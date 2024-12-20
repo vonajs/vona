@@ -11,21 +11,12 @@ const startingSlashRegex = /\\|\//;
 
 @Service()
 export class ServiceErrorView extends BeanBase {
-  private error: Error;
-  private viewTemplate: string;
-
   private codeContext = 5;
   private _filterHeaders = ['cookie', 'connection'];
-  private assets = new Map();
 
-  protected __init__(error: Error, template: string) {
-    this.error = error;
-    this.viewTemplate = template;
-  }
-
-  toHTML() {
-    const stack = this.parseError();
-    const data = this.serializeData(stack, (frame, index) => {
+  toHTML(error: Error, viewTemplate: string): string {
+    const stack = this.parseError(error);
+    const data = this.serializeData(error, stack, (frame, index) => {
       const serializedFrame = this.serializeFrame(frame) as any;
       serializedFrame.classes = this.getFrameClasses(frame, index);
       return serializedFrame;
@@ -38,7 +29,7 @@ export class ServiceErrorView extends BeanBase {
       errorLogo: this.scope.util.combineStaticPath('img/vona.svg'),
     };
 
-    return this.complieView(this.viewTemplate, data);
+    return this.complieView(viewTemplate, data);
   }
 
   complieView(tpl, locals) {
@@ -61,21 +52,13 @@ export class ServiceErrorView extends BeanBase {
     return !filename.includes('node_modules' + path.sep);
   }
 
-  setAssets(key, value) {
-    this.assets.set(key, value);
-  }
-
-  getAssets(key) {
-    this.assets.get(key);
-  }
-
-  getFrameSource(frame) {
+  getFrameSource(contentsCache: Record<string, string>, frame) {
     const filename = frame.getFileName();
     const lineNumber = frame.getLineNumber();
-    let contents = this.getAssets(filename) as any;
-    if (!contents) {
+    let contents = contentsCache[filename];
+    if (contents === undefined) {
       contents = fs.existsSync(filename) ? fs.readFileSync(filename, 'utf8') : '';
-      this.setAssets(filename, contents);
+      contentsCache[filename] = contents;
     }
     const lines = contents.split(/\r?\n/);
 
@@ -86,11 +69,12 @@ export class ServiceErrorView extends BeanBase {
     };
   }
 
-  parseError() {
-    const stack = StackTrace.parse(this.error);
+  parseError(error: Error) {
+    const stack = StackTrace.parse(error);
+    const contentsCache: Record<string, string> = {};
     return stack.map(frame => {
       if (!this.isNode(frame)) {
-        frame.context = this.getFrameSource(frame);
+        frame.context = this.getFrameSource(contentsCache, frame);
       }
       return frame;
     });
@@ -139,17 +123,17 @@ export class ServiceErrorView extends BeanBase {
     };
   }
 
-  serializeData(stack, frameFomatter) {
-    const code = this.error.code;
-    let message = this.app.meta.util.detectErrorMessage(this.error);
+  serializeData(error: Error, stack, frameFomatter) {
+    const code = error.code;
+    let message = this.app.meta.util.detectErrorMessage(error);
     if (code) {
       message = `${message} (code: ${code})`;
     }
     return {
       code,
       message,
-      name: this.error.name,
-      status: this.error.status,
+      name: error.name,
+      status: error.status,
       frames: stack instanceof Array ? stack.filter(frame => frame.getFileName()).map(frameFomatter) : [],
     };
   }

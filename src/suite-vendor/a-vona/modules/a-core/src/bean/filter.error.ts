@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BeanBase, cast, HttpStatus, NextSync } from 'vona';
 import { Filter, IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
-import { ServiceErrorView } from 'vona-module-a-core';
 
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
   logs: Record<number | string, boolean>;
@@ -117,8 +116,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       return true;
     }
 
-    const errorView = this.bean._newBean(ServiceErrorView, err, this._getViewTemplate());
-    this.ctx.body = errorView.toHTML();
+    this.ctx.body = this.scope.service.errorView.toHTML(err, this._getViewTemplate());
 
     // handled
     return true;
