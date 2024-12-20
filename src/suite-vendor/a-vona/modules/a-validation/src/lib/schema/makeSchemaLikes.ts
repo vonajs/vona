@@ -19,7 +19,10 @@ export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPreviou
   if (!!cast<z.ZodSchema>(schemaLike).parseAsync) {
     // schema
     return schemaLike as z.ZodSchema;
-  } else if (isClassStrict(schemaLike)) {
+  } else if (
+    isClassStrict(schemaLike) ||
+    ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)
+  ) {
     // class
     return schema(cast<Constructable>(schemaLike));
   } else {
