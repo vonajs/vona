@@ -1,25 +1,3 @@
-/** summerCache: begin */
-export * from '../bean/summerCache.test.js';
-
-import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-declare module 'vona-module-a-summer' {
-  export interface ISummerCacheRecord {
-    'vona-test:test': IDecoratorSummerCacheOptions;
-  }
-}
-declare module 'vona-module-vona-test' {
-  export interface SummerCacheTest {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** summerCache: end */
-/** summerCache: begin */
-import { SummerCacheTest } from '../bean/summerCache.test.js';
-export interface IModuleSummerCache {
-  test: SummerCacheTest;
-}
-/** summerCache: end */
 /** aop: begin */
 export * from '../bean/aop.regExp.js';
 export * from '../bean/aop.simple.js';
@@ -124,25 +102,6 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** eventListener: end */
-/** meta: begin */
-export * from '../bean/meta.status.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'vona-test:status': never;
-  }
-}
-declare module 'vona-module-vona-test' {
-  export interface MetaStatus {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** meta: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
 
@@ -188,6 +147,28 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** schedule: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.test.js';
+
+import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+declare module 'vona-module-a-summer' {
+  export interface ISummerCacheRecord {
+    'vona-test:test': IDecoratorSummerCacheOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface SummerCacheTest {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** summerCache: end */
+/** summerCache: begin */
+import { SummerCacheTest } from '../bean/summerCache.test.js';
+export interface IModuleSummerCache {
+  test: SummerCacheTest;
+}
+/** summerCache: end */
 /** dto: begin */
 export * from '../dto/profile.js';
 export * from '../dto/user.js';
@@ -256,7 +237,6 @@ export * from '../controller/bean.js';
 export * from '../controller/onion.js';
 export * from '../controller/performAction.js';
 export * from '../controller/queue.js';
-export * from '../controller/status.js';
 export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
@@ -268,7 +248,6 @@ declare module 'vona-module-a-web' {
     'vona-test:onion': IDecoratorControllerOptions;
     'vona-test:performAction': IDecoratorControllerOptions;
     'vona-test:queue': IDecoratorControllerOptions;
-    'vona-test:status': IDecoratorControllerOptions;
     'vona-test:summer': IDecoratorControllerOptions;
     'vona-test:tail': IDecoratorControllerOptions;
     'vona-test:transaction': IDecoratorControllerOptions;
@@ -291,11 +270,6 @@ declare module 'vona-module-vona-test' {
   }
 
   export interface ControllerQueue {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerStatus {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
@@ -334,7 +308,6 @@ declare module 'vona-module-a-web' {
     '/vona/test/performAction/echo': '/vona/test/performAction/echo';
     '/vona/test/queue/pushAsync': '/vona/test/queue/pushAsync';
     '/vona/test/queue/push': '/vona/test/queue/push';
-    '/vona/test/status': '/vona/test/status';
     '/vona/test/summer': '/vona/test/summer';
     '/vona/test/tail': '/vona/test/tail';
     '/vona/test/transaction/fail': '/vona/test/transaction/fail';
@@ -373,11 +346,10 @@ export interface ScopeModuleVonaTest {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  summerCache: IModuleSummerCache;
   broadcast: IModuleBroadcast;
   event: IModuleEvent;
-  status: MetaStatus;
   queue: IModuleQueue;
+  summerCache: IModuleSummerCache;
   service: IModuleService;
 }
 
