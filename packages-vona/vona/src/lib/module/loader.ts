@@ -1,7 +1,6 @@
 import { AppMeta } from '../core/meta.js';
 import { ModuleTools } from './module.js';
 import loadConfig from './config.js';
-import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
@@ -35,7 +34,6 @@ export class ModuleLoader extends BeanSimple {
 
     if (meta.inApp) {
       await loadConfig(app, modules);
-      await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
       loadErrors(app, modules);
@@ -45,7 +43,6 @@ export class ModuleLoader extends BeanSimple {
       loadReload(app);
     } else {
       await loadConfig(app, modules);
-      await loadModuleMeta(app, modules);
       loadClusterAgent(app);
       loadReload(app);
       loadDevelopment(app);

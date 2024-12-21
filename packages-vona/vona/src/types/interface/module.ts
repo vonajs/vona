@@ -9,7 +9,6 @@ export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceL
 export type TypeModuleResourceErrors = Record<number, string>;
 export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
 
-// todo:
 export interface IModuleResource {
   Main: new () => IModuleMain;
   Monkey: new () => IMonkeyModule & IMonkeySystem;

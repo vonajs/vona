@@ -13,7 +13,6 @@ export interface ContextBase {
   set subdomain(value: string);
   get ctxCaller();
   set ctxCaller(value);
-  get cache();
   tail(cb);
   tailDone(): Promise<any>;
   get tailCallbacks();

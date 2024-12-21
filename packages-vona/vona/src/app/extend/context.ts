@@ -1,6 +1,5 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
-import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
@@ -8,7 +7,6 @@ import { cast } from '../../types/utils/cast.js';
 import { appResource, MetadataKey } from '../../lib/index.js';
 import { AsyncResource } from 'node:async_hooks';
 
-const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
 const SUBDOMAIN = Symbol.for('Context#__subdomain');
@@ -21,30 +19,6 @@ const context: ContextBase = {
     const self = cast(this);
     const serviceInstance = cast(self.app.bean._getBean('a-instance.service.instance' as never));
     return serviceInstance.getConfig(self.subdomain) || self.app.config;
-  },
-  get module() {
-    const self = cast<VonaContext>(this);
-    if (this[MODULE] === undefined) {
-      const url = self.req.url || '';
-      let info;
-      if (url.indexOf('/api/static/public/') === 0) {
-        info = null;
-      } else {
-        info = ModuleInfo.parseInfo(ModuleInfo.parseName(url));
-      }
-      if (!info) {
-        info = ModuleInfo.parseInfo('a-base');
-      }
-      if (info) {
-        const module = self.app.meta.modules[info.relativeName];
-        // should not throw error, because the url maybe not valid
-        // if (!module) throw new Error(`module not found: ${info.relativeName}`);
-        this[MODULE] = module || null;
-      } else {
-        this[MODULE] = null;
-      }
-    }
-    return this[MODULE];
   },
   get meta() {
     const self = cast<VonaContext>(this);
@@ -84,10 +58,6 @@ const context: ContextBase = {
     cast(this).dbMeta = value.dbMeta;
     // dbLevel
     this.dbLevel = value.dbLevel;
-  },
-  get cache() {
-    const self = cast<VonaContext>(this);
-    return self.app.bean._getBean('cache' as any);
   },
   tail(cb) {
     if (!cast(this).dbMeta.master) {
