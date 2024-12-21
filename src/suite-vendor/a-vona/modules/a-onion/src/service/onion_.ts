@@ -285,7 +285,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   /** internal */
   public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: IOnionExecuteCustom) {
     const sceneName = this.sceneName;
-    const fn = (context: any, next) => {
+    const fn = (data: any, next) => {
       // optionsPrimitive
       const optionsPrimitive = item.beanOptions.optionsPrimitive;
       // options
@@ -301,7 +301,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         throw new Error(`${sceneName} bean not found: ${beanFullName}`);
       }
       if (executeCustom) {
-        return executeCustom(beanInstance, options, next, context);
+        return executeCustom(beanInstance, data, options, next);
       }
       return cast(beanInstance).execute(options, next);
     };
