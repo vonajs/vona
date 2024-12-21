@@ -1,4 +1,4 @@
-import { Constructable, OmitNever, Type } from 'vona';
+import { Constructable, OmitNever, Type, VonaContext } from 'vona';
 import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, ServiceOnion } from 'vona-module-a-onion';
 import { IApiPathRecord } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -46,7 +46,7 @@ export interface RouteHandlerArgumentMetaDecorator {
   field?: string;
   pipes: Function[];
   schema: z.ZodSchema;
-  extractValue?: Function;
+  extractValue?: (ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) => Promise<any>;
 }
 
 export interface RouteHandlerArgumentMeta {
