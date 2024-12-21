@@ -8,7 +8,7 @@ export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
 @Guard<IGuardOptionsPassport>({ global: true, public: false })
 export class GuardPassport extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsPassport, next: Next): Promise<boolean> {
-    if (!this.bean.passport.current) {
+    if (!this.bean.passport.getCurrent()) {
       await this.bean.passport.signinWithAnonymous();
     }
     if (!options.public && !this.bean.passport.isAuthenticated) {
