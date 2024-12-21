@@ -29,10 +29,6 @@ export class AppResource extends BeanSimple {
     let { module, scene, name, beanClass, virtual } = options;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
-    // todo: remove
-    if (scene === ('bean' as any) && name === 'base2') {
-      name = 'base';
-    }
     // module
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
