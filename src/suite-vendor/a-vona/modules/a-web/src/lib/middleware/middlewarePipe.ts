@@ -9,7 +9,7 @@ import {
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-aspect';
-import { ServiceOnion } from 'vona-module-a-onion';
+import { IOnionExecuteCustom, ServiceOnion } from 'vona-module-a-onion';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // check handler
@@ -66,7 +66,7 @@ async function _transformArgument(
   value: any,
 ) {
   // pipes
-  const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, options, value) => {
+  const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, _data, options, value) => {
     return beanInstance.transform(value, metadata, options);
   });
   if (pipes.length === 0) return value;
@@ -86,7 +86,11 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
 
 const __cacheMiddlewaresArgument: Record<string, Function[]> = {};
 
-function composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
+function composePipes(
+  ctx: VonaContext,
+  argMeta: RouteHandlerArgumentMetaDecorator,
+  executeCustom: IOnionExecuteCustom,
+) {
   const onionPipe = ctx.app.bean.onion.pipe;
   const beanFullName = ctx.getClassBeanFullName();
   const handlerName = ctx.getHandler()!.name;
