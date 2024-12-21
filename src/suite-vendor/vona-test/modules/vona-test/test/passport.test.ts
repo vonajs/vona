@@ -8,6 +8,7 @@ describe('passport.test.ts', () => {
       assert.equal(app.bean.passport.isAuthenticated, true);
       await app.bean.passport.signout();
       assert.equal(app.bean.passport.isAuthenticated, false);
+      await app.bean.executor.performAction('get', '/vona/test/passport/echo/admin');
     });
   });
 });

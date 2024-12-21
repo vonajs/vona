@@ -235,6 +235,7 @@ declare module 'vona' {
 /** controller: begin */
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
+export * from '../controller/passport.js';
 export * from '../controller/performAction.js';
 export * from '../controller/queue.js';
 export * from '../controller/summer.js';
@@ -246,6 +247,7 @@ declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'vona-test:bean': IDecoratorControllerOptions;
     'vona-test:onion': IDecoratorControllerOptions;
+    'vona-test:passport': IDecoratorControllerOptions;
     'vona-test:performAction': IDecoratorControllerOptions;
     'vona-test:queue': IDecoratorControllerOptions;
     'vona-test:summer': IDecoratorControllerOptions;
@@ -260,6 +262,11 @@ declare module 'vona-module-vona-test' {
   }
 
   export interface ControllerOnion {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerPassport {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
@@ -302,6 +309,8 @@ declare module 'vona-module-a-web' {
     '/vona/test/onion/echo3/:_string_': '/vona/test/onion/echo3:_userId_';
     '/vona/test/onion/echo3/:userId': `/vona/test/onion/echo3/${string}`;
     '/vona/test/onion/echo5': '/vona/test/onion/echo5';
+    '/vona/test/passport/echo/:_string_': '/vona/test/passport/echo:_name_';
+    '/vona/test/passport/echo/:name': `/vona/test/passport/echo/${string}`;
   }
   export interface IApiPathPostRecord {
     '/vona/test/onion/echo4': '/vona/test/onion/echo4';
