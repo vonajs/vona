@@ -21,3 +21,7 @@ export function Body(property: string, ...schemaLikes: SchemaLike[]): ParameterD
 export function Body(property?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('body')(property, ...schemaLikes);
 }
+
+export function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
+  return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
+}

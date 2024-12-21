@@ -34,7 +34,8 @@ export type RouteHandlerArgumentType =
   | 'host'
   | 'ip'
   | 'rawBody'
-  | 'string';
+  | 'string'
+  | 'user';
 
 export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
 export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgumentsValue');

@@ -2,10 +2,12 @@ import { VonaContext } from 'vona';
 import { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from 'vona-module-a-aspect';
 
 export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
-  return exchangeKeyForValue(argMeta.type, argMeta.field, { req: ctx.request, res: ctx.response });
+  return exchangeKeyForValue(ctx, argMeta.type, argMeta.field);
 }
 
-export function exchangeKeyForValue(type: RouteHandlerArgumentType, field: string | undefined, { req, res }) {
+export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgumentType, field: string | undefined) {
+  const req = ctx.request as any;
+  const res = ctx.response as any;
   const modes = {
     request: () => req,
     response: () => res,
@@ -22,6 +24,7 @@ export function exchangeKeyForValue(type: RouteHandlerArgumentType, field: strin
     },
     ip: () => req.ip,
     rawBody: () => req.rawBody,
+    user: () => ctx.app.bean.passport.getCurrent(),
   };
   return modes[type]?.();
 }
