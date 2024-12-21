@@ -1,23 +1,29 @@
 import { TableIdentity } from 'vona-module-a-database';
-import { IUserBase } from '../types/user.js';
+import { IUserAdapter, IUserBase } from '../types/user.js';
 import { ILocalInfos } from 'vona';
 
+let __userAdapter: IUserAdapter;
+
+export function setUserAdapter(userAdapter: IUserAdapter): void {
+  __userAdapter = userAdapter;
+}
+
 export function userId(user: IUserBase): TableIdentity {
-  throw new Error('userId not implemented.');
+  return __userAdapter.userId(user);
 }
 
 export function userName(user: IUserBase): string {
-  throw new Error('userName not implemented.');
+  return __userAdapter.userName(user);
 }
 
 export function userAvatar(user: IUserBase): string | undefined {
-  throw new Error('userAvatar not implemented.');
+  return __userAdapter.userAvatar(user);
 }
 
 export function userLocale(user: IUserBase): keyof ILocalInfos | undefined {
-  throw new Error('userAvatar not implemented.');
+  return __userAdapter.userLocale(user);
 }
 
 export function isAnonymous(user: IUserBase): boolean {
-  throw new Error('isAuthenticated not implemented.');
+  return __userAdapter.isAnonymous(user);
 }
