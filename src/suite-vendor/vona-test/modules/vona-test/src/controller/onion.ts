@@ -6,18 +6,19 @@ import { Controller, Get, Post } from 'vona-module-a-web';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Transaction } from 'vona-module-a-database';
 import { Gate } from 'vona-module-a-core';
+import { Public } from 'vona-module-a-user';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
   @Get('/')
   @UseMiddleware('a-database:transaction')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-user:passport', { public: true })
   index() {
     //return 'Hello Vona';
   }
 
   @Get('//echo')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-user:passport', { public: true })
   @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
@@ -31,7 +32,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Get('echo2/:userId/:userName')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-user:passport', { public: true })
   //async echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   async echo2(@Query(DtoUser) book: Partial<DtoUser>) {
     //const ctx = this.app.currentContext;
@@ -40,7 +41,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Get('echo3/:userId')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-user:passport', { public: true })
   async echo3(@Query('id', v.optional()) id: number) {
     //this.scope.util.combineApiPath
     console.log(this.ctx.path);
@@ -50,14 +51,14 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Post('echo4')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-user:passport', { public: true })
   @UseFilterGlobal('a-core:error', { enable: true, logs: { 422: true } })
   async echo4(@Body(v.array(DtoUser)) users: DtoUser[]) {
     return users;
   }
 
   @Get('echo5')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @Public()
   async echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
