@@ -1,11 +1,9 @@
-import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { Constructable, MetadataKey } from '../../lib/index.js';
 import { VonaConfig } from '../config/config.js';
 import { VonaContext } from './index.js';
 
 export interface ContextBase {
   get config(): VonaConfig;
-  get meta(): CtxMeta;
   get innerAccess(): boolean;
   set innerAccess(value: boolean);
   get dbLevel(): number;

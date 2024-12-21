@@ -1,13 +1,11 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
-import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
 import { cast } from '../../types/utils/cast.js';
 import { appResource, MetadataKey } from '../../lib/index.js';
 import { AsyncResource } from 'node:async_hooks';
 
-const META = Symbol.for('Context#__meta');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
 const SUBDOMAIN = Symbol.for('Context#__subdomain');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
@@ -20,13 +18,6 @@ const context: ContextBase = {
     const self = cast(this);
     const serviceInstance = cast(self.app.bean._getBean('a-instance.service.instance' as never));
     return serviceInstance.getConfig(self.subdomain) || self.app.config;
-  },
-  get meta() {
-    const self = cast<VonaContext>(this);
-    if (!this[META]) {
-      this[META] = self.bean._newBean(CtxMeta);
-    }
-    return this[META];
   },
   get innerAccess() {
     return this[INNERACCESS];
