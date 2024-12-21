@@ -6,10 +6,7 @@ import { IUser } from '../types/user.js';
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
   async createUserAnonymous(): Promise<IUserBase> {
-    const user: IUser = { id: 0, name: 'anonymous', avatar: undefined, locale: undefined };
-    // event
-
-    // ok
+    const user: IUser = { id: -1, name: 'anonymous', avatar: undefined, locale: undefined };
     return user;
   }
 }
