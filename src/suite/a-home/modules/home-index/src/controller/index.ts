@@ -1,11 +1,11 @@
 import { BeanBase } from 'vona';
-import { UseGuardGlobal } from 'vona-module-a-aspect';
+import { Public } from 'vona-module-a-user';
 import { Controller, Get } from 'vona-module-a-web';
 
 @Controller()
 export class ControllerIndex extends BeanBase {
   @Get('//')
-  @UseGuardGlobal('a-core:user', { public: true })
+  @Public()
   index() {
     return this.scope.locale.helloVona();
   }
