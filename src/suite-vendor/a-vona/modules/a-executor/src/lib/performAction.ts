@@ -67,7 +67,7 @@ export async function performActionInner<T = any>({
     if (innerAccess !== undefined) ctx.innerAccess = innerAccess;
 
     // onion
-    ctx.meta.onionsDynamic = onions;
+    ctx.onionsDynamic = onions;
 
     // invoke middleware
     await __fnMiddleware(ctx);

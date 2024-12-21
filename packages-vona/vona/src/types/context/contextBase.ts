@@ -1,18 +1,19 @@
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { Constructable, MetadataKey } from '../../lib/index.js';
 import { VonaConfig } from '../config/config.js';
+import { VonaContext } from './index.js';
 
 export interface ContextBase {
   get config(): VonaConfig;
   get meta(): CtxMeta;
-  get innerAccess();
-  set innerAccess(value);
-  get dbLevel();
-  set dbLevel(value);
+  get innerAccess(): boolean;
+  set innerAccess(value: boolean);
+  get dbLevel(): number;
+  set dbLevel(value: number | undefined);
   get subdomain(): string;
   set subdomain(value: string);
-  get ctxCaller();
-  set ctxCaller(value);
+  get ctxCaller(): VonaContext;
+  set ctxCaller(value: VonaContext);
   tail(cb);
   tailDone(): Promise<any>;
   get tailCallbacks();
@@ -22,4 +23,6 @@ export interface ContextBase {
   getClassBeanFullName(): string | undefined;
   getHandler(): Function | undefined;
   getHandlerName(): MetadataKey | undefined;
+  get onionsDynamic(): any | undefined;
+  set onionsDynamic(value: any | undefined);
 }

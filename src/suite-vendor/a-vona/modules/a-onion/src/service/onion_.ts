@@ -178,7 +178,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
-      optionsDynamic = cast(ctx.meta).onionsDynamic?.[item.beanOptions.scene]?.[item.name];
+      optionsDynamic = ctx.onionsDynamic?.[item.beanOptions.scene]?.[item.name];
     }
     // final options
     let options;

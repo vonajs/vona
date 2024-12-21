@@ -41,8 +41,8 @@ declare module 'vona' {
     onions: ConfigOnions;
   }
 
-  export interface CtxMeta {
-    /** dynamic onions middleware options */
-    onionsDynamic?: PowerPartial<ConfigOnions>;
+  export interface VonaContext {
+    get onionsDynamic(): PowerPartial<ConfigOnions> | undefined;
+    set onionsDynamic(value: PowerPartial<ConfigOnions> | undefined);
   }
 }

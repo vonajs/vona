@@ -13,6 +13,7 @@ const SUBDOMAIN = Symbol.for('Context#__subdomain');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
 const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const DBLEVEL = Symbol.for('Context#__dblevel');
+const ONIONSDYNAMIC = Symbol.for('Context#__onionsdynamic');
 
 const context: ContextBase = {
   get config() {
@@ -33,10 +34,10 @@ const context: ContextBase = {
   set innerAccess(value) {
     this[INNERACCESS] = value;
   },
-  get dbLevel() {
+  get dbLevel(): number {
     return this[DBLEVEL] ?? 0;
   },
-  set dbLevel(value) {
+  set dbLevel(value: number | undefined) {
     this[DBLEVEL] = value;
   },
   get subdomain() {
@@ -120,6 +121,14 @@ const context: ContextBase = {
     const handler = self.getHandler();
     if (!handler) return undefined;
     return handler.name;
+  },
+
+  get onionsDynamic(): any | undefined {
+    return this[ONIONSDYNAMIC];
+  },
+
+  set onionsDynamic(value: any | undefined) {
+    this[ONIONSDYNAMIC] = value;
   },
 };
 export default context;
