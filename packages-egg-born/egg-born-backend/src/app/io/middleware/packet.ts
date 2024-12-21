@@ -1,7 +1,19 @@
-export default function (app) {
+export default function (_app) {
   return (ctx, next) => {
-    return app.bean.onion.socketPacket.compose(ctx)(ctx, next);
+    return _composeSocketPacket(ctx)(ctx.packet, next);
   };
+}
+
+function _composeSocketPacket(ctx) {
+  return ctx.app.bean.onion.socketPacket.compose(
+    ctx,
+    undefined,
+    undefined,
+    undefined,
+    (beanInstance, data, options, next) => {
+      return beanInstance.execute(data, options, next);
+    },
+  );
 }
 
 // function wrapMiddleware(item) {
