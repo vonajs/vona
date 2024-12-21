@@ -27,7 +27,8 @@
     "vona-module-a-event": "workspace:^",
     "vona-module-a-redis": "workspace:^",
     "vona-module-a-bean": "workspace:^",
-    "vona-module-a-static": "workspace:^"
+    "vona-module-a-static": "workspace:^",
+    "vona-module-a-user": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
