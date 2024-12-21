@@ -52,4 +52,11 @@ export class BeanPassport extends BeanBase {
     // ok
     return userAnonymous as T;
   }
+
+  public async signinMock<T extends IUserBase = IUserBase>(name?: string): Promise<T> {
+    const serviceAdapter = this.bean._getBean<IPassportAdapter>(this.scope.config.passportAdapter as never);
+    const user = await serviceAdapter.getUserMock(name);
+    await this.signin(user);
+    return user as T;
+  }
 }

@@ -9,4 +9,10 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     const user: IUser = { id: -1, name: 'anonymous', avatar: undefined, locale: undefined };
     return user;
   }
+
+  async getUserMock(name?: string): Promise<IUserBase> {
+    if (!name) name = 'admin';
+    const user: IUser = { id: 1, name, avatar: undefined, locale: undefined };
+    return user;
+  }
 }
