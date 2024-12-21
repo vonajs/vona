@@ -14,9 +14,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
   log(err: Error, options: IFilterOptionsError, next: NextSync): boolean {
     // 403->401
     if (err.code === 403) {
-      // todo: use diffrent state user
-      const user = this.ctx && this.ctx.state && cast(this.ctx.state).user;
-      if (user && user.op.anonymous) {
+      if (!this.bean.passport.isAuthenticated) {
         err.code = 401;
         err.status = 401;
       }
