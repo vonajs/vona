@@ -20,6 +20,7 @@ export class BeanUser extends BeanUserBase {
   }
 
   public get current(): IUser | undefined {
+    return undefined;
     return userAdmin;
   }
 

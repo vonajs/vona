@@ -5,7 +5,7 @@ import { Controller, Get } from 'vona-module-a-web';
 @Controller()
 export class ControllerIndex extends BeanBase {
   @Get('//')
-  @UseGuardGlobal('home-base:user', { public: true })
+  @UseGuardGlobal('a-core:user', { public: true })
   index() {
     return this.scope.locale.helloVona();
   }
