@@ -156,10 +156,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
 
   getOnionOptionsDynamic<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
     const item = this.getOnionSlice(onionName);
-    return this.combineOnionOptions(this.ctx, item);
+    return this.combineOnionOptions(item);
   }
 
-  combineOnionOptions(ctx: VonaContext, item: IOnionSlice<OPTIONS, ONIONNAME>) {
+  combineOnionOptions(item: IOnionSlice<OPTIONS, ONIONNAME>) {
+    const ctx = this.ctx;
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
@@ -292,14 +293,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       // optionsPrimitive
       const optionsPrimitive = item.beanOptions.optionsPrimitive;
       // options
-      const options = this.combineOnionOptions(ctx, item);
+      const options = this.combineOnionOptions(item);
       // enable match ignore dependencies
-      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, this._getRoutePathForMatch(ctx))) {
+      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, this._getRoutePathForMatch())) {
         return typeof next === 'function' ? next() : next;
       }
       // execute
       const beanFullName = item.beanOptions.beanFullName;
-      const beanInstance = ctx.app.bean._getBean(beanFullName as any);
+      const beanInstance = this.app.bean._getBean(beanFullName as any);
       if (!beanInstance) {
         throw new Error(`${sceneName} bean not found: ${beanFullName}`);
       }
@@ -315,9 +316,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return fn;
   }
 
-  private _getRoutePathForMatch(ctx: VonaContext) {
-    const routePathRaw: string | undefined = ctx.route?.routePathRaw;
+  private _getRoutePathForMatch() {
+    const routePathRaw: string | undefined = this.ctx.route?.routePathRaw;
     if (!routePathRaw) return;
-    return routePathRaw.startsWith('//') ? '/' + ctx.path : ctx.path.substring(this.app.config.globalPrefix.length);
+    return routePathRaw.startsWith('//')
+      ? '/' + this.ctx.path
+      : this.ctx.path.substring(this.app.config.globalPrefix.length);
   }
 }
