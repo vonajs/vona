@@ -256,14 +256,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   private _loadOnionsAll() {
     const onionsAll: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     for (const module of this.app.meta.modulesArray) {
-      // todo: should be removed
-      if (this.sceneName === 'middleware') {
-        this._loadOnionsAll_fromConfig(onionsAll, module);
-      }
-      // todo: remove this line
-      if (this.sceneName !== 'middleware' || ['a-core', 'a-database'].includes(module.info.relativeName)) {
-        this._loadOnionsAll_fromMetadata(onionsAll, module);
-      }
+      this._loadOnionsAll_fromMetadata(onionsAll, module);
     }
     return onionsAll;
   }
@@ -287,42 +280,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         name,
         options: beanOptions.options as any,
         beanOptions: beanOptions as any,
-      } as any);
-    }
-  }
-
-  // todo: should be removed
-  private _loadOnionsAll_fromConfig(onionsAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
-    const config = this.app.config.modules[module.info.relativeName];
-    if (!config?.middlewares) return;
-    for (const onionKey in config.middlewares) {
-      const onionConfig = config.middlewares[onionKey];
-      // bean
-      const beanName = onionConfig.bean;
-      if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${onionKey}`);
-      let bean;
-      if (typeof beanName === 'string') {
-        bean = {
-          module: module.info.relativeName,
-          name: beanName,
-        };
-      } else {
-        bean = {
-          module: beanName.module || module.info.relativeName,
-          name: beanName.name,
-        };
-      }
-      const beanFullName = `${bean.module}.middleware.${bean.name}`;
-      const beanOptions = appResource.getBean(beanFullName)!;
-      // options
-      beanOptions.options = onionConfig;
-      // push
-      // todo: remove options/fromConfig/as any
-      onionsAll.push({
-        name: onionKey as ONIONNAME,
-        options: onionConfig,
-        beanOptions: beanOptions as any,
-        fromConfig: true,
       } as any);
     }
   }
