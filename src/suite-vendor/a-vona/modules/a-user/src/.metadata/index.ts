@@ -14,6 +14,27 @@ declare module 'vona-module-a-user' {
   }
 }
 /** guard: end */
+/** bean: begin */
+export * from '../bean/bean.passport.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-user' {
+  export interface BeanPassport {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanPassport } from '../bean/bean.passport.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    passport: BeanPassport;
+  }
+}
+/** bean: end */
 /** scope: begin */
 import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
