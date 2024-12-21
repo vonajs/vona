@@ -3,7 +3,7 @@ export * from '../bean/guard.passport.js';
 import { IGuardOptionsPassport } from '../bean/guard.passport.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
-  export interface IGuardRecordLocal {
+  export interface IGuardRecordGlobal {
     'a-user:passport': IGuardOptionsPassport;
   }
 }

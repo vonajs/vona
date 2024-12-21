@@ -1,11 +1,17 @@
 import { BeanBase, Next } from 'vona';
-import { Guard, IDecoratorGuardOptions, IGuardExecute } from 'vona-module-a-aspect';
+import { Guard, IDecoratorGuardOptionsGlobal, IGuardExecute } from 'vona-module-a-aspect';
 
-export interface IGuardOptionsPassport extends IDecoratorGuardOptions {}
+export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
+  public: boolean;
+}
 
-@Guard<IGuardOptionsPassport>()
+@Guard<IGuardOptionsPassport>({ global: true, public: false })
 export class GuardPassport extends BeanBase implements IGuardExecute {
-  async execute(_options: IGuardOptionsPassport, next: Next): Promise<boolean> {
+  async execute(options: IGuardOptionsPassport, next: Next): Promise<boolean> {
+    if (!options.public && !this.bean.user.isAuthenticated) {
+      //return false;
+      return this.app.throw(401);
+    }
     // next
     return next();
   }
