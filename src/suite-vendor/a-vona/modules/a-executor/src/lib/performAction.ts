@@ -2,17 +2,16 @@ import http from 'http';
 import compose from 'koa-compose';
 import { IPerformActionInnerParams } from '../types/executor.js';
 import { cast, VonaContext } from 'vona';
+import { delegateProperties } from './utils.js';
 
 let __fnMiddleware;
 
 export async function performActionInner<T = any>({
   ctxCaller,
   innerAccess,
-  // subdomain, deprecated
   method,
   path,
   query,
-  headers,
   body,
   onions,
 }: IPerformActionInnerParams): Promise<T> {
@@ -48,29 +47,18 @@ export async function performActionInner<T = any>({
       },
     });
 
-    // query body
+    // instance
+    ctx.instance = ctxCaller.instance;
+
+    // delegateProperties
+    delegateProperties(ctx, ctxCaller);
+
+    // query
     if (query !== undefined) {
       cast(ctx.req).query = cast(ctx.request).query = query;
     }
+    // body
     cast(ctx.req).body = ctx.request.body = body;
-
-    // headers
-    delegateHeaders(ctx, ctxCaller, headers);
-
-    // multipart
-    ctx.multipart = function (options) {
-      return ctxCaller.multipart(options);
-    };
-
-    // cookies
-    delegateCookies(ctx, ctxCaller);
-
-    // todo: remove session
-    // XX should not delegate session, because session._ctx related to ctx
-    // not delegate ctx.user, because will create req.user by state.user
-    for (const property of ['state', 'socket', 'session', 'instance']) {
-      delegateProperty(ctx, ctxCaller, property);
-    }
 
     // ctxCaller
     ctx.ctxCaller = ctxCaller;
@@ -103,32 +91,6 @@ export async function performActionInner<T = any>({
         });
       }
     }
-  });
-}
-
-function delegateHeaders(ctx, ctxCaller, headers) {
-  if (ctxCaller && ctxCaller.headers) {
-    Object.assign(ctx.headers, ctxCaller.headers);
-  }
-  if (headers) {
-    Object.assign(ctx.headers, headers);
-  }
-}
-
-function delegateCookies(ctx, ctxCaller) {
-  const _cookies = ctx.cookies;
-  Object.defineProperty(ctx, 'cookies', {
-    get() {
-      return ctxCaller.cookies || _cookies;
-    },
-  });
-}
-
-function delegateProperty(ctx, ctxCaller, property) {
-  Object.defineProperty(ctx, property, {
-    get() {
-      return ctxCaller[property];
-    },
   });
 }
 

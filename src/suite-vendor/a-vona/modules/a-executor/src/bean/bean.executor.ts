@@ -3,6 +3,7 @@ import { BeanBase, FunctionAsync } from 'vona';
 import { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
 import { IApiPathRecordMethodMap } from 'vona-module-a-web';
+import { delegateProperties } from '../lib/utils.js';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -118,14 +119,14 @@ export class BeanExecutor extends BeanBase {
         // ctxCaller
         if (ctxCaller) {
           // delegateProperties
-          _delegateProperties(ctx, ctxCaller);
+          delegateProperties(ctx, ctxCaller);
           // ctxCaller
           ctx.ctxCaller = ctxCaller;
         }
         // extraData
         if (options.extraData) {
           // delegateProperties
-          _delegateProperties(ctx, {
+          delegateProperties(ctx, {
             state: options.extraData?.state,
             request: { headers: options.extraData?.headers },
           });
@@ -148,44 +149,3 @@ export class BeanExecutor extends BeanBase {
     );
   }
 }
-
-function _delegateProperties(ctx, ctxCaller) {
-  for (const property of ['state']) {
-    _delegateProperty(ctx, ctxCaller, property);
-  }
-  for (const property of ['headers']) {
-    _delegateProperty(ctx.request, ctxCaller.request, property);
-    // if (ctx.request[property]) req[property] = ctx.request[property];
-  }
-}
-
-function _delegateProperty(ctx, ctxCaller, property) {
-  if (!ctxCaller[property]) return;
-  if (!ctx[property]) ctx[property] = {};
-  for (const key in ctxCaller[property]) {
-    ctx[property][key] = ctxCaller[property][key];
-  }
-}
-
-// function _delegateProperty(ctx, ctxCaller, property) {
-//   const keyMock = `__executeBean__mock__${property}__`;
-//   const keyOriginal = `__executeBean__mock__${property}__original__`;
-//   if (['headers'].includes(property)) {
-//     ctx[keyOriginal] = ctx[property];
-//   }
-//   Object.defineProperty(ctx, property, {
-//     get() {
-//       const value = ctxCaller && ctxCaller[property];
-//       if (value) return value;
-//       //
-//       if (['headers'].includes(property)) {
-//         return ctx[keyOriginal];
-//       }
-//       //
-//       if (!ctx[keyMock]) {
-//         ctx[keyMock] = {};
-//       }
-//       return ctx[keyMock];
-//     },
-//   });
-// }
