@@ -6,14 +6,15 @@ import { isAnonymous } from '../lib/user.js';
 @Bean()
 export class BeanPassport extends BeanBase {
   public get isAuthenticated(): boolean {
-    return !!this.current && !isAnonymous(this.current);
+    const user = this.getCurrent();
+    return !!user && !isAnonymous(user);
   }
 
-  public get current(): IUserBase | undefined {
-    return this.ctx.state.user;
+  public getCurrent<T extends IUserBase = IUserBase>(): T | undefined {
+    return this.ctx.state.user as T | undefined;
   }
 
-  public set current(user: IUserBase | undefined) {
+  public setCurrent<T extends IUserBase>(user: T | undefined) {
     this.ctx.state.user = user;
     let ctxCaller = this.ctx.ctxCaller;
     while (ctxCaller) {
@@ -22,32 +23,33 @@ export class BeanPassport extends BeanBase {
     }
   }
 
-  public async signin(user: IUserBase): Promise<void> {
+  public async signin<T extends IUserBase>(user: T): Promise<void> {
     // event
     await this.scope.event.signin.emit(user);
     // ok
-    this.current = user;
+    this.setCurrent(user);
   }
 
   public async signout(): Promise<void> {
-    if (!this.current) return;
+    const user = this.getCurrent();
+    if (!user) return;
     // event
-    await this.scope.event.signout.emit(this.current);
+    await this.scope.event.signout.emit(user);
     // ok
-    this.current = undefined;
+    this.setCurrent(undefined);
   }
 
   public async signinWithAnonymous(): Promise<void> {
     const userAnonymous = await this.createUserAnonymous();
-    this.current = userAnonymous;
+    this.setCurrent(userAnonymous);
   }
 
-  public async createUserAnonymous(): Promise<IUserBase> {
+  public async createUserAnonymous<T extends IUserBase = IUserBase>(): Promise<T> {
     const serviceAdapter = this.bean._getBean<IPassportAdapter>(this.scope.config.passportAdapter as never);
     const userAnonymous = await serviceAdapter.createUserAnonymous();
     // event
     await this.scope.event.createUserAnonymous.emit(userAnonymous);
     // ok
-    return userAnonymous;
+    return userAnonymous as T;
   }
 }
