@@ -1,114 +1,19 @@
 import { Bean } from 'vona-module-a-bean';
-import {
-  appMetadata,
-  appResource,
-  BeanBase,
-  cast,
-  Constructable,
-  deepExtend,
-  IModuleRoute,
-  Next,
-  VonaContext,
-} from 'vona';
-import is from 'is-type-of';
+import { appMetadata, appResource, BeanBase, Constructable, deepExtend, Next, VonaContext } from 'vona';
 import * as ModuleInfo from '@cabloy/module-info';
 import { IDecoratorControllerOptions } from '../types/controller.js';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.js';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.js';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-aspect';
-import { IOnionSlice, SymbolUseOnionOptions } from 'vona-module-a-onion';
+import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 import { RequestMethod, SymbolRequestMappingHandler } from '../types/http.js';
 import { RequestMappingMetadata } from '../lib/decorator/requestMapping.js';
 
 @Bean()
 export class BeanRouter extends BeanBase {
-  register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
-    // info
-    if (typeof info === 'string') {
-      info = ModuleInfo.parseInfo(info)!;
-    }
-    // app
-    const app = this.app;
-
-    // path
-    const routePath =
-      typeof route.path === 'string'
-        ? app.meta.util.combineApiPath(info.relativeName, route.path, true, false)
-        : route.path;
-
-    // route
-    const _route = {
-      pid: info.pid,
-      module: info.name,
-      controller: route.controller,
-      controllerBeanFullName: '',
-      action: '',
-      route,
-      routeName: route.name,
-      routeMethod: route.method,
-      routePath,
-    };
-    // controller
-    if (route.controller) {
-      if (is.function(route.controller)) {
-        throw new Error(`Controller should be bean: ${info.relativeName}.${cast(route.controller)(app).name}`);
-      }
-      let controllerBeanFullName;
-      if (typeof route.controller === 'string') {
-        controllerBeanFullName = `${info.relativeName}.controller.${route.controller}`;
-      } else {
-        controllerBeanFullName = `${route.controller.module || info.relativeName}.controller.${route.controller.name}`;
-      }
-      _route.controllerBeanFullName = controllerBeanFullName;
-    }
-    // action
-    let action = route.action;
-    if (!action && typeof route.path === 'string') {
-      action = route.path.substring(route.path.lastIndexOf('/') + 1);
-    }
-    _route.action = action || '';
-
-    // middlewaresLocal: route
-    const middlewaresLocal: any[] = [];
-    if (route.middlewares) {
-      let middlewares = route.middlewares;
-      if (typeof middlewares === 'string') middlewares = middlewares.split(',');
-      middlewares.forEach(key => {
-        if (is.string(key)) {
-          const item = app.bean.onion.middleware.onionsNormal[key];
-          if (item) {
-            middlewaresLocal.push(wrapMiddleware('middleware', item));
-          } else {
-            middlewaresLocal.push(wrapMiddlewareApp(key, route, app));
-          }
-        } else {
-          middlewaresLocal.push(key);
-        }
-      });
-    }
-
-    // controller
-    if (route.controller) {
-      // middleware controller
-      middlewaresLocal.push(controllerActionToMiddleware(_route.controllerBeanFullName, _route));
-    }
-
-    // register
-    this._registerInner(_route, middlewaresLocal);
-  }
-
-  unRegister(name) {
-    const app = this.app;
-    const index = app.router.stack.findIndex(layer => layer.name && layer.name === name);
-    if (index > -1) app.router.stack.splice(index, 1);
-  }
-
-  findByPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
-    const app = this.app;
-    const _path = app.meta.util.combineApiPath(moduleName, path, true, simplify);
-    return app.router.stack.find(layer => layer.path === _path);
-  }
+  // todo: maybe need for no controller
+  register() {}
 
   registerController(moduleName: string, controller: Constructable) {
     // info
@@ -136,6 +41,18 @@ export class BeanRouter extends BeanBase {
         desc,
       );
     }
+  }
+
+  unRegister(name) {
+    const app = this.app;
+    const index = app.router.stack.findIndex(layer => layer.name && layer.name === name);
+    if (index > -1) app.router.stack.splice(index, 1);
+  }
+
+  findByPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
+    const app = this.app;
+    const _path = app.meta.util.combineApiPath(moduleName, path, true, simplify);
+    return app.router.stack.find(layer => layer.path === _path);
   }
 
   private _registerControllerAction(
@@ -276,63 +193,6 @@ export class BeanRouter extends BeanBase {
       app.router[route.routeMethod](route.routePath, ...args);
     }
   }
-}
-
-function wrapMiddlewareApp(key, route, app) {
-  try {
-    const middleware = app.middlewares[key];
-    const optionsRoute = route.meta ? route.meta[key] : null;
-    const mw = middleware(optionsRoute, app);
-    mw._name = key;
-    return mw;
-  } catch (err) {
-    console.log(`\nmiddleware error: ${key}\n`);
-    throw err;
-  }
-}
-
-// todo: remove
-function wrapMiddleware(_sceneName: string, item: IOnionSlice) {
-  const fn = (ctx: VonaContext, next) => {
-    // options
-    const options = ctx.app.bean.onion.middleware.getOnionOptionsDynamic(item.name as never) as any;
-    // enable match ignore dependencies
-    if (options.enable === false || !middlewareMatch(ctx, options)) {
-      return next();
-    }
-    // execute
-    const beanFullName = item.beanOptions.beanFullName;
-    const beanInstance = ctx.app.bean._getBean(beanFullName as never) as any;
-    if (!beanInstance) {
-      throw new Error(`middleware bean not found: ${beanFullName}`);
-    }
-    return beanInstance.execute(options, next);
-  };
-  fn._name = item.name;
-  return fn;
-}
-
-// todo: remove
-function middlewareMatch(_ctx, _options) {
-  return true;
-  // if (!options.match && !options.ignore) {
-  //   return true;
-  // }
-  // const match = pathMatching(options);
-  // return match(ctx);
-}
-
-function controllerActionToMiddleware(controllerBeanFullName, _route) {
-  return function classControllerMiddleware(ctx: VonaContext) {
-    const controller = ctx.app.bean._getBean(controllerBeanFullName);
-    if (!controller) {
-      throw new Error(`controller not found: ${controllerBeanFullName}`);
-    }
-    if (!controller[_route.action]) {
-      throw new Error(`controller action not found: ${controllerBeanFullName}.${_route.action}`);
-    }
-    return controller[_route.action](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
-  };
 }
 
 function classControllerMiddleware(ctx: VonaContext) {
