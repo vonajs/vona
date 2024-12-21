@@ -35,6 +35,28 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** event: begin */
+export * from '../bean/event.createUserAnonymous.js';
+
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-user:createUserAnonymous': IDecoratorEventOptions;
+  }
+}
+declare module 'vona-module-a-user' {
+  export interface EventCreateUserAnonymous {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
+}
+/** event: end */
+/** event: begin */
+import { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.js';
+export interface IModuleEvent {
+  createUserAnonymous: EventCreateUserAnonymous;
+}
+/** event: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -50,6 +72,7 @@ export interface ScopeModuleAUser {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  event: IModuleEvent;
 }
 
 import 'vona';
