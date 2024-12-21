@@ -11,6 +11,10 @@ export interface IUserAdapter {
   isAnonymous: (user: IUserBase) => boolean;
 }
 
+export interface IPassportAdapter {
+  createUserAnonymous(): Promise<IUserBase>;
+}
+
 declare module 'vona' {
   export interface ContextState {
     user?: IUserBase;

@@ -35,8 +35,12 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -45,6 +49,7 @@ export class ScopeModuleAUser extends BeanScopeBase {}
 export interface ScopeModuleAUser {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
 }
 
 import 'vona';
@@ -55,6 +60,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     user: ScopeModuleAUser;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-user': ReturnType<typeof config>;
   }
 }
 
