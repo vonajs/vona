@@ -1,5 +1,5 @@
 import { schemaEmail, schemaIp, schemaMax, schemaMin, schemaUrl, schemaUuid } from './helpers.js';
-import { schemaDescription, schemaOpenapi } from './openapi.js';
+import { schemaDescription, schemaExample, schemaOpenapi } from './openapi.js';
 import { schemaArray, schemaDefault, schemaObject, schemaOptional } from './system.js';
 
 export const v = {
@@ -17,4 +17,5 @@ export const v = {
   // openapi
   openapi: schemaOpenapi,
   description: schemaDescription,
+  example: schemaExample,
 };

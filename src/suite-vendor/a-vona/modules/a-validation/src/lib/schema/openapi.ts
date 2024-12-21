@@ -14,3 +14,9 @@ export function schemaDescription<T extends ZodTypeAny>(description?: string) {
     return schema.openapi({ description });
   };
 }
+
+export function schemaExample<T extends ZodTypeAny>(example?: any) {
+  return function (schema: T): T {
+    return schema.openapi({ example });
+  };
+}
