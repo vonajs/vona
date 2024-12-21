@@ -1,3 +1,3 @@
 export type FunctionAsync<RESULT> = () => Promise<RESULT>;
-export type Next = () => Promise<any>;
-export type NextSync = () => any;
+export type Next = (data?: any) => Promise<any>;
+export type NextSync = (data?: any) => any;

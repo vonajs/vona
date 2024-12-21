@@ -72,8 +72,12 @@ async function _transformArgument(
   if (pipes.length === 0) return value;
   // apply
   for (const pipe of pipes) {
-    value = await pipe(value);
+    value = await pipe(value, _pipeNextDefault);
   }
+  return value;
+}
+
+function _pipeNextDefault(value: any) {
   return value;
 }
 

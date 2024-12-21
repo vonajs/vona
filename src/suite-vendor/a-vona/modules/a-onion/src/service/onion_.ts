@@ -1,6 +1,16 @@
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 import { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, SymbolProxyDisable, VonaContext } from 'vona';
+import {
+  appMetadata,
+  appResource,
+  BeanBase,
+  cast,
+  compose,
+  deepExtend,
+  Next,
+  SymbolProxyDisable,
+  VonaContext,
+} from 'vona';
 import { Service } from 'vona-module-a-web';
 import { getOnionScenesMeta } from 'vona-shared';
 import {
@@ -285,14 +295,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   /** internal */
   public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: IOnionExecuteCustom) {
     const sceneName = this.sceneName;
-    const fn = (data: any, next) => {
+    const fn = (data: any, next: Next) => {
       // optionsPrimitive
       const optionsPrimitive = item.beanOptions.optionsPrimitive;
       // options
       const options = this.combineOnionOptions(item);
       // enable match ignore dependencies
       if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, this._getRoutePathForMatch())) {
-        return typeof next === 'function' ? next() : next;
+        return next(data);
       }
       // execute
       const beanFullName = item.beanOptions.beanFullName;
