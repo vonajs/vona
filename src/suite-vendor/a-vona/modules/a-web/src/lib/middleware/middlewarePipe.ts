@@ -12,7 +12,7 @@ import {
 import { ServiceOnion } from 'vona-module-a-onion';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
-  // todo: support fromConfig
+  // check handler
   const handler = ctx.getHandler();
   if (!handler) return next();
   // arguments

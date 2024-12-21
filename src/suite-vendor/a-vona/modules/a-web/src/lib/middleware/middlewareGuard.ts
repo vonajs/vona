@@ -3,7 +3,7 @@ import { Next, VonaContext } from 'vona';
 export async function middlewareGuard(ctx: VonaContext, next: Next) {
   // check innerAccess
   if (ctx.innerAccess) return next();
-  // todo: support fromConfig(handler not found for fromConfig)
+  // check handler
   const handler = ctx.getHandler();
   if (!handler) return next();
   // compose

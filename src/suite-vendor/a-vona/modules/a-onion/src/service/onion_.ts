@@ -171,18 +171,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     let optionsRoute;
     if (!cast(item).argumentPipe && this.sceneMeta.optionsRoute) {
       const route = ctx.route?.route;
-      optionsRoute = route?.meta?.[cast(item).fromConfig ? item.name : item.beanOptions.beanFullName];
+      optionsRoute = route?.meta?.[item.beanOptions.beanFullName];
     }
     // options: argument pipe
     const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe ? cast(item).argumentPipe?.options : undefined;
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
-      if (cast(item).fromConfig) {
-        optionsDynamic = cast(ctx.meta).onionsDynamic?.[item.name as any];
-      } else {
-        optionsDynamic = cast(ctx.meta).onionsDynamic?.[item.beanOptions.scene]?.[item.name];
-      }
+      optionsDynamic = cast(ctx.meta).onionsDynamic?.[item.beanOptions.scene]?.[item.name];
     }
     // final options
     let options;
