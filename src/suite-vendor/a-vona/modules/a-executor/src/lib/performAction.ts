@@ -65,6 +65,7 @@ export async function performActionInner<T = any>({
     // cookies
     delegateCookies(ctx, ctxCaller);
 
+    // todo: remove session
     // XX should not delegate session, because session._ctx related to ctx
     // not delegate ctx.user, because will create req.user by state.user
     for (const property of ['state', 'socket', 'session', 'instance']) {

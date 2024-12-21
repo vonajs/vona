@@ -1,4 +1,3 @@
-import { IModuleRoute } from '../../lib/bean/resource/route/type.js';
 import { Constructable } from '../../lib/decorator/type/constructable.js';
 import { VonaApplication } from '../application/app.js';
 import { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
@@ -19,7 +18,6 @@ export interface IModuleResource {
   config: (app: VonaApplication) => object | Promise<object>;
   meta: ((app: VonaApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
-  routes: IModuleRoute[];
   controllers: Constructable[];
 }
 
