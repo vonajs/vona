@@ -17,6 +17,21 @@ export class BeanPassport extends BeanBase {
     this.ctx.state.user = user;
   }
 
+  public async signin(user: IUserBase): Promise<void> {
+    // event
+    await this.scope.event.signin.emit(user);
+    // ok
+    this.current = user;
+  }
+
+  public async signout(): Promise<void> {
+    if (!this.current) return;
+    // event
+    await this.scope.event.signout.emit(this.current);
+    // ok
+    this.current = undefined;
+  }
+
   public async signinWithAnonymous(): Promise<void> {
     const userAnonymous = await this.createUserAnonymous();
     this.current = userAnonymous;
