@@ -40,13 +40,15 @@ export type RouteHandlerArgumentType =
 export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
 export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgumentsValue');
 
+export type TypeExtractValue = (ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) => Promise<any>;
+
 export interface RouteHandlerArgumentMetaDecorator {
   index: number;
   type: RouteHandlerArgumentType;
   field?: string;
   pipes: Function[];
   schema: z.ZodSchema;
-  extractValue?: (ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) => Promise<any>;
+  extractValue?: TypeExtractValue;
 }
 
 export interface RouteHandlerArgumentMeta {

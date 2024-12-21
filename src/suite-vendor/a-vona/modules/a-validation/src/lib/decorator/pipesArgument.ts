@@ -5,10 +5,11 @@ import {
   RouteHandlerArgumentMetaDecorator,
   RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
+  TypeExtractValue,
 } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
 
-export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
+export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {
   return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       // not inherit
