@@ -15,6 +15,11 @@ export class BeanPassport extends BeanBase {
 
   public set current(user: IUserBase | undefined) {
     this.ctx.state.user = user;
+    let ctxCaller = this.ctx.ctxCaller;
+    while (ctxCaller) {
+      ctxCaller.state.user = user;
+      ctxCaller = ctxCaller.ctxCaller;
+    }
   }
 
   public async signin(user: IUserBase): Promise<void> {
