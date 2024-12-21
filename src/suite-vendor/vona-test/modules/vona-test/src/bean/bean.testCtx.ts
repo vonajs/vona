@@ -5,7 +5,7 @@ class TestCtx0 extends BeanBase {
   _name: string;
 
   protected __init__(moduleName) {
-    this._name = moduleName || this.ctx.module.info.relativeName;
+    this._name = moduleName;
   }
 
   protected __get__(prop) {

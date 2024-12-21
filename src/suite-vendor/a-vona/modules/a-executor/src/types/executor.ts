@@ -6,7 +6,6 @@ export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
   subdomain?: string | null | undefined;
   instance?: boolean;
-  module?: string; // todo: remove
 }
 
 export interface INewCtxExtraData {

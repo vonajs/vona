@@ -5,7 +5,6 @@ import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
 import {
   IModule,
-  IModuleMeta,
   ISuite,
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
@@ -43,7 +42,6 @@ export class AppMeta extends BeanSimple {
   modulesMonkey: Record<string, IModule>;
   //
   constants: Record<string, any>;
-  metas: Record<string, IModuleMeta>;
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //

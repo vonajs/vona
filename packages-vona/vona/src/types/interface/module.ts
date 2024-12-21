@@ -16,21 +16,13 @@ export interface IModuleResource {
   locales: TypeModuleResourceLocales;
   Errors: TypeModuleResourceErrors;
   config: (app: VonaApplication) => object | Promise<object>;
-  meta: ((app: VonaApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
   controllers: Constructable[];
 }
 
-export type TypeModuleMetaGeneric = {
-  [property: string]: any;
-};
-
-export interface IModuleMeta extends TypeModuleMetaGeneric {}
-
 declare module '@cabloy/module-info' {
   export interface IModule {
     resource: IModuleResource;
-    meta: IModuleMeta;
     mainInstance: IModuleMain;
     monkeyInstance: IMonkeyModule & IMonkeySystem;
   }
