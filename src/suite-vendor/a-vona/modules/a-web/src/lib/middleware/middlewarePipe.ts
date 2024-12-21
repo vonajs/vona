@@ -66,13 +66,13 @@ async function _transformArgument(
   value: any,
 ) {
   // pipes
-  const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, _data, options, value) => {
+  const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, value, options, _next) => {
     return beanInstance.transform(value, metadata, options);
   });
   if (pipes.length === 0) return value;
   // apply
   for (const pipe of pipes) {
-    value = await pipe(ctx, value);
+    value = await pipe(value);
   }
   return value;
 }
