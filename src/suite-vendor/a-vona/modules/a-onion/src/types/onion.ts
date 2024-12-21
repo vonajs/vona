@@ -4,6 +4,8 @@ import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
 
+export type IOnionExecuteCustom = (beanInstance: any, data: any, options: any, next: Function) => any;
+
 export type TypeUseOnionGlobalBaseOptions<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
 
 export interface IOnionOptionsEnable {

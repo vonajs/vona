@@ -28,9 +28,7 @@ export interface IDecoratorFilterOptionsGlobal
   global: true;
 }
 
-export const SymbolFilterComposeContext = Symbol('SymbolFilterComposeContext');
-
-export interface IFilterComposeContext {
+export interface IFilterComposeData {
   err: Error;
   method: string;
 }

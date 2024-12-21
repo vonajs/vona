@@ -4,6 +4,7 @@ import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, SymbolPr
 import { Service } from 'vona-module-a-web';
 import { getOnionScenesMeta } from 'vona-shared';
 import {
+  IOnionExecuteCustom,
   IOnionOptionsDeps,
   IOnionOptionsEnable,
   IOnionOptionsMatch,
@@ -41,7 +42,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
-    executeCustom?: Function,
+    executeCustom?: IOnionExecuteCustom,
   ) {
     // compose
     const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
@@ -75,7 +76,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this._composeOnionsGlobal();
   }
 
-  private _composeOnionsGlobal(executeCustom?: Function) {
+  private _composeOnionsGlobal(executeCustom?: IOnionExecuteCustom) {
     if (!this._cacheOnionsGlobal) {
       const onions: Function[] = [];
       for (const item of this.onionsGlobal) {
@@ -91,7 +92,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
-    executeCustom?: Function,
+    executeCustom?: IOnionExecuteCustom,
   ) {
     const beanFullName = ctx.getClassBeanFullName();
     const handlerName = ctx.getHandler()?.name;
@@ -282,9 +283,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   /** internal */
-  public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
+  public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: IOnionExecuteCustom) {
     const sceneName = this.sceneName;
-    const fn = (ctx: VonaContext, next) => {
+    const fn = (context: any, next) => {
       // optionsPrimitive
       const optionsPrimitive = item.beanOptions.optionsPrimitive;
       // options
@@ -300,7 +301,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         throw new Error(`${sceneName} bean not found: ${beanFullName}`);
       }
       if (executeCustom) {
-        return executeCustom(beanInstance, options, next, ctx);
+        return executeCustom(beanInstance, options, next, context);
       }
       return cast(beanInstance).execute(options, next);
     };
