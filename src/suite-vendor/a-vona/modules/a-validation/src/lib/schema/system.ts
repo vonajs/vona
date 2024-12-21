@@ -2,7 +2,7 @@ import { coerceWithNil } from '@cabloy/zod-query';
 import { Constructable, isNil } from 'vona';
 import { z } from 'zod';
 import { SchemaLike } from '../types/decorator.js';
-import { ValidatorOptions } from '../types/validatorOptions.js';
+import { ISchemaObjectOptions } from '../types/validatorOptions.js';
 import { makeSchemaLike } from './makeSchemaLikes.js';
 import { schema } from './schema.js';
 
@@ -18,7 +18,7 @@ export function schemaOptional() {
   };
 }
 
-export function schemaObject<T>(classType: Constructable<T>, options?: Partial<ValidatorOptions>) {
+export function schemaObject<T>(classType: Constructable<T>, options?: ISchemaObjectOptions) {
   return function (_schema: z.ZodSchema): z.ZodSchema<T> {
     return schema(classType, options);
   };
