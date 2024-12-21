@@ -11,7 +11,7 @@ import { Gate } from 'vona-module-a-core';
 export class ControllerOnion extends BeanBase {
   @Get('/')
   @UseMiddleware('a-database:transaction')
-  // @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-core:user', { public: true })
   index() {
     //return 'Hello Vona';
   }
@@ -31,7 +31,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Get('echo2/:userId/:userName')
-  // @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-core:user', { public: true })
   //async echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   async echo2(@Query(DtoUser) book: Partial<DtoUser>) {
     //const ctx = this.app.currentContext;
@@ -40,7 +40,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Get('echo3/:userId')
-  // @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-core:user', { public: true })
   async echo3(@Query('id', v.optional()) id: number) {
     //this.scope.util.combineApiPath
     console.log(this.ctx.path);
@@ -50,14 +50,14 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Post('echo4')
-  // @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-core:user', { public: true })
   @UseFilterGlobal('a-core:error', { enable: true, logs: { 422: true } })
   async echo4(@Body(v.array(DtoUser)) users: DtoUser[]) {
     return users;
   }
 
   @Get('echo5')
-  // @UseGuardGlobal('a-core:user', { public: true })
+  @UseGuardGlobal('a-core:user', { public: true })
   async echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
