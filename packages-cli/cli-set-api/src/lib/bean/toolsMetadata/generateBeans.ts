@@ -30,9 +30,8 @@ export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName
     // const beanName = parts[parts.length - 1];
     // const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const fileNameJS = fileName.replace('.ts', '.js');
-    let className = parts.map(item => toUpperCaseFirstChar(item)).join('');
+    const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
-    if (className === 'BeanBase') className = 'BeanBase2';
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
     if (!isBeanGlobal || !isIgnore) {
       // ignore virtual

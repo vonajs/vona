@@ -5,10 +5,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
   for (const globFile of globFiles) {
-    let { className, beanName, fileNameJSRelative, isIgnore, isVirtual } = globFile;
+    const { className, beanName, fileNameJSRelative, isIgnore, isVirtual } = globFile;
     if (isIgnore || isVirtual) continue;
     const beanFullName = beanName;
-    if (className === 'BeanBase') className = 'BeanBase2';
     contentImports.push(`import { ${className} } from '${fileNameJSRelative}';`);
     contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
   }

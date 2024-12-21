@@ -40,16 +40,12 @@ export async function globBeanFiles(
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
     const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
-    let className =
+    const className =
       (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     const fileContent = isIgnore ? '' : fse.readFileSync(file).toString();
     const isVirtual = fileContent.includes('@Virtual()');
-    // todo: remove
-    if (sceneName === 'bean' && parts[1] === 'base') {
-      className = 'BeanBase2';
-    }
     result.push({
       file,
       fileContent,
