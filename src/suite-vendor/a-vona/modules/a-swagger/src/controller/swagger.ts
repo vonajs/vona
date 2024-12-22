@@ -6,7 +6,7 @@ import { Controller, Get, Res } from 'vona-module-a-web';
 export class ControllerSwagger extends BeanBase {
   @Get()
   @Public()
-  @Res.contentType('application/json')
+  @Res.contentType('text/html')
   index() {
     return 'Hello Swagger';
   }

@@ -1,7 +1,7 @@
 import { appMetadata, MetadataKey } from 'vona';
-import { SymbolResponseMetadata } from '../../types/response.js';
+import { SymbolResponseMetadata, TypeResponseContentType } from '../../types/response.js';
 
-function contentType(contentType: string): MethodDecorator {
+function contentType(contentType: TypeResponseContentType): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     const map = appMetadata.getOwnMetadataMap(false, SymbolResponseMetadata, target, prop);
     map.contentType = contentType;
