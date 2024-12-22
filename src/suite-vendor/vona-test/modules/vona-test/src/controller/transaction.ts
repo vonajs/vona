@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { Body } from 'vona-module-a-validation';
+import { Body } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 
 const tableName = '__tempTransaction';

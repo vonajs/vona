@@ -1,16 +1,14 @@
 import { appMetadata, Constructable, Next, VonaContext } from 'vona';
 import { extractValue } from './extractValue.js';
+import { IDecoratorPipeOptionsGlobal, IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
+import { IOnionExecuteCustom, ServiceOnion } from 'vona-module-a-onion';
+import { valid } from 'vona-module-a-validation';
 import {
-  IDecoratorPipeOptionsGlobal,
-  IPipeRecord,
-  IPipeTransform,
   RouteHandlerArgumentMeta,
   RouteHandlerArgumentMetaDecorator,
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
-} from 'vona-module-a-aspect';
-import { IOnionExecuteCustom, ServiceOnion } from 'vona-module-a-onion';
-import { valid } from 'vona-module-a-validation';
+} from 'vona-module-a-openapi';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // check handler

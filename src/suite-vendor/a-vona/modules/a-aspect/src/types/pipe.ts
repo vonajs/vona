@@ -1,7 +1,7 @@
-import { Constructable, OmitNever, Type, VonaContext } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, ServiceOnion } from 'vona-module-a-onion';
+import { OmitNever } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import { IApiPathRecord } from 'vona-module-a-web';
-import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
 export interface IPipeRecordLocal {}

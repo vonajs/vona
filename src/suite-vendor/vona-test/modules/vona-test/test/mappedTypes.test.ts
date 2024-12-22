@@ -2,7 +2,7 @@ import { app } from 'vona-mock';
 import { DtoUser } from '../src/dto/user.js';
 import { cast, catchError, MixinClass, OmitClass, PartialClass, PickClass } from 'vona';
 import assert from 'assert';
-import { Rule } from 'vona-module-a-validation';
+import { Rule } from 'vona-module-a-openapi';
 import { DtoProfile } from '../src/dto/profile.js';
 import { Dto } from 'vona-module-a-web';
 

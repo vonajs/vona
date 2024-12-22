@@ -1,13 +1,12 @@
 import { BeanBase } from 'vona';
-import { Body, Query, v } from 'vona-module-a-validation';
+import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
+import { Gate } from 'vona-module-a-core';
+import { Transaction } from 'vona-module-a-database';
+import { Api, Body, Query, v } from 'vona-module-a-openapi';
+import { Public } from 'vona-module-a-user';
+import { Controller, Get, Post } from 'vona-module-a-web';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
-import { Controller, Get, Post } from 'vona-module-a-web';
-import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
-import { Transaction } from 'vona-module-a-database';
-import { Gate } from 'vona-module-a-core';
-import { Public } from 'vona-module-a-user';
-import { Api } from 'vona-module-a-openapi';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
