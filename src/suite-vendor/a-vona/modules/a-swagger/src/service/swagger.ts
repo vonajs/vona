@@ -140,11 +140,24 @@ export class ServiceSwagger extends BeanBase {
     // request
     const request = {};
     for (const argumentType of __ArgumentTypes) {
-      let schema = argsMapIsolate[argumentType];
+      let schema: z.ZodSchema | undefined = argsMapIsolate[argumentType];
       if (!schema && argsMapWithField[argumentType]) {
         schema = z.object(argsMapWithField[argumentType]);
       }
-      if (schema) {
+      if (!schema) continue;
+      // record
+      if (argumentType === 'body') {
+        // body
+        request['body'] = {
+          required: !schema.isOptional(),
+          content: {
+            'application/json': {
+              schema,
+            },
+          },
+        };
+      } else {
+        // others
         const name = argumentType === 'param' ? 'params' : argumentType;
         request[name] = schema;
       }
