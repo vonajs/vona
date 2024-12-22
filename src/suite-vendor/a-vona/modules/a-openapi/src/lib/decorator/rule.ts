@@ -1,7 +1,7 @@
 import { appMetadata, MetadataKey, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-database';
 import { z } from 'zod';
-import { SchemaLike } from '../types/decorator.js';
+import { SchemaLike } from '../../types/decorator.js';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
 
 export const SymbolDecoratorRule = Symbol('SymbolDecoratorRule');

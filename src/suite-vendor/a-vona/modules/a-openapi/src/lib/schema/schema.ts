@@ -1,7 +1,7 @@
 import { appMetadata, appResource, Constructable } from 'vona';
-import { ISchemaObjectOptions } from '../types/validatorOptions.js';
 import { z } from 'zod';
 import { SymbolDecoratorRule } from '../decorator/rule.js';
+import { ISchemaObjectOptions } from '../../types/decorator.js';
 
 export function schema(schemaLike: z.ZodSchema): z.ZodSchema;
 export function schema(classType: StringConstructor): z.ZodString;
