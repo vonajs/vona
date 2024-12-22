@@ -141,7 +141,7 @@ export class ServiceSwagger extends BeanBase {
     const request = {};
     for (const argumentType of __ArgumentTypes) {
       let schema = argsMapIsolate[argumentType];
-      if (!schema) {
+      if (!schema && argsMapWithField[argumentType]) {
         schema = z.object(argsMapWithField[argumentType]);
       }
       if (schema) {
