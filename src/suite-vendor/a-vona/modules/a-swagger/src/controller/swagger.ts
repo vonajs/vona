@@ -31,6 +31,7 @@ export class ControllerSwagger extends BeanBase {
   @Get()
   @Public()
   @Api.contentType('text/html')
+  @Api.exclude()
   index() {
     return __SWAGGER_HTML__;
   }
@@ -38,6 +39,7 @@ export class ControllerSwagger extends BeanBase {
   @Get('json')
   @Public()
   @Api.contentType('text/plain')
+  @Api.exclude()
   json() {
     const json = this.scope.service.swagger.generateJson();
     return JSON.stringify(json, null, 2);
