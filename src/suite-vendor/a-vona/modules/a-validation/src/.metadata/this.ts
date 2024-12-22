@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-validation';
-export { ScopeModuleAValidator as ScopeModule } from './index.js';
+export { ScopeModuleAValidation as ScopeModule } from './index.js';
