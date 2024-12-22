@@ -9,4 +9,4 @@ function contentType(contentType: string): MethodDecorator {
   } as any;
 }
 
-export const Response = { contentType };
+export const Res = { contentType };
