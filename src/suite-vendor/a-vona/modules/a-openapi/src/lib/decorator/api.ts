@@ -36,4 +36,12 @@ function bodyCustom(bodySchemaWrapper: SchemaLikeCreate | false, ...schemaLikes:
   } as any;
 }
 
-export const Api = { contentType, body, bodyCustom };
+function exclude(): ClassDecorator & MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    options.exclude = true;
+    return descriptor;
+  } as any;
+}
+
+export const Api = { contentType, body, bodyCustom, exclude };

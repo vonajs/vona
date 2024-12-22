@@ -47,6 +47,7 @@ export class ServiceSwagger extends BeanBase {
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
     const controllerOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller);
+    if (controllerOpenApiOptions?.exclude) return;
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -79,6 +80,14 @@ export class ServiceSwagger extends BeanBase {
     // app
     const app = this.app;
 
+    // action options
+    const actionOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(
+      SymbolOpenApiOptions,
+      controller.prototype,
+      actionKey,
+    );
+    if (actionOpenApiOptions?.exclude) return;
+
     // actionPath/actionMethod
     if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey)) return;
     const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
@@ -90,6 +99,7 @@ export class ServiceSwagger extends BeanBase {
     const actionMethod: RequestMethod = handlerMetadata.method || RequestMethod.GET;
     // ignore regexp
     if (actionPath instanceof RegExp) return;
+
     // routePath
     const routePath = app.meta.util.combineApiPathControllerAndAction(
       info.relativeName,
@@ -100,13 +110,6 @@ export class ServiceSwagger extends BeanBase {
     ) as string;
     // :id -> {id}
     const routePath2 = routePath.replace(/:([^/]+)/g, '{$1}');
-
-    // middlewares options
-    const actionOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(
-      SymbolOpenApiOptions,
-      controller.prototype,
-      actionKey,
-    );
 
     // registerPath
     registry.registerPath({

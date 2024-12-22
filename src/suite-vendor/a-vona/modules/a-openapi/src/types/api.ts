@@ -8,6 +8,7 @@ export interface IOpenApiOptions {
   contentType?: TypeResponseContentType;
   bodySchema?: z.ZodSchema;
   bodySchemaWrapper?: SchemaLikeCreate | false;
+  exclude?: boolean;
 }
 
 export type TypeResponseContentType =
