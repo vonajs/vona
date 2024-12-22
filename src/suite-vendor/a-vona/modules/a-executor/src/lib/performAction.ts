@@ -99,7 +99,7 @@ function createRequest({ method, url }, ctxCaller) {
   const _req = ctxCaller.request;
   // req
   const req = new http.IncomingMessage(null as any);
-  req.headers = _req.headers;
+  req.headers = Object.assign({}, _req.headers, { accept: 'application/json' });
   (<any>req).host = _req.host;
   (<any>req).hostname = _req.hostname;
   (<any>req).protocol = _req.protocol;
