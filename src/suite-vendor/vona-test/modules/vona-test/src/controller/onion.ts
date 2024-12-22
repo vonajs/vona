@@ -33,8 +33,8 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo2/:userId/:userName')
   @UseGuardGlobal('a-user:passport', { public: true })
-  //async echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
-  async echo2(@Query(DtoUser) book: Partial<DtoUser>) {
+  //echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
+  echo2(@Query(DtoUser) book: Partial<DtoUser>) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return book;
@@ -42,7 +42,7 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo3/:userId')
   @UseGuardGlobal('a-user:passport', { public: true })
-  async echo3(@Query('id', v.optional()) id: number) {
+  echo3(@Query('id', v.optional()) id: number) {
     //this.scope.util.combineApiPath
     console.log(this.ctx.path);
     //const ctx = this.app.currentContext;
@@ -60,7 +60,7 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo5')
   @Public()
-  async echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
+  echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return ids;

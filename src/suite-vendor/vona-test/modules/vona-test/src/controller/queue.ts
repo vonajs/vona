@@ -11,7 +11,7 @@ export class ControllerQueue extends BeanBase {
   }
 
   @Post('push')
-  async push() {
+  push() {
     this.scope.queue.test.push({ a: 1, b: 2 });
   }
 }

@@ -5,7 +5,11 @@ import { Controller, Post } from 'vona-module-a-web';
 @Controller({ path: 'status', meta: { mode: 'unittest' } })
 export class ControllerStatus extends BeanBase {
   @Post()
-  async status() {
+  status() {
+    return this._status();
+  }
+
+  private async _status() {
     // get
     let value = await this.scope.status.get('enable');
     assert.equal(value, undefined);
