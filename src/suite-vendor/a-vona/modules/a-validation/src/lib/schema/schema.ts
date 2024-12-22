@@ -1,4 +1,4 @@
-import { appMetadata, Constructable } from 'vona';
+import { appMetadata, appResource, Constructable } from 'vona';
 import { ISchemaObjectOptions } from '../types/validatorOptions.js';
 import { z } from 'zod';
 import { SymbolDecoratorRule } from '../decorator/rule.js';
@@ -30,5 +30,10 @@ export function schema(classType: any, options?: ISchemaObjectOptions): any {
   let schema = z.object(rules as z.ZodRawShape);
   if (options?.passthrough) schema = schema.passthrough() as any;
   if (options?.strict) schema = schema.strict() as any;
+  // refId
+  const beanFullName = appResource.getBeanFullName(classType);
+  if (beanFullName) {
+    schema = schema.openapi(beanFullName);
+  }
   return schema as any;
 }
