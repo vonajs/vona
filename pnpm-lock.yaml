@@ -83,6 +83,9 @@ importers:
       vona-module-a-onion:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-onion
+      vona-module-a-openapi:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-openapi
       vona-module-a-queue:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-queue
@@ -863,6 +866,9 @@ importers:
       vona-module-a-onion:
         specifier: workspace:^
         version: link:modules/a-onion
+      vona-module-a-openapi:
+        specifier: workspace:^
+        version: link:modules/a-openapi
       vona-module-a-queue:
         specifier: workspace:^
         version: link:modules/a-queue
@@ -975,6 +981,8 @@ importers:
   src/suite-vendor/a-vona/modules/a-meta: {}
 
   src/suite-vendor/a-vona/modules/a-onion: {}
+
+  src/suite-vendor/a-vona/modules/a-openapi: {}
 
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
