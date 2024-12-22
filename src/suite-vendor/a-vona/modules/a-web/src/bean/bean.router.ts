@@ -7,8 +7,8 @@ import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.j
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-aspect';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
-import { RequestMethod, SymbolRequestMappingHandler } from '../types/http.js';
-import { RequestMappingMetadata } from '../lib/decorator/requestMapping.js';
+import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.js';
+import { RequestMappingMetadata } from '../lib/decorator/request.js';
 
 @Bean()
 export class BeanRouter extends BeanBase {

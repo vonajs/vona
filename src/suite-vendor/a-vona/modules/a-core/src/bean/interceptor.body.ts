@@ -15,4 +15,10 @@ export class InterceptorBody extends BeanBase implements IInterceptorExecute {
     // ok
     return res;
   }
+
+  private _output(body: any) {
+    this.ctx.response.status = 200;
+    this.ctx.response.type = 'application/json';
+    this.ctx.response.body = { code: 0, message: body.message, body };
+  }
 }
