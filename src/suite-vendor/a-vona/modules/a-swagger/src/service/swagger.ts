@@ -1,13 +1,14 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import { OpenAPIObject } from 'openapi3-ts/oas30';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceSwagger extends BeanBase {
-  generateJson() {
+  generateJson(): OpenAPIObject {
     const registry = this._collectRegistry();
     const generator = new OpenApiGeneratorV3(registry.definitions);
-    return generator.generateDocument();
+    return generator.generateDocument(this.scope.config.generateDocument);
   }
 
   private _collectRegistry() {

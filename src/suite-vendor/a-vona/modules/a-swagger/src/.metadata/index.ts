@@ -52,8 +52,12 @@ declare module 'vona-module-a-web' {
   }
 }
 /** controller: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -62,6 +66,7 @@ export class ScopeModuleASwagger extends BeanScopeBase {}
 export interface ScopeModuleASwagger {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
   service: IModuleService;
 }
 
@@ -73,6 +78,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     swagger: ScopeModuleASwagger;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-swagger': ReturnType<typeof config>;
   }
 }
 

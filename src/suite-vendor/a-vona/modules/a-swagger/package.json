@@ -31,6 +31,7 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^7.2.0"
+    "@asteasolutions/zod-to-openapi": "^7.2.0",
+    "openapi3-ts": "^4.4.0"
   }
 }
