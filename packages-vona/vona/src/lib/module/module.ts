@@ -92,6 +92,14 @@ export class ModuleTools extends BeanSimple {
     return await Promise.all(promises);
   }
 
+  private async _importModules_preload() {
+    for (const module of this.app.meta.modulesArray) {
+      if (module.info.capabilities?.preload) {
+        await import(this._getModuleIndexPath(module));
+      }
+    }
+  }
+
   protected async _importSpecificModule(moduleName: string) {
     const module = this.app.meta.modules[moduleName];
     await import(this._getModuleIndexPath(module));
@@ -100,6 +108,9 @@ export class ModuleTools extends BeanSimple {
   private async _importModules() {
     const timeBegin = new Date();
     console.log(`import modules begin, pid: ${process.pid}`);
+    // preload
+    await this._importModules_preload();
+    // import
     let modulesResource: IModuleResource[];
     if (__import_type_serialization) {
       modulesResource = await this._importModules_serialization();

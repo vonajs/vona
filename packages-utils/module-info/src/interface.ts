@@ -7,6 +7,7 @@ export interface IModuleCapabilities {
   icon: boolean;
   theme: boolean;
   locale: boolean;
+  preload: boolean;
 }
 
 export interface IModuleInfo {

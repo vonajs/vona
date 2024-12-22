@@ -6,6 +6,7 @@ export interface IModuleCapabilities {
     icon: boolean;
     theme: boolean;
     locale: boolean;
+    preload: boolean;
 }
 export interface IModuleInfo {
     pid: string;
@@ -92,6 +93,7 @@ export interface IGlobBeanFile {
     beanName: string;
     beanNameFull: string;
     isIgnore: boolean;
+    isVirtual: boolean;
 }
 export interface IMetadataCustomGenerateOptions {
     cli: any;

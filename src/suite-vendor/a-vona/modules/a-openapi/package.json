@@ -3,6 +3,9 @@
   "version": "5.0.0",
   "title": "a-openapi",
   "vonaModule": {
+    "capabilities": {
+      "preload": true
+    },
     "dependencies": {},
     "globalDependencies": {
       "@asteasolutions/zod-to-openapi": true
