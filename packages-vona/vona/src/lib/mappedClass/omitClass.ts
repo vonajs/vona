@@ -1,7 +1,7 @@
 import { Constructable } from '../decorator/type/constructable.js';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
 
-export function omitClass<T, K extends keyof T>(
+export function OmitClass<T, K extends keyof T>(
   classRef: Constructable<T>,
   keys: K[],
 ): Constructable<Omit<T, (typeof keys)[number]>> {

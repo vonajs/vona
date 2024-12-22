@@ -9,7 +9,7 @@ type ClassRefsToConstructors<T extends Constructable[]> = {
 
 type Intersection<T extends Constructable[]> = Constructable<UnionToIntersection<ClassRefsToConstructors<T>[number]>>;
 
-export function mixinClass<T extends Constructable[]>(...classRefs: T): Intersection<T> {
+export function MixinClass<T extends Constructable[]>(...classRefs: T): Intersection<T> {
   abstract class TargetClass {}
   copyMetadataOfClasses(
     TargetClass.prototype,
