@@ -33,4 +33,11 @@ export class ControllerSwagger extends BeanBase {
   index() {
     return __SWAGGER_HTML__;
   }
+
+  @Get('json')
+  @Public()
+  @Res.contentType('application/json')
+  json() {
+    return { name: 'yang', age: 18 };
+  }
 }
