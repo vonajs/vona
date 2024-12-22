@@ -10,6 +10,10 @@ import {
 } from 'vona-module-a-web';
 import * as ModuleInfo from '@cabloy/module-info';
 import { IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
+import { RouteHandlerArgumentMetaDecorator, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-aspect';
+import { z } from 'zod';
+
+const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
 @Service()
 export class ServiceSwagger extends BeanBase {
@@ -104,15 +108,47 @@ export class ServiceSwagger extends BeanBase {
       path: routePath2,
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
-      request: this._collectRequest(),
+      request: this._collectRequest(controller, actionKey),
       responses: this._collectResponse(),
     });
   }
 
-  private _collectRequest() {
+  private _collectRequest(controller: Constructable, actionKey: string) {
+    // meta
+    const argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
+      SymbolRouteHandlersArgumentsMeta,
+      controller.prototype,
+      actionKey,
+    );
+    if (!argsMeta) return;
+    // args
+    const argsMapWithField = {};
+    const argsMapIsolate = {};
+    for (const argMeta of argsMeta) {
+      if (!__ArgumentTypes.includes(argMeta.type)) continue;
+      if (argMeta.field) {
+        if (!argsMapWithField[argMeta.type]) {
+          argsMapWithField[argMeta.type] = {};
+        }
+        argsMapWithField[argMeta.type][argMeta.field] = argMeta.schema;
+      } else {
+        if (!argsMapIsolate[argMeta.type]) {
+          argsMapIsolate[argMeta.type] = argMeta.schema;
+        }
+      }
+    }
     // request
     const request = {};
-    // request params
+    for (const argumentType of __ArgumentTypes) {
+      let schema = argsMapIsolate[argumentType];
+      if (!schema) {
+        schema = z.object(argsMapWithField[argumentType]);
+      }
+      if (schema) {
+        const name = argumentType === 'param' ? 'params' : argumentType;
+        request[name] = schema;
+      }
+    }
     return request;
   }
 
