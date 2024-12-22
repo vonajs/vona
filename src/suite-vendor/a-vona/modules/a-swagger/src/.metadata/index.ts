@@ -1,3 +1,33 @@
+/** service: begin */
+export * from '../service/swagger.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IServiceRecord {
+    'a-swagger:swagger': never;
+  }
+}
+declare module 'vona-module-a-swagger' {
+  export interface ServiceSwagger {
+    /** @internal */
+    get scope(): ScopeModuleASwagger;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceSwagger } from '../service/swagger.js';
+export interface IModuleService {
+  swagger: ServiceSwagger;
+}
+/** service: end */
+/** service: begin */
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-swagger.service.swagger': ServiceSwagger;
+  }
+}
+/** service: end */
 /** controller: begin */
 export * from '../controller/swagger.js';
 
@@ -14,6 +44,14 @@ declare module 'vona-module-a-swagger' {
   }
 }
 /** controller: end */
+/** controller: begin */
+declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord {
+    '//swagger': '//swagger';
+    '//swagger/json': '//swagger/json';
+  }
+}
+/** controller: end */
 /** scope: begin */
 import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -24,6 +62,7 @@ export class ScopeModuleASwagger extends BeanScopeBase {}
 export interface ScopeModuleASwagger {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  service: IModuleService;
 }
 
 import 'vona';

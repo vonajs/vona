@@ -38,6 +38,6 @@ export class ControllerSwagger extends BeanBase {
   @Public()
   @Res.contentType('text/plain')
   json() {
-    return { name: 'yang', age: 18 };
+    return this.scope.service.swagger.generateJson();
   }
 }
