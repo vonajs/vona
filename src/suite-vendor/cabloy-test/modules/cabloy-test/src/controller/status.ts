@@ -1,8 +1,10 @@
 import { BeanBase } from 'vona';
 import assert from 'assert';
 import { Controller, Post } from 'vona-module-a-web';
+import { Api } from 'vona-module-a-openapi';
 
 @Controller({ path: 'status', meta: { mode: 'unittest' } })
+@Api.exclude()
 export class ControllerStatus extends BeanBase {
   @Post()
   status() {

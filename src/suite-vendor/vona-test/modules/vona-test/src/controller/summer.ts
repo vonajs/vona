@@ -3,8 +3,10 @@ import { __ThisModule__ } from '../.metadata/this.js';
 import assert from 'assert';
 import { SummerCacheTest } from '../bean/summerCache.test.js';
 import { Controller, Post } from 'vona-module-a-web';
+import { Api } from 'vona-module-a-openapi';
 
 @Controller({ path: 'summer', meta: { mode: 'unittest' } })
+@Api.exclude()
 export class ControllerSummer extends BeanBase {
   @Post()
   async test() {
