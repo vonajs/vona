@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@asteasolutions/zod-to-openapi':
+        specifier: ^7.3.0
+        version: 7.3.0(zod@3.24.1)
       assert:
         specifier: ^2.1.0
         version: 2.1.0
@@ -982,7 +985,11 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-onion: {}
 
-  src/suite-vendor/a-vona/modules/a-openapi: {}
+  src/suite-vendor/a-vona/modules/a-openapi:
+    dependencies:
+      '@asteasolutions/zod-to-openapi':
+        specifier: ^7.3.0
+        version: 7.3.0(zod@3.24.1)
 
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
@@ -1035,9 +1042,6 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-validation:
     dependencies:
-      '@asteasolutions/zod-to-openapi':
-        specifier: ^7.2.0
-        version: 7.3.0(zod@3.24.1)
       '@cabloy/zod-errors-custom':
         specifier: workspace:^
         version: link:../../../../../packages-utils/zod-errors-custom
