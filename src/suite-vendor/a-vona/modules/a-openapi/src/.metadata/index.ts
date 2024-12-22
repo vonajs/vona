@@ -1,3 +1,6 @@
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
