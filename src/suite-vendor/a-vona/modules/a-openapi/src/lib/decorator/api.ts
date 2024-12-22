@@ -1,6 +1,6 @@
 import { appMetadata, MetadataKey } from 'vona';
 import { IOpenApiOptions, SymbolOpenApiOptions, TypeResponseContentType } from '../../types/api.js';
-import { SchemaLike } from '../../types/decorator.js';
+import { SchemaLike, SchemaLikeCreate } from '../../types/decorator.js';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
 
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
@@ -23,4 +23,17 @@ function body(...schemaLikes: SchemaLike[]): MethodDecorator {
   } as any;
 }
 
-export const Api = { contentType, body };
+function bodyCustom(bodySchemaWrapper: SchemaLikeCreate | false, ...schemaLikes: SchemaLike[]): MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    // schema
+    const metaType = appMetadata.getDesignReturntype(target, prop);
+    const schema = makeSchemaLikes(schemaLikes, metaType);
+    // options
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    options.bodySchema = schema;
+    options.bodySchemaWrapper = bodySchemaWrapper;
+    return descriptor;
+  } as any;
+}
+
+export const Api = { contentType, body, bodyCustom };
