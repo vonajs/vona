@@ -10,6 +10,7 @@ import {
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-aspect';
 import { IOnionExecuteCustom, ServiceOnion } from 'vona-module-a-onion';
+import { valid } from 'vona-module-a-validation';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // check handler
@@ -128,6 +129,9 @@ function _collectArgumentMiddlewares(
 ) {
   if (!argMeta.pipes) return;
   return argMeta.pipes.map(pipe => {
+    if (typeof pipe !== 'function') {
+      pipe = valid({ schema: pipe }) as Function;
+    }
     const { pipeName, options } = pipe();
     const item = onionPipe.onionsNormal[pipeName];
     if (!item) throw new Error(`${onionPipe.sceneName} not found: ${pipeName}`);

@@ -28,8 +28,5 @@
     "static"
   ],
   "scripts": {},
-  "dependencies": {
-    "@cabloy/zod-errors-custom": "workspace:^",
-    "@cabloy/zod-query": "workspace:^"
-  }
+  "dependencies": {}
 }

@@ -1,6 +1,4 @@
 import { appMetadata, MetadataKey } from 'vona';
-import { SchemaLike } from '../types/decorator.js';
-import { valid } from '../../bean/pipe.valid.js';
 import {
   RouteHandlerArgumentMetaDecorator,
   RouteHandlerArgumentType,
@@ -8,6 +6,7 @@ import {
   TypeExtractValue,
 } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
+import { SchemaLike } from '../../types/decorator.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {
   return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
@@ -33,7 +32,7 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
         index,
         type: paramType,
         field: paramField,
-        pipes: [valid({ schema: argSchema })],
+        pipes: [argSchema],
         schema: argSchema,
         extractValue,
       });

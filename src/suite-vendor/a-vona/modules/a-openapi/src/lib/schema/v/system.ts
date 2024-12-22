@@ -1,10 +1,7 @@
 import { Constructable, isNil } from 'vona';
 import { z } from 'zod';
-import { SchemaLike } from '../types/decorator.js';
-import { ISchemaObjectOptions } from '../types/validatorOptions.js';
-import { makeSchemaLike } from './makeSchemaLikes.js';
-import { schema } from './schema.js';
 import { coerceWithNil } from '@cabloy/zod-query';
+import { schema, SchemaLike } from 'vona-module-a-openapi';
 
 export function schemaDefault<T>(defaultValue: T) {
   return function (schema: z.ZodSchema): z.ZodSchema {
