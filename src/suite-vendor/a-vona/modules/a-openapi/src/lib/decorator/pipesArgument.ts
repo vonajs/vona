@@ -1,12 +1,12 @@
 import { appMetadata, MetadataKey } from 'vona';
+import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
 import {
   RouteHandlerArgumentMetaDecorator,
   RouteHandlerArgumentType,
+  SchemaLike,
   SymbolRouteHandlersArgumentsMeta,
   TypeExtractValue,
-} from 'vona-module-a-aspect';
-import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
-import { SchemaLike } from '../../types/decorator.js';
+} from '../../types/decorator.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {
   return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {

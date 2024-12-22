@@ -9,10 +9,9 @@ import {
   SymbolRequestMappingHandler,
 } from 'vona-module-a-web';
 import * as ModuleInfo from '@cabloy/module-info';
-import { IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
+import { IOpenApiOptions, schema, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 import { RouteHandlerArgumentMetaDecorator, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-aspect';
 import { z } from 'zod';
-import { schema } from 'vona-module-a-validation';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 

@@ -21,52 +21,6 @@ export interface IDecoratorPipeOptionsGlobal
   global: true;
 }
 
-export type RouteHandlerArgumentType =
-  | 'request'
-  | 'response'
-  | 'body'
-  | 'query'
-  | 'param'
-  | 'headers'
-  | 'session'
-  | 'file'
-  | 'files'
-  | 'host'
-  | 'ip'
-  | 'rawBody'
-  | 'string'
-  | 'user';
-
-export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
-export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgumentsValue');
-
-export type TypeExtractValue = (ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) => Promise<any>;
-
-export interface RouteHandlerArgumentMetaDecorator {
-  index: number;
-  type: RouteHandlerArgumentType;
-  field?: string;
-  pipes: (Function | z.ZodSchema)[];
-  schema: z.ZodSchema;
-  extractValue?: TypeExtractValue;
-}
-
-export interface RouteHandlerArgumentMeta {
-  type: RouteHandlerArgumentType;
-  field?: string;
-  metaType?: Type<any>;
-  controller: Constructable;
-  method: string;
-  index: number;
-}
-
-export interface IPipeItemArgument<OPTIONS = unknown, ONIONNAME = string, T = unknown>
-  extends IOnionSlice<OPTIONS, ONIONNAME, T> {
-  argumentPipe?: {
-    options?: IDecoratorPipeOptions;
-  };
-}
-
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
     pipe: ServiceOnion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
