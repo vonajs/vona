@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "modules/a-cabloy/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-status/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-swagger/tsconfig.build.json"
     }
   ]
 }

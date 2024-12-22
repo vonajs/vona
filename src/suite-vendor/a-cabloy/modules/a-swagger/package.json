@@ -3,7 +3,9 @@
   "version": "5.0.0",
   "title": "a-swagger",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {
+      "a-vona": "5.0.0"
+    }
   },
   "type": "module",
   "exports": {
