@@ -184,10 +184,11 @@ export class ServiceSwagger extends BeanBase {
       bodySchema = schema(metaType as any);
     }
     // response
+    const contentType = actionOpenApiOptions?.contentType || 'application/json';
     const response = {
       description: '',
       content: {
-        'application/json': {
+        [contentType]: {
           schema: bodySchema,
         },
       },
