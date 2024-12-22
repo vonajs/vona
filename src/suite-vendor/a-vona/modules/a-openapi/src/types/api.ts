@@ -1,8 +1,11 @@
+import { z } from 'zod';
+
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 export interface IOpenApiOptions {
   description?: string;
   summary?: string;
   contentType?: TypeResponseContentType;
+  bodySchema?: z.ZodSchema;
 }
 
 export type TypeResponseContentType =
