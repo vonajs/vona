@@ -118,7 +118,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-summer
       vona-module-a-swagger:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-swagger
+        version: link:src/suite-vendor/a-cabloy/modules/a-swagger
       vona-module-a-user:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-user
@@ -832,8 +832,14 @@ importers:
   src/suite-vendor/a-cabloy:
     dependencies:
       vona-module-a-cabloy:
-        specifier: ^5.0.3
+        specifier: workspace:^
         version: link:modules/a-cabloy
+      vona-module-a-status:
+        specifier: workspace:^
+        version: link:modules/a-status
+      vona-module-a-swagger:
+        specifier: workspace:^
+        version: link:modules/a-swagger
 
   src/suite-vendor/a-cabloy/modules/a-cabloy: {}
 
@@ -842,6 +848,12 @@ importers:
       assert:
         specifier: ^2.0.0
         version: 2.1.0
+
+  src/suite-vendor/a-cabloy/modules/a-swagger:
+    dependencies:
+      openapi3-ts:
+        specifier: ^4.4.0
+        version: 4.4.0
 
   src/suite-vendor/a-vona:
     dependencies:
@@ -855,14 +867,23 @@ importers:
         specifier: workspace:^
         version: link:modules/a-broadcast
       vona-module-a-core:
-        specifier: ^5.0.3
+        specifier: workspace:^
         version: link:modules/a-core
+      vona-module-a-database:
+        specifier: workspace:^
+        version: link:modules/a-database
       vona-module-a-event:
         specifier: workspace:^
         version: link:modules/a-event
       vona-module-a-executor:
         specifier: workspace:^
         version: link:modules/a-executor
+      vona-module-a-index:
+        specifier: workspace:^
+        version: link:modules/a-index
+      vona-module-a-instance:
+        specifier: workspace:^
+        version: link:modules/a-instance
       vona-module-a-meta:
         specifier: workspace:^
         version: link:modules/a-meta
@@ -893,17 +914,20 @@ importers:
       vona-module-a-static:
         specifier: workspace:^
         version: link:modules/a-static
-      vona-module-a-swagger:
+      vona-module-a-summer:
         specifier: workspace:^
-        version: link:modules/a-swagger
+        version: link:modules/a-summer
       vona-module-a-user:
         specifier: workspace:^
         version: link:modules/a-user
       vona-module-a-validation:
         specifier: workspace:^
         version: link:modules/a-validation
+      vona-module-a-version:
+        specifier: workspace:^
+        version: link:modules/a-version
       vona-module-a-vona:
-        specifier: ^5.0.3
+        specifier: workspace:^
         version: link:modules/a-vona
       vona-module-a-web:
         specifier: workspace:^
@@ -990,6 +1014,15 @@ importers:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.3.0
         version: 7.3.0(zod@3.24.1)
+      '@cabloy/zod-errors-custom':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/zod-errors-custom
+      '@cabloy/zod-query':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/zod-query
+      zod:
+        specifier: ^3.23.8
+        version: 3.24.1
 
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
@@ -1029,25 +1062,9 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
 
-  src/suite-vendor/a-vona/modules/a-swagger:
-    dependencies:
-      openapi3-ts:
-        specifier: ^4.4.0
-        version: 4.4.0
-
   src/suite-vendor/a-vona/modules/a-user: {}
 
-  src/suite-vendor/a-vona/modules/a-validation:
-    dependencies:
-      '@cabloy/zod-errors-custom':
-        specifier: workspace:^
-        version: link:../../../../../packages-utils/zod-errors-custom
-      '@cabloy/zod-query':
-        specifier: workspace:^
-        version: link:../../../../../packages-utils/zod-query
-      zod:
-        specifier: ^3.23.8
-        version: 3.24.1
+  src/suite-vendor/a-vona/modules/a-validation: {}
 
   src/suite-vendor/a-vona/modules/a-version: {}
 

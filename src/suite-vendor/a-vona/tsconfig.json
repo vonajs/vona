@@ -4,67 +4,79 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/a-core/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-vona/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-validation/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-queue/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-startup/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-schedule/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-executor/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-redlock/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-onion/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-web/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-aspect/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-socket/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-meta/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-broadcast/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-event/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-redis/tsconfig.build.json"
     },
     {
       "path": "modules/a-bean/tsconfig.build.json"
     },
     {
+      "path": "modules/a-broadcast/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-core/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-database/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-event/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-executor/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-index/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-instance/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-meta/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-onion/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-openapi/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-queue/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-redis/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-redlock/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-schedule/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-socket/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-startup/tsconfig.build.json"
+    },
+    {
       "path": "modules/a-static/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-summer/tsconfig.build.json"
     },
     {
       "path": "modules/a-user/tsconfig.build.json"
     },
     {
-      "path": "modules/a-swagger/tsconfig.build.json"
+      "path": "modules/a-validation/tsconfig.build.json"
     },
     {
-      "path": "modules/a-openapi/tsconfig.build.json"
+      "path": "modules/a-version/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-vona/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-web/tsconfig.build.json"
     }
   ]
 }
