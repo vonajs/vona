@@ -1,6 +1,5 @@
 import { appMetadata, MetadataKey } from 'vona';
-import { IOpenApiOptions, SymbolOpenApiOptions, TypeResponseContentType } from '../types/api.js';
-import { makeSchemaLikes, SchemaLike } from 'vona-module-a-validation';
+import { IOpenApiOptions, SymbolOpenApiOptions, TypeResponseContentType } from '../../types/api.js';
 
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {

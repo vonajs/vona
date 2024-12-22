@@ -110,7 +110,7 @@ export class ServiceSwagger extends BeanBase {
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
       request: this._collectRequest(controller, actionKey),
-      responses: this._collectResponses(controller, actionKey),
+      responses: this._collectResponses(controller, actionKey, actionOpenApiOptions),
     });
   }
 
@@ -166,10 +166,20 @@ export class ServiceSwagger extends BeanBase {
     return request;
   }
 
-  private _collectResponses(controller: Constructable, actionKey: string) {
+  private _collectResponses(
+    controller: Constructable,
+    actionKey: string,
+    actionOpenApiOptions: IOpenApiOptions | undefined,
+  ) {
     // body schema
-    const metaType = appMetadata.getDesignReturntype(controller.prototype, actionKey);
-    const bodySchema = schema(metaType as any);
+    let bodySchema: z.ZodSchema;
+    if (actionOpenApiOptions?.bodySchema) {
+      bodySchema = actionOpenApiOptions.bodySchema;
+    } else {
+      const metaType = appMetadata.getDesignReturntype(controller.prototype, actionKey);
+      bodySchema = schema(metaType as any);
+    }
+    // response
     const response = {
       description: '',
       content: {

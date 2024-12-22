@@ -7,6 +7,7 @@ import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } f
 import { Transaction } from 'vona-module-a-database';
 import { Gate } from 'vona-module-a-core';
 import { Public } from 'vona-module-a-user';
+import { Api } from 'vona-module-a-openapi';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
@@ -53,6 +54,7 @@ export class ControllerOnion extends BeanBase {
   @Post('echo4')
   @UseGuardGlobal('a-user:passport', { public: true })
   @UseFilterGlobal('a-core:error', { enable: true, logs: { 422: true } })
+  @Api.body(v.array(DtoUser))
   echo4(@Body(v.optional(), v.array(DtoUser)) users: DtoUser[]): DtoUser[] {
     return users;
   }

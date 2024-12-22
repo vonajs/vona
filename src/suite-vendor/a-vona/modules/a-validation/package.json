@@ -3,10 +3,7 @@
   "version": "5.0.0",
   "title": "a-validation",
   "vonaModule": {
-    "dependencies": {},
-    "globalDependencies": {
-      "zod": true
-    }
+    "dependencies": {}
   },
   "type": "module",
   "exports": {
@@ -33,7 +30,6 @@
   "scripts": {},
   "dependencies": {
     "@cabloy/zod-errors-custom": "workspace:^",
-    "@cabloy/zod-query": "workspace:^",
-    "zod": "^3.23.8"
+    "@cabloy/zod-query": "workspace:^"
   }
 }
