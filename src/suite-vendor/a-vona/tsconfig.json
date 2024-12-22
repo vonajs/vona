@@ -59,6 +59,9 @@
     },
     {
       "path": "modules/a-user/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-swagger/tsconfig.build.json"
     }
   ]
 }
