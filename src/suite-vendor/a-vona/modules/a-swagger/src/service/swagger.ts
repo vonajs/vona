@@ -10,6 +10,7 @@ import {
 } from 'vona-module-a-web';
 import * as ModuleInfo from '@cabloy/module-info';
 import {
+  bodySchemaWrapper,
   IOpenApiOptions,
   RouteHandlerArgumentMetaDecorator,
   schema,
@@ -176,15 +177,10 @@ export class ServiceSwagger extends BeanBase {
     actionOpenApiOptions: IOpenApiOptions | undefined,
   ) {
     // body schema
-    let bodySchema: z.ZodSchema;
-    if (actionOpenApiOptions?.bodySchema) {
-      bodySchema = actionOpenApiOptions.bodySchema;
-    } else {
-      const metaType = appMetadata.getDesignReturntype(controller.prototype, actionKey);
-      bodySchema = schema(metaType as any);
-    }
-    // response
+    const bodySchema = this._parseBodySchema(controller, actionKey, actionOpenApiOptions);
+    // contentType
     const contentType = actionOpenApiOptions?.contentType || 'application/json';
+    // response
     const response = {
       description: '',
       content: {
@@ -196,5 +192,24 @@ export class ServiceSwagger extends BeanBase {
     // responses
     const responses = { [HttpStatus.OK]: response };
     return responses;
+  }
+
+  private _parseBodySchema(
+    controller: Constructable,
+    actionKey: string,
+    actionOpenApiOptions: IOpenApiOptions | undefined,
+  ) {
+    // bodySchema
+    let bodySchema: z.ZodSchema;
+    if (actionOpenApiOptions?.bodySchema) {
+      bodySchema = actionOpenApiOptions.bodySchema;
+    } else {
+      const metaType = appMetadata.getDesignReturntype(controller.prototype, actionKey);
+      bodySchema = schema(metaType as any);
+    }
+    // wrapper
+    if (actionOpenApiOptions?.bodySchemaWrapper === false) return bodySchema;
+    const wrapper = actionOpenApiOptions?.bodySchemaWrapper ?? bodySchemaWrapper;
+    return wrapper(bodySchema);
   }
 }

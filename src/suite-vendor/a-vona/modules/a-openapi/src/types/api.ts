@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { SchemaLikeCreate } from './decorator.js';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 export interface IOpenApiOptions {
@@ -6,6 +7,7 @@ export interface IOpenApiOptions {
   summary?: string;
   contentType?: TypeResponseContentType;
   bodySchema?: z.ZodSchema;
+  bodySchemaWrapper?: SchemaLikeCreate | false;
 }
 
 export type TypeResponseContentType =
