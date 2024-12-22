@@ -5,7 +5,7 @@ import { IDecoratorControllerOptions } from '../types/controller.js';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.js';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.js';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
-import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-aspect';
+import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapi';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.js';
 import { RequestMappingMetadata } from '../lib/decorator/request.js';
