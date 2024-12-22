@@ -6,7 +6,6 @@ import { Controller, Get, Post } from 'vona-module-a-web';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Transaction } from 'vona-module-a-database';
 import { Gate } from 'vona-module-a-core';
-import { Public } from 'vona-module-a-user';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {

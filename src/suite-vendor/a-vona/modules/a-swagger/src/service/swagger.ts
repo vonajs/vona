@@ -149,6 +149,7 @@ export class ServiceSwagger extends BeanBase {
         request[name] = schema;
       }
     }
+    console.log(request);
     return request;
   }
 
