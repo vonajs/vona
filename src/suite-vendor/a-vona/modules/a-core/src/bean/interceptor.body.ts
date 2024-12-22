@@ -1,6 +1,6 @@
 import { appMetadata, BeanBase, Next } from 'vona';
 import { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute, Interceptor } from 'vona-module-a-aspect';
-import { SymbolResponseMetadata, TypeResponseContentType, TypeResponseMetadata } from 'vona-module-a-web';
+import { IOpenApiOptions, SymbolOpenApiOptions, TypeResponseContentType } from 'vona-module-a-openapi';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptionsGlobal {}
 
@@ -32,12 +32,8 @@ export class InterceptorBody extends BeanBase implements IInterceptorExecute {
     const controller = this.ctx.getClass();
     if (controller) {
       const handlerName = this.ctx.getHandlerName();
-      const map = appMetadata.getMetadata<TypeResponseMetadata>(
-        SymbolResponseMetadata,
-        controller.prototype,
-        handlerName,
-      );
-      const contentType = map?.contentType;
+      const options = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      const contentType = options?.contentType;
       if (contentType) return contentType;
     }
     if (this.ctx.accepts('html') === 'html') return 'text/html';

@@ -3,9 +3,7 @@
   "version": "5.0.0",
   "title": "a-swagger",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
+    "dependencies": {}
   },
   "type": "module",
   "exports": {
@@ -31,7 +29,6 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^7.2.0",
     "openapi3-ts": "^4.4.0"
   }
 }
