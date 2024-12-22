@@ -1,6 +1,6 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { OpenAPIObject } from 'openapi3-ts/oas30';
-import { appMetadata, appResource, BeanBase, Constructable } from 'vona';
+import { appMetadata, appResource, BeanBase, Constructable, HttpStatus } from 'vona';
 import {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
@@ -12,6 +12,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 import { RouteHandlerArgumentMetaDecorator, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-aspect';
 import { z } from 'zod';
+import { schema } from 'vona-module-a-validation';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
@@ -109,7 +110,7 @@ export class ServiceSwagger extends BeanBase {
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
       request: this._collectRequest(controller, actionKey),
-      responses: this._collectResponse(),
+      responses: this._collectResponses(controller, actionKey),
     });
   }
 
@@ -165,9 +166,20 @@ export class ServiceSwagger extends BeanBase {
     return request;
   }
 
-  private _collectResponse() {
-    // response
-    const response = {};
-    return response;
+  private _collectResponses(controller: Constructable, actionKey: string) {
+    // body schema
+    const metaType = appMetadata.getDesignReturntype(controller.prototype, actionKey);
+    const bodySchema = schema(metaType as any);
+    const response = {
+      description: '',
+      content: {
+        'application/json': {
+          schema: bodySchema,
+        },
+      },
+    };
+    // responses
+    const responses = { [HttpStatus.OK]: response };
+    return responses;
   }
 }
