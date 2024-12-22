@@ -1,1 +1,5 @@
-export const SymbolOpenApiInfo = Symbol('SymbolOpenApiInfo');
+export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
+export interface IOpenApiOptions {
+  description?: string;
+  summary?: string;
+}

@@ -1,9 +1,15 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { OpenAPIObject } from 'openapi3-ts/oas30';
 import { appMetadata, appResource, BeanBase, Constructable } from 'vona';
-import { IDecoratorControllerOptions, Service } from 'vona-module-a-web';
+import {
+  IDecoratorControllerOptions,
+  RequestMappingMetadata,
+  RequestMethod,
+  Service,
+  SymbolRequestMappingHandler,
+} from 'vona-module-a-web';
 import * as ModuleInfo from '@cabloy/module-info';
-import { SymbolUseOnionOptions } from 'vona-module-a-onion';
+import { IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 @Service()
 export class ServiceSwagger extends BeanBase {
@@ -30,7 +36,7 @@ export class ServiceSwagger extends BeanBase {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
-    const controllerMiddlewaresOptions = appMetadata.getMetadata<object>(SymbolUseOnionOptions, controller);
+    const controllerOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller);
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -43,7 +49,7 @@ export class ServiceSwagger extends BeanBase {
         controller,
         controllerBeanFullName,
         controllerPath,
-        controllerMiddlewaresOptions,
+        controllerOpenApiOptions,
         actionKey,
         desc,
       );
@@ -54,11 +60,11 @@ export class ServiceSwagger extends BeanBase {
     registry: OpenAPIRegistry,
     info: ModuleInfo.IModuleInfo,
     controller: Constructable,
-    controllerBeanFullName: string,
+    _controllerBeanFullName: string,
     controllerPath: string | undefined,
-    controllerMiddlewaresOptions: object | undefined,
+    _controllerOpenApiOptions: IOpenApiOptions | undefined,
     actionKey: string,
-    desc: PropertyDescriptor,
+    _desc: PropertyDescriptor,
   ) {
     // app
     const app = this.app;
@@ -71,7 +77,9 @@ export class ServiceSwagger extends BeanBase {
       actionKey,
     )!;
     const actionPath: RegExp | string = handlerMetadata.path || '';
-    const actionMethod: string = handlerMetadata.method || RequestMethod.GET;
+    const actionMethod: RequestMethod = handlerMetadata.method || RequestMethod.GET;
+    // ignore regexp
+    if (actionPath instanceof RegExp) return;
     // routePath
     const routePath = app.meta.util.combineApiPathControllerAndAction(
       info.relativeName,
@@ -79,48 +87,38 @@ export class ServiceSwagger extends BeanBase {
       actionPath,
       true,
       true,
-    );
-    const routePathRaw = app.meta.util.combineApiPathControllerAndActionRaw(
-      info.relativeName,
-      controllerPath,
-      actionPath,
-      true,
-    );
+    ) as string;
+    // :id -> {id}
+    const routePath2 = routePath.replace(/:([^/]+)/g, '{$1}');
 
     // middlewares options
-    const actionMiddlewaresOptions = appMetadata.getMetadata(SymbolUseOnionOptions, controller.prototype, actionKey);
+    const actionOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(
+      SymbolOpenApiOptions,
+      controller.prototype,
+      actionKey,
+    );
 
-    // route
-    const route = {
-      meta: deepExtend({}, controllerMiddlewaresOptions, actionMiddlewaresOptions),
-    };
+    // registerPath
+    registry.registerPath({
+      method: actionMethod,
+      path: routePath2,
+      description: actionOpenApiOptions?.description,
+      summary: actionOpenApiOptions?.summary,
+      request: this._collectRequest(),
+      responses: this._collectResponse(),
+    });
+  }
 
-    // route
-    const _route = {
-      pid: info.pid,
-      module: info.name,
-      controller,
-      actionDescriptor: desc,
-      controllerBeanFullName,
-      action: actionKey,
-      route: route,
-      routeName: undefined,
-      routeMethod: actionMethod,
-      routePath,
-      routePathRaw,
-    };
+  private _collectRequest() {
+    // request
+    const request = {};
+    // request params
+    return request;
+  }
 
-    // fn
-    const fn = (ctx, next) => {
-      ctx.route = _route;
-      return this._registerComposeMiddlewares(ctx)(ctx, next);
-    };
-
-    // register
-    if (_route.routeName) {
-      app.router[_route.routeMethod](_route.routeName, _route.routePath, fn);
-    } else {
-      app.router[_route.routeMethod](_route.routePath, fn);
-    }
+  private _collectResponse() {
+    // response
+    const response = {};
+    return response;
   }
 }
