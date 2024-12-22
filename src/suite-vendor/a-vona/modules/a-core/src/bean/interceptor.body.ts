@@ -1,5 +1,6 @@
-import { BeanBase, Next } from 'vona';
+import { appMetadata, BeanBase, Next } from 'vona';
 import { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute, Interceptor } from 'vona-module-a-aspect';
+import { SymbolResponseMetadata, TypeResponseContentType, TypeResponseMetadata } from 'vona-module-a-web';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptionsGlobal {}
 
@@ -10,15 +11,37 @@ export class InterceptorBody extends BeanBase implements IInterceptorExecute {
     const res = await next();
     // handle
     if (this.ctx.response.status === 404 && this.ctx.response.body === undefined) {
-      this.app.success(res);
+      this._output(res);
     }
     // ok
     return res;
   }
 
   private _output(body: any) {
-    this.ctx.response.status = 200;
-    this.ctx.response.type = 'application/json';
-    this.ctx.response.body = { code: 0, message: body.message, body };
+    const contentType = this._prepareContentType();
+    if (contentType === 'application/json') {
+      this.app.success(body);
+    } else {
+      this.ctx.response.status = 200;
+      this.ctx.response.type = contentType;
+      this.ctx.response.body = body;
+    }
+  }
+
+  private _prepareContentType(): TypeResponseContentType {
+    const controller = this.ctx.getClass();
+    if (controller) {
+      const handlerName = this.ctx.getHandlerName();
+      const map = appMetadata.getMetadata<TypeResponseMetadata>(
+        SymbolResponseMetadata,
+        controller.prototype,
+        handlerName,
+      );
+      const contentType = map?.contentType;
+      if (contentType) return contentType;
+    }
+    if (this.ctx.accepts('html') === 'html') return 'text/html';
+    if (this.ctx.accepts('json') === 'json') return 'application/json';
+    return 'application/octet-stream';
   }
 }

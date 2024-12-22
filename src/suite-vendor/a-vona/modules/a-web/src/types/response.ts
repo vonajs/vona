@@ -1,4 +1,5 @@
 export const SymbolResponseMetadata = Symbol('SymbolResponseMetadata');
+export type TypeResponseMetadata = Record<string, any>;
 
 export type TypeResponseContentType =
   | 'application/json'
