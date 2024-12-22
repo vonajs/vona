@@ -10,9 +10,6 @@
       "path": "modules/a-vona/tsconfig.build.json"
     },
     {
-      "path": "modules/a-swagger/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-validation/tsconfig.build.json"
     },
     {

@@ -10,7 +10,6 @@
   "author": "",
   "dependencies": {
     "vona-module-a-core": "^5.0.3",
-    "vona-module-a-swagger": "^5.0.3",
     "vona-module-a-vona": "^5.0.3",
     "vona-module-a-validation": "workspace:^",
     "vona-module-a-queue": "workspace:^",
