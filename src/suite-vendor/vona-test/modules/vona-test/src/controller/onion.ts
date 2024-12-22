@@ -6,6 +6,7 @@ import { Controller, Get, Post } from 'vona-module-a-web';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Transaction } from 'vona-module-a-database';
 import { Gate } from 'vona-module-a-core';
+import { Public } from 'vona-module-a-user';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
@@ -58,7 +59,7 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo5')
   @Public()
-  async echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
+  async echo5(@Query('ids', v.default([1]), v.array(Number)) ids: number[]) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return ids;

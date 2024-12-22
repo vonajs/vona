@@ -1,5 +1,4 @@
-import { coerceWithNil } from '@cabloy/zod-query';
-import { Constructable, isNil } from 'vona';
+import { Constructable } from 'vona';
 import { z } from 'zod';
 import { SchemaLike } from '../types/decorator.js';
 import { ISchemaObjectOptions } from '../types/validatorOptions.js';
@@ -24,17 +23,8 @@ export function schemaObject<T>(classType: Constructable<T>, options?: ISchemaOb
   };
 }
 
-export function schemaArray(schemaLike?: SchemaLike, params?: z.RawCreateParams & { separator?: string }) {
+export function schemaArray(schemaLike?: SchemaLike, params?: z.RawCreateParams) {
   return function (schema: z.ZodSchema): z.ZodSchema {
-    return z.preprocess(
-      val => {
-        val = coerceWithNil(val);
-        if (isNil(val)) return val;
-        if (typeof val !== 'string') return val;
-        if (isNil(params?.separator) && val[0] === '[') return JSON.parse(val);
-        return val.split(params?.separator ?? ',');
-      },
-      z.array(makeSchemaLike(schemaLike, schema), params),
-    );
+    return z.array(makeSchemaLike(schemaLike, schema), params);
   };
 }
