@@ -17,7 +17,7 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 <script>
   window.onload = () => {
     window.ui = SwaggerUIBundle({
-      url: 'https://petstore3.swagger.io/api/v3/openapi.json',
+      url: '__SWAGGER_JSON__',
       dom_id: '#swagger-ui',
     });
   };
