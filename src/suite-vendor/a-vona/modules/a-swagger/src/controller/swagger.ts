@@ -36,7 +36,7 @@ export class ControllerSwagger extends BeanBase {
 
   @Get('json')
   @Public()
-  @Res.contentType('application/json')
+  @Res.contentType('text/plain')
   json() {
     return { name: 'yang', age: 18 };
   }
