@@ -1,37 +1,3 @@
-/** beans: begin */
-export * from '../bean/database.dialect.mysql.js';
-export * from '../bean/database.dialect.mysql2.js';
-export * from '../bean/database.dialect.pg.js';
-import { DatabaseDialectMysql } from '../bean/database.dialect.mysql.js';
-import { DatabaseDialectMysql2 } from '../bean/database.dialect.mysql2.js';
-import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-database.database.dialect.mysql': DatabaseDialectMysql;
-    'a-database.database.dialect.mysql2': DatabaseDialectMysql2;
-    'a-database.database.dialect.pg': DatabaseDialectPg;
-  }
-}
-declare module 'vona-module-a-database' {
-  export interface DatabaseDialectMysql {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-
-  export interface DatabaseDialectMysql2 {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-
-  export interface DatabaseDialectPg {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-}
-/** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.transaction.js';
 import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
@@ -72,29 +38,6 @@ declare module 'vona' {
   }
 }
 /** bean: end */
-/** databaseDialect: begin */
-export * from '../bean/databaseDialect.pg1.js';
-export * from '../bean/databaseDialect.pg2.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IDatabaseDialectRecord {
-    'a-database:pg1': never;
-    'a-database:pg2': never;
-  }
-}
-declare module 'vona-module-a-database' {
-  export interface DatabaseDialectPg1 {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-
-  export interface DatabaseDialectPg2 {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-}
-/** databaseDialect: end */
 /** service: begin */
 export * from '../service/databaseClient.js';
 export * from '../service/dbMeta.js';

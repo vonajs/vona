@@ -1,6 +1,6 @@
 import { BeanBaseSimple, cast } from 'vona';
 import { Rule } from 'vona-module-a-openapi';
-import { IDecoratorEntityOptions } from './onionEntity.js';
+import { IDecoratorEntityOptions } from './onion/entity.js';
 
 export class EntityBase extends BeanBaseSimple {
   public get table(): string {

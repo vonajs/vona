@@ -1,5 +1,5 @@
 import { createBeanDecorator } from 'vona';
-import { IDecoratorEntityOptions } from '../types/onionEntity.js';
+import { IDecoratorEntityOptions } from '../types/onion/entity.js';
 
 const __tableNames = new Set();
 

@@ -1,6 +1,6 @@
 import { appMetadata, appResource, Constructable } from 'vona';
-import { IDecoratorEntityOptions } from './onionEntity.js';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapi';
+import { IDecoratorEntityOptions } from './onion/entity.js';
 
 export function column<T>(classEntity: () => Constructable<T>, extract: (classEntity: T) => any): string {
   return columns(classEntity, extract) as unknown as string;
