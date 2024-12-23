@@ -32,10 +32,8 @@ export function schema(classType: any, options?: ISchemaObjectOptions): any {
   // refId
   const beanOptions = appResource.getBean(classType);
   if (beanOptions) {
-    schema = schema.openapi(
-      beanOptions.beanFullName,
-      cast(beanOptions.options)?.description ? { description: cast(beanOptions.options).description } : undefined,
-    );
+    const description = cast(beanOptions.options)?.description;
+    schema = schema.openapi(beanOptions.beanFullName, description ? { description } : undefined);
   }
   return schema as any;
 }
