@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
 export type TypeBroadcastTestJobData = {

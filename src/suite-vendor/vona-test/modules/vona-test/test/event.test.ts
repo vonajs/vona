@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'node:assert';
 import { app } from 'vona-mock';
 
 describe('event.test.ts', () => {

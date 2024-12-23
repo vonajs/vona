@@ -1,6 +1,6 @@
 import { BeanBase, cast } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
-import assert from 'assert';
+import assert from 'node:assert';
 import { ServiceTest } from '../service/test.js';
 import { Controller, Get } from 'vona-module-a-web';
 import { Api } from 'vona-module-a-openapi';

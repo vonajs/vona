@@ -1,5 +1,5 @@
 import { BeanBase, cast } from 'vona';
-import assert from 'assert';
+import assert from 'node:assert';
 import { Controller, Post } from 'vona-module-a-web';
 import { Api } from 'vona-module-a-openapi';
 
