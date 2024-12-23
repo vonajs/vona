@@ -26,12 +26,12 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 </body>
 </html>`;
 
-@Controller({ path: '//swagger', exclude: false, meta: { mode: ['local', 'unittest'] } })
+@Controller({ path: '//swagger', exclude: true, meta: { mode: ['local', 'unittest'] } })
 export class ControllerSwagger extends BeanBase {
   @Get()
   @Public()
   @Api.contentType('text/html')
-  index() {
+  index(): string {
     const _apiPath = this.scope.util.combineApiPath(apiPath('//swagger/json'));
     return __SWAGGER_HTML__.replace('__SWAGGER_JSON__', _apiPath);
   }
@@ -39,7 +39,7 @@ export class ControllerSwagger extends BeanBase {
   @Get('json')
   @Public()
   @Api.contentType('text/plain')
-  json() {
+  json(): string {
     const json = this.scope.service.swagger.generateJson();
     return JSON.stringify(json, null, 2);
   }
