@@ -1,0 +1,4 @@
+import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-database';
+
+@DatabaseDialect()
+export class DatabaseDialect<%=argv.beanNameCapitalize%> extends BeanDatabaseDialectBase {}

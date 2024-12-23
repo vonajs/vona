@@ -72,6 +72,29 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** databaseDialect: begin */
+export * from '../bean/databaseDialect.pg1.js';
+export * from '../bean/databaseDialect.pg2.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IDatabaseDialectRecord {
+    'a-database:pg1': never;
+    'a-database:pg2': never;
+  }
+}
+declare module 'vona-module-a-database' {
+  export interface DatabaseDialectPg1 {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface DatabaseDialectPg2 {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+}
+/** databaseDialect: end */
 /** service: begin */
 export * from '../service/databaseClient.js';
 export * from '../service/dbMeta.js';

@@ -27,6 +27,9 @@
         "optionsGlobalInterfaceFrom": "vona-module-a-database",
         "scopeResource": true,
         "boilerplate": "cli/model/boilerplate"
+      },
+      "databaseDialect": {
+        "boilerplate": "cli/databaseDialect/boilerplate"
       }
     }
   },
