@@ -12,8 +12,8 @@ import { AppUtil } from '../../lib/utils/util.js';
 // @ts-ignore ignore the throw type check of 'config'
 export interface VonaApplication extends EggApplication, ApplicationError, ApplicationText {
   options: EggLoaderOptions & { flavor };
-  meta: AppMeta;
   util: AppUtil;
+  meta: AppMeta;
   get ctx(): VonaContext;
   bean: BeanContainer;
   io: SocketServer;
