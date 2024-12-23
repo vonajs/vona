@@ -1,6 +1,15 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { OpenAPIObject } from 'openapi3-ts/oas30';
-import { appMetadata, appResource, BeanBase, Constructable, HttpStatus, IDecoratorBeanOptionsBase } from 'vona';
+import {
+  appMetadata,
+  appResource,
+  BeanBase,
+  cast,
+  Constructable,
+  HttpStatus,
+  IDecoratorBeanOptionsBase,
+  LocaleModuleNameSeparator,
+} from 'vona';
 import {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
@@ -26,7 +35,36 @@ export class ServiceSwagger extends BeanBase {
   generateJson(): OpenAPIObject {
     const registry = this._collectRegistry();
     const generator = new OpenApiGeneratorV3(registry.definitions);
-    return generator.generateDocument(this.scope.config.generateDocument);
+    const apiObj = generator.generateDocument(this.scope.config.generateDocument);
+    this._translate(apiObj);
+    return apiObj;
+  }
+
+  private _translate(apiObj: OpenAPIObject) {
+    // paths
+    if (apiObj.paths) {
+      for (const key in apiObj.paths) {
+        const path = apiObj.paths[key];
+        for (const method in path) {
+          const methodObj = path[method];
+          this._translateString(methodObj, 'description');
+          this._translateString(methodObj, 'summary');
+        }
+      }
+    }
+    // components
+    if (apiObj.components?.schemas) {
+      for (const key in apiObj.components.schemas) {
+        const schema = apiObj.components.schemas[key];
+        this._translateString(schema, 'description');
+      }
+    }
+  }
+
+  private _translateString(obj: any, key: string) {
+    if (obj[key] && obj[key].includes(LocaleModuleNameSeparator)) {
+      obj[key] = this.app.text(obj[key]);
+    }
   }
 
   private _collectRegistry() {

@@ -1,9 +1,10 @@
 import { Rule, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
+import { locale } from '../.metadata/index.js';
 
 @Dto()
 export class DtoUser {
-  @Rule()
+  @Rule(v.description(locale('UserId')))
   id: number;
 
   @Rule(v.min(3))
