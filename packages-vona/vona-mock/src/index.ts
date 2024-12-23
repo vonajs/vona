@@ -30,8 +30,6 @@ if (!Bundle) {
   });
 }
 
-// todo: need to be removed
-export const assert = null;
 export const app = cast<MockCabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
 export const mm = Bundle.mm;
