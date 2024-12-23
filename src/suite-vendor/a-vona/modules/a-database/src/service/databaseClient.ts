@@ -1,6 +1,5 @@
 import { BeanBase, deepExtend } from 'vona';
 import knex, { Knex } from 'knex';
-import { configBases } from '../common/configBases.js';
 import { Service } from 'vona-module-a-web';
 
 export type ISetDatabaseNameResult = { database?: string; filename?: string };
@@ -49,9 +48,11 @@ export class ServiceDatabaseClient extends BeanBase {
     if (!clientConfig) {
       throw new Error(`database config not found: ${clientName}`);
     }
+    // configBaseClient
+    const dialect = this.app.bean.database.getDialect(clientConfig.client as string);
+    const configBaseClient = dialect.getConfigBase();
     // combine
     const configBase = this.configDatabase.base;
-    const configBaseClient = configBases[clientConfig.client as string];
     clientConfig = deepExtend({}, configBase, configBaseClient, clientConfig);
     // ready
     return clientConfig;

@@ -10,6 +10,19 @@ import { TableIdentity } from '../types/tableIdentity.js';
 
 @BeanTemp({ scene: 'database.dialect' })
 export class DatabaseDialectPg extends BeanDatabaseDialectBase {
+  getConfigBase(): Knex.Config {
+    return {
+      connection: {
+        // types: {
+        //   getTypeParser: (oid: number, format: string): any => {
+        //     if (oid === 114) return pgTypes.getTypeParser(25, 'text');
+        //     return pgTypes.getTypeParser(oid, cast(format));
+        //   },
+        // },
+      },
+    };
+  }
+
   async fetchDatabases(
     schemaBuilder: Knex.SchemaBuilder,
     databasePrefix: string,

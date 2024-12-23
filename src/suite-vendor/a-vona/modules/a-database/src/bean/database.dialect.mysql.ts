@@ -7,9 +7,20 @@ import {
   IFetchIndexesResultItem,
 } from './bean.databaseDialectBase.js';
 import { TableIdentity } from '../types/tableIdentity.js';
+import { promisify } from 'node:util';
 
 @BeanTemp({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
+  getConfigBase(): Knex.Config {
+    return {
+      pool: {
+        afterCreate(conn, done) {
+          mysql_afterCreate(conn).then(done).catch(done);
+        },
+      },
+    };
+  }
+
   async fetchDatabases(
     schemaBuilder: Knex.SchemaBuilder,
     databasePrefix: string,
@@ -71,4 +82,14 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
       .where({ ref_name: viewName });
     return items.map(item => item.dep_name);
   }
+}
+
+async function mysql_afterCreate(conn) {
+  await _executeQuery(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
+  await _executeQuery(conn, "SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO'");
+}
+
+async function _executeQuery(conn, sql) {
+  const queryAsync = promisify(cb => conn.query(sql, cb));
+  return await queryAsync();
 }
