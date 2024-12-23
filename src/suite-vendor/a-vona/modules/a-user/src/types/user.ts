@@ -13,7 +13,8 @@ export interface IUserAdapter {
 
 export interface IPassportAdapter {
   createUserAnonymous(): Promise<IUserBase>;
-  getUserMock(name?: string): Promise<IUserBase>;
+  getUserMock(name?: string): Promise<IUserBase | undefined>;
+  getUser(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
 }
 
 declare module 'vona' {
