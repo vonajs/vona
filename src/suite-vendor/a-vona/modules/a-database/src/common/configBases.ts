@@ -1,7 +1,5 @@
-import { cast } from 'vona';
 import { Knex } from 'knex';
 import { promisify } from 'node:util';
-import pgTypes from 'pg-types';
 
 export const configBases: Record<string, Knex.Config> = {
   mysql: {
@@ -18,22 +16,22 @@ export const configBases: Record<string, Knex.Config> = {
       },
     },
     connection: {
-      typeCast(field, next) {
-        if (field.type === 'JSON') {
-          return field.string('utf-8'); // utf8 https://github.com/sidorares/node-mysql2/pull/1662
-        }
-        return next();
-      },
+      // typeCast(field, next) {
+      //   if (field.type === 'JSON') {
+      //     return field.string('utf-8'); // utf8 https://github.com/sidorares/node-mysql2/pull/1662
+      //   }
+      //   return next();
+      // },
     },
   },
   pg: {
     connection: {
-      types: {
-        getTypeParser: (oid: number, format: string): any => {
-          if (oid === 114) return pgTypes.getTypeParser(25, 'text');
-          return pgTypes.getTypeParser(oid, cast(format));
-        },
-      },
+      // types: {
+      //   getTypeParser: (oid: number, format: string): any => {
+      //     if (oid === 114) return pgTypes.getTypeParser(25, 'text');
+      //     return pgTypes.getTypeParser(oid, cast(format));
+      //   },
+      // },
     },
   },
 };
