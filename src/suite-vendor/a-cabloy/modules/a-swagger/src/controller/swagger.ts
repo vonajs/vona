@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { Controller, Get } from 'vona-module-a-web';
+import { apiPath, Controller, Get } from 'vona-module-a-web';
 
 const __SWAGGER_HTML__ = `<!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,8 @@ export class ControllerSwagger extends BeanBase {
   @Public()
   @Api.contentType('text/html')
   index() {
-    return __SWAGGER_HTML__;
+    const _apiPath = this.scope.util.combineApiPath(apiPath('//swagger/json'));
+    return __SWAGGER_HTML__.replace('__SWAGGER_JSON__', _apiPath);
   }
 
   @Get('json')
