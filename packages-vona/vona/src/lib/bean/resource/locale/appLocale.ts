@@ -1,6 +1,6 @@
 import * as localeutil from '@cabloy/localeutil';
 import { BeanSimple } from '../../beanSimple.js';
-import { ILocalInfos, IModuleLocale, IModuleLocaleText } from './type.js';
+import { ILocalInfos, IModuleLocale, IModuleLocaleText, LocaleModuleNameSeparator } from './type.js';
 
 export class AppLocale extends BeanSimple {
   get locale(): keyof ILocalInfos {
@@ -47,10 +47,10 @@ export class AppLocale extends BeanSimple {
     ...args: any[]
   ): string {
     if (!key) return key;
-    const pos = key.indexOf(':');
+    const pos = key.indexOf(LocaleModuleNameSeparator);
     if (pos > -1) {
       moduleScope = key.substring(0, pos);
-      key = key.substring(pos + 1);
+      key = key.substring(pos + LocaleModuleNameSeparator.length);
     }
     return localeutil.getLocaleText(
       supportCustomMessage,

@@ -1,3 +1,4 @@
 export default {
-  helloVona: '您好, Vona!',
+  Home: '首页',
+  HelloVona: '您好, Vona!',
 };

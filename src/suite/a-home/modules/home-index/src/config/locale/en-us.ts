@@ -1,3 +1,4 @@
 export default {
-  helloVona: 'Hello Vona!',
+  Home: 'Home',
+  HelloVona: 'Hello Vona!',
 };
