@@ -16,7 +16,7 @@ describe('locale.test.ts', () => {
           app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'),
           '您好，世界',
         );
-        assert.equal(app.meta.locale.getText(false, undefined, ctx.locale, 'vona-test:TestHelloWorld'), '您好，世界');
+        assert.equal(app.meta.locale.getText(false, undefined, ctx.locale, 'vona-test::TestHelloWorld'), '您好，世界');
         // scope locale
         const scopeTest = app.bean.scope('vona-test');
         assert.equal(scopeTest.locale.TestHelloWorld(), '您好，世界');

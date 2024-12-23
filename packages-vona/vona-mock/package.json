@@ -35,7 +35,6 @@
     "@cabloy/module-info": "workspace:^",
     "@cabloy/module-info-pro": "workspace:^",
     "@types/mocha": "^10.0.1",
-    "assert": "^2.1.0",
     "egg-mock": "^5.10.9"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
