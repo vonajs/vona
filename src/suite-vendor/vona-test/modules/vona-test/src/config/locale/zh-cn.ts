@@ -1,4 +1,5 @@
 export default {
+  User: '用户',
   UserId: '用户名',
   TestHelloWorld: '您好，世界',
   TestApples: '%d个苹果',

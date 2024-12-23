@@ -1,4 +1,5 @@
 export default {
+  User: 'User',
   UserId: 'User Id',
   TestHelloWorld: 'Hello World',
   TestApples: '%d apples',
