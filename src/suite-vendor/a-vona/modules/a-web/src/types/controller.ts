@@ -25,6 +25,7 @@ export interface IControllerRecord {}
 
 export interface IDecoratorControllerOptions extends IOnionOptionsEnable {
   path?: string;
+  tags?: string[];
 }
 
 declare module 'vona-module-a-onion' {
