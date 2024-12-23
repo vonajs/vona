@@ -2,9 +2,13 @@ import { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IDtoRecord {}
 
+export interface IDecoratorDtoOptions {
+  description?: string;
+}
+
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    dto: ServiceOnion<never, keyof IDtoRecord>;
+    dto: ServiceOnion<IDecoratorDtoOptions, keyof IDtoRecord>;
   }
 }
 

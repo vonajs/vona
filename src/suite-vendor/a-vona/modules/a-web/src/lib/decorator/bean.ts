@@ -1,5 +1,6 @@
 import { createBeanDecorator } from 'vona';
 import { IDecoratorControllerOptions } from '../../types/controller.js';
+import { IDecoratorDtoOptions } from '../../types/dto.js';
 
 export function Controller(options?: IDecoratorControllerOptions): ClassDecorator;
 export function Controller(path?: string): ClassDecorator;
@@ -15,6 +16,6 @@ export function Service(): ClassDecorator {
   return createBeanDecorator('service');
 }
 
-export function Dto(): ClassDecorator {
-  return createBeanDecorator('dto');
+export function Dto(options?: IDecoratorDtoOptions): ClassDecorator {
+  return createBeanDecorator('dto', options);
 }

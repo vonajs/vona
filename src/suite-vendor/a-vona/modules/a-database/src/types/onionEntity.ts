@@ -5,6 +5,7 @@ export interface IEntityRecord {}
 
 export interface IDecoratorEntityOptions {
   table?: string;
+  description?: string;
 }
 
 declare module 'vona-module-a-onion' {

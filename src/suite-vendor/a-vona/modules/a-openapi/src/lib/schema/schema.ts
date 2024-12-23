@@ -1,4 +1,4 @@
-import { appMetadata, appResource, Constructable } from 'vona';
+import { appMetadata, appResource, cast, Constructable } from 'vona';
 import { z } from 'zod';
 import { ISchemaObjectOptions, SymbolDecoratorRule } from '../../types/decorator.js';
 
@@ -30,9 +30,12 @@ export function schema(classType: any, options?: ISchemaObjectOptions): any {
   if (options?.passthrough) schema = schema.passthrough() as any;
   if (options?.strict) schema = schema.strict() as any;
   // refId
-  const beanFullName = appResource.getBeanFullName(classType);
-  if (beanFullName) {
-    schema = schema.openapi(beanFullName);
+  const beanOptions = appResource.getBean(classType);
+  if (beanOptions) {
+    schema = schema.openapi(
+      beanOptions.beanFullName,
+      cast(beanOptions.options)?.description ? { description: cast(beanOptions.options).description } : undefined,
+    );
   }
   return schema as any;
 }

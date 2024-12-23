@@ -4,7 +4,6 @@ import {
   appMetadata,
   appResource,
   BeanBase,
-  cast,
   Constructable,
   HttpStatus,
   IDecoratorBeanOptionsBase,
