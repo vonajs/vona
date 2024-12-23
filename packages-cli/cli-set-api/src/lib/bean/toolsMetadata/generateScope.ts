@@ -87,7 +87,7 @@ declare module 'vona' {
 }
 ${
   options.locales
-    ? `\nexport function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}:\${K}\` {
+    ? `\nexport function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}::\${K}\` {
   return \`${moduleName}::\${key}\`;
 }`
     : ''

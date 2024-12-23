@@ -381,7 +381,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `vona-test:${K}` {
-  return `vona-test:${key}`;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `vona-test::${K}` {
+  return `vona-test::${key}`;
 }
 /** scope: end */

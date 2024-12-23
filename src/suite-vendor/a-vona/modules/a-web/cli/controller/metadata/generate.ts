@@ -60,14 +60,17 @@ function __parseControllerPath(fileContent: string): string | false {
 
 function __parseActionPaths(fileContent: string): [string, string][] {
   const actionPaths: [string, string][] = [];
-  const matches = fileContent.match(/(@Get|@Post|@Delete|@Put|@Patch)\(.*\)/g);
+  const matches = fileContent.match(/(@Get|@Post|@Delete|@Put|@Patch)\([\s\S]*?\)/g);
   if (!matches) return [];
   for (const match of matches) {
-    const matches2 = match.match(/@([^\(]*)\((.*)\)/);
+    const matches2 = match.match(/@([^\(]*)\(([\s\S]*?)\)/);
     if (!matches2) throw new Error('parse action path error');
     let actionPath = matches2[2];
-    if (actionPath !== '' && !actionPath.startsWith("'")) continue;
-    if (actionPath.startsWith("'")) actionPath = actionPath.replaceAll("'", '');
+    if (actionPath !== '' && !actionPath.startsWith("'")) continue; //exclude regexp
+    if (actionPath.startsWith("'")) {
+      const pos = actionPath.indexOf("'", 1);
+      actionPath = actionPath.substring(1, pos);
+    }
     actionPaths.push([matches2[1], actionPath]);
   }
   return actionPaths;
