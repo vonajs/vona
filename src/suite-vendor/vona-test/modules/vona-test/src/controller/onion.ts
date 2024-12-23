@@ -2,11 +2,12 @@ import { BeanBase } from 'vona';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
-import { Api, Body, Query, v } from 'vona-module-a-openapi';
+import { Api, Body, Param, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get, Post } from 'vona-module-a-web';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
+import { locale } from '../.metadata/index.js';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
@@ -34,7 +35,12 @@ export class ControllerOnion extends BeanBase {
   @Get('echo2/:userId/:userName')
   @UseGuardGlobal('a-user:passport', { public: true })
   //echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
-  echo2(@Query(DtoUser) book: Partial<DtoUser>) {
+  echo2(
+    @Param('id', v.description(locale('UserId')), v.example('example:1')) _userId: number,
+    @Query(DtoUser) book: Partial<DtoUser>,
+    @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
+    _book: Partial<DtoUser>,
+  ) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return book;

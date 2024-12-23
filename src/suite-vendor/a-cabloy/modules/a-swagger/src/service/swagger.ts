@@ -44,11 +44,17 @@ export class ServiceSwagger extends BeanBase {
     // paths
     if (apiObj.paths) {
       for (const key in apiObj.paths) {
-        const path = apiObj.paths[key];
-        for (const method in path) {
-          const methodObj = path[method];
+        const pathObj = apiObj.paths[key];
+        for (const method in pathObj) {
+          const methodObj = pathObj[method];
           this._translateString(methodObj, 'description');
           this._translateString(methodObj, 'summary');
+          // parameters
+          for (const parameterObj of methodObj.parameters || []) {
+            this._translateSchema(parameterObj.schema);
+          }
+          // requestBody
+          this._translateSchema(methodObj.requestBody?.content?.['application/json']?.schema);
         }
       }
     }
@@ -56,19 +62,25 @@ export class ServiceSwagger extends BeanBase {
     if (apiObj.components?.schemas) {
       for (const key in apiObj.components.schemas) {
         const schema = apiObj.components.schemas[key];
-        this._translateString(schema, 'description');
-        const properties = cast<SchemaObject>(schema).properties;
-        if (properties && typeof properties === 'object') {
-          for (const prop in properties) {
-            const propObj = properties[prop];
-            this._translateString(propObj, 'description');
-          }
-        }
+        this._translateSchema(schema);
+      }
+    }
+  }
+
+  private _translateSchema(schema: any) {
+    if (!schema) return;
+    this._translateString(schema, 'description');
+    const properties = cast<SchemaObject>(schema).properties;
+    if (properties && typeof properties === 'object') {
+      for (const prop in properties) {
+        const propObj = properties[prop];
+        this._translateSchema(propObj);
       }
     }
   }
 
   private _translateString(obj: any, key: string) {
+    if (!obj) return;
     if (obj[key] && obj[key].includes(LocaleModuleNameSeparator)) {
       obj[key] = this.app.text(obj[key]);
     }
