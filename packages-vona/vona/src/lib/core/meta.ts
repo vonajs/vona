@@ -1,5 +1,5 @@
 import { AppReload } from '../module/reload/reload.js';
-import { AppUtil, uuidv4 } from '../utils/util.js';
+import { uuidv4 } from '../utils/util.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
@@ -27,7 +27,6 @@ export class AppMeta extends BeanSimple {
   error: ErrorClass;
   locale: AppLocale;
   text: IModuleLocaleText;
-  util: AppUtil;
   scopeContainer: BeanScopeContainer;
   reload: AppReload;
   messenger: AppMessenger;
@@ -68,9 +67,6 @@ export class AppMeta extends BeanSimple {
     // text
     this.text = this.locale.createLocaleText();
     createAppText(this.app);
-
-    // util
-    this.util = this.bean._newBean(AppUtil);
 
     // scopeContainer
     this.scopeContainer = this.bean._newBean(BeanScopeContainer);

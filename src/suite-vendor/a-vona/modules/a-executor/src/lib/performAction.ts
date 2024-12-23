@@ -23,7 +23,7 @@ export async function performActionInner<T = any>({
     __fnMiddleware = compose([middleware]);
   }
   // request
-  const url = app.meta.util.combineApiPath('', path, true, true);
+  const url = app.util.combineApiPath('', path, true, true);
   const req = createRequest({ method, url }, ctxCaller);
   // response
   const res = new http.ServerResponse(req);
@@ -80,12 +80,12 @@ export async function performActionInner<T = any>({
       if (ctx.body.code === 0) {
         return ctx.body.data;
       }
-      throw ctx.app.meta.util.createError(ctx.body);
+      throw ctx.app.util.createError(ctx.body);
     } else {
       if (ctx.body && typeof ctx.body === 'object') {
-        throw ctx.app.meta.util.createError(ctx.body);
+        throw ctx.app.util.createError(ctx.body);
       } else {
-        throw ctx.app.meta.util.createError({
+        throw ctx.app.util.createError({
           code: ctx.status,
           message: ctx.message,
         });

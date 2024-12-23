@@ -51,7 +51,7 @@ export class BeanRouter extends BeanBase {
 
   findByPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
     const app = this.app;
-    const _path = app.meta.util.combineApiPath(moduleName, path, true, simplify);
+    const _path = app.util.combineApiPath(moduleName, path, true, simplify);
     return app.router.stack.find(layer => layer.path === _path);
   }
 
@@ -77,14 +77,14 @@ export class BeanRouter extends BeanBase {
     const actionPath: RegExp | string = handlerMetadata.path || '';
     const actionMethod: string = handlerMetadata.method || RequestMethod.GET;
     // routePath
-    const routePath = app.meta.util.combineApiPathControllerAndAction(
+    const routePath = app.util.combineApiPathControllerAndAction(
       info.relativeName,
       controllerPath,
       actionPath,
       true,
       true,
     );
-    const routePathRaw = app.meta.util.combineApiPathControllerAndActionRaw(
+    const routePathRaw = app.util.combineApiPathControllerAndActionRaw(
       info.relativeName,
       controllerPath,
       actionPath,

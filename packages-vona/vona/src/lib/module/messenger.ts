@@ -23,7 +23,7 @@ export class AppMessenger extends BeanSimple {
       try {
         data = await provider.handler(info.data);
       } catch (error) {
-        err = app.meta.util.createError(error, true);
+        err = app.util.createError(error, true);
       }
       if (info.echo) {
         if (app.meta.inApp) {

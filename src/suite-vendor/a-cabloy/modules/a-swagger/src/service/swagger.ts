@@ -160,7 +160,7 @@ export class ServiceSwagger extends BeanBase {
     if (actionPath instanceof RegExp) return;
 
     // routePath
-    const routePath = app.meta.util.combineApiPathControllerAndAction(
+    const routePath = app.util.combineApiPathControllerAndAction(
       info.relativeName,
       controllerPath,
       actionPath,
@@ -173,7 +173,7 @@ export class ServiceSwagger extends BeanBase {
     // tags
     let tags: string[] | undefined = actionOpenApiOptions?.tags ?? controllerOpenApiOptions?.tags;
     if (!tags) {
-      tags = [this.app.meta.util.combineResourceName(info.relativeName, beanOptions.name, true, true)];
+      tags = [this.app.util.combineResourceName(info.relativeName, beanOptions.name, true, true)];
     }
     // registerPath
     registry.registerPath({

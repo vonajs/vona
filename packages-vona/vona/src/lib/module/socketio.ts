@@ -34,7 +34,7 @@ export class SocketioReady extends BeanSimple {
           .checkAppReadyInstance(true)
           .then(res => {
             if (!res) return fn(null, false);
-            if (app.meta.util.isSafeDomain(ctx as unknown as VonaContext, origin)) {
+            if (app.util.isSafeDomain(ctx as unknown as VonaContext, origin)) {
               return fn(null, true);
             }
             return fn(null, false);

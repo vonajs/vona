@@ -63,7 +63,7 @@ export class ModuleTools extends BeanSimple {
   async monkey(monkeyName) {
     const app = this.app;
     for (const module of app.meta.modulesArray) {
-      await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, module);
+      await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, module);
     }
   }
 

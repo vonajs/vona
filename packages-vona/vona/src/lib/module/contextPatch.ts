@@ -8,7 +8,7 @@ export default function (app: VonaApplication) {
     const createContext = app.createContext as any;
     app.createContext = (...args) => {
       const context = createContext.call(app, ...args);
-      app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesArray, 'createContext', undefined, context);
+      app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesArray, 'createContext', undefined, context);
       return context;
     };
   }

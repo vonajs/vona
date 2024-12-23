@@ -11,14 +11,14 @@ export class BeanScopeUtil extends BeanSimple {
   }
 
   combineApiPath(path: string | undefined, prefix?: string | boolean, simplify?: boolean) {
-    return this.app.meta.util.combineApiPath(this[BeanModuleScope], path, prefix, simplify);
+    return this.app.util.combineApiPath(this[BeanModuleScope], path, prefix, simplify);
   }
 
   combineResourceName(resourceName: string | undefined, simplify?: boolean, simplifyProviderId?: boolean): string {
-    return this.app.meta.util.combineResourceName(this[BeanModuleScope], resourceName, simplify, simplifyProviderId);
+    return this.app.util.combineResourceName(this[BeanModuleScope], resourceName, simplify, simplifyProviderId);
   }
 
   combineStaticPath(path: string | undefined) {
-    return this.app.meta.util.combineStaticPath(this[BeanModuleScope], path);
+    return this.app.util.combineStaticPath(this[BeanModuleScope], path);
   }
 }

@@ -125,7 +125,7 @@ export class ServiceErrorView extends BeanBase {
 
   serializeData(error: Error, stack, frameFomatter) {
     const code = error.code;
-    let message = this.app.meta.util.detectErrorMessage(error);
+    let message = this.app.util.detectErrorMessage(error);
     if (code) {
       message = `${message} (code: ${code})`;
     }

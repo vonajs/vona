@@ -45,11 +45,11 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     // next
     if (next() === true) return true;
 
-    const status = this.app.meta.util.detectStatus(err);
+    const status = this.app.util.detectStatus(err);
 
     this.ctx.status = status;
     const code = err.code ?? err.status;
-    const message = this.app.meta.util.detectErrorMessage(err);
+    const message = this.app.util.detectErrorMessage(err);
 
     // json error
     const errorJson = {
@@ -81,7 +81,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     // next
     if (next() === true) return true;
 
-    const status = this.app.meta.util.detectStatus(err);
+    const status = this.app.util.detectStatus(err);
     const errorPageUrl =
       typeof this.app.config.errorPageUrl === 'function'
         ? this.app.config.errorPageUrl(err, this)

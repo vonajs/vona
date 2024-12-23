@@ -27,7 +27,7 @@ module.exports = options => {
         ? optionsCors.origin
         : function corsOrigin(ctx: VonaContext) {
             // origin is {protocol}{hostname}{port}...
-            if (ctx.app.meta.util.isSafeDomain(ctx, origin)) {
+            if (ctx.app.util.isSafeDomain(ctx, origin)) {
               return origin;
             }
             return '';

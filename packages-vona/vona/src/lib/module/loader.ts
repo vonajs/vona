@@ -12,10 +12,14 @@ import loadDevelopment from './reload/development.js';
 import loadContextPatch from './contextPatch.js';
 import { loadBeans } from './bean/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { AppUtil } from '../utils/util.js';
 
 export class ModuleLoader extends BeanSimple {
   async execute() {
     const app = this.app;
+    // util
+    const util = app.bean._newBean(AppUtil);
+    app.util = util;
     // meta
     const meta = app.bean._newBean(AppMeta);
     app.meta = meta;

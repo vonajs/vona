@@ -37,12 +37,12 @@ export const mm = Bundle.mm;
 export function mockPath(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
   const app = cast<VonaApplication>(Bundle.app);
-  return app.meta.util.combineApiPath(moduleInfo.relativeName, path, false, true);
+  return app.util.combineApiPath(moduleInfo.relativeName, path, false, true);
 }
 export function mockUrl(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
   const app = cast<VonaApplication>(Bundle.app);
-  return app.meta.util.combineApiPath(moduleInfo.relativeName, path, true, true);
+  return app.util.combineApiPath(moduleInfo.relativeName, path, true, true);
 }
 export function mockModuleInfo(): IModuleInfo {
   return parseModuleInfo(ParseModuleNameLevel)!;

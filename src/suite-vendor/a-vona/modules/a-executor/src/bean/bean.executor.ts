@@ -38,7 +38,7 @@ export class BeanExecutor extends BeanBase {
     options?: IRunInAnonymousContextScopeOptions,
   ): Promise<RESULT> {
     // url
-    const url = this.app.meta.util.combineApiPath('', '/', true, true);
+    const url = this.app.util.combineApiPath('', '/', true, true);
     const req = {
       method: 'post',
       url,
