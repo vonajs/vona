@@ -1,30 +1,38 @@
 import { appMetadata } from 'vona';
 import { RequestMethod, SymbolRequestMappingHandler } from '../../types/request.js';
+import { IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export interface RequestMappingMetadata {
   path?: RegExp | string;
   method?: RequestMethod;
+  options?: IOpenApiOptions;
 }
 
 const defaultMetadata = {
-  path: '',
   method: RequestMethod.GET,
+  path: '',
+  options: undefined,
 };
 
 export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadata): MethodDecorator => {
   const path = metadata.path || '';
   const method = metadata.method || RequestMethod.GET;
+  const options = metadata.options;
 
   return (target: object, prop: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
     appMetadata.defineMetadata(SymbolRequestMappingHandler, { path, method }, target, prop);
+    if (options) {
+      const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+      Object.assign(optionsMeta, options);
+    }
     return descriptor;
   };
 };
 
 const createMappingDecorator =
   (method: RequestMethod) =>
-  (path?: RegExp | string): MethodDecorator => {
-    return RequestMapping({ path, method });
+  (path?: RegExp | string, options?: IOpenApiOptions): MethodDecorator => {
+    return RequestMapping({ method, path, options });
   };
 
 /**
