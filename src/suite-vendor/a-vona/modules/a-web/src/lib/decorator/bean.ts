@@ -12,7 +12,7 @@ export function Controller(options?: IDecoratorControllerOptions | string): Clas
   }
   return createBeanDecorator('controller', options, false, false, target => {
     const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
-    for (const key in ['exclude', 'tags']) {
+    for (const key of ['exclude', 'tags']) {
       if (options[key] !== undefined) optionsMeta[key] = options[key];
     }
   });
