@@ -1,9 +1,10 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { OpenAPIObject } from 'openapi3-ts/oas30';
+import { OpenAPIObject, SchemaObject } from 'openapi3-ts/oas30';
 import {
   appMetadata,
   appResource,
   BeanBase,
+  cast,
   Constructable,
   HttpStatus,
   IDecoratorBeanOptionsBase,
@@ -56,6 +57,13 @@ export class ServiceSwagger extends BeanBase {
       for (const key in apiObj.components.schemas) {
         const schema = apiObj.components.schemas[key];
         this._translateString(schema, 'description');
+        const properties = cast<SchemaObject>(schema).properties;
+        if (properties && typeof properties === 'object') {
+          for (const prop in properties) {
+            const propObj = properties[prop];
+            this._translateString(propObj, 'description');
+          }
+        }
       }
     }
   }
