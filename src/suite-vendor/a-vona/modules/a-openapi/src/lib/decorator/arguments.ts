@@ -22,6 +22,13 @@ export function Body(property?: string | SchemaLike, ...schemaLikes: SchemaLike[
   return createPipesArgumentDecorator('body')(property, ...schemaLikes);
 }
 
+export function Headers(): ParameterDecorator;
+export function Headers(...schemaLikes: SchemaLike[]): ParameterDecorator;
+export function Headers(property: string, ...schemaLikes: SchemaLike[]): ParameterDecorator;
+export function Headers(property?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
+  return createPipesArgumentDecorator('headers')(property, ...schemaLikes);
+}
+
 export function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
 }

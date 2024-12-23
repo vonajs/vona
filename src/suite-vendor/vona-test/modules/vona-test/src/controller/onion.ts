@@ -2,7 +2,7 @@ import { BeanBase } from 'vona';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
-import { Api, Body, Param, Query, v } from 'vona-module-a-openapi';
+import { Api, Body, Param, Query, v, Headers } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get, Post } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -48,12 +48,12 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo3/:userId')
   @UseGuardGlobal('a-user:passport', { public: true })
-  echo3(@Query('id', v.optional()) id: number) {
+  echo3(@Query('id', v.optional()) id: number, @Headers('Accept', v.description(locale('UserId'))) accept: string) {
     //this.scope.util.combineApiPath
     console.log(this.ctx.path);
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
-    return id;
+    return id + ':' + accept;
   }
 
   @Post('echo4')
