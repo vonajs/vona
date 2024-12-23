@@ -33,7 +33,8 @@
     "vona-module-a-validation": "workspace:^",
     "vona-module-a-version": "workspace:^",
     "vona-module-a-vona": "workspace:^",
-    "vona-module-a-web": "workspace:^"
+    "vona-module-a-web": "workspace:^",
+    "vona-module-a-databasedialect": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

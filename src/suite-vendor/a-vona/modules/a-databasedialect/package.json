@@ -1,0 +1,32 @@
+{
+  "name": "vona-module-a-databasedialect",
+  "version": "5.0.0",
+  "title": "a-databasedialect",
+  "vonaModule": {
+    "dependencies": {}
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "description": "",
+  "keywords": [
+    "Vona Module"
+  ],
+  "author": "",
+  "files": [
+    "dist",
+    "static"
+  ],
+  "scripts": {},
+  "dependencies": {}
+}
