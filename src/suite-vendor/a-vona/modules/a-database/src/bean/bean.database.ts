@@ -26,8 +26,8 @@ export class BeanDatabase extends BeanBase {
   }
 
   getDialect(client: string): BeanDatabaseDialectBase {
-    const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
-    const dialect = this.app.bean._getBean(beanFullName as any) as BeanDatabaseDialectBase;
+    const beanFullName = this.scope.config.dialects[client];
+    const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
     if (!dialect) {
       throw new Error(`database dialect not found: ${client}`);
     }

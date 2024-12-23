@@ -29,6 +29,7 @@
         "boilerplate": "cli/model/boilerplate"
       },
       "databaseDialect": {
+        "beanLocal": true,
         "boilerplate": "cli/databaseDialect/boilerplate"
       }
     }

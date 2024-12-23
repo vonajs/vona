@@ -14,7 +14,7 @@ export async function generateBeanLocals(
   const contentRecords: string[] = [];
   for (const globFile of globFiles) {
     const { fileNameJSRelative, className, beanName, isIgnore } = globFile;
-    const beanFullName = `${moduleName}.service.${beanName}`;
+    const beanFullName = `${moduleName}.${sceneName}.${beanName}`;
     if (isIgnore) continue;
     if (!sceneMeta.scopeResource) {
       contentImports.push(`import { ${className} } from '${fileNameJSRelative}';`);
@@ -24,6 +24,7 @@ export async function generateBeanLocals(
   if (contentRecords.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
+${contentImports.join('\n')}
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
