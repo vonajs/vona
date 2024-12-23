@@ -11,9 +11,9 @@ export function Controller(options?: IDecoratorControllerOptions | string): Clas
     options = { path: options } as unknown as IDecoratorControllerOptions;
   }
   return createBeanDecorator('controller', options, false, false, target => {
-    if (options.tags) {
-      const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
-      optionsMeta.tags = options.tags;
+    const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
+    for (const key in ['exclude', 'tags']) {
+      if (options[key] !== undefined) optionsMeta[key] = options[key];
     }
   });
 }

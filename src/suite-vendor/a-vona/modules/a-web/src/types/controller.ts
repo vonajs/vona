@@ -25,6 +25,7 @@ export interface IControllerRecord {}
 
 export interface IDecoratorControllerOptions extends IOnionOptionsEnable {
   path?: string;
+  exclude?: boolean;
   tags?: string[];
 }
 
