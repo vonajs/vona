@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/zhennann/cabloy#readme",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "vona": "cd ./packages-cli && tsc -b && cd .. && node ./packages-cli/cli/dist/bin/vona.js",
@@ -56,7 +56,7 @@
     "@swc/helpers": "^0.5.13",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.6",
-    "@types/node": "18.19.3",
+    "@types/node": "^22.10.2",
     "@zhennann/framework7": "^5.8.2",
     "@zhennann/socketio": "^4.0.2",
     "async": "^3.2.5",

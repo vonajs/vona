@@ -199,8 +199,8 @@ importers:
         specifier: ^10.0.6
         version: 10.0.10
       '@types/node':
-        specifier: 18.19.3
-        version: 18.19.3
+        specifier: ^22.10.2
+        version: 22.10.2
       '@zhennann/framework7':
         specifier: ^5.8.2
         version: 5.8.2
@@ -299,7 +299,7 @@ importers:
         version: 7.6.3
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@18.19.3)(typescript@5.7.2)
+        version: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(typescript@5.7.2)
       tsx:
         specifier: ^4.7.3
         version: 4.19.2
@@ -493,7 +493,7 @@ importers:
         version: 4.0.0
       '@zhennann/egg-bin':
         specifier: ^7.0.1
-        version: 7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@2.44.0))(typescript@4.9.5)
+        version: 7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@2.44.0))(typescript@4.9.5)
       '@zhennann/socketio':
         specifier: ^4.0.2
         version: 4.0.2
@@ -574,7 +574,7 @@ importers:
         version: link:../../packages-utils/process-helper
       '@zhennann/egg-bin':
         specifier: ^7.0.1
-        version: 7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@4.6.11))(typescript@5.7.2)
+        version: 7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@4.6.11))(typescript@5.7.2)
       '@zhennann/egg-scripts':
         specifier: ^4.0.2
         version: 4.0.2
@@ -2204,8 +2204,8 @@ packages:
   '@types/node@18.19.3':
     resolution: {integrity: sha512-k5fggr14DwAytoA/t8rPrIz++lXK7/DqckthCmoZOKNsEbJkId4Z//BqgApXBUGrGddrigYa1oqheo/7YmW4rg==}
 
-  '@types/node@20.17.10':
-    resolution: {integrity: sha512-/jrvh5h6NXhEauFFexRin69nA0uHJ5gwk4iDivp/DeoEua3uwCUto6PC86IpRITBOs4+6i2I56K5x5b6WYGXHA==}
+  '@types/node@22.10.2':
+    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
 
   '@types/passport@0.4.7':
     resolution: {integrity: sha512-EePlxNYx5tf3n0yjdPXX0/zDOv0UCwjMyQo4UkWGlhHteNDItAj7TfDdLttSThVMKQz3uCW7lsGzMuml0f8g9Q==}
@@ -7288,8 +7288,8 @@ packages:
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
-  undici-types@6.19.8:
-    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
@@ -8860,18 +8860,18 @@ snapshots:
 
   '@types/accepts@1.3.7':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/bluebird@3.5.42': {}
 
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/content-disposition@0.5.8': {}
 
@@ -8882,11 +8882,11 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/express': 5.0.0
       '@types/keygrip': 1.0.6
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/depd@1.1.37':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -8902,7 +8902,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.2':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
       '@types/qs': 6.9.17
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -8922,7 +8922,7 @@ snapshots:
   '@types/glob@8.1.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/html-minifier-terser@6.1.0': {}
 
@@ -8932,11 +8932,11 @@ snapshots:
 
   '@types/http-proxy@1.17.15':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/ioredis@4.28.10':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
@@ -8946,7 +8946,7 @@ snapshots:
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/keygrip@1.0.6': {}
 
@@ -8971,7 +8971,7 @@ snapshots:
       '@types/http-errors': 2.0.4
       '@types/keygrip': 1.0.6
       '@types/koa-compose': 3.2.8
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/linkify-it@5.0.0': {}
 
@@ -8996,9 +8996,9 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@20.17.10':
+  '@types/node@22.10.2':
     dependencies:
-      undici-types: 6.19.8
+      undici-types: 6.20.0
 
   '@types/passport@0.4.7':
     dependencies:
@@ -9010,7 +9010,7 @@ snapshots:
 
   '@types/redis@2.8.32':
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/redlock@4.0.7':
     dependencies:
@@ -9025,19 +9025,19 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 3.0.4
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
       '@types/send': 0.17.4
 
   '@types/superagent@8.1.9':
     dependencies:
       '@types/cookiejar': 2.1.5
       '@types/methods': 1.1.4
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
       form-data: 4.0.1
 
   '@types/supertest@2.0.16':
@@ -9689,13 +9689,13 @@ snapshots:
     dependencies:
       ssr-window: 2.0.0
 
-  '@zhennann/egg-bin@7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@2.44.0))(typescript@4.9.5)':
+  '@zhennann/egg-bin@7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@2.44.0))(typescript@4.9.5)':
     dependencies:
       '@zhennann/common-bin': 4.0.0
       c8: 9.1.0
       chalk: 4.1.2
       detect-port: 1.6.1
-      egg-ts-helper: 1.35.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)
+      egg-ts-helper: 1.35.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)
       egg-utils: 2.5.0
       globby: 11.1.0
       inspector-proxy: 1.2.3
@@ -9704,7 +9704,7 @@ snapshots:
       mochawesome-with-mocha: 7.1.3
       runscript: 1.6.0
       test: 3.3.0
-      ts-node: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(typescript@4.9.5)
+      ts-node: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(typescript@4.9.5)
       tsconfig-paths: 4.2.0
       ypkgfiles: 1.6.0
     optionalDependencies:
@@ -9717,13 +9717,13 @@ snapshots:
       - supports-color
       - typescript
 
-  '@zhennann/egg-bin@7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@4.6.11))(typescript@5.7.2)':
+  '@zhennann/egg-bin@7.0.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@4.6.11))(typescript@5.7.2)':
     dependencies:
       '@zhennann/common-bin': 4.0.0
       c8: 9.1.0
       chalk: 4.1.2
       detect-port: 1.6.1
-      egg-ts-helper: 1.35.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)
+      egg-ts-helper: 1.35.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)
       egg-utils: 2.5.0
       globby: 11.1.0
       inspector-proxy: 1.2.3
@@ -9732,7 +9732,7 @@ snapshots:
       mochawesome-with-mocha: 7.1.3
       runscript: 1.6.0
       test: 3.3.0
-      ts-node: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(typescript@5.7.2)
+      ts-node: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(typescript@5.7.2)
       tsconfig-paths: 4.2.0
       ypkgfiles: 1.6.0
     optionalDependencies:
@@ -11180,7 +11180,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  egg-ts-helper@1.35.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10):
+  egg-ts-helper@1.35.1(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2):
     dependencies:
       chalk: 2.4.2
       chokidar: 3.6.0
@@ -11189,7 +11189,7 @@ snapshots:
       enquirer: 2.4.1
       globby: 11.1.0
       json5: 2.2.3
-      ts-node: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(typescript@4.9.5)
+      ts-node: 10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(typescript@4.9.5)
       tslib: 2.8.1
       typescript: 4.9.5
       yn: 3.1.1
@@ -12684,7 +12684,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 22.10.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -14969,34 +14969,14 @@ snapshots:
     dependencies:
       typescript: 5.7.2
 
-  ts-node@10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@18.19.3)(typescript@5.7.2):
+  ts-node@10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(typescript@4.9.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 18.19.3
-      acorn: 8.14.0
-      acorn-walk: 8.3.4
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 5.7.2
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.10.1(@swc/helpers@0.5.15)
-
-  ts-node@10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(typescript@4.9.5):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 20.17.10
+      '@types/node': 22.10.2
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -15009,14 +14989,14 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.10.1(@swc/helpers@0.5.15)
 
-  ts-node@10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@20.17.10)(typescript@5.7.2):
+  ts-node@10.9.2(@swc/core@1.10.1(@swc/helpers@0.5.15))(@types/node@22.10.2)(typescript@5.7.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.17.10
+      '@types/node': 22.10.2
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -15151,7 +15131,7 @@ snapshots:
 
   undici-types@5.26.5: {}
 
-  undici-types@6.19.8: {}
+  undici-types@6.20.0: {}
 
   undici@5.28.4:
     dependencies:
