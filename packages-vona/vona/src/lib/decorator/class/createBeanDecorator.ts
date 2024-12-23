@@ -8,6 +8,7 @@ export function createBeanDecorator<T>(
   options?: T,
   optionsPrimitive?: boolean,
   virtual?: boolean,
+  fn?: (target: Constructable) => void,
 ): ClassDecorator {
   return function (target) {
     // module
@@ -24,5 +25,7 @@ export function createBeanDecorator<T>(
       optionsPrimitive,
       virtual,
     });
+    // fn
+    fn && fn(target as unknown as Constructable);
   };
 }

@@ -10,14 +10,12 @@ export function Controller(options?: IDecoratorControllerOptions | string): Clas
   if (typeof options === 'string') {
     options = { path: options } as unknown as IDecoratorControllerOptions;
   }
-  const fn = createBeanDecorator('controller', options);
-  return function (target) {
+  return createBeanDecorator('controller', options, false, false, target => {
     if (options.tags) {
       const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
       optionsMeta.tags = options.tags;
     }
-    return fn(target);
-  };
+  });
 }
 
 export function Service(): ClassDecorator {
