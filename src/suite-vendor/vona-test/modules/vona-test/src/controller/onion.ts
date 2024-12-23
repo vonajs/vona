@@ -10,6 +10,7 @@ import { DtoUser } from '../dto/user.js';
 import { locale } from '../.metadata/index.js';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
+@Api.tags(['Onion'])
 export class ControllerOnion extends BeanBase {
   @Get('/')
   @UseMiddleware('a-database:transaction')

@@ -2,9 +2,11 @@ import { BeanBase } from 'vona';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get } from 'vona-module-a-web';
 import { locale } from '../.metadata/index.js';
+import { Api } from 'vona-module-a-openapi';
 
 @Controller()
-export class ControllerIndex extends BeanBase {
+@Api.tags(['Home'])
+export class ControllerHome extends BeanBase {
   @Get('//', { description: locale('Home') })
   @Public()
   index() {

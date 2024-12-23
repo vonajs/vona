@@ -15,16 +15,16 @@ declare module 'vona-module-home-index' {
 }
 /** startup: end */
 /** controller: begin */
-export * from '../controller/index.js';
+export * from '../controller/home.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
-    'home-index:index': IDecoratorControllerOptions;
+    'home-index:home': IDecoratorControllerOptions;
   }
 }
 declare module 'vona-module-home-index' {
-  export interface ControllerIndex {
+  export interface ControllerHome {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
