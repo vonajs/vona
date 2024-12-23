@@ -26,7 +26,7 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 </body>
 </html>`;
 
-@Controller({ path: '//swagger', exclude: true, meta: { mode: ['local', 'unittest'] } })
+@Controller({ path: '//swagger', exclude: false, meta: { mode: ['local', 'unittest'] } })
 export class ControllerSwagger extends BeanBase {
   @Get()
   @Public()

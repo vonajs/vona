@@ -19,7 +19,7 @@ import {
 } from 'vona-module-a-web';
 import * as ModuleInfo from '@cabloy/module-info';
 import {
-  bodySchemaWrapper,
+  bodySchemaWrapperDefault,
   IOpenApiOptions,
   RouteHandlerArgumentMetaDecorator,
   schema,
@@ -244,10 +244,10 @@ export class ServiceSwagger extends BeanBase {
     actionKey: string,
     actionOpenApiOptions: IOpenApiOptions | undefined,
   ) {
-    // body schema
-    const bodySchema = this._parseBodySchema(controller, actionKey, actionOpenApiOptions);
     // contentType
     const contentType = actionOpenApiOptions?.contentType || 'application/json';
+    // body schema
+    const bodySchema = this._parseBodySchema(controller, actionKey, actionOpenApiOptions, contentType);
     // response
     const response = {
       description: '',
@@ -266,6 +266,7 @@ export class ServiceSwagger extends BeanBase {
     controller: Constructable,
     actionKey: string,
     actionOpenApiOptions: IOpenApiOptions | undefined,
+    contentType: string,
   ) {
     // bodySchema
     let bodySchema: z.ZodSchema;
@@ -276,8 +277,9 @@ export class ServiceSwagger extends BeanBase {
       bodySchema = schema(metaType as any);
     }
     // wrapper
+    if (contentType !== 'application/json') return bodySchema;
     if (actionOpenApiOptions?.bodySchemaWrapper === false) return bodySchema;
-    const wrapper = actionOpenApiOptions?.bodySchemaWrapper ?? bodySchemaWrapper;
+    const wrapper = actionOpenApiOptions?.bodySchemaWrapper ?? bodySchemaWrapperDefault;
     return wrapper(bodySchema);
   }
 }
