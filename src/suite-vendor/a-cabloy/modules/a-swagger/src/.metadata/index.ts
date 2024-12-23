@@ -1,3 +1,19 @@
+/** startup: begin */
+export * from '../bean/startup.outputSwaggerApi.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-swagger:outputSwaggerApi': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-swagger' {
+  export interface StartupOutputSwaggerApi {
+    /** @internal */
+    get scope(): ScopeModuleASwagger;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/swagger.js';
 
