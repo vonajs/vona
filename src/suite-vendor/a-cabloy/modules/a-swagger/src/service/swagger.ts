@@ -1,6 +1,6 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { OpenAPIObject } from 'openapi3-ts/oas30';
-import { appMetadata, appResource, BeanBase, Constructable, HttpStatus } from 'vona';
+import { appMetadata, appResource, BeanBase, Constructable, HttpStatus, IDecoratorBeanOptionsBase } from 'vona';
 import {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
@@ -58,6 +58,7 @@ export class ServiceSwagger extends BeanBase {
         registry,
         info,
         controller,
+        beanOptions,
         controllerBeanFullName,
         controllerPath,
         controllerOpenApiOptions,
@@ -71,9 +72,10 @@ export class ServiceSwagger extends BeanBase {
     registry: OpenAPIRegistry,
     info: ModuleInfo.IModuleInfo,
     controller: Constructable,
+    beanOptions: IDecoratorBeanOptionsBase,
     _controllerBeanFullName: string,
     controllerPath: string | undefined,
-    _controllerOpenApiOptions: IOpenApiOptions | undefined,
+    controllerOpenApiOptions: IOpenApiOptions | undefined,
     actionKey: string,
     _desc: PropertyDescriptor,
   ) {
@@ -111,8 +113,14 @@ export class ServiceSwagger extends BeanBase {
     // :id -> {id}
     const routePath2 = routePath.replace(/:([^/]+)/g, '{$1}');
 
+    // tags
+    let tags: string[] | undefined = actionOpenApiOptions?.tags ?? controllerOpenApiOptions?.tags;
+    if (!tags) {
+      tags = [this.app.meta.util.combineResourceName(info.relativeName, beanOptions.name, true, true)];
+    }
     // registerPath
     registry.registerPath({
+      tags,
       method: actionMethod,
       path: routePath2,
       description: actionOpenApiOptions?.description,

@@ -9,6 +9,7 @@ export interface IOpenApiOptions {
   bodySchema?: z.ZodSchema;
   bodySchemaWrapper?: SchemaLikeCreate | false;
   exclude?: boolean;
+  tags?: string[];
 }
 
 export type TypeResponseContentType =

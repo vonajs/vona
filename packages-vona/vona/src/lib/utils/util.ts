@@ -9,6 +9,7 @@ import { URL } from 'url';
 import * as uuid from 'uuid';
 import { IModule, TypeMonkeyName, VonaContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
@@ -84,14 +85,18 @@ export class AppUtil extends BeanSimple {
     // ignore module path
     if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
-    if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
-    const parts = moduleName.split('-');
-    // path
-    let res = globalPrefix;
-    if (!simplify || parts[0] !== 'a') res = `${res}/${parts[0]}`;
-    if (!simplify || !path.startsWith(parts[1])) res = `${res}/${parts[1]}`;
-    if (path) res = `${res}/${path}`;
-    return res;
+    const parts = combineResourceName(moduleName, path, simplify, true);
+    return `${globalPrefix}/${parts.join('/')}`;
+  }
+
+  combineResourceName(
+    moduleName: ModuleInfo.IModuleInfo | string,
+    resourceName: string | undefined,
+    simplify?: boolean,
+    simplifyProviderId?: boolean,
+  ): string {
+    const parts = combineResourceName(moduleName, resourceName, simplify, simplifyProviderId);
+    return toLowerCaseFirstChar(stringToCapitalize(parts));
   }
 
   combineStaticPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined) {
@@ -263,6 +268,26 @@ export class AppUtil extends BeanSimple {
     if (this.ctx.acceptJSONP) return 'js';
     return 'html';
   }
+}
+
+export function combineResourceName(
+  moduleName: ModuleInfo.IModuleInfo | string,
+  resourceName: string | undefined,
+  simplify?: boolean,
+  simplifyProviderId?: boolean,
+): string[] {
+  simplify = simplify ?? true;
+  simplifyProviderId = simplifyProviderId ?? true;
+  if (!resourceName) resourceName = '';
+  // module path + arg
+  if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
+  const parts = moduleName.split('-');
+  // path
+  const res: string[] = [];
+  if (!simplifyProviderId || parts[0] !== 'a') res.push(parts[0]);
+  if (!simplify || !resourceName.startsWith(parts[1])) res.push(parts[1]);
+  if (resourceName) res.push(resourceName);
+  return res;
 }
 
 export function combineQueries(url: string, queries: object): string {

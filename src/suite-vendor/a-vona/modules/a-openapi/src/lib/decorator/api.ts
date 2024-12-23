@@ -44,4 +44,12 @@ function exclude(): ClassDecorator & MethodDecorator {
   } as any;
 }
 
-export const Api = { contentType, body, bodyCustom, exclude };
+function tags(tags: string[]): ClassDecorator & MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    options.tags = tags;
+    return descriptor;
+  } as any;
+}
+
+export const Api = { contentType, body, bodyCustom, exclude, tags };
