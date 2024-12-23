@@ -1,9 +1,8 @@
-import { BeanTemp } from 'vona-module-a-bean';
-
-import { DatabaseDialectMysql } from './database.dialect.mysql.js';
+import { DatabaseDialect } from 'vona-module-a-database';
 import { Knex } from 'knex';
+import { DatabaseDialectMysql } from './databaseDialect.mysql.js';
 
-@BeanTemp({ scene: 'database.dialect' })
+@DatabaseDialect()
 export class DatabaseDialectMysql2 extends DatabaseDialectMysql {
   getConfigBase(): Knex.Config {
     const configBase = super.getConfigBase();
