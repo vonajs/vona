@@ -1,5 +1,6 @@
-import { OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { OpenAPIObject, SchemaObject } from 'openapi3-ts/oas30';
+import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
+import { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
 import {
   appMetadata,
   appResource,
@@ -20,12 +21,12 @@ import {
 import * as ModuleInfo from '@cabloy/module-info';
 import {
   bodySchemaWrapperDefault,
+  IOpenAPIObject,
   IOpenApiOptions,
   RouteHandlerArgumentMetaDecorator,
   schema,
   SymbolOpenApiOptions,
   SymbolRouteHandlersArgumentsMeta,
-  TypeOpenApiVersion,
 } from 'vona-module-a-openapi';
 import { z } from 'zod';
 
@@ -33,15 +34,16 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  generateJson(version: TypeOpenApiVersion = '31'): OpenAPIObject {
+  generateJson<K extends keyof IOpenAPIObject>(version: K = '31' as any): IOpenAPIObject[K] {
     const registry = this._collectRegistry();
-    const generator = new OpenApiGeneratorV3(registry.definitions);
+    const generator =
+      version === '30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj);
-    return apiObj;
+    return apiObj as IOpenAPIObject[K];
   }
 
-  private _translate(apiObj: OpenAPIObject) {
+  private _translate(apiObj: OpenAPIObject30 | OpenAPIObject31) {
     // paths
     if (apiObj.paths) {
       for (const key in apiObj.paths) {
@@ -71,7 +73,7 @@ export class ServiceOpenapi extends BeanBase {
   private _translateSchema(schema: any) {
     if (!schema) return;
     this._translateString(schema, 'description');
-    const properties = cast<SchemaObject>(schema).properties;
+    const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
       for (const prop in properties) {
         const propObj = properties[prop];
