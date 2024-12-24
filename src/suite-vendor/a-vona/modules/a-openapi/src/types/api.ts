@@ -12,6 +12,8 @@ export interface IOpenApiOptions {
   tags?: string[];
 }
 
+export type TypeOpenApiVersion = '30' | '31';
+
 export type TypeResponseContentType =
   | 'application/json'
   | 'application/xml'

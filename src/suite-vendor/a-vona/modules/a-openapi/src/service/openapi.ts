@@ -25,6 +25,7 @@ import {
   schema,
   SymbolOpenApiOptions,
   SymbolRouteHandlersArgumentsMeta,
+  TypeOpenApiVersion,
 } from 'vona-module-a-openapi';
 import { z } from 'zod';
 
@@ -32,10 +33,10 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  generateJson(): OpenAPIObject {
+  generateJson(version: TypeOpenApiVersion = '31'): OpenAPIObject {
     const registry = this._collectRegistry();
     const generator = new OpenApiGeneratorV3(registry.definitions);
-    const apiObj = generator.generateDocument(this.scope.config.generateDocument);
+    const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj);
     return apiObj;
   }
