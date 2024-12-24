@@ -12,6 +12,7 @@ export interface IOpenApiOptions {
   bodySchemaWrapper?: SchemaLikeCreate | false;
   exclude?: boolean;
   tags?: string[];
+  operationId?: string;
 }
 
 export type TypeOpenApiVersion = '30' | '31';
