@@ -1,4 +1,4 @@
-import { VonaApplication } from 'vona';
+import { TypeBeanRecordGeneralSelectorKeys, VonaApplication } from 'vona';
 import { IOnionOptionsMeta } from 'vona-module-a-onion';
 import {
   configAll,
@@ -7,9 +7,8 @@ import {
   configRedisWithIgnoreNull,
   TSummerCachePreset,
 } from 'vona-module-a-summer';
-import { IBeanRecordGeneralDatabaseDialect } from '../types/index.js';
 
-export type TypeDataBaseConfigDialects = Record<string, keyof IBeanRecordGeneralDatabaseDialect>;
+export type TypeDataBaseConfigDialects = Record<string, TypeBeanRecordGeneralSelectorKeys<'databaseDialect'>>;
 
 export const config = (_app: VonaApplication) => {
   return {

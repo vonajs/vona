@@ -1,9 +1,4 @@
-import { IBeanRecordGeneral } from 'vona';
 import { ServiceOnion } from 'vona-module-a-onion';
-
-export type IBeanRecordGeneralDatabaseDialect = {
-  [K in keyof IBeanRecordGeneral as K extends `${string}.databaseDialect.${string}` ? K : never]: IBeanRecordGeneral[K];
-};
 
 export interface IDatabaseDialectRecord {}
 
