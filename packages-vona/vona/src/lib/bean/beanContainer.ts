@@ -1,4 +1,4 @@
-import { cast, VonaApplication } from '../../types/index.js';
+import { cast, VonaApplication, VonaContext } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
@@ -17,11 +17,12 @@ export interface BeanContainer extends IBeanRecordGlobal {}
 
 export class BeanContainer {
   private app: VonaApplication;
+  private ctxOwner?: VonaContext;
 
   private [SymbolBeanContainerInstances]: Record<string, unknown> = {};
 
-  static create(app: VonaApplication) {
-    const beanContainer = new BeanContainer(app);
+  static create(app: VonaApplication, ctxOwner: VonaContext | undefined) {
+    const beanContainer = new BeanContainer(app, ctxOwner);
     return new Proxy(beanContainer, {
       get(obj, prop) {
         if (typeof prop === 'symbol') return obj[prop];
@@ -31,8 +32,9 @@ export class BeanContainer {
     });
   }
 
-  protected constructor(app: VonaApplication) {
+  protected constructor(app: VonaApplication, ctxOwner: VonaContext | undefined) {
     this.app = app;
+    this.ctxOwner = ctxOwner;
   }
 
   /** get specific module's scope */

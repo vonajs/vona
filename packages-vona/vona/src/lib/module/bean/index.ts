@@ -9,7 +9,7 @@ export function loadBeanContainer(app: VonaApplication) {
       return app.currentContext;
     },
   });
-  app.bean = BeanContainer.create(app);
+  app.bean = BeanContainer.create(app, undefined);
 }
 
 export function loadBeans(app: VonaApplication) {
@@ -21,9 +21,8 @@ export function loadBeans(app: VonaApplication) {
     app.createContext = (...args) => {
       const context = createContext.call(app, ...args);
 
-      // not check context.module
       // bean
-      context.bean = BeanContainer.create(app);
+      context.bean = BeanContainer.create(app, context);
 
       return context;
     };

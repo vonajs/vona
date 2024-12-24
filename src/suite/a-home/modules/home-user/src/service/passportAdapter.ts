@@ -44,6 +44,6 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
   }
 
   private _getCacheKey(name: string) {
-    return `${this.ctx.instance ? this.ctx.instance.id : 0}:a-startup:${name}`;
+    return `${this.ctx.instance ? this.ctx.instance.id : 0}:home-user:${name}`;
   }
 }
