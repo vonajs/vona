@@ -178,12 +178,15 @@ export class ServiceOpenapi extends BeanBase {
     if (!tags) {
       tags = [this.app.util.combineResourceName(info.relativeName, beanOptions.name, true, true)];
     }
+    // operationId
+    let operationId = actionOpenApiOptions?.operationId ?? actionKey;
+    operationId = `${tags[0]}.${operationId}`;
     // registerPath
     registry.registerPath({
       tags,
       method: actionMethod,
       path: routePath2,
-      operationId: actionOpenApiOptions?.operationId ?? actionKey,
+      operationId,
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
       request: this._collectRequest(controller, actionKey),
