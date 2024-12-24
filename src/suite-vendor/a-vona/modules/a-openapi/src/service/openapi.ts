@@ -31,7 +31,7 @@ import { z } from 'zod';
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
 @Service()
-export class ServiceSwagger extends BeanBase {
+export class ServiceOpenapi extends BeanBase {
   generateJson(): OpenAPIObject {
     const registry = this._collectRegistry();
     const generator = new OpenApiGeneratorV3(registry.definitions);

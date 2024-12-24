@@ -14,36 +14,6 @@ declare module 'vona-module-a-swagger' {
   }
 }
 /** startup: end */
-/** service: begin */
-export * from '../service/swagger.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IServiceRecord {
-    'a-swagger:swagger': never;
-  }
-}
-declare module 'vona-module-a-swagger' {
-  export interface ServiceSwagger {
-    /** @internal */
-    get scope(): ScopeModuleASwagger;
-  }
-}
-/** service: end */
-/** service: begin */
-import { ServiceSwagger } from '../service/swagger.js';
-export interface IModuleService {
-  swagger: ServiceSwagger;
-}
-/** service: end */
-/** service: begin */
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-swagger.service.swagger': ServiceSwagger;
-  }
-}
-/** service: end */
 /** controller: begin */
 export * from '../controller/swagger.js';
 
@@ -83,7 +53,6 @@ export interface ScopeModuleASwagger {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
 }
 
 import 'vona';
