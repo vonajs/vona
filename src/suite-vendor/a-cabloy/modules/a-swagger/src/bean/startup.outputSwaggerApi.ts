@@ -10,9 +10,11 @@ export class StartupOutputSwaggerApi extends BeanBase implements IStartupExecute
     const _apiPath = this.scope.util.combineApiPath(apiPath('//swagger'));
     // host
     const host = `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPath}`;
+    const host30 = `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPath}?version=30`;
     setTimeout(() => {
       console.log(chalk.yellow('\n=== swagger api ==='));
       console.log(chalk.cyan('> ' + host));
+      console.log(chalk.cyan('> ' + host30));
     }, 2000);
   }
 }
