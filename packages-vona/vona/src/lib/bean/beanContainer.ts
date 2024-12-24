@@ -114,15 +114,12 @@ export class BeanContainer {
     } else {
       beanInstance = new beanClass(...args);
     }
-    // app
+    // app/ctx
     if (beanInstance instanceof BeanSimple) {
-      // app
       (<any>beanInstance).app = this.app;
-    }
-    // ctx
-    if (this.ctx && beanInstance instanceof BeanSimple) {
-      // ctx
-      (<any>beanInstance).ctx = this.ctx;
+      if (this.ctx) {
+        __setPropertyValue(beanInstance, 'ctx', this.ctx);
+      }
     }
     // beanFullName
     if (typeof beanFullName === 'string') {
