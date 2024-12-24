@@ -30,7 +30,5 @@
     "static"
   ],
   "scripts": {},
-  "dependencies": {
-    "openapi3-ts": "^4.4.0"
-  }
+  "dependencies": {}
 }
