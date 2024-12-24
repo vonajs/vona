@@ -3,6 +3,28 @@ import { Api, Query, TypeOpenApiVersion, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { apiPath, Controller, Get } from 'vona-module-a-web';
 
+// const __SWAGGER_HTML__ = `<!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="utf-8" />
+//   <meta name="viewport" content="width=device-width, initial-scale=1" />
+//   <meta name="description" content="SwaggerUI" />
+//   <title>SwaggerUI</title>
+//   <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+// </head>
+// <body>
+// <div id="swagger-ui"></div>
+// <script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js" crossorigin></script>
+// <script>
+//   window.onload = () => {
+//     window.ui = SwaggerUIBundle({
+//       url: '__SWAGGER_JSON__',
+//       dom_id: '#swagger-ui',
+//     });
+//   };
+// </script>
+// </body>
+// </html>`;
 const __SWAGGER_HTML__ = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,21 +32,23 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="SwaggerUI" />
   <title>SwaggerUI</title>
-  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+  <link rel="stylesheet" type="text/css" href="__SWAGGER_UI__" />
+  <link rel="stylesheet" type="text/css" href="__SWAGGER_CSS__" />
 </head>
 <body>
-<div id="swagger-ui"></div>
-<script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js" crossorigin></script>
-<script>
-  window.onload = () => {
-    window.ui = SwaggerUIBundle({
-      url: '__SWAGGER_JSON__',
-      dom_id: '#swagger-ui',
-    });
-  };
-</script>
+  <div id="swagger-ui"></div>
+  <script src="__SWAGGER_JS__" charset="UTF-8" crossorigin></script>
+  <script>
+    window.onload = () => {
+      window.ui = SwaggerUIBundle({
+        url: '__SWAGGER_JSON__',
+        dom_id: '#swagger-ui',
+      });
+    };
+  </script>
 </body>
-</html>`;
+</html>
+`;
 
 @Controller({ path: '//swagger', exclude: true, meta: { mode: ['local', 'unittest'] } })
 export class ControllerSwagger extends BeanBase {
@@ -32,8 +56,15 @@ export class ControllerSwagger extends BeanBase {
   @Public()
   @Api.contentType('text/html')
   index(@Query('version', v.default('31')) version: string): string {
-    const _apiPath = this.scope.util.combineApiPath(apiPath('//swagger/json'));
-    return __SWAGGER_HTML__.replace('__SWAGGER_JSON__', `${_apiPath}?version=${version}`);
+    const _pathUI = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui.css');
+    const _pathCSS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/index.css');
+    const _pathJS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui-bundle.js');
+    const _pathJSON = this.scope.util.combineApiPath(apiPath('//swagger/json'));
+    return __SWAGGER_HTML__
+      .replace('__SWAGGER_UI__', _pathUI)
+      .replace('__SWAGGER_CSS__', _pathCSS)
+      .replace('__SWAGGER_JS__', _pathJS)
+      .replace('__SWAGGER_JSON__', `${_pathJSON}?version=${version}`);
   }
 
   @Get('json')
