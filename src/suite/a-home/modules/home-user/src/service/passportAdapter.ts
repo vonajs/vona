@@ -22,6 +22,17 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     if (user.name !== undefined) return usersDemo.find(item => item.name === user.name);
   }
 
+  async updateUser(user: Partial<IUser>): Promise<void> {
+    const usersDemo = await this._getUsersDemo();
+    if (!usersDemo) return;
+    const userDemo = usersDemo.find(item => item.id === user.id);
+    if (!userDemo) return;
+    Object.assign(userDemo, user);
+    const redis = this.bean.redis.get('cache');
+    const key = this._getCacheKey('usersDemo');
+    await redis.set(key, JSON.stringify(usersDemo));
+  }
+
   private async _getUsersDemo() {
     if (this.app.meta.isProd) return;
     const redis = this.bean.redis.get('cache');
