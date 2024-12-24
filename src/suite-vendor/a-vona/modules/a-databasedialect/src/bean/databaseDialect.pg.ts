@@ -9,7 +9,7 @@ import {
 
 @DatabaseDialect()
 export class DatabaseDialectPg extends BeanDatabaseDialectBase {
-  getConfigBase(): Knex.Config {
+  getConfigBase(): Knex.Config | undefined {
     return {
       connection: {
         // types: {

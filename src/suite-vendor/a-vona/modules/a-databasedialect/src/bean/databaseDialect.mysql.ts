@@ -10,7 +10,7 @@ import {
 
 @DatabaseDialect()
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
-  getConfigBase(): Knex.Config {
+  getConfigBase(): Knex.Config | undefined {
     return {
       pool: {
         afterCreate(conn, done) {

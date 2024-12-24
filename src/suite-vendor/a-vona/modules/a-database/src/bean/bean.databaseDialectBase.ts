@@ -20,8 +20,8 @@ export type ITableColumns = Record<string, ITableColumn>;
 
 @Virtual()
 export class BeanDatabaseDialectBase extends BeanBase {
-  getConfigBase(): Knex.Config {
-    throw new Error('Not Implemented');
+  getConfigBase(): Knex.Config | undefined {
+    return undefined;
   }
 
   async fetchDatabases(
