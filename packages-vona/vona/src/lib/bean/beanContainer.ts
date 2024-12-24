@@ -17,12 +17,12 @@ export interface BeanContainer extends IBeanRecordGlobal {}
 
 export class BeanContainer {
   private app: VonaApplication;
-  private ctxOwner?: VonaContext;
+  private ctx?: VonaContext;
 
   private [SymbolBeanContainerInstances]: Record<string, unknown> = {};
 
-  static create(app: VonaApplication, ctxOwner: VonaContext | undefined) {
-    const beanContainer = new BeanContainer(app, ctxOwner);
+  static create(app: VonaApplication, ctx: VonaContext | undefined) {
+    const beanContainer = new BeanContainer(app, ctx);
     return new Proxy(beanContainer, {
       get(obj, prop) {
         if (typeof prop === 'symbol') return obj[prop];
@@ -32,9 +32,9 @@ export class BeanContainer {
     });
   }
 
-  protected constructor(app: VonaApplication, ctxOwner: VonaContext | undefined) {
+  protected constructor(app: VonaApplication, ctx: VonaContext | undefined) {
     this.app = app;
-    this.ctxOwner = ctxOwner;
+    this.ctx = ctx;
   }
 
   /** get specific module's scope */
@@ -118,6 +118,11 @@ export class BeanContainer {
     if (beanInstance instanceof BeanSimple) {
       // app
       (<any>beanInstance).app = this.app;
+    }
+    // ctx
+    if (this.ctx && beanInstance instanceof BeanSimple) {
+      // ctx
+      (<any>beanInstance).ctx = this.ctx;
     }
     // beanFullName
     if (typeof beanFullName === 'string') {
