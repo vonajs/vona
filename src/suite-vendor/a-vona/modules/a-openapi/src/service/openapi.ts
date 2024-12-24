@@ -29,6 +29,7 @@ import {
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona-module-a-openapi';
 import { z } from 'zod';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
@@ -175,8 +176,8 @@ export class ServiceOpenapi extends BeanBase {
 
     // tags
     let tags: string[] | undefined = actionOpenApiOptions?.tags ?? controllerOpenApiOptions?.tags;
-    if (!tags) {
-      tags = [this.app.util.combineResourceName(info.relativeName, beanOptions.name, true, true)];
+    if (!tags || tags.length === 0) {
+      tags = [toUpperCaseFirstChar(this.app.util.combineResourceName(info.relativeName, beanOptions.name, true, true))];
     }
     // operationId
     let operationId = actionOpenApiOptions?.operationId ?? actionKey;

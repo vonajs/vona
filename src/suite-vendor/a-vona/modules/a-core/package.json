@@ -5,6 +5,7 @@
   "vonaModule": {
     "dependencies": {},
     "globalDependencies": {
+      "@cabloy/word-utils": true,
       "boxen": true,
       "chalk": true,
       "fs-extra": true,
@@ -38,6 +39,7 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@cabloy/word-utils": "^1.0.7",
     "boxen": "^8.0.1",
     "chalk": "^5.3.0",
     "cookie": "^1.0.2",
