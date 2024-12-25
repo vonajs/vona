@@ -181,7 +181,7 @@ export class ServiceOpenapi extends BeanBase {
     }
     // operationId
     let operationId = actionOpenApiOptions?.operationId ?? actionKey;
-    operationId = `${tags[0]}.${operationId}`;
+    operationId = `${tags[0]}_${operationId}`;
     // registerPath
     registry.registerPath({
       tags,
