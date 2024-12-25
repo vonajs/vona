@@ -32,19 +32,19 @@ export class ControllerOnion extends BeanBase {
     return 'echo: ' + id + ':' + temp + ':' + name;
   }
 
-  @Get('echo2/:userId/:userName')
+  @Post('echo2/:userId/:userName')
   @UseGuardGlobal('a-user:passport', { public: true })
   //echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
     @Param('userId', v.description(locale('UserId')), v.example('example:1')) _userId: number,
     @Param('userName', v.description(locale('UserId')), v.example('example:1')) _userName: string,
-    @Query(DtoUser) book: Partial<DtoUser>,
+    @Query(DtoUser) _user: DtoUser,
     @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
-    _book: Partial<DtoUser>,
-  ) {
+    user: DtoUser,
+  ): DtoUser {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
-    return book;
+    return user;
   }
 
   @Get('echo3/:userId')
