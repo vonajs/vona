@@ -36,7 +36,8 @@ export class ControllerOnion extends BeanBase {
   @UseGuardGlobal('a-user:passport', { public: true })
   //echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
-    @Param('id', v.description(locale('UserId')), v.example('example:1')) _userId: number,
+    @Param('userId', v.description(locale('UserId')), v.example('example:1')) _userId: number,
+    @Param('userName', v.description(locale('UserId')), v.example('example:1')) _userName: string,
     @Query(DtoUser) book: Partial<DtoUser>,
     @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
     _book: Partial<DtoUser>,
@@ -48,7 +49,11 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo3/:userId')
   @UseGuardGlobal('a-user:passport', { public: true })
-  echo3(@Query('id', v.optional()) id: number, @Headers('Accept', v.description(locale('UserId'))) accept: string) {
+  echo3(
+    @Param('userId') _userId: number,
+    @Query('id', v.optional()) id: number,
+    @Headers('Accept', v.description(locale('UserId'))) accept: string,
+  ) {
     //this.scope.util.combineApiPath
     console.log(this.ctx.path);
     //const ctx = this.app.currentContext;
