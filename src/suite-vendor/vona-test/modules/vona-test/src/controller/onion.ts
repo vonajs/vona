@@ -24,11 +24,18 @@ export class ControllerOnion extends BeanBase {
   @Gate({ gate: { mode: 'local' } })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   @Transaction({ isolationLevel: 'read committed', readOnly: false })
+  @Api.body(v.optional(), z.string())
   echo(
     @Query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Query('name', z.number().optional()) name: string,
-  ) {
+    @Body(
+      v.description(locale('User')),
+      v.optional(),
+      z.object({ id: z.number().openapi({ description: locale('UserId') }) }),
+    )
+    _user: DtoUser,
+  ): string | undefined {
     return 'echo: ' + id + ':' + temp + ':' + name;
   }
 
