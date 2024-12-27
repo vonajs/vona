@@ -36,8 +36,8 @@ export class InterceptorBody extends BeanBase implements IInterceptorExecute {
       const contentType = options?.contentType;
       if (contentType) return contentType;
     }
-    if (this.ctx.accepts('html') === 'html') return 'text/html';
     if (this.ctx.accepts('json') === 'json') return 'application/json';
+    if (this.ctx.accepts('html') === 'html') return 'text/html';
     return 'application/octet-stream';
   }
 }
