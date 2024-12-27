@@ -18,7 +18,7 @@ export class ControllerOnion extends BeanBase {
     //return 'Hello Vona';
   }
 
-  @Get('//echo')
+  @Post('//echo')
   @UseGuardGlobal('a-user:passport', { public: true })
   @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
@@ -29,11 +29,7 @@ export class ControllerOnion extends BeanBase {
     @Query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Query('name', z.number().optional()) name: string,
-    @Body(
-      v.description(locale('User')),
-      v.optional(),
-      z.object({ id: z.number().openapi({ description: locale('UserId') }) }),
-    )
+    @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
     _user: DtoUser,
   ): string | undefined {
     return 'echo: ' + id + ':' + temp + ':' + name;
