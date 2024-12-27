@@ -58,7 +58,7 @@ export async function performActionInner<T = any>({
       cast(ctx.req).query = cast(ctx.request).query = query;
     }
     // body
-    cast(ctx.req).body = ctx.request.body = body ?? {};
+    cast(ctx.req).body = ctx.request.body = body ?? {}; // body should set {} if undefined/null
 
     // ctxCaller
     ctx.ctxCaller = ctxCaller;
