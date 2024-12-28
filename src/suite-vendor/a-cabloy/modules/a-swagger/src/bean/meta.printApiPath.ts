@@ -5,9 +5,6 @@ import { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-p
 @Meta()
 export class MetaPrintApiPath extends BeanBase implements IMetaPrintApiPathExecute {
   async execute(): Promise<IMetaPrintApiPathInfo | IMetaPrintApiPathInfo[]> {
-    return {
-      title: 'home',
-      path: `http://localhost:${process.env.SERVER_LISTEN_PORT}`,
-    };
+    return [{ title: 'swagger api ' }];
   }
 }

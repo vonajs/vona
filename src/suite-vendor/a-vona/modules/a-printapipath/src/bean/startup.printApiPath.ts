@@ -28,13 +28,13 @@ export class StartupPrintApiPath extends BeanBase implements IStartupExecute {
     //
     const table = new TableClass({
       head: ['Title', 'Path'],
-      colWidths: [20, 80],
+      colWidths: [30, 80],
     });
     for (const output of outputs) {
       table.push([output.title, output.path]);
     }
     //
-    console.log(chalk.yellow('\n=== home api ==='));
+    console.log(chalk.yellow('\n=== print api path ==='));
     console.log(table.toString());
   }
 }

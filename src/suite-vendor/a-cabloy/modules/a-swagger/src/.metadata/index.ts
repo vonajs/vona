@@ -1,3 +1,19 @@
+/** meta: begin */
+export * from '../bean/meta.printApiPath.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-swagger:printApiPath': never;
+  }
+}
+declare module 'vona-module-a-swagger' {
+  export interface MetaPrintApiPath {
+    /** @internal */
+    get scope(): ScopeModuleASwagger;
+  }
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.outputSwaggerApi.js';
 
