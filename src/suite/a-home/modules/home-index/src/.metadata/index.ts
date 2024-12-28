@@ -1,3 +1,19 @@
+/** meta: begin */
+export * from '../bean/meta.printApiPath.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'home-index:printApiPath': never;
+  }
+}
+declare module 'vona-module-home-index' {
+  export interface MetaPrintApiPath {
+    /** @internal */
+    get scope(): ScopeModuleHomeIndex;
+  }
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.outputHomeApi.js';
 
