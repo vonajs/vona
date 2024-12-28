@@ -16,15 +16,22 @@ declare module 'vona-module-home-index' {
 /** meta: end */
 /** startup: begin */
 export * from '../bean/startup.outputHomeApi.js';
+export * from '../bean/startup.printApiPath.js';
 
 import { IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'home-index:outputHomeApi': IDecoratorStartupOptions;
+    'home-index:printApiPath': IDecoratorStartupOptions;
   }
 }
 declare module 'vona-module-home-index' {
   export interface StartupOutputHomeApi {
+    /** @internal */
+    get scope(): ScopeModuleHomeIndex;
+  }
+
+  export interface StartupPrintApiPath {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }

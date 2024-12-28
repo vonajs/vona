@@ -29,6 +29,9 @@ importers:
       chalk:
         specifier: ^5.3.0
         version: 5.4.1
+      cli-table3:
+        specifier: ^0.6.5
+        version: 0.6.5
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -352,7 +355,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       cli-table3:
-        specifier: ^0.6.2
+        specifier: ^0.6.5
         version: 0.6.5
       egg-born-utils:
         specifier: ^1.2.0
@@ -963,6 +966,9 @@ importers:
       chalk:
         specifier: ^5.3.0
         version: 5.4.1
+      cli-table3:
+        specifier: ^0.6.5
+        version: 0.6.5
       cookie:
         specifier: ^1.0.2
         version: 1.0.2

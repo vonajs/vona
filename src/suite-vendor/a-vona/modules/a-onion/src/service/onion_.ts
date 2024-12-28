@@ -71,6 +71,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this[SymbolOnionsEnabled][selector];
   }
 
+  getOnionsEnabledOfMeta(beanName: string, selector?: string) {
+    return this.getOnionsEnabled(selector).filter(item => item.beanOptions.name === beanName);
+  }
+
   getOnionsEnabledWrapped(wrapFn: Function, selector?: string) {
     if (!selector) selector = '';
     if (!this[SymbolOnionsEnabledWrapped][selector]) {

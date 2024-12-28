@@ -43,7 +43,7 @@
     "@zhennann/ejs": "^3.0.1",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
-    "cli-table3": "^0.6.2",
+    "cli-table3": "^0.6.5",
     "esbuild": "^0.23.0",
     "egg-born-utils": "^1.2.0",
     "enquirer": "^2.3.6",
