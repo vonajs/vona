@@ -3,7 +3,12 @@
   "version": "5.0.0",
   "title": "a-printapipath",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "metas": {
+      "printApiPath": {
+        "boilerplate": "cli/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
@@ -25,7 +30,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}
