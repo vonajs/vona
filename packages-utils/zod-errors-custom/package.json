@@ -44,6 +44,6 @@
     "prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@cabloy/word-utils": "^1.0.7"
+    "@cabloy/word-utils": "^1.0.8"
   }
 }

@@ -46,7 +46,7 @@
     "@cabloy/module-info": "workspace:^",
     "@cabloy/module-info-pro": "workspace:^",
     "@cabloy/set": "^1.0.7",
-    "@cabloy/word-utils": "^1.0.7",
+    "@cabloy/word-utils": "^1.0.8",
     "@types/retry": "^0.12.5",
     "@zhennann/egg-passport": "^2.1.5",
     "chalk": "^3.0.0",

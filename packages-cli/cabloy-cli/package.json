@@ -37,7 +37,7 @@
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
-    "@cabloy/word-utils": "^1.0.7",
+    "@cabloy/word-utils": "^1.0.8",
     "@npmcli/config": "^8.3.4",
     "@zhennann/common-bin": "^4.0.0",
     "@zhennann/ejs": "^3.0.1",

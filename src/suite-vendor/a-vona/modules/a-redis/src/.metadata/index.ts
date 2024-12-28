@@ -42,6 +42,7 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

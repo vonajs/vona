@@ -1,5 +1,6 @@
 import { Bean } from 'vona-module-a-bean';
 import { BeanBase, SymbolProxyDisable } from 'vona';
+import { matchSelector } from '@cabloy/word-utils';
 import {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
@@ -50,8 +51,5 @@ export class BeanOnion extends BeanBase {
 }
 
 function __onionMatchSelector(match: TypeOnionOptionsMatchRule<string>, selector: string) {
-  if (!Array.isArray(match)) {
-    return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
-  }
-  return match.some(item => __onionMatchSelector(item, selector));
+  return matchSelector(match, selector);
 }

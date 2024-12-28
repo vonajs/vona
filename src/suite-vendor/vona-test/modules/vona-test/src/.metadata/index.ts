@@ -304,9 +304,6 @@ declare module 'vona-module-a-web' {
     '/vona/test/bean/test': '/vona/test/bean/test';
     '/vona/test/bean/service': '/vona/test/bean/service';
     '/': '/';
-    '//echo': '//echo';
-    '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
-    '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
     '/vona/test/onion/echo3/:_string_': '/vona/test/onion/echo3:_userId_';
     '/vona/test/onion/echo3/:userId': `/vona/test/onion/echo3/${string}`;
     '/vona/test/onion/echo5': '/vona/test/onion/echo5';
@@ -314,6 +311,9 @@ declare module 'vona-module-a-web' {
     '/vona/test/passport/echo/:name': `/vona/test/passport/echo/${string}`;
   }
   export interface IApiPathPostRecord {
+    '//echo': '//echo';
+    '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
+    '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
     '/vona/test/onion/echo4': '/vona/test/onion/echo4';
     '/vona/test/performAction/echo': '/vona/test/performAction/echo';
     '/vona/test/queue/pushAsync': '/vona/test/queue/pushAsync';
