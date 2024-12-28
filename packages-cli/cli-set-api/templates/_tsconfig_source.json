@@ -29,7 +29,7 @@
       "path": "packages-utils/localeutil"
     },
     {
-      "path": "packages-vona/shared"
+      "path": "packages-vona/vona-shared"
     },
     {
       "path": "packages-vona/vona-core"
