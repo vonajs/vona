@@ -1,4 +1,4 @@
-import { relativeNameToCapitalize } from 'vona';
+import { relativeNameToCapitalize } from '@cabloy/module-info';
 
 export interface GenerateScopeOptions {
   config: string;

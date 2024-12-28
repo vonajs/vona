@@ -32,6 +32,9 @@
       "path": "packages-vona/shared"
     },
     {
+      "path": "packages-vona/vona-core"
+    },
+    {
       "path": "packages-vona/vona"
     },
     {

@@ -1,6 +1,6 @@
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import eggBornUtils from 'egg-born-utils';
-import { OnionMetaMeta, OnionSceneMeta } from 'vona';
+import { OnionMetaMeta, OnionSceneMeta } from '@cabloy/module-info';
 
 export async function generateScopeResourcesMeta(
   metaName: string,

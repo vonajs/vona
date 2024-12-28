@@ -1,0 +1,72 @@
+{
+  "name": "vona-core",
+  "version": "5.0.7",
+  "description": "vona",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
+  "author": "zhennann",
+  "dependencies": {
+    "@cabloy/cluster-reload": "^1.0.7",
+    "@cabloy/compose": "^2.0.0",
+    "@cabloy/deps": "workspace:^",
+    "@cabloy/dotenv": "workspace:^",
+    "@cabloy/egg-socket.io": "^6.0.0",
+    "@cabloy/ensure-array": "workspace:^",
+    "@cabloy/extend": "^3.0.12",
+    "@cabloy/json5": "^1.0.7",
+    "@cabloy/koa-static-cache": "^5.1.8",
+    "@cabloy/localeutil": "workspace:^",
+    "@cabloy/module-glob": "workspace:^",
+    "@cabloy/module-info": "workspace:^",
+    "@cabloy/module-info-pro": "workspace:^",
+    "@cabloy/set": "^1.0.7",
+    "@cabloy/word-utils": "^1.0.8",
+    "@types/retry": "^0.12.5",
+    "@zhennann/egg-passport": "^2.1.5",
+    "chalk": "^3.0.0",
+    "chokidar": "^3.5.2",
+    "debounce": "^1.2.0",
+    "egg": "^3.17.5",
+    "egg-cluster": "^2.2.1",
+    "egg-security": "^3.0.0",
+    "fs-extra": "^10.1.0",
+    "inflation": "^2.0.0",
+    "module-alias": "^2.2.2",
+    "passport-oauth2": "^1.6.1",
+    "raw-body": "2.5.1",
+    "reflect-metadata": "^0.2.2",
+    "regenerator-runtime": "^0.14.1",
+    "retry": "^0.13.1",
+    "semver": "^7.3.7",
+    "socket.io": "^2.3.0",
+    "uuid": "^11.0.3",
+    "vona-shared": "workspace:^"
+  },
+  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+}
