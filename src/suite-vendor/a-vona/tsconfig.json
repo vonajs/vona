@@ -80,6 +80,9 @@
     },
     {
       "path": "modules/a-databasedialect/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-printapipath/tsconfig.build.json"
     }
   ]
 }
