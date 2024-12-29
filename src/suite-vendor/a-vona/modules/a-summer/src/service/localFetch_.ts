@@ -22,8 +22,10 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
     const fn_get = options?.get;
     if (fn_get) {
       return await fn_get(key, options, keyHash);
+    } else if (cast<ISummerCacheGet<KEY, DATA>>(this.cacheBeanNative).getNative) {
+      return await cast<ISummerCacheGet<KEY, DATA>>(this.cacheBeanNative).getNative(key, options, keyHash);
     }
-    return await cast<ISummerCacheGet<KEY, DATA>>(this.cacheBeanNative).getNative(key, options, keyHash);
+    return undefined;
   }
 
   async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
