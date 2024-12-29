@@ -1,9 +1,7 @@
-import { BeanModuleScopeBase } from '../../bean/beanModuleScopeBase.js';
 import { IBeanRecord } from '../../bean/type.js';
 import { MetadataKey, appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { Constructable, IDecoratorUseOptions } from '../index.js';
-import { parseModuleName } from './util.js';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator;
 export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator;
@@ -21,11 +19,8 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
       beanFullName = appResource.getBeanFullName(beanClass);
       if (!beanFullName) throw new Error(`beanFullName not found for: ${beanClass.name}`);
     }
-    // selector: maybe moduleScope
-    let selector = options.selector;
-    if (!selector && beanClass.prototype instanceof BeanModuleScopeBase) {
-      selector = parseModuleName();
-    }
+    // selector
+    const selector = options.selector;
     // record
     appResource.addUse(target, {
       prop,
