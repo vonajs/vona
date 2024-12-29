@@ -100,10 +100,11 @@ export class ServiceStartup extends BeanBase {
     // ignore debounce for test
     if (!options?.force && !this.app.meta.isTest) {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
-      const cacheKey = `startupDebounce:${startup.name}${subdomain !== undefined ? `:${this.ctx.instance.id}` : ''}`;
+      const cacheKey =
+        `startupDebounce:${startup.name}${subdomain !== undefined ? `:${this.ctx.instance.id}` : ''}` as const;
       const debounce =
         typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
-      const flag = await this._getset(cacheKey, true, debounce);
+      const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, debounce);
       if (flag) return;
     }
     // perform
@@ -162,23 +163,5 @@ export class ServiceStartup extends BeanBase {
     // src/backend/app/public
     await fse.remove(path.join(this.app.options.baseDir, 'app/public/1'));
     await fse.remove(path.join(this.app.options.baseDir.replace('dist/backend', 'src/backend'), 'app/public/1'));
-  }
-
-  private _getCacheKey(name: string) {
-    return `${this.ctx.instance ? this.ctx.instance.id : 0}:a-startup:${name}`;
-  }
-
-  private async _getset(name: string, value: any, timeout?: number) {
-    const redis = this.bean.redis.get('cache');
-    const key = this._getCacheKey(name);
-    let valuePrev: any;
-    if (timeout) {
-      const res = await redis.multi().get(key).set(key, JSON.stringify(value), 'PX', timeout).exec();
-      valuePrev = res && res[0][1];
-    } else {
-      const res = await redis.multi().get(key).set(key, JSON.stringify(value)).exec();
-      valuePrev = res && res[0][1];
-    }
-    return valuePrev ? JSON.parse(valuePrev) : undefined;
   }
 }
