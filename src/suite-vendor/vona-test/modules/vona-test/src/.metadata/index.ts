@@ -64,6 +64,28 @@ export interface IModuleBroadcast {
   test: BroadcastTest;
 }
 /** broadcast: end */
+/** cacheMem: begin */
+export * from '../bean/cacheMem.test.js';
+
+import { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  export interface ICacheMemRecord {
+    'vona-test:test': IDecoratorCacheMemOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface CacheMemTest {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** cacheMem: end */
+/** cacheMem: begin */
+import { CacheMemTest } from '../bean/cacheMem.test.js';
+export interface IModuleCacheMem {
+  test: CacheMemTest;
+}
+/** cacheMem: end */
 /** event: begin */
 export * from '../bean/event.helloEcho.js';
 
@@ -235,6 +257,7 @@ declare module 'vona' {
 /** service: end */
 /** controller: begin */
 export * from '../controller/bean.js';
+export * from '../controller/cacheMem.js';
 export * from '../controller/onion.js';
 export * from '../controller/passport.js';
 export * from '../controller/performAction.js';
@@ -247,6 +270,7 @@ import { IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'vona-test:bean': IDecoratorControllerOptions;
+    'vona-test:cacheMem': IDecoratorControllerOptions;
     'vona-test:onion': IDecoratorControllerOptions;
     'vona-test:passport': IDecoratorControllerOptions;
     'vona-test:performAction': IDecoratorControllerOptions;
@@ -258,6 +282,11 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-vona-test' {
   export interface ControllerBean {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerCacheMem {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
@@ -311,6 +340,7 @@ declare module 'vona-module-a-web' {
     '/vona/test/passport/echo/:name': `/vona/test/passport/echo/${string}`;
   }
   export interface IApiPathPostRecord {
+    '/vona/test/cacheMem': '/vona/test/cacheMem';
     '//echo': '//echo';
     '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
     '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
@@ -357,6 +387,7 @@ export interface ScopeModuleVonaTest {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   broadcast: IModuleBroadcast;
+  cacheMem: IModuleCacheMem;
   event: IModuleEvent;
   queue: IModuleQueue;
   summerCache: IModuleSummerCache;

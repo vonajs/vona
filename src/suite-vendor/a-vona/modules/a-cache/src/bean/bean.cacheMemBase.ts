@@ -71,6 +71,13 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
     return cacheMem.get(keyHash);
   }
 
+  public peek(key?: KEY): DATA | undefined {
+    const cacheMem = this.__cacheInstanceMem;
+    if (!cacheMem) return undefined;
+    const keyHash = this.__getKeyHash(key);
+    return cacheMem.peek(keyHash);
+  }
+
   public set(value: DATA): void;
   public set(key: KEY | undefined, value: DATA): void;
   public set(key?: KEY | DATA, value?: DATA): void {

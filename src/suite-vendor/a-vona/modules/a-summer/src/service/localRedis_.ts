@@ -13,7 +13,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
 
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey(keyHash);
-    const _value = await this.redisSummer.get(redisKey);
+    const _value = await this.redisSummer.getex(redisKey, 'PX', this._cacheOptions.redis!.ttl);
     let value: DATA | null | undefined = _value ? JSON.parse(_value) : undefined;
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
