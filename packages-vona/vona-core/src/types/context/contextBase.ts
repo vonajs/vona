@@ -16,9 +16,9 @@ export interface ContextBase {
   tailDone(): Promise<any>;
   get tailCallbacks();
   getPayload(options?): Promise<any>;
-  getClass(): Constructable | undefined;
-  getClassPrototype(): object | undefined;
-  getClassBeanFullName(): string | undefined;
+  getController(): Constructable | undefined;
+  getControllerPrototype(): object | undefined;
+  getControllerBeanFullName(): string | undefined;
   getHandler(): Function | undefined;
   getHandlerName(): MetadataKey | undefined;
   get onionsDynamic(): any | undefined;

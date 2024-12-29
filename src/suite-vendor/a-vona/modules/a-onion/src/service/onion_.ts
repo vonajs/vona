@@ -108,7 +108,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     fnEnd?: Function | Function[],
     executeCustom?: IOnionExecuteCustom,
   ) {
-    const beanFullName = ctx.getClassBeanFullName();
+    const beanFullName = ctx.getControllerBeanFullName();
     const handlerName = ctx.getHandler()?.name;
     const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
     if (!this._cacheOnionsHandler[key]) {
@@ -129,17 +129,17 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   public _collectOnionsHandler(ctx: VonaContext) {
-    if (!ctx.getClass()) return [];
+    if (!ctx.getController()) return [];
     // onionsLocal: controller
     const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
-      ctx.getClass()!,
+      ctx.getController()!,
     )?.[this.sceneName] as string[];
     // onionsLocal: action
     const onionsLocal: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
-      ctx.getClassPrototype()!,
+      ctx.getControllerPrototype()!,
       ctx.getHandlerName()!,
     )?.[this.sceneName] as string[];
     const onionsLocalAll: string[] = [];

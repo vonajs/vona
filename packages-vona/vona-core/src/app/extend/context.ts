@@ -82,21 +82,21 @@ const context: ContextBase = {
     return await raw(inflate(self.req), options);
   },
 
-  getClass() {
+  getController() {
     const self = cast<VonaContext>(this);
     return self.route?.controller;
   },
 
-  getClassPrototype(): object | undefined {
+  getControllerPrototype(): object | undefined {
     const self = cast<VonaContext>(this);
-    const controller = self.getClass();
+    const controller = self.getController();
     if (!controller) return undefined;
     return controller.prototype;
   },
 
-  getClassBeanFullName(): string | undefined {
+  getControllerBeanFullName(): string | undefined {
     const self = cast<VonaContext>(this);
-    const controller = self.getClass();
+    const controller = self.getController();
     if (!controller) return undefined;
     const beanOptions = appResource.getBean(controller);
     return beanOptions?.beanFullName;

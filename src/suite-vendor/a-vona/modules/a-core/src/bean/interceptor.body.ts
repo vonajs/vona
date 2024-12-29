@@ -29,7 +29,7 @@ export class InterceptorBody extends BeanBase implements IInterceptorExecute {
   }
 
   private _prepareContentType(): TypeResponseContentType {
-    const controller = this.ctx.getClass();
+    const controller = this.ctx.getController();
     if (controller) {
       const handlerName = this.ctx.getHandlerName();
       const options = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);

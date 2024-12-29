@@ -15,7 +15,7 @@ export async function middlewarePipe(ctx: VonaContext, next: Next) {
   const handler = ctx.getHandler();
   if (!handler) return next();
   // arguments
-  ctx[SymbolRouteHandlersArgumentsValue] = await _transformArguments(ctx, ctx.getClass()!, handler);
+  ctx[SymbolRouteHandlersArgumentsValue] = await _transformArguments(ctx, ctx.getController()!, handler);
   // next
   return next();
 }
@@ -95,7 +95,7 @@ function composePipes(
   executeCustom: IOnionExecuteCustom,
 ) {
   const onionPipe = ctx.app.bean.onion.pipe;
-  const beanFullName = ctx.getClassBeanFullName();
+  const beanFullName = ctx.getControllerBeanFullName();
   const handlerName = ctx.getHandler()!.name;
   const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
   if (!__cacheMiddlewaresArgument[key]) {
