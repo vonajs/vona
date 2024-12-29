@@ -18,7 +18,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOpitons.redis!.ttl);
+      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl);
     }
     return value;
   }
@@ -51,7 +51,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
         const valueMissing = valuesMissing[i];
         multi.setex(
           redisKeysMissing[i],
-          Math.trunc(this._cacheOpitons.redis!.ttl / 1000),
+          Math.trunc(this._cacheOptions.redis!.ttl / 1000),
           JSON.stringify(valueMissing),
         );
         values[indexesMissing[i]] = valueMissing;
@@ -105,7 +105,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
 
   get redisSummer() {
     if (!this._redisSummer) {
-      const clientName = this._cacheOpitons.redis?.client ?? this.scopeSummer.config.summer.redis.client;
+      const clientName = this._cacheOptions.redis?.client ?? this.scopeSummer.config.summer.redis.client;
       this._redisSummer = this.bean.redis.get(clientName);
     }
     return this._redisSummer;

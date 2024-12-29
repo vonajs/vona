@@ -21,7 +21,7 @@ export class BeanCacheMemRedis extends BeanBase {
 
   get __lruCache(): LRUCache<string, any> {
     if (!this.__memoryInstance[this.__cacheName]) {
-      this.__memoryInstance[this.__cacheName] = new LRUCache<string, any>(this._cacheOpitons.mem as any);
+      this.__memoryInstance[this.__cacheName] = new LRUCache<string, any>(this._cacheOptions.mem as any);
     }
     return this.__memoryInstance[this.__cacheName];
   }

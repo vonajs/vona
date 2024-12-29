@@ -8,26 +8,26 @@ import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../type
 export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, DATA> {
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
     let _cacheName: string;
-    let _cacheOpitons: IDecoratorSummerCacheOptions;
+    let _cacheOptions: IDecoratorSummerCacheOptions;
     if (cacheName) {
       // dynamic
       _cacheName = cacheName;
-      _cacheOpitons = cacheOptions ?? {};
+      _cacheOptions = cacheOptions ?? {};
     } else {
       // summer cache
       _cacheName = this.beanFullName;
-      _cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
+      _cacheOptions = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
     }
     // preset
-    let preset = _cacheOpitons.preset;
-    if (!preset && !_cacheOpitons.mode) preset = this.configModule.summer.presetDefault;
+    let preset = _cacheOptions.preset;
+    if (!preset && !_cacheOptions.mode) preset = this.configModule.summer.presetDefault;
     if (preset) {
       const configPreset = this.configModule.summer.preset[preset];
       // extend
-      _cacheOpitons = deepExtend({}, configPreset, _cacheOpitons, { preset: undefined });
+      _cacheOptions = deepExtend({}, configPreset, _cacheOptions, { preset: undefined });
     }
     // super
-    super.__init__(_cacheName, _cacheOpitons);
+    super.__init__(_cacheName, _cacheOptions);
   }
 
   async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {

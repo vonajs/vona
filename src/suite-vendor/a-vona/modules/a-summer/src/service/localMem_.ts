@@ -56,7 +56,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     // del on other workers by broadcast
     this.scope.broadcast.memDel.emit({
       cacheName: this._cacheName,
-      cacheOptions: this._cacheOpitons,
+      cacheOptions: this._cacheOptions,
       keyHash,
       key,
       options,
@@ -72,7 +72,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     // del on other workers by broadcast
     this.scope.broadcast.memMultiDel.emit({
       cacheName: this._cacheName,
-      cacheOptions: this._cacheOpitons,
+      cacheOptions: this._cacheOptions,
       keysHash,
       keys,
       options,
@@ -86,7 +86,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     // clear on this worker
     this.lruCache.clear();
     // clear on other workers by broadcast
-    this.scope.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOpitons, options });
+    this.scope.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOptions, options });
     // clear layered
     const layered = this.__getLayered(options);
     await layered.clear(options);
@@ -123,7 +123,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   get lruCache(): LRUCache<string, any> {
     if (!this.memoryInstance[this._cacheName]) {
-      this.memoryInstance[this._cacheName] = new LRUCache<string, any>(this._cacheOpitons.mem as any);
+      this.memoryInstance[this._cacheName] = new LRUCache<string, any>(this._cacheOptions.mem as any);
     }
     return this.memoryInstance[this._cacheName];
   }

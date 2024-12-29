@@ -7,7 +7,7 @@ import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../type
 
 export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   protected _cacheName: string;
-  protected _cacheOpitons: IDecoratorSummerCacheOptions;
+  protected _cacheOptions: IDecoratorSummerCacheOptions;
 
   protected _localMem: ServiceLocalMem<KEY, DATA>;
   protected _localRedis: ServiceLocalRedis<KEY, DATA>;
@@ -15,7 +15,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
     this._cacheName = cacheName;
-    this._cacheOpitons = cacheOptions;
+    this._cacheOptions = cacheOptions;
   }
 
   protected get scopeSummer() {
@@ -31,7 +31,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
       this._localMem = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localMem` as any,
         this._cacheName,
-        this._cacheOpitons,
+        this._cacheOptions,
       );
     }
     return this._localMem;
@@ -42,7 +42,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
       this._localRedis = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localRedis` as any,
         this._cacheName,
-        this._cacheOpitons,
+        this._cacheOptions,
       );
     }
     return this._localRedis;
@@ -53,7 +53,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
       this._localFetch = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localFetch` as any,
         this._cacheName,
-        this._cacheOpitons,
+        this._cacheOptions,
       );
     }
     return this._localFetch;
@@ -61,19 +61,19 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
 
   protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
     // enable/meta
-    const enable = options?.enable ?? this._cacheOpitons.enable ?? this.scopeSummer.config.summer.enable;
-    const meta = this._cacheOpitons.meta ?? this.scopeSummer.config.summer.meta;
+    const enable = options?.enable ?? this._cacheOptions.enable ?? this.scopeSummer.config.summer.enable;
+    const meta = this._cacheOptions.meta ?? this.scopeSummer.config.summer.meta;
     if (!this.bean.onion.checkOnionOptionsEnabled({ enable, meta })) return false;
     // default
     return true;
   }
 
   protected __getOptionsMode(options?: TSummerCacheActionOptions<KEY, DATA>) {
-    return options?.mode ?? this._cacheOpitons.mode ?? 'all';
+    return options?.mode ?? this._cacheOptions.mode ?? 'all';
   }
 
   protected __checkValueEmpty(value: DATA | null | undefined, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    const ignoreNull = options?.ignoreNull ?? this._cacheOpitons.ignoreNull ?? false;
+    const ignoreNull = options?.ignoreNull ?? this._cacheOptions.ignoreNull ?? false;
     if (ignoreNull) {
       return value === undefined || value === null;
     }

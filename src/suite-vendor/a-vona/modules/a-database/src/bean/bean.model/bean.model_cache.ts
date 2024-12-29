@@ -382,27 +382,27 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private __cacheOptionsInner() {
     if (this.options.cacheOptions === false) return false;
     // options
-    let _cacheOpitons = this.options.cacheOptions ?? {};
+    let _cacheOptions = this.options.cacheOptions ?? {};
     // preset
     let configPreset;
-    let preset = _cacheOpitons.preset;
-    if (!preset && !_cacheOpitons.mode) preset = this.scopeDatabase.config.summer.presetDefault;
+    let preset = _cacheOptions.preset;
+    if (!preset && !_cacheOptions.mode) preset = this.scopeDatabase.config.summer.presetDefault;
     if (preset) {
       configPreset = this.scopeDatabase.config.summer.preset[preset];
     }
     // extend
-    _cacheOpitons = deepExtend(
+    _cacheOptions = deepExtend(
       {
         enable: this.scopeDatabase.config.summer.enable,
         meta: this.scopeDatabase.config.summer.meta,
         redis: { client: this.scopeDatabase.config.summer.redis.client },
       },
       configPreset,
-      _cacheOpitons,
+      _cacheOptions,
       { preset: undefined },
     );
     // ok
-    return _cacheOpitons;
+    return _cacheOptions;
   }
 
   private __cacheEnabledInner() {
