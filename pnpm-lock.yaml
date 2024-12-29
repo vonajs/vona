@@ -65,6 +65,9 @@ importers:
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
+      vona-module-a-cache:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-cache
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
@@ -876,6 +879,9 @@ importers:
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:modules/a-broadcast
+      vona-module-a-cache:
+        specifier: workspace:^
+        version: link:modules/a-cache
       vona-module-a-core:
         specifier: workspace:^
         version: link:modules/a-core
@@ -954,6 +960,8 @@ importers:
   src/suite-vendor/a-vona/modules/a-bean: {}
 
   src/suite-vendor/a-vona/modules/a-broadcast: {}
+
+  src/suite-vendor/a-vona/modules/a-cache: {}
 
   src/suite-vendor/a-vona/modules/a-core:
     dependencies:

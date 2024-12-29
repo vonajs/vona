@@ -83,6 +83,9 @@
     },
     {
       "path": "modules/a-printapipath/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-cache/tsconfig.build.json"
     }
   ]
 }
