@@ -63,40 +63,40 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
     return cast(cache).__getKeyHash(key);
   }
 
-  public get(name: KEY): DATA | undefined {
+  public get(key: KEY): DATA | undefined {
     const cacheMem = this.__cacheInstanceMem;
     if (!cacheMem) return undefined;
-    const keyHash = this.__getKeyHash(name);
+    const keyHash = this.__getKeyHash(key);
     return cacheMem.get(keyHash);
   }
 
-  public set(name: KEY, value: DATA, timeout?: number) {
+  public set(key: KEY, value: DATA, timeout?: number) {
     const cacheMem = this.__cacheInstanceMem;
     if (!cacheMem) return;
-    const keyHash = this.__getKeyHash(name);
+    const keyHash = this.__getKeyHash(key);
     cacheMem.set(keyHash, value, { ttl: timeout || 0 });
   }
 
-  public getset(name: KEY, value: DATA, timeout?: number) {
+  public getset(key: KEY, value: DATA, timeout?: number) {
     const cacheMem = this.__cacheInstanceMem;
     if (!cacheMem) return;
-    const valueOld = this.get(name);
-    this.set(name, value, timeout);
+    const valueOld = this.get(key);
+    this.set(key, value, timeout);
     return valueOld;
   }
 
-  has(name: KEY) {
+  has(key: KEY) {
     const cacheMem = this.__cacheInstanceMem;
     if (!cacheMem) return false;
-    const keyHash = this.__getKeyHash(name);
+    const keyHash = this.__getKeyHash(key);
     return cacheMem.has(keyHash);
   }
 
-  remove(name: KEY) {
+  remove(key: KEY) {
     const cache = this.__cacheInstance;
     if (!cache) return;
     // del on this worker + broadcast
-    cache.del(name);
+    cache.del(key);
   }
 
   clear() {
