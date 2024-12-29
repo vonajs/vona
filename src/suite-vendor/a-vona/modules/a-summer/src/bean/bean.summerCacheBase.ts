@@ -1,5 +1,5 @@
 import { Virtual } from 'vona-module-a-bean';
-import { deepExtend } from 'vona';
+import { cast, deepExtend } from 'vona';
 import objectHash from 'object-hash';
 import { CacheBase } from '../common/cacheBase.js';
 import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
@@ -34,6 +34,13 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
     return await layered.get(keyHash, key, options);
+  }
+
+  /** for internal usage */
+  async _set(key: KEY, value: DATA, options?: TSummerCacheActionOptions<KEY, DATA>) {
+    const keyHash = this.__getKeyHash(key);
+    const layered = this.__getLayered(options);
+    return await cast(layered)._set(keyHash, key, value, options);
   }
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>> {
@@ -84,7 +91,8 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
 
   private __getKeyHash(key: KEY): string {
     if (key === undefined || key === null) {
-      throw new Error('key is required');
+      key = 'default' as KEY;
+      // throw new Error('key is required');
     }
     if (Array.isArray(key) || typeof key === 'object') {
       return objectHash(key, { respectType: false });

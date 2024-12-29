@@ -1,10 +1,8 @@
-import { Meta } from 'vona-module-a-meta';
-import { BeanStatusBase } from 'vona-module-a-status';
+import { BeanCacheRedisBase, CacheRedis } from 'vona-module-a-cache';
 
-export interface Meta<%=argv.beanNameCapitalize%> {
-  get(name: 'enable'): Promise<boolean | undefined>;
-  set(name: 'enable', value: boolean): Promise<void>;
-}
+export type TCacheRedis<%=argv.beanNameCapitalize%>Key = any;
+export type TCacheRedis<%=argv.beanNameCapitalize%>Data = any;
 
-@Meta()
-export class Meta<%=argv.beanNameCapitalize%> extends BeanStatusBase {}
+@CacheRedis()
+export class CacheRedis<%=argv.beanNameCapitalize%>
+  extends BeanCacheRedisBase<TCacheRedis<%=argv.beanNameCapitalize%>Key, TCacheRedis<%=argv.beanNameCapitalize%>Data> {}

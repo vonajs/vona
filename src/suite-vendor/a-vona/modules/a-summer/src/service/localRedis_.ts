@@ -18,9 +18,15 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl);
+      await this._set(keyHash, key, value!, options);
     }
     return value;
+  }
+
+  /** for internal usage */
+  private async _set(keyHash: string, _key: KEY, value: DATA, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+    const redisKey = this._getRedisKey(keyHash);
+    await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl);
   }
 
   async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
