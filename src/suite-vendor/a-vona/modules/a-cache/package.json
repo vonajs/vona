@@ -3,7 +3,17 @@
   "version": "5.0.0",
   "title": "a-cache",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "metas": {
+      "cacheMem": {
+        "scopeResource": true,
+        "boilerplate": "cli/cacheMem/boilerplate"
+      },
+      "cacheRedis": {
+        "scopeResource": true,
+        "boilerplate": "cli/cacheRedis/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
