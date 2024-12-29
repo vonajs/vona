@@ -63,33 +63,16 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends BeanBase {
     return await cache.peek(key!);
   }
 
-  public async set(value: DATA): Promise<void>;
-  public async set(key: KEY | undefined, value: DATA): Promise<void>;
-  public async set(key?: KEY | DATA, value?: DATA): Promise<void> {
+  public async set(value?: DATA, key?: KEY, ttl?: number): Promise<void> {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    if (arguments.length === 1) {
-      value = key as DATA;
-      key = undefined;
-    } else {
-      key = key as KEY;
-    }
-    await cast(cache)._set(key!, value);
+    await cast(cache)._set(key!, value, ttl);
   }
 
-  public async getset(value: DATA): Promise<DATA | undefined>;
-  public async getset(key: KEY, value: DATA): Promise<DATA | undefined>;
-  public async getset(key?: KEY | DATA, value?: DATA): Promise<DATA | undefined> {
+  public async getset(value?: DATA, key?: KEY, ttl?: number): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    if (arguments.length === 1) {
-      value = key as DATA;
-      key = undefined;
-    } else {
-      key = key as KEY;
-      value = value as DATA;
-    }
-    return await cast(cache)._getset(key!, value);
+    return await cast(cache)._getset(key!, value, ttl);
   }
 
   async has(key?: KEY): Promise<boolean> {

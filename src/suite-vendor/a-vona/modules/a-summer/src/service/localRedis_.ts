@@ -18,27 +18,29 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      await this._set(keyHash, key, value!, options);
+      await this._set(keyHash, key, value!);
     }
     return value;
   }
 
   /** for internal usage */
-  protected async _set(keyHash: string, _key: KEY, value: DATA, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected async _set(keyHash: string, _key: KEY, value: DATA, ttl?: number) {
     const redisKey = this._getRedisKey(keyHash);
-    await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl);
+    ttl = ttl ?? this._cacheOptions.redis!.ttl;
+    if (ttl) {
+      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', ttl);
+    } else {
+      await this.redisSummer.set(redisKey, JSON.stringify(value));
+    }
   }
 
   /** for internal usage */
-  protected async _getset(keyHash: string, _key: KEY, value: DATA, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected async _getset(keyHash: string, _key: KEY, value: DATA, ttl?: number) {
     const redisKey = this._getRedisKey(keyHash);
+    ttl = ttl ?? this._cacheOptions.redis!.ttl;
     let valuePrev: any;
-    if (this._cacheOptions.redis!.ttl) {
-      const res = await this.redisSummer
-        .multi()
-        .get(redisKey)
-        .set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl)
-        .exec();
+    if (ttl) {
+      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();
       valuePrev = res && res[0][1];
     } else {
       const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
