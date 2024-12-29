@@ -271,7 +271,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table: string,
     where: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | undefined> {
+  ): Promise<TResult2 | null | undefined> {
     // cache
     const cache = this.__cacheInstance;
     const cacheKey = { where, options };
@@ -298,10 +298,10 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table: string,
     where: { id: string },
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | undefined> {
+  ): Promise<TResult2 | null | undefined> {
     // cache
     const cache = this.__cacheInstance;
-    const item: TResult2 | undefined = await cache.get(where.id, {
+    const item: TResult2 | null | undefined = await cache.get(where.id, {
       get: async () => {
         // where: maybe contain aux key
         // disableInstance: use the model options, not use options by outer
@@ -376,7 +376,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private get __cacheInstance() {
     if (this.__cacheOptions === false) throw new Error('cache disabled');
-    return this.app.bean.summer.cache(this.__cacheName, this.__cacheOptions);
+    return this.app.bean.summer.cache<any, any>(this.__cacheName, this.__cacheOptions);
   }
 
   private __cacheOptionsInner() {
