@@ -1,0 +1,49 @@
+import assert from 'node:assert';
+import { BeanBase, retry, sleep } from 'vona';
+import { Api } from 'vona-module-a-openapi';
+import { Controller, Post } from 'vona-module-a-web';
+
+@Controller({ path: 'cacheRedis', meta: { mode: 'unittest' } })
+@Api.exclude()
+export class ControllerCacheRedis extends BeanBase {
+  @Post()
+  async redis() {
+    let res;
+    let value;
+
+    // getset
+    value = await this.scope.cacheRedis.test.getset('zhen.nann');
+    assert.equal(value, undefined);
+
+    value = await this.scope.cacheRedis.test.getset('zhennann');
+    assert.equal(value, 'zhen.nann');
+
+    // has
+    res = await this.scope.cacheRedis.test.has();
+    assert.equal(res, true);
+
+    // get
+    value = await this.scope.cacheRedis.test.get();
+    assert.equal(value, 'zhennann');
+
+    // remove
+    await this.scope.cacheRedis.test.remove();
+    res = await this.scope.cacheRedis.test.has();
+    assert.equal(res, false);
+
+    // set again
+    await this.scope.cacheRedis.test.set('zhennann'); // will be expired after 1s
+
+    // get
+    value = await this.scope.cacheRedis.test.get();
+    assert.equal(value, 'zhennann');
+
+    // peek after timeout
+    await sleep(900);
+    await retry({ retries: 3 }, async () => {
+      await sleep(100);
+      value = await this.scope.cacheRedis.test.peek();
+      assert.equal(value, undefined);
+    });
+  }
+}

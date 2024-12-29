@@ -86,6 +86,28 @@ export interface IModuleCacheMem {
   test: CacheMemTest;
 }
 /** cacheMem: end */
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.test.js';
+
+import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  export interface ICacheRedisRecord {
+    'vona-test:test': IDecoratorCacheRedisOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface CacheRedisTest {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import { CacheRedisTest } from '../bean/cacheRedis.test.js';
+export interface IModuleCacheRedis {
+  test: CacheRedisTest;
+}
+/** cacheRedis: end */
 /** event: begin */
 export * from '../bean/event.helloEcho.js';
 
@@ -258,6 +280,7 @@ declare module 'vona' {
 /** controller: begin */
 export * from '../controller/bean.js';
 export * from '../controller/cacheMem.js';
+export * from '../controller/cacheRedis.js';
 export * from '../controller/onion.js';
 export * from '../controller/passport.js';
 export * from '../controller/performAction.js';
@@ -271,6 +294,7 @@ declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'vona-test:bean': IDecoratorControllerOptions;
     'vona-test:cacheMem': IDecoratorControllerOptions;
+    'vona-test:cacheRedis': IDecoratorControllerOptions;
     'vona-test:onion': IDecoratorControllerOptions;
     'vona-test:passport': IDecoratorControllerOptions;
     'vona-test:performAction': IDecoratorControllerOptions;
@@ -287,6 +311,11 @@ declare module 'vona-module-vona-test' {
   }
 
   export interface ControllerCacheMem {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerCacheRedis {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
@@ -341,6 +370,7 @@ declare module 'vona-module-a-web' {
   }
   export interface IApiPathPostRecord {
     '/vona/test/cacheMem': '/vona/test/cacheMem';
+    '/vona/test/cacheRedis': '/vona/test/cacheRedis';
     '//echo': '//echo';
     '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
     '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
@@ -388,6 +418,7 @@ export interface ScopeModuleVonaTest {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   broadcast: IModuleBroadcast;
   cacheMem: IModuleCacheMem;
+  cacheRedis: IModuleCacheRedis;
   event: IModuleEvent;
   queue: IModuleQueue;
   summerCache: IModuleSummerCache;
