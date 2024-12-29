@@ -4,7 +4,7 @@
   "title": "a-cache",
   "vonaModule": {
     "dependencies": {},
-    "metas": {
+    "onions": {
       "cacheMem": {
         "optionsGlobalInterfaceName": "IDecoratorCacheMemOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-cache",
