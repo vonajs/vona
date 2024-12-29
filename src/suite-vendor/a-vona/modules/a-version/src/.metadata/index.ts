@@ -263,7 +263,6 @@ import { Errors } from '../config/errors.js';
 /** scope: begin */
 import {
   BeanScopeBase,
-  TypeModuleBean,
   BeanScopeUtil,
   TypeModuleConfig,
   TypeModuleErrors,
@@ -276,7 +275,6 @@ import { Scope } from 'vona-module-a-bean';
 export class ScopeModuleAVersion extends BeanScopeBase {}
 
 export interface ScopeModuleAVersion {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;

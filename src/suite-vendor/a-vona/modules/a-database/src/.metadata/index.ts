@@ -114,7 +114,6 @@ export * from '../main.js';
 /** scope: begin */
 import {
   BeanScopeBase,
-  TypeModuleBean,
   BeanScopeUtil,
   TypeModuleConfig,
   TypeModuleErrors,
@@ -127,7 +126,6 @@ import { Scope } from 'vona-module-a-bean';
 export class ScopeModuleADatabase extends BeanScopeBase {}
 
 export interface ScopeModuleADatabase {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;

@@ -41,14 +41,13 @@ declare module 'vona-module-a-web' {
 }
 /** controller: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleCabloyTest extends BeanScopeBase {}
 
 export interface ScopeModuleCabloyTest {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
   status: MetaStatus;
 }

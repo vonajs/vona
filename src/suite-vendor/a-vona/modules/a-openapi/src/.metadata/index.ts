@@ -37,14 +37,13 @@ import { config } from '../config/config.js';
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAOpenapi extends BeanScopeBase {}
 
 export interface ScopeModuleAOpenapi {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;

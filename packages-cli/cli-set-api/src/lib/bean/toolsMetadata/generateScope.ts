@@ -19,9 +19,6 @@ export async function generateScope(
   const contentRecords: string[] = [];
   // basic
   contentImports.push('BeanScopeBase');
-  // _bean
-  contentImports.push('TypeModuleBean');
-  contentRecords.push('_bean: TypeModuleBean;');
   // util
   contentImports.push('BeanScopeUtil');
   contentRecords.push('util: BeanScopeUtil;');

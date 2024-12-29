@@ -51,14 +51,13 @@ declare module 'vona' {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleARedis extends BeanScopeBase {}
 
 export interface ScopeModuleARedis {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
 }

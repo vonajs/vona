@@ -23,14 +23,13 @@ declare module 'vona' {
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAWeb extends BeanScopeBase {}
 
 export interface ScopeModuleAWeb {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
 }
 

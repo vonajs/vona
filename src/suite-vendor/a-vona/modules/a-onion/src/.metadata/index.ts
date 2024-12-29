@@ -27,14 +27,13 @@ declare module 'vona' {}
 declare module 'vona-module-a-onion' {}
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAOnion extends BeanScopeBase {}
 
 export interface ScopeModuleAOnion {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
 }
 

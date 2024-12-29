@@ -72,14 +72,13 @@ declare module 'vona-module-a-status' {
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAStatus extends BeanScopeBase {}
 
 export interface ScopeModuleAStatus {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
   entity: IModuleEntity;
   model: IModuleModel;

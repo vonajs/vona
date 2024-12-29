@@ -1,12 +1,11 @@
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleASocket extends BeanScopeBase {}
 
 export interface ScopeModuleASocket {
-  _bean: TypeModuleBean;
   util: BeanScopeUtil;
 }
 
