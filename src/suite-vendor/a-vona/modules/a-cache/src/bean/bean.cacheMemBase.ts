@@ -1,7 +1,7 @@
 import { BeanBase, cast } from 'vona';
 import { Virtual } from 'vona-module-a-bean';
 import { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
-import { BeanSummerCacheBase } from 'vona-module-a-summer';
+import { BeanSummerCacheBase, IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
@@ -26,11 +26,12 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
     return this[SymbolCacheEnabled];
   }
 
-  private __cacheOptionsInner() {
+  private __cacheOptionsInner(): IDecoratorSummerCacheOptions {
     const onionOptions = this.onionOptions as IDecoratorCacheMemOptions;
     return {
       enable: onionOptions.enable,
       meta: onionOptions.meta,
+      mode: 'mem',
       mem: {
         max: onionOptions.max,
         ttl: onionOptions.ttl,
