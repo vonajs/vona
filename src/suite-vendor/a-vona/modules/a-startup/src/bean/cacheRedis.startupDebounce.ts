@@ -1,7 +1,7 @@
 import { BeanCacheRedisBase, CacheRedis } from 'vona-module-a-cache';
 
-export type TCacheRedisStartupDebounceKey = any;
-export type TCacheRedisStartupDebounceData = any;
+export type TCacheRedisStartupDebounceKey = `startupDebounce:${string}`;
+export type TCacheRedisStartupDebounceData = boolean;
 
 @CacheRedis()
 export class CacheRedisStartupDebounce extends BeanCacheRedisBase<
