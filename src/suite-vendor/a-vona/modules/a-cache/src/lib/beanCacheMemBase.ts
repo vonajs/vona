@@ -1,4 +1,4 @@
-import { BeanBase } from 'vona';
+import { BeanBase, cast } from 'vona';
 import LRUCache from 'lru-cache';
 import { IMetaOptionsCacheMem } from '../types/cacheMem.js';
 
@@ -17,23 +17,6 @@ export class BeanCacheMemBase extends BeanBase {
         return this._set(name, value);
       };
     }
-  }
-
-  get __lruCache(): LRUCache<string, any> {
-    if (!this.__memoryInstance[this.__cacheName]) {
-      this.__memoryInstance[this.__cacheName] = new LRUCache<string, any>(this.__cacheOptions.mem as any);
-    }
-    return this.__memoryInstance[this.__cacheName];
-  }
-
-  get __memoryInstance() {
-    if (!this.app[SUMMERCACHEMEMORY]) {
-      this.app[SUMMERCACHEMEMORY] = {};
-    }
-    if (!this.app[SUMMERCACHEMEMORY][this.ctx.subdomain]) {
-      this.app[SUMMERCACHEMEMORY][this.ctx.subdomain] = {};
-    }
-    return this.app[SUMMERCACHEMEMORY][this.ctx.subdomain];
   }
 
   private get __cacheName() {
@@ -74,41 +57,39 @@ export class BeanCacheMemBase extends BeanBase {
   }
 
   private get __cacheInstance() {
-    if (!this.__cacheEnabled) return;
-    return this.app.bean.summer.cache(this.__cacheName, this.__cacheOptions);
+    if (!this.__cacheEnabled) return undefined;
+    const cache = this.app.bean.summer.cache(this.__cacheName, this.__cacheOptions);
+    const layered = cast(cache).__getLayered();
+    return layered.lruCache;
   }
 
   private _get(name: string): any | undefined {
     const cache = this.__cacheInstance;
-    if (!cache) return;
-    return cache.peek(name);
+    if (!cache) return undefined;
+    return cache.get(name);
   }
 
   private _set(name: string, value: any, timeout?: number) {
-    this.memory[name] = {
-      value,
-      timeout: timeout || 0,
-      timestamp: new Date(),
-    };
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    cache.set(name, value, { ttl: timeout || 0 });
   }
 
-  getset(name, value, timeout?) {
-    const valueOld = this.get(name);
-    this.memory[name] = {
-      value,
-      timeout: timeout || 0,
-      timestamp: new Date(),
-    };
+  private _getset(name: string, value: any, timeout?: number) {
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    const valueOld = this._get(name);
+    this._set(name, value, timeout);
     return valueOld;
   }
 
-  has(name) {
-    const res = this.memory[name];
-    if (!res) return null;
-    return res.timeout === 0 || new Date().valueOf() - res.timestamp < res.timeout ? res : null;
+  has(name: string) {
+    const cache = this.__cacheInstance;
+    if (!cache) return false;
+    return cache.has(name);
   }
 
-  remove(name) {
+  remove(name: string) {
     // remove this
     this._remove(name);
     // broadcast

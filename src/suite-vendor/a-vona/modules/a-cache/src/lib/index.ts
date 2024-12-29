@@ -1,1 +1,1 @@
-export * from './beanCacheMemBase.js';
+export * from './cacheMem.js';
