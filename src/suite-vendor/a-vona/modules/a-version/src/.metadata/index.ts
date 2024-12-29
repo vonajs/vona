@@ -41,6 +41,28 @@ export interface IModuleBroadcast {
   columnsClear: BroadcastColumnsClear;
 }
 /** broadcast: end */
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.workerAlive.js';
+
+import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  export interface ICacheRedisRecord {
+    'a-version:workerAlive': IDecoratorCacheRedisOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface CacheRedisWorkerAlive {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.js';
+export interface IModuleCacheRedis {
+  workerAlive: CacheRedisWorkerAlive;
+}
+/** cacheRedis: end */
 /** entity: begin */
 export * from '../entity/version.js';
 export * from '../entity/versionInit.js';
@@ -260,6 +282,7 @@ export interface ScopeModuleAVersion {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   broadcast: IModuleBroadcast;
+  cacheRedis: IModuleCacheRedis;
   entity: IModuleEntity;
   model: IModuleModel;
   event: IModuleEvent;

@@ -1,5 +1,4 @@
 import { AppReload } from '../module/reload/reload.js';
-import { uuidv4 } from '../utils/util.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
@@ -16,7 +15,6 @@ import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText, createAppText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
-  workerId: string;
   inApp: boolean;
   inAgent: boolean;
   isProd: boolean;
@@ -51,9 +49,6 @@ export class AppMeta extends BeanSimple {
   __versionReadyError: Error;
 
   protected __init__() {
-    // workerId
-    this.workerId = uuidv4();
-
     // app or agent
     this.inApp = this.app.type === 'application';
     this.inAgent = this.app.type === 'agent';

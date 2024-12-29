@@ -1,36 +1,23 @@
 import { Bean } from 'vona-module-a-bean';
-import { BeanBase } from 'vona';
-import { Redis } from 'ioredis';
+import { BeanBase, uuidv4 } from 'vona';
+
+const SymbolWorkerId = Symbol('SymbolWorkerId');
 
 @Bean()
 export class BeanWorker extends BeanBase {
-  _redisCache: Redis;
-  // _redisIO = null;
-
   get id() {
-    return this.app.meta.workerId;
+    if (this.app[SymbolWorkerId] === undefined) {
+      this.app[SymbolWorkerId] = uuidv4();
+    }
+    return this.app[SymbolWorkerId];
   }
-
-  get redisCache() {
-    if (!this._redisCache) this._redisCache = this.bean.redis.get('cache');
-    return this._redisCache;
-  }
-
-  // get redisIO() {
-  //   if (!this._redisIO) this._redisIO = this.app.redis.get('io');
-  //   return this._redisIO;
-  // }
 
   async setAlive() {
     const aliveTimeout = this.scope.config.worker.alive.timeout;
-    const key = `workerAlive:${this.id}`;
-    await this.redisCache.set(key, JSON.stringify(true), 'PX', aliveTimeout * 2);
-    // await this.redisIO.set(key, JSON.stringify(true), 'PX', aliveTimeout * 2);
+    await this.scope.cacheRedis.workerAlive.set(true, this.id, aliveTimeout * 2);
   }
 
-  async getAlive({ id }: any) {
-    const key = `workerAlive:${id}`;
-    const value = await this.redisCache.get(key);
-    return value ? JSON.parse(value) : undefined;
+  async getAlive(id?: string) {
+    return await this.scope.cacheRedis.workerAlive.get(id ?? this.id);
   }
 }
