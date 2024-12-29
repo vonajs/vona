@@ -1,3 +1,25 @@
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.startupDebounce.js';
+
+import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  export interface ICacheRedisRecord {
+    'a-startup:startupDebounce': IDecoratorCacheRedisOptions;
+  }
+}
+declare module 'vona-module-a-startup' {
+  export interface CacheRedisStartupDebounce {
+    /** @internal */
+    get scope(): ScopeModuleAStartup;
+  }
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import { CacheRedisStartupDebounce } from '../bean/cacheRedis.startupDebounce.js';
+export interface IModuleCacheRedis {
+  startupDebounce: CacheRedisStartupDebounce;
+}
+/** cacheRedis: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -63,6 +85,7 @@ export interface ScopeModuleAStartup {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  cacheRedis: IModuleCacheRedis;
   redlock: MetaRedlock;
   service: IModuleService;
 }

@@ -78,35 +78,18 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
     return cacheMem.peek(keyHash);
   }
 
-  public set(value: DATA): void;
-  public set(key: KEY | undefined, value: DATA): void;
-  public set(key?: KEY | DATA, value?: DATA): void {
+  public set(value?: DATA, key?: KEY, ttl?: number): void {
     const cacheMem = this.__cacheInstanceMem;
     if (!cacheMem) return;
-    if (arguments.length === 1) {
-      value = key as DATA;
-      key = undefined;
-    } else {
-      key = key as KEY;
-    }
     const keyHash = this.__getKeyHash(key);
-    cacheMem.set(keyHash, value);
+    cacheMem.set(keyHash, value, { ttl });
   }
 
-  public getset(value: DATA): DATA | undefined;
-  public getset(key: KEY, value: DATA): DATA | undefined;
-  public getset(key?: KEY | DATA, value?: DATA): DATA | undefined {
+  public getset(value?: DATA, key?: KEY, ttl?: number): DATA | undefined {
     const cacheMem = this.__cacheInstanceMem;
     if (!cacheMem) return;
-    if (arguments.length === 1) {
-      value = key as DATA;
-      key = undefined;
-    } else {
-      key = key as KEY;
-      value = value as DATA;
-    }
     const valueOld = this.get(key);
-    this.set(key, value);
+    this.set(value, key, ttl);
     return valueOld;
   }
 
