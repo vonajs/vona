@@ -43,6 +43,13 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return await cast(layered)._set(keyHash, key, value, options);
   }
 
+  /** for internal usage */
+  async _getset(key: KEY, value: DATA, options?: TSummerCacheActionOptions<KEY, DATA>) {
+    const keyHash = this.__getKeyHash(key);
+    const layered = this.__getLayered(options);
+    return await cast(layered)._getset(keyHash, key, value, options);
+  }
+
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>> {
     if (!keys || keys.length === 0) {
       return [];

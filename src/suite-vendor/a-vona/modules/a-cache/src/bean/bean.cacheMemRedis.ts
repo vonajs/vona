@@ -77,11 +77,11 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends BeanBase {
     await cast(cache)._set(key!, value);
   }
 
-  public getset(value: DATA): DATA | undefined;
-  public getset(key: KEY, value: DATA): DATA | undefined;
-  public getset(key?: KEY | DATA, value?: DATA): DATA | undefined {
-    const cacheRedis = this.__cacheInstanceRedis;
-    if (!cacheRedis) return;
+  public async getset(value: DATA): Promise<DATA | undefined>;
+  public async getset(key: KEY, value: DATA): Promise<DATA | undefined>;
+  public async getset(key?: KEY | DATA, value?: DATA): Promise<DATA | undefined> {
+    const cache = this.__cacheInstance;
+    if (!cache) return;
     if (arguments.length === 1) {
       value = key as DATA;
       key = undefined;
@@ -89,9 +89,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends BeanBase {
       key = key as KEY;
       value = value as DATA;
     }
-    const valueOld = this.get(key);
-    this.set(key, value);
-    return valueOld;
+    return await cast(cache)._getset(key!, value);
   }
 
   has(key?: KEY): boolean {

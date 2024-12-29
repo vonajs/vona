@@ -24,9 +24,27 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   }
 
   /** for internal usage */
-  private async _set(keyHash: string, _key: KEY, value: DATA, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected async _set(keyHash: string, _key: KEY, value: DATA, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey(keyHash);
     await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl);
+  }
+
+  /** for internal usage */
+  protected async _getset(keyHash: string, _key: KEY, value: DATA, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+    const redisKey = this._getRedisKey(keyHash);
+    let valuePrev: any;
+    if (this._cacheOptions.redis!.ttl) {
+      const res = await this.redisSummer
+        .multi()
+        .get(redisKey)
+        .set(redisKey, JSON.stringify(value), 'PX', this._cacheOptions.redis!.ttl)
+        .exec();
+      valuePrev = res && res[0][1];
+    } else {
+      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
+      valuePrev = res && res[0][1];
+    }
+    return valuePrev ? JSON.parse(valuePrev) : undefined;
   }
 
   async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
