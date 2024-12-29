@@ -27,14 +27,14 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends BeanBase {
   }
 
   private __cacheOptionsInner(): IDecoratorSummerCacheOptions {
-    const onionOptions = this.onionOptions as IDecoratorCacheRedisOptions;
+    const onionOptions = this.onionOptions as IDecoratorCacheRedisOptions | undefined;
     return {
-      enable: onionOptions.enable,
-      meta: onionOptions.meta,
+      enable: onionOptions?.enable,
+      meta: onionOptions?.meta,
       mode: 'redis',
       redis: {
-        ttl: onionOptions.ttl,
-        client: onionOptions.client || this.$scope.cache.config.redis.client,
+        ttl: onionOptions?.ttl || 0,
+        client: onionOptions?.client || this.$scope.cache.config.redis.client,
       },
     };
   }

@@ -27,14 +27,14 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
   }
 
   private __cacheOptionsInner(): IDecoratorSummerCacheOptions {
-    const onionOptions = this.onionOptions as IDecoratorCacheMemOptions;
+    const onionOptions = this.onionOptions as IDecoratorCacheMemOptions | undefined;
     return {
-      enable: onionOptions.enable,
-      meta: onionOptions.meta,
+      enable: onionOptions?.enable,
+      meta: onionOptions?.meta,
       mode: 'mem',
       mem: {
-        max: onionOptions.max,
-        ttl: onionOptions.ttl,
+        max: onionOptions?.max,
+        ttl: onionOptions?.ttl,
       },
     };
   }

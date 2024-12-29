@@ -28,22 +28,16 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     const userDemo = usersDemo.find(item => item.id === user.id);
     if (!userDemo) return;
     Object.assign(userDemo, user);
-    const redis = this.bean.redis.get('cache');
-    const key = this._getCacheKey('usersDemo');
-    await redis.set(key, JSON.stringify(usersDemo));
+    await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }
 
   private async _getUsersDemo() {
     if (this.app.meta.isProd) return;
-    const redis = this.bean.redis.get('cache');
-    const key = this._getCacheKey('usersDemo');
-    const usersDemo = await redis.get(key);
-    if (usersDemo) return JSON.parse(usersDemo);
-    await redis.set(key, JSON.stringify(__UsersDemo));
-    return __UsersDemo;
-  }
-
-  private _getCacheKey(name: string) {
-    return `${this.ctx.instance ? this.ctx.instance.id : 0}:home-user:${name}`;
+    let usersDemo = await this.scope.cacheRedis.usersDemo.get();
+    if (!usersDemo) {
+      usersDemo = __UsersDemo;
+      await this.scope.cacheRedis.usersDemo.set(usersDemo);
+    }
+    return usersDemo;
   }
 }
