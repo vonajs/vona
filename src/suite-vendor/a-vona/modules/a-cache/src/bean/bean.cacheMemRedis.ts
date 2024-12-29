@@ -92,24 +92,20 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends BeanBase {
     return await cast(cache)._getset(key!, value);
   }
 
-  has(key?: KEY): boolean {
-    const cacheRedis = this.__cacheInstanceRedis;
-    if (!cacheRedis) return false;
-    const keyHash = this.__getKeyHash(key);
-    return cacheRedis.has(keyHash);
+  async has(key?: KEY): Promise<boolean> {
+    return !!(await this.peek(key));
   }
 
-  remove(key?: KEY): void {
+  async remove(key?: KEY): Promise<void> {
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    await cache.del(key!);
+  }
+
+  async clear(): Promise<void> {
     const cache = this.__cacheInstance;
     if (!cache) return;
     // del on this worker + broadcast
-    cache.del(key ?? ('default' as any));
-  }
-
-  clear(): void {
-    const cache = this.__cacheInstance;
-    if (!cache) return;
-    // del on this worker + broadcast
-    cache.clear();
+    await cache.clear();
   }
 }

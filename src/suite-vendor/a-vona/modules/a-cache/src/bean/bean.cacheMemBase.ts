@@ -61,7 +61,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
   private __getKeyHash(key?: KEY): string {
     const cache = this.__cacheInstance;
     if (!cache) throw new Error('cache not enabled');
-    return cast(cache).__getKeyHash(key ?? 'default');
+    return cast(cache).__getKeyHash(key);
   }
 
   public get(key?: KEY): DATA | undefined {
@@ -121,7 +121,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends BeanBase {
     const cache = this.__cacheInstance;
     if (!cache) return;
     // del on this worker + broadcast
-    cache.del(key ?? ('default' as any));
+    cache.del(key!);
   }
 
   clear(): void {
