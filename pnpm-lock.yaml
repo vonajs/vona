@@ -961,7 +961,11 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-broadcast: {}
 
-  src/suite-vendor/a-vona/modules/a-cache: {}
+  src/suite-vendor/a-vona/modules/a-cache:
+    dependencies:
+      lru-cache:
+        specifier: ^8.0.4
+        version: 8.0.5
 
   src/suite-vendor/a-vona/modules/a-core:
     dependencies:

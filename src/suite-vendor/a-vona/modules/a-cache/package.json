@@ -38,5 +38,7 @@
     "static"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "lru-cache": "^8.0.4"
+  }
 }
