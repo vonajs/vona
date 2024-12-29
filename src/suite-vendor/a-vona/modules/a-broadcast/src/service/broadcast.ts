@@ -12,7 +12,7 @@ export class ServiceBroadcast extends BeanBase {
 
   protected __init__() {
     const app = this.app;
-    this.__callerId = app.meta.workerId;
+    this.__callerId = app.bean.worker.id;
     this.__channelName = `broadcast_${this.app.name}:`;
     this.__pub = app.bean.redis.get('broadcast').duplicate();
     this.__sub = app.bean.redis.get('broadcast').duplicate();
