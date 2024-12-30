@@ -23,6 +23,19 @@ export class CliToolsDeps extends BeanCliBase {
   }
 
   async _generate(projectPath: string, tsc: boolean, force: boolean) {
+    // generate package.json
+    await this._generatePackageJson(projectPath);
+    // generate type modules file
+    await this._generateTypeModulesFile(projectPath, force);
+    // generate type project file
+    await this._generateTypeProjectFile(projectPath);
+    // tsc
+    if (tsc) {
+      await this._tsc();
+    }
+  }
+
+  async _generatePackageJson(projectPath: string) {
     const pkgFile = path.join(projectPath, 'package.json');
     const pkgOriginalFile = path.join(projectPath, 'package.original.json');
     // check original
@@ -38,15 +51,9 @@ export class CliToolsDeps extends BeanCliBase {
     }
     // generate pkg from pkgOriginal
     await this._generatePkgFromPkgOriginal(pkgOriginal, pkgFile);
-    // generate type modules file
-    await this._generateTypeModulesFile(projectPath, force);
-    // generate type project file
-    await this._generateTypeProjectFile(projectPath);
-    // tsc
-    if (tsc) {
-      await this._tsc();
-    }
   }
+
+  async _generatePackageJson_prepareDeps(projectPath: string) {}
 
   _getProjectMode(projectPath: string) {
     const vonaPath = this._getVonaPath(projectPath);
