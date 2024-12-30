@@ -34,7 +34,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async mget(keys?: KEY[], ttl?: number): Promise<Array<DATA | null | undefined>> {
+  public async mget(keys: KEY[], ttl?: number): Promise<Array<DATA | null | undefined>> {
     if (!keys || keys.length === 0) return [];
     const cache = this.__cacheInstance;
     if (!cache) return [];
@@ -78,7 +78,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
-  public async mset(values?: DATA[], keys?: KEY[], ttl?: number): Promise<void> {
+  public async mset(values: DATA[], keys: KEY[], ttl?: number): Promise<void> {
     if (!values || values.length === 0) return;
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
@@ -127,7 +127,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     await cache.del(redisKey);
   }
 
-  public async mdel(keys?: KEY[]): Promise<void> {
+  public async mdel(keys: KEY[]): Promise<void> {
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
