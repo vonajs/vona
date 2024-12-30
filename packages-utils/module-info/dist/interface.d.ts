@@ -75,6 +75,7 @@ export interface IModulePackage {
         fileVersion: number;
         dependencies?: Record<string, string>;
         globalDependencies?: Record<string, string | boolean>;
+        globalDependenciesDev?: Record<string, string | boolean>;
         onions?: OnionScenesMeta;
         metas?: OnionMetasMeta;
     };
@@ -82,6 +83,7 @@ export interface IModulePackage {
         capabilities?: IModuleCapabilitiesZova;
         dependencies?: Record<string, string>;
         globalDependencies?: Record<string, string | boolean>;
+        globalDependenciesDev?: Record<string, string | boolean>;
         onions?: OnionScenesMeta;
         metas?: OnionMetasMeta;
         bundle?: {
