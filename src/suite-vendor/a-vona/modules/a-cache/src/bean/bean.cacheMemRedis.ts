@@ -116,7 +116,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     const cache = this.__cacheInstance;
     if (!cache) return false;
     const redisKey = this.__getRedisKey(key);
-    const _value = await cache.get(redisKey);
+    const _value = await cache.exists(redisKey);
     return !!_value;
   }
 
