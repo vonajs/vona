@@ -23,6 +23,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     return value;
   }
 
+  // todo: remove
   /** for internal usage */
   protected async _set(keyHash: string, _key: KEY, value: DATA, ttl?: number) {
     const redisKey = this._getRedisKey(keyHash);
@@ -34,6 +35,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     }
   }
 
+  // todo: remove
   /** for internal usage */
   protected async _getset(keyHash: string, _key: KEY, value: DATA, ttl?: number) {
     const redisKey = this._getRedisKey(keyHash);

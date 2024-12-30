@@ -1,94 +1,112 @@
-import { BeanBase, cast } from 'vona';
 import { Virtual } from 'vona-module-a-bean';
 import { IDecoratorCacheRedisOptions } from '../types/cacheRedis.js';
-import { BeanSummerCacheBase, IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-
-const SymbolCacheOptions = Symbol('SymbolCacheOptions');
-const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
+import { CacheBase } from '../common/cacheBase.js';
+import { Redis } from 'ioredis';
 
 @Virtual()
-export class BeanCacheRedisBase<KEY = any, DATA = any> extends BeanBase {
-  private get __cacheName() {
-    return this.beanFullName;
-  }
+export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheRedisOptions, KEY> {
+  private _redisSummer: Redis;
 
-  private get __cacheOptions() {
-    if (this[SymbolCacheOptions] === undefined) {
-      this[SymbolCacheOptions] = this.__cacheOptionsInner();
+  private get redisSummer() {
+    if (!this._redisSummer) {
+      const clientName = this._cacheOptions.client ?? this.$scope.cache.config.redis.client;
+      this._redisSummer = this.bean.redis.get(clientName);
     }
-    return this[SymbolCacheOptions];
+    return this._redisSummer;
   }
 
-  private get __cacheEnabled() {
-    if (this[SymbolCacheEnabled] === undefined) {
-      this[SymbolCacheEnabled] = this.__cacheEnabledInner();
-    }
-    return this[SymbolCacheEnabled];
-  }
-
-  private __cacheOptionsInner(): IDecoratorSummerCacheOptions {
-    const onionOptions = this.onionOptions as IDecoratorCacheRedisOptions | undefined;
-    return {
-      enable: onionOptions?.enable,
-      meta: onionOptions?.meta,
-      mode: 'redis',
-      redis: {
-        ttl: onionOptions?.ttl || 0,
-        client: onionOptions?.client || this.$scope.cache.config.redis.client,
-      },
-    };
-  }
-
-  private __cacheEnabledInner() {
-    // enable
-    if (!this.bean.onion.checkOnionOptionsEnabled(this.__cacheOptions)) return false;
-    // default
-    return true;
-  }
-
-  private get __cacheInstance(): BeanSummerCacheBase<KEY, DATA> | undefined {
+  protected get __cacheInstance(): Redis | undefined {
     if (!this.__cacheEnabled) return undefined;
-    return this.app.bean.summer.cache<KEY, DATA>(this.__cacheName, this.__cacheOptions);
+    return this.redisSummer;
   }
 
-  public async get(key?: KEY): Promise<DATA | null | undefined> {
+  public async get(key?: KEY): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
-    return await cache.get(key!);
+    const redisKey = this.__getRedisKey(key);
+    const _value = await cache.getex(redisKey, 'PX', this._cacheOptions.ttl);
+    return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async peek(key?: KEY): Promise<DATA | null | undefined> {
+  public async peek(key?: KEY): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
-    return await cache.peek(key!);
+    const redisKey = this.__getRedisKey(key);
+    const _value = await cache.get(redisKey);
+    return _value ? JSON.parse(_value) : undefined;
   }
 
   public async set(value?: DATA, key?: KEY, ttl?: number): Promise<void> {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    await cast(cache)._set(key!, value, ttl);
+    const redisKey = this.__getRedisKey(key);
+    ttl = ttl ?? this._cacheOptions.ttl;
+    if (ttl) {
+      await cache.set(redisKey, JSON.stringify(value), 'PX', ttl);
+    } else {
+      await cache.set(redisKey, JSON.stringify(value));
+    }
   }
 
   public async getset(value?: DATA, key?: KEY, ttl?: number): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    return await cast(cache)._getset(key!, value, ttl);
+    const redisKey = this.__getRedisKey(key);
+    ttl = ttl ?? this._cacheOptions.ttl;
+    let valuePrev: any;
+    if (ttl) {
+      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();
+      valuePrev = res && res[0][1];
+    } else {
+      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
+      valuePrev = res && res[0][1];
+    }
+    return valuePrev ? JSON.parse(valuePrev) : undefined;
   }
 
-  async has(key?: KEY): Promise<boolean> {
-    return !!(await this.peek(key));
+  public async has(key?: KEY): Promise<boolean> {
+    const cache = this.__cacheInstance;
+    if (!cache) return false;
+    const redisKey = this.__getRedisKey(key);
+    const _value = await cache.get(redisKey);
+    return !!_value;
   }
 
-  async remove(key?: KEY): Promise<void> {
+  public async del(key?: KEY): Promise<void> {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    await cache.del(key!);
+    const redisKey = this.__getRedisKey(key);
+    await cache.del(redisKey);
   }
 
-  async clear(): Promise<void> {
+  public async mdel(keys?: KEY[]): Promise<void> {
+    if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
-    // del on this worker + broadcast
-    await cache.clear();
+    const redisKeys = keys.map(key => this.__getRedisKey(key));
+    await cache.del(redisKeys);
+  }
+
+  public async clear(): Promise<void> {
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    const redisKey = this.__getRedisKey('*');
+    const keyPrefix = cache.options.keyPrefix;
+    const keyPattern = `${keyPrefix}${redisKey}`;
+    const keys = await cache.keys(keyPattern);
+    const keysDel: any[] = [];
+    for (const fullKey of keys) {
+      const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
+      keysDel.push(key);
+    }
+    if (keysDel.length > 0) {
+      await cache.del(keysDel);
+    }
+  }
+
+  private __getRedisKey(key?: KEY | '*'): string {
+    const keyHash = key === '*' ? '*' : this.__getKeyHash(key);
+    const iid = this.ctx.instance ? this.ctx.instance.id : 0;
+    return `${iid}!${this._cacheName}!${keyHash}`;
   }
 }
