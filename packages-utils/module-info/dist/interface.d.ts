@@ -82,6 +82,8 @@ export interface IModulePackage {
         capabilities?: IModuleCapabilitiesZova;
         dependencies?: Record<string, string>;
         globalDependencies?: Record<string, string | boolean>;
+        onions?: OnionScenesMeta;
+        metas?: OnionMetasMeta;
         bundle?: {
             vendors?: Array<IBundleVendor>;
         };

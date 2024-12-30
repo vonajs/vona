@@ -1,7 +1,7 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
 import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
-import { VonaConfigMeta, VonaMetaMode } from 'vona-shared';
+import { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
 import { deepExtend } from '../utils/util.js';
 
 function createLoaderClass(Base) {

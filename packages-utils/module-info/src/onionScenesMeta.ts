@@ -1,4 +1,4 @@
-import { IModule, OnionMetasMeta, OnionScenesMeta } from '@cabloy/module-info';
+import { IModule, OnionMetasMeta, OnionScenesMeta } from './interface.js';
 
 let __onionScenesMeta: OnionScenesMeta;
 export function getOnionScenesMeta(modules: Record<string, IModule>) {
@@ -20,7 +20,7 @@ export function _getOnionScenesMeta(modules: Record<string, IModule>) {
   const result = {};
   for (const moduleName in modules) {
     const module = modules[moduleName];
-    const onions = module.package.vonaModule?.onions;
+    const onions = module.package.vonaModule?.onions ?? module.package.zovaModule?.onions;
     if (!onions) continue;
     for (const sceneName in onions) {
       result[sceneName] = { ...onions[sceneName], module };
@@ -33,7 +33,7 @@ export function _getOnionMetasMeta(modules: Record<string, IModule>) {
   const result = {};
   for (const moduleName in modules) {
     const module = modules[moduleName];
-    const metas = module.package.vonaModule?.metas;
+    const metas = module.package.vonaModule?.metas ?? module.package.zovaModule?.metas;
     if (!metas) continue;
     for (const sceneName in metas) {
       result[sceneName] = { ...metas[sceneName], module };

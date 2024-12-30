@@ -11,7 +11,7 @@ import {
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
-import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
+import { VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText, createAppText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {

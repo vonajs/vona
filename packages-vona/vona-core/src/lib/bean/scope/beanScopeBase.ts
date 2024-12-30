@@ -5,7 +5,7 @@ import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 import { IModule } from '@cabloy/module-info';
 import { BeanScopeUtil } from './beanScopeUtil.js';
-import { getOnionMetasMeta } from 'vona-shared';
+import { getOnionMetasMeta } from '@cabloy/module-info';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
