@@ -26,8 +26,8 @@ export class ControllerCacheMem extends BeanBase {
     value = this.scope.cacheMem.test.get();
     assert.equal(value, 'zhennann');
 
-    // remove
-    this.scope.cacheMem.test.remove();
+    // del
+    this.scope.cacheMem.test.del();
     res = this.scope.cacheMem.test.has();
     assert.equal(res, false);
 

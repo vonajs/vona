@@ -22,17 +22,24 @@ declare module 'vona' {
 }
 /** bean: end */
 /** broadcast: begin */
+export * from '../bean/broadcast.memClear.js';
 export * from '../bean/broadcast.memDel.js';
 export * from '../bean/broadcast.memMultiDel.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
+    'a-cache:memClear': IDecoratorBroadcastOptions;
     'a-cache:memDel': IDecoratorBroadcastOptions;
     'a-cache:memMultiDel': IDecoratorBroadcastOptions;
   }
 }
 declare module 'vona-module-a-cache' {
+  export interface BroadcastMemClear {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+
   export interface BroadcastMemDel {
     /** @internal */
     get scope(): ScopeModuleACache;
@@ -45,9 +52,11 @@ declare module 'vona-module-a-cache' {
 }
 /** broadcast: end */
 /** broadcast: begin */
+import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
 import { BroadcastMemDel } from '../bean/broadcast.memDel.js';
 import { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
 export interface IModuleBroadcast {
+  memClear: BroadcastMemClear;
   memDel: BroadcastMemDel;
   memMultiDel: BroadcastMemMultiDel;
 }

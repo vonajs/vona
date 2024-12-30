@@ -102,8 +102,10 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
   clear(): void {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    // del on this worker + broadcast
+    // clear on this worker
     cache.clear();
+    // clear on other workers by broadcast
+    this.$scope.cache.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOptions });
   }
 
   protected __delRaw(keyHash: string, _key: KEY) {
@@ -116,5 +118,11 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     keysHash.forEach(keyHash => cache.delete(keyHash));
+  }
+
+  protected __clearRaw() {
+    const cache = this.__cacheInstance;
+    if (!cache) return undefined;
+    cache.clear();
   }
 }
