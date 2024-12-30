@@ -21,7 +21,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // peek
-    const values = keysHash.map(keyHash => this.lruCache.peek(keyHash));
+    const values = this.cacheMem.mget(keys);
     const keysHashMissing: any[] = [];
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
@@ -40,7 +40,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
       // set/merge
       for (let i = 0; i < keysHashMissing.length; i++) {
         const valueMissing = valuesMissing[i];
-        this.lruCache.set(keysHashMissing[i], valueMissing);
+        this.cacheMem.set(valueMissing!, keysMissing[i]);
         values[indexesMissing[i]] = valueMissing;
       }
     }
@@ -49,16 +49,8 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   }
 
   async del(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    // del on this worker
-    this.lruCache.delete(keyHash);
-    // del on other workers by broadcast
-    this.scope.broadcast.memDel.emit({
-      cacheName: this._cacheName,
-      cacheOptions: this._cacheOptions,
-      keyHash,
-      key,
-      options,
-    });
+    // del on this worker+broadcast
+    this.cacheMem.del(key);
     // del layered
     const layered = this.__getLayered(options);
     await layered.del(keyHash, key, options);
