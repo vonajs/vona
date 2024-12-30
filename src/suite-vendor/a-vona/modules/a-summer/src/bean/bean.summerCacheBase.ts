@@ -1,6 +1,5 @@
 import { Virtual } from 'vona-module-a-bean';
-import { cast, deepExtend } from 'vona';
-import objectHash from 'object-hash';
+import { deepExtend } from 'vona';
 import { CacheBase } from '../common/cacheBase.js';
 import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
 
@@ -31,47 +30,29 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
   }
 
   async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
-    const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
-    return await layered.get(keyHash, key, options);
-  }
-
-  /** for internal usage */
-  async _set(key: KEY, value: DATA, ttl?: number, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    const keyHash = this.__getKeyHash(key);
-    const layered = this.__getLayered(options);
-    return await cast(layered)._set(keyHash, key, value, ttl);
-  }
-
-  /** for internal usage */
-  async _getset(key: KEY, value: DATA, ttl?: number, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    const keyHash = this.__getKeyHash(key);
-    const layered = this.__getLayered(options);
-    return await cast(layered)._getset(keyHash, key, value, ttl);
+    return await layered.get(key, options);
   }
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>> {
     if (!keys || keys.length === 0) {
       return [];
     }
-    const keysHash = this.__getKeysHash(keys);
     const layered = this.__getLayered(options);
-    return await layered.mget(keysHash, keys, options);
+    return await layered.mget(keys, options);
   }
 
   async del(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
-    return await layered.del(keyHash, key, options);
+    return await layered.del(key, options);
   }
 
   async mdel(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     if (!keys || keys.length === 0) {
       return [];
     }
-    const keysHash = this.__getKeysHash(keys);
     const layered = this.__getLayered(options);
-    return await layered.mdel(keysHash, keys, options);
+    return await layered.mdel(keys, options);
   }
 
   async clear(options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -80,9 +61,8 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
   }
 
   async peek(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
-    const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
-    return await layered.peek(keyHash, key, options);
+    return await layered.peek(key, options);
   }
 
   private __getLayered(options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -94,25 +74,5 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
       return this.localMem;
     }
     return this.localRedis;
-  }
-
-  // todo: remove
-  private __getKeyHash(key: KEY): string {
-    if (key === undefined || key === null) {
-      key = 'default' as KEY;
-      // throw new Error('key is required');
-    }
-    if (Array.isArray(key) || typeof key === 'object') {
-      return objectHash(key, { respectType: false });
-    }
-    if (typeof key !== 'string') {
-      return String(key);
-    }
-    return key;
-  }
-
-  // todo: remove
-  private __getKeysHash(keys: KEY[]): string[] {
-    return keys.map(key => this.__getKeyHash(key));
   }
 }

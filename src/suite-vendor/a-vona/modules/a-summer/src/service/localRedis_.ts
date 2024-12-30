@@ -3,6 +3,7 @@ import { CacheBase } from '../common/cacheBase.js';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 import { TSummerCacheActionOptions } from '../types/summerCache.js';
 import { Service } from 'vona-module-a-web';
+import { BeanCacheRedisBase } from 'vona-module-a-cache';
 
 @Service()
 export class ServiceLocalRedis<KEY = any, DATA = any>
@@ -12,43 +13,13 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   _redisSummer: Redis;
 
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    const redisKey = this._getRedisKey(keyHash);
-    const _value = await this.redisSummer.getex(redisKey, 'PX', this._cacheOptions.redis!.ttl);
-    let value: DATA | null | undefined = _value ? JSON.parse(_value) : undefined;
+    let value = await this.cacheRedis.get(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      await this._set(keyHash, key, value!);
+      await this.cacheRedis.set(value!, key);
     }
     return value;
-  }
-
-  // todo: remove
-  /** for internal usage */
-  protected async _set(keyHash: string, _key: KEY, value: DATA, ttl?: number) {
-    const redisKey = this._getRedisKey(keyHash);
-    ttl = ttl ?? this._cacheOptions.redis!.ttl;
-    if (ttl) {
-      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', ttl);
-    } else {
-      await this.redisSummer.set(redisKey, JSON.stringify(value));
-    }
-  }
-
-  // todo: remove
-  /** for internal usage */
-  protected async _getset(keyHash: string, _key: KEY, value: DATA, ttl?: number) {
-    const redisKey = this._getRedisKey(keyHash);
-    ttl = ttl ?? this._cacheOptions.redis!.ttl;
-    let valuePrev: any;
-    if (ttl) {
-      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();
-      valuePrev = res && res[0][1];
-    } else {
-      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
-      valuePrev = res && res[0][1];
-    }
-    return valuePrev ? JSON.parse(valuePrev) : undefined;
   }
 
   async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -137,6 +108,10 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       this._redisSummer = this.bean.redis.get(clientName);
     }
     return this._redisSummer;
+  }
+
+  get cacheRedis(): BeanCacheRedisBase<KEY, DATA> {
+    return this.app.bean.cache.redis(this._cacheName, this._cacheOptions.redis);
   }
 
   _getRedisKey(keyHash: '*' | string) {

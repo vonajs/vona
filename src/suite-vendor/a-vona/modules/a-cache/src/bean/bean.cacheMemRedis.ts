@@ -20,11 +20,17 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return this.redisSummer;
   }
 
-  public async get(key?: KEY): Promise<DATA | null | undefined> {
+  public async get(key?: KEY, ttl?: number): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
-    const _value = await cache.getex(redisKey, 'PX', this._cacheOptions.ttl);
+    ttl = ttl ?? this._cacheOptions.ttl;
+    let _value;
+    if (ttl) {
+      _value = await cache.getex(redisKey, 'PX', ttl);
+    } else {
+      _value = await cache.get(redisKey);
+    }
     return _value ? JSON.parse(_value) : undefined;
   }
 
