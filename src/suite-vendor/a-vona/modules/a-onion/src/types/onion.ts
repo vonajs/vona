@@ -1,5 +1,5 @@
 import { IDecoratorBeanOptionsBase, PowerPartial } from 'vona';
-import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
+import { VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');

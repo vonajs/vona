@@ -53,7 +53,7 @@ export class CliToolsDeps extends BeanCliBase {
     await this._generatePkgFromPkgOriginal(pkgOriginal, pkgFile);
   }
 
-  async _generatePackageJson_prepareDeps(projectPath: string) {}
+  async _generatePackageJson_prepareDeps(_projectPath: string) {}
 
   _getProjectMode(projectPath: string) {
     const vonaPath = this._getVonaPath(projectPath);

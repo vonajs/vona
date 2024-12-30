@@ -9,7 +9,7 @@ import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourc
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
-import { getOnionMetasMeta, getOnionScenesMeta } from 'vona-shared';
+import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 

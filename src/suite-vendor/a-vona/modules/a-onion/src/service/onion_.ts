@@ -1,5 +1,5 @@
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
-import { IModule, OnionSceneMeta } from '@cabloy/module-info';
+import { getOnionScenesMeta, IModule, OnionSceneMeta } from '@cabloy/module-info';
 import {
   appMetadata,
   appResource,
@@ -12,7 +12,6 @@ import {
   VonaContext,
 } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { getOnionScenesMeta } from 'vona-shared';
 import {
   IOnionExecuteCustom,
   IOnionOptionsDeps,

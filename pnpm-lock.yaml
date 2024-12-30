@@ -972,6 +972,9 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-core:
     dependencies:
+      '@cabloy/module-info':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/module-info
       '@cabloy/word-utils':
         specifier: ^1.0.8
         version: 1.0.8

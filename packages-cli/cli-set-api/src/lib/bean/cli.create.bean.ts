@@ -1,9 +1,8 @@
 import { BeanCliBase } from '@cabloy/cli';
-import { IModuleInfo } from '@cabloy/module-info';
-import path from 'path';
+import { getOnionMetasMeta, getOnionScenesMeta, IModuleInfo } from '@cabloy/module-info';
 import fs from 'fs';
+import path from 'path';
 import { __ThisSetName__ } from '../this.js';
-import { getOnionScenesMeta, getOnionMetasMeta } from 'vona-shared';
 
 const __decorators = {
   virtual: 'Virtual',
