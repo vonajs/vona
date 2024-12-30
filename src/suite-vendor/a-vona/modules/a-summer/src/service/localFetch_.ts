@@ -18,44 +18,44 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
     super.__init__(cacheName, cacheOptions);
   }
 
-  async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const fn_get = options?.get;
     if (fn_get) {
-      return await fn_get(key, options, keyHash);
+      return await fn_get(key, options);
     } else if (cast<ISummerCacheGet<KEY, DATA>>(this.cacheBeanNative).getNative) {
-      return await cast<ISummerCacheGet<KEY, DATA>>(this.cacheBeanNative).getNative(key, options, keyHash);
+      return await cast<ISummerCacheGet<KEY, DATA>>(this.cacheBeanNative).getNative(key, options);
     }
     return undefined;
   }
 
-  async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // mget
     const fn_mget = options?.mget;
     if (fn_mget) {
-      return await fn_mget(keys, options, keysHash);
+      return await fn_mget(keys, options);
     }
     const cacheBean = cast<ISummerCacheMGet<KEY, DATA> | undefined>(this.cacheBeanNative);
     if (cacheBean?.mgetNative) {
-      return await cacheBean.mgetNative(keys, options, keysHash);
+      return await cacheBean.mgetNative(keys, options);
     }
     // fallback
     const values: Array<DATA | null | undefined> = [];
     for (let i = 0; i < keys.length; i++) {
-      values.push(await this.get(keysHash[i], keys[i], options));
+      values.push(await this.get(keys[i], options));
     }
     return values;
   }
 
-  async peek(_keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async peek(_key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // just return undefined
     return undefined;
   }
 
-  async del(_keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async del(_key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // do nothing
   }
 
-  async mdel(_keysHash: string[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async mdel(_keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // do nothing
   }
 
