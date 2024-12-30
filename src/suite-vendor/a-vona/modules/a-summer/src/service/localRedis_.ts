@@ -12,11 +12,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
 {
   _redisSummer: Redis;
 
-  async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = await this.cacheRedis.get(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
-      value = await layered.get(keyHash, key, options);
+      value = await layered.get(key, options);
       await this.cacheRedis.set(value!, key);
     }
     return value;
