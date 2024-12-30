@@ -1,13 +1,24 @@
+import { VonaConfigMeta } from './vona.js';
+import { ZovaConfigMeta } from './zova.js';
+
 export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';
 
 export interface IModuleCapabilities {
-  monkey: boolean;
-  sync: boolean;
-  icon: boolean;
-  theme: boolean;
-  locale: boolean;
-  preload: boolean;
+  monkey?: boolean;
+  sync?: boolean;
+  icon?: boolean;
+  theme?: boolean;
+  locale?: boolean;
+  preload?: boolean;
+}
+
+export interface IModuleCapabilitiesZova extends IModuleCapabilities {
+  meta?: ZovaConfigMeta;
+}
+
+export interface IModuleCapabilitiesVona extends IModuleCapabilities {
+  meta?: VonaConfigMeta;
 }
 
 export interface IModuleInfo {
@@ -72,7 +83,7 @@ export interface IModulePackage {
   name: string;
   version: string;
   vonaModule?: {
-    capabilities?: IModuleCapabilities;
+    capabilities?: IModuleCapabilitiesVona;
     fileVersion: number;
     dependencies?: Record<string, string>;
     globalDependencies?: Record<string, string | boolean>;
@@ -80,7 +91,7 @@ export interface IModulePackage {
     metas?: OnionMetasMeta;
   };
   zovaModule?: {
-    capabilities?: IModuleCapabilities;
+    capabilities?: IModuleCapabilitiesZova;
     dependencies?: Record<string, string>;
     globalDependencies?: Record<string, string | boolean>;
     bundle?: {
