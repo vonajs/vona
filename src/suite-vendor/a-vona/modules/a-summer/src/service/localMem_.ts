@@ -20,7 +20,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   }
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
-    // peek
+    // mget
     const values = this.cacheMem.mget(keys);
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];

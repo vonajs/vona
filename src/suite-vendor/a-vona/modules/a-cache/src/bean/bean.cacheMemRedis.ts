@@ -34,6 +34,30 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
+  public async mget(keys?: KEY[], ttl?: number): Promise<Array<DATA | null | undefined>> {
+    if (!keys || keys.length === 0) return [];
+    const cache = this.__cacheInstance;
+    if (!cache) return [];
+    const redisKeys = this.__getRedisKeys(keys);
+    const _values = await cache.mget(redisKeys);
+    const values = _values.map(v => (v ? JSON.parse(v) : undefined));
+    ttl = ttl ?? this._cacheOptions.ttl;
+    if (ttl) {
+      const redisKeysEx: string[] = [];
+      for (let i = 0; i < redisKeys.length; i++) {
+        if (!!_values[i]) {
+          redisKeysEx.push(redisKeys[i]);
+        }
+      }
+      let multi = cache.multi();
+      for (const redisKey of redisKeysEx) {
+        multi = multi.pexpire(redisKey, ttl);
+      }
+      await multi.exec();
+    }
+    return values;
+  }
+
   public async peek(key?: KEY): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
@@ -52,6 +76,24 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     } else {
       await cache.set(redisKey, JSON.stringify(value));
     }
+  }
+
+  public async mset(values?: DATA[], keys?: KEY[], ttl?: number): Promise<void> {
+    if (!values || values.length === 0) return;
+    if (!keys || keys.length === 0) return;
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    ttl = ttl ?? this._cacheOptions.ttl;
+    let multi = cache.multi();
+    for (let i = 0; i < keys.length; i++) {
+      const redisKey = this.__getRedisKey(keys[i]);
+      if (ttl) {
+        multi = multi.set(redisKey, JSON.stringify(values[i]), 'PX', ttl);
+      } else {
+        multi = multi.set(redisKey, JSON.stringify(values[i]));
+      }
+    }
+    await multi.exec();
   }
 
   public async getset(value?: DATA, key?: KEY, ttl?: number): Promise<DATA | null | undefined> {
