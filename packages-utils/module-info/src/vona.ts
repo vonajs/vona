@@ -5,4 +5,9 @@ export interface VonaConfigMeta {
   mode: VonaMetaMode;
 }
 
+export interface VonaOnionOptionsMeta {
+  flavor?: VonaMetaFlavor | VonaMetaFlavor[];
+  mode?: VonaMetaMode | VonaMetaMode[];
+}
+
 export interface VonaMetaFlavorExtend {}

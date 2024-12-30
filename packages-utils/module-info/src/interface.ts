@@ -1,5 +1,5 @@
-import { VonaConfigMeta } from './vona.js';
-import { ZovaConfigMeta } from './zova.js';
+import { VonaOnionOptionsMeta } from './vona.js';
+import { ZovaOnionOptionsMeta } from './zova.js';
 
 export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';
@@ -14,11 +14,11 @@ export interface IModuleCapabilities {
 }
 
 export interface IModuleCapabilitiesZova extends IModuleCapabilities {
-  meta?: ZovaConfigMeta;
+  meta?: ZovaOnionOptionsMeta;
 }
 
 export interface IModuleCapabilitiesVona extends IModuleCapabilities {
-  meta?: VonaConfigMeta;
+  meta?: VonaOnionOptionsMeta;
 }
 
 export interface IModuleInfo {

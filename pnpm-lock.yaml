@@ -56,6 +56,9 @@ importers:
       vona-module-a-aspect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-aspect
+      vona-module-a-b:
+        specifier: workspace:^
+        version: link:src/suite/a-b/modules/a-b
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
@@ -1128,6 +1131,14 @@ importers:
         version: link:modules/vona-test
 
   src/suite-vendor/vona-test/modules/vona-test: {}
+
+  src/suite/a-b:
+    dependencies:
+      vona-module-a-b:
+        specifier: workspace:^
+        version: link:modules/a-b
+
+  src/suite/a-b/modules/a-b: {}
 
   src/suite/a-home:
     dependencies:
