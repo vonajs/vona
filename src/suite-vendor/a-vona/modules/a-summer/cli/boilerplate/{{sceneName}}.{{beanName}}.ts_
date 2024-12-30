@@ -9,7 +9,7 @@ export class SummerCache<%=argv.beanNameCapitalize%>
   implements ISummerCacheGet<TSummerCache<%=argv.beanNameCapitalize%>Key, TSummerCache<%=argv.beanNameCapitalize%>Data>
 {
   async getNative(
-    _key: TSummerCache<%=argv.beanNameCapitalize%>Key,
+    _key?: TSummerCache<%=argv.beanNameCapitalize%>Key,
     _options?: TSummerCacheActionOptions<TSummerCache<%=argv.beanNameCapitalize%>Key, TSummerCache<%=argv.beanNameCapitalize%>Data>,
   ): Promise<TSummerCache<%=argv.beanNameCapitalize%>Data | null | undefined> {}
 }

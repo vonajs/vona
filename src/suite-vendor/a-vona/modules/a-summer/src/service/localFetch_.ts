@@ -18,7 +18,7 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
     super.__init__(cacheName, cacheOptions);
   }
 
-  async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const fn_get = options?.get;
     if (fn_get) {
       return await fn_get(key, options);
@@ -46,12 +46,12 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
     return values;
   }
 
-  async peek(_key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async peek(_key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // just return undefined
     return undefined;
   }
 
-  async del(_key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async del(_key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // do nothing
   }
 

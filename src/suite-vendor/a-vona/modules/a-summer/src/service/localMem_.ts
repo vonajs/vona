@@ -9,7 +9,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
-  async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = this.cacheMem.get(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
@@ -46,7 +46,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     return values;
   }
 
-  async del(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async del(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     // del on this worker+broadcast
     this.cacheMem.del(key);
     // del layered
@@ -70,7 +70,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     await layered.clear(options);
   }
 
-  async peek(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async peek(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = this.cacheMem.peek(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);

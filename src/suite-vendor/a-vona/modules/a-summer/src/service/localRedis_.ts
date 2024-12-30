@@ -9,7 +9,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
-  async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = await this.cacheRedis.get(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
@@ -46,7 +46,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     return values;
   }
 
-  async del(key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async del(key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     await this.cacheRedis.del(key);
   }
 
@@ -58,7 +58,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     await this.cacheRedis.clear();
   }
 
-  async peek(key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async peek(key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     const value = await this.cacheRedis.peek(key);
     // need not call layered.peek
     // if (this.__checkValueEmpty(value, options)) {
