@@ -20,46 +20,6 @@ declare module 'vona' {
   }
 }
 /** bean: end */
-/** broadcast: begin */
-export * from '../bean/broadcast.memClear.js';
-export * from '../bean/broadcast.memDel.js';
-export * from '../bean/broadcast.memMultiDel.js';
-
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
-declare module 'vona-module-a-broadcast' {
-  export interface IBroadcastRecord {
-    'a-summer:memClear': IDecoratorBroadcastOptions;
-    'a-summer:memDel': IDecoratorBroadcastOptions;
-    'a-summer:memMultiDel': IDecoratorBroadcastOptions;
-  }
-}
-declare module 'vona-module-a-summer' {
-  export interface BroadcastMemClear {
-    /** @internal */
-    get scope(): ScopeModuleASummer;
-  }
-
-  export interface BroadcastMemDel {
-    /** @internal */
-    get scope(): ScopeModuleASummer;
-  }
-
-  export interface BroadcastMemMultiDel {
-    /** @internal */
-    get scope(): ScopeModuleASummer;
-  }
-}
-/** broadcast: end */
-/** broadcast: begin */
-import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
-import { BroadcastMemDel } from '../bean/broadcast.memDel.js';
-import { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
-export interface IModuleBroadcast {
-  memClear: BroadcastMemClear;
-  memDel: BroadcastMemDel;
-  memMultiDel: BroadcastMemMultiDel;
-}
-/** broadcast: end */
 /** service: begin */
 export * from '../service/localFetch_.js';
 export * from '../service/localMem_.js';
@@ -83,7 +43,6 @@ export class ScopeModuleASummer extends BeanScopeBase {}
 export interface ScopeModuleASummer {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  broadcast: IModuleBroadcast;
 }
 
 import 'vona';
