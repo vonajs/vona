@@ -32,14 +32,24 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     return this.lruCache;
   }
 
-  public get(key?: KEY): DATA | undefined {
+  public get(key?: KEY): DATA | null | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
     return cache.get(keyHash);
   }
 
-  public peek(key?: KEY): DATA | undefined {
+  public mget(keys?: KEY[]): Array<DATA | null | undefined> {
+    if (!keys || keys.length === 0) return [];
+    const cache = this.__cacheInstance;
+    if (!cache) return [];
+    const keysHash = this.__getKeysHash(keys);
+    const values = keysHash.map(keyHash => cache.get(keyHash));
+    const keyHash = this.__getKeyHash(key);
+    return cache.get(keyHash);
+  }
+
+  public peek(key?: KEY): DATA | null | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
@@ -53,7 +63,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     cache.set(keyHash, value, { ttl });
   }
 
-  public getset(value?: DATA, key?: KEY, ttl?: number): DATA | undefined {
+  public getset(value?: DATA, key?: KEY, ttl?: number): DATA | null | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const valueOld = this.get(key);
@@ -87,7 +97,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
-    const keysHash = keys.map(key => this.__getKeyHash(key));
+    const keysHash = this.__getKeysHash(keys);
     // del on this worker
     keysHash.forEach(keyHash => cache.delete(keyHash));
     // del on other workers by broadcast

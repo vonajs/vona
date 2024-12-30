@@ -20,7 +20,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return this.redisSummer;
   }
 
-  public async get(key?: KEY): Promise<DATA | undefined> {
+  public async get(key?: KEY): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
@@ -28,7 +28,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async peek(key?: KEY): Promise<DATA | undefined> {
+  public async peek(key?: KEY): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
@@ -48,7 +48,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
-  public async getset(value?: DATA, key?: KEY, ttl?: number): Promise<DATA | undefined> {
+  public async getset(value?: DATA, key?: KEY, ttl?: number): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return;
     const redisKey = this.__getRedisKey(key);
@@ -83,7 +83,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
-    const redisKeys = keys.map(key => this.__getRedisKey(key));
+    const redisKeys = this.__getRedisKeys(keys);
     await cache.del(redisKeys);
   }
 
@@ -108,5 +108,9 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     const keyHash = key === '*' ? '*' : this.__getKeyHash(key);
     const iid = this.ctx.instance ? this.ctx.instance.id : 0;
     return `${iid}!${this._cacheName}!${keyHash}`;
+  }
+
+  private __getRedisKeys(keys: KEY[]): string[] {
+    return keys.map(key => this.__getRedisKey(key));
   }
 }

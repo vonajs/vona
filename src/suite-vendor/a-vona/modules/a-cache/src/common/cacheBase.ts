@@ -43,4 +43,8 @@ export class CacheBase<CACHEOPTIONS extends IOnionOptionsEnable = IOnionOptionsE
     if (!cache) throw new Error('cache not enabled');
     return getKeyHash(key ?? 'default');
   }
+
+  protected __getKeysHash(keys: KEY[]): string[] {
+    return keys.map(key => this.__getKeyHash(key));
+  }
 }

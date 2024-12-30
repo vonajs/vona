@@ -1,10 +1,8 @@
-import LRUCache from 'lru-cache';
 import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona-module-a-web';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 import { TSummerCacheActionOptions } from '../types/summerCache.js';
-
-const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
+import { BeanCacheMemBase } from 'vona-module-a-cache';
 
 @Service()
 export class ServiceLocalMem<KEY = any, DATA = any>
@@ -12,11 +10,11 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   implements ICacheLayeredBase<KEY, DATA>
 {
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    let value = this.lruCache.get(keyHash);
+    let value = this.cacheMem.get(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      this.lruCache.set(keyHash, value);
+      this.cacheMem.set(value!, key);
     }
     return value;
   }
@@ -121,20 +119,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     return this.localFetch;
   }
 
-  get lruCache(): LRUCache<string, any> {
-    if (!this.memoryInstance[this._cacheName]) {
-      this.memoryInstance[this._cacheName] = new LRUCache<string, any>(this._cacheOptions.mem as any);
-    }
-    return this.memoryInstance[this._cacheName];
-  }
-
-  get memoryInstance() {
-    if (!this.app[SUMMERCACHEMEMORY]) {
-      this.app[SUMMERCACHEMEMORY] = {};
-    }
-    if (!this.app[SUMMERCACHEMEMORY][this.ctx.subdomain]) {
-      this.app[SUMMERCACHEMEMORY][this.ctx.subdomain] = {};
-    }
-    return this.app[SUMMERCACHEMEMORY][this.ctx.subdomain];
+  get cacheMem(): BeanCacheMemBase<KEY, DATA> {
+    return this.app.bean.cache.mem(this._cacheName, this._cacheOptions.mem);
   }
 }
