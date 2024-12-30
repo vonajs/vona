@@ -32,7 +32,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     return this.lruCache;
   }
 
-  public get(key?: KEY): DATA | null | undefined {
+  public get(key?: KEY, ttl?: number): DATA | null | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
@@ -59,6 +59,18 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!cache) return;
     const keyHash = this.__getKeyHash(key);
     cache.set(keyHash, value, { ttl });
+  }
+
+  public mset(values?: DATA[], keys?: KEY[], ttl?: number): void {
+    if (!values || values.length === 0) return;
+    if (!keys || keys.length === 0) return;
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    ttl = ttl ?? this._cacheOptions.ttl;
+    for (let i = 0; i < keys.length; i++) {
+      const keyHash = this.__getKeyHash(keys[i]);
+      cache.set(keyHash, values[i], { ttl });
+    }
   }
 
   public getset(value?: DATA, key?: KEY, ttl?: number): DATA | null | undefined {

@@ -36,9 +36,9 @@ export class ServiceLocalMem<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // console.log('-------mem:', valuesMissing);
       // set/merge
+      this.cacheMem.mset(valuesMissing as any, keysMissing);
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
-        this.cacheMem.set(valueMissing!, keysMissing[i]);
         values[indexesMissing[i]] = valueMissing;
       }
     }
