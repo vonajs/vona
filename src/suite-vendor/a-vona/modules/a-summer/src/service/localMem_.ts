@@ -57,50 +57,28 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   }
 
   async mdel(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
-    // del on this worker
-    keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
-    // del on other workers by broadcast
-    this.scope.broadcast.memMultiDel.emit({
-      cacheName: this._cacheName,
-      cacheOptions: this._cacheOptions,
-      keysHash,
-      keys,
-      options,
-    });
+    // del on this worker+broadcast
+    this.cacheMem.mdel(keys);
     // del layered
     const layered = this.__getLayered(options);
     await layered.mdel(keysHash, keys, options);
   }
 
   async clear(options?: TSummerCacheActionOptions<KEY, DATA>) {
-    // clear on this worker
-    this.lruCache.clear();
-    // clear on other workers by broadcast
-    this.scope.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOptions, options });
+    // clear on this worker+broadcast
+    this.cacheMem.clear();
     // clear layered
     const layered = this.__getLayered(options);
     await layered.clear(options);
   }
 
   async peek(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    let value = this.lruCache.peek(keyHash);
+    let value = this.cacheMem.peek(key);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.peek(keyHash, key, options);
     }
     return value;
-  }
-
-  __delRaw(keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
-    this.lruCache.delete(keyHash);
-  }
-
-  __mdelRaw(keysHash: string[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
-    keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
-  }
-
-  __clearRaw(_options?: TSummerCacheActionOptions<KEY, DATA>) {
-    this.lruCache.clear();
   }
 
   __getLayered(options?: TSummerCacheActionOptions<KEY, DATA>): ICacheLayeredBase<KEY, DATA> {
