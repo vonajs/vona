@@ -1094,14 +1094,7 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-static: {}
 
-  src/suite-vendor/a-vona/modules/a-summer:
-    dependencies:
-      lru-cache:
-        specifier: ^8.0.4
-        version: 8.0.5
-      object-hash:
-        specifier: ^3.0.0
-        version: 3.0.0
+  src/suite-vendor/a-vona/modules/a-summer: {}
 
   src/suite-vendor/a-vona/modules/a-user: {}
 
