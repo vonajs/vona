@@ -26,8 +26,8 @@ export class ControllerCacheRedis extends BeanBase {
     value = await this.scope.cacheRedis.test.get();
     assert.equal(value, 'zhennann');
 
-    // remove
-    await this.scope.cacheRedis.test.remove();
+    // del
+    await this.scope.cacheRedis.test.del();
     res = await this.scope.cacheRedis.test.has();
     assert.equal(res, false);
 

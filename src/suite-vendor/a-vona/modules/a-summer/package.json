@@ -37,8 +37,5 @@
     "Cabloy Module"
   ],
   "author": "zhennann",
-  "dependencies": {
-    "lru-cache": "^8.0.4",
-    "object-hash": "^3.0.0"
-  }
+  "dependencies": {}
 }
