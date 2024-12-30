@@ -142,7 +142,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     const keyPrefix = cache.options.keyPrefix;
     const keyPattern = `${keyPrefix}${redisKey}`;
     const keys = await cache.keys(keyPattern);
-    const keysDel: any[] = [];
+    const keysDel: string[] = [];
     for (const fullKey of keys) {
       const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
       keysDel.push(key);
