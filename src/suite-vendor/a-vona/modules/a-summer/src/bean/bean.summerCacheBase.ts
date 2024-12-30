@@ -96,6 +96,7 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return this.localRedis;
   }
 
+  // todo: remove
   private __getKeyHash(key: KEY): string {
     if (key === undefined || key === null) {
       key = 'default' as KEY;
@@ -110,6 +111,7 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return key;
   }
 
+  // todo: remove
   private __getKeysHash(keys: KEY[]): string[] {
     return keys.map(key => this.__getKeyHash(key));
   }
