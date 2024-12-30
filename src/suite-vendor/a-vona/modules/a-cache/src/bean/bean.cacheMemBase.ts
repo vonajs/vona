@@ -83,6 +83,22 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     });
   }
 
+  mdel(keys: KEY[]): void {
+    if (!keys || keys.length === 0) return;
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    const keysHash = keys.map(key => this.__getKeyHash(key));
+    // del on this worker
+    keysHash.forEach(keyHash => cache.delete(keyHash));
+    // del on other workers by broadcast
+    this.$scope.cache.broadcast.memMultiDel.emit({
+      cacheName: this._cacheName,
+      cacheOptions: this._cacheOptions,
+      keysHash,
+      keys,
+    });
+  }
+
   clear(): void {
     const cache = this.__cacheInstance;
     if (!cache) return;
@@ -94,5 +110,11 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     cache.delete(keyHash);
+  }
+
+  protected __mdelRaw(keysHash: string[], _keys: KEY[]) {
+    const cache = this.__cacheInstance;
+    if (!cache) return undefined;
+    keysHash.forEach(keyHash => cache.delete(keyHash));
   }
 }
