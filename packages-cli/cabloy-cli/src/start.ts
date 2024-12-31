@@ -4,14 +4,15 @@ import { BeanCli } from './lib/bean.cli.js';
 import { CliCommand } from './lib/cli.js';
 import { collectCommands } from './lib/commands.js';
 import { checkForUpdates } from './utils.js';
+import { TypeBrandName } from '@cabloy/module-info';
 const DISPATCH = Symbol.for('eb:Command#dispatch');
 const PARSE = Symbol.for('eb:Command#parse');
 
 export class CabloyCommand extends CommonBin {
-  brandName: string;
+  brandName: TypeBrandName;
   defaultSetName: string;
 
-  constructor(brandName: string, rawArgv?) {
+  constructor(brandName: TypeBrandName, rawArgv?) {
     super(rawArgv);
     this.usage = `Usage: ${brandName} [command] [options]`;
     this.defaultSetName = brandName === 'zova' ? 'front' : 'api';
@@ -46,7 +47,7 @@ export class CabloyCommand extends CommonBin {
     const indexCommand = indexBrandName > -1 ? indexBrandName + 1 : 0;
     Object.assign(argv, this._prepareCliFullName(parsed._[indexCommand]));
     // cli meta
-    const context = { argv };
+    const context = { brandName: this.brandName, argv };
     const beanCli = new BeanCli();
     const meta = await beanCli.meta({ context });
     // cli run

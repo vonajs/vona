@@ -3,6 +3,7 @@ import { ZovaOnionOptionsMeta } from './zova.js';
 
 export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';
+export type TypeBrandName = 'zova' | 'vona';
 
 export interface IModuleCapabilities {
   monkey?: boolean;

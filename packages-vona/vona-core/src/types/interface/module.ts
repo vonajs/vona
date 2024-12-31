@@ -2,8 +2,6 @@ import { Constructable } from '../../lib/decorator/type/constructable.js';
 import { VonaApplication } from '../application/app.js';
 import { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
 
-export * from '@cabloy/module-info';
-
 export type TypeModuleResourceLocales = Record<string, object>;
 export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;
 export type TypeModuleResourceErrors = Record<number, string>;

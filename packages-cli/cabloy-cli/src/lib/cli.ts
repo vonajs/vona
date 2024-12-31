@@ -29,7 +29,13 @@ export class CliCommand extends BaseCommand {
     argv = Object.assign({}, argv, this.__argv);
     delete argv.$0;
     // context
-    const context = { argv, cwd, env: this._adjustEnv({ env }), rawArgv };
+    const context = {
+      brandName: process.env.CabloyCliBrandName as any,
+      argv,
+      cwd,
+      env: this._adjustEnv({ env }),
+      rawArgv,
+    };
     // log start
     // eslint-disable-next-line no-console
     console.log(`${process.env.CabloyCliBrandName} ${chalk.cyan(argv.cliFullName)} at %s\n`, cwd);

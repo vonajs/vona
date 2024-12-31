@@ -1,3 +1,5 @@
+import { TypeBrandName } from '@cabloy/module-info';
+
 export interface ICommandArgv {
   // [Prop: string]: any;
   projectPath: string;
@@ -8,6 +10,7 @@ export interface ICommandArgv {
 }
 
 export interface ICommandContext {
+  brandName: TypeBrandName;
   argv: ICommandArgv;
 }
 
