@@ -12,6 +12,29 @@ export class LocalCommon {
     this.cli = cli;
   }
 
+  async _generateTypeModulesFile(projectPath: string, force: boolean) {
+    const typeFile = path.join(projectPath, 'src/backend/typing/modules.d.ts');
+    let content = '';
+    // // all suites
+    // for (const key in this.modulesMeta.suites) {
+    //   const suite = this.modulesMeta.suites[key];
+    //   content += `import '${suite.package.name}';\n`;
+    // }
+    // all modules
+    this.cli.modulesMeta.modulesArray.forEach(module => {
+      content += `import '${module.package.name}';\n`;
+    });
+    await fse.writeFile(typeFile, content);
+    // all modules: type file
+    for (const module of this.cli.modulesMeta.modulesArray) {
+      if (module.info.node_modules) continue;
+      const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
+      if (force || !fse.existsSync(moduleTypeFile)) {
+        await fse.ensureLink(typeFile, moduleTypeFile);
+      }
+    }
+  }
+
   async _generatePackageJson(projectPath: string) {
     const pkgFile = path.join(projectPath, 'package.json');
     const pkgOriginalFile = path.join(projectPath, 'package.original.json');

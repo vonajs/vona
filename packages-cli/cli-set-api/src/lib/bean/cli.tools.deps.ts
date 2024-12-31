@@ -26,7 +26,7 @@ export class CliToolsDeps extends BeanCliBase {
     // generate package.json
     await this.common._generatePackageJson(projectPath);
     // generate type modules file
-    await this._generateTypeModulesFile(projectPath, force);
+    await this.common._generateTypeModulesFile(projectPath, force);
     // generate type project file
     await this._generateTypeProjectFile(projectPath);
     // tsc
@@ -73,29 +73,6 @@ export class CliToolsDeps extends BeanCliBase {
     if (exists && JSON.stringify(referencesNew, null, 2) === JSON.stringify(referencesOld, null, 2)) return;
     const contentNew = { ...content, references: referencesNew };
     await fse.outputFile(fileConfig, JSON.stringify(contentNew, null, 2));
-  }
-
-  async _generateTypeModulesFile(projectPath: string, force: boolean) {
-    const typeFile = path.join(projectPath, 'src/backend/typing/modules.d.ts');
-    let content = '';
-    // // all suites
-    // for (const key in this.modulesMeta.suites) {
-    //   const suite = this.modulesMeta.suites[key];
-    //   content += `import '${suite.package.name}';\n`;
-    // }
-    // all modules
-    this.modulesMeta.modulesArray.forEach(module => {
-      content += `import '${module.package.name}';\n`;
-    });
-    await fse.writeFile(typeFile, content);
-    // all modules: type file
-    for (const module of this.modulesMeta.modulesArray) {
-      if (module.info.node_modules) continue;
-      const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
-      if (force || !fse.existsSync(moduleTypeFile)) {
-        await fse.ensureLink(typeFile, moduleTypeFile);
-      }
-    }
   }
 
   async _tsc() {
