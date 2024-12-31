@@ -14,6 +14,9 @@
       "moment": true,
       "uuid": true,
       "vona-shared": true
+    },
+    "globalDependenciesDev": {
+      "@types/retry": true
     }
   },
   "type": "module",
@@ -53,6 +56,9 @@
     "stack-trace": "^1.0.0-pre2",
     "uuid": "^11.0.3",
     "vona-shared": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/retry": "^0.12.5"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

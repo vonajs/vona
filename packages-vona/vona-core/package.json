@@ -47,7 +47,6 @@
     "@cabloy/module-info-pro": "workspace:^",
     "@cabloy/set": "^1.0.7",
     "@cabloy/word-utils": "^1.0.8",
-    "@types/retry": "^0.12.5",
     "@zhennann/egg-passport": "^2.1.5",
     "chalk": "^3.0.0",
     "chokidar": "^3.5.2",
@@ -67,6 +66,9 @@
     "socket.io": "^2.3.0",
     "uuid": "^11.0.3",
     "vona-shared": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/retry": "^0.12.5"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
