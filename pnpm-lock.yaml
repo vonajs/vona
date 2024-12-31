@@ -56,9 +56,6 @@ importers:
       vona-module-a-aspect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-aspect
-      vona-module-a-b:
-        specifier: workspace:^
-        version: link:src/suite/a-b/modules/a-b
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
@@ -216,9 +213,9 @@ importers:
       '@types/node':
         specifier: ^22.10.2
         version: 22.10.2
-      '@zhennann/framework7':
-        specifier: ^5.8.2
-        version: 5.8.2
+      '@types/retry':
+        specifier: ^0.12.5
+        version: 0.12.5
       '@zhennann/socketio':
         specifier: ^4.0.2
         version: 4.0.2
@@ -327,6 +324,9 @@ importers:
       vona-mock:
         specifier: workspace:^
         version: link:packages-vona/vona-mock
+      vona-module-a-b:
+        specifier: workspace:^
+        version: link:src/suite/a-b/modules/a-b
       vue-eslint-parser:
         specifier: ^9.4.2
         version: 9.4.3(eslint@8.57.1)
@@ -775,9 +775,6 @@ importers:
       '@cabloy/word-utils':
         specifier: ^1.0.8
         version: 1.0.8
-      '@types/retry':
-        specifier: ^0.12.5
-        version: 0.12.5
       '@zhennann/egg-passport':
         specifier: ^2.1.5
         version: 2.1.5
@@ -835,6 +832,10 @@ importers:
       vona-shared:
         specifier: workspace:^
         version: link:../vona-shared
+    devDependencies:
+      '@types/retry':
+        specifier: ^0.12.5
+        version: 0.12.5
 
   packages-vona/vona-mock:
     dependencies:
@@ -1011,6 +1012,10 @@ importers:
       vona-shared:
         specifier: workspace:^
         version: link:../../../../../packages-vona/vona-shared
+    devDependencies:
+      '@types/retry':
+        specifier: ^0.12.5
+        version: 0.12.5
 
   src/suite-vendor/a-vona/modules/a-database:
     dependencies:
@@ -2573,9 +2578,6 @@ packages:
   '@zhennann/debounce@1.0.1':
     resolution: {integrity: sha512-gK4iXtSBL3sd24JJU5cOiDyjjVpXMIGNYp7QNJpuC8WqcOJBy8NiCqeTy+8CMf63Zn1Ei4VApoIiFAC7/qHjxw==}
 
-  '@zhennann/dom7@2.1.5':
-    resolution: {integrity: sha512-pq/iwsQxD30oAPkM/49S+t5fR1vvChThUJHrnp/2qJUoIgv8z6yott7BxahOXkOYEnKgvFVCngDkMq/Rqam3PQ==}
-
   '@zhennann/egg-bin@7.0.1':
     resolution: {integrity: sha512-a9PMogk4lApLVpBbI3u2MNxF40OYiC5p5DzEPJf03tJXPloIc5+jSbYumfrhow4VKima3IlEX3ULZIJWfODFDw==}
     engines: {node: '>= 14.0.0'}
@@ -2598,9 +2600,6 @@ packages:
   '@zhennann/ejs@3.0.1':
     resolution: {integrity: sha512-AkfhJ8D8X+sLyBTl5Lrp7nT0Gg4apE+9CcPk5EFolC3O0Qhom4QDUJxaczElsSyNzbSAkFNRzcNW9MTeJQOv3w==}
     engines: {node: '>=0.10.0'}
-
-  '@zhennann/framework7@5.8.2':
-    resolution: {integrity: sha512-MUF+Ic2RqwV9BplSAXcnN8qz20JwrVSFTHS0nylKMcMXi4PR0ISVn5Ps6L111N47hSLANFoUCh6LA9xU4z+SxA==}
 
   '@zhennann/socketio@4.0.2':
     resolution: {integrity: sha512-SXWicISdQvd8wX4n8Oc9TUkYlnA3MDvLPntce8aFxbRao+ESsIT2mCYDAmqis+UyCq5IhUnKeW3rx1KsXS85Sg==}
@@ -6076,9 +6075,6 @@ packages:
   path-to-regexp@1.9.0:
     resolution: {integrity: sha512-xIp7/apCFJuUHdDLWe8O1HIkb0kQrOMb/0u6FXQjemHn/ii5LrIzU6bdECnsiTF/GjZkMEKg1xdiZwNqDYlZ6g==}
 
-  path-to-regexp@6.3.0:
-    resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
-
   path-type@1.1.0:
     resolution: {integrity: sha512-S4eENJz1pkiQn9Znv33Q+deTOKmbl+jj1Fl+qiP/vYezj+S8x+J3Uo0ISrx/QoEvIlOaDWJhPaRd1flJ9HXZqg==}
     engines: {node: '>=0.10.0'}
@@ -6871,9 +6867,6 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  ssr-window@2.0.0:
-    resolution: {integrity: sha512-NXzN+/HPObKAx191H3zKlYomE5WrVIkoCB5IaSdvKokxTpjBdWfr0RaP+1Z5KOfDT0ZVz+2tdtiBkhsEQ9p+0A==}
-
   stack-trace@0.0.10:
     resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
 
@@ -7072,10 +7065,6 @@ packages:
   tcp-proxy.js@1.5.0:
     resolution: {integrity: sha512-+BTS7RUwSHhkJdlqgCZ1Ta7U3Ei/vyaHe6uizj4t5IoUrFM55SLsFHzlZzOZvvtVdpGhQ0Y10UKjA7HTlxU5eQ==}
     engines: {node: '>=14.0.0'}
-
-  template7@1.4.2:
-    resolution: {integrity: sha512-eoKnScBMDk7lyj7+iCzKbxGiSLLlQk0DNvmclyJuMCUKxy9JrFuAB+GD5iplF4WiQPtMdI06CHHks3avL22JXA==}
-    engines: {node: '>= 0.10.0'}
 
   term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
@@ -9692,10 +9681,6 @@ snapshots:
 
   '@zhennann/debounce@1.0.1': {}
 
-  '@zhennann/dom7@2.1.5':
-    dependencies:
-      ssr-window: 2.0.0
-
   '@zhennann/egg-bin@7.0.1(@swc/core@1.10.3(@swc/helpers@0.5.15))(@types/node@22.10.2)(egg-mock@5.15.1(egg@3.29.0)(mocha@10.8.2)(urllib@2.44.0))(typescript@4.9.5)':
     dependencies:
       '@zhennann/common-bin': 4.0.0
@@ -9777,13 +9762,6 @@ snapshots:
       - supports-color
 
   '@zhennann/ejs@3.0.1': {}
-
-  '@zhennann/framework7@5.8.2':
-    dependencies:
-      '@zhennann/dom7': 2.1.5
-      path-to-regexp: 6.3.0
-      ssr-window: 2.0.0
-      template7: 1.4.2
 
   '@zhennann/socketio@4.0.2':
     dependencies:
@@ -13682,8 +13660,6 @@ snapshots:
     dependencies:
       isarray: 0.0.1
 
-  path-to-regexp@6.3.0: {}
-
   path-type@1.1.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -14607,8 +14583,6 @@ snapshots:
       safer-buffer: 2.1.2
       tweetnacl: 0.14.5
 
-  ssr-window@2.0.0: {}
-
   stack-trace@0.0.10: {}
 
   stack-trace@1.0.0-pre2: {}
@@ -14853,8 +14827,6 @@ snapshots:
       through2: 2.0.5
     transitivePeerDependencies:
       - supports-color
-
-  template7@1.4.2: {}
 
   term-size@2.2.1: {}
 

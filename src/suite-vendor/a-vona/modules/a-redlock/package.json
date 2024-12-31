@@ -7,6 +7,9 @@
     "globalDependencies": {
       "redlock": true
     },
+    "globalDependenciesDev": {
+      "@types/redlock": true
+    },
     "metas": {
       "redlock": {
         "scopeResource": true,
@@ -39,7 +42,9 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@types/redlock": "^4.0.7",
     "redlock": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/redlock": "^4.0.7"
   }
 }
