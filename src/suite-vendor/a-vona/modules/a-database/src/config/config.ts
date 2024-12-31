@@ -16,7 +16,7 @@ export const config = (_app: VonaApplication) => {
       mysql: 'a-databasedialect.databaseDialect.mysql',
       mysql2: 'a-databasedialect.databaseDialect.mysql2',
       pg: 'a-databasedialect.databaseDialect.pg',
-    } as TypeDataBaseConfigDialects,
+    } as unknown as TypeDataBaseConfigDialects,
     summer: {
       enable: true,
       meta: {} as IOnionOptionsMeta,
