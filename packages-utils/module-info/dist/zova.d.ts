@@ -6,6 +6,11 @@ export interface ZovaConfigMeta {
     mode: ZovaMetaMode;
     appMode: ZovaMetaAppMode;
 }
+export interface ZovaOnionOptionsMeta {
+    flavor?: ZovaMetaFlavor | ZovaMetaFlavor[];
+    mode?: ZovaMetaMode | ZovaMetaMode[];
+    appMode?: ZovaMetaAppMode | ZovaMetaAppMode[];
+}
 export interface ZovaMetaFlavorExtend {
 }
 export interface ZovaMetaAppModeExtend {

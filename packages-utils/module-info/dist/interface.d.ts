@@ -1,7 +1,8 @@
-import { VonaConfigMeta } from './vona.js';
-import { ZovaConfigMeta } from './zova.js';
+import { VonaOnionOptionsMeta } from './vona.js';
+import { ZovaOnionOptionsMeta } from './zova.js';
 export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';
+export type TypeBrandName = 'zova' | 'vona';
 export interface IModuleCapabilities {
     monkey?: boolean;
     sync?: boolean;
@@ -11,10 +12,10 @@ export interface IModuleCapabilities {
     preload?: boolean;
 }
 export interface IModuleCapabilitiesZova extends IModuleCapabilities {
-    meta?: ZovaConfigMeta;
+    meta?: ZovaOnionOptionsMeta;
 }
 export interface IModuleCapabilitiesVona extends IModuleCapabilities {
-    meta?: VonaConfigMeta;
+    meta?: VonaOnionOptionsMeta;
 }
 export interface IModuleInfo {
     pid: string;
@@ -108,7 +109,7 @@ export interface IGlobBeanFile {
     isVirtual: boolean;
 }
 export interface IMetadataCustomGenerateOptions {
-    cli: any;
+    cli: unknown;
     sceneName: string;
     sceneNameCapitalize: string;
     sceneMeta: OnionSceneMeta;
