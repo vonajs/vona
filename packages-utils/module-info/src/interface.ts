@@ -122,7 +122,7 @@ export interface IGlobBeanFile {
 }
 
 export interface IMetadataCustomGenerateOptions {
-  cli: any;
+  cli: unknown; // specific type by business: @cabloy/cli: BeanCliBase
   sceneName: string;
   sceneNameCapitalize: string;
   sceneMeta: OnionSceneMeta;

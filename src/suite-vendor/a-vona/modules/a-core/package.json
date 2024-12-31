@@ -17,6 +17,7 @@
       "vona-shared": true
     },
     "globalDependenciesDev": {
+      "@cabloy/cli": true,
       "@types/retry": true
     }
   },
@@ -60,6 +61,7 @@
     "vona-shared": "workspace:^"
   },
   "devDependencies": {
+    "@cabloy/cli": "workspace:^",
     "@types/retry": "^0.12.5"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
