@@ -52,27 +52,9 @@ export class CliToolsDeps extends BeanCliBase {
     const projectMode = this._getProjectMode(projectPath);
     const fileTemplate = this._resolveTemplatePath(`_tsconfig_${projectMode}.json`);
     const fileConfig = path.join(projectPath, 'tsconfig.json');
-    // content
-    let contentOld;
-    const exists = fse.existsSync(fileConfig);
-    if (exists) {
-      contentOld = (await fse.readFile(fileConfig)).toString();
-    } else {
-      contentOld = (await fse.readFile(fileTemplate)).toString();
+    if (!fse.existsSync(fileConfig)) {
+      await fse.copyFile(fileTemplate, fileConfig);
     }
-    const content = JSON.parse(contentOld);
-    const referencesOld = content.references;
-    // remove old
-    const referencesNew = referencesOld.filter(
-      item =>
-        !['src/suite/', 'src/module/', 'src/suite-vendor/', 'src/module-vendor/'].some(
-          item2 => item.path.indexOf(item2) > -1,
-        ),
-    );
-    //
-    if (exists && JSON.stringify(referencesNew, null, 2) === JSON.stringify(referencesOld, null, 2)) return;
-    const contentNew = { ...content, references: referencesNew };
-    await fse.outputFile(fileConfig, JSON.stringify(contentNew, null, 2));
   }
 
   async _tsc() {
