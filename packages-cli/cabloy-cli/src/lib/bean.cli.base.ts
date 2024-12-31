@@ -3,6 +3,7 @@ import { LocalConsole } from './local.console.js';
 import { LocalHelper } from './local.helper.js';
 import { LocalTemplate } from './local.template.js';
 import { CmdOptions } from '../types/argv.js';
+import { LocalCommon } from './local.common.js';
 
 export class BeanCliBase {
   options: CmdOptions;
@@ -10,6 +11,7 @@ export class BeanCliBase {
   __console: LocalConsole;
   __helper: LocalHelper;
   __template: LocalTemplate;
+  __common: LocalCommon;
   modulesMeta: Awaited<ReturnType<typeof glob>>;
 
   constructor(options: CmdOptions) {
@@ -36,6 +38,13 @@ export class BeanCliBase {
       this.__template = new LocalTemplate(this);
     }
     return this.__template;
+  }
+
+  get common(): LocalCommon {
+    if (!this.__common) {
+      this.__common = new LocalCommon(this);
+    }
+    return this.__common;
   }
 
   get context() {
