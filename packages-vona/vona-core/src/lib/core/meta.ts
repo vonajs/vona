@@ -2,16 +2,10 @@ import { AppReload } from '../module/reload/reload.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
-import {
-  IModule,
-  ISuite,
-  TypeModuleResourceLocaleModules,
-  TypeModuleResourceLocales,
-  EnumAppEvent,
-} from '../../types/index.js';
+import { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, EnumAppEvent } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
-import { VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
+import { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText, createAppText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {

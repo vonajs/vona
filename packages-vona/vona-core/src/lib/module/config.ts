@@ -1,4 +1,5 @@
-import { VonaApplication, IModule } from '../../types/index.js';
+import { IModule } from '@cabloy/module-info';
+import { VonaApplication } from '../../types/index.js';
 import { deepExtend } from '../utils/util.js';
 
 export default async function (app: VonaApplication, modules: Record<string, IModule>) {

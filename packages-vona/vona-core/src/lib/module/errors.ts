@@ -1,6 +1,7 @@
 import { ErrorClass } from '../bean/resource/error/errorClass.js';
-import { VonaApplication, IModule } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 import { deepExtend } from '../utils/util.js';
+import { IModule } from '@cabloy/module-info';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all errors

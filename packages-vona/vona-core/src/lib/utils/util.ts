@@ -7,9 +7,10 @@ import path from 'node:path';
 import os from 'node:os';
 import { URL } from 'url';
 import * as uuid from 'uuid';
-import { IModule, TypeMonkeyName, VonaContext } from '../../types/index.js';
+import { TypeMonkeyName, VonaContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { IModule } from '@cabloy/module-info';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
