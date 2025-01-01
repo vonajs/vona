@@ -22,7 +22,6 @@ export async function generateOnions(
   for (const globFile of globFiles) {
     const { fileContent, fileNameJSRelative, className, beanNameFull, isIgnore, isVirtual } = globFile;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
-    if (isIgnore) continue;
     // get scope() also can be ignored
     if (!['entity', 'dto'].includes(sceneName) && !isVirtual) {
       contentScopes.push(`
@@ -31,6 +30,7 @@ export async function generateOnions(
           get scope(): ${scopeModuleName};
         }`);
     }
+    if (isIgnore) continue;
     if (sceneMeta.optionsNone) continue;
     // fileInfo
     const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);

@@ -33,14 +33,12 @@ export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName
     const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
-    if (!isBeanGlobal || !isIgnore) {
-      // ignore virtual
-      contentScopes.push(`
+    // ignore virtual
+    contentScopes.push(`
         export interface ${className} {
           /** @internal */
           get scope(): ${scopeModuleName};
         }`);
-    }
     if (isBeanGlobal || !isIgnore) {
       contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
     }
