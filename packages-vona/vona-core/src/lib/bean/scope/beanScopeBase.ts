@@ -1,4 +1,3 @@
-import { BeanScopeBean } from './beanScopeBean.js';
 import { BeanScopeScene } from './beanScopeScene.js';
 import { BeanBaseSimple } from '../beanBaseSimple.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
@@ -9,13 +8,11 @@ import { getOnionMetasMeta } from '@cabloy/module-info';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
-const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
-  private [BeanModuleBean]: BeanScopeBean;
   private [BeanModuleUtil]: BeanScopeUtil;
   private __onionMetaNames: Record<string, boolean>;
   private __scenes: Record<string, BeanScopeScene> = {};
@@ -64,13 +61,6 @@ export class BeanScopeBase extends BeanBaseSimple {
     // constant
     if (prop === 'constant') {
       return this.app.meta.constants[moduleBelong];
-    }
-    // _bean
-    if (prop === '_bean') {
-      if (!this[BeanModuleBean]) {
-        this[BeanModuleBean] = this.bean._newBean(BeanScopeBean, moduleBelong);
-      }
-      return this[BeanModuleBean];
     }
     // util
     if (prop === 'util') {
