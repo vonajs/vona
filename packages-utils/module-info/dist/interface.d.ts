@@ -56,7 +56,7 @@ export interface OnionSceneMeta {
     optionsGlobalInterfaceName?: string;
     optionsGlobalInterfaceFrom?: string;
     scopeResource?: boolean;
-    beanLocal?: boolean;
+    beanGeneral?: boolean;
     boilerplate?: string;
     metadataCustom?: string;
 }
