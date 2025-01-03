@@ -97,6 +97,8 @@ export interface IModulePackage {
     dependencies: Record<string, string>;
 }
 export interface IGlobBeanFile {
+    sceneName: string;
+    sceneNameCapitalize: string;
     file: string;
     fileContent: string;
     fileName: string;
