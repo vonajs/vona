@@ -232,7 +232,7 @@ export class LocalHelper {
   }
   async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
     // temp
-    const fileTempObj = tmp.fileSync({ postfix: '.mjs' });
+    const fileTempObj = tmp.fileSync({ tmpdir: path.dirname(fileName), postfix: '.mjs' });
     const fileTemp = fileTempObj.name;
     // build
     const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);

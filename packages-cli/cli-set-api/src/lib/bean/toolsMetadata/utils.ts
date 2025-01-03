@@ -47,6 +47,8 @@ export async function globBeanFiles(
     const fileContent = isIgnore ? '' : fse.readFileSync(file).toString();
     const isVirtual = fileContent.includes('@Virtual()');
     result.push({
+      sceneName,
+      sceneNameCapitalize,
       file,
       fileContent,
       fileName,
