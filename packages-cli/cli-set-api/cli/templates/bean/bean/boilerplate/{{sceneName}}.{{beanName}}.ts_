@@ -1,4 +1,4 @@
-import { <%=argv.decoratorName%>, BeanBase } from 'vona';
+import { Bean, BeanBase } from 'vona';
 
-@<%=argv.decoratorName%>(<%-argv.beanOptions%>)
-export class <%=argv.sceneNameCapitalize%><%=argv.beanNameCapitalize%> extends BeanBase {}
+@Bean()
+export class Bean<%=argv.beanNameCapitalize%> extends BeanBase {}
