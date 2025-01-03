@@ -110,6 +110,8 @@ export interface IModulePackage {
 }
 
 export interface IGlobBeanFile {
+  sceneName: string;
+  sceneNameCapitalize: string;
   file: string;
   fileContent: string;
   fileName: string;
