@@ -15,7 +15,7 @@
       "service": {
         "sceneIsolate": true,
         "scopeResource": true,
-        "beanLocal": true,
+        "beanGeneral": true,
         "boilerplate": "cli/service/boilerplate"
       },
       "controller": {

@@ -3,7 +3,7 @@ import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
-import { generateBeanLocals } from './toolsMetadata/generateBeanLocals.js';
+import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourcesMeta.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
@@ -78,9 +78,9 @@ export class CliToolsMetadata extends BeanCliBase {
           scopeResources[sceneName] = `IModule${toUpperCaseFirstChar(sceneName)}`;
         }
       }
-      // bean locals
-      if (sceneMeta.beanLocal) {
-        content += await generateBeanLocals(sceneName, sceneMeta, moduleName, modulePath);
+      // bean generals
+      if (sceneMeta.beanGeneral) {
+        content += await generateBeanGenerals(sceneName, sceneMeta, moduleName, modulePath);
       }
       // metas
       if (sceneName === 'meta') {
