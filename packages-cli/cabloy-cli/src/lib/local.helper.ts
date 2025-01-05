@@ -68,7 +68,7 @@ export class LocalHelper {
     }
     return Boxen(text, options);
   }
-  gogocode(sourceCode: string, options: gogocode.GoGoOption): gogocode.GoGoAST {
+  gogocode(sourceCode: string, options?: gogocode.GoGoOption): gogocode.GoGoAST {
     return gogocode(sourceCode, options);
   }
   firstCharToLowerCase(name: string) {
