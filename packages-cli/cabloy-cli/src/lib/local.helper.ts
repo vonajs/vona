@@ -13,6 +13,7 @@ import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
 import tmp from 'tmp';
 import { build as esBuild } from 'esbuild';
 import { pathToFileURL } from 'node:url';
+import gogocode from 'gogocode';
 
 export class LocalHelper {
   cli: BeanCliBase;
@@ -66,6 +67,9 @@ export class LocalHelper {
       options = this.moduleConfig.helper.boxen.options;
     }
     return Boxen(text, options);
+  }
+  gogocode(sourceCode: string, options: gogocode.GoGoOption): gogocode.GoGoAST {
+    return gogocode(sourceCode, options);
   }
   firstCharToLowerCase(name: string) {
     return name.charAt(0).toLowerCase() + name.substring(1);
