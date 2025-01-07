@@ -33,11 +33,19 @@ declare module 'vona' {
 export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+export const locales = {
+  'en-us': locale_en_us,
+  'zh-cn': locale_zh_cn,
+};
+/** locale: end */
 /** main: begin */
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -46,6 +54,7 @@ export class ScopeModuleAOpenapi extends BeanScopeBase {}
 export interface ScopeModuleAOpenapi {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
 }
 
@@ -62,6 +71,13 @@ declare module 'vona' {
   export interface IBeanScopeConfig {
     'a-openapi': ReturnType<typeof config>;
   }
+
+  export interface IBeanScopeLocale {
+    'a-openapi': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-openapi::${K}` {
+  return `a-openapi::${key}`;
+}
 /** scope: end */
