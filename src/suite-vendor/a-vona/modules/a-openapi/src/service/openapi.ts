@@ -86,7 +86,7 @@ export class ServiceOpenapi extends BeanBase {
   private _translateString(obj: any, key: string) {
     if (!obj) return;
     if (obj[key] && obj[key].includes(LocaleModuleNameSeparator)) {
-      obj[key] = this.app.text(obj[key]);
+      obj[key] = this.app.meta.text(obj[key]);
     }
   }
 

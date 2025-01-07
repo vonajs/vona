@@ -54,7 +54,7 @@ export class AppMeta extends BeanSimple {
     this.locale = this.bean._newBean(AppLocale);
 
     // text
-    this.app.text = this.text = this.locale.createLocaleText();
+    this.text = this.locale.createLocaleText();
 
     // scopeContainer
     this.scopeContainer = this.bean._newBean(BeanScopeContainer);
