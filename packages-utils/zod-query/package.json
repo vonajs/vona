@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/zod-query",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "zod-query",
   "publishConfig": {
     "access": "public"
