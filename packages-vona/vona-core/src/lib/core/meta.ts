@@ -6,7 +6,7 @@ import { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, EnumAppEven
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText, createAppText } from '../bean/index.js';
+import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
   inApp: boolean;
@@ -55,7 +55,6 @@ export class AppMeta extends BeanSimple {
 
     // text
     this.text = this.locale.createLocaleText();
-    createAppText(this.app);
 
     // scopeContainer
     this.scopeContainer = this.bean._newBean(BeanScopeContainer);
