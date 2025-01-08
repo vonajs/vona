@@ -42,3 +42,7 @@ export const isSymbol = (val: any): val is symbol => typeof val === 'symbol';
 export function isPromise(obj: any): obj is Promise<any> {
   return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
+
+export function isNilOrEmptyString(str?: string | undefined | null): str is null | undefined | '' {
+  return str === undefined || str === null || str === '';
+}
