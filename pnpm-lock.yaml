@@ -333,9 +333,6 @@ importers:
       vona-mock:
         specifier: workspace:^
         version: link:packages-vona/vona-mock
-      vona-module-a-b:
-        specifier: workspace:^
-        version: link:src/suite/a-b/modules/a-b
       vue-eslint-parser:
         specifier: ^9.4.2
         version: 9.4.3(eslint@8.57.1)
@@ -715,6 +712,8 @@ importers:
 
   packages-utils/set: {}
 
+  packages-utils/utils: {}
+
   packages-utils/zod-errors-custom:
     dependencies:
       '@cabloy/word-utils':
@@ -988,6 +987,9 @@ importers:
       '@cabloy/module-info':
         specifier: workspace:^
         version: link:../../../../../packages-utils/module-info
+      '@cabloy/utils':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -1152,14 +1154,6 @@ importers:
         version: link:modules/vona-test
 
   src/suite-vendor/vona-test/modules/vona-test: {}
-
-  src/suite/a-b:
-    dependencies:
-      vona-module-a-b:
-        specifier: workspace:^
-        version: link:modules/a-b
-
-  src/suite/a-b/modules/a-b: {}
 
   src/suite/a-home:
     dependencies:
@@ -2088,28 +2082,24 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.10.3':
     resolution: {integrity: sha512-L07/4zKnIY2S/00bE+Yn3oEHkyGjWmGGE8Ta4luVCL+00s04EIwMoE1Hc8E8xFB5zLew5ViKFc5kNb5YZ/tRFQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.10.3':
     resolution: {integrity: sha512-cvTCekY4u0fBIDNfhv/2UxcOXqH4XJE2iNxKuQejS5KIapFJwrZ+fRQ2lha3+yopI/d2p96BlBEWTAcBzeTntw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.10.3':
     resolution: {integrity: sha512-h9kUOTrSSpY9JNc41a+NMAwK62USk/pvNE9Fi/Pfoklmlf9j9j8gRCitqvHpmZcEF4PPIsoMdiGetDipTwvWlw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.10.3':
     resolution: {integrity: sha512-iHOmLYkZYn3r1Ff4rfyczdrYGt/wVIWyY0t8swsO9o1TE+zmucGFZuYZzgj3ng8Kp4sojJrydAGz8TINQZDBzQ==}

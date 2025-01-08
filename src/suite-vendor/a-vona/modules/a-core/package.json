@@ -6,6 +6,7 @@
     "dependencies": {},
     "globalDependencies": {
       "@cabloy/module-info:": true,
+      "@cabloy/utils": true,
       "@cabloy/word-utils": true,
       "boxen": true,
       "chalk": true,
@@ -47,6 +48,7 @@
   "scripts": {},
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
+    "@cabloy/utils": "workspace:^",
     "@cabloy/word-utils": "^1.0.8",
     "boxen": "^8.0.1",
     "chalk": "^5.3.0",
