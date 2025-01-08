@@ -6,7 +6,8 @@ import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKe
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';
-import { compose, isNilOrEmptyString } from '../utils/util.js';
+import { compose } from '../utils/util.js';
+import { isNilOrEmptyString } from '@cabloy/utils';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
 const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
