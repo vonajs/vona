@@ -1,5 +1,5 @@
+import { isUndefined } from '@cabloy/utils';
 import 'reflect-metadata';
-import { isUndefined } from '../utils/utilsShared.js';
 
 export type MetadataKey = symbol | string;
 

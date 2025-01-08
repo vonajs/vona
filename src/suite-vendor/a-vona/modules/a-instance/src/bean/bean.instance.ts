@@ -1,7 +1,8 @@
 import { Bean } from 'vona-module-a-bean';
-import { ConfigInstanceBase, isNil, VonaConfig } from 'vona';
+import { ConfigInstanceBase, VonaConfig } from 'vona';
 import { BeanBase } from 'vona';
 import { EntityInstance } from '../entity/instance.js';
+import { isNil } from '@cabloy/utils';
 
 @Bean()
 export class BeanInstance extends BeanBase {

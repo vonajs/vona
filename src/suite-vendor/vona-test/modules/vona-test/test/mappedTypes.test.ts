@@ -1,10 +1,11 @@
 import { app } from 'vona-mock';
 import { DtoUser } from '../src/dto/user.js';
-import { cast, catchError, MixinClass, OmitClass, PartialClass, PickClass } from 'vona';
+import { cast, MixinClass, OmitClass, PartialClass, PickClass } from 'vona';
 import assert from 'node:assert';
 import { Rule } from 'vona-module-a-openapi';
 import { DtoProfile } from '../src/dto/profile.js';
 import { Dto } from 'vona-module-a-web';
+import { catchError } from '@cabloy/utils';
 
 @Dto()
 class DtoUserWithMarried extends OmitClass(DtoUser, ['married']) {

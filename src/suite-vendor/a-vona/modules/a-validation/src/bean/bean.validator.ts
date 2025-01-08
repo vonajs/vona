@@ -1,9 +1,10 @@
 import { Bean } from 'vona-module-a-bean';
-import { BeanBase, Constructable, HttpStatus, isNil } from 'vona';
+import { BeanBase, Constructable, HttpStatus } from 'vona';
 import { z } from 'zod';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { ValidatorOptions } from '../types/validatorOptions.js';
 import { schema } from 'vona-module-a-openapi';
+import { isNil } from '@cabloy/utils';
 
 @Bean()
 export class BeanValidator extends BeanBase {
