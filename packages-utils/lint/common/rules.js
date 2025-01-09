@@ -111,6 +111,8 @@ const rules = {
       extendDefaults: true,
     },
   ],
+  'prefer-rest-params': 'off',
+  // 'no-setter-return': 'off', // no effect for typescript check
 };
 
 module.exports = rules;
