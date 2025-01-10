@@ -120,7 +120,7 @@ export class BeanContainer {
     record: boolean,
     beanFullName: string | undefined,
     beanClass: Constructable<T> | undefined,
-    args,
+    args: any[],
     aop: boolean | undefined,
     withSelector?: boolean,
   ) {
