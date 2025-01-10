@@ -141,17 +141,6 @@ export class BeanContainer {
     return beanInstance;
   }
 
-  private _initBeanInstance(beanFullName, beanInstance, args) {
-    // inject
-    this._injectBeanInstance(beanInstance, beanFullName);
-    // init
-    if (beanInstance.__init__) {
-      beanInstance.__init__(...args);
-    }
-    // ok
-    return beanInstance;
-  }
-
   private _prepareBeanInstance(beanFullName, beanClass, args, aop) {
     // create
     let beanInstance;
@@ -173,6 +162,17 @@ export class BeanContainer {
     }
     // aop: proxy
     return this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
+  }
+
+  private _initBeanInstance(beanFullName, beanInstance, args) {
+    // inject
+    this._injectBeanInstance(beanInstance, beanFullName);
+    // init
+    if (beanInstance.__init__) {
+      beanInstance.__init__(...args);
+    }
+    // ok
+    return beanInstance;
   }
 
   private _injectBeanInstance(beanInstance, beanFullName) {
