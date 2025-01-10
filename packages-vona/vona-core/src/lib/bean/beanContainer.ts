@@ -12,6 +12,7 @@ import { SymbolBeanFullName } from './beanBaseSimple.js';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
 const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
+const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
 export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
@@ -193,11 +194,15 @@ export class BeanContainer {
       enumerable: true,
       configurable: true,
       get() {
-        const symbol = Symbol.for(`__bean_use__#${prop}`);
-        if (!beanInstance[symbol]) {
-          beanInstance[symbol] = self._injectBeanInstanceProp(beanInstance, targetBeanFullName, useOptions);
+        if (!beanInstance[SymbolBeanInstancePropsLazy]) beanInstance[SymbolBeanInstancePropsLazy] = {};
+        if (!beanInstance[SymbolBeanInstancePropsLazy][prop]) {
+          beanInstance[SymbolBeanInstancePropsLazy][prop] = self._injectBeanInstanceProp(
+            beanInstance,
+            targetBeanFullName,
+            useOptions,
+          );
         }
-        return beanInstance[symbol];
+        return beanInstance[SymbolBeanInstancePropsLazy][prop];
       },
     });
   }
