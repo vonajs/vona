@@ -79,6 +79,21 @@ export class BeanContainer {
     return this[SymbolBeanContainerInstances][key] as T;
   }
 
+  _getBeanSelectorInner<T>(beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
+    // bean options
+    const beanOptions = appResource.getBean(beanFullName as any);
+    if (!beanOptions) {
+      // not found
+      return null!;
+    }
+    const fullName = beanOptions.beanFullName;
+    const key = __getSelectorKey(fullName, withSelector, args[0]);
+    if (this[SymbolBeanContainerInstances][key] === undefined) {
+      this._newBeanInner(fullName as any, withSelector, ...args);
+    }
+    return this[SymbolBeanContainerInstances][key] as T;
+  }
+
   _newBean<T>(A: Constructable<T>, ...args): T;
   _newBean<K extends keyof IBeanRecord>(beanFullName: K, ...args): IBeanRecord[K];
   // _newBean<T>(beanFullName: string, ...args): T;
@@ -100,6 +115,24 @@ export class BeanContainer {
     return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, cast(beanOptions.scene) === 'aop');
   }
 
+  _newBeanInner<T>(beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
+    // bean options
+    const beanOptions = appResource.getBean(beanFullName as any);
+    if (!beanOptions) {
+      // class
+      if (typeof beanFullName === 'function' && isClass(beanFullName)) {
+        const beanInstance = this._createBeanInstance(beanFullName, beanFullName, withSelector, args);
+        return this._patchBeanInstance(beanFullName, beanInstance, false);
+      }
+      // throw new Error(`bean not found: ${beanFullName}`);
+      return null!;
+    }
+    // instance
+    const beanInstance = this._createBeanInstance(beanOptions.beanFullName, beanOptions.beanClass, withSelector, args);
+    // patch
+    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, cast(beanOptions.scene) === 'aop');
+  }
+
   _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
   _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
   // _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
@@ -107,7 +140,43 @@ export class BeanContainer {
     return this._newBean(beanFullName as any, selector, ...args);
   }
 
-  private _createBeanInstance(beanFullName, beanClass, args) {
+  private _createBeanInstance<T>(
+    record: boolean,
+    beanFullName: string,
+    beanClass: Constructable<T> | undefined,
+    args,
+    aop: boolean | undefined,
+    withSelector?: boolean,
+  ) {
+    // prepare
+    const beanInstance = this._prepareBeanInstance(beanFullName, beanClass, args, aop);
+    // record
+    if (record) {
+      // fullName
+      const fullName = appResource.getBeanFullName(beanFullName);
+      if (fullName) {
+        const key = __getSelectorKey(fullName, withSelector, args[0]);
+        this[SymbolBeanContainerInstances][key] = beanInstance;
+      }
+    }
+    // init
+    this._initBeanInstance(beanFullName, beanInstance, args);
+    // ok
+    return beanInstance;
+  }
+
+  private _initBeanInstance(beanFullName, beanInstance, args) {
+    // inject
+    this._injectBeanInstance(beanInstance, beanFullName);
+    // init
+    if (beanInstance.__init__) {
+      beanInstance.__init__(...args);
+    }
+    // ok
+    return beanInstance;
+  }
+
+  private _prepareBeanInstance(beanFullName, beanClass, args, aop) {
     // create
     let beanInstance;
     if (beanClass.prototype.__init__) {
@@ -126,16 +195,8 @@ export class BeanContainer {
     if (typeof beanFullName === 'string') {
       __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
     }
-    /// / scope
-    // this._injectBeanInstanceScope(beanInstance, beanFullName);
-    // inject
-    this._injectBeanInstance(beanInstance, beanFullName);
-    // init
-    if (beanInstance.__init__) {
-      beanInstance.__init__(...args);
-    }
-    // ok
-    return beanInstance;
+    // aop: proxy
+    return this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
   }
 
   private _injectBeanInstance(beanInstance, beanFullName) {
@@ -485,4 +546,12 @@ function __methodTypeOfDescriptor(descriptorInfo) {
     return methodType;
   }
   return null;
+}
+
+// same as _getBean if selector is undefined/null/'', as as to get the same bean instance
+//   not use !selector which maybe is 0
+function __getSelectorKey(beanFullName: string, withSelector?: boolean, selector?: any) {
+  if (!withSelector) return beanFullName;
+  const isSelectorValid = !isNilOrEmptyString(selector);
+  return !isSelectorValid ? beanFullName : `${beanFullName}#${selector}`;
 }
