@@ -45,38 +45,18 @@ export class BeanContainer {
     return this._getBean(`${moduleScope}.scope.module` as any);
   }
 
-  _getBean<T>(A: Constructable<T>): T;
-  _getBean<K extends keyof IBeanRecord>(beanFullName: K): IBeanRecord[K];
-  // _getBean<T>(beanFullName: string): T;
-  _getBean<T>(beanFullName: Constructable<T> | string): T {
-    return this._getBeanSelector(beanFullName as any);
+  _getBean<T>(A: Constructable<T>, ...args): T;
+  _getBean<K extends keyof IBeanRecord>(beanFullName: K, ...args): IBeanRecord[K];
+  // _getBean<T>(beanFullName: string, ...args): T;
+  _getBean<T>(beanFullName: Constructable<T> | string, ...args): T {
+    return this._getBeanSelectorInner(beanFullName as any, false, ...args);
   }
 
   _getBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
   _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
   // _getBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
   _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
-    // bean options
-    const beanOptions = appResource.getBean(beanFullName as any);
-    if (!beanOptions) {
-      // not found
-      return null!;
-    }
-    const fullName = beanOptions.beanFullName;
-    // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
-    //   not use !selector which maybe is 0
-    const isSelectorValid = !isNilOrEmptyString(selector);
-    const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
-    if (this[SymbolBeanContainerInstances][key] === undefined) {
-      let beanInstance;
-      if (isSelectorValid) {
-        beanInstance = this._newBean(fullName as any, selector, ...args);
-      } else {
-        beanInstance = this._newBean(fullName as any, undefined, ...args);
-      }
-      this[SymbolBeanContainerInstances][key] = beanInstance;
-    }
-    return this[SymbolBeanContainerInstances][key] as T;
+    return this._getBeanSelectorInner(beanFullName, true, selector, ...args);
   }
 
   _getBeanSelectorInner<T>(beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
@@ -115,22 +95,26 @@ export class BeanContainer {
     return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, cast(beanOptions.scene) === 'aop');
   }
 
-  _newBeanInner<T>(beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
+  _newBeanInner<T>(record: boolean, beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
       // class
       if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-        const beanInstance = this._createBeanInstance(beanFullName, beanFullName, withSelector, args);
-        return this._patchBeanInstance(beanFullName, beanInstance, false);
+        return this._createBeanInstance<T>(record, undefined, beanFullName, args, false, withSelector);
       }
       // throw new Error(`bean not found: ${beanFullName}`);
       return null!;
     }
     // instance
-    const beanInstance = this._createBeanInstance(beanOptions.beanFullName, beanOptions.beanClass, withSelector, args);
-    // patch
-    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, cast(beanOptions.scene) === 'aop');
+    return this._createBeanInstance<T>(
+      record,
+      beanOptions.beanFullName,
+      beanOptions.beanClass as Constructable<T>,
+      args,
+      cast(beanOptions.scene) === 'aop',
+      withSelector,
+    );
   }
 
   _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
@@ -142,7 +126,7 @@ export class BeanContainer {
 
   private _createBeanInstance<T>(
     record: boolean,
-    beanFullName: string,
+    beanFullName: string | undefined,
     beanClass: Constructable<T> | undefined,
     args,
     aop: boolean | undefined,

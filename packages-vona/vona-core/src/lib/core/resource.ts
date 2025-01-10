@@ -55,7 +55,7 @@ export class AppResource extends BeanSimple {
     return beanOptions;
   }
 
-  getBeanFullName(beanFullName: string): string;
+  getBeanFullName(beanFullName: string | undefined): string | undefined;
   getBeanFullName<T>(A: Constructable<T>): string | undefined;
   getBeanFullName(beanFullName) {
     if (typeof beanFullName === 'string') return beanFullName;
