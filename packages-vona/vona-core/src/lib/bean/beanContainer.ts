@@ -69,7 +69,7 @@ export class BeanContainer {
     const fullName = beanOptions.beanFullName;
     const key = __getSelectorKey(fullName, withSelector, args[0]);
     if (this[SymbolBeanContainerInstances][key] === undefined) {
-      this._newBeanInner(fullName as any, withSelector, ...args);
+      this._newBeanInner(true, fullName, withSelector, ...args);
     }
     return this[SymbolBeanContainerInstances][key] as T;
   }
