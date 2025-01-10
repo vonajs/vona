@@ -1,5 +1,5 @@
 import { cast, VonaApplication, VonaContext } from '../../types/index.js';
-import { Constructable } from '../decorator/index.js';
+import { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
 import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
@@ -182,51 +182,43 @@ export class BeanContainer {
     if (!uses) return;
     for (const key in uses) {
       const useOptions = uses[key];
-      const selector = useOptions.selector;
-      const injectionScope = useOptions.injectionScope;
-      this._injectBeanInstancePropLazy(
-        beanInstance,
-        useOptions.prop,
-        useOptions.beanFullName,
-        selector,
-        injectionScope,
-      );
+      this._injectBeanInstancePropLazy(beanInstance, useOptions.prop, useOptions.beanFullName, useOptions);
     }
   }
 
-  private _injectBeanInstancePropLazy(instance, prop, targetBeanFullName, selector?: string, injectionScope?: string) {
+  private _injectBeanInstancePropLazy(beanInstance, prop, targetBeanFullName, useOptions) {
     const self = this;
-    Object.defineProperty(instance, prop, {
+    Object.defineProperty(beanInstance, prop, {
       enumerable: true,
       configurable: true,
       get() {
         const symbol = Symbol.for(`__bean_use__#${prop}`);
-        if (!instance[symbol]) {
-          instance[symbol] = self._injectBeanInstanceProp(targetBeanFullName, selector, injectionScope);
+        if (!beanInstance[symbol]) {
+          beanInstance[symbol] = self._injectBeanInstanceProp(beanInstance, targetBeanFullName, useOptions);
         }
-        return instance[symbol];
+        return beanInstance[symbol];
       },
     });
   }
 
-  private _injectBeanInstanceProp(targetBeanFullName, selector?: string, injectionScope?: string) {
+  private _injectBeanInstanceProp(beanInstance, targetBeanFullName: string, useOptions: IDecoratorUseOptionsBase) {
     // injectionScope
-    if (!injectionScope) {
-      // const targetOptions = appResource.getBean(targetBeanFullName);
-      // if (!targetOptions) {
-      //   throw new Error(`not found bean class: ${targetBeanFullName}`);
-      // }
-      injectionScope = 'app';
-    }
+    const injectionScope = useOptions.injectionScope ?? 'app';
+    // options: selectorInfo
+    const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
     // targetInstance
     let targetInstance;
     // selector maybe empty string
     if (injectionScope === 'app') {
-      targetInstance = this.app.bean._getBeanSelector(targetBeanFullName, selector);
+      targetInstance = this.app.bean._getBeanSelectorInner(
+        targetBeanFullName,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
+      );
     } else if (injectionScope === 'ctx') {
-      targetInstance = this._getBeanSelector(targetBeanFullName, selector);
+      targetInstance = this._getBeanSelectorInner(targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
     } else if (injectionScope === 'new') {
-      targetInstance = this._newBean(targetBeanFullName, selector);
+      targetInstance = this._newBeanInner(false, targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
     }
     return targetInstance;
   }
