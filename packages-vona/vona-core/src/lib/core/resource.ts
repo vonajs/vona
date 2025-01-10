@@ -2,9 +2,9 @@ import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } fr
 import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { isClass } from '../utils/isClass.js';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { isClass } from '../utils/isClass.js';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
@@ -55,23 +55,22 @@ export class AppResource extends BeanSimple {
     return beanOptions;
   }
 
-  getBeanFullName(beanFullName: string | undefined): string | undefined;
-  getBeanFullName<T>(A: Constructable<T>): string | undefined;
+  getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
+  getBeanFullName<K extends keyof IBeanRecord>(beanFullName: K): K | undefined;
+  getBeanFullName(beanFullName: string): string | undefined;
   getBeanFullName(beanFullName) {
-    if (typeof beanFullName === 'string') return beanFullName;
-    return appMetadata.getOwnMetadata(SymbolDecoratorBeanFullName, beanFullName);
+    if (!beanFullName) return beanFullName;
+    if (typeof beanFullName === 'function' && isClass(beanFullName)) {
+      return appMetadata.getOwnMetadata(SymbolDecoratorBeanFullName, beanFullName);
+    }
+    return beanFullName;
   }
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
-    let fullName: string | undefined;
-    if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-      fullName = this.getBeanFullName(beanFullName);
-    } else {
-      fullName = beanFullName as string;
-    }
+  getBean<T>(beanFullName): IDecoratorBeanOptionsBase<T> | undefined {
+    const fullName = this.getBeanFullName(beanFullName);
     if (!fullName) return null!;
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;
   }
