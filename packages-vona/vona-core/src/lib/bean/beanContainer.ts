@@ -78,24 +78,23 @@ export class BeanContainer {
   _newBean<K extends keyof IBeanRecord>(beanFullName: K, ...args): IBeanRecord[K];
   // _newBean<T>(beanFullName: string, ...args): T;
   _newBean<T>(beanFullName: Constructable<T> | string, ...args): T {
-    // bean options
-    const beanOptions = appResource.getBean(beanFullName as any);
-    if (!beanOptions) {
-      // class
-      if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-        const beanInstance = this._createBeanInstance(beanFullName, beanFullName, args);
-        return this._patchBeanInstance(beanFullName, beanInstance, false);
-      }
-      // throw new Error(`bean not found: ${beanFullName}`);
-      return null!;
-    }
-    // instance
-    const beanInstance = this._createBeanInstance(beanOptions.beanFullName, beanOptions.beanClass, args);
-    // patch
-    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, cast(beanOptions.scene) === 'aop');
+    return this._newBeanInner(false, beanFullName, false, ...args);
   }
 
-  _newBeanInner<T>(record: boolean, beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
+  _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
+  _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
+  // _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
+  _newBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
+    return this._newBean(beanFullName as any, selector, ...args);
+  }
+
+  /** @internal */
+  public _newBeanInner<T>(
+    record: boolean,
+    beanFullName: Constructable<T> | string,
+    withSelector?: boolean,
+    ...args
+  ): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -115,13 +114,6 @@ export class BeanContainer {
       cast(beanOptions.scene) === 'aop',
       withSelector,
     );
-  }
-
-  _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
-  _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
-  // _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
-  _newBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
-    return this._newBean(beanFullName as any, selector, ...args);
   }
 
   private _createBeanInstance<T>(
