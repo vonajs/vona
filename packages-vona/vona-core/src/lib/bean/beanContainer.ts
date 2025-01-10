@@ -8,6 +8,7 @@ import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';
 import { compose } from '../utils/util.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
+import { SymbolBeanFullName } from './beanBaseSimple.js';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
 const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
@@ -158,7 +159,7 @@ export class BeanContainer {
     }
     // beanFullName
     if (typeof beanFullName === 'string') {
-      __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
+      __setPropertyValue(beanInstance, SymbolBeanFullName, beanFullName);
     }
     // aop: proxy
     return this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
