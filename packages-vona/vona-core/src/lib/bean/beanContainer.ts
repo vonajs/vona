@@ -1,5 +1,5 @@
 import { cast, VonaApplication, VonaContext } from '../../types/index.js';
-import { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
+import { __prepareInjectSelectorInfo, Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
 import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
