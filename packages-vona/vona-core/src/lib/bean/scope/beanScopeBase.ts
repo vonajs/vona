@@ -1,5 +1,5 @@
 import { BeanScopeScene } from './beanScopeScene.js';
-import { BeanBaseSimple } from '../beanBaseSimple.js';
+import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 import { IModule } from '@cabloy/module-info';
@@ -19,7 +19,7 @@ export class BeanScopeBase extends BeanBaseSimple {
   private __metas: Record<string, unknown> = {};
 
   get module(): IModule {
-    return this.app.meta.modules[this.moduleBelong];
+    return this.app.meta.modules[this[SymbolModuleBelong]];
   }
 
   private get onionMetaNames() {
@@ -37,7 +37,7 @@ export class BeanScopeBase extends BeanBaseSimple {
   }
 
   protected __get__(prop: string) {
-    const moduleBelong = this.moduleBelong;
+    const moduleBelong = this[SymbolModuleBelong];
     // error
     if (prop === 'error') {
       if (!this[BeanModuleError]) {

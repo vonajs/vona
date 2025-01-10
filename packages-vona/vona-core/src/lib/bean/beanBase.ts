@@ -1,4 +1,4 @@
-import { BeanBaseSimple } from './beanBaseSimple.js';
+import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
 import { IModuleLocaleText } from './resource/locale/type.js';
 import { IBeanScopeContainer } from './scope/beanScopeContainer.js';
 import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
@@ -8,7 +8,7 @@ const SymbolText = Symbol('SymbolText');
 export class BeanBase extends BeanBaseSimple {
   protected get $text(): IModuleLocaleText {
     if (!this[SymbolText]) {
-      this[SymbolText] = this.app.meta.locale.createLocaleText(this.moduleBelong);
+      this[SymbolText] = this.app.meta.locale.createLocaleText(this[SymbolModuleBelong]);
     }
     return this[SymbolText];
   }
@@ -26,7 +26,7 @@ export class BeanBase extends BeanBaseSimple {
   protected getScope(): unknown;
   protected getScope(moduleScope?: string) {
     if (!moduleScope) {
-      return this.bean.scope(this.moduleBelong as never);
+      return this.bean.scope(this[SymbolModuleBelong] as never);
     }
     return this.bean.scope(moduleScope as never);
   }

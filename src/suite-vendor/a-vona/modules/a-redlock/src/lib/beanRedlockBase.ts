@@ -1,4 +1,4 @@
-import { BeanBase, FunctionAsync } from 'vona';
+import { BeanBase, FunctionAsync, SymbolModuleBelong } from 'vona';
 import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 
 export class BeanRedlockBase extends BeanBase {
@@ -15,6 +15,6 @@ export class BeanRedlockBase extends BeanBase {
   }
 
   private _prepareResource(resource: string) {
-    return `${this.moduleBelong}.${resource}`;
+    return `${this[SymbolModuleBelong]}.${resource}`;
   }
 }

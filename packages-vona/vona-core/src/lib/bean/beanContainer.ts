@@ -231,7 +231,7 @@ export class BeanContainer {
   //     configurable: true,
   //     get() {
   //       if (!this[BeanInstanceScope]) {
-  //         this[BeanInstanceScope] = this.bean._getBean(`${this.moduleBelong}.scope.module`);
+  //         this[BeanInstanceScope] = this.bean._getBean(`${this[SymbolModuleBelong]}.scope.module`);
   //       }
   //       return this[BeanInstanceScope];
   //     },

@@ -1,10 +1,10 @@
-import { BeanBase } from 'vona';
+import { BeanBase, SymbolModuleBelong } from 'vona';
 
 export class BeanStaticBase extends BeanBase {
   protected __get__(prop: string) {
     if (prop === 'get') {
       return (path: string) => {
-        return this.app.util.combineStaticPath(this.moduleBelong, path);
+        return this.app.util.combineStaticPath(this[SymbolModuleBelong], path);
       };
     }
   }

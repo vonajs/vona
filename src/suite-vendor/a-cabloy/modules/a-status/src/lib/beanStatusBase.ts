@@ -1,4 +1,4 @@
-import { BeanBase } from 'vona';
+import { BeanBase, SymbolModuleBelong } from 'vona';
 
 export class BeanStatusBase extends BeanBase {
   protected __get__(prop: string) {
@@ -19,7 +19,7 @@ export class BeanStatusBase extends BeanBase {
 
   private async _get(name: any): Promise<any> {
     const status = await this._modelStatus.get({
-      module: this.moduleBelong,
+      module: this[SymbolModuleBelong],
       name,
     });
     return status ? JSON.parse(status.value) : undefined;
@@ -31,7 +31,7 @@ export class BeanStatusBase extends BeanBase {
 
   private async _setInner(name: any, value: any, queue: boolean) {
     const status = await this._modelStatus.get({
-      module: this.moduleBelong,
+      module: this[SymbolModuleBelong],
       name,
     });
     if (status) {
@@ -41,12 +41,12 @@ export class BeanStatusBase extends BeanBase {
       });
     } else {
       if (queue) {
-        await this.$scope.status.redlock.lockIsolate(`statusSet.${this.moduleBelong}.${name}`, async () => {
+        await this.$scope.status.redlock.lockIsolate(`statusSet.${this[SymbolModuleBelong]}.${name}`, async () => {
           return await this._setInner(name, value, false);
         });
       } else {
         await this._modelStatus.insert({
-          module: this.moduleBelong,
+          module: this[SymbolModuleBelong],
           name,
           value: JSON.stringify(value),
         });
