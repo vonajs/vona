@@ -238,16 +238,17 @@ export class LocalHelper {
     // temp
     const fileTempObj = tmp.fileSync({ tmpdir: path.dirname(fileName), postfix: '.mjs' });
     const fileTemp = fileTempObj.name;
-    // build
-    const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
-    await esBuild(esBuildConfig as any);
-    // load
-    const instance = await import(this._pathToHref(fileTemp));
-    const result = await fn(instance);
-    // delete temp
-    fileTempObj.removeCallback();
-    // ok
-    return result;
+    try {
+      // build
+      const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
+      await esBuild(esBuildConfig as any);
+      // load
+      const instance = await import(this._pathToHref(fileTemp));
+      return await fn(instance);
+    } finally {
+      // delete temp
+      fileTempObj.removeCallback();
+    }
   }
   private _createEsbuildConfig(fileSrc: string, fileDest: string) {
     return {
