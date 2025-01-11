@@ -390,7 +390,7 @@ function __checkSuites(context, suites) {
     for (const key in suites) {
         const suite = suites[key];
         // check if disable
-        if (!context.disabledSuites[key]) {
+        if (_checkSuiteValid(context, suites, key)) {
             context.suites[key] = suite;
         }
         else {
@@ -400,5 +400,18 @@ function __checkSuites(context, suites) {
             }
         }
     }
+}
+function _checkSuiteValid(context, suites, suiteRelativeName) {
+    // suite
+    const suite = suites[suiteRelativeName];
+    // check if disable
+    if (context.disabledSuites[suiteRelativeName])
+        return false;
+    // check meta
+    const capabilities = suite.package.zovaModule?.capabilities ?? suite.package.vonaModule?.capabilities;
+    if (context.meta && capabilities && !(0, utils_1.checkMeta)(capabilities.meta, context.meta))
+        return false;
+    // ok
+    return true;
 }
 //# sourceMappingURL=index.js.map
