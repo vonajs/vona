@@ -6,7 +6,8 @@
     "capabilities": {
       "meta": {
         "mode": [
-          "local"
+          "local",
+          "unittest"
         ]
       }
     }

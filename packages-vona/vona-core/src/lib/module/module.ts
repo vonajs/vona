@@ -21,6 +21,7 @@ export class ModuleTools extends BeanSimple {
       disabledSuites: process.env.PROJECT_DISABLED_SUITES,
       log: false,
       //log: !!app.meta.inAgent,
+      meta: app.meta,
     });
     app.meta.suites = suites;
     app.meta.modules = modules;
