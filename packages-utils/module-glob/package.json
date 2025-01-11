@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/module-glob",
-  "version": "5.1.9",
+  "version": "5.1.10",
   "description": "cabloy module-glob",
   "publishConfig": {
     "access": "public"
@@ -33,6 +33,7 @@
   "author": "zhennann",
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
+    "@cabloy/utils": "workspace:^",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "egg-born-utils": "^1.2.0"

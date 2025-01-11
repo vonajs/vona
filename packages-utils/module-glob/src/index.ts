@@ -7,7 +7,10 @@ import eggBornUtils from 'egg-born-utils';
 import { getPathsMeta } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
 import { IModule, IModulePackage, ISuite, ISuiteModuleBase, parseInfoPro } from '@cabloy/module-info';
+import { checkMeta } from '@cabloy/utils';
 export * from './interface.js';
+
+const SymbolModuleOrdering = Symbol('SymbolModuleOrdering');
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -19,7 +22,7 @@ const boxenOptions: boxen.Options = {
 
 // type: front/backend
 export async function glob(options: IModuleGlobOptions) {
-  const { projectPath, disabledModules, disabledSuites, log, projectMode } = options;
+  const { projectPath, disabledModules, disabledSuites, log, projectMode, meta } = options;
   // context
   const context: IModuleGlobContext = {
     options,
@@ -39,6 +42,7 @@ export async function glob(options: IModuleGlobOptions) {
     //
     disabledModules: __getDisabledModules(disabledModules),
     disabledSuites: __getDisabledSuites(disabledSuites),
+    meta,
     //
     pathsMeta: getPathsMeta(projectMode),
   };
@@ -82,7 +86,7 @@ function getPackageModuleNode(projectMode) {
   return ['zova', 'vona'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
 }
 
-async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>) {
+async function __loadPackage(context: IModuleGlobContext, modules: Record<string, ISuiteModuleBase>) {
   const promises: Promise<IModulePackage>[] = [];
   const modulesArray: string[] = [];
   for (const moduleName in modules) {
@@ -101,7 +105,7 @@ async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>)
   }
 }
 
-function __orderModules(context, modules) {
+function __orderModules(context: IModuleGlobContext, modules: Record<string, IModule>) {
   // 'a-version' first
   if (modules['a-version']) {
     __pushModule(context, modules, 'a-version');
@@ -118,14 +122,18 @@ function __orderModules(context, modules) {
   }
 }
 
-function __pushModule(context, modules, moduleRelativeName) {
-  // check if disable
-  if (context.disabledModules[moduleRelativeName]) return false;
-
+function __pushModule(context: IModuleGlobContext, modules: Record<string, IModule>, moduleRelativeName) {
   // module
   const module = modules[moduleRelativeName];
-  if (module.__ordering) return true;
-  module.__ordering = true;
+  // check if disable
+  if (context.disabledModules[moduleRelativeName]) return false;
+  // check meta
+  const capabilities = module.package.zovaModule?.capabilities ?? module.package.vonaModule?.capabilities;
+  if (context.meta && capabilities && !checkMeta(capabilities.meta, context.meta)) return false;
+
+  // ordering
+  if (module[SymbolModuleOrdering]) return true;
+  module[SymbolModuleOrdering] = true;
 
   // dependencies
   if (!__orderDependencies(context, modules, module, moduleRelativeName)) {
@@ -145,7 +153,12 @@ function __pushModule(context, modules, moduleRelativeName) {
   return true;
 }
 
-function __orderDependencies(context, modules, module, moduleRelativeName) {
+function __orderDependencies(
+  context: IModuleGlobContext,
+  modules: Record<string, IModule>,
+  module,
+  moduleRelativeName,
+) {
   if (context.options.disableCheckDependencies) return true;
   const moduleNode = getPackageModuleNode(context.options.projectMode);
   if (!module.package[moduleNode] || !module.package[moduleNode].dependencies) return true;
@@ -262,7 +275,7 @@ function __logModules(context: IModuleGlobContext, log) {
   // console.log('\n');
 }
 
-function __logSuites(context, log) {
+function __logSuites(context: IModuleGlobContext, log) {
   for (const suiteName in context.suites) {
     const suite = context.suites[suiteName];
     if (suite.info.vendor) {
@@ -371,7 +384,7 @@ function __bindSuitesModules(suites, modules) {
   }
 }
 
-function __checkSuites(context, suites) {
+function __checkSuites(context: IModuleGlobContext, suites) {
   for (const key in suites) {
     const suite = suites[key];
     // check if disable

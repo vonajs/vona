@@ -26,7 +26,9 @@ const boxen_1 = __importDefault(require("boxen"));
 const egg_born_utils_1 = __importDefault(require("egg-born-utils"));
 const meta_js_1 = require("./meta.js");
 const module_info_1 = require("@cabloy/module-info");
+const utils_1 = require("@cabloy/utils");
 __exportStar(require("./interface.js"), exports);
+const SymbolModuleOrdering = Symbol('SymbolModuleOrdering');
 const boxenOptions = {
     padding: 1,
     margin: 1,
@@ -36,7 +38,7 @@ const boxenOptions = {
 };
 // type: front/backend
 async function glob(options) {
-    const { projectPath, disabledModules, disabledSuites, log, projectMode } = options;
+    const { projectPath, disabledModules, disabledSuites, log, projectMode, meta } = options;
     // context
     const context = {
         options,
@@ -56,6 +58,7 @@ async function glob(options) {
         //
         disabledModules: __getDisabledModules(disabledModules),
         disabledSuites: __getDisabledSuites(disabledSuites),
+        meta,
         //
         pathsMeta: (0, meta_js_1.getPathsMeta)(projectMode),
     };
@@ -128,14 +131,19 @@ function __orderModules(context, modules) {
     }
 }
 function __pushModule(context, modules, moduleRelativeName) {
+    // module
+    const module = modules[moduleRelativeName];
     // check if disable
     if (context.disabledModules[moduleRelativeName])
         return false;
-    // module
-    const module = modules[moduleRelativeName];
-    if (module.__ordering)
+    // check meta
+    const capabilities = module.package.zovaModule?.capabilities ?? module.package.vonaModule?.capabilities;
+    if (context.meta && capabilities && !(0, utils_1.checkMeta)(capabilities.meta, context.meta))
+        return false;
+    // ordering
+    if (module[SymbolModuleOrdering])
         return true;
-    module.__ordering = true;
+    module[SymbolModuleOrdering] = true;
     // dependencies
     if (!__orderDependencies(context, modules, module, moduleRelativeName)) {
         context.disabledModules[moduleRelativeName] = true;

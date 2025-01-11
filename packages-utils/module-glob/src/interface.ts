@@ -6,6 +6,8 @@ export interface IModuleGlobOptions {
   disabledModules?: string[] | string;
   disabledSuites?: string[] | string;
   log?: boolean;
+  meta?: {};
+  disableCheckDependencies?: boolean;
 }
 
 export interface IModuleGlobContext {
@@ -26,6 +28,7 @@ export interface IModuleGlobContext {
   //
   disabledModules: Record<string, boolean>;
   disabledSuites: Record<string, boolean>;
+  meta?: {};
   //
   pathsMeta: IModuleGlobPathsMeta;
 }
