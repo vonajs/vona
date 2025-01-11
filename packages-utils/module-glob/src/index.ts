@@ -384,11 +384,11 @@ function __bindSuitesModules(suites, modules) {
   }
 }
 
-function __checkSuites(context: IModuleGlobContext, suites) {
+function __checkSuites(context: IModuleGlobContext, suites: Record<string, ISuite>) {
   for (const key in suites) {
     const suite = suites[key];
     // check if disable
-    if (!context.disabledSuites[key]) {
+    if (_checkSuiteValid(context, suites, key)) {
       context.suites[key] = suite;
     } else {
       // disabledModules
@@ -397,4 +397,20 @@ function __checkSuites(context: IModuleGlobContext, suites) {
       }
     }
   }
+}
+
+function _checkSuiteValid(
+  context: IModuleGlobContext,
+  suites: Record<string, ISuite>,
+  suiteRelativeName: string,
+): boolean {
+  // suite
+  const suite = suites[suiteRelativeName];
+  // check if disable
+  if (context.disabledSuites[suiteRelativeName]) return false;
+  // check meta
+  const capabilities = suite.package.zovaModule?.capabilities ?? suite.package.vonaModule?.capabilities;
+  if (context.meta && capabilities && !checkMeta(capabilities.meta, context.meta)) return false;
+  // ok
+  return true;
 }
