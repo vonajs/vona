@@ -2,6 +2,16 @@
   "name": "vona-suite-cabloy-test",
   "version": "5.0.3",
   "title": "cabloy-test",
+  "vonaModule": {
+    "capabilities": {
+      "meta": {
+        "mode": [
+          "local",
+          "unittest"
+        ]
+      }
+    }
+  },
   "type": "module",
   "files": [
     "dist"
