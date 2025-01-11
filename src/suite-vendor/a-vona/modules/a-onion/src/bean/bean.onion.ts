@@ -8,6 +8,7 @@ import {
   TypeOnionOptionsMatchRule,
 } from '../types/onion.js';
 import { ServiceOnion } from '../service/onion_.js';
+import { checkMeta } from '@cabloy/utils';
 
 @Bean()
 export class BeanOnion extends BeanBase {
@@ -23,7 +24,7 @@ export class BeanOnion extends BeanBase {
 
   public checkOnionOptionsEnabled(options: IOnionOptionsEnable & IOnionOptionsMatch<string>, selector?: string) {
     if (options.enable === false) return false;
-    if (!this.bean.onion.checkOnionOptionsMeta(options.meta)) return false;
+    if (!this.checkOnionOptionsMeta(options.meta)) return false;
     if (!selector) return true;
     if (!options.match && !options.ignore) return true;
     return (
@@ -33,20 +34,7 @@ export class BeanOnion extends BeanBase {
   }
 
   public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
-    // check none
-    if (!meta) return true;
-    // check flavor
-    if (meta.flavor) {
-      if (!Array.isArray(meta.flavor) && meta.flavor !== this.app.meta.flavor) return false;
-      if (Array.isArray(meta.flavor) && !meta.flavor.includes(this.app.meta.flavor)) return false;
-    }
-    // check mode
-    if (meta.mode) {
-      if (!Array.isArray(meta.mode) && meta.mode !== this.app.meta.mode) return false;
-      if (Array.isArray(meta.mode) && !meta.mode.includes(this.app.meta.mode)) return false;
-    }
-    // default
-    return true;
+    return checkMeta(meta, this.app.meta);
   }
 }
 

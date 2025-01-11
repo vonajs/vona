@@ -46,3 +46,17 @@ export function isPromise(obj: any): obj is Promise<any> {
 export function isNilOrEmptyString(str?: string | undefined | null): str is null | undefined | '' {
   return str === undefined || str === null || str === '';
 }
+
+export function checkMeta(meta?: {}, data?: {}): boolean {
+  // check none
+  if (!meta) return true;
+  // loop
+  for (const key in meta) {
+    const metaItem = meta[key];
+    if (isNil(metaItem)) continue;
+    if (!Array.isArray(metaItem) && metaItem !== data?.[key]) return false;
+    if (Array.isArray(metaItem) && !metaItem.includes(data?.[key])) return false;
+  }
+  // default
+  return true;
+}
