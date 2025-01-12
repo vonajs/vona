@@ -75,3 +75,31 @@ function _getProperty<T>(obj: object, name: string, sep: string | undefined, for
   }
   return obj as T | undefined;
 }
+
+export function evaluate(expression: string, scope?: object) {
+  if (!scope) return _evaluateSimple(expression);
+  const scopeKeys = Object.keys(scope);
+  const scopeParams: any[] = [];
+  for (let i = 0; i < scopeKeys.length; i++) {
+    const key = scopeKeys[i];
+    scopeParams.push(scope[key]);
+  }
+  const fn = createFunction(expression, scopeKeys);
+  return fn(...scopeParams);
+}
+
+export function createFunction(expression: string, scopeKeys?: string[]): Function {
+  let fn: Function;
+  try {
+    const js = `return (${expression})`;
+    fn = scopeKeys && scopeKeys.length > 0 ? new Function(scopeKeys.join(','), js) : new Function(js);
+  } catch (_err) {
+    fn = scopeKeys && scopeKeys.length > 0 ? new Function(scopeKeys.join(','), expression) : new Function(expression);
+  }
+  return fn;
+}
+
+function _evaluateSimple(expression: string) {
+  const fn = createFunction(expression);
+  return fn();
+}
