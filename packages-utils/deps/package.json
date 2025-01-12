@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/deps",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "cabloy deps",
   "publishConfig": {
     "access": "public"
