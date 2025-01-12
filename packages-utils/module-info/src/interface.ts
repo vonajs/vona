@@ -5,6 +5,14 @@ export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';
 export type TypeBrandName = 'zova' | 'vona';
 
+export interface ICapabilitiesAop {
+  enable?: boolean;
+  meta?: ZovaOnionOptionsMeta;
+  match?: string | string[];
+  ignore?: string | string[];
+}
+
+export type TypeCapabilitiesAops = Record<string, ICapabilitiesAop>;
 export interface IModuleCapabilities {
   monkey?: boolean;
   sync?: boolean;
@@ -12,6 +20,7 @@ export interface IModuleCapabilities {
   theme?: boolean;
   locale?: boolean;
   preload?: boolean;
+  aops?: TypeCapabilitiesAops;
 }
 
 export interface IModuleCapabilitiesZova extends IModuleCapabilities {
