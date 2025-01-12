@@ -42,7 +42,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     this.sceneName = sceneName;
     this.sceneMeta = getOnionScenesMeta(this.app.meta.modules)[this.sceneName];
     this._loadOnions();
-    this._handleDependents(this.onionsGlobal);
     this._swapOnions(this.onionsGlobal);
   }
 
@@ -213,31 +212,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return options;
   }
 
-  private _handleDependents(onions: IOnionSlice<OPTIONS, ONIONNAME>[]) {
-    for (const onion of onions) {
-      const onionOptions = onion.beanOptions.options as IOnionOptionsDeps<string>;
-      let dependents = onionOptions.dependents as any;
-      if (!dependents) continue;
-      if (!Array.isArray(dependents)) {
-        dependents = dependents.split(',') as any[];
-      }
-      for (const dep of dependents!) {
-        const onion2 = onions.find(item => item.name === dep);
-        if (!onion2) {
-          throw new Error(`${this.sceneName} ${dep} not found for dependents of ${onion.name}`);
-        }
-        const options = onion2.beanOptions.options as IOnionOptionsDeps<string>;
-        if (!options.dependencies) options.dependencies = [];
-        if (!Array.isArray(options.dependencies)) {
-          options.dependencies = [options.dependencies] as never[];
-        }
-        if (options.dependencies.findIndex(item => item === onion.name) === -1) {
-          options.dependencies.push(onion.name as never);
-        }
-      }
-    }
-  }
-
   private _swapOnions(onions: IOnionSlice<OPTIONS, ONIONNAME>[]) {
     swapDeps(onions as ISwapDepsItem[], {
       name: 'name',
@@ -245,6 +219,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
           .options as IOnionOptionsDeps<string>;
         return onionOptions.dependencies as any;
+      },
+      dependents: item => {
+        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
+          .options as IOnionOptionsDeps<string>;
+        return onionOptions.dependents as any;
       },
     });
   }
