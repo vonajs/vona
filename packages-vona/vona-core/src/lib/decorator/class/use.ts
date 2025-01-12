@@ -1,4 +1,4 @@
-import { getProperty, isNil } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
 import { IBeanRecord } from '../../bean/type.js';
 import { MetadataKey, appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
@@ -10,6 +10,7 @@ import {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
+import { VonaApplication } from 'vona';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
 export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;
@@ -111,5 +112,6 @@ function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecora
   if (arg.startsWith('##')) {
     return arg.substring('##'.length);
   }
-  return getProperty(beanInstance, arg, '.');
+  const app: VonaApplication = beanInstance.app;
+  return app.meta.celjs.evaluate(arg, beanInstance);
 }

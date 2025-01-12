@@ -7,6 +7,7 @@ import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText } from '../bean/index.js';
+import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 
 export class AppMeta extends BeanSimple {
   inApp: boolean;
@@ -23,6 +24,7 @@ export class AppMeta extends BeanSimple {
   reload: AppReload;
   messenger: AppMessenger;
   appMonkey?: IMonkeyApp & IMonkeySystem;
+  celjs: typeof CelJS;
   //
   resource: AppResource;
   metadata: AppMetadata;

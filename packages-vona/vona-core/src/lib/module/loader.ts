@@ -23,6 +23,7 @@ export class ModuleLoader extends BeanSimple {
     // meta
     const meta = app.bean._newBean(AppMeta);
     app.meta = meta;
+    app.meta.celjs = await import('cel-js');
 
     // messenger
     loadMessenger(app);
