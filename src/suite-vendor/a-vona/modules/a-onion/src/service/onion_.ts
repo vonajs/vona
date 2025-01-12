@@ -286,12 +286,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
       }
       // push
-      // todo: remove options/as any
       onionsAll.push({
         name,
-        options: beanOptions.options as any,
         beanOptions: beanOptions as any,
-      } as any);
+      });
     }
   }
 
