@@ -5,6 +5,7 @@
   "vonaModule": {
     "dependencies": {},
     "globalDependencies": {
+      "@cabloy/deps": true,
       "@cabloy/module-info:": true,
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
@@ -47,6 +48,7 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@cabloy/deps": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/utils": "workspace:^",
     "@cabloy/word-utils": "^1.0.8",
