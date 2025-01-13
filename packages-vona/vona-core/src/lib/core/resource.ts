@@ -42,8 +42,6 @@ export class AppResource extends BeanSimple {
       name,
       moduleBelong,
     } as IDecoratorBeanOptionsBase;
-    beanOptions.__aopChains__ = null!;
-    beanOptions.__aopChainsKey__ = {};
     // record
     this.beans[beanFullName] = beanOptions;
     if (!this.scenes[scene!]) this.scenes[scene!] = {};

@@ -11,6 +11,8 @@ import { isNilOrEmptyString } from '@cabloy/utils';
 import { SymbolBeanFullName } from './beanBaseSimple.js';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
+const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');
+const SymbolCacheAopChainsKey = Symbol('Bean#SymbolCacheAopChainsKey');
 const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
 const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
 export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
@@ -362,8 +364,10 @@ export class BeanContainer {
     if (!beanFullNameOrBeanClass) return [];
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
-    const host = beanOptions || beanFullNameOrBeanClass;
-    if (host.__aopChains__) return host.__aopChains__;
+    const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
+    const host = this._aopCacheHost();
+    if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
+    if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     let chains: MetadataKey[] = [];
     if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
@@ -378,15 +382,20 @@ export class BeanContainer {
       chains.push(SymbolProxyMagic);
     }
     // hold
-    host.__aopChains__ = chains;
+    host[SymbolCacheAopChains][cacheKey] = chains;
     return chains;
   }
 
   private _getAopChains(beanFullName) {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
-    const host = beanOptions || beanFullName;
-    return host.__aopChains__;
+    const cacheKey = beanOptions?.beanFullName || beanFullName;
+    const host = this._aopCacheHost();
+    return host[SymbolCacheAopChains]?.[cacheKey] || [];
+  }
+
+  private _aopCacheHost() {
+    return this.app;
   }
 
   private _getAopChainsProp(
@@ -399,9 +408,11 @@ export class BeanContainer {
   ) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
-    const host = beanOptions || beanFullName;
-    if (!host.__aopChainsKey__) host.__aopChainsKey__ = {};
-    if (host.__aopChainsKey__[chainsKey]) return host.__aopChainsKey__[chainsKey];
+    const cacheKey = beanOptions?.beanFullName || beanFullName;
+    const host = this._aopCacheHost();
+    if (!host[SymbolCacheAopChainsKey]) host[SymbolCacheAopChainsKey] = {};
+    if (!host[SymbolCacheAopChainsKey][cacheKey]) host[SymbolCacheAopChainsKey][cacheKey] = {};
+    if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey]) return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
@@ -445,7 +456,7 @@ export class BeanContainer {
         }
       }
     }
-    host.__aopChainsKey__[chainsKey] = chains;
+    host[SymbolCacheAopChainsKey][cacheKey][chainsKey] = chains;
     return chains;
   }
 
