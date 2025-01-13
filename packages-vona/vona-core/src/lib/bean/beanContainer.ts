@@ -408,7 +408,8 @@ export class BeanContainer {
       if (aopKey === SymbolProxyMagic) {
         chains.push([aopKey, methodName]);
       } else {
-        const aop: any = this._getBean(aopKey as string as any);
+        // singleton
+        const aop: any = this.app.bean._getBean(aopKey as string as any);
         if (aop[methodName]) {
           let fn;
           if (methodType === 'get') {
