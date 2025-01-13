@@ -35,7 +35,7 @@ function __patchJSON() {
     });
   };
 
-  global.JSON5 = {
+  globalThis.JSON5 = {
     parse,
     stringify: json5.stringify,
   } as typeof json5;
