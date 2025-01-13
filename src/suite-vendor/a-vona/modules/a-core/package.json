@@ -6,7 +6,9 @@
     "dependencies": {},
     "globalDependencies": {
       "@cabloy/deps": true,
+      "@cabloy/json5": true,
       "@cabloy/module-info:": true,
+      "@cabloy/set": true,
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
       "boxen": true,
@@ -50,7 +52,9 @@
   "scripts": {},
   "dependencies": {
     "@cabloy/deps": "workspace:^",
+    "@cabloy/json5": "workspace:^",
     "@cabloy/module-info": "workspace:^",
+    "@cabloy/set": "workspace:^",
     "@cabloy/utils": "workspace:^",
     "@cabloy/word-utils": "^1.0.8",
     "boxen": "^8.0.1",
