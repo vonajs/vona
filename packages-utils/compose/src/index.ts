@@ -1,3 +1,5 @@
+export type TypeComposeAdapter = (context: any, chain: any) => { receiver?: any; fn?: Function };
+
 const __adapterDefault = (_context, chain) => {
   return {
     receiver: undefined,
@@ -5,7 +7,7 @@ const __adapterDefault = (_context, chain) => {
   };
 };
 
-export function compose(chains, adapter) {
+export function compose(chains?: any[], adapter?: TypeComposeAdapter) {
   if (!adapter) adapter = __adapterDefault;
   if (!chains) chains = [];
   return function (context, next?) {
@@ -17,15 +19,15 @@ export function compose(chains, adapter) {
       index = i;
       let receiver;
       let fn;
-      const chain = chains[i];
+      const chain = chains![i];
       if (chain) {
-        const obj = adapter(context, chain);
+        const obj = adapter!(context, chain);
         if (!obj) return dispatch(i + 1, context);
         receiver = obj.receiver;
         fn = obj.fn;
         if (!fn) throw new Error('fn is not defined');
       }
-      if (i === chains.length) fn = next;
+      if (i === chains!.length) fn = next;
       if (!fn) return;
       return fn.call(receiver, context, function next(...args) {
         context = args.length === 0 ? context : args[0];
