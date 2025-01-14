@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/compose",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "cabloy compose",
   "publishConfig": {
     "access": "public"
@@ -22,7 +22,10 @@
     "dist/**/*.d.ts"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "prepublishOnly": "npm run tsc:publish"
   },
   "keywords": [
     "egg",
