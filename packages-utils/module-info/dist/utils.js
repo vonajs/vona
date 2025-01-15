@@ -1,10 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseInfoFromPath = parseInfoFromPath;
-exports.parseInfo = parseInfo;
-exports.parseInfoPro = parseInfoPro;
-exports.parseName = parseName;
-exports.relativeNameToCapitalize = relativeNameToCapitalize;
+exports.relativeNameToCapitalize = exports.parseName = exports.parseInfoPro = exports.parseInfo = exports.parseInfoFromPath = void 0;
 function parseInfoFromPath(pathName) {
     if (!pathName)
         return;
@@ -20,6 +16,7 @@ function parseInfoFromPath(pathName) {
         return info;
     }
 }
+exports.parseInfoFromPath = parseInfoFromPath;
 const PREFIX_A = '/api/';
 const PREFIX_B = 'vona-module-';
 const PREFIX_C = './vona-module-';
@@ -53,6 +50,7 @@ function parseInfo(moduleName) {
     };
     return info;
 }
+exports.parseInfo = parseInfo;
 function parseInfoPro(moduleName, projectMode, projectEntityType) {
     const info = parseInfo(moduleName);
     if (!info)
@@ -65,6 +63,7 @@ function parseInfoPro(moduleName, projectMode, projectEntityType) {
     }
     return info;
 }
+exports.parseInfoPro = parseInfoPro;
 // /api/aa/hello/home/index
 // vona-module-aa-hello
 // ./aa-hello/
@@ -95,6 +94,7 @@ function parseName(moduleUrl) {
         return _parseName(moduleUrl.replace('/', '-'), '');
     }
 }
+exports.parseName = parseName;
 function _parseNameLikeUrl(moduleUrl, prefix) {
     const posA = prefix.length;
     const posB = moduleUrl.indexOf('/', posA) + 1;
@@ -126,4 +126,5 @@ function relativeNameToCapitalize(moduleName, firstCharToUpperCase) {
     })
         .join('');
 }
+exports.relativeNameToCapitalize = relativeNameToCapitalize;
 //# sourceMappingURL=utils.js.map

@@ -112,6 +112,11 @@ async function __loadPackage(context, modules) {
         const moduleNode = getPackageModuleNode(context.options.projectMode);
         const capabilities = module.package[moduleNode]?.capabilities;
         module.info.capabilities = capabilities;
+        module.info.onionsMeta = {
+            onions: module.package[moduleNode]?.onions,
+            metas: module.package[moduleNode]?.metas,
+            onionsConfig: module.package[moduleNode]?.onionsConfig,
+        };
     }
 }
 function __orderModules(context, modules) {
