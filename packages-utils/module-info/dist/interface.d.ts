@@ -8,6 +8,8 @@ export interface IOnionsConfigItem {
     meta?: ZovaOnionOptionsMeta;
     match?: string | string[];
     ignore?: string | string[];
+    dependencies?: string | string[];
+    dependents?: string | string[];
 }
 export type TypeOnionsConfigItems = Record<string, IOnionsConfigItem>;
 export type TypeOnionsConfig = Record<string, TypeOnionsConfigItems>;
