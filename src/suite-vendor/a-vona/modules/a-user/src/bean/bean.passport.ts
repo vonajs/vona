@@ -5,6 +5,16 @@ import { isAnonymous } from '../lib/user.js';
 
 @Bean()
 export class BeanPassport extends BeanBase {
+  private _passportAdapter: IPassportAdapter;
+
+  private get passportAdapter(): IPassportAdapter {
+    if (!this._passportAdapter) {
+      const beanFullName = this.scope.config.passportAdapter.replace(':', '.service.');
+      this._passportAdapter = this.bean._getBean<IPassportAdapter>(beanFullName as never);
+    }
+    return this._passportAdapter;
+  }
+
   public get isAuthenticated(): boolean {
     const user = this.getCurrent();
     return !!user && !isAnonymous(user);
@@ -45,8 +55,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public async createUserAnonymous<T extends IUserBase = IUserBase>(): Promise<T> {
-    const serviceAdapter = this.bean._getBean<IPassportAdapter>(this.scope.config.passportAdapter as never);
-    const userAnonymous = await serviceAdapter.createUserAnonymous();
+    const userAnonymous = await this.passportAdapter.createUserAnonymous();
     // event
     await this.scope.event.createUserAnonymous.emit(userAnonymous);
     // ok
@@ -54,8 +63,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public async signinMock<T extends IUserBase = IUserBase>(name?: string): Promise<T> {
-    const serviceAdapter = this.bean._getBean<IPassportAdapter>(this.scope.config.passportAdapter as never);
-    const user = await serviceAdapter.getUserMock(name);
+    const user = await this.passportAdapter.getUserMock(name);
     if (!user) this.app.throw(403);
     await this.signin(user);
     return user as T;
