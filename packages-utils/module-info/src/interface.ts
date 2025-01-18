@@ -143,15 +143,3 @@ export interface IGlobBeanFile {
   isIgnore: boolean;
   isVirtual: boolean;
 }
-
-export interface IMetadataCustomGenerateOptions {
-  cli: unknown; // specific type by business: @cabloy/cli: BeanCliBase
-  sceneName: string;
-  sceneNameCapitalize: string;
-  sceneMeta: OnionSceneMeta;
-  moduleName: string;
-  modulePath: string;
-  globFiles: IGlobBeanFile[];
-}
-
-export type TypeMetadataCustomGenerate = (options: IMetadataCustomGenerateOptions) => Promise<string>;

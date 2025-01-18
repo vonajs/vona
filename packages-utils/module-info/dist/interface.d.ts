@@ -129,14 +129,4 @@ export interface IGlobBeanFile {
     isIgnore: boolean;
     isVirtual: boolean;
 }
-export interface IMetadataCustomGenerateOptions {
-    cli: unknown;
-    sceneName: string;
-    sceneNameCapitalize: string;
-    sceneMeta: OnionSceneMeta;
-    moduleName: string;
-    modulePath: string;
-    globFiles: IGlobBeanFile[];
-}
-export type TypeMetadataCustomGenerate = (options: IMetadataCustomGenerateOptions) => Promise<string>;
 //# sourceMappingURL=interface.d.ts.map

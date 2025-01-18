@@ -257,6 +257,27 @@ export class LocalHelper {
       },
     );
   }
+  requireDynamic(file: string) {
+    if (!file) throw new Error('file should not empty');
+    let instance = require(file);
+    const mtime = this._requireDynamic_getFileTime(file);
+    if (instance.__requireDynamic_mtime === undefined) {
+      instance.__requireDynamic_mtime = mtime;
+    } else if (instance.__requireDynamic_mtime !== mtime) {
+      delete require.cache[require.resolve(file)];
+      instance = require(file);
+      instance.__requireDynamic_mtime = mtime;
+    }
+    return instance;
+  }
+  private _requireDynamic_getFileTime(file) {
+    if (!path.isAbsolute(file)) return null;
+    const exists = fse.pathExistsSync(file);
+    if (!exists) return null;
+    // stat
+    const stat = fse.statSync(file);
+    return stat.mtime.valueOf();
+  }
   async tempFile<RESULT>(fn: (fileTemp: string) => Promise<RESULT>, options?: ITempFileOptions): Promise<RESULT> {
     // temp
     const fileTempObj = tmp.fileSync(options);

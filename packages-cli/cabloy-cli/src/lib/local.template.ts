@@ -1,13 +1,12 @@
 import fs from 'fs';
-import fse from 'fs-extra';
 import path from 'path';
-
 import eggBornUtils from 'egg-born-utils';
 import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 import { BeanCliBase } from './bean.cli.base.js';
 import { commandsConfig } from '../config.js';
+import { IEjsData, ISnippet, TypeParseOptionLanguage } from '../types/template.js';
 
 export class LocalTemplate {
   cli: BeanCliBase;
@@ -58,7 +57,7 @@ export class LocalTemplate {
         setName,
         path: snippetsPath,
       });
-      await this.applySnippets({ targetDir, snippetsDir });
+      await this.applySnippets(targetDir, snippetsDir);
     }
     // then
     if (boilerplatePath) {
@@ -185,7 +184,7 @@ export class LocalTemplate {
     };
   }
 
-  getEjsData() {
+  getEjsData(): IEjsData {
     return {
       cli: this.cli,
       ...this.context,
@@ -201,9 +200,9 @@ export class LocalTemplate {
     };
   }
 
-  async applySnippets({ targetDir, snippetsDir }: any) {
+  async applySnippets(targetDir: string, snippetsDir: string) {
     // snippets
-    let files = eggBornUtils.tools.globbySync('*.cjs', {
+    let files = eggBornUtils.tools.globbySync('*.{cjs,ts}', {
       cwd: snippetsDir,
       onlyFiles: true,
     });
@@ -214,26 +213,36 @@ export class LocalTemplate {
     // for
     for (const file of files) {
       const snippetTemplatePath = path.join(snippetsDir, file);
-      const snippet = this.requireDynamic(snippetTemplatePath);
-      if (!snippet.file) {
-        throw new Error(`should provider file path for: ${file}`);
-      }
-      let fileName;
-      if (typeof snippet.file === 'function') {
-        fileName = snippet.file(this.getEjsData());
-      } else {
-        fileName = await this.renderContent({ content: snippet.file });
-      }
-      if (!fileName) {
-        // means ignore, so do nothing
-      } else {
-        const targetFile = path.join(targetDir, fileName);
-        await this.applySnippet({ targetFile, snippet });
-      }
+      await this._loadSnippetInstance(snippetTemplatePath, async instance => {
+        const snippet: ISnippet = typeof instance === 'function' ? instance() : instance;
+        if (!snippet.file) {
+          throw new Error(`should provider file path for: ${file}`);
+        }
+        let fileName;
+        if (typeof snippet.file === 'function') {
+          fileName = snippet.file(this.getEjsData());
+        } else {
+          fileName = await this.renderContent({ content: snippet.file });
+        }
+        if (!fileName) {
+          // means ignore, so do nothing
+        } else {
+          const targetFile = path.join(targetDir, fileName);
+          await this.applySnippet(targetFile, snippet);
+        }
+      });
     }
   }
 
-  async applySnippet({ targetFile, snippet }: any) {
+  async _loadSnippetInstance(snippetTemplatePath: string, fn: (instance: any) => Promise<void>) {
+    if (snippetTemplatePath.endsWith('.cjs')) {
+      const instance = this.helper.requireDynamic(snippetTemplatePath);
+      await fn(instance);
+    }
+    await this.helper.importDynamic(snippetTemplatePath, fn);
+  }
+
+  async applySnippet(targetFile: string, snippet: ISnippet) {
     await this.console.log(`apply changes to ${targetFile}`);
     // source code
     let sourceCode;
@@ -247,7 +256,7 @@ export class LocalTemplate {
       sourceCode = await this.renderContent({ content: snippet.init });
     }
     // language
-    const language = snippet.parseOptions && snippet.parseOptions.language;
+    const language = snippet.parseOptions?.language as TypeParseOptionLanguage;
     // transform
     let outputCode;
     if (language === 'plain') {
@@ -275,28 +284,5 @@ export class LocalTemplate {
     const num = fileName.split('-')[0];
     if (!num || isNaN(num)) return 10000;
     return parseInt(num);
-  }
-
-  requireDynamic(file) {
-    if (!file) throw new Error('file should not empty');
-    let instance = require(file);
-    const mtime = this._requireDynamic_getFileTime(file);
-    if (instance.__requireDynamic_mtime === undefined) {
-      instance.__requireDynamic_mtime = mtime;
-    } else if (instance.__requireDynamic_mtime !== mtime) {
-      delete require.cache[require.resolve(file)];
-      instance = require(file);
-      instance.__requireDynamic_mtime = mtime;
-    }
-    return instance;
-  }
-
-  private _requireDynamic_getFileTime(file) {
-    if (!path.isAbsolute(file)) return null;
-    const exists = fse.pathExistsSync(file);
-    if (!exists) return null;
-    // stat
-    const stat = fse.statSync(file);
-    return stat.mtime.valueOf();
   }
 }
