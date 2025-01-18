@@ -25,6 +25,7 @@ env/.env*.mine
 **/.metadata/modules.d.ts
 
 # auto created
+.temp-dynamic-*
 /tsconfig.json
 /cabloy.json
 /package.json
