@@ -83,6 +83,7 @@ export interface OnionSceneMeta {
   optionsGlobalInterfaceFrom?: string;
   scopeResource?: boolean;
   beanGeneral?: boolean;
+  snippets?: string;
   boilerplate?: string;
   metadataCustom?: string;
 }
@@ -90,6 +91,7 @@ export interface OnionSceneMeta {
 export interface OnionMetaMeta {
   module?: IModule;
   scopeResource?: boolean;
+  snippets?: string;
   boilerplate?: string;
   metadataCustom?: string;
 }
