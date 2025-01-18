@@ -1,8 +1,11 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
 const __snippet_declare = "import <%=argv.nameMeta.fullCapitalize%> from './page/<%=argv.pageName%>/index.vue';\n";
 const __snippet_body =
   '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
 
-export default {
+export default metadataCustomSnippet({
+  parseOptions: { language: '' },
   file: 'openapi.config.ts',
   init: `import { ZovaOpenapiConfig } from 'zova-openapi';
 
@@ -16,7 +19,7 @@ export default function (): ZovaOpenapiConfig {
   };
 }
 `,
-  async transform({ cli: cli, ast, argv }) {
+  async transform({ cli, ast, argv }) {
     const moduleNames = argv._;
     for (const moduleName of moduleNames) {
       if (!ast.has(`return { modules: { '${moduleName}':{$$$0}, $$$1}, $$$2}`)) {
@@ -29,4 +32,4 @@ export default function (): ZovaOpenapiConfig {
     // ok
     return ast;
   },
-};
+});

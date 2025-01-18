@@ -21,11 +21,16 @@ export interface IEjsData extends ICommandContext {
 
 export interface IAstData<LANGUAGE extends TypeParseOptionLanguage> extends ICommandContext {
   cli: BeanCliBase;
-  ast: LANGUAGE extends 'plain' ? string : LANGUAGE extends 'json' ? object : GoGoAST;
+  ast: TypeParseResult<LANGUAGE>;
   snippet: ISnippet<LANGUAGE>;
 }
 
 export type TypeParseOptionLanguage = 'plain' | 'json' | 'gogo' | '';
+export type TypeParseResult<LANGUAGE extends TypeParseOptionLanguage> = LANGUAGE extends 'plain'
+  ? string
+  : LANGUAGE extends 'json'
+    ? object
+    : GoGoAST;
 export interface IParseOptions<LANGUAGE> {
   language?: LANGUAGE;
 }
@@ -33,7 +38,7 @@ export interface ISnippet<LANGUAGE extends TypeParseOptionLanguage = ''> {
   file: string | ((ejsData: IEjsData) => string);
   init?: string;
   parseOptions?: IParseOptions<LANGUAGE>;
-  transform: (astData: IAstData<LANGUAGE>) => Promise<any>;
+  transform: (astData: IAstData<LANGUAGE>) => Promise<TypeParseResult<LANGUAGE>>;
 }
 export function metadataCustomSnippet<LANGUAGE extends TypeParseOptionLanguage>(snippet: ISnippet<LANGUAGE>) {
   return snippet;

@@ -14,6 +14,15 @@ importers:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.3.0
         version: 7.3.0(zod@3.24.1)
+      '@cabloy/deps':
+        specifier: workspace:^
+        version: link:packages-utils/deps
+      '@cabloy/json5':
+        specifier: workspace:^
+        version: link:packages-utils/json5
+      '@cabloy/set':
+        specifier: workspace:^
+        version: link:packages-utils/set
       '@cabloy/utils':
         specifier: workspace:^
         version: link:packages-utils/utils
@@ -29,6 +38,9 @@ importers:
       bullmq:
         specifier: ^5.34.3
         version: 5.34.5
+      cel-js:
+        specifier: ^0.3.0
+        version: 0.3.0
       chalk:
         specifier: ^5.3.0
         version: 5.4.1
@@ -62,6 +74,9 @@ importers:
       vona-module-a-aspect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-aspect
+      vona-module-a-b:
+        specifier: workspace:^
+        version: link:src/module/a-b
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
@@ -874,6 +889,8 @@ importers:
 
   packages-vona/vona-shared: {}
 
+  src/module/a-b: {}
+
   src/suite-vendor/a-cabloy:
     dependencies:
       vona-module-a-cabloy:
@@ -999,9 +1016,15 @@ importers:
       '@cabloy/deps':
         specifier: workspace:^
         version: link:../../../../../packages-utils/deps
+      '@cabloy/json5':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/json5
       '@cabloy/module-info':
         specifier: workspace:^
         version: link:../../../../../packages-utils/module-info
+      '@cabloy/set':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/set
       '@cabloy/utils':
         specifier: workspace:^
         version: link:../../../../../packages-utils/utils
@@ -2112,28 +2135,24 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.10.3':
     resolution: {integrity: sha512-L07/4zKnIY2S/00bE+Yn3oEHkyGjWmGGE8Ta4luVCL+00s04EIwMoE1Hc8E8xFB5zLew5ViKFc5kNb5YZ/tRFQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.10.3':
     resolution: {integrity: sha512-cvTCekY4u0fBIDNfhv/2UxcOXqH4XJE2iNxKuQejS5KIapFJwrZ+fRQ2lha3+yopI/d2p96BlBEWTAcBzeTntw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.10.3':
     resolution: {integrity: sha512-h9kUOTrSSpY9JNc41a+NMAwK62USk/pvNE9Fi/Pfoklmlf9j9j8gRCitqvHpmZcEF4PPIsoMdiGetDipTwvWlw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.10.3':
     resolution: {integrity: sha512-iHOmLYkZYn3r1Ff4rfyczdrYGt/wVIWyY0t8swsO9o1TE+zmucGFZuYZzgj3ng8Kp4sojJrydAGz8TINQZDBzQ==}
