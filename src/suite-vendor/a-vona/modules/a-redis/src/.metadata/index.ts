@@ -23,7 +23,7 @@ declare module 'vona' {
 export * from '../service/redisClient.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-redis:redisClient': never;
   }

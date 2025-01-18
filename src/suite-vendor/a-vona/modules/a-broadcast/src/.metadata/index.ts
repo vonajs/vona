@@ -2,7 +2,7 @@
 export * from '../service/broadcast.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-broadcast:broadcast': never;
   }

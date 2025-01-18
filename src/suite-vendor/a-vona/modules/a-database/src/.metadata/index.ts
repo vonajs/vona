@@ -44,7 +44,7 @@ export * from '../service/dbMeta.js';
 export * from '../service/transaction.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-database:databaseClient': never;
     'a-database:dbMeta': never;

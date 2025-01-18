@@ -134,7 +134,7 @@ import { MetaRedlock } from '../bean/meta.redlock.js';
 export * from '../service/instance.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-instance:instance': never;
   }

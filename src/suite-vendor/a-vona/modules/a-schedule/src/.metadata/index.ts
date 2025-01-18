@@ -59,7 +59,7 @@ declare module 'vona-module-a-schedule' {
 export * from '../service/schedule.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-schedule:schedule': never;
   }

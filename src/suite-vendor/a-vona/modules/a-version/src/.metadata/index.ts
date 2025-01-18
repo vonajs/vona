@@ -208,7 +208,7 @@ export * from '../service/database.js';
 export * from '../service/version.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-version:database': never;
     'a-version:version': never;

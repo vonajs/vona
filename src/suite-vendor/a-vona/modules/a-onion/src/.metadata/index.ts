@@ -23,7 +23,7 @@ declare module 'vona' {
 export * from '../service/onion_.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona-module-a-web' {}
 declare module 'vona-module-a-onion' {}
 /** service: end */
 /** scope: begin */

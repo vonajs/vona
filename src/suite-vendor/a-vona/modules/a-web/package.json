@@ -16,6 +16,7 @@
         "sceneIsolate": true,
         "scopeResource": true,
         "beanGeneral": true,
+        "optionsGlobalInterfaceFrom": "vona-module-a-web",
         "boilerplate": "cli/service/boilerplate"
       },
       "controller": {

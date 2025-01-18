@@ -18,7 +18,7 @@ declare module 'vona-module-a-queue' {
 export * from '../service/queue.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-queue:queue': never;
   }

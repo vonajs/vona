@@ -24,7 +24,7 @@ export interface IModuleCacheRedis {
 export * from '../service/passportAdapter.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'home-user:passportAdapter': never;
   }

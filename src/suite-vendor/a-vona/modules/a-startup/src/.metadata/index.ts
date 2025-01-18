@@ -43,7 +43,7 @@ import { MetaRedlock } from '../bean/meta.redlock.js';
 export * from '../service/startup.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-startup:startup': never;
   }

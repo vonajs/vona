@@ -26,7 +26,7 @@ export * from '../service/localMem_.js';
 export * from '../service/localRedis_.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona-module-a-web' {}
 declare module 'vona-module-a-summer' {}
 /** service: end */
 /** config: begin */

@@ -80,7 +80,7 @@ import { MetaStatic } from '../bean/meta.static.js';
 export * from '../service/errorView.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-core:errorView': never;
   }

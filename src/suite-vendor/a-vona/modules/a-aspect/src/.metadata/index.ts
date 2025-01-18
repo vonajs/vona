@@ -3,7 +3,7 @@ export * from '../service/aop.js';
 export * from '../service/filter.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-aspect:aop': never;
     'a-aspect:filter': never;

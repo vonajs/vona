@@ -232,7 +232,7 @@ export * from '../service/testApp.js';
 export * from '../service/testClass.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'vona-test:test': never;
     'vona-test:testApp': never;
