@@ -9,7 +9,6 @@
     "metas": {
       "status": {
         "scopeResource": true,
-        "snippets": "cli/snippets",
         "boilerplate": "cli/boilerplate"
       }
     }

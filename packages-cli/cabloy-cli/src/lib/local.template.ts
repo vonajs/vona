@@ -213,8 +213,7 @@ export class LocalTemplate {
     // for
     for (const file of files) {
       const snippetTemplatePath = path.join(snippetsDir, file);
-      await this._loadSnippetInstance(snippetTemplatePath, async instance => {
-        const snippet: ISnippet = typeof instance === 'function' ? instance() : instance;
+      await this._loadSnippetInstance(snippetTemplatePath, async snippet => {
         if (!snippet.file) {
           throw new Error(`should provider file path for: ${file}`);
         }
@@ -234,7 +233,7 @@ export class LocalTemplate {
     }
   }
 
-  async _loadSnippetInstance(snippetTemplatePath: string, fn: (instance: any) => Promise<void>) {
+  async _loadSnippetInstance(snippetTemplatePath: string, fn: (snippet: ISnippet) => Promise<void>) {
     if (snippetTemplatePath.endsWith('.cjs')) {
       const instance = this.helper.requireDynamic(snippetTemplatePath);
       await fn(instance);
