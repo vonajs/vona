@@ -15,6 +15,12 @@ import { build as esBuild } from 'esbuild';
 import { pathToFileURL } from 'node:url';
 import gogocode from 'gogocode';
 
+export interface ITempFileOptions {
+  tmpdir?: string;
+  prefix?: string;
+  postfix?: string;
+}
+
 export class LocalHelper {
   cli: BeanCliBase;
   processHelper: ProcessHelper;
@@ -235,16 +241,28 @@ export class LocalHelper {
     return name;
   }
   async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
+    return await this.tempFile(
+      async fileTemp => {
+        // build
+        const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
+        await esBuild(esBuildConfig as any);
+        // load
+        const instance = await import(this._pathToHref(fileTemp));
+        return await fn(instance);
+      },
+      {
+        tmpdir: path.dirname(fileName),
+        prefix: '.temp-dynamic-',
+        postfix: '.mjs',
+      },
+    );
+  }
+  async tempFile<RESULT>(fn: (fileTemp: string) => Promise<RESULT>, options?: ITempFileOptions): Promise<RESULT> {
     // temp
-    const fileTempObj = tmp.fileSync({ tmpdir: path.dirname(fileName), prefix: '.temp-dynamic-', postfix: '.mjs' });
+    const fileTempObj = tmp.fileSync(options);
     const fileTemp = fileTempObj.name;
     try {
-      // build
-      const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
-      await esBuild(esBuildConfig as any);
-      // load
-      const instance = await import(this._pathToHref(fileTemp));
-      return await fn(instance);
+      return await fn(fileTemp);
     } finally {
       // delete temp
       fileTempObj.removeCallback();
