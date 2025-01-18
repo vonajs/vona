@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "@cabloy/cli",
   "publishConfig": {
     "access": "public"
