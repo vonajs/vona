@@ -5,7 +5,7 @@ const __snippet_body =
   '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
 
 export default metadataCustomSnippet({
-  parseOptions: { language: '' },
+  language: '',
   file: 'openapi.config.ts',
   init: `import { ZovaOpenapiConfig } from 'zova-openapi';
 

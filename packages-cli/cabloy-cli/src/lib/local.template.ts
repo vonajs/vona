@@ -6,7 +6,7 @@ import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 import { BeanCliBase } from './bean.cli.base.js';
 import { commandsConfig } from '../config.js';
-import { IEjsData, ISnippet, TypeParseOptionLanguage } from '../types/template.js';
+import { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.js';
 
 export class LocalTemplate {
   cli: BeanCliBase;
@@ -256,7 +256,7 @@ export class LocalTemplate {
       sourceCode = await this.renderContent({ content: snippet.init });
     }
     // language
-    const language = snippet.parseOptions?.language as TypeParseOptionLanguage;
+    const language = snippet.language as TypeParseLanguage;
     // transform
     let outputCode;
     if (language === 'plain') {

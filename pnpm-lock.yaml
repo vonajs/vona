@@ -357,6 +357,9 @@ importers:
 
   packages-cli/cabloy-cli:
     dependencies:
+      '@babel/parser':
+        specifier: ^7.26.5
+        version: 7.26.5
       '@cabloy/module-glob':
         specifier: workspace:^
         version: link:../../packages-utils/module-glob
@@ -1332,8 +1335,8 @@ packages:
     resolution: {integrity: sha512-tbhNuIxNcVb21pInl3ZSjksLCvgdZy9KwJ8brv993QtIVKJBBkYXz4q4ZbAv31GdnC+R90np23L5FbEBlthAEw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.26.3':
-    resolution: {integrity: sha512-WJ/CvmY8Mea8iDXo6a7RK2wbmJITT5fN3BEkRuFlxVyNx8jOKIIhmC4fSkTcPcf8JyavbBwIe6OpiCOBXt/IcA==}
+  '@babel/parser@7.26.5':
+    resolution: {integrity: sha512-SRJ4jYmXRqV1/Xc+TIVG84WjHBXKlxO9sHQnA2Pf12QQEAp1LOh6kDzNHXcUnbH1QI0FDoPPVOt+vyUDucxpaw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -1739,6 +1742,10 @@ packages:
 
   '@babel/types@7.26.3':
     resolution: {integrity: sha512-vN5p+1kl59GVKMvTHt55NzzmYVxprfJD+ql7U9NFIfKCBkYE55LYtS+WtPlaYOyzydrKI8Nezd+aZextrd+FMA==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.26.5':
+    resolution: {integrity: sha512-L6mZmwFDK6Cjh1nRCLXpa6no13ZIioJDz7mdkzHv399pThrTa/k0nUlNaenOeh2kWu/iaOQYElEpKPUswUa9Vg==}
     engines: {node: '>=6.9.0'}
 
   '@bcoe/v8-coverage@0.2.3':
@@ -7871,7 +7878,7 @@ snapshots:
       '@babel/helper-compilation-targets': 7.25.9
       '@babel/helper-module-transforms': 7.26.0(@babel/core@7.26.0)
       '@babel/helpers': 7.26.0
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/template': 7.25.9
       '@babel/traverse': 7.26.4
       '@babel/types': 7.26.3
@@ -7893,7 +7900,7 @@ snapshots:
 
   '@babel/generator@7.26.3':
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/types': 7.26.3
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
@@ -8020,9 +8027,9 @@ snapshots:
       '@babel/template': 7.25.9
       '@babel/types': 7.26.3
 
-  '@babel/parser@7.26.3':
+  '@babel/parser@7.26.5':
     dependencies:
-      '@babel/types': 7.26.3
+      '@babel/types': 7.26.5
 
   '@babel/plugin-bugfix-firefox-class-in-computed-class-key@7.25.9(@babel/core@7.26.0)':
     dependencies:
@@ -8518,14 +8525,14 @@ snapshots:
   '@babel/template@7.25.9':
     dependencies:
       '@babel/code-frame': 7.26.2
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/types': 7.26.3
 
   '@babel/traverse@7.26.4':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/generator': 7.26.3
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/template': 7.25.9
       '@babel/types': 7.26.3
       debug: 4.4.0(supports-color@8.1.1)
@@ -8534,6 +8541,11 @@ snapshots:
       - supports-color
 
   '@babel/types@7.26.3':
+    dependencies:
+      '@babel/helper-string-parser': 7.25.9
+      '@babel/helper-validator-identifier': 7.25.9
+
+  '@babel/types@7.26.5':
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
@@ -9371,7 +9383,7 @@ snapshots:
 
   '@vue/compiler-core@3.0.11':
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/types': 7.26.3
       '@vue/shared': 3.0.11
       estree-walker: 2.0.2
@@ -9379,7 +9391,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.13':
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@vue/shared': 3.5.13
       entities: 4.5.0
       estree-walker: 2.0.2
@@ -9397,7 +9409,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.13':
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@vue/compiler-core': 3.5.13
       '@vue/compiler-dom': 3.5.13
       '@vue/compiler-ssr': 3.5.13
@@ -10156,7 +10168,7 @@ snapshots:
   babel-eslint@10.1.0(eslint@8.57.1):
     dependencies:
       '@babel/code-frame': 7.26.2
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/traverse': 7.26.4
       '@babel/types': 7.26.3
       eslint: 8.57.1
@@ -12252,7 +12264,7 @@ snapshots:
 
   gogocode@1.0.55(vue@3.5.13(typescript@5.7.2)):
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       glob: 7.2.3
       hyntax-yx: 1.0.9
       indent-string: 4.0.0
@@ -12765,7 +12777,7 @@ snapshots:
 
   jsdoc@4.0.4:
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@jsdoc/salty': 0.2.9
       '@types/markdown-it': 14.1.2
       bluebird: 3.7.2
@@ -15430,7 +15442,7 @@ snapshots:
 
   vue3-browser-compiler-yx@1.0.4(vue@3.5.13(typescript@5.7.2)):
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.26.5
       '@babel/types': 7.26.3
       '@vue/compiler-core': 3.0.11
       '@vue/compiler-dom': 3.0.11

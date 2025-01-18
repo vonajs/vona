@@ -2,6 +2,7 @@ import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import { BeanCliBase } from '../lib/bean.cli.base.js';
 import { ICommandContext } from './argv.js';
 import { GoGoAST } from 'gogocode';
+import { ParserOptions } from '@babel/parser';
 
 export interface IMetadataCustomGenerateOptions {
   cli: BeanCliBase;
@@ -19,27 +20,31 @@ export interface IEjsData extends ICommandContext {
   cli: BeanCliBase;
 }
 
-export interface IAstData<LANGUAGE extends TypeParseOptionLanguage> extends ICommandContext {
+export interface IAstData<LANGUAGE extends TypeParseLanguage> extends ICommandContext {
   cli: BeanCliBase;
   ast: TypeParseResult<LANGUAGE>;
   snippet: ISnippet<LANGUAGE>;
 }
 
-export type TypeParseOptionLanguage = 'plain' | 'json' | 'gogo' | '';
-export type TypeParseResult<LANGUAGE extends TypeParseOptionLanguage> = LANGUAGE extends 'plain'
+export type TypeParseLanguage = 'plain' | 'json' | 'gogo' | '';
+export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
   ? string
   : LANGUAGE extends 'json'
     ? object
     : GoGoAST;
-export interface IParseOptions<LANGUAGE> {
-  language?: LANGUAGE;
-}
-export interface ISnippet<LANGUAGE extends TypeParseOptionLanguage = ''> {
+export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
+  ? never
+  : LANGUAGE extends 'json'
+    ? never
+    : ParserOptions;
+
+export interface ISnippet<LANGUAGE extends TypeParseLanguage = ''> {
+  language: LANGUAGE;
   file: string | ((ejsData: IEjsData) => string);
   init?: string;
-  parseOptions?: IParseOptions<LANGUAGE>;
+  parseOptions?: TypeParseOptions<LANGUAGE>;
   transform: (astData: IAstData<LANGUAGE>) => Promise<TypeParseResult<LANGUAGE>>;
 }
-export function metadataCustomSnippet<LANGUAGE extends TypeParseOptionLanguage>(snippet: ISnippet<LANGUAGE>) {
+export function metadataCustomSnippet<LANGUAGE extends TypeParseLanguage>(snippet: ISnippet<LANGUAGE>) {
   return snippet;
 }

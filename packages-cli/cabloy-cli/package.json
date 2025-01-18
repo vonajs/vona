@@ -34,6 +34,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
+    "@babel/parser": "^7.26.5",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
