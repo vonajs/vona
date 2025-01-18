@@ -239,7 +239,9 @@ export class LocalTemplate {
       const instance = this.helper.requireDynamic(snippetTemplatePath);
       await fn(instance);
     }
-    await this.helper.importDynamic(snippetTemplatePath, fn);
+    await this.helper.importDynamic(snippetTemplatePath, instance => {
+      return fn(instance.default);
+    });
   }
 
   async applySnippet(targetFile: string, snippet: ISnippet) {
