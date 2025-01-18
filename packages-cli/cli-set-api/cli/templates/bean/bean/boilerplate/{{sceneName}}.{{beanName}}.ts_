@@ -1,4 +1,0 @@
-import { Bean, BeanBase } from 'vona';
-
-@Bean()
-export class Bean<%=argv.beanNameCapitalize%> extends BeanBase {}
