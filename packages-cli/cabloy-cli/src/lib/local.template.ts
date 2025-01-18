@@ -43,33 +43,37 @@ export class LocalTemplate {
     return this.moduleConfig.template.render.ignore;
   }
 
-  resolveTemplatePath({ setName, path: _path }: any) {
+  resolveTemplatePath(setName: string, _path: string): string {
     if (path.isAbsolute(_path)) return _path;
     const sets = this.moduleConfig.sets;
     const modulePath = require.resolve(`${sets[process.env.CabloyCliBrandName as any][setName]}/package.json`);
     return path.join(path.dirname(modulePath), 'cli/templates', _path);
   }
 
-  async renderBoilerplateAndSnippets({ targetDir, setName, snippetsPath, boilerplatePath }: any) {
+  async renderBoilerplateAndSnippets({
+    targetDir,
+    setName,
+    snippetsPath,
+    boilerplatePath,
+  }: {
+    targetDir: string;
+    setName: string;
+    snippetsPath?: string | null | undefined;
+    boilerplatePath?: string | null | undefined;
+  }) {
     // first
     if (snippetsPath) {
-      const snippetsDir = this.resolveTemplatePath({
-        setName,
-        path: snippetsPath,
-      });
+      const snippetsDir = this.resolveTemplatePath(setName, snippetsPath);
       await this.applySnippets(targetDir, snippetsDir);
     }
     // then
     if (boilerplatePath) {
-      const templateDir = this.resolveTemplatePath({
-        setName,
-        path: boilerplatePath,
-      });
-      await this.renderDir({ targetDir, templateDir });
+      const templateDir = this.resolveTemplatePath(setName, boilerplatePath);
+      await this.renderDir(targetDir, templateDir);
     }
   }
 
-  async renderDir({ targetDir, templateDir }: any) {
+  async renderDir(targetDir: string, templateDir: string) {
     const { argv } = this.context;
     // files
     const files = eggBornUtils.tools.globbySync('**/*', {
