@@ -50,12 +50,12 @@ export class CliCreateBean extends BeanCliBase {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }
     await this.helper.ensureDir(beanDir);
-    // boilerplate name
+    // snippets/boilerplate
     const snippets = this._getBoilerplatesOrSnippets('snippets');
     const boilerplates = this._getBoilerplatesOrSnippets('boilerplate');
     const snippetsName = snippets[`${sceneName}:${argv.beanName}`] || snippets[sceneName];
     const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
-    // render boilerplate
+    // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
       setName: __ThisSetName__,
