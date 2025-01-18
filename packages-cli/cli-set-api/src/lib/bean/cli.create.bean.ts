@@ -73,7 +73,7 @@ export class CliCreateBean extends BeanCliBase {
     for (const sceneName in onionScenesMeta) {
       const onionSceneMeta = onionScenesMeta[sceneName];
       if (onionSceneMeta[type]) {
-        result[sceneName] = path.join(onionSceneMeta.module!.root, onionSceneMeta[type]);
+        result[sceneName] = path.join(onionSceneMeta.module!.root, onionSceneMeta[type]!);
       }
     }
     // metas
@@ -81,7 +81,7 @@ export class CliCreateBean extends BeanCliBase {
     for (const sceneName in onionMetasMeta) {
       const onionMetaMeta = onionMetasMeta[sceneName];
       if (onionMetaMeta[type]) {
-        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, onionMetaMeta[type]);
+        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, onionMetaMeta[type]!);
       }
     }
     return result;
