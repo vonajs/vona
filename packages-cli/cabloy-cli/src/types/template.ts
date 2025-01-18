@@ -30,7 +30,7 @@ export type TypeParseLanguage = 'plain' | 'json' | 'gogo' | '';
 export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
   ? string
   : LANGUAGE extends 'json'
-    ? object
+    ? any
     : GoGoAST;
 export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
   ? never
