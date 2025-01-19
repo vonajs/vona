@@ -28,7 +28,7 @@ export function compose(chains?: any[], adapter?: TypeComposeAdapter) {
         if (!fn) throw new Error('fn is not defined');
       }
       if (i === chains!.length) fn = next;
-      if (!fn) return;
+      if (!fn) return context;
       return fn.call(receiver, context, function next(...args) {
         context = args.length === 0 ? context : args[0];
         return dispatch(i + 1, context);
