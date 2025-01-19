@@ -280,7 +280,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       const optionsPrimitive = item.beanOptions.optionsPrimitive;
       // options
       const options = this.combineOnionOptions(item);
-      // enable match ignore dependencies
+      // enable match ignore
       if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, this._getRoutePathForMatch())) {
         return next(data);
       }
