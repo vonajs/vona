@@ -1,2 +1,1 @@
-export * from './lib/errorMapDefault.js';
-export * from './lib/errorMapSchema.js';
+export * from './lib/index.js';
