@@ -46,7 +46,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   compose(
-    ctx: VonaContext,
+    ctx: VonaContext | undefined,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
@@ -100,14 +100,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   private _composeOnionsHandler(
-    ctx: VonaContext,
+    ctx: VonaContext | undefined,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
     executeCustom?: IOnionExecuteCustom,
   ) {
-    const beanFullName = ctx.getControllerBeanFullName();
-    const handlerName = ctx.getHandler()?.name;
+    const beanFullName = ctx?.getControllerBeanFullName();
+    const handlerName = ctx?.getHandler()?.name;
     const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
     if (!this._cacheOnionsHandler[key]) {
       let onions: Function[] = [];
@@ -126,8 +126,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this._cacheOnionsHandler[key];
   }
 
-  public _collectOnionsHandler(ctx: VonaContext) {
-    if (!ctx.getController()) return [];
+  public _collectOnionsHandler(ctx: VonaContext | undefined) {
+    if (!ctx?.getController()) return [];
     // onionsLocal: controller
     const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
