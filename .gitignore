@@ -38,6 +38,7 @@ env/.env*.mine
 !packages-utils/module-glob/dist
 !packages-utils/module-info/dist
 !packages-utils/module-info-pro/dist
+!packages-utils/utils/dist
 
 /docker-compose
 !/docker-compose/config

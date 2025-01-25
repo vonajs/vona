@@ -116,7 +116,7 @@ export class AppUtil extends BeanSimple {
 
   async getPublicPathPhysicalRoot() {
     if (this.app.meta.isTest || this.app.meta.isLocal) {
-      return this.app.config.static.dir;
+      return path.join(this.app.options.baseDir, 'app/public');
     }
     const dir = this.app.config.publicDir || path.join(os.homedir(), 'vona', this.app.name, 'public');
     await fse.ensureDir(dir);

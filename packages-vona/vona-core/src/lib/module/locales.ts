@@ -3,10 +3,11 @@ import path from 'path';
 import { VonaApplication, TypeModuleResourceLocales } from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
 import { IModule } from '@cabloy/module-info';
+import localesDefault from '../core/locales.js';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all locales
-  app.meta.locales = {};
+  app.meta.locales = localesDefault;
   app.meta.localeModules = {};
 
   // load locales
@@ -48,7 +49,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
      *
      */
     // project locales
-    const localeDirs = (<any>app.config.i18n).dirs;
+    const localeDirs = [path.join(app.options.baseDir, 'config/locale')];
     for (let i = 0; i < localeDirs.length; i++) {
       const dir = localeDirs[i];
 
