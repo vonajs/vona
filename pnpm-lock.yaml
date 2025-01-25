@@ -1184,6 +1184,9 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-web:
     dependencies:
+      '@eggjs/router':
+        specifier: ^3.0.5
+        version: 3.0.5
       egg-path-matching:
         specifier: ^1.0.1
         version: 1.1.0
@@ -1812,6 +1815,10 @@ packages:
   '@eggjs/router@2.0.1':
     resolution: {integrity: sha512-oiP0sSMP6DkghgIp3VvpEgTRhTwDDpBzUdwaQH+sIpanlUOhctoRsw3zKVNwvOi/aNguHNNHaZUcq3HReBohhA==}
     engines: {node: '>= 8'}
+
+  '@eggjs/router@3.0.5':
+    resolution: {integrity: sha512-72CLZ+9WOQbaSNr6sT1N3x8zArVyUvX0JWUPMYuaGY9gPI6ChBGTnHwecJ4KRc6Iakt0VPpkZrx+H+XXd53cSw==}
+    engines: {node: '>= 18.19.0'}
 
   '@eggjs/utils@4.1.6':
     resolution: {integrity: sha512-2MHcl9OM71K6OXEjtM0ptpFaqfcWeNZ6AXf53euxMy6O6TdflEslFuNz9cmVmCPkoBd9CNhxuBMmY1swaWdeSA==}
@@ -4931,6 +4938,10 @@ packages:
   inflection@1.13.4:
     resolution: {integrity: sha512-6I/HUDeYFfuNCVS3td055BaXBwKYuzw7K3ExVMStBowKo9oOAMJIXIHvdyR3iboTCp1b+1i5DSkIZTcwIktuDw==}
     engines: {'0': node >= 0.4.0}
+
+  inflection@3.0.2:
+    resolution: {integrity: sha512-+Bg3+kg+J6JUWn8J6bzFmOWkTQ6L/NHfDRSYU+EVvuKHDxUDHAXgqixHfVlzuBQaPOTac8hn43aPhMNk6rMe3g==}
+    engines: {node: '>=18.0.0'}
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
@@ -8636,6 +8647,17 @@ snapshots:
       utility: 1.18.0
     transitivePeerDependencies:
       - supports-color
+
+  '@eggjs/router@3.0.5':
+    dependencies:
+      http-errors: 2.0.0
+      inflection: 3.0.2
+      is-type-of: 2.2.0
+      koa-compose: 4.1.0
+      methods: 1.1.2
+      path-to-regexp: 1.9.0
+      urijs: 1.19.11
+      utility: 2.4.0
 
   '@eggjs/utils@4.1.6': {}
 
@@ -12500,6 +12522,8 @@ snapshots:
   inflation@2.1.0: {}
 
   inflection@1.13.4: {}
+
+  inflection@3.0.2: {}
 
   inflight@1.0.6:
     dependencies:

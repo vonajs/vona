@@ -53,6 +53,7 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@eggjs/router": "^3.0.5",
     "egg-path-matching": "^1.0.1"
   }
 }

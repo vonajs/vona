@@ -19,9 +19,40 @@ declare module 'vona' {
   }
 }
 /** bean: end */
-/** monkey: begin */
-export * from '../monkey.js';
-/** monkey: end */
+/** service: begin */
+export * from '../service/router.js';
+
+import 'vona';
+declare module 'vona-module-a-web' {
+  export interface IServiceRecord {
+    'a-web:router': never;
+  }
+}
+declare module 'vona-module-a-web' {
+  export interface ServiceRouter {
+    /** @internal */
+    get scope(): ScopeModuleAWeb;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceRouter } from '../service/router.js';
+export interface IModuleService {
+  router: ServiceRouter;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-web.service.router': ServiceRouter;
+  }
+}
+/** service: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -31,6 +62,7 @@ export class ScopeModuleAWeb extends BeanScopeBase {}
 
 export interface ScopeModuleAWeb {
   util: BeanScopeUtil;
+  service: IModuleService;
 }
 
 import 'vona';
