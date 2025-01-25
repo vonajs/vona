@@ -57,6 +57,22 @@ declare module 'vona-module-a-core' {
   }
 }
 /** middleware: end */
+/** middlewareSystem: begin */
+export * from '../bean/middlewareSystem.meta.js';
+import { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IMiddlewareSystemRecord {
+    'a-core:meta': IMiddlewareSystemOptionsMeta;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface MiddlewareSystemMeta {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** middlewareSystem: end */
 /** meta: begin */
 export * from '../bean/meta.static.js';
 
