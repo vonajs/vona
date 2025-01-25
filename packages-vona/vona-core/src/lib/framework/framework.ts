@@ -14,6 +14,10 @@ export class Application extends egg.Application {
     return eggPath;
   }
 
+  dumpConfig() {
+    // do nothing
+  }
+
   dumpTiming() {
     // do nothing
   }
@@ -22,6 +26,10 @@ export class Application extends egg.Application {
 export class Agent extends egg.Agent {
   get [EGG_PATH]() {
     return eggPath;
+  }
+
+  dumpConfig() {
+    // do nothing
   }
 
   dumpTiming() {
