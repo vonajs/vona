@@ -9,22 +9,17 @@ export interface IMiddlewareSystemOptionsMeta extends IDecoratorMiddlewareSystem
 @MiddlewareSystem<IMiddlewareSystemOptionsMeta>({ logging: false })
 export class MiddlewareSystemMeta extends BeanBase implements IMiddlewareSystemExecute {
   async execute(options: IMiddlewareSystemOptionsMeta, next: Next) {
+    const ctx = this.ctx;
+
     if (options.logging) {
-      this.ctx.coreLogger.info(
-        '[meta] request started, host: %s, user-agent: %s',
-        this.ctx.host,
-        this.ctx.header['user-agent'],
-      );
+      ctx.coreLogger.info('[meta] request started, host: %s, user-agent: %s', ctx.host, ctx.header['user-agent']);
     }
     await next();
     // total response time header
-    if (this.ctx.performanceStarttime) {
-      this.ctx.set(
-        'x-readtime',
-        (Math.floor((performance.now() - this.ctx.performanceStarttime) * 1000) / 1000).toString(),
-      );
+    if (ctx.performanceStarttime) {
+      ctx.set('x-readtime', (Math.floor((performance.now() - ctx.performanceStarttime) * 1000) / 1000).toString());
     } else {
-      this.ctx.set('x-readtime', (Date.now() - this.ctx.starttime).toString());
+      ctx.set('x-readtime', (Date.now() - ctx.starttime).toString());
     }
   }
 }
