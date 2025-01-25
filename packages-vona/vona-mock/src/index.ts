@@ -18,11 +18,11 @@ if (!Bundle) {
     // wait ready
     await Bundle.app.ready();
     // session
-    Bundle.app.mockSession({});
+    // Bundle.app.mockSession({});
     // wait app ready
     await app.meta.waitAppReady();
     // restore
-    Bundle.mock.restore();
+    // Bundle.mock.restore();
   });
 
   after(async function () {

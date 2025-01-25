@@ -98,6 +98,11 @@ export default function (appInfo: VonaAppInfo) {
   // modules
   config.modules = {};
 
+  // coreMiddleware
+  config.coreMiddleware = [
+    // 'meta', 'siteFile', 'notfound', 'bodyParser', 'overrideMethod'
+  ];
+
   // i18n
   config.i18n = {
     defaultLocale: 'en-us',

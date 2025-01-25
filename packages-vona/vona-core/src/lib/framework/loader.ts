@@ -8,6 +8,14 @@ function createLoaderClass(Base) {
   return class LoaderClass extends Base {
     pkgVona: any = null;
 
+    loadPlugin() {
+      // do nothing
+    }
+
+    loadMiddleware(_opt: any) {
+      // do nothing
+    }
+
     loadConfig() {
       // meta
       const mode: VonaMetaMode = this.serverEnv;

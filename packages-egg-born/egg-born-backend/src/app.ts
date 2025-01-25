@@ -22,19 +22,19 @@ export default class AppBootHook {
   }
 
   _prepareMiddlewares() {
-    const app = this.app;
-    // jwt
-    let index = app.config.coreMiddleware.indexOf('session');
-    if (index === -1) {
-      app.config.coreMiddleware.push('appReady', 'instance', 'cors', 'jwt');
-    } else {
-      app.config.coreMiddleware.splice(index, 0, 'appReady', 'instance', 'cors', 'jwt');
-    }
-    // siteFile
-    index = app.config.coreMiddleware.indexOf('siteFile');
-    if (index > -1) {
-      app.config.coreMiddleware.splice(index, 1);
-    }
+    // const app = this.app;
+    // // jwt
+    // let index = app.config.coreMiddleware.indexOf('session');
+    // if (index === -1) {
+    //   app.config.coreMiddleware.push('appReady', 'instance', 'cors', 'jwt');
+    // } else {
+    //   app.config.coreMiddleware.splice(index, 0, 'appReady', 'instance', 'cors', 'jwt');
+    // }
+    // // siteFile
+    // index = app.config.coreMiddleware.indexOf('siteFile');
+    // if (index > -1) {
+    //   app.config.coreMiddleware.splice(index, 1);
+    // }
     // // sessionCaller
     // index = app.config.coreMiddleware.indexOf('session');
     // if (index > -1) {
