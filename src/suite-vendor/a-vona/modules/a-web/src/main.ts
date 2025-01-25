@@ -1,5 +1,11 @@
-import { BeanSimple, IModuleMain } from 'vona';
+import { BeanSimple, compose, IModuleMain, Next, VonaContext } from 'vona';
 import { EggRouter } from '@eggjs/router';
+import { IOnionSlice } from 'vona-module-a-onion';
+import {
+  IDecoratorMiddlewareSystemOptions,
+  IMiddlewareSystemExecute,
+  IMiddlewareSystemRecord,
+} from 'vona-module-a-aspect';
 
 const SymbolRouter = Symbol('SymbolRouter');
 
@@ -24,9 +30,30 @@ export class Main extends BeanSimple implements IModuleMain {
       this.bean.router.registerController(controller.beanOptions.module, controller.beanOptions.beanClass);
     }
     // middleware: system
-    this.app.use(this.app.bean.onion.middlewareSystem.compose(undefined));
+    const middlewares = this.bean.onion.middlewareSystem.getOnionsEnabledWrapped(item => {
+      return this._wrapOnion(item);
+    });
+    this.app.use(compose(middlewares));
     // middleware: router
     this.app.use(this[SymbolRouter].middleware());
   }
   async configLoaded(_config: any) {}
+
+  private _wrapOnion(item: IOnionSlice<IDecoratorMiddlewareSystemOptions, keyof IMiddlewareSystemRecord>) {
+    const fn = (_ctx: VonaContext, next: Next) => {
+      const options = item.beanOptions.options!;
+      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
+        return next();
+      }
+      // execute
+      const beanFullName = item.beanOptions.beanFullName;
+      const beanInstance = this.app.bean._getBean<IMiddlewareSystemExecute>(beanFullName as any);
+      if (!beanInstance) {
+        throw new Error(`middlewareSystem bean not found: ${beanFullName}`);
+      }
+      return beanInstance.execute(options, next);
+    };
+    fn._name = item.name;
+    return fn;
+  }
 }
