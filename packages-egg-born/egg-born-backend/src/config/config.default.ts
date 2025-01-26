@@ -125,12 +125,6 @@ export default function (appInfo: VonaAppInfo) {
     ignore: /\/api\/static\//,
   };
 
-  // bodyParser
-  config.bodyParser = {
-    jsonLimit: '30mb',
-    formLimit: '30mb',
-  };
-
   // multipart
   config.multipart = {
     fileSize: '30mb',
