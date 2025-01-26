@@ -1060,6 +1060,9 @@ importers:
       koa-bodyparser:
         specifier: ^4.4.1
         version: 4.4.1
+      koa-override:
+        specifier: ^4.0.0
+        version: 4.0.0
       moment:
         specifier: ^2.30.1
         version: 2.30.1
@@ -5442,6 +5445,10 @@ packages:
   koa-override@3.0.0:
     resolution: {integrity: sha512-w2rWCfapbQUZ8TrRBarj6iwryCTooEcdw9lr1hYC1q4FnaCZcAOhpjB1VpqtbODALVMgY3JGlzLSeYRXc5Ky0Q==}
     engines: {node: '>= 8.0.0'}
+
+  koa-override@4.0.0:
+    resolution: {integrity: sha512-OxKEHerA4pVQ2W6qPX1sXWJ8HMCr94Q424C8qyzVpT70aCo9/NTKsqpCmKewPbdZAzxPTjnmlWdDkfa+WWlaDQ==}
+    engines: {node: '>= 18.19.0'}
 
   koa-range@0.3.0:
     resolution: {integrity: sha512-Ich3pCz6RhtbajYXRWjIl6O5wtrLs6kE3nkXc9XmaWe+MysJyZO7K4L3oce1Jpg/iMgCbj+5UCiMm/rqVtcDIg==}
@@ -13027,6 +13034,8 @@ snapshots:
   koa-override@3.0.0:
     dependencies:
       methods: 1.1.2
+
+  koa-override@4.0.0: {}
 
   koa-range@0.3.0:
     dependencies:

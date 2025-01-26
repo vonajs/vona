@@ -1,3 +1,27 @@
+/** middlewareSystem: begin */
+export * from '../bean/middlewareSystem.appReady.js';
+export * from '../bean/middlewareSystem.instance.js';
+import { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.js';
+import { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IMiddlewareSystemRecord {
+    'a-instance:appReady': IMiddlewareSystemOptionsAppReady;
+    'a-instance:instance': IMiddlewareSystemOptionsInstance;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface MiddlewareSystemAppReady {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface MiddlewareSystemInstance {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** middlewareSystem: end */
 /** bean: begin */
 export * from '../bean/bean.instance.js';
 
