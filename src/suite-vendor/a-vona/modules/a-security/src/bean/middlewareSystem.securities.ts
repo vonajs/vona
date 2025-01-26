@@ -1,10 +1,24 @@
-import { BeanBase, Next } from 'vona';
+import { pathMatching } from 'egg-path-matching';
+import assert from 'node:assert';
+import { BeanBase, compose, Next } from 'vona';
 import { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute, MiddlewareSystem } from 'vona-module-a-aspect';
+import securityMiddlewares from '../lib/middlewares/index.js';
+
+export type SecurityMiddlewareName =
+  | 'csrf'
+  | 'hsts'
+  | 'methodnoallow'
+  | 'noopen'
+  | 'nosniff'
+  | 'csp'
+  | 'xssProtection'
+  | 'xframe'
+  | 'dta';
 
 export interface IMiddlewareSystemOptionsSecurities extends IDecoratorMiddlewareSystemOptions {
   domainWhiteList: string[];
   protocolWhiteList: string[];
-  defaultMiddleware: string | string[];
+  defaultMiddleware: string | SecurityMiddlewareName | SecurityMiddlewareName[];
   csrf: {
     match?: any;
     ignore?: any;
@@ -156,8 +170,89 @@ export interface IMiddlewareSystemOptionsSecurities extends IDecoratorMiddleware
   },
 })
 export class MiddlewareSystemSecurities extends BeanBase implements IMiddlewareSystemExecute {
-  async execute(_options: IMiddlewareSystemOptionsSecurities, next: Next) {
-    // next
-    return next();
+  private _composer: any;
+
+  async execute(options: IMiddlewareSystemOptionsSecurities, next: Next) {
+    return this._getComposer(options)(this.ctx, next);
+  }
+
+  _getComposer(options: IMiddlewareSystemOptionsSecurities) {
+    if (!this._composer) {
+      const middlewares = this._createMiddlewares(options);
+      this._composer = compose(middlewares);
+    }
+    return this._composer;
+  }
+
+  _createMiddlewares(options: IMiddlewareSystemOptionsSecurities) {
+    const middlewares: Function[] = [];
+    const defaultMiddlewares =
+      typeof options.defaultMiddleware === 'string'
+        ? (options.defaultMiddleware
+            .split(',')
+            .map(m => m.trim())
+            .filter(m => !!m) as SecurityMiddlewareName[])
+        : options.defaultMiddleware;
+
+    if (options.match || options.ignore) {
+      this.app.coreLogger.warn('[@eggjs/security/middleware/securities] Please set `match` or `ignore` on sub config');
+    }
+
+    // format csrf.cookieDomain
+    const originalCookieDomain = options.csrf.cookieDomain;
+    if (originalCookieDomain && typeof originalCookieDomain !== 'function') {
+      options.csrf.cookieDomain = () => originalCookieDomain;
+    }
+
+    defaultMiddlewares.forEach(middlewareName => {
+      const opt = Reflect.get(options, middlewareName) as any;
+      if (opt === false) {
+        this.app.coreLogger.warn(
+          '[egg-security] Please use `config.security.%s = { enable: false }` instead of `config.security.%s = false`',
+          middlewareName,
+          middlewareName,
+        );
+      }
+
+      assert(
+        opt === false || typeof opt === 'object',
+        `config.security.${middlewareName} must be an object, or false(if you turn it off)`,
+      );
+
+      if (opt === false || (opt && opt.enable === false)) {
+        return;
+      }
+
+      if (middlewareName === 'csrf' && opt.useSession && !this.app.plugins.session) {
+        throw new Error('csrf.useSession enabled, but session plugin is disabled');
+      }
+
+      // use opt.match first (compatibility)
+      if (opt.match && opt.ignore) {
+        this.app.coreLogger.warn(
+          '[@eggjs/security/middleware/securities] `options.match` and `options.ignore` are both set, using `options.match`',
+        );
+        opt.ignore = undefined;
+      }
+      if (!opt.ignore && opt.blackUrls) {
+        this.app.deprecate(
+          '[@eggjs/security/middleware/securities] Please use `config.security.xframe.ignore` instead, `config.security.xframe.blackUrls` will be removed very soon',
+        );
+        opt.ignore = opt.blackUrls;
+      }
+      // set matching function to security middleware options
+      opt.matching = pathMatching(opt);
+
+      const createMiddleware = securityMiddlewares[middlewareName];
+      const fn = createMiddleware(opt);
+      middlewares.push(fn);
+      this.app.coreLogger.info('[@eggjs/security/middleware/securities] use %s middleware', middlewareName);
+    });
+
+    this.app.coreLogger.info(
+      '[@eggjs/security/middleware/securities] compose %d middlewares into one security middleware',
+      middlewares.length,
+    );
+    return middlewares;
   }
 }
