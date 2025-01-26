@@ -5,7 +5,7 @@ import { URL } from 'node:url';
 import { IMiddlewareSystemOptionsCors } from './middlewareSystem.cors.js';
 
 @Bean()
-export class BeanCors extends BeanBase {
+export class BeanSecurity extends BeanBase {
   isSafeDomain(origin: string | undefined | null): boolean {
     // origin is {protocol}{hostname}{port}...
     if (!origin || origin === 'null' || origin === null) return true;

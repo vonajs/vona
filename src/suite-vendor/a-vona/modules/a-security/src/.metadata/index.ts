@@ -15,23 +15,23 @@ declare module 'vona-module-a-security' {
 }
 /** middlewareSystem: end */
 /** bean: begin */
-export * from '../bean/bean.cors.js';
+export * from '../bean/bean.security.js';
 
 import 'vona';
 declare module 'vona' {}
 declare module 'vona-module-a-security' {
-  export interface BeanCors {
+  export interface BeanSecurity {
     /** @internal */
     get scope(): ScopeModuleASecurity;
   }
 }
 /** bean: end */
 /** bean: begin */
-import { BeanCors } from '../bean/bean.cors.js';
+import { BeanSecurity } from '../bean/bean.security.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    cors: BeanCors;
+    security: BeanSecurity;
   }
 }
 /** bean: end */
