@@ -30,6 +30,6 @@
   "scripts": {},
   "dependencies": {
     "@koa/cors": "^5.0.0",
-    "egg-security": "^3.7.0"
+    "matcher": "^5.0.0"
   }
 }

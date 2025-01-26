@@ -1,14 +1,22 @@
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.cors.js';
+export * from '../bean/middlewareSystem.securities.js';
 import { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
+import { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-security:cors': IMiddlewareSystemOptionsCors;
+    'a-security:securities': IMiddlewareSystemOptionsSecurities;
   }
 }
 declare module 'vona-module-a-security' {
   export interface MiddlewareSystemCors {
+    /** @internal */
+    get scope(): ScopeModuleASecurity;
+  }
+
+  export interface MiddlewareSystemSecurities {
     /** @internal */
     get scope(): ScopeModuleASecurity;
   }

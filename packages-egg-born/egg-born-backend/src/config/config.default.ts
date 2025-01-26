@@ -107,24 +107,6 @@ export default function (appInfo: VonaAppInfo) {
     defaultLocale: 'en-us',
   };
 
-  // session
-  config.session = {
-    key: 'CABLOY_SESS',
-    httpOnly: true,
-    encrypt: true,
-    ignore: /\/api\/static\//,
-  };
-
-  // passportInitialize
-  config.passportInitialize = {
-    ignore: /\/api\/static\//,
-  };
-
-  // passportSession
-  config.passportSession = {
-    ignore: /\/api\/static\//,
-  };
-
   // multipart
   config.multipart = {
     fileSize: '30mb',
@@ -150,20 +132,6 @@ export default function (appInfo: VonaAppInfo) {
       '.mp3',
       '.wav',
     ],
-  };
-
-  // cors middleware
-  config.cors = {
-    ignore: /\/api\/static\//,
-    origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
-    exposeHeaders: '',
-    allowHeaders: '',
-    maxAge: '',
-    credentials: true,
-    keepHeadersOnError: false,
-    secureContext: false,
-    privateNetworkAccess: false,
   };
 
   // database

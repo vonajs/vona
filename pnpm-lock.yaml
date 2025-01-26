@@ -1177,9 +1177,9 @@ importers:
       '@koa/cors':
         specifier: ^5.0.0
         version: 5.0.0
-      egg-security:
-        specifier: ^3.7.0
-        version: 3.7.0
+      matcher:
+        specifier: ^5.0.0
+        version: 5.0.0
 
   src/suite-vendor/a-vona/modules/a-socket: {}
 
@@ -4062,10 +4062,6 @@ packages:
     resolution: {integrity: sha512-x9wbSOVCSh1tMxmsQ/LZ4WhLkRmsXnIM7z06nLVB2xE99yg3K4v5XVXI40JZ0JyQsKGvUMY7iKSaffK3QyZ6vQ==}
     engines: {node: '>=14.20.0'}
 
-  egg-security@3.7.0:
-    resolution: {integrity: sha512-bIlPTBUW2FZ7MHntPExv0F7xigKMMK3irfEo8ypeG7S2G2vg/uFoNZumzBv4PnJeNwTzjUuG+G/YDHFOgSbTsQ==}
-    engines: {node: '>=14.20.0'}
-
   egg-session@3.3.0:
     resolution: {integrity: sha512-RCPWHLWi0Ak+xI/zXN71Wpva/wsqevmKDvkOGk2uu5UdwRHw5lKuTtYm161NMDGZi6lvcnzR2lN7xRcDuhGiIw==}
     engines: {node: '>=8.0.0'}
@@ -4224,6 +4220,10 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+
+  escape-string-regexp@5.0.0:
+    resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
+    engines: {node: '>=12'}
 
   eslint-config-egg-born@1.1.5:
     resolution: {integrity: sha512-ZD1QZbXUqEvHYDejlkKXtjhsGrzYCbsoS7GAQgxsI7YLrANaXeVlHL0/Mb8+tCO/5S44qHIhYDkPfDdAlrnLog==}
@@ -5698,6 +5698,10 @@ packages:
   matcher@4.0.0:
     resolution: {integrity: sha512-S6x5wmcDmsDRRU/c2dkccDwQPXoFczc5+HpQ2lON8pnvHlnvHAHj5WlLVvw6n6vNyHuVugYrFohYxbS+pvFpKQ==}
     engines: {node: '>=10'}
+
+  matcher@5.0.0:
+    resolution: {integrity: sha512-s2EMBOWtXFc8dgqvoAzKJXxNHibcdJMV0gwqKUaw9E2JBJuGUK7DrNKrA6g/i+v72TT16+6sVm5mS3thaMLQUw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -11326,23 +11330,6 @@ snapshots:
       type-is: 1.6.18
       xss: 1.0.15
 
-  egg-security@3.7.0:
-    dependencies:
-      '@eggjs/ip': 2.0.2
-      csrf: 3.1.0
-      delegates: 1.0.0
-      egg-path-matching: 1.1.0
-      escape-html: 1.0.3
-      extend: 3.0.2
-      koa-compose: 4.1.0
-      matcher: 4.0.0
-      methods: 1.1.2
-      nanoid: 3.3.8
-      platform: 1.3.6
-      statuses: 2.0.1
-      type-is: 1.6.18
-      xss: 1.0.15
-
   egg-session@3.3.0:
     dependencies:
       koa-session: 6.4.0
@@ -11661,6 +11648,8 @@ snapshots:
   escape-string-regexp@2.0.0: {}
 
   escape-string-regexp@4.0.0: {}
+
+  escape-string-regexp@5.0.0: {}
 
   eslint-config-egg-born@1.1.5(eslint@8.57.1)(typescript@4.9.5):
     dependencies:
@@ -13330,6 +13319,10 @@ snapshots:
   matcher@4.0.0:
     dependencies:
       escape-string-regexp: 4.0.0
+
+  matcher@5.0.0:
+    dependencies:
+      escape-string-regexp: 5.0.0
 
   math-intrinsics@1.1.0: {}
 

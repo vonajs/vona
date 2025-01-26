@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import * as security from 'egg-security';
+import matcher from 'matcher';
 import { URL } from 'node:url';
 import { IMiddlewareSystemOptionsCors } from './middlewareSystem.cors.js';
 
@@ -26,14 +26,34 @@ export class BeanSecurity extends BeanBase {
       return false;
     }
 
-    if (
-      security.utils.isSafeDomain(parsedUrl.hostname, whiteListCors) ||
-      security.utils.isSafeDomain(origin, whiteListCors)
-    ) {
+    if (_isSafeDomain(parsedUrl.hostname, whiteListCors) || _isSafeDomain(origin, whiteListCors)) {
       return true;
     }
     return false;
   }
+}
+
+function _isSafeDomain(domain, whiteList) {
+  // domain must be string, otherwise return false
+  if (typeof domain !== 'string') return false;
+  // Ignore case sensitive first
+  domain = domain.toLowerCase();
+  // add prefix `.`, because all domains in white list start with `.`
+  const hostname = '.' + domain;
+
+  return whiteList.some(rule => {
+    // Check whether we've got '*' as a wild character symbol
+    if (rule.includes('*')) {
+      return matcher.isMatch(domain, rule);
+    }
+    // If domain is an absolute path such as `http://...`
+    // We can directly check whether it directly equals to `domain`
+    // And we don't need to cope with `endWith`.
+    if (domain === rule) return true;
+    // ensure wwweggjs.com not match eggjs.com
+    if (!/^\./.test(rule)) rule = `.${rule}`;
+    return hostname.endsWith(rule);
+  });
 }
 
 // getWhiteListCors(ctx) {
