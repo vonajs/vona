@@ -1039,6 +1039,9 @@ importers:
       '@cabloy/word-utils':
         specifier: ^1.0.8
         version: 1.0.8
+      '@koa/cors':
+        specifier: ^5.0.0
+        version: 5.0.0
       boxen:
         specifier: ^8.0.1
         version: 8.0.1

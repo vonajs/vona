@@ -59,10 +59,12 @@ declare module 'vona-module-a-core' {
 /** middleware: end */
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.bodyparser.js';
+export * from '../bean/middlewareSystem.cors.js';
 export * from '../bean/middlewareSystem.meta.js';
 export * from '../bean/middlewareSystem.notfound.js';
 export * from '../bean/middlewareSystem.overrideMethod.js';
 import { IMiddlewareSystemOptionsBodyparser } from '../bean/middlewareSystem.bodyparser.js';
+import { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
 import { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.js';
 import { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.js';
 import { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.js';
@@ -70,6 +72,7 @@ import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-core:bodyparser': IMiddlewareSystemOptionsBodyparser;
+    'a-core:cors': IMiddlewareSystemOptionsCors;
     'a-core:meta': IMiddlewareSystemOptionsMeta;
     'a-core:notfound': IMiddlewareSystemOptionsNotfound;
     'a-core:overrideMethod': IMiddlewareSystemOptionsOverrideMethod;
@@ -77,6 +80,11 @@ declare module 'vona-module-a-aspect' {
 }
 declare module 'vona-module-a-core' {
   export interface MiddlewareSystemBodyparser {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+
+  export interface MiddlewareSystemCors {
     /** @internal */
     get scope(): ScopeModuleACore;
   }

@@ -152,14 +152,6 @@ export default function (appInfo: VonaAppInfo) {
     ],
   };
 
-  // appReady middleware
-  config.appReady = {
-    ignore: /\/api\/static\//,
-  };
-  // instance middleware
-  config.instance = {
-    ignore: /\/api\/static\//,
-  };
   // cors middleware
   config.cors = {
     ignore: /\/api\/static\//,
