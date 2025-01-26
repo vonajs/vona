@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import matcher from 'matcher';
+import { isMatch } from 'matcher';
 import { URL } from 'node:url';
 import { IMiddlewareSystemOptionsCors } from './middlewareSystem.cors.js';
 
@@ -44,7 +44,7 @@ function _isSafeDomain(domain, whiteList) {
   return whiteList.some(rule => {
     // Check whether we've got '*' as a wild character symbol
     if (rule.includes('*')) {
-      return matcher.isMatch(domain, rule);
+      return isMatch(domain, rule);
     }
     // If domain is an absolute path such as `http://...`
     // We can directly check whether it directly equals to `domain`
