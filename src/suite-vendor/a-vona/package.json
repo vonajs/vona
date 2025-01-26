@@ -37,7 +37,8 @@
     "vona-module-a-databasedialect": "workspace:^",
     "vona-module-a-printapipath": "workspace:^",
     "vona-module-a-cache": "workspace:^",
-    "vona-module-a-security": "workspace:^"
+    "vona-module-a-security": "workspace:^",
+    "vona-module-a-i18n": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

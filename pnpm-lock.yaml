@@ -110,6 +110,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-executor
+      vona-module-a-i18n:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-i18n
       vona-module-a-index:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-index
@@ -946,6 +949,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:modules/a-executor
+      vona-module-a-i18n:
+        specifier: workspace:^
+        version: link:modules/a-i18n
       vona-module-a-index:
         specifier: workspace:^
         version: link:modules/a-index
@@ -1119,6 +1125,8 @@ importers:
       koa-compose:
         specifier: ^4.1.0
         version: 4.1.0
+
+  src/suite-vendor/a-vona/modules/a-i18n: {}
 
   src/suite-vendor/a-vona/modules/a-index: {}
 

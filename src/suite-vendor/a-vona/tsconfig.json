@@ -89,6 +89,9 @@
     },
     {
       "path": "modules/a-security/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-i18n/tsconfig.build.json"
     }
   ]
 }
