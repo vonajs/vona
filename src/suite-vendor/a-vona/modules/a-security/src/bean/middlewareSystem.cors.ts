@@ -56,7 +56,7 @@ function _corsOrigin(ctx: VonaContext) {
   let origin = ctx.get('origin');
   if (!origin || origin === 'null') origin = 'null';
   // origin is {protocol}{hostname}{port}...
-  if (ctx.app.util.isSafeDomain(ctx, origin)) {
+  if (ctx.app.bean.cors.isSafeDomain(origin)) {
     return origin;
   }
   return '';

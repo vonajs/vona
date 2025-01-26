@@ -95,9 +95,6 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
-      vona-module-a-cors:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-cors
       vona-module-a-d:
         specifier: workspace:^
         version: link:src/suite/a-d/modules/a-d
@@ -143,6 +140,9 @@ importers:
       vona-module-a-schedule:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-schedule
+      vona-module-a-security:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-security
       vona-module-a-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-socket
@@ -837,9 +837,6 @@ importers:
       egg-cluster:
         specifier: ^2.2.1
         version: 2.4.0
-      egg-security:
-        specifier: ^3.0.0
-        version: 3.6.0
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
@@ -937,9 +934,6 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:modules/a-core
-      vona-module-a-cors:
-        specifier: workspace:^
-        version: link:modules/a-cors
       vona-module-a-database:
         specifier: workspace:^
         version: link:modules/a-database
@@ -982,6 +976,9 @@ importers:
       vona-module-a-schedule:
         specifier: workspace:^
         version: link:modules/a-schedule
+      vona-module-a-security:
+        specifier: workspace:^
+        version: link:modules/a-security
       vona-module-a-socket:
         specifier: workspace:^
         version: link:modules/a-socket
@@ -1095,12 +1092,6 @@ importers:
         specifier: ^0.12.5
         version: 0.12.5
 
-  src/suite-vendor/a-vona/modules/a-cors:
-    dependencies:
-      '@koa/cors':
-        specifier: ^5.0.0
-        version: 5.0.0
-
   src/suite-vendor/a-vona/modules/a-database:
     dependencies:
       bignumber.js:
@@ -1180,6 +1171,15 @@ importers:
         version: 4.0.7
 
   src/suite-vendor/a-vona/modules/a-schedule: {}
+
+  src/suite-vendor/a-vona/modules/a-security:
+    dependencies:
+      '@koa/cors':
+        specifier: ^5.0.0
+        version: 5.0.0
+      egg-security:
+        specifier: ^3.7.0
+        version: 3.7.0
 
   src/suite-vendor/a-vona/modules/a-socket: {}
 
@@ -4060,6 +4060,10 @@ packages:
 
   egg-security@3.6.0:
     resolution: {integrity: sha512-x9wbSOVCSh1tMxmsQ/LZ4WhLkRmsXnIM7z06nLVB2xE99yg3K4v5XVXI40JZ0JyQsKGvUMY7iKSaffK3QyZ6vQ==}
+    engines: {node: '>=14.20.0'}
+
+  egg-security@3.7.0:
+    resolution: {integrity: sha512-bIlPTBUW2FZ7MHntPExv0F7xigKMMK3irfEo8ypeG7S2G2vg/uFoNZumzBv4PnJeNwTzjUuG+G/YDHFOgSbTsQ==}
     engines: {node: '>=14.20.0'}
 
   egg-session@3.3.0:
@@ -11306,6 +11310,23 @@ snapshots:
       utility: 1.18.0
 
   egg-security@3.6.0:
+    dependencies:
+      '@eggjs/ip': 2.0.2
+      csrf: 3.1.0
+      delegates: 1.0.0
+      egg-path-matching: 1.1.0
+      escape-html: 1.0.3
+      extend: 3.0.2
+      koa-compose: 4.1.0
+      matcher: 4.0.0
+      methods: 1.1.2
+      nanoid: 3.3.8
+      platform: 1.3.6
+      statuses: 2.0.1
+      type-is: 1.6.18
+      xss: 1.0.15
+
+  egg-security@3.7.0:
     dependencies:
       '@eggjs/ip': 2.0.2
       csrf: 3.1.0

@@ -1,0 +1,60 @@
+/** middlewareSystem: begin */
+export * from '../bean/middlewareSystem.cors.js';
+import { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IMiddlewareSystemRecord {
+    'a-security:cors': IMiddlewareSystemOptionsCors;
+  }
+}
+declare module 'vona-module-a-security' {
+  export interface MiddlewareSystemCors {
+    /** @internal */
+    get scope(): ScopeModuleASecurity;
+  }
+}
+/** middlewareSystem: end */
+/** bean: begin */
+export * from '../bean/bean.cors.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-security' {
+  export interface BeanCors {
+    /** @internal */
+    get scope(): ScopeModuleASecurity;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanCors } from '../bean/bean.cors.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    cors: BeanCors;
+  }
+}
+/** bean: end */
+/** scope: begin */
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+
+@Scope()
+export class ScopeModuleASecurity extends BeanScopeBase {}
+
+export interface ScopeModuleASecurity {
+  util: BeanScopeUtil;
+}
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanScopeRecord {
+    'a-security': ScopeModuleASecurity;
+  }
+
+  export interface IBeanScopeContainer {
+    security: ScopeModuleASecurity;
+  }
+}
+
+/** scope: end */

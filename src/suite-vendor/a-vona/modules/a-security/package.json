@@ -1,7 +1,7 @@
 {
-  "name": "vona-module-a-cors",
+  "name": "vona-module-a-security",
   "version": "5.0.0",
-  "title": "a-cors",
+  "title": "a-security",
   "vonaModule": {
     "dependencies": {}
   },
@@ -29,6 +29,7 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@koa/cors": "^5.0.0"
+    "@koa/cors": "^5.0.0",
+    "egg-security": "^3.7.0"
   }
 }

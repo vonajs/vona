@@ -1,11 +1,9 @@
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
 import * as ModuleInfo from '@cabloy/module-info';
-import * as security from 'egg-security';
 import fse from 'fs-extra';
 import path from 'node:path';
 import os from 'node:os';
-import { URL } from 'url';
 import * as uuid from 'uuid';
 import { TypeMonkeyName, VonaContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
@@ -185,60 +183,6 @@ export class AppUtil extends BeanSimple {
         await ebAppMonkey[monkeyName](moduleTarget, ...monkeyData);
       }
     }
-  }
-
-  // getWhiteListCors(ctx) {
-  //   let whiteListCors;
-  //   const _config = ctx.app.bean._getScope('a-base').config;
-  //   const _whiteList = (_config && _config.cors && _config.cors.whiteList) || [];
-  //   if (!Array.isArray(_whiteList)) {
-  //     whiteListCors = _whiteList.split(',');
-  //   } else {
-  //     whiteListCors = _whiteList.concat();
-  //   }
-  //   // inherits from jsonp
-  //   let _whiteListJsonp = _config && _config.jsonp && _config.jsonp.whiteList;
-  //   if (_whiteListJsonp) {
-  //     if (!Array.isArray(_whiteListJsonp)) {
-  //       _whiteListJsonp = _whiteListJsonp.split(',');
-  //     }
-  //     whiteListCors = whiteListCors.concat(_whiteListJsonp);
-  //   }
-  //   // hostSelf
-  //   const hostSelf = ctx.app.bean.base.getAbsoluteUrl();
-  //   if (hostSelf) {
-  //     whiteListCors.push(hostSelf);
-  //   }
-  //   // ok
-  //   return whiteListCors;
-  // }
-
-  isSafeDomain(ctx: VonaContext, origin) {
-    // origin is {protocol}{hostname}{port}...
-    if (!origin || origin === 'null' || origin === null) return true;
-
-    // whiteList
-    let whiteListCors = ctx.app.config.cors.origin;
-    if (whiteListCors === '*') return true;
-    if (!whiteListCors) return false;
-    if (typeof whiteListCors === 'string') {
-      whiteListCors = whiteListCors.split(',');
-    }
-
-    let parsedUrl;
-    try {
-      parsedUrl = new URL(origin);
-    } catch (_) {
-      return false;
-    }
-
-    if (
-      security.utils.isSafeDomain(parsedUrl.hostname, whiteListCors) ||
-      security.utils.isSafeDomain(origin, whiteListCors)
-    ) {
-      return true;
-    }
-    return false;
   }
 
   detectErrorMessage(err: Error) {
