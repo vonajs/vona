@@ -8,7 +8,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['xssProtection']) =>
 
     const opts = {
       ...options,
-      ...ctx.securityOptions.xssProtection,
+      ...ctx.securityOptions?.xssProtection,
     };
     if (checkIfIgnore(opts, ctx)) return;
 

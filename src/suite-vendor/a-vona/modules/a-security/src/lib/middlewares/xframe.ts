@@ -8,7 +8,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['xframe']) => {
 
     const opts = {
       ...options,
-      ...ctx.securityOptions.xframe,
+      ...ctx.securityOptions?.xframe,
     };
     if (checkIfIgnore(opts, ctx)) return;
 

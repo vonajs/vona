@@ -9,7 +9,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['hsts']) => {
 
     const opts = {
       ...options,
-      ...ctx.securityOptions.hsts,
+      ...ctx.securityOptions?.hsts,
     };
     if (checkIfIgnore(opts, ctx)) return;
 

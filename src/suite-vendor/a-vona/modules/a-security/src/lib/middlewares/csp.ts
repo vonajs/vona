@@ -14,7 +14,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['csp']) => {
 
     const opts = {
       ...options,
-      ...ctx.securityOptions.csp,
+      ...ctx.securityOptions?.csp,
     };
     if (checkIfIgnore(opts, ctx)) return;
 

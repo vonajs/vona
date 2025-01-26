@@ -9,7 +9,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['noopen']) => {
 
     const opts = {
       ...options,
-      ...ctx.securityOptions.noopen,
+      ...ctx.securityOptions?.noopen,
     };
     if (checkIfIgnore(opts, ctx)) return;
 

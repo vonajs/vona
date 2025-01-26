@@ -23,7 +23,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['nosniff']) => {
 
     const opts = {
       ...options,
-      ...ctx.securityOptions.nosniff,
+      ...ctx.securityOptions?.nosniff,
     };
     if (checkIfIgnore(opts, ctx)) return;
 
