@@ -44,6 +44,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
 })
 export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSystemExecute {
   private _composer: any;
+
   async execute(options: IMiddlewareSystemOptionsStatic, next: Next) {
     return this._getComposer(options)(this.ctx, next);
   }

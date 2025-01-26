@@ -1174,12 +1174,21 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-security:
     dependencies:
+      '@eggjs/ip':
+        specifier: ^2.1.0
+        version: 2.1.0
       '@koa/cors':
         specifier: ^5.0.0
         version: 5.0.0
+      egg-path-matching:
+        specifier: ^2.1.0
+        version: 2.1.0
       matcher:
         specifier: ^5.0.0
         version: 5.0.0
+      type-is:
+        specifier: ^1.6.18
+        version: 1.6.18
 
   src/suite-vendor/a-vona/modules/a-socket: {}
 
@@ -1833,8 +1842,8 @@ packages:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
 
-  '@eggjs/ip@2.0.2':
-    resolution: {integrity: sha512-UdnZ+fMwpdV2ybpNxYk9zI0rzd+GQuGv1f2QFJLJ0mRBBrO+Oan3W+/CQiQ+d5n6r+3pHZsMti2GU8m7YIWpnA==}
+  '@eggjs/ip@2.1.0':
+    resolution: {integrity: sha512-jOsufOpySKBld+N1GG8IAW9EEQNmQ6bDaBnrRlYFk6AspoxG8gAzXSW93ZFfEPwscS5rL7UbDUKyIHUkmkTPyw==}
     engines: {node: '>= 14.0.0'}
 
   '@eggjs/router@2.0.1':
@@ -4054,6 +4063,9 @@ packages:
   egg-path-matching@1.1.0:
     resolution: {integrity: sha512-pHdz/q8v843jSEpLksXmJEZ8dzDNiCfTgQtgoSTT9bsLa1QFCzsdeZLag+CKTaCHsDhy3id/WjjTRF94X91y6w==}
 
+  egg-path-matching@2.1.0:
+    resolution: {integrity: sha512-g2V2ohTSf/WN1UNtUdeUAhu/xbA97uAJHgqRpRInR2KT77MRxrG4XtcsjbZudQmB5XRPvYSbnny/1m/57+UadA==}
+
   egg-schedule@4.0.1:
     resolution: {integrity: sha512-9BgIEOA5+jsqqvW8qLj/0SbTHkr9t2vNRBbZQkqqscejocViGysGd866vN+rcpuqd2zmnP6EQ0YqPAV5fI8P6Q==}
     engines: {node: '>=14.17.0'}
@@ -6214,6 +6226,9 @@ packages:
 
   path-to-regexp@1.9.0:
     resolution: {integrity: sha512-xIp7/apCFJuUHdDLWe8O1HIkb0kQrOMb/0u6FXQjemHn/ii5LrIzU6bdECnsiTF/GjZkMEKg1xdiZwNqDYlZ6g==}
+
+  path-to-regexp@6.3.0:
+    resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
 
   path-type@1.1.0:
     resolution: {integrity: sha512-S4eENJz1pkiQn9Znv33Q+deTOKmbl+jj1Fl+qiP/vYezj+S8x+J3Uo0ISrx/QoEvIlOaDWJhPaRd1flJ9HXZqg==}
@@ -8667,7 +8682,7 @@ snapshots:
 
   '@discoveryjs/json-ext@0.5.7': {}
 
-  '@eggjs/ip@2.0.2': {}
+  '@eggjs/ip@2.1.0': {}
 
   '@eggjs/router@2.0.1':
     dependencies:
@@ -11305,6 +11320,10 @@ snapshots:
     dependencies:
       path-to-regexp: 1.9.0
 
+  egg-path-matching@2.1.0:
+    dependencies:
+      path-to-regexp: 6.3.0
+
   egg-schedule@4.0.1:
     dependencies:
       cron-parser: 2.18.0
@@ -11315,7 +11334,7 @@ snapshots:
 
   egg-security@3.6.0:
     dependencies:
-      '@eggjs/ip': 2.0.2
+      '@eggjs/ip': 2.1.0
       csrf: 3.1.0
       delegates: 1.0.0
       egg-path-matching: 1.1.0
@@ -13861,6 +13880,8 @@ snapshots:
   path-to-regexp@1.9.0:
     dependencies:
       isarray: 0.0.1
+
+  path-to-regexp@6.3.0: {}
 
   path-type@1.1.0:
     dependencies:

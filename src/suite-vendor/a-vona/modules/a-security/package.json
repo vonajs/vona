@@ -29,7 +29,10 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@eggjs/ip": "^2.1.0",
     "@koa/cors": "^5.0.0",
-    "matcher": "^5.0.0"
+    "egg-path-matching": "^2.1.0",
+    "matcher": "^5.0.0",
+    "type-is": "^1.6.18"
   }
 }
