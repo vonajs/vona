@@ -14,6 +14,14 @@ const DBLEVEL = Symbol.for('Context#__dblevel');
 const ONIONSDYNAMIC = Symbol.for('Context#__onionsdynamic');
 
 const context: ContextBase = {
+  get locale() {
+    const self = cast(this);
+    return self.__getLocale();
+  },
+  set locale(value) {
+    const self = cast(this);
+    self.__setLocale(value);
+  },
   get config() {
     const self = cast(this);
     const serviceInstance = cast(self.app.bean._getBean('a-instance.service.instance' as never));
