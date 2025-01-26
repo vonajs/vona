@@ -792,9 +792,6 @@ importers:
       '@cabloy/json5':
         specifier: workspace:^
         version: link:../../packages-utils/json5
-      '@cabloy/koa-static-cache':
-        specifier: ^5.1.8
-        version: 5.1.8
       '@cabloy/localeutil':
         specifier: workspace:^
         version: link:../../packages-utils/localeutil
@@ -1170,7 +1167,17 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-startup: {}
 
-  src/suite-vendor/a-vona/modules/a-static: {}
+  src/suite-vendor/a-vona/modules/a-static:
+    dependencies:
+      '@cabloy/koa-static-cache':
+        specifier: ^5.1.8
+        version: 5.1.8
+      koa-range:
+        specifier: ^0.3.0
+        version: 0.3.0
+      ylru:
+        specifier: ^2.0.0
+        version: 2.0.0
 
   src/suite-vendor/a-vona/modules/a-summer: {}
 

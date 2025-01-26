@@ -60,16 +60,13 @@ declare module 'vona-module-a-core' {
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.meta.js';
 export * from '../bean/middlewareSystem.notfound.js';
-export * from '../bean/middlewareSystem.static.js';
 import { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.js';
 import { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.js';
-import { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-core:meta': IMiddlewareSystemOptionsMeta;
     'a-core:notfound': IMiddlewareSystemOptionsNotfound;
-    'a-core:static': IMiddlewareSystemOptionsStatic;
   }
 }
 declare module 'vona-module-a-core' {
@@ -79,11 +76,6 @@ declare module 'vona-module-a-core' {
   }
 
   export interface MiddlewareSystemNotfound {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-
-  export interface MiddlewareSystemStatic {
     /** @internal */
     get scope(): ScopeModuleACore;
   }

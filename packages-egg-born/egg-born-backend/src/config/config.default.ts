@@ -1,5 +1,4 @@
 import { VonaAppInfo, VonaConfigOptional, VonaContext } from 'vona';
-import path from 'path';
 import * as uuid from 'uuid';
 
 // eslint-disable-next-line
@@ -159,16 +158,6 @@ export default function (appInfo: VonaAppInfo) {
     ],
   };
 
-  // static
-  config.static = {
-    prefix: '/api/static/',
-    preload: false,
-    alias: {
-      '/favicon.ico': '/api/static/home/index/img/vona.png',
-    },
-    getFullPath,
-  };
-
   // appReady middleware
   config.appReady = {
     ignore: /\/api\/static\//,
@@ -270,25 +259,4 @@ function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
     const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as any;
     return beanFilter.performErrorFilters(err, method);
   });
-}
-
-function getFullPath(ctx, dir, filename, _options) {
-  const parts = filename.split(path.sep);
-  const wordFirst = parts.shift();
-  // public
-  if (wordFirst === 'public') {
-    const fullPath = path.normalize(path.join(dir, parts.join(path.sep)));
-    // files that can be accessd should be under options.dir
-    if (fullPath.indexOf(dir) !== 0) return null;
-    return fullPath;
-  }
-  // static
-  const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
-  const module = ctx.app.meta.modules[moduleRelativeName];
-  if (!module) return null;
-  const staticPath = path.join(module.root, 'static');
-  const fullPath = path.normalize(path.join(staticPath, parts.join(path.sep)));
-  // files that can be accessd should be under options.dir
-  if (fullPath.indexOf(staticPath) !== 0) return null;
-  return fullPath;
 }

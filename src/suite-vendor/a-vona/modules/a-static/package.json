@@ -35,5 +35,9 @@
     "cli"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "@cabloy/koa-static-cache": "^5.1.8",
+    "koa-range": "^0.3.0",
+    "ylru": "^2.0.0"
+  }
 }
