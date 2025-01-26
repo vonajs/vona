@@ -86,6 +86,9 @@
     },
     {
       "path": "modules/a-cache/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-cors/tsconfig.build.json"
     }
   ]
 }

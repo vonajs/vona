@@ -95,6 +95,9 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
+      vona-module-a-cors:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-cors
       vona-module-a-d:
         specifier: workspace:^
         version: link:src/suite/a-d/modules/a-d
@@ -934,6 +937,9 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:modules/a-core
+      vona-module-a-cors:
+        specifier: workspace:^
+        version: link:modules/a-cors
       vona-module-a-database:
         specifier: workspace:^
         version: link:modules/a-database
@@ -1039,9 +1045,6 @@ importers:
       '@cabloy/word-utils':
         specifier: ^1.0.8
         version: 1.0.8
-      '@koa/cors':
-        specifier: ^5.0.0
-        version: 5.0.0
       boxen:
         specifier: ^8.0.1
         version: 8.0.1
@@ -1091,6 +1094,12 @@ importers:
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
+
+  src/suite-vendor/a-vona/modules/a-cors:
+    dependencies:
+      '@koa/cors':
+        specifier: ^5.0.0
+        version: 5.0.0
 
   src/suite-vendor/a-vona/modules/a-database:
     dependencies:
