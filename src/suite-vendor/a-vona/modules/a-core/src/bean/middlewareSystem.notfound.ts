@@ -5,7 +5,7 @@ export interface IMiddlewareSystemOptionsNotfound extends IDecoratorMiddlewareSy
   pageUrl?: string;
 }
 
-@MiddlewareSystem<IMiddlewareSystemOptionsNotfound>()
+@MiddlewareSystem<IMiddlewareSystemOptionsNotfound>({ dependencies: 'a-core:meta' })
 export class MiddlewareSystemNotfound extends BeanBase implements IMiddlewareSystemExecute {
   async execute(options: IMiddlewareSystemOptionsNotfound, next: Next) {
     const ctx = this.ctx;
