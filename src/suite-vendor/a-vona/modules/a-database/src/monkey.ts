@@ -5,13 +5,14 @@ const DATABASEMETA = Symbol.for('Context#__databasemeta');
 
 export class Monkey extends BeanSimple implements IMonkeySystem {
   createContext(context: VonaContext): void {
+    const self = this;
     // db
     Object.defineProperty(context, 'db', {
       enumerable: false,
       get() {
         return context.dbMeta.transaction.inTransaction
           ? context.dbMeta.transaction.connection
-          : this.app.bean.database.getDefault();
+          : self.app.bean.database.getDefault();
       },
     });
     // dbMeta
