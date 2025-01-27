@@ -95,7 +95,12 @@ export class Monkey extends BeanSimple implements IMonkeySystem {
 
 function formatLocale(locale) {
   // support zh_CN, en_US => zh-CN, en-US
-  return locale.replace('_', '-').toLowerCase();
+  return parseTokenSafe(locale).replace('_', '-').toLowerCase();
+}
+
+function parseTokenSafe(token?: string) {
+  if (!token) return '';
+  return token.replace(/[\\\.*#%'"`;, ]/g, '');
 }
 
 function updateCookie(ctx, locale, cookieField, cookieMaxAge, cookieDomain) {

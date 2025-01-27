@@ -13,34 +13,6 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   // load locales
   loadLocales();
 
-  // patch service
-  patchCreateContext();
-
-  function patchCreateContext() {
-    // ctx
-    const createContext = app.createContext as any;
-    app.createContext = (...args) => {
-      const context = createContext.call(app, ...args);
-
-      // system
-      const __getLocale = context.__getLocale;
-      context.__getLocale = function () {
-        if (context.__locale) {
-          return context.__locale;
-        }
-        let locale = __getLocale.call(context);
-        const locale2 = _parseTokenSafe(locale);
-        if (locale !== locale2) {
-          locale = locale2;
-          context.__setLocale(locale);
-        }
-        return locale;
-      };
-
-      return context;
-    };
-  }
-
   function loadLocales() {
     /**
      * based on egg-i18n
@@ -106,10 +78,5 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       moduleLocales,
       app.meta.localeModules[moduleName][locale],
     );
-  }
-
-  function _parseTokenSafe(token?: string) {
-    if (!token) return token;
-    return token.replace(/[\\\.*#%'"`;, ]/g, '');
   }
 }
