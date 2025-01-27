@@ -3,7 +3,10 @@
   "version": "5.0.0",
   "title": "a-i18n",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "capabilities": {
+      "monkey": true
+    }
   },
   "type": "module",
   "exports": {

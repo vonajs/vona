@@ -6,7 +6,8 @@ export interface I18nConfig {
   cookieField: string;
   localeAlias: any;
   writeCookie: boolean;
-  cookieMaxAge: string;
+  cookieMaxAge: number;
+  cookieDomain?: string;
 }
 
 export const config = (_app: VonaApplication) => {
@@ -17,7 +18,7 @@ export const config = (_app: VonaApplication) => {
       cookieField: 'locale',
       localeAlias: {},
       writeCookie: true,
-      cookieMaxAge: '1y',
+      cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
     } as I18nConfig,
   };
 };

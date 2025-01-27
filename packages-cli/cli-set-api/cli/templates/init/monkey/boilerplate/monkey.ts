@@ -1,4 +1,5 @@
-import { BeanSimple, IModule, IMonkeyModule } from 'vona';
+import { IModule } from '@cabloy/module-info';
+import { BeanSimple, IMonkeyModule } from 'vona';
 
 export class Monkey extends BeanSimple implements IMonkeyModule {
   async moduleLoading(_module: IModule) {}
