@@ -49,17 +49,13 @@ export class BeanExecutor extends BeanBase {
       // todo: check if need for passport
       // (<any>ctx.req).ctx = ctx;
       // locale
-      Object.defineProperty(ctx, 'locale', {
-        get() {
-          return locale || this.app.config.i18n.defaultLocale;
-        },
-      });
+      if (locale !== undefined) {
+        ctx.locale = locale;
+      }
       // subdomain
-      Object.defineProperty(ctx, 'subdomain', {
-        get() {
-          return subdomain;
-        },
-      });
+      if (subdomain !== undefined) {
+        ctx.subdomain = subdomain;
+      }
       // instance
       if (subdomain !== undefined && subdomain !== null) {
         ctx.instance = await this.bean.instance.get(subdomain);

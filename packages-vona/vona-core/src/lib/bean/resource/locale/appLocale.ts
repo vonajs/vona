@@ -4,7 +4,7 @@ import { ILocalInfos, IModuleLocale, IModuleLocaleText, LocaleModuleNameSeparato
 
 export class AppLocale extends BeanSimple {
   get locale(): keyof ILocalInfos {
-    return this.ctx.locale || this.app.config.i18n.defaultLocale;
+    return this.ctx.locale;
   }
 
   set locale(value: keyof ILocalInfos) {

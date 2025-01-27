@@ -185,6 +185,40 @@ export class AppUtil extends BeanSimple {
     }
   }
 
+  monkeyModuleSync(
+    ebAppMonkey,
+    ebModulesMonkey,
+    monkeyName: TypeMonkeyName,
+    moduleTarget?: IModule,
+    ...monkeyData: any[]
+  ) {
+    // self: main
+    if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
+      moduleTarget.mainInstance[monkeyName](...monkeyData);
+    }
+    // module monkey
+    for (const key in ebModulesMonkey) {
+      const moduleMonkey: IModule = ebModulesMonkey[key];
+      if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
+        if (moduleTarget === undefined) {
+          // @ts-ignore ignore
+          moduleMonkey.monkeyInstance[monkeyName](...monkeyData);
+        } else {
+          // @ts-ignore ignore
+          moduleMonkey.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
+        }
+      }
+    }
+    // app monkey
+    if (ebAppMonkey && ebAppMonkey[monkeyName]) {
+      if (moduleTarget === undefined) {
+        ebAppMonkey[monkeyName](...monkeyData);
+      } else {
+        ebAppMonkey[monkeyName](moduleTarget, ...monkeyData);
+      }
+    }
+  }
+
   detectErrorMessage(err: Error) {
     // detect json parse error
     if (
