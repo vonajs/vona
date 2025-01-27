@@ -33,13 +33,6 @@ export default function (appInfo: VonaAppInfo) {
     },
   };
 
-  // safe
-  config.security = {
-    csrf: {
-      enable: false,
-    },
-  };
-
   // io
   config.io = {
     init: {},
