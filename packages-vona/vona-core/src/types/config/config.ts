@@ -8,7 +8,7 @@ import { VonaConfigMeta } from '@cabloy/module-info';
 // @ts-ignore ignore the throw type check of 'development'
 export interface VonaConfig extends EggAppConfig {
   globalPrefix: string;
-  publicDir: string;
+  publicDir?: string;
   modules: IBeanScopeConfig;
   development: ConfigDevelopment;
   instances: ConfigInstanceBase[];
