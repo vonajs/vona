@@ -53,9 +53,11 @@ export class BeanExecutor extends BeanBase {
         ctx.locale = locale;
       }
       // subdomain
-      if (subdomain !== undefined) {
-        ctx.subdomain = subdomain;
-      }
+      Object.defineProperty(ctx, 'subdomain', {
+        get() {
+          return subdomain;
+        },
+      });
       // instance
       if (subdomain !== undefined && subdomain !== null) {
         ctx.instance = await this.bean.instance.get(subdomain);
