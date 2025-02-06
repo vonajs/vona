@@ -19,7 +19,7 @@ export class Main extends BeanSimple implements IModuleMain {
       },
     });
     // dbMeta
-    Object.defineProperty(context, 'dbMeta', {
+    Object.defineProperty(this.app.context, 'dbMeta', {
       enumerable: false,
       get(this: VonaContext) {
         if (!this[DATABASEMETA]) {
@@ -36,7 +36,7 @@ export class Main extends BeanSimple implements IModuleMain {
       },
     });
     // transaction
-    Object.defineProperty(context, 'transaction', {
+    Object.defineProperty(this.app.context, 'transaction', {
       enumerable: false,
       get(this: VonaContext) {
         return this.dbMeta.transaction;
