@@ -12,8 +12,8 @@ export default function (app: VonaApplication) {
       pids[data.pid] = true;
       if (!_ready) {
         _ready = true;
-        // for agent: event: appReady
-        app.emit(EnumAppEvent.AppReady);
+        // for agent: event: appStarted
+        app.emit(EnumAppEvent.AppStarted);
       }
     },
   });

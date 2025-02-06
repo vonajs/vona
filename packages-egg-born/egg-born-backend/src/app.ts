@@ -16,7 +16,7 @@ export default class AppBootHook {
   async didLoad() {}
 
   async serverDidReady() {
-    await this.bootstrap.loadModules();
+    await this.bootstrap.start();
     await this.bootstrap.versionReady();
     await this.bootstrap.socketioReady();
   }

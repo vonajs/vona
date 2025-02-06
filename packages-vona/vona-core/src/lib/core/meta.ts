@@ -41,8 +41,8 @@ export class AppMeta extends BeanSimple {
   appReady: boolean;
   appReadyInstances: Record<string, boolean>;
   //
-  __versionReady: boolean;
-  __versionReadyError: Error;
+  __appStarted: boolean;
+  __appStartError: Error;
 
   protected __init__() {
     // app or agent
@@ -80,20 +80,20 @@ export class AppMeta extends BeanSimple {
     this.mode = this.app.config.configMeta.mode;
   }
 
-  async waitAppReady() {
+  async waitAppStarted() {
     return new Promise((resolve, reject) => {
       // check once
-      if (this.__versionReady) {
+      if (this.__appStarted) {
         resolve(true);
       }
-      if (this.__versionReadyError) {
-        reject(this.__versionReadyError);
+      if (this.__appStartError) {
+        reject(this.__appStartError);
       }
       // listen
-      this.app.on(EnumAppEvent.AppReady, () => {
+      this.app.on(EnumAppEvent.AppStarted, () => {
         resolve(true);
       });
-      this.app.on(EnumAppEvent.AppReadyError, err => {
+      this.app.on(EnumAppEvent.AppStartError, err => {
         reject(err);
       });
     });

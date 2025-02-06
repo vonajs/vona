@@ -1,4 +1,4 @@
 export enum EnumAppEvent {
-  AppReady = 'eb:event:appReady',
-  AppReadyError = 'eb:event:appReadyError',
+  AppStarted = 'eb:event:appStarted',
+  AppStartError = 'eb:event:appStartError',
 }
