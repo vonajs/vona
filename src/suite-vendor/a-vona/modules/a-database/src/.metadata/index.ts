@@ -105,9 +105,6 @@ export const locales = {
 export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
-/** monkey: begin */
-export * from '../monkey.js';
-/** monkey: end */
 /** main: begin */
 export * from '../main.js';
 /** main: end */
