@@ -3,9 +3,10 @@ import inflate from 'inflation';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
 import { cast } from '../../types/utils/cast.js';
-import { appResource, MetadataKey } from '../../lib/index.js';
+import { appResource, BeanContainer, MetadataKey } from '../../lib/index.js';
 import { AsyncResource } from 'node:async_hooks';
 
+const BEAN = Symbol.for('Context#__bean');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
 const SUBDOMAIN = Symbol.for('Context#__subdomain');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
@@ -14,6 +15,13 @@ const DBLEVEL = Symbol.for('Context#__dblevel');
 const ONIONSDYNAMIC = Symbol.for('Context#__onionsdynamic');
 
 const context: ContextBase = {
+  get bean(): BeanContainer {
+    const self = cast(this);
+    if (!self[BEAN]) {
+      self[BEAN] = BeanContainer.create(self.app, self);
+    }
+    return self[BEAN];
+  },
   get locale() {
     const self = cast(this);
     return self.__getLocale();

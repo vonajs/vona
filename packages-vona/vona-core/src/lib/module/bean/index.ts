@@ -11,20 +11,3 @@ export function loadBeanContainer(app: VonaApplication) {
   });
   app.bean = BeanContainer.create(app, undefined);
 }
-
-export function loadBeans(app: VonaApplication) {
-  // patch context
-  patchCreateContext();
-
-  function patchCreateContext() {
-    const createContext = app.createContext as any;
-    app.createContext = (...args) => {
-      const context = createContext.call(app, ...args);
-
-      // bean
-      context.bean = BeanContainer.create(app, context);
-
-      return context;
-    };
-  }
-}
