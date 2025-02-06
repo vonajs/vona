@@ -14,7 +14,7 @@ const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const DBLEVEL = Symbol.for('Context#__dblevel');
 const ONIONSDYNAMIC = Symbol.for('Context#__onionsdynamic');
 
-const context: ContextBase = {
+export const contextBase: ContextBase = {
   get bean(): BeanContainer {
     const self = cast(this);
     if (!self[BEAN]) {
@@ -138,4 +138,3 @@ const context: ContextBase = {
     this[ONIONSDYNAMIC] = value;
   },
 };
-export default context;

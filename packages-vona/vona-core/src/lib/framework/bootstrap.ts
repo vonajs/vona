@@ -1,5 +1,5 @@
 import { VonaApplication } from '../../types/index.js';
-import { loadBeanContainer } from '../module/bean/index.js';
+import { extendApp } from '../core/app.js';
 import { ModuleLoader } from '../module/loader.js';
 import { SocketioReady } from '../module/socketio.js';
 import { VersionReady } from '../module/version/ready.js';
@@ -12,8 +12,8 @@ export class Bootstrap {
   }
 
   async loadModules() {
-    // bean container
-    loadBeanContainer(this.app);
+    // extendApp
+    extendApp(this.app);
     // module loader
     const moduleLoader = this.app.bean._newBean(ModuleLoader);
     await moduleLoader.execute();
