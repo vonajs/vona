@@ -160,6 +160,7 @@ export class AppUtil extends BeanSimple {
   ) {
     // self: main
     if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
+      // @ts-ignore ignore
       await moduleTarget.mainInstance[monkeyName](...monkeyData);
     }
     // module monkey
@@ -194,6 +195,7 @@ export class AppUtil extends BeanSimple {
   ) {
     // self: main
     if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
+      // @ts-ignore ignore
       moduleTarget.mainInstance[monkeyName](...monkeyData);
     }
     // module monkey
