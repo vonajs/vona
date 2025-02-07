@@ -17,6 +17,7 @@ export default class AppBootHook {
 
   async serverDidReady() {
     await this.bootstrap.start();
+    // todo: remove
     await this.bootstrap.socketioReady();
   }
 
