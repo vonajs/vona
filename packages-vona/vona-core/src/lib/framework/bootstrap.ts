@@ -2,7 +2,6 @@ import { EnumAppEvent, VonaApplication } from '../../types/index.js';
 import { extendApp } from '../core/app.js';
 import { ModuleLoader } from '../module/loader.js';
 import { SocketioReady } from '../module/socketio.js';
-import { VersionReady } from '../module/version/ready.js';
 
 export class Bootstrap {
   app: VonaApplication;
@@ -60,11 +59,6 @@ export class Bootstrap {
     });
     // hook: appStarted
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
-  }
-
-  async versionReady() {
-    const versionReady = this.app.bean._newBean(VersionReady);
-    await versionReady.execute();
   }
 
   async socketioReady() {
