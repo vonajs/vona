@@ -15,7 +15,7 @@ export interface INewCtxExtraData {
 
 export interface INewCtxOptions {
   locale?: keyof ILocalInfos;
-  instanceName?: string | null | undefined;
+  instanceName?: string | undefined;
   instance?: boolean;
   dbLevel?: number;
   transaction?: boolean;

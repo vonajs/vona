@@ -2,7 +2,7 @@ import Redlock from 'redlock';
 import { INewCtxOptions } from 'vona-module-a-executor';
 
 export interface IRedlockLockOptions {
-  subdomain?: string | null | undefined;
+  instanceName?: string | undefined;
   redlock?: Redlock;
   lockTTL?: number;
 }

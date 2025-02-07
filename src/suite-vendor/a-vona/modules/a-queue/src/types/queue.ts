@@ -7,7 +7,7 @@ import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 export interface IQueuePushOptions {
   queueNameSub?: string;
   locale?: keyof ILocalInfos;
-  subdomain?: string | undefined;
+  instanceName?: string | undefined;
   dbLevel?: number;
   extraData?: INewCtxExtraData;
   jobName?: string;
