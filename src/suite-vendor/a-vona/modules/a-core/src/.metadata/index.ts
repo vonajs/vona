@@ -1,19 +1,3 @@
-/** filter: begin */
-export * from '../bean/filter.error.js';
-import { IFilterOptionsError } from '../bean/filter.error.js';
-import 'vona';
-declare module 'vona-module-a-aspect' {
-  export interface IFilterRecordGlobal {
-    'a-core:error': IFilterOptionsError;
-  }
-}
-declare module 'vona-module-a-core' {
-  export interface FilterError {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-}
-/** filter: end */
 /** interceptor: begin */
 export * from '../bean/interceptor.body.js';
 import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
@@ -116,43 +100,8 @@ declare module 'vona-module-a-core' {
 /** meta static: begin */
 import { MetaStatic } from '../bean/meta.static.js';
 /** meta static: end */
-/** service: begin */
-export * from '../service/errorView.js';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  export interface IServiceRecord {
-    'a-core:errorView': never;
-  }
-}
-declare module 'vona-module-a-core' {
-  export interface ServiceErrorView {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-}
-/** service: end */
-/** service: begin */
-import { ServiceErrorView } from '../service/errorView.js';
-export interface IModuleService {
-  errorView: ServiceErrorView;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-core.service.errorView': ServiceErrorView;
-  }
-}
-/** service: end */
-/** config: begin */
-export * from '../config/config.js';
-import { config } from '../config/config.js';
-/** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -160,9 +109,7 @@ export class ScopeModuleACore extends BeanScopeBase {}
 
 export interface ScopeModuleACore {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
   static: MetaStatic;
-  service: IModuleService;
 }
 
 import 'vona';
@@ -173,10 +120,6 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     core: ScopeModuleACore;
-  }
-
-  export interface IBeanScopeConfig {
-    'a-core': ReturnType<typeof config>;
   }
 }
 
