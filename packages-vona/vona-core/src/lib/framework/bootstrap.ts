@@ -14,22 +14,9 @@ export class Bootstrap {
   async start() {
     const app = this.app;
     try {
-      // extendApp
-      extendApp(this.app);
-      // module loader
-      const moduleLoader = this.app.bean._newBean(ModuleLoader);
-      await moduleLoader.execute();
-      // appStart/appReady/appStarted
-      // started
-      app.meta.__appStarted = true;
-      // event: appReady
-      app.emit(EnumAppEvent.AppStarted);
-      // event to agent
-      // todo: remove
-      app.meta.messenger.callAgent({
-        name: 'appReady',
-        data: { pid: process.pid },
-      });
+      await this._start_appStart();
+      await this._start_appReady();
+      await this._start_appStarted();
     } catch (err) {
       // record
       app.meta.__appStartError = err as Error;
@@ -38,6 +25,41 @@ export class Bootstrap {
       // throw exception
       throw err;
     }
+  }
+
+  async _start_appStart() {
+    const app = this.app;
+    // extendApp
+    extendApp(app);
+    // module loader
+    const moduleLoader = app.bean._newBean(ModuleLoader);
+    await moduleLoader.execute();
+    // hook: appStart
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStart');
+  }
+
+  async _start_appReady() {
+    const app = this.app;
+    app.meta.appReady = true;
+    app.meta.appReadyInstances = {};
+    // todo: 在这里启动server listen，允许外部访问系统
+    // hook: appReady
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appReady');
+  }
+
+  async _start_appStarted() {
+    const app = this.app;
+    app.meta.__appStarted = true;
+    // event: appReady
+    app.emit(EnumAppEvent.AppStarted);
+    // event to agent
+    // todo: remove
+    app.meta.messenger.callAgent({
+      name: 'appReady',
+      data: { pid: process.pid },
+    });
+    // hook: appStarted
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
   }
 
   async versionReady() {
