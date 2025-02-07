@@ -52,7 +52,7 @@ export class BeanExecutor extends BeanBase {
       if (locale !== undefined) {
         ctx.locale = locale;
       }
-      // subdomain: hold undefined if undefined
+      // instanceName: hold undefined if undefined
       ctx.instanceName = instanceName;
       // instance
       if (instanceName !== undefined && instanceName !== null) {

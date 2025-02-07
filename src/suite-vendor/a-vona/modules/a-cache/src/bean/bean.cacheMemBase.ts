@@ -11,10 +11,10 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!this.app[SUMMERCACHEMEMORY]) {
       this.app[SUMMERCACHEMEMORY] = {};
     }
-    if (!this.app[SUMMERCACHEMEMORY][this.ctx.subdomain]) {
-      this.app[SUMMERCACHEMEMORY][this.ctx.subdomain] = {};
+    if (!this.app[SUMMERCACHEMEMORY][this.ctx.instanceName]) {
+      this.app[SUMMERCACHEMEMORY][this.ctx.instanceName] = {};
     }
-    return this.app[SUMMERCACHEMEMORY][this.ctx.subdomain];
+    return this.app[SUMMERCACHEMEMORY][this.ctx.instanceName];
   }
 
   private get lruCache(): LRUCache<string, any> {

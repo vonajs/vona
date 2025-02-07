@@ -20,8 +20,8 @@ export interface IExecuteBeanCallback {
 }
 
 export class AppUtil extends BeanSimple {
-  instanceStarted(subdomain: string): boolean {
-    return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
+  instanceStarted(instanceName: string): boolean {
+    return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[instanceName];
   }
 
   combineApiPathControllerAndActionRaw(
@@ -123,7 +123,7 @@ export class AppUtil extends BeanSimple {
 
   async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
     const rootPath = await this.getPublicPathPhysicalRoot();
-    // use instance.id, not subdomain
+    // use instance.id, not instanceName
     const dir = path.join(rootPath, this.ctx.instance.id.toString(), subdir || '');
     if (ensure) {
       await fse.ensureDir(dir);

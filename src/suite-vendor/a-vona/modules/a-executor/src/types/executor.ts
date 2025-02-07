@@ -24,7 +24,7 @@ export interface INewCtxOptions {
 
 export interface IPerformActionOptions {
   innerAccess?: boolean;
-  // subdomain, deprecated
+  // instanceName, deprecated
   query?: object;
   headers?: object;
   body?: object;
@@ -34,7 +34,7 @@ export interface IPerformActionOptions {
 export interface IPerformActionInnerParams {
   ctxCaller: VonaContext;
   innerAccess?: boolean;
-  // subdomain, deprecated
+  // instanceName, deprecated
   method: TypeRequestMethod;
   path: any;
   query?: object;

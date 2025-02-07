@@ -40,7 +40,7 @@ export const contextBase: ContextBase = {
   get config() {
     const self = cast(this);
     const serviceInstance = cast(self.app.bean._getBean('a-instance.service.instance' as never));
-    return serviceInstance.getConfig(self.subdomain) || self.app.config;
+    return serviceInstance.getConfig(self.instanceName) || self.app.config;
   },
   get innerAccess() {
     return this[INNERACCESS];

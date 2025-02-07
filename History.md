@@ -569,7 +569,7 @@ class Atom extends app.meta.AtomBase {
 
 - **Enhance**
   - Login 页面：在 pc 布局中仍然采用 small 尺寸
-  - 多实例：如果 subdomain 没有对应的实例就打印明确的配置提示
+  - 多实例：如果 instanceName 没有对应的实例就打印明确的配置提示
   - 如果是匿名用户访问受限资源，就自动弹出 Login 页面
 
 ## 2022-01-21, Version 4.12.128

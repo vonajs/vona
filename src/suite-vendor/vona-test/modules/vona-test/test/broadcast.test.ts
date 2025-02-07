@@ -10,7 +10,7 @@ describe('broadcast.test.ts', () => {
           locale: 'zh-cn',
         },
       );
-      assert.equal(app.ctx.subdomain, '');
+      assert.equal(app.ctx.instanceName, '');
     });
   });
 });
