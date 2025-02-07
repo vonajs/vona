@@ -20,4 +20,16 @@ export interface IMonkeyModule {
   configLoaded(module: IModule, config: any): Promise<void>;
 }
 
-export interface IMonkeySystem {}
+export interface IMonkeySystem extends IMonkeyAppStart, IMonkeyAppReady, IMonkeyAppStarted {}
+
+export interface IMonkeyAppStart {
+  appStart(): Promise<void>;
+}
+
+export interface IMonkeyAppReady {
+  appReady(): Promise<void>;
+}
+
+export interface IMonkeyAppStarted {
+  appStarted(): Promise<void>;
+}
