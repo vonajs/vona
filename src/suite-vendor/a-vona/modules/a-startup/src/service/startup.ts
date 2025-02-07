@@ -7,7 +7,7 @@ import { IOnionSlice } from 'vona-module-a-onion';
 
 @Service()
 export class ServiceStartup extends BeanBase {
-  async versionReady() {
+  async appStart() {
     // clear keys
     await this._clearResources();
 
@@ -18,11 +18,9 @@ export class ServiceStartup extends BeanBase {
         await this.runStartup(startup.name);
       }
     }
+  }
 
-    // appReady
-    this.app.meta.appReady = true;
-    this.app.meta.appReadyInstances = {};
-
+  async appReady() {
     // run startups: after
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;

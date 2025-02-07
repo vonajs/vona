@@ -3,13 +3,18 @@
   "version": "5.0.0",
   "title": "a-startup",
   "vonaModule": {
-    "dependencies": {},
+    "dependencies": {
+      "a-vona": "5.0.0"
+    },
     "onions": {
       "startup": {
         "optionsGlobalInterfaceName": "IDecoratorStartupOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-startup",
         "boilerplate": "cli/boilerplate"
       }
+    },
+    "capabilities": {
+      "monkey": true
     }
   },
   "type": "module",
