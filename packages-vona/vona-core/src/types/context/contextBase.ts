@@ -6,8 +6,8 @@ export interface ContextBase {
   get bean(): BeanContainer;
   get locale(): keyof ILocalInfos;
   set locale(value: keyof ILocalInfos);
-  get instanceName(): string | undefined;
-  set instanceName(value: string | undefined);
+  get instanceName(): string | undefined | null;
+  set instanceName(value: string | undefined | null);
   get config(): VonaConfig;
   get innerAccess(): boolean;
   set innerAccess(value: boolean);

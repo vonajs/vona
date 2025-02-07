@@ -29,11 +29,11 @@ export const contextBase: ContextBase = {
     const self = cast(this);
     self.__setLocale(value);
   },
-  get instanceName(): string | undefined {
+  get instanceName(): string | undefined | null {
     const self = cast(this);
     return self.__getInstanceName();
   },
-  set instanceName(value: string | undefined) {
+  set instanceName(value: string | undefined | null) {
     const self = cast(this);
     self.__setInstanceName(value);
   },

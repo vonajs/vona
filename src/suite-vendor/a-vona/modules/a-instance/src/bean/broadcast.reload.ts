@@ -8,6 +8,6 @@ export class BroadcastReload
   implements IBroadcastExecute<TypeBroadcastReloadJobData>
 {
   async execute(_data: TypeBroadcastReloadJobData, _isEmitter?: boolean) {
-    await this.scope.service.instance.instanceStartup(this.ctx.subdomain, { force: true });
+    await this.scope.service.instance.instanceStartup(this.ctx.instanceName!, { force: true });
   }
 }

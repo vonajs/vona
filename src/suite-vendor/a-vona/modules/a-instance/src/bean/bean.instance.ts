@@ -25,35 +25,35 @@ export class BeanInstance extends BeanBase {
     await this.scope.service.instance.instanceChanged();
   }
 
-  async get(subdomain: string) {
-    if (isNil(subdomain)) this.app.throw(403);
-    return await this._get(subdomain);
+  async get(instanceName: string) {
+    if (isNil(instanceName)) this.app.throw(403);
+    return await this._get(instanceName);
   }
 
-  private async _get(subdomain: string): Promise<EntityInstance | null> {
+  private async _get(instanceName: string): Promise<EntityInstance | null> {
     // get
-    const instance = await this.modelInstance.get({ name: subdomain });
+    const instance = await this.modelInstance.get({ name: instanceName });
     if (instance) return instance;
     // instance base
-    const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(subdomain);
+    const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
     if (!configInstanceBase) return null;
     // lock
     return await this.scope.redlock.lockIsolate(
-      `registerInstance.${subdomain}`,
+      `registerInstance.${instanceName}`,
       async () => {
         return await this._registerLock(configInstanceBase);
       },
-      { subdomain: null },
+      { instanceName: null },
     );
   }
 
   private async _registerLock(configInstanceBase: ConfigInstanceBase) {
     // get again
-    let instance = await this.modelInstance.get({ name: configInstanceBase.subdomain });
+    let instance = await this.modelInstance.get({ name: configInstanceBase.instanceName });
     if (instance) return instance;
     // insert
     instance = {
-      name: configInstanceBase.subdomain,
+      name: configInstanceBase.instanceName,
       title: configInstanceBase.title,
       config: JSON.stringify(configInstanceBase.config || {}),
       disabled: false,

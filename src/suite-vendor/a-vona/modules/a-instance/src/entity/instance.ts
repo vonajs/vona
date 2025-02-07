@@ -18,6 +18,6 @@ export class EntityInstance extends OmitClass(EntityBase, ['iid']) {
 export interface IInstanceStartupQueueInfo {
   resolve: Function;
   reject: Function;
-  subdomain: string;
+  instanceName: string;
   options: IInstanceStartupOptions;
 }

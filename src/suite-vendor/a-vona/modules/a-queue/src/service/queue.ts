@@ -32,7 +32,7 @@ export class ServiceQueue extends BeanBase {
     return this._queuePush(info, true);
   }
 
-  loadQueueWorkers(instanceName?: string) {
+  loadQueueWorkers(instanceName?: string | undefined | null) {
     for (const queueItem of this.bean.onion.queue.getOnionsEnabled()) {
       const info: IQueueJobContext<unknown> = {
         queueName: queueItem.name as never,
@@ -177,7 +177,7 @@ export class ServiceQueue extends BeanBase {
     return this._queues[queueKey];
   }
 
-  getQueue(queueName: keyof IQueueRecord, instanceName?: string) {
+  getQueue(queueName: keyof IQueueRecord, instanceName?: string | undefined | null) {
     return this._getQueue({
       queueName,
       data: undefined as any,

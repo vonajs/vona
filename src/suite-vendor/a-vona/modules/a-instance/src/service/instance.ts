@@ -20,17 +20,17 @@ const __cacheIntancesConfig: Record<string, VonaConfig> = {};
 
 @Service()
 export class ServiceInstance extends BeanBase {
-  getConfigInstanceBase(subdomain: string) {
-    const instances = this.app.config.instances || [{ subdomain: '', password: '' }];
-    return instances.find(item => item.subdomain === subdomain);
+  getConfigInstanceBase(instanceName: string) {
+    const instances = this.app.config.instances || [{ instanceName: '', password: '' }];
+    return instances.find(item => item.instanceName === instanceName);
   }
 
-  getConfig(subdomain?: string): VonaConfig | undefined {
-    if (isNil(subdomain) && this.ctx?.instance) {
-      subdomain = this.ctx?.subdomain;
+  getConfig(instanceName?: string | undefined | null): VonaConfig | undefined {
+    if (isNil(instanceName) && this.ctx?.instance) {
+      instanceName = this.ctx?.instanceName;
     }
-    if (isNil(subdomain)) return undefined;
-    return __cacheIntancesConfig[subdomain];
+    if (isNil(instanceName)) return undefined;
+    return __cacheIntancesConfig[instanceName];
   }
 
   async instanceChanged(reload: boolean = true) {
@@ -56,53 +56,53 @@ export class ServiceInstance extends BeanBase {
     const appReady = await this.checkAppReady(startup !== false);
     if (!appReady) return false;
     // check appReady instance
-    const subdomain = this.ctx.subdomain;
-    if (subdomain === undefined) throw new Error(`subdomain not valid: ${subdomain}`);
-    if (this.ctx.app.meta.appReadyInstances[subdomain]) return true;
+    const instanceName = this.ctx.instanceName;
+    if (isNil(instanceName)) throw new Error(`instanceName not valid: ${instanceName}`);
+    if (this.ctx.app.meta.appReadyInstances[instanceName]) return true;
     // instance startup
     if (startup === false) return false;
-    await this.instanceStartup(subdomain, { force: false });
+    await this.instanceStartup(instanceName, { force: false });
     return true;
   }
 
-  async resetCache(subdomain: string) {
-    await this._cacheInstanceConfig(subdomain, true);
+  async resetCache(instanceName: string) {
+    await this._cacheInstanceConfig(instanceName, true);
   }
 
-  private async _cacheInstanceConfig(subdomain: string, force: boolean) {
-    if (__cacheIntancesConfig[subdomain] && !force) return;
-    let instance = await this.bean.instance.get(subdomain);
+  private async _cacheInstanceConfig(instanceName: string, force: boolean) {
+    if (__cacheIntancesConfig[instanceName] && !force) return;
+    let instance = await this.bean.instance.get(instanceName);
     if (!instance) this.app.throw(403);
     instance = instance!;
     // config
     const instanceConfig = JSON.parse(instance.config);
     // cache configs
-    __cacheIntancesConfig[subdomain] = deepExtend({}, this.ctx.app.config, instanceConfig, {
+    __cacheIntancesConfig[instanceName] = deepExtend({}, this.ctx.app.config, instanceConfig, {
       instances: undefined,
     });
   }
 
   // options: force/instanceBase
-  async instanceStartup(subdomain: string, options?: IInstanceStartupOptions) {
+  async instanceStartup(instanceName: string, options?: IInstanceStartupOptions) {
     if (!options) options = {};
     if (!options.configInstanceBase) {
-      options.configInstanceBase = this.scope.service.instance.getConfigInstanceBase(subdomain);
+      options.configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
     }
     // cache instance config
-    await this._cacheInstanceConfig(subdomain, false);
+    await this._cacheInstanceConfig(instanceName, false);
     // queue within the same worker
-    if (!__queueInstanceStartup[subdomain]) {
-      __queueInstanceStartup[subdomain] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
+    if (!__queueInstanceStartup[instanceName]) {
+      __queueInstanceStartup[instanceName] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
         // check again
         const force = info.options?.force;
-        if (this.ctx.app.meta.appReadyInstances[info.subdomain] && !force) {
+        if (this.ctx.app.meta.appReadyInstances[info.instanceName] && !force) {
           info.resolve();
           cb();
           return;
         }
         // startup
         this.$scope.startup.service.startup
-          .runStartupInstance(info.subdomain, info.options)
+          .runStartupInstance(info.instanceName, info.options)
           .then(() => {
             info.resolve();
             cb();
@@ -118,14 +118,14 @@ export class ServiceInstance extends BeanBase {
       // options
       if (!options) options = { force: false, configInstanceBase: undefined };
       // queue push
-      const info: IInstanceStartupQueueInfo = { resolve, reject, subdomain, options };
-      __queueInstanceStartup[subdomain].push(info);
+      const info: IInstanceStartupQueueInfo = { resolve, reject, instanceName, options };
+      __queueInstanceStartup[instanceName].push(info);
     });
   }
 
   async initInstance() {
     // instance
-    const instance = await this.bean.instance.get(this.ctx.subdomain);
+    const instance = await this.bean.instance.get(this.ctx.instanceName!);
     if (!instance) {
       // prompt: should for local/prod
       // if (this.ctx.app.meta.isLocal) {
@@ -134,7 +134,7 @@ export class ServiceInstance extends BeanBase {
           ? 'https://cabloy.com/zh-cn/articles/multi-instance.html'
           : 'https://cabloy.com/articles/multi-instance.html';
       let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].js')}`;
-      message += '\n' + chalk.hex('#FF8800')(`{ subdomain: '${this.ctx.subdomain}', password: '', title: '' }`);
+      message += '\n' + chalk.hex('#FF8800')(`{ instanceName: '${this.ctx.instanceName}', password: '', title: '' }`);
       message += `\nMore info: ${chalk.cyan(urlInfo)}`;
       console.log('\n' + Boxen.default(message, boxenOptions));
       // }
@@ -143,7 +143,7 @@ export class ServiceInstance extends BeanBase {
     // check if disabled
     if (instance.disabled) {
       // locked
-      console.log('instance disabled: ', this.ctx.subdomain);
+      console.log('instance disabled: ', this.ctx.instanceName);
       return this.app.throw(423); // not this.app.fail(423)
     }
 
