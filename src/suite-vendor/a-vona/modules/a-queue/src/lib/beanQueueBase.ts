@@ -14,7 +14,7 @@ export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
     );
   }
 
-  getQueue(subdomain?: string) {
-    return this.$scope.queue.service.queue.getQueue(this.onionName as keyof IQueueRecord, subdomain);
+  getQueue(instanceName?: string) {
+    return this.$scope.queue.service.queue.getQueue(this.onionName as keyof IQueueRecord, instanceName);
   }
 }

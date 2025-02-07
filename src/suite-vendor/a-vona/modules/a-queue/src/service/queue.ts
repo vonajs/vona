@@ -1,5 +1,5 @@
 import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, subdomainDesp, uuidv4 } from 'vona';
+import { BeanBase, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import {
   IDecoratorQueueOptions,
   IQueueCallbacks,
@@ -26,19 +26,19 @@ export class ServiceQueue extends BeanBase {
     this._queuePush(info, false);
   }
 
-  // { locale, subdomain, module, queueName,queueNameSub,data }
+  // { locale, instanceName, module, queueName,queueNameSub,data }
   pushAsync<DATA, RESULT>(info: IQueueJobContext<DATA>): Promise<RESULT> {
     if (!info.options?.dbLevel) throw new Error('should specify the options.dbLevel');
     return this._queuePush(info, true);
   }
 
-  loadQueueWorkers(subdomain: string) {
+  loadQueueWorkers(instanceName?: string) {
     for (const queueItem of this.bean.onion.queue.getOnionsEnabled()) {
       const info: IQueueJobContext<unknown> = {
         queueName: queueItem.name as never,
         data: undefined as any,
         options: {
-          subdomain,
+          instanceName,
         },
       };
       this._ensureWorker(info);
@@ -95,7 +95,7 @@ export class ServiceQueue extends BeanBase {
             return await this._performTask(job);
           },
           {
-            // subdomain: job.data.subdomain, // need not
+            // instanceName: job.data.instanceName, // need not
             redlock: _worker.redlock,
             lockTTL: _lockTTL,
           },
@@ -177,12 +177,12 @@ export class ServiceQueue extends BeanBase {
     return this._queues[queueKey];
   }
 
-  getQueue(queueName: keyof IQueueRecord, subdomain?: string) {
+  getQueue(queueName: keyof IQueueRecord, instanceName?: string) {
     return this._getQueue({
       queueName,
       data: undefined as any,
       options: {
-        subdomain: subdomain ?? this.ctx.subdomain,
+        instanceName: instanceName ?? this.ctx.instanceName,
       },
     });
   }
@@ -234,8 +234,8 @@ export class ServiceQueue extends BeanBase {
   }
 
   _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
-    const subdomain = subdomainDesp(info.options?.subdomain);
-    return `${subdomain}||${info.queueName.replace(':', '.queue.')}`;
+    const instanceName = instanceDesp(info.options?.instanceName);
+    return `${instanceName}||${info.queueName.replace(':', '.queue.')}`;
   }
 
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
@@ -252,7 +252,7 @@ export class ServiceQueue extends BeanBase {
       },
       {
         locale: info.options?.locale,
-        subdomain: info.options?.subdomain,
+        instanceName: info.options?.instanceName,
         dbLevel: info.options!.dbLevel,
         extraData: info.options?.extraData,
         transaction: queueConfig?.transaction,
@@ -275,7 +275,7 @@ export class ServiceQueue extends BeanBase {
     } else {
       options.dbLevel = options.dbLevel ?? this.ctx.dbLevel + 1;
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
-      options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
+      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
       // extraData: headers
       const headers = options.extraData!.headers!;
       for (const key in this.ctx.request.headers) {
