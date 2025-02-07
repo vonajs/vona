@@ -3,7 +3,7 @@ import { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IBroadcastEmitOptions {
   locale?: keyof ILocalInfos;
-  subdomain?: string | null | undefined;
+  instanceName?: string | null | undefined;
 }
 
 export interface IBroadcastExecute<DATA = unknown> {

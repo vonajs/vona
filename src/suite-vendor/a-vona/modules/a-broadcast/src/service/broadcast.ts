@@ -48,7 +48,7 @@ export class ServiceBroadcast extends BeanBase {
       },
       {
         locale: info.options?.locale,
-        subdomain: info.options?.subdomain,
+        instanceName: info.options?.instanceName,
         transaction: broadcastConfig?.transaction,
         instance: broadcastConfig?.instance !== false,
       },

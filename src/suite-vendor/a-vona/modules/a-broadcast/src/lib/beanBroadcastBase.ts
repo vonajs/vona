@@ -10,7 +10,7 @@ export class BeanBroadcastBase<DATA = unknown> extends BeanBase {
     options = deepExtend({}, options)!;
     if (this.ctx) {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
-      options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
+      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     return {
       broadcastName: this.onionName as never,

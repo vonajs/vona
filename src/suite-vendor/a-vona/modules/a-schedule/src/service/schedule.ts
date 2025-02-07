@@ -77,7 +77,7 @@ export class ServiceSchedule extends BeanBase {
     return `${instanceName}.${cast<string>(scheduleName).replace(':', '.schedule.')}`; // not use :
   }
 
-  public async loadSchedules(instanceName?: string) {
+  public async loadSchedules(instanceName?: string | undefined | null) {
     if (instanceName === undefined) instanceName = this.ctx.instanceName;
     for (const scheduleItem of this.bean.onion.schedule.getOnionsEnabled()) {
       const scheduleName = scheduleItem.name;
@@ -85,7 +85,7 @@ export class ServiceSchedule extends BeanBase {
     }
   }
 
-  public async addSchedule(scheduleName: keyof IScheduleRecord, instanceName?: string) {
+  public async addSchedule(scheduleName: keyof IScheduleRecord, instanceName?: string | undefined | null) {
     if (instanceName === undefined) instanceName = this.ctx.instanceName;
     const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
     if (!scheduleItem) return;
