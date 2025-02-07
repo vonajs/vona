@@ -21,7 +21,7 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
 
       const hasParamField = typeof field === 'string';
       const paramField = hasParamField ? field : undefined;
-      const paramSchemaLikes = hasParamField ? schemaLikes : [field, ...schemaLikes].filter(item => !!item);
+      const paramSchemaLikes = hasParamField ? schemaLikes : [field!, ...schemaLikes].filter(item => !!item);
 
       const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
       const metaType = paramtypes[index];
