@@ -4,7 +4,7 @@ import { TypeRequestMethod } from 'vona-module-a-web';
 
 export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
-  subdomain?: string | null | undefined;
+  instanceName?: string | null | undefined;
   instance?: boolean;
 }
 
@@ -15,10 +15,10 @@ export interface INewCtxExtraData {
 
 export interface INewCtxOptions {
   locale?: keyof ILocalInfos;
-  subdomain?: string | null | undefined;
+  instanceName?: string | null | undefined;
+  instance?: boolean;
   dbLevel?: number;
   transaction?: boolean;
-  instance?: boolean;
   extraData?: INewCtxExtraData;
 }
 

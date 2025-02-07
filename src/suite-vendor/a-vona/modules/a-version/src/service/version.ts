@@ -16,7 +16,7 @@ import {
 export class ServiceVersion extends BeanBase {
   async instanceInitStartup(options?: IInstanceStartupOptions) {
     const instanceBase = options?.configInstanceBase;
-    await this.__instanceInit(this.ctx.subdomain, instanceBase);
+    await this.__instanceInit(this.ctx.instanceName, instanceBase);
   }
 
   async __start() {
@@ -36,19 +36,22 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  async __instanceInit(subdomain: string, instanceBase?: ConfigInstanceBase) {
+  async __instanceInit(instanceName: string | undefined | null, instanceBase?: ConfigInstanceBase) {
+    if (instanceName === undefined || instanceName === null) {
+      throw new Error('instance name is not valid');
+    }
     try {
-      const optionsInit = Object.assign({}, instanceBase, { scene: 'init' as const, subdomain });
+      const optionsInit = Object.assign({}, instanceBase, { scene: 'init' as const, instanceName });
       await this.__check(optionsInit);
-      console.log(chalk.cyan(`  The instance is initialized successfully: ${subdomain || 'default'}`));
+      console.log(chalk.cyan(`  The instance is initialized successfully: ${instanceName || 'default'}`));
     } catch (err) {
-      console.log(chalk.cyan(`  The instance is initialized failed: ${subdomain || 'default'}`));
+      console.log(chalk.cyan(`  The instance is initialized failed: ${instanceName || 'default'}`));
       throw err;
     }
   }
 
-  async __instanceTest(subdomain: string) {
-    await this.__check({ scene: 'test', subdomain });
+  async __instanceTest(instanceName: string) {
+    await this.__check({ scene: 'test', instanceName });
   }
 
   // scene: null/init/test
@@ -80,7 +83,7 @@ export class ServiceVersion extends BeanBase {
         await this.__done(options);
       },
       {
-        subdomain: options.subdomain,
+        instanceName: options.instanceName,
       },
     );
 
@@ -122,7 +125,7 @@ export class ServiceVersion extends BeanBase {
           const res = await this.bean.model
             .builder<EntityVersionInit>('aVersionInit')
             .select('*')
-            .where({ subdomain: options.subdomain, module: moduleName })
+            .where({ instanceName: options.instanceName, module: moduleName })
             .orderBy('version', 'desc')
             .first();
           if (res) {
@@ -147,7 +150,7 @@ export class ServiceVersion extends BeanBase {
           await this.__testModuleTransaction(module, fileVersionNew, options);
         },
         {
-          subdomain: options.subdomain,
+          instanceName: options.instanceName,
           transaction: true,
         },
       );
@@ -201,7 +204,7 @@ export class ServiceVersion extends BeanBase {
             await this.__initModuleTransaction(module, version, options);
           },
           {
-            subdomain: options.subdomain,
+            instanceName: options.instanceName,
             transaction: true,
           },
         );
@@ -237,7 +240,7 @@ export class ServiceVersion extends BeanBase {
       await this.bean.model.insert(
         'aVersionInit',
         {
-          subdomain: options.subdomain,
+          instanceName: options.instanceName,
           module: module.info.relativeName,
           version,
         },

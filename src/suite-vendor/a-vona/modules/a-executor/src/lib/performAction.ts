@@ -40,10 +40,10 @@ export async function performActionInner<T = any>({
       },
     });
 
-    // subdomain
-    Object.defineProperty(ctx, 'subdomain', {
+    // instanceName
+    Object.defineProperty(ctx, 'instanceName', {
       get() {
-        return ctxCaller.subdomain;
+        return ctxCaller.instanceName;
       },
     });
 

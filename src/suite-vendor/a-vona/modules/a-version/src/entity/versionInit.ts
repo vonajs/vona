@@ -3,7 +3,7 @@ import { Entity, EntityBase } from 'vona-module-a-database';
 
 @Entity('aVersionInit')
 export class EntityVersionInit extends OmitClass(EntityBase, ['iid', 'deleted']) {
-  subdomain: string;
+  instanceName: string;
   module: string;
   version: number;
 }

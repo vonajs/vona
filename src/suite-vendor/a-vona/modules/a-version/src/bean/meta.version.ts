@@ -15,7 +15,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
       const entity = this.scope.entity.versionInit;
       await this.bean.model.createTable(entity.table, function (table) {
         table.basicFields({ deleted: false, iid: false });
-        table.string(entity.column('subdomain'), 50);
+        table.string(entity.column('instanceName'), 50);
         table.string(entity.column('module'), 50);
         table.integer(entity.column('version'));
       });

@@ -44,7 +44,7 @@ export class BeanExecutor extends BeanBase {
       url,
     };
     const locale = options?.locale;
-    const subdomain = options?.subdomain;
+    const instanceName = options?.instanceName;
     return await this.app.runInAnonymousContextScope(async ctx => {
       // todo: check if need for passport
       // (<any>ctx.req).ctx = ctx;
@@ -52,15 +52,11 @@ export class BeanExecutor extends BeanBase {
       if (locale !== undefined) {
         ctx.locale = locale;
       }
-      // subdomain
-      Object.defineProperty(ctx, 'subdomain', {
-        get() {
-          return subdomain;
-        },
-      });
+      // subdomain: hold undefined if undefined
+      ctx.instanceName = instanceName;
       // instance
-      if (subdomain !== undefined && subdomain !== null) {
-        ctx.instance = await this.bean.instance.get(subdomain);
+      if (instanceName !== undefined && instanceName !== null) {
+        ctx.instance = await this.bean.instance.get(instanceName);
         // start instance
         if (options?.instance) {
           await this.$scope.instance.service.instance.checkAppReadyInstance(true);
@@ -88,9 +84,9 @@ export class BeanExecutor extends BeanBase {
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     if (!this.ctx) {
-      options.subdomain = options.subdomain === undefined ? '' : options.subdomain;
+      options.instanceName = options.instanceName === undefined ? '' : options.instanceName;
     } else {
-      options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
+      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     return await this.newCtx(fn, options);
   }
@@ -102,7 +98,7 @@ export class BeanExecutor extends BeanBase {
     } else {
       options.dbLevel = options.dbLevel ?? this.ctx.dbLevel;
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
-      options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
+      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     // run
     const isolate = !this.ctx || this.ctx.dbLevel !== options.dbLevel;
@@ -141,7 +137,7 @@ export class BeanExecutor extends BeanBase {
         // ok
         return res;
       },
-      { locale: options.locale, subdomain: options.subdomain, instance: options.instance },
+      { locale: options.locale, instanceName: options.instanceName, instance: options.instance },
     );
   }
 }

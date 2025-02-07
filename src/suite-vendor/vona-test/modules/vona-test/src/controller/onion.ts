@@ -66,7 +66,7 @@ export class ControllerOnion extends BeanBase {
 
   @Post('echo4')
   @UseGuardGlobal('a-user:passport', { public: true })
-  @UseFilterGlobal('a-core:error', { enable: true, logs: { 422: true } })
+  @UseFilterGlobal('a-error:error', { enable: true, logs: { 422: true } })
   @Api.body(v.array(DtoUser))
   echo4(@Body(v.optional(), v.array(DtoUser)) users: DtoUser[]): DtoUser[] {
     return users;

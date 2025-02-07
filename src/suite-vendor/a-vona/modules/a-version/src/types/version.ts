@@ -2,7 +2,7 @@ import { ConfigInstanceBase } from 'vona';
 
 export interface IMetaVersionOptions {
   scene: 'update' | 'init' | 'test';
-  subdomain?: string;
+  instanceName?: string;
 }
 
 export interface IMetaVersionOptionsInner extends IMetaVersionOptions {
@@ -20,7 +20,7 @@ export interface IMetaVersionInitOptions extends ConfigInstanceBase {
 
 export interface IMetaVersionTestOptions {
   version: number;
-  subdomain: string;
+  instanceName: string;
 }
 
 export interface IMetaVersionUpdate {
