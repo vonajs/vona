@@ -9,7 +9,7 @@ export default function (appInfo: VonaAppInfo) {
   // instances
   config.instances = [
     {
-      subdomain: '',
+      instanceName: '',
       password: '',
       title: '',
       config: {
