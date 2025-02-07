@@ -31,27 +31,27 @@ export class ServiceStartup extends BeanBase {
 
     // version init : force: should be false
     if (this.app.meta.isTest || this.app.meta.isLocal) {
-      const subdomain = '';
+      const instanceName = '';
       await this.bean.executor.newCtx(
         async () => {
-          await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
+          await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
         },
         {
-          subdomain,
+          instanceName,
         },
       );
     } else {
       // all instances
       const instances = await this.bean.instance.list();
       for (const instance of instances) {
-        const subdomain = instance.name;
+        const instanceName = instance.name;
         // need not await
         this.bean.executor.newCtx(
           async () => {
-            await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
+            await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
           },
           {
-            subdomain,
+            instanceName,
           },
         );
       }
@@ -59,59 +59,59 @@ export class ServiceStartup extends BeanBase {
 
     // version test
     if (this.app.meta.isTest) {
-      const subdomain = '';
+      const instanceName = '';
       await this.bean.executor.newCtx(
         async () => {
-          await this.$scope.version.service.version.__instanceTest(subdomain);
+          await this.$scope.version.service.version.__instanceTest(instanceName);
         },
         {
-          subdomain,
+          instanceName,
         },
       );
     }
   }
 
-  async runStartup(startupName: string, subdomain?: string, options?: IInstanceStartupOptions) {
+  async runStartup(startupName: string, instanceName?: string, options?: IInstanceStartupOptions) {
     const startup = this.bean.onion.startup.onionsNormal[startupName];
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // normal
     if (!startupOptions.debounce) {
-      return await this._runStartupInner(startup, subdomain, options);
+      return await this._runStartupInner(startup, instanceName, options);
     }
     // debounce: lock
     return await this.scope.redlock.lockIsolate(
       `startup.${startupName}`,
       async () => {
-        return await this._runStartupLock(startup, subdomain, options);
+        return await this._runStartupLock(startup, instanceName, options);
       },
       {
-        subdomain,
+        instanceName,
       },
     );
   }
 
   async _runStartupLock(
     startup: IOnionSlice<IDecoratorStartupOptions>,
-    subdomain?: string,
+    instanceName?: string,
     options?: IInstanceStartupOptions,
   ) {
     // ignore debounce for test
     if (!options?.force && !this.app.meta.isTest) {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
       const cacheKey =
-        `startupDebounce:${startup.name}${subdomain !== undefined ? `:${this.ctx.instance.id}` : ''}` as const;
+        `startupDebounce:${startup.name}${instanceName !== undefined ? `:${this.ctx.instance.id}` : ''}` as const;
       const debounce =
         typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
       const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, debounce);
       if (flag) return;
     }
     // perform
-    await this._runStartupInner(startup, subdomain, options);
+    await this._runStartupInner(startup, instanceName, options);
   }
 
   async _runStartupInner(
     startup: IOnionSlice<IDecoratorStartupOptions>,
-    subdomain?: string,
+    instanceName?: string,
     options?: IInstanceStartupOptions,
   ) {
     console.log(
@@ -125,27 +125,27 @@ export class ServiceStartup extends BeanBase {
         await bean.execute(options);
       },
       {
-        subdomain,
+        instanceName,
         transaction: startupOptions.transaction,
       },
     );
   }
 
-  async runStartupInstance(subdomain: string, options?: IInstanceStartupOptions) {
+  async runStartupInstance(instanceName: string, options?: IInstanceStartupOptions) {
     // run startups: not after
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (startupOptions?.instance && startupOptions?.after !== true) {
-        await this.runStartup(startup.name, subdomain, options);
+        await this.runStartup(startup.name, instanceName, options);
       }
     }
     // set flag
-    this.app.meta.appReadyInstances[subdomain] = true;
+    this.app.meta.appReadyInstances[instanceName] = true;
     // run startups: after
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (startupOptions?.instance && startupOptions?.after === true) {
-        await this.runStartup(startup.name, subdomain, options);
+        await this.runStartup(startup.name, instanceName, options);
       }
     }
   }
