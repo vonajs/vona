@@ -1,5 +1,5 @@
 import Redlock from 'redlock';
-import { BeanBase, FunctionAsync, subdomainDesp } from 'vona';
+import { BeanBase, FunctionAsync, instanceDesp } from 'vona';
 import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 import { Service } from 'vona-module-a-web';
 
@@ -12,11 +12,11 @@ export class ServiceRedlock extends BeanBase {
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockOptions,
   ): Promise<RESULT> {
-    const subdomain = options?.subdomain === undefined ? this.ctx?.subdomain : options?.subdomain;
+    const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options?.instanceName;
     const redlock = options?.redlock ?? this.redlockDefault;
     const lockTTL = options?.lockTTL ?? this.scope.config.redlock.lockTTL;
     // resource
-    const _lockResource = `redlock_${this.app.name}:${subdomainDesp(subdomain)}:${resource}`;
+    const _lockResource = `redlock_${this.app.name}:${instanceDesp(instanceName)}:${resource}`;
     // lock
     let _lock = await redlock.lock(_lockResource, lockTTL);
     // timer

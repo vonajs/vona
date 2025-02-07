@@ -296,9 +296,9 @@ export function compose(chains, adapter?) {
   return _compose(chains, adapter);
 }
 
-export function subdomainDesp(subdomain: string | null | undefined): string {
-  if (subdomain === undefined || subdomain === null) return '~';
-  return subdomain || '-';
+export function instanceDesp(instanceName: string | null | undefined): string {
+  if (instanceName === undefined || instanceName === null) return '~';
+  return instanceName || '-';
 }
 
 export function requireDynamic(file: string) {
