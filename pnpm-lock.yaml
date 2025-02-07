@@ -1124,7 +1124,11 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-databasedialect: {}
 
-  src/suite-vendor/a-vona/modules/a-error: {}
+  src/suite-vendor/a-vona/modules/a-error:
+    dependencies:
+      koa-onerror:
+        specifier: ^5.0.1
+        version: 5.0.1
 
   src/suite-vendor/a-vona/modules/a-event: {}
 
@@ -5486,6 +5490,10 @@ packages:
     resolution: {integrity: sha512-D15tp5rxevHqqcvOiEDbtQolG6z3NpBNupz3EUZz43pjYv5SGMom2Xz1FKM8oTya56+aq+hejPW/iBrNnC/UGQ==}
     engines: {node: '>= 8.0.0'}
 
+  koa-onerror@5.0.1:
+    resolution: {integrity: sha512-mSdakWWkZASupPZe661zhSwa/szIvskdmNpLn9gRmrcI2iktDDLi+u0c6KuG6mI6E6Fh8btVMdx0u40/2IvxQw==}
+    engines: {node: '>= 18.19.0'}
+
   koa-override@3.0.0:
     resolution: {integrity: sha512-w2rWCfapbQUZ8TrRBarj6iwryCTooEcdw9lr1hYC1q4FnaCZcAOhpjB1VpqtbODALVMgY3JGlzLSeYRXc5Ky0Q==}
     engines: {node: '>= 8.0.0'}
@@ -7078,6 +7086,10 @@ packages:
   stream-wormhole@1.1.0:
     resolution: {integrity: sha512-gHFfL3px0Kctd6Po0M8TzEvt3De/xu6cnRrjlfYNhwbhLPLwigI2t1nc6jrzNuaYg5C4YF78PPFuQPzRiqn9ew==}
     engines: {node: '>=4.0.0'}
+
+  stream-wormhole@2.0.1:
+    resolution: {integrity: sha512-B31SiV7tNxOGqvC367O1dVL4nWBgCT7xqtHtikvxUkrbxgvtUemYc6WyO8+Z5cLW8/HUvYmNkgZIjTXYLIDYVw==}
+    engines: {node: '>=16.0.0'}
 
   streamifier@0.1.1:
     resolution: {integrity: sha512-zDgl+muIlWzXNsXeyUfOk9dChMjlpkq0DRsxujtYPgyJ676yQ8jEm6zzaaWHFDg5BNcLuif0eD2MTyJdZqXpdg==}
@@ -13088,6 +13100,11 @@ snapshots:
       escape-html: 1.0.3
       stream-wormhole: 1.1.0
 
+  koa-onerror@5.0.1:
+    dependencies:
+      escape-html: 1.0.3
+      stream-wormhole: 2.0.1
+
   koa-override@3.0.0:
     dependencies:
       methods: 1.1.2
@@ -14855,6 +14872,8 @@ snapshots:
   stream-slice@0.1.2: {}
 
   stream-wormhole@1.1.0: {}
+
+  stream-wormhole@2.0.1: {}
 
   streamifier@0.1.1: {}
 

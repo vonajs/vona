@@ -1,4 +1,4 @@
-import { VonaAppInfo, VonaConfigOptional, VonaContext } from 'vona';
+import { VonaAppInfo, VonaConfigOptional } from 'vona';
 import * as uuid from 'uuid';
 
 // eslint-disable-next-line
@@ -95,11 +95,6 @@ export default function (appInfo: VonaAppInfo) {
     // 'meta', 'siteFile', 'notfound', 'bodyParser', 'overrideMethod'
   ];
 
-  // i18n
-  config.i18n = {
-    defaultLocale: 'en-us',
-  };
-
   // multipart
   config.multipart = {
     fileSize: '30mb',
@@ -183,27 +178,5 @@ export default function (appInfo: VonaAppInfo) {
     },
   };
 
-  // onerror
-  config.onerror = {
-    appErrorFilter(err: Error, ctx: VonaContext) {
-      if (!err) return false;
-      _performErrorFilters(ctx, err, 'log');
-      return false;
-    },
-    json(err: Error, ctx: VonaContext) {
-      _performErrorFilters(ctx, err, 'json');
-    },
-    html(err: Error, ctx: VonaContext) {
-      _performErrorFilters(ctx, err, 'html');
-    },
-  };
-
   return config;
-}
-
-function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
-  return ctx.app.ctxStorage.run(ctx as any, () => {
-    const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as any;
-    return beanFilter.performErrorFilters(err, method);
-  });
 }

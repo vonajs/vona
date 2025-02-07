@@ -29,5 +29,7 @@
     "templates"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "koa-onerror": "^5.0.1"
+  }
 }
