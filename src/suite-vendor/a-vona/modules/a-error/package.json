@@ -30,6 +30,9 @@
   ],
   "scripts": {},
   "dependencies": {
-    "koa-onerror": "^5.0.1"
+    "cookie": "^1.0.2",
+    "koa-onerror": "^5.0.1",
+    "mustache": "^4.2.0",
+    "stack-trace": "^1.0.0-pre2"
   }
 }

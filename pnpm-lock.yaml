@@ -1066,9 +1066,6 @@ importers:
       cli-table3:
         specifier: ^0.6.5
         version: 0.6.5
-      cookie:
-        specifier: ^1.0.2
-        version: 1.0.2
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -1081,15 +1078,9 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
-      mustache:
-        specifier: ^4.2.0
-        version: 4.2.0
       retry:
         specifier: ^0.13.1
         version: 0.13.1
-      stack-trace:
-        specifier: ^1.0.0-pre2
-        version: 1.0.0-pre2
       uuid:
         specifier: ^11.0.3
         version: 11.0.3
@@ -1126,9 +1117,18 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-error:
     dependencies:
+      cookie:
+        specifier: ^1.0.2
+        version: 1.0.2
       koa-onerror:
         specifier: ^5.0.1
         version: 5.0.1
+      mustache:
+        specifier: ^4.2.0
+        version: 4.2.0
+      stack-trace:
+        specifier: ^1.0.0-pre2
+        version: 1.0.0-pre2
 
   src/suite-vendor/a-vona/modules/a-event: {}
 

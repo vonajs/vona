@@ -4,17 +4,31 @@ import { ServiceFilter } from 'vona-module-a-aspect';
 
 export const config = (_app: VonaApplication) => {
   return {
-    accepts: undefined as typeof accepts | undefined,
-    appErrorFilter(err: Error, ctx: VonaContext) {
-      if (!err) return false;
-      _performErrorFilters(ctx, err, 'log');
-      return false;
+    error: {
+      templatePath: '',
+      appErrorFilter(err: Error, ctx: VonaContext) {
+        if (!err) return false;
+        _performErrorFilters(ctx, err, 'log');
+        return false;
+      },
     },
-    json(err: Error, ctx: VonaContext) {
-      _performErrorFilters(ctx, err, 'json');
-    },
-    html(err: Error, ctx: VonaContext) {
-      _performErrorFilters(ctx, err, 'html');
+    onerror: {
+      accepts(this: VonaContext) {
+        const fn = accepts;
+        return fn(this as any);
+      },
+      js(err: Error, ctx: VonaContext) {
+        _performErrorFilters(ctx, err, 'json');
+        if (ctx.createJsonpBody) {
+          ctx.createJsonpBody(ctx.body);
+        }
+      },
+      json(err: Error, ctx: VonaContext) {
+        _performErrorFilters(ctx, err, 'json');
+      },
+      html(err: Error, ctx: VonaContext) {
+        _performErrorFilters(ctx, err, 'html');
+      },
     },
   };
 };
