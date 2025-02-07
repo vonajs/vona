@@ -31,6 +31,7 @@ export class LocalCommon {
       if (module.info.node_modules) continue;
       const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
       if (force || !fse.existsSync(moduleTypeFile)) {
+        if (fse.existsSync(moduleTypeFile)) await fse.remove(moduleTypeFile);
         await fse.ensureLink(typeFile, moduleTypeFile);
       }
     }
