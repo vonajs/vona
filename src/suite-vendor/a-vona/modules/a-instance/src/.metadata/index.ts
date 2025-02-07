@@ -185,6 +185,10 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -193,8 +197,11 @@ export const locales = {
   'zh-cn': locale_zh_cn,
 };
 /** locale: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -202,6 +209,7 @@ export class ScopeModuleAInstance extends BeanScopeBase {}
 
 export interface ScopeModuleAInstance {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   broadcast: IModuleBroadcast;
   entity: IModuleEntity;
@@ -218,6 +226,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     instance: ScopeModuleAInstance;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-instance': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {

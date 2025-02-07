@@ -8,7 +8,6 @@ import { AsyncResource } from 'node:async_hooks';
 
 const BEAN = Symbol.for('Context#__bean');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
-const SUBDOMAIN = Symbol.for('Context#__subdomain');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
 const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const DBLEVEL = Symbol.for('Context#__dblevel');
@@ -30,6 +29,14 @@ export const contextBase: ContextBase = {
     const self = cast(this);
     self.__setLocale(value);
   },
+  get instanceName(): string | undefined | null {
+    const self = cast(this);
+    return self.__getInstanceName();
+  },
+  set instanceName(value: string | undefined | null) {
+    const self = cast(this);
+    self.__setInstanceName(value);
+  },
   get config() {
     const self = cast(this);
     const serviceInstance = cast(self.app.bean._getBean('a-instance.service.instance' as never));
@@ -46,13 +53,6 @@ export const contextBase: ContextBase = {
   },
   set dbLevel(value: number | undefined) {
     this[DBLEVEL] = value;
-  },
-  get subdomain() {
-    const self = cast<VonaContext>(this);
-    return typeof this[SUBDOMAIN] === 'undefined' ? self.subdomains.join('.') : this[SUBDOMAIN];
-  },
-  set subdomain(value) {
-    this[SUBDOMAIN] = value;
   },
   get ctxCaller() {
     return this[CTXCALLER];
