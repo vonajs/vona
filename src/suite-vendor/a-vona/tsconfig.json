@@ -92,6 +92,9 @@
     },
     {
       "path": "modules/a-i18n/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-error/tsconfig.build.json"
     }
   ]
 }

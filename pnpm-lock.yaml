@@ -104,6 +104,9 @@ importers:
       vona-module-a-databasedialect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-databasedialect
+      vona-module-a-error:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-error
       vona-module-a-event:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-event
@@ -943,6 +946,9 @@ importers:
       vona-module-a-databasedialect:
         specifier: workspace:^
         version: link:modules/a-databasedialect
+      vona-module-a-error:
+        specifier: workspace:^
+        version: link:modules/a-error
       vona-module-a-event:
         specifier: workspace:^
         version: link:modules/a-event
@@ -1117,6 +1123,8 @@ importers:
         version: 4.0.2
 
   src/suite-vendor/a-vona/modules/a-databasedialect: {}
+
+  src/suite-vendor/a-vona/modules/a-error: {}
 
   src/suite-vendor/a-vona/modules/a-event: {}
 
