@@ -1,10 +1,6 @@
 import { cast, VonaApplication } from '../../../types/index.js';
-import { VersionReady } from '../version/ready.js';
 
 export default function (app: VonaApplication) {
-  const versionReady = app.bean._newBean(VersionReady);
-  // initialize
-  versionReady.initialize();
   // eb_clear
   app.messenger.once('eb_clear', async data => {
     await cast(app.bean._getBean('a-queue.service.queue' as any)).clearWorkers();
