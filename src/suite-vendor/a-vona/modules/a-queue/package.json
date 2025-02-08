@@ -3,7 +3,9 @@
   "version": "5.0.0",
   "title": "a-queue",
   "vonaModule": {
-    "dependencies": {},
+    "dependencies": {
+      "a-vona": "5.0.0"
+    },
     "globalDependencies": {
       "bullmq": true
     },
@@ -14,6 +16,9 @@
         "scopeResource": true,
         "boilerplate": "cli/boilerplate"
       }
+    },
+    "capabilities": {
+      "monkey": true
     }
   },
   "type": "module",

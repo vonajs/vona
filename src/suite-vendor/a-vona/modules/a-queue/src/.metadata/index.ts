@@ -49,6 +49,9 @@ declare module 'vona' {
 export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
