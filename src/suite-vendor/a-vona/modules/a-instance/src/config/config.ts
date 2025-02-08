@@ -5,7 +5,5 @@ export interface IInstanceConfig {
 }
 
 export const config = (_app: VonaApplication) => {
-  return {
-    instance: {} as IInstanceConfig,
-  };
+  return {} as IInstanceConfig;
 };

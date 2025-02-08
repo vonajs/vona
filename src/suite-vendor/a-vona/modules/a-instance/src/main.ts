@@ -8,7 +8,7 @@ const SymbolInstanceNameExists = Symbol('SymbolInstanceNameExists');
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {
-    const options = this.bean.scope(__ThisModule__).config.instance;
+    const options = this.bean.scope(__ThisModule__).config;
     this.app.context.__getInstanceName = function (this: VonaContext) {
       return __getInstanceName(this, options);
     };
