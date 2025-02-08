@@ -30,9 +30,21 @@ export class LocalCommon {
     for (const module of this.cli.modulesMeta.modulesArray) {
       if (module.info.node_modules) continue;
       const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
-      if (force || !fse.existsSync(moduleTypeFile)) {
-        if (fse.existsSync(moduleTypeFile)) await fse.remove(moduleTypeFile);
-        await fse.ensureLink(typeFile, moduleTypeFile);
+      let needCreate = true;
+      if (fse.existsSync(moduleTypeFile)) {
+        try {
+          const realFile = await fse.readlink(moduleTypeFile);
+          if (realFile === typeFile) {
+            needCreate = false;
+          } else {
+            await fse.remove(moduleTypeFile);
+          }
+        } catch (_err) {
+          await fse.remove(moduleTypeFile);
+        }
+      }
+      if (needCreate) {
+        await fse.ensureSymlink(typeFile, moduleTypeFile);
       }
     }
   }
