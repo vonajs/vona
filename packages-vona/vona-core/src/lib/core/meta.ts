@@ -41,8 +41,8 @@ export class AppMeta extends BeanSimple {
   appReady: boolean;
   appReadyInstances: Record<string, boolean>;
   //
-  __appStarted: boolean;
-  __appStartError: Error;
+  appStarted: boolean;
+  appStartError: Error;
 
   protected __init__() {
     // app or agent
@@ -83,11 +83,11 @@ export class AppMeta extends BeanSimple {
   async waitAppStarted() {
     return new Promise((resolve, reject) => {
       // check once
-      if (this.__appStarted) {
+      if (this.appStarted) {
         resolve(true);
       }
-      if (this.__appStartError) {
-        reject(this.__appStartError);
+      if (this.appStartError) {
+        reject(this.appStartError);
       }
       // listen
       this.app.on(EnumAppEvent.AppStarted, () => {

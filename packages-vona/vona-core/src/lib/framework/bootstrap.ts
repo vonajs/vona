@@ -18,7 +18,7 @@ export class Bootstrap {
       await this._start_appStarted();
     } catch (err) {
       // record
-      app.meta.__appStartError = err as Error;
+      app.meta.appStartError = err as Error;
       // event: appReadyError
       app.emit(EnumAppEvent.AppStartError, err);
       // throw exception
@@ -48,15 +48,9 @@ export class Bootstrap {
 
   async _start_appStarted() {
     const app = this.app;
-    app.meta.__appStarted = true;
+    app.meta.appStarted = true;
     // event: appReady
     app.emit(EnumAppEvent.AppStarted);
-    // event to agent
-    // todo: remove
-    app.meta.messenger.callAgent({
-      name: 'appReady',
-      data: { pid: process.pid },
-    });
     // hook: appStarted
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
   }
