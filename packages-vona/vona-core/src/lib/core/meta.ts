@@ -9,6 +9,8 @@ import { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-in
 import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText } from '../bean/index.js';
 import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 
+const SymbolClosePromise = Symbol('SymbolClosePromise');
+
 export class AppMeta extends BeanSimple {
   inApp: boolean;
   inAgent: boolean;
@@ -43,6 +45,8 @@ export class AppMeta extends BeanSimple {
   //
   appStarted: boolean;
   appStartError: Error;
+  //
+  appClosed: boolean;
 
   protected __init__() {
     // app or agent
@@ -97,5 +101,21 @@ export class AppMeta extends BeanSimple {
         reject(err);
       });
     });
+  }
+
+  async close() {
+    if (!this[SymbolClosePromise]) {
+      this[SymbolClosePromise] = this._closeInner();
+    }
+    return this[SymbolClosePromise];
+  }
+
+  private async _closeInner() {
+    // set appClosed first
+    this.appClosed = true;
+    // todo: server.close();
+    // hook: appClosed
+    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClosed');
+    // need not call process.exit
   }
 }
