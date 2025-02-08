@@ -6,7 +6,6 @@ import loadErrors from './errors.js';
 import loadConstants from './constant.js';
 import loadMessenger from './messenger.js';
 import loadClusterApp from './cluster/app.js';
-import loadClusterAgent from './cluster/agent.js';
 import loadReload from './reload/reload.js';
 import loadDevelopment from './reload/development.js';
 import { BeanSimple } from '../bean/beanSimple.js';
@@ -44,7 +43,6 @@ export class ModuleLoader extends BeanSimple {
       loadReload(app);
     } else {
       await loadConfig(app, modules);
-      loadClusterAgent(app);
       loadReload(app);
       loadDevelopment(app);
     }
