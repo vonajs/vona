@@ -17,16 +17,15 @@ export class CliToolsDeps extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     const tsc = argv.tsc;
-    const force = argv.force;
     // generate
-    await this._generate(projectPath, tsc, force);
+    await this._generate(projectPath, tsc);
   }
 
-  async _generate(projectPath: string, tsc: boolean, force: boolean) {
+  async _generate(projectPath: string, tsc: boolean) {
     // generate package.json
     await this.common._generatePackageJson(projectPath);
     // generate type modules file
-    await this.common._generateTypeModulesFile(projectPath, force);
+    await this.common._generateTypeModulesFile(projectPath);
     // generate type project file
     await this._generateTypeProjectFile(projectPath);
     // tsc

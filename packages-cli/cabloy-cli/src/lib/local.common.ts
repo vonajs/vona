@@ -12,7 +12,7 @@ export class LocalCommon {
     this.cli = cli;
   }
 
-  async _generateTypeModulesFile(projectPath: string, force: boolean) {
+  async _generateTypeModulesFile(projectPath: string) {
     const pathName = this.cli.context.brandName === 'zova' ? 'front' : 'backend';
     const typeFile = path.join(projectPath, `src/${pathName}/typing/modules.d.ts`);
     let content = '';
