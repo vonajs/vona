@@ -5,7 +5,6 @@ import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
 import loadMessenger from './messenger.js';
-import loadClusterApp from './cluster/app.js';
 import loadReload from './reload/reload.js';
 import loadDevelopment from './reload/development.js';
 import { BeanSimple } from '../bean/beanSimple.js';
@@ -39,7 +38,6 @@ export class ModuleLoader extends BeanSimple {
       loadLocales(app, modules);
       loadErrors(app, modules);
       loadConstants(app, modules);
-      loadClusterApp(app);
       loadReload(app);
     } else {
       await loadConfig(app, modules);
