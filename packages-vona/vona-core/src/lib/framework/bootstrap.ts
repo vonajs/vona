@@ -13,6 +13,7 @@ export class Bootstrap {
   async start() {
     const app = this.app;
     try {
+      await this._start_init();
       await this._start_appStart();
       await this._start_appReady();
       await this._start_appStarted();
@@ -26,13 +27,17 @@ export class Bootstrap {
     }
   }
 
-  async _start_appStart() {
+  async _start_init() {
     const app = this.app;
     // extendApp
     extendApp(app);
     // module loader
     const moduleLoader = app.bean._newBean(ModuleLoader);
     await moduleLoader.execute();
+  }
+
+  async _start_appStart() {
+    const app = this.app;
     // hook: appStart
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStart');
   }

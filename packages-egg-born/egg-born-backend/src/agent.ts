@@ -11,6 +11,6 @@ export default class AppBootHook {
 
   async didLoad() {
     // todo: need not
-    // await this.bootstrap.loadModules();
+    await this.bootstrap._start_init();
   }
 }
