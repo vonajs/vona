@@ -5,6 +5,9 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"
+    },
+    "capabilities": {
+      "monkey": true
     }
   },
   "type": "module",
