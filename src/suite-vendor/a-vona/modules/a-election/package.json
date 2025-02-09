@@ -3,7 +3,13 @@
   "version": "5.0.0",
   "title": "a-election",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "metas": {
+      "election": {
+        "scopeResource": true,
+        "boilerplate": "cli/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {

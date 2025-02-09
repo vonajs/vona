@@ -1,0 +1,10 @@
+import { FunctionAsync } from 'vona';
+import { Meta } from 'vona-module-a-meta';
+import { BeanElectionBase, IElectionElectOptions } from 'vona-module-a-election';
+
+export interface Meta<%=argv.beanNameCapitalize%> {
+  lock<RESULT>(resource: 'name', fn: FunctionAsync<RESULT>, options?: IElectionElectOptions): Promise<RESULT>;
+}
+
+@Meta()
+export class Meta<%=argv.beanNameCapitalize%> extends BeanElectionBase {}
