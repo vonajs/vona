@@ -92,7 +92,7 @@ export function developmentWatchDirs(app: VonaApplication) {
         await processHelper.tsc();
       }
     }
-    // exitAll
-    await app.bean.worker.exitAll();
+    // reloadAll
+    await app.bean.worker.reloadAll();
   }
 }

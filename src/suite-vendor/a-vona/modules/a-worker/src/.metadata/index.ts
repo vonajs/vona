@@ -21,11 +21,13 @@ declare module 'vona' {
 /** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.exitAll.js';
+export * from '../bean/broadcast.reloadAll.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-worker:exitAll': IDecoratorBroadcastOptions;
+    'a-worker:reloadAll': IDecoratorBroadcastOptions;
   }
 }
 declare module 'vona-module-a-worker' {
@@ -33,12 +35,19 @@ declare module 'vona-module-a-worker' {
     /** @internal */
     get scope(): ScopeModuleAWorker;
   }
+
+  export interface BroadcastReloadAll {
+    /** @internal */
+    get scope(): ScopeModuleAWorker;
+  }
 }
 /** broadcast: end */
 /** broadcast: begin */
 import { BroadcastExitAll } from '../bean/broadcast.exitAll.js';
+import { BroadcastReloadAll } from '../bean/broadcast.reloadAll.js';
 export interface IModuleBroadcast {
   exitAll: BroadcastExitAll;
+  reloadAll: BroadcastReloadAll;
 }
 /** broadcast: end */
 /** cacheRedis: begin */

@@ -1,5 +1,5 @@
 import { Bean } from 'vona-module-a-bean';
-import { BeanBase, uuidv4 } from 'vona';
+import { BeanBase, cast, uuidv4 } from 'vona';
 
 const SymbolWorkerId = Symbol('SymbolWorkerId');
 
@@ -33,5 +33,17 @@ export class BeanWorker extends BeanBase {
 
   async exitAll(code?: number | string | null | undefined) {
     this.scope.broadcast.exitAll.emit({ code });
+  }
+
+  async reload() {
+    await this.app.meta.close();
+    cast(process).send({
+      to: 'master',
+      action: 'reload-worker',
+    });
+  }
+
+  async reloadAll() {
+    this.scope.broadcast.reloadAll.emit();
   }
 }
