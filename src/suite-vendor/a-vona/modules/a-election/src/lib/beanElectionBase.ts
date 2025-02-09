@@ -1,7 +1,7 @@
 import { BeanBase, FunctionAsync, SymbolModuleBelong } from 'vona';
 import { IElectionElectOptions } from '../types/election.js';
 
-export class BeanRedlockBase extends BeanBase {
+export class BeanElectionBase extends BeanBase {
   protected __get__(prop: string) {
     if (prop === 'elect') {
       return (resource: string, fn: FunctionAsync<any>, options?: IElectionElectOptions) => {
