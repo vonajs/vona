@@ -41,6 +41,7 @@ export class BeanWorker extends BeanBase {
       to: 'master',
       action: 'reload-worker',
     });
+    // todo: process.exit('reload-worker')，用于在cluster中监听进程关闭，然后fork new worker
   }
 
   async reloadAll() {
