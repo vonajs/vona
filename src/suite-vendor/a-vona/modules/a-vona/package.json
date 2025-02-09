@@ -11,6 +11,7 @@
       "a-core": "5.0.0",
       "a-database": "5.0.0",
       "a-databasedialect": "5.0.0",
+      "a-development": "5.0.0",
       "a-error": "5.0.0",
       "a-event": "5.0.0",
       "a-executor": "5.0.0",

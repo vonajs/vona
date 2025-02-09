@@ -95,6 +95,9 @@
     },
     {
       "path": "modules/a-error/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-development/tsconfig.build.json"
     }
   ]
 }
