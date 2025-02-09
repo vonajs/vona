@@ -1,10 +1,3 @@
-import Redlock from 'redlock';
-import { INewCtxOptions } from 'vona-module-a-executor';
+import { IRedlockLockOptions } from 'vona-module-a-redlock';
 
-export interface IRedlockLockOptions {
-  instanceName?: string | undefined | null;
-  redlock?: Redlock;
-  lockTTL?: number;
-}
-
-export interface IRedlockLockIsolateOptions extends IRedlockLockOptions, INewCtxOptions {}
+export interface IElectionElectOptions extends IRedlockLockOptions {}

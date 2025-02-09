@@ -1,15 +1,11 @@
 import { BeanBase, FunctionAsync, SymbolModuleBelong } from 'vona';
-import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
+import { IElectionElectOptions } from '../types/election.js';
 
 export class BeanRedlockBase extends BeanBase {
   protected __get__(prop: string) {
-    if (prop === 'lock') {
-      return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockOptions) => {
-        return this.$scope.redlock.service.redlock.lock(this._prepareResource(resource), fn, options);
-      };
-    } else if (prop === 'lockIsolate') {
-      return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockIsolateOptions) => {
-        return this.$scope.redlock.service.redlock.lockIsolate(this._prepareResource(resource), fn, options);
+    if (prop === 'elect') {
+      return (resource: string, fn: FunctionAsync<any>, options?: IElectionElectOptions) => {
+        return this.$scope.election.service.election.elect(this._prepareResource(resource), fn, options);
       };
     }
   }
