@@ -3,6 +3,13 @@
   "version": "5.0.0",
   "title": "a-development",
   "vonaModule": {
+    "capabilities": {
+      "meta": {
+        "mode": [
+          "unittest"
+        ]
+      }
+    },
     "dependencies": {}
   },
   "type": "module",
