@@ -1,3 +1,25 @@
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.election.js';
+
+import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  export interface ICacheRedisRecord {
+    'a-election:election': IDecoratorCacheRedisOptions;
+  }
+}
+declare module 'vona-module-a-election' {
+  export interface CacheRedisElection {
+    /** @internal */
+    get scope(): ScopeModuleAElection;
+  }
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import { CacheRedisElection } from '../bean/cacheRedis.election.js';
+export interface IModuleCacheRedis {
+  election: CacheRedisElection;
+}
+/** cacheRedis: end */
 /** service: begin */
 export * from '../service/election.js';
 
@@ -38,6 +60,7 @@ export class ScopeModuleAElection extends BeanScopeBase {}
 
 export interface ScopeModuleAElection {
   util: BeanScopeUtil;
+  cacheRedis: IModuleCacheRedis;
   service: IModuleService;
 }
 

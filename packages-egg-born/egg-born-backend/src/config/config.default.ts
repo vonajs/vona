@@ -175,7 +175,6 @@ export default function (appInfo: VonaAppInfo) {
       auth: { keyPrefix: `auth_${appInfo.name}:` },
       summer: { keyPrefix: `summer_${appInfo.name}:` },
       model: { keyPrefix: `model_${appInfo.name}:` },
-      system: { keyPrefix: `system_${appInfo.name}:` },
     },
   };
 
