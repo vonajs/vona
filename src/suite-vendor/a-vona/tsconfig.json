@@ -98,6 +98,9 @@
     },
     {
       "path": "modules/a-development/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-election/tsconfig.build.json"
     }
   ]
 }

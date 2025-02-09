@@ -107,6 +107,9 @@ importers:
       vona-module-a-development:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-development
+      vona-module-a-election:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-election
       vona-module-a-error:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-error
@@ -952,6 +955,9 @@ importers:
       vona-module-a-development:
         specifier: workspace:^
         version: link:modules/a-development
+      vona-module-a-election:
+        specifier: workspace:^
+        version: link:modules/a-election
       vona-module-a-error:
         specifier: workspace:^
         version: link:modules/a-error
@@ -1122,6 +1128,8 @@ importers:
   src/suite-vendor/a-vona/modules/a-databasedialect: {}
 
   src/suite-vendor/a-vona/modules/a-development: {}
+
+  src/suite-vendor/a-vona/modules/a-election: {}
 
   src/suite-vendor/a-vona/modules/a-error:
     dependencies:
