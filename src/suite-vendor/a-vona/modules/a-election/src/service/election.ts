@@ -43,6 +43,6 @@ export class ServiceElection extends BeanBase {
         clearInterval(intervalId);
         fn();
       }
-    }, this.$scope.version.config.worker.alive.timeout);
+    }, this.$scope.worker.config.worker.alive.timeout);
   }
 }
