@@ -260,6 +260,9 @@ export const locales = {
 export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import {
   BeanScopeBase,
