@@ -1,6 +1,5 @@
 import { VonaApplication } from '../../types/application/app.js';
 import { BeanContainer } from '../bean/beanContainer.js';
-import appClose from './appClose.js';
 import { contextBase } from './context.js';
 
 export function extendApp(app: VonaApplication) {
@@ -19,6 +18,4 @@ export function extendApp(app: VonaApplication) {
     const desc = Object.getOwnPropertyDescriptor(contextBase, key)!;
     Object.defineProperty(app.context, key, desc);
   }
-  // app close
-  appClose(app);
 }
