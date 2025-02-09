@@ -1,24 +1,3 @@
-/** bean: begin */
-export * from '../bean/bean.worker.js';
-
-import 'vona';
-declare module 'vona' {}
-declare module 'vona-module-a-version' {
-  export interface BeanWorker {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-}
-/** bean: end */
-/** bean: begin */
-import { BeanWorker } from '../bean/bean.worker.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    worker: BeanWorker;
-  }
-}
-/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.columnsClear.js';
 
@@ -41,28 +20,6 @@ export interface IModuleBroadcast {
   columnsClear: BroadcastColumnsClear;
 }
 /** broadcast: end */
-/** cacheRedis: begin */
-export * from '../bean/cacheRedis.workerAlive.js';
-
-import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
-declare module 'vona-module-a-cache' {
-  export interface ICacheRedisRecord {
-    'a-version:workerAlive': IDecoratorCacheRedisOptions;
-  }
-}
-declare module 'vona-module-a-version' {
-  export interface CacheRedisWorkerAlive {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-}
-/** cacheRedis: end */
-/** cacheRedis: begin */
-import { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.js';
-export interface IModuleCacheRedis {
-  workerAlive: CacheRedisWorkerAlive;
-}
-/** cacheRedis: end */
 /** entity: begin */
 export * from '../entity/version.js';
 export * from '../entity/versionInit.js';
@@ -237,10 +194,6 @@ declare module 'vona' {
   }
 }
 /** service: end */
-/** config: begin */
-export * from '../config/config.js';
-import { config } from '../config/config.js';
-/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -253,18 +206,8 @@ export const locales = {
 export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
-/** main: begin */
-export * from '../main.js';
-/** main: end */
 /** scope: begin */
-import {
-  BeanScopeBase,
-  BeanScopeUtil,
-  TypeModuleConfig,
-  TypeModuleErrors,
-  TypeModuleLocales,
-  TypeLocaleBase,
-} from 'vona';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleErrors, TypeModuleLocales, TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -272,11 +215,9 @@ export class ScopeModuleAVersion extends BeanScopeBase {}
 
 export interface ScopeModuleAVersion {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   broadcast: IModuleBroadcast;
-  cacheRedis: IModuleCacheRedis;
   entity: IModuleEntity;
   model: IModuleModel;
   event: IModuleEvent;
@@ -291,10 +232,6 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     version: ScopeModuleAVersion;
-  }
-
-  export interface IBeanScopeConfig {
-    'a-version': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {
