@@ -840,12 +840,6 @@ importers:
       chalk:
         specifier: ^3.0.0
         version: 3.0.0
-      chokidar:
-        specifier: ^3.5.2
-        version: 3.6.0
-      debounce:
-        specifier: ^1.2.0
-        version: 1.2.1
       egg:
         specifier: ^3.17.5
         version: 3.29.0
@@ -1133,7 +1127,14 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-databasedialect: {}
 
-  src/suite-vendor/a-vona/modules/a-development: {}
+  src/suite-vendor/a-vona/modules/a-development:
+    dependencies:
+      chokidar:
+        specifier: ^3.5.2
+        version: 3.6.0
+      debounce:
+        specifier: ^1.2.0
+        version: 1.2.1
 
   src/suite-vendor/a-vona/modules/a-election: {}
 

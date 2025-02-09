@@ -1,4 +1,3 @@
-import { AppReload } from '../module/reload/reload.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
@@ -23,7 +22,6 @@ export class AppMeta extends BeanSimple {
   locale: AppLocale;
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
-  reload: AppReload;
   messenger: AppMessenger;
   appMonkey?: IMonkeyApp & IMonkeySystem;
   celjs: typeof CelJS;
@@ -64,9 +62,6 @@ export class AppMeta extends BeanSimple {
 
     // scopeContainer
     this.scopeContainer = this.bean._newBean(BeanScopeContainer);
-
-    // reload
-    this.reload = this.bean._newBean(AppReload);
 
     // resource
     this.resource = appResource;

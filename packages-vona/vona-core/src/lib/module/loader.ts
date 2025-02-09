@@ -5,8 +5,6 @@ import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
 import loadMessenger from './messenger.js';
-import loadReload from './reload/reload.js';
-import loadDevelopment from './reload/development.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppUtil } from '../utils/util.js';
 
@@ -38,11 +36,8 @@ export class ModuleLoader extends BeanSimple {
       loadLocales(app, modules);
       loadErrors(app, modules);
       loadConstants(app, modules);
-      loadReload(app);
     } else {
       await loadConfig(app, modules);
-      loadReload(app);
-      loadDevelopment(app);
     }
 
     // monkey modules
