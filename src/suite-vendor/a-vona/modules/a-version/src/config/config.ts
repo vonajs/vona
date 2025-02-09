@@ -1,10 +1,11 @@
 import { VonaApplication } from 'vona';
 
-export const config = (_app: VonaApplication) => {
+export const config = (app: VonaApplication) => {
   return {
     worker: {
       alive: {
-        timeout: 7000,
+        timeout: app.meta.isProd ? 3000 : 1000,
+        timeoutMore: app.meta.isProd ? 3000 : 1000,
       },
     },
   };
