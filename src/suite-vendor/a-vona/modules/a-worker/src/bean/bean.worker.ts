@@ -33,6 +33,5 @@ export class BeanWorker extends BeanBase {
 
   async exitAll(code?: number | string | null | undefined) {
     this.scope.broadcast.exitAll.emit({ code });
-    await this.exit(code);
   }
 }
