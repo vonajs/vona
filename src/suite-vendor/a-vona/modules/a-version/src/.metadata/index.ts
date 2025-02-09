@@ -170,7 +170,6 @@ declare module 'vona-module-a-version' {
 export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';
 export * from '../bean/startup.instanceInit.js';
-export * from '../bean/startup.workerAlive.js';
 
 import { IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
@@ -178,7 +177,6 @@ declare module 'vona-module-a-startup' {
     'a-version:databaseInit': IDecoratorStartupOptions;
     'a-version:databaseName': IDecoratorStartupOptions;
     'a-version:instanceInit': IDecoratorStartupOptions;
-    'a-version:workerAlive': IDecoratorStartupOptions;
   }
 }
 declare module 'vona-module-a-version' {
@@ -193,11 +191,6 @@ declare module 'vona-module-a-version' {
   }
 
   export interface StartupInstanceInit {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface StartupWorkerAlive {
     /** @internal */
     get scope(): ScopeModuleAVersion;
   }
