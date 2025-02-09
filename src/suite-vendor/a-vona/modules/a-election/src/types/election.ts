@@ -1,3 +1,5 @@
 import { IRedlockLockOptions } from 'vona-module-a-redlock';
 
-export interface IElectionElectOptions extends IRedlockLockOptions {}
+export interface IElectionElectOptions extends IRedlockLockOptions {
+  tickets: number;
+}

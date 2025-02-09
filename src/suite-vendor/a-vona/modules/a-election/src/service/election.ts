@@ -8,5 +8,10 @@ export class ServiceElection extends BeanBase {
     resource: string,
     fn: FunctionAsync<RESULT>,
     options?: IElectionElectOptions,
-  ): Promise<RESULT> {}
+  ): Promise<RESULT> {
+    const intervalId = setInterval(() => {
+      const lockResource = `election.${resource}`;
+      this.$scope.redlock.service.redlock.lock(lockResource, async () => {}, options);
+    }, this.$scope.version.config.worker.alive.timeout);
+  }
 }
