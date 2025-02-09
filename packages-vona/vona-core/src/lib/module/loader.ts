@@ -4,7 +4,6 @@ import loadConfig from './config.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
-import loadMessenger from './messenger.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppUtil } from '../utils/util.js';
 
@@ -18,9 +17,6 @@ export class ModuleLoader extends BeanSimple {
     const meta = app.bean._newBean(AppMeta);
     app.meta = meta;
     app.meta.celjs = await import('cel-js');
-
-    // messenger
-    loadMessenger(app);
 
     // modules
     const moduleTools = app.bean._newBean(ModuleTools);

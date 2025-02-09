@@ -112,7 +112,4 @@ export class AppMessenger extends BeanSimple {
   }
 }
 
-export default function (app: VonaApplication) {
-  // messenger
-  app.meta.messenger = app.bean._newBean(AppMessenger);
-}
+export default function (_app: VonaApplication) {}

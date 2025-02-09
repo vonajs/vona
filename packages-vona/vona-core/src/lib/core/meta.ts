@@ -1,5 +1,4 @@
 import { BeanSimple } from '../bean/beanSimple.js';
-import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
 import { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, EnumAppEvent } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
@@ -22,7 +21,6 @@ export class AppMeta extends BeanSimple {
   locale: AppLocale;
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
-  messenger: AppMessenger;
   appMonkey?: IMonkeyApp & IMonkeySystem;
   celjs: typeof CelJS;
   //
