@@ -3,7 +3,9 @@
   "version": "5.0.0",
   "title": "a-broadcast",
   "vonaModule": {
-    "dependencies": {},
+    "dependencies": {
+      "a-worker": "5.0.0"
+    },
     "onions": {
       "broadcast": {
         "optionsGlobalInterfaceName": "IDecoratorBroadcastOptions",
