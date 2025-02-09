@@ -3,7 +3,7 @@ import { Bean } from 'vona-module-a-bean';
 import { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
 import { BeanCacheMemBase } from './bean.cacheMemBase.js';
 import { IDecoratorCacheRedisOptions } from '../types/cacheRedis.js';
-import { BeanCacheRedisBase } from './bean.cacheMemRedis.js';
+import { BeanCacheRedisBase } from './bean.cacheRedisBase.js';
 
 @Bean()
 export class BeanCache extends BeanBase {

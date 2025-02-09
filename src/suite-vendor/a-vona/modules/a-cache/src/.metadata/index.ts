@@ -1,7 +1,7 @@
 /** bean: begin */
 export * from '../bean/bean.cache.js';
 export * from '../bean/bean.cacheMemBase.js';
-export * from '../bean/bean.cacheMemRedis.js';
+export * from '../bean/bean.cacheRedisBase.js';
 
 import 'vona';
 declare module 'vona' {}
