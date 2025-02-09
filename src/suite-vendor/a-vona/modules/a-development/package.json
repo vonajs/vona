@@ -37,6 +37,7 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@cabloy/process-helper": "workspace:^",
     "chokidar": "^3.5.2",
     "debounce": "^1.2.0"
   }

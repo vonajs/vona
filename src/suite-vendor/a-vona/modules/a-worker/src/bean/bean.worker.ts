@@ -25,4 +25,14 @@ export class BeanWorker extends BeanBase {
   async getAlive(id?: string) {
     return await this.scope.cacheRedis.workerAlive.get(id ?? this.id);
   }
+
+  async exit(code?: number | string | null | undefined) {
+    await this.app.meta.close();
+    process.exit(code);
+  }
+
+  async exitAll(code?: number | string | null | undefined) {
+    this.scope.broadcast.exitAll.emit({ code });
+    await this.exit(code);
+  }
 }

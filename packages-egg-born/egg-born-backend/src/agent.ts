@@ -9,8 +9,5 @@ export default class AppBootHook {
     this.bootstrap = new Bootstrap(app);
   }
 
-  async didLoad() {
-    // todo: need not
-    await this.bootstrap._start_appLoad();
-  }
+  async didLoad() {}
 }

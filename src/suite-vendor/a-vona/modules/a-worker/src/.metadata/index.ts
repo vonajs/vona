@@ -19,6 +19,28 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.exitAll.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-worker:exitAll': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-worker' {
+  export interface BroadcastExitAll {
+    /** @internal */
+    get scope(): ScopeModuleAWorker;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastExitAll } from '../bean/broadcast.exitAll.js';
+export interface IModuleBroadcast {
+  exitAll: BroadcastExitAll;
+}
+/** broadcast: end */
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.workerAlive.js';
 
@@ -61,6 +83,7 @@ export class ScopeModuleAWorker extends BeanScopeBase {}
 export interface ScopeModuleAWorker {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  broadcast: IModuleBroadcast;
   cacheRedis: IModuleCacheRedis;
 }
 

@@ -3,8 +3,7 @@ import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { ProcessHelper } from '@cabloy/process-helper';
-import { VonaApplication } from '../../../types/application/app.js';
-import { cast } from '../../../types/utils/cast.js';
+import { cast, VonaApplication } from 'vona';
 
 const __pathesWatch = [
   'src/backend/config',
@@ -21,10 +20,7 @@ const __pathesIgnore = ['/test/', '.test.ts'];
 export default function (app: VonaApplication) {
   let watcherDevelopment: chokidar.FSWatcher | null = null;
 
-  // only in development
-  if (app.meta.inAgent && app.meta.isLocal) {
-    _register();
-  }
+  _register();
 
   // invoked in agent
   function _register() {
@@ -88,7 +84,7 @@ export default function (app: VonaApplication) {
     // ignores
     if (__pathesIgnore.some(item => info.includes(item))) return;
     // log
-    app.logger.warn(`[agent:development] reload worker because ${info} changed`);
+    console.log(`[development] reload worker because ${info} changed`);
     // tsc
     if (extname !== '.mts') {
       if (__pathesTsc.some(item => info.includes(item))) {
@@ -96,7 +92,7 @@ export default function (app: VonaApplication) {
         await processHelper.tsc();
       }
     }
-    // reload
-    app.meta.reload.now();
+    // exit
+    await app.bean.worker.exitAll();
   }
 }

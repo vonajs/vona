@@ -36,8 +36,6 @@ export class ModuleLoader extends BeanSimple {
       loadLocales(app, modules);
       loadErrors(app, modules);
       loadConstants(app, modules);
-    } else {
-      await loadConfig(app, modules);
     }
 
     // monkey modules
