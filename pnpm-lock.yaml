@@ -104,9 +104,6 @@ importers:
       vona-module-a-databasedialect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-databasedialect
-      vona-module-a-development:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-development
       vona-module-a-election:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-election
@@ -372,6 +369,9 @@ importers:
       vona-mock:
         specifier: workspace:^
         version: link:packages-vona/vona-mock
+      vona-module-a-development:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-development
       vue-eslint-parser:
         specifier: ^9.4.2
         version: 9.4.3(eslint@8.57.1)

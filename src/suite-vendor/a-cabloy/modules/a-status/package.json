@@ -3,9 +3,7 @@
   "version": "5.0.0",
   "vonaModule": {
     "fileVersion": 1,
-    "dependencies": {
-      "a-vona": "5.0.0"
-    },
+    "dependencies": {},
     "metas": {
       "status": {
         "scopeResource": true,

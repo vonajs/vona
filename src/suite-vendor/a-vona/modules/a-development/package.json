@@ -6,9 +6,10 @@
     "capabilities": {
       "meta": {
         "mode": [
-          "unittest"
+          "local"
         ]
-      }
+      },
+      "monkey": true
     },
     "dependencies": {}
   },

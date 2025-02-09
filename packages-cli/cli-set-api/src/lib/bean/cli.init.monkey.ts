@@ -51,12 +51,12 @@ export class CliInitMonkey extends BeanCliBase {
       pkg.vonaModule.capabilities.monkey = true;
       changed = true;
     }
-    // dependencies
-    if (!pkg.vonaModule.dependencies) pkg.vonaModule.dependencies = {};
-    if (!pkg.vonaModule.dependencies['a-vona']) {
-      pkg.vonaModule.dependencies['a-vona'] = '5.0.0';
-      changed = true;
-    }
+    // // dependencies
+    // if (!pkg.vonaModule.dependencies) pkg.vonaModule.dependencies = {};
+    // if (!pkg.vonaModule.dependencies['a-vona']) {
+    //   pkg.vonaModule.dependencies['a-vona'] = '5.0.0';
+    //   changed = true;
+    // }
     // save
     if (changed) {
       await this.helper.saveJSONFile(pkgFile, pkg);

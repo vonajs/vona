@@ -17,6 +17,9 @@ declare module 'vona-module-a-development' {
 /** meta election: begin */
 import { MetaElection } from '../bean/meta.election.js';
 /** meta election: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';

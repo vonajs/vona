@@ -3,9 +3,7 @@
   "version": "5.0.0",
   "title": "a-queue",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    },
+    "dependencies": {},
     "globalDependencies": {
       "bullmq": true
     },
