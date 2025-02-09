@@ -11,9 +11,6 @@
   },
   "references": [
     {
-      "path": "packages-utils/cluster-reload"
-    },
-    {
       "path": "packages-utils/compose"
     },
     {

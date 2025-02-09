@@ -32,7 +32,6 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/cluster-reload": "^1.0.7",
     "@cabloy/compose": "^2.0.0",
     "@cabloy/deps": "workspace:^",
     "@cabloy/dotenv": "workspace:^",
