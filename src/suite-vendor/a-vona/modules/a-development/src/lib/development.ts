@@ -17,7 +17,7 @@ const __pathesWatch = [
 const __pathesTsc = ['src/backend/config', 'src/backend/demo', 'packages-vona/vona'];
 const __pathesIgnore = ['/test/', '.test.ts'];
 
-export default function (app: VonaApplication) {
+export function developmentWatchDirs(app: VonaApplication) {
   let watcherDevelopment: chokidar.FSWatcher | null = null;
 
   _register();
@@ -92,7 +92,7 @@ export default function (app: VonaApplication) {
         await processHelper.tsc();
       }
     }
-    // exit
+    // exitAll
     await app.bean.worker.exitAll();
   }
 }
