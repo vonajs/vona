@@ -101,6 +101,9 @@
     },
     {
       "path": "modules/a-election/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-worker/tsconfig.build.json"
     }
   ]
 }

@@ -185,6 +185,9 @@ importers:
       vona-module-a-web:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-web
+      vona-module-a-worker:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-worker
       vona-module-cabloy-test:
         specifier: workspace:^
         version: link:src/suite-vendor/cabloy-test/modules/cabloy-test
@@ -1030,6 +1033,9 @@ importers:
       vona-module-a-web:
         specifier: workspace:^
         version: link:modules/a-web
+      vona-module-a-worker:
+        specifier: workspace:^
+        version: link:modules/a-worker
 
   src/suite-vendor/a-vona/modules/a-aspect: {}
 
@@ -1260,6 +1266,8 @@ importers:
       egg-path-matching:
         specifier: ^1.0.1
         version: 1.1.0
+
+  src/suite-vendor/a-vona/modules/a-worker: {}
 
   src/suite-vendor/cabloy-test:
     dependencies:
