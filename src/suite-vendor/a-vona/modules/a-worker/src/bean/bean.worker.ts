@@ -1,5 +1,6 @@
 import { Bean } from 'vona-module-a-bean';
 import { BeanBase, cast, uuidv4 } from 'vona';
+import { isNil } from '@cabloy/utils';
 
 const SymbolWorkerId = Symbol('SymbolWorkerId');
 
@@ -23,6 +24,7 @@ export class BeanWorker extends BeanBase {
   }
 
   async getAlive(id?: string) {
+    if (isNil(id) || id === this.id) return true;
     return await this.scope.cacheRedis.workerAlive.get(id ?? this.id);
   }
 
