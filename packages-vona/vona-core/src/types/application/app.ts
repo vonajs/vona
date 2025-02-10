@@ -1,5 +1,4 @@
 import { Application as EggApplication, EggLoaderOptions } from 'egg';
-import { EggPassport } from '@zhennann/egg-passport';
 import { BeanContainer } from '../../lib/bean/beanContainer.js';
 import { AppMeta } from '../../lib/core/meta.js';
 import { Server as SocketServer } from 'socket.io';
@@ -17,6 +16,5 @@ export interface VonaApplication extends EggApplication, ApplicationError, Appli
   get ctx(): VonaContext;
   bean: BeanContainer;
   io: SocketServer;
-  passport: EggPassport;
   config: VonaConfig;
 }
