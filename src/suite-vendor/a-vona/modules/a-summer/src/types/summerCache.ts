@@ -1,5 +1,6 @@
 import { OmitNever } from 'vona';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import { IRedisClientRecord } from 'vona-module-a-redis';
 
 export interface ISummerCacheRecord {}
 
@@ -23,7 +24,7 @@ export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
   };
   redis?: {
     ttl: number;
-    client?: string;
+    client?: keyof IRedisClientRecord;
   };
   ignoreNull?: boolean;
 }
