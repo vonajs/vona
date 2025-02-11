@@ -7,10 +7,10 @@ import {
   configRedisWithIgnoreNull,
   TSummerCachePreset,
 } from 'vona-module-a-summer';
-import { IDatabaseDialectRecord } from '../types/database.js';
+import { IDatabaseClientDialectRecord } from '../types/database.js';
 
 export type TypeDataBaseConfigDialects = Record<
-  keyof IDatabaseDialectRecord,
+  keyof IDatabaseClientDialectRecord,
   TypeBeanRecordGeneralSelectorKeys<'databaseDialect'>
 >;
 

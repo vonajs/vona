@@ -7,6 +7,7 @@ import {
   IModelUpdateOptionsGeneral,
 } from '../../types/index.js';
 import { Knex } from 'knex';
+import { IDatabaseClientDialectRecord } from '../../types/database.js';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {
@@ -21,8 +22,8 @@ export class BeanModelMeta extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
-  public get dialectClient() {
-    return cast<Knex.Client>(cast(this.ctx.db).client).config.client as string;
+  public get dialectClient(): keyof IDatabaseClientDialectRecord {
+    return cast<Knex.Client>(cast(this.ctx.db).client).config.client as keyof IDatabaseClientDialectRecord;
   }
 
   public get dialect() {

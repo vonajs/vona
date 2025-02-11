@@ -1,11 +1,12 @@
 import knex, { Knex } from 'knex';
 import { VonaApplication, cast } from 'vona';
 import { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/bean.databaseDialectBase.js';
+import { IDatabaseClientDialectRecord } from '../types/database.js';
 
 export function ExtendSchemaBuilder(app: VonaApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase', 'fetchIndexes'].forEach(function (method) {
     knex.SchemaBuilder.extend(method, async function (...args) {
-      const client = cast<Knex.Client>(cast(this).client).config.client as string;
+      const client = cast<Knex.Client>(cast(this).client).config.client as keyof IDatabaseClientDialectRecord;
       const dialect = app.bean.database.getDialect(client);
       return await dialect[method](this, ...args);
     });

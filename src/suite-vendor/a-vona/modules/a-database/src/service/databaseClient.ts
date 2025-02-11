@@ -49,7 +49,7 @@ export class ServiceDatabaseClient extends BeanBase {
       throw new Error(`database config not found: ${clientName}`);
     }
     // configBaseClient
-    const dialect = this.app.bean.database.getDialect(clientConfig.client as string);
+    const dialect = this.app.bean.database.getDialect(clientConfig.client);
     const configBaseClient = dialect.getConfigBase();
     // combine
     const configBase = this.configDatabase.base;

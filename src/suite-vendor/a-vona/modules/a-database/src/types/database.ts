@@ -9,7 +9,7 @@ export interface IDatabaseClientRecord {
   mysql: never;
 }
 
-export interface IDatabaseDialectRecord {
+export interface IDatabaseClientDialectRecord {
   pg: never;
   mysql: never;
   mysql2: never;
