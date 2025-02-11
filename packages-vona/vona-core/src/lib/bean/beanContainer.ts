@@ -9,6 +9,7 @@ import { isClass } from '../utils/isClass.js';
 import { compose } from '../utils/util.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { SymbolBeanFullName } from './beanBaseSimple.js';
+import { BeanAopBase } from './beanAopBase.js';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
 const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');
@@ -172,7 +173,7 @@ export class BeanContainer {
     // inject
     this._injectBeanInstance(beanInstance, beanFullName);
     // init
-    if (beanInstance.__init__) {
+    if (!(beanInstance instanceof BeanAopBase) && beanInstance.__init__) {
       beanInstance.__init__(...args);
     }
     // ok
@@ -273,6 +274,7 @@ export class BeanContainer {
         const methodType = __methodTypeOfDescriptor(descriptorInfo);
         // get prop
         if (!methodType) {
+          if (__isLifeCycleMethod(prop)) return target[prop];
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
           const _aopChainsProp = self._getAopChainsProp(
@@ -417,10 +419,12 @@ export class BeanContainer {
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
       if (aopKey === SymbolProxyMagic) {
-        chains.push([aopKey, methodName]);
+        if (!__isLifeCycleMethod(methodName)) {
+          chains.push([aopKey, methodName]);
+        }
       } else {
         // singleton
-        const aop: any = this.app.bean._getBean(aopKey as string as any);
+        const aop: BeanAopBase = this.app.bean._getBean(aopKey as string as any);
         if (aop[methodName]) {
           let fn;
           if (methodType === 'get') {
@@ -438,21 +442,23 @@ export class BeanContainer {
           }
           chains.push([aopKey, fn]);
         } else if (methodNameMagic && aop[methodNameMagic]) {
-          let fn;
-          if (methodType === 'get') {
-            fn = function (_, next) {
-              return aop[methodNameMagic](prop, next, receiver);
-            };
-          } else if (methodType === 'set') {
-            fn = function (value, next) {
-              return aop[methodNameMagic](prop, value, next, receiver);
-            };
-          } else if (methodType === 'method') {
-            fn = function (args, next) {
-              return aop[methodNameMagic](args, next, receiver);
-            };
+          if (!__isLifeCycleMethod(methodName)) {
+            let fn;
+            if (methodType === 'get') {
+              fn = function (_, next) {
+                return aop[methodNameMagic](prop, next, receiver);
+              };
+            } else if (methodType === 'set') {
+              fn = function (value, next) {
+                return aop[methodNameMagic](prop, value, next, receiver);
+              };
+            } else if (methodType === 'method') {
+              fn = function (args, next) {
+                return aop[methodNameMagic](args, next, receiver);
+              };
+            }
+            chains.push([aopKey, fn]);
           }
-          chains.push([aopKey, fn]);
         }
       }
     }
@@ -521,13 +527,17 @@ function __isInnerMethod(prop) {
   return [
     '__get__',
     '__set__',
-    '__init__',
-    '__dispose__',
+    // '__init__',
+    // '__dispose__',
     'then',
     '__v_isShallow',
     '__v_isReadonly',
     '__v_raw',
   ].includes(prop);
+}
+
+function __isLifeCycleMethod(prop) {
+  return ['__init__', '__dispose__'].includes(prop);
 }
 
 function __methodTypeOfDescriptor(descriptorInfo) {
