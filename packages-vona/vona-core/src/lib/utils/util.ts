@@ -331,3 +331,12 @@ export function deepExtend<T = any>(...args): T {
 export function uuidv4() {
   return uuid.v4();
 }
+
+export function disposeInstance(instance: any) {
+  instance?.__dispose__?.();
+}
+
+export function polyfillDispose(instance: any) {
+  if (!instance || instance.__dispose__) return;
+  Object.getPrototypeOf(instance)['__dispose__'] = () => {};
+}
