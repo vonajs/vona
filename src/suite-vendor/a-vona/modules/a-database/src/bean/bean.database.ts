@@ -3,21 +3,22 @@ import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanDatabaseDialectBase } from './bean.databaseDialectBase.js';
 import { ServiceDatabaseClient } from '../service/databaseClient.js';
+import { IDatabaseClientRecord } from '../types/database.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
-  getClient(clientName?: string) {
+  getClient(clientName?: keyof IDatabaseClientRecord) {
     return this.app.bean._getBeanSelector(ServiceDatabaseClient, clientName);
   }
 
-  get(clientName?: string) {
+  get(clientName?: keyof IDatabaseClientRecord) {
     const client = this.getClient(clientName);
     return client.db;
   }
 
   getClientDefault() {
     const clientName = this.ctx.dbLevel === 0 ? '' : `:${this.ctx.dbLevel}`;
-    return this.getClient(clientName);
+    return this.getClient(clientName as keyof IDatabaseClientRecord);
   }
 
   getDefault() {

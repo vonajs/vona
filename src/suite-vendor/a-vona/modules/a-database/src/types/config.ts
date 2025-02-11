@@ -1,8 +1,9 @@
 import { Knex } from 'knex';
+import { IDatabaseClientRecord } from './database.js';
 
 export interface ConfigDatabase {
   testDatabase: boolean;
   defaultClient: string;
-  clients: Record<string, Knex.Config>;
+  clients: Record<keyof IDatabaseClientRecord, Knex.Config>;
   base: Knex.Config;
 }

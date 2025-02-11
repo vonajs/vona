@@ -4,6 +4,11 @@ import { ServiceTransaction } from '../service/transaction.js';
 import { ConfigDatabase } from './config.js';
 import { BeanModel } from '../bean/bean.model.js';
 
+export interface IDatabaseClientRecord {
+  pg: never;
+  mysql: never;
+}
+
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     model: BeanModel;
