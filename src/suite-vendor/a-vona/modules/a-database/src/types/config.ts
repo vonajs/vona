@@ -1,9 +1,12 @@
 import { Knex } from 'knex';
-import { IDatabaseClientRecord } from './database.js';
+import { IDatabaseClientRecord, IDatabaseDialectRecord } from './database.js';
 
+export interface ConfigDatabaseClient extends Omit<Knex.Config, 'client'> {
+  client?: keyof IDatabaseDialectRecord;
+}
 export interface ConfigDatabase {
   testDatabase: boolean;
   defaultClient: string;
-  clients: Record<keyof IDatabaseClientRecord, Knex.Config>;
-  base: Knex.Config;
+  clients: Record<keyof IDatabaseClientRecord, ConfigDatabaseClient>;
+  base: ConfigDatabaseClient;
 }

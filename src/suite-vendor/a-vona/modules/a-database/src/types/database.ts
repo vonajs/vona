@@ -9,6 +9,12 @@ export interface IDatabaseClientRecord {
   mysql: never;
 }
 
+export interface IDatabaseDialectRecord {
+  pg: never;
+  mysql: never;
+  mysql2: never;
+}
+
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     model: BeanModel;

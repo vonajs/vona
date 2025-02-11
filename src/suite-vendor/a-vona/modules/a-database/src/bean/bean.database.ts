@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanDatabaseDialectBase } from './bean.databaseDialectBase.js';
 import { ServiceDatabaseClient } from '../service/databaseClient.js';
-import { IDatabaseClientRecord } from '../types/database.js';
+import { IDatabaseClientRecord, IDatabaseDialectRecord } from '../types/database.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -26,7 +26,7 @@ export class BeanDatabase extends BeanBase {
     return client.db;
   }
 
-  getDialect(client: string): BeanDatabaseDialectBase {
+  getDialect(client: keyof IDatabaseDialectRecord): BeanDatabaseDialectBase {
     const beanFullName = this.scope.config.dialects[client];
     const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
     if (!dialect) {
