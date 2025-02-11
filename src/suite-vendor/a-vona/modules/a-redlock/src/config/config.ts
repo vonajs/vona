@@ -1,11 +1,12 @@
 import { VonaApplication } from 'vona';
 import * as Redlock from 'redlock';
+import { IRedisClientRecord } from 'vona-module-a-redis';
 
 export const config = (app: VonaApplication) => {
   const lockTTL = app.meta.isLocal ? 8 : app.meta.isTest ? 60 : 30;
   return {
     redlock: {
-      clients: ['redlock'] as string[],
+      clients: ['redlock'] as (keyof IRedisClientRecord)[],
       lockTTL: lockTTL * 1000,
       // https://github.com/mike-marcacci/node-redlock#configuration
       options: {

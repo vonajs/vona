@@ -1,11 +1,12 @@
 import { OmitNever } from 'vona';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import { IRedisClientRecord } from 'vona-module-a-redis';
 
 export interface ICacheRedisRecord {}
 
 export interface IDecoratorCacheRedisOptions extends IOnionOptionsEnable {
   ttl: number;
-  client?: string;
+  client?: keyof IRedisClientRecord;
 }
 
 declare module 'vona-module-a-onion' {

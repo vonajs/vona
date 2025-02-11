@@ -1,7 +1,7 @@
 import { Redis, RedisOptions } from 'ioredis';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { ConfigRedisCluster } from '../types/redis.js';
+import { ConfigRedisCluster, IRedisClientRecord } from '../types/redis.js';
 
 @Service()
 export class ServiceRedisClient extends BeanBase {
@@ -50,7 +50,7 @@ export class ServiceRedisClient extends BeanBase {
       if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
       if (clientName.includes('redlock')) continue;
       const client = app.config.redis.clients[clientName];
-      await this._clearRedisKeys(app.bean.redis.get(clientName), `${client.keyPrefix}*`);
+      await this._clearRedisKeys(app.bean.redis.get(clientName as keyof IRedisClientRecord), `${client.keyPrefix}*`);
     }
   }
 
