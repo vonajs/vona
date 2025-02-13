@@ -1,10 +1,10 @@
 import chalk from 'chalk';
-import { BeanBase, ConfigInstanceBase } from 'vona';
+import { BeanBase, type ConfigInstanceBase } from 'vona';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 import { Service } from 'vona-module-a-web';
-import { IInstanceStartupOptions } from 'vona-module-a-startup';
-import {
+import { type IInstanceStartupOptions } from 'vona-module-a-startup';
+import type {
   IMetaVersionInit,
   IMetaVersionOptions,
   IMetaVersionOptionsInner,

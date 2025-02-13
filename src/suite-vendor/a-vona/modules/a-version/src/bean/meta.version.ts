@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
-import {
+import type {
   IMetaVersionInit,
   IMetaVersionInitOptions,
   IMetaVersionUpdate,

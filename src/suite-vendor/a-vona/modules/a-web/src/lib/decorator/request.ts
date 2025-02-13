@@ -1,6 +1,6 @@
 import { appMetadata } from 'vona';
 import { RequestMethod, SymbolRequestMappingHandler } from '../../types/request.js';
-import { IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
+import { type IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export interface RequestMappingMetadata {
   path?: RegExp | string;

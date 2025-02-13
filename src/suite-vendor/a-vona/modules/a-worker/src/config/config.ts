@@ -1,4 +1,4 @@
-import { VonaApplication } from 'vona';
+import type { VonaApplication } from 'vona';
 
 export const config = (app: VonaApplication) => {
   return {

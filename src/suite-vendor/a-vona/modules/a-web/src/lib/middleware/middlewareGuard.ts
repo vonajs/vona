@@ -1,4 +1,4 @@
-import { Next, VonaContext } from 'vona';
+import type { Next, VonaContext } from 'vona';
 
 export async function middlewareGuard(ctx: VonaContext, next: Next) {
   // check innerAccess

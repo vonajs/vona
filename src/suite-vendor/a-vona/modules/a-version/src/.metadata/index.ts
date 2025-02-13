@@ -207,7 +207,7 @@ export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

@@ -1,4 +1,4 @@
-import { BeanQueueBase, IQueueExecute, IQueuePushOptions, Queue } from 'vona-module-a-queue';
+import { BeanQueueBase, type IQueueExecute, type IQueuePushOptions, Queue } from 'vona-module-a-queue';
 
 export type TypeQueueTestJobData = {
   a: number;

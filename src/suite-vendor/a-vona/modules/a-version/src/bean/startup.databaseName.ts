@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { IStartupExecute, Startup } from 'vona-module-a-startup';
+import { type IStartupExecute, Startup } from 'vona-module-a-startup';
 
 @Startup({ dependencies: 'a-version:databaseInit' })
 export class StartupDatabaseName extends BeanBase implements IStartupExecute {

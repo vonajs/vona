@@ -1,7 +1,7 @@
-import { BeanSimple, compose, IModuleMain, Next, VonaContext } from 'vona';
+import { BeanSimple, compose, type IModuleMain, type Next, type VonaContext } from 'vona';
 import { EggRouter } from '@eggjs/router';
-import { IOnionSlice } from 'vona-module-a-onion';
-import {
+import { type IOnionSlice } from 'vona-module-a-onion';
+import type {
   IDecoratorMiddlewareSystemOptions,
   IMiddlewareSystemExecute,
   IMiddlewareSystemRecord,

@@ -1,5 +1,5 @@
-import { VonaContext } from 'vona';
-import { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from 'vona-module-a-openapi';
+import type { VonaContext } from 'vona';
+import type { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from 'vona-module-a-openapi';
 
 export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
   return exchangeKeyForValue(ctx, argMeta.type, argMeta.field);
