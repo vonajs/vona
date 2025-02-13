@@ -112,10 +112,10 @@ export * from '../main.js';
 import {
   BeanScopeBase,
   BeanScopeUtil,
-  TypeModuleConfig,
+  type TypeModuleConfig,
   TypeModuleErrors,
-  TypeModuleLocales,
-  TypeLocaleBase,
+  type TypeModuleLocales,
+  type TypeLocaleBase,
 } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 

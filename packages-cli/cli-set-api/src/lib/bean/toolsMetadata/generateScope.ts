@@ -24,7 +24,7 @@ export async function generateScope(
   contentRecords.push('util: BeanScopeUtil;');
   //
   if (options.config) {
-    contentImports.push('TypeModuleConfig');
+    contentImports.push('type TypeModuleConfig');
     contentRecords.push('config: TypeModuleConfig<typeof config>;');
   }
   if (options.errors) {
@@ -32,8 +32,8 @@ export async function generateScope(
     contentRecords.push('error: TypeModuleErrors<typeof Errors>;');
   }
   if (options.locales) {
-    contentImports.push('TypeModuleLocales');
-    contentImports.push('TypeLocaleBase');
+    contentImports.push('type TypeModuleLocales');
+    contentImports.push('type TypeLocaleBase');
     contentRecords.push('locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;');
   }
   if (options.constants) {

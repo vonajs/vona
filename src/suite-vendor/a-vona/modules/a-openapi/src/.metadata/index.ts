@@ -45,7 +45,7 @@ export const locales = {
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

@@ -53,7 +53,7 @@ import { config } from '../config/config.js';
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

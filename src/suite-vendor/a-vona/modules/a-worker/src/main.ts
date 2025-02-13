@@ -1,4 +1,4 @@
-import { BeanSimple, IModuleMain } from 'vona';
+import { BeanSimple, type IModuleMain } from 'vona';
 import { __ThisModule__ } from './.metadata/this.js';
 
 export class Main extends BeanSimple implements IModuleMain {

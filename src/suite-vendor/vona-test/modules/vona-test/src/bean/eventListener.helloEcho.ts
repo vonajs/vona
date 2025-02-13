@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
-import { EventListener, IEventExecute, NextEvent } from 'vona-module-a-event';
-import { TypeEventHelloEchoData, TypeEventHelloEchoResult } from './event.helloEcho.js';
+import { EventListener, type IEventExecute, type NextEvent } from 'vona-module-a-event';
+import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from './event.helloEcho.js';
 
 @EventListener({ match: 'vona-test:helloEcho' })
 export class EventListenerHelloEcho

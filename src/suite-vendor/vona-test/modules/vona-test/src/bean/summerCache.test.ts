@@ -1,4 +1,9 @@
-import { BeanSummerCacheBase, ISummerCacheGet, SummerCache, TSummerCacheActionOptions } from 'vona-module-a-summer';
+import {
+  BeanSummerCacheBase,
+  type ISummerCacheGet,
+  SummerCache,
+  type TSummerCacheActionOptions,
+} from 'vona-module-a-summer';
 
 export type TSummerCacheTestKey = { id: number };
 export type TSummerCacheTestData = { id: number; name: string };

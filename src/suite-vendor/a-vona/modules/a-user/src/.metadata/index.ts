@@ -80,7 +80,7 @@ export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
