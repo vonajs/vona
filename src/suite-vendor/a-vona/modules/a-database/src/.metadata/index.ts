@@ -113,7 +113,7 @@ import {
   BeanScopeBase,
   BeanScopeUtil,
   type TypeModuleConfig,
-  TypeModuleErrors,
+  type TypeModuleErrors,
   type TypeModuleLocales,
   type TypeLocaleBase,
 } from 'vona';

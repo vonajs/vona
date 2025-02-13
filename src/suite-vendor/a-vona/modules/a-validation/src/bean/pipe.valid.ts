@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { createArgumentPipe, IDecoratorPipeOptions, IPipeTransform, Pipe } from 'vona-module-a-aspect';
-import { BeanBase, Constructable, HttpStatus } from 'vona';
-import { ValidatorOptions } from '../types/validatorOptions.js';
-import { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import { createArgumentPipe, type IDecoratorPipeOptions, type IPipeTransform, Pipe } from 'vona-module-a-aspect';
+import { BeanBase, type Constructable, HttpStatus } from 'vona';
+import { type ValidatorOptions } from '../types/validatorOptions.js';
+import { type RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 
 export interface IPipeOptionsValid extends IDecoratorPipeOptions, ValidatorOptions {
   schema?: z.ZodSchema;
