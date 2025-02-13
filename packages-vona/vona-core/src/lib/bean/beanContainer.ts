@@ -354,7 +354,7 @@ export class BeanContainer {
       apply(target, thisArg, args) {
         // aop
         return self.__composeForProp(_aopChainsProp)(args, args => {
-          return target.apply(thisArg, args);
+          return Reflect.apply(target, thisArg, args);
         });
       },
     });
