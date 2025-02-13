@@ -289,7 +289,7 @@ export class BeanContainer {
           // aop
           return self.__composeForProp(_aopChainsProp)(undefined, () => {
             if (!descriptorInfo && target.__get__) {
-              return target.__get__(prop);
+              return Reflect.apply(target.__get__, receiver, [prop, target]);
             } else {
               return Reflect.get(target, prop, receiver);
             }
@@ -323,7 +323,7 @@ export class BeanContainer {
         // aop
         return self.__composeForProp(_aopChainsProp)(value, value => {
           if (!descriptorInfo && target.__set__) {
-            const res = Reflect.apply(target.__set__, receiver, [prop, value]);
+            const res = Reflect.apply(target.__set__, receiver, [prop, value, target]);
             if (res === undefined) throw new Error('__set__ must return true/false');
             if (!res) {
               Reflect.set(target, prop, value, receiver);
