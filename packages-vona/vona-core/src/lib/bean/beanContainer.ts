@@ -296,7 +296,7 @@ export class BeanContainer {
           });
         }
         // method
-        return self._getInstanceMethodProxy(receiver, beanFullName, target, prop);
+        return self._getInstanceMethodProxy(beanFullName, target, prop, receiver);
       },
       set(target, prop, value, receiver) {
         if (typeof prop === 'symbol') {
@@ -338,19 +338,19 @@ export class BeanContainer {
     });
   }
 
-  private _getInstanceMethodProxy(receiver, beanFullName, beanInstance, prop) {
+  private _getInstanceMethodProxy(beanFullName, target, prop, receiver) {
     const self = this;
     // not aop magic methods
     if (__isInnerMethod(prop)) {
-      return beanInstance[prop];
+      return Reflect.get(target, prop, receiver);
     }
     // aop chains
     const _aopChainsProp = this._getAopChainsProp(receiver, beanFullName, prop, undefined, 'method', prop);
-    if (_aopChainsProp.length === 0) return beanInstance[prop];
+    if (_aopChainsProp.length === 0) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
-    if (beanInstance[methodProxyKey]) return beanInstance[methodProxyKey];
-    const methodProxy = new Proxy(beanInstance[prop], {
+    if (target[methodProxyKey]) return Reflect.get(target, methodProxyKey, receiver);
+    const methodProxy = new Proxy(target[prop], {
       apply(target, thisArg, args) {
         // aop
         return self.__composeForProp(_aopChainsProp)(args, args => {
@@ -358,7 +358,7 @@ export class BeanContainer {
         });
       },
     });
-    __setPropertyValue(beanInstance, methodProxyKey, methodProxy);
+    __setPropertyValue(target, methodProxyKey, methodProxy);
     return methodProxy;
   }
 
