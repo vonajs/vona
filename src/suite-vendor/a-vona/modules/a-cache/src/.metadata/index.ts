@@ -26,7 +26,7 @@ export * from '../bean/broadcast.memClear.js';
 export * from '../bean/broadcast.memDel.js';
 export * from '../bean/broadcast.memMultiDel.js';
 
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-cache:memClear': IDecoratorBroadcastOptions;

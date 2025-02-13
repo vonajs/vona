@@ -1,7 +1,7 @@
 /** broadcast: begin */
 export * from '../bean/broadcast.columnsClear.js';
 
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-version:columnsClear': IDecoratorBroadcastOptions;
@@ -25,7 +25,7 @@ export * from '../entity/version.js';
 export * from '../entity/versionInit.js';
 export * from '../entity/viewRecord.js';
 
-import { IDecoratorEntityOptions } from 'vona-module-a-database';
+import { type IDecoratorEntityOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-version:version': IDecoratorEntityOptions;
@@ -66,7 +66,7 @@ declare module 'vona-module-a-version' {
 /** model: begin */
 export * from '../model/viewRecord.js';
 
-import { IDecoratorModelOptions } from 'vona-module-a-database';
+import { type IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-version:viewRecord': IDecoratorModelOptions;
@@ -88,7 +88,7 @@ export interface IModuleModel {
 /** event: begin */
 export * from '../bean/event.versionDone.js';
 
-import { IDecoratorEventOptions } from 'vona-module-a-event';
+import { type IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-version:versionDone': IDecoratorEventOptions;
@@ -128,7 +128,7 @@ export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';
 export * from '../bean/startup.instanceInit.js';
 
-import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-version:databaseInit': IDecoratorStartupOptions;

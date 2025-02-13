@@ -1,7 +1,7 @@
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.usersDemo.js';
 
-import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'home-user:usersDemo': IDecoratorCacheRedisOptions;

@@ -23,7 +23,7 @@ declare module 'vona' {
 export * from '../bean/broadcast.exitAll.js';
 export * from '../bean/broadcast.reloadAll.js';
 
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-worker:exitAll': IDecoratorBroadcastOptions;
@@ -53,7 +53,7 @@ export interface IModuleBroadcast {
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.workerAlive.js';
 
-import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'a-worker:workerAlive': IDecoratorCacheRedisOptions;
