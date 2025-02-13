@@ -3,7 +3,6 @@ import { __ThisModule__ } from './.metadata/this.js';
 import { IInstanceConfig } from './config/config.js';
 
 const SymbolInstanceName = Symbol('SymbolInstanceName');
-const SymbolInstanceNameExists = Symbol('SymbolInstanceNameExists');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
@@ -21,11 +20,10 @@ export class Main extends BeanSimple implements IModuleMain {
 
 function __setInstanceName(ctx: VonaContext, instanceName: string | undefined | null) {
   ctx[SymbolInstanceName] = instanceName;
-  ctx[SymbolInstanceNameExists] = true;
 }
 
 function __getInstanceName(ctx: VonaContext, options: IInstanceConfig) {
-  if (ctx[SymbolInstanceNameExists] === true) {
+  if (ctx.hasOwnProperty(SymbolInstanceName)) {
     return ctx[SymbolInstanceName];
   }
 
