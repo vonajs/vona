@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-import { VonaCommand } from '../start.js';
+import { VonaCommand } from '../start.ts';
 new VonaCommand().start();
