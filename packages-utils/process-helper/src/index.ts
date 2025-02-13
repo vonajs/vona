@@ -142,7 +142,7 @@ export class ProcessHelper {
         if (code !== 0) {
           const message = stderr || `spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`;
           const err = new Error(message);
-          (<any>err).code = 10000 + Number(code);
+          (err as any).code = 10000 + Number(code);
           return reject(err);
         }
         resolve(stdout);

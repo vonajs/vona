@@ -1,6 +1,6 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
-import { BeanCliBase } from '../lib/bean.cli.base.js';
-import type { ICommandContext } from './argv.js';
+import { BeanCliBase } from '../lib/bean.cli.base.ts';
+import type { ICommandContext } from './argv.ts';
 import type { GoGoAST } from 'gogocode';
 import type { ParserOptions } from '@babel/parser';
 

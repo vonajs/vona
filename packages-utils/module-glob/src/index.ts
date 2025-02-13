@@ -4,8 +4,8 @@ import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
-import { getPathsMeta } from './meta.js';
-import type { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
+import { getPathsMeta } from './meta.ts';
+import type { IModuleGlobContext, IModuleGlobOptions } from './interface.ts';
 import {
   type IModule,
   type IModulePackage,
@@ -14,7 +14,7 @@ import {
   parseInfoPro,
 } from '@cabloy/module-info';
 import { checkMeta } from '@cabloy/utils';
-export * from './interface.js';
+export * from './interface.ts';
 
 const SymbolModuleOrdering = Symbol('SymbolModuleOrdering');
 

@@ -12,8 +12,8 @@
         "./src/index.ts",
         "./dist/index.d.ts"
       ],
-      "import": "./src/index.js",
-      "require": "./src/index.js",
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"

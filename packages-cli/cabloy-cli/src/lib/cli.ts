@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import enquirer from 'enquirer';
 import eggBornUtils from 'egg-born-utils';
 import BaseCommand from '@zhennann/common-bin';
-import { BeanCli } from './bean.cli.js';
+import { BeanCli } from './bean.cli.ts';
 
 const __envFields = ['TERM', 'TERM_PROGRAM', 'TERM_PROGRAM_VERSION', 'SHELL', 'COLOR', 'LANG', 'npm_config_registry'];
 const __comment_seperator = '====================================================================';

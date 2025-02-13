@@ -1,4 +1,4 @@
-import { commandsConfig } from '../config.js';
+import { commandsConfig } from '../config.ts';
 
 let __commandsMeta: { map: any; all: any };
 

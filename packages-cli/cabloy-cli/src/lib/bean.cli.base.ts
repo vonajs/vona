@@ -1,9 +1,9 @@
 import { glob } from '@cabloy/module-glob';
-import { LocalConsole } from './local.console.js';
-import { LocalHelper } from './local.helper.js';
-import { LocalTemplate } from './local.template.js';
-import { type CmdOptions } from '../types/argv.js';
-import { LocalCommon } from './local.common.js';
+import { LocalConsole } from './local.console.ts';
+import { LocalHelper } from './local.helper.ts';
+import { LocalTemplate } from './local.template.ts';
+import { type CmdOptions } from '../types/argv.ts';
+import { LocalCommon } from './local.common.ts';
 
 export class BeanCliBase {
   options: CmdOptions;

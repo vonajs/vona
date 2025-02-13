@@ -4,9 +4,9 @@ import eggBornUtils from 'egg-born-utils';
 import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
-import { BeanCliBase } from './bean.cli.base.js';
-import { commandsConfig } from '../config.js';
-import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.js';
+import { BeanCliBase } from './bean.cli.base.ts';
+import { commandsConfig } from '../config.ts';
+import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.ts';
 
 export class LocalTemplate {
   cli: BeanCliBase;
