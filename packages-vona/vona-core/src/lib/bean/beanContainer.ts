@@ -349,7 +349,7 @@ export class BeanContainer {
     if (_aopChainsProp.length === 0) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
-    if (target[methodProxyKey]) return Reflect.get(target, methodProxyKey, receiver);
+    if (target[methodProxyKey]) return target[methodProxyKey];
     const methodProxy = new Proxy(target[prop], {
       apply(target, thisArg, args) {
         // aop
