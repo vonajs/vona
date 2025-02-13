@@ -2,7 +2,7 @@
   "name": "vona-cli",
   "title": "zova cli",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "description": "vona cli",
   "author": "zhennann",
   "license": "MIT",

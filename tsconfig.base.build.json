@@ -1,8 +1,0 @@
-{
-  "extends": "@cabloy/lint/api/tsconfig.base.esm",
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "nodenext",
-    "verbatimModuleSyntax": true
-  }
-}

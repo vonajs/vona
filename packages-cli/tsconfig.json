@@ -4,13 +4,13 @@
   "include": [],
   "references": [
     {
-      "path": "cabloy-cli/tsconfig.build.json"
+      "path": "cabloy-cli"
     },
     {
-      "path": "cli/tsconfig.build.json"
+      "path": "cli"
     },
     {
-      "path": "cli-set-api/tsconfig.build.json"
+      "path": "cli-set-api"
     }
   ]
 }
