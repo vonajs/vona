@@ -40,7 +40,7 @@ export * from '../bean/event.createUserAnonymous.js';
 export * from '../bean/event.signin.js';
 export * from '../bean/event.signout.js';
 
-import { IDecoratorEventOptions } from 'vona-module-a-event';
+import { type IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-user:createUserAnonymous': IDecoratorEventOptions;

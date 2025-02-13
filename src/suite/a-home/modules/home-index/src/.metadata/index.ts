@@ -17,7 +17,7 @@ declare module 'vona-module-home-index' {
 /** controller: begin */
 export * from '../controller/home.js';
 
-import { IDecoratorControllerOptions } from 'vona-module-a-web';
+import { type IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'home-index:home': IDecoratorControllerOptions;

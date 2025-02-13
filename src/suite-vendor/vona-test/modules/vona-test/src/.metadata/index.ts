@@ -2,7 +2,7 @@
 export * from '../bean/aop.regExp.js';
 export * from '../bean/aop.simple.js';
 
-import { IDecoratorAopOptions } from 'vona-module-a-aspect';
+import { type IDecoratorAopOptions } from 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   export interface IAopRecord {
     'vona-test:regExp': IDecoratorAopOptions;
@@ -45,7 +45,7 @@ declare module 'vona' {
 /** broadcast: begin */
 export * from '../bean/broadcast.test.js';
 
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'vona-test:test': IDecoratorBroadcastOptions;
@@ -67,7 +67,7 @@ export interface IModuleBroadcast {
 /** cacheMem: begin */
 export * from '../bean/cacheMem.test.js';
 
-import { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
+import { type IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   export interface ICacheMemRecord {
     'vona-test:test': IDecoratorCacheMemOptions;
@@ -89,7 +89,7 @@ export interface IModuleCacheMem {
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.test.js';
 
-import { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'vona-test:test': IDecoratorCacheRedisOptions;
@@ -111,7 +111,7 @@ export interface IModuleCacheRedis {
 /** event: begin */
 export * from '../bean/event.helloEcho.js';
 
-import { IDecoratorEventOptions } from 'vona-module-a-event';
+import { type IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'vona-test:helloEcho': IDecoratorEventOptions;
@@ -133,7 +133,7 @@ export interface IModuleEvent {
 /** eventListener: begin */
 export * from '../bean/eventListener.helloEcho.js';
 
-import { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventListenerRecord {
     'vona-test:helloEcho': IDecoratorEventListenerOptions;
@@ -149,7 +149,7 @@ declare module 'vona-module-vona-test' {
 /** queue: begin */
 export * from '../bean/queue.test.js';
 
-import { IDecoratorQueueOptions } from 'vona-module-a-queue';
+import { type IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'vona-test:test': IDecoratorQueueOptions;
@@ -172,7 +172,7 @@ export interface IModuleQueue {
 export * from '../bean/schedule.test.js';
 export * from '../bean/schedule.test2.js';
 
-import { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
+import { type IDecoratorScheduleOptions } from 'vona-module-a-schedule';
 declare module 'vona-module-a-schedule' {
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
@@ -194,7 +194,7 @@ declare module 'vona-module-vona-test' {
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
-import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import { type IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 declare module 'vona-module-a-summer' {
   export interface ISummerCacheRecord {
     'vona-test:test': IDecoratorSummerCacheOptions;
@@ -289,7 +289,7 @@ export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
 
-import { IDecoratorControllerOptions } from 'vona-module-a-web';
+import { type IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'vona-test:bean': IDecoratorControllerOptions;

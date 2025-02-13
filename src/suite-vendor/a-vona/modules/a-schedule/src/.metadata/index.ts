@@ -20,7 +20,7 @@ import { MetaRedlock } from '../bean/meta.redlock.js';
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
 
-import { IDecoratorQueueOptions } from 'vona-module-a-queue';
+import { type IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-schedule:schedule': IDecoratorQueueOptions;
@@ -42,7 +42,7 @@ export interface IModuleQueue {
 /** startup: begin */
 export * from '../bean/startup.loadSchedules.js';
 
-import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-schedule:loadSchedules': IDecoratorStartupOptions;

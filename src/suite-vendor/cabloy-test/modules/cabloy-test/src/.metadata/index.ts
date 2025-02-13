@@ -20,7 +20,7 @@ import { MetaStatus } from '../bean/meta.status.js';
 /** controller: begin */
 export * from '../controller/status.js';
 
-import { IDecoratorControllerOptions } from 'vona-module-a-web';
+import { type IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'cabloy-test:status': IDecoratorControllerOptions;

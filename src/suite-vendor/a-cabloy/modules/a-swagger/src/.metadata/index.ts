@@ -17,7 +17,7 @@ declare module 'vona-module-a-swagger' {
 /** controller: begin */
 export * from '../controller/swagger.js';
 
-import { IDecoratorControllerOptions } from 'vona-module-a-web';
+import { type IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-swagger:swagger': IDecoratorControllerOptions;

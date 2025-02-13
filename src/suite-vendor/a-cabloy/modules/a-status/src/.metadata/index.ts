@@ -1,7 +1,7 @@
 /** entity: begin */
 export * from '../entity/status.js';
 
-import { IDecoratorEntityOptions } from 'vona-module-a-database';
+import { type IDecoratorEntityOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-status:status': IDecoratorEntityOptions;
@@ -26,7 +26,7 @@ declare module 'vona-module-a-status' {
 /** model: begin */
 export * from '../model/status.js';
 
-import { IDecoratorModelOptions } from 'vona-module-a-database';
+import { type IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-status:status': IDecoratorModelOptions;

@@ -1,7 +1,7 @@
 /** startup: begin */
 export * from '../bean/startup.loadQueueWorkers.js';
 
-import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-queue:loadQueueWorkers': IDecoratorStartupOptions;

@@ -47,7 +47,7 @@ declare module 'vona' {
 export * from '../bean/broadcast.reload.js';
 export * from '../bean/broadcast.resetCache.js';
 
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-instance:reload': IDecoratorBroadcastOptions;
@@ -77,7 +77,7 @@ export interface IModuleBroadcast {
 /** entity: begin */
 export * from '../entity/instance.js';
 
-import { IDecoratorEntityOptions } from 'vona-module-a-database';
+import { type IDecoratorEntityOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-instance:instance': IDecoratorEntityOptions;
@@ -102,7 +102,7 @@ declare module 'vona-module-a-instance' {
 /** model: begin */
 export * from '../model/instance.js';
 
-import { IDecoratorModelOptions } from 'vona-module-a-database';
+import { type IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-instance:instance': IDecoratorModelOptions;
