@@ -1,4 +1,4 @@
-import { TypeBrandName } from '@cabloy/module-info';
+import { type TypeBrandName } from '@cabloy/module-info';
 
 export interface ICommandArgv {
   // [Prop: string]: any;

@@ -1,5 +1,5 @@
-import { TypeProjectMode } from '@cabloy/module-info';
-import { IModuleGlobPathMetaItem, IModuleGlobPathsMeta } from './interface.js';
+import type { TypeProjectMode } from '@cabloy/module-info';
+import type { IModuleGlobPathMetaItem, IModuleGlobPathsMeta } from './interface.js';
 
 const __pathSuites: IModuleGlobPathMetaItem[] = [
   {

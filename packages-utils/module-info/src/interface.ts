@@ -1,5 +1,5 @@
-import { VonaOnionOptionsMeta } from './vona.js';
-import { ZovaOnionOptionsMeta } from './zova.js';
+import { type VonaOnionOptionsMeta } from './vona.js';
+import { type ZovaOnionOptionsMeta } from './zova.js';
 
 export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';

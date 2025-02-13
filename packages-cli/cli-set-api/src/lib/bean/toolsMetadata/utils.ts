@@ -1,4 +1,4 @@
-import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
+import { type IGlobBeanFile, type OnionSceneMeta } from '@cabloy/module-info';
 import { stringToCapitalize, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import path from 'path';
 import fse from 'fs-extra';

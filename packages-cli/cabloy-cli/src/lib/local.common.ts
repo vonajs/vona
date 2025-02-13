@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fse from 'fs-extra';
 import { BeanCliBase } from './bean.cli.base.js';
-import { IModule, IModulePackage } from '@cabloy/module-info';
+import type { IModule, IModulePackage } from '@cabloy/module-info';
 
 type TypeDeps = Record<string, string>;
 

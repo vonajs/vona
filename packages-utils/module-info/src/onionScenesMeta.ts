@@ -1,4 +1,4 @@
-import { IModule, OnionMetasMeta, OnionScenesMeta } from './interface.js';
+import type { IModule, OnionMetasMeta, OnionScenesMeta } from './interface.js';
 
 let __onionScenesMeta: OnionScenesMeta;
 export function getOnionScenesMeta(modules: Record<string, IModule>) {

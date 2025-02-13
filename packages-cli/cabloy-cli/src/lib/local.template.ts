@@ -6,7 +6,7 @@ import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 import { BeanCliBase } from './bean.cli.base.js';
 import { commandsConfig } from '../config.js';
-import { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.js';
+import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.js';
 
 export class LocalTemplate {
   cli: BeanCliBase;

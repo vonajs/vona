@@ -2,7 +2,7 @@ import { glob } from '@cabloy/module-glob';
 import { LocalConsole } from './local.console.js';
 import { LocalHelper } from './local.helper.js';
 import { LocalTemplate } from './local.template.js';
-import { CmdOptions } from '../types/argv.js';
+import { type CmdOptions } from '../types/argv.js';
 import { LocalCommon } from './local.common.js';
 
 export class BeanCliBase {

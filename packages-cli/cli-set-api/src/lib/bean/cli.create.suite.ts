@@ -1,5 +1,5 @@
 import { BeanCliBase } from '@cabloy/cli';
-import { IModuleInfo } from '@cabloy/module-info';
+import { type IModuleInfo } from '@cabloy/module-info';
 import fs from 'fs';
 import path from 'path';
 import { __ThisSetName__ } from '../this.js';

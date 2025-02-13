@@ -5,8 +5,14 @@ import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import { getPathsMeta } from './meta.js';
-import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
-import { IModule, IModulePackage, ISuite, ISuiteModuleBase, parseInfoPro } from '@cabloy/module-info';
+import type { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
+import {
+  type IModule,
+  type IModulePackage,
+  type ISuite,
+  type ISuiteModuleBase,
+  parseInfoPro,
+} from '@cabloy/module-info';
 import { checkMeta } from '@cabloy/utils';
 export * from './interface.js';
 

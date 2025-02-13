@@ -1,4 +1,4 @@
-import { IConsoleLogData, IConsoleLogOptions } from '../types/console.js';
+import type { IConsoleLogData, IConsoleLogOptions } from '../types/console.js';
 import { BeanCliBase } from './bean.cli.base.js';
 
 export class LocalConsole {

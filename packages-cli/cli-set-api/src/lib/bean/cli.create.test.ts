@@ -1,7 +1,7 @@
-import { BeanCliBase, NameMeta } from '@cabloy/cli';
+import { BeanCliBase, type NameMeta } from '@cabloy/cli';
 import path from 'path';
 import fs from 'fs';
-import { IModuleInfo } from '@cabloy/module-info';
+import { type IModuleInfo } from '@cabloy/module-info';
 import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {

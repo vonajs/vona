@@ -1,4 +1,4 @@
-import { IModuleInfo, TypeProjectEntityType, TypeProjectMode } from './interface.js';
+import type { IModuleInfo, TypeProjectEntityType, TypeProjectMode } from './interface.js';
 
 export function parseInfoFromPath(pathName?: string | null): IModuleInfo | undefined {
   if (!pathName) return;

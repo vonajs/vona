@@ -1,4 +1,4 @@
-import { ICommandContext } from '../types/argv.js';
+import type { ICommandContext } from '../types/argv.ts';
 import { findCommand } from './commands.js';
 
 export class BeanCli {

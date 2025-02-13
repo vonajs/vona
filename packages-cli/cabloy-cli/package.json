@@ -5,7 +5,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "types": [

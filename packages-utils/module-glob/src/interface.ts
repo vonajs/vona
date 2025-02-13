@@ -1,4 +1,4 @@
-import { IModule, ISuite, TypeProjectMode } from '@cabloy/module-info';
+import type { IModule, ISuite, TypeProjectMode } from '@cabloy/module-info';
 
 export interface IModuleGlobOptions {
   projectMode: TypeProjectMode;

@@ -1,8 +1,8 @@
-import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
+import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import { BeanCliBase } from '../lib/bean.cli.base.js';
-import { ICommandContext } from './argv.js';
-import { GoGoAST } from 'gogocode';
-import { ParserOptions } from '@babel/parser';
+import type { ICommandContext } from './argv.js';
+import type { GoGoAST } from 'gogocode';
+import type { ParserOptions } from '@babel/parser';
 
 export interface IMetadataCustomGenerateOptions {
   cli: BeanCliBase;

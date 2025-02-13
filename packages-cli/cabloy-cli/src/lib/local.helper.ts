@@ -1,12 +1,12 @@
 import Chalk from 'chalk';
-import TableClass, { TableConstructorOptions } from 'cli-table3';
+import TableClass, { type TableConstructorOptions } from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { commandsConfig } from '../config.js';
 import { BeanCliBase } from './bean.cli.base.js';
-import { NameMeta } from '../types/helper.js';
+import { type NameMeta } from '../types/helper.js';
 import { getRegistry } from '../registry.js';
 import path from 'node:path';
 import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
