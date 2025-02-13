@@ -1,5 +1,5 @@
-import { ILocalInfos } from 'vona';
-import { IUserBase } from 'vona-module-a-user';
+import type { ILocalInfos } from 'vona';
+import type { IUserBase } from 'vona-module-a-user';
 
 export interface IUser extends IUserBase {
   id: number;

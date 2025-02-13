@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
-import { IPassportAdapter, IUserBase } from 'vona-module-a-user';
+import type { IPassportAdapter, IUserBase } from 'vona-module-a-user';
 import { Service } from 'vona-module-a-web';
-import { IUser } from '../types/user.js';
+import type { IUser } from '../types/user.js';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
 @Service()
