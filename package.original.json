@@ -68,6 +68,7 @@
     "connect-history-api-fallback": "^1.6.0",
     "copy-webpack-plugin": "^7.0.0",
     "egg-born-utils": "^1.2.0",
+    "eslint": "^9.20.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.19.2",
     "extend2": "^1.0.1",

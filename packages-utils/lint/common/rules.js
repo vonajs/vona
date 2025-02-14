@@ -1,4 +1,4 @@
-const rules = {
+export const rules = {
   'prettier/prettier': ['error', { singleQuote: true }],
   'prefer-promise-reject-errors': 'off',
   quotes: ['error', 'single', { avoidEscape: true }],
