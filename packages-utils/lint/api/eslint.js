@@ -11,6 +11,7 @@ export default [
   }),
   {
     languageOptions: {
+      parser: parserTs,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -19,7 +20,6 @@ export default [
         ecmaVersion: 'latest',
         useJSXTextNode: true,
         sourceType: 'module',
-        parser: parserTs,
       },
     },
     rules,
