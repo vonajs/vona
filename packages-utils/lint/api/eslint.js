@@ -1,27 +1,25 @@
-const rules = require('../common/rules.js');
+import stylistic from '@stylistic/eslint-plugin';
+import parserTs from '@typescript-eslint/parser';
 
-module.exports = {
-  extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['@typescript-eslint', 'prettier'],
-  parserOptions: {
-    parser: require.resolve('@typescript-eslint/parser'),
+export default [
+  stylistic.configs.customize({
+    indent: 2,
+    quotes: 'single',
+    semi: true,
+    jsx: true,
+  }),
+  {
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+          tsx: true,
+        },
+        ecmaVersion: 'latest',
+        useJSXTextNode: true,
+        sourceType: 'module',
+        parser: parserTs,
+      },
+    },
   },
-  rules,
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
-    mocha: true,
-  },
-  globals: {
-    // $: true,
-    // util: true,
-    // env: true,
-    // App: true,
-    // getApp: true,
-    // Page: true,
-    // wx: true,
-    // define: true,
-    Proxy: true,
-  },
-};
+];

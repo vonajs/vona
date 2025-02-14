@@ -1,3 +1,3 @@
-const config = require('../api/prettier.js');
+import config from '../api/prettier.js';
 
-module.exports = config;
+export default config;
