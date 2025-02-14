@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import { VonaApplication, TypeModuleResourceLocales } from '../../types/index.js';
+import type { VonaApplication, TypeModuleResourceLocales } from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
-import { IModule } from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
 import localesDefault from '../core/locales.js';
+import { createRequire } from 'node:module';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all locales
@@ -36,6 +37,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
         const filepath = path.join(dir, name);
         // support en_US.js => en-US.js
         const locale = localeutil.formatLocale(name.split('.')[0]);
+        const require = createRequire(import.meta.url);
         const resource = require(filepath);
         _initLocales(locale, resource.default ? resource.default : resource);
       }

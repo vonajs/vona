@@ -1,6 +1,6 @@
 import { appResource } from '../../core/resource.js';
-import { IBeanSceneRecord } from '../interface/beanOptions.js';
-import { Constructable } from '../type/constructable.js';
+import type { IBeanSceneRecord } from '../interface/beanOptions.js';
+import type { Constructable } from '../type/constructable.js';
 import { parseModuleName } from './util.js';
 
 export function createBeanDecorator<T>(
@@ -26,6 +26,6 @@ export function createBeanDecorator<T>(
       virtual,
     });
     // fn
-    fn && fn(target as unknown as Constructable);
+    fn?.(target as unknown as Constructable);
   };
 }

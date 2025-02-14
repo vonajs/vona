@@ -1,4 +1,4 @@
-import { IBeanRecord, InjectionScope, MetadataKey } from '../../../index.js';
+import type { IBeanRecord, InjectionScope, MetadataKey } from '../../../index.js';
 
 export interface IDecoratorUseOptionsBase {
   prop: MetadataKey;
@@ -13,7 +13,7 @@ export interface IDecoratorUseOptionsBase {
 export interface IDecoratorUseOptions {
   beanFullName?: keyof IBeanRecord;
   selector?: string;
-  //injectionScope?: InjectionScope;
+  // injectionScope?: InjectionScope;
   init?: IDecoratorUseOptionsInit;
 }
 

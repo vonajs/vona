@@ -1,6 +1,7 @@
-import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
-import { MetadataKey, appMetadata } from './metadata.js';
-import { IBeanRecord } from '../bean/type.js';
+import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
+import type { MetadataKey } from './metadata.js';
+import { appMetadata } from './metadata.js';
+import type { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';

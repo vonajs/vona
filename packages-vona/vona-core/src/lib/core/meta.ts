@@ -1,10 +1,14 @@
 import { BeanSimple } from '../bean/beanSimple.js';
-import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
-import { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, EnumAppEvent } from '../../types/index.js';
-import { AppResource, appResource } from './resource.js';
-import { AppMetadata, appMetadata } from './metadata.js';
-import { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText } from '../bean/index.js';
+import type { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
+import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.js';
+import { EnumAppEvent } from '../../types/index.js';
+import type { AppResource } from './resource.js';
+import { appResource } from './resource.js';
+import type { AppMetadata } from './metadata.js';
+import { appMetadata } from './metadata.js';
+import type { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
+import type { ErrorClass, IModuleLocaleText } from '../bean/index.js';
+import { BeanScopeContainer, AppLocale } from '../bean/index.js';
 import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 
 const SymbolClosePromise = Symbol('SymbolClosePromise');
@@ -63,7 +67,7 @@ export class AppMeta extends BeanSimple {
 
     // resource
     this.resource = appResource;
-    (<any>this.resource).app = this.app;
+    (<any> this.resource).app = this.app;
 
     // metadata
     this.metadata = appMetadata;

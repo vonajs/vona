@@ -1,8 +1,9 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
 import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
-import { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
+import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
 import { deepExtend } from '../utils/util.js';
+import { createRequire } from 'node:module';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {
@@ -42,6 +43,7 @@ function createLoaderClass(Base) {
 
     getAppname() {
       if (!this.pkgVona) {
+        const require = createRequire(import.meta.url);
         this.pkgVona = require(path.join(process.cwd(), 'package.json'));
         this.pkg.name = this.pkgVona.name;
       }

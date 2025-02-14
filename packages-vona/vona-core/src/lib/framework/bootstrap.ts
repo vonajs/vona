@@ -1,4 +1,5 @@
-import { EnumAppEvent, VonaApplication } from '../../types/index.js';
+import type { VonaApplication } from '../../types/index.js';
+import { EnumAppEvent } from '../../types/index.js';
 import { extendApp } from '../core/app.js';
 import { ModuleLoader } from '../module/loader.js';
 import { SocketioReady } from '../module/socketio.js';
