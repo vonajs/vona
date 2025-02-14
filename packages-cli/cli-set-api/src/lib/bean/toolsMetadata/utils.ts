@@ -73,7 +73,7 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
   let matches = fileContent.match(reg);
   if (matches) {
     optionsCustomInterface = matches[1];
-    //optionsCustomInterfaceFrom
+    // optionsCustomInterfaceFrom
     reg = new RegExp(`import {[\\s\\S]*?${optionsCustomInterface}[, ][\\s\\S]*?} from '([^']*)'`);
     matches = fileContent.match(reg);
     if (matches) {

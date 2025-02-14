@@ -154,8 +154,8 @@ function _checkIfModuleOnlyDev(module: IModule) {
 
 function _collectModuleDevs(module: IModule, deps: {}, nameDependencies: string, nameGlobalDependencies: string) {
   const moduleDeps = module.package[nameDependencies];
-  const globalDependencies
-    = module.package.vonaModule?.[nameGlobalDependencies] || module.package.zovaModule?.[nameGlobalDependencies];
+  const globalDependencies =
+    module.package.vonaModule?.[nameGlobalDependencies] || module.package.zovaModule?.[nameGlobalDependencies];
   if (globalDependencies) {
     for (const key in globalDependencies) {
       let version = globalDependencies[key];
