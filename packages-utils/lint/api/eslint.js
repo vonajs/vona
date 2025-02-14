@@ -1,6 +1,6 @@
 import stylistic from '@stylistic/eslint-plugin';
 import parserTs from '@typescript-eslint/parser';
-import rules from '../common/rules.js';
+import { rules } from '../common/rules.js';
 
 export default [
   stylistic.configs.customize({

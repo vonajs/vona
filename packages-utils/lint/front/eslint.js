@@ -2,7 +2,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import vueParser from 'vue-eslint-parser';
 import parserTs from '@typescript-eslint/parser';
 import eslintVue from 'eslint-plugin-vue';
-import rules from '../common/rules.js';
+import { rules } from '../common/rules.js';
 
 export default [
   ...eslintVue.configs['flat/recommended'],
