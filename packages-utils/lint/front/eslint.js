@@ -4,6 +4,7 @@ import parserTs from '@typescript-eslint/parser';
 import tseslint from 'typescript-eslint';
 import eslintVue from 'eslint-plugin-vue';
 import { rules } from '../common/rules.js';
+import { rulesVue } from '../common/rulesVue.js';
 
 export default [
   ...tseslint.configs.recommended,
@@ -50,6 +51,6 @@ export default [
         Proxy: true,
       },
     },
-    rules,
+    rules: Object.assign({}, rules, rulesVue),
   },
 ];

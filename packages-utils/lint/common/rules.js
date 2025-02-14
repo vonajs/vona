@@ -2,6 +2,7 @@ export const rules = {
   'prefer-promise-reject-errors': 'off',
   'no-console': 'error',
   '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+  '@typescript-eslint/explicit-function-return-type': 'off',
   '@stylistic/max-len': ['error', { code: 130, tabWidth: 2 }],
   '@stylistic/arrow-parens': ['error', 'as-needed'],
   '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
