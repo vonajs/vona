@@ -6,6 +6,7 @@ import { rules } from '../common/rules.js';
 export default [
   ...tseslint.configs.recommended,
   stylistic.configs.customize({
+    flat: true,
     indent: 2,
     quotes: 'single',
     semi: true,
@@ -25,6 +26,8 @@ export default [
       },
       globals: {
         process: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
       },
     },
     rules,
