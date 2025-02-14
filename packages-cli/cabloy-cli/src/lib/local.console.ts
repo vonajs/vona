@@ -22,7 +22,7 @@ export class LocalConsole {
     if (typeof data !== 'object') {
       data = { text: String(data) };
     }
-    let { /* progressNo,*/ total, progress, text } = data;
+    let { /* progressNo, */ total, progress, text } = data;
     // logPrefix
     const logPrefix = options.logPrefix;
     if (logPrefix) {
@@ -37,7 +37,9 @@ export class LocalConsole {
           text = this._adjustText(`${progressText}=> `, text);
         }
       }
-      return console.log(text);
+      // eslint-disable-next-line
+      console.log(text);
+      return;
     }
   }
 
