@@ -77,17 +77,8 @@ export const rules = {
       'ts-ignore': 'allow-with-description',
     },
   ],
-  '@typescript-eslint/ban-types': [
-    'error',
-    {
-      types: {
-        // un-ban a type that's banned by default
-        '{}': false,
-        'Function': false,
-      },
-      extendDefaults: true,
-    },
-  ],
+  '@typescript-eslint/no-empty-object-type': 'off',
+  '@typescript-eslint/no-unsafe-function-type': 'off',
   '@stylistic/max-len': ['error', {
     code: 130, tabWidth: 2,
     ignoreComments: true,

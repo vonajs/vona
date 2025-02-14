@@ -1,14 +1,15 @@
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
-import * as ModuleInfo from '@cabloy/module-info';
+import type * as ModuleInfo from '@cabloy/module-info';
 import fse from 'fs-extra';
 import path from 'node:path';
 import os from 'node:os';
 import * as uuid from 'uuid';
-import { TypeMonkeyName, VonaContext } from '../../types/index.js';
+import type { TypeMonkeyName, VonaContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
-import { IModule } from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
+import { createRequire } from 'node:module';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
@@ -303,6 +304,7 @@ export function instanceDesp(instanceName: string | null | undefined): string {
 
 export function requireDynamic(file: string) {
   if (!file) throw new Error('file should not empty');
+  const require = createRequire(import.meta.url);
   let instance = require(file);
   const mtime = _requireDynamic_getFileTime(file);
   if (instance.__requireDynamic_mtime === undefined) {

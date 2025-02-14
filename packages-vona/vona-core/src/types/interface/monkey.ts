@@ -1,4 +1,4 @@
-import { IModule } from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
 
 export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySystem;
 

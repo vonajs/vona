@@ -23,6 +23,9 @@ export default [
         useJSXTextNode: true,
         sourceType: 'module',
       },
+      globals: {
+        process: 'readonly',
+      },
     },
     rules,
   },
