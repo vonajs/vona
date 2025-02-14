@@ -92,4 +92,7 @@ export const rules = {
   '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
   '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
   '@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
+  '@stylistic/js/keyword-spacing': ['error', { overrides: {
+    this: { before: false },
+  } }],
 };

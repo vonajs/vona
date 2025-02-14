@@ -1,9 +1,9 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
-import { ContextBase } from '../../types/context/contextBase.js';
-import { VonaContext } from '../../types/context/index.js';
+import type { ContextBase } from '../../types/context/contextBase.js';
+import type { VonaContext } from '../../types/context/index.js';
 import { cast } from '../../types/utils/cast.js';
-import { appResource, BeanContainer, MetadataKey } from '../../lib/index.js';
+import { appResource, BeanContainer, type MetadataKey } from '../../lib/index.js';
 import { AsyncResource } from 'node:async_hooks';
 
 const BEAN = Symbol.for('Context#__bean');

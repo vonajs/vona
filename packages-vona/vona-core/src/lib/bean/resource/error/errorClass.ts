@@ -17,6 +17,7 @@ export class ErrorClass extends BeanSimple {
     this.ctx.response.type = 'application/json';
     this.ctx.response.body = { code: 0, message: body.message, data };
   }
+
   // code/message,args
   fail(module, code, ...args) {
     const body = this.parseFail(module, code, ...args);
@@ -25,6 +26,7 @@ export class ErrorClass extends BeanSimple {
     this.ctx.response.type = 'application/json';
     this.ctx.response.body = { code: body.code, message: body.message }; // body maybe Error
   }
+
   // code/message,args
   throw(module, code, ...args): never {
     const body = this.parseFail(module, code, ...args);
@@ -34,15 +36,18 @@ export class ErrorClass extends BeanSimple {
     err.status = __calcStatus(body.code);
     throw err;
   }
+
   // code/message,args
   parseFail(module, code, ...args) {
     if (typeof code === 'object') return code;
     return this.parseCode(module, 500, code, ...args);
   }
+
   // code/message,args
   parseSuccess(module, code, ...args) {
     return this.parseCode(module, 0, code, ...args);
   }
+
   // parseCode
   parseCode(module, codeDefault, code, ...args) {
     const ebError = this.ebErrors[module];
