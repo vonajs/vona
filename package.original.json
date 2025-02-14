@@ -52,6 +52,7 @@
     "@cabloy/lint": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
+    "@eslint/config-inspector": "^1.0.0",
     "@swc/core": "^1.7.36",
     "@swc/helpers": "^0.5.13",
     "@types/glob": "^8.1.0",
