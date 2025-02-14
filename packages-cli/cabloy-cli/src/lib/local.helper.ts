@@ -49,12 +49,15 @@ export class LocalHelper {
   get moduleConfig() {
     return commandsConfig;
   }
+
   get chalk() {
     return this.newChalk();
   }
+
   get Table() {
     return TableClass;
   }
+
   get cwd() {
     return this.context.argv.projectPath;
   }
@@ -65,24 +68,30 @@ export class LocalHelper {
     }
     return new Chalk.Instance(options);
   }
+
   newTable(options: TableConstructorOptions) {
     return new TableClass(options);
   }
+
   boxen({ text, options }: any) {
     if (!options) {
       options = this.moduleConfig.helper.boxen.options;
     }
     return Boxen(text, options);
   }
+
   gogocode(sourceCode: string, options?: gogocode.GoGoOption): gogocode.GoGoAST {
     return gogocode(sourceCode, options);
   }
+
   firstCharToLowerCase(name: string) {
     return name.charAt(0).toLowerCase() + name.substring(1);
   }
+
   firstCharToUpperCase(name: string) {
     return name.charAt(0).toUpperCase() + name.substring(1);
   }
+
   stringToCapitalize(str: string[] | string, separator: string): string {
     if (typeof str === 'string') str = str.split(separator);
     return str
@@ -91,10 +100,12 @@ export class LocalHelper {
       })
       .join('');
   }
+
   slashPrefixForPath(count: number) {
     if (count === 0) return './';
     return '../'.repeat(count);
   }
+
   parseNameMeta(name: string, ignores?: string[]): NameMeta {
     const original = name;
     const parts = original.split('/');
@@ -122,28 +133,34 @@ export class LocalHelper {
       fullCapitalize,
     };
   }
+
   parseModuleInfo(moduleName) {
     const moduleInfo = ModuleInfo.parseInfoPro(moduleName, process.env.CabloyCliBrandName as any, 'module');
     if (!moduleInfo) throw new Error(`module name is not valid: ${moduleName}`);
     return moduleInfo;
   }
+
   findModule(moduleName) {
     const moduleInfo = this.parseModuleInfo(moduleName);
     return this.cli.modulesMeta.modules[moduleInfo.relativeName];
   }
+
   parseSuiteInfo(suiteName) {
     const suiteInfo = ModuleInfo.parseInfoPro(suiteName, process.env.CabloyCliBrandName as any, 'suite');
     if (!suiteInfo) throw new Error(`suite name is not valid: ${suiteName}`);
     return suiteInfo;
   }
+
   findSuite(suiteName) {
     const suiteInfo = this.parseSuiteInfo(suiteName);
     return this.cli.modulesMeta.suites[suiteInfo.relativeName];
   }
+
   async ensureDir(dir) {
     await fse.ensureDir(dir);
     return dir;
   }
+
   async pnpmInstall() {
     // args
     const args = ['install', '--force'];
@@ -155,31 +172,40 @@ export class LocalHelper {
       args,
     });
   }
+
   async formatFile({ fileName, logPrefix }: any) {
     return await this.processHelper.formatFile({ fileName, logPrefix });
   }
+
   async spawnBin({ cmd, args, options }: any) {
     return await this.processHelper.spawnBin({ cmd, args, options });
   }
+
   async spawnCmd({ cmd, args, options }: any) {
     return await this.processHelper.spawnCmd({ cmd, args, options });
   }
+
   async spawnExe({ cmd, args, options }: any) {
     return await this.processHelper.spawnExe({ cmd, args, options });
   }
+
   async spawn({ cmd, args = [], options = {} }) {
     return await this.processHelper.spawn({ cmd, args, options });
   }
+
   async gitCommit({ cwd, message }: any) {
     return await this.processHelper.gitCommit(message, { cwd });
   }
+
   async getRegistry() {
     return await getRegistry();
   }
+
   parseBrandPath() {
     const modulePath = require.resolve(`${process.env.CabloyCliBrandName}-cli/package.json`);
     return path.join(path.dirname(modulePath), `dist/bin/${process.env.CabloyCliBrandName}.js`);
   }
+
   async invokeCli(args: string[], options) {
     await this.processHelper.spawnExe({
       cmd: 'node',
@@ -187,16 +213,19 @@ export class LocalHelper {
       options,
     });
   }
+
   async loadJSONFile(fileName: string) {
     const pkgContent = (await fse.readFile(fileName)).toString();
     return JSON.parse(pkgContent);
   }
+
   async saveJSONFile(fileName: string, json: object, format?: boolean) {
     await fse.writeFile(fileName, JSON.stringify(json, null, 2) + '\n');
     if (format !== false) {
       await this.formatFile({ fileName });
     }
   }
+
   safeSplit(str: string, sep: string = ',') {
     let left = 0;
     let start = 0;
@@ -223,12 +252,14 @@ export class LocalHelper {
     }
     return result;
   }
+
   async removeGitkeep(parentPath: string) {
     const gitkeep = path.join(parentPath, '.gitkeep');
     if (fse.existsSync(gitkeep)) {
       await fse.remove(gitkeep);
     }
   }
+
   combineModuleNameAndResource(moduleName: string, resourceName: string) {
     let name = combineWordsDeduplicate(
       ModuleInfo.relativeNameToCapitalize(moduleName, false),
@@ -240,6 +271,7 @@ export class LocalHelper {
     }
     return name;
   }
+
   async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
     return await this.tempFile(
       async fileTemp => {
@@ -257,6 +289,7 @@ export class LocalHelper {
       },
     );
   }
+
   requireDynamic(file: string) {
     if (!file) throw new Error('file should not empty');
     let instance = require(file);
@@ -270,6 +303,7 @@ export class LocalHelper {
     }
     return instance;
   }
+
   private _requireDynamic_getFileTime(file) {
     if (!path.isAbsolute(file)) return null;
     const exists = fse.pathExistsSync(file);
@@ -278,6 +312,7 @@ export class LocalHelper {
     const stat = fse.statSync(file);
     return stat.mtime.valueOf();
   }
+
   async tempFile<RESULT>(fn: (fileTemp: string) => Promise<RESULT>, options?: ITempFileOptions): Promise<RESULT> {
     // temp
     const fileTempObj = tmp.fileSync(options);
@@ -289,6 +324,7 @@ export class LocalHelper {
       fileTempObj.removeCallback();
     }
   }
+
   private _createEsbuildConfig(fileSrc: string, fileDest: string) {
     return {
       platform: 'node',
@@ -300,6 +336,7 @@ export class LocalHelper {
       outfile: fileDest,
     };
   }
+
   private _pathToHref(fileName: string): string {
     return path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
   }
