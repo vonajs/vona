@@ -1,8 +1,10 @@
 import stylistic from '@stylistic/eslint-plugin';
 import parserTs from '@typescript-eslint/parser';
+import tseslint from 'typescript-eslint';
 import { rules } from '../common/rules.js';
 
 export default [
+  ...tseslint.configs.recommended,
   stylistic.configs.customize({
     indent: 2,
     quotes: 'single',

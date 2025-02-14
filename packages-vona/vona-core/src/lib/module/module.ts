@@ -1,11 +1,11 @@
 import fse from 'fs-extra';
 import path from 'path';
 import { glob } from '@cabloy/module-glob';
-import { IModuleResource } from '../../types/index.js';
+import type { IModuleResource } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { pathToFileURL } from 'node:url';
 import * as Path from 'node:path';
-import { IModule } from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
 
 // const __import_type_serialization = true;
 const __import_type_serialization = false;
@@ -20,7 +20,7 @@ export class ModuleTools extends BeanSimple {
       disabledModules: process.env.PROJECT_DISABLED_MODULES,
       disabledSuites: process.env.PROJECT_DISABLED_SUITES,
       log: false,
-      //log: !!app.meta.inAgent,
+      // log: !!app.meta.inAgent,
       meta: app.meta,
     });
     app.meta.suites = suites;
@@ -109,6 +109,7 @@ export class ModuleTools extends BeanSimple {
 
   private async _importModules() {
     const timeBegin = new Date();
+    // eslint-disable-next-line
     console.log(`import modules begin, pid: ${process.pid}`);
     // preload
     await this._importModules_preload();
@@ -120,6 +121,7 @@ export class ModuleTools extends BeanSimple {
       modulesResource = await this._importModules_parallelization();
     }
     const timeEnd = new Date();
+    // eslint-disable-next-line
     console.log(`import modules end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
     return modulesResource;
   }
