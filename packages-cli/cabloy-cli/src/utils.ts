@@ -22,7 +22,7 @@ export async function checkForUpdates(packageName: string) {
       versionOld,
     )} → ${chalk.keyword('orange')(versionNew)}`;
     message += `\nRun ${chalk.keyword('orange')(`> pnpm add -g ${packageName} <`)} to update!`;
-
+    // eslint-disable-next-line
     console.log('\n' + boxen(message, boxenOptions as any));
   } catch (_err) {
     // donothing

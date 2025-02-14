@@ -18,8 +18,8 @@ export const commandsConfig = {
   template: {
     render: {
       fileMapping: {
-        gitignore: '.gitignore',
-        _gitignore: '.gitignore',
+        'gitignore': '.gitignore',
+        '_gitignore': '.gitignore',
         '_.gitignore': '.gitignore',
         '_package.json': 'package.json',
         '_.eslintrc': '.eslintrc',
