@@ -5,6 +5,7 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx'],
     ignores: [
+      '**/*.d.ts', 
       'node_modules',
       'dist',
     ],
