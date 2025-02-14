@@ -1,4 +1,4 @@
-import { VonaApplication } from '../../types/application/app.js';
+import type { VonaApplication } from '../../types/application/app.js';
 import { BeanContainer } from '../bean/beanContainer.js';
 import { contextBase } from './context.js';
 

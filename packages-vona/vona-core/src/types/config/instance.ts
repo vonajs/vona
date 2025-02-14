@@ -1,4 +1,4 @@
-import { VonaConfigOptional } from './config.js';
+import type { VonaConfigOptional } from './config.js';
 
 export interface ConfigInstanceBase {
   instanceName: string;

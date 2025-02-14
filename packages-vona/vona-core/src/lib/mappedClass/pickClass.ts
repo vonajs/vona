@@ -1,4 +1,4 @@
-import { Constructable } from '../decorator/type/constructable.js';
+import type { Constructable } from '../decorator/type/constructable.js';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
 
 export function PickClass<T, K extends keyof T>(

@@ -1,4 +1,4 @@
-import { IModuleError } from './type.js';
+import type { IModuleError } from './type.js';
 import { BeanScopeErrorImpl } from './beanScopeErrorImpl.js';
 import { BeanSimple } from '../../beanSimple.js';
 

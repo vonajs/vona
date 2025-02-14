@@ -1,6 +1,6 @@
 /** bean merge: bean.instance */
 
-import { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
+import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 
 export interface IBeanRecordGlobal {}
 export interface IBeanRecordGeneral {}

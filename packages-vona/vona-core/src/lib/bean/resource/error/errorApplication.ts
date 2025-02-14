@@ -1,5 +1,5 @@
-import { HttpStatus } from '../../../../types/index.js';
-import { IErrorObject } from './errorObject.js';
+import type { HttpStatus } from '../../../../types/index.js';
+import type { IErrorObject } from './errorObject.js';
 
 type TypeErrorMethodNames = 'parseFail' | 'parseSuccess';
 

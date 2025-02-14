@@ -1,8 +1,10 @@
-import { cast, VonaApplication, VonaContext } from '../../types/index.js';
-import { __prepareInjectSelectorInfo, Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
+import type { VonaApplication, VonaContext } from '../../types/index.js';
+import { cast } from '../../types/index.js';
+import type { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
+import { __prepareInjectSelectorInfo } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
-import { MetadataKey } from '../core/metadata.js';
-import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
+import type { MetadataKey } from '../core/metadata.js';
+import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';

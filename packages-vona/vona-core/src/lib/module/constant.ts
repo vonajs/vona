@@ -1,5 +1,5 @@
-import { IModule } from '@cabloy/module-info';
-import { VonaApplication } from '../../types/index.js';
+import type { IModule } from '@cabloy/module-info';
+import type { VonaApplication } from '../../types/index.js';
 import { deepExtend } from '../utils/util.js';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
