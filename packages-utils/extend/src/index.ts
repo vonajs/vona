@@ -92,6 +92,7 @@ export function extend(...args) {
         // Prevent never-ending loop
         if (target !== copy) {
           // Recurse if we're merging plain objects or arrays
+          // eslint-disable-next-line
           if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
             if (copyIsArray) {
               copyIsArray = false;

@@ -1,5 +1,6 @@
 {
   "name": "@cabloy/dotenv",
+  "type": "module",
   "version": "1.0.9",
   "description": "cabloy dotenv",
   "publishConfig": {
