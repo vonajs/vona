@@ -95,4 +95,17 @@ export const rules = {
   '@stylistic/keyword-spacing': ['error', { overrides: {
     this: { before: true },
   } }],
+  '@stylistic/indent': ['error', 2, {
+    SwitchCase: 1, VariableDeclarator: 'first', outerIIFEBody: 1,
+    MemberExpression: 1,
+    FunctionDeclaration: { body: 1, parameters: 1 },
+    FunctionExpression: { body: 1, parameters: 1 },
+    StaticBlock: { body: 1 },
+    CallExpression: { arguments: 1 },
+    ArrayExpression: 1,
+    ObjectExpression: 1,
+    ImportDeclaration: 1,
+    flatTernaryExpressions: true,
+    offsetTernaryExpressions: true,
+  }],
 };
