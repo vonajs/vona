@@ -7,10 +7,13 @@ import { Rule } from 'vona-module-a-openapi';
 export class EntityInstance extends OmitClass(EntityBase, ['iid']) {
   @Rule()
   disabled: boolean;
+
   @Rule()
   name: string;
+
   @Rule()
   title: string;
+
   @Rule()
   config: string;
 }

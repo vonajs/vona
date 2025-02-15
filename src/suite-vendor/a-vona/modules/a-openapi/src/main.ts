@@ -8,5 +8,6 @@ export class Main extends BeanSimple implements IModuleMain {
       errorsAdapter(this.app);
     }
   }
+
   async configLoaded(_config: any) {}
 }

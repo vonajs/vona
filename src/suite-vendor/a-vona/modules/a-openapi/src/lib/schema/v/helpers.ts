@@ -23,9 +23,9 @@ export function schemaIp(
   options?:
     | string
     | {
-        version?: IpVersion;
-        message?: string;
-      },
+      version?: IpVersion;
+      message?: string;
+    },
 ) {
   return function (schema: z.ZodString): z.ZodString {
     return schema.ip(options);

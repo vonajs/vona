@@ -35,7 +35,7 @@ export function schemaArray(schemaLike?: SchemaLike, params?: z.RawCreateParams 
         return val.split(params?.separator ?? ',');
       },
       z.array(makeSchemaLike(schemaLike, z.any()), params),
-      //z.array(makeSchemaLike(schemaLike, schema), params),
+      // z.array(makeSchemaLike(schemaLike, schema), params),
     );
   };
 }

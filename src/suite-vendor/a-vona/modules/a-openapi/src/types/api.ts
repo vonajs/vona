@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
-import { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
-import { SchemaLikeCreate } from './decorator.js';
+import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
+import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
+import type { SchemaLikeCreate } from './decorator.js';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 export interface IOpenApiOptions {
@@ -17,12 +17,12 @@ export interface IOpenApiOptions {
 
 export type TypeOpenApiVersion = '30' | '31';
 export interface IOpenAPIObject {
-  '30': OpenAPIObject30;
-  '31': OpenAPIObject31;
+  30: OpenAPIObject30;
+  31: OpenAPIObject31;
 }
 export interface IOpenAPISchemaObject {
-  '30': SchemaObject30;
-  '31': SchemaObject31;
+  30: SchemaObject30;
+  31: SchemaObject31;
 }
 
 export type TypeResponseContentType =

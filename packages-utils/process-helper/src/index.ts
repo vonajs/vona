@@ -92,22 +92,26 @@ export class ProcessHelper {
       throw err;
     }
   }
+
   async spawnBin({ cmd, args, options }) {
     cmd = path.join(this.cwd, 'node_modules/.bin', cmd);
     return await this.spawnCmd({ cmd, args, options });
   }
+
   async spawnCmd({ cmd, args, options }) {
     if (/^win/.test(process.platform)) {
       cmd = `${cmd}.cmd`;
     }
     return await this.spawn({ cmd, args, options });
   }
+
   async spawnExe({ cmd, args, options }) {
     if (/^win/.test(process.platform)) {
       cmd = `${cmd}.exe`;
     }
     return await this.spawn({ cmd, args, options });
   }
+
   async spawn({
     cmd,
     args = [],
@@ -149,6 +153,7 @@ export class ProcessHelper {
       });
     });
   }
+
   async npmPublish(options?: IProcessHelperSpawnOptions) {
     await this.spawnCmd({
       cmd: 'npm',
@@ -156,6 +161,7 @@ export class ProcessHelper {
       options,
     });
   }
+
   async gitCommit(message: string, options?: IProcessHelperSpawnOptions) {
     // git status
     const stdout = await this.spawnExe({
@@ -188,6 +194,7 @@ export class ProcessHelper {
       options,
     });
   }
+
   async tsc(args?: string[], options?: IProcessHelperSpawnOptions) {
     if (!args) args = ['-b'];
     const timeBegin = new Date();

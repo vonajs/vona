@@ -21,8 +21,8 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
       typeof nextOrDefault === 'function'
         ? cast<NextEvent<DATA, RESULT>>(nextOrDefault)
         : async (): Promise<RESULT> => {
-            return nextOrDefault!;
-          };
+          return nextOrDefault!;
+        };
     return await compose(eventListeners)(data, next);
   }
 

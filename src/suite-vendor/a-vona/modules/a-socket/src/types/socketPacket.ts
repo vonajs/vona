@@ -10,7 +10,7 @@ export interface ISocketPacketExecute {
 
 export interface IDecoratorSocketPacketOptions
   extends IOnionOptionsBase<keyof ISocketPathRecord>,
-    IOnionOptionsDeps<keyof ISocketPacketRecord> {}
+  IOnionOptionsDeps<keyof ISocketPacketRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

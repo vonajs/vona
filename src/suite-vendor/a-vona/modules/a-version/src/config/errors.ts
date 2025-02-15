@@ -1,3 +1,3 @@
 export enum Errors {
-  'ModuleOld' = 1001,
+  ModuleOld = 1001,
 }

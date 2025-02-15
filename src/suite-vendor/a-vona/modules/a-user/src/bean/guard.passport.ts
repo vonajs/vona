@@ -12,7 +12,7 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
       await this.bean.passport.signinWithAnonymous();
     }
     if (!options.public && !this.bean.passport.isAuthenticated) {
-      //return false;
+      // return false;
       return this.app.throw(401);
     }
     // next

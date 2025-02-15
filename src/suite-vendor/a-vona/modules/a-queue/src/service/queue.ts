@@ -247,7 +247,7 @@ export class ServiceQueue extends BeanBase {
     return await this.bean.executor.newCtx(
       async () => {
         const beanFullName = queueItem.beanOptions.beanFullName;
-        const beanInstance = <IQueueExecute<DATA>>this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IQueueExecute<DATA>> this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(info.data, info.options, job);
       },
       {

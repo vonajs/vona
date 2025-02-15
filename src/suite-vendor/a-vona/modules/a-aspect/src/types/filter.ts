@@ -24,7 +24,7 @@ export interface IDecoratorFilterOptions {
 
 export interface IDecoratorFilterOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-    IOnionOptionsDeps<keyof IFilterRecordGlobal> {
+  IOnionOptionsDeps<keyof IFilterRecordGlobal> {
   global: true;
 }
 
