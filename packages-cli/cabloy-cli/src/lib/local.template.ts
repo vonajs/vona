@@ -287,7 +287,7 @@ export class LocalTemplate {
 
   _parseSnippetFilePrefix(fileName) {
     const num = fileName.split('-')[0];
-    if (!num || isNaN(num)) return 10000;
+    if (!num || Number.isNaN(num)) return 10000;
     return Number.parseInt(num);
   }
 }

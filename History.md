@@ -191,7 +191,7 @@
 
   - 旧项目：在 package.json 文件中增加如下脚本配置：
 
-```javascript
+```text
 "scripts": {
   ...
   "release": "egg-born-bin release",
@@ -238,7 +238,7 @@ $ npm run cli :create:app appName -- [--module=]
 
 `src/front/config/config.default.js`
 
-```javascript
+```text
 modules: {
   'a-app': {
     appInit: {
@@ -742,7 +742,7 @@ $ npm run db:reset
 
 如果是旧项目，只需在项目的 package.json 中增加如下指令即可：
 
-```javascript
+```text
 {
   "scripts": {
     "db:reset": "egg-born-bin backend-db-reset",
