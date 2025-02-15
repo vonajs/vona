@@ -1,4 +1,6 @@
 export const rules = {
+  'antfu/if-newline': 'off',
+  'import/no-duplicates': 'off',
   'eslint-comments/no-unlimited-disable': 'off',
   'prefer-promise-reject-errors': 'off',
   'no-console': 'warn',
@@ -57,6 +59,18 @@ export const rules = {
   '@typescript-eslint/no-namespace': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
   '@typescript-eslint/no-var-requires': 'off',
+  'unused-imports/no-unused-vars': [
+    'error',
+    {
+      args: 'all',
+      argsIgnorePattern: '^_',
+      caughtErrors: 'all',
+      caughtErrorsIgnorePattern: '^_',
+      destructuredArrayIgnorePattern: '^_',
+      varsIgnorePattern: '^_',
+      ignoreRestSiblings: true,
+    },
+  ],
   '@typescript-eslint/no-unused-vars': [
     'error',
     {
