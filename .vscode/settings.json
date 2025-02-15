@@ -20,7 +20,7 @@
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
   // prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[html]": {
