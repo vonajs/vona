@@ -37,6 +37,7 @@ export class Main extends BeanSimple implements IModuleMain {
     // middleware: router
     this.app.use(this[SymbolRouter].middleware());
   }
+
   async configLoaded(_config: any) {}
 
   private _wrapOnion(item: IOnionSlice<IDecoratorMiddlewareSystemOptions, keyof IMiddlewareSystemRecord>) {

@@ -5,8 +5,7 @@ import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from './event.h
 @EventListener({ match: 'vona-test:helloEcho' })
 export class EventListenerHelloEcho
   extends BeanBase
-  implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult>
-{
+  implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult> {
   async execute(
     data: TypeEventHelloEchoData,
     next: NextEvent<TypeEventHelloEchoData, TypeEventHelloEchoResult>,

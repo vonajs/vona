@@ -31,9 +31,9 @@ export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadat
 
 const createMappingDecorator =
   (method: RequestMethod) =>
-  (path?: RegExp | string, options?: IOpenApiOptions): MethodDecorator => {
-    return RequestMapping({ method, path, options });
-  };
+    (path?: RegExp | string, options?: IOpenApiOptions): MethodDecorator => {
+      return RequestMapping({ method, path, options });
+    };
 
 /**
  * Route handler (method) Decorator. Routes HTTP POST requests to the specified path.

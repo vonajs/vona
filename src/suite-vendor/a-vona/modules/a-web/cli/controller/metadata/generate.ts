@@ -1,4 +1,4 @@
-import { IMetadataCustomGenerateOptions } from '@cabloy/module-info';
+import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
@@ -66,7 +66,7 @@ function __parseActionPaths(fileContent: string): [string, string][] {
     const matches2 = match.match(/@([^\(]*)\(([\s\S]*?)\)/);
     if (!matches2) throw new Error('parse action path error');
     let actionPath = matches2[2];
-    if (actionPath !== '' && !actionPath.startsWith("'")) continue; //exclude regexp
+    if (actionPath !== '' && !actionPath.startsWith("'")) continue; // exclude regexp
     if (actionPath.startsWith("'")) {
       const pos = actionPath.indexOf("'", 1);
       actionPath = actionPath.substring(1, pos);
