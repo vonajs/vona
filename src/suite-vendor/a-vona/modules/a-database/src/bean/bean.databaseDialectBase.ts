@@ -84,7 +84,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
   // pg: nextval
   protected _safeNumber(value) {
     const num = Number(value);
-    return isNaN(num) ? null : num;
+    return Number.isNaN(num) ? null : num;
   }
 
   protected _columnTypePrefixes(type: string, prefixes: string[]) {

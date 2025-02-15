@@ -148,13 +148,13 @@ export class BeanContainer {
     return beanInstance;
   }
 
-  private _prepareBeanInstance(beanFullName, beanClass, args, aop) {
+  private _prepareBeanInstance(beanFullName, BeanClass, args, aop) {
     // create
     let beanInstance;
-    if (beanClass.prototype.__init__) {
-      beanInstance = new beanClass();
+    if (BeanClass.prototype.__init__) {
+      beanInstance = new BeanClass();
     } else {
-      beanInstance = new beanClass(...args);
+      beanInstance = new BeanClass(...args);
     }
     // app/ctx
     if (beanInstance instanceof BeanSimple) {
@@ -168,7 +168,7 @@ export class BeanContainer {
       __setPropertyValue(beanInstance, SymbolBeanFullName, beanFullName);
     }
     // aop: proxy
-    return this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
+    return this._patchBeanInstance(beanFullName || BeanClass, beanInstance, aop);
   }
 
   private _initBeanInstance(beanFullName, beanInstance, args) {

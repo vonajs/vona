@@ -10,9 +10,9 @@ export interface MockCabloyApplication extends TypeMockCabloyApplication<VonaApp
 
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
-let Bundle = global.__egg_born_mock;
+let Bundle = globalThis.__egg_born_mock;
 if (!Bundle) {
-  Bundle = global.__egg_born_mock = _Bundle;
+  Bundle = globalThis.__egg_born_mock = _Bundle;
 
   // eslint-disable-next-line
   before(async function () {

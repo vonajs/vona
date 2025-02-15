@@ -1,4 +1,6 @@
 export const rules = {
+  'no-extend-native': ['error', { exceptions: ['Set'] }],
+  'no-new-func': 'off',
   'regexp/no-super-linear-backtracking': 'off',
   'no-template-curly-in-string': 'off',
   'n/prefer-global/process': 'off',
@@ -59,6 +61,7 @@ export const rules = {
   'prefer-rest-params': 'off',
   // 'no-setter-return': 'off', // no effect for typescript check
   'ts/method-signature-style': 'off',
+  'ts/no-redeclare': 'off',
   '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/no-namespace': 'off',

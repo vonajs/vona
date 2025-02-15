@@ -64,9 +64,9 @@ async function main2() {
   });
   for (const file of files) {
     const fileSrc = path.join(process.cwd(), file);
-    const package = require(fileSrc);
-    if (!package.version) continue;
-    let name = package.name;
+    const pkg = require(fileSrc);
+    if (!pkg.version) continue;
+    let name = pkg.name;
     if (name.indexOf('cabloy-module') === -1 && name.indexOf('cabloy-suite') === -1) {
       continue;
     }
@@ -80,8 +80,8 @@ async function main2() {
     // console.log(body);
     const fileDest = path.join(process.cwd(), '.assets/none/package.json');
     const dirDest = path.join(process.cwd(), '.assets/none');
-    package.name = name;
-    await fse.outputFile(fileDest, JSON.stringify(package, null, 2));
+    pkg.name = name;
+    await fse.outputFile(fileDest, JSON.stringify(pkg, null, 2));
     // await fse.copyFile(fileSrc, fileDest);
     const processHelper = new ProcessHelper(process.cwd());
     await processHelper.npmPublish({ cwd: dirDest });
