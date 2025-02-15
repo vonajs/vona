@@ -1,35 +1,65 @@
-import stylistic from '@stylistic/eslint-plugin';
-import parserTs from '@typescript-eslint/parser';
-import tseslint from 'typescript-eslint';
+import antfu from '@antfu/eslint-config';
 import globals from 'globals';
 import { rules } from '../common/rules.js';
 
-export default [
-  ...tseslint.configs.recommended,
-  stylistic.configs.customize({
-    flat: true,
-    indent: 2,
-    quotes: 'single',
-    semi: true,
-    jsx: true,
-  }),
-  {
+export default function eslintConfig(config, ...args) {
+  config = Object.assign({
+    stylistic: {
+      indent: 2,
+      quotes: 'single',
+      semi: true,
+      jsx: true,
+    },
+    typescript: true,
+  }, config);
+  return antfu(config, {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules,
     languageOptions: {
-      parser: parserTs,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-          tsx: true,
-        },
-        ecmaVersion: 'latest',
-        useJSXTextNode: true,
-        sourceType: 'module',
-      },
       globals: {
+        ...globals.nodeBuiltin,
         ...globals.node,
         ...globals.jest,
       },
     },
-    rules,
-  },
-];
+  }, ...args);
+}
+
+// export default function eslintConfig(config, ...args) {
+//   return [
+//     ...tseslint.configs.recommended,
+//     stylistic.configs.customize({
+//       flat: true,
+//       indent: 2,
+//       quotes: 'single',
+//       semi: true,
+//       jsx: true,
+//     }),
+//     {
+//       files,
+//       languageOptions: {
+//         parser: parserTs,
+//         parserOptions: {
+//           ecmaFeatures: {
+//             jsx: true,
+//             tsx: true,
+//           },
+//           ecmaVersion: 'latest',
+//           useJSXTextNode: true,
+//           sourceType: 'module',
+//         },
+//         globals: {
+//           ...globals.node,
+//           ...globals.jest,
+//         },
+//       },
+//       rules,
+//     },
+//     {
+//       files: ['**/*.json'],
+//       ignores: ['package-lock.json'],
+//       language: 'json/json',
+//       ...json.configs.recommended,
+//     },
+//   ];
+// }
