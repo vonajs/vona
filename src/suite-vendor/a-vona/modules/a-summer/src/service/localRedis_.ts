@@ -7,8 +7,7 @@ import { BeanCacheRedisBase } from 'vona-module-a-cache';
 @Service()
 export class ServiceLocalRedis<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
-  implements ICacheLayeredBase<KEY, DATA>
-{
+  implements ICacheLayeredBase<KEY, DATA> {
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = await this.cacheRedis.get(key);
     if (this.__checkValueEmpty(value, options)) {

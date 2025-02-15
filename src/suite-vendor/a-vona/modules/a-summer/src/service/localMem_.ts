@@ -7,8 +7,7 @@ import { BeanCacheMemBase } from 'vona-module-a-cache';
 @Service()
 export class ServiceLocalMem<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
-  implements ICacheLayeredBase<KEY, DATA>
-{
+  implements ICacheLayeredBase<KEY, DATA> {
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = this.cacheMem.get(key);
     if (this.__checkValueEmpty(value, options)) {

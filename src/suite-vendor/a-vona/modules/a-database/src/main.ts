@@ -8,6 +8,7 @@ export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
     ExtendKnex(this.app);
   }
+
   async moduleLoaded() {
     // db
     Object.defineProperty(this.app.context, 'db', {
@@ -43,5 +44,6 @@ export class Main extends BeanSimple implements IModuleMain {
       },
     });
   }
+
   async configLoaded(_config) {}
 }

@@ -15,6 +15,7 @@ export class Main extends BeanSimple implements IModuleMain {
       return __setInstanceName(this, instanceName);
     };
   }
+
   async configLoaded(_config: any) {}
 }
 

@@ -1,3 +1,3 @@
 export enum Errors {
-  'ShouldSpecifyTable' = 1001,
+  ShouldSpecifyTable = 1001,
 }

@@ -1,7 +1,6 @@
 import { VonaAppInfo, VonaConfigOptional } from 'vona';
 import * as uuid from 'uuid';
 
-// eslint-disable-next-line
 export default function (appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
 

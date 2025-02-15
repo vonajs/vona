@@ -9,7 +9,7 @@ declare module '@cabloy/cli' {
 export default metadataCustomSnippet({
   file: 'tsconfig.json',
   language: 'json',
-  async transform({ /* cli,*/ ast, argv }) {
+  async transform({ /* cli, */ ast, argv }) {
     ast.references.push({
       path: `modules/${argv.name}/tsconfig.build.json`,
     });

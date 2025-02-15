@@ -16,7 +16,7 @@ export interface IDecoratorGuardOptions {
 
 export interface IDecoratorGuardOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-    IOnionOptionsDeps<keyof IGuardRecordGlobal> {
+  IOnionOptionsDeps<keyof IGuardRecordGlobal> {
   global: true;
 }
 

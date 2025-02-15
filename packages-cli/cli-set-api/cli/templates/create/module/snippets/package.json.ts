@@ -9,7 +9,7 @@ declare module '@cabloy/cli' {
 export default metadataCustomSnippet({
   file: 'package.json',
   language: 'json',
-  async transform({ /* cli,*/ ast, argv }) {
+  async transform({ /* cli, */ ast, argv }) {
     ast.dependencies[`vona-module-${argv.name}`] = 'workspace:^';
     // ok
     return ast;

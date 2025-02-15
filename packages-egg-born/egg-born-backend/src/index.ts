@@ -1,6 +1,6 @@
 import path from 'path';
 import egg from 'egg';
-import * as Framework from "vona";
+import * as Framework from 'vona';
 
 const EGG_PATH = Symbol.for('egg#eggPath');
 const EGG_LOADER = Symbol.for('egg#loader');
@@ -13,6 +13,7 @@ class Application extends Framework.Application {
   get [EGG_PATH]() {
     return eggPath;
   }
+
   get [EGG_LOADER]() {
     return Framework.AppWorkerLoader;
   }
@@ -22,6 +23,7 @@ class Agent extends Framework.Agent {
   get [EGG_PATH]() {
     return eggPath;
   }
+
   get [EGG_LOADER]() {
     return Framework.AgentWorkerLoader;
   }

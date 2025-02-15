@@ -6,5 +6,6 @@ export class Main extends BeanSimple implements IModuleMain {
     // force broadcast init
     this.bean._getBean('a-broadcast.service.broadcast');
   }
+
   async configLoaded(_config: any) {}
 }

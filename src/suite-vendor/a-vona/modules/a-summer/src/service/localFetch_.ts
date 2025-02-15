@@ -12,8 +12,7 @@ import { Service } from 'vona-module-a-web';
 @Service()
 export class ServiceLocalFetch<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
-  implements ICacheLayeredBase<KEY, DATA>
-{
+  implements ICacheLayeredBase<KEY, DATA> {
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
     super.__init__(cacheName, cacheOptions);
   }

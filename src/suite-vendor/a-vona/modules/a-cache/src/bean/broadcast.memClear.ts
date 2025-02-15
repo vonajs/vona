@@ -10,8 +10,7 @@ export type TypeBroadcastMemClearJobData = {
 @Broadcast()
 export class BroadcastMemClear
   extends BeanBroadcastBase<TypeBroadcastMemClearJobData>
-  implements IBroadcastExecute<TypeBroadcastMemClearJobData>
-{
+  implements IBroadcastExecute<TypeBroadcastMemClearJobData> {
   async execute(data: TypeBroadcastMemClearJobData, isEmitter?: boolean) {
     const { cacheName, cacheOptions } = data;
     if (!isEmitter) {

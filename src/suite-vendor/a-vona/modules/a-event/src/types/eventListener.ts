@@ -12,8 +12,8 @@ export interface IEventListenerRecord {}
 
 export interface IDecoratorEventListenerOptions
   extends IOnionOptionsEnable,
-    IOnionOptionsMatch<keyof IEventRecord>,
-    IOnionOptionsDeps<keyof IEventListenerRecord> {}
+  IOnionOptionsMatch<keyof IEventRecord>,
+  IOnionOptionsDeps<keyof IEventListenerRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

@@ -24,7 +24,7 @@ class BackendStartCommand extends StartCommand {
     if (!context.env.NODE_OPTIONS) {
       context.env.NODE_OPTIONS = '';
     }
-    context.env.NODE_OPTIONS += ` --no-warnings`;
+    context.env.NODE_OPTIONS += ' --no-warnings';
 
     await super.run(context);
   }

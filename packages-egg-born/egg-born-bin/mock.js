@@ -17,14 +17,14 @@ const spec = utils.combineTestPattern({
 });
 
 module.exports = {
-  extension: ['ts'],
+  'extension': ['ts'],
   spec,
   'node-option': ['no-warnings', 'loader=ts-node/esm', 'conditions=development'],
-  timeout: 0,
-  exit: true,
+  'timeout': 0,
+  'exit': true,
 };
 
-/** .mocharc.js 
+/** .mocharc.js
 const mockConfig = require('egg-born-bin/mock.js');
 
 module.exports = mockConfig;

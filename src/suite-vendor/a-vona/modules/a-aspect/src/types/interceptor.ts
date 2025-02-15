@@ -16,7 +16,7 @@ export interface IDecoratorInterceptorOptions {
 
 export interface IDecoratorInterceptorOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-    IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {
+  IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {
   global: true;
 }
 

@@ -12,8 +12,7 @@ export type TypeBroadcastMemDelJobData = {
 @Broadcast()
 export class BroadcastMemDel
   extends BeanBroadcastBase<TypeBroadcastMemDelJobData>
-  implements IBroadcastExecute<TypeBroadcastMemDelJobData>
-{
+  implements IBroadcastExecute<TypeBroadcastMemDelJobData> {
   async execute(data: TypeBroadcastMemDelJobData, isEmitter?: boolean) {
     const { cacheName, cacheOptions, keyHash, key } = data;
     if (!isEmitter) {

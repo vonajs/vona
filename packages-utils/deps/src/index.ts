@@ -13,7 +13,7 @@ export interface ISwapDepsOptions {
 export function swapDeps(items: ISwapDepsItem[], options?: ISwapDepsOptions) {
   // _handleDependents
   const depsDynamic = _handleDependents(items, options);
-  // eslint-disable-next-line
+
   while (true) {
     if (!_swapDeps(depsDynamic, items, options)) break;
   }

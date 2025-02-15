@@ -16,7 +16,7 @@ export interface IDecoratorMiddlewareOptions {
 
 export interface IDecoratorMiddlewareOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-    IOnionOptionsDeps<keyof IMiddlewareRecordGlobal> {
+  IOnionOptionsDeps<keyof IMiddlewareRecordGlobal> {
   global: true;
 }
 

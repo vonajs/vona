@@ -11,7 +11,7 @@ export interface ISocketConnectionExecute {
 
 export interface IDecoratorSocketConnectionOptions
   extends IOnionOptionsBase<keyof ISocketPathRecord>,
-    IOnionOptionsDeps<keyof ISocketConnectionRecord> {}
+  IOnionOptionsDeps<keyof ISocketConnectionRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

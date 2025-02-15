@@ -43,7 +43,6 @@ const setProperty = function setProperty(target, options) {
       writable: true,
     });
   } else {
-    // eslint-disable-next-line no-param-reassign
     target[options.name] = options.newValue;
   }
 };

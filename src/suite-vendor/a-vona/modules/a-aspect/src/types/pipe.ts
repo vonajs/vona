@@ -17,7 +17,7 @@ export interface IDecoratorPipeOptions {
 
 export interface IDecoratorPipeOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-    IOnionOptionsDeps<keyof IPipeRecordGlobal> {
+  IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   global: true;
 }
 

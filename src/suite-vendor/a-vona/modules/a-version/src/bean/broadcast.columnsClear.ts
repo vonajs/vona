@@ -8,8 +8,7 @@ export type TypeBroadcastColumnsClearJobData = {
 @Broadcast({ instance: false })
 export class BroadcastColumnsClear
   extends BeanBroadcastBase<TypeBroadcastColumnsClearJobData>
-  implements IBroadcastExecute<TypeBroadcastColumnsClearJobData>
-{
+  implements IBroadcastExecute<TypeBroadcastColumnsClearJobData> {
   async execute(data: TypeBroadcastColumnsClearJobData, isEmitter?: boolean) {
     const { mode, tableName } = data;
     if (!isEmitter) {

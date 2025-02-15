@@ -78,7 +78,7 @@ function showlog(registry, syncInfo, done) {
       } else {
         setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
       }
-    }
+    },
   );
 }
 
@@ -129,7 +129,7 @@ function sync(registry, name, callback) {
         }
         callback(null, { ok: true });
       });
-    }
+    },
   );
 }
 

@@ -16,6 +16,7 @@ export class Main extends BeanSimple implements IModuleMain {
       return __setLocale(this, locale, options);
     };
   }
+
   async configLoaded(_config: any) {}
 }
 

@@ -5,6 +5,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStart, IMonkeyAppRea
   async appStart() {
     await this.bean.scope(__ThisModule__).service.startup.appStart();
   }
+
   async appReady() {
     await this.bean.scope(__ThisModule__).service.startup.appReady();
   }

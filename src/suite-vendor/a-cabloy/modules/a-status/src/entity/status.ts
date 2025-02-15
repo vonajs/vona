@@ -5,8 +5,10 @@ import { Rule } from 'vona-module-a-openapi';
 export class EntityStatus extends EntityBase {
   @Rule()
   module: string;
+
   @Rule()
   name: string;
+
   @Rule()
   value: string;
 }

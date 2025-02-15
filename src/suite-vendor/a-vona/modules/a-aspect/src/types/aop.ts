@@ -5,8 +5,8 @@ export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
   extends IOnionOptionsEnable,
-    IOnionOptionsMatch<keyof IBeanRecord>,
-    IOnionOptionsDeps<keyof IAopRecord> {}
+  IOnionOptionsMatch<keyof IBeanRecord>,
+  IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

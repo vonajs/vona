@@ -43,7 +43,7 @@ export class ServiceBroadcast extends BeanBase {
     return await this.bean.executor.newCtx(
       async () => {
         const beanFullName = broadcastItem.beanOptions.beanFullName;
-        const beanInstance = <IBroadcastExecute<DATA>>this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IBroadcastExecute<DATA>> this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(info.data, isEmitter);
       },
       {

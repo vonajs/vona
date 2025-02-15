@@ -18,7 +18,7 @@ export class ServiceSchedule extends BeanBase {
     return await this.bean.executor.newCtx(
       async () => {
         const beanFullName = scheduleItem.beanOptions.beanFullName;
-        const beanInstance = <IScheduleExecute>this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IScheduleExecute> this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(job);
       },
       {

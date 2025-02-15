@@ -6,7 +6,7 @@ import { ServiceOnion } from 'vona-module-a-onion';
 export interface IModelRecord {}
 
 // todo: 不再使用EntityBaseTemp之后，就需要使用这行代码
-//export interface IDecoratorModelOptions<T extends IDecoratorEntityOptions = IDecoratorEntityOptions> {
+// export interface IDecoratorModelOptions<T extends IDecoratorEntityOptions = IDecoratorEntityOptions> {
 export interface IDecoratorModelOptions<T extends object = {}> {
   entity?: T;
   table?: string;

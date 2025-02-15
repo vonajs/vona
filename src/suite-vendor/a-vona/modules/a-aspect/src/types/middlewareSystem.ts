@@ -9,7 +9,7 @@ export interface IMiddlewareSystemExecute {
 
 export interface IDecoratorMiddlewareSystemOptions
   extends IOnionOptionsBase<string>, // not use IApiPathRecord
-    IOnionOptionsDeps<keyof IMiddlewareSystemRecord> {}
+  IOnionOptionsDeps<keyof IMiddlewareSystemRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

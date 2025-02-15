@@ -26,5 +26,6 @@ export class Main extends BeanSimple implements IModuleMain {
     }
     onerror(app, errorOptions);
   }
+
   async configLoaded(_config: any) {}
 }

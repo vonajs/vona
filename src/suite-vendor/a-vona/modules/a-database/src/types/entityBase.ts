@@ -10,18 +10,23 @@ export class EntityBase extends BeanBaseSimple {
   public column(column: string) {
     return column;
   }
+
   public columns(...columns: string[]) {
     return columns;
   }
 
   @Rule()
   id: number;
+
   @Rule()
   createdAt: Date;
+
   @Rule()
   updatedAt: Date;
+
   @Rule()
   deleted: boolean;
+
   @Rule()
   iid: number;
 }
