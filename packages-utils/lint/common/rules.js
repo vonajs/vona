@@ -1,4 +1,6 @@
 export const rules = {
+  'regexp/no-super-linear-backtracking': 'off',
+  'no-template-curly-in-string': 'off',
   'n/prefer-global/process': 'off',
   'unicorn/error-message': 'off',
   'antfu/if-newline': 'off',
@@ -56,6 +58,7 @@ export const rules = {
   'newline-per-chained-call': [0],
   'prefer-rest-params': 'off',
   // 'no-setter-return': 'off', // no effect for typescript check
+  'ts/method-signature-style': 'off',
   '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/no-namespace': 'off',
