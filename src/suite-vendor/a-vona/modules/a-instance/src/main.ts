@@ -25,7 +25,7 @@ function __setInstanceName(ctx: VonaContext, instanceName: string | undefined | 
 }
 
 function __getInstanceName(ctx: VonaContext, options: IInstanceConfig) {
-  if (ctx.hasOwnProperty(SymbolInstanceName)) {
+  if (Object.prototype.hasOwnProperty.call(ctx, SymbolInstanceName)) {
     return ctx[SymbolInstanceName];
   }
 
