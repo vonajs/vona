@@ -29,7 +29,7 @@ class Agent extends Framework.Agent {
   }
 }
 
-export = Object.assign(egg, {
+export default Object.assign(egg, {
   Application,
   Agent,
   AppWorkerLoader: Framework.AppWorkerLoader,
