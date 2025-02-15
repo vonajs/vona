@@ -17,7 +17,6 @@ export default function eslintConfig(config, ...args) {
     rules,
     languageOptions: {
       globals: {
-        ...globals.nodeBuiltin,
         ...globals.node,
         ...globals.jest,
       },

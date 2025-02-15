@@ -1,4 +1,5 @@
 export const rules = {
+  'n/prefer-global/process': 'off',
   'unicorn/error-message': 'off',
   'antfu/if-newline': 'off',
   'import/no-duplicates': 'off',
