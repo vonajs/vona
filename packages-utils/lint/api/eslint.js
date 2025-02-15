@@ -11,6 +11,7 @@ export default function eslintConfig(config, ...args) {
       jsx: true,
     },
     typescript: true,
+    gitignore: false,
   }, config);
   return antfu(config, {
     files: ['**/*.ts', '**/*.tsx'],

@@ -13,6 +13,7 @@ export default function eslintConfig(config, ...args) {
     },
     typescript: true,
     vue: true,
+    gitignore: false,
   }, config);
   return antfu(config, {
     files: ['**/*.ts', '**/*.tsx'],
