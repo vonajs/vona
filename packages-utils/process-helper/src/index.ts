@@ -55,6 +55,7 @@ export class ProcessHelperConsole {
 
   async _logInner(_data, text) {
     // fallback
+    // eslint-disable-next-line
     console.log(text);
   }
 

@@ -11,6 +11,7 @@ export default [
       'coverage',
       'docker-compose',
       'scripts',
+      'packages-egg-born',
     ],
   },
   {

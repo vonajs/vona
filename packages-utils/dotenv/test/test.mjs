@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import path from 'node:path';
 import { loadEnvs, getEnvFiles } from '../dist/index.js';
 

@@ -2,7 +2,8 @@ export function deprecated(oldUsage, newUsage) {
   const message = '`'
     .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
     .concat(newUsage, '` instead');
-  return console.warn(message);
+  // eslint-disable-next-line
+  console.warn(message);
 }
 
 export async function catchError<T>(

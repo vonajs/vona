@@ -137,6 +137,7 @@ export class ServiceInstance extends BeanBase {
       let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].js')}`;
       message += '\n' + chalk.hex('#FF8800')(`{ instanceName: '${this.ctx.instanceName}', password: '', title: '' }`);
       message += `\nMore info: ${chalk.cyan(urlInfo)}`;
+      // eslint-disable-next-line
       console.log('\n' + Boxen.default(message, boxenOptions));
       // }
       return this.app.throw(423); // not this.app.fail(423)
@@ -144,6 +145,7 @@ export class ServiceInstance extends BeanBase {
     // check if disabled
     if (instance.disabled) {
       // locked
+      // eslint-disable-next-line
       console.log('instance disabled: ', this.ctx.instanceName);
       return this.app.throw(423); // not this.app.fail(423)
     }

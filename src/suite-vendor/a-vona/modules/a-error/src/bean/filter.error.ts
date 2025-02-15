@@ -36,6 +36,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
 
     // todo: use new log engine
     if (options.logs[err.code!] !== false) {
+      // eslint-disable-next-line
       console.error(err);
     }
 

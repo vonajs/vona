@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import path from 'path';
 import fse from 'fs-extra';
 import semver from 'semver';

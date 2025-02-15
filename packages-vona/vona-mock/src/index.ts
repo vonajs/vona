@@ -14,6 +14,7 @@ let Bundle = global.__egg_born_mock;
 if (!Bundle) {
   Bundle = global.__egg_born_mock = _Bundle;
 
+  // eslint-disable-next-line
   before(async function () {
     const app = cast<VonaApplication>(Bundle.app);
     // wait ready
@@ -26,6 +27,7 @@ if (!Bundle) {
     // Bundle.mock.restore();
   });
 
+  // eslint-disable-next-line
   after(async function () {
     await Bundle.app.close();
   });
