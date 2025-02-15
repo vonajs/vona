@@ -13,6 +13,7 @@ export class Main extends BeanSimple implements IModuleMain {
       if (!ctx) {
         ctx = app.currentContext || app.createAnonymousContext();
       }
+      // eslint-disable-next-line no-useless-return
       if (config.error.appErrorFilter && !config.error.appErrorFilter(err, ctx)) return;
       // do nothing
     });
