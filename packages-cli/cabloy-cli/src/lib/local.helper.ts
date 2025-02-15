@@ -14,6 +14,7 @@ import tmp from 'tmp';
 import { build as esBuild } from 'esbuild';
 import { pathToFileURL } from 'node:url';
 import gogocode from 'gogocode';
+import { createRequire } from 'node:module';
 
 export interface ITempFileOptions {
   tmpdir?: string;
@@ -292,6 +293,7 @@ export class LocalHelper {
 
   requireDynamic(file: string) {
     if (!file) throw new Error('file should not empty');
+    const require = createRequire(import.meta.url);
     let instance = require(file);
     const mtime = this._requireDynamic_getFileTime(file);
     if (instance.__requireDynamic_mtime === undefined) {

@@ -2,6 +2,7 @@ import urllib from 'urllib';
 import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
+import { createRequire } from 'node:module';
 import { getRegistry } from './registry.ts';
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
@@ -9,6 +10,7 @@ const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yel
 export async function checkForUpdates(packageName: string) {
   try {
     // version old
+    const require = createRequire(import.meta.url);
     const pkg = require(`${packageName}/package.json`);
     const versionOld = pkg.version;
     // version new

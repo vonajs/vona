@@ -8,6 +8,7 @@ export default [
       '**/node_modules/**',
       '**/dist/**',
       '**/static/**',
+      '.assets',
       'coverage',
       'docker-compose',
       'scripts',
