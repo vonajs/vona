@@ -1,5 +1,5 @@
 import { BeanBase, cast, deepExtend } from 'vona';
-import { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
+import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
 import { Service } from 'vona-module-a-web';
 
 @Service()

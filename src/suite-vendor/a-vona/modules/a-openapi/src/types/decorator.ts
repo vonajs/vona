@@ -1,5 +1,5 @@
-import { Constructable, Type, VonaContext } from 'vona';
-import { z } from 'zod';
+import type { Constructable, Type, VonaContext } from 'vona';
+import type { z } from 'zod';
 
 export const SymbolDecoratorRule = Symbol('SymbolDecoratorRule');
 export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');

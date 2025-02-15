@@ -1,8 +1,8 @@
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.cors.js';
 export * from '../bean/middlewareSystem.securities.js';
-import { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
-import { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
+import type { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
+import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
@@ -35,7 +35,7 @@ declare module 'vona-module-a-security' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanSecurity } from '../bean/bean.security.js';
+import type { BeanSecurity } from '../bean/bean.security.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -44,7 +44,8 @@ declare module 'vona' {
 }
 /** bean: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

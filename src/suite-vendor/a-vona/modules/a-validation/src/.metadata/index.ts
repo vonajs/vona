@@ -1,6 +1,6 @@
 /** pipe: begin */
 export * from '../bean/pipe.valid.js';
-import { IPipeOptionsValid } from '../bean/pipe.valid.js';
+import type { IPipeOptionsValid } from '../bean/pipe.valid.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IPipeRecordLocal {
@@ -27,7 +27,7 @@ declare module 'vona-module-a-validation' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanValidator } from '../bean/bean.validator.js';
+import type { BeanValidator } from '../bean/bean.validator.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -44,7 +44,8 @@ export const locales = {
 };
 /** locale: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

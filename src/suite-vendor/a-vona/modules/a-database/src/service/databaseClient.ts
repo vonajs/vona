@@ -1,5 +1,6 @@
 import { BeanBase, deepExtend } from 'vona';
-import knex, { Knex } from 'knex';
+import type { Knex } from 'knex';
+import knex from 'knex';
 import { Service } from 'vona-module-a-web';
 
 export type ISetDatabaseNameResult = { database?: string; filename?: string };

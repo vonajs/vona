@@ -1,4 +1,5 @@
-import { IModuleInfo, parseInfoFromPath } from '@cabloy/module-info';
+import type { IModuleInfo } from '@cabloy/module-info';
+import { parseInfoFromPath } from '@cabloy/module-info';
 import StackUtils from 'stack-utils';
 
 export const ParseModuleNameLevelInit = 1;

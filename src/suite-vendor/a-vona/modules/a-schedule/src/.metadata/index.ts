@@ -15,7 +15,7 @@ declare module 'vona-module-a-schedule' {
 }
 /** meta: end */
 /** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
+import type { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
@@ -34,7 +34,7 @@ declare module 'vona-module-a-schedule' {
 }
 /** queue: end */
 /** queue: begin */
-import { QueueSchedule } from '../bean/queue.schedule.js';
+import type { QueueSchedule } from '../bean/queue.schedule.js';
 export interface IModuleQueue {
   schedule: QueueSchedule;
 }
@@ -72,7 +72,7 @@ declare module 'vona-module-a-schedule' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceSchedule } from '../service/schedule.js';
+import type { ServiceSchedule } from '../service/schedule.js';
 export interface IModuleService {
   schedule: ServiceSchedule;
 }
@@ -88,10 +88,11 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

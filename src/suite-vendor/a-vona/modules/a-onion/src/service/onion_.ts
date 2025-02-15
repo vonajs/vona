@@ -1,5 +1,10 @@
-import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
-import { getOnionScenesMeta, IModule, OnionSceneMeta } from '@cabloy/module-info';
+import type { ISwapDepsItem } from '@cabloy/deps';
+import { swapDeps } from '@cabloy/deps';
+import type { IModule, OnionSceneMeta } from '@cabloy/module-info';
+import { getOnionScenesMeta } from '@cabloy/module-info';
+import type {
+  Next,
+  VonaContext } from 'vona';
 import {
   appMetadata,
   appResource,
@@ -7,17 +12,16 @@ import {
   cast,
   compose,
   deepExtend,
-  Next,
   SymbolProxyDisable,
-  VonaContext,
 } from 'vona';
 import { Service } from 'vona-module-a-web';
-import {
+import type {
   IOnionExecuteCustom,
   IOnionOptionsDeps,
   IOnionOptionsEnable,
   IOnionOptionsMatch,
-  IOnionSlice,
+  IOnionSlice } from '../types/onion.js';
+import {
   SymbolUseOnionLocal,
 } from '../types/onion.js';
 

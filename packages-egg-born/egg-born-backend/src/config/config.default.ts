@@ -1,4 +1,4 @@
-import { VonaAppInfo, VonaConfigOptional } from 'vona';
+import type { VonaAppInfo, VonaConfigOptional } from 'vona';
 import * as uuid from 'uuid';
 
 export default function (appInfo: VonaAppInfo) {

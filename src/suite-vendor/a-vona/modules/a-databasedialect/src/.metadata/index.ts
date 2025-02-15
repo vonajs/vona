@@ -29,9 +29,9 @@ declare module 'vona-module-a-databasedialect' {
 }
 /** databaseDialect: end */
 /** databaseDialect: begin */
-import { DatabaseDialectMysql } from '../bean/databaseDialect.mysql.js';
-import { DatabaseDialectMysql2 } from '../bean/databaseDialect.mysql2.js';
-import { DatabaseDialectPg } from '../bean/databaseDialect.pg.js';
+import type { DatabaseDialectMysql } from '../bean/databaseDialect.mysql.js';
+import type { DatabaseDialectMysql2 } from '../bean/databaseDialect.mysql2.js';
+import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -42,7 +42,8 @@ declare module 'vona' {
 }
 /** databaseDialect: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

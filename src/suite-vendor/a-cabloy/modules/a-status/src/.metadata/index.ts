@@ -10,7 +10,7 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-a-status' {}
 /** entity: end */
 /** entity: begin */
-import { EntityStatus } from '../entity/status.js';
+import type { EntityStatus } from '../entity/status.js';
 export interface IModuleEntity {
   status: EntityStatus;
 }
@@ -40,7 +40,7 @@ declare module 'vona-module-a-status' {
 }
 /** model: end */
 /** model: begin */
-import { ModelStatus } from '../model/status.js';
+import type { ModelStatus } from '../model/status.js';
 export interface IModuleModel {
   status: ModelStatus;
 }
@@ -69,10 +69,11 @@ declare module 'vona-module-a-status' {
 }
 /** meta: end */
 /** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
+import type { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

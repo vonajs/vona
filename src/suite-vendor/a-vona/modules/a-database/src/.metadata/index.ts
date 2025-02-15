@@ -1,6 +1,6 @@
 /** middleware: begin */
 export * from '../bean/middleware.transaction.js';
-import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
+import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordLocal {
@@ -30,7 +30,7 @@ declare module 'vona-module-a-database' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanDatabase } from '../bean/bean.database.js';
+import type { BeanDatabase } from '../bean/bean.database.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -69,9 +69,9 @@ declare module 'vona-module-a-database' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceDatabaseClient } from '../service/databaseClient.js';
-import { ServiceDbMeta } from '../service/dbMeta.js';
-import { ServiceTransaction } from '../service/transaction.js';
+import type { ServiceDatabaseClient } from '../service/databaseClient.js';
+import type { ServiceDbMeta } from '../service/dbMeta.js';
+import type { ServiceTransaction } from '../service/transaction.js';
 export interface IModuleService {
   databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
@@ -91,7 +91,7 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -103,15 +103,16 @@ export const locales = {
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.js';
-import { Errors } from '../config/errors.js';
+import type { Errors } from '../config/errors.js';
 /** error: end */
 /** main: begin */
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
+import type {
+  BeanScopeUtil } from 'vona';
 import {
   BeanScopeBase,
-  BeanScopeUtil,
   type TypeModuleConfig,
   type TypeModuleErrors,
   type TypeModuleLocales,

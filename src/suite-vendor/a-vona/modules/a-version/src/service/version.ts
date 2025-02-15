@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { BeanBase, type ConfigInstanceBase } from 'vona';
-import { EntityVersion } from '../entity/version.js';
-import { EntityVersionInit } from '../entity/versionInit.js';
+import type { EntityVersion } from '../entity/version.js';
+import type { EntityVersionInit } from '../entity/versionInit.js';
 import { Service } from 'vona-module-a-web';
 import { type IInstanceStartupOptions } from 'vona-module-a-startup';
 import type {

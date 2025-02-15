@@ -1,10 +1,11 @@
-import { Knex } from 'knex';
+import type { Knex } from 'knex';
+import type {
+  IFetchDatabasesResultItem,
+  IFetchIndexesResultItem,
+  TableIdentity } from 'vona-module-a-database';
 import {
   BeanDatabaseDialectBase,
   DatabaseDialect,
-  IFetchDatabasesResultItem,
-  IFetchIndexesResultItem,
-  TableIdentity,
 } from 'vona-module-a-database';
 
 @DatabaseDialect()

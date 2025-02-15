@@ -1,5 +1,5 @@
-import { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
-import { z, ZodTypeAny } from 'zod';
+import type { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
+import type { z, ZodTypeAny } from 'zod';
 
 export function schemaOpenapi<T extends ZodTypeAny>(metadata: Partial<ZodOpenAPIMetadata<z.input<T>>>);
 export function schemaOpenapi<T extends ZodTypeAny>(refId: string, metadata?: Partial<ZodOpenAPIMetadata<z.input<T>>>);

@@ -1,8 +1,8 @@
-import * as Bull from 'bullmq';
-import Redlock from 'redlock';
-import { ILocalInfos, OmitNever } from 'vona';
-import { INewCtxExtraData } from 'vona-module-a-executor';
-import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type * as Bull from 'bullmq';
+import type Redlock from 'redlock';
+import type { ILocalInfos, OmitNever } from 'vona';
+import type { INewCtxExtraData } from 'vona-module-a-executor';
+import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IQueuePushOptions {
   queueNameSub?: string;

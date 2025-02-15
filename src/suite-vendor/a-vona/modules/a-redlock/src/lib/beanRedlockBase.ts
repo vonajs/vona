@@ -1,5 +1,6 @@
-import { BeanBase, FunctionAsync, SymbolModuleBelong } from 'vona';
-import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
+import type { FunctionAsync } from 'vona';
+import { BeanBase, SymbolModuleBelong } from 'vona';
+import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 
 export class BeanRedlockBase extends BeanBase {
   protected __get__(prop: string) {

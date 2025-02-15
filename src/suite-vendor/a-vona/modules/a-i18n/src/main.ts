@@ -1,6 +1,7 @@
-import { BeanSimple, IModuleMain, VonaContext } from 'vona';
+import type { IModuleMain, VonaContext } from 'vona';
+import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.js';
-import { I18nConfig } from './config/config.js';
+import type { I18nConfig } from './config/config.js';
 
 const SymbolLocale = Symbol('SymbolLocale');
 const SymbolLocaleOrigin = Symbol('SymbolLocaleOrigin');

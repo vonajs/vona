@@ -1,4 +1,5 @@
-import { BeanSimple, IModuleMain, VonaContext } from 'vona';
+import type { IModuleMain, VonaContext } from 'vona';
+import { BeanSimple } from 'vona';
 import { ExtendKnex } from './extend/index.js';
 import { ServiceDbMeta } from './service/dbMeta.js';
 

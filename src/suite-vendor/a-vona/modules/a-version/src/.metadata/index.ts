@@ -15,7 +15,7 @@ declare module 'vona-module-a-version' {
 }
 /** broadcast: end */
 /** broadcast: begin */
-import { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
+import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
 export interface IModuleBroadcast {
   columnsClear: BroadcastColumnsClear;
 }
@@ -36,9 +36,9 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-a-version' {}
 /** entity: end */
 /** entity: begin */
-import { EntityVersion } from '../entity/version.js';
-import { EntityVersionInit } from '../entity/versionInit.js';
-import { EntityViewRecord } from '../entity/viewRecord.js';
+import type { EntityVersion } from '../entity/version.js';
+import type { EntityVersionInit } from '../entity/versionInit.js';
+import type { EntityViewRecord } from '../entity/viewRecord.js';
 export interface IModuleEntity {
   version: EntityVersion;
   versionInit: EntityVersionInit;
@@ -80,7 +80,7 @@ declare module 'vona-module-a-version' {
 }
 /** model: end */
 /** model: begin */
-import { ModelViewRecord } from '../model/viewRecord.js';
+import type { ModelViewRecord } from '../model/viewRecord.js';
 export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
@@ -102,7 +102,7 @@ declare module 'vona-module-a-version' {
 }
 /** event: end */
 /** event: begin */
-import { EventVersionDone } from '../bean/event.versionDone.js';
+import type { EventVersionDone } from '../bean/event.versionDone.js';
 export interface IModuleEvent {
   versionDone: EventVersionDone;
 }
@@ -177,8 +177,8 @@ declare module 'vona-module-a-version' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceDatabase } from '../service/database.js';
-import { ServiceVersion } from '../service/version.js';
+import type { ServiceDatabase } from '../service/database.js';
+import type { ServiceVersion } from '../service/version.js';
 export interface IModuleService {
   database: ServiceDatabase;
   version: ServiceVersion;
@@ -204,10 +204,11 @@ export const locales = {
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.js';
-import { Errors } from '../config/errors.js';
+import type { Errors } from '../config/errors.js';
 /** error: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

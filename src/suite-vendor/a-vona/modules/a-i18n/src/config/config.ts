@@ -1,4 +1,4 @@
-import { ILocalInfos, VonaApplication } from 'vona';
+import type { ILocalInfos, VonaApplication } from 'vona';
 
 export interface I18nConfig {
   defaultLocale: keyof ILocalInfos;

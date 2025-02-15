@@ -1,6 +1,6 @@
 /** interceptor: begin */
 export * from '../bean/interceptor.body.js';
-import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+import type { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IInterceptorRecordGlobal {
@@ -17,8 +17,8 @@ declare module 'vona-module-a-core' {
 /** middleware: begin */
 export * from '../bean/middleware.development.js';
 export * from '../bean/middleware.gate.js';
-import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
-import { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
+import type { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
+import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordGlobal {
@@ -46,10 +46,10 @@ export * from '../bean/middlewareSystem.bodyparser.js';
 export * from '../bean/middlewareSystem.meta.js';
 export * from '../bean/middlewareSystem.notfound.js';
 export * from '../bean/middlewareSystem.overrideMethod.js';
-import { IMiddlewareSystemOptionsBodyparser } from '../bean/middlewareSystem.bodyparser.js';
-import { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.js';
-import { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.js';
-import { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.js';
+import type { IMiddlewareSystemOptionsBodyparser } from '../bean/middlewareSystem.bodyparser.js';
+import type { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.js';
+import type { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.js';
+import type { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
@@ -98,10 +98,11 @@ declare module 'vona-module-a-core' {
 }
 /** meta: end */
 /** meta static: begin */
-import { MetaStatic } from '../bean/meta.static.js';
+import type { MetaStatic } from '../bean/meta.static.js';
 /** meta static: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

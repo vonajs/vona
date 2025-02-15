@@ -1,4 +1,4 @@
-import { ClusterOptions, RedisOptions } from 'ioredis';
+import type { ClusterOptions, RedisOptions } from 'ioredis';
 
 export interface IRedisClientRecord {
   default: never;

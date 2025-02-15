@@ -1,29 +1,32 @@
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
-import { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
+import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
+import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
+import type {
+  Constructable,
+  IDecoratorBeanOptionsBase } from 'vona';
 import {
   appMetadata,
   appResource,
   BeanBase,
   cast,
-  Constructable,
   HttpStatus,
-  IDecoratorBeanOptionsBase,
   LocaleModuleNameSeparator,
 } from 'vona';
-import {
+import type {
   IDecoratorControllerOptions,
-  RequestMappingMetadata,
+  RequestMappingMetadata } from 'vona-module-a-web';
+import {
   RequestMethod,
   Service,
   SymbolRequestMappingHandler,
 } from 'vona-module-a-web';
 import * as ModuleInfo from '@cabloy/module-info';
-import {
-  bodySchemaWrapperDefault,
+import type {
   IOpenAPIObject,
   IOpenApiOptions,
-  RouteHandlerArgumentMetaDecorator,
+  RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
+import {
+  bodySchemaWrapperDefault,
   schema,
   SymbolOpenApiOptions,
   SymbolRouteHandlersArgumentsMeta,

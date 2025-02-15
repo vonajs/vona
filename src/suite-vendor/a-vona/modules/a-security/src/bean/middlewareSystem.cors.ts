@@ -1,5 +1,7 @@
-import { BeanBase, Next, VonaContext } from 'vona';
-import { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute, MiddlewareSystem } from 'vona-module-a-aspect';
+import type { Next, VonaContext } from 'vona';
+import { BeanBase } from 'vona';
+import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import { MiddlewareSystem } from 'vona-module-a-aspect';
 import koaCors from '@koa/cors';
 
 export interface IMiddlewareSystemOptionsCors extends IDecoratorMiddlewareSystemOptions {

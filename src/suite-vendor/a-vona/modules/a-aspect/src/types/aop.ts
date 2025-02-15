@@ -1,5 +1,5 @@
-import { IBeanRecord, OmitNever } from 'vona';
-import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
+import type { IBeanRecord, OmitNever } from 'vona';
+import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IAopRecord {}
 

@@ -1,4 +1,5 @@
-import { BeanSimple, IMonkeyAppStarted } from 'vona';
+import type { IMonkeyAppStarted } from 'vona';
+import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.js';
 import { developmentWatchDirs } from './lib/development.js';
 

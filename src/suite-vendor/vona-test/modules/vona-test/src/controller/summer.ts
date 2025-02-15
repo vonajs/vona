@@ -1,7 +1,7 @@
 import { BeanBase, retry } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import assert from 'node:assert';
-import { SummerCacheTest } from '../bean/summerCache.test.js';
+import type { SummerCacheTest } from '../bean/summerCache.test.js';
 import { Controller, Post } from 'vona-module-a-web';
 import { Api } from 'vona-module-a-openapi';
 import { sleep } from '@cabloy/utils';

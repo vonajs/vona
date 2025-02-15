@@ -1,5 +1,5 @@
-import { Next, OmitNever } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { Next, OmitNever } from 'vona';
+import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
 
 export interface ISocketPathRecord {}
 

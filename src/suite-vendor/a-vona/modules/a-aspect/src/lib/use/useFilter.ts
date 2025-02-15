@@ -1,4 +1,4 @@
-import { IFilterRecordLocal } from '../../types/filter.js';
+import type { IFilterRecordLocal } from '../../types/filter.js';
 import { UseOnionBase } from './useOnionBase.js';
 
 export function UseFilter<T extends keyof IFilterRecordLocal>(

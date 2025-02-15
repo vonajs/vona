@@ -1,6 +1,6 @@
-import { ContextState, ILocalInfos, PowerPartial, VonaContext } from 'vona';
-import { ConfigOnions } from 'vona-module-a-onion';
-import { TypeRequestMethod } from 'vona-module-a-web';
+import type { ContextState, ILocalInfos, PowerPartial, VonaContext } from 'vona';
+import type { ConfigOnions } from 'vona-module-a-onion';
+import type { TypeRequestMethod } from 'vona-module-a-web';
 
 export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;

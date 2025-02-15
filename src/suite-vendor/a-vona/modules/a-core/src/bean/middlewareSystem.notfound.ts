@@ -1,5 +1,7 @@
-import { BeanBase, Next } from 'vona';
-import { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute, MiddlewareSystem } from 'vona-module-a-aspect';
+import type { Next } from 'vona';
+import { BeanBase } from 'vona';
+import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import { MiddlewareSystem } from 'vona-module-a-aspect';
 
 export interface IMiddlewareSystemOptionsNotfound extends IDecoratorMiddlewareSystemOptions {
   pageUrl?: string;

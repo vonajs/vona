@@ -13,7 +13,7 @@ declare module 'vona-module-a-cache' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanCache } from '../bean/bean.cache.js';
+import type { BeanCache } from '../bean/bean.cache.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -52,9 +52,9 @@ declare module 'vona-module-a-cache' {
 }
 /** broadcast: end */
 /** broadcast: begin */
-import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
-import { BroadcastMemDel } from '../bean/broadcast.memDel.js';
-import { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
+import type { BroadcastMemClear } from '../bean/broadcast.memClear.js';
+import type { BroadcastMemDel } from '../bean/broadcast.memDel.js';
+import type { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
 export interface IModuleBroadcast {
   memClear: BroadcastMemClear;
   memDel: BroadcastMemDel;
@@ -63,10 +63,11 @@ export interface IModuleBroadcast {
 /** broadcast: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

@@ -1,7 +1,7 @@
-import { OpenAPIObjectConfig as OpenAPIObjectConfigV30 } from '@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator.js';
-import { OpenAPIObjectConfigV31 } from '@asteasolutions/zod-to-openapi/dist/v3.1/openapi-generator.js';
-import { VonaApplication } from 'vona';
-import { TypeOpenApiVersion } from '../types/api.js';
+import type { OpenAPIObjectConfig as OpenAPIObjectConfigV30 } from '@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator.js';
+import type { OpenAPIObjectConfigV31 } from '@asteasolutions/zod-to-openapi/dist/v3.1/openapi-generator.js';
+import type { VonaApplication } from 'vona';
+import type { TypeOpenApiVersion } from '../types/api.js';
 
 export const config = (_app: VonaApplication) => {
   return {

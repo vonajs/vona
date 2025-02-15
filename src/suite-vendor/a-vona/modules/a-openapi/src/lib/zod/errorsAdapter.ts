@@ -1,4 +1,4 @@
-import { VonaApplication } from 'vona';
+import type { VonaApplication } from 'vona';
 import { setErrorMapDefault, setErrorMapSchema } from '@cabloy/zod-errors-custom';
 
 export function errorsAdapter(app: VonaApplication) {

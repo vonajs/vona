@@ -5,7 +5,7 @@ import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { commandsConfig } from '../config.ts';
-import { BeanCliBase } from './bean.cli.base.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
 import { type NameMeta } from '../types/helper.ts';
 import { getRegistry } from '../registry.ts';
 import path from 'node:path';

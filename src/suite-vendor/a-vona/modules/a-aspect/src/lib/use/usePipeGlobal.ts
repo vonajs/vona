@@ -1,5 +1,5 @@
-import { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
-import { IPipeRecordGlobal } from '../../types/pipe.js';
+import type { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
+import type { IPipeRecordGlobal } from '../../types/pipe.js';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 
 export function UsePipeGlobal<T extends keyof IPipeRecordGlobal>(

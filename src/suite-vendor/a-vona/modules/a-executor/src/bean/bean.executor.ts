@@ -1,8 +1,9 @@
 import { Bean } from 'vona-module-a-bean';
-import { BeanBase, FunctionAsync } from 'vona';
-import { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
+import type { FunctionAsync } from 'vona';
+import { BeanBase } from 'vona';
+import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
-import { IApiPathRecordMethodMap } from 'vona-module-a-web';
+import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import { delegateProperties } from '../lib/utils.js';
 
 @Bean()

@@ -11,7 +11,7 @@ declare module 'vona-module-a-web' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanRouter } from '../bean/bean.router.js';
+import type { BeanRouter } from '../bean/bean.router.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -23,7 +23,8 @@ declare module 'vona' {
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

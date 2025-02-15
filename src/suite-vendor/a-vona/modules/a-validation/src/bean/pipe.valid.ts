@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 import { createArgumentPipe, type IDecoratorPipeOptions, type IPipeTransform, Pipe } from 'vona-module-a-aspect';
 import { BeanBase, type Constructable, HttpStatus } from 'vona';
 import { type ValidatorOptions } from '../types/validatorOptions.js';

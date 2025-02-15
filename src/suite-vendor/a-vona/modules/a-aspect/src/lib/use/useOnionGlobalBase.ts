@@ -1,4 +1,5 @@
-import { appMetadata, MetadataKey } from 'vona';
+import type { MetadataKey } from 'vona';
+import { appMetadata } from 'vona';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 
 export function UseOnionGlobalBase(

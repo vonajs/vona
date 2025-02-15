@@ -3,7 +3,8 @@ import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { ProcessHelper } from '@cabloy/process-helper';
-import { cast, VonaApplication } from 'vona';
+import type { VonaApplication } from 'vona';
+import { cast } from 'vona';
 
 const __pathesWatch = [
   'src/backend/config',

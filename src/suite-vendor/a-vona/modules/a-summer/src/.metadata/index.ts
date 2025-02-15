@@ -12,7 +12,7 @@ declare module 'vona-module-a-summer' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanSummer } from '../bean/bean.summer.js';
+import type { BeanSummer } from '../bean/bean.summer.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -31,10 +31,11 @@ declare module 'vona-module-a-summer' {}
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

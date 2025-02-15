@@ -15,7 +15,7 @@ declare module 'vona-module-cabloy-test' {
 }
 /** meta: end */
 /** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
+import type { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
 /** controller: begin */
 export * from '../controller/status.js';
@@ -41,7 +41,8 @@ declare module 'vona-module-a-web' {
 }
 /** controller: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

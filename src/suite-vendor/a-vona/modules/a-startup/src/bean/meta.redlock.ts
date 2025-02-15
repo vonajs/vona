@@ -1,6 +1,7 @@
-import { FunctionAsync } from 'vona';
+import type { FunctionAsync } from 'vona';
 import { Meta } from 'vona-module-a-meta';
-import { BeanRedlockBase, IRedlockLockIsolateOptions } from 'vona-module-a-redlock';
+import type { IRedlockLockIsolateOptions } from 'vona-module-a-redlock';
+import { BeanRedlockBase } from 'vona-module-a-redlock';
 
 export interface MetaRedlock {
   lockIsolate<RESULT, KEY extends string>(

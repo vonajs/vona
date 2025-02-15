@@ -1,6 +1,7 @@
 import { checkIfIgnore } from '../utils.js';
-import { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
-import { deepExtend, Next, VonaContext } from 'vona';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
+import type { Next, VonaContext } from 'vona';
+import { deepExtend } from 'vona';
 
 const HEADER = ['x-content-security-policy', 'content-security-policy'];
 const REPORT_ONLY_HEADER = ['x-content-security-policy-report-only', 'content-security-policy-report-only'];

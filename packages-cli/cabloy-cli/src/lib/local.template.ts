@@ -4,7 +4,7 @@ import eggBornUtils from 'egg-born-utils';
 import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
-import { BeanCliBase } from './bean.cli.base.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
 import { commandsConfig } from '../config.ts';
 import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.ts';
 

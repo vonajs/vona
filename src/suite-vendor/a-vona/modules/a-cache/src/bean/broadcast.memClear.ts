@@ -1,5 +1,6 @@
-import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
-import { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
+import type { IBroadcastExecute } from 'vona-module-a-broadcast';
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
+import type { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
 import { cast } from 'vona';
 
 export type TypeBroadcastMemClearJobData = {

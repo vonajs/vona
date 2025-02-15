@@ -1,6 +1,7 @@
 import eggBornUtils from 'egg-born-utils';
 import { cascadeExtendKeys } from 'cascade-extend';
-import dotenv, { DotenvParseOutput } from 'dotenv';
+import type { DotenvParseOutput } from 'dotenv';
+import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 
 export function loadEnvs(

@@ -1,5 +1,5 @@
-import { VonaApplication } from 'vona';
-import { IServiceRecord } from 'vona-module-a-web';
+import type { VonaApplication } from 'vona';
+import type { IServiceRecord } from 'vona-module-a-web';
 
 export const config = (_app: VonaApplication) => {
   return {

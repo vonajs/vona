@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
-import { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
+import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
 import { apiPath } from 'vona-module-a-web';
 
 @Meta()

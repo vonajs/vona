@@ -1,6 +1,6 @@
-import { VonaApplication } from 'vona';
-import { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
-import { IOnionOptionsMeta } from 'vona-module-a-onion';
+import type { VonaApplication } from 'vona';
+import type { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
+import type { IOnionOptionsMeta } from 'vona-module-a-onion';
 
 export const configRedis = {
   mode: 'redis', // only redis

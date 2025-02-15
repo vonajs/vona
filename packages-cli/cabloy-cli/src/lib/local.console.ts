@@ -1,5 +1,5 @@
 import type { IConsoleLogData, IConsoleLogOptions } from '../types/console.ts';
-import { BeanCliBase } from './bean.cli.base.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
 
 export class LocalConsole {
   cli: BeanCliBase;

@@ -1,5 +1,5 @@
 import { cast, type ILocalInfos } from 'vona';
-import { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-database';
 import { type IUserBase, setUserAdapter } from 'vona-module-a-user';
 import type { IUser } from '../types/user.js';
 

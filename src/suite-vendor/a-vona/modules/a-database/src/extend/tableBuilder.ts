@@ -1,5 +1,5 @@
 import knex from 'knex';
-import { VonaApplication } from 'vona';
+import type { VonaApplication } from 'vona';
 
 export interface IBasicFieldsOptions {
   id?: boolean;

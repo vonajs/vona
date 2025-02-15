@@ -1,5 +1,5 @@
 import { createBeanDecorator } from 'vona';
-import { IDecoratorStartupOptions } from '../types/startup.js';
+import type { IDecoratorStartupOptions } from '../types/startup.js';
 
 export function Startup(options?: IDecoratorStartupOptions): ClassDecorator {
   return createBeanDecorator('startup', options);

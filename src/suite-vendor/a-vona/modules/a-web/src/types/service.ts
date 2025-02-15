@@ -1,4 +1,4 @@
-import { ServiceOnion } from 'vona-module-a-onion';
+import type { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IServiceRecord {}
 

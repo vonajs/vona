@@ -1,9 +1,9 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase } from 'vona';
-import { ServiceLocalMem } from '../service/localMem_.js';
-import { ServiceLocalRedis } from '../service/localRedis_.js';
-import { ServiceLocalFetch } from '../service/localFetch_.js';
-import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
+import type { ServiceLocalMem } from '../service/localMem_.js';
+import type { ServiceLocalRedis } from '../service/localRedis_.js';
+import type { ServiceLocalFetch } from '../service/localFetch_.js';
+import type { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
 
 export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   protected _cacheName: string;

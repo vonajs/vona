@@ -1,12 +1,12 @@
 import { BeanModelMeta } from './bean.model_meta.js';
-import { Knex } from 'knex';
+import type { Knex } from 'knex';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
-import { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types/index.js';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types/index.js';
 import { cast } from 'vona';
 import { BigNumber } from 'bignumber.js';
-import { ITableColumns } from '../bean.databaseDialectBase.js';
+import type { ITableColumns } from '../bean.databaseDialectBase.js';
 
 let __columns: Record<string, ITableColumns> = {};
 

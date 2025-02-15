@@ -1,5 +1,5 @@
-import * as Bull from 'bullmq';
-import { VonaApplication } from 'vona';
+import type * as Bull from 'bullmq';
+import type { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {

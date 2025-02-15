@@ -1,6 +1,7 @@
-import { BeanSimple, IModuleMain, VonaContext } from 'vona';
+import type { IModuleMain, VonaContext } from 'vona';
+import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.js';
-import { IInstanceConfig } from './config/config.js';
+import type { IInstanceConfig } from './config/config.js';
 
 const SymbolInstanceName = Symbol('SymbolInstanceName');
 

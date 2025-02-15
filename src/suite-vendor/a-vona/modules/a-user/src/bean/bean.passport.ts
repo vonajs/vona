@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { IPassportAdapter, IUserBase } from '../types/user.js';
+import type { IPassportAdapter, IUserBase } from '../types/user.js';
 import { isAnonymous } from '../lib/user.js';
 
 @Bean()

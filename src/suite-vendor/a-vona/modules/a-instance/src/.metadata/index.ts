@@ -1,8 +1,8 @@
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.appReady.js';
 export * from '../bean/middlewareSystem.instance.js';
-import { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.js';
-import { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.js';
+import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.js';
+import type { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
@@ -35,7 +35,7 @@ declare module 'vona-module-a-instance' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanInstance } from '../bean/bean.instance.js';
+import type { BeanInstance } from '../bean/bean.instance.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -67,8 +67,8 @@ declare module 'vona-module-a-instance' {
 }
 /** broadcast: end */
 /** broadcast: begin */
-import { BroadcastReload } from '../bean/broadcast.reload.js';
-import { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
+import type { BroadcastReload } from '../bean/broadcast.reload.js';
+import type { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
 export interface IModuleBroadcast {
   reload: BroadcastReload;
   resetCache: BroadcastResetCache;
@@ -86,7 +86,7 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-a-instance' {}
 /** entity: end */
 /** entity: begin */
-import { EntityInstance } from '../entity/instance.js';
+import type { EntityInstance } from '../entity/instance.js';
 export interface IModuleEntity {
   instance: EntityInstance;
 }
@@ -116,7 +116,7 @@ declare module 'vona-module-a-instance' {
 }
 /** model: end */
 /** model: begin */
-import { ModelInstance } from '../model/instance.js';
+import type { ModelInstance } from '../model/instance.js';
 export interface IModuleModel {
   instance: ModelInstance;
 }
@@ -125,7 +125,7 @@ export interface IModuleModel {
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.version.js';
-import { IMetaOptionsIndex } from 'vona-module-a-index';
+import type { IMetaOptionsIndex } from 'vona-module-a-index';
 import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
@@ -152,7 +152,7 @@ declare module 'vona-module-a-instance' {
 }
 /** meta: end */
 /** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
+import type { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
 /** service: begin */
 export * from '../service/instance.js';
@@ -171,7 +171,7 @@ declare module 'vona-module-a-instance' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceInstance } from '../service/instance.js';
+import type { ServiceInstance } from '../service/instance.js';
 export interface IModuleService {
   instance: ServiceInstance;
 }
@@ -187,7 +187,7 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -201,7 +201,8 @@ export const locales = {
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

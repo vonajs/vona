@@ -1,5 +1,6 @@
 import { BeanBase } from 'vona';
-import { Api, Query, TypeOpenApiVersion, v } from 'vona-module-a-openapi';
+import type { TypeOpenApiVersion } from 'vona-module-a-openapi';
+import { Api, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { apiPath, Controller, Get } from 'vona-module-a-web';
 

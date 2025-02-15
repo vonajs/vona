@@ -1,4 +1,5 @@
-import { BeanSimple, IModuleMain } from 'vona';
+import type { IModuleMain } from 'vona';
+import { BeanSimple } from 'vona';
 import { onerror, type OnerrorOptions } from 'koa-onerror';
 import { __ThisModule__ } from './.metadata/this.js';
 

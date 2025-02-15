@@ -15,13 +15,14 @@ declare module 'vona-module-a-development' {
 }
 /** meta: end */
 /** meta election: begin */
-import { MetaElection } from '../bean/meta.election.js';
+import type { MetaElection } from '../bean/meta.election.js';
 /** meta election: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

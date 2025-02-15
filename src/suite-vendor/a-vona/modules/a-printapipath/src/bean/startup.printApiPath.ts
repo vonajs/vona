@@ -1,6 +1,7 @@
 import { BeanBase } from 'vona';
-import { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
-import { IStartupExecute, Startup } from 'vona-module-a-startup';
+import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
+import type { IStartupExecute } from 'vona-module-a-startup';
+import { Startup } from 'vona-module-a-startup';
 import TableClass from 'cli-table3';
 import chalk from 'chalk';
 

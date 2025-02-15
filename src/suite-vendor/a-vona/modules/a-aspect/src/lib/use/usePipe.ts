@@ -1,4 +1,4 @@
-import { IPipeRecordLocal } from '../../types/pipe.js';
+import type { IPipeRecordLocal } from '../../types/pipe.js';
 import { UseOnionBase } from './useOnionBase.js';
 
 export function UsePipe<T extends keyof IPipeRecordLocal>(

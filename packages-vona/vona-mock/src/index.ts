@@ -1,8 +1,9 @@
 import _Bundle from 'egg-mock/bootstrap.js';
-import { VonaApplication, VonaContext, cast } from 'vona';
-import { IModuleInfo } from '@cabloy/module-info';
+import type { VonaApplication, VonaContext } from 'vona';
+import { cast } from 'vona';
+import type { IModuleInfo } from '@cabloy/module-info';
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
-import { BaseMockApplication } from 'egg-mock';
+import type { BaseMockApplication } from 'egg-mock';
 
 type TypeMockCabloyApplication<T, C> = BaseMockApplication<T, C> & VonaApplication;
 export interface MockCabloyApplication extends TypeMockCabloyApplication<VonaApplication, VonaContext> {}

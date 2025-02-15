@@ -1,4 +1,4 @@
-import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;

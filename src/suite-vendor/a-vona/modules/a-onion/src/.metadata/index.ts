@@ -11,7 +11,7 @@ declare module 'vona-module-a-onion' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanOnion } from '../bean/bean.onion.js';
+import type { BeanOnion } from '../bean/bean.onion.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -27,7 +27,8 @@ declare module 'vona-module-a-web' {}
 declare module 'vona-module-a-onion' {}
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

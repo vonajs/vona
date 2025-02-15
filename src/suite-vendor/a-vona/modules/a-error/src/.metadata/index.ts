@@ -1,6 +1,6 @@
 /** filter: begin */
 export * from '../bean/filter.error.js';
-import { IFilterOptionsError } from '../bean/filter.error.js';
+import type { IFilterOptionsError } from '../bean/filter.error.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IFilterRecordGlobal {
@@ -31,7 +31,7 @@ declare module 'vona-module-a-error' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceErrorView } from '../service/errorView.js';
+import type { ServiceErrorView } from '../service/errorView.js';
 export interface IModuleService {
   errorView: ServiceErrorView;
 }
@@ -47,13 +47,14 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** main: begin */
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

@@ -1,7 +1,7 @@
 import { cast } from 'vona';
 import { BigNumber } from 'bignumber.js';
 import { BeanModelView } from './bean.model_view.js';
-import {
+import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
   IModelMethodOptionsGeneral,
@@ -9,7 +9,7 @@ import {
   IModelUpdateOptionsGeneral,
   TableIdentity,
 } from '../../types/index.js';
-import { Knex } from 'knex';
+import type { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */

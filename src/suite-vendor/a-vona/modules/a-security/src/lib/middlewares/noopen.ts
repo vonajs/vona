@@ -1,5 +1,5 @@
-import { Next, VonaContext } from 'vona';
-import { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
+import type { Next, VonaContext } from 'vona';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
 import { checkIfIgnore } from '../utils.js';
 
 // @see http://blogs.msdn.com/b/ieinternals/archive/2009/06/30/internet-explorer-custom-http-headers.aspx

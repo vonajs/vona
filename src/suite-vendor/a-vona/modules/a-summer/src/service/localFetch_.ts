@@ -1,7 +1,7 @@
 import { CacheBase } from '../common/cacheBase.js';
 import { cast } from 'vona';
-import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
-import {
+import type { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
+import type {
   IDecoratorSummerCacheOptions,
   ISummerCacheGet,
   ISummerCacheMGet,

@@ -15,7 +15,7 @@ declare module 'vona-module-a-broadcast' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceBroadcast } from '../service/broadcast.js';
+import type { ServiceBroadcast } from '../service/broadcast.js';
 export interface IModuleService {
   broadcast: ServiceBroadcast;
 }
@@ -33,7 +33,8 @@ declare module 'vona' {
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

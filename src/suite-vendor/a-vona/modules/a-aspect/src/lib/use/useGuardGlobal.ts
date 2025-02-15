@@ -1,5 +1,5 @@
-import { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
-import { IGuardRecordGlobal } from '../../types/guard.js';
+import type { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
+import type { IGuardRecordGlobal } from '../../types/guard.js';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 
 export function UseGuardGlobal<T extends keyof IGuardRecordGlobal>(

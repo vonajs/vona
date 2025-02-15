@@ -1,5 +1,5 @@
-import { VonaApplication } from 'vona';
-import { IRedisClientRecord } from 'vona-module-a-redis';
+import type { VonaApplication } from 'vona';
+import type { IRedisClientRecord } from 'vona-module-a-redis';
 
 export const config = (_app: VonaApplication) => {
   return {

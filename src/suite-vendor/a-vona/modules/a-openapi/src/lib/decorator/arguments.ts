@@ -1,4 +1,4 @@
-import { SchemaLike } from '../../types/decorator.js';
+import type { SchemaLike } from '../../types/decorator.js';
 import { createPipesArgumentDecorator } from './pipesArgument.js';
 
 export function Param(): ParameterDecorator;

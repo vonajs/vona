@@ -1,10 +1,11 @@
-import { BeanBase, deepExtend, VonaConfig } from 'vona';
+import type { VonaConfig } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import * as Boxen from 'boxen';
-import { IInstanceStartupQueueInfo } from '../entity/instance.js';
+import type { IInstanceStartupQueueInfo } from '../entity/instance.js';
 import { Service } from 'vona-module-a-web';
-import { IInstanceStartupOptions } from 'vona-module-a-startup';
+import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { isNil, sleep } from '@cabloy/utils';
 
 const boxenOptions: Boxen.Options = {

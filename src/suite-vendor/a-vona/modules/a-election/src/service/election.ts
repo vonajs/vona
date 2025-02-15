@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { IElectionElectOptions } from '../types/election.js';
+import type { IElectionElectOptions } from '../types/election.js';
 
 @Service()
 export class ServiceElection extends BeanBase {

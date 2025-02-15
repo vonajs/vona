@@ -22,8 +22,8 @@ declare module 'vona-module-a-aspect' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceAop } from '../service/aop.js';
-import { ServiceFilter } from '../service/filter.js';
+import type { ServiceAop } from '../service/aop.js';
+import type { ServiceFilter } from '../service/filter.js';
 export interface IModuleService {
   aop: ServiceAop;
   filter: ServiceFilter;
@@ -40,7 +40,8 @@ declare module 'vona' {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

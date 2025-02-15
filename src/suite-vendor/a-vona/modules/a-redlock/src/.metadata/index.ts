@@ -15,7 +15,7 @@ declare module 'vona-module-a-redlock' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceRedlock } from '../service/redlock.js';
+import type { ServiceRedlock } from '../service/redlock.js';
 export interface IModuleService {
   redlock: ServiceRedlock;
 }
@@ -31,10 +31,11 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

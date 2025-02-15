@@ -1,6 +1,7 @@
-import { appResource, BeanBase, Constructable, IBeanRecord, SymbolProxyDisable } from 'vona';
+import type { Constructable, IBeanRecord } from 'vona';
+import { appResource, BeanBase, SymbolProxyDisable } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { IDecoratorAopOptions } from '../types/aop.js';
+import type { IDecoratorAopOptions } from '../types/aop.js';
 
 @Service()
 export class ServiceAop extends BeanBase {

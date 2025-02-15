@@ -1,6 +1,7 @@
-import { BeanBase, FunctionAsync } from 'vona';
-import knex from 'knex';
-import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
+import type { FunctionAsync } from 'vona';
+import { BeanBase } from 'vona';
+import type knex from 'knex';
+import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 import { Service } from 'vona-module-a-web';
 
 @Service()

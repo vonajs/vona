@@ -31,7 +31,7 @@ declare module 'vona-module-a-queue' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceQueue } from '../service/queue.js';
+import type { ServiceQueue } from '../service/queue.js';
 export interface IModuleService {
   queue: ServiceQueue;
 }
@@ -47,13 +47,14 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

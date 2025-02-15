@@ -1,5 +1,6 @@
 import { replaceTemplate } from '@cabloy/word-utils';
-import { util, z, ZodIssueCode } from 'zod';
+import type { z } from 'zod';
+import { util, ZodIssueCode } from 'zod';
 
 export type LocaleAdapterFn = (text: string, ...args: any[]) => string;
 

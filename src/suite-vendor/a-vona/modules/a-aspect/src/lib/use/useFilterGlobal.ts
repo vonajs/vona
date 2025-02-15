@@ -1,5 +1,5 @@
-import { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
-import { IFilterRecordGlobal } from '../../types/filter.js';
+import type { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
+import type { IFilterRecordGlobal } from '../../types/filter.js';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 
 export function UseFilterGlobal<T extends keyof IFilterRecordGlobal>(

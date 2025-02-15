@@ -1,8 +1,10 @@
 import { isObject, isString } from '@cabloy/utils';
 import assert from 'node:assert';
 import path from 'node:path';
-import { BeanBase, compose, Next } from 'vona';
-import { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute, MiddlewareSystem } from 'vona-module-a-aspect';
+import type { Next } from 'vona';
+import { BeanBase, compose } from 'vona';
+import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import { MiddlewareSystem } from 'vona-module-a-aspect';
 import { LRU } from 'ylru';
 import { existsSync, mkdirSync } from 'node:fs';
 import range from 'koa-range';

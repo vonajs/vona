@@ -1,7 +1,7 @@
-import { OmitNever } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
-import { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
-import { IApiPathRecord } from 'vona-module-a-web';
+import type { OmitNever } from 'vona';
+import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IPipeRecordGlobal {}
 export interface IPipeRecordLocal {}

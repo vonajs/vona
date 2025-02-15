@@ -1,6 +1,6 @@
-import { Next, OmitNever } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
-import { ISocketPathRecord } from './socketConnection.js';
+import type { Next, OmitNever } from 'vona';
+import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { ISocketPathRecord } from './socketConnection.js';
 
 export interface ISocketPacketRecord {}
 

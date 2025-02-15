@@ -1,7 +1,7 @@
 import { cast, deepExtend } from 'vona';
-import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import { getTargetColumnName } from '../../common/utils.js';
-import {
+import type {
   EntityBase,
   IModelGetOptions,
   IModelMethodOptions,

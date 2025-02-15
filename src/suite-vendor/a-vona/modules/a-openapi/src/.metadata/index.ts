@@ -15,7 +15,7 @@ declare module 'vona-module-a-openapi' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceOpenapi } from '../service/openapi.js';
+import type { ServiceOpenapi } from '../service/openapi.js';
 export interface IModuleService {
   openapi: ServiceOpenapi;
 }
@@ -31,7 +31,7 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -45,7 +45,8 @@ export const locales = {
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

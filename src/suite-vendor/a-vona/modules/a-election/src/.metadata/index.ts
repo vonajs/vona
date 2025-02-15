@@ -15,7 +15,7 @@ declare module 'vona-module-a-election' {
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import { CacheRedisElection } from '../bean/cacheRedis.election.js';
+import type { CacheRedisElection } from '../bean/cacheRedis.election.js';
 export interface IModuleCacheRedis {
   election: CacheRedisElection;
 }
@@ -37,7 +37,7 @@ declare module 'vona-module-a-election' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceElection } from '../service/election.js';
+import type { ServiceElection } from '../service/election.js';
 export interface IModuleService {
   election: ServiceElection;
 }
@@ -52,7 +52,8 @@ declare module 'vona' {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

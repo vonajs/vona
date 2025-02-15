@@ -1,5 +1,5 @@
-import { ILocalInfos, OmitNever } from 'vona';
-import { ServiceOnion } from 'vona-module-a-onion';
+import type { ILocalInfos, OmitNever } from 'vona';
+import type { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IBroadcastEmitOptions {
   locale?: keyof ILocalInfos;

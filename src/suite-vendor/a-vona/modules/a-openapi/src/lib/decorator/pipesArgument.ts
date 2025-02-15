@@ -1,11 +1,13 @@
-import { appMetadata, MetadataKey } from 'vona';
+import type { MetadataKey } from 'vona';
+import { appMetadata } from 'vona';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
-import {
+import type {
   RouteHandlerArgumentMetaDecorator,
   RouteHandlerArgumentType,
   SchemaLike,
+  TypeExtractValue } from '../../types/decorator.js';
+import {
   SymbolRouteHandlersArgumentsMeta,
-  TypeExtractValue,
 } from '../../types/decorator.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {

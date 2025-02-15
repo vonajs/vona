@@ -1,4 +1,4 @@
-import { IModelMethodOptions, IModelUpdateOptions, TableIdentity } from '../../types/index.js';
+import type { IModelMethodOptions, IModelUpdateOptions, TableIdentity } from '../../types/index.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {

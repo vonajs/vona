@@ -1,6 +1,6 @@
-import { OmitNever } from 'vona';
-import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
-import { IRedisClientRecord } from 'vona-module-a-redis';
+import type { OmitNever } from 'vona';
+import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { IRedisClientRecord } from 'vona-module-a-redis';
 
 export interface ISummerCacheRecord {}
 

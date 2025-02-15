@@ -1,6 +1,6 @@
 import { checkIfIgnore } from '../utils.js';
-import { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
-import { Next, VonaContext } from 'vona';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
+import type { Next, VonaContext } from 'vona';
 
 export default (options: IMiddlewareSystemOptionsSecurities['xssProtection']) => {
   return async function xssProtection(ctx: VonaContext, next: Next) {

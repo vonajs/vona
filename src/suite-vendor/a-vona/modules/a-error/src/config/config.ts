@@ -1,6 +1,6 @@
-import { VonaApplication, VonaContext } from 'vona';
+import type { VonaApplication, VonaContext } from 'vona';
 import { accepts } from '../lib/utils.js';
-import { ServiceFilter } from 'vona-module-a-aspect';
+import type { ServiceFilter } from 'vona-module-a-aspect';
 
 export const config = (_app: VonaApplication) => {
   return {

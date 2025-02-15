@@ -1,7 +1,7 @@
 import { Bean } from 'vona-module-a-bean';
 import { BeanBase, SymbolProxyDisable } from 'vona';
 import { matchSelector } from '@cabloy/word-utils';
-import {
+import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionOptionsMeta,

@@ -1,6 +1,6 @@
-import { HttpStatus } from 'vona';
+import type { HttpStatus } from 'vona';
 import type { ISchemaObjectOptions } from 'vona-module-a-openapi';
-import { z } from 'zod';
+import type { z } from 'zod';
 
 export interface ValidatorOptions<T = any> extends ISchemaObjectOptions {
   disableErrorMessages: boolean;

@@ -1,5 +1,5 @@
-import { Next, VonaContext } from 'vona';
-import { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
+import type { Next, VonaContext } from 'vona';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
 import { checkIfIgnore } from '../utils.js';
 
 // status codes for redirects

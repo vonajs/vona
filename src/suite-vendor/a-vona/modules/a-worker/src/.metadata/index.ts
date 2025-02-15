@@ -11,7 +11,7 @@ declare module 'vona-module-a-worker' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanWorker } from '../bean/bean.worker.js';
+import type { BeanWorker } from '../bean/bean.worker.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -43,8 +43,8 @@ declare module 'vona-module-a-worker' {
 }
 /** broadcast: end */
 /** broadcast: begin */
-import { BroadcastExitAll } from '../bean/broadcast.exitAll.js';
-import { BroadcastReloadAll } from '../bean/broadcast.reloadAll.js';
+import type { BroadcastExitAll } from '../bean/broadcast.exitAll.js';
+import type { BroadcastReloadAll } from '../bean/broadcast.reloadAll.js';
 export interface IModuleBroadcast {
   exitAll: BroadcastExitAll;
   reloadAll: BroadcastReloadAll;
@@ -67,14 +67,14 @@ declare module 'vona-module-a-worker' {
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.js';
+import type { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.js';
 export interface IModuleCacheRedis {
   workerAlive: CacheRedisWorkerAlive;
 }
 /** cacheRedis: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
+import type { config } from '../config/config.js';
 /** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
@@ -83,7 +83,8 @@ export * from '../monkey.js';
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

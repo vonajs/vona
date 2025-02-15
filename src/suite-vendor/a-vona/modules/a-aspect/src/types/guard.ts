@@ -1,6 +1,6 @@
-import { Next, OmitNever } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
-import { IApiPathRecord } from 'vona-module-a-web';
+import type { Next, OmitNever } from 'vona';
+import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IGuardRecordGlobal {}
 export interface IGuardRecordLocal {}

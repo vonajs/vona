@@ -2,7 +2,7 @@ import moment from 'moment';
 import chalk from 'chalk';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { ServiceDatabaseClient } from 'vona-module-a-database';
+import type { ServiceDatabaseClient } from 'vona-module-a-database';
 
 const __separator = '-';
 const __timeFormat = `YYYYMMDD${__separator}HHmmss`;

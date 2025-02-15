@@ -1,6 +1,7 @@
-import { BeanBase, cast, compose, Next } from 'vona';
-import { IOnionSlice } from 'vona-module-a-onion';
-import {
+import type { Next } from 'vona';
+import { BeanBase, cast, compose } from 'vona';
+import type { IOnionSlice } from 'vona-module-a-onion';
+import type {
   IDecoratorEventListenerOptions,
   IEventExecute,
   IEventListenerRecord,

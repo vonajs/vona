@@ -1,4 +1,5 @@
-import { BeanSimple, IModuleMain } from 'vona';
+import type { IModuleMain } from 'vona';
+import { BeanSimple } from 'vona';
 import { errorsAdapter } from './lib/zod/errorsAdapter.js';
 
 export class Main extends BeanSimple implements IModuleMain {

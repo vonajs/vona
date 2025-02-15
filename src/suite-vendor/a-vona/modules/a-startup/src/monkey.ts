@@ -1,4 +1,5 @@
-import { BeanSimple, IMonkeyAppReady, IMonkeyAppStart } from 'vona';
+import type { IMonkeyAppReady, IMonkeyAppStart } from 'vona';
+import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppStart, IMonkeyAppReady {

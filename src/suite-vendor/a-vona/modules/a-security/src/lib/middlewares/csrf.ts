@@ -1,6 +1,6 @@
-import { Next, VonaContext } from 'vona';
+import type { Next, VonaContext } from 'vona';
 import typeis from 'type-is';
-import { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
 import { checkIfIgnore } from '../utils.js';
 
 export default (options: IMiddlewareSystemOptionsSecurities['csrf']) => {

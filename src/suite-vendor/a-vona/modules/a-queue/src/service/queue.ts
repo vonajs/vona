@@ -1,6 +1,6 @@
 import * as Bull from 'bullmq';
 import { BeanBase, deepExtend, instanceDesp, uuidv4 } from 'vona';
-import {
+import type {
   IDecoratorQueueOptions,
   IQueueCallbacks,
   IQueueExecute,

@@ -11,7 +11,7 @@ declare module 'vona-module-home-base' {
 }
 /** bean: end */
 /** bean: begin */
-import { BeanDebug } from '../bean/bean.debug.js';
+import type { BeanDebug } from '../bean/bean.debug.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -20,7 +20,8 @@ declare module 'vona' {
 }
 /** bean: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()

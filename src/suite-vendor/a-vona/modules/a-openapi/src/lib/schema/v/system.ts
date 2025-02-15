@@ -1,7 +1,7 @@
-import { Constructable } from 'vona';
+import type { Constructable } from 'vona';
 import { z } from 'zod';
 import { coerceWithNil } from '@cabloy/zod-query';
-import { ISchemaObjectOptions, SchemaLike } from '../../../types/decorator.js';
+import type { ISchemaObjectOptions, SchemaLike } from '../../../types/decorator.js';
 import { schema } from '../schema.js';
 import { makeSchemaLike } from '../makeSchemaLikes.js';
 import { isNil } from '@cabloy/utils';

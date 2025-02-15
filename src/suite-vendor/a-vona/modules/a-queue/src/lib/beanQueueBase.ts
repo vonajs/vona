@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { IQueuePushOptions, IQueueRecord } from '../types/queue.js';
+import type { IQueuePushOptions, IQueueRecord } from '../types/queue.js';
 
 export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT> {

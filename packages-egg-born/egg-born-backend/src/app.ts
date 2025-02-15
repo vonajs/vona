@@ -1,4 +1,5 @@
-import { VonaApplication, Bootstrap } from 'vona';
+import type { VonaApplication } from 'vona';
+import { Bootstrap } from 'vona';
 
 export default class AppBootHook {
   app: VonaApplication;

@@ -1,5 +1,5 @@
-import { OmitNever } from 'vona';
-import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { OmitNever } from 'vona';
+import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface ICacheMemRecord {}
 

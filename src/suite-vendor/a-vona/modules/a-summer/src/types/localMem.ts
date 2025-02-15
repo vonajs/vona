@@ -1,4 +1,4 @@
-import { ScopeModuleASummer } from '../.metadata/index.js';
+import type { ScopeModuleASummer } from '../.metadata/index.js';
 
 declare module 'vona-module-a-summer' {
   export interface ServiceLocalMem {

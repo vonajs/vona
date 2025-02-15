@@ -1,5 +1,5 @@
-import { ConfigInstanceBase, OmitNever } from 'vona';
-import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { ConfigInstanceBase, OmitNever } from 'vona';
+import type { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IStartupRecord {}
 

@@ -1,7 +1,7 @@
 import { Virtual } from 'vona-module-a-bean';
 import { deepExtend } from 'vona';
 import { CacheBase } from '../common/cacheBase.js';
-import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
+import type { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
 
 @Virtual()
 export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, DATA> {

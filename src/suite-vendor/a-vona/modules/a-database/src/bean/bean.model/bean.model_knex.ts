@@ -1,6 +1,6 @@
-import { Knex } from 'knex';
+import type { Knex } from 'knex';
 import { BeanModelUtils } from './bean.model_utils.js';
-import { IModelMethodOptionsGeneral } from '../../types/index.js';
+import type { IModelMethodOptionsGeneral } from '../../types/index.js';
 
 export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
   get schema(): Knex.SchemaBuilder {
