@@ -34,7 +34,9 @@ export class StartupPrintApiPath extends BeanBase implements IStartupExecute {
       table.push([output.title, output.path]);
     }
     //
+    // eslint-disable-next-line
     console.log(chalk.yellow('\n===== print api path ====='));
+    // eslint-disable-next-line
     console.log(table.toString());
   }
 }

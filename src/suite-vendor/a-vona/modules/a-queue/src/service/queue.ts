@@ -113,6 +113,7 @@ export class ServiceQueue extends BeanBase {
         const workerInner = _worker.worker as any;
         if (!workerInner.running) {
           _worker.worker.run().catch(error => {
+            // eslint-disable-next-line
             console.error(error);
           });
         }

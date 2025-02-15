@@ -114,6 +114,7 @@ export class ServiceStartup extends BeanBase {
     instanceName?: string,
     options?: IInstanceStartupOptions,
   ) {
+    // eslint-disable-next-line
     console.log(
       `----${startup.beanOptions?.options?.instance ? ' instance' : ''} startup: ${startup.name}, pid: ${process.pid}`,
     );

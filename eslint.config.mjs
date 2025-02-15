@@ -10,6 +10,7 @@ export default [
       '**/static/**',
       'coverage',
       'docker-compose',
+      'scripts',
     ],
   },
   {

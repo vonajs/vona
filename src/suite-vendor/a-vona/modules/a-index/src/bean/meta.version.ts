@@ -68,7 +68,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       }
     } catch (e: any) {
       // just log the error message
+      // eslint-disable-next-line
       console.log(chalk.red(e.message));
+      // eslint-disable-next-line
       if (e.sql) console.log(chalk.red(e.sql));
     }
   }

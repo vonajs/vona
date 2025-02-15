@@ -84,6 +84,7 @@ export function developmentWatchDirs(app: VonaApplication) {
     // ignores
     if (__pathesIgnore.some(item => info.includes(item))) return;
     // log
+    // eslint-disable-next-line
     console.log(`[development] reload worker because ${info} changed`);
     // tsc
     if (extname !== '.mts') {
