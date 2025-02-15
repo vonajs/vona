@@ -1,4 +1,5 @@
 export const rules = {
+  'eslint-comments/no-unlimited-disable': 'off',
   'prefer-promise-reject-errors': 'off',
   'no-console': 'warn',
   'no-debugger': 'warn',

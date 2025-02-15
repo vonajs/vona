@@ -7,7 +7,7 @@ describe('transaction.test.ts', () => {
   it('action:transaction:fail', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create table
-      await app.bean.model.createTable(tableName, function (table) {
+      await app.bean.model.createTable(tableName, table => {
         table.basicFields();
         table.string('name');
       });
@@ -42,7 +42,7 @@ describe('transaction.test.ts', () => {
   it('action:transaction:success', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create table
-      await app.bean.model.createTable(tableName, function (table) {
+      await app.bean.model.createTable(tableName, table => {
         table.basicFields();
         table.string('name');
       });

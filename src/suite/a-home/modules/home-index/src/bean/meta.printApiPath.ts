@@ -1,6 +1,6 @@
+import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
-import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
 
 @Meta()
 export class MetaPrintApiPath extends BeanBase implements IMetaPrintApiPathExecute {

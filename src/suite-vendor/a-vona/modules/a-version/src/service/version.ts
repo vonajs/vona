@@ -1,9 +1,7 @@
-import chalk from 'chalk';
-import { BeanBase, type ConfigInstanceBase } from 'vona';
+import type { ConfigInstanceBase } from 'vona';
+import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import type { EntityVersion } from '../entity/version.js';
 import type { EntityVersionInit } from '../entity/versionInit.js';
-import { Service } from 'vona-module-a-web';
-import { type IInstanceStartupOptions } from 'vona-module-a-startup';
 import type {
   IMetaVersionInit,
   IMetaVersionOptions,
@@ -11,6 +9,9 @@ import type {
   IMetaVersionTest,
   IMetaVersionUpdate,
 } from '../types/version.js';
+import chalk from 'chalk';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceVersion extends BeanBase {
@@ -67,7 +68,7 @@ export class ServiceVersion extends BeanBase {
       // confirm table aVersion exists
       const hasTableVersion = await this.bean.model.schema.hasTable('aVersion');
       if (!hasTableVersion) {
-        await this.bean.model.createTable('aVersion', function (table) {
+        await this.bean.model.createTable('aVersion', table => {
           table.basicFields({ deleted: false, iid: false });
           table.string('module', 50);
           table.integer('version');
@@ -78,7 +79,9 @@ export class ServiceVersion extends BeanBase {
     // check all modules
     const debug = this.app.bean.debug.get('version');
     for (const module of this.app.meta.modulesArray) {
-      if (debug.enabled) debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
+      if (debug.enabled) {
+        debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
+      }
       await this.__checkModule(module.info.relativeName, options);
     }
 
@@ -191,38 +194,35 @@ export class ServiceVersion extends BeanBase {
 
   async __updateModule2(options, module, version) {
     // perform action
-    try {
-      if (options.scene === 'update') {
-        // update
-        await this.bean.executor.newCtx(
-          async () => {
-            await this.__updateModuleTransaction(module, version);
-          },
-          {
-            transaction: module.name !== 'a-index',
-          },
-        );
-      } else {
-        // init
-        await this.bean.executor.newCtx(
-          async () => {
-            await this.__initModuleTransaction(module, version, options);
-          },
-          {
-            instanceName: options.instanceName,
-            transaction: true,
-          },
-        );
-      }
-    } catch (err) {
-      throw err;
+    if (options.scene === 'update') {
+      // update
+      await this.bean.executor.newCtx(
+        async () => {
+          await this.__updateModuleTransaction(module, version);
+        },
+        {
+          transaction: module.name !== 'a-index',
+        },
+      );
+    } else {
+      // init
+      await this.bean.executor.newCtx(
+        async () => {
+          await this.__initModuleTransaction(module, version, options);
+        },
+        {
+          instanceName: options.instanceName,
+          transaction: true,
+        },
+      );
     }
   }
 
   async __updateModuleTransaction(module, version) {
     // bean
     const beanVersion = this.__getBeanVersion<IMetaVersionUpdate>(module.info.relativeName, true);
-    if (!beanVersion.update) throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
+    if (!beanVersion.update)
+      throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
     // clear columns cache
     this.bean.model.columnsClearAll();
     // execute
@@ -276,7 +276,8 @@ export class ServiceVersion extends BeanBase {
   private __getBeanVersion<T>(moduleName: string, throwErrorIfEmpty: boolean): T {
     // bean
     const beanVersion = this.bean._getBean(`${moduleName}.meta.version` as any);
-    if (!beanVersion && throwErrorIfEmpty) throw new Error(`meta.version not exists for ${moduleName}`);
+    if (!beanVersion && throwErrorIfEmpty)
+      throw new Error(`meta.version not exists for ${moduleName}`);
     return beanVersion;
   }
 }

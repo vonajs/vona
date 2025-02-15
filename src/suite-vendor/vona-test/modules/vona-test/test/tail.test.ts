@@ -1,5 +1,5 @@
-import { app } from 'vona-mock';
 import { cast } from 'vona';
+import { app } from 'vona-mock';
 
 describe('tail.test.ts', () => {
   it('action:tail', async () => {
