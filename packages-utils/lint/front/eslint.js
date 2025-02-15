@@ -4,6 +4,7 @@ import parserTs from '@typescript-eslint/parser';
 import tseslint from 'typescript-eslint';
 import eslintVue from 'eslint-plugin-vue';
 import globals from 'globals';
+import json from '@eslint/json';
 import { rules } from '../common/rules.js';
 import { rulesVue } from '../common/rulesVue.js';
 
@@ -55,5 +56,15 @@ export default [
       },
     },
     rules: Object.assign({}, rules, rulesVue),
+  },
+  {
+    plugins: {
+      json,
+    },
+    files: ['**/*.json'],
+    language: 'json/json',
+    rules: {
+      'json/no-duplicate-keys': 'error',
+    },
   },
 ];

@@ -1,22 +1,24 @@
 {
   "name": "@cabloy/lint",
+  "type": "module",
   "version": "5.0.0",
   "description": "Node Style Guide for Cabloy.",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
   "files": [
     "api",
     "common",
     "front"
   ],
   "dependencies": {
+    "@antfu/eslint-config": "^4.2.1",
+    "@eslint/json": "^0.10.0",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@typescript-eslint/parser": "^8.24.0",
     "eslint-plugin-vue": "^9.32.0",
-    "globals":"^15.15.0",
-    "typescript-eslint":"^8.24.0",
+    "globals": "^15.15.0",
+    "typescript-eslint": "^8.24.0",
     "vue-eslint-parser": "^9.4.3"
   }
 }

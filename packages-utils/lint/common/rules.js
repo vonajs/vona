@@ -80,7 +80,8 @@ export const rules = {
   '@typescript-eslint/no-empty-object-type': 'off',
   '@typescript-eslint/no-unsafe-function-type': 'off',
   '@stylistic/max-len': ['error', {
-    code: 130, tabWidth: 2,
+    code: 130,
+    tabWidth: 2,
     ignoreComments: true,
     ignoreTrailingComments: true,
     ignoreUrls: true,
@@ -96,7 +97,9 @@ export const rules = {
     this: { before: true },
   } }],
   '@stylistic/indent': ['error', 2, {
-    SwitchCase: 1, VariableDeclarator: 'first', outerIIFEBody: 1,
+    SwitchCase: 1,
+    VariableDeclarator: 'first',
+    outerIIFEBody: 1,
     MemberExpression: 1,
     FunctionDeclaration: { body: 1, parameters: 1 },
     FunctionExpression: { body: 1, parameters: 1 },
