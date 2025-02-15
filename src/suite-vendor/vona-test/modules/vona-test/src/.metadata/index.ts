@@ -1,8 +1,76 @@
+/** locale: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+
+import type { TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
 /** aop: begin */
+import type { IDecoratorAopOptions } from 'vona-module-a-aspect';
+import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+
+import type { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
+import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+
+import type { IDecoratorEventOptions } from 'vona-module-a-event';
+import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+
+import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
+import type { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
+
+import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
+/** bean: end */
+/** bean: begin */
+import type { BeanTestCtx } from '../bean/bean.testCtx.js';
+/** broadcast: end */
+/** broadcast: begin */
+import type { BroadcastTest } from '../bean/broadcast.test.js';
+
+/** cacheMem: end */
+/** cacheMem: begin */
+import type { CacheMemTest } from '../bean/cacheMem.test.js';
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import type { CacheRedisTest } from '../bean/cacheRedis.test.js';
+
+/** event: end */
+/** event: begin */
+import type { EventHelloEcho } from '../bean/event.helloEcho.js';
+
+/** queue: end */
+/** queue: begin */
+import type { QueueTest } from '../bean/queue.test.js';
+/** summerCache: end */
+/** summerCache: begin */
+import type { SummerCacheTest } from '../bean/summerCache.test.js';
+
+import type { config } from '../config/config.js';
+
+/** service: end */
+/** service: begin */
+import type { ServiceTest } from '../service/test.js';
+import type { ServiceTestApp } from '../service/testApp.js';
+import type { ServiceTestClass } from '../service/testClass.js';
+import { BeanScopeBase } from 'vona';
+/** service: end */
+/** service: begin */
+
+import { Scope } from 'vona-module-a-bean';
+
+/** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+import 'vona';
+import 'vona';
+import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
 export * from '../bean/aop.regExp.js';
 export * from '../bean/aop.simple.js';
-
-import { type IDecoratorAopOptions } from 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   export interface IAopRecord {
     'vona-test:regExp': IDecoratorAopOptions;
@@ -23,8 +91,6 @@ declare module 'vona-module-vona-test' {
 /** aop: end */
 /** bean: begin */
 export * from '../bean/bean.testCtx.js';
-
-import 'vona';
 declare module 'vona' {}
 declare module 'vona-module-vona-test' {
   export interface BeanTestCtx {
@@ -32,10 +98,6 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanTestCtx } from '../bean/bean.testCtx.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     testCtx: BeanTestCtx;
@@ -44,8 +106,6 @@ declare module 'vona' {
 /** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.test.js';
-
-import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'vona-test:test': IDecoratorBroadcastOptions;
@@ -57,17 +117,12 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** broadcast: end */
-/** broadcast: begin */
-import type { BroadcastTest } from '../bean/broadcast.test.js';
 export interface IModuleBroadcast {
   test: BroadcastTest;
 }
 /** broadcast: end */
 /** cacheMem: begin */
 export * from '../bean/cacheMem.test.js';
-
-import { type IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   export interface ICacheMemRecord {
     'vona-test:test': IDecoratorCacheMemOptions;
@@ -79,17 +134,12 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** cacheMem: end */
-/** cacheMem: begin */
-import type { CacheMemTest } from '../bean/cacheMem.test.js';
 export interface IModuleCacheMem {
   test: CacheMemTest;
 }
 /** cacheMem: end */
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.test.js';
-
-import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'vona-test:test': IDecoratorCacheRedisOptions;
@@ -101,17 +151,12 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** cacheRedis: end */
-/** cacheRedis: begin */
-import type { CacheRedisTest } from '../bean/cacheRedis.test.js';
 export interface IModuleCacheRedis {
   test: CacheRedisTest;
 }
 /** cacheRedis: end */
 /** event: begin */
 export * from '../bean/event.helloEcho.js';
-
-import { type IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'vona-test:helloEcho': IDecoratorEventOptions;
@@ -123,17 +168,12 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** event: end */
-/** event: begin */
-import type { EventHelloEcho } from '../bean/event.helloEcho.js';
 export interface IModuleEvent {
   helloEcho: EventHelloEcho;
 }
 /** event: end */
 /** eventListener: begin */
 export * from '../bean/eventListener.helloEcho.js';
-
-import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventListenerRecord {
     'vona-test:helloEcho': IDecoratorEventListenerOptions;
@@ -148,8 +188,6 @@ declare module 'vona-module-vona-test' {
 /** eventListener: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
-
-import { type IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'vona-test:test': IDecoratorQueueOptions;
@@ -161,18 +199,13 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** queue: end */
-/** queue: begin */
-import type { QueueTest } from '../bean/queue.test.js';
 export interface IModuleQueue {
   test: QueueTest;
 }
+export * from '../bean/schedule.test2.js';
 /** queue: end */
 /** schedule: begin */
 export * from '../bean/schedule.test.js';
-export * from '../bean/schedule.test2.js';
-
-import { type IDecoratorScheduleOptions } from 'vona-module-a-schedule';
 declare module 'vona-module-a-schedule' {
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
@@ -193,8 +226,6 @@ declare module 'vona-module-vona-test' {
 /** schedule: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
-
-import { type IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 declare module 'vona-module-a-summer' {
   export interface ISummerCacheRecord {
     'vona-test:test': IDecoratorSummerCacheOptions;
@@ -206,18 +237,15 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** summerCache: end */
-/** summerCache: begin */
-import type { SummerCacheTest } from '../bean/summerCache.test.js';
 export interface IModuleSummerCache {
   test: SummerCacheTest;
 }
-/** summerCache: end */
-/** dto: begin */
-export * from '../dto/profile.js';
-export * from '../dto/user.js';
-
-import 'vona';
+/** controller: end */
+/** config: begin */
+export * from '../config/config.js';
+/** service: end */
+/** controller: begin */
+export * from '../controller/bean.js';
 declare module 'vona' {
   export interface IDtoRecord {
     'vona-test:profile': never;
@@ -225,13 +253,9 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-vona-test' {}
-/** dto: end */
-/** service: begin */
-export * from '../service/test.js';
-export * from '../service/testApp.js';
-export * from '../service/testClass.js';
-
-import 'vona';
+export * from '../controller/cacheMem.js';
+export * from '../controller/cacheRedis.js';
+export * from '../controller/onion.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'vona-test:test': never;
@@ -255,20 +279,11 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceTest } from '../service/test.js';
-import type { ServiceTestApp } from '../service/testApp.js';
-import type { ServiceTestClass } from '../service/testClass.js';
 export interface IModuleService {
   test: ServiceTest;
   testApp: ServiceTestApp;
   testClass: ServiceTestClass;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'vona-test.service.test': ServiceTest;
@@ -276,20 +291,20 @@ declare module 'vona' {
     'vona-test.service.testClass': ServiceTestClass;
   }
 }
-/** service: end */
-/** controller: begin */
-export * from '../controller/bean.js';
-export * from '../controller/cacheMem.js';
-export * from '../controller/cacheRedis.js';
-export * from '../controller/onion.js';
 export * from '../controller/passport.js';
 export * from '../controller/performAction.js';
 export * from '../controller/queue.js';
 export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
-
-import { type IDecoratorControllerOptions } from 'vona-module-a-web';
+/** summerCache: end */
+/** dto: begin */
+export * from '../dto/profile.js';
+export * from '../dto/user.js';
+/** dto: end */
+/** service: begin */
+export * from '../service/test.js';
+export * from '../service/testApp.js';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'vona-test:bean': IDecoratorControllerOptions;
@@ -384,23 +399,11 @@ declare module 'vona-module-a-web' {
     '/vona/test/transaction/success': '/vona/test/transaction/success';
   }
 }
-/** controller: end */
-/** config: begin */
-export * from '../config/config.js';
-import type { config } from '../config/config.js';
-/** config: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
+export * from '../service/testClass.js';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** locale: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleVonaTest extends BeanScopeBase {}
@@ -417,8 +420,6 @@ export interface ScopeModuleVonaTest {
   summerCache: IModuleSummerCache;
   service: IModuleService;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'vona-test': ScopeModuleVonaTest;

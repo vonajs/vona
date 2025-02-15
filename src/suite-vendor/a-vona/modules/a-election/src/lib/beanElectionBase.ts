@@ -1,6 +1,6 @@
 import type { FunctionAsync } from 'vona';
-import { BeanBase, SymbolModuleBelong } from 'vona';
 import type { IElectionElectOptions } from '../types/election.js';
+import { BeanBase, SymbolModuleBelong } from 'vona';
 
 export class BeanElectionBase extends BeanBase {
   protected __get__(prop: string) {

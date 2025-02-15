@@ -1,12 +1,12 @@
 import type { VonaConfig } from 'vona';
-import { BeanBase, deepExtend } from 'vona';
-import async from 'async';
-import chalk from 'chalk';
-import * as Boxen from 'boxen';
-import type { IInstanceStartupQueueInfo } from '../entity/instance.js';
-import { Service } from 'vona-module-a-web';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
+import type { IInstanceStartupQueueInfo } from '../entity/instance.js';
 import { isNil, sleep } from '@cabloy/utils';
+import async from 'async';
+import * as Boxen from 'boxen';
+import chalk from 'chalk';
+import { BeanBase, deepExtend } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 const boxenOptions: Boxen.Options = {
   padding: 1,
@@ -135,7 +135,7 @@ export class ServiceInstance extends BeanBase {
           ? 'https://cabloy.com/zh-cn/articles/multi-instance.html'
           : 'https://cabloy.com/articles/multi-instance.html';
       let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].js')}`;
-      message += '\n' + chalk.hex('#FF8800')(`{ instanceName: '${this.ctx.instanceName}', password: '', title: '' }`);
+      message += `\n${chalk.hex('#FF8800')(`{ instanceName: '${this.ctx.instanceName}', password: '', title: '' }`)}`;
       message += `\nMore info: ${chalk.cyan(urlInfo)}`;
       // eslint-disable-next-line
       console.log('\n' + Boxen.default(message, boxenOptions));

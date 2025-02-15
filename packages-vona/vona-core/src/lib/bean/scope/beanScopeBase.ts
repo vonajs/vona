@@ -1,10 +1,10 @@
-import { BeanScopeScene } from './beanScopeScene.js';
+import type { IModule } from '@cabloy/module-info';
+import { getOnionMetasMeta } from '@cabloy/module-info';
 import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
-import type { IModule } from '@cabloy/module-info';
+import { BeanScopeScene } from './beanScopeScene.js';
 import { BeanScopeUtil } from './beanScopeUtil.js';
-import { getOnionMetasMeta } from '@cabloy/module-info';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');

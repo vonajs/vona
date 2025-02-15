@@ -1,17 +1,17 @@
+import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
-import path from 'path';
-import { generateBeans } from './toolsMetadata/generateBeans.js';
-import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.js';
+import { generateBeans } from './toolsMetadata/generateBeans.js';
+import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
+import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
+import { generateMain, generateMonkey } from './toolsMetadata/generateMonkey.js';
+import { generateOnions } from './toolsMetadata/generateOnions.js';
+import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourcesMeta.js';
-import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
-import { generateScope } from './toolsMetadata/generateScope.js';
-import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
-import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
-import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -160,11 +160,11 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     let jsContent;
     if (fse.existsSync(jsFile)) {
       jsContent = (await fse.readFile(jsFile)).toString();
-      if (jsContent.indexOf(jsExport) > -1) return;
-      jsContent = jsExport + '\n' + jsContent;
+      if (jsContent.includes(jsExport)) return;
+      jsContent = `${jsExport}\n${jsContent}`;
       jsContent = jsContent.replace('export {};\n', '');
     } else {
-      jsContent = jsExport + '\n';
+      jsContent = `${jsExport}\n`;
     }
     await fse.writeFile(jsFile, jsContent);
   }

@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {},
-  "exclude": ["modules"],
   "references": [
     {
       "path": "modules/cabloy-test/tsconfig.build.json"
     }
-  ]
+  ],
+  "exclude": ["modules"]
 }

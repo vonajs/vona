@@ -15,7 +15,7 @@ services:
       - ./docker-compose/output/app/dist:/root/output/app/dist
       - ./docker-compose/output/app/cabloy:/root/cabloy
       - ./docker-compose/logs/app:/root/logs
-    command: ['./scripts/wait-for-it.sh', 'mysql:3306', 'redis:6379', '-s', '--', './scripts/app-init.sh']
+    command: [./scripts/wait-for-it.sh, 'mysql:3306', 'redis:6379', -s, --, ./scripts/app-init.sh]
 
   nginx:
     image: nginx:latest
@@ -49,15 +49,15 @@ services:
       - ./docker-compose/data/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'CDf#lV+q5I1RB2KR'
-      MYSQL_DATABASE: 'cabloy'
-      MYSQL_USER: 'web_user'
+      MYSQL_DATABASE: cabloy
+      MYSQL_USER: web_user
       MYSQL_PASSWORD: '!%{9mov.Tw3LmcYP'
     security_opt:
       - seccomp:unconfined
 
   redis:
     image: redis:latest
-    command: ['redis-server', '--appendonly', 'yes']
+    command: [redis-server, --appendonly, yes]
     restart: always
     ports:
       - '36379:6379'

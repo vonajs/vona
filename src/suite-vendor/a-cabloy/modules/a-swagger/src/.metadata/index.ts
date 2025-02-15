@@ -1,7 +1,18 @@
+/** config: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+
+import type { TypeModuleConfig } from 'vona';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { config } from '../config/config.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
-export * from '../bean/meta.printApiPath.js';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/meta.printApiPath.js';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-swagger:printApiPath': never;
@@ -13,11 +24,9 @@ declare module 'vona-module-a-swagger' {
     get scope(): ScopeModuleASwagger;
   }
 }
-/** meta: end */
-/** controller: begin */
-export * from '../controller/swagger.js';
-
-import { type IDecoratorControllerOptions } from 'vona-module-a-web';
+/** controller: end */
+/** config: begin */
+export * from '../config/config.js';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-swagger:swagger': IDecoratorControllerOptions;
@@ -37,15 +46,9 @@ declare module 'vona-module-a-web' {
     '//swagger/json': '//swagger/json';
   }
 }
-/** controller: end */
-/** config: begin */
-export * from '../config/config.js';
-import type { config } from '../config/config.js';
-/** config: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleConfig } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+/** meta: end */
+/** controller: begin */
+export * from '../controller/swagger.js';
 
 @Scope()
 export class ScopeModuleASwagger extends BeanScopeBase {}
@@ -54,8 +57,6 @@ export interface ScopeModuleASwagger {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-swagger': ScopeModuleASwagger;

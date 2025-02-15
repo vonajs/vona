@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-summer",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-summer",
   "vonaModule": {
@@ -13,7 +14,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "Layered Cache",
+  "author": "zhennann",
+  "keywords": [
+    "Cabloy Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -26,16 +31,11 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "Layered Cache",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
-  "keywords": [
-    "Cabloy Module"
-  ],
-  "author": "zhennann",
   "dependencies": {}
 }

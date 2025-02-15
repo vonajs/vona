@@ -3,37 +3,37 @@ import type { IModule } from '@cabloy/module-info';
 export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySystem;
 
 export interface IMonkeyApp {
-  moduleLoading(module: IModule): Promise<void>;
-  moduleLoaded(module: IModule): Promise<void>;
-  configLoaded(module: IModule, config: any): Promise<void>;
+  moduleLoading: (module: IModule) => Promise<void>;
+  moduleLoaded: (module: IModule) => Promise<void>;
+  configLoaded: (module: IModule, config: any) => Promise<void>;
 }
 
 export interface IModuleMain {
-  moduleLoading(): Promise<void>;
-  moduleLoaded(): Promise<void>;
-  configLoaded(config: any): Promise<void>;
+  moduleLoading: () => Promise<void>;
+  moduleLoaded: () => Promise<void>;
+  configLoaded: (config: any) => Promise<void>;
 }
 
 export interface IMonkeyModule {
-  moduleLoading(module: IModule): Promise<void>;
-  moduleLoaded(module: IModule): Promise<void>;
-  configLoaded(module: IModule, config: any): Promise<void>;
+  moduleLoading: (module: IModule) => Promise<void>;
+  moduleLoaded: (module: IModule) => Promise<void>;
+  configLoaded: (module: IModule, config: any) => Promise<void>;
 }
 
 export interface IMonkeySystem extends IMonkeyAppStart, IMonkeyAppReady, IMonkeyAppStarted, IMonkeyAppClosed {}
 
 export interface IMonkeyAppStart {
-  appStart(): Promise<void>;
+  appStart: () => Promise<void>;
 }
 
 export interface IMonkeyAppReady {
-  appReady(): Promise<void>;
+  appReady: () => Promise<void>;
 }
 
 export interface IMonkeyAppStarted {
-  appStarted(): Promise<void>;
+  appStarted: () => Promise<void>;
 }
 
 export interface IMonkeyAppClosed {
-  appClosed(): Promise<void>;
+  appClosed: () => Promise<void>;
 }

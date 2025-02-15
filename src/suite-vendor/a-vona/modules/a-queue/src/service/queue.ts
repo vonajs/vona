@@ -1,5 +1,3 @@
-import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import type {
   IDecoratorQueueOptions,
   IQueueCallbacks,
@@ -13,6 +11,8 @@ import type {
   IQueueWorks,
   TypeQueueJob,
 } from '../types/queue.js';
+import * as Bull from 'bullmq';
+import { BeanBase, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -88,7 +88,7 @@ export class ServiceQueue extends BeanBase {
         // redlock
         const info = job.data as IQueueJobContext<DATA>;
         const queueNameSub = info.options?.queueNameSub;
-        const _lockResource = `queue:${queueKey}${queueNameSub ? '#' + queueNameSub : ''}`;
+        const _lockResource = `queue:${queueKey}${queueNameSub ? `#${queueNameSub}` : ''}`;
         return await this.$scope.redlock.service.redlock.lock(
           _lockResource,
           async () => {
@@ -109,11 +109,10 @@ export class ServiceQueue extends BeanBase {
     });
 
     _worker.worker.on('error', err => {
-      if (err.message && err.message.indexOf('Missing lock for job') > -1) {
+      if (err.message && err.message.includes('Missing lock for job')) {
         const workerInner = _worker.worker as any;
         if (!workerInner.running) {
           _worker.worker.run().catch(error => {
-            // eslint-disable-next-line
             console.error(error);
           });
         }
@@ -265,7 +264,7 @@ export class ServiceQueue extends BeanBase {
     const endDate = repeat.endDate ? new Date(repeat.endDate).getTime() : '';
     const tz = repeat.tz || '';
     const pattern = repeat.pattern;
-    const suffix = (pattern ? pattern : String(repeat.every)) || '';
+    const suffix = (pattern || String(repeat.every)) || '';
     return `${jobName}:${endDate}:${tz}:${suffix}`;
   }
 

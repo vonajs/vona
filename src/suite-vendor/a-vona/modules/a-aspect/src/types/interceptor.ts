@@ -7,7 +7,7 @@ export interface IInterceptorRecordLocal {}
 export type IInterceptorRecord = IInterceptorRecordGlobal & IInterceptorRecordLocal;
 
 export interface IInterceptorExecute {
-  execute(options: IDecoratorInterceptorOptions, next: Next): Promise<any>;
+  execute: (options: IDecoratorInterceptorOptions, next: Next) => Promise<any>;
 }
 
 export interface IDecoratorInterceptorOptions {

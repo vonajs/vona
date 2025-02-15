@@ -1,17 +1,17 @@
 import type { VonaApplication, VonaContext } from '../../types/index.js';
-import { cast } from '../../types/index.js';
-import type { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
-import { __prepareInjectSelectorInfo } from '../decorator/index.js';
-import { appResource } from '../core/resource.js';
 import type { MetadataKey } from '../core/metadata.js';
+import type { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
-import { BeanBase } from './beanBase.js';
-import { BeanSimple } from './beanSimple.js';
+import { isNilOrEmptyString } from '@cabloy/utils';
+import { cast } from '../../types/index.js';
+import { appResource } from '../core/resource.js';
+import { __prepareInjectSelectorInfo } from '../decorator/index.js';
 import { isClass } from '../utils/isClass.js';
 import { compose } from '../utils/util.js';
-import { isNilOrEmptyString } from '@cabloy/utils';
-import { SymbolBeanFullName } from './beanBaseSimple.js';
 import { BeanAopBase } from './beanAopBase.js';
+import { BeanBase } from './beanBase.js';
+import { SymbolBeanFullName } from './beanBaseSimple.js';
+import { BeanSimple } from './beanSimple.js';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
 const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');

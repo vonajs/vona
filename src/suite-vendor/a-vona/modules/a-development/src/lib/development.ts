@@ -1,9 +1,9 @@
-import path from 'path';
-import fse from 'fs-extra';
+import type { VonaApplication } from 'vona';
+import path from 'node:path';
+import { ProcessHelper } from '@cabloy/process-helper';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
-import { ProcessHelper } from '@cabloy/process-helper';
-import type { VonaApplication } from 'vona';
+import fse from 'fs-extra';
 import { cast } from 'vona';
 
 const __pathesWatch = [
@@ -48,7 +48,7 @@ export function developmentWatchDirs(app: VonaApplication) {
     );
     // on ready
     const _watcher2 = cast(_watcher);
-    _watcher.once('ready', function () {
+    _watcher.once('ready', () => {
       _watcher2.__eb_ready = true;
       if (_watcher2.__eb_closing) {
         _watcher.close();

@@ -1,5 +1,5 @@
-import { BeanEventBase, Event } from 'vona-module-a-event';
 import type { IUserBase } from '../types/user.js';
+import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export type TypeEventSignoutData = IUserBase;
 

@@ -2,24 +2,24 @@
   "name": "egg-born-bin",
   "version": "5.0.7",
   "description": "egg-born-bin",
-  "main": "index.js",
-  "bin": {
-    "egg-born-bin": "bin/egg-born-bin.js"
-  },
+  "author": "zhennann",
+  "homepage": "https://github.com/zhennann/egg-born-bin#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhennann/egg-born-bin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhennann/egg-born-bin/issues"
   },
   "keywords": [
     "egg",
     "egg-born",
     "bin"
   ],
-  "author": "zhennann",
-  "bugs": {
-    "url": "https://github.com/zhennann/egg-born-bin/issues"
+  "main": "index.js",
+  "bin": {
+    "egg-born-bin": "bin/egg-born-bin.js"
   },
-  "homepage": "https://github.com/zhennann/egg-born-bin#readme",
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",

@@ -1,6 +1,7 @@
+import type { IOpenApiOptions } from 'vona-module-a-openapi';
 import { appMetadata } from 'vona';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 import { RequestMethod, SymbolRequestMappingHandler } from '../../types/request.js';
-import { type IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export interface RequestMappingMetadata {
   path?: RegExp | string;
@@ -14,7 +15,7 @@ const defaultMetadata = {
   options: undefined,
 };
 
-export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadata): MethodDecorator => {
+export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadata): MethodDecorator {
   const path = metadata.path || '';
   const method = metadata.method || RequestMethod.GET;
   const options = metadata.options;
@@ -27,13 +28,13 @@ export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadat
     }
     return descriptor;
   };
-};
+}
 
-const createMappingDecorator =
-  (method: RequestMethod) =>
-    (path?: RegExp | string, options?: IOpenApiOptions): MethodDecorator => {
-      return RequestMapping({ method, path, options });
-    };
+function createMappingDecorator(method: RequestMethod) {
+  return (path?: RegExp | string, options?: IOpenApiOptions): MethodDecorator => {
+    return RequestMapping({ method, path, options });
+  };
+}
 
 /**
  * Route handler (method) Decorator. Routes HTTP POST requests to the specified path.

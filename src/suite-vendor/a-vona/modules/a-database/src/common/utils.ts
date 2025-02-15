@@ -30,11 +30,11 @@ export function formatValueArray(value) {
 
 export function getTableOrTableAlias(table: string) {
   const _table = table.toString();
-  return _table.indexOf(' as ') > -1 ? _table.split(' as ')[1].trim() : _table;
+  return _table.includes(' as ') ? _table.split(' as ')[1].trim() : _table;
 }
 
 export function getTargetColumnName(column: string) {
-  if (column.indexOf(' as ') > -1) return column.split(' as ')[1].trim();
-  if (column.indexOf('.') > -1) return column.split('.')[1].trim();
+  if (column.includes(' as ')) return column.split(' as ')[1].trim();
+  if (column.includes('.')) return column.split('.')[1].trim();
   return column;
 }

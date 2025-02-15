@@ -1,13 +1,13 @@
 {
   "name": "vona-suite-a-home",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-home",
-  "type": "module",
+  "description": "",
+  "author": "zhennann",
   "files": [
     "dist"
   ],
-  "description": "",
-  "author": "zhennann",
   "dependencies": {
     "vona-module-home-base": "workspace:^",
     "vona-module-home-index": "workspace:^",

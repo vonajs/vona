@@ -1,7 +1,7 @@
-import Redlock from 'redlock';
 import type { FunctionAsync } from 'vona';
-import { BeanBase, instanceDesp } from 'vona';
 import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
+import Redlock from 'redlock';
+import { BeanBase, instanceDesp } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()

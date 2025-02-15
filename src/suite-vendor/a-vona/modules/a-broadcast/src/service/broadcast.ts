@@ -1,7 +1,7 @@
-import { Service } from 'vona-module-a-web';
+import type { Redis } from 'ioredis';
 import type { IBroadcastExecute, IBroadcastJobContext, IDecoratorBroadcastOptions } from '../types/broadcast.js';
 import { BeanBase } from 'vona';
-import type { Redis } from 'ioredis';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceBroadcast extends BeanBase {
@@ -16,7 +16,7 @@ export class ServiceBroadcast extends BeanBase {
     this.__channelName = `broadcast_${this.app.name}:`;
     this.__pub = app.bean.redis.get('broadcast').duplicate();
     this.__sub = app.bean.redis.get('broadcast').duplicate();
-    this.__sub.subscribe(this.__channelName, function () {});
+    this.__sub.subscribe(this.__channelName, () => {});
     this.__sub.on('message', (_channel, info) => {
       this._performTask(JSON.parse(info))
         .then(() => {

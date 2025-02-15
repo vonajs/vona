@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
+const querystring = require('node:querystring');
 const Bagpipe = require('bagpipe');
-const fs = require('fs');
-const querystring = require('querystring');
 const request = require('npm-request');
 const argv = require('./lib/parse_argv')('sync');
 
@@ -35,7 +35,8 @@ if (!names.length && fs.existsSync(packagePath)) {
     }
     dependencies = Object.keys(dependenciesMap);
     isPrivate = !!pkg.private;
-  } catch (err) {
+  }
+  catch (err) {
     console.log('Parse `package.json` file error: %s', err.message);
     process.exit(1);
   }
@@ -43,9 +44,11 @@ if (!names.length && fs.existsSync(packagePath)) {
 
 if (names && names.length) {
   syncByNames(names);
-} else if (packageName) {
+}
+else if (packageName) {
   syncByPackage(packageName);
-} else {
+}
+else {
   console.log(`Usage: $ cnpm sync [moduleName1 moduleName2 ...]
 Options:
   --publish        sync as publish
@@ -57,13 +60,13 @@ function showlog(registry, syncInfo, done) {
   request(
     {
       method: 'GET',
-      path: syncInfo.logurl + '?offset=' + syncInfo.lastLines,
+      path: `${syncInfo.logurl}?offset=${syncInfo.lastLines}`,
     },
     {
       registry,
       configFile: argv.userconfig,
     },
-    function (err, info) {
+    (err, info) => {
       if (err) {
         return done(err);
       }
@@ -73,9 +76,10 @@ function showlog(registry, syncInfo, done) {
       const log = info.log.trim();
       console.log(log);
       syncInfo.lastLines += log.split('\n').length;
-      if (log.indexOf('[done] Sync ' + syncInfo.name) >= 0) {
+      if (log.includes(`[done] Sync ${syncInfo.name}`)) {
         done();
-      } else {
+      }
+      else {
         setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
       }
     },
@@ -83,15 +87,15 @@ function showlog(registry, syncInfo, done) {
 }
 
 function sync(registry, name, callback) {
-  let url = name + '/sync?';
+  let url = `${name}/sync?`;
   url += querystring.stringify({
     // publish,
     // nodeps,
     sync_upstream: true,
   });
   console.log('sync %s, PUT %s/%s', name, registry, url);
-  const realRegistry =
-    registry === 'https://registry.npmmirror.com' ? 'https://registry-direct.npmmirror.com' : registry;
+  const realRegistry
+    = registry === 'https://registry.npmmirror.com' ? 'https://registry-direct.npmmirror.com' : registry;
   request(
     {
       method: 'PUT',
@@ -102,7 +106,7 @@ function sync(registry, name, callback) {
       registry: realRegistry,
       configFile: argv.userconfig,
     },
-    function (err, result, data, res) {
+    (err, result, data, res) => {
       if (err) {
         return callback(err);
       }
@@ -120,10 +124,10 @@ function sync(registry, name, callback) {
       const syncInfo = {
         name,
         lastLines: 0,
-        logurl: name + '/sync/log/' + result.logId,
+        logurl: `${name}/sync/log/${result.logId}`,
       };
       console.log('logurl: %s/sync/%s#logid=%s', registrywebs[registry], name, result.logId);
-      showlog(registry, syncInfo, function (err) {
+      showlog(registry, syncInfo, (err) => {
         if (err) {
           return callback(err);
         }
@@ -143,16 +147,18 @@ function syncByNames(names) {
   console.log('Start sync %j.', names);
   const fail = {};
   const success = {};
-  registrys.forEach(function (registry) {
-    names.forEach(function (name) {
-      queue.push(sync, registry, name, function (err, data) {
+  registrys.forEach((registry) => {
+    names.forEach((name) => {
+      queue.push(sync, registry, name, (err, data) => {
         remain--;
         if (err) {
           console.error(err.message);
           fail[name] = true;
-        } else if (!data.ok) {
+        }
+        else if (!data.ok) {
           fail[name] = true;
-        } else {
+        }
+        else {
           success[name] = true;
         }
         if (!remain) {

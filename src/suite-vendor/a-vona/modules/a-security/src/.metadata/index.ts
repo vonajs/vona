@@ -1,9 +1,25 @@
+/** bean: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+/** bean: end */
+/** bean: begin */
+import type { BeanSecurity } from '../bean/bean.security.js';
+/** middlewareSystem: end */
+/** bean: begin */
+import type { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
+
+import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/bean.security.js';
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.cors.js';
-export * from '../bean/middlewareSystem.securities.js';
-import type { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
-import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
-import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-security:cors': IMiddlewareSystemOptionsCors;
@@ -21,11 +37,7 @@ declare module 'vona-module-a-security' {
     get scope(): ScopeModuleASecurity;
   }
 }
-/** middlewareSystem: end */
-/** bean: begin */
-export * from '../bean/bean.security.js';
-
-import 'vona';
+export * from '../bean/middlewareSystem.securities.js';
 declare module 'vona' {}
 declare module 'vona-module-a-security' {
   export interface BeanSecurity {
@@ -33,20 +45,11 @@ declare module 'vona-module-a-security' {
     get scope(): ScopeModuleASecurity;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanSecurity } from '../bean/bean.security.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     security: BeanSecurity;
   }
 }
-/** bean: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleASecurity extends BeanScopeBase {}
@@ -55,7 +58,6 @@ export interface ScopeModuleASecurity {
   util: BeanScopeUtil;
 }
 
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-security': ScopeModuleASecurity;

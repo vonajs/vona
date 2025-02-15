@@ -3,15 +3,15 @@ const toStr = Object.prototype.toString;
 const defineProperty = Object.defineProperty;
 const gOPD = Object.getOwnPropertyDescriptor;
 
-const isArray = function isArray(arr) {
+function isArray(arr) {
   if (typeof Array.isArray === 'function') {
     return Array.isArray(arr);
   }
 
   return toStr.call(arr) === '[object Array]';
-};
+}
 
-const isPlainObject = function isPlainObject(obj) {
+function isPlainObject(obj) {
   if (!obj || toStr.call(obj) !== '[object Object]') {
     return false;
   }
@@ -31,10 +31,10 @@ const isPlainObject = function isPlainObject(obj) {
   }
 
   return typeof key === 'undefined' || hasOwn.call(obj, key);
-};
+}
 
 // If name is '__proto__', and Object.defineProperty is available, define __proto__ as an own property on target
-const setProperty = function setProperty(target, options) {
+function setProperty(target, options) {
   if (defineProperty && options.name === '__proto__') {
     defineProperty(target, options.name, {
       enumerable: true,
@@ -45,10 +45,10 @@ const setProperty = function setProperty(target, options) {
   } else {
     target[options.name] = options.newValue;
   }
-};
+}
 
 // Return undefined instead of __proto__ if '__proto__' is not an own property
-const getProperty = function getProperty(obj, name) {
+function getProperty(obj, name) {
   if (name === '__proto__') {
     if (!hasOwn.call(obj, name)) {
       return void 0;
@@ -59,7 +59,7 @@ const getProperty = function getProperty(obj, name) {
   }
 
   return obj[name];
-};
+}
 
 export function extend(deep: boolean, ...args);
 export function extend(...args) {

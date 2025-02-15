@@ -1,5 +1,5 @@
-import { BeanBase, deepExtend } from 'vona';
 import type { IBroadcastEmitOptions, IBroadcastJobContext } from '../types/broadcast.js';
+import { BeanBase, deepExtend } from 'vona';
 
 export class BeanBroadcastBase<DATA = unknown> extends BeanBase {
   emit(data?: DATA, options?: IBroadcastEmitOptions) {

@@ -4,6 +4,6 @@ export interface IInstanceConfig {
   getInstanceName?: (ctx: VonaContext) => string | undefined | null;
 }
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {} as IInstanceConfig;
-};
+}

@@ -1,11 +1,18 @@
 {
   "name": "@cabloy/module-info",
+  "type": "module",
   "version": "1.2.10",
   "description": "cabloy module-info",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
+  "author": "zhennann",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -19,8 +26,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
   ],
   "scripts": {
     "lint": "eslint .",
@@ -28,13 +35,6 @@
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
-  "keywords": [
-    "egg",
-    "egg-born",
-    "framework",
-    "cabloy"
-  ],
-  "author": "zhennann",
   "dependencies": {
     "stack-utils": "^2.0.6"
   },

@@ -1,6 +1,6 @@
-import { Bean } from 'vona-module-a-bean';
-import { BeanBase, cast, uuidv4 } from 'vona';
 import { isNil } from '@cabloy/utils';
+import { BeanBase, cast, uuidv4 } from 'vona';
+import { Bean } from 'vona-module-a-bean';
 
 const SymbolWorkerId = Symbol('SymbolWorkerId');
 

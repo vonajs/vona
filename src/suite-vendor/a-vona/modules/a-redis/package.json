@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-redis",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-redis",
   "vonaModule": {
@@ -8,7 +9,11 @@
       "ioredis": true
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -21,11 +26,6 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
     "dist",
     "static"

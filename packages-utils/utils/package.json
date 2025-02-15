@@ -1,11 +1,18 @@
 {
   "name": "@cabloy/utils",
+  "type": "module",
   "version": "1.0.3",
   "description": "cabloy utils",
   "publishConfig": {
     "access": "public"
   },
-  "type":"module",
+  "author": "zhennann",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -19,17 +26,10 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
   ],
   "scripts": {
     "lint": "eslint ."
-  },
-  "keywords": [
-    "egg",
-    "egg-born",
-    "framework",
-    "cabloy"
-  ],
-  "author": "zhennann"
+  }
 }

@@ -1,6 +1,6 @@
+import type { IFilterComposeData, IFilterJson } from '../types/filter.js';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import type { IFilterComposeData, IFilterJson } from '../types/filter.js';
 
 @Service()
 export class ServiceFilter extends BeanBase {

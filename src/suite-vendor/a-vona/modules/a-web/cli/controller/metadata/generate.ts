@@ -16,13 +16,13 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       if (!apiPath.includes(':')) {
         contentPaths[method].push(`'${apiPath}': '${apiPath}'`);
       } else {
-        const apiPath1 = apiPath.replace(/(:[^\/]+)/g, (_, _part) => {
+        const apiPath1 = apiPath.replace(/(:[^/]+)/g, (_, _part) => {
           return ':_string_';
         });
-        const apiPath2 = apiPath.replace(/(\/:[^\/]+)/g, (_, part) => {
+        const apiPath2 = apiPath.replace(/(\/:[^/]+)/g, (_, part) => {
           return `:_${part.substring(2)}_`;
         });
-        const apiPath3 = apiPath.replace(/(:[^\/]+)/g, (_, _part) => {
+        const apiPath3 = apiPath.replace(/(:[^/]+)/g, (_, _part) => {
           return '${string}';
         });
         contentPaths[method].push(`'${apiPath1}': '${apiPath2}'`);
@@ -48,9 +48,9 @@ declare module 'vona-module-a-web' {
 }
 
 function __parseControllerPath(fileContent: string): string | false {
-  let matched = fileContent.match(/@Controller\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*?export class/);
+  let matched = fileContent.match(/@Controller\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
   if (!matched) {
-    matched = fileContent.match(/@Controller\(([^\)]*)\)/);
+    matched = fileContent.match(/@Controller\(([^)]*)\)/);
   }
   if (!matched) return false;
   const controllerPath = matched[1];
@@ -63,7 +63,7 @@ function __parseActionPaths(fileContent: string): [string, string][] {
   const matches = fileContent.match(/(@Get|@Post|@Delete|@Put|@Patch)\([\s\S]*?\)/g);
   if (!matches) return [];
   for (const match of matches) {
-    const matches2 = match.match(/@([^\(]*)\(([\s\S]*?)\)/);
+    const matches2 = match.match(/@([^(]*)\(([\s\S]*?)\)/);
     if (!matches2) throw new Error('parse action path error');
     let actionPath = matches2[2];
     if (actionPath !== '' && !actionPath.startsWith("'")) continue; // exclude regexp
@@ -91,7 +91,7 @@ function __combineApiPath(
   if (apiPath.startsWith('/_api_')) {
     apiPath = apiPath.substring('/_api_'.length);
   } else {
-    apiPath = '/' + apiPath;
+    apiPath = `/${apiPath}`;
   }
   return apiPath;
 }

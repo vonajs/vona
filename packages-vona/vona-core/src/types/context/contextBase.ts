@@ -15,15 +15,15 @@ export interface ContextBase {
   set dbLevel(value: number | undefined);
   get ctxCaller(): VonaContext;
   set ctxCaller(value: VonaContext);
-  tail(cb);
-  tailDone(): Promise<any>;
+  tail: (cb) => any;
+  tailDone: () => Promise<any>;
   get tailCallbacks();
-  getPayload(options?): Promise<any>;
-  getController(): Constructable | undefined;
-  getControllerPrototype(): object | undefined;
-  getControllerBeanFullName(): string | undefined;
-  getHandler(): Function | undefined;
-  getHandlerName(): MetadataKey | undefined;
+  getPayload: (options?) => Promise<any>;
+  getController: () => Constructable | undefined;
+  getControllerPrototype: () => object | undefined;
+  getControllerBeanFullName: () => string | undefined;
+  getHandler: () => Function | undefined;
+  getHandlerName: () => MetadataKey | undefined;
   get onionsDynamic(): any | undefined;
   set onionsDynamic(value: any | undefined);
 }

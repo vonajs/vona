@@ -1,18 +1,18 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const program = require('commander');
 const config = require('./config');
 
 let argv = null;
 
-module.exports = cmd => {
+module.exports = (cmd) => {
   if (!argv) {
     argv = program
       .option('-v, --version', 'show full versions')
-      .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
-      .option('-w, --registryweb [registryweb]', 'web url, default is ' + config.cnpmHost)
-      .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
-      .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
-      .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
+      .option('-r, --registry [registry]', `registry url, default is ${config.cnpmRegistry}`)
+      .option('-w, --registryweb [registryweb]', `web url, default is ${config.cnpmHost}`)
+      .option('--disturl [disturl]', `dist url for node-gyp, default is ${config.disturl}`)
+      .option('-c, --cache [cache]', `cache folder, default is ${config.cache}`)
+      .option('-u, --userconfig [userconfig]', `userconfig file, default is ${config.userconfig}`)
       .option('-y, --yes', 'yes all confirm')
       .option('--ignore-custom-config', 'ignore custom .cnpmrc')
       .option('--proxy [proxy]', 'set a http proxy, no default');
@@ -20,7 +20,8 @@ module.exports = cmd => {
 
   if (cmd === 'doc') {
     argv.option('-g, --git', '[doc options] open git url');
-  } else if (cmd === 'sync') {
+  }
+  else if (cmd === 'sync') {
     argv
       .option('--sync-publish', '[sync options] sync as publish')
       .option('--no-deps', '[sync options] do not sync dependencies and devDependencies');
@@ -29,7 +30,7 @@ module.exports = cmd => {
   // commander's bug, fix here
   // https://github.com/visionmedia/commander.js/pull/189
   let cacheInfo;
-  argv.on('cache', function (cache) {
+  argv.on('cache', (cache) => {
     if (typeof cache === 'string') {
       cacheInfo = cache;
       return;

@@ -1,7 +1,7 @@
 import type { MetadataKey } from 'vona';
-import { appMetadata, registerMappedClassMetadataKey } from 'vona';
 import type { z } from 'zod';
 import type { SchemaLike } from '../../types/decorator.js';
+import { appMetadata, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../../types/decorator.js';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
 

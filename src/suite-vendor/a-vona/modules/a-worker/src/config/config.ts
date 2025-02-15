@@ -1,6 +1,6 @@
 import type { VonaApplication } from 'vona';
 
-export const config = (app: VonaApplication) => {
+export function config(app: VonaApplication) {
   return {
     worker: {
       alive: {
@@ -9,4 +9,4 @@ export const config = (app: VonaApplication) => {
       },
     },
   };
-};
+}

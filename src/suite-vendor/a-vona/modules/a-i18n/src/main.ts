@@ -1,7 +1,7 @@
 import type { IModuleMain, VonaContext } from 'vona';
+import type { I18nConfig } from './config/config.js';
 import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.js';
-import type { I18nConfig } from './config/config.js';
 
 const SymbolLocale = Symbol('SymbolLocale');
 const SymbolLocaleOrigin = Symbol('SymbolLocaleOrigin');
@@ -107,7 +107,7 @@ function formatLocale(locale) {
 
 function parseTokenSafe(token?: string) {
   if (!token) return '';
-  return token.replace(/[\\\.*#%'"`;, ]/g, '');
+  return token.replace(/[\\.*#%'"`;, ]/g, '');
 }
 
 function updateCookie(ctx, locale, cookieField, cookieMaxAge, cookieDomain) {

@@ -10,7 +10,7 @@ export interface I18nConfig {
   cookieDomain?: string;
 }
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {
     i18n: {
       defaultLocale: 'en-us',
@@ -21,4 +21,4 @@ export const config = (_app: VonaApplication) => {
       cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
     } as I18nConfig,
   };
-};
+}

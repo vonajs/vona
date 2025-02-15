@@ -4,7 +4,7 @@ import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-mo
 export interface IMiddlewareSystemRecord {}
 
 export interface IMiddlewareSystemExecute {
-  execute(options: IDecoratorMiddlewareSystemOptions, next: Next): Promise<any>;
+  execute: (options: IDecoratorMiddlewareSystemOptions, next: Next) => Promise<any>;
 }
 
 export interface IDecoratorMiddlewareSystemOptions

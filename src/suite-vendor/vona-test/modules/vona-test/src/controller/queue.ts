@@ -1,7 +1,7 @@
-import { BeanBase } from 'vona';
 import assert from 'node:assert';
-import { Controller, Post } from 'vona-module-a-web';
+import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
+import { Controller, Post } from 'vona-module-a-web';
 
 @Controller({ path: 'queue', meta: { mode: 'unittest' } })
 @Api.exclude()

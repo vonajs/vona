@@ -1,8 +1,23 @@
+/** service: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+/** service: end */
 /** service: begin */
-export * from '../service/aop.js';
-export * from '../service/filter.js';
+import type { ServiceAop } from '../service/aop.js';
+import type { ServiceFilter } from '../service/filter.js';
+/** service: end */
+/** service: begin */
+
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** service: begin */
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../service/aop.js';
+export * from '../service/filter.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-aspect:aop': never;
@@ -20,29 +35,16 @@ declare module 'vona-module-a-aspect' {
     get scope(): ScopeModuleAAspect;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceAop } from '../service/aop.js';
-import type { ServiceFilter } from '../service/filter.js';
 export interface IModuleService {
   aop: ServiceAop;
   filter: ServiceFilter;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-aspect.service.aop': ServiceAop;
     'a-aspect.service.filter': ServiceFilter;
   }
 }
-/** service: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAAspect extends BeanScopeBase {}
@@ -51,8 +53,6 @@ export interface ScopeModuleAAspect {
   util: BeanScopeUtil;
   service: IModuleService;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-aspect': ScopeModuleAAspect;

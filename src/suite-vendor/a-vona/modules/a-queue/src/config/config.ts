@@ -1,7 +1,7 @@
 import type * as Bull from 'bullmq';
 import type { VonaApplication } from 'vona';
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {
     worker: {
       lockDuration: 30 * 1000,
@@ -9,4 +9,4 @@ export const config = (_app: VonaApplication) => {
       stalledInterval: 10 * 1000,
     } as Bull.WorkerOptions,
   };
-};
+}

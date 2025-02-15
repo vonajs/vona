@@ -6,7 +6,7 @@ export interface ISocketPathRecord {}
 export interface ISocketConnectionRecord {}
 
 export interface ISocketConnectionExecute {
-  execute(options: IDecoratorSocketConnectionOptions, next: Next): Promise<any>;
+  execute: (options: IDecoratorSocketConnectionOptions, next: Next) => Promise<any>;
 }
 
 export interface IDecoratorSocketConnectionOptions

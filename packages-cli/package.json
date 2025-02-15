@@ -1,8 +1,8 @@
 {
   "name": "vona-cli",
   "title": "zova cli",
-  "private": true,
   "type": "module",
+  "private": true,
   "description": "vona cli",
   "author": "zhennann",
   "license": "MIT",

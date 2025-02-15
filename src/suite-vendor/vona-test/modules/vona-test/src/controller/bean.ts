@@ -1,9 +1,9 @@
-import { BeanBase, cast } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
 import assert from 'node:assert';
-import { ServiceTest } from '../service/test.js';
-import { Controller, Get } from 'vona-module-a-web';
+import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
+import { Controller, Get } from 'vona-module-a-web';
+import { __ThisModule__ } from '../.metadata/this.js';
+import { ServiceTest } from '../service/test.js';
 
 @Controller({ path: 'bean', meta: { mode: 'unittest' } })
 @Api.exclude()

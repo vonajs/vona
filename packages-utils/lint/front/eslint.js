@@ -1,10 +1,10 @@
+import json from '@eslint/json';
 import stylistic from '@stylistic/eslint-plugin';
-import vueParser from 'vue-eslint-parser';
 import parserTs from '@typescript-eslint/parser';
-import tseslint from 'typescript-eslint';
 import eslintVue from 'eslint-plugin-vue';
 import globals from 'globals';
-import json from '@eslint/json';
+import tseslint from 'typescript-eslint';
+import vueParser from 'vue-eslint-parser';
 import { rules } from '../common/rules.js';
 import { rulesVue } from '../common/rulesVue.js';
 

@@ -1,6 +1,6 @@
 import type { FunctionAsync } from 'vona';
-import { Meta } from 'vona-module-a-meta';
 import type { IRedlockLockIsolateOptions } from 'vona-module-a-redlock';
+import { Meta } from 'vona-module-a-meta';
 import { BeanRedlockBase } from 'vona-module-a-redlock';
 
 export interface MetaRedlock {
@@ -10,11 +10,11 @@ export interface MetaRedlock {
   //   fn: FunctionAsync<RESULT>,
   //   options?: IRedlockLockIsolateOptions,
   // ): Promise<RESULT>;
-  lockIsolate<RESULT, KEY extends string>(
+  lockIsolate: <RESULT, KEY extends string>(
     resource: `registerInstance.${KEY}`,
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockIsolateOptions,
-  ): Promise<RESULT>;
+  ) => Promise<RESULT>;
 }
 
 @Meta()

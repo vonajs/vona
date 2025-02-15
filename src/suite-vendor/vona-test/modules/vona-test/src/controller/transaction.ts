@@ -9,7 +9,7 @@ const tableName = '__tempTransaction';
 export class ControllerTransaction extends BeanBase {
   @Post('fail')
   fail(@Body() item: object) {
-    return this.app.bean.model.update(tableName + 'error', item);
+    return this.app.bean.model.update(`${tableName}error`, item);
   }
 
   @Post('success')

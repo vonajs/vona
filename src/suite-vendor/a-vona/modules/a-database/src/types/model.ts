@@ -10,7 +10,7 @@ export type IModelSelectParamsJoinType =
   | 'rightOuterJoin'
   | 'fullOuterJoin'
   | 'crossJoin';
-export type IModelSelectParamsJoinOnMap = { [key: string]: string | number | boolean | Knex.Raw<any> };
+export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
 export type IModelSelectParamsJoin = [
   IModelSelectParamsJoinType,
   Knex.TableDescriptor,

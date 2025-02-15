@@ -1,9 +1,9 @@
-import { Bean } from 'vona-module-a-bean';
 import type { FunctionAsync } from 'vona';
-import { BeanBase } from 'vona';
-import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
-import { performActionInner } from '../lib/performAction.js';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
+import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
+import { BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { performActionInner } from '../lib/performAction.js';
 import { delegateProperties } from '../lib/utils.js';
 
 @Bean()
@@ -16,7 +16,10 @@ export class BeanExecutor extends BeanBase {
     // T,
     METHOD extends keyof IApiPathRecordMethodMap,
     PATHKEY extends keyof IApiPathRecordMethodMap[METHOD],
-  >(method: METHOD, path: IApiPathRecordMethodMap[METHOD][PATHKEY], options?: IPerformActionOptions): Promise<any> {
+  >(method: METHOD,
+    path: IApiPathRecordMethodMap[METHOD][PATHKEY],
+    options?: IPerformActionOptions,
+  ): Promise<any> {
     return await performActionInner(
       Object.assign({}, options, {
         ctxCaller: this.ctx,

@@ -1,6 +1,4 @@
-import { cast, deepExtend } from 'vona';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-import { getTargetColumnName } from '../../common/utils.js';
 import type {
   EntityBase,
   IModelGetOptions,
@@ -9,6 +7,8 @@ import type {
   IModelUpdateOptions,
   TableIdentity,
 } from '../../types/index.js';
+import { cast, deepExtend } from 'vona';
+import { getTargetColumnName } from '../../common/utils.js';
 import { BeanModel } from '../bean.model.js';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');

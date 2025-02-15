@@ -1,5 +1,5 @@
 import type { VonaApplication } from 'vona';
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {};
-};
+}

@@ -1,8 +1,8 @@
 import type { Next, VonaContext } from 'vona';
-import { BeanBase } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
-import { MiddlewareSystem } from 'vona-module-a-aspect';
 import koaCors from '@koa/cors';
+import { BeanBase } from 'vona';
+import { MiddlewareSystem } from 'vona-module-a-aspect';
 
 export interface IMiddlewareSystemOptionsCors extends IDecoratorMiddlewareSystemOptions {
   whiteList: string | string[];

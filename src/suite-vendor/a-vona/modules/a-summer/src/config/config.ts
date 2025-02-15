@@ -1,6 +1,6 @@
 import type { VonaApplication } from 'vona';
-import type { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
+import type { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
 
 export const configRedis = {
   mode: 'redis', // only redis
@@ -23,7 +23,7 @@ export const configAll = {
 
 export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {
     summer: {
       enable: true,
@@ -40,4 +40,4 @@ export const config = (_app: VonaApplication) => {
       },
     },
   };
-};
+}

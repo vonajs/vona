@@ -1,9 +1,10 @@
-import { BeanBroadcastBase, Broadcast, type IBroadcastExecute } from 'vona-module-a-broadcast';
+import type { IBroadcastExecute } from 'vona-module-a-broadcast';
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export type TypeBroadcastColumnsClearJobData = {
+export interface TypeBroadcastColumnsClearJobData {
   mode?: 'all';
   tableName?: string;
-};
+}
 
 @Broadcast({ instance: false })
 export class BroadcastColumnsClear

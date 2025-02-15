@@ -1,7 +1,15 @@
+/** middlewareSystem: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
 /** middlewareSystem: begin */
-export * from '../bean/middlewareSystem.static.js';
 import type { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 import 'vona';
+
+import 'vona';
+
+export * from '../bean/middlewareSystem.static.js';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-static:static': IMiddlewareSystemOptionsStatic;
@@ -13,11 +21,6 @@ declare module 'vona-module-a-static' {
     get scope(): ScopeModuleAStatic;
   }
 }
-/** middlewareSystem: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAStatic extends BeanScopeBase {}
@@ -25,8 +28,6 @@ export class ScopeModuleAStatic extends BeanScopeBase {}
 export interface ScopeModuleAStatic {
   util: BeanScopeUtil;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-static': ScopeModuleAStatic;

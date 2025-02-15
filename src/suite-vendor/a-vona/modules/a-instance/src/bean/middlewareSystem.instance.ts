@@ -1,6 +1,6 @@
 import type { Next } from 'vona';
-import { BeanBase } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import { BeanBase } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
 
 export interface IMiddlewareSystemOptionsInstance extends IDecoratorMiddlewareSystemOptions {}

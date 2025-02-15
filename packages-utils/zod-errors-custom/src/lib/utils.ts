@@ -1,5 +1,5 @@
-import { replaceTemplate } from '@cabloy/word-utils';
 import type { z } from 'zod';
+import { replaceTemplate } from '@cabloy/word-utils';
 import { util, ZodIssueCode } from 'zod';
 
 export type LocaleAdapterFn = (text: string, ...args: any[]) => string;
@@ -179,7 +179,7 @@ function _replaceTemplate(content: string, scope?: object | undefined): [string,
   if (!content) return [content, []];
   if (!scope) return [content, []];
   const args: any[] = [];
-  content = content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+  content = content.toString().replace(/(\\)?\{\{ *([\w.]+) *\}\}/g, (block, skip, key) => {
     if (skip) {
       return block.substring(skip.length);
     }

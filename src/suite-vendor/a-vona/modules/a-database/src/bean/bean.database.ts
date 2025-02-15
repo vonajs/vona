@@ -1,9 +1,8 @@
-import { Bean } from 'vona-module-a-bean';
-import { BeanBase } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from '../types/database.js';
 import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.js';
+import { BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from '../service/databaseClient.js';
-import type { IDatabaseClientRecord, IDatabaseClientDialectRecord } from '../types/database.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {

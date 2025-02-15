@@ -1,14 +1,14 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
-import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 import type { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
 import { cast } from 'vona';
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export type TypeBroadcastMemDelJobData = {
+export interface TypeBroadcastMemDelJobData {
   cacheName: string;
   cacheOptions: IDecoratorCacheMemOptions;
   keyHash: string;
   key: unknown;
-};
+}
 
 @Broadcast()
 export class BroadcastMemDel

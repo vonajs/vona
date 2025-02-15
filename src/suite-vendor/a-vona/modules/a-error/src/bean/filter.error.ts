@@ -1,8 +1,8 @@
+import type { NextSync } from 'vona';
+import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
 import fs from 'node:fs';
 import path from 'node:path';
-import type { NextSync } from 'vona';
 import { BeanBase, cast, HttpStatus } from 'vona';
-import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
 import { Filter } from 'vona-module-a-aspect';
 
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
@@ -36,7 +36,6 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
 
     // todo: use new log engine
     if (options.logs[err.code!] !== false) {
-      // eslint-disable-next-line
       console.error(err);
     }
 
@@ -97,7 +96,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       // 5xx
       if (status >= 500) {
         if (errorPageUrl) {
-          const statusQuery = (errorPageUrl.indexOf('?') > 0 ? '&' : '?') + `real_status=${status}`;
+          const statusQuery = `${errorPageUrl.indexOf('?') > 0 ? '&' : '?'}real_status=${status}`;
           this.ctx.redirect(errorPageUrl + statusQuery);
           return true;
         }

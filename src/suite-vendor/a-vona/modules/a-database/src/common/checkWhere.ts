@@ -23,20 +23,20 @@ export function checkWhere(where) {
       continue;
     }
     // check key: exists
-    if (key.indexOf(__wherePlaceholderExists) > -1) {
+    if (key.includes(__wherePlaceholderExists)) {
       wheres.push(['EXISTS', value]);
       continue;
     }
     // check key: not exists
-    if (key.indexOf(__wherePlaceholderNotExists) > -1) {
+    if (key.includes(__wherePlaceholderNotExists)) {
       wheres.push(['NOTEXISTS', value]);
       continue;
     }
     // check key: or/and
     let keyOrAnd;
-    if (key.indexOf(__wherePlaceholderOr) > -1) {
+    if (key.includes(__wherePlaceholderOr)) {
       keyOrAnd = 'OR';
-    } else if (key.indexOf(__wherePlaceholderAnd) > -1) {
+    } else if (key.includes(__wherePlaceholderAnd)) {
       keyOrAnd = 'AND';
     }
     if (keyOrAnd) {

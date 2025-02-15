@@ -1,13 +1,13 @@
-import { BeanBase, cast, appResource } from 'vona';
-import type { BeanModel } from '../bean.model.js';
+import type { Knex } from 'knex';
+import type { IDatabaseClientDialectRecord } from '../../types/database.js';
 import type {
   IDecoratorEntityOptions,
   IDecoratorModelOptions,
   IModelMethodOptionsGeneral,
   IModelUpdateOptionsGeneral,
 } from '../../types/index.js';
-import type { Knex } from 'knex';
-import type { IDatabaseClientDialectRecord } from '../../types/database.js';
+import type { BeanModel } from '../bean.model.js';
+import { appResource, BeanBase, cast } from 'vona';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {

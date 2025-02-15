@@ -1,6 +1,6 @@
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export type TypeEventHelloEchoData = { text: string };
+export interface TypeEventHelloEchoData { text: string }
 
 export type TypeEventHelloEchoResult = string;
 

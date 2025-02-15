@@ -1,12 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-import eggBornUtils from 'egg-born-utils';
-import isTextOrBinary from 'istextorbinary';
-import ejs from '@zhennann/ejs';
-import gogocode from 'gogocode';
-import type { BeanCliBase } from './bean.cli.base.ts';
-import { commandsConfig } from '../config.ts';
 import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
+import fs from 'node:fs';
+import path from 'node:path';
+import ejs from '@zhennann/ejs';
+import eggBornUtils from 'egg-born-utils';
+import gogocode from 'gogocode';
+import isTextOrBinary from 'istextorbinary';
+import { commandsConfig } from '../config.ts';
 
 export class LocalTemplate {
   cli: BeanCliBase;
@@ -100,7 +100,7 @@ export class LocalTemplate {
 
   replaceTemplate(content, scope) {
     if (!content) return null;
-    return content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+    return content.toString().replace(/(\\)?\{\{ *([\w.]+) *\}\}/g, (block, skip, key) => {
       if (skip) {
         return block.substring(skip.length);
       }
@@ -288,6 +288,6 @@ export class LocalTemplate {
   _parseSnippetFilePrefix(fileName) {
     const num = fileName.split('-')[0];
     if (!num || isNaN(num)) return 10000;
-    return parseInt(num);
+    return Number.parseInt(num);
   }
 }

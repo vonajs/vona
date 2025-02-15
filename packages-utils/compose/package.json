@@ -5,6 +5,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "author": "zhennann",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -18,8 +25,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
   ],
   "scripts": {
     "lint": "eslint .",
@@ -27,12 +34,5 @@
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
-  "keywords": [
-    "egg",
-    "egg-born",
-    "framework",
-    "cabloy"
-  ],
-  "author": "zhennann",
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

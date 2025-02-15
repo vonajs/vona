@@ -1,8 +1,8 @@
+import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.js';
 import chalk from 'chalk';
 import { appResource, BeanBase, cast, deepExtend } from 'vona';
 import { Meta } from 'vona-module-a-meta';
-import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
-import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.js';
 
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
@@ -59,7 +59,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
         }
         if (!map[fieldNameFirst]) {
           const indexName = `${indexPrefix}${fieldNameFirst}`;
-          await this.bean.model.schema.alterTable(tableName, function (table) {
+          await this.bean.model.schema.alterTable(tableName, table => {
             table.index(fieldNameArray, indexName, indexType);
           });
           // too long

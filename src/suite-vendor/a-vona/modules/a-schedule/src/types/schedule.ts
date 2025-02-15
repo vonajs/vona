@@ -1,13 +1,13 @@
 import type * as Bull from 'bullmq';
-import type { TypeQueueScheduleJobData, TypeQueueScheduleJobResult } from '../bean/queue.schedule.js';
-import type { IQueueJobContext, IQueueRecord } from 'vona-module-a-queue';
-import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { OmitNever } from 'vona';
+import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { IQueueJobContext, IQueueRecord } from 'vona-module-a-queue';
+import type { TypeQueueScheduleJobData, TypeQueueScheduleJobResult } from '../bean/queue.schedule.js';
 
 export type TypeScheduleJob = Bull.Job<IQueueJobContext<TypeQueueScheduleJobData>, TypeQueueScheduleJobResult>;
 
 export interface IScheduleExecute {
-  execute(job?: TypeScheduleJob): Promise<void>;
+  execute: (job?: TypeScheduleJob) => Promise<void>;
 }
 
 export interface IScheduleRecord {}

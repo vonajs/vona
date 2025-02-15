@@ -1,8 +1,8 @@
-import { pathMatching } from 'egg-path-matching';
-import assert from 'node:assert';
 import type { Next } from 'vona';
-import { BeanBase, compose } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import assert from 'node:assert';
+import { pathMatching } from 'egg-path-matching';
+import { BeanBase, compose } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
 import securityMiddlewares from '../lib/middlewares/index.js';
 

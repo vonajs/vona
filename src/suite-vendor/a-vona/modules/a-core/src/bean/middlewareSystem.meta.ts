@@ -1,8 +1,8 @@
 import type { Next } from 'vona';
-import { BeanBase } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
-import { MiddlewareSystem } from 'vona-module-a-aspect';
 import { performance } from 'node:perf_hooks';
+import { BeanBase } from 'vona';
+import { MiddlewareSystem } from 'vona-module-a-aspect';
 
 export interface IMiddlewareSystemOptionsMeta extends IDecoratorMiddlewareSystemOptions {
   logging: boolean;

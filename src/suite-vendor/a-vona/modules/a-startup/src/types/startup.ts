@@ -4,7 +4,7 @@ import type { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-
 export interface IStartupRecord {}
 
 export interface IStartupExecute {
-  execute(options?: IInstanceStartupOptions): Promise<void>;
+  execute: (options?: IInstanceStartupOptions) => Promise<void>;
 }
 
 export interface IDecoratorStartupOptions extends IOnionOptionsEnable, IOnionOptionsDeps<keyof IStartupRecord> {

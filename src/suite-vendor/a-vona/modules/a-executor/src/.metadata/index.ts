@@ -1,7 +1,18 @@
+/** bean: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+/** bean: end */
 /** bean: begin */
-export * from '../bean/bean.executor.js';
+import type { BeanExecutor } from '../bean/bean.executor.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** bean: begin */
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/bean.executor.js';
 declare module 'vona' {}
 declare module 'vona-module-a-executor' {
   export interface BeanExecutor {
@@ -9,20 +20,11 @@ declare module 'vona-module-a-executor' {
     get scope(): ScopeModuleAExecutor;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanExecutor } from '../bean/bean.executor.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     executor: BeanExecutor;
   }
 }
-/** bean: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAExecutor extends BeanScopeBase {}
@@ -30,8 +32,6 @@ export class ScopeModuleAExecutor extends BeanScopeBase {}
 export interface ScopeModuleAExecutor {
   util: BeanScopeUtil;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-executor': ScopeModuleAExecutor;

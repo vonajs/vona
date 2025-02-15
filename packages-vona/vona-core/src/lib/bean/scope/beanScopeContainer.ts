@@ -10,7 +10,7 @@ export class BeanScopeContainer extends BeanSimple {
     if (!this.__instances[prop]) {
       let moduleName = splitWords(prop, true, '-');
       if (!moduleName?.includes('-')) {
-        moduleName = 'a-' + moduleName;
+        moduleName = `a-${moduleName}`;
       }
       this.__instances[prop] = this.bean.scope(moduleName as never);
     }

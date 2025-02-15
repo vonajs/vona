@@ -1,8 +1,9 @@
 import type { Context as EggContext } from 'egg';
+import type { VonaApplication } from '../application/app.js';
 import type { ContextBase } from './contextBase.js';
 import type { ContextOthers } from './contextOthers.js';
-import type { VonaApplication } from '../application/app.js';
 import type { ContextState } from './contextState.js';
+
 export * from './contextState.js';
 
 // @ts-ignore ignore the throw type check of 'throw'/'meta'

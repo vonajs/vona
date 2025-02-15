@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-socket",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-socket",
   "vonaModule": {
@@ -17,7 +18,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -30,15 +35,10 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
   "dependencies": {}

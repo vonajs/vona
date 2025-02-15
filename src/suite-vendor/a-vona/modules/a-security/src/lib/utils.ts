@@ -1,15 +1,15 @@
-import { normalize } from 'node:path';
-import * as matcher from 'matcher';
-import IP from '@eggjs/ip';
 import type { PathMatchingFun } from 'egg-path-matching';
 import type { VonaContext } from 'vona';
 import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
+import { normalize } from 'node:path';
+import IP from '@eggjs/ip';
+import * as matcher from 'matcher';
 
 /**
  * Check whether a domain is in the safe domain white list or not.
- * @param {String} domain The inputted domain.
+ * @param {string} domain The inputted domain.
  * @param {Array<string>} whiteList The white list for domain.
- * @return {Boolean} If the `domain` is in the white list, return true; otherwise false.
+ * @return {boolean} If the `domain` is in the white list, return true; otherwise false.
  */
 export function isSafeDomain(domain: string, whiteList: string[]): boolean {
   // domain must be string, otherwise return false
@@ -17,7 +17,7 @@ export function isSafeDomain(domain: string, whiteList: string[]): boolean {
   // Ignore case sensitive first
   domain = domain.toLowerCase();
   // add prefix `.`, because all domains in white list start with `.`
-  const hostname = '.' + domain;
+  const hostname = `.${domain}`;
 
   return whiteList.some(rule => {
     // Check whether we've got '*' as a wild character symbol
@@ -35,7 +35,7 @@ export function isSafeDomain(domain: string, whiteList: string[]): boolean {
 }
 
 export function isSafePath(path: string, ctx: VonaContext) {
-  path = '.' + path;
+  path = `.${path}`;
   if (path.includes('%')) {
     try {
       path = decodeURIComponent(path);
@@ -87,7 +87,7 @@ export function getCookieDomain(hostname: string) {
 }
 
 function getDomain(splits: string[], index: number) {
-  return '.' + splits.slice(index).join('.');
+  return `.${splits.slice(index).join('.')}`;
 }
 
 export function merge(origin: Record<string, any>, opts?: Record<string, any>) {

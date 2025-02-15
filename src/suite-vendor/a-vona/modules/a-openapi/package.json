@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-openapi",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-openapi",
   "vonaModule": {
@@ -12,7 +13,11 @@
       "zod": true
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -25,20 +30,15 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
     "dist",
     "static"
   ],
   "scripts": {},
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@cabloy/zod-errors-custom": "workspace:^",
     "@cabloy/zod-query": "workspace:^",
-    "@asteasolutions/zod-to-openapi": "^7.3.0",
     "openapi3-ts": "^4.4.0",
     "zod": "^3.23.8"
   }

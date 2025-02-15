@@ -1,10 +1,10 @@
-import { BeanBase, retry } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
-import assert from 'node:assert';
 import type { SummerCacheTest } from '../bean/summerCache.test.js';
-import { Controller, Post } from 'vona-module-a-web';
-import { Api } from 'vona-module-a-openapi';
+import assert from 'node:assert';
 import { sleep } from '@cabloy/utils';
+import { BeanBase, retry } from 'vona';
+import { Api } from 'vona-module-a-openapi';
+import { Controller, Post } from 'vona-module-a-web';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 @Controller({ path: 'summer', meta: { mode: 'unittest' } })
 @Api.exclude()

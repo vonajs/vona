@@ -1,7 +1,28 @@
+/** main: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
+/** service: end */
 /** service: begin */
-export * from '../service/openapi.js';
+
+import type { config } from '../config/config.js';
+/** service: end */
+/** service: begin */
+import type { ServiceOpenapi } from '../service/openapi.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+/** service: end */
+/** config: begin */
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../config/config.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-openapi:openapi': never;
@@ -13,41 +34,23 @@ declare module 'vona-module-a-openapi' {
     get scope(): ScopeModuleAOpenapi;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceOpenapi } from '../service/openapi.js';
 export interface IModuleService {
   openapi: ServiceOpenapi;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-openapi.service.openapi': ServiceOpenapi;
   }
 }
-/** service: end */
-/** config: begin */
-export * from '../config/config.js';
-import type { config } from '../config/config.js';
-/** config: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
+/** locale: end */
+/** main: begin */
+export * from '../main.js';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** locale: end */
-/** main: begin */
-export * from '../main.js';
-/** main: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+/** service: begin */
+export * from '../service/openapi.js';
 
 @Scope()
 export class ScopeModuleAOpenapi extends BeanScopeBase {}
@@ -59,7 +62,6 @@ export interface ScopeModuleAOpenapi {
   service: IModuleService;
 }
 
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-openapi': ScopeModuleAOpenapi;

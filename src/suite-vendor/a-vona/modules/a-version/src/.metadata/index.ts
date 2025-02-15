@@ -1,7 +1,54 @@
-/** broadcast: begin */
-export * from '../bean/broadcast.columnsClear.js';
+/** error: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
 
-import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+/** broadcast: begin */
+import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IDecoratorEventOptions } from 'vona-module-a-event';
+
+import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
+/** broadcast: end */
+/** broadcast: begin */
+import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
+
+/** event: end */
+/** event: begin */
+import type { EventVersionDone } from '../bean/event.versionDone.js';
+import type { Errors } from '../config/errors.js';
+
+/** entity: end */
+/** entity: begin */
+import type { EntityVersion } from '../entity/version.js';
+import type { EntityVersionInit } from '../entity/versionInit.js';
+
+import type { EntityViewRecord } from '../entity/viewRecord.js';
+
+/** model: end */
+/** model: begin */
+import type { ModelViewRecord } from '../model/viewRecord.js';
+/** service: end */
+/** service: begin */
+import type { ServiceDatabase } from '../service/database.js';
+import type { ServiceVersion } from '../service/version.js';
+/** service: end */
+/** service: begin */
+
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** service: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/broadcast.columnsClear.js';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-version:columnsClear': IDecoratorBroadcastOptions;
@@ -13,19 +60,18 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** broadcast: end */
-/** broadcast: begin */
-import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
 export interface IModuleBroadcast {
   columnsClear: BroadcastColumnsClear;
 }
-/** broadcast: end */
-/** entity: begin */
-export * from '../entity/version.js';
-export * from '../entity/versionInit.js';
-export * from '../entity/viewRecord.js';
-
-import { type IDecoratorEntityOptions } from 'vona-module-a-database';
+/** model: end */
+/** event: begin */
+export * from '../bean/event.versionDone.js';
+/** event: end */
+/** meta: begin */
+export * from '../bean/meta.version.js';
+/** meta: end */
+/** startup: begin */
+export * from '../bean/startup.databaseInit.js';
 declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-version:version': IDecoratorEntityOptions;
@@ -34,11 +80,6 @@ declare module 'vona-module-a-database' {
   }
 }
 declare module 'vona-module-a-version' {}
-/** entity: end */
-/** entity: begin */
-import type { EntityVersion } from '../entity/version.js';
-import type { EntityVersionInit } from '../entity/versionInit.js';
-import type { EntityViewRecord } from '../entity/viewRecord.js';
 export interface IModuleEntity {
   version: EntityVersion;
   versionInit: EntityVersionInit;
@@ -62,11 +103,7 @@ declare module 'vona-module-a-version' {
     columns: <K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** entity: end */
-/** model: begin */
-export * from '../model/viewRecord.js';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
+export * from '../bean/startup.databaseName.js';
 declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-version:viewRecord': IDecoratorModelOptions;
@@ -78,17 +115,10 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** model: end */
-/** model: begin */
-import type { ModelViewRecord } from '../model/viewRecord.js';
 export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
-/** model: end */
-/** event: begin */
-export * from '../bean/event.versionDone.js';
-
-import { type IDecoratorEventOptions } from 'vona-module-a-event';
+export * from '../bean/startup.instanceInit.js';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-version:versionDone': IDecoratorEventOptions;
@@ -100,17 +130,12 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** event: end */
-/** event: begin */
-import type { EventVersionDone } from '../bean/event.versionDone.js';
 export interface IModuleEvent {
   versionDone: EventVersionDone;
 }
-/** event: end */
-/** meta: begin */
-export * from '../bean/meta.version.js';
-
-import 'vona';
+/** locale: end */
+/** error: begin */
+export * from '../config/errors.js';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-version:version': never;
@@ -122,13 +147,11 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** meta: end */
-/** startup: begin */
-export * from '../bean/startup.databaseInit.js';
-export * from '../bean/startup.databaseName.js';
-export * from '../bean/startup.instanceInit.js';
-
-import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+/** broadcast: end */
+/** entity: begin */
+export * from '../entity/version.js';
+export * from '../entity/versionInit.js';
+export * from '../entity/viewRecord.js';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-version:databaseInit': IDecoratorStartupOptions;
@@ -152,12 +175,12 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
+/** entity: end */
+/** model: begin */
+export * from '../model/viewRecord.js';
 /** startup: end */
 /** service: begin */
 export * from '../service/database.js';
-export * from '../service/version.js';
-
-import 'vona';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-version:database': never;
@@ -175,41 +198,21 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceDatabase } from '../service/database.js';
-import type { ServiceVersion } from '../service/version.js';
 export interface IModuleService {
   database: ServiceDatabase;
   version: ServiceVersion;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-version.service.database': ServiceDatabase;
     'a-version.service.version': ServiceVersion;
   }
 }
-/** service: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** locale: end */
-/** error: begin */
-export * from '../config/errors.js';
-import type { Errors } from '../config/errors.js';
-/** error: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+export * from '../service/version.js';
 
 @Scope()
 export class ScopeModuleAVersion extends BeanScopeBase {}
@@ -224,8 +227,6 @@ export interface ScopeModuleAVersion {
   event: IModuleEvent;
   service: IModuleService;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-version': ScopeModuleAVersion;

@@ -1,4 +1,4 @@
 {
-  "extends":"../api/tsconfig.base.cjs",
+  "extends": "../api/tsconfig.base.cjs",
   "compilerOptions": {}
 }

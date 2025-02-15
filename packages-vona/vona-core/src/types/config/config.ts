@@ -1,9 +1,9 @@
+import type { VonaConfigMeta } from '@cabloy/module-info';
 import type { EggAppConfig } from 'egg';
 import type { IBeanScopeConfig } from '../../index.js';
 import type { PowerPartial } from '../utils/powerPartial.js';
 import type { ConfigDevelopment } from './development.js';
 import type { ConfigInstanceBase } from './instance.js';
-import type { VonaConfigMeta } from '@cabloy/module-info';
 
 // @ts-ignore ignore the throw type check of 'development'
 export interface VonaConfig extends EggAppConfig {

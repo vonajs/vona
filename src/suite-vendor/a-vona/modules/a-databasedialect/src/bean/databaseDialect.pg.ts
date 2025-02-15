@@ -2,7 +2,8 @@ import type { Knex } from 'knex';
 import type {
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
-  TableIdentity } from 'vona-module-a-database';
+  TableIdentity,
+} from 'vona-module-a-database';
 import {
   BeanDatabaseDialectBase,
   DatabaseDialect,

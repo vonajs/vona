@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import type { LocaleAdapterFn } from './utils.js';
+import { z } from 'zod';
 import { prepareIssue, translateError } from './utils.js';
 
 const SymbolTranslated = Symbol('SymbolTranslated');

@@ -1,11 +1,11 @@
-import fse from 'fs-extra';
-import path from 'path';
-import { glob } from '@cabloy/module-glob';
-import type { IModuleResource } from '../../types/index.js';
-import { BeanSimple } from '../bean/beanSimple.js';
-import { pathToFileURL } from 'node:url';
-import * as Path from 'node:path';
 import type { IModule } from '@cabloy/module-info';
+import type { IModuleResource } from '../../types/index.js';
+import * as Path from 'node:path';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { glob } from '@cabloy/module-glob';
+import fse from 'fs-extra';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 // const __import_type_serialization = true;
 const __import_type_serialization = false;

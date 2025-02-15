@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const utils = require('./lib/utils.js');
 
 // baseDir
@@ -24,8 +24,9 @@ module.exports = {
   'exit': true,
 };
 
-/** .mocharc.js
+/**
+ .mocharc.js
 const mockConfig = require('egg-born-bin/mock.js');
-
+ 
 module.exports = mockConfig;
-*/
+ */

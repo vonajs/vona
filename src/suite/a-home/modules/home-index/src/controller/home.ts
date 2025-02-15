@@ -1,8 +1,8 @@
 import { BeanBase } from 'vona';
+import { Api } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get } from 'vona-module-a-web';
 import { locale } from '../.metadata/index.js';
-import { Api } from 'vona-module-a-openapi';
 
 @Controller()
 @Api.tags(['Home'])

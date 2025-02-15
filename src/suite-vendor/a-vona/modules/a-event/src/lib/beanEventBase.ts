@@ -1,5 +1,4 @@
 import type { Next } from 'vona';
-import { BeanBase, cast, compose } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type {
   IDecoratorEventListenerOptions,
@@ -7,6 +6,7 @@ import type {
   IEventListenerRecord,
   NextEvent,
 } from '../types/eventListener.js';
+import { BeanBase, cast, compose } from 'vona';
 
 export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   async emit(data: DATA, nextOrDefault?: NextEvent<DATA, RESULT> | RESULT): Promise<RESULT> {

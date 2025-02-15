@@ -3,25 +3,25 @@ import type { IErrorObject } from './errorObject.js';
 
 type TypeErrorMethodNames = 'parseFail' | 'parseSuccess';
 
-type TypeErrorMethodCommon = {
+interface TypeErrorMethodCommon {
   (code: number | string, ...args: any[]): IErrorObject;
-};
+}
 
-type TypeErrorMethodFail = {
+interface TypeErrorMethodFail {
   (code: number | string, ...args: any[]): void;
-};
+}
 
-type TypeErrorMethodThrow = {
+interface TypeErrorMethodThrow {
   (code: HttpStatus | number | string, ...args: any[]): never;
-};
+}
 
-type TypeErrorMethodSuccess = {
+interface TypeErrorMethodSuccess {
   (data?: any, ...args: any[]): void;
-};
+}
 
-type TypeErrorMethodParseCode = {
+interface TypeErrorMethodParseCode {
   (codeDefault: number, code: number | string, ...args: any[]): IErrorObject;
-};
+}
 
 type TypeErrorMethods = { success: TypeErrorMethodSuccess } & { throw: TypeErrorMethodThrow } & {
   fail: TypeErrorMethodFail;

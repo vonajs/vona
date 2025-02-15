@@ -1,10 +1,18 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
-import { swapDeps } from '@cabloy/deps';
 import type { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import { getOnionScenesMeta } from '@cabloy/module-info';
 import type {
   Next,
-  VonaContext } from 'vona';
+  VonaContext,
+} from 'vona';
+import type {
+  IOnionExecuteCustom,
+  IOnionOptionsDeps,
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionSlice,
+} from '../types/onion.js';
+import { swapDeps } from '@cabloy/deps';
+import { getOnionScenesMeta } from '@cabloy/module-info';
 import {
   appMetadata,
   appResource,
@@ -15,12 +23,6 @@ import {
   SymbolProxyDisable,
 } from 'vona';
 import { Service } from 'vona-module-a-web';
-import type {
-  IOnionExecuteCustom,
-  IOnionOptionsDeps,
-  IOnionOptionsEnable,
-  IOnionOptionsMatch,
-  IOnionSlice } from '../types/onion.js';
 import {
   SymbolUseOnionLocal,
 } from '../types/onion.js';
@@ -220,13 +222,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     swapDeps(onions as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
-        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
-          .options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions.options as IOnionOptionsDeps<string>;
         return onionOptions.dependencies as any;
       },
       dependents: item => {
-        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
-          .options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions.options as IOnionOptionsDeps<string>;
         return onionOptions.dependents as any;
       },
     });
@@ -307,7 +307,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     const routePathRaw: string | undefined = this.ctx.route?.routePathRaw;
     if (!routePathRaw) return;
     return routePathRaw.startsWith('//')
-      ? '/' + this.ctx.path
+      ? `/${this.ctx.path}`
       : this.ctx.path.substring(this.app.config.globalPrefix.length);
   }
 }

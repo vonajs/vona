@@ -1,7 +1,14 @@
+/** startup: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
 /** startup: begin */
-export * from '../bean/startup.printApiPath.js';
+import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
-import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+import 'vona';
+
+export * from '../bean/startup.printApiPath.js';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-printapipath:printApiPath': IDecoratorStartupOptions;
@@ -13,11 +20,6 @@ declare module 'vona-module-a-printapipath' {
     get scope(): ScopeModuleAPrintapipath;
   }
 }
-/** startup: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAPrintapipath extends BeanScopeBase {}
@@ -25,8 +27,6 @@ export class ScopeModuleAPrintapipath extends BeanScopeBase {}
 export interface ScopeModuleAPrintapipath {
   util: BeanScopeUtil;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-printapipath': ScopeModuleAPrintapipath;

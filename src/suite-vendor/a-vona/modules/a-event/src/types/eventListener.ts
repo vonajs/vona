@@ -5,7 +5,7 @@ import type { IEventRecord } from './event.js';
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
-  execute(data: DATA, next: Next): Promise<RESULT>;
+  execute: (data: DATA, next: Next) => Promise<RESULT>;
 }
 
 export interface IEventListenerRecord {}

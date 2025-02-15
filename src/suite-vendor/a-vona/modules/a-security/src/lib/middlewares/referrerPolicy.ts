@@ -30,7 +30,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['referrerPolicy']) =
 
     const policy = opts.value;
     if (!ALLOWED_POLICIES_ENUM.includes(policy)) {
-      throw new Error('"' + policy + '" is not available.');
+      throw new Error(`"${policy}" is not available.`);
     }
 
     ctx.set('referrer-policy', policy);

@@ -1,7 +1,18 @@
+/** main: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+/** bean: end */
 /** bean: begin */
-export * from '../bean/bean.router.js';
+import type { BeanRouter } from '../bean/bean.router.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** bean: begin */
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/bean.router.js';
 declare module 'vona' {}
 declare module 'vona-module-a-web' {
   export interface BeanRouter {
@@ -9,10 +20,6 @@ declare module 'vona-module-a-web' {
     get scope(): ScopeModuleAWeb;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanRouter } from '../bean/bean.router.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     router: BeanRouter;
@@ -21,11 +28,6 @@ declare module 'vona' {
 /** bean: end */
 /** main: begin */
 export * from '../main.js';
-/** main: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAWeb extends BeanScopeBase {}
@@ -33,8 +35,6 @@ export class ScopeModuleAWeb extends BeanScopeBase {}
 export interface ScopeModuleAWeb {
   util: BeanScopeUtil;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-web': ScopeModuleAWeb;

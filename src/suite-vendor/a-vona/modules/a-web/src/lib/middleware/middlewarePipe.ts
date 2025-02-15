@@ -1,15 +1,16 @@
-import { appMetadata, type Constructable, type Next, type VonaContext } from 'vona';
-import { extractValue } from './extractValue.js';
+import type { Constructable, Next, VonaContext } from 'vona';
 import type { IDecoratorPipeOptionsGlobal, IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import { type IOnionExecuteCustom } from 'vona-module-a-onion';
-import { valid } from 'vona-module-a-validation';
+import type { IOnionExecuteCustom } from 'vona-module-a-onion';
+import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
+import { appMetadata } from 'vona';
 import {
-  type RouteHandlerArgumentMeta,
-  type RouteHandlerArgumentMetaDecorator,
+
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-openapi';
+import { valid } from 'vona-module-a-validation';
+import { extractValue } from './extractValue.js';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // check handler
@@ -38,7 +39,7 @@ async function _transformArguments(
   if (!argsMeta) return;
 
   // args
-  const args = Array(paramtypes.length);
+  const args = Array.from({ length: paramtypes.length });
   for (let index = args.length - 1; index >= 0; index--) {
     const argMeta = argsMeta.find(item => item.index === index);
     if (!argMeta) continue;
@@ -137,7 +138,7 @@ function _collectArgumentMiddlewares(
     return {
       ...item,
       argumentPipe: {
-        options: options,
+        options,
       },
     };
   });

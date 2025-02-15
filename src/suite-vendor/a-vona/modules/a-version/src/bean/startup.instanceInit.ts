@@ -1,5 +1,6 @@
+import type { IInstanceStartupOptions, IStartupExecute } from 'vona-module-a-startup';
 import { BeanBase } from 'vona';
-import { type IInstanceStartupOptions, type IStartupExecute, Startup } from 'vona-module-a-startup';
+import { Startup } from 'vona-module-a-startup';
 
 @Startup({ instance: true, debounce: true })
 export class StartupInstanceInit extends BeanBase implements IStartupExecute {

@@ -1,9 +1,9 @@
-const path = require('path');
-const chalk = require('chalk');
-const boxen = require('boxen');
-const eggBornUtils = require('egg-born-utils');
+const path = require('node:path');
 const { loadEnvs } = require('@cabloy/dotenv');
 const { ensureArray } = require('@cabloy/ensure-array');
+const boxen = require('boxen');
+const chalk = require('chalk');
+const eggBornUtils = require('egg-born-utils');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
@@ -16,7 +16,7 @@ const utils = {
       console.log(chalk.red(`Open auth token not found: ${tokenName}`));
       if (!tokenName) {
         const message = `Run ${chalk.keyword('orange')('> npm run test:backend <')} first!`;
-        console.log('\n' + boxen(message, boxenOptions) + '\n');
+        console.log(`\n${boxen(message, boxenOptions)}\n`);
       }
     }
     return token;
@@ -28,7 +28,8 @@ const utils = {
     const warnWhenRunning = options.warnWhenRunning;
     // token
     const token = await eggBornUtils.openAuthConfig.prepareToken(projectPath, null);
-    if (!token) return false;
+    if (!token)
+      return false;
     // OpenAuthClient
     const openAuthClient = new eggBornUtils.OpenAuthClient({ token });
     // echo
@@ -38,14 +39,15 @@ const utils = {
       });
       if (warnWhenRunning) {
         const message = chalk.keyword('orange')('The backend dev server is running!');
-        console.log('\n' + boxen(message, boxenOptions) + '\n');
+        console.log(`\n${boxen(message, boxenOptions)}\n`);
       }
       return true;
-    } catch (err) {
+    }
+    catch (err) {
       if (err.status === -1 && (err.address === '::1' || err.address === '127.0.0.1')) {
         if (needDevServer) {
           const message = `Run ${chalk.keyword('orange')('> npm run dev:backend <')} first!`;
-          console.log('\n' + boxen(message, boxenOptions) + '\n');
+          console.log(`\n${boxen(message, boxenOptions)}\n`);
         }
         return false;
       }
@@ -60,7 +62,8 @@ const utils = {
       needDevServer: false,
       warnWhenRunning: false,
     });
-    if (devServerRunning) return null;
+    if (devServerRunning)
+      return null;
     // start
     const Command = require('../index.js');
     const commandDev = new Command(['backend-dev', '--workers=1']);

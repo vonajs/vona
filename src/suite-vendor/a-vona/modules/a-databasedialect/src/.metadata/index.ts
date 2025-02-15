@@ -1,9 +1,22 @@
+/** databaseDialect: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { DatabaseDialectMysql2 } from '../bean/databaseDialect.mysql2.js';
+/** databaseDialect: end */
 /** databaseDialect: begin */
-export * from '../bean/databaseDialect.mysql.js';
-export * from '../bean/databaseDialect.mysql2.js';
-export * from '../bean/databaseDialect.pg.js';
+import type { DatabaseDialectMysql } from '../bean/databaseDialect.mysql.js';
+import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/databaseDialect.mysql2.js';
+/** databaseDialect: begin */
+export * from '../bean/databaseDialect.mysql.js';
+export * from '../bean/databaseDialect.pg.js';
 declare module 'vona' {
   export interface IDatabaseDialectRecord {
     'a-databasedialect:mysql': never;
@@ -27,12 +40,6 @@ declare module 'vona-module-a-databasedialect' {
     get scope(): ScopeModuleADatabasedialect;
   }
 }
-/** databaseDialect: end */
-/** databaseDialect: begin */
-import type { DatabaseDialectMysql } from '../bean/databaseDialect.mysql.js';
-import type { DatabaseDialectMysql2 } from '../bean/databaseDialect.mysql2.js';
-import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-databasedialect.databaseDialect.mysql': DatabaseDialectMysql;
@@ -40,11 +47,6 @@ declare module 'vona' {
     'a-databasedialect.databaseDialect.pg': DatabaseDialectPg;
   }
 }
-/** databaseDialect: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleADatabasedialect extends BeanScopeBase {}
@@ -53,7 +55,6 @@ export interface ScopeModuleADatabasedialect {
   util: BeanScopeUtil;
 }
 
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-databasedialect': ScopeModuleADatabasedialect;

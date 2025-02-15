@@ -1,12 +1,14 @@
 {
   "name": "vona-module-a-instance",
+  "type": "module",
   "version": "5.0.0",
   "title": "Instance",
   "vonaModule": {
     "fileVersion": 1,
     "dependencies": {}
   },
-  "type": "module",
+  "description": "",
+  "author": "zhennann",
   "exports": {
     ".": {
       "types": [
@@ -19,12 +21,10 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
   "files": [
     "dist",
     "static"
   ],
   "scripts": {},
-  "author": "zhennann",
   "dependencies": {}
 }

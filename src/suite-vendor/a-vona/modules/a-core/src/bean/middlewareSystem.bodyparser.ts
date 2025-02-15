@@ -1,8 +1,8 @@
 import type { Next } from 'vona';
-import { BeanBase } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
-import { MiddlewareSystem } from 'vona-module-a-aspect';
 import bodyparser from 'koa-bodyparser';
+import { BeanBase } from 'vona';
+import { MiddlewareSystem } from 'vona-module-a-aspect';
 
 export interface IMiddlewareSystemOptionsBodyparser extends IDecoratorMiddlewareSystemOptions {
   enableTypes: string[];

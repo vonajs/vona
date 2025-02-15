@@ -1,7 +1,33 @@
-/** cacheRedis: begin */
-export * from '../bean/cacheRedis.startupDebounce.js';
+/** monkey: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { TypeModuleConfig } from 'vona';
 
-import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+/** cacheRedis: begin */
+import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import type { CacheRedisStartupDebounce } from '../bean/cacheRedis.startupDebounce.js';
+
+/** meta: end */
+/** meta redlock: begin */
+import type { MetaRedlock } from '../bean/meta.redlock.js';
+import type { config } from '../config/config.js';
+/** service: end */
+/** service: begin */
+import type { ServiceStartup } from '../service/startup.js';
+/** service: end */
+/** service: begin */
+
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/cacheRedis.startupDebounce.js';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'a-startup:startupDebounce': IDecoratorCacheRedisOptions;
@@ -13,17 +39,12 @@ declare module 'vona-module-a-startup' {
     get scope(): ScopeModuleAStartup;
   }
 }
-/** cacheRedis: end */
-/** cacheRedis: begin */
-import type { CacheRedisStartupDebounce } from '../bean/cacheRedis.startupDebounce.js';
 export interface IModuleCacheRedis {
   startupDebounce: CacheRedisStartupDebounce;
 }
 /** cacheRedis: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
-
-import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-startup:redlock': never;
@@ -35,14 +56,9 @@ declare module 'vona-module-a-startup' {
     get scope(): ScopeModuleAStartup;
   }
 }
-/** meta: end */
-/** meta redlock: begin */
-import type { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** service: begin */
-export * from '../service/startup.js';
-
-import 'vona';
+/** service: end */
+/** config: begin */
+export * from '../config/config.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-startup:startup': never;
@@ -54,33 +70,20 @@ declare module 'vona-module-a-startup' {
     get scope(): ScopeModuleAStartup;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceStartup } from '../service/startup.js';
 export interface IModuleService {
   startup: ServiceStartup;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-startup.service.startup': ServiceStartup;
   }
 }
-/** service: end */
-/** config: begin */
-export * from '../config/config.js';
-import type { config } from '../config/config.js';
 /** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
-/** monkey: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleConfig } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+/** meta redlock: end */
+/** service: begin */
+export * from '../service/startup.js';
 
 @Scope()
 export class ScopeModuleAStartup extends BeanScopeBase {}
@@ -92,8 +95,6 @@ export interface ScopeModuleAStartup {
   redlock: MetaRedlock;
   service: IModuleService;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-startup': ScopeModuleAStartup;

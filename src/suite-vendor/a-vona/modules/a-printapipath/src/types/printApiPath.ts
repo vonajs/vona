@@ -3,5 +3,5 @@ export interface IMetaPrintApiPathInfo {
   path: string;
 }
 export interface IMetaPrintApiPathExecute {
-  execute(): Promise<IMetaPrintApiPathInfo | IMetaPrintApiPathInfo[]>;
+  execute: () => Promise<IMetaPrintApiPathInfo | IMetaPrintApiPathInfo[]>;
 }

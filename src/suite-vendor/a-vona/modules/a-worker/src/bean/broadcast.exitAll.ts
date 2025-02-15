@@ -1,8 +1,9 @@
-import { BeanBroadcastBase, Broadcast, type IBroadcastExecute } from 'vona-module-a-broadcast';
+import type { IBroadcastExecute } from 'vona-module-a-broadcast';
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export type TypeBroadcastExitAllJobData = {
+export interface TypeBroadcastExitAllJobData {
   code?: number | string | null | undefined;
-};
+}
 
 @Broadcast()
 export class BroadcastExitAll

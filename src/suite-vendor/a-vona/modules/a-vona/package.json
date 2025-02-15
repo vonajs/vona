@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-vona",
+  "type": "module",
   "version": "5.0.3",
   "title": "a-vona",
   "vonaModule": {
@@ -39,7 +40,11 @@
       "a-worker": "5.0.0"
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -52,11 +57,6 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
     "dist",
     "static"

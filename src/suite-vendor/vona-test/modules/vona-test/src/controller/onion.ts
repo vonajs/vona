@@ -2,12 +2,12 @@ import { BeanBase } from 'vona';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
-import { Api, Body, Param, Query, v, Headers } from 'vona-module-a-openapi';
+import { Api, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get, Post } from 'vona-module-a-web';
 import { z } from 'zod';
-import { DtoUser } from '../dto/user.js';
 import { locale } from '../.metadata/index.js';
+import { DtoUser } from '../dto/user.js';
 
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
@@ -32,7 +32,7 @@ export class ControllerOnion extends BeanBase {
     @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
     _user: DtoUser,
   ): string | undefined {
-    return 'echo: ' + id + ':' + temp + ':' + name;
+    return `echo: ${id}:${temp}:${name}`;
   }
 
   @Post('echo2/:userId/:userName')
@@ -62,7 +62,7 @@ export class ControllerOnion extends BeanBase {
     console.log(this.ctx.path);
     // const ctx = this.app.currentContext;
     // console.log(ctx === this.ctx);
-    return id + ':' + accept;
+    return `${id}:${accept}`;
   }
 
   @Post('echo4')

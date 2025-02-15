@@ -1,7 +1,7 @@
-import { Bean } from 'vona-module-a-bean';
-import { BeanBase } from 'vona';
-import { ServiceRedisClient } from '../service/redisClient.js';
 import type { IRedisClientRecord } from '../types/redis.js';
+import { BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { ServiceRedisClient } from '../service/redisClient.js';
 
 @Bean()
 export class BeanRedis extends BeanBase {

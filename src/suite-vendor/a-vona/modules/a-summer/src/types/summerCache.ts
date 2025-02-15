@@ -5,11 +5,11 @@ import type { IRedisClientRecord } from 'vona-module-a-redis';
 export interface ISummerCacheRecord {}
 
 export interface ISummerCacheGet<KEY, DATA> {
-  getNative(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined>;
+  getNative: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
 }
 
 export interface ISummerCacheMGet<KEY, DATA> {
-  mgetNative(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>>;
+  mgetNative: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
 }
 
 export type TSummerCachePreset = 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
@@ -29,13 +29,13 @@ export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
   ignoreNull?: boolean;
 }
 
-export type TSummerCacheActionOptions<KEY, DATA> = {
+export interface TSummerCacheActionOptions<KEY, DATA> {
   enable?: boolean;
   mode?: TSummerCacheMode;
   ignoreNull?: boolean;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
   mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
-};
+}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

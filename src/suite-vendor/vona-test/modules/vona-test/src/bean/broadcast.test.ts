@@ -1,9 +1,10 @@
+import type { IBroadcastExecute } from 'vona-module-a-broadcast';
 import assert from 'node:assert';
-import { BeanBroadcastBase, Broadcast, type IBroadcastExecute } from 'vona-module-a-broadcast';
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export type TypeBroadcastTestJobData = {
+export interface TypeBroadcastTestJobData {
   message: string;
-};
+}
 
 @Broadcast()
 export class BroadcastTest

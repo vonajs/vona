@@ -1,7 +1,22 @@
+/** main: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+/** service: end */
 /** service: begin */
-export * from '../service/broadcast.js';
+import type { ServiceBroadcast } from '../service/broadcast.js';
+/** service: end */
+/** service: begin */
+
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** service: end */
+/** main: begin */
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../main.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-broadcast:broadcast': never;
@@ -13,29 +28,16 @@ declare module 'vona-module-a-broadcast' {
     get scope(): ScopeModuleABroadcast;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceBroadcast } from '../service/broadcast.js';
 export interface IModuleService {
   broadcast: ServiceBroadcast;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-broadcast.service.broadcast': ServiceBroadcast;
   }
 }
-/** service: end */
-/** main: begin */
-export * from '../main.js';
-/** main: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+/** service: begin */
+export * from '../service/broadcast.js';
 
 @Scope()
 export class ScopeModuleABroadcast extends BeanScopeBase {}
@@ -45,7 +47,6 @@ export interface ScopeModuleABroadcast {
   service: IModuleService;
 }
 
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-broadcast': ScopeModuleABroadcast;

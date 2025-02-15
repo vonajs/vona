@@ -1,7 +1,7 @@
-import { Virtual } from 'vona-module-a-bean';
-import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.js';
-import { CacheBase } from '../common/cacheBase.js';
 import type { Redis } from 'ioredis';
+import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.js';
+import { Virtual } from 'vona-module-a-bean';
+import { CacheBase } from '../common/cacheBase.js';
 
 @Virtual()
 export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheRedisOptions, KEY> {
@@ -45,7 +45,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     if (ttl) {
       const redisKeysEx: string[] = [];
       for (let i = 0; i < redisKeys.length; i++) {
-        if (!!_values[i]) {
+        if (_values[i]) {
           redisKeysEx.push(redisKeys[i]);
         }
       }

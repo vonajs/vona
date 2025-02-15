@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {},
-  "exclude": ["modules"],
   "references": [
     {
       "path": "modules/a-cabloy/tsconfig.build.json"
@@ -12,5 +11,6 @@
     {
       "path": "modules/a-swagger/tsconfig.build.json"
     }
-  ]
+  ],
+  "exclude": ["modules"]
 }

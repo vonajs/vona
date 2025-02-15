@@ -21,7 +21,7 @@ function __patchJSON() {
   // json
   const _jsonParse = JSON.parse;
   JSON.parse = function (source, reviver) {
-    return _jsonParse(source, function (k, v) {
+    return _jsonParse(source, (k, v) => {
       return __jsonReviver(k, v, reviver);
     });
   };
@@ -30,7 +30,7 @@ function __patchJSON() {
   const _json5Parse = json5.parse;
   // @ts-ignore ignore parse
   const parse = function (source, reviver) {
-    return _json5Parse(source, function (k, v) {
+    return _json5Parse(source, (k, v) => {
       return __jsonReviver(k, v, reviver);
     });
   };

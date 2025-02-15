@@ -1,7 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {},
-  "include": [],
   "references": [
     {
       "path": "cabloy-cli"
@@ -12,5 +11,6 @@
     {
       "path": "cli-set-api"
     }
-  ]
+  ],
+  "include": []
 }

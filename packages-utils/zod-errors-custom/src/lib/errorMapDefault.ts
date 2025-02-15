@@ -1,6 +1,6 @@
 import type { ZodErrorMap } from 'zod';
-import { util, z, ZodIssueCode, ZodParsedType } from 'zod';
 import type { LocaleAdapterFn } from './utils.js';
+import { util, z, ZodIssueCode, ZodParsedType } from 'zod';
 import { prepareIssue, translateError } from './utils.js';
 
 export function setErrorMapDefault(localeAdapterFn: LocaleAdapterFn) {

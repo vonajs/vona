@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-status",
+  "type": "module",
   "version": "5.0.0",
   "vonaModule": {
     "fileVersion": 1,
@@ -11,7 +12,8 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "zhennann",
   "exports": {
     ".": {
       "types": [
@@ -24,13 +26,11 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
-  "author": "zhennann",
   "dependencies": {}
 }

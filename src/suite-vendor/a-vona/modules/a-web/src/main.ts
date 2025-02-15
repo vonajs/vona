@@ -1,11 +1,12 @@
-import { BeanSimple, compose, type IModuleMain, type Next, type VonaContext } from 'vona';
-import { EggRouter } from '@eggjs/router';
-import { type IOnionSlice } from 'vona-module-a-onion';
+import type { IModuleMain, Next, VonaContext } from 'vona';
 import type {
   IDecoratorMiddlewareSystemOptions,
   IMiddlewareSystemExecute,
   IMiddlewareSystemRecord,
 } from 'vona-module-a-aspect';
+import type { IOnionSlice } from 'vona-module-a-onion';
+import { EggRouter } from '@eggjs/router';
+import { BeanSimple, compose } from 'vona';
 
 const SymbolRouter = Symbol('SymbolRouter');
 

@@ -1,8 +1,8 @@
-const fse = require('fs-extra');
 const fs = require('node:fs/promises');
-const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
+const { ProcessHelper } = require('@cabloy/process-helper');
 const eggBornUtils = require('egg-born-utils');
+const fse = require('fs-extra');
 const argv = require('./lib/parse_argv')('sync');
 const path = require('node:path');
 const gogocode = require('gogocode');
@@ -124,7 +124,7 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 function getScopeModuleName(moduleName) {
-  const parts2 = moduleName.split('-').map(name => {
+  const parts2 = moduleName.split('-').map((name) => {
     return name.charAt(0).toUpperCase() + name.substring(1);
   });
   return `ScopeModule${parts2.join('')}`;
@@ -136,7 +136,7 @@ function classPathToClassNameMixin(classPath) {
   const parts = classPath
     .replaceAll('.', '_')
     .split('_')
-    .map(name => {
+    .map((name) => {
       return name.charAt(0).toUpperCase() + name.substring(1);
     });
   return parts.join('');
@@ -154,11 +154,11 @@ function parseShortName(classPath) {
 
 function classPathToClassName(prefix, classPath) {
   prefix = prefix.charAt(0).toUpperCase() + prefix.substring(1);
-  const parts = classPath.split('/').map(part => {
+  const parts = classPath.split('/').map((part) => {
     const parts2 = part
       .replaceAll('.', '-')
       .split('-')
-      .map(name => {
+      .map((name) => {
         return name.charAt(0).toUpperCase() + name.substring(1);
       });
     return parts2.join('');
@@ -168,13 +168,15 @@ function classPathToClassName(prefix, classPath) {
 
 function parseBeanName(beanClassName, scene) {
   // scene
-  if (!scene) scene = 'bean';
-  scene = scene.toLowerCase().replace(/\./gi, '');
+  if (!scene)
+    scene = 'bean';
+  scene = scene.toLowerCase().replace(/\./g, '');
   // bean class name
   let name;
   if (beanClassName.toLowerCase().startsWith(scene)) {
     name = beanClassName.substring(scene.length);
-  } else {
+  }
+  else {
     name = beanClassName;
   }
   // lowerCase

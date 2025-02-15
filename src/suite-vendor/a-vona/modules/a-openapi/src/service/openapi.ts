@@ -1,9 +1,21 @@
-import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
 import type {
   Constructable,
-  IDecoratorBeanOptionsBase } from 'vona';
+  IDecoratorBeanOptionsBase,
+} from 'vona';
+import type {
+  IOpenAPIObject,
+  IOpenApiOptions,
+  RouteHandlerArgumentMetaDecorator,
+} from 'vona-module-a-openapi';
+import type {
+  IDecoratorControllerOptions,
+  RequestMappingMetadata,
+} from 'vona-module-a-web';
+import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import * as ModuleInfo from '@cabloy/module-info';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import {
   appMetadata,
   appResource,
@@ -12,27 +24,18 @@ import {
   HttpStatus,
   LocaleModuleNameSeparator,
 } from 'vona';
-import type {
-  IDecoratorControllerOptions,
-  RequestMappingMetadata } from 'vona-module-a-web';
-import {
-  RequestMethod,
-  Service,
-  SymbolRequestMappingHandler,
-} from 'vona-module-a-web';
-import * as ModuleInfo from '@cabloy/module-info';
-import type {
-  IOpenAPIObject,
-  IOpenApiOptions,
-  RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
 import {
   bodySchemaWrapperDefault,
   schema,
   SymbolOpenApiOptions,
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona-module-a-openapi';
+import {
+  RequestMethod,
+  Service,
+  SymbolRequestMappingHandler,
+} from 'vona-module-a-web';
 import { z } from 'zod';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
@@ -233,7 +236,7 @@ export class ServiceOpenapi extends BeanBase {
       // record
       if (argumentType === 'body') {
         // body
-        request['body'] = {
+        request.body = {
           required: !schema.isOptional(),
           content: {
             'application/json': {

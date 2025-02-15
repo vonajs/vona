@@ -1,20 +1,19 @@
 /* eslint-disable no-console */
-import path from 'path';
-import fse from 'fs-extra';
-import semver from 'semver';
-import chalk from 'chalk';
-import boxen from 'boxen';
-import eggBornUtils from 'egg-born-utils';
-import { getPathsMeta } from './meta.ts';
+import type { IModule, IModulePackage, ISuite, ISuiteModuleBase } from '@cabloy/module-info';
 import type { IModuleGlobContext, IModuleGlobOptions } from './interface.ts';
+import path from 'node:path';
 import {
-  type IModule,
-  type IModulePackage,
-  type ISuite,
-  type ISuiteModuleBase,
+
   parseInfoPro,
 } from '@cabloy/module-info';
 import { checkMeta } from '@cabloy/utils';
+import boxen from 'boxen';
+import chalk from 'chalk';
+import eggBornUtils from 'egg-born-utils';
+import fse from 'fs-extra';
+import semver from 'semver';
+import { getPathsMeta } from './meta.ts';
+
 export * from './interface.ts';
 
 const SymbolModuleOrdering = Symbol('SymbolModuleOrdering');
@@ -182,10 +181,10 @@ function __orderDependencies(
     const subModule = modules[key];
     if (!subModule) {
       const message =
-        chalk.keyword('orange')(`module ${moduleRelativeName} disabled`) +
-        ', because ' +
-        chalk.keyword('cyan')(`module ${key} not exists`);
-      console.log('\n' + boxen(message, boxenOptions) + '\n');
+        `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)
+        }, because ${
+          chalk.keyword('cyan')(`module ${key} not exists`)}`;
+      console.log(`\n${boxen(message, boxenOptions)}\n`);
       enabled = false; // process.exit(0);
       continue;
     }
@@ -265,23 +264,23 @@ function __logModules(context: IModuleGlobContext, log) {
   // log
   console.log(chalk.yellow('\n=== Local Modules ==='));
   for (const key in context.modulesLocal) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.yellow('\n=== Global Modules ==='));
   for (const key in context.modulesGlobal) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.yellow('\n=== Monkey Modules ==='));
   for (const key in context.modulesMonkey) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.yellow('\n=== Sync Modules ==='));
   for (const key in context.modulesSync) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.yellow('\n=== Icon Modules ==='));
   for (const key in context.modulesIcon) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.keyword('orange')(`\n=== Total Modules: ${context.modulesArray.length} ===`));
   // console.log('\n');
@@ -300,11 +299,11 @@ function __logSuites(context: IModuleGlobContext, log) {
   // log
   console.log(chalk.yellow('\n=== Local Suites ==='));
   for (const key in context.suitesLocal) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.yellow('\n=== Vendor Suites ==='));
   for (const key in context.suitesVendor) {
-    console.log(chalk.cyan('> ' + key));
+    console.log(chalk.cyan(`> ${key}`));
   }
   console.log(chalk.keyword('orange')(`\n=== Total Suites: ${Object.keys(context.suites).length} ===`));
   console.log('\n');
@@ -371,8 +370,8 @@ function __parseSuites(context: IModuleGlobContext, projectPath) {
   return suites;
 }
 
-const __suite_pattern1 = /src\/suite\/([^\/]+)\/modules/;
-const __suite_pattern2 = /src\/suite-vendor\/([^\/]+)\/modules/;
+const __suite_pattern1 = /src\/suite\/([^/]+)\/modules/;
+const __suite_pattern2 = /src\/suite-vendor\/([^/]+)\/modules/;
 function __bindSuitesModules(suites, modules) {
   for (const moduleName in modules) {
     const module = modules[moduleName];

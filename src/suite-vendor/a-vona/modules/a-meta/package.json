@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-meta",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-meta",
   "vonaModule": {
@@ -10,7 +11,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -23,11 +28,6 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
     "dist",
     "static"

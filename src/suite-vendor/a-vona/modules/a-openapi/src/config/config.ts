@@ -3,7 +3,7 @@ import type { OpenAPIObjectConfigV31 } from '@asteasolutions/zod-to-openapi/dist
 import type { VonaApplication } from 'vona';
 import type { TypeOpenApiVersion } from '../types/api.js';
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {
     defaultVersion: '31' as TypeOpenApiVersion,
     generateDocument: {
@@ -25,4 +25,4 @@ export const config = (_app: VonaApplication) => {
       } as OpenAPIObjectConfigV31,
     },
   };
-};
+}

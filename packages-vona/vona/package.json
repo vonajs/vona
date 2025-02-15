@@ -1,11 +1,18 @@
 {
   "name": "vona",
+  "type": "module",
   "version": "5.0.7",
   "description": "vona",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
+  "author": "zhennann",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -19,19 +26,12 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
   ],
   "scripts": {
     "lint": "eslint ."
   },
-  "keywords": [
-    "egg",
-    "egg-born",
-    "framework",
-    "cabloy"
-  ],
-  "author": "zhennann",
   "dependencies": {
     "vona-core": "workspace:^",
     "vona-shared": "workspace:^",

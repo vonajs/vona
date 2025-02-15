@@ -2,7 +2,7 @@ export const isUndefined = (obj: any): obj is undefined => typeof obj === 'undef
 
 export const isObject = (fn: any): fn is object => !isNil(fn) && typeof fn === 'object';
 
-export const isPlainObject = (fn: any): fn is object => {
+export function isPlainObject(fn: any): fn is object {
   if (!isObject(fn)) {
     return false;
   }
@@ -16,17 +16,19 @@ export const isPlainObject = (fn: any): fn is object => {
     ctor instanceof ctor &&
     Function.prototype.toString.call(ctor) === Function.prototype.toString.call(Object)
   );
-};
+}
 
-export const addLeadingSlash = (path?: string): string =>
-  path && typeof path === 'string' ? (path.charAt(0) !== '/' ? '/' + path : path) : '';
+export function addLeadingSlash(path?: string): string {
+  return path && typeof path === 'string' ? (path.charAt(0) !== '/' ? `/${path}` : path) : '';
+}
 
-export const normalizePath = (path?: string): string =>
-  path
+export function normalizePath(path?: string): string {
+  return path
     ? path.startsWith('/')
-      ? ('/' + path.replace(/\/+$/, '')).replace(/\/+/g, '/')
-      : '/' + path.replace(/\/+$/, '')
+      ? (`/${path.replace(/\/+$/, '')}`).replace(/\/+/g, '/')
+      : `/${path.replace(/\/+$/, '')}`
     : '/';
+}
 
 export const stripEndSlash = (path: string) => (path[path.length - 1] === '/' ? path.slice(0, path.length - 1) : path);
 

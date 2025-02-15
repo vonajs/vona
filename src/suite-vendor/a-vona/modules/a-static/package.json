@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-static",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-static",
   "vonaModule": {
@@ -11,7 +12,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -24,15 +29,10 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
   "dependencies": {

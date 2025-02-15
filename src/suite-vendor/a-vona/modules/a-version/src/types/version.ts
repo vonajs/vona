@@ -1,4 +1,4 @@
-import { type ConfigInstanceBase } from 'vona';
+import type { ConfigInstanceBase } from 'vona';
 
 export interface IMetaVersionOptions {
   scene: 'update' | 'init' | 'test';
@@ -24,13 +24,13 @@ export interface IMetaVersionTestOptions {
 }
 
 export interface IMetaVersionUpdate {
-  update(options: IMetaVersionUpdateOptions): Promise<void>;
+  update: (options: IMetaVersionUpdateOptions) => Promise<void>;
 }
 
 export interface IMetaVersionInit {
-  init(options: IMetaVersionInitOptions): Promise<void>;
+  init: (options: IMetaVersionInitOptions) => Promise<void>;
 }
 
 export interface IMetaVersionTest {
-  test(options: IMetaVersionTestOptions): Promise<void>;
+  test: (options: IMetaVersionTestOptions) => Promise<void>;
 }

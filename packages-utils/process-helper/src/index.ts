@@ -1,5 +1,5 @@
-import ChildProcess from 'child_process';
-import path from 'path';
+import ChildProcess from 'node:child_process';
+import path from 'node:path';
 
 // only hook once and only when ever start any child.
 const childs: Set<ChildProcess.ChildProcess> = new Set();
@@ -100,14 +100,14 @@ export class ProcessHelper {
   }
 
   async spawnCmd({ cmd, args, options }) {
-    if (/^win/.test(process.platform)) {
+    if (process.platform.startsWith('win')) {
       cmd = `${cmd}.cmd`;
     }
     return await this.spawn({ cmd, args, options });
   }
 
   async spawnExe({ cmd, args, options }) {
-    if (/^win/.test(process.platform)) {
+    if (process.platform.startsWith('win')) {
       cmd = `${cmd}.exe`;
     }
     return await this.spawn({ cmd, args, options });
@@ -170,11 +170,11 @@ export class ProcessHelper {
       args: ['status'],
       options,
     });
-    if (stdout.indexOf('nothing to commit, working tree clean') > -1 && stdout.indexOf('is ahead of') === -1) {
+    if (stdout.includes('nothing to commit, working tree clean') && !stdout.includes('is ahead of')) {
       // do nothing
       return;
     }
-    if (stdout.indexOf('is ahead of') === -1) {
+    if (!stdout.includes('is ahead of')) {
       // git add .
       await this.spawnExe({
         cmd: 'git',

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import path from 'node:path';
-import { loadEnvs, getEnvFiles } from '../dist/index.js';
+import { getEnvFiles, loadEnvs } from '../dist/index.js';
 
 const meta = { serverEnv: 'unittest' };
 const envDir = path.join(process.cwd(), 'src/backend/config/env');

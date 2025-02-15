@@ -1,9 +1,9 @@
-import { BeanBase, cast } from 'vona';
-import path from 'path';
-import fse from 'fs-extra';
-import { Service } from 'vona-module-a-web';
-import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.js';
 import type { IOnionSlice } from 'vona-module-a-onion';
+import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.js';
+import path from 'node:path';
+import fse from 'fs-extra';
+import { BeanBase, cast } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceStartup extends BeanBase {

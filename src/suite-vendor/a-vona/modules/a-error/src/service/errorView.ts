@@ -1,11 +1,11 @@
-import path from 'node:path';
 import fs from 'node:fs';
-import { BeanBase, cast } from 'vona';
-import { Service } from 'vona-module-a-web';
+import path from 'node:path';
+import util from 'node:util';
+import cookie from 'cookie';
 import Mustache from 'mustache';
 import * as StackTrace from 'stack-trace';
-import cookie from 'cookie';
-import util from 'node:util';
+import { BeanBase, cast } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 const startingSlashRegex = /\\|\//;
 
@@ -49,7 +49,7 @@ export class ServiceErrorView extends BeanBase {
       return false;
     }
     const filename = frame.getFileName() || '';
-    return !filename.includes('node_modules' + path.sep);
+    return !filename.includes(`node_modules${path.sep}`);
   }
 
   getFrameSource(contentsCache: Record<string, string>, frame) {
@@ -134,7 +134,7 @@ export class ServiceErrorView extends BeanBase {
       message,
       name: error.name,
       status: error.status,
-      frames: stack instanceof Array ? stack.filter(frame => frame.getFileName()).map(frameFomatter) : [],
+      frames: Array.isArray(stack) ? stack.filter(frame => frame.getFileName()).map(frameFomatter) : [],
     };
   }
 

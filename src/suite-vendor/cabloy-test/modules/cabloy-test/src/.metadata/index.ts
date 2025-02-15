@@ -1,7 +1,19 @@
+/** controller: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
+/** meta: end */
+/** meta status: begin */
+import type { MetaStatus } from '../bean/meta.status.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
-export * from '../bean/meta.status.js';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/meta.status.js';
 declare module 'vona' {
   export interface IMetaRecord {
     'cabloy-test:status': never;
@@ -13,14 +25,9 @@ declare module 'vona-module-cabloy-test' {
     get scope(): ScopeModuleCabloyTest;
   }
 }
-/** meta: end */
-/** meta status: begin */
-import type { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
 /** controller: begin */
 export * from '../controller/status.js';
-
-import { type IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'cabloy-test:status': IDecoratorControllerOptions;
@@ -39,11 +46,6 @@ declare module 'vona-module-a-web' {
     '/cabloy/test/status': '/cabloy/test/status';
   }
 }
-/** controller: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleCabloyTest extends BeanScopeBase {}
@@ -52,8 +54,6 @@ export interface ScopeModuleCabloyTest {
   util: BeanScopeUtil;
   status: MetaStatus;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'cabloy-test': ScopeModuleCabloyTest;

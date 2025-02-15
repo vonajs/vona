@@ -1,8 +1,8 @@
 import type { VonaApplication, VonaContext } from 'vona';
-import { accepts } from '../lib/utils.js';
 import type { ServiceFilter } from 'vona-module-a-aspect';
+import { accepts } from '../lib/utils.js';
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {
     error: {
       templatePath: '',
@@ -31,7 +31,7 @@ export const config = (_app: VonaApplication) => {
       },
     },
   };
-};
+}
 
 function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
   return ctx.app.ctxStorage.run(ctx as any, () => {

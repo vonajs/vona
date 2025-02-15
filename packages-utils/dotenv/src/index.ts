@@ -1,8 +1,8 @@
-import eggBornUtils from 'egg-born-utils';
-import { cascadeExtendKeys } from 'cascade-extend';
 import type { DotenvParseOutput } from 'dotenv';
+import { cascadeExtendKeys } from 'cascade-extend';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
+import eggBornUtils from 'egg-born-utils';
 
 export function loadEnvs(
   meta: object,
@@ -54,7 +54,7 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?:
   let keys = cascadeExtendKeys(scope, source, prefix, '.');
   if (!keys) return undefined;
   // mine
-  keys = keys.filter(item => item.indexOf('.mine') === -1).concat(keys.filter(item => item.indexOf('.mine') > -1));
+  keys = keys.filter(item => !item.includes('.mine')).concat(keys.filter(item => item.includes('.mine')));
   // files
   files = keys.map(key => {
     let file = `${dir}/${key}`;

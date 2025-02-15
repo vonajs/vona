@@ -1,8 +1,8 @@
+import type { ISwapDepsItem } from '@cabloy/deps';
+import type { Knex } from 'knex';
+import { swapDeps } from '@cabloy/deps';
 import { cast } from 'vona';
 import { BeanModelKnex } from './bean.model_knex.js';
-import type { Knex } from 'knex';
-import type { ISwapDepsItem } from '@cabloy/deps';
-import { swapDeps } from '@cabloy/deps';
 
 export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async createView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
@@ -64,12 +64,12 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   ): Promise<void> {
     if (!alterViewAuto) {
       // alter table
-      return await this.schema.alterTable(tableName, function (table) {
+      return await this.schema.alterTable(tableName, table => {
         return callback(table);
       });
     }
     await this._viewDependentsAll_handle(tableName, async () => {
-      await this.schema.alterTable(tableName, function (table) {
+      await this.schema.alterTable(tableName, table => {
         return callback(table);
       });
     });

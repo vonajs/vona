@@ -1,6 +1,6 @@
 import type { Next } from 'vona';
-import { BeanBase } from 'vona';
 import type { IDecoratorGuardOptionsGlobal, IGuardExecute } from 'vona-module-a-aspect';
+import { BeanBase } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
 
 export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {

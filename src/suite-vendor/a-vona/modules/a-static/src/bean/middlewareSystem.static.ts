@@ -1,14 +1,14 @@
-import { isObject, isString } from '@cabloy/utils';
-import assert from 'node:assert';
-import path from 'node:path';
 import type { Next } from 'vona';
-import { BeanBase, compose } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import assert from 'node:assert';
+import { existsSync, mkdirSync } from 'node:fs';
+import path from 'node:path';
+import staticCache from '@cabloy/koa-static-cache';
+import { isObject, isString } from '@cabloy/utils';
+import range from 'koa-range';
+import { BeanBase, compose } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
 import { LRU } from 'ylru';
-import { existsSync, mkdirSync } from 'node:fs';
-import range from 'koa-range';
-import staticCache from '@cabloy/koa-static-cache';
 
 interface IStaticDirItem {
   prefix: string;
@@ -39,7 +39,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
   alias: {
     '/favicon.ico': '/api/static/home/index/img/vona.png',
   },
-  getFullPath: getFullPath,
+  getFullPath,
   // maxAge: undefined,
   // buffer: false,
   // dir: '',
@@ -63,7 +63,7 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
     options = Object.assign(
       {
         maxAge: this.app.meta.isProd ? 31536000 : 0,
-        buffer: this.app.meta.isProd ? true : false,
+        buffer: !!this.app.meta.isProd,
         dir: path.join(this.app.options.baseDir, 'app/public'),
       },
       options,

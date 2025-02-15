@@ -1,8 +1,8 @@
-import is from 'is-type-of';
-import chalk from 'chalk';
-import enquirer from 'enquirer';
-import eggBornUtils from 'egg-born-utils';
 import BaseCommand from '@zhennann/common-bin';
+import chalk from 'chalk';
+import eggBornUtils from 'egg-born-utils';
+import enquirer from 'enquirer';
+import is from 'is-type-of';
 import { BeanCli } from './bean.cli.ts';
 
 const __envFields = ['TERM', 'TERM_PROGRAM', 'TERM_PROGRAM_VERSION', 'SHELL', 'COLOR', 'LANG', 'npm_config_registry'];
@@ -79,7 +79,7 @@ export class CliCommand extends BaseCommand {
     const welcomes = this._getMetaWelcomes();
     if (!welcomes) return;
     const welcome = welcomes[0];
-    if (!welcome || welcome.indexOf('articles/cli-introduce.html') === -1) return;
+    if (!welcome || !welcome.includes('articles/cli-introduce.html')) return;
     // eslint-disable-next-line no-console
     console.log('');
     // eslint-disable-next-line no-console

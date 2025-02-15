@@ -1,5 +1,5 @@
-import { sleep } from '@cabloy/utils';
 import assert from 'node:assert';
+import { sleep } from '@cabloy/utils';
 import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';

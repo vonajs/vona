@@ -47,7 +47,7 @@ export function buildWhere(builder: Knex.QueryBuilder, wheres) {
 function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
   // op
   let op = value.op || '='; // default is =
-  op = op.indexOf('like') > -1 ? 'like' : op;
+  op = op.includes('like') ? 'like' : op;
   // op: null/notNull
   if (op === 'null') {
     return builder.whereNull(key);
@@ -104,5 +104,5 @@ function _formatOrAnd_and(builder: Knex.QueryBuilder, wheres) {
 
 function _safeOp(op) {
   if (op === 'notIn') return 'not in';
-  return op.replace(/[\\\.*#%'"`;, ]/g, '');
+  return op.replace(/[\\.*#%'"`;, ]/g, '');
 }

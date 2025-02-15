@@ -1,7 +1,7 @@
-import { Virtual } from 'vona-module-a-bean';
-import { BeanBase } from 'vona';
 import type { Knex } from 'knex';
 import type { TableIdentity } from '../types/tableIdentity.js';
+import { BeanBase } from 'vona';
+import { Virtual } from 'vona-module-a-bean';
 
 export interface IFetchDatabasesResultItem {
   name: string;
@@ -88,6 +88,6 @@ export class BeanDatabaseDialectBase extends BeanBase {
   }
 
   protected _columnTypePrefixes(type: string, prefixes: string[]) {
-    return prefixes.some(prefix => type.indexOf(prefix) > -1);
+    return prefixes.some(prefix => type.includes(prefix));
   }
 }

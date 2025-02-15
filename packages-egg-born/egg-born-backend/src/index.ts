@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import egg from 'egg';
 import * as Framework from 'vona';
 

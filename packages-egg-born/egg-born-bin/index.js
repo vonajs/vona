@@ -1,5 +1,6 @@
-const path = require('path');
+const path = require('node:path');
 const Command = require('@zhennann/egg-bin').Command;
+
 const DISPATCH = Symbol.for('eb:Command#dispatch');
 
 class EggBornBinCommand extends Command {

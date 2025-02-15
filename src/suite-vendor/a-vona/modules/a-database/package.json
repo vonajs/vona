@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-database",
+  "type": "module",
   "version": "5.0.7",
   "title": "a-database",
   "private": true,
@@ -34,7 +35,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "db",
+  "author": "zhennann",
+  "keywords": [
+    "Cabloy Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -47,17 +52,12 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "db",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
-  "keywords": [
-    "Cabloy Module"
-  ],
-  "author": "zhennann",
   "dependencies": {
     "bignumber.js": "^9.1.2",
     "knex": "^3.1.0",

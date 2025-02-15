@@ -1,9 +1,9 @@
-import path from 'path';
-import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
-import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
 import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
-import { deepExtend } from '../utils/util.js';
 import { createRequire } from 'node:module';
+import path from 'node:path';
+import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
+import { AgentWorkerLoader, AppWorkerLoader } from 'egg';
+import { deepExtend } from '../utils/util.js';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {

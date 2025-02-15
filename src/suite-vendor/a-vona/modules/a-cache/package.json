@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-cache",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-cache",
   "vonaModule": {
@@ -19,7 +20,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -32,11 +37,6 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
     "dist",
     "static"

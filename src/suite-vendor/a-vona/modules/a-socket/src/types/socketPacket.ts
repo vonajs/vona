@@ -5,7 +5,7 @@ import type { ISocketPathRecord } from './socketConnection.js';
 export interface ISocketPacketRecord {}
 
 export interface ISocketPacketExecute {
-  execute(packet: any[], options: IDecoratorSocketPacketOptions, next: Next): Promise<any>;
+  execute: (packet: any[], options: IDecoratorSocketPacketOptions, next: Next) => Promise<any>;
 }
 
 export interface IDecoratorSocketPacketOptions

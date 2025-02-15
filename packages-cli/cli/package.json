@@ -1,15 +1,17 @@
 {
   "name": "vona-cli",
+  "type": "module",
   "version": "1.0.7",
   "description": "vona cli",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
-  "main": "dist/index.js",
-  "bin": {
-    "vona": "dist/bin/vona.js"
-  },
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "framework",
+    "vona"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -22,6 +24,10 @@
     },
     "./package.json": "./package.json"
   },
+  "main": "dist/index.js",
+  "bin": {
+    "vona": "dist/bin/vona.js"
+  },
   "files": [
     "dist"
   ],
@@ -31,12 +37,6 @@
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
-  "keywords": [
-    "framework",
-    "vona"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "@cabloy/cli": "workspace:^",
     "vona-cli-set-api": "workspace:^"

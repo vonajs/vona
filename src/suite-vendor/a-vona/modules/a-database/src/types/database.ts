@@ -1,8 +1,8 @@
 import type { Knex } from 'knex';
+import type { BeanModel } from '../bean/bean.model.js';
 import type { ServiceDbMeta } from '../service/dbMeta.js';
 import type { ServiceTransaction } from '../service/transaction.js';
 import type { ConfigDatabase } from './config.js';
-import type { BeanModel } from '../bean/bean.model.js';
 
 export interface IDatabaseClientRecord {
   pg: never;

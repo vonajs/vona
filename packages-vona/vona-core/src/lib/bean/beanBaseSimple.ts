@@ -1,5 +1,5 @@
-import { appResource } from '../core/resource.js';
 import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.js';
+import { appResource } from '../core/resource.js';
 import { BeanSimple } from './beanSimple.js';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');

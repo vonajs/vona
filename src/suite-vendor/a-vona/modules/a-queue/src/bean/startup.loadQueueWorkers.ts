@@ -1,5 +1,5 @@
-import { BeanBase } from 'vona';
 import type { IStartupExecute } from 'vona-module-a-startup';
+import { BeanBase } from 'vona';
 import { Startup } from 'vona-module-a-startup';
 
 @Startup({ instance: true, after: true })

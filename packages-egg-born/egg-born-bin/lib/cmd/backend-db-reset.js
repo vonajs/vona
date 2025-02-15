@@ -35,12 +35,14 @@ class BackendDbResetCommand extends TestCommand {
     const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
-    if (devServerRunning) return;
+    if (devServerRunning)
+      return;
 
     // run
     const mochaFile = require.resolve('../mockApp.js');
     const testArgs = await this.formatTestArgs(context);
-    if (!testArgs) return;
+    if (!testArgs)
+      return;
 
     const opt = {
       env: Object.assign(

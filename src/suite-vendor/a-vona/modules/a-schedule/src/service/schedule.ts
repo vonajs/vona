@@ -1,5 +1,5 @@
-import { BeanBase, cast, deepExtend } from 'vona';
 import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
+import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -54,7 +54,7 @@ export class ServiceSchedule extends BeanBase {
       return false;
     }
     // check disable
-    if (-1 === this.bean.onion.schedule.getOnionsEnabled().findIndex(item => item.name === scheduleName)) {
+    if (this.bean.onion.schedule.getOnionsEnabled().findIndex(item => item.name === scheduleName) === -1) {
       await this.deleteSchedule(job);
       return false;
     }

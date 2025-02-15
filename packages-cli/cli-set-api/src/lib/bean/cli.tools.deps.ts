@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
+import fse from 'fs-extra';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -36,7 +36,7 @@ export class CliToolsDeps extends BeanCliBase {
 
   _getProjectMode(projectPath: string) {
     const vonaPath = this._getVonaPath(projectPath);
-    return vonaPath.indexOf('packages-vona') > -1 ? 'source' : 'project';
+    return vonaPath.includes('packages-vona') ? 'source' : 'project';
   }
 
   _getVonaPath(projectPath: string) {

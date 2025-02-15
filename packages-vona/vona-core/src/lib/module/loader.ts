@@ -1,11 +1,11 @@
-import { AppMeta } from '../core/meta.js';
-import { ModuleTools } from './module.js';
-import loadConfig from './config.js';
-import loadLocales from './locales.js';
-import loadErrors from './errors.js';
-import loadConstants from './constant.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { AppMeta } from '../core/meta.js';
 import { AppUtil } from '../utils/util.js';
+import loadConfig from './config.js';
+import loadConstants from './constant.js';
+import loadErrors from './errors.js';
+import loadLocales from './locales.js';
+import { ModuleTools } from './module.js';
 
 export class ModuleLoader extends BeanSimple {
   async execute() {

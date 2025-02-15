@@ -1,8 +1,8 @@
-import type { VonaApplication } from 'vona';
 import type * as Redlock from 'redlock';
+import type { VonaApplication } from 'vona';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 
-export const config = (app: VonaApplication) => {
+export function config(app: VonaApplication) {
   const lockTTL = app.meta.isLocal ? 8 : app.meta.isTest ? 60 : 30;
   return {
     redlock: {
@@ -17,4 +17,4 @@ export const config = (app: VonaApplication) => {
       } as Redlock.Options,
     },
   };
-};
+}

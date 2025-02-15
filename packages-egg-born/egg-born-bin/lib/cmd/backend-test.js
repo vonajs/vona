@@ -42,7 +42,8 @@ class BackendTestCommand extends TestCommand {
     const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
-    if (devServerRunning) return;
+    if (devServerRunning)
+      return;
 
     // run
     await super.run(context);
@@ -76,7 +77,8 @@ class BackendTestCommand extends TestCommand {
 
     // clean mocha stack, inspired by https://github.com/rstacruz/mocha-clean
     // [mocha built-in](https://github.com/mochajs/mocha/blob/master/lib/utils.js#L738) don't work with `[npminstall](https://github.com/cnpm/npminstall)`, so we will override it.
-    if (!testArgv.fullTrace) requireArr.unshift(require.resolve('@zhennann/egg-bin/lib/mocha-clean'));
+    if (!testArgv.fullTrace)
+      requireArr.unshift(require.resolve('@zhennann/egg-bin/lib/mocha-clean'));
 
     // handle mochawesome enable
     if (!testArgv.reporter && testArgv.mochawesome) {

@@ -4,7 +4,7 @@ export function isClass(fn) {
 }
 
 export function isClassStrict(fn) {
-  return typeof fn === 'function' && /^class(?:\s|{)/.test(fn.toString());
+  return typeof fn === 'function' && /^class(?:\s|\{)/.test(fn.toString());
 }
 
 // function fnBody(fn) {

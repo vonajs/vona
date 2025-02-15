@@ -1,7 +1,7 @@
+import type { IModule, IModulePackage } from '@cabloy/module-info';
+import type { BeanCliBase } from './bean.cli.base.ts';
 import path from 'node:path';
 import fse from 'fs-extra';
-import type { BeanCliBase } from './bean.cli.base.ts';
-import type { IModule, IModulePackage } from '@cabloy/module-info';
 
 type TypeDeps = Record<string, string>;
 
@@ -75,7 +75,7 @@ export class LocalCommon {
     // all modules
     this.cli.modulesMeta.modulesArray.forEach(module => {
       const onlyDev = _checkIfModuleOnlyDev(module);
-      const version = module.info.node_modules ? '^' + module.package.version : 'workspace:^';
+      const version = module.info.node_modules ? `^${module.package.version}` : 'workspace:^';
       if (onlyDev) {
         depsDev[module.package.name] = version;
       } else {

@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-version",
+  "type": "module",
   "version": "5.0.0",
   "vonaModule": {
     "fileVersion": 1,
@@ -10,7 +11,14 @@
       }
     }
   },
-  "type": "module",
+  "description": "vona-module-a-version",
+  "author": "zhennann",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "module",
+    "a-version"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -23,19 +31,11 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "vona-module-a-version",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
-  "keywords": [
-    "egg",
-    "egg-born",
-    "module",
-    "a-version"
-  ],
-  "author": "zhennann",
   "dependencies": {}
 }

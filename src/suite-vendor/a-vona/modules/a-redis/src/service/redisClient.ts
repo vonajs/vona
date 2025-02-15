@@ -1,8 +1,8 @@
 import type { RedisOptions } from 'ioredis';
+import type { ConfigRedisCluster, IRedisClientRecord } from '../types/redis.js';
 import { Redis } from 'ioredis';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
-import type { ConfigRedisCluster, IRedisClientRecord } from '../types/redis.js';
 
 @Service()
 export class ServiceRedisClient extends BeanBase {

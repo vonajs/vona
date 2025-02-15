@@ -1,7 +1,8 @@
+import type { IUserBase } from 'vona-module-a-user';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
-import { userName, type IUserBase } from 'vona-module-a-user';
 import { Api, Param, User } from 'vona-module-a-openapi';
+import { userName } from 'vona-module-a-user';
 import { Controller, Get } from 'vona-module-a-web';
 
 @Controller('passport')

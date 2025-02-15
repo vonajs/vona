@@ -1,6 +1,7 @@
+import type { OnerrorOptions } from 'koa-onerror';
 import type { IModuleMain } from 'vona';
+import { onerror } from 'koa-onerror';
 import { BeanSimple } from 'vona';
-import { onerror, type OnerrorOptions } from 'koa-onerror';
 import { __ThisModule__ } from './.metadata/this.js';
 
 export class Main extends BeanSimple implements IModuleMain {

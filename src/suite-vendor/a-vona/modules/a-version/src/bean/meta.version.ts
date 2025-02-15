@@ -1,5 +1,3 @@
-import { BeanBase } from 'vona';
-import { Meta } from 'vona-module-a-meta';
 import type {
   IMetaVersionInit,
   IMetaVersionInitOptions,
@@ -7,20 +5,22 @@ import type {
   IMetaVersionUpdateOptions,
 } from 'vona-module-a-version';
 import fse from 'fs-extra';
+import { BeanBase } from 'vona';
+import { Meta } from 'vona-module-a-meta';
 
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVersionInit {
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
       const entity = this.scope.entity.versionInit;
-      await this.bean.model.createTable(entity.table, function (table) {
+      await this.bean.model.createTable(entity.table, table => {
         table.basicFields({ deleted: false, iid: false });
         table.string(entity.column('instanceName'), 50);
         table.string(entity.column('module'), 50);
         table.integer(entity.column('version'));
       });
       const entity2 = this.scope.entity.viewRecord;
-      await this.bean.model.createTable(entity2.table, function (table) {
+      await this.bean.model.createTable(entity2.table, table => {
         table.basicFields({ deleted: true, iid: false });
         table.string(entity2.column('viewName'), 255);
         table.text(entity2.column('viewSql'));

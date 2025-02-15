@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {},
-  "exclude": ["modules"],
   "references": [
     {
       "path": "modules/a-aspect/tsconfig.build.json"
@@ -105,5 +104,6 @@
     {
       "path": "modules/a-worker/tsconfig.build.json"
     }
-  ]
+  ],
+  "exclude": ["modules"]
 }

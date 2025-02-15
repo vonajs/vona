@@ -1,7 +1,8 @@
+import type { IOpenApiOptions } from 'vona-module-a-openapi';
+import type { IDecoratorControllerOptions } from '../../types/controller.js';
+import type { IDecoratorDtoOptions } from '../../types/dto.js';
 import { appMetadata, createBeanDecorator } from 'vona';
-import { type IDecoratorControllerOptions } from '../../types/controller.js';
-import { type IDecoratorDtoOptions } from '../../types/dto.js';
-import { type IOpenApiOptions, SymbolOpenApiOptions } from 'vona-module-a-openapi';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export function Controller(options?: IDecoratorControllerOptions): ClassDecorator;
 export function Controller(path?: string): ClassDecorator;

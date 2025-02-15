@@ -14,7 +14,7 @@ const extTo = '.ts';
 async function main() {
   // paths
   const paths = argv.args;
-  const patterns = paths.map(item => {
+  const patterns = paths.map((item) => {
     return `${item}/**/*${extFrom}`;
   });
   // files

@@ -1,5 +1,6 @@
+import type { IScheduleExecute, TypeScheduleJob } from 'vona-module-a-schedule';
 import { BeanBase } from 'vona';
-import { type IScheduleExecute, Schedule, type TypeScheduleJob } from 'vona-module-a-schedule';
+import { Schedule } from 'vona-module-a-schedule';
 
 @Schedule({ enable: false, repeat: { every: 5000 } })
 export class ScheduleTest2 extends BeanBase implements IScheduleExecute {

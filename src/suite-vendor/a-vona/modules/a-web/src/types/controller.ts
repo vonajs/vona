@@ -1,6 +1,6 @@
-import { type OmitNever } from 'vona';
+import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import { type IOnionOptionsEnable } from 'vona-module-a-onion';
+import type { IOnionOptionsEnable } from 'vona-module-a-onion';
 
 export interface IApiPathRecordMethodMap {
   get: IApiPathGetRecord;

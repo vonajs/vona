@@ -1,7 +1,7 @@
-import { checkIfIgnore } from '../utils.js';
-import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
 import type { Next, VonaContext } from 'vona';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
 import { deepExtend } from 'vona';
+import { checkIfIgnore } from '../utils.js';
 
 const HEADER = ['x-content-security-policy', 'content-security-policy'];
 const REPORT_ONLY_HEADER = ['x-content-security-policy-report-only', 'content-security-policy-report-only'];
@@ -39,22 +39,22 @@ export default (options: IMiddlewareSystemOptionsSecurities['csp']) => {
       } else {
         let values = (Array.isArray(value) ? value : [value]) as string[];
         if (key === 'script-src') {
-          const hasNonce = values.some(function (val) {
-            return val.indexOf('nonce-') !== -1;
+          const hasNonce = values.some(val => {
+            return val.includes('nonce-');
           });
 
           if (!hasNonce) {
-            values.push("'nonce-" + ctx.nonce + "'");
+            values.push(`'nonce-${ctx.nonce}'`);
           }
         }
 
-        values = values.map(function (d) {
+        values = values.map(d => {
           if (d.startsWith('.')) {
-            d = '*' + d;
+            d = `*${d}`;
           }
           return d;
         });
-        bufArray.push(key + ' ' + values.join(' '));
+        bufArray.push(`${key} ${values.join(' ')}`);
       }
     }
     const headerString = bufArray.join(';');

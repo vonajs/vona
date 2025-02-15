@@ -1,11 +1,11 @@
+import type { IBeanRecord } from '../bean/type.js';
 import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import type { MetadataKey } from './metadata.js';
-import { appMetadata } from './metadata.js';
-import type { IBeanRecord } from '../bean/type.js';
+import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { isClass } from '../utils/isClass.js';
+import { appMetadata } from './metadata.js';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
@@ -79,7 +79,7 @@ export class AppResource extends BeanSimple {
     if (name) return name;
     // scene
     if (!scene) scene = 'bean';
-    scene = scene.replace(/\./gi, '');
+    scene = scene.replace(/\./g, '');
     // bean class name
     const beanClassName = beanClass.name;
     if (beanClassName.toLocaleUpperCase().startsWith(scene.toLocaleUpperCase())) {

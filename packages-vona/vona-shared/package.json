@@ -5,6 +5,21 @@
   "publishConfig": {
     "access": "public"
   },
+  "author": "zhennann",
+  "license": "MIT",
+  "homepage": "https://github.com/cabloy/vona#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabloy/vona.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cabloy/vona/issues"
+  },
+  "keywords": [
+    "vue3",
+    "ioc",
+    "vona"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -16,21 +31,6 @@
     "dist",
     "src"
   ],
-  "author": "zhennann",
-  "license": "MIT",
-  "keywords": [
-    "vue3",
-    "ioc",
-    "vona"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cabloy/vona.git"
-  },
-  "homepage": "https://github.com/cabloy/vona#readme",
-  "bugs": {
-    "url": "https://github.com/cabloy/vona/issues"
-  },
   "scripts": {
     "lint": "eslint .",
     "clean": "tsc -b --clean",

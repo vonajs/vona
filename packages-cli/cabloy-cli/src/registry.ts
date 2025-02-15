@@ -9,7 +9,7 @@ export async function getRegistry() {
     await npmConfig.load();
     __registry = npmConfig.get('registry') || 'https://registry.npmjs.org/';
     if (__registry.charAt(__registry.length - 1) !== '/') {
-      __registry = __registry + '/';
+      __registry = `${__registry}/`;
     }
   }
   return __registry;

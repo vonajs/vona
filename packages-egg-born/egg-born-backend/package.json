@@ -2,18 +2,14 @@
   "name": "egg-born-backend",
   "version": "10.0.7",
   "description": "egg-born-backend",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
-  ],
-  "scripts": {
-    "lint": "eslint ."
-  },
+  "author": "zhennann",
+  "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhennann/egg-born-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhennann/egg-born-backend/issues"
   },
   "keywords": [
     "egg",
@@ -21,11 +17,15 @@
     "framework",
     "backend"
   ],
-  "author": "zhennann",
-  "bugs": {
-    "url": "https://github.com/zhennann/egg-born-backend/issues"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
+  ],
+  "scripts": {
+    "lint": "eslint ."
   },
-  "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
     "@koa/cors": "^5.0.0",
     "@types/uuid": "^9.0.8",

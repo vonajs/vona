@@ -61,7 +61,8 @@ class BackendDevCommand extends DevCommand {
     const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
-    if (devServerRunning) return;
+    if (devServerRunning)
+      return;
 
     // run
     await super.run(context);

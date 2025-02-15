@@ -1,8 +1,8 @@
-import { type IGlobBeanFile, type OnionSceneMeta } from '@cabloy/module-info';
+import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
+import path from 'node:path';
 import { stringToCapitalize, toUpperCaseFirstChar } from '@cabloy/word-utils';
-import path from 'path';
-import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
+import fse from 'fs-extra';
 
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
@@ -82,7 +82,7 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
   }
   // isGlobal
   const isGlobal = sceneMeta.hasLocal
-    ? fileContent.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/)
+    ? fileContent.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*export class/)
     : true;
   return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }

@@ -1,6 +1,6 @@
 const ioc = require('socket.io-client');
 
-module.exports = options => {
+module.exports = (options) => {
   const { openAuthClient } = options;
   return {
     _io: null,

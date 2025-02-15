@@ -1,11 +1,11 @@
 export type TypeComposeAdapter = (context: any, chain: any) => { receiver?: any; fn?: Function } | undefined;
 
-const __adapterDefault = (_context, chain) => {
+function __adapterDefault(_context, chain) {
   return {
     receiver: undefined,
     fn: chain,
   };
-};
+}
 
 export function compose(chains?: any[], adapter?: TypeComposeAdapter) {
   if (!adapter) adapter = __adapterDefault;
@@ -29,7 +29,7 @@ export function compose(chains?: any[], adapter?: TypeComposeAdapter) {
       }
       if (i === chains!.length) fn = next;
       if (!fn) return context;
-      return fn.call(receiver, context, function next(...args) {
+      return fn.call(receiver, context, (...args) => {
         context = args.length === 0 ? context : args[0];
         return dispatch(i + 1, context);
       });

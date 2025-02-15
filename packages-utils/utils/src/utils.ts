@@ -2,7 +2,7 @@ export function deprecated(oldUsage, newUsage) {
   const message = '`'
     .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
     .concat(newUsage, '` instead');
-  // eslint-disable-next-line
+
   console.warn(message);
 }
 
@@ -25,7 +25,7 @@ export async function sleep(ms) {
 
 export function replaceTemplate(content: string, scope: object) {
   if (!content) return content;
-  return content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+  return content.toString().replace(/(\\)?\{\{ *([\w.]+) *\}\}/g, (block, skip, key) => {
     if (skip) {
       return block.substring(skip.length);
     }

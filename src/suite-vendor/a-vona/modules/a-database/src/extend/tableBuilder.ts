@@ -1,5 +1,5 @@
-import knex from 'knex';
 import type { VonaApplication } from 'vona';
+import knex from 'knex';
 
 export interface IBasicFieldsOptions {
   id?: boolean;
@@ -28,17 +28,17 @@ export function ExtendTableBuilder(_app: VonaApplication) {
   knex.TableBuilder.extend('int1', function (columnName) {
     return this.integer(columnName).defaultTo(1);
   });
-  ['atomId', 'itemId', 'userId', 'atomClassId', 'atomIdMain', 'atomClassIdMain'].forEach(function (method) {
+  ['atomId', 'itemId', 'userId', 'atomClassId', 'atomIdMain', 'atomClassIdMain'].forEach(method => {
     knex.TableBuilder.extend(method, function () {
       return this.integer(method).defaultTo(0);
     });
   });
-  ['description'].forEach(function (method) {
+  ['description'].forEach(method => {
     knex.TableBuilder.extend(method, function (length = 255) {
       return this.string(method, length);
     });
   });
-  ['content'].forEach(function (method) {
+  ['content'].forEach(method => {
     knex.TableBuilder.extend(method, function (useText) {
       return useText ? this.text(method) : this.json(method);
     });

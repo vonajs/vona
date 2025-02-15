@@ -1,15 +1,15 @@
+import type * as ModuleInfo from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
+import type { TypeMonkeyName, VonaContext } from '../../types/index.js';
+import { createRequire } from 'node:module';
+import os from 'node:os';
+import path from 'node:path';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
-import type * as ModuleInfo from '@cabloy/module-info';
-import fse from 'fs-extra';
-import path from 'node:path';
-import os from 'node:os';
-import * as uuid from 'uuid';
-import type { TypeMonkeyName, VonaContext } from '../../types/index.js';
-import { BeanSimple } from '../bean/beanSimple.js';
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
-import type { IModule } from '@cabloy/module-info';
-import { createRequire } from 'node:module';
+import fse from 'fs-extra';
+import * as uuid from 'uuid';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
@@ -36,7 +36,7 @@ export class AppUtil extends BeanSimple {
     if (apiPath.startsWith('/_api_')) {
       apiPath = apiPath.substring('/_api_'.length);
     } else {
-      apiPath = '/' + apiPath;
+      apiPath = `/${apiPath}`;
     }
     return apiPath;
   }
@@ -285,7 +285,7 @@ export function combineQueries(url: string, queries: object): string {
   }
   if (!str) return url;
   //
-  if (!url) return '?' + str;
+  if (!url) return `?${str}`;
   //
   const pos = url.indexOf('?');
   if (pos === -1) return `${url}?${str}`;
@@ -340,5 +340,5 @@ export function disposeInstance(instance: any) {
 
 export function polyfillDispose(instance: any) {
   if (!instance || instance.__dispose__) return;
-  Object.getPrototypeOf(instance)['__dispose__'] = () => {};
+  Object.getPrototypeOf(instance).__dispose__ = () => {};
 }

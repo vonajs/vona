@@ -15,7 +15,8 @@ class BackendStartCommand extends StartCommand {
     // need not sticky
     // if (context.argv.sticky === undefined) context.argv.sticky = true;
 
-    if (!context.argv._ || context.argv._.length === 0) context.argv._ = ['dist/backend'];
+    if (!context.argv._ || context.argv._.length === 0)
+      context.argv._ = ['dist/backend'];
 
     if (!context.argv.title) {
       context.argv.title = `cabloy-server-${utils.getAppPackage().name}`;

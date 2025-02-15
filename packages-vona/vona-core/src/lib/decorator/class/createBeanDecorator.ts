@@ -1,6 +1,6 @@
-import { appResource } from '../../core/resource.js';
 import type { IBeanSceneRecord } from '../interface/beanOptions.js';
 import type { Constructable } from '../type/constructable.js';
+import { appResource } from '../../core/resource.js';
 import { parseModuleName } from './util.js';
 
 export function createBeanDecorator<T>(

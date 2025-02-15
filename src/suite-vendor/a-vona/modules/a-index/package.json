@@ -1,5 +1,6 @@
 {
   "name": "vona-module-a-index",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-index",
   "vonaModule": {
@@ -12,7 +13,8 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "zhennann",
   "exports": {
     ".": {
       "types": [
@@ -25,13 +27,11 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
   "files": [
+    "cli",
     "dist",
-    "static",
-    "cli"
+    "static"
   ],
   "scripts": {},
-  "author": "zhennann",
   "dependencies": {}
 }

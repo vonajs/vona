@@ -1,11 +1,17 @@
 {
   "name": "@cabloy/cli",
+  "type": "module",
   "version": "2.1.10",
   "description": "@cabloy/cli",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "framework",
+    "cabloy-cli"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -27,12 +33,6 @@
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
-  "keywords": [
-    "framework",
-    "cabloy-cli"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "@babel/parser": "^7.26.5",
     "@cabloy/module-glob": "workspace:^",
@@ -45,9 +45,9 @@
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "cli-table3": "^0.6.5",
-    "esbuild": "^0.23.0",
     "egg-born-utils": "^1.2.0",
     "enquirer": "^2.3.6",
+    "esbuild": "^0.23.0",
     "fs-extra": "^11.2.0",
     "gogocode": "^1.0.53",
     "is-type-of": "^2.1.0",

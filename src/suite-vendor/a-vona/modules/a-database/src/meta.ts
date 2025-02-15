@@ -1,11 +1,11 @@
 import atomClasses from './meta/atomClass/atomClasses.js';
-import schemas from './meta/validation/schemas.js';
-import keywords from './meta/validation/keywords.js';
 // static
 import staticApps from './meta/static/apps.js';
 import staticDicts from './meta/static/dicts.js';
 import staticLayouts from './meta/static/layouts.js';
 import staticResources from './meta/static/resources.js';
+import keywords from './meta/validation/keywords.js';
+import schemas from './meta/validation/schemas.js';
 // meta
 export const meta = {
   base: {

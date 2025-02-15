@@ -1,7 +1,35 @@
+/** config: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { TypeModuleConfig } from 'vona';
+
+import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
+import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
+
+/** meta: end */
+/** meta redlock: begin */
+import type { MetaRedlock } from '../bean/meta.redlock.js';
+
+/** queue: end */
+/** queue: begin */
+import type { QueueSchedule } from '../bean/queue.schedule.js';
+import type { config } from '../config/config.js';
+/** service: end */
+/** service: begin */
+import type { ServiceSchedule } from '../service/schedule.js';
+/** service: end */
+/** service: begin */
+
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
-export * from '../bean/meta.redlock.js';
+import 'vona';
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/meta.redlock.js';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-schedule:redlock': never;
@@ -13,14 +41,9 @@ declare module 'vona-module-a-schedule' {
     get scope(): ScopeModuleASchedule;
   }
 }
-/** meta: end */
-/** meta redlock: begin */
-import type { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
-
-import { type IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-schedule:schedule': IDecoratorQueueOptions;
@@ -32,17 +55,12 @@ declare module 'vona-module-a-schedule' {
     get scope(): ScopeModuleASchedule;
   }
 }
-/** queue: end */
-/** queue: begin */
-import type { QueueSchedule } from '../bean/queue.schedule.js';
 export interface IModuleQueue {
   schedule: QueueSchedule;
 }
 /** queue: end */
 /** startup: begin */
 export * from '../bean/startup.loadSchedules.js';
-
-import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-schedule:loadSchedules': IDecoratorStartupOptions;
@@ -54,11 +72,9 @@ declare module 'vona-module-a-schedule' {
     get scope(): ScopeModuleASchedule;
   }
 }
-/** startup: end */
-/** service: begin */
-export * from '../service/schedule.js';
-
-import 'vona';
+/** service: end */
+/** config: begin */
+export * from '../config/config.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-schedule:schedule': never;
@@ -70,30 +86,17 @@ declare module 'vona-module-a-schedule' {
     get scope(): ScopeModuleASchedule;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceSchedule } from '../service/schedule.js';
 export interface IModuleService {
   schedule: ServiceSchedule;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-schedule.service.schedule': ServiceSchedule;
   }
 }
-/** service: end */
-/** config: begin */
-export * from '../config/config.js';
-import type { config } from '../config/config.js';
-/** config: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleConfig } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+/** startup: end */
+/** service: begin */
+export * from '../service/schedule.js';
 
 @Scope()
 export class ScopeModuleASchedule extends BeanScopeBase {}
@@ -105,8 +108,6 @@ export interface ScopeModuleASchedule {
   queue: IModuleQueue;
   service: IModuleService;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-schedule': ScopeModuleASchedule;

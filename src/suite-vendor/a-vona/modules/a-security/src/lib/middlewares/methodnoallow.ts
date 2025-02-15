@@ -1,5 +1,5 @@
-import { METHODS } from 'node:http';
 import type { Next, VonaContext } from 'vona';
+import { METHODS } from 'node:http';
 
 const METHODS_NOT_ALLOWED = ['TRACE', 'TRACK'];
 const safeHttpMethodsMap: Record<string, boolean> = {};

@@ -1,9 +1,10 @@
 import type { Knex } from 'knex';
-import { promisify } from 'node:util';
 import type {
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
-  TableIdentity } from 'vona-module-a-database';
+  TableIdentity,
+} from 'vona-module-a-database';
+import { promisify } from 'node:util';
 import {
   BeanDatabaseDialectBase,
   DatabaseDialect,

@@ -1,6 +1,6 @@
+import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { OmitClass } from 'vona';
 import { Entity, EntityBase } from 'vona-module-a-database';
-import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { Rule } from 'vona-module-a-openapi';
 
 @Entity('aInstance')

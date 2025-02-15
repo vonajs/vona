@@ -1,21 +1,22 @@
 import type { TypeBeanRecordGeneralSelectorKeys, VonaApplication } from 'vona';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
 import type {
-  TSummerCachePreset } from 'vona-module-a-summer';
+  TSummerCachePreset,
+} from 'vona-module-a-summer';
+import type { IDatabaseClientDialectRecord } from '../types/database.js';
 import {
   configAll,
   configAllWithIgnoreNull,
   configRedis,
   configRedisWithIgnoreNull,
 } from 'vona-module-a-summer';
-import type { IDatabaseClientDialectRecord } from '../types/database.js';
 
 export type TypeDataBaseConfigDialects = Record<
   keyof IDatabaseClientDialectRecord,
   TypeBeanRecordGeneralSelectorKeys<'databaseDialect'>
 >;
 
-export const config = (_app: VonaApplication) => {
+export function config(_app: VonaApplication) {
   return {
     dialects: {
       mysql: 'a-databasedialect.databaseDialect.mysql',
@@ -37,4 +38,4 @@ export const config = (_app: VonaApplication) => {
       },
     },
   };
-};
+}

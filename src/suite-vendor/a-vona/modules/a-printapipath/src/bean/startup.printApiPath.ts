@@ -1,9 +1,9 @@
-import { BeanBase } from 'vona';
 import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
 import type { IStartupExecute } from 'vona-module-a-startup';
-import { Startup } from 'vona-module-a-startup';
-import TableClass from 'cli-table3';
 import chalk from 'chalk';
+import TableClass from 'cli-table3';
+import { BeanBase } from 'vona';
+import { Startup } from 'vona-module-a-startup';
 
 @Startup({ debounce: true, after: true, meta: { mode: 'local' } })
 export class StartupPrintApiPath extends BeanBase implements IStartupExecute {

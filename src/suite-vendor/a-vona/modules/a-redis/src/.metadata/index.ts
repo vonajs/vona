@@ -1,7 +1,27 @@
+/** service: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+/** bean: end */
 /** bean: begin */
-export * from '../bean/bean.redis.js';
+import type { BeanRedis } from '../bean/bean.redis.js';
+/** service: end */
+/** service: begin */
+import type { ServiceRedisClient } from '../service/redisClient.js';
+
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** service: end */
+/** service: begin */
+
+/** bean: begin */
+import 'vona';
+import 'vona';
+import 'vona';
+import 'vona';
 
 import 'vona';
+
+export * from '../bean/bean.redis.js';
 declare module 'vona' {}
 declare module 'vona-module-a-redis' {
   export interface BeanRedis {
@@ -9,10 +29,6 @@ declare module 'vona-module-a-redis' {
     get scope(): ScopeModuleARedis;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanRedis } from '../bean/bean.redis.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     redis: BeanRedis;
@@ -21,8 +37,6 @@ declare module 'vona' {
 /** bean: end */
 /** service: begin */
 export * from '../service/redisClient.js';
-
-import 'vona';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-redis:redisClient': never;
@@ -34,26 +48,14 @@ declare module 'vona-module-a-redis' {
     get scope(): ScopeModuleARedis;
   }
 }
-/** service: end */
-/** service: begin */
-import type { ServiceRedisClient } from '../service/redisClient.js';
 export interface IModuleService {
   redisClient: ServiceRedisClient;
 }
-/** service: end */
-/** service: begin */
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-redis.service.redisClient': ServiceRedisClient;
   }
 }
-/** service: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleARedis extends BeanScopeBase {}
@@ -62,8 +64,6 @@ export interface ScopeModuleARedis {
   util: BeanScopeUtil;
   service: IModuleService;
 }
-
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-redis': ScopeModuleARedis;

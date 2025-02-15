@@ -5,5 +5,5 @@ export interface IMetaOptionsIndex {
 }
 
 export interface IMetaIndexExecute {
-  execute(options: IMetaOptionsIndex): Promise<boolean>;
+  execute: (options: IMetaOptionsIndex) => Promise<boolean>;
 }

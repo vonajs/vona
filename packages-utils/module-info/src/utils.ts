@@ -2,11 +2,11 @@ import type { IModuleInfo, TypeProjectEntityType, TypeProjectMode } from './inte
 
 export function parseInfoFromPath(pathName?: string | null): IModuleInfo | undefined {
   if (!pathName) return;
-  pathName = pathName.replace(/\\/gi, '/');
+  pathName = pathName.replace(/\\/g, '/');
   const parts = pathName.split('/');
   for (let i = parts.length - 1; i >= 0; i--) {
     const part = parts[i];
-    if (part.indexOf('-') === -1) continue;
+    if (!part.includes('-')) continue;
     const info = parseInfo(part);
     if (!info) continue;
     return info;
@@ -23,7 +23,7 @@ const PREFIX_E = '/';
 //   first check / then -
 export function parseInfo(moduleName: string | undefined): IModuleInfo | undefined {
   if (!moduleName) return;
-  if (moduleName.indexOf('://') > -1) return;
+  if (moduleName.includes('://')) return;
   if (moduleName.charAt(0) === '/') moduleName = moduleName.substring(1);
   let parts = moduleName.split('/').filter(item => item);
   if (parts.length < 2) {
@@ -64,7 +64,7 @@ export function parseInfoPro(
 export function parseName(moduleUrl): string | undefined {
   if (!moduleUrl) return;
   if (moduleUrl.indexOf('/api/static/') === 0) {
-    moduleUrl = '/api/' + moduleUrl.substring('/api/static/'.length);
+    moduleUrl = `/api/${moduleUrl.substring('/api/static/'.length)}`;
   }
   if (moduleUrl.indexOf(PREFIX_A) === 0) {
     return _parseNameLikeUrl(moduleUrl, PREFIX_A);

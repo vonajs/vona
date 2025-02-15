@@ -1,7 +1,27 @@
-/** pipe: begin */
-export * from '../bean/pipe.valid.js';
+/** locale: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { TypeLocaleBase, TypeModuleLocales } from 'vona';
+
+/** bean: end */
+/** bean: begin */
+import type { BeanValidator } from '../bean/bean.validator.js';
+/** pipe: end */
+/** bean: begin */
 import type { IPipeOptionsValid } from '../bean/pipe.valid.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
+/** bean: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
 import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/bean.validator.js';
 declare module 'vona-module-a-aspect' {
   export interface IPipeRecordLocal {
     'a-validation:valid': IPipeOptionsValid;
@@ -13,11 +33,8 @@ declare module 'vona-module-a-validation' {
     get scope(): ScopeModuleAValidation;
   }
 }
-/** pipe: end */
-/** bean: begin */
-export * from '../bean/bean.validator.js';
-
-import 'vona';
+/** pipe: begin */
+export * from '../bean/pipe.valid.js';
 declare module 'vona' {}
 declare module 'vona-module-a-validation' {
   export interface BeanValidator {
@@ -25,28 +42,15 @@ declare module 'vona-module-a-validation' {
     get scope(): ScopeModuleAValidation;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanValidator } from '../bean/bean.validator.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     validator: BeanValidator;
   }
 }
-/** bean: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** locale: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAValidation extends BeanScopeBase {}
@@ -56,7 +60,6 @@ export interface ScopeModuleAValidation {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-validation': ScopeModuleAValidation;

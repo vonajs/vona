@@ -1,4 +1,5 @@
 import * as Retry from 'retry';
+
 export * as Retry from 'retry';
 
 export type RetryFunction<DATA> = (currentAttempt: number) => Promise<DATA>;

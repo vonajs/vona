@@ -1,14 +1,14 @@
-import { Bean } from 'vona-module-a-bean';
-import { BeanBase, SymbolProxyDisable } from 'vona';
-import { matchSelector } from '@cabloy/word-utils';
 import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionOptionsMeta,
   TypeOnionOptionsMatchRule,
 } from '../types/onion.js';
-import { ServiceOnion } from '../service/onion_.js';
 import { checkMeta } from '@cabloy/utils';
+import { matchSelector } from '@cabloy/word-utils';
+import { BeanBase, SymbolProxyDisable } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { ServiceOnion } from '../service/onion_.js';
 
 @Bean()
 export class BeanOnion extends BeanBase {

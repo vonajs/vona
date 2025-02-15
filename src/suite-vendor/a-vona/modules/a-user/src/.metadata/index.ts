@@ -1,7 +1,31 @@
-/** guard: begin */
-export * from '../bean/guard.passport.js';
+/** config: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'vona';
+import type { TypeModuleConfig } from 'vona';
+
+import type { IDecoratorEventOptions } from 'vona-module-a-event';
+/** bean: end */
+/** bean: begin */
+import type { BeanPassport } from '../bean/bean.passport.js';
+/** event: end */
+/** event: begin */
+import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.js';
+
+import type { EventSignin } from '../bean/event.signin.js';
+import type { EventSignout } from '../bean/event.signout.js';
+/** guard: end */
+/** bean: begin */
 import type { IGuardOptionsPassport } from '../bean/guard.passport.js';
+import type { config } from '../config/config.js';
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/bean.passport.js';
 declare module 'vona-module-a-aspect' {
   export interface IGuardRecordGlobal {
     'a-user:passport': IGuardOptionsPassport;
@@ -13,11 +37,9 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
-/** guard: end */
-/** bean: begin */
-export * from '../bean/bean.passport.js';
-
-import 'vona';
+/** bean: end */
+/** event: begin */
+export * from '../bean/event.createUserAnonymous.js';
 declare module 'vona' {}
 declare module 'vona-module-a-user' {
   export interface BeanPassport {
@@ -25,22 +47,15 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
-/** bean: end */
-/** bean: begin */
-import type { BeanPassport } from '../bean/bean.passport.js';
-import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     passport: BeanPassport;
   }
 }
-/** bean: end */
-/** event: begin */
-export * from '../bean/event.createUserAnonymous.js';
 export * from '../bean/event.signin.js';
 export * from '../bean/event.signout.js';
-
-import { type IDecoratorEventOptions } from 'vona-module-a-event';
+/** guard: begin */
+export * from '../bean/guard.passport.js';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-user:createUserAnonymous': IDecoratorEventOptions;
@@ -64,11 +79,6 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
-/** event: end */
-/** event: begin */
-import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.js';
-import type { EventSignin } from '../bean/event.signin.js';
-import type { EventSignout } from '../bean/event.signout.js';
 export interface IModuleEvent {
   createUserAnonymous: EventCreateUserAnonymous;
   signin: EventSignin;
@@ -77,12 +87,6 @@ export interface IModuleEvent {
 /** event: end */
 /** config: begin */
 export * from '../config/config.js';
-import type { config } from '../config/config.js';
-/** config: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import { BeanScopeBase, type TypeModuleConfig } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAUser extends BeanScopeBase {}
@@ -93,7 +97,6 @@ export interface ScopeModuleAUser {
   event: IModuleEvent;
 }
 
-import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-user': ScopeModuleAUser;

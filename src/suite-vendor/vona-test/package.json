@@ -1,5 +1,6 @@
 {
   "name": "vona-suite-vona-test",
+  "type": "module",
   "version": "5.0.3",
   "title": "vona-test",
   "vonaModule": {
@@ -12,12 +13,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
   "files": [
     "dist"
   ],
-  "description": "",
-  "author": "",
   "dependencies": {
     "vona-module-vona-test": "^5.0.3"
   },

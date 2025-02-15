@@ -1,20 +1,21 @@
-import Chalk from 'chalk';
-import TableClass, { type TableConstructorOptions } from 'cli-table3';
-import Boxen from 'boxen';
-import fse from 'fs-extra';
+import type { TableConstructorOptions } from 'cli-table3';
+import type { NameMeta } from '../types/helper.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
-import { commandsConfig } from '../config.ts';
-import type { BeanCliBase } from './bean.cli.base.ts';
-import { type NameMeta } from '../types/helper.ts';
-import { getRegistry } from '../registry.ts';
-import path from 'node:path';
 import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
-import tmp from 'tmp';
+import Boxen from 'boxen';
+import Chalk from 'chalk';
+import TableClass from 'cli-table3';
 import { build as esBuild } from 'esbuild';
-import { pathToFileURL } from 'node:url';
+import fse from 'fs-extra';
 import gogocode from 'gogocode';
-import { createRequire } from 'node:module';
+import tmp from 'tmp';
+import { commandsConfig } from '../config.ts';
+import { getRegistry } from '../registry.ts';
 
 export interface ITempFileOptions {
   tmpdir?: string;
@@ -221,7 +222,7 @@ export class LocalHelper {
   }
 
   async saveJSONFile(fileName: string, json: object, format?: boolean) {
-    await fse.writeFile(fileName, JSON.stringify(json, null, 2) + '\n');
+    await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
     if (format !== false) {
       await this.formatFile({ fileName });
     }

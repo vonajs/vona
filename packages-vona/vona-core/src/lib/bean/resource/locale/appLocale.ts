@@ -1,6 +1,6 @@
+import type { ILocalInfos, IModuleLocale, IModuleLocaleText } from './type.js';
 import * as localeutil from '@cabloy/localeutil';
 import { BeanSimple } from '../../beanSimple.js';
-import type { ILocalInfos, IModuleLocale, IModuleLocaleText } from './type.js';
 import { LocaleModuleNameSeparator } from './type.js';
 
 export class AppLocale extends BeanSimple {
