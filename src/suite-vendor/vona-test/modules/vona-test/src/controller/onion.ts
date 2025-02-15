@@ -15,7 +15,7 @@ export class ControllerOnion extends BeanBase {
   @UseMiddleware('a-database:transaction')
   @UseGuardGlobal('a-user:passport', { public: true })
   index() {
-    //return 'Hello Vona';
+    // return 'Hello Vona';
   }
 
   @Post('//echo')
@@ -37,7 +37,7 @@ export class ControllerOnion extends BeanBase {
 
   @Post('echo2/:userId/:userName')
   @UseGuardGlobal('a-user:passport', { public: true })
-  //echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
+  // echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
     @Param('userId', v.description(locale('UserId')), v.example('example:1')) _userId: number,
     @Param('userName', v.description(locale('UserId')), v.example('example:1')) _userName: string,
@@ -45,8 +45,8 @@ export class ControllerOnion extends BeanBase {
     @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
     user: DtoUser,
   ): DtoUser {
-    //const ctx = this.app.currentContext;
-    //console.log(ctx === this.ctx);
+    // const ctx = this.app.currentContext;
+    // console.log(ctx === this.ctx);
     return user;
   }
 
@@ -57,10 +57,11 @@ export class ControllerOnion extends BeanBase {
     @Query('id', v.optional()) id: number,
     @Headers('Accept', v.description(locale('UserId'))) accept: string,
   ) {
-    //this.scope.util.combineApiPath
+    // this.scope.util.combineApiPath
+    // eslint-disable-next-line
     console.log(this.ctx.path);
-    //const ctx = this.app.currentContext;
-    //console.log(ctx === this.ctx);
+    // const ctx = this.app.currentContext;
+    // console.log(ctx === this.ctx);
     return id + ':' + accept;
   }
 
@@ -75,8 +76,8 @@ export class ControllerOnion extends BeanBase {
   @Get('echo5')
   @Public()
   echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
-    //const ctx = this.app.currentContext;
-    //console.log(ctx === this.ctx);
+    // const ctx = this.app.currentContext;
+    // console.log(ctx === this.ctx);
     return ids;
   }
 }
