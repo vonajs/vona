@@ -9,6 +9,7 @@ __patchJSON();
 function __patchJSON() {
   // 2020-03-13T00:44:15.149Z
   // 2020-03-13T00:44:15Z
+  // eslint-disable-next-line
   const __dateTest = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
   function __jsonReviver(k, v, reviver) {
     if (v && typeof v === 'string' && __dateTest.test(v)) {
