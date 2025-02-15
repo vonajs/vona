@@ -13,5 +13,6 @@ export class Main extends BeanSimple implements IModuleMain {
     // alive
     await this.app.bean.worker.setAlive();
   }
+
   async configLoaded(_config: any) {}
 }

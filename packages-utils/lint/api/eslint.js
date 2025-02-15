@@ -1,6 +1,7 @@
 import stylistic from '@stylistic/eslint-plugin';
 import parserTs from '@typescript-eslint/parser';
 import tseslint from 'typescript-eslint';
+import globals from 'globals';
 import { rules } from '../common/rules.js';
 
 export default [
@@ -25,10 +26,8 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        console: 'readonly',
-        process: 'readonly',
-        describe: 'readonly',
-        it: 'readonly',
+        ...globals.node,
+        ...globals.jest,
       },
     },
     rules,

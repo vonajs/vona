@@ -20,8 +20,7 @@ export type TSummerCacheTestData = { id: number; name: string };
 })
 export class SummerCacheTest
   extends BeanSummerCacheBase<TSummerCacheTestKey, TSummerCacheTestData>
-  implements ISummerCacheGet<TSummerCacheTestKey, TSummerCacheTestData>
-{
+  implements ISummerCacheGet<TSummerCacheTestKey, TSummerCacheTestData> {
   async getNative(
     key: TSummerCacheTestKey,
     _options?: TSummerCacheActionOptions<TSummerCacheTestKey, TSummerCacheTestData>,

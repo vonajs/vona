@@ -3,6 +3,7 @@ import vueParser from 'vue-eslint-parser';
 import parserTs from '@typescript-eslint/parser';
 import tseslint from 'typescript-eslint';
 import eslintVue from 'eslint-plugin-vue';
+import globals from 'globals';
 import { rules } from '../common/rules.js';
 import { rulesVue } from '../common/rulesVue.js';
 
@@ -30,6 +31,8 @@ export default [
         parser: parserTs,
       },
       globals: {
+        ...globals.browser,
+        ...globals.jest,
         ga: 'readonly', // Google Analytics
         cordova: 'readonly',
         __statics: 'readonly',
@@ -37,7 +40,6 @@ export default [
         __QUASAR_SSR_SERVER__: 'readonly',
         __QUASAR_SSR_CLIENT__: 'readonly',
         __QUASAR_SSR_PWA__: 'readonly',
-        console: 'readonly',
         process: 'readonly',
         Capacitor: 'readonly',
         chrome: 'readonly',

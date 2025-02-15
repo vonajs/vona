@@ -15,7 +15,7 @@ declare module 'vona-module-home-user' {
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import { CacheRedisUsersDemo } from '../bean/cacheRedis.usersDemo.js';
+import type { CacheRedisUsersDemo } from '../bean/cacheRedis.usersDemo.js';
 export interface IModuleCacheRedis {
   usersDemo: CacheRedisUsersDemo;
 }
@@ -37,7 +37,7 @@ declare module 'vona-module-home-user' {
 }
 /** service: end */
 /** service: begin */
-import { ServicePassportAdapter } from '../service/passportAdapter.js';
+import type { ServicePassportAdapter } from '../service/passportAdapter.js';
 export interface IModuleService {
   passportAdapter: ServicePassportAdapter;
 }
@@ -52,7 +52,8 @@ declare module 'vona' {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
