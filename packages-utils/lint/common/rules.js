@@ -1,4 +1,5 @@
 export const rules = {
+  'unicorn/error-message': 'off',
   'antfu/if-newline': 'off',
   'import/no-duplicates': 'off',
   'eslint-comments/no-unlimited-disable': 'off',
