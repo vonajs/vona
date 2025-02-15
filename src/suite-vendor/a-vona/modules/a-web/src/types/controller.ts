@@ -10,10 +10,10 @@ export interface IApiPathRecordMethodMap {
 }
 export interface IApiPathRecord
   extends IApiPathGetRecord,
-    IApiPathPostRecord,
-    IApiPathDeleteRecord,
-    IApiPathPutRecord,
-    IApiPathPatchRecord {}
+  IApiPathPostRecord,
+  IApiPathDeleteRecord,
+  IApiPathPutRecord,
+  IApiPathPatchRecord {}
 
 export interface IApiPathGetRecord {}
 export interface IApiPathPostRecord {}

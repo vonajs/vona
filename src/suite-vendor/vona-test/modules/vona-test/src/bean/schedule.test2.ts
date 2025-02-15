@@ -4,6 +4,7 @@ import { type IScheduleExecute, Schedule, type TypeScheduleJob } from 'vona-modu
 @Schedule({ enable: false, repeat: { every: 5000 } })
 export class ScheduleTest2 extends BeanBase implements IScheduleExecute {
   async execute(job?: TypeScheduleJob) {
+    // eslint-disable-next-line
     console.log(
       `----- Schedule Test2: iid=${this.ctx.instance.id}, every=${job?.data.options?.jobOptions?.repeat?.every}, ${new Date()}`,
     );
