@@ -1,4 +1,5 @@
 export const rules = {
+  'jsdoc/check-alignment': 'off',
   'no-extend-native': ['error', { exceptions: ['Set'] }],
   'no-new-func': 'off',
   'regexp/no-super-linear-backtracking': 'off',
