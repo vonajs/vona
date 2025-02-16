@@ -62,8 +62,8 @@ export const rules = {
   'newline-per-chained-call': [0],
   'prefer-rest-params': 'off',
   // 'no-setter-return': 'off', // no effect for typescript check
-  'ts/method-signature-style': 'off',
-  'ts/no-redeclare': 'off',
+  '@typescript-eslint/method-signature-style': 'off',
+  '@typescript-eslint/no-redeclare': 'off',
   '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'separate-type-imports', prefer: 'type-imports' }],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/no-namespace': 'off',
@@ -137,4 +137,5 @@ export const rules = {
     flatTernaryExpressions: true,
     offsetTernaryExpressions: true,
   }],
+  '@stylistic/jsx-closing-tag-location': 'off',
 };
