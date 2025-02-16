@@ -79,8 +79,8 @@ export class ProcessHelper {
   async formatFile({ fileName, logPrefix }) {
     try {
       await this.spawnBin({
-        cmd: 'prettier',
-        args: ['--write', '--ignore-path', 'null', fileName],
+        cmd: 'eslint',
+        args: ['--fix', '--no-warn-ignored', fileName],
         options: {
           logPrefix,
         },
