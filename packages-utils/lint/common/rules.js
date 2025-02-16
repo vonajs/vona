@@ -6,6 +6,7 @@ export const rules = {
   'n/prefer-global/process': 'off',
   'unicorn/error-message': 'off',
   'antfu/if-newline': 'off',
+  'antfu/top-level-function': 'off',
   'import/no-duplicates': 'off',
   'eslint-comments/no-unlimited-disable': 'off',
   'prefer-promise-reject-errors': 'off',
@@ -62,7 +63,7 @@ export const rules = {
   // 'no-setter-return': 'off', // no effect for typescript check
   'ts/method-signature-style': 'off',
   'ts/no-redeclare': 'off',
-  '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+  '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'separate-type-imports', prefer: 'type-imports' }],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/no-namespace': 'off',
   '@typescript-eslint/no-explicit-any': 'off',

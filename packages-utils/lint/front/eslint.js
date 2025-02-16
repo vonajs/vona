@@ -3,6 +3,21 @@ import globals from 'globals';
 import { rules } from '../common/rules.js';
 import { rulesVue } from '../common/rulesVue.js';
 
+const globalsMy = {
+  ...globals.browser,
+  ...globals.jest,
+  ga: 'readonly', // Google Analytics
+  cordova: 'readonly',
+  __statics: 'readonly',
+  __QUASAR_SSR__: 'readonly',
+  __QUASAR_SSR_SERVER__: 'readonly',
+  __QUASAR_SSR_CLIENT__: 'readonly',
+  __QUASAR_SSR_PWA__: 'readonly',
+  process: 'readonly',
+  Capacitor: 'readonly',
+  chrome: 'readonly',
+};
+
 export default function eslintConfig(config, ...args) {
   config = Object.assign({
     stylistic: {
@@ -19,29 +34,17 @@ export default function eslintConfig(config, ...args) {
     files: ['**/*.ts', '**/*.tsx'],
     rules,
     languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
+      parserOptions: {
+        emitDecoratorMetadata: true,
+        experimentalDecorators: true,
       },
+      globals: globalsMy,
     },
   }, {
     files: ['**/*.vue'],
     rules: Object.assign({}, rules, rulesVue),
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.jest,
-        ga: 'readonly', // Google Analytics
-        cordova: 'readonly',
-        __statics: 'readonly',
-        __QUASAR_SSR__: 'readonly',
-        __QUASAR_SSR_SERVER__: 'readonly',
-        __QUASAR_SSR_CLIENT__: 'readonly',
-        __QUASAR_SSR_PWA__: 'readonly',
-        process: 'readonly',
-        Capacitor: 'readonly',
-        chrome: 'readonly',
-      },
+      globals: globalsMy,
     },
   }, ...args);
 }

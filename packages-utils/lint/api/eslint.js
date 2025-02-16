@@ -17,6 +17,10 @@ export default function eslintConfig(config, ...args) {
     files: ['**/*.ts', '**/*.tsx'],
     rules,
     languageOptions: {
+      parserOptions: {
+        emitDecoratorMetadata: true,
+        experimentalDecorators: true,
+      },
       globals: {
         ...globals.node,
         ...globals.jest,
