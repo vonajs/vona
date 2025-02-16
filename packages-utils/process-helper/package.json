@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/process-helper",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "cabloy process-helper",
   "publishConfig": {
     "access": "public"
@@ -29,7 +29,10 @@
     "dist"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "prepublishOnly": "npm run tsc:publish"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
