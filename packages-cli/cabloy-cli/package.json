@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/cli",
   "type": "module",
-  "version": "2.1.10",
+  "version": "3.0.0",
   "description": "@cabloy/cli",
   "publishConfig": {
     "access": "public"
