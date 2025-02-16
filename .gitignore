@@ -34,7 +34,6 @@ env/.env*.mine
 !packages-utils/dotenv/dist
 !packages-utils/ensure-array/dist
 !packages-utils/extend/dist
-!packages-utils/process-helper/dist
 !packages-utils/module-glob/dist
 !packages-utils/module-info/dist
 !packages-utils/module-info-pro/dist
