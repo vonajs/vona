@@ -103,6 +103,7 @@ export const rules = {
   ],
   '@typescript-eslint/no-empty-object-type': 'off',
   '@typescript-eslint/no-unsafe-function-type': 'off',
+  '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
   '@stylistic/max-len': ['error', {
     code: 130,
     tabWidth: 2,
