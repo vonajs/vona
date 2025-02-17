@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/cli",
   "type": "module",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "@cabloy/cli",
   "publishConfig": {
     "access": "public"
@@ -30,6 +30,7 @@
     "indent": 2,
     "remove": [
       "clean-package",
+      "devDependencies",
       "scripts",
       "exports.\\..import"
     ]
