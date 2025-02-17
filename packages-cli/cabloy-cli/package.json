@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "clean": "tsc -b --clean",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
@@ -57,7 +57,8 @@
     "urllib": "^3.24.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4"
+    "@types/fs-extra": "^11.0.4",
+    "rimraf": "^6.0.1"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
