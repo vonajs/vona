@@ -3,7 +3,6 @@ import type { IModule, IModulePackage, ISuite, ISuiteModuleBase } from '@cabloy/
 import type { IModuleGlobContext, IModuleGlobOptions } from './interface.ts';
 import path from 'node:path';
 import {
-
   parseInfoPro,
 } from '@cabloy/module-info';
 import { checkMeta } from '@cabloy/utils';
