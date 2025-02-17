@@ -1,2 +1,2 @@
-export * from './check.js';
-export * from './utils.js';
+export * from './check.ts';
+export * from './utils.ts';
