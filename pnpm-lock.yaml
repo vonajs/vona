@@ -760,7 +760,14 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6
 
-  packages-utils/process-helper: {}
+  packages-utils/process-helper:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/set: {}
 
