@@ -1,4 +1,4 @@
-import type { TypeOpenApiVersion } from 'vona-module-a-openapi';
+import type { IOpenAPIObject } from 'vona-module-a-openapi';
 import { BeanBase } from 'vona';
 import { Api, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
@@ -50,7 +50,7 @@ export class ControllerSwagger extends BeanBase {
   @Public()
   @Api.contentType('text/plain')
   json(@Query('version', v.default('31')) version: string): string {
-    const json = this.$scope.openapi.service.openapi.generateJson(version as TypeOpenApiVersion);
+    const json = this.$scope.openapi.service.openapi.generateJson(version as unknown as keyof IOpenAPIObject);
     return JSON.stringify(json, null, 2);
   }
 }

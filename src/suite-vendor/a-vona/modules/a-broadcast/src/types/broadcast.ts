@@ -7,7 +7,7 @@ export interface IBroadcastEmitOptions {
 }
 
 export interface IBroadcastExecute<DATA = unknown> {
-  execute: (data: DATA, isEmitter?: boolean) => Promise<void>;
+  execute(data?: DATA, isEmitter?: boolean): Promise<void>;
 }
 
 export interface IBroadcastJobContext<DATA> {

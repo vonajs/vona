@@ -2,7 +2,7 @@
   "name": "cabloy-api",
   "title": "Cabloy",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "description": "A Node.js full-stack framework with workflow engine, based on koa + egg + vue + framework7",
   "repository": {
     "type": "git",
