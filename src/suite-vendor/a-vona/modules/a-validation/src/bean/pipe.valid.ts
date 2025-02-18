@@ -19,13 +19,14 @@ export interface IPipeOptionsValid extends IDecoratorPipeOptions, ValidatorOptio
   strict: false,
 })
 export class PipeValid extends BeanBase implements IPipeTransform<any> {
-  async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValid) {
-    if (options.schema) {
+  async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions) {
+    const options2 = options as IPipeOptionsValid;
+    if (options2.schema) {
       // validateSchema
-      return await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
-    } else if (options.class) {
+      return await this.bean.validator.validateSchema(options2.schema, value, options2, metadata.field);
+    } else if (options2.class) {
       // validate
-      return await this.bean.validator.validate(options.class, value, options, metadata.field);
+      return await this.bean.validator.validate(options2.class, value, options2, metadata.field);
     }
     return value;
   }
