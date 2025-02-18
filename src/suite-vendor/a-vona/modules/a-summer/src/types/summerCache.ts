@@ -10,7 +10,7 @@ export interface ISummerCacheGet<KEY, DATA> {
 }
 
 export interface ISummerCacheMGet<KEY, DATA> {
-  mgetNative: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
+  mgetNative(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>>;
 }
 
 export type TSummerCachePreset = 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
