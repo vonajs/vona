@@ -7,7 +7,8 @@ export interface IGuardRecordLocal {}
 export type IGuardRecord = IGuardRecordGlobal & IGuardRecordLocal;
 
 export interface IGuardExecute {
-  execute: (options: IDecoratorGuardOptions, next: Next) => Promise<boolean>;
+  execute(options: IDecoratorGuardOptions, next: Next): Promise<boolean>;
+  execute(options: IDecoratorGuardOptionsGlobal, next: Next): Promise<boolean>;
 }
 
 export interface IDecoratorGuardOptions {
