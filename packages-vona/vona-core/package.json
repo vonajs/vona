@@ -46,7 +46,7 @@
     "@cabloy/module-info-pro": "workspace:^",
     "@cabloy/set": "workspace:^",
     "@cabloy/utils": "workspace:^",
-    "@cabloy/word-utils": "^1.0.8",
+    "@cabloy/word-utils": "^2.0.0",
     "cel-js": "^0.3.0",
     "chalk": "^3.0.0",
     "egg": "^3.17.5",
