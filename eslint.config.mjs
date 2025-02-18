@@ -9,5 +9,6 @@ export default EslintConfig({
     '.assets',
     'coverage',
     'docker-compose',
+    'package.json',
   ],
 });

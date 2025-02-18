@@ -17,7 +17,7 @@ export function makeSchemaLikes(schemaLikes: SchemaLike[], typeInit: any): z.Zod
 
 export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPrevious: z.ZodSchema): z.ZodSchema {
   if (!schemaLike) return schemaPrevious;
-  if (cast<z.ZodSchema>(schemaLike).parseAsync) {
+  if (Object.prototype.hasOwnProperty.call(schemaLike, 'parseAsync')) {
     // schema
     return schemaLike as z.ZodSchema;
   } else if (

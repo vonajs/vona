@@ -44,7 +44,7 @@ export class ServiceOpenapi extends BeanBase {
   generateJson<K extends keyof IOpenAPIObject>(version: K = '31' as any): IOpenAPIObject[K] {
     const registry = this._collectRegistry();
     const generator =
-      version === '30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+      version === '30' as any ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj);
     return apiObj as IOpenAPIObject[K];
@@ -226,7 +226,7 @@ export class ServiceOpenapi extends BeanBase {
       }
     }
     // request
-    const request = {};
+    const request: any = {};
     for (const argumentType of __ArgumentTypes) {
       let schema: z.ZodSchema | undefined = argsMapIsolate[argumentType];
       if (!schema && argsMapWithField[argumentType]) {

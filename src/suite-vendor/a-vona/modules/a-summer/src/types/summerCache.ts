@@ -5,7 +5,7 @@ import type { IRedisClientRecord } from 'vona-module-a-redis';
 export interface ISummerCacheRecord {}
 
 export interface ISummerCacheGet<KEY, DATA> {
-  getNative: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
+  getNative: (key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
 }
 
 export interface ISummerCacheMGet<KEY, DATA> {

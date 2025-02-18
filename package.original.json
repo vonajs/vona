@@ -18,7 +18,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "vona": "node ./packages-cli/cli/dist/bin/vona.js",
+    "vona": "node ./packages-cli/cli/src/bin/vona.ts",
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "npm run prerun && node ./scripts/egg-born-bin.js backend-db-reset --flavor=normal",
     "dev": "npm run prerun && node ./scripts/egg-born-bin.js backend-dev --workers=2 --flavor=normal",
