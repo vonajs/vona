@@ -7,7 +7,7 @@ export interface IMiddlewareRecordLocal {}
 export type IMiddlewareRecord = IMiddlewareRecordGlobal & IMiddlewareRecordLocal;
 
 export interface IMiddlewareExecute {
-  execute: (options: IDecoratorMiddlewareOptions, next: Next) => Promise<any>;
+  execute(options: IDecoratorMiddlewareOptions, next: Next): Promise<any>;
 }
 
 export interface IDecoratorMiddlewareOptions {
