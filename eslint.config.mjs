@@ -10,5 +10,6 @@ export default EslintConfig({
     'coverage',
     'docker-compose',
     'package.json',
+    'scripts',
   ],
 });
