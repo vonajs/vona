@@ -11,5 +11,6 @@ export default EslintConfig({
     'docker-compose',
     'package.json',
     'scripts',
+    'packages-egg-born',
   ],
 });

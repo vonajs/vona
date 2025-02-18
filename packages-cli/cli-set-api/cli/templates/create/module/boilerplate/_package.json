@@ -1,5 +1,6 @@
 {
   "name": "vona-module-<%=argv.name%>",
+  "type": "module",
   "version": "5.0.0",
   "title": "<%=argv.moduleInfo.relativeName%>",
   "vonaModule": {
@@ -7,7 +8,6 @@
       "a-vona": "5.0.0"
     }
   },
-  "type": "module",
   "exports": {
     ".": {
       "types": ["./src/index.ts", "./dist/index.d.ts"],
