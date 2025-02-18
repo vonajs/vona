@@ -8,7 +8,7 @@ export interface IPipeRecordLocal {}
 export type IPipeRecord = IPipeRecordGlobal & IPipeRecordLocal;
 
 export interface IPipeTransform<T = any, R = any> {
-  transform: (value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions) => Promise<R>;
+  transform(value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions): Promise<R>;
 }
 
 export interface IDecoratorPipeOptions {
