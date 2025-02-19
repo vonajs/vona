@@ -1,16 +1,16 @@
-import { CliCreateBean } from './bean/cli.create.bean.js';
-import { CliCreateModule } from './bean/cli.create.module.js';
-import { CliCreateSuite } from './bean/cli.create.suite.js';
-import { CliCreateTest } from './bean/cli.create.test.js';
-import { CliDefaultList } from './bean/cli.default.list.js';
-import { CliInitConfig } from './bean/cli.init.config.js';
-import { CliInitLocale } from './bean/cli.init.locale.js';
-import { CliInitMain } from './bean/cli.init.main.js';
-import { CliInitMonkey } from './bean/cli.init.monkey.js';
-import { CliInitStatic } from './bean/cli.init.static.js';
-import { CliToolsBuild } from './bean/cli.tools.build.js';
-import { CliToolsDeps } from './bean/cli.tools.deps.js';
-import { CliToolsMetadata } from './bean/cli.tools.metadata.js';
+import { CliCreateBean } from './bean/cli.create.bean.ts';
+import { CliCreateModule } from './bean/cli.create.module.ts';
+import { CliCreateSuite } from './bean/cli.create.suite.ts';
+import { CliCreateTest } from './bean/cli.create.test.ts';
+import { CliDefaultList } from './bean/cli.default.list.ts';
+import { CliInitConfig } from './bean/cli.init.config.ts';
+import { CliInitLocale } from './bean/cli.init.locale.ts';
+import { CliInitMain } from './bean/cli.init.main.ts';
+import { CliInitMonkey } from './bean/cli.init.monkey.ts';
+import { CliInitStatic } from './bean/cli.init.static.ts';
+import { CliToolsBuild } from './bean/cli.tools.build.ts';
+import { CliToolsDeps } from './bean/cli.tools.deps.ts';
+import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 
 export const beans = {
   'default.list': CliDefaultList,

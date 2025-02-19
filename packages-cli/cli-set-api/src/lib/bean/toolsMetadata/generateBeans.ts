@@ -2,7 +2,7 @@ import type { OnionScenesMeta } from '@cabloy/module-info';
 import path from 'node:path';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import eggBornUtils from 'egg-born-utils';
-import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
+import { checkIgnoreOfParts, getScopeModuleName } from './utils.ts';
 
 // todo: remove
 export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName: string, modulePath: string) {

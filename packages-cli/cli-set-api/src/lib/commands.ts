@@ -1,16 +1,16 @@
-import createBean from './command/create.bean.js';
-import createModule from './command/create.module.js';
-import createSuite from './command/create.suite.js';
-import createTest from './command/create.test.js';
-import defaultList from './command/default.list.js';
-import initConfig from './command/init.config.js';
-import initLocale from './command/init.locale.js';
-import initMain from './command/init.main.js';
-import initMonkey from './command/init.monkey.js';
-import initStatic from './command/init.static.js';
-import toolsBuild from './command/tools.build.js';
-import toolsDeps from './command/tools.deps.js';
-import toolsMetadata from './command/tools.metadata.js';
+import createBean from './command/create.bean.ts';
+import createModule from './command/create.module.ts';
+import createSuite from './command/create.suite.ts';
+import createTest from './command/create.test.ts';
+import defaultList from './command/default.list.ts';
+import initConfig from './command/init.config.ts';
+import initLocale from './command/init.locale.ts';
+import initMain from './command/init.main.ts';
+import initMonkey from './command/init.monkey.ts';
+import initStatic from './command/init.static.ts';
+import toolsBuild from './command/tools.build.ts';
+import toolsDeps from './command/tools.deps.ts';
+import toolsMetadata from './command/tools.metadata.ts';
 
 export const commands = {
   default: {

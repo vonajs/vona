@@ -1,5 +1,5 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
-import { globBeanFiles } from './utils.js';
+import { globBeanFiles } from './utils.ts';
 
 export async function generateBeanGenerals(
   sceneName: string,

@@ -6,7 +6,7 @@ export async function generateMonkey(modulePath: string) {
   if (!fse.existsSync(monkeyFile)) return '';
   // combine
   const content = `/** monkey: begin */
-export * from '../monkey.js';
+export * from '../monkey.ts';
 /** monkey: end */
 `;
   return content;
@@ -17,7 +17,7 @@ export async function generateMain(modulePath: string) {
   if (!fse.existsSync(monkeyFile)) return '';
   // combine
   const content = `/** main: begin */
-export * from '../main.js';
+export * from '../main.ts';
 /** main: end */
 `;
   return content;

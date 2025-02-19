@@ -7,8 +7,8 @@ export async function generateConfig(modulePath: string) {
   if (!fse.existsSync(configFile)) return '';
   // combine
   const content = `/** config: begin */
-export * from '../config/config.js';
-import { config } from '../config/config.js';
+export * from '../config/config.ts';
+import { config } from '../config/config.ts';
 /** config: end */
 `;
   return content;
@@ -19,8 +19,8 @@ export async function generateConstant(modulePath: string) {
   if (!fse.existsSync(constantFile)) return '';
   // combine
   const content = `/** constant: begin */
-export * from '../config/constants.js';
-import { constants } from '../config/constants.js';
+export * from '../config/constants.ts';
+import { constants } from '../config/constants.ts';
 /** constant: end */
 `;
   return content;
@@ -55,8 +55,8 @@ export async function generateError(modulePath: string) {
   if (!fse.existsSync(errorFile)) return '';
   // combine
   const content = `/** error: begin */
-export * from '../config/errors.js';
-import { Errors } from '../config/errors.js';
+export * from '../config/errors.ts';
+import { Errors } from '../config/errors.ts';
 /** error: end */
 `;
   return content;

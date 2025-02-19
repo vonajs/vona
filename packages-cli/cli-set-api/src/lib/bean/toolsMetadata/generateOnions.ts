@@ -1,6 +1,6 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.js';
+import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.ts';
 
 export async function generateOnions(
   sceneName: string,

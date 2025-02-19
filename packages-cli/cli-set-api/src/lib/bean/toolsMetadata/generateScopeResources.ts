@@ -1,6 +1,6 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { globBeanFiles } from './utils.js';
+import { globBeanFiles } from './utils.ts';
 
 export async function generateScopeResources(
   sceneName: string,
