@@ -21,11 +21,15 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist/**/*.d.ts",
-    "dist/**/*.js"
+    "dist"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "@koa/cors": "^5.0.0",
@@ -40,7 +44,28 @@
     "vona": "^5.0.7"
   },
   "devDependencies": {
-    "@types/koa-cors": "^0.0.6"
+    "@types/koa-cors": "^0.0.6",
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import"
+    ]
+  }
 }
