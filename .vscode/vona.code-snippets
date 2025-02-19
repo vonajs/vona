@@ -9,4 +9,26 @@
     "body": ["protected __init__() {", "  $0", "}"],
     "description": "__init__",
   },
+  "aop.__init__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopinit",
+    "body": [
+      "protected async __init__(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "  await next();",
+      "  $0",
+      "}"
+    ],
+    "description": "aop.__init__"
+  },
+  "aop.action": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopaction",
+    "body": [
+      "async action(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "  $0",
+      "  return await next();",
+      "}"
+    ],
+    "description": "aop.action"
+  }
 }
