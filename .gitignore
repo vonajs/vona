@@ -30,15 +30,6 @@ env/.env*.mine
 /cabloy.json
 /package.json
 
-# should pre-compiled
-!packages-utils/dotenv/dist
-!packages-utils/ensure-array/dist
-!packages-utils/extend/dist
-!packages-utils/module-glob/dist
-!packages-utils/module-info/dist
-!packages-utils/module-info-pro/dist
-!packages-utils/utils/dist
-
 /docker-compose
 !/docker-compose/config
 !/docker-compose/data/mysql/.gitkeep
@@ -82,6 +73,3 @@ env/.env*.mine
 sftp-config.json
 sftp-config-.json
 /.assets
-
-/packages/build/lib/project/front/dist
-/packages/egg-born-front/__runtime

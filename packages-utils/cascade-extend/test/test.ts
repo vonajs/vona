@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { cascadeExtend, cascadeExtendKeys } from '../src/index.ts';
 
 const scope = {
