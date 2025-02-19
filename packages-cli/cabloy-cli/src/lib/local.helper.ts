@@ -204,8 +204,14 @@ export class LocalHelper {
   }
 
   parseBrandPath() {
+    const require = createRequire(import.meta.url);
     const modulePath = require.resolve(`${process.env.CabloyCliBrandName}-cli/package.json`);
-    return path.join(path.dirname(modulePath), `dist/bin/${process.env.CabloyCliBrandName}.js`);
+    // ts or js
+    let file = path.join(path.dirname(modulePath), `src/bin/${process.env.CabloyCliBrandName}.ts`);
+    if (!fse.existsSync(file)) {
+      file = path.join(path.dirname(modulePath), `dist/bin/${process.env.CabloyCliBrandName}.js`);
+    }
+    return file;
   }
 
   async invokeCli(args: string[], options) {
