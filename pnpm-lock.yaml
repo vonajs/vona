@@ -547,6 +547,12 @@ importers:
       '@types/koa-cors':
         specifier: ^0.0.6
         version: 0.0.6
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-egg-born/egg-born-bin:
     dependencies:
@@ -680,15 +686,42 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0
 
-  packages-utils/compose: {}
+  packages-utils/cascade-extend:
+    dependencies:
+      '@cabloy/extend':
+        specifier: workspace:^
+        version: link:../extend
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
-  packages-utils/deps: {}
+  packages-utils/compose:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  packages-utils/deps:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/dotenv:
     dependencies:
       cascade-extend:
-        specifier: ^1.0.3
-        version: 1.0.4
+        specifier: workspace:^
+        version: link:../cascade-extend
       dotenv:
         specifier: ^16.4.5
         version: 16.4.7
@@ -698,16 +731,44 @@ importers:
       egg-born-utils:
         specifier: ^1.2.0
         version: 1.2.1
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
-  packages-utils/ensure-array: {}
+  packages-utils/ensure-array:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
-  packages-utils/extend: {}
+  packages-utils/extend:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/json5:
     dependencies:
       json5:
         specifier: ^2.1.1
         version: 2.2.3
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/lint:
     dependencies:
@@ -736,7 +797,14 @@ importers:
         specifier: ^9.4.3
         version: 9.4.3(eslint@9.20.1)
 
-  packages-utils/localeutil: {}
+  packages-utils/localeutil:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/module-glob:
     dependencies:
@@ -755,12 +823,26 @@ importers:
       egg-born-utils:
         specifier: ^1.2.0
         version: 1.2.1
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/module-info:
     dependencies:
       stack-utils:
         specifier: ^2.0.6
         version: 2.0.6
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/module-info-pro:
     dependencies:
@@ -770,6 +852,13 @@ importers:
       stack-utils:
         specifier: ^2.0.6
         version: 2.0.6
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/process-helper:
     devDependencies:
@@ -780,19 +869,45 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  packages-utils/set: {}
+  packages-utils/set:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
-  packages-utils/utils: {}
+  packages-utils/utils:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-utils/zod-errors-custom:
     dependencies:
       '@cabloy/word-utils':
         specifier: ^2.0.0
         version: 2.0.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
-  packages-utils/zod-query: {}
-
-  packages-vona/orm: {}
+  packages-utils/zod-query:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-vona/vona:
     dependencies:
@@ -805,6 +920,13 @@ importers:
       vona-suite-a-vona:
         specifier: workspace:^
         version: link:../../src/suite-vendor/a-vona
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-vona/vona-core:
     dependencies:
@@ -896,6 +1018,12 @@ importers:
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-vona/vona-mock:
     dependencies:
@@ -911,8 +1039,22 @@ importers:
       egg-mock:
         specifier: ^5.10.9
         version: 5.15.1(egg@3.30.1)(mocha@10.8.2)(urllib@4.6.11)
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
-  packages-vona/vona-shared: {}
+  packages-vona/vona-shared:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   src/module/a-b: {}
 
@@ -3639,9 +3781,6 @@ packages:
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
-
-  cascade-extend@1.0.4:
-    resolution: {integrity: sha512-VO3ESjQ/hIS/jN3yh9+mg2th/cNFRofEGEZ61/Wk4pt9/thfMHQMgGR2ZK7iqtl9vEzk0F7DoM8G1bD6lQ5Feg==}
 
   caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
@@ -11843,10 +11982,6 @@ snapshots:
       no-case: 3.0.4
       tslib: 2.8.1
       upper-case-first: 2.0.2
-
-  cascade-extend@1.0.4:
-    dependencies:
-      '@cabloy/extend': link:packages-utils/extend
 
   caseless@0.12.0: {}
 
