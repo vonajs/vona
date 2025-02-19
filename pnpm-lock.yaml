@@ -27,8 +27,8 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^1.0.8
-        version: 1.0.10
+        specifier: ^2.0.0
+        version: 2.0.0
       bignumber.js:
         specifier: ^9.1.2
         version: 9.1.2
@@ -397,8 +397,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/process-helper
       '@cabloy/word-utils':
-        specifier: ^1.0.8
-        version: 1.0.10
+        specifier: ^2.0.0
+        version: 2.0.0
       '@npmcli/config':
         specifier: ^8.3.4
         version: 8.3.4(bluebird@3.7.2)
@@ -466,6 +466,13 @@ importers:
       vona-cli-set-api:
         specifier: workspace:^
         version: link:../cli-set-api
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   packages-cli/cli-set-api:
     dependencies:
@@ -476,8 +483,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/module-info
       '@cabloy/word-utils':
-        specifier: ^1.0.8
-        version: 1.0.10
+        specifier: ^2.0.0
+        version: 2.0.0
       compressing:
         specifier: ^1.10.0
         version: 1.10.1
@@ -499,6 +506,10 @@ importers:
       vona-shared:
         specifier: ^1.0.7
         version: link:../../packages-vona/vona-shared
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
 
   packages-egg-born/egg-born-backend:
     dependencies:
@@ -776,8 +787,8 @@ importers:
   packages-utils/zod-errors-custom:
     dependencies:
       '@cabloy/word-utils':
-        specifier: ^1.0.8
-        version: 1.0.10
+        specifier: ^2.0.0
+        version: 2.0.0
 
   packages-utils/zod-query: {}
 
@@ -837,8 +848,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^1.0.8
-        version: 1.0.10
+        specifier: ^2.0.0
+        version: 2.0.0
       cel-js:
         specifier: ^0.3.0
         version: 0.3.0
@@ -1063,8 +1074,8 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^1.0.8
-        version: 1.0.10
+        specifier: ^2.0.0
+        version: 2.0.0
       boxen:
         specifier: ^8.0.1
         version: 8.0.1
@@ -1904,8 +1915,8 @@ packages:
     resolution: {integrity: sha512-qKYqaHk5A74ASLvXd7/WhicgHfOsOvVrZNEdGaynjnvcswWfhKYdxtwS6CJig7YsE4gaOCFT2MEXFn3RXdt+fA==}
     engines: {node: '>= 7.6.0'}
 
-  '@cabloy/word-utils@1.0.10':
-    resolution: {integrity: sha512-L/+icmuNntNHQEWKdJ1ikD9e9z3J5WXtB60p8xzZyxPWimSif36lK/dO0FKrl58M0CDY7Aa5m6cxs4cxx34Z0w==}
+  '@cabloy/word-utils@2.0.0':
+    resolution: {integrity: sha512-FG5a0imEbPlwno5p8V80yr1vQBfV4Pj68wsuQAyXkrS5EFvK5/9YuP/RuXOC7sRMd22yolFgcfGBCeCu7qv/QA==}
 
   '@chevrotain/cst-dts-gen@11.0.3':
     resolution: {integrity: sha512-BvIKpRLeS/8UbfxXxgC33xOumsacaeCKAjAeLyOn7Pcp95HiRbrpl14S+9vaZLolnbssPIUuiUd8IvgkRyt6NQ==}
@@ -9690,7 +9701,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@cabloy/word-utils@1.0.10': {}
+  '@cabloy/word-utils@2.0.0': {}
 
   '@chevrotain/cst-dts-gen@11.0.3':
     dependencies:
