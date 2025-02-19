@@ -13,7 +13,7 @@ export default function (appInfo: VonaAppInfo) {
   config.cluster = {
     listen: {
       hostname: process.env.SERVER_LISTEN_HOSTNAME,
-      port: Number.parseInt(process.env.SERVER_LISTEN_PORT),
+      port: Number.parseInt(process.env.SERVER_LISTEN_PORT!),
     },
   };
 
@@ -130,7 +130,7 @@ export default function (appInfo: VonaAppInfo) {
         client: 'pg',
         connection: {
           host: process.env.DATABASE_CLIENT_PG_HOST,
-          port: Number.parseInt(process.env.DATABASE_CLIENT_PG_PORT),
+          port: Number.parseInt(process.env.DATABASE_CLIENT_PG_PORT!),
           user: process.env.DATABASE_CLIENT_PG_USER,
           password: process.env.DATABASE_CLIENT_PG_PASSWORD,
           database: process.env.DATABASE_CLIENT_PG_DATABASE,
@@ -140,7 +140,7 @@ export default function (appInfo: VonaAppInfo) {
         client: 'mysql2',
         connection: {
           host: process.env.DATABASE_CLIENT_MYSQL_HOST,
-          port: Number.parseInt(process.env.DATABASE_CLIENT_MYSQL_PORT),
+          port: Number.parseInt(process.env.DATABASE_CLIENT_MYSQL_PORT!),
           user: process.env.DATABASE_CLIENT_MYSQL_USER,
           password: process.env.DATABASE_CLIENT_MYSQL_PASSWORD,
           database: process.env.DATABASE_CLIENT_MYSQL_DATABASE,
@@ -158,9 +158,9 @@ export default function (appInfo: VonaAppInfo) {
   config.redis = {
     default: {
       host: process.env.REDIS_DEFAULT_HOST,
-      port: Number.parseInt(process.env.REDIS_DEFAULT_PORT),
+      port: Number.parseInt(process.env.REDIS_DEFAULT_PORT!),
       password: process.env.REDIS_DEFAULT_PASSWORD,
-      db: Number.parseInt(process.env.REDIS_DEFAULT_DB),
+      db: Number.parseInt(process.env.REDIS_DEFAULT_DB!),
       maxRetriesPerRequest: null,
       enableReadyCheck: false,
     },

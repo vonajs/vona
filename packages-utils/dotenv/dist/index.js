@@ -1,41 +1,33 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getEnvFiles = exports.metaToScope = exports.loadEnvs = void 0;
-const egg_born_utils_1 = __importDefault(require("egg-born-utils"));
-const cascade_extend_1 = require("cascade-extend");
-const dotenv_1 = __importDefault(require("dotenv"));
-const dotenv_expand_1 = __importDefault(require("dotenv-expand"));
-function loadEnvs(meta, dir, prefix = '.env', postfix) {
+import { cascadeExtendKeys } from 'cascade-extend';
+import dotenv from 'dotenv';
+import dotenvExpand from 'dotenv-expand';
+import eggBornUtils from 'egg-born-utils';
+export function loadEnvs(meta, dir, prefix = '.env', postfix) {
     // envfiles
     const envFiles = getEnvFiles(meta, dir, prefix, postfix);
     if (!envFiles)
         return undefined;
     // dotenv
-    const result = dotenv_1.default.config({ path: envFiles.reverse() });
+    const result = dotenv.config({ path: envFiles.reverse() });
     if (result.error) {
         throw result.error;
     }
     // expand
-    dotenv_expand_1.default.expand(result);
+    dotenvExpand.expand(result);
     // ok
     return result.parsed;
 }
-exports.loadEnvs = loadEnvs;
-function metaToScope(meta) {
+export function metaToScope(meta) {
     const scope = {};
     for (const key in meta) {
         scope[meta[key]] = true;
     }
     return scope;
 }
-exports.metaToScope = metaToScope;
-function getEnvFiles(meta, dir, prefix, postfix) {
+export function getEnvFiles(meta, dir, prefix, postfix) {
     // files
     const pattern = [`${dir}/${prefix}*`];
-    let files = egg_born_utils_1.default.tools.globbySync(pattern);
+    let files = eggBornUtils.tools.globbySync(pattern);
     const fileNames = files.map(item => {
         item = item.substring(dir.length + 1);
         if (postfix) {
@@ -51,11 +43,11 @@ function getEnvFiles(meta, dir, prefix, postfix) {
     // scope
     const scope = metaToScope(meta);
     // extend
-    let keys = (0, cascade_extend_1.cascadeExtendKeys)(scope, source, prefix, '.');
+    let keys = cascadeExtendKeys(scope, source, prefix, '.');
     if (!keys)
         return undefined;
     // mine
-    keys = keys.filter(item => item.indexOf('.mine') === -1).concat(keys.filter(item => item.indexOf('.mine') > -1));
+    keys = keys.filter(item => !item.includes('.mine')).concat(keys.filter(item => item.includes('.mine')));
     // files
     files = keys.map(key => {
         let file = `${dir}/${key}`;
@@ -66,5 +58,3 @@ function getEnvFiles(meta, dir, prefix, postfix) {
     });
     return files;
 }
-exports.getEnvFiles = getEnvFiles;
-//# sourceMappingURL=index.js.map
