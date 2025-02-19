@@ -54,7 +54,7 @@ function getProperty(obj, name) {
       return void 0;
     } else if (gOPD) {
       // In early versions of node, obj['__proto__'] is buggy when obj has __proto__ as an own property. Object.getOwnPropertyDescriptor() works.
-      return (<any>gOPD)(obj, name).value;
+      return (gOPD as any)(obj, name).value;
     }
   }
 
