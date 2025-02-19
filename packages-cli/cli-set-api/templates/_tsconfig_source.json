@@ -11,6 +11,9 @@
   },
   "references": [
     {
+      "path": "packages-utils/cascade-extend"
+    },
+    {
       "path": "packages-utils/compose"
     },
     {

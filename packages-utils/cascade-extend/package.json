@@ -1,17 +1,26 @@
 {
-  "name": "@cabloy/dotenv",
+  "name": "cascade-extend",
   "type": "module",
-  "version": "1.0.9",
-  "description": "cabloy dotenv",
+  "version": "2.0.0",
+  "description": "cascade-extend",
   "publishConfig": {
     "access": "public"
   },
   "author": "zhennann",
+  "license": "MIT",
+  "homepage": "https://github.com/zhennann/cascade-extend#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhennann/cascade-extend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhennann/cascade-extend/issues"
+  },
   "keywords": [
     "egg",
     "egg-born",
-    "framework",
-    "cabloy"
+    "cabloy",
+    "cascade-extend"
   ],
   "exports": {
     ".": {
@@ -35,12 +44,6 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {
-    "cascade-extend": "^1.0.3",
-    "dotenv": "^16.4.5",
-    "dotenv-expand": "^11.0.6",
-    "egg-born-utils": "^1.2.0"
-  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -49,6 +52,9 @@
       "scripts",
       "exports.\\..import"
     ]
+  },
+  "dependencies": {
+    "@cabloy/extend": "^3.0.5"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
