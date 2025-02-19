@@ -20,7 +20,6 @@
         "./dist/index.d.ts"
       ],
       "import": "./src/index.ts",
-      "require": "./src/index.ts",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
@@ -29,7 +28,12 @@
     "dist"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "@cabloy/compose": "^2.0.0",
@@ -62,7 +66,17 @@
     "vona-shared": "workspace:^"
   },
   "devDependencies": {
-    "@types/retry": "^0.12.5"
+    "@types/retry": "^0.12.5",
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import"
+    ]
+  }
 }
