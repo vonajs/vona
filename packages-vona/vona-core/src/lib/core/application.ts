@@ -2,6 +2,7 @@ import type { VonaApplicationOptions } from '../../types/application/app.ts';
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { ApplicationError } from '../bean/resource/error/errorApplication.ts';
+import http from 'node:http';
 import KoaApplication from 'koa';
 import { BeanContainer } from '../bean/beanContainer.ts';
 import { AppUtil } from '../utils/util.ts';
@@ -12,18 +13,17 @@ export interface VonaApplication extends ApplicationError {}
 
 export class VonaApplication extends KoaApplication {
   options: VonaApplicationOptions;
+  config: VonaConfig;
+  bean: BeanContainer;
   util: AppUtil;
   meta: AppMeta;
-  bean: BeanContainer;
-  config: VonaConfig;
 
   constructor(options: VonaApplicationOptions) {
     super(options);
     this.options = options;
+    this.config = options.config;
     this.bean = BeanContainer.create(this, undefined);
-    // util
     this.util = this.bean._newBean(AppUtil);
-    // meta
     this.meta = this.bean._newBean(AppMeta);
     // app.context
     for (const key of Reflect.ownKeys(contextBase)) {
@@ -34,5 +34,42 @@ export class VonaApplication extends KoaApplication {
 
   get ctx(): VonaContext {
     return this.currentContext as unknown as VonaContext;
+  }
+
+  get name() {
+    return this.options.name;
+  }
+
+  createAnonymousContext(req) {
+    const request = {
+      headers: {
+        'host': '127.0.0.1',
+        'x-forwarded-for': '127.0.0.1',
+      },
+      query: {},
+      querystring: '',
+      host: '127.0.0.1',
+      hostname: '127.0.0.1',
+      protocol: 'http',
+      secure: 'false',
+      method: 'GET',
+      url: '/',
+      path: '/',
+      socket: {
+        remoteAddress: '127.0.0.1',
+        remotePort: 7001,
+      },
+    };
+    if (req) {
+      for (const key in req) {
+        if (key === 'headers' || key === 'query' || key === 'socket') {
+          Object.assign(request[key], req[key]);
+        } else {
+          request[key] = req[key];
+        }
+      }
+    }
+    const response = new http.ServerResponse(request as any);
+    return this.createContext(request as any, response);
   }
 }

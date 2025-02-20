@@ -1,4 +1,5 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
+import type { VonaConfig } from '../config/config.ts';
 
 export interface KoaApplicationOptions {
   env?: string | undefined;
@@ -10,7 +11,12 @@ export interface KoaApplicationOptions {
   asyncLocalStorage?: boolean | undefined;
 }
 
-export interface VonaApplicationOptions extends KoaApplicationOptions {
+export interface VonaAppInfo {
+  name: string;
   baseDir: string;
   configMeta: VonaConfigMeta;
+}
+
+export interface VonaApplicationOptions extends KoaApplicationOptions, VonaAppInfo {
+  config: VonaConfig;
 }
