@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { locale } from '../.metadata/index.js';
 import { DtoUser } from '../dto/user.js';
 
-@Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'unittest'] } })
+@Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Get('/')
   @UseMiddleware('a-database:transaction')

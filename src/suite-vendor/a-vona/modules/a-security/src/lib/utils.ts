@@ -40,7 +40,8 @@ export function isSafePath(path: string, ctx: VonaContext) {
     try {
       path = decodeURIComponent(path);
     } catch (_e) {
-      if (ctx.app.config.env === 'local' || ctx.app.config.env === 'unittest') {
+      if (ctx.app.meta.isLocal || ctx.app.meta.isTest) {
+        // todo: log
         // not under production environment, output log
         ctx.coreLogger.warn('[@eggjs/security: dta global block] : decode file path %j failed.', path);
       }

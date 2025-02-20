@@ -21,7 +21,7 @@ CabloyJS 内置的每一项特性都做到精心调校，均体现了从`开箱�
 [license-url]: https://github.com/zhennann/cabloy/blob/master/LICENSE
 [npm-image]: https://img.shields.io/npm/v/cabloy.svg?style=flat-square
 [npm-url]: https://npmjs.com/package/cabloy
-[test-image]: https://github.com/zhennann/cabloy/workflows/actions-unittest/badge.svg
+[test-image]: https://github.com/zhennann/cabloy/workflows/actions-test/badge.svg
 [test-url]: https://github.com/zhennann/cabloy/actions
 [codecov-image]: https://img.shields.io/codecov/c/github/zhennann/cabloy.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/zhennann/cabloy

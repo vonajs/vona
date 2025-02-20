@@ -4,7 +4,7 @@ import { Controller, Post } from 'vona-module-a-web';
 
 const tableName = '__tempTransaction';
 
-@Controller({ path: 'transaction', meta: { mode: 'unittest' } })
+@Controller({ path: 'transaction', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTransaction extends BeanBase {
   @Post('fail')

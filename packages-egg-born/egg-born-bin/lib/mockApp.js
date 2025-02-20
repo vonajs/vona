@@ -9,7 +9,7 @@ const mock = require('egg-mock');
   options.framework = process.env.EGG_FRAMEWORK;
 
   // env
-  mock.env('unittest');
+  mock.env('test');
   // app
   const app = mock.app(options);
   await app.ready();

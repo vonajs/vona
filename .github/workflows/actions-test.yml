@@ -1,10 +1,10 @@
-name: actions-unittest
+name: actions-test
 on:
   push:
     branches:
       - master
 jobs:
-  unittest:
+  test:
     strategy:
       fail-fast: false
       matrix:

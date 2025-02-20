@@ -4,7 +4,7 @@ import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 
-@Controller({ path: 'cacheRedis', meta: { mode: 'unittest' } })
+@Controller({ path: 'cacheRedis', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerCacheRedis extends BeanBase {
   @Post()

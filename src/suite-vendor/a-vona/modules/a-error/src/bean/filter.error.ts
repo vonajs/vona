@@ -109,7 +109,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       this.ctx.body = `<h2>${status} ${HttpStatus[status]}</h2>`;
       return true;
     }
-    // show simple error format for unittest
+    // show simple error format for test
     if (this.app.meta.isTest) {
       this.ctx.status = status;
       this.ctx.body = `${err.name}: ${err.message}\n${err.stack}`;

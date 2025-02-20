@@ -5,7 +5,7 @@ import { Controller, Get } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { ServiceTest } from '../service/test.js';
 
-@Controller({ path: 'bean', meta: { mode: 'unittest' } })
+@Controller({ path: 'bean', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerBean extends BeanBase {
   @Get('test')

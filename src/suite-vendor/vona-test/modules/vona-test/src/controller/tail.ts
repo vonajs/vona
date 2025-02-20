@@ -3,7 +3,7 @@ import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 
-@Controller({ path: 'tail', meta: { mode: 'unittest' } })
+@Controller({ path: 'tail', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTail extends BeanBase {
   @Post()

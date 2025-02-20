@@ -2,7 +2,7 @@
 import path from 'node:path';
 import { getEnvFiles, loadEnvs } from '../src/index.ts';
 
-const meta = { serverEnv: 'unittest' };
+const meta = { serverEnv: 'test' };
 const envDir = path.join(process.cwd(), 'src/backend/config/env');
 const configDir = path.join(process.cwd(), 'src/backend/config/config');
 

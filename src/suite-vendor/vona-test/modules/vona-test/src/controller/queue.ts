@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 
-@Controller({ path: 'queue', meta: { mode: 'unittest' } })
+@Controller({ path: 'queue', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerQueue extends BeanBase {
   @Post('pushAsync')

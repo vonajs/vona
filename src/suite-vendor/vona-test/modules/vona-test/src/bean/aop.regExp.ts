@@ -1,7 +1,7 @@
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
-@Aop({ match: [/^vona-test\.service\.test\w+$/, 'testCtx'], meta: { mode: 'unittest' } })
+@Aop({ match: [/^vona-test\.service\.test\w+$/, 'testCtx'], meta: { mode: 'test' } })
 export class AopRegExp extends BeanAopBase {
   __get_name__(next) {
     const value = next();

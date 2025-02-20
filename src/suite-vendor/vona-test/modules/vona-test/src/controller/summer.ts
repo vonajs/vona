@@ -6,7 +6,7 @@ import { Api } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.js';
 
-@Controller({ path: 'summer', meta: { mode: 'unittest' } })
+@Controller({ path: 'summer', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerSummer extends BeanBase {
   @Post()
