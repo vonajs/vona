@@ -1,3 +1,4 @@
+import binDev from './command/bin.dev.ts';
 import createBean from './command/create.bean.ts';
 import createModule from './command/create.module.ts';
 import createSuite from './command/create.suite.ts';
@@ -15,6 +16,9 @@ import toolsMetadata from './command/tools.metadata.ts';
 export const commands = {
   default: {
     list: defaultList,
+  },
+  bin: {
+    dev: binDev,
   },
   create: {
     suite: createSuite,
