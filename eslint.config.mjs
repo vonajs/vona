@@ -6,6 +6,7 @@ export default EslintConfig({
     '**/node_modules/**',
     '**/dist/**',
     '**/static/**',
+    '.vona',
     '.assets',
     'coverage',
     'docker-compose',

@@ -18,6 +18,9 @@ miniprogram_npm
 *.tmp
 *.rdb
 
+# vona core related directories
+.vona
+
 # mine .env files
 env/.env*.mine
 /src/backend/config/config/config*.mine.ts

@@ -26,12 +26,12 @@ export async function generateEntryFiles(
     let configDir = path.join(configOptions.appDir, 'src/backend/config');
     if (!fse.existsSync(configDir)) {
       // eslint-disable-next-line
-      console.log(chalk.red('path not found: src/front/config\n'));
+      console.log(chalk.red('path not found: src/backend/config\n'));
       process.exit(0);
     }
     // meta
     const meta = getEnvMeta(configMeta);
-    configDir = path.join(configOptions.appDir, 'src/front/config/config');
+    configDir = path.join(configOptions.appDir, 'src/backend/config/config');
     const files = getEnvFiles(meta, configDir, 'config', '.ts')!;
     const filenames = files.map(item => path.basename(item));
     const imports: string[] = [];
@@ -42,7 +42,7 @@ export async function generateEntryFiles(
       for (let index = 1; index < parts.length - 1; index++) {
         constName += parts[index].charAt(0).toUpperCase() + parts[index].substring(1);
       }
-      imports.push(`import ${constName} from '../src/front/config/config/${filename}';`);
+      imports.push(`import ${constName} from '../src/backend/config/config/${filename}';`);
       constNames.push(constName);
     }
     const contentDest = `${imports.join('\n')}\nexport default [${constNames.join(', ')}];`;

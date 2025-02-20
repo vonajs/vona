@@ -27,7 +27,10 @@ export class CliBinDev extends BeanCliBase {
     const mode: VonaMetaMode = 'development';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
-    const configOptions: VonaBinConfigOptions = { appDir: projectPath };
+    const configOptions: VonaBinConfigOptions = {
+      appDir: projectPath,
+      runtimeDir: '.vona',
+    };
     const vonaMeta = await generateVonaMeta(configMeta, configOptions);
   }
 }

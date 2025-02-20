@@ -494,6 +494,9 @@ importers:
       '@cabloy/word-utils':
         specifier: ^2.0.0
         version: 2.0.0
+      chalk:
+        specifier: ^3.0.0
+        version: 3.0.0
       compressing:
         specifier: ^1.10.0
         version: 1.10.1
