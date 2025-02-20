@@ -1,4 +1,4 @@
-import type { VonaMetaFlavor } from '@cabloy/module-info';
+import type { VonaConfigMeta } from '@cabloy/module-info';
 
 export interface KoaApplicationOptions {
   env?: string | undefined;
@@ -12,5 +12,5 @@ export interface KoaApplicationOptions {
 
 export interface VonaApplicationOptions extends KoaApplicationOptions {
   baseDir: string;
-  flavor: VonaMetaFlavor;
+  configMeta: VonaConfigMeta;
 }
