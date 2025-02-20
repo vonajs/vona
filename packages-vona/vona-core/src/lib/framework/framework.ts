@@ -1,15 +1,12 @@
 // import path from 'path';
-import egg from 'egg';
 
 export { Bootstrap } from './bootstrap.ts';
-
-export { CustomAgentWorkerLoader as AgentWorkerLoader, CustomAppWorkerLoader as AppWorkerLoader } from './loader.ts';
 
 // const EGG_PATH = Symbol.for('egg#eggPath');
 
 // const eggPath = path.resolve(__dirname, '../..');
 
-export class Application extends egg.Application {
+export class Application {
   // get [EGG_PATH]() {
   // return eggPath;
   // }
@@ -23,7 +20,7 @@ export class Application extends egg.Application {
   }
 }
 
-export class Agent extends egg.Agent {
+export class Agent {
   // get [EGG_PATH]() {
   //   return eggPath;
   // }

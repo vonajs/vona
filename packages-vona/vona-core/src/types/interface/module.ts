@@ -1,5 +1,5 @@
+import type { VonaApplication } from '../../lib/core/application.ts';
 import type { Constructable } from '../../lib/decorator/type/constructable.ts';
-import type { VonaApplication } from '../application/app.ts';
 import type { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.ts';
 
 export type TypeModuleResourceLocales = Record<string, object>;

@@ -1,5 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
-import type { VonaApplication } from '../../types/index.ts';
+import type { VonaApplication } from '../core/application.ts';
 import { deepExtend } from '../utils/util.ts';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {

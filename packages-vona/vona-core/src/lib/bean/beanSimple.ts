@@ -1,4 +1,5 @@
-import type { VonaApplication, VonaContext } from '../../types/index.ts';
+import type { VonaContext } from '../../types/index.ts';
+import type { VonaApplication } from '../core/application.ts';
 
 export class BeanSimple {
   protected app: VonaApplication;

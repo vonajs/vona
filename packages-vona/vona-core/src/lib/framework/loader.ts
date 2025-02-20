@@ -2,10 +2,9 @@ import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
-import { AgentWorkerLoader, AppWorkerLoader } from 'egg';
 import { deepExtend } from '../utils/util.ts';
 
-function createLoaderClass(Base) {
+export function createLoaderClass(Base) {
   return class LoaderClass extends Base {
     pkgVona: any = null;
 
@@ -70,6 +69,3 @@ function createLoaderClass(Base) {
     }
   };
 }
-
-export const CustomAppWorkerLoader = createLoaderClass(AppWorkerLoader);
-export const CustomAgentWorkerLoader = createLoaderClass(AgentWorkerLoader);

@@ -1,6 +1,5 @@
-import type { VonaApplication } from '../../types/index.ts';
+import type { VonaApplication } from '../core/application.ts';
 import { EnumAppEvent } from '../../types/index.ts';
-import { extendApp } from '../core/app.ts';
 import { ModuleLoader } from '../module/loader.ts';
 import { SocketioReady } from '../module/socketio.ts';
 
@@ -30,8 +29,6 @@ export class Bootstrap {
 
   async _start_appLoad() {
     const app = this.app;
-    // extendApp
-    extendApp(app);
     // module loader
     const moduleLoader = app.bean._newBean(ModuleLoader);
     await moduleLoader.execute();

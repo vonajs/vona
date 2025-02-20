@@ -15,8 +15,6 @@ import { appResource } from './resource.ts';
 const SymbolClosePromise = Symbol('SymbolClosePromise');
 
 export class AppMeta extends BeanSimple {
-  inApp: boolean;
-  inAgent: boolean;
   isProd: boolean;
   isTest: boolean;
   isLocal: boolean;
@@ -50,10 +48,6 @@ export class AppMeta extends BeanSimple {
   appClosed: boolean;
 
   protected __init__() {
-    // app or agent
-    this.inApp = this.app.type === 'application';
-    this.inAgent = this.app.type === 'agent';
-
     // env
     this.prepareEnv();
 

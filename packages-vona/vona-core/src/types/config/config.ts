@@ -1,12 +1,25 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
-import type { EggAppConfig } from 'egg';
 import type { IBeanScopeConfig } from '../../index.ts';
 import type { PowerPartial } from '../utils/powerPartial.ts';
 import type { ConfigDevelopment } from './development.ts';
 import type { ConfigInstanceBase } from './instance.ts';
 
 // @ts-ignore ignore the throw type check of 'development'
-export interface VonaConfig extends EggAppConfig {
+export interface VonaConfig {
+  hostHeaders: string;
+  ipHeaders: string;
+  protocolHeaders: string;
+  maxProxyCount: number;
+  maxIpsCount: number;
+  proxy: boolean;
+  keys: string;
+  cluster: {
+    listen: {
+      hostname: string;
+      port: number;
+    };
+  };
+  //
   globalPrefix: string;
   publicDir?: string;
   modules: IBeanScopeConfig;

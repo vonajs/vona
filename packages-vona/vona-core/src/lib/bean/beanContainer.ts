@@ -1,4 +1,5 @@
-import type { VonaApplication, VonaContext } from '../../types/index.ts';
+import type { VonaContext } from '../../types/index.ts';
+import type { VonaApplication } from '../core/application.ts';
 import type { MetadataKey } from '../core/metadata.ts';
 import type { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';

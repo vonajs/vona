@@ -1,5 +1,6 @@
 import type { IModule } from '@cabloy/module-info';
-import type { TypeModuleResourceLocales, VonaApplication } from '../../types/index.ts';
+import type { TypeModuleResourceLocales } from '../../types/index.ts';
+import type { VonaApplication } from '../core/application.ts';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
