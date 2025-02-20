@@ -29,7 +29,7 @@
     "start": "node ./scripts/egg-born-scripts.js backend-start --flavor=normal",
     "start:daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon --flavor=normal",
     "stop": "node ./scripts/egg-born-scripts.js backend-stop --flavor=normal",
-    "prerun": "npm run vona :tools:deps -- --tsc",
+    "prerun": "npm run vona :tools:deps",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },

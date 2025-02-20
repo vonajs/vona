@@ -3,16 +3,8 @@ export default {
   info: {
     version: '5.0.0',
     title: 'Cli: Tools: Deps',
-    usage: 'vona :tools:deps [--tsc] [--force]',
+    usage: 'vona :tools:deps',
   },
   options: {
-    tsc: {
-      description: 'tsc',
-      type: 'boolean',
-    },
-    force: {
-      description: 'force',
-      type: 'boolean',
-    },
   },
 };

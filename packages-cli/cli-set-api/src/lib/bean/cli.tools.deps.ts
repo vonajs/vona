@@ -5,8 +5,6 @@ import fse from 'fs-extra';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
-    tsc: boolean;
-    force: boolean;
   }
 }
 
@@ -16,22 +14,17 @@ export class CliToolsDeps extends BeanCliBase {
     // super
     await super.execute();
     const projectPath = argv.projectPath;
-    const tsc = argv.tsc;
     // generate
-    await this._generate(projectPath, tsc);
+    await this._generate(projectPath);
   }
 
-  async _generate(projectPath: string, tsc: boolean) {
+  async _generate(projectPath: string) {
     // generate package.json
     await this.common._generatePackageJson(projectPath);
     // generate type modules file
     await this.common._generateTypeModulesFile(projectPath);
     // generate type project file
     await this._generateTypeProjectFile(projectPath);
-    // tsc
-    if (tsc) {
-      await this._tsc();
-    }
   }
 
   _getProjectMode(projectPath: string) {
@@ -54,9 +47,5 @@ export class CliToolsDeps extends BeanCliBase {
     if (!fse.existsSync(fileConfig)) {
       await fse.copyFile(fileTemplate, fileConfig);
     }
-  }
-
-  async _tsc() {
-    await this.helper.processHelper.tsc();
   }
 }
