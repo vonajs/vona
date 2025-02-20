@@ -159,7 +159,7 @@ export class BeanContainer {
     }
     // app/ctx
     if (beanInstance instanceof BeanSimple) {
-      (<any>beanInstance).app = this.app;
+      (beanInstance as any).app = this.app;
       if (this.ctx) {
         __setPropertyValue(beanInstance, 'ctx', this.ctx);
       }

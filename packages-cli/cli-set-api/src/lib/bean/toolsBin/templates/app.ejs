@@ -1,1 +1,12 @@
-export {}
+import { PluginVona } from 'vona';
+import { locales } from '../src/backend/config/locales.ts';
+<%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
+import config from './config.ts';
+import { modulesMeta } from './modules-meta.ts';
+
+await PluginZova.install({ 
+  modulesMeta, 
+  locales,
+  config,
+  <%=appMonkey?'AppMonkey,':''%>
+});
