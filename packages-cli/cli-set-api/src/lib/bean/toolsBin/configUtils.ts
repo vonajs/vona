@@ -3,7 +3,7 @@ import type { VonaBinConfigOptions } from './types.ts';
 import path from 'node:path';
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
-import { getEnvMeta } from './utils.ts';
+import { getEnvMeta, getNodeEnv } from './utils.ts';
 
 export function createConfigUtils(
   configMeta: VonaConfigMeta,
@@ -26,26 +26,15 @@ export function createConfigUtils(
     const envs = dotenv.loadEnvs(meta, envDir, '.env');
     const res = Object.assign(
       {
-        NODE_ENV: meta.mode,
+        NODE_ENV: getNodeEnv(meta.mode),
       },
       envs,
       {
         META_FLAVOR: meta.flavor,
         META_MODE: meta.mode,
-        META_APP_MODE: meta.appMode,
-      },
-      // compatible with quasar
-      {
-        DEV: meta.mode === 'development',
-        PROD: meta.mode === 'production',
-        SSR: meta.appMode === 'ssr',
-        // DEBUGGING: meta.mode === 'development',
-        // CLIENT: envs!.APP_SERVER === 'true',
-        // SERVER: envs!.APP_SERVER !== 'true',
-        // MODE: meta.appMode,
       },
     );
-    for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'DEV', 'PROD', 'SSR']) {
+    for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE']) {
       if (res[key] as any !== false) {
         process.env[key] = res[key];
       }
@@ -58,22 +47,13 @@ export function createConfigUtils(
     const meta = getEnvMeta(configMeta);
     // modules
     __modulesMeta = await glob({
-      projectMode: 'zova',
+      projectMode: 'vona',
       projectPath: configOptions.appDir,
-      disabledModules: __getDisabledModules(),
+      disabledModules: process.env.PROJECT_DISABLED_MODULES,
       disabledSuites: process.env.PROJECT_DISABLED_SUITES,
       log: false,
       meta,
     });
     return __modulesMeta;
-  }
-
-  function __getDisabledModules() {
-    let modules: string[] | string = process.env.PROJECT_DISABLED_MODULES ?? '';
-    if (!Array.isArray(modules)) modules = modules ? modules.split(',') : [];
-    if (process.env.PINIA_ENABLED === 'false') {
-      modules.push('a-pinia');
-    }
-    return modules;
   }
 }

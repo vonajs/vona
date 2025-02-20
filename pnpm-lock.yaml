@@ -479,6 +479,15 @@ importers:
       '@cabloy/cli':
         specifier: workspace:^
         version: link:../cabloy-cli
+      '@cabloy/dotenv':
+        specifier: workspace:^
+        version: link:../../packages-utils/dotenv
+      '@cabloy/extend':
+        specifier: workspace:^
+        version: link:../../packages-utils/extend
+      '@cabloy/module-glob':
+        specifier: workspace:^
+        version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
         specifier: workspace:^
         version: link:../../packages-utils/module-info

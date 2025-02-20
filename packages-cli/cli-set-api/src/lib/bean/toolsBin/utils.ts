@@ -1,4 +1,4 @@
-import type { VonaConfigMeta } from '@cabloy/module-info';
+import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import fse from 'fs-extra';
@@ -6,6 +6,10 @@ import compileTemplate from 'lodash/template.js';
 
 export function getEnvMeta(configMeta: VonaConfigMeta) {
   return { flavor: configMeta.flavor, mode: configMeta.mode, mine: 'mine' };
+}
+
+export function getNodeEnv(mode: VonaMetaMode) {
+  return mode === 'test' ? 'test' : mode === 'local' ? 'development' : 'production';
 }
 
 export function resolveTemplatePath(file: string) {
