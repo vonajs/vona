@@ -22,6 +22,5 @@ export class CliBinDev extends BeanCliBase {
   }
 
   async _run(projectPath: string) {
-
   }
 }
