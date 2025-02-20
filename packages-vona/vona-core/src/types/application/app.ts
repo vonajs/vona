@@ -1,5 +1,5 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
-import type { VonaConfig } from '../config/config.ts';
+import type { VonaConfig, VonaConfigOptional } from '../config/config.ts';
 
 export interface KoaApplicationOptions {
   env?: string | undefined;
@@ -20,3 +20,5 @@ export interface VonaAppInfo {
 export interface VonaApplicationOptions extends KoaApplicationOptions, VonaAppInfo {
   config: VonaConfig;
 }
+
+export type TypeAppInfoConfig = (appInfo: VonaAppInfo) => VonaConfigOptional | Promise<VonaConfigOptional>;

@@ -1,7 +1,7 @@
 import type { IModule } from '@cabloy/module-info';
 import type { Constructable } from '../../lib/decorator/type/constructable.ts';
+import type { TypeAppInfoConfig } from '../application/app.ts';
 import type { VonaLocaleOptionalMap } from '../config/locale.ts';
-import type { TypeModuleResourceConfig } from './module.ts';
 import type { IMonkeyModule, IMonkeySystem } from './monkey.js';
 
 export interface PluginVonaModulesMeta {
@@ -12,6 +12,6 @@ export interface PluginVonaModulesMeta {
 export interface PluginVonaOptions {
   modulesMeta: PluginVonaModulesMeta;
   locales: VonaLocaleOptionalMap;
-  config: TypeModuleResourceConfig[];
+  config: TypeAppInfoConfig[];
   AppMonkey?: Constructable<IMonkeyModule & IMonkeySystem>;
 }
