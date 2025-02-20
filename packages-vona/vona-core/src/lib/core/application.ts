@@ -40,7 +40,7 @@ export class VonaApplication extends KoaApplication {
     return this.options.name;
   }
 
-  createAnonymousContext(req) {
+  createAnonymousContext(req?: any) {
     const request = {
       headers: {
         'host': '127.0.0.1',

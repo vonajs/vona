@@ -30,10 +30,8 @@ export class BeanExecutor extends BeanBase {
   }
 
   runInBackground(fn: FunctionAsync<void>) {
-    this.ctx.runInBackground(async () => {
-      return await this.newCtxIsolate(async () => {
-        return await fn();
-      });
+    return this.newCtxIsolate(async () => {
+      return await fn();
     });
   }
 
