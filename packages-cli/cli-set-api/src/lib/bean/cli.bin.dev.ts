@@ -1,4 +1,5 @@
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
+import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import { BeanCliBase } from '@cabloy/cli';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
@@ -25,10 +26,8 @@ export class CliBinDev extends BeanCliBase {
     const workers = argv.workers || 1;
     const mode: VonaMetaMode = 'development';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
-    const configMeta: VonaConfigMeta = {
-      flavor,
-      mode,
-    };
-    const vonaMeta = await generateVonaMeta(projectPath, configMeta);
+    const configMeta: VonaConfigMeta = { flavor, mode };
+    const configOptions: VonaBinConfigOptions = { appDir: projectPath };
+    const vonaMeta = await generateVonaMeta(configMeta, configOptions);
   }
 }
