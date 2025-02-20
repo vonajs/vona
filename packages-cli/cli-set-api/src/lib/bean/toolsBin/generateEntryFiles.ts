@@ -74,7 +74,7 @@ export async function generateEntryFiles(
     const { modules, modulesArray } = modulesMeta;
     const moduleNames = modulesArray.map(item => item.info.relativeName);
     // src
-    const fileSrc = resolveTemplatePath('zova-modules-meta.ejs');
+    const fileSrc = resolveTemplatePath('vona-modules-meta.ejs');
     const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'modules-meta.ts');
     await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
     await copyTemplateFile(fileSrc, fileDest, { modules, moduleNames });

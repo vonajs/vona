@@ -10,3 +10,4 @@ export type VonaLocale = {
 } & typeof localeDefault;
 
 export type VonaLocaleOptional = PowerPartial<VonaLocale>;
+export type VonaLocaleOptionalMap = Record<string, VonaLocaleOptional>;

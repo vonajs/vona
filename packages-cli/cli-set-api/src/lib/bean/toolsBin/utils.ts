@@ -13,7 +13,7 @@ export function getNodeEnv(mode: VonaMetaMode) {
 }
 
 export function resolveTemplatePath(file: string) {
-  return new URL(path.join('../templates', file), import.meta.url);
+  return new URL(path.join('./templates', file), import.meta.url);
 }
 
 export function generateConfigDefine(env) {
