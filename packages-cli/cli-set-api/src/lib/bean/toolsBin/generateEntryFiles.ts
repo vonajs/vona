@@ -5,19 +5,22 @@ import path from 'node:path';
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
-import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
+import { copyTemplateFile, getEnvMeta, resolveTemplatePath, saveJSONFile } from './utils.ts';
 
 export async function generateEntryFiles(
   configMeta: VonaConfigMeta,
   configOptions: VonaBinConfigOptions,
   modulesMeta: Awaited<ReturnType<typeof glob>>,
+  env: { [name: string]: string },
 ) {
   // config
   await __generateConfig();
   // modules meta
   await __generateModulesMeta();
-  // app component
-  await __generateAppComponent();
+  // env
+  await __generateEnvJson();
+  // app
+  await __generateApp();
 
   //////////////////////////////
 
@@ -52,21 +55,12 @@ export async function generateEntryFiles(
     fse.writeFileSync(fileDest, contentDest, 'utf-8');
   }
 
-  async function __generateAppComponent() {
-    // dest
-    const pathDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'app');
-    fse.ensureDirSync(pathDest);
+  async function __generateApp() {
     // src
-    const files = ['controller.tsx_'];
-    for (const file of files) {
-      const fileSrc = resolveTemplatePath(`app/${file}`);
-      const fileDest = path.join(pathDest, file.substring(0, file.length - 1));
-      const vars = {
-        appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkey.ts')),
-        legacy: fse.existsSync(path.join(configOptions.appDir, 'src/legacy')),
-      };
-      await copyTemplateFile(fileSrc, fileDest, vars);
-    }
+    const fileSrc = resolveTemplatePath('app.ejs');
+    const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'app.ts');
+    await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
+    await copyTemplateFile(fileSrc, fileDest);
   }
 
   async function __generateModulesMeta() {
@@ -78,5 +72,10 @@ export async function generateEntryFiles(
     const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'modules-meta.ts');
     await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
     await copyTemplateFile(fileSrc, fileDest, { modules, moduleNames });
+  }
+
+  async function __generateEnvJson() {
+    const envFile = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.json');
+    await saveJSONFile(envFile, env);
   }
 }

@@ -11,7 +11,7 @@ export async function generateVonaMeta(configMeta: VonaConfigMeta, configOptions
   // modulesMeta
   const modulesMeta = await configUtils.loadModulesMeta();
   // generateEntryFiles
-  await generateEntryFiles(configMeta, configOptions, modulesMeta);
+  await generateEntryFiles(configMeta, configOptions, modulesMeta, env);
   // ok
   return {
     env,
