@@ -15,16 +15,5 @@ export default function (_appInfo: VonaAppInfo) {
     },
   };
 
-  // add http_proxy to httpclient
-  if (process.env.http_proxy) {
-    config.httpclient = {
-      request: {
-        enableProxy: true,
-        rejectUnauthorized: false,
-        proxy: process.env.http_proxy,
-      },
-    };
-  }
-
   return config;
 }

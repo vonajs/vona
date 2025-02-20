@@ -44,7 +44,9 @@ export function developmentWatchDirs(app: VonaApplication) {
       'change',
       debounce(info => {
         _developmentChange(info);
-      }, app.config.development.debounce),
+      },
+      // todo: app.config.development.debounce
+      1000),
     );
     // on ready
     const _watcher2 = cast(_watcher);

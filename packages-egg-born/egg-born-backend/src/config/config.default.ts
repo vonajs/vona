@@ -20,18 +20,6 @@ export default function (appInfo: VonaAppInfo) {
   // globalPrefix
   config.globalPrefix = '/api';
 
-  // development
-  config.development = {
-    debounce: 1000,
-  };
-
-  // versionReady
-  config.versionReady = {
-    retry: {
-      timeout: 3000,
-    },
-  };
-
   // io
   config.io = {
     init: {},
