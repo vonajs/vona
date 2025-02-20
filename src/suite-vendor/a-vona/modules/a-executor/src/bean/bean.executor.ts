@@ -47,7 +47,9 @@ export class BeanExecutor extends BeanBase {
     };
     const locale = options?.locale;
     const instanceName = options?.instanceName;
-    return await this.app.runInAnonymousContextScope(async ctx => {
+    // ctx
+    const ctx = this.app.createAnonymousContext(req);
+    return await this.app.ctxStorage.run(ctx, async () => {
       // todo: check if need for passport
       // (<any>ctx.req).ctx = ctx;
       // locale
