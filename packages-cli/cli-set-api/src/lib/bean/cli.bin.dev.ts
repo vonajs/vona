@@ -1,8 +1,6 @@
-import type { VonaMetaFlavor } from '@cabloy/module-info';
-import path from 'node:path';
+import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import { BeanCliBase } from '@cabloy/cli';
-import eggBornUtils from 'egg-born-utils';
-import fse from 'fs-extra';
+import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -22,5 +20,15 @@ export class CliBinDev extends BeanCliBase {
   }
 
   async _run(projectPath: string) {
+    const { argv } = this.context;
+    // todo: 确认workers是否为number
+    const workers = argv.workers || 1;
+    const mode: VonaMetaMode = 'development';
+    const flavor: VonaMetaFlavor = argv.flavor || 'normal';
+    const configMeta: VonaConfigMeta = {
+      flavor,
+      mode,
+    };
+    const vonaMeta = await generateVonaMeta(projectPath, configMeta);
   }
 }
