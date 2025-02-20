@@ -143,11 +143,11 @@ export class AppUtil extends BeanSimple {
     if (!this.app.meta.isProd) {
       if (data.stack) error.stack = data.stack;
       if (data.name) error.name = data.name;
-      if (data.errno) (<any>error).errno = data.errno;
-      if (data.sqlMessage) (<any>error).sqlMessage = data.sqlMessage;
-      if (data.sqlState) (<any>error).sqlState = data.sqlState;
-      if (data.index) (<any>error).index = data.index;
-      if (data.sql) (<any>error).sql = data.sql;
+      if (data.errno) (error as any).errno = data.errno;
+      if (data.sqlMessage) (error as any).sqlMessage = data.sqlMessage;
+      if (data.sqlState) (error as any).sqlState = data.sqlState;
+      if (data.index) (error as any).index = data.index;
+      if (data.sql) (error as any).sql = data.sql;
     }
     return error;
   }

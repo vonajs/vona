@@ -1,10 +1,10 @@
 import { PluginVona } from 'vona';
-import { locales } from '../src/backend/config/locales.ts';
-<%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
-import config from './config.ts';
 import { modulesMeta } from './modules-meta.ts';
+import { locales } from '../src/backend/config/locales.ts';
+import config from './config.ts';
+<%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
-await PluginZova.install({ 
+await PluginVona.install({ 
   modulesMeta, 
   locales,
   config,

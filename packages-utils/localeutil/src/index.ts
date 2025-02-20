@@ -1,6 +1,6 @@
-import { getText } from './util.js';
+import { getText } from './util.ts';
 
-export * from './util.js';
+export * from './util.ts';
 
 export type Flags = [number, number?];
 export type KeyCache = [Flags, string];
