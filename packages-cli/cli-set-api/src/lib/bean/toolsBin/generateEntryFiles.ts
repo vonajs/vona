@@ -79,41 +79,4 @@ export async function generateEntryFiles(
     await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
     await copyTemplateFile(fileSrc, fileDest, { modules, moduleNames });
   }
-
-  // import tmp from 'tmp';
-  // import { build as esBuild } from 'esbuild';
-  // import { pathToFileURL } from 'node:url';
-
-  // function _pathToHref(fileName: string): string {
-  //   return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
-  // }
-
-  // async function __loadConfig(fileName: string, meta) {
-  //   // temp
-  //   const fileTempObj = tmp.fileSync({ postfix: '.mjs' });
-  //   const fileTemp = fileTempObj.name;
-  //   // build
-  //   const esBuildConfig = __createEsbuildConfig(fileName, fileTemp);
-  //   await esBuild(esBuildConfig as any);
-  //   // load
-  //   const fnResult = await import(_pathToHref(fileTemp));
-  //   const configFn = fnResult.default || fnResult;
-  //   const config = await configFn(meta);
-  //   // delete temp
-  //   fileTempObj.removeCallback();
-  //   // ok
-  //   return config;
-  // }
-
-  // function __createEsbuildConfig(fileSrc: string, fileDest: string) {
-  //   return {
-  //     platform: 'node',
-  //     format: 'esm',
-  //     bundle: true,
-  //     packages: 'external',
-  //     resolveExtensions: ['.mjs', '.js', '.mts', '.ts', '.json'],
-  //     entryPoints: [fileSrc],
-  //     outfile: fileDest,
-  //   };
-  // }
 }
