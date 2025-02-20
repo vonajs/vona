@@ -48,6 +48,9 @@
   },
   "dependencies": {
     "@cabloy/cli": "workspace:^",
+    "@cabloy/dotenv": "workspace:^",
+    "@cabloy/extend": "workspace:^",
+    "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/word-utils": "^2.0.0",
     "compressing": "^1.10.0",
