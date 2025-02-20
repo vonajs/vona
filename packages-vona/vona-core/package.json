@@ -52,9 +52,9 @@
     "@cabloy/word-utils": "^2.0.0",
     "cel-js": "^0.3.0",
     "chalk": "^3.0.0",
-    "egg": "^3.17.5",
     "fs-extra": "^10.1.0",
     "inflation": "^2.0.0",
+    "koa": "^2.15.4",
     "passport-oauth2": "^1.6.1",
     "raw-body": "2.5.1",
     "reflect-metadata": "^0.2.2",
@@ -65,6 +65,7 @@
     "vona-shared": "workspace:^"
   },
   "devDependencies": {
+    "@types/koa": "^2.15.0",
     "@types/retry": "^0.12.5",
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
