@@ -1,5 +1,5 @@
-import { HttpStatus } from '../../../../types/enum/httpStatus.js';
-import { BeanSimple } from '../../beanSimple.js';
+import { HttpStatus } from '../../../../types/enum/httpStatus.ts';
+import { BeanSimple } from '../../beanSimple.ts';
 
 export class ErrorClass extends BeanSimple {
   ebErrors: any;

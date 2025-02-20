@@ -1,11 +1,11 @@
-import type { IBeanRecord } from '../bean/type.js';
-import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
-import type { MetadataKey } from './metadata.js';
+import type { IBeanRecord } from '../bean/type.ts';
+import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
+import type { MetadataKey } from './metadata.ts';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
-import { BeanSimple } from '../bean/beanSimple.js';
-import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
-import { isClass } from '../utils/isClass.js';
-import { appMetadata } from './metadata.js';
+import { BeanSimple } from '../bean/beanSimple.ts';
+import { registerMappedClassMetadataKey } from '../mappedClass/utils.ts';
+import { isClass } from '../utils/isClass.ts';
+import { appMetadata } from './metadata.ts';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');

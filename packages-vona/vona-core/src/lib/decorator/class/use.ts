@@ -1,6 +1,6 @@
 import type { VonaApplication } from 'vona';
-import type { IBeanRecord } from '../../bean/type.js';
-import type { MetadataKey } from '../../core/metadata.js';
+import type { IBeanRecord } from '../../bean/type.ts';
+import type { MetadataKey } from '../../core/metadata.ts';
 import type {
   Constructable,
   IDecoratorUseOptions,
@@ -8,10 +8,10 @@ import type {
   IInjectSelectorInfo,
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
-} from '../index.js';
+} from '../index.ts';
 import { isNil } from '@cabloy/utils';
-import { appMetadata } from '../../core/metadata.js';
-import { appResource } from '../../core/resource.js';
+import { appMetadata } from '../../core/metadata.ts';
+import { appResource } from '../../core/resource.ts';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
 export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;

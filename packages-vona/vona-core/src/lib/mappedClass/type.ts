@@ -1,4 +1,4 @@
-import type { MetadataKey } from '../core/metadata.js';
+import type { MetadataKey } from '../core/metadata.ts';
 
 export const SymbolMappedClassMetadataKeys = Symbol('SymbolMappedClassMetakeys');
 

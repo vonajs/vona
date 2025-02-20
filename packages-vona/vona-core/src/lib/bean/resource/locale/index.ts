@@ -1,3 +1,3 @@
-export * from './appLocale.js';
-export * from './beanScopeLocale.js';
-export * from './type.js';
+export * from './appLocale.ts';
+export * from './beanScopeLocale.ts';
+export * from './type.ts';

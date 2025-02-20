@@ -1,5 +1,5 @@
 import { splitWords } from '@cabloy/word-utils';
-import { BeanSimple } from '../beanSimple.js';
+import { BeanSimple } from '../beanSimple.ts';
 
 export interface IBeanScopeContainer {}
 

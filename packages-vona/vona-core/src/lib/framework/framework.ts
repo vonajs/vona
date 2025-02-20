@@ -1,9 +1,9 @@
 // import path from 'path';
 import egg from 'egg';
 
-export { Bootstrap } from './bootstrap.js';
+export { Bootstrap } from './bootstrap.ts';
 
-export { CustomAgentWorkerLoader as AgentWorkerLoader, CustomAppWorkerLoader as AppWorkerLoader } from './loader.js';
+export { CustomAgentWorkerLoader as AgentWorkerLoader, CustomAppWorkerLoader as AppWorkerLoader } from './loader.ts';
 
 // const EGG_PATH = Symbol.for('egg#eggPath');
 

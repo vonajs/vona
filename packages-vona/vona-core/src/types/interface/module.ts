@@ -1,6 +1,6 @@
-import type { Constructable } from '../../lib/decorator/type/constructable.js';
-import type { VonaApplication } from '../application/app.js';
-import type { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
+import type { Constructable } from '../../lib/decorator/type/constructable.ts';
+import type { VonaApplication } from '../application/app.ts';
+import type { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.ts';
 
 export type TypeModuleResourceLocales = Record<string, object>;
 export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;

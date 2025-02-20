@@ -1,11 +1,11 @@
-import type { MetadataKey } from '../../lib/index.js';
-import type { ContextBase } from '../../types/context/contextBase.js';
-import type { VonaContext } from '../../types/context/index.js';
+import type { MetadataKey } from '../../lib/index.ts';
+import type { ContextBase } from '../../types/context/contextBase.ts';
+import type { VonaContext } from '../../types/context/index.ts';
 import { AsyncResource } from 'node:async_hooks';
 import inflate from 'inflation';
 import raw from 'raw-body';
-import { appResource, BeanContainer } from '../../lib/index.js';
-import { cast } from '../../types/utils/cast.js';
+import { appResource, BeanContainer } from '../../lib/index.ts';
+import { cast } from '../../types/utils/cast.ts';
 
 const BEAN = Symbol.for('Context#__bean');
 const INNERACCESS = Symbol.for('Context#__inneraccess');

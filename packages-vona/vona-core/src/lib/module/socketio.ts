@@ -1,6 +1,6 @@
 // import { URL } from 'url';
-import { BeanSimple } from '../bean/beanSimple.js';
-// import { cast } from '../../types/utils/cast.js';
+import { BeanSimple } from '../bean/beanSimple.ts';
+// import { cast } from '../../types/utils/cast.ts';
 
 export class SocketioReady extends BeanSimple {
   initialize() {

@@ -1,6 +1,6 @@
-import type { BeanContainer, Constructable, ILocalInfos, MetadataKey } from '../../lib/index.js';
-import type { VonaConfig } from '../config/config.js';
-import type { VonaContext } from './index.js';
+import type { BeanContainer, Constructable, ILocalInfos, MetadataKey } from '../../lib/index.ts';
+import type { VonaConfig } from '../config/config.ts';
+import type { VonaContext } from './index.ts';
 
 export interface ContextBase {
   get bean(): BeanContainer;

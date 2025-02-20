@@ -1,2 +1,2 @@
-export * from './app.js';
-export * from './appText.js';
+export * from './app.ts';
+export * from './appText.ts';

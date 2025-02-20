@@ -1,6 +1,6 @@
-import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.js';
-import { appResource } from '../core/resource.js';
-import { BeanSimple } from './beanSimple.js';
+import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.ts';
+import { appResource } from '../core/resource.ts';
+import { BeanSimple } from './beanSimple.ts';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');
 export const SymbolModuleBelong = Symbol('SymbolModuleBelong');

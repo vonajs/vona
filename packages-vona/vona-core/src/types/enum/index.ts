@@ -1,2 +1,2 @@
-export * from './appEvent.js';
-export * from './httpStatus.js';
+export * from './appEvent.ts';
+export * from './httpStatus.ts';

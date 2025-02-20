@@ -1,5 +1,5 @@
-import type { IBeanScopeLocale } from '../../lib/bean/type.js';
-import type { PowerPartial } from '../utils/powerPartial.js';
+import type { IBeanScopeLocale } from '../../lib/bean/type.ts';
+import type { PowerPartial } from '../utils/powerPartial.ts';
 
 export const localeDefault = {
   modules: {},

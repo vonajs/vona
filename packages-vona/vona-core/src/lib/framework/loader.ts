@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
 import { AgentWorkerLoader, AppWorkerLoader } from 'egg';
-import { deepExtend } from '../utils/util.js';
+import { deepExtend } from '../utils/util.ts';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {

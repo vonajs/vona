@@ -1,10 +1,10 @@
 import type { IModule } from '@cabloy/module-info';
-import type { TypeModuleResourceLocales, VonaApplication } from '../../types/index.js';
+import type { TypeModuleResourceLocales, VonaApplication } from '../../types/index.ts';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import * as localeutil from '@cabloy/localeutil';
-import localesDefault from '../core/locales.js';
+import localesDefault from '../core/locales.ts';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all locales

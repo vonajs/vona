@@ -1,3 +1,3 @@
-export * from './class/index.js';
-export * from './interface/index.js';
-export * from './type/index.js';
+export * from './class/index.ts';
+export * from './interface/index.ts';
+export * from './type/index.ts';

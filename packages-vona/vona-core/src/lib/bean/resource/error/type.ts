@@ -1,4 +1,4 @@
-import type { IErrorObject } from './errorObject.js';
+import type { IErrorObject } from './errorObject.ts';
 
 export interface IModuleError {
   throw: (...args: any[]) => never;

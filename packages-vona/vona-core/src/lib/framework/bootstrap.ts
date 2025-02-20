@@ -1,8 +1,8 @@
-import type { VonaApplication } from '../../types/index.js';
-import { EnumAppEvent } from '../../types/index.js';
-import { extendApp } from '../core/app.js';
-import { ModuleLoader } from '../module/loader.js';
-import { SocketioReady } from '../module/socketio.js';
+import type { VonaApplication } from '../../types/index.ts';
+import { EnumAppEvent } from '../../types/index.ts';
+import { extendApp } from '../core/app.ts';
+import { ModuleLoader } from '../module/loader.ts';
+import { SocketioReady } from '../module/socketio.ts';
 
 export class Bootstrap {
   app: VonaApplication;

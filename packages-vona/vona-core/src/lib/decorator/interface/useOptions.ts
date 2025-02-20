@@ -1,4 +1,4 @@
-import type { IBeanRecord, InjectionScope, MetadataKey } from '../../../index.js';
+import type { IBeanRecord, InjectionScope, MetadataKey } from '../../../index.ts';
 
 export interface IDecoratorUseOptionsBase {
   prop: MetadataKey;

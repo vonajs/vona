@@ -1,3 +1,3 @@
-export * from './isClass.js';
-export * from './retry.js';
-export * from './util.js';
+export * from './isClass.ts';
+export * from './retry.ts';
+export * from './util.ts';

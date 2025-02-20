@@ -1,2 +1,2 @@
-export * from './createBeanDecorator.js';
-export * from './use.js';
+export * from './createBeanDecorator.ts';
+export * from './use.ts';

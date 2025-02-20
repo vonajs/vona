@@ -1,6 +1,6 @@
-import type { VonaApplication } from '../../types/application/app.js';
-import { BeanContainer } from '../bean/beanContainer.js';
-import { contextBase } from './context.js';
+import type { VonaApplication } from '../../types/application/app.ts';
+import { BeanContainer } from '../bean/beanContainer.ts';
+import { contextBase } from './context.ts';
 
 export function extendApp(app: VonaApplication) {
   // app.ctx

@@ -1,6 +1,6 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
-import type { TypeMonkeyName, VonaContext } from '../../types/index.js';
+import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
 import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
@@ -9,7 +9,7 @@ import { extend } from '@cabloy/extend';
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import * as uuid from 'uuid';
-import { BeanSimple } from '../bean/beanSimple.js';
+import { BeanSimple } from '../bean/beanSimple.ts';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;

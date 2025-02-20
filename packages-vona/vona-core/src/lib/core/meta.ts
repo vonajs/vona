@@ -1,15 +1,15 @@
 import type { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
-import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.js';
-import type { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
-import type { ErrorClass, IModuleLocaleText } from '../bean/index.js';
-import type { AppMetadata } from './metadata.js';
-import type { AppResource } from './resource.js';
-import { EnumAppEvent } from '../../types/index.js';
-import { BeanSimple } from '../bean/beanSimple.js';
-import { AppLocale, BeanScopeContainer } from '../bean/index.js';
-import { appMetadata } from './metadata.js';
-import { appResource } from './resource.js';
+import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.ts';
+import type { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.ts';
+import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
+import type { AppMetadata } from './metadata.ts';
+import type { AppResource } from './resource.ts';
+import { EnumAppEvent } from '../../types/index.ts';
+import { BeanSimple } from '../bean/beanSimple.ts';
+import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
+import { appMetadata } from './metadata.ts';
+import { appResource } from './resource.ts';
 
 const SymbolClosePromise = Symbol('SymbolClosePromise');
 

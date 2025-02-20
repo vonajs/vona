@@ -1,2 +1,2 @@
-export * from './module.js';
-export * from './monkey.js';
+export * from './module.ts';
+export * from './monkey.ts';

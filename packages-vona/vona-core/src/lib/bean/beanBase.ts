@@ -1,7 +1,7 @@
-import type { IModuleLocaleText } from './resource/locale/type.js';
-import type { IBeanScopeContainer } from './scope/beanScopeContainer.js';
-import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
-import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
+import type { IModuleLocaleText } from './resource/locale/type.ts';
+import type { IBeanScopeContainer } from './scope/beanScopeContainer.ts';
+import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
+import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
 
 const SymbolText = Symbol('SymbolText');
 

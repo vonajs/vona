@@ -1,10 +1,10 @@
 import type { Context as EggContext } from 'egg';
-import type { VonaApplication } from '../application/app.js';
-import type { ContextBase } from './contextBase.js';
-import type { ContextOthers } from './contextOthers.js';
-import type { ContextState } from './contextState.js';
+import type { VonaApplication } from '../application/app.ts';
+import type { ContextBase } from './contextBase.ts';
+import type { ContextOthers } from './contextOthers.ts';
+import type { ContextState } from './contextState.ts';
 
-export * from './contextState.js';
+export * from './contextState.ts';
 
 // @ts-ignore ignore the throw type check of 'throw'/'meta'
 export interface VonaContext extends ContextBase, ContextOthers, EggContext {
