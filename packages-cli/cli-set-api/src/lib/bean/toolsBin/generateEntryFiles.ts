@@ -78,7 +78,10 @@ export async function generateEntryFiles(
   }
 
   async function __generateEnvJson() {
-    const envFile = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.json');
-    await saveJSONFile(envFile, env);
+    const contentDest = `export default ${JSON.stringify(env, null, 2)};\n`;
+    // output
+    const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'env.ts');
+    fse.ensureFileSync(fileDest);
+    fse.writeFileSync(fileDest, contentDest, 'utf-8');
   }
 }
