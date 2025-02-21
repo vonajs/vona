@@ -9,5 +9,4 @@ export * from './contextState.ts';
 export interface VonaContext extends ContextBase, ContextOthers {
   app: VonaApplication;
   state: ContextState;
-  [key: string | symbol]: any; // should use any rather than unknown
 }
