@@ -13,5 +13,6 @@ export interface BootstrapOptions {
   modulesMeta: BootstrapOptionsMeta;
   locales: VonaLocaleOptionalMap;
   config: TypeAppInfoConfig[];
+  env: { [key: string]: string | boolean };
   AppMonkey?: Constructable<IMonkeyModule & IMonkeySystem>;
 }

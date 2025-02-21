@@ -1,12 +1,14 @@
-import { PluginVona } from 'vona';
+import { bootstrap } from 'vona';
 import { modulesMeta } from './modules-meta.ts';
 import { locales } from '../src/backend/config/locales.ts';
 import config from './config.ts';
+import env from './.env.json' with {type: 'json'};
 <%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
-await PluginVona.install({ 
+await bootstrap({ 
   modulesMeta, 
   locales,
   config,
+  env,
   <%=appMonkey?'AppMonkey,':''%>
 });
