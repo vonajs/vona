@@ -7,7 +7,7 @@ import type {
   IModelUpdateOptionsGeneral,
   TableIdentity,
 } from '../../types/index.ts';
-import { BigNumber } from 'bignumber.ts';
+import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { BeanModelView } from './bean.model_view.ts';
 

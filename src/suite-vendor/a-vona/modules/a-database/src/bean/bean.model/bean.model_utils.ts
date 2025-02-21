@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types/index.ts';
 import type { ITableColumns } from '../bean.databaseDialectBase.ts';
-import { BigNumber } from 'bignumber.ts';
+import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
 import { checkWhere } from '../../common/checkWhere.ts';
