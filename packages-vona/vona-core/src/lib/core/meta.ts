@@ -72,11 +72,12 @@ export class AppMeta extends BeanSimple {
   }
 
   prepareEnv() {
-    this.isProd = this.app.config.configMeta.mode === 'prod';
-    this.isTest = this.app.config.configMeta.mode === 'test';
-    this.isLocal = this.app.config.configMeta.mode === 'local';
-    this.flavor = this.app.config.configMeta.flavor;
-    this.mode = this.app.config.configMeta.mode;
+    const mode = this.app.config.meta.mode;
+    this.isProd = mode === 'prod';
+    this.isTest = mode === 'test';
+    this.isLocal = mode === 'local';
+    this.mode = mode;
+    this.flavor = this.app.config.meta.flavor;
   }
 
   async waitAppStarted() {

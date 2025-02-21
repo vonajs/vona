@@ -1,9 +1,8 @@
 import type { VonaApplication } from '../core/application.ts';
 import { EnumAppEvent } from '../../types/index.ts';
 import { ModuleLoader } from '../module/loader.ts';
-import { SocketioReady } from '../module/socketio.ts';
 
-export class Bootstrap__ {
+export class Start {
   app: VonaApplication;
 
   constructor(app: VonaApplication) {
@@ -44,7 +43,8 @@ export class Bootstrap__ {
     const app = this.app;
     app.meta.appReady = true;
     app.meta.appReadyInstances = {};
-    // todo: 在这里启动server listen，允许外部访问系统
+    // listen here so as to serve
+    // app.listen(app.config.server.listen.port, app.config.server.listen.hostname);
     // hook: appReady
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appReady');
   }
@@ -56,10 +56,5 @@ export class Bootstrap__ {
     app.emit(EnumAppEvent.AppStarted);
     // hook: appStarted
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
-  }
-
-  async socketioReady() {
-    const socketioReady = this.app.bean._newBean(SocketioReady);
-    socketioReady.initialize();
   }
 }
