@@ -172,7 +172,7 @@ export class ServiceErrorView extends BeanBase {
       config = cast(this.app).dumpConfigToObject().config.config;
     }
     return {
-      baseDir: this.app.config.baseDir,
+      projectPath: this.app.options.projectPath,
       config: util.inspect(config),
     };
   }
