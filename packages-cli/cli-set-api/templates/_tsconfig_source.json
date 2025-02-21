@@ -34,9 +34,6 @@
     },
     {
       "path": "packages-vona/vona-mock"
-    },
-    {
-      "path": "packages-egg-born/egg-born-backend"
     }
   ]
 }
