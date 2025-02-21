@@ -6,7 +6,6 @@
   "description": "",
   "author": "",
   "files": [
-    "dist"
   ],
   "dependencies": {
     "vona-module-a-cabloy": "workspace:^",

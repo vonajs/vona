@@ -3,7 +3,7 @@
   "type": "module",
   "version": "5.0.0",
   "title": "<%=argv.suiteInfo.relativeName%>",
-  "files": ["dist"],
+  "files": [],
   "description": "<%=argv.description%>",
   "author": "<%=argv.author%>",
   "dependencies": {}

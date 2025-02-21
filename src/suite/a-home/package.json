@@ -6,7 +6,6 @@
   "description": "",
   "author": "zhennann",
   "files": [
-    "dist"
   ],
   "dependencies": {
     "vona-module-home-base": "workspace:^",

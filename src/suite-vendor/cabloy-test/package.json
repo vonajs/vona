@@ -16,7 +16,6 @@
   "description": "",
   "author": "",
   "files": [
-    "dist"
   ],
   "dependencies": {
     "vona-module-cabloy-test": "^5.0.3"

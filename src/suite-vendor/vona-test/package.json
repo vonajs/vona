@@ -16,7 +16,6 @@
   "description": "",
   "author": "",
   "files": [
-    "dist"
   ],
   "dependencies": {
     "vona-module-vona-test": "^5.0.3"
