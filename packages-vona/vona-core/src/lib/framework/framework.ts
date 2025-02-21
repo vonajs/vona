@@ -1,7 +1,5 @@
 // import path from 'path';
 
-export { Bootstrap } from './bootstrap.ts';
-
 // const EGG_PATH = Symbol.for('egg#eggPath');
 
 // const eggPath = path.resolve(__dirname, '../..');
