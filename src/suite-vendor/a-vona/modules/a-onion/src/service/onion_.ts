@@ -308,6 +308,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     if (!routePathRaw) return;
     return routePathRaw.startsWith('//')
       ? `/${this.ctx.path}`
-      : this.ctx.path.substring(this.app.config.globalPrefix.length);
+      : this.ctx.path.substring(this.app.config.server.globalPrefix.length);
   }
 }

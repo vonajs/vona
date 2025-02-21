@@ -33,7 +33,7 @@ export async function performActionInner<T = any>({
   // ctx
   const ctx = app.createContext(req, res) as unknown as VonaContext;
   // run
-  return await app.ctxStorage.run(ctx as any, async () => {
+  return await app.ctxStorage!.run(ctx as any, async () => {
     // locale
     Object.defineProperty(ctx, 'locale', {
       get() {
@@ -74,12 +74,12 @@ export async function performActionInner<T = any>({
     await __fnMiddleware(ctx);
     // check result
     if (ctx.status === 200) {
-      if (!ctx.body || ctx.body.code === undefined) {
+      if (!ctx.body || (ctx.body as any).code === undefined) {
         // not check code, e.g. text/xml
         return ctx.body;
       }
-      if (ctx.body.code === 0) {
-        return ctx.body.data;
+      if ((ctx.body as any).code === 0) {
+        return (ctx.body as any).data;
       }
       throw ctx.app.util.createError(ctx.body);
     } else {

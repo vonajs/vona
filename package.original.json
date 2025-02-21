@@ -25,6 +25,7 @@
     "dev:one": "npm run prerun && node ./scripts/egg-born-bin.js backend-dev --workers=1 --flavor=normal",
     "test": "npm run prerun && node ./scripts/egg-born-bin.js backend-test --flavor=normal",
     "cov": "npm run prerun && node ./scripts/egg-born-bin.js backend-cov --flavor=normal",
+    "tsc": "npm run prerun && tsc -b",
     "build": "npm run prerun && npm run vona :tools:build",
     "start": "node ./scripts/egg-born-scripts.js backend-start --flavor=normal",
     "start:daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon --flavor=normal",

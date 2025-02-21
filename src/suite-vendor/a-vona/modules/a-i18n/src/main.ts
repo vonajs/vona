@@ -80,8 +80,8 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
   }
 
   // cookie alias
-  if (locale in options.localeAlias) {
-    locale = options.localeAlias[locale];
+  if (locale as string in options.localeAlias) {
+    locale = options.localeAlias[locale as string];
   }
 
   locale = formatLocale(locale);

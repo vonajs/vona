@@ -22,8 +22,9 @@ export class ServiceBroadcast extends BeanBase {
         .then(() => {
           // do nothing
         })
-        .catch((err: Error) => {
-          app.logger.error(err);
+        .catch((_err: Error) => {
+          // todo: log
+          // app.logger.error(err);
         });
     });
   }
