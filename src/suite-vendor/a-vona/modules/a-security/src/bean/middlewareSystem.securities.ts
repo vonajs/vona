@@ -197,7 +197,7 @@ export class MiddlewareSystemSecurities extends BeanBase implements IMiddlewareS
         : options.defaultMiddleware;
 
     if (options.match || options.ignore) {
-      this.app.coreLogger.warn('[@eggjs/security/middleware/securities] Please set `match` or `ignore` on sub config');
+      // this.app.coreLogger.warn('[@eggjs/security/middleware/securities] Please set `match` or `ignore` on sub config');
     }
 
     // format csrf.cookieDomain
@@ -209,11 +209,11 @@ export class MiddlewareSystemSecurities extends BeanBase implements IMiddlewareS
     defaultMiddlewares.forEach(middlewareName => {
       const opt = Reflect.get(options, middlewareName) as any;
       if (opt === false) {
-        this.app.coreLogger.warn(
-          '[egg-security] Please use `config.security.%s = { enable: false }` instead of `config.security.%s = false`',
-          middlewareName,
-          middlewareName,
-        );
+        // this.app.coreLogger.warn(
+        //   '[egg-security] Please use `config.security.%s = { enable: false }` instead of `config.security.%s = false`',
+        //   middlewareName,
+        //   middlewareName,
+        // );
       }
 
       assert(
@@ -225,21 +225,24 @@ export class MiddlewareSystemSecurities extends BeanBase implements IMiddlewareS
         return;
       }
 
-      if (middlewareName === 'csrf' && opt.useSession && !this.app.plugins.session) {
+      if (middlewareName === 'csrf' && opt.useSession) {
         throw new Error('csrf.useSession enabled, but session plugin is disabled');
       }
+      // if (middlewareName === 'csrf' && opt.useSession && !this.app.plugins.session) {
+      //   throw new Error('csrf.useSession enabled, but session plugin is disabled');
+      // }
 
       // use opt.match first (compatibility)
       if (opt.match && opt.ignore) {
-        this.app.coreLogger.warn(
-          '[@eggjs/security/middleware/securities] `options.match` and `options.ignore` are both set, using `options.match`',
-        );
+        // this.app.coreLogger.warn(
+        //   '[@eggjs/security/middleware/securities] `options.match` and `options.ignore` are both set, using `options.match`',
+        // );
         opt.ignore = undefined;
       }
       if (!opt.ignore && opt.blackUrls) {
-        this.app.deprecate(
-          '[@eggjs/security/middleware/securities] Please use `config.security.xframe.ignore` instead, `config.security.xframe.blackUrls` will be removed very soon',
-        );
+        // this.app.deprecate(
+        //   '[@eggjs/security/middleware/securities] Please use `config.security.xframe.ignore` instead, `config.security.xframe.blackUrls` will be removed very soon',
+        // );
         opt.ignore = opt.blackUrls;
       }
       // set matching function to security middleware options
@@ -248,13 +251,13 @@ export class MiddlewareSystemSecurities extends BeanBase implements IMiddlewareS
       const createMiddleware = securityMiddlewares[middlewareName];
       const fn = createMiddleware(opt);
       middlewares.push(fn);
-      this.app.coreLogger.info('[@eggjs/security/middleware/securities] use %s middleware', middlewareName);
+      // this.app.coreLogger.info('[@eggjs/security/middleware/securities] use %s middleware', middlewareName);
     });
 
-    this.app.coreLogger.info(
-      '[@eggjs/security/middleware/securities] compose %d middlewares into one security middleware',
-      middlewares.length,
-    );
+    // this.app.coreLogger.info(
+    //   '[@eggjs/security/middleware/securities] compose %d middlewares into one security middleware',
+    //   middlewares.length,
+    // );
     return middlewares;
   }
 }

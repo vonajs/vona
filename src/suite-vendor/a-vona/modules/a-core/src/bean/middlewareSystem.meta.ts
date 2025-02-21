@@ -14,7 +14,7 @@ export class MiddlewareSystemMeta extends BeanBase implements IMiddlewareSystemE
     const ctx = this.ctx;
     if (options.logging) {
       // todo: log
-      ctx.coreLogger.info('[meta] request started, host: %s, user-agent: %s', ctx.host, ctx.header['user-agent']);
+      // ctx.coreLogger.info('[meta] request started, host: %s, user-agent: %s', ctx.host, ctx.header['user-agent']);
     }
     // start
     ctx.starttime = Date.now();
