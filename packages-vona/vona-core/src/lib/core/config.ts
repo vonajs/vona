@@ -7,7 +7,7 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { deepExtend } from '../utils/util.ts';
 
-export async function combineConfigDefault(appInfo: VonaAppInfo) {
+export async function combineAppConfigDefault(appInfo: VonaAppInfo) {
   let config: VonaConfigOptional = await configDefault(appInfo);
   const mode = appInfo.configMeta.mode;
   if (mode === 'local') {

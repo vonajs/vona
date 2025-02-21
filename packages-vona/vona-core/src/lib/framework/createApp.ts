@@ -2,7 +2,7 @@ import type { TypeAppInfoConfig, VonaAppInfo, VonaApplicationOptions } from '../
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import { VonaApplication } from '../core/application.ts';
-import { combineConfigDefault } from '../core/config.ts';
+import { combineAppConfigDefault } from '../core/config.ts';
 import { deepExtend } from '../utils/util.ts';
 import { Start } from './start.ts';
 
@@ -48,7 +48,7 @@ function prepareAppInfo(): VonaAppInfo {
 }
 
 async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[]) {
-  const config = await combineConfigDefault(appInfo);
+  const config = await combineAppConfigDefault(appInfo);
   for (const configItem of configs) {
     const res = await configItem(appInfo);
     if (res) {
