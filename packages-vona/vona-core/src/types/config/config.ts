@@ -8,9 +8,10 @@ export interface VonaConfig {
   meta: VonaConfigMeta;
   env: VonaConfigEnv;
   server: {
-    keys: string;
+    keys: string[];
     globalPrefix: string;
-    publicDir?: string;
+    publicDir: string;
+    subdomainOffset: number;
     listen: {
       hostname: string;
       port: number;

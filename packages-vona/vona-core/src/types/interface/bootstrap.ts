@@ -1,18 +1,17 @@
 import type { IModule } from '@cabloy/module-info';
-import type { Constructable } from '../../lib/decorator/type/constructable.ts';
 import type { TypeAppInfoConfig } from '../application/app.ts';
 import type { VonaLocaleOptionalMap } from '../config/locale.ts';
-import type { IMonkeyModule, IMonkeySystem } from './monkey.js';
+import type { AppMonkeyConstructable } from './monkey.js';
 
-export interface BootstrapOptionsMeta {
+export interface VonaModulesMeta {
   modules: Record<string, IModule>;
   moduleNames: string[];
 }
 
 export interface BootstrapOptions {
-  modulesMeta: BootstrapOptionsMeta;
+  modulesMeta: VonaModulesMeta;
   locales: VonaLocaleOptionalMap;
   config: TypeAppInfoConfig[];
   env: { [key: string]: string | boolean };
-  AppMonkey?: Constructable<IMonkeyModule & IMonkeySystem>;
+  AppMonkey?: AppMonkeyConstructable;
 }

@@ -1,6 +1,7 @@
-import type { TypeAppInfoConfig, VonaAppInfo } from '../../types/application/app.ts';
+import type { VonaConfig } from 'vona';
+import type { TypeAppInfoConfig, VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
-import { deepExtend } from 'vona';
+import { deepExtend, VonaApplication } from 'vona';
 import { combineConfigDefault } from '../core/config.ts';
 
 export async function createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
@@ -12,14 +13,15 @@ export async function createApp({ modulesMeta, locales, config, env, AppMonkey }
   const appConfig = await prepareConfig(appInfo, config);
   // options
   const options: VonaApplicationOptions = {
-    config: appConfig,
+    name: appInfo.name,
+    baseDir: appInfo.baseDir,
+    modulesMeta,
+    locales,
+    config: appConfig as unknown as VonaConfig,
+    AppMonkey,
   };
-  // env
-  console.log(modulesMeta, locales, config, AppMonkey);
-  // // zova app
-  // const app = new ZovaApplication(vue, ctxRoot);
-  // await app.initialize({ modulesMeta, locales, config, AppMonkey, legacyRoutes });
-  // return app;
+  const app = new VonaApplication(options);
+  return app;
 }
 
 function prepareEnv(env: { [key: string]: string | boolean }) {
@@ -42,7 +44,7 @@ function prepareAppInfo(): VonaAppInfo {
 }
 
 async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[]) {
-  const config = combineConfigDefault(appInfo.configMeta);
+  const config = await combineConfigDefault(appInfo);
   for (const configItem of configs) {
     const res = await configItem(appInfo);
     if (res) {

@@ -1,4 +1,4 @@
-import type { VonaApplicationOptions } from '../../types/application/app.ts';
+import type { KoaApplicationOptions, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { ApplicationError } from '../bean/resource/error/errorApplication.ts';
@@ -19,7 +19,13 @@ export class VonaApplication extends KoaApplication {
   meta: AppMeta;
 
   constructor(options: VonaApplicationOptions) {
-    super(options);
+    const koaOptions: KoaApplicationOptions = {
+      env: process.env.NODE_ENV,
+      keys: options.config.server.keys,
+      proxy: options.config.proxy.enabled,
+      subdomainOffset:
+    };
+    super(koaOptions);
     this.options = options;
     this.config = options.config;
     this.bean = BeanContainer.create(this, undefined);

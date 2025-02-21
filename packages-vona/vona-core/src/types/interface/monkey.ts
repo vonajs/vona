@@ -1,4 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
+import type { Constructable } from '../../lib/decorator/type/constructable.ts';
 
 export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySystem;
 
@@ -31,3 +32,5 @@ export interface IMonkeyAppStarted {
 export interface IMonkeyAppClosed {
   appClosed: () => Promise<void>;
 }
+
+export type AppMonkeyConstructable = Constructable<IMonkeyModule & IMonkeySystem>;

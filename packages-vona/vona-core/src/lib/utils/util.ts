@@ -2,7 +2,6 @@ import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
 import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
 import { createRequire } from 'node:module';
-import os from 'node:os';
 import path from 'node:path';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
@@ -77,7 +76,7 @@ export class AppUtil extends BeanSimple {
     prefix?: string | boolean,
     simplify?: boolean,
   ) {
-    const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
+    const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.server.globalPrefix;
     simplify = simplify ?? true;
     if (!path) path = '';
     // ignore globalPrefix
@@ -113,17 +112,8 @@ export class AppUtil extends BeanSimple {
     return `${globalPrefix}/${parts[0]}/${parts[1]}/${path}`;
   }
 
-  async getPublicPathPhysicalRoot() {
-    if (this.app.meta.isTest || this.app.meta.isLocal) {
-      return path.join(this.app.options.baseDir, 'app/public');
-    }
-    const dir = this.app.config.publicDir || path.join(os.homedir(), 'vona', this.app.name, 'public');
-    await fse.ensureDir(dir);
-    return dir;
-  }
-
   async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
-    const rootPath = await this.getPublicPathPhysicalRoot();
+    const rootPath = this.app.config.server.publicDir;
     // use instance.id, not instanceName
     const dir = path.join(rootPath, this.ctx.instance.id.toString(), subdir || '');
     if (ensure) {

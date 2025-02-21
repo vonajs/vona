@@ -15,6 +15,10 @@ declare global {
       APP_NAME: string | undefined;
       APP_TITLE: string | undefined;
       APP_VERSION: string | undefined;
+      SERVER_KEYS: string | undefined;
+      SERVER_GLOBALPREFIX: string | undefined;
+      SERVER_PUBLICDIR: string | undefined;
+      SERVER_SUBDOMAINOFFSET: string | undefined;
       SERVER_LISTEN_HOSTNAME: string | undefined;
       SERVER_LISTEN_PORT: string | undefined;
     }
