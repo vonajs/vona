@@ -34,9 +34,7 @@ declare module 'vona' {
     redis: BeanRedis;
   }
 }
-/** bean: end */
-/** service: begin */
-export * from '../service/redisClient.js';
+export * from '../main.js';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-redis:redisClient': never;
@@ -56,6 +54,10 @@ declare module 'vona' {
     'a-redis.service.redisClient': ServiceRedisClient;
   }
 }
+
+/** bean: end */
+/** service: begin */
+export * from '../service/redisClient.js';
 
 @Scope()
 export class ScopeModuleARedis extends BeanScopeBase {}
