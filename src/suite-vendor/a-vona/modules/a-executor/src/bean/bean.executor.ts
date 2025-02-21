@@ -49,7 +49,7 @@ export class BeanExecutor extends BeanBase {
     const instanceName = options?.instanceName;
     // ctx
     const ctx = this.app.createAnonymousContext(req);
-    return await this.app.ctxStorage.run(ctx, async () => {
+    return await this.app.ctxStorage!.run(ctx, async () => {
       // todo: check if need for passport
       // (<any>ctx.req).ctx = ctx;
       // locale
@@ -72,7 +72,7 @@ export class BeanExecutor extends BeanBase {
       await ctx.tailDone();
       // ok
       return res;
-    }, req as any);
+    });
   }
 
   async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {

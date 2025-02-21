@@ -18,6 +18,11 @@ export type TypeDataBaseConfigDialects = Record<
 
 export function config(_app: VonaApplication) {
   return {
+    model: {
+      disableDeleted: false,
+      disableInstance: false,
+      disableUpdateTime: false,
+    },
     dialects: {
       mysql: 'a-databasedialect.databaseDialect.mysql',
       mysql2: 'a-databasedialect.databaseDialect.mysql2',

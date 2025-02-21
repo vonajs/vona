@@ -46,19 +46,19 @@ export class BeanModelMeta extends BeanBase {
 
   get disableInstance() {
     return this.options.disableInstance === undefined
-      ? this.app.config.model.disableInstance
+      ? this.scopeDatabase.config.model.disableInstance
       : this.options.disableInstance;
   }
 
   get disableDeleted() {
     return this.options.disableDeleted === undefined
-      ? this.app.config.model.disableDeleted
+      ? this.scopeDatabase.config.model.disableDeleted
       : this.options.disableDeleted;
   }
 
   get disableUpdateTime() {
     return this.options.disableUpdateTime === undefined
-      ? this.app.config.model.disableUpdateTime
+      ? this.scopeDatabase.config.model.disableUpdateTime
       : this.options.disableUpdateTime;
   }
 

@@ -85,9 +85,9 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
 
     const status = this.app.util.detectStatus(err);
     const errorPageUrl =
-      typeof this.app.config.errorPageUrl === 'function'
-        ? this.app.config.errorPageUrl(err, this)
-        : this.app.config.errorPageUrl;
+      typeof this.scope.config.error.errorPageUrl === 'function'
+        ? this.scope.config.error.errorPageUrl(err, this.ctx)
+        : this.scope.config.error.errorPageUrl;
 
     // keep the real response status
     this.ctx.realStatus = status;
