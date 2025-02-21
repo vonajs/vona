@@ -1,12 +1,10 @@
 import type { VonaAppInfo, VonaConfigOptional } from 'vona';
 
-export default function (appInfo: VonaAppInfo) {
+export default function (_appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
 
-  // server
-  config.server = {
-    keys: [`${appInfo.name}_1596889047267_3245`],
-  };
+  // modules
+  config.modules = {};
 
   return config;
 }
