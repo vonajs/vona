@@ -15,7 +15,7 @@ export async function createApp({ modulesMeta, locales, config, env, AppMonkey }
   // options
   const options: VonaApplicationOptions = {
     name: appInfo.name,
-    baseDir: appInfo.baseDir,
+    projectPath: appInfo.projectPath,
     modulesMeta,
     locales,
     config: appConfig as unknown as VonaConfig,
@@ -38,7 +38,7 @@ function prepareEnv(env: { [key: string]: string | boolean }) {
 function prepareAppInfo(): VonaAppInfo {
   return {
     name: process.env.APP_NAME!,
-    baseDir: process.cwd(),
+    projectPath: process.cwd(),
     configMeta: {
       flavor: process.env.META_FLAVOR,
       mode: process.env.META_MODE,

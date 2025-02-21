@@ -81,7 +81,7 @@ async function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
   const mode = appInfo.configMeta.mode;
   let publicDir: string;
   if (mode === 'test' || mode === 'local') {
-    publicDir = path.join(appInfo.baseDir, 'app/public');
+    publicDir = path.join(appInfo.projectPath, 'app/public');
   } else {
     publicDir = path.join(os.homedir(), 'vona', appInfo.name, 'public');
   }

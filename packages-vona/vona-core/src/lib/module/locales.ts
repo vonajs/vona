@@ -1,10 +1,6 @@
 import type { IModule } from '@cabloy/module-info';
 import type { TypeModuleResourceLocales } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
-import fs from 'node:fs';
-import { createRequire } from 'node:module';
-import path from 'node:path';
-import * as localeutil from '@cabloy/localeutil';
 import localesDefault from '../core/locales.ts';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
@@ -16,34 +12,10 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   loadLocales();
 
   function loadLocales() {
-    /**
-     * based on egg-i18n
-     *
-     * https://github.com/eggjs/egg-i18n/blob/master/app.js
-     *
-     */
     // project locales
-    const localeDirs = [path.join(app.options.baseDir, 'config/locale')];
-    for (let i = 0; i < localeDirs.length; i++) {
-      const dir = localeDirs[i];
-
-      if (!fs.existsSync(dir)) {
-        continue;
-      }
-
-      const names = fs.readdirSync(dir);
-      for (let j = 0; j < names.length; j++) {
-        const name = names[j];
-        if (path.extname(name) !== '.js') continue;
-        const filepath = path.join(dir, name);
-        // support en_US.js => en-US.js
-        const locale = localeutil.formatLocale(name.split('.')[0]);
-        const require = createRequire(import.meta.url);
-        const resource = require(filepath);
-        _initLocales(locale, resource.default ? resource.default : resource);
-      }
+    for (const locale in app.options.locales) {
+      _initLocales(locale, app.options.locales[locale]);
     }
-
     // module locales
     for (const moduleName in modules) {
       const module = modules[moduleName];

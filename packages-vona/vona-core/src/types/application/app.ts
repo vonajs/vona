@@ -16,13 +16,13 @@ export interface KoaApplicationOptions {
 
 export interface VonaAppInfo {
   name: string;
-  baseDir: string;
+  projectPath: string;
   configMeta: VonaConfigMeta;
 }
 
 export interface VonaApplicationOptions {
   name: string;
-  baseDir: string;
+  projectPath: string;
   modulesMeta: VonaModulesMeta;
   locales: VonaLocaleOptionalMap;
   config: VonaConfig;

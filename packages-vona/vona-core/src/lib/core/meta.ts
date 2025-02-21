@@ -1,7 +1,7 @@
 import type { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.ts';
-import type { IMonkeyModule, IMonkeySystem } from '../../types/interface/monkey.ts';
+import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
@@ -24,7 +24,7 @@ export class AppMeta extends BeanSimple {
   locale: AppLocale;
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
-  appMonkey?: IMonkeyModule & IMonkeySystem;
+  appMonkey?: AppMonkeyConstructable;
   celjs: typeof CelJS;
   //
   resource: AppResource;
@@ -48,6 +48,9 @@ export class AppMeta extends BeanSimple {
   appClosed: boolean;
 
   protected __init__() {
+    // appMonkey
+    this.appMonkey = this.app.options.AppMonkey;
+
     // env
     this.prepareEnv();
 

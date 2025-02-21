@@ -1,8 +1,6 @@
-import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
+import type { VonaMetaMode } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
-import { deepExtend } from '../utils/util.ts';
 
 export function createLoaderClass(Base) {
   return class LoaderClass extends Base {
@@ -47,25 +45,6 @@ export function createLoaderClass(Base) {
         this.pkg.name = this.pkgVona.name;
       }
       return this.pkgVona.name;
-    }
-
-    _loadAppEnvs(meta: VonaConfigMeta) {
-      const projectPath = path.join(this.options.baseDir, '../..');
-      const envDir = path.join(projectPath, 'env');
-      loadEnvs(meta, envDir, '.env');
-    }
-
-    _loadAppConfig(meta: VonaConfigMeta) {
-      const configDir = path.join(this.options.baseDir, 'config/config');
-      const files = getEnvFiles(meta, configDir, 'config', '.js');
-      if (!files) return;
-      const target = this.config;
-      for (const file of files) {
-        const config = this.loadFile(file, this.appInfo);
-        if (config) {
-          deepExtend(target, config);
-        }
-      }
     }
   };
 }

@@ -1,7 +1,6 @@
 import type { IModule } from '@cabloy/module-info';
 import type { IModuleResource } from '../../types/index.ts';
 import * as Path from 'node:path';
-import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { glob } from '@cabloy/module-glob';
 import fse from 'fs-extra';
@@ -16,7 +15,7 @@ export class ModuleTools extends BeanSimple {
     // all modules
     const { suites, modules, modulesArray } = await glob({
       projectMode: 'vona',
-      projectPath: path.join(app.options.baseDir, '../..'),
+      projectPath: app.options.projectPath,
       disabledModules: process.env.PROJECT_DISABLED_MODULES,
       disabledSuites: process.env.PROJECT_DISABLED_SUITES,
       log: false,
@@ -27,17 +26,6 @@ export class ModuleTools extends BeanSimple {
     app.meta.modules = modules;
     app.meta.modulesArray = modulesArray;
     app.meta.modulesMonkey = {};
-    // app monkey
-    let pathAppMonkey;
-    if (app.meta.isTest || app.meta.isLocal) {
-      pathAppMonkey = _pathToHref(path.resolve(process.cwd(), 'src/backend/config/monkey.mts'));
-    } else {
-      pathAppMonkey = _pathToHref(path.resolve(app.options.baseDir, 'config/monkey.mjs'));
-    }
-    if (fse.existsSync(pathAppMonkey)) {
-      const AppMonkey = await import(pathAppMonkey);
-      app.meta.appMonkey = app.bean._newBean(AppMonkey.AppMonkey);
-    }
     return modules;
   }
 
