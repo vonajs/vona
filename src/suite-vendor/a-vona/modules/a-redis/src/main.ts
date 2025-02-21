@@ -4,8 +4,8 @@ import { BeanSimple, deepExtend } from 'vona';
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
-    const configDefault = combineConfigDefault(this.app);
-    this.app.config.redis = deepExtend({}, configDefault, this.app.config.redis);
+    const _configDefault = await combineConfigDefault<ConfigRedis>(this.app, configDefault);
+    this.app.config.redis = deepExtend({}, _configDefault, this.app.config.redis);
   }
 
   async moduleLoaded() {}
@@ -13,7 +13,7 @@ export class Main extends BeanSimple implements IModuleMain {
   async configLoaded(_config: any) {}
 }
 
-export function configDefault(app: VonaApplication): ConfigRedis {
+export async function configDefault(app: VonaApplication): Promise<PowerPartial<ConfigRedis>> {
   return {
     default: {
       host: process.env.REDIS_DEFAULT_HOST,
@@ -37,27 +37,23 @@ export function configDefault(app: VonaApplication): ConfigRedis {
   };
 }
 
-export function combineConfigDefault(app: VonaApplication) {
-  let config: ConfigRedis = configDefault(app);
+export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial<T>>;
+
+export async function combineConfigDefault<T>(
+  app: VonaApplication,
+  configDefault: TypeConfigLoader<T>,
+  configLocal?: TypeConfigLoader<T>,
+  configProd?: TypeConfigLoader<T>,
+  configTest?: TypeConfigLoader<T>,
+): Promise<PowerPartial<T>> {
+  let config = await configDefault(app);
   const mode = app.config.meta.mode;
-  if (mode === 'local') {
-    config = deepExtend(config, configLocal());
-  } else if (mode === 'prod') {
-    config = deepExtend(config, configProd());
-  } else if (mode === 'test') {
-    config = deepExtend(config, configTest());
+  if (mode === 'local' && configLocal) {
+    config = deepExtend(config, await configLocal(app));
+  } else if (mode === 'prod' && configProd) {
+    config = deepExtend(config, await configProd(app));
+  } else if (mode === 'test' && configTest) {
+    config = deepExtend(config, await configTest(app));
   }
   return config;
-}
-
-export function configLocal(): PowerPartial<ConfigRedis> {
-  return {};
-}
-
-export function configProd(): PowerPartial<ConfigRedis> {
-  return {};
-}
-
-export function configTest(): PowerPartial<ConfigRedis> {
-  return {};
 }

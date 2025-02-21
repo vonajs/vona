@@ -1,5 +1,5 @@
-import type { VonaApplication } from 'vona';
 import type { IBeanRecord } from '../../bean/type.ts';
+import type { VonaApplication } from '../../core/application.ts';
 import type { MetadataKey } from '../../core/metadata.ts';
 import type {
   Constructable,

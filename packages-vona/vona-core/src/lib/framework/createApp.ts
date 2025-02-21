@@ -1,8 +1,9 @@
-import type { VonaConfig } from 'vona';
 import type { TypeAppInfoConfig, VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
+import type { VonaConfig } from '../../types/config/config.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
-import { deepExtend, VonaApplication } from 'vona';
+import { VonaApplication } from '../core/application.ts';
 import { combineConfigDefault } from '../core/config.ts';
+import { deepExtend } from '../utils/util.ts';
 import { Start } from './start.ts';
 
 export async function createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
