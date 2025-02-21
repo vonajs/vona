@@ -1,4 +1,4 @@
-import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
+import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 

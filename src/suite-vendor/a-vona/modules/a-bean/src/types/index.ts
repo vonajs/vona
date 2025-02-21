@@ -1,3 +1,3 @@
-export * from './bean.js';
-export * from './beanTemp.js';
-export * from './scope.js';
+export * from './bean.ts';
+export * from './beanTemp.ts';
+export * from './scope.ts';

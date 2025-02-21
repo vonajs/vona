@@ -1,9 +1,9 @@
-import type { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
-import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.js';
+import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
+import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { BeanCacheMemBase } from './bean.cacheMemBase.js';
-import { BeanCacheRedisBase } from './bean.cacheRedisBase.js';
+import { BeanCacheMemBase } from './bean.cacheMemBase.ts';
+import { BeanCacheRedisBase } from './bean.cacheRedisBase.ts';
 
 @Bean()
 export class BeanCache extends BeanBase {

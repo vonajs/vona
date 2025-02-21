@@ -1,1 +1,1 @@
-export * from './startup.js';
+export * from './startup.ts';

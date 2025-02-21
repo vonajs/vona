@@ -1,7 +1,7 @@
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
 import type { z } from 'zod';
-import type { SchemaLikeCreate } from './decorator.js';
+import type { SchemaLikeCreate } from './decorator.ts';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 export interface IOpenApiOptions {

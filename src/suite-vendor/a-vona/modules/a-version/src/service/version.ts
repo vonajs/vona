@@ -1,14 +1,14 @@
 import type { ConfigInstanceBase } from 'vona';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
-import type { EntityVersion } from '../entity/version.js';
-import type { EntityVersionInit } from '../entity/versionInit.js';
+import type { EntityVersion } from '../entity/version.ts';
+import type { EntityVersionInit } from '../entity/versionInit.ts';
 import type {
   IMetaVersionInit,
   IMetaVersionOptions,
   IMetaVersionOptionsInner,
   IMetaVersionTest,
   IMetaVersionUpdate,
-} from '../types/version.js';
+} from '../types/version.ts';
 import chalk from 'chalk';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';

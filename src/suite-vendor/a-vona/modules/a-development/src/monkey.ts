@@ -1,7 +1,7 @@
 import type { IMonkeyAppStarted } from 'vona';
 import { BeanSimple } from 'vona';
-import { __ThisModule__ } from './.metadata/this.js';
-import { developmentWatchDirs } from './lib/development.js';
+import { __ThisModule__ } from './.metadata/this.ts';
+import { developmentWatchDirs } from './lib/development.ts';
 
 export class Monkey extends BeanSimple implements IMonkeyAppStarted {
   async appStarted() {

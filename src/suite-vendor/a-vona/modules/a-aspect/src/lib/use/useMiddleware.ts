@@ -1,5 +1,5 @@
-import type { IMiddlewareRecordLocal } from '../../types/middleware.js';
-import { UseOnionBase } from './useOnionBase.js';
+import type { IMiddlewareRecordLocal } from '../../types/middleware.ts';
+import { UseOnionBase } from './useOnionBase.ts';
 
 export function UseMiddleware<T extends keyof IMiddlewareRecordLocal>(
   middlewareName: T,

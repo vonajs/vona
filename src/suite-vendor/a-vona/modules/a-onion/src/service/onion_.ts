@@ -10,7 +10,7 @@ import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionSlice,
-} from '../types/onion.js';
+} from '../types/onion.ts';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
 import {
@@ -25,7 +25,7 @@ import {
 import { Service } from 'vona-module-a-web';
 import {
   SymbolUseOnionLocal,
-} from '../types/onion.js';
+} from '../types/onion.ts';
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');

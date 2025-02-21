@@ -1,6 +1,6 @@
 import type { VonaConfig } from 'vona';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
-import type { IInstanceStartupQueueInfo } from '../entity/instance.js';
+import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
 import { isNil, sleep } from '@cabloy/utils';
 import async from 'async';
 import * as Boxen from 'boxen';

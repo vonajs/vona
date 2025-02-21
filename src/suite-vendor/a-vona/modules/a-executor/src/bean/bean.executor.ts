@@ -1,10 +1,10 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
-import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
+import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { performActionInner } from '../lib/performAction.js';
-import { delegateProperties } from '../lib/utils.js';
+import { performActionInner } from '../lib/performAction.ts';
+import { delegateProperties } from '../lib/utils.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {

@@ -1,9 +1,9 @@
-import functions from './resource/functions.js';
-import menus from './resource/menus.js';
-import mines from './resource/mines.js';
-import widgets from './resource/widgets.js';
-import blocks from './resource/blocks.js';
-import deprecateds from './resource/deprecateds.js';
+import functions from './resource/functions.ts';
+import menus from './resource/menus.ts';
+import mines from './resource/mines.ts';
+import widgets from './resource/widgets.ts';
+import blocks from './resource/blocks.ts';
+import deprecateds from './resource/deprecateds.ts';
 
 let resources: any[] = [];
 resources = resources.concat(functions);

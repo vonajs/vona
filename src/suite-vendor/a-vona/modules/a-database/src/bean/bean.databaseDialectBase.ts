@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { TableIdentity } from '../types/tableIdentity.js';
+import type { TableIdentity } from '../types/tableIdentity.ts';
 import { BeanBase } from 'vona';
 import { Virtual } from 'vona-module-a-bean';
 

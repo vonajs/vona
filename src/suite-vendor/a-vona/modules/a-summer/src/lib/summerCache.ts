@@ -1,4 +1,4 @@
-import type { IDecoratorSummerCacheOptions } from '../types/summerCache.js';
+import type { IDecoratorSummerCacheOptions } from '../types/summerCache.ts';
 import { createBeanDecorator } from 'vona';
 
 export function SummerCache(options?: IDecoratorSummerCacheOptions): ClassDecorator {

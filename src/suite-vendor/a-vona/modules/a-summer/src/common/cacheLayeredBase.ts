@@ -1,4 +1,4 @@
-import type { TSummerCacheActionOptions } from '../types/summerCache.js';
+import type { TSummerCacheActionOptions } from '../types/summerCache.ts';
 
 export interface ICacheLayeredBase<KEY, DATA> {
   get: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;

@@ -2,7 +2,7 @@ import type { Constructable } from 'vona';
 import type { IDecoratorPipeOptions, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { z } from 'zod';
-import type { ValidatorOptions } from '../types/validatorOptions.js';
+import type { ValidatorOptions } from '../types/validatorOptions.ts';
 import { BeanBase, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 

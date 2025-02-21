@@ -1,4 +1,4 @@
-import type { IQueuePushOptions, IQueueRecord } from '../types/queue.js';
+import type { IQueuePushOptions, IQueueRecord } from '../types/queue.ts';
 import { BeanBase } from 'vona';
 
 export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {

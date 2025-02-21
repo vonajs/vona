@@ -1,6 +1,6 @@
 // todo: 如果没有必要，就删除这里的代码
 // import { appMetadata, MetadataKey } from 'vona';
-// import { SymbolResponseMetadata, TypeResponseContentType } from '../../types/response.js';
+// import { SymbolResponseMetadata, TypeResponseContentType } from '../../types/response.ts';
 
 // function contentType(contentType: TypeResponseContentType): MethodDecorator {
 //   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {

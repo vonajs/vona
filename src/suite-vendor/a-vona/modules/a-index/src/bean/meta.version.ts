@@ -1,5 +1,5 @@
 import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
-import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.js';
+import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.ts';
 import chalk from 'chalk';
 import { appResource, BeanBase, cast, deepExtend } from 'vona';
 import { Meta } from 'vona-module-a-meta';

@@ -1,8 +1,8 @@
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from '../types/database.js';
-import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.js';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from '../types/database.ts';
+import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { ServiceDatabaseClient } from '../service/databaseClient.js';
+import { ServiceDatabaseClient } from '../service/databaseClient.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {

@@ -1,5 +1,5 @@
 import type { IpVersion, z } from 'zod';
-import type { errorUtil } from '../../zod/errorUtil.js';
+import type { errorUtil } from '../../zod/errorUtil.ts';
 
 export function schemaEmail(message?: errorUtil.ErrMessage) {
   return function (schema: z.ZodString): z.ZodString {

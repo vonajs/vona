@@ -1,6 +1,6 @@
 import type { IModuleMain } from 'vona';
 import { BeanSimple } from 'vona';
-import { __ThisModule__ } from './.metadata/this.js';
+import { __ThisModule__ } from './.metadata/this.ts';
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}

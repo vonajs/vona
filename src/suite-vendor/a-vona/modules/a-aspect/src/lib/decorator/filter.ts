@@ -1,4 +1,4 @@
-import type { IDecoratorFilterOptions } from '../../types/filter.js';
+import type { IDecoratorFilterOptions } from '../../types/filter.ts';
 import { createBeanDecorator } from 'vona';
 
 export function Filter<T extends IDecoratorFilterOptions>(options?: T): ClassDecorator {

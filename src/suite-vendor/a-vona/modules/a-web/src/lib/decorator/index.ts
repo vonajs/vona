@@ -1,3 +1,3 @@
-export * from './bean.js';
-export * from './request.js';
-export * from './response.js';
+export * from './bean.ts';
+export * from './request.ts';
+export * from './response.ts';

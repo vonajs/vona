@@ -1,1 +1,1 @@
-export * from './printApiPath.js';
+export * from './printApiPath.ts';

@@ -1,4 +1,4 @@
-import { formatValueArray, isRaw } from './utils.js';
+import { formatValueArray, isRaw } from './utils.ts';
 
 const __wherePlaceholderOr = '__or__';
 const __wherePlaceholderAnd = '__and__';

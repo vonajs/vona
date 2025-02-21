@@ -1,11 +1,11 @@
-import atomClasses from './meta/atomClass/atomClasses.js';
+import atomClasses from './meta/atomClass/atomClasses.ts';
 // static
-import staticApps from './meta/static/apps.js';
-import staticDicts from './meta/static/dicts.js';
-import staticLayouts from './meta/static/layouts.js';
-import staticResources from './meta/static/resources.js';
-import keywords from './meta/validation/keywords.js';
-import schemas from './meta/validation/schemas.js';
+import staticApps from './meta/static/apps.ts';
+import staticDicts from './meta/static/dicts.ts';
+import staticLayouts from './meta/static/layouts.ts';
+import staticResources from './meta/static/resources.ts';
+import keywords from './meta/validation/keywords.ts';
+import schemas from './meta/validation/schemas.ts';
 // meta
 export const meta = {
   base: {

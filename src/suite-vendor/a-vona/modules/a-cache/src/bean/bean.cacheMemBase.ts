@@ -1,7 +1,7 @@
-import type { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
+import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 import LRUCache from 'lru-cache';
 import { Virtual } from 'vona-module-a-bean';
-import { CacheBase } from '../common/cacheBase.js';
+import { CacheBase } from '../common/cacheBase.ts';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 

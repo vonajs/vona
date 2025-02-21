@@ -2,7 +2,7 @@ import type { ISwapDepsItem } from '@cabloy/deps';
 import type { Knex } from 'knex';
 import { swapDeps } from '@cabloy/deps';
 import { cast } from 'vona';
-import { BeanModelKnex } from './bean.model_knex.js';
+import { BeanModelKnex } from './bean.model_knex.ts';
 
 export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async createView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {

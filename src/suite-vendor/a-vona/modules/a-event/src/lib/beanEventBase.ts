@@ -5,7 +5,7 @@ import type {
   IEventExecute,
   IEventListenerRecord,
   NextEvent,
-} from '../types/eventListener.js';
+} from '../types/eventListener.ts';
 import { BeanBase, cast, compose } from 'vona';
 
 export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {

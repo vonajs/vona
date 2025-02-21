@@ -1,4 +1,4 @@
-import type { IElectionElectOptions } from '../types/election.js';
+import type { IElectionElectOptions } from '../types/election.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 

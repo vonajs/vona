@@ -1,6 +1,6 @@
 import type { PathMatchingFun } from 'egg-path-matching';
 import type { VonaContext } from 'vona';
-import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
+import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.ts';
 import { normalize } from 'node:path';
 import IP from '@eggjs/ip';
 import * as matcher from 'matcher';

@@ -1,5 +1,5 @@
 import '@cabloy/zod-query';
 
-export * from './api.js';
-export * from './decorator.js';
-export * from './zod-openapi.js';
+export * from './api.ts';
+export * from './decorator.ts';
+export * from './zod-openapi.ts';

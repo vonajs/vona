@@ -1,4 +1,4 @@
-import type { IUser } from '../types/user.js';
+import type { IUser } from '../types/user.ts';
 import { BeanCacheRedisBase, CacheRedis } from 'vona-module-a-cache';
 
 export type TCacheRedisUsersDemoKey = any;

@@ -1,5 +1,5 @@
-import type { IModelMethodOptions, IModelUpdateOptions, TableIdentity } from '../../types/index.js';
-import { BeanModelCrud } from './bean.model_crud.js';
+import type { IModelMethodOptions, IModelUpdateOptions, TableIdentity } from '../../types/index.ts';
+import { BeanModelCrud } from './bean.model_crud.ts';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
   async create<TRecord2 extends {} = TRecord>(

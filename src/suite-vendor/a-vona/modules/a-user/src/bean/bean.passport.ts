@@ -1,7 +1,7 @@
-import type { IPassportAdapter, IUserBase } from '../types/user.js';
+import type { IPassportAdapter, IUserBase } from '../types/user.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { isAnonymous } from '../lib/user.js';
+import { isAnonymous } from '../lib/user.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {

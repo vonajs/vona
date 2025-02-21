@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { ValidatorOptions } from '../types/validatorOptions.js';
+import type { ValidatorOptions } from '../types/validatorOptions.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { BeanBase, HttpStatus } from 'vona';

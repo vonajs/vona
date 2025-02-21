@@ -6,8 +6,8 @@ import { Api, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get, Post } from 'vona-module-a-web';
 import { z } from 'zod';
-import { locale } from '../.metadata/index.js';
-import { DtoUser } from '../dto/user.js';
+import { locale } from '../.metadata/index.ts';
+import { DtoUser } from '../dto/user.ts';
 
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {

@@ -1,7 +1,7 @@
 import type { IModuleMain, VonaContext } from 'vona';
 import { BeanSimple } from 'vona';
-import { ExtendKnex } from './extend/index.js';
-import { ServiceDbMeta } from './service/dbMeta.js';
+import { ExtendKnex } from './extend/index.ts';
+import { ServiceDbMeta } from './service/dbMeta.ts';
 
 const DATABASEMETA = Symbol('Context#__databasemeta');
 

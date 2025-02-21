@@ -10,7 +10,7 @@ import {
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-openapi';
 import { valid } from 'vona-module-a-validation';
-import { extractValue } from './extractValue.js';
+import { extractValue } from './extractValue.ts';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // check handler

@@ -1,1 +1,1 @@
-export * from './executor.js';
+export * from './executor.ts';

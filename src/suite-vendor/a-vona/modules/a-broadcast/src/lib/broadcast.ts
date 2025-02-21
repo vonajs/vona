@@ -1,4 +1,4 @@
-import type { IDecoratorBroadcastOptions } from '../types/broadcast.js';
+import type { IDecoratorBroadcastOptions } from '../types/broadcast.ts';
 import { createBeanDecorator } from 'vona';
 
 export function Broadcast(options?: IDecoratorBroadcastOptions): ClassDecorator {

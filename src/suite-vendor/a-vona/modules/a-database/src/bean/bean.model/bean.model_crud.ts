@@ -6,10 +6,10 @@ import type {
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
   TableIdentity,
-} from '../../types/index.js';
-import { BigNumber } from 'bignumber.js';
+} from '../../types/index.ts';
+import { BigNumber } from 'bignumber.ts';
 import { cast } from 'vona';
-import { BeanModelView } from './bean.model_view.js';
+import { BeanModelView } from './bean.model_view.ts';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */

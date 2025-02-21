@@ -1,7 +1,7 @@
 import type { ILocalInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IUserBase } from 'vona-module-a-user';
-import type { IUser } from '../types/user.js';
+import type { IUser } from '../types/user.ts';
 import { cast } from 'vona';
 import { setUserAdapter } from 'vona-module-a-user';
 

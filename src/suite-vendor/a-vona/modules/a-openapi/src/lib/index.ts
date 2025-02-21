@@ -1,3 +1,3 @@
-export * from './decorator/index.js';
-export * from './schema/index.js';
-export * from './zod/index.js';
+export * from './decorator/index.ts';
+export * from './schema/index.ts';
+export * from './zod/index.ts';

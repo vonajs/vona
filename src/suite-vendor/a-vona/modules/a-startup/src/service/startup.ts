@@ -1,5 +1,5 @@
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.js';
+import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.ts';
 import path from 'node:path';
 import fse from 'fs-extra';
 import { BeanBase, cast } from 'vona';

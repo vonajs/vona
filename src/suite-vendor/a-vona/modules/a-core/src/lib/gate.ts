@@ -1,5 +1,5 @@
 import type { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
-import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
+import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
 import { UseMiddlewareGlobal } from 'vona-module-a-aspect';
 
 export function Gate(

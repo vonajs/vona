@@ -1,2 +1,2 @@
-export * from './errorsAdapter.js';
-export * from './errorUtil.js';
+export * from './errorsAdapter.ts';
+export * from './errorUtil.ts';

@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { ServiceTransaction } from './transaction.js';
+import { ServiceTransaction } from './transaction.ts';
 
 @Service()
 export class ServiceDbMeta extends BeanBase {

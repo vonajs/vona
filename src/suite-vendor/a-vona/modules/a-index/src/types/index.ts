@@ -1,1 +1,1 @@
-export * from './indexes.js';
+export * from './indexes.ts';

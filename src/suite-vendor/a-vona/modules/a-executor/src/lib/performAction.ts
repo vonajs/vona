@@ -1,9 +1,9 @@
 import type { VonaContext } from 'vona';
-import type { IPerformActionInnerParams } from '../types/executor.js';
+import type { IPerformActionInnerParams } from '../types/executor.ts';
 import http from 'node:http';
 import compose from 'koa-compose';
 import { cast } from 'vona';
-import { delegateProperties } from './utils.js';
+import { delegateProperties } from './utils.ts';
 
 let __fnMiddleware;
 

@@ -1,1 +1,1 @@
-export * from './beanRedlockBase.js';
+export * from './beanRedlockBase.ts';

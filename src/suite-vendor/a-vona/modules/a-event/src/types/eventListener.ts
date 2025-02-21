@@ -1,6 +1,6 @@
 import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
-import type { IEventRecord } from './event.js';
+import type { IEventRecord } from './event.ts';
 
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;
 

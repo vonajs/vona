@@ -1,5 +1,5 @@
 import type { IPassportAdapter, IUserBase } from 'vona-module-a-user';
-import type { IUser } from '../types/user.js';
+import type { IUser } from '../types/user.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 

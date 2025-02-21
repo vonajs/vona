@@ -1,1 +1,1 @@
-export * from './redlock.js';
+export * from './redlock.ts';

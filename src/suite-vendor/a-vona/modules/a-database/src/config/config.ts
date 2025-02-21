@@ -3,7 +3,7 @@ import type { IOnionOptionsMeta } from 'vona-module-a-onion';
 import type {
   TSummerCachePreset,
 } from 'vona-module-a-summer';
-import type { IDatabaseClientDialectRecord } from '../types/database.js';
+import type { IDatabaseClientDialectRecord } from '../types/database.ts';
 import {
   configAll,
   configAllWithIgnoreNull,

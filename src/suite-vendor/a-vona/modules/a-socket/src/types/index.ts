@@ -1,2 +1,2 @@
-export * from './socketConnection.js';
-export * from './socketPacket.js';
+export * from './socketConnection.ts';
+export * from './socketPacket.ts';

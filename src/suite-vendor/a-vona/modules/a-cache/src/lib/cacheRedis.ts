@@ -1,4 +1,4 @@
-import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.js';
+import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
 import { createBeanDecorator } from 'vona';
 
 export function CacheRedis(options?: IDecoratorCacheRedisOptions): ClassDecorator {

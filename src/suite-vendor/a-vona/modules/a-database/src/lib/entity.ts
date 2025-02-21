@@ -1,4 +1,4 @@
-import type { IDecoratorEntityOptions } from '../types/onion/entity.js';
+import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { createBeanDecorator } from 'vona';
 
 const __tableNames = new Set();

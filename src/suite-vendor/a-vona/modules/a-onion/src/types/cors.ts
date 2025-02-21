@@ -1,6 +1,6 @@
 import type { VonaContext } from 'vona';
 import type { IApiPathRecord } from 'vona-module-a-web';
-import type { IOnionOptionsBase } from './onion.js';
+import type { IOnionOptionsBase } from './onion.ts';
 
 export interface ConfigCors extends IOnionOptionsBase<keyof IApiPathRecord> {
   origin: ((ctx: VonaContext) => boolean) | string[] | string;

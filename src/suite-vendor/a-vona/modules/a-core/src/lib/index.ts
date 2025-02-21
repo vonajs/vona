@@ -1,1 +1,1 @@
-export * from './gate.js';
+export * from './gate.ts';

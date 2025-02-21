@@ -1,2 +1,2 @@
-export * from './beanBroadcastBase.js';
-export * from './broadcast.js';
+export * from './beanBroadcastBase.ts';
+export * from './broadcast.ts';

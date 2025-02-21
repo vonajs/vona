@@ -1,1 +1,1 @@
-export * from './validatorOptions.js';
+export * from './validatorOptions.ts';

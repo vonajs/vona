@@ -1,7 +1,7 @@
-import type { IDecoratorSummerCacheOptions } from '../types/summerCache.js';
+import type { IDecoratorSummerCacheOptions } from '../types/summerCache.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { BeanSummerCacheBase } from './bean.summerCacheBase.js';
+import { BeanSummerCacheBase } from './bean.summerCacheBase.ts';
 
 @Bean()
 export class BeanSummer extends BeanBase {

@@ -6,10 +6,10 @@ import type {
   IModelSelectParams,
   IModelUpdateOptions,
   TableIdentity,
-} from '../../types/index.js';
+} from '../../types/index.ts';
 import { cast, deepExtend } from 'vona';
-import { getTargetColumnName } from '../../common/utils.js';
-import { BeanModel } from '../bean.model.js';
+import { getTargetColumnName } from '../../common/utils.ts';
+import { BeanModel } from '../bean.model.ts';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');

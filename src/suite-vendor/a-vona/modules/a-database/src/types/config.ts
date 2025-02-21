@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from './database.js';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from './database.ts';
 
 export interface ConfigDatabaseClient extends Omit<Knex.Config, 'client'> {
   client?: keyof IDatabaseClientDialectRecord;

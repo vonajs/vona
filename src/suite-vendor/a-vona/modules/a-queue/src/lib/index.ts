@@ -1,2 +1,2 @@
-export * from './beanQueueBase.js';
-export * from './queue.js';
+export * from './beanQueueBase.ts';
+export * from './queue.ts';

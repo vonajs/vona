@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { VonaApplication } from 'vona';
-import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/bean.databaseDialectBase.js';
-import type { IDatabaseClientDialectRecord } from '../types/database.js';
+import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/bean.databaseDialectBase.ts';
+import type { IDatabaseClientDialectRecord } from '../types/database.ts';
 import knex from 'knex';
 import { cast } from 'vona';
 

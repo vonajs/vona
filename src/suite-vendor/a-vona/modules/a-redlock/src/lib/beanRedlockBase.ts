@@ -1,5 +1,5 @@
 import type { FunctionAsync } from 'vona';
-import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
+import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 import { BeanBase, SymbolModuleBelong } from 'vona';
 
 export class BeanRedlockBase extends BeanBase {

@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 
-import { formatValue, isRaw } from './utils.js';
+import { formatValue, isRaw } from './utils.ts';
 
 export function buildWhere(builder: Knex.QueryBuilder, wheres) {
   // raw

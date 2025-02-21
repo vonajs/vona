@@ -1,3 +1,3 @@
-export * from './databaseDialect.js';
-export * from './entity.js';
-export * from './model.js';
+export * from './databaseDialect.ts';
+export * from './entity.ts';
+export * from './model.ts';

@@ -1,1 +1,1 @@
-export * from './broadcast.js';
+export * from './broadcast.ts';

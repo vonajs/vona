@@ -1,4 +1,4 @@
-import type { EntityInstance } from './entity/instance.js';
+import type { EntityInstance } from './entity/instance.ts';
 import 'vona';
 
 declare module 'vona' {

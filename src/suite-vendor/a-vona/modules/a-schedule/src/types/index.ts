@@ -1,1 +1,1 @@
-export * from './schedule.js';
+export * from './schedule.ts';

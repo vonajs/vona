@@ -1,1 +1,1 @@
-export * from './beanStaticBase.js';
+export * from './beanStaticBase.ts';

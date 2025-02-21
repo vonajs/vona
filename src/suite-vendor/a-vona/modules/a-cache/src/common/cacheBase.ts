@@ -1,6 +1,6 @@
 import type { IOnionOptionsEnable } from 'vona-module-a-onion';
 import { BeanBase } from 'vona';
-import { getKeyHash } from '../lib/utils.js';
+import { getKeyHash } from '../lib/utils.ts';
 
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
 

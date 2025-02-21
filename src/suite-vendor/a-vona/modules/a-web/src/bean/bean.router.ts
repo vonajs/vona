@@ -1,15 +1,15 @@
 import type { Constructable, Next, VonaContext } from 'vona';
-import type { RequestMappingMetadata } from '../lib/decorator/request.js';
-import type { IDecoratorControllerOptions } from '../types/controller.js';
+import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
+import type { IDecoratorControllerOptions } from '../types/controller.ts';
 import * as ModuleInfo from '@cabloy/module-info';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapi';
-import { middlewareGuard } from '../lib/middleware/middlewareGuard.js';
-import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.js';
-import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
-import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.js';
+import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
+import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.ts';
+import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
+import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.ts';
 
 @Bean()
 export class BeanRouter extends BeanBase {

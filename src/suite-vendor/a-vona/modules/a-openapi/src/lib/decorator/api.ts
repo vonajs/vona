@@ -1,9 +1,9 @@
 import type { MetadataKey } from 'vona';
-import type { IOpenApiOptions, TypeResponseContentType } from '../../types/api.js';
-import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.js';
+import type { IOpenApiOptions, TypeResponseContentType } from '../../types/api.ts';
+import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
 import { appMetadata } from 'vona';
-import { SymbolOpenApiOptions } from '../../types/api.js';
-import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
+import { SymbolOpenApiOptions } from '../../types/api.ts';
+import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {

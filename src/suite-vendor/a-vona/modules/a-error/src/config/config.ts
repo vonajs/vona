@@ -1,6 +1,6 @@
 import type { VonaApplication, VonaContext } from 'vona';
 import type { ServiceFilter } from 'vona-module-a-aspect';
-import { accepts } from '../lib/utils.js';
+import { accepts } from '../lib/utils.ts';
 
 export function config(_app: VonaApplication) {
   return {

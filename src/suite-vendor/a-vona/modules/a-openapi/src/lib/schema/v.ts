@@ -1,6 +1,6 @@
-import { schemaEmail, schemaIp, schemaMax, schemaMin, schemaUrl, schemaUuid } from './v/helpers.js';
-import { schemaDescription, schemaExample, schemaOpenapi } from './v/openapi.js';
-import { schemaArray, schemaDefault, schemaObject, schemaOptional } from './v/system.js';
+import { schemaEmail, schemaIp, schemaMax, schemaMin, schemaUrl, schemaUuid } from './v/helpers.ts';
+import { schemaDescription, schemaExample, schemaOpenapi } from './v/openapi.ts';
+import { schemaArray, schemaDefault, schemaObject, schemaOptional } from './v/system.ts';
 
 export const v = {
   array: schemaArray,

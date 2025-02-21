@@ -1,2 +1,2 @@
-export * from './public.js';
-export * from './user.js';
+export * from './public.ts';
+export * from './user.ts';

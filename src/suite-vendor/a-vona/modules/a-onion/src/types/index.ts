@@ -1,2 +1,2 @@
-export * from './cors.js';
-export * from './onion.js';
+export * from './cors.ts';
+export * from './onion.ts';

@@ -1,2 +1,2 @@
-export * from './localMem.js';
-export * from './summerCache.js';
+export * from './localMem.ts';
+export * from './summerCache.ts';

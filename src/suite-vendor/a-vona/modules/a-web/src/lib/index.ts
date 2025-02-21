@@ -1,2 +1,2 @@
-export * from './decorator/index.js';
-export * from './utils.js';
+export * from './decorator/index.ts';
+export * from './utils.ts';

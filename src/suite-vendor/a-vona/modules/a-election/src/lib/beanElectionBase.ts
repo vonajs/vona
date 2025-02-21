@@ -1,5 +1,5 @@
 import type { FunctionAsync } from 'vona';
-import type { IElectionElectOptions } from '../types/election.js';
+import type { IElectionElectOptions } from '../types/election.ts';
 import { BeanBase, SymbolModuleBelong } from 'vona';
 
 export class BeanElectionBase extends BeanBase {

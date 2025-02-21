@@ -1,4 +1,4 @@
-import type { IUserBase } from '../types/user.js';
+import type { IUserBase } from '../types/user.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export type TypeEventSigninData = IUserBase;

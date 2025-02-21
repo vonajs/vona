@@ -1,4 +1,4 @@
-import type { IDecoratorBeanTempOptions } from '../types/beanTemp.js';
+import type { IDecoratorBeanTempOptions } from '../types/beanTemp.ts';
 import { createBeanDecorator } from 'vona';
 
 export function BeanTemp(options: IDecoratorBeanTempOptions): ClassDecorator {

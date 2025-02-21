@@ -1,5 +1,5 @@
 import type { RedisOptions } from 'ioredis';
-import type { ConfigRedisCluster, IRedisClientRecord } from '../types/redis.js';
+import type { ConfigRedisCluster, IRedisClientRecord } from '../types/redis.ts';
 import { Redis } from 'ioredis';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';

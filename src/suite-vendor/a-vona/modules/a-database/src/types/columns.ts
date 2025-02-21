@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { IDecoratorEntityOptions } from './onion/entity.js';
+import type { IDecoratorEntityOptions } from './onion/entity.ts';
 import { appMetadata, appResource } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapi';
 

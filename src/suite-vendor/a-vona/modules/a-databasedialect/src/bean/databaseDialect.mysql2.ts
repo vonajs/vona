@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import { DatabaseDialect } from 'vona-module-a-database';
-import { DatabaseDialectMysql } from './databaseDialect.mysql.js';
+import { DatabaseDialectMysql } from './databaseDialect.mysql.ts';
 
 @DatabaseDialect()
 export class DatabaseDialectMysql2 extends DatabaseDialectMysql {

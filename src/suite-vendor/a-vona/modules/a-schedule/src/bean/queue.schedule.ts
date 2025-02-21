@@ -1,5 +1,5 @@
 import type { IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
-import type { IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
+import type { IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
 import { BeanQueueBase, Queue } from 'vona-module-a-queue';
 
 export interface TypeQueueScheduleJobData {

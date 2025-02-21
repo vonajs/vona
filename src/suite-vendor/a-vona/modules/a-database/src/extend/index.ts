@@ -1,6 +1,6 @@
 import type { VonaApplication } from 'vona';
-import { ExtendSchemaBuilder } from './schemaBuilder.js';
-import { ExtendTableBuilder } from './tableBuilder.js';
+import { ExtendSchemaBuilder } from './schemaBuilder.ts';
+import { ExtendTableBuilder } from './tableBuilder.ts';
 
 export function ExtendKnex(app: VonaApplication) {
   if (app.meta.inApp) {

@@ -1,8 +1,8 @@
 import type { Constructable } from 'vona';
 import type { z } from 'zod';
-import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.js';
+import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
 import { cast, isClassStrict } from 'vona';
-import { schema } from './schema.js';
+import { schema } from './schema.ts';
 
 export function makeSchemaLikes(schemaLikes: SchemaLike[], typeInit: any): z.ZodSchema {
   // default schema

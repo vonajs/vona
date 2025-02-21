@@ -1,2 +1,2 @@
-export * from './cacheMem.js';
-export * from './cacheRedis.js';
+export * from './cacheMem.ts';
+export * from './cacheRedis.ts';

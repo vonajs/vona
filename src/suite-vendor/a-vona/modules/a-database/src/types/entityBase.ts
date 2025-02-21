@@ -1,4 +1,4 @@
-import type { IDecoratorEntityOptions } from './onion/entity.js';
+import type { IDecoratorEntityOptions } from './onion/entity.ts';
 import { BeanBaseSimple, cast } from 'vona';
 import { Rule } from 'vona-module-a-openapi';
 

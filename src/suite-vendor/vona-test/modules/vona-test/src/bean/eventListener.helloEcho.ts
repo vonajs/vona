@@ -1,5 +1,5 @@
 import type { IEventExecute, NextEvent } from 'vona-module-a-event';
-import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from './event.helloEcho.js';
+import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from './event.helloEcho.ts';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 

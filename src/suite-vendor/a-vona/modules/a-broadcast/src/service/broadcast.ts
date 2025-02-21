@@ -1,5 +1,5 @@
 import type { Redis } from 'ioredis';
-import type { IBroadcastExecute, IBroadcastJobContext, IDecoratorBroadcastOptions } from '../types/broadcast.js';
+import type { IBroadcastExecute, IBroadcastJobContext, IDecoratorBroadcastOptions } from '../types/broadcast.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 

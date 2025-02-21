@@ -1,5 +1,5 @@
 import type { Next, VonaContext } from 'vona';
-import { isSafePath } from '../utils.js';
+import { isSafePath } from '../utils.ts';
 
 // https://en.wikipedia.org/wiki/Directory_traversal_attack
 export default () => {

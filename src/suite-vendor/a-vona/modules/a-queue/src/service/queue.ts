@@ -10,7 +10,7 @@ import type {
   IQueueWork,
   IQueueWorks,
   TypeQueueJob,
-} from '../types/queue.js';
+} from '../types/queue.ts';
 import * as Bull from 'bullmq';
 import { BeanBase, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';

@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import { pathMatching } from 'egg-path-matching';
 import { BeanBase, compose } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
-import securityMiddlewares from '../lib/middlewares/index.js';
+import securityMiddlewares from '../lib/middlewares/index.ts';
 
 export type SecurityMiddlewareName =
   | 'csrf'

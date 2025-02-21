@@ -1,1 +1,1 @@
-export * from './createArgumentPipe.js';
+export * from './createArgumentPipe.ts';

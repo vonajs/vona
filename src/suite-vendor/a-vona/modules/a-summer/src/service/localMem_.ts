@@ -1,8 +1,8 @@
 import type { BeanCacheMemBase } from 'vona-module-a-cache';
-import type { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
-import type { TSummerCacheActionOptions } from '../types/summerCache.js';
+import type { ICacheLayeredBase } from '../common/cacheLayeredBase.ts';
+import type { TSummerCacheActionOptions } from '../types/summerCache.ts';
 import { Service } from 'vona-module-a-web';
-import { CacheBase } from '../common/cacheBase.js';
+import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()
 export class ServiceLocalMem<KEY = any, DATA = any>

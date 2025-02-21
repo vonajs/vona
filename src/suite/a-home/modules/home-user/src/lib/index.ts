@@ -1,1 +1,1 @@
-export * from './userAdapter.js';
+export * from './userAdapter.ts';

@@ -1,5 +1,5 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
-import type { IDecoratorCacheMemOptions } from '../types/cacheMem.js';
+import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 import { cast } from 'vona';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 

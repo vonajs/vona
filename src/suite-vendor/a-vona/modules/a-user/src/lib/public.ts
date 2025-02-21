@@ -1,5 +1,5 @@
 import type { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
-import type { IGuardOptionsPassport } from '../bean/guard.passport.js';
+import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
 import { UseGuardGlobal } from 'vona-module-a-aspect';
 
 export function Public(

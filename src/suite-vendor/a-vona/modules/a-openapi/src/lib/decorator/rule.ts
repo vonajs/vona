@@ -1,9 +1,9 @@
 import type { MetadataKey } from 'vona';
 import type { z } from 'zod';
-import type { SchemaLike } from '../../types/decorator.js';
+import type { SchemaLike } from '../../types/decorator.ts';
 import { appMetadata, registerMappedClassMetadataKey } from 'vona';
-import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../../types/decorator.js';
-import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
+import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../../types/decorator.ts';
+import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 
 export function Rule(...schemaLikes: SchemaLike[]): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {

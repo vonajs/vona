@@ -1,6 +1,6 @@
 import type { Next, VonaContext } from 'vona';
-import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.js';
-import { checkIfIgnore } from '../utils.js';
+import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSystem.securities.ts';
+import { checkIfIgnore } from '../utils.ts';
 
 export default (options: IMiddlewareSystemOptionsSecurities['xframe']) => {
   return async function xframe(ctx: VonaContext, next: Next) {

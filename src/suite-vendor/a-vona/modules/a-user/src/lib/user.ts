@@ -1,6 +1,6 @@
 import type { ILocalInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
-import type { IUserAdapter, IUserBase } from '../types/user.js';
+import type { IUserAdapter, IUserBase } from '../types/user.ts';
 
 let __userAdapter: IUserAdapter;
 

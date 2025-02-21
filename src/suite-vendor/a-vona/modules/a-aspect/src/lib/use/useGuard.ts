@@ -1,5 +1,5 @@
-import type { IGuardRecordLocal } from '../../types/guard.js';
-import { UseOnionBase } from './useOnionBase.js';
+import type { IGuardRecordLocal } from '../../types/guard.ts';
+import { UseOnionBase } from './useOnionBase.ts';
 
 export function UseGuard<T extends keyof IGuardRecordLocal>(
   guardName: T,
