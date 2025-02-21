@@ -1,6 +1,6 @@
 import type { IModuleMain, PowerPartial, VonaApplication } from 'vona';
 import type { ConfigRedis } from './types/redis.ts';
-import { BeanSimple, deepExtend } from 'vona';
+import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
@@ -35,25 +35,4 @@ export async function configDefault(app: VonaApplication): Promise<PowerPartial<
       model: { keyPrefix: `model_${app.name}:` },
     },
   };
-}
-
-export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial<T>>;
-
-export async function combineConfigDefault<T>(
-  app: VonaApplication,
-  configDefault: TypeConfigLoader<T>,
-  configLocal?: TypeConfigLoader<T>,
-  configProd?: TypeConfigLoader<T>,
-  configTest?: TypeConfigLoader<T>,
-): Promise<PowerPartial<T>> {
-  let config = await configDefault(app);
-  const mode = app.config.meta.mode;
-  if (mode === 'local' && configLocal) {
-    config = deepExtend(config, await configLocal(app));
-  } else if (mode === 'prod' && configProd) {
-    config = deepExtend(config, await configProd(app));
-  } else if (mode === 'test' && configTest) {
-    config = deepExtend(config, await configTest(app));
-  }
-  return config;
 }
