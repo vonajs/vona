@@ -12,6 +12,7 @@ export interface VonaConfig {
     globalPrefix: string;
     publicDir: string;
     subdomainOffset: number;
+    workers: number;
     listen: {
       hostname: string;
       port: number;

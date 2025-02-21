@@ -28,7 +28,7 @@ export class CliBinDev extends BeanCliBase {
     const configOptions: VonaBinConfigOptions = {
       appDir: projectPath,
       runtimeDir: '.vona',
-      workers: argv.workers || 1,
+      workers: argv.workers,
     };
     await generateVonaMeta(configMeta, configOptions);
     await this.helper.spawn({

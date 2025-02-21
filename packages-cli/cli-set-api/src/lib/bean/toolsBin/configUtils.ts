@@ -27,6 +27,7 @@ export function createConfigUtils(
     const res = Object.assign(
       {
         NODE_ENV: getNodeEnv(meta.mode),
+        SERVER_WORKERS: '1',
       },
       envs,
       {
@@ -34,7 +35,10 @@ export function createConfigUtils(
         META_MODE: meta.mode,
       },
     );
-    for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE']) {
+    if (configOptions.workers !== undefined) {
+      res.SERVER_WORKERS = configOptions.workers.toString();
+    }
+    for (const key of ['NODE_ENV', 'SERVER_WORKERS', 'META_FLAVOR', 'META_MODE']) {
       if (res[key] as any !== false) {
         process.env[key] = res[key];
       }

@@ -19,6 +19,7 @@ declare global {
       SERVER_GLOBALPREFIX: string | undefined;
       SERVER_PUBLICDIR: string | undefined;
       SERVER_SUBDOMAINOFFSET: string | undefined;
+      SERVER_WORKERS: string | undefined;
       SERVER_LISTEN_HOSTNAME: string | undefined;
       SERVER_LISTEN_PORT: string | undefined;
     }
