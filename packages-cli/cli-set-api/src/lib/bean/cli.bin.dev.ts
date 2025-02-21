@@ -22,15 +22,21 @@ export class CliBinDev extends BeanCliBase {
 
   async _run(projectPath: string) {
     const { argv } = this.context;
-    // todo: 确认workers是否为number
-    const workers = argv.workers || 1;
     const mode: VonaMetaMode = 'local';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
     const configOptions: VonaBinConfigOptions = {
       appDir: projectPath,
       runtimeDir: '.vona',
+      workers: argv.workers || 1,
     };
-    const vonaMeta = await generateVonaMeta(configMeta, configOptions);
+    await generateVonaMeta(configMeta, configOptions);
+    await this.helper.spawn({
+      cmd: 'node',
+      args: ['--experimental-transform-types', '--loader=ts-node/esm', '.vona/app.ts'],
+      options: {
+        cwd: projectPath,
+      },
+    });
   }
 }

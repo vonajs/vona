@@ -94,19 +94,31 @@ export class ProcessHelper {
     }
   }
 
-  async spawnBin({ cmd, args, options }) {
+  async spawnBin({ cmd, args, options }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     cmd = path.join(this.cwd, 'node_modules/.bin', cmd);
     return await this.spawnCmd({ cmd, args, options });
   }
 
-  async spawnCmd({ cmd, args, options }) {
+  async spawnCmd({ cmd, args, options }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     if (process.platform.startsWith('win')) {
       cmd = `${cmd}.cmd`;
     }
     return await this.spawn({ cmd, args, options });
   }
 
-  async spawnExe({ cmd, args, options }) {
+  async spawnExe({ cmd, args, options }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     if (process.platform.startsWith('win')) {
       cmd = `${cmd}.exe`;
     }
@@ -119,8 +131,8 @@ export class ProcessHelper {
     options = {},
   }: {
     cmd: string;
-    args: any[];
-    options: IProcessHelperSpawnOptions;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
   }): Promise<string> {
     options.cwd = options.cwd || this.cwd;
     options.stdio = options.stdio || 'inherit';
