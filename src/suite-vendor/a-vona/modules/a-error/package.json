@@ -17,9 +17,8 @@
         "./src/index.ts",
         "./dist/index.d.ts"
       ],
-      "development": "./src/index.ts",
-      "import": "./dist/index.js",
-      "default": "./src/index.ts"
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -28,11 +27,30 @@
     "static",
     "templates"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
   "dependencies": {
     "cookie": "^1.0.2",
     "koa-onerror": "^5.0.1",
     "mustache": "^4.2.0",
     "stack-trace": "^1.0.0-pre2"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import"
+    ]
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   }
 }

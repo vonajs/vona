@@ -46,9 +46,8 @@
         "./src/index.ts",
         "./dist/index.d.ts"
       ],
-      "development": "./src/index.ts",
-      "import": "./dist/index.js",
-      "default": "./src/index.ts"
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -57,12 +56,31 @@
     "dist",
     "static"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
   "dependencies": {
     "bignumber.js": "^9.1.2",
     "knex": "^3.1.0",
     "mysql2": "^3.9.1",
     "pg": "^8.11.3",
     "pg-types": "^4.0.2"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import"
+    ]
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   }
 }

@@ -17,9 +17,8 @@
         "./src/index.ts",
         "./dist/index.d.ts"
       ],
-      "development": "./src/index.ts",
-      "import": "./dist/index.js",
-      "default": "./src/index.ts"
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -27,12 +26,31 @@
     "dist",
     "static"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
   "dependencies": {
     "@eggjs/ip": "^2.1.0",
     "@koa/cors": "^5.0.0",
     "egg-path-matching": "^2.1.0",
     "matcher": "^5.0.0",
     "type-is": "^1.6.18"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import"
+    ]
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   }
 }
