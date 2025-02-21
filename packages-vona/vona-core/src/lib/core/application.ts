@@ -23,7 +23,10 @@ export class VonaApplication extends KoaApplication {
       env: process.env.NODE_ENV,
       keys: options.config.server.keys,
       proxy: options.config.proxy.enabled,
-      subdomainOffset:
+      subdomainOffset: options.config.server.subdomainOffset,
+      proxyIpHeader: options.config.proxy.ipHeaders,
+      maxIpsCount: options.config.proxy.maxIpsCount,
+      asyncLocalStorage: true,
     };
     super(koaOptions);
     this.options = options;
