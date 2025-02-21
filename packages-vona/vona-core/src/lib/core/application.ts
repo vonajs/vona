@@ -1,3 +1,4 @@
+import type { Server } from 'node:http';
 import type { KoaApplicationOptions, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { VonaContext } from '../../types/context/index.ts';
@@ -17,6 +18,7 @@ export class VonaApplication extends KoaApplication {
   bean: BeanContainer;
   util: AppUtil;
   meta: AppMeta;
+  server: Server;
 
   constructor(options: VonaApplicationOptions) {
     const koaOptions: KoaApplicationOptions = {

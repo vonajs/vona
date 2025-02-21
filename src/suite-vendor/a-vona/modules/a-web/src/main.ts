@@ -15,7 +15,6 @@ export class Main extends BeanSimple implements IModuleMain {
 
   async moduleLoading() {}
   async moduleLoaded() {
-    if (this.app.meta.inAgent) return;
     const self = this;
     // router
     Object.defineProperty(this.app, 'router', {
