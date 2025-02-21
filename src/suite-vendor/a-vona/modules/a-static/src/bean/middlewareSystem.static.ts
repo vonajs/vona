@@ -64,7 +64,7 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
       {
         maxAge: this.app.meta.isProd ? 31536000 : 0,
         buffer: !!this.app.meta.isProd,
-        dir: path.join(this.app.options.baseDir, 'app/public'),
+        dir: path.join(this.app.options.projectPath, '.app/public'),
       },
       options,
     );
@@ -109,12 +109,6 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
       if (!existsSync(newOptions.dir)) {
         mkdirSync(newOptions.dir, { recursive: true });
       }
-
-      this.app.loggers.coreLogger.info(
-        '[egg-static] starting static serve %s -> %s',
-        newOptions.prefix,
-        newOptions.dir,
-      );
 
       middlewares.push(staticCache(newOptions));
     }
