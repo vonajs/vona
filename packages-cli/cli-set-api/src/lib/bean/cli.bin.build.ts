@@ -6,7 +6,7 @@ declare module '@cabloy/cli' {
   }
 }
 
-export class CliToolsBuild extends BeanCliBase {
+export class CliBinBuild extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super

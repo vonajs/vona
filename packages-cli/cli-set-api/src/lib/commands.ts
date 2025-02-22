@@ -1,3 +1,4 @@
+import binBuild from './command/bin.build.ts';
 import binDev from './command/bin.dev.ts';
 import binTsc from './command/bin.tsc.ts';
 import createBean from './command/create.bean.ts';
@@ -10,7 +11,6 @@ import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
 import initMonkey from './command/init.monkey.ts';
 import initStatic from './command/init.static.ts';
-import toolsBuild from './command/tools.build.ts';
 import toolsDeps from './command/tools.deps.ts';
 import toolsMetadata from './command/tools.metadata.ts';
 
@@ -19,6 +19,7 @@ export const commands = {
     list: defaultList,
   },
   bin: {
+    build: binBuild,
     dev: binDev,
     tsc: binTsc,
   },
@@ -39,6 +40,5 @@ export const commands = {
   tools: {
     deps: toolsDeps,
     metadata: toolsMetadata,
-    build: toolsBuild,
   },
 };

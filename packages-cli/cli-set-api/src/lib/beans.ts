@@ -1,3 +1,4 @@
+import { CliBinBuild } from './bean/cli.bin.build.ts';
 import { CliBinDev } from './bean/cli.bin.dev.ts';
 import { CliBinTsc } from './bean/cli.bin.tsc.ts';
 import { CliCreateBean } from './bean/cli.create.bean.ts';
@@ -10,12 +11,12 @@ import { CliInitLocale } from './bean/cli.init.locale.ts';
 import { CliInitMain } from './bean/cli.init.main.ts';
 import { CliInitMonkey } from './bean/cli.init.monkey.ts';
 import { CliInitStatic } from './bean/cli.init.static.ts';
-import { CliToolsBuild } from './bean/cli.tools.build.ts';
 import { CliToolsDeps } from './bean/cli.tools.deps.ts';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 
 export const beans = {
   'default.list': CliDefaultList,
+  'bin.build': CliBinBuild,
   'bin.dev': CliBinDev,
   'bin.tsc': CliBinTsc,
   'create.suite': CliCreateSuite,
@@ -29,5 +30,4 @@ export const beans = {
   'init.static': CliInitStatic,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
-  'tools.build': CliToolsBuild,
 };
