@@ -33,6 +33,16 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
+  "peerDependencies": {
+    "better-sqlite3": "^11.8.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.12.0",
+    "pg": "^8.13.3",
+    "pg-native": "^3.2.2",
+    "pg-types": "^4.0.2",
+    "sqlite3": "^5.1.7",
+    "tedious": "^18.6.1"
+  },
   "dependencies": {},
   "clean-package": {
     "indent": 2,
