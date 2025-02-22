@@ -39,7 +39,6 @@
     "chalk": "^3.0.0",
     "cli-table3": "^0.6.2",
     "compressing": "^1.5.1",
-    "egg-born-backend": "workspace:^",
     "egg-born-scripts": "workspace:^",
     "egg-born-utils": "^1.2.0",
     "egg-mock": "^5.10.9",

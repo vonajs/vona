@@ -53,6 +53,7 @@
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/word-utils": "^2.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
     "chalk": "^3.0.0",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.1",
@@ -60,7 +61,7 @@
     "gogocode": "^1.0.53",
     "lodash": "^4.17.21",
     "rimraf": "^5.0.5",
-    "urllib": "^3.24.0",
+    "rollup": "^4.34.8",
     "vona-shared": "^1.0.7"
   },
   "devDependencies": {

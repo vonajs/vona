@@ -30,7 +30,6 @@
     "@zhennann/egg-scripts": "^4.0.2",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
-    "egg-born-backend": "workspace:^",
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^10.1.0"
   },
