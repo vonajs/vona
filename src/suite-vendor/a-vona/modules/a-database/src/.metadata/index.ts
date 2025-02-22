@@ -7,18 +7,18 @@ import type { TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLoca
 
 /** bean: end */
 /** bean: begin */
-import type { BeanDatabase } from '../bean/bean.database.js';
+import type { BeanDatabase } from '../bean/bean.database.ts';
 /** middleware: end */
 /** bean: begin */
-import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
-import type { config } from '../config/config.js';
+import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.ts';
+import type { config } from '../config/config.ts';
 
-import type { Errors } from '../config/errors.js';
+import type { Errors } from '../config/errors.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceDatabaseClient } from '../service/databaseClient.js';
-import type { ServiceDbMeta } from '../service/dbMeta.js';
-import type { ServiceTransaction } from '../service/transaction.js';
+import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
+import type { ServiceDbMeta } from '../service/dbMeta.ts';
+import type { ServiceTransaction } from '../service/transaction.ts';
 /** service: end */
 /** service: begin */
 
@@ -29,8 +29,8 @@ import {
 import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -39,7 +39,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.database.js';
+export * from '../bean/bean.database.ts';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordLocal {
     'a-database:transaction': IMiddlewareOptionsTransaction;
@@ -51,11 +51,11 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 }
-export * from '../bean/bean.databaseDialectBase.js';
-export * from '../bean/bean.model.js';
-export * from '../bean/bean.modelBase.js';
+export * from '../bean/bean.databaseDialectBase.ts';
+export * from '../bean/bean.model.ts';
+export * from '../bean/bean.modelBase.ts';
 /** middleware: begin */
-export * from '../bean/middleware.transaction.js';
+export * from '../bean/middleware.transaction.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-database' {
   export interface BeanDatabase {
@@ -70,13 +70,13 @@ declare module 'vona' {
 }
 /** service: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 /** locale: end */
 /** error: begin */
-export * from '../config/errors.js';
+export * from '../config/errors.ts';
 /** error: end */
 /** main: begin */
-export * from '../main.js';
+export * from '../main.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-database:databaseClient': never;
@@ -114,13 +114,13 @@ declare module 'vona' {
 }
 /** bean: end */
 /** service: begin */
-export * from '../service/databaseClient.js';
+export * from '../service/databaseClient.ts';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-export * from '../service/dbMeta.js';
-export * from '../service/transaction.js';
+export * from '../service/dbMeta.ts';
+export * from '../service/transaction.ts';
 
 @Scope()
 export class ScopeModuleADatabase extends BeanScopeBase {}

@@ -3,7 +3,7 @@
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanRouter } from '../bean/bean.router.js';
+import type { BeanRouter } from '../bean/bean.router.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
@@ -12,7 +12,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.router.js';
+export * from '../bean/bean.router.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-web' {
   export interface BeanRouter {
@@ -27,7 +27,7 @@ declare module 'vona' {
 }
 /** bean: end */
 /** main: begin */
-export * from '../main.js';
+export * from '../main.ts';
 
 @Scope()
 export class ScopeModuleAWeb extends BeanScopeBase {}

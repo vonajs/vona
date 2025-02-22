@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-static';
-export { ScopeModuleAStatic as ScopeModule } from './index.js';
+export { ScopeModuleAStatic as ScopeModule } from './index.ts';

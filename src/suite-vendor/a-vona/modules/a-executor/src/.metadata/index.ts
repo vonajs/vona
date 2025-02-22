@@ -3,7 +3,7 @@
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanExecutor } from '../bean/bean.executor.js';
+import type { BeanExecutor } from '../bean/bean.executor.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
@@ -12,7 +12,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.executor.js';
+export * from '../bean/bean.executor.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-executor' {
   export interface BeanExecutor {

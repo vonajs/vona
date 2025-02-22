@@ -3,7 +3,7 @@
 import type { BeanScopeUtil } from 'vona';
 /** meta: end */
 /** meta election: begin */
-import type { MetaElection } from '../bean/meta.election.js';
+import type { MetaElection } from '../bean/meta.election.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
@@ -11,7 +11,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.election.js';
+export * from '../bean/meta.election.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-development:election': never;
@@ -25,7 +25,7 @@ declare module 'vona-module-a-development' {
 }
 /** meta election: end */
 /** monkey: begin */
-export * from '../monkey.js';
+export * from '../monkey.ts';
 
 @Scope()
 export class ScopeModuleADevelopment extends BeanScopeBase {}

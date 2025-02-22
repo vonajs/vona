@@ -4,7 +4,7 @@ import type { BeanScopeUtil } from 'vona';
 
 import type { TypeModuleConfig } from 'vona';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import type { config } from '../config/config.js';
+import type { config } from '../config/config.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
@@ -12,7 +12,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.printApiPath.js';
+export * from '../bean/meta.printApiPath.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-swagger:printApiPath': never;
@@ -26,7 +26,7 @@ declare module 'vona-module-a-swagger' {
 }
 /** controller: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-swagger:swagger': IDecoratorControllerOptions;
@@ -48,7 +48,7 @@ declare module 'vona-module-a-web' {
 }
 /** meta: end */
 /** controller: begin */
-export * from '../controller/swagger.js';
+export * from '../controller/swagger.ts';
 
 @Scope()
 export class ScopeModuleASwagger extends BeanScopeBase {}

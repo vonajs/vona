@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-redis';
-export { ScopeModuleARedis as ScopeModule } from './index.js';
+export { ScopeModuleARedis as ScopeModule } from './index.ts';

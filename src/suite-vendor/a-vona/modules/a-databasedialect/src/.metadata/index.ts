@@ -1,11 +1,11 @@
 /** databaseDialect: end */
 /** scope: begin */
 import type { BeanScopeUtil } from 'vona';
-import type { DatabaseDialectMysql2 } from '../bean/databaseDialect.mysql2.js';
+import type { DatabaseDialectMysql2 } from '../bean/databaseDialect.mysql2.ts';
 /** databaseDialect: end */
 /** databaseDialect: begin */
-import type { DatabaseDialectMysql } from '../bean/databaseDialect.mysql.js';
-import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.js';
+import type { DatabaseDialectMysql } from '../bean/databaseDialect.mysql.ts';
+import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
@@ -13,10 +13,10 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/databaseDialect.mysql2.js';
+export * from '../bean/databaseDialect.mysql2.ts';
 /** databaseDialect: begin */
-export * from '../bean/databaseDialect.mysql.js';
-export * from '../bean/databaseDialect.pg.js';
+export * from '../bean/databaseDialect.mysql.ts';
+export * from '../bean/databaseDialect.pg.ts';
 declare module 'vona' {
   export interface IDatabaseDialectRecord {
     'a-databasedialect:mysql': never;

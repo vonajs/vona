@@ -8,21 +8,21 @@ import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 /** meta: end */
 /** meta redlock: begin */
-import type { MetaRedlock } from '../bean/meta.redlock.js';
+import type { MetaRedlock } from '../bean/meta.redlock.ts';
 
 /** entity: end */
 /** entity: begin */
-import type { EntityStatus } from '../entity/status.js';
+import type { EntityStatus } from '../entity/status.ts';
 /** model: end */
 /** model: begin */
-import type { ModelStatus } from '../model/status.js';
+import type { ModelStatus } from '../model/status.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.redlock.ts';
 declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-status:status': IDecoratorEntityOptions;
@@ -40,7 +40,7 @@ declare module 'vona-module-a-status' {
     columns: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-export * from '../bean/meta.version.js';
+export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-status:status': IDecoratorModelOptions;
@@ -56,10 +56,10 @@ export interface IModuleModel {
   status: ModelStatus;
 }
 /** entity: begin */
-export * from '../entity/status.js';
+export * from '../entity/status.ts';
 /** entity: end */
 /** model: begin */
-export * from '../model/status.js';
+export * from '../model/status.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-status:redlock': never;

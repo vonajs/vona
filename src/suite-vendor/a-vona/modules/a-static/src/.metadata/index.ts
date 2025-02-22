@@ -2,14 +2,14 @@
 /** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** middlewareSystem: begin */
-import type { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.js';
+import type { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
 
 import 'vona';
 
-export * from '../bean/middlewareSystem.static.js';
+export * from '../bean/middlewareSystem.static.ts';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-static:static': IMiddlewareSystemOptionsStatic;

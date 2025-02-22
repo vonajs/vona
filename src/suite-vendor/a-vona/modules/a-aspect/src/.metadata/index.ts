@@ -3,8 +3,8 @@
 import type { BeanScopeUtil } from 'vona';
 /** service: end */
 /** service: begin */
-import type { ServiceAop } from '../service/aop.js';
-import type { ServiceFilter } from '../service/filter.js';
+import type { ServiceAop } from '../service/aop.ts';
+import type { ServiceFilter } from '../service/filter.ts';
 /** service: end */
 /** service: begin */
 
@@ -16,8 +16,8 @@ import 'vona';
 
 import 'vona';
 
-export * from '../service/aop.js';
-export * from '../service/filter.js';
+export * from '../service/aop.ts';
+export * from '../service/filter.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-aspect:aop': never;

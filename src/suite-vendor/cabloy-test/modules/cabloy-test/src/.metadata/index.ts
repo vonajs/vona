@@ -5,7 +5,7 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
 /** meta: end */
 /** meta status: begin */
-import type { MetaStatus } from '../bean/meta.status.js';
+import type { MetaStatus } from '../bean/meta.status.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
@@ -13,7 +13,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.status.js';
+export * from '../bean/meta.status.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'cabloy-test:status': never;
@@ -27,7 +27,7 @@ declare module 'vona-module-cabloy-test' {
 }
 /** meta status: end */
 /** controller: begin */
-export * from '../controller/status.js';
+export * from '../controller/status.ts';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'cabloy-test:status': IDecoratorControllerOptions;

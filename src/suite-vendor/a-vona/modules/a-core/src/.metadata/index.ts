@@ -2,16 +2,16 @@
 /** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** interceptor: begin */
-import type { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+import type { IInterceptorOptionsBody } from '../bean/interceptor.body.ts';
 /** meta: end */
 /** meta static: begin */
-import type { MetaStatic } from '../bean/meta.static.js';
-import type { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
-import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
-import type { IMiddlewareSystemOptionsBodyparser } from '../bean/middlewareSystem.bodyparser.js';
-import type { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.js';
-import type { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.js';
-import type { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.js';
+import type { MetaStatic } from '../bean/meta.static.ts';
+import type { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.ts';
+import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
+import type { IMiddlewareSystemOptionsBodyparser } from '../bean/middlewareSystem.bodyparser.ts';
+import type { IMiddlewareSystemOptionsMeta } from '../bean/middlewareSystem.meta.ts';
+import type { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.ts';
+import type { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.ts';
 import { BeanScopeBase } from 'vona';
 
 import { Scope } from 'vona-module-a-bean';
@@ -22,7 +22,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/interceptor.body.js';
+export * from '../bean/interceptor.body.ts';
 declare module 'vona-module-a-aspect' {
   export interface IInterceptorRecordGlobal {
     'a-core:body': IInterceptorOptionsBody;
@@ -36,10 +36,10 @@ declare module 'vona-module-a-core' {
 }
 /** middlewareSystem: end */
 /** meta: begin */
-export * from '../bean/meta.static.js';
+export * from '../bean/meta.static.ts';
 /** interceptor: end */
 /** middleware: begin */
-export * from '../bean/middleware.development.js';
+export * from '../bean/middleware.development.ts';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordGlobal {
     'a-core:gate': IMiddlewareOptionsGate;
@@ -60,12 +60,12 @@ declare module 'vona-module-a-core' {
     get scope(): ScopeModuleACore;
   }
 }
-export * from '../bean/middleware.gate.js';
+export * from '../bean/middleware.gate.ts';
 /** middleware: end */
 /** middlewareSystem: begin */
-export * from '../bean/middlewareSystem.bodyparser.js';
-export * from '../bean/middlewareSystem.meta.js';
-export * from '../bean/middlewareSystem.notfound.js';
+export * from '../bean/middlewareSystem.bodyparser.ts';
+export * from '../bean/middlewareSystem.meta.ts';
+export * from '../bean/middlewareSystem.notfound.ts';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-core:bodyparser': IMiddlewareSystemOptionsBodyparser;
@@ -95,7 +95,7 @@ declare module 'vona-module-a-core' {
     get scope(): ScopeModuleACore;
   }
 }
-export * from '../bean/middlewareSystem.overrideMethod.js';
+export * from '../bean/middlewareSystem.overrideMethod.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-core:static': never;

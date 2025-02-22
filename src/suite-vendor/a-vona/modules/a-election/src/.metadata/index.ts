@@ -6,10 +6,10 @@ import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import type { CacheRedisElection } from '../bean/cacheRedis.election.js';
+import type { CacheRedisElection } from '../bean/cacheRedis.election.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceElection } from '../service/election.js';
+import type { ServiceElection } from '../service/election.ts';
 /** service: end */
 /** service: begin */
 
@@ -20,7 +20,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/cacheRedis.election.js';
+export * from '../bean/cacheRedis.election.ts';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'a-election:election': IDecoratorCacheRedisOptions;
@@ -37,7 +37,7 @@ export interface IModuleCacheRedis {
 }
 /** cacheRedis: end */
 /** service: begin */
-export * from '../service/election.js';
+export * from '../service/election.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-election:election': never;

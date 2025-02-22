@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-schedule';
-export { ScopeModuleASchedule as ScopeModule } from './index.js';
+export { ScopeModuleASchedule as ScopeModule } from './index.ts';

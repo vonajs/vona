@@ -5,10 +5,10 @@ import type { TypeModuleConfig } from 'vona';
 /** service: end */
 /** service: begin */
 
-import type { config } from '../config/config.js';
+import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceRedlock } from '../service/redlock.js';
+import type { ServiceRedlock } from '../service/redlock.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
@@ -18,7 +18,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../config/config.js';
+export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-redlock:redlock': never;
@@ -39,7 +39,7 @@ declare module 'vona' {
   }
 }
 /** service: begin */
-export * from '../service/redlock.js';
+export * from '../service/redlock.ts';
 
 @Scope()
 export class ScopeModuleARedlock extends BeanScopeBase {}

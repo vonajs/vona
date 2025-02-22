@@ -3,12 +3,12 @@
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanSecurity } from '../bean/bean.security.js';
+import type { BeanSecurity } from '../bean/bean.security.ts';
 /** middlewareSystem: end */
 /** bean: begin */
-import type { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.js';
+import type { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.ts';
 
-import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.js';
+import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
@@ -17,9 +17,9 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.security.js';
+export * from '../bean/bean.security.ts';
 /** middlewareSystem: begin */
-export * from '../bean/middlewareSystem.cors.js';
+export * from '../bean/middlewareSystem.cors.ts';
 declare module 'vona-module-a-aspect' {
   export interface IMiddlewareSystemRecord {
     'a-security:cors': IMiddlewareSystemOptionsCors;
@@ -37,7 +37,7 @@ declare module 'vona-module-a-security' {
     get scope(): ScopeModuleASecurity;
   }
 }
-export * from '../bean/middlewareSystem.securities.js';
+export * from '../bean/middlewareSystem.securities.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-security' {
   export interface BeanSecurity {

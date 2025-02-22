@@ -7,16 +7,16 @@ import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 /** bean: end */
 /** bean: begin */
-import type { BeanWorker } from '../bean/bean.worker.js';
+import type { BeanWorker } from '../bean/bean.worker.ts';
 /** broadcast: end */
 /** broadcast: begin */
-import type { BroadcastExitAll } from '../bean/broadcast.exitAll.js';
+import type { BroadcastExitAll } from '../bean/broadcast.exitAll.ts';
 
-import type { BroadcastReloadAll } from '../bean/broadcast.reloadAll.js';
+import type { BroadcastReloadAll } from '../bean/broadcast.reloadAll.ts';
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import type { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.js';
-import type { config } from '../config/config.js';
+import type { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.ts';
+import type { config } from '../config/config.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
@@ -25,7 +25,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.worker.js';
+export * from '../bean/bean.worker.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-worker' {
   export interface BeanWorker {
@@ -40,8 +40,8 @@ declare module 'vona' {
 }
 /** bean: end */
 /** broadcast: begin */
-export * from '../bean/broadcast.exitAll.js';
-export * from '../bean/broadcast.reloadAll.js';
+export * from '../bean/broadcast.exitAll.ts';
+export * from '../bean/broadcast.reloadAll.ts';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'a-worker:exitAll': IDecoratorBroadcastOptions;
@@ -65,7 +65,7 @@ export interface IModuleBroadcast {
 }
 /** broadcast: end */
 /** cacheRedis: begin */
-export * from '../bean/cacheRedis.workerAlive.js';
+export * from '../bean/cacheRedis.workerAlive.ts';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'a-worker:workerAlive': IDecoratorCacheRedisOptions;
@@ -82,13 +82,13 @@ export interface IModuleCacheRedis {
 }
 /** cacheRedis: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 /** monkey: end */
 /** main: begin */
-export * from '../main.js';
+export * from '../main.ts';
 /** config: end */
 /** monkey: begin */
-export * from '../monkey.js';
+export * from '../monkey.ts';
 
 @Scope()
 export class ScopeModuleAWorker extends BeanScopeBase {}

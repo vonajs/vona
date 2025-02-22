@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-security';
-export { ScopeModuleASecurity as ScopeModule } from './index.js';
+export { ScopeModuleASecurity as ScopeModule } from './index.ts';

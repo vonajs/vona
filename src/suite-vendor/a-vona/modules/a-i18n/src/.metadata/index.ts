@@ -3,16 +3,16 @@
 import type { BeanScopeUtil } from 'vona';
 import type { TypeModuleConfig } from 'vona';
 /** config: begin */
-import type { config } from '../config/config.js';
+import type { config } from '../config/config.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 import 'vona';
 
-export * from '../config/config.js';
+export * from '../config/config.ts';
 /** config: end */
 /** main: begin */
-export * from '../main.js';
+export * from '../main.ts';
 
 @Scope()
 export class ScopeModuleAI18n extends BeanScopeBase {}

@@ -1,7 +1,7 @@
 /** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 import { BeanScopeBase } from 'vona';
-import { Scope } from '../lib/scope.js';
+import { Scope } from '../lib/scope.ts';
 
 import 'vona';
 

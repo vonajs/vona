@@ -3,10 +3,10 @@
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanRedis } from '../bean/bean.redis.js';
+import type { BeanRedis } from '../bean/bean.redis.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceRedisClient } from '../service/redisClient.js';
+import type { ServiceRedisClient } from '../service/redisClient.ts';
 
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -21,7 +21,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.redis.js';
+export * from '../bean/bean.redis.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-redis' {
   export interface BeanRedis {
@@ -34,7 +34,7 @@ declare module 'vona' {
     redis: BeanRedis;
   }
 }
-export * from '../main.js';
+export * from '../main.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-redis:redisClient': never;
@@ -57,7 +57,7 @@ declare module 'vona' {
 
 /** bean: end */
 /** service: begin */
-export * from '../service/redisClient.js';
+export * from '../service/redisClient.ts';
 
 @Scope()
 export class ScopeModuleARedis extends BeanScopeBase {}

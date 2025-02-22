@@ -4,9 +4,9 @@ import type { BeanScopeUtil } from 'vona';
 import type { TypeModuleConfig } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanSummer } from '../bean/bean.summer.js';
+import type { BeanSummer } from '../bean/bean.summer.ts';
 
-import type { config } from '../config/config.js';
+import type { config } from '../config/config.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
@@ -16,8 +16,8 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.summer.js';
-export * from '../bean/bean.summerCacheBase.js';
+export * from '../bean/bean.summer.ts';
+export * from '../bean/bean.summerCacheBase.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-summer' {
   export interface BeanSummer {
@@ -32,14 +32,14 @@ declare module 'vona' {
 }
 /** service: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 /** bean: end */
 /** service: begin */
-export * from '../service/localFetch_.js';
-export * from '../service/localMem_.js';
+export * from '../service/localFetch_.ts';
+export * from '../service/localMem_.ts';
 declare module 'vona-module-a-web' {}
 declare module 'vona-module-a-summer' {}
-export * from '../service/localRedis_.js';
+export * from '../service/localRedis_.ts';
 
 @Scope()
 export class ScopeModuleASummer extends BeanScopeBase {}

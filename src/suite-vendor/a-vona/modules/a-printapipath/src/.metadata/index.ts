@@ -9,7 +9,7 @@ import { config } from '../config/config.ts';
 
 import 'vona';
 
-export * from '../bean/startup.printApiPath.js';
+export * from '../bean/startup.printApiPath.ts';
 declare module 'vona-module-a-startup' {
 
   export interface IStartupRecord {

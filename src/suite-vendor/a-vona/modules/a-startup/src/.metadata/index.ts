@@ -7,15 +7,15 @@ import type { TypeModuleConfig } from 'vona';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import type { CacheRedisStartupDebounce } from '../bean/cacheRedis.startupDebounce.js';
+import type { CacheRedisStartupDebounce } from '../bean/cacheRedis.startupDebounce.ts';
 
 /** meta: end */
 /** meta redlock: begin */
-import type { MetaRedlock } from '../bean/meta.redlock.js';
-import type { config } from '../config/config.js';
+import type { MetaRedlock } from '../bean/meta.redlock.ts';
+import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceStartup } from '../service/startup.js';
+import type { ServiceStartup } from '../service/startup.ts';
 /** service: end */
 /** service: begin */
 
@@ -27,7 +27,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/cacheRedis.startupDebounce.js';
+export * from '../bean/cacheRedis.startupDebounce.ts';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'a-startup:startupDebounce': IDecoratorCacheRedisOptions;
@@ -44,7 +44,7 @@ export interface IModuleCacheRedis {
 }
 /** cacheRedis: end */
 /** meta: begin */
-export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.redlock.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-startup:redlock': never;
@@ -58,7 +58,7 @@ declare module 'vona-module-a-startup' {
 }
 /** service: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-startup:startup': never;
@@ -80,10 +80,10 @@ declare module 'vona' {
 }
 /** config: end */
 /** monkey: begin */
-export * from '../monkey.js';
+export * from '../monkey.ts';
 /** meta redlock: end */
 /** service: begin */
-export * from '../service/startup.js';
+export * from '../service/startup.ts';
 
 @Scope()
 export class ScopeModuleAStartup extends BeanScopeBase {}

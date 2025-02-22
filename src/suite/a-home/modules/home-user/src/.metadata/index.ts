@@ -6,17 +6,17 @@ import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import type { CacheRedisUsersDemo } from '../bean/cacheRedis.usersDemo.js';
+import type { CacheRedisUsersDemo } from '../bean/cacheRedis.usersDemo.ts';
 /** service: end */
 /** service: begin */
-import type { ServicePassportAdapter } from '../service/passportAdapter.js';
+import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 /** service: end */
 /** service: begin */
 
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
-export * from '../bean/cacheRedis.usersDemo.js';
+export * from '../bean/cacheRedis.usersDemo.ts';
 declare module 'vona-module-a-cache' {
   export interface ICacheRedisRecord {
     'home-user:usersDemo': IDecoratorCacheRedisOptions;
@@ -33,7 +33,7 @@ export interface IModuleCacheRedis {
 }
 /** cacheRedis: end */
 /** service: begin */
-export * from '../service/passportAdapter.js';
+export * from '../service/passportAdapter.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'home-user:passportAdapter': never;

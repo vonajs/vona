@@ -8,15 +8,15 @@ import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
 
 /** meta: end */
 /** meta redlock: begin */
-import type { MetaRedlock } from '../bean/meta.redlock.js';
+import type { MetaRedlock } from '../bean/meta.redlock.ts';
 
 /** queue: end */
 /** queue: begin */
-import type { QueueSchedule } from '../bean/queue.schedule.js';
-import type { config } from '../config/config.js';
+import type { QueueSchedule } from '../bean/queue.schedule.ts';
+import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceSchedule } from '../service/schedule.js';
+import type { ServiceSchedule } from '../service/schedule.ts';
 /** service: end */
 /** service: begin */
 
@@ -29,7 +29,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.redlock.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-schedule:redlock': never;
@@ -43,7 +43,7 @@ declare module 'vona-module-a-schedule' {
 }
 /** meta redlock: end */
 /** queue: begin */
-export * from '../bean/queue.schedule.js';
+export * from '../bean/queue.schedule.ts';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-schedule:schedule': IDecoratorQueueOptions;
@@ -60,7 +60,7 @@ export interface IModuleQueue {
 }
 /** queue: end */
 /** startup: begin */
-export * from '../bean/startup.loadSchedules.js';
+export * from '../bean/startup.loadSchedules.ts';
 declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-schedule:loadSchedules': IDecoratorStartupOptions;
@@ -74,7 +74,7 @@ declare module 'vona-module-a-schedule' {
 }
 /** service: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-schedule:schedule': never;
@@ -96,7 +96,7 @@ declare module 'vona' {
 }
 /** startup: end */
 /** service: begin */
-export * from '../service/schedule.js';
+export * from '../service/schedule.ts';
 
 @Scope()
 export class ScopeModuleASchedule extends BeanScopeBase {}

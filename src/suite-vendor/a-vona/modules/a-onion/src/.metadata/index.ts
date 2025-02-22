@@ -3,7 +3,7 @@
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanOnion } from '../bean/bean.onion.js';
+import type { BeanOnion } from '../bean/bean.onion.ts';
 import { BeanScopeBase } from 'vona';
 
 import { Scope } from 'vona-module-a-bean';
@@ -14,7 +14,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.onion.js';
+export * from '../bean/bean.onion.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
@@ -29,7 +29,7 @@ declare module 'vona' {
 }
 /** bean: end */
 /** service: begin */
-export * from '../service/onion_.js';
+export * from '../service/onion_.ts';
 declare module 'vona-module-a-web' {}
 declare module 'vona-module-a-onion' {}
 

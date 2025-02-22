@@ -8,14 +8,14 @@ import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** controller: end */
 /** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 /** meta: begin */
 import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.printApiPath.js';
+export * from '../bean/meta.printApiPath.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'home-index:printApiPath': never;
@@ -29,7 +29,7 @@ declare module 'vona-module-home-index' {
 }
 /** meta: end */
 /** controller: begin */
-export * from '../controller/home.js';
+export * from '../controller/home.ts';
 declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'home-index:home': IDecoratorControllerOptions;

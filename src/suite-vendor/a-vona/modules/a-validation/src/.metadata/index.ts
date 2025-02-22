@@ -5,23 +5,23 @@ import type { TypeLocaleBase, TypeModuleLocales } from 'vona';
 
 /** bean: end */
 /** bean: begin */
-import type { BeanValidator } from '../bean/bean.validator.js';
+import type { BeanValidator } from '../bean/bean.validator.ts';
 /** pipe: end */
 /** bean: begin */
-import type { IPipeOptionsValid } from '../bean/pipe.valid.js';
+import type { IPipeOptionsValid } from '../bean/pipe.valid.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: end */
 /** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
 import 'vona';
 import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.validator.js';
+export * from '../bean/bean.validator.ts';
 declare module 'vona-module-a-aspect' {
   export interface IPipeRecordLocal {
     'a-validation:valid': IPipeOptionsValid;
@@ -34,7 +34,7 @@ declare module 'vona-module-a-validation' {
   }
 }
 /** pipe: begin */
-export * from '../bean/pipe.valid.js';
+export * from '../bean/pipe.valid.ts';
 declare module 'vona' {}
 declare module 'vona-module-a-validation' {
   export interface BeanValidator {

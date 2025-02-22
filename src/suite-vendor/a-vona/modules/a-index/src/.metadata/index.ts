@@ -2,7 +2,7 @@
 /** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 import type { TypeModuleConfig } from 'vona';
-import type { config } from '../config/config.js';
+import type { config } from '../config/config.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
@@ -10,7 +10,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.version.js';
+export * from '../bean/meta.version.ts';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-index:version': never;
@@ -24,7 +24,7 @@ declare module 'vona-module-a-index' {
 }
 /** meta: end */
 /** config: begin */
-export * from '../config/config.js';
+export * from '../config/config.ts';
 
 @Scope()
 export class ScopeModuleAIndex extends BeanScopeBase {}

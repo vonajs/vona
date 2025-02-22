@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-queue';
-export { ScopeModuleAQueue as ScopeModule } from './index.js';
+export { ScopeModuleAQueue as ScopeModule } from './index.ts';
