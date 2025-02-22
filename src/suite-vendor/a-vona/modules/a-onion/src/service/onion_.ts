@@ -22,6 +22,7 @@ import {
   deepExtend,
   SymbolProxyDisable,
 } from 'vona';
+import { Service } from 'vona-module-a-web';
 import {
   SymbolUseOnionLocal,
 } from '../types/onion.ts';
@@ -29,6 +30,7 @@ import {
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
+@Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   protected [SymbolProxyDisable]: boolean = true;
   sceneName: string;
