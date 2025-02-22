@@ -1,3 +1,3 @@
-export * from './errorMapDefault.js';
-export * from './errorMapSchema.js';
-export * from './locales.js';
+export * from './errorMapDefault.ts';
+export * from './errorMapSchema.ts';
+export * from './locales.ts';

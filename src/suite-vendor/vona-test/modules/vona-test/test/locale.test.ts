@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { app, mockModuleInfo } from 'vona-mock';
-import { __ThisModule__ } from '../src/.metadata/this.js';
+import { __ThisModule__ } from '../src/.metadata/this.ts';
 
 describe('locale.test.ts', () => {
   it('action:locale', async () => {
