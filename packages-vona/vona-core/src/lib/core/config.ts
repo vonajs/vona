@@ -36,7 +36,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
       globalPrefix: process.env.SERVER_GLOBALPREFIX || '/api',
       publicDir: process.env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo),
       subdomainOffset: Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1'),
-      workers: Number.parseInt(process.env.SERVER_WORKERS || '1'),
+      workers: Number.parseInt(process.env.SERVER_WORKERS!),
       listen: {
         hostname: process.env.SERVER_LISTEN_HOSTNAME,
         port: Number.parseInt(process.env.SERVER_LISTEN_PORT!),
