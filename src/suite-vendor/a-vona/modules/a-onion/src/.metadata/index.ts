@@ -1,22 +1,22 @@
-/** service: end */
+/** bean: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'vona';
+import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanOnion } from '../bean/bean.onion.ts';
-import { BeanScopeBase } from 'vona';
-
-import { Scope } from 'vona-module-a-bean';
+import { BeanOnion } from '../bean/bean.onion.ts';
 /** bean: begin */
-import 'vona';
 import 'vona';
 import 'vona';
 
 import 'vona';
 
 export * from '../bean/bean.onion.ts';
-declare module 'vona' {}
+declare module 'vona' {
+
+}
 declare module 'vona-module-a-onion' {
+
   export interface BeanOnion {
     /** @internal */
     get scope(): ScopeModuleAOnion;
@@ -27,11 +27,6 @@ declare module 'vona' {
     onion: BeanOnion;
   }
 }
-/** bean: end */
-/** service: begin */
-export * from '../service/onion_.ts';
-declare module 'vona-module-a-web' {}
-declare module 'vona-module-a-onion' {}
 
 @Scope()
 export class ScopeModuleAOnion extends BeanScopeBase {}
@@ -47,6 +42,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     onion: ScopeModuleAOnion;
   }
+
 }
 
 /** scope: end */
