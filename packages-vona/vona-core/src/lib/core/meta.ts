@@ -1,4 +1,4 @@
-import type { IModule, ISuite } from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
 import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.ts';
 import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
@@ -28,7 +28,6 @@ export class AppMeta extends BeanSimple {
   resource: AppResource;
   metadata: AppMetadata;
   //
-  suites: Record<string, ISuite>;
   modules: Record<string, IModule>;
   modulesArray: IModule[];
   modulesMonkey: Record<string, IModule>;

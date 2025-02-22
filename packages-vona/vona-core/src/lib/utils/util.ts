@@ -3,6 +3,8 @@ import type { IModule } from '@cabloy/module-info';
 import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import * as Path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
@@ -331,4 +333,8 @@ export function disposeInstance(instance: any) {
 export function polyfillDispose(instance: any) {
   if (!instance || instance.__dispose__) return;
   Object.getPrototypeOf(instance).__dispose__ = () => {};
+}
+
+export function pathToHref(fileName: string): string {
+  return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }
