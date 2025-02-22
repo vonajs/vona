@@ -22,7 +22,6 @@ declare module '@cabloy/cli' {
   interface ICommandArgv {
     workers?: number;
     flavor?: VonaMetaFlavor;
-    sourcemap: boolean;
   }
 }
 
@@ -51,7 +50,6 @@ export class CliBinBuild extends BeanCliBase {
   }
 
   async _rollup(projectPath: string) {
-    const { argv } = this.context;
     const inputOptions: RollupOptions = {
       input: path.join(projectPath, '.vona/app.ts'),
       plugins: [
@@ -79,7 +77,7 @@ export class CliBinBuild extends BeanCliBase {
               },
               keepClassNames: true,
             },
-            minify: false,
+            minify: process.env.BUILD_MINIFY === 'true',
           },
         }),
       ],
@@ -88,7 +86,7 @@ export class CliBinBuild extends BeanCliBase {
     const outputOption: OutputOptions = {
       file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
-      sourcemap: argv.sourcemap,
+      sourcemap: process.env.BUILD_SOURCEMAP === 'true',
     };
 
     let bundle: RollupBuild | undefined;

@@ -14,9 +14,5 @@ export default {
       description: 'flavor',
       type: 'string',
     },
-    sourcemap: {
-      description: 'sourcemap',
-      type: 'boolean',
-    },
   },
 };
