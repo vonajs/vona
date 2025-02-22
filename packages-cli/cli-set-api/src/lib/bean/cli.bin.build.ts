@@ -12,7 +12,6 @@ import { rollup } from 'rollup';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
-// const typescript = typescriptImport as any as typeof typescriptImport.default;
 const resolve = resolveImport as any as typeof resolveImport.default;
 const swc = swcImport as any as typeof swcImport.default;
 const json = jsonImport as any as typeof jsonImport.default;
