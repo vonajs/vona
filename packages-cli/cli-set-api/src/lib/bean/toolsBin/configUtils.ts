@@ -1,5 +1,6 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './types.ts';
+import os from 'node:os';
 import path from 'node:path';
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
@@ -27,7 +28,6 @@ export function createConfigUtils(
     const res = Object.assign(
       {
         NODE_ENV: getNodeEnv(meta.mode),
-        SERVER_WORKERS: '1',
       },
       envs,
       {
@@ -37,6 +37,14 @@ export function createConfigUtils(
     );
     if (configOptions.workers !== undefined) {
       res.SERVER_WORKERS = configOptions.workers.toString();
+    }
+    // maybe empty string
+    if (!res.SERVER_WORKERS) {
+      if (meta.mode === 'prod') {
+        res.SERVER_WORKERS = os.cpus().length.toString();
+      } else {
+        res.SERVER_WORKERS = '1';
+      }
     }
     for (const key of ['NODE_ENV', 'SERVER_WORKERS', 'META_FLAVOR', 'META_MODE']) {
       if (res[key] as any !== false) {
