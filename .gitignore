@@ -28,6 +28,7 @@ env/.env*.mine
 **/.metadata/modules.d.ts
 
 # auto created
+.rollup.cache
 .temp-dynamic-*
 /tsconfig.json
 /cabloy.json

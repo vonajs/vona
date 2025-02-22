@@ -8,7 +8,8 @@
     "packages-utils/**/*.ts",
     "packages-vona/**/*.ts",
     "src/**/*.ts",
-    "**/.metadata/**/*.ts"
+    "**/.metadata/**/*.ts",
+    ".vona/**/*.ts"
   ],
   "exclude":
   [
@@ -19,6 +20,6 @@
     "packages-cli/cabloy-cli/**/*.test.ts",
     "packages-utils/**/*.test.ts",
     "packages-vona/**/*.test.ts",
-    "src/**/*.test.ts"
+    "src/**/test/**/*.test.ts"
   ]
 }
