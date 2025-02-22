@@ -28,7 +28,7 @@ const modules = {};
       resource: () => import('${module.info.fullName}'),
       name: '${module.info.relativeName}',
       info: ${JSON.stringify(module.info,null,2)},
-      root: '${process.env.META_MODE==='prod'?'':module.root}',
+      root: '${process.env.META_MODE==='prod'?'':module.root.replaceAll('\\','\\\\')}',
       package: ${JSON.stringify(_package,null,2)},
     };`;
     print(importClause);
