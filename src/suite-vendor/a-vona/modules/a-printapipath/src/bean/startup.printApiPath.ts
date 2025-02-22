@@ -10,7 +10,7 @@ export class StartupPrintApiPath extends BeanBase implements IStartupExecute {
   async execute() {
     setTimeout(async () => {
       await this._print();
-    }, 1000);
+    }, this.scope.config.delay);
   }
 
   async _print() {

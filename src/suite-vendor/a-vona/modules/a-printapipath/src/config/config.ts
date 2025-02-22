@@ -1,5 +1,7 @@
 import type { VonaApplication } from 'vona';
 
 export function config(_app: VonaApplication) {
-  return {};
+  return {
+    delay: 0,
+  };
 }
