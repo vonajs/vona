@@ -1,5 +1,5 @@
 import type { IBeanRecord } from '../bean/type.ts';
-import type { Constructable, IDecoratorBeanInfoOptions, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
+import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { MetadataKey } from './metadata.ts';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { BeanSimple } from '../bean/beanSimple.ts';
@@ -32,11 +32,6 @@ export class AppResource extends BeanSimple {
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
-    if (!module && this.app.meta.isProd) {
-      // beanInfo
-      const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(DecoratorBeanInfo, beanClass!);
-      module = beanInfo?.module;
-    }
     if (!module) {
       throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     }

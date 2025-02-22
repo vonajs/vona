@@ -1,8 +1,13 @@
+import type { Constructable } from 'vona';
+import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.ts';
 import { parseModuleName as _parseModuleName, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
+import { appMetadata } from '../../core/metadata.ts';
+import { DecoratorBeanInfo } from '../../core/resource.ts';
 
 export const ParseModuleNameLevel = ParseModuleNameLevelInit + 5;
 
-export function parseModuleName() {
-  if (process.env.META_MODE === 'prod') return undefined;
-  return _parseModuleName(ParseModuleNameLevel);
+export function parseModuleName(beanClass: Constructable) {
+  // beanInfo
+  const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(DecoratorBeanInfo, beanClass);
+  return beanInfo?.module || _parseModuleName(ParseModuleNameLevel);
 }

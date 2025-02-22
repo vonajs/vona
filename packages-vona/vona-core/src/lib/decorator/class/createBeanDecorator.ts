@@ -11,8 +11,9 @@ export function createBeanDecorator<T>(
   fn?: (target: Constructable) => void,
 ): ClassDecorator {
   return function (target) {
+    const beanClass = target as unknown as Constructable;
     // module
-    const module = parseModuleName();
+    const module = parseModuleName(beanClass);
     // name
     const name = scene === 'scope' ? 'module' : undefined;
     // add
@@ -20,12 +21,12 @@ export function createBeanDecorator<T>(
       module,
       scene,
       name,
-      beanClass: target as unknown as Constructable,
+      beanClass,
       options,
       optionsPrimitive,
       virtual,
     });
     // fn
-    fn?.(target as unknown as Constructable);
+    fn?.(beanClass);
   };
 }
