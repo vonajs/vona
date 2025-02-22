@@ -8,7 +8,6 @@ import commonjsImport from '@rollup/plugin-commonjs';
 import jsonImport from '@rollup/plugin-json';
 import resolveImport from '@rollup/plugin-node-resolve';
 import terserImport from '@rollup/plugin-terser';
-// import swcImport from '@rollup/plugin-swc';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
