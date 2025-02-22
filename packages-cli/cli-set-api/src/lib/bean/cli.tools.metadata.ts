@@ -155,7 +155,7 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
   }
 
   async _generateIndex(modulePath: string) {
-    const jsExport = "export * from './.metadata/index.js';";
+    const jsExport = "export * from './.metadata/index.ts';";
     const jsFile = path.join(modulePath, 'src/index.ts');
     let jsContent;
     if (fse.existsSync(jsFile)) {

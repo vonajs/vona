@@ -36,7 +36,7 @@ export async function generateLocale(modulePath: string) {
   for (const file of files) {
     const localeName = path.basename(file.substring(0, file.length - '.ts'.length));
     const className = `locale_${localeName.replace('-', '_')}`;
-    contentImports.push(`import ${className} from '../config/locale/${localeName}.js';`);
+    contentImports.push(`import ${className} from '../config/locale/${localeName}.ts';`);
     contentLocales.push(`'${localeName}': ${className},`);
   }
   // combine
