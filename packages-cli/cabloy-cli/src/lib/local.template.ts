@@ -1,6 +1,7 @@
 import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.ts';
 import type { BeanCliBase } from './bean.cli.base.ts';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import ejs from '@zhennann/ejs';
 import eggBornUtils from 'egg-born-utils';
@@ -46,6 +47,7 @@ export class LocalTemplate {
   resolveTemplatePath(setName: string, _path: string): string {
     if (path.isAbsolute(_path)) return _path;
     const sets = this.moduleConfig.sets;
+    const require = createRequire(import.meta.url);
     const modulePath = require.resolve(`${sets[process.env.CabloyCliBrandName as any][setName]}/package.json`);
     return path.join(path.dirname(modulePath), 'cli/templates', _path);
   }
