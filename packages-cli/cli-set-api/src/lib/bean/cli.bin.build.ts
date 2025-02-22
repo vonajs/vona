@@ -7,7 +7,6 @@ import commonjsImport from '@rollup/plugin-commonjs';
 import jsonImport from '@rollup/plugin-json';
 import resolveImport from '@rollup/plugin-node-resolve';
 import swcImport from '@rollup/plugin-swc';
-// import typescriptImport from '@rollup/plugin-typescript';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
@@ -58,11 +57,6 @@ export class CliBinBuild extends BeanCliBase {
         }),
         json(),
         commonjs(),
-        // typescript({
-        //   module: 'NodeNext',
-        //   tsconfig: path.join(projectPath, './tsconfig.build.json'),
-        //   outputToFilesystem: true,
-        // }),
         swc({
           swc: {
             jsc: {
