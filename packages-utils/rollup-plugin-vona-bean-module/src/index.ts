@@ -1,6 +1,5 @@
 import { createFilter } from '@rollup/pluginutils';
 import { walk } from 'estree-walker';
-import MagicString from 'magic-string';
 
 const whitespace = /\s/;
 

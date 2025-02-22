@@ -43,9 +43,9 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.26.9",
     "@rollup/pluginutils": "^5.0.1",
-    "estree-walker": "^2.0.2",
-    "magic-string": "^0.30.3"
+    "estree-walker": "^2.0.2"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

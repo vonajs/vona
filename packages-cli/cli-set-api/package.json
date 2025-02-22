@@ -47,16 +47,22 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@babel/plugin-transform-typescript": "^7.26.8",
     "@cabloy/cli": "workspace:^",
     "@cabloy/dotenv": "workspace:^",
     "@cabloy/extend": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/word-utils": "^2.0.0",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-swc": "^0.4.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "babel-plugin-zova-bean-module": "^1.1.0",
     "chalk": "^3.0.0",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.1",
@@ -65,7 +71,6 @@
     "lodash": "^4.17.21",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
-    "rollup-plugin-vona-bean-module": "workspace:^",
     "vona-shared": "^1.0.7"
   },
   "devDependencies": {
