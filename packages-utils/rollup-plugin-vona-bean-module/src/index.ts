@@ -4,70 +4,59 @@ import MagicString from 'magic-string';
 
 const whitespace = /\s/;
 
-function getName(node) {
-  if (node.type === 'Identifier') return node.name;
-  if (node.type === 'ThisExpression') return 'this';
-  if (node.type === 'Super') return 'super';
+// function getName(node) {
+//   if (node.type === 'Identifier') return node.name;
+//   if (node.type === 'ThisExpression') return 'this';
+//   if (node.type === 'Super') return 'super';
 
-  return null;
+//   return null;
+// }
+
+// function flatten(node) {
+//   const parts = [];
+
+//   while (node.type === 'MemberExpression') {
+//     if (node.computed) return null;
+
+//     parts.unshift(node.property.name);
+//     node = node.object;
+//   }
+
+//   const name = getName(node);
+
+//   if (!name) return null;
+
+//   parts.unshift(name);
+//   return parts.join('.');
+// }
+
+export interface PluginVonaBeanModuleOptions {
+  include?: string;
+  exclude?: string;
+  sourceMap?: boolean;
 }
 
-function flatten(node) {
-  const parts = [];
-
-  while (node.type === 'MemberExpression') {
-    if (node.computed) return null;
-
-    parts.unshift(node.property.name);
-    node = node.object;
-  }
-
-  const name = getName(node);
-
-  if (!name) return null;
-
-  parts.unshift(name);
-  return parts.join('.');
-}
-
-export default function strip(options = {}) {
-  const include = options.include || '**/*.js';
+export default function (options: PluginVonaBeanModuleOptions = {}) {
+  const include = options.include || '**/*.ts';
   const { exclude } = options;
   const filter = createFilter(include, exclude);
   const sourceMap = options.sourceMap !== false;
 
-  const removeDebuggerStatements = options.debugger !== false;
-  const functions = (options.functions || ['console.*', 'assert.*']).map(keypath =>
-    keypath.replace(/\*/g, '\\w+').replace(/\./g, '\\s*\\.\\s*'),
-  );
-
-  const labels = options.labels || [];
-
-  const labelsPatterns = labels.map(l => `${l}\\s*:`);
-
-  const firstPass = [...functions, ...labelsPatterns];
-  if (removeDebuggerStatements) {
-    firstPass.push('debugger\\b');
-  }
-
-  const reFunctions = new RegExp(`^(?:${functions.join('|')})$`);
-  const reFirstpass = new RegExp(`\\b(?:${firstPass.join('|')})`);
-  const firstPassFilter = firstPass.length > 0 ? code => reFirstpass.test(code) : () => false;
   const UNCHANGED = null;
 
   return {
-    name: 'strip',
+    name: 'vonaBeanModule',
 
     transform(code, id) {
-      if (!filter(id) || !firstPassFilter(code)) {
+      if (!filter(id)) {
         return UNCHANGED;
       }
 
       let ast;
 
       try {
-        ast = this.parse(code);
-      } catch (err) {
+        ast = (this as any).parse(code);
+      } catch (err: any) {
         err.message += ` in ${id}`;
         throw err;
       }
@@ -109,33 +98,27 @@ export default function strip(options = {}) {
       }
 
       walk(ast, {
-        enter(node, parent) {
-          Object.defineProperty(node, 'parent', {
-            value: parent,
-            enumerable: false,
-            configurable: true,
-          });
-
+        enter(node, _parent) {
           if (sourceMap) {
             magicString.addSourcemapLocation(node.start);
             magicString.addSourcemapLocation(node.end);
           }
 
-          if (removeDebuggerStatements && node.type === 'DebuggerStatement') {
-            removeStatement(node);
-            this.skip();
-          } else if (node.type === 'LabeledStatement') {
-            if (node.label && labels.includes(node.label.name)) {
-              removeStatement(node);
-              this.skip();
-            }
-          } else if (node.type === 'CallExpression') {
-            const keypath = flatten(node.callee);
-            if (keypath && reFunctions.test(keypath)) {
-              removeExpression(node);
-              this.skip();
-            }
-          }
+          // if (removeDebuggerStatements && node.type === 'DebuggerStatement') {
+          //   removeStatement(node);
+          //   this.skip();
+          // } else if (node.type === 'LabeledStatement') {
+          //   if (node.label && labels.includes(node.label.name)) {
+          //     removeStatement(node);
+          //     this.skip();
+          //   }
+          // } else if (node.type === 'CallExpression') {
+          //   const keypath = flatten(node.callee);
+          //   if (keypath && reFunctions.test(keypath)) {
+          //     removeExpression(node);
+          //     this.skip();
+          //   }
+          // }
         },
       });
 

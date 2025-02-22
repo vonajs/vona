@@ -533,6 +533,9 @@ importers:
       rollup:
         specifier: ^4.34.8
         version: 4.34.8
+      rollup-plugin-vona-bean-module:
+        specifier: workspace:^
+        version: link:../../packages-utils/rollup-plugin-vona-bean-module
       vona-shared:
         specifier: ^1.0.7
         version: link:../../packages-vona/vona-shared
@@ -858,6 +861,9 @@ importers:
       estree-walker:
         specifier: ^2.0.2
         version: 2.0.2
+      magic-string:
+        specifier: ^0.30.3
+        version: 0.30.17
     devDependencies:
       clean-package:
         specifier: ^2.2.0

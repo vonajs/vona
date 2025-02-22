@@ -9,6 +9,7 @@ import resolveImport from '@rollup/plugin-node-resolve';
 import swcImport from '@rollup/plugin-swc';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
+import vonaBeanModule from 'rollup-plugin-vona-bean-module';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -56,6 +57,7 @@ export class CliBinBuild extends BeanCliBase {
         }),
         json(),
         commonjs(),
+        vonaBeanModule(),
         swc({
           swc: {
             jsc: {
