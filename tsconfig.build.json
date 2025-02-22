@@ -3,9 +3,22 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": [".vona/**/*.ts", "src/**/*.ts"],
-  "exclude": ["src/**/*.d.ts", "src/**/*.test.ts"],
-  "ts-node": {
-    "swc": true
-  }
+  "include": [
+    "packages-cli/cabloy-cli/**/*.ts",
+    "packages-utils/**/*.ts",
+    "packages-vona/**/*.ts",
+    "src/**/*.ts",
+    "**/.metadata/**/*.ts"
+  ],
+  "exclude":
+  [
+    "packages-cli/cabloy-cli/**/*.d.ts",
+    "packages-utils/**/*.d.ts",
+    "packages-vona/**/*.d.ts",
+    "src/**/*.d.ts",
+    "packages-cli/cabloy-cli/**/*.test.ts",
+    "packages-utils/**/*.test.ts",
+    "packages-vona/**/*.test.ts",
+    "src/**/*.test.ts"
+  ]
 }

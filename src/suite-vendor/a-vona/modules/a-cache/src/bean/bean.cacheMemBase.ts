@@ -1,5 +1,5 @@
 import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
-import LRUCache from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import { Virtual } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
 
