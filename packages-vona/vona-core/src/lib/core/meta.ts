@@ -1,4 +1,4 @@
-import type { IModule, ISuite, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
+import type { IModule, ISuite } from '@cabloy/module-info';
 import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.ts';
 import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
@@ -18,8 +18,6 @@ export class AppMeta extends BeanSimple {
   isProd: boolean;
   isTest: boolean;
   isLocal: boolean;
-  flavor: VonaMetaFlavor;
-  mode: VonaMetaMode;
   error: ErrorClass;
   locale: AppLocale;
   text: IModuleLocaleText;
@@ -79,8 +77,6 @@ export class AppMeta extends BeanSimple {
     this.isProd = mode === 'prod';
     this.isTest = mode === 'test';
     this.isLocal = mode === 'local';
-    this.mode = mode;
-    this.flavor = this.app.config.meta.flavor;
   }
 
   async waitAppStarted() {
