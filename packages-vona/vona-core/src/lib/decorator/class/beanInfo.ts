@@ -1,5 +1,5 @@
-import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.js';
-import { appMetadata } from '../../core/metadata.js';
+import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.ts';
+import { appMetadata } from '../../core/metadata.ts';
 import { DecoratorBeanInfo } from '../../core/resource.ts';
 
 export function BeanInfo(options: IDecoratorBeanInfoOptions): ClassDecorator {
