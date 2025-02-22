@@ -38,7 +38,7 @@ export async function globBeanFiles(
     if (sceneMeta.sceneIsolate && parts.length !== 1) continue;
     if (!sceneMeta.sceneIsolate && parts.length < 2) continue;
     const isIgnore = checkIgnoreOfParts(parts);
-    const fileNameJS = fileName.replace('.ts', '.js');
+    const fileNameJS = fileName; // fileName.replace('.ts', '.js');
     const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
     const className =
       (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');

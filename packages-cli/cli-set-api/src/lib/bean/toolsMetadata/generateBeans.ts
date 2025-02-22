@@ -29,7 +29,7 @@ export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName
     // const sceneName = parts.slice(0, -1).join('.');
     // const beanName = parts[parts.length - 1];
     // const beanNameCapitalize = toUpperCaseFirstChar(beanName);
-    const fileNameJS = fileName.replace('.ts', '.js');
+    const fileNameJS = fileName; // fileName.replace('.ts', '.js');
     const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);

@@ -47,7 +47,7 @@ export async function generateScope(
   // combine
   const content = `/** scope: begin */
 import { ${contentImports.join(', ')} } from 'vona';
-import { Scope } from '${moduleName === 'a-bean' ? '../lib/scope.js' : 'vona-module-a-bean'}';
+import { Scope } from '${moduleName === 'a-bean' ? '../lib/scope.ts' : 'vona-module-a-bean'}';
 
 @Scope()
 export class ScopeModule${relativeNameCapitalize} extends BeanScopeBase {}

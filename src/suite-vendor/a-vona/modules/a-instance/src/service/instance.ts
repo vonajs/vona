@@ -134,7 +134,7 @@ export class ServiceInstance extends BeanBase {
         this.ctx.locale === 'zh-cn'
           ? 'https://cabloy.com/zh-cn/articles/multi-instance.html'
           : 'https://cabloy.com/articles/multi-instance.html';
-      let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].js')}`;
+      let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].ts')}`;
       message += `\n${chalk.hex('#FF8800')(`{ instanceName: '${this.ctx.instanceName}', password: '', title: '' }`)}`;
       message += `\nMore info: ${chalk.cyan(urlInfo)}`;
       // eslint-disable-next-line
