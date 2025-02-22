@@ -5,11 +5,6 @@ import type {
   IDecoratorBeanOptionsBase,
 } from 'vona';
 import type {
-  IOpenAPIObject,
-  IOpenApiOptions,
-  RouteHandlerArgumentMetaDecorator,
-} from 'vona-module-a-openapi';
-import type {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
 } from 'vona-module-a-web';
@@ -25,17 +20,15 @@ import {
   LocaleModuleNameSeparator,
 } from 'vona';
 import {
-  bodySchemaWrapperDefault,
-  schema,
-  SymbolOpenApiOptions,
-  SymbolRouteHandlersArgumentsMeta,
-} from 'vona-module-a-openapi';
-import {
   RequestMethod,
   Service,
   SymbolRequestMappingHandler,
 } from 'vona-module-a-web';
 import { z } from 'zod';
+import { SymbolOpenApiOptions, type IOpenAPIObject, type IOpenApiOptions } from '../types/api.ts';
+import { SymbolRouteHandlersArgumentsMeta, type RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
+import { schema } from '../lib/schema/schema.ts';
+import { bodySchemaWrapperDefault } from '../lib/schema/bodySchemaWrapper.ts';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 
