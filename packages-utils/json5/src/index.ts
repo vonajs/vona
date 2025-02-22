@@ -1,4 +1,4 @@
-import * as json5 from 'json5';
+import json5 from 'json5';
 
 declare global {
   // eslint-disable-next-line
