@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
-import overrideMethod from 'koa-override';
+import overrideMethodImport from 'koa-override';
 import { BeanBase } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
+
+const overrideMethod = overrideMethodImport as any;
 
 export interface IMiddlewareSystemOptionsOverrideMethod extends IDecoratorMiddlewareSystemOptions {
   allowedMethods?: string[];

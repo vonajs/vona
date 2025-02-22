@@ -100,8 +100,8 @@ function combineApiPathControllerAndAction(
   moduleName: string,
   controllerPath: string | undefined,
   actionPath: RegExp | string | undefined,
-  prefix?: string | boolean,
-  simplify?: boolean,
+  prefix: string,
+  simplify: boolean,
 ): RegExp | string {
   if (actionPath === undefined) actionPath = '';
   // routePath
@@ -126,9 +126,9 @@ function combineApiPathControllerAndAction(
   return routePath;
 }
 
-function combineApiPath(moduleName: string, path: string | undefined, prefix?: string | boolean, simplify?: boolean) {
-  const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
-  simplify = simplify ?? true;
+function combineApiPath(moduleName: string, path: string | undefined, globalPrefix: string, simplify: boolean) {
+  // const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
+  // simplify = simplify ?? true;
   if (!path) path = '';
   // ignore globalPrefix
   if (path.startsWith('//')) return path.substring(1);

@@ -3,10 +3,14 @@ import type { OutputOptions, RollupBuild, RollupOptions } from 'rollup';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import typescript from '@rollup/plugin-typescript';
+import commonjsImport from '@rollup/plugin-commonjs';
+import typescriptImport from '@rollup/plugin-typescript';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
+
+const commonjs = commonjsImport as any as typeof commonjsImport.default;
+const typescript = typescriptImport as any as typeof typescriptImport.default;
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -43,7 +47,7 @@ export class CliBinBuild extends BeanCliBase {
       input: path.join(projectPath, '.vona/app.ts'),
       output: [{ file: path.join(projectPath, 'dist/index.js'), format: 'es' }],
       plugins: [
-        // @ts-ignore typescript
+        commonjs(),
         typescript({
           module: 'NodeNext',
           tsconfig: path.join(projectPath, './tsconfig.build.json'),
