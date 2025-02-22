@@ -16,9 +16,9 @@ export class CliBinTsc extends BeanCliBase {
     await this._tsc(projectPath, force);
   }
 
-  async _tsc(_projectPath: string, force: boolean) {
+  async _tsc(projectPath: string, force: boolean) {
     // count
-    const count =
+    const count = 1 +
       Object.keys(this.modulesMeta.suites).length + this.modulesMeta.modulesArray.filter(item => !item.suite).length;
     // begin
     let counter = 0;
@@ -30,6 +30,10 @@ export class CliBinTsc extends BeanCliBase {
     if (force) {
       tscArgs.push('--force');
     }
+    // tsc: project
+    // eslint-disable-next-line
+    console.log(`===>  ${++counter}/${count} project`);
+    await this.helper.processHelper.tsc(tscArgs, { cwd: projectPath });
     // suites
     for (const key in this.modulesMeta.suites) {
       const suite = this.modulesMeta.suites[key];
