@@ -14,7 +14,9 @@ const typescript = typescriptImport as any as typeof typescriptImport.default;
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
-    force: boolean;
+    workers?: number;
+    flavor?: VonaMetaFlavor;
+    sourcemap: boolean;
   }
 }
 
@@ -43,6 +45,7 @@ export class CliBinBuild extends BeanCliBase {
   }
 
   async _rollup(projectPath: string) {
+    const { argv } = this.context;
     const inputOptions: RollupOptions = {
       input: path.join(projectPath, '.vona/app.ts'),
       output: [{ file: path.join(projectPath, 'dist/index.js'), format: 'es' }],
@@ -56,7 +59,7 @@ export class CliBinBuild extends BeanCliBase {
     };
 
     const outputOption: OutputOptions = {
-      sourcemap: true,
+      sourcemap: argv.sourcemap,
       file: path.join(projectPath, 'dist/index.js'),
     };
 
