@@ -32,6 +32,9 @@ export function config(_app: VonaApplication) {
       html(err: Error, ctx: VonaContext) {
         _performErrorFilters(ctx, err, 'html');
       },
+      text(err: Error, ctx: VonaContext) {
+        ctx.body = err.code; // not set err.message for safety
+      },
     },
   };
 }

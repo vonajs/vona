@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "cookie": "^1.0.2",
-    "koa-onerror": "^5.0.1",
     "mustache": "^4.2.0",
-    "stack-trace": "^1.0.0-pre2"
+    "stack-trace": "^1.0.0-pre2",
+    "stream-wormhole": "^2.0.1"
   },
   "clean-package": {
     "indent": 2,

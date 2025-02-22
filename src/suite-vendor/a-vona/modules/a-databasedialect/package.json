@@ -37,8 +37,10 @@
     "better-sqlite3": "^11.8.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.12.0",
+    "oracledb": "^6.7.2",
     "pg": "^8.13.3",
     "pg-native": "^3.2.2",
+    "pg-query-stream": "^4.7.3",
     "pg-types": "^4.0.2",
     "sqlite3": "^5.1.7",
     "tedious": "^18.6.1"

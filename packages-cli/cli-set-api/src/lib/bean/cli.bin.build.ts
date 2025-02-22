@@ -78,7 +78,8 @@ export class CliBinBuild extends BeanCliBase {
     };
 
     const outputOption: OutputOptions = {
-      file: path.join(projectPath, 'dist/index.js'),
+      dir: path.join(projectPath, 'dist'),
+      // file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
       sourcemap: process.env.BUILD_SOURCEMAP === 'true',
     };

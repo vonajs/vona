@@ -1336,12 +1336,18 @@ importers:
       mysql2:
         specifier: ^3.12.0
         version: 3.12.0
+      oracledb:
+        specifier: ^6.7.2
+        version: 6.7.2
       pg:
         specifier: ^8.13.3
         version: 8.13.3(pg-native@3.2.2)
       pg-native:
         specifier: ^3.2.2
         version: 3.2.2
+      pg-query-stream:
+        specifier: ^4.7.3
+        version: 4.7.3(pg@8.13.3(pg-native@3.2.2))
       pg-types:
         specifier: ^4.0.2
         version: 4.0.2
@@ -1392,15 +1398,15 @@ importers:
       cookie:
         specifier: ^1.0.2
         version: 1.0.2
-      koa-onerror:
-        specifier: ^5.0.1
-        version: 5.0.1
       mustache:
         specifier: ^4.2.0
         version: 4.2.0
       stack-trace:
         specifier: ^1.0.0-pre2
         version: 1.0.0-pre2
+      stream-wormhole:
+        specifier: ^2.0.1
+        version: 2.0.1
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -6934,10 +6940,6 @@ packages:
     resolution: {integrity: sha512-D15tp5rxevHqqcvOiEDbtQolG6z3NpBNupz3EUZz43pjYv5SGMom2Xz1FKM8oTya56+aq+hejPW/iBrNnC/UGQ==}
     engines: {node: '>= 8.0.0'}
 
-  koa-onerror@5.0.1:
-    resolution: {integrity: sha512-mSdakWWkZASupPZe661zhSwa/szIvskdmNpLn9gRmrcI2iktDDLi+u0c6KuG6mI6E6Fh8btVMdx0u40/2IvxQw==}
-    engines: {node: '>= 18.19.0'}
-
   koa-override@3.0.0:
     resolution: {integrity: sha512-w2rWCfapbQUZ8TrRBarj6iwryCTooEcdw9lr1hYC1q4FnaCZcAOhpjB1VpqtbODALVMgY3JGlzLSeYRXc5Ky0Q==}
     engines: {node: '>= 8.0.0'}
@@ -7802,6 +7804,10 @@ packages:
     resolution: {integrity: sha512-sjYP8QyVWBpBZWD6Vr1M/KwknSw6kJOz41tvGMlwWeClHBtYKTbHMki1PsLZnxKpXMPbTKv9b3pjQu3REib96A==}
     engines: {node: '>=8'}
 
+  oracledb@6.7.2:
+    resolution: {integrity: sha512-fdHnGyI9VJ84HWEQLdhqmkFmrFRCi2CJ/xrZplRAyXrD+oL70f0WzQ0OBEBcHsOAdxKgpnTwm4bdyuIPQDgUgQ==}
+    engines: {node: '>=14.6'}
+
   os-locale@1.4.0:
     resolution: {integrity: sha512-PRT7ZORmwu2MEFt4/fv3Q+mEfN4zetKxufQrkShY2oGvUms9r8otu5HfdyIFHkYXjO7laNsoVGmM2MANfuTA8g==}
     engines: {node: '>=0.10.0'}
@@ -8001,6 +8007,11 @@ packages:
   pg-connection-string@2.7.0:
     resolution: {integrity: sha512-PI2W9mv53rXJQEOb8xNR8lH7Hr+EKa6oJa38zsK0S/ky2er16ios1wLKhZyxzD7jUReiWokc9WK5nxSnC7W1TA==}
 
+  pg-cursor@2.12.3:
+    resolution: {integrity: sha512-2koS4+f+oCJnJ6pTdUlp3TkwOCjlPr9lmwcTDPeXZv3eiXDCxZeBC7T0+LldA9+mhqdcO8WDqbuFfdFEJm9YLw==}
+    peerDependencies:
+      pg: ^8
+
   pg-int8@1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
@@ -8019,6 +8030,11 @@ packages:
 
   pg-protocol@1.7.1:
     resolution: {integrity: sha512-gjTHWGYWsEgy9MsY0Gp6ZJxV24IjDqdpTW7Eh0x+WfJLFsm/TJx1MzL6T0D88mBvkpxotCQ6TwW6N+Kko7lhgQ==}
+
+  pg-query-stream@4.7.3:
+    resolution: {integrity: sha512-WvsdwYXrvIXNZJflX/2MEQLjKs5TopZWeiyam1zcaFfhwQtL19ENOvGdzVsihGsbsNGdVRU5yiqg2G5p06UAbg==}
+    peerDependencies:
+      pg: ^8
 
   pg-types@2.2.0:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
@@ -16139,11 +16155,6 @@ snapshots:
       escape-html: 1.0.3
       stream-wormhole: 1.1.0
 
-  koa-onerror@5.0.1:
-    dependencies:
-      escape-html: 1.0.3
-      stream-wormhole: 2.0.1
-
   koa-override@3.0.0:
     dependencies:
       methods: 1.1.2
@@ -17288,6 +17299,8 @@ snapshots:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
 
+  oracledb@6.7.2: {}
+
   os-locale@1.4.0:
     dependencies:
       lcid: 1.0.0
@@ -17469,6 +17482,10 @@ snapshots:
 
   pg-connection-string@2.7.0: {}
 
+  pg-cursor@2.12.3(pg@8.13.3(pg-native@3.2.2)):
+    dependencies:
+      pg: 8.13.3(pg-native@3.2.2)
+
   pg-int8@1.0.1: {}
 
   pg-native@3.2.2:
@@ -17483,6 +17500,11 @@ snapshots:
       pg: 8.13.3(pg-native@3.2.2)
 
   pg-protocol@1.7.1: {}
+
+  pg-query-stream@4.7.3(pg@8.13.3(pg-native@3.2.2)):
+    dependencies:
+      pg: 8.13.3(pg-native@3.2.2)
+      pg-cursor: 2.12.3(pg@8.13.3(pg-native@3.2.2))
 
   pg-types@2.2.0:
     dependencies:
