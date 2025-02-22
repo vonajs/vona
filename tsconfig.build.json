@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [".vona/**/*.ts", "src/**/*.ts"],
+  "exclude": ["src/**/*.d.ts", "src/**/*.test.ts"],
+  "ts-node": {
+    "swc": true
+  }
+}

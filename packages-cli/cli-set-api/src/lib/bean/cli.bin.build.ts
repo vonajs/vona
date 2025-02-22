@@ -1,6 +1,11 @@
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
+import type { OutputOptions, RollupBuild, RollupOptions } from 'rollup';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
+import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import typescript from '@rollup/plugin-typescript';
+import { rimraf } from 'rimraf';
+import { rollup } from 'rollup';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -29,5 +34,36 @@ export class CliBinBuild extends BeanCliBase {
       workers: argv.workers,
     };
     await generateVonaMeta(configMeta, configOptions);
+    await rimraf(path.join(projectPath, 'dist'));
+    await this._rollup(projectPath);
+  }
+
+  async _rollup(projectPath: string) {
+    const inputOptions: RollupOptions = {
+      input: path.join(projectPath, '.vona/app.ts'),
+      output: [{ file: path.join(projectPath, 'dist/index.js'), format: 'es' }],
+      plugins: [
+        // @ts-ignore typescript
+        typescript({
+          module: 'NodeNext',
+          tsconfig: path.join(projectPath, './tsconfig.build.json'),
+        }),
+      ],
+    };
+
+    const outputOption: OutputOptions = {
+      sourcemap: true,
+    };
+
+    let bundle: RollupBuild | undefined;
+    try {
+      bundle = await rollup(inputOptions);
+      await bundle.write(outputOption);
+    } finally {
+      if (bundle) {
+        // closes the bundle
+        await bundle.close();
+      }
+    }
   }
 }
