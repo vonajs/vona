@@ -57,6 +57,7 @@ export class CliBinBuild extends BeanCliBase {
 
     const outputOption: OutputOptions = {
       sourcemap: true,
+      file: path.join(projectPath, 'dist/index.js'),
     };
 
     let bundle: RollupBuild | undefined;
