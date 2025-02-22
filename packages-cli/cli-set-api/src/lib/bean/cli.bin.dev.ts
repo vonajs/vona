@@ -31,7 +31,7 @@ export class CliBinDev extends BeanCliBase {
       workers: argv.workers,
     };
     await generateVonaMeta(configMeta, configOptions);
-    await this.helper.spawn({
+    await this.helper.spawnExe({
       cmd: 'node',
       args: ['--experimental-transform-types', '--loader=ts-node/esm', '.vona/app.ts'],
       options: {

@@ -5,7 +5,7 @@ import path from 'node:path';
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
-import { copyTemplateFile, getEnvMeta, resolveTemplatePath, saveJSONFile } from './utils.ts';
+import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
 
 export async function generateEntryFiles(
   configMeta: VonaConfigMeta,
