@@ -54,6 +54,7 @@ export class CliBinBuild extends BeanCliBase {
         typescript({
           module: 'NodeNext',
           tsconfig: path.join(projectPath, './tsconfig.build.json'),
+          outputToFilesystem: true,
         }),
       ],
     };
