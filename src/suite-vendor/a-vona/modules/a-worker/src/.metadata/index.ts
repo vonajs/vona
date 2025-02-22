@@ -17,7 +17,7 @@ import type { BroadcastReloadAll } from '../bean/broadcast.reloadAll.ts';
 /** cacheRedis: begin */
 import type { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.ts';
 import type { config } from '../config/config.ts';
-import { BeanScopeBase } from 'vona';
+import { BeanInfo, BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
 import 'vona';
@@ -90,6 +90,7 @@ export * from '../main.ts';
 /** monkey: begin */
 export * from '../monkey.ts';
 
+@BeanInfo({ module: 'a-worker' })
 @Scope()
 export class ScopeModuleAWorker extends BeanScopeBase {}
 
