@@ -1,5 +1,5 @@
 import type { IBeanRecord } from '../bean/type.ts';
-import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
+import type { Constructable, IDecoratorBeanInfoOptions, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { MetadataKey } from './metadata.ts';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { BeanSimple } from '../bean/beanSimple.ts';
@@ -8,6 +8,7 @@ import { isClass } from '../utils/isClass.ts';
 import { appMetadata } from './metadata.ts';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
+export const DecoratorBeanInfo = Symbol('Decorator#BeanInfo');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 
 export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;
@@ -31,7 +32,14 @@ export class AppResource extends BeanSimple {
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
-    if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
+    if (!module && this.app.meta.isProd) {
+      // beanInfo
+      const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(DecoratorBeanInfo, beanClass!);
+      module = beanInfo?.module;
+    }
+    if (!module) {
+      throw new Error(`module name not parsed for bean: ${scene}.${name}`);
+    }
     // beanFullName
     const beanFullName = scene && scene !== ('bean' as any) ? `${module}.${scene}.${name}` : name;
     // moduleBelong

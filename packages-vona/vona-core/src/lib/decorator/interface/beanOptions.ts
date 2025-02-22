@@ -19,3 +19,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   options?: OPTIONS;
   optionsPrimitive?: boolean;
 }
+
+export interface IDecoratorBeanInfoOptions {
+  module: string;
+}
