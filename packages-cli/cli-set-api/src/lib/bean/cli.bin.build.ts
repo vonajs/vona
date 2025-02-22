@@ -4,6 +4,9 @@ import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import commonjsImport from '@rollup/plugin-commonjs';
+import jsonImport from '@rollup/plugin-json';
+import resolveImport from '@rollup/plugin-node-resolve';
+import swcImport from '@rollup/plugin-swc';
 import typescriptImport from '@rollup/plugin-typescript';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
@@ -11,6 +14,9 @@ import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
 const typescript = typescriptImport as any as typeof typescriptImport.default;
+const resolve = resolveImport as any as typeof resolveImport.default;
+const swc = swcImport as any as typeof swcImport.default;
+const json = jsonImport as any as typeof jsonImport.default;
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -48,20 +54,41 @@ export class CliBinBuild extends BeanCliBase {
     const { argv } = this.context;
     const inputOptions: RollupOptions = {
       input: path.join(projectPath, '.vona/app.ts'),
-      output: [{ file: path.join(projectPath, 'dist/index.js'), format: 'es' }],
       plugins: [
+        resolve({
+          preferBuiltins: true,
+        }),
+        json(),
         commonjs(),
         typescript({
           module: 'NodeNext',
           tsconfig: path.join(projectPath, './tsconfig.build.json'),
           outputToFilesystem: true,
         }),
+        swc({
+          swc: {
+            jsc: {
+              experimental: {
+                keepImportAssertions: true,
+                emitAssertForImportAttributes: false,
+              },
+              parser: {
+                syntax: 'typescript',
+                tsx: true,
+                decorators: true,
+              },
+              keepClassNames: true,
+            },
+            minify: false,
+          },
+        }),
       ],
     };
 
     const outputOption: OutputOptions = {
-      sourcemap: argv.sourcemap,
       file: path.join(projectPath, 'dist/index.js'),
+      format: 'esm',
+      sourcemap: argv.sourcemap,
     };
 
     let bundle: RollupBuild | undefined;
