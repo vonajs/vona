@@ -1,4 +1,5 @@
 import binDev from './command/bin.dev.ts';
+import binTsc from './command/bin.tsc.ts';
 import createBean from './command/create.bean.ts';
 import createModule from './command/create.module.ts';
 import createSuite from './command/create.suite.ts';
@@ -19,6 +20,7 @@ export const commands = {
   },
   bin: {
     dev: binDev,
+    tsc: binTsc,
   },
   create: {
     suite: createSuite,
