@@ -13,6 +13,12 @@ function getCamelFromSnake(input){
   return toReturn.charAt(0).toLowerCase() + toReturn.slice(1);
 }
 %>
+<% for (const relativeName of moduleNames) {
+  const module=modules[relativeName];
+  const importName=getCamelFromSnake(relativeName);
+  const importClause=`import * as ${importName} from '${module.info.fullName}';\n`;
+  print(importClause);
+}%>
 const modules = {};
 
 <% for (const relativeName in modules) {
@@ -25,7 +31,7 @@ const modules = {};
     };
     const importName=getCamelFromSnake(relativeName);
     const importClause=`modules['${module.info.relativeName}'] = { 
-      resource: () => import('${module.info.fullName}'),
+      resource: ${importName},
       name: '${module.info.relativeName}',
       info: ${JSON.stringify(module.info,null,2)},
       root: '${process.env.META_MODE==='prod'?'':module.root.replaceAll('\\','\\\\')}',
