@@ -26,7 +26,7 @@
     "test": "npm run prerun && node ./scripts/egg-born-bin.js backend-test --flavor=normal",
     "cov": "npm run prerun && node ./scripts/egg-born-bin.js backend-cov --flavor=normal",
     "tsc": "npm run prerun && npm run vona :bin:tsc",
-    "build": "npm run prerun && npm run vona :bin:build",
+    "build": "npm run prerun && npm run vona :bin:build --flavor=normal",
     "start": "node ./scripts/egg-born-scripts.js backend-start --flavor=normal",
     "start:daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon --flavor=normal",
     "stop": "node ./scripts/egg-born-scripts.js backend-stop --flavor=normal",
