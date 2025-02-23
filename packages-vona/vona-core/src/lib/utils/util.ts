@@ -21,7 +21,17 @@ export interface IExecuteBeanCallback {
   (params: IExecuteBeanCallbackParams): Promise<any>;
 }
 
+export interface IModuleAssetSceneRecord {
+  cli: never;
+  static: never;
+  templates: never;
+}
+
+const SymbolProdRootPath = Symbol('SymbolProdRootPath');
+
 export class AppUtil extends BeanSimple {
+  private [SymbolProdRootPath]: string;
+
   instanceStarted(instanceName: string): boolean {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[instanceName];
   }
@@ -122,6 +132,29 @@ export class AppUtil extends BeanSimple {
       await fse.ensureDir(dir);
     }
     return dir;
+  }
+
+  get prodRootPath(): string {
+    if (!this.app.meta.isProd) throw new Error('only invoked in prod');
+    if (!this[SymbolProdRootPath]) {
+      this[SymbolProdRootPath] = import.meta.dirname;
+    }
+    return this[SymbolProdRootPath];
+  }
+
+  getAssetPathPhysical(
+    moduleName: ModuleInfo.IModuleInfo | string,
+    scene: keyof IModuleAssetSceneRecord,
+    assetPath: string | undefined,
+  ) {
+    if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
+    if (this.app.meta.isProd) {
+      return path.join(this.prodRootPath, scene, moduleName, assetPath || '');
+    } else {
+      const module = this.app.meta.modules[moduleName];
+      if (!module) throw new Error('module not found');
+      return path.join(module.root, scene, assetPath || '');
+    }
   }
 
   createError(data, returnObject?: boolean) {

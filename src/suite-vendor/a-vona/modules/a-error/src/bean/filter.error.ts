@@ -1,9 +1,9 @@
 import type { NextSync } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
 import fs from 'node:fs';
-import path from 'node:path';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
+import { __ThisModule__ } from '../.metadata/this.ts';
 
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
   logs: Record<number | string, boolean>;
@@ -124,7 +124,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
 
   private _getViewTemplate() {
     const fileTemplate =
-      this.scope.config.error.templatePath || path.join(this.scope.module.root, 'templates/onerror_page.mustache');
+      this.scope.config.error.templatePath || this.app.util.getAssetPathPhysical(__ThisModule__, 'templates', 'onerror_page.mustache');
     if (!__cacheViewTemplates[fileTemplate]) {
       __cacheViewTemplates[fileTemplate] = fs.readFileSync(fileTemplate, 'utf8');
     }

@@ -1,4 +1,4 @@
-import type { Next } from 'vona';
+import type { Next, VonaContext } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
 import assert from 'node:assert';
 import { existsSync, mkdirSync } from 'node:fs';
@@ -117,7 +117,7 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
   }
 }
 
-function getFullPath(ctx, dir, filename, _options) {
+function getFullPath(ctx: VonaContext, dir, filename, _options) {
   const parts = filename.split(path.sep);
   const wordFirst = parts.shift();
   // public
@@ -131,8 +131,8 @@ function getFullPath(ctx, dir, filename, _options) {
   const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
   const module = ctx.app.meta.modules[moduleRelativeName];
   if (!module) return null;
-  const staticPath = path.join(module.root, 'static');
-  const fullPath = path.normalize(path.join(staticPath, parts.join(path.sep)));
+  const staticPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static', parts.join(path.sep));
+  const fullPath = path.normalize(staticPath);
   // files that can be accessd should be under options.dir
   if (fullPath.indexOf(staticPath) !== 0) return null;
   return fullPath;

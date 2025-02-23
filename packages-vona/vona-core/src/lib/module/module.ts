@@ -5,9 +5,6 @@ export class ModuleTools extends BeanSimple {
   async prepare(): Promise<Record<string, IModule>> {
     const app = this.app;
     const modules = app.options.modulesMeta.modules;
-    if (app.meta.isProd) {
-      // todo: change module.root
-    }
     const modulesArray = app.options.modulesMeta.moduleNames.map(relativeName => modules[relativeName]);
     app.meta.modules = modules;
     app.meta.modulesArray = modulesArray;
