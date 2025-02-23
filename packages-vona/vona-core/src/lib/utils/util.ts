@@ -149,7 +149,7 @@ export class AppUtil extends BeanSimple {
   ) {
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     if (this.app.meta.isProd) {
-      return path.join(this.prodRootPath, scene, moduleName, assetPath || '');
+      return path.join(this.prodRootPath, 'assets', scene, moduleName, assetPath || '');
     } else {
       const module = this.app.meta.modules[moduleName];
       if (!module) throw new Error('module not found');
