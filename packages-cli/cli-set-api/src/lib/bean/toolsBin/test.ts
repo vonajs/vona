@@ -1,6 +1,7 @@
 import os from 'node:os';
 import { run } from 'node:test';
 import { tap } from 'node:test/reporters';
+import { closeApp, createApp } from 'vona-mock';
 
 const argv = process.argv.slice(2);
 const coverage = argv[0] === 'true';
@@ -28,10 +29,11 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       cwd: projectPath,
       globPatterns: patterns,
       setup: async () => {
-        console.log('setup:', new Date());
+        await createApp(projectPath);
       },
     } as any)
-      .on('test:summary', () => {
+      .on('test:summary', async () => {
+        await closeApp();
         resolve(undefined);
       })
       .compose(tap)

@@ -1,52 +1,39 @@
 import type { IModuleInfo } from '@cabloy/module-info';
-import type { BaseMockApplication } from 'egg-mock';
-import type { VonaApplication, VonaContext } from 'vona';
+import type { VonaApplication } from 'vona-core';
+import path from 'node:path';
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
-import _Bundle from 'egg-mock/bootstrap.js';
-import { cast } from 'vona';
-
-type TypeMockCabloyApplication<T, C> = BaseMockApplication<T, C> & VonaApplication;
-export interface MockCabloyApplication extends TypeMockCabloyApplication<VonaApplication, VonaContext> {}
 
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
-let Bundle = globalThis.__egg_born_mock;
-if (!Bundle) {
-  Bundle = globalThis.__egg_born_mock = _Bundle;
-
-  // eslint-disable-next-line
-  before(async function () {
-    const app = cast<VonaApplication>(Bundle.app);
-    // wait ready
-    await Bundle.app.ready();
-    // session
-    // Bundle.app.mockSession({});
-    // wait app started
-    await app.meta.waitAppStarted();
-    // restore
-    // Bundle.mock.restore();
-  });
-
-  // eslint-disable-next-line
-  after(async function () {
-    await Bundle.app.close();
-  });
+export async function createApp(projectPath: string) {
+  if (!globalThis.__app__) {
+    const testFile = path.join(projectPath, '.vona/test.ts');
+    const testInstance = await import(testFile);
+    globalThis.__app__ = await testInstance.getApp();
+  }
+  return globalThis.__app__;
 }
 
-export const app = cast<MockCabloyApplication>(Bundle.app);
-export const mock = Bundle.mock;
-export const mm = Bundle.mm;
+export async function closeApp() {
+  if (globalThis.__app__) {
+    await globalThis.__app__.meta.close();
+  }
+}
+
+export const app: VonaApplication = globalThis.__app__;
 
 export function mockPath(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app = cast<VonaApplication>(Bundle.app);
+  const app: VonaApplication = globalThis.__app__;
   return app.util.combineApiPath(moduleInfo.relativeName, path, false, true);
 }
+
 export function mockUrl(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app = cast<VonaApplication>(Bundle.app);
+  const app: VonaApplication = globalThis.__app__;
   return app.util.combineApiPath(moduleInfo.relativeName, path, true, true);
 }
+
 export function mockModuleInfo(): IModuleInfo {
   return parseModuleInfo(ParseModuleNameLevel)!;
 }

@@ -107,6 +107,7 @@ export class AppMeta extends BeanSimple {
   private async _closeInner() {
     // set appClosed first
     this.appClosed = true;
+    // todo: close server
     // hook: appClosed
     await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClosed');
     // need not call process.exit

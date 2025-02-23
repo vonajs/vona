@@ -38,8 +38,7 @@
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
     "@cabloy/module-info-pro": "workspace:^",
-    "@types/mocha": "^10.0.1",
-    "egg-mock": "^5.10.9"
+    "vona-core": "workspace:^"
   },
   "clean-package": {
     "indent": 2,
