@@ -64,7 +64,7 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
       {
         maxAge: this.app.meta.isProd ? 31536000 : 0,
         buffer: !!this.app.meta.isProd,
-        dir: path.join(this.app.options.projectPath, '.app/public'),
+        dir: this.app.config.server.publicDir,
       },
       options,
     );

@@ -162,6 +162,6 @@ export class ServiceStartup extends BeanBase {
     // redis
     await this.$scope.redis.service.redisClient.clearAllData();
     // .app/public
-    await fse.remove(path.join(this.app.options.projectPath, '.app/public/1'));
+    await fse.remove(path.join(this.app.config.server.publicDir, '1'));
   }
 }
