@@ -1,4 +1,5 @@
 import assert from 'node:assert';
+import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
 describe('broadcast.test.ts', () => {

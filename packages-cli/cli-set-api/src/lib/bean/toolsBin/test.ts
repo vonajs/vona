@@ -1,12 +1,13 @@
 import os from 'node:os';
+import path from 'node:path';
 import { run } from 'node:test';
 import { tap } from 'node:test/reporters';
-import { closeApp, createApp } from 'vona-mock';
 
 const argv = process.argv.slice(2);
 const coverage = argv[0] === 'true';
 const projectPath = argv[1];
-const patterns = (argv[2] || '').split(',');
+// const patterns = (argv[2] || '').split(',');
+const patterns = ['src/suite-vendor/vona-test/modules/vona-test/test/bean.test.ts'];
 
 await testRun(coverage, projectPath, patterns);
 
@@ -39,4 +40,19 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       .compose(tap)
       .pipe(process.stdout);
   });
+}
+
+export async function createApp(projectPath: string) {
+  if (!globalThis.__app__) {
+    const testFile = path.join(projectPath, '.vona/test.ts');
+    const testInstance = await import(testFile);
+    globalThis.__app__ = await testInstance.getApp();
+  }
+  return globalThis.__app__;
+}
+
+export async function closeApp() {
+  if (globalThis.__app__) {
+    await globalThis.__app__.meta.close();
+  }
 }

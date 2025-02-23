@@ -71,7 +71,6 @@
     "lodash": "^4.17.21",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
-    "vona-mock": "workspace:^",
     "vona-shared": "workspace:^"
   },
   "devDependencies": {

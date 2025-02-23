@@ -551,9 +551,6 @@ importers:
       rollup:
         specifier: ^4.34.8
         version: 4.34.8
-      vona-mock:
-        specifier: workspace:^
-        version: link:../../packages-vona/vona-mock
       vona-shared:
         specifier: workspace:^
         version: link:../../packages-vona/vona-shared
