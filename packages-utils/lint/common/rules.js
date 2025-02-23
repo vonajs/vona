@@ -8,6 +8,7 @@ export const rules = {
   'n/prefer-global/process': 'off',
   'unicorn/error-message': 'off',
   'antfu/if-newline': 'off',
+  'antfu/no-top-level-await': 'off',
   'antfu/top-level-function': 'off',
   'import/no-duplicates': 'off',
   'eslint-comments/no-unlimited-disable': 'off',
