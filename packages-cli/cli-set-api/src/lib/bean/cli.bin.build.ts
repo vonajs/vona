@@ -59,7 +59,7 @@ export class CliBinBuild extends BeanCliBase {
       const module = modulesMeta.modules[relativeName];
       if (!module.package.files) continue;
       for (const scene of module.package.files) {
-        if (['dist', 'test'].includes(scene)) continue;
+        if (['dist', 'cli', 'test'].includes(scene)) continue;
         const scenePath = path.join(module.root, scene);
         if (fse.existsSync(scenePath)) {
           const destPath = path.join(assetsPath, scene, relativeName);
