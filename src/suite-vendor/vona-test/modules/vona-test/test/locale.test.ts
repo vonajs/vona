@@ -1,4 +1,5 @@
 import assert from 'node:assert';
+import { describe, it } from 'node:test';
 import { app, mockModuleInfo } from 'vona-mock';
 import { __ThisModule__ } from '../src/.metadata/this.ts';
 

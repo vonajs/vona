@@ -1,3 +1,4 @@
+import { describe, it } from 'node:test';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
 

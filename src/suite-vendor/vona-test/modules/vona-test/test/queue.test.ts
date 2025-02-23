@@ -1,3 +1,4 @@
+import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
 describe('queue.test.ts', () => {

@@ -1,4 +1,5 @@
 import assert from 'node:assert';
+import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
 import { cast, MixinClass, OmitClass, PartialClass, PickClass } from 'vona';
 import { app } from 'vona-mock';
