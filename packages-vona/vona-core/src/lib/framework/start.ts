@@ -52,7 +52,7 @@ export class Start {
   async _start_appStarted() {
     const app = this.app;
     app.meta.appStarted = true;
-    // event: appReady
+    // event: appStarted
     app.emit(EnumAppEvent.AppStarted);
     // hook: appStarted
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
