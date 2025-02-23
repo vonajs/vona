@@ -5,7 +5,7 @@ const argv = process.argv.slice(2);
 
 await testRun(argv[0]);
 
-async function testRun(_projectPath: string) {
+async function testRun(projectPath: string) {
   return new Promise(resolve => {
     run({
       isolation: 'none',
@@ -13,8 +13,8 @@ async function testRun(_projectPath: string) {
       // only: false,
       // coverage:false,
       // files: ['src/suite-vendor/vona-test/modules/vona-test/test/bean.test.ts'],
-      cwd: _projectPath,
-      globPatterns: ['**/*.test.ts'],
+      cwd: projectPath,
+      globPatterns: ['.assets/test/*.test.ts'],
       setup: async () => {
       },
     } as any)
