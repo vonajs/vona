@@ -1,5 +1,6 @@
 import { CliBinBuild } from './bean/cli.bin.build.ts';
 import { CliBinDev } from './bean/cli.bin.dev.ts';
+import { CliBinTest } from './bean/cli.bin.test.ts';
 import { CliBinTsc } from './bean/cli.bin.tsc.ts';
 import { CliCreateBean } from './bean/cli.create.bean.ts';
 import { CliCreateModule } from './bean/cli.create.module.ts';
@@ -18,6 +19,7 @@ export const beans = {
   'default.list': CliDefaultList,
   'bin.build': CliBinBuild,
   'bin.dev': CliBinDev,
+  'bin.test': CliBinTest,
   'bin.tsc': CliBinTsc,
   'create.suite': CliCreateSuite,
   'create.bean': CliCreateBean,
