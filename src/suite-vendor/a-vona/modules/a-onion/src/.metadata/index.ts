@@ -1,4 +1,4 @@
-/** service: end */
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -29,15 +29,18 @@ declare module 'vona' {
     onion: BeanOnion;
   }
 }
-/** bean: end */
-/** service: begin */
-export * from '../service/onion_.ts';
+/** service: end */
+/** main: begin */
+export * from '../main.ts';
 declare module 'vona-module-a-web' {
 
 }
 declare module 'vona-module-a-onion' {
 
 }
+/** bean: end */
+/** service: begin */
+export * from '../service/onion_.ts';
 
 @Scope()
 export class ScopeModuleAOnion extends BeanScopeBase {}
