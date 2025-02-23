@@ -36,17 +36,34 @@ export class CliBinTest extends BeanCliBase {
     await this._run(projectPath, modulesMeta);
   }
 
-  async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
+  async _run(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
+    // globs
+    const patterns = this._combineTestPatterns(projectPath, modulesMeta);
+    // testFile
     let testFile = path.join(import.meta.dirname, './toolsBin/test.ts');
     if (!fse.existsSync(testFile)) {
       testFile = path.join(import.meta.dirname, './toolsBin/test.js');
     }
+    // run
     await this.helper.spawnExe({
       cmd: 'node',
-      args: ['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, 'ssss'],
+      args: ['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, patterns.join(',')],
       options: {
         cwd: projectPath,
       },
     });
+  }
+
+  _combineTestPatterns(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
+    const patterns: string[] = [];
+    for (const moduleName in modulesMeta.modules) {
+      const module = modulesMeta.modules[moduleName];
+      const testDir = path.join(module.root, 'test');
+      if (fse.existsSync(testDir)) {
+        const relativePath = path.relative(projectPath, module.root);
+        patterns.push(`${relativePath}/test/**/*.ts`);
+      }
+    }
+    return patterns;
   }
 }
