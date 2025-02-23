@@ -56,14 +56,16 @@ export async function generateEntryFiles(
   }
 
   async function __generateApp() {
-    // src
-    const fileSrc = resolveTemplatePath('app.ejs');
-    const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'app.ts');
-    await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
-    const vars = {
-      appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/backend/config/monkey.ts')),
-    };
-    await copyTemplateFile(fileSrc, fileDest, vars);
+    const templates = [['app.ejs', 'app.ts'], ['test.ejs', 'test.ts']];
+    for (const [templateSrc, templateDest] of templates) {
+      const fileSrc = resolveTemplatePath(templateSrc);
+      const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, templateDest);
+      await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
+      const vars = {
+        appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/backend/config/monkey.ts')),
+      };
+      await copyTemplateFile(fileSrc, fileDest, vars);
+    }
   }
 
   async function __generateModulesMeta() {
