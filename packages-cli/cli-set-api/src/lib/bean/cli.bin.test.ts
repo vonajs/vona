@@ -8,6 +8,7 @@ import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
+    coverage?: boolean;
     flavor?: VonaMetaFlavor;
   }
 }
@@ -37,6 +38,7 @@ export class CliBinTest extends BeanCliBase {
   }
 
   async _run(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
+    const { argv } = this.context;
     // globs
     const patterns = this._combineTestPatterns(projectPath, modulesMeta);
     // testFile
@@ -47,7 +49,7 @@ export class CliBinTest extends BeanCliBase {
     // run
     await this.helper.spawnExe({
       cmd: 'node',
-      args: ['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, patterns.join(',')],
+      args: ['--experimental-transform-types', '--loader=ts-node/esm', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')],
       options: {
         cwd: projectPath,
       },
