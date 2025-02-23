@@ -24,7 +24,7 @@
     "dev": "npm run prerun && npm run vona :bin:dev --workers=2 --flavor=normal",
     "dev:one": "npm run prerun && npm run vona :bin:dev --workers=1 --flavor=normal",
     "test": "npm run prerun && npm run vona :bin:test --flavor=normal",
-    "cov": "npm run prerun && node ./scripts/egg-born-bin.js backend-cov --flavor=normal",
+    "cov": "npm run prerun && npm run vona :bin:test --coverage --flavor=normal",
     "tsc": "npm run prerun && npm run vona :bin:tsc",
     "build": "npm run prerun && npm run vona :bin:build --flavor=normal",
     "start": "node ./dist/app.js",

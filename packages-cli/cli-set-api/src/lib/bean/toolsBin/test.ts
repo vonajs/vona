@@ -24,6 +24,7 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       concurrency,
       only: process.env.TEST_ONLY === 'true',
       coverage,
+      coverageIncludeGlobs: ['src/**/*.ts'],
       cwd: projectPath,
       globPatterns: patterns,
       setup: async () => {
