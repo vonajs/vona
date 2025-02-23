@@ -126,6 +126,7 @@ export interface IModulePackage {
   title: string;
   description: string;
   author: string;
+  files: string[];
   dependencies: Record<string, string>;
 }
 

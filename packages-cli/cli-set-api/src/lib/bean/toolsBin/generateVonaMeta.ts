@@ -15,5 +15,6 @@ export async function generateVonaMeta(configMeta: VonaConfigMeta, configOptions
   // ok
   return {
     env,
+    modulesMeta,
   };
 }

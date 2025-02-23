@@ -1,3 +1,4 @@
+import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { OutputOptions, RollupBuild, RollupOptions } from 'rollup';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
@@ -8,6 +9,7 @@ import commonjsImport from '@rollup/plugin-commonjs';
 import jsonImport from '@rollup/plugin-json';
 import resolveImport from '@rollup/plugin-node-resolve';
 import terserImport from '@rollup/plugin-terser';
+import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
@@ -45,9 +47,26 @@ export class CliBinBuild extends BeanCliBase {
       runtimeDir: '.vona',
       workers: argv.workers,
     };
-    await generateVonaMeta(configMeta, configOptions);
+    const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await rimraf(path.join(projectPath, 'dist'));
     await this._rollup(projectPath);
+    await this._assets(projectPath, modulesMeta);
+  }
+
+  async _assets(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
+    const assetsPath = path.join(projectPath, 'dist/assets');
+    for (const relativeName in modulesMeta.modules) {
+      const module = modulesMeta.modules[relativeName];
+      if (!module.package.files) continue;
+      for (const scene of module.package.files) {
+        if (['dist', 'test'].includes(scene)) continue;
+        const scenePath = path.join(module.root, scene);
+        if (fse.existsSync(scenePath)) {
+          const destPath = path.join(assetsPath, scene, relativeName);
+          await fse.copy(scenePath, destPath);
+        }
+      }
+    }
   }
 
   async _rollup(projectPath: string) {
