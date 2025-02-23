@@ -24,10 +24,14 @@ const modules = {};
 <% for (const relativeName in modules) {
     const module=modules[relativeName];
     const _package={
-      version:module.package.version,
-      title:module.package.title,
-      description:module.package.description,
-      author:module.package.author,
+      version: module.package.version,
+      title: module.package.title,
+      description: module.package.description,
+      author: module.package.author,
+      vonaModule: {
+        capabilities: module.package.vonaModule?.capabilities,
+        fileVersion: module.package.vonaModule?.fileVersion,
+      },
     };
     const importName=getCamelFromSnake(relativeName);
     const importClause=`modules['${module.info.relativeName}'] = { 
