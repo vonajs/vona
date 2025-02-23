@@ -42,7 +42,9 @@ export class ServiceStartup extends BeanBase {
       );
     } else {
       // all instances
-      const instances = await this.bean.instance.list();
+      const instances = await this.bean.executor.newCtx(async () => {
+        return await this.bean.instance.list();
+      });
       for (const instance of instances) {
         const instanceName = instance.name;
         // need not await
