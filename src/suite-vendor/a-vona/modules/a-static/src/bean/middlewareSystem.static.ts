@@ -131,8 +131,8 @@ function getFullPath(ctx: VonaContext, dir, filename, _options) {
   const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
   const module = ctx.app.meta.modules[moduleRelativeName];
   if (!module) return null;
-  const staticPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static', parts.join(path.sep));
-  const fullPath = path.normalize(staticPath);
+  const staticPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static');
+  const fullPath = path.normalize(path.join(staticPath, parts.join(path.sep)));
   // files that can be accessd should be under options.dir
   if (fullPath.indexOf(staticPath) !== 0) return null;
   return fullPath;

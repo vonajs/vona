@@ -145,7 +145,7 @@ export class AppUtil extends BeanSimple {
   getAssetPathPhysical(
     moduleName: ModuleInfo.IModuleInfo | string,
     scene: keyof IModuleAssetSceneRecord,
-    assetPath: string | undefined,
+    assetPath?: string,
   ) {
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     if (this.app.meta.isProd) {
