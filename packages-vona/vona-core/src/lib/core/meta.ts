@@ -122,8 +122,8 @@ export class AppMeta extends BeanSimple {
     // todo: container dispose
     this.app.bean.dispose();
     // handles
-    if (this.app.meta.isTest) {
-      await sleep(1000);
+    if (process.env.TEST_WHYISNODERUNNING === 'true' && this.app.meta.isTest) {
+      await sleep(2000);
       const handles = (process as any)._getActiveHandles();
       if (handles.length > 0) {
         whyIsNodeRunning();

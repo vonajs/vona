@@ -22,6 +22,7 @@ declare global {
       SERVER_WORKERS: string | undefined;
       SERVER_LISTEN_HOSTNAME: string | undefined;
       SERVER_LISTEN_PORT: string | undefined;
+      TEST_WHYISNODERUNNING: string | undefined;
     }
   }
 }
