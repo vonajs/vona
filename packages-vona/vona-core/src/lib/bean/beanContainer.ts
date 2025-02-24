@@ -14,12 +14,12 @@ import { BeanBase } from './beanBase.ts';
 import { SymbolBeanFullName } from './beanBaseSimple.ts';
 import { BeanSimple } from './beanSimple.ts';
 
-const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
-const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');
-const SymbolCacheAopChainsKey = Symbol('Bean#SymbolCacheAopChainsKey');
-const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
+const SymbolProxyMagic = Symbol('SymbolProxyMagic');
+const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
+const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
+const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
 const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
-export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
+export const SymbolProxyDisable = Symbol('SymbolProxyDisable');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export interface BeanContainer extends IBeanRecordGlobal {}
@@ -44,6 +44,19 @@ export class BeanContainer {
   protected constructor(app: VonaApplication, ctx: VonaContext | undefined) {
     this.app = app;
     this.ctx = ctx;
+  }
+
+  /** @internal */
+  public dispose() {
+    const beanInstances = this[SymbolBeanContainerInstances];
+    for (const prop in beanInstances) {
+      if (prop.startsWith('$$')) continue;
+      const beanInstance = cast(beanInstances[prop]);
+      if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
+        beanInstance.__dispose__();
+      }
+    }
+    this[SymbolBeanContainerInstances] = {};
   }
 
   /** get specific module's scope */
