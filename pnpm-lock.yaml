@@ -381,9 +381,9 @@ importers:
       vona-module-a-development:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-development
-      vue-eslint-parser:
-        specifier: ^9.4.2
-        version: 9.4.3(eslint@9.21.0)
+      why-is-node-running:
+        specifier: ^3.2.2
+        version: 3.2.2
 
   packages-cli/cabloy-cli:
     dependencies:
@@ -551,9 +551,15 @@ importers:
       rollup:
         specifier: ^4.34.8
         version: 4.34.8
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@swc/core@1.10.18(@swc/helpers@0.5.15))(@types/node@22.13.5)(typescript@5.7.3)
       vona-shared:
         specifier: workspace:^
         version: link:../../packages-vona/vona-shared
+      why-is-node-running:
+        specifier: ^3.2.2
+        version: 3.2.2
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -9756,6 +9762,11 @@ packages:
   which@4.0.0:
     resolution: {integrity: sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg==}
     engines: {node: ^16.13.0 || >=18.0.0}
+    hasBin: true
+
+  why-is-node-running@3.2.2:
+    resolution: {integrity: sha512-NKUzAelcoCXhXL4dJzKIwXeR8iEVqsA0Lq6Vnd0UXvgaKbzVo4ZTHROF2Jidrv+SgxOQ03fMinnNhzZATxOD3A==}
+    engines: {node: '>=20.11'}
     hasBin: true
 
   wide-align@1.1.5:
@@ -19742,6 +19753,8 @@ snapshots:
   which@4.0.0:
     dependencies:
       isexe: 3.1.1
+
+  why-is-node-running@3.2.2: {}
 
   wide-align@1.1.5:
     dependencies:

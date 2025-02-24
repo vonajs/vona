@@ -71,7 +71,9 @@
     "lodash": "^4.17.21",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
-    "vona-shared": "workspace:^"
+    "ts-node": "^10.9.2",
+    "vona-shared": "workspace:^",
+    "why-is-node-running": "^3.2.2"
   },
   "devDependencies": {
     "clean-package": "^2.2.0"

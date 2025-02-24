@@ -97,6 +97,6 @@
     "typedoc": "^0.25.13",
     "typescript": "^5.7.3",
     "vona-mock": "workspace:^",
-    "vue-eslint-parser": "^9.4.2"
+    "why-is-node-running": "^3.2.2"
   }
 }

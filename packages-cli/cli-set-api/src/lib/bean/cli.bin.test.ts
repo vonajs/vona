@@ -49,7 +49,7 @@ export class CliBinTest extends BeanCliBase {
     // run
     await this.helper.spawnExe({
       cmd: 'node',
-      args: ['--experimental-transform-types', '--loader=ts-node/esm', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')],
+      args: ['--experimental-transform-types', '--loader=ts-node/esm', '--import=why-is-node-running/include', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')],
       options: {
         cwd: projectPath,
       },
