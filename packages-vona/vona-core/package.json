@@ -62,7 +62,8 @@
     "retry": "^0.13.1",
     "semver": "^7.3.7",
     "uuid": "^11.0.3",
-    "vona-shared": "workspace:^"
+    "vona-shared": "workspace:^",
+    "why-is-node-running": "^3.2.2"
   },
   "devDependencies": {
     "@types/koa": "^2.15.0",

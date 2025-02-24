@@ -6,7 +6,9 @@ import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
 import { promisify } from 'node:util';
+import { sleep } from '@cabloy/utils';
 import * as celjs from 'cel-js';
+import whyIsNodeRunning from 'why-is-node-running';
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
@@ -119,6 +121,14 @@ export class AppMeta extends BeanSimple {
     await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClosed');
     // todo: container dispose
     this.app.bean.dispose();
+    // handles
+    if (this.app.meta.isTest) {
+      await sleep(1000);
+      const handles = (process as any)._getActiveHandles();
+      if (handles.length > 0) {
+        whyIsNodeRunning();
+      }
+    }
     // need not call process.exit
   }
 }

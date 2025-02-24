@@ -1016,6 +1016,9 @@ importers:
       vona-shared:
         specifier: workspace:^
         version: link:../vona-shared
+      why-is-node-running:
+        specifier: ^3.2.2
+        version: 3.2.2
     devDependencies:
       '@types/koa':
         specifier: ^2.15.0
