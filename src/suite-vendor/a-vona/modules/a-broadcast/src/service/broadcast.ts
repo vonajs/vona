@@ -29,6 +29,11 @@ export class ServiceBroadcast extends BeanBase {
     });
   }
 
+  protected __dispose__() {
+    this.__pub?.quit();
+    this.__sub?.quit();
+  }
+
   emit<DATA>(info: IBroadcastJobContext<DATA>) {
     info.callerId = this.__callerId;
     this.__pub.publish(this.__channelName, JSON.stringify(info));
