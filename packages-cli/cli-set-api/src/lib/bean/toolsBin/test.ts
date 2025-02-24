@@ -7,7 +7,6 @@ const argv = process.argv.slice(2);
 const coverage = argv[0] === 'true';
 const projectPath = argv[1];
 const patterns = (argv[2] || '').split(',');
-// const patterns = ['src/suite-vendor/vona-test/modules/vona-test/test/bean.test.ts'];
 
 let taskCounter = 0;
 
