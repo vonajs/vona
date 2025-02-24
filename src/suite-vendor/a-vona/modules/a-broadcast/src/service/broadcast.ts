@@ -30,8 +30,8 @@ export class ServiceBroadcast extends BeanBase {
   }
 
   protected __dispose__() {
-    this.__pub?.quit();
-    this.__sub?.quit();
+    this.__pub?.disconnect(false);
+    this.__sub?.disconnect(false);
   }
 
   emit<DATA>(info: IBroadcastJobContext<DATA>) {

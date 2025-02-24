@@ -8,10 +8,6 @@ import { Service } from 'vona-module-a-web';
 export class ServiceRedlock extends BeanBase {
   private _redlockDefault: Redlock;
 
-  protected __dispose__() {
-    this._redlockDefault?.quit();
-  }
-
   public async lock<RESULT>(
     resource: string,
     fn: FunctionAsync<RESULT>,
