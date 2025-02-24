@@ -5,7 +5,7 @@ import { Api, Param, User } from 'vona-module-a-openapi';
 import { userName } from 'vona-module-a-user';
 import { Controller, Get } from 'vona-module-a-web';
 
-@Controller('passport')
+@Controller({ path: 'passport', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerPassport extends BeanBase {
   @Get('echo/:name')
