@@ -92,10 +92,10 @@ export class AppMeta extends BeanSimple {
         reject(this.appStartError);
       }
       // listen
-      this.app.on(EnumAppEvent.AppStarted, () => {
+      this.app.once(EnumAppEvent.AppStarted, () => {
         resolve(true);
       });
-      this.app.on(EnumAppEvent.AppStartError, err => {
+      this.app.once(EnumAppEvent.AppStartError, err => {
         reject(err);
       });
     });
