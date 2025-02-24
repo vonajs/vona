@@ -54,6 +54,14 @@ export class ServiceQueue extends BeanBase {
     this._workers = {};
   }
 
+  async clearQueues() {
+    for (const queueKey in this._queues) {
+      const _queue = this._queues[queueKey];
+      await _queue.queue.close();
+      await _queue.queueEvents.close();
+    }
+  }
+
   _createWorker<DATA>(info: IQueueJobContext<DATA>, queueKey: string) {
     const app = this.app;
     // worker
