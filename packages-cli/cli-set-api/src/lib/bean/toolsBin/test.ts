@@ -20,6 +20,7 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
   } else {
     concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
   }
+  let taskCounter = 0;
   return new Promise(resolve => {
     run({
       isolation: 'none',
@@ -37,6 +38,19 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
         await closeApp();
         resolve(undefined);
       })
+      .on('test:dequeue', () => {
+        taskCounter++;
+      })
+      .on('test:fail', async () => {
+        if (--taskCounter === 0) {
+          closeApp();
+        }
+      })
+      .on('test:complete', async () => {
+        if (--taskCounter === 0) {
+          closeApp();
+        }
+      })
       .compose(tap)
       .pipe(process.stdout);
   });
@@ -52,7 +66,12 @@ export async function createApp(projectPath: string) {
 }
 
 export async function closeApp() {
-  if (globalThis.__app__) {
-    await globalThis.__app__.meta.close();
-  }
+  setTimeout(async() => {
+    if (globalThis.__app__) {
+      await globalThis.__app__.meta.close();
+      delete globalThis.__app__;
+      let handles = process._getActiveHandles();
+      console.log('---------handles:', handles.length);
+    }  
+  }, 500);
 }
