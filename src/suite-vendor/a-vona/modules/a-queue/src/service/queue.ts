@@ -49,7 +49,6 @@ export class ServiceQueue extends BeanBase {
   async clearWorkers() {
     for (const queueKey in this._workers) {
       const _worker = this._workers[queueKey];
-      (_worker.workerOptions.connection as Redis).disconnect(false);
       await _worker.worker.close();
     }
     this._workers = {};
@@ -58,8 +57,6 @@ export class ServiceQueue extends BeanBase {
   async clearQueues() {
     for (const queueKey in this._queues) {
       const _queue = this._queues[queueKey];
-      (_queue.options.connection as Redis).disconnect(false);
-      (_queue.queueEventsOptions.connection as Redis).disconnect(false);
       await _queue.queue.close();
       await _queue.queueEvents.close();
     }
@@ -86,7 +83,7 @@ export class ServiceQueue extends BeanBase {
     }
 
     // create work
-    const connectionWorker = app.bean.redis.get('queue').duplicate();
+    const connectionWorker = app.bean.redis.get('queue');
     const _workerOptions = Object.assign({}, this.scope.config.worker, workerOptions, {
       prefix,
       connection: connectionWorker,
@@ -150,14 +147,14 @@ export class ServiceQueue extends BeanBase {
     const queueOptions = queueConfig?.options?.queue;
 
     // create queue
-    const connectionQueue: Bull.ConnectionOptions = app.bean.redis.get('queue').duplicate();
+    const connectionQueue: Bull.ConnectionOptions = app.bean.redis.get('queue');
     const _queueOptions = Object.assign({}, queueOptions, { prefix, connection: connectionQueue });
     _queue.config = queueConfig;
     _queue.options = _queueOptions;
     _queue.queue = new Bull.Queue(queueKey, _queueOptions);
 
     // create events
-    const connectionEvents: Bull.ConnectionOptions = app.bean.redis.get('queue').duplicate();
+    const connectionEvents: Bull.ConnectionOptions = app.bean.redis.get('queue');
     const _queueEventsOptions = { prefix, connection: connectionEvents };
     _queue.queueEventsOptions = _queueEventsOptions;
     _queue.queueEvents = new Bull.QueueEvents(queueKey, _queueEventsOptions);
