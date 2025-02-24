@@ -28,6 +28,7 @@ export interface IQueueJobContext<DATA> {
 export interface IQueueWork {
   redlock: Redlock;
   worker: Bull.Worker;
+  workerOptions: Bull.WorkerOptions;
 }
 export interface IQueueWorks {
   [queueKey: string]: IQueueWork;
@@ -38,6 +39,7 @@ export interface IQueueQueue {
   options: Bull.QueueOptions;
   queue: Bull.Queue;
   queueEvents: Bull.QueueEvents;
+  queueEventsOptions: Bull.QueueEventsOptions;
 }
 
 export interface IQueueQueues {

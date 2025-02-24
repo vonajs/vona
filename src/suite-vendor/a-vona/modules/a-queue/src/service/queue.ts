@@ -1,3 +1,4 @@
+import type { Redis } from 'ioredis';
 import type {
   IDecoratorQueueOptions,
   IQueueCallbacks,
@@ -48,7 +49,7 @@ export class ServiceQueue extends BeanBase {
   async clearWorkers() {
     for (const queueKey in this._workers) {
       const _worker = this._workers[queueKey];
-      await _worker.redlock?.quit();
+      (_worker.workerOptions.connection as Redis).disconnect(false);
       await _worker.worker.close();
     }
     this._workers = {};
@@ -57,6 +58,8 @@ export class ServiceQueue extends BeanBase {
   async clearQueues() {
     for (const queueKey in this._queues) {
       const _queue = this._queues[queueKey];
+      (_queue.options.connection as Redis).disconnect(false);
+      (_queue.queueEventsOptions.connection as Redis).disconnect(false);
       await _queue.queue.close();
       await _queue.queueEvents.close();
     }
@@ -88,6 +91,7 @@ export class ServiceQueue extends BeanBase {
       prefix,
       connection: connectionWorker,
     });
+    _worker.workerOptions = _workerOptions;
     _worker.worker = new Bull.Worker(
       queueKey,
       async job => {
@@ -154,7 +158,9 @@ export class ServiceQueue extends BeanBase {
 
     // create events
     const connectionEvents: Bull.ConnectionOptions = app.bean.redis.get('queue').duplicate();
-    _queue.queueEvents = new Bull.QueueEvents(queueKey, { prefix, connection: connectionEvents });
+    const _queueEventsOptions = { prefix, connection: connectionEvents };
+    _queue.queueEventsOptions = _queueEventsOptions;
+    _queue.queueEvents = new Bull.QueueEvents(queueKey, _queueEventsOptions);
     _queue.queueEvents.on('completed', ({ jobId, returnvalue }) => {
       this._callCallback(jobId, undefined, returnvalue);
     });
