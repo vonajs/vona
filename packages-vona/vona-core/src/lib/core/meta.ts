@@ -42,6 +42,7 @@ export class AppMeta extends BeanSimple {
   appStarted: boolean;
   appStartError: Error;
   //
+  appClose: boolean;
   appClosed: boolean;
 
   protected __init__() {
@@ -105,11 +106,17 @@ export class AppMeta extends BeanSimple {
   }
 
   private async _closeInner() {
-    // set appClosed first
+    // close server
+    this.app.server.close();
+    // appClose
+    this.appClose = true;
+    // hook: appClose
+    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClose');
+    // appClosed
     this.appClosed = true;
-    // todo: close server
     // hook: appClosed
     await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClosed');
+    // todo: container dispose
     // need not call process.exit
   }
 }

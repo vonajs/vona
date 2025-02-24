@@ -12,7 +12,7 @@ export class MiddlewareSystemAppReady extends BeanBase implements IMiddlewareSys
   async execute(_options: IMiddlewareSystemOptionsAppReady, next: Next) {
     // check appReady
     if (!this.ctx.innerAccess) {
-      if (this.app.meta.appClosed) this.app.throw(423);
+      if (this.app.meta.appClose) this.app.throw(423);
       await this.scope.service.instance.checkAppReady();
     }
     // next
