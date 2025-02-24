@@ -3,7 +3,7 @@ import { BeanElectionBase } from 'vona-module-a-election';
 import { Meta } from 'vona-module-a-meta';
 
 export interface MetaElection {
-  elect: (resource: 'development', fn: Function, options?: IElectionElectOptions) => void;
+  obtain: (resource: 'development', fn: Function, options?: IElectionElectOptions) => void;
 }
 
 @Meta()

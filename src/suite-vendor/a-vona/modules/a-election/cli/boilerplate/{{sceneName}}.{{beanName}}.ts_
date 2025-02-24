@@ -2,7 +2,7 @@ import { Meta } from 'vona-module-a-meta';
 import { BeanElectionBase, IElectionElectOptions } from 'vona-module-a-election';
 
 export interface Meta<%=argv.beanNameCapitalize%> {
-  elect(resource: 'name', fn: Function, options?: IElectionElectOptions): void;
+  obtain(resource: 'name', fn: Function, options?: IElectionElectOptions): void;
 }
 
 @Meta()

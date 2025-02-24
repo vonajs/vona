@@ -4,11 +4,21 @@ import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceElection extends BeanBase {
-  public elect(resource: string, fn: Function, options?: IElectionElectOptions) {
-    const intervalId = setInterval(async () => {
+  _intervalId: any = null;
+  _isLeader: boolean = false;
+
+  protected __dispose__() {
+    if (this._intervalId) {
+      clearInterval(this._intervalId);
+      this._intervalId = null;
+    }
+  }
+
+  public obtain(resource: string, fn: Function, options?: IElectionElectOptions) {
+    this._intervalId = setInterval(async () => {
       const tickets = options?.tickets ?? 1;
       const lockResource = `election.${resource}`;
-      const isLeader = await this.$scope.redlock.service.redlock.lock(
+      this._isLeader = await this.$scope.redlock.service.redlock.lock(
         lockResource,
         async () => {
           // leaders
@@ -39,9 +49,27 @@ export class ServiceElection extends BeanBase {
         },
         options,
       );
-      if (isLeader) {
-        clearInterval(intervalId);
-        fn();
+      if (this._isLeader) {
+        if (this._intervalId) {
+          clearInterval(this._intervalId);
+          this._intervalId = null;
+        }
+        const self = this;
+        async function release() {
+          await self.$scope.redlock.service.redlock.lock(
+            lockResource,
+            async () => {
+              const leaders = (await self.scope.cacheRedis.election.get('leaders')) || [];
+              const index = leaders.indexOf(self.bean.worker.id);
+              if (index > -1) {
+                leaders.splice(index, 1);
+                await self.scope.cacheRedis.election.set(leaders, 'leaders');
+              }
+            },
+            options,
+          );
+        }
+        fn(release);
       }
     }, this.$scope.worker.config.worker.alive.timeout);
   }

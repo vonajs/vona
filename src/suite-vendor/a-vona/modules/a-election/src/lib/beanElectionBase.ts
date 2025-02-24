@@ -4,9 +4,9 @@ import { BeanBase, SymbolModuleBelong } from 'vona';
 
 export class BeanElectionBase extends BeanBase {
   protected __get__(prop: string) {
-    if (prop === 'elect') {
+    if (prop === 'obtain') {
       return (resource: string, fn: FunctionAsync<any>, options?: IElectionElectOptions) => {
-        return this.$scope.election.service.election.elect(this._prepareResource(resource), fn, options);
+        return this.$scope.election.service.election.obtain(this._prepareResource(resource), fn, options);
       };
     }
   }
