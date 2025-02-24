@@ -33,7 +33,7 @@ export class ServiceDatabaseClient extends BeanBase {
   }
 
   protected __dispose__() {
-    this._knex.destroy();
+    this._knex?.destroy();
   }
 
   private _extractClientName(clientName?: string) {

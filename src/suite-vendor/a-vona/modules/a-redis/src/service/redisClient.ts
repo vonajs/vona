@@ -17,6 +17,10 @@ export class ServiceRedisClient extends BeanBase {
     this._redisInstance = this._createClient(clientName);
   }
 
+  protected __dispose__() {
+    this._redisInstance?.disconnect(false);
+  }
+
   private _createClient(clientName?: string): Redis {
     clientName = clientName || 'default';
     const configRedis = this.app.config.redis;
