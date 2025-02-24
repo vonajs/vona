@@ -48,7 +48,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "lru-cache": "^8.0.4",
+    "lru-cache": "^11.0.2",
     "object-hash": "^3.0.0"
   },
   "clean-package": {
