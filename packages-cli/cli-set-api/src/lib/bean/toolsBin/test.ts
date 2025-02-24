@@ -6,8 +6,10 @@ import { tap } from 'node:test/reporters';
 const argv = process.argv.slice(2);
 const coverage = argv[0] === 'true';
 const projectPath = argv[1];
-// const patterns = (argv[2] || '').split(',');
-const patterns = ['src/suite-vendor/vona-test/modules/vona-test/test/bean.test.ts'];
+const patterns = (argv[2] || '').split(',');
+// const patterns = ['src/suite-vendor/vona-test/modules/vona-test/test/bean.test.ts'];
+
+let taskCounter = 0;
 
 await testRun(coverage, projectPath, patterns);
 
@@ -20,7 +22,6 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
   } else {
     concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
   }
-  let taskCounter = 0;
   return new Promise(resolve => {
     run({
       isolation: 'none',
@@ -42,21 +43,17 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
         taskCounter++;
       })
       .on('test:fail', async () => {
-        if (--taskCounter === 0) {
-          closeApp();
-        }
+        checkClose();
       })
       .on('test:complete', async () => {
-        if (--taskCounter === 0) {
-          closeApp();
-        }
+        checkClose();
       })
       .compose(tap)
       .pipe(process.stdout);
   });
 }
 
-export async function createApp(projectPath: string) {
+async function createApp(projectPath: string) {
   if (!globalThis.__app__) {
     const testFile = path.join(projectPath, '.vona/test.ts');
     const testInstance = await import(testFile);
@@ -65,13 +62,19 @@ export async function createApp(projectPath: string) {
   return globalThis.__app__;
 }
 
-export async function closeApp() {
-  setTimeout(async() => {
-    if (globalThis.__app__) {
-      await globalThis.__app__.meta.close();
-      delete globalThis.__app__;
-      let handles = process._getActiveHandles();
-      console.log('---------handles:', handles.length);
-    }  
-  }, 500);
+async function closeApp() {
+  if (globalThis.__app__) {
+    await globalThis.__app__.meta.close();
+    delete globalThis.__app__;
+    let handles = process._getActiveHandles();
+    console.log('---------handles:', handles.length);
+  }
+}
+
+async function checkClose() {
+  setTimeout(() => {
+    if (--taskCounter === 0) {
+      closeApp();
+    }
+  }, 1000);
 }
