@@ -5,6 +5,7 @@ import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
+import { promisify } from 'node:util';
 import * as celjs from 'cel-js';
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
@@ -107,7 +108,7 @@ export class AppMeta extends BeanSimple {
 
   private async _closeInner() {
     // close server
-    this.app.server.close();
+    await promisify(this.app.server.close).call(this.app.server);
     // appClose
     this.appClose = true;
     // hook: appClose
