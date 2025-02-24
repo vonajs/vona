@@ -65,8 +65,6 @@ async function closeApp() {
   if (globalThis.__app__) {
     await globalThis.__app__.meta.close();
     delete globalThis.__app__;
-    let handles = process._getActiveHandles();
-    console.log('---------handles:', handles.length);
   }
 }
 
