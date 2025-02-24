@@ -34,7 +34,7 @@ export class BeanOnion extends BeanBase {
   }
 
   public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
-    return checkMeta(meta, this.app.meta);
+    return checkMeta(meta,this.app.config.meta);
   }
 }
 
