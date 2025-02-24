@@ -60,6 +60,7 @@ export class ServiceQueue extends BeanBase {
       await _queue.queue.close();
       await _queue.queueEvents.close();
     }
+    this._queues = {};
   }
 
   _createWorker<DATA>(info: IQueueJobContext<DATA>, queueKey: string) {
