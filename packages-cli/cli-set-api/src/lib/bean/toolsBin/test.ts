@@ -3,6 +3,7 @@ import path from 'node:path';
 import { run } from 'node:test';
 import eggBornUtils from 'egg-born-utils';
 import { tap } from 'node:test/reporters';
+import { closeApp } from 'vona-core';
 import { resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
@@ -58,17 +59,7 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
 }
 
 async function createApp(projectPath: string) {
-  if (!globalThis.__app__) {
-    const testFile = path.join(projectPath, '.vona/test.ts');
-    const testInstance = await import(testFile);
-    globalThis.__app__ = await testInstance.getApp();
-  }
-  return globalThis.__app__;
-}
-
-async function closeApp() {
-  if (globalThis.__app__) {
-    await globalThis.__app__.meta.close();
-    delete globalThis.__app__;
-  }
+  const testFile = path.join(projectPath, '.vona/test.ts');
+  const testInstance = await import(testFile);
+  await testInstance.getApp();
 }

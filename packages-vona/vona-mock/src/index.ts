@@ -1,20 +1,19 @@
 import type { IModuleInfo } from '@cabloy/module-info';
 import type { VonaApplication } from 'vona-core';
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
+import { useApp } from 'vona-core';
 
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
-export const app: VonaApplication = globalThis.__app__;
+export const app: VonaApplication = useApp();
 
 export function mockPath(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app: VonaApplication = globalThis.__app__;
   return app.util.combineApiPath(moduleInfo.relativeName, path, false, true);
 }
 
 export function mockUrl(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app: VonaApplication = globalThis.__app__;
   return app.util.combineApiPath(moduleInfo.relativeName, path, true, true);
 }
 
