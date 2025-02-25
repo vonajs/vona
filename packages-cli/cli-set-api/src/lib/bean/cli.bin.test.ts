@@ -31,7 +31,7 @@ export class CliBinTest extends BeanCliBase {
     const configOptions: VonaBinConfigOptions = {
       appDir: projectPath,
       runtimeDir: '.vona',
-      workers: argv.workers,
+      workers: 1,
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
@@ -54,7 +54,7 @@ export class CliBinTest extends BeanCliBase {
     if (process.env.TEST_WHYISNODERUNNING === 'true') {
       args.push('--import=why-is-node-running/include');
     }
-    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')]);
+    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
     await this.helper.spawnExe({
       cmd: 'node',
       args,

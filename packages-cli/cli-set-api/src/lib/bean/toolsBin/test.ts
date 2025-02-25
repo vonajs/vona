@@ -10,13 +10,13 @@ import { closeApp } from 'vona-core';
 import { pathToHref, resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
-const coverage = argv[0] === 'true';
-const projectPath = argv[1];
+const projectPath = argv[0];
+const coverage = argv[1] === 'true';
 const patterns = (argv[2] || '').split(',');
 
-await testRun(coverage, projectPath, patterns);
+await testRun(projectPath, coverage, patterns);
 
-async function testRun(coverage: boolean, projectPath: string, patterns: string[]) {
+async function testRun(projectPath: string, coverage: boolean, patterns: string[]) {
   // files
   const files = await eggBornUtils.tools.globbyAsync(patterns, {
     cwd: projectPath,

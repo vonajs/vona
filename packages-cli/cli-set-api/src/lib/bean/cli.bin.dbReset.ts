@@ -19,10 +19,10 @@ export class CliBinDbReset extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     // test
-    await this._test(projectPath);
+    await this._dbReset(projectPath);
   }
 
-  async _test(projectPath: string) {
+  async _dbReset(projectPath: string) {
     const { argv } = this.context;
     const mode: VonaMetaMode = 'test';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
@@ -30,30 +30,21 @@ export class CliBinDbReset extends BeanCliBase {
     const configOptions: VonaBinConfigOptions = {
       appDir: projectPath,
       runtimeDir: '.vona',
-      workers: argv.workers,
+      workers: 1,
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
   }
 
-  async _run(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
-    const { argv } = this.context;
-    // globs
-    const patterns = this._combineTestPatterns(projectPath, modulesMeta);
+  async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
     // testFile
-    let testFile = path.join(import.meta.dirname, './toolsBin/test.ts');
+    let testFile = path.join(import.meta.dirname, './toolsBin/dbReset.ts');
     if (!fse.existsSync(testFile)) {
-      testFile = path.join(import.meta.dirname, './toolsBin/test.js');
+      testFile = path.join(import.meta.dirname, './toolsBin/dbReset.js');
     }
     // run
     let args: string[] = [];
-    if (argv.coverage) {
-      args.push('--experimental-test-coverage');
-    }
-    if (process.env.TEST_WHYISNODERUNNING === 'true') {
-      args.push('--import=why-is-node-running/include');
-    }
-    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')]);
+    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath]);
     await this.helper.spawnExe({
       cmd: 'node',
       args,
