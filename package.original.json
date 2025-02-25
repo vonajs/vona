@@ -20,7 +20,7 @@
   "scripts": {
     "vona": "node ./packages-cli/cli/src/bin/vona.ts",
     "cli": "node ./scripts/egg-born-bin.js cli",
-    "db:reset": "npm run prerun && node ./scripts/egg-born-bin.js backend-db-reset -- --flavor=normal",
+    "db:reset": "npm run prerun && npm run vona :bin:dbReset -- --flavor=normal",
     "dev": "npm run prerun && npm run vona :bin:dev -- --workers=2 --flavor=normal",
     "dev:one": "npm run prerun && npm run vona :bin:dev -- --workers=1 --flavor=normal",
     "test": "npm run prerun && npm run vona :bin:test -- --flavor=normal",
