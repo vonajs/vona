@@ -47,9 +47,14 @@ export class CliBinTest extends BeanCliBase {
       testFile = path.join(import.meta.dirname, './toolsBin/test.js');
     }
     // run
+    let args: string[] = [];
+    if (argv.coverage) {
+      args.push('--experimental-test-coverage');
+    }
+    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', '--import=why-is-node-running/include', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')]);
     await this.helper.spawnExe({
       cmd: 'node',
-      args: ['--experimental-transform-types', '--loader=ts-node/esm', '--import=why-is-node-running/include', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')],
+      args,
       options: {
         cwd: projectPath,
       },
