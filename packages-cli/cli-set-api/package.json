@@ -27,7 +27,8 @@
   },
   "files": [
     "cli",
-    "dist"
+    "dist",
+    "templates"
   ],
   "clean-package": {
     "indent": 2,

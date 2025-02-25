@@ -2,6 +2,7 @@ import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { resolveTemplatePath } from '../utils.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -36,13 +37,9 @@ export class CliToolsDeps extends BeanCliBase {
     return eggBornUtils.tools._getVonaPath(projectPath);
   }
 
-  _resolveTemplatePath(file: string) {
-    return new URL(path.join('../../../templates', file), import.meta.url);
-  }
-
   async _generateTypeProjectFile(projectPath: string) {
     const projectMode = this._getProjectMode(projectPath);
-    const fileTemplate = this._resolveTemplatePath(`_tsconfig_${projectMode}.json`);
+    const fileTemplate = resolveTemplatePath(`config/_tsconfig_${projectMode}.json`);
     const fileConfig = path.join(projectPath, 'tsconfig.json');
     if (!fse.existsSync(fileConfig)) {
       await fse.copyFile(fileTemplate, fileConfig);

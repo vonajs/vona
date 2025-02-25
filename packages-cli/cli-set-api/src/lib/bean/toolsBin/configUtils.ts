@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
-import { getEnvMeta, getNodeEnv } from './utils.ts';
+import { getEnvMeta, getNodeEnv } from '../../utils.ts';
 
 export function createConfigUtils(
   configMeta: VonaConfigMeta,
