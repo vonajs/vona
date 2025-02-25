@@ -7,6 +7,7 @@ import http from 'node:http';
 import KoaApplication from 'koa';
 import { BeanContainer } from '../bean/beanContainer.ts';
 import { AppUtil } from '../utils/util.ts';
+import { VonaAsyncLocalStorage } from './asyncLocalStorage.ts';
 import { contextBase } from './context.ts';
 import { AppMeta } from './meta.ts';
 
@@ -19,6 +20,7 @@ export class VonaApplication extends KoaApplication {
   util: AppUtil;
   meta: AppMeta;
   server: Server;
+  ctxStorage: VonaAsyncLocalStorage<VonaContext>;
 
   constructor(options: VonaApplicationOptions) {
     const koaOptions: KoaApplicationOptions = {
@@ -28,7 +30,7 @@ export class VonaApplication extends KoaApplication {
       subdomainOffset: options.config.server.subdomainOffset,
       proxyIpHeader: options.config.proxy.ipHeaders,
       maxIpsCount: options.config.proxy.maxIpsCount,
-      asyncLocalStorage: true,
+      asyncLocalStorage: false,
     };
     super(koaOptions);
     this.options = options;
@@ -36,6 +38,8 @@ export class VonaApplication extends KoaApplication {
     this.bean = BeanContainer.create(this, undefined);
     this.util = this.bean._newBean(AppUtil);
     this.meta = this.bean._newBean(AppMeta);
+    // asyncLocalStorage
+    this.ctxStorage = new VonaAsyncLocalStorage(this);
     // app.context
     for (const key of Reflect.ownKeys(contextBase)) {
       const desc = Object.getOwnPropertyDescriptor(contextBase, key)!;
@@ -51,7 +55,7 @@ export class VonaApplication extends KoaApplication {
     return this.options.name;
   }
 
-  createAnonymousContext(req?: any) {
+  createAnonymousContext(req?: any): VonaContext {
     const request = {
       headers: {
         'host': '127.0.0.1',
@@ -81,16 +85,6 @@ export class VonaApplication extends KoaApplication {
       }
     }
     const response = new http.ServerResponse(request as any);
-    return this.createContext(request as any, response);
-  }
-
-  handleRequest(ctx, fnMiddleware) {
-    try {
-      this.meta.ctxCounter.increment();
-      // @ts-ignore ignore
-      return super.handleRequest(ctx, fnMiddleware);
-    } finally {
-      this.meta.ctxCounter.decrement();
-    }
+    return this.createContext(request as any, response) as unknown as VonaContext;
   }
 }

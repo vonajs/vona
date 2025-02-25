@@ -60,7 +60,7 @@ export class BeanExecutor extends BeanBase {
       ctx.instanceName = instanceName;
       // instance
       if (instanceName !== undefined && instanceName !== null) {
-        ctx.instance = await this.bean.instance.get(instanceName);
+        ctx.instance = (await this.bean.instance.get(instanceName))!;
         // start instance
         if (options?.instance) {
           await this.$scope.instance.service.instance.checkAppReadyInstance(true);
