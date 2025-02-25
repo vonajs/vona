@@ -56,7 +56,7 @@ export async function generateEntryFiles(
   }
 
   async function __generateApp() {
-    const templates = [['app.ejs', 'app.ts'], ['test.ejs', 'test.ts']];
+    const templates = [['app/app.ejs', 'app.ts'], ['app/test.ejs', 'test.ts']];
     for (const [templateSrc, templateDest] of templates) {
       const fileSrc = resolveTemplatePath(templateSrc);
       const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, templateDest);
@@ -73,7 +73,7 @@ export async function generateEntryFiles(
     const { modules, modulesArray } = modulesMeta;
     const moduleNames = modulesArray.map(item => item.info.relativeName);
     // src
-    const fileSrc = resolveTemplatePath('vona-modules-meta.ejs');
+    const fileSrc = resolveTemplatePath('app/vona-modules-meta.ejs');
     const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'modules-meta.ts');
     await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
     await copyTemplateFile(fileSrc, fileDest, { modules, moduleNames });
