@@ -1,4 +1,5 @@
 export const rules = {
+  'test/no-only-tests': 'off',
   'test/no-import-node-test': 'off',
   'jsdoc/check-alignment': 'off',
   'no-extend-native': ['error', { exceptions: ['Set'] }],
