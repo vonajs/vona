@@ -83,4 +83,9 @@ export class VonaApplication extends KoaApplication {
     const response = new http.ServerResponse(request as any);
     return this.createContext(request as any, response);
   }
+
+  handleRequest(ctx, fnMiddleware) {
+    // @ts-ignore ignore
+    return super.handleRequest(ctx, fnMiddleware);
+  }
 }

@@ -12,12 +12,14 @@ import whyIsNodeRunning from 'why-is-node-running';
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
+import { CtxCounter } from './ctxCounter.ts';
 import { appMetadata } from './metadata.ts';
 import { appResource } from './resource.ts';
 
 const SymbolClosePromise = Symbol('SymbolClosePromise');
 
 export class AppMeta extends BeanSimple {
+  ctxCounter: CtxCounter;
   isProd: boolean;
   isTest: boolean;
   isLocal: boolean;
@@ -49,6 +51,9 @@ export class AppMeta extends BeanSimple {
   appClosed: boolean;
 
   protected __init__() {
+    // ctxCounter
+    this.ctxCounter = new CtxCounter();
+
     // appMonkey
     this.appMonkey = this.app.options.AppMonkey;
 
