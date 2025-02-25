@@ -4,6 +4,7 @@ import type { OutputOptions, RollupBuild, RollupOptions } from 'rollup';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import aliasImport from '@rollup/plugin-alias';
 import babelImport from '@rollup/plugin-babel';
 import commonjsImport from '@rollup/plugin-commonjs';
 import jsonImport from '@rollup/plugin-json';
@@ -20,6 +21,7 @@ const resolve = resolveImport as any as typeof resolveImport.default;
 const json = jsonImport as any as typeof jsonImport.default;
 const babel = babelImport as any as typeof babelImport.default;
 const terser = terserImport as any as typeof terserImport.default;
+const alias = aliasImport as any as typeof aliasImport.default;
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -70,7 +72,14 @@ export class CliBinBuild extends BeanCliBase {
   }
 
   async _rollup(projectPath: string) {
+    const aliasEntries: aliasImport.Alias[] = [];
+    for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious']) {
+      aliasEntries.push({ find: name, replacement: 'vona-shared' });
+    }
     const plugins = [
+      alias({
+        entries: aliasEntries,
+      }),
       resolve({
         preferBuiltins: true,
       }),
