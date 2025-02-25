@@ -6,8 +6,8 @@ import TableClass from 'cli-table3';
 import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
 import { lcov, tap } from 'node:test/reporters';
-import { closeApp } from 'vona-core';
-import { pathToHref, resolveTemplatePath } from '../../utils.ts';
+import { closeApp, createTestApp } from 'vona-core';
+import { resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
 const projectPath = argv[0];
@@ -65,7 +65,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       cwd: projectPath,
       files,
       setup: async () => {
-        await createApp(projectPath);
+        await createTestApp(projectPath);
       },
     } as any)
       .on('test:coverage', data => {
@@ -74,9 +74,9 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       .on('test:summary', async () => {
         resolve(undefined);
       })
-      .on('test:pass', t => {
+      .on('test:pass', async t => {
         if (t.name === '---done---') {
-          closeApp();
+          await closeApp();
         }
       });
     if (coverage) {
@@ -90,12 +90,6 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
         .pipe(process.stdout);
     }
   });
-}
-
-async function createApp(projectPath: string) {
-  const testFile = path.join(projectPath, '.vona/test.ts');
-  const testInstance = await import(pathToHref(testFile));
-  await testInstance.getApp();
 }
 
 function outputCoverageReport(totals: CoverageTotals) {
