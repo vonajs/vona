@@ -2,6 +2,7 @@ import { createWriteStream } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
+import TableClass from 'cli-table3';
 import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
 import { lcov, tap } from 'node:test/reporters';
@@ -56,7 +57,9 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
         await createApp(projectPath);
       },
     } as any)
-      .on('test:coverage', async () => {})
+      .on('test:coverage', data => {
+        outputCoverageReport(data.summary.totals);
+      })
       .on('test:summary', async () => {
         resolve(undefined);
       })
@@ -83,3 +86,55 @@ async function createApp(projectPath: string) {
   const testInstance = await import(testFile);
   await testInstance.getApp();
 }
+
+function outputCoverageReport(totals: CoverageTotals) {
+  // table
+  const table = new TableClass({
+    head: ['', 'Total', 'Covered', 'Percent'],
+    colWidths: [15, 15, 15, 25],
+  });
+  table.push(['Lines', totals.totalLineCount, totals.coveredLineCount, totals.coveredLinePercent]);
+  table.push(['Branches', totals.totalBranchCount, totals.coveredBranchCount, totals.coveredBranchPercent]);
+  table.push(['Functions', totals.totalFunctionCount, totals.coveredFunctionCount, totals.coveredFunctionPercent]);
+  // eslint-disable-next-line
+  console.log(table.toString());
+}
+
+interface CoverageTotals {
+  /**
+   * The total number of lines.
+   */
+  totalLineCount: number;
+  /**
+   * The total number of branches.
+   */
+  totalBranchCount: number;
+  /**
+   * The total number of functions.
+   */
+  totalFunctionCount: number;
+  /**
+   * The number of covered lines.
+   */
+  coveredLineCount: number;
+  /**
+   * The number of covered branches.
+   */
+  coveredBranchCount: number;
+  /**
+   * The number of covered functions.
+   */
+  coveredFunctionCount: number;
+  /**
+   * The percentage of lines covered.
+   */
+  coveredLinePercent: number;
+  /**
+   * The percentage of branches covered.
+   */
+  coveredBranchPercent: number;
+  /**
+   * The percentage of functions covered.
+   */
+  coveredFunctionPercent: number;
+};
