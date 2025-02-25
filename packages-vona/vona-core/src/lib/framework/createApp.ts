@@ -7,6 +7,20 @@ import { deepExtend } from '../utils/util.ts';
 import { Start } from './start.ts';
 
 export async function createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
+  if (!globalThis.__app__) {
+    globalThis.__app__ = await __createApp({
+      modulesMeta,
+      locales,
+      config,
+      env,
+      AppMonkey,
+    });
+  }
+  await globalThis.__app__.meta.waitAppStarted();
+  return globalThis.__app__;
+}
+
+async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
   // env
   prepareEnv(env);
   // appInfo
