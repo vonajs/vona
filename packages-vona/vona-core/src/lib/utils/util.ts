@@ -3,7 +3,6 @@ import type { IModule } from '@cabloy/module-info';
 import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import * as Path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
@@ -369,5 +368,6 @@ export function polyfillDispose(instance: any) {
 }
 
 export function pathToHref(fileName: string): string {
-  return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
+  return pathToFileURL(fileName).href;
+  // return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }

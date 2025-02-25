@@ -7,7 +7,7 @@ import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
 import { lcov, tap } from 'node:test/reporters';
 import { closeApp } from 'vona-core';
-import { resolveTemplatePath } from '../../utils.ts';
+import { pathToHref, resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
 const coverage = argv[0] === 'true';
@@ -44,9 +44,15 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       coverageIncludeGlobs = coverageIncludeGlobs.concat(['src/module/**/*.ts', 'src/suite/**/*.ts']);
     }
   }
-  const coverageExcludeGlobs=[
-    'src/module/*/cli/**/*.ts','src/module/*/templates/**/*.ts', 'src/suite/*/modules/*/cli/**/*.ts','src/suite/*/modules/*/templates/**/*.ts',
-    'src/module-vendor/*/cli/**/*.ts','src/module-vendor/*/templates/**/*.ts', 'src/suite-vendor/*/modules/*/cli/**/*.ts','src/suite-vendor/*/modules/*/templates/**/*.ts'
+  const coverageExcludeGlobs = [
+    'src/module/*/cli/**/*.ts',
+    'src/module/*/templates/**/*.ts',
+    'src/suite/*/modules/*/cli/**/*.ts',
+    'src/suite/*/modules/*/templates/**/*.ts',
+    'src/module-vendor/*/cli/**/*.ts',
+    'src/module-vendor/*/templates/**/*.ts',
+    'src/suite-vendor/*/modules/*/cli/**/*.ts',
+    'src/suite-vendor/*/modules/*/templates/**/*.ts',
   ];
   return new Promise(resolve => {
     const testStream = run({
@@ -88,7 +94,7 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
 
 async function createApp(projectPath: string) {
   const testFile = path.join(projectPath, '.vona/test.ts');
-  const testInstance = await import(testFile);
+  const testInstance = await import(pathToHref(testFile));
   await testInstance.getApp();
 }
 

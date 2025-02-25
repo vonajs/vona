@@ -2,6 +2,7 @@ import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
 
@@ -61,4 +62,8 @@ export async function loadJSONFile(fileName: string) {
 
 export async function saveJSONFile(fileName: string, json: object) {
   await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
+}
+
+export function pathToHref(fileName: string): string {
+  return pathToFileURL(fileName).href;
 }
