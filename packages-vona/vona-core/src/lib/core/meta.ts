@@ -120,6 +120,8 @@ export class AppMeta extends BeanSimple {
     this.appClose = true;
     // hook: appClose
     await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClose');
+    // ctx counter
+    await this.app.meta.ctxCounter.awaitUntilZero();
     // appClosed
     this.appClosed = true;
     // hook: appClosed

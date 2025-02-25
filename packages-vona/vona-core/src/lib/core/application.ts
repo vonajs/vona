@@ -85,7 +85,12 @@ export class VonaApplication extends KoaApplication {
   }
 
   handleRequest(ctx, fnMiddleware) {
-    // @ts-ignore ignore
-    return super.handleRequest(ctx, fnMiddleware);
+    try {
+      this.meta.ctxCounter.increment();
+      // @ts-ignore ignore
+      return super.handleRequest(ctx, fnMiddleware);
+    } finally {
+      this.meta.ctxCounter.decrement();
+    }
   }
 }
