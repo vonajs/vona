@@ -125,7 +125,7 @@ export class AppMeta extends BeanSimple {
     if (process.env.TEST_WHYISNODERUNNING === 'true' && this.app.meta.isTest) {
       await sleep(2000);
       const handles = (process as any)._getActiveHandles();
-      if (handles.length > 0) {
+      if (handles.length > 3) {
         whyIsNodeRunning();
       }
     }

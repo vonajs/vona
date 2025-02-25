@@ -1,18 +1,28 @@
 import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
+import eggBornUtils from 'egg-born-utils';
 import { tap } from 'node:test/reporters';
+import { resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
 const coverage = argv[0] === 'true';
 const projectPath = argv[1];
 const patterns = (argv[2] || '').split(',');
 
-let taskCounter = 0;
-
 await testRun(coverage, projectPath, patterns);
 
 async function testRun(coverage: boolean, projectPath: string, patterns: string[]) {
+  // files
+  const files = await eggBornUtils.tools.globbyAsync(patterns, {
+    cwd: projectPath,
+  });
+  if (process.env.TEST_ONLY === 'true') {
+    files.push(resolveTemplatePath('test/done-only.test.ts'));
+  } else {
+    files.push(resolveTemplatePath('test/done.test.ts'));
+  }
+  // concurrency
   let concurrency = 1;
   if (process.env.TEST_CONCURRENCY === 'true') {
     concurrency = os.cpus().length;
@@ -29,23 +39,18 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       coverage,
       coverageIncludeGlobs: ['src/**/*.ts'],
       cwd: projectPath,
-      globPatterns: patterns,
+      files,
       setup: async () => {
         await createApp(projectPath);
       },
     } as any)
       .on('test:summary', async () => {
-        await closeApp();
         resolve(undefined);
       })
-      .on('test:dequeue', () => {
-        taskCounter++;
-      })
-      .on('test:fail', async () => {
-        checkClose();
-      })
-      .on('test:complete', async () => {
-        checkClose();
+      .on('test:pass', t => {
+        if (t.name === '---done---') {
+          closeApp();
+        }
       })
       .compose(tap)
       .pipe(process.stdout);
@@ -66,12 +71,4 @@ async function closeApp() {
     await globalThis.__app__.meta.close();
     delete globalThis.__app__;
   }
-}
-
-async function checkClose() {
-  setTimeout(() => {
-    if (--taskCounter === 0) {
-      closeApp();
-    }
-  }, 1000);
 }
