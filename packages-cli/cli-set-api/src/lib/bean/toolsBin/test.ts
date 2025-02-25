@@ -1,8 +1,10 @@
+import { createWriteStream } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
 import eggBornUtils from 'egg-born-utils';
-import { tap } from 'node:test/reporters';
+import fse from 'fs-extra';
+import { lcov, tap } from 'node:test/reporters';
 import { closeApp } from 'vona-core';
 import { resolveTemplatePath } from '../../utils.ts';
 
@@ -33,7 +35,7 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
     concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
   }
   return new Promise(resolve => {
-    run({
+    const testStream = run({
       isolation: 'none',
       concurrency,
       only: process.env.TEST_ONLY === 'true',
@@ -52,9 +54,17 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
         if (t.name === '---done---') {
           closeApp();
         }
-      })
-      .compose(tap)
-      .pipe(process.stdout);
+      });
+    if (coverage) {
+      const reporterDir = path.join(projectPath, 'coverage');
+      fse.ensureDirSync(reporterDir);
+      const reporter = createWriteStream(path.join(reporterDir, 'lcov.info'));
+      testStream.compose(lcov)
+        .pipe(reporter);
+    } else {
+      testStream.compose(tap)
+        .pipe(process.stdout);
+    }
   });
 }
 
