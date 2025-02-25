@@ -44,6 +44,10 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       coverageIncludeGlobs = coverageIncludeGlobs.concat(['src/module/**/*.ts', 'src/suite/**/*.ts']);
     }
   }
+  const coverageExcludeGlobs=[
+    'src/module/*/cli/**/*.ts','src/module/*/templates/**/*.ts', 'src/suite/*/modules/*/cli/**/*.ts','src/suite/*/modules/*/templates/**/*.ts',
+    'src/module-vendor/*/cli/**/*.ts','src/module-vendor/*/templates/**/*.ts', 'src/suite-vendor/*/modules/*/cli/**/*.ts','src/suite-vendor/*/modules/*/templates/**/*.ts'
+  ];
   return new Promise(resolve => {
     const testStream = run({
       isolation: 'none',
@@ -51,6 +55,7 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
       only: process.env.TEST_ONLY === 'true',
       coverage,
       coverageIncludeGlobs,
+      coverageExcludeGlobs,
       cwd: projectPath,
       files,
       setup: async () => {
