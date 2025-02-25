@@ -1,4 +1,5 @@
 import { CliBinBuild } from './bean/cli.bin.build.ts';
+import { CliBinDbReset } from './bean/cli.bin.dbReset.ts';
 import { CliBinDev } from './bean/cli.bin.dev.ts';
 import { CliBinTest } from './bean/cli.bin.test.ts';
 import { CliBinTsc } from './bean/cli.bin.tsc.ts';
@@ -18,6 +19,7 @@ import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 export const beans = {
   'default.list': CliDefaultList,
   'bin.build': CliBinBuild,
+  'bin.dbReset': CliBinDbReset,
   'bin.dev': CliBinDev,
   'bin.test': CliBinTest,
   'bin.tsc': CliBinTsc,
