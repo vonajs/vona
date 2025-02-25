@@ -34,13 +34,22 @@ async function testRun(coverage: boolean, projectPath: string, patterns: string[
   } else {
     concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
   }
+  // coverage
+  let coverageIncludeGlobs: string[] = [];
+  if (coverage) {
+    if (fse.existsSync(path.join(projectPath, 'packages-vona/vona-core'))) {
+      coverageIncludeGlobs = coverageIncludeGlobs.concat(['packages-vona/vona-core', 'src/module-vendor/**/*.ts', 'src/suite-vendor/**/*.ts']);
+    } else {
+      coverageIncludeGlobs = coverageIncludeGlobs.concat(['src/module/**/*.ts', 'src/suite/**/*.ts']);
+    }
+  }
   return new Promise(resolve => {
     const testStream = run({
       isolation: 'none',
       concurrency,
       only: process.env.TEST_ONLY === 'true',
       coverage,
-      coverageIncludeGlobs: ['src/**/*.ts'],
+      coverageIncludeGlobs,
       cwd: projectPath,
       files,
       setup: async () => {
