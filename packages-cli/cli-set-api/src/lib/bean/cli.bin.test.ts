@@ -51,7 +51,10 @@ export class CliBinTest extends BeanCliBase {
     if (argv.coverage) {
       args.push('--experimental-test-coverage');
     }
-    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', '--import=why-is-node-running/include', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')]);
+    if (process.env.TEST_WHYISNODERUNNING === 'true') {
+      args.push('--import=why-is-node-running/include');
+    }
+    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, (!!argv.coverage).toString(), projectPath, patterns.join(',')]);
     await this.helper.spawnExe({
       cmd: 'node',
       args,
