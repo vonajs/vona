@@ -40,7 +40,7 @@ export function config(_app: VonaApplication) {
 }
 
 function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
-  return ctx.app.ctxStorage!.run(ctx as any, () => {
+  return ctx.app.ctxStorage.run(ctx as any, () => {
     const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as ServiceFilter;
     return beanFilter.performErrorFilters(err, method);
   });

@@ -33,7 +33,7 @@ export async function performActionInner<T = any>({
   // ctx
   const ctx = app.createContext(req, res) as unknown as VonaContext;
   // run
-  return await app.ctxStorage!.run(ctx as any, async () => {
+  return await app.ctxStorage.run(ctx as any, async () => {
     // locale
     Object.defineProperty(ctx, 'locale', {
       get() {
