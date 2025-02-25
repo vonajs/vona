@@ -11,7 +11,6 @@ import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
 import Boxen from 'boxen';
 import Chalk from 'chalk';
 import TableClass from 'cli-table3';
-import { build as esBuild } from 'esbuild';
 import fse from 'fs-extra';
 import gogocode from 'gogocode';
 import tmp from 'tmp';
@@ -298,21 +297,9 @@ export class LocalHelper {
   }
 
   async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
-    return await this.tempFile(
-      async fileTemp => {
-        // build
-        const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
-        await esBuild(esBuildConfig as any);
-        // load
-        const instance = await import(this._pathToHref(fileTemp));
-        return await fn(instance);
-      },
-      {
-        tmpdir: path.dirname(fileName),
-        prefix: '.temp-dynamic-',
-        postfix: '.mjs',
-      },
-    );
+    // load
+    const instance = await import(this._pathToHref(fileName));
+    return await fn(instance);
   }
 
   requireDynamic(file: string) {
@@ -351,19 +338,37 @@ export class LocalHelper {
     }
   }
 
-  private _createEsbuildConfig(fileSrc: string, fileDest: string) {
-    return {
-      platform: 'node',
-      format: 'esm',
-      bundle: true,
-      packages: 'external',
-      resolveExtensions: ['.mjs', '.js', '.mts', '.ts', '.json'],
-      entryPoints: [fileSrc],
-      outfile: fileDest,
-    };
-  }
-
   private _pathToHref(fileName: string): string {
-    return path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
+    return pathToFileURL(fileName).href;
   }
 }
+
+// async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
+//   return await this.tempFile(
+//     async fileTemp => {
+//       // build
+//       const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
+//       await esBuild(esBuildConfig as any);
+//       // load
+//       const instance = await import(this._pathToHref(fileTemp));
+//       return await fn(instance);
+//     },
+//     {
+//       tmpdir: path.dirname(fileName),
+//       prefix: '.temp-dynamic-',
+//       postfix: '.mjs',
+//     },
+//   );
+// }
+
+// private _createEsbuildConfig(fileSrc: string, fileDest: string) {
+//   return {
+//     platform: 'node',
+//     format: 'esm',
+//     bundle: true,
+//     packages: 'external',
+//     resolveExtensions: ['.mjs', '.js', '.mts', '.ts', '.json'],
+//     entryPoints: [fileSrc],
+//     outfile: fileDest,
+//   };
+// }
