@@ -27,21 +27,10 @@
     "cov": "npm run prerun && npm run vona :bin:test -- --coverage --flavor=normal",
     "tsc": "npm run prerun && npm run vona :bin:tsc",
     "build": "npm run prerun && npm run vona :bin:build -- --flavor=normal",
-    "bundle": "pkg",
     "start": "node ./dist/app.js",
     "prerun": "npm run vona :tools:deps",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
-  },
-  "pkg": {
-    "scripts": "dist/**/*.js",
-    "assets": [
-      "dist/assets"
-    ],
-    "targets": [
-      "node23-macos-arm64"
-    ],
-    "outputPath": "dist-bundle"
   },
   "pnpm": {
     "overrides": {
@@ -100,7 +89,6 @@
     "open": "^7.4.2",
     "ora": "^4.1.1",
     "p-map": "^3.0.0",
-    "pkg": "^5.8.1",
     "regenerator-runtime": "^0.14.1",
     "rimraf": "^5.0.5",
     "semver": "^7.6.0",

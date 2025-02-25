@@ -116,6 +116,8 @@ export class CliBinBuild extends BeanCliBase {
       // file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
       sourcemap: process.env.BUILD_SOURCEMAP === 'true',
+      // https://github.com/rollup/rollup/issues/4166
+      // inlineDynamicImports: true,
     };
 
     let bundle: RollupBuild | undefined;
