@@ -1,10 +1,9 @@
-import type { VonaApplication } from 'vona';
 import path from 'node:path';
 import { ProcessHelper } from '@cabloy/process-helper';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import fse from 'fs-extra';
-import { cast } from 'vona';
+import { cast, reloadApp } from 'vona';
 
 const __pathesWatch = [
   'src/backend/config',
@@ -18,7 +17,7 @@ const __pathesWatch = [
 const __pathesTsc = ['src/backend/config', 'src/backend/demo', 'packages-vona/vona'];
 const __pathesIgnore = ['/test/', '.test.ts'];
 
-export function developmentWatchDirs(app: VonaApplication) {
+export function developmentWatchDirs() {
   let watcherDevelopment: chokidar.FSWatcher | null = null;
 
   _register();
@@ -97,6 +96,7 @@ export function developmentWatchDirs(app: VonaApplication) {
       }
     }
     // reloadAll
-    await app.bean.worker.reloadAll();
+    // await app.bean.worker.reloadAll();
+    await reloadApp();
   }
 }

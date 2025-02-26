@@ -3,10 +3,12 @@ import type { VonaApplication } from 'vona';
 import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/bean.databaseDialectBase.ts';
 import type { IDatabaseClientDialectRecord } from '../types/database.ts';
 import knex from 'knex';
+import SchemaBuilder from 'knex/lib/schema/builder.js';
 import { cast } from 'vona';
 
 export function ExtendSchemaBuilder(app: VonaApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase', 'fetchIndexes'].forEach(method => {
+    delete SchemaBuilder.prototype[method];
     knex.SchemaBuilder.extend(method, async function (...args) {
       const client = cast<Knex.Client>(cast(this).client).config.client as keyof IDatabaseClientDialectRecord;
       const dialect = app.bean.database.getDialect(client);

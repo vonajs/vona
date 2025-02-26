@@ -9,7 +9,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
   async appStarted() {
     this.bean.scope(__ThisModule__).election.obtain('development', fn => {
       this._fnRelease = fn;
-      developmentWatchDirs(this.app);
+      developmentWatchDirs();
     });
   }
 
