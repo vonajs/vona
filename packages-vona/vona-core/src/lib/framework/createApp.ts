@@ -6,7 +6,9 @@ import { combineAppConfigDefault } from '../core/config.ts';
 import { deepExtend } from '../utils/util.ts';
 import { Start } from './start.ts';
 
-export async function createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
+export async function createApp(bootstrapOptions: BootstrapOptions) {
+  globalThis.__bootstrapOptions__ = bootstrapOptions;
+  const { modulesMeta, locales, config, env, AppMonkey } = bootstrapOptions;
   if (!globalThis.__app__) {
     globalThis.__app__ = await __createApp({
       modulesMeta,
