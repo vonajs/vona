@@ -1,5 +1,4 @@
 import path from 'node:path';
-import { ProcessHelper } from '@cabloy/process-helper';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import fse from 'fs-extra';
@@ -14,7 +13,6 @@ const __pathesWatch = [
   'src/suite-vendor',
   'packages-vona/vona',
 ];
-const __pathesTsc = ['src/backend/config', 'src/backend/demo', 'packages-vona/vona'];
 const __pathesIgnore = ['/test/', '.test.ts'];
 
 export function developmentWatchDirs() {
@@ -88,15 +86,8 @@ export function developmentWatchDirs() {
     // log
     // eslint-disable-next-line
     console.log(`[development] reload worker because ${info} changed`);
-    // tsc
-    if (extname !== '.mts') {
-      if (__pathesTsc.some(item => info.includes(item))) {
-        const processHelper = new ProcessHelper();
-        await processHelper.tsc();
-      }
-    }
     // reloadAll
     // await app.bean.worker.reloadAll();
-    await reloadApp();
+    reloadApp();
   }
 }
