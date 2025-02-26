@@ -46,6 +46,9 @@ export class CliBinDev extends BeanCliBase {
       });
       nodemon.on('quit', () => {
         resolve(undefined);
+      }).on('restart', files => {
+        // eslint-disable-next-line
+        console.log('App restarted due to: ', files);
       });
     });
     // await this.helper.spawnExe({
