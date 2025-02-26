@@ -7,16 +7,17 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
   if (cluster.isPrimary) {
     handleProcessMaster();
 
-    console.log(`Primary ${process.pid} is running`);
+    // console.log(`Primary ${process.pid} is running`);
 
     // Fork workers.
     for (let i = 0; i < workers; i++) {
       cluster.fork();
     }
 
-    cluster.on('exit', (worker, code, signal) => {
-      console.log(`worker ${worker.process.pid} died`, code, signal);
+    cluster.on('exit', (_worker, _code, _signal) => {
+      // console.log(`worker ${worker.process.pid} died`, code, signal);
       // should not kill master self by manual
+      // master -> worker, rather than worker -> master
       // if (cluster.workers && Object.keys(cluster.workers).length === 0) {
       //   process.kill(process.pid, 'SIGTERM');
       // }
@@ -24,6 +25,6 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
   } else {
     handleProcessWork();
     await createApp(bootstrapOptions);
-    console.log(`Worker ${process.pid} started`);
+    // console.log(`Worker ${process.pid} started`);
   }
 }

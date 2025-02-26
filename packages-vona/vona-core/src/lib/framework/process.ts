@@ -2,11 +2,11 @@ import { closeApp } from './useApp.ts';
 
 export function handleProcessWork() {
   process.once('SIGUSR2', async () => {
-    console.log('------------SIGUSR2');
+    // console.log('------------SIGUSR2');
     await closeApp(true);
   });
   process.once('SIGINT', async () => {
-    console.log('------------SIGINT');
+    // console.log('------------SIGINT');
     await closeApp(true);
   });
 }
