@@ -7,7 +7,7 @@ export function useApp() {
   return globalThis.__app__;
 }
 
-export async function closeApp() {
+export async function closeApp(terminate?: boolean) {
   while (globalThis.__closing__) {
     await sleep(50);
   }
@@ -19,6 +19,9 @@ export async function closeApp() {
     }
   } finally {
     globalThis.__closing__ = false;
+  }
+  if (terminate) {
+    process.kill(process.pid, 'SIGTERM');
   }
 }
 
