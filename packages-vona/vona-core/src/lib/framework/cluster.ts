@@ -1,5 +1,6 @@
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import cluster from 'node:cluster';
+import { handleProcess } from 'vona';
 import { createApp } from './createApp.ts';
 
 export async function startCluster(workers: number, bootstrapOptions: BootstrapOptions) {
@@ -15,6 +16,7 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
       console.log(`worker ${worker.process.pid} died`, code, signal);
     });
   } else {
+    handleProcess();
     await createApp(bootstrapOptions);
     console.log(`Worker ${process.pid} started`);
   }
