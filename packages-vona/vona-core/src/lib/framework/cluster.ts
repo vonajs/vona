@@ -14,6 +14,13 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
       cluster.fork();
     }
 
+    cluster.on('message', (worker, message) => {
+      if (message === 'reload-worker') {
+        worker.process.kill('SIGTERM');
+        cluster.fork();
+      }
+    });
+
     cluster.on('exit', (_worker, _code, _signal) => {
       // console.log(`worker ${worker.process.pid} died`, code, signal);
       // should not kill master self by manual

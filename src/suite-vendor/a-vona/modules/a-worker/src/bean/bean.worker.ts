@@ -1,5 +1,6 @@
+import cluster from 'node:cluster';
 import { isNil } from '@cabloy/utils';
-import { BeanBase, cast, uuidv4 } from 'vona';
+import { BeanBase, closeApp, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 const SymbolWorkerId = Symbol('SymbolWorkerId');
@@ -38,15 +39,13 @@ export class BeanWorker extends BeanBase {
   }
 
   async reload() {
-    await this.app.meta.close();
-    cast(process).send({
-      to: 'master',
-      action: 'reload-worker',
-    });
-    // todo: process.exit('reload-worker')，用于在cluster中监听进程关闭，然后fork new worker
+    if (!cluster.worker) throw new Error('Only take affect in cluster');
+    cluster.worker.send('reload-worker');
+    closeApp(false);
   }
 
   async reloadAll() {
+    if (!cluster.worker) throw new Error('Only take affect in cluster');
     this.scope.broadcast.reloadAll.emit();
   }
 }
