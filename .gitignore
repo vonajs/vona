@@ -30,7 +30,6 @@ env/.env*.mine
 # auto created
 .rollup.cache
 .temp-dynamic-*
-/tsconfig.json
 /cabloy.json
 /package.json
 
