@@ -5,7 +5,6 @@ export function handleProcessWork() {
     console.log('------------SIGUSR2');
     await closeApp(true);
   });
-
   process.once('SIGINT', async () => {
     console.log('------------SIGINT');
     await closeApp(true);
@@ -14,12 +13,10 @@ export function handleProcessWork() {
 
 export function handleProcessMaster() {
   process.once('SIGUSR2', () => {
-    // for (const id in cluster.workers) {
-    //   cluster.workers[id]?.process.kill('SIGTERM');
-    // }
-    // console.log('------------SIGUSR2 master');
+    // should not kill master self by manual
+    // process.kill(process.pid, 'SIGTERM');
   });
   process.once('SIGINT', () => {
-    // console.log('------------SIGINT master');
+    process.kill(process.pid, 'SIGTERM');
   });
 }

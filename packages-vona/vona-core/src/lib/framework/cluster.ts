@@ -16,6 +16,9 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
 
     cluster.on('exit', (worker, code, signal) => {
       console.log(`worker ${worker.process.pid} died`, code, signal);
+      if (cluster.workers && Object.keys(cluster.workers).length === 0) {
+        process.kill(process.pid, 'SIGTERM');
+      }
     });
   } else {
     handleProcessWork();
