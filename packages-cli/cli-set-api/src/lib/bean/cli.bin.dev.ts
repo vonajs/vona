@@ -1,7 +1,6 @@
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
-import { resolve } from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import nodemon from 'nodemon';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
@@ -42,7 +41,7 @@ export class CliBinDev extends BeanCliBase {
       (nodemon as any)({
         script: '.vona/app.ts',
         cwd: projectPath,
-        exec:'node',
+        exec: 'node',
         execArgs: ['--experimental-transform-types', '--loader=ts-node/esm'],
       });
       nodemon.on('quit', () => {
