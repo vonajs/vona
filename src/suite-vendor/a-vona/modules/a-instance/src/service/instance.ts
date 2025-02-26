@@ -16,11 +16,21 @@ const boxenOptions: Boxen.Options = {
   borderStyle: 'round',
 } as Boxen.Options;
 
-const __queueInstanceStartup: any = {};
-const __cacheIntancesConfig: Record<string, VonaConfig> = {};
+const SymbolQueueInstanceStartup = Symbol('SymbolQueueInstanceStartup');
+const SymbolCacheIntancesConfig = Symbol('SymbolCacheIntancesConfig');
 
 @Service()
 export class ServiceInstance extends BeanBase {
+  get __queueInstanceStartup(): any {
+    if (!this.app.meta[SymbolQueueInstanceStartup]) this.app.meta[SymbolQueueInstanceStartup] = {};
+    return this.app.meta[SymbolQueueInstanceStartup];
+  }
+
+  get __cacheIntancesConfig(): Record<string, VonaConfig> {
+    if (!this.app.meta[SymbolCacheIntancesConfig]) this.app.meta[SymbolCacheIntancesConfig] = {};
+    return this.app.meta[SymbolCacheIntancesConfig];
+  }
+
   getConfigInstanceBase(instanceName: string) {
     const instances = this.app.config.instances || [{ instanceName: '', password: '' }];
     return instances.find(item => item.instanceName === instanceName);
@@ -31,7 +41,7 @@ export class ServiceInstance extends BeanBase {
       instanceName = this.ctx?.instanceName;
     }
     if (isNil(instanceName)) return undefined;
-    return __cacheIntancesConfig[instanceName];
+    return this.__cacheIntancesConfig[instanceName];
   }
 
   async instanceChanged(reload: boolean = true) {
@@ -71,14 +81,14 @@ export class ServiceInstance extends BeanBase {
   }
 
   private async _cacheInstanceConfig(instanceName: string, force: boolean) {
-    if (__cacheIntancesConfig[instanceName] && !force) return;
+    if (this.__cacheIntancesConfig[instanceName] && !force) return;
     let instance = await this.bean.instance.get(instanceName);
     if (!instance) this.app.throw(403);
     instance = instance!;
     // config
     const instanceConfig = JSON.parse(instance.config);
     // cache configs
-    __cacheIntancesConfig[instanceName] = deepExtend({}, this.ctx.app.config, instanceConfig, {
+    this.__cacheIntancesConfig[instanceName] = deepExtend({}, this.ctx.app.config, instanceConfig, {
       instances: undefined,
     });
   }
@@ -92,8 +102,8 @@ export class ServiceInstance extends BeanBase {
     // cache instance config
     await this._cacheInstanceConfig(instanceName, false);
     // queue within the same worker
-    if (!__queueInstanceStartup[instanceName]) {
-      __queueInstanceStartup[instanceName] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
+    if (!this.__queueInstanceStartup[instanceName]) {
+      this.__queueInstanceStartup[instanceName] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
         // check again
         const force = info.options?.force;
         if (this.ctx.app.meta.appReadyInstances[info.instanceName] && !force) {
@@ -120,7 +130,7 @@ export class ServiceInstance extends BeanBase {
       if (!options) options = { force: false, configInstanceBase: undefined };
       // queue push
       const info: IInstanceStartupQueueInfo = { resolve, reject, instanceName, options };
-      __queueInstanceStartup[instanceName].push(info);
+      this.__queueInstanceStartup[instanceName].push(info);
     });
   }
 

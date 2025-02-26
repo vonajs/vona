@@ -89,13 +89,15 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
   return extractValue(ctx, argMeta);
 }
 
-const __cacheMiddlewaresArgument: Record<string, Function[]> = {};
+const SymbolCacheMiddlewaresArgument = Symbol('SymbolCacheMiddlewaresArgument');
 
 function composePipes(
   ctx: VonaContext,
   argMeta: RouteHandlerArgumentMetaDecorator,
   executeCustom: IOnionExecuteCustom,
 ) {
+  if (!ctx.app.meta[SymbolCacheMiddlewaresArgument]) ctx.app.meta[SymbolCacheMiddlewaresArgument] = {};
+  const __cacheMiddlewaresArgument: Record<string, Function[]> = ctx.app.meta[SymbolCacheMiddlewaresArgument];
   const onionPipe = ctx.app.bean.onion.pipe;
   const beanFullName = ctx.getControllerBeanFullName();
   const handlerName = ctx.getHandler()!.name;
