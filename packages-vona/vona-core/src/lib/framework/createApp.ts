@@ -1,25 +1,34 @@
 import type { TypeAppInfoConfig, VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
+import { sleep } from '@cabloy/utils';
 import { VonaApplication } from '../core/application.ts';
 import { combineAppConfigDefault } from '../core/config.ts';
 import { deepExtend } from '../utils/util.ts';
 import { Start } from './start.ts';
 
 export async function createApp(bootstrapOptions: BootstrapOptions) {
-  globalThis.__bootstrapOptions__ = bootstrapOptions;
-  const { modulesMeta, locales, config, env, AppMonkey } = bootstrapOptions;
-  if (!globalThis.__app__) {
-    globalThis.__app__ = await __createApp({
-      modulesMeta,
-      locales,
-      config,
-      env,
-      AppMonkey,
-    });
+  while (globalThis.__creating__) {
+    await sleep(100);
   }
-  await globalThis.__app__.meta.waitAppStarted();
-  return globalThis.__app__;
+  try {
+    globalThis.__creating__ = true;
+    globalThis.__bootstrapOptions__ = bootstrapOptions;
+    const { modulesMeta, locales, config, env, AppMonkey } = bootstrapOptions;
+    if (!globalThis.__app__) {
+      globalThis.__app__ = await __createApp({
+        modulesMeta,
+        locales,
+        config,
+        env,
+        AppMonkey,
+      });
+    }
+    await globalThis.__app__.meta.waitAppStarted();
+    return globalThis.__app__;
+  } finally {
+    globalThis.__creating__ = false;
+  }
 }
 
 async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {

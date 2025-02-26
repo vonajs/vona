@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { sleep } from '@cabloy/utils';
 import { pathToHref } from '../utils/util.ts';
 import { createApp } from './createApp.ts';
 
@@ -20,6 +21,14 @@ export async function createTestApp(projectPath: string) {
 }
 
 export async function reloadApp() {
-  await closeApp();
-  await createApp(globalThis.__bootstrapOptions__);
+  while (globalThis.__reloading__) {
+    await sleep(100);
+  }
+  try {
+    globalThis.__reloading__ = true;
+    await closeApp();
+    await createApp(globalThis.__bootstrapOptions__);
+  } finally {
+    globalThis.__reloading__ = false;
+  }
 }
