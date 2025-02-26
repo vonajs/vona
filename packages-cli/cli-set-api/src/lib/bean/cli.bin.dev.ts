@@ -1,6 +1,9 @@
+import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
+import { resolve } from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import nodemon from 'nodemon';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -17,10 +20,10 @@ export class CliBinDev extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     // run
-    await this._run(projectPath);
+    await this._dev(projectPath);
   }
 
-  async _run(projectPath: string) {
+  async _dev(projectPath: string) {
     const { argv } = this.context;
     const mode: VonaMetaMode = 'local';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
@@ -30,13 +33,28 @@ export class CliBinDev extends BeanCliBase {
       runtimeDir: '.vona',
       workers: argv.workers,
     };
-    await generateVonaMeta(configMeta, configOptions);
-    await this.helper.spawnExe({
-      cmd: 'node',
-      args: ['--experimental-transform-types', '--loader=ts-node/esm', '.vona/app.ts'],
-      options: {
+    const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
+    await this._run(projectPath, modulesMeta);
+  }
+
+  async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
+    return new Promise((resolve, _reject) => {
+      (nodemon as any)({
+        script: '.vona/app.ts',
         cwd: projectPath,
-      },
+        exec:'node',
+        execArgs: ['--experimental-transform-types', '--loader=ts-node/esm'],
+      });
+      nodemon.on('quit', () => {
+        resolve(undefined);
+      });
     });
+    // await this.helper.spawnExe({
+    //   cmd: 'node',
+    //   args: ['--experimental-transform-types', '--loader=ts-node/esm', '.vona/app.ts'],
+    //   options: {
+    //     cwd: projectPath,
+    //   },
+    // });
   }
 }

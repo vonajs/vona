@@ -15,7 +15,6 @@
     "vona-module-a-core": "workspace:^",
     "vona-module-a-database": "workspace:^",
     "vona-module-a-databasedialect": "workspace:^",
-    "vona-module-a-development": "workspace:^",
     "vona-module-a-election": "workspace:^",
     "vona-module-a-error": "workspace:^",
     "vona-module-a-event": "workspace:^",
