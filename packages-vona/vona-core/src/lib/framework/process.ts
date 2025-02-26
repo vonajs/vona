@@ -16,7 +16,8 @@ export function handleProcessMaster() {
     // should not kill master self by manual
     // process.kill(process.pid, 'SIGTERM');
   });
-  process.once('SIGINT', () => {
-    process.kill(process.pid, 'SIGTERM');
-  });
+  // should not kill master self by manual
+  // process.once('SIGINT', () => {
+  //   process.kill(process.pid, 'SIGTERM');
+  // });
 }

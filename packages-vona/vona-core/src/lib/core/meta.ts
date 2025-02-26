@@ -5,7 +5,7 @@ import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
-import { promisify } from 'node:util';
+import cluster from 'node:cluster';
 import { sleep } from '@cabloy/utils';
 import * as celjs from 'cel-js';
 import whyIsNodeRunning from 'why-is-node-running';
@@ -114,8 +114,15 @@ export class AppMeta extends BeanSimple {
   }
 
   private async _closeInner() {
-    // close server
-    await promisify(this.app.server.close).call(this.app.server);
+    if (process.env.SERVER_WORKERS !== '1') {
+      // disconnect
+      cluster.worker?.disconnect();
+    } else {
+      // close server
+      this.app.server.close();
+      // maybe hang up using await
+      // await promisify(this.app.server.close).call(this.app.server);
+    }
     // appClose
     this.appClose = true;
     // hook: appClose
