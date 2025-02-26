@@ -8,6 +8,8 @@ import type {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
 } from 'vona-module-a-web';
+import type { IOpenAPIObject, IOpenApiOptions } from '../types/api.ts';
+import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import * as ModuleInfo from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -25,10 +27,10 @@ import {
   SymbolRequestMappingHandler,
 } from 'vona-module-a-web';
 import { z } from 'zod';
-import { SymbolOpenApiOptions, type IOpenAPIObject, type IOpenApiOptions } from '../types/api.ts';
-import { SymbolRouteHandlersArgumentsMeta, type RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
-import { schema } from '../lib/schema/schema.ts';
 import { bodySchemaWrapperDefault } from '../lib/schema/bodySchemaWrapper.ts';
+import { schema } from '../lib/schema/schema.ts';
+import { SymbolOpenApiOptions } from '../types/api.ts';
+import { SymbolRouteHandlersArgumentsMeta } from '../types/decorator.ts';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
 

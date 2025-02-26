@@ -1,7 +1,7 @@
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { createBeanDecorator } from 'vona';
 
-const __tableNames = new Set();
+// const __tableNames = new Set();
 
 export function Entity(options?: IDecoratorEntityOptions): ClassDecorator;
 export function Entity(table?: string): ClassDecorator;
@@ -10,11 +10,11 @@ export function Entity(options?: IDecoratorEntityOptions | string): ClassDecorat
   if (typeof options === 'string') {
     options = { table: options } as unknown as IDecoratorEntityOptions;
   }
-  // tableName
-  const tableName = options.table;
-  if (__tableNames.has(tableName)) {
-    throw new Error(`entity table exists: ${tableName}`);
-  }
-  __tableNames.add(tableName);
+  // // tableName
+  // const tableName = options.table;
+  // if (__tableNames.has(tableName)) {
+  //   throw new Error(`entity table exists: ${tableName}`);
+  // }
+  // __tableNames.add(tableName);
   return createBeanDecorator('entity', options);
 }
