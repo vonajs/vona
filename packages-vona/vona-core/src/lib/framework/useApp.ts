@@ -15,5 +15,5 @@ export async function closeApp() {
 export async function createTestApp(projectPath: string) {
   const testFile = path.join(projectPath, '.vona/test.ts');
   const testInstance = await import(pathToHref(testFile));
-  await testInstance.getApp();
+  return await testInstance.getApp();
 }
