@@ -1,5 +1,5 @@
-import type { Constructable } from 'vona';
 import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.ts';
+import type { Constructable } from '../type/constructable.ts';
 import { parseModuleName as _parseModuleName, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
 import { appMetadata } from '../../core/metadata.ts';
 import { DecoratorBeanInfo } from '../../core/resource.ts';

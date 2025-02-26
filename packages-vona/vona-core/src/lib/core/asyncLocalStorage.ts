@@ -1,4 +1,4 @@
-import type { VonaApplication } from 'vona';
+import type { VonaApplication } from './application.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 export class VonaAsyncLocalStorage<T> extends AsyncLocalStorage<T> {
