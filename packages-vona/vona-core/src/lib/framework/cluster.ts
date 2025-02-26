@@ -1,10 +1,12 @@
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import cluster from 'node:cluster';
-import { handleProcess } from 'vona';
 import { createApp } from './createApp.ts';
+import { handleProcessMaster, handleProcessWork } from './process.ts';
 
 export async function startCluster(workers: number, bootstrapOptions: BootstrapOptions) {
   if (cluster.isPrimary) {
+    handleProcessMaster();
+
     console.log(`Primary ${process.pid} is running`);
 
     // Fork workers.
@@ -16,7 +18,7 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
       console.log(`worker ${worker.process.pid} died`, code, signal);
     });
   } else {
-    handleProcess();
+    handleProcessWork();
     await createApp(bootstrapOptions);
     console.log(`Worker ${process.pid} started`);
   }
