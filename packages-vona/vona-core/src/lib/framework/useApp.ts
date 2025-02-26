@@ -8,9 +8,17 @@ export function useApp() {
 }
 
 export async function closeApp() {
-  if (globalThis.__app__) {
-    await globalThis.__app__.meta.close();
-    delete globalThis.__app__;
+  while (globalThis.__closing__) {
+    await sleep(50);
+  }
+  try {
+    globalThis.__closing__ = true;
+    if (globalThis.__app__) {
+      await globalThis.__app__.meta.close();
+      delete globalThis.__app__;
+    }
+  } finally {
+    globalThis.__closing__ = false;
   }
 }
 
