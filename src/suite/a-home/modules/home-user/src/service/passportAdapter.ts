@@ -41,7 +41,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
       return;
     let usersDemo = await this.scope.cacheRedis.usersDemo.get();
     if (!usersDemo) {
-      usersDemo = deepExtend([], __UsersDemo);
+      usersDemo = deepExtend([], __UsersDemo)!;
       await this.scope.cacheRedis.usersDemo.set(usersDemo);
     }
     return usersDemo;
