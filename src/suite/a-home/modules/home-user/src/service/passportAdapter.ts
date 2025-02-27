@@ -1,6 +1,6 @@
 import type { IPassportAdapter, IUserBase } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
@@ -41,7 +41,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
       return;
     let usersDemo = await this.scope.cacheRedis.usersDemo.get();
     if (!usersDemo) {
-      usersDemo = __UsersDemo;
+      usersDemo = deepExtend([], __UsersDemo);
       await this.scope.cacheRedis.usersDemo.set(usersDemo);
     }
     return usersDemo;
