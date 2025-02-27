@@ -5,7 +5,7 @@ import config from './config.ts';
 import env from './env.ts';
 <%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
-await bootstrap({ 
+bootstrap({ 
   modulesMeta, 
   locales,
   config,
