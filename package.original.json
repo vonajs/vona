@@ -61,7 +61,6 @@
     "autoprefixer": "^9.8.8",
     "axios": "^1.6.8",
     "bagpipe": "^0.3.5",
-    "bluebird": "^3.7.2",
     "chalk": "^3.0.0",
     "commander": "^11.1.0",
     "connect-history-api-fallback": "^1.6.0",

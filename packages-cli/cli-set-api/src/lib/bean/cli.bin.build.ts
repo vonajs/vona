@@ -1,6 +1,6 @@
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-import type { OutputOptions, RollupBuild, RollupOptions } from 'rollup';
+import type { LogLevel, LogOrStringHandler, OutputOptions, RollupBuild, RollupLog, RollupOptions } from 'rollup';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
@@ -109,6 +109,13 @@ export class CliBinBuild extends BeanCliBase {
     const inputOptions: RollupOptions = {
       input: path.join(projectPath, '.vona/app.ts'),
       plugins,
+      onLog: (level: LogLevel, log: RollupLog, defaultHandler: LogOrStringHandler) => {
+        if (log.code === 'CIRCULAR_DEPENDENCY' && process.env.BUILD_LOG_CIRCULAR_DEPENDENCY === 'false') return;
+        if (log.code === 'THIS_IS_UNDEFINED' && log.message.includes('ramda/es/partialObject.js')) return;
+        if (log.code === 'EVAL' && log.message.includes('depd/index.js')) return;
+        if (log.code === 'EVAL' && log.message.includes('bluebird/js/release/util.js')) return;
+        defaultHandler(level, log);
+      },
     };
 
     const outputOption: OutputOptions = {
