@@ -1,6 +1,6 @@
 import cluster from 'node:cluster';
 import { isNil } from '@cabloy/utils';
-import { BeanBase, closeApp, uuidv4 } from 'vona';
+import { BeanBase, closeApp, reloadApp, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 const SymbolWorkerId = Symbol('SymbolWorkerId');
@@ -39,13 +39,15 @@ export class BeanWorker extends BeanBase {
   }
 
   async reload() {
-    if (!cluster.worker) throw new Error('Only take affect in cluster');
-    cluster.worker.send('reload-worker');
-    closeApp(false);
+    if (cluster.worker) {
+      cluster.worker.send('reload-worker');
+      closeApp(false);
+    } else {
+      reloadApp();
+    }
   }
 
   async reloadAll() {
-    if (!cluster.worker) throw new Error('Only take affect in cluster');
     this.scope.broadcast.reloadAll.emit();
   }
 }
