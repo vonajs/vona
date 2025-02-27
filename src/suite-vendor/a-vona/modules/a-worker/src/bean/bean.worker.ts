@@ -39,13 +39,21 @@ export class BeanWorker extends BeanBase {
   }
 
   async reload() {
-    if (!cluster.worker) throw new Error('Only take affect in cluster');
+    if (!cluster.worker) {
+      return;
+      // maybe throw uncaughtException
+      // throw new Error('Only take affect in cluster');
+    }
     cluster.worker.send('reload-worker');
     closeApp(false);
   }
 
   async reloadAll() {
-    if (!cluster.worker) throw new Error('Only take affect in cluster');
+    if (!cluster.worker) {
+      return;
+      // maybe throw uncaughtException
+      // throw new Error('Only take affect in cluster');
+    }
     this.scope.broadcast.reloadAll.emit();
   }
 }

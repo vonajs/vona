@@ -9,6 +9,11 @@ export function handleProcessWork() {
     // console.log('------------SIGINT');
     await closeApp(true);
   });
+  process.on('uncaughtException', err => {
+    // todo: log
+    // eslint-disable-next-line
+    console.log(err);
+  });
 }
 
 export function handleProcessMaster() {
