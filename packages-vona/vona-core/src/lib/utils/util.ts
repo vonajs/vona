@@ -371,3 +371,11 @@ export function pathToHref(fileName: string): string {
   return pathToFileURL(fileName).href;
   // return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }
+
+export function prepareEnv(env: { [key: string]: string | boolean }) {
+  for (const key of Object.keys(env)) {
+    if (process.env[key] === undefined && env[key] !== false) {
+      process.env[key] = env[key].toString();
+    }
+  }
+}

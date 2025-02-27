@@ -4,7 +4,7 @@ import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import { sleep } from '@cabloy/utils';
 import { VonaApplication } from '../core/application.ts';
 import { combineAppConfigDefault } from '../core/config.ts';
-import { deepExtend } from '../utils/util.ts';
+import { deepExtend, prepareEnv } from '../utils/util.ts';
 import { Start } from './start.ts';
 
 export async function createApp(bootstrapOptions: BootstrapOptions) {
@@ -51,14 +51,6 @@ async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Boo
   const start = new Start(app);
   await start.start();
   return app;
-}
-
-function prepareEnv(env: { [key: string]: string | boolean }) {
-  for (const key of Object.keys(env)) {
-    if (process.env[key] === undefined && env[key] !== false) {
-      process.env[key] = env[key].toString();
-    }
-  }
 }
 
 function prepareAppInfo(): VonaAppInfo {
