@@ -3,7 +3,7 @@ import { Api, Body } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 
 const tableNameFail = '__tempTransactionFail';
-  const tableNameSuccess = '__tempTransactionSuccess';
+const tableNameSuccess = '__tempTransactionSuccess';
 
 @Controller({ path: 'transaction', meta: { mode: 'test' } })
 @Api.exclude()
