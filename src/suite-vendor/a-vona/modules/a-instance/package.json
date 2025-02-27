@@ -31,7 +31,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {},
+  "dependencies": {
+    "async": "^3.2.6"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
