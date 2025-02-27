@@ -41,14 +41,13 @@ export class ServiceRedlock extends BeanBase {
         });
     }, lockTTL / 2);
     try {
-      const res = await fn();
+      return await fn();
+    } finally {
       _lockDone();
-      await _lock.unlock();
-      return res;
-    } catch (err) {
-      _lockDone();
-      await _lock.unlock();
-      throw err;
+      // not await, and throw error
+      _lock.unlock().catch(_err => {
+        // do nothing
+      });
     }
   }
 
