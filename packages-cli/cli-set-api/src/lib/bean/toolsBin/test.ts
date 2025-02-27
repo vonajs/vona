@@ -2,11 +2,13 @@ import { createWriteStream } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
+import { sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
 import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
 import { lcov, tap } from 'node:test/reporters';
 import { closeApp, createTestApp } from 'vona-core';
+import whyIsNodeRunning from 'why-is-node-running';
 import { resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
@@ -77,6 +79,14 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       .on('test:pass', async t => {
         if (t.name === '---done---') {
           await closeApp();
+          // handles
+          if (process.env.TEST_WHYISNODERUNNING === 'true') {
+            await sleep(2000);
+            const handles = (process as any)._getActiveHandles();
+            if (handles.length > 3) {
+              whyIsNodeRunning();
+            }
+          }
         }
       });
     if (coverage) {
