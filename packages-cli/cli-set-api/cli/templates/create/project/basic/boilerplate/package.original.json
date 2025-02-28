@@ -1,0 +1,44 @@
+{
+  "name": "Vona",
+  "title": "Vona",
+  "private": true,
+  "type": "module",
+  "description": "A Node.js full-stack framework with workflow engine",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vonajs/vona.git"
+  },
+  "author": "zhennann",
+  "keywords": ["nodejs", "full-stack", "workflow-engine", "vona", "cabloy"],
+  "bugs": {
+    "url": "https://github.com/vonajs/vona/issues"
+  },
+  "homepage": "https://github.com/vonajs/vona#readme",
+  "engines": {
+    "node": ">=23.7.0"
+  },
+  "scripts": {
+    "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile",
+    "vona": "node ./packages-cli/cli/src/bin/vona.ts",
+    "db:reset": "npm run prerun && npm run vona :bin:dbReset -- --flavor=normal",
+    "dev": "npm run prerun && npm run vona :bin:dev -- --workers=2 --flavor=normal",
+    "dev:one": "npm run prerun && npm run vona :bin:dev -- --workers=1 --flavor=normal",
+    "test": "npm run prerun && npm run vona :bin:test -- --flavor=normal",
+    "cov": "npm run prerun && npm run vona :bin:test -- --coverage --flavor=normal",
+    "tsc": "npm run prerun && npm run vona :bin:tsc",
+    "build": "npm run prerun && npm run vona :bin:build -- --flavor=normal",
+    "start": "node ./dist/app.js",
+    "prerun": "npm run vona :tools:deps",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/mime": "3.0.4"
+    }
+  },
+  "dependencies": {
+    "vona": "workspace:^"
+  },
+  "devDependencies": {}
+}
