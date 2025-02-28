@@ -1,6 +1,6 @@
+import { evaluate } from '@cabloy/utils';
 import BaseCommand from '@zhennann/common-bin';
 import chalk from 'chalk';
-import eggBornUtils from 'egg-born-utils';
 import enquirer from 'enquirer';
 import is from 'is-type-of';
 import { BeanCli } from './bean.cli.ts';
@@ -136,7 +136,7 @@ export class CliCommand extends BaseCommand {
     const expression = question[propName] && question[propName].expression;
     if (!expression) return null;
     return function (value) {
-      return eggBornUtils.tools.evaluateExpression({ expression, scope: { value, group, question, key, context } });
+      return evaluate(expression, { value, group, question, key, context });
     };
   }
 
@@ -192,6 +192,6 @@ export class CliCommand extends BaseCommand {
   _checkGroupCondition({ group, context }) {
     const expression = group.condition && group.condition.expression;
     if (!expression) return true;
-    return eggBornUtils.tools.evaluateExpression({ expression, scope: { group, context } });
+    return evaluate(expression, { group, context });
   }
 }

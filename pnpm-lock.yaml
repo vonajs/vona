@@ -29,6 +29,9 @@ importers:
       '@cabloy/process-helper':
         specifier: workspace:^
         version: link:../../packages-utils/process-helper
+      '@cabloy/utils':
+        specifier: workspace:^
+        version: link:../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.0
         version: 2.0.0
