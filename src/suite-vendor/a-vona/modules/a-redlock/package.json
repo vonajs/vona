@@ -6,11 +6,9 @@
   "vonaModule": {
     "dependencies": {},
     "globalDependencies": {
-      "redlock": true
+      "@sesamecare-oss/redlock": true
     },
-    "globalDependenciesDev": {
-      "@types/redlock": true
-    },
+    "globalDependenciesDev": {},
     "metas": {
       "redlock": {
         "scopeResource": true,
@@ -47,10 +45,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "redlock": "^4.1.0"
+    "@sesamecare-oss/redlock": "^1.4.0"
   },
   "devDependencies": {
-    "@types/redlock": "^4.0.7",
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },

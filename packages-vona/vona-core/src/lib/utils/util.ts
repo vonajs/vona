@@ -351,7 +351,7 @@ function _requireDynamic_getFileTime(file) {
 }
 
 export function deepExtend<T extends []>(target: T, ...args): [];
-export function deepExtend<T>(target: T, ...args): any;
+export function deepExtend<T = any>(target: {}, ...args): T;
 export function deepExtend(target: any, ...args): any {
   return extend(true, target, ...args);
 }
