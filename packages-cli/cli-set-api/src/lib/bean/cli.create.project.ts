@@ -8,7 +8,7 @@ import compressing from 'compressing';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import urllib from 'urllib';
-// import { __ThisSetName__ } from '../this.ts';
+import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -38,21 +38,15 @@ export class CliCreateProject extends BeanCliBase {
     }
     // template
     const template = argv.template;
-    const packageName = `vona-template-${template}`;
-    // download boilerplate
-    const templateDir = await this.downloadBoilerplate(packageName);
-    fse.copySync(templateDir, targetDir);
-    // remove LICENSE
-    fse.removeSync(path.join(targetDir, 'LICENSE'));
-    /// / copy package.json
-    // fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
-    // // render project boilerplate
-    // await this.template.renderBoilerplateAndSnippets({
-    //   targetDir,
-    //   setName: __ThisSetName__,
-    //   snippetsPath: null,
-    //   boilerplatePath: `create/project/${template}/boilerplate`,
-    // });
+    // copy package.json
+    fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
+    // render project boilerplate
+    await this.template.renderBoilerplateAndSnippets({
+      targetDir,
+      setName: __ThisSetName__,
+      snippetsPath: null,
+      boilerplatePath: `create/project/${template}/boilerplate`,
+    });
     // done
     await this.printUsage(targetDir);
   }
