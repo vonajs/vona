@@ -1,21 +1,21 @@
 {
-  "name": "cabloy-api",
-  "title": "Cabloy",
+  "name": "Vona",
+  "title": "Vona",
   "private": true,
   "type": "module",
-  "description": "A Node.js full-stack framework with workflow engine, based on koa + egg + vue + framework7",
+  "description": "A Node.js full-stack framework with workflow engine",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhennann/cabloy.git"
+    "url": "git+https://github.com/vonajs/vona.git"
   },
   "author": "zhennann",
-  "keywords": ["nodejs", "full-stack", "workflow-engine", "egg-framework", "framework7", "cabloy"],
+  "keywords": ["nodejs", "full-stack", "workflow-engine", "vona", "cabloy"],
   "bugs": {
-    "url": "https://github.com/zhennann/cabloy/issues"
+    "url": "https://github.com/vonajs/vona/issues"
   },
-  "homepage": "https://github.com/zhennann/cabloy#readme",
+  "homepage": "https://github.com/vonajs/vona#readme",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=23.7.0"
   },
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile",
