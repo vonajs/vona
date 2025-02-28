@@ -1,8 +1,8 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import path from 'node:path';
 import { stringToCapitalize, toUpperCaseFirstChar } from '@cabloy/word-utils';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
@@ -28,7 +28,7 @@ export async function globBeanFiles(
   const pattern = sceneMeta.sceneIsolate
     ? `${modulePath}/src/${sceneName}/*.ts`
     : `${modulePath}/src/bean/${sceneName}.*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  const files = await globby(pattern);
   if (files.length === 0) return result;
   files.sort();
   for (const file of files) {

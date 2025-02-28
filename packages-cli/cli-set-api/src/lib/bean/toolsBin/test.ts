@@ -4,8 +4,8 @@ import path from 'node:path';
 import { run } from 'node:test';
 import { sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 import { lcov, tap } from 'node:test/reporters';
 import { closeApp, createTestApp } from 'vona-core';
 import whyIsNodeRunning from 'why-is-node-running';
@@ -20,7 +20,7 @@ await testRun(projectPath, coverage, patterns);
 
 async function testRun(projectPath: string, coverage: boolean, patterns: string[]) {
   // files
-  const files = await eggBornUtils.tools.globbyAsync(patterns, {
+  const files = await globby(patterns, {
     cwd: projectPath,
   });
   if (process.env.TEST_ONLY === 'true') {

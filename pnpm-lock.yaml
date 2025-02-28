@@ -53,9 +53,6 @@ importers:
       cli-table3:
         specifier: ^0.6.5
         version: 0.6.5
-      egg-born-utils:
-        specifier: ^1.2.0
-        version: 1.2.1
       enquirer:
         specifier: ^2.3.6
         version: 2.4.1
@@ -172,12 +169,12 @@ importers:
       compressing:
         specifier: ^1.10.0
         version: 1.10.1
-      egg-born-utils:
-        specifier: ^1.2.1
-        version: 1.2.1
       fs-extra:
         specifier: ^11.2.0
         version: 11.3.0
+      globby:
+        specifier: ^14.1.0
+        version: 14.1.0
       gogocode:
         specifier: ^1.0.53
         version: 1.0.55(vue@3.5.13(typescript@5.7.3))
@@ -258,6 +255,9 @@ importers:
       egg-born-utils:
         specifier: ^1.2.0
         version: 1.2.1
+      globby:
+        specifier: ^14.1.0
+        version: 14.1.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0

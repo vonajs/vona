@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import ejs from '@zhennann/ejs';
-import eggBornUtils from 'egg-born-utils';
 import { globby } from 'globby';
 import gogocode from 'gogocode';
 import isTextOrBinary from 'istextorbinary';
@@ -208,7 +207,7 @@ export class LocalTemplate {
 
   async applySnippets(targetDir: string, snippetsDir: string) {
     // snippets
-    let files = eggBornUtils.tools.globbySync('*.{cjs,ts}', {
+    let files = await globby('*.{cjs,ts}', {
       cwd: snippetsDir,
       onlyFiles: true,
     });

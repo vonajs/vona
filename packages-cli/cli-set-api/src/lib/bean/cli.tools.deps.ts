@@ -1,6 +1,5 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
 import { resolveTemplatePath } from '../utils.ts';
 
@@ -29,12 +28,15 @@ export class CliToolsDeps extends BeanCliBase {
   }
 
   _getProjectMode(projectPath: string) {
-    const vonaPath = this._getVonaPath(projectPath);
+    const vonaPath = this._getVonaPath(projectPath)!;
     return vonaPath.includes('packages-vona') ? 'source' : 'project';
   }
 
   _getVonaPath(projectPath: string) {
-    return eggBornUtils.tools._getVonaPath(projectPath);
+    let vonaPath = path.join(projectPath, 'packages-vona/vona');
+    if (fse.existsSync(vonaPath)) return vonaPath;
+    vonaPath = path.join(projectPath, 'node_modules/vona');
+    if (fse.existsSync(vonaPath)) return vonaPath;
   }
 
   async _generateTypeProjectFile(projectPath: string) {

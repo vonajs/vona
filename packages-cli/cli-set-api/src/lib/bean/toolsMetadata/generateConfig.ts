@@ -1,6 +1,6 @@
 import path from 'node:path';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 
 export async function generateConfig(modulePath: string) {
   const configFile = path.join(modulePath, 'src/config/config.ts');
@@ -28,7 +28,7 @@ import { constants } from '../config/constants.ts';
 
 export async function generateLocale(modulePath: string) {
   const pattern = `${modulePath}/src/config/locale/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  const files = await globby(pattern);
   if (files.length === 0) return '';
   files.sort();
   const contentImports: string[] = [];

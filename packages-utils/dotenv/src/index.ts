@@ -3,6 +3,7 @@ import { cascadeExtendKeys } from 'cascade-extend';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import eggBornUtils from 'egg-born-utils';
+import { globbySync } from 'globby';
 
 export function loadEnvs(
   meta: object,
@@ -34,8 +35,8 @@ export function metaToScope(meta: object) {
 
 export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?: string): string[] | undefined {
   // files
-  const pattern = [`${dir}/${prefix}*`];
-  let files: string[] = eggBornUtils.tools.globbySync(pattern);
+  const pattern = [`${prefix}*`];
+  let files: string[] = globbySync(pattern, { cwd: dir });
   const fileNames = files.map(item => {
     item = item.substring(dir.length + 1);
     if (postfix) {

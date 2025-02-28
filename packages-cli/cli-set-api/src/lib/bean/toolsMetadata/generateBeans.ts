@@ -1,7 +1,7 @@
 import type { OnionScenesMeta } from '@cabloy/module-info';
 import path from 'node:path';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import eggBornUtils from 'egg-born-utils';
+import { globby } from 'globby';
 import { checkIgnoreOfParts, getScopeModuleName } from './utils.ts';
 
 // todo: remove
@@ -11,7 +11,7 @@ export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName
   // ignore
   const ignore = Object.keys(onionScenesMeta).map(item => `**/${item}.*.ts`);
   // files
-  const files = await eggBornUtils.tools.globbyAsync(pattern, { ignore });
+  const files = await globby(pattern, { ignore });
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
