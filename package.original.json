@@ -9,7 +9,13 @@
     "url": "git+https://github.com/vonajs/vona.git"
   },
   "author": "zhennann",
-  "keywords": ["nodejs", "full-stack", "workflow-engine", "vona", "cabloy"],
+  "keywords": [
+    "nodejs",
+    "full-stack",
+    "workflow-engine",
+    "vona",
+    "cabloy"
+  ],
   "bugs": {
     "url": "https://github.com/vonajs/vona/issues"
   },
