@@ -39,6 +39,7 @@
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "egg-born-utils": "^1.2.0",
+    "fs-extra": "^11.3.0",
     "semver": "^7.7.1"
   },
   "clean-package": {

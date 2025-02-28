@@ -9,7 +9,7 @@ import fse from 'fs-extra';
 import randomize from 'randomatic';
 import { rimraf } from 'rimraf';
 import urllib from 'urllib';
-import { uuidv4 } from 'vona-core';
+import * as uuid from 'uuid';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -47,8 +47,8 @@ export class CliCreateProject extends BeanCliBase {
       throw new Error(`project exists: ${projectName}`);
     }
     // vars
-    argv.SERVER_KEYS = `vona_${uuidv4}_${Date.now()}_${random(100, 10000)}`;
-    argv.SERVER_KEYS_PROD = `vona_${uuidv4}_${Date.now()}_${random(100, 10000)}`;
+    argv.SERVER_KEYS = `vona_${uuid.v4()}_${Date.now()}_${random(100, 10000)}`;
+    argv.SERVER_KEYS_PROD = `vona_${uuid.v4()}_${Date.now()}_${random(100, 10000)}`;
     argv.DATABASE_CLIENT_MYSQL_USER = 'web_user';
     argv.DATABASE_CLIENT_MYSQL_PASSWORD = randomize('*', 16, { exclude: '\\\'"$' });
     argv.DATABASE_CLIENT_MYSQL_PASSWORD_ROOT = randomize('*', 16, { exclude: '\\\'"$' });

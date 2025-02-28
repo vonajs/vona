@@ -76,6 +76,7 @@
     "rollup": "^4.34.8",
     "ts-node": "^10.9.2",
     "urllib": "^4.6.11",
+    "uuid": "^11.1.0",
     "why-is-node-running": "^3.2.2"
   },
   "devDependencies": {
