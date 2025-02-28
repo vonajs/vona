@@ -17,6 +17,7 @@ declare module '@cabloy/cli' {
     force: boolean;
     template: string;
     SERVER_KEYS: string;
+    SERVER_KEYS_PROD: string;
     DATABASE_CLIENT_MYSQL_USER: string;
     DATABASE_CLIENT_MYSQL_PASSWORD: string;
     DATABASE_CLIENT_MYSQL_PASSWORD_ROOT: string;
@@ -47,6 +48,7 @@ export class CliCreateProject extends BeanCliBase {
     }
     // vars
     argv.SERVER_KEYS = `vona_${uuidv4}_${Date.now()}_${random(100, 10000)}`;
+    argv.SERVER_KEYS_PROD = `vona_${uuidv4}_${Date.now()}_${random(100, 10000)}`;
     argv.DATABASE_CLIENT_MYSQL_USER = 'web_user';
     argv.DATABASE_CLIENT_MYSQL_PASSWORD = randomize('*', 16, { exclude: '\\\'"$' });
     argv.DATABASE_CLIENT_MYSQL_PASSWORD_ROOT = randomize('*', 16, { exclude: '\\\'"$' });
