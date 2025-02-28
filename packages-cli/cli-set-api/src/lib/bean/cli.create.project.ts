@@ -46,6 +46,7 @@ export class CliCreateProject extends BeanCliBase {
     if (!argv.force && fs.existsSync(targetDir)) {
       throw new Error(`project exists: ${projectName}`);
     }
+    fse.ensureDirSync(targetDir);
     // vars
     argv.SERVER_KEYS = `vona_${uuid.v4()}_${Date.now()}_${random(100, 10000)}`;
     argv.SERVER_KEYS_PROD = `vona_${uuid.v4()}_${Date.now()}_${random(100, 10000)}`;
