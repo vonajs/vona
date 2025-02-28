@@ -350,7 +350,9 @@ function _requireDynamic_getFileTime(file) {
   return stat.mtime.valueOf();
 }
 
-export function deepExtend<T extends ({} | [])>(target: T, ...args): T extends [] ? [] : any {
+export function deepExtend<T extends []>(target: T, ...args): [];
+export function deepExtend<T>(target: T, ...args): any;
+export function deepExtend(target: any, ...args): any {
   return extend(true, target, ...args);
 }
 
