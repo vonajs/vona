@@ -66,6 +66,12 @@ export class CliCreateProject extends BeanCliBase {
     });
     // copy package.json
     fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
+    // npm run init
+    await this.helper.spawnCmd({
+      cmd: 'npm',
+      args: ['run', 'init'],
+      options: { cwd: targetDir },
+    });
     // done
     await this.printUsage(targetDir);
   }
