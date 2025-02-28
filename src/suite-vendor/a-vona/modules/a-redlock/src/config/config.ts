@@ -1,4 +1,4 @@
-import type * as Redlock from 'redlock';
+import type * as Redlock from '@sesamecare-oss/redlock';
 import type { VonaApplication } from 'vona';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 
@@ -14,7 +14,7 @@ export function config(app: VonaApplication) {
         retryCount: -1,
         retryDelay: 200,
         retryJitter: 100,
-      } as Redlock.Options,
+      } as Redlock.Settings,
     },
   };
 }

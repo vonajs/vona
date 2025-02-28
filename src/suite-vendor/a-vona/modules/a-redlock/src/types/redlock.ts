@@ -1,4 +1,4 @@
-import type Redlock from 'redlock';
+import type { Redlock } from '@sesamecare-oss/redlock';
 import type { INewCtxOptions } from 'vona-module-a-executor';
 
 export interface IRedlockLockOptions {

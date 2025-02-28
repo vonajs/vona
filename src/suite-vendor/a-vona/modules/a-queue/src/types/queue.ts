@@ -1,5 +1,5 @@
+import type Redlock from '@sesamecare-oss/redlock';
 import type * as Bull from 'bullmq';
-import type Redlock from 'redlock';
 import type { ILocalInfos, OmitNever } from 'vona';
 import type { INewCtxExtraData } from 'vona-module-a-executor';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
@@ -26,7 +26,7 @@ export interface IQueueJobContext<DATA> {
 }
 
 export interface IQueueWork {
-  redlock: Redlock;
+  redlock: Redlock.Redlock;
   worker: Bull.Worker;
   workerOptions: Bull.WorkerOptions;
 }
@@ -63,7 +63,7 @@ export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
   options?: {
     queue?: Bull.QueueOptions;
     worker?: Partial<Bull.WorkerOptions>;
-    redlock?: Redlock.Options & { lockTTL?: number };
+    redlock?: Redlock.Redlock & { lockTTL?: number };
     job?: Bull.JobsOptions;
   };
 }

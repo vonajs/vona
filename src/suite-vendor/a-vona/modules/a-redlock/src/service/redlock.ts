@@ -1,6 +1,7 @@
+import type { Settings } from '@sesamecare-oss/redlock';
 import type { FunctionAsync } from 'vona';
 import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
-import Redlock from 'redlock';
+import { Redlock } from '@sesamecare-oss/redlock';
 import { BeanBase, instanceDesp } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -19,7 +20,7 @@ export class ServiceRedlock extends BeanBase {
     // resource
     const _lockResource = `redlock_${this.app.name}:${instanceDesp(instanceName)}:${resource}`;
     // lock
-    let _lock = await redlock.lock(_lockResource, lockTTL);
+    let _lock = await redlock.acquire([_lockResource], lockTTL);
     // timer
     let _lockTimer = null as any;
     const _lockDone = () => {
@@ -45,7 +46,7 @@ export class ServiceRedlock extends BeanBase {
     } finally {
       _lockDone();
       // not await, and throw error
-      _lock.unlock().catch(_err => {
+      _lock.release().catch(_err => {
         // do nothing
       });
     }
@@ -72,7 +73,7 @@ export class ServiceRedlock extends BeanBase {
     return this._redlockDefault;
   }
 
-  public create(options: Redlock.Options) {
+  public create(options: Settings) {
     // clients
     const clients = [] as any;
     for (const clientName of this.scope.config.redlock.clients) {
