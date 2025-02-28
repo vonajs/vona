@@ -54,8 +54,7 @@
     "raw-body": "2.5.1",
     "reflect-metadata": "^0.2.2",
     "retry": "^0.13.1",
-    "uuid": "^11.0.3",
-    "why-is-node-running": "^3.2.2"
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@types/koa": "^2.15.0",
