@@ -6,14 +6,23 @@ import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import compressing from 'compressing';
 import fse from 'fs-extra';
+import randomize from 'randomatic';
 import { rimraf } from 'rimraf';
 import urllib from 'urllib';
+import { uuidv4 } from 'vona-core';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     force: boolean;
     template: string;
+    SERVER_KEYS: string;
+    DATABASE_CLIENT_MYSQL_USER: string;
+    DATABASE_CLIENT_MYSQL_PASSWORD: string;
+    DATABASE_CLIENT_MYSQL_PASSWORD_ROOT: string;
+    DATABASE_CLIENT_PG_USER: string;
+    DATABASE_CLIENT_PG_PASSWORD: string;
+    DATABASE_CLIENT_PG_PASSWORD_ROOT: string;
   }
 }
 
@@ -36,10 +45,16 @@ export class CliCreateProject extends BeanCliBase {
     if (!argv.force && fs.existsSync(targetDir)) {
       throw new Error(`project exists: ${projectName}`);
     }
+    // vars
+    argv.SERVER_KEYS = `vona_${uuidv4}_${Date.now()}_${random(100, 10000)}`;
+    argv.DATABASE_CLIENT_MYSQL_USER = 'web_user';
+    argv.DATABASE_CLIENT_MYSQL_PASSWORD = randomize('*', 16, { exclude: '\\\'"$' });
+    argv.DATABASE_CLIENT_MYSQL_PASSWORD_ROOT = randomize('*', 16, { exclude: '\\\'"$' });
+    argv.DATABASE_CLIENT_PG_USER = 'web_user';
+    argv.DATABASE_CLIENT_PG_PASSWORD = randomize('*', 16, { exclude: '\\\'"$' });
+    argv.DATABASE_CLIENT_PG_PASSWORD_ROOT = randomize('*', 16, { exclude: '\\\'"$' });
     // template
     const template = argv.template;
-    // copy package.json
-    fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
     // render project boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
@@ -47,6 +62,8 @@ export class CliCreateProject extends BeanCliBase {
       snippetsPath: null,
       boilerplatePath: `create/project/${template}/boilerplate`,
     });
+    // copy package.json
+    fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
     // done
     await this.printUsage(targetDir);
   }
@@ -56,8 +73,9 @@ export class CliCreateProject extends BeanCliBase {
       - cd ${targetDir}
       - pnpm install
       - npm run dev
+      - npm run test
       - npm run build
-      - npm run preview
+      - npm run start
     `);
   }
 
@@ -108,4 +126,8 @@ export class CliCreateProject extends BeanCliBase {
     }
     return await this.httpClient.request(url, options);
   }
+}
+
+function random(start, end) {
+  return Math.floor(Math.random() * (end - start) + start);
 }

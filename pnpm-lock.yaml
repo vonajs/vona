@@ -11,244 +11,9 @@ importers:
 
   .:
     dependencies:
-      '@asteasolutions/zod-to-openapi':
-        specifier: ^7.3.0
-        version: 7.3.0(zod@3.24.2)
-      '@cabloy/deps':
-        specifier: workspace:^
-        version: link:packages-utils/deps
-      '@cabloy/json5':
-        specifier: workspace:^
-        version: link:packages-utils/json5
-      '@cabloy/set':
-        specifier: workspace:^
-        version: link:packages-utils/set
-      '@cabloy/utils':
-        specifier: workspace:^
-        version: link:packages-utils/utils
-      '@cabloy/word-utils':
-        specifier: ^2.0.0
-        version: 2.0.0
-      bignumber.js:
-        specifier: ^9.1.2
-        version: 9.1.2
-      boxen:
-        specifier: ^8.0.1
-        version: 8.0.1
-      bullmq:
-        specifier: ^5.34.3
-        version: 5.41.7
-      cel-js:
-        specifier: ^0.3.0
-        version: 0.3.1
-      chalk:
-        specifier: ^5.3.0
-        version: 5.4.1
-      cli-table3:
-        specifier: ^0.6.5
-        version: 0.6.5
-      fs-extra:
-        specifier: ^11.2.0
-        version: 11.3.0
-      ioredis:
-        specifier: ^5.4.1
-        version: 5.5.0
-      knex:
-        specifier: ^3.1.0
-        version: 3.1.0
-      moment:
-        specifier: ^2.30.1
-        version: 2.30.1
-      redlock:
-        specifier: ^4.1.0
-        version: 4.2.0
-      retry:
-        specifier: ^0.13.1
-        version: 0.13.1
-      uuid:
-        specifier: ^11.0.3
-        version: 11.1.0
       vona:
         specifier: workspace:^
         version: link:packages-vona/vona
-      vona-module-a-aspect:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-aspect
-      vona-module-a-b:
-        specifier: workspace:^
-        version: link:src/module/a-b
-      vona-module-a-bean:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-bean
-      vona-module-a-broadcast:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-broadcast
-      vona-module-a-c:
-        specifier: workspace:^
-        version: link:src/module/a-c
-      vona-module-a-cabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
-      vona-module-a-cache:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-cache
-      vona-module-a-core:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-core
-      vona-module-a-d:
-        specifier: workspace:^
-        version: link:src/suite/a-d/modules/a-d
-      vona-module-a-database:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-database
-      vona-module-a-databasedialect:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-databasedialect
-      vona-module-a-election:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-election
-      vona-module-a-error:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-error
-      vona-module-a-event:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-event
-      vona-module-a-executor:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-executor
-      vona-module-a-i18n:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-i18n
-      vona-module-a-index:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-index
-      vona-module-a-instance:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-instance
-      vona-module-a-meta:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-meta
-      vona-module-a-onion:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-onion
-      vona-module-a-openapi:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-openapi
-      vona-module-a-printapipath:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-printapipath
-      vona-module-a-queue:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-queue
-      vona-module-a-redis:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-redis
-      vona-module-a-redlock:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-redlock
-      vona-module-a-schedule:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-schedule
-      vona-module-a-security:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-security
-      vona-module-a-socket:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-socket
-      vona-module-a-startup:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-startup
-      vona-module-a-static:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-static
-      vona-module-a-status:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-status
-      vona-module-a-summer:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-summer
-      vona-module-a-swagger:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-swagger
-      vona-module-a-user:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-user
-      vona-module-a-validation:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-validation
-      vona-module-a-version:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-version
-      vona-module-a-vona:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-vona
-      vona-module-a-web:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-web
-      vona-module-a-worker:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-worker
-      vona-module-cabloy-test:
-        specifier: workspace:^
-        version: link:src/suite-vendor/cabloy-test/modules/cabloy-test
-      vona-module-home-base:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-base
-      vona-module-home-index:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-index
-      vona-module-home-user:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-user
-      vona-module-vona-test:
-        specifier: workspace:^
-        version: link:src/suite-vendor/vona-test/modules/vona-test
-      vona-shared:
-        specifier: workspace:^
-        version: link:packages-vona/vona-shared
-      zod:
-        specifier: ^3.23.8
-        version: 3.24.2
-    devDependencies:
-      '@cabloy/cli':
-        specifier: workspace:^
-        version: link:packages-cli/cabloy-cli
-      '@cabloy/lint':
-        specifier: workspace:^
-        version: link:packages-utils/lint
-      '@swc/core':
-        specifier: ^1.7.36
-        version: 1.11.4(@swc/helpers@0.5.15)
-      '@swc/helpers':
-        specifier: ^0.5.13
-        version: 0.5.15
-      '@types/node':
-        specifier: ^22.10.2
-        version: 22.13.5
-      '@types/redlock':
-        specifier: ^4.0.7
-        version: 4.0.7
-      '@types/retry':
-        specifier: ^0.12.5
-        version: 0.12.5
-      eslint:
-        specifier: ^9.20.1
-        version: 9.21.0
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.11.4(@swc/helpers@0.5.15))(@types/node@22.13.5)(typescript@5.7.3)
-      tslib:
-        specifier: ^2.8.1
-        version: 2.8.1
-      typescript:
-        specifier: ^5.7.3
-        version: 5.7.3
-      vona-mock:
-        specifier: workspace:^
-        version: link:packages-vona/vona-mock
-      why-is-node-running:
-        specifier: ^3.2.2
-        version: 3.2.2
 
   packages-cli/cabloy-cli:
     dependencies:
@@ -416,6 +181,9 @@ importers:
       nodemon:
         specifier: ^3.1.9
         version: 3.1.9
+      randomatic:
+        specifier: ^3.1.1
+        version: 3.1.1
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -3615,6 +3383,10 @@ packages:
   is-module@1.0.0:
     resolution: {integrity: sha512-51ypPSPCoTEIN9dy5Oy+h4pShgJmPCygKfyRCISBI+JoWT/2oJvK8QPxmwv7b/p239jXrm9M1mlQbyKJ5A152g==}
 
+  is-number@4.0.0:
+    resolution: {integrity: sha512-rSklcAIlf1OmFdyAqbnWTLVelsQ58uvZ66S/ZyawjWqIviTWCjg2PzVGw8WUA+nNuPTqb4wgA+NszrJ+08LlgQ==}
+    engines: {node: '>=0.10.0'}
+
   is-number@7.0.0:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
@@ -3722,6 +3494,10 @@ packages:
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
+
+  kind-of@6.0.3:
+    resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
+    engines: {node: '>=0.10.0'}
 
   knex@3.1.0:
     resolution: {integrity: sha512-GLoII6hR0c4ti243gMs5/1Rb3B+AjwMOfjYm97pu0FOQa7JH56hgBxYf5WK2525ceSbBY1cjeZ9yk99GPMB6Kw==}
@@ -3862,6 +3638,9 @@ packages:
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
+
+  math-random@1.0.4:
+    resolution: {integrity: sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==}
 
   mdast-util-find-and-replace@3.0.2:
     resolution: {integrity: sha512-Tmd1Vg/m3Xz43afeNxDIhWRtFZgM2VLyaf4vSTYwudTyeuTneoL3qtWMA5jeLyz/O1vDJmmV4QuScFCA2tBPwg==}
@@ -4492,6 +4271,10 @@ packages:
 
   ramda@0.30.0:
     resolution: {integrity: sha512-13Y0iMhIQuAm/wNGBL/9HEqIfRGmNmjKnTPlKWfA9f7dnDkr8d45wQ+S7+ZLh/Pq9PdcGxkqKUEA7ySu1QSd9Q==}
+
+  randomatic@3.1.1:
+    resolution: {integrity: sha512-TuDE5KxZ0J461RVjrJZCJc+J+zCkTb1MbH9AQUq68sMhOMcy9jLcb3BrZKgp9q9Ncltdg4QVqWrH02W2EFFVYw==}
+    engines: {node: '>= 0.10.0'}
 
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -7499,6 +7282,8 @@ snapshots:
 
   is-module@1.0.0: {}
 
+  is-number@4.0.0: {}
+
   is-number@7.0.0: {}
 
   is-obj@2.0.0: {}
@@ -7595,6 +7380,8 @@ snapshots:
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
+
+  kind-of@6.0.3: {}
 
   knex@3.1.0:
     dependencies:
@@ -7739,6 +7526,8 @@ snapshots:
       escape-string-regexp: 5.0.0
 
   math-intrinsics@1.1.0: {}
+
+  math-random@1.0.4: {}
 
   mdast-util-find-and-replace@3.0.2:
     dependencies:
@@ -8523,6 +8312,12 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   ramda@0.30.0: {}
+
+  randomatic@3.1.1:
+    dependencies:
+      is-number: 4.0.0
+      kind-of: 6.0.3
+      math-random: 1.0.4
 
   randombytes@2.1.0:
     dependencies:
