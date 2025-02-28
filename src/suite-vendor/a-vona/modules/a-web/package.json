@@ -58,8 +58,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@eggjs/router": "^3.0.5",
-    "egg-path-matching": "^1.0.1"
+    "find-my-way": "^9.2.0"
   },
   "clean-package": {
     "indent": 2,

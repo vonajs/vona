@@ -56,6 +56,7 @@ declare module 'vona-module-a-swagger' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
+    '//rapidoc': '//rapidoc';
     '//swagger': '//swagger';
     '//swagger/json': '//swagger/json';
   }

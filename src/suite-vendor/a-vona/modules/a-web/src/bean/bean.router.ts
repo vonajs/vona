@@ -1,7 +1,8 @@
-import type { Constructable, Next, VonaContext } from 'vona';
+import type { Constructable, VonaContext } from 'vona';
 import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
 import type { IDecoratorControllerOptions } from '../types/controller.ts';
 import * as ModuleInfo from '@cabloy/module-info';
+import Router from 'find-my-way';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
@@ -13,9 +14,6 @@ import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.ts'
 
 @Bean()
 export class BeanRouter extends BeanBase {
-  // todo: maybe need for no controller
-  register() {}
-
   registerController(moduleName: string, controller: Constructable) {
     // info
     const info = ModuleInfo.parseInfo(moduleName)!;
@@ -44,16 +42,38 @@ export class BeanRouter extends BeanBase {
     }
   }
 
-  unRegister(name) {
-    const app = this.app;
-    const index = app.router.stack.findIndex(layer => layer.name && layer.name === name);
-    if (index > -1) app.router.stack.splice(index, 1);
-  }
-
-  findByPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
+  register(
+    method: Router.HTTPMethod,
+    moduleName: ModuleInfo.IModuleInfo | string,
+    path: string | undefined,
+    simplify: boolean,
+    fn: Router.Handler<Router.HTTPVersion.V1>,
+  ) {
     const app = this.app;
     const _path = app.util.combineApiPath(moduleName, path, true, simplify);
-    return app.router.stack.find(layer => layer.path === _path);
+    app.router.on(method, _path, fn);
+  }
+
+  unRegister(
+    method: Router.HTTPMethod,
+    moduleName: ModuleInfo.IModuleInfo | string,
+    path: string | undefined,
+    simplify: boolean,
+  ) {
+    const app = this.app;
+    const _path = app.util.combineApiPath(moduleName, path, true, simplify);
+    app.router.off(method, _path);
+  }
+
+  findByPath(
+    method: Router.HTTPMethod,
+    moduleName: ModuleInfo.IModuleInfo | string,
+    path: string | undefined,
+    simplify: boolean,
+  ): any {
+    const app = this.app;
+    const _path = app.util.combineApiPath(moduleName, path, true, simplify);
+    return app.router.findRoute(method, _path);
   }
 
   private _registerControllerAction(
@@ -109,7 +129,6 @@ export class BeanRouter extends BeanBase {
       controllerBeanFullName,
       action: actionKey,
       route,
-      routeName: undefined,
       routeMethod: actionMethod,
       routePath,
       routePathRaw,
@@ -122,11 +141,7 @@ export class BeanRouter extends BeanBase {
     };
 
     // register
-    if (_route.routeName) {
-      app.router[_route.routeMethod](_route.routeName, _route.routePath, fn);
-    } else {
-      app.router[_route.routeMethod](_route.routePath, fn);
-    }
+    app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath.toString(), fn);
   }
 
   _registerComposeMiddlewares(ctx: VonaContext) {
@@ -142,57 +157,6 @@ export class BeanRouter extends BeanBase {
     const fnEnd = classControllerMiddleware;
     // compose
     return this.app.bean.onion.middleware.compose(ctx, fnStart, fnMid, fnEnd);
-  }
-
-  _registerInner(route, middlewaresLocal) {
-    // app
-    const app = this.app;
-    // args
-    let args: any[] = [];
-    // middlewares: start
-    const fnStart = async (ctx: VonaContext, next: Next) => {
-      // route
-      ctx.route = route;
-      // next
-      const res = await next();
-      // invoke callbackes: handle secondly
-      await ctx.tailDone();
-      // ok
-      return res;
-    };
-    fnStart._name = 'start';
-    args.push(fnStart);
-
-    // middlewares: globals
-    args.push(...app.bean.onion.middleware.composedOnionsGlobal);
-    // middlewares: guard/interceptor/pipes
-    args.push(middlewareGuard);
-    args.push(middlewareInterceptor);
-    args.push(middlewarePipe);
-
-    // middlewares: tailDone
-    const fnTailDone = async (ctx, next) => {
-      // next
-      const res = await next();
-      // invoke callbackes: handle firstly
-      await ctx.tailDone();
-      // ok
-      return res;
-    };
-    fnTailDone._name = 'tailDone';
-    args.push(fnTailDone);
-
-    // middlewares
-    if (middlewaresLocal.length > 0) {
-      args = args.concat(middlewaresLocal);
-    }
-
-    // load
-    if (route.routeName) {
-      app.router[route.routeMethod](route.routeName, route.routePath, ...args);
-    } else {
-      app.router[route.routeMethod](route.routePath, ...args);
-    }
   }
 }
 
@@ -220,3 +184,54 @@ async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
   // ok
   return res;
 }
+
+// _registerInner(route, middlewaresLocal) {
+//   // app
+//   const app = this.app;
+//   // args
+//   let args: any[] = [];
+//   // middlewares: start
+//   const fnStart = async (ctx: VonaContext, next: Next) => {
+//     // route
+//     ctx.route = route;
+//     // next
+//     const res = await next();
+//     // invoke callbackes: handle secondly
+//     await ctx.tailDone();
+//     // ok
+//     return res;
+//   };
+//   fnStart._name = 'start';
+//   args.push(fnStart);
+
+//   // middlewares: globals
+//   args.push(...app.bean.onion.middleware.composedOnionsGlobal);
+//   // middlewares: guard/interceptor/pipes
+//   args.push(middlewareGuard);
+//   args.push(middlewareInterceptor);
+//   args.push(middlewarePipe);
+
+//   // middlewares: tailDone
+//   const fnTailDone = async (ctx, next) => {
+//     // next
+//     const res = await next();
+//     // invoke callbackes: handle firstly
+//     await ctx.tailDone();
+//     // ok
+//     return res;
+//   };
+//   fnTailDone._name = 'tailDone';
+//   args.push(fnTailDone);
+
+//   // middlewares
+//   if (middlewaresLocal.length > 0) {
+//     args = args.concat(middlewaresLocal);
+//   }
+
+//   // load
+//   if (route.routeName) {
+//     app.router[route.routeMethod](route.routeName, route.routePath, ...args);
+//   } else {
+//     app.router[route.routeMethod](route.routePath, ...args);
+//   }
+// }

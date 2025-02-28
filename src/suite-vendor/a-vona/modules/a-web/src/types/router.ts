@@ -1,7 +1,7 @@
-import type { EggRouter } from '@eggjs/router';
+import type Router from 'find-my-way';
 
 declare module 'vona' {
   export interface VonaApplication {
-    router: EggRouter;
+    router: Router.Instance<Router.HTTPVersion.V1>;
   }
 }

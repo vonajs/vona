@@ -5,22 +5,24 @@ import type {
   IMiddlewareSystemRecord,
 } from 'vona-module-a-aspect';
 import type { IOnionSlice } from 'vona-module-a-onion';
-import { EggRouter } from '@eggjs/router';
+import Router from 'find-my-way';
 import { BeanSimple, compose } from 'vona';
+import { __ThisModule__ } from './.metadata/this.ts';
 
 const SymbolRouter = Symbol('SymbolRouter');
 
 export class Main extends BeanSimple implements IModuleMain {
-  private [SymbolRouter]: EggRouter;
+  private [SymbolRouter]: Router.Instance<Router.HTTPVersion.V1>;
 
   async moduleLoading() {}
   async moduleLoaded() {
+    const config = this.bean.scope(__ThisModule__).config;
     const self = this;
     // router
     Object.defineProperty(this.app, 'router', {
       get() {
         if (!self[SymbolRouter]) {
-          self[SymbolRouter] = new EggRouter({ sensitive: true }, this.app);
+          self[SymbolRouter] = Router(config.router);
         }
         return self[SymbolRouter];
       },
@@ -35,7 +37,7 @@ export class Main extends BeanSimple implements IModuleMain {
     });
     this.app.use(compose(middlewares));
     // middleware: router
-    this.app.use(this[SymbolRouter].middleware());
+    this.app.use(routerMiddleware(this[SymbolRouter]));
   }
 
   async configLoaded(_config: any) {}
@@ -57,4 +59,10 @@ export class Main extends BeanSimple implements IModuleMain {
     fn._name = item.name;
     return fn;
   }
+}
+
+function routerMiddleware(router: Router.Instance<Router.HTTPVersion.V1>) {
+  return function (ctx: VonaContext) {
+    router.lookup(ctx.req, ctx.res, ctx);
+  };
 }
