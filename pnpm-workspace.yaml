@@ -1,6 +1,5 @@
 packages:
   - 'packages-cli/*'
-  - 'packages-egg-born/*'
   - 'packages-utils/*'
   - 'packages-vona/*'
   - 'src/module/*'
