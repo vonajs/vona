@@ -51,14 +51,10 @@
     "fs-extra": "^10.1.0",
     "inflation": "^2.0.0",
     "koa": "^2.15.4",
-    "passport-oauth2": "^1.6.1",
     "raw-body": "2.5.1",
     "reflect-metadata": "^0.2.2",
-    "regenerator-runtime": "^0.14.1",
     "retry": "^0.13.1",
-    "semver": "^7.3.7",
     "uuid": "^11.0.3",
-    "vona-shared": "workspace:^",
     "why-is-node-running": "^3.2.2"
   },
   "devDependencies": {

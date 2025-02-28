@@ -76,7 +76,6 @@
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
     "ts-node": "^10.9.2",
-    "vona-shared": "workspace:^",
     "why-is-node-running": "^3.2.2"
   },
   "devDependencies": {

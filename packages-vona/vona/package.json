@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "vona-core": "workspace:^",
-    "vona-shared": "workspace:^",
     "vona-suite-a-vona": "workspace:^"
   },
   "clean-package": {
