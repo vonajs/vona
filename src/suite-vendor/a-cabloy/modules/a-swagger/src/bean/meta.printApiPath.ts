@@ -7,10 +7,13 @@ import { apiPath } from 'vona-module-a-web';
 export class MetaPrintApiPath extends BeanBase implements IMetaPrintApiPathExecute {
   async execute(): Promise<IMetaPrintApiPathInfo | IMetaPrintApiPathInfo[]> {
     // apiPath
-    const _apiPath = this.scope.util.combineApiPath(apiPath('//swagger'));
+    const _apiPathSwagger = this.scope.util.combineApiPath(apiPath('//swagger'));
+    const _apiPathRapidoc = this.scope.util.combineApiPath(apiPath('//rapidoc'));
     return [
-      { title: 'swagger', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPath}` },
-      { title: 'swagger30', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPath}?version=30` },
+      { title: 'swagger', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPathSwagger}` },
+      // { title: 'swagger30', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPathSwagger}?version=30` },
+      { title: 'rapidoc', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPathRapidoc}` },
+      // { title: 'rapidoc30', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPathRapidoc}?version=30` },
     ];
   }
 }
