@@ -135,9 +135,11 @@ export class BeanRouter extends BeanBase {
     };
 
     // fn
-    const fn = (ctx, next) => {
+    const self = this;
+    const fn = function (this: VonaContext, _req, _res, _params, _store, _searchParams) {
+      const ctx = this;
       ctx.route = _route;
-      return this._registerComposeMiddlewares(ctx)(ctx, next);
+      return self._registerComposeMiddlewares(ctx)(ctx);
     };
 
     // register

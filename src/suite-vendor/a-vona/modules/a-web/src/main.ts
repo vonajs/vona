@@ -63,6 +63,11 @@ export class Main extends BeanSimple implements IModuleMain {
 
 function routerMiddleware(router: Router.Instance<Router.HTTPVersion.V1>) {
   return function (ctx: VonaContext) {
-    router.lookup(ctx.req, ctx.res, ctx);
+    return new Promise((resolve, reject) => {
+      (router as any).lookup(ctx.req, ctx.res, ctx, (err: Error, result: any) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
   };
 }

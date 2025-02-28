@@ -5,6 +5,7 @@ import type { VonaApplication } from 'vona';
 export function config(_app: VonaApplication) {
   return {
     router: {
+      defaultRoute: (_req, _res) => {},
     } as Config<Router.HTTPVersion.V1>,
   };
 }
