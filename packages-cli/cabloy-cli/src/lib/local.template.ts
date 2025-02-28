@@ -5,6 +5,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import ejs from '@zhennann/ejs';
 import eggBornUtils from 'egg-born-utils';
+import { globby } from 'globby';
 import gogocode from 'gogocode';
 import isTextOrBinary from 'istextorbinary';
 import { commandsConfig } from '../config.ts';
@@ -78,11 +79,10 @@ export class LocalTemplate {
   async renderDir(targetDir: string, templateDir: string) {
     const { argv } = this.context;
     // files
-    const files = eggBornUtils.tools.globbySync('**/*', {
+    const files = await globby('**/*', {
       cwd: templateDir,
       dot: true,
       onlyFiles: false,
-      followSymlinkedDirectories: false,
     });
     // loop
     for (const file of files) {
