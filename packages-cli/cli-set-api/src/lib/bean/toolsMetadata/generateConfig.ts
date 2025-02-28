@@ -27,8 +27,7 @@ import { constants } from '../config/constants.ts';
 }
 
 export async function generateLocale(modulePath: string) {
-  const pattern = `${modulePath}/src/config/locale/*.ts`;
-  const files = await globby(pattern);
+  const files = await globby('src/config/locale/*.ts', { cwd: modulePath });
   if (files.length === 0) return '';
   files.sort();
   const contentImports: string[] = [];

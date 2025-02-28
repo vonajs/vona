@@ -10,8 +10,7 @@ export async function generateScopeResourcesMeta(
   _moduleName: string,
   modulePath: string,
 ) {
-  const pattern = `${modulePath}/src/bean/meta.${metaName}.ts`;
-  const files = await globby(pattern);
+  const files = await globby(`src/bean/meta.${metaName}.ts`, { cwd: modulePath });
   if (files.length === 0) return '';
   // combine
   const content = `/** meta ${metaName}: begin */

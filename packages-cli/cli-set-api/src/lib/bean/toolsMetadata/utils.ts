@@ -26,12 +26,13 @@ export async function globBeanFiles(
   const result: IGlobBeanFile[] = [];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = sceneMeta.sceneIsolate
-    ? `${modulePath}/src/${sceneName}/*.ts`
-    : `${modulePath}/src/bean/${sceneName}.*.ts`;
-  const files = await globby(pattern);
+    ? `src/${sceneName}/*.ts`
+    : `src/bean/${sceneName}.*.ts`;
+  const files = await globby(pattern, { cwd: modulePath });
   if (files.length === 0) return result;
   files.sort();
   for (const file of files) {
+    const filePath = path.join(modulePath, file);
     const fileName = path.basename(file);
     if (fileName.startsWith('_')) continue;
     const parts = fileName.split('.').slice(0, -1);
@@ -44,12 +45,12 @@ export async function globBeanFiles(
       (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
-    const fileContent = isIgnore ? '' : fse.readFileSync(file).toString();
+    const fileContent = isIgnore ? '' : fse.readFileSync(filePath).toString();
     const isVirtual = fileContent.includes('@Virtual()');
     result.push({
       sceneName,
       sceneNameCapitalize,
-      file,
+      file: filePath,
       fileContent,
       fileName,
       fileNameJS,

@@ -7,11 +7,10 @@ import { checkIgnoreOfParts, getScopeModuleName } from './utils.ts';
 // todo: remove
 export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName: string, modulePath: string) {
   const scopeModuleName = getScopeModuleName(moduleName);
-  const pattern = `${modulePath}/src/bean/*.ts`;
   // ignore
   const ignore = Object.keys(onionScenesMeta).map(item => `**/${item}.*.ts`);
   // files
-  const files = await globby(pattern, { ignore });
+  const files = await globby('src/bean/*.ts', { ignore, cwd: modulePath });
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
