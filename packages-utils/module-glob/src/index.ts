@@ -8,8 +8,8 @@ import {
 import { checkMeta } from '@cabloy/utils';
 import boxen from 'boxen';
 import chalk from 'chalk';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globbySync } from 'globby';
 import semver from 'semver';
 import { getPathsMeta } from './meta.ts';
 
@@ -205,11 +205,11 @@ function __orderDependencies(
 function __parseModules(context: IModuleGlobContext, projectPath) {
   const modules: Record<string, IModule> = {};
   for (const __path of context.pathsMeta.modules) {
-    const prefix = `${projectPath}/${__path.prefix}`;
-    const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
-    for (const filePkg of filePkgs) {
+    const fileNames = globbySync(`${__path.prefix}*/package.json`, { cwd: projectPath });
+    for (const fileName of fileNames) {
+      const filePkg = path.join(projectPath, fileName);
       // name
-      const name = filePkg.split('/').slice(-2)[0];
+      const name = fileName.split('/').slice(-2)[0];
       // check if '-' prefix exists
       if (name.substring(0, 1) === '-') {
         // skip
@@ -331,11 +331,11 @@ function __getDisabledSuites(disabledSuites?: string[] | string) {
 function __parseSuites(context: IModuleGlobContext, projectPath) {
   const suites: Record<string, ISuite> = {};
   for (const __path of context.pathsMeta.suites) {
-    const prefix = `${projectPath}/${__path.prefix}`;
-    const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
-    for (const filePkg of filePkgs) {
+    const fileNames = globbySync(`${__path.prefix}*/package.json`, { cwd: projectPath });
+    for (const fileName of fileNames) {
+      const filePkg = path.join(projectPath, fileName);
       // name
-      const name = filePkg.split('/').slice(-2)[0];
+      const name = fileName.split('/').slice(-2)[0];
       // check if '-' prefix exists
       if (name.substring(0, 1) === '-') {
         // skip

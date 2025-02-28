@@ -37,7 +37,6 @@
     "cascade-extend": "workspace:^",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
-    "egg-born-utils": "^1.2.0",
     "globby": "^14.1.0"
   },
   "clean-package": {

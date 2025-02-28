@@ -1,8 +1,8 @@
 import type { DotenvParseOutput } from 'dotenv';
+import path from 'node:path';
 import { cascadeExtendKeys } from 'cascade-extend';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
-import eggBornUtils from 'egg-born-utils';
 import { globbySync } from 'globby';
 
 export function loadEnvs(
@@ -35,10 +35,8 @@ export function metaToScope(meta: object) {
 
 export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?: string): string[] | undefined {
   // files
-  const pattern = [`${prefix}*`];
-  let files: string[] = globbySync(pattern, { cwd: dir });
+  let files: string[] = globbySync(`${prefix}*`, { cwd: dir });
   const fileNames = files.map(item => {
-    item = item.substring(dir.length + 1);
     if (postfix) {
       item = item.substring(0, item.length - postfix.length);
     }
@@ -58,7 +56,7 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?:
   keys = keys.filter(item => !item.includes('.mine')).concat(keys.filter(item => item.includes('.mine')));
   // files
   files = keys.map(key => {
-    let file = `${dir}/${key}`;
+    let file = path.join(dir, key);
     if (postfix) {
       file = `${file}${postfix}`;
     }
