@@ -39,7 +39,7 @@ export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName
           get scope(): ${scopeModuleName};
         }`);
     if (isBeanGlobal || !isIgnore) {
-      contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
+      contentImports.push(`import type { ${className} } from '../bean/${fileNameJS}';`);
     }
     if (isBeanGlobal && !isIgnore) {
       contentRecordsGlobal.push(`'${beanFullName}': ${className};`);

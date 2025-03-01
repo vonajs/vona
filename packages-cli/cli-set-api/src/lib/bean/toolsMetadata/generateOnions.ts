@@ -37,7 +37,7 @@ export async function generateOnions(
     // import options
     if (fileInfo.optionsCustomInterface) {
       contentImports.push(
-        `import { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
+        `import type { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
       );
     }
     // record
