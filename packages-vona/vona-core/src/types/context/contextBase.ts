@@ -26,4 +26,5 @@ export interface ContextBase {
   getHandlerName: () => MetadataKey | undefined;
   get onionsDynamic(): any | undefined;
   set onionsDynamic(value: any | undefined);
+  get acceptJSON(): boolean;
 }
