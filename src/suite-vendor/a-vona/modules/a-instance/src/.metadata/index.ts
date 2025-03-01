@@ -3,22 +3,25 @@ import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IMetaOptionsIndex } from 'vona-module-a-index';
 /** bean: end */
 /** bean: begin */
 import type { BeanInstance } from '../bean/bean.instance.ts';
+
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastReload } from '../bean/broadcast.reload.ts';
-
 import type { BroadcastResetCache } from '../bean/broadcast.resetCache.ts';
-import type { IMetaOptionsIndex } from '../bean/meta.index.ts';
+/** meta: end */
+/** meta redlock: begin */
+import type { MetaRedlock } from '../bean/meta.redlock.ts';
+
 /** middlewareSystem: end */
 /** bean: begin */
 import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
-
 import type { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.ts';
-import type { config } from '../config/config.ts';
 
+import type { config } from '../config/config.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityInstance } from '../entity/instance.ts';
@@ -31,11 +34,8 @@ import type { ServiceInstance } from '../service/instance.ts';
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 
-/** meta: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.ts';
+import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
