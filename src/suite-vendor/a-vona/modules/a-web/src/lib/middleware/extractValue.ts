@@ -13,7 +13,7 @@ export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgument
     response: () => res,
     body: () => (field && req.body ? req.body[field] : req.body),
     query: () => (field ? req.query[field] : req.query),
-    param: () => (field ? ctx.params[field] : ctx.params),
+    param: () => (field ? req.params[field] : req.params),
     headers: () => (field ? req.headers[field.toLowerCase()] : req.headers),
     session: () => req.session,
     file: () => req[field || 'file'],

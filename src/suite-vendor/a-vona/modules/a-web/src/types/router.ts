@@ -5,3 +5,10 @@ declare module 'vona' {
     router: Router.Instance<Router.HTTPVersion.V1>;
   }
 }
+
+declare module 'koa'{
+  export interface Request {
+    params: { [key: string]: string };
+    query: { [key: string]: string };
+  }
+}
