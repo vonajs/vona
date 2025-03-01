@@ -1,9 +1,9 @@
-/** bean: end */
-/** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
 import type { BeanDebug } from '../bean/bean.debug.ts';
+/** bean: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
@@ -13,8 +13,11 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/bean.debug.ts';
-declare module 'vona' {}
+declare module 'vona' {
+
+}
 declare module 'vona-module-home-base' {
+
   export interface BeanDebug {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
@@ -40,6 +43,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     homeBase: ScopeModuleHomeBase;
   }
+
 }
 
 /** scope: end */
