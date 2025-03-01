@@ -1,31 +1,25 @@
-/** main: end */
-/** scope: begin */
-import type {
-  BeanScopeUtil,
-} from 'vona';
-import type { TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
-
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
+
 /** middleware: end */
 /** bean: begin */
 import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.ts';
 import type { config } from '../config/config.ts';
-
 import type { Errors } from '../config/errors.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
+/** main: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
 /** service: end */
 /** service: begin */
 
-import {
-  BeanScopeBase,
-
-} from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
@@ -41,11 +35,14 @@ import 'vona';
 
 export * from '../bean/bean.database.ts';
 declare module 'vona-module-a-aspect' {
+
   export interface IMiddlewareRecordLocal {
     'a-database:transaction': IMiddlewareOptionsTransaction;
   }
+
 }
 declare module 'vona-module-a-database' {
+
   export interface MiddlewareTransaction {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -56,8 +53,11 @@ export * from '../bean/bean.model.ts';
 export * from '../bean/bean.modelBase.ts';
 /** middleware: begin */
 export * from '../bean/middleware.transaction.ts';
-declare module 'vona' {}
+declare module 'vona' {
+
+}
 declare module 'vona-module-a-database' {
+
   export interface BeanDatabase {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -78,13 +78,16 @@ export * from '../config/errors.ts';
 /** main: begin */
 export * from '../main.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-database:databaseClient': never;
     'a-database:dbMeta': never;
     'a-database:transaction': never;
   }
+
 }
 declare module 'vona-module-a-database' {
+
   export interface ServiceDatabaseClient {
     /** @internal */
     get scope(): ScopeModuleADatabase;

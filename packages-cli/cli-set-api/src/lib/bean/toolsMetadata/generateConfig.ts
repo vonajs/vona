@@ -8,7 +8,7 @@ export async function generateConfig(modulePath: string) {
   // combine
   const content = `/** config: begin */
 export * from '../config/config.ts';
-import { config } from '../config/config.ts';
+import type { config } from '../config/config.ts';
 /** config: end */
 `;
   return content;
