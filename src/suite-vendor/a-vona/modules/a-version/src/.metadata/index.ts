@@ -1,24 +1,20 @@
-/** error: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
-
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
 /** broadcast: begin */
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IDecoratorEventOptions } from 'vona-module-a-event';
-
 import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
+
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.ts';
-
 /** event: end */
 /** event: begin */
 import type { EventVersionDone } from '../bean/event.versionDone.ts';
-import type { Errors } from '../config/errors.ts';
 
+import type { Errors } from '../config/errors.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityVersion } from '../entity/version.ts';
@@ -29,14 +25,17 @@ import type { EntityViewRecord } from '../entity/viewRecord.ts';
 /** model: end */
 /** model: begin */
 import type { ModelViewRecord } from '../model/viewRecord.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceVersion } from '../service/version.ts';
+/** error: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
 /** service: end */
 /** service: begin */
 
-import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** locale: begin */
@@ -50,11 +49,14 @@ import 'vona';
 
 export * from '../bean/broadcast.columnsClear.ts';
 declare module 'vona-module-a-broadcast' {
+
   export interface IBroadcastRecord {
     'a-version:columnsClear': IDecoratorBroadcastOptions;
   }
+
 }
 declare module 'vona-module-a-version' {
+
   export interface BroadcastColumnsClear {
     /** @internal */
     get scope(): ScopeModuleAVersion;
@@ -73,13 +75,17 @@ export * from '../bean/meta.version.ts';
 /** startup: begin */
 export * from '../bean/startup.databaseInit.ts';
 declare module 'vona-module-a-database' {
+
   export interface IEntityRecord {
     'a-version:version': IDecoratorEntityOptions;
     'a-version:versionInit': IDecoratorEntityOptions;
     'a-version:viewRecord': IDecoratorEntityOptions;
   }
+
 }
-declare module 'vona-module-a-version' {}
+declare module 'vona-module-a-version' {
+
+}
 export interface IModuleEntity {
   version: EntityVersion;
   versionInit: EntityVersionInit;
@@ -88,6 +94,7 @@ export interface IModuleEntity {
 /** entity: end */
 /** entity: begin */
 declare module 'vona-module-a-version' {
+
   export interface EntityVersion {
     column: <K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(column: K) => K;
     columns: <K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
@@ -105,11 +112,14 @@ declare module 'vona-module-a-version' {
 }
 export * from '../bean/startup.databaseName.ts';
 declare module 'vona-module-a-database' {
+
   export interface IModelRecord {
     'a-version:viewRecord': IDecoratorModelOptions;
   }
+
 }
 declare module 'vona-module-a-version' {
+
   export interface ModelViewRecord {
     /** @internal */
     get scope(): ScopeModuleAVersion;
@@ -120,11 +130,14 @@ export interface IModuleModel {
 }
 export * from '../bean/startup.instanceInit.ts';
 declare module 'vona-module-a-event' {
+
   export interface IEventRecord {
     'a-version:versionDone': IDecoratorEventOptions;
   }
+
 }
 declare module 'vona-module-a-version' {
+
   export interface EventVersionDone {
     /** @internal */
     get scope(): ScopeModuleAVersion;
@@ -137,11 +150,14 @@ export interface IModuleEvent {
 /** error: begin */
 export * from '../config/errors.ts';
 declare module 'vona' {
+
   export interface IMetaRecord {
     'a-version:version': never;
   }
+
 }
 declare module 'vona-module-a-version' {
+
   export interface MetaVersion {
     /** @internal */
     get scope(): ScopeModuleAVersion;
@@ -153,13 +169,16 @@ export * from '../entity/version.ts';
 export * from '../entity/versionInit.ts';
 export * from '../entity/viewRecord.ts';
 declare module 'vona-module-a-startup' {
+
   export interface IStartupRecord {
     'a-version:databaseInit': IDecoratorStartupOptions;
     'a-version:databaseName': IDecoratorStartupOptions;
     'a-version:instanceInit': IDecoratorStartupOptions;
   }
+
 }
 declare module 'vona-module-a-version' {
+
   export interface StartupDatabaseInit {
     /** @internal */
     get scope(): ScopeModuleAVersion;
@@ -182,12 +201,15 @@ export * from '../model/viewRecord.ts';
 /** service: begin */
 export * from '../service/database.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-version:database': never;
     'a-version:version': never;
   }
+
 }
 declare module 'vona-module-a-version' {
+
   export interface ServiceDatabase {
     /** @internal */
     get scope(): ScopeModuleAVersion;

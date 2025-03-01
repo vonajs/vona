@@ -55,7 +55,7 @@ export async function generateError(modulePath: string) {
   // combine
   const content = `/** error: begin */
 export * from '../config/errors.ts';
-import { Errors } from '../config/errors.ts';
+import type { Errors } from '../config/errors.ts';
 /** error: end */
 `;
   return content;
