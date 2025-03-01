@@ -109,7 +109,7 @@ export const rules = {
   '@typescript-eslint/no-unsafe-function-type': 'off',
   '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
   '@stylistic/max-len': ['error', {
-    code: 130,
+    code: 150,
     tabWidth: 2,
     ignoreComments: true,
     ignoreTrailingComments: true,

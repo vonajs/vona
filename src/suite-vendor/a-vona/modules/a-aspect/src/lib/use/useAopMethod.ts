@@ -1,12 +1,7 @@
 import type { MetadataKey } from 'vona';
-import type { IAopMethodRecord } from '../../types/aopMethod.ts';
+import type { IAopMethodRecord, IUseAopMethodPropMetadata } from '../../types/aopMethod.ts';
 import { appMetadata, registerMappedClassMetadataKey } from 'vona';
-
-export const SymbolDecoratorUseAopMethod = Symbol('SymbolDecoratorUseAopMethod');
-export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord> {
-  aopMethodName: T;
-  options?: Partial<IAopMethodRecord[T]>;
-}
+import { SymbolDecoratorUseAopMethod } from '../../types/aopMethod.ts';
 
 export function UseAopMethod<T extends keyof IAopMethodRecord>(
   aopMethodName: T,
