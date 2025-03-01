@@ -1,14 +1,14 @@
-/** service: end */
-/** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** service: end */
 /** service: begin */
 import type { ServiceAop } from '../service/aop.ts';
 import type { ServiceFilter } from '../service/filter.ts';
 /** service: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
+/** service: end */
 /** service: begin */
 
-import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: begin */
 import 'vona';
@@ -19,12 +19,15 @@ import 'vona';
 export * from '../service/aop.ts';
 export * from '../service/filter.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-aspect:aop': never;
     'a-aspect:filter': never;
   }
+
 }
 declare module 'vona-module-a-aspect' {
+
   export interface ServiceAop {
     /** @internal */
     get scope(): ScopeModuleAAspect;
@@ -61,6 +64,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     aspect: ScopeModuleAAspect;
   }
+
 }
 
 /** scope: end */

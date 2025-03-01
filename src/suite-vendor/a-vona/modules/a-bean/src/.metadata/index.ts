@@ -1,5 +1,5 @@
-/** scope: begin */
 import type { BeanScopeUtil } from 'vona';
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from '../lib/scope.ts';
 
@@ -19,6 +19,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     bean: ScopeModuleABean;
   }
+
 }
 
 /** scope: end */

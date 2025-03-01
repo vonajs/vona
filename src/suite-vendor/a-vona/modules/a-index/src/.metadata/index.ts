@@ -1,8 +1,7 @@
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+import type { config } from '../config/config.ts';
 /** config: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeModuleConfig } from 'vona';
-import type { config } from '../config/config.ts';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** meta: begin */
@@ -12,11 +11,14 @@ import 'vona';
 
 export * from '../bean/meta.version.ts';
 declare module 'vona' {
+
   export interface IMetaRecord {
     'a-index:version': never;
   }
+
 }
 declare module 'vona-module-a-index' {
+
   export interface MetaVersion {
     /** @internal */
     get scope(): ScopeModuleAIndex;
@@ -45,6 +47,7 @@ declare module 'vona' {
   export interface IBeanScopeConfig {
     'a-index': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

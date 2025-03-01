@@ -1,30 +1,24 @@
-/** main: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
-
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-import type { IDecoratorModelOptions } from 'vona-module-a-database';
-import type { IMetaOptionsIndex } from 'vona-module-a-index';
 
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
 /** bean: end */
 /** bean: begin */
 import type { BeanInstance } from '../bean/bean.instance.ts';
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastReload } from '../bean/broadcast.reload.ts';
-import type { BroadcastResetCache } from '../bean/broadcast.resetCache.ts';
 
-/** meta: end */
-/** meta redlock: begin */
-import type { MetaRedlock } from '../bean/meta.redlock.ts';
+import type { BroadcastResetCache } from '../bean/broadcast.resetCache.ts';
+import type { IMetaOptionsIndex } from '../bean/meta.index.ts';
 /** middlewareSystem: end */
 /** bean: begin */
 import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
 
 import type { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.ts';
 import type { config } from '../config/config.ts';
+
 /** entity: end */
 /** entity: begin */
 import type { EntityInstance } from '../entity/instance.ts';
@@ -34,15 +28,20 @@ import type { ModelInstance } from '../model/instance.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceInstance } from '../service/instance.ts';
-
+/** main: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-/** service: end */
-/** service: begin */
 
+/** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.ts';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
+/** service: end */
+/** service: begin */
+
 import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
 import 'vona';
@@ -58,12 +57,15 @@ export * from '../bean/bean.instance.ts';
 /** broadcast: begin */
 export * from '../bean/broadcast.reload.ts';
 declare module 'vona-module-a-aspect' {
+
   export interface IMiddlewareSystemRecord {
     'a-instance:appReady': IMiddlewareSystemOptionsAppReady;
     'a-instance:instance': IMiddlewareSystemOptionsInstance;
   }
+
 }
 declare module 'vona-module-a-instance' {
+
   export interface MiddlewareSystemAppReady {
     /** @internal */
     get scope(): ScopeModuleAInstance;
@@ -75,8 +77,11 @@ declare module 'vona-module-a-instance' {
   }
 }
 export * from '../bean/broadcast.resetCache.ts';
-declare module 'vona' {}
+declare module 'vona' {
+
+}
 declare module 'vona-module-a-instance' {
+
   export interface BeanInstance {
     /** @internal */
     get scope(): ScopeModuleAInstance;
@@ -92,12 +97,15 @@ declare module 'vona' {
 export * from '../bean/meta.index.ts';
 export * from '../bean/meta.redlock.ts';
 declare module 'vona-module-a-broadcast' {
+
   export interface IBroadcastRecord {
     'a-instance:reload': IDecoratorBroadcastOptions;
     'a-instance:resetCache': IDecoratorBroadcastOptions;
   }
+
 }
 declare module 'vona-module-a-instance' {
+
   export interface BroadcastReload {
     /** @internal */
     get scope(): ScopeModuleAInstance;
@@ -114,17 +122,22 @@ export interface IModuleBroadcast {
 }
 export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
+
   export interface IEntityRecord {
     'a-instance:instance': IDecoratorEntityOptions;
   }
+
 }
-declare module 'vona-module-a-instance' {}
+declare module 'vona-module-a-instance' {
+
+}
 export interface IModuleEntity {
   instance: EntityInstance;
 }
 /** entity: end */
 /** entity: begin */
 declare module 'vona-module-a-instance' {
+
   export interface EntityInstance {
     column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
     columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
@@ -133,11 +146,14 @@ declare module 'vona-module-a-instance' {
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.appReady.ts';
 declare module 'vona-module-a-database' {
+
   export interface IModelRecord {
     'a-instance:instance': IDecoratorModelOptions;
   }
+
 }
 declare module 'vona-module-a-instance' {
+
   export interface ModelInstance {
     /** @internal */
     get scope(): ScopeModuleAInstance;
@@ -154,13 +170,16 @@ export * from '../config/config.ts';
 /** entity: begin */
 export * from '../entity/instance.ts';
 declare module 'vona' {
+
   export interface IMetaRecord {
     'a-instance:index': IMetaOptionsIndex;
     'a-instance:redlock': never;
     'a-instance:version': never;
   }
+
 }
 declare module 'vona-module-a-instance' {
+
   export interface MetaIndex {
     /** @internal */
     get scope(): ScopeModuleAInstance;
@@ -180,11 +199,14 @@ declare module 'vona-module-a-instance' {
 /** main: begin */
 export * from '../main.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-instance:instance': never;
   }
+
 }
 declare module 'vona-module-a-instance' {
+
   export interface ServiceInstance {
     /** @internal */
     get scope(): ScopeModuleAInstance;
