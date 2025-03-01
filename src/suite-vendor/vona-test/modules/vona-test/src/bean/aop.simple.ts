@@ -1,3 +1,5 @@
+import type { Next } from 'vona';
+import type { BeanTestCtx } from 'vona-module-vona-test';
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
@@ -49,7 +51,7 @@ export class AopSimple extends AopSimpleBase {
     return next(value);
   }
 
-  async actionAsync(_args, next) {
+  async actionAsync(_args: Parameters<BeanTestCtx['actionAsync']>, next: Next, _receiver: BeanTestCtx) {
     const result = await next();
     return `${result}:simpleaop`;
   }

@@ -34,7 +34,7 @@ class TestCtx0 extends BeanBase {
     return a + b;
   }
 
-  async actionAsync({ a, b }: any) {
+  async actionAsync({ a, b }: { a: number; b: number }) {
     return Promise.resolve(a + b);
   }
 

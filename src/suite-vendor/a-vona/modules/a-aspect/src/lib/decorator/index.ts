@@ -1,4 +1,5 @@
 export * from './aop.ts';
+export * from './aopMethod.ts';
 export * from './filter.ts';
 export * from './guard.ts';
 export * from './interceptor.ts';
