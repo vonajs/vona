@@ -12,7 +12,7 @@ import type {
   TypeQueueJob,
 } from '../types/queue.ts';
 import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, instanceDesp, uuidv4 } from 'vona';
+import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -248,7 +248,7 @@ export class ServiceQueue extends BeanBase {
 
   _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
     const instanceName = instanceDesp(info.options?.instanceName);
-    return `${instanceName}||${info.queueName.replace(':', '.queue.')}`;
+    return `${instanceName}||${beanFullNameFromOnionName(info.queueName, 'queue')}`;
   }
 
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {

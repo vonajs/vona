@@ -1,5 +1,5 @@
 import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
-import { BeanBase, cast, deepExtend } from 'vona';
+import { BeanBase, beanFullNameFromOnionName, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -74,7 +74,7 @@ export class ServiceSchedule extends BeanBase {
   }
 
   public getScheduleKey(instanceName: string | undefined | null, scheduleName: keyof IScheduleRecord) {
-    return `${instanceName}.${cast<string>(scheduleName).replace(':', '.schedule.')}`; // not use :
+    return `${instanceName}.${beanFullNameFromOnionName(cast<string>(scheduleName), 'schedule')}`; // not use :
   }
 
   public async loadSchedules(instanceName?: string | undefined | null) {

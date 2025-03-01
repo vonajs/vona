@@ -1,5 +1,5 @@
 import type { IPassportAdapter, IUserBase } from '../types/user.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { isAnonymous } from '../lib/user.ts';
 
@@ -9,7 +9,7 @@ export class BeanPassport extends BeanBase {
 
   private get passportAdapter(): IPassportAdapter {
     if (!this._passportAdapter) {
-      const beanFullName = this.scope.config.passportAdapter.replace(':', '.service.');
+      const beanFullName = beanFullNameFromOnionName(this.scope.config.passportAdapter, 'service');
       this._passportAdapter = this.bean._getBean<IPassportAdapter>(beanFullName as never);
     }
     return this._passportAdapter;

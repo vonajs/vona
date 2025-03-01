@@ -1,5 +1,6 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
+import type { IBeanSceneRecord } from 'vona';
 import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -380,4 +381,8 @@ export function prepareEnv(env: { [key: string]: string | boolean }) {
       process.env[key] = env[key].toString();
     }
   }
+}
+
+export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): string {
+  return onionName.replace(':', `.${sceneName}.`);
 }

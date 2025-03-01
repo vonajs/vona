@@ -1,7 +1,7 @@
 import type { Constructable, IBeanRecord } from 'vona';
 import type { IDecoratorAopOptions } from '../types/aop.ts';
 import type { IUseAopMethodPropMetadata } from '../types/aopMethod.ts';
-import { appMetadata, appResource, BeanBase, deepExtend, SymbolProxyDisable } from 'vona';
+import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, deepExtend, SymbolProxyDisable } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { SymbolDecoratorUseAopMethod } from '../types/aopMethod.ts';
 
@@ -58,8 +58,8 @@ export class ServiceAop extends BeanBase {
         const onionSlice = this.bean.onion.aopMethod.getOnionSlice(aopMethod.aopMethodName);
         const options = deepExtend({}, onionSlice.beanOptions.options, aopMethod.options);
         if (this.bean.onion.checkOnionOptionsEnabled(options)) {
-          const beanFullName = aopMethod.aopMethodName.replace(':', '.aopMethod.');
-          const beanInstance = this.app.bean._getBean(beanFullName);
+          const beanFullName = beanFullNameFromOnionName(aopMethod.aopMethodName, 'aopMethod');
+          const beanInstance = this.app.bean._getBean(beanFullName as any);
           aopMethodsMatched.push({
             beanInstance,
             options,
