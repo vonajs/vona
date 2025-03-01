@@ -1,4 +1,5 @@
 export * from './beanAopBase.ts';
+export * from './beanAopMethodBase.ts';
 export * from './beanBase.ts';
 export * from './beanBaseSimple.ts';
 export * from './beanContainer.ts';
