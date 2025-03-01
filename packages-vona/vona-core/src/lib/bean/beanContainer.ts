@@ -400,7 +400,7 @@ export class BeanContainer {
     // aop method
     if (!beanInstance[SymbolProxyDisable] && beanOptions) {
       const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
-      if (beanAop.hasAopMethods()) {
+      if (beanAop.hasAopMethods(beanOptions?.beanFullName)) {
         chains.push(SymbolProxyAopMethod);
       }
     }
@@ -449,25 +449,23 @@ export class BeanContainer {
         }
       } else if (aopKey === SymbolProxyAopMethod) {
         const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
-        const aopMethods = beanAop.findAopMethodsMatched(beanFullName, methodName);
-        if (aopMethods) {
-          for (const aopMethod of aopMethods) {
-            let fn;
-            if (methodType === 'get') {
-              fn = function (_, next) {
-                return aopMethod.beanInstance.get(aopMethod.options, next, receiver);
-              };
-            } else if (methodType === 'set') {
-              fn = function (value, next) {
-                return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver);
-              };
-            } else if (methodType === 'method') {
-              fn = function (args, next) {
-                return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver);
-              };
-            }
-            chains.push([aopKey, fn]);
+        const __aopMethods = beanAop.findAopMethodsMatched(beanFullName, methodName);
+        for (const aopMethod of __aopMethods) {
+          let fn;
+          if (methodType === 'get') {
+            fn = function (_, next) {
+              return aopMethod.beanInstance.get(aopMethod.options, next, receiver);
+            };
+          } else if (methodType === 'set') {
+            fn = function (value, next) {
+              return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver);
+            };
+          } else if (methodType === 'method') {
+            fn = function (args, next) {
+              return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver);
+            };
           }
+          chains.push([aopKey, fn]);
         }
       } else {
         // singleton

@@ -5,11 +5,8 @@ import { appMetadata, appResource, BeanBase, deepExtend, SymbolProxyDisable } fr
 import { Service } from 'vona-module-a-web';
 import { SymbolDecoratorUseAopMethod } from '../types/aopMethod.ts';
 
-const SymbolCacheAopMethods = Symbol('SymbolCacheAopMethods');
-
 @Service()
 export class ServiceAop extends BeanBase {
-  private [SymbolCacheAopMethods]: Record<string, IUseAopMethodPropMetadata[] | null> = {};
   protected [SymbolProxyDisable]: boolean = true;
 
   findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
@@ -53,28 +50,23 @@ export class ServiceAop extends BeanBase {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
-    // cache
-    const cacheKey = `${beanOptions.beanFullName}.${prop}`;
-    if (this[SymbolCacheAopMethods][cacheKey] === undefined) {
-      const aopMethodsMathed: IUseAopMethodPropMetadata[] = [];
-      const uses = appMetadata.getMetadata(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
-      const aopMethods: IUseAopMethodPropMetadata[] = uses?.[prop];
-      if (aopMethods) {
-        for (const aopMethod of aopMethods) {
-          const optionsConfig = this.app.config.onions[beanOptions.scene]?.[aopMethod.aopMethodName];
-          const options = deepExtend({}, beanOptions.options, optionsConfig, aopMethod.options);
-          if (this.bean.onion.checkOnionOptionsEnabled(options)) {
-            const beanFullName = aopMethod.aopMethodName.replace(':', '.aopMethod.');
-            const beanInstance = this.app.bean._getBean(beanFullName);
-            aopMethodsMathed.push({
-              beanInstance,
-              options,
-            });
-          }
+    const aopMethodsMathed: IUseAopMethodPropMetadata[] = [];
+    const uses = appMetadata.getMetadata(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
+    const aopMethods: IUseAopMethodPropMetadata[] = uses?.[prop];
+    if (aopMethods) {
+      for (const aopMethod of aopMethods) {
+        const optionsConfig = this.app.config.onions[beanOptions.scene]?.[aopMethod.aopMethodName];
+        const options = deepExtend({}, beanOptions.options, optionsConfig, aopMethod.options);
+        if (this.bean.onion.checkOnionOptionsEnabled(options)) {
+          const beanFullName = aopMethod.aopMethodName.replace(':', '.aopMethod.');
+          const beanInstance = this.app.bean._getBean(beanFullName);
+          aopMethodsMathed.push({
+            beanInstance,
+            options,
+          });
         }
       }
-      this[SymbolCacheAopMethods][cacheKey] = aopMethodsMathed.length === 0 ? null : aopMethodsMathed;
     }
-    return this[SymbolCacheAopMethods][cacheKey];
+    return aopMethodsMathed;
   }
 }
