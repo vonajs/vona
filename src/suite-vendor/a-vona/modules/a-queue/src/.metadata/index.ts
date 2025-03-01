@@ -1,17 +1,16 @@
-/** monkey: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 
-import type { TypeModuleConfig } from 'vona';
 /** startup: begin */
 import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
-/** service: end */
-/** service: begin */
-
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceQueue } from '../service/queue.ts';
+/** service: end */
+/** service: begin */
+
+/** monkey: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
@@ -21,11 +20,14 @@ import 'vona';
 
 export * from '../bean/startup.loadQueueWorkers.ts';
 declare module 'vona-module-a-startup' {
+
   export interface IStartupRecord {
     'a-queue:loadQueueWorkers': IDecoratorStartupOptions;
   }
+
 }
 declare module 'vona-module-a-queue' {
+
   export interface StartupLoadQueueWorkers {
     /** @internal */
     get scope(): ScopeModuleAQueue;
@@ -35,11 +37,14 @@ declare module 'vona-module-a-queue' {
 /** config: begin */
 export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-queue:queue': never;
   }
+
 }
 declare module 'vona-module-a-queue' {
+
   export interface ServiceQueue {
     /** @internal */
     get scope(): ScopeModuleAQueue;
@@ -80,6 +85,7 @@ declare module 'vona' {
   export interface IBeanScopeConfig {
     'a-queue': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */
