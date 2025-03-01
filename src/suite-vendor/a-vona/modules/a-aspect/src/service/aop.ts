@@ -50,7 +50,7 @@ export class ServiceAop extends BeanBase {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
-    const aopMethodsMathed: IUseAopMethodPropMetadata[] = [];
+    const aopMethodsMatched: IUseAopMethodPropMetadata[] = [];
     const uses = appMetadata.getMetadata(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
     const aopMethods: IUseAopMethodPropMetadata[] = uses?.[prop];
     if (aopMethods) {
@@ -60,13 +60,13 @@ export class ServiceAop extends BeanBase {
         if (this.bean.onion.checkOnionOptionsEnabled(options)) {
           const beanFullName = aopMethod.aopMethodName.replace(':', '.aopMethod.');
           const beanInstance = this.app.bean._getBean(beanFullName);
-          aopMethodsMathed.push({
+          aopMethodsMatched.push({
             beanInstance,
             options,
           });
         }
       }
     }
-    return aopMethodsMathed;
+    return aopMethodsMatched;
   }
 }

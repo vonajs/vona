@@ -448,25 +448,7 @@ export class BeanContainer {
           chains.push([aopKey, methodName]);
         }
       } else if (aopKey === SymbolProxyAopMethod) {
-        const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
-        const __aopMethods = beanAop.findAopMethodsMatched(beanFullName, methodName);
-        for (const aopMethod of __aopMethods) {
-          let fn;
-          if (methodType === 'get') {
-            fn = function (_, next) {
-              return aopMethod.beanInstance.get(aopMethod.options, next, receiver);
-            };
-          } else if (methodType === 'set') {
-            fn = function (value, next) {
-              return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver);
-            };
-          } else if (methodType === 'method') {
-            fn = function (args, next) {
-              return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver);
-            };
-          }
-          chains.push([aopKey, fn]);
-        }
+        this.___getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodName, methodType, receiver);
       } else {
         // singleton
         const aop: BeanAopBase = this.app.bean._getBean(aopKey as string as any);
@@ -509,6 +491,28 @@ export class BeanContainer {
     }
     host[SymbolCacheAopChainsKey][cacheKey][chainsKey] = chains;
     return chains;
+  }
+
+  private ___getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodName, methodType, receiver) {
+    const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
+    const aopMethods = beanAop.findAopMethodsMatched(beanFullName, methodName);
+    for (const aopMethod of aopMethods) {
+      let fn;
+      if (methodType === 'get') {
+        fn = function (_, next) {
+          return aopMethod.beanInstance.get(aopMethod.options, next, receiver);
+        };
+      } else if (methodType === 'set') {
+        fn = function (value, next) {
+          return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver);
+        };
+      } else if (methodType === 'method') {
+        fn = function (args, next) {
+          return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver);
+        };
+      }
+      chains.push([aopKey, fn]);
+    }
   }
 
   private __composeForPropAdapter = (_context, chain) => {
