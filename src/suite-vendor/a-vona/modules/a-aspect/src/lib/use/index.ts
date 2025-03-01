@@ -1,3 +1,4 @@
+export * from './useAopMethod.ts';
 export * from './useFilter.ts';
 export * from './useFilterGlobal.ts';
 export * from './useGuard.ts';

@@ -1,18 +1,17 @@
-/** config: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
-
 /** bean: end */
 /** bean: begin */
 import type { BeanCache } from '../bean/bean.cache.ts';
+
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastMemClear } from '../bean/broadcast.memClear.ts';
 import type { BroadcastMemDel } from '../bean/broadcast.memDel.ts';
 import type { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.ts';
 import type { config } from '../config/config.ts';
+/** config: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
@@ -24,8 +23,11 @@ import 'vona';
 export * from '../bean/bean.cache.ts';
 export * from '../bean/bean.cacheMemBase.ts';
 export * from '../bean/bean.cacheRedisBase.ts';
-declare module 'vona' {}
+declare module 'vona' {
+
+}
 declare module 'vona-module-a-cache' {
+
   export interface BeanCache {
     /** @internal */
     get scope(): ScopeModuleACache;
@@ -42,13 +44,16 @@ export * from '../bean/broadcast.memClear.ts';
 export * from '../bean/broadcast.memDel.ts';
 export * from '../bean/broadcast.memMultiDel.ts';
 declare module 'vona-module-a-broadcast' {
+
   export interface IBroadcastRecord {
     'a-cache:memClear': IDecoratorBroadcastOptions;
     'a-cache:memDel': IDecoratorBroadcastOptions;
     'a-cache:memMultiDel': IDecoratorBroadcastOptions;
   }
+
 }
 declare module 'vona-module-a-cache' {
+
   export interface BroadcastMemClear {
     /** @internal */
     get scope(): ScopeModuleACache;
@@ -93,6 +98,7 @@ declare module 'vona' {
   export interface IBeanScopeConfig {
     'a-cache': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */
