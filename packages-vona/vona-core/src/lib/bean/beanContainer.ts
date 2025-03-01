@@ -389,17 +389,20 @@ export class BeanContainer {
     if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     let chains: MetadataKey[] = [];
-    const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
     // aop
     if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
+      const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
       const aops = beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);
       }
     }
     // aop method
-    if (beanAop.hasAopMethods()) {
-      chains.push(SymbolProxyAopMethod);
+    if (!beanInstance[SymbolProxyDisable] && beanOptions) {
+      const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
+      if (beanAop.hasAopMethods()) {
+        chains.push(SymbolProxyAopMethod);
+      }
     }
     // magic self
     if (__hasMagicMothod(beanInstance)) {
