@@ -55,8 +55,8 @@ export class ServiceAop extends BeanBase {
     const aopMethods: IUseAopMethodPropMetadata[] = uses?.[prop];
     if (aopMethods) {
       for (const aopMethod of aopMethods) {
-        const optionsConfig = this.app.config.onions[beanOptions.scene]?.[aopMethod.aopMethodName];
-        const options = deepExtend({}, beanOptions.options, optionsConfig, aopMethod.options);
+        const onionSlice = this.bean.onion.aopMethod.getOnionSlice(aopMethod.aopMethodName);
+        const options = deepExtend({}, onionSlice.beanOptions.options, aopMethod.options);
         if (this.bean.onion.checkOnionOptionsEnabled(options)) {
           const beanFullName = aopMethod.aopMethodName.replace(':', '.aopMethod.');
           const beanInstance = this.app.bean._getBean(beanFullName);
