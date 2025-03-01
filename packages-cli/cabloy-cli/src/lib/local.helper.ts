@@ -233,7 +233,7 @@ export class LocalHelper {
   async invokeCli(args: string[], options) {
     await this.processHelper.spawnExe({
       cmd: 'node',
-      args: [this.parseBrandPath()].concat(args),
+      args: ['--experimental-transform-types', this.parseBrandPath()].concat(args),
       options,
     });
   }
