@@ -1,9 +1,8 @@
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'vona';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 /** locale: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-
-import type { TypeLocaleBase, TypeModuleLocales } from 'vona';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** controller: end */
@@ -17,11 +16,14 @@ import 'vona';
 
 export * from '../bean/meta.printApiPath.ts';
 declare module 'vona' {
+
   export interface IMetaRecord {
     'home-index:printApiPath': never;
   }
+
 }
 declare module 'vona-module-home-index' {
+
   export interface MetaPrintApiPath {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
@@ -31,11 +33,14 @@ declare module 'vona-module-home-index' {
 /** controller: begin */
 export * from '../controller/home.ts';
 declare module 'vona-module-a-web' {
+
   export interface IControllerRecord {
     'home-index:home': IDecoratorControllerOptions;
   }
+
 }
 declare module 'vona-module-home-index' {
+
   export interface ControllerHome {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
@@ -47,6 +52,7 @@ declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '//': '//';
   }
+
 }
 export const locales = {
   'en-us': locale_en_us,
