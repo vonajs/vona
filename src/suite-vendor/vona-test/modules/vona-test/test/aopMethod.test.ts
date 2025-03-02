@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('aopMethod.test.ts', () => {
+describe('aopMethod.test.ts', () => {
   it('action:aopMethod', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
