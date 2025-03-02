@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/module-info",
   "type": "module",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "cabloy module-info",
   "publishConfig": {
     "access": "public"
@@ -33,9 +33,7 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {
-    "stack-utils": "^2.0.6"
-  },
+  "dependencies": {},
   "clean-package": {
     "indent": 2,
     "remove": [
