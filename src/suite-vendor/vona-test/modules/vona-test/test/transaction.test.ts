@@ -7,6 +7,7 @@ describe('transaction.test.ts', () => {
   const tableNameSuccess = '__tempTransactionSuccess';
 
   it('action:transaction:fail', async () => {
+    // transaction
     await app.bean.executor.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableNameFail, table => {
@@ -39,9 +40,43 @@ describe('transaction.test.ts', () => {
       // drop table
       await app.bean.model.dropTable(tableNameFail);
     });
+
+    // aop method
+    const scopeTest = app.bean.scope('vona-test');
+    await app.bean.executor.mockCtx(async () => {
+      // create table
+      await app.bean.model.createTable(tableNameFail, table => {
+        table.basicFields();
+        table.string('name');
+      });
+      // create a new item
+      const res = await app.bean.model.insert(tableNameFail, {
+        name: 'hello',
+      });
+      const id = res[0];
+
+      // try to change name
+      const itemNew = {
+        id,
+        name: 'hello!!',
+      };
+      try {
+        await scopeTest.service.transaction.fail(itemNew);
+      } catch (_err) {}
+
+      // check name
+      const item = await app.bean.model.get(tableNameFail, {
+        id,
+      });
+      assert.notEqual(item.name, itemNew.name);
+
+      // drop table
+      await app.bean.model.dropTable(tableNameFail);
+    });
   });
 
   it('action:transaction:success', async () => {
+    // transaction
     await app.bean.executor.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableNameSuccess, table => {
@@ -62,6 +97,37 @@ describe('transaction.test.ts', () => {
       await app.bean.executor.performAction('post', '/vona/test/transaction/success', {
         body: itemNew,
       });
+
+      // check name
+      const item = await app.bean.model.get(tableNameSuccess, {
+        id,
+      });
+      assert.equal(item.name, itemNew.name);
+
+      // drop table
+      await app.bean.model.dropTable(tableNameSuccess);
+    });
+
+    // aop method
+    const scopeTest = app.bean.scope('vona-test');
+    await app.bean.executor.mockCtx(async () => {
+      // create table
+      await app.bean.model.createTable(tableNameSuccess, table => {
+        table.basicFields();
+        table.string('name');
+      });
+      // create a new item
+      const res = await app.bean.model.insert(tableNameSuccess, {
+        name: 'hello',
+      });
+      const id = res[0];
+
+      // try to change name
+      const itemNew = {
+        id,
+        name: 'hello!!',
+      };
+      await scopeTest.service.transaction.success(itemNew);
 
       // check name
       const item = await app.bean.model.get(tableNameSuccess, {
