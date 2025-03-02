@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
-import { TransactionMiddleware } from 'vona-module-a-database';
+import { Transaction } from 'vona-module-a-database';
 import { Api, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get, Post } from 'vona-module-a-web';
@@ -23,7 +23,7 @@ export class ControllerOnion extends BeanBase {
   @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
-  @TransactionMiddleware({ isolationLevel: 'read committed', readOnly: false })
+  @Transaction({ isolationLevel: 'read committed', readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(
     @Query('id', v.default(0), z.number()) id: number,
