@@ -52,7 +52,7 @@ export class ServiceAop extends BeanBase {
     if (!beanOptions) return;
     const aopMethodsMatched: IUseAopMethodPropMetadata[] = [];
     const uses = appMetadata.getMetadata(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
-    const aopMethods: IUseAopMethodPropMetadata[] = uses?.[prop];
+    const aopMethods: IUseAopMethodPropMetadata[] | undefined = uses?.[prop];
     if (aopMethods) {
       for (const aopMethod of aopMethods) {
         const onionSlice = this.bean.onion.aopMethod.getOnionSlice(aopMethod.onionName!);
