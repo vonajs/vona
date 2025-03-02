@@ -386,3 +386,7 @@ export function prepareEnv(env: { [key: string]: string | boolean }) {
 export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): string {
   return onionName.replace(':', `.${sceneName}.`);
 }
+
+export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {
+  return beanFullName.replace(`.${sceneName}.`, ':');
+}
