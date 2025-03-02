@@ -15,7 +15,7 @@ export function UseAopMethod<T extends keyof IAopMethodRecord>(
       target,
     );
     if (!uses[prop]) uses[prop] = [];
-    uses[prop].push({ aopMethodName, options });
+    uses[prop].push({ onionName: aopMethodName, options });
     return descriptor;
   } as any;
 }

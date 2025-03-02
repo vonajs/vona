@@ -4,7 +4,7 @@ import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 export const SymbolDecoratorUseAopMethod = Symbol('SymbolDecoratorUseAopMethod');
 export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord = any> {
   beanInstance?: any;
-  aopMethodName?: T;
+  onionName?: T;
   options?: Partial<IAopMethodRecord[T]>;
 }
 
