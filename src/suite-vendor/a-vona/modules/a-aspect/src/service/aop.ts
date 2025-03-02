@@ -55,10 +55,10 @@ export class ServiceAop extends BeanBase {
     const aopMethods: IUseAopMethodPropMetadata[] = uses?.[prop];
     if (aopMethods) {
       for (const aopMethod of aopMethods) {
-        const onionSlice = this.bean.onion.aopMethod.getOnionSlice(aopMethod.onionName);
+        const onionSlice = this.bean.onion.aopMethod.getOnionSlice(aopMethod.onionName!);
         const options = deepExtend({}, onionSlice.beanOptions.options, aopMethod.options);
         if (this.bean.onion.checkOnionOptionsEnabled(options)) {
-          const beanFullName = beanFullNameFromOnionName(aopMethod.onionName, 'aopMethod');
+          const beanFullName = beanFullNameFromOnionName(aopMethod.onionName!, 'aopMethod');
           const beanInstance = this.app.bean._getBean(beanFullName as any);
           aopMethodsMatched.push({
             onionName: aopMethod.onionName,
