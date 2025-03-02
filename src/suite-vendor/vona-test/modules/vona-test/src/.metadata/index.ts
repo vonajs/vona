@@ -44,10 +44,11 @@ import type { SummerCacheTest } from '../bean/summerCache.test.ts';
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
+import type { ServiceAopMethod } from '../service/aopMethod.ts';
+
 import type { ServiceTest } from '../service/test.ts';
 
 import type { ServiceTestApp } from '../service/testApp.ts';
-
 import type { ServiceTestClass } from '../service/testClass.ts';
 /** locale: end */
 /** scope: begin */
@@ -308,9 +309,11 @@ declare module 'vona-module-vona-test' {
 export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
 export * from '../controller/onion.ts';
+export * from '../controller/passport.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
+    'vona-test:aopMethod': never;
     'vona-test:test': never;
     'vona-test:testApp': never;
     'vona-test:testClass': never;
@@ -318,6 +321,11 @@ declare module 'vona-module-a-web' {
 
 }
 declare module 'vona-module-vona-test' {
+
+  export interface ServiceAopMethod {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
 
   export interface ServiceTest {
     /** @internal */
@@ -335,18 +343,19 @@ declare module 'vona-module-vona-test' {
   }
 }
 export interface IModuleService {
+  aopMethod: ServiceAopMethod;
   test: ServiceTest;
   testApp: ServiceTestApp;
   testClass: ServiceTestClass;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
+    'vona-test.service.aopMethod': ServiceAopMethod;
     'vona-test.service.test': ServiceTest;
     'vona-test.service.testApp': ServiceTestApp;
     'vona-test.service.testClass': ServiceTestClass;
   }
 }
-export * from '../controller/passport.ts';
 export * from '../controller/performAction.ts';
 export * from '../controller/queue.ts';
 export * from '../controller/summer.ts';
@@ -358,6 +367,7 @@ export * from '../dto/profile.ts';
 export * from '../dto/user.ts';
 /** dto: end */
 /** service: begin */
+export * from '../service/aopMethod.ts';
 export * from '../service/test.ts';
 export * from '../service/testApp.ts';
 declare module 'vona-module-a-web' {
