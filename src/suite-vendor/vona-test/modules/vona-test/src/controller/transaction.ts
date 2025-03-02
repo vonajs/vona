@@ -9,8 +9,9 @@ const tableNameSuccess = '__tempTransactionSuccess';
 @Api.exclude()
 export class ControllerTransaction extends BeanBase {
   @Post('fail')
-  fail(@Body() item: object) {
-    return this.app.bean.model.update(`${tableNameFail}error`, item);
+  async fail(@Body() item: object) {
+    await this.app.bean.model.update(`${tableNameFail}`, item);
+    await this.app.bean.model.update(`${tableNameFail}error`, item);
   }
 
   @Post('success')
