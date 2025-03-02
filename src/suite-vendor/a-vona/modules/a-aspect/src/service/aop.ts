@@ -43,10 +43,10 @@ export class ServiceAop extends BeanBase {
     return !!uses;
   }
 
-  findAopMethodsMatched<T>(A: Constructable<T>, prop: string): IUseAopMethodPropMetadata[] | null | undefined;
-  findAopMethodsMatched<K extends keyof IBeanRecord>(beanFullName: K, prop: string): IUseAopMethodPropMetadata[] | null | undefined;
-  findAopMethodsMatched(beanFullName: string, prop: string): IUseAopMethodPropMetadata[] | null | undefined;
-  findAopMethodsMatched<T>(beanFullName: Constructable<T> | string, prop: string): IUseAopMethodPropMetadata[] | null | undefined {
+  findAopMethodsMatched<T>(A: Constructable<T>, prop: string): IUseAopMethodPropMetadata[] | undefined;
+  findAopMethodsMatched<K extends keyof IBeanRecord>(beanFullName: K, prop: string): IUseAopMethodPropMetadata[] | undefined;
+  findAopMethodsMatched(beanFullName: string, prop: string): IUseAopMethodPropMetadata[] | undefined;
+  findAopMethodsMatched<T>(beanFullName: Constructable<T> | string, prop: string): IUseAopMethodPropMetadata[] | undefined {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
