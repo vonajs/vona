@@ -11,15 +11,15 @@ export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord = an
 export interface IAopMethodRecord {}
 
 export interface IAopMethodGet {
-  get(options: IDecoratorAopMethodOptions, next: NextSync, _receiver: any): any;
+  get(options: IDecoratorAopMethodOptions, next: NextSync, receiver: any, prop: string): any;
 }
 
 export interface IAopMethodSet {
-  set(options: IDecoratorAopMethodOptions, value: any, next: NextSync, _receiver: any): void;
+  set(options: IDecoratorAopMethodOptions, value: any, next: NextSync, receiver: any, prop: string): void;
 }
 
 export interface IAopMethodExecute {
-  execute(options: IDecoratorAopMethodOptions, args: [], next: Next | NextSync, _receiver: any): Promise<any> | any;
+  execute(options: IDecoratorAopMethodOptions, args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any;
 }
 
 export interface IDecoratorAopMethodOptions extends IOnionOptionsEnable {}
