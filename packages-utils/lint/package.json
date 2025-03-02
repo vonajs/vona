@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/lint",
   "type": "module",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "description": "Node Style Guide for Cabloy.",
   "publishConfig": {
     "access": "public"
