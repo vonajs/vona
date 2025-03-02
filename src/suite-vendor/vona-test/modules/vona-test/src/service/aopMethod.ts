@@ -12,7 +12,7 @@ class ServiceAopMethodBase extends BeanBase {
 
 @Service()
 export class ServiceAopMethod extends ServiceAopMethodBase {
-  private _name: string = 'vona';
+  private _name: string = '';
 
   @UseAopMethod('vona-test:test', { wrapper: '+' })
   @UseAopMethod('vona-test:test', { wrapper: '-' })

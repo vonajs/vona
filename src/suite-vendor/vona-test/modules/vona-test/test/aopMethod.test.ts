@@ -13,6 +13,7 @@ describe.only('aopMethod.test.ts', () => {
       assert.equal(result, '-+hello+-');
       result = await scopeTest.service.aopMethod.testAsync();
       assert.equal(result, '-+hello+-');
+      scopeTest.service.aopMethod.name = '-+vona+-';
       result = scopeTest.service.aopMethod.name;
       assert.equal(result, '-+vona+-');
     });
