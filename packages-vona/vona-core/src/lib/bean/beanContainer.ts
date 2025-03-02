@@ -500,14 +500,17 @@ export class BeanContainer {
       let fn;
       if (methodType === 'get') {
         fn = function (_, next) {
+          if (!aopMethod.beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
           return aopMethod.beanInstance.get(aopMethod.options, next, receiver, prop);
         };
       } else if (methodType === 'set') {
         fn = function (value, next) {
+          if (!aopMethod.beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
           return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver, prop);
         };
       } else if (methodType === 'method') {
         fn = function (args, next) {
+          if (!aopMethod.beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
           return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver, prop);
         };
       }
