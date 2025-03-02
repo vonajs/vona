@@ -1,26 +1,27 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
+import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
-
 /** middleware: end */
-/** bean: begin */
+/** aopMethod: begin */
 import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.ts';
+
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
-
 /** service: end */
 /** service: begin */
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
+
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
-import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
@@ -30,10 +31,11 @@ import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
+import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.database.ts';
+export * from '../bean/aopMethod.transaction.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IMiddlewareRecordLocal {
@@ -44,6 +46,23 @@ declare module 'vona-module-a-aspect' {
 declare module 'vona-module-a-database' {
 
   export interface MiddlewareTransaction {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+}
+/** aopMethod: end */
+/** bean: begin */
+export * from '../bean/bean.database.ts';
+declare module 'vona-module-a-aspect' {
+
+  export interface IAopMethodRecord {
+    'a-database:transaction': IAopMethodOptionsTransaction;
+  }
+
+}
+declare module 'vona-module-a-database' {
+
+  export interface AopMethodTransaction {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
