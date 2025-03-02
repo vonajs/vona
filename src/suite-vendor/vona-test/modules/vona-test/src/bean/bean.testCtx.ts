@@ -14,7 +14,7 @@ class TestCtx0 extends BeanBase {
     }
   }
 
-  protected __set__(prop, value) {
+  protected __set__(prop, value): boolean {
     if (prop === 'magicSelf') {
       this['magic:self'] = value;
       return true;

@@ -15,7 +15,7 @@ export interface IAopMethodGet {
 }
 
 export interface IAopMethodSet {
-  set(options: IDecoratorAopMethodOptions, value: any, next: NextSync, receiver: any, prop: string): void;
+  set(options: IDecoratorAopMethodOptions, value: any, next: NextSync, receiver: any, prop: string): boolean;
 }
 
 export interface IAopMethodExecute {

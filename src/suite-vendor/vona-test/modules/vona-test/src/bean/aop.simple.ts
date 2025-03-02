@@ -24,7 +24,7 @@ export class AopSimple extends AopSimpleBase {
     return value;
   }
 
-  __set__(prop, value, next) {
+  __set__(prop, value, next): boolean {
     if (prop === 'name') {
       const parts = value.split(':');
       const index = parts.indexOf('simpleaop');
@@ -41,7 +41,7 @@ export class AopSimple extends AopSimpleBase {
     return `${value}:simpleaop`;
   }
 
-  __set_name__(value, next) {
+  __set_name__(value, next): boolean {
     const parts = value.split(':');
     const index = parts.indexOf('simpleaop');
     if (index > -1) {

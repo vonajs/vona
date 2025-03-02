@@ -14,8 +14,8 @@ export class AopMethodTest extends BeanAopMethodBase implements IAopMethodGet, I
     return this._wrapper(options.wrapper, res);
   }
 
-  set(options: IAopMethodOptionsTest, value: string, next: NextSync, _receiver: any, _prop: string): void {
-    next(this._unwrapper(options.wrapper, value));
+  set(options: IAopMethodOptionsTest, value: string, next: NextSync, _receiver: any, _prop: string): boolean {
+    return next(this._unwrapper(options.wrapper, value));
   }
 
   execute(options: IAopMethodOptionsTest, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<string> | string {
