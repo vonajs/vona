@@ -22,10 +22,10 @@ import type { BeanTestCtx } from '../bean/bean.testCtx.ts';
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastTest } from '../bean/broadcast.test.ts';
+
 /** cacheMem: end */
 /** cacheMem: begin */
 import type { CacheMemTest } from '../bean/cacheMem.test.ts';
-
 /** cacheRedis: end */
 /** cacheRedis: begin */
 import type { CacheRedisTest } from '../bean/cacheRedis.test.ts';
@@ -50,6 +50,7 @@ import type { ServiceTest } from '../service/test.ts';
 
 import type { ServiceTestApp } from '../service/testApp.ts';
 import type { ServiceTestClass } from '../service/testClass.ts';
+import type { ServiceTransaction } from '../service/transaction.ts';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -310,6 +311,7 @@ export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
+export * from '../controller/performAction.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -317,6 +319,7 @@ declare module 'vona-module-a-web' {
     'vona-test:test': never;
     'vona-test:testApp': never;
     'vona-test:testClass': never;
+    'vona-test:transaction': never;
   }
 
 }
@@ -341,12 +344,18 @@ declare module 'vona-module-vona-test' {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
+
+  export interface ServiceTransaction {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
 }
 export interface IModuleService {
   aopMethod: ServiceAopMethod;
   test: ServiceTest;
   testApp: ServiceTestApp;
   testClass: ServiceTestClass;
+  transaction: ServiceTransaction;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -354,9 +363,9 @@ declare module 'vona' {
     'vona-test.service.test': ServiceTest;
     'vona-test.service.testApp': ServiceTestApp;
     'vona-test.service.testClass': ServiceTestClass;
+    'vona-test.service.transaction': ServiceTransaction;
   }
 }
-export * from '../controller/performAction.ts';
 export * from '../controller/queue.ts';
 export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
@@ -370,6 +379,7 @@ export * from '../dto/user.ts';
 export * from '../service/aopMethod.ts';
 export * from '../service/test.ts';
 export * from '../service/testApp.ts';
+export * from '../service/testClass.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
@@ -468,7 +478,7 @@ declare module 'vona-module-a-web' {
   }
 
 }
-export * from '../service/testClass.ts';
+export * from '../service/transaction.ts';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,

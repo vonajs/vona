@@ -11,8 +11,9 @@ export interface IAopMethodOptionsTransaction extends IDecoratorAopMethodOptions
 
 @AopMethod<IAopMethodOptionsTransaction>()
 export class AopMethodTransaction extends BeanAopMethodBase implements IAopMethodExecute {
-  execute(_options: IAopMethodOptionsTransaction, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<any> | any {
-    // next
-    return next();
+  execute(options: IAopMethodOptionsTransaction, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<any> | any {
+    return this.ctx.transaction.begin(() => {
+      return next();
+    }, options);
   }
 }
