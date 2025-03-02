@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { Transaction } from 'vona-module-a-database';
+import { TransactionMiddleware } from 'vona-module-a-database';
 import { Api, Body } from 'vona-module-a-openapi';
 import { Controller, Post } from 'vona-module-a-web';
 
@@ -10,14 +10,14 @@ const tableNameSuccess = '__tempTransactionSuccess';
 @Api.exclude()
 export class ControllerTransaction extends BeanBase {
   @Post('fail')
-  @Transaction()
+  @TransactionMiddleware()
   async fail(@Body() item: object) {
     await this.app.bean.model.update(`${tableNameFail}`, item);
     await this.app.bean.model.update(`${tableNameFail}error`, item);
   }
 
   @Post('success')
-  @Transaction()
+  @TransactionMiddleware()
   async success(@Body() item: object) {
     await this.app.bean.model.update(tableNameSuccess, item);
   }
