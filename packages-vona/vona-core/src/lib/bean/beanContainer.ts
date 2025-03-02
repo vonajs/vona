@@ -448,7 +448,7 @@ export class BeanContainer {
           chains.push([aopKey, methodName]);
         }
       } else if (aopKey === SymbolProxyAopMethod) {
-        this.___getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodName, methodType, receiver);
+        this.___getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, receiver, prop);
       } else {
         // singleton
         const aop: BeanAopBase = this.app.bean._getBean(aopKey as string as any);
@@ -493,22 +493,22 @@ export class BeanContainer {
     return chains;
   }
 
-  private ___getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodName, methodType, receiver) {
+  private ___getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, receiver, prop: string) {
     const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
-    const aopMethods = beanAop.findAopMethodsMatched(beanFullName, methodName);
+    const aopMethods = beanAop.findAopMethodsMatched(beanFullName, prop);
     for (const aopMethod of aopMethods) {
       let fn;
       if (methodType === 'get') {
         fn = function (_, next) {
-          return aopMethod.beanInstance.get(aopMethod.options, next, receiver);
+          return aopMethod.beanInstance.get(aopMethod.options, next, receiver, prop);
         };
       } else if (methodType === 'set') {
         fn = function (value, next) {
-          return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver);
+          return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver, prop);
         };
       } else if (methodType === 'method') {
         fn = function (args, next) {
-          return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver);
+          return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver, prop);
         };
       }
       chains.push([aopKey, fn]);
