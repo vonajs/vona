@@ -3,6 +3,11 @@ export const isNil = (val: any): val is null | undefined => isUndefined(val) || 
 
 export const isObject = (fn: any): fn is object => !isNil(fn) && typeof fn === 'object';
 
+export function isEmptyObject(obj: any): boolean {
+  if (!obj) return true;
+  return Object.keys(obj).length === 0;
+}
+
 export function isPlainObject(fn: any): fn is object {
   if (!isObject(fn)) {
     return false;
