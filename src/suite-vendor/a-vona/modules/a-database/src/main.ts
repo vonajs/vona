@@ -9,7 +9,7 @@ const DATABASEMETA = Symbol('Context#__databasemeta');
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
     //
-    const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault);
+    const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault, configLocal, configProd, configTest);
     this.app.config.database = deepExtend({}, _configDefault, this.app.config.database);
     //
     ExtendKnex(this.app);
@@ -88,7 +88,7 @@ export async function configDefault(_app: VonaApplication): Promise<PowerPartial
   };
 }
 
-export async function configLocal(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
+async function configLocal(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
   return {
     testDatabase: true,
     base: {
@@ -97,7 +97,7 @@ export async function configLocal(_app: VonaApplication): Promise<PowerPartial<C
   };
 }
 
-export async function configProd(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
+async function configProd(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
   return {
     testDatabase: false,
     base: {
@@ -106,7 +106,7 @@ export async function configProd(_app: VonaApplication): Promise<PowerPartial<Co
   };
 }
 
-export async function configTest(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
+async function configTest(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
   return {
     testDatabase: true,
     base: {
