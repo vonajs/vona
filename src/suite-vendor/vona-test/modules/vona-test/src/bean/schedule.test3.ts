@@ -6,7 +6,7 @@ import { Schedule } from 'vona-module-a-schedule';
 export class ScheduleTest3 extends BeanBase implements IScheduleExecute {
   async execute(job?: TypeScheduleJob) {
     this.logger.silly(
-      `Schedule Test2: iid=${this.ctx.instance.id}, every=${job?.data.options?.jobOptions?.repeat?.every}, ${new Date()}`,
+      `Schedule Test3: iid=${this.ctx.instance.id}, every=${job?.data.options?.jobOptions?.repeat?.every}, ${new Date()}`,
     );
   }
 }
