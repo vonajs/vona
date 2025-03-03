@@ -246,7 +246,7 @@ declare module 'vona-module-vona-test' {
 export interface IModuleQueue {
   test: QueueTest;
 }
-export * from '../bean/schedule.test2.ts';
+export * from '../bean/schedule.test3.ts';
 /** queue: end */
 /** schedule: begin */
 export * from '../bean/schedule.test.ts';
@@ -254,7 +254,7 @@ declare module 'vona-module-a-schedule' {
 
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
-    'vona-test:test2': IDecoratorScheduleOptions;
+    'vona-test:test3': IDecoratorScheduleOptions;
   }
 
 }
@@ -265,7 +265,7 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 
-  export interface ScheduleTest2 {
+  export interface ScheduleTest3 {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
