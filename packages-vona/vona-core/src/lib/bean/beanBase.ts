@@ -1,7 +1,6 @@
 import type { IModuleLocaleText } from './resource/locale/type.ts';
 import type { IBeanScopeContainer } from './scope/beanScopeContainer.ts';
 import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
-import { cast } from '../../types/utils/cast.ts';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
 
 const SymbolText = Symbol('SymbolText');
@@ -12,6 +11,10 @@ export class BeanBase extends BeanBaseSimple {
       this[SymbolText] = this.app.meta.locale.createLocaleText(this[SymbolModuleBelong]);
     }
     return this[SymbolText];
+  }
+
+  protected get logger() {
+    return this.app.meta.logger.get();
   }
 
   public get scope(): unknown {
@@ -32,9 +35,3 @@ export class BeanBase extends BeanBaseSimple {
     return this.bean.scope(moduleScope as never);
   }
 }
-
-Object.defineProperty(BeanBase.prototype, 'logger', {
-  get(this: BeanBase) {
-    return cast(this.app.bean).logger.get('default');
-  },
-});

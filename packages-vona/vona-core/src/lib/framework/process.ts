@@ -14,7 +14,7 @@ export function handleProcessWork() {
     if (!app) {
       console.error(err);
     } else {
-      const logger = app.bean.logger.get('default');
+      const logger = app.meta.logger.get();
       logger.error(err);
     }
   });

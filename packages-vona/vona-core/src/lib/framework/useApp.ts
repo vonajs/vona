@@ -1,8 +1,9 @@
+import type { VonaApplication } from 'vona';
 import path from 'node:path';
 import { sleep } from '@cabloy/utils';
 import { pathToHref } from '../utils/util.ts';
 
-export function useApp() {
+export function useApp(): VonaApplication {
   return globalThis.__app__;
 }
 
