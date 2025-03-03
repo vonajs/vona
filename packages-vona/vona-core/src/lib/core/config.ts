@@ -1,5 +1,6 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { VonaConfigOptional } from '../../types/config/config.ts';
+import type { ConfigLogger } from '../../types/interface/logger.ts';
 import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 import type { VonaApplication } from './application.ts';
 import os from 'node:os';
@@ -21,6 +22,13 @@ export async function combineAppConfigDefault(appInfo: VonaAppInfo) {
 }
 
 export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOptional> {
+  // server
+  const publicDir = process.env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo);
+  const loggerDir = process.env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo);
+  const subdomainOffset = Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1');
+  const workers = Number.parseInt(process.env.SERVER_WORKERS!);
+  // logger
+  const logger = _combineLoggerDefault(appInfo, loggerDir);
   return {
     meta: {
       flavor: process.env.META_FLAVOR,
@@ -34,10 +42,10 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
     server: {
       keys: (process.env.SERVER_KEYS || '').split(','),
       globalPrefix: process.env.SERVER_GLOBALPREFIX || '/api',
-      publicDir: process.env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo),
-      loggerDir: process.env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo),
-      subdomainOffset: Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1'),
-      workers: Number.parseInt(process.env.SERVER_WORKERS!),
+      publicDir,
+      loggerDir,
+      subdomainOffset,
+      workers,
       listen: {
         hostname: process.env.SERVER_LISTEN_HOSTNAME,
         port: Number.parseInt(process.env.SERVER_LISTEN_PORT!),
@@ -51,6 +59,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
       maxProxyCount: 1,
       maxIpsCount: 15,
     },
+    logger,
     //
     instances: [],
     modules: {},
@@ -124,4 +133,40 @@ export async function combineConfigDefault<T>(
     config = deepExtend(config, await configTest(app));
   }
   return config;
+}
+
+function _combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
+  const configDefault: ConfigLogger = {
+    default: ({ format, transports }) => {
+      return {
+        level: 'silly',
+        format: format.combine(
+          format.errors({ stack: true }),
+          format.timestamp(),
+        ),
+        transports: [
+          new transports.File({
+            level: 'error',
+            filename: path.join(loggerDir, 'error.log'),
+            format: format.combine(format.json()),
+          }),
+          new transports.File({ level: 'silly', filename: path.join(loggerDir, 'combined.log') }),
+          new transports.Console({
+            format: format.combine(
+              format.colorize(),
+              format.printf(({ timestamp, level, stack, message }) => {
+                return `${timestamp} ${level} ${stack || message}`;
+              }),
+            ),
+            forceConsole: true,
+          }),
+        ],
+        silent: false,
+      };
+    },
+    clients: {
+      default: {},
+    },
+  };
+  return configDefault;
 }
