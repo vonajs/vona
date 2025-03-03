@@ -29,13 +29,10 @@ export class ServiceVersion extends BeanBase {
       // broadcast
       this.scope.broadcast.columnsClear.emit({ mode: 'all' });
       // log
-      // eslint-disable-next-line
-      if (Object.keys(result).length > 0) console.log(result);
-      // eslint-disable-next-line
-      console.log(chalk.cyan('  All modules are checked successfully!'));
+      if (Object.keys(result).length > 0) this.logger.silly(result);
+      this.logger.silly(chalk.cyan('All modules are checked successfully!'));
     } catch (err) {
-      // eslint-disable-next-line
-      console.log(chalk.cyan('  Modules are checked failed!'));
+      this.logger.silly(chalk.cyan('Modules are checked failed!'));
       throw err;
     }
   }
@@ -47,11 +44,9 @@ export class ServiceVersion extends BeanBase {
     try {
       const optionsInit = Object.assign({}, instanceBase, { scene: 'init' as const, instanceName });
       await this.__check(optionsInit);
-      // eslint-disable-next-line
-      console.log(chalk.cyan(`  The instance is initialized successfully: ${instanceName || 'default'}`));
+      this.logger.silly(chalk.cyan(`The instance is initialized successfully: ${instanceName || 'default'}`));
     } catch (err) {
-      // eslint-disable-next-line
-      console.log(chalk.cyan(`  The instance is initialized failed: ${instanceName || 'default'}`));
+      this.logger.silly(chalk.cyan(`The instance is initialized failed: ${instanceName || 'default'}`));
       throw err;
     }
   }

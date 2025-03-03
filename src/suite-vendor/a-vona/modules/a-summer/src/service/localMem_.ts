@@ -33,7 +33,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     if (keysMissing.length > 0) {
       const layered = this.__getLayered(options);
       const valuesMissing = await layered.mget(keysMissing, options);
-      // console.log('-------mem:', valuesMissing);
+      // this.logger.silly('-------mem:', valuesMissing);
       // set/merge
       this.cacheMem.mset(valuesMissing as any, keysMissing);
       for (let i = 0; i < keysMissing.length; i++) {

@@ -116,9 +116,8 @@ export class ServiceStartup extends BeanBase {
     instanceName?: string,
     options?: IInstanceStartupOptions,
   ) {
-    // eslint-disable-next-line
-    console.log(
-      `----${startup.beanOptions?.options?.instance ? ' instance' : ''} startup: ${startup.name}, pid: ${process.pid}`,
+    this.logger.silly(
+      `startup${startup.beanOptions?.options?.instance ? ' instance' : ''}: ${startup.name}, pid: ${process.pid}`,
     );
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // execute

@@ -75,8 +75,7 @@ export class ServiceDatabase extends BeanBase {
       }
       // set config and reload client
       await client.changeConfigAndReload(databaseName);
-      // eslint-disable-next-line
-      console.log(chalk.cyan(`  database: ${databaseName}, pid: ${process.pid}`));
+      this.logger.silly(chalk.cyan(`database: ${databaseName}, pid: ${process.pid}`));
     }
     // test db
     if (this.app.meta.isTest) {
@@ -95,8 +94,7 @@ export class ServiceDatabase extends BeanBase {
       // set config and reload client
       await client.changeConfigAndReload(databaseName);
       // database ready
-      // eslint-disable-next-line
-      console.log(chalk.cyan(`  database: ${databaseName}, pid: ${process.pid}`));
+      this.logger.silly(chalk.cyan(`database: ${databaseName}, pid: ${process.pid}`));
     }
   }
 }
