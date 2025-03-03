@@ -10,3 +10,9 @@ export interface ConfigLogger {
   default: TypeLoggerOptions;
   clients: Record<keyof ILoggerClientRecord, TypeLoggerOptions>;
 }
+
+declare module 'vona' {
+  export interface BeanBase {
+    get logger(): Winston.Logger;
+  }
+}
