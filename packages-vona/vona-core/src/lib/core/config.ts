@@ -35,6 +35,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
       keys: (process.env.SERVER_KEYS || '').split(','),
       globalPrefix: process.env.SERVER_GLOBALPREFIX || '/api',
       publicDir: process.env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo),
+      loggerDir: process.env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo),
       subdomainOffset: Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1'),
       workers: Number.parseInt(process.env.SERVER_WORKERS!),
       listen: {
@@ -78,6 +79,18 @@ export function configTest(): VonaConfigOptional {
       enabled: false,
     },
   };
+}
+
+async function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
+  const mode = appInfo.configMeta.mode;
+  let loggerDir: string;
+  if (mode === 'test' || mode === 'local') {
+    loggerDir = path.join(appInfo.projectPath, '.app/logs');
+  } else {
+    loggerDir = path.join(os.homedir(), 'vona', appInfo.name, 'logs');
+  }
+  await fse.ensureDir(loggerDir);
+  return loggerDir;
 }
 
 async function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {

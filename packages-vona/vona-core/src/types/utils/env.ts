@@ -18,6 +18,7 @@ declare global {
       SERVER_KEYS: string | undefined;
       SERVER_GLOBALPREFIX: string | undefined;
       SERVER_PUBLICDIR: string | undefined;
+      SERVER_LOGGERDIR: string | undefined;
       SERVER_SUBDOMAINOFFSET: string | undefined;
       SERVER_WORKERS: string | undefined;
       SERVER_LISTEN_HOSTNAME: string | undefined;

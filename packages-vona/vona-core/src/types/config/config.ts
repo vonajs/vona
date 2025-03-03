@@ -11,6 +11,7 @@ export interface VonaConfig {
     keys: string[];
     globalPrefix: string;
     publicDir: string;
+    loggerDir: string;
     subdomainOffset: number;
     workers: number;
     listen: {
