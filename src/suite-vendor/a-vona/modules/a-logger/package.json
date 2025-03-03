@@ -4,9 +4,7 @@
   "version": "5.0.0",
   "title": "a-logger",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
+    "dependencies": {}
   },
   "description": "",
   "author": "",
