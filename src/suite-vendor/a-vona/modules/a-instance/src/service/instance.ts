@@ -3,18 +3,8 @@ import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
 import { isNil, sleep } from '@cabloy/utils';
 import async from 'async';
-import * as Boxen from 'boxen';
-import chalk from 'chalk';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
-
-const boxenOptions: Boxen.Options = {
-  padding: 1,
-  margin: 1,
-  align: 'center',
-  borderColor: 'yellow',
-  borderStyle: 'round',
-} as Boxen.Options;
 
 const SymbolQueueInstanceStartup = Symbol('SymbolQueueInstanceStartup');
 const SymbolCacheIntancesConfig = Symbol('SymbolCacheIntancesConfig');
@@ -138,31 +128,16 @@ export class ServiceInstance extends BeanBase {
     // instance
     const instance = await this.bean.instance.get(this.ctx.instanceName!);
     if (!instance) {
-      // prompt: should for local/prod
-      // if (this.ctx.app.meta.isLocal) {
-      const urlInfo =
-        this.ctx.locale === 'zh-cn'
-          ? 'https://cabloy.com/zh-cn/articles/multi-instance.html'
-          : 'https://cabloy.com/articles/multi-instance.html';
-      let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].ts')}`;
-      message += `\n${chalk.hex('#FF8800')(`{ instanceName: '${this.ctx.instanceName}', password: '', title: '' }`)}`;
-      message += `\nMore info: ${chalk.cyan(urlInfo)}`;
-      // eslint-disable-next-line
-      console.log('\n' + Boxen.default(message, boxenOptions));
-      // }
+      this.logger.error(`instance not found: ${this.ctx.instanceName}`);
       return this.app.throw(423); // not this.app.fail(423)
     }
-    // check if disabled
+    // check if disabled/locked
     if (instance.disabled) {
-      // locked
-      // eslint-disable-next-line
-      console.log('instance disabled: ', this.ctx.instanceName);
+      this.logger.silly(`instance disabled: ${this.ctx.instanceName}`);
       return this.app.throw(423); // not this.app.fail(423)
     }
-
     // check instance startup ready
     await this.checkAppReadyInstance(true);
-
     // ok
     this.ctx.instance = instance;
   }

@@ -9,6 +9,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
     default: ({ format, transports }, { level }) => {
       return {
         format: format.combine(
+          format.splat(),
           format.errors({ stack: true }),
           format.timestamp(),
         ),
