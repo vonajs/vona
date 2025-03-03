@@ -9,6 +9,7 @@ import babelImport from '@rollup/plugin-babel';
 import commonjsImport from '@rollup/plugin-commonjs';
 import jsonImport from '@rollup/plugin-json';
 import resolveImport from '@rollup/plugin-node-resolve';
+import replaceImport from '@rollup/plugin-replace';
 import terserImport from '@rollup/plugin-terser';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
@@ -22,6 +23,7 @@ const json = jsonImport as any as typeof jsonImport.default;
 const babel = babelImport as any as typeof babelImport.default;
 const terser = terserImport as any as typeof terserImport.default;
 const alias = aliasImport as any as typeof aliasImport.default;
+const replace = replaceImport as any as typeof replaceImport.default;
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -82,6 +84,11 @@ export class CliBinBuild extends BeanCliBase {
       }),
       resolve({
         preferBuiltins: true,
+      }),
+      replace({
+        values: {
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        },
       }),
       json(),
       commonjs(),
