@@ -1,5 +1,5 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
-import type { IBeanScopeConfig, VonaConfigEnv } from '../../index.ts';
+import type { ConfigLogger, IBeanScopeConfig, VonaConfigEnv } from '../../index.ts';
 import type { PowerPartial } from '../utils/powerPartial.ts';
 import type { ConfigInstanceBase } from './instance.ts';
 
@@ -27,6 +27,7 @@ export interface VonaConfig {
     maxProxyCount: number;
     maxIpsCount: number;
   };
+  logger: ConfigLogger;
   //
   modules: IBeanScopeConfig;
   instances: ConfigInstanceBase[];

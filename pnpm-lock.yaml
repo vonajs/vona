@@ -748,6 +748,9 @@ importers:
       uuid:
         specifier: ^11.0.3
         version: 11.1.0
+      winston:
+        specifier: ^3.17.0
+        version: 3.17.0
     devDependencies:
       '@types/koa':
         specifier: ^2.15.0

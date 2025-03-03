@@ -2,6 +2,11 @@ import type { VonaApplication } from 'vona';
 import type { ConfigLogger } from '../types/logger.ts';
 import path from 'node:path';
 
+const ignorePrivate = format((info, opts) => {
+  if (info.private) { return false; }
+  return info;
+});
+
 export function config(app: VonaApplication) {
   const loggerPath = app.config.server.loggerDir;
   const configDefault: ConfigLogger = {

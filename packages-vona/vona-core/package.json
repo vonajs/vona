@@ -52,7 +52,8 @@
     "raw-body": "2.5.1",
     "reflect-metadata": "^0.2.2",
     "retry": "^0.13.1",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/koa": "^2.15.0",

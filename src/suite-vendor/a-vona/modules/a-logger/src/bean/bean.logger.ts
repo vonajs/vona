@@ -8,9 +8,4 @@ export class BeanLogger extends BeanBase {
   getClient(clientName?: keyof ILoggerClientRecord) {
     return this.app.bean._getBeanSelector(ServiceLoggerClient, clientName);
   }
-
-  get(clientName?: keyof ILoggerClientRecord) {
-    const client = this.getClient(clientName);
-    return client.instance;
-  }
 }
