@@ -20,6 +20,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
             ),
           }),
           new transports.File({
+            level: 'silly',
             filename: path.join(loggerDir, 'combined.log'),
             format: format.combine(
               formatLoggerFilter({ level }),
@@ -27,6 +28,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
             ),
           }),
           new transports.Console({
+            level: 'silly',
             format: format.combine(
               formatLoggerFilter({ level, silly: true }),
               format.colorize(),
