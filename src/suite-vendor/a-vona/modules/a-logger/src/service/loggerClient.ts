@@ -1,4 +1,4 @@
-import type { ILoggerClientRecord } from '../types/logger.ts';
+import type { ILoggerClientRecord, TypeLoggerOptions } from '../types/logger.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 import * as Winston from 'winston';
@@ -6,6 +6,7 @@ import * as Winston from 'winston';
 @Service()
 export class ServiceLoggerClient extends BeanBase {
   private _loggerInstance: Winston.Logger;
+  private _configDefault: TypeLoggerOptions;
 
   get instance(): Winston.Logger {
     return this._loggerInstance;
@@ -29,11 +30,18 @@ export class ServiceLoggerClient extends BeanBase {
     if (typeof configClient === 'function') {
       configClient = configClient(Winston);
     }
-    let configDefault = configLogger.default;
-    if (typeof configDefault === 'function') {
-      configDefault = configDefault(Winston);
-    }
-    const configNode = deepExtend({}, configDefault, configClient);
+    const configNode = deepExtend({}, this._getConfigDefault(), configClient);
     return Winston.createLogger(configNode);
+  }
+
+  private _getConfigDefault() {
+    if (!this._configDefault) {
+      let configDefault = this.scope.config.default;
+      if (typeof configDefault === 'function') {
+        configDefault = configDefault(Winston);
+      }
+      this._configDefault = configDefault;
+    }
+    return this._configDefault;
   }
 }
