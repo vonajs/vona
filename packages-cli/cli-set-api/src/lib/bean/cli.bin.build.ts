@@ -78,6 +78,10 @@ export class CliBinBuild extends BeanCliBase {
     for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious']) {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
+    const replaceValues = {};
+    for (const name of ['NODE_ENV', 'META_MODE', 'META_FLAVOR']) {
+      replaceValues[`process.env.${name}`] = JSON.stringify(process.env[name]);
+    }
     const plugins = [
       alias({
         entries: aliasEntries,
@@ -86,9 +90,7 @@ export class CliBinBuild extends BeanCliBase {
         preferBuiltins: true,
       }),
       replace({
-        values: {
-          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        },
+        values: replaceValues,
       }),
       json(),
       commonjs(),
