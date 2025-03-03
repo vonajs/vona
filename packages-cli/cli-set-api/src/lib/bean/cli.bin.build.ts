@@ -55,6 +55,7 @@ export class CliBinBuild extends BeanCliBase {
     await rimraf(path.join(projectPath, 'dist'));
     await this._rollup(projectPath);
     await this._assets(projectPath, modulesMeta);
+    await rimraf(path.join(projectPath, '.vona'));
   }
 
   async _assets(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
