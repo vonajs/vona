@@ -5,8 +5,7 @@
   "title": "a-core",
   "description": "",
   "author": "",
-  "files": [
-  ],
+  "files": [],
   "dependencies": {
     "vona-module-a-aspect": "workspace:^",
     "vona-module-a-bean": "workspace:^",
@@ -22,6 +21,7 @@
     "vona-module-a-i18n": "workspace:^",
     "vona-module-a-index": "workspace:^",
     "vona-module-a-instance": "workspace:^",
+    "vona-module-a-logger": "workspace:^",
     "vona-module-a-meta": "workspace:^",
     "vona-module-a-onion": "workspace:^",
     "vona-module-a-openapi": "workspace:^",

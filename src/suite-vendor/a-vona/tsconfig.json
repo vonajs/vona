@@ -100,7 +100,12 @@
     },
     {
       "path": "modules/a-worker/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-logger/tsconfig.build.json"
     }
   ],
-  "exclude": ["modules"]
+  "exclude": [
+    "modules"
+  ]
 }
