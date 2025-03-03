@@ -1,6 +1,5 @@
 import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
 import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.ts';
-import chalk from 'chalk';
 import { appResource, BeanBase, cast, deepExtend } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
@@ -68,10 +67,8 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       }
     } catch (e: any) {
       // just log the error message
-      // eslint-disable-next-line
-      console.log(chalk.red(e.message));
-      // eslint-disable-next-line
-      if (e.sql) console.log(chalk.red(e.sql));
+      this.logger.error(e.message);
+      if (e.sql) this.logger.error(e.sql);
     }
   }
 }
