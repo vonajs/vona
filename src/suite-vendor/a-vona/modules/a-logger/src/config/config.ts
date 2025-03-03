@@ -11,15 +11,17 @@ export function config(app: VonaApplication) {
         format: format.combine(
           format.errors({ stack: true }),
           format.timestamp(),
-          // format.json(),
         ),
         transports: [
-          new transports.File({ level: 'error', filename: path.join(loggerPath, 'error.log') }),
+          new transports.File({
+            level: 'error',
+            filename: path.join(loggerPath, 'error.log'),
+            format: format.combine(format.json()),
+          }),
           new transports.File({ level: 'silly', filename: path.join(loggerPath, 'combined.log') }),
           new transports.Console({
             format: format.combine(
               format.colorize(),
-              // format.simple(),
               format.printf(({ timestamp, level, stack, message }) => {
                 return `${timestamp} ${level} ${stack || message}`;
               }),
