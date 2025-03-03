@@ -1,12 +1,12 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { VonaConfigOptional } from '../../types/config/config.ts';
-import type { ConfigLogger } from '../../types/interface/logger.ts';
 import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 import type { VonaApplication } from './application.ts';
 import os from 'node:os';
 import path from 'node:path';
 import fse from 'fs-extra';
 import { deepExtend } from '../utils/util.ts';
+import { combineLoggerDefault } from './loggerDefault.ts';
 
 export async function combineAppConfigDefault(appInfo: VonaAppInfo) {
   let config: VonaConfigOptional = await configDefault(appInfo);
@@ -28,7 +28,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
   const subdomainOffset = Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(process.env.SERVER_WORKERS!);
   // logger
-  const logger = _combineLoggerDefault(appInfo, loggerDir);
+  const logger = combineLoggerDefault(appInfo, loggerDir);
   return {
     meta: {
       flavor: process.env.META_FLAVOR,
@@ -133,40 +133,4 @@ export async function combineConfigDefault<T>(
     config = deepExtend(config, await configTest(app));
   }
   return config;
-}
-
-function _combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
-  const configDefault: ConfigLogger = {
-    default: ({ format, transports }) => {
-      return {
-        level: 'silly',
-        format: format.combine(
-          format.errors({ stack: true }),
-          format.timestamp(),
-        ),
-        transports: [
-          new transports.File({
-            level: 'error',
-            filename: path.join(loggerDir, 'error.log'),
-            format: format.combine(format.json()),
-          }),
-          new transports.File({ level: 'silly', filename: path.join(loggerDir, 'combined.log') }),
-          new transports.Console({
-            format: format.combine(
-              format.colorize(),
-              format.printf(({ timestamp, level, stack, message }) => {
-                return `${timestamp} ${level} ${stack || message}`;
-              }),
-            ),
-            forceConsole: true,
-          }),
-        ],
-        silent: false,
-      };
-    },
-    clients: {
-      default: {},
-    },
-  };
-  return configDefault;
 }

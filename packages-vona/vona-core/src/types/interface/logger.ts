@@ -1,6 +1,11 @@
 import type * as Winston from 'winston';
 
-export type TypeLoggerOptions = Winston.LoggerOptions | ((winston: typeof Winston) => Winston.LoggerOptions);
+export interface ILoggerOptionsClientInfo {
+  clientName: keyof ILoggerClientRecord;
+  level: string | undefined;
+}
+
+export type TypeLoggerOptions = Winston.LoggerOptions | ((winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => Winston.LoggerOptions);
 
 export interface ILoggerClientRecord {
   default: never;

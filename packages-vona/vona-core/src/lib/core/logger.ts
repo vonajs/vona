@@ -7,7 +7,6 @@ const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
 export class AppLogger extends BeanSimple {
   private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, Winston.Logger> = {} as any;
-  private _configDefault: TypeLoggerOptions;
 
   get(clientName?: keyof ILoggerClientRecord) {
     clientName = clientName || 'default';
@@ -18,24 +17,36 @@ export class AppLogger extends BeanSimple {
   }
 
   private _createClient(clientName: keyof ILoggerClientRecord): Winston.Logger {
-    const configLogger = this.app.config.logger;
-    let configClient = configLogger.clients[clientName];
+    const configClient = this.app.config.logger.clients[clientName];
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
-    if (typeof configClient === 'function') {
-      configClient = configClient(Winston);
-    }
-    const configNode = deepExtend({}, this._getConfigDefault(), configClient);
+    const configNode = deepExtend(
+      {},
+      _prepareConfigClient(clientName, this.app.config.logger.default),
+      _prepareConfigClient(clientName, configClient),
+    );
     return Winston.createLogger(configNode);
   }
-
-  private _getConfigDefault() {
-    if (!this._configDefault) {
-      let configDefault = this.app.config.logger.default;
-      if (typeof configDefault === 'function') {
-        configDefault = configDefault(Winston);
-      }
-      this._configDefault = configDefault;
-    }
-    return this._configDefault;
-  }
 }
+
+function _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
+  if (typeof configClient !== 'function') return configClient;
+  return configClient(Winston, {
+    clientName,
+    level: getLoggerClientLevel(clientName),
+  });
+}
+
+export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): string | undefined {
+  const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
+  const level = process.env[envName];
+  if (level === 'false') return;
+  if (level === 'true' || !level) return 'info';
+  return level;
+}
+
+export const formatLoggerFilter = Winston.format((info, opts: any) => {
+  const level = opts.level;
+  if (!level) return false;
+  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return info;
+  return false;
+});
