@@ -36,6 +36,7 @@ export class CliBinTest extends BeanCliBase {
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
+    await rimraf(path.join(projectPath, '.vona'));
   }
 
   async _run(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
@@ -63,7 +64,6 @@ export class CliBinTest extends BeanCliBase {
         cwd: projectPath,
       },
     });
-    await rimraf(path.join(projectPath, '.vona'));
   }
 
   _combineTestPatterns(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {

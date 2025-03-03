@@ -1,8 +1,10 @@
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
+import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import nodemon from 'nodemon';
+import { rimraf } from 'rimraf';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -34,6 +36,7 @@ export class CliBinDev extends BeanCliBase {
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
+    await rimraf(path.join(projectPath, '.vona'));
   }
 
   async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
