@@ -1,4 +1,4 @@
-import { closeApp } from './useApp.ts';
+import { closeApp, useApp } from './useApp.ts';
 
 export function handleProcessWork() {
   process.once('SIGUSR2', async () => {
@@ -10,9 +10,13 @@ export function handleProcessWork() {
     await closeApp(true);
   });
   process.on('uncaughtException', err => {
-    // todo: log
-    // eslint-disable-next-line
-    console.log(err);
+    const app = useApp();
+    if (!app) {
+      console.error(err);
+    } else {
+      const logger = app.bean.logger.get('default');
+      logger.error(err);
+    }
   });
 }
 
