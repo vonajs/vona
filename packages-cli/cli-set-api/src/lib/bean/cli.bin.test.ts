@@ -4,6 +4,7 @@ import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import { rimraf } from 'rimraf';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -62,6 +63,7 @@ export class CliBinTest extends BeanCliBase {
         cwd: projectPath,
       },
     });
+    await rimraf(path.join(projectPath, '.vona'));
   }
 
   _combineTestPatterns(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
