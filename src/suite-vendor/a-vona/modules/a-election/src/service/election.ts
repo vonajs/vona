@@ -1,5 +1,5 @@
 import type { IElectionElectOptions } from '../types/election.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, functionNoop } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -15,8 +15,12 @@ export class ServiceElection extends BeanBase {
   }
 
   public obtain(resource: string, fn: Function, options?: IElectionElectOptions) {
+    const tickets = options?.tickets ?? 1;
+    if (tickets === -1 || tickets === Infinity) {
+      fn(functionNoop);
+      return;
+    }
     this._intervalId = setInterval(async () => {
-      const tickets = options?.tickets ?? 1;
       const lockResource = `election.${resource}`;
       this._isLeader = await this.$scope.redlock.service.redlock.lock(
         lockResource,
