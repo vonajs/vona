@@ -26,6 +26,9 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
     }
     await globalThis.__app__.meta.waitAppStarted();
     return globalThis.__app__;
+  } catch (err) {
+    delete globalThis.__app__;
+    throw err;
   } finally {
     globalThis.__creating__ = false;
   }

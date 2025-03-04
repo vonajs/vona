@@ -13,6 +13,7 @@ export function handleProcessWork() {
     const app = useApp();
     if (!app) {
       console.error(err);
+      process.kill(process.pid, 'SIGTERM');
     } else {
       const logger = app.meta.logger.get();
       logger.error(err);
