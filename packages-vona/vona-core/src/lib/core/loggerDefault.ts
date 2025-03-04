@@ -1,6 +1,5 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { ConfigLogger } from '../../types/interface/logger.ts';
-import path from 'node:path';
 import { formatLoggerConsole, formatLoggerFilter } from './logger.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
@@ -15,14 +14,16 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
         transports: [
           new transports.File({
             level: 'error',
-            filename: path.join(loggerDir, 'error.log'),
+            filename: 'error.log',
+            dirname: loggerDir,
             format: format.combine(
               format.json(),
             ),
           }),
           new transports.File({
             level: 'silly',
-            filename: path.join(loggerDir, 'combined.log'),
+            filename: 'combined.log',
+            dirname: loggerDir,
             format: format.combine(
               formatLoggerFilter({ level }),
               format.json(),
