@@ -1,4 +1,4 @@
-import type { ILoggerClientRecord, TypeLoggerOptions } from '../../types/interface/logger.ts';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from '../../types/interface/logger.ts';
 import * as Winston from 'winston';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { deepExtend } from '../utils/util.ts';
@@ -21,6 +21,11 @@ export class AppLogger extends BeanSimple {
       this[SymbolLoggerInstances][clientName] = this._createClient(clientName);
     }
     return this[SymbolLoggerInstances][clientName];
+  }
+
+  child(childName: keyof ILoggerClientChildRecord, clientName?: keyof ILoggerClientRecord) {
+    const logger = this.get(clientName);
+    return logger.child({ name: childName });
   }
 
   private _createClient(clientName: keyof ILoggerClientRecord): Winston.Logger {

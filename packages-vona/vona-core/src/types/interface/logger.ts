@@ -11,6 +11,8 @@ export interface ILoggerClientRecord {
   default: never;
 }
 
+export interface ILoggerClientChildRecord {}
+
 export interface ConfigLogger {
   default: TypeLoggerOptions;
   clients: Record<keyof ILoggerClientRecord, TypeLoggerOptions>;

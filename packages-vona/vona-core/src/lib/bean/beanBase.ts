@@ -1,3 +1,4 @@
+import type { ILoggerClientChildRecord } from '../../types/interface/logger.ts';
 import type { IModuleLocaleText } from './resource/locale/type.ts';
 import type { IBeanScopeContainer } from './scope/beanScopeContainer.ts';
 import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
@@ -15,6 +16,10 @@ export class BeanBase extends BeanBaseSimple {
 
   protected get logger() {
     return this.app.meta.logger.get();
+  }
+
+  protected loggerChild(childName: keyof ILoggerClientChildRecord) {
+    return this.app.meta.logger.child(childName);
   }
 
   public get scope(): unknown {
