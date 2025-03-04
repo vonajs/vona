@@ -1,8 +1,7 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { ConfigLogger } from '../../types/interface/logger.ts';
 import path from 'node:path';
-import { isEmptyObject } from '@cabloy/utils';
-import { formatLoggerFilter } from './logger.ts';
+import { formatLoggerConsole, formatLoggerFilter } from './logger.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
   const configDefault: ConfigLogger = {
@@ -34,16 +33,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
             format: format.combine(
               formatLoggerFilter({ level, silly: true }),
               format.colorize(),
-              format.printf(({ timestamp, level, stack, message, ...meta }) => {
-                let text = `${timestamp} ${level} ${message}`;
-                if (!isEmptyObject(meta)) {
-                  text = `${text} ${JSON.stringify(meta)}`;
-                }
-                if (stack) {
-                  text = `${text}\n${stack}`;
-                }
-                return text;
-              }),
+              formatLoggerConsole(),
             ),
             forceConsole: true,
           }),

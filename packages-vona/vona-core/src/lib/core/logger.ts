@@ -1,4 +1,5 @@
 import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from '../../types/interface/logger.ts';
+import { isEmptyObject } from '@cabloy/utils';
 import * as Winston from 'winston';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { deepExtend } from '../utils/util.ts';
@@ -76,3 +77,16 @@ export const formatLoggerFilter = Winston.format((info, opts: any) => {
   if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return info;
   return false;
 });
+
+export const formatLoggerConsole = () => {
+  return Winston.format.printf(({ timestamp, level, stack, message, ...meta }) => {
+    let text = `${timestamp} ${level} ${message}`;
+    if (!isEmptyObject(meta)) {
+      text = `${text} ${JSON.stringify(meta)}`;
+    }
+    if (stack) {
+      text = `${text}\n${stack}`;
+    }
+    return text;
+  });
+};
