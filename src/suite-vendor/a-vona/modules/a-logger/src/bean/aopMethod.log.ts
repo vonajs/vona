@@ -20,18 +20,30 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     logger.log(options.level, `${message}\nargs: ${JSON.stringify(_args)}`);
     const profiler = logger.startTimer();
     // next
-    const res = next();
-    if (res?.then) {
-      return res.then((res: any) => {
-        this._logPass(profiler, res, options, message);
-        return res;
-      });
+    try {
+      const res = next();
+      if (res?.then) {
+        return res.then((res: any) => {
+          this._logPass(profiler, res, options, message);
+          return res;
+        }).catch((err: Error) => {
+          this._logError(profiler, err, options, message);
+          throw err;
+        });
+      }
+      this._logPass(profiler, res, options, message);
+      return res;
+    } catch (err: any) {
+      this._logError(profiler, err, options, message);
+      throw err;
     }
-    this._logPass(profiler, res, options, message);
-    return res;
   }
 
   _logPass(profiler: winston.Profiler, res: any, options: IAopMethodOptionsLog, message: string) {
     profiler.done({ level: options.level, message: `${message}\nresult: ${JSON.stringify(res)}` });
+  }
+
+  _logError(profiler: winston.Profiler, err: Error, _options: IAopMethodOptionsLog, message: string) {
+    profiler.done({ level: 'error', message: `${message}\n${err.toString()}` });
   }
 }
