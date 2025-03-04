@@ -11,6 +11,9 @@ export class VonaAsyncLocalStorage<T> extends AsyncLocalStorage<T> {
 
   run<R>(store: T, callback: () => R): R;
   run<R, TArgs extends any[]>(store: T, callback: (...args: TArgs) => R, ...args: TArgs): R {
+    if (store === this.app.currentContext) {
+      return callback(...args);
+    }
     return super.run(store, (...args) => {
       try {
         this.app.meta.ctxCounter.increment();
