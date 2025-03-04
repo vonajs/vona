@@ -9,7 +9,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
   clientName?: keyof ILoggerClientRecord;
   auto?: boolean;
-  arguments?: boolean;
+  args?: boolean;
   result?: boolean;
 }
 
@@ -38,7 +38,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
-    logger.log(options.level, `${message}\nvalue: ${JSON.stringify(value)}`);
+    logger.log(options.level, `${message} value: ${JSON.stringify(value)}`);
     const timeStart = Date.now();
     // next
     try {
@@ -55,7 +55,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
-    options.arguments !== false && logger.log(options.level, `${message}\nargs: ${JSON.stringify(_args)}`);
+    options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`);
     const timeStart = Date.now();
     // next
     try {
@@ -80,13 +80,14 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
   _logResult(logger: winston.Logger, timeStart: number, res: any, options: IAopMethodOptionsLog, message: string) {
     const durationMs = Date.now() - timeStart;
     const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
-    const textResult = res !== undefined ? `\nresult: ${JSON.stringify(res)}` : '';
-    logger.log(options.level, `${message}${textDurationMs}${textResult}`);
+    const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
+    logger.log(options.level, `${message}${textResult}${textDurationMs}`);
   }
 
   _logError(logger: winston.Logger, timeStart: number, err: Error, _options: IAopMethodOptionsLog, message: string) {
     const durationMs = Date.now() - timeStart;
     const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
-    logger.log('error', `${message}${textDurationMs} ${err.toString()}`);
+    const textError = ` error: ${err.message}`;
+    logger.log('error', `${message}${textError}${textDurationMs}`);
   }
 }
