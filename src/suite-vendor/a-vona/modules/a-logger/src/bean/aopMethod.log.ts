@@ -1,10 +1,11 @@
-import type { Next, NextSync } from 'vona';
+import type { ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import { BeanAopMethodBase } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
-
+  level: LoggerLevel;
+  clientName: keyof ILoggerClientRecord;
 }
 
 @AopMethod<IAopMethodOptionsLog>()

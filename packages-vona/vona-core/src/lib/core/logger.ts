@@ -1,4 +1,4 @@
-import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, TypeLoggerOptions } from '../../types/interface/logger.ts';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import * as Winston from 'winston';
@@ -81,12 +81,12 @@ async function _closeLogger(logger: Winston.Logger) {
   });
 }
 
-export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): string | undefined {
+export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): LoggerLevel | undefined {
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
   const level = process.env[envName];
   if (level === 'false') return;
   if (level === 'true' || !level) return 'info';
-  return level;
+  return level as LoggerLevel;
 }
 
 export const formatLoggerFilter = Winston.format((info, opts: any) => {
