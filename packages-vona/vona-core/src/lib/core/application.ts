@@ -20,7 +20,7 @@ export class VonaApplication extends KoaApplication {
   util: AppUtil;
   meta: AppMeta;
   server: Server;
-  ctxStorage: VonaAsyncLocalStorage<VonaContext>;
+  ctxStorage: VonaAsyncLocalStorage;
 
   constructor(options: VonaApplicationOptions) {
     const koaOptions: KoaApplicationOptions = {
