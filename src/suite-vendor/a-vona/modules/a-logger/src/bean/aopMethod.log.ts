@@ -8,16 +8,13 @@ import { AopMethod } from 'vona-module-a-aspect';
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
   clientName?: keyof ILoggerClientRecord;
-  auto: boolean;
-  arguments: boolean;
-  result: boolean;
+  auto?: boolean;
+  arguments?: boolean;
+  result?: boolean;
 }
 
 @AopMethod<IAopMethodOptionsLog>({
   level: 'info',
-  auto: false,
-  arguments: true,
-  result: true,
 })
 export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute {
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): string {
@@ -29,7 +26,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     // next
     try {
       const res = next();
-      options.result && this._logResult(logger, timeStart, res, options, message);
+      this._logResult(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
       this._logError(logger, timeStart, err, options, message);
@@ -41,12 +38,12 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
-    options.arguments && logger.log(options.level, `${message}\nvalue: ${JSON.stringify(value)}`);
+    logger.log(options.level, `${message}\nvalue: ${JSON.stringify(value)}`);
     const timeStart = Date.now();
     // next
     try {
       const res = next();
-      options.result && this._logResult(logger, timeStart, undefined, options, message);
+      (!options.auto) && this._logResult(logger, timeStart, undefined, options, message);
       return res;
     } catch (err: any) {
       this._logError(logger, timeStart, err, options, message);
@@ -58,21 +55,21 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
-    options.arguments && logger.log(options.level, `${message}\nargs: ${JSON.stringify(_args)}`);
+    options.arguments !== false && logger.log(options.level, `${message}\nargs: ${JSON.stringify(_args)}`);
     const timeStart = Date.now();
     // next
     try {
       const res = next();
       if (res?.then) {
         return res.then((res: any) => {
-          options.result && this._logResult(logger, timeStart, res, options, message);
+          options.result !== false && this._logResult(logger, timeStart, res, options, message);
           return res;
         }).catch((err: Error) => {
           this._logError(logger, timeStart, err, options, message);
           throw err;
         });
       }
-      options.result && this._logResult(logger, timeStart, res, options, message);
+      options.result !== false && this._logResult(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
       this._logError(logger, timeStart, err, options, message);
