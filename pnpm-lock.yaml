@@ -209,6 +209,9 @@ importers:
       vona-shared:
         specifier: workspace:^
         version: link:packages-vona/vona-shared
+      winston:
+        specifier: ^3.17.0
+        version: 3.17.0
       zod:
         specifier: ^3.23.8
         version: 3.24.2
@@ -1054,6 +1057,9 @@ importers:
       vona-shared:
         specifier: workspace:^
         version: link:../../../../../packages-vona/vona-shared
+      winston:
+        specifier: ^3.17.0
+        version: 3.17.0
     devDependencies:
       '@cabloy/cli':
         specifier: workspace:^
