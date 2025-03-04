@@ -15,7 +15,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 })
 export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute {
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): string {
-    const message = `${receiver[SymbolBeanFullName]}#${prop}`;
+    const message = `${receiver[SymbolBeanFullName]}#get ${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
     logger.log(options.level, message);
@@ -32,7 +32,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
   }
 
   set(options: IAopMethodOptionsLog, value: string, next: NextSync, receiver: any, prop: string): boolean {
-    const message = `${receiver[SymbolBeanFullName]}#${prop}`;
+    const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
     logger.log(options.level, `${message}\nvalue: ${JSON.stringify(value)}`);
