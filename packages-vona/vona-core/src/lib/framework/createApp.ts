@@ -23,12 +23,11 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
         env,
         AppMonkey,
       });
+      const start = new Start(globalThis.__app__);
+      await start.start();
     }
     await globalThis.__app__.meta.waitAppStarted();
     return globalThis.__app__;
-  } catch (err) {
-    delete globalThis.__app__;
-    throw err;
   } finally {
     globalThis.__creating__ = false;
   }
@@ -50,10 +49,7 @@ async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Boo
     config: appConfig as unknown as VonaConfig,
     AppMonkey,
   };
-  const app = new VonaApplication(options);
-  const start = new Start(app);
-  await start.start();
-  return app;
+  return new VonaApplication(options);
 }
 
 function prepareAppInfo(): VonaAppInfo {

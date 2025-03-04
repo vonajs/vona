@@ -11,7 +11,7 @@ export function handleProcessWork() {
   });
   process.on('uncaughtException', err => {
     const app = useApp();
-    if (!app) {
+    if (!app || !app.meta.appStarted) {
       console.error(err);
       process.kill(process.pid, 'SIGTERM');
     } else {
