@@ -8,6 +8,13 @@ const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 export class AppLogger extends BeanSimple {
   private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, Winston.Logger> = {} as any;
 
+  public async dispose() {
+    for (const key in this[SymbolLoggerInstances]) {
+      const logger = this[SymbolLoggerInstances][key];
+      await _closeLogger(logger);
+    }
+  }
+
   get(clientName?: keyof ILoggerClientRecord) {
     clientName = clientName || 'default';
     if (!this[SymbolLoggerInstances][clientName]) {
@@ -24,8 +31,22 @@ export class AppLogger extends BeanSimple {
       _prepareConfigClient(clientName, this.app.config.logger.default),
       _prepareConfigClient(clientName, configClient),
     );
-    return Winston.createLogger(configNode);
+    const logger = Winston.createLogger(configNode);
+    logger.on('error', err => {
+      console.error(err);
+    });
+    return logger;
   }
+}
+
+async function _closeLogger(logger: Winston.Logger) {
+  return new Promise(resolve => {
+    if ((logger as any).__closed__) return resolve(true);
+    logger.end(() => {
+      (logger as any).__closed__ = true;
+      resolve(true);
+    });
+  });
 }
 
 function _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {

@@ -9,7 +9,7 @@ export function handleProcessWork() {
     // console.log('------------SIGINT');
     await closeApp(true);
   });
-  process.on('uncaughtException', err => {
+  process.on('uncaughtException', async err => {
     const app = useApp();
     if (!app) {
       console.error(err);
@@ -18,7 +18,7 @@ export function handleProcessWork() {
       const logger = app.meta.logger.get();
       logger.error(err);
       if (!app.meta.appStarted) {
-        logger.close();
+        await app.meta.logger.dispose();
         process.kill(process.pid, 'SIGTERM');
       }
     }
