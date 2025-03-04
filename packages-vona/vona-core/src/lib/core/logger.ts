@@ -67,7 +67,15 @@ export class AppLogger extends BeanSimple {
       optionsFile = { filename: `${fileName}.log` };
     }
     const _options = deepExtend({ dirname: this.app.config.server.loggerDir }, optionsFile, options);
-    return configRotate.enable ? new DailyRotateFile(_options) : new Winston.transports.File(_options);
+    if (configRotate.enable) {
+      const transport = new DailyRotateFile(_options);
+      transport.on('error', err => {
+        console.error(err);
+      });
+      return transport;
+    } else {
+      return new Winston.transports.File(_options);
+    }
   }
 }
 
