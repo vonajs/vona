@@ -1,7 +1,8 @@
+import type { VonaContext } from 'vona';
 import type { VonaApplication } from './application.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 
-export class VonaAsyncLocalStorage<T> extends AsyncLocalStorage<T> {
+export class VonaAsyncLocalStorage extends AsyncLocalStorage<VonaContext> {
   app: VonaApplication;
 
   constructor(app: VonaApplication) {
@@ -9,8 +10,8 @@ export class VonaAsyncLocalStorage<T> extends AsyncLocalStorage<T> {
     this.app = app;
   }
 
-  async run<R>(store: T, callback: () => R): Promise<R>;
-  async run<R, TArgs extends any[]>(store: T, callback: (...args: TArgs) => R, ...args: TArgs): Promise<R> {
+  async run<R>(store: VonaContext, callback: () => R): Promise<R>;
+  async run<R, TArgs extends any[]>(store: VonaContext, callback: (...args: TArgs) => R, ...args: TArgs): Promise<R> {
     if (store === this.app.currentContext) {
       return await callback(...args);
     }
@@ -19,6 +20,7 @@ export class VonaAsyncLocalStorage<T> extends AsyncLocalStorage<T> {
         this.app.meta.ctxCounter.increment();
         return await callback(...args);
       } finally {
+        await store.bean.dispose();
         this.app.meta.ctxCounter.decrement();
       }
     }, ...args);
