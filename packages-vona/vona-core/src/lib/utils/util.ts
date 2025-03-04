@@ -1,7 +1,7 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
-import type { IBeanSceneRecord } from 'vona';
 import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
+import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

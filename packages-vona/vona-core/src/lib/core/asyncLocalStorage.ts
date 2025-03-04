@@ -1,4 +1,4 @@
-import type { VonaContext } from 'vona';
+import type { VonaContext } from '../../types/context/index.ts';
 import type { VonaApplication } from './application.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 
