@@ -11,12 +11,16 @@ export function handleProcessWork() {
   });
   process.on('uncaughtException', err => {
     const app = useApp();
-    if (!app || !app.meta.appStarted) {
+    if (!app) {
       console.error(err);
       process.kill(process.pid, 'SIGTERM');
     } else {
       const logger = app.meta.logger.get();
       logger.error(err);
+      if (!app.meta.appStarted) {
+        logger.close();
+        process.kill(process.pid, 'SIGTERM');
+      }
     }
   });
 }
