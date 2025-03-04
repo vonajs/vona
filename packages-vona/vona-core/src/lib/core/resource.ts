@@ -84,7 +84,7 @@ export class AppResource extends BeanSimple {
     if (!scene) scene = 'bean';
     scene = scene.replace(/\./g, '');
     // bean class name
-    const beanClassName = beanClass.name;
+    const beanClassName = this._fixClassName(beanClass.name);
     if (beanClassName.toLocaleUpperCase().startsWith(scene.toLocaleUpperCase())) {
       name = beanClassName.substring(scene.length);
     } else {
@@ -131,6 +131,13 @@ export class AppResource extends BeanSimple {
   _getModuleName<T>(beanFullName: Constructable<T> | string): string | undefined {
     const beanOptions = this.getBean(beanFullName as any);
     return beanOptions?.module;
+  }
+
+  _fixClassName(className: string) {
+    const ch = className.charAt(className.length - 1);
+    if (ch === '2') return className.substring(0, className.length - 1);
+    // if (ch >= '0' && ch <= '9') return className.substring(0, className.length - 1);
+    return className;
   }
 }
 
