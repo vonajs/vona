@@ -1,6 +1,7 @@
 import type { ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
+import chalk from 'chalk';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
@@ -18,32 +19,36 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
     logger.log(options.level, `${message}\nargs: ${JSON.stringify(_args)}`);
-    const profiler = logger.startTimer();
+    const timeStart = Date.now();
     // next
     try {
       const res = next();
       if (res?.then) {
         return res.then((res: any) => {
-          this._logPass(profiler, res, options, message);
+          this._logPass(logger, timeStart, res, options, message);
           return res;
         }).catch((err: Error) => {
-          this._logError(profiler, err, options, message);
+          this._logError(logger, timeStart, err, options, message);
           throw err;
         });
       }
-      this._logPass(profiler, res, options, message);
+      this._logPass(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
-      this._logError(profiler, err, options, message);
+      this._logError(logger, timeStart, err, options, message);
       throw err;
     }
   }
 
-  _logPass(profiler: winston.Profiler, res: any, options: IAopMethodOptionsLog, message: string) {
-    profiler.done({ level: options.level, message: `${message}\nresult: ${JSON.stringify(res)}` });
+  _logPass(logger: winston.Logger, timeStart: number, res: any, options: IAopMethodOptionsLog, message: string) {
+    const durationMs = Date.now() - timeStart;
+    const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
+    logger.log(options.level, `${message}${textDurationMs}\nresult: ${JSON.stringify(res)}`);
   }
 
-  _logError(profiler: winston.Profiler, err: Error, _options: IAopMethodOptionsLog, message: string) {
-    profiler.done({ level: 'error', message: `${message} ${err.toString()}` });
+  _logError(logger: winston.Logger, timeStart: number, err: Error, _options: IAopMethodOptionsLog, message: string) {
+    const durationMs = Date.now() - timeStart;
+    const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
+    logger.log('error', `${message}${textDurationMs} ${err.toString()}`);
   }
 }
