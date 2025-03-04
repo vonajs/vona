@@ -18,7 +18,7 @@ export class ServiceRedisClient extends BeanBase {
   }
 
   protected async __dispose__() {
-    await this._redisInstance?.quit(); // .disconnect(false);
+    await this._redisInstance?.quit();
   }
 
   private _createClient(clientName?: string): Redis {

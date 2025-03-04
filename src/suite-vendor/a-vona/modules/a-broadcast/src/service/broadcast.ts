@@ -30,8 +30,8 @@ export class ServiceBroadcast extends BeanBase {
   }
 
   protected async __dispose__() {
-    await this.__pub?.quit();// .disconnect(false);
-    await this.__sub?.quit();// .disconnect(false);
+    await this.__pub?.quit();
+    await this.__sub?.quit();
   }
 
   emit<DATA>(info: IBroadcastJobContext<DATA>) {
