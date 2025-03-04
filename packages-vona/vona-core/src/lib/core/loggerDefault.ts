@@ -1,10 +1,11 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { ConfigLogger } from '../../types/interface/logger.ts';
+import type { VonaApplication } from './application.ts';
 import { formatLoggerConsole, formatLoggerFilter } from './logger.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
   const configDefault: ConfigLogger = {
-    default: ({ format, transports }, { level }) => {
+    default(this: VonaApplication, { format, transports }, { level }) {
       return {
         format: format.combine(
           format.splat(),

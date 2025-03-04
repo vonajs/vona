@@ -35,14 +35,22 @@ export class AppLogger extends BeanSimple {
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
     const configNode = deepExtend(
       {},
-      _prepareConfigClient(clientName, this.app.config.logger.default),
-      _prepareConfigClient(clientName, configClient),
+      this._prepareConfigClient(clientName, this.app.config.logger.default),
+      this._prepareConfigClient(clientName, configClient),
     );
     const logger = Winston.createLogger(configNode);
     logger.on('error', err => {
       console.error(err);
     });
     return logger;
+  }
+
+  private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
+    if (typeof configClient !== 'function') return configClient;
+    return configClient.call(this.app, Winston, {
+      clientName,
+      level: getLoggerClientLevel(clientName),
+    });
   }
 }
 
@@ -53,14 +61,6 @@ async function _closeLogger(logger: Winston.Logger) {
       (logger as any).__closed__ = true;
       resolve(true);
     });
-  });
-}
-
-function _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
-  if (typeof configClient !== 'function') return configClient;
-  return configClient(Winston, {
-    clientName,
-    level: getLoggerClientLevel(clientName),
   });
 }
 
