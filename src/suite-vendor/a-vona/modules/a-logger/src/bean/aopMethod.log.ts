@@ -11,7 +11,6 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   auto: boolean;
   arguments: boolean;
   result: boolean;
-  error: boolean;
 }
 
 @AopMethod<IAopMethodOptionsLog>({
@@ -19,14 +18,13 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   auto: false,
   arguments: true,
   result: true,
-  error: true,
 })
 export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute {
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): string {
     const message = `${receiver[SymbolBeanFullName]}#get ${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
-    options.arguments && logger.log(options.level, message);
+    (!options.auto) && logger.log(options.level, message);
     const timeStart = Date.now();
     // next
     try {
@@ -34,7 +32,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
       options.result && this._logResult(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
-      options.error && this._logError(logger, timeStart, err, options, message);
+      this._logError(logger, timeStart, err, options, message);
       throw err;
     }
   }
@@ -51,7 +49,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
       options.result && this._logResult(logger, timeStart, undefined, options, message);
       return res;
     } catch (err: any) {
-      options.error && this._logError(logger, timeStart, err, options, message);
+      this._logError(logger, timeStart, err, options, message);
       throw err;
     }
   }
@@ -70,14 +68,14 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
           options.result && this._logResult(logger, timeStart, res, options, message);
           return res;
         }).catch((err: Error) => {
-          options.error && this._logError(logger, timeStart, err, options, message);
+          this._logError(logger, timeStart, err, options, message);
           throw err;
         });
       }
       options.result && this._logResult(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
-      options.error && this._logError(logger, timeStart, err, options, message);
+      this._logError(logger, timeStart, err, options, message);
       throw err;
     }
   }
