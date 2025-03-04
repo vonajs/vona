@@ -44,6 +44,6 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
   }
 
   _logError(profiler: winston.Profiler, err: Error, _options: IAopMethodOptionsLog, message: string) {
-    profiler.done({ level: 'error', message: `${message}\n${err.toString()}` });
+    profiler.done({ level: 'error', message: `${message} ${err.toString()}` });
   }
 }
