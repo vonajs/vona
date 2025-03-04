@@ -31,6 +31,23 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     }
   }
 
+  set(options: IAopMethodOptionsLog, value: string, next: NextSync, receiver: any, prop: string): boolean {
+    const message = `${receiver[SymbolBeanFullName]}#${prop}`;
+    const logger = this.app.meta.logger.get(options.clientName);
+    // begin
+    logger.log(options.level, `${message}\nvalue: ${JSON.stringify(value)}`);
+    const timeStart = Date.now();
+    // next
+    try {
+      const res = next();
+      this._logPass(logger, timeStart, undefined, options, message);
+      return res;
+    } catch (err: any) {
+      this._logError(logger, timeStart, err, options, message);
+      throw err;
+    }
+  }
+
   execute(options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any {
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.get(options.clientName);
@@ -60,7 +77,8 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
   _logPass(logger: winston.Logger, timeStart: number, res: any, options: IAopMethodOptionsLog, message: string) {
     const durationMs = Date.now() - timeStart;
     const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
-    logger.log(options.level, `${message}${textDurationMs}\nresult: ${JSON.stringify(res)}`);
+    const textResult = res !== undefined ? `\nresult: ${JSON.stringify(res)}` : '';
+    logger.log(options.level, `${message}${textDurationMs}${textResult}`);
   }
 
   _logError(logger: winston.Logger, timeStart: number, err: Error, _options: IAopMethodOptionsLog, message: string) {
