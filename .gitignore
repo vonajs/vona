@@ -20,6 +20,7 @@ miniprogram_npm
 
 # vona core related directories
 .vona
+.app
 
 # mine .env files
 env/.env*.mine
