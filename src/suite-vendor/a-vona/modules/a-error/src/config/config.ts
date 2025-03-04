@@ -18,12 +18,6 @@ export function config(_app: VonaApplication) {
       async log(err: Error, ctx: VonaContext) {
         return await _performErrorFilters(ctx, err, 'log');
       },
-      async js(err: Error, ctx: VonaContext) {
-        await _performErrorFilters(ctx, err, 'json');
-        if (ctx.createJsonpBody) {
-          ctx.createJsonpBody(ctx.body);
-        }
-      },
       async json(err: Error, ctx: VonaContext) {
         return await _performErrorFilters(ctx, err, 'json');
       },

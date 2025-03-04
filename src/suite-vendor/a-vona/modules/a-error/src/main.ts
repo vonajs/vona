@@ -13,7 +13,7 @@ export class Main extends BeanSimple implements IModuleMain {
     const errorOptions: OnerrorOptions = {};
 
     // support customize error response
-    const keys = ['accepts', 'log', 'all', 'html', 'json', 'text', 'js'];
+    const keys = ['accepts', 'log', 'all', 'html', 'json', 'text'];
     for (const type of keys) {
       if (config.onerror[type]) {
         Reflect.set(errorOptions, type, config.onerror[type]);
