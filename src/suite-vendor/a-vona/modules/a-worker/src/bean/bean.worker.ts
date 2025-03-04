@@ -44,8 +44,8 @@ export class BeanWorker extends BeanBase {
       // maybe throw uncaughtException
       // throw new Error('Only take affect in cluster');
     }
+    await closeApp(false);
     cluster.worker.send('reload-worker');
-    closeApp(false);
   }
 
   async reloadAll() {
