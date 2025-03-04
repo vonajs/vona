@@ -1,5 +1,6 @@
 import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from '../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
+import chalk from 'chalk';
 import * as Winston from 'winston';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { deepExtend } from '../utils/util.ts';
@@ -79,14 +80,11 @@ export const formatLoggerFilter = Winston.format((info, opts: any) => {
 });
 
 export const formatLoggerConsole = () => {
-  return Winston.format.printf(({ timestamp, level, stack, message, ...meta }) => {
-    let text = `${timestamp} ${level} ${message}`;
-    if (!isEmptyObject(meta)) {
-      text = `${text} ${JSON.stringify(meta)}`;
-    }
-    if (stack) {
-      text = `${text}\n${stack}`;
-    }
-    return text;
+  return Winston.format.printf(({ timestamp, level, stack, message, name, ...meta }) => {
+    const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
+    const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
+    const textMessage = message ? ` ${message}` : '';
+    const textStack = stack ? `\n${stack}` : '';
+    return `${timestamp} ${level}${textName}${textMeta}${textMessage}${textStack}`;
   });
 };
