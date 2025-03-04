@@ -5,6 +5,17 @@ import { formatLoggerConsole, formatLoggerFilter } from './logger.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, loggerDir: string) {
   const configDefault: ConfigLogger = {
+    rotate: {
+      enable: true,
+      options(this: VonaApplication, fileName) {
+        return {
+          filename: `${fileName}-%DATE%.log`,
+          datePattern: 'YYYY-MM-DD',
+          maxSize: '20m',
+          maxFiles: '7d',
+        };
+      },
+    },
     default(this: VonaApplication, { format, transports }, { level }) {
       return {
         format: format.combine(
