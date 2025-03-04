@@ -1,16 +1,21 @@
 import type { ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
-import { BeanAopMethodBase } from 'vona';
+import { BeanAopMethodBase, SymbolBeanFullName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
-  clientName: keyof ILoggerClientRecord;
+  clientName?: keyof ILoggerClientRecord;
 }
 
-@AopMethod<IAopMethodOptionsLog>()
+@AopMethod<IAopMethodOptionsLog>({
+  level: 'info',
+})
 export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute {
-  execute(_options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<any> | any {
+  execute(options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any {
+    const message = `${receiver[SymbolBeanFullName]}#${prop}`;
+    const logger = this.app.meta.logger.get(options.clientName);
+    logger.log(options.level, message);
     // next
     return next();
   }
