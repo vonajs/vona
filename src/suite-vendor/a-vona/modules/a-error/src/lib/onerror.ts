@@ -25,7 +25,7 @@ const defaultOptions: OnerrorOptions = {};
 export function onerror(app: any, options?: OnerrorOptions) {
   options = { ...defaultOptions, ...options };
 
-  app.context.onerror = function (err: any) {
+  app.context.onerror = async function (err: any) {
     // don't do anything if there is no error.
     // this allows you to pass `this.onerror`
     // to node-style callbacks.
@@ -69,8 +69,8 @@ export function onerror(app: any, options?: OnerrorOptions) {
       err.headerSent = true;
     }
 
-    // delegate
-    this.app.emit('error', err, this);
+    // log filter, need not app.emit('error')
+    await (options as any).log.call(this, err, this);
 
     // nothing we can do here other
     // than delegate to the app-level
@@ -101,7 +101,7 @@ export function onerror(app: any, options?: OnerrorOptions) {
       if (options.redirect && type !== 'json') {
         this.redirect(options.redirect);
       } else {
-        (options as any)[type].call(this, err, this);
+        await (options as any)[type].call(this, err, this);
         this.type = type;
       }
     }
