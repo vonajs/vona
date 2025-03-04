@@ -8,6 +8,7 @@ import { AopMethod } from 'vona-module-a-aspect';
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
   clientName?: keyof ILoggerClientRecord;
+
 }
 
 @AopMethod<IAopMethodOptionsLog>({
@@ -23,7 +24,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     // next
     try {
       const res = next();
-      this._logPass(logger, timeStart, res, options, message);
+      this._logResult(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
       this._logError(logger, timeStart, err, options, message);
@@ -40,7 +41,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     // next
     try {
       const res = next();
-      this._logPass(logger, timeStart, undefined, options, message);
+      this._logResult(logger, timeStart, undefined, options, message);
       return res;
     } catch (err: any) {
       this._logError(logger, timeStart, err, options, message);
@@ -59,14 +60,14 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
       const res = next();
       if (res?.then) {
         return res.then((res: any) => {
-          this._logPass(logger, timeStart, res, options, message);
+          this._logResult(logger, timeStart, res, options, message);
           return res;
         }).catch((err: Error) => {
           this._logError(logger, timeStart, err, options, message);
           throw err;
         });
       }
-      this._logPass(logger, timeStart, res, options, message);
+      this._logResult(logger, timeStart, res, options, message);
       return res;
     } catch (err: any) {
       this._logError(logger, timeStart, err, options, message);
@@ -74,7 +75,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     }
   }
 
-  _logPass(logger: winston.Logger, timeStart: number, res: any, options: IAopMethodOptionsLog, message: string) {
+  _logResult(logger: winston.Logger, timeStart: number, res: any, options: IAopMethodOptionsLog, message: string) {
     const durationMs = Date.now() - timeStart;
     const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
     const textResult = res !== undefined ? `\nresult: ${JSON.stringify(res)}` : '';
