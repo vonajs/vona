@@ -12,7 +12,7 @@
   "__dispose__": {
     "scope": "typescript,typescriptreact",
     "prefix": "dispose",
-    "body": ["protected __dispose__() {", "  $0", "}"],
+    "body": ["protected async __dispose__() {", "  $0", "}"],
     "description": "__dispose__",
   },
   "aop.__init__": {
@@ -30,8 +30,8 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopdispose",
     "body": [
-      "protected __dispose__(_args: [], next: Function, _receiver: any) {",
-      "  next();",
+      "protected async __dispose__(_args: [], next: Function, _receiver: any) {",
+      "  await next();",
       "  $0",
       "}"
     ],

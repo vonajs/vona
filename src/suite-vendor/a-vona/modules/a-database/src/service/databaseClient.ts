@@ -32,8 +32,8 @@ export class ServiceDatabaseClient extends BeanBase {
     this._knex = knex(this.clientConfig);
   }
 
-  protected __dispose__() {
-    this._knex?.destroy();
+  protected async __dispose__() {
+    await this._knex?.destroy();
   }
 
   private _extractClientName(clientName?: string) {

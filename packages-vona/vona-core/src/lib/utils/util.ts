@@ -361,8 +361,8 @@ export function uuidv4() {
   return uuid.v4();
 }
 
-export function disposeInstance(instance: any) {
-  instance?.__dispose__?.();
+export async function disposeInstance(instance: any) {
+  await instance?.__dispose__?.();
 }
 
 export function polyfillDispose(instance: any) {

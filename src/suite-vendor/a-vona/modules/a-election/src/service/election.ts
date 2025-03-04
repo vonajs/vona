@@ -7,7 +7,7 @@ export class ServiceElection extends BeanBase {
   _intervalId: any = null;
   _isLeader: boolean = false;
 
-  protected __dispose__() {
+  protected async __dispose__() {
     if (this._intervalId) {
       clearInterval(this._intervalId);
       this._intervalId = null;

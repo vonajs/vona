@@ -29,9 +29,9 @@ export class ServiceBroadcast extends BeanBase {
     });
   }
 
-  protected __dispose__() {
-    this.__pub?.disconnect(false);
-    this.__sub?.disconnect(false);
+  protected async __dispose__() {
+    await this.__pub?.quit();// .disconnect(false);
+    await this.__sub?.quit();// .disconnect(false);
   }
 
   emit<DATA>(info: IBroadcastJobContext<DATA>) {

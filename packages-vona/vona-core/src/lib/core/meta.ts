@@ -137,7 +137,7 @@ export class AppMeta extends BeanSimple {
     // hook: appClosed
     await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClosed');
     // todo: container dispose
-    this.app.bean.dispose();
+    await this.app.bean.dispose();
     // need not call process.exit
   }
 }
