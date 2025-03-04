@@ -13,7 +13,7 @@ const __cacheViewTemplates: Record<string, any> = {};
 
 @Filter<IFilterOptionsError>({ global: true, logs: {} })
 export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IFilterHtml {
-  log(err: Error, options: IFilterOptionsError, next: NextSync): boolean {
+  async log(err: Error, options: IFilterOptionsError, next: NextSync): Promise<boolean> {
     // 403->401
     if (err.code === 403) {
       if (!this.bean.passport.isAuthenticated) {
@@ -32,7 +32,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     }
 
     // next
-    if (next() === true) return true;
+    if ((await next()) === true) return true;
 
     // todo: use new log engine
     if (options.logs[err.code!] !== false) {
@@ -43,9 +43,9 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     return true;
   }
 
-  json(err: Error, _options: IFilterOptionsError, next: NextSync): boolean {
+  async json(err: Error, _options: IFilterOptionsError, next: NextSync): Promise<boolean> {
     // next
-    if (next() === true) return true;
+    if ((await next()) === true) return true;
 
     const status = this.app.util.detectStatus(err);
 
@@ -79,9 +79,9 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     return true;
   }
 
-  html(err: Error, _options: IFilterOptionsError, next: NextSync): boolean {
+  async html(err: Error, _options: IFilterOptionsError, next: NextSync): Promise<boolean> {
     // next
-    if (next() === true) return true;
+    if ((await next()) === true) return true;
 
     const status = this.app.util.detectStatus(err);
     const errorPageUrl =
