@@ -1,7 +1,8 @@
-import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from '../../types/interface/logger.ts';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, TypeLoggerOptions } from '../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import * as Winston from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { deepExtend } from '../utils/util.ts';
 
@@ -51,6 +52,22 @@ export class AppLogger extends BeanSimple {
       clientName,
       level: getLoggerClientLevel(clientName),
     });
+  }
+
+  public createTransportFile(
+    fileName: string,
+    clientInfo: ILoggerOptionsClientInfo,
+    options: Winston.transports.FileTransportOptions | DailyRotateFile.DailyRotateFileTransportOptions,
+  ) {
+    const configRotate = this.app.config.logger.rotate;
+    let optionsFile;
+    if (configRotate.enable) {
+      optionsFile = configRotate.options.call(this, fileName, Winston, clientInfo);
+    } else {
+      optionsFile = { filename: `${fileName}.log` };
+    }
+    const _options = deepExtend({ dirname: this.app.config.server.loggerDir }, optionsFile, options);
+    return configRotate.enable ? new DailyRotateFile(_options) : new Winston.transports.File(_options);
   }
 }
 

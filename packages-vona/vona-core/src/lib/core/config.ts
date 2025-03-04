@@ -28,7 +28,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
   const subdomainOffset = Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(process.env.SERVER_WORKERS!);
   // logger
-  const logger = combineLoggerDefault(appInfo, loggerDir);
+  const logger = combineLoggerDefault(appInfo);
   return {
     meta: {
       flavor: process.env.META_FLAVOR,
