@@ -6,7 +6,7 @@ import { formatLoggerConsole, formatLoggerFilter } from './logger.ts';
 export function combineLoggerDefault(_appInfo: VonaAppInfo) {
   const configDefault: ConfigLogger = {
     rotate: {
-      enable: true,
+      enable: false,
       options(fileName) {
         return {
           filename: `${fileName}-%DATE%.log`,
