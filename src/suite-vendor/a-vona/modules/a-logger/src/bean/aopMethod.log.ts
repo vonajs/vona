@@ -1,7 +1,6 @@
 import type { ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
-import chalk from 'chalk';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
@@ -22,14 +21,14 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
     (!options.auto) && logger.log(options.level, message);
-    const timeStart = Date.now();
+    const profiler = logger.startTimer();
     // next
     try {
       const res = next();
-      this._logResult(logger, timeStart, res, options, message);
+      this._logResult(profiler, res, options, message);
       return res;
     } catch (err: any) {
-      this._logError(logger, timeStart, err, options, message);
+      this._logError(profiler, err, options, message);
       throw err;
     }
   }
@@ -39,14 +38,14 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
     logger.log(options.level, `${message} value: ${JSON.stringify(value)}`);
-    const timeStart = Date.now();
+    const profiler = logger.startTimer();
     // next
     try {
       const res = next();
-      (!options.auto) && this._logResult(logger, timeStart, undefined, options, message);
+      (!options.auto) && this._logResult(profiler, undefined, options, message);
       return res;
     } catch (err: any) {
-      this._logError(logger, timeStart, err, options, message);
+      this._logError(profiler, err, options, message);
       throw err;
     }
   }
@@ -56,38 +55,34 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const logger = this.app.meta.logger.get(options.clientName);
     // begin
     options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`);
-    const timeStart = Date.now();
+    const profiler = logger.startTimer();
     // next
     try {
       const res = next();
       if (res?.then) {
         return res.then((res: any) => {
-          options.result !== false && this._logResult(logger, timeStart, res, options, message);
+          options.result !== false && this._logResult(profiler, res, options, message);
           return res;
         }).catch((err: Error) => {
-          this._logError(logger, timeStart, err, options, message);
+          this._logError(profiler, err, options, message);
           throw err;
         });
       }
-      options.result !== false && this._logResult(logger, timeStart, res, options, message);
+      options.result !== false && this._logResult(profiler, res, options, message);
       return res;
     } catch (err: any) {
-      this._logError(logger, timeStart, err, options, message);
+      this._logError(profiler, err, options, message);
       throw err;
     }
   }
 
-  _logResult(logger: winston.Logger, timeStart: number, res: any, options: IAopMethodOptionsLog, message: string) {
-    const durationMs = Date.now() - timeStart;
-    const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
+  _logResult(profiler: winston.Profiler, res: any, options: IAopMethodOptionsLog, message: string) {
     const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
-    logger.log(options.level, `${message}${textResult}${textDurationMs}`);
+    profiler.done({ level: options.level, message: `${message}${textResult}` });
   }
 
-  _logError(logger: winston.Logger, timeStart: number, err: Error, _options: IAopMethodOptionsLog, message: string) {
-    const durationMs = Date.now() - timeStart;
-    const textDurationMs = ` ${chalk.cyan(`+${durationMs}ms`)}`;
+  _logError(profiler: winston.Profiler, err: Error, _options: IAopMethodOptionsLog, message: string) {
     const textError = ` error: ${err.message}`;
-    logger.log('error', `${message}${textError}${textDurationMs}`);
+    profiler.done({ level: 'error', message: `${message}${textError}` });
   }
 }
