@@ -1,12 +1,11 @@
 import type { IModule } from '@cabloy/module-info';
-import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.ts';
 import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
 import cluster from 'node:cluster';
-import * as celjs from 'cel-js';
+
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
@@ -28,7 +27,6 @@ export class AppMeta extends BeanSimple {
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
   appMonkey?: AppMonkeyConstructable;
-  celjs: typeof CelJS;
   //
   resource: AppResource;
   metadata: AppMetadata;
@@ -78,9 +76,6 @@ export class AppMeta extends BeanSimple {
 
     // metadata
     this.metadata = appMetadata;
-
-    // celjs
-    this.celjs = celjs;
   }
 
   prepareEnv() {
