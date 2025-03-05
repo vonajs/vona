@@ -9,14 +9,18 @@ export interface IMiddlewareSystemOptionsHttpLog extends IDecoratorMiddlewareSys
 @MiddlewareSystem<IMiddlewareSystemOptionsHttpLog>()
 export class MiddlewareSystemHttpLog extends BeanBase implements IMiddlewareSystemExecute {
   async execute(_options: IMiddlewareSystemOptionsHttpLog, next: Next) {
+    const ctx = this.ctx;
     // start
-    const req = StdSerializers.req(this.ctx.req);
+    const req = StdSerializers.req(ctx.req);
     this.loggerChild('req').http(JSON.stringify(req));
     const profiler = this.loggerChild('res').startTimer();
     // next
     await next();
     // end
-    const res = StdSerializers.res(this.ctx.res);
+    const res = {
+      statusCode: ctx.res.statusCode,
+      headers: ctx.res.getHeaders(),
+    };
     profiler.done({ level: 'http', message: JSON.stringify(res) });
   }
 }
