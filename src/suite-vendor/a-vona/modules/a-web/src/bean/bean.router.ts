@@ -96,7 +96,7 @@ export class BeanRouter extends BeanBase {
       actionKey,
     )!;
     const actionPath: RegExp | string = handlerMetadata.path || '';
-    const actionMethod: string = handlerMetadata.method || RequestMethod.GET;
+    const actionMethod: RequestMethod = handlerMetadata.method || RequestMethod.GET;
     // routePath
     const routePath = app.util.combineApiPathControllerAndAction(
       info.relativeName,
