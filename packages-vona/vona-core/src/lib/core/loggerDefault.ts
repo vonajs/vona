@@ -31,14 +31,15 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo) {
             ),
           }),
           this.meta.logger.createTransportFile('combined', clientInfo, {
-            level: 'silly',
+            level: clientInfo.level,
+            silent: clientInfo.level === undefined,
             format: format.combine(
-              formatLoggerFilter({ level: clientInfo.level }),
               format.json(),
             ),
           }),
           new transports.Console({
             level: 'silly',
+            silent: clientInfo.level === undefined,
             format: format.combine(
               formatLoggerFilter({ level: clientInfo.level, silly: true }),
               format.colorize(),
