@@ -114,9 +114,8 @@ export class ServiceQueue extends BeanBase {
       _workerOptions,
     );
 
-    _worker.worker.on('failed', (_job, _err) => {
-      // todo: log
-      // app.logger.error(err);
+    _worker.worker.on('failed', (_job, err) => {
+      this.logger.error(err);
     });
 
     _worker.worker.on('error', err => {
