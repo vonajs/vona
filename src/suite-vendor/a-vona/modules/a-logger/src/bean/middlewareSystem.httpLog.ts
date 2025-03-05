@@ -18,6 +18,7 @@ export class MiddlewareSystemHttpLog extends BeanBase implements IMiddlewareSyst
     await next();
     // end
     const res = {
+      url: ctx.req.url,
       statusCode: ctx.res.statusCode,
       headers: ctx.res.getHeaders(),
     };
