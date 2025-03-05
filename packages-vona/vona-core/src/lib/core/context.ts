@@ -96,7 +96,7 @@ export const contextBase: ContextBase = {
   },
 
   getController() {
-    const self = cast<VonaContext>(this);
+    const self = cast(this);
     return self.route?.controller;
   },
 
@@ -116,7 +116,7 @@ export const contextBase: ContextBase = {
   },
 
   getHandler() {
-    const self = cast<VonaContext>(this);
+    const self = cast(this);
     return self.route?.actionDescriptor?.value;
   },
 
