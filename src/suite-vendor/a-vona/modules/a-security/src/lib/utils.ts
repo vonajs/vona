@@ -41,9 +41,8 @@ export function isSafePath(path: string, ctx: VonaContext) {
       path = decodeURIComponent(path);
     } catch (_e) {
       if (ctx.app.meta.isLocal || ctx.app.meta.isTest) {
-        // todo: log
         // not under production environment, output log
-        ctx.coreLogger.warn('[@eggjs/security: dta global block] : decode file path %j failed.', path);
+        ctx.app.meta.logger.get().warn('[@eggjs/security: dta global block] : decode file path %j failed.', path);
       }
     }
   }

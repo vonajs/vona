@@ -35,9 +35,8 @@ export class ServiceRedlock extends BeanBase {
         .then(lock => {
           _lock = lock;
         })
-        .catch(_err => {
-          // todo: log
-          // this.app.logger.error(err);
+        .catch(err => {
+          this.logger.error(err);
           _lockDone();
         });
     }, lockTTL / 2);
