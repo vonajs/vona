@@ -72,11 +72,8 @@ export class ServiceVersion extends BeanBase {
     }
 
     // check all modules
-    const debug = this.app.bean.debug.get('version');
     for (const module of this.app.meta.modulesArray) {
-      if (debug.enabled) {
-        debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
-      }
+      this.loggerChild('version').debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
       await this.__checkModule(module.info.relativeName, options);
     }
 
@@ -173,10 +170,8 @@ export class ServiceVersion extends BeanBase {
         versions.push(version);
       }
       // loop
-      const debug = this.app.bean.debug.get('version');
       for (const version of versions) {
-        if (debug.enabled)
-          debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
+        this.loggerChild('version').debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
         await this.__updateModule2(options, module, version);
       }
     }

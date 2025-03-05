@@ -34,3 +34,9 @@ export interface IMetaVersionInit {
 export interface IMetaVersionTest {
   test: (options: IMetaVersionTestOptions) => Promise<void>;
 }
+
+declare module 'vona' {
+  export interface ILoggerClientChildRecord {
+    version: never;
+  }
+}

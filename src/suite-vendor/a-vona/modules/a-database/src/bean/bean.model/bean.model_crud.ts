@@ -133,8 +133,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // page
     this.buildPage(builder, params.page);
     // ready
-    const debug = this.app.bean.debug.get('model');
-    if (debug.enabled) debug('model.select: %s', builder.toQuery());
+    this.loggerChild('model').debug('model.select: %s', builder.toQuery());
     return (await builder) as TResult2[];
   }
 
@@ -207,8 +206,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       return BigNumber(0);
     }
     // ready
-    const debug = this.app.bean.debug.get('model');
-    if (debug.enabled) debug('model.count: %s', builder.toQuery());
+    this.loggerChild('model').debug('model.count: %s', builder.toQuery());
     const res = await builder;
     return this.extractCount(res);
   }
@@ -243,8 +241,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // insert
     builder.insert(datas as unknown as any);
     // debug
-    const debug = this.app.bean.debug.get('model');
-    if (debug.enabled) debug('model.insert: %s', builder.toQuery());
+    this.loggerChild('model').debug('model.insert: %s', builder.toQuery());
     // dialect
     return await this.dialect.insert(builder);
   }
@@ -291,8 +288,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       return;
     }
     // debug
-    const debug = this.app.bean.debug.get('model');
-    if (debug.enabled) debug('model.update: %s', builder.toQuery());
+    this.loggerChild('model').debug('model.update: %s', builder.toQuery());
     // ready
     await builder;
   }
@@ -331,8 +327,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       return;
     }
     // debug
-    const debug = this.app.bean.debug.get('model');
-    if (debug.enabled) debug('model.delete: %s', builder.toQuery());
+    this.loggerChild('model').debug('model.delete: %s', builder.toQuery());
     // ready
     await builder;
   }
