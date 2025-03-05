@@ -1,7 +1,7 @@
 import type { ILoggerClientChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
-import { evaluate } from '@cabloy/utils';
+import { evaluate, evaluateExpressions } from '@cabloy/utils';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
@@ -83,13 +83,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
   }
 
   _getContext(options: IAopMethodOptionsLog, receiver: any) {
-    const context = options.context;
-    if (!context) return;
-    const result = {};
-    for (const key in context) {
-      result[key] = evaluate(context[key], receiver);
-    }
-    return result;
+    return evaluateExpressions(options.context, receiver);
   }
 
   _logResult(profiler: winston.Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {

@@ -6,9 +6,8 @@ import type {
   IDecoratorUseOptionsBase,
   IInjectSelectorInfo,
   IUsePrepareArgResult,
-  TypeDecoratorUseOptionsInitArg,
 } from '../index.ts';
-import { evaluate, isNil } from '@cabloy/utils';
+import { evaluateExpressions } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.ts';
 import { appResource } from '../../core/resource.ts';
 
@@ -88,25 +87,6 @@ function __prepareInjectSelectorInfo_init(
   const withSelector = init.withSelector ?? useOptions.selector !== undefined;
   const _args = init.args ?? [init.arg];
   if (!_args) return;
-  const args = _args.map(arg => __prepareInjectSelectorInfo_init_arg(beanInstance, arg));
+  const args = _args.map(arg => evaluateExpressions(arg, beanInstance));
   return { withSelector, args };
-}
-
-function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
-  if (isNil(arg)) return arg;
-  if (Array.isArray(arg)) {
-    return arg.map(item => __prepareInjectSelectorInfo_init_argInner(beanInstance, item));
-  } else if (typeof arg === 'object') {
-    const res = {};
-    for (const key in arg) {
-      res[key] = __prepareInjectSelectorInfo_init_argInner(beanInstance, arg[key]);
-    }
-    return res;
-  }
-  // others
-  return __prepareInjectSelectorInfo_init_argInner(beanInstance, arg);
-}
-
-function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
-  return evaluate(arg, beanInstance);
 }
