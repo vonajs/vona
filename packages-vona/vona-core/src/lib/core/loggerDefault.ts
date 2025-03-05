@@ -30,6 +30,13 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo) {
               format.json(),
             ),
           }),
+          this.meta.logger.createTransportFile('http', clientInfo, {
+            level: 'http',
+            format: format.combine(
+              formatLoggerFilter({ level: 'http', strict: true }),
+              format.json(),
+            ),
+          }),
           this.meta.logger.createTransportFile('combined', clientInfo, {
             level: clientInfo.level,
             silent: clientInfo.level === undefined,

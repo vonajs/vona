@@ -101,6 +101,10 @@ export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): Log
 export const formatLoggerFilter = Winston.format((info, opts: any) => {
   const level = opts.level;
   if (!level) return false;
+  if (opts.strict) {
+    if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return info;
+    return false;
+  }
   if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return info;
   return false;
 });
