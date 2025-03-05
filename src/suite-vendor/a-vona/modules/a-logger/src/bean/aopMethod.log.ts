@@ -1,4 +1,4 @@
-import type { ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'vona';
@@ -6,6 +6,7 @@ import { AopMethod } from 'vona-module-a-aspect';
 
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
+  childName?: keyof ILoggerClientChildRecord;
   clientName?: keyof ILoggerClientRecord;
   auto?: boolean;
   args?: boolean;
@@ -18,7 +19,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute {
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): string {
     const message = `${receiver[SymbolBeanFullName]}#get ${prop}`;
-    const logger = this.app.meta.logger.get(options.clientName);
+    const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
     (!options.auto) && logger.log(options.level, message);
     const profiler = logger.startTimer();
@@ -35,7 +36,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
 
   set(options: IAopMethodOptionsLog, value: string, next: NextSync, receiver: any, prop: string): boolean {
     const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
-    const logger = this.app.meta.logger.get(options.clientName);
+    const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
     logger.log(options.level, `${message} value: ${JSON.stringify(value)}`);
     const profiler = logger.startTimer();
@@ -52,7 +53,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
 
   execute(options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any {
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
-    const logger = this.app.meta.logger.get(options.clientName);
+    const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
     options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`);
     const profiler = logger.startTimer();

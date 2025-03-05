@@ -26,8 +26,9 @@ export class AppLogger extends BeanSimple {
     return this[SymbolLoggerInstances][clientName];
   }
 
-  child(childName: keyof ILoggerClientChildRecord, clientName?: keyof ILoggerClientRecord) {
+  child(childName?: keyof ILoggerClientChildRecord, clientName?: keyof ILoggerClientRecord) {
     const logger = this.get(clientName);
+    if (!childName) return logger;
     return logger.child({ name: childName });
   }
 
