@@ -10,6 +10,7 @@ import { extend } from '@cabloy/extend';
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import * as uuid from 'uuid';
+import { cast } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 
 export interface IExecuteBeanCallbackParams {
@@ -127,7 +128,7 @@ export class AppUtil extends BeanSimple {
   async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
     const rootPath = this.app.config.server.publicDir;
     // use instance.id, not instanceName
-    const dir = path.join(rootPath, this.ctx.instance.id.toString(), subdir || '');
+    const dir = path.join(rootPath, cast(this.ctx).instance.id.toString(), subdir || '');
     if (ensure) {
       await fse.ensureDir(dir);
     }
@@ -272,7 +273,6 @@ export class AppUtil extends BeanSimple {
 
   accepts() {
     if (this.ctx.acceptJSON) return 'json';
-    if (this.ctx.acceptJSONP) return 'js';
     return 'html';
   }
 }
