@@ -34,9 +34,8 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     // next
     if ((await next()) === true) return true;
 
-    // todo: use new log engine
     if (options.logs[err.code!] !== false) {
-      console.error(err);
+      this.logger.error(err);
     }
 
     // handled
