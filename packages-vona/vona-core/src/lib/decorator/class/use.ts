@@ -1,5 +1,4 @@
 import type { IBeanRecord } from '../../bean/type.ts';
-import type { VonaApplication } from '../../core/application.ts';
 import type { MetadataKey } from '../../core/metadata.ts';
 import type {
   Constructable,
@@ -9,7 +8,7 @@ import type {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.ts';
-import { isNil } from '@cabloy/utils';
+import { evaluate, isNil } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.ts';
 import { appResource } from '../../core/resource.ts';
 
@@ -109,10 +108,5 @@ function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUs
 }
 
 function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
-  if (typeof arg !== 'string') return arg;
-  if (arg.startsWith('##')) {
-    return arg.substring('##'.length);
-  }
-  const app: VonaApplication = beanInstance.app;
-  return app.meta.celjs.evaluate(arg, beanInstance);
+  return evaluate(arg, beanInstance);
 }
