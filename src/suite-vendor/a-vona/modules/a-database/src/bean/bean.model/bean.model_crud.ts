@@ -317,8 +317,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
-      // todo: deleted to true
-      await this.update(table, { deleted: 1 }, Object.assign({}, options, { where }));
+      await this.update(table, { deleted: true }, Object.assign({}, options, { where }));
       return;
     }
     // builder
