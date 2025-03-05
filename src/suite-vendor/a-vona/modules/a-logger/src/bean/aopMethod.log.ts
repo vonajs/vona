@@ -11,6 +11,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   auto?: boolean;
   args?: boolean;
   result?: boolean;
+  // context?:Record<
 }
 
 @AopMethod<IAopMethodOptionsLog>({
