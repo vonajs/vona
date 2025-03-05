@@ -11,6 +11,7 @@ import type {
   IOnionOptionsMatch,
   IOnionSlice,
 } from '../types/onion.ts';
+import { isRegExp } from 'node:util/types';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
 import {
@@ -304,8 +305,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   private _getRoutePathForMatch() {
-    const routePathRaw: string | undefined = this.ctx.route?.routePathRaw;
-    if (!routePathRaw) return;
+    const routePathRaw: string | RegExp | undefined = this.ctx.route?.routePathRaw;
+    if (!routePathRaw || isRegExp(routePathRaw)) return;
     return routePathRaw.startsWith('//')
       ? `/${this.ctx.path}`
       : this.ctx.path.substring(this.app.config.server.globalPrefix.length);

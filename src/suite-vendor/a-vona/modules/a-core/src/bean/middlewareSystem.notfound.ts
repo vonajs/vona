@@ -7,7 +7,7 @@ export interface IMiddlewareSystemOptionsNotfound extends IDecoratorMiddlewareSy
   pageUrl?: string;
 }
 
-@MiddlewareSystem<IMiddlewareSystemOptionsNotfound>({ dependencies: 'a-core:meta' })
+@MiddlewareSystem<IMiddlewareSystemOptionsNotfound>({ dependencies: 'a-logger:httpLog' })
 export class MiddlewareSystemNotfound extends BeanBase implements IMiddlewareSystemExecute {
   async execute(options: IMiddlewareSystemOptionsNotfound, next: Next) {
     const ctx = this.ctx;
