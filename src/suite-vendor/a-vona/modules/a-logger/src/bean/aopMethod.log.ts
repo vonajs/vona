@@ -24,7 +24,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#get ${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    (!options.auto) && logger.log(options.level, message, { context });
+    (!options.auto) && logger.log(options.level, message, context ? { context } : undefined);
     const profiler = logger.startTimer();
     // next
     try {
@@ -42,7 +42,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    logger.log(options.level, `${message} value: ${JSON.stringify(value)}`, { context });
+    logger.log(options.level, `${message} value: ${JSON.stringify(value)}`, context ? { context } : undefined);
     const profiler = logger.startTimer();
     // next
     try {
@@ -60,7 +60,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`, { context });
+    options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`, context ? { context } : undefined);
     const profiler = logger.startTimer();
     // next
     try {
@@ -94,11 +94,15 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
 
   _logResult(profiler: winston.Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
     const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
-    profiler.done({ level: options.level, message: `${message}${textResult}`, context });
+    const info: any = { level: options.level, message: `${message}${textResult}` };
+    if (context) info.context = context;
+    profiler.done(info);
   }
 
   _logError(profiler: winston.Profiler, context: any, err: Error, _options: IAopMethodOptionsLog, message: string) {
     const textError = ` error: ${err.message}`;
-    profiler.done({ level: 'error', message: `${message}${textError}`, context });
+    const info: any = { level: 'error', message: `${message}${textError}` };
+    if (context) info.context = context;
+    profiler.done(info);
   }
 }
