@@ -40,6 +40,10 @@ declare module 'vona' {
     onions: ConfigOnions;
   }
 
+  export interface ILoggerClientChildRecord {
+    onion: never;
+  }
+
   export interface VonaContext {
     get onionsDynamic(): PowerPartial<ConfigOnions> | undefined;
     set onionsDynamic(value: PowerPartial<ConfigOnions> | undefined);
