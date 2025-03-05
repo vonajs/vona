@@ -23,7 +23,6 @@ import {
   deepExtend,
   SymbolProxyDisable,
 } from 'vona';
-import { Log } from 'vona-module-a-logger';
 import { Service } from 'vona-module-a-web';
 import {
   SymbolUseOnionLocal,
@@ -73,7 +72,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
         return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
-      // this.loggerChild('onion').verbose(JSON.stringify(this[SymbolOnionsEnabled][selector], null, 2));
+      const message = `getOnionsEnabled:${this.sceneName}${selector ? `:${selector}` : ''}\n${JSON.stringify(this[SymbolOnionsEnabled][selector], null, 2)}`;
+      this.loggerChild('onion').verbose(message);
     }
     return this[SymbolOnionsEnabled][selector];
   }
