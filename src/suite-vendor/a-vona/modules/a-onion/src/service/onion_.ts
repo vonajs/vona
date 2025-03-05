@@ -23,6 +23,7 @@ import {
   deepExtend,
   SymbolProxyDisable,
 } from 'vona';
+import { Log } from 'vona-module-a-logger';
 import { Service } from 'vona-module-a-web';
 import {
   SymbolUseOnionLocal,
@@ -68,18 +69,13 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   getOnionsEnabled(selector?: string) {
     if (!selector) selector = '';
     if (!this[SymbolOnionsEnabled][selector]) {
-      this[SymbolOnionsEnabled][selector] = this._getOnionsEnabled(selector);
+      this[SymbolOnionsEnabled][selector] = this.onionsGlobal.filter(onionSlice => {
+        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
+        return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
+      }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
+      // this.loggerChild('onion').verbose(JSON.stringify(this[SymbolOnionsEnabled][selector], null, 2));
     }
     return this[SymbolOnionsEnabled][selector];
-  }
-
-  // this.loggerChild('onion').verbose(JSON.stringify(this[SymbolOnionsEnabled][selector], null, 2));
-
-  private _getOnionsEnabled(selector?: string) {
-    return this.onionsGlobal.filter(onionSlice => {
-      const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
-      return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
-    }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
   }
 
   getOnionsEnabledOfMeta(beanName: string, selector?: string) {
