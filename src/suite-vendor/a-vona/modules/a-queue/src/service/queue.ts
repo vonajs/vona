@@ -122,8 +122,8 @@ export class ServiceQueue extends BeanBase {
       if (err.message && err.message.includes('Missing lock for job')) {
         const workerInner = _worker.worker as any;
         if (!workerInner.running) {
-          _worker.worker.run().catch(error => {
-            console.error(error);
+          _worker.worker.run().catch(err => {
+            this.logger.error(err);
           });
         }
       }
