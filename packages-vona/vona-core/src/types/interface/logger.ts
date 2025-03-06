@@ -3,7 +3,7 @@ import type DailyRotateFile from 'winston-daily-rotate-file';
 
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
-  level: LoggerLevel | undefined;
+  level: () => (LoggerLevel | undefined);
 }
 
 export type TypeLoggerOptions = Winston.LoggerOptions | ((winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => Winston.LoggerOptions);

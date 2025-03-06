@@ -32,6 +32,14 @@ export class AppLogger extends BeanSimple {
     return logger.child({ name: childName });
   }
 
+  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+    return getLoggerClientLevel(clientName);
+  }
+
+  setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+    setLoggerClientLevel(level, clientName);
+  }
+
   private _createClient(clientName: keyof ILoggerClientRecord): Winston.Logger {
     const configClient = this.app.config.logger.clients[clientName];
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
@@ -51,7 +59,7 @@ export class AppLogger extends BeanSimple {
     if (typeof configClient !== 'function') return configClient;
     return configClient.call(this.app, Winston, {
       clientName,
-      level: getLoggerClientLevel(clientName),
+      level: () => getLoggerClientLevel(clientName),
     });
   }
 
@@ -90,7 +98,8 @@ async function _closeLogger(logger: Winston.Logger) {
   });
 }
 
-export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): LoggerLevel | undefined {
+export function getLoggerClientLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+  clientName = clientName || 'default';
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
   const level = process.env[envName];
   if (level === 'false') return;
@@ -98,8 +107,14 @@ export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): Log
   return level as LoggerLevel;
 }
 
+export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+  clientName = clientName || 'default';
+  const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
+  process.env[envName] = level.toString();
+}
+
 export const formatLoggerFilter = Winston.format((info, opts: any) => {
-  const level = opts.level;
+  const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
   if (opts.strict) {
     if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return info;
