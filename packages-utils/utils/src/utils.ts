@@ -88,19 +88,7 @@ export function createFunction(expression: string, scopeKeys?: string[]): Functi
   return fn;
 }
 
-// export function evaluate(expression: string, scope?: object) {
-//   if (!scope) return _evaluateSimple(expression);
-//   const scopeKeys = Object.keys(scope);
-//   const scopeParams: any[] = [];
-//   for (let i = 0; i < scopeKeys.length; i++) {
-//     const key = scopeKeys[i];
-//     scopeParams.push(scope[key]);
-//   }
-//   const fn = createFunction(expression, scopeKeys);
-//   return fn(...scopeParams);
-// }
-
-// function _evaluateSimple(expression: string) {
-//   const fn = createFunction(expression);
-//   return fn();
-// }
+export function evaluateSimple(expression: string) {
+  const fn = createFunction(expression);
+  return fn();
+}
