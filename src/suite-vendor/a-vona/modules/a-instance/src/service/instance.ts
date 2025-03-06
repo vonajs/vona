@@ -128,12 +128,12 @@ export class ServiceInstance extends BeanBase {
     // instance
     const instance = await this.bean.instance.get(this.ctx.instanceName!);
     if (!instance) {
-      this.logger.warn(`instance not found: ${this.ctx.instanceName}`);
+      this.$logger.warn(`instance not found: ${this.ctx.instanceName}`);
       return this.app.throw(423); // not this.app.fail(423)
     }
     // check if disabled/locked
     if (instance.disabled) {
-      this.logger.silly(`instance disabled: ${this.ctx.instanceName}`);
+      this.$logger.silly(`instance disabled: ${this.ctx.instanceName}`);
       return this.app.throw(423); // not this.app.fail(423)
     }
     // check instance startup ready

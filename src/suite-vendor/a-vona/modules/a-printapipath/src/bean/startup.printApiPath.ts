@@ -36,6 +36,6 @@ export class StartupPrintApiPath extends BeanBase implements IStartupExecute {
     }
     //
     const text = `${chalk.yellow('===== print api path =====')}\n${table.toString()}`;
-    this.logger.silly(text);
+    this.$logger.silly(text);
   }
 }

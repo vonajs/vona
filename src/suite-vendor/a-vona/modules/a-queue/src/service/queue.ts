@@ -115,7 +115,7 @@ export class ServiceQueue extends BeanBase {
     );
 
     _worker.worker.on('failed', (_job, err) => {
-      this.logger.error(err);
+      this.$logger.error(err);
     });
 
     _worker.worker.on('error', err => {
@@ -123,7 +123,7 @@ export class ServiceQueue extends BeanBase {
         const workerInner = _worker.worker as any;
         if (!workerInner.running) {
           _worker.worker.run().catch(err => {
-            this.logger.error(err);
+            this.$logger.error(err);
           });
         }
       }

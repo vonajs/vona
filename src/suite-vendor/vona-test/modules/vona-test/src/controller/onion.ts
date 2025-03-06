@@ -59,7 +59,7 @@ export class ControllerOnion extends BeanBase {
   ) {
     // this.scope.util.combineApiPath
 
-    this.logger.silly(this.ctx.path);
+    this.$logger.silly(this.ctx.path);
     // const ctx = this.app.currentContext;
     // this.logger.silly(ctx === this.ctx);
     return `${id}:${accept}`;

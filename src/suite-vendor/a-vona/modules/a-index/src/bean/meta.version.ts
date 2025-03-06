@@ -67,8 +67,8 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       }
     } catch (e: any) {
       // just log the error message
-      this.logger.error(e.message);
-      if (e.sql) this.logger.error(e.sql);
+      this.$logger.error(e.message);
+      if (e.sql) this.$logger.error(e.sql);
     }
   }
 }

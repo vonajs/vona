@@ -73,7 +73,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
       const message = `getOnionsEnabled#${this.sceneName}${selector ? `#${selector}` : ''} ${JSON.stringify(this[SymbolOnionsEnabled][selector])}`;
-      this.loggerChild('onion').verbose(message);
+      this.$loggerChild('onion').verbose(message);
     }
     return this[SymbolOnionsEnabled][selector];
   }
