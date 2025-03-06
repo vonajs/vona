@@ -984,6 +984,19 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-body:
+    dependencies:
+      co-body:
+        specifier: ^6.2.0
+        version: 6.2.0
+      copy-to:
+        specifier: ^2.0.1
+        version: 2.0.1
+      koa-bodyparser:
+        specifier: ^4.4.1
+        version: 4.4.1
+      type-is:
+        specifier: ^1.6.18
+        version: 1.6.18
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1049,9 +1062,6 @@ importers:
       fs-extra:
         specifier: ^11.2.0
         version: 11.3.0
-      koa-bodyparser:
-        specifier: ^4.4.1
-        version: 4.4.1
       koa-override:
         specifier: ^4.0.0
         version: 4.0.0

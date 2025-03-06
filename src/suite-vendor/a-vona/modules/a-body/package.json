@@ -39,7 +39,6 @@
   },
   "dependencies": {
     "co-body": "^6.2.0",
-    "copy-to": "^2.0.1",
     "type-is": "^1.6.18"
   },
   "devDependencies": {
