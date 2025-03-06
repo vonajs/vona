@@ -15,7 +15,7 @@ export type BodyParserOptions = {
    * declares the HTTP methods where bodies will be parsed.
    * @default ['POST', 'PUT', 'PATCH']
    */
-  parsedMethods?: string[];
+  parsedMethods: string[];
   /**
    * json detector function, can help to detect request json type based on custom logic
    */
@@ -24,11 +24,11 @@ export type BodyParserOptions = {
    * co-body parser will only parse when request type hits enableTypes
    * @default ['json', 'form']
    */
-  enableTypes?: BodyType[];
+  enableTypes: BodyType[];
   /**
    * extend parser types, can help to enhance the base mime types with custom types
    */
-  extendTypes?: {
+  extendTypes: {
     [K in BodyType]?: string[];
   };
   /**
@@ -37,27 +37,27 @@ export type BodyParserOptions = {
    *
    * @default true
    */
-  jsonStrict?: CoBodyOptions['strict'];
+  jsonStrict: CoBodyOptions['strict'];
   /**
    * limit of the `json` body
    * @default '1mb'
    */
-  jsonLimit?: CoBodyOptions['limit'];
+  jsonLimit: CoBodyOptions['limit'];
   /**
    * limit of the `urlencoded` body
    * @default '56kb'
    */
-  formLimit?: CoBodyOptions['limit'];
+  formLimit: CoBodyOptions['limit'];
   /**
    * limit of the `text` body
    * @default '1mb'
    */
-  textLimit?: CoBodyOptions['limit'];
+  textLimit: CoBodyOptions['limit'];
   /**
    * limit of the `xml` body
    * @default '1mb'
    */
-  xmlLimit?: CoBodyOptions['limit'];
+  xmlLimit: CoBodyOptions['limit'];
 } & Pick<
   CoBodyOptions,
   /**
