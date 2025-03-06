@@ -3,9 +3,6 @@ import type { BodyParserOptions, BodyType } from './body-parser.types.ts';
 import parser from 'co-body';
 import { getIsEnabledBodyAs, getMimeTypes, isTypes } from './body-parser.utils.ts';
 
-/**
- * Global declaration for the added properties to the 'ctx.request'
- */
 declare module 'koa' {
   export interface Request {
     body: any;
@@ -13,14 +10,11 @@ declare module 'koa' {
   }
 }
 
-/**
- * Middleware wrapper which delegate options to the core code
- */
 export async function bodyParserWrapper(ctx: VonaContext, options: BodyParserOptions) {
-  if (!options.parsedMethods.includes(ctx.method.toUpperCase())) return;
   if (ctx.request.body !== undefined) {
     return ctx.request.body;
   }
+  if (!options.parsedMethods.includes(ctx.method.toUpperCase())) return;
   // parse
   const response = await parseBody(ctx, options);
   // patch koa
@@ -56,7 +50,6 @@ async function parseBody(ctx: VonaContext, options: BodyParserOptions) {
     strict: bodyType === 'json' ? options.jsonStrict : undefined,
     [`${bodyType}Types`]: mimeTypes[bodyType],
     limit: options[`${shouldParseBodyAs('xml') ? 'xml' : bodyType}Limit`],
-
     encoding: options.encoding || 'utf-8',
   };
 
