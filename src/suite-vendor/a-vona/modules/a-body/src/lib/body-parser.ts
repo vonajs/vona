@@ -1,4 +1,5 @@
 import type * as Koa from 'koa';
+import type { VonaContext } from 'vona';
 import type { BodyParserOptions, BodyType } from './body-parser.types.ts';
 import parser from 'co-body';
 import { getIsEnabledBodyAs, getMimeTypes, isTypes } from './body-parser.utils.ts';
@@ -7,7 +8,8 @@ import { getIsEnabledBodyAs, getMimeTypes, isTypes } from './body-parser.utils.t
  * Global declaration for the added properties to the 'ctx.request'
  */
 declare module 'koa' {
-  interface Request {
+  export interface Request {
+    body: any;
     rawBody: string;
   }
 }
@@ -15,7 +17,7 @@ declare module 'koa' {
 /**
  * Middleware wrapper which delegate options to the core code
  */
-export function bodyParserWrapper(opts: BodyParserOptions = {}) {
+export async function bodyParserWrapper(ctx: VonaContext, opts: BodyParserOptions) {
   const {
     parsedMethods = ['POST', 'PUT', 'PATCH'],
     detectJSON,
@@ -26,9 +28,21 @@ export function bodyParserWrapper(opts: BodyParserOptions = {}) {
   const isEnabledBodyAs = getIsEnabledBodyAs(enableTypes);
   const mimeTypes = getMimeTypes(extendTypes);
 
-  /**
-   * Handler to parse the request coming data
-   */
+  if (
+    // method souldn't be parsed
+    !parsedMethods.includes(ctx.method.toUpperCase()) ||
+    // koa request body already parsed
+    ctx.request.body !== undefined
+  ) {
+    return ctx.request.body;
+  }
+
+  // parse
+  const response = await parseBody(ctx);
+  // patch koa
+  ctx.request.body = 'parsed' in response ? response.parsed : {};
+  if (ctx.request.rawBody === undefined) ctx.request.rawBody = response.raw;
+
   async function parseBody(ctx: Koa.Context) {
     const shouldParseBodyAs = (type: BodyType) => {
       return Boolean(
@@ -64,42 +78,8 @@ export function bodyParserWrapper(opts: BodyParserOptions = {}) {
   }
 
   return async function bodyParser(ctx: Koa.Context, next: Koa.Next) {
-    if (
-      // method souldn't be parsed
-      !parsedMethods.includes(ctx.method.toUpperCase()) ||
-      // patchNode enabled and raw request already parsed
-      (patchNode && ctx.req.body !== undefined) ||
-      // koa request body already parsed
-      ctx.request.body !== undefined ||
-      // bodyparser disabled
-      ctx.disableBodyParser
-    ) {
-      return next();
-    }
-    // raw request parsed and contain 'body' values and it's enabled to override the koa request
-    if (enableRawChecking && ctx.req.body !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      ctx.request.body = ctx.req.body;
-      return next();
-    }
-
-    if (ctx.req.closed) {
-      ctx.status = 499;
-      ctx.body = 'Request already closed';
-      return;
-    }
-
     try {
-      const response = await parseBody(ctx);
-      // patch node
-      if (patchNode) {
-        ctx.req.body = 'parsed' in response ? response.parsed : {};
-        if (ctx.req.rawBody === undefined) ctx.req.rawBody = response.raw;
-      }
 
-      // patch koa
-      ctx.request.body = 'parsed' in response ? response.parsed : {};
-      if (ctx.request.rawBody === undefined) ctx.request.rawBody = response.raw;
     } catch (err: unknown) {
       if (!onError) throw err;
       onError(err as Error, ctx);
