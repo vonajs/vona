@@ -37,7 +37,11 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "co-body": "^6.2.0",
+    "copy-to": "^2.0.1",
+    "type-is": "^1.6.18"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
