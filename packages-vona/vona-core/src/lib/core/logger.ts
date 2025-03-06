@@ -128,7 +128,7 @@ export const formatLoggerConsole = () => {
   return Winston.format.printf(({ timestamp, level, stack, message, name, durationMs, ...meta }) => {
     const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
     const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
-    const textMessage = message ? ` ${message}` : '';
+    const textMessage = ` ${message}`;
     const textDurationMs = durationMs !== undefined ? ` ${chalk.cyan(`+${durationMs}ms`)}` : '';
     const textStack = stack ? `\n${stack}` : '';
     return `${timestamp} ${level}${textName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
