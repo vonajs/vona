@@ -46,7 +46,7 @@ export class ControllerOnion extends BeanBase {
     user: DtoUser,
   ): DtoUser {
     // const ctx = this.app.currentContext;
-    // this.logger.silly(ctx === this.ctx);
+    // this.$logger.silly(ctx === this.ctx);
     return user;
   }
 
@@ -61,7 +61,7 @@ export class ControllerOnion extends BeanBase {
 
     this.$logger.silly(this.ctx.path);
     // const ctx = this.app.currentContext;
-    // this.logger.silly(ctx === this.ctx);
+    // this.$logger.silly(ctx === this.ctx);
     return `${id}:${accept}`;
   }
 
@@ -77,7 +77,7 @@ export class ControllerOnion extends BeanBase {
   @Public()
   echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     // const ctx = this.app.currentContext;
-    // this.logger.silly(ctx === this.ctx);
+    // this.$logger.silly(ctx === this.ctx);
     return ids;
   }
 }

@@ -116,7 +116,7 @@ export class ServiceStartup extends BeanBase {
     instanceName?: string,
     options?: IInstanceStartupOptions,
   ) {
-    this.logger.silly(
+    this.$logger.silly(
       `startup${startup.beanOptions?.options?.instance ? ' instance' : ''}: ${startup.name}, pid: ${process.pid}`,
     );
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;

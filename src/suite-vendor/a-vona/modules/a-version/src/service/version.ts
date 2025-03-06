@@ -29,10 +29,10 @@ export class ServiceVersion extends BeanBase {
       // broadcast
       this.scope.broadcast.columnsClear.emit({ mode: 'all' });
       // log
-      if (Object.keys(result).length > 0) this.logger.silly(result);
-      this.logger.silly(chalk.cyan('All modules are checked successfully!'));
+      if (Object.keys(result).length > 0) this.$logger.silly(result);
+      this.$logger.silly(chalk.cyan('All modules are checked successfully!'));
     } catch (err) {
-      this.logger.silly(chalk.cyan('Modules are checked failed!'));
+      this.$logger.silly(chalk.cyan('Modules are checked failed!'));
       throw err;
     }
   }
@@ -44,9 +44,9 @@ export class ServiceVersion extends BeanBase {
     try {
       const optionsInit = Object.assign({}, instanceBase, { scene: 'init' as const, instanceName });
       await this.__check(optionsInit);
-      this.logger.silly(chalk.cyan(`The instance is initialized successfully: ${instanceName || 'default'}`));
+      this.$logger.silly(chalk.cyan(`The instance is initialized successfully: ${instanceName || 'default'}`));
     } catch (err) {
-      this.logger.silly(chalk.cyan(`The instance is initialized failed: ${instanceName || 'default'}`));
+      this.$logger.silly(chalk.cyan(`The instance is initialized failed: ${instanceName || 'default'}`));
       throw err;
     }
   }
@@ -73,7 +73,7 @@ export class ServiceVersion extends BeanBase {
 
     // check all modules
     for (const module of this.app.meta.modulesArray) {
-      this.loggerChild('version').debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
+      this.$loggerChild('version').debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
       await this.__checkModule(module.info.relativeName, options);
     }
 
@@ -171,7 +171,7 @@ export class ServiceVersion extends BeanBase {
       }
       // loop
       for (const version of versions) {
-        this.loggerChild('version').debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
+        this.$loggerChild('version').debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
         await this.__updateModule2(options, module, version);
       }
     }

@@ -33,7 +33,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (keysMissing.length > 0) {
       const layered = this.__getLayered(options);
       const valuesMissing = await layered.mget(keysMissing, options);
-      // this.logger.silly('-------redis:', valuesMissing);
+      // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
       await this.cacheRedis.mset(valuesMissing as any, keysMissing);
       for (let i = 0; i < keysMissing.length; i++) {
