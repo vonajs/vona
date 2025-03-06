@@ -1,4 +1,5 @@
-import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
+import type { IBroadcastExecute } from 'vona-module-a-broadcast';
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
 export type TypeBroadcast<%=argv.beanNameCapitalize%>JobData = unknown;
 
