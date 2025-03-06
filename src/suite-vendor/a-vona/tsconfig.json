@@ -103,6 +103,9 @@
     },
     {
       "path": "modules/a-logger/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-body/tsconfig.build.json"
     }
   ],
   "exclude": [

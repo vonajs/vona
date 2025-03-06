@@ -77,6 +77,9 @@ importers:
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
+      vona-module-a-body:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-body
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-broadcast
@@ -862,6 +865,9 @@ importers:
       vona-module-a-bean:
         specifier: workspace:^
         version: link:modules/a-bean
+      vona-module-a-body:
+        specifier: workspace:^
+        version: link:modules/a-body
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:modules/a-broadcast
@@ -969,6 +975,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-bean:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-body:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
