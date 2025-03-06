@@ -7,6 +7,7 @@ export function config(_app: VonaApplication) {
       enableTypes: ['json', 'form'],
       encoding: 'utf8',
       formLimit: '20mb',
+      jsonStrict: true,
       jsonLimit: '20mb',
       textLimit: '20mb',
       xmlLimit: '20mb',
