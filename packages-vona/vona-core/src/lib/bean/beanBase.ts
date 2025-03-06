@@ -14,20 +14,20 @@ export class BeanBase extends BeanBaseSimple {
     return this[SymbolText];
   }
 
-  protected get logger() {
+  protected get $logger() {
     return this.app.meta.logger.get();
   }
 
-  protected loggerChild(childName: keyof ILoggerClientChildRecord) {
+  protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
     return this.app.meta.logger.child(childName);
-  }
-
-  public get scope(): unknown {
-    return this.getScope();
   }
 
   protected get $scope(): IBeanScopeContainer {
     return this.app.meta.scopeContainer as unknown as IBeanScopeContainer;
+  }
+
+  public get scope(): unknown {
+    return this.getScope();
   }
 
   protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
