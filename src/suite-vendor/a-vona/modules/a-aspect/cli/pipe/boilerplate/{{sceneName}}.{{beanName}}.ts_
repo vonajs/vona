@@ -1,5 +1,7 @@
+import type { IDecoratorPipeOptions, IPipeTransform } from 'vona-module-a-aspect';
+import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import { BeanBase } from 'vona';
-import { IDecoratorPipeOptions, IPipeTransform, Pipe, RouteHandlerArgumentMeta } from 'vona-module-a-aspect';
+import { Pipe } from 'vona-module-a-aspect';
 
 export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
 
