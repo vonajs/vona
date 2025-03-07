@@ -54,6 +54,6 @@ export class ServiceBody extends BeanBase {
       encoding: options.encoding || 'utf-8',
     };
 
-    return await parser[bodyType](ctx, parserOptions);
+    return await parser[bodyType](ctx.req, parserOptions);
   }
 }

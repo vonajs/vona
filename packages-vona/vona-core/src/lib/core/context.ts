@@ -2,8 +2,6 @@ import type { ContextBase } from '../../types/context/contextBase.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { MetadataKey } from './metadata.ts';
 import { AsyncResource } from 'node:async_hooks';
-import inflate from 'inflation';
-import raw from 'raw-body';
 import { cast } from '../../types/utils/cast.ts';
 import { BeanContainer } from '../bean/beanContainer.ts';
 import { appResource } from './resource.ts';
@@ -88,11 +86,6 @@ export const contextBase: ContextBase = {
       this[TAILCALLBACKS] = [];
     }
     return this[TAILCALLBACKS];
-  },
-
-  async getPayload(options) {
-    const self = cast<VonaContext>(this);
-    return await raw(inflate(self.req), options);
   },
 
   getController() {

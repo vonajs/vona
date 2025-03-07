@@ -18,7 +18,6 @@ export interface ContextBase {
   tail: (cb) => any;
   tailDone: () => Promise<any>;
   get tailCallbacks();
-  getPayload: (options?) => Promise<any>;
   getController: () => Constructable | undefined;
   getControllerPrototype: () => object | undefined;
   getControllerBeanFullName: () => string | undefined;
