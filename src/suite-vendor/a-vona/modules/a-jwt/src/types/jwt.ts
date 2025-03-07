@@ -15,3 +15,7 @@ export interface ConfigJwt {
   default: IJwtClientOptions;
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;
 }
+
+export interface IJwtPayload {
+  client: keyof IJwtClientRecord;
+}

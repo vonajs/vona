@@ -1,4 +1,4 @@
-import type { IJwtClientOptions, IJwtClientRecord } from '../types/jwt.ts';
+import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload } from '../types/jwt.ts';
 import * as jwt from 'jsonwebtoken';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -22,7 +22,9 @@ export class ServiceJwtClient extends BeanBase {
     const configJwt = this.scope.config;
     const configClient = configJwt.clients[clientName];
     if (!configClient) throw new Error(`jwt client not found: ${clientName}`);
-    this._clientOptions = deepExtend({}, configJwt.default, configClient);
+    this._clientOptions = deepExtend({
+      secret: this.app.config.server.keys[0],
+    }, configJwt.default, configClient);
     this._clientName = clientName;
     this._jwtInstance = jwt;
   }
