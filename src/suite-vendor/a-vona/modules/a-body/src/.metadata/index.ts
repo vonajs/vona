@@ -2,11 +2,15 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** bean: end */
 /** bean: begin */
 import type { BeanBody } from '../bean/bean.body.ts';
-import type { config } from '../config/config.ts';
 
+/** interceptor: end */
+/** bean: begin */
+import type { IInterceptorOptionsBody } from '../bean/interceptor.body.ts';
+import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceBody } from '../service/body.ts';
+
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -14,7 +18,7 @@ import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
-/** bean: begin */
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -23,6 +27,22 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/bean.body.ts';
+declare module 'vona-module-a-aspect' {
+
+  export interface IInterceptorRecordGlobal {
+    'a-body:body': IInterceptorOptionsBody;
+  }
+
+}
+declare module 'vona-module-a-body' {
+
+  export interface InterceptorBody {
+    /** @internal */
+    get scope(): ScopeModuleABody;
+  }
+}
+/** interceptor: begin */
+export * from '../bean/interceptor.body.ts';
 declare module 'vona' {
 
 }
@@ -75,6 +95,7 @@ export interface ScopeModuleABody {
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
 }
+
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-body': ScopeModuleABody;
