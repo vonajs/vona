@@ -1,11 +1,8 @@
-import type { BodyParserOptions, BodyType } from './body-parser.types.ts';
+import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
 import typeis from 'type-is';
 import { deepExtend } from 'vona';
-import { supportedBodyTypes } from './body-parser.types.ts';
+import { supportedBodyTypes } from '../types/bodyParser.ts';
 
-/**
- * UnsupportedBodyTypeError
- */
 export class UnsupportedBodyTypeError extends Error {
   constructor(wrongType: string) {
     super();
@@ -17,9 +14,6 @@ export class UnsupportedBodyTypeError extends Error {
   }
 }
 
-/**
- * Utility which help us to check if the body type enabled
- */
 export function getIsEnabledBodyAs(enableTypes: BodyType[]) {
   for (const enabledType of enableTypes) {
     if (!supportedBodyTypes.includes(enabledType)) {
@@ -38,9 +32,6 @@ export function getIsEnabledBodyAs(enableTypes: BodyType[]) {
   return isEnabledBodyAs;
 }
 
-/**
- * Utility which help us to merge the extended mime types with our base
- */
 export function getMimeTypes(
   extendTypes: NonNullable<BodyParserOptions['extendTypes']>,
 ) {
@@ -56,7 +47,6 @@ export function getMimeTypes(
   }
 
   const defaultMimeTypes = {
-    // default json mime types
     json: [
       'application/json',
       'application/json-patch+json',
@@ -65,11 +55,8 @@ export function getMimeTypes(
       'application/reports+json',
       'application/scim+json',
     ],
-    // default form mime types
     form: ['application/x-www-form-urlencoded'],
-    // default text mime types
     text: ['text/plain'],
-    // default xml mime types
     xml: ['text/xml', 'application/xml'],
   };
   const mimeTypes = deepExtend(defaultMimeTypes, extendTypes);

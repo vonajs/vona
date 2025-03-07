@@ -1,9 +1,15 @@
 import type { Options as CoBodyOptions } from 'co-body';
-import type * as Koa from 'koa';
+import type { VonaContext } from 'vona';
 
-/**
- * List of supported body types
- */
+declare module 'koa' {
+  export interface Request {
+    body: any;
+    rawBody: string;
+  }
+}
+
+export const SymbolDisableBodyParser = Symbol('SymbolDisableBodyParser');
+
 export const supportedBodyTypes = ['json', 'form', 'text', 'xml'] as const;
 export type BodyType = (typeof supportedBodyTypes)[number];
 
@@ -19,7 +25,7 @@ export type BodyParserOptions = {
   /**
    * json detector function, can help to detect request json type based on custom logic
    */
-  detectJSON?: (ctx: Koa.Context) => boolean;
+  detectJSON?: (ctx: VonaContext) => boolean;
   /**
    * co-body parser will only parse when request type hits enableTypes
    * @default ['json', 'form']

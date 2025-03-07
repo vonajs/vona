@@ -3,11 +3,20 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** bean: begin */
 import type { BeanBody } from '../bean/bean.body.ts';
 import type { config } from '../config/config.ts';
+
+/** service: end */
+/** service: begin */
+import type { ServiceBody } from '../service/body.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
+/** service: end */
+/** service: begin */
+
 /** bean: begin */
+import 'vona';
+import 'vona';
 import 'vona';
 import 'vona';
 
@@ -29,9 +38,34 @@ declare module 'vona' {
     body: BeanBody;
   }
 }
-/** bean: end */
+/** service: end */
 /** config: begin */
 export * from '../config/config.ts';
+declare module 'vona-module-a-web' {
+
+  export interface IServiceRecord {
+    'a-body:body': never;
+  }
+
+}
+declare module 'vona-module-a-body' {
+
+  export interface ServiceBody {
+    /** @internal */
+    get scope(): ScopeModuleABody;
+  }
+}
+export interface IModuleService {
+  body: ServiceBody;
+}
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-body.service.body': ServiceBody;
+  }
+}
+/** bean: end */
+/** service: begin */
+export * from '../service/body.ts';
 
 @Scope()
 export class ScopeModuleABody extends BeanScopeBase {}
@@ -39,6 +73,7 @@ export class ScopeModuleABody extends BeanScopeBase {}
 export interface ScopeModuleABody {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  service: IModuleService;
 }
 declare module 'vona' {
   export interface IBeanScopeRecord {

@@ -16,6 +16,8 @@ export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // check handler
   const handler = ctx.getHandler();
   if (!handler) return next();
+  // body parser
+  
   // arguments
   ctx[SymbolRouteHandlersArgumentsValue] = await _transformArguments(ctx, ctx.getController()!, handler);
   // next
