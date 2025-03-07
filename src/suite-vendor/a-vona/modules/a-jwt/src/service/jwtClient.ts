@@ -36,7 +36,7 @@ export class ServiceJwtClient extends BeanBase {
   async sign(payload: IJwtPayload) {
     return new Promise((resolve, reject) => {
       payload = Object.assign({}, payload, { [this.fieldClient]: this._clientName });
-      this._jwtInstance.sign(payload, this._clientOptions.secret, this._clientOptions.signOptions, (err, encoded) => {
+      this._jwtInstance.sign(payload, this._clientOptions.secret!, this._clientOptions.signOptions, (err, encoded) => {
         if (err) return reject(err);
         resolve(encoded);
       });

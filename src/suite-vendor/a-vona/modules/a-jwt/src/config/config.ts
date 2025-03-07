@@ -2,7 +2,10 @@ import type { VonaApplication } from 'vona';
 import type { ConfigJwt } from '../types/jwt.ts';
 
 export function config(app: VonaApplication) {
-  const config: ConfigJwt = {
+  return {
+    field: {
+      client: 'client',
+    },
     default: {
       secret: undefined,
       signOptions: {
@@ -20,6 +23,5 @@ export function config(app: VonaApplication) {
         signOptions: { expiresIn: 30 * 24 * 60 * 60 },
       },
     },
-  };
-  return config;
+  } as ConfigJwt;
 }

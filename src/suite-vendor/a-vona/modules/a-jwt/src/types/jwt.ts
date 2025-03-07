@@ -7,13 +7,13 @@ export interface IJwtClientRecord {
 }
 
 export interface IJwtClientOptions {
-  secret: string;
+  secret?: string;
   signOptions: SignOptions;
 }
 
 export interface ConfigJwt {
   field: {
-    client: 'client';
+    client: string;
   };
   default: IJwtClientOptions;
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;
