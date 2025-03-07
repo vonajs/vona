@@ -109,6 +109,9 @@
     },
     {
       "path": "modules/a-auth/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-jwt/tsconfig.build.json"
     }
   ],
   "exclude": [

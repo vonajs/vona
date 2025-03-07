@@ -23,6 +23,7 @@
     "vona-module-a-i18n": "workspace:^",
     "vona-module-a-index": "workspace:^",
     "vona-module-a-instance": "workspace:^",
+    "vona-module-a-jwt": "workspace:^",
     "vona-module-a-logger": "workspace:^",
     "vona-module-a-meta": "workspace:^",
     "vona-module-a-onion": "workspace:^",
