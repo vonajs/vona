@@ -7,21 +7,21 @@ import { SymbolDisableBodyParser } from '../types/bodyParser.ts';
 
 @Service()
 export class ServiceBody extends BeanBase {
-  async parserWrapper() {
+  async parse() {
     const options = this.scope.config.parser;
     const ctx = this.ctx;
     if (ctx.request.body !== undefined) return ctx.request.body;
     if (!options.parsedMethods.includes(ctx.method.toUpperCase())) return;
     if (ctx[SymbolDisableBodyParser]) return;
     // parse
-    const response = await this.parse(options);
+    const response = await this.parseRaw(options);
     // patch koa
     ctx.request.body = 'parsed' in response ? response.parsed : {};
     if (ctx.request.rawBody === undefined) ctx.request.rawBody = response.raw;
     return ctx.request.body;
   }
 
-  async parse(options: BodyParserOptions) {
+  async parseRaw(options: BodyParserOptions) {
     const ctx = this.ctx;
     const isEnabledBodyAs = getIsEnabledBodyAs(options.enableTypes);
     const mimeTypes = getMimeTypes(options.extendTypes);
