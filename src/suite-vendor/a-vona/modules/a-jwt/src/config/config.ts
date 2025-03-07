@@ -14,7 +14,7 @@ export function config(app: VonaApplication) {
     },
     clients: {
       query: {
-        signOptions: { expiresIn: 2 * 60 },
+        signOptions: { expiresIn: 10 * 60 },
       },
       access: {
         signOptions: { expiresIn: 2 * 60 * 60 },
