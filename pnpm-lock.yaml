@@ -71,6 +71,9 @@ importers:
       vona-module-a-aspect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-aspect
+      vona-module-a-auth:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-auth
       vona-module-a-b:
         specifier: workspace:^
         version: link:src/module/a-b
@@ -734,15 +737,9 @@ importers:
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
-      inflation:
-        specifier: ^2.0.0
-        version: 2.1.0
       koa:
         specifier: ^2.15.4
         version: 2.16.0
-      raw-body:
-        specifier: 2.5.1
-        version: 2.5.1
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -862,6 +859,9 @@ importers:
       vona-module-a-aspect:
         specifier: workspace:^
         version: link:modules/a-aspect
+      vona-module-a-auth:
+        specifier: workspace:^
+        version: link:modules/a-auth
       vona-module-a-bean:
         specifier: workspace:^
         version: link:modules/a-bean
@@ -974,6 +974,15 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
+  src/suite-vendor/a-vona/modules/a-auth:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
   src/suite-vendor/a-vona/modules/a-bean:
     devDependencies:
       clean-package:
@@ -988,12 +997,6 @@ importers:
       co-body:
         specifier: ^6.2.0
         version: 6.2.0
-      copy-to:
-        specifier: ^2.0.1
-        version: 2.0.1
-      koa-bodyparser:
-        specifier: ^4.4.1
-        version: 4.4.1
       type-is:
         specifier: ^1.6.18
         version: 1.6.18
@@ -2866,9 +2869,6 @@ packages:
     resolution: {integrity: sha512-TG2hpqe4ELx54QER/S3HQ9SRVnQnGBtKUz5bLQWtYAQ+o6GpgMs6sYUvaiJjVxb+UXwhRhAEP3m7LbsIZ77Hmw==}
     engines: {node: '>= 0.8'}
 
-  copy-to@2.0.1:
-    resolution: {integrity: sha512-3DdaFaU/Zf1AnpLiFDeNCD4TOWe3Zl2RZaTzUvWiIk5ERzcCodOE20Vqq4fzCbNoHURFHT4/us/Lfq+S2zyY4w==}
-
   core-js-compat@3.40.0:
     resolution: {integrity: sha512-0XEDpr5y5mijvw8Lbc6E5AkjrHfp7eEoPlu36SWeAbcL8fn1G1ANe8DBlo2XoNN89oVpxWwOjYIPVzR4ZvsKCQ==}
 
@@ -3826,10 +3826,6 @@ packages:
         optional: true
       tedious:
         optional: true
-
-  koa-bodyparser@4.4.1:
-    resolution: {integrity: sha512-kBH3IYPMb+iAXnrxIhXnW+gXV8OTzCu8VPDqvcDHW9SQrbkHmqPQtiZwrltNmSq6/lpipHnT7k7PsjlVD7kK0w==}
-    engines: {node: '>=8.0.0'}
 
   koa-compose@4.1.0:
     resolution: {integrity: sha512-8ODW8TrDuMYvXRwra/Kh7/rJo9BtOfPc6qO8eAfC80CnCvSjSl0bkRM24X6/XBBEyj0v1nRUQ1LyOy3dbqOWXw==}
@@ -6752,8 +6748,6 @@ snapshots:
       depd: 2.0.0
       keygrip: 1.1.0
 
-  copy-to@2.0.1: {}
-
   core-js-compat@3.40.0:
     dependencies:
       browserslist: 4.24.4
@@ -7725,12 +7719,6 @@ snapshots:
       tildify: 2.0.0
     transitivePeerDependencies:
       - supports-color
-
-  koa-bodyparser@4.4.1:
-    dependencies:
-      co-body: 6.2.0
-      copy-to: 2.0.1
-      type-is: 1.6.18
 
   koa-compose@4.1.0: {}
 

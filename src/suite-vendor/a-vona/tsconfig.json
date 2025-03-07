@@ -106,6 +106,9 @@
     },
     {
       "path": "modules/a-body/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-auth/tsconfig.build.json"
     }
   ],
   "exclude": [
