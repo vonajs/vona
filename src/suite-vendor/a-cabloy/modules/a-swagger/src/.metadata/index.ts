@@ -1,11 +1,11 @@
-import type { TypeModuleConfig } from 'vona';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { config } from '../config/config.ts';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-import { config } from '../config/config.ts';
 /** meta: begin */
 import 'vona';
 
