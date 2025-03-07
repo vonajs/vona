@@ -6,24 +6,25 @@ import { Service } from 'vona-module-a-web';
 @Service()
 export class ServiceJwtClient extends BeanBase {
   private _jwtInstance: typeof jwt;
-  private _jwtClientOptions: IJwtClientOptions;
+  private _clientName: keyof IJwtClientRecord;
+  private _clientOptions: IJwtClientOptions;
 
   get instance(): typeof jwt {
     return this._jwtInstance;
   }
 
   protected __init__(clientName?: keyof IJwtClientRecord) {
-    // instance
-    this._jwtInstance = this._createClient(clientName);
+    this._createClient(clientName);
   }
 
-  private _createClient(clientName?: keyof IJwtClientRecord): typeof jwt {
+  private _createClient(clientName?: keyof IJwtClientRecord) {
     clientName = clientName || 'query';
     const configJwt = this.scope.config;
     const configClient = configJwt.clients[clientName];
     if (!configClient) throw new Error(`jwt client not found: ${clientName}`);
-    this._jwtClientOptions = deepExtend({}, configJwt.default, configClient);
-    return jwt;
+    this._clientOptions = deepExtend({}, configJwt.default, configClient);
+    this._clientName = clientName;
+    this._jwtInstance = jwt;
   }
 
   async sign(payload: IJwtPayload) {
