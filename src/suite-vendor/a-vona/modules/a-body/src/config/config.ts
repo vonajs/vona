@@ -1,5 +1,5 @@
 import type { VonaApplication } from 'vona';
-import type { BodyParserOptions } from '../lib/body-parser.types.ts';
+import type { BodyParserOptions } from '../types/bodyParser.ts';
 
 export function config(_app: VonaApplication) {
   return {
