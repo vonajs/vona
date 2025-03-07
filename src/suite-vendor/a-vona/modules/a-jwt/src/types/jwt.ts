@@ -1,17 +1,17 @@
 import type { SignOptions } from 'jsonwebtoken';
 
-export interface IJwtSceneRecord {
+export interface IJwtClientRecord {
   access: never;
   refresh: never;
   query: never;
 }
 
-export interface IJwtSceneOptions {
+export interface IJwtClientOptions {
   secret?: string;
   signOptions: SignOptions;
 }
 
 export interface ConfigJwt {
-  default: IJwtSceneOptions;
-  scenes: Record<keyof IJwtSceneRecord, IJwtSceneOptions>;
+  default: IJwtClientOptions;
+  clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;
 }

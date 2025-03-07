@@ -9,7 +9,7 @@ export function config(app: VonaApplication) {
         issuer: app.config.env.appName,
       },
     },
-    scenes: {
+    clients: {
       query: {
         signOptions: { expiresIn: 2 * 60 },
       },
