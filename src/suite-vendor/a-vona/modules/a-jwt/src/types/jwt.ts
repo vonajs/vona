@@ -1,28 +1,17 @@
-import type { ClusterOptions, RedisOptions } from 'ioredis';
+import type { SignOptions } from 'jsonwebtoken';
 
-export interface IRedisClientRecord {
-  default: never;
-  redlock: never;
-  queue: never;
-  broadcast: never;
-  cache: never;
-  io: never;
-  auth: never;
-  summer: never;
-  model: never;
+export interface IJwtSceneRecord {
+  access: never;
+  refresh: never;
+  query: never;
 }
 
-export interface ConfigRedisCluster extends ClusterOptions {
-  nodes: RedisOptions[];
+export interface IJwtSceneOptions {
+  secret?: string;
+  signOptions: SignOptions;
 }
 
-export interface ConfigRedis {
-  default: RedisOptions;
-  clients: Record<keyof IRedisClientRecord, RedisOptions | ConfigRedisCluster>;
-}
-
-declare module 'vona' {
-  export interface VonaConfig {
-    redis: ConfigRedis;
-  }
+export interface ConfigJwt {
+  default: IJwtSceneOptions;
+  scenes: Record<keyof IJwtSceneRecord, IJwtSceneOptions>;
 }
