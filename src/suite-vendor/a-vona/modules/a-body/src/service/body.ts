@@ -1,6 +1,8 @@
+import type { IOpenApiOptions, TypeResponseContentType } from 'vona-module-a-openapi';
 import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
 import parser from 'co-body';
-import { BeanBase } from 'vona';
+import { appMetadata, BeanBase } from 'vona';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 import { Service } from 'vona-module-a-web';
 import { getIsEnabledBodyAs, getMimeTypes, isTypes } from '../lib/utils.ts';
 import { SymbolDisableBodyParser } from '../types/bodyParser.ts';
@@ -55,5 +57,29 @@ export class ServiceBody extends BeanBase {
     };
 
     return await parser[bodyType](ctx.req, parserOptions);
+  }
+
+  async respond(body: any, contentType?: TypeResponseContentType) {
+    if (!contentType) contentType = this.getResponseContentType();
+    if (contentType === 'application/json') {
+      this.app.success(body);
+    } else {
+      this.ctx.response.status = 200;
+      this.ctx.response.type = contentType;
+      this.ctx.response.body = body;
+    }
+  }
+
+  getResponseContentType(): TypeResponseContentType {
+    const controller = this.ctx.getController();
+    if (controller) {
+      const handlerName = this.ctx.getHandlerName();
+      const options = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      const contentType = options?.contentType;
+      if (contentType) return contentType;
+    }
+    if (this.ctx.accepts('json') === 'json') return 'application/json';
+    if (this.ctx.accepts('html') === 'html') return 'text/html';
+    return 'application/octet-stream';
   }
 }
