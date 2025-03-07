@@ -11,7 +11,7 @@ export interface IMiddlewareSystemOptionsOverrideMethod extends IDecoratorMiddle
 }
 
 @MiddlewareSystem<IMiddlewareSystemOptionsOverrideMethod>({
-  dependencies: 'a-core:bodyparser',
+  dependencies: 'a-static:static',
   allowedMethods: ['POST'],
 })
 export class MiddlewareSystemOverrideMethod extends BeanBase implements IMiddlewareSystemExecute {

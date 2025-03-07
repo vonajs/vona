@@ -6,7 +6,6 @@ import type { IInterceptorOptionsBody } from '../bean/interceptor.body.ts';
 import type { MetaStatic } from '../bean/meta.static.ts';
 import type { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.ts';
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
-import type { IMiddlewareSystemOptionsBodyparser } from '../bean/middlewareSystem.bodyparser.ts';
 import type { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.ts';
 import type { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.ts';
 /** meta static: end */
@@ -68,23 +67,16 @@ declare module 'vona-module-a-core' {
 export * from '../bean/middleware.gate.ts';
 /** middleware: end */
 /** middlewareSystem: begin */
-export * from '../bean/middlewareSystem.bodyparser.ts';
 export * from '../bean/middlewareSystem.notfound.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IMiddlewareSystemRecord {
-    'a-core:bodyparser': IMiddlewareSystemOptionsBodyparser;
     'a-core:notfound': IMiddlewareSystemOptionsNotfound;
     'a-core:overrideMethod': IMiddlewareSystemOptionsOverrideMethod;
   }
 
 }
 declare module 'vona-module-a-core' {
-
-  export interface MiddlewareSystemBodyparser {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
 
   export interface MiddlewareSystemNotfound {
     /** @internal */
