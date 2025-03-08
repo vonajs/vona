@@ -12,7 +12,7 @@ export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
 export class GuardPassport extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsPassport, next: Next): Promise<boolean> {
     // jwt
-    if (options.jwt) {
+    if (!options.public && options.jwt) {
 
     }
     // check current

@@ -4,13 +4,18 @@ import type { ConfigJwt } from '../types/jwt.ts';
 export function config(app: VonaApplication) {
   return {
     field: {
-      client: 'client',
+      payload: {
+        client: 'client',
+      },
+      extract: {
+        header: 'authorization',
+        headerScheme: 'bearer',
+        query: 'auth_token',
+      },
     },
     default: {
       secret: undefined,
-      signOptions: {
-        issuer: app.config.env.appName,
-      },
+      signOptions: { issuer: app.config.env.appName },
     },
     clients: {
       query: {

@@ -13,7 +13,14 @@ export interface IJwtClientOptions {
 
 export interface ConfigJwt {
   field: {
-    client: string;
+    payload: {
+      client: string;
+    };
+    extract: {
+      header: string;
+      headerScheme: string;
+      query: string;
+    };
   };
   default: IJwtClientOptions;
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;

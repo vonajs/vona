@@ -30,7 +30,7 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   private get fieldClient() {
-    return this.scope.config.field.client;
+    return this.scope.config.field.payload.client;
   }
 
   async sign(payload: IJwtPayload) {
@@ -41,5 +41,11 @@ export class ServiceJwtClient extends BeanBase {
         resolve(encoded);
       });
     });
+  }
+
+  async verify(payload?: IJwtPayload) {
+    if (!payload) {
+
+    }
   }
 }
