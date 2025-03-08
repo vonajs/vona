@@ -20,6 +20,7 @@ export interface ConfigJwt {
     payload: {
       client: string;
       path: string;
+      data: string;
     };
     extract: {
       header: string;

@@ -1,4 +1,4 @@
-import type { IPassportAdapter, IUserBase } from '../types/user.ts';
+import type { IPassportAdapter, IPassportBase, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { isAnonymous } from '../lib/user.ts';
@@ -20,17 +20,21 @@ export class BeanPassport extends BeanBase {
     return !!user && !isAnonymous(user);
   }
 
-  public getCurrent<T extends IUserBase = IUserBase>(): T | undefined {
-    return this.ctx.state.user as T | undefined;
-  }
-
-  public setCurrent<T extends IUserBase>(user: T | undefined) {
-    this.ctx.state.user = user;
+  public setCurrent<T extends IPassportBase>(passport: T | undefined) {
+    this.ctx.state.passport = passport;
     let ctxCaller = this.ctx.ctxCaller;
     while (ctxCaller) {
-      ctxCaller.state.user = user;
+      ctxCaller.state.passport = passport;
       ctxCaller = ctxCaller.ctxCaller;
     }
+  }
+
+  public getCurrent<T extends IPassportBase = IPassportBase>(): T | undefined {
+    return this.ctx.state.passport as T | undefined;
+  }
+
+  public getCurrentUser<T extends IUserBase = IUserBase>(): T | undefined {
+    return this.ctx.state.passport?.user as T | undefined;
   }
 
   public async signin<T extends IUserBase>(user: T): Promise<void> {
@@ -72,9 +76,8 @@ export class BeanPassport extends BeanBase {
   /** default is jwt */
   public async checkAuthToken() {
     const payload = await this.bean.jwt.get('access').verify();
-  }
-
-  public async signinWithAuthToken(token: string) {
-
+    const data = payload[this.$scope.jwt.config.field.payload.data];
+    const passport = await this.passportAdapter.deserializeUser(data);
+    this.setCurrent(passport);
   }
 }

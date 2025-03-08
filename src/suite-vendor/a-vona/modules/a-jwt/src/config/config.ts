@@ -7,6 +7,7 @@ export function config(app: VonaApplication) {
       payload: {
         client: 'client',
         path: 'path',
+        data: 'data',
       },
       extract: {
         header: '',

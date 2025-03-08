@@ -8,6 +8,7 @@ import type { CacheRedisUsersDemo } from '../bean/cacheRedis.usersDemo.ts';
 /** service: end */
 /** service: begin */
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
+import type { ServiceRedisToken } from '../service/redisToken.ts';
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -41,10 +42,12 @@ export interface IModuleCacheRedis {
 /** cacheRedis: end */
 /** service: begin */
 export * from '../service/passportAdapter.ts';
+export * from '../service/redisToken.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
     'home-user:passportAdapter': never;
+    'home-user:redisToken': never;
   }
 
 }
@@ -54,13 +57,20 @@ declare module 'vona-module-home-user' {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
+
+  export interface ServiceRedisToken {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
 }
 export interface IModuleService {
   passportAdapter: ServicePassportAdapter;
+  redisToken: ServiceRedisToken;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'home-user.service.passportAdapter': ServicePassportAdapter;
+    'home-user.service.redisToken': ServiceRedisToken;
   }
 }
 
