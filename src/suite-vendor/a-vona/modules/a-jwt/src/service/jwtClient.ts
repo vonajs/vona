@@ -1,4 +1,4 @@
-import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload } from '../types/jwt.ts';
+import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions } from '../types/jwt.ts';
 import * as jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -37,9 +37,11 @@ export class ServiceJwtClient extends BeanBase {
     return this.scope.config.field.payload.path;
   }
 
-  async sign(payload: IJwtPayload) {
+  async sign(payload: IJwtPayload, options: IJwtSignOptions) {
     return new Promise((resolve, reject) => {
-      payload = Object.assign({}, payload, { [this.fieldClient]: this._clientName });
+      const payloadSys: any = { [this.fieldClient]: this._clientName };
+      if (options.path) payloadSys[this.fieldPath] = options.path;
+      payload = Object.assign({}, payload, payloadSys);
       this._jwtInstance.sign(payload, this._clientOptions.secret!, this._clientOptions.signOptions, (err, encoded) => {
         if (err) return reject(err);
         resolve(encoded);

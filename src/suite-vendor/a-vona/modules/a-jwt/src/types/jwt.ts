@@ -6,6 +6,10 @@ export interface IJwtClientRecord {
   refresh: never;
 }
 
+export interface IJwtSignOptions {
+  path?: string;
+}
+
 export interface IJwtClientOptions {
   secret?: string;
   signOptions: SignOptions;
