@@ -1,9 +1,9 @@
 import type { SignOptions } from 'jsonwebtoken';
 
 export interface IJwtClientRecord {
+  temp: never;
   access: never;
   refresh: never;
-  query: never;
 }
 
 export interface IJwtClientOptions {
@@ -15,6 +15,7 @@ export interface ConfigJwt {
   field: {
     payload: {
       client: string;
+      path: string;
     };
     extract: {
       header: string;

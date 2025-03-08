@@ -6,6 +6,7 @@ export function config(app: VonaApplication) {
     field: {
       payload: {
         client: 'client',
+        path: 'path',
       },
       extract: {
         header: '',
@@ -19,7 +20,7 @@ export function config(app: VonaApplication) {
       signOptions: { issuer: app.config.env.appName },
     },
     clients: {
-      query: {
+      temp: {
         signOptions: { expiresIn: 10 * 60 },
       },
       access: {

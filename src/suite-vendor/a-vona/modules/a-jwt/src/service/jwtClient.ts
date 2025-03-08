@@ -18,7 +18,7 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   private _createClient(clientName?: keyof IJwtClientRecord) {
-    clientName = clientName || 'query';
+    clientName = clientName || 'temp';
     const configJwt = this.scope.config;
     const configClient = configJwt.clients[clientName];
     if (!configClient) throw new Error(`jwt client not found: ${clientName}`);
@@ -31,6 +31,10 @@ export class ServiceJwtClient extends BeanBase {
 
   private get fieldClient() {
     return this.scope.config.field.payload.client;
+  }
+
+  private get fieldPath() {
+    return this.scope.config.field.payload.path;
   }
 
   async sign(payload: IJwtPayload) {
@@ -50,7 +54,11 @@ export class ServiceJwtClient extends BeanBase {
       this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.signOptions, (err, decoded) => {
         if (err) return reject(err);
         const payload = cast<IJwtPayload>(decoded);
+        // check field client
         if (payload[this.fieldClient] !== this._clientName) return this.app.throw(401);
+        // check field path
+        if (payload[this.fieldPath] && payload[this.fieldPath] !== this.ctx.route.routePathRaw) return this.app.throw(401);
+        // passed
         resolve(payload);
       });
     });
