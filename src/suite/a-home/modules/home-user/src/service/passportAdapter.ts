@@ -1,5 +1,5 @@
-import type { IPassportAdapter, IPassportBase, IPayloadDataBase, IUserBase } from 'vona-module-a-user';
-import type { IPayloadData, IUser } from '../types/user.ts';
+import type { IAuthBase, IPassportAdapter, IPassportBase, IUserBase } from 'vona-module-a-user';
+import type { IAuth, IPayloadData, IUser } from '../types/user.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -42,7 +42,13 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     if (!verified) return;
     const user = await this.getUser({ id: payloadData.userId });
     if (!user) return;
-    return { user, auth: payloadData.authId };
+    const auth = await this.getAuth({ id: payloadData.authId });
+    if (!auth) return;
+    return { user, auth };
+  }
+
+  async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
+    return auth;
   }
 
   private async _getUsersDemo() {

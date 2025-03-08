@@ -26,6 +26,7 @@ export interface IPassportAdapter {
   getUser(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   updateUser(user: Partial<IUserBase>): Promise<void>;
   deserializeUser(data: IPayloadDataBase): Promise<IPassportBase | undefined>;
+  getAuth(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
 }
 
 declare module 'vona' {
