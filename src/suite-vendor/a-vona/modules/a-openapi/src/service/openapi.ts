@@ -93,6 +93,16 @@ export class ServiceOpenapi extends BeanBase {
 
   private _collectRegistry() {
     const registry = new OpenAPIRegistry();
+    // securitySchemes
+    const configSecuritySchemes = this.scope.config.securitySchemes;
+    for (const key in configSecuritySchemes) {
+      let securityScheme = configSecuritySchemes[key];
+      if (typeof securityScheme === 'function') {
+        securityScheme = (securityScheme as any).call(this.app);
+      }
+      registry.registerComponent('securitySchemes', key, securityScheme as any);
+    }
+    // controller
     for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
       this._collectController(registry, controller.beanOptions.module, controller.beanOptions.beanClass);
     }

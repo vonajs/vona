@@ -1,5 +1,6 @@
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
+import type { VonaApplication } from 'vona';
 import type { z } from 'zod';
 import type { SchemaLikeCreate } from './decorator.ts';
 
@@ -24,6 +25,8 @@ export interface IOpenAPISchemaObject {
   30: SchemaObject30;
   31: SchemaObject31;
 }
+
+export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => object) | object>;
 
 export type TypeResponseContentType =
   | 'application/json'

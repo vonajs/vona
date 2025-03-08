@@ -1,7 +1,7 @@
 import type { OpenAPIObjectConfig as OpenAPIObjectConfigV30 } from '@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator.ts';
 import type { OpenAPIObjectConfigV31 } from '@asteasolutions/zod-to-openapi/dist/v3.1/openapi-generator.ts';
 import type { VonaApplication } from 'vona';
-import type { TypeOpenApiVersion } from '../types/api.ts';
+import type { TypeOpenApiVersion, TypeSecuritySchemes } from '../types/api.ts';
 
 export function config(_app: VonaApplication) {
   return {
@@ -24,5 +24,12 @@ export function config(_app: VonaApplication) {
         },
       } as OpenAPIObjectConfigV31,
     },
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    } as TypeSecuritySchemes,
   };
 }
