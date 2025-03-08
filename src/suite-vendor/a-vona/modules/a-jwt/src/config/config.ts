@@ -8,8 +8,9 @@ export function config(app: VonaApplication) {
         client: 'client',
       },
       extract: {
-        header: 'authorization',
-        headerScheme: 'bearer',
+        header: '',
+        headerAuth:'authorization',
+        headerAuthScheme: 'bearer',
         query: 'auth_token',
       },
     },
