@@ -24,7 +24,7 @@ export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgument
     },
     ip: () => req.ip,
     rawBody: () => req.rawBody,
-    user: () => ctx.app.bean.passport.getCurrent(),
+    user: () => ctx.app.bean.passport.getCurrentUser(),
   };
   return modes[type]?.();
 }
