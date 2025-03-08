@@ -68,4 +68,13 @@ export class BeanPassport extends BeanBase {
     await this.signin(user);
     return user as T;
   }
+
+  /** default is jwt */
+  public async checkAuthToken() {
+    const payload = await this.bean.jwt.get('access').verify();
+  }
+
+  public async signinWithAuthToken(token: string) {
+
+  }
 }

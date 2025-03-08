@@ -43,13 +43,14 @@ export class ServiceJwtClient extends BeanBase {
     });
   }
 
-  async verify(token?: string) {
+  async verify(token?: string): Promise<IJwtPayload> {
     if (!token) token = this.scope.service.jwtExtract.fromAllWays();
     if (!token) this.app.throw(401, 'jwt token not found');
     return new Promise((resolve, reject) => {
-      this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.signOptions, (err, payload) => {
+      this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.signOptions, (err, decoded) => {
         if (err) return reject(err);
-        if (cast<IJwtPayload>(payload)[this.fieldClient] !== this._clientName) return this.app.throw(401);
+        const payload = cast<IJwtPayload>(decoded);
+        if (payload[this.fieldClient] !== this._clientName) return this.app.throw(401);
         resolve(payload);
       });
     });

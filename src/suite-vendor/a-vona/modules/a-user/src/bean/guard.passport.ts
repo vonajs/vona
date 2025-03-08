@@ -5,15 +5,15 @@ import { Guard } from 'vona-module-a-aspect';
 
 export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
   public: boolean;
-  jwt: boolean;
+  checkAuthToken: boolean; // default is jwt
 }
 
-@Guard<IGuardOptionsPassport>({ global: true, public: false, jwt: true })
+@Guard<IGuardOptionsPassport>({ global: true, public: false, checkAuthToken: true })
 export class GuardPassport extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsPassport, next: Next): Promise<boolean> {
     // jwt
-    if (!options.public && options.jwt) {
-
+    if (!options.public && options.checkAuthToken) {
+      await this.bean.passport.checkAuthToken();
     }
     // check current
     if (!this.bean.passport.getCurrent()) {
