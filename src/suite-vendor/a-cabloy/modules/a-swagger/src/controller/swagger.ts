@@ -22,6 +22,9 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
       window.ui = SwaggerUIBundle({
         url: '__SWAGGER_JSON__',
         dom_id: '#swagger-ui',
+        onComplete: function() {
+          window.ui.preauthorizeApiKey('bearerAuth', 'someJwtValue');
+        },
       });
     };
   </script>
