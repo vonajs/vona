@@ -1,7 +1,7 @@
-import type { IUserBase } from '../types/user.ts';
+import type { IPassportBase } from '../types/user.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export type TypeEventSigninData = IUserBase;
+export type TypeEventSigninData = IPassportBase;
 
 export type TypeEventSigninResult = void;
 

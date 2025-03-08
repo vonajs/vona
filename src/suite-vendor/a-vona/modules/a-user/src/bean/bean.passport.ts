@@ -16,7 +16,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public get isAuthenticated(): boolean {
-    const user = this.getCurrent();
+    const user = this.getCurrentUser();
     return !!user && !isAnonymous(user);
   }
 
@@ -37,18 +37,18 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport?.user as T | undefined;
   }
 
-  public async signin<T extends IUserBase>(user: T): Promise<void> {
+  public async signin<T extends IPassportBase>(passport: T): Promise<void> {
     // event
-    await this.scope.event.signin.emit(user);
+    await this.scope.event.signin.emit(passport);
     // ok
-    this.setCurrent(user);
+    this.setCurrent(passport);
   }
 
   public async signout(): Promise<void> {
-    const user = this.getCurrent();
-    if (!user) return;
+    const passport = this.getCurrent();
+    if (!passport) return;
     // event
-    await this.scope.event.signout.emit(user);
+    await this.scope.event.signout.emit(passport);
     // ok
     this.setCurrent(undefined);
   }
