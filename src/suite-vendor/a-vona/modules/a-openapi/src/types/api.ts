@@ -6,6 +6,7 @@ import type { SchemaLikeCreate } from './decorator.ts';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 export interface IOpenApiOptions {
+  public?: boolean;
   description?: string;
   summary?: string;
   contentType?: TypeResponseContentType;
