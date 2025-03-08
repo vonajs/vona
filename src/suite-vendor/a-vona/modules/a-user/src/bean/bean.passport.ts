@@ -55,7 +55,8 @@ export class BeanPassport extends BeanBase {
 
   public async signinWithAnonymous(): Promise<void> {
     const userAnonymous = await this.createUserAnonymous();
-    this.setCurrent(userAnonymous);
+    const passport = { user: userAnonymous, auth: undefined };
+    this.setCurrent(passport);
   }
 
   public async createUserAnonymous<T extends IUserBase = IUserBase>(): Promise<T> {
@@ -66,11 +67,12 @@ export class BeanPassport extends BeanBase {
     return userAnonymous as T;
   }
 
-  public async signinMock<T extends IUserBase = IUserBase>(name?: string): Promise<T> {
+  public async signinMock<T extends IPassportBase = IPassportBase>(name?: string): Promise<T> {
     const user = await this.passportAdapter.getUserMock(name);
-    if (!user) this.app.throw(403);
-    await this.signin(user);
-    return user as T;
+    if (!user) return this.app.throw(401);
+    const passport = { user, auth: undefined };
+    await this.signin(passport);
+    return passport as T;
   }
 
   /** default is jwt */
