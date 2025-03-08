@@ -58,6 +58,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
   }
 
   async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
+    // todo: check if getBean of bean.auth
     return auth;
   }
 
