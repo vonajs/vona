@@ -1,4 +1,4 @@
-import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
+import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30, SecurityRequirementObject } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
 import type {
   Constructable,
@@ -193,12 +193,22 @@ export class ServiceOpenapi extends BeanBase {
     // operationId
     let operationId = actionOpenApiOptions?.operationId ?? actionKey;
     operationId = `${tags[0]}_${operationId}`;
+    // security
+    let security: SecurityRequirementObject[] | undefined;
+    if (!actionOpenApiOptions?.public) {
+      security = [
+        {
+          bearerAuth: [],
+        },
+      ];
+    }
     // registerPath
     registry.registerPath({
       tags,
       method: actionMethod,
       path: routePath2,
       operationId,
+      security,
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
       request: this._collectRequest(controller, actionKey),
