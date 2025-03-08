@@ -28,7 +28,7 @@ export function config(app: VonaApplication) {
         signOptions: { expiresIn: 2 * 60 * 60 },
       },
       refresh: {
-        signOptions: { expiresIn: 30 * 24 * 60 * 60 },
+        signOptions: { expiresIn: 7 * 24 * 60 * 60 },
       },
     },
   } as ConfigJwt;

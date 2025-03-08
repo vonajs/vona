@@ -1,6 +1,6 @@
 import type { IAuthBase, IPassportAdapter, IPassportBase, IUserBase } from 'vona-module-a-user';
-import type { IAuth, IPayloadData, IUser } from '../types/user.ts';
-import { BeanBase, deepExtend } from 'vona';
+import type { IAuth, IPassport, IPayloadData, IUser } from '../types/user.ts';
+import { BeanBase, deepExtend, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
@@ -45,6 +45,16 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     const auth = await this.getAuth({ id: payloadData.authId });
     if (!auth) return;
     return { user, auth };
+  }
+
+  async serializeUser(passport: IPassport): Promise<IPayloadData> {
+    const userId = passport.user!.id;
+    const authId = passport.auth!.id;
+    const token = uuidv4();
+    const payloadData: IPayloadData = { userId, authId, token };
+    // save redis token
+    await this.scope.service.redisToken.save(payloadData);
+    return payloadData;
   }
 
   async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
