@@ -1,6 +1,6 @@
 import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload } from '../types/jwt.ts';
 import * as jwt from 'jsonwebtoken';
-import { BeanBase, deepExtend } from 'vona';
+import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -43,9 +43,15 @@ export class ServiceJwtClient extends BeanBase {
     });
   }
 
-  async verify(payload?: IJwtPayload) {
-    if (!payload) {
-
-    }
+  async verify(token?: string) {
+    if (!token) token = this.scope.service.jwtExtract.fromAllWays();
+    if (!token) this.app.throw(401, 'jwt token not found');
+    return new Promise((resolve, reject) => {
+      this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.signOptions, (err, payload) => {
+        if (err) return reject(err);
+        if (cast<IJwtPayload>(payload)[this.fieldClient] !== this._clientName) return this.app.throw(401);
+        resolve(payload);
+      });
+    });
   }
 }

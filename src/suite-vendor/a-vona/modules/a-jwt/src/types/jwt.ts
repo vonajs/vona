@@ -18,7 +18,7 @@ export interface ConfigJwt {
     };
     extract: {
       header: string;
-      headerAuth:string;
+      headerAuth: string;
       headerAuthScheme: string;
       query: string;
     };
