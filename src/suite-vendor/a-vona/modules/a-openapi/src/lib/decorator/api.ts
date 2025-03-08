@@ -5,6 +5,11 @@ import { appMetadata } from 'vona';
 import { SymbolOpenApiOptions } from '../../types/api.ts';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 
+export function setPublic(target: object, prop: MetadataKey, value: boolean) {
+  const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+  options.public = value;
+}
+
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
