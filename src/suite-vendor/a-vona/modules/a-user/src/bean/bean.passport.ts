@@ -78,6 +78,7 @@ export class BeanPassport extends BeanBase {
     const payload = await this.bean.jwt.get('access').verify();
     const data = payload[this.$scope.jwt.config.field.payload.data];
     const passport = await this.passportAdapter.deserializeUser(data);
+    if (!passport) return this.app.throw(401);
     this.setCurrent(passport);
   }
 }
