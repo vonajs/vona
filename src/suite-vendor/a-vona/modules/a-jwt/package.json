@@ -39,7 +39,8 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "9.0.8",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "ms": "^2.1.3"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

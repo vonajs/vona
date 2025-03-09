@@ -1,5 +1,11 @@
 import type { SignOptions } from 'jsonwebtoken';
 
+export interface IJwtToken {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+}
+
 export interface IJwtClientRecord {
   temp: never;
   access: never;
