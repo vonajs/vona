@@ -1,5 +1,5 @@
 export interface IAuthIdRecord {
-  '-1': 'mock';
+  '-10000': 'mock';
 }
 
 export function getAuthIdSystem<K extends keyof IAuthIdRecord>(_authName: IAuthIdRecord[K], authId: K): number {

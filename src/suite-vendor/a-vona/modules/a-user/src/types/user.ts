@@ -1,5 +1,6 @@
 import type { ILocalInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
+import type { IPayloadDataBase } from 'vona-module-a-jwt';
 
 export interface IUserBase {}
 

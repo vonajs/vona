@@ -8,6 +8,7 @@ import { getAuthIdSystem } from '../types/auth.ts';
 @Bean()
 export class BeanPassport extends BeanBase {
   private _passportAdapter: IPassportAdapter;
+  private _mockCounter: number = 0;
 
   private get passportAdapter(): IPassportAdapter {
     if (!this._passportAdapter) {
@@ -64,7 +65,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public async signinMock(name?: string): Promise<IPayloadDataBase> {
-    return await this.signinSystem('mock', '-1', name);
+    return await this.signinSystem('mock', (-10000 - ++this._mockCounter) as any, name);
   }
 
   public async signinWithAnonymous(): Promise<void> {
