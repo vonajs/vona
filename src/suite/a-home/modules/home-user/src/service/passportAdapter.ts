@@ -62,6 +62,10 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return { user, auth };
   }
 
+  async deletePassport(passport: IPassport): Promise<void> {
+
+  }
+
   private async _getUsersDemo() {
     if (this.app.meta.isProd)
       return;
