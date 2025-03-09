@@ -39,22 +39,33 @@ export class BeanPassport extends BeanBase {
   }
 
   public async signin<T extends IPassportBase>(passport: T): Promise<IPayloadDataBase> {
-    // event
-    await this.scope.event.signin.emit(passport);
     // current
     this.setCurrent(passport);
+    // event
+    await this.scope.event.signin.emit(passport);
     // serializePassport: payloadData for client certificate
-    const payloadData = await this.passportAdapter.serializePassport(passport);
-    return payloadData;
+    return await this.passportAdapter.serializePassport(passport);
   }
 
   public async signout(): Promise<void> {
+    // current
     const passport = this.getCurrent();
     if (!passport) return;
+    // removePassport
+    await this.passportAdapter.removePassport(passport);
     // event
     await this.scope.event.signout.emit(passport);
     // ok
     this.setCurrent(undefined);
+  }
+
+  public async signinMock<T extends IPassportBase = IPassportBase>(name?: string): Promise<T> {
+    const user = await this.passportAdapter.getUserMock(name);
+    if (!user) return this.app.throw(401);
+    const auth = { id: getAuthIdSystem('mock', '-1') };
+    const passport = { user, auth };
+    await this.signin(passport);
+    return passport as unknown as T;
   }
 
   public async signinWithAnonymous(): Promise<void> {
@@ -69,15 +80,6 @@ export class BeanPassport extends BeanBase {
     await this.scope.event.createUserAnonymous.emit(userAnonymous);
     // ok
     return userAnonymous as T;
-  }
-
-  public async signinMock<T extends IPassportBase = IPassportBase>(name?: string): Promise<T> {
-    const user = await this.passportAdapter.getUserMock(name);
-    if (!user) return this.app.throw(401);
-    const auth = { id: getAuthIdSystem('mock', '-1') };
-    const passport = { user, auth };
-    await this.signin(passport);
-    return passport as unknown as T;
   }
 
   /** default is jwt */

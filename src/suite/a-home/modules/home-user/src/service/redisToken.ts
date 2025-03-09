@@ -18,7 +18,7 @@ export class ServiceRedisToken extends BeanBase {
 
   async save(payloadData: IPayloadData) {
     const key = this._getAuthRedisKey(payloadData);
-    if (!key) return this.app.throw(401);
+    if (!key || !payloadData.token) return this.app.throw(401);
     await this.redisAuth.set(key, payloadData.token, 'EX', this.scope.config.redisToken.maxAge);
   }
 
@@ -26,6 +26,12 @@ export class ServiceRedisToken extends BeanBase {
     const key = this._getAuthRedisKey(payloadData);
     if (!key) return this.app.throw(401);
     await this.redisAuth.expire(key, this.scope.config.redisToken.maxAge);
+  }
+
+  async remove(payloadData: IPayloadData) {
+    const key = this._getAuthRedisKey(payloadData);
+    if (!key) return;
+    await this.redisAuth.del(key);
   }
 
   private _getAuthRedisKey(payloadData: IPayloadData) {

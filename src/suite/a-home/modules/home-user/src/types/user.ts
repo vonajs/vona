@@ -20,5 +20,5 @@ export interface IPassport extends IPassportBase {
 export interface IPayloadData extends IPayloadDataBase {
   userId: number;
   authId: number;
-  token: string;
+  token?: string;
 }
