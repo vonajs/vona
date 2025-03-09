@@ -10,7 +10,15 @@ const __SWAGGER_HTML__ = `<!doctype html>
     <script type="module" src="__SWAGGER_JS__"></script>
   </head>
   <body>
-    <rapi-doc spec-url="__SWAGGER_JSON__"></rapi-doc>
+    <rapi-doc id="the-doc" spec-url="__SWAGGER_JSON__"></rapi-doc>
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const rapidocEl = document.getElementById('the-doc');
+      rapidocEl.addEventListener('spec-loaded', (e) => {
+        rapidocEl.setApiKey('bearerAuth', '__SWAGGER_ACCESSTOKEN__');
+      });
+    });
+  </script>
   </body>
 </html>
 `;
@@ -20,10 +28,19 @@ export class ControllerRapidoc extends BeanBase {
   @Get()
   @Public()
   @Api.contentType('text/html')
-  index(@Query('version', v.default('31')) version: string): string {
+  async index(@Query('version', v.default('31')) version: string): Promise<string> {
+    // signin
+    let accessToken = '';
+    if (this.app.meta.isLocal || this.app.meta.isTest) {
+      const payloadData = await this.bean.passport.signinSystem('swagger', '-2');
+      const jwt = await this.bean.jwt.create(payloadData);
+      accessToken = jwt.accessToken;
+    }
+    // ui
     const _pathJS = this.scope.util.combineStaticPath('rapidoc-9.3.8/rapidoc-min.js');
     const _pathJSON = this.scope.util.combineApiPath(apiPath('//swagger/json'));
     return __SWAGGER_HTML__
+      .replace('__SWAGGER_ACCESSTOKEN__', accessToken)
       .replace('__SWAGGER_JS__', _pathJS)
       .replace('__SWAGGER_JSON__', `${_pathJSON}?version=${version}`);
   }
