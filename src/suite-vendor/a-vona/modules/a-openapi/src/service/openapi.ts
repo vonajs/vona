@@ -194,8 +194,9 @@ export class ServiceOpenapi extends BeanBase {
     let operationId = actionOpenApiOptions?.operationId ?? actionKey;
     operationId = `${tags[0]}_${operationId}`;
     // security
+    const _public: boolean | undefined = actionOpenApiOptions?.public ?? controllerOpenApiOptions?.public;
     let security: SecurityRequirementObject[] | undefined;
-    if (!actionOpenApiOptions?.public) {
+    if (!_public) {
       security = [
         {
           bearerAuth: [],
