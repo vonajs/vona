@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('jwt.test.ts', () => {
@@ -16,10 +17,12 @@ describe('jwt.test.ts', () => {
       let isAuthenticated = await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
       assert.equal(isAuthenticated, true);
       // isAuthenticated: isolate
-      isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
-        return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
+      const [isAuthenticated2, _err] = await catchError(async () => {
+        return await app.bean.executor.newCtxIsolate(async () => {
+          return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
+        });
       });
-      assert.equal(isAuthenticated, false);
+      assert.equal(isAuthenticated2, undefined);
       // isAuthenticated: isolate + header
       isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
         return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated', { authToken: jwt.accessToken });
