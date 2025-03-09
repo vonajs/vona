@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, Body, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { Controller, Post } from 'vona-module-a-web';
+import { Controller, Get, Post } from 'vona-module-a-web';
 
 @Controller('jwt')
 export class ControllerJwt extends BeanBase {
@@ -14,5 +14,10 @@ export class ControllerJwt extends BeanBase {
     const payloadData = await this.bean.passport.signinMock(name);
     const jwt = await this.bean.jwt.create(payloadData);
     return jwt;
+  }
+
+  @Get('isAuthenticated')
+  isAuthenticated(): boolean {
+    return this.bean.passport.isAuthenticated;
   }
 }

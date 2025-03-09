@@ -461,6 +461,7 @@ declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '/vona/test/bean/test': '/vona/test/bean/test';
     '/vona/test/bean/service': '/vona/test/bean/service';
+    '/vona/test/jwt/isAuthenticated': '/vona/test/jwt/isAuthenticated';
     '/': '/';
     '/vona/test/onion/echo3/:_string_': '/vona/test/onion/echo3:_userId_';
     '/vona/test/onion/echo3/:userId': `/vona/test/onion/echo3/${string}`;
@@ -471,6 +472,7 @@ declare module 'vona-module-a-web' {
   export interface IApiPathPostRecord {
     '/vona/test/cacheMem': '/vona/test/cacheMem';
     '/vona/test/cacheRedis': '/vona/test/cacheRedis';
+    '/vona/test/jwt/login': '/vona/test/jwt/login';
     '//echo': '//echo';
     '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
     '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
