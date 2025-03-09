@@ -19,7 +19,7 @@ describe('jwt.test.ts', () => {
       isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
         return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
       });
-      assert.equal(isAuthenticated, true);
+      assert.equal(isAuthenticated, false);
     });
   });
 });

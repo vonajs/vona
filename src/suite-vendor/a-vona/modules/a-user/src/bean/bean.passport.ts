@@ -2,7 +2,6 @@ import type { IAuthIdRecord } from '../types/auth.ts';
 import type { IPassportAdapter, IPassportBase, IPayloadDataBase, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { isAnonymous } from '../lib/user.ts';
 import { getAuthIdSystem } from '../types/auth.ts';
 
 @Bean()
@@ -18,8 +17,8 @@ export class BeanPassport extends BeanBase {
   }
 
   public get isAuthenticated(): boolean {
-    const user = this.getCurrentUser();
-    return !!user && !isAnonymous(user);
+    const passport = this.getCurrent();
+    return !!passport && !!passport.auth;
   }
 
   public setCurrent<T extends IPassportBase>(passport: T | undefined) {
