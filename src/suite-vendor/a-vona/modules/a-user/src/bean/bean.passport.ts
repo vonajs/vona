@@ -59,13 +59,12 @@ export class BeanPassport extends BeanBase {
     this.setCurrent(undefined);
   }
 
-  public async signinMock<T extends IPassportBase = IPassportBase>(name?: string): Promise<T> {
+  public async signinMock(name?: string): Promise<IPayloadDataBase> {
     const user = await this.passportAdapter.getUserMock(name);
     if (!user) return this.app.throw(401);
     const auth = { id: getAuthIdSystem('mock', '-1') };
     const passport = { user, auth };
-    await this.signin(passport);
-    return passport as unknown as T;
+    return await this.signin(passport);
   }
 
   public async signinWithAnonymous(): Promise<void> {
