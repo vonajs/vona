@@ -83,6 +83,7 @@ export class BeanPassport extends BeanBase {
   /** default is jwt */
   public async checkAuthToken() {
     const payload = await this.bean.jwt.get('access').verify();
+    if (!payload) return; // no jwt token
     const data = payload[this.$scope.jwt.config.field.payload.data];
     const passport = await this.passportAdapter.deserializePassport(data);
     if (!passport) return this.app.throw(401);

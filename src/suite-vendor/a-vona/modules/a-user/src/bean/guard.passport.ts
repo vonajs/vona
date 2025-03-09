@@ -21,8 +21,11 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
     }
     if (!options.public && !this.bean.passport.isAuthenticated) {
       // return false;
+      // 401 for this guard,403 for the next guards
       return this.app.throw(401);
     }
+    // check innerAccess
+    if (this.ctx.innerAccess) return true;
     // next
     return next();
   }

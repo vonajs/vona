@@ -1,8 +1,6 @@
 import type { Next, VonaContext } from 'vona';
 
 export async function middlewareGuard(ctx: VonaContext, next: Next) {
-  // check innerAccess
-  if (ctx.innerAccess) return next();
   // check handler
   const handler = ctx.getHandler();
   if (!handler) return next();
