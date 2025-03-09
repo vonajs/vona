@@ -20,6 +20,11 @@ describe('jwt.test.ts', () => {
         return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
       });
       assert.equal(isAuthenticated, false);
+      // isAuthenticated: isolate + header
+      isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
+        return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated', { authToken: jwt.accessToken });
+      });
+      assert.equal(isAuthenticated, true);
     });
   });
 });

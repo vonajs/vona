@@ -29,6 +29,7 @@ export interface IPerformActionOptions {
   headers?: object;
   body?: object;
   onions?: PowerPartial<ConfigOnions>;
+  authToken?: string;
 }
 
 export interface IPerformActionInnerParams {
@@ -41,4 +42,5 @@ export interface IPerformActionInnerParams {
   headers?: object;
   body?: object;
   onions?: PowerPartial<ConfigOnions>;
+  authToken?: string;
 }

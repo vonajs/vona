@@ -12,6 +12,8 @@ import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.t
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
 import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.ts';
 
+const SymbolRouteComposeMiddlewaresCache = Symbol('SymbolRouteComposeMiddlewaresCache');
+
 @Bean()
 export class BeanRouter extends BeanBase {
   registerController(moduleName: string, controller: Constructable) {
@@ -141,7 +143,10 @@ export class BeanRouter extends BeanBase {
       ctx.route = _route;
       ctx.request.params = params;
       ctx.request.query = searchParams;
-      return self._registerComposeMiddlewares(ctx)(ctx);
+      if (!_route[SymbolRouteComposeMiddlewaresCache]) {
+        _route[SymbolRouteComposeMiddlewaresCache] = self._registerComposeMiddlewares(ctx);
+      }
+      return _route[SymbolRouteComposeMiddlewaresCache](ctx);
     };
 
     // register

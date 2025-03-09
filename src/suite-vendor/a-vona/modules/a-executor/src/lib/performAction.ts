@@ -13,8 +13,10 @@ export async function performActionInner<T = any>({
   method,
   path,
   query,
+  headers,
   body,
   onions,
+  authToken,
 }: IPerformActionInnerParams): Promise<T> {
   // app
   const app = ctxCaller.app;
@@ -53,6 +55,16 @@ export async function performActionInner<T = any>({
 
     // delegateProperties
     delegateProperties(ctx, ctxCaller);
+
+    // headers
+    if (headers) {
+      Object.assign(ctx.request.headers, headers);
+    }
+
+    // authToken
+    if (authToken) {
+      ctx.request.headers.authorization = `Bearer ${authToken}`;
+    }
 
     // query
     if (query !== undefined) {
