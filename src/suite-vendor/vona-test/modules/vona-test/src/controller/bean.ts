@@ -1,12 +1,14 @@
 import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
+import { Public } from 'vona-module-a-user';
 import { Controller, Get } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.ts';
 import { ServiceTest } from '../service/test.ts';
 
 @Controller({ path: 'bean', meta: { mode: 'test' } })
 @Api.exclude()
+@Public()
 export class ControllerBean extends BeanBase {
   @Get('test')
   async test() {
@@ -65,6 +67,7 @@ export class ControllerBean extends BeanBase {
   }
 
   @Get('service')
+  @Public()
   async service() {
     let res;
 

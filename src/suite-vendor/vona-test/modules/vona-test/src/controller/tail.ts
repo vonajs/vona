@@ -1,12 +1,14 @@
 import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
+import { Public } from 'vona-module-a-user';
 import { Controller, Post } from 'vona-module-a-web';
 
 @Controller({ path: 'tail', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTail extends BeanBase {
   @Post()
+  @Public()
   tail() {
     // 1
     cast(this.ctx)._tail_test = 1;
