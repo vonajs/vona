@@ -1,3 +1,4 @@
+import type { IAuthIdRecord } from '../types/auth.ts';
 import type { IPassportAdapter, IPassportBase, IPayloadDataBase, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -59,12 +60,16 @@ export class BeanPassport extends BeanBase {
     this.setCurrent(undefined);
   }
 
-  public async signinMock(name?: string): Promise<IPayloadDataBase> {
+  public async signinSystem<K extends keyof IAuthIdRecord>(authName: IAuthIdRecord[K], authId: K, name?: string): Promise<IPayloadDataBase> {
     const user = await this.passportAdapter.getUserMock(name);
     if (!user) return this.app.throw(401);
-    const auth = { id: getAuthIdSystem('mock', '-1') };
+    const auth = { id: getAuthIdSystem(authName, authId) };
     const passport = { user, auth };
     return await this.signin(passport);
+  }
+
+  public async signinMock(name?: string): Promise<IPayloadDataBase> {
+    return await this.signinSystem('mock', '-1', name);
   }
 
   public async signinWithAnonymous(): Promise<void> {
