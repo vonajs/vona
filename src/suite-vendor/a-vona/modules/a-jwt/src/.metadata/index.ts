@@ -7,15 +7,17 @@ import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceJwtClient } from '../service/jwtClient.ts';
+
 import type { ServiceJwtExtract } from '../service/jwtExtract.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
+/** bean: begin */
+import 'vona';
 /** service: end */
 /** service: begin */
 
-/** bean: begin */
 import 'vona';
 import 'vona';
 import 'vona';
@@ -42,7 +44,20 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
+declare module 'vona' {
+
+  export interface IDtoRecord {
+    'a-jwt:jwtToken': never;
+  }
+
+}
+declare module 'vona-module-a-jwt' {
+
+}
 /** bean: end */
+/** dto: begin */
+export * from '../dto/jwtToken.ts';
+/** dto: end */
 /** service: begin */
 export * from '../service/jwtClient.ts';
 declare module 'vona-module-a-web' {
