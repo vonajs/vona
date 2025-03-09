@@ -24,11 +24,6 @@ export class BeanPassport extends BeanBase {
 
   public setCurrent<T extends IPassportBase>(passport: T | undefined) {
     this.ctx.state.passport = passport;
-    let ctxCaller = this.ctx.ctxCaller;
-    while (ctxCaller) {
-      ctxCaller.state.passport = passport;
-      ctxCaller = ctxCaller.ctxCaller;
-    }
   }
 
   public getCurrent<T extends IPassportBase = IPassportBase>(): T | undefined {

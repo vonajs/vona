@@ -9,12 +9,17 @@ export function delegateProperties(ctx, ctxCaller) {
 }
 
 export function delegateProperty(ctx, ctxCaller, property) {
-  if (!ctxCaller[property]) return;
-  if (!ctx[property]) ctx[property] = {};
-  for (const key in ctxCaller[property]) {
-    ctx[property][key] = ctxCaller[property][key];
-  }
+  if (!ctxCaller[property])ctxCaller[property] = {};
+  ctx[property] = ctxCaller[property];
 }
+
+// export function delegateProperty(ctx, ctxCaller, property) {
+//   if (!ctxCaller[property]) return;
+//   if (!ctx[property]) ctx[property] = {};
+//   for (const key in ctxCaller[property]) {
+//     ctx[property][key] = ctxCaller[property][key];
+//   }
+// }
 
 // function _delegateProperty(ctx, ctxCaller, property) {
 //   const keyMock = `__executeBean__mock__${property}__`;
