@@ -43,8 +43,8 @@ export class BeanPassport extends BeanBase {
     await this.scope.event.signin.emit(passport);
     // current
     this.setCurrent(passport);
-    // serializeUser: payloadData for client certificate
-    const payloadData = await this.passportAdapter.serializeUser(passport);
+    // serializePassport: payloadData for client certificate
+    const payloadData = await this.passportAdapter.serializePassport(passport);
     return payloadData;
   }
 
@@ -84,7 +84,7 @@ export class BeanPassport extends BeanBase {
   public async checkAuthToken() {
     const payload = await this.bean.jwt.get('access').verify();
     const data = payload[this.$scope.jwt.config.field.payload.data];
-    const passport = await this.passportAdapter.deserializeUser(data);
+    const passport = await this.passportAdapter.deserializePassport(data);
     if (!passport) return this.app.throw(401);
     this.setCurrent(passport);
   }

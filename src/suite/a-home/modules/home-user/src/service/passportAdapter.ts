@@ -36,7 +36,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }
 
-  async deserializeUser(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
+  async deserializePassport(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
     // verify redis token
     const verified = await this.scope.service.redisToken.verify(payloadData);
     if (!verified) return;
@@ -47,7 +47,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return { user, auth };
   }
 
-  async serializeUser(passport: IPassport): Promise<IPayloadData> {
+  async serializePassport(passport: IPassport): Promise<IPayloadData> {
     const userId = passport.user!.id;
     const authId = passport.auth!.id;
     const token = uuidv4();
