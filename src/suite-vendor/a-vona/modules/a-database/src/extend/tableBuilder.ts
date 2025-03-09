@@ -19,10 +19,6 @@ export function ExtendTableBuilder(_app: VonaApplication) {
     if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
   });
-  delete TableBuilder.prototype.id0;
-  knex.TableBuilder.extend('id0', function (columnName) {
-    return this.integer(columnName).defaultTo(0);
-  });
   delete TableBuilder.prototype.int0;
   knex.TableBuilder.extend('int0', function (columnName) {
     return this.integer(columnName).defaultTo(0);
@@ -30,12 +26,6 @@ export function ExtendTableBuilder(_app: VonaApplication) {
   delete TableBuilder.prototype.int1;
   knex.TableBuilder.extend('int1', function (columnName) {
     return this.integer(columnName).defaultTo(1);
-  });
-  ['atomId', 'itemId', 'userId', 'atomClassId', 'atomIdMain', 'atomClassIdMain'].forEach(method => {
-    delete TableBuilder.prototype[method];
-    knex.TableBuilder.extend(method, function () {
-      return this.integer(method).defaultTo(0);
-    });
   });
   ['description'].forEach(method => {
     delete TableBuilder.prototype[method];
