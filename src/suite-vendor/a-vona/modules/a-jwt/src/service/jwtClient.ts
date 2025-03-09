@@ -37,14 +37,14 @@ export class ServiceJwtClient extends BeanBase {
     return this.scope.config.field.payload.path;
   }
 
-  async sign(payload: IJwtPayload, options: IJwtSignOptions) {
+  async sign(payload: IJwtPayload, options?: IJwtSignOptions): Promise<string> {
     return new Promise((resolve, reject) => {
       const payloadSys: any = { [this.fieldClient]: this._clientName };
-      if (options.path) payloadSys[this.fieldPath] = options.path;
+      if (options?.path) payloadSys[this.fieldPath] = options.path;
       payload = Object.assign({}, payload, payloadSys);
       this._jwtInstance.sign(payload, this._clientOptions.secret!, this._clientOptions.signOptions, (err, encoded) => {
         if (err) return reject(err);
-        resolve(encoded);
+        resolve(encoded!);
       });
     });
   }

@@ -23,7 +23,7 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
         url: '__SWAGGER_JSON__',
         dom_id: '#swagger-ui',
         onComplete: function() {
-          window.ui.preauthorizeApiKey('bearerAuth', 'someJwtValue');
+          window.ui.preauthorizeApiKey('bearerAuth', '__SWAGGER_ACCESSTOKEN__');
         },
       });
     };
@@ -37,12 +37,17 @@ export class ControllerSwagger extends BeanBase {
   @Get()
   @Public()
   @Api.contentType('text/html')
-  index(@Query('version', v.default('31')) version: string): string {
+  async index(@Query('version', v.default('31')) version: string): Promise<string> {
+    // signin
+    const payloadData = await this.bean.passport.signinSystem('swagger', '-2');
+    const jwt = await this.bean.jwt.create(payloadData);
+    // ui
     const _pathUI = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui.css');
     const _pathCSS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/index.css');
     const _pathJS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui-bundle.js');
     const _pathJSON = this.scope.util.combineApiPath(apiPath('//swagger/json'));
     return __SWAGGER_HTML__
+      .replace('__SWAGGER_ACCESSTOKEN__', jwt.accessToken)
       .replace('__SWAGGER_UI__', _pathUI)
       .replace('__SWAGGER_CSS__', _pathCSS)
       .replace('__SWAGGER_JS__', _pathJS)

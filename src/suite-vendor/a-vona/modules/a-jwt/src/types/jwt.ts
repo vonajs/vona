@@ -7,7 +7,7 @@ export interface IJwtClientRecord {
 }
 
 export interface IJwtSignOptions {
-  path?: string;
+  path?: string | string[];
 }
 
 export interface IJwtClientOptions {
