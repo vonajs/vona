@@ -1,14 +1,10 @@
 import type { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
 import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
 import { UseGuardGlobal } from 'vona-module-a-aspect';
-import { setPublic } from 'vona-module-a-openapi';
 
 export function Public(
   options?: Partial<TypeUseOnionGlobalBaseOptions<IGuardOptionsPassport>>,
 ): ClassDecorator & MethodDecorator {
   const _public = options?.public === undefined ? true : options.public;
-  return UseGuardGlobal('a-user:passport', { public: _public }, (target, prop, descriptor) => {
-    setPublic(target, prop!, _public);
-    return descriptor;
-  });
+  return UseGuardGlobal('a-user:passport', { public: _public });
 }
