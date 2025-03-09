@@ -36,15 +36,9 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }
 
-  async deserializePassport(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
-    // verify redis token
-    const verified = await this.scope.service.redisToken.verify(payloadData);
-    if (!verified) return;
-    const user = await this.getUser({ id: payloadData.userId });
-    if (!user) return;
-    const auth = await this.getAuth({ id: payloadData.authId });
-    if (!auth) return;
-    return { user, auth };
+  async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
+    // todo: check if getBean of bean.auth
+    return auth;
   }
 
   async serializePassport(passport: IPassport): Promise<IPayloadData> {
@@ -57,9 +51,15 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return payloadData;
   }
 
-  async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
-    // todo: check if getBean of bean.auth
-    return auth;
+  async deserializePassport(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
+    // verify redis token
+    const verified = await this.scope.service.redisToken.verify(payloadData);
+    if (!verified) return;
+    const user = await this.getUser({ id: payloadData.userId });
+    if (!user) return;
+    const auth = await this.getAuth({ id: payloadData.authId });
+    if (!auth) return;
+    return { user, auth };
   }
 
   private async _getUsersDemo() {

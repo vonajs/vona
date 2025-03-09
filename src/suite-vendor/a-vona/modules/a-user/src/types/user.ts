@@ -25,9 +25,10 @@ export interface IPassportAdapter {
   getUserMock(name?: string): Promise<IUserBase | undefined>;
   getUser(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   updateUser(user: Partial<IUserBase>): Promise<void>;
-  deserializePassport(data: IPayloadDataBase): Promise<IPassportBase | undefined>;
-  serializePassport(passport: IPassportBase): Promise<IPayloadDataBase>;
   getAuth(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
+  serializePassport(passport: IPassportBase): Promise<IPayloadDataBase>;
+  deserializePassport(data: IPayloadDataBase): Promise<IPassportBase | undefined>;
+
 }
 
 declare module 'vona' {
