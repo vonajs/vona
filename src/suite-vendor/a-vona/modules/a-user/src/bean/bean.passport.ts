@@ -1,7 +1,8 @@
-import type { IPassportAdapter, IPassportBase, IUserBase } from '../types/user.ts';
+import type { IPassportAdapter, IPassportBase, IPayloadDataBase, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { isAnonymous } from '../lib/user.ts';
+import { getAuthIdSystem } from '../types/auth.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {
@@ -37,11 +38,14 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport?.user as T | undefined;
   }
 
-  public async signin<T extends IPassportBase>(passport: T): Promise<void> {
+  public async signin<T extends IPassportBase>(passport: T): Promise<IPayloadDataBase> {
     // event
     await this.scope.event.signin.emit(passport);
-    // ok
+    // current
     this.setCurrent(passport);
+    // serializeUser: payloadData for client certificate
+    const payloadData = await this.passportAdapter.serializeUser(passport);
+    return payloadData;
   }
 
   public async signout(): Promise<void> {
@@ -70,9 +74,10 @@ export class BeanPassport extends BeanBase {
   public async signinMock<T extends IPassportBase = IPassportBase>(name?: string): Promise<T> {
     const user = await this.passportAdapter.getUserMock(name);
     if (!user) return this.app.throw(401);
-    const passport = { user, auth: undefined };
+    const auth = { id: getAuthIdSystem('mock', '-1') };
+    const passport = { user, auth };
     await this.signin(passport);
-    return passport as T;
+    return passport as unknown as T;
   }
 
   /** default is jwt */
