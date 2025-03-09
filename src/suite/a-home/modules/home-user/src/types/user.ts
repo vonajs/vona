@@ -1,5 +1,6 @@
 import type { ILocalInfos } from 'vona';
-import type { IAuthBase, IPassportBase, IPayloadDataBase, IUserBase } from 'vona-module-a-user';
+import type { IPayloadDataBase } from 'vona-module-a-jwt';
+import type { IAuthBase, IPassportBase, IUserBase } from 'vona-module-a-user';
 
 export interface IUser extends IUserBase {
   id: number;

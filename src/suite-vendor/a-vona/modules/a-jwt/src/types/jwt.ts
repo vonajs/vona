@@ -39,4 +39,6 @@ export interface ConfigJwt {
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;
 }
 
+export interface IPayloadDataBase {}
+
 export interface IJwtPayload {}

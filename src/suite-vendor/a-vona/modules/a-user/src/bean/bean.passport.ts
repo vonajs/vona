@@ -1,5 +1,6 @@
+import type { IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthIdRecord } from '../types/auth.ts';
-import type { IPassportAdapter, IPassportBase, IPayloadDataBase, IUserBase } from '../types/user.ts';
+import type { IPassportAdapter, IPassportBase, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { getAuthIdSystem } from '../types/auth.ts';
@@ -82,10 +83,9 @@ export class BeanPassport extends BeanBase {
 
   /** default is jwt */
   public async checkAuthToken() {
-    const payload = await this.bean.jwt.get('access').verify();
-    if (!payload) return; // no jwt token
-    const data = payload[this.$scope.jwt.config.field.payload.data];
-    const passport = await this.passportAdapter.deserializePassport(data);
+    const payloadData = await this.bean.jwt.get('access').verify();
+    if (!payloadData) return; // no jwt token
+    const passport = await this.passportAdapter.deserializePassport(payloadData);
     if (!passport) return this.app.throw(401);
     this.setCurrent(passport);
   }

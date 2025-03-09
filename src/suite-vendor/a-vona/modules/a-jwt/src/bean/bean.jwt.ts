@@ -1,4 +1,4 @@
-import type { IJwtClientRecord, IJwtPayload, IJwtSignOptions, IJwtToken } from '../types/jwt.ts';
+import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadDataBase } from '../types/jwt.ts';
 import ms from 'ms';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -10,11 +10,11 @@ export class BeanJwt extends BeanBase {
     return this.app.bean._getBeanSelector(ServiceJwtClient, clientName);
   }
 
-  async create(payload: IJwtPayload, options?: IJwtSignOptions): Promise<IJwtToken> {
+  async create(payloadData: IPayloadDataBase, options?: IJwtSignOptions): Promise<IJwtToken> {
     // accessToken
-    const accessToken = await this.get('access').sign(payload, options);
+    const accessToken = await this.get('access').sign(payloadData, options);
     // refreshToken
-    const refreshToken = await this.get('refresh').sign(payload, options);
+    const refreshToken = await this.get('refresh').sign(payloadData, options);
     // expiresIn
     let expiresIn = this.scope.config.clients.access.signOptions.expiresIn!;
     if (typeof expiresIn === 'string') expiresIn = ms(expiresIn);

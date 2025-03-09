@@ -10,8 +10,6 @@ export interface IPassportBase {
   auth?: IAuthBase;
 }
 
-export interface IPayloadDataBase {}
-
 export interface IUserAdapter {
   userId(user: IUserBase): TableIdentity;
   userName (user: IUserBase): string;

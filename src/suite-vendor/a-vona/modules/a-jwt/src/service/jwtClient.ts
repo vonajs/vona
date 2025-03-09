@@ -1,4 +1,4 @@
-import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions } from '../types/jwt.ts';
+import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IPayloadDataBase } from '../types/jwt.ts';
 import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -37,11 +37,17 @@ export class ServiceJwtClient extends BeanBase {
     return this.scope.config.field.payload.path;
   }
 
-  async sign(payload: IJwtPayload, options?: IJwtSignOptions): Promise<string> {
+  private get fieldData() {
+    return this.scope.config.field.payload.data;
+  }
+
+  async sign(payloadData: IPayloadDataBase, options?: IJwtSignOptions): Promise<string> {
     return new Promise((resolve, reject) => {
-      const payloadSys: any = { [this.fieldClient]: this._clientName };
-      if (options?.path) payloadSys[this.fieldPath] = options.path;
-      payload = Object.assign({}, payload, payloadSys);
+      const payload: IJwtPayload = {
+        [this.fieldClient]: this._clientName,
+        [this.fieldData]: payloadData,
+      };
+      if (options?.path) payload[this.fieldPath] = options.path;
       this._jwtInstance.sign(payload, this._clientOptions.secret!, this._clientOptions.signOptions, (err, encoded) => {
         if (err) return reject(err);
         resolve(encoded!);
@@ -49,7 +55,7 @@ export class ServiceJwtClient extends BeanBase {
     });
   }
 
-  async verify(token?: string): Promise<IJwtPayload | undefined> {
+  async verify(token?: string): Promise<IPayloadDataBase | undefined> {
     if (!token) token = this.scope.service.jwtExtract.fromAllWays();
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
@@ -61,7 +67,7 @@ export class ServiceJwtClient extends BeanBase {
         // check field path
         if (payload[this.fieldPath] && payload[this.fieldPath] !== this.ctx.route.routePathRaw) return this.app.throw(401);
         // passed
-        resolve(payload);
+        resolve(payload[this.fieldData]);
       });
     });
   }
