@@ -39,15 +39,19 @@ export class ControllerSwagger extends BeanBase {
   @Api.contentType('text/html')
   async index(@Query('version', v.default('31')) version: string): Promise<string> {
     // signin
-    const payloadData = await this.bean.passport.signinSystem('swagger', '-2');
-    const jwt = await this.bean.jwt.create(payloadData);
+    let accessToken = '';
+    if (this.app.meta.isLocal || this.app.meta.isTest) {
+      const payloadData = await this.bean.passport.signinSystem('swagger', '-2');
+      const jwt = await this.bean.jwt.create(payloadData);
+      accessToken = jwt.accessToken;
+    }
     // ui
     const _pathUI = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui.css');
     const _pathCSS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/index.css');
     const _pathJS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui-bundle.js');
     const _pathJSON = this.scope.util.combineApiPath(apiPath('//swagger/json'));
     return __SWAGGER_HTML__
-      .replace('__SWAGGER_ACCESSTOKEN__', jwt.accessToken)
+      .replace('__SWAGGER_ACCESSTOKEN__', accessToken)
       .replace('__SWAGGER_UI__', _pathUI)
       .replace('__SWAGGER_CSS__', _pathCSS)
       .replace('__SWAGGER_JS__', _pathJS)
