@@ -1,5 +1,5 @@
 import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions } from '../types/jwt.ts';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
