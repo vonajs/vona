@@ -1,10 +1,12 @@
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
+import { Public } from 'vona-module-a-user';
 import { Controller, Post } from 'vona-module-a-web';
 
 @Controller({ path: 'status', meta: { mode: 'test' } })
 @Api.exclude()
+@Public()
 export class ControllerStatus extends BeanBase {
   @Post()
   status() {
