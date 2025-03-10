@@ -2,7 +2,7 @@ import type { IAuthBase, IPassportAdapter, IPassportBase, IUserBase } from 'vona
 import type { IAuth } from '../types/auth.ts';
 import type { IPassport, IPayloadData } from '../types/passport.ts';
 import type { IUser } from '../types/user.ts';
-import { BeanBase, deepExtend, uuidv4 } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
@@ -59,24 +59,6 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     const auth = await this.getAuth({ id: payloadData.authId });
     if (!auth) return;
     return { user, auth };
-  }
-
-  async verifyAuthToken(payloadData: IPayloadData): Promise<boolean> {
-    return await this.scope.service.redisToken.verify(payloadData);
-  }
-
-  async refreshAuthToken(payloadData: IPayloadData): Promise<void> {
-    await this.scope.service.redisToken.refresh(payloadData);
-  }
-
-  async removeAuthToken(payloadData: IPayloadData): Promise<void> {
-    await this.scope.service.redisToken.remove(payloadData);
-  }
-
-  async createAuthToken(payloadData: IPayloadData): Promise<IPayloadData> {
-    const payloadDataNew = Object.assign({}, payloadData, { token: uuidv4() });
-    await this.scope.service.redisToken.create(payloadDataNew);
-    return payloadDataNew;
   }
 
   private async _getUsersDemo() {
