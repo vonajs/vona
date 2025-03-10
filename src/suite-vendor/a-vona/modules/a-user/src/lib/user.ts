@@ -1,6 +1,6 @@
 import type { ILocalInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
-import type { IUserAdapter, IUserBase } from '../types/user.ts';
+import type { IUserAdapter, IUserBase, IUserIdRecord } from '../types/user.ts';
 
 let __userAdapter: IUserAdapter;
 
@@ -26,4 +26,8 @@ export function getUserLocale(user: IUserBase): keyof ILocalInfos | undefined {
 
 export function getUserAnonymous(user: IUserBase): boolean {
   return __userAdapter.getUserAnonymous(user);
+}
+
+export function getUserIdSystem<K extends keyof IUserIdRecord>(_userName: IUserIdRecord[K], userId: K): TableIdentity {
+  return userId;
 }
