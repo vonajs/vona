@@ -11,8 +11,7 @@ export class ControllerJwt extends BeanBase {
   @Api.body(v.object(DtoJwtToken))
   @Public()
   async login(@Body('name') name: string): Promise<IJwtToken> {
-    const payloadData = await this.bean.passport.signinMock(name);
-    const jwt = await this.bean.jwt.create(payloadData);
+    const jwt = await this.bean.passport.signinMock(name);
     return jwt;
   }
 

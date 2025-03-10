@@ -1,5 +1,5 @@
-import type { IPayloadDataBase } from 'vona-module-a-jwt';
-import type { IAuthIdRecord } from '../types/auth.ts';
+import type { IJwtToken } from 'vona-module-a-jwt';
+import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -36,13 +36,16 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport?.user as T | undefined;
   }
 
-  public async signin<T extends IPassportBase>(passport: T): Promise<IPayloadDataBase> {
+  public async signin<T extends IPassportBase>(passport: T, options?: ISigninOptions): Promise<IJwtToken> {
+    const authToken = options?.authToken ?? 'jwt';
     // current
     this.setCurrent(passport);
     // event
     await this.scope.event.signin.emit(passport);
     // serializePassport: payloadData for client certificate
-    return await this.passportAdapter.serializePassport(passport);
+    const payloadData = await this.passportAdapter.serializePassport(passport);
+    if (authToken !== 'jwt') throw new Error('Only support jwt');
+    return await this.bean.jwt.create(payloadData);
   }
 
   public async signout(): Promise<void> {
@@ -57,16 +60,21 @@ export class BeanPassport extends BeanBase {
     this.setCurrent(undefined);
   }
 
-  public async signinSystem<K extends keyof IAuthIdRecord>(authName: IAuthIdRecord[K], authId: K, name?: string): Promise<IPayloadDataBase> {
+  public async signinSystem<K extends keyof IAuthIdRecord>(
+    authName: IAuthIdRecord[K],
+    authId: K,
+    name?: string,
+    options?: ISigninOptions,
+  ): Promise<IJwtToken> {
     const user = await this.passportAdapter.getUserMock(name);
     if (!user) return this.app.throw(401);
     const auth = { id: getAuthIdSystem(authName, authId) };
     const passport = { user, auth };
-    return await this.signin(passport);
+    return await this.signin(passport, options);
   }
 
-  public async signinMock(name?: string): Promise<IPayloadDataBase> {
-    return await this.signinSystem('mock', (-10000 - ++this._mockCounter) as any, name);
+  public async signinMock(name?: string, options?: ISigninOptions): Promise<IJwtToken> {
+    return await this.signinSystem('mock', (-10000 - ++this._mockCounter) as any, name, options);
   }
 
   public async signinWithAnonymous(): Promise<void> {

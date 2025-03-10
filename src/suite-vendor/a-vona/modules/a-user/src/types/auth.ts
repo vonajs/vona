@@ -11,3 +11,9 @@ export interface IAuthBase {
 export interface IAuthAdapter {
   getAuthId(user: IAuthBase): TableIdentity;
 }
+
+export type TypeAuthToken = 'jwt';
+
+export interface ISigninOptions {
+  authToken: TypeAuthToken;
+}

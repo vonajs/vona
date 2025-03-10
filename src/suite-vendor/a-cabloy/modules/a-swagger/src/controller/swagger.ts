@@ -41,8 +41,7 @@ export class ControllerSwagger extends BeanBase {
     // signin
     let accessToken = '';
     if (this.app.meta.isLocal || this.app.meta.isTest) {
-      const payloadData = await this.bean.passport.signinSystem('swagger', '-2');
-      const jwt = await this.bean.jwt.create(payloadData);
+      const jwt = await this.bean.passport.signinSystem('swagger', '-2');
       accessToken = jwt.accessToken;
     }
     // ui
