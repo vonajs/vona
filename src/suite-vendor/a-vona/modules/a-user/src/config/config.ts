@@ -5,17 +5,21 @@ import type { IServiceRecord } from 'vona-module-a-web';
 export function config(_app: VonaApplication) {
   return {
     tableIdentity: {
-      user(this: knex.Knex.TableBuilder, _columnName: string) {
-        return this.increments();
+      user: {
+        userIdPrimary(this: knex.Knex.TableBuilder) {
+          return this.increments();
+        },
+        userId(this: knex.Knex.TableBuilder, columnName: string) {
+          return this.integer(columnName); // default is null
+        },
       },
-      userRef(this: knex.Knex.TableBuilder, columnName: string) {
-        return this.int0(columnName);
-      },
-      auth(this: knex.Knex.TableBuilder, _columnName: string) {
-        return this.increments();
-      },
-      authRef(this: knex.Knex.TableBuilder, columnName: string) {
-        return this.int0(columnName);
+      auth: {
+        authIdPrimary(this: knex.Knex.TableBuilder) {
+          return this.increments();
+        },
+        authId(this: knex.Knex.TableBuilder, columnName: string) {
+          return this.integer(columnName);
+        },
       },
     },
     passportAdapter: 'home-user:passportAdapter' as keyof IServiceRecord,
