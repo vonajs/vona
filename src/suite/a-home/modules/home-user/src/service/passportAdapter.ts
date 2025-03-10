@@ -46,11 +46,8 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
   async serializePassport(passport: IPassport): Promise<IPayloadData> {
     const userId = passport.user!.id;
     const authId = passport.auth!.id;
-    const token = uuidv4();
-    const payloadData: IPayloadData = { userId, authId, token };
-    // save redis token
-    await this.scope.service.redisToken.save(payloadData);
-    return payloadData;
+    const payloadData: IPayloadData = { userId, authId };
+    return await this.createAuthToken(payloadData);
   }
 
   async deserializePassport(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
@@ -69,11 +66,21 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     const userId = passport.user!.id;
     const authId = passport.auth!.id;
     const payloadData: IPayloadData = { userId, authId };
-    await this.scope.service.redisToken.remove(payloadData);
+    await this.removeAuthToken(payloadData);
   }
 
   async refreshAuthToken(payloadData: IPayloadData): Promise<void> {
     await this.scope.service.redisToken.refresh(payloadData);
+  }
+
+  async removeAuthToken(payloadData: IPayloadData): Promise<void> {
+    await this.scope.service.redisToken.remove(payloadData);
+  }
+
+  async createAuthToken(payloadData: IPayloadData): Promise<IPayloadData> {
+    const payloadDataNew = Object.assign({}, payloadData, { token: uuidv4() });
+    await this.scope.service.redisToken.create(payloadDataNew);
+    return payloadDataNew;
   }
 
   private async _getUsersDemo() {

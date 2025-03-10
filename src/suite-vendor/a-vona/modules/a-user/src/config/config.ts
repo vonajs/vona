@@ -5,6 +5,12 @@ import type { IServiceRecord } from 'vona-module-a-web';
 
 export function config(_app: VonaApplication) {
   return {
+    passport: {
+      refreshAuthToken: {
+        recreate: true,
+        refresh: true,
+      },
+    },
     tableIdentity: {
       current: {
         user: 'number' as TableIdentityType,
