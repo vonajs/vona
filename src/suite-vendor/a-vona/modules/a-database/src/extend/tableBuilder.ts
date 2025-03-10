@@ -20,22 +20,22 @@ export function ExtendTableBuilder(_app: VonaApplication) {
     return this;
   });
   delete TableBuilder.prototype.int0;
-  knex.TableBuilder.extend('int0', function (columnName) {
+  knex.TableBuilder.extend('int0', function (this: knex.Knex.TableBuilder, columnName: string) {
     return this.integer(columnName).defaultTo(0);
   });
   delete TableBuilder.prototype.int1;
-  knex.TableBuilder.extend('int1', function (columnName) {
+  knex.TableBuilder.extend('int1', function (this: knex.Knex.TableBuilder, columnName: string) {
     return this.integer(columnName).defaultTo(1);
   });
   ['description'].forEach(method => {
     delete TableBuilder.prototype[method];
-    knex.TableBuilder.extend(method, function (length = 255) {
+    knex.TableBuilder.extend(method, function (this: knex.Knex.TableBuilder, length: number = 255) {
       return this.string(method, length);
     });
   });
   ['content'].forEach(method => {
     delete TableBuilder.prototype[method];
-    knex.TableBuilder.extend(method, function (useText) {
+    knex.TableBuilder.extend(method, function (this: knex.Knex.TableBuilder, useText?: boolean) {
       return useText ? this.text(method) : this.json(method);
     });
   });
