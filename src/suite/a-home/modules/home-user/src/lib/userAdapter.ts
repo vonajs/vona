@@ -5,24 +5,24 @@ import type { IUser } from '../types/user.ts';
 import { cast } from 'vona';
 import { setUserAdapter } from 'vona-module-a-user';
 
-setUserAdapter({ userId, userName, userAvatar, userLocale, isAnonymous });
+setUserAdapter({ getUserId, getUserName, getUserAvatar, getUserLocale, getUserAnonymous });
 
-function userId(user: IUserBase): TableIdentity {
+function getUserId(user: IUserBase): TableIdentity {
   return cast<IUser>(user).id;
 }
 
-function userName(user: IUserBase): string {
+function getUserName(user: IUserBase): string {
   return cast<IUser>(user).name;
 }
 
-function userAvatar(user: IUserBase): string | undefined {
+function getUserAvatar(user: IUserBase): string | undefined {
   return cast<IUser>(user).avatar;
 }
 
-function userLocale(user: IUserBase): keyof ILocalInfos | undefined {
+function getUserLocale(user: IUserBase): keyof ILocalInfos | undefined {
   return cast<IUser>(user).locale;
 }
 
-function isAnonymous(user: IUserBase): boolean {
+function getUserAnonymous(user: IUserBase): boolean {
   return cast<IUser>(user).id === -1;
 }

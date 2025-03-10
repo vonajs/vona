@@ -8,22 +8,22 @@ export function setUserAdapter(userAdapter: IUserAdapter): void {
   __userAdapter = userAdapter;
 }
 
-export function userId(user: IUserBase): TableIdentity {
-  return __userAdapter.userId(user);
+export function getUserId(user: IUserBase): TableIdentity {
+  return __userAdapter.getUserId(user);
 }
 
-export function userName(user: IUserBase): string {
-  return __userAdapter.userName(user);
+export function getUserName(user: IUserBase): string {
+  return __userAdapter.getUserName(user);
 }
 
-export function userAvatar(user: IUserBase): string | undefined {
-  return __userAdapter.userAvatar(user);
+export function getUserAvatar(user: IUserBase): string | undefined {
+  return __userAdapter.getUserAvatar(user);
 }
 
-export function userLocale(user: IUserBase): keyof ILocalInfos | undefined {
-  return __userAdapter.userLocale(user);
+export function getUserLocale(user: IUserBase): keyof ILocalInfos | undefined {
+  return __userAdapter.getUserLocale(user);
 }
 
-export function isAnonymous(user: IUserBase): boolean {
-  return __userAdapter.isAnonymous(user);
+export function getUserAnonymous(user: IUserBase): boolean {
+  return __userAdapter.getUserAnonymous(user);
 }

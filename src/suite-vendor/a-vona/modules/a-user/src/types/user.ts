@@ -16,11 +16,11 @@ export interface IPassportBase {
 }
 
 export interface IUserAdapter {
-  userId(user: IUserBase): TableIdentity;
-  userName (user: IUserBase): string;
-  userAvatar (user: IUserBase): string | undefined;
-  userLocale(user: IUserBase): keyof ILocalInfos | undefined;
-  isAnonymous(user: IUserBase): boolean;
+  getUserId(user: IUserBase): TableIdentity;
+  getUserName (user: IUserBase): string;
+  getUserAvatar (user: IUserBase): string | undefined;
+  getUserLocale(user: IUserBase): keyof ILocalInfos | undefined;
+  getUserAnonymous(user: IUserBase): boolean;
 }
 
 export interface IPassportAdapter {
