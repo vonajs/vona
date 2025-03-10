@@ -1,5 +1,6 @@
 import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
+import type { IUserBase } from 'vona-module-a-user';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -34,9 +35,9 @@ export class ServiceRedisToken extends BeanBase {
     await this.redisAuth.del(key);
   }
 
-  async removeAll(payloadData: IPayloadData) {
+  async removeAll(user: IUserBase) {
     const keyPrefix = this.redisAuth.options.keyPrefix;
-    const keyPattern = this._getAuthRedisKeyPattern(payloadData, keyPrefix);
+    const keyPattern = this._getAuthRedisKeyPattern(user, keyPrefix);
     const keys = await this.redisAuth.keys(keyPattern);
     for (const fullKey of keys) {
       const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
@@ -49,7 +50,7 @@ export class ServiceRedisToken extends BeanBase {
     return `authToken:${this.ctx.instance.id}:${payloadData.userId}:${payloadData.authId}`;
   }
 
-  private _getAuthRedisKeyPattern(payloadData: IPayloadData, keyPrefix: string | undefined) {
-    return `${keyPrefix ?? ''}authToken:${this.ctx.instance.id}:${payloadData.userId}:*`;
+  private _getAuthRedisKeyPattern(user: IUserBase, keyPrefix: string | undefined) {
+    return `${keyPrefix ?? ''}authToken:${this.ctx.instance.id}:${user.id}:*`;
   }
 }

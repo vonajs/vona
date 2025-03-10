@@ -1,4 +1,4 @@
-import type { IAuthTokenAdapter } from 'vona-module-a-user';
+import type { IAuthTokenAdapter, IUserBase } from 'vona-module-a-user';
 import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -21,5 +21,9 @@ export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapt
 
   async remove(payloadData: IPayloadData): Promise<void> {
     await this.scope.service.redisToken.remove(payloadData);
+  }
+
+  async removeAll(user: IUserBase): Promise<void> {
+    await this.scope.service.redisToken.removeAll(user);
   }
 }

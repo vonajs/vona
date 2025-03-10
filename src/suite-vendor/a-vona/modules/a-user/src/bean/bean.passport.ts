@@ -103,9 +103,13 @@ export class BeanPassport extends BeanBase {
     return userAnonymous;
   }
 
+  public async kickOut(user: IUserBase) {
+    await this.authTokenAdapter.removeAll(user);
+  }
+
   /** default is jwt */
-  public async checkAuthToken() {
-    const payloadData = await this.bean.jwt.get('access').verify();
+  public async checkAuthToken(accessToken?: string) {
+    const payloadData = await this.bean.jwt.get('access').verify(accessToken);
     if (!payloadData) return; // no jwt token
     const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
