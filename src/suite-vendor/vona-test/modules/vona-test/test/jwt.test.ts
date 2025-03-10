@@ -38,8 +38,10 @@ describe('jwt.test.ts', () => {
       // logout
       await app.bean.executor.performAction('post', '/vona/test/jwt/logout');
       // isAuthenticated: isolate + header
-      isAuthenticated = await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
-      assert.equal(isAuthenticated, false);
+      const [isAuthenticated3] = await catchError(async () => {
+        return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
+      });
+      assert.equal(isAuthenticated3, undefined);
     });
   });
 });
