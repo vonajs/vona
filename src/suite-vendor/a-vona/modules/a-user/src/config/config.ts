@@ -7,8 +7,8 @@ export function config(_app: VonaApplication) {
   return {
     tableIdentity: {
       current: {
-        user: 'number' as keyof TableIdentityType,
-        auth: 'number' as keyof TableIdentityType,
+        user: 'number' as TableIdentityType,
+        auth: 'number' as TableIdentityType,
       },
       fields: {
         user: {

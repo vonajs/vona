@@ -1,40 +1,24 @@
 import type { VonaApplication } from 'vona';
 import knex from 'knex';
 import TableBuilder from 'knex/lib/schema/tablebuilder.js';
+import { __ThisModule__ } from '../.metadata/this.ts';
 
 export function ExtendKnex(app: VonaApplication) {
   ExtendTableBuilder(app);
 }
 
-export function ExtendTableBuilder(_app: VonaApplication) {
-  delete TableBuilder.prototype.basicFields;
-  knex.TableBuilder.extend('basicFields', function (options?: IBasicFieldsOptions) {
-    options = options || ({} as IBasicFieldsOptions);
-    if (options.id !== false) this.increments();
-    if (options.timestamps !== false) this.timestamps(true, true, true);
-    if (options.deleted !== false) this.boolean('deleted').defaultTo(false);
-    if (options.iid !== false) this.integer('iid').defaultTo(0);
-    return this;
+export function ExtendTableBuilder(app: VonaApplication) {
+  const scope = app.bean.scope(__ThisModule__);
+  const configTableIdentity = scope.config.tableIdentity;
+  // user
+  const configFieldUser = configTableIdentity.fields.user[configTableIdentity.current.user];
+  delete TableBuilder.prototype.userIdPrimary;
+  delete TableBuilder.prototype.userId;
+  knex.TableBuilder.extend('userIdPrimary', function (this: knex.Knex.TableBuilder) {
+    return configFieldUser.userIdPrimary.call(this);
   });
-  delete TableBuilder.prototype.int0;
-  knex.TableBuilder.extend('int0', function (columnName) {
-    return this.integer(columnName).defaultTo(0);
-  });
-  delete TableBuilder.prototype.int1;
-  knex.TableBuilder.extend('int1', function (columnName) {
-    return this.integer(columnName).defaultTo(1);
-  });
-  ['description'].forEach(method => {
-    delete TableBuilder.prototype[method];
-    knex.TableBuilder.extend(method, function (length = 255) {
-      return this.string(method, length);
-    });
-  });
-  ['content'].forEach(method => {
-    delete TableBuilder.prototype[method];
-    knex.TableBuilder.extend(method, function (useText) {
-      return useText ? this.text(method) : this.json(method);
-    });
+  knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName: string) {
+    return configFieldUser.userId.call(this, columnName);
   });
 }
 
