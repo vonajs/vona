@@ -309,9 +309,9 @@ declare module 'vona-module-vona-test' {
 }
 export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
-export * from '../controller/jwt.ts';
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
+export * from '../controller/performAction.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -366,7 +366,6 @@ declare module 'vona' {
     'vona-test.service.transaction': ServiceTransaction;
   }
 }
-export * from '../controller/performAction.ts';
 export * from '../controller/queue.ts';
 export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
@@ -387,7 +386,6 @@ declare module 'vona-module-a-web' {
     'vona-test:bean': IDecoratorControllerOptions;
     'vona-test:cacheMem': IDecoratorControllerOptions;
     'vona-test:cacheRedis': IDecoratorControllerOptions;
-    'vona-test:jwt': IDecoratorControllerOptions;
     'vona-test:onion': IDecoratorControllerOptions;
     'vona-test:passport': IDecoratorControllerOptions;
     'vona-test:performAction': IDecoratorControllerOptions;
@@ -411,11 +409,6 @@ declare module 'vona-module-vona-test' {
   }
 
   export interface ControllerCacheRedis {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerJwt {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }

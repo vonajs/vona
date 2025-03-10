@@ -1,3 +1,4 @@
+import type { IPayloadDataBase } from 'vona-module-a-jwt';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
@@ -6,42 +7,21 @@ import { app } from 'vona-mock';
 describe('jwt.test.ts', () => {
   it('action:jwt', async () => {
     await app.bean.executor.mockCtx(async () => {
-      // login
-      const jwt = await app.bean.executor.performAction('post', '/vona/test/jwt/login', {
-        body: {
-          name: 'admin',
-        },
+      // sign
+      const payloadData: IPayloadDataBase = { userId: 1, authId: 1 };
+      const token = await app.bean.jwt.get('access').sign(payloadData);
+      assert.equal(token.split('.').length, 3);
+      // verify
+      const [payloadDataVerified1] = await catchError(async () => {
+        return await app.bean.jwt.get('refresh').verify(token);
       });
-      assert.equal(!!jwt?.accessToken, true);
-      // isAuthenticated
-      let isAuthenticated = await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
-      assert.equal(isAuthenticated, true);
-      // isAuthenticated: isolate
-      const [isAuthenticated2, _err] = await catchError(async () => {
-        return await app.bean.executor.newCtxIsolate(async () => {
-          return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
-        });
-      });
-      assert.equal(isAuthenticated2, undefined);
-      // isAuthenticated: isolate + header
-      isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
-        return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated', { authToken: jwt.accessToken });
-      });
-      assert.equal(isAuthenticated, true);
-      // refresh
-      const jwtNew = await app.bean.executor.performAction('post', '/vona/test/jwt/refresh', {
-        body: {
-          refreshToken: jwt.refreshToken,
-        },
-      });
-      assert.notEqual(jwt?.accessToken, jwtNew.accessToken);
-      // logout
-      await app.bean.executor.performAction('post', '/vona/test/jwt/logout');
-      // isAuthenticated: isolate + header
-      const [isAuthenticated3] = await catchError(async () => {
-        return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
-      });
-      assert.equal(isAuthenticated3, undefined);
+      assert.equal(payloadDataVerified1, undefined);
+      // verify
+      const payloadDataVerified2 = await app.bean.jwt.get('access').verify(token);
+      assert.deepEqual(payloadData, payloadDataVerified2);
+      // create jwt token
+      const jwtToken = await app.bean.jwt.create(payloadData);
+      assert.equal(!!jwtToken.accessToken, true);
     });
   });
 });
