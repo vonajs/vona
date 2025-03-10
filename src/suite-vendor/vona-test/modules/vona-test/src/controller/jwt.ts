@@ -19,4 +19,9 @@ export class ControllerJwt extends BeanBase {
   isAuthenticated(): boolean {
     return this.bean.passport.isAuthenticated;
   }
+
+  @Post('refresh')
+  async refresh() {
+    await this.bean.passport.refreshAuthToken();
+  }
 }

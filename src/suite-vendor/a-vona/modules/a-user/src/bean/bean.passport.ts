@@ -99,4 +99,11 @@ export class BeanPassport extends BeanBase {
     if (!passport) return this.app.throw(401);
     this.setCurrent(passport);
   }
+
+  public async refreshAuthToken(refreshToken: string) {
+    const payloadData = await this.bean.jwt.get('refresh').verify(refreshToken);
+    if (!payloadData) return this.app.throw(401);
+    await this.passportAdapter.refreshAuthToken(payloadData);
+    return await this.bean.jwt.create(payloadData);
+  }
 }

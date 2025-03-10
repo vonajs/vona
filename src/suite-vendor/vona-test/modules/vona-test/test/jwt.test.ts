@@ -28,6 +28,7 @@ describe('jwt.test.ts', () => {
         return await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated', { authToken: jwt.accessToken });
       });
       assert.equal(isAuthenticated, true);
+      // refresh
     });
   });
 });

@@ -72,6 +72,10 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     await this.scope.service.redisToken.remove(payloadData);
   }
 
+  async refreshAuthToken(payloadData: IPayloadData): Promise<void> {
+    await this.scope.service.redisToken.refresh(payloadData);
+  }
+
   private async _getUsersDemo() {
     if (this.app.meta.isProd)
       return;

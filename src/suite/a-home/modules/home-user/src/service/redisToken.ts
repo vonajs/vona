@@ -1,4 +1,4 @@
-import type { IPayloadData } from '../types/user.ts';
+import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -22,7 +22,7 @@ export class ServiceRedisToken extends BeanBase {
     await this.redisAuth.set(key, payloadData.token, 'EX', this.scope.config.redisToken.maxAge);
   }
 
-  async renew(payloadData: IPayloadData) {
+  async refresh(payloadData: IPayloadData) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key) return this.app.throw(401);
     await this.redisAuth.expire(key, this.scope.config.redisToken.maxAge);
