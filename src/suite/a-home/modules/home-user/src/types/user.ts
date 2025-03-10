@@ -1,17 +1,15 @@
 import type { ILocalInfos } from 'vona';
+import type { TableIdentity } from 'vona-module-a-database';
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthBase, IPassportBase, IUserBase } from 'vona-module-a-user';
 
 export interface IUser extends IUserBase {
-  id: number;
   name: string;
   avatar?: string;
   locale?: keyof ILocalInfos | undefined;
 }
 
-export interface IAuth extends IAuthBase {
-  id: number;
-}
+export interface IAuth extends IAuthBase {}
 
 export interface IPassport extends IPassportBase {
   user?: IUser;
@@ -19,7 +17,7 @@ export interface IPassport extends IPassportBase {
 }
 
 export interface IPayloadData extends IPayloadDataBase {
-  userId: number;
-  authId: number;
+  userId: TableIdentity;
+  authId: TableIdentity;
   token?: string;
 }

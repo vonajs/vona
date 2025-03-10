@@ -2,9 +2,13 @@ import type { ILocalInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
 
-export interface IUserBase {}
+export interface IUserBase {
+  id: TableIdentity;
+}
 
-export interface IAuthBase {}
+export interface IAuthBase {
+  id: TableIdentity;
+}
 
 export interface IPassportBase {
   user?: IUserBase;

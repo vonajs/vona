@@ -3,7 +3,7 @@ import type { IAuthIdRecord } from '../types/auth.ts';
 import type { IPassportAdapter, IPassportBase, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { getAuthIdSystem } from '../types/auth.ts';
+import { getAuthIdSystem } from '../lib/auth.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {

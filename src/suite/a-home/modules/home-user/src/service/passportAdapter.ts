@@ -38,7 +38,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
 
   async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
     // todo: check if getBean of bean.auth
-    return auth;
+    return auth as unknown as IAuthBase | undefined;
   }
 
   async serializePassport(passport: IPassport): Promise<IPayloadData> {
