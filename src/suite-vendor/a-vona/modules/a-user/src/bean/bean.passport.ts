@@ -1,4 +1,4 @@
-import type { IJwtToken, IPayloadDataBase } from 'vona-module-a-jwt';
+import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
@@ -53,8 +53,9 @@ export class BeanPassport extends BeanBase {
     // current
     const passport = this.getCurrent();
     if (!passport) return;
-    // removePassport
-    await this.passportAdapter.removePassport(passport);
+    // removeAuthToken
+    const payloadData = await this.passportAdapter.serializePassport(passport);
+    await this.passportAdapter.removeAuthToken(payloadData);
     // event
     await this.scope.event.signout.emit(passport);
     // ok

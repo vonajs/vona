@@ -61,13 +61,6 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return { user, auth };
   }
 
-  async removePassport(passport: IPassport): Promise<void> {
-    const userId = passport.user!.id;
-    const authId = passport.auth!.id;
-    const payloadData: IPayloadData = { userId, authId };
-    await this.removeAuthToken(payloadData);
-  }
-
   async verifyAuthToken(payloadData: IPayloadData): Promise<boolean> {
     return await this.scope.service.redisToken.verify(payloadData);
   }

@@ -16,7 +16,6 @@ export interface IPassportAdapter {
   setCurrent(passport: IPassportBase | undefined): Promise<IPassportBase | undefined>;
   serializePassport(passport: IPassportBase): Promise<IPayloadDataBase>;
   deserializePassport(payloadData: IPayloadDataBase): Promise<IPassportBase | undefined>;
-  removePassport(passport: IPassportBase): Promise<void>;
   verifyAuthToken(payloadData: IPayloadDataBase): Promise<boolean>;
   refreshAuthToken(payloadData: IPayloadDataBase): Promise<void>;
   removeAuthToken(payloadData: IPayloadDataBase): Promise<void>;
