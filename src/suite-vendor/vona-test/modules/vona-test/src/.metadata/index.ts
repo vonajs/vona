@@ -473,6 +473,8 @@ declare module 'vona-module-a-web' {
     '/vona/test/cacheMem': '/vona/test/cacheMem';
     '/vona/test/cacheRedis': '/vona/test/cacheRedis';
     '/vona/test/jwt/login': '/vona/test/jwt/login';
+    '/vona/test/jwt/refresh': '/vona/test/jwt/refresh';
+    '/vona/test/jwt/logout': '/vona/test/jwt/logout';
     '//echo': '//echo';
     '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
     '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;

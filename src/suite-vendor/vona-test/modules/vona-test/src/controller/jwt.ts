@@ -21,7 +21,14 @@ export class ControllerJwt extends BeanBase {
   }
 
   @Post('refresh')
-  async refresh() {
-    await this.bean.passport.refreshAuthToken();
+  @Api.body(v.object(DtoJwtToken))
+  @Public()
+  async refresh(@Body('refreshToken') refreshToken: string): Promise<IJwtToken> {
+    return await this.bean.passport.refreshAuthToken(refreshToken);
+  }
+
+  @Post('logout')
+  async logout() {
+    return await this.bean.passport.signout();
   }
 }

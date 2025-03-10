@@ -29,7 +29,17 @@ describe('jwt.test.ts', () => {
       });
       assert.equal(isAuthenticated, true);
       // refresh
-      
+      const jwtNew = await app.bean.executor.performAction('post', '/vona/test/jwt/refresh', {
+        body: {
+          refreshToken: jwt.refreshToken,
+        },
+      });
+      assert.notEqual(jwt?.accessToken, jwtNew.accessToken);
+      // logout
+      await app.bean.executor.performAction('post', '/vona/test/jwt/logout');
+      // isAuthenticated: isolate + header
+      isAuthenticated = await app.bean.executor.performAction('get', '/vona/test/jwt/isAuthenticated');
+      assert.equal(isAuthenticated, false);
     });
   });
 });
