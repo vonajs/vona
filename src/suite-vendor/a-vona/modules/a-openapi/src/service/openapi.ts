@@ -154,7 +154,7 @@ export class ServiceOpenapi extends BeanBase {
     // app
     const app = this.app;
 
-    // action options
+    // action options: should not extend controllerOpenApiOptions
     const actionOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(
       SymbolOpenApiOptions,
       controller.prototype,
