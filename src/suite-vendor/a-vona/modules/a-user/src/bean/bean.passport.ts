@@ -1,5 +1,6 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
+import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -8,12 +9,21 @@ import { getAuthIdSystem } from '../lib/auth.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {
+  private _authTokenAdapter: IAuthTokenAdapter;
   private _passportAdapter: IPassportAdapter;
   private _mockCounter: number = 0;
 
+  private get authTokenAdapter(): IAuthTokenAdapter {
+    if (!this._authTokenAdapter) {
+      const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.authToken, 'service');
+      this._authTokenAdapter = this.bean._getBean<IAuthTokenAdapter>(beanFullName as never);
+    }
+    return this._authTokenAdapter;
+  }
+
   private get passportAdapter(): IPassportAdapter {
     if (!this._passportAdapter) {
-      const beanFullName = beanFullNameFromOnionName(this.scope.config.passportAdapter, 'service');
+      const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.passport, 'service');
       this._passportAdapter = this.bean._getBean<IPassportAdapter>(beanFullName as never);
     }
     return this._passportAdapter;

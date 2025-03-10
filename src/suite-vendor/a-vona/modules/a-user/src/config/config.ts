@@ -55,6 +55,9 @@ export function config(_app: VonaApplication) {
         },
       },
     },
-    passportAdapter: 'home-user:passportAdapter' as keyof IServiceRecord,
+    adapter: {
+      authToken: 'home-user:authTokenAdapter' as keyof IServiceRecord,
+      passport: 'home-user:passportAdapter' as keyof IServiceRecord,
+    },
   };
 }
