@@ -28,15 +28,15 @@ export class BeanPassport extends BeanBase {
     this.ctx.state.passport = await this.passportAdapter.setCurrent(passport);
   }
 
-  public getCurrent<T extends IPassportBase = IPassportBase>(): T | undefined {
-    return this.ctx.state.passport as T | undefined;
+  public getCurrent(): IPassportBase | undefined {
+    return this.ctx.state.passport;
   }
 
-  public getCurrentUser<T extends IUserBase = IUserBase>(): T | undefined {
-    return this.ctx.state.passport?.user as T | undefined;
+  public getCurrentUser(): IUserBase | undefined {
+    return this.ctx.state.passport?.user;
   }
 
-  public async signin<T extends IPassportBase>(passport: T, options?: ISigninOptions): Promise<IJwtToken> {
+  public async signin(passport: IPassportBase, options?: ISigninOptions): Promise<IJwtToken> {
     const authToken = options?.authToken ?? 'jwt';
     // current
     await this.setCurrent(passport);
@@ -83,12 +83,12 @@ export class BeanPassport extends BeanBase {
     await this.setCurrent(passport);
   }
 
-  public async createUserAnonymous<T extends IUserBase = IUserBase>(): Promise<T> {
+  public async createUserAnonymous(): Promise<IUserBase> {
     const userAnonymous = await this.passportAdapter.createUserAnonymous();
     // event
     await this.scope.event.createUserAnonymous.emit(userAnonymous);
     // ok
-    return userAnonymous as T;
+    return userAnonymous;
   }
 
   /** default is jwt */
