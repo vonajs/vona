@@ -34,12 +34,22 @@ export class ServiceRedisToken extends BeanBase {
     await this.redisAuth.del(key);
   }
 
+  async removeAll(payloadData: IPayloadData) {
+    const keyPrefix = this.redisAuth.options.keyPrefix;
+    const keyPattern = this._getAuthRedisKeyPattern(payloadData, keyPrefix);
+    const keys = await this.redisAuth.keys(keyPattern);
+    for (const fullKey of keys) {
+      const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
+      await this.redisAuth.del(key);
+    }
+  }
+
   private _getAuthRedisKey(payloadData: IPayloadData) {
     if (!this.ctx.instance) return;
     return `authToken:${this.ctx.instance.id}:${payloadData.userId}:${payloadData.authId}`;
   }
 
-  _getAuthRedisKeyPattern({ user, keyPrefix }: any) {
-    return `${keyPrefix}authToken:${this.ctx.instance.id}:${user.id}:*`;
+  private _getAuthRedisKeyPattern(payloadData: IPayloadData, keyPrefix: string | undefined) {
+    return `${keyPrefix ?? ''}authToken:${this.ctx.instance.id}:${payloadData.userId}:*`;
   }
 }
