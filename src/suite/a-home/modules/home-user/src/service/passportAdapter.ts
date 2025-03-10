@@ -43,6 +43,10 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return auth as unknown as IAuthBase | undefined;
   }
 
+  async setCurrent(passport: IPassport | undefined): Promise<IPassport | undefined> {
+    return passport;
+  }
+
   async serializePassport(passport: IPassport): Promise<IPayloadData> {
     const userId = passport.user!.id;
     const authId = passport.auth!.id;

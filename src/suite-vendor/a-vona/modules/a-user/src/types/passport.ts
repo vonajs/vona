@@ -13,6 +13,7 @@ export interface IPassportAdapter {
   getUser(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   updateUser(user: Partial<IUserBase>): Promise<void>;
   getAuth(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
+  setCurrent(passport: IPassportBase | undefined): Promise<IPassportBase | undefined>;
   serializePassport(passport: IPassportBase): Promise<IPayloadDataBase>;
   deserializePassport(payloadData: IPayloadDataBase): Promise<IPassportBase | undefined>;
   removePassport(passport: IPassportBase): Promise<void>;

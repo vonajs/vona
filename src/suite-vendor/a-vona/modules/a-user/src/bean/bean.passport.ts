@@ -24,8 +24,8 @@ export class BeanPassport extends BeanBase {
     return !!passport && !!passport.auth;
   }
 
-  public setCurrent<T extends IPassportBase>(passport: T | undefined) {
-    this.ctx.state.passport = passport;
+  public async setCurrent<T extends IPassportBase>(passport: T | undefined) {
+    this.ctx.state.passport = await this.passportAdapter.setCurrent(passport);
   }
 
   public getCurrent<T extends IPassportBase = IPassportBase>(): T | undefined {
@@ -39,7 +39,7 @@ export class BeanPassport extends BeanBase {
   public async signin<T extends IPassportBase>(passport: T, options?: ISigninOptions): Promise<IJwtToken> {
     const authToken = options?.authToken ?? 'jwt';
     // current
-    this.setCurrent(passport);
+    await this.setCurrent(passport);
     // event
     await this.scope.event.signin.emit(passport);
     // serializePassport: payloadData for client certificate
@@ -57,7 +57,7 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signout.emit(passport);
     // ok
-    this.setCurrent(undefined);
+    await this.setCurrent(undefined);
   }
 
   public async signinSystem<K extends keyof IAuthIdRecord>(
@@ -80,7 +80,7 @@ export class BeanPassport extends BeanBase {
   public async signinWithAnonymous(): Promise<void> {
     const userAnonymous = await this.createUserAnonymous();
     const passport = { user: userAnonymous, auth: undefined };
-    this.setCurrent(passport);
+    await this.setCurrent(passport);
   }
 
   public async createUserAnonymous<T extends IUserBase = IUserBase>(): Promise<T> {
@@ -97,7 +97,7 @@ export class BeanPassport extends BeanBase {
     if (!payloadData) return; // no jwt token
     const passport = await this.passportAdapter.deserializePassport(payloadData);
     if (!passport) return this.app.throw(401);
-    this.setCurrent(passport);
+    await this.setCurrent(passport);
   }
 
   public async refreshAuthToken(refreshToken: string) {
