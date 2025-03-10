@@ -24,7 +24,7 @@ export class BeanPassport extends BeanBase {
     return !!passport && !!passport.auth;
   }
 
-  public async setCurrent<T extends IPassportBase>(passport: T | undefined) {
+  public async setCurrent(passport: IPassportBase | undefined) {
     this.ctx.state.passport = await this.passportAdapter.setCurrent(passport);
   }
 
