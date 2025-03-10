@@ -43,7 +43,8 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serializePassport: payloadData for client certificate
-    const payloadData = await this.passportAdapter.serializePassport(passport);
+    let payloadData = await this.passportAdapter.serializePassport(passport);
+    payloadData = await this.passportAdapter.createAuthToken(payloadData);
     if (authToken !== 'jwt') throw new Error('Only support jwt');
     return await this.bean.jwt.create(payloadData);
   }
@@ -95,8 +96,7 @@ export class BeanPassport extends BeanBase {
   public async checkAuthToken() {
     const payloadData = await this.bean.jwt.get('access').verify();
     if (!payloadData) return; // no jwt token
-    // 本质上就是verify redis token
-    const verified = await this.verifyAuthToken(payloadData);
+    const verified = await this.passportAdapter.verifyAuthToken(payloadData);
     if (!verified) return this.app.throw(401);
     const passport = await this.passportAdapter.deserializePassport(payloadData);
     if (!passport) return this.app.throw(401);
@@ -106,7 +106,8 @@ export class BeanPassport extends BeanBase {
   public async refreshAuthToken(refreshToken: string) {
     let payloadData = await this.bean.jwt.get('refresh').verify(refreshToken);
     if (!payloadData) return this.app.throw(401);
-    // 也需要verify redis token
+    const verified = await this.passportAdapter.verifyAuthToken(payloadData);
+    if (!verified) return this.app.throw(401);
     const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
     if (configRefreshAuthToken.recreate) {
       await this.passportAdapter.removeAuthToken(payloadData);
@@ -115,9 +116,5 @@ export class BeanPassport extends BeanBase {
       await this.passportAdapter.refreshAuthToken(payloadData);
     }
     return await this.bean.jwt.create(payloadData);
-  }
-
-  public async verifyAuthToken(payloadData: IPayloadDataBase): Promise<boolean> {
-    return await this.passportAdapter.verifyAuthToken(payloadData);
   }
 }
