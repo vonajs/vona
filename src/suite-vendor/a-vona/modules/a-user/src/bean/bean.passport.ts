@@ -52,8 +52,8 @@ export class BeanPassport extends BeanBase {
     await this.setCurrent(passport);
     // event
     await this.scope.event.signin.emit(passport);
-    // serializePassport: payloadData for client certificate
-    let payloadData = await this.passportAdapter.serializePassport(passport);
+    // serialize: payloadData for client certificate
+    let payloadData = await this.passportAdapter.serialize(passport);
     payloadData = await this.authTokenAdapter.create(payloadData);
     if (authToken !== 'jwt') throw new Error('Only support jwt');
     return await this.bean.jwt.create(payloadData);
@@ -64,7 +64,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.getCurrent();
     if (!passport) return;
     // removeAuthToken
-    const payloadData = await this.passportAdapter.serializePassport(passport);
+    const payloadData = await this.passportAdapter.serialize(passport);
     await this.authTokenAdapter.remove(payloadData);
     // event
     await this.scope.event.signout.emit(passport);
@@ -109,7 +109,7 @@ export class BeanPassport extends BeanBase {
     if (!payloadData) return; // no jwt token
     const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
-    const passport = await this.passportAdapter.deserializePassport(payloadData);
+    const passport = await this.passportAdapter.deserialize(payloadData);
     if (!passport) return this.app.throw(401);
     await this.setCurrent(passport);
   }

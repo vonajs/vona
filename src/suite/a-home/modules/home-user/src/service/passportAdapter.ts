@@ -47,13 +47,13 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return passport;
   }
 
-  async serializePassport(passport: IPassportBase): Promise<IPayloadData> {
+  async serialize(passport: IPassportBase): Promise<IPayloadData> {
     const userId = passport.user!.id;
     const authId = passport.auth!.id;
     return { userId, authId };
   }
 
-  async deserializePassport(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
+  async deserialize(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
     const user = await this.getUser({ id: payloadData.userId });
     if (!user) return;
     const auth = await this.getAuth({ id: payloadData.authId });
