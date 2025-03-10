@@ -36,6 +36,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Post('echo2/:userId/:userName')
+  // @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @UseGuardGlobal('a-user:passport', { public: true })
   // echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
