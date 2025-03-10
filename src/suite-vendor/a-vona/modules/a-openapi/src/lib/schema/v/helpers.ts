@@ -1,5 +1,6 @@
-import type { IpVersion, z } from 'zod';
+import type { IpVersion } from 'zod';
 import type { errorUtil } from '../../zod/errorUtil.ts';
+import { z } from 'zod';
 
 export function schemaEmail(message?: errorUtil.ErrMessage) {
   return function (schema: z.ZodString): z.ZodString {
@@ -41,5 +42,11 @@ export function schemaMin(min: number, message?: errorUtil.ErrMessage) {
 export function schemaMax(max: number, message?: errorUtil.ErrMessage) {
   return function (schema: any): any {
     return schema.max(max, message);
+  };
+}
+
+export function schemaTableIdentity() {
+  return function (_schema: any): any {
+    return z.union([z.string(), z.number()]);
   };
 }
