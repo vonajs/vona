@@ -55,10 +55,6 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
   }
 
   async deserializePassport(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
-    if (!payloadData) return this.app.throw(401);
-    // verify redis token
-    const verified = await this.verifyAuthToken(payloadData);
-    if (!verified) return;
     const user = await this.getUser({ id: payloadData.userId });
     if (!user) return;
     const auth = await this.getAuth({ id: payloadData.authId });

@@ -1,4 +1,4 @@
-import type { IJwtToken } from 'vona-module-a-jwt';
+import type { IJwtToken, IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
@@ -95,6 +95,9 @@ export class BeanPassport extends BeanBase {
   public async checkAuthToken() {
     const payloadData = await this.bean.jwt.get('access').verify();
     if (!payloadData) return; // no jwt token
+    // 本质上就是verify redis token
+    const verified = await this.verifyAuthToken(payloadData);
+    if (!verified) return this.app.throw(401);
     const passport = await this.passportAdapter.deserializePassport(payloadData);
     if (!passport) return this.app.throw(401);
     await this.setCurrent(passport);
@@ -103,6 +106,7 @@ export class BeanPassport extends BeanBase {
   public async refreshAuthToken(refreshToken: string) {
     let payloadData = await this.bean.jwt.get('refresh').verify(refreshToken);
     if (!payloadData) return this.app.throw(401);
+    // 也需要verify redis token
     const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
     if (configRefreshAuthToken.recreate) {
       await this.passportAdapter.removeAuthToken(payloadData);
@@ -111,5 +115,9 @@ export class BeanPassport extends BeanBase {
       await this.passportAdapter.refreshAuthToken(payloadData);
     }
     return await this.bean.jwt.create(payloadData);
+  }
+
+  public async verifyAuthToken(payloadData: IPayloadDataBase): Promise<boolean> {
+    return await this.passportAdapter.verifyAuthToken(payloadData);
   }
 }
