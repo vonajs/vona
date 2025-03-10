@@ -1,4 +1,5 @@
 export type TableIdentity = string | number;
+export type TableIdentityType = 'string' | 'number';
 
 export const TableIdentity = {
   isZero(id: TableIdentity) {
