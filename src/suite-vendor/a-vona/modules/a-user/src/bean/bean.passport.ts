@@ -54,7 +54,7 @@ export class BeanPassport extends BeanBase {
     await this.scope.event.signin.emit(passport);
     // serializePassport: payloadData for client certificate
     let payloadData = await this.passportAdapter.serializePassport(passport);
-    payloadData = await this.passportAdapter.createAuthToken(payloadData);
+    payloadData = await this.authTokenAdapter.create(payloadData);
     if (authToken !== 'jwt') throw new Error('Only support jwt');
     return await this.bean.jwt.create(payloadData);
   }
@@ -65,7 +65,7 @@ export class BeanPassport extends BeanBase {
     if (!passport) return;
     // removeAuthToken
     const payloadData = await this.passportAdapter.serializePassport(passport);
-    await this.passportAdapter.removeAuthToken(payloadData);
+    await this.authTokenAdapter.remove(payloadData);
     // event
     await this.scope.event.signout.emit(passport);
     // ok
@@ -107,7 +107,7 @@ export class BeanPassport extends BeanBase {
   public async checkAuthToken() {
     const payloadData = await this.bean.jwt.get('access').verify();
     if (!payloadData) return; // no jwt token
-    const verified = await this.passportAdapter.verifyAuthToken(payloadData);
+    const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
     const passport = await this.passportAdapter.deserializePassport(payloadData);
     if (!passport) return this.app.throw(401);
@@ -117,14 +117,14 @@ export class BeanPassport extends BeanBase {
   public async refreshAuthToken(refreshToken: string) {
     let payloadData = await this.bean.jwt.get('refresh').verify(refreshToken);
     if (!payloadData) return this.app.throw(401);
-    const verified = await this.passportAdapter.verifyAuthToken(payloadData);
+    const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
     const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
     if (configRefreshAuthToken.recreate) {
-      await this.passportAdapter.removeAuthToken(payloadData);
-      payloadData = await this.passportAdapter.createAuthToken(payloadData);
+      await this.authTokenAdapter.remove(payloadData);
+      payloadData = await this.authTokenAdapter.create(payloadData);
     } else if (configRefreshAuthToken.refresh) {
-      await this.passportAdapter.refreshAuthToken(payloadData);
+      await this.authTokenAdapter.refresh(payloadData);
     }
     return await this.bean.jwt.create(payloadData);
   }
