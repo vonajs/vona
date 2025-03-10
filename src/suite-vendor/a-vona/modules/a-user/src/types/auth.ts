@@ -7,3 +7,7 @@ export interface IAuthIdRecord {
 export interface IAuthBase {
   id: TableIdentity;
 }
+
+export interface IAuthAdapter {
+  getAuthId(user: IAuthBase): TableIdentity;
+}

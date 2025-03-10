@@ -1,5 +1,7 @@
 import type { IAuthBase, IPassportAdapter, IPassportBase, IUserBase } from 'vona-module-a-user';
-import type { IAuth, IPassport, IPayloadData, IUser } from '../types/user.ts';
+import type { IAuth } from '../types/auth.ts';
+import type { IPassport, IPayloadData } from '../types/passport.ts';
+import type { IUser } from '../types/user.ts';
 import { BeanBase, deepExtend, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
 
