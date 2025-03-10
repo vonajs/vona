@@ -20,22 +20,25 @@ export function ExtendTableBuilder(app: VonaApplication) {
   knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName: string) {
     return configFieldUser.userId.call(this, columnName);
   });
+  // auth
+  const configFieldAuth = configTableIdentity.fields.auth[configTableIdentity.current.auth];
+  delete TableBuilder.prototype.authIdPrimary;
+  delete TableBuilder.prototype.authId;
+  knex.TableBuilder.extend('authIdPrimary', function (this: knex.Knex.TableBuilder) {
+    return configFieldAuth.authIdPrimary.call(this);
+  });
+  knex.TableBuilder.extend('authId', function (this: knex.Knex.TableBuilder, columnName: string) {
+    return configFieldAuth.authId.call(this, columnName);
+  });
 }
 
 declare module 'knex' {
   namespace Knex {
     interface TableBuilder {
-      basicFields(options?: IBasicFieldsOptions): Knex.TableBuilder;
-      int0(columnName: string): Knex.ColumnBuilder;
-      int1(columnName: string): Knex.ColumnBuilder;
-      atomId(): Knex.ColumnBuilder;
-      itemId(): Knex.ColumnBuilder;
-      userId(): Knex.ColumnBuilder;
-      atomClassId(): Knex.ColumnBuilder;
-      atomIdMain(): Knex.ColumnBuilder;
-      atomClassIdMain(): Knex.ColumnBuilder;
-      description(length?: number): Knex.ColumnBuilder;
-      content(useText?: boolean): Knex.ColumnBuilder;
+      userIdPrimary(): Knex.ColumnBuilder;
+      userId(columnName: string): Knex.ColumnBuilder;
+      authIdPrimary(): Knex.ColumnBuilder;
+      authId(columnName: string): Knex.ColumnBuilder;
     }
   }
 }
