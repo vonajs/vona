@@ -30,7 +30,10 @@ export class BeanBase extends BeanBaseSimple {
 
   protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
     if (!this[SymbolLoggerChildren][childName]) {
-      this[SymbolLoggerChildren][childName] = this.$logger.child(childName);
+      this[SymbolLoggerChildren][childName] = this.app.meta.logger.get().child({
+        beanFullName: this.beanFullName,
+        name: childName,
+      });
     }
     return this[SymbolLoggerChildren][childName];
   }
