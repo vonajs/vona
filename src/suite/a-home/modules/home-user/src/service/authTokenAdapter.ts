@@ -6,7 +6,7 @@ import { Service } from 'vona-module-a-web';
 @Service()
 export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapter {
   async create(payloadData: IPayloadData): Promise<IPayloadData> {
-    const token = (payloadData.authId.toString().charAt(0) === '-') ? createHash(payloadData.authId.toString()) : uuidv4();
+    const token = (payloadData.authId.toString() === '-1') ? createHash(payloadData.authId.toString()) : uuidv4();
     const payloadDataNew = Object.assign({}, payloadData, { token });
     await this.scope.service.redisToken.create(payloadDataNew);
     return payloadDataNew;
