@@ -1,9 +1,11 @@
 import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
 import type { IStartupExecute } from 'vona-module-a-startup';
 import chalk from 'chalk';
-import TableClass from 'cli-table3';
 import { BeanBase } from 'vona';
 import { Startup } from 'vona-module-a-startup';
+
+const __tipBegin = '=================== tip: begin ===================';
+const __tipEnd = '=================== tip: end =====================';
 
 @Startup({ debounce: true, after: true, meta: { mode: 'local' } })
 export class StartupPrintApiPath extends BeanBase implements IStartupExecute {
@@ -27,15 +29,8 @@ export class StartupPrintApiPath extends BeanBase implements IStartupExecute {
       }
     }
     //
-    const table = new TableClass({
-      head: ['Title', 'Path'],
-      colWidths: [30, 80],
-    });
-    for (const output of outputs) {
-      table.push([output.title, output.path]);
-    }
-    //
-    const text = `${chalk.yellow('===== print api path =====')}\n${table.toString()}`;
+    const message = outputs.map(output => `${chalk.magenta(output.title)}: ${chalk.cyan(output.path)}`).join('\n');
+    const text = `\n${chalk.yellow(__tipBegin)}\n${message}\n${chalk.yellow(__tipEnd)}`;
     this.$logger.silly(text);
   }
 }
