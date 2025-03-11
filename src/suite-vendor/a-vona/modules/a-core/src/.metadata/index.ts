@@ -4,7 +4,6 @@ import type { BeanScopeUtil } from 'vona';
 import type { MetaStatic } from '../bean/meta.static.ts';
 /** middlewareSystem: end */
 /** meta: begin */
-import type { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.ts';
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
 import type { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.ts';
 import type { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.ts';
@@ -20,31 +19,21 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/meta.static.ts';
-/** middleware: begin */
-export * from '../bean/middleware.development.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IMiddlewareRecordGlobal {
     'a-core:gate': IMiddlewareOptionsGate;
   }
 
-  export interface IMiddlewareRecordLocal {
-    'a-core:development': IMiddlewareOptionsDevelopment;
-  }
-
 }
 declare module 'vona-module-a-core' {
-
-  export interface MiddlewareDevelopment {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
 
   export interface MiddlewareGate {
     /** @internal */
     get scope(): ScopeModuleACore;
   }
 }
+/** middleware: begin */
 export * from '../bean/middleware.gate.ts';
 /** middleware: end */
 /** middlewareSystem: begin */
