@@ -125,12 +125,13 @@ export const formatLoggerFilter = Winston.format((info, opts: any) => {
 });
 
 export const formatLoggerConsole = () => {
-  return Winston.format.printf(({ timestamp, level, stack, message, name, durationMs, ...meta }) => {
+  return Winston.format.printf(({ timestamp, level, stack, message, name, beanFullName, durationMs, ...meta }) => {
     const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
+    const textBeanFullName = beanFullName ? ` ${chalk.cyan(`[${beanFullName}]`)}` : '';
     const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
     const textMessage = ` ${message}`;
     const textDurationMs = durationMs !== undefined ? ` ${chalk.cyan(`+${durationMs}ms`)}` : '';
     const textStack = stack ? `\n${stack}` : '';
-    return `${timestamp} ${level}${textName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
+    return `${timestamp} ${level}${textName}${textBeanFullName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
   });
 };
