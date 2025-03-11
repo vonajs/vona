@@ -25,4 +25,8 @@ export class BeanJwt extends BeanBase {
       expiresIn,
     };
   }
+
+  async createTemp(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+    return await this.get('temp').sign(payloadData, options);
+  }
 }
