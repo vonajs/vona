@@ -9,17 +9,17 @@ import { Scope } from 'vona-module-a-bean';
 
 import 'vona';
 
-export * from '../bean/startup.printApiPath.ts';
+export * from '../bean/startup.printTip.ts';
 declare module 'vona-module-a-startup' {
 
   export interface IStartupRecord {
-    'a-printtip:printApiPath': IDecoratorStartupOptions;
+    'a-printtip:printTip': IDecoratorStartupOptions;
   }
 
 }
 declare module 'vona-module-a-printtip' {
 
-  export interface StartupPrintApiPath {
+  export interface StartupPrintTip {
     /** @internal */
     get scope(): ScopeModuleAPrinttip;
   }
