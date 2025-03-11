@@ -7,10 +7,12 @@ import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
 
 const SymbolText = Symbol('SymbolText');
 const SymbolLogger = Symbol('SymbolLogger');
+const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
 
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
   private [SymbolLogger]: winston.Logger;
+  private [SymbolLoggerChildren]: Record<string, winston.Logger> = {};
 
   protected get $text(): IModuleLocaleText {
     if (!this[SymbolText]) {
@@ -27,7 +29,10 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
-    return this.app.meta.logger.child(childName);
+    if (!this[SymbolLoggerChildren][childName]) {
+      this[SymbolLoggerChildren][childName] = this.$logger.child(childName);
+    }
+    return this[SymbolLoggerChildren][childName];
   }
 
   protected get $scope(): IBeanScopeContainer {
