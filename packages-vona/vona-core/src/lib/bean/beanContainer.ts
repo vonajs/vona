@@ -422,6 +422,7 @@ export class BeanContainer {
   }
 
   private _aopCacheHost() {
+    if (!this.app) throw new Error('Perhaps missing await');
     return this.app;
   }
 
