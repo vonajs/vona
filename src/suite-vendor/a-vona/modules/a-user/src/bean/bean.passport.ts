@@ -1,5 +1,5 @@
 import type { IJwtSignOptions, IJwtToken } from 'vona-module-a-jwt';
-import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
+import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
@@ -44,6 +44,10 @@ export class BeanPassport extends BeanBase {
 
   public getCurrentUser(): IUserBase | undefined {
     return this.ctx.state.passport?.user;
+  }
+
+  public getCurrentAuth(): IAuthBase | undefined {
+    return this.ctx.state.passport?.auth;
   }
 
   public async signin(passport: IPassportBase, options?: ISigninOptions): Promise<IJwtToken> {
