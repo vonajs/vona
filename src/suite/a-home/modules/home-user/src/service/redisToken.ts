@@ -1,6 +1,6 @@
+import type { IUserBase } from 'vona-module-a-user';
 import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
-import type { IUserBase } from 'vona-module-a-user';
 import { Service } from 'vona-module-a-web';
 
 @Service()

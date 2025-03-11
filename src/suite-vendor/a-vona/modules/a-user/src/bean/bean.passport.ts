@@ -119,10 +119,13 @@ export class BeanPassport extends BeanBase {
   }
 
   public async refreshAuthToken(refreshToken: string) {
+    // payloadData
     let payloadData = await this.bean.jwt.get('refresh').verify(refreshToken);
     if (!payloadData) return this.app.throw(401);
+    // verify
     const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
+    // refreshAuthToken
     const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
     if (configRefreshAuthToken.recreate) {
       await this.authTokenAdapter.remove(payloadData);
@@ -130,6 +133,7 @@ export class BeanPassport extends BeanBase {
     } else if (configRefreshAuthToken.refresh) {
       await this.authTokenAdapter.refresh(payloadData);
     }
+    // jwt token
     return await this.bean.jwt.create(payloadData);
   }
 }
