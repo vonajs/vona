@@ -5,9 +5,9 @@
   "title": "a-cabloy",
   "description": "",
   "author": "",
-  "files": [
-  ],
+  "files": [],
   "dependencies": {
+    "vona-module-a-auth": "workspace:^",
     "vona-module-a-cabloy": "workspace:^",
     "vona-module-a-status": "workspace:^",
     "vona-module-a-swagger": "workspace:^"

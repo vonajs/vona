@@ -73,7 +73,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-aspect
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-auth
+        version: link:src/suite-vendor/a-cabloy/modules/a-auth
       vona-module-a-b:
         specifier: workspace:^
         version: link:src/module/a-b
@@ -820,6 +820,9 @@ importers:
 
   src/suite-vendor/a-cabloy:
     dependencies:
+      vona-module-a-auth:
+        specifier: workspace:^
+        version: link:modules/a-auth
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:modules/a-cabloy
@@ -829,6 +832,15 @@ importers:
       vona-module-a-swagger:
         specifier: workspace:^
         version: link:modules/a-swagger
+
+  src/suite-vendor/a-cabloy/modules/a-auth:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-cabloy:
     devDependencies:
@@ -864,7 +876,7 @@ importers:
         version: link:modules/a-aspect
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:modules/a-auth
+        version: link:../a-cabloy/modules/a-auth
       vona-module-a-bean:
         specifier: workspace:^
         version: link:modules/a-bean
@@ -972,15 +984,6 @@ importers:
         version: link:modules/a-worker
 
   src/suite-vendor/a-vona/modules/a-aspect:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/a-vona/modules/a-auth:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

@@ -10,7 +10,12 @@
     },
     {
       "path": "modules/a-swagger/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-auth/tsconfig.build.json"
     }
   ],
-  "exclude": ["modules"]
+  "exclude": [
+    "modules"
+  ]
 }
