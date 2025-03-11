@@ -17,7 +17,9 @@ import type { config } from '../config/config.ts';
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+
 import { Scope } from 'vona-module-a-bean';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -93,6 +95,23 @@ export interface IModuleEvent {
   signout: EventSignout;
 }
 /** event: end */
+/** meta: begin */
+export * from '../bean/meta.printApiPath.ts';
+declare module 'vona' {
+
+  export interface IMetaRecord {
+    'a-user:printApiPath': never;
+  }
+
+}
+declare module 'vona-module-a-user' {
+
+  export interface MetaPrintApiPath {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
+}
+/** meta: end */
 /** config: begin */
 export * from '../config/config.ts';
 /** config: end */
