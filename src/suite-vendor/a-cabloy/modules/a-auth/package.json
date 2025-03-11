@@ -6,6 +6,14 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"
+    },
+    "metas": {
+      "authProvider": {
+        "optionsGlobalInterfaceName": "IDecoratorAuthProviderOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-auth",
+        "scopeResource": true,
+        "boilerplate": "cli/boilerplate/authProvider"
+      }
     }
   },
   "description": "",
