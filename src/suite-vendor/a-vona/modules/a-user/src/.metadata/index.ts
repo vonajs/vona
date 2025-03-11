@@ -94,7 +94,6 @@ export interface IModuleEvent {
   signin: EventSignin;
   signout: EventSignout;
 }
-export * from '../bean/meta.printTip1.ts';
 /** event: end */
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';
@@ -102,18 +101,12 @@ declare module 'vona' {
 
   export interface IMetaRecord {
     'a-user:printTip': never;
-    'a-user:printTip1': never;
   }
 
 }
 declare module 'vona-module-a-user' {
 
   export interface MetaPrintTip {
-    /** @internal */
-    get scope(): ScopeModuleAUser;
-  }
-
-  export interface MetaPrintTip1 {
     /** @internal */
     get scope(): ScopeModuleAUser;
   }
