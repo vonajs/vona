@@ -1,12 +1,12 @@
 {
-  "name": "vona-module-a-printapipath",
+  "name": "vona-module-a-printtip",
   "type": "module",
   "version": "5.0.0",
-  "title": "a-printapipath",
+  "title": "a-printtip",
   "vonaModule": {
     "dependencies": {},
     "metas": {
-      "printApiPath": {
+      "printTip": {
         "boilerplate": "cli/boilerplate"
       }
     }

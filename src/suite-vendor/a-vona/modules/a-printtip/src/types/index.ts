@@ -1,1 +1,1 @@
-export * from './printApiPath.ts';
+export * from './printTip.ts';

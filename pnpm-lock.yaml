@@ -143,9 +143,9 @@ importers:
       vona-module-a-openapi:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-openapi
-      vona-module-a-printapipath:
+      vona-module-a-printtip:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-printapipath
+        version: link:src/suite-vendor/a-vona/modules/a-printtip
       vona-module-a-queue:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-queue
@@ -922,9 +922,9 @@ importers:
       vona-module-a-openapi:
         specifier: workspace:^
         version: link:modules/a-openapi
-      vona-module-a-printapipath:
+      vona-module-a-printtip:
         specifier: workspace:^
-        version: link:modules/a-printapipath
+        version: link:modules/a-printtip
       vona-module-a-queue:
         specifier: workspace:^
         version: link:modules/a-queue
@@ -1327,7 +1327,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/a-vona/modules/a-printapipath:
+  src/suite-vendor/a-vona/modules/a-printtip:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

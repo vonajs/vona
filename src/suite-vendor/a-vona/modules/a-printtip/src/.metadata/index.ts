@@ -1,11 +1,11 @@
-import type { TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** startup: begin */
 import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
+import type { config } from '../config/config.ts';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
+import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-import { config } from '../config/config.ts';
 
 import 'vona';
 
@@ -13,15 +13,15 @@ export * from '../bean/startup.printApiPath.ts';
 declare module 'vona-module-a-startup' {
 
   export interface IStartupRecord {
-    'a-printapipath:printApiPath': IDecoratorStartupOptions;
+    'a-printtip:printApiPath': IDecoratorStartupOptions;
   }
 
 }
-declare module 'vona-module-a-printapipath' {
+declare module 'vona-module-a-printtip' {
 
   export interface StartupPrintApiPath {
     /** @internal */
-    get scope(): ScopeModuleAPrintapipath;
+    get scope(): ScopeModuleAPrinttip;
   }
 }
 /** startup: end */
@@ -29,23 +29,23 @@ declare module 'vona-module-a-printapipath' {
 export * from '../config/config.ts';
 
 @Scope()
-export class ScopeModuleAPrintapipath extends BeanScopeBase {}
+export class ScopeModuleAPrinttip extends BeanScopeBase {}
 
-export interface ScopeModuleAPrintapipath {
+export interface ScopeModuleAPrinttip {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-printapipath': ScopeModuleAPrintapipath;
+    'a-printtip': ScopeModuleAPrinttip;
   }
 
   export interface IBeanScopeContainer {
-    printapipath: ScopeModuleAPrintapipath;
+    printtip: ScopeModuleAPrinttip;
   }
 
   export interface IBeanScopeConfig {
-    'a-printapipath': ReturnType<typeof config>;
+    'a-printtip': ReturnType<typeof config>;
   }
 
 }
