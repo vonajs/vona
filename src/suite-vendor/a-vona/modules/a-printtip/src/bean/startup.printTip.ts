@@ -22,6 +22,7 @@ export class StartupPrintTip extends BeanBase implements IStartupExecute {
     for (const onion of onions) {
       const beanInstance = this.bean._getBean<IMetaPrintTipExecute>(onion.beanOptions.beanFullName as any);
       const res = await beanInstance.execute();
+      if (!res) continue;
       if (Array.isArray(res)) {
         outputs.push(...res);
       } else {
