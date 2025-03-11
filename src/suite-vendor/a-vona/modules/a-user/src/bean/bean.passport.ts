@@ -1,4 +1,4 @@
-import type { IJwtSignOptions, IJwtToken } from 'vona-module-a-jwt';
+import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
