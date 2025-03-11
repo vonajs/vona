@@ -28,7 +28,7 @@
     "vona-module-a-meta": "workspace:^",
     "vona-module-a-onion": "workspace:^",
     "vona-module-a-openapi": "workspace:^",
-    "vona-module-a-printapipath": "workspace:^",
+    "vona-module-a-printtip": "workspace:^",
     "vona-module-a-queue": "workspace:^",
     "vona-module-a-redis": "workspace:^",
     "vona-module-a-redlock": "workspace:^",

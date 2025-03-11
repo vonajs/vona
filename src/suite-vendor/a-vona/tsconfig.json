@@ -81,7 +81,7 @@
       "path": "modules/a-databasedialect/tsconfig.build.json"
     },
     {
-      "path": "modules/a-printapipath/tsconfig.build.json"
+      "path": "modules/a-printtip/tsconfig.build.json"
     },
     {
       "path": "modules/a-cache/tsconfig.build.json"
