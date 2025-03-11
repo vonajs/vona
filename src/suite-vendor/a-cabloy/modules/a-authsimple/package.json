@@ -1,19 +1,11 @@
 {
-  "name": "vona-module-a-auth",
+  "name": "vona-module-a-authsimple",
   "type": "module",
   "version": "5.0.0",
-  "title": "a-auth",
+  "title": "a-authsimple",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"
-    },
-    "metas": {
-      "authProvider": {
-        "optionsGlobalInterfaceName": "IDecoratorAuthProviderOptions",
-        "optionsGlobalInterfaceFrom": "vona-module-a-auth",
-        "scopeResource": true,
-        "boilerplate": "cli/boilerplate/authProvider"
-      }
     }
   },
   "description": "",
@@ -30,7 +22,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["cli", "dist", "static"],
+  "files": ["dist", "static"],
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
