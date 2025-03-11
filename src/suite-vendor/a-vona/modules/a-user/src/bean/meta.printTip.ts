@@ -5,6 +5,7 @@ import { Meta } from 'vona-module-a-meta';
 @Meta()
 export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
+    if (!this.app.meta.isLocal) return;
     // signin
     const jwt = await this.app.bean.executor.newCtx(async () => {
       return await this.bean.passport.signinSystem('dev', '-1');
