@@ -14,17 +14,17 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.printApiPath.ts';
+export * from '../bean/meta.printTip.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
-    'home-index:printApiPath': never;
+    'home-index:printTip': never;
   }
 
 }
 declare module 'vona-module-home-index' {
 
-  export interface MetaPrintApiPath {
+  export interface MetaPrintTip {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }

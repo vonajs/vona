@@ -1,10 +1,10 @@
-import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
+import type { IMetaPrintTipExecute, IMetaPrintTipInfo } from 'vona-module-a-printtip';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
 @Meta()
-export class MetaPrintApiPath extends BeanBase implements IMetaPrintApiPathExecute {
-  async execute(): Promise<IMetaPrintApiPathInfo | IMetaPrintApiPathInfo[]> {
+export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
+  async execute(): Promise<IMetaPrintTipInfo | IMetaPrintTipInfo[]> {
     // signin
     const jwt = await this.app.bean.executor.newCtx(async () => {
       return await this.bean.passport.signinSystem('dev', '-1');

@@ -1,11 +1,11 @@
-import type { IMetaPrintApiPathExecute, IMetaPrintApiPathInfo } from 'vona-module-a-printapipath';
+import type { IMetaPrintTipExecute, IMetaPrintTipInfo } from 'vona-module-a-printtip';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 import { apiPath } from 'vona-module-a-web';
 
 @Meta()
-export class MetaPrintApiPath extends BeanBase implements IMetaPrintApiPathExecute {
-  async execute(): Promise<IMetaPrintApiPathInfo | IMetaPrintApiPathInfo[]> {
+export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
+  async execute(): Promise<IMetaPrintTipInfo | IMetaPrintTipInfo[]> {
     // apiPath
     const _apiPathSwagger = this.scope.util.combineApiPath(apiPath('//swagger'));
     const _apiPathRapidoc = this.scope.util.combineApiPath(apiPath('//rapidoc'));

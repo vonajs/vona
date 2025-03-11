@@ -11,17 +11,17 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/meta.printApiPath.ts';
+export * from '../bean/meta.printTip.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
-    'a-swagger:printApiPath': never;
+    'a-swagger:printTip': never;
   }
 
 }
 declare module 'vona-module-a-swagger' {
 
-  export interface MetaPrintApiPath {
+  export interface MetaPrintTip {
     /** @internal */
     get scope(): ScopeModuleASwagger;
   }

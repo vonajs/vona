@@ -96,17 +96,17 @@ export interface IModuleEvent {
 }
 /** event: end */
 /** meta: begin */
-export * from '../bean/meta.printApiPath.ts';
+export * from '../bean/meta.printTip.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
-    'a-user:printApiPath': never;
+    'a-user:printTip': never;
   }
 
 }
 declare module 'vona-module-a-user' {
 
-  export interface MetaPrintApiPath {
+  export interface MetaPrintTip {
     /** @internal */
     get scope(): ScopeModuleAUser;
   }
