@@ -11,7 +11,7 @@ export class MetaPrintApiPath extends BeanBase implements IMetaPrintApiPathExecu
     }, { instanceName: '' });
     const accessToken = jwt.accessToken;
     return {
-      title: 'access token',
+      title: 'access token [admin] [dev]',
       path: `Bearer ${accessToken}`,
     };
   }
