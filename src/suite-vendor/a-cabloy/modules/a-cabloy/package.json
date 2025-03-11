@@ -6,6 +6,7 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0",
+      "a-auth": "5.0.0",
       "a-status": "5.0.0",
       "a-swagger": "5.0.0"
     }
