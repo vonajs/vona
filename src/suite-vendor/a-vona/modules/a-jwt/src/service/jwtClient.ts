@@ -48,7 +48,11 @@ export class ServiceJwtClient extends BeanBase {
         [this.fieldData]: payloadData,
       };
       if (options?.path) payload[this.fieldPath] = options.path;
-      this._jwtInstance.sign(payload, this._clientOptions.secret!, this._clientOptions.signOptions, (err, encoded) => {
+      let signOptions = this._clientOptions.signOptions;
+      if (options?.dev) {
+        signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.clients.refresh.signOptions.expiresIn });
+      }
+      this._jwtInstance.sign(payload, this._clientOptions.secret!, signOptions, (err, encoded) => {
         if (err) return reject(err);
         resolve(encoded!);
       });

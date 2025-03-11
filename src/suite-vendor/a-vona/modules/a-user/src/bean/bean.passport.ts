@@ -1,4 +1,4 @@
-import type { IJwtToken } from 'vona-module-a-jwt';
+import type { IJwtSignOptions, IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
@@ -54,9 +54,11 @@ export class BeanPassport extends BeanBase {
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
     let payloadData = await this.passportAdapter.serialize(passport);
+    // auth token
     payloadData = await this.authTokenAdapter.create(payloadData);
+    // jwt token
     if (authToken !== 'jwt') throw new Error('Only support jwt');
-    return await this.bean.jwt.create(payloadData);
+    return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });
   }
 
   public async signout(): Promise<void> {

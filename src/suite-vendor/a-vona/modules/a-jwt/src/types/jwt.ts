@@ -14,6 +14,7 @@ export interface IJwtClientRecord {
 
 export interface IJwtSignOptions {
   path?: string | string[];
+  dev?: boolean;
 }
 
 export interface IJwtClientOptions {

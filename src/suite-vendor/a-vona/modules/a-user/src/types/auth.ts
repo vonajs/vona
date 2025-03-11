@@ -1,6 +1,7 @@
 import type { TableIdentity } from 'vona-module-a-database';
 
 export interface IAuthIdRecord {
+  '-1': 'dev';
   '-10000': 'mock';
 }
 
