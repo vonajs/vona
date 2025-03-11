@@ -81,4 +81,9 @@ export class ControllerOnion extends BeanBase {
     // this.$logger.silly(ctx === this.ctx);
     return ids;
   }
+
+  @Post('echo6')
+  echo6() {
+    return this.bean.passport.isAuthenticated;
+  }
 }
