@@ -1,7 +1,9 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
+import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
 import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
+import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -359,6 +361,12 @@ export function deepExtend(target: any, ...args): any {
 
 export function uuidv4() {
   return uuid.v4();
+}
+
+export function createHash(str: string, encoding?: BinaryToTextEncoding, algorithm?: string, options?: HashOptions) {
+  const hash = crypto.createHash(algorithm ?? 'sha256', options);
+  hash.update(str);
+  return hash.digest(encoding ?? 'hex');
 }
 
 export async function disposeInstance(instance: any) {

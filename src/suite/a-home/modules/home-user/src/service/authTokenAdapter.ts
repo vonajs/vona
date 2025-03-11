@@ -1,12 +1,13 @@
 import type { IAuthTokenAdapter, IUserBase } from 'vona-module-a-user';
 import type { IPayloadData } from '../types/passport.ts';
-import { BeanBase, uuidv4 } from 'vona';
+import { BeanBase, createHash, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapter {
   async create(payloadData: IPayloadData): Promise<IPayloadData> {
-    const payloadDataNew = Object.assign({}, payloadData, { token: uuidv4() });
+    const token = (payloadData.authId.toString().charAt(0) === '-') ? createHash(payloadData.authId.toString()) : uuidv4();
+    const payloadDataNew = Object.assign({}, payloadData, { token });
     await this.scope.service.redisToken.create(payloadDataNew);
     return payloadDataNew;
   }
