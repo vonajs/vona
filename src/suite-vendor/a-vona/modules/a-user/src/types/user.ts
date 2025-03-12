@@ -19,7 +19,6 @@ export interface IUserAdapter {
 
 export interface IUserInnerAdapter {
   createAnonymous(): Promise<IUserBase>;
-  getMock(name?: string): Promise<IUserBase | undefined>;
   getByName(name: string): Promise<IUserBase | undefined>;
   get(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   update(user: Partial<IUserBase>): Promise<void>;

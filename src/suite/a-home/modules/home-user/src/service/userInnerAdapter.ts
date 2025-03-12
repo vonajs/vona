@@ -12,10 +12,6 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     return user;
   }
 
-  async getMock(name?: string): Promise<IUserBase | undefined> {
-    return this.get({ name: name ?? 'admin' });
-  }
-
   async getByName(name: string): Promise<IUserBase | undefined> {
     return this.get({ name });
   }

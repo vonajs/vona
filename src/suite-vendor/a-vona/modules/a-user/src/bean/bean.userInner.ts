@@ -18,10 +18,6 @@ export class BeanUserInner extends BeanBase {
     return this.userInnerAdapter.createAnonymous();
   }
 
-  getMock(name?: string): Promise<IUserBase | undefined> {
-    return this.userInnerAdapter.getMock(name);
-  }
-
   getByName(name: string): Promise<IUserBase | undefined> {
     return this.userInnerAdapter.getByName(name);
   }
