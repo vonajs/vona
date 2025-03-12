@@ -7,12 +7,12 @@
     "dependencies": {
       "a-vona": "5.0.0"
     },
-    "metas": {
+    "onions": {
       "authProvider": {
         "optionsGlobalInterfaceName": "IDecoratorAuthProviderOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-auth",
         "scopeResource": true,
-        "boilerplate": "cli/boilerplate/authProvider"
+        "boilerplate": "cli/boilerplate"
       }
     }
   },
