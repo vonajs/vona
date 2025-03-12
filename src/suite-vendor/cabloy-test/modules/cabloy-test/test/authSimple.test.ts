@@ -10,6 +10,11 @@ describe.only('authSimple.test.ts.test.ts', () => {
         clientOptions: { username: 'admin', password: '123456' },
       });
       console.log('------------auth simple authenticate', res);
+      const res2 = await app.bean.authSimple.authenticate(
+        { username: 'admin', password: '123456' },
+        'default',
+      );
+      console.log('------------auth simple authenticate', res2);
     });
   });
 });

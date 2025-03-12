@@ -1,6 +1,7 @@
+import type { PowerPartial } from 'vona';
 import type { IAuthenticateOptions } from '../types/auth.ts';
 import type { IAuthProviderRecord } from '../types/authProvider.ts';
-import { BeanBase, type PowerPartial } from 'vona';
+import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()

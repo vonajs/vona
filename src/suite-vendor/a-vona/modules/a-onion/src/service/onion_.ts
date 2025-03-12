@@ -82,6 +82,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this.getOnionsEnabled(selector).filter(item => item.beanOptions.name === beanName);
   }
 
+  getOnionSliceEnabled(onionName: ONIONNAME, selector?: string) {
+    return this.getOnionsEnabled(selector).find(item => item.name === onionName);
+  }
+
+  getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
+    return this.onionsNormal[onionName];
+  }
+
   getOnionsEnabledWrapped(wrapFn: Function, selector?: string) {
     if (!selector) selector = '';
     if (!this[SymbolOnionsEnabledWrapped][selector]) {
@@ -166,10 +174,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       onionsLocal.push(item);
     }
     return onionsLocal;
-  }
-
-  getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
-    return this.onionsNormal[onionName];
   }
 
   getOnionOptions<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
