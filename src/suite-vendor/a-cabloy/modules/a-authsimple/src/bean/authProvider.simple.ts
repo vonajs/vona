@@ -1,4 +1,3 @@
-import type { Next } from 'vona';
 import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
@@ -17,8 +16,6 @@ export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOption
 
 @AuthProvider<IAuthProviderOptionsSimple>()
 export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute {
-  async execute(_options: IAuthProviderOptionsSimple, next: Next) {
-    // next
-    return next();
+  async execute(_clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple) {
   }
 }

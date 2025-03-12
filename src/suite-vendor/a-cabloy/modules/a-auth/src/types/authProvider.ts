@@ -1,4 +1,4 @@
-import type { Next, OmitNever } from 'vona';
+import type { OmitNever } from 'vona';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IAuthProviderRecord {}
@@ -14,12 +14,12 @@ export interface IDecoratorAuthProviderOptions<
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 >
   extends IOnionOptionsEnable {
-  default: T;
-  clients: Record<K, T>;
+  default?: T;
+  clients?: Record<K, T>;
 }
 
 export interface IAuthProviderExecute {
-  execute(options: IDecoratorAuthProviderOptions, next: Next): Promise<any>;
+  execute(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<any>;
 }
 
 declare module 'vona-module-a-onion' {
