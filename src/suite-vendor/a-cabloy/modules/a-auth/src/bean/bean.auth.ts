@@ -6,8 +6,8 @@ import { Bean } from 'vona-module-a-bean';
 @Bean()
 export class BeanAuth extends BeanBase {
   async authenticate<T extends keyof IAuthProviderRecord>(
-    authProviderName: T,
-    options?: Partial<TypeUseOnionOmitOptionsEnable<IAuthProviderRecord[T]>>,
+    _authProviderName: T,
+    _options?: Partial<TypeUseOnionOmitOptionsEnable<IAuthProviderRecord[T]>>,
   ) {
 
   }
