@@ -84,7 +84,7 @@ export class BeanPassport extends BeanBase {
     name?: string,
     options?: ISigninOptions,
   ): Promise<IJwtToken> {
-    const user = await this.passportAdapter.getUserMock(name);
+    const user = await this.bean.userInner.getMock(name);
     if (!user) return this.app.throw(401);
     const auth = { id: getAuthIdSystem(authName, authId) };
     const passport = { user, auth };
@@ -102,7 +102,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public async createUserAnonymous(): Promise<IUserBase> {
-    const userAnonymous = await this.passportAdapter.createUserAnonymous();
+    const userAnonymous = await this.bean.userInner.createAnonymous();
     // event
     await this.scope.event.createUserAnonymous.emit(userAnonymous);
     // ok

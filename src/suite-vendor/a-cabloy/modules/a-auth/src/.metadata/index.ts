@@ -1,7 +1,7 @@
 import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import type { BeanAuth } from '../bean/bean.auth.ts';
+import type { BeanAuthInner } from '../bean/bean.authInner.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAuthenticator } from '../service/authenticator.ts';
@@ -21,20 +21,20 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.auth.ts';
+export * from '../bean/bean.authInner.ts';
 declare module 'vona' {
 
 }
 declare module 'vona-module-a-auth' {
 
-  export interface BeanAuth {
+  export interface BeanAuthInner {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    auth: BeanAuth;
+    authInner: BeanAuthInner;
   }
 }
 /** bean: end */

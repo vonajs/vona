@@ -4,6 +4,7 @@ import type { IDecoratorEventOptions } from 'vona-module-a-event';
 /** bean: end */
 /** bean: begin */
 import type { BeanPassport } from '../bean/bean.passport.ts';
+import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
 /** event: begin */
 import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.ts';
@@ -41,6 +42,7 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
+export * from '../bean/bean.userInner.ts';
 /** bean: end */
 /** event: begin */
 export * from '../bean/event.createUserAnonymous.ts';
@@ -53,10 +55,16 @@ declare module 'vona-module-a-user' {
     /** @internal */
     get scope(): ScopeModuleAUser;
   }
+
+  export interface BeanUserInner {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     passport: BeanPassport;
+    userInner: BeanUserInner;
   }
 }
 export * from '../bean/event.signin.ts';

@@ -5,7 +5,7 @@ import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
-export class BeanAuth extends BeanBase {
+export class BeanAuthInner extends BeanBase {
   async authenticate<T extends keyof IAuthProviderRecord>(
     authProviderName: T,
     options?: PowerPartial<IAuthenticateOptions<IAuthProviderRecord[T]>>,
