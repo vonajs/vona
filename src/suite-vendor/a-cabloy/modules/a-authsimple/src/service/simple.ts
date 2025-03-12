@@ -1,4 +1,7 @@
 import type { TableIdentity } from 'vona-module-a-database';
+import { Buffer } from 'node:buffer';
+import { pbkdf2, randomBytes } from 'node:crypto';
+import { promisify } from 'node:util';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -19,15 +22,20 @@ export class ServiceSimple extends BeanBase {
     return authSimple;
   }
 
-  async verifyPassword({ password, hash }: any) {
-    const _password = passwordFn(password.toString());
-    const verifyFn = util.promisify(_password.verifyAgainst);
-    return await verifyFn.call(_password, hash);
+  async verifyPasswordHash(password: string, hash: string) {
+    const [method, salt, iterations, keylen, digest, key] = hash.split('$');
+    if (!method || !salt || !iterations || !keylen || !digest || !key) return false;
+    const key2 = await promisify(pbkdf2)(password, Buffer.from(salt, 'hex'), Number.parseInt(iterations), Number.parseInt(keylen), digest);
+    return key2.toString('hex') === key;
   }
 
-  async calcPassword({ password }: any) {
-    const _password = passwordFn(password.toString());
-    const hashFn = util.promisify(_password.hash);
-    return await hashFn.call(_password);
+  async calcPasswordHash(password: string) {
+    const configPasswordHash = this.scope.config.passwordHash;
+    // salt
+    const salt = await promisify(randomBytes)(configPasswordHash.saltlen);
+    // pbkdf2
+    const key = await promisify(pbkdf2)(password, salt, configPasswordHash.iterations, configPasswordHash.keylen, configPasswordHash.digest);
+    // hash
+    return `pbkdf2$${salt.toString('hex')}$${configPasswordHash.iterations}$${configPasswordHash.keylen}$${configPasswordHash.digest}$${key.toString('hex')}`;
   }
 }
