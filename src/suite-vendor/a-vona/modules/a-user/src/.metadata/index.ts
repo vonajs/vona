@@ -3,6 +3,7 @@ import type { IDecoratorEventOptions } from 'vona-module-a-event';
 
 /** bean: end */
 /** bean: begin */
+import type { BeanAuthInner } from '../bean/bean.authInner.ts';
 import type { BeanPassport } from '../bean/bean.passport.ts';
 import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
@@ -27,7 +28,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/bean.passport.ts';
+export * from '../bean/bean.authInner.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IGuardRecordGlobal {
@@ -42,6 +43,7 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
+export * from '../bean/bean.passport.ts';
 export * from '../bean/bean.userInner.ts';
 /** bean: end */
 /** event: begin */
@@ -50,6 +52,11 @@ declare module 'vona' {
 
 }
 declare module 'vona-module-a-user' {
+
+  export interface BeanAuthInner {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
 
   export interface BeanPassport {
     /** @internal */
@@ -63,6 +70,7 @@ declare module 'vona-module-a-user' {
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
+    authInner: BeanAuthInner;
     passport: BeanPassport;
     userInner: BeanUserInner;
   }

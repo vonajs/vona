@@ -1,16 +1,10 @@
-import type { IAuthBase, IPassportAdapter, IPassportBase } from 'vona-module-a-user';
-import type { IAuth } from '../types/auth.ts';
+import type { IPassportAdapter, IPassportBase } from 'vona-module-a-user';
 import type { IPassport, IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
-  async getAuth(auth: Partial<IAuth>): Promise<IAuthBase | undefined> {
-    // todo: check if getBean of bean.auth
-    return auth as unknown as IAuthBase | undefined;
-  }
-
   async setCurrent(passport: IPassport | undefined): Promise<IPassport | undefined> {
     return passport;
   }
@@ -24,7 +18,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
   async deserialize(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
     const user = await this.bean.userInner.get({ id: payloadData.userId });
     if (!user) return;
-    const auth = await this.getAuth({ id: payloadData.authId });
+    const auth = await this.bean.authInner.get({ id: payloadData.authId });
     if (!auth) return;
     return { user, auth };
   }
