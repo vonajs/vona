@@ -16,8 +16,11 @@ export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOption
 
 @AuthProvider<IAuthProviderOptionsSimple>()
 export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute {
-  async execute(_clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple) {
+  async execute(clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple) {
     // user
-    //const user=await this.bean.user.
+    const user = await this.bean.userInner.getByName(clientOptions.username);
+    if (!user) return this.app.throw(401);
+    const verified = await this.scope.service.simple.verify(user.id, clientOptions.password);
+    if (!verified) return this.app.throw(401);
   }
 }
