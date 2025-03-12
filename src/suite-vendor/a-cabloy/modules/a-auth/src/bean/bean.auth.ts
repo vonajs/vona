@@ -1,13 +1,13 @@
 import type { IAuthenticateOptions } from '../types/auth.ts';
 import type { IAuthProviderRecord } from '../types/authProvider.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, type PowerPartial } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanAuth extends BeanBase {
   async authenticate<T extends keyof IAuthProviderRecord>(
     _authProviderName: T,
-    _options?: Partial<IAuthenticateOptions<IAuthProviderRecord[T]>>,
+    _options?: PowerPartial<IAuthenticateOptions<IAuthProviderRecord[T]>>,
   ) {
   }
 }

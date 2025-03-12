@@ -4,10 +4,16 @@ import type { IAuthProviderOptionsSimple } from '../bean/authProvider.simple.ts'
 /** authProvider: end */
 /** authProvider: begin */
 import type { AuthProviderSimple } from '../bean/authProvider.simple.ts';
-/** authProvider: end */
+
+/** bean: end */
+/** bean: begin */
+import type { BeanAuthSimple } from '../bean/bean.authSimple.ts';
+/** bean: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
 import 'vona';
 
 import 'vona';
@@ -29,6 +35,24 @@ declare module 'vona-module-a-authsimple' {
 }
 export interface IModuleAuthProvider {
   simple: AuthProviderSimple;
+}
+/** authProvider: end */
+/** bean: begin */
+export * from '../bean/bean.authSimple.ts';
+declare module 'vona' {
+
+}
+declare module 'vona-module-a-authsimple' {
+
+  export interface BeanAuthSimple {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    authSimple: BeanAuthSimple;
+  }
 }
 
 @Scope()
