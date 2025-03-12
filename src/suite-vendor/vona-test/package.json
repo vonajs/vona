@@ -18,7 +18,7 @@
   "files": [
   ],
   "dependencies": {
-    "vona-module-vona-test": "^5.0.3"
+    "vona-module-vona-test": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

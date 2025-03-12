@@ -4,6 +4,7 @@ import { pbkdf2, randomBytes } from 'node:crypto';
 import { promisify } from 'node:util';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
+import passwordHash from 'password-hash-salt';
 
 @Service()
 export class ServiceSimple extends BeanBase {
@@ -31,6 +32,7 @@ export class ServiceSimple extends BeanBase {
 
   async calcPasswordHash(password: string) {
     const configPasswordHash = this.scope.config.passwordHash;
+    return passwordHash.
     // salt
     const salt = await promisify(randomBytes)(configPasswordHash.saltlen);
     // pbkdf2
