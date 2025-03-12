@@ -1,3 +1,4 @@
+import type { IBeanRecord } from 'vona';
 import type { Constructable } from '../index.ts';
 // import { ContainerScope } from '../index.ts';
 
@@ -8,7 +9,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
    * global: equal to name
    * others: module.scene.name
    */
-  beanFullName: string;
+  beanFullName: keyof IBeanRecord;
   module: string;
   scene: keyof IBeanSceneRecord;
   name: string;
