@@ -1,15 +1,16 @@
 import type { Next } from 'vona';
-import type { IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
 import { BeanBase } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
 
-export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions {
-  default: {
-    username: string;
-    password: string;
-  };
-  clients: {};
-}
+export interface IAuthProviderSimpleClientRecord extends IAuthProviderClientRecord {}
+
+export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOptions {}
+
+export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions<
+  keyof IAuthProviderSimpleClientRecord,
+  IAuthProviderSimpleClientOptions
+> {}
 
 @Middleware<IAuthProviderOptionsSimple>()
 export class MiddlewareSimple extends BeanBase implements IAuthProviderExecute {
