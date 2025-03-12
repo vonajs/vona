@@ -84,7 +84,7 @@ export class BeanPassport extends BeanBase {
     name?: string,
     options?: ISigninOptions,
   ): Promise<IJwtToken> {
-    const user = await this.bean.userInner.getMock(name);
+    const user = await this.bean.userInner.getByName(name ?? 'admin');
     if (!user) return this.app.throw(401);
     const auth = { id: getAuthIdSystem(authName, authId) };
     const passport = { user, auth };

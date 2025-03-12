@@ -22,6 +22,10 @@ export class BeanUserInner extends BeanBase {
     return this.userInnerAdapter.getMock(name);
   }
 
+  getByName(name: string): Promise<IUserBase | undefined> {
+    return this.userInnerAdapter.getByName(name);
+  }
+
   get(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
     return this.userInnerAdapter.get(user);
   }

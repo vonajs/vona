@@ -16,6 +16,10 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     return this.get({ name: name ?? 'admin' });
   }
 
+  async getByName(name: string): Promise<IUserBase | undefined> {
+    return this.get({ name });
+  }
+
   async get(user: Partial<IUser>): Promise<IUserBase | undefined> {
     const usersDemo = await this._getUsersDemo();
     if (!usersDemo)
