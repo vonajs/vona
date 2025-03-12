@@ -3,7 +3,13 @@ import type { IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-m
 import { BeanBase } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
 
-export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions {}
+export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions {
+  default: {
+    username: string;
+    password: string;
+  };
+  clients: {};
+}
 
 @Middleware<IAuthProviderOptionsSimple>()
 export class MiddlewareSimple extends BeanBase implements IAuthProviderExecute {
