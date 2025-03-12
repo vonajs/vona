@@ -5,7 +5,7 @@ import { app } from 'vona-mock';
 describe.only('authSimple.test.ts.test.ts', () => {
   it('action:authSimple.test.ts', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const res = await app.bean.authInner.authenticate('a-authsimple:simple', {
+      const res = await app.bean.auth.authenticate('a-authsimple:simple', {
         clientName: 'default',
         clientOptions: { username: 'admin', password: '123456' },
       });

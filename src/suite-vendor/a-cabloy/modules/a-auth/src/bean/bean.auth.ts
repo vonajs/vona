@@ -1,11 +1,17 @@
 import type { PowerPartial } from 'vona';
+import type { IAuthBase, IAuthInnerAdapter } from 'vona-module-a-user';
 import type { IAuthenticateOptions } from '../types/auth.ts';
 import type { IAuthProviderExecute, IAuthProviderRecord } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
-export class BeanAuthInner extends BeanBase {
+export class BeanAuth extends BeanBase implements IAuthInnerAdapter {
+  get(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined> {
+    // todo: 从数据库读取数据
+    return auth as any;
+  }
+
   async authenticate<T extends keyof IAuthProviderRecord>(
     authProviderName: T,
     options?: PowerPartial<IAuthenticateOptions<IAuthProviderRecord[T]>>,

@@ -6,6 +6,6 @@ import { Bean } from 'vona-module-a-bean';
 @Bean()
 export class BeanAuthSimple extends BeanBase {
   async authenticate(clientOptions?: PowerPartial<IAuthProviderSimpleClientOptions>, clientName?: keyof IAuthProviderSimpleClientRecord) {
-    return await this.bean.authInner.authenticate('a-authsimple:simple', { clientName, clientOptions });
+    return await this.bean.auth.authenticate('a-authsimple:simple', { clientName, clientOptions });
   }
 }
