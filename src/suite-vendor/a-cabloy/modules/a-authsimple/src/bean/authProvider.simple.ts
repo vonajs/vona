@@ -1,13 +1,13 @@
 import type { Next } from 'vona';
-import type { IDecoratorMiddlewareOptions, IMiddlewareExecute } from 'vona-module-a-aspect';
+import type { IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
 import { BeanBase } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
 
-export interface IMiddlewareOptionsSimple extends IDecoratorMiddlewareOptions {}
+export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions {}
 
-@Middleware<IMiddlewareOptionsSimple>()
-export class MiddlewareSimple extends BeanBase implements IMiddlewareExecute {
-  async execute(_options: IMiddlewareOptionsSimple, next: Next) {
+@Middleware<IAuthProviderOptionsSimple>()
+export class MiddlewareSimple extends BeanBase implements IAuthProviderExecute {
+  async execute(_options: IAuthProviderOptionsSimple, next: Next) {
     // next
     return next();
   }

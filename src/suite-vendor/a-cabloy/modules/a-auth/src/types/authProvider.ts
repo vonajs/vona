@@ -3,7 +3,7 @@ import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IAuthProviderRecord {}
 
-export interface IMiddlewareExecute {
+export interface IAuthProviderExecute {
   execute(options: IDecoratorAuthProviderOptions, next: Next): Promise<any>;
 }
 
