@@ -1,11 +1,12 @@
-import { BeanEventBase, Event } from 'vona-module-a-event';
+import { BeanBase, Next } from 'vona';
+import { IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware } from 'vona-module-a-aspect';
 
-export type TypeEvent<%=argv.beanNameCapitalize%>Data = unknown;
+export interface IMiddlewareOptions<%=argv.beanNameCapitalize%> extends IDecoratorMiddlewareOptions {}
 
-export type TypeEvent<%=argv.beanNameCapitalize%>Result = void;
-
-@Event()
-export class Event<%=argv.beanNameCapitalize%> extends BeanEventBase<
-  TypeEvent<%=argv.beanNameCapitalize%>Data,
-  TypeEvent<%=argv.beanNameCapitalize%>Result
-> {}
+@Middleware<IMiddlewareOptions<%=argv.beanNameCapitalize%>>()
+export class Middleware<%=argv.beanNameCapitalize%> extends BeanBase implements IMiddlewareExecute {
+  async execute(_options: IMiddlewareOptions<%=argv.beanNameCapitalize%>, next: Next) {
+    // next
+    return next();
+  }
+}
