@@ -34,10 +34,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/compose": "^2.0.0",
+    "@cabloy/compose": "workspace:^",
     "@cabloy/deps": "workspace:^",
     "@cabloy/dotenv": "workspace:^",
-    "@cabloy/extend": "^3.0.12",
+    "@cabloy/extend": "workspace:^",
     "@cabloy/json5": "workspace:^",
     "@cabloy/localeutil": "workspace:^",
     "@cabloy/module-info": "workspace:^",
