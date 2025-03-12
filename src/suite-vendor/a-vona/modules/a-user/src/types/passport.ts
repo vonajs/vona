@@ -8,7 +8,6 @@ export interface IPassportBase {
 }
 
 export interface IPassportAdapter {
-  getAuth(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
   setCurrent(passport: IPassportBase | undefined): Promise<IPassportBase | undefined>;
   serialize(passport: IPassportBase): Promise<IPayloadDataBase>;
   deserialize(payloadData: IPayloadDataBase): Promise<IPassportBase | undefined>;

@@ -18,3 +18,7 @@ export type TypeAuthToken = 'jwt';
 export interface ISigninOptions {
   authToken: TypeAuthToken;
 }
+
+export interface IAuthInnerAdapter {
+  get(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
+}
