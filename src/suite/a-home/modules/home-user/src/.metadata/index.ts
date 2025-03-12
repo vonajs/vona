@@ -11,6 +11,7 @@ import type { config } from '../config/config.ts';
 import type { ServiceAuthTokenAdapter } from '../service/authTokenAdapter.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 import type { ServiceRedisToken } from '../service/redisToken.ts';
+import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 /** service: end */
 /** service: begin */
 
@@ -48,12 +49,14 @@ export * from '../config/config.ts';
 /** service: begin */
 export * from '../service/authTokenAdapter.ts';
 export * from '../service/passportAdapter.ts';
+export * from '../service/redisToken.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
     'home-user:authTokenAdapter': never;
     'home-user:passportAdapter': never;
     'home-user:redisToken': never;
+    'home-user:userInnerAdapter': never;
   }
 
 }
@@ -73,20 +76,27 @@ declare module 'vona-module-home-user' {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
+
+  export interface ServiceUserInnerAdapter {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
 }
 export interface IModuleService {
   authTokenAdapter: ServiceAuthTokenAdapter;
   passportAdapter: ServicePassportAdapter;
   redisToken: ServiceRedisToken;
+  userInnerAdapter: ServiceUserInnerAdapter;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'home-user.service.authTokenAdapter': ServiceAuthTokenAdapter;
     'home-user.service.passportAdapter': ServicePassportAdapter;
     'home-user.service.redisToken': ServiceRedisToken;
+    'home-user.service.userInnerAdapter': ServiceUserInnerAdapter;
   }
 }
-export * from '../service/redisToken.ts';
+export * from '../service/userInnerAdapter.ts';
 
 @Scope()
 export class ScopeModuleHomeUser extends BeanScopeBase {}
