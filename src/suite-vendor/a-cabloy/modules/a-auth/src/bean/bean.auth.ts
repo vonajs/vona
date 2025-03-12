@@ -1,4 +1,4 @@
-import type { TypeUseOnionOmitOptionsEnable } from 'vona-module-a-onion';
+import type { IAuthenticateOptions } from '../types/auth.ts';
 import type { IAuthProviderRecord } from '../types/authProvider.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -7,8 +7,7 @@ import { Bean } from 'vona-module-a-bean';
 export class BeanAuth extends BeanBase {
   async authenticate<T extends keyof IAuthProviderRecord>(
     _authProviderName: T,
-    _options?: Partial<TypeUseOnionOmitOptionsEnable<IAuthProviderRecord[T]>>,
+    _options?: Partial<IAuthenticateOptions<IAuthProviderRecord[T]>>,
   ) {
-
   }
 }
