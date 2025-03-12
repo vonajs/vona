@@ -2,9 +2,9 @@ import type { TableIdentity } from 'vona-module-a-database';
 import { Buffer } from 'node:buffer';
 import { pbkdf2, randomBytes } from 'node:crypto';
 import { promisify } from 'node:util';
+import * as passwordHash from 'password-hash-salt';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import passwordHash from 'password-hash-salt';
 
 @Service()
 export class ServiceSimple extends BeanBase {
@@ -24,20 +24,11 @@ export class ServiceSimple extends BeanBase {
   }
 
   async verifyPasswordHash(password: string, hash: string) {
-    const [method, salt, iterations, keylen, digest, key] = hash.split('$');
-    if (!method || !salt || !iterations || !keylen || !digest || !key) return false;
-    const key2 = await promisify(pbkdf2)(password, Buffer.from(salt, 'hex'), Number.parseInt(iterations), Number.parseInt(keylen), digest);
-    return key2.toString('hex') === key;
+    return await passwordHash.verify(password, hash);
   }
 
   async calcPasswordHash(password: string) {
     const configPasswordHash = this.scope.config.passwordHash;
-    return passwordHash.
-    // salt
-    const salt = await promisify(randomBytes)(configPasswordHash.saltlen);
-    // pbkdf2
-    const key = await promisify(pbkdf2)(password, salt, configPasswordHash.iterations, configPasswordHash.keylen, configPasswordHash.digest);
-    // hash
-    return `pbkdf2$${salt.toString('hex')}$${configPasswordHash.iterations}$${configPasswordHash.keylen}$${configPasswordHash.digest}$${key.toString('hex')}`;
+    return await passwordHash.hash(password, configPasswordHash);
   }
 }

@@ -636,6 +636,15 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
+  packages-utils/password-hash-salt:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
   packages-utils/process-helper:
     devDependencies:
       clean-package:
@@ -708,7 +717,7 @@ importers:
   packages-vona/vona-core:
     dependencies:
       '@cabloy/compose':
-        specifier: ^2.0.0
+        specifier: workspace:^
         version: link:../../packages-utils/compose
       '@cabloy/deps':
         specifier: workspace:^
@@ -717,7 +726,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/dotenv
       '@cabloy/extend':
-        specifier: ^3.0.12
+        specifier: workspace:^
         version: link:../../packages-utils/extend
       '@cabloy/json5':
         specifier: workspace:^
@@ -849,6 +858,10 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-authsimple:
+    dependencies:
+      password-hash-salt:
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1534,7 +1547,7 @@ importers:
   src/suite-vendor/cabloy-test:
     dependencies:
       vona-module-cabloy-test:
-        specifier: ^5.0.3
+        specifier: workspace:^
         version: link:modules/cabloy-test
 
   src/suite-vendor/cabloy-test/modules/cabloy-test:
@@ -1549,7 +1562,7 @@ importers:
   src/suite-vendor/vona-test:
     dependencies:
       vona-module-vona-test:
-        specifier: ^5.0.3
+        specifier: workspace:^
         version: link:modules/vona-test
 
   src/suite-vendor/vona-test/modules/vona-test:
