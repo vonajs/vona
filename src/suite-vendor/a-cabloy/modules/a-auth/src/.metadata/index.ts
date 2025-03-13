@@ -1,13 +1,20 @@
 import type { BeanScopeUtil } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
 /** bean: end */
 /** bean: begin */
 import type { BeanAuth } from '../bean/bean.auth.ts';
 
+import type { BeanAuthProvider } from '../bean/bean.authProvider.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
+
+/** model: end */
+/** model: begin */
+import type { ModelAuth } from '../model/auth.ts';
+import type { ModelAuthProvider } from '../model/authProvider.ts';
 import type { ServiceAuthenticator } from '../service/authenticator.ts';
 /** service: end */
 /** service: begin */
@@ -31,6 +38,7 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/bean.auth.ts';
+export * from '../bean/bean.authProvider.ts';
 declare module 'vona' {
 
 }
@@ -40,13 +48,19 @@ declare module 'vona-module-a-auth' {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
+
+  export interface BeanAuthProvider {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     auth: BeanAuth;
+    authProvider: BeanAuthProvider;
   }
 }
-/** entity: end */
+/** model: end */
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 /** bean: end */
@@ -82,6 +96,34 @@ declare module 'vona-module-a-auth' {
   }
 }
 export * from '../entity/authProvider.ts';
+/** entity: end */
+/** model: begin */
+export * from '../model/auth.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IModelRecord {
+    'a-auth:auth': IDecoratorModelOptions;
+    'a-auth:authProvider': IDecoratorModelOptions;
+  }
+
+}
+declare module 'vona-module-a-auth' {
+
+  export interface ModelAuth {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface ModelAuthProvider {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+}
+export interface IModuleModel {
+  auth: ModelAuth;
+  authProvider: ModelAuthProvider;
+}
+export * from '../model/authProvider.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -137,6 +179,7 @@ export class ScopeModuleAAuth extends BeanScopeBase {}
 export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
   entity: IModuleEntity;
+  model: IModuleModel;
   service: IModuleService;
 }
 declare module 'vona' {
