@@ -1,12 +1,11 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-import type { EntityBase } from '../entityBase.ts';
 import type { IDecoratorEntityOptions } from './entity.ts';
 
 export interface IModelRecord {}
 
-export interface IDecoratorModelOptions<T = EntityBase> {
+export interface IDecoratorModelOptions<T = unknown> {
   entity?: Constructable<T>;
   table?: string;
   disableDeleted?: boolean;

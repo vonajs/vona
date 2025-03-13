@@ -9,10 +9,10 @@ export default (options: IMiddlewareSystemOptionsSecurities['csrf']) => {
       return next();
     }
 
-    // ensure csrf token exists
-    if (['any', 'all', 'ctoken'].includes(options.type)) {
-      ctx.ensureCsrfSecret();
-    }
+    // // ensure csrf token exists
+    // if (['any', 'all', 'ctoken'].includes(options.type)) {
+    //   ctx.ensureCsrfSecret();
+    // }
 
     // supported requests
     const method = ctx.method;
@@ -33,7 +33,7 @@ export default (options: IMiddlewareSystemOptionsSecurities['csrf']) => {
       return next();
     }
 
-    ctx.assertCsrf();
+    // ctx.assertCsrf();
     return next();
   };
 };

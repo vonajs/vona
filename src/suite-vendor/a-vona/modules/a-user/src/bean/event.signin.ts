@@ -1,4 +1,4 @@
-import type { IPassportBase } from '../types/user.ts';
+import type { IPassportBase } from '../types/passport.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export type TypeEventSigninData = IPassportBase;

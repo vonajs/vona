@@ -18,21 +18,14 @@ const ALLOWED_POLICIES_ENUM = [
 export default (options: IMiddlewareSystemOptionsSecurities['referrerPolicy']) => {
   return async function referrerPolicy(ctx: VonaContext, next: Next) {
     await next();
-
-    const opts = {
-      ...options,
-      // check refererPolicy for backward compatibility
-      // typo on the old version
-      // @see https://github.com/eggjs/security/blob/e3408408adec5f8d009d37f75126ed082481d0ac/lib/middlewares/referrerPolicy.js#L21C59-L21C72
-      ...ctx.securityOptions?.referrerPolicy,
-    };
-    if (checkIfIgnore(opts, ctx)) return;
-
-    const policy = opts.value;
+    // check refererPolicy for backward compatibility
+    // typo on the old version
+    // @see https://github.com/eggjs/security/blob/e3408408adec5f8d009d37f75126ed082481d0ac/lib/middlewares/referrerPolicy.js#L21C59-L21C72
+    if (checkIfIgnore(options, ctx)) return;
+    const policy = options.value;
     if (!ALLOWED_POLICIES_ENUM.includes(policy)) {
       throw new Error(`"${policy}" is not available.`);
     }
-
     ctx.set('referrer-policy', policy);
   };
 };

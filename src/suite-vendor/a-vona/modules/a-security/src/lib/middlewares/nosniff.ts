@@ -17,16 +17,9 @@ const RedirectStatus: Record<number, boolean> = {
 export default (options: IMiddlewareSystemOptionsSecurities['nosniff']) => {
   return async function nosniff(ctx: VonaContext, next: Next) {
     await next();
-
     // ignore redirect response
     if (RedirectStatus[ctx.status]) return;
-
-    const opts = {
-      ...options,
-      ...ctx.securityOptions?.nosniff,
-    };
-    if (checkIfIgnore(opts, ctx)) return;
-
+    if (checkIfIgnore(options, ctx)) return;
     ctx.set('x-content-type-options', 'nosniff');
   };
 };

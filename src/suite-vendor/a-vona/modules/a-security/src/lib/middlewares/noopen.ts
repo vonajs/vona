@@ -6,13 +6,7 @@ import { checkIfIgnore } from '../utils.ts';
 export default (options: IMiddlewareSystemOptionsSecurities['noopen']) => {
   return async function noopen(ctx: VonaContext, next: Next) {
     await next();
-
-    const opts = {
-      ...options,
-      ...ctx.securityOptions?.noopen,
-    };
-    if (checkIfIgnore(opts, ctx)) return;
-
+    if (checkIfIgnore(options, ctx)) return;
     ctx.set('x-download-options', 'noopen');
   };
 };

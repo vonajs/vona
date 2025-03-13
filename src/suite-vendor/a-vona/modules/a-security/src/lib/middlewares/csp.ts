@@ -13,18 +13,14 @@ export default (options: IMiddlewareSystemOptionsSecurities['csp']) => {
   return async function csp(ctx: VonaContext, next: Next) {
     await next();
 
-    const opts = {
-      ...options,
-      ...ctx.securityOptions?.csp,
-    };
-    if (checkIfIgnore(opts, ctx)) return;
+    if (checkIfIgnore(options, ctx)) return;
 
     let finalHeader;
-    const matchedOption = deepExtend({}, opts.policy);
+    const matchedOption = deepExtend({}, options.policy);
     const bufArray: any[] = [];
 
-    const headers = opts.reportOnly ? REPORT_ONLY_HEADER : HEADER;
-    if (opts.supportIE && MSIE_REGEXP.test(ctx.get('user-agent'))) {
+    const headers = options.reportOnly ? REPORT_ONLY_HEADER : HEADER;
+    if (options.supportIE && MSIE_REGEXP.test(ctx.get('user-agent'))) {
       finalHeader = headers[0];
     } else {
       finalHeader = headers[1];
@@ -38,15 +34,15 @@ export default (options: IMiddlewareSystemOptionsSecurities['csp']) => {
         bufArray.push(key);
       } else {
         let values = (Array.isArray(value) ? value : [value]) as string[];
-        if (key === 'script-src') {
-          const hasNonce = values.some(val => {
-            return val.includes('nonce-');
-          });
+        // if (key === 'script-src') {
+        //   const hasNonce = values.some(val => {
+        //     return val.includes('nonce-');
+        //   });
 
-          if (!hasNonce) {
-            values.push(`'nonce-${ctx.nonce}'`);
-          }
-        }
+        //   if (!hasNonce) {
+        //     values.push(`'nonce-${ctx.nonce}'`);
+        //   }
+        // }
 
         values = values.map(d => {
           if (d.startsWith('.')) {
@@ -59,6 +55,6 @@ export default (options: IMiddlewareSystemOptionsSecurities['csp']) => {
     }
     const headerString = bufArray.join(';');
     ctx.set(finalHeader, headerString);
-    ctx.set('x-csp-nonce', ctx.nonce);
+    // ctx.set('x-csp-nonce', ctx.nonce);
   };
 };
