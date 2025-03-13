@@ -6,20 +6,23 @@ import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { BeanAuth } from '../bean/bean.auth.ts';
 
 import type { BeanAuthProvider } from '../bean/bean.authProvider.ts';
+/** meta: end */
+/** meta redlock: begin */
+import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
-import type { EntityAuthProvider } from '../entity/authProvider.ts';
 
+import type { EntityAuthProvider } from '../entity/authProvider.ts';
 /** model: end */
 /** model: begin */
 import type { ModelAuth } from '../model/auth.ts';
 import type { ModelAuthProvider } from '../model/authProvider.ts';
 import type { ServiceAuthenticator } from '../service/authenticator.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
-
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -62,10 +65,8 @@ declare module 'vona' {
 }
 /** model: end */
 /** meta: begin */
+export * from '../bean/meta.redlock.ts';
 export * from '../bean/meta.version.ts';
-/** bean: end */
-/** entity: begin */
-export * from '../entity/auth.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
@@ -95,10 +96,10 @@ declare module 'vona-module-a-auth' {
     columns: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
+/** bean: end */
+/** entity: begin */
+export * from '../entity/auth.ts';
 export * from '../entity/authProvider.ts';
-/** entity: end */
-/** model: begin */
-export * from '../model/auth.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -123,15 +124,24 @@ export interface IModuleModel {
   auth: ModelAuth;
   authProvider: ModelAuthProvider;
 }
+/** entity: end */
+/** model: begin */
+export * from '../model/auth.ts';
 export * from '../model/authProvider.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
+    'a-auth:redlock': never;
     'a-auth:version': never;
   }
 
 }
 declare module 'vona-module-a-auth' {
+
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
 
   export interface MetaVersion {
     /** @internal */
@@ -139,7 +149,7 @@ declare module 'vona-module-a-auth' {
   }
 }
 export * from '../service/authenticator.ts';
-/** meta: end */
+/** meta redlock: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
 declare module 'vona-module-a-web' {
@@ -180,6 +190,7 @@ export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
   entity: IModuleEntity;
   model: IModuleModel;
+  redlock: MetaRedlock;
   service: IModuleService;
 }
 declare module 'vona' {

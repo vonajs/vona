@@ -10,7 +10,7 @@ export class BeanAuthSimple extends BeanBase {
     return await this.bean.auth.authenticate('a-authsimple:simple', { clientName, clientOptions });
   }
 
-  async add(userId: TableIdentity, password: string) {
+  async add(userId: TableIdentity, password: string, clientName?: string) {
     // add authsimple
     const authSimpleId = await this.scope.service.authSimple.add(userId, password);
     // todo: 将authSimpleId作为profileId添加至aAuth表中
