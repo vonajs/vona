@@ -1,4 +1,5 @@
 import type { PowerPartial } from 'vona';
+import type { EntityAuth, IAuthProviderClientRecord } from 'vona-module-a-auth';
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IAuthProviderSimpleClientOptions, IAuthProviderSimpleClientRecord } from './authProvider.simple.ts';
 import { BeanBase } from 'vona';
@@ -10,24 +11,19 @@ export class BeanAuthSimple extends BeanBase {
     return await this.bean.auth.authenticate('a-authsimple:simple', { clientName, clientOptions });
   }
 
-  async add(userId: TableIdentity, password: string, clientName?: string) {
+  async add(userId: TableIdentity, password: string, clientName?: keyof IAuthProviderClientRecord): Promise<EntityAuth> {
     // add authsimple
     const authSimpleId = await this.scope.service.authSimple.add(userId, password);
-    // todo: 将authSimpleId作为profileId添加至aAuth表中
-    // // auth
-    // const providerItem = await this.app.bean.authProvider.getAuthProvider({
-    //   module: __ThisModule__,
-    //   providerName: 'authsimple',
-    // });
-    // await this.modelAuth.insert({
-    //   userId,
-    //   providerId: providerItem.id,
-    //   profileId: authSimpleId,
-    //   profile: JSON.stringify({
-    //     authSimpleId,
-    //     rememberMe: false,
-    //   }),
-    // });
-    return authSimpleId;
+    // auth provider
+    const authProvider = await this.app.bean.authProvider.getByOnionName('a-authsimple:simple', clientName);
+    // auth
+    return await this.$scope.auth.model.auth.insert({
+      userId,
+      authProviderId: authProvider.id,
+      profileId: authSimpleId,
+      profile: JSON.stringify({
+        id: authSimpleId,
+      }),
+    });
   }
 }

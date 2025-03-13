@@ -18,7 +18,7 @@ describe('transaction.test.ts', () => {
       const res = await app.bean.model.insert(tableNameFail, {
         name: 'hello',
       });
-      const id = res[0];
+      const id = res.id;
 
       // try to change name
       const itemNew = {
@@ -53,7 +53,7 @@ describe('transaction.test.ts', () => {
       const res = await app.bean.model.insert(tableNameFail, {
         name: 'hello',
       });
-      const id = res[0];
+      const id = res.id;
 
       // try to change name
       const itemNew = {
@@ -87,7 +87,7 @@ describe('transaction.test.ts', () => {
       const res = await app.bean.model.insert(tableNameSuccess, {
         name: 'hello',
       });
-      const id = res[0];
+      const id = res.id;
 
       // try to change name
       const itemNew = {
@@ -120,7 +120,7 @@ describe('transaction.test.ts', () => {
       const res = await app.bean.model.insert(tableNameSuccess, {
         name: 'hello',
       });
-      const id = res[0];
+      const id = res.id;
 
       // try to change name
       const itemNew = {

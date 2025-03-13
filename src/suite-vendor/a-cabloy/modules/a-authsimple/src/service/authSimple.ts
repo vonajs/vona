@@ -10,8 +10,7 @@ export class ServiceAuthSimple extends BeanBase {
     password = password || this.scope.config.passwordDefault.normal;
     const hash = await this.calcPasswordHash(password);
     // auth simple
-    const res = await this.scope.model.authSimple.insert({ userId, hash });
-    return res[0];
+    return await this.scope.model.authSimple.insert({ userId, hash });
   }
 
   async verifyPassword(userId: TableIdentity, password: string): Promise<TableIdentity | undefined> {

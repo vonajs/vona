@@ -212,15 +212,24 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   }
 
   async insert<TRecord2 extends {} = TRecord>(
-    data?: Partial<TRecord2> | Partial<TRecord2>[],
+    data?: Partial<TRecord2>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TableIdentity[]>;
+  ): Promise<TRecord[]>;
+  async insert<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TRecord>;
   async insert<TRecord2 extends {} = TRecord>(
     table: string,
-    data?: Partial<TRecord2> | Partial<TRecord2>[],
+    data?: Partial<TRecord2>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TableIdentity[]>;
-  async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<TableIdentity[]> {
+  ): Promise<TRecord[]>;
+  async insert<TRecord2 extends {} = TRecord>(
+    table: string,
+    data?: Partial<TRecord2>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TRecord>;
+  async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<TRecord[] | TRecord> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
@@ -243,7 +252,15 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // debug
     this.$loggerChild('model').debug('model.insert: %s', builder.toQuery());
     // dialect
-    return await this.dialect.insert(builder);
+    const ids = await this.dialect.insert(builder);
+    // ids
+    for (let index = 0; index < ids.length; index++) {
+      const id = ids[index];
+      if (id) {
+        datas[index].id = id;
+      }
+    }
+    return Array.isArray(data) ? datas : datas[0];
   }
 
   async update<TRecord2 extends {} = TRecord>(

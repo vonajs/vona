@@ -58,9 +58,7 @@ export class BeanInstance extends BeanBase {
       config: JSON.stringify(configInstanceBase.config || {}),
       disabled: false,
     } as EntityInstance;
-    const res = await this.modelInstance.insert(instance);
-    instance.id = res[0] as number;
-    return instance;
+    return await this.modelInstance.insert(instance);
   }
 
   async reload() {

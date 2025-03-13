@@ -36,9 +36,7 @@ export class BeanAuthProvider extends BeanBase {
       clientName: data.clientName,
       clientOptions: undefined,
     };
-    // insert
-    const res2 = await this.scope.model.authProvider.insert(dataNew);
-    dataNew.id = res2[0] as number;
-    return dataNew;
+    // create
+    return await this.scope.model.authProvider.insert(dataNew);
   }
 }
