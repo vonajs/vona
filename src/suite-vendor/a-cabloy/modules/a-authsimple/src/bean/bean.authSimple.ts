@@ -13,16 +13,17 @@ export class BeanAuthSimple extends BeanBase {
 
   async add(userId: TableIdentity, password: string, clientName?: keyof IAuthProviderClientRecord): Promise<EntityAuth> {
     // add authsimple
-    const authSimpleId = await this.scope.service.authSimple.add(userId, password);
+    const authSimple = await this.scope.service.authSimple.add(userId, password);
     // auth provider
     const authProvider = await this.app.bean.authProvider.getByOnionName('a-authsimple:simple', clientName);
     // auth
+    const profileId = authSimple.id;
     return await this.$scope.auth.model.auth.insert({
       userId,
       authProviderId: authProvider.id,
-      profileId: authSimpleId,
+      profileId,
       profile: JSON.stringify({
-        id: authSimpleId,
+        id: profileId,
       }),
     });
   }
