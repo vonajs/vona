@@ -5,7 +5,7 @@ import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceAuthSimple extends BeanBase {
-  async addAuthSimple(userId: TableIdentity | undefined, password: string) {
+  async add(userId: TableIdentity | undefined, password: string) {
     // hash
     password = password || this.scope.config.passwordDefault.normal;
     const hash = await this.calcPasswordHash(password);

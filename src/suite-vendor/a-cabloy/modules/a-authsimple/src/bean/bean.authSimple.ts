@@ -12,24 +12,22 @@ export class BeanAuthSimple extends BeanBase {
 
   async add(userId: TableIdentity, password: string) {
     // add authsimple
-    const authSimpleId = await this._addAuthSimple({ password });
-    // update userId
-    await this.modelAuthSimple.update({ id: authSimpleId, userId });
-
-    // auth
-    const providerItem = await this.app.bean.authProvider.getAuthProvider({
-      module: __ThisModule__,
-      providerName: 'authsimple',
-    });
-    await this.modelAuth.insert({
-      userId,
-      providerId: providerItem.id,
-      profileId: authSimpleId,
-      profile: JSON.stringify({
-        authSimpleId,
-        rememberMe: false,
-      }),
-    });
+    const authSimpleId = await this.scope.service.authSimple.add(userId, password);
+    // todo: 将authSimpleId作为profileId添加至aAuth表中
+    // // auth
+    // const providerItem = await this.app.bean.authProvider.getAuthProvider({
+    //   module: __ThisModule__,
+    //   providerName: 'authsimple',
+    // });
+    // await this.modelAuth.insert({
+    //   userId,
+    //   providerId: providerItem.id,
+    //   profileId: authSimpleId,
+    //   profile: JSON.stringify({
+    //     authSimpleId,
+    //     rememberMe: false,
+    //   }),
+    // });
     return authSimpleId;
   }
 }
