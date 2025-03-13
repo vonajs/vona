@@ -1,9 +1,10 @@
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
+import type { PowerPartial } from 'vona';
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
-  clientName?: keyof T['clients'] | undefined;
-  clientOptions: T['default'];
+  clientName?: keyof T['clients'] | 'default'| undefined;
+  clientOptions?: PowerPartial<T['default']>;
 }
 
 export interface IAuthUserProfilePropSlice {

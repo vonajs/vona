@@ -8,7 +8,7 @@ import { Bean } from 'vona-module-a-bean';
 export class BeanAuth extends BeanBase {
   async authenticate<T extends keyof IAuthProviderRecord>(
     authProviderName: T,
-    options?: PowerPartial<IAuthenticateOptions<IAuthProviderRecord[T]>>,
+    options?: IAuthenticateOptions<IAuthProviderRecord[T]>,
   ) {
     // onionSlice
     const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(authProviderName);
@@ -23,7 +23,7 @@ export class BeanAuth extends BeanBase {
 
   private async _prepareClientOptions<T extends keyof IAuthProviderRecord>(
     optionsMeta: PowerPartial<IAuthProviderRecord[T]>,
-    options?: PowerPartial<IAuthenticateOptions<IAuthProviderRecord[T]>>,
+    options?: IAuthenticateOptions<IAuthProviderRecord[T]>,
   ): Promise<IAuthProviderRecord[T]['default']> {
     const clientName = options?.clientName ?? 'default';
     // todo: 从数据库中获取options
