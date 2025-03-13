@@ -8,14 +8,15 @@ export interface IAuthProviderClientRecord {
   default: never;
 }
 
-export interface IAuthProviderClientOptions {}
+export interface IAuthProviderClientOptions {
+  confirmed?: boolean;
+}
 
 export interface IDecoratorAuthProviderOptions<
   K extends keyof IAuthProviderClientRecord = keyof IAuthProviderClientRecord,
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 >
   extends IOnionOptionsEnable {
-  confirmed: boolean;
   default: T;
   clients: Record<K, T>;
 }
