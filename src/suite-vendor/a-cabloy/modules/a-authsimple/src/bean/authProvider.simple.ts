@@ -20,6 +20,7 @@ export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute
     // user
     const user = await this.bean.userInner.getByName(clientOptions.username);
     if (!user) return this.app.throw(401);
+    // verify
     const verified = await this.scope.service.authSimple.verify(user.id, clientOptions.password);
     if (!verified) return this.app.throw(401);
   }

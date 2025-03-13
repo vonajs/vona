@@ -14,7 +14,7 @@ export class ServiceAuthSimple extends BeanBase {
     return res[0];
   }
 
-  async verify(userId: TableIdentity, password: string): Promise<boolean> {
+  async verify(userId: TableIdentity, password: string): Promise<boolean | TableIdentity> {
     // check
     if (!password) return false;
     // authSimple
@@ -24,7 +24,7 @@ export class ServiceAuthSimple extends BeanBase {
     const res = await this.verifyPasswordHash(password, authSimple.hash);
     if (!res) return false;
     // ok
-    return true;
+    return authSimple.id;
   }
 
   async verifyPasswordHash(password: string, hash: string) {

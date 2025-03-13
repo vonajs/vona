@@ -2,6 +2,8 @@ export * from './columns.ts';
 export * from './config.ts';
 export * from './database.ts';
 export * from './entityBase.ts';
+export * from './entityBaseSimple.ts';
+export * from './entityProBase.ts';
 export * from './logger.ts';
 export * from './model.ts';
 export * from './onion/index.ts';
