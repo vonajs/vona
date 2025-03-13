@@ -30,7 +30,7 @@ export class ServiceVersion extends BeanBase {
       this.scope.broadcast.columnsClear.emit({ mode: 'all' });
       // log
       if (Object.keys(result).length > 0) {
-        this.$logger.info(JSON.stringify(result));
+        this.$logger.info(JSON.stringify(result, null, 2));
       }
       this.$logger.silly(chalk.cyan('All modules are checked successfully!'));
     } catch (err) {

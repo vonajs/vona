@@ -5,6 +5,18 @@ import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceAuthSimple extends BeanBase {
+  async addAuthSimple({ password }: any) {
+    // hash
+    password = password || this.configModule.defaultPassword;
+    const hash = await this.localSimple.calcPassword({ password });
+    // auth simple
+    const res = await this.modelAuthSimple.insert({
+      userId: 0,
+      hash,
+    });
+    return res[0];
+  }
+
   async verify(userId: TableIdentity, password: string): Promise<boolean> {
     // check
     if (!password) return false;
