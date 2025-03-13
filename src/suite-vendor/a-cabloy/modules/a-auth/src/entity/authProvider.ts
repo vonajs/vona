@@ -1,9 +1,9 @@
 import type { IAuthProviderClientOptions } from '../types/authProvider.ts';
-import { Entity, EntityBase } from 'vona-module-a-database';
+import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 import { Rule } from 'vona-module-a-openapi';
 
 @Entity('aAuthProvider')
-export class EntityAuthProvider extends EntityBase {
+export class EntityAuthProvider extends EntityBaseSimple {
   @Rule()
   disabled: boolean;
 
