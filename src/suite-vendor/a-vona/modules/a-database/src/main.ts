@@ -11,11 +11,11 @@ export class Main extends BeanSimple implements IModuleMain {
     //
     const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault, configLocal, configProd, configTest);
     this.app.config.database = deepExtend({}, _configDefault, this.app.config.database);
-    //
-    ExtendKnex(this.app);
   }
 
   async moduleLoaded() {
+    // ExtendKnex
+    ExtendKnex(this.app);
     // db
     Object.defineProperty(this.app.context, 'db', {
       enumerable: false,
