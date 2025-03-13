@@ -13,8 +13,8 @@ export function config(_app: VonaApplication) {
     },
     tableIdentity: {
       current: {
-        user: 'number' as TableIdentityType,
-        auth: 'number' as TableIdentityType,
+        user: 'string' as TableIdentityType,
+        auth: 'string' as TableIdentityType,
       },
       fields: {
         user: {
