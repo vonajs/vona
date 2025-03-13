@@ -8,7 +8,7 @@ const DATABASEMETA = Symbol('Context#__databasemeta');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
-    //
+    // config
     const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault, configLocal, configProd, configTest);
     this.app.config.database = deepExtend({}, _configDefault, this.app.config.database);
   }
