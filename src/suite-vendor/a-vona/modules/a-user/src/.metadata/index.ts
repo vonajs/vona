@@ -16,7 +16,7 @@ import type { EventSignout } from '../bean/event.signout.ts';
 /** bean: begin */
 import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
 import type { config } from '../config/config.ts';
-/** main: end */
+/** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 
@@ -130,9 +130,6 @@ declare module 'vona-module-a-user' {
 /** meta: end */
 /** config: begin */
 export * from '../config/config.ts';
-/** config: end */
-/** main: begin */
-export * from '../main.ts';
 
 @Scope()
 export class ScopeModuleAUser extends BeanScopeBase {}
