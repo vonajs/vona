@@ -23,7 +23,7 @@ export function config(_app: VonaApplication) {
               return this.increments();
             },
             userId(this: knex.Knex.TableBuilder, columnName: string) {
-              return this.integer(columnName); // default is null
+              return this.integer(columnName ?? 'userId'); // default is null
             },
           },
           string: {
@@ -31,7 +31,7 @@ export function config(_app: VonaApplication) {
               return this.bigIncrements();
             },
             userId(this: knex.Knex.TableBuilder, columnName: string) {
-              return this.bigInteger(columnName); // default is null
+              return this.bigInteger(columnName ?? 'userId'); // default is null
             },
           },
         },
@@ -41,7 +41,7 @@ export function config(_app: VonaApplication) {
               return this.increments();
             },
             authId(this: knex.Knex.TableBuilder, columnName: string) {
-              return this.integer(columnName);
+              return this.integer(columnName ?? 'authId');
             },
           },
           string: {
@@ -49,7 +49,7 @@ export function config(_app: VonaApplication) {
               return this.bigIncrements();
             },
             authId(this: knex.Knex.TableBuilder, columnName: string) {
-              return this.bigInteger(columnName);
+              return this.bigInteger(columnName ?? 'authId');
             },
           },
         },

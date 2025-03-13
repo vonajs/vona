@@ -1,8 +1,10 @@
 import type { VonaApplication } from 'vona';
+import type { TableIdentityType } from '../types/tableIdentity.ts';
 import knex from 'knex';
 import TableBuilder from 'knex/lib/schema/tablebuilder.js';
 
 export interface IBasicFieldsOptions {
+  idType?: TableIdentityType;
   id?: boolean;
   timestamps?: boolean;
   deleted?: boolean;
@@ -13,7 +15,13 @@ export function ExtendTableBuilder(_app: VonaApplication) {
   delete TableBuilder.prototype.basicFields;
   knex.TableBuilder.extend('basicFields', function (options?: IBasicFieldsOptions) {
     options = options || ({} as IBasicFieldsOptions);
-    if (options.id !== false) this.increments();
+    if (options.id !== false) {
+      if (options.idType === 'string') {
+        this.bigIncrements();
+      } else {
+        this.increments();
+      }
+    }
     if (options.timestamps !== false) this.timestamps(true, true, true);
     if (options.deleted !== false) this.boolean('deleted').defaultTo(false);
     if (options.iid !== false) this.integer('iid').defaultTo(0);
