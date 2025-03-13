@@ -4,11 +4,12 @@ import type { BeanScopeUtil } from 'vona';
 import type { BeanAuth } from '../bean/bean.auth.ts';
 /** service: end */
 /** service: begin */
+import type { ServiceAuth } from '../service/auth.ts';
+
 import type { ServiceAuthenticator } from '../service/authenticator.ts';
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-
 import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
 import 'vona';
@@ -39,15 +40,22 @@ declare module 'vona' {
 }
 /** bean: end */
 /** service: begin */
+export * from '../service/auth.ts';
 export * from '../service/authenticator.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
+    'a-auth:auth': never;
     'a-auth:authenticator': never;
   }
 
 }
 declare module 'vona-module-a-auth' {
+
+  export interface ServiceAuth {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
 
   export interface ServiceAuthenticator {
     /** @internal */
@@ -55,10 +63,12 @@ declare module 'vona-module-a-auth' {
   }
 }
 export interface IModuleService {
+  auth: ServiceAuth;
   authenticator: ServiceAuthenticator;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
+    'a-auth.service.auth': ServiceAuth;
     'a-auth.service.authenticator': ServiceAuthenticator;
   }
 }
