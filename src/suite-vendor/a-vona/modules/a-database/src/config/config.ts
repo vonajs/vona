@@ -4,6 +4,7 @@ import type {
   TSummerCachePreset,
 } from 'vona-module-a-summer';
 import type { IDatabaseClientDialectRecord } from '../types/database.ts';
+import type { TableIdentityType } from '../types/tableIdentity.ts';
 import {
   configAll,
   configAllWithIgnoreNull,
@@ -18,6 +19,9 @@ export type TypeDataBaseConfigDialects = Record<
 
 export function config(_app: VonaApplication) {
   return {
+    entity: {
+      identityType: 'string' as TableIdentityType,
+    },
     model: {
       disableDeleted: false,
       disableInstance: false,

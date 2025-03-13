@@ -1,29 +1,7 @@
-import type { IDecoratorEntityOptions } from './onion/entity.ts';
-import { BeanBaseSimple, cast } from 'vona';
 import { Rule } from 'vona-module-a-openapi';
+import { EntityBaseInner } from './entityBaseInner.ts';
 
-export class EntityBaseSimple extends BeanBaseSimple {
-  public get table(): string {
-    return cast<IDecoratorEntityOptions>(this.onionOptions).table!;
-  }
-
-  public column(column: string) {
-    return column;
-  }
-
-  public columns(...columns: string[]) {
-    return columns;
-  }
-
+export class EntityBaseSimple extends EntityBaseInner {
   @Rule()
-  createdAt: Date;
-
-  @Rule()
-  updatedAt: Date;
-
-  @Rule()
-  deleted: boolean;
-
-  @Rule()
-  iid: number;
+  id: number;
 }
