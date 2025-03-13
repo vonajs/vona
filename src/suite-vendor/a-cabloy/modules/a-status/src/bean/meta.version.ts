@@ -6,13 +6,13 @@ import { Meta } from 'vona-module-a-meta';
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
-      // create table: aStatus
+      // aStatus
       const entity = this.scope.entity.status;
       await this.bean.model.createTable(entity.table, table => {
-        table.basicFields();
+        table.basicFieldsSimple();
         table.string(entity.column('module'), 255);
         table.string(entity.column('name'), 255);
-        table.text(entity.column('value'));
+        table.json(entity.column('value'));
       });
     }
   }

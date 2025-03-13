@@ -20,9 +20,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       await this.bean.model.createTable(entityAuthProvider.table, table => {
         table.basicFieldsSimple();
         table.boolean(entityAuthProvider.column('disabled')).defaultTo(false);
-        table.string(entityAuthProvider.column('module'), 50);
-        table.string(entityAuthProvider.column('providerName'), 50);
-        table.string(entityAuthProvider.column('clientName'), 50);
+        table.string(entityAuthProvider.column('module'), 255);
+        table.string(entityAuthProvider.column('providerName'), 255);
+        table.string(entityAuthProvider.column('clientName'), 255);
         table.json(entityAuthProvider.column('clientOptions'));
       });
     }

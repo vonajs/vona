@@ -1,8 +1,8 @@
-import { Entity, EntityBase } from 'vona-module-a-database';
+import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 import { Rule } from 'vona-module-a-openapi';
 
 @Entity('aStatus')
-export class EntityStatus extends EntityBase {
+export class EntityStatus extends EntityBaseSimple {
   @Rule()
   module: string;
 
@@ -10,5 +10,5 @@ export class EntityStatus extends EntityBase {
   name: string;
 
   @Rule()
-  value: string;
+  value: object | undefined;
 }
