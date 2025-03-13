@@ -21,7 +21,7 @@ import type { ModelAuthSimple } from '../model/authSimple.ts';
 
 /** service: end */
 /** service: begin */
-import type { ServiceSimple } from '../service/simple.ts';
+import type { ServiceAuthSimple } from '../service/authSimple.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -144,28 +144,28 @@ export * from '../model/authSimple.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
-    'a-authsimple:simple': never;
+    'a-authsimple:authSimple': never;
   }
 
 }
 declare module 'vona-module-a-authsimple' {
 
-  export interface ServiceSimple {
+  export interface ServiceAuthSimple {
     /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 }
 export interface IModuleService {
-  simple: ServiceSimple;
+  authSimple: ServiceAuthSimple;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-authsimple.service.simple': ServiceSimple;
+    'a-authsimple.service.authSimple': ServiceAuthSimple;
   }
 }
 /** meta: end */
 /** service: begin */
-export * from '../service/simple.ts';
+export * from '../service/authSimple.ts';
 
 @Scope()
 export class ScopeModuleAAuthsimple extends BeanScopeBase {}

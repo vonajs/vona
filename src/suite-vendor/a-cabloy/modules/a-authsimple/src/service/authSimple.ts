@@ -4,7 +4,7 @@ import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 @Service()
-export class ServiceSimple extends BeanBase {
+export class ServiceAuthSimple extends BeanBase {
   async verify(userId: TableIdentity, password: string): Promise<boolean> {
     // check
     if (!password) return false;
