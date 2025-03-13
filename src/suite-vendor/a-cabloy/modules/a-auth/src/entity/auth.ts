@@ -7,7 +7,7 @@ export class EntityAuth extends EntityBase {
   userId: TableIdentity;
 
   @Rule()
-  authProviderId: TableIdentity;
+  authProviderId: number;
 
   @Rule()
   profileId: string;

@@ -11,6 +11,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       await this.bean.model.createTable(entity.table, table => {
         table.basicFields();
         table.userId();
+        table.integer('authProviderId');
+        table.string('profileId', 255);
+        table.text('profile');
       });
     }
   }
