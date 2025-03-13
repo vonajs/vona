@@ -63,12 +63,13 @@ export class ServiceVersion extends BeanBase {
 
     if (options.scene === 'update') {
       // confirm table aVersion exists
-      const hasTableVersion = await this.bean.model.schema.hasTable('aVersion');
+      const entity = this.scope.entity.version;
+      const hasTableVersion = await this.bean.model.schema.hasTable(entity.table);
       if (!hasTableVersion) {
-        await this.bean.model.createTable('aVersion', table => {
-          table.basicFields({ deleted: false, iid: false });
-          table.string('module', 50);
-          table.integer('version');
+        await this.bean.model.createTable(entity.table, table => {
+          table.basicFieldsSimple({ deleted: false, iid: false });
+          table.string(entity.column('module'), 255);
+          table.integer(entity.column('version'));
         });
       }
     }

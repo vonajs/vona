@@ -14,14 +14,14 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
     if (options.version === 1) {
       const entity = this.scope.entity.versionInit;
       await this.bean.model.createTable(entity.table, table => {
-        table.basicFields({ deleted: false, iid: false });
-        table.string(entity.column('instanceName'), 50);
-        table.string(entity.column('module'), 50);
+        table.basicFieldsSimple({ deleted: false, iid: false });
+        table.string(entity.column('instanceName'), 255);
+        table.string(entity.column('module'), 255);
         table.integer(entity.column('version'));
       });
       const entity2 = this.scope.entity.viewRecord;
       await this.bean.model.createTable(entity2.table, table => {
-        table.basicFields({ deleted: true, iid: false });
+        table.basicFieldsSimple({ deleted: true, iid: false });
         table.string(entity2.column('viewName'), 255);
         table.text(entity2.column('viewSql'));
       });

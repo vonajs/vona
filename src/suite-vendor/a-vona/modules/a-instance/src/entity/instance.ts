@@ -1,10 +1,10 @@
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { OmitClass } from 'vona';
-import { Entity, EntityBase } from 'vona-module-a-database';
+import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 import { Rule } from 'vona-module-a-openapi';
 
 @Entity('aInstance')
-export class EntityInstance extends OmitClass(EntityBase, ['iid']) {
+export class EntityInstance extends OmitClass(EntityBaseSimple, ['iid']) {
   @Rule()
   disabled: boolean;
 
