@@ -22,7 +22,7 @@ export class BeanStatusBase extends BeanBase {
       module: this[SymbolModuleBelong],
       name,
     });
-    return status ? JSON.parse(status.value) : undefined;
+    return status?.value;
   }
 
   private async _set(name: any, value: any): Promise<void> {

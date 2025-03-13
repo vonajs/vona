@@ -29,7 +29,7 @@ export function config(_app: VonaApplication) {
     },
     dialects: {
       mysql: 'a-databasedialect.databaseDialect.mysql',
-      mysql2: 'a-databasedialect.databaseDialect.mysql2',
+      mysql2: 'a-databasedialect.databaseDialect.mysql3',
       pg: 'a-databasedialect.databaseDialect.pg',
     } as unknown as TypeDataBaseConfigDialects,
     summer: {

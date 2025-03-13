@@ -10,5 +10,5 @@ export class EntityStatus extends EntityBaseSimple {
   name: string;
 
   @Rule()
-  value: object | undefined;
+  value: any;
 }

@@ -17,12 +17,24 @@ export class ControllerStatus extends BeanBase {
     // get
     let value = await this.scope.status.get('enable');
     assert.equal(value, undefined);
-
     // set
     await this.scope.status.set('enable', true);
-
     // get
     value = await this.scope.status.get('enable');
     assert.equal(value, true);
+
+    // get
+    let user = await this.scope.status.get('user');
+    assert.equal(user, undefined);
+    // set
+    await this.scope.status.set('user', { name: 'zhennann', age: 18 });
+    // get
+    user = await this.scope.status.get('user');
+    assert.deepEqual(user, { name: 'zhennann', age: 18 });
+    // update
+    await this.scope.status.set('user', { name: 'zhennann', age: 19 });
+    // get
+    user = await this.scope.status.get('user');
+    assert.deepEqual(user, { name: 'zhennann', age: 19 });
   }
 }

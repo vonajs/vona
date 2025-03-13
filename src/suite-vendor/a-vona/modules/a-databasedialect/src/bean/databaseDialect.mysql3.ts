@@ -3,7 +3,7 @@ import { DatabaseDialect } from 'vona-module-a-database';
 import { DatabaseDialectMysql } from './databaseDialect.mysql.ts';
 
 @DatabaseDialect()
-export class DatabaseDialectMysql2 extends DatabaseDialectMysql {
+export class DatabaseDialectMysql3 extends DatabaseDialectMysql {
   getConfigBase(): Knex.Config | undefined {
     return super.getConfigBase();
     // const configBase = super.getConfigBase();
