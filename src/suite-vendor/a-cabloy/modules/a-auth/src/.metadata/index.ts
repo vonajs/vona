@@ -8,10 +8,10 @@ import type { BeanAuth } from '../bean/bean.auth.ts';
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
+import type { ServiceAuthenticator } from '../service/authenticator.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceAuth } from '../service/auth.ts';
-import type { ServiceAuthenticator } from '../service/authenticator.ts';
+import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 
 /** service: end */
 /** scope: begin */
@@ -96,21 +96,21 @@ declare module 'vona-module-a-auth' {
     get scope(): ScopeModuleAAuth;
   }
 }
+export * from '../service/authenticator.ts';
 /** meta: end */
 /** service: begin */
-export * from '../service/auth.ts';
-export * from '../service/authenticator.ts';
+export * from '../service/authInnerAdapter.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
-    'a-auth:auth': never;
+    'a-auth:authInnerAdapter': never;
     'a-auth:authenticator': never;
   }
 
 }
 declare module 'vona-module-a-auth' {
 
-  export interface ServiceAuth {
+  export interface ServiceAuthInnerAdapter {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
@@ -121,12 +121,12 @@ declare module 'vona-module-a-auth' {
   }
 }
 export interface IModuleService {
-  auth: ServiceAuth;
+  authInnerAdapter: ServiceAuthInnerAdapter;
   authenticator: ServiceAuthenticator;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-auth.service.auth': ServiceAuth;
+    'a-auth.service.authInnerAdapter': ServiceAuthInnerAdapter;
     'a-auth.service.authenticator': ServiceAuthenticator;
   }
 }
