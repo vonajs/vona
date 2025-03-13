@@ -3,6 +3,6 @@ import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
 @Meta()
-export class Meta<%=argv.beanNameCapitalize%> extends BeanBase implements IMetaVersionUpdate {
+export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(_options: IMetaVersionUpdateOptions) {}
 }
