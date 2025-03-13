@@ -1,24 +1,24 @@
 import type { VonaApplication } from 'vona';
 import type { TableIdentityType } from '../types/tableIdentity.ts';
 import knex from 'knex';
+import { __ThisModule__ } from '../.metadata/this.ts';
 
 export interface IBasicFieldsOptions {
-  idType?: TableIdentityType;
   id?: boolean;
   timestamps?: boolean;
   deleted?: boolean;
   iid?: boolean;
 }
 
-export function ExtendTableBuilder(_app: VonaApplication) {
-  knex.TableBuilder.extend('basicFields', function (options?: IBasicFieldsOptions) {
+export function ExtendTableBuilder(app: VonaApplication) {
+  const scope = app.bean.scope(__ThisModule__);
+  function _basicFields(this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions, idType?: TableIdentityType) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) {
-      if (options.idType === 'string') {
+      const _idType = idType ?? scope.config.entity.idType;
+      if (_idType === 'string') {
         this.bigIncrements();
-      } else if (options.idType === 'number') {
-        this.increments();
-      } else {
+      } else if (_idType === 'number') {
         this.increments();
       }
     }
@@ -26,6 +26,23 @@ export function ExtendTableBuilder(_app: VonaApplication) {
     if (options.deleted !== false) this.boolean('deleted').defaultTo(false);
     if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
+  }
+
+  knex.TableBuilder.extend('basicFields', function (this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions) {
+    _basicFields.call(this, options, undefined);
+    return this;
+  });
+  knex.TableBuilder.extend('basicFieldsSimple', function (this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions) {
+    _basicFields.call(this, options, 'number');
+    return this;
+  });
+  knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName?: string) {
+    const _idType = scope.config.entity.idType;
+    if (_idType === 'string') {
+      return this.bigInteger(columnName ?? 'userId'); // default value is null
+    } else if (_idType === 'number') {
+      return this.integer(columnName ?? 'userId'); // default value is null
+    }
   });
   knex.TableBuilder.extend('int0', function (this: knex.Knex.TableBuilder, columnName: string) {
     return this.integer(columnName).defaultTo(0);
@@ -49,14 +66,10 @@ declare module 'knex' {
   namespace Knex {
     interface TableBuilder {
       basicFields(options?: IBasicFieldsOptions): Knex.TableBuilder;
+      basicFieldsSimple(options?: IBasicFieldsOptions): Knex.TableBuilder;
+      userId(columnName?: string): Knex.ColumnBuilder;
       int0(columnName: string): Knex.ColumnBuilder;
       int1(columnName: string): Knex.ColumnBuilder;
-      atomId(): Knex.ColumnBuilder;
-      itemId(): Knex.ColumnBuilder;
-      userId(): Knex.ColumnBuilder;
-      atomClassId(): Knex.ColumnBuilder;
-      atomIdMain(): Knex.ColumnBuilder;
-      atomClassIdMain(): Knex.ColumnBuilder;
       description(length?: number): Knex.ColumnBuilder;
       content(useText?: boolean): Knex.ColumnBuilder;
     }
