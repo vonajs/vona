@@ -14,15 +14,15 @@ export class ServiceAuthSimple extends BeanBase {
     return res[0];
   }
 
-  async verify(userId: TableIdentity, password: string): Promise<boolean | TableIdentity> {
+  async verify(userId: TableIdentity, password: string): Promise<TableIdentity | undefined> {
     // check
-    if (!password) return false;
+    if (!password) return;
     // authSimple
     const authSimple = await this.scope.model.authSimple.get({ userId });
-    if (!authSimple) return false;
+    if (!authSimple) return;
     // verify
     const res = await this.verifyPasswordHash(password, authSimple.hash);
-    if (!res) return false;
+    if (!res) return;
     // ok
     return authSimple.id;
   }

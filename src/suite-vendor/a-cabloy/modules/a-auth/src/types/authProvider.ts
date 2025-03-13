@@ -1,5 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { IAuthUserProfile } from './auth.ts';
 
 export interface IAuthProviderRecord {}
 
@@ -19,7 +20,7 @@ export interface IDecoratorAuthProviderOptions<
 }
 
 export interface IAuthProviderExecute {
-  execute(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<any>;
+  execute(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<IAuthUserProfile>;
 }
 
 declare module 'vona-module-a-onion' {

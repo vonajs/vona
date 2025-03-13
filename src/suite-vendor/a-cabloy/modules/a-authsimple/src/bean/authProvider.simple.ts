@@ -1,4 +1,4 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IAuthUserProfile, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
 
@@ -16,12 +16,17 @@ export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOption
 
 @AuthProvider<IAuthProviderOptionsSimple>()
 export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute {
-  async execute(clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple) {
+  async execute(clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple): Promise<IAuthUserProfile> {
     // user
     const user = await this.bean.userInner.getByName(clientOptions.username);
     if (!user) return this.app.throw(401);
     // verify
-    const verified = await this.scope.service.authSimple.verify(user.id, clientOptions.password);
-    if (!verified) return this.app.throw(401);
+    const profileId = await this.scope.service.authSimple.verify(user.id, clientOptions.password);
+    if (!profileId) return this.app.throw(401);
+    // profile
+    const profile: IAuthUserProfile = {
+      id: profileId,
+    };
+    return profile;
   }
 }

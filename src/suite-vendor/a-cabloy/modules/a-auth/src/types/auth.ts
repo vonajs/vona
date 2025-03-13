@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'vona-module-a-database';
 import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
@@ -15,8 +16,8 @@ export interface IAuthUserProfileName {
   middleName?: string;
 }
 export interface IAuthUserProfile {
-  id: string;
-  username: string;
+  id: string | TableIdentity;
+  username?: string;
   displayName?: string;
   name?: IAuthUserProfileName;
   gender?: string; // male/female
