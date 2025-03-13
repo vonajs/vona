@@ -9,15 +9,13 @@ export class ServiceAuthSimple extends BeanBase {
     // check
     if (!password) return false;
     // authSimple
-    const authSimple = await this.modelAuthSimple.get({
-      userId,
-    });
+    const authSimple = await this.scope.model.authSimple.get({ userId });
     if (!authSimple) return false;
     // verify
-    const res = await this.verifyPassword({ password, hash: authSimple.hash });
+    const res = await this.verifyPasswordHash(password, authSimple.hash);
     if (!res) return false;
     // ok
-    return authSimple;
+    return true;
   }
 
   async verifyPasswordHash(password: string, hash: string) {
