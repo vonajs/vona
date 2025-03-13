@@ -15,6 +15,7 @@ export interface IDecoratorAuthProviderOptions<
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 >
   extends IOnionOptionsEnable {
+  confirmed: boolean;
   default: T;
   clients: Record<K, T>;
 }

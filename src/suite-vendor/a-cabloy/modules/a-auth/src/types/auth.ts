@@ -24,4 +24,5 @@ export interface IAuthUserProfile {
   profileUrl?: string;
   emails?: IAuthUserProfilePropSlice[];
   photos?: IAuthUserProfilePropSlice[];
+  confirmed?: boolean;
 }
