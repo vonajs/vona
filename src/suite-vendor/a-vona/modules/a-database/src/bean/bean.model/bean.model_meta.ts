@@ -33,7 +33,7 @@ export class BeanModelMeta extends BeanBase {
   get table(): string {
     let table = this.options.table;
     if (!table && this.options.entity) {
-      const beanOptionsEntity = appResource.getBean(this.options.entity as any);
+      const beanOptionsEntity = appResource.getBean(this.options.entity);
       const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
       table = entityOptions.table;
     }

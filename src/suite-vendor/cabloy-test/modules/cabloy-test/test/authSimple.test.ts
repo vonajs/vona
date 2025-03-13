@@ -6,10 +6,10 @@ describe.only('authSimple.test.ts.test.ts', () => {
   it('action:passwordHash', async () => {
     const scope = app.bean.scope('a-authsimple');
     const password = '12344##1xxaasDFQ,.$';
-    const hash = await scope.service.simple.calcPasswordHash(password);
-    let verified = await scope.service.simple.verifyPasswordHash(password, hash);
+    const hash = await scope.service.authSimple.calcPasswordHash(password);
+    let verified = await scope.service.authSimple.verifyPasswordHash(password, hash);
     assert.equal(verified, true);
-    verified = await scope.service.simple.verifyPasswordHash(`${password}failed`, hash);
+    verified = await scope.service.authSimple.verifyPasswordHash(`${password}failed`, hash);
     assert.equal(verified, false);
   });
 
