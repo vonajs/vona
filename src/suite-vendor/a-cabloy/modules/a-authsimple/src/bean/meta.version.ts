@@ -6,7 +6,7 @@ import { Meta } from 'vona-module-a-meta';
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVersionInit {
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
-      // create table: aAuthSimple
+      // aAuthSimple
       const entity = this.scope.entity.authSimple;
       await this.bean.model.createTable(entity.table, table => {
         table.authIdPrimary();
