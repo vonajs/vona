@@ -19,7 +19,7 @@ export type TypeDataBaseConfigDialects = Record<
 
 export function config(_app: VonaApplication) {
   return {
-    entity: {
+    table: {
       idType: 'string' as TableIdentityType,
     },
     model: {

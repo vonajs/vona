@@ -15,7 +15,7 @@ export function ExtendTableBuilder(app: VonaApplication) {
   function _basicFields(this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions, idType?: TableIdentityType) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) {
-      const _idType = idType ?? scope.config.entity.idType;
+      const _idType = idType ?? scope.config.table.idType;
       if (_idType === 'string') {
         this.bigIncrements();
       } else if (_idType === 'number') {
@@ -37,7 +37,7 @@ export function ExtendTableBuilder(app: VonaApplication) {
     return this;
   });
   knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName?: string) {
-    const _idType = scope.config.entity.idType;
+    const _idType = scope.config.table.idType;
     if (_idType === 'string') {
       return this.bigInteger(columnName ?? 'userId'); // default value is null
     } else if (_idType === 'number') {
