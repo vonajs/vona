@@ -25,7 +25,7 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
     const data2 = await this.prepareData<TRecord2>(table, data);
     // insert
     const res = await this.insert(table, data2, options);
-    cast(data2).id = res[0];
+    if (res[0]) cast(data2).id = res[0];
     return data2;
   }
 
