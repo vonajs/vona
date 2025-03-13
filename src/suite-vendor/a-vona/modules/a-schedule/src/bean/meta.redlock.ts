@@ -4,11 +4,11 @@ import { Meta } from 'vona-module-a-meta';
 import { BeanRedlockBase } from 'vona-module-a-redlock';
 
 export interface MetaRedlock {
-  lock: <RESULT, KEY extends string>(
+  lock<RESULT, KEY extends string>(
     resource: `schedule.${KEY}`,
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockOptions,
-  ) => Promise<RESULT>;
+  ): Promise<RESULT>;
 }
 
 @Meta()

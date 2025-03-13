@@ -10,11 +10,11 @@ export interface MetaRedlock {
   //   fn: FunctionAsync<RESULT>,
   //   options?: IRedlockLockIsolateOptions,
   // ): Promise<RESULT>;
-  lockIsolate: <RESULT, KEY extends string>(
+  lockIsolate<RESULT, KEY extends string>(
     resource: `registerInstance.${KEY}`,
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockIsolateOptions,
-  ) => Promise<RESULT>;
+  ): Promise<RESULT>;
 }
 
 @Meta()
