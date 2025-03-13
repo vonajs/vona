@@ -1,19 +1,24 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
+
 /** authProvider: begin */
 import type { IAuthProviderOptionsSimple } from '../bean/authProvider.simple.ts';
-
 /** authProvider: end */
 /** authProvider: begin */
 import type { AuthProviderSimple } from '../bean/authProvider.simple.ts';
 /** bean: end */
 /** bean: begin */
 import type { BeanAuthSimple } from '../bean/bean.authSimple.ts';
-import type { config } from '../config/config.ts';
 
+import type { config } from '../config/config.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityAuthSimple } from '../entity/authSimple.ts';
+/** model: end */
+/** model: begin */
+import type { ModelAuthSimple } from '../model/authSimple.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceSimple } from '../service/simple.ts';
@@ -71,7 +76,7 @@ declare module 'vona' {
     authSimple: BeanAuthSimple;
   }
 }
-/** entity: end */
+/** model: end */
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
@@ -99,6 +104,26 @@ declare module 'vona-module-a-authsimple' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IModelRecord {
+    'a-authsimple:authSimple': IDecoratorModelOptions;
+  }
+
+}
+declare module 'vona-module-a-authsimple' {
+
+  export interface ModelAuthSimple {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
+export interface IModuleModel {
+  authSimple: ModelAuthSimple;
+}
+/** bean: end */
+/** entity: begin */
+export * from '../entity/authSimple.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -113,9 +138,9 @@ declare module 'vona-module-a-authsimple' {
     get scope(): ScopeModuleAAuthsimple;
   }
 }
-/** bean: end */
-/** entity: begin */
-export * from '../entity/authSimple.ts';
+/** entity: end */
+/** model: begin */
+export * from '../model/authSimple.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -150,6 +175,7 @@ export interface ScopeModuleAAuthsimple {
   config: TypeModuleConfig<typeof config>;
   authProvider: IModuleAuthProvider;
   entity: IModuleEntity;
+  model: IModuleModel;
   service: IModuleService;
 }
 declare module 'vona' {
