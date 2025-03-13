@@ -1,9 +1,8 @@
-import type { TableIdentity } from 'vona-module-a-database';
-import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
 import type { PowerPartial } from 'vona';
+import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
-  clientName?: keyof T['clients'] | 'default'| undefined;
+  clientName?: keyof T['clients'] | 'default' | undefined;
   clientOptions?: PowerPartial<T['default']>;
 }
 
@@ -17,7 +16,7 @@ export interface IAuthUserProfileName {
   middleName?: string;
 }
 export interface IAuthUserProfile {
-  id: string | TableIdentity;
+  id: string;
   username?: string;
   displayName?: string;
   name?: IAuthUserProfileName;

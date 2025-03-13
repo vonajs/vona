@@ -25,7 +25,7 @@ export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute
     if (!profileId) return this.app.throw(401);
     // profile
     const profile: IAuthUserProfile = {
-      id: profileId,
+      id: profileId.toString(),
       confirmed: clientOptions.confirmed,
     };
     return profile;
