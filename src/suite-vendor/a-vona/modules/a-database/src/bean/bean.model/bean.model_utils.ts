@@ -46,7 +46,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async defaultData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string): Promise<TResult2> {
     table = table || this.table;
     if (!table) return {} as TResult2;
-    if (this.columnsDefaultCache[table]) {
+    if (!this.columnsDefaultCache[table]) {
       const data = {};
       // columns
       const columns = await this.columns(table);
