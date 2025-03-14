@@ -260,11 +260,12 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const ids = await this.dialect.insert(builder);
     // combine
     const result: any[] = [];
+    const dataDefault = await this.default(table);
     for (let index = 0; index < ids.length; index++) {
-      const dataDefault = await this.default();
-      if (ids[index] !== undefined) dataDefault.id = ids[index];
+      const dataWithId: any = {};
+      if (ids[index] !== undefined) dataWithId.id = ids[index];
       // datas[index] maybe has id
-      result.push(Object.assign(dataDefault, datas[index]));
+      result.push(Object.assign({}, dataDefault, dataWithId, datas[index]));
     }
     // ok
     return Array.isArray(data) ? result : result[0];
