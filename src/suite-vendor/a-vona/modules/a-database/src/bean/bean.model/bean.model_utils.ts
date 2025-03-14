@@ -8,7 +8,7 @@ import { checkWhere } from '../../common/checkWhere.ts';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
-let __columns: Record<string, ITableColumns> = {};
+const SymbolColumns = Symbol('SymbolColumns');
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<TResult2>;
@@ -45,14 +45,21 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return data;
   }
 
+  protected get columnsCache(): Record<string, ITableColumns> {
+    if (!this.dbOriginal[SymbolColumns]) {
+      this.dbOriginal[SymbolColumns] = {};
+    }
+    return this.dbOriginal[SymbolColumns];
+  }
+
   async columns(table?: string): Promise<ITableColumns> {
     table = table || this.table;
     if (!table) return {};
-    let columns = __columns[table];
+    let columns = this.columnsCache[table];
     if (!columns) {
       const dialect = this.dialect;
       const map = await this.self.builder(table).columnInfo();
-      columns = __columns[table] = {};
+      columns = this.columnsCache[table] = {};
       for (const name in map) {
         columns[name] = dialect.coerceColumn(map[name]);
       }
@@ -60,16 +67,16 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return columns;
   }
 
-  columnsClear(table) {
+  columnsClear(table?: string) {
     table = table || this.table;
-    const exists = __columns[table];
-    delete __columns[table];
+    const exists = this.columnsCache[table];
+    delete this.columnsCache[table];
     return exists;
   }
 
   columnsClearAll() {
-    const exists = Object.keys(__columns).length > 0;
-    __columns = {};
+    const exists = Object.keys(this.columnsCache).length > 0;
+    this.dbOriginal[SymbolColumns] = undefined;
     return exists;
   }
 
