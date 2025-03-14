@@ -211,29 +211,29 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return this.extractCount(res);
   }
 
-  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async insert<TRecord2 extends {} = TRecord>(
     data?: Partial<TRecord2>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2>;
-  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TRecord>;
+  async insert<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2>;
-  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, data?, options?): Promise<TResult2[] | TResult2> {
-
+  ): Promise<TRecord>;
+  async insert(table?, data?, options?): Promise<TRecord[] | TRecord> {
+    return await this.batchInsert(table, data, options);
   }
 
-  async inserts<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async batchInsert<TRecord2 extends {} = TRecord>(
     data: Partial<TRecord2>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2[]>;
-  async inserts<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TRecord[]>;
+  async batchInsert<TRecord2 extends {} = TRecord>(
     table: string,
     data: Partial<TRecord2>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2[]>;
-  async inserts<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, data?, options?): Promise<TResult2[] | TResult2> {
+  ): Promise<TRecord[]>;
+  async batchInsert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<TRecord[] | TRecord> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
