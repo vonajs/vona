@@ -469,6 +469,7 @@ declare module 'vona-module-a-web' {
     '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
     '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
     '/vona/test/onion/echo4': '/vona/test/onion/echo4';
+    '/vona/test/onion/echo6': '/vona/test/onion/echo6';
     '/vona/test/passport/login': '/vona/test/passport/login';
     '/vona/test/passport/refresh': '/vona/test/passport/refresh';
     '/vona/test/passport/logout': '/vona/test/passport/logout';
@@ -521,7 +522,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `vona-test::${K}` {
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `vona-test::${K}` {
   return `vona-test::${key}`;
 }
 /** scope: end */

@@ -6,7 +6,7 @@ import { Api, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Get, Post } from 'vona-module-a-web';
 import { z } from 'zod';
-import { locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/index.ts';
 import { DtoUser } from '../dto/user.ts';
 
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
@@ -29,7 +29,7 @@ export class ControllerOnion extends BeanBase {
     @Query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Query('name', z.number().optional()) name: string,
-    @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
+    @Body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
     _user: DtoUser,
   ): string | undefined {
     return `echo: ${id}:${temp}:${name}`;
@@ -40,10 +40,10 @@ export class ControllerOnion extends BeanBase {
   @UseGuardGlobal('a-user:passport', { public: true })
   // echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
-    @Param('userId', v.description(locale('UserId')), v.example('example:1')) _userId: number,
-    @Param('userName', v.description(locale('UserId')), v.example('example:1')) _userName: string,
+    @Param('userId', v.description($locale('UserId')), v.example('example:1')) _userId: number,
+    @Param('userName', v.description($locale('UserId')), v.example('example:1')) _userName: string,
     @Query(DtoUser) _user: DtoUser,
-    @Body(v.description(locale('User')), z.object({ id: z.number().openapi({ description: locale('UserId') }) }))
+    @Body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
     user: DtoUser,
   ): DtoUser {
     // const ctx = this.app.currentContext;
@@ -56,7 +56,7 @@ export class ControllerOnion extends BeanBase {
   echo3(
     @Param('userId') _userId: number,
     @Query('id', v.optional()) id: number,
-    @Headers('Accept', v.description(locale('UserId'))) accept: string,
+    @Headers('Accept', v.description($locale('UserId'))) accept: string,
   ) {
     // this.scope.util.combineApiPath
 

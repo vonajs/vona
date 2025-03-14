@@ -1,14 +1,13 @@
-/** config: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeModuleConfig } from 'vona';
-/** service: end */
-/** service: begin */
-
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
+
+/** service: end */
+/** service: begin */
 import type { ServiceRedlock } from '../service/redlock.ts';
+/** config: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
@@ -20,11 +19,14 @@ import 'vona';
 
 export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-redlock:redlock': never;
   }
+
 }
 declare module 'vona-module-a-redlock' {
+
   export interface ServiceRedlock {
     /** @internal */
     get scope(): ScopeModuleARedlock;
@@ -62,6 +64,7 @@ declare module 'vona' {
   export interface IBeanScopeConfig {
     'a-redlock': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

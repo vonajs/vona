@@ -1,23 +1,23 @@
-import type { TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
-/** monkey: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
 
-import { Scope } from 'vona-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import { BeanWorker } from '../bean/bean.worker.ts';
+import type { BeanWorker } from '../bean/bean.worker.ts';
 /** broadcast: end */
 /** broadcast: begin */
-import { BroadcastExitAll } from '../bean/broadcast.exitAll.ts';
-
-import { BroadcastReloadAll } from '../bean/broadcast.reloadAll.ts';
+import type { BroadcastExitAll } from '../bean/broadcast.exitAll.ts';
+import type { BroadcastReloadAll } from '../bean/broadcast.reloadAll.ts';
 /** cacheRedis: end */
 /** cacheRedis: begin */
-import { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.ts';
-import { config } from '../config/config.ts';
+import type { CacheRedisWorkerAlive } from '../bean/cacheRedis.workerAlive.ts';
+
+import type { config } from '../config/config.ts';
+/** monkey: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
 import 'vona';
 import 'vona';

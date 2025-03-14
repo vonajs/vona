@@ -1,5 +1,3 @@
-/** main: end */
-/** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** service: end */
 /** service: begin */
@@ -7,6 +5,8 @@ import type { ServiceBroadcast } from '../service/broadcast.ts';
 /** service: end */
 /** service: begin */
 
+/** main: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
@@ -18,11 +18,14 @@ import 'vona';
 
 export * from '../main.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-broadcast:broadcast': never;
   }
+
 }
 declare module 'vona-module-a-broadcast' {
+
   export interface ServiceBroadcast {
     /** @internal */
     get scope(): ScopeModuleABroadcast;
@@ -55,6 +58,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     broadcast: ScopeModuleABroadcast;
   }
+
 }
 
 /** scope: end */

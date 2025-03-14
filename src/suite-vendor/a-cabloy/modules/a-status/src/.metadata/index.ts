@@ -1,5 +1,3 @@
-/** meta redlock: end */
-/** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** model: end */
 /** meta: begin */
@@ -16,6 +14,8 @@ import type { EntityStatus } from '../entity/status.ts';
 /** model: end */
 /** model: begin */
 import type { ModelStatus } from '../model/status.ts';
+/** meta redlock: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
@@ -24,17 +24,22 @@ import 'vona';
 
 export * from '../bean/meta.redlock.ts';
 declare module 'vona-module-a-database' {
+
   export interface IEntityRecord {
     'a-status:status': IDecoratorEntityOptions;
   }
+
 }
-declare module 'vona-module-a-status' {}
+declare module 'vona-module-a-status' {
+
+}
 export interface IModuleEntity {
   status: EntityStatus;
 }
 /** entity: end */
 /** entity: begin */
 declare module 'vona-module-a-status' {
+
   export interface EntityStatus {
     column: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(column: K) => K;
     columns: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
@@ -42,11 +47,14 @@ declare module 'vona-module-a-status' {
 }
 export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
+
   export interface IModelRecord {
     'a-status:status': IDecoratorModelOptions;
   }
+
 }
 declare module 'vona-module-a-status' {
+
   export interface ModelStatus {
     /** @internal */
     get scope(): ScopeModuleAStatus;
@@ -61,12 +69,15 @@ export * from '../entity/status.ts';
 /** model: begin */
 export * from '../model/status.ts';
 declare module 'vona' {
+
   export interface IMetaRecord {
     'a-status:redlock': never;
     'a-status:version': never;
   }
+
 }
 declare module 'vona-module-a-status' {
+
   export interface MetaRedlock {
     /** @internal */
     get scope(): ScopeModuleAStatus;
@@ -96,6 +107,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     status: ScopeModuleAStatus;
   }
+
 }
 
 /** scope: end */

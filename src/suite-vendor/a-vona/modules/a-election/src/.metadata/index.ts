@@ -1,5 +1,3 @@
-/** service: end */
-/** scope: begin */
 import type { BeanScopeUtil } from 'vona';
 /** cacheRedis: begin */
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
@@ -11,9 +9,11 @@ import type { CacheRedisElection } from '../bean/cacheRedis.election.ts';
 /** service: begin */
 import type { ServiceElection } from '../service/election.ts';
 /** service: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
+/** service: end */
 /** service: begin */
 
-import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
 import 'vona';
@@ -22,11 +22,14 @@ import 'vona';
 
 export * from '../bean/cacheRedis.election.ts';
 declare module 'vona-module-a-cache' {
+
   export interface ICacheRedisRecord {
     'a-election:election': IDecoratorCacheRedisOptions;
   }
+
 }
 declare module 'vona-module-a-election' {
+
   export interface CacheRedisElection {
     /** @internal */
     get scope(): ScopeModuleAElection;
@@ -39,11 +42,14 @@ export interface IModuleCacheRedis {
 /** service: begin */
 export * from '../service/election.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-election:election': never;
   }
+
 }
 declare module 'vona-module-a-election' {
+
   export interface ServiceElection {
     /** @internal */
     get scope(): ScopeModuleAElection;
@@ -74,6 +80,7 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     election: ScopeModuleAElection;
   }
+
 }
 
 /** scope: end */

@@ -1,9 +1,8 @@
-/** main: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeModuleConfig } from 'vona';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** config: begin */
 import type { config } from '../config/config.ts';
+/** main: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
@@ -33,6 +32,7 @@ declare module 'vona' {
   export interface IBeanScopeConfig {
     'a-i18n': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

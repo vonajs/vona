@@ -1,14 +1,13 @@
-/** locale: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeLocaleBase, TypeModuleLocales } from 'vona';
-
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'vona';
 /** bean: end */
 /** bean: begin */
 import type { BeanValidator } from '../bean/bean.validator.ts';
+
 /** pipe: end */
 /** bean: begin */
 import type { IPipeOptionsValid } from '../bean/pipe.valid.ts';
+/** locale: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** bean: end */
@@ -23,11 +22,14 @@ import 'vona';
 
 export * from '../bean/bean.validator.ts';
 declare module 'vona-module-a-aspect' {
+
   export interface IPipeRecordLocal {
     'a-validation:valid': IPipeOptionsValid;
   }
+
 }
 declare module 'vona-module-a-validation' {
+
   export interface PipeValid {
     /** @internal */
     get scope(): ScopeModuleAValidation;
@@ -35,8 +37,11 @@ declare module 'vona-module-a-validation' {
 }
 /** pipe: begin */
 export * from '../bean/pipe.valid.ts';
-declare module 'vona' {}
+declare module 'vona' {
+
+}
 declare module 'vona-module-a-validation' {
+
   export interface BeanValidator {
     /** @internal */
     get scope(): ScopeModuleAValidation;
@@ -74,7 +79,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-validation::${K}` {
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-validation::${K}` {
   return `a-validation::${key}`;
 }
 /** scope: end */

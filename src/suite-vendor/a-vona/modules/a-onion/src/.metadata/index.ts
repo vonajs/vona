@@ -1,10 +1,11 @@
-/** main: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+import type { BeanScopeUtil } from 'vona';
 /** bean: end */
 /** bean: begin */
-import { BeanOnion } from '../bean/bean.onion.ts';
+import type { BeanOnion } from '../bean/bean.onion.ts';
+/** main: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 /** bean: begin */
 import 'vona';

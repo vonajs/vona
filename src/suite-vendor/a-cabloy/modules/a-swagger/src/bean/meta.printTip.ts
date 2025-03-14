@@ -1,14 +1,14 @@
 import type { IMetaPrintTipExecute, TypeMetaPrintTipResult } from 'vona-module-a-printtip';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
-import { apiPath } from 'vona-module-a-web';
+import { $apiPath } from 'vona-module-a-web';
 
 @Meta()
 export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
     // apiPath
-    const _apiPathSwagger = this.scope.util.combineApiPath(apiPath('//swagger'));
-    const _apiPathRapidoc = this.scope.util.combineApiPath(apiPath('//rapidoc'));
+    const _apiPathSwagger = this.scope.util.combineApiPath($apiPath('//swagger'));
+    const _apiPathRapidoc = this.scope.util.combineApiPath($apiPath('//rapidoc'));
     return [
       { title: 'swagger', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPathSwagger}` },
       // { title: 'swagger30', path: `http://localhost:${process.env.SERVER_LISTEN_PORT}${_apiPathSwagger}?version=30` },

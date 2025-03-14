@@ -1,14 +1,13 @@
-/** main: end */
-/** scope: begin */
-import type { BeanScopeUtil } from 'vona';
-import type { TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
-/** service: end */
-/** service: begin */
-
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
+
+/** service: end */
+/** service: begin */
 import type { ServiceOpenapi } from '../service/openapi.ts';
+/** main: end */
+/** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** config: end */
@@ -24,11 +23,14 @@ import 'vona';
 
 export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
+
   export interface IServiceRecord {
     'a-openapi:openapi': never;
   }
+
 }
 declare module 'vona-module-a-openapi' {
+
   export interface ServiceOpenapi {
     /** @internal */
     get scope(): ScopeModuleAOpenapi;
@@ -80,7 +82,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-openapi::${K}` {
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-openapi::${K}` {
   return `a-openapi::${key}`;
 }
 /** scope: end */

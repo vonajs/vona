@@ -1,12 +1,12 @@
-import type { TypeModuleConfig } from 'vona';
-/** main: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** bean: end */
 /** bean: begin */
-import { BeanRouter } from '../bean/bean.router.ts';
-import { config } from '../config/config.ts';
+import type { BeanRouter } from '../bean/bean.router.ts';
+import type { config } from '../config/config.ts';
+/** main: end */
+/** scope: begin */
+import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** bean: begin */
 import 'vona';
 import 'vona';
