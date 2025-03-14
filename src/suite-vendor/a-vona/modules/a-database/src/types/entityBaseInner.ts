@@ -4,7 +4,7 @@ import { Rule } from 'vona-module-a-openapi';
 
 export class EntityBaseInner extends BeanBaseSimple {
   public get $table(): string {
-    return cast<IDecoratorEntityOptions>(this.onionOptions).table!;
+    return cast<IDecoratorEntityOptions>(this.$onionOptions).table!;
   }
 
   public $column(column: string) {

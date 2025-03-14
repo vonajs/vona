@@ -49,7 +49,7 @@ export class BeanModelMeta extends BeanBase {
   }
 
   get options(): IDecoratorModelOptions {
-    return (this.beanOptions.options || {}) as IDecoratorModelOptions;
+    return (this.$beanOptions.options || {}) as IDecoratorModelOptions;
   }
 
   get disableInstance() {

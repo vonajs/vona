@@ -15,8 +15,8 @@ export class CacheBase<CACHEOPTIONS extends IOnionOptionsEnable = IOnionOptionsE
       this._cacheOptions = cacheOptions ?? ({} as CACHEOPTIONS);
     } else {
       // static
-      this._cacheName = this.beanFullName;
-      this._cacheOptions = cacheOptions ?? (this.beanOptions.options as CACHEOPTIONS) ?? {};
+      this._cacheName = this.$beanFullName;
+      this._cacheOptions = cacheOptions ?? (this.$beanOptions.options as CACHEOPTIONS) ?? {};
     }
   }
 
