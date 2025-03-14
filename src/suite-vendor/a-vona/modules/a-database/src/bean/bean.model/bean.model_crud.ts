@@ -212,24 +212,28 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   }
 
   async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    data?: Partial<TRecord2>[],
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2[]>;
-  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     data?: Partial<TRecord2>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TResult2>;
-  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table: string,
-    data?: Partial<TRecord2>[],
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2[]>;
   async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     data?: Partial<TRecord2>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TResult2>;
   async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, data?, options?): Promise<TResult2[] | TResult2> {
+
+  }
+
+  async inserts<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    data: Partial<TRecord2>[],
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TResult2[]>;
+  async inserts<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    data: Partial<TRecord2>[],
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TResult2[]>;
+  async inserts<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, data?, options?): Promise<TResult2[] | TResult2> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
