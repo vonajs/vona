@@ -18,8 +18,8 @@ export class ServiceTransaction extends BeanBase {
     return this._connection;
   }
 
-  set connection(value: knex.Knex.Transaction | undefined) {
-    this._connection = value;
+  get db(): knex.Knex | undefined {
+    return this._db;
   }
 
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: Partial<IMiddlewareOptionsTransaction>): Promise<RESULT> {
