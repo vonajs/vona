@@ -66,3 +66,8 @@ export function checkMeta(meta?: {}, data?: {}): boolean {
   // default
   return true;
 }
+
+export function safeBoolean(value?: undefined | null | boolean | string) {
+  if (isNil(value) || value === 'false' || value === '0') return false;
+  return Boolean(value);
+}

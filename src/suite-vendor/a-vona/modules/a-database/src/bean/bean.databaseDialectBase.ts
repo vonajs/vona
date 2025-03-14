@@ -1,5 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from '../types/tableIdentity.ts';
+import { isNil, safeBoolean } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Virtual } from 'vona-module-a-bean';
 
@@ -66,9 +67,9 @@ export class BeanDatabaseDialectBase extends BeanBase {
 
   protected _coerceColumnValue(type: string, value) {
     // null
-    if (value === null) return value;
+    if (isNil(value)) return undefined;
     // type
-    if (['bit', 'bool', 'boolean'].includes(type)) return Boolean(value);
+    if (['bit', 'bool', 'boolean'].includes(type)) return safeBoolean(value);
     if (['int'].includes(type)) return this._safeNumber(value);
     if (this._columnTypePrefixes(type, ['timestamp']) && value === 'CURRENT_TIMESTAMP') return new Date();
     if (this._columnTypePrefixes(type, ['float', 'double'])) return this._safeNumber(value);
@@ -76,7 +77,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
       return this._safeNumber(value);
     }
     // pg: NULL::character varying
-    if (value.indexOf('NULL::') === 0) return null;
+    if (value.indexOf('NULL::') === 0) return undefined;
     // others
     return value;
   }
@@ -84,7 +85,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
   // pg: nextval
   protected _safeNumber(value) {
     const num = Number(value);
-    return Number.isNaN(num) ? null : num;
+    return Number.isNaN(num) ? undefined : num;
   }
 
   protected _columnTypePrefixes(type: string, prefixes: string[]) {
