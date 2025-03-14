@@ -244,9 +244,11 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // options
     const datas: any[] = [];
     for (const dataTemp of datasTemp) {
-      const data = await this.prepareData<TRecord2>(table, dataTemp);
-      this._prepareInsertDataByOptions(data, options);
-      datas.push(data);
+      // first
+      this._prepareInsertDataByOptions(dataTemp, options);
+      // then
+      const dataNew = await this.prepareData<TRecord2>(table, dataTemp);
+      datas.push(dataNew);
     }
     // builder
     const builder = this.builder<TRecord2>(table);
@@ -261,6 +263,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     for (let index = 0; index < ids.length; index++) {
       const dataDefault = await this.default();
       if (ids[index] !== undefined) dataDefault.id = ids[index];
+      // datas[index] maybe has id
       result.push(Object.assign(dataDefault, datas[index]));
     }
     // ok
