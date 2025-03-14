@@ -19,7 +19,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   }
 
   protected get scopeSummer() {
-    return this.getScope(__ThisModule__);
+    return this.bean.scope(__ThisModule__);
   }
 
   protected get configModule() {

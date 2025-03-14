@@ -12,7 +12,7 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   async emit(data: DATA, nextOrDefault?: NextEvent<DATA, RESULT> | RESULT): Promise<RESULT> {
     const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
       return this._wrapOnion(item);
-    }, this.onionName);
+    }, this.$onionName);
     if (eventListeners.length === 0) {
       return typeof nextOrDefault === 'function'
         ? await cast<NextEvent<DATA, RESULT>>(nextOrDefault)(data)

@@ -14,8 +14,8 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
       _cacheOptions = cacheOptions ?? {};
     } else {
       // summer cache
-      _cacheName = this.beanFullName;
-      _cacheOptions = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
+      _cacheName = this.$beanFullName;
+      _cacheOptions = cacheOptions ?? (this.$beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
     }
     // preset
     let preset = _cacheOptions.preset;
