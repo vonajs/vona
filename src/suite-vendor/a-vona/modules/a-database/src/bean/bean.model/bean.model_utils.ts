@@ -8,7 +8,7 @@ import { checkWhere } from '../../common/checkWhere.ts';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
-const SymbolColumns = Symbol('SymbolColumns');
+const SymbolColumnsCache = Symbol('SymbolColumnsCache');
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<TResult2>;
@@ -40,21 +40,25 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return data as TResult2;
   }
 
-  async default<T = any>(data?: T): Promise<T> {
-    data = data || ({} as T);
+  async default<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string): Promise<TResult2> {
+    const data = {};
     // columns
-    const columns = await this.columns();
+    const columns = await this.columns(table);
     for (const columnName in columns) {
       data[columnName] = columns[columnName].default;
     }
-    return data;
+    return data as TResult2;
   }
 
-  protected get columnsCache(): Record<string, ITableColumns> {
-    if (!this.dbOriginal[SymbolColumns]) {
-      this.dbOriginal[SymbolColumns] = {};
+  private get columnsCache(): Record<string, ITableColumns> {
+    if (!this.dbOriginal[SymbolColumnsCache]) {
+      this.dbOriginal[SymbolColumnsCache] = {};
     }
-    return this.dbOriginal[SymbolColumns];
+    return this.dbOriginal[SymbolColumnsCache];
+  }
+
+  private clearColumnsCache() {
+    this.dbOriginal[SymbolColumnsCache] = undefined;
   }
 
   async columns(table?: string): Promise<ITableColumns> {
@@ -81,7 +85,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
 
   columnsClearAll() {
     const exists = Object.keys(this.columnsCache).length > 0;
-    this.dbOriginal[SymbolColumns] = undefined;
+    this.clearColumnsCache();
     return exists;
   }
 
