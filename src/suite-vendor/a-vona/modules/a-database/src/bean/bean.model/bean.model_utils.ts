@@ -9,6 +9,7 @@ import { getTableOrTableAlias, isRaw } from '../../common/utils.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
 const SymbolColumnsCache = Symbol('SymbolColumnsCache');
+const SymbolColumnsDefaultCache = Symbol('SymbolColumnsDefaultCache');
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<TResult2>;
@@ -41,13 +42,25 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   }
 
   async default<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string): Promise<TResult2> {
-    const data = {};
-    // columns
-    const columns = await this.columns(table);
-    for (const columnName in columns) {
-      data[columnName] = columns[columnName].default;
+    table = table || this.table;
+    if (!table) return {} as TResult2;
+    if (this.columnsDefaultCache[table]) {
+      const data = {};
+      // columns
+      const columns = await this.columns(table);
+      for (const columnName in columns) {
+        data[columnName] = columns[columnName].default;
+      }
+      this.columnsDefaultCache[table] = data;
     }
-    return data as TResult2;
+    return this.columnsDefaultCache[table] as TResult2;
+  }
+
+  private get columnsDefaultCache(): Record<string, {}> {
+    if (!this.dbOriginal[SymbolColumnsDefaultCache]) {
+      this.dbOriginal[SymbolColumnsDefaultCache] = {};
+    }
+    return this.dbOriginal[SymbolColumnsDefaultCache];
   }
 
   private get columnsCache(): Record<string, ITableColumns> {
@@ -59,6 +72,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
 
   private clearColumnsCache() {
     this.dbOriginal[SymbolColumnsCache] = undefined;
+    this.dbOriginal[SymbolColumnsDefaultCache] = undefined;
   }
 
   async columns(table?: string): Promise<ITableColumns> {
@@ -80,6 +94,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     table = table || this.table;
     const exists = this.columnsCache[table];
     delete this.columnsCache[table];
+    delete this.columnsDefaultCache[table];
     return exists;
   }
 
