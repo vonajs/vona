@@ -242,5 +242,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
         data[columnNameDeleted] = false;
       }
     }
+    // createdAt/updatedAt
+    for (const key of ['createdAt', 'updatedAt']) {
+      if (data[key] === undefined) {
+        data[key] = new Date();
+      }
+    }
   }
 }

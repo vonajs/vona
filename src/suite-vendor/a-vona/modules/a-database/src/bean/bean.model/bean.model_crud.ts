@@ -254,16 +254,17 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     builder.insert(datas as unknown as any);
     // debug
     this.$loggerChild('model').debug('model.insert: %s', builder.toQuery());
-    // dialect
+    // dialect insert
     const ids = await this.dialect.insert(builder);
-    // ids
+    // combine
+    const result: any[] = [];
     for (let index = 0; index < ids.length; index++) {
-      const id = ids[index];
-      if (id) {
-        datas[index].id = id;
-      }
+      const dataDefault = await this.default();
+      if (ids[index] !== undefined) dataDefault.id = ids[index];
+      result.push(Object.assign(dataDefault, datas[index]));
     }
-    return Array.isArray(data) ? datas : datas[0];
+    // ok
+    return Array.isArray(data) ? result : result[0];
   }
 
   async update<TRecord2 extends {} = TRecord>(
