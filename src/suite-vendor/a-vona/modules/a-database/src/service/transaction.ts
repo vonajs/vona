@@ -8,6 +8,7 @@ import { Service } from 'vona-module-a-web';
 export class ServiceTransaction extends BeanBase {
   _transactionCounter: number = 0;
   _connection?: knex.Knex.Transaction;
+  _db?: knex.Knex;
 
   get inTransaction() {
     return this._transactionCounter > 0;
@@ -23,10 +24,12 @@ export class ServiceTransaction extends BeanBase {
 
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: Partial<IMiddlewareOptionsTransaction>): Promise<RESULT> {
     let res: RESULT;
-    const db = this.app.bean.database.getDefault();
+    if (!this._db) {
+      this._db = this.app.bean.database.getDefault();
+    }
     try {
       if (++this._transactionCounter === 1) {
-        this._connection = await db.transaction(options);
+        this._connection = await this._db.transaction(options);
       }
     } catch (err) {
       this._transactionCounter--;
@@ -38,6 +41,7 @@ export class ServiceTransaction extends BeanBase {
       if (--this._transactionCounter === 0) {
         await this._connection!.rollback();
         this._connection = undefined;
+        this._db = undefined;
       }
       throw err;
     }
@@ -45,10 +49,12 @@ export class ServiceTransaction extends BeanBase {
       if (--this._transactionCounter === 0) {
         await this._connection!.commit();
         this._connection = undefined;
+        this._db = undefined;
       }
     } catch (err) {
       await this._connection!.rollback();
       this._connection = undefined;
+      this._db = undefined;
       throw err;
     }
     return res;
