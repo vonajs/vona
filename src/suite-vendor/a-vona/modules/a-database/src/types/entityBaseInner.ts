@@ -3,15 +3,15 @@ import { BeanBaseSimple, cast } from 'vona';
 import { Rule } from 'vona-module-a-openapi';
 
 export class EntityBaseInner extends BeanBaseSimple {
-  public get table(): string {
+  public get $table(): string {
     return cast<IDecoratorEntityOptions>(this.onionOptions).table!;
   }
 
-  public column(column: string) {
+  public $column(column: string) {
     return column;
   }
 
-  public columns(...columns: string[]) {
+  public $columns(...columns: string[]) {
     return columns;
   }
 

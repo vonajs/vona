@@ -2,7 +2,6 @@ import type winston from 'winston';
 import type { ILoggerClientChildRecord } from '../../types/interface/logger.ts';
 import type { IModuleLocaleText } from './resource/locale/type.ts';
 import type { IBeanScopeContainer } from './scope/beanScopeContainer.ts';
-import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
 
 const SymbolText = Symbol('SymbolText');
@@ -23,7 +22,7 @@ export class BeanBase extends BeanBaseSimple {
 
   protected get $logger() {
     if (!this[SymbolLogger]) {
-      this[SymbolLogger] = this.app.meta.logger.get().child({ beanFullName: this.beanFullName });
+      this[SymbolLogger] = this.app.meta.logger.get().child({ beanFullName: this.$beanFullName });
     }
     return this[SymbolLogger];
   }
@@ -31,7 +30,7 @@ export class BeanBase extends BeanBaseSimple {
   protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
     if (!this[SymbolLoggerChildren][childName]) {
       this[SymbolLoggerChildren][childName] = this.app.meta.logger.get().child({
-        beanFullName: this.beanFullName,
+        beanFullName: this.$beanFullName,
         name: childName,
       });
     }
@@ -43,16 +42,6 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   public get scope(): unknown {
-    return this.getScope();
-  }
-
-  protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
-  // protected getScope<T>(moduleScope: string): T;
-  protected getScope(): unknown;
-  protected getScope(moduleScope?: string) {
-    if (!moduleScope) {
-      return this.bean.scope(this[SymbolModuleBelong] as never);
-    }
-    return this.bean.scope(moduleScope as never);
+    return this.bean.scope(this[SymbolModuleBelong] as never);
   }
 }

@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { Api, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { apiPath, Controller, Get } from 'vona-module-a-web';
+import { $apiPath, Controller, Get } from 'vona-module-a-web';
 
 const __SWAGGER_HTML__ = `<!doctype html>
 <html>
@@ -37,7 +37,7 @@ export class ControllerRapidoc extends BeanBase {
     }
     // ui
     const _pathJS = this.scope.util.combineStaticPath('rapidoc-9.3.8/rapidoc-min.js');
-    const _pathJSON = this.scope.util.combineApiPath(apiPath('//swagger/json'));
+    const _pathJSON = this.scope.util.combineApiPath($apiPath('//swagger/json'));
     return __SWAGGER_HTML__
       .replace('__SWAGGER_ACCESSTOKEN__', accessToken)
       .replace('__SWAGGER_JS__', _pathJS)

@@ -17,20 +17,20 @@ export class BeanBaseSimple extends BeanSimple {
     return appResource._getModuleName(this[SymbolBeanFullName]);
   }
 
-  protected get beanFullName() {
+  protected get $beanFullName() {
     return this[SymbolBeanFullName];
   }
 
-  protected get beanOptions(): IDecoratorBeanOptionsBase {
+  protected get $beanOptions(): IDecoratorBeanOptionsBase {
     return appResource.getBean(this[SymbolBeanFullName])!;
   }
 
-  protected get onionName() {
-    const parts = this.beanFullName.split('.');
+  protected get $onionName() {
+    const parts = this.$beanFullName.split('.');
     return `${parts[0]}:${parts[2]}`;
   }
 
-  protected get onionOptions(): unknown | undefined {
-    return this.beanOptions.options;
+  protected get $onionOptions(): unknown | undefined {
+    return this.$beanOptions.options;
   }
 }

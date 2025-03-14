@@ -2,7 +2,7 @@ import type { IOpenAPIObject } from 'vona-module-a-openapi';
 import { BeanBase } from 'vona';
 import { Api, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { apiPath, Controller, Get } from 'vona-module-a-web';
+import { $apiPath, Controller, Get } from 'vona-module-a-web';
 
 const __SWAGGER_HTML__ = `<!DOCTYPE html>
 <html lang="en">
@@ -48,7 +48,7 @@ export class ControllerSwagger extends BeanBase {
     const _pathUI = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui.css');
     const _pathCSS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/index.css');
     const _pathJS = this.scope.util.combineStaticPath('swagger-ui-5.18.2/swagger-ui-bundle.js');
-    const _pathJSON = this.scope.util.combineApiPath(apiPath('//swagger/json'));
+    const _pathJSON = this.scope.util.combineApiPath($apiPath('//swagger/json'));
     return __SWAGGER_HTML__
       .replace('__SWAGGER_ACCESSTOKEN__', accessToken)
       .replace('__SWAGGER_UI__', _pathUI)
