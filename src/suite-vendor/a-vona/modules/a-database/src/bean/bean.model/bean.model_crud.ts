@@ -243,12 +243,14 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const datasTemp = Array.isArray(data) ? data : [data];
     // options
     const datas: any[] = [];
+    const datasOriginal: any[] = [];
     for (const dataTemp of datasTemp) {
       // first
       this._prepareInsertDataByOptions(dataTemp, options);
       // then
-      const dataNew = await this.prepareData<TRecord2>(table, dataTemp);
+      const [dataNew, dataNewOriginal] = await this.prepareData<TRecord2>(table, dataTemp);
       datas.push(dataNew);
+      datasOriginal.push(dataNewOriginal);
     }
     // builder
     const builder = this.builder<TRecord2>(table);
@@ -264,8 +266,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     for (let index = 0; index < ids.length; index++) {
       const dataWithId: any = {};
       if (ids[index] !== undefined) dataWithId.id = ids[index];
-      // datas[index] maybe has id
-      result.push(Object.assign({}, dataDefault, dataWithId, datas[index]));
+      // datasOriginal[index] maybe has id
+      result.push(Object.assign({}, dataDefault, dataWithId, datasOriginal[index]));
     }
     // ok
     return Array.isArray(data) ? result : result[0];
@@ -290,7 +292,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
-    data = await this.prepareData<TRecord2>(table, data);
+    [data] = await this.prepareData<TRecord2>(table, data);
     // where
     const where = Object.assign({}, options?.where);
     // id

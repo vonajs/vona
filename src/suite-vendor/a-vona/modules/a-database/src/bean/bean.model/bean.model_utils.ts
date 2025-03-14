@@ -12,9 +12,9 @@ const SymbolColumnsCache = Symbol('SymbolColumnsCache');
 const SymbolColumnsDefaultCache = Symbol('SymbolColumnsDefaultCache');
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<TResult2>;
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table: string, item?): Promise<TResult2>;
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, item?): Promise<TResult2> {
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<[TResult2, TResult2]>;
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table: string, item?): Promise<[TResult2, TResult2]>;
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, item?): Promise<[TResult2, TResult2]> {
     if (typeof table !== 'string') {
       item = table;
       table = undefined;
@@ -23,22 +23,24 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // item
-    if (!item) return {} as TResult2;
+    if (!item) return [{}, {}] as [TResult2, TResult2];
     // columns
     const columns = await this.columns(table);
     // data
     const data = {};
+    const dataOriginal = {};
     for (const columnName in columns) {
       const column = columns[columnName];
       if (Object.prototype.hasOwnProperty.call(item, columnName)) {
         let value = item[columnName];
+        dataOriginal[columnName] = value;
         if (column.type === 'json' && value !== undefined) {
           value = JSON.stringify(value);
         }
         data[columnName] = value;
       }
     }
-    return data as TResult2;
+    return [data, dataOriginal] as [TResult2, TResult2];
   }
 
   async defaultData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string): Promise<TResult2> {
