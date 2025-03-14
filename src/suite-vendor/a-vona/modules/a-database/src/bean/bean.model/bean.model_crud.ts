@@ -366,7 +366,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
   ): Promise<TResult2[]>;
   async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2[]> {
-    const raw = this.ctx.db.raw(sql, bindings);
+    const raw = this.db.raw(sql, bindings);
     const result = await raw;
     // dialect
     return this.dialect.query(result) as unknown as TResult2[];

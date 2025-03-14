@@ -4,7 +4,7 @@ import { BeanModelUtils } from './bean.model_utils.ts';
 
 export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
   get schema(): Knex.SchemaBuilder {
-    return this.ctx.db.schema;
+    return this.db.schema;
   }
 
   builder<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -13,9 +13,9 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     // table
     table = table || this.table;
     if (table) {
-      return this.ctx.db(table);
+      return this.db(table);
     }
-    return this.ctx.db.queryBuilder<TRecord2, TResult2[]>();
+    return this.db.queryBuilder<TRecord2, TResult2[]>();
   }
 
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(

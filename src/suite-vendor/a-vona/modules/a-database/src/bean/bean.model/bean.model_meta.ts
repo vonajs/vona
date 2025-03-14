@@ -14,6 +14,14 @@ export class BeanModelMeta extends BeanBase {
     return cast<BeanModel>(this);
   }
 
+  protected get db() {
+    return this.ctx.db;
+  }
+
+  protected get dbOriginal() {
+    return this.ctx.dbOriginal;
+  }
+
   public get scopeDatabase() {
     return this.$scope.database;
   }
@@ -23,7 +31,7 @@ export class BeanModelMeta extends BeanBase {
   }
 
   public get dialectClient(): keyof IDatabaseClientDialectRecord {
-    return cast<Knex.Client>(cast(this.ctx.db).client).config.client as keyof IDatabaseClientDialectRecord;
+    return cast<Knex.Client>(cast(this.db).client).config.client as keyof IDatabaseClientDialectRecord;
   }
 
   public get dialect() {
