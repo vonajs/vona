@@ -7,10 +7,10 @@ export function setAuthAdapter(authAdapter: IAuthAdapter): void {
   __authAdapter = authAdapter;
 }
 
-export function getAuthId(user: IAuthBase): TableIdentity {
+export function $getAuthId(user: IAuthBase): TableIdentity {
   return __authAdapter.getAuthId(user);
 }
 
-export function getAuthIdSystem<K extends keyof IAuthIdRecord>(_authName: IAuthIdRecord[K], authId: K): TableIdentity {
+export function $getAuthIdSystem<K extends keyof IAuthIdRecord>(_authName: IAuthIdRecord[K], authId: K): TableIdentity {
   return authId;
 }

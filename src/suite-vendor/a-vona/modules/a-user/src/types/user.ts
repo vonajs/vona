@@ -11,8 +11,8 @@ export interface IUserBase {
 
 export interface IUserAdapter {
   getUserId(user: IUserBase): TableIdentity;
-  getUserName (user: IUserBase): string;
-  getUserAvatar (user: IUserBase): string | undefined;
+  getUserName(user: IUserBase): string;
+  getUserAvatar(user: IUserBase): string | undefined;
   getUserLocale(user: IUserBase): keyof ILocalInfos | undefined;
   getUserAnonymous(user: IUserBase): boolean;
 }

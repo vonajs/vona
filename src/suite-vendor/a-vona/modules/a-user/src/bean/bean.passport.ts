@@ -5,7 +5,7 @@ import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { getAuthIdSystem } from '../lib/auth.ts';
+import { $getAuthIdSystem } from '../lib/auth.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {
@@ -86,7 +86,7 @@ export class BeanPassport extends BeanBase {
   ): Promise<IJwtToken> {
     const user = await this.bean.userInner.getByName(name ?? 'admin');
     if (!user) return this.app.throw(401);
-    const auth = { id: getAuthIdSystem(authName, authId) };
+    const auth = { id: $getAuthIdSystem(authName, authId) };
     const passport = { user, auth };
     return await this.signin(passport, options);
   }
