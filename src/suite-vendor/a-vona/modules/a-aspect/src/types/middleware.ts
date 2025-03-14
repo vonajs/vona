@@ -1,5 +1,5 @@
 import type { Next, OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsBase, IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IMiddlewareRecordGlobal {}
@@ -10,9 +10,7 @@ export interface IMiddlewareExecute {
   execute(options: IDecoratorMiddlewareOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorMiddlewareOptions {
-  enable?: boolean;
-}
+export interface IDecoratorMiddlewareOptions extends IOnionOptionsEnable {}
 
 export interface IDecoratorMiddlewareOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,

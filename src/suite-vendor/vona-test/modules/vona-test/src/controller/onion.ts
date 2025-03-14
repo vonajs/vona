@@ -12,9 +12,10 @@ import { DtoUser } from '../dto/user.ts';
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Get('/')
-  @UseMiddleware('a-database:transaction')
+  @UseMiddleware('a-database:transaction', { enable: true, meta: { mode: 'local' } })
   @UseGuardGlobal('a-user:passport', { public: true })
   index() {
+    return this.ctx.dbMeta.transaction.inTransaction;
     // return 'Hello Vona';
   }
 

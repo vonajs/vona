@@ -1,5 +1,5 @@
 import type { OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsBase, IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
@@ -11,9 +11,7 @@ export interface IPipeTransform<T = any, R = any> {
   transform(value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions): Promise<R>;
 }
 
-export interface IDecoratorPipeOptions {
-  enable?: boolean;
-}
+export interface IDecoratorPipeOptions extends IOnionOptionsEnable {}
 
 export interface IDecoratorPipeOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,

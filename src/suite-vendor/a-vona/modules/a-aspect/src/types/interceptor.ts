@@ -1,5 +1,5 @@
 import type { Next, OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsBase, IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IInterceptorRecordGlobal {}
@@ -10,9 +10,7 @@ export interface IInterceptorExecute {
   execute(options: IDecoratorInterceptorOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorInterceptorOptions {
-  enable?: boolean;
-}
+export interface IDecoratorInterceptorOptions extends IOnionOptionsEnable {}
 
 export interface IDecoratorInterceptorOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,

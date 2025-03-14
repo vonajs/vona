@@ -1,5 +1,5 @@
 import type { NextSync, OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsBase, IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IFilterRecordGlobal {}
@@ -18,9 +18,7 @@ export interface IFilterHtml {
   html(err: Error, options: IDecoratorFilterOptions, next: NextSync): Promise<boolean>;
 }
 
-export interface IDecoratorFilterOptions {
-  enable?: boolean;
-}
+export interface IDecoratorFilterOptions extends IOnionOptionsEnable {}
 
 export interface IDecoratorFilterOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
