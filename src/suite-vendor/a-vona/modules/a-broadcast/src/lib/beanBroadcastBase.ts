@@ -13,7 +13,7 @@ export class BeanBroadcastBase<DATA = unknown> extends BeanBase {
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     return {
-      broadcastName: this.onionName as never,
+      broadcastName: this.$onionName as never,
       data,
       options,
     };

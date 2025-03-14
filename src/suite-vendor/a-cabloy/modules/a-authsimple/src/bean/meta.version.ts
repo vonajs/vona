@@ -8,10 +8,10 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
     if (options.version === 1) {
       // aAuthSimple
       const entity = this.scope.entity.authSimple;
-      await this.bean.model.createTable(entity.table, table => {
+      await this.bean.model.createTable(entity.$table, table => {
         table.basicFields();
         table.userId();
-        table.text(entity.column('hash'));
+        table.text(entity.$column('hash'));
       });
     }
   }
