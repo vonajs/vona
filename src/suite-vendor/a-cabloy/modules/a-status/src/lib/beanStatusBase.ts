@@ -37,7 +37,7 @@ export class BeanStatusBase extends BeanBase {
     if (status) {
       await this._modelStatus.update({
         id: status.id,
-        value: JSON.stringify(value),
+        value,
       });
     } else {
       if (queue) {
@@ -48,7 +48,7 @@ export class BeanStatusBase extends BeanBase {
         await this._modelStatus.insert({
           module: this[SymbolModuleBelong],
           name,
-          value: JSON.stringify(value),
+          value,
         });
       }
     }

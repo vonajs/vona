@@ -28,8 +28,13 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     // data
     const data = {};
     for (const columnName in columns) {
-      if (item[columnName] !== undefined) {
-        data[columnName] = item[columnName];
+      const column = columns[columnName];
+      let value = item[columnName];
+      if (value !== undefined) {
+        if (column.type === 'json') {
+          value = JSON.stringify(value);
+        }
+        data[columnName] = value;
       }
     }
     return data as TResult2;
