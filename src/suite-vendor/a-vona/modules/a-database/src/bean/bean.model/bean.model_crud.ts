@@ -240,10 +240,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
     data = data || {};
-    const datas = Array.isArray(data) ? data : [data];
+    const datasTemp = Array.isArray(data) ? data : [data];
     // options
-    for (const data of datas) {
+    const datas: any[] = [];
+    for (const dataTemp of datasTemp) {
+      const data = await this.prepareData<TRecord2>(table, dataTemp);
       this._prepareInsertDataByOptions(data, options);
+      datas.push(data);
     }
     // builder
     const builder = this.builder<TRecord2>(table);
@@ -282,7 +285,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
-    data = Object.assign({}, data);
+    data = await this.prepareData<TRecord2>(table, data);
     // where
     const where = Object.assign({}, options?.where);
     // id

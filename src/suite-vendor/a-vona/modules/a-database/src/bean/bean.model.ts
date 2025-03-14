@@ -1,6 +1,6 @@
 import { Virtual } from 'vona-module-a-bean';
 
-import { BeanModelCrud2 } from './bean.model/bean.model_crud2.ts';
+import { BeanModelCrud } from './bean.model/bean.model_crud.ts';
 
 @Virtual()
-export class BeanModel<TRecord extends {} = any> extends BeanModelCrud2<TRecord> {}
+export class BeanModel<TRecord extends {} = any> extends BeanModelCrud<TRecord> {}
