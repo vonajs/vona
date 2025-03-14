@@ -80,7 +80,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-index::${K}` {
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-index::${K}` {
   return `home-index::${key}`;
 }
 /** scope: end */
