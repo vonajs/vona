@@ -1,12 +1,20 @@
-import type { IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
+import type { IAuthUserProfile, IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
-import { BeanBase, deepExtend } from 'vona';
+import { BeanBase, deepExtend, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
 
 @Service()
 export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapter {
+  async createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
+    const usersDemo = await this._getUsersDemo();
+    const user = { id: uuidv4(), name: profile.username!, avatar: profile.photos?.[0].value, locale: undefined };
+    usersDemo.push(user);
+    await this._saveUsersDemo(usersDemo);
+    return user;
+  }
+
   async createAnonymous(): Promise<IUserBase> {
     const user: IUser = { id: -1, name: 'anonymous', avatar: undefined, locale: undefined };
     return user;
@@ -18,8 +26,6 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
 
   async get(user: Partial<IUser>): Promise<IUserBase | undefined> {
     const usersDemo = await this._getUsersDemo();
-    if (!usersDemo)
-      return;
     if (user.id !== undefined)
       return usersDemo.find(item => item.id === user.id);
     if (user.name !== undefined)
@@ -28,23 +34,23 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
 
   async update(user: Partial<IUser>): Promise<void> {
     const usersDemo = await this._getUsersDemo();
-    if (!usersDemo)
-      return;
     const userDemo = usersDemo.find(item => item.id === user.id);
-    if (!userDemo)
-      return;
+    if (!userDemo) return;
     Object.assign(userDemo, user);
     await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }
 
   private async _getUsersDemo() {
-    if (this.app.meta.isProd)
-      return;
+    if (this.app.meta.isProd) return this.app.throw(500);
     let usersDemo = await this.scope.cacheRedis.usersDemo.get();
     if (!usersDemo) {
       usersDemo = deepExtend([], __UsersDemo);
-      await this.scope.cacheRedis.usersDemo.set(usersDemo);
+      await this._saveUsersDemo(usersDemo);
     }
     return usersDemo;
+  }
+
+  private async _saveUsersDemo(usersDemo) {
+    await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }
 }

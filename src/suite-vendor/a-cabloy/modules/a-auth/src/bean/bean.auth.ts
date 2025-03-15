@@ -1,4 +1,4 @@
-import type { IPassportBase } from 'vona-module-a-user';
+import type { IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateOptions, IAuthenticateState, IAuthUserProfile } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderExecute, IAuthProviderRecord } from '../types/authProvider.ts';
@@ -104,29 +104,21 @@ export class BeanAuth extends BeanBase {
       passport.user = userCurrent;
     } else if (stateIntention === 'login') {
       // check if user exists
-      let user;
-      if (authUserId) {
-        user = await this.model.get({ id: authUserId });
+      let entityUser: IUserBase | undefined;
+      if (entityAuth.userId) {
+        entityUser = await this.bean.userInner.get({ id: entityAuth.userId });
       }
-      if (user) {
-        // check if disabled
-        if (user.disabled) return false;
-        // update user
-        await this._updateUserInfo(user.id, profileUser.profile, columns);
-        userId = user.id;
-      } else {
+      if (!entityUser) {
         // add user
-        userId = await this._addUserInfo(profileUser.profile, columns, profileUser.autoActivate);
-        user = await this.model.get({ id: userId });
+        entityUser = await this.bean.userInner.createByProfile(profileUser);
         // update auth's userId
-        await this.modelAuth.update({
-          id: authId,
-          userId,
+        await this.scope.model.auth.update({
+          id: entityAuth.id,
+          userId: entityUser.id,
         });
       }
       // ready
-      verifyUser.op = user;
-      verifyUser.agent = user;
+      passport.user = entityUser;
     }
 
     // user verify event

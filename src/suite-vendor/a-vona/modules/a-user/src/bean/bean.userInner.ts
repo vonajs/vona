@@ -1,3 +1,4 @@
+import type { IAuthUserProfile } from '../types/authProfile.ts';
 import type { IUserBase, IUserInnerAdapter } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -12,6 +13,10 @@ export class BeanUserInner extends BeanBase {
       this._userInnerAdapter = this.bean._getBean<IUserInnerAdapter>(beanFullName as never);
     }
     return this._userInnerAdapter;
+  }
+
+  createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
+    return this.userInnerAdapter.createByProfile(profile);
   }
 
   createAnonymous(): Promise<IUserBase> {

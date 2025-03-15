@@ -1,5 +1,6 @@
 import type { ILocalInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
+import type { IAuthUserProfile } from './authProfile.ts';
 
 export interface IUserIdRecord {
   '-1': 'anonymous';
@@ -18,6 +19,7 @@ export interface IUserAdapter {
 }
 
 export interface IUserInnerAdapter {
+  createByProfile(profile: IAuthUserProfile): Promise<IUserBase>;
   createAnonymous(): Promise<IUserBase>;
   getByName(name: string): Promise<IUserBase | undefined>;
   get(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
