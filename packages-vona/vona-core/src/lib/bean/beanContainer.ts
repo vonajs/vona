@@ -406,7 +406,7 @@ export class BeanContainer {
       }
     }
     // magic self
-    if (__hasMagicMothod(beanInstance)) {
+    if (__hasMagicMethod(beanInstance)) {
       chains.push(SymbolProxyMagic);
     }
     // hold
@@ -585,7 +585,7 @@ function __setPropertyValue(obj, prop, value) {
   });
 }
 
-function __hasMagicMothod(instance) {
+function __hasMagicMethod(instance) {
   return !!instance.__get__ || !!instance.__set__;
 }
 
