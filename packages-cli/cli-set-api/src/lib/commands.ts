@@ -10,6 +10,7 @@ import createSuite from './command/create.suite.ts';
 import createTest from './command/create.test.ts';
 import defaultList from './command/default.list.ts';
 import initConfig from './command/init.config.ts';
+import initError from './command/init.error.ts';
 import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
 import initMonkey from './command/init.monkey.ts';
@@ -38,6 +39,7 @@ export const commands = {
   init: {
     config: initConfig,
     locale: initLocale,
+    error: initError,
     monkey: initMonkey,
     main: initMain,
     static: initStatic,

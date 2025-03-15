@@ -10,6 +10,7 @@ import { CliCreateSuite } from './bean/cli.create.suite.ts';
 import { CliCreateTest } from './bean/cli.create.test.ts';
 import { CliDefaultList } from './bean/cli.default.list.ts';
 import { CliInitConfig } from './bean/cli.init.config.ts';
+import { CliInitError } from './bean/cli.init.error.ts';
 import { CliInitLocale } from './bean/cli.init.locale.ts';
 import { CliInitMain } from './bean/cli.init.main.ts';
 import { CliInitMonkey } from './bean/cli.init.monkey.ts';
@@ -30,6 +31,7 @@ export const beans = {
   'create.project': CliCreateProject,
   'create.test': CliCreateTest,
   'init.config': CliInitConfig,
+  'init.error': CliInitError,
   'init.locale': CliInitLocale,
   'init.monkey': CliInitMonkey,
   'init.main': CliInitMain,
