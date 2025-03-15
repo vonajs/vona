@@ -1,1 +1,3 @@
-export enum Errors {}
+export enum Errors {
+  TheAuthShouldBeEnabled = 1001,
+}
