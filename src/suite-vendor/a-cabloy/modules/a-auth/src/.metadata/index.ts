@@ -1,4 +1,4 @@
-import type { BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 /** bean: end */
@@ -23,17 +23,21 @@ import type { ServiceAuthenticator } from '../service/authenticator.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
-/** service: end */
+/** locale: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 
 import { Scope } from 'vona-module-a-bean';
-/** bean: begin */
-import 'vona';
-import 'vona';
+/** service: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 /** service: end */
 /** service: begin */
 
+/** bean: begin */
+import 'vona';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -182,12 +186,17 @@ declare module 'vona' {
     'a-auth.service.authenticator': ServiceAuthenticator;
   }
 }
+export const locales = {
+  'en-us': locale_en_us,
+  'zh-cn': locale_zh_cn,
+};
 
 @Scope()
 export class ScopeModuleAAuth extends BeanScopeBase {}
 
 export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
   redlock: MetaRedlock;
@@ -202,6 +211,12 @@ declare module 'vona' {
     auth: ScopeModuleAAuth;
   }
 
+  export interface IBeanScopeLocale {
+    'a-auth': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-auth::${K}` {
+  return `a-auth::${key}`;
+}
 /** scope: end */
