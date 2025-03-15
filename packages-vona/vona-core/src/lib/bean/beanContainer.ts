@@ -384,6 +384,7 @@ export class BeanContainer {
     const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
     // ProxyDisable
     const proxyDisable = beanOptions?.beanClass ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass) : false;
+    // host
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
     if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
