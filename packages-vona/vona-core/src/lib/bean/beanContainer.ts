@@ -5,7 +5,8 @@ import type { Constructable, IDecoratorUseOptionsBase } from '../decorator/index
 import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { cast } from '../../types/index.ts';
-import { appResource } from '../core/resource.ts';
+import { appMetadata } from '../core/metadata.ts';
+import { appResource, SymbolDecoratorProxyDisable } from '../core/resource.ts';
 import { __prepareInjectSelectorInfo } from '../decorator/index.ts';
 import { isClass } from '../utils/isClass.ts';
 import { compose } from '../utils/util.ts';
@@ -20,7 +21,6 @@ const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
 const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
 const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
-export const SymbolProxyDisable = Symbol('SymbolProxyDisable');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export interface BeanContainer extends IBeanRecordGlobal {}
@@ -382,13 +382,15 @@ export class BeanContainer {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
     const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
+    // ProxyDisable
+    const proxyDisable = beanOptions?.beanClass ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass) : false;
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
     if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     let chains: MetadataKey[] = [];
     // aop
-    if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
+    if (!proxyDisable && beanOptions && cast(beanOptions.scene) !== 'aop') {
       const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
       const aops = beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
@@ -396,7 +398,7 @@ export class BeanContainer {
       }
     }
     // aop method
-    if (!beanInstance[SymbolProxyDisable] && beanOptions) {
+    if (!proxyDisable && beanOptions) {
       const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
       if (beanAop.hasAopMethods(beanOptions?.beanFullName)) {
         chains.push(SymbolProxyAopMethod);

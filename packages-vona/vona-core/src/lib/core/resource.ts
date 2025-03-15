@@ -9,6 +9,7 @@ import { appMetadata } from './metadata.ts';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
+export const SymbolDecoratorProxyDisable = Symbol('SymbolDecoratorProxyDisable');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 
 export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;

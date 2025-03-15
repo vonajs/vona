@@ -1,14 +1,13 @@
 import type { Constructable, IBeanRecord } from 'vona';
 import type { IDecoratorAopOptions } from '../types/aop.ts';
 import type { IUseAopMethodPropMetadata } from '../types/aopMethod.ts';
-import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, deepExtend, SymbolProxyDisable } from 'vona';
+import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, deepExtend, ProxyDisable } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { SymbolDecoratorUseAopMethod } from '../types/aopMethod.ts';
 
+@ProxyDisable()
 @Service()
 export class ServiceAop extends BeanBase {
-  protected [SymbolProxyDisable]: boolean = true;
-
   findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
   findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): string[] | undefined;
   findAopsMatched(beanFullName: string): string[] | undefined;
