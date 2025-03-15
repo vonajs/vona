@@ -535,7 +535,7 @@ function __composeForPropAdapter(_context, chain) {
     receiver: undefined,
     fn,
   };
-};
+}
 
 function __composeForProp(chains) {
   return compose(chains, __composeForPropAdapter);
