@@ -8,7 +8,7 @@ import { isClass } from '../utils/isClass.ts';
 import { appMetadata } from './metadata.ts';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
-export const DecoratorBeanInfo = Symbol('Decorator#BeanInfo');
+export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 
 export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;
