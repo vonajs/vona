@@ -32,8 +32,8 @@ export class BeanAuth extends BeanBase {
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderExecute>(onionSlice.beanOptions.beanFullName as any);
     const profileUser = await beanAuthProvider.execute(clientOptions!, onionSlice.beanOptions.options!);
     // issuePassport
-    await this.issuePassport(profileUser, entityAuthProvider, clientOptions, options?.state);
-    console.log(onionSlice);
+    const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, options?.state);
+    console.log('-----passport', passport);
   }
 
   async issuePassport(
@@ -41,7 +41,7 @@ export class BeanAuth extends BeanBase {
     entityAuthProvider: EntityAuthProvider,
     clientOptions: IAuthProviderClientOptions,
     state?: IAuthenticateState,
-  ) {
+  ): Promise<IPassportBase> {
     // stateIntention
     const stateIntention = state?.intention || 'login';
     const authProviderId = entityAuthProvider.id;
@@ -120,21 +120,15 @@ export class BeanAuth extends BeanBase {
       // ready
       passport.user = entityUser;
     }
-
-    // user verify event
-    await this.self.scope.event.userVerify.emit({ verifyUser, profileUser });
-
-    // restore maxAge
-    //   maxAge: 0,null/undefined,>0
-    if (this.ctx.session) {
-      if (profileUser.maxAge === 0) {
-        this.ctx.session.maxAge = this.config.auth.maxAge.default;
-      } else {
-        this.ctx.session.maxAge = profileUser.maxAge || this.config.auth.maxAge.authenticated;
-      }
-    }
-
+    // event: issuePassport
+    await this.scope.event.issuePassport.emit({
+      passport,
+      profileUser,
+      entityAuthProvider,
+      clientOptions,
+      state,
+    });
     // ok
-    return verifyUser;
+    return passport;
   }
 }

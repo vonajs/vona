@@ -1,25 +1,30 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IDecoratorEventOptions } from 'vona-module-a-event';
+
 /** bean: end */
 /** bean: begin */
 import type { BeanAuth } from '../bean/bean.auth.ts';
-
 import type { BeanAuthProvider } from '../bean/bean.authProvider.ts';
+/** event: end */
+/** event: begin */
+import type { EventIssuePassport } from '../bean/event.issuePassport.ts';
+
 /** meta: end */
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 import type { Errors } from '../config/errors.ts';
-
 /** entity: end */
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
+
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 /** model: end */
 /** model: begin */
 import type { ModelAuth } from '../model/auth.ts';
-
 import type { ModelAuthProvider } from '../model/authProvider.ts';
+
 import type { ServiceAuthenticator } from '../service/authenticator.ts';
 /** service: end */
 /** service: begin */
@@ -69,9 +74,11 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** event: begin */
+export * from '../bean/event.issuePassport.ts';
+/** event: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.ts';
-export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
@@ -101,12 +108,10 @@ declare module 'vona-module-a-auth' {
     $columns: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
+export * from '../bean/meta.version.ts';
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';
-/** bean: end */
-/** entity: begin */
-export * from '../entity/auth.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -130,6 +135,26 @@ declare module 'vona-module-a-auth' {
 export interface IModuleModel {
   auth: ModelAuth;
   authProvider: ModelAuthProvider;
+}
+/** bean: end */
+/** entity: begin */
+export * from '../entity/auth.ts';
+declare module 'vona-module-a-event' {
+
+  export interface IEventRecord {
+    'a-auth:issuePassport': IDecoratorEventOptions;
+  }
+
+}
+declare module 'vona-module-a-auth' {
+
+  export interface EventIssuePassport {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+}
+export interface IModuleEvent {
+  issuePassport: EventIssuePassport;
 }
 export * from '../entity/authProvider.ts';
 /** entity: end */
@@ -204,6 +229,7 @@ export interface ScopeModuleAAuth {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  event: IModuleEvent;
   redlock: MetaRedlock;
   service: IModuleService;
 }
