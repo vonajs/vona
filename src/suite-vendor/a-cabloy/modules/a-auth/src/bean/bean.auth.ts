@@ -1,5 +1,5 @@
 import type { PowerPartial } from 'vona';
-import type { IAuthenticateOptions } from '../types/auth.ts';
+import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
 import type { IAuthProviderExecute, IAuthProviderRecord } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -14,20 +14,31 @@ export class BeanAuth extends BeanBase {
     const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(authProviderName);
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
     // clientOptions
-    const clientOptions = await this._prepareClientOptions(onionSlice.beanOptions.options! as any, options);
+    const clientOptions = await this._prepareClientOptions(authProviderName, onionSlice.beanOptions.options! as any, options);
     // execute
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderExecute>(onionSlice.beanOptions.beanFullName as any);
-    await beanAuthProvider.execute(clientOptions!, onionSlice.beanOptions.options!);
+    const profile = await beanAuthProvider.execute(clientOptions!, onionSlice.beanOptions.options!);
+    //
     console.log(onionSlice);
   }
 
   private async _prepareClientOptions<T extends keyof IAuthProviderRecord>(
+    authProviderName: T,
     optionsMeta: PowerPartial<IAuthProviderRecord[T]>,
     options?: IAuthenticateOptions<IAuthProviderRecord[T]>,
   ): Promise<IAuthProviderRecord[T]['default']> {
     const clientName = options?.clientName ?? 'default';
-    // todo: 从数据库中获取options
-    const clientOptions = deepExtend({}, optionsMeta.default, optionsMeta.clients?.[clientName as any], options?.clientOptions);
+    // authProvider
+    const authProvider = await this.scope.model.authProvider.get({ providerName: authProviderName, clientName });
+    if (!authProvider || authProvider?.disabled) return this.app.throw(403);
+    // combine
+    const clientOptions = deepExtend(
+      {},
+      optionsMeta.default,
+      optionsMeta.clients?.[clientName as any],
+      authProvider.clientOptions,
+      options?.clientOptions,
+    );
     return clientOptions;
   }
 
