@@ -529,7 +529,7 @@ export class BeanContainer {
 function __composeForPropAdapter(_context, chain) {
   const [aopKey, fn] = chain;
   // SymbolProxyMagic
-  if (aopKey === SymbolProxyMagic) return null;
+  if (aopKey === SymbolProxyMagic) return;
   // chain
   return {
     receiver: undefined,
