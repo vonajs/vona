@@ -10,6 +10,6 @@ export interface IAuthenticateState {
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
   state?: IAuthenticateState;
-  clientName?: keyof T['clients'] | 'default' | undefined;
+  clientName?: Extract<keyof T['clients'], 'string'> | 'default' | undefined;
   clientOptions?: PowerPartial<T['default']>;
 }

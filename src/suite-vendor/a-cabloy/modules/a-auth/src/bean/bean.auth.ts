@@ -17,7 +17,7 @@ export class BeanAuth extends BeanBase {
     const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(authProviderName);
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
     // authProvider
-    const entityAuthProvider = await this.scope.model.authProvider.get({ providerName: authProviderName, clientName });
+    const entityAuthProvider = await this.bean.authProvider.get({ providerName: authProviderName, clientName });
     if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
     // clientOptions
     const optionsMeta = onionSlice.beanOptions.options;
