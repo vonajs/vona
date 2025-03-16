@@ -9,7 +9,7 @@ import type {
 import type { BeanModel } from '../bean.model.ts';
 import { appResource, BeanBase, cast } from 'vona';
 
-export class BeanModelMeta extends BeanBase {
+export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   protected get self() {
     return cast<BeanModel>(this);
   }
@@ -84,7 +84,7 @@ export class BeanModelMeta extends BeanBase {
     return this.disableDeleted;
   }
 
-  protected _checkDisableUpdateTimeByOptions(options?: IModelUpdateOptionsGeneral) {
+  protected _checkDisableUpdateTimeByOptions(options?: IModelUpdateOptionsGeneral<TRecord>) {
     if (options?.disableUpdateTime === true || options?.disableUpdateTime === false) {
       return options?.disableUpdateTime;
     }
