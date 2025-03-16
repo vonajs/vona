@@ -6,6 +6,7 @@ import type {
   IModelSelectParams,
   IModelUpdateOptions,
   TableIdentity,
+  TypeModelWhere,
 } from '../../types/index.ts';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
@@ -130,19 +131,19 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.mget(table, ids, options2);
   }
 
-  async get<TRecord2 extends {} = TRecord>(
-    where?: object,
-    options?: IModelGetOptions<TRecord2>,
+  async get(
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord | undefined>;
-  async get<TRecord2 extends {} = TRecord>(
+  async get(
     table: string,
-    where?: object,
-    options?: IModelGetOptions<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord | undefined>;
-  async get<TRecord2 extends {} = TRecord>(
+  async get(
     table?,
-    where?,
-    options?: IModelGetOptions<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord | undefined> {
     if (typeof table !== 'string') {
       options = where;
@@ -160,7 +161,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (!this.__cacheEnabled) {
       return await super.get(table, where, options);
     }
-    if (where.id && typeof where.id === 'object') {
+    if (cast(where).id && typeof cast(where).id === 'object') {
       // for example: id: { op: '<', val: flowNodeId },
       return await super.get(table, where, options);
     }
@@ -267,11 +268,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.__deleteCache_key(id);
   }
 
-  private async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  private async __get_notkey(
     table: string,
-    where: object,
+    where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | null | undefined> {
+  ): Promise<TRecord | null | undefined> {
     // cache
     const cache = this.__cacheInstance;
     const cacheKey = { where, options };
@@ -284,9 +285,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     });
     if (!data) return data;
     // check if exists and valid
-    const data2 = await this.__get_key(table, { id: data.id }, options);
+    const data2 = await this.__get_key(table, { id: data.id } as any, options);
     if (data2 && this.__checkCacheNotKeyDataValid(where, data2)) {
-      return data2 as TResult2;
+      return data2 as TRecord;
     }
     // delete cache
     await this.__deleteCache_notkey(cacheKey);
@@ -294,14 +295,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.__get_notkey(table, where, options);
   }
 
-  private async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  private async __get_key(
     table: string,
-    where: { id: string },
+    where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | null | undefined> {
+  ): Promise<TRecord | null | undefined> {
     // cache
     const cache = this.__cacheInstance;
-    const item: TResult2 | null | undefined = await cache.get(where.id, {
+    const item: TRecord | null | undefined = await cache.get(cast(where).id, {
       get: async () => {
         // where: maybe contain aux key
         // disableInstance: use the model options, not use options by outer

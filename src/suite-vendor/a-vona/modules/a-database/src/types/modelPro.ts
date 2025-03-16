@@ -1,5 +1,6 @@
+// not use Extract<keyof TRecord, 'string'>
 export type TypeModelWhere<TRecord> = {
-  [prop in Extract<keyof TRecord, 'string'>]: any;
+  [prop in keyof TRecord]?: TRecord[prop];
 };
 
 // not use Extract<keyof TRecord, 'string'>
