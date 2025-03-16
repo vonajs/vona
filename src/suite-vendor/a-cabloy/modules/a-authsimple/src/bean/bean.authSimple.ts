@@ -17,7 +17,7 @@ export class BeanAuthSimple extends BeanBase {
     // auth provider
     const authProvider = await this.app.bean.authProvider.getByOnionName('a-authsimple:simple', clientName);
     // auth
-    const profileId = authSimple.id;
+    const profileId = String(authSimple.id);
     return await this.$scope.auth.model.auth.insert({
       userId,
       authProviderId: authProvider.id,
