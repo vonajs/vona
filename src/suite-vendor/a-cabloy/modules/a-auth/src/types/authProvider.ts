@@ -1,6 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
-import type { IAuthUserProfile } from './auth.ts';
+import type { IAuthUserProfile } from 'vona-module-a-user';
 
 export interface IAuthProviderRecord {}
 
