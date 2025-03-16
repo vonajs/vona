@@ -11,7 +11,7 @@ import { BeanModelMeta } from './bean.model_meta.ts';
 const SymbolColumnsCache = Symbol('SymbolColumnsCache');
 const SymbolColumnsDefaultCache = Symbol('SymbolColumnsDefaultCache');
 
-export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
+export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   async prepareData(item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
   async prepareData(table: string, item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
   async prepareData(table?, item?): Promise<[TRecord, TRecord]> {
