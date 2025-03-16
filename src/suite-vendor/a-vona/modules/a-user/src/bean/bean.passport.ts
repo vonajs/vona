@@ -58,9 +58,7 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    let payloadData = await this.passportAdapter.serialize(passport);
-    // auth token
-    payloadData = await this.authTokenAdapter.create(payloadData);
+    const payloadData = await this._passportSerialize(passport);
     // jwt token
     if (authToken !== 'jwt') throw new Error('Only support jwt');
     return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });
@@ -149,9 +147,25 @@ export class BeanPassport extends BeanBase {
     // current
     const passport = this.getCurrent();
     if (!passport) return this.app.throw(401);
-    // removeAuthToken
-    const payloadData = await this.passportAdapter.serialize(passport);
+    // payloadData
+    const payloadData = await this._passportSerialize(passport);
     // jwt token
     return await this.bean.jwt.createTemp(payloadData, options);
+  }
+
+  public async createOauthAuthToken(options?: IJwtSignOptions) {
+    // current
+    const passport = this.getCurrent();
+    if (!passport) return this.app.throw(401);
+    // payloadData
+    const payloadData = await this._passportSerialize(passport);
+    // jwt token
+    return await this.bean.jwt.createOauth(payloadData, options);
+  }
+
+  private async _passportSerialize(passport: IPassportBase) {
+    const payloadData = await this.passportAdapter.serialize(passport);
+    // auth token
+    return await this.authTokenAdapter.create(payloadData);
   }
 }
