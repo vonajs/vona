@@ -37,7 +37,7 @@ export async function generateScope(
     contentRecords.push('locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;');
   }
   if (options.constants) {
-    contentImports.push('TypeModuleConstants');
+    contentImports.push('type TypeModuleConstants');
     contentRecords.push('constant: TypeModuleConstants<typeof constants>;');
   }
   // loop
