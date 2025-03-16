@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 
 // join
 export type IModelSelectParamsJoinType =
@@ -22,11 +23,7 @@ export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
-export type TypeModelWhere<TRecord = {}> = {
-  [prop in keyof TRecord]: any;
-};
-
-export interface IModelSelectParams<TRecord = {}> {
+export interface IModelSelectParams<TRecord> {
   alias?: string;
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
@@ -48,7 +45,7 @@ export interface IModelCountParams {
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 export type IModelUpdateOptions = Omit<IModelUpdateOptionsGeneral, 'disableInstance'>;
-export type IModelGetOptions = Omit<IModelGetOptionsGeneral, 'disableInstance'>;
+export type IModelGetOptions<TRecord> = Omit<IModelGetOptionsGeneral<TRecord>, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
@@ -60,8 +57,8 @@ export interface IModelUpdateOptionsGeneral extends IModelMethodOptionsGeneral {
   disableUpdateTime?: boolean;
 }
 
-export interface IModelGetOptionsGeneral extends IModelMethodOptionsGeneral {
-  columns?: any;
+export interface IModelGetOptionsGeneral<TRecord> extends IModelMethodOptionsGeneral {
+  columns?: TypeModelColumns<TRecord>;
 }
 
 export interface IModelSelectParamsPage {

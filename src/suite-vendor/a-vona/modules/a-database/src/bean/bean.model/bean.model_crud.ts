@@ -13,32 +13,32 @@ import { BeanModelView } from './bean.model_view.ts';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async mget<TRecord2 extends {} = TRecord>(
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptionsGeneral,
-  ): Promise<(TResult2 | undefined)[]>;
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptionsGeneral<TRecord2>,
+  ): Promise<(TRecord | undefined)[]>;
+  async mget<TRecord2 extends {} = TRecord>(
     table: string,
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptionsGeneral,
-  ): Promise<(TResult2 | undefined)[]>;
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptionsGeneral<TRecord2>,
+  ): Promise<(TRecord | undefined)[]>;
+  async mget<TRecord2 extends {} = TRecord>(
     table?,
     ids?,
     options?,
-  ): Promise<(TResult2 | undefined)[]> {
+  ): Promise<(TRecord | undefined)[]> {
     // mget
-    const items = await this._mget<TRecord2, TResult2>(table, ids, options);
+    const items = await this._mget<TRecord2>(table, ids, options);
     // filter
     return items.filter(item => !!item);
   }
 
   /** hold undefined item if not exists */
-  protected async _mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  protected async _mget<TRecord2 extends {} = TRecord>(
     table?,
     ids?,
     options?,
-  ): Promise<(TResult2 | undefined)[]> {
+  ): Promise<(TRecord | undefined)[]> {
     if (typeof table !== 'string') {
       options = ids;
       ids = table;
@@ -51,29 +51,29 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (ids.length === 0) return [];
     // ids maybe object[]
     if (typeof ids[0] === 'object') {
-      const result: (TResult2 | undefined)[] = [];
+      const result: (TRecord | undefined)[] = [];
       for (const id of ids) {
         // get from db directly
         // item maybe undefined
-        const item = await this._get<TRecord2, TResult2>(id as object);
+        const item = await this._get<TRecord2, TRecord>(id as object);
         result.push(item);
       }
       return result;
     }
     // params
-    const params: IModelSelectParams = {
+    const params: IModelSelectParams<TRecord2> = {
       where: {
         id: ids,
-      },
+      } as any,
     };
     if (options?.columns) {
       params.columns = options?.columns;
     }
     // select
     const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
-    const items = await this._select<TRecord2, TResult2>(table, params, options2);
+    const items = await this._select<TRecord2>(table, params, options2);
     // sort
-    const result: (TResult2 | undefined)[] = [];
+    const result: (TRecord | undefined)[] = [];
     for (const id of ids) {
       // item maybe undefined
       result.push(items.find(item => cast(item).id === id));
@@ -112,7 +112,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // table alias
     table = params.alias ? `${table} as ${params.alias}` : table;
     // builder
-    const builder = this.builder<TRecord2, TResult2>(table);
+    const builder = this.builder<TRecord2, TRecord>(table);
     // columns
     builder.select(params.columns);
     // distinct
@@ -137,28 +137,28 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return (await builder) as TRecord[];
   }
 
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async get<TRecord2 extends {} = TRecord>(
     where?: object,
-    options?: IModelGetOptionsGeneral,
-  ): Promise<TResult2 | undefined>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptionsGeneral<TRecord2>,
+  ): Promise<TRecord | undefined>;
+  async get<TRecord2 extends {} = TRecord>(
     table: string,
     where?: object,
-    options?: IModelGetOptionsGeneral,
-  ): Promise<TResult2 | undefined>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptionsGeneral<TRecord2>,
+  ): Promise<TRecord | undefined>;
+  async get<TRecord2 extends {} = TRecord>(
     table?,
     where?,
-    options?,
-  ): Promise<TResult2 | undefined> {
-    return await this._get<TRecord2, TResult2>(table, where, options);
+    options?: IModelGetOptionsGeneral<TRecord2>,
+  ): Promise<TRecord | undefined> {
+    return await this._get<TRecord2>(table, where, options);
   }
 
-  protected async _get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  protected async _get<TRecord2 extends {} = TRecord>(
     table?,
     where?,
-    options?,
-  ): Promise<TResult2 | undefined> {
+    options?: IModelGetOptionsGeneral<TRecord2>,
+  ): Promise<TRecord | undefined> {
     if (typeof table !== 'string') {
       options = where;
       where = table;
@@ -168,7 +168,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
-    const params: IModelSelectParams = { where, limit: 1 };
+    const params: IModelSelectParams<TRecord2> = { where, limit: 1 };
     if (options?.columns) {
       params.columns = options?.columns;
     }
@@ -176,7 +176,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const items = await this._select(table, params, options);
     const item = items[0];
     if (!item) return undefined;
-    return item as unknown as TResult2;
+    return item as unknown as TRecord;
   }
 
   async count(params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;

@@ -48,16 +48,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.__cacheInstance.clear();
   }
 
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async mget<TRecord2 extends {} = TRecord>(
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptions,
-  ): Promise<TResult2[]>;
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptions<TRecord2>,
+  ): Promise<TRecord[]>;
+  async mget<TRecord2 extends {} = TRecord>(
     table: string,
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptions,
-  ): Promise<TResult2[]>;
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table, ids, options?): Promise<TResult2[]> {
+    options?: IModelGetOptions<TRecord2>,
+  ): Promise<TRecord[]>;
+  async mget<TRecord2 extends {} = TRecord>(table, ids, options?: IModelGetOptions<TRecord2>): Promise<TRecord[]> {
     if (typeof table !== 'string') {
       options = ids;
       ids = table;
@@ -65,14 +65,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // not use cache if specified table
     if (table && table !== this.table) {
-      return (await super.mget(table, ids, options)) as TResult2[];
+      return (await super.mget(table, ids, options)) as TRecord[];
     }
     // table
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return (await super.mget(table, ids, options)) as TResult2[];
+      return (await super.mget(table, ids, options)) as TRecord[];
     }
     // cache
     const cache = this.__cacheInstance;
@@ -118,7 +118,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // 1: select id
     const columnId = `${params?.alias ? params?.alias : table}.id`;
-    const params2: IModelSelectParams = Object.assign({}, params, { columns: [columnId] });
+    const params2: IModelSelectParams<TRecord2> = Object.assign({}, params, { columns: [columnId] });
     const items = await super.select<TRecord2>(table, params2, options);
     if (items.length === 0) {
       // donothing
@@ -130,20 +130,20 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.mget(table, ids, options2);
   }
 
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async get<TRecord2 extends {} = TRecord>(
     where?: object,
-    options?: IModelGetOptions,
-  ): Promise<TResult2 | undefined>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptions<TRecord2>,
+  ): Promise<TRecord | undefined>;
+  async get<TRecord2 extends {} = TRecord>(
     table: string,
     where?: object,
-    options?: IModelGetOptions,
-  ): Promise<TResult2 | undefined>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelGetOptions<TRecord2>,
+  ): Promise<TRecord | undefined>;
+  async get<TRecord2 extends {} = TRecord>(
     table?,
     where?,
-    options?,
-  ): Promise<TResult2 | undefined> {
+    options?: IModelGetOptions<TRecord2>,
+  ): Promise<TRecord | undefined> {
     if (typeof table !== 'string') {
       options = where;
       where = table;
@@ -313,17 +313,17 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return item;
   }
 
-  private __filterMGetColumns(items: any[], options?: IModelGetOptions) {
+  private __filterMGetColumns<TRecord2 extends {} = TRecord>(items: any[], options?: IModelGetOptions<TRecord2>) {
     if (items.length === 0 || !options?.columns) return items;
     return items.map(item => {
       return this.__filterGetColumns(item, options);
     });
   }
 
-  private __filterGetColumns(data, options?: IModelGetOptions) {
+  private __filterGetColumns<TRecord2 extends {} = TRecord>(data, options?: IModelGetOptions<TRecord2>) {
     if (!data || !options?.columns) return data;
     let columns = options?.columns;
-    if (!Array.isArray(columns)) columns = columns.split(',');
+    if (!Array.isArray(columns)) columns = columns.split(',') as any;
     const data2 = {};
     for (let column of columns) {
       column = getTargetColumnName(column);
