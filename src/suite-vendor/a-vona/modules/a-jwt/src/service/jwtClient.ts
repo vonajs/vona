@@ -18,7 +18,7 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   private _createClient(clientName?: keyof IJwtClientRecord) {
-    clientName = clientName || 'temp';
+    clientName = clientName || 'access';
     const configJwt = this.scope.config;
     const configClient = configJwt.clients[clientName];
     if (!configClient) throw new Error(`jwt client not found: ${clientName}`);
@@ -51,6 +51,9 @@ export class ServiceJwtClient extends BeanBase {
       let signOptions = this._clientOptions.signOptions;
       if (options?.dev) {
         signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.clients.refresh.signOptions.expiresIn });
+      }
+      if (options?.temp) {
+        signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.tempToken.signOptions.expiresIn });
       }
       this._jwtInstance.sign(payload, this._clientOptions.secret!, signOptions, (err, encoded) => {
         if (err) return reject(err);

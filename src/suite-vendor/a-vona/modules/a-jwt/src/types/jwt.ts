@@ -9,13 +9,13 @@ export interface IJwtToken {
 export interface IJwtClientRecord {
   access: never;
   refresh: never;
-  temp: never;
-  auth: never;
+  oauth: never;
 }
 
 export interface IJwtSignOptions {
   path?: string | string[];
   dev?: boolean;
+  temp?: boolean;
 }
 
 export interface IJwtClientOptions {
@@ -36,6 +36,9 @@ export interface ConfigJwt {
       headerAuthScheme: string;
       query: string;
     };
+  };
+  tempToken: {
+    signOptions: { expiresIn: number };
   };
   default: IJwtClientOptions;
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;

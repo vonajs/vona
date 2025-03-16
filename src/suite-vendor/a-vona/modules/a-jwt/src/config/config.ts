@@ -16,19 +16,22 @@ export function config(app: VonaApplication) {
         query: 'auth_token',
       },
     },
+    tempToken: {
+      signOptions: { expiresIn: 10 * 60 },
+    },
     default: {
       secret: undefined,
       signOptions: { issuer: app.config.env.appName },
     },
     clients: {
-      temp: {
-        signOptions: { expiresIn: 10 * 60 },
-      },
       access: {
         signOptions: { expiresIn: 2 * 60 * 60 },
       },
       refresh: {
         signOptions: { expiresIn: 7 * 24 * 60 * 60 },
+      },
+      oauth: {
+        signOptions: { expiresIn: 5 * 60 },
       },
     },
   } as ConfigJwt;
