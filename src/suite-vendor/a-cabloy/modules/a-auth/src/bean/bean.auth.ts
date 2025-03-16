@@ -73,7 +73,7 @@ export class BeanAuth extends BeanBase {
       entityAuth = await this.scope.model.auth.insert({
         authProviderId,
         profileId,
-        profile: profileUser,
+        profile: JSON.stringify(profileUser),
       });
     }
     // passport.auth ready
