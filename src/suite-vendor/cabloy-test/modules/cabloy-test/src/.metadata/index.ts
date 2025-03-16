@@ -30,15 +30,22 @@ declare module 'vona-module-cabloy-test' {
 }
 /** meta status: end */
 /** controller: begin */
+export * from '../controller/passport.ts';
 export * from '../controller/status.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
+    'cabloy-test:passport': IDecoratorControllerOptions;
     'cabloy-test:status': IDecoratorControllerOptions;
   }
 
 }
 declare module 'vona-module-cabloy-test' {
+
+  export interface ControllerPassport {
+    /** @internal */
+    get scope(): ScopeModuleCabloyTest;
+  }
 
   export interface ControllerStatus {
     /** @internal */
@@ -48,6 +55,9 @@ declare module 'vona-module-cabloy-test' {
 /** controller: end */
 /** controller: begin */
 declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord {
+    '/cabloy/test/passport/isAuthenticated': '/cabloy/test/passport/isAuthenticated';
+  }
   export interface IApiPathPostRecord {
     '/cabloy/test/status': '/cabloy/test/status';
   }

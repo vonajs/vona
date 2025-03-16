@@ -1,8 +1,9 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
-describe.only('authSimple.test.ts.test.ts', () => {
+describe('authSimple.test.ts.test.ts', () => {
   it('action:passwordHash', async () => {
     const scope = app.bean.scope('a-authsimple');
     const password = '12344##1xxaasDFQ,.$';
@@ -15,16 +16,30 @@ describe.only('authSimple.test.ts.test.ts', () => {
 
   it('action:authSimple.test.ts', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const res = await app.bean.auth.authenticate('a-authsimple:simple', {
+      // login
+      const jwt = await app.bean.auth.authenticate('a-authsimple:simple', {
         clientName: 'default',
         clientOptions: { username: 'admin', password: '123456' },
       });
-      console.log('------------auth simple authenticate', res);
-      const res2 = await app.bean.authSimple.authenticate(
+      assert.equal(!!jwt?.accessToken, true);
+      // isAuthenticated: isolate
+      const [isAuthenticated2, _err] = await catchError(async () => {
+        return await app.bean.executor.newCtxIsolate(async () => {
+          return await app.bean.executor.performAction('get', '/cabloy/test/passport/isAuthenticated');
+        });
+      });
+      assert.equal(isAuthenticated2, undefined);
+      // isAuthenticated: isolate + header
+      const isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
+        return await app.bean.executor.performAction('get', '/vona/test/passport/isAuthenticated', { authToken: jwt.accessToken });
+      });
+      assert.equal(isAuthenticated, true);
+      // login again
+      const jwt2 = await app.bean.authSimple.authenticate(
         { username: 'admin', password: '123456' },
         'default',
       );
-      console.log('------------auth simple authenticate', res2);
+      assert.equal(!!jwt2?.accessToken, true);
     });
   });
 });
