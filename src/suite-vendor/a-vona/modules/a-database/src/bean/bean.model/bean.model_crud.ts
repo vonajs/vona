@@ -81,24 +81,24 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return result;
   }
 
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    params?: IModelSelectParams,
+  async select<TRecord2 extends {} = TRecord>(
+    params?: IModelSelectParams<TRecord2>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2[]>;
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TRecord[]>;
+  async select<TRecord2 extends {} = TRecord>(
     table: string,
-    params?: IModelSelectParams,
+    params?: IModelSelectParams<TRecord2>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TResult2[]>;
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, params?, options?): Promise<TResult2[]> {
-    return await this._select<TRecord2, TResult2>(table, params, options);
+  ): Promise<TRecord[]>;
+  async select<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<TRecord[]> {
+    return await this._select<TRecord2>(table, params, options);
   }
 
-  protected async _select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  protected async _select<TRecord2 extends {} = TRecord>(
     table?,
     params?,
     options?,
-  ): Promise<TResult2[]> {
+  ): Promise<TRecord[]> {
     if (typeof table !== 'string') {
       options = params;
       params = table;
@@ -122,7 +122,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // where
     const wheres = this.prepareWhere(builder, table, params.where, options);
     if (wheres === false) {
-      return [] as TResult2[];
+      return [] as TRecord[];
     }
     // orders
     this.buildOrders(builder, params.orders);
@@ -134,7 +134,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     this.buildPage(builder, params.page);
     // ready
     this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
-    return (await builder) as TResult2[];
+    return (await builder) as TRecord[];
   }
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(

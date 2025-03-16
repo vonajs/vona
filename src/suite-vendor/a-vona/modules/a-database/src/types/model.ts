@@ -22,10 +22,14 @@ export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
-export interface IModelSelectParams {
+export type TypeModelWhere<TRecord = {}> = {
+  [prop in keyof TRecord]: any;
+};
+
+export interface IModelSelectParams<TRecord = {}> {
   alias?: string;
   distinct?: any;
-  where?: any;
+  where?: TypeModelWhere<TRecord>;
   columns?: any;
   joins?: IModelSelectParamsJoin[];
   orders?: IModelSelectParamsOrder[];

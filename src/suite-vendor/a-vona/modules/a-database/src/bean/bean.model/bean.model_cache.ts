@@ -90,16 +90,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.__filterMGetColumns(items, options);
   }
 
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    params?: IModelSelectParams,
+  async select<TRecord2 extends {} = TRecord>(
+    params?: IModelSelectParams<TRecord2>,
     options?: IModelMethodOptions,
-  ): Promise<TResult2[]>;
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TRecord[]>;
+  async select<TRecord2 extends {} = TRecord>(
     table: string,
-    params?: IModelSelectParams,
+    params?: IModelSelectParams<TRecord2>,
     options?: IModelMethodOptions,
-  ): Promise<TResult2[]>;
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, params?, options?): Promise<TResult2[]> {
+  ): Promise<TRecord[]>;
+  async select<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<TRecord[]> {
     if (typeof table !== 'string') {
       options = params;
       params = table;
@@ -122,7 +122,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     const items = await super.select<TRecord2>(table, params2, options);
     if (items.length === 0) {
       // donothing
-      return [] as TResult2[];
+      return [] as TRecord[];
     }
     // 2: mget
     const ids = items.map(item => cast(item).id);
