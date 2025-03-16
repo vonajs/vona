@@ -45,10 +45,12 @@ export class BeanAuth extends BeanBase {
     state?: IAuthenticateState,
   ): Promise<IPassportBase> {
     // event: issuePassport
-    return await this.scope.event.issuePassport.emit({ profileUser, entityAuthProvider, clientOptions, state,
-    }, async ({ profileUser, entityAuthProvider, clientOptions, state }) => {
-      return await this._issuePassportInner(profileUser, entityAuthProvider, clientOptions, state);
-    });
+    return await this.scope.event.issuePassport.emit(
+      { profileUser, entityAuthProvider, clientOptions, state },
+      async ({ profileUser, entityAuthProvider, clientOptions, state }) => {
+        return await this._issuePassportInner(profileUser, entityAuthProvider, clientOptions, state);
+      },
+    );
   }
 
   private async _issuePassportInner(
