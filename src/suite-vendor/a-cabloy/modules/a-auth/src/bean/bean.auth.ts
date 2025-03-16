@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'vona-module-a-database';
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
@@ -45,9 +46,8 @@ export class BeanAuth extends BeanBase {
   ): Promise<IPassportBase> {
     // event: issuePassport
     return await this.scope.event.issuePassport.emit({ profileUser, entityAuthProvider, clientOptions, state,
-    }, async params => {
-      const { profileUser, entityAuthProvider, clientOptions, state } = params!;
-      return this._issuePassportInner(profileUser, entityAuthProvider, clientOptions, state);
+    }, async ({ profileUser, entityAuthProvider, clientOptions, state }) => {
+      return await this._issuePassportInner(profileUser, entityAuthProvider, clientOptions, state);
     });
   }
 
@@ -138,15 +138,41 @@ export class BeanAuth extends BeanBase {
       // ready
       passport.user = entityUser;
     }
-    // event: issuePassport
-    await this.scope.event.issuePassport.emit({
-      passport,
-      profileUser,
-      entityAuthProvider,
-      clientOptions,
-      state,
-    });
     // ok
     return passport;
+  }
+
+  async accountMigration(userIdFrom: TableIdentity, userIdTo: TableIdentity) {
+    return await this.scope.event.accountMigration.emit({ userIdFrom, userIdTo }, async ({ userIdFrom, userIdTo }) => {
+      return await this._accountMigrationInner(userIdFrom, userIdTo);
+    });
+  }
+
+  private async _accountMigrationInner(userIdFrom: TableIdentity, userIdTo: TableIdentity) {
+    // aAuth: delete old records
+    const list = await this.scope.model.auth.select({
+      where: {
+        userId: userIdFrom,
+      },
+    });
+    for (const item of list) {
+      await this.scope.model.auth.delete({
+        userId: userIdTo,
+        authProviderId: item.authProviderId,
+      });
+    }
+    // aAuth: update records
+    await this.scope.model.auth.update(
+      {
+        userId: userIdTo,
+      },
+      {
+        where: {
+          userId: userIdFrom,
+        },
+      },
+    );
+    // delete user
+    await this.bean.userInner.delete({ id: userIdFrom });
   }
 }

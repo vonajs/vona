@@ -9,16 +9,17 @@ import type { BeanAuth } from '../bean/bean.auth.ts';
 import type { BeanAuthProvider } from '../bean/bean.authProvider.ts';
 /** event: end */
 /** event: begin */
-import type { EventIssuePassport } from '../bean/event.issuePassport.ts';
+import type { EventAccountMigration } from '../bean/event.accountMigration.ts';
 
+import type { EventIssuePassport } from '../bean/event.issuePassport.ts';
 /** meta: end */
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 import type { Errors } from '../config/errors.ts';
+
 /** entity: end */
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
-
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 /** model: end */
 /** model: begin */
@@ -75,10 +76,8 @@ declare module 'vona' {
 }
 /** model: end */
 /** event: begin */
+export * from '../bean/event.accountMigration.ts';
 export * from '../bean/event.issuePassport.ts';
-/** event: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
@@ -108,10 +107,10 @@ declare module 'vona-module-a-auth' {
     $columns: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
+/** event: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.ts';
 export * from '../bean/meta.version.ts';
-/** locale: end */
-/** error: begin */
-export * from '../config/errors.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -136,17 +135,26 @@ export interface IModuleModel {
   auth: ModelAuth;
   authProvider: ModelAuthProvider;
 }
+/** locale: end */
+/** error: begin */
+export * from '../config/errors.ts';
 /** bean: end */
 /** entity: begin */
 export * from '../entity/auth.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventRecord {
+    'a-auth:accountMigration': IDecoratorEventOptions;
     'a-auth:issuePassport': IDecoratorEventOptions;
   }
 
 }
 declare module 'vona-module-a-auth' {
+
+  export interface EventAccountMigration {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
 
   export interface EventIssuePassport {
     /** @internal */
@@ -154,6 +162,7 @@ declare module 'vona-module-a-auth' {
   }
 }
 export interface IModuleEvent {
+  accountMigration: EventAccountMigration;
   issuePassport: EventIssuePassport;
 }
 export * from '../entity/authProvider.ts';

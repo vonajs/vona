@@ -4,23 +4,23 @@ import type {
   IDecoratorEventListenerOptions,
   IEventExecute,
   IEventListenerRecord,
-  NextEvent,
+  NextEventStrict,
 } from '../types/eventListener.ts';
 import { BeanBase, cast, compose } from 'vona';
 
 export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
-  async emit(data: DATA, nextOrDefault?: NextEvent<DATA, RESULT> | RESULT): Promise<RESULT> {
+  async emit(data: DATA, nextOrDefault?: NextEventStrict<DATA, RESULT> | RESULT): Promise<RESULT> {
     const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
       return this._wrapOnion(item);
     }, this.$onionName);
     if (eventListeners.length === 0) {
       return typeof nextOrDefault === 'function'
-        ? await cast<NextEvent<DATA, RESULT>>(nextOrDefault)(data)
+        ? await cast<NextEventStrict<DATA, RESULT>>(nextOrDefault)(data)
         : nextOrDefault!;
     }
     const next =
       typeof nextOrDefault === 'function'
-        ? cast<NextEvent<DATA, RESULT>>(nextOrDefault)
+        ? cast<NextEventStrict<DATA, RESULT>>(nextOrDefault)
         : async (): Promise<RESULT> => {
           return nextOrDefault!;
         };

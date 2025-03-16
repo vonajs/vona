@@ -2,8 +2,8 @@ import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
 import type { IEventRecord } from './event.ts';
 
-// not use `data: DATA`
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;
+export type NextEventStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => Promise<RESULT>;
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
   execute: (data: DATA, next: Next) => Promise<RESULT>;
