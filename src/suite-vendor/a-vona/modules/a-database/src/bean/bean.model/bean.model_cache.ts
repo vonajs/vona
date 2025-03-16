@@ -49,16 +49,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.__cacheInstance.clear();
   }
 
-  async mget<TRecord2 extends {} = TRecord>(
+  async mget(
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptions<TRecord2>,
+    options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord[]>;
-  async mget<TRecord2 extends {} = TRecord>(
+  async mget(
     table: string,
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptions<TRecord2>,
+    options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord[]>;
-  async mget<TRecord2 extends {} = TRecord>(table, ids, options?: IModelGetOptions<TRecord2>): Promise<TRecord[]> {
+  async mget(table, ids, options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
     if (typeof table !== 'string') {
       options = ids;
       ids = table;
@@ -91,16 +91,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.__filterMGetColumns(items, options);
   }
 
-  async select<TRecord2 extends {} = TRecord>(
-    params?: IModelSelectParams<TRecord2>,
+  async select(
+    params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord[]>;
-  async select<TRecord2 extends {} = TRecord>(
+  async select(
     table: string,
-    params?: IModelSelectParams<TRecord2>,
+    params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord[]>;
-  async select<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<TRecord[]> {
+  async select(table?, params?, options?): Promise<TRecord[]> {
     if (typeof table !== 'string') {
       options = params;
       params = table;
@@ -119,8 +119,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // 1: select id
     const columnId = `${params?.alias ? params?.alias : table}.id`;
-    const params2: IModelSelectParams<TRecord2> = Object.assign({}, params, { columns: [columnId] });
-    const items = await super.select<TRecord2>(table, params2, options);
+    const params2: IModelSelectParams<TRecord> = Object.assign({}, params, { columns: [columnId] });
+    const items = await super.select<TRecord>(table, params2, options);
     if (items.length === 0) {
       // donothing
       return [] as TRecord[];
@@ -176,13 +176,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.__filterGetColumns(await this.__get_key(table, where, options), options);
   }
 
-  async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
-  async update<TRecord2 extends {} = TRecord>(
+  async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void>;
+  async update(
     table: string,
-    data?: Partial<TRecord2>,
-    options?: IModelUpdateOptions,
+    data?: Partial<TRecord>,
+    options?: IModelUpdateOptions<TRecord>,
   ): Promise<void>;
-  async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
+  async update(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
@@ -209,7 +209,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     } else {
       const where = data.id !== undefined ? Object.assign({}, options?.where, { id: data.id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const items = await this.select<TRecord2>(table, { where, columns: ['id'] }, options);
+      const items = await this.select(table, { where, columns: ['id'] }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -227,13 +227,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.__deleteCache_key(id);
   }
 
-  async delete<TRecord2 extends {} = TRecord>(where?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<void>;
-  async delete<TRecord2 extends {} = TRecord>(
+  async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void>;
+  async delete(
     table: string,
-    where?: Partial<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<void>;
-  async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
+  async delete(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {
       options = where;
       where = table;
@@ -251,7 +251,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return await super.delete(table, where, options);
     }
     // check where and get id
-    const items = await this.select<TRecord2>(table, { where, columns: ['id'] }, options);
+    const items = await this.select(table, { where, columns: ['id'] }, options);
     if (items.length === 0) {
       // donothing
       return;
@@ -279,7 +279,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     const data = await cache.get(cacheKey, {
       get: async () => {
         const options = Object.assign({}, cacheKey.options, { columns: ['id'] });
-        return await super.get(table, cacheKey.where, options);
+        return await super.get(table, cacheKey.where, options as any);
       },
       ignoreNull: true,
     });
@@ -314,14 +314,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return item;
   }
 
-  private __filterMGetColumns<TRecord2 extends {} = TRecord>(items: any[], options?: IModelGetOptions<TRecord2>) {
+  private __filterMGetColumns(items: any[], options?: IModelGetOptions<TRecord>) {
     if (items.length === 0 || !options?.columns) return items;
     return items.map(item => {
       return this.__filterGetColumns(item, options);
     });
   }
 
-  private __filterGetColumns<TRecord2 extends {} = TRecord>(data, options?: IModelGetOptions<TRecord2>) {
+  private __filterGetColumns(data, options?: IModelGetOptions<TRecord>) {
     if (!data || !options?.columns) return data;
     let columns = options?.columns;
     if (!Array.isArray(columns)) columns = cast(columns).split(',');

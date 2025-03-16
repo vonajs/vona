@@ -44,7 +44,7 @@ export interface IModelCountParams {
 }
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
-export type IModelUpdateOptions = Omit<IModelUpdateOptionsGeneral, 'disableInstance'>;
+export type IModelUpdateOptions<TRecord> = Omit<IModelUpdateOptionsGeneral<TRecord>, 'disableInstance'>;
 export type IModelGetOptions<TRecord> = Omit<IModelGetOptionsGeneral<TRecord>, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
@@ -52,8 +52,8 @@ export interface IModelMethodOptionsGeneral {
   disableInstance?: boolean;
 }
 
-export interface IModelUpdateOptionsGeneral extends IModelMethodOptionsGeneral {
-  where?: any;
+export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptionsGeneral {
+  where?: TypeModelWhere<TRecord>;
   disableUpdateTime?: boolean;
 }
 
