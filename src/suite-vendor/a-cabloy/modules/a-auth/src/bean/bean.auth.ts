@@ -71,7 +71,7 @@ export class BeanAuth extends BeanBase {
       const userCurrent = this.bean.passport.getCurrentUser();
       if (!userCurrent) return this.app.throw(401);
       // migrate
-      if (entityAuth.userId !== userCurrent.id) {
+      if (String(entityAuth.userId) !== String(userCurrent.id)) {
         await this.accountMigration(userCurrent.id, entityAuth.userId);
       }
       // user
@@ -85,21 +85,22 @@ export class BeanAuth extends BeanBase {
       if (!userCurrent) return this.app.throw(401);
       // associated
       // force update auth's userId, maybe different
-      if (entityAuth.userId !== userCurrent.id) {
+      if (String(entityAuth.userId) !== String(userCurrent.id)) {
         // accountMigration / update
         if (entityAuth.userId) {
           await this.accountMigration(entityAuth.userId, userCurrent.id);
+          entityAuth.userId = userCurrent.id;
         } else {
           // delete old record
           await this.scope.model.auth.delete({
             authProviderId,
             userId: userCurrent.id,
           });
-          entityAuth.userId = userCurrent.id;
           await this.scope.model.auth.update({
             id: entityAuth.id,
             userId: userCurrent.id,
           });
+          entityAuth.userId = userCurrent.id;
         }
       }
       // ready
@@ -114,11 +115,11 @@ export class BeanAuth extends BeanBase {
         // add user
         entityUser = await this.bean.userInner.createByProfile(profileUser);
         // update auth's userId
-        entityAuth.userId = entityUser.id;
         await this.scope.model.auth.update({
           id: entityAuth.id,
           userId: entityUser.id,
         });
+        entityAuth.userId = entityUser.id;
       }
       // ready
       passport.user = entityUser;
