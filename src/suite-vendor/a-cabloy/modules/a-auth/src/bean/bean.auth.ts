@@ -1,10 +1,10 @@
-import type { TableIdentity } from 'vona-module-a-database';
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderExecute, IAuthProviderRecord } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { TableIdentity } from 'vona-module-a-database';
 
 @Bean()
 export class BeanAuth extends BeanBase {
@@ -85,7 +85,7 @@ export class BeanAuth extends BeanBase {
       const userCurrent = this.bean.passport.getCurrentUser();
       if (!userCurrent) return this.app.throw(401);
       // migrate
-      if (String(entityAuth.userId) !== String(userCurrent.id)) {
+      if (TableIdentity.isNotEqual(entityAuth.userId, userCurrent.id)) {
         await this.accountMigration(userCurrent.id, entityAuth.userId);
       }
       // user
@@ -99,7 +99,7 @@ export class BeanAuth extends BeanBase {
       if (!userCurrent) return this.app.throw(401);
       // associated
       // force update auth's userId, maybe different
-      if (String(entityAuth.userId) !== String(userCurrent.id)) {
+      if (TableIdentity.isNotEqual(entityAuth.userId, userCurrent.id)) {
         // accountMigration / update
         if (entityAuth.userId) {
           await this.accountMigration(entityAuth.userId, userCurrent.id);

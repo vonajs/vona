@@ -1,6 +1,7 @@
 import type { IAuthUserProfile, IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
 import { BeanBase, deepExtend } from 'vona';
+import { TableIdentity } from 'vona-module-a-database';
 import { Service } from 'vona-module-a-web';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
@@ -31,15 +32,24 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
   async get(user: Partial<IUser>): Promise<IUserBase | undefined> {
     const usersDemo = await this._getUsersDemo();
     if (user.id !== undefined)
-      return usersDemo.find(item => String(item.id) === String(user.id));
+      return usersDemo.find(item => TableIdentity.isEqual(item.id, user.id));
     if (user.name !== undefined)
       return usersDemo.find(item => item.name === user.name);
   }
 
   async update(user: Partial<IUser>): Promise<void> {
     const usersDemo = await this._getUsersDemo();
-    const userDemo = usersDemo.find(item => item.id === user.id);
+    const userDemo = usersDemo.find(item => TableIdentity.isEqual(item.id, user.id));
     if (!userDemo) return;
+    Object.assign(userDemo, user);
+    await this.scope.cacheRedis.usersDemo.set(usersDemo);
+  }
+
+  async delete(user: Partial<IUser>): Promise<void> {
+    const usersDemo = await this._getUsersDemo();
+    const index = usersDemo.findIndex(item => TableIdentity.isEqual(item.id, user.id));
+    if (index === -1) return;
+
     Object.assign(userDemo, user);
     await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }

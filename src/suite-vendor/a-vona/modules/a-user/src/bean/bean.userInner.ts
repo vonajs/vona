@@ -34,4 +34,8 @@ export class BeanUserInner extends BeanBase {
   update(user: Partial<IUserBase>): Promise<void> {
     return this.userInnerAdapter.update(user);
   }
+
+  delete(user: Partial<IUserBase>): Promise<void> {
+    return this.userInnerAdapter.delete(user);
+  }
 }

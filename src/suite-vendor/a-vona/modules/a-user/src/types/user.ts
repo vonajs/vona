@@ -24,4 +24,5 @@ export interface IUserInnerAdapter {
   getByName(name: string): Promise<IUserBase | undefined>;
   get(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   update(user: Partial<IUserBase>): Promise<void>;
+  delete(user: Partial<IUserBase>): Promise<void>;
 }
