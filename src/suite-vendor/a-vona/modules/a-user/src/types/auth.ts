@@ -13,10 +13,11 @@ export interface IAuthAdapter {
   getAuthId(user: IAuthBase): TableIdentity;
 }
 
-export type TypeAuthToken = 'jwt';
+export type TypeAuthToken = 'recreate' | 'refresh' | 'nochange';
 
 export interface ISigninOptions {
-  authToken: TypeAuthToken;
+  /** default: refresh */
+  authToken?: TypeAuthToken;
 }
 
 export interface IAuthInnerAdapter {

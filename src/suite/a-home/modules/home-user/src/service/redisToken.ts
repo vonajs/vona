@@ -17,6 +17,14 @@ export class ServiceRedisToken extends BeanBase {
     return true;
   }
 
+  async retrieve(payloadData: IPayloadData): Promise<IPayloadData | undefined> {
+    const key = this._getAuthRedisKey(payloadData);
+    if (!key) return;
+    const token = await this.redisAuth.get(key);
+    if (!token) return;
+    return { ...payloadData, token };
+  }
+
   async create(payloadData: IPayloadData) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key || !payloadData.token) return this.app.throw(401);

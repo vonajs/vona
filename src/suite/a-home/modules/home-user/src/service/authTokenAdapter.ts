@@ -12,6 +12,10 @@ export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapt
     return payloadDataNew;
   }
 
+  async retrieve(payloadData: IPayloadData): Promise<IPayloadData | undefined> {
+    return await this.scope.service.redisToken.retrieve(payloadData);
+  }
+
   async verify(payloadData: IPayloadData): Promise<boolean> {
     return await this.scope.service.redisToken.verify(payloadData);
   }

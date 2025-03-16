@@ -52,15 +52,13 @@ export class BeanPassport extends BeanBase {
   }
 
   public async signin(passport: IPassportBase, options?: ISigninOptions): Promise<IJwtToken> {
-    const authToken = options?.authToken ?? 'jwt';
     // current
     await this.setCurrent(passport);
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    const payloadData = await this._passportSerialize(passport);
+    const payloadData = await this._passportSerialize(passport, options);
     // jwt token
-    if (authToken !== 'jwt') throw new Error('Only support jwt');
     return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });
   }
 
@@ -148,7 +146,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.getCurrent();
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport);
+    const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
     // jwt token
     return await this.bean.jwt.createTemp(payloadData, options);
   }
@@ -158,14 +156,29 @@ export class BeanPassport extends BeanBase {
     const passport = this.getCurrent();
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport);
+    const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
     // jwt token
     return await this.bean.jwt.createOauth(payloadData, options);
   }
 
-  private async _passportSerialize(passport: IPassportBase) {
+  private async _passportSerialize(passport: IPassportBase, options?: ISigninOptions) {
+    // serialize
     const payloadData = await this.passportAdapter.serialize(passport);
     // auth token
-    return await this.authTokenAdapter.create(payloadData);
+    const authToken = options?.authToken ?? 'refresh';
+    if (authToken === 'recreate') {
+      return await this.authTokenAdapter.create(payloadData);
+    } else {
+      const payloadData2 = await this.authTokenAdapter.retrieve(payloadData);
+      if (!payloadData2) {
+        return await this.authTokenAdapter.create(payloadData);
+      }
+      if (authToken === 'refresh') {
+        await this.authTokenAdapter.refresh(payloadData2);
+      } else if (authToken === 'nochange') {
+        // do nothing
+      }
+      return payloadData2;
+    }
   }
 }
