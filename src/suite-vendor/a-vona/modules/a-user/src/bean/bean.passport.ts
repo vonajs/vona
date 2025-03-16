@@ -6,6 +6,7 @@ import type { IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $getAuthIdSystem } from '../lib/auth.ts';
+import { $getUserAnonymous } from '../lib/user.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {
@@ -30,8 +31,8 @@ export class BeanPassport extends BeanBase {
   }
 
   public get isAuthenticated(): boolean {
-    const passport = this.getCurrent();
-    return !!passport && !!passport.auth;
+    const user = this.getCurrentUser();
+    return !!user && !$getUserAnonymous(user);
   }
 
   public async setCurrent(passport: IPassportBase | undefined) {
