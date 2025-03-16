@@ -1,6 +1,6 @@
-import type { IPassportBase, IUserBase } from 'vona-module-a-user';
+import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
-import type { IAuthenticateOptions, IAuthenticateState, IAuthUserProfile } from '../types/auth.ts';
+import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderExecute, IAuthProviderRecord } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -38,6 +38,20 @@ export class BeanAuth extends BeanBase {
   }
 
   async issuePassport(
+    profileUser: IAuthUserProfile,
+    entityAuthProvider: EntityAuthProvider,
+    clientOptions: IAuthProviderClientOptions,
+    state?: IAuthenticateState,
+  ): Promise<IPassportBase> {
+    // event: issuePassport
+    return await this.scope.event.issuePassport.emit({ profileUser, entityAuthProvider, clientOptions, state,
+    }, async params => {
+      const { profileUser, entityAuthProvider, clientOptions, state } = params!;
+      return this._issuePassportInner(profileUser, entityAuthProvider, clientOptions, state);
+    });
+  }
+
+  private async _issuePassportInner(
     profileUser: IAuthUserProfile,
     entityAuthProvider: EntityAuthProvider,
     clientOptions: IAuthProviderClientOptions,

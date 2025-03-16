@@ -3,14 +3,13 @@ import type { IAuthUserProfile, IPassportBase } from 'vona-module-a-user';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventIssuePassportData {
-  passport: IPassportBase;
   profileUser: IAuthUserProfile;
   entityAuthProvider: EntityAuthProvider;
   clientOptions: IAuthProviderClientOptions;
   state?: IAuthenticateState;
 }
 
-export type TypeEventIssuePassportResult = void;
+export type TypeEventIssuePassportResult = IPassportBase;
 
 @Event()
 export class EventIssuePassport extends BeanEventBase<
