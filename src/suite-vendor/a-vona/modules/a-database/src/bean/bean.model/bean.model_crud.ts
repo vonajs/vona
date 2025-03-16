@@ -6,6 +6,7 @@ import type {
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
   TableIdentity,
+  TypeModelWhere,
 } from '../../types/index.ts';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
@@ -13,28 +14,28 @@ import { BeanModelView } from './bean.model_view.ts';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */
-  async mget<TRecord2 extends {} = TRecord>(
+  async mget(
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptionsGeneral<TRecord2>,
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]>;
-  async mget<TRecord2 extends {} = TRecord>(
+  async mget(
     table: string,
     ids: (TableIdentity | object)[],
-    options?: IModelGetOptionsGeneral<TRecord2>,
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]>;
-  async mget<TRecord2 extends {} = TRecord>(
+  async mget(
     table?,
     ids?,
     options?,
   ): Promise<(TRecord | undefined)[]> {
     // mget
-    const items = await this._mget<TRecord2>(table, ids, options);
+    const items = await this._mget(table, ids, options);
     // filter
     return items.filter(item => !!item);
   }
 
   /** hold undefined item if not exists */
-  protected async _mget<TRecord2 extends {} = TRecord>(
+  protected async _mget(
     table?,
     ids?,
     options?,
@@ -55,13 +56,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       for (const id of ids) {
         // get from db directly
         // item maybe undefined
-        const item = await this._get<TRecord2>(id as object);
+        const item = await this._get(id as object);
         result.push(item);
       }
       return result;
     }
     // params
-    const params: IModelSelectParams<TRecord2> = {
+    const params: IModelSelectParams<TRecord> = {
       where: {
         id: ids,
       } as any,
@@ -71,7 +72,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     }
     // select
     const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
-    const items = await this._select<TRecord2>(table, params, options2);
+    const items = await this._select<TRecord>(table, params, options2);
     // sort
     const result: (TRecord | undefined)[] = [];
     for (const id of ids) {
@@ -137,27 +138,27 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return (await builder) as TRecord[];
   }
 
-  async get<TRecord2 extends {} = TRecord>(
-    where?: object,
-    options?: IModelGetOptionsGeneral<TRecord2>,
+  async get(
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined>;
-  async get<TRecord2 extends {} = TRecord>(
+  async get(
     table: string,
-    where?: object,
-    options?: IModelGetOptionsGeneral<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined>;
-  async get<TRecord2 extends {} = TRecord>(
+  async get(
     table?,
-    where?,
-    options?: IModelGetOptionsGeneral<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined> {
-    return await this._get<TRecord2>(table, where, options);
+    return await this._get(table, where, options);
   }
 
-  protected async _get<TRecord2 extends {} = TRecord>(
+  protected async _get(
     table?,
-    where?,
-    options?: IModelGetOptionsGeneral<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined> {
     if (typeof table !== 'string') {
       options = where;
@@ -168,7 +169,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
-    const params: IModelSelectParams<TRecord2> = { where, limit: 1 };
+    const params: IModelSelectParams<TRecord> = { where, limit: 1 };
     if (options?.columns) {
       params.columns = options?.columns;
     }
