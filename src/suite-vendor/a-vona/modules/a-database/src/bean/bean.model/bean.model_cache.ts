@@ -323,9 +323,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private __filterGetColumns<TRecord2 extends {} = TRecord>(data, options?: IModelGetOptions<TRecord2>) {
     if (!data || !options?.columns) return data;
     let columns = options?.columns;
-    if (!Array.isArray(columns)) columns = columns.split(',') as any;
+    if (!Array.isArray(columns)) columns = cast(columns).split(',');
     const data2 = {};
-    for (let column of columns) {
+    for (let column of cast(columns)) {
       column = getTargetColumnName(column);
       if (column === '*') return data;
       if (data[column] !== undefined) {
