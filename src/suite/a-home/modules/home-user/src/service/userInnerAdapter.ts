@@ -49,8 +49,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     const usersDemo = await this._getUsersDemo();
     const index = usersDemo.findIndex(item => TableIdentity.isEqual(item.id, user.id));
     if (index === -1) return;
-
-    Object.assign(userDemo, user);
+    usersDemo.splice(index, 1);
     await this.scope.cacheRedis.usersDemo.set(usersDemo);
   }
 
