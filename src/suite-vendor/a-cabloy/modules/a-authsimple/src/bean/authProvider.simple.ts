@@ -1,4 +1,5 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IAuthUserProfile, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
 

@@ -1,6 +1,6 @@
 import type { IAuthUserProfile, IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
-import { BeanBase, deepExtend, uuidv4 } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
 const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefined }];
@@ -9,7 +9,11 @@ const __UsersDemo = [{ id: 1, name: 'admin', avatar: undefined, locale: undefine
 export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapter {
   async createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
     const usersDemo = await this._getUsersDemo();
-    const user = { id: uuidv4(), name: profile.username!, avatar: profile.photos?.[0].value, locale: undefined };
+    let id = 0;
+    usersDemo.forEach(item => {
+      if (Number(item.id) > id) id = Number(item.id);
+    });
+    const user = { id: id + 1, name: profile.username!, avatar: profile.photos?.[0].value, locale: undefined };
     usersDemo.push(user);
     await this._saveUsersDemo(usersDemo);
     return user;
@@ -27,7 +31,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
   async get(user: Partial<IUser>): Promise<IUserBase | undefined> {
     const usersDemo = await this._getUsersDemo();
     if (user.id !== undefined)
-      return usersDemo.find(item => item.id === user.id);
+      return usersDemo.find(item => String(item.id) === String(user.id));
     if (user.name !== undefined)
       return usersDemo.find(item => item.name === user.name);
   }

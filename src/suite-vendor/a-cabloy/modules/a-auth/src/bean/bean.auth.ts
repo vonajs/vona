@@ -95,6 +95,7 @@ export class BeanAuth extends BeanBase {
             authProviderId,
             userId: userCurrent.id,
           });
+          entityAuth.userId = userCurrent.id;
           await this.scope.model.auth.update({
             id: entityAuth.id,
             userId: userCurrent.id,
@@ -113,6 +114,7 @@ export class BeanAuth extends BeanBase {
         // add user
         entityUser = await this.bean.userInner.createByProfile(profileUser);
         // update auth's userId
+        entityAuth.userId = entityUser.id;
         await this.scope.model.auth.update({
           id: entityAuth.id,
           userId: entityUser.id,
