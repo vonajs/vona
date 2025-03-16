@@ -55,7 +55,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       for (const id of ids) {
         // get from db directly
         // item maybe undefined
-        const item = await this._get<TRecord2, TRecord>(id as object);
+        const item = await this._get<TRecord2>(id as object);
         result.push(item);
       }
       return result;
