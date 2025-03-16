@@ -1,3 +1,4 @@
+import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
@@ -11,7 +12,7 @@ export class BeanAuth extends BeanBase {
   async authenticate<T extends keyof IAuthProviderRecord>(
     authProviderName: T,
     options?: IAuthenticateOptions<IAuthProviderRecord[T]>,
-  ) {
+  ): Promise<IJwtToken> {
     // clientName
     const clientName = options?.clientName ?? 'default';
     // onionSlice
@@ -35,7 +36,9 @@ export class BeanAuth extends BeanBase {
     const profileUser = await beanAuthProvider.execute(clientOptions!, onionSlice.beanOptions.options!);
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, options?.state);
-    console.log('-----passport', passport);
+    // signin
+    const jwtToken = await this.bean.passport.signin(passport);
+    return jwtToken;
   }
 
   async issuePassport(

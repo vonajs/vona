@@ -7,9 +7,10 @@ export interface IJwtToken {
 }
 
 export interface IJwtClientRecord {
-  temp: never;
   access: never;
   refresh: never;
+  temp: never;
+  auth: never;
 }
 
 export interface IJwtSignOptions {
