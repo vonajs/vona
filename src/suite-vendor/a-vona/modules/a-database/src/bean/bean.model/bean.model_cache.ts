@@ -120,7 +120,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // 1: select id
     const columnId = `${params?.alias ? params?.alias : table}.id`;
     const params2: IModelSelectParams<TRecord> = Object.assign({}, params, { columns: [columnId] });
-    const items = await super.select<TRecord>(table, params2, options);
+    const items = await super.select(table, params2, options);
     if (items.length === 0) {
       // donothing
       return [] as TRecord[];
@@ -263,7 +263,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       id = items.map(item => cast(item).id);
     }
     // delete by id/ids
-    await super.delete(table, { id }, options);
+    await super.delete(table, { id } as any, options);
     // delete cache
     await this.__deleteCache_key(id);
   }

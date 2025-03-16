@@ -12,9 +12,9 @@ const SymbolColumnsCache = Symbol('SymbolColumnsCache');
 const SymbolColumnsDefaultCache = Symbol('SymbolColumnsDefaultCache');
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<[TResult2, TResult2]>;
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table: string, item?): Promise<[TResult2, TResult2]>;
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, item?): Promise<[TResult2, TResult2]> {
+  async prepareData(item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
+  async prepareData(table: string, item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
+  async prepareData(table?, item?): Promise<[TRecord, TRecord]> {
     if (typeof table !== 'string') {
       item = table;
       table = undefined;
@@ -23,7 +23,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // item
-    if (!item) return [{}, {}] as [TResult2, TResult2];
+    if (!item) return [{}, {}] as [TRecord, TRecord];
     // columns
     const columns = await this.columns(table);
     // data
@@ -40,12 +40,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
         data[columnName] = value;
       }
     }
-    return [data, dataOriginal] as [TResult2, TResult2];
+    return [data, dataOriginal] as [TRecord, TRecord];
   }
 
-  async defaultData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string): Promise<TResult2> {
+  async defaultData(table?: string): Promise<TRecord> {
     table = table || this.table;
-    if (!table) return {} as TResult2;
+    if (!table) return {} as TRecord;
     if (!this.columnsDefaultCache[table]) {
       const data = {};
       // columns
@@ -55,7 +55,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
       }
       this.columnsDefaultCache[table] = data;
     }
-    return this.columnsDefaultCache[table] as TResult2;
+    return this.columnsDefaultCache[table] as TRecord;
   }
 
   private get columnsDefaultCache(): Record<string, {}> {

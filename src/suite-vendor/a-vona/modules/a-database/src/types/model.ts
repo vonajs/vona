@@ -35,11 +35,11 @@ export interface IModelSelectParams<TRecord> {
   page?: IModelSelectParamsPage;
 }
 
-export interface IModelCountParams {
+export interface IModelCountParams<TRecord> {
   alias?: string;
   count?: any;
   distinct?: any;
-  where?: any;
+  where?: TypeModelWhere<TRecord>;
   joins?: IModelSelectParamsJoin[];
 }
 

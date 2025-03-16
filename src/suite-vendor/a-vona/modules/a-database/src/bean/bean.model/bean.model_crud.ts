@@ -72,7 +72,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     }
     // select
     const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
-    const items = await this._select<TRecord>(table, params, options2);
+    const items = await this._select(table, params, options2);
     // sort
     const result: (TRecord | undefined)[] = [];
     for (const id of ids) {
@@ -82,20 +82,20 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return result;
   }
 
-  async select<TRecord2 extends {} = TRecord>(
-    params?: IModelSelectParams<TRecord2>,
+  async select(
+    params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
-  async select<TRecord2 extends {} = TRecord>(
+  async select(
     table: string,
-    params?: IModelSelectParams<TRecord2>,
+    params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
-  async select<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<TRecord[]> {
-    return await this._select<TRecord2>(table, params, options);
+  async select(table?, params?, options?): Promise<TRecord[]> {
+    return await this._select(table, params, options);
   }
 
-  protected async _select<TRecord2 extends {} = TRecord>(
+  protected async _select(
     table?,
     params?,
     options?,
@@ -113,7 +113,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // table alias
     table = params.alias ? `${table} as ${params.alias}` : table;
     // builder
-    const builder = this.builder<TRecord2, TRecord>(table);
+    const builder = this.builder<TRecord, TRecord>(table);
     // columns
     builder.select(params.columns);
     // distinct
@@ -180,8 +180,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return item as unknown as TRecord;
   }
 
-  async count(params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-  async count(table: string, params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+  async count(params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+  async count(table: string, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
   async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<BigNumber> {
     if (typeof table !== 'string') {
       options = params;
@@ -212,29 +212,29 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return this.extractCount(res);
   }
 
-  async insert<TRecord2 extends {} = TRecord>(
-    data?: Partial<TRecord2>,
+  async insert(
+    data?: Partial<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord>;
-  async insert<TRecord2 extends {} = TRecord>(
+  async insert(
     table: string,
-    data?: Partial<TRecord2>,
+    data?: Partial<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord>;
   async insert(table?, data?, options?): Promise<TRecord[] | TRecord> {
     return await this.batchInsert(table, data, options);
   }
 
-  async batchInsert<TRecord2 extends {} = TRecord>(
-    data: Partial<TRecord2>[],
+  async batchInsert(
+    data: Partial<TRecord>[],
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
-  async batchInsert<TRecord2 extends {} = TRecord>(
+  async batchInsert(
     table: string,
-    data: Partial<TRecord2>[],
+    data: Partial<TRecord>[],
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
-  async batchInsert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<TRecord[] | TRecord> {
+  async batchInsert(table?, data?, options?): Promise<TRecord[] | TRecord> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
@@ -253,12 +253,12 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       // first
       this._prepareInsertDataByOptions(dataTemp, options);
       // then
-      const [dataNew, dataNewOriginal] = await this.prepareData<TRecord2>(table, dataTemp);
+      const [dataNew, dataNewOriginal] = await this.prepareData(table, dataTemp);
       datas.push(dataNew);
       datasOriginal.push(dataNewOriginal);
     }
     // builder
-    const builder = this.builder<TRecord2>(table);
+    const builder = this.builder<TRecord>(table);
     // insert
     builder.insert(datas as unknown as any);
     // debug
@@ -278,16 +278,16 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return Array.isArray(data) ? result : result[0];
   }
 
-  async update<TRecord2 extends {} = TRecord>(
-    data?: Partial<TRecord2>,
-    options?: IModelUpdateOptionsGeneral,
+  async update(
+    data?: Partial<TRecord>,
+    options?: IModelUpdateOptionsGeneral<TRecord>,
   ): Promise<void>;
-  async update<TRecord2 extends {} = TRecord>(
+  async update(
     table: string,
-    data?: Partial<TRecord2>,
-    options?: IModelUpdateOptionsGeneral,
+    data?: Partial<TRecord>,
+    options?: IModelUpdateOptionsGeneral<TRecord>,
   ): Promise<void>;
-  async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
+  async update(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
@@ -297,7 +297,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
-    [data] = await this.prepareData<TRecord2>(table, data);
+    [data] = await this.prepareData(table, data);
     // where
     const where = Object.assign({}, options?.where);
     // id
@@ -310,7 +310,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       data.updatedAt = new Date();
     }
     // builder
-    const builder = this.builder<TRecord2>(table);
+    const builder = this.builder<TRecord>(table);
     // update
     builder.update(data);
     // where
@@ -325,16 +325,16 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     await builder;
   }
 
-  async delete<TRecord2 extends {} = TRecord>(
-    where?: Partial<TRecord2>,
+  async delete(
+    where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<void>;
-  async delete<TRecord2 extends {} = TRecord>(
+  async delete(
     table: string,
-    where?: Partial<TRecord2>,
+    where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<void>;
-  async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
+  async delete(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {
       options = where;
       where = table;
@@ -345,11 +345,11 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
-      await this.update(table, { deleted: true }, Object.assign({}, options, { where }));
+      await this.update(table, { deleted: true } as any, Object.assign({}, options, { where }));
       return;
     }
     // builder
-    const builder = this.builder<TRecord2>(table);
+    const builder = this.builder<TRecord>(table);
     // delete
     builder.delete();
     // where
@@ -364,33 +364,33 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     await builder;
   }
 
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2[]>;
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async query(value: Knex.Value): Promise<TRecord[]>;
+  async query(
     sql: string,
     binding: Knex.RawBinding,
-  ): Promise<TResult2[]>;
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TRecord[]>;
+  async query(
     sql: string,
     bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
-  ): Promise<TResult2[]>;
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2[]> {
+  ): Promise<TRecord[]>;
+  async query(sql, bindings?): Promise<TRecord[]> {
     const raw = this.db.raw(sql, bindings);
     const result = await raw;
     // dialect
-    return this.dialect.query(result) as unknown as TResult2[];
+    return this.dialect.query(result) as unknown as TRecord[];
   }
 
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2 | undefined>;
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async queryOne(value: Knex.Value): Promise<TRecord | undefined>;
+  async queryOne(
     sql: string,
     binding: Knex.RawBinding,
-  ): Promise<TResult2 | undefined>;
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TRecord | undefined>;
+  async queryOne(
     sql: string,
     bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
-  ): Promise<TResult2 | undefined>;
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2 | undefined> {
+  ): Promise<TRecord | undefined>;
+  async queryOne(sql, bindings?): Promise<TRecord | undefined> {
     const res = await this.query(sql, bindings);
-    return res[0] as unknown as TResult2 | undefined;
+    return res[0] as unknown as TRecord | undefined;
   }
 }
