@@ -54,7 +54,7 @@ export class BeanAuth extends BeanBase {
   private async _issuePassportInner(
     profileUser: IAuthUserProfile,
     entityAuthProvider: EntityAuthProvider,
-    clientOptions: IAuthProviderClientOptions,
+    _clientOptions: IAuthProviderClientOptions,
     state?: IAuthenticateState,
   ): Promise<IPassportBase> {
     // stateIntention
