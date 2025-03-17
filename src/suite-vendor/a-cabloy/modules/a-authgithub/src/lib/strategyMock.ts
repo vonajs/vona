@@ -23,7 +23,7 @@ export class StrategyMock extends OAuth2Strategy {
 
     this.name = 'github-mock';
     this._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
-    this._oauth2.useAuthorizationHeaderforGET(true);
+    // this._oauth2.useAuthorizationHeaderforGET(true);
 
     this._oauth2.getOAuthAccessToken = function (_code, params, callback) {
       const accessToken = uuidv4();
