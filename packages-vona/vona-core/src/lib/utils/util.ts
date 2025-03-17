@@ -39,6 +39,21 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[instanceName];
   }
 
+  get protocol() {
+    const config = this.app.config;
+    return config.server.serve.protocol || this.ctx?.protocol;
+  }
+
+  get host() {
+    const config = this.app.config;
+    return config.server.serve.host || this.ctx?.host;
+  }
+
+  getAbsoluteUrl(path?: string) {
+    const prefix = this.host ? `${this.protocol}://${this.host}` : '';
+    return `${prefix}${path || ''}`;
+  }
+
   combineApiPathControllerAndActionRaw(
     moduleName: ModuleInfo.IModuleInfo | string,
     controllerPath: string | undefined,

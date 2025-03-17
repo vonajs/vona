@@ -18,6 +18,10 @@ export interface VonaConfig {
       hostname: string;
       port: number;
     };
+    serve: {
+      protocol: string;
+      host: string;
+    };
   };
   proxy: {
     enabled: boolean;

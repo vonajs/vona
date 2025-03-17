@@ -49,8 +49,7 @@ export class BeanAuth extends BeanBase {
       console.log('----strategy verified');
     });
     cast(strategy).redirect = (location: string) => {
-      console.log(cast(strategy).name);
-      this.app.redirect(location);
+      if (cast(strategy).name !== 'mock') return this.app.redirect(location);
     };
     cast(strategy).error = (err: Error) => {
       throw err;

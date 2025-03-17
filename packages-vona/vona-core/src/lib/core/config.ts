@@ -50,6 +50,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
         hostname: process.env.SERVER_LISTEN_HOSTNAME,
         port: Number.parseInt(process.env.SERVER_LISTEN_PORT!),
       },
+      serve: {},
     },
     proxy: {
       enabled: true,
