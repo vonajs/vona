@@ -1,12 +1,18 @@
-import { BeanBase, Next } from 'vona';
-import { IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware } from 'vona-module-a-aspect';
+import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthUserProfile } from 'vona-module-a-user';
+import { BeanBase } from 'vona';
+import { AuthProvider } from 'vona-module-a-auth';
 
-export interface IMiddlewareOptions<%=argv.beanNameCapitalize%> extends IDecoratorMiddlewareOptions {}
+export interface IAuthProvider<%=argv.beanNameCapitalize%>ClientRecord extends IAuthProviderClientRecord {}
 
-@Middleware<IMiddlewareOptions<%=argv.beanNameCapitalize%>>()
-export class Middleware<%=argv.beanNameCapitalize%> extends BeanBase implements IMiddlewareExecute {
-  async execute(_options: IMiddlewareOptions<%=argv.beanNameCapitalize%>, next: Next) {
-    // next
-    return next();
-  }
+export interface IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions extends IAuthProviderClientOptions {}
+
+export interface IAuthProviderOptions<%=argv.beanNameCapitalize%> extends IDecoratorAuthProviderOptions<
+  keyof IAuthProviderSimpleClientRecord,
+  IAuthProviderSimpleClientOptions
+> {}
+
+@AuthProvider<IAuthProviderOptions<%=argv.beanNameCapitalize%>>({ redirect: false })
+export class AuthProvider<%=argv.beanNameCapitalize%> extends BeanBase implements IAuthProviderExecute {
+  async execute(clientOptions: IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions, _options: IAuthProviderOptions<%=argv.beanNameCapitalize%>): Promise<IAuthUserProfile> {}
 }
