@@ -28,8 +28,11 @@ export class ServiceBroadcast extends BeanBase {
     });
   }
 
-  public async dispose() {
+  public async disposePub() {
     await this.__pub?.quit();
+  }
+
+  public async disposeSub() {
     await this.__sub?.quit();
   }
 
