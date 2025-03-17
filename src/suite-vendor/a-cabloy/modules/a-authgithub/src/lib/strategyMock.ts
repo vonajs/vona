@@ -1,74 +1,43 @@
 import type { IAuthProviderGithubClientOptions } from '../bean/authProvider.github.ts';
 import OAuth2Strategy from 'passport-oauth2';
+import { uuidv4 } from 'vona';
 
 export class StrategyMock extends OAuth2Strategy {
-  constructor(clientOptions: IAuthProviderGithubClientOptions, verify: Function) {
-    super();
+  name: string;
+  _userProfileURL: string;
+  _oauth2: any;
+
+  constructor(options: IAuthProviderGithubClientOptions, verify: Function) {
+    options = options || {};
+    options.authorizationURL = options.authorizationURL || 'https://github.com/login/oauth/authorize';
+    options.tokenURL = options.tokenURL || 'https://github.com/login/oauth/access_token';
+    options.scopeSeparator = options.scopeSeparator || ',';
+    options.customHeaders = options.customHeaders || {};
+
+    if (!options.customHeaders['User-Agent']) {
+      options.customHeaders['User-Agent'] = options.userAgent || 'passport-github';
+    }
+
+    super(options, verify);
+
+    this.name = 'github-mock';
+    this._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
+    this._oauth2.useAuthorizationHeaderforGET(true);
+
+    this._oauth2.getOAuthAccessToken = function (_code, params, callback) {
+      const accessToken = uuidv4();
+      const refreshToken = uuidv4();
+      callback(null, accessToken, refreshToken, params);
+    };
+  }
+
+  userProfile(_accessToken, done) {
+    const mockId = 'mock-github-user';
+    const profile = {
+      id: mockId,
+      username: mockId,
+      displayName: mockId,
+    };
+    done(null, profile);
   }
 }
-
-function Strategy(this: any, options, verify) {
-  if (typeof options === 'function') {
-    verify = options;
-    options = {};
-  }
-  if (!verify) {
-    throw new TypeError('LocalStrategy requires a verify callback');
-  }
-
-  passport.Strategy.call(this);
-  this.name = 'github-mock';
-  this._verify = verify;
-  this._passReqToCallback = options.passReqToCallback;
-}
-
-/**
- * Inherit from `passport.Strategy`.
- */
-util.inherits(Strategy, passport.Strategy);
-
-Strategy.prototype.authenticate = function (req) {
-  // self
-  const self = this;
-  const ctx = req.ctx;
-
-  // check
-  if (req.method === 'POST') {
-    // not allow
-    return self.error(ctx.app.parseFail(403));
-  }
-
-  // verified
-  function verified(err, user, info) {
-    if (err) {
-      return self.error(err);
-    }
-    if (!user) {
-      return self.fail(info);
-    }
-    ctx.app.success(user);
-    self.success(user, info);
-  }
-
-  // mock
-  const mockId = 'mock-github-user';
-  const profile = {
-    id: mockId,
-    username: mockId,
-    displayName: mockId,
-  };
-  const accessToken = null;
-  const refreshToken = null;
-
-  try {
-    if (self._passReqToCallback) {
-      this._verify(req, accessToken, refreshToken, profile, verified);
-    } else {
-      this._verify(accessToken, refreshToken, profile, verified);
-    }
-  } catch (ex) {
-    return self.error(ex);
-  }
-};
-
-export default Strategy;
