@@ -74,6 +74,9 @@ importers:
       vona-module-a-auth:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-auth
+      vona-module-a-authgithub:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-authgithub
       vona-module-a-authsimple:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-authsimple
@@ -835,6 +838,9 @@ importers:
       vona-module-a-auth:
         specifier: workspace:^
         version: link:modules/a-auth
+      vona-module-a-authgithub:
+        specifier: workspace:^
+        version: link:modules/a-authgithub
       vona-module-a-authsimple:
         specifier: workspace:^
         version: link:modules/a-authsimple
@@ -849,6 +855,15 @@ importers:
         version: link:modules/a-swagger
 
   src/suite-vendor/a-cabloy/modules/a-auth:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/a-authgithub:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

@@ -1,23 +1,16 @@
 {
-  "name": "vona-module-a-cabloy",
+  "name": "vona-module-a-authgithub",
   "type": "module",
-  "version": "5.0.3",
-  "title": "a-cabloy",
+  "version": "5.0.0",
+  "title": "a-authgithub",
   "vonaModule": {
     "dependencies": {
-      "a-vona": "5.0.0",
-      "a-auth": "5.0.0",
-      "a-authsimple": "5.0.0",
-      "a-authgithub": "5.0.0",
-      "a-status": "5.0.0",
-      "a-swagger": "5.0.0"
+      "a-vona": "5.0.0"
     }
   },
   "description": "",
   "author": "",
-  "keywords": [
-    "Vona Module"
-  ],
+  "keywords": ["Vona Module"],
   "exports": {
     ".": {
       "types": [
@@ -29,10 +22,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist",
-    "static"
-  ],
+  "files": ["dist", "static"],
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
@@ -49,6 +39,7 @@
       "exports.\\..import"
     ]
   },
+  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

@@ -16,6 +16,9 @@
     },
     {
       "path": "modules/a-authsimple/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-authgithub/tsconfig.build.json"
     }
   ],
   "exclude": [
