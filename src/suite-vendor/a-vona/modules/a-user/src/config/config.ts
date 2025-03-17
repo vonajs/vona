@@ -1,13 +1,11 @@
 import type { VonaApplication } from 'vona';
 import type { IServiceRecord } from 'vona-module-a-web';
+import type { TypeAuthToken } from '../types/auth.ts';
 
 export function config(_app: VonaApplication) {
   return {
     passport: {
-      refreshAuthToken: {
-        recreate: true,
-        refresh: true,
-      },
+      refreshAuthToken: 'recreate' as TypeAuthToken,
     },
     adapter: {
       authToken: 'home-user:authTokenAdapter' as keyof IServiceRecord,

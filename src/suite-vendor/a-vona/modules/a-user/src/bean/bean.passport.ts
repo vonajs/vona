@@ -1,4 +1,4 @@
-import type { IJwtSignOptions, IJwtToken } from 'vona-module-a-jwt';
+import type { IJwtSignOptions, IJwtToken, IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
@@ -130,12 +130,7 @@ export class BeanPassport extends BeanBase {
     if (!verified) return this.app.throw(401);
     // refreshAuthToken
     const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
-    if (configRefreshAuthToken.recreate) {
-      await this.authTokenAdapter.remove(payloadData);
-      payloadData = await this.authTokenAdapter.create(payloadData);
-    } else if (configRefreshAuthToken.refresh) {
-      await this.authTokenAdapter.refresh(payloadData);
-    }
+    payloadData = await this._handlePayloadData(payloadData, { authToken: configRefreshAuthToken });
     // jwt token
     return await this.bean.jwt.create(payloadData);
   }
@@ -164,6 +159,10 @@ export class BeanPassport extends BeanBase {
   private async _passportSerialize(passport: IPassportBase, options?: ISigninOptions) {
     // serialize
     const payloadData = await this.passportAdapter.serialize(passport);
+    return await this._handlePayloadData(payloadData, options);
+  }
+
+  private async _handlePayloadData(payloadData: IPayloadDataBase, options?: ISigninOptions) {
     // auth token
     const authToken = options?.authToken ?? 'refresh';
     if (authToken === 'recreate') {
