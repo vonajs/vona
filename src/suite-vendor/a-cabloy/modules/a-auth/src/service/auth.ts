@@ -1,8 +1,9 @@
-import type { IAuthUserProfile, IPassportBase } from 'vona-module-a-user';
+import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
-import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
+import type { IAuthenticateState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions } from '../types/authProvider.ts';
 import { BeanBase } from 'vona';
+import { TableIdentity } from 'vona-module-a-database';
 import { Service } from 'vona-module-a-web';
 
 @Service()
@@ -12,11 +13,11 @@ export class ServiceAuth extends BeanBase {
     beanAuthProvider: IAuthProviderVerify,
     clientOptions: IAuthProviderClientOptions,
     onionOptions: IDecoratorAuthProviderOptions,
-    options?: IAuthenticateOptions,
+    state?: IAuthenticateState,
   ) {
     const profileUser = await beanAuthProvider.verify([], clientOptions, onionOptions);
     // issuePassport
-    const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, options?.state);
+    const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, state);
     // signin
     const jwtToken = await this.bean.passport.signin(passport, { authToken: 'recreate' });
     return jwtToken;

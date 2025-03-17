@@ -1,4 +1,4 @@
-import type { OmitNever } from 'vona';
+import type { Constructable, OmitNever } from 'vona';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 
@@ -22,8 +22,9 @@ export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOpt
   customHeaders?: object;
 }
 
-export type TypeStrategyOptions<T extends IAuthProviderClientOptions> = T & {
+export type TypeStrategyOptions<T extends IAuthProviderClientOptions = IAuthProviderClientOptions> = T & {
   callbackURL?: string;
+  state?: string;
 };
 
 export type TypeStrategyVerifyArgs = any[];
@@ -37,6 +38,10 @@ export interface IDecoratorAuthProviderOptions<
   redirect: boolean;
   default?: T;
   clients?: { [prop in K]?: T }; // Record<K, T>;
+}
+
+export interface IAuthProviderStrategy {
+  strategy(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<Constructable>;
 }
 
 export interface IAuthProviderVerify {
