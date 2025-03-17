@@ -12,7 +12,7 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
   IAuthProviderGithubClientOptions
 > {}
 
-@AuthProvider<IAuthProviderOptionsGithub>({ redirect: false })
+@AuthProvider<IAuthProviderOptionsGithub>({ redirect: true })
 export class AuthProviderGithub extends BeanBase implements IAuthProviderExecute {
   async execute(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<IAuthUserProfile> {
     // profile
