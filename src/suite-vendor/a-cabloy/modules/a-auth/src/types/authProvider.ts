@@ -23,7 +23,7 @@ export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOpt
   customHeaders?: object;
 }
 
-export type TypeStrategyVerifyArgs = [];
+export type TypeStrategyVerifyArgs = any[];
 export type TypeStrategyOauth2VerifyArgs = [accessToken: string, refreshToken: string, profile: IAuthUserProfile];
 
 export interface IDecoratorAuthProviderOptions<
