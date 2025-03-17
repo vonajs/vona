@@ -1,1 +1,1 @@
-export * from './strategyMock.ts';
+export {};

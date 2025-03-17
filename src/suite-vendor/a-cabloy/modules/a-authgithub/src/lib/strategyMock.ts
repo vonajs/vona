@@ -1,5 +1,11 @@
-import passport from 'passport-strategy';
-import util from 'util';
+import type { IAuthProviderGithubClientOptions } from '../bean/authProvider.github.ts';
+import OAuth2Strategy from 'passport-oauth2';
+
+export class StrategyMock extends OAuth2Strategy {
+  constructor(clientOptions: IAuthProviderGithubClientOptions, verify: Function) {
+    super();
+  }
+}
 
 function Strategy(this: any, options, verify) {
   if (typeof options === 'function') {

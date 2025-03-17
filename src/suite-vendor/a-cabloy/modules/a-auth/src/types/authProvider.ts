@@ -12,6 +12,20 @@ export interface IAuthProviderClientOptions {
   confirmed?: boolean;
 }
 
+export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOptions {
+  clientID?: string;
+  clientSecret?: string;
+  callbackURL?: string;
+  scope?: string;
+  authorizationURL?: string;
+  tokenURL?: string;
+  scopeSeparator?: string;
+  customHeaders?: object;
+}
+
+export type TypeStrategyVerifyArgs = [];
+export type TypeStrategyOauth2VerifyArgs = [accessToken: string, refreshToken: string, profile: IAuthUserProfile];
+
 export interface IDecoratorAuthProviderOptions<
   K extends keyof IAuthProviderClientRecord = keyof IAuthProviderClientRecord,
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
@@ -22,8 +36,8 @@ export interface IDecoratorAuthProviderOptions<
   clients?: { [prop in K]?: T }; // Record<K, T>;
 }
 
-export interface IAuthProviderExecute {
-  execute(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<IAuthUserProfile>;
+export interface IAuthProviderVerify {
+  verify(args: TypeStrategyVerifyArgs, clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<IAuthUserProfile>;
 }
 
 declare module 'vona-module-a-onion' {

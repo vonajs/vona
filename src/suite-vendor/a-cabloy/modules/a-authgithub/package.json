@@ -40,7 +40,8 @@
     ]
   },
   "dependencies": {
-    "passport-github": "^1.1.0"
+    "passport-github": "^1.1.0",
+    "passport-oauth2": "^1.8.0"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
