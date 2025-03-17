@@ -1,3 +1,4 @@
+import type { TypeStrategyOptions } from 'vona-module-a-auth';
 import type { IAuthProviderGithubClientOptions } from '../bean/authProvider.github.ts';
 import OAuth2Strategy from 'passport-oauth2';
 import { uuidv4 } from 'vona';
@@ -7,7 +8,7 @@ export class StrategyMock extends OAuth2Strategy {
   _userProfileURL: string;
   _oauth2: any;
 
-  constructor(options: IAuthProviderGithubClientOptions, verify: Function) {
+  constructor(options: TypeStrategyOptions<IAuthProviderGithubClientOptions>, verify: Function) {
     options = options || {};
     options.authorizationURL = options.authorizationURL || 'https://github.com/login/oauth/authorize';
     options.tokenURL = options.tokenURL || 'https://github.com/login/oauth/access_token';

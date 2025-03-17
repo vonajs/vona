@@ -1,4 +1,4 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyOauth2VerifyArgs, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
+import type { IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyOauth2VerifyArgs } from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';

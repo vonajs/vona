@@ -15,13 +15,16 @@ export interface IAuthProviderClientOptions {
 export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOptions {
   clientID?: string;
   clientSecret?: string;
-  callbackURL?: string;
   scope?: string;
   authorizationURL?: string;
   tokenURL?: string;
   scopeSeparator?: string;
   customHeaders?: object;
 }
+
+export type TypeStrategyOptions<T extends IAuthProviderClientOptions> = T & {
+  callbackURL?: string;
+};
 
 export type TypeStrategyVerifyArgs = any[];
 export type TypeStrategyOauth2VerifyArgs = [accessToken: string, refreshToken: string, profile: IAuthUserProfile];
