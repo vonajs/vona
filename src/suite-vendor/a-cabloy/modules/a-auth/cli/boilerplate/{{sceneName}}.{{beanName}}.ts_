@@ -14,5 +14,11 @@ export interface IAuthProviderOptions<%=argv.beanNameCapitalize%> extends IDecor
 
 @AuthProvider<IAuthProviderOptions<%=argv.beanNameCapitalize%>>({ redirect: false })
 export class AuthProvider<%=argv.beanNameCapitalize%> extends BeanBase implements IAuthProviderExecute {
-  async execute(clientOptions: IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions, _options: IAuthProviderOptions<%=argv.beanNameCapitalize%>): Promise<IAuthUserProfile> {}
+  async execute(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<IAuthUserProfile> {
+    // profile
+    const profile: IAuthUserProfile = {
+      id: '',
+    };
+    return profile;
+  }
 }
