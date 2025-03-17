@@ -1,6 +1,5 @@
 import type { BeanScopeUtil } from 'vona';
-import type { IAuthProviderOptionsGithub } from '../bean/authProvider.github1.ts';
-import type { AuthProviderGithub1 } from '../bean/authProvider.github1.ts';
+/** authProvider: begin */
 import type { IAuthProviderOptionsGithub } from '../bean/authProvider.github.ts';
 /** authProvider: end */
 /** authProvider: begin */
@@ -13,14 +12,11 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/authProvider.github1.ts';
-/** authProvider: begin */
 export * from '../bean/authProvider.github.ts';
 declare module 'vona-module-a-auth' {
 
   export interface IAuthProviderRecord {
     'a-authgithub:github': IAuthProviderOptionsGithub;
-    'a-authgithub:github1': IAuthProviderOptionsGithub;
   }
 
 }
@@ -30,15 +26,9 @@ declare module 'vona-module-a-authgithub' {
     /** @internal */
     get scope(): ScopeModuleAAuthgithub;
   }
-
-  export interface AuthProviderGithub1 {
-    /** @internal */
-    get scope(): ScopeModuleAAuthgithub;
-  }
 }
 export interface IModuleAuthProvider {
   github: AuthProviderGithub;
-  github1: AuthProviderGithub1;
 }
 
 @Scope()
@@ -48,7 +38,6 @@ export interface ScopeModuleAAuthgithub {
   util: BeanScopeUtil;
   authProvider: IModuleAuthProvider;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-authgithub': ScopeModuleAAuthgithub;

@@ -22,6 +22,7 @@ export class AuthProviderGithub extends BeanBase implements IAuthProviderVerify 
     _clientOptions: IAuthProviderGithubClientOptions,
     _options: IAuthProviderOptionsGithub,
   ): Promise<IAuthUserProfile> {
+    // confirmed
     // profile
     const profile: IAuthUserProfile = {
       id: '',
