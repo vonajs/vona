@@ -26,9 +26,9 @@ import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { ModelAuth } from '../model/auth.ts';
 import type { ModelAuthProvider } from '../model/authProvider.ts';
 
-import type { ServiceAuthenticator } from '../service/authenticator.ts';
 /** service: end */
 /** service: begin */
+import type { ServiceAuth } from '../service/auth.ts';
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 
 /** error: end */
@@ -190,43 +190,43 @@ declare module 'vona-module-a-auth' {
   }
 }
 export * from '../model/authProvider.ts';
-export * from '../service/authenticator.ts';
+/** meta redlock: end */
+/** service: begin */
+export * from '../service/auth.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
+    'a-auth:auth': never;
     'a-auth:authInnerAdapter': never;
-    'a-auth:authenticator': never;
   }
 
 }
 declare module 'vona-module-a-auth' {
 
-  export interface ServiceAuthInnerAdapter {
+  export interface ServiceAuth {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
-  export interface ServiceAuthenticator {
+  export interface ServiceAuthInnerAdapter {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }
 export interface IModuleService {
+  auth: ServiceAuth;
   authInnerAdapter: ServiceAuthInnerAdapter;
-  authenticator: ServiceAuthenticator;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
+    'a-auth.service.auth': ServiceAuth;
     'a-auth.service.authInnerAdapter': ServiceAuthInnerAdapter;
-    'a-auth.service.authenticator': ServiceAuthenticator;
   }
 }
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** meta redlock: end */
-/** service: begin */
 export * from '../service/authInnerAdapter.ts';
 
 @Scope()
