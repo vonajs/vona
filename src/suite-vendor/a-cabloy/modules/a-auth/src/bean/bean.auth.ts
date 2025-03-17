@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { StrategyBase } from '../lib/strategyBase.ts';
-import type { IAuthenticateOptions } from '../types/auth.ts';
+import type { IAuthenticateOptions, IAuthenticateStateInner } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -14,6 +14,8 @@ export class BeanAuth extends BeanBase {
   ): Promise<IJwtToken | undefined> {
     // clientName
     const clientName = options?.clientName ?? 'default';
+    // stateIntention
+    const stateIntention = options?.state?.intention ?? 'login';
     // onionSlice
     const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(authProviderName);
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
@@ -38,9 +40,10 @@ export class BeanAuth extends BeanBase {
       return await this.scope.service.auth.authenticateCallback(entityAuthProvider, beanAuthProvider, clientOptions, onionOptions, options?.state);
     }
     // redirect
-    const callbackURL = '';
-    const state = '';
-    const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, { callbackURL, state });
+    const callbackURL = 'http://ssss'; // 内网与外网的区别
+    const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
+    const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, { accessToken });
+    const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, { callbackURL, state: JSON.stringify(strategyState) });
     const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
     const strategy = new Strategy(strategyOptions, () => {
       console.log('----strategy verified');

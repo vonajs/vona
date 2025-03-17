@@ -8,6 +8,10 @@ export interface IAuthenticateState {
   redirect?: string;
 }
 
+export interface IAuthenticateStateInner extends IAuthenticateState {
+  accessToken?: string;
+}
+
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
   state?: IAuthenticateState;
   clientName?: Extract<keyof T['clients'], 'string'> | 'default' | undefined;
