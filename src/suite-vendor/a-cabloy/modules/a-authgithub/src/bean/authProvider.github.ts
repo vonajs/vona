@@ -15,7 +15,7 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
   IAuthProviderGithubClientOptions
 > {}
 
-@AuthProvider<IAuthProviderOptionsGithub>({ redirect: true })
+@AuthProvider<IAuthProviderOptionsGithub>({ redirect: true, default: { confirmed: true } })
 export class AuthProviderGithub extends BeanBase implements IAuthProviderVerify {
   async verify(
     _args: TypeStrategyOauth2VerifyArgs,
