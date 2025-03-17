@@ -3,7 +3,7 @@ import type { IJwtToken } from 'vona-module-a-jwt';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStateInner } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
-import { BeanBase, cast, deepExtend } from 'vona';
+import { BeanBase, cast, deepExtend, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
@@ -40,7 +40,14 @@ export class BeanAuth extends BeanBase {
       return await this.scope.service.auth.authenticateCallback(entityAuthProvider, beanAuthProvider, clientOptions, onionOptions, options?.state);
     }
     // redirect
-    const callbackURL = 'http://ssss'; // 内网与外网的区别
+    const callbackURLRelative = this.app.util.combineApiPathControllerAndAction(
+      'a-auth',
+      'passport',
+      `${module}/${providerName}/${clientName}/callback`,
+      true,
+      true,
+    ) as string;
+    const callbackURL = this.app.util.getAbsoluteUrl(callbackURLRelative);
     const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
     const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, { accessToken });
     const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, { callbackURL, state: JSON.stringify(strategyState) });
@@ -49,7 +56,17 @@ export class BeanAuth extends BeanBase {
       console.log('----strategy verified');
     });
     cast(strategy).redirect = (location: string) => {
-      if (cast(strategy).name !== 'mock') return this.app.redirect(location);
+      // real
+      if (cast(strategy).name !== 'mock') {
+        return this.app.redirect(location);
+      }
+      // mock
+      this.bean.executor.performAction('get', callbackURLRelative as any, {
+        query: {
+          code: uuidv4(),
+          state: JSON.stringify(strategyState),
+        },
+      });
     };
     cast(strategy).error = (err: Error) => {
       throw err;
