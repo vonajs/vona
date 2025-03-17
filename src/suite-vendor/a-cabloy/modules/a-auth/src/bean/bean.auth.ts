@@ -3,7 +3,7 @@ import type { IJwtToken } from 'vona-module-a-jwt';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStateInner } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
-import { BeanBase, deepExtend } from 'vona';
+import { BeanBase, cast, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
@@ -48,6 +48,12 @@ export class BeanAuth extends BeanBase {
     const strategy = new Strategy(strategyOptions, () => {
       console.log('----strategy verified');
     });
+    cast(strategy).redirect = (location: string) => {
+      console.log(location);
+    };
+    cast(strategy).error = (err: Error) => {
+      throw err;
+    };
     strategy.authenticate(this.ctx.req, strategyOptions);
   }
 }
