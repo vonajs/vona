@@ -22,7 +22,7 @@ export class StrategyMock extends OAuth2Strategy {
     super(options, verify);
 
     const self = this as any;
-    self.name = 'github-mock';
+    self.name = 'mock';
     self._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
     self._oauth2.useAuthorizationHeaderforGET(true);
 

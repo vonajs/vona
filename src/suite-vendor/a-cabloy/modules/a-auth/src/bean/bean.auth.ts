@@ -49,6 +49,7 @@ export class BeanAuth extends BeanBase {
       console.log('----strategy verified');
     });
     cast(strategy).redirect = (location: string) => {
+      console.log(cast(strategy).name);
       console.log(location);
     };
     cast(strategy).error = (err: Error) => {
