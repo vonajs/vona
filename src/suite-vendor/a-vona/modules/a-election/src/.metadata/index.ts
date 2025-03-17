@@ -8,7 +8,7 @@ import type { CacheRedisElection } from '../bean/cacheRedis.election.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceElection } from '../service/election.ts';
-/** service: end */
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 /** service: end */
@@ -38,9 +38,9 @@ declare module 'vona-module-a-election' {
 export interface IModuleCacheRedis {
   election: CacheRedisElection;
 }
-/** cacheRedis: end */
-/** service: begin */
-export * from '../service/election.ts';
+/** service: end */
+/** monkey: begin */
+export * from '../monkey.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -63,6 +63,9 @@ declare module 'vona' {
     'a-election.service.election': ServiceElection;
   }
 }
+/** cacheRedis: end */
+/** service: begin */
+export * from '../service/election.ts';
 
 @Scope()
 export class ScopeModuleAElection extends BeanScopeBase {}
