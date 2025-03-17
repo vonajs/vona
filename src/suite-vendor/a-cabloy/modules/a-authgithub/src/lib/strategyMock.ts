@@ -4,9 +4,9 @@ import OAuth2Strategy from 'passport-oauth2';
 import { uuidv4 } from 'vona';
 
 export class StrategyMock extends OAuth2Strategy {
-  name: string;
-  _userProfileURL: string;
-  _oauth2: any;
+  // name: string;
+  // _userProfileURL: string;
+  // _oauth2: any;
 
   constructor(options: TypeStrategyOptions<IAuthProviderGithubClientOptions>, verify: Function) {
     options = options || {};
@@ -21,11 +21,12 @@ export class StrategyMock extends OAuth2Strategy {
 
     super(options, verify);
 
-    this.name = 'github-mock';
-    this._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
-    // this._oauth2.useAuthorizationHeaderforGET(true);
+    const self = this as any;
+    self.name = 'github-mock';
+    self._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
+    self._oauth2.useAuthorizationHeaderforGET(true);
 
-    this._oauth2.getOAuthAccessToken = function (_code, params, callback) {
+    self._oauth2.getOAuthAccessToken = function (_code, params, callback) {
       const accessToken = uuidv4();
       const refreshToken = uuidv4();
       callback(null, accessToken, refreshToken, params);
