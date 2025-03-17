@@ -9,6 +9,7 @@ export interface IAuthProviderClientRecord {
 }
 
 export interface IAuthProviderClientOptions {
+  redirect: boolean;
   confirmed?: boolean;
 }
 
