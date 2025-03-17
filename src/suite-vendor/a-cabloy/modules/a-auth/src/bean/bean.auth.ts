@@ -51,6 +51,7 @@ export class BeanAuth extends BeanBase {
     cast(strategy).redirect = (location: string) => {
       console.log(cast(strategy).name);
       console.log(location);
+      this.app;
     };
     cast(strategy).error = (err: Error) => {
       throw err;

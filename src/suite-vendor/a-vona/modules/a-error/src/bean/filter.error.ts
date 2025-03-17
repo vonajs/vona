@@ -96,7 +96,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       if (status >= 500) {
         if (errorPageUrl) {
           const statusQuery = `${errorPageUrl.indexOf('?') > 0 ? '&' : '?'}real_status=${status}`;
-          this.ctx.redirect(errorPageUrl + statusQuery);
+          this.app.redirect(errorPageUrl + statusQuery);
           return true;
         }
         this.ctx.status = 500;
