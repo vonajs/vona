@@ -1,4 +1,4 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
@@ -16,8 +16,12 @@ export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOption
 > {}
 
 @AuthProvider<IAuthProviderOptionsSimple>({ redirect: false })
-export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute {
-  async execute(clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple): Promise<IAuthUserProfile> {
+export class AuthProviderSimple extends BeanBase implements IAuthProviderVerify {
+  async verify(
+    _args: TypeStrategyVerifyArgs,
+    clientOptions: IAuthProviderSimpleClientOptions,
+    _options: IAuthProviderOptionsSimple,
+  ): Promise<IAuthUserProfile> {
     if (!clientOptions.username || !clientOptions.password) return this.app.throw(401);
     // user
     const user = await this.bean.userInner.getByName(clientOptions.username);

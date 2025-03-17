@@ -1,4 +1,4 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderExecute, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
+import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions } from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
@@ -13,8 +13,12 @@ export interface IAuthProviderOptions<%=argv.beanNameCapitalize%> extends IDecor
 > {}
 
 @AuthProvider<IAuthProviderOptions<%=argv.beanNameCapitalize%>>({ redirect: false })
-export class AuthProvider<%=argv.beanNameCapitalize%> extends BeanBase implements IAuthProviderExecute {
-  async execute(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<IAuthUserProfile> {
+export class AuthProvider<%=argv.beanNameCapitalize%> extends BeanBase implements IAuthProviderVerify {
+  async verify(
+    _args: TypeStrategyVerifyArgs,
+    _clientOptions: IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions,
+    _options: IAuthProviderOptions<%=argv.beanNameCapitalize%>
+  ): Promise<IAuthUserProfile> {
     // profile
     const profile: IAuthUserProfile = {
       id: '',
