@@ -14,6 +14,9 @@
         "scopeResource": true,
         "boilerplate": "cli/boilerplate"
       }
+    },
+    "capabilities": {
+      "monkey": true
     }
   },
   "description": "",

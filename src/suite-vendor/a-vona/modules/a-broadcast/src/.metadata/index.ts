@@ -9,7 +9,7 @@ import type { ServiceBroadcast } from '../service/broadcast.ts';
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-/** service: end */
+/** monkey: end */
 /** main: begin */
 import 'vona';
 import 'vona';
@@ -39,6 +39,9 @@ declare module 'vona' {
     'a-broadcast.service.broadcast': ServiceBroadcast;
   }
 }
+/** service: end */
+/** monkey: begin */
+export * from '../monkey.ts';
 /** service: begin */
 export * from '../service/broadcast.ts';
 

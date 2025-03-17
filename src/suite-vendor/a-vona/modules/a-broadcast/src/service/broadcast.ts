@@ -28,7 +28,7 @@ export class ServiceBroadcast extends BeanBase {
     });
   }
 
-  protected async __dispose__() {
+  public async dispose() {
     await this.__pub?.quit();
     await this.__sub?.quit();
   }
