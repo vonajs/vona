@@ -1,3 +1,4 @@
+import type { PowerPartial } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
@@ -18,6 +19,7 @@ export class BeanAuth extends BeanBase {
     // onionSlice
     const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(authProviderName);
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
+    const onionOptions = onionSlice.beanOptions.options!;
     // authProvider
     const [module, providerName] = authProviderName.split(':');
     const entityAuthProvider = await this.bean.authProvider.get({ module, providerName, clientName });
@@ -33,7 +35,7 @@ export class BeanAuth extends BeanBase {
     );
     // execute
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderExecute>(onionSlice.beanOptions.beanFullName as any);
-    const profileUser = await beanAuthProvider.execute(clientOptions!, onionSlice.beanOptions.options!);
+    const profileUser = await beanAuthProvider.execute(clientOptions, onionOptions);
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, options?.state);
     // signin
