@@ -20,7 +20,7 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
   useMockForDev: boolean;
 }
 
-@AuthProvider<IAuthProviderOptionsGithub>({ redirect: true, useMockForDev: true, default: { confirmed: true } })
+@AuthProvider<IAuthProviderOptionsGithub>({ redirect: true, useMockForDev: true, default: { confirmed: true, clientID: 'xxxxxx', clientSecret: 'xxxxxx' } })
 export class AuthProviderGithub extends BeanBase implements IAuthProviderStrategy, IAuthProviderVerify {
   async strategy(_clientOptions: IAuthProviderGithubClientOptions, options: IAuthProviderOptionsGithub): Promise<Constructable> {
     return (this.app.meta.isTest || this.app.meta.isLocal) && options.useMockForDev ? StrategyMock : StrategyGithub;
