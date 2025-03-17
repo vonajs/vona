@@ -2,7 +2,7 @@ import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateOptions, IAuthenticateState } from '../types/auth.ts';
-import type { IAuthProviderClientOptions, IAuthProviderExecute, IAuthProviderRecord } from '../types/authProvider.ts';
+import type { IAuthProviderClientOptions, IAuthProviderRecord, IAuthProviderVerify } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { TableIdentity } from 'vona-module-a-database';
@@ -33,8 +33,8 @@ export class BeanAuth extends BeanBase {
       options?.clientOptions,
     );
     // execute
-    const beanAuthProvider = this.app.bean._getBean<IAuthProviderExecute>(onionSlice.beanOptions.beanFullName as any);
-    const profileUser = await beanAuthProvider.execute(clientOptions, onionOptions);
+    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify>(onionSlice.beanOptions.beanFullName as any);
+    const profileUser = await beanAuthProvider.verify([], clientOptions, onionOptions);
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, options?.state);
     // signin
