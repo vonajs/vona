@@ -1,4 +1,3 @@
-import type { PowerPartial } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
