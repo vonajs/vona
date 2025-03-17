@@ -15,7 +15,7 @@ export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOption
   IAuthProviderSimpleClientOptions
 > {}
 
-@AuthProvider<IAuthProviderOptionsSimple>({ default: { redirect: false } })
+@AuthProvider<IAuthProviderOptionsSimple>({ redirect: false })
 export class AuthProviderSimple extends BeanBase implements IAuthProviderExecute {
   async execute(clientOptions: IAuthProviderSimpleClientOptions, _options: IAuthProviderOptionsSimple): Promise<IAuthUserProfile> {
     if (!clientOptions.username || !clientOptions.password) return this.app.throw(401);

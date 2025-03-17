@@ -9,7 +9,6 @@ export interface IAuthProviderClientRecord {
 }
 
 export interface IAuthProviderClientOptions {
-  redirect: boolean;
   confirmed?: boolean;
 }
 
@@ -18,6 +17,7 @@ export interface IDecoratorAuthProviderOptions<
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 >
   extends IOnionOptionsEnable {
+  redirect: boolean;
   default?: T;
   clients?: Record<K, T>;
 }
