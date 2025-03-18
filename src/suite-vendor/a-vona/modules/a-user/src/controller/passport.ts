@@ -12,4 +12,11 @@ export class ControllerPassport extends BeanBase {
   async refreshAuthToken(@Body('refreshToken') refreshToken: string): Promise<DtoJwtToken> {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }
+
+  @Post('createAuthTokenFromOauthCode')
+  @Public()
+  @Api.body(v.object(DtoJwtToken))
+  async createAuthTokenFromOauthCode(@Body('code') code: string): Promise<DtoJwtToken> {
+    return await this.bean.passport.createAuthTokenFromOauthCode(code);
+  }
 }
