@@ -111,8 +111,8 @@ declare module 'vona-module-a-auth' {
 }
 /** event: end */
 /** meta: begin */
+export * from '../bean/meta.printTip.ts';
 export * from '../bean/meta.redlock.ts';
-export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -137,12 +137,10 @@ export interface IModuleModel {
   auth: ModelAuth;
   authProvider: ModelAuthProvider;
 }
+export * from '../bean/meta.version.ts';
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';
-/** service: end */
-/** controller: begin */
-export * from '../controller/passport.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventRecord {
@@ -167,6 +165,9 @@ export interface IModuleEvent {
   accountMigration: EventAccountMigration;
   issuePassport: EventIssuePassport;
 }
+/** service: end */
+/** controller: begin */
+export * from '../controller/passport.ts';
 /** bean: end */
 /** entity: begin */
 export * from '../entity/auth.ts';
@@ -174,12 +175,18 @@ export * from '../entity/authProvider.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
+    'a-auth:printTip': never;
     'a-auth:redlock': never;
     'a-auth:version': never;
   }
 
 }
 declare module 'vona-module-a-auth' {
+
+  export interface MetaPrintTip {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
 
   export interface MetaRedlock {
     /** @internal */
@@ -241,6 +248,14 @@ declare module 'vona-module-a-auth' {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
+}
+/** controller: end */
+/** controller: begin */
+declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord {
+    '/auth/passport/callback': '/auth/passport/callback';
+  }
+
 }
 export const locales = {
   'en-us': locale_en_us,
