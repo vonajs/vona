@@ -58,8 +58,10 @@ export class ControllerPassport extends BeanBase {
           state,
           args,
         );
-        if (strategy.name === 'mock') return resolve(jwt);
         // code
+        const code = await this.bean.passport.createOauthAuthTokenCode(jwt.accessToken);
+        if (strategy.name === 'mock') return resolve(jwt);
+
         // redirect
       });
       strategy.error = (err: Error) => {

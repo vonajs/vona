@@ -33,4 +33,8 @@ export class BeanJwt extends BeanBase {
   async createOauth(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
     return await this.get('oauth').sign(payloadData, options);
   }
+
+  async createOauthCode(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+    return await this.get('code').sign(payloadData, options);
+  }
 }
