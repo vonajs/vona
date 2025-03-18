@@ -123,12 +123,9 @@ export class BeanPassport extends BeanBase {
   }
 
   public async refreshAuthToken(refreshToken: string) {
-    // payloadData
-    let payloadData = await this.bean.jwt.get('refresh').verify(refreshToken);
+    // checkAuthToken by code
+    let payloadData = await this.checkAuthToken(refreshToken, 'refresh');
     if (!payloadData) return this.app.throw(401);
-    // verify
-    const verified = await this.authTokenAdapter.verify(payloadData);
-    if (!verified) return this.app.throw(401);
     // refreshAuthToken
     const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
     payloadData = await this._handlePayloadData(payloadData, { authToken: configRefreshAuthToken });
