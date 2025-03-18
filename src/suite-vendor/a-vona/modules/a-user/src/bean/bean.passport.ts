@@ -157,7 +157,7 @@ export class BeanPassport extends BeanBase {
     return await this.bean.jwt.createOauth(payloadData, options);
   }
 
-  public async createOauthAuthTokenCode(accessToken: string, options?: IJwtSignOptions) {
+  public async createOauthCode(accessToken: string, options?: IJwtSignOptions) {
     // payloadData
     const payloadData = await this.bean.jwt.get('access').verify(accessToken);
     if (!payloadData) return this.app.throw(401);
