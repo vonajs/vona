@@ -9,6 +9,6 @@ export class ControllerPassport extends BeanBase {
   @Public()
   @Api.exclude()
   callback() {
-
+    console.log(this.ctx.host);
   }
 }

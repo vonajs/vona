@@ -56,15 +56,16 @@ export class VonaApplication extends KoaApplication {
   }
 
   createAnonymousContext(req?: any): VonaContext {
+    const host = `localhost:${process.env.SERVER_LISTEN_PORT}`;
     const request = {
       headers: {
-        'host': '127.0.0.1',
-        'x-forwarded-for': '127.0.0.1',
+        'host': host,
+        'x-forwarded-for': host,
       },
       query: {},
       querystring: '',
-      host: '127.0.0.1',
-      hostname: '127.0.0.1',
+      host,
+      hostname: 'localhost',
       protocol: 'http',
       secure: 'false',
       method: 'GET',
