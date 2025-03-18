@@ -1,6 +1,6 @@
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
-import type { IAuthenticateState } from '../types/auth.ts';
+import type { IAuthenticateState, IAuthenticateStateInner } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions } from '../types/authProvider.ts';
 import { BeanBase } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
@@ -44,7 +44,7 @@ export class ServiceAuth extends BeanBase {
     profileUser: IAuthUserProfile,
     entityAuthProvider: EntityAuthProvider,
     _clientOptions: IAuthProviderClientOptions,
-    state?: IAuthenticateState,
+    state?: IAuthenticateStateInner,
   ): Promise<IPassportBase> {
     // stateIntention
     const stateIntention = state?.intention || 'login';
@@ -70,9 +70,7 @@ export class ServiceAuth extends BeanBase {
     // user
     if (stateIntention === 'migrate') {
       // should check user so as to create this current passport
-      await this.bean.passport.checkAuthToken();
-      const userCurrent = this.bean.passport.getCurrentUser();
-      if (!userCurrent) return this.app.throw(401);
+      const userCurrent = await this._checkAuthTokenAndReturnCurrentUser(state?.accessToken);
       // migrate
       if (TableIdentity.isNotEqual(entityAuth.userId, userCurrent.id)) {
         await this.accountMigration(userCurrent.id, entityAuth.userId);
@@ -83,9 +81,7 @@ export class ServiceAuth extends BeanBase {
       passport.user = user;
     } else if (stateIntention === 'associate') {
       // should check user so as to create this current passport
-      await this.bean.passport.checkAuthToken();
-      const userCurrent = this.bean.passport.getCurrentUser();
-      if (!userCurrent) return this.app.throw(401);
+      const userCurrent = await this._checkAuthTokenAndReturnCurrentUser(state?.accessToken);
       // associated
       // force update auth's userId, maybe different
       if (TableIdentity.isNotEqual(entityAuth.userId, userCurrent.id)) {
@@ -129,6 +125,15 @@ export class ServiceAuth extends BeanBase {
     }
     // ok
     return passport;
+  }
+
+  private async _checkAuthTokenAndReturnCurrentUser(accessToken?: string) {
+    if (accessToken) {
+      await this.bean.passport.checkAuthToken(accessToken, 'oauth');
+    }
+    const userCurrent = this.bean.passport.getCurrentUser();
+    if (!userCurrent) return this.app.throw(401);
+    return userCurrent;
   }
 
   async accountMigration(userIdFrom: TableIdentity, userIdTo: TableIdentity) {

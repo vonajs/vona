@@ -110,7 +110,6 @@ export class BeanPassport extends BeanBase {
     await this.authTokenAdapter.removeAll(user);
   }
 
-  /** default is jwt */
   public async checkAuthToken(accessToken?: string, clientName?: keyof IJwtClientRecord) {
     clientName = clientName ?? 'access';
     const payloadData = await this.bean.jwt.get(clientName).verify(accessToken);
