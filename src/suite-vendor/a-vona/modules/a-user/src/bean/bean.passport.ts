@@ -1,4 +1,4 @@
-import type { IJwtSignOptions, IJwtToken, IPayloadDataBase } from 'vona-module-a-jwt';
+import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
@@ -111,8 +111,9 @@ export class BeanPassport extends BeanBase {
   }
 
   /** default is jwt */
-  public async checkAuthToken(accessToken?: string) {
-    const payloadData = await this.bean.jwt.get('access').verify(accessToken);
+  public async checkAuthToken(accessToken?: string, clientName?: keyof IJwtClientRecord) {
+    clientName = clientName ?? 'access';
+    const payloadData = await this.bean.jwt.get(clientName).verify(accessToken);
     if (!payloadData) return; // no jwt token
     const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
