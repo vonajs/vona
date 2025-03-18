@@ -45,6 +45,7 @@ export class ControllerPassport extends BeanBase {
     // execute
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
     // strategy
+    if (!beanAuthProvider.strategy) return this.app.throw(401);
     const strategyOptions: TypeStrategyOptions = clientOptions;
     const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
     // strategy.authenticate
