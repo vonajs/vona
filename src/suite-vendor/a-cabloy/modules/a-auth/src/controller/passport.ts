@@ -60,9 +60,15 @@ export class ControllerPassport extends BeanBase {
         );
         // code
         const code = await this.bean.passport.createOauthAuthTokenCode(jwt.accessToken);
-        if (strategy.name === 'mock') return resolve(jwt);
-
-        // redirect
+        if (strategy.name === 'mock') {
+          // mock
+          const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
+          return resolve(jwt2);
+        } else {
+          // redirect
+          if (!state.redirect) throw new Error('redirect not specified');
+          this.app.redirect(`${state.redirect}?${this.scope.config.oauthCodeField}=${encodeURIComponent(code)}`);
+        }
       });
       strategy.error = (err: Error) => {
         throw err;

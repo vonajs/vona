@@ -1,4 +1,4 @@
-import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IDecoratorEventOptions } from 'vona-module-a-event';
@@ -17,32 +17,33 @@ import type { EventIssuePassport } from '../bean/event.issuePassport.ts';
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 
+import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
+
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 /** model: end */
 /** model: begin */
 import type { ModelAuth } from '../model/auth.ts';
-
 import type { ModelAuthProvider } from '../model/authProvider.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceAuth } from '../service/auth.ts';
-
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
-/** controller: end */
+import { Scope } from 'vona-module-a-bean';
+
+/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
-
 import locale_zh_cn from '../config/locale/zh-cn.ts';
 /** bean: begin */
 import 'vona';
@@ -138,9 +139,9 @@ export interface IModuleModel {
   authProvider: ModelAuthProvider;
 }
 export * from '../bean/meta.version.ts';
-/** locale: end */
-/** error: begin */
-export * from '../config/errors.ts';
+/** controller: end */
+/** config: begin */
+export * from '../config/config.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventRecord {
@@ -165,13 +166,15 @@ export interface IModuleEvent {
   accountMigration: EventAccountMigration;
   issuePassport: EventIssuePassport;
 }
+/** locale: end */
+/** error: begin */
+export * from '../config/errors.ts';
 /** service: end */
 /** controller: begin */
 export * from '../controller/passport.ts';
 /** bean: end */
 /** entity: begin */
 export * from '../entity/auth.ts';
-export * from '../entity/authProvider.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -198,10 +201,10 @@ declare module 'vona-module-a-auth' {
     get scope(): ScopeModuleAAuth;
   }
 }
+export * from '../entity/authProvider.ts';
 /** entity: end */
 /** model: begin */
 export * from '../model/auth.ts';
-export * from '../model/authProvider.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -232,9 +235,7 @@ declare module 'vona' {
     'a-auth.service.authInnerAdapter': ServiceAuthInnerAdapter;
   }
 }
-/** meta redlock: end */
-/** service: begin */
-export * from '../service/auth.ts';
+export * from '../model/authProvider.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
@@ -257,6 +258,9 @@ declare module 'vona-module-a-web' {
   }
 
 }
+/** meta redlock: end */
+/** service: begin */
+export * from '../service/auth.ts';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
@@ -268,6 +272,7 @@ export class ScopeModuleAAuth extends BeanScopeBase {}
 
 export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
@@ -283,6 +288,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     auth: ScopeModuleAAuth;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-auth': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {

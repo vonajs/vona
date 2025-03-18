@@ -119,6 +119,7 @@ export class BeanPassport extends BeanBase {
     const passport = await this.passportAdapter.deserialize(payloadData);
     if (!passport) return this.app.throw(401);
     await this.setCurrent(passport);
+    return payloadData;
   }
 
   public async refreshAuthToken(refreshToken: string) {
@@ -159,9 +160,17 @@ export class BeanPassport extends BeanBase {
   public async createOauthAuthTokenCode(accessToken: string, options?: IJwtSignOptions) {
     // payloadData
     const payloadData = await this.bean.jwt.get('access').verify(accessToken);
-    if (!payloadData) return;
+    if (!payloadData) return this.app.throw(401);
     // create
     return await this.bean.jwt.createOauthCode(payloadData, options);
+  }
+
+  public async createAuthTokenFromOauthCode(code: string) {
+    // checkAuthToken by code
+    const payloadData = await this.checkAuthToken(code, 'code');
+    if (!payloadData) return this.app.throw(401);
+    // jwt token
+    return await this.bean.jwt.create(payloadData);
   }
 
   private async _passportSerialize(passport: IPassportBase, options?: ISigninOptions) {
