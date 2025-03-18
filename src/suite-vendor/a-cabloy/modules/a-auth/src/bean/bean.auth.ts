@@ -36,7 +36,7 @@ export class BeanAuth extends BeanBase {
     // execute
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
     // direct
-    if (!onionOptions.redirect) {
+    if (!beanAuthProvider.strategy) {
       return await this.scope.service.auth.authenticateCallback(entityAuthProvider, beanAuthProvider, clientOptions, onionOptions, options?.state);
     }
     // redirect
