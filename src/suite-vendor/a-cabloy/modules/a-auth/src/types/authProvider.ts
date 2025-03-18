@@ -35,7 +35,6 @@ export interface IDecoratorAuthProviderOptions<
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 >
   extends IOnionOptionsEnable {
-  redirect: boolean;
   default?: T;
   clients?: { [prop in K]?: T }; // Record<K, T>;
 }

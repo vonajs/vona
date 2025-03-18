@@ -15,7 +15,7 @@ export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOption
   IAuthProviderSimpleClientOptions
 > {}
 
-@AuthProvider<IAuthProviderOptionsSimple>({ redirect: false })
+@AuthProvider<IAuthProviderOptionsSimple>()
 export class AuthProviderSimple extends BeanBase implements IAuthProviderVerify {
   async verify(
     _args: TypeStrategyVerifyArgs,
