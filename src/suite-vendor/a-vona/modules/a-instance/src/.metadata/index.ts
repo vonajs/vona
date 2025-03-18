@@ -56,7 +56,7 @@ import 'vona';
 export * from '../bean/bean.instance.ts';
 declare module 'vona-module-a-aspect' {
 
-  export interface IMiddlewareRecordLocal {
+  export interface IMiddlewareRecordGlobal {
     'a-instance:instance': IMiddlewareOptionsInstance;
   }
 
