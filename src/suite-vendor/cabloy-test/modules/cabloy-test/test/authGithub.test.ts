@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
-describe.only('authGithub.test.ts', () => {
+describe('authGithub.test.ts', () => {
   it('action:authGithub', async () => {
     await app.bean.executor.mockCtx(async () => {
       // login
@@ -21,7 +21,7 @@ describe.only('authGithub.test.ts', () => {
       assert.equal(isAuthenticated2, undefined);
       // isAuthenticated: isolate + header
       const isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
-        return await app.bean.executor.performAction('get', '/vona/test/passport/isAuthenticated', { authToken: jwt?.accessToken });
+        return await app.bean.executor.performAction('get', '/cabloy/test/passport/isAuthenticated', { authToken: jwt?.accessToken });
       });
       assert.equal(isAuthenticated, true);
     });
