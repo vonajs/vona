@@ -28,7 +28,7 @@ export type TypeStrategyOptions<T extends IAuthProviderClientOptions = IAuthProv
 };
 
 export type TypeStrategyVerifyArgs = any[];
-export type TypeStrategyOauth2VerifyArgs<T = object> = [accessToken: string, refreshToken: string, profile: T];
+export type TypeStrategyOauth2VerifyArgs<T = IAuthUserProfile> = [accessToken: string, refreshToken: string, profile: T];
 
 export interface IDecoratorAuthProviderOptions<
   K extends keyof IAuthProviderClientRecord = keyof IAuthProviderClientRecord,

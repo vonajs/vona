@@ -3,7 +3,7 @@ import type { IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IAuth
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import StrategyGithub from 'passport-github';
 import { BeanBase } from 'vona';
-import { AuthProvider } from 'vona-module-a-auth';
+import { AuthProvider, getStrategyOauth2Profile } from 'vona-module-a-auth';
 import { StrategyMock } from '../lib/strategyMock.ts';
 
 export interface IAuthProviderGithubClientRecord extends IAuthProviderClientRecord {}
@@ -27,15 +27,10 @@ export class AuthProviderGithub extends BeanBase implements IAuthProviderStrateg
   }
 
   async verify(
-    _args: TypeStrategyOauth2VerifyArgs,
+    args: TypeStrategyOauth2VerifyArgs,
     _clientOptions: IAuthProviderGithubClientOptions,
     _options: IAuthProviderOptionsGithub,
   ): Promise<IAuthUserProfile> {
-    // confirmed
-    // profile
-    const profile: IAuthUserProfile = {
-      id: '',
-    };
-    return profile;
+    return getStrategyOauth2Profile(args);
   }
 }
