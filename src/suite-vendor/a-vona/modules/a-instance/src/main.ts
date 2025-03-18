@@ -33,7 +33,12 @@ function __getInstanceName(ctx: VonaContext, options: IInstanceConfig) {
   if (options.getInstanceName) {
     instanceName = options.getInstanceName(ctx);
   } else {
-    instanceName = ctx.subdomains.join('.');
+    // header: x-instance-name
+    instanceName = ctx.req.headers['x-vona-instance-name'];
+    if (instanceName === undefined) {
+      // subdomains
+      instanceName = ctx.subdomains.join('.');
+    }
   }
 
   __setInstanceName(ctx, instanceName);
