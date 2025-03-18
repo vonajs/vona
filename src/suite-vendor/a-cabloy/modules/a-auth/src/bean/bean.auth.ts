@@ -36,20 +36,28 @@ export class BeanAuth extends BeanBase {
     );
     // execute
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
-    // direct
+    // strategy: no
     if (!beanAuthProvider.strategy) {
       return await this.scope.service.auth.authenticateCallback(entityAuthProvider, beanAuthProvider, clientOptions, onionOptions, options?.state);
     }
-    // redirect
+    // strategy
+    // callbackURL
     const callbackURLRelative = $apiPath('/auth/passport/callback');
     const callbackURL = this.app.util.getAbsoluteUrl(this.scope.util.combineApiPath(callbackURLRelative));
+    // strategyState
     const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
     const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, { accessToken });
-    const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, { callbackURL, state: JSON.stringify(strategyState) });
+    const strategyStateString = JSON.stringify(strategyState);
+    // strategy
+    const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, {
+      callbackURL,
+      state: strategyStateString,
+    });
     const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
     const strategy = new Strategy(strategyOptions, () => {
       console.log('----strategy verified');
     });
+    // strategy.authenticate
     return new Promise(resolve => {
       strategy.redirect = async (location: string) => {
         // real
@@ -60,7 +68,7 @@ export class BeanAuth extends BeanBase {
         const res = await this.bean.executor.performAction('get', callbackURLRelative as any, {
           query: {
             code: uuidv4(),
-            state: JSON.stringify(strategyState),
+            state: strategyStateString,
           },
         });
         resolve(res);
