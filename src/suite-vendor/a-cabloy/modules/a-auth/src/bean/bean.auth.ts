@@ -5,6 +5,7 @@ import type { IAuthenticateOptions, IAuthenticateStateInner } from '../types/aut
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, cast, deepExtend, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { $apiPath } from 'vona-module-a-web';
 
 @Bean()
 export class BeanAuth extends BeanBase {
@@ -40,14 +41,8 @@ export class BeanAuth extends BeanBase {
       return await this.scope.service.auth.authenticateCallback(entityAuthProvider, beanAuthProvider, clientOptions, onionOptions, options?.state);
     }
     // redirect
-    const callbackURLRelative = this.app.util.combineApiPathControllerAndAction(
-      'a-auth',
-      'passport',
-      `${module}/${providerName}/${clientName}/callback`,
-      true,
-      true,
-    ) as string;
-    const callbackURL = this.app.util.getAbsoluteUrl(callbackURLRelative);
+    const callbackURLRelative = $apiPath('/auth/passport/callback');
+    const callbackURL = this.app.util.getAbsoluteUrl(this.scope.util.combineApiPath(callbackURLRelative));
     const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
     const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, { accessToken });
     const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, { callbackURL, state: JSON.stringify(strategyState) });
