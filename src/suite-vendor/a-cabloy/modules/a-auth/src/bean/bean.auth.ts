@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { StrategyBase } from '../lib/strategyBase.ts';
-import type { IAuthenticateOptions, IAuthenticateStateInner } from '../types/auth.ts';
+import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, deepExtend, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -38,7 +38,13 @@ export class BeanAuth extends BeanBase {
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
     // strategy: no
     if (!beanAuthProvider.strategy) {
-      return await this.scope.service.auth.authenticateCallback(entityAuthProvider, beanAuthProvider, clientOptions, onionOptions, options?.state);
+      return await this.scope.service.auth.authenticateCallback(
+        entityAuthProvider,
+        beanAuthProvider,
+        clientOptions,
+        onionOptions,
+        options?.state as unknown as IAuthenticateStrategyState,
+      );
     }
     // strategy
     // callbackURL
@@ -46,7 +52,7 @@ export class BeanAuth extends BeanBase {
     const callbackURL = this.app.util.getAbsoluteUrl(this.scope.util.combineApiPath(callbackURLRelative));
     // strategyState
     const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
-    const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, {
+    const strategyState: IAuthenticateStrategyState = Object.assign({}, options?.state, {
       accessToken,
       authProviderId: entityAuthProvider.id,
       instanceName: this.ctx.instanceName!,

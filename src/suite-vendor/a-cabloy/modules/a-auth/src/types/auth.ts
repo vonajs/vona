@@ -8,10 +8,10 @@ export interface IAuthenticateState {
   redirect?: string;
 }
 
-export interface IAuthenticateStateInner extends IAuthenticateState {
+export interface IAuthenticateStrategyState extends IAuthenticateState {
   accessToken?: string;
-  authProviderId?: number;
-  instanceName?: string;
+  authProviderId: number;
+  instanceName: string;
 }
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
