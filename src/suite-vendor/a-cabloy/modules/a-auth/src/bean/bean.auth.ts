@@ -64,9 +64,7 @@ export class BeanAuth extends BeanBase {
       state: strategyStateString,
     });
     const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
-    const strategy = new Strategy(strategyOptions, () => {
-      console.log('----strategy verified');
-    });
+    const strategy = new Strategy(strategyOptions, () => {});
     // strategy.authenticate
     return new Promise(resolve => {
       strategy.redirect = async (location: string) => {

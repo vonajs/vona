@@ -1,7 +1,7 @@
 import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions } from '../types/authProvider.ts';
+import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
 import { BeanBase } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
 import { Service } from 'vona-module-a-web';
@@ -14,8 +14,9 @@ export class ServiceAuth extends BeanBase {
     clientOptions: IAuthProviderClientOptions,
     onionOptions: IDecoratorAuthProviderOptions,
     state?: IAuthenticateStrategyState,
+    strategyVerifyArgs?: TypeStrategyVerifyArgs,
   ) {
-    const profileUser = await beanAuthProvider.verify([], clientOptions, onionOptions);
+    const profileUser = await beanAuthProvider.verify(strategyVerifyArgs ?? [], clientOptions, onionOptions);
     // confirmed
     if (profileUser.confirmed === undefined) profileUser.confirmed = clientOptions.confirmed;
     // issuePassport
