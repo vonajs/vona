@@ -58,8 +58,9 @@ export class ControllerPassport extends BeanBase {
           state,
           args,
         );
-        console.log('----strategy verified');
-        resolve(jwt);
+        if (strategy.name === 'mock') return resolve(jwt);
+        // code
+        // redirect
       });
       strategy.error = (err: Error) => {
         throw err;
