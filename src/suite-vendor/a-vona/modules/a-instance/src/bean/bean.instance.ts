@@ -25,7 +25,7 @@ export class BeanInstance extends BeanBase {
     await this.scope.service.instance.instanceChanged();
   }
 
-  async get(instanceName: string) {
+  async get(instanceName?: string | null) {
     if (isNil(instanceName)) this.app.throw(403);
     return await this._get(instanceName);
   }

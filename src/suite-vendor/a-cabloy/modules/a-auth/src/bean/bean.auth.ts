@@ -46,11 +46,11 @@ export class BeanAuth extends BeanBase {
     const callbackURL = this.app.util.getAbsoluteUrl(this.scope.util.combineApiPath(callbackURLRelative));
     // strategyState
     const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
-    const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, { 
+    const strategyState: IAuthenticateStateInner = Object.assign({}, options?.state, {
       accessToken,
-      authProviderId:entityAuthProvider.id ,
-      iid:this.ctx.instance.id,
-     });
+      authProviderId: entityAuthProvider.id,
+      instanceName: this.ctx.instanceName!,
+    });
     const strategyStateString = JSON.stringify(strategyState);
     // strategy
     const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, {

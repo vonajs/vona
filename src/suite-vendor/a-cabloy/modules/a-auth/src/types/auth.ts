@@ -11,7 +11,7 @@ export interface IAuthenticateState {
 export interface IAuthenticateStateInner extends IAuthenticateState {
   accessToken?: string;
   authProviderId?: number;
-  iid?: number;
+  instanceName?: string;
 }
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
