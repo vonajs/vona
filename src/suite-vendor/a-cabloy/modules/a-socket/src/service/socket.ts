@@ -22,6 +22,13 @@ export class ServiceSocket extends BeanBase {
       this.app.bean.executor.newCtx(async () => {
         await this.composeSocketConnections({ method: 'enter', ws });
       }, { innerAccess: false, instance: true, req });
+      // exit
+      ws.on('close', () => {
+        this.app.bean.executor.newCtx(async () => {
+          await this.composeSocketConnections({ method: 'exit', ws });
+        }, { innerAccess: false, instance: true, req });
+      });
+      // error
       ws.on('error', err => {
         this.$logger.error(err);
       });

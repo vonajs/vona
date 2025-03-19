@@ -15,6 +15,7 @@ function test() {
       console.log('WebSocket connection established!');
       // Sends a message to the WebSocket server.
       ws.send('Hello Server!');
+      ws.close();
       resolve(true);
     });
   });
