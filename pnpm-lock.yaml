@@ -458,6 +458,9 @@ importers:
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2
+      yargs-parser:
+        specifier: ^21.1.1
+        version: 21.1.1
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -5427,6 +5430,10 @@ packages:
   yargs-parser@13.1.2:
     resolution: {integrity: sha512-3lbsNRf/j+A4QuSZfDRA7HRSfWrzO0YjqTJd5kjAq37Zep1CEgaYmrH9Q3GwPiB9cHyd1Y1UwggGhJGoxipbzg==}
 
+  yargs-parser@21.1.1:
+    resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
+    engines: {node: '>=12'}
+
   yargs@13.3.2:
     resolution: {integrity: sha512-AX3Zw5iPruN5ie6xGRIDgqkT+ZhnRlZMLMHAs8tg7nRruy2Nb+i5o9bwghAogtM08q1dpr2LVoS8KSTMYpWXUw==}
 
@@ -9587,6 +9594,8 @@ snapshots:
     dependencies:
       camelcase: 5.3.1
       decamelize: 1.2.0
+
+  yargs-parser@21.1.1: {}
 
   yargs@13.3.2:
     dependencies:
