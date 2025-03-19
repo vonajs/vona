@@ -1,7 +1,7 @@
 import type { Next } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IDecoratorSocketConnectionOptions, ISocketConnectionComposeData, ISocketConnectionExecute, ISocketConnectionRecord, ISocketPacketComposeData } from '../types/socketConnection.ts';
-import type { ISocketPacketExecute } from '../types/socketPacket.ts';
+import type { IDecoratorSocketPacketOptions, ISocketPacketExecute, ISocketPacketRecord } from '../types/socketPacket.ts';
 import { compose } from '@cabloy/compose';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -96,7 +96,7 @@ export class ServiceSocket extends BeanBase {
     return fn;
   }
 
-  private _wrapOnionPacket(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {
+  private _wrapOnionPacket(item: IOnionSlice<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>) {
     const fn = (data: ISocketPacketComposeData, next: Next) => {
       const options = item.beanOptions.options!;
       if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
