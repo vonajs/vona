@@ -20,6 +20,7 @@
   "scripts": {
     "init": "npm run prerun && pnpm install --no-frozen-lockfile",
     "vona": "vona",
+    "demo": "npm run vona :bin:demo -- --flavor=normal",
     "db:reset": "npm run prerun && npm run vona :bin:dbReset -- --flavor=normal",
     "dev": "npm run prerun && npm run vona :bin:dev -- --workers=2 --flavor=normal",
     "dev:one": "npm run prerun && npm run vona :bin:dev -- --workers=1 --flavor=normal",
