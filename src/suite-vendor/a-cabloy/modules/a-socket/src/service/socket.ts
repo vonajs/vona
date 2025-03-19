@@ -44,14 +44,15 @@ export class ServiceSocket extends BeanBase {
           });
           resolve(undefined);
         });
-        // error
-        ws.on('error', err => {
-          this.$logger.error(err);
-        });
+        // message
         ws.on('message', async data => {
           await this.app.ctxStorage.run(ctx as any, async () => {
             await this.composeSocketPackets({ data, ws });
           });
+        });
+        // error
+        ws.on('error', err => {
+          this.$logger.error(err);
         });
       });
     }, { innerAccess: false, instance: true, req });
