@@ -15,7 +15,7 @@ export class ServiceStartup extends BeanBase {
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (!startupOptions?.instance && startupOptions?.after !== true) {
-        await this.runStartup(startup.name);
+        await this.runStartup(startup.name, null);
       }
     }
   }
@@ -25,7 +25,7 @@ export class ServiceStartup extends BeanBase {
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (!startupOptions?.instance && startupOptions?.after === true) {
-        await this.runStartup(startup.name);
+        await this.runStartup(startup.name, null);
       }
     }
 
@@ -73,7 +73,7 @@ export class ServiceStartup extends BeanBase {
     }
   }
 
-  async runStartup(startupName: string, instanceName?: string, options?: IInstanceStartupOptions) {
+  async runStartup(startupName: string, instanceName?: string | null, options?: IInstanceStartupOptions) {
     const startup = this.bean.onion.startup.onionsNormal[startupName];
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // normal
@@ -113,7 +113,7 @@ export class ServiceStartup extends BeanBase {
 
   async _runStartupInner(
     startup: IOnionSlice<IDecoratorStartupOptions>,
-    instanceName?: string,
+    instanceName?: string | null,
     options?: IInstanceStartupOptions,
   ) {
     this.$logger.silly(
