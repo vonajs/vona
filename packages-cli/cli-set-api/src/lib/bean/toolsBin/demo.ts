@@ -1,7 +1,7 @@
 import { closeApp, createGeneralApp } from 'vona-core';
 
-const argv = process.argv.slice(2);
-const projectPath = argv[0];
+const projectPath = process.argv[2];
+const argv = process.argv.slice(3);
 
 await demoRun(projectPath);
 

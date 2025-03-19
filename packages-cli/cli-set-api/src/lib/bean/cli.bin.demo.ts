@@ -47,6 +47,10 @@ export class CliBinDemo extends BeanCliBase {
     // run
     let args: string[] = [];
     args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath]);
+    const pos = process.argv.indexOf(':bin:demo');
+    if (pos > -1) {
+      args = args.concat(process.argv.slice(pos + 1));
+    }
     await this.helper.spawnExe({
       cmd: 'node',
       args,
