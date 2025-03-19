@@ -26,4 +26,5 @@ export interface ContextBase {
   get onionsDynamic(): any | undefined;
   set onionsDynamic(value: any | undefined);
   get acceptJSON(): boolean;
+  redirect(url: string, status?: 301 | 302): void;
 }

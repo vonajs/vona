@@ -135,4 +135,9 @@ export const contextBase: ContextBase = {
     if (self.accepts('html', 'text', 'json') === 'json') return true;
     return false;
   },
+
+  redirect(url: string, status?: 301 | 302): void {
+    const self = cast<VonaContext>(this);
+    return self.app.redirect(url, status);
+  },
 };
