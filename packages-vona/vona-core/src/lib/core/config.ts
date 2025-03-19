@@ -49,6 +49,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
       listen: {
         hostname: process.env.SERVER_LISTEN_HOSTNAME,
         port: Number.parseInt(process.env.SERVER_LISTEN_PORT!),
+        disable: process.env.SERVER_LISTEN_DISABLE === 'true',
       },
       serve: {},
     },

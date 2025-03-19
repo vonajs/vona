@@ -117,9 +117,11 @@ export class AppMeta extends BeanSimple {
       cluster.worker?.disconnect();
     } else {
       // close server
-      this.app.server.close();
-      // maybe hang up using await
-      // await promisify(this.app.server.close).call(this.app.server);
+      if (this.app.server) {
+        this.app.server.close();
+        // maybe hang up using await
+        // await promisify(this.app.server.close).call(this.app.server);
+      }
     }
     // appClose
     this.appClose = true;

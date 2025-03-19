@@ -17,6 +17,7 @@ export interface VonaConfig {
     listen: {
       hostname: string;
       port: number;
+      disable: boolean;
     };
     serve: {
       protocol: string;
