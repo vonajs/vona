@@ -6,6 +6,7 @@ export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
   instanceName?: string | null | undefined;
   instance?: boolean;
+  req?: any;
 }
 
 export interface INewCtxExtraData {
@@ -20,6 +21,8 @@ export interface INewCtxOptions {
   dbLevel?: number;
   transaction?: boolean;
   extraData?: INewCtxExtraData;
+  innerAccess?: boolean;
+  req?: any;
 }
 
 export interface IPerformActionOptions {

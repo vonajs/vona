@@ -39,19 +39,20 @@ export class BeanExecutor extends BeanBase {
     fn: FunctionAsync<RESULT>,
     options?: IRunInAnonymousContextScopeOptions,
   ): Promise<RESULT> {
+    let req = options?.req;
+    if (!req) {
     // url
-    const url = this.app.util.combineApiPath('', '/', true, true);
-    const req = {
-      method: 'post',
-      url,
-    };
+      const url = this.app.util.combineApiPath('', '/', true, true);
+      req = {
+        method: 'post',
+        url,
+      };
+    }
     const locale = options?.locale;
     let instanceName = options?.instanceName;
     // ctx
     const ctx = this.app.createAnonymousContext(req);
     return await this.app.ctxStorage.run(ctx, async () => {
-      // todo: check if need for passport
-      // (<any>ctx.req).ctx = ctx;
       // locale
       if (locale !== undefined) {
         ctx.locale = locale;
@@ -114,7 +115,7 @@ export class BeanExecutor extends BeanBase {
       async () => {
         const ctx = this.app.ctx;
         // innerAccess
-        ctx.innerAccess = true;
+        ctx.innerAccess = options.innerAccess !== false;
         // ctxCaller
         if (ctxCaller) {
           // delegateProperties
@@ -144,7 +145,7 @@ export class BeanExecutor extends BeanBase {
         // ok
         return res;
       },
-      { locale: options.locale, instanceName: options.instanceName, instance: options.instance },
+      { locale: options.locale, instanceName: options.instanceName, instance: options.instance, req: options.req },
     );
   }
 }
