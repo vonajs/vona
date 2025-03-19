@@ -18,6 +18,9 @@
         "optionsGlobalInterfaceFrom": "vona-module-a-socket",
         "boilerplate": "cli/socketPacket/boilerplate"
       }
+    },
+    "capabilities": {
+      "monkey": true
     }
   },
   "description": "",
