@@ -11,6 +11,7 @@
     "vona-module-a-authgithub": "workspace:^",
     "vona-module-a-authsimple": "workspace:^",
     "vona-module-a-cabloy": "workspace:^",
+    "vona-module-a-socket": "workspace:^",
     "vona-module-a-status": "workspace:^",
     "vona-module-a-swagger": "workspace:^"
   },

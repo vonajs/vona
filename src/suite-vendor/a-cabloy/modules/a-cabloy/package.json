@@ -9,6 +9,7 @@
       "a-auth": "5.0.0",
       "a-authsimple": "5.0.0",
       "a-authgithub": "5.0.0",
+      "a-socket": "5.0.0",
       "a-status": "5.0.0",
       "a-swagger": "5.0.0"
     }

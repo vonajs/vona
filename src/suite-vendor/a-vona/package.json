@@ -34,7 +34,6 @@
     "vona-module-a-redlock": "workspace:^",
     "vona-module-a-schedule": "workspace:^",
     "vona-module-a-security": "workspace:^",
-    "vona-module-a-socket": "workspace:^",
     "vona-module-a-startup": "workspace:^",
     "vona-module-a-static": "workspace:^",
     "vona-module-a-summer": "workspace:^",

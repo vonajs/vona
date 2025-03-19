@@ -169,7 +169,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-security
       vona-module-a-socket:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-socket
+        version: link:src/suite-vendor/a-vona/modules/a-socket1
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
@@ -1007,7 +1007,7 @@ importers:
         version: link:modules/a-security
       vona-module-a-socket:
         specifier: workspace:^
-        version: link:modules/a-socket
+        version: link:modules/a-socket1
       vona-module-a-startup:
         specifier: workspace:^
         version: link:modules/a-startup
@@ -1465,7 +1465,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/a-vona/modules/a-socket:
+  src/suite-vendor/a-vona/modules/a-socket1:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

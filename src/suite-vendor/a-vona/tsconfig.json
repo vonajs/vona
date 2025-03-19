@@ -51,9 +51,6 @@
       "path": "modules/a-schedule/tsconfig.build.json"
     },
     {
-      "path": "modules/a-socket/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-startup/tsconfig.build.json"
     },
     {

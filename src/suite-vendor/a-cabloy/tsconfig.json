@@ -19,6 +19,9 @@
     },
     {
       "path": "modules/a-authgithub/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-socket/tsconfig.build.json"
     }
   ],
   "exclude": [
