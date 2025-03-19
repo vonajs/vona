@@ -1,8 +1,9 @@
-import type { BeanScopeUtil } from 'vona';
+import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { ISocketConnectionOptionsBase } from '../bean/socketConnection.base.ts';
 /** service: end */
 /** service: begin */
 
+import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceSocket } from '../service/socket.ts';
@@ -42,8 +43,8 @@ declare module 'vona' {
   }
 }
 /** socketConnection: end */
-/** monkey: begin */
-export * from '../monkey.ts';
+/** config: begin */
+export * from '../config/config.ts';
 declare module 'vona-module-a-socket' {
 
   export interface ISocketConnectionRecord {
@@ -58,6 +59,9 @@ declare module 'vona-module-a-socket' {
     get scope(): ScopeModuleASocket;
   }
 }
+/** config: end */
+/** monkey: begin */
+export * from '../monkey.ts';
 /** service: begin */
 export * from '../service/socket.ts';
 
@@ -66,6 +70,7 @@ export class ScopeModuleASocket extends BeanScopeBase {}
 
 export interface ScopeModuleASocket {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
   service: IModuleService;
 }
 
@@ -76,6 +81,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     socket: ScopeModuleASocket;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-socket': ReturnType<typeof config>;
   }
 
 }

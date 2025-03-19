@@ -19,8 +19,8 @@ export class ServiceSocket extends BeanBase {
     // maybe running in demo
     if (!this.app.server) return;
     // wss
-    const wss = new WebSocketServer({ server: this.app.server });
-    wss.on('connection', (ws, req) => {
+    this.app.wss = new WebSocketServer({ server: this.app.server });
+    this.app.wss.on('connection', (ws, req) => {
       this._onConnection(ws, req);
     });
   }

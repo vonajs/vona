@@ -8,8 +8,25 @@ export interface ISocketConnectionOptionsBase extends IDecoratorSocketConnection
 
 @SocketConnection<ISocketConnectionOptionsBase>()
 export class SocketConnectionBase extends BeanBase implements ISocketConnectionExecute {
+  private _interval: any;
+
+  protected async __dispose__() {
+    if (this._interval) {
+      clearInterval(this._interval);
+      this._interval = null;
+    }
+  }
+
   async enter(ws: WebSocket, _options: ISocketConnectionOptionsBase, next: Next): Promise<void> {
+    // id
     ws.id = uuidv4();
+    // isAlive
+    ws.isAlive = true;
+    ws.on('pong', () => {
+      ws.isAlive = true;
+    });
+    // start interval
+    this._startInterval();
     // next
     return next();
   }
@@ -17,5 +34,16 @@ export class SocketConnectionBase extends BeanBase implements ISocketConnectionE
   async exit(_ws: WebSocket, _options: ISocketConnectionOptionsBase, next: Next): Promise<void> {
     // next
     return next();
+  }
+
+  private _startInterval() {
+    if (this._interval) return;
+    this._interval = setInterval(() => {
+      this.app.wss.clients.forEach(ws => {
+        if (ws.isAlive === false) return ws.terminate();
+        ws.isAlive = false;
+        ws.ping();
+      });
+    }, this.scope.config.timeout.ping);
   }
 }
