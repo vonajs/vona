@@ -1,11 +1,13 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-/** cacheRedis: begin */
-import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+/** entity: end */
+/** meta: begin */
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 
-/** cacheRedis: end */
-/** cacheRedis: begin */
-import type { CacheRedisUsersDemo } from '../bean/cacheRedis.usersDemo.ts';
 import type { config } from '../config/config.ts';
+
+/** entity: end */
+/** entity: begin */
+import type { EntityUser } from '../entity/user.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
@@ -22,31 +24,53 @@ import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
 import 'vona';
+import 'vona';
 
 import 'vona';
 
-export * from '../bean/cacheRedis.usersDemo.ts';
-declare module 'vona-module-a-cache' {
+export * from '../bean/meta.version.ts';
+declare module 'vona-module-a-database' {
 
-  export interface ICacheRedisRecord {
-    'home-user:usersDemo': IDecoratorCacheRedisOptions;
+  export interface IEntityRecord {
+    'home-user:user': IDecoratorEntityOptions;
   }
 
 }
 declare module 'vona-module-home-user' {
 
-  export interface CacheRedisUsersDemo {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
 }
-export interface IModuleCacheRedis {
-  usersDemo: CacheRedisUsersDemo;
+export interface IModuleEntity {
+  user: EntityUser;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-home-user' {
+
+  export interface EntityUser {
+    $column: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K) => K;
+    $columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
 }
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
-/** cacheRedis: end */
+declare module 'vona' {
+
+  export interface IMetaRecord {
+    'home-user:version': never;
+  }
+
+}
+declare module 'vona-module-home-user' {
+
+  export interface MetaVersion {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** entity: begin */
+export * from '../entity/user.ts';
+/** meta: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
 export * from '../service/authTokenAdapter.ts';
@@ -114,9 +138,10 @@ export class ScopeModuleHomeUser extends BeanScopeBase {}
 export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  cacheRedis: IModuleCacheRedis;
+  entity: IModuleEntity;
   service: IModuleService;
 }
+
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'home-user': ScopeModuleHomeUser;
