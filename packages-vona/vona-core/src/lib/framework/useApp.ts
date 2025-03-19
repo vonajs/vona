@@ -25,10 +25,10 @@ export async function closeApp(terminate?: boolean) {
   }
 }
 
-export async function createTestApp(projectPath: string) {
-  const testFile = path.join(projectPath, '.vona/test.ts');
+export async function createTestApp(projectPath: string, envRuntime?: NodeJS.ProcessEnv) {
+  const testFile = path.join(projectPath, '.vona/app.ts');
   const testInstance = await import(pathToHref(testFile));
-  return await testInstance.getApp();
+  return await testInstance.createSingleApp(envRuntime);
 }
 
 // export async function reloadApp() {

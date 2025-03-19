@@ -5,12 +5,12 @@ import config from './config.ts';
 import env from './env.ts';
 <%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
-export async function getApp() {
+export async function createSingleApp(envRuntime?: NodeJS.ProcessEnv) {
   return await createApp({
     modulesMeta,
     locales,
     config,
-    env,
+    env: envRuntime ? Object.assign({}, env, envRuntime) : env,
     <%=appMonkey?'AppMonkey,':''%>
   });
 }
