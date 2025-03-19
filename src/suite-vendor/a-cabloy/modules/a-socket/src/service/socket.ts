@@ -1,16 +1,19 @@
 import type { Next } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IDecoratorSocketConnectionOptions, ISocketConnectionComposeData, ISocketConnectionExecute, ISocketConnectionRecord } from '../types/socketConnection.ts';
+import type { IDecoratorSocketConnectionOptions, ISocketConnectionComposeData, ISocketConnectionExecute, ISocketConnectionRecord, ISocketPacketComposeData } from '../types/socketConnection.ts';
+import type { ISocketPacketExecute } from '../types/socketPacket.ts';
 import { compose } from '@cabloy/compose';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { WebSocket, WebSocketServer } from 'ws';
 
 const SymbolSocketConnections = Symbol('SymbolSocketConnections');
+const SymbolSocketPackets = Symbol('SymbolSocketPackets');
 
 @Service()
 export class ServiceSocket extends BeanBase {
   [SymbolSocketConnections]: Function;
+  [SymbolSocketPackets]: Function;
 
   async appReady() {
     // maybe running in demo
@@ -37,8 +40,8 @@ export class ServiceSocket extends BeanBase {
         ws.on('error', err => {
           this.$logger.error(err);
         });
-        ws.on('message', data => {
-
+        ws.on('message', async data => {
+          await this.composeSocketPackets({ data, ws });
         });
       });
     }, { innerAccess: false, instance: true, req });
@@ -47,14 +50,24 @@ export class ServiceSocket extends BeanBase {
   private get composeSocketConnections() {
     if (!this[SymbolSocketConnections]) {
       const connections = this.bean.onion.socketConnection.getOnionsEnabledWrapped(item => {
-        return this._wrapOnion(item);
+        return this._wrapOnionConnection(item);
       });
       this[SymbolSocketConnections] = compose(connections);
     }
     return this[SymbolSocketConnections];
   }
 
-  private _wrapOnion(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {
+  private get composeSocketPackets() {
+    if (!this[SymbolSocketPackets]) {
+      const packets = this.bean.onion.socketPacket.getOnionsEnabledWrapped(item => {
+        return this._wrapOnionPacket(item);
+      });
+      this[SymbolSocketPackets] = compose(packets);
+    }
+    return this[SymbolSocketPackets];
+  }
+
+  private _wrapOnionConnection(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {
     const fn = (data: ISocketConnectionComposeData, next: Next) => {
       const options = item.beanOptions.options!;
       if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
@@ -67,6 +80,24 @@ export class ServiceSocket extends BeanBase {
         throw new Error(`socketConnection bean not found: ${beanFullName}`);
       }
       return beanInstance[data.method](data.ws, options, next);
+    };
+    fn._name = item.name;
+    return fn;
+  }
+
+  private _wrapOnionPacket(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {
+    const fn = (data: ISocketPacketComposeData, next: Next) => {
+      const options = item.beanOptions.options!;
+      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
+        return next();
+      }
+      // execute
+      const beanFullName = item.beanOptions.beanFullName;
+      const beanInstance = this.app.bean._getBean<ISocketPacketExecute>(beanFullName as any);
+      if (!beanInstance) {
+        throw new Error(`socketPacket bean not found: ${beanFullName}`);
+      }
+      return beanInstance.execute(data.data, data.ws, options, next);
     };
     fn._name = item.name;
     return fn;

@@ -1,5 +1,6 @@
 import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { WebSocket } from 'ws';
 import type { ISocketPathRecord } from './socketConnection.ts';
 
 export interface ISocketPacketRecord {}

@@ -1,6 +1,6 @@
 import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
-import type WebSocket from 'ws';
+import type { WebSocket } from 'ws';
 
 export interface ISocketPathRecord {}
 
@@ -17,6 +17,11 @@ export interface IDecoratorSocketConnectionOptions
 
 export interface ISocketConnectionComposeData {
   method: 'enter' | 'exit';
+  ws: WebSocket;
+}
+
+export interface ISocketPacketComposeData {
+  data: any;
   ws: WebSocket;
 }
 
