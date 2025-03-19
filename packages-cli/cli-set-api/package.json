@@ -78,7 +78,8 @@
     "ts-node": "^10.9.2",
     "urllib": "^4.6.11",
     "uuid": "^11.1.0",
-    "why-is-node-running": "^3.2.2"
+    "why-is-node-running": "^3.2.2",
+    "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
     "clean-package": "^2.2.0"
