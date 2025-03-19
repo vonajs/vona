@@ -1,13 +1,18 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-/** entity: end */
+/** model: end */
 /** meta: begin */
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { config } from '../config/config.ts';
 
 /** entity: end */
 /** entity: begin */
 import type { EntityUser } from '../entity/user.ts';
+
+/** model: end */
+/** model: begin */
+import type { ModelUser } from '../model/user.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
@@ -54,6 +59,25 @@ declare module 'vona-module-home-user' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IModelRecord {
+    'home-user:user': IDecoratorModelOptions;
+  }
+
+}
+declare module 'vona-module-home-user' {
+
+  export interface ModelUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+export interface IModuleModel {
+  user: ModelUser;
+}
+/** entity: begin */
+export * from '../entity/user.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -68,8 +92,9 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
-/** entity: begin */
-export * from '../entity/user.ts';
+/** entity: end */
+/** model: begin */
+export * from '../model/user.ts';
 /** meta: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
@@ -139,6 +164,7 @@ export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   entity: IModuleEntity;
+  model: IModuleModel;
   service: IModuleService;
 }
 
