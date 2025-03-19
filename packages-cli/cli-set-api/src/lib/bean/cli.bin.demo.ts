@@ -1,4 +1,3 @@
-import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
@@ -58,18 +57,5 @@ export class CliBinDemo extends BeanCliBase {
         cwd: projectPath,
       },
     });
-  }
-
-  _combineTestPatterns(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
-    const patterns: string[] = [];
-    for (const moduleName in modulesMeta.modules) {
-      const module = modulesMeta.modules[moduleName];
-      const testDir = path.join(module.root, 'test');
-      if (fse.existsSync(testDir)) {
-        const relativePath = path.relative(projectPath, module.root);
-        patterns.push(`${relativePath}/test/**/*.ts`);
-      }
-    }
-    return patterns;
   }
 }
