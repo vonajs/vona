@@ -92,6 +92,7 @@ export class CliBinBuild extends BeanCliBase {
       }),
       replace({
         values: replaceValues,
+        preventAssignment: false,
       }),
       json(),
       commonjs(),
