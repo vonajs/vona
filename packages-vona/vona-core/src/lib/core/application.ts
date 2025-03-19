@@ -56,32 +56,37 @@ export class VonaApplication extends KoaApplication {
   }
 
   createAnonymousContext(req?: any): VonaContext {
-    const host = `localhost:${process.env.SERVER_LISTEN_PORT}`;
-    const request = {
-      headers: {
-        'host': host,
-        'x-forwarded-for': host,
-      },
-      query: {},
-      querystring: '',
-      host,
-      hostname: 'localhost',
-      protocol: 'http',
-      secure: 'false',
-      method: 'GET',
-      url: '/',
-      path: '/',
-      socket: {
-        remoteAddress: '127.0.0.1',
-        remotePort: 7001,
-      },
-    };
-    if (req) {
-      for (const key in req) {
-        if (key === 'headers' || key === 'query' || key === 'socket') {
-          Object.assign(request[key], req[key]);
-        } else {
-          request[key] = req[key];
+    let request;
+    if (req?.constructor?.name === 'IncomingMessage') {
+      request = req;
+    } else {
+      const host = `localhost:${process.env.SERVER_LISTEN_PORT}`;
+      request = {
+        headers: {
+          'host': host,
+          'x-forwarded-for': host,
+        },
+        query: {},
+        querystring: '',
+        host,
+        hostname: 'localhost',
+        protocol: 'http',
+        secure: 'false',
+        method: 'GET',
+        url: '/',
+        path: '/',
+        socket: {
+          remoteAddress: '127.0.0.1',
+          remotePort: 7001,
+        },
+      };
+      if (req) {
+        for (const key in req) {
+          if (key === 'headers' || key === 'query' || key === 'socket') {
+            Object.assign(request[key], req[key]);
+          } else {
+            request[key] = req[key];
+          }
         }
       }
     }
