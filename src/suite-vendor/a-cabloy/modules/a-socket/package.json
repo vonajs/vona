@@ -48,7 +48,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ws": "^8.18.1"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [

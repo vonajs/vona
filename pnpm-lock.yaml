@@ -169,7 +169,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-security
       vona-module-a-socket:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-socket1
+        version: link:src/suite-vendor/a-cabloy/modules/a-socket
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
@@ -850,6 +850,9 @@ importers:
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:modules/a-cabloy
+      vona-module-a-socket:
+        specifier: workspace:^
+        version: link:modules/a-socket
       vona-module-a-status:
         specifier: workspace:^
         version: link:modules/a-status
@@ -896,6 +899,19 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-cabloy:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/a-socket:
+    dependencies:
+      ws:
+        specifier: ^8.18.1
+        version: 8.18.1
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1005,9 +1021,6 @@ importers:
       vona-module-a-security:
         specifier: workspace:^
         version: link:modules/a-security
-      vona-module-a-socket:
-        specifier: workspace:^
-        version: link:modules/a-socket1
       vona-module-a-startup:
         specifier: workspace:^
         version: link:modules/a-startup
@@ -1457,15 +1470,6 @@ importers:
       type-is:
         specifier: ^1.6.18
         version: 1.6.18
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/a-vona/modules/a-socket1:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -5403,6 +5407,18 @@ packages:
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+
+  ws@8.18.1:
+    resolution: {integrity: sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
@@ -9573,6 +9589,8 @@ snapshots:
       strip-ansi: 7.1.0
 
   wrappy@1.0.2: {}
+
+  ws@8.18.1: {}
 
   xml-name-validator@4.0.0: {}
 
