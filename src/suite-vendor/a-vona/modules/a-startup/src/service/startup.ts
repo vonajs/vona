@@ -1,6 +1,7 @@
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.ts';
 import path from 'node:path';
+import { isNil } from '@cabloy/utils';
 import fse from 'fs-extra';
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -94,14 +95,14 @@ export class ServiceStartup extends BeanBase {
 
   async _runStartupLock(
     startup: IOnionSlice<IDecoratorStartupOptions>,
-    instanceName?: string,
+    instanceName?: string | null,
     options?: IInstanceStartupOptions,
   ) {
     // ignore debounce for test
     if (!options?.force && !this.app.meta.isTest) {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
       const cacheKey =
-        `startupDebounce:${startup.name}${instanceName !== undefined ? `:${this.ctx.instance.id}` : ''}` as const;
+        `startupDebounce:${startup.name}${!isNil(instanceName) ? `:${this.ctx.instance.id}` : ''}` as const;
       const debounce =
         typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
       const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, debounce);
