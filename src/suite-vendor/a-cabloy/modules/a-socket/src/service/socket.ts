@@ -28,12 +28,15 @@ export class ServiceSocket extends BeanBase {
   private async _onConnection(ws: WebSocket, req: any) {
     // enter
     return await this.app.bean.executor.newCtx(async () => {
+      const ctx = this.app.ctx;
       // enter
       await this.composeSocketConnections({ method: 'enter', ws });
       return new Promise(resolve => {
         // exit
         ws.on('close', async () => {
-          await this.composeSocketConnections({ method: 'exit', ws });
+          await this.app.ctxStorage.run(ctx as any, async () => {
+            await this.composeSocketConnections({ method: 'exit', ws });
+          });
           resolve(undefined);
         });
         // error
@@ -41,7 +44,9 @@ export class ServiceSocket extends BeanBase {
           this.$logger.error(err);
         });
         ws.on('message', async data => {
-          await this.composeSocketPackets({ data, ws });
+          await this.app.ctxStorage.run(ctx as any, async () => {
+            await this.composeSocketPackets({ data, ws });
+          });
         });
       });
     }, { innerAccess: false, instance: true, req });
