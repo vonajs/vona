@@ -1,4 +1,4 @@
-import type { Next, VonaContext } from 'vona';
+import type { Next } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IDecoratorSocketConnectionOptions, ISocketConnectionComposeData, ISocketConnectionExecute, ISocketConnectionRecord } from '../types/socketConnection.ts';
 import { compose } from '@cabloy/compose';
