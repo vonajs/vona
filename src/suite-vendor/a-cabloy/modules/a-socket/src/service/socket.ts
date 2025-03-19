@@ -38,22 +38,22 @@ export class ServiceSocket extends BeanBase {
       await this.composeSocketConnections({ method: 'enter', ws });
       return new Promise(resolve => {
         // exit
-        ws.on('close', async () => {
+        ws.onclose = async () => {
           await this.app.ctxStorage.run(ctx as any, async () => {
             await this.composeSocketConnections({ method: 'exit', ws });
           });
           resolve(undefined);
-        });
+        };
         // message
-        ws.on('message', async data => {
+        ws.onmessage = async event => {
           await this.app.ctxStorage.run(ctx as any, async () => {
-            await this.composeSocketPackets({ data, ws });
+            await this.composeSocketPackets({ data: event.data, ws });
           });
-        });
+        };
         // error
-        ws.on('error', err => {
-          this.$logger.error(err);
-        });
+        ws.onerror = event => {
+          this.$logger.error(event.error);
+        };
       });
     }, { innerAccess: false, instance: true, req });
   }
