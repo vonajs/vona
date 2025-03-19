@@ -12,6 +12,6 @@ export interface BootstrapOptions {
   modulesMeta: VonaModulesMeta;
   locales: VonaLocaleOptionalMap;
   config: TypeAppInfoConfig[];
-  env: NodeJS.ProcessEnv;
+  env: Partial<NodeJS.ProcessEnv>;
   AppMonkey?: AppMonkeyConstructable;
 }

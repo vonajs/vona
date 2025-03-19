@@ -398,7 +398,7 @@ export function pathToHref(fileName: string): string {
   // return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }
 
-export function prepareEnv(env: NodeJS.ProcessEnv) {
+export function prepareEnv(env: Partial<NodeJS.ProcessEnv>) {
   for (const key of Object.keys(env)) {
     if (process.env[key] === undefined && cast(env[key]) !== false) {
       process.env[key] = env[key]?.toString();
