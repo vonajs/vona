@@ -5,7 +5,7 @@ import type { ISocketPathRecord } from './socketConnection.ts';
 export interface ISocketPacketRecord {}
 
 export interface ISocketPacketExecute {
-  execute: (packet: any[], options: IDecoratorSocketPacketOptions, next: Next) => Promise<any>;
+  execute: (data: any, ws: WebSocket, options: IDecoratorSocketPacketOptions, next: Next) => Promise<any>;
 }
 
 export interface IDecoratorSocketPacketOptions

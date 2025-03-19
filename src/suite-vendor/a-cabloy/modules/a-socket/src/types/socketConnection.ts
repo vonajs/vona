@@ -1,17 +1,24 @@
 import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type WebSocket from 'ws';
 
 export interface ISocketPathRecord {}
 
 export interface ISocketConnectionRecord {}
 
 export interface ISocketConnectionExecute {
-  execute: (options: IDecoratorSocketConnectionOptions, next: Next) => Promise<any>;
+  enter: (ws: WebSocket, options: IDecoratorSocketConnectionOptions, next: Next) => Promise<any>;
+  exit: (ws: WebSocket, options: IDecoratorSocketConnectionOptions, next: Next) => Promise<any>;
 }
 
 export interface IDecoratorSocketConnectionOptions
   extends IOnionOptionsBase<keyof ISocketPathRecord>,
   IOnionOptionsDeps<keyof ISocketConnectionRecord> {}
+
+export interface ISocketConnectionComposeData {
+  method: 'enter' | 'exit';
+  ws: WebSocket;
+}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
