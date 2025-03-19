@@ -4,7 +4,7 @@ import type { IDecoratorSocketConnectionOptions, ISocketConnectionComposeData, I
 import { compose } from '@cabloy/compose';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { WebSocketServer } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 
 const SymbolSocketConnections = Symbol('SymbolSocketConnections');
 
@@ -18,28 +18,33 @@ export class ServiceSocket extends BeanBase {
     // wss
     const wss = new WebSocketServer({ server: this.app.server });
     wss.on('connection', (ws, req) => {
-      // enter
-      this.app.bean.executor.newCtx(async () => {
-        await this.composeSocketConnections({ method: 'enter', ws });
-      }, { innerAccess: false, instance: true, req });
-      // exit
-      ws.on('close', () => {
-        this.app.bean.executor.newCtx(async () => {
-          await this.composeSocketConnections({ method: 'exit', ws });
-        }, { innerAccess: false, instance: true, req });
-      });
-      // error
-      ws.on('error', err => {
-        this.$logger.error(err);
-      });
-      ws.on('message', data => {
-        console.log('received: %s', data);
-      });
-      ws.send('something');
+      this._onConnection(ws, req);
     });
   }
 
-  get composeSocketConnections() {
+  private async _onConnection(ws: WebSocket, req: any) {
+    // enter
+    return await this.app.bean.executor.newCtx(async () => {
+      // enter
+      await this.composeSocketConnections({ method: 'enter', ws });
+      return new Promise(resolve => {
+        // exit
+        ws.on('close', async () => {
+          await this.composeSocketConnections({ method: 'exit', ws });
+          resolve(undefined);
+        });
+        // error
+        ws.on('error', err => {
+          this.$logger.error(err);
+        });
+        ws.on('message', data => {
+
+        });
+      });
+    }, { innerAccess: false, instance: true, req });
+  }
+
+  private get composeSocketConnections() {
     if (!this[SymbolSocketConnections]) {
       const connections = this.bean.onion.socketConnection.getOnionsEnabledWrapped(item => {
         return this._wrapOnion(item);
