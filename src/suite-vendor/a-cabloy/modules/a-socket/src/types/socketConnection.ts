@@ -7,8 +7,8 @@ export interface ISocketPathRecord {}
 export interface ISocketConnectionRecord {}
 
 export interface ISocketConnectionExecute {
-  enter: (ws: WebSocket, options: IDecoratorSocketConnectionOptions, next: Next) => Promise<any>;
-  exit: (ws: WebSocket, options: IDecoratorSocketConnectionOptions, next: Next) => Promise<any>;
+  enter: (ws: WebSocket, options: IDecoratorSocketConnectionOptions, next: Next) => Promise<void>;
+  exit: (ws: WebSocket, options: IDecoratorSocketConnectionOptions, next: Next) => Promise<void>;
 }
 
 export interface IDecoratorSocketConnectionOptions

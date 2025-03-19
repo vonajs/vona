@@ -1,22 +1,24 @@
 import type { BeanScopeUtil } from 'vona';
-/** service: end */
-/** service: begin */
-import type { ServiceSocket } from '../service/socket.ts';
+import type { ISocketConnectionOptionsBase } from '../bean/socketConnection.base.ts';
 /** service: end */
 /** service: begin */
 
+/** service: end */
+/** service: begin */
+import type { ServiceSocket } from '../service/socket.ts';
 /** monkey: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
-/** monkey: begin */
+/** socketConnection: begin */
+import 'vona';
 import 'vona';
 import 'vona';
 
 import 'vona';
 
-export * from '../monkey.ts';
+export * from '../bean/socketConnection.base.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -37,6 +39,23 @@ export interface IModuleService {
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-socket.service.socket': ServiceSocket;
+  }
+}
+/** socketConnection: end */
+/** monkey: begin */
+export * from '../monkey.ts';
+declare module 'vona-module-a-socket' {
+
+  export interface ISocketConnectionRecord {
+    'a-socket:base': ISocketConnectionOptionsBase;
+  }
+
+}
+declare module 'vona-module-a-socket' {
+
+  export interface SocketConnectionBase {
+    /** @internal */
+    get scope(): ScopeModuleASocket;
   }
 }
 /** service: begin */
