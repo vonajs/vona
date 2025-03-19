@@ -46,7 +46,7 @@ export class BeanExecutor extends BeanBase {
       url,
     };
     const locale = options?.locale;
-    const instanceName = options?.instanceName;
+    let instanceName = options?.instanceName;
     // ctx
     const ctx = this.app.createAnonymousContext(req);
     return await this.app.ctxStorage.run(ctx, async () => {
@@ -56,8 +56,11 @@ export class BeanExecutor extends BeanBase {
       if (locale !== undefined) {
         ctx.locale = locale;
       }
-      // instanceName: hold undefined if undefined
-      ctx.instanceName = instanceName;
+      // instanceName: undefined/null is different
+      if (instanceName !== undefined) {
+        ctx.instanceName = instanceName;
+      }
+      instanceName = ctx.instanceName; // use default instanceName when undefined
       // instance
       if (instanceName !== undefined && instanceName !== null) {
         ctx.instance = (await this.bean.instance.get(instanceName))!;
