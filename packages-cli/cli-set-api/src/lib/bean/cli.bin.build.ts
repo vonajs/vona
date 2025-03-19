@@ -117,7 +117,7 @@ export class CliBinBuild extends BeanCliBase {
       }));
     }
     const inputOptions: RollupOptions = {
-      input: path.join(projectPath, '.vona/app.ts'),
+      input: path.join(projectPath, '.vona/bootstrap.ts'),
       plugins,
       onLog: (level: LogLevel, log: RollupLog, defaultHandler: LogOrStringHandler) => {
         if (log.code === 'CIRCULAR_DEPENDENCY' && process.env.BUILD_LOG_CIRCULAR_DEPENDENCY === 'false') return;

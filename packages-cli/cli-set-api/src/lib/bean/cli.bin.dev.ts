@@ -42,7 +42,7 @@ export class CliBinDev extends BeanCliBase {
   async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
     return new Promise((resolve, _reject) => {
       (nodemon as any)({
-        script: '.vona/app.ts',
+        script: '.vona/bootstrap.ts',
         cwd: projectPath,
         exec: 'node',
         execArgs: ['--experimental-transform-types', '--loader=ts-node/esm'],
@@ -57,7 +57,7 @@ export class CliBinDev extends BeanCliBase {
     });
     // await this.helper.spawnExe({
     //   cmd: 'node',
-    //   args: ['--experimental-transform-types', '--loader=ts-node/esm', '.vona/app.ts'],
+    //   args: ['--experimental-transform-types', '--loader=ts-node/esm', '.vona/bootstrap.ts'],
     //   options: {
     //     cwd: projectPath,
     //   },

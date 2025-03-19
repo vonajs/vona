@@ -56,7 +56,7 @@ export async function generateEntryFiles(
   }
 
   async function __generateApp() {
-    const templates = [['app/app.ejs', 'app.ts'], ['app/test.ejs', 'test.ts']];
+    const templates = [['app/bootstrap.ejs', 'bootstrap.ts'], ['app/test.ejs', 'test.ts']];
     for (const [templateSrc, templateDest] of templates) {
       const fileSrc = resolveTemplatePath(templateSrc);
       const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, templateDest);
