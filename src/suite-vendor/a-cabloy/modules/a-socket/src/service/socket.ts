@@ -29,6 +29,11 @@ export class ServiceSocket extends BeanBase {
     // enter
     return await this.app.bean.executor.newCtx(async () => {
       const ctx = this.app.ctx;
+      Object.defineProperty(ctx, 'ws', {
+        get() {
+          return ws;
+        },
+      });
       // enter
       await this.composeSocketConnections({ method: 'enter', ws });
       return new Promise(resolve => {
