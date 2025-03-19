@@ -4,6 +4,7 @@ import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import { rimraf } from 'rimraf';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -34,6 +35,7 @@ export class CliBinDbReset extends BeanCliBase {
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
+    await rimraf(path.join(projectPath, '.vona'));
   }
 
   async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
