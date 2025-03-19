@@ -12,7 +12,7 @@ const projectPath = process.argv[2];
 const argv = parser(process.argv.slice(3));
 
 let mainFile: string;
-if (argv._[0].includes('.ts')) {
+if (argv._[0]?.includes('.ts')) {
   mainFile = argv._[0];
   argv._ = argv._.slice(1);
 } else {
