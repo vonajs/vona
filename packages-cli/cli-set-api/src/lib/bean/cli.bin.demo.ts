@@ -4,7 +4,6 @@ import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
-import { rimraf } from 'rimraf';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -20,29 +19,30 @@ export class CliBinDemo extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     // test
-    await this._dbReset(projectPath);
+    await this._demo(projectPath);
   }
 
-  async _dbReset(projectPath: string) {
+  async _demo(projectPath: string) {
     const { argv } = this.context;
-    const mode: VonaMetaMode = 'test';
+    const mode: VonaMetaMode = 'local';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
-    const configOptions: VonaBinConfigOptions = {
-      appDir: projectPath,
-      runtimeDir: '.vona',
-      workers: 1,
-    };
-    const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
-    await this._run(projectPath, modulesMeta);
-    await rimraf(path.join(projectPath, '.vona'));
+    if (!fse.existsSync(path.join(projectPath, '.vona'))) {
+      const configOptions: VonaBinConfigOptions = {
+        appDir: projectPath,
+        runtimeDir: '.vona',
+        workers: 1,
+      };
+      await generateVonaMeta(configMeta, configOptions);
+    }
+    await this._run(projectPath);
   }
 
-  async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
+  async _run(projectPath: string) {
     // testFile
-    let testFile = path.join(import.meta.dirname, './toolsBin/dbReset.ts');
+    let testFile = path.join(import.meta.dirname, './toolsBin/demo.ts');
     if (!fse.existsSync(testFile)) {
-      testFile = path.join(import.meta.dirname, './toolsBin/dbReset.js');
+      testFile = path.join(import.meta.dirname, './toolsBin/demo.js');
     }
     // run
     let args: string[] = [];
