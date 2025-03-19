@@ -6,3 +6,9 @@ declare module 'vona' {
     get ws(): WebSocket;
   }
 }
+
+declare module 'ws' {
+  export interface WebSocket {
+    id: string;
+  }
+}
