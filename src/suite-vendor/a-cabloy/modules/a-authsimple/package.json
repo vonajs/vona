@@ -6,7 +6,8 @@
   "vonaModule": {
     "fileVersion": 1,
     "dependencies": {
-      "a-vona": "5.0.0"
+      "a-vona": "5.0.0",
+      "home-user": "5.0.0"
     }
   },
   "description": "",
