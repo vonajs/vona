@@ -7,7 +7,7 @@ import TableClass from 'cli-table3';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import { lcov, tap } from 'node:test/reporters';
-import { closeApp, createTestApp } from 'vona-core';
+import { closeApp, createGeneralApp } from 'vona-core';
 import whyIsNodeRunning from 'why-is-node-running';
 import { resolveTemplatePath } from '../../utils.ts';
 
@@ -67,7 +67,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       cwd: projectPath,
       files,
       setup: async () => {
-        await createTestApp(projectPath);
+        await createGeneralApp(projectPath);
       },
     } as any)
       .on('test:coverage', data => {
