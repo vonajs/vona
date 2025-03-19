@@ -24,6 +24,7 @@ export default function eslintConfig(config, ...args) {
       globals: {
         ...globals.node,
         ...globals.jest,
+        NodeJS: true,
       },
     },
   }, ...args);
