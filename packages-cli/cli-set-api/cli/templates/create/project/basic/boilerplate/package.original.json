@@ -27,7 +27,7 @@
     "cov": "npm run prerun && npm run vona :bin:test -- --coverage --flavor=normal",
     "tsc": "npm run prerun && npm run vona :bin:tsc",
     "build": "npm run prerun && npm run vona :bin:build -- --flavor=normal",
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/bootstrap.js",
     "prerun": "npm run vona :tools:deps",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
