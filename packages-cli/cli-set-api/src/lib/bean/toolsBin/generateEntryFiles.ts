@@ -80,7 +80,7 @@ export async function generateEntryFiles(
   }
 
   async function __generateEnvJson() {
-    const contentDest = `export default ${JSON.stringify(env, null, 2)} satisfies NodeJS.ProcessEnv;\n`;
+    const contentDest = `export default ${JSON.stringify(env, null, 2)} as unknown as NodeJS.ProcessEnv;\n`;
     // output
     const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'env.ts');
     fse.ensureFileSync(fileDest);
