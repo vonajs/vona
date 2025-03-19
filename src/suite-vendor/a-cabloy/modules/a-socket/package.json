@@ -4,7 +4,9 @@
   "version": "5.0.0",
   "title": "a-socket",
   "vonaModule": {
-    "dependencies": {},
+    "dependencies": {
+      "a-vona": "5.0.0"
+    },
     "onions": {
       "socketConnection": {
         "optionsGlobalInterfaceName": "IDecoratorSocketConnectionOptions",
