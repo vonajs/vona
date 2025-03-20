@@ -11,7 +11,7 @@ import { z } from 'zod';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
-  @Web.get('login/:module/:providerName/:clientName')
+  @Web.get('login/:module/:providerName/:clientName?')
   @Public()
   login<T extends keyof IAuthProviderRecord>(
     @Arg.query('redirect') redirect: string,
