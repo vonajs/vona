@@ -1,11 +1,8 @@
 import type { VonaContext } from 'vona';
 import type { IPerformActionInnerParams } from '../types/executor.ts';
 import http from 'node:http';
-import compose from 'koa-compose';
 import { cast } from 'vona';
 import { delegateProperties } from './utils.ts';
-
-let __fnMiddleware;
 
 export async function performActionInner<T = any>({
   ctxCaller,
@@ -20,11 +17,6 @@ export async function performActionInner<T = any>({
 }: IPerformActionInnerParams): Promise<T> {
   // app
   const app = ctxCaller.app;
-  // middleware
-  if (!__fnMiddleware) {
-    const middleware = app.middleware[app.middleware.length - 1];
-    __fnMiddleware = compose([middleware]);
-  }
   // request
   const url = app.util.combineApiPath('', path, true, true);
   const req = createRequest({ method, url }, ctxCaller);
@@ -83,7 +75,8 @@ export async function performActionInner<T = any>({
     ctx.onionsDynamic = onions;
 
     // invoke middleware
-    await __fnMiddleware(ctx);
+    const middleware = app.middleware[app.middleware.length - 1] as any;
+    await middleware(ctx);
     // check result
     if (ctx.status === 200) {
       if (!ctx.body || (ctx.body as any).code === undefined) {
