@@ -181,7 +181,7 @@ export class ServiceOpenapi extends BeanBase {
       actionPath,
       true,
       true,
-    ) as string;
+    );
     // :id -> {id}
     const routePath2 = routePath.replace(/:([^/]+)/g, '{$1}');
 

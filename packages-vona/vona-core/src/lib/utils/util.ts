@@ -59,7 +59,7 @@ export class AppUtil extends BeanSimple {
     controllerPath: string | undefined,
     actionPath: RegExp | string | undefined,
     simplify?: boolean,
-  ): RegExp | string {
+  ): string {
     let apiPath = this.combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, '/_api_', simplify);
     if (typeof apiPath !== 'string') return apiPath;
     if (apiPath.startsWith('/_api_')) {
@@ -76,13 +76,13 @@ export class AppUtil extends BeanSimple {
     actionPath: RegExp | string | undefined,
     prefix?: string | boolean,
     simplify?: boolean,
-  ): RegExp | string {
+  ): string {
     if (actionPath === undefined) actionPath = '';
     // routePath
-    let routePath: RegExp | string;
+    let routePath: string;
     if (typeof actionPath !== 'string') {
       // regexp
-      routePath = actionPath;
+      throw new TypeError('regexp not supported');
     } else if (actionPath.startsWith('/')) {
       // absolute
       routePath = this.combineApiPath(moduleName, actionPath, prefix, simplify);
