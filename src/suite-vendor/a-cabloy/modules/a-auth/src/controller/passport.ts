@@ -25,14 +25,30 @@ export class ControllerPassport extends BeanBase {
     });
   }
 
-  @Web.get('associate')
-  async associate() {
-
+  @Web.get('associate/:module/:providerName/:clientName?')
+  associate<T extends keyof IAuthProviderRecord>(
+    @Arg.query('redirect') redirect: string,
+    @Arg.param('module') module: string,
+    @Arg.param('providerName') providerName: string,
+    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+  ) {
+    return this.bean.auth.authenticate(`${module}:${providerName}` as T, {
+      state: { intention: 'associate', redirect },
+      clientName,
+    });
   }
 
-  @Web.get('migrate')
-  async migrate() {
-
+  @Web.get('migrate/:module/:providerName/:clientName?')
+  migrate<T extends keyof IAuthProviderRecord>(
+    @Arg.query('redirect') redirect: string,
+    @Arg.param('module') module: string,
+    @Arg.param('providerName') providerName: string,
+    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+  ) {
+    return this.bean.auth.authenticate(`${module}:${providerName}` as T, {
+      state: { intention: 'migrate', redirect },
+      clientName,
+    });
   }
 
   @Web.get('callback')
