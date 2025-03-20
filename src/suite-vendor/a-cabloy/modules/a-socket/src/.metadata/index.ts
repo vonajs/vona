@@ -1,8 +1,9 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-import type { ISocketConnectionOptionsBase } from '../bean/socketConnection.base.ts';
+import type { ISocketConnectionOptionsAppReady } from '../bean/socketConnection.appReady.ts';
 /** service: end */
 /** service: begin */
 
+import type { ISocketConnectionOptionsBase } from '../bean/socketConnection.base.ts';
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
@@ -19,7 +20,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/socketConnection.base.ts';
+export * from '../bean/socketConnection.appReady.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -42,17 +43,24 @@ declare module 'vona' {
     'a-socket.service.socket': ServiceSocket;
   }
 }
+export * from '../bean/socketConnection.base.ts';
 /** socketConnection: end */
 /** config: begin */
 export * from '../config/config.ts';
 declare module 'vona-module-a-socket' {
 
   export interface ISocketConnectionRecord {
+    'a-socket:appReady': ISocketConnectionOptionsAppReady;
     'a-socket:base': ISocketConnectionOptionsBase;
   }
 
 }
 declare module 'vona-module-a-socket' {
+
+  export interface SocketConnectionAppReady {
+    /** @internal */
+    get scope(): ScopeModuleASocket;
+  }
 
   export interface SocketConnectionBase {
     /** @internal */
