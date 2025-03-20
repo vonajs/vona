@@ -1,4 +1,5 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
@@ -60,7 +61,7 @@ function __parseControllerPath(fileContent: string): string | false {
 
 function __parseActionPaths(fileContent: string): [string, string][] {
   const actionPaths: [string, string][] = [];
-  const matches = fileContent.match(/(@Get|@Post|@Delete|@Put|@Patch)\([\s\S]*?\)/g);
+  const matches = fileContent.match(/(@Web\.get|@Web\.post|@Web\.delete|@Web\.put|@Web\.patch)\([\s\S]*?\)/g);
   if (!matches) return [];
   for (const match of matches) {
     const matches2 = match.match(/@([^(]*)\(([\s\S]*?)\)/);
@@ -71,7 +72,8 @@ function __parseActionPaths(fileContent: string): [string, string][] {
       const pos = actionPath.indexOf("'", 1);
       actionPath = actionPath.substring(1, pos);
     }
-    actionPaths.push([matches2[1], actionPath]);
+    const method = toUpperCaseFirstChar(matches2[1].substring(4));
+    actionPaths.push([method, actionPath]);
   }
   return actionPaths;
 }
