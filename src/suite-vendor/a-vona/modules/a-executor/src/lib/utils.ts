@@ -1,16 +1,16 @@
 import http from 'node:http';
 
-export function delegateProperties(ctx, ctxCaller) {
+export function __delegateProperties(ctx, ctxCaller) {
   for (const property of ['state']) {
-    delegateProperty(ctx, ctxCaller, property);
+    __delegateProperty(ctx, ctxCaller, property);
   }
   for (const property of ['headers']) {
-    delegateProperty(ctx.request, ctxCaller.request, property);
+    __delegateProperty(ctx.request, ctxCaller.request, property);
     // if (ctx.request[property]) req[property] = ctx.request[property];
   }
 }
 
-export function delegateProperty(ctx, ctxCaller, property) {
+export function __delegateProperty(ctx, ctxCaller, property) {
   if (!ctxCaller[property])ctxCaller[property] = {};
   ctx[property] = ctxCaller[property];
 }

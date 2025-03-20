@@ -3,7 +3,7 @@ import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.ts';
 import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { __createRequest, delegateProperties } from '../lib/utils.ts';
+import { __createRequest, __delegateProperties } from '../lib/utils.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -157,14 +157,14 @@ export class BeanExecutor extends BeanBase {
         // ctxCaller
         if (ctxCaller) {
           // delegateProperties
-          delegateProperties(ctx, ctxCaller);
+          __delegateProperties(ctx, ctxCaller);
           // ctxCaller
           ctx.ctxCaller = ctxCaller;
         }
         // extraData
         if (options.extraData) {
           // delegateProperties
-          delegateProperties(ctx, {
+          __delegateProperties(ctx, {
             state: options.extraData?.state,
             request: { headers: options.extraData?.headers },
           });
