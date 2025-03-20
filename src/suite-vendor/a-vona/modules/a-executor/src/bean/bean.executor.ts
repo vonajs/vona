@@ -79,27 +79,25 @@ export class BeanExecutor extends BeanBase {
   ): Promise<RESULT> {
     let req = options?.req;
     if (!req) {
-    // url
+      // url
       const url = this.app.util.combineApiPath('', '/', true, true);
       req = {
         method: 'post',
         url,
       };
     }
-    const locale = options?.locale;
-    let instanceName = options?.instanceName;
     // ctx
     const ctx = this.app.createAnonymousContext(req);
     return await this.app.ctxStorage.run(ctx, async () => {
       // locale
-      if (locale !== undefined) {
-        ctx.locale = locale;
+      if (options?.locale !== undefined) {
+        ctx.locale = options?.locale;
       }
       // instanceName: undefined/null is different
-      if (instanceName !== undefined) {
-        ctx.instanceName = instanceName;
+      if (options?.instanceName !== undefined) {
+        ctx.instanceName = options?.instanceName;
       }
-      instanceName = ctx.instanceName; // use default instanceName when undefined
+      const instanceName = ctx.instanceName; // use default instanceName when undefined
       // instance
       if (instanceName !== undefined && instanceName !== null) {
         ctx.instance = (await this.bean.instance.get(instanceName))!;

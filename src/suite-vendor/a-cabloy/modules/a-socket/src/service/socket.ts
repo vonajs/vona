@@ -55,7 +55,7 @@ export class ServiceSocket extends BeanBase {
           this.$logger.error(event.error);
         };
       });
-    }, { innerAccess: false, instance: true, req });
+    }, { dbLevel: 0, innerAccess: false, instanceName: null, instance: false, req });
   }
 
   private get composeSocketConnections() {
