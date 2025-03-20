@@ -1,17 +1,12 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { performActionInner } from '../lib/performAction.ts';
-import { delegateProperties } from '../lib/utils.ts';
+import { __createRequest, delegateProperties } from '../lib/utils.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
-  // todo: url should not be relative path, should be absolute
-  //       because ctxCaller.module removed
-  //       so, maybe need provide this.scope.util.combineUrl
-  //          this result is: /api/a/user/add, thus the method of combineApiPath not needed in performActionInner
   async performAction<
     // T,
     METHOD extends keyof IApiPathRecordMethodMap,
@@ -20,13 +15,56 @@ export class BeanExecutor extends BeanBase {
     path: IApiPathRecordMethodMap[METHOD][PATHKEY],
     options?: IPerformActionOptions,
   ): Promise<any> {
-    return await performActionInner(
-      Object.assign({}, options, {
-        ctxCaller: this.ctx,
-        method,
-        path,
-      }),
-    );
+    // app
+    const app = this.app;
+    // request
+    const url = app.util.combineApiPath('', path as any, true, true);
+    const req = __createRequest({ method, url }, this.ctx);
+    // new ctx
+    return await this.newCtx(async () => {
+      const ctx = this.ctx;
+      // default status code
+      ctx.res.statusCode = 404;
+      // headers
+      if (options?.headers) {
+        Object.assign(ctx.request.headers, options?.headers);
+      }
+      // authToken
+      if (options?.authToken) {
+        ctx.request.headers.authorization = `Bearer ${options?.authToken}`;
+      }
+      // query
+      if (options?.query !== undefined) {
+        cast(ctx.req).query = cast(ctx.request).query = options?.query;
+      }
+      // body
+      cast(ctx.req).body = ctx.request.body = options?.body ?? {}; // body should set {} if undefined/null
+      // onion
+      ctx.onionsDynamic = options?.onions;
+      // invoke middleware
+      const middleware = app.middleware[app.middleware.length - 1] as any;
+      await middleware(ctx);
+      // check result
+      if (ctx.status === 200) {
+        if (!ctx.body || (ctx.body as any).code === undefined) {
+          // not check code, e.g. text/xml
+          return ctx.body;
+        }
+        if ((ctx.body as any).code === 0) {
+          return (ctx.body as any).data;
+        }
+        throw app.util.createError(ctx.body);
+      } else {
+        if (ctx.body && typeof ctx.body === 'object') {
+          throw app.util.createError(ctx.body);
+        } else {
+          throw app.util.createError({
+            code: ctx.status,
+            message: ctx.message,
+          });
+        }
+      }
+    }, { req, innerAccess: options?.innerAccess });
   }
 
   runInBackground(fn: FunctionAsync<void>) {
