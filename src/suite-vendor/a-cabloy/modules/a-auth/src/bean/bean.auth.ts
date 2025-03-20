@@ -73,13 +73,17 @@ export class BeanAuth extends BeanBase {
           return this.app.redirect(location);
         }
         // mock
-        const res = await this.bean.executor.performAction('get', callbackURLRelative as any, {
-          query: {
-            code: uuidv4(),
-            state: strategyStateString,
-          },
-        });
-        resolve(res);
+        try {
+          const res = await this.bean.executor.performAction('get', callbackURLRelative as any, {
+            query: {
+              code: uuidv4(),
+              state: strategyStateString,
+            },
+          });
+          resolve(res);
+        } catch (err) {
+          reject(err);
+        }
       };
       strategy.error = (err: Error) => {
         reject(err);

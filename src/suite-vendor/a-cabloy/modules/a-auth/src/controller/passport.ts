@@ -74,30 +74,34 @@ export class ControllerPassport extends BeanBase {
     const strategyOptions: TypeStrategyOptions = clientOptions;
     const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
     // strategy.authenticate
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const strategy = new Strategy(strategyOptions, async (...args: TypeStrategyVerifyArgs) => {
-        const jwt = await this.scope.service.auth.authenticateCallback(
-          entityAuthProvider,
-          beanAuthProvider,
-          clientOptions,
-          onionOptions,
-          state,
-          args,
-        );
-        // code
-        const code = await this.bean.passport.createOauthCode(jwt.accessToken);
-        if (strategy.name === 'mock') {
-          // mock
-          const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
-          return resolve(jwt2);
-        } else {
-          // redirect
-          if (!state.redirect) throw new Error('redirect not specified');
-          return this.app.redirect(`${state.redirect}?${this.scope.config.oauthCodeField}=${encodeURIComponent(code)}`);
+        try {
+          const jwt = await this.scope.service.auth.authenticateCallback(
+            entityAuthProvider,
+            beanAuthProvider,
+            clientOptions,
+            onionOptions,
+            state,
+            args,
+          );
+          // code
+          const code = await this.bean.passport.createOauthCode(jwt.accessToken);
+          if (strategy.name === 'mock') {
+            // mock
+            const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
+            return resolve(jwt2);
+          } else {
+            // redirect
+            if (!state.redirect) return reject(new Error('redirect not specified'));
+            return this.app.redirect(`${state.redirect}?${this.scope.config.oauthCodeField}=${encodeURIComponent(code)}`);
+          }
+        } catch (err) {
+          reject(err);
         }
       });
       strategy.error = (err: Error) => {
-        throw err;
+        reject(err);
       };
       strategy.authenticate(this.ctx.req, strategyOptions);
     });
