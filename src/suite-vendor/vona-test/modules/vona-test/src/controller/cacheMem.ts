@@ -3,7 +3,7 @@ import { sleep } from '@cabloy/utils';
 import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { Controller, Post } from 'vona-module-a-web';
+import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'cacheMem', meta: { mode: 'test' } })
 @Api.exclude()

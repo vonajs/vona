@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { Controller, Post } from 'vona-module-a-web';
+import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'tail', meta: { mode: 'test' } })
 @Api.exclude()
