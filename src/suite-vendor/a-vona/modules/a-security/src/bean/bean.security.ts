@@ -6,24 +6,36 @@ import { isSafeDomain } from '../lib/utils.ts';
 
 @Bean()
 export class BeanSecurity extends BeanBase {
-  isSafeDomain(origin: string | undefined | null): boolean {
+  checkOrigin(origin: string | undefined | null, hostCurrent?: string): string {
+    if (!origin || origin === 'null' || origin === null) origin = 'null';
+    // origin is {protocol}{hostname}{port}...
+    if (this.isSafeDomain(origin, hostCurrent)) {
+      return origin;
+    }
+    return '';
+  }
+
+  isSafeDomain(origin: string | undefined | null, hostCurrent?: string): boolean {
     // origin is {protocol}{hostname}{port}...
     if (!origin || origin === 'null' || origin === null) return true;
-
-    // whiteList
-    const onionCors = this.bean.onion.middlewareSystem.getOnionSlice('a-security:cors');
-    let whiteListCors = (<IMiddlewareSystemOptionsCors>onionCors.beanOptions.options).whiteList;
-    if (whiteListCors === '*') return true;
-    if (!whiteListCors) return false;
-    if (typeof whiteListCors === 'string') {
-      whiteListCors = whiteListCors.split(',');
-    }
 
     let parsedUrl;
     try {
       parsedUrl = new URL(origin);
     } catch (_) {
       return false;
+    }
+
+    if (parsedUrl.host === hostCurrent) return true;
+
+    // whiteList
+    // todo: combine app config
+    const onionCors = this.bean.onion.middlewareSystem.getOnionSlice('a-security:cors');
+    let whiteListCors = (<IMiddlewareSystemOptionsCors>onionCors.beanOptions.options).whiteList;
+    if (whiteListCors === '*') return true;
+    if (!whiteListCors) return false;
+    if (typeof whiteListCors === 'string') {
+      whiteListCors = whiteListCors.split(',');
     }
 
     if (isSafeDomain(parsedUrl.hostname, whiteListCors) || isSafeDomain(origin, whiteListCors)) {

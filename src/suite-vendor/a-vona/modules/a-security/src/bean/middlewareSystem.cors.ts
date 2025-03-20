@@ -36,18 +36,9 @@ export class MiddlewareSystemCors extends BeanBase implements IMiddlewareSystemE
     if (!this._cors) {
       this._cors = koaCors(options);
     }
-    const ctx = this.ctx;
     // not cors (safari not send sec-fetch-mode)
     // if (ctx.headers['sec-fetch-mode'] !== 'cors') return await next();
-    if (ctx.innerAccess) return next();
-
-    let origin = ctx.get('origin');
-    if (!origin || origin === 'null') origin = 'null';
-
-    const host = ctx.host;
-    if (origin !== 'null' && new URL(origin).host === host) {
-      return next();
-    }
+    if (this.ctx.innerAccess) return next();
 
     // next
     return this._cors(this.ctx, next);
@@ -55,11 +46,5 @@ export class MiddlewareSystemCors extends BeanBase implements IMiddlewareSystemE
 }
 
 function _corsOrigin(ctx: VonaContext) {
-  let origin = ctx.get('origin');
-  if (!origin || origin === 'null') origin = 'null';
-  // origin is {protocol}{hostname}{port}...
-  if (ctx.app.bean.security.isSafeDomain(origin)) {
-    return origin;
-  }
-  return '';
+  return ctx.app.bean.security.checkOrigin(ctx.get('origin'), ctx.host);
 }
