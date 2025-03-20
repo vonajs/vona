@@ -36,40 +36,13 @@ function createMappingDecorator(method: RequestMethod) {
   };
 }
 
-/**
- * Route handler (method) Decorator. Routes HTTP POST requests to the specified path.
- */
-export const Post = createMappingDecorator(RequestMethod.POST);
-
-/**
- * Route handler (method) Decorator. Routes HTTP GET requests to the specified path.
- */
-export const Get = createMappingDecorator(RequestMethod.GET);
-
-/**
- * Route handler (method) Decorator. Routes HTTP DELETE requests to the specified path.
- */
-export const Delete = createMappingDecorator(RequestMethod.DELETE);
-
-/**
- * Route handler (method) Decorator. Routes HTTP PUT requests to the specified path.
- */
-export const Put = createMappingDecorator(RequestMethod.PUT);
-
-/**
- * Route handler (method) Decorator. Routes HTTP PATCH requests to the specified path.
- */
-export const Patch = createMappingDecorator(RequestMethod.PATCH);
-
-/**
- * Route handler (method) Decorator. Routes HTTP OPTIONS requests to the specified path.
- */
-export const Options = createMappingDecorator(RequestMethod.OPTIONS);
-
-/**
- * Route handler (method) Decorator. Routes HTTP HEAD requests to the specified path.
- */
-export const Head = createMappingDecorator(RequestMethod.HEAD);
+const Post = createMappingDecorator(RequestMethod.POST);
+const Get = createMappingDecorator(RequestMethod.GET);
+const Delete = createMappingDecorator(RequestMethod.DELETE);
+const Put = createMappingDecorator(RequestMethod.PUT);
+const Patch = createMappingDecorator(RequestMethod.PATCH);
+const Options = createMappingDecorator(RequestMethod.OPTIONS);
+const Head = createMappingDecorator(RequestMethod.HEAD);
 
 export const Web = {
   post: Post,
