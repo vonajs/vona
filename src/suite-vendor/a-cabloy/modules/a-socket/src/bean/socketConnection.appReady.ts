@@ -6,7 +6,7 @@ import { SocketConnection } from 'vona-module-a-socket';
 
 export interface ISocketConnectionOptionsAppReady extends IDecoratorSocketConnectionOptions {}
 
-@SocketConnection<ISocketConnectionOptionsAppReady>()
+@SocketConnection<ISocketConnectionOptionsAppReady>({ dependencies: 'a-socket:base' })
 export class SocketConnectionAppReady extends BeanBase implements ISocketConnectionExecute {
   async enter(_ws: WebSocket, _options: ISocketConnectionOptionsAppReady, next: Next): Promise<void> {
     // check appReady
