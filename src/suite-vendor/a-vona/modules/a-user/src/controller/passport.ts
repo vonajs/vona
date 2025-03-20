@@ -6,14 +6,14 @@ import { Public } from '../lib/public.ts';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
-  @Post('refreshAuthToken')
+  @Web.post('refreshAuthToken')
   @Public()
   @Api.body(v.object(DtoJwtToken))
   async refreshAuthToken(@Body('refreshToken') refreshToken: string): Promise<DtoJwtToken> {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }
 
-  @Post('createAuthTokenFromOauthCode')
+  @Web.post('createAuthTokenFromOauthCode')
   @Public()
   @Api.body(v.object(DtoJwtToken))
   async createAuthTokenFromOauthCode(@Body('code') code: string): Promise<DtoJwtToken> {

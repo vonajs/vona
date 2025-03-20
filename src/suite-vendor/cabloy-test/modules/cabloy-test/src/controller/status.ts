@@ -8,7 +8,7 @@ import { Controller, Post } from 'vona-module-a-web';
 @Api.exclude()
 @Public()
 export class ControllerStatus extends BeanBase {
-  @Post()
+  @Web.post()
   status() {
     return this._status();
   }

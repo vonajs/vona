@@ -10,7 +10,7 @@ import { ServiceTest } from '../service/test.ts';
 @Api.exclude()
 @Public()
 export class ControllerBean extends BeanBase {
-  @Get('test')
+  @Web.get('test')
   async test() {
     const a = 3;
     const b = 4;
@@ -66,7 +66,7 @@ export class ControllerBean extends BeanBase {
     assert.equal(res, '__magicSelf__');
   }
 
-  @Get('service')
+  @Web.get('service')
   @Public()
   async service() {
     let res;

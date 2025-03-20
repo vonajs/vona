@@ -9,7 +9,7 @@ import { Controller, Post } from 'vona-module-a-web';
 @Api.exclude()
 @Public()
 export class ControllerCacheRedis extends BeanBase {
-  @Post()
+  @Web.post()
   async redis() {
     let res;
     let value;

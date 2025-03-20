@@ -7,14 +7,14 @@ import { Controller, Post } from 'vona-module-a-web';
 @Controller({ path: 'queue', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerQueue extends BeanBase {
-  @Post('pushAsync')
+  @Web.post('pushAsync')
   @Public()
   async pushAsync() {
     const res = await this.scope.queue.test.pushAsync({ a: 1, b: 2 });
     assert.equal(res, 3);
   }
 
-  @Post('push')
+  @Web.post('push')
   @Public()
   push() {
     this.scope.queue.test.push({ a: 1, b: 2 });

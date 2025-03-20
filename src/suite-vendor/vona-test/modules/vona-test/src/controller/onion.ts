@@ -2,16 +2,16 @@ import { BeanBase } from 'vona';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
-import { Api, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
+import { Api, Arg, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { Controller, Get, Post } from 'vona-module-a-web';
+import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
 import { $locale } from '../.metadata/index.ts';
 import { DtoUser } from '../dto/user.ts';
 
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {
-  @Get('/')
+  @Web.get('/')
   @UseMiddleware('a-database:transaction', { enable: true, meta: { mode: 'local' } })
   @UseGuardGlobal('a-user:passport', { public: true })
   index() {
@@ -19,7 +19,7 @@ export class ControllerOnion extends BeanBase {
     // return 'Hello Vona';
   }
 
-  @Post('//echo')
+  @Web.post('//echo')
   @UseGuardGlobal('a-user:passport', { public: true })
   @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
@@ -36,7 +36,7 @@ export class ControllerOnion extends BeanBase {
     return `echo: ${id}:${temp}:${name}`;
   }
 
-  @Post('echo2/:userId/:userName')
+  @Web.post('echo2/:userId/:userName')
   // @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @UseGuardGlobal('a-user:passport', { public: true })
   // echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
@@ -52,7 +52,7 @@ export class ControllerOnion extends BeanBase {
     return user;
   }
 
-  @Get('echo3/:userId')
+  @Web.get('echo3/:userId')
   @UseGuardGlobal('a-user:passport', { public: true })
   echo3(
     @Param('userId') _userId: number,
@@ -67,15 +67,15 @@ export class ControllerOnion extends BeanBase {
     return `${id}:${accept}`;
   }
 
-  @Post('echo4')
+  @Web.post('echo4')
   @UseGuardGlobal('a-user:passport', { public: true })
   @UseFilterGlobal('a-error:error', { enable: true, logs: { 422: true } })
   @Api.body(v.array(DtoUser))
-  echo4(@Body(v.optional(), v.array(DtoUser)) users: DtoUser[]): DtoUser[] {
+  echo4(@Arg.body(v.optional(), v.array(DtoUser)) users: DtoUser[]): DtoUser[] {
     return users;
   }
 
-  @Get('echo5')
+  @Web.get('echo5')
   @Public()
   echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     // const ctx = this.app.currentContext;
@@ -83,7 +83,7 @@ export class ControllerOnion extends BeanBase {
     return ids;
   }
 
-  @Post('echo6')
+  @Web.post('echo6')
   echo6() {
     return this.bean.passport.isAuthenticated;
   }

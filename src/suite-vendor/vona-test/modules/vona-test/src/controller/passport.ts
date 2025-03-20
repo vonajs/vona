@@ -10,7 +10,7 @@ import { Controller, Get, Post } from 'vona-module-a-web';
 @Controller({ path: 'passport', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerPassport extends BeanBase {
-  @Get('echo/:name')
+  @Web.get('echo/:name')
   @Public()
   echo(@Param('name') name: string, @User() user: IUserBase) {
     assert.equal(name, 'admin');
@@ -18,7 +18,7 @@ export class ControllerPassport extends BeanBase {
     return { name, user };
   }
 
-  @Post('login')
+  @Web.post('login')
   @Api.body(v.object(DtoJwtToken))
   @Public()
   async login(@Body('name') name: string): Promise<IJwtToken> {
@@ -26,19 +26,19 @@ export class ControllerPassport extends BeanBase {
     return jwt;
   }
 
-  @Get('isAuthenticated')
+  @Web.get('isAuthenticated')
   isAuthenticated(): boolean {
     return this.bean.passport.isAuthenticated;
   }
 
-  @Post('refresh')
+  @Web.post('refresh')
   @Api.body(v.object(DtoJwtToken))
   @Public()
   async refresh(@Body('refreshToken') refreshToken: string): Promise<IJwtToken> {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }
 
-  @Post('logout')
+  @Web.post('logout')
   async logout() {
     return await this.bean.passport.signout();
   }

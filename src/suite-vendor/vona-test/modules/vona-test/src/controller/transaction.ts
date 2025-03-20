@@ -10,7 +10,7 @@ const tableNameSuccess = '__tempTransactionSuccess';
 @Controller({ path: 'transaction', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTransaction extends BeanBase {
-  @Post('fail')
+  @Web.post('fail')
   @TransactionMiddleware()
   @Public()
   async fail(@Body() item: object) {
@@ -18,7 +18,7 @@ export class ControllerTransaction extends BeanBase {
     await this.app.bean.model.update(`${tableNameFail}error`, item);
   }
 
-  @Post('success')
+  @Web.post('success')
   @TransactionMiddleware()
   @Public()
   async success(@Body() item: object) {

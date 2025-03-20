@@ -7,7 +7,7 @@ import { Controller, Post } from 'vona-module-a-web';
 @Controller({ path: 'tail', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTail extends BeanBase {
-  @Post()
+  @Web.post()
   @Public()
   tail() {
     // 1

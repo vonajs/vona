@@ -7,7 +7,7 @@ import { $locale } from '../.metadata/index.ts';
 @Controller()
 @Api.tags(['Home'])
 export class ControllerHome extends BeanBase {
-  @Get('//', { description: $locale('Home') })
+  @Web.get('//', { description: $locale('Home') })
   @Public()
   index() {
     return this.scope.locale.HelloVona();

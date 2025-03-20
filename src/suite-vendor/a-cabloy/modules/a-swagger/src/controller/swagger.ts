@@ -34,7 +34,7 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 
 @Controller({ path: '//swagger', exclude: true, meta: { mode: ['local', 'test'] } })
 export class ControllerSwagger extends BeanBase {
-  @Get()
+  @Web.get()
   @Public()
   @Api.contentType('text/html')
   async index(@Query('version', v.default('31')) version: string): Promise<string> {
@@ -57,7 +57,7 @@ export class ControllerSwagger extends BeanBase {
       .replace('__SWAGGER_JSON__', `${_pathJSON}?version=${version}`);
   }
 
-  @Get('json')
+  @Web.get('json')
   @Public()
   @Api.contentType('text/plain')
   json(@Query('version', v.default('31')) version: string): string {

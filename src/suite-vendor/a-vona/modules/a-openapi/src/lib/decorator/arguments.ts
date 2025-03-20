@@ -32,3 +32,11 @@ export function Headers(property?: string | SchemaLike, ...schemaLikes: SchemaLi
 export function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
 }
+
+export const Arg = {
+  param: Param,
+  query: Query,
+  body: Body,
+  headers: Headers,
+  user: User,
+};

@@ -70,3 +70,13 @@ export const Options = createMappingDecorator(RequestMethod.OPTIONS);
  * Route handler (method) Decorator. Routes HTTP HEAD requests to the specified path.
  */
 export const Head = createMappingDecorator(RequestMethod.HEAD);
+
+export const Web = {
+  post: Post,
+  get: Get,
+  delete: Delete,
+  put: Put,
+  patch: Patch,
+  options: Options,
+  head: Head,
+};

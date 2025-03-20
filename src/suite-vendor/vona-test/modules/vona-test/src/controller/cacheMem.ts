@@ -9,7 +9,7 @@ import { Controller, Post } from 'vona-module-a-web';
 @Api.exclude()
 @Public()
 export class ControllerCacheMem extends BeanBase {
-  @Post()
+  @Web.post()
   async mem() {
     let res;
     let value;

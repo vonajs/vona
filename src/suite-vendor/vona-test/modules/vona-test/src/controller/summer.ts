@@ -10,7 +10,7 @@ import { __ThisModule__ } from '../.metadata/this.ts';
 @Controller({ path: 'summer', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerSummer extends BeanBase {
-  @Post()
+  @Web.post()
   @Public()
   async test() {
     // name
