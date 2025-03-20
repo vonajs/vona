@@ -6,9 +6,11 @@ import { SocketConnection } from 'vona-module-a-socket';
 
 export interface ISocketConnectionOptionsInstance extends IDecoratorSocketConnectionOptions {}
 
-@SocketConnection<ISocketConnectionOptionsInstance>()
+@SocketConnection<ISocketConnectionOptionsInstance>({ dependencies: 'a-socket:appReady' })
 export class SocketConnectionInstance extends BeanBase implements ISocketConnectionExecute {
   async enter(_ws: WebSocket, _options: ISocketConnectionOptionsInstance, next: Next): Promise<void> {
+    // init instance
+    await this.$scope.instance.service.instance.initInstance();
     // next
     return next();
   }
