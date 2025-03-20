@@ -66,7 +66,7 @@ export class BeanAuth extends BeanBase {
     const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
     const strategy = new Strategy(strategyOptions, () => {});
     // strategy.authenticate
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       strategy.redirect = async (location: string) => {
         // real
         if (strategy.name !== 'mock') {
@@ -82,7 +82,7 @@ export class BeanAuth extends BeanBase {
         resolve(res);
       };
       strategy.error = (err: Error) => {
-        throw err;
+        reject(err);
       };
       strategy.authenticate(this.ctx.req, strategyOptions);
     });
