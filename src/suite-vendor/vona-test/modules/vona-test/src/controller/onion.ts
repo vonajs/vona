@@ -2,7 +2,7 @@ import { BeanBase } from 'vona';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
-import { Api, Arg, Body, Headers, Param, Query, v } from 'vona-module-a-openapi';
+import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -27,10 +27,10 @@ export class ControllerOnion extends BeanBase {
   @Transaction({ isolationLevel: 'read committed', readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(
-    @Query('id', v.default(0), z.number()) id: number,
+    @Arg.query('id', v.default(0), z.number()) id: number,
     temp: string,
-    @Query('name', z.number().optional()) name: string,
-    @Body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
+    @Arg.query('name', z.number().optional()) name: string,
+    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
     _user: DtoUser,
   ): string | undefined {
     return `echo: ${id}:${temp}:${name}`;
@@ -39,12 +39,12 @@ export class ControllerOnion extends BeanBase {
   @Web.post('echo2/:userId/:userName')
   // @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @UseGuardGlobal('a-user:passport', { public: true })
-  // echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
+  // echo2(@Arg.query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
-    @Param('userId', v.description($locale('UserId')), v.example('example:1')) _userId: number,
-    @Param('userName', v.description($locale('UserId')), v.example('example:1')) _userName: string,
-    @Query(DtoUser) _user: DtoUser,
-    @Body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
+    @Arg.param('userId', v.description($locale('UserId')), v.example('example:1')) _userId: number,
+    @Arg.param('userName', v.description($locale('UserId')), v.example('example:1')) _userName: string,
+    @Arg.query(DtoUser) _user: DtoUser,
+    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
     user: DtoUser,
   ): DtoUser {
     // const ctx = this.app.currentContext;
@@ -55,9 +55,9 @@ export class ControllerOnion extends BeanBase {
   @Web.get('echo3/:userId')
   @UseGuardGlobal('a-user:passport', { public: true })
   echo3(
-    @Param('userId') _userId: number,
-    @Query('id', v.optional()) id: number,
-    @Headers('Accept', v.description($locale('UserId'))) accept: string,
+    @Arg.param('userId') _userId: number,
+    @Arg.query('id', v.optional()) id: number,
+    @Arg.headers('Accept', v.description($locale('UserId'))) accept: string,
   ) {
     // this.scope.util.combineApiPath
 
@@ -77,7 +77,7 @@ export class ControllerOnion extends BeanBase {
 
   @Web.get('echo5')
   @Public()
-  echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
+  echo5(@Arg.query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     // const ctx = this.app.currentContext;
     // this.$logger.silly(ctx === this.ctx);
     return ids;

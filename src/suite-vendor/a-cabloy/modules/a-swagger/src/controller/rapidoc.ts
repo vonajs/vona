@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
-import { Api, Query, v } from 'vona-module-a-openapi';
+import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { $apiPath, Controller, Get } from 'vona-module-a-web';
+import { $apiPath, Controller, Web } from 'vona-module-a-web';
 
 const __SWAGGER_HTML__ = `<!doctype html>
 <html>
@@ -28,7 +28,7 @@ export class ControllerRapidoc extends BeanBase {
   @Web.get()
   @Public()
   @Api.contentType('text/html')
-  async index(@Query('version', v.default('31')) version: string): Promise<string> {
+  async index(@Arg.query('version', v.default('31')) version: string): Promise<string> {
     // signin
     let accessToken = '';
     if (this.app.meta.isLocal || this.app.meta.isTest) {

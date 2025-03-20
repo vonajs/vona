@@ -3,16 +3,16 @@ import type { IUserBase } from 'vona-module-a-user';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
-import { Api, Body, Param, User, v } from 'vona-module-a-openapi';
+import { Api, Arg, v } from 'vona-module-a-openapi';
 import { $getUserName, Public } from 'vona-module-a-user';
-import { Controller, Get, Post } from 'vona-module-a-web';
+import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'passport', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerPassport extends BeanBase {
   @Web.get('echo/:name')
   @Public()
-  echo(@Param('name') name: string, @User() user: IUserBase) {
+  echo(@Arg.param('name') name: string, @Arg.user() user: IUserBase) {
     assert.equal(name, 'admin');
     assert.equal($getUserName(user), 'admin');
     return { name, user };
@@ -21,7 +21,7 @@ export class ControllerPassport extends BeanBase {
   @Web.post('login')
   @Api.body(v.object(DtoJwtToken))
   @Public()
-  async login(@Body('name') name: string): Promise<IJwtToken> {
+  async login(@Arg.body('name') name: string): Promise<IJwtToken> {
     const jwt = await this.bean.passport.signinMock(name);
     return jwt;
   }
@@ -34,7 +34,7 @@ export class ControllerPassport extends BeanBase {
   @Web.post('refresh')
   @Api.body(v.object(DtoJwtToken))
   @Public()
-  async refresh(@Body('refreshToken') refreshToken: string): Promise<IJwtToken> {
+  async refresh(@Arg.body('refreshToken') refreshToken: string): Promise<IJwtToken> {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }
 

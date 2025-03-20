@@ -1,14 +1,14 @@
 import { BeanBase } from 'vona';
-import { Api, Body } from 'vona-module-a-openapi';
+import { Api, Arg } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
-import { Controller, Post } from 'vona-module-a-web';
+import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'performAction', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerPerformAction extends BeanBase {
   @Web.post('echo')
   @Public()
-  echo(@Body('id') id: number) {
+  echo(@Arg.body('id') id: number) {
     const url = this.scope.util.combineApiPath('performAction/echo');
     return { id, url };
   }
