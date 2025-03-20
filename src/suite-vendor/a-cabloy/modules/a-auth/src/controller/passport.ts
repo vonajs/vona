@@ -1,15 +1,40 @@
 import type { Constructable } from 'vona';
 import type { StrategyBase } from '../lib/strategyBase.ts';
-import type { IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
+import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
+import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { UseMiddlewareGlobal } from 'vona-module-a-aspect';
-import { Api } from 'vona-module-a-openapi';
+import { Api, Arg } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
+import { z } from 'zod';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
+  @Web.get('login/:module/:providerName/:clientName')
+  @Public()
+  login<T extends keyof IAuthProviderRecord>(
+    @Arg.query('redirect') redirect: string,
+    @Arg.param('module') module: string,
+    @Arg.param('providerName') providerName: string,
+    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+  ) {
+    return this.bean.auth.authenticate(`${module}:${providerName}` as T, {
+      state: { intention: 'login', redirect },
+      clientName,
+    });
+  }
+
+  @Web.get('associate')
+  async associate() {
+
+  }
+
+  @Web.get('migrate')
+  async migrate() {
+
+  }
+
   @Web.get('callback')
   @Public()
   @UseMiddlewareGlobal('a-instance:instance', { enable: false })
