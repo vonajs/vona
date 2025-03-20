@@ -15,7 +15,7 @@ export class BeanAuthProvider extends BeanBase {
   }
 
   async get(data: Partial<EntityAuthProvider>) {
-    if (!data.clientName) data = { ...data, clientName: 'default' };
+    if (!data.id && !data.clientName) data = { ...data, clientName: 'default' };
     const res = await this.scope.model.authProvider.get(data);
     if (res) return res;
     if (!data.module || !data.providerName) throw new Error('Invalid auth provider');
