@@ -254,6 +254,10 @@ declare module 'vona-module-a-auth' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
+    '/auth/passport/login/:_string_/:_string_/:_string_': '/auth/passport/login:_module_:_providerName_:_clientName?_';
+    '/auth/passport/login/:module/:providerName/:clientName?': `/auth/passport/login/${string}/${string}/${string}`;
+    '/auth/passport/associate': '/auth/passport/associate';
+    '/auth/passport/migrate': '/auth/passport/migrate';
     '/auth/passport/callback': '/auth/passport/callback';
   }
 
