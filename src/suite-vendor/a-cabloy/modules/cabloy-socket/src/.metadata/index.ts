@@ -2,6 +2,7 @@ import type { BeanScopeUtil } from 'vona';
 /** socketConnection: begin */
 import type { ISocketConnectionOptionsCabloy } from '../bean/socketConnection.cabloy.ts';
 import type { ISocketPacketOptionsCabloy } from '../bean/socketPacket.cabloy.ts';
+import type { ISocketPacketOptionsPerformAction } from '../bean/socketPacket.performAction.ts';
 /** socketPacket: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -29,16 +30,23 @@ declare module 'vona-module-cabloy-socket' {
 /** socketConnection: end */
 /** socketPacket: begin */
 export * from '../bean/socketPacket.cabloy.ts';
+export * from '../bean/socketPacket.performAction.ts';
 declare module 'vona-module-a-socket' {
 
   export interface ISocketPacketRecord {
     'cabloy-socket:cabloy': ISocketPacketOptionsCabloy;
+    'cabloy-socket:performAction': ISocketPacketOptionsPerformAction;
   }
 
 }
 declare module 'vona-module-cabloy-socket' {
 
   export interface SocketPacketCabloy {
+    /** @internal */
+    get scope(): ScopeModuleCabloySocket;
+  }
+
+  export interface SocketPacketPerformAction {
     /** @internal */
     get scope(): ScopeModuleCabloySocket;
   }

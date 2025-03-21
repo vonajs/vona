@@ -1,6 +1,19 @@
 export interface ISocketCabloyEventRecord {
   default: never;
+  performAction: never;
+  performActionBack: never;
 }
+
+export const socketCabloyEventRecord = {
+  default: '_a',
+  performAction: '_b',
+  performActionBack: '_c',
+};
+export const socketCabloyEventRecordReverse = {
+  _a: 'default',
+  _b: 'performAction',
+  _c: 'performActionBack',
+};
 
 export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord | undefined, any];
 
