@@ -49,5 +49,6 @@ declare global {
       path: string,
       options?: ISocketCabloyPerformActionOptions,
     ): Promise<any>;
+    closeEvents(): void;
   }
 }

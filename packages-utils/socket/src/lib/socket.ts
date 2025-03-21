@@ -17,6 +17,7 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
   if (packet[0] === 'performActionBack') {
     const result = packet[1];
     const performActionBack = this[SymbolPerformActionRecord][result.id];
+    delete this[SymbolPerformActionRecord][result.id];
     if (performActionBack) {
       if (result.c === 0) {
         performActionBack.resolve(result.d);
@@ -26,7 +27,6 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
         err.message = result.m;
         performActionBack.reject(err);
       }
-      delete this[SymbolPerformActionRecord][result.id];
     }
   }
   return packet;
@@ -51,4 +51,16 @@ WebSocket.prototype.performAction = function (
     };
     this.sendEvent('performAction', data);
   });
+};
+
+WebSocket.prototype.closeEvents = function () {
+  const callbacks = this[SymbolPerformActionRecord];
+  if (!callbacks) return;
+  for (const id in callbacks) {
+    const callback = callbacks[id];
+    delete callbacks[id];
+    const err = new Error();
+    (err as any).code = 400;
+    callback.reject(err);
+  }
 };

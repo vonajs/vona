@@ -29,5 +29,8 @@ function test() {
     ws.onmessage = async event => {
       ws.parseEvent(event);
     };
+    ws.onclose = () => {
+      ws.closeEvents();
+    };
   });
 }
