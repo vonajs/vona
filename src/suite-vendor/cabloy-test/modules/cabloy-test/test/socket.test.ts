@@ -11,12 +11,8 @@ describe.only('socket.test.ts', () => {
 function test() {
   return new Promise(resolve => {
     const ws = new WebSocket(`ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`);
-    ws.sendEvent = (eventName: keyof ISocketCabloyEventRecord, data, cb) => {
-      const packet: TypeSocketPacketCabloy = [eventName, data];
-      ws.send(JSON.stringify(packet), cb);
-    };
     ws.onopen = () => {
-      ws.send('Hello Server!');
+      ws.sendEvent('default', 'Hello Server!');
       ws.close();
       resolve(true);
     };

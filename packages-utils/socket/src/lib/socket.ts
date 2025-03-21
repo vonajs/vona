@@ -1,4 +1,7 @@
-export interface ISocketCabloyEventRecord {}
+export interface ISocketCabloyEventRecord {
+  default: never;
+}
+
 export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord | undefined, any];
 
 declare global {
