@@ -15,9 +15,14 @@ export const socketCabloyEventRecordReverse = {
   _c: 'performActionBack',
 };
 
+export type TypeSocketCabloyPerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
 export interface ISocketCabloyPerformActionOptions {
+  body?: any;
+  headers?: object;
+}
+export interface ISocketCabloyPerformActionOptionsInner {
   id: number;
-  m: 'get' | 'post' | 'delete' | 'put' | 'patch';
+  m: TypeSocketCabloyPerformActionMethod;
   p: string;
   b?: any;
   h?: object;
@@ -40,5 +45,9 @@ declare global {
       },
       cb?: (err?: Error) => void,
     ): void;
+    performAction(method: TypeSocketCabloyPerformActionMethod,
+      path: string,
+      options?: ISocketCabloyPerformActionOptions,
+    ): Promise<any>;
   }
 }
