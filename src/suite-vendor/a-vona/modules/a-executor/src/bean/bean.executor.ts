@@ -77,17 +77,8 @@ export class BeanExecutor extends BeanBase {
     fn: FunctionAsync<RESULT>,
     options?: IRunInAnonymousContextScopeOptions,
   ): Promise<RESULT> {
-    let req = options?.req;
-    if (!req) {
-      // url
-      const url = this.app.util.combineApiPath('', '/', true, true);
-      req = {
-        method: 'post',
-        url,
-      };
-    }
     // ctx
-    const ctx = this.app.createAnonymousContext(req);
+    const ctx = this.app.createAnonymousContext(options?.req, options?.reqInherit);
     return await this.app.ctxStorage.run(ctx, async () => {
       // locale
       if (options?.locale !== undefined) {
@@ -181,7 +172,13 @@ export class BeanExecutor extends BeanBase {
         // ok
         return res;
       },
-      { locale: options.locale, instanceName: options.instanceName, instance: options.instance, req: options.req },
+      {
+        locale: options.locale,
+        instanceName: options.instanceName,
+        instance: options.instance,
+        req: options.req,
+        reqInherit: options.reqInherit,
+      },
     );
   }
 }

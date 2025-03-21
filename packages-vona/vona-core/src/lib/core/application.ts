@@ -72,7 +72,7 @@ export class VonaApplication extends KoaApplication {
         hostname: 'localhost',
         protocol: 'http',
         secure: 'false',
-        method: 'GET',
+        method: 'POST',
         url: '/',
         path: '/',
         socket: {

@@ -8,6 +8,7 @@ export interface IRunInAnonymousContextScopeOptions {
   instanceName?: string | null | undefined;
   instance?: boolean;
   req?: any;
+  reqInherit?: boolean;
 }
 
 export interface INewCtxExtraData {
@@ -24,6 +25,7 @@ export interface INewCtxOptions {
   extraData?: INewCtxExtraData;
   innerAccess?: boolean;
   req?: any;
+  reqInherit?: boolean;
 }
 
 export interface IPerformActionOptions {
