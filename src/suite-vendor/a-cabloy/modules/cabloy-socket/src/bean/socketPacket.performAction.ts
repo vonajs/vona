@@ -14,7 +14,7 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
     const data: ISocketCabloyPerformActionOptionsInner = packet[1];
     if (eventName !== 'performAction') return next();
     try {
-      const res = await this.bean.executor.performAction(data.m, data.p as never, {
+      const res = await this.bean.executor.performActionInner(data.m, data.p as never, {
         innerAccess: false,
         body: data.b,
         headers: data.h,

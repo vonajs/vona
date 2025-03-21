@@ -9,17 +9,25 @@ import { SymbolRouterMiddleware } from '../types/executor.ts';
 @Bean()
 export class BeanExecutor extends BeanBase {
   async performAction<
-    // T,
     METHOD extends keyof IApiPathRecordMethodMap,
     PATHKEY extends keyof IApiPathRecordMethodMap[METHOD],
   >(method: METHOD,
     path: IApiPathRecordMethodMap[METHOD][PATHKEY],
     options?: IPerformActionOptions,
   ): Promise<any> {
+    // url
+    const url = this.app.util.combineApiPath('', path as any, true, true);
+    return await this.performActionInner(method, url, options);
+  }
+
+  async performActionInner<
+    METHOD extends keyof IApiPathRecordMethodMap,
+  >(method: METHOD,
+    url: string,
+    options?: IPerformActionOptions,
+  ): Promise<any> {
     // app
     const app = this.app;
-    // request
-    const url = app.util.combineApiPath('', path as any, true, true);
     // new ctx
     return await this.newCtx(async () => {
       const ctx = this.ctx;
