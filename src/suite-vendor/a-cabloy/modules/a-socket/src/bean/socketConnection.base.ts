@@ -18,12 +18,6 @@ export class SocketConnectionBase extends BeanBase implements ISocketConnectionE
   }
 
   async enter(ws: WebSocket, _options: ISocketConnectionOptionsBase, next: Next): Promise<void> {
-    // cors
-    const origin = this.bean.security.checkOrigin(this.ctx.get('origin'), this.ctx.host);
-    if (!origin) {
-      ws.terminate();
-      return;
-    }
     // id
     ws.id = uuidv4();
     // isAlive

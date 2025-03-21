@@ -4,6 +4,7 @@ import type { ISocketConnectionOptionsAppReady } from '../bean/socketConnection.
 /** service: begin */
 
 import type { ISocketConnectionOptionsBase } from '../bean/socketConnection.base.ts';
+import type { ISocketConnectionOptionsCors } from '../bean/socketConnection.cors.ts';
 import type { ISocketConnectionOptionsInstance } from '../bean/socketConnection.instance.ts';
 import type { config } from '../config/config.ts';
 /** service: end */
@@ -45,6 +46,7 @@ declare module 'vona' {
   }
 }
 export * from '../bean/socketConnection.base.ts';
+export * from '../bean/socketConnection.cors.ts';
 export * from '../bean/socketConnection.instance.ts';
 /** socketConnection: end */
 /** config: begin */
@@ -54,6 +56,7 @@ declare module 'vona-module-a-socket' {
   export interface ISocketConnectionRecord {
     'a-socket:appReady': ISocketConnectionOptionsAppReady;
     'a-socket:base': ISocketConnectionOptionsBase;
+    'a-socket:cors': ISocketConnectionOptionsCors;
     'a-socket:instance': ISocketConnectionOptionsInstance;
   }
 
@@ -66,6 +69,11 @@ declare module 'vona-module-a-socket' {
   }
 
   export interface SocketConnectionBase {
+    /** @internal */
+    get scope(): ScopeModuleASocket;
+  }
+
+  export interface SocketConnectionCors {
     /** @internal */
     get scope(): ScopeModuleASocket;
   }
