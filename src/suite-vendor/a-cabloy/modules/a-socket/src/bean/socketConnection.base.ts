@@ -18,6 +18,8 @@ export class SocketConnectionBase extends BeanBase implements ISocketConnectionE
   }
 
   async enter(ws: WebSocket, _options: ISocketConnectionOptionsBase, next: Next): Promise<void> {
+    // namespace
+    ws.namespace = this.scope.service.socket.getNamespace();
     // id
     ws.id = uuidv4();
     // isAlive

@@ -1,3 +1,4 @@
+import type { IncomingMessage } from 'node:http';
 import type { Next } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IDecoratorSocketConnectionOptions, ISocketConnectionComposeData, ISocketConnectionExecute, ISocketConnectionRecord, ISocketPacketComposeData } from '../types/socketConnection.ts';
@@ -25,7 +26,7 @@ export class ServiceSocket extends BeanBase {
     });
   }
 
-  private async _onConnection(ws: WebSocket, req: any) {
+  private async _onConnection(ws: WebSocket, req: IncomingMessage) {
     // enter
     return await this.app.bean.executor.newCtx(async () => {
       const ctx = this.app.ctx;
@@ -78,14 +79,14 @@ export class ServiceSocket extends BeanBase {
     return this[SymbolSocketPackets];
   }
 
-  private _getNamespace() {
+  public getNamespace() {
     return this.ctx.path.substring(1);
   }
 
   private _wrapOnionConnection(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {
     const fn = (data: ISocketConnectionComposeData, next: Next) => {
       const options = item.beanOptions.options!;
-      if (!this.bean.onion.checkOnionOptionsEnabled(options, this._getNamespace())) {
+      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.getNamespace())) {
         return next();
       }
       // execute
@@ -103,7 +104,7 @@ export class ServiceSocket extends BeanBase {
   private _wrapOnionPacket(item: IOnionSlice<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>) {
     const fn = (data: ISocketPacketComposeData, next: Next) => {
       const options = item.beanOptions.options!;
-      if (!this.bean.onion.checkOnionOptionsEnabled(options, this._getNamespace())) {
+      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.getNamespace())) {
         return next();
       }
       // execute

@@ -13,6 +13,7 @@ declare module 'vona' {
 
 declare module 'ws' {
   export interface WebSocket {
+    namespace: string;
     id: string;
     isAlive: boolean;
   }
