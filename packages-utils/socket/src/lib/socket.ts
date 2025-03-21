@@ -18,12 +18,12 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
     const result = packet[1];
     const performActionBack = this[SymbolPerformActionRecord][result.id];
     if (performActionBack) {
-      if (result.code === 0) {
-        performActionBack.resolve(result.data);
+      if (result.c === 0) {
+        performActionBack.resolve(result.d);
       } else {
         const err = new Error();
-        (err as any).code = result.code;
-        err.message = result.message;
+        (err as any).code = result.c;
+        err.message = result.m;
         performActionBack.reject(err);
       }
       delete this[SymbolPerformActionRecord][result.id];
