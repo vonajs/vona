@@ -1,4 +1,5 @@
 // import assert from 'node:assert';
+import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
@@ -14,7 +15,7 @@ function test() {
     ws.onopen = async () => {
       ws.sendEvent('default', 'Hello Server!');
       const res = await ws.performAction('get', '/');
-      console.log(res);
+      assert.equal(res, 'Hello Vona!');
       ws.close();
       resolve(true);
     };
