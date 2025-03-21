@@ -47,9 +47,13 @@ export class ServiceSocket extends BeanBase {
         };
         // message
         ws.onmessage = async event => {
-          await this.app.ctxStorage.run(ctx as any, async () => {
-            await this.composeSocketPackets({ data: event.data, ws });
-          });
+          try {
+            await this.app.ctxStorage.run(ctx as any, async () => {
+              await this.composeSocketPackets({ data: event.data, ws });
+            });
+          } catch (err) {
+            this.$logger.error(err);
+          }
         };
         // error
         ws.onerror = event => {
