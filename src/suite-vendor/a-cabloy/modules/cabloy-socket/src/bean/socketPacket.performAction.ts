@@ -10,7 +10,7 @@ export interface ISocketPacketOptionsPerformAction extends IDecoratorSocketPacke
 @SocketPacket<ISocketPacketOptionsPerformAction>({ match: 'cabloy', dependencies: 'cabloy-socket:cabloy' })
 export class SocketPacketPerformAction extends BeanBase implements ISocketPacketExecute {
   async execute(packet: TypeSocketPacketCabloy, _ws: WebSocket, _options: ISocketPacketOptionsPerformAction, next: Next): Promise<void> {
-    console.log(packet);
+    console.log(packet[0] === 'performAction');
     // next
     return next();
   }
