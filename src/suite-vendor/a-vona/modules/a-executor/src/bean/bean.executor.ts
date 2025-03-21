@@ -4,6 +4,7 @@ import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScope
 import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __createRequest, __delegateProperties } from '../lib/utils.ts';
+import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -42,8 +43,7 @@ export class BeanExecutor extends BeanBase {
       // onion
       ctx.onionsDynamic = options?.onions;
       // invoke middleware
-      const middleware = app.middleware[app.middleware.length - 1] as any;
-      await middleware(ctx);
+      await app[SymbolRouterMiddleware](ctx);
       // check result
       if (ctx.status === 200) {
         if (!ctx.body || (ctx.body as any).code === undefined) {

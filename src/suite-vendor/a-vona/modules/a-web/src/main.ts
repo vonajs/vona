@@ -7,6 +7,7 @@ import type {
 import type { IOnionSlice } from 'vona-module-a-onion';
 import Router from 'find-my-way';
 import { BeanSimple, compose } from 'vona';
+import { SymbolRouterMiddleware } from 'vona-module-a-executor';
 import { __ThisModule__ } from './.metadata/this.ts';
 
 const SymbolRouter = Symbol('SymbolRouter');
@@ -37,7 +38,8 @@ export class Main extends BeanSimple implements IModuleMain {
     });
     this.app.use(compose(middlewares));
     // middleware: router
-    this.app.use(routerMiddleware(this[SymbolRouter]));
+    this.app[SymbolRouterMiddleware] = routerMiddleware(this[SymbolRouter]);
+    this.app.use(this.app[SymbolRouterMiddleware]);
   }
 
   async configLoaded(_config: any) {}

@@ -1,6 +1,8 @@
 import type { ContextState, ILocalInfos, PowerPartial } from 'vona';
 import type { ConfigOnions } from 'vona-module-a-onion';
 
+export const SymbolRouterMiddleware = Symbol('SymbolRouterMiddleware');
+
 export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
   instanceName?: string | null | undefined;
