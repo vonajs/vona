@@ -36,14 +36,27 @@ export class ServiceSocket extends BeanBase {
         },
       });
       // enter
-      await this.composeSocketConnections({ method: 'enter', ws });
+      try {
+        await this.composeSocketConnections({ method: 'enter', ws });
+      } catch (err) {
+        this.$logger.error(err);
+        // terminate
+        ws.terminate();
+        return;
+      }
+      // promise
       return new Promise(resolve => {
         // exit
         ws.onclose = async () => {
-          await this.app.ctxStorage.run(ctx as any, async () => {
-            await this.composeSocketConnections({ method: 'exit', ws });
-          });
-          resolve(undefined);
+          try {
+            await this.app.ctxStorage.run(ctx as any, async () => {
+              await this.composeSocketConnections({ method: 'exit', ws });
+            });
+          } catch (err) {
+            this.$logger.error(err);
+          } finally {
+            resolve(undefined);
+          }
         };
         // message
         ws.onmessage = async event => {
