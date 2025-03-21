@@ -113,9 +113,16 @@ export class ServiceSocket extends BeanBase {
       if (!beanInstance) {
         throw new Error(`socketPacket bean not found: ${beanFullName}`);
       }
-      return beanInstance.execute(data.data, data.ws, options, next);
+      return beanInstance.execute(data.data, data.ws, options, _patchPacketNext(data, next));
     };
     fn._name = item.name;
     return fn;
   }
+}
+
+function _patchPacketNext(data: ISocketPacketComposeData, next) {
+  return (...args) => {
+    const context = args.length === 0 ? data.data : args[0];
+    return next({ data: context, ws: data.ws });
+  };
 }

@@ -1,14 +1,33 @@
 import type { BeanScopeUtil } from 'vona';
-/** socketPacket: begin */
+/** socketConnection: begin */
+import type { ISocketConnectionOptionsCabloy } from '../bean/socketConnection.cabloy.ts';
 import type { ISocketPacketOptionsCabloy } from '../bean/socketPacket.cabloy.ts';
 /** socketPacket: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 import 'vona';
+import 'vona';
 
 import 'vona';
 
+export * from '../bean/socketConnection.cabloy.ts';
+declare module 'vona-module-a-socket' {
+
+  export interface ISocketConnectionRecord {
+    'cabloy-socket:cabloy': ISocketConnectionOptionsCabloy;
+  }
+
+}
+declare module 'vona-module-cabloy-socket' {
+
+  export interface SocketConnectionCabloy {
+    /** @internal */
+    get scope(): ScopeModuleCabloySocket;
+  }
+}
+/** socketConnection: end */
+/** socketPacket: begin */
 export * from '../bean/socketPacket.cabloy.ts';
 declare module 'vona-module-a-socket' {
 
