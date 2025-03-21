@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-WebSocket.prototype.sendEvent = function (eventName: keyof ISocketCabloyEventRecord, data) {
+WebSocket.prototype.sendEvent = function (eventName: keyof ISocketCabloyEventRecord, data: any) {
   const packet: TypeSocketPacketCabloy = [eventName, data];
   this.send(JSON.stringify(packet));
 };
