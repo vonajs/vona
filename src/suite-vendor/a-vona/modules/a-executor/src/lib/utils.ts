@@ -1,5 +1,3 @@
-import http from 'node:http';
-
 export function __delegateProperties(ctx, ctxCaller) {
   for (const property of ['state']) {
     __delegateProperty(ctx, ctxCaller, property);
@@ -13,26 +11,6 @@ export function __delegateProperties(ctx, ctxCaller) {
 export function __delegateProperty(ctx, ctxCaller, property) {
   if (!ctxCaller[property])ctxCaller[property] = {};
   ctx[property] = ctxCaller[property];
-}
-
-export function __createRequest({ method, url }, ctxCaller) {
-  // _req
-  const _req = ctxCaller.request;
-  // req
-  const req = new http.IncomingMessage(null as any);
-  req.headers = Object.assign({}, _req.headers, { accept: 'application/json' });
-  (<any>req).host = _req.host;
-  (<any>req).hostname = _req.hostname;
-  (<any>req).protocol = _req.protocol;
-  (<any>req).secure = _req.secure;
-  req.method = method.toUpperCase();
-  req.url = url;
-  // path,
-  (<any>req).socket = {
-    remoteAddress: _req.socket.remoteAddress,
-    remotePort: _req.socket.remotePort,
-  };
-  return req;
 }
 
 // export function delegateProperty(ctx, ctxCaller, property) {

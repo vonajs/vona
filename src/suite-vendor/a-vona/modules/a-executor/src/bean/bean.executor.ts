@@ -3,7 +3,7 @@ import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.ts';
 import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { __createRequest, __delegateProperties } from '../lib/utils.ts';
+import { __delegateProperties } from '../lib/utils.ts';
 import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Bean()
@@ -20,19 +20,23 @@ export class BeanExecutor extends BeanBase {
     const app = this.app;
     // request
     const url = app.util.combineApiPath('', path as any, true, true);
-    const req = __createRequest({ method, url }, this.ctx);
     // new ctx
     return await this.newCtx(async () => {
       const ctx = this.ctx;
       // default status code
       ctx.res.statusCode = 404;
+      ctx.req.method = method.toUpperCase();
+      ctx.req.url = url;
+      // json
+      ctx.req.headers = Object.assign({}, ctx.req.headers);
+      ctx.req.headers.accept = 'application/json';
       // headers
       if (options?.headers) {
-        Object.assign(ctx.request.headers, options?.headers);
+        Object.assign(ctx.req.headers, options?.headers);
       }
       // authToken
       if (options?.authToken) {
-        ctx.request.headers.authorization = `Bearer ${options?.authToken}`;
+        ctx.req.headers.authorization = `Bearer ${options?.authToken}`;
       }
       // query
       if (options?.query !== undefined) {
@@ -64,7 +68,7 @@ export class BeanExecutor extends BeanBase {
           });
         }
       }
-    }, { req, innerAccess: options?.innerAccess });
+    }, { innerAccess: options?.innerAccess });
   }
 
   runInBackground(fn: FunctionAsync<void>) {
