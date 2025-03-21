@@ -11,8 +11,10 @@ describe.only('socket.test.ts', () => {
 function test() {
   return new Promise(resolve => {
     const ws = new WebSocket(`ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`);
-    ws.onopen = () => {
+    ws.onopen = async () => {
       ws.sendEvent('default', 'Hello Server!');
+      const res = await ws.performAction('get', '/');
+      console.log(res);
       ws.close();
       resolve(true);
     };
