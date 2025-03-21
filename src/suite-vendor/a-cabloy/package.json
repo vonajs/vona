@@ -13,7 +13,8 @@
     "vona-module-a-cabloy": "workspace:^",
     "vona-module-a-socket": "workspace:^",
     "vona-module-a-status": "workspace:^",
-    "vona-module-a-swagger": "workspace:^"
+    "vona-module-a-swagger": "workspace:^",
+    "vona-module-cabloy-socket": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

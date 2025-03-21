@@ -203,6 +203,9 @@ importers:
       vona-module-a-worker:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-worker
+      vona-module-cabloy-socket:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/cabloy-socket
       vona-module-cabloy-test:
         specifier: workspace:^
         version: link:src/suite-vendor/cabloy-test/modules/cabloy-test
@@ -859,6 +862,9 @@ importers:
       vona-module-a-swagger:
         specifier: workspace:^
         version: link:modules/a-swagger
+      vona-module-cabloy-socket:
+        specifier: workspace:^
+        version: link:modules/cabloy-socket
 
   src/suite-vendor/a-cabloy/modules/a-auth:
     devDependencies:
@@ -933,6 +939,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-swagger:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/cabloy-socket:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
