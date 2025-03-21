@@ -78,10 +78,14 @@ export class ServiceSocket extends BeanBase {
     return this[SymbolSocketPackets];
   }
 
+  private _getNamespace() {
+    return this.ctx.path.substring(1);
+  }
+
   private _wrapOnionConnection(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {
     const fn = (data: ISocketConnectionComposeData, next: Next) => {
       const options = item.beanOptions.options!;
-      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
+      if (!this.bean.onion.checkOnionOptionsEnabled(options, this._getNamespace())) {
         return next();
       }
       // execute
@@ -99,7 +103,7 @@ export class ServiceSocket extends BeanBase {
   private _wrapOnionPacket(item: IOnionSlice<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>) {
     const fn = (data: ISocketPacketComposeData, next: Next) => {
       const options = item.beanOptions.options!;
-      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
+      if (!this.bean.onion.checkOnionOptionsEnabled(options, this._getNamespace())) {
         return next();
       }
       // execute
