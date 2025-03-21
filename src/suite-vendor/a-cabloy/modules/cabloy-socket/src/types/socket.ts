@@ -1,5 +1,5 @@
 export interface ISocketCabloyEventRecord {}
-export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord, any];
+export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord | undefined, any];
 
 declare module 'vona-module-a-socket'{
 
