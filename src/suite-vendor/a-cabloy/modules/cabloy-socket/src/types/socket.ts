@@ -15,6 +15,14 @@ export const socketCabloyEventRecordReverse = {
   _c: 'performActionBack',
 };
 
+export interface ISocketCabloyPerformActionOptions {
+  id: number;
+  m: 'get' | 'post' | 'delete' | 'put' | 'patch';
+  p: string;
+  b?: any;
+  h?: object;
+}
+
 export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord | undefined, any];
 
 declare module 'vona-module-a-socket'{

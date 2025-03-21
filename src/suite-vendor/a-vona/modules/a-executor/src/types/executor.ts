@@ -33,7 +33,7 @@ export interface IPerformActionOptions {
   // instanceName, deprecated
   query?: object;
   headers?: object;
-  body?: object;
+  body?: any;
   onions?: PowerPartial<ConfigOnions>;
   authToken?: string;
 }
