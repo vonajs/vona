@@ -1,34 +1,15 @@
-export interface ISocketCabloyEventRecord {
-  default: never;
-}
-
-export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord | undefined, any];
-
-declare global {
-  interface WebSocket {
-    parseEvent(event: MessageEvent): TypeSocketPacketCabloy;
-    sendEvent(eventName: keyof ISocketCabloyEventRecord, data: any, cb?: (err?: Error) => void): void;
-    sendEvent(
-      eventName: keyof ISocketCabloyEventRecord,
-      data: any,
-      options: {
-        mask?: boolean | undefined;
-        binary?: boolean | undefined;
-        compress?: boolean | undefined;
-        fin?: boolean | undefined;
-      },
-      cb?: (err?: Error) => void,
-    ): void;
-  }
-}
+import type { ISocketCabloyEventRecord, TypeSocketPacketCabloy } from 'vona-module-cabloy-socket';
+import { socketCabloyEventRecord, socketCabloyEventRecordReverse } from 'vona-module-cabloy-socket';
 
 WebSocket.prototype.sendEvent = function (eventName: keyof ISocketCabloyEventRecord, data: any) {
-  const packet: TypeSocketPacketCabloy = [eventName, data];
-  this.send(JSON.stringify(packet));
+  const eventNameInner = socketCabloyEventRecord[eventName] ?? eventName;
+  this.send(JSON.stringify([eventNameInner, data]));
 };
 
 WebSocket.prototype.parseEvent = function (event: MessageEvent) {
   const data = event.data;
-  const packet: TypeSocketPacketCabloy = (data && typeof data === 'string') ? JSON.parse(data) : [undefined, data];
+  const packetInner = (data && typeof data === 'string') ? JSON.parse(data) : [undefined, data];
+  const eventName = socketCabloyEventRecordReverse[packetInner[0]] ?? packetInner[0];
+  const packet: TypeSocketPacketCabloy = [eventName, packetInner[1]];
   return packet;
 };
