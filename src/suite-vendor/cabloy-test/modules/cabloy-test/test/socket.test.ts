@@ -18,5 +18,8 @@ function test() {
       ws.close();
       resolve(true);
     };
+    ws.onmessage = async event => {
+      ws.parseEvent(event);
+    };
   });
 }

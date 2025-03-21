@@ -14,6 +14,21 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
   const packetInner = (data && typeof data === 'string') ? JSON.parse(data) : [undefined, data];
   const eventName = socketCabloyEventRecordReverse[packetInner[0]] ?? packetInner[0];
   const packet: TypeSocketPacketCabloy = [eventName, packetInner[1]];
+  if (packet[0] === 'performActionBack') {
+    const result = packet[1];
+    const performActionBack = this[SymbolPerformActionRecord][result.id];
+    if (performActionBack) {
+      if (result.code === 0) {
+        performActionBack.resolve(result.data);
+      } else {
+        const err = new Error();
+        (err as any).code = result.code;
+        err.message = result.message;
+        performActionBack.reject(err);
+      }
+      delete this[SymbolPerformActionRecord][result.id];
+    }
+  }
   return packet;
 };
 
