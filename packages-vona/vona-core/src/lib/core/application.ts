@@ -55,9 +55,9 @@ export class VonaApplication extends KoaApplication {
     return this.options.name;
   }
 
-  createAnonymousContext(req?: any): VonaContext {
+  createAnonymousContext(req?: any, reqInherit?: boolean): VonaContext {
     let request;
-    if (req?.constructor?.name === 'IncomingMessage') {
+    if (req && reqInherit) {
       request = req;
     } else {
       const host = `localhost:${process.env.SERVER_LISTEN_PORT}`;
