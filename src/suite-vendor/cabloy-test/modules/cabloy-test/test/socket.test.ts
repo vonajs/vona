@@ -1,4 +1,3 @@
-// import assert from 'node:assert';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -13,11 +12,12 @@ function test() {
   return new Promise(resolve => {
     const ws = new WebSocket(`ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`);
     ws.onopen = async () => {
+      // sendEvent
       ws.sendEvent('default', 'Hello Server!');
-      // success
+      // performAction: success
       const res = await ws.performAction('get', '/');
       assert.equal(res, 'Hello Vona!');
-      // fail
+      // performAction: fail
       try {
         await ws.performAction('get', '/__not_found_fail');
       } catch (err: any) {
