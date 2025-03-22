@@ -4,13 +4,18 @@ import { app } from 'vona-mock';
 
 describe('socket.test.ts', () => {
   it('action:socket', async () => {
-    await test();
+    const jwt = await app.bean.passport.signinMock();
+    await test(jwt.accessToken);
+    await app.bean.passport.signout();
   });
 });
 
-function test() {
+function test(accessToken: string) {
   return new Promise(resolve => {
-    const ws = new WebSocket(`ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`);
+    const ws = new WebSocket(
+      `ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`,
+      ['first', `Bearer ${accessToken}`],
+    );
     ws.onopen = async () => {
       // sendEvent
       ws.sendEvent('default', 'Hello Server!');
