@@ -1,14 +1,14 @@
 import { Entity, EntityBaseSimple } from 'vona-module-a-database';
-import { Rule } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapi';
 
 @Entity('aStatus')
 export class EntityStatus extends EntityBaseSimple {
-  @Rule()
+  @Api.field()
   module: string;
 
-  @Rule()
+  @Api.field()
   name: string;
 
-  @Rule()
+  @Api.field()
   value: any;
 }

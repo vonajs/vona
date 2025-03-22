@@ -7,7 +7,7 @@ import { SocketPacket } from 'vona-module-a-socket';
 
 export interface ISocketPacketOptionsPerformAction extends IDecoratorSocketPacketOptions {}
 
-@SocketPacket<ISocketPacketOptionsPerformAction>({ match: 'cabloy', dependencies: 'cabloy-socket:cabloy' })
+@SocketPacket<ISocketPacketOptionsPerformAction>({ match: '/cabloy', dependencies: 'cabloy-socket:cabloy' })
 export class SocketPacketPerformAction extends BeanBase implements ISocketPacketExecute {
   async execute(packet: TypeSocketPacketCabloy, ws: WebSocket, _options: ISocketPacketOptionsPerformAction, next: Next): Promise<void> {
     const eventName: keyof ISocketCabloyEventRecord | undefined = packet[0];

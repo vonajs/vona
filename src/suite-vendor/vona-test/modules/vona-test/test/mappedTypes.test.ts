@@ -10,7 +10,7 @@ import { DtoUser } from '../src/dto/user.ts';
 
 @Dto()
 class DtoUserWithMarried extends OmitClass(DtoUser, ['married']) {
-  @Rule()
+  @Api.field()
   married: boolean;
 }
 

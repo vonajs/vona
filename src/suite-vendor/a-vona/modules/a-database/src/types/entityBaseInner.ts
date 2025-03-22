@@ -1,6 +1,6 @@
 import type { IDecoratorEntityOptions } from './onion/entity.ts';
 import { BeanBaseSimple, cast } from 'vona';
-import { Rule } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapi';
 
 export class EntityBaseInner extends BeanBaseSimple {
   public get $table(): string {
@@ -15,15 +15,15 @@ export class EntityBaseInner extends BeanBaseSimple {
     return columns;
   }
 
-  @Rule()
+  @Api.field()
   createdAt: Date;
 
-  @Rule()
+  @Api.field()
   updatedAt: Date;
 
-  @Rule()
+  @Api.field()
   deleted: boolean;
 
-  @Rule()
+  @Api.field()
   iid: number;
 }

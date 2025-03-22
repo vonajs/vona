@@ -97,7 +97,7 @@ export class ServiceSocket extends BeanBase {
   }
 
   public getNamespace() {
-    return this.ctx.path.substring(1);
+    return this.ctx.path;
   }
 
   private _wrapOnionConnection(item: IOnionSlice<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>) {

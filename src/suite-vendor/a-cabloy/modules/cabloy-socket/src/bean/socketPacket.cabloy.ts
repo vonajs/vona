@@ -8,7 +8,7 @@ import { socketCabloyEventRecordReverse } from '../types/socket.ts';
 
 export interface ISocketPacketOptionsCabloy extends IDecoratorSocketPacketOptions {}
 
-@SocketPacket<ISocketPacketOptionsCabloy>({ match: 'cabloy' })
+@SocketPacket<ISocketPacketOptionsCabloy>({ match: '/cabloy' })
 export class SocketPacketCabloy extends BeanBase implements ISocketPacketExecute {
   async execute(data: any, _ws: WebSocket, _options: ISocketPacketOptionsCabloy, next: Next): Promise<void> {
     const packetInner = (data && typeof data === 'string') ? JSON.parse(data) : [undefined, data];

@@ -1,14 +1,14 @@
-import { Rule } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 
 @Dto()
 export class DtoJwtToken {
-  @Rule()
+  @Api.field()
   accessToken: string;
 
-  @Rule()
+  @Api.field()
   refreshToken: string;
 
-  @Rule()
+  @Api.field()
   expiresIn: number;
 }

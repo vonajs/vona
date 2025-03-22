@@ -2,7 +2,9 @@ import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
 import type { WebSocket } from 'ws';
 
-export interface ISocketNamespaceRecord {}
+export interface ISocketNamespaceRecord {
+  '/': never;
+}
 
 export interface ISocketConnectionRecord {}
 
