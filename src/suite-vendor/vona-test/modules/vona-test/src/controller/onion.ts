@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
+import { Aspect } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
 import { Api, Arg, v } from 'vona-module-a-openapi';
@@ -12,18 +12,18 @@ import { DtoUser } from '../dto/user.ts';
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Web.get('/')
-  @UseMiddleware('a-database:transaction', { enable: true, meta: { mode: 'local' } })
-  @UseGuardGlobal('a-user:passport', { public: true })
+  @Aspect.middleware('a-database:transaction', { enable: true, meta: { mode: 'local' } })
+  @Aspect.guardGlobal('a-user:passport', { public: true })
   index() {
     return this.ctx.dbMeta.transaction.inTransaction;
     // return 'Hello Vona';
   }
 
   @Web.post('//echo')
-  @UseGuardGlobal('a-user:passport', { public: true })
-  @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
+  @Aspect.guardGlobal('a-user:passport', { public: true })
+  @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
-  @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
+  @Aspect.middleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   @Transaction({ isolationLevel: 'read committed', readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(
@@ -38,7 +38,7 @@ export class ControllerOnion extends BeanBase {
 
   @Web.post('echo2/:userId/:userName')
   // @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
-  @UseGuardGlobal('a-user:passport', { public: true })
+  @Aspect.guardGlobal('a-user:passport', { public: true })
   // echo2(@Arg.query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
     @Arg.param('userId', v.description($locale('UserId')), v.example('example:1')) _userId: number,
@@ -53,7 +53,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Web.get('echo3/:userId')
-  @UseGuardGlobal('a-user:passport', { public: true })
+  @Aspect.guardGlobal('a-user:passport', { public: true })
   echo3(
     @Arg.param('userId') _userId: number,
     @Arg.query('id', v.optional()) id: number,
@@ -68,8 +68,8 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Web.post('echo4')
-  @UseGuardGlobal('a-user:passport', { public: true })
-  @UseFilterGlobal('a-error:error', { enable: true, logs: { 422: true } })
+  @Aspect.guardGlobal('a-user:passport', { public: true })
+  @Aspect.filterGlobal('a-error:error', { enable: true, logs: { 422: true } })
   @Api.body(v.array(DtoUser))
   echo4(@Arg.body(v.optional(), v.array(DtoUser)) users: DtoUser[]): DtoUser[] {
     return users;
