@@ -14,7 +14,7 @@ describe.only('upload.test.ts', () => {
         body: formData,
       });
       const data = await res.json();
-      assert.equal(data, true);
+      assert.equal(data.data, true);
     });
   });
 });

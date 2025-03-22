@@ -8,5 +8,6 @@ export class ControllerUpload extends BeanBase {
   @Public()
   fields() {
     console.log(this.ctx.req);
+    return true;
   }
 }
