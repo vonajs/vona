@@ -36,11 +36,6 @@ export class ServiceSocket extends BeanBase {
           return ws;
         },
       });
-      // headers
-      const headers = _headersFromProtocol(ws.protocol);
-      if (headers) {
-        Object.assign(ctx.req.headers, headers);
-      }
       // enter
       try {
         await this.composeSocketConnections({ method: 'enter', ws });
@@ -148,9 +143,4 @@ function _patchPacketNext(data: ISocketPacketComposeData, next) {
     const context = args.length === 0 ? data.data : args[0];
     return next({ data: context, ws: data.ws });
   };
-}
-
-function _headersFromProtocol(protocol?: string) {
-  if (!protocol || !protocol.startsWith('__headers__')) return;
-  return JSON.parse(decodeURIComponent(protocol.substring('__headers__'.length)));
 }

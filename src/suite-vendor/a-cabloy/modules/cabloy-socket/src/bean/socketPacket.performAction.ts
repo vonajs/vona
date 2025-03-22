@@ -17,7 +17,7 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
     try {
       let res;
       if (data.p === 'handshake') {
-        res = 2;
+        res = await this._handShake(data.h);
       } else {
         res = await this.bean.executor.performActionInner(data.m, data.p as never, {
           innerAccess: false,
@@ -28,6 +28,21 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
       ws.sendEvent('performActionBack', { id: data.id, c: 0, d: res });
     } catch (err: any) {
       ws.sendEvent('performActionBack', { id: data.id, c: err.code, m: err.message });
+    }
+  }
+
+  private async _handShake(headers?: object) {
+    // headers
+    if (headers) {
+      Object.assign(this.ctx.req.headers, headers);
+    }
+    // auth token
+    if (!this.bean.passport.getCurrent()) {
+      await this.bean.passport.checkAuthToken();
+    }
+    // check current
+    if (!this.bean.passport.getCurrent()) {
+      await this.bean.passport.signinWithAnonymous();
     }
   }
 }
