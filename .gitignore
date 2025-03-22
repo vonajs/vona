@@ -7,8 +7,6 @@ miniprogram_npm
 /docs-api
 /run
 
-.gitmodules
-
 .idea
 .DS_Store
 
