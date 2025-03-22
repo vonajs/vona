@@ -370,6 +370,7 @@ export * from '../controller/queue.ts';
 export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
 export * from '../controller/transaction.ts';
+export * from '../controller/upload.ts';
 /** summerCache: end */
 /** dto: begin */
 export * from '../dto/profile.ts';
@@ -393,6 +394,7 @@ declare module 'vona-module-a-web' {
     'vona-test:summer': IDecoratorControllerOptions;
     'vona-test:tail': IDecoratorControllerOptions;
     'vona-test:transaction': IDecoratorControllerOptions;
+    'vona-test:upload': IDecoratorControllerOptions;
   }
 
 }
@@ -447,6 +449,11 @@ declare module 'vona-module-vona-test' {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
+
+  export interface ControllerUpload {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
 }
 /** controller: end */
 /** controller: begin */
@@ -480,6 +487,7 @@ declare module 'vona-module-a-web' {
     '/vona/test/tail': '/vona/test/tail';
     '/vona/test/transaction/fail': '/vona/test/transaction/fail';
     '/vona/test/transaction/success': '/vona/test/transaction/success';
+    '/vona/test/upload/fields': '/vona/test/upload/fields';
   }
 
 }
