@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
-import { cast, MixinClass, OmitClass, PartialClass, PickClass } from 'vona';
+import { cast, ClassMapped } from 'vona';
 import { app } from 'vona-mock';
 import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
@@ -9,7 +9,7 @@ import { DtoProfile } from '../src/dto/profile.ts';
 import { DtoUser } from '../src/dto/user.ts';
 
 @Dto()
-class DtoUserWithMarried extends OmitClass(DtoUser, ['married']) {
+class DtoUserWithMarried extends ClassMapped.omit(DtoUser, ['married']) {
   @Api.field()
   married: boolean;
 }
@@ -26,7 +26,7 @@ describe('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew, data, JSON.stringify(err, null, 2));
       // OmitClass
       const [, err2] = await catchError(async () => {
-        return await serviceValidator.validate(OmitClass(DtoUser, ['married']), data, { strict: true });
+        return await serviceValidator.validate(ClassMapped.omit(DtoUser, ['married']), data, { strict: true });
       });
       assert.equal(cast(err2?.message)[0]?.keys[0], 'married');
       // OmitClass and inherit
@@ -36,17 +36,17 @@ describe('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew3, data);
       // PickClass
       const [, err4] = await catchError(async () => {
-        return await serviceValidator.validate(PickClass(DtoUser, ['id', 'name']), data, { strict: true });
+        return await serviceValidator.validate(ClassMapped.pick(DtoUser, ['id', 'name']), data, { strict: true });
       });
       assert.equal(cast(err4?.message)[0]?.keys[0], 'married');
       // PartialClass
       const [dataNew5] = await catchError(async () => {
-        return await serviceValidator.validate(PartialClass(DtoUser), {}, { strict: true });
+        return await serviceValidator.validate(ClassMapped.partial(DtoUser), {}, { strict: true });
       });
       assert.deepEqual(dataNew5, {});
       const [dataNew6] = await catchError(async () => {
         return await serviceValidator.validate(
-          PartialClass(DtoUser, ['id', 'name']),
+          ClassMapped.partial(DtoUser, ['id', 'name']),
           { married: true },
           { strict: true },
         );
@@ -54,7 +54,7 @@ describe('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew6, { married: true });
       // MixinClass
       const [, err7] = await catchError(async () => {
-        return await serviceValidator.validate(MixinClass(DtoUser, DtoProfile), data, { strict: true });
+        return await serviceValidator.validate(ClassMapped.mixin(DtoUser, DtoProfile), data, { strict: true });
       });
       assert.equal(cast(err7?.message)[0]?.path[0], 'email');
     });

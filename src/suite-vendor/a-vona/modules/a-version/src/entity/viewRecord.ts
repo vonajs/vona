@@ -1,8 +1,8 @@
-import { OmitClass } from 'vona';
+import { ClassMapped } from 'vona';
 import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 
 @Entity('aViewRecord')
-export class EntityViewRecord extends OmitClass(EntityBaseSimple, ['iid']) {
+export class EntityViewRecord extends ClassMapped.omit(EntityBaseSimple, ['iid']) {
   viewName: string;
   viewSql: string;
 }

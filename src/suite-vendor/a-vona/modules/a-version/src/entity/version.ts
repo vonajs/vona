@@ -1,8 +1,8 @@
-import { OmitClass } from 'vona';
+import { ClassMapped } from 'vona';
 import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 
 @Entity('aVersion')
-export class EntityVersion extends OmitClass(EntityBaseSimple, ['iid', 'deleted']) {
+export class EntityVersion extends ClassMapped.omit(EntityBaseSimple, ['iid', 'deleted']) {
   module: string;
   version: number;
 }
