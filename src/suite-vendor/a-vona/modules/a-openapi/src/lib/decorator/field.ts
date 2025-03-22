@@ -5,7 +5,7 @@ import { appMetadata, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../../types/decorator.ts';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 
-export function Rule(...schemaLikes: SchemaLike[]): PropertyDecorator {
+export function Field(...schemaLikes: SchemaLike[]): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
     //
     registerMappedClassMetadataKey(target, SymbolDecoratorRule, {

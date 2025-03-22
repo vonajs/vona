@@ -4,6 +4,7 @@ import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
 import { appMetadata } from 'vona';
 import { SymbolOpenApiOptions } from '../../types/api.ts';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
+import { Field } from './field.ts';
 
 export function setPublic(target: object, prop: MetadataKey, value: boolean) {
   const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
@@ -59,4 +60,4 @@ function tags(tags: string[]): ClassDecorator & MethodDecorator {
   } as any;
 }
 
-export const Api = { contentType, body, bodyCustom, exclude, tags };
+export const Api = { field: Field, contentType, body, bodyCustom, exclude, tags };
