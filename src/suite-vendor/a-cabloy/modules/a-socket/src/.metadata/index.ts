@@ -6,6 +6,7 @@ import type { ISocketConnectionOptionsAppReady } from '../bean/socketConnection.
 import type { ISocketConnectionOptionsBase } from '../bean/socketConnection.base.ts';
 import type { ISocketConnectionOptionsCors } from '../bean/socketConnection.cors.ts';
 import type { ISocketConnectionOptionsInstance } from '../bean/socketConnection.instance.ts';
+import type { ISocketConnectionOptionsPassport } from '../bean/socketConnection.passport.ts';
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
@@ -48,6 +49,7 @@ declare module 'vona' {
 export * from '../bean/socketConnection.base.ts';
 export * from '../bean/socketConnection.cors.ts';
 export * from '../bean/socketConnection.instance.ts';
+export * from '../bean/socketConnection.passport.ts';
 /** socketConnection: end */
 /** config: begin */
 export * from '../config/config.ts';
@@ -58,6 +60,7 @@ declare module 'vona-module-a-socket' {
     'a-socket:base': ISocketConnectionOptionsBase;
     'a-socket:cors': ISocketConnectionOptionsCors;
     'a-socket:instance': ISocketConnectionOptionsInstance;
+    'a-socket:passport': ISocketConnectionOptionsPassport;
   }
 
 }
@@ -79,6 +82,11 @@ declare module 'vona-module-a-socket' {
   }
 
   export interface SocketConnectionInstance {
+    /** @internal */
+    get scope(): ScopeModuleASocket;
+  }
+
+  export interface SocketConnectionPassport {
     /** @internal */
     get scope(): ScopeModuleASocket;
   }
