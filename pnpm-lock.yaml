@@ -23,6 +23,9 @@ importers:
       '@cabloy/set':
         specifier: workspace:^
         version: link:packages-utils/set
+      '@cabloy/socket':
+        specifier: workspace:^
+        version: link:packages-utils/socket
       '@cabloy/utils':
         specifier: workspace:^
         version: link:packages-utils/utils
@@ -185,6 +188,9 @@ importers:
       vona-module-a-swagger:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-swagger
+      vona-module-a-upload:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-upload
       vona-module-a-user:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-user
@@ -1061,6 +1067,9 @@ importers:
       vona-module-a-summer:
         specifier: workspace:^
         version: link:modules/a-summer
+      vona-module-a-upload:
+        specifier: workspace:^
+        version: link:modules/a-upload
       vona-module-a-user:
         specifier: workspace:^
         version: link:modules/a-user
@@ -1538,6 +1547,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-summer:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-upload:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

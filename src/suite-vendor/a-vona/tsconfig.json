@@ -106,6 +106,9 @@
     },
     {
       "path": "modules/a-jwt/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-upload/tsconfig.build.json"
     }
   ],
   "exclude": [
