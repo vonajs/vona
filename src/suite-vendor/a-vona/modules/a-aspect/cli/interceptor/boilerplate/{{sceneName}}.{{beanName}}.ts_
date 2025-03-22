@@ -1,5 +1,7 @@
-import { BeanBase, Next } from 'vona';
-import { IDecoratorInterceptorOptions, IInterceptorExecute, Interceptor } from 'vona-module-a-aspect';
+import type { Next } from 'vona';
+import type { IDecoratorInterceptorOptions, IInterceptorExecute } from 'vona-module-a-aspect';
+import { BeanBase } from 'vona';
+import { Interceptor } from 'vona-module-a-aspect';
 
 export interface IInterceptorOptions<%=argv.beanNameCapitalize%> extends IDecoratorInterceptorOptions {}
 
