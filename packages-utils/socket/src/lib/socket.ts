@@ -66,5 +66,5 @@ WebSocket.prototype.closeEvents = function () {
 };
 
 WebSocket.prototype.protocolFromHeaders = function (headers: object) {
-  return encodeURIComponent(JSON.stringify(headers));
+  return `__headers__${encodeURIComponent(JSON.stringify(headers))}`;
 };

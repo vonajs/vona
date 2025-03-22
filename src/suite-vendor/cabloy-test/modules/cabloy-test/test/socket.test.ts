@@ -15,7 +15,7 @@ describe.only('socket.test.ts', () => {
 function test(accessToken: string) {
   return new Promise(resolve => {
     const headers = {
-      Authorization: `Bearer ${accessToken}`,
+      authorization: `Bearer ${accessToken}`,
     };
     const ws = new WebSocket(
       `ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`,
