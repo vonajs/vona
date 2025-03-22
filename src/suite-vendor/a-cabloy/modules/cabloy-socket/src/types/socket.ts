@@ -25,6 +25,7 @@ export interface ISocketCabloyPerformActionOptions {
 export interface ISocketCabloyPerformActionOptionsInner {
   id: number;
   m: TypeSocketCabloyPerformActionMethod;
+  q?: object;
   p: string;
   b?: any;
   h?: object;

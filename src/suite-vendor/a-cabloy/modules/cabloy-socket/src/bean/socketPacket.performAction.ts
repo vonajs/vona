@@ -21,6 +21,7 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
       } else {
         res = await this.bean.executor.performActionInner(data.m, data.p as never, {
           innerAccess: false,
+          query: data.q,
           body: data.b,
           headers: data.h,
         });

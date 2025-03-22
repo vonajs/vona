@@ -46,6 +46,7 @@ WebSocket.prototype.performAction = function (
       id,
       m: method,
       p: path,
+      q: options?.query,
       b: options?.body,
       h: options?.headers,
     };
