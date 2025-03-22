@@ -65,6 +65,7 @@ WebSocket.prototype.closeEvents = function () {
   }
 };
 
-WebSocket.prototype.protocolFromHeaders = function (headers: object) {
-  return `__headers__${encodeURIComponent(JSON.stringify(headers))}`;
+WebSocket.prototype.handshake = async function (headers?: object): Promise<void> {
+  if (!headers) return;
+  await this.performAction('post', 'handshake', { headers });
 };

@@ -50,6 +50,6 @@ declare global {
       options?: ISocketCabloyPerformActionOptions,
     ): Promise<any>;
     closeEvents(): void;
-    protocolFromHeaders(headers: object): string;
+    handshake(headers?: object): Promise<void>;
   }
 }

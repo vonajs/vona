@@ -14,14 +14,15 @@ describe.only('socket.test.ts', () => {
 
 function test(accessToken: string) {
   return new Promise(resolve => {
-    const headers = {
-      authorization: `Bearer ${accessToken}`,
-    };
     const ws = new WebSocket(
       `ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`,
-      WebSocket.prototype.protocolFromHeaders(headers),
     );
     ws.onopen = async () => {
+      // handshake
+      const headers = {
+        authorization: `Bearer ${accessToken}`,
+      };
+      await ws.handshake(headers);
       // sendEvent
       ws.sendEvent('default', 'Hello Server!');
       // performAction: success
