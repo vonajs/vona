@@ -26,9 +26,9 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
           headers: data.h,
         });
       }
-      ws.sendEvent('performActionBack', { id: data.id, c: 0, d: res });
+      ws.sendEvent('performActionBack', { i: data.i, c: 0, d: res });
     } catch (err: any) {
-      ws.sendEvent('performActionBack', { id: data.id, c: err.code, m: err.message });
+      ws.sendEvent('performActionBack', { i: data.i, c: err.code, m: err.message });
     }
   }
 

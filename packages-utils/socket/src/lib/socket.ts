@@ -16,8 +16,9 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
   const packet: TypeSocketPacketCabloy = [eventName, packetInner[1]];
   if (packet[0] === 'performActionBack') {
     const result = packet[1];
-    const performActionBack = this[SymbolPerformActionRecord][result.id];
-    delete this[SymbolPerformActionRecord][result.id];
+    const id = result.i;
+    const performActionBack = this[SymbolPerformActionRecord][id];
+    delete this[SymbolPerformActionRecord][id];
     if (performActionBack) {
       if (result.c === 0) {
         performActionBack.resolve(result.d);
@@ -43,7 +44,7 @@ WebSocket.prototype.performAction = function (
     if (!this[SymbolPerformActionRecord]) this[SymbolPerformActionRecord] = {};
     this[SymbolPerformActionRecord][id] = { resolve, reject };
     const data: ISocketCabloyPerformActionOptionsInner = {
-      id,
+      i: id,
       m: method,
       p: path,
       q: options?.query,

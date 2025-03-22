@@ -22,7 +22,7 @@ export interface ISocketCabloyPerformActionOptions {
   headers?: object;
 }
 export interface ISocketCabloyPerformActionOptionsInner {
-  id: number;
+  i: number;
   m: TypeSocketCabloyPerformActionMethod;
   p: string;
   q?: object;
