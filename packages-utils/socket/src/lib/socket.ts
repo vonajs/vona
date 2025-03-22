@@ -64,3 +64,7 @@ WebSocket.prototype.closeEvents = function () {
     callback.reject(err);
   }
 };
+
+WebSocket.prototype.protocolFromHeaders = function (headers: object) {
+  return encodeURIComponent(JSON.stringify(headers));
+};

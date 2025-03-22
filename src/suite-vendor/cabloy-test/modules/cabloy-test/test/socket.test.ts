@@ -2,19 +2,24 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe('socket.test.ts', () => {
+describe.only('socket.test.ts', () => {
   it('action:socket', async () => {
-    const jwt = await app.bean.passport.signinMock();
-    await test(jwt.accessToken);
-    await app.bean.passport.signout();
+    await app.bean.executor.mockCtx(async () => {
+      const jwt = await app.bean.passport.signinMock();
+      await test(jwt.accessToken);
+      await app.bean.passport.signout();
+    });
   });
 });
 
 function test(accessToken: string) {
   return new Promise(resolve => {
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
     const ws = new WebSocket(
       `ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}/cabloy?name=zhennann`,
-      ['first', `Bearer ${accessToken}`],
+      WebSocket.prototype.protocolFromHeaders(headers),
     );
     ws.onopen = async () => {
       // sendEvent

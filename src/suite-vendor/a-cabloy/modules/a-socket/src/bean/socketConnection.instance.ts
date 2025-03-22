@@ -11,6 +11,7 @@ export class SocketConnectionInstance extends BeanBase implements ISocketConnect
   async enter(_ws: WebSocket, _options: ISocketConnectionOptionsInstance, next: Next): Promise<void> {
     // init instance
     await this.$scope.instance.service.instance.initInstance();
+    console.log('---------------------:', _ws.protocol);
     // next
     return next();
   }
