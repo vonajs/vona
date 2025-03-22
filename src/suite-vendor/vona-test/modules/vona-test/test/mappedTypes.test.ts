@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
 import { cast, MixinClass, OmitClass, PartialClass, PickClass } from 'vona';
 import { app } from 'vona-mock';
-import { Rule } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 import { DtoProfile } from '../src/dto/profile.ts';
 import { DtoUser } from '../src/dto/user.ts';
