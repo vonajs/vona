@@ -13,12 +13,18 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
     const eventName: keyof ISocketCabloyEventRecord | undefined = packet[0];
     const data: ISocketCabloyPerformActionOptionsInner = packet[1];
     if (eventName !== 'performAction') return next();
+    // handshake
     try {
-      const res = await this.bean.executor.performActionInner(data.m, data.p as never, {
-        innerAccess: false,
-        body: data.b,
-        headers: data.h,
-      });
+      let res;
+      if (data.p === 'handshake') {
+        res = 2;
+      } else {
+        res = await this.bean.executor.performActionInner(data.m, data.p as never, {
+          innerAccess: false,
+          body: data.b,
+          headers: data.h,
+        });
+      }
       ws.sendEvent('performActionBack', { id: data.id, c: 0, d: res });
     } catch (err: any) {
       ws.sendEvent('performActionBack', { id: data.id, c: err.code, m: err.message });
