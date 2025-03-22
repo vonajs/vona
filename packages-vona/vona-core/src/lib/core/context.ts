@@ -60,12 +60,9 @@ export const contextBase: ContextBase = {
   set ctxCaller(value) {
     // ctxCaller
     this[CTXCALLER] = value;
-    // innerAccess
-    this.innerAccess = true;
+    // todo: 尽量不要在这里设置，容易产生黑盒
     // transaction
     cast(this).dbMeta = value.dbMeta;
-    // dbLevel
-    this.dbLevel = value.dbLevel;
   },
   tail(cb) {
     if (!cast(this).dbMeta.master) {

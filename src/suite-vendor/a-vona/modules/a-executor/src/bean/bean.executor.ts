@@ -153,8 +153,6 @@ export class BeanExecutor extends BeanBase {
     return await this.runInAnonymousContextScope(
       async () => {
         const ctx = this.app.ctx;
-        // innerAccess
-        ctx.innerAccess = options.innerAccess !== false;
         // ctxCaller
         if (ctxCaller) {
           // delegateProperties
@@ -170,6 +168,8 @@ export class BeanExecutor extends BeanBase {
             request: { headers: options.extraData?.headers },
           });
         }
+        // innerAccess
+        ctx.innerAccess = options.innerAccess !== false;
         // dbLevel
         ctx.dbLevel = options.dbLevel;
         // execute
