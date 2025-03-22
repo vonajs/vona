@@ -1,10 +1,10 @@
 import { BeanBase } from 'vona';
-import { UseAopMethod } from 'vona-module-a-aspect';
+import { Aspect } from 'vona-module-a-aspect';
 import { Service } from 'vona-module-a-web';
 
 class ServiceAopMethodBase extends BeanBase {
-  @UseAopMethod('vona-test:test', { wrapper: '+' })
-  @UseAopMethod('vona-test:test', { wrapper: '-' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '+' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '-' })
   testSyncBase() {
     return 'hello';
   }
@@ -14,20 +14,20 @@ class ServiceAopMethodBase extends BeanBase {
 export class ServiceAopMethod extends ServiceAopMethodBase {
   private _name: string = '';
 
-  @UseAopMethod('vona-test:test', { wrapper: '+' })
-  @UseAopMethod('vona-test:test', { wrapper: '-' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '+' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '-' })
   testSync() {
     return 'hello';
   }
 
-  @UseAopMethod('vona-test:test', { wrapper: '+' })
-  @UseAopMethod('vona-test:test', { wrapper: '-' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '+' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '-' })
   async testAsync() {
     return 'hello';
   }
 
-  @UseAopMethod('vona-test:test', { wrapper: '+' })
-  @UseAopMethod('vona-test:test', { wrapper: '-' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '+' })
+  @Aspect.aopMethod('vona-test:test', { wrapper: '-' })
   get name() {
     return this._name;
   }

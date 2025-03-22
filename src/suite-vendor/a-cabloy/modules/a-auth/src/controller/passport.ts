@@ -3,7 +3,7 @@ import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
 import { BeanBase, cast, deepExtend } from 'vona';
-import { UseMiddlewareGlobal } from 'vona-module-a-aspect';
+import { Aspect } from 'vona-module-a-aspect';
 import { Api, Arg } from 'vona-module-a-openapi';
 import { Public } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
@@ -53,7 +53,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.get('callback')
   @Public()
-  @UseMiddlewareGlobal('a-instance:instance', { enable: false })
+  @Aspect.middlewareGlobal('a-instance:instance', { enable: false })
   @Api.exclude()
   async callback() {
     const code = this.ctx.query.code as string;

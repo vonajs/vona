@@ -37,7 +37,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Web.post('echo2/:userId/:userName')
-  // @UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
+  // @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Aspect.guardGlobal('a-user:passport', { public: true })
   // echo2(@Arg.query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
