@@ -4,7 +4,7 @@ import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
 import { ExtendKnex } from './extend/index.ts';
 import { ServiceDbMeta } from './service/dbMeta.ts';
 
-const DATABASEMETA = Symbol('Context#__databasemeta');
+const SymbolDbMeta = Symbol('SymbolDbMeta');
 const SymbolDbLevel = Symbol('SymbolDbLevel');
 
 export class Main extends BeanSimple implements IModuleMain {
@@ -49,10 +49,10 @@ export class Main extends BeanSimple implements IModuleMain {
     Object.defineProperty(this.app.context, 'dbMeta', {
       enumerable: false,
       get(this: VonaContext) {
-        if (!this[DATABASEMETA]) {
-          this[DATABASEMETA] = this.bean._newBean(ServiceDbMeta);
+        if (!this[SymbolDbMeta]) {
+          this[SymbolDbMeta] = this.bean._newBean(ServiceDbMeta);
         }
-        return this[DATABASEMETA];
+        return this[SymbolDbMeta];
       },
       set(metaCaller: ServiceDbMeta) {
         // transaction
