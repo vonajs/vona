@@ -55,7 +55,7 @@ export class AppUtil extends BeanSimple {
   }
 
   getAbsoluteUrlByApiPath(path: string) {
-    return this.getAbsoluteUrl(this.combineApiPath('', path, true, true));
+    return this.getAbsoluteUrl(this.combineApiPath(path, '', true, true));
   }
 
   combineApiPathControllerAndActionRaw(

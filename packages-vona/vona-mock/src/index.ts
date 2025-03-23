@@ -9,12 +9,12 @@ export const app: VonaApplication = useApp();
 
 export function mockPath(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  return app.util.combineApiPath(moduleInfo.relativeName, path, false, true);
+  return app.util.combineApiPath(path, moduleInfo.relativeName, false, true);
 }
 
 export function mockUrl(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  return app.util.combineApiPath(moduleInfo.relativeName, path, true, true);
+  return app.util.combineApiPath(path, moduleInfo.relativeName, true, true);
 }
 
 export function mockModuleInfo(): IModuleInfo {
