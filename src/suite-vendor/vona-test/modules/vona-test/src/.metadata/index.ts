@@ -465,6 +465,7 @@ declare module 'vona-module-a-web' {
     '/vona/test/onion/echo3/:_string_': '/vona/test/onion/echo3:_userId_';
     '/vona/test/onion/echo3/:userId': `/vona/test/onion/echo3/${string}`;
     '/vona/test/onion/echo5': '/vona/test/onion/echo5';
+    '/vona/test/onion/echo6': '/vona/test/onion/echo6';
     '/vona/test/passport/echo/:_string_': '/vona/test/passport/echo:_name_';
     '/vona/test/passport/echo/:name': `/vona/test/passport/echo/${string}`;
     '/vona/test/passport/isAuthenticated': '/vona/test/passport/isAuthenticated';
@@ -476,7 +477,6 @@ declare module 'vona-module-a-web' {
     '/vona/test/onion/echo2/:_string_/:_string_': '/vona/test/onion/echo2:_userId_:_userName_';
     '/vona/test/onion/echo2/:userId/:userName': `/vona/test/onion/echo2/${string}/${string}`;
     '/vona/test/onion/echo4': '/vona/test/onion/echo4';
-    '/vona/test/onion/echo6': '/vona/test/onion/echo6';
     '/vona/test/passport/login': '/vona/test/passport/login';
     '/vona/test/passport/refresh': '/vona/test/passport/refresh';
     '/vona/test/passport/logout': '/vona/test/passport/logout';

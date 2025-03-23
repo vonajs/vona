@@ -81,7 +81,8 @@ export class ControllerOnion extends BeanBase {
     return ids;
   }
 
-  @Web.post('echo6')
+  @Web.get('echo6')
+  @Passport.admin()
   echo6() {
     return this.bean.passport.isAuthenticated;
   }
