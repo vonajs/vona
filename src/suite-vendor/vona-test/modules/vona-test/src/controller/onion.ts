@@ -3,7 +3,7 @@ import { Aspect } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
 import { Transaction } from 'vona-module-a-database';
 import { Api, Arg, v } from 'vona-module-a-openapi';
-import { Public } from 'vona-module-a-user';
+import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
 import { $locale } from '../.metadata/index.ts';
@@ -74,7 +74,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Web.get('echo5')
-  @Public()
+  @Passport.public()
   echo5(@Arg.query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     // const ctx = this.app.currentContext;
     // this.$logger.silly(ctx === this.ctx);
