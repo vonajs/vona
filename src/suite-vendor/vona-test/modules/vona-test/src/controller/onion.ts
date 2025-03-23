@@ -59,8 +59,6 @@ export class ControllerOnion extends BeanBase {
     @Arg.query('id', v.optional()) id: number,
     @Arg.headers('Accept', v.description($locale('UserId'))) accept: string,
   ) {
-    // this.scope.util.combineApiPath
-
     this.$logger.silly(this.ctx.path);
     // const ctx = this.app.currentContext;
     // this.$logger.silly(ctx === this.ctx);

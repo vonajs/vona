@@ -16,7 +16,7 @@ export class BeanExecutor extends BeanBase {
     options?: IPerformActionOptions,
   ): Promise<any> {
     // url
-    const url = this.app.util.combineApiPath('', path as any, true, true);
+    const url = this.app.util.combineApiPath(path as any, '', true, true);
     return await this.performActionInner(method, url, options);
   }
 

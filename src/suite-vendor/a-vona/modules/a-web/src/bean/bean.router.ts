@@ -52,7 +52,7 @@ export class BeanRouter extends BeanBase {
     fn: Router.Handler<Router.HTTPVersion.V1>,
   ) {
     const app = this.app;
-    const _path = app.util.combineApiPath(moduleName, path, true, simplify);
+    const _path = app.util.combineApiPath(path, moduleName, true, simplify);
     app.router.on(method, _path, fn);
   }
 
@@ -63,7 +63,7 @@ export class BeanRouter extends BeanBase {
     simplify: boolean,
   ) {
     const app = this.app;
-    const _path = app.util.combineApiPath(moduleName, path, true, simplify);
+    const _path = app.util.combineApiPath(path, moduleName, true, simplify);
     app.router.off(method, _path);
   }
 
@@ -74,7 +74,7 @@ export class BeanRouter extends BeanBase {
     simplify: boolean,
   ): any {
     const app = this.app;
-    const _path = app.util.combineApiPath(moduleName, path, true, simplify);
+    const _path = app.util.combineApiPath(path, moduleName, true, simplify);
     return app.router.findRoute(method, _path);
   }
 
