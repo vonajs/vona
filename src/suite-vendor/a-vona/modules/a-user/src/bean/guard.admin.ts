@@ -8,7 +8,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
   passWhenAdmin: boolean;
 }
 
-@Guard<IGuardOptionsAdmin>({ admin: false, passWhenAdmin: true })
+@Guard<IGuardOptionsAdmin>({ admin: true, passWhenAdmin: true })
 export class GuardAdmin extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
     if (options.admin) {
