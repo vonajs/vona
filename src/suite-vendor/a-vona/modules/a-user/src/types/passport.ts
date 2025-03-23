@@ -8,6 +8,7 @@ export interface IPassportBase {
 }
 
 export interface IPassportAdapter {
+  isAdmin(user: IUserBase): Promise<boolean>;
   setCurrent(passport: IPassportBase | undefined): Promise<IPassportBase | undefined>;
   serialize(passport: IPassportBase): Promise<IPayloadDataBase>;
   deserialize(payloadData: IPayloadDataBase): Promise<IPassportBase | undefined>;

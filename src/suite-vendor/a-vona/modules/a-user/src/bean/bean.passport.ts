@@ -35,6 +35,11 @@ export class BeanPassport extends BeanBase {
     return !!user && !$getUserAnonymous(user);
   }
 
+  public async isAdmin(): Promise<boolean> {
+    const user = this.getCurrentUser();
+    return !!user && this.isAuthenticated && await this.passportAdapter.isAdmin(user);
+  }
+
   public async setCurrent(passport: IPassportBase | undefined) {
     this.ctx.state.passport = await this.passportAdapter.setCurrent(passport);
   }
