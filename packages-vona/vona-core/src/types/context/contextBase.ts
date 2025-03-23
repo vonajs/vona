@@ -11,8 +11,6 @@ export interface ContextBase {
   get config(): VonaConfig;
   get innerAccess(): boolean;
   set innerAccess(value: boolean);
-  get dbLevel(): number;
-  set dbLevel(value: number | undefined);
   get ctxCaller(): VonaContext;
   set ctxCaller(value: VonaContext);
   tail: (cb) => any;

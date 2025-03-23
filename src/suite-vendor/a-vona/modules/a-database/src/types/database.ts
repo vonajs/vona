@@ -25,6 +25,8 @@ declare module 'vona' {
   }
 
   export interface VonaContext {
+    get dbLevel(): number;
+    set dbLevel(value: number | undefined);
     get db(): Knex | Knex.Transaction;
     get dbOriginal(): Knex;
     get dbMeta(): ServiceDbMeta;

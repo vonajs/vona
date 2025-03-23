@@ -10,7 +10,6 @@ const BEAN = Symbol.for('Context#__bean');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
 const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
-const DBLEVEL = Symbol.for('Context#__dblevel');
 const ONIONSDYNAMIC = Symbol.for('Context#__onionsdynamic');
 
 export const contextBase: ContextBase = {
@@ -47,12 +46,6 @@ export const contextBase: ContextBase = {
   },
   set innerAccess(value) {
     this[INNERACCESS] = value;
-  },
-  get dbLevel(): number {
-    return this[DBLEVEL] ?? 0;
-  },
-  set dbLevel(value: number | undefined) {
-    this[DBLEVEL] = value;
   },
   get ctxCaller() {
     return this[CTXCALLER];

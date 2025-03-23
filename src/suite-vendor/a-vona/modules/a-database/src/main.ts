@@ -5,6 +5,7 @@ import { ExtendKnex } from './extend/index.ts';
 import { ServiceDbMeta } from './service/dbMeta.ts';
 
 const DATABASEMETA = Symbol('Context#__databasemeta');
+const SymbolDbLevel = Symbol('SymbolDbLevel');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
@@ -16,6 +17,16 @@ export class Main extends BeanSimple implements IModuleMain {
   async moduleLoaded() {
     // ExtendKnex
     ExtendKnex(this.app);
+    // dbLevel
+    Object.defineProperty(this.app.context, 'dbLevel', {
+      enumerable: false,
+      get(this: VonaContext) {
+        return this[SymbolDbLevel] ?? 0;
+      },
+      set(value: number | undefined) {
+        this[SymbolDbLevel] = value;
+      },
+    });
     // db
     Object.defineProperty(this.app.context, 'db', {
       enumerable: false,
