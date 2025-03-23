@@ -18,7 +18,7 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
   async execute(options: IInterceptorOptionsUpload, next: Next) {
     // recieve
     const [fields, files, filesCleanup] = await this._receive(options);
-    this.ctx[SymbolUploadValue] = [fields, files];
+    this.ctx[SymbolUploadValue] = { fields, files };
     // next
     let res;
     try {

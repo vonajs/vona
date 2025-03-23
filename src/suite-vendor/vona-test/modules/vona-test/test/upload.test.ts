@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { $apiPath } from 'vona-module-a-web';
 
-describe('upload.test.ts', () => {
+describe.only('upload.test.ts', () => {
   it('action:upload:fields', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
@@ -14,7 +14,7 @@ describe('upload.test.ts', () => {
         body: formData,
       });
       const data = await res.json();
-      assert.equal(data.data, true);
+      assert.equal(data.data.fields.find(item => item.name === 'name')?.value, 'zhennann');
     });
   });
 });

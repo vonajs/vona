@@ -1,4 +1,6 @@
 import { BeanBase } from 'vona';
+import { Aspect } from 'vona-module-a-aspect';
+import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
@@ -6,8 +8,9 @@ import { Controller, Web } from 'vona-module-a-web';
 export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()
+  @Aspect.interceptor('a-upload:upload')
   fields() {
-    console.log(this.ctx.req);
-    return true;
+    console.log(this.ctx[SymbolUploadValue]);
+    return this.ctx[SymbolUploadValue];
   }
 }
