@@ -7,7 +7,7 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
     return {
       title: 'home',
-      path: `http://localhost:${process.env.SERVER_LISTEN_PORT}`,
+      path: this.app.util.getAbsoluteUrl(),
     };
   }
 }
