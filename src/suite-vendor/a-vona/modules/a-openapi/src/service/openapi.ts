@@ -188,7 +188,7 @@ export class ServiceOpenapi extends BeanBase {
     // tags
     let tags: string[] | undefined = actionOpenApiOptions?.tags ?? controllerOpenApiOptions?.tags;
     if (!tags || tags.length === 0) {
-      tags = [toUpperCaseFirstChar(this.app.util.combineResourceName(info.relativeName, beanOptions.name, true, true))];
+      tags = [toUpperCaseFirstChar(this.app.util.combineResourceName(beanOptions.name, info.relativeName, true, true))];
     }
     // operationId
     let operationId = actionOpenApiOptions?.operationId ?? actionKey;

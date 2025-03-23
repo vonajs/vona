@@ -118,17 +118,17 @@ export class AppUtil extends BeanSimple {
     // ignore module path
     if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
-    const parts = combineResourceName(moduleName ?? '', path, simplify, true);
+    const parts = combineResourceName(path, moduleName ?? '', simplify, true);
     return `${globalPrefix}/${parts.join('/')}`;
   }
 
   combineResourceName(
-    moduleName: ModuleInfo.IModuleInfo | string,
     resourceName: string | undefined,
+    moduleName: ModuleInfo.IModuleInfo | string,
     simplify?: boolean,
     simplifyProviderId?: boolean,
   ): string {
-    const parts = combineResourceName(moduleName, resourceName, simplify, simplifyProviderId);
+    const parts = combineResourceName(resourceName, moduleName, simplify, simplifyProviderId);
     return toLowerCaseFirstChar(stringToCapitalize(parts));
   }
 
@@ -299,8 +299,8 @@ export class AppUtil extends BeanSimple {
 }
 
 export function combineResourceName(
-  moduleName: ModuleInfo.IModuleInfo | string,
   resourceName: string | undefined,
+  moduleName: ModuleInfo.IModuleInfo | string,
   simplify?: boolean,
   simplifyProviderId?: boolean,
 ): string[] {
