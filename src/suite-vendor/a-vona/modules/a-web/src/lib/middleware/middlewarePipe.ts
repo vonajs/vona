@@ -5,7 +5,6 @@ import type { IOnionExecuteCustom } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
 import { appMetadata } from 'vona';
 import {
-
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-openapi';
