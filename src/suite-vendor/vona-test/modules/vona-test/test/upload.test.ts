@@ -21,6 +21,7 @@ describe.only('upload.test.ts', () => {
   it('action:upload:file', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
+      formData.append('name', 'zhennann');
       formData.append('welcome', new (Blob as any)(['hello world!']), 'file-test.txt');
       const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/fields'));
       const res = await fetch(url, {
@@ -28,12 +29,14 @@ describe.only('upload.test.ts', () => {
         body: formData,
       });
       const data = await res.json();
+      assert.equal(data.data.fields.find(item => item.name === 'name')?.value, 'zhennann');
       assert.equal(data.data.files.find(item => item.name === 'welcome')?.info.filename, 'file-test.txt');
     });
   });
   it('action:upload:files', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
+      formData.append('name', 'zhennann');
       formData.append('welcome1', new (Blob as any)(['hello world!']), 'file-test1.txt');
       formData.append('welcome2', new (Blob as any)(['hello world!']), 'file-test2.txt');
       const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/fields'));
@@ -42,6 +45,7 @@ describe.only('upload.test.ts', () => {
         body: formData,
       });
       const data = await res.json();
+      assert.equal(data.data.fields.find(item => item.name === 'name')?.value, 'zhennann');
       assert.equal(data.data.files.find(item => item.name === 'welcome1')?.info.filename, 'file-test1.txt');
       assert.equal(data.data.files.find(item => item.name === 'welcome2')?.info.filename, 'file-test2.txt');
     });
