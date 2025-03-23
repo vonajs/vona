@@ -8,7 +8,7 @@ import { ServiceTest } from '../service/test.ts';
 
 @Controller({ path: 'bean', meta: { mode: 'test' } })
 @Api.exclude()
-@Public()
+@Passport.public()
 export class ControllerBean extends BeanBase {
   @Web.get('test')
   async test() {
@@ -67,7 +67,7 @@ export class ControllerBean extends BeanBase {
   }
 
   @Web.get('service')
-  @Public()
+  @Passport.public()
   async service() {
     let res;
 

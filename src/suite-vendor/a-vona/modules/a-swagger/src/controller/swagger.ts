@@ -35,7 +35,7 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 @Controller({ path: '//swagger', exclude: true, meta: { mode: ['local', 'test'] } })
 export class ControllerSwagger extends BeanBase {
   @Web.get()
-  @Public()
+  @Passport.public()
   @Api.contentType('text/html')
   async index(@Arg.query('version', v.default('31')) version: string): Promise<string> {
     // signin
@@ -58,7 +58,7 @@ export class ControllerSwagger extends BeanBase {
   }
 
   @Web.get('json')
-  @Public()
+  @Passport.public()
   @Api.contentType('text/plain')
   json(@Arg.query('version', v.default('31')) version: string): string {
     const json = this.$scope.openapi.service.openapi.generateJson(version as unknown as keyof IOpenAPIObject);

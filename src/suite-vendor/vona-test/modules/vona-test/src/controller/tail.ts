@@ -8,7 +8,7 @@ import { Controller, Web } from 'vona-module-a-web';
 @Api.exclude()
 export class ControllerTail extends BeanBase {
   @Web.post()
-  @Public()
+  @Passport.public()
   tail() {
     // 1
     cast(this.ctx)._tail_test = 1;

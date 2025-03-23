@@ -11,7 +11,7 @@ import { Controller, Web } from 'vona-module-a-web';
 @Api.exclude()
 export class ControllerPassport extends BeanBase {
   @Web.get('echo/:name')
-  @Public()
+  @Passport.public()
   echo(@Arg.param('name') name: string, @Arg.user() user: IUserBase) {
     assert.equal(name, 'admin');
     assert.equal($getUserName(user), 'admin');
@@ -20,7 +20,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('login')
   @Api.body(v.object(DtoJwtToken))
-  @Public()
+  @Passport.public()
   async login(@Arg.body('name') name: string): Promise<IJwtToken> {
     const jwt = await this.bean.passport.signinMock(name);
     return jwt;
@@ -33,7 +33,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('refresh')
   @Api.body(v.object(DtoJwtToken))
-  @Public()
+  @Passport.public()
   async refresh(@Arg.body('refreshToken') refreshToken: string): Promise<IJwtToken> {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }

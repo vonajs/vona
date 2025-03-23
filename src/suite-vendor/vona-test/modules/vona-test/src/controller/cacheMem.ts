@@ -7,7 +7,7 @@ import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'cacheMem', meta: { mode: 'test' } })
 @Api.exclude()
-@Public()
+@Passport.public()
 export class ControllerCacheMem extends BeanBase {
   @Web.post()
   async mem() {

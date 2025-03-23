@@ -26,7 +26,7 @@ const __SWAGGER_HTML__ = `<!doctype html>
 @Controller({ path: '//rapidoc', exclude: true, meta: { mode: ['local', 'test'] } })
 export class ControllerRapidoc extends BeanBase {
   @Web.get()
-  @Public()
+  @Passport.public()
   @Api.contentType('text/html')
   async index(@Arg.query('version', v.default('31')) version: string): Promise<string> {
     // signin

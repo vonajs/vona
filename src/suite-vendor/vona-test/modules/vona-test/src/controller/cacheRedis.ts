@@ -7,7 +7,7 @@ import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'cacheRedis', meta: { mode: 'test' } })
 @Api.exclude()
-@Public()
+@Passport.public()
 export class ControllerCacheRedis extends BeanBase {
   @Web.post()
   async redis() {

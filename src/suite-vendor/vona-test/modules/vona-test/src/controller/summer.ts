@@ -11,7 +11,7 @@ import { __ThisModule__ } from '../.metadata/this.ts';
 @Api.exclude()
 export class ControllerSummer extends BeanBase {
   @Web.post()
-  @Public()
+  @Passport.public()
   async test() {
     // name
     const name = 'test';

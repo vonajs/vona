@@ -7,7 +7,7 @@ import { Controller, Web } from 'vona-module-a-web';
 @Api.exclude()
 export class ControllerPerformAction extends BeanBase {
   @Web.post('echo')
-  @Public()
+  @Passport.public()
   echo(@Arg.body('id') id: number) {
     const url = this.scope.util.combineApiPath('performAction/echo');
     return { id, url };

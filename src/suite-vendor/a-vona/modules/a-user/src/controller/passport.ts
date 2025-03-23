@@ -7,14 +7,14 @@ import { Public } from '../lib/public.ts';
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
   @Web.post('refreshAuthToken')
-  @Public()
+  @Passport.public()
   @Api.body(v.object(DtoJwtToken))
   async refreshAuthToken(@Arg.body('refreshToken') refreshToken: string): Promise<DtoJwtToken> {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }
 
   @Web.post('createAuthTokenFromOauthCode')
-  @Public()
+  @Passport.public()
   @Api.body(v.object(DtoJwtToken))
   async createAuthTokenFromOauthCode(@Arg.body('code') code: string): Promise<DtoJwtToken> {
     return await this.bean.passport.createAuthTokenFromOauthCode(code);

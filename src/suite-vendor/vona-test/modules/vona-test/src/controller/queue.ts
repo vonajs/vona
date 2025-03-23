@@ -8,14 +8,14 @@ import { Controller, Web } from 'vona-module-a-web';
 @Api.exclude()
 export class ControllerQueue extends BeanBase {
   @Web.post('pushAsync')
-  @Public()
+  @Passport.public()
   async pushAsync() {
     const res = await this.scope.queue.test.pushAsync({ a: 1, b: 2 });
     assert.equal(res, 3);
   }
 
   @Web.post('push')
-  @Public()
+  @Passport.public()
   push() {
     this.scope.queue.test.push({ a: 1, b: 2 });
   }
