@@ -37,6 +37,7 @@
     "vona-module-a-startup": "workspace:^",
     "vona-module-a-static": "workspace:^",
     "vona-module-a-summer": "workspace:^",
+    "vona-module-a-swagger": "workspace:^",
     "vona-module-a-upload": "workspace:^",
     "vona-module-a-user": "workspace:^",
     "vona-module-a-validation": "workspace:^",

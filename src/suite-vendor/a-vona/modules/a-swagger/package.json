@@ -5,7 +5,7 @@
   "title": "a-swagger",
   "vonaModule": {
     "dependencies": {
-      "a-vona": "5.0.0"
+      "a-openapi": "5.0.0"
     }
   },
   "description": "",

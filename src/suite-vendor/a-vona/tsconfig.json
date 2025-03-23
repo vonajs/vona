@@ -60,6 +60,9 @@
       "path": "modules/a-summer/tsconfig.build.json"
     },
     {
+      "path": "modules/a-swagger/tsconfig.build.json"
+    },
+    {
       "path": "modules/a-user/tsconfig.build.json"
     },
     {
