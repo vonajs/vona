@@ -46,7 +46,7 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
           prefix: '.temp-upload-',
         });
         const fileTemp = fileTempObj.name;
-        filesCleanup.push(fileTemp.removeCallback);
+        filesCleanup.push(fileTempObj.removeCallback);
         files.push({
           name,
           file: fileTemp,

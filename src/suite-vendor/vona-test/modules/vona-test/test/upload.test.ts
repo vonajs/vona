@@ -21,15 +21,14 @@ describe.only('upload.test.ts', () => {
   it('action:upload:file', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
-      formData.append('name', 'zhennann');
-      formData.append('file', new (Blob as any)(['hello world!']), 'file-test.txt');
+      formData.append('welcome', new (Blob as any)(['hello world!']), 'file-test.txt');
       const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/fields'));
       const res = await fetch(url, {
         method: 'POST',
         body: formData,
       });
       const data = await res.json();
-      assert.equal(data.data.fields.find(item => item.name === 'name')?.value, 'zhennann');
+      assert.equal(data.data.files.find(item => item.name === 'welcome')?.info.filename, 'file-test.txt');
     });
   });
 });
