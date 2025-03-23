@@ -7,6 +7,7 @@ import Busboy from 'busboy';
 import tmp from 'tmp';
 import { BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+import { SymbolUploadValue } from '../types/upload.ts';
 
 export interface IInterceptorOptionsUpload extends IDecoratorInterceptorOptions {
   busboy?: BusboyConfig;
@@ -17,6 +18,7 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
   async execute(options: IInterceptorOptionsUpload, next: Next) {
     // recieve
     const [fields, files, filesCleanup] = await this._receive(options);
+    this.ctx[SymbolUploadValue] = [fields, files];
     // next
     let res;
     try {
@@ -31,7 +33,7 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
     return res;
   }
 
-  async _receive(options: IInterceptorOptionsUpload) {
+  async _receive(options: IInterceptorOptionsUpload): Promise<[ IUploadField[], IUploadFile[], Function[] ]> {
     return new Promise((resolve, reject) => {
       const fields: IUploadField[] = [];
       const files: IUploadFile[] = [];

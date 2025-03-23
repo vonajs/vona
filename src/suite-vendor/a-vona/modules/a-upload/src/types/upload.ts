@@ -1,3 +1,5 @@
+export const SymbolUploadValue = Symbol('SymbolUploadValue');
+
 export interface IUploadFile {
   name?: string;
   file: string;
