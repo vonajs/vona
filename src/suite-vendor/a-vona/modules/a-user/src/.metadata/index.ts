@@ -1,7 +1,7 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorEventOptions } from 'vona-module-a-event';
-
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 /** bean: end */
 /** bean: begin */
 import type { BeanAuthInner } from '../bean/bean.authInner.ts';
@@ -10,11 +10,12 @@ import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
 /** event: begin */
 import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.ts';
-
 import type { EventSignin } from '../bean/event.signin.ts';
+
 import type { EventSignout } from '../bean/event.signout.ts';
 /** guard: end */
 /** bean: begin */
+import type { IGuardOptionsAdmin } from '../bean/guard.admin.ts';
 import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
 import type { config } from '../config/config.ts';
 
@@ -33,25 +34,35 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/bean.authInner.ts';
+export * from '../bean/bean.passport.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IGuardRecordGlobal {
     'a-user:passport': IGuardOptionsPassport;
   }
 
+  export interface IGuardRecordLocal {
+    'a-user:admin': IGuardOptionsAdmin;
+  }
+
 }
 declare module 'vona-module-a-user' {
+
+  export interface GuardAdmin {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
 
   export interface GuardPassport {
     /** @internal */
     get scope(): ScopeModuleAUser;
   }
 }
-export * from '../bean/bean.passport.ts';
 export * from '../bean/bean.userInner.ts';
 /** bean: end */
 /** event: begin */
 export * from '../bean/event.createUserAnonymous.ts';
+export * from '../bean/event.signin.ts';
 declare module 'vona' {
 
 }
@@ -79,9 +90,9 @@ declare module 'vona' {
     userInner: BeanUserInner;
   }
 }
-export * from '../bean/event.signin.ts';
 export * from '../bean/event.signout.ts';
 /** guard: begin */
+export * from '../bean/guard.admin.ts';
 export * from '../bean/guard.passport.ts';
 declare module 'vona-module-a-event' {
 
@@ -166,6 +177,7 @@ declare module 'vona-module-a-user' {
 declare module 'vona-module-a-web' {
   export interface IApiPathPostRecord {
     '/user/passport/refreshAuthToken': '/user/passport/refreshAuthToken';
+    '/user/passport/createAuthTokenFromOauthCode': '/user/passport/createAuthTokenFromOauthCode';
   }
 
 }
