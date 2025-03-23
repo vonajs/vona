@@ -19,6 +19,6 @@ export class BeanScopeUtil extends BeanSimple {
   }
 
   combineStaticPath(path: string | undefined) {
-    return this.app.util.combineStaticPath(this[BeanModuleScope], path);
+    return this.app.util.combineStaticPath(path, this[BeanModuleScope]);
   }
 }

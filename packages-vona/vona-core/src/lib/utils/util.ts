@@ -132,7 +132,7 @@ export class AppUtil extends BeanSimple {
     return toLowerCaseFirstChar(stringToCapitalize(parts));
   }
 
-  combineStaticPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined) {
+  combineStaticPath(path: string | undefined, moduleName?: ModuleInfo.IModuleInfo | string) {
     const globalPrefix = '/api/static';
     if (!path) path = '';
     // ignore globalPrefix
@@ -140,6 +140,7 @@ export class AppUtil extends BeanSimple {
     // ignore module path
     if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
+    if (!moduleName) throw new Error('should specify the moduleName');
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     const parts = moduleName.split('-');
     // path
