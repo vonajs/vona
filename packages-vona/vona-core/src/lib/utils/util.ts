@@ -89,13 +89,13 @@ export class AppUtil extends BeanSimple {
       throw new TypeError('regexp not supported');
     } else if (actionPath.startsWith('/')) {
       // absolute
-      routePath = this.combineApiPath(moduleName, actionPath, prefix, simplify);
+      routePath = this.combineApiPath(actionPath, moduleName, prefix, simplify);
     } else {
       // relative
       if (!controllerPath) {
-        routePath = this.combineApiPath(moduleName, actionPath, prefix, simplify);
+        routePath = this.combineApiPath(actionPath, moduleName, prefix, simplify);
       } else {
-        routePath = this.combineApiPath(moduleName, controllerPath, prefix, simplify);
+        routePath = this.combineApiPath(controllerPath, moduleName, prefix, simplify);
         if (actionPath) {
           routePath = `${routePath}/${actionPath}`;
         }
@@ -105,8 +105,8 @@ export class AppUtil extends BeanSimple {
   }
 
   combineApiPath(
-    moduleName: ModuleInfo.IModuleInfo | string,
     path: string | undefined,
+    moduleName?: ModuleInfo.IModuleInfo | string,
     prefix?: string | boolean,
     simplify?: boolean,
   ) {
@@ -118,7 +118,7 @@ export class AppUtil extends BeanSimple {
     // ignore module path
     if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
-    const parts = combineResourceName(moduleName, path, simplify, true);
+    const parts = combineResourceName(moduleName ?? '', path, simplify, true);
     return `${globalPrefix}/${parts.join('/')}`;
   }
 

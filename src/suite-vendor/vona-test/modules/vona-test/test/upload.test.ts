@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { $apiPath } from 'vona-module-a-web';
 
-describe.only('upload.test.ts', () => {
+describe('upload.test.ts', () => {
   it('action:upload:fields', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
