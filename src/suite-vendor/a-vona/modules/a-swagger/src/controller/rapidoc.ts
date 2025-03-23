@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Api, Arg, v } from 'vona-module-a-openapi';
-import { Public } from 'vona-module-a-user';
+import { Passport } from 'vona-module-a-user';
 import { $apiPath, Controller, Web } from 'vona-module-a-web';
 
 const __SWAGGER_HTML__ = `<!doctype html>

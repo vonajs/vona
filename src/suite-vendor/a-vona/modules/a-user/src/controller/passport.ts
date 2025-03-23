@@ -2,7 +2,7 @@ import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Controller, Web } from 'vona-module-a-web';
-import { Public } from '../lib/public.ts';
+import { Passport } from '../lib/passport.ts';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {

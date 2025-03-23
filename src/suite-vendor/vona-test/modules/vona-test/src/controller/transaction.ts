@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { TransactionMiddleware } from 'vona-module-a-database';
 import { Api, Arg } from 'vona-module-a-openapi';
-import { Public } from 'vona-module-a-user';
+import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
 const tableNameFail = '__tempTransactionFail';

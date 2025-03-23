@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, Arg, v } from 'vona-module-a-openapi';
-import { $getUserName, Public } from 'vona-module-a-user';
+import { $getUserName, Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'passport', meta: { mode: 'test' } })

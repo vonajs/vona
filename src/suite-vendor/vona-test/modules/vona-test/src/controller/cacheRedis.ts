@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { sleep } from '@cabloy/utils';
 import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
-import { Public } from 'vona-module-a-user';
+import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
 @Controller({ path: 'cacheRedis', meta: { mode: 'test' } })
