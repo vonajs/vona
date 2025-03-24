@@ -240,8 +240,7 @@ export class ServiceOpenapi extends BeanBase {
         }
         argsMapWithField[argMeta.type][argMeta.field] = argMeta.schema;
       } else {
-        // ignore upload.fields
-        if (!argsMapIsolate[argMeta.type] && argMeta.type !== 'fields') {
+        if (!argsMapIsolate[argMeta.type]) {
           argsMapIsolate[argMeta.type] = argMeta.schema;
         }
       }
@@ -250,6 +249,7 @@ export class ServiceOpenapi extends BeanBase {
     const request: any = {};
     if (isUpload) {
       const schemaObj: any = {};
+      // not check argsMapIsolate.fields
       if (argsMapWithField.fields) Object.assign(schemaObj, argsMapWithField.fields);
       if (argsMapWithField.files) Object.assign(schemaObj, argsMapWithField.files);
       if (argsMapIsolate.files) schemaObj.files = argsMapIsolate.files;

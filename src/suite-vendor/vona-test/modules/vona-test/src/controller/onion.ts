@@ -69,7 +69,7 @@ export class ControllerOnion extends BeanBase {
   @Aspect.guardGlobal('a-user:passport', { public: true })
   @Aspect.filterGlobal('a-error:error', { enable: true, logs: { 422: true } })
   @Api.body(v.array(DtoUser))
-  echo4(@Arg.body(v.optional(), v.array(DtoUser)) users: DtoUser[]): DtoUser[] {
+  echo4(@Arg.body(v.optional(), v.array(), v.object(DtoUser)) users: DtoUser[]): DtoUser[] {
     return users;
   }
 
