@@ -39,7 +39,6 @@ export type RouteHandlerArgumentType =
   | 'headers'
   | 'session'
   | 'fields'
-  | 'file'
   | 'files'
   | 'host'
   | 'ip'

@@ -1,4 +1,4 @@
-import type { IUploadField } from 'vona-module-a-upload';
+import type { IUploadField, IUploadFile } from 'vona-module-a-upload';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
@@ -21,14 +21,19 @@ export class ControllerUpload extends BeanBase {
   @Web.post('file')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  file() {
+  file(@Arg.fields('name') field: IUploadField, @Arg.files('welcome') file: IUploadFile) {
+    assert.equal(field.value, 'zhennann');
+    assert.equal(file.name, 'welcome');
     return this.ctx[SymbolUploadValue];
   }
 
   @Web.post('files')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  files() {
+  files(@Arg.files() files: IUploadFile[], @Arg.files('welcome1') file1: IUploadFile, @Arg.files('welcome2') file2: IUploadFile) {
+    assert.equal(files.find(item => item.name === 'welcome1')?.name, 'welcome1');
+    assert.equal(file1.name, 'welcome1');
+    assert.equal(file2.name, 'welcome2');
     return this.ctx[SymbolUploadValue];
   }
 }

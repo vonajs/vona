@@ -29,8 +29,11 @@ export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgument
       if (!uploadValue) throw new Error('should use interceptor: a-upload:upload');
       return field ? uploadValue.fields.find(item => item.name === field) : uploadValue.fields;
     },
-    file: () => req[field || 'file'],
-    files: () => req.files,
+    files: () => {
+      const uploadValue: IUploadValue = ctx[SymbolUploadValue];
+      if (!uploadValue) throw new Error('should use interceptor: a-upload:upload');
+      return field ? uploadValue.files.find(item => item.name === field) : uploadValue.files;
+    },
   };
   return modes[type]?.();
 }
