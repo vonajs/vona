@@ -226,46 +226,69 @@ export class ServiceOpenapi extends BeanBase {
     );
     if (!argsMeta) return;
     // args
-    const argsMapWithField = {};
-    const argsMapIsolate = {};
+    const argsMapWithField: any = {};
+    const argsMapIsolate: any = {};
+    let isUpload;
     for (const argMeta of argsMeta) {
       if (!__ArgumentTypes.includes(argMeta.type)) continue;
+      if (['fields', 'files'].includes(argMeta.type)) {
+        isUpload = true;
+      }
       if (argMeta.field) {
         if (!argsMapWithField[argMeta.type]) {
           argsMapWithField[argMeta.type] = {};
         }
         argsMapWithField[argMeta.type][argMeta.field] = argMeta.schema;
       } else {
-        if (!argsMapIsolate[argMeta.type]) {
+        // ignore upload.fields
+        if (!argsMapIsolate[argMeta.type] && argMeta.type !== 'fields') {
           argsMapIsolate[argMeta.type] = argMeta.schema;
         }
       }
     }
     // request
     const request: any = {};
-    for (const argumentType of __ArgumentTypes) {
-      let schema: z.ZodSchema | undefined = argsMapIsolate[argumentType];
-      if (!schema && argsMapWithField[argumentType]) {
-        schema = z.object(argsMapWithField[argumentType]);
-      }
-      if (!schema) continue;
-      // record
-      if (argumentType === 'body') {
-        // body
-        request.body = {
-          required: !schema.isOptional(),
-          content: {
-            'application/json': {
-              schema,
-            },
+    if (isUpload) {
+      const schemaObj: any = {};
+      if (argsMapWithField.fields) Object.assign(schemaObj, argsMapWithField.fields);
+      if (argsMapWithField.files) Object.assign(schemaObj, argsMapWithField.files);
+      if (argsMapIsolate.files) schemaObj.files = argsMapIsolate.files;
+      const schema = z.object(schemaObj);
+      // body
+      request.body = {
+        required: true,
+        content: {
+          'multipart/form-data': {
+            schema,
           },
-        };
-      } else {
-        // others
-        const name = argumentType === 'param' ? 'params' : argumentType;
-        request[name] = schema;
+        },
+      };
+    } else {
+      for (const argumentType of __ArgumentTypes) {
+        let schema: z.ZodSchema | undefined = argsMapIsolate[argumentType];
+        if (!schema && argsMapWithField[argumentType]) {
+          schema = z.object(argsMapWithField[argumentType]);
+        }
+        if (!schema) continue;
+        // record
+        if (argumentType === 'body') {
+          // body
+          request.body = {
+            required: !schema.isOptional(),
+            content: {
+              'application/json': {
+                schema,
+              },
+            },
+          };
+        } else {
+          // others
+          const name = argumentType === 'param' ? 'params' : argumentType;
+          request[name] = schema;
+        }
       }
     }
+
     return request;
   }
 

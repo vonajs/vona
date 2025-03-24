@@ -2,7 +2,7 @@ import type { IUploadField, IUploadFile } from 'vona-module-a-upload';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
-import { Arg } from 'vona-module-a-openapi';
+import { Arg, v } from 'vona-module-a-openapi';
 import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
@@ -12,7 +12,7 @@ export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  fields(@Arg.fields() fields: IUploadField[], @Arg.fields('name') name: string) {
+  fields(@Arg.fields() fields: IUploadField[], @Arg.fields('name', v.default('zhennann'), v.description('your name')) name: string) {
     assert.equal(fields.find(item => item.name === 'name')?.value, 'zhennann');
     assert.equal(name, 'zhennann');
     return this.ctx[SymbolUploadValue];
