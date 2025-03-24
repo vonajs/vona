@@ -12,17 +12,17 @@ export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  fields(@Arg.fields() fields: IUploadField[], @Arg.fields('name') field: IUploadField) {
+  fields(@Arg.fields() fields: IUploadField[], @Arg.fields('name') name: string) {
     assert.equal(fields.find(item => item.name === 'name')?.value, 'zhennann');
-    assert.equal(field.value, 'zhennann');
+    assert.equal(name, 'zhennann');
     return this.ctx[SymbolUploadValue];
   }
 
   @Web.post('file')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  file(@Arg.fields('name') field: IUploadField, @Arg.files('welcome') file: IUploadFile) {
-    assert.equal(field.value, 'zhennann');
+  file(@Arg.fields('name') name: string, @Arg.files('welcome') file: IUploadFile) {
+    assert.equal(name, 'zhennann');
     assert.equal(file.name, 'welcome');
     return this.ctx[SymbolUploadValue];
   }

@@ -32,7 +32,7 @@ import { schema } from '../lib/schema/schema.ts';
 import { SymbolOpenApiOptions } from '../types/api.ts';
 import { SymbolRouteHandlersArgumentsMeta } from '../types/decorator.ts';
 
-const __ArgumentTypes = ['param', 'query', 'body', 'headers'];
+const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'files'];
 
 @Service()
 export class ServiceOpenapi extends BeanBase {

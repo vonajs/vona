@@ -27,7 +27,7 @@ export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgument
     fields: () => {
       const uploadValue: IUploadValue = ctx[SymbolUploadValue];
       if (!uploadValue) throw new Error('should use interceptor: a-upload:upload');
-      return field ? uploadValue.fields.find(item => item.name === field) : uploadValue.fields;
+      return field ? uploadValue.fields.find(item => item.name === field)?.value : uploadValue.fields;
     },
     files: () => {
       const uploadValue: IUploadValue = ctx[SymbolUploadValue];
