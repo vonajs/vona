@@ -12,4 +12,18 @@ export class ControllerUpload extends BeanBase {
   fields() {
     return this.ctx[SymbolUploadValue];
   }
+
+  @Web.post('file')
+  @Passport.public()
+  @Aspect.interceptor('a-upload:upload')
+  file() {
+    return this.ctx[SymbolUploadValue];
+  }
+
+  @Web.post('files')
+  @Passport.public()
+  @Aspect.interceptor('a-upload:upload')
+  files() {
+    return this.ctx[SymbolUploadValue];
+  }
 }

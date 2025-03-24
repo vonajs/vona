@@ -488,6 +488,8 @@ declare module 'vona-module-a-web' {
     '/vona/test/transaction/fail': '/vona/test/transaction/fail';
     '/vona/test/transaction/success': '/vona/test/transaction/success';
     '/vona/test/upload/fields': '/vona/test/upload/fields';
+    '/vona/test/upload/file': '/vona/test/upload/file';
+    '/vona/test/upload/files': '/vona/test/upload/files';
   }
 
 }

@@ -23,7 +23,7 @@ describe.only('upload.test.ts', () => {
       const formData = new FormData();
       formData.append('name', 'zhennann');
       formData.append('welcome', new (Blob as any)(['hello world!']), 'file-test.txt');
-      const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/fields'));
+      const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/file'));
       const res = await fetch(url, {
         method: 'POST',
         body: formData,
@@ -39,7 +39,7 @@ describe.only('upload.test.ts', () => {
       formData.append('name', 'zhennann');
       formData.append('welcome1', new (Blob as any)(['hello world!']), 'file-test1.txt');
       formData.append('welcome2', new (Blob as any)(['hello world!']), 'file-test2.txt');
-      const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/fields'));
+      const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/files'));
       const res = await fetch(url, {
         method: 'POST',
         body: formData,
