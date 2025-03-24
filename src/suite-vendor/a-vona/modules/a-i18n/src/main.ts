@@ -14,17 +14,16 @@ export class Main extends BeanSimple implements IModuleMain {
       return __getLocale(this, options);
     };
     this.app.context.__setLocale = function (this: VonaContext, locale: string) {
-      return __setLocale(this, locale, options);
+      return __setLocale(this, locale);
     };
   }
 
   async configLoaded(_config: any) {}
 }
 
-function __setLocale(ctx: VonaContext, locale: string, options: I18nConfig) {
+function __setLocale(ctx: VonaContext, locale: string) {
   ctx[SymbolLocale] = locale;
   ctx[SymbolLocaleOrigin] = 'set';
-  updateCookie(ctx, locale, options.cookieField, options.cookieMaxAge, options.cookieDomain);
 }
 
 function __getLocale(ctx: VonaContext, options: I18nConfig) {
@@ -34,16 +33,14 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
 
   const localeNames = Object.keys(ctx.app.meta.locales);
 
-  const cookieLocale = ctx.cookies.get(options.cookieField, { signed: false });
-
   // 1. Query
   let locale = ctx.query[options.queryField];
   let localeOrigin = 'query';
 
-  // 2. Cookie
+  // 2. Header
   if (!locale) {
-    locale = cookieLocale;
-    localeOrigin = 'cookie';
+    locale = ctx.req.headers[options.headerField];
+    localeOrigin = 'header';
   }
 
   // 3. Header
@@ -91,10 +88,6 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
     locale = options.defaultLocale;
   }
 
-  // if header not send, set the locale cookie
-  if (options.writeCookie && cookieLocale !== locale && !ctx.headerSent) {
-    updateCookie(ctx, locale, options.cookieField, options.cookieMaxAge, options.cookieDomain);
-  }
   ctx[SymbolLocale] = locale;
   ctx[SymbolLocaleOrigin] = localeOrigin;
   return locale;
@@ -108,16 +101,4 @@ function formatLocale(locale) {
 function parseTokenSafe(token?: string) {
   if (!token) return '';
   return token.replace(/[\\.*#%'"`;, ]/g, '');
-}
-
-function updateCookie(ctx, locale, cookieField, cookieMaxAge, cookieDomain) {
-  const cookieOptions = {
-    // make sure brower javascript can read the cookie
-    httpOnly: false,
-    maxAge: cookieMaxAge,
-    signed: false,
-    domain: cookieDomain,
-    overwrite: true,
-  };
-  ctx.cookies.set(cookieField, locale, cookieOptions);
 }

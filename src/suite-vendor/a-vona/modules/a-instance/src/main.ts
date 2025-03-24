@@ -33,6 +33,7 @@ function __getInstanceName(ctx: VonaContext, options: IInstanceConfig) {
   if (options.getInstanceName) {
     instanceName = options.getInstanceName(ctx);
   } else {
+    // not use query params for safety
     // header: x-vona-instance-name
     instanceName = ctx.req.headers['x-vona-instance-name'];
     if (instanceName === undefined) {
