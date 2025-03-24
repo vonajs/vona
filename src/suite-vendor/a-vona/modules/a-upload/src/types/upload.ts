@@ -1,5 +1,10 @@
 export const SymbolUploadValue = Symbol('SymbolUploadValue');
 
+export interface IUploadValue {
+  fields: IUploadField[];
+  files: IUploadFile[];
+}
+
 export interface IUploadFile {
   name?: string;
   file: string;

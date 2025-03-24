@@ -28,6 +28,7 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
       for (const fileCleanup of filesCleanup) {
         fileCleanup();
       }
+      this.ctx[SymbolUploadValue] = undefined;
     }
     // ok
     return res;
