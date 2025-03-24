@@ -38,6 +38,7 @@ export type RouteHandlerArgumentType =
   | 'param'
   | 'headers'
   | 'session'
+  | 'fields'
   | 'file'
   | 'files'
   | 'host'

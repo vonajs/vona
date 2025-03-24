@@ -29,6 +29,13 @@ function Headers(property?: string | SchemaLike, ...schemaLikes: SchemaLike[]): 
   return createPipesArgumentDecorator('headers')(property, ...schemaLikes);
 }
 
+function Fields(): ParameterDecorator;
+function Fields(...schemaLikes: SchemaLike[]): ParameterDecorator;
+function Fields(property: string, ...schemaLikes: SchemaLike[]): ParameterDecorator;
+function Fields(property?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
+  return createPipesArgumentDecorator('fields')(property, ...schemaLikes);
+}
+
 function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
 }
@@ -38,5 +45,6 @@ export const Arg = {
   query: Query,
   body: Body,
   headers: Headers,
+  fields: Fields,
   user: User,
 };
