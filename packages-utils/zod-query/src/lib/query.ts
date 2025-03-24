@@ -11,6 +11,10 @@ import { isNil } from './utils.ts';
 
 const _parseString = z.ZodString.prototype._parse;
 z.ZodString.prototype._parse = function (this: z.ZodString, input) {
+  if ((this as any)._def?.openapi?.metadata?.format === 'binary' && !isNil(input.data)) {
+    // ignore upload file
+    return { status: 'valid', value: input.data };
+  }
   _coerce(input, () => {
     input.data = String(input.data);
   });

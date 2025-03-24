@@ -21,7 +21,7 @@ export class ControllerUpload extends BeanBase {
   @Web.post('file')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  file(@Arg.fields('name') name: string, @Arg.files('welcome') file: IUploadFile) {
+  file(@Arg.fields('name', v.default('zhennann')) name: string, @Arg.files('welcome') file: IUploadFile) {
     assert.equal(name, 'zhennann');
     assert.equal(file.name, 'welcome');
     return this.ctx[SymbolUploadValue];
