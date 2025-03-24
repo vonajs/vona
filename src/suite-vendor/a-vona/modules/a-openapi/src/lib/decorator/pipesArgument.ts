@@ -31,7 +31,7 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
       let metaType;
       if (paramType === 'files') {
         metaType = z.string().openapi({ format: 'binary' });
-        if (!field) {
+        if (!paramField) {
           metaType = z.array(metaType);
         }
       } else {
