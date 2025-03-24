@@ -418,3 +418,14 @@ export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IB
 export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {
   return beanFullName.replace(`.${sceneName}.`, ':');
 }
+
+export function filterHeaders(headers: object | undefined, whitelist: string[]) {
+  if (!headers) return;
+  const res = {};
+  for (const key in headers) {
+    if (whitelist.includes(key)) {
+      res[key] = headers[key];
+    }
+  }
+  return res;
+}
