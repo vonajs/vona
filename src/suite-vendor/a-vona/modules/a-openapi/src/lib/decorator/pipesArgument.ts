@@ -6,6 +6,7 @@ import type {
   TypeExtractValue,
 } from '../../types/decorator.ts';
 import { appMetadata } from 'vona';
+import { z } from 'zod';
 import {
   SymbolRouteHandlersArgumentsMeta,
 } from '../../types/decorator.ts';
@@ -27,7 +28,15 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
       const paramSchemaLikes = hasParamField ? schemaLikes : [field!, ...schemaLikes].filter(item => !!item);
 
       const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
-      const metaType = paramtypes[index];
+      let metaType;
+      if (paramType === 'files') {
+        metaType = z.string().openapi({ format: 'binary' });
+        if (!field) {
+          metaType = z.array(metaType);
+        }
+      } else {
+        metaType = paramtypes[index];
+      }
 
       const argSchema = makeSchemaLikes(paramSchemaLikes, metaType);
 
