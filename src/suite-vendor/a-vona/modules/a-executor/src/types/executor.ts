@@ -12,8 +12,10 @@ export interface IRunInAnonymousContextScopeOptions {
 }
 
 export interface INewCtxExtraData {
-  headers?: Record<string, string>;
   state?: ContextState;
+  request?: {
+    headers?: Record<string, string>;
+  };
 }
 
 export interface INewCtxOptions {

@@ -163,10 +163,7 @@ export class BeanExecutor extends BeanBase {
         // extraData
         if (options.extraData) {
           // delegateProperties
-          __delegateProperties(ctx, {
-            state: options.extraData?.state,
-            request: { headers: options.extraData?.headers },
-          });
+          __delegateProperties(ctx, options.extraData);
         }
         // innerAccess
         ctx.innerAccess = options.innerAccess !== false;

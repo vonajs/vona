@@ -281,7 +281,7 @@ export class ServiceQueue extends BeanBase {
   }
 
   prepareJobInfo<DATA>(queueName: keyof IQueueRecord, data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
-    options = deepExtend({ extraData: { headers: {} } }, options)!;
+    options = deepExtend({ extraData: { request: { headers: {} } } }, options)!;
     if (!this.ctx) {
       options.dbLevel = options.dbLevel ?? 1;
     } else {
@@ -289,7 +289,7 @@ export class ServiceQueue extends BeanBase {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
       // extraData: headers
-      const headers = options.extraData!.headers!;
+      const headers = options.extraData!.request!.headers!;
       for (const key in this.ctx.request.headers) {
         if (key.startsWith('x-vona-data-') && !headers[key]) {
           const value = this.ctx.request.headers[key];
