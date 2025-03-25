@@ -12,7 +12,7 @@ import { DtoUser } from '../dto/user.ts';
 @Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Web.get('/')
-  @Aspect.middleware('a-database:transaction', { enable: true, meta: { mode: 'local' } })
+  @Aspect.aopMethod('a-database:transaction', { enable: true, meta: { mode: 'local' } })
   @Aspect.guardGlobal('a-user:passport', { public: true })
   index() {
     return this.ctx.dbMeta.transaction.inTransaction;
@@ -23,7 +23,7 @@ export class ControllerOnion extends BeanBase {
   @Aspect.guardGlobal('a-user:passport', { public: true })
   @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
-  @Aspect.middleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
+  @Aspect.aopMethod('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   @Transaction({ isolationLevel: 'read committed', readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(
