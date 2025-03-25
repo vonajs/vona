@@ -1,5 +1,6 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
 /** aopMethod: begin */
+import type { IAopMethodOptionsDataSource } from '../bean/aopMethod.dataSource.ts';
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
 
 import type { BeanDatabase } from '../bean/bean.database.ts';
@@ -33,15 +34,22 @@ import 'vona';
 
 import 'vona';
 
+export * from '../bean/aopMethod.dataSource.ts';
 export * from '../bean/aopMethod.transaction.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IAopMethodRecord {
+    'a-database:dataSource': IAopMethodOptionsDataSource;
     'a-database:transaction': IAopMethodOptionsTransaction;
   }
 
 }
 declare module 'vona-module-a-database' {
+
+  export interface AopMethodDataSource {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 
   export interface AopMethodTransaction {
     /** @internal */
