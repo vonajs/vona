@@ -9,6 +9,6 @@ export class ServiceDbMeta extends BeanBase {
 
   protected __init__() {
     this.master = true;
-    this.transaction = this.bean._newBean(ServiceTransaction);
+    this.transaction = this.ctx.bean._newBean(ServiceTransaction);
   }
 }
