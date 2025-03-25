@@ -162,6 +162,8 @@ export class BeanExecutor extends BeanBase {
           // dbMeta
           if (ctxCaller.dbMeta.inTransaction) {
             ctx.dbMeta = ctxCaller.dbMeta;
+          } else {
+            ctx.dbMeta.currentClient = ctxCaller.dbMeta.currentClient;
           }
         }
         // extraData
