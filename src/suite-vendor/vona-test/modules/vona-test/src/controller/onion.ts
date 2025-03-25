@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Gate } from 'vona-module-a-core';
-import { Transaction } from 'vona-module-a-database';
+import { Database } from 'vona-module-a-database';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
@@ -24,7 +24,7 @@ export class ControllerOnion extends BeanBase {
   @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Gate({ gate: { mode: 'local' } })
   @Aspect.aopMethod('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
-  @Transaction({ isolationLevel: 'read committed', readOnly: false })
+  @Database.transaction({ isolationLevel: 'read committed', readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(
     @Arg.query('id', v.default(0), z.number()) id: number,
