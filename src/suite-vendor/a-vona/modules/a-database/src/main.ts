@@ -40,13 +40,6 @@ export class Main extends BeanSimple implements IModuleMain {
         this[SymbolDbMeta] = value;
       },
     });
-    // transaction
-    Object.defineProperty(this.app.context, 'transaction', {
-      enumerable: false,
-      get(this: VonaContext) {
-        return this.dbMeta.transaction;
-      },
-    });
   }
 
   async configLoaded(_config) {}

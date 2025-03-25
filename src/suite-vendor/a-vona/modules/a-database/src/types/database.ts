@@ -1,6 +1,5 @@
 import type { BeanModel } from '../bean/bean.model.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
-import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ConfigDatabase } from './config.ts';
 
 export interface IDatabaseClientRecord {
@@ -28,6 +27,5 @@ declare module 'vona' {
     set dbLevel(value: number | undefined);
     get dbMeta(): ServiceDbMeta;
     set dbMeta(value: ServiceDbMeta);
-    get transaction(): ServiceTransaction;
   }
 }
