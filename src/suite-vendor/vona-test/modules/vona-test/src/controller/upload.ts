@@ -32,7 +32,7 @@ export class ControllerUpload extends BeanBase {
   @Aspect.interceptor('a-upload:upload')
   files(
     @Arg.files(v.description('more files')) files: IUploadFile[],
-    @Arg.files('image', v.description('images')) images: IUploadFile[],
+    @Arg.files('images', v.description('images')) images: IUploadFile[],
     @Arg.file('welcome1', v.description('single file')) file1: IUploadFile,
     @Arg.file('welcome2')file2: IUploadFile,
   ) {

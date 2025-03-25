@@ -32,7 +32,7 @@ import { schema } from '../lib/schema/schema.ts';
 import { SymbolOpenApiOptions } from '../types/api.ts';
 import { SymbolRouteHandlersArgumentsMeta } from '../types/decorator.ts';
 
-const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'files'];
+const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field', 'files', 'file'];
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
@@ -231,7 +231,7 @@ export class ServiceOpenapi extends BeanBase {
     let isUpload;
     for (const argMeta of argsMeta) {
       if (!__ArgumentTypes.includes(argMeta.type)) continue;
-      if (['fields', 'files'].includes(argMeta.type)) {
+      if (['fields', 'field', 'files', 'file'].includes(argMeta.type)) {
         isUpload = true;
       }
       if (argMeta.field) {
