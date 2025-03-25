@@ -39,7 +39,7 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   get current() {
-    return this.inTransaction ? this.transaction.connection : this.currentClient.db;
+    return this.inTransaction ? this.transaction.connection! : this.currentClient.db;
   }
 
   tail(cb: (...args: any[]) => any) {

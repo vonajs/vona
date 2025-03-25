@@ -27,15 +27,6 @@ export class Main extends BeanSimple implements IModuleMain {
         this[SymbolDbLevel] = value;
       },
     });
-    // db
-    Object.defineProperty(this.app.context, 'db', {
-      enumerable: false,
-      get(this: VonaContext) {
-        return this.dbMeta.transaction.inTransaction
-          ? this.dbMeta.transaction.connection
-          : this.app.bean.database.getDefault();
-      },
-    });
     // dbMeta
     Object.defineProperty(this.app.context, 'dbMeta', {
       enumerable: false,

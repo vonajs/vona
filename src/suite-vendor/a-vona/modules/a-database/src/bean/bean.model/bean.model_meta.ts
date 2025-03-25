@@ -15,11 +15,11 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   }
 
   protected get db() {
-    return this.ctx.db;
+    return this.ctx.dbMeta.current;
   }
 
   protected get dbOriginal() {
-    return this.ctx.db.client.config.connection;
+    return this.ctx.dbMeta.current.client.config.connection;
   }
 
   public get scopeDatabase() {

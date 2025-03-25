@@ -1,4 +1,3 @@
-import type { Knex } from 'knex';
 import type { BeanModel } from '../bean/bean.model.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
@@ -27,7 +26,6 @@ declare module 'vona' {
   export interface VonaContext {
     get dbLevel(): number;
     set dbLevel(value: number | undefined);
-    get db(): Knex | Knex.Transaction;
     get dbMeta(): ServiceDbMeta;
     set dbMeta(value: ServiceDbMeta);
     get transaction(): ServiceTransaction;
