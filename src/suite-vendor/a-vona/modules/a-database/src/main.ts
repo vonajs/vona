@@ -36,15 +36,6 @@ export class Main extends BeanSimple implements IModuleMain {
           : this.app.bean.database.getDefault();
       },
     });
-    // dbOriginal
-    Object.defineProperty(this.app.context, 'dbOriginal', {
-      enumerable: false,
-      get(this: VonaContext) {
-        return this.dbMeta.transaction.inTransaction
-          ? this.dbMeta.transaction.db
-          : this.app.bean.database.getDefault();
-      },
-    });
     // dbMeta
     Object.defineProperty(this.app.context, 'dbMeta', {
       enumerable: false,

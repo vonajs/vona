@@ -28,7 +28,6 @@ declare module 'vona' {
     get dbLevel(): number;
     set dbLevel(value: number | undefined);
     get db(): Knex | Knex.Transaction;
-    get dbOriginal(): Knex;
     get dbMeta(): ServiceDbMeta;
     set dbMeta(value: ServiceDbMeta);
     get transaction(): ServiceTransaction;

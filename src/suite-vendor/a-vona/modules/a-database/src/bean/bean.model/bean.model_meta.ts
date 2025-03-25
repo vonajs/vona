@@ -19,7 +19,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   }
 
   protected get dbOriginal() {
-    return this.ctx.dbOriginal;
+    return this.ctx.db.client.config.connection;
   }
 
   public get scopeDatabase() {
