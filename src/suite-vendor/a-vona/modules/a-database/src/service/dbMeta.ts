@@ -1,3 +1,4 @@
+import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { AsyncResource } from 'node:async_hooks';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -7,6 +8,7 @@ import { ServiceTransaction } from './transaction.ts';
 export class ServiceDbMeta extends BeanBase {
   private _transaction: ServiceTransaction;
   private _tailCallbacks: ((...args: any[]) => any)[] = [];
+  private _databaseClientCurrent: ServiceDatabaseClient;
 
   protected __init__() {}
 
@@ -23,6 +25,21 @@ export class ServiceDbMeta extends BeanBase {
 
   get inTransaction() {
     return this.transaction.inTransaction;
+  }
+
+  get currentClient() {
+    if (!this._databaseClientCurrent) {
+      this._databaseClientCurrent = this.app.bean.database.getClientDefault();
+    }
+    return this._databaseClientCurrent;
+  }
+
+  set currentClient(value) {
+    this._databaseClientCurrent = value;
+  }
+
+  get current() {
+    return this.inTransaction ? this.transaction.connection : this.currentClient.db;
   }
 
   tail(cb: (...args: any[]) => any) {
