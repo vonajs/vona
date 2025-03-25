@@ -252,7 +252,7 @@ export class ServiceOpenapi extends BeanBase {
       // not check argsMapIsolate.fields
       if (argsMapWithField.fields) Object.assign(schemaObj, argsMapWithField.fields);
       if (argsMapWithField.files) Object.assign(schemaObj, argsMapWithField.files);
-      if (argsMapIsolate.files) schemaObj.files = argsMapIsolate.files;
+      if (argsMapIsolate.files) schemaObj.blobs = argsMapIsolate.files;
       const schema = z.object(schemaObj);
       // body
       request.body = {
