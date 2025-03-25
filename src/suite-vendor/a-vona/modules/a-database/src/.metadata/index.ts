@@ -1,12 +1,13 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
+import type { BeanDatabase } from '../bean/bean.database.ts';
 /** bean: end */
 /** bean: begin */
-import type { BeanDatabase } from '../bean/bean.database.ts';
+import type { BeanDataSource } from '../bean/bean.dataSource.ts';
+
 /** middleware: end */
 /** aopMethod: begin */
 import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.ts';
-
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
 /** service: end */
@@ -50,8 +51,6 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 }
-/** aopMethod: end */
-/** bean: begin */
 export * from '../bean/bean.database.ts';
 declare module 'vona-module-a-aspect' {
 
@@ -68,6 +67,9 @@ declare module 'vona-module-a-database' {
   }
 }
 export * from '../bean/bean.databaseDialectBase.ts';
+/** aopMethod: end */
+/** bean: begin */
+export * from '../bean/bean.dataSource.ts';
 export * from '../bean/bean.model.ts';
 export * from '../bean/bean.modelBase.ts';
 /** middleware: begin */
@@ -77,6 +79,11 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-database' {
 
+  export interface BeanDataSource {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
   export interface BeanDatabase {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -84,6 +91,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
+    dataSource: BeanDataSource;
     database: BeanDatabase;
   }
 }
