@@ -159,6 +159,10 @@ export class BeanExecutor extends BeanBase {
           __delegateProperties(ctx, ctxCaller);
           // ctxCaller
           ctx.ctxCaller = ctxCaller;
+          // dbMeta
+          if (ctxCaller.dbMeta.inTransaction) {
+            ctx.dbMeta = ctxCaller.dbMeta;
+          }
         }
         // extraData
         if (options.extraData) {

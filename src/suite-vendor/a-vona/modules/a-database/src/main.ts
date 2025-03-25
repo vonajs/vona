@@ -45,8 +45,8 @@ export class Main extends BeanSimple implements IModuleMain {
         }
         return this[SymbolDbMeta];
       },
-      set(metaCaller: ServiceDbMeta) {
-        this[SymbolDbMeta] = metaCaller;
+      set(value: ServiceDbMeta) {
+        this[SymbolDbMeta] = value;
       },
     });
     // transaction

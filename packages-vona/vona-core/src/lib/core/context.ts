@@ -49,13 +49,7 @@ export const contextBase: ContextBase = {
     return this[CTXCALLER];
   },
   set ctxCaller(value) {
-    // ctxCaller
     this[CTXCALLER] = value;
-    // todo: 尽量不要在这里设置，容易产生黑盒
-    // transaction
-    if (value.dbMeta.inTransaction) {
-      cast(this).dbMeta = value.dbMeta;
-    }
   },
 
   getController() {
