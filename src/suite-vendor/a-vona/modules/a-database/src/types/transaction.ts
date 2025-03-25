@@ -4,3 +4,8 @@ export type TransactionIsolationLevels =
   | 'snapshot'
   | 'repeatable read'
   | 'serializable';
+
+export interface ITransactionOptions {
+  isolationLevel?: TransactionIsolationLevels;
+  readOnly?: boolean;
+}

@@ -1,19 +1,17 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
+/** aopMethod: begin */
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
+
 import type { BeanDatabase } from '../bean/bean.database.ts';
 /** bean: end */
 /** bean: begin */
 import type { BeanDataSource } from '../bean/bean.dataSource.ts';
-
-/** middleware: end */
-/** aopMethod: begin */
-import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.ts';
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
-
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 /** main: end */
@@ -32,26 +30,10 @@ import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
-import 'vona';
 
 import 'vona';
 
 export * from '../bean/aopMethod.transaction.ts';
-declare module 'vona-module-a-aspect' {
-
-  export interface IMiddlewareRecordLocal {
-    'a-database:transaction': IMiddlewareOptionsTransaction;
-  }
-
-}
-declare module 'vona-module-a-database' {
-
-  export interface MiddlewareTransaction {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-}
-export * from '../bean/bean.database.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IAopMethodRecord {
@@ -66,14 +48,13 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 }
+export * from '../bean/bean.database.ts';
 export * from '../bean/bean.databaseDialectBase.ts';
 /** aopMethod: end */
 /** bean: begin */
 export * from '../bean/bean.dataSource.ts';
 export * from '../bean/bean.model.ts';
 export * from '../bean/bean.modelBase.ts';
-/** middleware: begin */
-export * from '../bean/middleware.transaction.ts';
 declare module 'vona' {
 
 }
@@ -162,7 +143,6 @@ export interface ScopeModuleADatabase {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-database': ScopeModuleADatabase;

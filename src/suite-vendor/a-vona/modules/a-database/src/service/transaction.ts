@@ -1,6 +1,6 @@
 import type knex from 'knex';
 import type { FunctionAsync } from 'vona';
-import type { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.ts';
+import type { ITransactionOptions } from '../types/transaction.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -22,7 +22,7 @@ export class ServiceTransaction extends BeanBase {
     return this._db;
   }
 
-  async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: Partial<IMiddlewareOptionsTransaction>): Promise<RESULT> {
+  async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     let res: RESULT;
     if (!this._db) {
       this._db = this.app.bean.database.getDefault();
