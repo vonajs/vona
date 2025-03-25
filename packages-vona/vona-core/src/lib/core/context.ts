@@ -1,7 +1,6 @@
 import type { ContextBase } from '../../types/context/contextBase.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { MetadataKey } from './metadata.ts';
-import { AsyncResource } from 'node:async_hooks';
 import { cast } from '../../types/utils/cast.ts';
 import { BeanContainer } from '../bean/beanContainer.ts';
 import { appResource } from './resource.ts';
@@ -9,7 +8,6 @@ import { appResource } from './resource.ts';
 const BEAN = Symbol.for('Context#__bean');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
-const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const ONIONSDYNAMIC = Symbol.for('Context#__onionsdynamic');
 
 export const contextBase: ContextBase = {
@@ -55,27 +53,9 @@ export const contextBase: ContextBase = {
     this[CTXCALLER] = value;
     // todo: 尽量不要在这里设置，容易产生黑盒
     // transaction
-    cast(this).dbMeta = value.dbMeta;
-  },
-  tail(cb) {
-    if (!cast(this).dbMeta.master) {
-      this.ctxCaller.tail(AsyncResource.bind(cb));
-    } else {
-      this.tailCallbacks.push(cb);
+    if (value.dbMeta.inTransaction) {
+      cast(this).dbMeta = value.dbMeta;
     }
-  },
-  async tailDone() {
-    while (true) {
-      const cb = this.tailCallbacks.shift();
-      if (!cb) break;
-      await cb();
-    }
-  },
-  get tailCallbacks() {
-    if (!this[TAILCALLBACKS]) {
-      this[TAILCALLBACKS] = [];
-    }
-    return this[TAILCALLBACKS];
   },
 
   getController() {

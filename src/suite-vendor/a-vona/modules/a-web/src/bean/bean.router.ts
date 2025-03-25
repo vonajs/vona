@@ -180,7 +180,7 @@ async function routeStartMiddleware(ctx: VonaContext, next: Function) {
   // next
   const res = await next();
   // invoke callbackes: handle secondly
-  await ctx.tailDone();
+  await ctx.dbMeta.tailDone();
   // ok
   return res;
 }
@@ -189,7 +189,7 @@ async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
   // next
   const res = await next();
   // invoke callbackes: handle firstly
-  await ctx.tailDone();
+  await ctx.dbMeta.tailDone();
   // ok
   return res;
 }
@@ -206,7 +206,7 @@ async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
 //     // next
 //     const res = await next();
 //     // invoke callbackes: handle secondly
-//     await ctx.tailDone();
+//     await ctx.dbMeta.tailDone();
 //     // ok
 //     return res;
 //   };
@@ -225,7 +225,7 @@ async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
 //     // next
 //     const res = await next();
 //     // invoke callbackes: handle firstly
-//     await ctx.tailDone();
+//     await ctx.dbMeta.tailDone();
 //     // ok
 //     return res;
 //   };

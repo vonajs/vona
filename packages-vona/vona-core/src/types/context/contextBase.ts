@@ -13,9 +13,6 @@ export interface ContextBase {
   set innerAccess(value: boolean);
   get ctxCaller(): VonaContext;
   set ctxCaller(value: VonaContext);
-  tail: (cb) => any;
-  tailDone: () => Promise<any>;
-  get tailCallbacks();
   getController: () => Constructable | undefined;
   getControllerPrototype: () => object | undefined;
   getControllerBeanFullName: () => string | undefined;
