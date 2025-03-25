@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { $apiPath } from 'vona-module-a-web';
 
-describe.only('upload.test.ts', () => {
+describe('upload.test.ts', () => {
   it('action:upload:fields', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
@@ -42,6 +42,8 @@ describe.only('upload.test.ts', () => {
       formData.append('name', 'zhennann');
       formData.append('welcome1', new (Blob as any)(['hello world!'], { type: 'text/plain' }), 'file-test1.txt');
       formData.append('welcome2', new (Blob as any)(['hello world!'], { type: 'text/plain' }), 'file-test2.txt');
+      formData.append('images', new (Blob as any)(['hello world!'], { type: 'text/plain' }));
+      formData.append('images', new (Blob as any)(['hello world!'], { type: 'text/plain' }));
       const url = app.util.getAbsoluteUrlByApiPath($apiPath('/vona/test/upload/files'));
       const res = await fetch(url, {
         method: 'POST',
