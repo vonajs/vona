@@ -10,10 +10,9 @@ export class ServiceRedisToken extends BeanBase {
   }
 
   async verify(payloadData: IPayloadData) {
-    const key = this._getAuthRedisKey(payloadData);
-    if (!key) return false;
-    const token = await this.redisAuth.get(key);
-    if (token !== payloadData.token) return false;
+    const payloadData2 = await this.retrieve(payloadData);
+    if (!payloadData2) return false;
+    if (payloadData2.token !== payloadData.token) return false;
     return true;
   }
 
