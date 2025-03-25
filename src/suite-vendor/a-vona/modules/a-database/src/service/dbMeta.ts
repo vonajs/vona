@@ -5,10 +5,20 @@ import { ServiceTransaction } from './transaction.ts';
 @Service()
 export class ServiceDbMeta extends BeanBase {
   master: boolean;
-  transaction: ServiceTransaction;
+  private _transaction: ServiceTransaction;
 
   protected __init__() {
     this.master = true;
-    this.transaction = this.ctx.bean._newBean(ServiceTransaction);
+  }
+
+  get transaction() {
+    if (!this._transaction) {
+      this._transaction = this.ctx.bean._newBean(ServiceTransaction);
+    }
+    return this._transaction;
+  }
+
+  set transaction(value) {
+    this._transaction = value;
   }
 }
