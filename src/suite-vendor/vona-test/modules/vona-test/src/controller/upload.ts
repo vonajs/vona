@@ -6,6 +6,7 @@ import { Arg, v } from 'vona-module-a-openapi';
 import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
+import { z } from 'zod';
 
 @Controller({ path: 'upload', meta: { mode: ['test', 'local'] } })
 export class ControllerUpload extends BeanBase {
@@ -14,12 +15,11 @@ export class ControllerUpload extends BeanBase {
   @Aspect.interceptor('a-upload:upload')
   fields(
     @Arg.fields() fields: IUploadField[],
-    @Arg.fields('checkes') checkes: string[],
+    @Arg.fields('checkes', v.array(z.string())) checkes: string[],
     @Arg.field('name', v.default('zhennann'), v.description('your name')) name: string,
   ) {
     assert.equal(fields.find(item => item.name === 'name')?.value, 'zhennann');
     assert.equal(checkes.length > 0, true);
-    console.log('----checkes', checkes);
     assert.equal(name, 'zhennann');
     return this.ctx[SymbolUploadValue];
   }
