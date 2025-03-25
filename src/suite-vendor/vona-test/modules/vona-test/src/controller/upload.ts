@@ -21,7 +21,7 @@ export class ControllerUpload extends BeanBase {
   @Web.post('file')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  file(@Arg.fields('name', v.default('zhennann')) name: string, @Arg.files('welcome') file: IUploadFile) {
+  file(@Arg.fields('name', v.default('zhennann')) name: string, @Arg.file('welcome') file: IUploadFile) {
     assert.equal(name, 'zhennann');
     assert.equal(file.name, 'welcome');
     return this.ctx[SymbolUploadValue];
@@ -30,8 +30,14 @@ export class ControllerUpload extends BeanBase {
   @Web.post('files')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  files(@Arg.files(v.description('more files')) files: IUploadFile[], @Arg.files('welcome1', v.description('single file')) file1: IUploadFile, @Arg.files('welcome2') file2: IUploadFile) {
+  files(
+    @Arg.files(v.description('more files')) files: IUploadFile[],
+    @Arg.files('image', v.description('images')) images: IUploadFile[],
+    @Arg.file('welcome1', v.description('single file')) file1: IUploadFile,
+    @Arg.file('welcome2')file2: IUploadFile,
+  ) {
     assert.equal(files.find(item => item.name === 'welcome1')?.name, 'welcome1');
+    assert.equal(images.find(item => item.name === 'images')?.name, 'images');
     assert.equal(file1.name, 'welcome1');
     assert.equal(file2.name, 'welcome2');
     return this.ctx[SymbolUploadValue];
