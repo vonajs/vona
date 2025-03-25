@@ -36,6 +36,13 @@ function Fields(property?: string | SchemaLike, ...schemaLikes: SchemaLike[]): P
   return createPipesArgumentDecorator('fields')(property, ...schemaLikes);
 }
 
+function Field(): ParameterDecorator;
+function Field(...schemaLikes: SchemaLike[]): ParameterDecorator;
+function Field(property: string, ...schemaLikes: SchemaLike[]): ParameterDecorator;
+function Field(property?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
+  return createPipesArgumentDecorator('field')(property, ...schemaLikes);
+}
+
 function Files(): ParameterDecorator;
 function Files(...schemaLikes: SchemaLike[]): ParameterDecorator;
 function Files(property: string, ...schemaLikes: SchemaLike[]): ParameterDecorator;
@@ -60,6 +67,7 @@ export const Arg = {
   body: Body,
   headers: Headers,
   fields: Fields,
+  field: Field,
   files: Files,
   file: File,
   user: User,

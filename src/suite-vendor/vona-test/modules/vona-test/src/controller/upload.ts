@@ -12,8 +12,14 @@ export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  fields(@Arg.fields() fields: IUploadField[], @Arg.fields('name', v.default('zhennann'), v.description('your name')) name: string) {
+  fields(
+    @Arg.fields() fields: IUploadField[],
+    @Arg.fields('checkes') checkes: string[],
+    @Arg.field('name', v.default('zhennann'), v.description('your name')) name: string,
+  ) {
     assert.equal(fields.find(item => item.name === 'name')?.value, 'zhennann');
+    assert.equal(checkes.length > 0, true);
+    console.log('----checkes', checkes);
     assert.equal(name, 'zhennann');
     return this.ctx[SymbolUploadValue];
   }
@@ -21,7 +27,7 @@ export class ControllerUpload extends BeanBase {
   @Web.post('file')
   @Passport.public()
   @Aspect.interceptor('a-upload:upload')
-  file(@Arg.fields('name', v.default('zhennann')) name: string, @Arg.file('welcome') file: IUploadFile) {
+  file(@Arg.field('name', v.default('zhennann')) name: string, @Arg.file('welcome') file: IUploadFile) {
     assert.equal(name, 'zhennann');
     assert.equal(file.name, 'welcome');
     return this.ctx[SymbolUploadValue];
