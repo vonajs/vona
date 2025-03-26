@@ -1,11 +1,11 @@
 import type { Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
-import type { TransactionIsolationLevels } from '../types/transaction.ts';
+import type { EnumTransactionIsolationLevels } from '../types/transaction.ts';
 import { BeanAopMethodBase } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
 export interface IAopMethodOptionsTransaction extends IDecoratorAopMethodOptions {
-  isolationLevel: TransactionIsolationLevels;
+  isolationLevel: EnumTransactionIsolationLevels;
   readOnly: boolean;
 }
 

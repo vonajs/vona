@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Core } from 'vona-module-a-core';
-import { Database } from 'vona-module-a-database';
+import { Database, EnumTransactionIsolationLevels } from 'vona-module-a-database';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
@@ -23,8 +23,8 @@ export class ControllerOnion extends BeanBase {
   @Aspect.guardGlobal('a-user:passport', { public: true })
   @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
   @Core.gate({ gate: { mode: 'local' } })
-  @Aspect.aopMethod('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
-  @Database.transaction({ isolationLevel: 'read committed', readOnly: false })
+  @Aspect.aopMethod('a-database:transaction', { isolationLevel: EnumTransactionIsolationLevels.SERIALIZABLE, readOnly: true })
+  @Database.transaction({ isolationLevel: EnumTransactionIsolationLevels.READ_COMMITTED, readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(
     @Arg.query('id', v.default(0), z.number()) id: number,
