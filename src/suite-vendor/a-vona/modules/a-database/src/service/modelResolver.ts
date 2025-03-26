@@ -1,13 +1,12 @@
-import { appResource, BeanBase } from 'vona';
+import type { IDecoratorModelOptions } from '../types/onion/model.ts';
+import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { IDecoratorModelOptions } from '../types/index.ts';
 
 const BeanModuleScope = Symbol('ModelResolver:BeanModuleScope');
 
 @Service()
 export class ServiceModelResolver extends BeanBase {
   private [BeanModuleScope]: string;
-  private __instances: Record<string, any> = {};
 
   constructor(moduleScope) {
     super();
