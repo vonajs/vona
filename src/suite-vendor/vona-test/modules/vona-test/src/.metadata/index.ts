@@ -5,6 +5,9 @@ import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 
 import type { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
+
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IDecoratorEventOptions } from 'vona-module-a-event';
 
 import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
@@ -29,10 +32,10 @@ import type { CacheMemTest } from '../bean/cacheMem.test.ts';
 /** cacheRedis: end */
 /** cacheRedis: begin */
 import type { CacheRedisTest } from '../bean/cacheRedis.test.ts';
-
 /** event: end */
 /** event: begin */
 import type { EventHelloEcho } from '../bean/event.helloEcho.ts';
+
 /** queue: end */
 /** queue: begin */
 import type { QueueTest } from '../bean/queue.test.ts';
@@ -40,8 +43,15 @@ import type { QueueTest } from '../bean/queue.test.ts';
 /** summerCache: end */
 /** summerCache: begin */
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
-
 import type { config } from '../config/config.ts';
+
+/** entity: end */
+/** entity: begin */
+import type { EntityTest } from '../entity/test.ts';
+
+/** model: end */
+/** model: begin */
+import type { ModelTest } from '../model/test.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
@@ -189,9 +199,54 @@ declare module 'vona-module-vona-test' {
 export interface IModuleCacheRedis {
   test: CacheRedisTest;
 }
-/** cacheRedis: end */
+/** model: end */
 /** event: begin */
 export * from '../bean/event.helloEcho.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IEntityRecord {
+    'vona-test:test': IDecoratorEntityOptions;
+  }
+
+}
+declare module 'vona-module-vona-test' {
+
+}
+export interface IModuleEntity {
+  test: EntityTest;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-vona-test' {
+
+  export interface EntityTest {
+    $column: <K extends keyof Omit<EntityTest, 'column' | 'columns' | 'table'>>(column: K) => K;
+    $columns: <K extends keyof Omit<EntityTest, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** event: end */
+/** eventListener: begin */
+export * from '../bean/eventListener.helloEcho.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IModelRecord {
+    'vona-test:test': IDecoratorModelOptions;
+  }
+
+}
+declare module 'vona-module-vona-test' {
+
+  export interface ModelTest {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+export interface IModuleModel {
+  test: ModelTest;
+}
+/** eventListener: end */
+/** queue: begin */
+export * from '../bean/queue.test.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventRecord {
@@ -209,9 +264,7 @@ declare module 'vona-module-vona-test' {
 export interface IModuleEvent {
   helloEcho: EventHelloEcho;
 }
-/** event: end */
-/** eventListener: begin */
-export * from '../bean/eventListener.helloEcho.ts';
+export * from '../bean/schedule.test3.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventListenerRecord {
@@ -226,9 +279,9 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** eventListener: end */
-/** queue: begin */
-export * from '../bean/queue.test.ts';
+/** queue: end */
+/** schedule: begin */
+export * from '../bean/schedule.test.ts';
 declare module 'vona-module-a-queue' {
 
   export interface IQueueRecord {
@@ -246,10 +299,12 @@ declare module 'vona-module-vona-test' {
 export interface IModuleQueue {
   test: QueueTest;
 }
-export * from '../bean/schedule.test3.ts';
-/** queue: end */
-/** schedule: begin */
-export * from '../bean/schedule.test.ts';
+/** schedule: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.test.ts';
+/** controller: end */
+/** config: begin */
+export * from '../config/config.ts';
 declare module 'vona-module-a-schedule' {
 
   export interface IScheduleRecord {
@@ -270,9 +325,9 @@ declare module 'vona-module-vona-test' {
     get scope(): ScopeModuleVonaTest;
   }
 }
-/** schedule: end */
-/** summerCache: begin */
-export * from '../bean/summerCache.test.ts';
+/** service: end */
+/** controller: begin */
+export * from '../controller/bean.ts';
 declare module 'vona-module-a-summer' {
 
   export interface ISummerCacheRecord {
@@ -290,12 +345,8 @@ declare module 'vona-module-vona-test' {
 export interface IModuleSummerCache {
   test: SummerCacheTest;
 }
-/** controller: end */
-/** config: begin */
-export * from '../config/config.ts';
-/** service: end */
-/** controller: begin */
-export * from '../controller/bean.ts';
+export * from '../controller/cacheMem.ts';
+export * from '../controller/cacheRedis.ts';
 declare module 'vona' {
 
   export interface IDtoRecord {
@@ -307,11 +358,11 @@ declare module 'vona' {
 declare module 'vona-module-vona-test' {
 
 }
-export * from '../controller/cacheMem.ts';
-export * from '../controller/cacheRedis.ts';
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
 export * from '../controller/performAction.ts';
+export * from '../controller/queue.ts';
+export * from '../controller/summer.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -366,8 +417,6 @@ declare module 'vona' {
     'vona-test.service.transaction': ServiceTransaction;
   }
 }
-export * from '../controller/queue.ts';
-export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
 export * from '../controller/transaction.ts';
 export * from '../controller/upload.ts';
@@ -375,6 +424,12 @@ export * from '../controller/upload.ts';
 /** dto: begin */
 export * from '../dto/profile.ts';
 export * from '../dto/user.ts';
+/** cacheRedis: end */
+/** entity: begin */
+export * from '../entity/test.ts';
+/** entity: end */
+/** model: begin */
+export * from '../model/test.ts';
 /** dto: end */
 /** service: begin */
 export * from '../service/aopMethod.ts';
@@ -509,6 +564,8 @@ export interface ScopeModuleVonaTest {
   broadcast: IModuleBroadcast;
   cacheMem: IModuleCacheMem;
   cacheRedis: IModuleCacheRedis;
+  entity: IModuleEntity;
+  model: IModuleModel;
   event: IModuleEvent;
   queue: IModuleQueue;
   summerCache: IModuleSummerCache;
