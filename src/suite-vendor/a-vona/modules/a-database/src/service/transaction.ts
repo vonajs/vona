@@ -55,9 +55,13 @@ export class ServiceTransaction extends BeanBase {
         return await this.bean.executor.newCtxIsolate(fn, {
           transaction: true,
           transactionOptions,
-          instance: true,
-          extraData: this.ctx as any,
         });
+      }
+    } else if (propagation === EnumTransactionPropagation.NOT_SUPPORTED) {
+      if (!this.inTransaction) {
+        return await fn();
+      } else {
+        return await this.bean.executor.newCtxIsolate(fn);
       }
     }
   }

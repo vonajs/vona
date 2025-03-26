@@ -91,6 +91,7 @@ export class BeanExecutor extends BeanBase {
       options.dbLevel = options.dbLevel ?? 1; // same as isolate
     } else {
       options.dbLevel = options.dbLevel ?? this.ctx.dbLevel + 1;
+      options.extraData = options.instanceName === undefined && options.extraData === undefined ? this.ctx as any : options.extraData;
     }
     return await this.newCtx(fn, options);
   }
