@@ -41,7 +41,7 @@ export class BeanDatabase extends BeanBase {
   }
 
   createDbMeta(clientName?: keyof IDatabaseClientRecord) {
-    return this.ctx.bean._newBean(ServiceDbMeta, clientName);
+    return this.app.bean._newBean(ServiceDbMeta, clientName);
   }
 
   async switchClient<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {
