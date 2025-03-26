@@ -17,4 +17,12 @@ describe('database.test.ts', () => {
       assert.equal(app.ctx.dbMeta.currentClientName, app.config.database.defaultClient);
     });
   });
+  it('action:dataSource:model', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // scope
+      const scopeTest = app.bean.scope('vona-test');
+      const modelTest = scopeTest.model.test;
+      console.log(modelTest);
+    });
+  });
 });
