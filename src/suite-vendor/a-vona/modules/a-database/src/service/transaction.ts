@@ -26,13 +26,44 @@ export class ServiceTransaction extends BeanBase {
   }
 
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
-    let res: RESULT;
+    // transactionOptions
+    const transactionOptions = Object.assign({}, options, { propagation: undefined });
     // propagation
     const propagation = options?.propagation ?? EnumTransactionPropagation.REQUIRED;
-    if (propagation === EnumTransactionPropagation.SUPPORTS) {
+    if (propagation === EnumTransactionPropagation.REQUIRED) {
+      // required
+      return await this._isolationLevelRequired(fn, transactionOptions);
+    } else if (propagation === EnumTransactionPropagation.SUPPORTS) {
       // supports
+      if (this.inTransaction) {
+        return await this._isolationLevelRequired(fn, transactionOptions);
+      } else {
+        return await fn();
+      }
+    } else if (propagation === EnumTransactionPropagation.MANDATORY) {
+      // mandatory
+      if (this.inTransaction) {
+        return await this._isolationLevelRequired(fn, transactionOptions);
+      } else {
+        throw new Error('transaction error: mandatory');
+      }
+    } else if (propagation === EnumTransactionPropagation.REQUIRES_NEW) {
+      // requires_new
+      if (!this.inTransaction) {
+        return await this._isolationLevelRequired(fn, transactionOptions);
+      } else {
+        return await this.bean.executor.newCtxIsolate(fn, {
+          instance: true,
+          transaction: true,
+          transactionOptions,
+          extraData: this.ctx as any,
+        });
+      }
     }
-    // do
+  }
+
+  private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
+    let res: RESULT;
     try {
       if (++this._transactionCounter === 1) {
         const db = this._dbMeta.currentClient.db;
