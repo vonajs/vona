@@ -149,10 +149,15 @@ export class BeanExecutor extends BeanBase {
     }
     // run
     const isolate = !this.ctx || this.ctx.dbLevel !== options.dbLevel;
-    const ctxCaller = !isolate && this.ctx;
+    const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
+    const ctxCallerDbMeta = ctxCaller?.dbMeta;// must before runInAnonymousContextScope
     return await this.runInAnonymousContextScope(
       async () => {
         const ctx = this.app.ctx;
+        // innerAccess
+        ctx.innerAccess = options.innerAccess !== false;
+        // dbLevel: must before ctx.dbMeta.currentClient
+        ctx.dbLevel = options.dbLevel;
         // ctxCaller
         if (ctxCaller) {
           // delegateProperties
@@ -160,10 +165,10 @@ export class BeanExecutor extends BeanBase {
           // ctxCaller
           ctx.ctxCaller = ctxCaller;
           // dbMeta
-          if (ctxCaller.dbMeta.inTransaction) {
-            ctx.dbMeta = ctxCaller.dbMeta;
+          if (ctxCallerDbMeta!.inTransaction) {
+            ctx.dbMeta = ctxCallerDbMeta!;
           } else {
-            ctx.dbMeta.currentClient = ctxCaller.dbMeta.currentClient;
+            ctx.dbMeta.currentClient = ctxCallerDbMeta!.currentClient;
           }
         }
         // extraData
@@ -171,10 +176,6 @@ export class BeanExecutor extends BeanBase {
           // delegateProperties
           __delegateProperties(ctx, options.extraData);
         }
-        // innerAccess
-        ctx.innerAccess = options.innerAccess !== false;
-        // dbLevel
-        ctx.dbLevel = options.dbLevel;
         // execute
         let res: RESULT;
         if (options.transaction) {

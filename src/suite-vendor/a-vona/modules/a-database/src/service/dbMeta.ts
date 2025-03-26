@@ -6,16 +6,17 @@ import { ServiceTransaction } from './transaction.ts';
 
 @Service()
 export class ServiceDbMeta extends BeanBase {
+  private _databaseClientCurrent: ServiceDatabaseClient;
   private _transaction: ServiceTransaction;
   private _tailCallbacks: ((...args: any[]) => any)[] = [];
-  private _databaseClientCurrent: ServiceDatabaseClient;
 
-  protected __init__() {}
+  protected __init__() {
+    // must init eager, let ctx is same
+    this._databaseClientCurrent = this.app.bean.database.getClientDefault();
+    this._transaction = this.ctx.bean._newBean(ServiceTransaction);
+  }
 
   get transaction() {
-    if (!this._transaction) {
-      this._transaction = this.ctx.bean._newBean(ServiceTransaction);
-    }
     return this._transaction;
   }
 
@@ -28,9 +29,6 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   get currentClient() {
-    if (!this._databaseClientCurrent) {
-      this._databaseClientCurrent = this.app.bean.database.getClientDefault();
-    }
     return this._databaseClientCurrent;
   }
 
