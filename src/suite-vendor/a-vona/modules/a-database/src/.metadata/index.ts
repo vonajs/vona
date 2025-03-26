@@ -13,6 +13,7 @@ import type { Errors } from '../config/errors.ts';
 /** service: begin */
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
+import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 /** main: end */
 /** scope: begin */
@@ -85,11 +86,15 @@ export * from '../config/errors.ts';
 /** error: end */
 /** main: begin */
 export * from '../main.ts';
+/** bean: end */
+/** service: begin */
+export * from '../service/databaseClient.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
     'a-database:databaseClient': never;
     'a-database:dbMeta': never;
+    'a-database:modelResolver': never;
     'a-database:transaction': never;
   }
 
@@ -106,6 +111,11 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 
+  export interface ServiceModelResolver {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
   export interface ServiceTransaction {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -114,23 +124,23 @@ declare module 'vona-module-a-database' {
 export interface IModuleService {
   databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
+  modelResolver: ServiceModelResolver;
   transaction: ServiceTransaction;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-database.service.databaseClient': ServiceDatabaseClient;
     'a-database.service.dbMeta': ServiceDbMeta;
+    'a-database.service.modelResolver': ServiceModelResolver;
     'a-database.service.transaction': ServiceTransaction;
   }
 }
-/** bean: end */
-/** service: begin */
-export * from '../service/databaseClient.ts';
+export * from '../service/dbMeta.ts';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-export * from '../service/dbMeta.ts';
+export * from '../service/modelResolver.ts';
 export * from '../service/transaction.ts';
 
 @Scope()

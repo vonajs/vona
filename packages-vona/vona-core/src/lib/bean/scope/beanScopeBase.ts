@@ -1,4 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
+import type { BeanBase } from '../beanBase.ts';
 import { getOnionMetasMeta } from '@cabloy/module-info';
 import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.ts';
 import { BeanScopeError } from '../resource/error/beanScopeError.ts';
@@ -9,11 +10,13 @@ import { BeanScopeUtil } from './beanScopeUtil.ts';
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
+const BeanModuleModel = Symbol('BeanScopeBase#BeanModuleModel');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleUtil]: BeanScopeUtil;
+  private [BeanModuleModel]: BeanBase;
   private __onionMetaNames: Record<string, boolean>;
   private __scenes: Record<string, BeanScopeScene> = {};
   private __metas: Record<string, unknown> = {};
@@ -68,6 +71,13 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleUtil] = this.bean._newBean(BeanScopeUtil, moduleBelong);
       }
       return this[BeanModuleUtil];
+    }
+    // model
+    if (prop === 'model') {
+      if (!this[BeanModuleModel]) {
+        this[BeanModuleModel] = this.bean._newBean('a-database.service.modelResolver' as any, moduleBelong);
+      }
+      return this[BeanModuleModel];
     }
     // meta
     if (this.onionMetaNames[prop]) {
