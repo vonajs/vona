@@ -1,4 +1,5 @@
 import type { ContextState, ILocalInfos, PowerPartial } from 'vona';
+import type { IDatabaseClientRecord } from 'vona-module-a-database';
 import type { ConfigOnions } from 'vona-module-a-onion';
 
 export const SymbolRouterMiddleware = Symbol('SymbolRouterMiddleware');
@@ -15,6 +16,7 @@ export interface INewCtxOptions {
   instanceName?: string | undefined | null;
   instance?: boolean;
   dbLevel?: number;
+  dbClientName?: keyof IDatabaseClientRecord;
   transaction?: boolean;
   extraData?: INewCtxExtraData;
   innerAccess?: boolean;

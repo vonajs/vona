@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { IDatabaseClientRecord } from '../types/database.ts';
 import knex from 'knex';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -8,7 +9,7 @@ export interface ISetDatabaseNameResult { database?: string; filename?: string }
 @Service()
 export class ServiceDatabaseClient extends BeanBase {
   clientNameOriginal?: string;
-  clientName: string;
+  clientName: keyof IDatabaseClientRecord;
   clientConfig: Knex.Config;
   private _knex: Knex;
 
@@ -35,13 +36,13 @@ export class ServiceDatabaseClient extends BeanBase {
     await this._knex?.destroy();
   }
 
-  private _extractClientName(clientName?: string) {
+  private _extractClientName(clientName?: string): keyof IDatabaseClientRecord {
     // default
     if (!clientName) return this.configDatabase.defaultClient;
     // split
     clientName = clientName.split(':')[0];
     if (!clientName) return this.configDatabase.defaultClient;
-    return clientName;
+    return clientName as keyof IDatabaseClientRecord;
   }
 
   getClientConfig(clientName: string, original: boolean = false): Knex.Config {

@@ -6,7 +6,7 @@ export interface ConfigDatabaseClient extends Omit<Knex.Config, 'client'> {
 }
 export interface ConfigDatabase {
   testDatabase: boolean;
-  defaultClient: string;
+  defaultClient: keyof IDatabaseClientRecord;
   clients: Record<keyof IDatabaseClientRecord, ConfigDatabaseClient>;
   base: ConfigDatabaseClient;
 }

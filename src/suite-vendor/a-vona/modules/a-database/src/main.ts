@@ -1,5 +1,6 @@
 import type { IModuleMain, PowerPartial, VonaApplication, VonaContext } from 'vona';
 import type { ConfigDatabase } from './types/config.ts';
+import type { IDatabaseClientRecord } from './types/database.ts';
 import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
 import { ExtendKnex } from './extend/index.ts';
 import { ServiceDbMeta } from './service/dbMeta.ts';
@@ -48,7 +49,7 @@ export class Main extends BeanSimple implements IModuleMain {
 export async function configDefault(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
   return {
     testDatabase: false,
-    defaultClient: process.env.DATABASE_DEFAULT_CLIENT,
+    defaultClient: process.env.DATABASE_DEFAULT_CLIENT as keyof IDatabaseClientRecord,
     clients: {
       pg: {
         client: 'pg',

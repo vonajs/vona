@@ -111,6 +111,7 @@ export class BeanExecutor extends BeanBase {
       options.dbLevel = options.dbLevel ?? 1; // same as isolate
     } else {
       options.dbLevel = options.dbLevel ?? this.ctx.dbLevel;
+      options.dbClientName = options.dbClientName === undefined ? this.ctx.dbMeta.currentClient.clientName : options.dbClientName;
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
