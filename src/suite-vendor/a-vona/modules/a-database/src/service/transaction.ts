@@ -5,7 +5,7 @@ import type { ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDbMeta } from './dbMeta.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { TransactionIsolationLevels } from '../types/transaction.ts';
+import { EnumTransactionPropagation, TransactionIsolationLevels } from '../types/transaction.ts';
 
 @Service()
 export class ServiceTransaction extends BeanBase {
@@ -27,6 +27,12 @@ export class ServiceTransaction extends BeanBase {
 
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     let res: RESULT;
+    // propagation
+    const propagation = options?.propagation ?? EnumTransactionPropagation.REQUIRED;
+    if (propagation === EnumTransactionPropagation.SUPPORTS) {
+      // supports
+    }
+    // do
     try {
       if (++this._transactionCounter === 1) {
         const db = this._dbMeta.currentClient.db;
