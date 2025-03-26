@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('database.test.ts', () => {
+describe('database.test.ts', () => {
   it('action:dataSource:switch', async () => {
     await app.bean.executor.mockCtx(async () => {
       // current
