@@ -92,27 +92,9 @@ export class BeanExecutor extends BeanBase {
     // ctx
     const ctx = this.app.createAnonymousContext(options?.req, options?.reqInherit);
     return await this.app.ctxStorage.run(ctx, async () => {
-      // locale
-      if (options?.locale !== undefined) {
-        ctx.locale = options?.locale;
-      }
-      // instanceName: undefined/null is different
-      if (options?.instanceName !== undefined) {
-        ctx.instanceName = options?.instanceName;
-      }
-      const instanceName = ctx.instanceName; // use default instanceName when undefined
-      // instance
-      if (instanceName !== undefined && instanceName !== null) {
-        ctx.instance = (await this.bean.instance.get(instanceName))!;
-        // start instance
-        if (options?.instance) {
-          await this.$scope.instance.service.instance.checkAppReadyInstance(true);
-        }
-      }
       // fn
       const res = await fn();
-      // tail done
-      await ctx.dbMeta.tailDone();
+
       // ok
       return res;
     });
@@ -156,8 +138,16 @@ export class BeanExecutor extends BeanBase {
         const ctx = this.app.ctx;
         // innerAccess
         ctx.innerAccess = options.innerAccess !== false;
-        // dbLevel: must before ctx.dbMeta.currentClient
+        // dbLevel: must before ctx.dbMeta
         ctx.dbLevel = options.dbLevel;
+        // locale
+        if (options.locale !== undefined) {
+          ctx.locale = options.locale;
+        }
+        // instanceName: undefined/null is different
+        if (options.instanceName !== undefined) {
+          ctx.instanceName = options.instanceName;
+        }
         // ctxCaller
         if (ctxCaller) {
           // delegateProperties
@@ -176,6 +166,15 @@ export class BeanExecutor extends BeanBase {
           // delegateProperties
           __delegateProperties(ctx, options.extraData);
         }
+        // instance
+        const instanceName = ctx.instanceName; // use default instanceName when undefined
+        if (instanceName !== undefined && instanceName !== null) {
+          ctx.instance = (await this.bean.instance.get(instanceName))!;
+          // start instance
+          if (options.instance) {
+            await this.$scope.instance.service.instance.checkAppReadyInstance(true);
+          }
+        }
         // execute
         let res: RESULT;
         if (options.transaction) {
@@ -185,6 +184,8 @@ export class BeanExecutor extends BeanBase {
         } else {
           res = await fn();
         }
+        // tail done
+        await ctx.dbMeta.tailDone();
         // ok
         return res;
       },
