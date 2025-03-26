@@ -169,7 +169,7 @@ export class BeanExecutor extends BeanBase {
       if (options.transaction) {
         res = await ctx.dbMeta.transaction.begin(async () => {
           return await fn();
-        });
+        }, options.transactionOptions);
       } else {
         res = await fn();
       }
