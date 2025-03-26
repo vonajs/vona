@@ -13,7 +13,7 @@ export class ServiceDbMeta extends BeanBase {
   protected __init__() {
     // must init eager, let ctx is same
     this._databaseClientCurrent = this.app.bean.database.getClientDefault();
-    this._transaction = this.ctx.bean._newBean(ServiceTransaction);
+    this._transaction = this.ctx.bean._newBean(ServiceTransaction, this);
   }
 
   get transaction() {

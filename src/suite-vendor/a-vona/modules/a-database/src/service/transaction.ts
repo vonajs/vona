@@ -1,6 +1,7 @@
 import type knex from 'knex';
 import type { FunctionAsync } from 'vona';
 import type { ITransactionOptions } from '../types/transaction.ts';
+import type { ServiceDbMeta } from './dbMeta.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -8,7 +9,11 @@ import { Service } from 'vona-module-a-web';
 export class ServiceTransaction extends BeanBase {
   _transactionCounter: number = 0;
   _connection?: knex.Knex.Transaction;
-  _db?: knex.Knex;
+  _dbMeta: ServiceDbMeta;
+
+  protected __init__(dbMeta: ServiceDbMeta) {
+    this._dbMeta = dbMeta;
+  }
 
   get inTransaction() {
     return this._transactionCounter > 0;
@@ -18,18 +23,12 @@ export class ServiceTransaction extends BeanBase {
     return this._connection;
   }
 
-  get db(): knex.Knex | undefined {
-    return this._db;
-  }
-
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     let res: RESULT;
-    if (!this._db) {
-      this._db = this.app.bean.database.getDefault();
-    }
     try {
       if (++this._transactionCounter === 1) {
-        this._connection = await this._db.transaction(options);
+        const db = this._dbMeta.currentClient.db;
+        this._connection = await db.transaction(options);
       }
     } catch (err) {
       this._transactionCounter--;
@@ -41,7 +40,6 @@ export class ServiceTransaction extends BeanBase {
       if (--this._transactionCounter === 0) {
         await this._connection!.rollback();
         this._connection = undefined;
-        this._db = undefined;
       }
       throw err;
     }
@@ -49,12 +47,10 @@ export class ServiceTransaction extends BeanBase {
       if (--this._transactionCounter === 0) {
         await this._connection!.commit();
         this._connection = undefined;
-        this._db = undefined;
       }
     } catch (err) {
       await this._connection!.rollback();
       this._connection = undefined;
-      this._db = undefined;
       throw err;
     }
     return res;
