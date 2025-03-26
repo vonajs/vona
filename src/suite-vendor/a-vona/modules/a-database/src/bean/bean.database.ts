@@ -3,6 +3,7 @@ import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from '../service/databaseClient.ts';
+import { ServiceDbMeta } from '../service/dbMeta.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -33,5 +34,9 @@ export class BeanDatabase extends BeanBase {
       throw new Error(`database dialect not found: ${client}`);
     }
     return dialect;
+  }
+
+  createDbMeta(clientName?: keyof IDatabaseClientRecord) {
+    return this.ctx.bean._newBean(ServiceDbMeta, clientName);
   }
 }

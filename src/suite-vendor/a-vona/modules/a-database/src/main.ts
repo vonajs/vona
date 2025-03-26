@@ -1,9 +1,9 @@
 import type { IModuleMain, PowerPartial, VonaApplication, VonaContext } from 'vona';
+import type { ServiceDbMeta } from './service/dbMeta.ts';
 import type { ConfigDatabase } from './types/config.ts';
 import type { IDatabaseClientRecord } from './types/database.ts';
 import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
 import { ExtendKnex } from './extend/index.ts';
-import { ServiceDbMeta } from './service/dbMeta.ts';
 
 const SymbolDbMeta = Symbol('SymbolDbMeta');
 const SymbolDbLevel = Symbol('SymbolDbLevel');
@@ -33,7 +33,7 @@ export class Main extends BeanSimple implements IModuleMain {
       enumerable: false,
       get(this: VonaContext) {
         if (!this[SymbolDbMeta]) {
-          this[SymbolDbMeta] = this.bean._newBean(ServiceDbMeta);
+          this[SymbolDbMeta] = this.bean.database.createDbMeta();
         }
         return this[SymbolDbMeta];
       },

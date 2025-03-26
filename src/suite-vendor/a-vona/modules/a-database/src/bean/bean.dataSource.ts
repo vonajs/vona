@@ -2,7 +2,6 @@ import type { FunctionAsync } from 'vona';
 import type { IDataSourceSwitchOptions } from '../types/dataSource.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { ServiceDbMeta } from '../service/dbMeta.ts';
 
 @Bean()
 export class BeanDataSource extends BeanBase {
@@ -14,7 +13,7 @@ export class BeanDataSource extends BeanBase {
     }
     // dbMetaPrevious
     const dbMetaPrevious = this.ctx.dbMeta;
-    this.ctx.dbMeta = this.ctx.bean._newBean(ServiceDbMeta, clientName);
+    this.ctx.dbMeta = this.bean.database.createDbMeta(clientName);
     // fn
     try {
       return await fn();

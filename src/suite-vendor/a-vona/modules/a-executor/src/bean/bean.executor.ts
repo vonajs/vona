@@ -121,7 +121,6 @@ export class BeanExecutor extends BeanBase {
     const ctxCallerDbMeta = ctxCaller?.dbMeta;// must before ctxStorage.run
     const ctx = this.app.createAnonymousContext(options.req, options.reqInherit);
     return await this.app.ctxStorage.run(ctx, async () => {
-      const ctx = this.app.ctx;
       // innerAccess
       ctx.innerAccess = options.innerAccess !== false;
       // dbLevel: must before ctx.dbMeta
@@ -146,11 +145,15 @@ export class BeanExecutor extends BeanBase {
         } else {
           ctx.dbMeta.currentClient = ctxCallerDbMeta!.currentClient;
         }
-      }
-      // extraData
-      if (options.extraData) {
-        // delegateProperties
-        __delegateProperties(ctx, options.extraData);
+      } else {
+        // isolate
+        // dbMeta
+        ctx.dbMeta = this.bean.database.createDbMeta(options.dbClientName);
+        // extraData
+        if (options.extraData) {
+          // delegateProperties
+          __delegateProperties(ctx, options.extraData);
+        }
       }
       // instance
       const instanceName = ctx.instanceName; // use default instanceName when undefined
