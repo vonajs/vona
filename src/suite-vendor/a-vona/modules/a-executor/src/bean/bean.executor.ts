@@ -140,10 +140,10 @@ export class BeanExecutor extends BeanBase {
         // ctxCaller
         ctx.ctxCaller = ctxCaller;
         // dbMeta
-        if (ctxCallerDbMeta!.inTransaction) {
+        //   :fist invoke createDbMeta so as to get the real clientName
+        ctx.dbMeta = this.bean.database.createDbMeta(options.dbClientName);
+        if (ctx.dbMeta.currentClient.clientName === ctxCallerDbMeta!.currentClient.clientName && ctxCallerDbMeta!.inTransaction) {
           ctx.dbMeta = ctxCallerDbMeta!;
-        } else {
-          ctx.dbMeta.currentClient = ctxCallerDbMeta!.currentClient;
         }
       } else {
         // isolate
