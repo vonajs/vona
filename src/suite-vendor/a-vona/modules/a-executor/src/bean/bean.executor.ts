@@ -1,6 +1,6 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
-import type { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.ts';
+import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
 import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
@@ -85,21 +85,6 @@ export class BeanExecutor extends BeanBase {
     });
   }
 
-  async runInAnonymousContextScope<RESULT>(
-    fn: FunctionAsync<RESULT>,
-    options?: IRunInAnonymousContextScopeOptions,
-  ): Promise<RESULT> {
-    // ctx
-    const ctx = this.app.createAnonymousContext(options?.req, options?.reqInherit);
-    return await this.app.ctxStorage.run(ctx, async () => {
-      // fn
-      const res = await fn();
-
-      // ok
-      return res;
-    });
-  }
-
   async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     if (!this.ctx) {
@@ -132,70 +117,62 @@ export class BeanExecutor extends BeanBase {
     // run
     const isolate = !this.ctx || this.ctx.dbLevel !== options.dbLevel;
     const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
-    const ctxCallerDbMeta = ctxCaller?.dbMeta;// must before runInAnonymousContextScope
-    return await this.runInAnonymousContextScope(
-      async () => {
-        const ctx = this.app.ctx;
-        // innerAccess
-        ctx.innerAccess = options.innerAccess !== false;
-        // dbLevel: must before ctx.dbMeta
-        ctx.dbLevel = options.dbLevel;
-        // locale
-        if (options.locale !== undefined) {
-          ctx.locale = options.locale;
-        }
-        // instanceName: undefined/null is different
-        if (options.instanceName !== undefined) {
-          ctx.instanceName = options.instanceName;
-        }
+    const ctxCallerDbMeta = ctxCaller?.dbMeta;// must before ctxStorage.run
+    const ctx = this.app.createAnonymousContext(options.req, options.reqInherit);
+    return await this.app.ctxStorage.run(ctx, async () => {
+      const ctx = this.app.ctx;
+      // innerAccess
+      ctx.innerAccess = options.innerAccess !== false;
+      // dbLevel: must before ctx.dbMeta
+      ctx.dbLevel = options.dbLevel;
+      // locale
+      if (options.locale !== undefined) {
+        ctx.locale = options.locale;
+      }
+      // instanceName: undefined/null is different
+      if (options.instanceName !== undefined) {
+        ctx.instanceName = options.instanceName;
+      }
+      // ctxCaller
+      if (ctxCaller) {
+        // delegateProperties
+        __delegateProperties(ctx, ctxCaller);
         // ctxCaller
-        if (ctxCaller) {
-          // delegateProperties
-          __delegateProperties(ctx, ctxCaller);
-          // ctxCaller
-          ctx.ctxCaller = ctxCaller;
-          // dbMeta
-          if (ctxCallerDbMeta!.inTransaction) {
-            ctx.dbMeta = ctxCallerDbMeta!;
-          } else {
-            ctx.dbMeta.currentClient = ctxCallerDbMeta!.currentClient;
-          }
-        }
-        // extraData
-        if (options.extraData) {
-          // delegateProperties
-          __delegateProperties(ctx, options.extraData);
-        }
-        // instance
-        const instanceName = ctx.instanceName; // use default instanceName when undefined
-        if (instanceName !== undefined && instanceName !== null) {
-          ctx.instance = (await this.bean.instance.get(instanceName))!;
-          // start instance
-          if (options.instance) {
-            await this.$scope.instance.service.instance.checkAppReadyInstance(true);
-          }
-        }
-        // execute
-        let res: RESULT;
-        if (options.transaction) {
-          res = await ctx.dbMeta.transaction.begin(async () => {
-            return await fn();
-          });
+        ctx.ctxCaller = ctxCaller;
+        // dbMeta
+        if (ctxCallerDbMeta!.inTransaction) {
+          ctx.dbMeta = ctxCallerDbMeta!;
         } else {
-          res = await fn();
+          ctx.dbMeta.currentClient = ctxCallerDbMeta!.currentClient;
         }
-        // tail done
-        await ctx.dbMeta.tailDone();
-        // ok
-        return res;
-      },
-      {
-        locale: options.locale,
-        instanceName: options.instanceName,
-        instance: options.instance,
-        req: options.req,
-        reqInherit: options.reqInherit,
-      },
-    );
+      }
+      // extraData
+      if (options.extraData) {
+        // delegateProperties
+        __delegateProperties(ctx, options.extraData);
+      }
+      // instance
+      const instanceName = ctx.instanceName; // use default instanceName when undefined
+      if (instanceName !== undefined && instanceName !== null) {
+        ctx.instance = (await this.bean.instance.get(instanceName))!;
+        // start instance
+        if (options.instance) {
+          await this.$scope.instance.service.instance.checkAppReadyInstance(true);
+        }
+      }
+      // execute
+      let res: RESULT;
+      if (options.transaction) {
+        res = await ctx.dbMeta.transaction.begin(async () => {
+          return await fn();
+        });
+      } else {
+        res = await fn();
+      }
+      // tail done
+      await ctx.dbMeta.tailDone();
+      // ok
+      return res;
+    });
   }
 }

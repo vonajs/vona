@@ -3,14 +3,6 @@ import type { ConfigOnions } from 'vona-module-a-onion';
 
 export const SymbolRouterMiddleware = Symbol('SymbolRouterMiddleware');
 
-export interface IRunInAnonymousContextScopeOptions {
-  locale?: keyof ILocalInfos;
-  instanceName?: string | null | undefined;
-  instance?: boolean;
-  req?: any;
-  reqInherit?: boolean;
-}
-
 export interface INewCtxExtraData {
   state?: ContextState;
   request?: {
