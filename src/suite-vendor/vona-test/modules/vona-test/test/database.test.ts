@@ -10,7 +10,7 @@ describe('database.test.ts', () => {
       // switch
       const clientNames = Object.keys(app.config.database.clients);
       const clientName2 = clientNames.find(item => item !== app.config.database.defaultClient);
-      await app.bean.dataSource.switch(async () => {
+      await app.bean.database.switchClient(async () => {
         assert.equal(app.ctx.dbMeta.currentClientName, clientName2);
       }, { clientName: clientName2 as any });
       // restore

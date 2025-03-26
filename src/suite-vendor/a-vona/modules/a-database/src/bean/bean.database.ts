@@ -41,7 +41,7 @@ export class BeanDatabase extends BeanBase {
     return this.ctx.bean._newBean(ServiceDbMeta, clientName);
   }
 
-  async switchClientName<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {
+  async switchClient<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {
     const clientName = options?.clientName || this.app.config.database.defaultClient;
     // check if the same
     if (this.ctx.dbMeta.currentClientName === clientName) {
