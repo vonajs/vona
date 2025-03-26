@@ -53,9 +53,9 @@ export class ServiceTransaction extends BeanBase {
         return await this._isolationLevelRequired(fn, transactionOptions);
       } else {
         return await this.bean.executor.newCtxIsolate(fn, {
-          instance: true,
           transaction: true,
           transactionOptions,
+          instance: true,
           extraData: this.ctx as any,
         });
       }
