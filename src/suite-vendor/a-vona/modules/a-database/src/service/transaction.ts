@@ -45,7 +45,7 @@ export class ServiceTransaction extends BeanBase {
       if (this.inTransaction) {
         return await this._isolationLevelRequired(fn, transactionOptions);
       } else {
-        throw new Error('transaction error: mandatory');
+        throw new Error('transaction error: EnumTransactionPropagation.MANDATORY');
       }
     } else if (propagation === EnumTransactionPropagation.REQUIRES_NEW) {
       // requires_new
@@ -63,7 +63,14 @@ export class ServiceTransaction extends BeanBase {
       } else {
         return await this.bean.executor.newCtxIsolate(fn);
       }
+    } else if (propagation === EnumTransactionPropagation.NEVER) {
+      if (!this.inTransaction) {
+        return await fn();
+      } else {
+        throw new Error('transaction error: EnumTransactionPropagation.NEVER');
+      }
     }
+    throw new Error('transaction error: unknown propagation');
   }
 
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
