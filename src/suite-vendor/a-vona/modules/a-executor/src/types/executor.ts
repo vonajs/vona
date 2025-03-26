@@ -19,7 +19,7 @@ export interface INewCtxOptions {
   dbClientName?: keyof IDatabaseClientRecord;
   transaction?: boolean;
   transactionOptions?: ITransactionOptions;
-  extraData?: INewCtxExtraData;
+  extraData?: INewCtxExtraData | undefined | null;
   innerAccess?: boolean;
   req?: any;
   reqInherit?: boolean;

@@ -30,13 +30,13 @@ describe('passport.test.ts', () => {
       const [isAuthenticated2, _err] = await catchError(async () => {
         return await app.bean.executor.newCtxIsolate(async () => {
           return await app.bean.executor.performAction('get', '/vona/test/passport/isAuthenticated');
-        });
+        }, { extraData: null });
       });
       assert.equal(isAuthenticated2, undefined);
       // isAuthenticated: isolate + header
       isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
         return await app.bean.executor.performAction('get', '/vona/test/passport/isAuthenticated', { authToken: jwt.accessToken });
-      });
+      }, { extraData: null });
       assert.equal(isAuthenticated, true);
       // refresh
       const jwtNew = await app.bean.executor.performAction('post', '/vona/test/passport/refresh', {
