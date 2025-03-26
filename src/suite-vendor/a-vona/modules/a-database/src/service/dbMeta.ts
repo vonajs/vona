@@ -14,7 +14,7 @@ export class ServiceDbMeta extends BeanBase {
   protected __init__(clientName?: keyof IDatabaseClientRecord) {
     // must init eager, let ctx is same
     this._databaseClientCurrent = this.app.bean.database.getClient(clientName);
-    this._transaction = this.ctx.bean._newBean(ServiceTransaction, this);
+    this._transaction = this.app.bean._newBean(ServiceTransaction, this);
   }
 
   get transaction() {

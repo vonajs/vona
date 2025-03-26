@@ -9,9 +9,12 @@ import { ServiceDbMeta } from '../service/dbMeta.ts';
 @Bean()
 export class BeanDatabase extends BeanBase {
   getClient(clientName?: keyof IDatabaseClientRecord) {
+    return this.app.bean._getBeanSelector(ServiceDatabaseClient, this.prepareClientNameSelector(clientName));
+  }
+
+  prepareClientNameSelector(clientName?: keyof IDatabaseClientRecord) {
     const clientName2 = (!clientName || clientName === this.app.config.database.defaultClient) ? '' : clientName;
-    const clientName3 = this.ctx.dbLevel === 0 ? clientName2 : `${clientName2}:${this.ctx.dbLevel}`;
-    return this.app.bean._getBeanSelector(ServiceDatabaseClient, clientName3);
+    return this.ctx.dbLevel === 0 ? clientName2 : `${clientName2}:${this.ctx.dbLevel}`;
   }
 
   get(clientName?: keyof IDatabaseClientRecord) {

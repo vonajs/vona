@@ -8,7 +8,7 @@ export interface ISetDatabaseNameResult { database?: string; filename?: string }
 
 @Service()
 export class ServiceDatabaseClient extends BeanBase {
-  clientNameOriginal?: string;
+  clientNameSelector?: string;
   clientName: keyof IDatabaseClientRecord;
   clientConfig: Knex.Config;
   private _knex: Knex;
@@ -21,10 +21,10 @@ export class ServiceDatabaseClient extends BeanBase {
     return this._knex;
   }
 
-  protected __init__(clientName?: string) {
+  protected __init__(clientNameSelector?: string) {
     // name
-    this.clientNameOriginal = clientName;
-    this.clientName = this._extractClientName(clientName);
+    this.clientNameSelector = clientNameSelector;
+    this.clientName = this._extractClientName(clientNameSelector);
     // config
     this.clientConfig = this.getClientConfig(this.clientName);
     this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
@@ -97,6 +97,6 @@ export class ServiceDatabaseClient extends BeanBase {
     this.setClientConfig(this.clientName, config);
     // reload knex
     await this._knex.destroy();
-    this.__init__(this.clientNameOriginal);
+    this.__init__(this.clientNameSelector);
   }
 }

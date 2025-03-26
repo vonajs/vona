@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe('database.test.ts', () => {
+describe.only('database.test.ts', () => {
   it('action:dataSource:switch', async () => {
     await app.bean.executor.mockCtx(async () => {
       // current
@@ -22,7 +22,9 @@ describe('database.test.ts', () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
       const modelTest = scopeTest.model.test;
-      console.log(modelTest);
+      assert.equal(modelTest.options.clientName, '_pg_');
+      const modelTest2 = scopeTest.model.test;
+      assert.equal(modelTest, modelTest2);
     });
   });
 });
