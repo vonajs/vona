@@ -37,6 +37,10 @@ export class ServiceDbMeta extends BeanBase {
     this._databaseClientCurrent = value;
   }
 
+  get currentClientName() {
+    return this.currentClient.clientName;
+  }
+
   get current() {
     return this.inTransaction ? this.transaction.connection! : this.currentClient.db;
   }

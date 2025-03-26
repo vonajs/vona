@@ -112,7 +112,7 @@ export class BeanExecutor extends BeanBase {
       options.dbLevel = options.dbLevel ?? 1; // same as isolate
     } else {
       options.dbLevel = options.dbLevel ?? this.ctx.dbLevel;
-      options.dbClientName = options.dbClientName === undefined ? this.ctx.dbMeta.currentClient.clientName : options.dbClientName;
+      options.dbClientName = options.dbClientName === undefined ? this.ctx.dbMeta.currentClientName : options.dbClientName;
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
@@ -143,7 +143,7 @@ export class BeanExecutor extends BeanBase {
         // dbMeta
         //   :fist invoke createDbMeta so as to get the real clientName
         ctx.dbMeta = this.bean.database.createDbMeta(options.dbClientName);
-        if (ctx.dbMeta.currentClient.clientName === ctxCallerDbMeta!.currentClient.clientName && ctxCallerDbMeta!.inTransaction) {
+        if (ctx.dbMeta.currentClientName === ctxCallerDbMeta!.currentClientName && ctxCallerDbMeta!.inTransaction) {
           ctx.dbMeta = ctxCallerDbMeta!;
         }
       } else {

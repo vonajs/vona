@@ -8,7 +8,7 @@ export class BeanDataSource extends BeanBase {
   async switch<RESULT>(fn: FunctionAsync<RESULT>, options?: IDataSourceSwitchOptions): Promise<RESULT> {
     const clientName = options?.clientName || this.app.config.database.defaultClient;
     // check if the same
-    if (this.ctx.dbMeta.currentClient.clientName === clientName) {
+    if (this.ctx.dbMeta.currentClientName === clientName) {
       return await fn();
     }
     // dbMetaPrevious
