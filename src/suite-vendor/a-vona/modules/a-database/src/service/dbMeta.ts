@@ -1,3 +1,4 @@
+import type { IDatabaseClientRecord } from '../types/database.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { AsyncResource } from 'node:async_hooks';
 import { BeanBase } from 'vona';
@@ -10,9 +11,9 @@ export class ServiceDbMeta extends BeanBase {
   private _transaction: ServiceTransaction;
   private _tailCallbacks: ((...args: any[]) => any)[] = [];
 
-  protected __init__() {
+  protected __init__(clientName?: keyof IDatabaseClientRecord) {
     // must init eager, let ctx is same
-    this._databaseClientCurrent = this.app.bean.database.getClientDefault();
+    this._databaseClientCurrent = this.app.bean.database.getClient(clientName);
     this._transaction = this.ctx.bean._newBean(ServiceTransaction, this);
   }
 

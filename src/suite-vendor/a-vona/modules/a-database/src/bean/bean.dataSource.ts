@@ -2,6 +2,7 @@ import type { FunctionAsync } from 'vona';
 import type { IDataSourceSwitchOptions } from '../types/dataSource.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { ServiceDbMeta } from '../service/dbMeta.ts';
 
 @Bean()
 export class BeanDataSource extends BeanBase {
@@ -11,9 +12,15 @@ export class BeanDataSource extends BeanBase {
     if (this.ctx.dbMeta.currentClient.clientName === clientName) {
       return await fn();
     }
+    // dbMetaPrevious
     const dbMetaPrevious = this.ctx.dbMeta;
-
-    // 先判断与当前数据源是否一致
-    // 将现有dbMeta保存起来，在finally中进行恢复
+    this.ctx.dbMeta = this.ctx.bean._newBean(ServiceDbMeta, clientName);
+    // fn
+    try {
+      return await fn();
+    } finally {
+      // restore
+      this.ctx.dbMeta = dbMetaPrevious;
+    }
   }
 }
