@@ -1,7 +1,6 @@
 export * from './columns.ts';
 export * from './config.ts';
 export * from './database.ts';
-export * from './dataSource.ts';
 export * from './entityBase.ts';
 export * from './entityBaseInner.ts';
 export * from './entityBaseSimple.ts';

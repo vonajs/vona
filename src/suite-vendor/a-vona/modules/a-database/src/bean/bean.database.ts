@@ -1,4 +1,5 @@
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from '../types/database.ts';
+import type { FunctionAsync } from 'vona';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDatabaseSwitchOptions } from '../types/database.ts';
 import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -38,5 +39,23 @@ export class BeanDatabase extends BeanBase {
 
   createDbMeta(clientName?: keyof IDatabaseClientRecord) {
     return this.ctx.bean._newBean(ServiceDbMeta, clientName);
+  }
+
+  async switchClientName<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {
+    const clientName = options?.clientName || this.app.config.database.defaultClient;
+    // check if the same
+    if (this.ctx.dbMeta.currentClientName === clientName) {
+      return await fn();
+    }
+    // dbMetaPrevious
+    const dbMetaPrevious = this.ctx.dbMeta;
+    this.ctx.dbMeta = this.createDbMeta(clientName);
+    // fn
+    try {
+      return await fn();
+    } finally {
+      // restore
+      this.ctx.dbMeta = dbMetaPrevious;
+    }
   }
 }

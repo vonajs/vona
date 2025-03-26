@@ -13,6 +13,10 @@ export interface IDatabaseClientDialectRecord {
   mysql2: never;
 }
 
+export interface IDatabaseSwitchOptions {
+  clientName?: keyof IDatabaseClientRecord;
+}
+
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     model: BeanModel;
