@@ -85,6 +85,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       mget: async ids => {
         return await super._mget(table, ids, { disableDeleted: true });
       },
+      dbMeta: this.dbMeta,
     });
     // filter disableDeleted
     items = items.filter(item => {
@@ -286,6 +287,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         return await super.get(table, cacheKey.where, options as any);
       },
       ignoreNull: true,
+      dbMeta: this.dbMeta,
     });
     if (!data) return data;
     // check if exists and valid
@@ -312,6 +314,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         // disableInstance: use the model options, not use options by outer
         return await super.get(table, where, { disableDeleted: true });
       },
+      dbMeta: this.dbMeta,
     });
     if (!item) return item;
     if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return undefined;
