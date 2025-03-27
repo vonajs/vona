@@ -24,3 +24,7 @@ export interface ITransactionOptions {
   readOnly?: boolean;
   propagation?: EnumTransactionPropagation;
 }
+
+export interface ITransactionConsistencyCommitOptions {
+  ctxPrefer?: boolean;
+}

@@ -19,6 +19,7 @@ import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
+import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -106,6 +107,7 @@ export * from '../main.ts';
 /** event: end */
 /** service: begin */
 export * from '../service/databaseClient.ts';
+export * from '../service/dbMeta.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -113,6 +115,7 @@ declare module 'vona-module-a-web' {
     'a-database:dbMeta': never;
     'a-database:modelResolver': never;
     'a-database:transaction': never;
+    'a-database:transactionConsistency‌': never;
   }
 
 }
@@ -137,12 +140,18 @@ declare module 'vona-module-a-database' {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
+
+  export interface ServiceTransactionConsistency‌ {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 }
 export interface IModuleService {
   databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
   modelResolver: ServiceModelResolver;
   transaction: ServiceTransaction;
+  transactionConsistency‌: ServiceTransactionConsistency‌;
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -150,15 +159,16 @@ declare module 'vona' {
     'a-database.service.dbMeta': ServiceDbMeta;
     'a-database.service.modelResolver': ServiceModelResolver;
     'a-database.service.transaction': ServiceTransaction;
+    'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;
   }
 }
-export * from '../service/dbMeta.ts';
+export * from '../service/modelResolver.ts';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-export * from '../service/modelResolver.ts';
 export * from '../service/transaction.ts';
+export * from '../service/transactionConsistency‌.ts';
 
 @Scope()
 export class ScopeModuleADatabase extends BeanScopeBase {}

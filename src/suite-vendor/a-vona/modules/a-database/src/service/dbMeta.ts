@@ -1,22 +1,24 @@
 import type { FunctionAny } from 'vona';
 import type { IDatabaseClientRecord } from '../types/database.ts';
+import type { ITransactionConsistencyCommitOptions } from '../types/transaction.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { AsyncResource } from 'node:async_hooks';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { ServiceTransaction } from './transaction.ts';
+import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
 export class ServiceDbMeta extends BeanBase {
   private _databaseClientCurrent: ServiceDatabaseClient;
   private _transaction: ServiceTransaction;
-  private _commitCallbacks: FunctionAny[] = [];
-  private _compensateCallbacks: FunctionAny[] = [];
+  private _transactionConsistency: ServiceTransactionConsistency‌;
 
   protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     // must init eager, let ctx is same
     this._databaseClientCurrent = (!clientName || typeof clientName === 'string') ? this.app.bean.database.getClient(clientName) : clientName;
     this._transaction = this.app.bean._newBean(ServiceTransaction, this);
+    this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
   }
 
   get transaction() {
@@ -47,27 +49,21 @@ export class ServiceDbMeta extends BeanBase {
     return this.inTransaction ? this.transaction.connection! : this.currentClient.db;
   }
 
-  commit(cb: FunctionAny) {
-    this._commitCallbacks.push(AsyncResource.bind(cb));
+  commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
+    if (options?.ctxPrefer || !this.transaction.inTransaction) {
+      this._transactionConsistency.commit(cb);
+    } else {
+      this.transaction.commit(cb);
+    }
   }
 
   compensate(cb: FunctionAny) {
-    this._compensateCallbacks.unshift(AsyncResource.bind(cb));
+    if (this.transaction.inTransaction) {
+      this.transaction.compensate(cb);
+    }
   }
 
   async commitDone() {
-    while (true) {
-      const cb = this._commitCallbacks.shift();
-      if (!cb) break;
-      await cb();
-    }
-  }
-
-  async compensateDone() {
-    while (true) {
-      const cb = this._compensateCallbacks.shift();
-      if (!cb) break;
-      await cb();
-    }
+    await this._transactionConsistency.commitDone();
   }
 }

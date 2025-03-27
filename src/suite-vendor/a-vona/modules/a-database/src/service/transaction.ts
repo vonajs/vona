@@ -1,20 +1,23 @@
 import type knex from 'knex';
 import type { Knex } from 'knex';
-import type { FunctionAsync } from 'vona';
+import type { FunctionAny, FunctionAsync } from 'vona';
 import type { ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDbMeta } from './dbMeta.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { EnumTransactionPropagation, TransactionIsolationLevels } from '../types/transaction.ts';
+import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
 export class ServiceTransaction extends BeanBase {
-  _transactionCounter: number = 0;
-  _connection?: knex.Knex.Transaction;
-  _dbMeta: ServiceDbMeta;
+  private _transactionCounter: number = 0;
+  private _connection?: knex.Knex.Transaction;
+  private _dbMeta: ServiceDbMeta;
+  private _transactionConsistency: ServiceTransactionConsistency‌;
 
   protected __init__(dbMeta: ServiceDbMeta) {
     this._dbMeta = dbMeta;
+    this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
   }
 
   get inTransaction() {
@@ -74,6 +77,14 @@ export class ServiceTransaction extends BeanBase {
       }
     }
     throw new Error('transaction error: unknown propagation');
+  }
+
+  commit(cb: FunctionAny) {
+    this._transactionConsistency.commit(cb);
+  }
+
+  compensate(cb: FunctionAny) {
+    this._transactionConsistency.compensate(cb);
   }
 
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
