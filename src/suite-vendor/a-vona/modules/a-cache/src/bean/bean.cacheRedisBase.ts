@@ -1,5 +1,5 @@
 import type { Redis } from 'ioredis';
-import type { ICacheRedisGetOptions } from '../types/cache.ts';
+import type { ICacheRedisGetOptions, ICacheRedisSetOptions } from '../types/cache.ts';
 import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
 import { Virtual } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
@@ -67,11 +67,11 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async set(value?: DATA, key?: KEY, ttl?: number): Promise<void> {
+  public async set(value?: DATA, key?: KEY, options?: ICacheRedisSetOptions): Promise<void> {
     const cache = this.__cacheInstance;
     if (!cache) return;
     const redisKey = this.__getRedisKey(key);
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     if (ttl) {
       await cache.set(redisKey, JSON.stringify(value), 'PX', ttl);
     } else {
@@ -79,12 +79,12 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
-  public async mset(values: DATA[], keys: KEY[], ttl?: number): Promise<void> {
+  public async mset(values: DATA[], keys: KEY[], options?: ICacheRedisSetOptions): Promise<void> {
     if (!values || values.length === 0) return;
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     let multi = cache.multi();
     for (let i = 0; i < keys.length; i++) {
       const redisKey = this.__getRedisKey(keys[i]);
@@ -97,11 +97,11 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     await multi.exec();
   }
 
-  public async getset(value?: DATA, key?: KEY, ttl?: number): Promise<DATA | null | undefined> {
+  public async getset(value?: DATA, key?: KEY, options?: ICacheRedisSetOptions): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return;
     const redisKey = this.__getRedisKey(key);
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     let valuePrev: any;
     if (ttl) {
       const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();

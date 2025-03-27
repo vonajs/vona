@@ -1,4 +1,4 @@
-import type { ICacheMemGetOptions } from '../types/cache.ts';
+import type { ICacheMemGetOptions, ICacheMemSetOptions } from '../types/cache.ts';
 import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 import { LRUCache } from 'lru-cache';
 import { Virtual } from 'vona-module-a-bean';
@@ -61,31 +61,31 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     return cache.peek(keyHash);
   }
 
-  public set(value?: DATA, key?: KEY, ttl?: number): void {
+  public set(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): void {
     const cache = this.__cacheInstance;
     if (!cache) return;
     const keyHash = this.__getKeyHash(key);
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     cache.set(keyHash, value, { ttl });
   }
 
-  public mset(values: DATA[], keys: KEY[], ttl?: number): void {
+  public mset(values: DATA[], keys: KEY[], options?: ICacheMemSetOptions): void {
     if (!values || values.length === 0) return;
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     for (let i = 0; i < keys.length; i++) {
       const keyHash = this.__getKeyHash(keys[i]);
       cache.set(keyHash, values[i], { ttl });
     }
   }
 
-  public getset(value?: DATA, key?: KEY, ttl?: number): DATA | null | undefined {
+  public getset(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): DATA | null | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const valueOld = this.get(key);
-    this.set(value, key, ttl);
+    this.set(value, key, options);
     return valueOld;
   }
 
