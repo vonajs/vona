@@ -67,19 +67,19 @@ describe('database.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
-      const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
-      assert.equal(entityTest.title, 'clientNameDynamic:fail');
+      const entityTest = await scopeTest.model.test.insert({ title: 'transaction:compensate:fail' });
+      assert.equal(entityTest.title, 'transaction:compensate:fail');
       await catchError(async () => {
         const dbMeta = app.bean.database.createDbMeta('default');
         await dbMeta.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(dbMeta);
           assert.equal(modelTest.options.clientName, 'default');
-          await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:fail_1' });
+          await modelTest.update({ id: entityTest.id, title: 'transaction:compensate:fail_1' });
           throw new Error('rollback');
         });
       });
       const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
-      assert.equal(entityTest2?.title, 'clientNameDynamic:fail');
+      assert.equal(entityTest2?.title, 'transaction:compensate:fail');
     });
   });
 });
