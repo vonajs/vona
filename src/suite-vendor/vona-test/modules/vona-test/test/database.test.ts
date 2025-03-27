@@ -53,13 +53,11 @@ describe('database.test.ts', () => {
       const scopeTest = app.bean.scope('vona-test');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:success' });
       assert.equal(entityTest.title, 'clientNameDynamic:success');
-      await catchError(async () => {
-        const dbMeta = app.bean.database.createDbMeta('default');
-        await dbMeta.transaction.begin(async () => {
-          const modelTest = scopeTest.model.test.newInstance(dbMeta);
-          assert.equal(modelTest.options.clientName, 'default');
-          await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:success_1' });
-        });
+      const dbMeta = app.bean.database.createDbMeta('default');
+      await dbMeta.transaction.begin(async () => {
+        const modelTest = scopeTest.model.test.newInstance(dbMeta);
+        assert.equal(modelTest.options.clientName, 'default');
+        await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:success_1' });
       });
       const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
       assert.equal(entityTest2?.title, 'clientNameDynamic:success_1');
