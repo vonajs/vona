@@ -25,6 +25,10 @@ export class BeanDatabase extends BeanBase {
     return (!clientName || clientName === 'default' || clientName === this.app.config.database.defaultClient);
   }
 
+  prepareClientName(clientName?: keyof IDatabaseClientRecord) {
+    return this.isDefaultClientName(clientName) ? this.app.config.database.defaultClient : clientName;
+  }
+
   get(clientName?: keyof IDatabaseClientRecord) {
     const client = this.getClient(clientName);
     return client.db;
@@ -53,7 +57,7 @@ export class BeanDatabase extends BeanBase {
   }
 
   async switchClient<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {
-    const clientName = this.isDefaultClientName(options?.clientName) ? this.app.config.database.defaultClient : options?.clientName;
+    const clientName = this.prepareClientName(options?.clientName);
     // check if the same
     if (this.ctx.dbMeta.currentClientName === clientName) {
       return await fn();
