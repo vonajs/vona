@@ -111,7 +111,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.disableUpdateTime;
   }
 
-  public newInstance(clientName?: keyof IDatabaseClientRecord | ServiceDbMeta) {
+  public newInstance(clientName?: keyof IDatabaseClientRecord | ServiceDbMeta): this {
     return this.app.bean._newBean(this.$beanFullName as any, clientName);
   }
 }

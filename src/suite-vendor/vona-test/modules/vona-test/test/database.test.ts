@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('database.test.ts', () => {
@@ -27,15 +28,23 @@ describe('database.test.ts', () => {
       assert.equal(modelTest, modelTest2);
     });
   });
-  it('action:model:clientNameDynamic', async () => {
+  it('action:model:clientNameDynamic:transaction:fail', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
       const dbMeta = app.bean.database.createDbMeta('default');
-      const modelTest = scopeTest.model.test.newInstance(dbMeta);
-      assert.equal(modelTest.options.clientName, 'default');
-      const modelTest2 = scopeTest.model.test;
-      assert.equal(modelTest === modelTest2, false);
+      const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
+      assert.equal(entityTest.title, 'clientNameDynamic:fail');
+      await catchError(async () => {
+        await dbMeta.transaction.begin(async () => {
+          const modelTest = scopeTest.model.test.newInstance(dbMeta);
+          assert.equal(modelTest.options.clientName, 'default');
+          await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:fail_1' });
+          throw new Error('rollback');
+        });
+      });
+      const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
+      assert.equal(entityTest2?.title, 'clientNameDynamic:fail');
     });
   });
 });
