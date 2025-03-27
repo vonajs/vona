@@ -17,8 +17,12 @@ export class BeanDatabase extends BeanBase {
     if (clientName && clientName.includes(':')) return clientName;
     if (clientName === '') return clientName;
     // keyof IDatabaseClientRecord
-    const clientName2 = (!clientName || clientName === 'default' || clientName === this.app.config.database.defaultClient) ? '' : clientName;
+    const clientName2 = this.isDefaultClientName(clientName as any) ? '' : clientName;
     return this.ctx.dbLevel === 0 ? clientName2 : `${clientName2}:${this.ctx.dbLevel}`;
+  }
+
+  isDefaultClientName(clientName?: keyof IDatabaseClientRecord) {
+    return (!clientName || clientName === 'default' || clientName === this.app.config.database.defaultClient);
   }
 
   get(clientName?: keyof IDatabaseClientRecord) {
@@ -49,7 +53,7 @@ export class BeanDatabase extends BeanBase {
   }
 
   async switchClient<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {
-    const clientName = options?.clientName || this.app.config.database.defaultClient;
+    const clientName = this.isDefaultClientName(options?.clientName) ? this.app.config.database.defaultClient : options?.clientName;
     // check if the same
     if (this.ctx.dbMeta.currentClientName === clientName) {
       return await fn();
