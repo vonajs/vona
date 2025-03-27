@@ -12,7 +12,11 @@ export class BeanDatabase extends BeanBase {
     return this.app.bean._getBeanSelector(ServiceDatabaseClient, this.prepareClientNameSelector(clientName));
   }
 
-  prepareClientNameSelector(clientName?: keyof IDatabaseClientRecord) {
+  prepareClientNameSelector(clientName?: keyof IDatabaseClientRecord | string) {
+    // string
+    if (clientName && clientName.includes(':')) return clientName;
+    if (clientName === '') return clientName;
+    // keyof IDatabaseClientRecord
     const clientName2 = (!clientName || clientName === this.app.config.database.defaultClient) ? '' : clientName;
     return this.ctx.dbLevel === 0 ? clientName2 : `${clientName2}:${this.ctx.dbLevel}`;
   }

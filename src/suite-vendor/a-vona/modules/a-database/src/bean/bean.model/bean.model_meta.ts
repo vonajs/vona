@@ -1,25 +1,45 @@
 import type { Knex } from 'knex';
+import type { ServiceDbMeta } from '../../service/dbMeta.ts';
 import type { IDatabaseClientDialectRecord } from '../../types/database.ts';
 import type {
+  IDatabaseClientRecord,
   IDecoratorEntityOptions,
   IDecoratorModelOptions,
   IModelMethodOptionsGeneral,
   IModelUpdateOptionsGeneral,
 } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
+import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
 
+const SymbolModelDbMeta = Symbol('SymbolModelDbMeta');
+
 export class BeanModelMeta<TRecord extends {}> extends BeanBase {
+  private [SymbolModelDbMeta]: ServiceDbMeta;
+
+  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDbMeta) {
+    if (isNil(clientName)) return;
+    if (typeof clientName === 'string') {
+      this[SymbolModelDbMeta] = this.bean.database.createDbMeta(clientName);
+    } else {
+      this[SymbolModelDbMeta] = clientName;
+    }
+  }
+
   protected get self() {
     return cast<BeanModel>(this);
   }
 
+  protected get dbMeta() {
+    return this[SymbolModelDbMeta] ?? this.ctx.dbMeta;
+  }
+
   protected get db() {
-    return this.ctx.dbMeta.current;
+    return this.dbMeta.current;
   }
 
   protected get dbOriginal() {
-    return this.ctx.dbMeta.current.client.config.connection;
+    return this.dbMeta.current.client.config.connection;
   }
 
   public get scopeDatabase() {
