@@ -4,6 +4,7 @@
   "version": "5.0.3",
   "title": "vona-test",
   "vonaModule": {
+    "fileVersion": 1,
     "dependencies": {
       "a-vona": "5.0.0"
     }

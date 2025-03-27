@@ -43,8 +43,8 @@ import type { QueueTest } from '../bean/queue.test.ts';
 /** summerCache: end */
 /** summerCache: begin */
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
-import type { config } from '../config/config.ts';
 
+import type { config } from '../config/config.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
@@ -52,13 +52,14 @@ import type { EntityTest } from '../entity/test.ts';
 /** model: end */
 /** model: begin */
 import type { ModelTest } from '../model/test.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
-
 import type { ServiceTest } from '../service/test.ts';
 
 import type { ServiceTestApp } from '../service/testApp.ts';
+
 import type { ServiceTestClass } from '../service/testClass.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 /** locale: end */
@@ -68,10 +69,11 @@ import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 /** service: end */
 /** service: begin */
 
-import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
 
 import 'vona';
 import 'vona';
@@ -245,8 +247,8 @@ export interface IModuleModel {
   test: ModelTest;
 }
 /** eventListener: end */
-/** queue: begin */
-export * from '../bean/queue.test.ts';
+/** meta: begin */
+export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventRecord {
@@ -264,7 +266,9 @@ declare module 'vona-module-vona-test' {
 export interface IModuleEvent {
   helloEcho: EventHelloEcho;
 }
-export * from '../bean/schedule.test3.ts';
+/** meta: end */
+/** queue: begin */
+export * from '../bean/queue.test.ts';
 declare module 'vona-module-a-event' {
 
   export interface IEventListenerRecord {
@@ -275,6 +279,21 @@ declare module 'vona-module-a-event' {
 declare module 'vona-module-vona-test' {
 
   export interface EventListenerHelloEcho {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+export * from '../bean/schedule.test3.ts';
+declare module 'vona' {
+
+  export interface IMetaRecord {
+    'vona-test:version': never;
+  }
+
+}
+declare module 'vona-module-vona-test' {
+
+  export interface MetaVersion {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
