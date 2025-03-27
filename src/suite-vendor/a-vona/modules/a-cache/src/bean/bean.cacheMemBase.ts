@@ -67,6 +67,10 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const keyHash = this.__getKeyHash(key);
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
     cache.set(keyHash, value, { ttl });
+    const dbMeta = options?.dbMeta ?? this.ctx.dbMeta;
+    dbMeta.compensate(() => {
+      this.del(key);
+    });
   }
 
   public mset(values: DATA[], keys: KEY[], options?: ICacheMemSetOptions): void {
@@ -74,10 +78,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
-    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     for (let i = 0; i < keys.length; i++) {
-      const keyHash = this.__getKeyHash(keys[i]);
-      cache.set(keyHash, values[i], { ttl });
+      this.set(values[i], keys[i], options);
     }
   }
 
