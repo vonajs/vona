@@ -1,4 +1,5 @@
 import type { OmitNever } from 'vona';
+import type { ServiceDbMeta } from 'vona-module-a-database';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 
@@ -34,6 +35,7 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   enable?: boolean;
   mode?: TSummerCacheMode;
   ignoreNull?: boolean;
+  dbMeta?: ServiceDbMeta;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
   mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
 }
