@@ -22,6 +22,7 @@ export class ServiceTransactionConsistency‌ extends BeanBase {
       if (!cb) break;
       await cb();
     }
+    this._compensateCallbacks = [];
   }
 
   async compensateDone() {
@@ -30,5 +31,6 @@ export class ServiceTransactionConsistency‌ extends BeanBase {
       if (!cb) break;
       await cb();
     }
+    this._commitCallbacks = [];
   }
 }
