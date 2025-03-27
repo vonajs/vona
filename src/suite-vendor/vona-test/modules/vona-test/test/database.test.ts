@@ -75,6 +75,8 @@ describe('database.test.ts', () => {
           const modelTest = scopeTest.model.test.newInstance(dbMeta);
           assert.equal(modelTest.options.clientName, 'default');
           await modelTest.update({ id: entityTest.id, title: 'transaction:compensate:fail_1' });
+          // let cache take effect
+          await modelTest.get({ id: entityTest.id });
           throw new Error('rollback');
         });
       });
