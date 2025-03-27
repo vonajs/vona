@@ -12,18 +12,23 @@ import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { BeanModel } from '../bean.model.ts';
 
+const SymbolCacheName = Symbol('SymbolCacheName');
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
+  private [SymbolCacheName]: string;
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
 
   private get __cacheName() {
-    return this.scopeDatabase.event.modelCacheName.emitSync({
-      beanModel: this,
-    }, ({ beanModel }) => {
-      return `${(beanModel as any).$beanFullName}:${this.dbMeta.currentClientName}`;
-    });
+    if (!this[SymbolCacheName]) {
+      this[SymbolCacheName] = this.scopeDatabase.event.modelCacheName.emitSync({
+        beanModel: this,
+      }, ({ beanModel }) => {
+        return `${(beanModel as any).$beanFullName}:${this.dbMeta.currentClientName}`;
+      });
+    }
+    return this[SymbolCacheName];
   }
 
   private get __cacheOptions() {
