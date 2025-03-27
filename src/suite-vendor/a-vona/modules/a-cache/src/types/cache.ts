@@ -1,6 +1,8 @@
-import type { ServiceDbMeta } from 'vona-module-a-database';
-
-export interface ICacheActionOptions {
+export interface ICacheRedisGetOptions {
   ttl?: number;
-  dbMeta?: ServiceDbMeta;
+}
+
+export interface ICacheMemGetOptions {
+  updateAgeOnGet?: boolean;
+  updateAgeOnHas?: boolean;
 }

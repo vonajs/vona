@@ -1,5 +1,5 @@
 import type { Redis } from 'ioredis';
-import type { ICacheActionOptions } from '../types/cache.ts';
+import type { ICacheRedisGetOptions } from '../types/cache.ts';
 import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
 import { Virtual } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
@@ -21,7 +21,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return this.redisSummer;
   }
 
-  public async get(key?: KEY, options?: ICacheActionOptions): Promise<DATA | null | undefined> {
+  public async get(key?: KEY, options?: ICacheRedisGetOptions): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
@@ -35,14 +35,14 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async mget(keys: KEY[], ttl?: number): Promise<Array<DATA | null | undefined>> {
+  public async mget(keys: KEY[], options?: ICacheRedisGetOptions): Promise<Array<DATA | null | undefined>> {
     if (!keys || keys.length === 0) return [];
     const cache = this.__cacheInstance;
     if (!cache) return [];
     const redisKeys = this.__getRedisKeys(keys);
     const _values = await cache.mget(redisKeys);
     const values = _values.map(v => (v ? JSON.parse(v) : undefined));
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     if (ttl) {
       const redisKeysEx: string[] = [];
       for (let i = 0; i < redisKeys.length; i++) {

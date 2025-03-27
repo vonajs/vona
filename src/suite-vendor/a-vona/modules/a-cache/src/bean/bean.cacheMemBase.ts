@@ -1,3 +1,4 @@
+import type { ICacheMemGetOptions } from '../types/cache.ts';
 import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 import { LRUCache } from 'lru-cache';
 import { Virtual } from 'vona-module-a-bean';
@@ -38,19 +39,19 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     return this.lruCache;
   }
 
-  public get(key?: KEY): DATA | null | undefined {
+  public get(key?: KEY, options?: ICacheMemGetOptions): DATA | null | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
-    return cache.get(keyHash);
+    return cache.get(keyHash, options);
   }
 
-  public mget(keys: KEY[]): Array<DATA | null | undefined> {
+  public mget(keys: KEY[], options?: ICacheMemGetOptions): Array<DATA | null | undefined> {
     if (!keys || keys.length === 0) return [];
     const cache = this.__cacheInstance;
     if (!cache) return [];
     const keysHash = this.__getKeysHash(keys);
-    return keysHash.map(keyHash => cache.get(keyHash));
+    return keysHash.map(keyHash => cache.get(keyHash, options));
   }
 
   public peek(key?: KEY): DATA | null | undefined {
