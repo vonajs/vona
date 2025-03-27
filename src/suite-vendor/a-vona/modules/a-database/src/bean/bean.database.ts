@@ -44,7 +44,7 @@ export class BeanDatabase extends BeanBase {
     return dialect;
   }
 
-  createDbMeta(clientName?: keyof IDatabaseClientRecord) {
+  createDbMeta(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     return this.app.bean._newBean(ServiceDbMeta, clientName);
   }
 

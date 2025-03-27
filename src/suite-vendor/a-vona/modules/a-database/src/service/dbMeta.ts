@@ -11,9 +11,9 @@ export class ServiceDbMeta extends BeanBase {
   private _transaction: ServiceTransaction;
   private _tailCallbacks: ((...args: any[]) => any)[] = [];
 
-  protected __init__(clientName?: keyof IDatabaseClientRecord) {
+  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     // must init eager, let ctx is same
-    this._databaseClientCurrent = this.app.bean.database.getClient(clientName);
+    this._databaseClientCurrent = (!clientName || typeof clientName === 'string') ? this.app.bean.database.getClient(clientName) : clientName;
     this._transaction = this.app.bean._newBean(ServiceTransaction, this);
   }
 

@@ -27,4 +27,15 @@ describe('database.test.ts', () => {
       assert.equal(modelTest, modelTest2);
     });
   });
+  it('action:model:clientNameDynamic', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // scope
+      const scopeTest = app.bean.scope('vona-test');
+      const dbMeta = app.bean.database.createDbMeta('default');
+      const modelTest = scopeTest.model.test.newInstance(dbMeta);
+      assert.equal(modelTest.options.clientName, 'default');
+      const modelTest2 = scopeTest.model.test;
+      assert.equal(modelTest === modelTest2, false);
+    });
+  });
 });
