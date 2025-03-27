@@ -53,6 +53,7 @@ export class ServiceTransaction extends BeanBase {
         return await this._isolationLevelRequired(fn, transactionOptions);
       } else {
         return await this.bean.executor.newCtxIsolate(fn, {
+          dbClientName: this._dbMeta.currentClientName,
           transaction: true,
           transactionOptions,
         });
@@ -61,7 +62,9 @@ export class ServiceTransaction extends BeanBase {
       if (!this.inTransaction) {
         return await fn();
       } else {
-        return await this.bean.executor.newCtxIsolate(fn);
+        return await this.bean.executor.newCtxIsolate(fn, {
+          dbClientName: this._dbMeta.currentClientName,
+        });
       }
     } else if (propagation === EnumTransactionPropagation.NEVER) {
       if (!this.inTransaction) {
