@@ -17,7 +17,7 @@ export class BeanDatabase extends BeanBase {
     if (clientName && clientName.includes(':')) return clientName;
     if (clientName === '') return clientName;
     // keyof IDatabaseClientRecord
-    const clientName2 = (!clientName || clientName === this.app.config.database.defaultClient) ? '' : clientName;
+    const clientName2 = (!clientName || clientName === 'default' || clientName === this.app.config.database.defaultClient) ? '' : clientName;
     return this.ctx.dbLevel === 0 ? clientName2 : `${clientName2}:${this.ctx.dbLevel}`;
   }
 

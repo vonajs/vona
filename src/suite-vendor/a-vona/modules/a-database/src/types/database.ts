@@ -3,6 +3,7 @@ import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ConfigDatabase } from './config.ts';
 
 export interface IDatabaseClientRecord {
+  default: never;
   pg: never;
   mysql: never;
 }

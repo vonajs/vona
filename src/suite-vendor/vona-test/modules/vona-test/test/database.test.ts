@@ -22,7 +22,7 @@ describe('database.test.ts', () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
       const modelTest = scopeTest.model.test;
-      assert.equal(modelTest.options.clientName, '_pg_');
+      assert.equal(modelTest.options.clientName, 'default');
       const modelTest2 = scopeTest.model.test;
       assert.equal(modelTest, modelTest2);
     });
