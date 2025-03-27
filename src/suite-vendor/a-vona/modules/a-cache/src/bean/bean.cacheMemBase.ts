@@ -67,8 +67,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const keyHash = this.__getKeyHash(key);
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
     cache.set(keyHash, value, { ttl });
-    const dbMeta = options?.dbMeta ?? this.ctx.dbMeta;
-    dbMeta.compensate(() => {
+    const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
+    dbMeta?.compensate(() => {
       this.del(key);
     });
   }
