@@ -2,7 +2,6 @@ import type { FunctionAny } from 'vona';
 import type { IDatabaseClientRecord } from '../types/database.ts';
 import type { ITransactionConsistencyCommitOptions } from '../types/transaction.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
-import { AsyncResource } from 'node:async_hooks';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { ServiceTransaction } from './transaction.ts';
