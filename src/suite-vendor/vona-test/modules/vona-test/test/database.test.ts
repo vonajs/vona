@@ -63,4 +63,23 @@ describe('database.test.ts', () => {
       assert.equal(entityTest2?.title, 'clientNameDynamic:success_1');
     });
   });
+  it('action:database:transaction:compensate', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // scope
+      const scopeTest = app.bean.scope('vona-test');
+      const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
+      assert.equal(entityTest.title, 'clientNameDynamic:fail');
+      await catchError(async () => {
+        const dbMeta = app.bean.database.createDbMeta('default');
+        await dbMeta.transaction.begin(async () => {
+          const modelTest = scopeTest.model.test.newInstance(dbMeta);
+          assert.equal(modelTest.options.clientName, 'default');
+          await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:fail_1' });
+          throw new Error('rollback');
+        });
+      });
+      const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
+      assert.equal(entityTest2?.title, 'clientNameDynamic:fail');
+    });
+  });
 });
