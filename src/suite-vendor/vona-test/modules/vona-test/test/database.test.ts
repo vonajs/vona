@@ -32,10 +32,10 @@ describe('database.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
-      const dbMeta = app.bean.database.createDbMeta('default');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
       assert.equal(entityTest.title, 'clientNameDynamic:fail');
       await catchError(async () => {
+        const dbMeta = app.bean.database.createDbMeta('default');
         await dbMeta.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(dbMeta);
           assert.equal(modelTest.options.clientName, 'default');
@@ -51,10 +51,10 @@ describe('database.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
-      const dbMeta = app.bean.database.createDbMeta('default');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:success' });
       assert.equal(entityTest.title, 'clientNameDynamic:success');
       await catchError(async () => {
+        const dbMeta = app.bean.database.createDbMeta('default');
         await dbMeta.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(dbMeta);
           assert.equal(modelTest.options.clientName, 'default');
