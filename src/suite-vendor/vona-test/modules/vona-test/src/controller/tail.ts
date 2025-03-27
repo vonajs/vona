@@ -14,10 +14,10 @@ export class ControllerTail extends BeanBase {
     cast(this.ctx)._tail_test = 1;
 
     // tail
-    this.ctx.dbMeta.tail(() => {
+    this.ctx.dbMeta.commit(() => {
       assert.equal(cast(this.ctx)._tail_test_als_caller, undefined);
       assert.equal(cast(this.ctx)._tail_test, 2);
-      this.ctx.dbMeta.tail(() => {
+      this.ctx.dbMeta.commit(() => {
         assert.equal(cast(this.ctx)._tail_test, 3);
       });
       cast(this.ctx)._tail_test = 3;

@@ -175,7 +175,7 @@ export class BeanExecutor extends BeanBase {
         res = await fn();
       }
       // tail done
-      await ctx.dbMeta.tailDone();
+      await ctx.dbMeta.commitDone();
       // ok
       return res;
     });

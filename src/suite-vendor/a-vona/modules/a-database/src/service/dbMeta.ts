@@ -10,7 +10,7 @@ import { ServiceTransaction } from './transaction.ts';
 export class ServiceDbMeta extends BeanBase {
   private _databaseClientCurrent: ServiceDatabaseClient;
   private _transaction: ServiceTransaction;
-  private _tailCallbacks: FunctionAny[] = [];
+  private _commitCallbacks: FunctionAny[] = [];
 
   protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     // must init eager, let ctx is same
@@ -47,12 +47,12 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   commit(cb: (...args: any[]) => any) {
-    this._tailCallbacks.push(AsyncResource.bind(cb));
+    this._commitCallbacks.push(AsyncResource.bind(cb));
   }
 
-  async tailDone() {
+  async commitDone() {
     while (true) {
-      const cb = this._tailCallbacks.shift();
+      const cb = this._commitCallbacks.shift();
       if (!cb) break;
       await cb();
     }
