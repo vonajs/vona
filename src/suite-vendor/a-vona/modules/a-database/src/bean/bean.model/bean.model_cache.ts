@@ -19,7 +19,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
 
   private get __cacheName() {
-    return this.$beanFullName;
+    return `${this.$beanFullName}:${this.dbMeta.currentClientName}`;
   }
 
   private get __cacheOptions() {
