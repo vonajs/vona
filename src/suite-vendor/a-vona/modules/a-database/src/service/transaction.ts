@@ -87,6 +87,14 @@ export class ServiceTransaction extends BeanBase {
     this._transactionConsistency.compensate(cb);
   }
 
+  private async _commitDone() {
+    await this._transactionConsistency.commitDone();
+  }
+
+  private async _compensateDone() {
+    await this._transactionConsistency.compensateDone();
+  }
+
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     let res: RESULT;
     try {
@@ -103,6 +111,7 @@ export class ServiceTransaction extends BeanBase {
     } catch (err) {
       if (--this._transactionCounter === 0) {
         await this._connection!.rollback();
+        await this._compensateDone();
         this._connection = undefined;
       }
       throw err;
@@ -110,10 +119,12 @@ export class ServiceTransaction extends BeanBase {
     try {
       if (--this._transactionCounter === 0) {
         await this._connection!.commit();
+        await this._commitDone();
         this._connection = undefined;
       }
     } catch (err) {
       await this._connection!.rollback();
+      await this._compensateDone();
       this._connection = undefined;
       throw err;
     }
