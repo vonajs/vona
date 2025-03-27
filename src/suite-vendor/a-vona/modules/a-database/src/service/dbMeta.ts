@@ -11,6 +11,7 @@ export class ServiceDbMeta extends BeanBase {
   private _databaseClientCurrent: ServiceDatabaseClient;
   private _transaction: ServiceTransaction;
   private _commitCallbacks: FunctionAny[] = [];
+  private _compensateCallbacks: FunctionAny[] = [];
 
   protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     // must init eager, let ctx is same
@@ -46,13 +47,25 @@ export class ServiceDbMeta extends BeanBase {
     return this.inTransaction ? this.transaction.connection! : this.currentClient.db;
   }
 
-  commit(cb: (...args: any[]) => any) {
+  commit(cb: FunctionAny) {
     this._commitCallbacks.push(AsyncResource.bind(cb));
+  }
+
+  compensate(cb: FunctionAny) {
+    this._compensateCallbacks.unshift(AsyncResource.bind(cb));
   }
 
   async commitDone() {
     while (true) {
       const cb = this._commitCallbacks.shift();
+      if (!cb) break;
+      await cb();
+    }
+  }
+
+  async compensateDone() {
+    while (true) {
+      const cb = this._compensateCallbacks.shift();
       if (!cb) break;
       await cb();
     }
