@@ -1,3 +1,4 @@
+import type { FunctionAny } from 'vona';
 import type { IDatabaseClientRecord } from '../types/database.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { AsyncResource } from 'node:async_hooks';
@@ -9,7 +10,7 @@ import { ServiceTransaction } from './transaction.ts';
 export class ServiceDbMeta extends BeanBase {
   private _databaseClientCurrent: ServiceDatabaseClient;
   private _transaction: ServiceTransaction;
-  private _tailCallbacks: ((...args: any[]) => any)[] = [];
+  private _tailCallbacks: FunctionAny[] = [];
 
   protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     // must init eager, let ctx is same
@@ -45,7 +46,7 @@ export class ServiceDbMeta extends BeanBase {
     return this.inTransaction ? this.transaction.connection! : this.currentClient.db;
   }
 
-  tail(cb: (...args: any[]) => any) {
+  commit(cb: (...args: any[]) => any) {
     this._tailCallbacks.push(AsyncResource.bind(cb));
   }
 
