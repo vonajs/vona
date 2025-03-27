@@ -1,10 +1,15 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
+import type { IDecoratorEventOptions } from 'vona-module-a-event';
+
 /** aopMethod: begin */
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
-
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
+/** event: end */
+/** event: begin */
+import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
+
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
 
@@ -69,6 +74,26 @@ declare module 'vona' {
     database: BeanDatabase;
   }
 }
+/** bean: end */
+/** event: begin */
+export * from '../bean/event.modelCacheName.ts';
+declare module 'vona-module-a-event' {
+
+  export interface IEventRecord {
+    'a-database:modelCacheName': IDecoratorEventOptions;
+  }
+
+}
+declare module 'vona-module-a-database' {
+
+  export interface EventModelCacheName {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+}
+export interface IModuleEvent {
+  modelCacheName: EventModelCacheName;
+}
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
@@ -78,7 +103,7 @@ export * from '../config/errors.ts';
 /** error: end */
 /** main: begin */
 export * from '../main.ts';
-/** bean: end */
+/** event: end */
 /** service: begin */
 export * from '../service/databaseClient.ts';
 declare module 'vona-module-a-web' {
@@ -143,6 +168,7 @@ export interface ScopeModuleADatabase {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  event: IModuleEvent;
   service: IModuleService;
 }
 declare module 'vona' {

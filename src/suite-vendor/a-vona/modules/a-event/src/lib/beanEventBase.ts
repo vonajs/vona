@@ -5,6 +5,7 @@ import type {
   IEventExecute,
   IEventListenerRecord,
   NextEventStrict,
+  NextEventSyncStrict,
 } from '../types/eventListener.ts';
 import { BeanBase, cast, compose } from 'vona';
 
@@ -25,6 +26,24 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
           return nextOrDefault!;
         };
     return await compose(eventListeners)(data, next);
+  }
+
+  emitSync(data: DATA, nextOrDefault?: NextEventSyncStrict<DATA, RESULT> | RESULT): RESULT {
+    const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
+      return this._wrapOnion(item);
+    }, this.$onionName);
+    if (eventListeners.length === 0) {
+      return typeof nextOrDefault === 'function'
+        ? cast<NextEventSyncStrict<DATA, RESULT>>(nextOrDefault)(data)
+        : nextOrDefault!;
+    }
+    const next =
+      typeof nextOrDefault === 'function'
+        ? cast<NextEventSyncStrict<DATA, RESULT>>(nextOrDefault)
+        : (): RESULT => {
+            return nextOrDefault!;
+          };
+    return compose(eventListeners)(data, next);
   }
 
   private _wrapOnion(item: IOnionSlice<IDecoratorEventListenerOptions, keyof IEventListenerRecord>) {
