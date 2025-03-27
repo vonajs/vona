@@ -1,4 +1,5 @@
 import type { Redis } from 'ioredis';
+import type { ICacheActionOptions } from '../types/cache.ts';
 import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
 import { Virtual } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
@@ -20,11 +21,11 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return this.redisSummer;
   }
 
-  public async get(key?: KEY, ttl?: number): Promise<DATA | null | undefined> {
+  public async get(key?: KEY, options?: ICacheActionOptions): Promise<DATA | null | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
-    ttl = ttl ?? this._cacheOptions.ttl;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
     let _value;
     if (ttl) {
       _value = await cache.getex(redisKey, 'PX', ttl);

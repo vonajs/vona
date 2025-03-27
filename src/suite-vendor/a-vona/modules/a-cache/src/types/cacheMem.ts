@@ -6,6 +6,8 @@ export interface ICacheMemRecord {}
 export interface IDecoratorCacheMemOptions extends IOnionOptionsEnable {
   max?: number;
   ttl?: number;
+  updateAgeOnGet?: boolean;
+  updateAgeOnHas?: boolean;
 }
 
 declare module 'vona-module-a-onion' {

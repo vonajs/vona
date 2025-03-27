@@ -6,5 +6,11 @@ export function config(_app: VonaApplication) {
     redis: {
       client: 'cache' as keyof IRedisClientRecord,
     },
+    mem: {
+      options: {
+        updateAgeOnGet: true,
+        updateAgeOnHas: false,
+      },
+    },
   };
 }

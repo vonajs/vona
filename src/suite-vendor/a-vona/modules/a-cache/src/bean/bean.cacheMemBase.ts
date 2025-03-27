@@ -7,6 +7,11 @@ const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Virtual()
 export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheMemOptions, KEY> {
+  protected __init__(cacheName?: string, cacheOptions?: IDecoratorCacheMemOptions) {
+    super.__init__(cacheName, cacheOptions);
+    this._cacheOptions = Object.assign({}, this.$scope.cache.config.mem.options, this._cacheOptions);
+  }
+
   private get memoryInstance() {
     if (!this.app[SUMMERCACHEMEMORY]) {
       this.app[SUMMERCACHEMEMORY] = {};
