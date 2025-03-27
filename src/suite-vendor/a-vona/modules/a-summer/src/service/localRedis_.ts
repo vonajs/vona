@@ -13,7 +13,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      await this.cacheRedis.set(value!, key);
+      await this.cacheRedis.set(value!, key, { dbMeta: options?.dbMeta });
     }
     return value;
   }
@@ -35,7 +35,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
-      await this.cacheRedis.mset(valuesMissing as any, keysMissing);
+      await this.cacheRedis.mset(valuesMissing as any, keysMissing, { dbMeta: options?.dbMeta });
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
         values[indexesMissing[i]] = valueMissing;
