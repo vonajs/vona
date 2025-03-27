@@ -105,7 +105,7 @@ export class ServiceStartup extends BeanBase {
         `startupDebounce:${startup.name}${!isNil(instanceName) ? `:${this.ctx.instance.id}` : ''}` as const;
       const debounce =
         typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
-      const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, debounce);
+      const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, { ttl: debounce });
       if (flag) return;
     }
     // perform
