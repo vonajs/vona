@@ -4,24 +4,24 @@ import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
-import type { IDecoratorEventOptions } from 'vona-module-a-event';
 import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
-
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.ts';
+
 /** event: end */
 /** event: begin */
 import type { EventVersionDone } from '../bean/event.versionDone.ts';
+/** event: end */
+/** event: begin */
+import type { TypeEventVersionDoneData, TypeEventVersionDoneResult } from '../bean/event.versionDone.ts';
 
 import type { Errors } from '../config/errors.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
-
 import type { EntityViewRecord } from '../entity/viewRecord.ts';
-
 /** model: end */
 /** model: begin */
 import type { ModelViewRecord } from '../model/viewRecord.ts';
@@ -29,18 +29,22 @@ import type { ModelViewRecord } from '../model/viewRecord.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceDatabase } from '../service/database.ts';
+
 import type { ServiceVersion } from '../service/version.ts';
+
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-/** service: end */
-/** service: begin */
-
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
+/** service: end */
+/** service: begin */
+
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
+import 'vona-module-a-event';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -129,11 +133,7 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 export * from '../bean/startup.instanceInit.ts';
-declare module 'vona-module-a-event' {
-
-  export interface IEventRecord {
-    'a-version:versionDone': IDecoratorEventOptions;
-  }
+declare module 'vona' {
 
 }
 declare module 'vona-module-a-version' {
@@ -145,6 +145,11 @@ declare module 'vona-module-a-version' {
 }
 export interface IModuleEvent {
   versionDone: EventVersionDone;
+}
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-version:versionDone': (data: TypeEventVersionDoneData) => Promise<TypeEventVersionDoneResult> | TypeEventVersionDoneResult;
+  }
 }
 /** locale: end */
 /** error: begin */

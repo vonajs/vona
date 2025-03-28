@@ -8,6 +8,7 @@ import { Service } from 'vona-module-a-web';
 @Service()
 export class ServiceEventListener extends BeanBase {
   private _eventName: keyof IEventRecord;
+  private _eventHandlers: Function[] = [];
   private _composer: Function;
 
   protected __init__(eventName: keyof IEventRecord) {
@@ -19,18 +20,18 @@ export class ServiceEventListener extends BeanBase {
       const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
         return this._wrapOnion(item);
       }, this._eventName);
-      this._composer = compose(eventListeners);
+      const eventHandlers = [...eventListeners, ...this._eventHandlers];
+      this._composer = compose(eventHandlers);
     }
     return this._composer;
   }
 
   on(fn: Function): TypeEventOff {
-    const eventHandlers = this.getEventHandlers(eventName);
-    eventHandlers.push({ fn });
+    const eventHandlers = this._eventHandlers;
+    eventHandlers.push(fn);
     return () => {
-      const index = eventHandlers.findIndex(item => item.fn === fn);
+      const index = eventHandlers.findIndex(item => item === fn);
       if (index > -1) {
-        eventHandlers[index].fn = undefined;
         eventHandlers.splice(index, 1);
       }
     };

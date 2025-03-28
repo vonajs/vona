@@ -1,22 +1,24 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
-import type { IDecoratorEventOptions } from 'vona-module-a-event';
-
 /** aopMethod: begin */
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
+
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
 /** event: end */
 /** event: begin */
 import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
+/** event: end */
+/** event: begin */
+import type { TypeEventModelCacheNameData, TypeEventModelCacheNameResult } from '../bean/event.modelCacheName.ts';
 
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
-
 /** service: end */
 /** service: begin */
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
+
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
@@ -24,16 +26,18 @@ import type { ServiceTransactionConsistency‌ } from '../service/transactionCon
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-/** service: end */
-/** service: begin */
-
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+/** service: end */
+/** service: begin */
+
 import 'vona';
 import 'vona';
 import 'vona';
+import 'vona';
+import 'vona-module-a-event';
 import 'vona';
 import 'vona';
 
@@ -78,11 +82,7 @@ declare module 'vona' {
 /** bean: end */
 /** event: begin */
 export * from '../bean/event.modelCacheName.ts';
-declare module 'vona-module-a-event' {
-
-  export interface IEventRecord {
-    'a-database:modelCacheName': IDecoratorEventOptions;
-  }
+declare module 'vona' {
 
 }
 declare module 'vona-module-a-database' {
@@ -94,6 +94,11 @@ declare module 'vona-module-a-database' {
 }
 export interface IModuleEvent {
   modelCacheName: EventModelCacheName;
+}
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-database:modelCacheName': (data: TypeEventModelCacheNameData) => Promise<TypeEventModelCacheNameResult> | TypeEventModelCacheNameResult;
+  }
 }
 /** service: end */
 /** config: begin */
