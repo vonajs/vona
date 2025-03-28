@@ -9,7 +9,7 @@ import { Service } from 'vona-module-a-web';
 export class ServiceEventListener extends BeanBase {
   private _eventName: keyof IEventRecord;
   private _eventHandlers: Function[] = [];
-  private _composer: Function;
+  private _composer: Function | undefined;
 
   protected __init__(eventName: keyof IEventRecord) {
     this._eventName = eventName;
@@ -29,10 +29,12 @@ export class ServiceEventListener extends BeanBase {
   on(fn: Function): TypeEventOff {
     const eventHandlers = this._eventHandlers;
     eventHandlers.push(fn);
+    this._composer = undefined;
     return () => {
       const index = eventHandlers.findIndex(item => item === fn);
       if (index > -1) {
         eventHandlers.splice(index, 1);
+        this._composer = undefined;
       }
     };
   }
