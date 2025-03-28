@@ -25,8 +25,10 @@ export class ServiceDatabaseClient extends BeanBase {
 
   protected __init__(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
     this.__load(clientNameSelector, clientConfig);
-    this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async () => {
-
+    this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async ({ clientName, clientConfig }) => {
+      if (clientName === this.clientName) {
+        await this.reload(clientConfig);
+      }
     });
   }
 
