@@ -80,6 +80,6 @@ export class BeanDatabase extends BeanBase {
   }
 
   private async __reloadAllClientsInnerRaw(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
-
+    await this.scope.event.databaseClientReload.emit({ clientName, clientConfig });
   }
 }

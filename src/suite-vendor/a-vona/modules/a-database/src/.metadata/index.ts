@@ -12,11 +12,13 @@ import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseCl
 
 /** event: end */
 /** event: begin */
-import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
+import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
 /** event: end */
 /** event: begin */
-import type { TypeEventModelCacheNameData, TypeEventModelCacheNameResult } from '../bean/event.modelCacheName.ts';
+import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult } from '../bean/event.databaseClientReload.ts';
 
+import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
+import type { TypeEventModelCacheNameData, TypeEventModelCacheNameResult } from '../bean/event.modelCacheName.ts';
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
 /** service: end */
@@ -106,11 +108,17 @@ export interface IModuleBroadcast {
 }
 /** broadcast: end */
 /** event: begin */
+export * from '../bean/event.databaseClientReload.ts';
 export * from '../bean/event.modelCacheName.ts';
 declare module 'vona' {
 
 }
 declare module 'vona-module-a-database' {
+
+  export interface EventDatabaseClientReload {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 
   export interface EventModelCacheName {
     /** @internal */
@@ -118,10 +126,12 @@ declare module 'vona-module-a-database' {
   }
 }
 export interface IModuleEvent {
+  databaseClientReload: EventDatabaseClientReload;
   modelCacheName: EventModelCacheName;
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
+    'a-database:databaseClientReload': (data: TypeEventDatabaseClientReloadData) => Promise<TypeEventDatabaseClientReloadResult> | TypeEventDatabaseClientReloadResult;
     'a-database:modelCacheName': (data: TypeEventModelCacheNameData) => Promise<TypeEventModelCacheNameResult> | TypeEventModelCacheNameResult;
   }
 }
