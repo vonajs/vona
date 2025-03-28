@@ -20,7 +20,7 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
           mysql_afterCreate(conn).then(done).catch(done);
         },
       },
-    };
+    } as unknown as ConfigDatabaseClient;
   }
 
   async fetchDatabases(

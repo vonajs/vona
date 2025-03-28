@@ -22,7 +22,7 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
         //   },
         // },
       },
-    };
+    } as unknown as ConfigDatabaseClient;
   }
 
   async fetchDatabases(
