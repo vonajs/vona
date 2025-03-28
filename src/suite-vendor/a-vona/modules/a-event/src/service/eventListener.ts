@@ -1,6 +1,6 @@
 import type { Next } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IEventRecord } from '../types/event.ts';
+import type { IEventRecord, TypeEventOff } from '../types/event.ts';
 import type { IDecoratorEventListenerOptions, IEventExecute, IEventListenerRecord } from '../types/eventListener.ts';
 import { BeanBase, compose } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -22,6 +22,18 @@ export class ServiceEventListener extends BeanBase {
       this._composer = compose(eventListeners);
     }
     return this._composer;
+  }
+
+  on(fn: Function): TypeEventOff {
+    const eventHandlers = this.getEventHandlers(eventName);
+    eventHandlers.push({ fn });
+    return () => {
+      const index = eventHandlers.findIndex(item => item.fn === fn);
+      if (index > -1) {
+        eventHandlers[index].fn = undefined;
+        eventHandlers.splice(index, 1);
+      }
+    };
   }
 
   private _wrapOnion(item: IOnionSlice<IDecoratorEventListenerOptions, keyof IEventListenerRecord>) {

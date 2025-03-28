@@ -1,5 +1,7 @@
 import type { ServiceOnion } from 'vona-module-a-onion';
 
+export type TypeEventOff = () => void;
+
 export interface IEventRecord {}
 
 export interface IDecoratorEventOptions {}

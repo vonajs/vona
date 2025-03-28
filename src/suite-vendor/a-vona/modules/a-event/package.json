@@ -7,10 +7,10 @@
     "dependencies": {},
     "onions": {
       "event": {
-        "optionsGlobalInterfaceName": "IDecoratorEventOptions",
-        "optionsGlobalInterfaceFrom": "vona-module-a-event",
+        "optionsNone": true,
         "scopeResource": true,
-        "boilerplate": "cli/event/boilerplate"
+        "boilerplate": "cli/event/boilerplate",
+        "metadataCustom": "cli/event/metadata/generate.ts"
       },
       "eventListener": {
         "optionsGlobalInterfaceName": "IDecoratorEventListenerOptions",
