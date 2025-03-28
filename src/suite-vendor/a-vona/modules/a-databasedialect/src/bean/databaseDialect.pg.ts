@@ -1,5 +1,6 @@
 import type { Knex } from 'knex';
 import type {
+  ConfigDatabaseClient,
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
   TableIdentity,
@@ -11,7 +12,7 @@ import {
 
 @DatabaseDialect()
 export class DatabaseDialectPg extends BeanDatabaseDialectBase {
-  getConfigBase(): Knex.Config | undefined {
+  getConfigBase(): ConfigDatabaseClient | undefined {
     return {
       connection: {
         // types: {

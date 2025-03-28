@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientRecord } from '../types/database.ts';
 import knex from 'knex';
 import { BeanBase, deepExtend } from 'vona';
@@ -10,7 +11,7 @@ export interface ISetDatabaseNameResult { database?: string; filename?: string }
 export class ServiceDatabaseClient extends BeanBase {
   clientNameSelector?: string;
   clientName: keyof IDatabaseClientRecord;
-  clientConfig: Knex.Config;
+  clientConfig: ConfigDatabaseClient;
   private _knex: Knex;
 
   get configDatabase() {
@@ -45,7 +46,7 @@ export class ServiceDatabaseClient extends BeanBase {
     return clientName as keyof IDatabaseClientRecord;
   }
 
-  getClientConfig(clientName: string, original: boolean = false): Knex.Config {
+  getClientConfig(clientName: string, original: boolean = false): ConfigDatabaseClient {
     // clientConfig
     let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;
@@ -63,11 +64,9 @@ export class ServiceDatabaseClient extends BeanBase {
     return clientConfig;
   }
 
-  setClientConfig(clientName: string, clientConfig: Knex.Config) {
+  setClientConfig(clientName: keyof IDatabaseClientRecord, clientConfig: ConfigDatabaseClient) {
     // clientName
-    if (!clientName) {
-      clientName = this.configDatabase.defaultClient;
-    }
+    if (!clientName) clientName = this.configDatabase.defaultClient;
     this.configDatabase.clients[clientName] = clientConfig;
     // todo:emit event
   }

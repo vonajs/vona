@@ -1,10 +1,10 @@
-import type { Knex } from 'knex';
+import type { ConfigDatabaseClient } from 'vona-module-a-database';
 import { DatabaseDialect } from 'vona-module-a-database';
 import { DatabaseDialectMysql } from './databaseDialect.mysql.ts';
 
 @DatabaseDialect()
 export class DatabaseDialectMysql3 extends DatabaseDialectMysql {
-  getConfigBase(): Knex.Config | undefined {
+  getConfigBase(): ConfigDatabaseClient | undefined {
     return super.getConfigBase();
     // const configBase = super.getConfigBase();
     // return Object.assign({}, configBase, {

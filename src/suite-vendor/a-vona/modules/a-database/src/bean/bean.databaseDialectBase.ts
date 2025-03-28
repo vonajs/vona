@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { TableIdentity } from '../types/tableIdentity.ts';
 import { isNil, safeBoolean } from '@cabloy/utils';
 import { BeanBase } from 'vona';
@@ -21,7 +22,7 @@ export type ITableColumns = Record<string, ITableColumn>;
 
 @Virtual()
 export class BeanDatabaseDialectBase extends BeanBase {
-  getConfigBase(): Knex.Config | undefined {
+  getConfigBase(): ConfigDatabaseClient | undefined {
     return undefined;
   }
 
