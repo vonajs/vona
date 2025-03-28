@@ -3,14 +3,17 @@ import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from './event.h
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 
+type TypeEventData = TypeEventHelloEchoData;
+type TypeEventResult = TypeEventHelloEchoResult;
+
 @EventListener({ match: 'vona-test:helloEcho' })
 export class EventListenerHelloEcho
   extends BeanBase
-  implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult> {
+  implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(
-    data: TypeEventHelloEchoData,
-    next: NextEvent<TypeEventHelloEchoData, TypeEventHelloEchoResult>,
-  ): Promise<TypeEventHelloEchoResult> {
+    data: TypeEventData,
+    next: NextEvent<TypeEventData, TypeEventResult>,
+  ): Promise<TypeEventResult> {
     // next
     const result = await next();
     return `${data.text} ${result}`;
