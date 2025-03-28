@@ -36,11 +36,11 @@ export class ServiceDatabaseClient extends BeanBase {
     await this._knex?.destroy();
   }
 
-  private _extractClientName(clientName?: string): keyof IDatabaseClientRecord {
+  private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
     // default
-    if (!clientName) return this.configDatabase.defaultClient;
+    if (!clientNameSelector) return this.configDatabase.defaultClient;
     // split
-    clientName = clientName.split(':')[0];
+    const clientName = clientNameSelector.split(':')[0];
     if (!clientName) return this.configDatabase.defaultClient;
     return clientName as keyof IDatabaseClientRecord;
   }
@@ -69,6 +69,7 @@ export class ServiceDatabaseClient extends BeanBase {
       clientName = this.configDatabase.defaultClient;
     }
     this.configDatabase.clients[clientName] = clientConfig;
+    // todo:emit event
   }
 
   getDatabaseName(): string {
@@ -87,6 +88,7 @@ export class ServiceDatabaseClient extends BeanBase {
     return result;
   }
 
+  // todo: 将changeConfig和Reload分开，reload在event监听中被调用
   async changeConfigAndReload(databaseName: string): Promise<void> {
     // set databaseName
     const connDatabaseName = this.setDatabaseName(databaseName);
@@ -95,6 +97,11 @@ export class ServiceDatabaseClient extends BeanBase {
     const config = this.getClientConfig(this.clientName, true);
     config.connection = Object.assign({}, config.connection, connDatabaseName);
     this.setClientConfig(this.clientName, config);
+    // reload
+    await this.reload();
+  }
+
+  async reload() {
     // reload knex
     await this._knex.destroy();
     this.__init__(this.clientNameSelector);
