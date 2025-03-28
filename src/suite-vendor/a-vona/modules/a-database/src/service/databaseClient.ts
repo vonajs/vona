@@ -5,7 +5,7 @@ import knex from 'knex';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
 
-export interface ISetDatabaseNameResult { database?: string; filename?: string }
+export interface IPrepareDatabaseNameResult { database?: string; filename?: string }
 
 @Service()
 export class ServiceDatabaseClient extends BeanBase {
@@ -34,12 +34,19 @@ export class ServiceDatabaseClient extends BeanBase {
   }
 
   protected async __dispose__() {
-    await this._knex?.destroy();
+    if (this._knex) {
+      await this._knex.destroy();
+      this._knex = undefined as any;
+    }
   }
 
   async reload() {
-    await this._knex?.destroy();
+    await this.__dispose__();
     this.__init__(this.clientNameSelector);
+  }
+
+  async reloadAllClients() {
+
   }
 
   private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
@@ -69,40 +76,31 @@ export class ServiceDatabaseClient extends BeanBase {
     return clientConfig;
   }
 
-  setClientConfig(clientName: keyof IDatabaseClientRecord, clientConfig: ConfigDatabaseClient) {
-    // clientName
-    if (!clientName) clientName = this.configDatabase.defaultClient;
-    this.configDatabase.clients[clientName] = clientConfig;
-    // todo:emit event
-    // 将setClientConfig广播至所有worker
-  }
-
   getDatabaseName(): string {
     const connection = this.clientConfig.connection as any;
     return connection.database || connection.filename;
   }
 
-  setDatabaseName(databaseName: string): ISetDatabaseNameResult {
-    const result: ISetDatabaseNameResult = {};
+  private _prepareDatabaseName(databaseName: string): IPrepareDatabaseNameResult {
+    const result: IPrepareDatabaseNameResult = {};
     const connection = this.clientConfig.connection as any;
     if (connection.database) {
-      result.database = connection.database = databaseName;
+      result.database = databaseName;
     } else if (connection.filename) {
-      result.filename = connection.filename = databaseName;
+      result.filename = databaseName;
     }
     return result;
   }
 
-  // todo: 将changeConfig和Reload分开，reload在event监听中被调用
-  // todo: 更合理的设计，应该是单独提供一个changeDatabaseName的逻辑
   async changeConfigAndReload(databaseName: string): Promise<void> {
     // set databaseName
-    const connDatabaseName = this.setDatabaseName(databaseName);
+    const connDatabaseName = this._prepareDatabaseName(databaseName);
     // set config
     //   * should not use this.clientConfig.connection, because password is hidden
     const config = this.getClientConfig(this.clientName, true);
     config.connection = Object.assign({}, config.connection, connDatabaseName);
-    this.setClientConfig(this.clientName, config);
+    // only used by startup, so no consider that workders broadcast
+    this.configDatabase.clients[this.clientName] = config;
     // reload
     await this.reload();
   }
