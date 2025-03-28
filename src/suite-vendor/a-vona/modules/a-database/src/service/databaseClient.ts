@@ -69,6 +69,7 @@ export class ServiceDatabaseClient extends BeanBase {
     if (!clientName) clientName = this.configDatabase.defaultClient;
     this.configDatabase.clients[clientName] = clientConfig;
     // todo:emit event
+    // 将setClientConfig广播至所有worker
   }
 
   getDatabaseName(): string {
