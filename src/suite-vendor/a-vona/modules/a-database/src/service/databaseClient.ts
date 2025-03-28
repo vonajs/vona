@@ -22,20 +22,20 @@ export class ServiceDatabaseClient extends BeanBase {
     return this._knex;
   }
 
-  protected __init__(clientNameSelector?: string) {
-    this.__load(clientNameSelector);
+  protected __init__(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
+    this.__load(clientNameSelector, clientConfig);
   }
 
   protected async __dispose__() {
     await this.__close();
   }
 
-  private __load(clientNameSelector?: string) {
+  private __load(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
     // name
     this.clientNameSelector = clientNameSelector;
     this.clientName = this._extractClientName(clientNameSelector);
     // config
-    this.clientConfig = this.getClientConfig(this.clientName);
+    this.clientConfig = clientConfig ?? this.getClientConfig(this.clientName);
     this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this._knex = knex(this.clientConfig);
@@ -48,9 +48,9 @@ export class ServiceDatabaseClient extends BeanBase {
     }
   }
 
-  async reload() {
+  async reload(clientConfig?: ConfigDatabaseClient) {
     await this.__close();
-    this.__load(this.clientNameSelector);
+    this.__load(this.clientNameSelector, clientConfig);
   }
 
   private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
@@ -106,6 +106,6 @@ export class ServiceDatabaseClient extends BeanBase {
     // only used by startup, so no consider that workders broadcast
     this.configDatabase.clients[this.clientName] = config;
     // reload
-    await this.reload();
+    await this.reload(config);
   }
 }
