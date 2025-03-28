@@ -11,13 +11,14 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const typeData = `TypeEvent${beanNameCapitalize}Data`;
     const typeResult = `TypeEvent${beanNameCapitalize}Result`;
     contentImports.push(`import type { ${typeData}, ${typeResult} } from '${fileNameJSRelative}';`);
-    contentRecords.push(`'${beanNameFull}': (data: ${typeData}) => Promise<${typeResult}> | ${typeResult};`);
+    contentRecords.push(`'${beanNameFull}': EventOn<${typeData}, ${typeResult}>;`);
   }
   if (contentImports.length === 0) return '';
+  const contentImportEventOn = contentImports.length > 0 ? 'import type { EventOn } from \'vona-module-a-event\';' : '';
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentImports.join('\n')}
-import 'vona-module-a-event';  
+${contentImportEventOn} 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     ${contentRecords.join('\n')}
