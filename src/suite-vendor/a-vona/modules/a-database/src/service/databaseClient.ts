@@ -46,7 +46,7 @@ export class ServiceDatabaseClient extends BeanBase {
     return clientName as keyof IDatabaseClientRecord;
   }
 
-  getClientConfig(clientName: string, original: boolean = false): ConfigDatabaseClient {
+  getClientConfig(clientName: keyof IDatabaseClientRecord, original: boolean = false): ConfigDatabaseClient {
     // clientConfig
     let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;

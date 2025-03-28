@@ -44,11 +44,10 @@ export class BeanDatabase extends BeanBase {
   }
 
   getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
+    if (!client) throw new Error('database dialect not specified');
     const beanFullName = this.scope.config.dialects[client];
     const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
-    if (!dialect) {
-      throw new Error(`database dialect not found: ${client}`);
-    }
+    if (!dialect) throw new Error(`database dialect not found: ${client}`);
     return dialect;
   }
 

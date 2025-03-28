@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from './database.ts';
 
 export interface ConfigDatabaseClient extends Omit<Knex.Config, 'client'> {
-  client?: keyof IDatabaseClientDialectRecord;
+  client: keyof IDatabaseClientDialectRecord;
 }
 export interface ConfigDatabase {
   testDatabase: boolean;
