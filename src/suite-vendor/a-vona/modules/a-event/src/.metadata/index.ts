@@ -1,20 +1,44 @@
 import type { BeanScopeUtil } from 'vona';
+/** bean: end */
+/** bean: begin */
+import type { BeanEvent } from '../bean/bean.event.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceEventListener } from '../service/eventListener.ts';
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+
+import { Scope } from 'vona-module-a-bean';
+/** bean: begin */
+import 'vona';
 /** service: end */
 /** service: begin */
 
-import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/bean.event.ts';
+declare module 'vona' {
+
+}
+declare module 'vona-module-a-event' {
+
+  export interface BeanEvent {
+    /** @internal */
+    get scope(): ScopeModuleAEvent;
+  }
+}
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    event: BeanEvent;
+  }
+}
+/** bean: end */
 /** service: begin */
-import 'vona';
-import 'vona';
-
-import 'vona';
-
 export * from '../service/eventListener.ts';
 declare module 'vona-module-a-web' {
 
