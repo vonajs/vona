@@ -23,6 +23,14 @@ export class ServiceDatabaseClient extends BeanBase {
   }
 
   protected __init__(clientNameSelector?: string) {
+    this.__load(clientNameSelector);
+  }
+
+  protected async __dispose__() {
+    await this.__close();
+  }
+
+  private __load(clientNameSelector?: string) {
     // name
     this.clientNameSelector = clientNameSelector;
     this.clientName = this._extractClientName(clientNameSelector);
@@ -33,7 +41,7 @@ export class ServiceDatabaseClient extends BeanBase {
     this._knex = knex(this.clientConfig);
   }
 
-  protected async __dispose__() {
+  private async __close() {
     if (this._knex) {
       await this._knex.destroy();
       this._knex = undefined as any;
@@ -41,8 +49,8 @@ export class ServiceDatabaseClient extends BeanBase {
   }
 
   async reload() {
-    await this.__dispose__();
-    this.__init__(this.clientNameSelector);
+    await this.__close();
+    this.__load(this.clientNameSelector);
   }
 
   private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
