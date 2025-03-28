@@ -37,6 +37,11 @@ export class ServiceDatabaseClient extends BeanBase {
     await this._knex?.destroy();
   }
 
+  async reload() {
+    await this._knex?.destroy();
+    this.__init__(this.clientNameSelector);
+  }
+
   private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
     // default
     if (!clientNameSelector) return this.configDatabase.defaultClient;
@@ -89,6 +94,7 @@ export class ServiceDatabaseClient extends BeanBase {
   }
 
   // todo: 将changeConfig和Reload分开，reload在event监听中被调用
+  // todo: 更合理的设计，应该是单独提供一个changeDatabaseName的逻辑
   async changeConfigAndReload(databaseName: string): Promise<void> {
     // set databaseName
     const connDatabaseName = this.setDatabaseName(databaseName);
@@ -99,11 +105,5 @@ export class ServiceDatabaseClient extends BeanBase {
     this.setClientConfig(this.clientName, config);
     // reload
     await this.reload();
-  }
-
-  async reload() {
-    // reload knex
-    await this._knex.destroy();
-    this.__init__(this.clientNameSelector);
   }
 }
