@@ -1,9 +1,10 @@
+import type { IEventRecord } from '../types/event.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanEvent extends BeanBase {
-  addListener<K extends keyof IEventRecord>(
+  on<K extends keyof IEventRecord>(
     eventName: K,
     fn: TypeEventHandler<IEventRecord[K]['data'], IEventRecord[K]['result']>,
   ): TypeEventOff {

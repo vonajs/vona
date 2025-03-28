@@ -4,10 +4,11 @@ import type { IEventRecord } from './event.ts';
 
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;
 export type NextEventStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => Promise<RESULT>;
+export type NextEventSync<DATA = unknown, RESULT = unknown> = (data?: DATA) => RESULT;
 export type NextEventSyncStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => RESULT;
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
-  execute: (data: DATA, next: Next) => Promise<RESULT>;
+  execute: (data: DATA, next: Next) => Promise<RESULT> | RESULT;
 }
 
 export interface IEventListenerRecord {}
