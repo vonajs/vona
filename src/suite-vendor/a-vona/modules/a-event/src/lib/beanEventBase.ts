@@ -1,5 +1,5 @@
 import type { TypeEventOff } from '../types/event.ts';
-import type { NextEventGeneralStrict, NextEventStrict, NextEventSyncStrict } from '../types/eventListener.ts';
+import type { EventOn, NextEventStrict, NextEventSyncStrict } from '../types/eventListener.ts';
 import { BeanBase, cast } from 'vona';
 import { ServiceEventListener } from '../service/eventListener.ts';
 
@@ -26,7 +26,7 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
     return beanEventListener.composer(data, next);
   }
 
-  on(fn: NextEventGeneralStrict<DATA, RESULT>): TypeEventOff {
+  on(fn: EventOn<DATA, RESULT>): TypeEventOff {
     const beanEventListener = this.bean._getBeanSelector(ServiceEventListener, this.$onionName);
     return beanEventListener.on(fn);
   }
