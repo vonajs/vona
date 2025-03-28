@@ -1,10 +1,15 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
+import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+
 /** aopMethod: begin */
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
-
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
+/** broadcast: end */
+/** broadcast: begin */
+import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseClientReload.ts';
+
 /** event: end */
 /** event: begin */
 import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
@@ -80,6 +85,26 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.databaseClientReload.ts';
+declare module 'vona-module-a-broadcast' {
+
+  export interface IBroadcastRecord {
+    'a-database:databaseClientReload': IDecoratorBroadcastOptions;
+  }
+
+}
+declare module 'vona-module-a-database' {
+
+  export interface BroadcastDatabaseClientReload {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+}
+export interface IModuleBroadcast {
+  databaseClientReload: BroadcastDatabaseClientReload;
+}
+/** broadcast: end */
 /** event: begin */
 export * from '../bean/event.modelCacheName.ts';
 declare module 'vona' {
@@ -183,6 +208,7 @@ export interface ScopeModuleADatabase {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  broadcast: IModuleBroadcast;
   event: IModuleEvent;
   service: IModuleService;
 }

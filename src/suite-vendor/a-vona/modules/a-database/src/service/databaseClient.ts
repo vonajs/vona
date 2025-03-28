@@ -45,10 +45,6 @@ export class ServiceDatabaseClient extends BeanBase {
     this.__init__(this.clientNameSelector);
   }
 
-  async reloadAllClients() {
-
-  }
-
   private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
     // default
     if (!clientNameSelector) return this.configDatabase.defaultClient;

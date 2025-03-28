@@ -1,4 +1,5 @@
 import type { FunctionAsync } from 'vona';
+import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDatabaseSwitchOptions } from '../types/database.ts';
 import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
 import { BeanBase } from 'vona';
@@ -71,5 +72,14 @@ export class BeanDatabase extends BeanBase {
       // restore
       this.ctx.dbMeta = dbMetaPrevious;
     }
+  }
+
+  async reloadClients(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    await this.__reloadAllClientsInnerRaw(clientName, clientConfig);
+    this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig });
+  }
+
+  private async __reloadAllClientsInnerRaw(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+
   }
 }
