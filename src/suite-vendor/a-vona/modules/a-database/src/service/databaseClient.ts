@@ -13,6 +13,7 @@ export class ServiceDatabaseClient extends BeanBase {
   clientName: keyof IDatabaseClientRecord;
   clientConfig: ConfigDatabaseClient;
   private _knex: Knex;
+  private _onDatabaseClientReloadCancel?: Function;
 
   get configDatabase() {
     return this.app.config.database;
@@ -24,10 +25,14 @@ export class ServiceDatabaseClient extends BeanBase {
 
   protected __init__(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
     this.__load(clientNameSelector, clientConfig);
+    this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async () => {
+
+    });
   }
 
   protected async __dispose__() {
     await this.__close();
+    this._onDatabaseClientReloadCancel?.();
   }
 
   private __load(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
