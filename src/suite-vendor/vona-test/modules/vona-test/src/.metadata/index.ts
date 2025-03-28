@@ -8,26 +8,27 @@ import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { EventOn } from 'vona-module-a-event';
+
 import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
-
 import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
+
 import type { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
-
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { IAopMethodOptionsTest } from '../bean/aopMethod.test.ts';
+
 /** bean: end */
 /** bean: begin */
 import type { BeanTestCtx } from '../bean/bean.testCtx.ts';
-
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastTest } from '../bean/broadcast.test.ts';
+
 /** cacheMem: end */
 /** cacheMem: begin */
 import type { CacheMemTest } from '../bean/cacheMem.test.ts';
-
 /** cacheRedis: end */
 /** cacheRedis: begin */
 import type { CacheRedisTest } from '../bean/cacheRedis.test.ts';
@@ -40,6 +41,7 @@ import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from '../bean/e
 /** queue: end */
 /** queue: begin */
 import type { QueueTest } from '../bean/queue.test.ts';
+
 /** summerCache: end */
 /** summerCache: begin */
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
@@ -49,21 +51,20 @@ import type { config } from '../config/config.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
-
 /** model: end */
 /** model: begin */
 import type { ModelTest } from '../model/test.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
 
 import type { ServiceTest } from '../service/test.ts';
-
 import type { ServiceTestApp } from '../service/testApp.ts';
+
 import type { ServiceTestClass } from '../service/testClass.ts';
 
 import type { ServiceTransaction } from '../service/transaction.ts';
-
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -73,14 +74,13 @@ import { Scope } from 'vona-module-a-bean';
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
-import 'vona';
 /** service: end */
 /** service: begin */
 
 import 'vona';
 
 import 'vona';
-import 'vona-module-a-event';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -268,7 +268,7 @@ export interface IModuleEvent {
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'vona-test:helloEcho': (data: TypeEventHelloEchoData) => Promise<TypeEventHelloEchoResult> | TypeEventHelloEchoResult;
+    'vona-test:helloEcho': EventOn<TypeEventHelloEchoData, TypeEventHelloEchoResult>;
   }
 }
 /** meta: end */
