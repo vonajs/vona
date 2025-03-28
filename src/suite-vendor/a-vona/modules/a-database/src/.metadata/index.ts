@@ -1,22 +1,23 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 
+import type { EventOn } from 'vona-module-a-event';
 /** aopMethod: begin */
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
+
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseClientReload.ts';
-
 /** event: end */
 /** event: begin */
 import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
+
 /** event: end */
 /** event: begin */
 import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult } from '../bean/event.databaseClientReload.ts';
-
 import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
 import type { TypeEventModelCacheNameData, TypeEventModelCacheNameResult } from '../bean/event.modelCacheName.ts';
 import type { config } from '../config/config.ts';
@@ -24,8 +25,8 @@ import type { Errors } from '../config/errors.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
-import type { ServiceDbMeta } from '../service/dbMeta.ts';
 
+import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
@@ -36,15 +37,14 @@ import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
-import locale_zh_cn from '../config/locale/zh-cn.ts';
 /** service: end */
 /** service: begin */
 
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
-import 'vona-module-a-event';
 import 'vona';
 import 'vona';
 
@@ -131,8 +131,8 @@ export interface IModuleEvent {
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-database:databaseClientReload': (data: TypeEventDatabaseClientReloadData) => Promise<TypeEventDatabaseClientReloadResult> | TypeEventDatabaseClientReloadResult;
-    'a-database:modelCacheName': (data: TypeEventModelCacheNameData) => Promise<TypeEventModelCacheNameResult> | TypeEventModelCacheNameResult;
+    'a-database:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
+    'a-database:modelCacheName': EventOn<TypeEventModelCacheNameData, TypeEventModelCacheNameResult>;
   }
 }
 /** service: end */

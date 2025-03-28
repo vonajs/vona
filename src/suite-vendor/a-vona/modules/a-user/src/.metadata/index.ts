@@ -1,9 +1,10 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+import type { EventOn } from 'vona-module-a-event';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 /** bean: end */
 /** bean: begin */
 import type { BeanAuthInner } from '../bean/bean.authInner.ts';
-
 import type { BeanPassport } from '../bean/bean.passport.ts';
 import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
@@ -12,8 +13,8 @@ import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous
 /** event: end */
 /** event: begin */
 import type { TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult } from '../bean/event.createUserAnonymous.ts';
-import type { EventSignin } from '../bean/event.signin.ts';
 
+import type { EventSignin } from '../bean/event.signin.ts';
 import type { TypeEventSigninData, TypeEventSigninResult } from '../bean/event.signin.ts';
 import type { EventSignout } from '../bean/event.signout.ts';
 import type { TypeEventSignoutData, TypeEventSignoutResult } from '../bean/event.signout.ts';
@@ -25,15 +26,14 @@ import type { config } from '../config/config.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+
 import { Scope } from 'vona-module-a-bean';
 
 import 'vona';
 
 import 'vona';
-
 import 'vona';
 import 'vona';
-import 'vona-module-a-event';
 import 'vona';
 import 'vona';
 
@@ -127,9 +127,9 @@ export interface IModuleEvent {
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-user:createUserAnonymous': (data: TypeEventCreateUserAnonymousData) => Promise<TypeEventCreateUserAnonymousResult> | TypeEventCreateUserAnonymousResult;
-    'a-user:signin': (data: TypeEventSigninData) => Promise<TypeEventSigninResult> | TypeEventSigninResult;
-    'a-user:signout': (data: TypeEventSignoutData) => Promise<TypeEventSignoutResult> | TypeEventSignoutResult;
+    'a-user:createUserAnonymous': EventOn<TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult>;
+    'a-user:signin': EventOn<TypeEventSigninData, TypeEventSigninResult>;
+    'a-user:signout': EventOn<TypeEventSignoutData, TypeEventSignoutResult>;
   }
 }
 /** event: end */
