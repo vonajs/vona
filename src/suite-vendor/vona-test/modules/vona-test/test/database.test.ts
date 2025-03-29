@@ -45,6 +45,8 @@ describe('database.test.ts', () => {
       });
       const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
       assert.equal(entityTest2?.title, 'clientNameDynamic:fail');
+      // delete
+      await scopeTest.model.test.delete({ id: entityTest.id });
     });
   });
   it('action:model:clientNameDynamic:transaction:success', async () => {
@@ -61,6 +63,8 @@ describe('database.test.ts', () => {
       });
       const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
       assert.equal(entityTest2?.title, 'clientNameDynamic:success_1');
+      // delete
+      await scopeTest.model.test.delete({ id: entityTest.id });
     });
   });
   it('action:database:transaction:compensate', async () => {
@@ -82,6 +86,8 @@ describe('database.test.ts', () => {
       });
       const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
       assert.equal(entityTest2?.title, 'transaction:compensate:fail');
+      // delete
+      await scopeTest.model.test.delete({ id: entityTest.id });
     });
   });
 });
