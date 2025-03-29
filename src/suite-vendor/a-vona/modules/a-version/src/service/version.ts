@@ -25,9 +25,7 @@ export class ServiceVersion extends BeanBase {
     try {
       const result = await this.__check({ scene: 'update' });
       // clear columns cache
-      this.bean.model.columnsClearAll();
-      // broadcast
-      this.scope.broadcast.columnsClear.emit({ mode: 'all' });
+      this.ctx.dbMeta.columns.columnsClear();
       // log
       if (Object.keys(result).length > 0) {
         this.$logger.info(JSON.stringify(result, null, 2));
@@ -217,7 +215,7 @@ export class ServiceVersion extends BeanBase {
     if (!beanVersion.update)
       throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
     // clear columns cache
-    this.bean.model.columnsClearAll();
+    this.ctx.dbMeta.columns.columnsClear();
     // execute
     await beanVersion.update({ version });
     // insert record

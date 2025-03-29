@@ -1,15 +1,11 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
-/** broadcast: begin */
-import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
-
+/** model: end */
+/** event: begin */
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
-import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
 
-/** broadcast: end */
-/** broadcast: begin */
-import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.ts';
+import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
 /** event: end */
 /** event: begin */
 import type { EventVersionDone } from '../bean/event.versionDone.ts';
@@ -22,6 +18,7 @@ import type { Errors } from '../config/errors.ts';
 /** entity: begin */
 import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
+
 import type { EntityViewRecord } from '../entity/viewRecord.ts';
 
 /** model: end */
@@ -31,15 +28,14 @@ import type { ModelViewRecord } from '../model/viewRecord.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceDatabase } from '../service/database.ts';
-
 import type { ServiceVersion } from '../service/version.ts';
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
+import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
@@ -51,26 +47,6 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/broadcast.columnsClear.ts';
-declare module 'vona-module-a-broadcast' {
-
-  export interface IBroadcastRecord {
-    'a-version:columnsClear': IDecoratorBroadcastOptions;
-  }
-
-}
-declare module 'vona-module-a-version' {
-
-  export interface BroadcastColumnsClear {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-}
-export interface IModuleBroadcast {
-  columnsClear: BroadcastColumnsClear;
-}
-/** model: end */
-/** event: begin */
 export * from '../bean/event.versionDone.ts';
 /** event: end */
 /** meta: begin */
@@ -168,7 +144,6 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** broadcast: end */
 /** entity: begin */
 export * from '../entity/version.ts';
 export * from '../entity/versionInit.ts';
@@ -248,12 +223,12 @@ export interface ScopeModuleAVersion {
   util: BeanScopeUtil;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  broadcast: IModuleBroadcast;
   entity: IModuleEntity;
   model: IModuleModel;
   event: IModuleEvent;
   service: IModuleService;
 }
+
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-version': ScopeModuleAVersion;

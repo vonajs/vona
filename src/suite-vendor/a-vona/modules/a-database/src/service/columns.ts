@@ -53,4 +53,8 @@ export class ServiceColumns extends BeanBase {
     }
     return this.serviceColumnsCache.columnsDefaultCache[tableName];
   }
+
+  columnsClear(tableName?: string) {
+    return this.bean.database.columnsClear(this.dbMeta.currentClientName, tableName);
+  }
 }
