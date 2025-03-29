@@ -42,21 +42,6 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return [data, dataOriginal] as [TRecord, TRecord];
   }
 
-  async defaultData(table?: string): Promise<TRecord> {
-    table = table || this.table;
-    if (!table) return {} as TRecord;
-    if (!this.columnsDefaultCache[table]) {
-      const data = {};
-      // columns
-      const columns = await this.columns(table);
-      for (const columnName in columns) {
-        data[columnName] = columns[columnName].default;
-      }
-      this.columnsDefaultCache[table] = data;
-    }
-    return this.columnsDefaultCache[table] as TRecord;
-  }
-
   private get columnsDefaultCache(): Record<string, {}> {
     if (!this.dbOriginal[SymbolColumnsDefaultCache]) {
       this.dbOriginal[SymbolColumnsDefaultCache] = {};
@@ -71,19 +56,14 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return this.dbOriginal[SymbolColumnsCache];
   }
 
+  async defaultData(table?: string): Promise<TRecord> {
+    table = table || this.table;
+    return await this.dbMeta.columns.defaultData(table) as TRecord;
+  }
+
   async columns(table?: string): Promise<ITableColumns> {
     table = table || this.table;
-    if (!table) return {};
-    let columns = this.columnsCache[table];
-    if (!columns) {
-      const dialect = this.dialect;
-      const map = await this.self.builder(table).columnInfo();
-      columns = this.columnsCache[table] = {};
-      for (const name in map) {
-        columns[name] = dialect.coerceColumn(map[name]);
-      }
-    }
-    return columns;
+    return await this.dbMeta.columns.columns(table);
   }
 
   private clearColumnsCache() {

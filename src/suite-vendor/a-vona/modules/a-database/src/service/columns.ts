@@ -1,4 +1,4 @@
-import type { ITableColumns } from '../types/columns.ts';
+import type { ITableColumns, ITableColumnsDefault } from '../types/columns.ts';
 import type { ServiceDbMeta } from './dbMeta.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -38,5 +38,19 @@ export class ServiceColumns extends BeanBase {
       }
     }
     return columns;
+  }
+
+  async defaultData(tableName?: string): Promise<ITableColumnsDefault> {
+    if (!tableName) return {};
+    if (!this.serviceColumnsCache.columnsDefaultCache[tableName]) {
+      const data = {};
+      // columns
+      const columns = await this.columns(tableName);
+      for (const columnName in columns) {
+        data[columnName] = columns[columnName].default;
+      }
+      this.serviceColumnsCache.columnsDefaultCache[tableName] = data;
+    }
+    return this.serviceColumnsCache.columnsDefaultCache[tableName];
   }
 }
