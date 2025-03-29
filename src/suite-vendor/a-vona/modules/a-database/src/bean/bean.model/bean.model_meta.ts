@@ -1,6 +1,4 @@
-import type { Knex } from 'knex';
 import type { ServiceDbMeta } from '../../service/dbMeta.ts';
-import type { IDatabaseClientDialectRecord } from '../../types/database.ts';
 import type {
   IDatabaseClientRecord,
   IDecoratorEntityOptions,
@@ -36,10 +34,6 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
 
   protected get db() {
     return this.dbMeta.current;
-  }
-
-  protected get dbOriginal() {
-    return this.dbMeta.current.client.config.connection;
   }
 
   public get scopeDatabase() {
