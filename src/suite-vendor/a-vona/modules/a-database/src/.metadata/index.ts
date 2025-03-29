@@ -24,8 +24,10 @@ import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
 /** service: end */
 /** service: begin */
-import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
+import type { ServiceColumns } from '../service/columns.ts';
 
+import type { ServiceColumnsCache } from '../service/columnsCache.ts';
+import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
@@ -146,11 +148,15 @@ export * from '../config/errors.ts';
 export * from '../main.ts';
 /** event: end */
 /** service: begin */
+export * from '../service/columns.ts';
+export * from '../service/columnsCache.ts';
 export * from '../service/databaseClient.ts';
 export * from '../service/dbMeta.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
+    'a-database:columns': never;
+    'a-database:columnsCache': never;
     'a-database:databaseClient': never;
     'a-database:dbMeta': never;
     'a-database:modelResolver': never;
@@ -160,6 +166,16 @@ declare module 'vona-module-a-web' {
 
 }
 declare module 'vona-module-a-database' {
+
+  export interface ServiceColumns {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface ServiceColumnsCache {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 
   export interface ServiceDatabaseClient {
     /** @internal */
@@ -187,6 +203,8 @@ declare module 'vona-module-a-database' {
   }
 }
 export interface IModuleService {
+  columns: ServiceColumns;
+  columnsCache: ServiceColumnsCache;
   databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
   modelResolver: ServiceModelResolver;
@@ -195,6 +213,8 @@ export interface IModuleService {
 }
 declare module 'vona' {
   export interface IBeanRecordGeneral {
+    'a-database.service.columns': ServiceColumns;
+    'a-database.service.columnsCache': ServiceColumnsCache;
     'a-database.service.databaseClient': ServiceDatabaseClient;
     'a-database.service.dbMeta': ServiceDbMeta;
     'a-database.service.modelResolver': ServiceModelResolver;
