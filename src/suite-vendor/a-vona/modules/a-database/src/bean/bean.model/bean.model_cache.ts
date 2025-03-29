@@ -22,11 +22,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private get __cacheName() {
     if (!this[SymbolCacheName]) {
-      this[SymbolCacheName] = this.scopeDatabase.event.modelCacheName.emitSync({
-        beanModel: this,
-      }, ({ beanModel }) => {
-        return `${(beanModel as any).$beanFullName}:${this.dbMeta.currentClientName}`;
-      });
+      const clientNameReal = this.bean.database.prepareClientNameReal(this.dbMeta.currentClientName);
+      this[SymbolCacheName] = `${this.$beanFullName}:${clientNameReal}`;
     }
     return this[SymbolCacheName];
   }

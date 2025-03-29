@@ -14,15 +14,15 @@ import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.ts';
 import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseClientReload.ts';
 /** event: end */
 /** event: begin */
-import type { EventColumnsClear } from '../bean/event.columnsClear.ts';
+import type { EventClientNameReal } from '../bean/event.clientNameReal.ts';
 
 /** event: end */
 /** event: begin */
+import type { TypeEventClientNameRealData, TypeEventClientNameRealResult } from '../bean/event.clientNameReal.ts';
+import type { EventColumnsClear } from '../bean/event.columnsClear.ts';
 import type { TypeEventColumnsClearData, TypeEventColumnsClearResult } from '../bean/event.columnsClear.ts';
 import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
 import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult } from '../bean/event.databaseClientReload.ts';
-import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
-import type { TypeEventModelCacheNameData, TypeEventModelCacheNameResult } from '../bean/event.modelCacheName.ts';
 import type { config } from '../config/config.ts';
 import type { Errors } from '../config/errors.ts';
 /** service: end */
@@ -121,13 +121,18 @@ export interface IModuleBroadcast {
 }
 /** broadcast: end */
 /** event: begin */
+export * from '../bean/event.clientNameReal.ts';
 export * from '../bean/event.columnsClear.ts';
 export * from '../bean/event.databaseClientReload.ts';
-export * from '../bean/event.modelCacheName.ts';
 declare module 'vona' {
 
 }
 declare module 'vona-module-a-database' {
+
+  export interface EventClientNameReal {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 
   export interface EventColumnsClear {
     /** @internal */
@@ -138,22 +143,17 @@ declare module 'vona-module-a-database' {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
-
-  export interface EventModelCacheName {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
 }
 export interface IModuleEvent {
+  clientNameReal: EventClientNameReal;
   columnsClear: EventColumnsClear;
   databaseClientReload: EventDatabaseClientReload;
-  modelCacheName: EventModelCacheName;
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
+    'a-database:clientNameReal': EventOn<TypeEventClientNameRealData, TypeEventClientNameRealResult>;
     'a-database:columnsClear': EventOn<TypeEventColumnsClearData, TypeEventColumnsClearResult>;
     'a-database:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
-    'a-database:modelCacheName': EventOn<TypeEventModelCacheNameData, TypeEventModelCacheNameResult>;
   }
 }
 /** service: end */

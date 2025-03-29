@@ -30,6 +30,12 @@ export class BeanDatabase extends BeanBase {
     return this.isDefaultClientName(clientName) ? this.app.config.database.defaultClient : clientName!;
   }
 
+  prepareClientNameReal(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
+    return this.scope.event.clientNameReal.emitSync(this.prepareClientName(clientName), clientName => {
+      return clientName;
+    });
+  }
+
   get(clientName?: keyof IDatabaseClientRecord) {
     const client = this.getClient(clientName);
     return client.db;
@@ -80,7 +86,7 @@ export class BeanDatabase extends BeanBase {
   }
 
   __columnsClearRaw(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
-    this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientName(clientName), tableName });
+    this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientNameReal(clientName), tableName });
   }
 
   async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
