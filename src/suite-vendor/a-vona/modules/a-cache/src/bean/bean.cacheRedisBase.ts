@@ -10,7 +10,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
 
   private get redisSummer() {
     if (!this._redisSummer) {
-      const clientName = this._cacheOptions.client ?? this.$scope.cache.config.redis.client;
+      const clientName = this._cacheOptions.client ?? this.$scope.cache.config.redis.options.client;
       this._redisSummer = this.bean.redis.get(clientName);
     }
     return this._redisSummer;
