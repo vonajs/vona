@@ -116,6 +116,9 @@ importers:
       vona-module-a-databasedialect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-databasedialect
+      vona-module-a-datasharding:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-datasharding
       vona-module-a-datasource:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-datasource
@@ -871,6 +874,9 @@ importers:
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:modules/a-cabloy
+      vona-module-a-datasharding:
+        specifier: workspace:^
+        version: link:modules/a-datasharding
       vona-module-a-datasource:
         specifier: workspace:^
         version: link:modules/a-datasource
@@ -923,6 +929,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-cabloy:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/a-datasharding:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
