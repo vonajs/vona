@@ -19,9 +19,12 @@ const patterns = (argv[2] || '').split(',');
 await testRun(projectPath, coverage, patterns);
 
 async function testRun(projectPath: string, coverage: boolean, patterns: string[]) {
+  // patterns ignore
+  const patternsIgnore = (!coverage && process.env.TEST_PATTERNS_IGNORE) ? process.env.TEST_PATTERNS_IGNORE.split(',') : undefined;
   // files
   const files = await globby(patterns, {
     cwd: projectPath,
+    ignore: patternsIgnore,
   });
   if (process.env.TEST_ONLY === 'true') {
     files.push(resolveTemplatePath('test/done-only.test.ts'));
