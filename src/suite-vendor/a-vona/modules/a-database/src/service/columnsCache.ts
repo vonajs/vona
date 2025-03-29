@@ -13,6 +13,7 @@ export class ServiceColumnsCache extends BeanBase {
   private [SymbolColumnsDefaultCache]: Record<string, ITableColumnsDefault> = {};
   private _onColumnsClearCancel?: Function;
 
+  /** real client name */
   protected __init__(clientName: keyof IDatabaseClientRecord) {
     this.clientName = clientName;
     this._onColumnsClearCancel = this.scope.event.columnsClear.on(({ clientName, tableName }, next) => {

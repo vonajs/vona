@@ -50,14 +50,6 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
-  public get dialectClient(): keyof IDatabaseClientDialectRecord {
-    return cast<Knex.Client>(cast(this.db).client).config.client as keyof IDatabaseClientDialectRecord;
-  }
-
-  public get dialect() {
-    return this.app.bean.database.getDialect(this.dialectClient);
-  }
-
   get table(): string {
     let table = this.options.table;
     if (!table && this.options.entity) {
