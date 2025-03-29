@@ -96,5 +96,6 @@ export class BeanDatabase extends BeanBase {
 
   private async __reloadAllClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig });
+    this.__columnsClearRaw(clientName);
   }
 }
