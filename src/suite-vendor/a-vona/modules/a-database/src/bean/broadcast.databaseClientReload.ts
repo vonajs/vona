@@ -5,7 +5,7 @@ import { cast } from 'vona';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
 export interface TypeBroadcastDatabaseClientReloadJobData {
-  clientName: keyof IDatabaseClientRecord;
+  clientName?: keyof IDatabaseClientRecord;
   clientConfig?: ConfigDatabaseClient;
 }
 

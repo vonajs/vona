@@ -26,8 +26,8 @@ export class BeanDatabase extends BeanBase {
     return (!clientName || clientName === 'default' || clientName === this.app.config.database.defaultClient);
   }
 
-  prepareClientName(clientName?: keyof IDatabaseClientRecord) {
-    return this.isDefaultClientName(clientName) ? this.app.config.database.defaultClient : clientName;
+  prepareClientName(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
+    return this.isDefaultClientName(clientName) ? this.app.config.database.defaultClient : clientName!;
   }
 
   get(clientName?: keyof IDatabaseClientRecord) {
@@ -74,12 +74,12 @@ export class BeanDatabase extends BeanBase {
     }
   }
 
-  async reloadClients(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+  async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     await this.__reloadAllClientsInnerRaw(clientName, clientConfig);
     this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig });
   }
 
-  private async __reloadAllClientsInnerRaw(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
-    await this.scope.event.databaseClientReload.emit({ clientName, clientConfig });
+  private async __reloadAllClientsInnerRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig });
   }
 }
