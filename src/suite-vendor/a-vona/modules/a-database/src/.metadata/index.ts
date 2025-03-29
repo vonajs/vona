@@ -13,10 +13,12 @@ import type { BeanDatabase } from '../bean/bean.database.ts';
 import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseClientReload.ts';
 /** event: end */
 /** event: begin */
-import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
+import type { EventColumnsClear } from '../bean/event.columnsClear.ts';
 
 /** event: end */
 /** event: begin */
+import type { TypeEventColumnsClearData, TypeEventColumnsClearResult } from '../bean/event.columnsClear.ts';
+import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
 import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult } from '../bean/event.databaseClientReload.ts';
 import type { EventModelCacheName } from '../bean/event.modelCacheName.ts';
 import type { TypeEventModelCacheNameData, TypeEventModelCacheNameResult } from '../bean/event.modelCacheName.ts';
@@ -110,12 +112,18 @@ export interface IModuleBroadcast {
 }
 /** broadcast: end */
 /** event: begin */
+export * from '../bean/event.columnsClear.ts';
 export * from '../bean/event.databaseClientReload.ts';
 export * from '../bean/event.modelCacheName.ts';
 declare module 'vona' {
 
 }
 declare module 'vona-module-a-database' {
+
+  export interface EventColumnsClear {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 
   export interface EventDatabaseClientReload {
     /** @internal */
@@ -128,11 +136,13 @@ declare module 'vona-module-a-database' {
   }
 }
 export interface IModuleEvent {
+  columnsClear: EventColumnsClear;
   databaseClientReload: EventDatabaseClientReload;
   modelCacheName: EventModelCacheName;
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
+    'a-database:columnsClear': EventOn<TypeEventColumnsClearData, TypeEventColumnsClearResult>;
     'a-database:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
     'a-database:modelCacheName': EventOn<TypeEventModelCacheNameData, TypeEventModelCacheNameResult>;
   }

@@ -4,3 +4,5 @@ export interface ITableColumn {
 }
 
 export type ITableColumns = Record<string, ITableColumn>;
+
+export type ITableColumnsDefault = Record<string, any>;
