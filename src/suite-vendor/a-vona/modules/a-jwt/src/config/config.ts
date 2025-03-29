@@ -33,6 +33,9 @@ export function config(app: VonaApplication) {
       oauth: {
         signOptions: { expiresIn: 5 * 60 },
       },
+      oauthstate: {
+        signOptions: { expiresIn: 5 * 60 },
+      },
       code: {
         signOptions: { expiresIn: 3 * 60 },
       },

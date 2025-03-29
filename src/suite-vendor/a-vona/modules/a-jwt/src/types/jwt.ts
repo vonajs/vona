@@ -10,6 +10,7 @@ export interface IJwtClientRecord {
   access: never;
   refresh: never;
   oauth: never;
+  oauthstate: never;
   code: never;
 }
 
