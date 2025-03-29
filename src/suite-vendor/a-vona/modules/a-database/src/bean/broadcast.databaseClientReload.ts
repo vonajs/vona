@@ -16,7 +16,7 @@ export class BroadcastDatabaseClientReload
   async execute(data: TypeBroadcastDatabaseClientReloadJobData, isEmitter?: boolean) {
     const { clientName, clientConfig } = data;
     if (!isEmitter) {
-      await cast(this.bean.database).__reloadAllClientsInnerRaw(clientName, clientConfig);
+      await cast(this.bean.database).__reloadAllClientsRaw(clientName, clientConfig);
     }
   }
 }

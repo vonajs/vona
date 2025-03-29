@@ -10,6 +10,7 @@ import type { BeanDatabase } from '../bean/bean.database.ts';
 
 /** broadcast: end */
 /** broadcast: begin */
+import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.ts';
 import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseClientReload.ts';
 /** event: end */
 /** event: begin */
@@ -92,15 +93,22 @@ declare module 'vona' {
 }
 /** bean: end */
 /** broadcast: begin */
+export * from '../bean/broadcast.columnsClear.ts';
 export * from '../bean/broadcast.databaseClientReload.ts';
 declare module 'vona-module-a-broadcast' {
 
   export interface IBroadcastRecord {
+    'a-database:columnsClear': IDecoratorBroadcastOptions;
     'a-database:databaseClientReload': IDecoratorBroadcastOptions;
   }
 
 }
 declare module 'vona-module-a-database' {
+
+  export interface BroadcastColumnsClear {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 
   export interface BroadcastDatabaseClientReload {
     /** @internal */
@@ -108,6 +116,7 @@ declare module 'vona-module-a-database' {
   }
 }
 export interface IModuleBroadcast {
+  columnsClear: BroadcastColumnsClear;
   databaseClientReload: BroadcastDatabaseClientReload;
 }
 /** broadcast: end */
