@@ -36,6 +36,10 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.dbMeta.current;
   }
 
+  protected get dialect() {
+    return this.dbMeta.currentDialect;
+  }
+
   public get scopeDatabase() {
     return this.$scope.database;
   }
