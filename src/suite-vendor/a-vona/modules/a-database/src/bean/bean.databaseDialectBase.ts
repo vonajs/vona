@@ -1,24 +1,11 @@
 import type { Knex } from 'knex';
+import type { ITableColumn } from '../types/columns.ts';
 import type { ConfigDatabaseClient } from '../types/config.ts';
+import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../types/dialect.ts';
 import type { TableIdentity } from '../types/tableIdentity.ts';
 import { isNil, safeBoolean } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Virtual } from 'vona-module-a-bean';
-
-export interface IFetchDatabasesResultItem {
-  name: string;
-}
-
-export interface IFetchIndexesResultItem {
-  indexName: string;
-}
-
-export interface ITableColumn {
-  type: string;
-  default: any;
-}
-
-export type ITableColumns = Record<string, ITableColumn>;
 
 @Virtual()
 export class BeanDatabaseDialectBase extends BeanBase {
