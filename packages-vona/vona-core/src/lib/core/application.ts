@@ -93,9 +93,4 @@ export class VonaApplication extends KoaApplication {
     const response = new http.ServerResponse(request as any);
     return this.createContext(request as any, response) as unknown as VonaContext;
   }
-
-  redirect(url: string, status?: 301 | 302): void {
-    status = status ?? 302;
-    this.throw(status, url);
-  }
 }
