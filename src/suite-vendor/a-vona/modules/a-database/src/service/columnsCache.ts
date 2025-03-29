@@ -15,11 +15,11 @@ export class ServiceColumnsCache extends BeanBase {
 
   protected __init__(clientName: keyof IDatabaseClientRecord) {
     this.clientName = clientName;
-    this._onColumnsClearCancel = this.scope.event.columnsClear.on(async ({ clientName, tableName }, next) => {
+    this._onColumnsClearCancel = this.scope.event.columnsClear.on(({ clientName, tableName }, next) => {
       if (clientName === this.clientName) {
-        await this.reload(clientConfig);
+        this.columnsClear(tableName);
       }
-      await next();
+      next();
     });
   }
 
@@ -33,5 +33,19 @@ export class ServiceColumnsCache extends BeanBase {
 
   get columnsDefaultCache() {
     return this[SymbolColumnsDefaultCache];
+  }
+
+  columnsClear(tableName?: string) {
+    if (tableName) {
+      const exists = this.columnsCache[tableName];
+      delete this.columnsCache[tableName];
+      delete this.columnsDefaultCache[tableName];
+      return exists;
+    } else {
+      const exists = Object.keys(this.columnsCache).length > 0;
+      this[SymbolColumnsCache] = {};
+      this[SymbolColumnsDefaultCache] = {};
+      return exists;
+    }
   }
 }

@@ -71,11 +71,6 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return this.dbOriginal[SymbolColumnsCache];
   }
 
-  private clearColumnsCache() {
-    this.dbOriginal[SymbolColumnsCache] = undefined;
-    this.dbOriginal[SymbolColumnsDefaultCache] = undefined;
-  }
-
   async columns(table?: string): Promise<ITableColumns> {
     table = table || this.table;
     if (!table) return {};
@@ -89,6 +84,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
       }
     }
     return columns;
+  }
+
+  private clearColumnsCache() {
+    this.dbOriginal[SymbolColumnsCache] = undefined;
+    this.dbOriginal[SymbolColumnsDefaultCache] = undefined;
   }
 
   columnsClear(table?: string) {

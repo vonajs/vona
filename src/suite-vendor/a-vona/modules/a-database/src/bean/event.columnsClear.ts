@@ -1,6 +1,10 @@
+import type { IDatabaseClientRecord } from '../types/database.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export type TypeEventColumnsClearData = unknown;
+export interface TypeEventColumnsClearData {
+  clientName: keyof IDatabaseClientRecord;
+  tableName?: string;
+}
 
 export type TypeEventColumnsClearResult = void;
 
