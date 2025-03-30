@@ -92,3 +92,7 @@ export function evaluateSimple(expression: string) {
   const fn = createFunction(expression);
   return fn();
 }
+
+export function getRandomInt(size: number, start: number = 0) {
+  return Math.floor(Math.random() * size) + start;
+}

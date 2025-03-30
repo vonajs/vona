@@ -2,8 +2,8 @@ import type { IEventExecute, NextEvent } from 'vona-module-a-event';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 
-type TypeEventData = TypeEvent<%=argv.beanNameCapitalize%>Data;
-type TypeEventResult = TypeEvent<%=argv.beanNameCapitalize%>Result;
+type TypeEventData = unknown; // TypeEvent<%=argv.beanNameCapitalize%>Data;
+type TypeEventResult = unknown; // TypeEvent<%=argv.beanNameCapitalize%>Result;
 
 @EventListener({ match: 'some-module:<%=argv.beanName%>' })
 export class EventListener<%=argv.beanNameCapitalize%>
