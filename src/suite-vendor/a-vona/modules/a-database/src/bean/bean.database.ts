@@ -89,13 +89,13 @@ export class BeanDatabase extends BeanBase {
     this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientNameReal(clientName), tableName });
   }
 
-  async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
-    await this.__reloadAllClientsRaw(clientName, clientConfig);
-    this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig });
+  async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
+    await this.__reloadAllClientsRaw(clientName, clientConfig, extraData);
+    this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig, extraData });
   }
 
-  private async __reloadAllClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
-    await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig });
+  private async __reloadAllClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
+    await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig, extraData });
     this.__columnsClearRaw(clientName);
   }
 }

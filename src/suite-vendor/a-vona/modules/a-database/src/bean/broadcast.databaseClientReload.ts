@@ -7,6 +7,7 @@ import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 export interface TypeBroadcastDatabaseClientReloadJobData {
   clientName?: keyof IDatabaseClientRecord;
   clientConfig?: ConfigDatabaseClient;
+  extraData?: any;
 }
 
 @Broadcast()
@@ -14,9 +15,9 @@ export class BroadcastDatabaseClientReload
   extends BeanBroadcastBase<TypeBroadcastDatabaseClientReloadJobData>
   implements IBroadcastExecute<TypeBroadcastDatabaseClientReloadJobData> {
   async execute(data: TypeBroadcastDatabaseClientReloadJobData, isEmitter?: boolean) {
-    const { clientName, clientConfig } = data;
+    const { clientName, clientConfig, extraData } = data;
     if (!isEmitter) {
-      await cast(this.bean.database).__reloadAllClientsRaw(clientName, clientConfig);
+      await cast(this.bean.database).__reloadAllClientsRaw(clientName, clientConfig, extraData);
     }
   }
 }

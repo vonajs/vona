@@ -5,6 +5,7 @@ import { BeanEventBase, Event } from 'vona-module-a-event';
 export interface TypeEventDatabaseClientReloadData {
   clientName: keyof IDatabaseClientRecord;
   clientConfig?: ConfigDatabaseClient;
+  extraData?: any;
 }
 
 export type TypeEventDatabaseClientReloadResult = void;
