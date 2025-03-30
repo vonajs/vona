@@ -42,17 +42,17 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return await layered.mget(keys, options);
   }
 
-  async set(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const layered = this.__getLayered(options);
-    return await layered.del(key, options);
+    return await layered.set(value, key, options);
   }
 
-  async mset(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
+  async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
     if (!keys || keys.length === 0) {
-      return [];
+      return;
     }
     const layered = this.__getLayered(options);
-    return await layered.mdel(keys, options);
+    return await layered.mset(values, keys, options);
   }
 
   async del(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -62,7 +62,7 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
 
   async mdel(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     if (!keys || keys.length === 0) {
-      return [];
+      return;
     }
     const layered = this.__getLayered(options);
     return await layered.mdel(keys, options);
