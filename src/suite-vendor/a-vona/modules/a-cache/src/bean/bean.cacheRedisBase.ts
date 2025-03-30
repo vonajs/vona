@@ -30,8 +30,9 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
+    const updateAgeOnGet = options?.updateAgeOnGet ?? this._cacheOptions.updateAgeOnGet;
     let _value;
-    if (ttl) {
+    if (updateAgeOnGet && ttl) {
       _value = await cache.getex(redisKey, 'PX', ttl);
     } else {
       _value = await cache.get(redisKey);
@@ -47,7 +48,8 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     const _values = await cache.mget(redisKeys);
     const values = _values.map(v => (v ? JSON.parse(v) : undefined));
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
-    if (ttl) {
+    const updateAgeOnGet = options?.updateAgeOnGet ?? this._cacheOptions.updateAgeOnGet;
+    if (updateAgeOnGet && ttl) {
       const redisKeysEx: string[] = [];
       for (let i = 0; i < redisKeys.length; i++) {
         if (_values[i]) {

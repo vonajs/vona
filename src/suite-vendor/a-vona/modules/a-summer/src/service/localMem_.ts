@@ -9,7 +9,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    let value = this.cacheMem.get(key);
+    let value = this.cacheMem.get(key, { updateAgeOnGet: options?.updateAgeOnGet });
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
@@ -20,7 +20,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // mget
-    const values = this.cacheMem.mget(keys);
+    const values = this.cacheMem.mget(keys, { updateAgeOnGet: options?.updateAgeOnGet });
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {

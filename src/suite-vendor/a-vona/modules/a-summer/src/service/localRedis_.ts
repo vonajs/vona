@@ -9,7 +9,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    let value = await this.cacheRedis.get(key);
+    let value = await this.cacheRedis.get(key, { updateAgeOnGet: options?.updateAgeOnGet });
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
@@ -20,7 +20,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // mget
-    const values = await this.cacheRedis.mget(keys);
+    const values = await this.cacheRedis.mget(keys, { updateAgeOnGet: options?.updateAgeOnGet });
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {

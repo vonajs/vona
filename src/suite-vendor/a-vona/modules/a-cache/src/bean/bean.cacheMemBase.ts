@@ -28,6 +28,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
       this.memoryInstance[this._cacheName] = new LRUCache<string, any>({
         max: this._cacheOptions.max,
         ttl: this._cacheOptions.ttl,
+        updateAgeOnGet: this._cacheOptions.updateAgeOnGet,
+        updateAgeOnHas: this._cacheOptions.updateAgeOnHas,
         ttlAutopurge: true,
       } as any);
     }
