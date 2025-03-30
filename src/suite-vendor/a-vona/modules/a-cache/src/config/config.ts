@@ -4,9 +4,10 @@ import type { IRedisClientRecord } from 'vona-module-a-redis';
 export function config(_app: VonaApplication) {
   return {
     redis: {
-      options:{
+      options: {
         client: 'cache' as keyof IRedisClientRecord,
-      }
+        updateAgeOnGet: true,
+      },
     },
     mem: {
       options: {

@@ -8,10 +8,14 @@ import { CacheBase } from '../common/cacheBase.ts';
 export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheRedisOptions, KEY> {
   private _redisSummer: Redis;
 
+  protected __init__(cacheName?: string, cacheOptions?: IDecoratorCacheRedisOptions) {
+    super.__init__(cacheName, cacheOptions);
+    this._cacheOptions = Object.assign({}, this.$scope.cache.config.redis.options, this._cacheOptions);
+  }
+
   private get redisSummer() {
     if (!this._redisSummer) {
-      const clientName = this._cacheOptions.client ?? this.$scope.cache.config.redis.options.client;
-      this._redisSummer = this.bean.redis.get(clientName);
+      this._redisSummer = this.bean.redis.get(this._cacheOptions.client);
     }
     return this._redisSummer;
   }
