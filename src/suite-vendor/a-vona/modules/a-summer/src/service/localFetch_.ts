@@ -50,6 +50,14 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
     return undefined;
   }
 
+  async set(_value?: DATA, _key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+    // do nothing
+  }
+
+  async mset(_values: DATA[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+    // do nothing
+  }
+
   async del(_key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // do nothing
   }

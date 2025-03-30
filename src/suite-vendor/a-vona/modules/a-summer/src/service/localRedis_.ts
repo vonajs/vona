@@ -45,6 +45,14 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     return values;
   }
 
+  async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+    await this.cacheRedis.set(value, key, { dbMeta: options?.dbMeta });
+  }
+
+  async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+    await this.cacheRedis.mset(values, keys, { dbMeta: options?.dbMeta });
+  }
+
   async del(key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     await this.cacheRedis.del(key);
   }
