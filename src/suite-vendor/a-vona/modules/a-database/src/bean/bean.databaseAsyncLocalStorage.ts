@@ -13,12 +13,6 @@ export class BeanDatabaseAsyncLocalStorage extends BeanBase {
     return this.ctxStorage.getStore()!;
   }
 
-  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
-    if (!dbInfo) return fn();
-    const db = this.bean.database.createDbMeta(dbInfo.level, dbInfo.clientName);
-    return this.run(db, fn);
-  }
-
   async run<RESULT>(store: ServiceDbMeta, fn: FunctionAsync<RESULT>): Promise<RESULT> {
     if (store === this.currentDb) {
       return fn();

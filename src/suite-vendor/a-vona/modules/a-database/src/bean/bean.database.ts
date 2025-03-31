@@ -1,6 +1,6 @@
 import type { FunctionAsync } from 'vona';
 import type { ConfigDatabaseClient } from '../types/config.ts';
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDatabaseSwitchOptions } from '../types/database.ts';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDatabaseSwitchOptions, IDbInfo } from '../types/database.ts';
 import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -57,6 +57,12 @@ export class BeanDatabase extends BeanBase {
     const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
     if (!dialect) throw new Error(`database dialect not found: ${client}`);
     return dialect;
+  }
+
+  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
+    if (!dbInfo) return fn();
+    const db = this.createDbMeta(dbInfo.level, dbInfo.clientName);
+    return this.bean.databaseAsyncLocalStorage.run(db, fn);
   }
 
   createDbMeta(level?: number, clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
