@@ -15,6 +15,8 @@ export const configAll = {
   mode: 'all',
   mem: {
     max: 500,
+    broadcastOnSet: false,
+    broadcastDelOnSet: true,
   },
   redis: {
     ttl: 20 * 60 * 1000, // 20 minutes
