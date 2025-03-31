@@ -43,10 +43,6 @@ export class Start {
     const app = this.app;
     app.meta.appReady = true;
     app.meta.appReadyInstances = {};
-    // listen here so as to serve
-    if (!app.config.server.listen.disable) {
-      app.server = app.listen(app.config.server.listen.port, app.config.server.listen.hostname);
-    }
     // hook: appReady
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appReady');
   }
