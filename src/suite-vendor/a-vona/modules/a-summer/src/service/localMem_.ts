@@ -13,7 +13,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      this.cacheMem.set(value!, key, { dbMeta: options?.dbMeta });
+      this.cacheMem.set(value!, key, { dbMeta: options?.dbMeta, broadcastOnSet: false });
     }
     return value;
   }
@@ -35,7 +35,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // this.$logger.silly('-------mem:', valuesMissing);
       // set/merge
-      this.cacheMem.mset(valuesMissing as any, keysMissing, { dbMeta: options?.dbMeta });
+      this.cacheMem.mset(valuesMissing as any, keysMissing, { dbMeta: options?.dbMeta, broadcastOnSet: false });
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
         values[indexesMissing[i]] = valueMissing;

@@ -42,7 +42,7 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   ignoreNull?: boolean;
   dbMeta?: ServiceDbMeta;
   updateAgeOnGet?: boolean;
-  broadcastOnSet?: boolean;
+  broadcastOnSet?: TypeBroadcastOnSet;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
   mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
 }
