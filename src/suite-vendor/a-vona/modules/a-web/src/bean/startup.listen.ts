@@ -3,6 +3,6 @@ import { BeanBase } from 'vona';
 import { Startup } from 'vona-module-a-startup';
 
 @Startup()
-export class Startup<%=argv.beanNameCapitalize%> extends BeanBase implements IStartupExecute {
+export class StartupListen extends BeanBase implements IStartupExecute {
   async execute() {}
 }

@@ -1,8 +1,10 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
 /** bean: end */
 /** bean: begin */
 import type { BeanRouter } from '../bean/bean.router.ts';
 import type { config } from '../config/config.ts';
+
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -30,6 +32,23 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** startup: begin */
+export * from '../bean/startup.listen.ts';
+declare module 'vona-module-a-startup' {
+
+  export interface IStartupRecord {
+    'a-web:listen': IDecoratorStartupOptions;
+  }
+
+}
+declare module 'vona-module-a-web' {
+
+  export interface StartupListen {
+    /** @internal */
+    get scope(): ScopeModuleAWeb;
+  }
+}
+/** startup: end */
 /** config: begin */
 export * from '../config/config.ts';
 /** config: end */
