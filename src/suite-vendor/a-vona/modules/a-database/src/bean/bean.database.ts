@@ -81,6 +81,8 @@ export class BeanDatabase extends BeanBase {
     return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
   }
 
+  createDbMeta(dbInfo: IDbInfo);
+  createDbMeta(dbInfo: undefined, client: ServiceDatabaseClient);
   createDbMeta(dbInfo?: IDbInfo, client?: ServiceDatabaseClient) {
     return this.app.bean._newBean(ServiceDbMeta, dbInfo, client);
   }

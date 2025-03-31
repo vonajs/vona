@@ -31,11 +31,4 @@ declare module 'vona' {
   export interface VonaConfig {
     database: ConfigDatabase;
   }
-
-  export interface VonaContext {
-    get dbLevel(): number;
-    set dbLevel(value: number | undefined);
-    get dbMeta(): ServiceDbMeta;
-    set dbMeta(value: ServiceDbMeta);
-  }
 }

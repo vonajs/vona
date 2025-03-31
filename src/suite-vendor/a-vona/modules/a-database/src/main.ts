@@ -1,12 +1,8 @@
-import type { IModuleMain, PowerPartial, VonaApplication, VonaContext } from 'vona';
-import type { ServiceDbMeta } from './service/dbMeta.ts';
+import type { IModuleMain, PowerPartial, VonaApplication } from 'vona';
 import type { ConfigDatabase } from './types/config.ts';
 import type { IDatabaseClientRecord } from './types/database.ts';
 import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
 import { ExtendKnex } from './extend/index.ts';
-
-const SymbolDbMeta = Symbol('SymbolDbMeta');
-const SymbolDbLevel = Symbol('SymbolDbLevel');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
@@ -18,29 +14,6 @@ export class Main extends BeanSimple implements IModuleMain {
   async moduleLoaded() {
     // ExtendKnex
     ExtendKnex(this.app);
-    // dbLevel
-    Object.defineProperty(this.app.context, 'dbLevel', {
-      enumerable: false,
-      get(this: VonaContext) {
-        return this[SymbolDbLevel] ?? 0;
-      },
-      set(value: number | undefined) {
-        this[SymbolDbLevel] = value;
-      },
-    });
-    // dbMeta
-    Object.defineProperty(this.app.context, 'dbMeta', {
-      enumerable: false,
-      get(this: VonaContext) {
-        if (!this[SymbolDbMeta]) {
-          this[SymbolDbMeta] = this.bean.database.createDbMeta();
-        }
-        return this[SymbolDbMeta];
-      },
-      set(value: ServiceDbMeta) {
-        this[SymbolDbMeta] = value;
-      },
-    });
   }
 
   async configLoaded(_config) {}
