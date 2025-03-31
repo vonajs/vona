@@ -1,5 +1,4 @@
 import type { BeanModel } from '../bean/bean.model.ts';
-import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ConfigDatabase } from './config.ts';
 
 export interface IDbInfo {

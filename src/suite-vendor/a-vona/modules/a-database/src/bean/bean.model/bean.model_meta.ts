@@ -29,7 +29,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   }
 
   protected get dbMeta() {
-    return this[SymbolModelDbMeta] ?? this.ctx.dbMeta;
+    return this[SymbolModelDbMeta] ?? this.bean.database.current;
   }
 
   protected get connection() {
