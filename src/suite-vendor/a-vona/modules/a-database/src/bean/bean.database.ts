@@ -2,6 +2,7 @@ import type { FunctionAsync } from 'vona';
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDatabaseSwitchOptions, IDbInfo } from '../types/database.ts';
 import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
+import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from '../service/databaseClient.ts';
@@ -9,11 +10,13 @@ import { ServiceDbMeta } from '../service/dbMeta.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
-  getClient(level: number | undefined, clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
-    return this.app.bean._getBeanSelector(ServiceDatabaseClient, this.prepareClientNameSelector(level, clientName), clientConfig);
+  getClient(dbInfo: IDbInfo | undefined, clientConfig?: ConfigDatabaseClient) {
+    return this.app.bean._getBeanSelector(ServiceDatabaseClient, this.prepareClientNameSelector(dbInfo), clientConfig);
   }
 
-  prepareClientNameSelector(level: number | undefined, clientName?: keyof IDatabaseClientRecord | string) {
+  prepareClientNameSelector(dbInfo?: IDbInfo) {
+    const level = dbInfo?.level;
+    const clientName = dbInfo?.clientName as keyof IDatabaseClientRecord | string;
     // string
     if (clientName && clientName.includes(':')) return clientName;
     if (clientName === '') return clientName;
@@ -21,6 +24,15 @@ export class BeanDatabase extends BeanBase {
     const clientName2 = this.isDefaultClientName(clientName as any) ? '' : clientName;
     if (level === undefined) throw new Error('should specify the db level');
     return level === 0 ? clientName2 : `${clientName2}:${level}`;
+  }
+
+  parseClientNameSelector(clientNameSelector: string): Required<IDbInfo> {
+    if (isNil(clientNameSelector)) throw new Error('invalid clientNameSelector');
+    const [clientName, level] = clientNameSelector.split(':');
+    return {
+      level: Number(level ?? 0),
+      clientName: clientName as keyof IDatabaseClientRecord || this.app.config.database.defaultClient,
+    };
   }
 
   isDefaultClientName(clientName?: keyof IDatabaseClientRecord) {

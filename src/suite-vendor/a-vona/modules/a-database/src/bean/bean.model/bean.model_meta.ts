@@ -15,12 +15,12 @@ const SymbolModelDbMeta = Symbol('SymbolModelDbMeta');
 export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   private [SymbolModelDbMeta]: ServiceDbMeta;
 
-  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDbMeta) {
-    if (isNil(clientName)) return;
-    if (typeof clientName === 'string') {
-      this[SymbolModelDbMeta] = this.bean.database.createDbMeta(clientName);
+  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDbMeta) {
+    if (isNil(clientNameSelector)) return;
+    if (typeof clientNameSelector === 'string') {
+      this[SymbolModelDbMeta] = this.bean.database.createDbMeta() (clientName);
     } else {
-      this[SymbolModelDbMeta] = clientName;
+      this[SymbolModelDbMeta] = clientNameSelector;
     }
   }
 

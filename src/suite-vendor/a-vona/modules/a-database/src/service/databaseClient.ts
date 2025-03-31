@@ -9,8 +9,9 @@ export interface IPrepareDatabaseNameResult { database?: string; filename?: stri
 
 @Service()
 export class ServiceDatabaseClient extends BeanBase {
-  clientNameSelector?: string;
+  level: number;
   clientName: keyof IDatabaseClientRecord;
+  clientNameSelector: string;
   clientConfig: ConfigDatabaseClient;
   private _knex: Knex;
   private _onDatabaseClientReloadCancel?: Function;
@@ -23,7 +24,7 @@ export class ServiceDatabaseClient extends BeanBase {
     return this._knex;
   }
 
-  protected __init__(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
+  protected __init__(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
     this.__load(clientNameSelector, clientConfig);
     this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async ({ clientName, clientConfig }, next) => {
       if (clientName === this.clientName) {
@@ -38,10 +39,12 @@ export class ServiceDatabaseClient extends BeanBase {
     this._onDatabaseClientReloadCancel?.();
   }
 
-  private __load(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
+  private __load(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
     // name
     this.clientNameSelector = clientNameSelector;
-    this.clientName = this._extractClientName(clientNameSelector);
+    const dbInfo = this.bean.database.parseClientNameSelector(clientNameSelector);
+    this.level = dbInfo.level;
+    this.clientName = dbInfo.clientName;
     // config
     this.clientConfig = clientConfig ?? this.getClientConfig(this.clientName);
     this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
@@ -59,15 +62,6 @@ export class ServiceDatabaseClient extends BeanBase {
   async reload(clientConfig?: ConfigDatabaseClient) {
     await this.__close();
     this.__load(this.clientNameSelector, clientConfig);
-  }
-
-  private _extractClientName(clientNameSelector?: string): keyof IDatabaseClientRecord {
-    // default
-    if (!clientNameSelector) return this.configDatabase.defaultClient;
-    // split
-    const clientName = clientNameSelector.split(':')[0];
-    if (!clientName) return this.configDatabase.defaultClient;
-    return clientName as keyof IDatabaseClientRecord;
   }
 
   getClientConfig(clientName: keyof IDatabaseClientRecord, original: boolean = false): ConfigDatabaseClient {
