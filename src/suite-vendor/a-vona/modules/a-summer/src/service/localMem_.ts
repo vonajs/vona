@@ -47,7 +47,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
     // set
-    this.cacheMem.set(value, key, { dbMeta: options?.dbMeta });
+    this.cacheMem.set(value, key, { dbMeta: options?.dbMeta, broadcastOnSet: options?.broadcastOnSet });
     // set layered
     const layered = this.__getLayered(options);
     await layered.set(value, key, options);
@@ -55,7 +55,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
     // mset
-    this.cacheMem.mset(values, keys, { dbMeta: options?.dbMeta });
+    this.cacheMem.mset(values, keys, { dbMeta: options?.dbMeta, broadcastOnSet: options?.broadcastOnSet });
     // mset layered
     const layered = this.__getLayered(options);
     await layered.mset(values, keys, options);

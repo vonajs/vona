@@ -25,6 +25,7 @@ export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
     ttl?: number;
     updateAgeOnGet?: boolean;
     updateAgeOnHas?: boolean;
+    broadcastOnSet?: boolean;
   };
   redis?: {
     ttl: number;
@@ -40,6 +41,7 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   ignoreNull?: boolean;
   dbMeta?: ServiceDbMeta;
   updateAgeOnGet?: boolean;
+  broadcastOnSet?: boolean;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
   mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
 }
