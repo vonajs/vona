@@ -59,14 +59,18 @@ export class BeanDatabase extends BeanBase {
     return dialect;
   }
 
-  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
-    if (!dbInfo) return fn();
-    const db = this.createDbMeta(dbInfo.level, dbInfo.clientName);
-    return this.bean.databaseAsyncLocalStorage.run(db, fn);
+  get current() {
+    return this.scope.service.databaseAsyncLocalStorage.current;
   }
 
-  createDbMeta(level?: number, clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
-    return this.app.bean._newBean(ServiceDbMeta, level, clientName);
+  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
+    if (!dbInfo) return fn();
+    const db = this.createDbMeta(dbInfo);
+    return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
+  }
+
+  createDbMeta(dbInfo?: IDbInfo, client?: ServiceDatabaseClient) {
+    return this.app.bean._newBean(ServiceDbMeta, dbInfo, client);
   }
 
   async switchClient<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {

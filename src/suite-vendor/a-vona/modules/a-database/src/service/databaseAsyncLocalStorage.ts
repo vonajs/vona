@@ -1,20 +1,19 @@
 import type { FunctionAsync } from 'vona';
-import type { IDbInfo } from '../types/database.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { BeanBase } from 'vona';
-import { Bean } from 'vona-module-a-bean';
+import { Service } from 'vona-module-a-web';
 import { ServiceDbMeta } from '../service/dbMeta.ts';
 
-@Bean()
-export class BeanDatabaseAsyncLocalStorage extends BeanBase {
+@Service()
+export class ServiceDatabaseAsyncLocalStorage extends BeanBase {
   ctxStorage: AsyncLocalStorage<ServiceDbMeta>;
 
-  get currentDb(): ServiceDbMeta {
+  get current(): ServiceDbMeta {
     return this.ctxStorage.getStore()!;
   }
 
   async run<RESULT>(store: ServiceDbMeta, fn: FunctionAsync<RESULT>): Promise<RESULT> {
-    if (store === this.currentDb) {
+    if (store === this.current) {
       return fn();
     }
     return this.ctxStorage.run(store, () => {

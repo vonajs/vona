@@ -7,7 +7,6 @@ import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
-import type { BeanDatabaseAsyncLocalStorage } from '../bean/bean.databaseAsyncLocalStorage.ts';
 
 /** broadcast: end */
 /** broadcast: begin */
@@ -31,6 +30,7 @@ import type { Errors } from '../config/errors.ts';
 import type { ServiceColumns } from '../service/columns.ts';
 
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
+import type { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
@@ -74,7 +74,6 @@ declare module 'vona-module-a-database' {
 /** aopMethod: end */
 /** bean: begin */
 export * from '../bean/bean.database.ts';
-export * from '../bean/bean.databaseAsyncLocalStorage.ts';
 export * from '../bean/bean.databaseDialectBase.ts';
 export * from '../bean/bean.model.ts';
 export * from '../bean/bean.modelBase.ts';
@@ -87,16 +86,10 @@ declare module 'vona-module-a-database' {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
-
-  export interface BeanDatabaseAsyncLocalStorage {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     database: BeanDatabase;
-    databaseAsyncLocalStorage: BeanDatabaseAsyncLocalStorage;
   }
 }
 /** bean: end */
@@ -177,6 +170,7 @@ export * from '../main.ts';
 /** service: begin */
 export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
+export * from '../service/databaseAsyncLocalStorage.ts';
 export * from '../service/databaseClient.ts';
 export * from '../service/dbMeta.ts';
 declare module 'vona-module-a-web' {
@@ -184,6 +178,7 @@ declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-database:columns': never;
     'a-database:columnsCache': never;
+    'a-database:databaseAsyncLocalStorage': never;
     'a-database:databaseClient': never;
     'a-database:dbMeta': never;
     'a-database:modelResolver': never;
@@ -200,6 +195,11 @@ declare module 'vona-module-a-database' {
   }
 
   export interface ServiceColumnsCache {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface ServiceDatabaseAsyncLocalStorage {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
@@ -232,6 +232,7 @@ declare module 'vona-module-a-database' {
 export interface IModuleService {
   columns: ServiceColumns;
   columnsCache: ServiceColumnsCache;
+  databaseAsyncLocalStorage: ServiceDatabaseAsyncLocalStorage;
   databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
   modelResolver: ServiceModelResolver;
@@ -242,6 +243,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-database.service.columns': ServiceColumns;
     'a-database.service.columnsCache': ServiceColumnsCache;
+    'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
     'a-database.service.databaseClient': ServiceDatabaseClient;
     'a-database.service.dbMeta': ServiceDbMeta;
     'a-database.service.modelResolver': ServiceModelResolver;

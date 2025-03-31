@@ -1,6 +1,6 @@
 import type { FunctionAny } from 'vona';
 import type { BeanDatabaseDialectBase } from 'vona-module-a-database';
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from '../types/database.ts';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import type { ITransactionConsistencyCommitOptions } from '../types/transaction.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { BeanBase } from 'vona';
@@ -18,17 +18,14 @@ export class ServiceDbMeta extends BeanBase {
   private _transaction: ServiceTransaction;
   private _transactionConsistency: ServiceTransactionConsistency‌;
 
-  protected __init__(level?: number, clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
-    // level
-    this._level = level ?? this.bean.databaseAsyncLocalStorage.currentDb?.level ?? 1; // 0 for outer users
-    // clientName
-    if (!clientName) {
-      this._clientName = this.bean.databaseAsyncLocalStorage.currentDb?.clientName ?? this.app.config.database.defaultClient;
-    } else if (typeof clientName === 'string') {
-      this._clientName = clientName;
+  protected __init__(dbInfo?: IDbInfo, client?: ServiceDatabaseClient) {
+    if (client) {
+      this._client = client;
+      this._clientName = client.clientName;
+      this._level = client.level;
     } else {
-      this._client = clientName;
-      this._clientName = clientName.clientName;
+      this._level = dbInfo?.level ?? this.bean.database.current?.level ?? 1; // 0 for outer users
+      this._clientName = dbInfo?.clientName ?? this.bean.database.current?.clientName ?? this.app.config.database.defaultClient;
     }
   }
 
