@@ -20,7 +20,7 @@ export class BeanExecutor extends BeanBase {
     return await this.performActionInner(method, url, options);
   }
 
-  async performActionInner<
+  private async performActionInner<
     METHOD extends keyof IApiPathRecordMethodMap,
   >(method: METHOD,
     url: string,
