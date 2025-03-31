@@ -60,11 +60,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
   ): Knex.Raw<TResult2>;
   raw(sql, bindings?) {
-    return this.db.raw(sql, bindings);
+    return this.connection.raw(sql, bindings);
   }
 
   ref<TSrc extends string>(src: TSrc): Knex.Ref<TSrc, { [K in TSrc]: TSrc }> {
-    return this.db.ref<TSrc>(src);
+    return this.connection.ref<TSrc>(src);
   }
 
   toIdentifier(name: string | string[]): Knex.Raw<any> {

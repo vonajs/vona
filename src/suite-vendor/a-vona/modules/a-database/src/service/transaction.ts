@@ -99,8 +99,8 @@ export class ServiceTransaction extends BeanBase {
     let res: RESULT;
     try {
       if (++this._transactionCounter === 1) {
-        const db = this._dbMeta.currentClient.db;
-        this._connection = await db.transaction(_translateTransactionOptions(options));
+        const connection = this._dbMeta.currentClient.connection;
+        this._connection = await connection.transaction(_translateTransactionOptions(options));
       }
     } catch (err) {
       this._transactionCounter--;

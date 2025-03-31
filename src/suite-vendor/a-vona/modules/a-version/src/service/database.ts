@@ -31,7 +31,7 @@ export class ServiceDatabase extends BeanBase {
 
   async __fetchDatabases(client: ServiceDatabaseClient) {
     // dbs
-    let dbs = await client.db.schema.fetchDatabases(this.databasePrefix);
+    let dbs = await client.connection.schema.fetchDatabases(this.databasePrefix);
     // filter
     dbs = dbs.filter(db => {
       const _time = db.name.substring(this.databasePrefix.length);
@@ -44,7 +44,7 @@ export class ServiceDatabase extends BeanBase {
   async __createDatabase(client: ServiceDatabaseClient) {
     // create
     const databaseName = `${this.databasePrefix}${moment().format(__timeFormat)}`;
-    await client.db.schema.createDatabase(databaseName);
+    await client.connection.schema.createDatabase(databaseName);
     return databaseName;
   }
 
@@ -87,7 +87,7 @@ export class ServiceDatabase extends BeanBase {
       // drop old databases
       const dbs = await this.__fetchDatabases(client);
       for (const db of dbs) {
-        await client.db.schema.dropDatabase(db.name);
+        await client.connection.schema.dropDatabase(db.name);
       }
       // create database
       const databaseName = await this.__createDatabase(client);

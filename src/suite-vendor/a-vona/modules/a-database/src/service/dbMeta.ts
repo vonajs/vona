@@ -53,7 +53,7 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   get current() {
-    return this.inTransaction ? this.transaction.connection! : this.currentClient.db;
+    return this.inTransaction ? this.transaction.connection! : this.currentClient.connection;
   }
 
   get currentDialectName(): keyof IDatabaseClientDialectRecord {

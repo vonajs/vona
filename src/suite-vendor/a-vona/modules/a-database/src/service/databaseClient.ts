@@ -19,7 +19,7 @@ export class ServiceDatabaseClient extends BeanBase {
     return this.app.config.database;
   }
 
-  get db(): Knex {
+  get connection(): Knex {
     return this._knex;
   }
 

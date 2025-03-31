@@ -32,7 +32,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this[SymbolModelDbMeta] ?? this.ctx.dbMeta;
   }
 
-  protected get db() {
+  protected get connection() {
     return this.dbMeta.current;
   }
 

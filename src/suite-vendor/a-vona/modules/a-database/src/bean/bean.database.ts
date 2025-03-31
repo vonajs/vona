@@ -38,7 +38,7 @@ export class BeanDatabase extends BeanBase {
 
   get(clientName?: keyof IDatabaseClientRecord) {
     const client = this.getClient(clientName);
-    return client.db;
+    return client.connection;
   }
 
   getClientDefault() {
@@ -47,7 +47,7 @@ export class BeanDatabase extends BeanBase {
 
   getDefault() {
     const client = this.getClientDefault();
-    return client.db;
+    return client.connection;
   }
 
   getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
