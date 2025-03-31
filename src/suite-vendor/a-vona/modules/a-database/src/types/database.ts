@@ -2,6 +2,11 @@ import type { BeanModel } from '../bean/bean.model.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
 import type { ConfigDatabase } from './config.ts';
 
+export interface IDbInfo {
+  level?: number;
+  clientName?: keyof IDatabaseClientRecord;
+}
+
 export interface IDatabaseClientRecord {
   default: never;
   pg: never;

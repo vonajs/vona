@@ -59,8 +59,8 @@ export class BeanDatabase extends BeanBase {
     return dialect;
   }
 
-  createDbMeta(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
-    return this.app.bean._newBean(ServiceDbMeta, clientName);
+  createDbMeta(level?: number, clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
+    return this.app.bean._newBean(ServiceDbMeta, level, clientName);
   }
 
   async switchClient<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatabaseSwitchOptions): Promise<RESULT> {

@@ -17,10 +17,10 @@ export class BeanExecutor extends BeanBase {
   ): Promise<any> {
     // url
     const url = this.app.util.combineApiPath(path as any, '', true, true);
-    return await this.performActionInner(method, url, options);
+    return await this._performActionInner(method, url, options);
   }
 
-  private async performActionInner<
+  private async _performActionInner<
     METHOD extends keyof IApiPathRecordMethodMap,
   >(method: METHOD,
     url: string,
@@ -107,25 +107,24 @@ export class BeanExecutor extends BeanBase {
   }
 
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+    return this.bean.databaseAsyncLocalStorage.newDb(options?.dbInfo, () => {
+      return this._newCtxInner(fn, options);
+    });
+  }
+
+  private async _newCtxInner<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
-    if (!this.ctx) {
-      options.dbLevel = options.dbLevel ?? 1; // same as isolate
-    } else {
-      options.dbLevel = options.dbLevel ?? this.ctx.dbLevel;
-      options.dbClientName = options.dbClientName === undefined ? this.ctx.dbMeta.currentClientName : options.dbClientName;
+    if (this.ctx) {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     // run
-    const isolate = !this.ctx || this.ctx.dbLevel !== options.dbLevel;
+    const isolate = !this.ctx || options.instanceName !== undefined;
     const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
-    const ctxCallerDbMeta = ctxCaller?.dbMeta;// must before ctxStorage.run
     const ctx = this.app.createAnonymousContext(options.req, options.reqInherit, options.res);
     return await this.app.ctxStorage.run(ctx, async () => {
       // innerAccess
       ctx.innerAccess = options.innerAccess !== false;
-      // dbLevel: must before ctx.dbMeta
-      ctx.dbLevel = options.dbLevel;
       // locale
       if (options.locale !== undefined) {
         ctx.locale = options.locale;
@@ -140,17 +139,8 @@ export class BeanExecutor extends BeanBase {
         __delegateProperties(ctx, ctxCaller);
         // ctxCaller
         ctx.ctxCaller = ctxCaller;
-        // dbMeta
-        if (this.bean.database.prepareClientName(options.dbClientName) === ctxCallerDbMeta!.currentClientName && ctxCallerDbMeta!.inTransaction) {
-          ctx.dbMeta = ctxCallerDbMeta!;
-        } else {
-          ctx.dbMeta = this.bean.database.createDbMeta(options.dbClientName);
-        }
       } else {
-        // isolate
-        // dbMeta
-        ctx.dbMeta = this.bean.database.createDbMeta(options.dbClientName);
-        // extraData
+        // isolate: extraData
         if (options.extraData) {
           // delegateProperties
           __delegateProperties(ctx, options.extraData);

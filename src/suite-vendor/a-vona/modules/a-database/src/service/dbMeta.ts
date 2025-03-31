@@ -20,7 +20,7 @@ export class ServiceDbMeta extends BeanBase {
 
   protected __init__(level?: number, clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
     // level
-    this._level = level ?? this.bean.databaseAsyncLocalStorage.currentDb?.level ?? 0;
+    this._level = level ?? this.bean.databaseAsyncLocalStorage.currentDb?.level ?? 1; // 0 for outer users
     // clientName
     if (!clientName) {
       this._clientName = this.bean.databaseAsyncLocalStorage.currentDb?.clientName ?? this.app.config.database.defaultClient;

@@ -1,8 +1,9 @@
 import type { FunctionAsync } from 'vona';
-import type { ServiceDbMeta } from '../service/dbMeta.ts';
+import type { IDbInfo } from '../types/database.ts';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { ServiceDbMeta } from '../service/dbMeta.ts';
 
 @Bean()
 export class BeanDatabaseAsyncLocalStorage extends BeanBase {
@@ -10,6 +11,12 @@ export class BeanDatabaseAsyncLocalStorage extends BeanBase {
 
   get currentDb(): ServiceDbMeta {
     return this.ctxStorage.getStore()!;
+  }
+
+  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
+    if (!dbInfo) return fn();
+    const db = this.bean.database.createDbMeta(dbInfo.level, dbInfo.clientName);
+    return this.run(db, fn);
   }
 
   async run<RESULT>(store: ServiceDbMeta, fn: FunctionAsync<RESULT>): Promise<RESULT> {
