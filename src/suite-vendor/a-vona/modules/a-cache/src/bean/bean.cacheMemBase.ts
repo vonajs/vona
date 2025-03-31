@@ -91,9 +91,28 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!keys || keys.length === 0) return;
     const cache = this.__cacheInstance;
     if (!cache) return;
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
+    const broadcastOnSet = options?.broadcastOnSet ?? this._cacheOptions.broadcastOnSet;
+    const keysHash: string[] = [];
     for (let i = 0; i < keys.length; i++) {
-      this.set(values[i], keys[i], options);
+      const keyHash = this.__getKeyHash(keys[i]);
+      keysHash.push(keyHash);
+      cache.set(keyHash, values[i], { ttl });
     }
+    if (broadcastOnSet) {
+      this.$scope.cache.broadcast.memMultiSet.emit({
+        cacheName: this._cacheName,
+        cacheOptions: this._cacheOptions,
+        values,
+        keysHash,
+        keys,
+        options: { ttl },
+      });
+    }
+    const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
+    dbMeta?.compensate(() => {
+      this.mdel(keys);
+    });
   }
 
   public getset(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): DATA | null | undefined {
@@ -155,6 +174,14 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     cache.set(keyHash, value, options);
+  }
+
+  protected __msetRaw(values: DATA[], keysHash: string[], _keys: KEY[], options: ICacheMemSetOptions) {
+    const cache = this.__cacheInstance;
+    if (!cache) return undefined;
+    for (let i = 0; i < keysHash.length; i++) {
+      cache.set(keysHash[i], values[i], options);
+    }
   }
 
   protected __delRaw(keyHash: string, _key: KEY) {

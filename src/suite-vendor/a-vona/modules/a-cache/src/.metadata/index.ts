@@ -9,6 +9,7 @@ import type { BeanCache } from '../bean/bean.cache.ts';
 import type { BroadcastMemClear } from '../bean/broadcast.memClear.ts';
 import type { BroadcastMemDel } from '../bean/broadcast.memDel.ts';
 import type { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.ts';
+import type { BroadcastMemMultiSet } from '../bean/broadcast.memMultiSet.ts';
 import type { BroadcastMemSet } from '../bean/broadcast.memSet.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
@@ -44,6 +45,7 @@ declare module 'vona' {
 export * from '../bean/broadcast.memClear.ts';
 export * from '../bean/broadcast.memDel.ts';
 export * from '../bean/broadcast.memMultiDel.ts';
+export * from '../bean/broadcast.memMultiSet.ts';
 export * from '../bean/broadcast.memSet.ts';
 declare module 'vona-module-a-broadcast' {
 
@@ -51,6 +53,7 @@ declare module 'vona-module-a-broadcast' {
     'a-cache:memClear': IDecoratorBroadcastOptions;
     'a-cache:memDel': IDecoratorBroadcastOptions;
     'a-cache:memMultiDel': IDecoratorBroadcastOptions;
+    'a-cache:memMultiSet': IDecoratorBroadcastOptions;
     'a-cache:memSet': IDecoratorBroadcastOptions;
   }
 
@@ -72,6 +75,11 @@ declare module 'vona-module-a-cache' {
     get scope(): ScopeModuleACache;
   }
 
+  export interface BroadcastMemMultiSet {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+
   export interface BroadcastMemSet {
     /** @internal */
     get scope(): ScopeModuleACache;
@@ -81,6 +89,7 @@ export interface IModuleBroadcast {
   memClear: BroadcastMemClear;
   memDel: BroadcastMemDel;
   memMultiDel: BroadcastMemMultiDel;
+  memMultiSet: BroadcastMemMultiSet;
   memSet: BroadcastMemSet;
 }
 /** broadcast: end */
