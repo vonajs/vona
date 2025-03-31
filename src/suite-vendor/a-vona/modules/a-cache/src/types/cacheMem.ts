@@ -1,6 +1,8 @@
 import type { OmitNever } from 'vona';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
+export type TypeBroadcastOnSet = boolean | 'del';
+
 export interface ICacheMemRecord {}
 
 export interface IDecoratorCacheMemOptions extends IOnionOptionsEnable {
@@ -8,7 +10,7 @@ export interface IDecoratorCacheMemOptions extends IOnionOptionsEnable {
   ttl?: number;
   updateAgeOnGet?: boolean;
   updateAgeOnHas?: boolean;
-  broadcastOnSet?: boolean | 'del';
+  broadcastOnSet?: TypeBroadcastOnSet;
 }
 
 declare module 'vona-module-a-onion' {

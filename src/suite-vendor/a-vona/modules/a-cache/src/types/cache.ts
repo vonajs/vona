@@ -1,4 +1,5 @@
 import type { ServiceDbMeta } from 'vona-module-a-database';
+import type { TypeBroadcastOnSet } from './cacheMem.ts';
 
 export interface ICacheRedisGetOptions {
   ttl?: number;
@@ -16,6 +17,6 @@ export interface ICacheMemGetOptions {
 
 export interface ICacheMemSetOptions {
   ttl?: number;
-  broadcastOnSet?: boolean | 'del';
+  broadcastOnSet?: TypeBroadcastOnSet;
   dbMeta?: ServiceDbMeta;
 }

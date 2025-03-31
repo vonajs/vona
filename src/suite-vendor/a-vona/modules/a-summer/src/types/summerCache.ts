@@ -1,4 +1,5 @@
 import type { OmitNever } from 'vona';
+import type { TypeBroadcastOnSet } from 'vona-module-a-cache';
 import type { ServiceDbMeta } from 'vona-module-a-database';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
@@ -25,7 +26,7 @@ export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
     ttl?: number;
     updateAgeOnGet?: boolean;
     updateAgeOnHas?: boolean;
-    broadcastOnSet?: boolean | 'del';
+    broadcastOnSet?: TypeBroadcastOnSet;
   };
   redis?: {
     ttl: number;
