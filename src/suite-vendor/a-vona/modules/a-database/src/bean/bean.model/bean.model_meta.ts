@@ -18,7 +18,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDbMeta) {
     if (isNil(clientNameSelector)) return;
     if (typeof clientNameSelector === 'string') {
-      this[SymbolModelDbMeta] = this.bean.database.createDbMeta() (clientName);
+      this[SymbolModelDbMeta] = this.bean.database.createDbMeta(this.bean.database.parseClientNameSelector(clientNameSelector));
     } else {
       this[SymbolModelDbMeta] = clientNameSelector;
     }
@@ -33,11 +33,11 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   }
 
   protected get connection() {
-    return this.dbMeta.current;
+    return this.dbMeta.connection;
   }
 
   protected get dialect() {
-    return this.dbMeta.currentDialect;
+    return this.dbMeta.dialect;
   }
 
   public get scopeDatabase() {
