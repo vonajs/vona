@@ -11,17 +11,43 @@ import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts
 
 @Service()
 export class ServiceDbMeta extends BeanBase {
-  private _databaseClientCurrent: ServiceDatabaseClient;
+  private _level: number;
+  private _clientName: keyof IDatabaseClientRecord;
+  private _client: ServiceDatabaseClient;
   private _columns: ServiceColumns;
   private _transaction: ServiceTransaction;
   private _transactionConsistency: ServiceTransactionConsistency‌;
 
-  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
-    // must init eager, let ctx is same
-    this._databaseClientCurrent = (!clientName || typeof clientName === 'string') ? this.app.bean.database.getClient(clientName) : clientName;
+  protected __init__(level?: number, clientName?: keyof IDatabaseClientRecord | ServiceDatabaseClient) {
+    // level
+    this._level = level ?? this.bean.databaseAsyncLocalStorage.currentDb?.level ?? 0;
+    // clientName
+    if (!clientName) {
+      this._clientName = this.bean.databaseAsyncLocalStorage.currentDb?.clientName ?? this.app.config.database.defaultClient;
+    } else if (typeof clientName === 'string') {
+      this._clientName = clientName;
+    } else {
+      this._client = clientName;
+      this._clientName = clientName.clientName;
+    }
     this._columns = this.app.bean._newBean(ServiceColumns, this);
     this._transaction = this.app.bean._newBean(ServiceTransaction, this);
     this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
+  }
+
+  get level() {
+    return this._level;
+  }
+
+  get clientName() {
+    return this._clientName;
+  }
+
+  get client() {
+    if (!this._client) {
+      this._client = this.app.bean.database.getClient(this.level, this.clientName);
+    }
+    return this._client;
   }
 
   get columns() {
