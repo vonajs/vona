@@ -14,7 +14,6 @@ export function config(_app: VonaApplication) {
         updateAgeOnGet: true,
         updateAgeOnHas: false,
         broadcastOnSet: false,
-        broadcastDelOnSet: false,
       },
     },
   };

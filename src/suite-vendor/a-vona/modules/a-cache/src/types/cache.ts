@@ -16,7 +16,6 @@ export interface ICacheMemGetOptions {
 
 export interface ICacheMemSetOptions {
   ttl?: number;
-  broadcastOnSet?: boolean;
-  broadcastDelOnSet?: boolean;
+  broadcastOnSet?: boolean | 'del';
   dbMeta?: ServiceDbMeta;
 }
