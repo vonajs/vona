@@ -7,6 +7,7 @@ import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction
 /** bean: end */
 /** bean: begin */
 import type { BeanDatabase } from '../bean/bean.database.ts';
+import type { BeanDatabaseAsyncLocalStorage } from '../bean/bean.databaseAsyncLocalStorage.ts';
 
 /** broadcast: end */
 /** broadcast: begin */
@@ -73,6 +74,7 @@ declare module 'vona-module-a-database' {
 /** aopMethod: end */
 /** bean: begin */
 export * from '../bean/bean.database.ts';
+export * from '../bean/bean.databaseAsyncLocalStorage.ts';
 export * from '../bean/bean.databaseDialectBase.ts';
 export * from '../bean/bean.model.ts';
 export * from '../bean/bean.modelBase.ts';
@@ -85,10 +87,16 @@ declare module 'vona-module-a-database' {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
+
+  export interface BeanDatabaseAsyncLocalStorage {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
 }
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     database: BeanDatabase;
+    databaseAsyncLocalStorage: BeanDatabaseAsyncLocalStorage;
   }
 }
 /** bean: end */
