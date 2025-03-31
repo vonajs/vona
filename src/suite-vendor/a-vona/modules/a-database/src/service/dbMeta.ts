@@ -30,9 +30,6 @@ export class ServiceDbMeta extends BeanBase {
       this._client = clientName;
       this._clientName = clientName.clientName;
     }
-    this._columns = this.app.bean._newBean(ServiceColumns, this);
-    this._transaction = this.app.bean._newBean(ServiceTransaction, this);
-    this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
   }
 
   get level() {
@@ -51,48 +48,45 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   get columns() {
+    if (!this._columns) {
+      this._columns = this.app.bean._newBean(ServiceColumns, this);
+    }
     return this._columns;
   }
 
   get transaction() {
+    if (!this._transaction) {
+      this._transaction = this.app.bean._newBean(ServiceTransaction, this);
+    }
     return this._transaction;
   }
 
-  set transaction(value) {
-    this._transaction = value;
+  get transactionConsistency() {
+    if (!this._transactionConsistency) {
+      this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
+    }
+    return this._transactionConsistency;
   }
 
   get inTransaction() {
     return this.transaction.inTransaction;
   }
 
-  get currentClient() {
-    return this._databaseClientCurrent;
+  get connection() {
+    return this.inTransaction ? this.transaction.connection! : this.client.connection;
   }
 
-  set currentClient(value) {
-    this._databaseClientCurrent = value;
+  get dialectName(): keyof IDatabaseClientDialectRecord {
+    return this.client.clientConfig.client;
   }
 
-  get currentClientName() {
-    return this.currentClient.clientName;
-  }
-
-  get current() {
-    return this.inTransaction ? this.transaction.connection! : this.currentClient.connection;
-  }
-
-  get currentDialectName(): keyof IDatabaseClientDialectRecord {
-    return this.currentClient.clientConfig.client;
-  }
-
-  get currentDialect(): BeanDatabaseDialectBase {
-    return this.app.bean.database.getDialect(this.currentDialectName);
+  get dialect(): BeanDatabaseDialectBase {
+    return this.app.bean.database.getDialect(this.dialectName);
   }
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
     if (options?.ctxPrefer || !this.transaction.inTransaction) {
-      this._transactionConsistency.commit(cb);
+      this.transactionConsistency.commit(cb);
     } else {
       this.transaction.commit(cb);
     }
@@ -105,6 +99,6 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   async commitDone() {
-    await this._transactionConsistency.commitDone();
+    await this.transactionConsistency.commitDone();
   }
 }
