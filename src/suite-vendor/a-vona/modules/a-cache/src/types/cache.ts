@@ -16,5 +16,6 @@ export interface ICacheMemGetOptions {
 
 export interface ICacheMemSetOptions {
   ttl?: number;
+  broadcastOnSet?: boolean;
   dbMeta?: ServiceDbMeta;
 }

@@ -68,7 +68,18 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!cache) return;
     const keyHash = this.__getKeyHash(key);
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
+    const broadcastOnSet = options?.broadcastOnSet ?? this._cacheOptions.broadcastOnSet;
     cache.set(keyHash, value, { ttl });
+    if (broadcastOnSet) {
+      this.$scope.cache.broadcast.memSet.emit({
+        cacheName: this._cacheName,
+        cacheOptions: this._cacheOptions,
+        value,
+        keyHash,
+        key,
+        options: { ttl },
+      });
+    }
     const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
     dbMeta?.compensate(() => {
       this.del(key);
@@ -138,6 +149,12 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     cache.clear();
     // clear on other workers by broadcast
     this.$scope.cache.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOptions });
+  }
+
+  protected __setRaw(value: DATA, keyHash: string, _key: KEY, options: ICacheMemSetOptions) {
+    const cache = this.__cacheInstance;
+    if (!cache) return undefined;
+    cache.set(keyHash, value, options);
   }
 
   protected __delRaw(keyHash: string, _key: KEY) {

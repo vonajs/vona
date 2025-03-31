@@ -13,6 +13,7 @@ export function config(_app: VonaApplication) {
       options: {
         updateAgeOnGet: true,
         updateAgeOnHas: false,
+        broadcastOnSet: true,
       },
     },
   };

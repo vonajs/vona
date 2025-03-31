@@ -8,6 +8,7 @@ export interface IDecoratorCacheMemOptions extends IOnionOptionsEnable {
   ttl?: number;
   updateAgeOnGet?: boolean;
   updateAgeOnHas?: boolean;
+  broadcastOnSet?: boolean;
 }
 
 declare module 'vona-module-a-onion' {
