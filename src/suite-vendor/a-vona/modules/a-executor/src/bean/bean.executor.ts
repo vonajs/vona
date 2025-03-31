@@ -120,7 +120,7 @@ export class BeanExecutor extends BeanBase {
     const isolate = !this.ctx || this.ctx.dbLevel !== options.dbLevel;
     const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
     const ctxCallerDbMeta = ctxCaller?.dbMeta;// must before ctxStorage.run
-    const ctx = this.app.createAnonymousContext(options.req, options.reqInherit);
+    const ctx = this.app.createAnonymousContext(options.req, options.reqInherit, options.res);
     return await this.app.ctxStorage.run(ctx, async () => {
       // innerAccess
       ctx.innerAccess = options.innerAccess !== false;

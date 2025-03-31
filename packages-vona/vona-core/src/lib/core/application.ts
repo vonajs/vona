@@ -55,7 +55,7 @@ export class VonaApplication extends KoaApplication {
     return this.options.name;
   }
 
-  createAnonymousContext(req?: any, reqInherit?: boolean): VonaContext {
+  createAnonymousContext(req?: any, reqInherit?: boolean, res?: any): VonaContext {
     let request;
     if (req && reqInherit) {
       request = req;
@@ -90,7 +90,7 @@ export class VonaApplication extends KoaApplication {
         }
       }
     }
-    const response = new http.ServerResponse(request as any);
+    const response = res ?? new http.ServerResponse(request as any);
     return this.createContext(request as any, response) as unknown as VonaContext;
   }
 }

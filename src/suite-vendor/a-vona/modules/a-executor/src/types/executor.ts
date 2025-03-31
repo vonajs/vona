@@ -23,6 +23,7 @@ export interface INewCtxOptions {
   innerAccess?: boolean;
   req?: any;
   reqInherit?: boolean;
+  res?: any;
 }
 
 export interface IPerformActionOptions {
