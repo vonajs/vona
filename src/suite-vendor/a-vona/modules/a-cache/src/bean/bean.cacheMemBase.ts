@@ -71,14 +71,23 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const broadcastOnSet = options?.broadcastOnSet ?? this._cacheOptions.broadcastOnSet;
     cache.set(keyHash, value, { ttl });
     if (broadcastOnSet) {
-      this.$scope.cache.broadcast.memSet.emit({
-        cacheName: this._cacheName,
-        cacheOptions: this._cacheOptions,
-        value,
-        keyHash,
-        key,
-        options: { ttl },
-      });
+      if (broadcastOnSet === 'del') {
+        this.$scope.cache.broadcast.memDel.emit({
+          cacheName: this._cacheName,
+          cacheOptions: this._cacheOptions,
+          keyHash,
+          key,
+        });
+      } else {
+        this.$scope.cache.broadcast.memSet.emit({
+          cacheName: this._cacheName,
+          cacheOptions: this._cacheOptions,
+          value,
+          keyHash,
+          key,
+          options: { ttl },
+        });
+      }
     }
     const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
     dbMeta?.compensate(() => {
@@ -100,14 +109,23 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
       cache.set(keyHash, values[i], { ttl });
     }
     if (broadcastOnSet) {
-      this.$scope.cache.broadcast.memMultiSet.emit({
-        cacheName: this._cacheName,
-        cacheOptions: this._cacheOptions,
-        values,
-        keysHash,
-        keys,
-        options: { ttl },
-      });
+      if (broadcastOnSet === 'del') {
+        this.$scope.cache.broadcast.memMultiDel.emit({
+          cacheName: this._cacheName,
+          cacheOptions: this._cacheOptions,
+          keysHash,
+          keys,
+        });
+      } else {
+        this.$scope.cache.broadcast.memMultiSet.emit({
+          cacheName: this._cacheName,
+          cacheOptions: this._cacheOptions,
+          values,
+          keysHash,
+          keys,
+          options: { ttl },
+        });
+      }
     }
     const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
     dbMeta?.compensate(() => {
