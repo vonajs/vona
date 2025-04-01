@@ -30,6 +30,7 @@ import type { Errors } from '../config/errors.ts';
 import type { ServiceColumns } from '../service/columns.ts';
 
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
+import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDbMeta } from '../service/dbMeta.ts';
@@ -170,6 +171,7 @@ export * from '../main.ts';
 /** service: begin */
 export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
+export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage.ts';
 export * from '../service/databaseClient.ts';
 export * from '../service/dbMeta.ts';
@@ -178,6 +180,7 @@ declare module 'vona-module-a-web' {
   export interface IServiceRecord {
     'a-database:columns': never;
     'a-database:columnsCache': never;
+    'a-database:database': never;
     'a-database:databaseAsyncLocalStorage': never;
     'a-database:databaseClient': never;
     'a-database:dbMeta': never;
@@ -195,6 +198,11 @@ declare module 'vona-module-a-database' {
   }
 
   export interface ServiceColumnsCache {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface ServiceDatabase {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
@@ -232,6 +240,7 @@ declare module 'vona-module-a-database' {
 export interface IModuleService {
   columns: ServiceColumns;
   columnsCache: ServiceColumnsCache;
+  database: ServiceDatabase;
   databaseAsyncLocalStorage: ServiceDatabaseAsyncLocalStorage;
   databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
@@ -243,6 +252,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-database.service.columns': ServiceColumns;
     'a-database.service.columnsCache': ServiceColumnsCache;
+    'a-database.service.database': ServiceDatabase;
     'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
     'a-database.service.databaseClient': ServiceDatabaseClient;
     'a-database.service.dbMeta': ServiceDbMeta;

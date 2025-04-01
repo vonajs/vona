@@ -15,7 +15,7 @@ export class BroadcastColumnsClear
   async execute(data: TypeBroadcastColumnsClearJobData, isEmitter?: boolean) {
     const { clientName, tableName } = data;
     if (!isEmitter) {
-      await cast(this.bean.database).__columnsClearRaw(clientName, tableName);
+      await cast(this.scope.service.database).__columnsClearRaw(clientName, tableName);
     }
   }
 }
