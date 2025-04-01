@@ -35,9 +35,9 @@ describe('database.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
       assert.equal(entityTest.title, 'clientNameDynamic:fail');
       await catchError(async () => {
-        const dbMeta = app.bean.database.createDb({ clientName: 'default' });
-        await dbMeta.transaction.begin(async () => {
-          const modelTest = scopeTest.model.test.newInstance(dbMeta);
+        const db = app.bean.database.createDb({ clientName: 'default' });
+        await db.transaction.begin(async () => {
+          const modelTest = scopeTest.model.test.newInstance(db);
           assert.equal(modelTest.options.clientName, 'default');
           await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:fail_1' });
           throw new Error('rollback');
@@ -55,9 +55,9 @@ describe('database.test.ts', () => {
       const scopeTest = app.bean.scope('vona-test');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:success' });
       assert.equal(entityTest.title, 'clientNameDynamic:success');
-      const dbMeta = app.bean.database.createDb({ clientName: 'default' });
-      await dbMeta.transaction.begin(async () => {
-        const modelTest = scopeTest.model.test.newInstance(dbMeta);
+      const db = app.bean.database.createDb({ clientName: 'default' });
+      await db.transaction.begin(async () => {
+        const modelTest = scopeTest.model.test.newInstance(db);
         assert.equal(modelTest.options.clientName, 'default');
         await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:success_1' });
       });
@@ -74,9 +74,9 @@ describe('database.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'transaction:compensate:fail' });
       assert.equal(entityTest.title, 'transaction:compensate:fail');
       await catchError(async () => {
-        const dbMeta = app.bean.database.createDb({ clientName: 'default' });
-        await dbMeta.transaction.begin(async () => {
-          const modelTest = scopeTest.model.test.newInstance(dbMeta);
+        const db = app.bean.database.createDb({ clientName: 'default' });
+        await db.transaction.begin(async () => {
+          const modelTest = scopeTest.model.test.newInstance(db);
           assert.equal(modelTest.options.clientName, 'default');
           await modelTest.update({ id: entityTest.id, title: 'transaction:compensate:fail_1' });
           // let cache take effect

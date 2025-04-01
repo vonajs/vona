@@ -98,6 +98,7 @@ export class ServiceSchedule extends BeanBase {
       queueName,
       { scheduleName },
       {
+        dbInfo: scheduleOptions.dbInfo,
         instanceName,
         queueNameSub: scheduleName,
         jobOptions: {

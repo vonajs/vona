@@ -22,13 +22,13 @@ export class ServiceQueue extends BeanBase {
   _queueCallbacks: IQueueCallbacks = {};
 
   push<DATA>(info: IQueueJobContext<DATA>) {
-    if (!info.options?.dbLevel) throw new Error('should specify the options.dbLevel');
+    if (!info.options?.dbInfo) throw new Error('should specify the options.dbInfo');
     this._queuePush(info, false);
   }
 
   // { locale, instanceName, module, queueName,queueNameSub,data }
   pushAsync<DATA, RESULT>(info: IQueueJobContext<DATA>): Promise<RESULT> {
-    if (!info.options?.dbLevel) throw new Error('should specify the options.dbLevel');
+    if (!info.options?.dbInfo) throw new Error('should specify the options.dbInfo');
     return this._queuePush(info, true);
   }
 
@@ -263,9 +263,9 @@ export class ServiceQueue extends BeanBase {
         return await beanInstance.execute(info.data, info.options, job);
       },
       {
+        dbInfo: info.options?.dbInfo,
         locale: info.options?.locale,
         instanceName: info.options?.instanceName,
-        dbLevel: info.options!.dbLevel,
         extraData: info.options?.extraData,
         transaction: queueConfig?.transaction,
       },
@@ -281,13 +281,17 @@ export class ServiceQueue extends BeanBase {
   }
 
   prepareJobInfo<DATA>(queueName: keyof IQueueRecord, data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
-    options = deepExtend({ extraData: { request: { headers: {} } } }, options)!;
-    if (!this.ctx) {
-      options.dbLevel = options.dbLevel ?? 1;
-    } else {
-      options.dbLevel = options.dbLevel ?? this.ctx.dbLevel + 1;
-      options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
-      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
+    const current = this.bean.database.current;
+    const level = (options?.dbInfo?.level ?? current?.level ?? 0) + 1;
+    const clientName = options?.dbInfo?.clientName ?? current?.clientName;
+    const locale = options?.locale === undefined ? this.ctx?.locale : options.locale;
+    const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
+    options = deepExtend({ extraData: { request: { headers: {} } } }, options, {
+      dbInfo: { level, clientName },
+      locale,
+      instanceName,
+    })!;
+    if (this.ctx) {
       // extraData: headers
       const headers = options.extraData!.request!.headers!;
       for (const key in this.ctx.request.headers) {

@@ -13,7 +13,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      this.cacheMem.set(value!, key, { dbMeta: options?.dbMeta, broadcastOnSet: false });
+      this.cacheMem.set(value!, key, { db: options?.db, broadcastOnSet: false });
     }
     return value;
   }
@@ -35,7 +35,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // this.$logger.silly('-------mem:', valuesMissing);
       // set/merge
-      this.cacheMem.mset(valuesMissing as any, keysMissing, { dbMeta: options?.dbMeta, broadcastOnSet: false });
+      this.cacheMem.mset(valuesMissing as any, keysMissing, { db: options?.db, broadcastOnSet: false });
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
         values[indexesMissing[i]] = valueMissing;
@@ -47,7 +47,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
     // set
-    this.cacheMem.set(value, key, { dbMeta: options?.dbMeta, broadcastOnSet: options?.broadcastOnSet });
+    this.cacheMem.set(value, key, { db: options?.db, broadcastOnSet: options?.broadcastOnSet });
     // set layered
     const layered = this.__getLayered(options);
     await layered.set(value, key, options);
@@ -55,7 +55,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
     // mset
-    this.cacheMem.mset(values, keys, { dbMeta: options?.dbMeta, broadcastOnSet: options?.broadcastOnSet });
+    this.cacheMem.mset(values, keys, { db: options?.db, broadcastOnSet: options?.broadcastOnSet });
     // mset layered
     const layered = this.__getLayered(options);
     await layered.mset(values, keys, options);

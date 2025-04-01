@@ -13,7 +13,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      await this.cacheRedis.set(value!, key, { dbMeta: options?.dbMeta });
+      await this.cacheRedis.set(value!, key, { db: options?.db });
     }
     return value;
   }
@@ -35,7 +35,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
-      await this.cacheRedis.mset(valuesMissing as any, keysMissing, { dbMeta: options?.dbMeta });
+      await this.cacheRedis.mset(valuesMissing as any, keysMissing, { db: options?.db });
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
         values[indexesMissing[i]] = valueMissing;
@@ -46,11 +46,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   }
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.set(value, key, { dbMeta: options?.dbMeta });
+    await this.cacheRedis.set(value, key, { db: options?.db });
   }
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.mset(values, keys, { dbMeta: options?.dbMeta });
+    await this.cacheRedis.mset(values, keys, { db: options?.db });
   }
 
   async del(key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {

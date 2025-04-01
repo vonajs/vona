@@ -1,5 +1,6 @@
 import type * as Bull from 'bullmq';
 import type { OmitNever } from 'vona';
+import type { IDbInfo } from 'vona-module-a-database';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IQueueJobContext, IQueueRecord } from 'vona-module-a-queue';
 import type { TypeQueueScheduleJobData, TypeQueueScheduleJobResult } from '../bean/queue.schedule.ts';
@@ -17,6 +18,7 @@ export interface IDecoratorScheduleOptions extends IOnionOptionsEnable {
   repeat: Bull.RepeatOptions;
   templateOptions?: Bull.JobSchedulerTemplateOptions;
   transaction?: boolean;
+  dbInfo?: IDbInfo;
 }
 
 declare module 'vona-module-a-onion' {
