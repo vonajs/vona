@@ -55,9 +55,10 @@ export class ServiceBroadcast extends BeanBase {
         return await beanInstance.execute(info.data, isEmitter);
       },
       {
-
+        dbInfo: info.options?.dbInfo,
         locale: info.options?.locale,
         instanceName: info.options?.instanceName,
+        extraData: info.options?.extraData,
         transaction: broadcastConfig?.transaction,
         instance: broadcastConfig?.instance !== false,
       },
