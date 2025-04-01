@@ -109,13 +109,15 @@ export class BeanExecutor extends BeanBase {
 
   private async _newCtxInner<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
+    // isolate
+    const isolate = !this.ctx || options.instanceName !== undefined;
+    const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
+    // locale/instanceName
     if (this.ctx) {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     // run
-    const isolate = !this.ctx || options.instanceName !== undefined;
-    const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
     const ctx = this.app.createAnonymousContext(options.req, options.res);
     return await this.app.ctxStorage.run(ctx, async () => {
       // innerAccess
