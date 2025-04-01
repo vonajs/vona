@@ -33,7 +33,7 @@ import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
-import type { ServiceDbMeta } from '../service/dbMeta.ts';
+import type { ServiceDb } from '../service/db.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
@@ -174,7 +174,7 @@ export * from '../service/columnsCache.ts';
 export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage.ts';
 export * from '../service/databaseClient.ts';
-export * from '../service/dbMeta.ts';
+export * from '../service/db.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -183,7 +183,7 @@ declare module 'vona-module-a-web' {
     'a-database:database': never;
     'a-database:databaseAsyncLocalStorage': never;
     'a-database:databaseClient': never;
-    'a-database:dbMeta': never;
+    'a-database:db': never;
     'a-database:modelResolver': never;
     'a-database:transaction': never;
     'a-database:transactionConsistency‌': never;
@@ -217,7 +217,7 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 
-  export interface ServiceDbMeta {
+  export interface ServiceDb {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
@@ -243,7 +243,7 @@ export interface IModuleService {
   database: ServiceDatabase;
   databaseAsyncLocalStorage: ServiceDatabaseAsyncLocalStorage;
   databaseClient: ServiceDatabaseClient;
-  dbMeta: ServiceDbMeta;
+  db: ServiceDb;
   modelResolver: ServiceModelResolver;
   transaction: ServiceTransaction;
   transactionConsistency‌: ServiceTransactionConsistency‌;
@@ -255,7 +255,7 @@ declare module 'vona' {
     'a-database.service.database': ServiceDatabase;
     'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
     'a-database.service.databaseClient': ServiceDatabaseClient;
-    'a-database.service.dbMeta': ServiceDbMeta;
+    'a-database.service.db': ServiceDb;
     'a-database.service.modelResolver': ServiceModelResolver;
     'a-database.service.transaction': ServiceTransaction;
     'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;

@@ -22,7 +22,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private get __cacheName() {
     if (!this[SymbolCacheName]) {
-      const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this.dbMeta.clientName);
+      const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this.db.clientName);
       this[SymbolCacheName] = `${this.$beanFullName}:${clientNameReal}`;
     }
     return this[SymbolCacheName];
@@ -87,7 +87,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       mget: async ids => {
         return await super._mget(table, ids, { disableDeleted: true });
       },
-      dbMeta: this.dbMeta,
+      db: this.db,
     });
     // filter disableDeleted
     items = items.filter(item => {
@@ -289,7 +289,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         return await super.get(table, cacheKey.where, options as any);
       },
       ignoreNull: true,
-      dbMeta: this.dbMeta,
+      db: this.db,
     });
     if (!data) return data;
     // check if exists and valid
@@ -316,7 +316,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         // disableInstance: use the model options, not use options by outer
         return await super.get(table, where, { disableDeleted: true });
       },
-      dbMeta: this.dbMeta,
+      db: this.db,
     });
     if (!item) return item;
     if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return undefined;

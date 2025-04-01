@@ -10,7 +10,7 @@ import { ServiceTransaction } from './transaction.ts';
 import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
-export class ServiceDbMeta extends BeanBase {
+export class ServiceDb extends BeanBase {
   private _level: number;
   private _clientName: keyof IDatabaseClientRecord;
   private _client: ServiceDatabaseClient;

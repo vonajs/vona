@@ -3,7 +3,7 @@ import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { IDbInfo } from '../types/database.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { ServiceDbMeta } from '../service/dbMeta.ts';
+import { ServiceDb } from '../service/db.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -29,9 +29,9 @@ export class BeanDatabase extends BeanBase {
     return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
   }
 
-  createDb(dbInfo: IDbInfo): ServiceDbMeta;
-  createDb(dbInfo: undefined, client: ServiceDatabaseClient): ServiceDbMeta;
-  createDb(dbInfo?: IDbInfo, client?: ServiceDatabaseClient): ServiceDbMeta {
-    return this.app.bean._newBean(ServiceDbMeta, dbInfo, client);
+  createDb(dbInfo: IDbInfo): ServiceDb;
+  createDb(dbInfo: undefined, client: ServiceDatabaseClient): ServiceDb;
+  createDb(dbInfo?: IDbInfo, client?: ServiceDatabaseClient): ServiceDb {
+    return this.app.bean._newBean(ServiceDb, dbInfo, client);
   }
 }

@@ -1,25 +1,25 @@
 import type { ITableColumns, ITableColumnsDefault } from '../types/columns.ts';
-import type { ServiceDbMeta } from './dbMeta.ts';
+import type { ServiceDb } from './db.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { ServiceColumnsCache } from './columnsCache.ts';
 
 @Service()
 export class ServiceColumns extends BeanBase {
-  private _dbMeta: ServiceDbMeta;
+  private _db: ServiceDb;
   private _serviceColumnsCache: ServiceColumnsCache;
 
-  protected __init__(dbMeta: ServiceDbMeta) {
-    this._dbMeta = dbMeta;
+  protected __init__(db: ServiceDb) {
+    this._db = db;
   }
 
-  private get dbMeta() {
-    return this._dbMeta;
+  private get db() {
+    return this._db;
   }
 
   private get serviceColumnsCache() {
     if (!this._serviceColumnsCache) {
-      const clientNameReal = this.scope.service.database.prepareClientNameReal(this.dbMeta.clientName);
+      const clientNameReal = this.scope.service.database.prepareClientNameReal(this.db.clientName);
       this._serviceColumnsCache = this.bean._getBeanSelector(ServiceColumnsCache, clientNameReal);
     }
     return this._serviceColumnsCache;
@@ -29,8 +29,8 @@ export class ServiceColumns extends BeanBase {
     if (!tableName) return {};
     let columns = this.serviceColumnsCache.columnsCache[tableName];
     if (!columns) {
-      const dialect = this.dbMeta.dialect;
-      const connection = this.dbMeta.connection;
+      const dialect = this.db.dialect;
+      const connection = this.db.connection;
       const map = await connection(tableName).columnInfo();
       columns = this.serviceColumnsCache.columnsCache[tableName] = {};
       for (const name in map) {
@@ -55,6 +55,6 @@ export class ServiceColumns extends BeanBase {
   }
 
   columnsClear(tableName?: string) {
-    return this.scope.service.database.columnsClear(this.dbMeta.clientName, tableName);
+    return this.scope.service.database.columnsClear(this.db.clientName, tableName);
   }
 }

@@ -1,4 +1,4 @@
-import type { ServiceDbMeta } from '../../service/dbMeta.ts';
+import type { ServiceDb } from '../../service/db.ts';
 import type {
   IDatabaseClientRecord,
   IDecoratorEntityOptions,
@@ -10,18 +10,18 @@ import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
 
-const SymbolModelDbMeta = Symbol('SymbolModelDbMeta');
+const SymbolModelDb = Symbol('SymbolModelDb');
 
 export class BeanModelMeta<TRecord extends {}> extends BeanBase {
-  private [SymbolModelDbMeta]: ServiceDbMeta;
+  private [SymbolModelDb]: ServiceDb;
 
-  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDbMeta) {
+  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
     if (isNil(clientNameSelector)) return;
     if (typeof clientNameSelector === 'string') {
       const serviceDatabase = this.$scope.database.service.database;
-      this[SymbolModelDbMeta] = this.bean.database.createDb(serviceDatabase.parseClientNameSelector(clientNameSelector));
+      this[SymbolModelDb] = this.bean.database.createDb(serviceDatabase.parseClientNameSelector(clientNameSelector));
     } else {
-      this[SymbolModelDbMeta] = clientNameSelector;
+      this[SymbolModelDb] = clientNameSelector;
     }
   }
 
@@ -29,16 +29,16 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return cast<BeanModel>(this);
   }
 
-  protected get dbMeta() {
-    return this[SymbolModelDbMeta] ?? this.bean.database.current;
+  protected get db() {
+    return this[SymbolModelDb] ?? this.bean.database.current;
   }
 
   protected get connection() {
-    return this.dbMeta.connection;
+    return this.db.connection;
   }
 
   protected get dialect() {
-    return this.dbMeta.dialect;
+    return this.db.dialect;
   }
 
   public get scopeDatabase() {
@@ -102,7 +102,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.disableUpdateTime;
   }
 
-  public newInstance(clientName?: keyof IDatabaseClientRecord | ServiceDbMeta): this {
+  public newInstance(clientName?: keyof IDatabaseClientRecord | ServiceDb): this {
     return this.app.bean._newBean(this.$beanFullName as any, clientName);
   }
 }

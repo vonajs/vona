@@ -41,12 +41,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
 
   async defaultData(table?: string): Promise<TRecord> {
     table = table || this.table;
-    return await this.dbMeta.columns.defaultData(table) as TRecord;
+    return await this.db.columns.defaultData(table) as TRecord;
   }
 
   async columns(table?: string): Promise<ITableColumns> {
     table = table || this.table;
-    return await this.dbMeta.columns.columns(table);
+    return await this.db.columns.columns(table);
   }
 
   isRaw(raw) {
