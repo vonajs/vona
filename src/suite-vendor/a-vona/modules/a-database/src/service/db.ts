@@ -30,6 +30,10 @@ export class ServiceDb extends BeanBase {
     }
   }
 
+  get info(): IDbInfo {
+    return { level: this.level, clientName: this.clientName };
+  }
+
   get level() {
     return this._level;
   }

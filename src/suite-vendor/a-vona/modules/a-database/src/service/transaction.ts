@@ -2,7 +2,7 @@ import type knex from 'knex';
 import type { Knex } from 'knex';
 import type { FunctionAny, FunctionAsync } from 'vona';
 import type { ITransactionOptions } from '../types/transaction.ts';
-import type { ServiceDbMeta } from './dbMeta.ts';
+import type { ServiceDb } from './db.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { EnumTransactionPropagation, TransactionIsolationLevels } from '../types/transaction.ts';
@@ -12,11 +12,11 @@ import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts
 export class ServiceTransaction extends BeanBase {
   private _transactionCounter: number = 0;
   private _connection?: knex.Knex.Transaction;
-  private _dbMeta: ServiceDbMeta;
+  private _db: ServiceDb;
   private _transactionConsistency: ServiceTransactionConsistency‌;
 
-  protected __init__(dbMeta: ServiceDbMeta) {
-    this._dbMeta = dbMeta;
+  protected __init__(db: ServiceDb) {
+    this._db = db;
     this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
   }
 
@@ -56,7 +56,7 @@ export class ServiceTransaction extends BeanBase {
         return await this._isolationLevelRequired(fn, transactionOptions);
       } else {
         return await this.bean.executor.newCtxIsolate(fn, {
-          dbClientName: this._dbMeta.currentClientName,
+          dbInfo: this._db.info,
           transaction: true,
           transactionOptions,
         });
@@ -66,7 +66,7 @@ export class ServiceTransaction extends BeanBase {
         return await fn();
       } else {
         return await this.bean.executor.newCtxIsolate(fn, {
-          dbClientName: this._dbMeta.currentClientName,
+          dbInfo: this._db.info,
         });
       }
     } else if (propagation === EnumTransactionPropagation.NEVER) {
@@ -99,7 +99,7 @@ export class ServiceTransaction extends BeanBase {
     let res: RESULT;
     try {
       if (++this._transactionCounter === 1) {
-        const connection = this._dbMeta.currentClient.connection;
+        const connection = this._db.client.connection;
         this._connection = await connection.transaction(_translateTransactionOptions(options));
       }
     } catch (err) {

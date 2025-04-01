@@ -1,6 +1,6 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
-import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
+import type { INewCtxIsolateOptions, INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
 import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
@@ -85,10 +85,10 @@ export class BeanExecutor extends BeanBase {
     });
   }
 
-  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: Omit<INewCtxOptions, 'dbInfo'>): Promise<RESULT> {
+  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxIsolateOptions): Promise<RESULT> {
     return this.bean.database.newDbIsolate(() => {
-      return this.newCtx(fn, options);
-    });
+      return this._newCtxInner(fn, options);
+    }, options?.dbInfo);
   }
 
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {

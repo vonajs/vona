@@ -6,17 +6,21 @@ import { ServiceDb } from '../service/db.ts';
 
 @Service()
 export class ServiceDatabaseAsyncLocalStorage extends BeanBase {
-  ctxStorage: AsyncLocalStorage<ServiceDb>;
+  dbStorage: AsyncLocalStorage<ServiceDb>;
+
+  protected __init__() {
+    this.dbStorage = new AsyncLocalStorage();
+  }
 
   get current(): ServiceDb {
-    return this.ctxStorage.getStore()!;
+    return this.dbStorage.getStore()!;
   }
 
   async run<RESULT>(store: ServiceDb, fn: FunctionAsync<RESULT>): Promise<RESULT> {
     if (store === this.current) {
       return fn();
     }
-    return this.ctxStorage.run(store, () => {
+    return this.dbStorage.run(store, () => {
       return fn();
     });
   }

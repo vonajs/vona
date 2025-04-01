@@ -13,8 +13,7 @@ export class BeanDatabase extends BeanBase {
 
   async newDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfo?: IDbInfo): Promise<RESULT> {
     const current = this.bean.database.current;
-    if (!current) return this.newDb(fn, dbInfo);
-    const level = dbInfo?.level ?? current.level + 1;
+    const level = (dbInfo?.level ?? current?.level ?? 0) + 1;
     const clientName = dbInfo?.clientName ?? current?.clientName;
     return this.newDb(fn, { level, clientName });
   }

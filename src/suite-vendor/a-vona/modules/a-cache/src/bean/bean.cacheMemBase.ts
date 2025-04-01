@@ -89,8 +89,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         });
       }
     }
-    const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
-    dbMeta?.compensate(() => {
+    const db = options?.db ?? this.bean.database.current;
+    db?.compensate(() => {
       this.del(key);
     });
   }
@@ -127,8 +127,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         });
       }
     }
-    const dbMeta = options?.dbMeta ?? this.ctx?.dbMeta;
-    dbMeta?.compensate(() => {
+    const db = options?.db ?? this.bean.database.current;
+    db?.compensate(() => {
       this.mdel(keys);
     });
   }
