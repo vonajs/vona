@@ -1,15 +1,11 @@
 import type Redlock from '@sesamecare-oss/redlock';
 import type * as Bull from 'bullmq';
-import type { ILocalInfos, OmitNever } from 'vona';
-import type { IDbInfo } from 'vona-module-a-database';
-import type { INewCtxExtraData } from 'vona-module-a-executor';
+import type { OmitNever } from 'vona';
+import type { IGeneralInfoOptions, INewCtxExtraData } from 'vona-module-a-executor';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
-export interface IQueuePushOptions {
-  dbInfo?: IDbInfo;
+export interface IQueuePushOptions extends IGeneralInfoOptions {
   queueNameSub?: string;
-  locale?: keyof ILocalInfos;
-  instanceName?: string | undefined | null;
   extraData?: INewCtxExtraData;
   jobName?: string;
   jobOptions?: Bull.JobsOptions;

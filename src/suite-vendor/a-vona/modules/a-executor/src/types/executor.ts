@@ -36,3 +36,9 @@ export interface IPerformActionOptions {
   onions?: PowerPartial<ConfigOnions>;
   authToken?: string;
 }
+
+export interface IGeneralInfoOptions {
+  dbInfo?: IDbInfo;
+  locale?: keyof ILocalInfos;
+  instanceName?: string | undefined | null;
+}

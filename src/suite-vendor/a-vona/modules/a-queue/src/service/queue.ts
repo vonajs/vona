@@ -281,17 +281,9 @@ export class ServiceQueue extends BeanBase {
   }
 
   prepareJobInfo<DATA>(queueName: keyof IQueueRecord, data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
-    const current = this.bean.database.current;
-    const level = (options?.dbInfo?.level ?? current?.level ?? 0) + 1;
-    const clientName = options?.dbInfo?.clientName ?? current?.clientName;
-    const locale = options?.locale === undefined ? this.ctx?.locale : options.locale;
-    const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
-    options = deepExtend({ extraData: { request: { headers: {} } } }, options, {
-      dbInfo: { level, clientName },
-      locale,
-      instanceName,
-    })!;
+    options = this.$scope.executor.service.executor.prepareGeneralInfo(options);
     if (this.ctx) {
+      options = deepExtend({ extraData: { request: { headers: {} } } }, options)!;
       // extraData: headers
       const headers = options.extraData!.request!.headers!;
       for (const key in this.ctx.request.headers) {
