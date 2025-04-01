@@ -79,7 +79,7 @@ export class ServiceDbMeta extends BeanBase {
   }
 
   get dialect(): BeanDatabaseDialectBase {
-    return this.app.bean.database.getDialect(this.dialectName);
+    return this.scope.service.database.getDialect(this.dialectName);
   }
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
