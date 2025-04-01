@@ -1,3 +1,4 @@
+import type { FunctionAny } from 'vona';
 import type { BeanModel } from '../bean/bean.model.ts';
 import type { ConfigDatabase } from './config.ts';
 
@@ -29,5 +30,10 @@ declare module 'vona' {
 
   export interface VonaConfig {
     database: ConfigDatabase;
+  }
+
+  export interface VonaContext {
+    commit(cb: FunctionAny): void;
+    commitDone(): Promise<void>;
   }
 }

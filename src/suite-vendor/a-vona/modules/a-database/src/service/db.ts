@@ -7,7 +7,6 @@ import { BeanBase } from 'vona';
 import { ServiceColumns } from 'vona-module-a-database';
 import { Service } from 'vona-module-a-web';
 import { ServiceTransaction } from './transaction.ts';
-import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
 export class ServiceDb extends BeanBase {
@@ -16,7 +15,6 @@ export class ServiceDb extends BeanBase {
   private _client: ServiceDatabaseClient;
   private _columns: ServiceColumns;
   private _transaction: ServiceTransaction;
-  private _transactionConsistency: ServiceTransactionConsistency‌;
 
   protected __init__(dbInfo?: IDbInfo, client?: ServiceDatabaseClient) {
     if (client) {
@@ -63,13 +61,6 @@ export class ServiceDb extends BeanBase {
     return this._transaction;
   }
 
-  get transactionConsistency() {
-    if (!this._transactionConsistency) {
-      this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
-    }
-    return this._transactionConsistency;
-  }
-
   get inTransaction() {
     return this.transaction.inTransaction;
   }
@@ -88,7 +79,7 @@ export class ServiceDb extends BeanBase {
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
     if (options?.ctxPrefer || !this.transaction.inTransaction) {
-      this.transactionConsistency.commit(cb);
+      this.ctx?.commit(cb);
     } else {
       this.transaction.commit(cb);
     }
@@ -98,9 +89,5 @@ export class ServiceDb extends BeanBase {
     if (this.transaction.inTransaction) {
       this.transaction.compensate(cb);
     }
-  }
-
-  async commitDone() {
-    await this.transactionConsistency.commitDone();
   }
 }

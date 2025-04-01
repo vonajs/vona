@@ -1,8 +1,11 @@
-import type { IModuleMain, PowerPartial, VonaApplication } from 'vona';
+import type { FunctionAny, IModuleMain, PowerPartial, VonaApplication, VonaContext } from 'vona';
 import type { ConfigDatabase } from './types/config.ts';
 import type { IDatabaseClientRecord } from './types/database.ts';
-import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
+import { BeanSimple, cast, combineConfigDefault, deepExtend } from 'vona';
+import { ServiceTransactionConsistency‌ } from 'vona-module-a-database';
 import { ExtendKnex } from './extend/index.ts';
+
+const SymbolTransactionConsistency = Symbol('SymbolTransactionConsistency');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
@@ -14,6 +17,37 @@ export class Main extends BeanSimple implements IModuleMain {
   async moduleLoaded() {
     // ExtendKnex
     ExtendKnex(this.app);
+    // transactionConsistency
+    Object.defineProperty(this.app.context, 'transactionConsistency', {
+      enumerable: false,
+      get(this: VonaContext) {
+        if (!this[SymbolTransactionConsistency]) {
+          this[SymbolTransactionConsistency] = this.app.bean._newBean(ServiceTransactionConsistency‌);
+        }
+        return this[SymbolTransactionConsistency];
+      },
+    });
+    // commit
+    Object.defineProperty(this.app.context, 'commit', {
+      enumerable: false,
+      get() {
+        return function (this: VonaContext, cb: FunctionAny) {
+          if (this.ctxCaller) {
+            this.ctxCaller.commit(cb);
+          } else {
+            cast(this).transactionConsistency.commit(cb);
+          }
+        };
+      },
+    });
+    Object.defineProperty(this.app.context, 'commitDone', {
+      enumerable: false,
+      get() {
+        return function (this: VonaContext) {
+          cast(this).transactionConsistency.commitDone();
+        };
+      },
+    });
   }
 
   async configLoaded(_config) {}
