@@ -1,5 +1,5 @@
 import type { Redlock } from '@sesamecare-oss/redlock';
-import type { INewCtxOptions } from 'vona-module-a-executor';
+import type { IDbInfo } from 'vona-module-a-database';
 
 export interface IRedlockLockOptions {
   instanceName?: string | undefined | null;
@@ -7,4 +7,4 @@ export interface IRedlockLockOptions {
   lockTTL?: number;
 }
 
-export interface IRedlockLockIsolateOptions extends IRedlockLockOptions, INewCtxOptions {}
+export interface IRedlockLockIsolateOptions extends IRedlockLockOptions, IDbInfo {}
