@@ -80,24 +80,21 @@ export class BeanExecutor extends BeanBase {
   }
 
   runInBackground(fn: FunctionAsync<void>) {
-    return this.newCtxIsolate(() => {
-      return fn();
+    return this.bean.database.newDbIsolate(() => {
+      return this.newCtx(fn);
     });
   }
 
-  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxIsolateOptions): Promise<RESULT> {
-    return this.bean.database.newDbIsolate(() => {
-      return this._newCtxInner(fn, options);
-    }, options?.dbInfo);
+  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+    options = Object.assign({}, options);
+    // instanceName !== undefined means isolate
+    options.instanceName = options.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
+    return this.newCtx(fn, options);
   }
 
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
-    if (!this.ctx) {
-      options.instanceName = options.instanceName === undefined ? '' : options.instanceName;
-    } else {
-      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
-    }
+    options.instanceName = options.instanceName === undefined ? (this.ctx?.instanceName ?? '') : options.instanceName;
     return this.newCtx(fn, options);
   }
 

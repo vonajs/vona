@@ -15,10 +15,6 @@ export interface INewCtxOptions extends INewCtxBaseOptions {
   dbInfo?: IDbInfo | true;
 }
 
-export interface INewCtxIsolateOptions extends INewCtxBaseOptions {
-  dbInfo?: IDbInfo;
-}
-
 export interface INewCtxBaseOptions {
   locale?: keyof ILocalInfos;
   instanceName?: string | undefined | null;
