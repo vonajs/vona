@@ -128,6 +128,7 @@ export class ServiceStartup extends BeanBase {
         await bean.execute(options);
       },
       {
+        dbInfo: true,
         instanceName,
         transaction: startupOptions.transaction,
       },
