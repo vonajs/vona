@@ -17,10 +17,10 @@ export class BeanExecutor extends BeanBase {
   ): Promise<any> {
     // url
     const url = this.app.util.combineApiPath(path as any, '', true, true);
-    return await this._performActionInner(method, url, options);
+    return await this.performActionInner(method, url, options);
   }
 
-  private async _performActionInner<
+  async performActionInner<
     METHOD extends keyof IApiPathRecordMethodMap,
   >(method: METHOD,
     url: string,
