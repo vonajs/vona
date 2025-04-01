@@ -155,14 +155,14 @@ export class BeanExecutor extends BeanBase {
       // execute
       let res: RESULT;
       if (options.transaction) {
-        res = await ctx.dbMeta.transaction.begin(async () => {
+        res = await this.bean.database.current.transaction.begin(async () => {
           return await fn();
         }, options.transactionOptions);
       } else {
         res = await fn();
       }
       // tail done
-      await ctx.dbMeta.commitDone();
+      await this.bean.database.current.commitDone();
       // ok
       return res;
     });

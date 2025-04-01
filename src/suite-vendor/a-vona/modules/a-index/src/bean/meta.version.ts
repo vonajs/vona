@@ -36,7 +36,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
   private async _createIndexesOnTable(tableName: string, indexes: string | string[] | undefined) {
     if (!indexes) return;
-    const dialectName = this.ctx.dbMeta.currentDialectName;
+    const dialectName = this.bean.database.current.dialectName;
     const indexPrefix = `idx_${tableName}_`;
     try {
       const _indexArray = Array.isArray(indexes) ? indexes : indexes.split(',');
