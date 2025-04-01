@@ -18,7 +18,8 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDbMeta) {
     if (isNil(clientNameSelector)) return;
     if (typeof clientNameSelector === 'string') {
-      this[SymbolModelDbMeta] = this.bean.database.createDbMeta(this.bean.database.parseClientNameSelector(clientNameSelector));
+      const serviceDatabase = this.$scope.database.service.database;
+      this[SymbolModelDbMeta] = serviceDatabase.createDbMeta(serviceDatabase.parseClientNameSelector(clientNameSelector));
     } else {
       this[SymbolModelDbMeta] = clientNameSelector;
     }

@@ -22,7 +22,7 @@ export class ServiceModelResolver extends BeanBase {
     if (!clientName) {
       return this.bean._getBean(beanFullName as any);
     } else {
-      return this.bean._getBeanSelector(beanFullName as any, this.bean.database.prepareClientNameSelector({
+      return this.bean._getBeanSelector(beanFullName as any, this.scope.service.database.prepareClientNameSelector({
         level: this.bean.database.current.level,
         clientName,
       }));

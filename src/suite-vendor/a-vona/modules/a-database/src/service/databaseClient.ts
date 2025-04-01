@@ -42,7 +42,7 @@ export class ServiceDatabaseClient extends BeanBase {
   private __load(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
     // name
     this.clientNameSelector = clientNameSelector;
-    const dbInfo = this.bean.database.parseClientNameSelector(clientNameSelector);
+    const dbInfo = this.scope.service.database.parseClientNameSelector(clientNameSelector);
     this.level = dbInfo.level;
     this.clientName = dbInfo.clientName;
     // config

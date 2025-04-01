@@ -19,7 +19,7 @@ export class ServiceColumns extends BeanBase {
 
   private get serviceColumnsCache() {
     if (!this._serviceColumnsCache) {
-      const clientNameReal = this.bean.database.prepareClientNameReal(this.dbMeta.currentClientName);
+      const clientNameReal = this.scope.service.database.prepareClientNameReal(this.dbMeta.clientName);
       this._serviceColumnsCache = this.bean._getBeanSelector(ServiceColumnsCache, clientNameReal);
     }
     return this._serviceColumnsCache;
@@ -29,9 +29,9 @@ export class ServiceColumns extends BeanBase {
     if (!tableName) return {};
     let columns = this.serviceColumnsCache.columnsCache[tableName];
     if (!columns) {
-      const dialect = this.dbMeta.currentDialect;
-      const db = this.dbMeta.current;
-      const map = await db(tableName).columnInfo();
+      const dialect = this.dbMeta.dialect;
+      const connection = this.dbMeta.connection;
+      const map = await connection(tableName).columnInfo();
       columns = this.serviceColumnsCache.columnsCache[tableName] = {};
       for (const name in map) {
         columns[name] = dialect.coerceColumn(map[name]);
@@ -55,6 +55,6 @@ export class ServiceColumns extends BeanBase {
   }
 
   columnsClear(tableName?: string) {
-    return this.bean.database.columnsClear(this.dbMeta.currentClientName, tableName);
+    return this.scope.service.database.columnsClear(this.dbMeta.clientName, tableName);
   }
 }
