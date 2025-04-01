@@ -1,17 +1,16 @@
-import type { IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
+import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.ts';
+import type { ConfigDatabaseClient } from '../types/config.ts';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
+import { ServiceDatabaseClient } from './databaseClient.ts';
+import { ServiceDbMeta } from './dbMeta.ts';
 
 @Service()
 export class ServiceDatabase extends BeanBase {
   getClient(dbInfo: IDbInfo | undefined, clientConfig?: ConfigDatabaseClient) {
     return this.app.bean._getBeanSelector(ServiceDatabaseClient, this.prepareClientNameSelector(dbInfo), clientConfig);
-  }
-
-  get(clientName?: keyof IDatabaseClientRecord) {
-    const client = this.getClient(clientName);
-    return client.connection;
   }
 
   getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
