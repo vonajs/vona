@@ -80,20 +80,15 @@ export class BeanExecutor extends BeanBase {
   }
 
   runInBackground(fn: FunctionAsync<void>) {
-    return this.newCtxIsolate(async () => {
-      return await fn();
+    return this.newCtxIsolate(() => {
+      return fn();
     });
   }
 
-  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
-    options = Object.assign({}, options);
-    if (!this.ctx) {
-      options.dbLevel = options.dbLevel ?? 1; // same as isolate
-    } else {
-      options.dbLevel = options.dbLevel ?? this.ctx.dbLevel + 1;
-      options.extraData = options.instanceName === undefined && options.extraData === undefined ? this.ctx as any : options.extraData;
-    }
-    return await this.newCtx(fn, options);
+  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: Omit<INewCtxOptions, 'dbInfo'>): Promise<RESULT> {
+    return this.bean.database.newDbIsolate(undefined, () => {
+      return this.newCtx(fn, options);
+    });
   }
 
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
@@ -103,7 +98,7 @@ export class BeanExecutor extends BeanBase {
     } else {
       options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
-    return await this.newCtx(fn, options);
+    return this.newCtx(fn, options);
   }
 
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
