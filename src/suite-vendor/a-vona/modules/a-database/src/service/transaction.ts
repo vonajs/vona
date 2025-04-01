@@ -35,43 +35,41 @@ export class ServiceTransaction extends BeanBase {
     const propagation = options?.propagation ?? EnumTransactionPropagation.REQUIRED;
     if (propagation === EnumTransactionPropagation.REQUIRED) {
       // required
-      return await this._isolationLevelRequired(fn, transactionOptions);
+      return this._isolationLevelRequired(fn, transactionOptions);
     } else if (propagation === EnumTransactionPropagation.SUPPORTS) {
       // supports
       if (this.inTransaction) {
-        return await this._isolationLevelRequired(fn, transactionOptions);
+        return this._isolationLevelRequired(fn, transactionOptions);
       } else {
-        return await fn();
+        return fn();
       }
     } else if (propagation === EnumTransactionPropagation.MANDATORY) {
       // mandatory
       if (this.inTransaction) {
-        return await this._isolationLevelRequired(fn, transactionOptions);
+        return this._isolationLevelRequired(fn, transactionOptions);
       } else {
         throw new Error('transaction error: EnumTransactionPropagation.MANDATORY');
       }
     } else if (propagation === EnumTransactionPropagation.REQUIRES_NEW) {
       // requires_new
       if (!this.inTransaction) {
-        return await this._isolationLevelRequired(fn, transactionOptions);
+        return this._isolationLevelRequired(fn, transactionOptions);
       } else {
-        return await this.bean.executor.newCtxIsolate(fn, {
-          dbInfo: this._db.info,
-          transaction: true,
-          transactionOptions,
-        });
+        return this.bean.database.newDbIsolate(() => {
+          return this.bean.database.current.transaction.begin(() => {
+            return fn();
+          }, transactionOptions);
+        }, this._db.info);
       }
     } else if (propagation === EnumTransactionPropagation.NOT_SUPPORTED) {
       if (!this.inTransaction) {
-        return await fn();
+        return fn();
       } else {
-        return await this.bean.executor.newCtxIsolate(fn, {
-          dbInfo: this._db.info,
-        });
+        return this.bean.database.newDbIsolate(fn, this._db.info);
       }
     } else if (propagation === EnumTransactionPropagation.NEVER) {
       if (!this.inTransaction) {
-        return await fn();
+        return fn();
       } else {
         throw new Error('transaction error: EnumTransactionPropagation.NEVER');
       }
