@@ -107,7 +107,8 @@ export class BeanExecutor extends BeanBase {
   }
 
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
-    return this.bean.database.newDb(options?.dbInfo, () => {
+    if (!options?.dbInfo) return this._newCtxInner(fn, options);
+    return this.bean.database.newDb(options.dbInfo, () => {
       return this._newCtxInner(fn, options);
     });
   }

@@ -75,9 +75,14 @@ export class BeanDatabase extends BeanBase {
     return this.scope.service.databaseAsyncLocalStorage.current;
   }
 
-  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
-    if (!dbInfo) return fn();
-    const db = this.createDbMeta(dbInfo);
+  async newDb<RESULT>(dbInfo: IDbInfo, fn: FunctionAsync<RESULT>): Promise<RESULT> {
+    const current = this.bean.database.current;
+    const level = dbInfo.level ?? current?.level ?? 1; // 0 for outer users
+    const clientName = this.prepareClientName(dbInfo.clientName ?? current?.clientName ?? this.app.config.database.defaultClient); // dbInfo.clientName maybe 'default'
+    if (level === current?.level && clientName === current?.clientName) {
+      return fn();
+    }
+    const db = this.createDbMeta({ level, clientName });
     return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
   }
 
