@@ -40,7 +40,7 @@ export class ServiceDbMeta extends BeanBase {
 
   get client() {
     if (!this._client) {
-      this._client = this.app.bean.database.getClient({ level: this.level, clientName: this.clientName });
+      this._client = this.scope.service.database.getClient({ level: this.level, clientName: this.clientName });
     }
     return this._client;
   }
