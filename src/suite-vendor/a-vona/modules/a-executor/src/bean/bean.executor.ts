@@ -86,7 +86,7 @@ export class BeanExecutor extends BeanBase {
   }
 
   async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: Omit<INewCtxOptions, 'dbInfo'>): Promise<RESULT> {
-    return this.bean.database.newDbIsolate(undefined, () => {
+    return this.bean.database.newDbIsolate(() => {
       return this.newCtx(fn, options);
     });
   }
@@ -104,9 +104,9 @@ export class BeanExecutor extends BeanBase {
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     if (!options?.dbInfo) return this._newCtxInner(fn, options);
     const dbInfo = options.dbInfo === true ? {} : options.dbInfo;
-    return this.bean.database.newDb(dbInfo, () => {
+    return this.bean.database.newDb(() => {
       return this._newCtxInner(fn, options);
-    });
+    }, dbInfo);
   }
 
   private async _newCtxInner<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {

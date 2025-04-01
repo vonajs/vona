@@ -75,15 +75,15 @@ export class BeanDatabase extends BeanBase {
     return this.scope.service.databaseAsyncLocalStorage.current;
   }
 
-  async newDbIsolate<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
+  async newDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfo?: IDbInfo): Promise<RESULT> {
     const current = this.bean.database.current;
-    if (!current) return this.newDb(dbInfo, fn);
+    if (!current) return this.newDb(fn, dbInfo);
     const level = dbInfo?.level ?? current.level + 1;
     const clientName = dbInfo?.clientName ?? current?.clientName;
-    return this.newDb({ level, clientName }, fn);
+    return this.newDb(fn, { level, clientName });
   }
 
-  async newDb<RESULT>(dbInfo: IDbInfo | undefined, fn: FunctionAsync<RESULT>): Promise<RESULT> {
+  async newDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfo?: IDbInfo): Promise<RESULT> {
     const current = this.bean.database.current;
     const level = dbInfo?.level ?? current?.level ?? 1; // 0 for outer users
     const clientName = this.prepareClientName(dbInfo?.clientName ?? current?.clientName ?? this.app.config.database.defaultClient); // dbInfo.clientName maybe 'default'
