@@ -55,9 +55,9 @@ export class VonaApplication extends KoaApplication {
     return this.options.name;
   }
 
-  createAnonymousContext(req?: any, reqInherit?: boolean, res?: any): VonaContext {
+  createAnonymousContext(req?: any, res?: any): VonaContext {
     let request;
-    if (req && reqInherit) {
+    if (req) {
       request = req;
     } else {
       const host = `localhost:${process.env.SERVER_LISTEN_PORT}`;
@@ -80,15 +80,6 @@ export class VonaApplication extends KoaApplication {
           remotePort: 7001,
         },
       };
-      if (req) {
-        for (const key in req) {
-          if (key === 'headers' || key === 'query' || key === 'socket') {
-            Object.assign(request[key], req[key]);
-          } else {
-            request[key] = req[key];
-          }
-        }
-      }
     }
     const response = res ?? new http.ServerResponse(request as any);
     return this.createContext(request as any, response) as unknown as VonaContext;

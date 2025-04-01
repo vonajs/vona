@@ -25,7 +25,7 @@ export class StartupListen extends BeanBase implements IStartupExecute {
     return (req, res) => {
       return this.app.bean.executor.newCtx(() => {
         return cast(this.app).handleRequest(this.app.ctx, fn);
-      }, { dbLevel: 0, innerAccess: false, req, reqInherit: true, res }); // not set instanceName
+      }, { dbLevel: 0, innerAccess: false, req, res }); // not set instanceName
     };
   }
 }

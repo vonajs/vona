@@ -118,7 +118,7 @@ export class BeanExecutor extends BeanBase {
     // run
     const isolate = !this.ctx || options.instanceName !== undefined;
     const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
-    const ctx = this.app.createAnonymousContext(options.req, options.reqInherit, options.res);
+    const ctx = this.app.createAnonymousContext(options.req, options.res);
     return await this.app.ctxStorage.run(ctx, async () => {
       // innerAccess
       ctx.innerAccess = options.innerAccess !== false;

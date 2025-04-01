@@ -21,7 +21,6 @@ export interface INewCtxOptions {
   extraData?: INewCtxExtraData | undefined | null;
   innerAccess?: boolean;
   req?: any;
-  reqInherit?: boolean;
   res?: any;
 }
 
