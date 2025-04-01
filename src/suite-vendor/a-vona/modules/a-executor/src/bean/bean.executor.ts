@@ -1,6 +1,6 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
-import type { INewCtxIsolateOptions, INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
+import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
 import { BeanBase, cast } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
