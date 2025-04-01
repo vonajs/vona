@@ -5,7 +5,6 @@ import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { ServiceDatabaseClient } from './databaseClient.ts';
-import { ServiceDbMeta } from './dbMeta.ts';
 
 @Service()
 export class ServiceDatabase extends BeanBase {
@@ -21,10 +20,13 @@ export class ServiceDatabase extends BeanBase {
     return dialect;
   }
 
-  createDbMeta(dbInfo: IDbInfo): ServiceDbMeta;
-  createDbMeta(dbInfo: undefined, client: ServiceDatabaseClient): ServiceDbMeta;
-  createDbMeta(dbInfo?: IDbInfo, client?: ServiceDatabaseClient): ServiceDbMeta {
-    return this.app.bean._newBean(ServiceDbMeta, dbInfo, client);
+  prepareDbInfo(dbInfo?: IDbInfo) {
+    const current = this.bean.database.current;
+    const level = dbInfo?.level ?? current?.level ?? 1; // 0 for outer users
+    const clientName = this.scope.service.database.prepareClientName(
+      dbInfo?.clientName ?? current?.clientName ?? this.app.config.database.defaultClient,
+    ); // dbInfo.clientName maybe 'default'
+    return { level, clientName };
   }
 
   prepareClientNameSelector(dbInfo?: IDbInfo) {

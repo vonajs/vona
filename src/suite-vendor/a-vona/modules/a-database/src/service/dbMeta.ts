@@ -24,9 +24,9 @@ export class ServiceDbMeta extends BeanBase {
       this._clientName = client.clientName;
       this._level = client.level;
     } else {
-      if (dbInfo?.level === undefined || dbInfo?.clientName === undefined) throw new Error('should specify the level & clientName');
-      this._level = dbInfo.level;
-      this._clientName = dbInfo.clientName;
+      const dbInfo2 = this.scope.service.database.prepareDbInfo(dbInfo);
+      this._level = dbInfo2.level;
+      this._clientName = dbInfo2.clientName;
     }
   }
 

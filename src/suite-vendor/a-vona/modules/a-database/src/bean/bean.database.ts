@@ -1,7 +1,9 @@
 import type { FunctionAsync } from 'vona';
+import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { IDbInfo } from '../types/database.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { ServiceDbMeta } from '../service/dbMeta.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -19,14 +21,17 @@ export class BeanDatabase extends BeanBase {
 
   async newDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfo?: IDbInfo): Promise<RESULT> {
     const current = this.bean.database.current;
-    const level = dbInfo?.level ?? current?.level ?? 1; // 0 for outer users
-    const clientName = this.scope.service.database.prepareClientName(
-      dbInfo?.clientName ?? current?.clientName ?? this.app.config.database.defaultClient,
-    ); // dbInfo.clientName maybe 'default'
-    if (level === current?.level && clientName === current?.clientName) {
+    const dbInfo2 = this.scope.service.database.prepareDbInfo(dbInfo);
+    if (dbInfo2.level === current?.level && dbInfo2.clientName === current?.clientName) {
       return fn();
     }
-    const db = this.scope.service.database.createDbMeta({ level, clientName });
+    const db = this.createDb(dbInfo2);
     return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
+  }
+
+  createDb(dbInfo: IDbInfo): ServiceDbMeta;
+  createDb(dbInfo: undefined, client: ServiceDatabaseClient): ServiceDbMeta;
+  createDb(dbInfo?: IDbInfo, client?: ServiceDatabaseClient): ServiceDbMeta {
+    return this.app.bean._newBean(ServiceDbMeta, dbInfo, client);
   }
 }

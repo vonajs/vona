@@ -7,15 +7,15 @@ describe('database.test.ts', () => {
   it('action:database:switchClient', async () => {
     await app.bean.executor.mockCtx(async () => {
       // current
-      assert.equal(app.ctx.dbMeta.currentClientName, app.config.database.defaultClient);
+      assert.equal(app.bean.database.current.clientName, app.config.database.defaultClient);
       // switch
       const clientNames = Object.keys(app.config.database.clients);
       const clientName2 = clientNames.find(item => item !== app.config.database.defaultClient);
-      await app.bean.database.switchClient(async () => {
-        assert.equal(app.ctx.dbMeta.currentClientName, clientName2);
+      await app.bean.database.newDb(async () => {
+        assert.equal(app.bean.database.current.clientName, clientName2);
       }, { clientName: clientName2 as any });
       // restore
-      assert.equal(app.ctx.dbMeta.currentClientName, app.config.database.defaultClient);
+      assert.equal(app.bean.database.current.clientName, app.config.database.defaultClient);
     });
   });
   it('action:model:clientName', async () => {
@@ -35,7 +35,7 @@ describe('database.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
       assert.equal(entityTest.title, 'clientNameDynamic:fail');
       await catchError(async () => {
-        const dbMeta = app.bean.database.createDbMeta('default');
+        const dbMeta = app.bean.database.createDb({ clientName: 'default' });
         await dbMeta.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(dbMeta);
           assert.equal(modelTest.options.clientName, 'default');
@@ -55,7 +55,7 @@ describe('database.test.ts', () => {
       const scopeTest = app.bean.scope('vona-test');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:success' });
       assert.equal(entityTest.title, 'clientNameDynamic:success');
-      const dbMeta = app.bean.database.createDbMeta('default');
+      const dbMeta = app.bean.database.createDb({ clientName: 'default' });
       await dbMeta.transaction.begin(async () => {
         const modelTest = scopeTest.model.test.newInstance(dbMeta);
         assert.equal(modelTest.options.clientName, 'default');
@@ -74,7 +74,7 @@ describe('database.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'transaction:compensate:fail' });
       assert.equal(entityTest.title, 'transaction:compensate:fail');
       await catchError(async () => {
-        const dbMeta = app.bean.database.createDbMeta('default');
+        const dbMeta = app.bean.database.createDb({ clientName: 'default' });
         await dbMeta.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(dbMeta);
           assert.equal(modelTest.options.clientName, 'default');

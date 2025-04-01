@@ -19,7 +19,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     if (isNil(clientNameSelector)) return;
     if (typeof clientNameSelector === 'string') {
       const serviceDatabase = this.$scope.database.service.database;
-      this[SymbolModelDbMeta] = serviceDatabase.createDbMeta(serviceDatabase.parseClientNameSelector(clientNameSelector));
+      this[SymbolModelDbMeta] = this.bean.database.createDb(serviceDatabase.parseClientNameSelector(clientNameSelector));
     } else {
       this[SymbolModelDbMeta] = clientNameSelector;
     }
