@@ -94,6 +94,7 @@ export class BeanExecutor extends BeanBase {
 
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
+    options.dbInfo = options.dbInfo === undefined ? true : options.dbInfo;
     options.instanceName = options.instanceName === undefined ? (this.ctx?.instanceName ?? '') : options.instanceName;
     return this.newCtx(fn, options);
   }

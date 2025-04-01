@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
-describe('database.test.ts', () => {
+describe.only('database.test.ts', () => {
   it('action:database:switchClient', async () => {
     await app.bean.executor.mockCtx(async () => {
       // current
