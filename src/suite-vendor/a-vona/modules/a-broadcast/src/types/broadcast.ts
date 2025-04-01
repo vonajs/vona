@@ -1,10 +1,8 @@
-import type { ILocalInfos, OmitNever } from 'vona';
+import type { OmitNever } from 'vona';
+import type { IGeneralInfoOptions } from 'vona-module-a-executor';
 import type { ServiceOnion } from 'vona-module-a-onion';
 
-export interface IBroadcastEmitOptions {
-  locale?: keyof ILocalInfos;
-  instanceName?: string | null | undefined;
-}
+export interface IBroadcastEmitOptions extends IGeneralInfoOptions {}
 
 export interface IBroadcastExecute<DATA = unknown> {
   execute(data?: DATA, isEmitter?: boolean): Promise<void>;

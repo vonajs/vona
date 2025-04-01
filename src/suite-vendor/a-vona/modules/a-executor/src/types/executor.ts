@@ -41,4 +41,5 @@ export interface IGeneralInfoOptions {
   dbInfo?: IDbInfo;
   locale?: keyof ILocalInfos;
   instanceName?: string | undefined | null;
+  extraData?: INewCtxExtraData;
 }

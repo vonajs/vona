@@ -282,38 +282,6 @@ export class ServiceQueue extends BeanBase {
 
   prepareJobInfo<DATA>(queueName: keyof IQueueRecord, data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
     options = this.$scope.executor.service.executor.prepareGeneralInfo(options);
-    if (this.ctx) {
-      options = deepExtend({ extraData: { request: { headers: {} } } }, options)!;
-      // extraData: headers
-      const headers = options.extraData!.request!.headers!;
-      for (const key in this.ctx.request.headers) {
-        if (key.startsWith('x-vona-data-') && !headers[key]) {
-          const value = this.ctx.request.headers[key];
-          if (value) {
-            headers[key] = value as string;
-          }
-        }
-      }
-      // for (const key of ['x-clientid', 'x-scene']) {
-      //   if (!headers[key]) {
-      //     const value =
-      //       key === 'x-clientid'
-      //         ? (<any>ctx.app.bean).util.getFrontClientId()
-      //         : (<any>ctx.app.bean).util.getFrontScene();
-      //     if (value) {
-      //       headers[key] = value;
-      //     }
-      //   }
-      // }
-      // for (const key of ['host', 'origin', 'referer', 'user-agent']) {
-      //   if (!headers[key]) {
-      //     const value = this.ctx.request.headers[key];
-      //     if (value) {
-      //       headers[key] = value;
-      //     }
-      //   }
-      // }
-    }
     // info
     return { queueName, data, options };
   }
