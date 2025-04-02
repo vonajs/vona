@@ -21,7 +21,7 @@ export interface INewCtxBaseOptions {
   instance?: boolean;
   transaction?: boolean;
   transactionOptions?: ITransactionOptions;
-  extraData?: INewCtxExtraData | undefined | null;
+  extraData?: INewCtxExtraData | undefined;
   innerAccess?: boolean;
   req?: any;
   res?: any;
@@ -35,7 +35,7 @@ export interface IPerformActionOptions {
   body?: any;
   onions?: PowerPartial<ConfigOnions>;
   authToken?: string;
-  extraData?: INewCtxExtraData | undefined | null;
+  extraData?: INewCtxExtraData | undefined;
 }
 
 export interface IGeneralInfoOptions {
