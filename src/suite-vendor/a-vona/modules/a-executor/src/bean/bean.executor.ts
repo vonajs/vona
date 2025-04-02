@@ -1,10 +1,9 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
-import { BeanBase, cast } from 'vona';
+import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
-import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -17,66 +16,7 @@ export class BeanExecutor extends BeanBase {
   ): Promise<any> {
     // url
     const url = this.app.util.combineApiPath(path as any, '', true, true);
-    return await this.performActionInner(method, url, options);
-  }
-
-  async performActionInner<
-    METHOD extends keyof IApiPathRecordMethodMap,
-  >(method: METHOD,
-    url: string,
-    options?: IPerformActionOptions,
-  ): Promise<any> {
-    // app
-    const app = this.app;
-    // new ctx
-    return await this.newCtx(async () => {
-      const ctx = this.ctx;
-      // default status code
-      ctx.res.statusCode = 404;
-      ctx.req.method = method.toUpperCase();
-      ctx.req.url = url;
-      // json
-      ctx.req.headers = Object.assign({}, ctx.req.headers);
-      ctx.req.headers.accept = 'application/json';
-      // headers
-      if (options?.headers) {
-        Object.assign(ctx.req.headers, options?.headers);
-      }
-      // authToken
-      if (options?.authToken) {
-        ctx.req.headers.authorization = `Bearer ${options?.authToken}`;
-      }
-      // query
-      if (options?.query !== undefined) {
-        cast(ctx.req).query = cast(ctx.request).query = options?.query;
-      }
-      // body
-      cast(ctx.req).body = ctx.request.body = options?.body ?? {}; // body should set {} if undefined/null
-      // onion
-      ctx.onionsDynamic = options?.onions;
-      // invoke middleware
-      await app[SymbolRouterMiddleware](ctx);
-      // check result
-      if (ctx.status === 200) {
-        if (!ctx.body || (ctx.body as any).code === undefined) {
-          // not check code, e.g. text/xml
-          return ctx.body;
-        }
-        if ((ctx.body as any).code === 0) {
-          return (ctx.body as any).data;
-        }
-        throw app.util.createError(ctx.body);
-      } else {
-        if (ctx.body && typeof ctx.body === 'object') {
-          throw app.util.createError(ctx.body);
-        } else {
-          throw app.util.createError({
-            code: ctx.status,
-            message: ctx.message,
-          });
-        }
-      }
-    }, { innerAccess: options?.innerAccess });
+    return await this.scope.service.executor.performActionInner(method, url, options);
   }
 
   runInBackground(fn: FunctionAsync<void>) {
