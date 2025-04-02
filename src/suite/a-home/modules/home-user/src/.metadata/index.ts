@@ -4,13 +4,8 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
-import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-
-/** summerCache: end */
-/** summerCache: begin */
-import type { SummerCacheRedisToken } from '../bean/summerCache.redisToken.ts';
-
 import type { config } from '../config/config.ts';
+
 /** entity: end */
 /** entity: begin */
 import type { EntityUser } from '../entity/user.ts';
@@ -61,9 +56,9 @@ declare module 'vona-module-home-user' {
     $columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** meta: end */
-/** summerCache: begin */
-export * from '../bean/summerCache.redisToken.ts';
+/** service: end */
+/** config: begin */
+export * from '../config/config.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -81,9 +76,8 @@ declare module 'vona-module-home-user' {
 export interface IModuleModel {
   user: ModelUser;
 }
-/** service: end */
-/** config: begin */
-export * from '../config/config.ts';
+/** entity: begin */
+export * from '../entity/user.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -98,29 +92,10 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
-/** entity: begin */
-export * from '../entity/user.ts';
-declare module 'vona-module-a-summer' {
-
-  export interface ISummerCacheRecord {
-    'home-user:redisToken': IDecoratorSummerCacheOptions;
-  }
-
-}
-declare module 'vona-module-home-user' {
-
-  export interface SummerCacheRedisToken {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
-export interface IModuleSummerCache {
-  redisToken: SummerCacheRedisToken;
-}
 /** entity: end */
 /** model: begin */
 export * from '../model/user.ts';
-/** summerCache: end */
+/** meta: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
 export * from '../service/authTokenAdapter.ts';
@@ -190,7 +165,6 @@ export interface ScopeModuleHomeUser {
   config: TypeModuleConfig<typeof config>;
   entity: IModuleEntity;
   model: IModuleModel;
-  summerCache: IModuleSummerCache;
   service: IModuleService;
 }
 
