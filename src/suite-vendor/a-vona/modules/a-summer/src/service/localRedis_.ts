@@ -9,18 +9,18 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    let value = await this.cacheRedis.get(key, { updateAgeOnGet: options?.updateAgeOnGet });
+    let value = await this.cacheRedis.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      await this.cacheRedis.set(value!, key, { db: options?.db });
+      await this.cacheRedis.set(value!, key, { ttl: options?.ttl, db: options?.db });
     }
     return value;
   }
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // mget
-    const values = await this.cacheRedis.mget(keys, { updateAgeOnGet: options?.updateAgeOnGet });
+    const values = await this.cacheRedis.mget(keys, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {
@@ -35,7 +35,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
-      await this.cacheRedis.mset(valuesMissing as any, keysMissing, { db: options?.db });
+      await this.cacheRedis.mset(valuesMissing as any, keysMissing, { ttl: options?.ttl, db: options?.db });
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
         values[indexesMissing[i]] = valueMissing;
@@ -46,11 +46,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   }
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.set(value, key, { db: options?.db });
+    await this.cacheRedis.set(value, key, { ttl: options?.ttl, db: options?.db });
   }
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.mset(values, keys, { db: options?.db });
+    await this.cacheRedis.mset(values, keys, { ttl: options?.ttl, db: options?.db });
   }
 
   async del(key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {

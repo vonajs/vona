@@ -12,11 +12,12 @@ export interface ICacheRedisSetOptions {
 }
 
 export interface ICacheMemGetOptions {
+  ttl?: number;
   updateAgeOnGet?: boolean;
 }
 
 export interface ICacheMemSetOptions {
   ttl?: number;
-  broadcastOnSet?: TypeBroadcastOnSet;
   db?: ServiceDb;
+  broadcastOnSet?: TypeBroadcastOnSet;
 }
