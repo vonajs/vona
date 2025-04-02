@@ -15,7 +15,7 @@ export class ControllerOnion extends BeanBase {
   @Aspect.aopMethod('a-database:transaction', { enable: true, meta: { mode: 'local' } })
   @Aspect.guardGlobal('a-user:passport', { public: true })
   index() {
-    return this.bean.database.current.inTransaction;
+    return this.ctx.db.inTransaction;
     // return 'Hello Vona';
   }
 

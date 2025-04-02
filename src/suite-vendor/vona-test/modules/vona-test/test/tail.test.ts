@@ -13,7 +13,7 @@ describe('tail.test.ts', () => {
   it('action:tail:transaction', async () => {
     await app.bean.executor.mockCtx(async () => {
       cast(app.ctx)._tail_test_als_caller = 1;
-      await app.bean.database.current.transaction.begin(async () => {
+      await app.ctx.db.transaction.begin(async () => {
         await app.bean.executor.performAction('post', '/vona/test/tail');
       });
     });

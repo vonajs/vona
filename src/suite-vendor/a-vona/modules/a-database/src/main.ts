@@ -3,6 +3,7 @@ import type { ConfigDatabase } from './types/config.ts';
 import type { IDatabaseClientRecord } from './types/database.ts';
 import { BeanSimple, cast, combineConfigDefault, deepExtend } from 'vona';
 import { ServiceTransactionConsistency‌ } from 'vona-module-a-database';
+import { __ThisModule__ } from './.metadata/this.ts';
 import { ExtendKnex } from './extend/index.ts';
 
 const SymbolTransactionConsistency = Symbol('SymbolTransactionConsistency');
@@ -15,13 +16,15 @@ export class Main extends BeanSimple implements IModuleMain {
   }
 
   async moduleLoaded() {
+    // scope
+    const scopeSelf = this.bean.scope(__ThisModule__);
     // ExtendKnex
     ExtendKnex(this.app);
     // db
     Object.defineProperty(this.app.context, 'db', {
       enumerable: false,
       get(this: VonaContext) {
-        return this.app.bean.database.current;
+        return scopeSelf.service.databaseAsyncLocalStorage.current;
       },
     });
     // transactionConsistency
