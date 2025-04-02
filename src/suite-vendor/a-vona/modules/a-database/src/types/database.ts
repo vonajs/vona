@@ -1,5 +1,6 @@
 import type { FunctionAny } from 'vona';
 import type { BeanModel } from '../bean/bean.model.ts';
+import type { ServiceDb } from '../service/db.ts';
 import type { ConfigDatabase } from './config.ts';
 
 export interface IDbInfo {
@@ -33,6 +34,7 @@ declare module 'vona' {
   }
 
   export interface VonaContext {
+    get db(): ServiceDb;
     commit(cb: FunctionAny): void;
     commitDone(): Promise<void>;
   }

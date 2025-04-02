@@ -17,6 +17,13 @@ export class Main extends BeanSimple implements IModuleMain {
   async moduleLoaded() {
     // ExtendKnex
     ExtendKnex(this.app);
+    // db
+    Object.defineProperty(this.app.context, 'db', {
+      enumerable: false,
+      get(this: VonaContext) {
+        return this.app.bean.database.current;
+      },
+    });
     // transactionConsistency
     Object.defineProperty(this.app.context, 'transactionConsistency', {
       enumerable: false,
