@@ -62,7 +62,7 @@ export class ServiceExecutor extends BeanBase {
           });
         }
       }
-    }, { innerAccess: options?.innerAccess });
+    }, { innerAccess: options?.innerAccess, extraData: options?.extraData });
   }
 
   prepareGeneralInfo(options?: IGeneralInfoOptions): IGeneralInfoOptions {

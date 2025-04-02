@@ -35,6 +35,7 @@ export interface IPerformActionOptions {
   body?: any;
   onions?: PowerPartial<ConfigOnions>;
   authToken?: string;
+  extraData?: INewCtxExtraData | undefined | null;
 }
 
 export interface IGeneralInfoOptions {
