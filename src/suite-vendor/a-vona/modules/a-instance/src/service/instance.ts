@@ -126,7 +126,7 @@ export class ServiceInstance extends BeanBase {
 
   async initInstance() {
     // instance
-    const instance = await this.bean.instance.get(this.ctx.instanceName);
+    const instance = this.ctx.instance ?? await this.bean.instance.get(this.ctx.instanceName);
     if (!instance) {
       this.$logger.warn(`instance not found: ${this.ctx.instanceName}`);
       return this.app.throw(423); // not this.app.fail(423)
