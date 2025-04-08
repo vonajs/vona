@@ -239,10 +239,6 @@ export class LocalTemplate {
   }
 
   async _loadSnippetInstance(snippetTemplatePath: string, fn: (snippet: ISnippet) => Promise<void>) {
-    if (snippetTemplatePath.endsWith('.cjs')) {
-      const instance = this.helper.requireDynamic(snippetTemplatePath);
-      return await fn(instance);
-    }
     return await this.helper.importDynamic(snippetTemplatePath, instance => {
       return fn(instance.default);
     });
