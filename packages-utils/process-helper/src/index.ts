@@ -78,20 +78,28 @@ export class ProcessHelper {
 
   async formatFile({ fileName, logPrefix }) {
     try {
-      await this.spawnBin({
-        cmd: 'eslint',
-        args: ['--fix', '--no-warn-ignored', fileName],
-        options: {
-          logPrefix,
-        },
-      });
+      await this._formatFileInner({ fileName, logPrefix });
     } catch (err: any) {
       if (err.code === 2) {
         // not throw error
         return;
+      } else if (err.code === 10001) {
+        // try again
+        await this._formatFileInner({ fileName, logPrefix });
+        return;
       }
       throw err;
     }
+  }
+
+  private async _formatFileInner({ fileName, logPrefix }) {
+    await this.spawnBin({
+      cmd: 'eslint',
+      args: ['--fix', '--no-warn-ignored', fileName],
+      options: {
+        logPrefix,
+      },
+    });
   }
 
   async spawnBin({ cmd, args, options }: {
