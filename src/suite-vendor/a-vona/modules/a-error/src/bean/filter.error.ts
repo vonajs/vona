@@ -123,7 +123,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
 
   private _getViewTemplate() {
     const fileTemplate =
-      this.scope.config.error.templatePath || this.app.util.getAssetPathPhysical(__ThisModule__, 'templates', 'onerror_page.mustache');
+      this.scope.config.error.templatePath || this.app.util.getAssetPathPhysical(__ThisModule__, 'templates', 'onerror_page.mustache')!;
     if (!__cacheViewTemplates[fileTemplate]) {
       __cacheViewTemplates[fileTemplate] = fs.readFileSync(fileTemplate, 'utf8');
     }
