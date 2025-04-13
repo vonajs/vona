@@ -9,6 +9,7 @@ import range from 'koa-range';
 import { BeanBase, compose } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
 import { LRU } from 'ylru';
+import { __ThisModule__ } from '../.metadata/this.ts';
 
 interface IStaticDirItem {
   prefix: string;
@@ -120,6 +121,13 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
 }
 
 function getFullPath(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): string | undefined {
+  const scopeSelf = ctx.app.bean.scope(__ThisModule__);
+  return scopeSelf.event.getFullPath.emitSync({ dir, filename, options }, ({ dir, filename, options }) => {
+    return _getFullPathInner(ctx, dir, filename, options);
+  });
+}
+
+function _getFullPathInner(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): string | undefined {
   // trim prefix
   if (options.apiStaticPrefix !== '/') {
     const filePrefix = path.normalize(options.apiStaticPrefix.replace(/^\//, ''));
