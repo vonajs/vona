@@ -27,7 +27,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
   maxFiles: number;
   maxAge?: number;
   alias: Record<string, string>;
-  getFullPath: Function;
+  getFullPath: typeof getFullPath;
 }
 
 @MiddlewareSystem<IMiddlewareSystemOptionsStatic>({
@@ -120,14 +120,19 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
   }
 }
 
-function getFullPath(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): string | undefined {
+async function getFullPath(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): Promise<string | undefined> {
   const scopeSelf = ctx.app.bean.scope(__ThisModule__);
-  return scopeSelf.event.getFullPath.emitSync({ dir, filename, options }, ({ dir, filename, options }) => {
+  return scopeSelf.event.getFullPath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
     return _getFullPathInner(ctx, dir, filename, options);
   });
 }
 
-function _getFullPathInner(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): string | undefined {
+async function _getFullPathInner(
+  ctx: VonaContext,
+  dir: string,
+  filename: string,
+  options: IMiddlewareSystemOptionsStatic,
+): Promise<string | undefined> {
   // trim prefix
   if (options.apiStaticPrefix !== '/') {
     const filePrefix = path.normalize(options.apiStaticPrefix.replace(/^\//, ''));
@@ -148,9 +153,6 @@ function _getFullPathInner(ctx: VonaContext, dir: string, filename: string, opti
   const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
   const module = ctx.app.meta.modules[moduleRelativeName];
   if (!module) return;
-  const staticPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static');
-  const fullPath = path.normalize(path.join(staticPath, parts.join(path.sep)));
-  // files that can be accessd should be under options.dir
-  if (fullPath.indexOf(staticPath) !== 0) return;
+  const fullPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static', parts.join(path.sep));
   return fullPath;
 }

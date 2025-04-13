@@ -1581,8 +1581,8 @@ importers:
   src/suite-vendor/a-vona/modules/a-static:
     dependencies:
       '@cabloy/koa-static-cache':
-        specifier: ^5.1.8
-        version: 5.1.8
+        specifier: ^6.0.0
+        version: 6.0.0
       koa-range:
         specifier: ^0.3.0
         version: 0.3.0
@@ -1961,8 +1961,8 @@ packages:
     resolution: {integrity: sha512-Y3IR1cRnOxOCDvMmNiym7XpXQ93iGDDPHx+Zj+NM+rg0fBaShfQLkg+hKPaZCEvg5N/LeCo4+Rj/i3FuJsIQaw==}
     engines: {node: '>=6.9.0'}
 
-  '@cabloy/koa-static-cache@5.1.8':
-    resolution: {integrity: sha512-qKYqaHk5A74ASLvXd7/WhicgHfOsOvVrZNEdGaynjnvcswWfhKYdxtwS6CJig7YsE4gaOCFT2MEXFn3RXdt+fA==}
+  '@cabloy/koa-static-cache@6.0.0':
+    resolution: {integrity: sha512-y2NbzRuSlBha8CUskxUTuVfSUXTH/LRj6W26YjW/8CHZJ8U2hyB2gdE+Djsx0gh2+UI2gkEhkIbKo7H7Y6TyzA==}
     engines: {node: '>= 7.6.0'}
 
   '@cabloy/word-utils@2.0.0':
@@ -5856,7 +5856,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@cabloy/koa-static-cache@5.1.8':
+  '@cabloy/koa-static-cache@6.0.0':
     dependencies:
       compressible: 2.0.18
       debug: 3.2.7

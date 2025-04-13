@@ -28,6 +28,7 @@ export interface IModuleAssetSceneRecord {
   cli: never;
   static: never;
   templates: never;
+  site: never;
 }
 
 const SymbolProdRootPath = Symbol('SymbolProdRootPath');
@@ -150,7 +151,8 @@ export class AppUtil extends BeanSimple {
   async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
     const rootPath = this.app.config.server.publicDir;
     // use instance.id, not instanceName
-    const dir = path.join(rootPath, cast(this.ctx).instance.id.toString(), subdir || '');
+    const dir = combineFilePathSafe(path.join(rootPath, cast(this.ctx).instance.id.toString()), subdir || '');
+    if (!dir) throw new Error('not valid path');
     if (ensure) {
       await fse.ensureDir(dir);
     }
@@ -172,11 +174,11 @@ export class AppUtil extends BeanSimple {
   ) {
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     if (this.app.meta.isProd) {
-      return path.join(this.prodRootPath, 'assets', scene, moduleName, assetPath || '');
+      return combineFilePathSafe(path.join(this.prodRootPath, 'assets', scene, moduleName), assetPath || '');
     } else {
       const module = this.app.meta.modules[moduleName];
       if (!module) throw new Error('module not found');
-      return path.join(module.root, scene, assetPath || '');
+      return combineFilePathSafe(path.join(module.root, scene), assetPath || '');
     }
   }
 
@@ -428,4 +430,11 @@ export function filterHeaders(headers: object | undefined, whitelist: string[]) 
     }
   }
   return res;
+}
+
+export function combineFilePathSafe(dir: string, file: string) {
+  const fullPath = path.normalize(path.join(dir, file));
+  // files that can be accessd should be under options.dir
+  if (fullPath.indexOf(dir) !== 0) return;
+  return fullPath;
 }
