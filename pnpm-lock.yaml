@@ -179,6 +179,9 @@ importers:
       vona-module-a-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-socket
+      vona-module-a-ssr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-ssr
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
@@ -883,6 +886,9 @@ importers:
       vona-module-a-socket:
         specifier: workspace:^
         version: link:modules/a-socket
+      vona-module-a-ssr:
+        specifier: workspace:^
+        version: link:modules/a-ssr
       vona-module-a-status:
         specifier: workspace:^
         version: link:modules/a-status
@@ -963,6 +969,15 @@ importers:
       ws:
         specifier: ^8.18.1
         version: 8.18.1
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/a-ssr:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
