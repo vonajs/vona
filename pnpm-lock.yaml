@@ -182,6 +182,9 @@ importers:
       vona-module-a-ssr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-ssr
+      vona-module-a-ssrhome:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-ssrhome
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
@@ -889,6 +892,9 @@ importers:
       vona-module-a-ssr:
         specifier: workspace:^
         version: link:modules/a-ssr
+      vona-module-a-ssrhome:
+        specifier: workspace:^
+        version: link:modules/a-ssrhome
       vona-module-a-status:
         specifier: workspace:^
         version: link:modules/a-status
@@ -978,6 +984,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-ssr:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/a-ssrhome:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

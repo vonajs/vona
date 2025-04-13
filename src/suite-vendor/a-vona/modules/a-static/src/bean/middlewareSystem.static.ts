@@ -16,7 +16,7 @@ interface IStaticDirItem {
 }
 
 export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSystemOptions {
-  prefix: string;
+  apiStaticPrefix: string;
   dir?: string;
   dirs: (string | IStaticDirItem)[];
   // support lazy load
@@ -31,7 +31,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
 
 @MiddlewareSystem<IMiddlewareSystemOptionsStatic>({
   dependencies: 'a-core:notfound',
-  prefix: '/api/static/',
+  apiStaticPrefix: '/api/static/',
   dirs: [],
   dynamic: true,
   preload: false,
@@ -43,6 +43,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
   // maxAge: undefined,
   // buffer: false,
   // dir: '',
+  // prefix: '/', // should be always '/', so as to support ssr site
 })
 export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSystemExecute {
   private _composer: any;
@@ -65,6 +66,7 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
         maxAge: this.app.meta.isProd ? 31536000 : 0,
         buffer: !!this.app.meta.isProd,
         dir: this.app.config.server.publicDir,
+        prefix: '/',
       },
       options,
     );
@@ -117,23 +119,30 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
   }
 }
 
-function getFullPath(ctx: VonaContext, dir, filename, _options) {
+function getFullPath(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): string | undefined {
+  // trim prefix
+  if (options.apiStaticPrefix !== '/') {
+    const filePrefix = path.normalize(options.apiStaticPrefix.replace(/^\//, ''));
+    if (filename.indexOf(filePrefix) !== 0) return;
+    filename = filename.slice(filePrefix.length);
+  }
+  // check
   const parts = filename.split(path.sep);
   const wordFirst = parts.shift();
   // public
   if (wordFirst === 'public') {
     const fullPath = path.normalize(path.join(dir, parts.join(path.sep)));
     // files that can be accessd should be under options.dir
-    if (fullPath.indexOf(dir) !== 0) return null;
+    if (fullPath.indexOf(dir) !== 0) return;
     return fullPath;
   }
   // static
   const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
   const module = ctx.app.meta.modules[moduleRelativeName];
-  if (!module) return null;
+  if (!module) return;
   const staticPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static');
   const fullPath = path.normalize(path.join(staticPath, parts.join(path.sep)));
   // files that can be accessd should be under options.dir
-  if (fullPath.indexOf(staticPath) !== 0) return null;
+  if (fullPath.indexOf(staticPath) !== 0) return;
   return fullPath;
 }
