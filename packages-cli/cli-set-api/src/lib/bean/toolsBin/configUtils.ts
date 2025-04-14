@@ -10,7 +10,7 @@ export function createConfigUtils(
   configMeta: VonaConfigMeta,
   configOptions: VonaBinConfigOptions,
 ): {
-    loadEnvs: () => { [name: string]: string };
+    loadEnvs: () => NodeJS.ProcessEnv;
     loadModulesMeta: () => ReturnType<typeof glob>;
   } {
   let __modulesMeta: Awaited<ReturnType<typeof glob>>;
@@ -21,7 +21,7 @@ export function createConfigUtils(
 
   //////////////////////////////
 
-  function __loadEnvs() {
+  function __loadEnvs(): NodeJS.ProcessEnv {
     const meta = getEnvMeta(configMeta);
     const envDir = path.join(configOptions.appDir, 'env');
     const envs = dotenv.loadEnvs(meta, envDir, '.env');
@@ -52,7 +52,7 @@ export function createConfigUtils(
       }
     }
     // ok
-    return res;
+    return res as NodeJS.ProcessEnv;
   }
 
   async function __loadModulesMeta() {

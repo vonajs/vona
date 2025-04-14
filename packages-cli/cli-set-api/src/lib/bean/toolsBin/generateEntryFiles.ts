@@ -11,7 +11,7 @@ export async function generateEntryFiles(
   configMeta: VonaConfigMeta,
   configOptions: VonaBinConfigOptions,
   modulesMeta: Awaited<ReturnType<typeof glob>>,
-  env: { [name: string]: string },
+  env: NodeJS.ProcessEnv,
 ) {
   // config
   await __generateConfig();

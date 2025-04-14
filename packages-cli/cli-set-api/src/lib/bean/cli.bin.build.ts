@@ -14,6 +14,7 @@ import terserImport from '@rollup/plugin-terser';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
+import { generateConfigDefine } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -51,9 +52,9 @@ export class CliBinBuild extends BeanCliBase {
       runtimeDir: '.vona',
       workers: argv.workers,
     };
-    const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
+    const { env, modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await rimraf(path.join(projectPath, 'dist'));
-    await this._rollup(projectPath);
+    await this._rollup(projectPath, env);
     await this._assets(projectPath, modulesMeta);
     await rimraf(path.join(projectPath, '.vona'));
   }
@@ -74,15 +75,13 @@ export class CliBinBuild extends BeanCliBase {
     }
   }
 
-  async _rollup(projectPath: string) {
+  async _rollup(projectPath: string, env: NodeJS.ProcessEnv) {
     const aliasEntries: aliasImport.Alias[] = [];
     for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious']) {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
-    const replaceValues = {};
-    for (const name of ['NODE_ENV', 'META_MODE', 'META_FLAVOR']) {
-      replaceValues[`process.env.${name}`] = JSON.stringify(process.env[name]);
-    }
+
+    const replaceValues = generateConfigDefine(env, ['NODE_ENV', 'META_MODE', 'META_FLAVOR']);
     const plugins = [
       alias({
         entries: aliasEntries,
