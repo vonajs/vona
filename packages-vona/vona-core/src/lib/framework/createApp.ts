@@ -35,11 +35,11 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
 
 async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
   // env
-  prepareEnv(env);
+  const env2 = prepareEnv(env);
   // appInfo
-  const appInfo = prepareAppInfo();
+  const appInfo = prepareAppInfo(env2);
   // config
-  const appConfig = await prepareConfig(appInfo, config);
+  const appConfig = await prepareConfig(appInfo, config, env2);
   // options
   const options: VonaApplicationOptions = {
     name: appInfo.name,
@@ -52,21 +52,21 @@ async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Boo
   return new VonaApplication(options);
 }
 
-function prepareAppInfo(): VonaAppInfo {
+function prepareAppInfo(env: NodeJS.ProcessEnv): VonaAppInfo {
   return {
-    name: process.env.APP_NAME!,
+    name: env.APP_NAME!,
     projectPath: process.cwd(),
     configMeta: {
-      flavor: process.env.META_FLAVOR,
-      mode: process.env.META_MODE,
+      flavor: env.META_FLAVOR,
+      mode: env.META_MODE,
     },
   };
 }
 
-async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[]) {
-  const config = await combineAppConfigDefault(appInfo);
+async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[], env: NodeJS.ProcessEnv) {
+  const config = await combineAppConfigDefault(appInfo, env);
   for (const configItem of configs) {
-    const res = await configItem(appInfo);
+    const res = await configItem(appInfo, env);
     if (res) {
       deepExtend(config, res);
     }

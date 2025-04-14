@@ -8,48 +8,48 @@ import fse from 'fs-extra';
 import { deepExtend } from '../utils/util.ts';
 import { combineLoggerDefault } from './loggerDefault.ts';
 
-export async function combineAppConfigDefault(appInfo: VonaAppInfo) {
-  let config: VonaConfigOptional = await configDefault(appInfo);
+export async function combineAppConfigDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv) {
+  let config: VonaConfigOptional = await configDefault(appInfo, env);
   const mode = appInfo.configMeta.mode;
   if (mode === 'local') {
-    config = deepExtend(config, configLocal());
+    config = deepExtend(config, configLocal(env));
   } else if (mode === 'prod') {
-    config = deepExtend(config, configProd());
+    config = deepExtend(config, configProd(env));
   } else if (mode === 'test') {
-    config = deepExtend(config, configTest());
+    config = deepExtend(config, configTest(env));
   }
   return config;
 }
 
-export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOptional> {
+export async function configDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv): Promise<VonaConfigOptional> {
   // server
-  const publicDir = process.env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo);
-  const loggerDir = process.env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo);
-  const subdomainOffset = Number.parseInt(process.env.SERVER_SUBDOMAINOFFSET || '1');
-  const workers = Number.parseInt(process.env.SERVER_WORKERS!);
+  const publicDir = env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo);
+  const loggerDir = env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo);
+  const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
+  const workers = Number.parseInt(env.SERVER_WORKERS!);
   // logger
   const logger = combineLoggerDefault(appInfo);
   return {
     meta: {
-      flavor: process.env.META_FLAVOR,
-      mode: process.env.META_MODE,
+      flavor: env.META_FLAVOR,
+      mode: env.META_MODE,
     },
     env: {
-      appName: process.env.APP_NAME,
-      appTitle: process.env.APP_TITLE,
-      appVersion: process.env.APP_VERSION,
+      appName: env.APP_NAME,
+      appTitle: env.APP_TITLE,
+      appVersion: env.APP_VERSION,
     },
     server: {
-      keys: (process.env.SERVER_KEYS || '').split(','),
-      globalPrefix: process.env.SERVER_GLOBALPREFIX || '/api',
+      keys: (env.SERVER_KEYS || '').split(','),
+      globalPrefix: env.SERVER_GLOBALPREFIX || '/api',
       publicDir,
       loggerDir,
       subdomainOffset,
       workers,
       listen: {
-        hostname: process.env.SERVER_LISTEN_HOSTNAME,
-        port: Number.parseInt(process.env.SERVER_LISTEN_PORT!),
-        disable: process.env.SERVER_LISTEN_DISABLE === 'true',
+        hostname: env.SERVER_LISTEN_HOSTNAME,
+        port: Number.parseInt(env.SERVER_LISTEN_PORT!),
+        disable: env.SERVER_LISTEN_DISABLE === 'true',
       },
       serve: {},
     },
@@ -68,7 +68,7 @@ export async function configDefault(appInfo: VonaAppInfo): Promise<VonaConfigOpt
   };
 }
 
-export function configLocal(): VonaConfigOptional {
+export function configLocal(_env: NodeJS.ProcessEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: true,
@@ -76,7 +76,7 @@ export function configLocal(): VonaConfigOptional {
   };
 }
 
-export function configProd(): VonaConfigOptional {
+export function configProd(_env: NodeJS.ProcessEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: true,
@@ -84,7 +84,7 @@ export function configProd(): VonaConfigOptional {
   };
 }
 
-export function configTest(): VonaConfigOptional {
+export function configTest(_env: NodeJS.ProcessEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: false,

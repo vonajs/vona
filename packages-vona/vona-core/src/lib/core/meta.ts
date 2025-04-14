@@ -56,7 +56,7 @@ export class AppMeta extends BeanSimple {
     this.appMonkey = this.app.options.AppMonkey;
 
     // env
-    this.prepareEnv();
+    this._prepareEnv();
 
     // logger
     this.logger = this.bean._newBean(AppLogger);
@@ -78,7 +78,7 @@ export class AppMeta extends BeanSimple {
     this.metadata = appMetadata;
   }
 
-  prepareEnv() {
+  private _prepareEnv() {
     const mode = this.app.config.meta.mode;
     this.isProd = mode === 'prod';
     this.isTest = mode === 'test';

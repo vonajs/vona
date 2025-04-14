@@ -405,12 +405,14 @@ export function pathToHref(fileName: string): string {
   // return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }
 
-export function prepareEnv(env: Partial<NodeJS.ProcessEnv>) {
-  for (const key of Object.keys(env)) {
-    if (process.env[key] === undefined && cast(env[key]) !== false) {
-      process.env[key] = env[key]?.toString();
+export function prepareEnv(env: Partial<NodeJS.ProcessEnv>): NodeJS.ProcessEnv {
+  const env2 = { ...env };
+  for (const key of Object.keys(env2)) {
+    if (process.env[key] !== undefined) {
+      env2[key] = process.env[key];
     }
   }
+  return env2 as NodeJS.ProcessEnv;
 }
 
 export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): string {
