@@ -23,8 +23,9 @@ export class VonaApplication extends KoaApplication {
   ctxStorage: VonaAsyncLocalStorage;
 
   constructor(options: VonaApplicationOptions) {
+    const env = options.env;
     const koaOptions: KoaApplicationOptions = {
-      env: process.env.NODE_ENV,
+      env: env.NODE_ENV,
       keys: options.config.server.keys,
       proxy: options.config.proxy.enabled,
       subdomainOffset: options.config.server.subdomainOffset,
@@ -37,7 +38,7 @@ export class VonaApplication extends KoaApplication {
     this.config = options.config;
     this.bean = BeanContainer.create(this, undefined);
     this.util = this.bean._newBean(AppUtil);
-    this.meta = this.bean._newBean(AppMeta);
+    this.meta = this.bean._newBean(AppMeta, env);
     // asyncLocalStorage
     this.ctxStorage = new VonaAsyncLocalStorage(this);
     // app.context

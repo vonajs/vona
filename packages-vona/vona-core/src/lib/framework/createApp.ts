@@ -47,6 +47,7 @@ async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Boo
     modulesMeta,
     locales,
     config: appConfig as unknown as VonaConfig,
+    env: env2,
     AppMonkey,
   };
   return new VonaApplication(options);

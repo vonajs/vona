@@ -17,6 +17,7 @@ import { appResource } from './resource.ts';
 const SymbolClosePromise = Symbol('SymbolClosePromise');
 
 export class AppMeta extends BeanSimple {
+  env: NodeJS.ProcessEnv;
   ctxCounter: CtxCounter;
   isProd: boolean;
   isTest: boolean;
@@ -48,15 +49,16 @@ export class AppMeta extends BeanSimple {
   appClose: boolean;
   appClosed: boolean;
 
-  protected __init__() {
+  protected __init__(env: NodeJS.ProcessEnv) {
+    // env
+    this.env = env;
+    this._prepareEnv();
+
     // ctxCounter
     this.ctxCounter = new CtxCounter();
 
     // appMonkey
     this.appMonkey = this.app.options.AppMonkey;
-
-    // env
-    this._prepareEnv();
 
     // logger
     this.logger = this.bean._newBean(AppLogger);
