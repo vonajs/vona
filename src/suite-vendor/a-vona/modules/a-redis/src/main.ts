@@ -16,10 +16,10 @@ export class Main extends BeanSimple implements IModuleMain {
 export async function configDefault(app: VonaApplication): Promise<PowerPartial<ConfigRedis>> {
   return {
     default: {
-      host: process.env.REDIS_DEFAULT_HOST,
-      port: Number.parseInt(process.env.REDIS_DEFAULT_PORT!),
-      password: process.env.REDIS_DEFAULT_PASSWORD,
-      db: Number.parseInt(process.env.REDIS_DEFAULT_DB!),
+      host: app.meta.env.REDIS_DEFAULT_HOST,
+      port: Number.parseInt(app.meta.env.REDIS_DEFAULT_PORT!),
+      password: app.meta.env.REDIS_DEFAULT_PASSWORD,
+      db: Number.parseInt(app.meta.env.REDIS_DEFAULT_DB!),
       maxRetriesPerRequest: null,
       enableReadyCheck: false,
     },

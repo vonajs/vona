@@ -61,7 +61,7 @@ export class VonaApplication extends KoaApplication {
     if (req) {
       request = req;
     } else {
-      const host = `localhost:${process.env.SERVER_LISTEN_PORT}`;
+      const host = `localhost:${this.meta.env.SERVER_LISTEN_PORT}`;
       request = {
         headers: {
           'host': host,

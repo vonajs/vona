@@ -114,7 +114,7 @@ export class AppMeta extends BeanSimple {
   }
 
   private async _closeInner() {
-    if (process.env.SERVER_WORKERS !== '1') {
+    if (this.app.meta.env.SERVER_WORKERS !== '1') {
       // disconnect
       cluster.worker?.disconnect();
     } else {
