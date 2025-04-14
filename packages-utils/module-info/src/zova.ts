@@ -1,4 +1,4 @@
-export type ZovaMetaFlavor = 'front' | 'admin' | keyof ZovaMetaFlavorExtend;
+export type ZovaMetaFlavor = 'front' | 'admin' | 'vona' | keyof ZovaMetaFlavorExtend;
 export type ZovaMetaMode = 'development' | 'production';
 export type ZovaMetaAppMode =
   | 'spa'
