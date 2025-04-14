@@ -5,6 +5,7 @@ import type { VonaContext } from '../../types/context/index.ts';
 import type { ApplicationError } from '../bean/resource/error/errorApplication.ts';
 import http from 'node:http';
 import KoaApplication from 'koa';
+import { cast } from '../../types/utils/cast.ts';
 import { BeanContainer } from '../bean/beanContainer.ts';
 import { AppUtil } from '../utils/util.ts';
 import { VonaAsyncLocalStorage } from './asyncLocalStorage.ts';
@@ -25,7 +26,7 @@ export class VonaApplication extends KoaApplication {
   constructor(options: VonaApplicationOptions) {
     const env = options.env;
     const koaOptions: KoaApplicationOptions = {
-      env: env.NODE_ENV,
+      env: cast(env).NODE_ENV,
       keys: options.config.server.keys,
       proxy: options.config.proxy.enabled,
       subdomainOffset: options.config.server.subdomainOffset,
