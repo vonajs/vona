@@ -3,6 +3,7 @@ import type { VonaConfig } from '../../types/config/config.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import type { VonaConfigEnv } from '../../types/utils/env.ts';
 import { sleep } from '@cabloy/utils';
+import { cast } from '../../types/utils/cast.ts';
 import { VonaApplication } from '../core/application.ts';
 import { combineAppConfigDefault } from '../core/config.ts';
 import { deepExtend, prepareEnv } from '../utils/util.ts';
@@ -54,13 +55,13 @@ async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Boo
   return new VonaApplication(options);
 }
 
-function prepareAppInfo(env: NodeJS.ProcessEnv): VonaAppInfo {
+function prepareAppInfo(env: VonaConfigEnv): VonaAppInfo {
   return {
     name: env.APP_NAME!,
     projectPath: process.cwd(),
     configMeta: {
-      flavor: env.META_FLAVOR,
-      mode: env.META_MODE,
+      flavor: cast(env).META_FLAVOR,
+      mode: cast(env).META_MODE,
     },
   };
 }

@@ -27,7 +27,7 @@ export interface VonaApplicationOptions {
   modulesMeta: VonaModulesMeta;
   locales: VonaLocaleOptionalMap;
   config: VonaConfig;
-  env: NodeJS.ProcessEnv;
+  env: VonaConfigEnv;
   AppMonkey?: AppMonkeyConstructable;
 }
 

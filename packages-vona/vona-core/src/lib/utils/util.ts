@@ -1,7 +1,7 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
 import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
-import type { TypeMonkeyName, VonaContext } from '../../types/index.ts';
+import type { TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -405,14 +405,14 @@ export function pathToHref(fileName: string): string {
   // return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }
 
-export function prepareEnv(env: Partial<NodeJS.ProcessEnv>): NodeJS.ProcessEnv {
+export function prepareEnv(env: Partial<NodeJS.ProcessEnv>): VonaConfigEnv {
   const env2 = { ...env };
   for (const key of Object.keys(env2)) {
     if (process.env[key] !== undefined) {
       env2[key] = process.env[key];
     }
   }
-  return env2 as NodeJS.ProcessEnv;
+  return env2 as unknown as VonaConfigEnv;
 }
 
 export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): string {
