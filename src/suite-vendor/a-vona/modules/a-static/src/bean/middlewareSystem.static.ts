@@ -120,7 +120,12 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
   }
 }
 
-async function getFullPath(ctx: VonaContext, dir: string, filename: string, options: IMiddlewareSystemOptionsStatic): Promise<string | undefined> {
+async function getFullPath(
+  ctx: VonaContext,
+  dir: string,
+  filename: string,
+  options: IMiddlewareSystemOptionsStatic,
+): Promise<string | true | undefined> {
   const scopeSelf = ctx.app.bean.scope(__ThisModule__);
   return scopeSelf.event.getFullPath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
     return _getFullPathInner(ctx, dir, filename, options);

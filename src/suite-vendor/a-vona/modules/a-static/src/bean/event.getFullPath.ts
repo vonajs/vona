@@ -7,7 +7,7 @@ export interface TypeEventGetFullPathData {
   options: IMiddlewareSystemOptionsStatic;
 }
 
-export type TypeEventGetFullPathResult = string | undefined;
+export type TypeEventGetFullPathResult = string | true | undefined;
 
 @Event()
 export class EventGetFullPath extends BeanEventBase<
