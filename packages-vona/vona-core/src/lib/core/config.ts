@@ -1,14 +1,16 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { VonaConfigOptional } from '../../types/config/config.ts';
+import type { VonaConfigEnv } from '../../types/utils/env.ts';
 import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 import type { VonaApplication } from './application.ts';
 import os from 'node:os';
 import path from 'node:path';
 import fse from 'fs-extra';
+import { cast } from '../../types/utils/cast.ts';
 import { deepExtend } from '../utils/util.ts';
 import { combineLoggerDefault } from './loggerDefault.ts';
 
-export async function combineAppConfigDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv) {
+export async function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
   let config: VonaConfigOptional = await configDefault(appInfo, env);
   const mode = appInfo.configMeta.mode;
   if (mode === 'local') {
@@ -21,7 +23,7 @@ export async function combineAppConfigDefault(appInfo: VonaAppInfo, env: NodeJS.
   return config;
 }
 
-export async function configDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv): Promise<VonaConfigOptional> {
+export async function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): Promise<VonaConfigOptional> {
   // server
   const publicDir = env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo);
   const loggerDir = env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo);
@@ -31,8 +33,8 @@ export async function configDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv
   const logger = combineLoggerDefault(appInfo);
   return {
     meta: {
-      flavor: env.META_FLAVOR,
-      mode: env.META_MODE,
+      flavor: cast(env).META_FLAVOR,
+      mode: cast(env).META_MODE,
     },
     server: {
       keys: (env.SERVER_KEYS || '').split(','),
@@ -63,7 +65,7 @@ export async function configDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv
   };
 }
 
-export function configLocal(_env: NodeJS.ProcessEnv): VonaConfigOptional {
+export function configLocal(_env: VonaConfigEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: true,
@@ -71,7 +73,7 @@ export function configLocal(_env: NodeJS.ProcessEnv): VonaConfigOptional {
   };
 }
 
-export function configProd(_env: NodeJS.ProcessEnv): VonaConfigOptional {
+export function configProd(_env: VonaConfigEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: true,
@@ -79,7 +81,7 @@ export function configProd(_env: NodeJS.ProcessEnv): VonaConfigOptional {
   };
 }
 
-export function configTest(_env: NodeJS.ProcessEnv): VonaConfigOptional {
+export function configTest(_env: VonaConfigEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: false,

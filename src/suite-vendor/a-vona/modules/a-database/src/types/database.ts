@@ -38,4 +38,21 @@ declare module 'vona' {
     commit(cb: FunctionAny): void;
     commitDone(): Promise<void>;
   }
+
+  export interface VonaConfigEnv {
+    // default
+    DATABASE_DEFAULT_CLIENT: string | undefined;
+    // pg
+    DATABASE_CLIENT_PG_HOST: string | undefined;
+    DATABASE_CLIENT_PG_PORT: string | undefined;
+    DATABASE_CLIENT_PG_USER: string | undefined;
+    DATABASE_CLIENT_PG_PASSWORD: string | undefined;
+    DATABASE_CLIENT_PG_DATABASE: string | undefined;
+    // mysql
+    DATABASE_CLIENT_MYSQL_HOST: string | undefined;
+    DATABASE_CLIENT_MYSQL_PORT: string | undefined;
+    DATABASE_CLIENT_MYSQL_USER: string | undefined;
+    DATABASE_CLIENT_MYSQL_PASSWORD: string | undefined;
+    DATABASE_CLIENT_MYSQL_DATABASE: string | undefined;
+  }
 }

@@ -1,6 +1,7 @@
 import type { TypeAppInfoConfig, VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
+import type { VonaConfigEnv } from '../../types/utils/env.ts';
 import { sleep } from '@cabloy/utils';
 import { VonaApplication } from '../core/application.ts';
 import { combineAppConfigDefault } from '../core/config.ts';
@@ -64,7 +65,7 @@ function prepareAppInfo(env: NodeJS.ProcessEnv): VonaAppInfo {
   };
 }
 
-async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[], env: NodeJS.ProcessEnv) {
+async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[], env: VonaConfigEnv) {
   const config = await combineAppConfigDefault(appInfo, env);
   for (const configItem of configs) {
     const res = await configItem(appInfo, env);

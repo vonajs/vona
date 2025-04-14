@@ -25,4 +25,11 @@ declare module 'vona' {
   export interface VonaConfig {
     redis: ConfigRedis;
   }
+
+  export interface VonaConfigEnv {
+    REDIS_DEFAULT_HOST: string | undefined;
+    REDIS_DEFAULT_PORT: string | undefined;
+    REDIS_DEFAULT_PASSWORD: string | undefined;
+    REDIS_DEFAULT_DB: string | undefined;
+  }
 }

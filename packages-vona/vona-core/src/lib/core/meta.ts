@@ -1,5 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
-import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/index.ts';
+import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, VonaConfigEnv } from '../../types/index.ts';
 import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
@@ -17,7 +17,7 @@ import { appResource } from './resource.ts';
 const SymbolClosePromise = Symbol('SymbolClosePromise');
 
 export class AppMeta extends BeanSimple {
-  env: NodeJS.ProcessEnv;
+  env: VonaConfigEnv;
   ctxCounter: CtxCounter;
   isProd: boolean;
   isTest: boolean;
@@ -49,7 +49,7 @@ export class AppMeta extends BeanSimple {
   appClose: boolean;
   appClosed: boolean;
 
-  protected __init__(env: NodeJS.ProcessEnv) {
+  protected __init__(env: VonaConfigEnv) {
     // env
     this.env = env;
     this._prepareEnv();

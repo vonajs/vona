@@ -3,6 +3,7 @@ import type { VonaConfig, VonaConfigOptional } from '../config/config.ts';
 import type { VonaLocaleOptionalMap } from '../config/locale.ts';
 import type { VonaModulesMeta } from '../interface/bootstrap.ts';
 import type { AppMonkeyConstructable } from '../interface/monkey.ts';
+import type { VonaConfigEnv } from '../utils/env.ts';
 
 export interface KoaApplicationOptions {
   env?: string | undefined;
@@ -30,4 +31,4 @@ export interface VonaApplicationOptions {
   AppMonkey?: AppMonkeyConstructable;
 }
 
-export type TypeAppInfoConfig = (appInfo: VonaAppInfo, env: NodeJS.ProcessEnv) => VonaConfigOptional | Promise<VonaConfigOptional>;
+export type TypeAppInfoConfig = (appInfo: VonaAppInfo, env: VonaConfigEnv) => VonaConfigOptional | Promise<VonaConfigOptional>;
