@@ -21,7 +21,7 @@ export function config(app: VonaApplication) {
     },
     default: {
       secret: undefined,
-      signOptions: { issuer: app.config.env.appName },
+      signOptions: { issuer: app.meta.env.APP_NAME },
     },
     clients: {
       access: {

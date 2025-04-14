@@ -1,11 +1,5 @@
 import type { VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 
-export interface VonaConfigEnv {
-  appName: string | undefined;
-  appTitle: string | undefined;
-  appVersion: string | undefined;
-}
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {

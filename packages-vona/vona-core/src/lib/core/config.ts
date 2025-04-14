@@ -34,11 +34,6 @@ export async function configDefault(appInfo: VonaAppInfo, env: NodeJS.ProcessEnv
       flavor: env.META_FLAVOR,
       mode: env.META_MODE,
     },
-    env: {
-      appName: env.APP_NAME,
-      appTitle: env.APP_TITLE,
-      appVersion: env.APP_VERSION,
-    },
     server: {
       keys: (env.SERVER_KEYS || '').split(','),
       globalPrefix: env.SERVER_GLOBALPREFIX || '/api',
