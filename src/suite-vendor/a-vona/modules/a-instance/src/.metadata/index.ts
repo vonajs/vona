@@ -7,21 +7,21 @@ import type { IMetaOptionsIndex } from 'vona-module-a-index';
 /** bean: end */
 /** bean: begin */
 import type { BeanInstance } from '../bean/bean.instance.ts';
+
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastReload } from '../bean/broadcast.reload.ts';
-
 import type { BroadcastResetCache } from '../bean/broadcast.resetCache.ts';
+
 /** meta: end */
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
-/** middlewareSystem: end */
+/** model: end */
 /** bean: begin */
 import type { IMiddlewareOptionsInstance } from '../bean/middleware.instance.ts';
-
 import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
-import type { config } from '../config/config.ts';
 
+import type { config } from '../config/config.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityInstance } from '../entity/instance.ts';
@@ -86,6 +86,49 @@ declare module 'vona-module-a-instance' {
   }
 }
 export * from '../bean/broadcast.resetCache.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IEntityRecord {
+    'a-instance:instance': IDecoratorEntityOptions;
+  }
+
+}
+declare module 'vona-module-a-instance' {
+
+}
+export interface IModuleEntity {
+  instance: EntityInstance;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-instance' {
+
+  export interface EntityInstance {
+    $column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
+    $columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** broadcast: end */
+/** meta: begin */
+export * from '../bean/meta.index.ts';
+declare module 'vona-module-a-database' {
+
+  export interface IModelRecord {
+    'a-instance:instance': IDecoratorModelOptions;
+  }
+
+}
+declare module 'vona-module-a-instance' {
+
+  export interface ModelInstance {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+}
+export interface IModuleModel {
+  instance: ModelInstance;
+}
+export * from '../bean/meta.redlock.ts';
 declare module 'vona' {
 
 }
@@ -101,10 +144,9 @@ declare module 'vona' {
     instance: BeanInstance;
   }
 }
-/** model: end */
-/** meta: begin */
-export * from '../bean/meta.index.ts';
-export * from '../bean/meta.redlock.ts';
+export * from '../bean/meta.version.ts';
+/** middleware: begin */
+export * from '../bean/middleware.instance.ts';
 declare module 'vona-module-a-broadcast' {
 
   export interface IBroadcastRecord {
@@ -129,55 +171,13 @@ export interface IModuleBroadcast {
   reload: BroadcastReload;
   resetCache: BroadcastResetCache;
 }
-export * from '../bean/meta.version.ts';
-declare module 'vona-module-a-database' {
-
-  export interface IEntityRecord {
-    'a-instance:instance': IDecoratorEntityOptions;
-  }
-
-}
-declare module 'vona-module-a-instance' {
-
-}
-export interface IModuleEntity {
-  instance: EntityInstance;
-}
-/** entity: end */
-/** entity: begin */
-declare module 'vona-module-a-instance' {
-
-  export interface EntityInstance {
-    $column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** middleware: begin */
-export * from '../bean/middleware.instance.ts';
-declare module 'vona-module-a-database' {
-
-  export interface IModelRecord {
-    'a-instance:instance': IDecoratorModelOptions;
-  }
-
-}
-declare module 'vona-module-a-instance' {
-
-  export interface ModelInstance {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-}
-export interface IModuleModel {
-  instance: ModelInstance;
-}
 /** middleware: end */
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.appReady.ts';
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
-/** broadcast: end */
+/** middlewareSystem: end */
 /** entity: begin */
 export * from '../entity/instance.ts';
 declare module 'vona' {
@@ -249,9 +249,9 @@ export interface ScopeModuleAInstance {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  broadcast: IModuleBroadcast;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   redlock: MetaRedlock;
   service: IModuleService;
 }

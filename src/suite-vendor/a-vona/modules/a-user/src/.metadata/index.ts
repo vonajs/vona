@@ -1,10 +1,9 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { EventOn } from 'vona-module-a-event';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-
 /** bean: end */
 /** bean: begin */
 import type { BeanAuthInner } from '../bean/bean.authInner.ts';
+
 import type { BeanPassport } from '../bean/bean.passport.ts';
 import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
@@ -13,8 +12,8 @@ import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous
 /** event: end */
 /** event: begin */
 import type { TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult } from '../bean/event.createUserAnonymous.ts';
-
 import type { EventSignin } from '../bean/event.signin.ts';
+
 import type { TypeEventSigninData, TypeEventSigninResult } from '../bean/event.signin.ts';
 import type { EventSignout } from '../bean/event.signout.ts';
 import type { TypeEventSignoutData, TypeEventSignoutResult } from '../bean/event.signout.ts';
@@ -26,10 +25,7 @@ import type { config } from '../config/config.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-
 import { Scope } from 'vona-module-a-bean';
-
-import 'vona';
 
 import 'vona';
 import 'vona';
@@ -149,48 +145,9 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
-/** controller: end */
+/** meta: end */
 /** config: begin */
 export * from '../config/config.ts';
-declare module 'vona' {
-
-  export interface IDtoRecord {
-    'a-user:jwtToken': never;
-  }
-
-}
-declare module 'vona-module-a-user' {
-
-}
-/** dto: end */
-/** controller: begin */
-export * from '../controller/passport.ts';
-declare module 'vona-module-a-web' {
-
-  export interface IControllerRecord {
-    'a-user:passport': IDecoratorControllerOptions;
-  }
-
-}
-declare module 'vona-module-a-user' {
-
-  export interface ControllerPassport {
-    /** @internal */
-    get scope(): ScopeModuleAUser;
-  }
-}
-/** controller: end */
-/** controller: begin */
-declare module 'vona-module-a-web' {
-  export interface IApiPathPostRecord {
-    '/user/passport/refreshAuthToken': '/user/passport/refreshAuthToken';
-    '/user/passport/createAuthTokenFromOauthCode': '/user/passport/createAuthTokenFromOauthCode';
-  }
-
-}
-/** meta: end */
-/** dto: begin */
-export * from '../dto/jwtToken.ts';
 
 @Scope()
 export class ScopeModuleAUser extends BeanScopeBase {}
