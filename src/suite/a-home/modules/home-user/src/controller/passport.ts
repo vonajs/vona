@@ -75,9 +75,10 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('createPassportFromOauthCode')
   @Passport.public()
-  @Api.body(v.object(DtoJwtToken))
-  async createPassportFromOauthCode(@Arg.body('code') code: string): Promise<DtoJwtToken> {
-    return await this.bean.passport.createAuthTokenFromOauthCode(code);
+  @Api.body(v.object(DtoPassport))
+  async createPassportFromOauthCode(@Arg.body('code') code: string): Promise<DtoPassport> {
+    const jwt = await this.bean.passport.createAuthTokenFromOauthCode(code);
+    return this._combineDtoPassport(jwt);
   }
 
   private _combineDtoPassport(jwt?: IJwtToken): DtoPassport {
