@@ -6,6 +6,12 @@
       "path": "modules/a-aspect/tsconfig.build.json"
     },
     {
+      "path": "modules/a-auth/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-authsimple/tsconfig.build.json"
+    },
+    {
       "path": "modules/a-bean/tsconfig.build.json"
     },
     {

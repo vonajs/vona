@@ -9,6 +9,7 @@
   "dependencies": {
     "vona-module-a-aspect": "workspace:^",
     "vona-module-a-auth": "workspace:^",
+    "vona-module-a-authsimple": "workspace:^",
     "vona-module-a-bean": "workspace:^",
     "vona-module-a-body": "workspace:^",
     "vona-module-a-broadcast": "workspace:^",

@@ -868,15 +868,9 @@ importers:
 
   src/suite-vendor/a-cabloy:
     dependencies:
-      vona-module-a-auth:
-        specifier: workspace:^
-        version: link:../a-vona/modules/a-auth
       vona-module-a-authgithub:
         specifier: workspace:^
         version: link:modules/a-authgithub
-      vona-module-a-authsimple:
-        specifier: workspace:^
-        version: link:../a-vona/modules/a-authsimple
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:modules/a-cabloy
@@ -1016,6 +1010,9 @@ importers:
       vona-module-a-auth:
         specifier: workspace:^
         version: link:modules/a-auth
+      vona-module-a-authsimple:
+        specifier: workspace:^
+        version: link:modules/a-authsimple
       vona-module-a-bean:
         specifier: workspace:^
         version: link:modules/a-bean
