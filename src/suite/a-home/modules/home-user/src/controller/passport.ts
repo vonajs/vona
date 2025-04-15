@@ -12,6 +12,11 @@ import { DtoPassport } from '../dto/passport.ts';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
+  @Web.post('logout')
+  async logout() {
+    return await this.bean.passport.signout();
+  }
+
   @Web.post('login')
   @Passport.public()
   @Api.body(v.object(DtoPassport))
