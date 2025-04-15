@@ -1,4 +1,7 @@
 import type { IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
+import type { IJwtToken } from 'vona-module-a-jwt';
+import type { EntityAuth } from '../entity/auth.ts';
+import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, Arg, v } from 'vona-module-a-openapi';
@@ -12,24 +15,26 @@ export class ControllerPassport extends BeanBase {
   @Web.get('login/:module/:providerName/:clientName?')
   @Passport.public()
   @Api.body(v.object(DtoPassport))
-  login<T extends keyof IAuthProviderRecord>(
-    @Arg.query('redirect') redirect: string,
+  async login<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
     @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
-  ) {
-    return this.bean.auth.authenticate(`${module}:${providerName}` as T, {
+    @Arg.query('redirect', v.optional()) redirect?: string,
+  ): Promise<DtoPassport> {
+    // jwt
+    const jwt = await this.bean.auth.authenticate(`${module}:${providerName}` as T, {
       state: { intention: 'login', redirect },
       clientName,
     });
+    return this._combinePassport(jwt);
   }
 
   @Web.get('associate/:module/:providerName/:clientName?')
   associate<T extends keyof IAuthProviderRecord>(
-    @Arg.query('redirect') redirect: string,
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
     @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+    @Arg.query('redirect', v.optional()) redirect?: string,
   ) {
     return this.bean.auth.authenticate(`${module}:${providerName}` as T, {
       state: { intention: 'associate', redirect },
@@ -39,10 +44,10 @@ export class ControllerPassport extends BeanBase {
 
   @Web.get('migrate/:module/:providerName/:clientName?')
   migrate<T extends keyof IAuthProviderRecord>(
-    @Arg.query('redirect') redirect: string,
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
     @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+    @Arg.query('redirect', v.optional()) redirect?: string,
   ) {
     return this.bean.auth.authenticate(`${module}:${providerName}` as T, {
       state: { intention: 'migrate', redirect },
@@ -57,10 +62,20 @@ export class ControllerPassport extends BeanBase {
     return await this.bean.passport.refreshAuthToken(refreshToken);
   }
 
-  @Web.post('createAuthTokenFromOauthCode')
+  @Web.post('createPassportFromOauthCode')
   @Passport.public()
   @Api.body(v.object(DtoJwtToken))
-  async createAuthTokenFromOauthCode(@Arg.body('code') code: string): Promise<DtoJwtToken> {
+  async createPassportFromOauthCode(@Arg.body('code') code: string): Promise<DtoJwtToken> {
     return await this.bean.passport.createAuthTokenFromOauthCode(code);
+  }
+
+  private _combinePassport(jwt?: IJwtToken): DtoPassport {
+    if (!jwt) this.app.throw(403);
+    const passport = this.bean.passport.getCurrent()!;
+    return {
+      user: passport.user as EntityUser,
+      auth: passport.auth as EntityAuth,
+      jwt: jwt as DtoJwtToken,
+    };
   }
 }

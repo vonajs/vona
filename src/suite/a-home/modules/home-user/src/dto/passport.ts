@@ -1,8 +1,8 @@
-import type { DtoJwtToken } from 'vona-module-a-jwt';
-import type { EntityAuth } from '../entity/auth.ts';
-import type { EntityUser } from '../entity/user.ts';
+import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
+import { EntityAuth } from '../entity/auth.ts';
+import { EntityUser } from '../entity/user.ts';
 
 @Dto()
 export class DtoPassport {
