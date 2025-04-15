@@ -4,12 +4,13 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import type { config } from '../config/config.ts';
 
 /** entity: end */
 /** entity: begin */
 import type { EntityUser } from '../entity/user.ts';
-
 /** model: end */
 /** model: begin */
 import type { ModelUser } from '../model/user.ts';
@@ -19,9 +20,10 @@ import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 import type { ServiceAuthTokenAdapter } from '../service/authTokenAdapter.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 import type { ServiceRedisToken } from '../service/redisToken.ts';
-import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 /** service: end */
 /** service: begin */
+
+import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 
 /** config: end */
 /** scope: begin */
@@ -56,7 +58,7 @@ declare module 'vona-module-home-user' {
     $columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** service: end */
+/** controller: end */
 /** config: begin */
 export * from '../config/config.ts';
 declare module 'vona-module-a-database' {
@@ -76,8 +78,9 @@ declare module 'vona-module-home-user' {
 export interface IModuleModel {
   user: ModelUser;
 }
-/** entity: begin */
-export * from '../entity/user.ts';
+/** service: end */
+/** controller: begin */
+export * from '../controller/passport.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -92,6 +95,8 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
+/** entity: begin */
+export * from '../entity/user.ts';
 /** entity: end */
 /** model: begin */
 export * from '../model/user.ts';
@@ -100,7 +105,6 @@ export * from '../model/user.ts';
 export * from '../service/authInnerAdapter.ts';
 export * from '../service/authTokenAdapter.ts';
 export * from '../service/passportAdapter.ts';
-export * from '../service/redisToken.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -153,6 +157,21 @@ declare module 'vona' {
     'home-user.service.passportAdapter': ServicePassportAdapter;
     'home-user.service.redisToken': ServiceRedisToken;
     'home-user.service.userInnerAdapter': ServiceUserInnerAdapter;
+  }
+}
+export * from '../service/redisToken.ts';
+declare module 'vona-module-a-web' {
+
+  export interface IControllerRecord {
+    'home-user:passport': IDecoratorControllerOptions;
+  }
+
+}
+declare module 'vona-module-home-user' {
+
+  export interface ControllerPassport {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
   }
 }
 export * from '../service/userInnerAdapter.ts';
