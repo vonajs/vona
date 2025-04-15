@@ -5,11 +5,13 @@ import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
+import { DtoPassport } from '../dto/passport.ts';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
   @Web.get('login/:module/:providerName/:clientName?')
   @Passport.public()
+  @Api.body(v.object(DtoPassport))
   login<T extends keyof IAuthProviderRecord>(
     @Arg.query('redirect') redirect: string,
     @Arg.param('module') module: string,
