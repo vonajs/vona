@@ -12,6 +12,7 @@ import type { config } from '../config/config.ts';
 import type { EntityAuth } from '../entity/auth.ts';
 
 import type { EntityUser } from '../entity/user.ts';
+
 /** model: end */
 /** model: begin */
 import type { ModelUser } from '../model/user.ts';
@@ -21,15 +22,16 @@ import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 import type { ServiceAuthTokenAdapter } from '../service/authTokenAdapter.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 import type { ServiceRedisToken } from '../service/redisToken.ts';
+import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 /** service: end */
 /** service: begin */
-
-import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+
 import { Scope } from 'vona-module-a-bean';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -89,8 +91,9 @@ declare module 'vona-module-home-user' {
 export interface IModuleModel {
   user: ModelUser;
 }
-/** entity: begin */
-export * from '../entity/auth.ts';
+/** meta: end */
+/** dto: begin */
+export * from '../dto/passport.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -105,11 +108,23 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
+/** entity: begin */
+export * from '../entity/auth.ts';
+declare module 'vona' {
+
+  export interface IDtoRecord {
+    'home-user:passport': never;
+  }
+
+}
+declare module 'vona-module-home-user' {
+
+}
 export * from '../entity/user.ts';
 /** entity: end */
 /** model: begin */
 export * from '../model/user.ts';
-/** meta: end */
+/** dto: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
 export * from '../service/authTokenAdapter.ts';
