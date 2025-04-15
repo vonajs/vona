@@ -76,13 +76,13 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-aspect
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-auth
+        version: link:src/suite-vendor/a-vona/modules/a-auth
       vona-module-a-authgithub:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-authgithub
       vona-module-a-authsimple:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-authsimple
+        version: link:src/suite-vendor/a-vona/modules/a-authsimple
       vona-module-a-b:
         specifier: workspace:^
         version: link:src/module/a-b
@@ -870,13 +870,13 @@ importers:
     dependencies:
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:modules/a-auth
+        version: link:../a-vona/modules/a-auth
       vona-module-a-authgithub:
         specifier: workspace:^
         version: link:modules/a-authgithub
       vona-module-a-authsimple:
         specifier: workspace:^
-        version: link:modules/a-authsimple
+        version: link:../a-vona/modules/a-authsimple
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:modules/a-cabloy
@@ -902,15 +902,6 @@ importers:
         specifier: workspace:^
         version: link:modules/cabloy-socket
 
-  src/suite-vendor/a-cabloy/modules/a-auth:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
   src/suite-vendor/a-cabloy/modules/a-authgithub:
     dependencies:
       passport-github:
@@ -919,19 +910,6 @@ importers:
       passport-oauth2:
         specifier: ^1.8.0
         version: 1.8.0
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/a-cabloy/modules/a-authsimple:
-    dependencies:
-      password-hash-salt:
-        specifier: workspace:^
-        version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1037,7 +1015,7 @@ importers:
         version: link:modules/a-aspect
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:../a-cabloy/modules/a-auth
+        version: link:modules/a-auth
       vona-module-a-bean:
         specifier: workspace:^
         version: link:modules/a-bean
@@ -1148,6 +1126,28 @@ importers:
         version: link:modules/a-worker
 
   src/suite-vendor/a-vona/modules/a-aspect:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-auth:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-authsimple:
+    dependencies:
+      password-hash-salt:
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
