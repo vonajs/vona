@@ -2,14 +2,15 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** model: end */
 /** meta: begin */
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { config } from '../config/config.ts';
 
 /** entity: end */
 /** entity: begin */
+import type { EntityAuth } from '../entity/auth.ts';
+
 import type { EntityUser } from '../entity/user.ts';
 /** model: end */
 /** model: begin */
@@ -36,9 +37,13 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/meta.version.ts';
+/** controller: end */
+/** config: begin */
+export * from '../config/config.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
+    'home-user:auth': IDecoratorEntityOptions;
     'home-user:user': IDecoratorEntityOptions;
   }
 
@@ -47,20 +52,26 @@ declare module 'vona-module-home-user' {
 
 }
 export interface IModuleEntity {
+  auth: EntityAuth;
   user: EntityUser;
 }
 /** entity: end */
 /** entity: begin */
 declare module 'vona-module-home-user' {
 
+  export interface EntityAuth {
+    $column: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(column: K) => K;
+    $columns: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
   export interface EntityUser {
     $column: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** controller: end */
-/** config: begin */
-export * from '../config/config.ts';
+/** service: end */
+/** controller: begin */
+export * from '../controller/passport.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -78,9 +89,8 @@ declare module 'vona-module-home-user' {
 export interface IModuleModel {
   user: ModelUser;
 }
-/** service: end */
-/** controller: begin */
-export * from '../controller/passport.ts';
+/** entity: begin */
+export * from '../entity/auth.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -95,7 +105,6 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
-/** entity: begin */
 export * from '../entity/user.ts';
 /** entity: end */
 /** model: begin */

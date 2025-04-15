@@ -3,6 +3,7 @@ export * from './config.ts';
 export * from './database.ts';
 export * from './dialect.ts';
 export * from './entityBase.ts';
+export * from './entityBaseEmpty.ts';
 export * from './entityBaseInner.ts';
 export * from './entityBaseSimple.ts';
 export * from './logger.ts';
