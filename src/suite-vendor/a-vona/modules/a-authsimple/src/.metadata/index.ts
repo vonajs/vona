@@ -28,6 +28,8 @@ import type { ServiceAuthSimple } from '../service/authSimple.ts';
 import { BeanScopeBase } from 'vona';
 
 import { Scope } from 'vona-module-a-bean';
+
+import 'vona';
 import 'vona';
 /** service: end */
 /** service: begin */
@@ -121,8 +123,9 @@ declare module 'vona' {
     authSimple: BeanAuthSimple;
   }
 }
-/** entity: begin */
-export * from '../entity/authSimple.ts';
+/** meta: end */
+/** dto: begin */
+export * from '../dto/authSimple.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -136,6 +139,18 @@ declare module 'vona-module-a-authsimple' {
     /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
+}
+/** entity: begin */
+export * from '../entity/authSimple.ts';
+declare module 'vona' {
+
+  export interface IDtoRecord {
+    'a-authsimple:authSimple': never;
+  }
+
+}
+declare module 'vona-module-a-authsimple' {
+
 }
 /** entity: end */
 /** model: begin */
@@ -162,7 +177,7 @@ declare module 'vona' {
     'a-authsimple.service.authSimple': ServiceAuthSimple;
   }
 }
-/** meta: end */
+/** dto: end */
 /** service: begin */
 export * from '../service/authSimple.ts';
 

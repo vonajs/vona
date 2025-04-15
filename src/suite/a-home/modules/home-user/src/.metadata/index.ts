@@ -2,15 +2,14 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** model: end */
 /** meta: begin */
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-import type { IDecoratorModelOptions } from 'vona-module-a-database';
 
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import type { config } from '../config/config.ts';
 
 /** entity: end */
 /** entity: begin */
-import type { EntityAuth } from '../entity/auth.ts';
-
 import type { EntityUser } from '../entity/user.ts';
 
 /** model: end */
@@ -39,13 +38,9 @@ import 'vona';
 import 'vona';
 
 export * from '../bean/meta.version.ts';
-/** controller: end */
-/** config: begin */
-export * from '../config/config.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'home-user:auth': IDecoratorEntityOptions;
     'home-user:user': IDecoratorEntityOptions;
   }
 
@@ -54,26 +49,20 @@ declare module 'vona-module-home-user' {
 
 }
 export interface IModuleEntity {
-  auth: EntityAuth;
   user: EntityUser;
 }
 /** entity: end */
 /** entity: begin */
 declare module 'vona-module-home-user' {
 
-  export interface EntityAuth {
-    $column: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
   export interface EntityUser {
     $column: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** service: end */
-/** controller: begin */
-export * from '../controller/passport.ts';
+/** controller: end */
+/** config: begin */
+export * from '../config/config.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -91,9 +80,9 @@ declare module 'vona-module-home-user' {
 export interface IModuleModel {
   user: ModelUser;
 }
-/** meta: end */
-/** dto: begin */
-export * from '../dto/passport.ts';
+/** service: end */
+/** controller: begin */
+export * from '../controller/passport.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
@@ -108,11 +97,14 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
-/** entity: begin */
-export * from '../entity/auth.ts';
+/** meta: end */
+/** dto: begin */
+export * from '../dto/auth.ts';
+export * from '../dto/passport.ts';
 declare module 'vona' {
 
   export interface IDtoRecord {
+    'home-user:auth': never;
     'home-user:passport': never;
   }
 
@@ -120,6 +112,7 @@ declare module 'vona' {
 declare module 'vona-module-home-user' {
 
 }
+/** entity: begin */
 export * from '../entity/user.ts';
 /** entity: end */
 /** model: begin */
@@ -201,6 +194,11 @@ declare module 'vona-module-home-user' {
 /** controller: end */
 /** controller: begin */
 declare module 'vona-module-a-web' {
+  export interface IApiPathPostRecord {
+    '/home/user/passport/login': '/home/user/passport/login';
+    '/home/user/passport/refreshAuthToken': '/home/user/passport/refreshAuthToken';
+    '/home/user/passport/createPassportFromOauthCode': '/home/user/passport/createPassportFromOauthCode';
+  }
   export interface IApiPathGetRecord {
     '/home/user/passport/login/:_string_/:_string_/:_string_': '/home/user/passport/login:_module_:_providerName_:_clientName?_';
     '/home/user/passport/login/:module/:providerName/:clientName?': `/home/user/passport/login/${string}/${string}/${string}`;
@@ -208,10 +206,6 @@ declare module 'vona-module-a-web' {
     '/home/user/passport/associate/:module/:providerName/:clientName?': `/home/user/passport/associate/${string}/${string}/${string}`;
     '/home/user/passport/migrate/:_string_/:_string_/:_string_': '/home/user/passport/migrate:_module_:_providerName_:_clientName?_';
     '/home/user/passport/migrate/:module/:providerName/:clientName?': `/home/user/passport/migrate/${string}/${string}/${string}`;
-  }
-  export interface IApiPathPostRecord {
-    '/home/user/passport/refreshAuthToken': '/home/user/passport/refreshAuthToken';
-    '/home/user/passport/createAuthTokenFromOauthCode': '/home/user/passport/createAuthTokenFromOauthCode';
   }
 
 }
