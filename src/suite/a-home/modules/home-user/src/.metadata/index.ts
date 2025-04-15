@@ -101,11 +101,13 @@ declare module 'vona-module-home-user' {
 /** dto: begin */
 export * from '../dto/auth.ts';
 export * from '../dto/passport.ts';
+export * from '../dto/passportJwt.ts';
 declare module 'vona' {
 
   export interface IDtoRecord {
     'home-user:auth': never;
     'home-user:passport': never;
+    'home-user:passportJwt': never;
   }
 
 }
@@ -195,6 +197,7 @@ declare module 'vona-module-home-user' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathPostRecord {
+    '/home/user/passport/logout': '/home/user/passport/logout';
     '/home/user/passport/login': '/home/user/passport/login';
     '/home/user/passport/refreshAuthToken': '/home/user/passport/refreshAuthToken';
     '/home/user/passport/createPassportFromOauthCode': '/home/user/passport/createPassportFromOauthCode';
