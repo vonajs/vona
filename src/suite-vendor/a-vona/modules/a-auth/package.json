@@ -5,7 +5,9 @@
   "title": "a-auth",
   "vonaModule": {
     "fileVersion": 1,
-    "dependencies": {},
+    "dependencies": {
+      "a-database": "5.0.0"
+    },
     "onions": {
       "authProvider": {
         "optionsGlobalInterfaceName": "IDecoratorAuthProviderOptions",
