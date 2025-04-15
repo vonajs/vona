@@ -8,10 +8,17 @@ import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
+import { DtoPassport } from '../dto/passport.ts';
 import { DtoPassportJwt } from '../dto/passportJwt.ts';
 
 @Controller('passport')
 export class ControllerPassport extends BeanBase {
+  @Web.get('current')
+  @Api.body(v.optional(), v.object(DtoPassport))
+  current(): DtoPassport | undefined {
+    return this._combineDtoPassport();
+  }
+
   @Web.post('logout')
   async logout() {
     return await this.bean.passport.signout();
@@ -22,7 +29,7 @@ export class ControllerPassport extends BeanBase {
   @Api.body(v.object(DtoPassportJwt))
   async loginSimple(@Arg.body() clientOptions: DtoAuthSimple): Promise<DtoPassportJwt> {
     const jwt = await this.bean.authSimple.authenticate(clientOptions, 'default');
-    return this._combineDtoPassport(jwt);
+    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('login/:module/:providerName/:clientName?')
@@ -38,7 +45,7 @@ export class ControllerPassport extends BeanBase {
       state: { intention: 'login', redirect },
       clientName,
     });
-    return this._combineDtoPassport(jwt);
+    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('associate/:module/:providerName/:clientName?')
@@ -53,7 +60,7 @@ export class ControllerPassport extends BeanBase {
       state: { intention: 'associate', redirect },
       clientName,
     });
-    return this._combineDtoPassport(jwt);
+    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('migrate/:module/:providerName/:clientName?')
@@ -68,7 +75,7 @@ export class ControllerPassport extends BeanBase {
       state: { intention: 'migrate', redirect },
       clientName,
     });
-    return this._combineDtoPassport(jwt);
+    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.post('refreshAuthToken')
@@ -83,18 +90,23 @@ export class ControllerPassport extends BeanBase {
   @Api.body(v.object(DtoPassportJwt))
   async createPassportJwtFromOauthCode(@Arg.body('code') code: string): Promise<DtoPassportJwt> {
     const jwt = await this.bean.passport.createAuthTokenFromOauthCode(code);
-    return this._combineDtoPassport(jwt);
+    return this._combineDtoPassportJwt(jwt);
   }
 
-  private _combineDtoPassport(jwt?: IJwtToken): DtoPassportJwt {
+  private _combineDtoPassportJwt(jwt?: IJwtToken): DtoPassportJwt {
     if (!jwt) this.app.throw(403);
-    const passport = this.bean.passport.getCurrent()!;
     return {
-      passport: {
-        user: passport.user as EntityUser,
-        auth: { id: passport.auth!.id },
-      },
+      passport: this._combineDtoPassport()!,
       jwt: jwt as DtoJwtToken,
+    };
+  }
+
+  private _combineDtoPassport(): DtoPassport | undefined {
+    const passport = this.bean.passport.getCurrent();
+    if (!passport) return;
+    return {
+      user: passport.user as EntityUser,
+      auth: { id: passport.auth!.id },
     };
   }
 }
