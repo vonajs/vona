@@ -1,6 +1,7 @@
 import type { IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
 import { BeanBase } from 'vona';
-import { Arg } from 'vona-module-a-openapi';
+import { DtoJwtToken } from 'vona-module-a-jwt';
+import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -45,5 +46,19 @@ export class ControllerPassport extends BeanBase {
       state: { intention: 'migrate', redirect },
       clientName,
     });
+  }
+
+  @Web.post('refreshAuthToken')
+  @Passport.public()
+  @Api.body(v.object(DtoJwtToken))
+  async refreshAuthToken(@Arg.body('refreshToken') refreshToken: string): Promise<DtoJwtToken> {
+    return await this.bean.passport.refreshAuthToken(refreshToken);
+  }
+
+  @Web.post('createAuthTokenFromOauthCode')
+  @Passport.public()
+  @Api.body(v.object(DtoJwtToken))
+  async createAuthTokenFromOauthCode(@Arg.body('code') code: string): Promise<DtoJwtToken> {
+    return await this.bean.passport.createAuthTokenFromOauthCode(code);
   }
 }
