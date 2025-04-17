@@ -12,7 +12,7 @@ export function UseGuardGlobal<T extends keyof IGuardRecordGlobal>(
 ): ClassDecorator & MethodDecorator {
   return UseOnionGlobalBase('guard', guardName, options, (target, prop, descriptor) => {
     if (guardName === 'a-user:passport' && !isNil(options?.public)) {
-      setPublic(target, prop!, options?.public);
+      setPublic(target, prop, descriptor, options?.public);
     }
     if (!fn) return descriptor;
     return fn(target, prop, descriptor);

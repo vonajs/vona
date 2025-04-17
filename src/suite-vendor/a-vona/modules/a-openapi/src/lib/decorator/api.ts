@@ -1,14 +1,18 @@
 import type { MetadataKey } from 'vona';
-import type { IOpenApiOptions, TypeResponseContentType } from '../../types/api.ts';
+import type { IOpenApiHeader, IOpenApiOptions, TypeResponseContentType } from '../../types/api.ts';
 import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
 import { appMetadata } from 'vona';
 import { SymbolOpenApiOptions } from '../../types/api.ts';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 import { Field } from './field.ts';
 
-export function setPublic(target: object, prop: MetadataKey, value: boolean) {
+export function setPublic(target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor, value?: boolean) {
   const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
   options.public = value;
+  if (options.public) {
+    const fun = header({ name: 'Authorization' });
+    fun(target, prop!, descriptor!);
+  }
 }
 
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
@@ -60,4 +64,22 @@ function tags(tags: string[]): ClassDecorator & MethodDecorator {
   } as any;
 }
 
-export const Api = { field: Field, contentType, body, bodyCustom, exclude, tags };
+function header(header: IOpenApiHeader): ClassDecorator & MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    if (!options.headers) options.headers = [];
+    options.headers.push(header);
+    return descriptor;
+  } as any;
+}
+
+function headers(headers: IOpenApiHeader[]): ClassDecorator & MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    if (!options.headers) options.headers = [];
+    options.headers.push(...headers);
+    return descriptor;
+  } as any;
+}
+
+export const Api = { field: Field, contentType, body, bodyCustom, exclude, tags, header, headers };
