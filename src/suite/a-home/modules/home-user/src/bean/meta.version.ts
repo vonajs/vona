@@ -22,7 +22,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
       // admin
       await this.scope.model.user.insert({
         name: 'admin',
-        avatar: undefined,
+        avatar: ':emoji:flower',
         locale: undefined,
       });
     }
