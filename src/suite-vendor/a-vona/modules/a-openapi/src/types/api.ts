@@ -6,6 +6,11 @@ import type { SchemaLikeCreate } from './decorator.ts';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 
+export interface IOpenApiHeader {
+  name: string;
+  description?: string;
+}
+
 export interface IOpenApiOptions {
   public?: boolean;
   description?: string;
@@ -16,6 +21,7 @@ export interface IOpenApiOptions {
   exclude?: boolean;
   tags?: string[];
   operationId?: string;
+  headers?: IOpenApiHeader[];
 }
 
 export type TypeOpenApiVersion = '30' | '31';
