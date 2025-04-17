@@ -8,10 +8,11 @@ import type {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
 } from 'vona-module-a-web';
-import type { IOpenAPIObject, IOpenApiOptions } from '../types/api.ts';
+import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions } from '../types/api.ts';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import * as ModuleInfo from '@cabloy/module-info';
+import { isEmptyObject } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import {
   appMetadata,
@@ -212,18 +213,19 @@ export class ServiceOpenapi extends BeanBase {
       security,
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
-      request: this._collectRequest(controller, actionKey),
+      request: this._collectRequest(controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions),
       responses: this._collectResponses(controller, actionKey, actionOpenApiOptions),
     });
   }
 
-  private _collectRequest(controller: Constructable, actionKey: string) {
+  private _collectRequest(
+    controller: Constructable,
+    actionKey: string,
+    actionOpenApiOptions: IOpenApiOptions | undefined,
+    controllerOpenApiOptions: IOpenApiOptions | undefined,
+  ) {
     // meta
-    const argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
-      SymbolRouteHandlersArgumentsMeta,
-      controller.prototype,
-      actionKey,
-    );
+    const argsMeta = this._prepareArgsMeta(controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions);
     if (!argsMeta) return;
     // args
     const argsMapWithField: any = {};
@@ -268,8 +270,12 @@ export class ServiceOpenapi extends BeanBase {
     } else {
       for (const argumentType of __ArgumentTypes) {
         let schema: z.ZodSchema | undefined = argsMapIsolate[argumentType];
-        if (!schema && argsMapWithField[argumentType]) {
-          schema = z.object(argsMapWithField[argumentType]);
+        if (argsMapWithField[argumentType]) {
+          if (!schema) {
+            schema = z.object(argsMapWithField[argumentType]);
+          } else {
+            schema = (schema as any).extend(argsMapWithField[argumentType]);
+          }
         }
         if (!schema) continue;
         // record
@@ -336,5 +342,45 @@ export class ServiceOpenapi extends BeanBase {
     if (actionOpenApiOptions?.bodySchemaWrapper === false) return bodySchema;
     const wrapper = actionOpenApiOptions?.bodySchemaWrapper ?? bodySchemaWrapperDefault;
     return wrapper(bodySchema);
+  }
+
+  private _prepareArgsMeta(
+    controller: Constructable,
+    actionKey: string,
+    actionOpenApiOptions: IOpenApiOptions | undefined,
+    controllerOpenApiOptions: IOpenApiOptions | undefined,
+  ) {
+    // meta
+    let argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
+      SymbolRouteHandlersArgumentsMeta,
+      controller.prototype,
+      actionKey,
+    );
+    // headers
+    const objHeaders = Object.assign(
+      {},
+      this._combineArgHeaders(controllerOpenApiOptions?.headers),
+      this._combineArgHeaders(actionOpenApiOptions?.headers),
+    );
+    if (isEmptyObject(objHeaders)) return argsMeta;
+    // merge
+    if (!argsMeta) argsMeta = [];
+    let argHeaders = argsMeta.find(item => item.type === 'headers' && !item.field);
+    if (!argHeaders) {
+      argHeaders = { type: 'headers', field: undefined, schema: z.object(objHeaders) } as any;
+      argsMeta.push(argHeaders!);
+    } else {
+      argHeaders.schema = (argHeaders.schema as any).extend(objHeaders);
+    }
+    return argsMeta;
+  }
+
+  private _combineArgHeaders(headers?: IOpenApiHeader[] | undefined) {
+    if (!headers) return;
+    const objHeaders = {};
+    for (const header of headers) {
+      objHeaders[header.name] = z.string().openapi({ description: header.description });
+    }
+    return objHeaders;
   }
 }
