@@ -375,6 +375,7 @@ export class ServiceOpenapi extends BeanBase {
       argHeaders = { type: 'headers', field: undefined, schema: z.object(objHeaders) } as any;
       argsMeta.push(argHeaders!);
     } else {
+      if (!(argHeaders.schema as any).extend) throw new Error(`headers schema is not valid: ${actionKey}`);
       argHeaders.schema = (argHeaders.schema as any).extend(objHeaders);
     }
     return argsMeta;
