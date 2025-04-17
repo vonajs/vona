@@ -49,7 +49,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "bullmq": "^5.34.3"
+    "bullmq": "^5.49.1"
   },
   "clean-package": {
     "indent": 2,
