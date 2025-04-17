@@ -358,10 +358,15 @@ export class ServiceOpenapi extends BeanBase {
     );
     // headers
     const objHeaders = Object.assign(
-      {},
+      {} as any,
       this._combineArgHeaders(controllerOpenApiOptions?.headers),
       this._combineArgHeaders(actionOpenApiOptions?.headers),
     );
+    // public
+    const _public: boolean | undefined = actionOpenApiOptions?.public ?? controllerOpenApiOptions?.public;
+    if (!_public && !objHeaders.Authorization) {
+      objHeaders.Authorization = z.string();
+    }
     if (isEmptyObject(objHeaders)) return argsMeta;
     // merge
     if (!argsMeta) argsMeta = [];

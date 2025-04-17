@@ -6,13 +6,9 @@ import { SymbolOpenApiOptions } from '../../types/api.ts';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 import { Field } from './field.ts';
 
-export function setPublic(target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor, value?: boolean) {
+export function setPublic(target: object, prop?: MetadataKey, _descriptor?: PropertyDescriptor, value?: boolean) {
   const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
   options.public = value;
-  if (options.public) {
-    const fun = header({ name: 'Authorization' });
-    fun(target, prop!, descriptor!);
-  }
 }
 
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
