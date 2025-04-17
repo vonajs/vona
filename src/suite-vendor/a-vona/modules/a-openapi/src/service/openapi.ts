@@ -365,7 +365,7 @@ export class ServiceOpenapi extends BeanBase {
     // public
     const _public: boolean | undefined = actionOpenApiOptions?.public ?? controllerOpenApiOptions?.public;
     if (!_public && !objHeaders.Authorization) {
-      objHeaders.Authorization = z.string();
+      objHeaders.Authorization = z.string().optional();
     }
     if (isEmptyObject(objHeaders)) return argsMeta;
     // merge
