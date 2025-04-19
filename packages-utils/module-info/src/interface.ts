@@ -27,6 +27,7 @@ export interface IModuleCapabilities {
 
 export interface IModuleCapabilitiesZova extends IModuleCapabilities {
   meta?: ZovaOnionOptionsMeta;
+  server?: boolean;
 }
 
 export interface IModuleCapabilitiesVona extends IModuleCapabilities {
