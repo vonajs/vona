@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
+import { cast } from '../../types/utils/cast.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { deepExtend } from '../utils/util.ts';
 
@@ -115,7 +116,7 @@ export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: 
 }
 
 export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: any) => {
-  if (einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) {
+  if ((einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) || einfo.name === 'AxiosError') {
     const info = Object.assign({}, einfo, {
       level: einfo.level,
       [LEVEL]: einfo[LEVEL] || einfo.level,
@@ -124,6 +125,8 @@ export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: a
     });
     if (stack) info.stack = einfo.stack;
     if (cause) info.cause = einfo.cause;
+    info.message = `${info.message}: ${cast(info.config).url}`;
+    info[MESSAGE] = `${info[MESSAGE]}: ${cast(info.config).url}`;
     delete info.config;
     delete info.request;
     delete info.response;
