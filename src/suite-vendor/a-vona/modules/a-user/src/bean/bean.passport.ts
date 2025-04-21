@@ -3,6 +3,7 @@ import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts'
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IUserBase } from '../types/user.ts';
+import { catchError } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $getAuthIdSystem } from '../lib/auth.ts';
@@ -117,7 +118,15 @@ export class BeanPassport extends BeanBase {
 
   public async checkAuthToken(accessToken?: string, clientName?: keyof IJwtClientRecord) {
     clientName = clientName ?? 'access';
-    const payloadData = await this.bean.jwt.get(clientName).verify(accessToken);
+    const [payloadData, err] = await catchError(() => {
+      return this.bean.jwt.get(clientName).verify(accessToken);
+    });
+    if (err) {
+      if (['access', 'refresh'].includes(clientName)) {
+        err.code = 401;
+      }
+      throw err;
+    }
     if (!payloadData) return; // no jwt token
     const verified = await this.authTokenAdapter.verify(payloadData);
     if (!verified) return this.app.throw(401);
