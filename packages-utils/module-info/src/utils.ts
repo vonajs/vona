@@ -64,7 +64,8 @@ export function parseInfoPro(
 export function parseName(moduleUrl): string | undefined {
   const moduleName = _parseNameInner(moduleUrl);
   if (!moduleName) return;
-  if (moduleName.split('-').length !== 2) return;
+  const [a, b] = moduleName.split('-');
+  if (!a || !b) return;
   return moduleName;
 }
 
