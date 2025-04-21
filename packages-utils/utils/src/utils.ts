@@ -96,3 +96,23 @@ export function evaluateSimple(expression: string) {
 export function getRandomInt(size: number, start: number = 0) {
   return Math.floor(Math.random() * size) + start;
 }
+
+export function combineQueries(url?: string, queries?: Record<string, any>): string | undefined {
+  //
+  if (!queries) return url;
+  //
+  const parts: string[] = [];
+  for (const key of Object.keys(queries)) {
+    parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(queries[key])}`);
+  }
+  if (parts.length === 0) return url;
+  //
+  const str = parts.join('&');
+  //
+  if (!url) return `?${str}`;
+  //
+  const pos = url.indexOf('?');
+  if (pos === -1) return `${url}?${str}`;
+  if (pos === url.length - 1) return `${url}${str}`;
+  return `${url}&${str}`;
+}
