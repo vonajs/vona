@@ -62,6 +62,13 @@ export function parseInfoPro(
 // ./aa-hello/
 // ./vona-module-aa-hello/
 export function parseName(moduleUrl): string | undefined {
+  const moduleName = _parseNameInner(moduleUrl);
+  if (!moduleName) return;
+  if (moduleName.split('-').length !== 2) return;
+  return moduleName;
+}
+
+function _parseNameInner(moduleUrl): string | undefined {
   if (!moduleUrl) return;
   if (moduleUrl.indexOf('/api/static/') === 0) {
     moduleUrl = `/api/${moduleUrl.substring('/api/static/'.length)}`;
