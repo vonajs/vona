@@ -1,7 +1,7 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { ConfigLogger } from '../../types/interface/logger.ts';
 import type { VonaApplication } from './application.ts';
-import { formatLoggerConsole, formatLoggerFilter } from './logger.ts';
+import { formatLoggerAxiosError, formatLoggerConsole, formatLoggerFilter } from './logger.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo) {
   const configDefault: ConfigLogger = {
@@ -19,6 +19,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo) {
     default(this: VonaApplication, { format, transports }, clientInfo) {
       return {
         format: format.combine(
+          formatLoggerAxiosError(),
           format.splat(),
           format.errors({ stack: true }),
           format.timestamp(),

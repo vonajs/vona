@@ -113,6 +113,10 @@ export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: 
   process.env[envName] = level.toString();
 }
 
+export const formatLoggerAxiosError = Winston.format((info, _opts: any) => {
+  return info;
+});
+
 export const formatLoggerFilter = Winston.format((info, opts: any) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;

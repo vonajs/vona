@@ -67,7 +67,7 @@ export function onerror(app: any, options?: OnerrorOptions) {
     // 301/302
     if ([301, 302].includes(err.code as any)) {
       this.res.statusCode = err.code;
-      this.res.setHeader('Location', err.message);
+      this.res.setHeader('Location', err.url || err.message);
       this.res.setHeader('Content-Length', '0');
       this.res.end();
       return;
