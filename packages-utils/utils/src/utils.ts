@@ -97,22 +97,33 @@ export function getRandomInt(size: number, start: number = 0) {
   return Math.floor(Math.random() * size) + start;
 }
 
-export function combineQueries(url?: string, queries?: Record<string, any>): string {
+export function combineQueries(pagePath?: string, queries?: Record<string, any>): string {
+  pagePath = pagePath ?? '/';
   //
-  if (!queries) return url || '';
+  if (!queries) return pagePath;
   //
+  const query2: any[] = [];
   const parts: string[] = [];
-  for (const key of Object.keys(queries)) {
-    parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(queries[key])}`);
+  if (queries) {
+    for (const key in queries) {
+      const value = queries[key];
+      if (value && typeof value === 'object') {
+        query2.push([key, value]);
+      } else {
+        parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+      }
+    }
   }
-  if (parts.length === 0) return url || '';
+  // query2
+  for (const [key, value] of query2) {
+    parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}`);
+  }
+  if (parts.length === 0) return pagePath;
   //
   const str = parts.join('&');
   //
-  if (!url) return `?${str}`;
-  //
-  const pos = url.indexOf('?');
-  if (pos === -1) return `${url}?${str}`;
-  if (pos === url.length - 1) return `${url}${str}`;
-  return `${url}&${str}`;
+  const pos = pagePath.indexOf('?');
+  if (pos === -1) return `${pagePath}?${str}`;
+  if (pos === pagePath.length - 1) return `${pagePath}${str}`;
+  return `${pagePath}&${str}`;
 }
