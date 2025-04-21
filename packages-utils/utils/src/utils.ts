@@ -97,15 +97,15 @@ export function getRandomInt(size: number, start: number = 0) {
   return Math.floor(Math.random() * size) + start;
 }
 
-export function combineQueries(url?: string, queries?: Record<string, any>): string | undefined {
+export function combineQueries(url?: string, queries?: Record<string, any>): string {
   //
-  if (!queries) return url;
+  if (!queries) return url || '';
   //
   const parts: string[] = [];
   for (const key of Object.keys(queries)) {
     parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(queries[key])}`);
   }
-  if (parts.length === 0) return url;
+  if (parts.length === 0) return url || '';
   //
   const str = parts.join('&');
   //
