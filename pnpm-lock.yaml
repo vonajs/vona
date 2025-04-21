@@ -797,6 +797,9 @@ importers:
       retry:
         specifier: ^0.13.1
         version: 0.13.1
+      triple-beam:
+        specifier: ^1.4.1
+        version: 1.4.1
       uuid:
         specifier: ^11.0.3
         version: 11.1.0

@@ -1,6 +1,7 @@
 import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
+import { LEVEL, MESSAGE } from 'triple-beam';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import { BeanSimple } from '../bean/beanSimple.ts';
@@ -113,8 +114,22 @@ export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: 
   process.env[envName] = level.toString();
 }
 
-export const formatLoggerAxiosError = Winston.format((info, _opts: any) => {
-  return info;
+export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: any) => {
+  if (einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) {
+    const info = Object.assign({}, einfo, {
+      level: einfo.level,
+      [LEVEL]: einfo[LEVEL] || einfo.level,
+      message: einfo.message,
+      [MESSAGE]: einfo[MESSAGE] || einfo.message,
+    });
+    if (stack) info.stack = einfo.stack;
+    if (cause) info.cause = einfo.cause;
+    delete info.config;
+    delete info.request;
+    delete info.response;
+    return info;
+  }
+  return einfo;
 });
 
 export const formatLoggerFilter = Winston.format((info, opts: any) => {

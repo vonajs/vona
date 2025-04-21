@@ -49,6 +49,7 @@
     "koa": "^2.15.4",
     "reflect-metadata": "^0.2.2",
     "retry": "^0.13.1",
+    "triple-beam": "^1.4.1",
     "uuid": "^11.0.3",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"

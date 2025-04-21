@@ -19,9 +19,9 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo) {
     default(this: VonaApplication, { format, transports }, clientInfo) {
       return {
         format: format.combine(
-          formatLoggerAxiosError(),
-          format.splat(),
+          formatLoggerAxiosError({ stack: true }),
           format.errors({ stack: true }),
+          format.splat(),
           format.timestamp(),
         ),
         transports: [
