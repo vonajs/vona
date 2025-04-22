@@ -3,10 +3,10 @@ import type { EventOn } from 'vona-module-a-event';
 
 /** event: end */
 /** event: begin */
-import type { EventGetFullPath } from '../bean/event.getFullPath.ts';
+import type { EventResolvePath } from '../bean/event.resolvePath.ts';
 /** event: end */
 /** event: begin */
-import type { TypeEventGetFullPathData, TypeEventGetFullPathResult } from '../bean/event.getFullPath.ts';
+import type { TypeEventResolvePathData, TypeEventResolvePathResult } from '../bean/event.resolvePath.ts';
 /** middlewareSystem: end */
 /** event: begin */
 import type { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.ts';
@@ -19,7 +19,7 @@ import 'vona';
 
 import 'vona';
 
-export * from '../bean/event.getFullPath.ts';
+export * from '../bean/event.resolvePath.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IMiddlewareSystemRecord {
@@ -41,17 +41,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-static' {
 
-  export interface EventGetFullPath {
+  export interface EventResolvePath {
     /** @internal */
     get scope(): ScopeModuleAStatic;
   }
 }
 export interface IModuleEvent {
-  getFullPath: EventGetFullPath;
+  resolvePath: EventResolvePath;
 }
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-static:getFullPath': EventOn<TypeEventGetFullPathData, TypeEventGetFullPathResult>;
+    'a-static:resolvePath': EventOn<TypeEventResolvePathData, TypeEventResolvePathResult>;
   }
 }
 

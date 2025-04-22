@@ -127,7 +127,7 @@ async function getFullPath(
   options: IMiddlewareSystemOptionsStatic,
 ): Promise<string | true | undefined> {
   const scopeSelf = ctx.app.bean.scope(__ThisModule__);
-  return scopeSelf.event.getFullPath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
+  return scopeSelf.event.resolvePath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
     return _getFullPathInner(ctx, dir, filename, options);
   });
 }
