@@ -8,10 +8,11 @@ export interface IMenuItem {
   title?: string;
   caption?: string;
   icon?: string;
+  order?: number;
+  group?: string | string[];
   link?: string;
   external?: boolean;
   target?: string;
-  group?: string | string[];
 }
 
 export interface IMenuGroup {
@@ -19,5 +20,7 @@ export interface IMenuGroup {
   title?: string;
   caption?: string;
   icon?: string;
+  order?: number;
+  group?: string | string[];
   collapsed?: boolean;
 }

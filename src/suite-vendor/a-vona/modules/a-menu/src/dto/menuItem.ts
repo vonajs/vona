@@ -18,6 +18,12 @@ export class DtoMenuItem implements IMenuItem {
   icon?: string;
 
   @Api.field(v.optional())
+  order?: number;
+
+  @Api.field(v.optional(), z.union([z.string(), z.array(z.string())]))
+  group?: string | string[];
+
+  @Api.field(v.optional())
   link?: string;
 
   @Api.field(v.optional())
@@ -25,7 +31,4 @@ export class DtoMenuItem implements IMenuItem {
 
   @Api.field(v.optional())
   target?: string;
-
-  @Api.field(v.optional(), z.union([z.string(), z.array(z.string())]))
-  group?: string | string[];
 }

@@ -1,6 +1,7 @@
 import type { IMenuGroup } from '../types/menu.ts';
 import { Api, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
+import { z } from 'zod';
 
 @Dto()
 export class DtoMenuGroup implements IMenuGroup {
@@ -15,6 +16,12 @@ export class DtoMenuGroup implements IMenuGroup {
 
   @Api.field(v.optional())
   icon?: string;
+
+  @Api.field(v.optional())
+  order?: number;
+
+  @Api.field(v.optional(), z.union([z.string(), z.array(z.string())]))
+  group?: string | string[];
 
   @Api.field(v.optional())
   collapsed?: boolean;
