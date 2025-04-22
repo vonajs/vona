@@ -5,7 +5,7 @@ import { Dto } from 'vona-module-a-web';
 @Dto()
 export class DtoMenuGroup implements IMenuGroup {
   @Api.field()
-  name: string;
+  id: string;
 
   @Api.field(v.optional())
   title?: string;

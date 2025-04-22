@@ -4,6 +4,7 @@ export interface IMenus {
 }
 
 export interface IMenuItem {
+  id: string;
   title?: string;
   caption?: string;
   icon?: string;
@@ -14,7 +15,7 @@ export interface IMenuItem {
 }
 
 export interface IMenuGroup {
-  name: string;
+  id: string;
   title?: string;
   caption?: string;
   icon?: string;

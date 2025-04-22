@@ -5,6 +5,9 @@ import { z } from 'zod';
 
 @Dto()
 export class DtoMenuItem implements IMenuItem {
+  @Api.field()
+  id: string;
+
   @Api.field(v.optional())
   title?: string;
 
