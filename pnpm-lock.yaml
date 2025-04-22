@@ -149,6 +149,9 @@ importers:
       vona-module-a-logger:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-logger
+      vona-module-a-menu:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-menu
       vona-module-a-meta:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-meta
@@ -1064,6 +1067,9 @@ importers:
       vona-module-a-logger:
         specifier: workspace:^
         version: link:modules/a-logger
+      vona-module-a-menu:
+        specifier: workspace:^
+        version: link:modules/a-menu
       vona-module-a-meta:
         specifier: workspace:^
         version: link:modules/a-meta
@@ -1443,6 +1449,15 @@ importers:
       pino-std-serializers:
         specifier: ^7.0.0
         version: 7.0.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-menu:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

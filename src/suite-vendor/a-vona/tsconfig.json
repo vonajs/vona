@@ -118,6 +118,9 @@
     },
     {
       "path": "modules/a-upload/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-menu/tsconfig.build.json"
     }
   ],
   "exclude": [
