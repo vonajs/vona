@@ -24,6 +24,9 @@ export class DtoMenuItem implements IMenuItem {
   group?: string | string[];
 
   @Api.field(v.optional())
+  separator?: boolean;
+
+  @Api.field(v.optional())
   link?: string;
 
   @Api.field(v.optional())

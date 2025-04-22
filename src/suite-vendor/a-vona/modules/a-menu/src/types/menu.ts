@@ -10,6 +10,7 @@ export interface IMenuItem {
   icon?: string;
   order?: number;
   group?: string | string[];
+  separator?: boolean;
   link?: string;
   external?: boolean;
   target?: string;
