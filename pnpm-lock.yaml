@@ -179,9 +179,6 @@ importers:
       vona-module-a-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-socket
-      vona-module-a-ssr:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssr
       vona-module-a-ssrhome:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-ssrhome
@@ -236,6 +233,9 @@ importers:
       vona-module-home-user:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-user
+      vona-module-ssr-site:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-ssr/modules/ssr-site
       vona-module-vona-test:
         specifier: workspace:^
         version: link:src/suite-vendor/vona-test/modules/vona-test
@@ -886,9 +886,6 @@ importers:
       vona-module-a-socket:
         specifier: workspace:^
         version: link:modules/a-socket
-      vona-module-a-ssr:
-        specifier: workspace:^
-        version: link:modules/a-ssr
       vona-module-a-ssrhome:
         specifier: workspace:^
         version: link:modules/a-ssrhome
@@ -958,22 +955,6 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/a-cabloy/modules/a-ssr:
-    dependencies:
-      http-proxy:
-        specifier: ^1.18.1
-        version: 1.18.1
-    devDependencies:
-      '@types/http-proxy':
-        specifier: ^1.17.16
-        version: 1.17.16
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
   src/suite-vendor/a-cabloy/modules/a-ssrhome:
     devDependencies:
       clean-package:
@@ -998,6 +979,28 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-utils/socket
     devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-ssr:
+    dependencies:
+      vona-module-ssr-site:
+        specifier: workspace:^
+        version: link:modules/ssr-site
+
+  src/suite-vendor/a-ssr/modules/ssr-site:
+    dependencies:
+      http-proxy:
+        specifier: ^1.18.1
+        version: 1.18.1
+    devDependencies:
+      '@types/http-proxy':
+        specifier: ^1.17.16
+        version: 1.17.16
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
