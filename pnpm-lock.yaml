@@ -242,9 +242,9 @@ importers:
       vona-module-test-ssr:
         specifier: workspace:^
         version: link:src/suite-vendor/test-ssr/modules/test-ssr
-      vona-module-vona-test:
+      vona-module-test-vona:
         specifier: workspace:^
-        version: link:src/suite-vendor/vona-test/modules/vona-test
+        version: link:src/suite-vendor/test-vona/modules/test-vona
       vona-shared:
         specifier: workspace:^
         version: link:packages-vona/vona-shared
@@ -1750,13 +1750,13 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/vona-test:
+  src/suite-vendor/test-vona:
     dependencies:
-      vona-module-vona-test:
+      vona-module-test-vona:
         specifier: workspace:^
-        version: link:modules/vona-test
+        version: link:modules/test-vona
 
-  src/suite-vendor/vona-test/modules/vona-test:
+  src/suite-vendor/test-vona/modules/test-vona:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
