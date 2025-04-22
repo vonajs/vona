@@ -189,18 +189,18 @@ export function preprocessConfig(config: IMiddlewareSystemOptionsSecurities) {
   });
 }
 
-export function getFromUrl(url: string, prop?: string): string | null {
-  try {
-    const parsed = new URL(url);
-    return prop ? Reflect.get(parsed, prop) : parsed;
-  } catch {
-    return null;
-  }
-}
-
 function getContains(ip: string) {
   if (IP.isV4Format(ip) || IP.isV6Format(ip)) {
     return (address: string) => address === ip;
   }
   return IP.cidrSubnet(ip).contains;
 }
+
+// export function getFromUrl(url: string, prop?: string): string | null {
+//   try {
+//     const parsed = new URL(url);
+//     return prop ? Reflect.get(parsed, prop) : parsed;
+//   } catch {
+//     return null;
+//   }
+// }

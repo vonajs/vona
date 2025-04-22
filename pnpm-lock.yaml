@@ -98,6 +98,9 @@ importers:
       vona-module-a-c:
         specifier: workspace:^
         version: link:src/module/a-c
+      vona-module-a-cabloy:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
       vona-module-a-cache:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-cache
@@ -176,9 +179,9 @@ importers:
       vona-module-a-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-socket
-      vona-module-a-ssrhome:
+      vona-module-a-ssr:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssrhome
+        version: link:src/suite-vendor/a-ssr/modules/a-ssr
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
@@ -233,6 +236,12 @@ importers:
       vona-module-ssr-sitehome:
         specifier: workspace:^
         version: link:src/suite-vendor/a-ssr/modules/ssr-sitehome
+      vona-module-test-cabloy:
+        specifier: workspace:^
+        version: link:src/suite-vendor/test-cabloy/modules/test-cabloy
+      vona-module-test-ssr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/test-ssr/modules/test-ssr
       vona-module-vona-test:
         specifier: workspace:^
         version: link:src/suite-vendor/vona-test/modules/vona-test
@@ -883,9 +892,6 @@ importers:
       vona-module-a-socket:
         specifier: workspace:^
         version: link:modules/a-socket
-      vona-module-a-ssrhome:
-        specifier: workspace:^
-        version: link:modules/a-ssrhome
       vona-module-a-status:
         specifier: workspace:^
         version: link:modules/a-status
@@ -952,15 +958,6 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/a-cabloy/modules/a-ssrhome:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
   src/suite-vendor/a-cabloy/modules/a-status:
     devDependencies:
       clean-package:
@@ -985,12 +982,24 @@ importers:
 
   src/suite-vendor/a-ssr:
     dependencies:
+      vona-module-a-ssr:
+        specifier: workspace:^
+        version: link:modules/a-ssr
       vona-module-ssr-site:
         specifier: workspace:^
         version: link:modules/ssr-site
       vona-module-ssr-sitehome:
         specifier: workspace:^
         version: link:modules/ssr-sitehome
+
+  src/suite-vendor/a-ssr/modules/a-ssr:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
 
   src/suite-vendor/a-ssr/modules/ssr-site:
     dependencies:
@@ -1711,13 +1720,28 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/cabloy-test:
+  src/suite-vendor/test-cabloy:
     dependencies:
-      vona-module-cabloy-test:
+      vona-module-test-cabloy:
         specifier: workspace:^
-        version: link:modules/cabloy-test
+        version: link:modules/test-cabloy
 
-  src/suite-vendor/cabloy-test/modules/cabloy-test:
+  src/suite-vendor/test-cabloy/modules/test-cabloy:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/test-ssr:
+    dependencies:
+      vona-module-test-ssr:
+        specifier: workspace:^
+        version: link:modules/test-ssr
+
+  src/suite-vendor/test-ssr/modules/test-ssr:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
