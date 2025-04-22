@@ -1,3 +1,8 @@
+export interface IMenus {
+  items?: IMenuItem[];
+  groups?: IMenuGroup[];
+}
+
 export interface IMenuItem {
   title?: string;
   caption?: string;
