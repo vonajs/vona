@@ -10,11 +10,13 @@ import 'vona';
 
 export * from '../dto/menuGroup.ts';
 export * from '../dto/menuItem.ts';
+export * from '../dto/menusAndGroups.ts';
 declare module 'vona' {
 
   export interface IDtoRecord {
     'a-menu:menuGroup': never;
     'a-menu:menuItem': never;
+    'a-menu:menusAndGroups': never;
   }
 
 }
