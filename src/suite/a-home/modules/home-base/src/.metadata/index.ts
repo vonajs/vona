@@ -4,15 +4,24 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 /** event: end */
 /** event: begin */
 import type { EventRetrieveMenus } from '../bean/event.retrieveMenus.ts';
+
 /** event: end */
 /** event: begin */
 import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
-
+/** service: end */
+/** service: begin */
+import type { ServiceMenu } from '../service/menu.ts';
 /** controller: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+/** service: end */
+/** service: begin */
+
 import { Scope } from 'vona-module-a-bean';
+
 /** event: begin */
+import 'vona';
+import 'vona';
 import 'vona';
 
 import 'vona';
@@ -36,9 +45,34 @@ declare module 'vona-module-a-event' {
     'home-base:retrieveMenus': EventOn<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult>;
   }
 }
-/** event: end */
+/** service: end */
 /** controller: begin */
 export * from '../controller/menu.ts';
+declare module 'vona-module-a-web' {
+
+  export interface IServiceRecord {
+    'home-base:menu': never;
+  }
+
+}
+declare module 'vona-module-home-base' {
+
+  export interface ServiceMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
+export interface IModuleService {
+  menu: ServiceMenu;
+}
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'home-base.service.menu': ServiceMenu;
+  }
+}
+/** event: end */
+/** service: begin */
+export * from '../service/menu.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
@@ -68,6 +102,7 @@ export class ScopeModuleHomeBase extends BeanScopeBase {}
 export interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
   event: IModuleEvent;
+  service: IModuleService;
 }
 declare module 'vona' {
   export interface IBeanScopeRecord {
