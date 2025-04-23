@@ -4,8 +4,8 @@ import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceMenu extends BeanBase {
-  async retrieveMenus(): Promise<IMenus> {
-    return await this.$scope.menu.service.menu.retrieveMenus(async () => {
+  async retrieveMenus(publicPath?: string): Promise<IMenus> {
+    return await this.$scope.menu.service.menu.retrieveMenus(publicPath, async () => {
       return this._getMenusDefault();
     });
   }

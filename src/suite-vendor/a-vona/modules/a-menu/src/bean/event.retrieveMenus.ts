@@ -1,7 +1,9 @@
 import type { IMenus } from '../types/menu.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export type TypeEventRetrieveMenusData = unknown;
+export interface TypeEventRetrieveMenusData {
+  publicPath?: string;
+}
 
 export type TypeEventRetrieveMenusResult = IMenus;
 

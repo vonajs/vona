@@ -7,8 +7,9 @@ import { Service } from 'vona-module-a-web';
 @Service()
 export class ServiceMenu extends BeanBase {
   async retrieveMenus(
+    publicPath?: string,
     nextOrDefault?: NextEventStrict<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult> | TypeEventRetrieveMenusResult,
   ): Promise<IMenus> {
-    return await this.scope.event.retrieveMenus.emit(undefined, nextOrDefault);
+    return await this.scope.event.retrieveMenus.emit({ publicPath }, nextOrDefault);
   }
 }
