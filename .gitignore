@@ -59,7 +59,7 @@ env/.env*.mine
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-vona
-!/src/suite-vendor/vona-test
+!/src/suite-vendor/test-vona
 
 
 /src/module/*

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {},
+  "references": [
+    {
+      "path": "modules/test-vona/tsconfig.build.json"
+    }
+  ],
+  "exclude": ["modules"]
+}
