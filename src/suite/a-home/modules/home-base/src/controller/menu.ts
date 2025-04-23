@@ -6,9 +6,9 @@ import { Controller, Web } from 'vona-module-a-web';
 
 @Controller('menu')
 export class ControllerMenu extends BeanBase {
-  @Web.get(':publicPath?')
+  @Web.get(':publicPath')
   @Api.body(v.object(DtoMenus))
-  async retrieveMenus(@Arg.param('publicPath', v.optional()) publicPath?: string): Promise<IMenus> {
+  async retrieveMenus(@Arg.param('publicPath') publicPath: string): Promise<IMenus> {
     return await this.scope.service.menu.retrieveMenus(publicPath);
   }
 }
