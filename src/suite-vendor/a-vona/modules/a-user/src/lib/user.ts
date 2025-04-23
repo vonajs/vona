@@ -1,4 +1,4 @@
-import type { ILocalInfos } from 'vona';
+import type { ILocaleInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IUserAdapter, IUserBase, IUserIdRecord } from '../types/user.ts';
 
@@ -20,7 +20,7 @@ export function $getUserAvatar(user: IUserBase): string | undefined {
   return __userAdapter.getUserAvatar(user);
 }
 
-export function $getUserLocale(user: IUserBase): keyof ILocalInfos | undefined {
+export function $getUserLocale(user: IUserBase): keyof ILocaleInfos | undefined {
   return __userAdapter.getUserLocale(user);
 }
 

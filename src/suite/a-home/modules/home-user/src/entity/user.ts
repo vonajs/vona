@@ -1,4 +1,4 @@
-import type { ILocalInfos } from 'vona';
+import type { ILocaleInfos } from 'vona';
 import { Entity, EntityBase } from 'vona-module-a-database';
 import { Api, v } from 'vona-module-a-openapi';
 import { z } from 'zod';
@@ -12,5 +12,5 @@ export class EntityUser extends EntityBase {
   avatar?: string;
 
   @Api.field(z.string().optional())
-  locale?: keyof ILocalInfos | undefined;
+  locale?: keyof ILocaleInfos | undefined;
 }

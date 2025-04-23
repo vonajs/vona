@@ -1,4 +1,4 @@
-import type { ILocalInfos } from 'vona';
+import type { ILocaleInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IAuthUserProfile } from './authProfile.ts';
 
@@ -14,7 +14,7 @@ export interface IUserAdapter {
   getUserId(user: IUserBase): TableIdentity;
   getUserName(user: IUserBase): string;
   getUserAvatar(user: IUserBase): string | undefined;
-  getUserLocale(user: IUserBase): keyof ILocalInfos | undefined;
+  getUserLocale(user: IUserBase): keyof ILocaleInfos | undefined;
   getUserAnonymous(user: IUserBase): boolean;
 }
 

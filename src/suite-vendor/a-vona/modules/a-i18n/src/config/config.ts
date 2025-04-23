@@ -1,7 +1,7 @@
-import type { ILocalInfos, VonaApplication } from 'vona';
+import type { ILocaleInfos, VonaApplication } from 'vona';
 
 export interface I18nConfig {
-  defaultLocale: keyof ILocalInfos;
+  defaultLocale: keyof ILocaleInfos;
   queryField: string;
   headerField: string;
   localeAlias: any;
