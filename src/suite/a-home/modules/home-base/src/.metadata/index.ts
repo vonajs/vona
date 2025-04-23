@@ -1,52 +1,23 @@
 import type { BeanScopeUtil } from 'vona';
-import type { EventOn } from 'vona-module-a-event';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-/** event: end */
-/** event: begin */
-import type { EventRetrieveMenus } from '../bean/event.retrieveMenus.ts';
+/** service: end */
+/** service: begin */
 
-/** event: end */
-/** event: begin */
-import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceMenu } from '../service/menu.ts';
+
 /** controller: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-/** service: end */
-/** service: begin */
-
 import { Scope } from 'vona-module-a-bean';
-
-/** event: begin */
-import 'vona';
-import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../bean/event.retrieveMenus.ts';
-declare module 'vona' {
-
-}
-declare module 'vona-module-home-base' {
-
-  export interface EventRetrieveMenus {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
-}
-export interface IModuleEvent {
-  retrieveMenus: EventRetrieveMenus;
-}
-declare module 'vona-module-a-event' {
-  export interface IEventRecord {
-    'home-base:retrieveMenus': EventOn<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult>;
-  }
-}
 /** service: end */
 /** controller: begin */
+import 'vona';
+import 'vona';
+
+import 'vona';
+
 export * from '../controller/menu.ts';
 declare module 'vona-module-a-web' {
 
@@ -70,7 +41,6 @@ declare module 'vona' {
     'home-base.service.menu': ServiceMenu;
   }
 }
-/** event: end */
 /** service: begin */
 export * from '../service/menu.ts';
 declare module 'vona-module-a-web' {
@@ -101,9 +71,9 @@ export class ScopeModuleHomeBase extends BeanScopeBase {}
 
 export interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
-  event: IModuleEvent;
   service: IModuleService;
 }
+
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'home-base': ScopeModuleHomeBase;
