@@ -58,7 +58,7 @@ env/.env*.mine
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-vona
-!/src/suite-vendor/vona-test
+!/src/suite-vendor/test-vona
 !/src/suite-vendor/a-cabloy
 !/src/suite-vendor/cabloy-test
 
