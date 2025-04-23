@@ -1,6 +1,5 @@
 import type { NextEventStrict } from 'vona-module-a-event';
 import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
-import type { IMenus } from '../types/menu.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
@@ -9,7 +8,7 @@ export class ServiceMenu extends BeanBase {
   async retrieveMenus(
     publicPath?: string,
     nextOrDefault?: NextEventStrict<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult> | TypeEventRetrieveMenusResult,
-  ): Promise<IMenus> {
+  ): Promise<TypeEventRetrieveMenusResult> {
     return await this.scope.event.retrieveMenus.emit({ publicPath }, nextOrDefault);
   }
 }
