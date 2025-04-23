@@ -1,5 +1,5 @@
 export interface IMenus {
-  items?: IMenuItem[];
+  menus?: IMenuItem[];
   groups?: IMenuGroup[];
 }
 
