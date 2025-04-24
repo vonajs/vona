@@ -5,7 +5,7 @@ import { Interceptor } from 'vona-module-a-aspect';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptionsGlobal {}
 
-@Interceptor<IInterceptorOptionsBody>({ global: true })
+@Interceptor<IInterceptorOptionsBody>({ global: true, dependencies: 'a-openapi:openapiSchema' })
 export class InterceptorBody extends BeanBase implements IInterceptorExecute {
   async execute(_options: IInterceptorOptionsBody, next: Next) {
     // next

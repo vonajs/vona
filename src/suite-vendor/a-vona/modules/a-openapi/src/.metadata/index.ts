@@ -1,26 +1,45 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
-import type { config } from '../config/config.ts';
-/** service: end */
-/** service: begin */
+/** interceptor: begin */
+import type { IInterceptorOptionsOpenapiSchema } from '../bean/interceptor.openapiSchema.ts';
 
+import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceOpenapi } from '../service/openapi.ts';
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+/** service: end */
+/** service: begin */
+
 import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
+import 'vona';
+import 'vona';
+
+import 'vona';
+
+export * from '../bean/interceptor.openapiSchema.ts';
+declare module 'vona-module-a-aspect' {
+
+  export interface IInterceptorRecordGlobal {
+    'a-openapi:openapiSchema': IInterceptorOptionsOpenapiSchema;
+  }
+
+}
+declare module 'vona-module-a-openapi' {
+
+  export interface InterceptorOpenapiSchema {
+    /** @internal */
+    get scope(): ScopeModuleAOpenapi;
+  }
+}
 /** service: end */
 /** config: begin */
-import 'vona';
-import 'vona';
-
-import 'vona';
-
 export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
 
@@ -51,6 +70,7 @@ export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
+/** interceptor: end */
 /** service: begin */
 export * from '../service/openapi.ts';
 
@@ -63,7 +83,6 @@ export interface ScopeModuleAOpenapi {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-openapi': ScopeModuleAOpenapi;
