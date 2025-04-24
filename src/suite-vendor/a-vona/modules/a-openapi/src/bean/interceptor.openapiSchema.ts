@@ -8,7 +8,10 @@ export interface IInterceptorOptionsOpenapiSchema extends IDecoratorInterceptorO
 @Interceptor<IInterceptorOptionsOpenapiSchema>({ global: true })
 export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorExecute {
   async execute(_options: IInterceptorOptionsOpenapiSchema, next: Next) {
+    const headerOpenapiSchema = this.ctx.headers['x-vona-openapi-schema'];
+    if (headerOpenapiSchema !== 'true') return next();
     // next
-    return next();
+    const body = { ok: true };
+    this.app.success(body);
   }
 }
