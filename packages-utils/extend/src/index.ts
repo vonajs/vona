@@ -103,9 +103,7 @@ export function extend(...args) {
 
             // Never move original objects, clone them
             setProperty(target, { name, newValue: extend(deep, clone, copy) });
-
-            // Don't bring in undefined values
-          } else if (typeof copy !== 'undefined') {
+          } else {
             setProperty(target, { name, newValue: copy });
           }
         }
