@@ -35,8 +35,6 @@
   },
   "dependencies": {
     "@cabloy/compose": "workspace:^",
-    "@cabloy/deps": "workspace:^",
-    "@cabloy/dotenv": "workspace:^",
     "@cabloy/extend": "workspace:^",
     "@cabloy/json5": "workspace:^",
     "@cabloy/localeutil": "workspace:^",
