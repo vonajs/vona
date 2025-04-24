@@ -5,6 +5,7 @@ import { parseAuthHeader } from '../lib/authHeader.ts';
 @Service()
 export class ServiceJwtExtract extends BeanBase {
   fromHeader(): string | undefined {
+    if (!this.scope.config.field.extract.header) return;
     return this.ctx.request.headers[this.scope.config.field.extract.header] as string | undefined;
   }
 
