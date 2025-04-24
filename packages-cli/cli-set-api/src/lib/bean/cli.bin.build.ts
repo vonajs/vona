@@ -77,7 +77,7 @@ export class CliBinBuild extends BeanCliBase {
 
   async _rollup(projectPath: string, env: NodeJS.ProcessEnv) {
     const aliasEntries: aliasImport.Alias[] = [];
-    for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious']) {
+    for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious', 'cloudflare:sockets']) {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
 
