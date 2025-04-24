@@ -23,12 +23,11 @@ export class ServiceExecutor extends BeanBase {
       ctx.res.statusCode = 404;
       ctx.req.method = method.toUpperCase();
       ctx.req.url = url;
-      // json
-      ctx.req.headers = Object.assign({}, ctx.req.headers);
-      ctx.req.headers.accept = 'application/json';
       // headers
-      if (options?.headers) {
-        Object.assign(ctx.req.headers, options?.headers);
+      ctx.req.headers = Object.assign({}, ctx.req.headers, options?.headers);
+      // json
+      if (!ctx.req.headers.accept) {
+        ctx.req.headers.accept = 'application/json';
       }
       // authToken
       if (options?.authToken) {
