@@ -61,8 +61,8 @@ declare module 'vona-module-home-base' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
-    '/home/base/menu/:_string_': '/home/base/menu:_publicPath_';
-    '/home/base/menu/:publicPath': `/home/base/menu/${string}`;
+    '/home/base/menu/:_string_': '/home/base/menu:{publicPath?}';
+    '/home/base/menu/:publicPath?': `/home/base/menu/${string}`;
   }
 
 }

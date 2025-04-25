@@ -541,11 +541,11 @@ declare module 'vona-module-a-web' {
     '/test/vona/bean/test': '/test/vona/bean/test';
     '/test/vona/bean/service': '/test/vona/bean/service';
     '/': '/';
-    '/test/vona/onion/echo3/:_string_': '/test/vona/onion/echo3:_userId_';
+    '/test/vona/onion/echo3/:_string_': '/test/vona/onion/echo3:{userId}';
     '/test/vona/onion/echo3/:userId': `/test/vona/onion/echo3/${string}`;
     '/test/vona/onion/echo5': '/test/vona/onion/echo5';
     '/test/vona/onion/echo6': '/test/vona/onion/echo6';
-    '/test/vona/passport/echo/:_string_': '/test/vona/passport/echo:_name_';
+    '/test/vona/passport/echo/:_string_': '/test/vona/passport/echo:{name}';
     '/test/vona/passport/echo/:name': `/test/vona/passport/echo/${string}`;
     '/test/vona/passport/isAuthenticated': '/test/vona/passport/isAuthenticated';
   }
@@ -553,7 +553,7 @@ declare module 'vona-module-a-web' {
     '/test/vona/cacheMem': '/test/vona/cacheMem';
     '/test/vona/cacheRedis': '/test/vona/cacheRedis';
     '//echo': '//echo';
-    '/test/vona/onion/echo2/:_string_/:_string_': '/test/vona/onion/echo2:_userId_:_userName_';
+    '/test/vona/onion/echo2/:_string_/:_string_': '/test/vona/onion/echo2:{userId}:{userName}';
     '/test/vona/onion/echo2/:userId/:userName': `/test/vona/onion/echo2/${string}/${string}`;
     '/test/vona/onion/echo4': '/test/vona/onion/echo4';
     '/test/vona/passport/login': '/test/vona/passport/login';

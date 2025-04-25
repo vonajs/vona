@@ -196,19 +196,20 @@ declare module 'vona-module-home-user' {
 /** controller: end */
 /** controller: begin */
 declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord {
+    '/home/user/passport/current': '/home/user/passport/current';
+    '/home/user/passport/login/:_string_/:_string_/:_string_': '/home/user/passport/login:{module}:{providerName}:{clientName?}';
+    '/home/user/passport/login/:module/:providerName/:clientName?': `/home/user/passport/login/${string}/${string}/${string}`;
+    '/home/user/passport/associate/:_string_/:_string_/:_string_': '/home/user/passport/associate:{module}:{providerName}:{clientName?}';
+    '/home/user/passport/associate/:module/:providerName/:clientName?': `/home/user/passport/associate/${string}/${string}/${string}`;
+    '/home/user/passport/migrate/:_string_/:_string_/:_string_': '/home/user/passport/migrate:{module}:{providerName}:{clientName?}';
+    '/home/user/passport/migrate/:module/:providerName/:clientName?': `/home/user/passport/migrate/${string}/${string}/${string}`;
+  }
   export interface IApiPathPostRecord {
     '/home/user/passport/logout': '/home/user/passport/logout';
     '/home/user/passport/login': '/home/user/passport/login';
     '/home/user/passport/refreshAuthToken': '/home/user/passport/refreshAuthToken';
-    '/home/user/passport/createPassportFromOauthCode': '/home/user/passport/createPassportFromOauthCode';
-  }
-  export interface IApiPathGetRecord {
-    '/home/user/passport/login/:_string_/:_string_/:_string_': '/home/user/passport/login:_module_:_providerName_:_clientName?_';
-    '/home/user/passport/login/:module/:providerName/:clientName?': `/home/user/passport/login/${string}/${string}/${string}`;
-    '/home/user/passport/associate/:_string_/:_string_/:_string_': '/home/user/passport/associate:_module_:_providerName_:_clientName?_';
-    '/home/user/passport/associate/:module/:providerName/:clientName?': `/home/user/passport/associate/${string}/${string}/${string}`;
-    '/home/user/passport/migrate/:_string_/:_string_/:_string_': '/home/user/passport/migrate:_module_:_providerName_:_clientName?_';
-    '/home/user/passport/migrate/:module/:providerName/:clientName?': `/home/user/passport/migrate/${string}/${string}/${string}`;
+    '/home/user/passport/createPassportJwtFromOauthCode': '/home/user/passport/createPassportJwtFromOauthCode';
   }
 
 }
