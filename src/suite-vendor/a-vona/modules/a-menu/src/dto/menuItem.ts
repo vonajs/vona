@@ -1,8 +1,8 @@
-import type { IMenuItem } from '../types/menu.ts';
-import type { DtoMenuItemMeta } from './menuItemMeta.ts';
+import type { IMenuItem, IMenuItemMeta } from '../types/menu.ts';
 import { Api, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
+import { DtoMenuItemMeta } from './menuItemMeta.ts';
 
 @Dto()
 export class DtoMenuItem implements IMenuItem {
@@ -36,6 +36,6 @@ export class DtoMenuItem implements IMenuItem {
   @Api.field(v.optional())
   target?: string;
 
-  @Api.field(v.optional())
-  meta?: DtoMenuItemMeta;
+  @Api.field(v.optional(), v.object(DtoMenuItemMeta))
+  meta?: IMenuItemMeta;
 }

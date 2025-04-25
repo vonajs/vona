@@ -1,27 +1,18 @@
 import type { MetadataKey } from 'vona';
-import type { z } from 'zod';
 import type { SchemaLike } from '../../types/decorator.ts';
-import { appMetadata, registerMappedClassMetadataKey } from 'vona';
-import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../../types/decorator.ts';
+import { appMetadata } from 'vona';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
+import { getTargetDecoratorRuleColumns, getTargetDecoratorRules } from '../utils.ts';
 
 export function Field(...schemaLikes: SchemaLike[]): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
-    //
-    registerMappedClassMetadataKey(target, SymbolDecoratorRule, {
-      partialClass: (meta: z.ZodSchema) => {
-        return meta.optional();
-      },
-    });
+    // rules
+    const rules = getTargetDecoratorRules(target);
     // rule
     const metaType = appMetadata.getDesignType(target, prop);
-    const rule = makeSchemaLikes(schemaLikes, metaType);
-    // rules
-    const rules = appMetadata.getOwnMetadataMap(true, SymbolDecoratorRule, target);
-    rules[prop] = rule;
+    rules[prop] = makeSchemaLikes(schemaLikes, metaType);
     //
-    registerMappedClassMetadataKey(target, SymbolDecoratorRuleColumn);
-    const columns = appMetadata.getOwnMetadataMap(true, SymbolDecoratorRuleColumn, target);
+    const columns = getTargetDecoratorRuleColumns(target);
     columns[prop] = prop;
   };
 }
