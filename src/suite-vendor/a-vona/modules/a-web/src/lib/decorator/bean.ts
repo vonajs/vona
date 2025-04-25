@@ -26,6 +26,6 @@ export function Service(): ClassDecorator {
 export function Dto(options?: IDecoratorDtoOptions): ClassDecorator {
   return createBeanDecorator('dto', options, false, false, target => {
     // rules
-    getTargetDecoratorRules(target);
+    getTargetDecoratorRules(target.prototype);
   });
 }
