@@ -30,6 +30,7 @@ export interface INewCtxBaseOptions {
 export interface IPerformActionOptions {
   innerAccess?: boolean;
   // instanceName, deprecated
+  params?: object;
   query?: object;
   headers?: object;
   body?: any;

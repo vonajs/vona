@@ -1,8 +1,9 @@
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { IGeneralInfoOptions, IPerformActionOptions } from '../types/executor.ts';
+import { defaultPathSerializer } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Log } from 'vona-module-a-logger';
-import { Service } from 'vona-module-a-web';
+import { $apiPath, Service } from 'vona-module-a-web';
 import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Service()
@@ -22,7 +23,8 @@ export class ServiceExecutor extends BeanBase {
       // default status code
       ctx.res.statusCode = 404;
       ctx.req.method = method.toUpperCase();
-      ctx.req.url = url;
+      // url
+      ctx.req.url = defaultPathSerializer($apiPath(url as any), options?.params);
       // headers
       ctx.req.headers = Object.assign({}, ctx.req.headers, options?.headers);
       // json
