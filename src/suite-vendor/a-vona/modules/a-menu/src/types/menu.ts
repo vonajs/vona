@@ -3,10 +3,12 @@ export interface IMenus {
   groups?: IMenuGroup[];
 }
 
+export interface IMenuItemMeta {}
+
 export interface IMenuItem {
-  id: string;
+  name: string;
   title?: string;
-  caption?: string;
+  description?: string;
   icon?: string;
   order?: number;
   group?: string | string[];
@@ -14,12 +16,13 @@ export interface IMenuItem {
   link?: string;
   external?: boolean;
   target?: string;
+  meta?: IMenuItemMeta;
 }
 
 export interface IMenuGroup {
-  id: string;
+  name: string;
   title?: string;
-  caption?: string;
+  description?: string;
   icon?: string;
   order?: number;
   group?: string | string[];

@@ -1,4 +1,5 @@
 import type { IMenuItem } from '../types/menu.ts';
+import type { DtoMenuItemMeta } from './menuItemMeta.ts';
 import { Api, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -6,13 +7,13 @@ import { z } from 'zod';
 @Dto()
 export class DtoMenuItem implements IMenuItem {
   @Api.field()
-  id: string;
+  name: string;
 
   @Api.field(v.optional())
   title?: string;
 
   @Api.field(v.optional())
-  caption?: string;
+  description?: string;
 
   @Api.field(v.optional())
   icon?: string;
@@ -34,4 +35,7 @@ export class DtoMenuItem implements IMenuItem {
 
   @Api.field(v.optional())
   target?: string;
+
+  @Api.field(v.optional())
+  meta?: DtoMenuItemMeta;
 }

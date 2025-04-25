@@ -49,12 +49,14 @@ declare module 'vona-module-a-event' {
 /** dto: begin */
 export * from '../dto/menuGroup.ts';
 export * from '../dto/menuItem.ts';
+export * from '../dto/menuItemMeta.ts';
 export * from '../dto/menus.ts';
 declare module 'vona' {
 
   export interface IDtoRecord {
     'a-menu:menuGroup': never;
     'a-menu:menuItem': never;
+    'a-menu:menuItemMeta': never;
     'a-menu:menus': never;
   }
 

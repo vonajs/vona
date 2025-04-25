@@ -6,13 +6,13 @@ import { z } from 'zod';
 @Dto()
 export class DtoMenuGroup implements IMenuGroup {
   @Api.field()
-  id: string;
+  name: string;
 
   @Api.field(v.optional())
   title?: string;
 
   @Api.field(v.optional())
-  caption?: string;
+  description?: string;
 
   @Api.field(v.optional())
   icon?: string;
