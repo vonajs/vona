@@ -7,7 +7,7 @@ export function config(_app: VonaApplication) {
     error: {
       ssr: {
         site: 'a-ssrcabloy:cabloy',
-        pagePath: '/',
+        pagePath: '/a/ssrcabloy/error',
       },
       templatePath: '',
       errorPageUrl(_err: Error, _ctx: VonaContext): string | undefined {
