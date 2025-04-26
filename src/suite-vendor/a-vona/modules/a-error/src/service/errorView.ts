@@ -15,6 +15,10 @@ export class ServiceErrorView extends BeanBase {
   private _filterHeaders = ['cookie', 'connection'];
 
   toHTML(error: Error, viewTemplate: string): string {
+    return this.complieView(viewTemplate, this.getErrorData(error));
+  }
+
+  getErrorData(error: Error) {
     const stack = this.parseError(error);
     const data = this.serializeData(error, stack, (frame, index) => {
       const serializedFrame = this.serializeFrame(frame) as any;
@@ -28,8 +32,7 @@ export class ServiceErrorView extends BeanBase {
     data.meta = {
       errorLogo: this.$scope.core.static.get('img/vona.svg'),
     };
-
-    return this.complieView(viewTemplate, data);
+    return data;
   }
 
   complieView(tpl, locals) {

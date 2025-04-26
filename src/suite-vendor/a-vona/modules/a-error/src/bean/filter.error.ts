@@ -111,7 +111,11 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       return true;
     }
 
-    this.ctx.body = await this.bean.error.render(err, { returnHtml: true });
+    try {
+      this.ctx.body = await this.bean.error.render(err, { returnHtml: true });
+    } catch (err: any) {
+      this.ctx.body = err.message;
+    }
 
     // handled
     return true;

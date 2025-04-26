@@ -1,3 +1,4 @@
+import type { TypeEventResolvePathResult } from 'vona-module-a-static';
 import type { IErrorRenderOptions } from '../types/error.ts';
 import fs from 'node:fs';
 import { BeanBase } from 'vona';
@@ -8,7 +9,19 @@ const __cacheViewTemplates: Record<string, any> = {};
 
 @Bean()
 export class BeanError extends BeanBase {
-  async render(err: Error, options?: IErrorRenderOptions) {
+  async render(err: Error, options?: IErrorRenderOptions): Promise<TypeEventResolvePathResult> {
+    // ssr
+    const ssrSite = this.scope.config.error.ssr.site;
+    if (ssrSite) {
+      const html = await this.bean.ssr.render(
+        ssrSite as any,
+        this.scope.config.error.ssr.pagePath,
+        this.scope.service.errorView.getErrorData(err),
+        { returnHtml: options?.returnHtml },
+      );
+      if (html) return html;
+    }
+    // template
     const html = this.scope.service.errorView.toHTML(err, this._getViewTemplate());
     if (options?.returnHtml) return html;
     this.ctx.res.statusCode = 200;
