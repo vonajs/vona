@@ -1,25 +1,32 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-/** filter: begin */
-import type { IFilterOptionsError } from '../bean/filter.error.ts';
+/** bean: end */
+/** bean: begin */
+import type { BeanError } from '../bean/bean.error.ts';
 
+/** filter: end */
+/** bean: begin */
+import type { IFilterOptionsError } from '../bean/filter.error.ts';
 import type { config } from '../config/config.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceErrorView } from '../service/errorView.ts';
+
 /** main: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
-import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
 
 import 'vona';
 
-export * from '../bean/filter.error.ts';
+export * from '../bean/bean.error.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IFilterRecordGlobal {
@@ -32,6 +39,23 @@ declare module 'vona-module-a-error' {
   export interface FilterError {
     /** @internal */
     get scope(): ScopeModuleAError;
+  }
+}
+/** filter: begin */
+export * from '../bean/filter.error.ts';
+declare module 'vona' {
+
+}
+declare module 'vona-module-a-error' {
+
+  export interface BeanError {
+    /** @internal */
+    get scope(): ScopeModuleAError;
+  }
+}
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    error: BeanError;
   }
 }
 /** service: end */
@@ -62,7 +86,7 @@ declare module 'vona' {
 /** config: end */
 /** main: begin */
 export * from '../main.ts';
-/** filter: end */
+/** bean: end */
 /** service: begin */
 export * from '../service/errorView.ts';
 
@@ -74,6 +98,7 @@ export interface ScopeModuleAError {
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
 }
+
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-error': ScopeModuleAError;

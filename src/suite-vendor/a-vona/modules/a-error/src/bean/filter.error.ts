@@ -1,15 +1,11 @@
 import type { NextSync } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
-import fs from 'node:fs';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
-import { __ThisModule__ } from '../.metadata/this.ts';
 
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
   logs: Record<number | string, boolean>;
 }
-
-const __cacheViewTemplates: Record<string, any> = {};
 
 @Filter<IFilterOptionsError>({ global: true, logs: {} })
 export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IFilterHtml {
@@ -115,18 +111,9 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       return true;
     }
 
-    this.ctx.body = this.scope.service.errorView.toHTML(err, this._getViewTemplate());
+    this.ctx.body = await this.bean.error.render(err, { returnHtml: true });
 
     // handled
     return true;
-  }
-
-  private _getViewTemplate() {
-    const fileTemplate =
-      this.scope.config.error.templatePath || this.app.util.getAssetPathPhysical(__ThisModule__, 'templates', 'onerror_page.mustache')!;
-    if (!__cacheViewTemplates[fileTemplate]) {
-      __cacheViewTemplates[fileTemplate] = fs.readFileSync(fileTemplate, 'utf8');
-    }
-    return __cacheViewTemplates[fileTemplate];
   }
 }
