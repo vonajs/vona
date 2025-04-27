@@ -4,6 +4,7 @@ export interface IDtoRecord {}
 
 export interface IDecoratorDtoOptions {
   description?: string;
+  independent?: boolean;
 }
 
 declare module 'vona-module-a-onion' {
