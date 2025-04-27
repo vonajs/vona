@@ -10,19 +10,19 @@ const __cacheViewTemplates: Record<string, any> = {};
 @Bean()
 export class BeanError extends BeanBase {
   async render(err: Error, options?: IErrorRenderOptions): Promise<TypeEventResolvePathResult> {
-    // ssr
-    const ssrSite = this.scope.config.error.ssr.site;
-    const pagePath = this.scope.config.error.ssr.pagePath;
-    const beanSsr = this.bean.ssr;
-    if (ssrSite && pagePath && beanSsr) {
-      const html = await beanSsr.render(
-        ssrSite as any,
-        pagePath,
-        this.scope.service.errorView.getErrorData(err),
-        { returnHtml: options?.returnHtml },
-      );
-      if (html) return html;
-    }
+    // // ssr
+    // const ssrSite = this.scope.config.error.ssr.site;
+    // const pagePath = this.scope.config.error.ssr.pagePath;
+    // const beanSsr = this.bean.ssr;
+    // if (ssrSite && pagePath && beanSsr) {
+    //   const html = await beanSsr.render(
+    //     ssrSite as any,
+    //     pagePath,
+    //     this.scope.service.errorView.getErrorData(err),
+    //     { returnHtml: options?.returnHtml },
+    //   );
+    //   if (html) return html;
+    // }
     // template
     const html = this.scope.service.errorView.toHTML(err, this._getViewTemplate());
     if (options?.returnHtml) return html;

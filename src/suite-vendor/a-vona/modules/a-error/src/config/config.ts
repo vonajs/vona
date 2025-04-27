@@ -5,10 +5,10 @@ import { accepts } from '../lib/utils.ts';
 export function config(_app: VonaApplication) {
   return {
     error: {
-      ssr: {
-        site: 'a-ssrcabloy:cabloy',
-        pagePath: '/a/ssrcabloy/error',
-      },
+      // ssr: {
+      //   site: 'a-ssrcabloy:cabloy',
+      //   pagePath: '/a/ssrcabloy/error',
+      // },
       templatePath: '',
       errorPageUrl(_err: Error, _ctx: VonaContext): string | undefined {
         return undefined;
