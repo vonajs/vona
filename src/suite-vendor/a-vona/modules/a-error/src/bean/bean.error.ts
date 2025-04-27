@@ -12,10 +12,12 @@ export class BeanError extends BeanBase {
   async render(err: Error, options?: IErrorRenderOptions): Promise<TypeEventResolvePathResult> {
     // ssr
     const ssrSite = this.scope.config.error.ssr.site;
-    if (ssrSite) {
-      const html = await this.bean.ssr.render(
+    const pagePath = this.scope.config.error.ssr.pagePath;
+    const beanSsr = this.bean.ssr;
+    if (ssrSite && pagePath && beanSsr) {
+      const html = await beanSsr.render(
         ssrSite as any,
-        this.scope.config.error.ssr.pagePath,
+        pagePath,
         this.scope.service.errorView.getErrorData(err),
         { returnHtml: options?.returnHtml },
       );
