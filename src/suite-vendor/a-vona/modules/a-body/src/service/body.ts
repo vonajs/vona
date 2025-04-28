@@ -78,7 +78,7 @@ export class ServiceBody extends BeanBase {
       const contentType = options?.contentType;
       if (contentType) return contentType;
     }
-    if (this.ctx.accepts('json') === 'json') return 'application/json';
+    if (this.ctx.acceptJSON) return 'application/json';
     if (this.ctx.accepts('html') === 'html') return 'text/html';
     return 'application/octet-stream';
   }

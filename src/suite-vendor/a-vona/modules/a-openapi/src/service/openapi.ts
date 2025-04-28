@@ -29,7 +29,7 @@ import {
 } from 'vona-module-a-web';
 import { z } from 'zod';
 import { bodySchemaWrapperDefault } from '../lib/schema/bodySchemaWrapper.ts';
-import { schema } from '../lib/schema/schema.ts';
+import { $schema } from '../lib/schema/schema.ts';
 import { SymbolOpenApiOptions } from '../types/api.ts';
 import { SymbolRouteHandlersArgumentsMeta } from '../types/decorator.ts';
 
@@ -102,6 +102,14 @@ export class ServiceOpenapi extends BeanBase {
         securityScheme = (securityScheme as any).call(this.app);
       }
       registry.registerComponent('securitySchemes', key, securityScheme as any);
+    }
+    // schema: independent
+    const dtos = this.bean.onion.dto.getOnionsEnabled();
+    for (const dto of dtos) {
+      // if (dto.beanOptions.options?.independent) {
+      const schema = $schema(dto.beanOptions.beanClass);
+      registry.registerComponent('schemas', dto.beanOptions.beanFullName, schema as any);
+      // }
     }
     // controller
     for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
@@ -335,7 +343,7 @@ export class ServiceOpenapi extends BeanBase {
       bodySchema = actionOpenApiOptions.bodySchema;
     } else {
       const metaType = appMetadata.getDesignReturntype(controller.prototype, actionKey);
-      bodySchema = schema(metaType as any);
+      bodySchema = $schema(metaType as any);
     }
     // wrapper
     if (contentType !== 'application/json') return bodySchema;

@@ -4,15 +4,15 @@ import { appMetadata, appResource, cast } from 'vona';
 import { z } from 'zod';
 import { SymbolDecoratorRule } from '../../types/decorator.ts';
 
-export function schema(schemaLike: z.ZodSchema): z.ZodSchema;
-export function schema(classType: StringConstructor): z.ZodString;
-export function schema(classType: NumberConstructor): z.ZodNumber;
-export function schema(classType: BooleanConstructor): z.ZodBoolean;
-export function schema(classType: DateConstructor): z.ZodDate;
-export function schema(classType: BigIntConstructor): z.ZodBigInt;
-export function schema(classType: ArrayConstructor): z.ZodArray<z.ZodAny>;
-export function schema<T>(classType: Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
-export function schema(classType: any, options?: ISchemaObjectOptions): any {
+export function $schema(schemaLike: z.ZodSchema): z.ZodSchema;
+export function $schema(classType: StringConstructor): z.ZodString;
+export function $schema(classType: NumberConstructor): z.ZodNumber;
+export function $schema(classType: BooleanConstructor): z.ZodBoolean;
+export function $schema(classType: DateConstructor): z.ZodDate;
+export function $schema(classType: BigIntConstructor): z.ZodBigInt;
+export function $schema(classType: ArrayConstructor): z.ZodArray<z.ZodAny>;
+export function $schema<T>(classType: Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
+export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   if (!classType) return z.any();
   if (classType.parseAsync) return classType;
   if (classType.name === 'String') return z.string();

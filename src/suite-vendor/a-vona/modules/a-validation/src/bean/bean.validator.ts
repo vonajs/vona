@@ -4,7 +4,7 @@ import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { BeanBase, HttpStatus } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { schema } from 'vona-module-a-openapi';
+import { $schema } from 'vona-module-a-openapi';
 import { z } from 'zod';
 
 @Bean()
@@ -24,8 +24,8 @@ export class BeanValidator extends BeanBase {
     //   this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     // }
     // schema
-    const _schema = schema(classType, options);
-    return await this.validateSchema(_schema, value, options, path);
+    const schema = $schema(classType, options);
+    return await this.validateSchema(schema, value, options, path);
   }
 
   async validateSchema<T, V = T>(
