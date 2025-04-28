@@ -104,12 +104,14 @@ export class ServiceOpenapi extends BeanBase {
       registry.registerComponent('securitySchemes', key, securityScheme as any);
     }
     // schema: independent
-    const dtos = this.bean.onion.dto.getOnionsEnabled();
-    for (const dto of dtos) {
-      // if (dto.beanOptions.options?.independent) {
-      const schema = $schema(dto.beanOptions.beanClass);
-      registry.registerComponent('schemas', dto.beanOptions.beanFullName, schema as any);
-      // }
+    for (const sceneName of ['dto', 'entity']) {
+      const onionSlices = this.bean.onion[sceneName].getOnionsEnabled();
+      for (const onionSlice of onionSlices) {
+        if (onionSlice.beanOptions.options?.independent) {
+          const schema = $schema(onionSlice.beanOptions.beanClass);
+          registry.register(onionSlice.beanOptions.beanFullName, schema);
+        }
+      }
     }
     // controller
     for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
