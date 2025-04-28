@@ -538,37 +538,34 @@ declare module 'vona-module-test-vona' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
-    '/test/vona/bean/test': '/test/vona/bean/test';
-    '/test/vona/bean/service': '/test/vona/bean/service';
-    '/': '/';
-    '/test/vona/onion/echo3/:_string_': '/test/vona/onion/echo3:{userId}';
-    '/test/vona/onion/echo3/:userId': `/test/vona/onion/echo3/${string}`;
-    '/test/vona/onion/echo5': '/test/vona/onion/echo5';
-    '/test/vona/onion/echo6': '/test/vona/onion/echo6';
-    '/test/vona/passport/echo/:_string_': '/test/vona/passport/echo:{name}';
-    '/test/vona/passport/echo/:name': `/test/vona/passport/echo/${string}`;
-    '/test/vona/passport/isAuthenticated': '/test/vona/passport/isAuthenticated';
+    '/test/vona/bean/test': undefined;
+    '/test/vona/bean/service': undefined;
+    '/': undefined;
+    '/test/vona/onion/echo3/:userId': undefined;
+    '/test/vona/onion/echo5': undefined;
+    '/test/vona/onion/echo6': undefined;
+    '/test/vona/passport/echo/:name': undefined;
+    '/test/vona/passport/isAuthenticated': undefined;
   }
   export interface IApiPathPostRecord {
-    '/test/vona/cacheMem': '/test/vona/cacheMem';
-    '/test/vona/cacheRedis': '/test/vona/cacheRedis';
-    '//echo': '//echo';
-    '/test/vona/onion/echo2/:_string_/:_string_': '/test/vona/onion/echo2:{userId}:{userName}';
-    '/test/vona/onion/echo2/:userId/:userName': `/test/vona/onion/echo2/${string}/${string}`;
-    '/test/vona/onion/echo4': '/test/vona/onion/echo4';
-    '/test/vona/passport/login': '/test/vona/passport/login';
-    '/test/vona/passport/refresh': '/test/vona/passport/refresh';
-    '/test/vona/passport/logout': '/test/vona/passport/logout';
-    '/test/vona/performAction/echo': '/test/vona/performAction/echo';
-    '/test/vona/queue/pushAsync': '/test/vona/queue/pushAsync';
-    '/test/vona/queue/push': '/test/vona/queue/push';
-    '/test/vona/summer': '/test/vona/summer';
-    '/test/vona/tail': '/test/vona/tail';
-    '/test/vona/transaction/fail': '/test/vona/transaction/fail';
-    '/test/vona/transaction/success': '/test/vona/transaction/success';
-    '/test/vona/upload/fields': '/test/vona/upload/fields';
-    '/test/vona/upload/file': '/test/vona/upload/file';
-    '/test/vona/upload/files': '/test/vona/upload/files';
+    '/test/vona/cacheMem': undefined;
+    '/test/vona/cacheRedis': undefined;
+    '//echo': undefined;
+    '/test/vona/onion/echo2/:userId/:userName': undefined;
+    '/test/vona/onion/echo4': undefined;
+    '/test/vona/passport/login': undefined;
+    '/test/vona/passport/refresh': undefined;
+    '/test/vona/passport/logout': undefined;
+    '/test/vona/performAction/echo': undefined;
+    '/test/vona/queue/pushAsync': undefined;
+    '/test/vona/queue/push': undefined;
+    '/test/vona/summer': undefined;
+    '/test/vona/tail': undefined;
+    '/test/vona/transaction/fail': undefined;
+    '/test/vona/transaction/success': undefined;
+    '/test/vona/upload/fields': undefined;
+    '/test/vona/upload/file': undefined;
+    '/test/vona/upload/files': undefined;
   }
 
 }

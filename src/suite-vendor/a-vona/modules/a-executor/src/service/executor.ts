@@ -1,9 +1,9 @@
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { IGeneralInfoOptions, IPerformActionOptions } from '../types/executor.ts';
-import { defaultPathSerializer } from '@cabloy/utils';
+import { combineParamsAndQuery } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Log } from 'vona-module-a-logger';
-import { $apiPath, Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-web';
 import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Service()
@@ -24,7 +24,7 @@ export class ServiceExecutor extends BeanBase {
       ctx.res.statusCode = 404;
       ctx.req.method = method.toUpperCase();
       // url
-      ctx.req.url = defaultPathSerializer($apiPath(url as any), options?.params);
+      ctx.req.url = combineParamsAndQuery(url, { params: options?.params, query: options?.query });
       // headers
       ctx.req.headers = Object.assign({}, ctx.req.headers, options?.headers);
       // json
@@ -35,10 +35,10 @@ export class ServiceExecutor extends BeanBase {
       if (options?.authToken) {
         ctx.req.headers.authorization = `Bearer ${options?.authToken}`;
       }
-      // query
-      if (options?.query !== undefined) {
-        cast(ctx.req).query = cast(ctx.request).query = options?.query;
-      }
+      // // query
+      // if (options?.query !== undefined) {
+      //   cast(ctx.req).query = cast(ctx.request).query = options?.query;
+      // }
       // body
       cast(ctx.req).body = ctx.request.body = options?.body ?? {}; // body should set {} if undefined/null
       // onion

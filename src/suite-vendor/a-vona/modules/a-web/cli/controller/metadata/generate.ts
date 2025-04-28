@@ -15,19 +15,19 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       if (!contentPaths[method]) contentPaths[method] = [];
       const apiPath = __combineApiPath(moduleName, controllerPath, actionPath);
       if (!apiPath.includes(':')) {
-        contentPaths[method].push(`'${apiPath}': '${apiPath}'`);
+        contentPaths[method].push(`'${apiPath}': undefined;`);
       } else {
-        const apiPath1 = apiPath.replace(/(:[^/]+)/g, (_, _part) => {
-          return ':_string_';
-        });
-        const apiPath2 = apiPath.replace(/(\/:[^/]+)/g, (_, part) => {
-          return `:{${part.substring(2)}}`;
-        });
-        const apiPath3 = apiPath.replace(/(:[^/]+)/g, (_, _part) => {
-          return '${string}';
-        });
-        contentPaths[method].push(`'${apiPath1}': '${apiPath2}'`);
-        contentPaths[method].push(`'${apiPath}': \`${apiPath3}\``);
+        // const apiPath1 = apiPath.replace(/(:[^/]+)/g, (_, _part) => {
+        //   return ':_string_';
+        // });
+        // const apiPath2 = apiPath.replace(/(\/:[^/]+)/g, (_, part) => {
+        //   return `:{${part.substring(2)}}`;
+        // });
+        // const apiPath3 = apiPath.replace(/(:[^/]+)/g, (_, _part) => {
+        //   return '${string}';
+        // });
+        // contentPaths[method].push(`'${apiPath1}': '${apiPath2}'`);
+        contentPaths[method].push(`'${apiPath}': undefined;`);
       }
     }
   }
