@@ -8,7 +8,7 @@ describe('passport.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.passport.signinMock();
       assert.equal(app.bean.passport.isAuthenticated, true);
-      await app.bean.executor.performAction('get', '/test/vona/passport/echo/admin');
+      await app.bean.executor.performAction('get', '/test/vona/passport/echo/:name', { params: { name: 'admin' } });
       await app.bean.passport.signout();
       assert.equal(app.bean.passport.isAuthenticated, false);
     });
