@@ -9,9 +9,9 @@ import { __delegateProperties } from '../lib/utils.ts';
 export class BeanExecutor extends BeanBase {
   async performAction<
     METHOD extends keyof IApiPathRecordMethodMap,
-    PATHKEY extends keyof IApiPathRecordMethodMap[METHOD],
+    PATH extends keyof IApiPathRecordMethodMap[METHOD],
   >(method: METHOD,
-    path: IApiPathRecordMethodMap[METHOD][PATHKEY],
+    path: PATH,
     options?: IPerformActionOptions,
   ): Promise<any> {
     // url
