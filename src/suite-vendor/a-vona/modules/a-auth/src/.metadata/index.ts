@@ -260,7 +260,7 @@ declare module 'vona-module-a-auth' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
-    '/auth/passport/callback': '/auth/passport/callback';
+    '/auth/passport/callback': undefined;
   }
 
 }

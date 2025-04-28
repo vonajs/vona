@@ -50,7 +50,7 @@ declare module 'vona-module-home-index' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
-    '//': '//';
+    '//': undefined;
   }
 
 }

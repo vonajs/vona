@@ -197,19 +197,16 @@ declare module 'vona-module-home-user' {
 /** controller: begin */
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
-    '/home/user/passport/current': '/home/user/passport/current';
-    '/home/user/passport/login/:_string_/:_string_/:_string_': '/home/user/passport/login:{module}:{providerName}:{clientName?}';
-    '/home/user/passport/login/:module/:providerName/:clientName?': `/home/user/passport/login/${string}/${string}/${string}`;
-    '/home/user/passport/associate/:_string_/:_string_/:_string_': '/home/user/passport/associate:{module}:{providerName}:{clientName?}';
-    '/home/user/passport/associate/:module/:providerName/:clientName?': `/home/user/passport/associate/${string}/${string}/${string}`;
-    '/home/user/passport/migrate/:_string_/:_string_/:_string_': '/home/user/passport/migrate:{module}:{providerName}:{clientName?}';
-    '/home/user/passport/migrate/:module/:providerName/:clientName?': `/home/user/passport/migrate/${string}/${string}/${string}`;
+    '/home/user/passport/current': undefined;
+    '/home/user/passport/login/:module/:providerName/:clientName?': undefined;
+    '/home/user/passport/associate/:module/:providerName/:clientName?': undefined;
+    '/home/user/passport/migrate/:module/:providerName/:clientName?': undefined;
   }
   export interface IApiPathPostRecord {
-    '/home/user/passport/logout': '/home/user/passport/logout';
-    '/home/user/passport/login': '/home/user/passport/login';
-    '/home/user/passport/refreshAuthToken': '/home/user/passport/refreshAuthToken';
-    '/home/user/passport/createPassportJwtFromOauthCode': '/home/user/passport/createPassportJwtFromOauthCode';
+    '/home/user/passport/logout': undefined;
+    '/home/user/passport/login': undefined;
+    '/home/user/passport/refreshAuthToken': undefined;
+    '/home/user/passport/createPassportJwtFromOauthCode': undefined;
   }
 
 }
