@@ -146,7 +146,7 @@ export class ServiceOpenapi extends BeanBase {
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     const actionKeys = actionKey ? [actionKey] : Object.keys(descs);
-    for (const actionKey in actionKeys) {
+    for (const actionKey of actionKeys) {
       const desc = descs[actionKey];
       if (['constructor'].includes(actionKey)) continue;
       if (!desc.value || typeof desc.value !== 'function') continue;

@@ -11,7 +11,7 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
     const headerOpenapiSchema = this.ctx.headers['x-vona-openapi-schema'];
     if (headerOpenapiSchema !== 'true') return next();
     // openapi-schema
-    const body = { ok: true };
+    const body = this.$scope.openapi.service.openapi.generateJsonOfControllerAction(this.ctx.getController()!, this.ctx.getHandlerName() as string);
     this.app.success(body);
   }
 }
