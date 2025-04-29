@@ -180,10 +180,8 @@ export class ServiceOpenapi extends BeanBase {
       controller.prototype,
       actionKey,
     )!;
-    const actionPath: RegExp | string = handlerMetadata.path || '';
+    const actionPath: string = handlerMetadata.path || '';
     const actionMethod: RequestMethod = handlerMetadata.method || RequestMethod.GET;
-    // ignore regexp
-    if (actionPath instanceof RegExp) return;
 
     // routePath
     const routePath = app.util.combineApiPathControllerAndAction(

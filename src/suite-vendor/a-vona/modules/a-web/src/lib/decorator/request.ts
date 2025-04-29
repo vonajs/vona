@@ -4,7 +4,7 @@ import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 import { RequestMethod, SymbolRequestMappingHandler } from '../../types/request.ts';
 
 export interface RequestMappingMetadata {
-  path?: RegExp | string;
+  path?: string;
   method?: RequestMethod;
   options?: IOpenApiOptions;
 }
@@ -31,7 +31,7 @@ export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadat
 }
 
 function createMappingDecorator(method: RequestMethod) {
-  return (path?: RegExp | string, options?: IOpenApiOptions): MethodDecorator => {
+  return (path?: string, options?: IOpenApiOptions): MethodDecorator => {
     return RequestMapping({ method, path, options });
   };
 }
