@@ -103,8 +103,10 @@ export const contextBase: ContextBase = {
   redirect(url: string, status?: 301 | 302): void {
     const self = cast<VonaContext>(this);
     // checkOrigin
-    const origin = cast(self.app.bean).security.checkOrigin(url, self.host);
-    if (!origin) self.app.throw(403);
+    if (!url.startsWith('/')) {
+      const origin = cast(self.app.bean).security.checkOrigin(url, self.host);
+      if (!origin) self.app.throw(403);
+    }
     // throw
     status = status ?? 302;
     self.app.throw(status, url);
