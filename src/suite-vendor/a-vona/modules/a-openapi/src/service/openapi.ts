@@ -46,6 +46,18 @@ export class ServiceOpenapi extends BeanBase {
     return apiObj as IOpenAPIObject[K];
   }
 
+  generateJsonOfControllerAction<K extends keyof IOpenAPIObject>(controller: Constructable, actionKey: string, version: K = '31' as any): IOpenAPIObject[K] {
+    const registry = new OpenAPIRegistry();
+    const beanOptions = appResource.getBean(controller);
+    if (!beanOptions) throw new Error('invalid controller');
+    this._collectController(registry, beanOptions.module, controller, actionKey);
+    const generator =
+      version === '30' as any ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+    const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
+    this._translate(apiObj);
+    return apiObj as IOpenAPIObject[K];
+  }
+
   private _translate(apiObj: OpenAPIObject30 | OpenAPIObject31) {
     // paths
     if (apiObj.paths) {
@@ -120,7 +132,7 @@ export class ServiceOpenapi extends BeanBase {
     return registry;
   }
 
-  private _collectController(registry: OpenAPIRegistry, moduleName: string, controller: Constructable) {
+  private _collectController(registry: OpenAPIRegistry, moduleName: string, controller: Constructable, actionKey?: string) {
     // info
     const info = ModuleInfo.parseInfo(moduleName)!;
     // controller options
@@ -133,7 +145,8 @@ export class ServiceOpenapi extends BeanBase {
     if (controllerOpenApiOptions?.exclude) return;
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
-    for (const actionKey in descs) {
+    const actionKeys = actionKey ? [actionKey] : Object.keys(descs);
+    for (const actionKey in actionKeys) {
       const desc = descs[actionKey];
       if (['constructor'].includes(actionKey)) continue;
       if (!desc.value || typeof desc.value !== 'function') continue;
