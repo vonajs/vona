@@ -3,7 +3,12 @@ export interface IMenus {
   groups?: IMenuGroup[];
 }
 
-export interface IMenuItemMeta {}
+export interface IMenuItemMetaParams {}
+export interface IMenuItemMetaQuery {}
+export interface IMenuItemMeta {
+  params?: IMenuItemMetaParams;
+  query?: IMenuItemMetaQuery;
+}
 
 export interface IMenuItem {
   name: string;

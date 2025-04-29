@@ -50,6 +50,8 @@ declare module 'vona-module-a-event' {
 export * from '../dto/menuGroup.ts';
 export * from '../dto/menuItem.ts';
 export * from '../dto/menuItemMeta.ts';
+export * from '../dto/menuItemMetaParams.ts';
+export * from '../dto/menuItemMetaQuery.ts';
 export * from '../dto/menus.ts';
 declare module 'vona' {
 
@@ -57,6 +59,8 @@ declare module 'vona' {
     'a-menu:menuGroup': never;
     'a-menu:menuItem': never;
     'a-menu:menuItemMeta': never;
+    'a-menu:menuItemMetaParams': never;
+    'a-menu:menuItemMetaQuery': never;
     'a-menu:menus': never;
   }
 
