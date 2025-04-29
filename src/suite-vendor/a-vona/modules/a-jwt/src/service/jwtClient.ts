@@ -62,7 +62,7 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   async verify(token?: string): Promise<IPayloadDataBase | undefined> {
-    if (!token) token = this.scope.service.jwtExtract.fromAllWays();
+    if (!token && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
       this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.signOptions, (err, decoded) => {

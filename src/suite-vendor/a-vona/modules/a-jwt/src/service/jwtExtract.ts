@@ -20,10 +20,15 @@ export class ServiceJwtExtract extends BeanBase {
     return auth.value;
   }
 
+  fromCookie() {
+    return this.ctx.cookies.get(this.scope.config.field.extract.cookie);
+  }
+
   fromAllWays() {
     let token: string | undefined = this.fromQuery();
     if (!token) token = this.fromAuthHeaderWithScheme();
     if (!token) token = this.fromHeader();
+    if (!token) token = this.fromCookie();
     return token;
   }
 }

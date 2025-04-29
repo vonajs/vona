@@ -14,6 +14,7 @@ export function config(app: VonaApplication) {
         headerAuth: 'authorization',
         headerAuthScheme: 'bearer',
         query: 'auth_token',
+        cookie: 'token',
       },
     },
     tempToken: {
