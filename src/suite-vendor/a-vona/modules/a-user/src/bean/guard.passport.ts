@@ -1,5 +1,6 @@
 import type { Next } from 'vona';
 import type { IDecoratorGuardOptionsGlobal, IGuardExecute } from 'vona-module-a-aspect';
+import { catchError } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
 
@@ -15,7 +16,10 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
     if (!this.bean.passport.getCurrent()) {
       if (options.checkAuthToken) {
         // will return undefined if no accessToken, so not check options.public
-        await this.bean.passport.checkAuthToken();
+        const [_, err] = await catchError(() => {
+          return this.bean.passport.checkAuthToken();
+        });
+        if (err && !options.public) throw err;
       }
     }
     // check current
