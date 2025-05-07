@@ -63,6 +63,7 @@ export class LocalTemplate {
     snippetsPath?: string | null | undefined;
     boilerplatePath?: string | null | undefined;
   }) {
+    await this.helper.ensureDir(targetDir);
     // first
     if (snippetsPath) {
       const snippetsDir = this.resolveTemplatePath(setName, snippetsPath);
