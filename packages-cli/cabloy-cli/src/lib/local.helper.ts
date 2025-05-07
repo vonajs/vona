@@ -296,9 +296,12 @@ export class LocalHelper {
     return name;
   }
 
-  async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
+  async importDynamic(fileName: string): Promise<any>;
+  async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT>;
+  async importDynamic<RESULT>(fileName: string, fn?: (instance: any) => Promise<RESULT>): Promise<RESULT | any> {
     // load
     const instance = await import(this.pathToHref(fileName));
+    if (!fn) return instance;
     return await fn(instance);
   }
 
