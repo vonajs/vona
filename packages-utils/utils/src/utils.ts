@@ -88,9 +88,11 @@ export function createFunction(expression: string, scopeKeys?: string[]): Functi
   return fn;
 }
 
-export function evaluateSimple(expression: string) {
-  const fn = createFunction(expression);
-  return fn();
+export function evaluateSimple(expression: string, scope?: object) {
+  const scopeKeys = scope ? Object.keys(scope) : undefined;
+  const scopeValues = scope ? Object.values(scope) : undefined;
+  const fn = createFunction(expression, scopeKeys);
+  return scopeValues ? fn(...scopeValues) : fn();
 }
 
 export function getRandomInt(size: number, start: number = 0) {
