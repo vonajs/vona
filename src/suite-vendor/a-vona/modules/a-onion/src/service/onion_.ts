@@ -320,6 +320,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   public inspect(selector?: string) {
     const onionSlices = this.getOnionsEnabled(selector);
     const onionNames = onionSlices.map(item => item.name);
+    this.$logger.silly(JSON.stringify(onionSlices, null, 2));
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
   }
 }
