@@ -1,18 +1,29 @@
+import fs from 'node:fs';
 import { metadataCustomSnippet } from '@cabloy/cli';
+import { catchError } from '@cabloy/utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
+    module: string;
   }
 }
 
 export default metadataCustomSnippet({
-  file: 'meta.version.ts',
+  file: 'src/bean/meta.version.ts',
   language: 'gogo',
-  init: async ({ cli, targetFile }) => {
-
+  init: async ({ cli, argv, targetFile }) => {
+    await catchError(() => {
+      return cli.helper.invokeCli([
+        ':create:bean',
+        'meta',
+        'version',
+        `--module=${argv.module}`,
+      ], { cwd: argv.projectPath });
+    });
+    return fs.readFileSync(targetFile).toString('utf8');
   },
   async transform({ ast, argv }) {
-    argv.fileVersion = ast.vonaModule.fileVersion = 1 + (ast.vonaModule.fileVersion ?? 0);
+    console.log(argv);
     return ast;
   },
 });
