@@ -242,9 +242,9 @@ importers:
       vona-module-test-cabloy:
         specifier: workspace:^
         version: link:src/suite-vendor/test-cabloy/modules/test-cabloy
-      vona-module-test-pu:
+      vona-module-test-rest:
         specifier: workspace:^
-        version: link:src/suite-vendor/test-cabloy/modules/test-pu
+        version: link:src/suite-vendor/test-cabloy/modules/test-rest
       vona-module-test-ssr:
         specifier: workspace:^
         version: link:src/suite-vendor/test-cabloy/modules/test-ssr
@@ -1734,9 +1734,9 @@ importers:
       vona-module-test-cabloy:
         specifier: workspace:^
         version: link:modules/test-cabloy
-      vona-module-test-pu:
+      vona-module-test-rest:
         specifier: workspace:^
-        version: link:modules/test-pu
+        version: link:modules/test-rest
       vona-module-test-ssr:
         specifier: workspace:^
         version: link:modules/test-ssr
@@ -1750,7 +1750,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/test-cabloy/modules/test-pu:
+  src/suite-vendor/test-cabloy/modules/test-rest:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
