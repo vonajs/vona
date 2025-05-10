@@ -17,6 +17,7 @@ import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
 import initMonkey from './command/init.monkey.ts';
 import initStatic from './command/init.static.ts';
+import toolsCrud from './command/tools.crud.ts';
 import toolsDeps from './command/tools.deps.ts';
 import toolsMetadata from './command/tools.metadata.ts';
 
@@ -52,5 +53,6 @@ export const commands = {
   tools: {
     deps: toolsDeps,
     metadata: toolsMetadata,
+    crud: toolsCrud,
   },
 };
