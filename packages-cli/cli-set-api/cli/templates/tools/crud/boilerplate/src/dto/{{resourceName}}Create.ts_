@@ -1,0 +1,6 @@
+import { ClassMapped } from 'vona';
+import { Dto } from 'vona-module-a-web';
+import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
+
+@Dto()
+export class Dto<%=argv.resourceNameCapitalize%>Create extends ClassMapped.pick(Entity<%=argv.resourceNameCapitalize%>, ['name', 'description']) {}
