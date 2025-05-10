@@ -18,7 +18,7 @@ export interface IMiddlewareSystemOptionsCors extends IDecoratorMiddlewareSystem
 }
 
 @MiddlewareSystem<IMiddlewareSystemOptionsCors>({
-  dependencies: 'a-core:overrideMethod',
+  dependencies: 'a-static:static',
   whiteList: '*',
   origin: _corsOrigin,
   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
