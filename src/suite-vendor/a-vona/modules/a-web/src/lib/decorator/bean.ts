@@ -5,11 +5,12 @@ import { appMetadata, createBeanDecorator } from 'vona';
 import { getTargetDecoratorRules, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export function Controller(options?: IDecoratorControllerOptions): ClassDecorator;
-export function Controller(path?: string): ClassDecorator;
-export function Controller(options?: IDecoratorControllerOptions | string): ClassDecorator {
-  if (!options) options = {};
-  if (typeof options === 'string') {
-    options = { path: options } as unknown as IDecoratorControllerOptions;
+export function Controller(path?: string, options?: Omit<IDecoratorControllerOptions, 'path'>): ClassDecorator;
+export function Controller(path?: IDecoratorControllerOptions | string, options?: IDecoratorControllerOptions | string): ClassDecorator {
+  if (typeof path === 'string') {
+    options = Object.assign({}, options, { path });
+  } else {
+    options = path || {};
   }
   return createBeanDecorator('controller', options, false, false, target => {
     const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
