@@ -26,6 +26,11 @@ export interface IAstData<LANGUAGE extends TypeParseLanguage> extends ICommandCo
   snippet: ISnippet<LANGUAGE>;
 }
 
+export interface IInitData extends ICommandContext {
+  cli: BeanCliBase;
+  targetFile: string;
+}
+
 export type TypeParseLanguage = 'plain' | 'json' | 'gogo' | '';
 export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
   ? string
@@ -41,7 +46,7 @@ export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE exte
 export interface ISnippet<LANGUAGE extends TypeParseLanguage = ''> {
   language: LANGUAGE;
   file: string | ((ejsData: IEjsData) => string);
-  init?: string;
+  init?: string | ((initData: IInitData) => Promise<string>);
   parseOptions?: TypeParseOptions<LANGUAGE>;
   transform: (astData: IAstData<LANGUAGE>) => Promise<TypeParseResult<LANGUAGE>>;
 }

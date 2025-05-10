@@ -206,6 +206,14 @@ export class LocalTemplate {
     };
   }
 
+  getInitData(targetFile: string) {
+    return {
+      cli: this.cli,
+      targetFile,
+      ...this.context,
+    };
+  }
+
   async applySnippets(targetDir: string, snippetsDir: string) {
     // snippets
     let files = await globby('*.{cjs,ts}', {
@@ -256,7 +264,13 @@ export class LocalTemplate {
       if (!snippet.init) {
         throw new Error(`should provider init content for: ${targetFile}`);
       }
-      sourceCode = await this.renderContent({ content: snippet.init });
+      let content;
+      if (typeof snippet.init === 'function') {
+        content = await snippet.init(this.getInitData(targetFile));
+      } else {
+        content = snippet.init;
+      }
+      sourceCode = await this.renderContent({ content });
     }
     // language
     const language = snippet.language as TypeParseLanguage;
