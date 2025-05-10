@@ -10,6 +10,7 @@ declare module '@cabloy/cli' {
     moduleInfo: IModuleInfo;
     resourceName: string;
     resourceNameCapitalize: string;
+    moduleResourceName: string;
   }
 }
 
@@ -31,6 +32,8 @@ export class CliToolsCrud extends BeanCliBase {
     // resourceName
     const resourceName = argv.resourceName;
     argv.resourceNameCapitalize = this.helper.firstCharToUpperCase(resourceName);
+    // moduleResourceName
+    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.resourceName);
     // controller
     const controllerFile = path.join(targetDir, 'src/controller', `${resourceName}.ts`);
     if (fs.existsSync(controllerFile)) {
