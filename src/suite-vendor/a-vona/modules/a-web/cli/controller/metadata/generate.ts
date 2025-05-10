@@ -56,7 +56,7 @@ function __parseControllerPath(fileContent: string): string | false {
   if (!matched) return false;
   const controllerPath = matched[1];
   if (controllerPath === '') return '';
-  return controllerPath.replaceAll("'", '');
+  return controllerPath.split(',')[0].replaceAll("'", '');
 }
 
 function __parseActionPaths(fileContent: string): [string, string][] {
