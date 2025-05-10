@@ -31,7 +31,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
 }
 
 @MiddlewareSystem<IMiddlewareSystemOptionsStatic>({
-  dependencies: 'a-core:notfound',
+  dependencies: 'a-instance:appReady',
   apiStaticPrefix: '/api/static/',
   dirs: [],
   dynamic: true,

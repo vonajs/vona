@@ -6,7 +6,7 @@ import { MiddlewareSystem } from 'vona-module-a-aspect';
 export interface IMiddlewareSystemOptionsAppReady extends IDecoratorMiddlewareSystemOptions {}
 
 @MiddlewareSystem<IMiddlewareSystemOptionsAppReady>({
-  dependencies: 'a-core:overrideMethod',
+  dependencies: 'a-core:notfound',
 })
 export class MiddlewareSystemAppReady extends BeanBase implements IMiddlewareSystemExecute {
   async execute(_options: IMiddlewareSystemOptionsAppReady, next: Next) {

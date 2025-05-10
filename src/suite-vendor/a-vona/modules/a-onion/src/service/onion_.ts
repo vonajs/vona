@@ -316,4 +316,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     if (!routePathRaw || isRegExp(routePathRaw)) return;
     return routePathRaw;
   }
+
+  public inspect(selector?: string) {
+    const onionSlices = this.getOnionsEnabled(selector);
+    const onionNames = onionSlices.map(item => item.name);
+    this.$logger.silly(JSON.stringify(onionNames, null, 2));
+  }
 }
