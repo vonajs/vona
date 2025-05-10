@@ -1,0 +1,6 @@
+import { ClassMapped } from 'vona';
+import { Dto } from 'vona-module-a-web';
+import { Dto<%=argv.resourceNameCapitalize%>Create } from './<%=argv.resourceName%>Create.ts';
+
+@Dto()
+export class Dto<%=argv.resourceNameCapitalize%>Update extends ClassMapped.partial(Dto<%=argv.resourceNameCapitalize%>Create) {}
