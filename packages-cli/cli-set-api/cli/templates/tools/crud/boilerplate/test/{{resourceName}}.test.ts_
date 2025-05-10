@@ -1,0 +1,46 @@
+import type { Dto<%=argv.resourceNameCapitalize%>Create, Dto<%=argv.resourceNameCapitalize%>Update, Entity<%=argv.resourceNameCapitalize%> } from 'vona-module-test-pu';
+import assert from 'node:assert';
+import { describe, it } from 'node:test';
+import { catchError } from '@cabloy/utils';
+import { app } from 'vona-mock';
+
+describe('<%=argv.resourceName%>.test.ts', () => {
+  it('action:<%=argv.resourceName%>', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // data
+      const data: Dto<%=argv.resourceNameCapitalize%>Create = {
+        name: '__Tom__',
+        description: 'This is a test',
+      };
+      const dataUpdate: Dto<%=argv.resourceNameCapitalize%>Update = {
+        name: '__TomNew__',
+        description: 'This is a test',
+      };
+      // login
+      await app.bean.passport.signinMock();
+      // create
+      const <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('post', '/test/pu/<%=argv.resourceName%>', { body: data });
+      assert.equal(<%=argv.resourceName%>.name, data.name);
+      // findAll
+      const <%=argv.resourceName%>s: Entity<%=argv.resourceNameCapitalize%>[] = await app.bean.executor.performAction('get', '/test/pu/<%=argv.resourceName%>');
+      assert.equal(<%=argv.resourceName%>s.findIndex(item => item.name === data.name) > -1, true);
+      // update
+      await app.bean.executor.performAction('patch', '/test/pu/<%=argv.resourceName%>/:id', {
+        params: { id: <%=argv.resourceName%>.id },
+        body: dataUpdate,
+      });
+      // findOne
+      const <%=argv.resourceName%>One: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('get', '/test/pu/<%=argv.resourceName%>/:id', { params: { id: <%=argv.resourceName%>.id } });
+      assert.equal(<%=argv.resourceName%>One.name, dataUpdate.name);
+      // delete
+      await app.bean.executor.performAction('delete', '/test/pu/<%=argv.resourceName%>/:id', { params: { id: <%=argv.resourceName%>One.id } });
+      // findOne
+      const [_, err] = await catchError(() => {
+        return app.bean.executor.performAction('get', '/test/pu/<%=argv.resourceName%>/:id', { params: { id: <%=argv.resourceName%>One.id } });
+      });
+      assert.equal(err?.code, 404);
+      // logout
+      await app.bean.passport.signout();
+    });
+  });
+});
