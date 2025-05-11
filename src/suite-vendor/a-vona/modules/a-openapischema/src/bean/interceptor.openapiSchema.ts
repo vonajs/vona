@@ -17,7 +17,7 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
       handlerName: this.ctx.getHandlerName() as string,
     };
     const body = await this.scope.event.retrieveOpenapiSchema.emit(data, async data => {
-      const doc = this.$scope.openapi.service.openapi.generateJsonOfControllerAction(data.controller, data.handlerName, '');
+      const doc = this.$scope.openapi.service.openapi.generateJsonOfControllerAction(data.controller, data.handlerName, 'V31');
       return { doc };
     });
     this.app.success(body);
