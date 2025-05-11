@@ -10,6 +10,7 @@ import { BeanBase, compose } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
 import { LRU } from 'ylru';
 import { __ThisModule__ } from '../.metadata/this.ts';
+import { SymbolStaticGetFullPathInner } from '../types/static.ts';
 
 interface IStaticDirItem {
   prefix: string;
@@ -126,6 +127,11 @@ async function getFullPath(
   filename: string,
   options: IMiddlewareSystemOptionsStatic,
 ): Promise<string | true | undefined> {
+  if (process.env.META_MODE === 'local') {
+    ctx[SymbolStaticGetFullPathInner] = () => {
+      return _getFullPathInner(ctx, dir, filename, options);
+    };
+  }
   const scopeSelf = ctx.app.bean.scope(__ThisModule__);
   return scopeSelf.event.resolvePath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
     return _getFullPathInner(ctx, dir, filename, options);
