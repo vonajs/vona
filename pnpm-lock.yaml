@@ -161,6 +161,9 @@ importers:
       vona-module-a-openapi:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-openapi
+      vona-module-a-openapischema:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-openapischema
       vona-module-a-printtip:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-printtip
@@ -1094,6 +1097,9 @@ importers:
       vona-module-a-openapi:
         specifier: workspace:^
         version: link:modules/a-openapi
+      vona-module-a-openapischema:
+        specifier: workspace:^
+        version: link:modules/a-openapischema
       vona-module-a-printtip:
         specifier: workspace:^
         version: link:modules/a-printtip
@@ -1516,6 +1522,15 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.24.3
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-openapischema:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

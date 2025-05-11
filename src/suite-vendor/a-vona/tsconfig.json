@@ -121,6 +121,9 @@
     },
     {
       "path": "modules/a-menu/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-openapischema/tsconfig.build.json"
     }
   ],
   "exclude": [
