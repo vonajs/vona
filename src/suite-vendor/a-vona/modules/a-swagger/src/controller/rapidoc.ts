@@ -28,7 +28,7 @@ export class ControllerRapidoc extends BeanBase {
   @Web.get()
   @Passport.public()
   @Api.contentType('text/html')
-  async index(@Arg.query('version', v.default('31')) version: string): Promise<string> {
+  async index(@Arg.query('version', v.default('V31')) version: string): Promise<string> {
     // signin
     let accessToken = '';
     if (this.app.meta.isLocal || this.app.meta.isTest) {

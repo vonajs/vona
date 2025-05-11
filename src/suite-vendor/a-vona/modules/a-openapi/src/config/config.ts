@@ -5,7 +5,7 @@ import type { TypeOpenApiVersion, TypeSecuritySchemes } from '../types/api.ts';
 
 export function config(_app: VonaApplication) {
   return {
-    defaultVersion: '31' as TypeOpenApiVersion,
+    defaultVersion: 'V31' as TypeOpenApiVersion,
     generateDocument: {
       V30: {
         openapi: '3.0.0',
