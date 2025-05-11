@@ -719,6 +719,12 @@ importers:
 
   packages-utils/utils:
     dependencies:
+      '@cabloy/module-info':
+        specifier: workspace:^
+        version: link:../module-info
+      '@cabloy/word-utils':
+        specifier: ^2.0.0
+        version: 2.0.0
       cel-js:
         specifier: ^0.3.1
         version: 0.3.1

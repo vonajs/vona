@@ -9,7 +9,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
-import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { combineApiPath, combineApiPathControllerAndAction, combineApiPathControllerAndActionRaw, combineResourceName } from '@cabloy/utils';
 import fse from 'fs-extra';
 import * as uuid from 'uuid';
 import { cast } from '../../types/index.ts';
@@ -65,14 +65,7 @@ export class AppUtil extends BeanSimple {
     actionPath: RegExp | string | undefined,
     simplify?: boolean,
   ): string {
-    let apiPath = this.combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, '/_api_', simplify);
-    if (typeof apiPath !== 'string') return apiPath;
-    if (apiPath.startsWith('/_api_')) {
-      apiPath = apiPath.substring('/_api_'.length);
-    } else {
-      apiPath = `/${apiPath}`;
-    }
-    return apiPath;
+    return combineApiPathControllerAndActionRaw(moduleName, controllerPath, actionPath, simplify);
   }
 
   combineApiPathControllerAndAction(
@@ -82,27 +75,7 @@ export class AppUtil extends BeanSimple {
     prefix?: string | boolean,
     simplify?: boolean,
   ): string {
-    if (actionPath === undefined) actionPath = '';
-    // routePath
-    let routePath: string;
-    if (typeof actionPath !== 'string') {
-      // regexp
-      throw new TypeError('regexp not supported');
-    } else if (actionPath.startsWith('/')) {
-      // absolute
-      routePath = this.combineApiPath(actionPath, moduleName, prefix, simplify);
-    } else {
-      // relative
-      if (!controllerPath) {
-        routePath = this.combineApiPath(actionPath, moduleName, prefix, simplify);
-      } else {
-        routePath = this.combineApiPath(controllerPath, moduleName, prefix, simplify);
-        if (actionPath) {
-          routePath = `${routePath}/${actionPath}`;
-        }
-      }
-    }
-    return routePath;
+    return combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, prefix, simplify, this.app.config.server.globalPrefix);
   }
 
   combineApiPath(
@@ -111,26 +84,7 @@ export class AppUtil extends BeanSimple {
     prefix?: string | boolean,
     simplify?: boolean,
   ) {
-    const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.server.globalPrefix;
-    simplify = simplify ?? true;
-    if (!path) path = '';
-    // ignore globalPrefix
-    if (path.startsWith('//')) return path.substring(1);
-    // ignore module path
-    if (path.startsWith('/')) return `${globalPrefix}${path}`;
-    // globalPrefix + module path + arg
-    const parts = combineResourceName(path, moduleName ?? '', simplify, true);
-    return `${globalPrefix}/${parts.join('/')}`;
-  }
-
-  combineResourceName(
-    resourceName: string | undefined,
-    moduleName: ModuleInfo.IModuleInfo | string,
-    simplify?: boolean,
-    simplifyProviderId?: boolean,
-  ): string {
-    const parts = combineResourceName(resourceName, moduleName, simplify, simplifyProviderId);
-    return toLowerCaseFirstChar(stringToCapitalize(parts));
+    return combineApiPath(path, moduleName, prefix, simplify, this.app.config.server.globalPrefix);
   }
 
   combineStaticPath(path: string | undefined, moduleName?: ModuleInfo.IModuleInfo | string) {
@@ -146,6 +100,15 @@ export class AppUtil extends BeanSimple {
     const parts = moduleName.split('-');
     // path
     return `${globalPrefix}/${parts[0]}/${parts[1]}/${path}`;
+  }
+
+  combineResourceName(
+    resourceName: string | undefined,
+    moduleName: ModuleInfo.IModuleInfo | string,
+    simplify?: boolean,
+    simplifyProviderId?: boolean,
+  ): string {
+    return combineResourceName(resourceName, moduleName, simplify, simplifyProviderId);
   }
 
   async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
@@ -299,26 +262,6 @@ export class AppUtil extends BeanSimple {
     if (this.ctx.acceptJSON) return 'json';
     return 'html';
   }
-}
-
-export function combineResourceName(
-  resourceName: string | undefined,
-  moduleName: ModuleInfo.IModuleInfo | string,
-  simplify?: boolean,
-  simplifyProviderId?: boolean,
-): string[] {
-  simplify = simplify ?? true;
-  simplifyProviderId = simplifyProviderId ?? true;
-  if (!resourceName) resourceName = '';
-  // module path + arg
-  if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
-  const parts = moduleName.split('-');
-  // path
-  const res: string[] = [];
-  if (!simplifyProviderId || parts[0] !== 'a') res.push(parts[0]);
-  if (!simplify || !resourceName.startsWith(parts[1])) res.push(parts[1]);
-  if (resourceName) res.push(resourceName);
-  return res;
 }
 
 export function compose(chains, adapter?) {
