@@ -24,14 +24,14 @@ export interface IOpenApiOptions {
   headers?: IOpenApiHeader[];
 }
 
-export type TypeOpenApiVersion = '30' | '31';
+export type TypeOpenApiVersion = 'V30' | 'V31';
 export interface IOpenAPIObject {
-  30: OpenAPIObject30;
-  31: OpenAPIObject31;
+  V30: OpenAPIObject30;
+  V31: OpenAPIObject31;
 }
 export interface IOpenAPISchemaObject {
-  30: SchemaObject30;
-  31: SchemaObject31;
+  V30: SchemaObject30;
+  V31: SchemaObject31;
 }
 
 export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => object) | object>;

@@ -7,7 +7,7 @@ export function config(_app: VonaApplication) {
   return {
     defaultVersion: '31' as TypeOpenApiVersion,
     generateDocument: {
-      30: {
+      V30: {
         openapi: '3.0.0',
         info: {
           version: '5.0.0',
@@ -15,7 +15,7 @@ export function config(_app: VonaApplication) {
           description: 'Vona API',
         },
       } as OpenAPIObjectConfigV30,
-      31: {
+      V31: {
         openapi: '3.1.0',
         info: {
           version: '5.0.0',

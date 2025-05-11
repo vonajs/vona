@@ -37,22 +37,22 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field',
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  generateJson<K extends keyof IOpenAPIObject>(version: K = '31' as any): IOpenAPIObject[K] {
+  generateJson<K extends keyof IOpenAPIObject>(version: K = 'V31' as any): IOpenAPIObject[K] {
     const registry = this._collectRegistry();
     const generator =
-      version === '30' as any ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+      version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj);
     return apiObj as IOpenAPIObject[K];
   }
 
-  generateJsonOfControllerAction<K extends keyof IOpenAPIObject>(controller: Constructable, actionKey: string, version: K = '31' as any): IOpenAPIObject[K] {
+  generateJsonOfControllerAction<K extends keyof IOpenAPIObject>(controller: Constructable, actionKey: string, version: K = 'V31' as any): IOpenAPIObject[K] {
     const registry = new OpenAPIRegistry();
     const beanOptions = appResource.getBean(controller);
     if (!beanOptions) throw new Error('invalid controller');
     this._collectController(registry, beanOptions.module, controller, actionKey);
     const generator =
-      version === '30' as any ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+      version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj);
     return apiObj as IOpenAPIObject[K];

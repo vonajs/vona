@@ -1,8 +1,13 @@
+import type { Constructable } from 'vona';
 import { BeanEventBase, Event } from 'vona-module-a-event';
+import type { IOpenapiSchema } from '../types/schema.ts';
 
-export type TypeEventRetrieveOpenapiSchemaData = unknown;
+export interface TypeEventRetrieveOpenapiSchemaData {
+  controller: Constructable;
+  handlerName: string;
+}
 
-export type TypeEventRetrieveOpenapiSchemaResult = void;
+export type TypeEventRetrieveOpenapiSchemaResult = IOpenapiSchema;
 
 @Event()
 export class EventRetrieveOpenapiSchema extends BeanEventBase<
