@@ -78,10 +78,8 @@ export const contextBase: ContextBase = {
   },
 
   getHandlerName(): MetadataKey | undefined {
-    const self = cast<VonaContext>(this);
-    const handler = self.getHandler();
-    if (!handler) return undefined;
-    return handler.name;
+    const self = cast(this);
+    return self.route?.action;
   },
 
   get onionsDynamic(): any | undefined {
