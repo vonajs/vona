@@ -10,7 +10,7 @@ export interface IInterceptorOptionsOpenapiSchema extends IDecoratorInterceptorO
 export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorExecute {
   async execute(_options: IInterceptorOptionsOpenapiSchema, next: Next) {
     const headerOpenapiSchema = this.ctx.headers['x-vona-openapi-schema'];
-    if (headerOpenapiSchema !== 'true') return next();
+    if (headerOpenapiSchema?.toString() !== 'true') return next();
     // openapi-schema
     const data: TypeEventRetrieveOpenapiSchemaData = { route: this.ctx.route };
     const body = await this.scope.event.retrieveOpenapiSchema.emit(data, async data => {
