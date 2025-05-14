@@ -212,3 +212,8 @@ function _getProperty(obj, name, sep, forceObject) {
   }
   return obj;
 }
+
+export function toRaw(observed) {
+  const raw = observed && observed.__v_raw;
+  return raw ? toRaw(raw) : observed;
+}

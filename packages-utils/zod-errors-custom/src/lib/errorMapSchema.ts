@@ -1,6 +1,6 @@
 import type { LocaleAdapterFn } from './utils.ts';
 import { z } from 'zod';
-import { prepareIssue, translateError } from './utils.ts';
+import { prepareIssue, toRaw, translateError } from './utils.ts';
 
 const SymbolTranslated = Symbol('SymbolTranslated');
 
@@ -47,10 +47,11 @@ export function setErrorMapSchema(localeAdapterFn: LocaleAdapterFn) {
     const _parseOriginal = z[typeName].prototype._parse;
     z[typeName].prototype._parse = function (this: any, input) {
       if (this._def.errorMap && this._def.errorMap.name === 'customMap' && !this._def._errorMapPatched) {
-        this._def._errorMapPatched = true;
+        const def = toRaw(this._def);
+        def._errorMapPatched = true;
         const res = this._def.errorMap({ code: 'invalid_type' }, { defaultError: undefined });
         const key = res.message;
-        this._def.errorMap = (issue, ctx) => {
+        def.errorMap = (issue, ctx) => {
           if (!key || issue.code !== 'invalid_type') return { message: ctx.defaultError };
           issue = prepareIssue(localeAdapterFn, issue);
           const message = translateError(localeAdapterFn, key, issue);
