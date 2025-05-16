@@ -717,6 +717,15 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
+  packages-utils/table-identity:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
   packages-utils/utils:
     dependencies:
       '@cabloy/module-info':
@@ -1356,6 +1365,9 @@ importers:
       knex:
         specifier: ^3.1.0
         version: 3.1.0
+      table-identity:
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/table-identity
     devDependencies:
       clean-package:
         specifier: ^2.2.0
