@@ -79,22 +79,22 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this[SymbolOnionsEnabled][selector];
   }
 
-  getOnionsEnabledOfMeta(beanName: string, selector?: string) {
-    return this.getOnionsEnabled(selector).filter(item => item.beanOptions.name === beanName);
+  getOnionsEnabledOfMeta(beanName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    return this.getOnionsEnabled(selector, matchThis, ...matchArgs).filter(item => item.beanOptions.name === beanName);
   }
 
-  getOnionSliceEnabled(onionName: ONIONNAME, selector?: string) {
-    return this.getOnionsEnabled(selector).find(item => item.name === onionName);
+  getOnionSliceEnabled(onionName: ONIONNAME, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    return this.getOnionsEnabled(selector, matchThis, ...matchArgs).find(item => item.name === onionName);
   }
 
   getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
     return this.onionsNormal[onionName];
   }
 
-  getOnionsEnabledWrapped(wrapFn: Function, selector?: string) {
-    if (!selector) selector = '';
+  getOnionsEnabledWrapped(wrapFn: Function, _selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const selector = typeof _selector === 'string' ? _selector : '';
     if (!this[SymbolOnionsEnabledWrapped][selector]) {
-      const onions = this.getOnionsEnabled(selector);
+      const onions = this.getOnionsEnabled(_selector, matchThis, ...matchArgs);
       this[SymbolOnionsEnabledWrapped][selector] = onions.map(item => {
         return wrapFn(item);
       });
@@ -318,8 +318,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return routePathRaw;
   }
 
-  public inspect(selector?: string) {
-    const onionSlices = this.getOnionsEnabled(selector);
+  public inspect(selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const onionSlices = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
     const onionNames = onionSlices.map(item => item.name);
     this.$logger.silly(JSON.stringify(onionSlices, null, 2));
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
