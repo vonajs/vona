@@ -54,7 +54,7 @@
     "@cabloy/extend": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
-    "@cabloy/word-utils": "^2.0.0",
+    "@cabloy/word-utils": "^2.0.1",
     "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",

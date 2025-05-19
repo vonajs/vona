@@ -44,7 +44,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/word-utils": "^2.0.0"
+    "@cabloy/word-utils": "^2.0.1"
   },
   "clean-package": {
     "indent": 2,

@@ -1,11 +1,11 @@
 import type { IBeanRecord, OmitNever } from 'vona';
-import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
 
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
   extends IOnionOptionsEnable,
-  IOnionOptionsMatch<keyof IBeanRecord>,
+  IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IBeanRecord>>,
   IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'vona-module-a-onion' {

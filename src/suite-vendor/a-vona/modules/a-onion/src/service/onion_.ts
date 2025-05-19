@@ -10,6 +10,7 @@ import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionSlice,
+  TypeOnionOptionsMatchRule,
 } from '../types/onion.ts';
 import { isRegExp } from 'node:util/types';
 import { swapDeps } from '@cabloy/deps';
@@ -65,12 +66,12 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return compose(onions);
   }
 
-  getOnionsEnabled(selector?: string) {
-    if (!selector) selector = '';
+  getOnionsEnabled(_selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const selector = typeof _selector === 'string' ? _selector : '';
     if (!this[SymbolOnionsEnabled][selector]) {
       this[SymbolOnionsEnabled][selector] = this.onionsGlobal.filter(onionSlice => {
-        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
-        return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
+        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
+        return this.bean.onion.checkOnionOptionsEnabled(onionOptions, _selector, matchThis, ...matchArgs);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
       const message = `getOnionsEnabled#${this.sceneName}${selector ? `#${selector}` : ''} ${JSON.stringify(this[SymbolOnionsEnabled][selector])}`;
       this.$loggerChild('onion').verbose(message);
