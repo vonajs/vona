@@ -51,16 +51,17 @@ export function setProperty<T>(obj: object, name: string, value: T) {
   }
 }
 
-export function getProperty<T>(obj: object, name: string, sep?: string) {
+export function getProperty<T>(obj: object | undefined, name: string, sep?: string) {
   return _getProperty<T>(obj, name, sep, false);
 }
 
-export function getPropertyObject<T>(obj: object, name: string, sep?: string) {
+export function getPropertyObject<T>(obj: object | undefined, name: string, sep?: string) {
   return _getProperty<T>(obj, name, sep, true);
 }
 
-function _getProperty<T>(obj: object, name: string, sep: string | undefined, forceObject: boolean): T | undefined {
-  if (!obj) return undefined;
+function _getProperty<T>(_obj: object | undefined, name: string, sep: string | undefined, forceObject: boolean): T | undefined {
+  if (!_obj) return undefined;
+  let obj = _obj as object;
   const names = name.split(sep || '.');
   // loop
   for (const name of names) {
