@@ -44,6 +44,7 @@
     "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@cabloy/zod-errors-custom": "workspace:^",
     "@cabloy/zod-query": "workspace:^",
+    "@zhennann/currency": "^2.0.0",
     "openapi3-ts": "^4.4.0",
     "zod": "^3.23.8"
   },

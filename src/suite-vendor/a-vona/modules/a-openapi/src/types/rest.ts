@@ -1,8 +1,10 @@
+import type { CurrencyOptions } from '@zhennann/currency';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
 export interface ISchemaObjectExtensionFieldRest {
   render?: string;
+  currency?: CurrencyOptions | boolean;
   table?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
   form?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
 }

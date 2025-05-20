@@ -1555,6 +1555,9 @@ importers:
       '@cabloy/zod-query':
         specifier: workspace:^
         version: link:../../../../../packages-utils/zod-query
+      '@zhennann/currency':
+        specifier: ^2.0.0
+        version: 2.0.0
       openapi3-ts:
         specifier: ^4.4.0
         version: 4.4.0
@@ -2942,6 +2945,9 @@ packages:
   '@zhennann/common-bin@4.0.0':
     resolution: {integrity: sha512-PJMKNkA7UrrYW8KZyz7i3+lE4sDM0YxbLCGIidM73jaceQ4oZyrVN2vHTWpxN0NRV/SBVHYwpaZKPOw/FPczrA==}
     engines: {node: '>= 14.0.0'}
+
+  '@zhennann/currency@2.0.0':
+    resolution: {integrity: sha512-MPqcIhkwNc76ZwCGXH3iNZVyxFoNE1npGKtJIpg3X1rLg6S3V6iSrtR3/sIfcvTty7Kj6JKNPolchHVggzf8Qg==}
 
   '@zhennann/ejs@3.0.1':
     resolution: {integrity: sha512-AkfhJ8D8X+sLyBTl5Lrp7nT0Gg4apE+9CcPk5EFolC3O0Qhom4QDUJxaczElsSyNzbSAkFNRzcNW9MTeJQOv3w==}
@@ -7067,6 +7073,8 @@ snapshots:
       yargs-parser: 13.1.2
     transitivePeerDependencies:
       - supports-color
+
+  '@zhennann/currency@2.0.0': {}
 
   '@zhennann/ejs@3.0.1': {}
 
