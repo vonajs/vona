@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/utils",
   "type": "module",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "cabloy utils",
   "publishConfig": {
     "access": "public"
@@ -45,7 +45,8 @@
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
     "@cabloy/word-utils": "^2.0.1",
-    "cel-js": "^0.3.1"
+    "cel-js": "^0.3.1",
+    "chevrotain": "^11.0.3"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
