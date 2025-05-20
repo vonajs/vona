@@ -80,6 +80,7 @@ export interface OnionSceneMeta {
   optionsArgumentPipe?: boolean;
   optionsDynamic?: boolean;
   optionsPackage?: boolean;
+  optionsMatchCeljs?: boolean;
   optionsGlobalInterfaceName?: string;
   optionsGlobalInterfaceFrom?: string;
   scopeResource?: boolean;
