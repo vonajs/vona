@@ -139,7 +139,7 @@ z.ZodArray.prototype._parse = function (input) {
 
 const _parseOptional = z.ZodOptional.prototype._parse;
 z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
-  if (_getInnerType(this).typeName === 'ZodString') {
+  if (_getTypeName(_getInnerType(this)) === 'ZodString') {
     _coerce(input);
   } else {
     _coerceWithNil(input);
@@ -157,7 +157,7 @@ z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
 
 const _parseDefault = z.ZodDefault.prototype._parse;
 z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
-  if (_getInnerType(this).typeName === 'ZodString') {
+  if (_getTypeName(_getInnerType(this)) === 'ZodString') {
     _coerce(input);
   } else {
     _coerceWithNil(input);
@@ -203,6 +203,15 @@ function _getInnerType(schema: any) {
     innerType = innerType._def.innerType;
   }
   return innerType;
+}
+
+function _getTypeName(schema: any) {
+  let typeName = schema.typeName;
+  while (!typeName) {
+    schema = schema._def;
+    typeName = schema.typeName;
+  }
+  return typeName;
 }
 
 // function _coerce(instance, input, fn) {

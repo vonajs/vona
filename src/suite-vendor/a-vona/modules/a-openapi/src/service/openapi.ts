@@ -87,6 +87,7 @@ export class ServiceOpenapi extends BeanBase {
 
   private _translateSchema(schema: any) {
     if (!schema) return;
+    if (schema.type === 'object' && schema.required === undefined) schema.required = [];
     this._translateString(schema, 'description');
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
