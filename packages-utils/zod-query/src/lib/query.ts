@@ -144,6 +144,9 @@ z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
   } else {
     _coerceWithNil(input);
   }
+  if (input.data === null) {
+    input.data = undefined;
+  }
   return _parseOptional.call(this, input);
 };
 
