@@ -3,13 +3,13 @@ import { createBeanDecorator } from 'vona';
 
 // const __tableNames = new Set();
 
-export function Entity(options?: IDecoratorEntityOptions): ClassDecorator;
-export function Entity(table?: string, options?: Omit<IDecoratorEntityOptions, 'table'>): ClassDecorator;
-export function Entity(table?: IDecoratorEntityOptions | string, options?: IDecoratorEntityOptions): ClassDecorator {
+export function Entity<T extends IDecoratorEntityOptions>(options?: T): ClassDecorator;
+export function Entity<T extends IDecoratorEntityOptions>(table?: string, options?: Omit<T, 'table'>): ClassDecorator;
+export function Entity<T extends IDecoratorEntityOptions>(table?: T | string, options?: T): ClassDecorator {
   if (typeof table === 'string') {
     options = Object.assign({}, options, { table });
   } else {
-    options = table || {};
+    options = table || {} as any;
   }
   // // tableName
   // const tableName = options.table;
