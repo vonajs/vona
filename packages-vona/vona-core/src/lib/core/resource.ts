@@ -2,10 +2,12 @@ import type { IBeanRecord } from '../bean/type.ts';
 import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { MetadataKey } from './metadata.ts';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { cast } from '../../types/utils/cast.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { useApp } from '../framework/useApp.ts';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.ts';
 import { isClass } from '../utils/isClass.ts';
+import { deepExtend } from '../utils/util.ts';
 import { appMetadata } from './metadata.ts';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
@@ -30,7 +32,7 @@ export class AppResource extends BeanSimple {
   }
 
   addBean(beanOptions: Partial<IDecoratorBeanOptionsBase>) {
-    let { module, scene, name, beanClass, virtual } = beanOptions;
+    let { module, scene, name, beanClass, virtual, options, optionsPrimitive } = beanOptions;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
@@ -42,11 +44,14 @@ export class AppResource extends BeanSimple {
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
+    const options2 = this._prepareOnionOptions(options, optionsPrimitive, scene, `${module}:${name}`);
+    // beanOptions2
     const beanOptions2 = {
       ...beanOptions,
       beanFullName,
       name,
       moduleBelong,
+      options: options2,
     } as IDecoratorBeanOptionsBase;
     // record
     this.beans[beanFullName] = beanOptions2;
@@ -55,9 +60,6 @@ export class AppResource extends BeanSimple {
     this.scenes[scene!][module][beanFullName] = beanOptions2;
     // set metadata
     appMetadata.defineMetadata(SymbolDecoratorBeanFullName, beanFullName, beanOptions2.beanClass);
-    // app
-    const app = useApp();
-    console.log(app.config);
     // ok
     return beanOptions2;
   }
@@ -143,6 +145,16 @@ export class AppResource extends BeanSimple {
       className = className.substring(0, className.length - 1);
     }
     return className;
+  }
+
+  _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
+    const app = useApp();
+    const optionsConfig = cast(app.config).onions[scene]?.[name];
+    if (optionsPrimitive) {
+      return optionsConfig === undefined ? options : optionsConfig;
+    } else {
+      return deepExtend({}, options, optionsConfig);
+    }
   }
 }
 
