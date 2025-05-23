@@ -1,4 +1,5 @@
 export default {
+  TableIdentity: 'ID',
   CreatedAt: 'Created At',
   UpdatedAt: 'Updated At',
   Deleted: 'Deleted',
