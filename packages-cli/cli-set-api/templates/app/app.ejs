@@ -1,5 +1,4 @@
 import { createApp } from 'vona';
-import { modulesMeta } from './modules-meta.ts';
 import { locales } from '../src/backend/config/locales.ts';
 import config from './config.ts';
 import env from './env.ts';
@@ -7,7 +6,7 @@ import env from './env.ts';
 
 export async function createSingleApp(envRuntime?: NodeJS.ProcessEnv) {
   return await createApp({
-    modulesMeta,
+    modulesMeta: () => import('./modules-meta.ts'),
     locales,
     config,
     env: envRuntime ? Object.assign({}, env, envRuntime) : env,
