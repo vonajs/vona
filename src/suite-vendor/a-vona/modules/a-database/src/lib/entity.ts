@@ -1,5 +1,6 @@
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { createBeanDecorator } from 'vona';
+import { mergeFieldsOpenAPIMetadata } from 'vona-module-a-openapi';
 
 // const __tableNames = new Set();
 
@@ -17,5 +18,7 @@ export function Entity<T extends IDecoratorEntityOptions>(table?: T | string, op
   //   throw new Error(`entity table exists: ${tableName}`);
   // }
   // __tableNames.add(tableName);
-  return createBeanDecorator('entity', options);
+  return createBeanDecorator('entity', options, false, false, target => {
+    mergeFieldsOpenAPIMetadata(target);
+  });
 }

@@ -2,7 +2,7 @@ import type { IOpenApiOptions } from 'vona-module-a-openapi';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
 import { appMetadata, createBeanDecorator } from 'vona';
-import { getTargetDecoratorRules, SymbolOpenApiOptions } from 'vona-module-a-openapi';
+import { mergeFieldsOpenAPIMetadata, SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export function Controller(options?: IDecoratorControllerOptions): ClassDecorator;
 export function Controller(path?: string, options?: Omit<IDecoratorControllerOptions, 'path'>): ClassDecorator;
@@ -26,7 +26,6 @@ export function Service(): ClassDecorator {
 
 export function Dto<T extends IDecoratorDtoOptions>(options?: T): ClassDecorator {
   return createBeanDecorator('dto', options, false, false, target => {
-    // rules
-    getTargetDecoratorRules(target.prototype);
+    mergeFieldsOpenAPIMetadata(target);
   });
 }
