@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { ISchemaObjectOptions } from '../../types/decorator.ts';
+import type { TypeOpenAPIMetadata } from '../../types/rest.ts';
 import { appMetadata, appResource, cast } from 'vona';
 import { z } from 'zod';
 import { SymbolDecoratorRule } from '../../types/decorator.ts';
@@ -34,8 +35,8 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   // refId
   const beanOptions = appResource.getBean(classType);
   if (beanOptions) {
-    const description = cast(beanOptions.options)?.description;
-    schema = schema.openapi(beanOptions.beanFullName, description ? { description } : undefined);
+    const openapi: TypeOpenAPIMetadata = cast(beanOptions.options)?.openapi;
+    schema = schema.openapi(beanOptions.beanFullName, openapi);
   }
   return schema as any;
 }

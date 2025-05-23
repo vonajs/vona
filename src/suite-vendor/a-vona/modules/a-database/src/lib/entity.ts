@@ -5,7 +5,7 @@ import { createBeanDecorator } from 'vona';
 
 export function Entity(options?: IDecoratorEntityOptions): ClassDecorator;
 export function Entity(table?: string, options?: Omit<IDecoratorEntityOptions, 'table'>): ClassDecorator;
-export function Entity(table?: IDecoratorEntityOptions | string, options?: IDecoratorEntityOptions | string): ClassDecorator {
+export function Entity(table?: IDecoratorEntityOptions | string, options?: IDecoratorEntityOptions): ClassDecorator {
   if (typeof table === 'string') {
     options = Object.assign({}, options, { table });
   } else {

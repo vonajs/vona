@@ -1,10 +1,11 @@
 import type { ServiceOnion } from 'vona-module-a-onion';
+import type { TypeOpenAPIMetadata } from 'vona-module-a-openapi';
 
 export interface IDtoRecord {}
 
 export interface IDecoratorDtoOptions {
-  description?: string;
   independent?: boolean;
+  openapi?: TypeOpenAPIMetadata;
 }
 
 declare module 'vona-module-a-onion' {
