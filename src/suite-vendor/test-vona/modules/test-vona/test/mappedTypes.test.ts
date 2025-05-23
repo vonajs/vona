@@ -1,3 +1,4 @@
+import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
@@ -8,7 +9,9 @@ import { Dto } from 'vona-module-a-web';
 import { DtoProfile } from '../src/dto/profile.ts';
 import { DtoUser } from '../src/dto/user.ts';
 
-@Dto()
+interface IDtoOptionsUserWithMarried extends IDecoratorDtoOptions {}
+
+@Dto<IDtoOptionsUserWithMarried>()
 class DtoUserWithMarried extends ClassMapped.omit(DtoUser, ['married']) {
   @Api.field()
   married: boolean;
