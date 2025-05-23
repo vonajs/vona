@@ -1,6 +1,7 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
+import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
 /** event: end */
 /** event: begin */
@@ -10,8 +11,6 @@ import type { EventVersionDone } from '../bean/event.versionDone.ts';
 import type { TypeEventVersionDoneData, TypeEventVersionDoneResult } from '../bean/event.versionDone.ts';
 import type { Errors } from '../config/errors.ts';
 
-/** model: end */
-/** event: begin */
 import type { IEntityOptionsVersion } from '../entity/version.ts';
 /** entity: end */
 /** entity: begin */
@@ -25,22 +24,22 @@ import type { EntityViewRecord } from '../entity/viewRecord.ts';
 /** model: end */
 /** model: begin */
 import type { ModelViewRecord } from '../model/viewRecord.ts';
-
 /** service: end */
 /** service: begin */
 import type { ServiceDatabase } from '../service/database.ts';
 
 import type { ServiceVersion } from '../service/version.ts';
+
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 /** service: end */
-/** service: begin */
-
-/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
+/** service: end */
+/** service: begin */
+
 import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
 import 'vona';
@@ -49,7 +48,8 @@ import 'vona';
 import 'vona';
 
 import 'vona';
-
+/** model: end */
+/** event: begin */
 export * from '../bean/event.versionDone.ts';
 /** event: end */
 /** meta: begin */
@@ -91,6 +91,18 @@ declare module 'vona-module-a-version' {
   export interface EntityViewRecord {
     $column: <K extends keyof Omit<EntityViewRecord, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityViewRecord, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
+  }
+
+  export interface IEntityOptionsVersion {
+    fields?: TypeEntityOptionsFields<EntityVersion>;
+  }
+
+  export interface IEntityOptionsVersionInit {
+    fields?: TypeEntityOptionsFields<EntityVersionInit>;
+  }
+
+  export interface IEntityOptionsViewRecord {
+    fields?: TypeEntityOptionsFields<EntityViewRecord>;
   }
 }
 export * from '../bean/startup.databaseName.ts';
@@ -231,7 +243,6 @@ export interface ScopeModuleAVersion {
   event: IModuleEvent;
   service: IModuleService;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-version': ScopeModuleAVersion;

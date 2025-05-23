@@ -1,14 +1,18 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
 import type { config } from '../config/config.ts';
 import type { IDtoOptionsAuth } from '../dto/auth.ts';
 
+/** dto: end */
+/** dto: begin */
+import type { DtoAuth } from '../dto/auth.ts';
 import type { IDtoOptionsPassport } from '../dto/passport.ts';
+import type { DtoPassport } from '../dto/passport.ts';
 import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
-/** model: end */
-/** meta: begin */
+import type { DtoPassportJwt } from '../dto/passportJwt.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
 /** entity: end */
 /** entity: begin */
@@ -27,19 +31,20 @@ import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
-import { Scope } from 'vona-module-a-bean';
-
-import 'vona';
-import 'vona';
-import 'vona';
-import 'vona';
 import 'vona';
 
 import 'vona';
+import 'vona';
+import 'vona';
+import 'vona';
 
+import 'vona';
+/** model: end */
+/** meta: begin */
 export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
 
@@ -61,6 +66,10 @@ declare module 'vona-module-home-user' {
   export interface EntityUser {
     $column: <K extends keyof Omit<EntityUser, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityUser, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
+  }
+
+  export interface IEntityOptionsUser {
+    fields?: TypeEntityOptionsFields<EntityUser>;
   }
 }
 /** controller: end */
@@ -116,6 +125,20 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-home-user' {
 
+}
+declare module 'vona-module-home-user' {
+
+  export interface IDtoOptionsAuth {
+    fields?: TypeEntityOptionsFields<DtoAuth>;
+  }
+
+  export interface IDtoOptionsPassport {
+    fields?: TypeEntityOptionsFields<DtoPassport>;
+  }
+
+  export interface IDtoOptionsPassportJwt {
+    fields?: TypeEntityOptionsFields<DtoPassportJwt>;
+  }
 }
 /** entity: begin */
 export * from '../entity/user.ts';
@@ -225,7 +248,6 @@ export interface ScopeModuleHomeUser {
   model: IModuleModel;
   service: IModuleService;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'home-user': ScopeModuleHomeUser;

@@ -1,6 +1,7 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
+import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 /** bean: end */
 /** bean: begin */
@@ -22,8 +23,6 @@ import type { MetaRedlock } from '../bean/meta.redlock.ts';
 import type { config } from '../config/config.ts';
 
 import type { Errors } from '../config/errors.ts';
-/** model: end */
-/** bean: begin */
 import type { IEntityOptionsAuth } from '../entity/auth.ts';
 /** entity: end */
 /** entity: begin */
@@ -38,20 +37,20 @@ import type { ModelAuthProvider } from '../model/authProvider.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAuth } from '../service/auth.ts';
-
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
+
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-/** service: end */
-/** service: begin */
-
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
+/** service: end */
+/** service: begin */
 
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+
 import 'vona';
 import 'vona';
 import 'vona';
@@ -61,7 +60,8 @@ import 'vona';
 import 'vona';
 
 import 'vona';
-
+/** model: end */
+/** bean: begin */
 export * from '../bean/bean.auth.ts';
 export * from '../bean/bean.authProvider.ts';
 declare module 'vona-module-a-database' {
@@ -91,6 +91,14 @@ declare module 'vona-module-a-auth' {
   export interface EntityAuthProvider {
     $column: <K extends keyof Omit<EntityAuthProvider, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityAuthProvider, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
+  }
+
+  export interface IEntityOptionsAuth {
+    fields?: TypeEntityOptionsFields<EntityAuth>;
+  }
+
+  export interface IEntityOptionsAuthProvider {
+    fields?: TypeEntityOptionsFields<EntityAuthProvider>;
   }
 }
 /** bean: end */
@@ -289,7 +297,6 @@ export interface ScopeModuleAAuth {
   redlock: MetaRedlock;
   service: IModuleService;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-auth': ScopeModuleAAuth;
