@@ -11,6 +11,8 @@
     "onions": {
       "dto": {
         "sceneIsolate": true,
+        "optionsGlobalInterfaceName": "IDecoratorDtoOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-web",
         "boilerplate": "cli/dto/boilerplate"
       },
       "service": {
