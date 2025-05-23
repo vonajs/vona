@@ -269,13 +269,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     for (const key in onions) {
       const beanOptions = onions[key];
       const name = key.replace(`.${this.sceneName}.`, ':') as ONIONNAME;
-      // options
-      const optionsConfig = this.app.config.onions[beanOptions.scene]?.[name];
-      if (beanOptions.optionsPrimitive) {
-        beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
-      } else {
-        beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
-      }
       // push
       onionsAll.push({
         name,
