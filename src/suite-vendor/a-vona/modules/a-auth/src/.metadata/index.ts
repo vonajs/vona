@@ -1,9 +1,5 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
-/** model: end */
-/** bean: begin */
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
-
 import type { EventOn } from 'vona-module-a-event';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 /** bean: end */
@@ -17,40 +13,46 @@ import type { EventAccountMigration } from '../bean/event.accountMigration.ts';
 /** event: end */
 /** event: begin */
 import type { TypeEventAccountMigrationData, TypeEventAccountMigrationResult } from '../bean/event.accountMigration.ts';
-import type { EventIssuePassport } from '../bean/event.issuePassport.ts';
 
+import type { EventIssuePassport } from '../bean/event.issuePassport.ts';
 import type { TypeEventIssuePassportData, TypeEventIssuePassportResult } from '../bean/event.issuePassport.ts';
 /** meta: end */
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 import type { config } from '../config/config.ts';
+
 import type { Errors } from '../config/errors.ts';
+/** model: end */
+/** bean: begin */
+import type { IEntityOptionsAuth } from '../entity/auth.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityAuth } from '../entity/auth.ts';
+import type { IEntityOptionsAuthProvider } from '../entity/authProvider.ts';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
-
 /** model: end */
 /** model: begin */
 import type { ModelAuth } from '../model/auth.ts';
-import type { ModelAuthProvider } from '../model/authProvider.ts';
 
+import type { ModelAuthProvider } from '../model/authProvider.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAuth } from '../service/auth.ts';
+
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
-
-import { Scope } from 'vona-module-a-bean';
 
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
+
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -65,8 +67,8 @@ export * from '../bean/bean.authProvider.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-auth:auth': IDecoratorEntityOptions;
-    'a-auth:authProvider': IDecoratorEntityOptions;
+    'a-auth:auth': IEntityOptionsAuth;
+    'a-auth:authProvider': IEntityOptionsAuthProvider;
   }
 
 }

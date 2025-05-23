@@ -1,10 +1,7 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-/** model: end */
-/** authProvider: begin */
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IAuthProviderOptionsSimple } from '../bean/authProvider.simple.ts';
+
 /** authProvider: end */
 /** authProvider: begin */
 import type { AuthProviderSimple } from '../bean/authProvider.simple.ts';
@@ -12,6 +9,10 @@ import type { AuthProviderSimple } from '../bean/authProvider.simple.ts';
 /** bean: begin */
 import type { BeanAuthSimple } from '../bean/bean.authSimple.ts';
 import type { config } from '../config/config.ts';
+import type { IDtoOptionsAuthSimple } from '../dto/authSimple.ts';
+/** model: end */
+/** authProvider: begin */
+import type { IEntityOptionsAuthSimple } from '../entity/authSimple.ts';
 
 /** entity: end */
 /** entity: begin */
@@ -26,8 +27,8 @@ import type { ServiceAuthSimple } from '../service/authSimple.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-
 import { Scope } from 'vona-module-a-bean';
+import 'vona';
 
 import 'vona';
 import 'vona';
@@ -46,7 +47,7 @@ export * from '../bean/authProvider.simple.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-authsimple:authSimple': IDecoratorEntityOptions;
+    'a-authsimple:authSimple': IEntityOptionsAuthSimple;
   }
 
 }
@@ -142,10 +143,10 @@ declare module 'vona-module-a-authsimple' {
 }
 /** entity: begin */
 export * from '../entity/authSimple.ts';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'a-authsimple:authSimple': never;
+    'a-authsimple:authSimple': IDtoOptionsAuthSimple;
   }
 
 }

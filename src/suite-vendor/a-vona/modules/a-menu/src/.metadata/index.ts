@@ -6,7 +6,12 @@ import type { EventRetrieveMenus } from '../bean/event.retrieveMenus.ts';
 /** event: end */
 /** event: begin */
 import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
-
+import type { IDtoOptionsMenuGroup } from '../dto/menuGroup.ts';
+import type { IDtoOptionsMenuItem } from '../dto/menuItem.ts';
+import type { IDtoOptionsMenuItemMeta } from '../dto/menuItemMeta.ts';
+import type { IDtoOptionsItemMetaParams } from '../dto/menuItemMetaParams.ts';
+import type { IDtoOptionsItemMetaQuery } from '../dto/menuItemMetaQuery.ts';
+import type { IDtoOptionsMenus } from '../dto/menus.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceMenu } from '../service/menu.ts';
@@ -53,15 +58,15 @@ export * from '../dto/menuItemMeta.ts';
 export * from '../dto/menuItemMetaParams.ts';
 export * from '../dto/menuItemMetaQuery.ts';
 export * from '../dto/menus.ts';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'a-menu:menuGroup': never;
-    'a-menu:menuItem': never;
-    'a-menu:menuItemMeta': never;
-    'a-menu:menuItemMetaParams': never;
-    'a-menu:menuItemMetaQuery': never;
-    'a-menu:menus': never;
+    'a-menu:menuGroup': IDtoOptionsMenuGroup;
+    'a-menu:menuItem': IDtoOptionsMenuItem;
+    'a-menu:menuItemMeta': IDtoOptionsMenuItemMeta;
+    'a-menu:menuItemMetaParams': IDtoOptionsItemMetaParams;
+    'a-menu:menuItemMetaQuery': IDtoOptionsItemMetaQuery;
+    'a-menu:menus': IDtoOptionsMenus;
   }
 
 }

@@ -1,24 +1,25 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
-/** model: end */
-/** event: begin */
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
-
 import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
 /** event: end */
 /** event: begin */
 import type { EventVersionDone } from '../bean/event.versionDone.ts';
-
 /** event: end */
 /** event: begin */
 import type { TypeEventVersionDoneData, TypeEventVersionDoneResult } from '../bean/event.versionDone.ts';
 import type { Errors } from '../config/errors.ts';
+
+/** model: end */
+/** event: begin */
+import type { IEntityOptionsVersion } from '../entity/version.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityVersion } from '../entity/version.ts';
-import type { EntityVersionInit } from '../entity/versionInit.ts';
 
+import type { IEntityOptionsVersionInit } from '../entity/versionInit.ts';
+import type { EntityVersionInit } from '../entity/versionInit.ts';
+import type { IEntityOptionsViewRecord } from '../entity/viewRecord.ts';
 import type { EntityViewRecord } from '../entity/viewRecord.ts';
 
 /** model: end */
@@ -28,18 +29,20 @@ import type { ModelViewRecord } from '../model/viewRecord.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceDatabase } from '../service/database.ts';
+
 import type { ServiceVersion } from '../service/version.ts';
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
-import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -57,9 +60,9 @@ export * from '../bean/startup.databaseInit.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-version:version': IDecoratorEntityOptions;
-    'a-version:versionInit': IDecoratorEntityOptions;
-    'a-version:viewRecord': IDecoratorEntityOptions;
+    'a-version:version': IEntityOptionsVersion;
+    'a-version:versionInit': IEntityOptionsVersionInit;
+    'a-version:viewRecord': IEntityOptionsViewRecord;
   }
 
 }

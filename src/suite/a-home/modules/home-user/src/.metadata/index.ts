@@ -1,20 +1,22 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-/** model: end */
-/** meta: begin */
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
 import type { config } from '../config/config.ts';
+import type { IDtoOptionsAuth } from '../dto/auth.ts';
 
+import type { IDtoOptionsPassport } from '../dto/passport.ts';
+import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
+/** model: end */
+/** meta: begin */
+import type { IEntityOptionsUser } from '../entity/user.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityUser } from '../entity/user.ts';
-
 /** model: end */
 /** model: begin */
 import type { ModelUser } from '../model/user.ts';
+
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
@@ -22,14 +24,15 @@ import type { ServiceAuthTokenAdapter } from '../service/authTokenAdapter.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 import type { ServiceRedisToken } from '../service/redisToken.ts';
 import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
-/** service: end */
-/** service: begin */
-
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
+/** service: end */
+/** service: begin */
 
 import { Scope } from 'vona-module-a-bean';
+
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -41,7 +44,7 @@ export * from '../bean/meta.version.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'home-user:user': IDecoratorEntityOptions;
+    'home-user:user': IEntityOptionsUser;
   }
 
 }
@@ -102,12 +105,12 @@ declare module 'vona-module-home-user' {
 export * from '../dto/auth.ts';
 export * from '../dto/passport.ts';
 export * from '../dto/passportJwt.ts';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'home-user:auth': never;
-    'home-user:passport': never;
-    'home-user:passportJwt': never;
+    'home-user:auth': IDtoOptionsAuth;
+    'home-user:passport': IDtoOptionsPassport;
+    'home-user:passportJwt': IDtoOptionsPassportJwt;
   }
 
 }

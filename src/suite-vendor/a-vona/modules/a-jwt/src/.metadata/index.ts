@@ -3,7 +3,7 @@ import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 /** bean: begin */
 import type { BeanJwt } from '../bean/bean.jwt.ts';
 import type { config } from '../config/config.ts';
-
+import type { IDtoOptionsJwtToken } from '../dto/jwtToken.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceJwtClient } from '../service/jwtClient.ts';
@@ -44,10 +44,10 @@ declare module 'vona' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.ts';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'a-jwt:jwtToken': never;
+    'a-jwt:jwtToken': IDtoOptionsJwtToken;
   }
 
 }
