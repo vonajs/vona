@@ -2,6 +2,7 @@ import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IMetaOptionsIndex } from 'vona-module-a-index';
+import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** bean: end */
 /** bean: begin */
 import type { BeanInstance } from '../bean/bean.instance.ts';
@@ -13,8 +14,6 @@ import type { BroadcastResetCache } from '../bean/broadcast.resetCache.ts';
 /** meta: end */
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
-/** model: end */
-/** bean: begin */
 import type { IMiddlewareOptionsInstance } from '../bean/middleware.instance.ts';
 
 import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
@@ -37,8 +36,9 @@ import { Scope } from 'vona-module-a-bean';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
-
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+
+import 'vona';
 import 'vona';
 /** service: end */
 /** service: begin */
@@ -49,10 +49,10 @@ import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
-import 'vona';
 
 import 'vona';
-
+/** model: end */
+/** bean: begin */
 export * from '../bean/bean.instance.ts';
 declare module 'vona-module-a-aspect' {
 
@@ -106,6 +106,10 @@ declare module 'vona-module-a-instance' {
   export interface EntityInstance {
     $column: <K extends keyof Omit<EntityInstance, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityInstance, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
+  }
+
+  export interface IEntityOptionsInstance {
+    fields?: TypeEntityOptionsFields<EntityInstance>;
   }
 }
 /** broadcast: end */
@@ -255,7 +259,6 @@ export interface ScopeModuleAInstance {
   redlock: MetaRedlock;
   service: IModuleService;
 }
-
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-instance': ScopeModuleAInstance;

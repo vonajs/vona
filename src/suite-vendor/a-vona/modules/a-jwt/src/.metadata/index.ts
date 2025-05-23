@@ -1,9 +1,14 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+
+import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** bean: end */
 /** bean: begin */
 import type { BeanJwt } from '../bean/bean.jwt.ts';
 import type { config } from '../config/config.ts';
 import type { IDtoOptionsJwtToken } from '../dto/jwtToken.ts';
+/** dto: end */
+/** dto: begin */
+import type { DtoJwtToken } from '../dto/jwtToken.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceJwtClient } from '../service/jwtClient.ts';
@@ -13,7 +18,6 @@ import type { ServiceJwtExtract } from '../service/jwtExtract.ts';
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
-/** bean: begin */
 import 'vona';
 /** service: end */
 /** service: begin */
@@ -24,7 +28,7 @@ import 'vona';
 import 'vona';
 
 import 'vona';
-
+/** bean: begin */
 export * from '../bean/bean.jwt.ts';
 declare module 'vona' {
 
@@ -53,6 +57,12 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-jwt' {
 
+}
+declare module 'vona-module-a-jwt' {
+
+  export interface IDtoOptionsJwtToken {
+    fields?: TypeEntityOptionsFields<DtoJwtToken>;
+  }
 }
 /** bean: end */
 /** dto: begin */
