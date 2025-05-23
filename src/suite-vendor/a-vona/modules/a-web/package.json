@@ -13,7 +13,8 @@
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorDtoOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
-        "boilerplate": "cli/dto/boilerplate"
+        "boilerplate": "cli/dto/boilerplate",
+        "metadataCustom": "cli/dto/metadata/generate.ts"
       },
       "service": {
         "sceneIsolate": true,

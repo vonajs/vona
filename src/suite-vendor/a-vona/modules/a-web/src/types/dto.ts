@@ -1,3 +1,4 @@
+import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { TypeOpenAPIMetadata } from 'vona-module-a-openapi';
 
@@ -15,6 +16,10 @@ declare module 'vona-module-a-onion' {
 }
 
 declare module 'vona' {
+  export interface ConfigOnions {
+    dto: OmitNever<IDtoRecord>;
+  }
+
   export interface IBeanSceneRecord {
     dto: never;
   }
