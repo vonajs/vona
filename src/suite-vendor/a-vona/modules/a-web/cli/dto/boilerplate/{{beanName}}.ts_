@@ -1,8 +1,7 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import { BeanBase } from 'vona';
 import { Dto } from 'vona-module-a-web';
 
 export interface IDtoOptions<%=argv.beanNameCapitalize%> extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptions<%=argv.beanNameCapitalize%>>()
-export class Dto<%=argv.beanNameCapitalize%> extends BeanBase {}
+export class Dto<%=argv.beanNameCapitalize%> {}

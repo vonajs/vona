@@ -1,9 +1,12 @@
+import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import type { IMenuGroup } from '../types/menu.ts';
 import { Api, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
 
-@Dto()
+export interface IDtoOptionsMenuGroup extends IDecoratorDtoOptions {}
+
+@Dto<IDtoOptionsMenuGroup>()
 export class DtoMenuGroup implements IMenuGroup {
   @Api.field()
   name: string;

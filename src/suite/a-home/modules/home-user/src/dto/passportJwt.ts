@@ -1,9 +1,12 @@
+import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 import { DtoPassport } from './passport.ts';
 
-@Dto()
+export interface IDtoOptionsPassportJwt extends IDecoratorDtoOptions {}
+
+@Dto<IDtoOptionsPassportJwt>()
 export class DtoPassportJwt {
   @Api.field()
   passport: DtoPassport;
