@@ -131,6 +131,8 @@ export class CliToolsMetadata extends BeanCliBase {
       locales: contentLocales,
       constants: contentConstants,
     });
+    // patch
+    content = this._generatePatch(content);
     // empty
     if (!content.trim()) {
       content = 'export {};';
@@ -142,6 +144,14 @@ export class CliToolsMetadata extends BeanCliBase {
     await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
     // index
     await this._generateIndex(modulePath);
+  }
+
+  _generatePatch(content: string) {
+    if (!content) return content;
+    if (content.includes('TypeEntityOptionsFields')) {
+      content = `import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';\n${content}`;
+    }
+    return content;
   }
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {

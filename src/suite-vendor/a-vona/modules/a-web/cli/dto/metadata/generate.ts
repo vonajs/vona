@@ -15,11 +15,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     }`);
   }
   if (contentFields.length === 0) return '';
-  const contentImportTypeEntityOptionsFields = contentFields.length > 0 ? "import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';" : '';
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentImports.join('\n')} 
-${contentImportTypeEntityOptionsFields}  
 declare module 'vona-module-${moduleName}' {
   ${contentFields.join('\n')}
 }
