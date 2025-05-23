@@ -1,13 +1,14 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
-/** aop: begin */
+
 import type { IDecoratorAopOptions } from 'vona-module-a-aspect';
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 import type { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
-
 import type { EventOn } from 'vona-module-a-event';
+
 import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 
 import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
 import type { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
@@ -44,19 +45,23 @@ import type { QueueTest } from '../bean/queue.test.ts';
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
 
 import type { config } from '../config/config.ts';
+
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 
+/** dto: end */
+/** dto: begin */
+import type { DtoProfile } from '../dto/profile.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
+import type { DtoUser } from '../dto/user.ts';
 
 import type { IEntityOptionsTest } from '../entity/test.ts';
+
 /** entity: end */
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
-
 /** model: end */
 /** model: begin */
 import type { ModelTest } from '../model/test.ts';
-
 /** service: end */
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
@@ -88,7 +93,7 @@ import 'vona';
 import 'vona';
 
 import 'vona';
-
+/** aop: begin */
 export * from '../bean/aop.regExp.ts';
 export * from '../bean/aop.simple.ts';
 declare module 'vona-module-a-aspect' {
@@ -151,6 +156,10 @@ declare module 'vona-module-test-vona' {
   export interface EntityTest {
     $column: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
+  }
+
+  export interface IEntityOptionsTest {
+    fields?: TypeEntityOptionsFields<EntityTest>;
   }
 }
 /** bean: end */
@@ -382,6 +391,16 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-test-vona' {
 
+}
+declare module 'vona-module-test-vona' {
+
+  export interface IDtoOptionsProfile {
+    fields?: TypeEntityOptionsFields<DtoProfile>;
+  }
+
+  export interface IDtoOptionsUser {
+    fields?: TypeEntityOptionsFields<DtoUser>;
+  }
 }
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
