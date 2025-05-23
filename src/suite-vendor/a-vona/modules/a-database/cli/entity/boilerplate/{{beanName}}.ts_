@@ -1,4 +1,7 @@
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import { Entity, EntityBase } from 'vona-module-a-database';
 
-@Entity('<%=argv.moduleResourceName%>')
+export interface IEntityOptions<%=argv.beanNameCapitalize%> extends IDecoratorEntityOptions {}
+
+@Entity<IEntityOptions<%=argv.beanNameCapitalize%>>('<%=argv.moduleResourceName%>')
 export class Entity<%=argv.beanNameCapitalize%> extends EntityBase {}
