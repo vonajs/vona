@@ -1,8 +1,11 @@
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IAuthProviderClientOptions } from '../types/authProvider.ts';
 import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 import { Api } from 'vona-module-a-openapi';
 
-@Entity('aAuthProvider')
+export interface IEntityOptionsAuthProvider extends IDecoratorEntityOptions {}
+
+@Entity<IEntityOptionsAuthProvider>('aAuthProvider')
 export class EntityAuthProvider extends EntityBaseSimple {
   @Api.field()
   disabled: boolean;

@@ -1,9 +1,12 @@
 import type { ILocaleInfos } from 'vona';
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import { Entity, EntityBase } from 'vona-module-a-database';
 import { Api, v } from 'vona-module-a-openapi';
 import { z } from 'zod';
 
-@Entity('homeUser')
+export interface IEntityOptionsUser extends IDecoratorEntityOptions {}
+
+@Entity<IEntityOptionsUser>('homeUser')
 export class EntityUser extends EntityBase {
   @Api.field()
   name: string;
