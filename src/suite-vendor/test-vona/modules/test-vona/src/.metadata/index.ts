@@ -2,17 +2,14 @@ import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales
 /** aop: begin */
 import type { IDecoratorAopOptions } from 'vona-module-a-aspect';
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
-
 import type { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
-
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 
 import type { EventOn } from 'vona-module-a-event';
 import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
-import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
 
+import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
 import type { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 
@@ -32,6 +29,7 @@ import type { CacheMemTest } from '../bean/cacheMem.test.ts';
 /** cacheRedis: end */
 /** cacheRedis: begin */
 import type { CacheRedisTest } from '../bean/cacheRedis.test.ts';
+
 /** event: end */
 /** event: begin */
 import type { EventHelloEcho } from '../bean/event.helloEcho.ts';
@@ -41,16 +39,20 @@ import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from '../bean/e
 /** queue: end */
 /** queue: begin */
 import type { QueueTest } from '../bean/queue.test.ts';
-
 /** summerCache: end */
 /** summerCache: begin */
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
 
 import type { config } from '../config/config.ts';
+import type { IDtoOptionsProfile } from '../dto/profile.ts';
 
+import type { IDtoOptionsUser } from '../dto/user.ts';
+
+import type { IEntityOptionsTest } from '../entity/test.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
+
 /** model: end */
 /** model: begin */
 import type { ModelTest } from '../model/test.ts';
@@ -58,13 +60,11 @@ import type { ModelTest } from '../model/test.ts';
 /** service: end */
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
-
 import type { ServiceTest } from '../service/test.ts';
 import type { ServiceTestApp } from '../service/testApp.ts';
-
 import type { ServiceTestClass } from '../service/testClass.ts';
-
 import type { ServiceTransaction } from '../service/transaction.ts';
+
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -73,6 +73,7 @@ import { Scope } from 'vona-module-a-bean';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
 import 'vona';
 /** service: end */
 /** service: begin */
@@ -133,7 +134,7 @@ export * from '../bean/bean.testCtx.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'test-vona:test': IDecoratorEntityOptions;
+    'test-vona:test': IEntityOptionsTest;
   }
 
 }
@@ -371,11 +372,11 @@ export interface IModuleSummerCache {
 }
 export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'test-vona:profile': never;
-    'test-vona:user': never;
+    'test-vona:profile': IDtoOptionsProfile;
+    'test-vona:user': IDtoOptionsUser;
   }
 
 }
