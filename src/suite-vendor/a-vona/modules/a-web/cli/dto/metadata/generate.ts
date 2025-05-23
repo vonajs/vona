@@ -1,21 +1,27 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
-  const contentColumns: string[] = [];
+  const contentImports: string[] = [];
+  const contentFields: string[] = [];
   for (const globFile of globFiles) {
-    const { className } = globFile;
-    // contentColumns.push(`
-    // export interface ${className} {
-    //   $column: <K extends keyof Omit<${className}, '$column' | '$columns' | '$table'>>(column: K) => K;
-    //   $columns: <K extends keyof Omit<${className}, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
-    // }`);
+    const { className, beanName, fileNameJSRelative } = globFile;
+    const opionsName = `IDtoOptions${toUpperCaseFirstChar(beanName)}`;
+    contentImports.push(`import type { ${className} } from '${fileNameJSRelative}';`);
+    contentFields.push(`
+    export interface ${opionsName} {
+      fields?: TypeEntityOptionsFields<${className}>;
+    }`);
   }
-  if (contentColumns.length === 0) return '';
+  if (contentFields.length === 0) return '';
+  const contentImportTypeEntityOptionsFields = contentFields.length > 0 ? "import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';" : '';
   // combine
   const content = `/** ${sceneName}: begin */
+${contentImports.join('\n')} 
+${contentImportTypeEntityOptionsFields}  
 declare module 'vona-module-${moduleName}' {
-  ${contentColumns.join('\n')} 
+  ${contentFields.join('\n')}
 }
 /** ${sceneName}: end */
 `;
