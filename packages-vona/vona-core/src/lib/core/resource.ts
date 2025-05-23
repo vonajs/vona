@@ -3,6 +3,7 @@ import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase
 import type { MetadataKey } from './metadata.ts';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { BeanSimple } from '../bean/beanSimple.ts';
+import { useApp } from '../framework/useApp.ts';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.ts';
 import { isClass } from '../utils/isClass.ts';
 import { appMetadata } from './metadata.ts';
@@ -28,8 +29,8 @@ export class AppResource extends BeanSimple {
     return appMetadata.getMetadata(SymbolDecoratorUse, target);
   }
 
-  addBean(options: Partial<IDecoratorBeanOptionsBase>) {
-    let { module, scene, name, beanClass, virtual } = options;
+  addBean(beanOptions: Partial<IDecoratorBeanOptionsBase>) {
+    let { module, scene, name, beanClass, virtual } = beanOptions;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
@@ -41,21 +42,24 @@ export class AppResource extends BeanSimple {
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
-    const beanOptions = {
-      ...options,
+    const beanOptions2 = {
+      ...beanOptions,
       beanFullName,
       name,
       moduleBelong,
     } as IDecoratorBeanOptionsBase;
     // record
-    this.beans[beanFullName] = beanOptions;
+    this.beans[beanFullName] = beanOptions2;
     if (!this.scenes[scene!]) this.scenes[scene!] = {};
     if (!this.scenes[scene!][module]) this.scenes[scene!][module] = {};
-    this.scenes[scene!][module][beanFullName] = beanOptions;
+    this.scenes[scene!][module][beanFullName] = beanOptions2;
     // set metadata
-    appMetadata.defineMetadata(SymbolDecoratorBeanFullName, beanFullName, beanOptions.beanClass);
+    appMetadata.defineMetadata(SymbolDecoratorBeanFullName, beanFullName, beanOptions2.beanClass);
+    // app
+    const app = useApp();
+    console.log(app.config);
     // ok
-    return beanOptions;
+    return beanOptions2;
   }
 
   getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
