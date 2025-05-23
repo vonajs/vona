@@ -24,7 +24,7 @@ export function Service(): ClassDecorator {
   return createBeanDecorator('service');
 }
 
-export function Dto(options?: IDecoratorDtoOptions): ClassDecorator {
+export function Dto<T extends IDecoratorDtoOptions>(options?: T): ClassDecorator {
   return createBeanDecorator('dto', options, false, false, target => {
     // rules
     getTargetDecoratorRules(target.prototype);
