@@ -1,8 +1,11 @@
+import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import { Entity, EntityBase } from 'vona-module-a-database';
 import { Api, v } from 'vona-module-a-openapi';
 import { $locale } from '../.metadata/index.ts';
 
-@Entity('<%=argv.moduleResourceName%>')
+export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecoratorEntityOptions {}
+
+@Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>')
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(v.openapi({ description: $locale('Name') }), v.min(3))
   name: string;

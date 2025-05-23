@@ -1,6 +1,9 @@
+import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { ClassMapped } from 'vona';
 import { Dto } from 'vona-module-a-web';
 import { Dto<%=argv.resourceNameCapitalize%>Create } from './<%=argv.resourceName%>Create.ts';
 
-@Dto()
+export interface IDtoOptions<%=argv.resourceNameCapitalize%>Update extends IDecoratorDtoOptions {}
+
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Update>()
 export class Dto<%=argv.resourceNameCapitalize%>Update extends ClassMapped.partial(Dto<%=argv.resourceNameCapitalize%>Create) {}

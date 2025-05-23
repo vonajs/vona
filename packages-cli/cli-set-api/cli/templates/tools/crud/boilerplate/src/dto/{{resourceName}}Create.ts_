@@ -1,6 +1,9 @@
+import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { ClassMapped } from 'vona';
 import { Dto } from 'vona-module-a-web';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 
-@Dto()
+export interface IDtoOptions<%=argv.resourceNameCapitalize%>Create extends IDecoratorDtoOptions {}
+
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Create>()
 export class Dto<%=argv.resourceNameCapitalize%>Create extends ClassMapped.pick(Entity<%=argv.resourceNameCapitalize%>, ['name', 'description']) {}
