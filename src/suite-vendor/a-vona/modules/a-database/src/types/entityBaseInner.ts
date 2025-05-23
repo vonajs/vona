@@ -9,9 +9,9 @@ export class EntityBaseInner extends EntityBaseEmpty {
   @Api.field(v.openapi({ description: $locale('UpdatedAt') }))
   updatedAt: Date;
 
-  @Api.field(v.openapi({ description: $locale('Deleted') }))
+  @Api.field(v.openapi({ description: $locale('Deleted'), rest: { visible: false } }))
   deleted: boolean;
 
-  @Api.field(v.openapi({ description: $locale('InstanceId') }))
+  @Api.field(v.openapi({ description: $locale('InstanceId'), rest: { visible: false } }))
   iid: number;
 }
