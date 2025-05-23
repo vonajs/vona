@@ -1,12 +1,11 @@
 import { bootstrap } from 'vona';
-import { modulesMeta } from './modules-meta.ts';
 import { locales } from '../src/backend/config/locales.ts';
 import config from './config.ts';
 import env from './env.ts';
 <%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
 bootstrap({ 
-  modulesMeta, 
+  modulesMeta: () => import('./modules-meta.ts'),
   locales,
   config,
   env,

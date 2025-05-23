@@ -4,8 +4,9 @@ import { BeanSimple } from '../bean/beanSimple.ts';
 export class ModuleTools extends BeanSimple {
   async prepare(): Promise<Record<string, IModule>> {
     const app = this.app;
-    const modules = app.options.modulesMeta.modules;
-    const modulesArray = app.options.modulesMeta.moduleNames.map(relativeName => modules[relativeName]);
+    const modulesMeta = await app.options.modulesMeta();
+    const modules = modulesMeta.modulesMeta.modules;
+    const modulesArray = modulesMeta.modulesMeta.moduleNames.map(relativeName => modules[relativeName]);
     app.meta.modules = modules;
     app.meta.modulesArray = modulesArray;
     app.meta.modulesMonkey = {};
