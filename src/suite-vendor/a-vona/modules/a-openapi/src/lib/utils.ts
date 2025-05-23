@@ -28,12 +28,13 @@ export function mergeFieldsOpenAPIMetadata(target: Constructable) {
     for (const key in fields) {
       const field: TypeOpenAPIMetadata | z.ZodSchema = fields[key];
       if (field && rules[key]) {
+        const schemaCurrent: z.ZodSchema = rules[key] as any;
         if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
-          rules[key] = field;
+          const schema: z.ZodSchema = field as any;
+          rules[key] = schema.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, schema._def.openapi?.metadata));
         } else {
-          const schema: z.ZodSchema = rules[key] as any;
           // use deepExtend for sure strict
-          rules[key] = schema.openapi(deepExtend({}, schema._def.openapi?.metadata, field));
+          rules[key] = schemaCurrent.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, field));
         }
       }
     }
