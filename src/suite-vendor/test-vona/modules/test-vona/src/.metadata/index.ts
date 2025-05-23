@@ -148,8 +148,8 @@ export interface IModuleEntity {
 declare module 'vona-module-test-vona' {
 
   export interface EntityTest {
-    $column: <K extends keyof Omit<EntityTest, 'column' | 'columns' | 'table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityTest, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+    $column: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(column: K) => K;
+    $columns: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 }
 /** bean: end */
