@@ -26,3 +26,5 @@ declare module 'openapi3-ts/oas31' {
 
 export type TypeRenderComponent =
   (keyof TypeResourceActionRowRecordRender) | 'text' | 'textarea' | 'currency' | 'date' | 'datetime' | 'time' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url' | 'input';
+
+export type TypeSchemaScene = 'table' | 'form';
