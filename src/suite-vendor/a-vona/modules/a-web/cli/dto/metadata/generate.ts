@@ -11,7 +11,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentImports.push(`import type { ${className} } from '${fileNameJSRelative}';`);
     contentFields.push(`
     export interface ${opionsName} {
-      fields?: TypeEntityOptionsFields<${className}>;
+      fields?: TypeEntityOptionsFields<${className}, ${opionsName}['fieldsMore']>;
     }`);
   }
   if (contentFields.length === 0) return '';

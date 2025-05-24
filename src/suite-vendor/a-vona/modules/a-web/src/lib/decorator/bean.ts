@@ -24,7 +24,7 @@ export function Service(): ClassDecorator {
   return createBeanDecorator('service');
 }
 
-export function Dto<T extends IDecoratorDtoOptions>(options?: T): ClassDecorator {
+export function Dto<T extends IDecoratorDtoOptions<any>>(options?: T): ClassDecorator {
   return createBeanDecorator('dto', options, false, false, target => {
     mergeFieldsOpenAPIMetadata(target);
   });

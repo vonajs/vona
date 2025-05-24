@@ -4,9 +4,10 @@ import type { TypeOpenAPIMetadata } from 'vona-module-a-openapi';
 
 export interface IDtoRecord {}
 
-export interface IDecoratorDtoOptions {
+export interface IDecoratorDtoOptions<FieldsMore = never> {
   independent?: boolean;
   openapi?: TypeOpenAPIMetadata;
+  fieldsMore?: FieldsMore;
 }
 
 declare module 'vona-module-a-onion' {
