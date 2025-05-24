@@ -1,10 +1,8 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
-import type { IOpenApiOptions } from 'vona-module-a-openapi';
 import type { TypeEventRetrieveOpenapiSchemaData } from './event.retrieveOpenapiSchema.ts';
-import { appMetadata, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
-import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export interface IInterceptorOptionsOpenapiSchema extends IDecoratorInterceptorOptionsGlobal {}
 
