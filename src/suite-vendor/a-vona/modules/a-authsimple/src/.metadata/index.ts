@@ -163,7 +163,7 @@ declare module 'vona-module-a-authsimple' {
 declare module 'vona-module-a-authsimple' {
 
   export interface IDtoOptionsAuthSimple {
-    fields?: TypeEntityOptionsFields<DtoAuthSimple>;
+    fields?: TypeEntityOptionsFields<DtoAuthSimple, IDtoOptionsAuthSimple['fieldsMore']>;
   }
 }
 /** entity: end */

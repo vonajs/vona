@@ -61,7 +61,7 @@ declare module 'vona-module-a-jwt' {
 declare module 'vona-module-a-jwt' {
 
   export interface IDtoOptionsJwtToken {
-    fields?: TypeEntityOptionsFields<DtoJwtToken>;
+    fields?: TypeEntityOptionsFields<DtoJwtToken, IDtoOptionsJwtToken['fieldsMore']>;
   }
 }
 /** bean: end */

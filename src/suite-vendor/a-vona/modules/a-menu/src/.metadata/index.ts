@@ -85,27 +85,27 @@ declare module 'vona-module-a-menu' {
 declare module 'vona-module-a-menu' {
 
   export interface IDtoOptionsMenuGroup {
-    fields?: TypeEntityOptionsFields<DtoMenuGroup>;
+    fields?: TypeEntityOptionsFields<DtoMenuGroup, IDtoOptionsMenuGroup['fieldsMore']>;
   }
 
   export interface IDtoOptionsMenuItem {
-    fields?: TypeEntityOptionsFields<DtoMenuItem>;
+    fields?: TypeEntityOptionsFields<DtoMenuItem, IDtoOptionsMenuItem['fieldsMore']>;
   }
 
   export interface IDtoOptionsMenuItemMeta {
-    fields?: TypeEntityOptionsFields<DtoMenuItemMeta>;
+    fields?: TypeEntityOptionsFields<DtoMenuItemMeta, IDtoOptionsMenuItemMeta['fieldsMore']>;
   }
 
   export interface IDtoOptionsMenuItemMetaParams {
-    fields?: TypeEntityOptionsFields<DtoMenuItemMetaParams>;
+    fields?: TypeEntityOptionsFields<DtoMenuItemMetaParams, IDtoOptionsMenuItemMetaParams['fieldsMore']>;
   }
 
   export interface IDtoOptionsMenuItemMetaQuery {
-    fields?: TypeEntityOptionsFields<DtoMenuItemMetaQuery>;
+    fields?: TypeEntityOptionsFields<DtoMenuItemMetaQuery, IDtoOptionsMenuItemMetaQuery['fieldsMore']>;
   }
 
   export interface IDtoOptionsMenus {
-    fields?: TypeEntityOptionsFields<DtoMenus>;
+    fields?: TypeEntityOptionsFields<DtoMenus, IDtoOptionsMenus['fieldsMore']>;
   }
 }
 /** dto: end */

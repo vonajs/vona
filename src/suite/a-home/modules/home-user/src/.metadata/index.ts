@@ -129,15 +129,15 @@ declare module 'vona-module-home-user' {
 declare module 'vona-module-home-user' {
 
   export interface IDtoOptionsAuth {
-    fields?: TypeEntityOptionsFields<DtoAuth>;
+    fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['fieldsMore']>;
   }
 
   export interface IDtoOptionsPassport {
-    fields?: TypeEntityOptionsFields<DtoPassport>;
+    fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['fieldsMore']>;
   }
 
   export interface IDtoOptionsPassportJwt {
-    fields?: TypeEntityOptionsFields<DtoPassportJwt>;
+    fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['fieldsMore']>;
   }
 }
 /** entity: begin */

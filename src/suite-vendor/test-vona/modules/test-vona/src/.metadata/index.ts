@@ -395,11 +395,11 @@ declare module 'vona-module-test-vona' {
 declare module 'vona-module-test-vona' {
 
   export interface IDtoOptionsProfile {
-    fields?: TypeEntityOptionsFields<DtoProfile>;
+    fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile['fieldsMore']>;
   }
 
   export interface IDtoOptionsUser {
-    fields?: TypeEntityOptionsFields<DtoUser>;
+    fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser['fieldsMore']>;
   }
 }
 export * from '../controller/onion.ts';
