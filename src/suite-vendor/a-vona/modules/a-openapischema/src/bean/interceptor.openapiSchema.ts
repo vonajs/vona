@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
+import type { IOpenApiOptions } from 'vona-module-a-openapi';
 import type { TypeEventRetrieveOpenapiSchemaData } from './event.retrieveOpenapiSchema.ts';
-import { BeanBase } from 'vona';
+import { appMetadata, BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 
 export interface IInterceptorOptionsOpenapiSchema extends IDecoratorInterceptorOptionsGlobal {}
 
@@ -14,8 +16,17 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
     // openapi-schema
     const data: TypeEventRetrieveOpenapiSchemaData = { route: this.ctx.route };
     const body = await this.scope.event.retrieveOpenapiSchema.emit(data, async data => {
+      // doc
       const doc = this.$scope.openapi.service.openapi.generateJsonOfControllerAction(data.route.controller, data.route.action, 'V31');
-      return { doc };
+      // restResource
+      const actionOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(
+        SymbolOpenApiOptions,
+        data.route.controller.prototype,
+        data.route.action,
+      );
+      const restResource = actionOpenApiOptions?.restResource;
+      // ok
+      return { doc, meta: { restResource } };
     });
     this.app.success(body);
   }
