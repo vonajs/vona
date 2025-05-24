@@ -26,7 +26,7 @@ export interface IDecoratorUseOptionsInit {
 
 export interface IUsePrepareArgResult {
   withSelector?: boolean;
-  fns: Function[];
+  args: (Function | any)[];
 }
 
 export interface IInjectSelectorInfo {

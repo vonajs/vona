@@ -37,32 +37,26 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
   };
 }
 
-export function usePrepareArg(fn: () => any, withSelector?: boolean): any {
+export function usePrepareArg(arg: () => any, withSelector?: boolean): any {
   return {
     withSelector,
-    fns: [fn],
+    args: [arg],
   };
 }
 
-export function usePrepareArgs(fns: Array<() => any>, withSelector?: boolean): any {
+export function usePrepareArgs(args: Array<(() => any) | any>, withSelector?: boolean): any {
   return {
     withSelector,
-    fns,
+    args,
   };
 }
 
 export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo {
-  let withSelector = true;
-  let args: any[] = [];
   let selectorInfo = __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions);
   if (!selectorInfo) {
     selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
-  if (selectorInfo) {
-    withSelector = selectorInfo.withSelector;
-    args = selectorInfo.args;
-  }
-  return { withSelector, args: withSelector ? [useOptions.selector, ...args] : args };
+  return selectorInfo ?? { withSelector: false, args: [] };
 }
 
 function __prepareInjectSelectorInfo_descriptor(
@@ -73,8 +67,8 @@ function __prepareInjectSelectorInfo_descriptor(
   if (!fnGet) return;
   const res: IUsePrepareArgResult = fnGet.call(beanInstance);
   if (!res) return;
-  const withSelector = res.withSelector ?? useOptions.selector !== undefined;
-  const args = res.fns.map(fn => fn());
+  const withSelector = res.withSelector ?? false;
+  const args = res.args.map(arg => arg());
   return { withSelector, args };
 }
 
@@ -84,7 +78,7 @@ function __prepareInjectSelectorInfo_init(
 ): IInjectSelectorInfo | undefined {
   const init = useOptions.init;
   if (!init) return;
-  const withSelector = init.withSelector ?? useOptions.selector !== undefined;
+  const withSelector = init.withSelector ?? false;
   const _args = init.args ?? [init.arg];
   if (!_args) return;
   const args = _args.map(arg => evaluateExpressions(arg, beanInstance));
