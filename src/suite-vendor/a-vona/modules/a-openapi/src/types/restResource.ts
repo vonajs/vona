@@ -1,22 +1,22 @@
 import type { TypeComponentRecordSelectorKeysStrict } from './component.ts';
 
-export interface IOpenApiOptionsRest {
-  permissions: IOpenApiOptionsRestPermissions;
-  provider: IOpenApiOptionsRestProvider;
+export interface IOpenApiOptionsRestResource {
+  permissions?: IOpenApiOptionsRestResourcePermissions;
+  provider?: IOpenApiOptionsRestResourceProvider;
 }
 
-export interface IOpenApiOptionsRestPermissions {
+export interface IOpenApiOptionsRestResourcePermissions {
   create?: boolean;
   update?: boolean;
   delete?: boolean;
 }
 
-export interface IOpenApiOptionsRestProvider {
-  components: IOpenApiOptionsRestProviderComponents;
+export interface IOpenApiOptionsRestResourceProvider {
+  components?: IOpenApiOptionsRestResourceProviderComponents;
 }
 
-export interface IOpenApiOptionsRestProviderComponents {
-  restPage: TypeComponentRecordSelectorKeysStrict<'restPage'>;
-  table: TypeComponentRecordSelectorKeysStrict<'table'>;
-  form: TypeComponentRecordSelectorKeysStrict<'form'>;
+export interface IOpenApiOptionsRestResourceProviderComponents {
+  restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'>;
+  table?: TypeComponentRecordSelectorKeysStrict<'table'>;
+  form?: TypeComponentRecordSelectorKeysStrict<'form'>;
 }
