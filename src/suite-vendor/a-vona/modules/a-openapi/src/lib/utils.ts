@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
-import type { z } from 'zod';
 import type { TypeOpenAPIMetadata } from '../types/rest.ts';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
+import { z } from 'zod';
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../types/decorator.ts';
 
 export function getTargetDecoratorRules(target: object) {
@@ -27,14 +27,17 @@ export function mergeFieldsOpenAPIMetadata(target: Constructable) {
   if (fields) {
     for (const key in fields) {
       const field: TypeOpenAPIMetadata | z.ZodSchema = fields[key];
-      if (field && rules[key]) {
-        const schemaCurrent: z.ZodSchema = rules[key] as any;
-        if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
-          const schema: z.ZodSchema = field as any;
-          rules[key] = schema.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, schema._def.openapi?.metadata));
-        } else {
-          // use deepExtend for sure strict
+      if (!field) continue;
+      const schemaCurrent: z.ZodSchema | undefined = rules[key] as any;
+      if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
+        const schema: z.ZodSchema = field as any;
+        rules[key] = schema.openapi(deepExtend({}, schemaCurrent?._def.openapi?.metadata, schema._def.openapi?.metadata));
+      } else {
+        // use deepExtend for sure strict
+        if (schemaCurrent) {
           rules[key] = schemaCurrent.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, field));
+        } else {
+          rules[key] = z.any().openapi(deepExtend({}, field));
         }
       }
     }
