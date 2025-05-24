@@ -1,8 +1,14 @@
 import type { TypeComponentRecordSelectorKeysStrict } from './component.ts';
+import type { IFormProvider } from './formProvider.ts';
 
 export interface IOpenApiOptionsRestResource {
   permissions?: IOpenApiOptionsRestResourcePermissions;
   provider?: IOpenApiOptionsRestResourceProvider;
+  form?: IOpenApiOptionsRestResourceForm;
+}
+
+export interface IOpenApiOptionsRestResourceForm {
+  provider?: IFormProvider;
 }
 
 export interface IOpenApiOptionsRestResourcePermissions {
