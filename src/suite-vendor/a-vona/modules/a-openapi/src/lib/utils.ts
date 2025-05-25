@@ -24,21 +24,20 @@ export function mergeFieldsOpenAPIMetadata(target: Constructable) {
   // beanOptions
   const beanOptions = appResource.getBean(target);
   const fields = cast(beanOptions?.options)?.fields;
-  if (fields) {
-    for (const key in fields) {
-      const field: TypeOpenAPIMetadata | z.ZodSchema = fields[key];
-      if (!field) continue;
-      const schemaCurrent: z.ZodSchema | undefined = rules[key] as any;
-      if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
-        const schema: z.ZodSchema = field as any;
-        rules[key] = schema.openapi(deepExtend({}, schemaCurrent?._def.openapi?.metadata, schema._def.openapi?.metadata));
+  if (!fields) return;
+  for (const key in fields) {
+    const field: TypeOpenAPIMetadata | z.ZodSchema = fields[key];
+    if (!field) continue;
+    const schemaCurrent: z.ZodSchema | undefined = rules[key] as any;
+    if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
+      const schema: z.ZodSchema = field as any;
+      rules[key] = schema.openapi(deepExtend({}, schemaCurrent?._def.openapi?.metadata, schema._def.openapi?.metadata));
+    } else {
+      // use deepExtend for sure strict
+      if (schemaCurrent) {
+        rules[key] = schemaCurrent.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, field));
       } else {
-        // use deepExtend for sure strict
-        if (schemaCurrent) {
-          rules[key] = schemaCurrent.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, field));
-        } else {
-          rules[key] = z.any().openapi(deepExtend({}, field));
-        }
+        rules[key] = z.any().openapi(deepExtend({}, field));
       }
     }
   }
