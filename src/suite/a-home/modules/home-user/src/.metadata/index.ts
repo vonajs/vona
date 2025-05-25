@@ -1,11 +1,16 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-
 import type { config } from '../config/config.ts';
-import type { IDtoOptionsAuth } from '../dto/auth.ts';
 
+import type { IControllerOptionsPassport } from '../controller/passport.ts';
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerPassport } from '../controller/passport.ts';
+
+import type { IDtoOptionsAuth } from '../dto/auth.ts';
 /** dto: end */
 /** dto: begin */
 import type { DtoAuth } from '../dto/auth.ts';
@@ -17,10 +22,10 @@ import type { IEntityOptionsUser } from '../entity/user.ts';
 /** entity: end */
 /** entity: begin */
 import type { EntityUser } from '../entity/user.ts';
+
 /** model: end */
 /** model: begin */
 import type { ModelUser } from '../model/user.ts';
-
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
@@ -31,12 +36,12 @@ import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 /** service: end */
 /** service: begin */
 
+import { Scope } from 'vona-module-a-bean';
 import 'vona';
-
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -69,7 +74,7 @@ declare module 'vona-module-home-user' {
   }
 
   export interface IEntityOptionsUser {
-    fields?: TypeEntityOptionsFields<EntityUser>;
+    fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['fieldsMore']>;
   }
 }
 /** controller: end */
@@ -208,7 +213,7 @@ export * from '../service/redisToken.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
-    'home-user:passport': IDecoratorControllerOptions;
+    'home-user:passport': IControllerOptionsPassport;
   }
 
 }
@@ -219,8 +224,12 @@ declare module 'vona-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 }
-/** controller: end */
-/** controller: begin */
+declare module 'vona-module-home-user' {
+
+  export interface IControllerOptionsPassport {
+    actions?: TypeControllerOptionsActions<ControllerPassport>;
+  }
+}
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '/home/user/passport/current': undefined;

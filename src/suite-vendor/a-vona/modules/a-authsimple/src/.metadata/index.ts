@@ -70,7 +70,7 @@ declare module 'vona-module-a-authsimple' {
   }
 
   export interface IEntityOptionsAuthSimple {
-    fields?: TypeEntityOptionsFields<EntityAuthSimple>;
+    fields?: TypeEntityOptionsFields<EntityAuthSimple, IEntityOptionsAuthSimple['fieldsMore']>;
   }
 }
 /** authProvider: end */
