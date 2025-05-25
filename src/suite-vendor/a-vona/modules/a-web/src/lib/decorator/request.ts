@@ -31,7 +31,11 @@ export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadat
 }
 
 function createMappingDecorator(method: RequestMethod) {
-  return (path?: string, options?: IOpenApiOptions): MethodDecorator => {
+  return (path?: IOpenApiOptions | string, options?: IOpenApiOptions): MethodDecorator => {
+    if (path && typeof path === 'object') {
+      options = path;
+      path = undefined;
+    }
     return RequestMapping({ method, path, options });
   };
 }
