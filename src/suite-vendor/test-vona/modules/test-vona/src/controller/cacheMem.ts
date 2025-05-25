@@ -4,7 +4,6 @@ import { sleep } from '@cabloy/utils';
 import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
-
 import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsCacheMem extends IDecoratorControllerOptions {}

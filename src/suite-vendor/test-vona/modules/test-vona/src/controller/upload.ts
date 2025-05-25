@@ -7,7 +7,6 @@ import { Api, Arg, v } from 'vona-module-a-openapi';
 import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
-
 import { z } from 'zod';
 
 export interface IControllerOptionsUpload extends IDecoratorControllerOptions {}

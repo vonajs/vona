@@ -6,7 +6,6 @@ import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
-
 import { __ThisModule__ } from '../.metadata/this.ts';
 
 export interface IControllerOptionsSummer extends IDecoratorControllerOptions {}

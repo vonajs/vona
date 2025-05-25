@@ -5,7 +5,6 @@ import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.ts';
-
 import { ServiceTest } from '../service/test.ts';
 
 export interface IControllerOptionsBean extends IDecoratorControllerOptions {}

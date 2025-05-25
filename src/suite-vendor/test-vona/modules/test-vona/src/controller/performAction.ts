@@ -2,7 +2,6 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api, Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
-
 import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsPerformAction extends IDecoratorControllerOptions {}

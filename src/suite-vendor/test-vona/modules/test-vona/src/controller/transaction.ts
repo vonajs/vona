@@ -3,7 +3,6 @@ import { BeanBase } from 'vona';
 import { Database } from 'vona-module-a-database';
 import { Api, Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
-
 import { Controller, Web } from 'vona-module-a-web';
 
 const tableNameFail = '__tempTransactionFail';

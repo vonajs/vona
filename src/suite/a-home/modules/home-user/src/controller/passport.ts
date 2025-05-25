@@ -10,7 +10,6 @@ import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
 import { DtoPassport } from '../dto/passport.ts';
-
 import { DtoPassportJwt } from '../dto/passportJwt.ts';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}

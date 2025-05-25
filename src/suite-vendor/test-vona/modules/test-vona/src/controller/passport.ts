@@ -6,7 +6,6 @@ import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { $getUserName, Passport } from 'vona-module-a-user';
-
 import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
