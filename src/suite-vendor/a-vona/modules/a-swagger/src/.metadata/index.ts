@@ -1,16 +1,24 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { config } from '../config/config.ts';
+import type { IControllerOptionsRapidoc } from '../controller/rapidoc.ts';
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerRapidoc } from '../controller/rapidoc.ts';
+import type { IControllerOptionsSwagger } from '../controller/swagger.ts';
+// @ts-ignore ignore
+import type { ControllerSwagger } from '../controller/swagger.ts';
 /** config: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
+import 'vona';
+import 'vona';
+
+import 'vona';
 /** meta: begin */
-import 'vona';
-
-import 'vona';
-
 export * from '../bean/meta.printTip.ts';
 declare module 'vona' {
 
@@ -35,8 +43,8 @@ export * from '../controller/rapidoc.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
-    'a-swagger:rapidoc': IDecoratorControllerOptions;
-    'a-swagger:swagger': IDecoratorControllerOptions;
+    'a-swagger:rapidoc': IControllerOptionsRapidoc;
+    'a-swagger:swagger': IControllerOptionsSwagger;
   }
 
 }
@@ -52,8 +60,16 @@ declare module 'vona-module-a-swagger' {
     get scope(): ScopeModuleASwagger;
   }
 }
-/** controller: end */
-/** controller: begin */
+declare module 'vona-module-a-swagger' {
+
+  export interface IControllerOptionsRapidoc {
+    actions?: TypeControllerOptionsActions<ControllerRapidoc>;
+  }
+
+  export interface IControllerOptionsSwagger {
+    actions?: TypeControllerOptionsActions<ControllerSwagger>;
+  }
+}
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '//rapidoc': undefined;

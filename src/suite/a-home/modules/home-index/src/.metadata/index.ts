@@ -1,6 +1,11 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'vona';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
+import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
+import type { IControllerOptionsHome } from '../controller/home.ts';
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerHome } from '../controller/home.ts';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -9,11 +14,11 @@ import { Scope } from 'vona-module-a-bean';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
+import 'vona';
+import 'vona';
+
+import 'vona';
 /** meta: begin */
-import 'vona';
-
-import 'vona';
-
 export * from '../bean/meta.printTip.ts';
 declare module 'vona' {
 
@@ -35,7 +40,7 @@ export * from '../controller/home.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
-    'home-index:home': IDecoratorControllerOptions;
+    'home-index:home': IControllerOptionsHome;
   }
 
 }
@@ -46,8 +51,12 @@ declare module 'vona-module-home-index' {
     get scope(): ScopeModuleHomeIndex;
   }
 }
-/** controller: end */
-/** controller: begin */
+declare module 'vona-module-home-index' {
+
+  export interface IControllerOptionsHome {
+    actions?: TypeControllerOptionsActions<ControllerHome>;
+  }
+}
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '//': undefined;
