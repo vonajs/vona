@@ -15,7 +15,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     }`);
     contentFields.push(`
     export interface ${opionsName} {
-      fields?: TypeEntityOptionsFields<${className}>;
+      fields?: TypeEntityOptionsFields<${className}, ${opionsName}['fieldsMore']>;
     }`);
   }
   if (contentColumns.length === 0 && contentFields.length === 0) return '';

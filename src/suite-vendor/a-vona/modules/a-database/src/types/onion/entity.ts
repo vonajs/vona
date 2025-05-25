@@ -4,10 +4,11 @@ import type { TypeOpenAPIMetadata } from 'vona-module-a-openapi';
 
 export interface IEntityRecord {}
 
-export interface IDecoratorEntityOptions {
+export interface IDecoratorEntityOptions<FieldsMore = never> {
   table?: string;
   independent?: boolean;
   openapi?: TypeOpenAPIMetadata;
+  fieldsMore?: FieldsMore;
 }
 
 declare module 'vona-module-a-onion' {
