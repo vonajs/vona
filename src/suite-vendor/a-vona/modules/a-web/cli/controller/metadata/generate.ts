@@ -3,9 +3,15 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
+  const contentActions: string[] = [];
   const contentPaths: Record<string, string[]> = {};
   for (const globFile of globFiles) {
-    const { fileContent } = globFile;
+    const { className, beanName, fileContent } = globFile;
+    const opionsName = `IDtoOptions${toUpperCaseFirstChar(beanName)}`;
+    contentActions.push(`
+    export interface ${opionsName} {
+      actions?: TypeControllerOptionsActions<${className}, ${opionsName}['fieldsMore']>;
+    }`);
     // controllerPath
     const controllerPath = __parseControllerPath(fileContent);
     if (controllerPath === false) continue;
@@ -31,17 +37,22 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       }
     }
   }
-  if (Object.keys(contentPaths).length === 0) return '';
   let contentRecord = '';
   for (const method in contentPaths) {
     contentRecord += `export interface IApiPath${method}Record{
         ${contentPaths[method].join('\n')}
     }\n`;
   }
+  const contentRecord2 = contentRecord
+    ? `declare module 'vona-module-a-web' {
+  ${contentRecord}
+}`
+    : '';
   // combine
   const content = `/** ${sceneName}: begin */
-declare module 'vona-module-a-web' {
-  ${contentRecord}
+${contentRecord2}
+declare module 'vona-module-${moduleName}' {
+  ${contentActions.join('\n')}
 }
 /** ${sceneName}: end */
 `;
