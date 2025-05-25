@@ -7,7 +7,7 @@ import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
 export interface ISchemaObjectExtensionFieldRest {
-  render?: TypeRenderComponent;
+  render?: TypeFieldRenderComponent;
   currency?: CurrencyOptions | boolean;
   visible?: boolean;
   order?: number;
@@ -27,10 +27,10 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeRenderComponent =
+export type TypeFieldRenderComponent =
   (keyof IComponentRecord) | (keyof TypeResourceActionRowRecordRender) | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 
-export type TypeRenderComponentProvider = (keyof IComponentRecord) | (keyof TypeResourceActionRowRecordRender) | 'input' | 'textarea' | 'select';
+export type TypeFieldRenderComponentProvider = (keyof IComponentRecord) | (keyof TypeResourceActionRowRecordRender) | 'input' | 'textarea' | 'select';
 
 export type TypeSchemaScene = 'table' | 'form';
 
