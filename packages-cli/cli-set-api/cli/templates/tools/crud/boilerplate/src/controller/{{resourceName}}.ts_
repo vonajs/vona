@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'vona-module-a-database';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { Dto<%=argv.resourceNameCapitalize%>Update } from '../dto/<%=argv.resourceName%>Update.ts';
 import { BeanBase } from 'vona';
 import { Api, Arg, v } from 'vona-module-a-openapi';
@@ -6,7 +7,9 @@ import { Controller, Web } from 'vona-module-a-web';
 import { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resourceName%>Create.ts';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 
-@Controller('<%=argv.resourceName%>')
+export interface IControllerOptions<%=argv.resourceNameCapitalize%> extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptions<%=argv.resourceNameCapitalize%>>('<%=argv.resourceName%>')
 export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   @Web.post()
   @Api.body(v.object(Entity<%=argv.resourceNameCapitalize%>))
