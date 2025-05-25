@@ -1,7 +1,7 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { Dto } from 'vona-module-a-web';
 
-export interface IDtoOptionsItemMetaParams extends IDecoratorDtoOptions {}
+export interface IDtoOptionsMenuItemMetaParams extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsItemMetaParams>()
+@Dto<IDtoOptionsMenuItemMetaParams>()
 export class DtoMenuItemMetaParams {}

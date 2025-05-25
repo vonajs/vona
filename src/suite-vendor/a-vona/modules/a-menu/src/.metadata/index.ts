@@ -16,9 +16,9 @@ import type { IDtoOptionsMenuItem } from '../dto/menuItem.ts';
 import type { DtoMenuItem } from '../dto/menuItem.ts';
 import type { IDtoOptionsMenuItemMeta } from '../dto/menuItemMeta.ts';
 import type { DtoMenuItemMeta } from '../dto/menuItemMeta.ts';
-import type { IDtoOptionsItemMetaParams } from '../dto/menuItemMetaParams.ts';
+import type { IDtoOptionsMenuItemMetaParams } from '../dto/menuItemMetaParams.ts';
 import type { DtoMenuItemMetaParams } from '../dto/menuItemMetaParams.ts';
-import type { IDtoOptionsItemMetaQuery } from '../dto/menuItemMetaQuery.ts';
+import type { IDtoOptionsMenuItemMetaQuery } from '../dto/menuItemMetaQuery.ts';
 import type { DtoMenuItemMetaQuery } from '../dto/menuItemMetaQuery.ts';
 import type { IDtoOptionsMenus } from '../dto/menus.ts';
 import type { DtoMenus } from '../dto/menus.ts';
@@ -73,8 +73,8 @@ declare module 'vona-module-a-web' {
     'a-menu:menuGroup': IDtoOptionsMenuGroup;
     'a-menu:menuItem': IDtoOptionsMenuItem;
     'a-menu:menuItemMeta': IDtoOptionsMenuItemMeta;
-    'a-menu:menuItemMetaParams': IDtoOptionsItemMetaParams;
-    'a-menu:menuItemMetaQuery': IDtoOptionsItemMetaQuery;
+    'a-menu:menuItemMetaParams': IDtoOptionsMenuItemMetaParams;
+    'a-menu:menuItemMetaQuery': IDtoOptionsMenuItemMetaQuery;
     'a-menu:menus': IDtoOptionsMenus;
   }
 
