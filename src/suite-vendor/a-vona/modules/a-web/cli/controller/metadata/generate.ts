@@ -8,8 +8,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const contentPaths: Record<string, string[]> = {};
   for (const globFile of globFiles) {
     const { className, beanName, fileNameJSRelative, fileContent } = globFile;
-    const opionsName = `IDtoOptions${toUpperCaseFirstChar(beanName)}`;
-    contentImports.push(`import type { ${className} } from '${fileNameJSRelative}';`);
+    const opionsName = `IControllerOptions${toUpperCaseFirstChar(beanName)}`;
+    contentImports.push(`// @ts-ignore ignore\nimport type { ${className} } from '${fileNameJSRelative}';`);
     contentActions.push(`
     export interface ${opionsName} {
       actions?: TypeControllerOptionsActions<${className}>;
