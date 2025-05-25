@@ -151,6 +151,9 @@ export class CliToolsMetadata extends BeanCliBase {
     if (content.includes('TypeEntityOptionsFields')) {
       content = `import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';\n${content}`;
     }
+    if (content.includes('TypeControllerOptionsActions')) {
+      content = `import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';\n${content}`;
+    }
     return content;
   }
 

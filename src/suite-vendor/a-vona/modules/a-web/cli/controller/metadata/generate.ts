@@ -3,14 +3,16 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
+  const contentImports: string[] = [];
   const contentActions: string[] = [];
   const contentPaths: Record<string, string[]> = {};
   for (const globFile of globFiles) {
-    const { className, beanName, fileContent } = globFile;
+    const { className, beanName, fileNameJSRelative, fileContent } = globFile;
     const opionsName = `IDtoOptions${toUpperCaseFirstChar(beanName)}`;
+    contentImports.push(`import type { ${className} } from '${fileNameJSRelative}';`);
     contentActions.push(`
     export interface ${opionsName} {
-      actions?: TypeControllerOptionsActions<${className}, ${opionsName}['fieldsMore']>;
+      actions?: TypeControllerOptionsActions<${className}>;
     }`);
     // controllerPath
     const controllerPath = __parseControllerPath(fileContent);
@@ -50,10 +52,11 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     : '';
   // combine
   const content = `/** ${sceneName}: begin */
-${contentRecord2}
+${contentImports.join('\n')}
 declare module 'vona-module-${moduleName}' {
   ${contentActions.join('\n')}
 }
+${contentRecord2}
 /** ${sceneName}: end */
 `;
   return content;

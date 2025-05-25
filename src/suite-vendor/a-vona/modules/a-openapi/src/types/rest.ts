@@ -2,6 +2,7 @@ import type { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { z, ZodTypeAny } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
+import type { IOpenApiOptions } from './api.ts';
 import type { IComponentRecord } from './component.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
@@ -38,4 +39,8 @@ export type TypeOpenAPIMetadata<T extends ZodTypeAny = ZodTypeAny> = Partial<Zod
 
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
   [key in ((keyof Omit<T, '$column' | '$columns' | '$table'>) | (More extends string ? More : never))]?: TypeOpenAPIMetadata | z.ZodSchema;
+};
+
+export type TypeControllerOptionsActions<T extends {}> = {
+  [key in (keyof T)]?: IOpenApiOptions;
 };
