@@ -1,3 +1,4 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
 import assert from 'node:assert';
 import { sleep } from '@cabloy/utils';
@@ -5,9 +6,12 @@ import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
+
 import { __ThisModule__ } from '../.metadata/this.ts';
 
-@Controller({ path: 'summer', meta: { mode: 'test' } })
+export interface IControllerOptionsSummer extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsSummer>({ path: 'summer', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerSummer extends BeanBase {
   @Web.post()

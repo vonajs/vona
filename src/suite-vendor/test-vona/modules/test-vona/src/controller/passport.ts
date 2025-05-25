@@ -1,13 +1,17 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IUserBase } from 'vona-module-a-user';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { $getUserName, Passport } from 'vona-module-a-user';
+
 import { Controller, Web } from 'vona-module-a-web';
 
-@Controller({ path: 'passport', meta: { mode: 'test' } })
+export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsPassport>({ path: 'passport', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerPassport extends BeanBase {
   @Web.get('echo/:name')

@@ -1,5 +1,6 @@
 import type { IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
 import type { IJwtToken } from 'vona-module-a-jwt';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
 import { DtoAuthSimple } from 'vona-module-a-authsimple';
@@ -9,9 +10,12 @@ import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
 import { DtoPassport } from '../dto/passport.ts';
+
 import { DtoPassportJwt } from '../dto/passportJwt.ts';
 
-@Controller('passport')
+export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsPassport>('passport')
 export class ControllerPassport extends BeanBase {
   @Web.get('current')
   @Api.body(v.optional(), v.object(DtoPassport))

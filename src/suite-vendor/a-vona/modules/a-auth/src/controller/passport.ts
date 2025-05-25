@@ -1,4 +1,5 @@
 import type { Constructable } from 'vona';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
@@ -8,7 +9,9 @@ import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
-@Controller('passport')
+export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsPassport>('passport')
 export class ControllerPassport extends BeanBase {
   @Web.get('callback')
   @Passport.public()

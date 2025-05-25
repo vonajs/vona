@@ -1,13 +1,16 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Database } from 'vona-module-a-database';
 import { Api, Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
+
 import { Controller, Web } from 'vona-module-a-web';
 
 const tableNameFail = '__tempTransactionFail';
 const tableNameSuccess = '__tempTransactionSuccess';
+export interface IControllerOptionsTransaction extends IDecoratorControllerOptions {}
 
-@Controller({ path: 'transaction', meta: { mode: 'test' } })
+@Controller<IControllerOptionsTransaction>({ path: 'transaction', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTransaction extends BeanBase {
   @Web.post('fail')

@@ -1,7 +1,9 @@
 import type { IOpenAPIObject } from 'vona-module-a-openapi';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
+
 import { $apiPath, Controller, Web } from 'vona-module-a-web';
 
 const __SWAGGER_HTML__ = `<!DOCTYPE html>
@@ -31,8 +33,9 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 </body>
 </html>
 `;
+export interface IControllerOptionsSwagger extends IDecoratorControllerOptions {}
 
-@Controller({ path: '//swagger', exclude: true, meta: { mode: ['local', 'test'] } })
+@Controller<IControllerOptionsSwagger>({ path: '//swagger', exclude: true, meta: { mode: ['local', 'test'] } })
 export class ControllerSwagger extends BeanBase {
   @Web.get()
   @Passport.public()

@@ -1,10 +1,14 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
+
 import { Controller, Web } from 'vona-module-a-web';
 
-@Controller({ path: 'tail', meta: { mode: 'test' } })
+export interface IControllerOptionsTail extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsTail>({ path: 'tail', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerTail extends BeanBase {
   @Web.post()

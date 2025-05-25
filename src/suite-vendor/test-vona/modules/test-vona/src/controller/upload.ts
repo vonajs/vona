@@ -1,4 +1,5 @@
 import type { IUploadField, IUploadFile } from 'vona-module-a-upload';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
@@ -6,9 +7,12 @@ import { Api, Arg, v } from 'vona-module-a-openapi';
 import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
+
 import { z } from 'zod';
 
-@Controller({ path: 'upload', meta: { mode: ['test', 'local'] } })
+export interface IControllerOptionsUpload extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsUpload>({ path: 'upload', meta: { mode: ['test', 'local'] } })
 export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()

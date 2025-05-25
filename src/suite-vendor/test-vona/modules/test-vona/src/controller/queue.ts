@@ -1,10 +1,14 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
+
 import { Controller, Web } from 'vona-module-a-web';
 
-@Controller({ path: 'queue', meta: { mode: 'test' } })
+export interface IControllerOptionsQueue extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsQueue>({ path: 'queue', meta: { mode: 'test' } })
 @Api.exclude()
 export class ControllerQueue extends BeanBase {
   @Web.post('pushAsync')

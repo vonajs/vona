@@ -1,11 +1,15 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { sleep } from '@cabloy/utils';
 import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
+
 import { Controller, Web } from 'vona-module-a-web';
 
-@Controller({ path: 'cacheRedis', meta: { mode: 'test' } })
+export interface IControllerOptionsCacheRedis extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsCacheRedis>({ path: 'cacheRedis', meta: { mode: 'test' } })
 @Api.exclude()
 @Passport.public()
 export class ControllerCacheRedis extends BeanBase {

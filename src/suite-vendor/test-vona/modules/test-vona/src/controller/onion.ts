@@ -1,3 +1,4 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Core } from 'vona-module-a-core';
@@ -7,9 +8,12 @@ import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
 import { $locale } from '../.metadata/index.ts';
+
 import { DtoUser } from '../dto/user.ts';
 
-@Controller({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
+export interface IControllerOptionsOnion extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsOnion>({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Web.get('/')
   @Aspect.aopMethod('a-database:transaction', { enable: true, meta: { mode: 'local' } })

@@ -1,12 +1,16 @@
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.ts';
+
 import { ServiceTest } from '../service/test.ts';
 
-@Controller({ path: 'bean', meta: { mode: 'test' } })
+export interface IControllerOptionsBean extends IDecoratorControllerOptions {}
+
+@Controller<IControllerOptionsBean>({ path: 'bean', meta: { mode: 'test' } })
 @Api.exclude()
 @Passport.public()
 export class ControllerBean extends BeanBase {
