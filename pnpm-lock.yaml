@@ -86,9 +86,6 @@ importers:
       vona-module-a-authsimple:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-authsimple
-      vona-module-a-b:
-        specifier: workspace:^
-        version: link:src/module/a-b
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
@@ -98,9 +95,6 @@ importers:
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-broadcast
-      vona-module-a-c:
-        specifier: workspace:^
-        version: link:src/module/a-c
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
@@ -110,9 +104,6 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
-      vona-module-a-d:
-        specifier: workspace:^
-        version: link:src/suite/a-d/modules/a-d
       vona-module-a-database:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-database
@@ -882,24 +873,6 @@ importers:
         version: 6.0.1
 
   packages-vona/vona-shared:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/a-b:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/a-c:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1838,21 +1811,6 @@ importers:
         version: link:modules/test-vona
 
   src/suite-vendor/test-vona/modules/test-vona:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite/a-d:
-    dependencies:
-      vona-module-a-d:
-        specifier: workspace:^
-        version: link:modules/a-d
-
-  src/suite/a-d/modules/a-d:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
