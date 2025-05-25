@@ -42,7 +42,7 @@ export function mergeActionsOpenAPIMetadata(target: Constructable) {
   for (const key in actions) {
     const action: IOpenApiOptions = actions[key];
     if (!action) continue;
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, key) as IOpenApiOptions;
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target.prototype, key) as IOpenApiOptions;
     deepExtend(options, action);
   }
 }
