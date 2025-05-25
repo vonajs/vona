@@ -3,7 +3,6 @@ import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 }
 import type { VonaApplication } from 'vona';
 import type { z } from 'zod';
 import type { SchemaLikeCreate } from './decorator.ts';
-import type { IOpenApiOptionsRestResource } from './restResource.ts';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 
@@ -23,7 +22,6 @@ export interface IOpenApiOptions {
   tags?: string[];
   operationId?: string;
   headers?: IOpenApiHeader[];
-  restResource?: IOpenApiOptionsRestResource;
 }
 
 export type TypeOpenApiVersion = 'V30' | 'V31';
