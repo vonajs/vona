@@ -63,9 +63,9 @@ ${contentRecord2}
 }
 
 function __parseControllerPath(fileContent: string): string | false {
-  let matched = fileContent.match(/@Controller\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
+  let matched = fileContent.match(/@Controller<.*?>\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
   if (!matched) {
-    matched = fileContent.match(/@Controller\(([^)]*)\)/);
+    matched = fileContent.match(/@Controller<.*?>\(([^)]*)\)/);
   }
   if (!matched) return false;
   const controllerPath = matched[1];
