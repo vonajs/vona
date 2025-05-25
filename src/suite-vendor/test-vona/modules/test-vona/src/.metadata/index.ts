@@ -1,39 +1,39 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
-
 import type { IDecoratorAopOptions } from 'vona-module-a-aspect';
+
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 import type { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
-
 import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+
+import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 
 import type { IDecoratorQueueOptions } from 'vona-module-a-queue';
 import type { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { IAopMethodOptionsTest } from '../bean/aopMethod.test.ts';
-
 /** bean: end */
 /** bean: begin */
 import type { BeanTestCtx } from '../bean/bean.testCtx.ts';
+
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastTest } from '../bean/broadcast.test.ts';
-
 /** cacheMem: end */
 /** cacheMem: begin */
 import type { CacheMemTest } from '../bean/cacheMem.test.ts';
+
 /** cacheRedis: end */
 /** cacheRedis: begin */
 import type { CacheRedisTest } from '../bean/cacheRedis.test.ts';
-
 /** event: end */
 /** event: begin */
 import type { EventHelloEcho } from '../bean/event.helloEcho.ts';
+
 /** event: end */
 /** event: begin */
 import type { TypeEventHelloEchoData, TypeEventHelloEchoResult } from '../bean/event.helloEcho.ts';
@@ -43,19 +43,58 @@ import type { QueueTest } from '../bean/queue.test.ts';
 /** summerCache: end */
 /** summerCache: begin */
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
-
 import type { config } from '../config/config.ts';
 
-import type { IDtoOptionsProfile } from '../dto/profile.ts';
+import type { IControllerOptionsBean } from '../controller/bean.ts';
 
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerBean } from '../controller/bean.ts';
+
+import type { IControllerOptionsCacheMem } from '../controller/cacheMem.ts';
+// @ts-ignore ignore
+import type { ControllerCacheMem } from '../controller/cacheMem.ts';
+
+import type { IControllerOptionsCacheRedis } from '../controller/cacheRedis.ts';
+
+// @ts-ignore ignore
+import type { ControllerCacheRedis } from '../controller/cacheRedis.ts';
+import type { IControllerOptionsOnion } from '../controller/onion.ts';
+// @ts-ignore ignore
+import type { ControllerOnion } from '../controller/onion.ts';
+import type { IControllerOptionsPassport } from '../controller/passport.ts';
+// @ts-ignore ignore
+import type { ControllerPassport } from '../controller/passport.ts';
+import type { IControllerOptionsPerformAction } from '../controller/performAction.ts';
+// @ts-ignore ignore
+import type { ControllerPerformAction } from '../controller/performAction.ts';
+
+import type { IControllerOptionsQueue } from '../controller/queue.ts';
+// @ts-ignore ignore
+import type { ControllerQueue } from '../controller/queue.ts';
+import type { IControllerOptionsSummer } from '../controller/summer.ts';
+// @ts-ignore ignore
+import type { ControllerSummer } from '../controller/summer.ts';
+import type { IControllerOptionsTail } from '../controller/tail.ts';
+// @ts-ignore ignore
+import type { ControllerTail } from '../controller/tail.ts';
+/** service: end */
+/** service: begin */
+
+import type { IControllerOptionsTransaction } from '../controller/transaction.ts';
+// @ts-ignore ignore
+import type { ControllerTransaction } from '../controller/transaction.ts';
+import type { IControllerOptionsUpload } from '../controller/upload.ts';
+// @ts-ignore ignore
+import type { ControllerUpload } from '../controller/upload.ts';
+import type { IDtoOptionsProfile } from '../dto/profile.ts';
 /** dto: end */
 /** dto: begin */
 import type { DtoProfile } from '../dto/profile.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { DtoUser } from '../dto/user.ts';
-
 import type { IEntityOptionsTest } from '../entity/test.ts';
-
 /** entity: end */
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
@@ -69,7 +108,6 @@ import type { ServiceTest } from '../service/test.ts';
 import type { ServiceTestApp } from '../service/testApp.ts';
 import type { ServiceTestClass } from '../service/testClass.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
-
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase } from 'vona';
@@ -80,11 +118,8 @@ import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
 import 'vona';
 import 'vona';
-/** service: end */
-/** service: begin */
-
 import 'vona';
-
+import 'vona';
 import 'vona';
 import 'vona';
 import 'vona';
@@ -159,7 +194,7 @@ declare module 'vona-module-test-vona' {
   }
 
   export interface IEntityOptionsTest {
-    fields?: TypeEntityOptionsFields<EntityTest>;
+    fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['fieldsMore']>;
   }
 }
 /** bean: end */
@@ -483,17 +518,17 @@ export * from '../service/testClass.ts';
 declare module 'vona-module-a-web' {
 
   export interface IControllerRecord {
-    'test-vona:bean': IDecoratorControllerOptions;
-    'test-vona:cacheMem': IDecoratorControllerOptions;
-    'test-vona:cacheRedis': IDecoratorControllerOptions;
-    'test-vona:onion': IDecoratorControllerOptions;
-    'test-vona:passport': IDecoratorControllerOptions;
-    'test-vona:performAction': IDecoratorControllerOptions;
-    'test-vona:queue': IDecoratorControllerOptions;
-    'test-vona:summer': IDecoratorControllerOptions;
-    'test-vona:tail': IDecoratorControllerOptions;
-    'test-vona:transaction': IDecoratorControllerOptions;
-    'test-vona:upload': IDecoratorControllerOptions;
+    'test-vona:bean': IControllerOptionsBean;
+    'test-vona:cacheMem': IControllerOptionsCacheMem;
+    'test-vona:cacheRedis': IControllerOptionsCacheRedis;
+    'test-vona:onion': IControllerOptionsOnion;
+    'test-vona:passport': IControllerOptionsPassport;
+    'test-vona:performAction': IControllerOptionsPerformAction;
+    'test-vona:queue': IControllerOptionsQueue;
+    'test-vona:summer': IControllerOptionsSummer;
+    'test-vona:tail': IControllerOptionsTail;
+    'test-vona:transaction': IControllerOptionsTransaction;
+    'test-vona:upload': IControllerOptionsUpload;
   }
 
 }
@@ -554,8 +589,52 @@ declare module 'vona-module-test-vona' {
     get scope(): ScopeModuleTestVona;
   }
 }
-/** controller: end */
-/** controller: begin */
+declare module 'vona-module-test-vona' {
+
+  export interface IControllerOptionsBean {
+    actions?: TypeControllerOptionsActions<ControllerBean>;
+  }
+
+  export interface IControllerOptionsCacheMem {
+    actions?: TypeControllerOptionsActions<ControllerCacheMem>;
+  }
+
+  export interface IControllerOptionsCacheRedis {
+    actions?: TypeControllerOptionsActions<ControllerCacheRedis>;
+  }
+
+  export interface IControllerOptionsOnion {
+    actions?: TypeControllerOptionsActions<ControllerOnion>;
+  }
+
+  export interface IControllerOptionsPassport {
+    actions?: TypeControllerOptionsActions<ControllerPassport>;
+  }
+
+  export interface IControllerOptionsPerformAction {
+    actions?: TypeControllerOptionsActions<ControllerPerformAction>;
+  }
+
+  export interface IControllerOptionsQueue {
+    actions?: TypeControllerOptionsActions<ControllerQueue>;
+  }
+
+  export interface IControllerOptionsSummer {
+    actions?: TypeControllerOptionsActions<ControllerSummer>;
+  }
+
+  export interface IControllerOptionsTail {
+    actions?: TypeControllerOptionsActions<ControllerTail>;
+  }
+
+  export interface IControllerOptionsTransaction {
+    actions?: TypeControllerOptionsActions<ControllerTransaction>;
+  }
+
+  export interface IControllerOptionsUpload {
+    actions?: TypeControllerOptionsActions<ControllerUpload>;
+  }
+}
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '/test/vona/bean/test': undefined;
