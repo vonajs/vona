@@ -149,7 +149,7 @@ export class AppResource extends BeanSimple {
 
   _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
     const app = useApp();
-    const optionsConfig = cast(app.config).onions[scene]?.[name];
+    const optionsConfig = cast(app.config).onions?.[scene]?.[name];
     if (optionsPrimitive) {
       return optionsConfig === undefined ? options : optionsConfig;
     } else {
