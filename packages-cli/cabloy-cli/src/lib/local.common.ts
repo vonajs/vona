@@ -36,14 +36,11 @@ export class LocalCommon {
           const realFile = await fse.readlink(moduleTypeFile);
           if (realFile === typeFile) {
             needCreate = false;
-          } else {
-            await fse.remove(moduleTypeFile);
           }
-        } catch (_err) {
-          await fse.remove(moduleTypeFile);
-        }
+        } catch (_err) {}
       }
       if (needCreate) {
+        await fse.remove(moduleTypeFile);
         await fse.ensureSymlink(typeFile, moduleTypeFile);
       }
     }
