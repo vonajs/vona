@@ -3,6 +3,7 @@ import type { BeanCliBase } from './bean.cli.base.ts';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { catchError } from '@cabloy/utils';
 import ejs from '@zhennann/ejs';
 import { globby } from 'globby';
 import gogocode from 'gogocode';
@@ -166,7 +167,9 @@ export class LocalTemplate {
       fs.writeFileSync(targetFile, result);
       // format
       if (changed) {
-        await this.helper.formatFile({ fileName: targetFile, logPrefix: 'format: ' });
+        await catchError(() => {
+          return this.helper.formatFile({ fileName: targetFile, logPrefix: 'format: ' });
+        });
       }
     } else {
       await this.console.log(`ignore ${templateFile}, only support file, dir, symlink`);
@@ -293,7 +296,9 @@ export class LocalTemplate {
       // save
       fs.writeFileSync(targetFile, outputCode);
       // format
-      await this.helper.formatFile({ fileName: targetFile, logPrefix: 'format: ' });
+      await catchError(() => {
+        return this.helper.formatFile({ fileName: targetFile, logPrefix: 'format: ' });
+      });
     }
   }
 
