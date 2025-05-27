@@ -10,8 +10,8 @@ import { cast } from '../../types/utils/cast.ts';
 import { deepExtend } from '../utils/util.ts';
 import { combineLoggerDefault } from './loggerDefault.ts';
 
-export async function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
-  let config: VonaConfigOptional = await configDefault(appInfo, env);
+export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
+  let config: VonaConfigOptional = configDefault(appInfo, env);
   const mode = appInfo.configMeta.mode;
   if (mode === 'local') {
     config = deepExtend(config, configLocal(env));
@@ -23,10 +23,10 @@ export async function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaCon
   return config;
 }
 
-export async function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): Promise<VonaConfigOptional> {
+export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaConfigOptional {
   // server
-  const publicDir = env.SERVER_PUBLICDIR || await getPublicPathPhysicalRoot(appInfo);
-  const loggerDir = env.SERVER_LOGGERDIR || await getLoggerPathPhysicalRoot(appInfo);
+  const publicDir = env.SERVER_PUBLICDIR || getPublicPathPhysicalRoot(appInfo);
+  const loggerDir = env.SERVER_LOGGERDIR || getLoggerPathPhysicalRoot(appInfo);
   const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(env.SERVER_WORKERS!);
   // logger
@@ -89,7 +89,7 @@ export function configTest(_env: VonaConfigEnv): VonaConfigOptional {
   };
 }
 
-async function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
+function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
   const mode = appInfo.configMeta.mode;
   let loggerDir: string;
   if (mode === 'test' || mode === 'local') {
@@ -97,11 +97,11 @@ async function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
   } else {
     loggerDir = path.join(os.homedir(), 'vona', appInfo.name, 'logs');
   }
-  await fse.ensureDir(loggerDir);
+  fse.ensureDirSync(loggerDir);
   return loggerDir;
 }
 
-async function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
+function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
   const mode = appInfo.configMeta.mode;
   let publicDir: string;
   if (mode === 'test' || mode === 'local') {
@@ -109,7 +109,7 @@ async function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
   } else {
     publicDir = path.join(os.homedir(), 'vona', appInfo.name, 'public');
   }
-  await fse.ensureDir(publicDir);
+  fse.ensureDirSync(publicDir);
   return publicDir;
 }
 

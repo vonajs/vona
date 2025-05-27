@@ -18,7 +18,7 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
     globalThis.__bootstrapOptions__ = bootstrapOptions;
     const { modulesMeta, locales, config, env, AppMonkey } = bootstrapOptions;
     if (!globalThis.__app__) {
-      globalThis.__app__ = await __createApp({
+      globalThis.__app__ = __createApp({
         modulesMeta,
         locales,
         config,
@@ -35,13 +35,13 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
   }
 }
 
-async function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
+function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
   // env
   const env2 = prepareEnv(env);
   // appInfo
   const appInfo = prepareAppInfo(env2);
   // config
-  const appConfig = await prepareConfig(appInfo, config, env2);
+  const appConfig = prepareConfig(appInfo, config, env2);
   // options
   const options: VonaApplicationOptions = {
     name: appInfo.name,
@@ -66,10 +66,10 @@ function prepareAppInfo(env: VonaConfigEnv): VonaAppInfo {
   };
 }
 
-async function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[], env: VonaConfigEnv) {
-  const config = await combineAppConfigDefault(appInfo, env);
+function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[], env: VonaConfigEnv) {
+  const config = combineAppConfigDefault(appInfo, env);
   for (const configItem of configs) {
-    const res = await configItem(appInfo, env);
+    const res = configItem(appInfo, env);
     if (res) {
       deepExtend(config, res);
     }
