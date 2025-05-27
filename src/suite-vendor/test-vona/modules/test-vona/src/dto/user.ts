@@ -6,7 +6,7 @@ import { $locale } from '../.metadata/index.ts';
 
 export interface IDtoOptionsUser extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsUser>({ openapi: { description: $locale('User') } })
+@Dto<IDtoOptionsUser>({ openapi: { title: $locale('User') } })
 export class DtoUser {
   @Api.field(v.description($locale('UserId')), v.tableIdentity())
   id: TableIdentity;

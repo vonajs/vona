@@ -33,7 +33,7 @@ export class ControllerOnion extends BeanBase {
     @Arg.query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Arg.query('name', z.number().optional()) name: string,
-    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
+    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
     _user: DtoUser,
   ): string | undefined {
     return `echo: ${id}:${temp}:${name}`;
@@ -47,7 +47,7 @@ export class ControllerOnion extends BeanBase {
     @Arg.param('userId', v.description($locale('UserId')), v.example('example:1')) _userId: number,
     @Arg.param('userName', v.description($locale('UserId')), v.example('example:1')) _userName: string,
     @Arg.query(DtoUser) _user: DtoUser,
-    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ description: $locale('UserId') }) }))
+    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
     user: DtoUser,
   ): DtoUser {
     // const ctx = this.app.currentContext;
