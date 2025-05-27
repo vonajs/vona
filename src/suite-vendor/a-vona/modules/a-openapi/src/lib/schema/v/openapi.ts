@@ -9,6 +9,12 @@ export function schemaOpenapi<T extends ZodTypeAny>(refId: any, metadata?: any) 
   };
 }
 
+export function schemaTitle<T extends ZodTypeAny>(title?: string) {
+  return function (schema: T): T {
+    return schema.openapi({ title });
+  };
+}
+
 export function schemaDescription<T extends ZodTypeAny>(description?: string) {
   return function (schema: T): T {
     return schema.openapi({ description });

@@ -33,7 +33,7 @@ export class ControllerOnion extends BeanBase {
     @Arg.query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Arg.query('name', z.number().optional()) name: string,
-    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
+    @Arg.body(v.title($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
     _user: DtoUser,
   ): string | undefined {
     return `echo: ${id}:${temp}:${name}`;
@@ -44,10 +44,10 @@ export class ControllerOnion extends BeanBase {
   @Aspect.guardGlobal('a-user:passport', { public: true })
   // echo2(@Arg.query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(
-    @Arg.param('userId', v.description($locale('UserId')), v.example('example:1')) _userId: number,
-    @Arg.param('userName', v.description($locale('UserId')), v.example('example:1')) _userName: string,
+    @Arg.param('userId', v.title($locale('UserId')), v.example('example:1')) _userId: number,
+    @Arg.param('userName', v.title($locale('UserId')), v.example('example:1')) _userName: string,
     @Arg.query(DtoUser) _user: DtoUser,
-    @Arg.body(v.description($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
+    @Arg.body(v.title($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
     user: DtoUser,
   ): DtoUser {
     // const ctx = this.app.currentContext;
@@ -60,7 +60,7 @@ export class ControllerOnion extends BeanBase {
   echo3(
     @Arg.param('userId') _userId: number,
     @Arg.query('id', v.optional()) id: number,
-    @Arg.headers('Accept', v.description($locale('UserId'))) accept: string,
+    @Arg.headers('Accept', v.title($locale('UserId'))) accept: string,
   ) {
     this.$logger.silly(this.ctx.path);
     // const ctx = this.app.currentContext;

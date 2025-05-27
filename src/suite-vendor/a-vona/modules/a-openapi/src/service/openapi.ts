@@ -65,8 +65,7 @@ export class ServiceOpenapi extends BeanBase {
         const pathObj = apiObj.paths[key];
         for (const method in pathObj) {
           const methodObj = pathObj[method];
-          this._translateString(methodObj, 'description');
-          this._translateString(methodObj, 'summary');
+          this._translateStrings(methodObj, ['description', 'summary']);
           // parameters
           for (const parameterObj of methodObj.parameters || []) {
             this._translateSchema(parameterObj.schema);
@@ -88,13 +87,19 @@ export class ServiceOpenapi extends BeanBase {
   private _translateSchema(schema: any) {
     if (!schema) return;
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
-    this._translateString(schema, 'description');
+    this._translateStrings(schema, ['title', 'description']);
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
       for (const prop in properties) {
         const propObj = properties[prop];
         this._translateSchema(propObj);
       }
+    }
+  }
+
+  private _translateStrings(obj: any, keys: string[]) {
+    for (const key of keys) {
+      this._translateString(obj, key);
     }
   }
 

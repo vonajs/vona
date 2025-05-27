@@ -8,7 +8,7 @@ export interface IDtoOptionsUser extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsUser>({ openapi: { title: $locale('User') } })
 export class DtoUser {
-  @Api.field(v.description($locale('UserId')), v.tableIdentity())
+  @Api.field(v.title($locale('UserId')), v.tableIdentity())
   id: TableIdentity;
 
   @Api.field(v.min(3))

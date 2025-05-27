@@ -20,7 +20,7 @@ export class ControllerUpload extends BeanBase {
   fields(
     @Arg.fields() fields: IUploadField[],
     @Arg.fields('checkes', v.array(z.string())) checkes: string[],
-    @Arg.field('name', v.default('zhennann'), v.description('your name')) name: string,
+    @Arg.field('name', v.default('zhennann'), v.title('your name')) name: string,
   ) {
     assert.equal(fields.find(item => item.name === 'name')?.value, 'zhennann');
     assert.equal(checkes.length > 0, true);
@@ -43,9 +43,9 @@ export class ControllerUpload extends BeanBase {
   @Aspect.interceptor('a-upload:upload')
   @Api.contentType('application/json')
   files(
-    @Arg.files(v.description('more files')) files: IUploadFile[],
-    @Arg.files('images', v.description('images')) images: IUploadFile[],
-    @Arg.file('welcome1', v.description('single file')) file1: IUploadFile,
+    @Arg.files(v.title('more files')) files: IUploadFile[],
+    @Arg.files('images', v.title('images')) images: IUploadFile[],
+    @Arg.file('welcome1', v.title('single file')) file1: IUploadFile,
     @Arg.file('welcome2')file2: IUploadFile,
   ) {
     assert.equal(files.find(item => item.name === 'welcome1')?.name, 'welcome1');
