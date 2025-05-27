@@ -46,7 +46,7 @@ export class ServiceDatabaseClient extends BeanBase {
     this.level = dbInfo.level;
     this.clientName = dbInfo.clientName;
     // config
-    this.clientConfig = clientConfig ?? this.getClientConfig(this.clientName);
+    this.clientConfig = clientConfig ? deepExtend({}, clientConfig) : this.getClientConfig(this.clientName);
     this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this._knex = knex(this.clientConfig);
