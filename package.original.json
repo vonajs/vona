@@ -35,6 +35,7 @@
     "tsc": "npm run prerun && npm run vona :bin:tsc",
     "build": "npm run prerun && npm run vona :bin:build -- --flavor=normal",
     "start": "node ./dist/bootstrap.js",
+    "start:one": "SERVER_WORKERS=1 node ./dist/bootstrap.js",
     "prerun": "npm run vona :tools:deps",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
