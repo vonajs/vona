@@ -33,6 +33,7 @@ export interface IProcessHelperSpawnOptions {
   cwd?: string;
   logPrefix?: string;
   stdio?: any;
+  shell?: boolean | string;
   gracefull?: boolean;
 }
 
@@ -144,6 +145,7 @@ export class ProcessHelper {
   }): Promise<string> {
     options.cwd = options.cwd || this.cwd;
     options.stdio = options.stdio || 'inherit';
+    options.shell = options.shell ?? true;
     options.gracefull = options.gracefull ?? true;
     return new Promise((resolve, reject) => {
       const logPrefix = options.logPrefix;
