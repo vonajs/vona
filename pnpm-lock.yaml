@@ -230,9 +230,6 @@ importers:
       vona-module-cabloy-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/cabloy-socket
-      vona-module-demo-student:
-        specifier: workspace:^
-        version: link:src/module/demo-student
       vona-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -879,15 +876,6 @@ importers:
         version: 6.0.1
 
   packages-vona/vona-shared:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/demo-student:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
