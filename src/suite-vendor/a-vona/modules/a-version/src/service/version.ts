@@ -136,7 +136,7 @@ export class ServiceVersion extends BeanBase {
 
         // check if need update
         if (fileVersionOld > fileVersionNew) {
-          this.app.throw(1001, moduleName);
+          this.scope.error.ModuleOld.throw(moduleName);
         } else {
           // not check if (fileVersionOld < fileVersionNew)
           await this.__updateModule(options, module, fileVersionOld, fileVersionNew);

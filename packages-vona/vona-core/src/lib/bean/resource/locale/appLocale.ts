@@ -47,7 +47,7 @@ export class AppLocale extends BeanSimple {
     key: string,
     ...args: any[]
   ): string {
-    if (!key) return key;
+    if (!key || typeof key !== 'string') return key;
     const pos = key.indexOf(LocaleModuleNameSeparator);
     if (pos > -1) {
       moduleScope = key.substring(0, pos);
