@@ -1,4 +1,5 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import { combineApiPathControllerAndActionRaw } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
@@ -97,65 +98,5 @@ function __combineApiPath(
   controllerPath: string | undefined,
   actionPath: RegExp | string | undefined,
 ) {
-  let apiPath = combineApiPathControllerAndAction(
-    moduleName,
-    controllerPath,
-    actionPath,
-    '/_api_',
-    true,
-  );
-  if (apiPath.startsWith('/_api_')) {
-    apiPath = apiPath.substring('/_api_'.length);
-  } else {
-    apiPath = `/${apiPath}`;
-  }
-  return apiPath;
-}
-
-function combineApiPathControllerAndAction(
-  moduleName: string,
-  controllerPath: string | undefined,
-  actionPath: RegExp | string | undefined,
-  prefix: string,
-  simplify: boolean,
-): string {
-  if (actionPath === undefined) actionPath = '';
-  // routePath
-  let routePath: string;
-  if (typeof actionPath !== 'string') {
-    // regexp
-    throw new TypeError('regexp not supported');
-  } else if (actionPath.startsWith('/')) {
-    // absolute
-    routePath = combineApiPath(moduleName, actionPath, prefix, simplify);
-  } else {
-    // relative
-    if (!controllerPath) {
-      routePath = combineApiPath(moduleName, actionPath, prefix, simplify);
-    } else {
-      routePath = combineApiPath(moduleName, controllerPath, prefix, simplify);
-      if (actionPath) {
-        routePath = `${routePath}/${actionPath}`;
-      }
-    }
-  }
-  return routePath;
-}
-
-function combineApiPath(moduleName: string, path: string | undefined, globalPrefix: string, simplify: boolean) {
-  // const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
-  // simplify = simplify ?? true;
-  if (!path) path = '';
-  // ignore globalPrefix
-  if (path.startsWith('//')) return path.substring(1);
-  // ignore module path
-  if (path.startsWith('/')) return `${globalPrefix}${path}`;
-  // globalPrefix + module path + arg
-  const parts = moduleName.split('-');
-  // path
-  let res = globalPrefix;
-  if (!simplify || parts[0] !== 'a') res = `${res}/${parts[0]}`;
-  if (!simplify || !path.startsWith(parts[1])) res = `${res}/${parts[1]}`;
-  if (path) res = `${res}/${path}`;
-  return res;
+  return combineApiPathControllerAndActionRaw(moduleName, controllerPath, actionPath, true);
 }

@@ -19,24 +19,24 @@ describe('<%=argv.resourceName%>.test.ts', () => {
       // login
       await app.bean.passport.signinMock();
       // create
-      const <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('post', '/<%=argv.moduleInfo.url%>/<%=argv.resourceName%>', { body: data });
+      const <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('post', '<%=argv.moduleActionPathRaw%>', { body: data });
       assert.equal(<%=argv.resourceName%>.name, data.name);
       // findAll
-      const <%=argv.resourceName%>s: Entity<%=argv.resourceNameCapitalize%>[] = await app.bean.executor.performAction('get', '/<%=argv.moduleInfo.url%>/<%=argv.resourceName%>');
+      const <%=argv.resourceName%>s: Entity<%=argv.resourceNameCapitalize%>[] = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>');
       assert.equal(<%=argv.resourceName%>s.findIndex(item => item.name === data.name) > -1, true);
       // update
-      await app.bean.executor.performAction('patch', '/<%=argv.moduleInfo.url%>/<%=argv.resourceName%>/:id', {
+      await app.bean.executor.performAction('patch', '<%=argv.moduleActionPathRaw%>/:id', {
         params: { id: <%=argv.resourceName%>.id },
         body: dataUpdate,
       });
       // findOne
-      const <%=argv.resourceName%>One: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('get', '/<%=argv.moduleInfo.url%>/<%=argv.resourceName%>/:id', { params: { id: <%=argv.resourceName%>.id } });
+      const <%=argv.resourceName%>One: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>.id } });
       assert.equal(<%=argv.resourceName%>One.name, dataUpdate.name);
       // delete
-      await app.bean.executor.performAction('delete', '/<%=argv.moduleInfo.url%>/<%=argv.resourceName%>/:id', { params: { id: <%=argv.resourceName%>One.id } });
+      await app.bean.executor.performAction('delete', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>One.id } });
       // findOne
       const [_, err] = await catchError(() => {
-        return app.bean.executor.performAction('get', '/<%=argv.moduleInfo.url%>/<%=argv.resourceName%>/:id', { params: { id: <%=argv.resourceName%>One.id } });
+        return app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>One.id } });
       });
       assert.equal(err?.code, 404);
       // logout

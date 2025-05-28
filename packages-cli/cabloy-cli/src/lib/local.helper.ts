@@ -7,7 +7,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
-import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
+import { combineResourceName } from '@cabloy/utils';
 import Boxen from 'boxen';
 import Chalk from 'chalk';
 import TableClass from 'cli-table3';
@@ -285,15 +285,7 @@ export class LocalHelper {
   }
 
   combineModuleNameAndResource(moduleName: string, resourceName: string) {
-    let name = combineWordsDeduplicate(
-      ModuleInfo.relativeNameToCapitalize(moduleName, false),
-      this.firstCharToUpperCase(resourceName),
-    );
-    const firstWord = parseFirstWord(name);
-    if (firstWord === 'a') {
-      name = this.firstCharToLowerCase(name.substring(1));
-    }
-    return name;
+    return combineResourceName(resourceName, moduleName, true, true);
   }
 
   async importDynamic(fileName: string): Promise<any>;
