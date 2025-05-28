@@ -8,8 +8,9 @@
   },
   "author": "zhennann",
   "keywords": [
+    "nodejs",
     "framework",
-    "cabloy"
+    "vona"
   ],
   "exports": {
     ".": {
