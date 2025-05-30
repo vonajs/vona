@@ -2,6 +2,7 @@ import type { IBeanRecord } from '../bean/type.ts';
 import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { MetadataKey } from './metadata.ts';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import chalk from 'chalk';
 import { cast } from '../../types/utils/cast.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { useApp } from '../framework/useApp.ts';
@@ -25,6 +26,11 @@ export class AppResource extends BeanSimple {
     registerMappedClassMetadataKey(target, SymbolDecoratorUse);
     const uses = appMetadata.getOwnMetadataMap(true, SymbolDecoratorUse, target);
     uses[options.prop] = options;
+    if (process.env.NODE_ENV === 'development') {
+      if (typeof options.prop === 'string' && !options.prop.startsWith('$$')) {
+        console.error(chalk.red(`inject prop name should start with $$: ${options.prop}`));
+      }
+    }
   }
 
   getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> | undefined {
