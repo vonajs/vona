@@ -44,7 +44,7 @@
     }
   },
   "dependencies": {
-    "vona": "^5.0.12"
+    "vona": "^5.0.17"
   },
   "devDependencies": {}
 }
