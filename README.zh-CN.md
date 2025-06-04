@@ -61,3 +61,14 @@ REDIS_DEFAULT_DB = 0
 ``` bash
 npm run dev
 ```
+
+## 联系方式
+
+- [Twitter](https://x.com/zhennann2024)
+- [B站：濮水代码](https://space.bilibili.com/454737998)
+
+## License
+
+[MIT](./LICENSE)
+
+Copyright (c) 2016-present, Vona

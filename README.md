@@ -1,13 +1,10 @@
 English | [简体中文](./README.zh-CN.md)
 
-# What is Vona
+# Vona
 
 Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size
 
-* Issues: https://github.com/vonajs/vona/issues
-* Discussions: https://github.com/vonajs/vona/discussions
-* Twitter: https://x.com/zhennann2024
-* Bilibili: https://space.bilibili.com/454737998
+
 
 ## Quick Start
 
@@ -61,3 +58,14 @@ REDIS_DEFAULT_DB = 0
 ``` bash
 npm run dev
 ```
+
+## Stay In Touch
+
+- [Twitter](https://x.com/zhennann2024)
+- [Bilibili](https://space.bilibili.com/454737998)
+
+## License
+
+[MIT](./LICENSE)
+
+Copyright (c) 2016-present, Vona
