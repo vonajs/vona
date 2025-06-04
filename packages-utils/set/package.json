@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/set",
   "type": "module",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "cabloy set",
   "publishConfig": {
     "access": "public"

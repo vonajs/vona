@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-authsimple",
   "type": "module",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "title": "a-authsimple",
   "vonaModule": {
     "fileVersion": 1,
@@ -46,7 +46,7 @@
     ]
   },
   "dependencies": {
-    "password-hash-salt": "^1.0.3"
+    "password-hash-salt": "^1.0.4"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

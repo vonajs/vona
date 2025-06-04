@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/module-info-pro",
   "type": "module",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "cabloy module-info-pro",
   "publishConfig": {
     "access": "public"
@@ -42,7 +42,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.10",
+    "@cabloy/module-info": "^1.3.11",
     "stack-utils": "^2.0.6"
   },
   "devDependencies": {
