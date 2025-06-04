@@ -48,19 +48,7 @@ $ vona :create:project projectName
 $ cd projectName
 ```
 
-3. Prepare package.json
-
-``` bash
-$ cp package.original.json package.json
-```
-
-4. Initialize project
-
-``` bash
-$ npm run init
-```
-
-5. Modify .env file
+3. Modify .env file
 
 `env/.env`:
 
@@ -89,19 +77,19 @@ REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
-6. Start Dev Server
+4. Start Dev Server
 
 ``` bash
 $ npm run dev
 ```
 
-7. Unit test
+5. Unit test
 
 ``` bash
 $ npm run test
 ```
 
-8. Build
+6. Build
 
 ``` bash
 $ npm run build
