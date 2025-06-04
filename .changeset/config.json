@@ -7,5 +7,22 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["cabloy-socket"]
+  "ignore": [
+    "vona-suite-a-cabloy",
+    "vona-module-a-authgithub",
+    "vona-module-a-cabloy",
+    "vona-module-a-datasharding",
+    "vona-module-a-datasource",
+    "vona-module-a-rest",
+    "vona-module-a-socket",
+    "vona-module-a-ssr",
+    "vona-module-a-ssrcabloy",
+    "vona-module-a-ssrhome",
+    "vona-module-a-status",
+    "vona-module-cabloy-socket",
+    "vona-suite-test-cabloy",
+    "vona-module-test-cabloy",
+    "vona-module-test-rest",
+    "vona-module-test-ssr"
+  ]
 }
