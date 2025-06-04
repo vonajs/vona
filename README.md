@@ -30,6 +30,9 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 |MySQL|>=8|
 |Postgresql|>=17|
 
+* Redis: Required
+* MySQL/Postgresql: Choose what you want to use
+
 ## Quick Start
 
 1. Clone
