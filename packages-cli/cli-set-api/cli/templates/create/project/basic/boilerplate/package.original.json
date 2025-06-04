@@ -9,16 +9,20 @@
     "url": "git+https://github.com/vonajs/vona.git"
   },
   "author": "zhennann",
-  "keywords": ["nodejs", "full-stack", "workflow-engine", "vona", "cabloy"],
+  "keywords": [
+    "nodejs",
+    "vona",
+    "cabloy"
+  ],
   "bugs": {
     "url": "https://github.com/vonajs/vona/issues"
   },
   "homepage": "https://github.com/vonajs/vona#readme",
   "engines": {
-    "node": ">=23.7.0"
+    "node": ">=24.1.0"
   },
   "scripts": {
-    "init": "npm run prerun && pnpm install --no-frozen-lockfile",
+    "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile",
     "vona": "vona",
     "demo": "npm run vona :bin:demo -- --flavor=normal",
     "db:reset": "npm run prerun && npm run vona :bin:dbReset -- --flavor=normal",
@@ -29,6 +33,7 @@
     "tsc": "npm run prerun && npm run vona :bin:tsc",
     "build": "npm run prerun && npm run vona :bin:build -- --flavor=normal",
     "start": "node ./dist/bootstrap.js",
+    "start:one": "cross-env SERVER_WORKERS=1 node ./dist/bootstrap.js",
     "prerun": "npm run vona :tools:deps",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
