@@ -51,10 +51,11 @@
     ]
   },
   "dependencies": {
-    "@cabloy/extend": "workspace:^"
+    "@cabloy/extend": "^3.1.2"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
-  }
+  },
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
 }

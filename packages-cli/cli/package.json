@@ -46,12 +46,12 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "workspace:^",
-    "vona-cli-set-api": "workspace:^"
+    "@cabloy/cli": "^3.0.15",
+    "vona-cli-set-api": "^1.0.11"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
 }

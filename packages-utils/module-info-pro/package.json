@@ -42,12 +42,12 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "workspace:^",
+    "@cabloy/module-info": "^1.3.10",
     "stack-utils": "^2.0.6"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
 }

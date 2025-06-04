@@ -34,7 +34,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "cascade-extend": "workspace:^",
+    "cascade-extend": "^2.1.2",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "globby": "^14.1.0"
@@ -50,5 +50,6 @@
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
-  }
+  },
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
 }
