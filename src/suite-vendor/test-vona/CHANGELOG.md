@@ -1,5 +1,13 @@
 # vona-suite-test-vona
 
+## 5.0.8
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - vona-module-test-vona@5.0.8
+
 ## 5.0.7
 
 ### Patch Changes

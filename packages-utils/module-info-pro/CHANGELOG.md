@@ -1,5 +1,13 @@
 # @cabloy/module-info-pro
 
+## 1.0.22
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - @cabloy/module-info@1.3.14
+
 ## 1.0.21
 
 ### Patch Changes

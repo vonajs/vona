@@ -1,5 +1,11 @@
 # @cabloy/localeutil
 
+## 2.0.6
+
+### Patch Changes
+
+- first patch
+
 ## 2.0.5
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # vona
 
+## 5.0.15
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - vona-core@5.0.13
+  - vona-suite-a-vona@5.0.11
+
 ## 5.0.14
 
 ### Patch Changes

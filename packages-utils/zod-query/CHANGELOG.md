@@ -1,5 +1,11 @@
 # @cabloy/zod-query
 
+## 1.0.10
+
+### Patch Changes
+
+- first patch
+
 ## 1.0.9
 
 ### Patch Changes

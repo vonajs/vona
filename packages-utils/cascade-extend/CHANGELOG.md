@@ -1,5 +1,13 @@
 # cascade-extend
 
+## 2.1.6
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - @cabloy/extend@3.1.6
+
 ## 2.1.5
 
 ### Patch Changes

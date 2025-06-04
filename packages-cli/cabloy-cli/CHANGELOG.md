@@ -1,5 +1,16 @@
 # @cabloy/cli
 
+## 3.0.19
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - @cabloy/module-glob@5.2.7
+  - @cabloy/module-info@1.3.14
+  - @cabloy/process-helper@2.0.12
+  - @cabloy/utils@1.0.21
+
 ## 3.0.18
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @cabloy/extend
 
+## 3.1.6
+
+### Patch Changes
+
+- first patch
+
 ## 3.1.5
 
 ### Patch Changes

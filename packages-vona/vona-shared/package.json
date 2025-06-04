@@ -1,7 +1,7 @@
 {
   "name": "vona-shared",
   "type": "module",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "publishConfig": {
     "access": "public"

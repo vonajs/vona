@@ -1,5 +1,11 @@
 # @cabloy/lint
 
+## 5.0.12
+
+### Patch Changes
+
+- first patch
+
 ## 5.0.11
 
 ### Patch Changes

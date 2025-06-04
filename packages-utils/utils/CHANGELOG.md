@@ -1,5 +1,13 @@
 # @cabloy/utils
 
+## 1.0.21
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - @cabloy/module-info@1.3.14
+
 ## 1.0.20
 
 ### Patch Changes

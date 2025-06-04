@@ -1,5 +1,11 @@
 # @cabloy/module-info
 
+## 1.3.14
+
+### Patch Changes
+
+- first patch
+
 ## 1.3.13
 
 ### Patch Changes

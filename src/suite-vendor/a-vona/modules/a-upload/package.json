@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-upload",
   "type": "module",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "title": "a-upload",
   "vonaModule": {
     "dependencies": {}

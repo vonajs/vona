@@ -1,5 +1,20 @@
 # vona-core
 
+## 5.0.13
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - @cabloy/compose@2.0.10
+  - @cabloy/extend@3.1.6
+  - @cabloy/json5@1.0.14
+  - @cabloy/localeutil@2.0.6
+  - @cabloy/module-info@1.3.14
+  - @cabloy/module-info-pro@1.0.22
+  - @cabloy/set@1.0.13
+  - @cabloy/utils@1.0.21
+
 ## 5.0.12
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @cabloy/module-glob
 
+## 5.2.7
+
+### Patch Changes
+
+- first patch
+- Updated dependencies
+  - @cabloy/module-info@1.3.14
+  - @cabloy/utils@1.0.21
+
 ## 5.2.6
 
 ### Patch Changes
