@@ -15,6 +15,17 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 [download-image]: https://img.shields.io/npm/dm/vona?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/vona
 
+## Technology Stack
+
+|Name|Version|
+|--|--|
+|Nodejs| >=24.1.0 |
+|Typescript| >=5.7.3 |
+|Koa|>=3.0.0|
+|Redis|>=7.2.6|
+|MySQL|>=8|
+|Postgresql|>=17|
+
 ## Quick Start
 
 1. Clone
