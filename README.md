@@ -4,7 +4,16 @@ English | [简体中文](./README.zh-CN.md)
 
 Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size
 
+[![LICENSE MIT][license-image]][license-url]
+[![NPM version][npm-image]][npm-url]
+[![NPM download][download-image]][download-url]
 
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: https://github.com/vonajs/vona/blob/master/LICENSE
+[npm-image]: https://img.shields.io/npm/v/vona.svg?style=flat-square
+[npm-url]: https://npmjs.com/package/vona
+[download-image]: https://img.shields.io/npm/dm/vona?color=orange&label=npm%20downloads
+[download-url]: https://npmjs.com/package/vona
 
 ## Quick Start
 
