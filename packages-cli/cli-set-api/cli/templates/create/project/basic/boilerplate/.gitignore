@@ -20,6 +20,7 @@ miniprogram_npm
 
 # vona core related directories
 .vona
+.app
 
 # mine .env files
 env/.env*.mine
@@ -59,8 +60,7 @@ env/.env*.mine
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-vona
 !/src/suite-vendor/test-vona
-!/src/suite-vendor/a-cabloy
-!/src/suite-vendor/cabloy-test
+
 
 /src/module/*
 !/src/module/.gitkeep
