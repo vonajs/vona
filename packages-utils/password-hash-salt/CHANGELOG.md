@@ -1,5 +1,11 @@
 # password-hash-salt
 
+## 1.0.9
+
+### Patch Changes
+
+- first publish
+
 ## 1.0.8
 
 ### Patch Changes

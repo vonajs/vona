@@ -1,5 +1,13 @@
 # @cabloy/dotenv
 
+## 1.1.8
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - cascade-extend@2.1.8
+
 ## 1.1.7
 
 ### Patch Changes

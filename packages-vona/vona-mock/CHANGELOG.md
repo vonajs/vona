@@ -1,5 +1,15 @@
 # vona-mock
 
+## 6.0.15
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - @cabloy/module-info@1.3.16
+  - @cabloy/module-info-pro@1.0.24
+  - vona-core@5.0.15
+
 ## 6.0.14
 
 ### Patch Changes

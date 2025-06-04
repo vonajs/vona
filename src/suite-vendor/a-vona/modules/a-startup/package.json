@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-startup",
   "type": "module",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "title": "a-startup",
   "vonaModule": {
     "dependencies": {},

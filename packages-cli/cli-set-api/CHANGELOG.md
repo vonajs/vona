@@ -1,5 +1,17 @@
 # vona-cli-set-api
 
+## 1.0.26
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - @cabloy/cli@3.0.21
+  - @cabloy/dotenv@1.1.8
+  - @cabloy/extend@3.1.8
+  - @cabloy/module-glob@5.2.9
+  - @cabloy/module-info@1.3.16
+
 ## 1.0.25
 
 ### Patch Changes

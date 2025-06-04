@@ -1,5 +1,11 @@
 # vona-module-a-security
 
+## 5.0.7
+
+### Patch Changes
+
+- first publish
+
 ## 5.0.6
 
 ### Patch Changes

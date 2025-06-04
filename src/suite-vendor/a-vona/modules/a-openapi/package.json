@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-openapi",
   "type": "module",
-  "version": "5.0.8",
+  "version": "5.0.9",
   "title": "a-openapi",
   "vonaModule": {
     "capabilities": {
@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
-    "@cabloy/zod-errors-custom": "^1.0.10",
-    "@cabloy/zod-query": "^1.0.11",
+    "@cabloy/zod-errors-custom": "^1.0.11",
+    "@cabloy/zod-query": "^1.0.12",
     "@zhennann/currency": "^2.0.0",
     "openapi3-ts": "^4.4.0",
     "zod": "^3.23.8"

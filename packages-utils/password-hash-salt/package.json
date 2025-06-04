@@ -1,7 +1,7 @@
 {
   "name": "password-hash-salt",
   "type": "module",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Simple, safe and straight-forward password hashing / salting for node.js",
   "publishConfig": {
     "access": "public"

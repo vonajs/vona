@@ -1,5 +1,11 @@
 # table-identity
 
+## 1.0.8
+
+### Patch Changes
+
+- first publish
+
 ## 1.0.7
 
 ### Patch Changes

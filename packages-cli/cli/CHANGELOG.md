@@ -1,5 +1,14 @@
 # vona-cli
 
+## 1.0.25
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - @cabloy/cli@3.0.21
+  - vona-cli-set-api@1.0.26
+
 ## 1.0.24
 
 ### Patch Changes

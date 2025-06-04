@@ -1,5 +1,13 @@
 # vona-module-a-database
 
+## 5.0.17
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - table-identity@1.0.8
+
 ## 5.0.16
 
 ### Patch Changes

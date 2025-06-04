@@ -1,5 +1,11 @@
 # @cabloy/ensure-array
 
+## 1.0.16
+
+### Patch Changes
+
+- first publish
+
 ## 1.0.15
 
 ### Patch Changes

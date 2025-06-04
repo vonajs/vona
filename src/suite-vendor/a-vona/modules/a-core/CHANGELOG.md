@@ -1,5 +1,18 @@
 # vona-module-a-core
 
+## 5.0.12
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - @cabloy/deps@1.0.17
+  - @cabloy/json5@1.0.16
+  - @cabloy/module-info@1.3.16
+  - @cabloy/set@1.0.15
+  - @cabloy/utils@1.0.23
+  - vona-shared@1.0.15
+
 ## 5.0.11
 
 ### Patch Changes

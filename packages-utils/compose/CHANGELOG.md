@@ -1,5 +1,11 @@
 # @cabloy/compose
 
+## 2.0.12
+
+### Patch Changes
+
+- first publish
+
 ## 2.0.11
 
 ### Patch Changes

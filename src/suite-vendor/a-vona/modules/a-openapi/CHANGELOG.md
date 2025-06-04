@@ -1,5 +1,14 @@
 # vona-module-a-openapi
 
+## 5.0.9
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - @cabloy/zod-errors-custom@1.0.11
+  - @cabloy/zod-query@1.0.12
+
 ## 5.0.8
 
 ### Patch Changes

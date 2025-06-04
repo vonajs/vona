@@ -1,5 +1,15 @@
 # vona-suite-a-home
 
+## 5.0.5
+
+### Patch Changes
+
+- first publish
+- Updated dependencies
+  - vona-module-home-base@5.0.5
+  - vona-module-home-index@5.0.5
+  - vona-module-home-user@5.0.5
+
 ## 5.0.4
 
 ### Patch Changes

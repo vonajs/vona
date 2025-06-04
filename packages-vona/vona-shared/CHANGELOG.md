@@ -1,5 +1,11 @@
 # vona-shared
 
+## 1.0.15
+
+### Patch Changes
+
+- first publish
+
 ## 1.0.14
 
 ### Patch Changes
