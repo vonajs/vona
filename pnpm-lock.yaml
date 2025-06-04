@@ -389,7 +389,7 @@ importers:
         specifier: ^3.0.16
         version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: ^1.0.12
+        specifier: ^1.0.13
         version: link:../cli-set-api
     devDependencies:
       clean-package:
