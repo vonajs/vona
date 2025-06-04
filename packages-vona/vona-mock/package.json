@@ -1,7 +1,7 @@
 {
   "name": "vona-mock",
   "type": "module",
-  "version": "6.0.8",
+  "version": "6.0.9",
   "description": "vona mock",
   "publishConfig": {
     "access": "public"

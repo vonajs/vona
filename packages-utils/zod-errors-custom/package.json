@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/zod-errors-custom",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "zod-errors-custom",
   "publishConfig": {
     "access": "public"

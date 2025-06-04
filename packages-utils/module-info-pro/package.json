@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/module-info-pro",
   "type": "module",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "cabloy module-info-pro",
   "publishConfig": {
     "access": "public"
