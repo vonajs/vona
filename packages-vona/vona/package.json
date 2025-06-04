@@ -2,11 +2,19 @@
   "name": "vona",
   "type": "module",
   "version": "5.0.7",
-  "description": "vona",
+  "description": "Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size",
+  "author": "zhennann",
+  "homepage": "https://github.com/vonajs/vona#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vonajs/vona.git"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "author": "zhennann",
+  "bugs": {
+    "url": "https://github.com/vonajs/vona/issues"
+  },
   "keywords": [
     "nodejs",
     "framework",
@@ -26,6 +34,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24.1.0"
+  },
   "scripts": {
     "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",

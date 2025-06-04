@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/vonajs/vona#readme",
   "engines": {
-    "node": ">=23.7.0"
+    "node": ">=24.1.0"
   },
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile",
