@@ -1,0 +1,308 @@
+{
+	"publishedPackages": [
+		{
+			"name": "@cabloy/compose",
+			"version": "2.0.11"
+		},
+		{
+			"name": "@cabloy/deps",
+			"version": "1.0.16"
+		},
+		{
+			"name": "@cabloy/ensure-array",
+			"version": "1.0.15"
+		},
+		{
+			"name": "@cabloy/extend",
+			"version": "3.1.7"
+		},
+		{
+			"name": "@cabloy/json5",
+			"version": "1.0.15"
+		},
+		{
+			"name": "@cabloy/lint",
+			"version": "5.0.13"
+		},
+		{
+			"name": "@cabloy/localeutil",
+			"version": "2.0.7"
+		},
+		{
+			"name": "@cabloy/module-info",
+			"version": "1.3.15"
+		},
+		{
+			"name": "password-hash-salt",
+			"version": "1.0.8"
+		},
+		{
+			"name": "@cabloy/process-helper",
+			"version": "2.0.13"
+		},
+		{
+			"name": "@cabloy/set",
+			"version": "1.0.14"
+		},
+		{
+			"name": "@cabloy/socket",
+			"version": "1.0.10"
+		},
+		{
+			"name": "table-identity",
+			"version": "1.0.7"
+		},
+		{
+			"name": "@cabloy/zod-errors-custom",
+			"version": "1.0.10"
+		},
+		{
+			"name": "@cabloy/zod-query",
+			"version": "1.0.11"
+		},
+		{
+			"name": "vona-shared",
+			"version": "1.0.14"
+		},
+		{
+			"name": "vona-module-demo-student",
+			"version": "5.0.2"
+		},
+		{
+			"name": "vona-module-a-aspect",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-auth",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-bean",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-body",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-broadcast",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-cache",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-databasedialect",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-election",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-error",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-event",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-executor",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-i18n",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-index",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-instance",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-jwt",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-logger",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-menu",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-meta",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-onion",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-openapischema",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-printtip",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-queue",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-redis",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-redlock",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-schedule",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-security",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-startup",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-static",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-summer",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-swagger",
+			"version": "5.0.10"
+		},
+		{
+			"name": "vona-module-a-upload",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-user",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-validation",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-version",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-vona",
+			"version": "5.0.9"
+		},
+		{
+			"name": "vona-module-a-web",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-a-worker",
+			"version": "5.0.6"
+		},
+		{
+			"name": "vona-module-test-vona",
+			"version": "5.0.9"
+		},
+		{
+			"name": "vona-module-home-base",
+			"version": "5.0.4"
+		},
+		{
+			"name": "vona-module-home-index",
+			"version": "5.0.4"
+		},
+		{
+			"name": "vona-module-home-user",
+			"version": "5.0.4"
+		},
+		{
+			"name": "cascade-extend",
+			"version": "2.1.7"
+		},
+		{
+			"name": "@cabloy/module-info-pro",
+			"version": "1.0.23"
+		},
+		{
+			"name": "@cabloy/utils",
+			"version": "1.0.22"
+		},
+		{
+			"name": "vona-module-a-authsimple",
+			"version": "5.0.8"
+		},
+		{
+			"name": "vona-module-a-database",
+			"version": "5.0.16"
+		},
+		{
+			"name": "vona-module-a-openapi",
+			"version": "5.0.8"
+		},
+		{
+			"name": "vona-suite-test-vona",
+			"version": "5.0.9"
+		},
+		{
+			"name": "vona-suite-a-home",
+			"version": "5.0.4"
+		},
+		{
+			"name": "@cabloy/dotenv",
+			"version": "1.1.7"
+		},
+		{
+			"name": "@cabloy/module-glob",
+			"version": "5.2.8"
+		},
+		{
+			"name": "vona-core",
+			"version": "5.0.14"
+		},
+		{
+			"name": "@cabloy/cli",
+			"version": "3.0.20"
+		},
+		{
+			"name": "vona-mock",
+			"version": "6.0.14"
+		},
+		{
+			"name": "vona-cli-set-api",
+			"version": "1.0.25"
+		},
+		{
+			"name": "vona-module-a-core",
+			"version": "5.0.11"
+		},
+		{
+			"name": "vona-cli",
+			"version": "1.0.24"
+		},
+		{
+			"name": "vona-suite-a-vona",
+			"version": "5.0.12"
+		},
+		{
+			"name": "vona",
+			"version": "5.0.16"
+		}
+	]
+}
