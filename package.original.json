@@ -3,7 +3,7 @@
   "title": "Vona",
   "private": true,
   "type": "module",
-  "description": "A Node.js full-stack framework with workflow engine",
+  "description": "Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vonajs/vona.git"
