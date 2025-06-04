@@ -1,15 +1,15 @@
-English | [简体中文](./README.md)
+简体中文 | [English](./README.md)
 
-# What is Vona
+# Vona 是什么
 
-Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size
+Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任何规模的企业级应用
 
 * Issues: https://github.com/vonajs/vona/issues
 * Discussions: https://github.com/vonajs/vona/discussions
 * Twitter: https://x.com/zhennann2024
 * Bilibili: https://space.bilibili.com/454737998
 
-## Quick Start
+## 快速开始
 
 1. Clone
 
