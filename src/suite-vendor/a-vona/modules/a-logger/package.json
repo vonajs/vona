@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-logger",
   "type": "module",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "title": "a-logger",
   "vonaModule": {
     "dependencies": {}

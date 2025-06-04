@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-base",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "home-base",
   "vonaModule": {
     "dependencies": {

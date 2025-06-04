@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/process-helper",
   "type": "module",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "cabloy process-helper",
   "publishConfig": {
     "access": "public"
