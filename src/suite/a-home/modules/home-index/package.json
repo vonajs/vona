@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-index",
   "type": "module",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "title": "home-index",
   "vonaModule": {
     "dependencies": {

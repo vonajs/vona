@@ -1,5 +1,14 @@
 # @cabloy/module-glob
 
+## 5.2.6
+
+### Patch Changes
+
+- 9539085: first changeset
+- Updated dependencies [9539085]
+  - @cabloy/module-info@1.3.13
+  - @cabloy/utils@1.0.20
+
 ## 5.2.5
 
 ### Patch Changes

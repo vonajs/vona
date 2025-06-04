@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-event",
   "type": "module",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "title": "a-event",
   "vonaModule": {
     "dependencies": {},

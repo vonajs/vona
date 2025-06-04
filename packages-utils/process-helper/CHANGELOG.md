@@ -1,5 +1,11 @@
 # @cabloy/process-helper
 
+## 2.0.11
+
+### Patch Changes
+
+- 9539085: first changeset
+
 ## 2.0.10
 
 ### Patch Changes

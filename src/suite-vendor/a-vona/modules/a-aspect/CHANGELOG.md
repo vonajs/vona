@@ -1,5 +1,11 @@
 # vona-module-a-aspect
 
+## 5.0.4
+
+### Patch Changes
+
+- 9539085: first changeset
+
 ## 5.0.3
 
 ### Patch Changes
