@@ -19,6 +19,18 @@ Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任�
 
 [Click here](https://juejin.cn/post/7509709812857110582)
 
+## Technology Stack
+
+|名称|版本|
+|--|--|
+|Nodejs| >=24.1.0 |
+|Typescript| >=5.7.3 |
+|Koa|>=3.0.0|
+|Redis|>=7.2.6|
+|MySQL|>=8|
+|Postgresql|>=17|
+
+
 ## 快速开始
 
 1. Clone
