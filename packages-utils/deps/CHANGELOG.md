@@ -1,5 +1,11 @@
 # @cabloy/deps
 
+## 1.0.16
+
+### Patch Changes
+
+- test
+
 ## 1.0.15
 
 ### Patch Changes

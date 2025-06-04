@@ -1,5 +1,11 @@
 # @cabloy/module-info
 
+## 1.3.15
+
+### Patch Changes
+
+- test
+
 ## 1.3.14
 
 ### Patch Changes

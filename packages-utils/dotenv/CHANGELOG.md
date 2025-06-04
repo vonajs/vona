@@ -1,5 +1,13 @@
 # @cabloy/dotenv
 
+## 1.1.7
+
+### Patch Changes
+
+- test
+- Updated dependencies
+  - cascade-extend@2.1.7
+
 ## 1.1.6
 
 ### Patch Changes

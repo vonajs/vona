@@ -1,5 +1,13 @@
 # vona-module-a-authsimple
 
+## 5.0.8
+
+### Patch Changes
+
+- test
+- Updated dependencies
+  - password-hash-salt@1.0.8
+
 ## 5.0.7
 
 ### Patch Changes

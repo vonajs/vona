@@ -1,5 +1,11 @@
 # vona-module-a-swagger
 
+## 5.0.10
+
+### Patch Changes
+
+- test
+
 ## 5.0.9
 
 ### Patch Changes

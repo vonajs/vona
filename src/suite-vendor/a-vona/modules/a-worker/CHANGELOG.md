@@ -1,5 +1,11 @@
 # vona-module-a-worker
 
+## 5.0.6
+
+### Patch Changes
+
+- test
+
 ## 5.0.5
 
 ### Patch Changes

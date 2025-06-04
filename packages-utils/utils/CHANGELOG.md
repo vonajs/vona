@@ -1,5 +1,13 @@
 # @cabloy/utils
 
+## 1.0.22
+
+### Patch Changes
+
+- test
+- Updated dependencies
+  - @cabloy/module-info@1.3.15
+
 ## 1.0.21
 
 ### Patch Changes

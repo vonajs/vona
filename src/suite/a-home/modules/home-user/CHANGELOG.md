@@ -1,5 +1,11 @@
 # vona-module-home-user
 
+## 5.0.4
+
+### Patch Changes
+
+- test
+
 ## 5.0.3
 
 ### Patch Changes

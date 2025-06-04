@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/json5",
   "type": "module",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "cabloy json5",
   "publishConfig": {
     "access": "public"

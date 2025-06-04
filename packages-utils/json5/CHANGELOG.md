@@ -1,5 +1,11 @@
 # @cabloy/json5
 
+## 1.0.15
+
+### Patch Changes
+
+- test
+
 ## 1.0.14
 
 ### Patch Changes
