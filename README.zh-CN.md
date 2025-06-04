@@ -33,29 +33,38 @@ Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任�
 * Redis: 必须
 * MySQL/Postgresql: 选择一个你想用的
 
-## 快速开始
+## Quick Start
 
-1. Clone
+1. Install command-line tools
 
 ``` bash
-git clone git@github.com:cabloy/vona-dev.git vona-dev
+$ pnpm add -g vona-cli@latest
 ```
 
-2. Install
+2. Create Project
+
+``` bash
+$ vona :create:project projectName
+$ cd projectName
+```
+
+3. Prepare package.json
 
 ``` bash
 $ cp package.original.json package.json
+```
+
+4. Initialize project
+
+``` bash
 $ npm run init
 ```
 
-3. .env
+5. Modify .env file
 
-Modify the `.env` file:
+`env/.env`:
 
 ``` bash
-# app
-APP_NAME = Vona
-
 # database
 
 DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
@@ -80,10 +89,22 @@ REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
-4. Start
+6. Start Dev Server
 
 ``` bash
-npm run dev
+$ npm run dev
+```
+
+7. Unit test
+
+``` bash
+$ npm run test
+```
+
+8. Build
+
+``` bash
+$ npm run build
 ```
 
 ## 联系方式

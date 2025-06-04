@@ -35,27 +35,36 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 
 ## Quick Start
 
-1. Clone
+1. Install command-line tools
 
 ``` bash
-git clone git@github.com:cabloy/vona-dev.git vona-dev
+$ pnpm add -g vona-cli@latest
 ```
 
-2. Install
+2. Create Project
+
+``` bash
+$ vona :create:project projectName
+$ cd projectName
+```
+
+3. Prepare package.json
 
 ``` bash
 $ cp package.original.json package.json
+```
+
+4. Initialize project
+
+``` bash
 $ npm run init
 ```
 
-3. .env
+5. Modify .env file
 
-Modify the `.env` file:
+`env/.env`:
 
 ``` bash
-# app
-APP_NAME = Vona
-
 # database
 
 DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
@@ -80,10 +89,22 @@ REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
-4. Start
+6. Start Dev Server
 
 ``` bash
-npm run dev
+$ npm run dev
+```
+
+7. Unit test
+
+``` bash
+$ npm run test
+```
+
+8. Build
+
+``` bash
+$ npm run build
 ```
 
 ## Stay In Touch
