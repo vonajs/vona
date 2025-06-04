@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-worker",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-worker",
   "vonaModule": {
     "dependencies": {},
@@ -36,7 +36,6 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {},
   "clean-package": {
     "indent": 2,
     "remove": [

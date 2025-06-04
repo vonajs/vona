@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-auth",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-auth",
   "vonaModule": {
     "fileVersion": 1,
@@ -19,7 +19,9 @@
   },
   "description": "",
   "author": "",
-  "keywords": ["Vona Module"],
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -31,7 +33,11 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["cli", "dist", "static"],
+  "files": [
+    "cli",
+    "dist",
+    "static"
+  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
@@ -48,7 +54,6 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

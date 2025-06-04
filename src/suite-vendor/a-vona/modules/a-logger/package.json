@@ -1,14 +1,16 @@
 {
   "name": "vona-module-a-logger",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-logger",
   "vonaModule": {
     "dependencies": {}
   },
   "description": "",
   "author": "",
-  "keywords": ["Vona Module"],
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -20,7 +22,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist", "static"],
+  "files": [
+    "dist",
+    "static"
+  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",

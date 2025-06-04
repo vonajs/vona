@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-security",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-security",
   "vonaModule": {
     "dependencies": {}
