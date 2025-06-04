@@ -48,5 +48,7 @@
   "dependencies": {
     "vona": "workspace:^"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "lerna": "^8.2.2"
+  }
 }
