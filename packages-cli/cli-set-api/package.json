@@ -1,7 +1,7 @@
 {
   "name": "vona-cli-set-api",
   "type": "module",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "vona cli-set-api",
   "publishConfig": {
     "access": "public"
