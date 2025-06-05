@@ -15,19 +15,19 @@ importers:
         specifier: ^7.3.0
         version: 7.3.2(zod@3.25.51)
       '@cabloy/deps':
-        specifier: ^1.0.16
+        specifier: ^1.0.19
         version: link:packages-utils/deps
       '@cabloy/json5':
-        specifier: ^1.0.15
+        specifier: ^1.0.18
         version: link:packages-utils/json5
       '@cabloy/set':
-        specifier: ^1.0.14
+        specifier: ^1.0.17
         version: link:packages-utils/set
       '@cabloy/socket':
         specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/utils':
-        specifier: ^1.0.22
+        specifier: ^1.0.25
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -66,7 +66,7 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1
       table-identity:
-        specifier: ^1.0.7
+        specifier: ^1.0.10
         version: link:packages-utils/table-identity
       uuid:
         specifier: ^11.0.3
@@ -255,7 +255,7 @@ importers:
         specifier: workspace:^
         version: link:src/suite-vendor/test-vona/modules/test-vona
       vona-shared:
-        specifier: ^1.0.14
+        specifier: ^1.0.17
         version: link:packages-vona/vona-shared
       winston:
         specifier: ^3.17.0
@@ -265,10 +265,10 @@ importers:
         version: 3.25.51
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.20
+        specifier: ^3.0.24
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
-        specifier: ^5.0.13
+        specifier: ^5.0.16
         version: link:packages-utils/lint
       '@swc/core':
         specifier: ^1.7.36
@@ -301,7 +301,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.14
+        specifier: ^6.0.17
         version: link:packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -389,7 +389,7 @@ importers:
         specifier: ^3.0.24
         version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: ^1.0.33
+        specifier: ^1.0.34
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -782,7 +782,7 @@ importers:
         specifier: ^5.0.17
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1065,127 +1065,127 @@ importers:
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-aspect
       vona-module-a-auth:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-auth
       vona-module-a-authsimple:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-authsimple
       vona-module-a-bean:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-bean
       vona-module-a-body:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-body
       vona-module-a-broadcast:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-broadcast
       vona-module-a-cache:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-cache
       vona-module-a-core:
-        specifier: ^5.0.14
+        specifier: ^5.0.16
         version: link:modules/a-core
       vona-module-a-database:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:modules/a-database
       vona-module-a-databasedialect:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-databasedialect
       vona-module-a-election:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-election
       vona-module-a-error:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-error
       vona-module-a-event:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-event
       vona-module-a-executor:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-executor
       vona-module-a-i18n:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-i18n
       vona-module-a-index:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-jwt
       vona-module-a-logger:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-logger
       vona-module-a-menu:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-menu
       vona-module-a-meta:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-openapi
       vona-module-a-openapischema:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-openapischema
       vona-module-a-printtip:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-printtip
       vona-module-a-queue:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-queue
       vona-module-a-redis:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-redis
       vona-module-a-redlock:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-redlock
       vona-module-a-schedule:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-schedule
       vona-module-a-security:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-security
       vona-module-a-startup:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-startup
       vona-module-a-static:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-summer
       vona-module-a-swagger:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-swagger
       vona-module-a-upload:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-upload
       vona-module-a-user:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-user
       vona-module-a-validation:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-version
       vona-module-a-vona:
-        specifier: ^5.0.12
+        specifier: ^5.0.13
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-web
       vona-module-a-worker:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-worker
 
   src/suite-vendor/a-vona/modules/a-aspect:
