@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-i18n",
   "type": "module",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "title": "a-i18n",
   "vonaModule": {
     "dependencies": {},

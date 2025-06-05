@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/dotenv",
   "type": "module",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "cabloy dotenv",
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "cascade-extend": "^2.1.8",
+    "cascade-extend": "^2.1.9",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "globby": "^14.1.0"

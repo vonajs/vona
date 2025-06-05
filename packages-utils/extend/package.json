@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/extend",
   "type": "module",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "description": "cabloy extend",
   "publishConfig": {
     "access": "public"

@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-static",
   "type": "module",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "title": "a-static",
   "vonaModule": {
     "dependencies": {},
