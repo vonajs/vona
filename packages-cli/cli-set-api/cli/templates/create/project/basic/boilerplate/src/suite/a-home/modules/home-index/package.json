@@ -26,7 +26,8 @@
   },
   "files": [
     "dist",
-    "static"
+    "static",
+    "test"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
