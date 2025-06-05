@@ -47,6 +47,7 @@
     "vona": "workspace:^"
   },
   "devDependencies": {
+    "eslint": "^9.20.1",
     "lerna": "^8.2.2"
   }
 }

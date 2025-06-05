@@ -46,5 +46,7 @@
   "dependencies": {
     "vona": "^5.0.19"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^9.20.1"
+  }
 }
