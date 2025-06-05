@@ -389,7 +389,7 @@ importers:
         specifier: ^3.0.24
         version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: ^1.0.34
+        specifier: ^1.0.35
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -782,7 +782,7 @@ importers:
         specifier: ^5.0.17
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.16
+        specifier: ^5.0.17
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1086,7 +1086,7 @@ importers:
         specifier: ^5.0.10
         version: link:modules/a-cache
       vona-module-a-core:
-        specifier: ^5.0.16
+        specifier: ^5.0.17
         version: link:modules/a-core
       vona-module-a-database:
         specifier: ^5.0.20
@@ -1344,9 +1344,6 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
-      eslint:
-        specifier: ^9.20.1
-        version: 9.28.0
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
