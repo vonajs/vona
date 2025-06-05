@@ -27,9 +27,9 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
     ignore: patternsIgnore,
   });
   if (process.env.TEST_ONLY === 'true') {
-    files.push(resolveTemplatePath('test/done-only.test.ts'));
+    files.push(resolveTemplatePath('test/done-only.test.js'));
   } else {
-    files.push(resolveTemplatePath('test/done.test.ts'));
+    files.push(resolveTemplatePath('test/done.test.js'));
   }
   // concurrency
   let concurrency = 1;
