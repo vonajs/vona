@@ -86,6 +86,10 @@ export class CliBinBuildModule extends BeanCliBase {
         if (log.code === 'EVAL' && log.message.includes('bluebird/js/release/util.js')) return;
         defaultHandler(level, log);
       },
+      external(source, _importer, _isResolved) {
+        if (source.includes('/src/') || source.startsWith('.')) return false;
+        return true;
+      },
     };
 
     const outputOption: OutputOptions = {
