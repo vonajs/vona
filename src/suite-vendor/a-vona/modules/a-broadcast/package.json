@@ -51,7 +51,6 @@
     "indent": 2,
     "remove": [
       "clean-package",
-      "devDependencies",
       "exports.\\..import"
     ]
   },
