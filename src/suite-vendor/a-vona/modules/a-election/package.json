@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-election",
   "type": "module",
-  "version": "5.0.10",
+  "version": "5.0.11",
   "title": "a-election",
   "vonaModule": {
     "dependencies": {},
