@@ -389,7 +389,7 @@ importers:
         specifier: ^3.0.24
         version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: ^1.0.32
+        specifier: ^1.0.33
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -497,6 +497,9 @@ importers:
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
+      vona-core:
+        specifier: ^5.0.17
+        version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2
