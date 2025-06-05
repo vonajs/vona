@@ -47,6 +47,7 @@
     "vona": "^5.0.19"
   },
   "devDependencies": {
+    "@cabloy/lint": "^5.0.16",
     "eslint": "^9.20.1"
   }
 }
