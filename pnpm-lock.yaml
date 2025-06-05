@@ -16,19 +16,19 @@ importers:
         version: 7.3.2(zod@3.25.51)
       '@cabloy/deps':
         specifier: ^1.0.16
-        version: 1.0.19
+        version: link:packages-utils/deps
       '@cabloy/json5':
         specifier: ^1.0.15
-        version: 1.0.18
+        version: link:packages-utils/json5
       '@cabloy/set':
         specifier: ^1.0.14
-        version: 1.0.17
+        version: link:packages-utils/set
       '@cabloy/socket':
         specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/utils':
         specifier: ^1.0.22
-        version: 1.0.25
+        version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -67,7 +67,7 @@ importers:
         version: 0.13.1
       table-identity:
         specifier: ^1.0.7
-        version: 1.0.10
+        version: link:packages-utils/table-identity
       uuid:
         specifier: ^11.0.3
         version: 11.1.0
@@ -256,7 +256,7 @@ importers:
         version: link:src/suite-vendor/test-vona/modules/test-vona
       vona-shared:
         specifier: ^1.0.14
-        version: 1.0.17
+        version: link:packages-vona/vona-shared
       winston:
         specifier: ^3.17.0
         version: 3.17.0
@@ -266,10 +266,10 @@ importers:
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.20
-        version: 3.0.24(vue@3.5.16(typescript@5.8.3))
+        version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.13
-        version: 5.0.16(eslint@9.28.0)(typescript@5.8.3)
+        version: link:packages-utils/lint
       '@swc/core':
         specifier: ^1.7.36
         version: 1.11.29(@swc/helpers@0.5.17)
@@ -302,7 +302,7 @@ importers:
         version: 5.8.3
       vona-mock:
         specifier: ^6.0.14
-        version: 6.0.17
+        version: link:packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2
@@ -314,16 +314,16 @@ importers:
         version: 7.27.5
       '@cabloy/module-glob':
         specifier: ^5.2.11
-        version: 5.2.11
+        version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../../packages-utils/module-info
       '@cabloy/process-helper':
         specifier: ^2.0.16
-        version: 2.0.16
+        version: link:../../packages-utils/process-helper
       '@cabloy/utils':
         specifier: ^1.0.25
-        version: 1.0.25
+        version: link:../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -387,10 +387,10 @@ importers:
     dependencies:
       '@cabloy/cli':
         specifier: ^3.0.24
-        version: 3.0.24(vue@3.5.16(typescript@5.8.3))
+        version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: ^1.0.29
-        version: 1.0.29(@babel/core@7.27.4)(@babel/traverse@7.27.4)(@swc/core@1.11.29(@swc/helpers@0.5.17))(@types/node@22.15.29)(typescript@5.8.3)
+        specifier: ^1.0.31
+        version: link:../cli-set-api
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -412,19 +412,19 @@ importers:
         version: 7.27.1(@babel/core@7.27.4)
       '@cabloy/cli':
         specifier: ^3.0.24
-        version: 3.0.24(vue@3.5.16(typescript@5.8.3))
+        version: link:../cabloy-cli
       '@cabloy/dotenv':
         specifier: ^1.1.10
-        version: 1.1.10
+        version: link:../../packages-utils/dotenv
       '@cabloy/extend':
         specifier: ^3.1.10
-        version: 3.1.10
+        version: link:../../packages-utils/extend
       '@cabloy/module-glob':
         specifier: ^5.2.11
-        version: 5.2.11
+        version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../../packages-utils/module-info
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -512,7 +512,7 @@ importers:
     dependencies:
       '@cabloy/extend':
         specifier: ^3.1.10
-        version: 3.1.10
+        version: link:../extend
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -543,7 +543,7 @@ importers:
     dependencies:
       cascade-extend:
         specifier: ^2.1.10
-        version: 2.1.10
+        version: link:../cascade-extend
       dotenv:
         specifier: ^16.4.5
         version: 16.5.0
@@ -632,10 +632,10 @@ importers:
     dependencies:
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../module-info
       '@cabloy/utils':
         specifier: ^1.0.25
-        version: 1.0.25
+        version: link:../utils
       boxen:
         specifier: ^4.2.0
         version: 4.2.0
@@ -672,7 +672,7 @@ importers:
     dependencies:
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../module-info
       stack-utils:
         specifier: ^2.0.6
         version: 2.0.6
@@ -733,7 +733,7 @@ importers:
     dependencies:
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../module-info
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -777,10 +777,10 @@ importers:
     dependencies:
       vona-core:
         specifier: ^5.0.17
-        version: 5.0.17
+        version: link:../vona-core
       vona-suite-a-vona:
         specifier: ^5.0.15
-        version: 5.0.15(ioredis@5.6.1)
+        version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -796,28 +796,28 @@ importers:
         version: 7.3.2(zod@3.25.51)
       '@cabloy/compose':
         specifier: ^2.0.14
-        version: 2.0.14
+        version: link:../../packages-utils/compose
       '@cabloy/extend':
         specifier: ^3.1.10
-        version: 3.1.10
+        version: link:../../packages-utils/extend
       '@cabloy/json5':
         specifier: ^1.0.18
-        version: 1.0.18
+        version: link:../../packages-utils/json5
       '@cabloy/localeutil':
         specifier: ^2.0.10
-        version: 2.0.10
+        version: link:../../packages-utils/localeutil
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
         specifier: ^1.0.26
-        version: 1.0.26
+        version: link:../../packages-utils/module-info-pro
       '@cabloy/set':
         specifier: ^1.0.17
-        version: 1.0.17
+        version: link:../../packages-utils/set
       '@cabloy/utils':
         specifier: ^1.0.25
-        version: 1.0.25
+        version: link:../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -866,13 +866,13 @@ importers:
     dependencies:
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
         specifier: ^1.0.26
-        version: 1.0.26
+        version: link:../../packages-utils/module-info-pro
       vona-core:
         specifier: ^5.0.17
-        version: 5.0.17
+        version: link:../vona-core
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1063,127 +1063,127 @@ importers:
     dependencies:
       vona-module-a-aspect:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-aspect
       vona-module-a-auth:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-auth
       vona-module-a-authsimple:
         specifier: ^5.0.11
-        version: 5.0.11
+        version: link:modules/a-authsimple
       vona-module-a-bean:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-bean
       vona-module-a-body:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-body
       vona-module-a-broadcast:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-broadcast
       vona-module-a-cache:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-cache
       vona-module-a-core:
         specifier: ^5.0.14
-        version: 5.0.14
+        version: link:modules/a-core
       vona-module-a-database:
         specifier: ^5.0.19
-        version: 5.0.19
+        version: link:modules/a-database
       vona-module-a-databasedialect:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-databasedialect
       vona-module-a-election:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-election
       vona-module-a-error:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-error
       vona-module-a-event:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-event
       vona-module-a-executor:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-executor
       vona-module-a-i18n:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-i18n
       vona-module-a-index:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-index
       vona-module-a-instance:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-instance
       vona-module-a-jwt:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-jwt
       vona-module-a-logger:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-logger
       vona-module-a-menu:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-menu
       vona-module-a-meta:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-meta
       vona-module-a-onion:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-onion
       vona-module-a-openapi:
         specifier: ^5.0.11
-        version: 5.0.11
+        version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-openapischema
       vona-module-a-printtip:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-printtip
       vona-module-a-queue:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-queue
       vona-module-a-redis:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-redis
       vona-module-a-redlock:
         specifier: ^5.0.9
-        version: 5.0.9(ioredis@5.6.1)
+        version: link:modules/a-redlock
       vona-module-a-schedule:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-schedule
       vona-module-a-security:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-security
       vona-module-a-startup:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-startup
       vona-module-a-static:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-static
       vona-module-a-summer:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-summer
       vona-module-a-swagger:
         specifier: ^5.0.13
-        version: 5.0.13
+        version: link:modules/a-swagger
       vona-module-a-upload:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-upload
       vona-module-a-user:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-user
       vona-module-a-validation:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-validation
       vona-module-a-version:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.12
-        version: 5.0.12
+        version: link:modules/a-vona
       vona-module-a-web:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-web
       vona-module-a-worker:
         specifier: ^5.0.9
-        version: 5.0.9
+        version: link:modules/a-worker
 
   src/suite-vendor/a-vona/modules/a-aspect:
     devDependencies:
@@ -1207,7 +1207,7 @@ importers:
     dependencies:
       password-hash-salt:
         specifier: ^1.0.11
-        version: 1.0.11
+        version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1270,19 +1270,19 @@ importers:
     dependencies:
       '@cabloy/deps':
         specifier: ^1.0.19
-        version: 1.0.19
+        version: link:../../../../../packages-utils/deps
       '@cabloy/json5':
         specifier: ^1.0.18
-        version: 1.0.18
+        version: link:../../../../../packages-utils/json5
       '@cabloy/module-info':
         specifier: ^1.3.18
-        version: 1.3.18
+        version: link:../../../../../packages-utils/module-info
       '@cabloy/set':
         specifier: ^1.0.17
-        version: 1.0.17
+        version: link:../../../../../packages-utils/set
       '@cabloy/utils':
         specifier: ^1.0.25
-        version: 1.0.25
+        version: link:../../../../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -1312,17 +1312,17 @@ importers:
         version: 11.1.0
       vona-shared:
         specifier: ^1.0.17
-        version: 1.0.17
+        version: link:../../../../../packages-vona/vona-shared
       winston:
         specifier: ^3.17.0
         version: 3.17.0
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.24
-        version: 3.0.24(vue@3.5.16(typescript@5.8.3))
+        version: link:../../../../../packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
-        version: 5.0.16(eslint@9.28.0)(typescript@5.8.3)
+        version: link:../../../../../packages-utils/lint
       '@swc/core':
         specifier: ^1.7.36
         version: 1.11.29(@swc/helpers@0.5.17)
@@ -1358,7 +1358,7 @@ importers:
         version: 5.8.3
       vona-mock:
         specifier: ^6.0.17
-        version: 6.0.17
+        version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2
@@ -1373,7 +1373,7 @@ importers:
         version: 3.1.0
       table-identity:
         specifier: ^1.0.10
-        version: 1.0.10
+        version: link:../../../../../packages-utils/table-identity
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1551,10 +1551,10 @@ importers:
         version: 7.3.2(zod@3.25.51)
       '@cabloy/zod-errors-custom':
         specifier: ^1.0.13
-        version: 1.0.13
+        version: link:../../../../../packages-utils/zod-errors-custom
       '@cabloy/zod-query':
         specifier: ^1.0.14
-        version: 1.0.14
+        version: link:../../../../../packages-utils/zod-query
       '@zhennann/currency':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2067,60 +2067,12 @@ packages:
     resolution: {integrity: sha512-Y1GkI4ktrtvmawoSq+4FCVHNryea6uR+qUQy0AGxLSsjCX0nVmkYQMBLHDkXZuo5hGx7eYdnIaslsdBFm7zbUw==}
     engines: {node: '>=6.9.0'}
 
-  '@cabloy/cli@3.0.24':
-    resolution: {integrity: sha512-4dW95fwpTOai7wV+Z0Ze45mj8vNtPs9gijyRc3UCptO3mxnzXW7eXNpFBjp6qZDrMDTQzSVk6P9Vd3ILPzzcGg==}
-
-  '@cabloy/compose@2.0.14':
-    resolution: {integrity: sha512-8V2KarD2kRpMAWcgOfpvpPiZ2ON77nkBvD2Hj13bHVpgBON1ZfnFjhdiv+kMVzNBUFfzG0fWdPGwG9Qenfr25g==}
-
-  '@cabloy/deps@1.0.19':
-    resolution: {integrity: sha512-kTivNM96STCBu1ipc2hCNM2ywk12gWqZ29COhRS1tQwN72OkrY4XrxP4XAD9JJTX5zJ/P/55R+6OrC35HabNJw==}
-
-  '@cabloy/dotenv@1.1.10':
-    resolution: {integrity: sha512-GmAvXlP4aYV9PBbmJ0wKUqLdFjsQe7G/ByOLDWkkIlrwUnbHpH60cisdZ38bM4JigZwA7mvj50tvmnd5TdcYpw==}
-
-  '@cabloy/extend@3.1.10':
-    resolution: {integrity: sha512-2JB3TM0pJpXrhc36MB68iJTiadk/5TdtHNsTrVXtRq6NM0YMMofXnEEMKbhJsip3CbNjwB9YInctexDgW2CPog==}
-
-  '@cabloy/json5@1.0.18':
-    resolution: {integrity: sha512-igSDGx81uYwGwqXXmj0AOSTYOCEEEJ6c2jrX7vMQ1KGZXTaK6KlqwJhJ08Sxkpad2p1YAmqyh7dUQx0Q9AP2xA==}
-
   '@cabloy/koa-static-cache@6.0.1':
     resolution: {integrity: sha512-B7dF43O1gE5Whwn+MwNanjXZUTqpv/e2TmKIyyzdcVjH6o7ENesebxiDXJAAjkX6dpg3Bijpq6acBE38VKGJSQ==}
     engines: {node: '>= 7.6.0'}
 
-  '@cabloy/lint@5.0.16':
-    resolution: {integrity: sha512-TqiSucMl7vIOt0k1gb6TFEh19CFIhM0ruQrdyjWjpJfUTx8j3Diho+8eb6XYorRaEXXI12Hq9gCJEJDAfC2FNw==}
-
-  '@cabloy/localeutil@2.0.10':
-    resolution: {integrity: sha512-VXmOXmB7DP7SiGWYSGsngRkx1uGqj8OnH08IVcL/uwnvu8sbsk5cSfYQ1DMApzvmbyio/jHu7v4kynrGpCKhNw==}
-
-  '@cabloy/module-glob@5.2.11':
-    resolution: {integrity: sha512-bXMjcuvoB1PY2oGpmACpPx+mwc5CZM8rLaFtoVIoM2wHnQKGw+cVASpEEKv4MufLi3wSt1K820ZJXSwotzJ25Q==}
-
-  '@cabloy/module-info-pro@1.0.26':
-    resolution: {integrity: sha512-vrdgQLv/l6MYzrg9B1Hw/0XO2jRHnH1NLRB3Bp6jHXZr4APO57lWXzWOkhkCRCCgNDL+lbBG2BoK8fFN26GXfw==}
-
-  '@cabloy/module-info@1.3.18':
-    resolution: {integrity: sha512-lrOh/RYjcjsgmL5X603goIy6cRariGi4uSKWnIbOx3482iO5Sy4Xh/G0woPV2hqHCxULmh8/PDSOIAWhjo6ndA==}
-
-  '@cabloy/process-helper@2.0.16':
-    resolution: {integrity: sha512-46R2qp9B4aC7V/VJx+UcPYTP4xLDAdwnWIekz0qGFj3iJrzJd2SivKbqk+SL27UUAAPQYBWfmIkvOqndr8JW5A==}
-
-  '@cabloy/set@1.0.17':
-    resolution: {integrity: sha512-ITeSGRQfU+MVTw6Krf+f5owSIspQVVwAUG6pHbq+EW3KG9C4gV/7CtR/wOn/lIDcotwWN+MqSxVOx1Y/rG9o3A==}
-
-  '@cabloy/utils@1.0.25':
-    resolution: {integrity: sha512-jUggkMz/i5k0767/iPrqCGN7ofc+5QaTbl/0ThhxE3Yn4wnNZ5ZCWGcMAbobwOeo76i5BB63siX95xHXA1+0Mw==}
-
   '@cabloy/word-utils@2.0.1':
     resolution: {integrity: sha512-kZx3fdk8sOX9JpVv6Q7y6r+rbqZ0KvE8NukbvsQfSvOngV7Yi3dF8PmefCDJWuPqn6YZ4PdxKxCOWaYTrVQPQA==}
-
-  '@cabloy/zod-errors-custom@1.0.13':
-    resolution: {integrity: sha512-XnXIbkkgAPxC3Zl+MVq0pXHdmSJ7IJCWqgoW7OStukn9l0bTZCzZPGmXn9FkBsjAFW1IG2rYUk82rfC+7eBySg==}
-
-  '@cabloy/zod-query@1.0.14':
-    resolution: {integrity: sha512-d4vQ8FHf4kqKyKqXC/Zw+OP5LBKsUb9Z+5qiuVUesVjsBWr4xUG0fbY3Tovujf4swGEFlHTu5GhISyvs5yYhDw==}
 
   '@chevrotain/cst-dts-gen@11.0.3':
     resolution: {integrity: sha512-BvIKpRLeS/8UbfxXxgC33xOumsacaeCKAjAeLyOn7Pcp95HiRbrpl14S+9vaZLolnbssPIUuiUd8IvgkRyt6NQ==}
@@ -3528,9 +3480,6 @@ packages:
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
-
-  cascade-extend@2.1.10:
-    resolution: {integrity: sha512-7sdVLBu9zymuryzey6OoB5JLoQTzghQQMkiSY01GZe7VHCoUhOZy2n/1q6DKIV3erG3+3FuHwPME+9RD0+CmaQ==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -5972,9 +5921,6 @@ packages:
     resolution: {integrity: sha512-CB97UUvDKJde2V0KDWWB3lyf6PC3FaZP7YxZ2G8OAtn9p4HI9j9JLP9qjOGZFvyl8uwNT8qM+hGnz/n16NI7oA==}
     engines: {node: '>= 0.4.0'}
 
-  password-hash-salt@1.0.11:
-    resolution: {integrity: sha512-hVNCfaS44IoHoK+Dfye/GOu+60O39OMngA1iXzOiQKHjD7QVwjIvI7RMJGcyX2jjQam3JgbDFxUjZCq70DWbdw==}
-
   path-case@3.0.4:
     resolution: {integrity: sha512-qO4qCFjXqVTrcbPt/hQfhTQ+VhFsqNKOPtytgNKkKxSoEp3XPUQ8ObFuePylOIok5gjn69ry8XiULxCwot3Wfg==}
 
@@ -6763,9 +6709,6 @@ packages:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  table-identity@1.0.10:
-    resolution: {integrity: sha512-7sFLKKtqj14/w/sfZ2Fwboev3tFRHlUvSuD51tXlHePOl+rEK4aiIhZvs0q8zP63qCkokGu2SIvHswhy7RgDRQ==}
-
   tapable@2.2.2:
     resolution: {integrity: sha512-Re10+NauLTMCudc7T5WLFLAwDhQ0JWdrMK+9B2M8zR5hRExKmsRDCBA7/aV/pNJFltmBFO5BAMlQFi/vq3nKOg==}
     engines: {node: '>=6'}
@@ -7099,144 +7042,6 @@ packages:
 
   vfile-location@3.2.0:
     resolution: {integrity: sha512-aLEIZKv/oxuCDZ8lkJGhuhztf/BW4M+iHdCwglA/eWc+vtuRFJj8EtgceYFX4LRjOhCAAiNHsKGssC6onJ+jbA==}
-
-  vona-cli-set-api@1.0.29:
-    resolution: {integrity: sha512-ct7IgxT075Vd47DSDL5rPzacGPQ3HmZgniQOsUfjafqyAXOlqaJQ8biQIoSDAn9OhKTml1A7IyQRevlKQjdZIA==}
-
-  vona-core@5.0.17:
-    resolution: {integrity: sha512-4rv2VUYbXShBh49QSRXsBGWnfwSp870WrbVaWVi1D3cSX1XQNSP67ic/1Yxlb2hupiz+BPSRvCHx6UOa4VzhgA==}
-
-  vona-mock@6.0.17:
-    resolution: {integrity: sha512-oMweSg1pdzFjaheH5go3yjbSAk1XFZZGjt0mHWO06lt2aArfdhg4yw3IDh8/VQ72rui/SxTKq+PSQUzBoJG5OA==}
-
-  vona-module-a-aspect@5.0.9:
-    resolution: {integrity: sha512-DFjt0l/0+R12AB9yxx2FeSui19IpQqwa4CbrFY0BB37IiIRSawKP2mePVS940+YQ+gBq4dxK+LoQmH4XcZzPXg==}
-
-  vona-module-a-auth@5.0.9:
-    resolution: {integrity: sha512-6buCOru/i+ETsw62GDvznAYDxJwjoRrLbt/qC3/JyaI9TvxI0naRysetKff5AxzYDzuDlUN9Q+SQi3DU8WHT0g==}
-
-  vona-module-a-authsimple@5.0.11:
-    resolution: {integrity: sha512-J2tqe/rwsWog2bDnyEpTtdFC4iobKl1iZYoAWEfMEDJx2KB7kEAsbEPWPPsQeCKzorqsuCFpvdv9i9ehKx0WBg==}
-
-  vona-module-a-bean@5.0.9:
-    resolution: {integrity: sha512-UXuvkVs9af6BGkkHtI2fZxN6m/wpfRgQFqxTxNpZ15o/i14K0VUCgsxpfDVuP76bokxy5YOhc6FO34LVbg4RkA==}
-
-  vona-module-a-body@5.0.9:
-    resolution: {integrity: sha512-+hMGxhmJps+tZg2icFkgcrYkeLINv/FS0gaCx/h/F5rREggGmp3ABw4pCYDjHmE8Jb3x93TIJTvkA0jADBqR7Q==}
-
-  vona-module-a-broadcast@5.0.9:
-    resolution: {integrity: sha512-bSv8lgTAsa+1HQgOyzdKVezb63k/JUqToLratSYF6kNK4uPbOYYougE4hCeRExvDL9BeTgTtTicQKr4+EoRPrw==}
-
-  vona-module-a-cache@5.0.9:
-    resolution: {integrity: sha512-CcLePEZ7P4nVJOVLVXlEQIA/YAFuqsSzkkJTXfgz9BcgL9TbGJTN7cIlY5X4sUf1cAwOEdYd+75Z+FH8XKvY6Q==}
-
-  vona-module-a-core@5.0.14:
-    resolution: {integrity: sha512-2scT0RE0Zteywty4sPF7o9tYdfvWz92fhC0i24mYkDBvSAebGtpFOP1v+J3n2UMz4+QpB2UkQVrdXIeqM3oYPQ==}
-
-  vona-module-a-database@5.0.19:
-    resolution: {integrity: sha512-TWgeUsxfD0dIfAyZ5YQGYgjmeaRgw20oUefVZnqdWdfYu6okfiSb31/TQI/lI0wi7tMvxqg2V3jVuX8bAtSaFA==}
-
-  vona-module-a-databasedialect@5.0.9:
-    resolution: {integrity: sha512-7yCWBQdlja2kZnheYOyeTNvkkHSSOVEVaZv7oxwi/U0v696iO3lQ8ziTWsL0SVo5+WHMLczbnMDmtewEpqZD3w==}
-
-  vona-module-a-election@5.0.9:
-    resolution: {integrity: sha512-EzA6lgNi2mmnSDe5icYR2LGr0DvLc1T8bZylzensCILBGtPpcCUyZwt3zNF70A+sc6eWxUb2AjOWfH7qS92ehw==}
-
-  vona-module-a-error@5.0.9:
-    resolution: {integrity: sha512-mXVFP8IX0SrBPy4mEvBgRRbtyLQek/65lE5LsNsSFAPQ33zijpcoOPQLbZPZKOrE2dXOHydwJxRSNoeb/TaJgw==}
-
-  vona-module-a-event@5.0.9:
-    resolution: {integrity: sha512-YR0Z/Nlcz4PBmtcdwRftpMkfRnbXrMulp0snRQQbdk1d5KE1fsmO911benUPAAPFs+hG7oByql8l+v6LpwE+Hw==}
-
-  vona-module-a-executor@5.0.9:
-    resolution: {integrity: sha512-rvmT2fB3tb1JOgNW9DTqKSmO/OjakYUvl6X0r0eCoQ2NIFEZOaSVC23ncDqZBfHBwJezy4fUSuZoiyBkRKdiHA==}
-
-  vona-module-a-i18n@5.0.9:
-    resolution: {integrity: sha512-G5vVOoh856BRAlpIQLEV+v/6oXeKx5HYNC1fPv/MUl8OVh6xwQadm1qKISclKJ32kM00dhaICiKXW4LktWSaqA==}
-
-  vona-module-a-index@5.0.9:
-    resolution: {integrity: sha512-vQa1TFk5l3uF7l2+InO7QS7K/d/f5wbqOQfBgnixNvHrCurZZuYvqYCz/I+dvpr0tHXSabcbav7Sl8eJTqXr8w==}
-
-  vona-module-a-instance@5.0.9:
-    resolution: {integrity: sha512-thauiuCf/KKU1V8l/BoCG1oXdYGEZ6l07eajAuOp7kb5vO/YxeXLWqGmGHIVczj8Ai3ILznZQ2jn2VOdSNuyCw==}
-
-  vona-module-a-jwt@5.0.9:
-    resolution: {integrity: sha512-HFqMiO2u8MBFNKBEi77i+8THtaZkRZVYskK4OEqp1Xi8UJwEnDj3lwkJBEl6d1MhS7ALbGVqLsRvpgVoZuBr2Q==}
-
-  vona-module-a-logger@5.0.9:
-    resolution: {integrity: sha512-T0bbUL+uWsZv7ZXjgNejWGitfcnx3G/0iwjkco8ss52oZpEhTqVA3q0+6JyAIwF7Ra2RbUFyz+rz0+Lok+wnMw==}
-
-  vona-module-a-menu@5.0.9:
-    resolution: {integrity: sha512-YCy74apcXepavS5Rv7M/wMraSdJuxXTJYr65w5znLXjeqOa2jzT+ndVInBUJIAl5nQILWXenA9KQCFYRk8LAMw==}
-
-  vona-module-a-meta@5.0.9:
-    resolution: {integrity: sha512-4YrNQegblbGwBUj6ZYV/VvaBj9bdcUE/NtPHsxg52NHbmnhFOu14gFH18jAI4O6cVpDjkkvg3cJcNFUWvLtC0Q==}
-
-  vona-module-a-onion@5.0.9:
-    resolution: {integrity: sha512-URyf0AKEu7BBUUuSmspsDr9VIrhznGRUIOqrxVtABgEfV8ubP5BeLxgJT9sTwp/H3/Z6LPNkYEEUS+fT/TrvsA==}
-
-  vona-module-a-openapi@5.0.11:
-    resolution: {integrity: sha512-6XD44LuIslk48z2lEW93H4+quihtFyPxfzaoNI+wVx0O9aQ1wlsq5xiIxo/0zKPWag2hlnytL8WrGmdRR/w2Ew==}
-
-  vona-module-a-openapischema@5.0.9:
-    resolution: {integrity: sha512-tSHglaGSozwJ92c7ijTsOsrpmhtSx0kchTP2vidg1ocRTMHGdeOHYHoV0ZCJMvo+3pp4bKmDiWO1+f1/OSzzVQ==}
-
-  vona-module-a-printtip@5.0.9:
-    resolution: {integrity: sha512-IfORQwkJNpTLp8YmQ0cmWm79M664GLEPdWHJ7W/bIC666/w13lZ/2UE9/nGI04JO9M/+PhH/YOjEmJWMhaHhJQ==}
-
-  vona-module-a-queue@5.0.9:
-    resolution: {integrity: sha512-geD1n1RQRJ4OKtVsIG0KCaQJebj488uqg6QXQdx329eBOkVl2IJ+n7YeZ3fiGe2fvj8d2kI+KRxXarMrOk74yw==}
-
-  vona-module-a-redis@5.0.9:
-    resolution: {integrity: sha512-94DsZiNY0Fcw5Q9ZASzHTlVJ3pvIOWIeeYQxlwsis7YEGKXtgAHFfsSQh/lrbCFSVkZ8JeCv+gGRqGyX8YhM4A==}
-
-  vona-module-a-redlock@5.0.9:
-    resolution: {integrity: sha512-8YOC36jAJMR+ZFaF2zZ50hZ5VqqYy4n2RGMDeaVNc1FTleHv7cGM89hj4sOoHdfJWhWIfKsMi5Hv3Uvw34H+3w==}
-
-  vona-module-a-schedule@5.0.9:
-    resolution: {integrity: sha512-vbCxqs8t+a5Kqi/PB0s+4cHbc3pPmnjGSs142A5oiSoY0wudEE/0yktxqnTpywVGd3+ZljB4wWEtYUssjWIJsg==}
-
-  vona-module-a-security@5.0.9:
-    resolution: {integrity: sha512-BRfCo2HjECeutdr1FuC26I3rOFCIwt30Fyj9erU7oXa1EQQFYIcccBM/kk2cI10U05n4m3qoKl4gXQM//8Zi8g==}
-
-  vona-module-a-startup@5.0.9:
-    resolution: {integrity: sha512-ZLuxNipOfF9IYIzExko4OIIs7xWp/SMQV0V6Y4JuJxNXL0VFeHNu5+/1+Sz8dygpWblXCRo8d+OW2Gl6lZ/jNQ==}
-
-  vona-module-a-static@5.0.9:
-    resolution: {integrity: sha512-+SbqtooST78jDLCMMuWbuXdVGVbPuSwlcjn7vI2lDIb1u4GPEVAO7t81Tsa0KfzmSsTqooFS4DROHk7qPdNiGg==}
-
-  vona-module-a-summer@5.0.9:
-    resolution: {integrity: sha512-ZNEeDMUsYN+YACh42j+g5yBFYVCPVPcD13xPN+xMD12K9S9Pz9VndlpyMtrPW93cq9hVCnmtpHy7r/esKhihJQ==}
-
-  vona-module-a-swagger@5.0.13:
-    resolution: {integrity: sha512-L+YRsN/dWRbJ+Wr7oPLbNds6nZm/giqTYtFctGo/Kg5c/ZiqZSZkzg+ERA5LYXMpIBJuUp5X/zGVdlFmsGfBug==}
-
-  vona-module-a-upload@5.0.9:
-    resolution: {integrity: sha512-OdYCsEL5RLLNN7CNr6Hxkf5zzyDSJdKUtCYg1iYtAC4VOovFTdb8HgP9SofbZTwbdkai+XwwfeKqSBZagNdhLQ==}
-
-  vona-module-a-user@5.0.9:
-    resolution: {integrity: sha512-fA7372S2o2NjeEjWCiQuBFzwnVXhLpmQyiRlePraJLcQglVrt0FmjFgYF1JKVkzyJibcADqxxeHr1pXvvEp6Wg==}
-
-  vona-module-a-validation@5.0.9:
-    resolution: {integrity: sha512-0UMvk+BIxJzqNiIvtBlbWhkz6oRQtq4uqT3vYRyEBPgkpcc8v6svqiBZqzSCZNoVOr/hOtdmEMfM5iFCd8XYGg==}
-
-  vona-module-a-version@5.0.9:
-    resolution: {integrity: sha512-sCdqPkKDApc8MV4HWujneQdBBnHLx/aKp3Z3/hKbpCbaVgaJCQaYUfdsDCmtSHUdLK5Q35pyBluvjycUX6Ft0A==}
-
-  vona-module-a-vona@5.0.12:
-    resolution: {integrity: sha512-HwPluF3jhGpdJJrplvDd5F0kvGdUIlmFFgSgo849bMVx7F+b+iDGyvrcl3ozSuSVXujkczizNfKqEWOvjYY3vQ==}
-
-  vona-module-a-web@5.0.9:
-    resolution: {integrity: sha512-/DaXvsWyEYoIb7xlgLyZdhA4LisKkyN37qCp7WMsVqV19ZJL/SKa9dehWyOSdjNHQ1PK5eG0Qs6f6P4ItdaKbg==}
-
-  vona-module-a-worker@5.0.9:
-    resolution: {integrity: sha512-dzbSk3edCp9McgLPpSPaRcHYJ780oWknz4s7xQepGQxJlFp9pll0KIEAQqBpswkQrZghGDPmpL6Kx/dHDC7f1A==}
-
-  vona-shared@1.0.17:
-    resolution: {integrity: sha512-ijtpK/UGO9ZM2Z1ceSh8kE2TfpfwTxOWlgmq6OvHGBxQB2v0JsFgCGd278soS+RPjT6VY3T3XOxfS19DnUTlQw==}
-
-  vona-suite-a-vona@5.0.15:
-    resolution: {integrity: sha512-HDJ4g3oEvO0ZJ6+08bVqWCYQcMAV5d24SFcLlfnyO/abUNEYJgy9htUFw7BFA/hqSiqentrpSnHgQkww6tx1fQ==}
 
   vue-eslint-parser@10.1.3:
     resolution: {integrity: sha512-dbCBnd2e02dYWsXoqX5yKUZlOt+ExIpq7hmHKPb5ZqKcjf++Eo0hMseFTZMLKThrUk61m+Uv6A2YSBve6ZvuDQ==}
@@ -7707,51 +7512,6 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@cabloy/cli@3.0.24(vue@3.5.16(typescript@5.8.3))':
-    dependencies:
-      '@babel/parser': 7.27.5
-      '@cabloy/module-glob': 5.2.11
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/process-helper': 2.0.16
-      '@cabloy/utils': 1.0.25
-      '@cabloy/word-utils': 2.0.1
-      '@npmcli/config': 8.3.4
-      '@zhennann/common-bin': 4.0.0
-      '@zhennann/ejs': 3.0.1
-      boxen: 4.2.0
-      chalk: 3.0.0
-      cli-table3: 0.6.5
-      enquirer: 2.4.1
-      fs-extra: 11.3.0
-      globby: 14.1.0
-      gogocode: 1.0.55(vue@3.5.16(typescript@5.8.3))
-      is-type-of: 2.2.0
-      istextorbinary: 3.3.0
-      semver: 7.7.2
-      tmp: 0.2.3
-      urllib: 3.27.2
-    transitivePeerDependencies:
-      - bluebird
-      - supports-color
-      - vue
-
-  '@cabloy/compose@2.0.14': {}
-
-  '@cabloy/deps@1.0.19': {}
-
-  '@cabloy/dotenv@1.1.10':
-    dependencies:
-      cascade-extend: 2.1.10
-      dotenv: 16.5.0
-      dotenv-expand: 11.0.7
-      globby: 14.1.0
-
-  '@cabloy/extend@3.1.10': {}
-
-  '@cabloy/json5@1.0.18':
-    dependencies:
-      json5: 2.2.3
-
   '@cabloy/koa-static-cache@6.0.1':
     dependencies:
       compressible: 2.0.18
@@ -7762,76 +7522,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@cabloy/lint@5.0.16(eslint@9.28.0)(typescript@5.8.3)':
-    dependencies:
-      '@antfu/eslint-config': 4.13.3(@eslint/json@0.10.0)(@typescript-eslint/utils@8.33.1(eslint@9.28.0)(typescript@5.8.3))(@vue/compiler-sfc@3.5.16)(eslint@9.28.0)(typescript@5.8.3)
-      '@eslint/json': 0.10.0
-      '@stylistic/eslint-plugin': 3.1.0(eslint@9.28.0)(typescript@5.8.3)
-      '@typescript-eslint/parser': 8.33.1(eslint@9.28.0)(typescript@5.8.3)
-      eslint-plugin-vue: 9.33.0(eslint@9.28.0)
-      globals: 15.15.0
-      typescript-eslint: 8.33.1(eslint@9.28.0)(typescript@5.8.3)
-      vue-eslint-parser: 9.4.3(eslint@9.28.0)
-    transitivePeerDependencies:
-      - '@eslint-react/eslint-plugin'
-      - '@prettier/plugin-xml'
-      - '@typescript-eslint/utils'
-      - '@unocss/eslint-plugin'
-      - '@vue/compiler-sfc'
-      - astro-eslint-parser
-      - eslint
-      - eslint-import-resolver-node
-      - eslint-plugin-astro
-      - eslint-plugin-format
-      - eslint-plugin-react-hooks
-      - eslint-plugin-react-refresh
-      - eslint-plugin-solid
-      - eslint-plugin-svelte
-      - eslint-plugin-vuejs-accessibility
-      - prettier-plugin-astro
-      - prettier-plugin-slidev
-      - supports-color
-      - svelte-eslint-parser
-      - typescript
-      - vitest
-
-  '@cabloy/localeutil@2.0.10': {}
-
-  '@cabloy/module-glob@5.2.11':
-    dependencies:
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/utils': 1.0.25
-      boxen: 4.2.0
-      chalk: 3.0.0
-      fs-extra: 11.3.0
-      globby: 14.1.0
-      semver: 7.7.2
-
-  '@cabloy/module-info-pro@1.0.26':
-    dependencies:
-      '@cabloy/module-info': 1.3.18
-      stack-utils: 2.0.6
-
-  '@cabloy/module-info@1.3.18': {}
-
-  '@cabloy/process-helper@2.0.16': {}
-
-  '@cabloy/set@1.0.17': {}
-
-  '@cabloy/utils@1.0.25':
-    dependencies:
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/word-utils': 2.0.1
-      cel-js: 0.3.1
-      chevrotain: 11.0.3
-
   '@cabloy/word-utils@2.0.1': {}
-
-  '@cabloy/zod-errors-custom@1.0.13':
-    dependencies:
-      '@cabloy/word-utils': 2.0.1
-
-  '@cabloy/zod-query@1.0.14': {}
 
   '@chevrotain/cst-dts-gen@11.0.3':
     dependencies:
@@ -9227,7 +8918,7 @@ snapshots:
 
   babel-plugin-zova-bean-module@1.1.1:
     dependencies:
-      '@cabloy/module-info': 1.3.18
+      '@cabloy/module-info': link:packages-utils/module-info
       '@cabloy/word-utils': 2.0.1
 
   balanced-match@1.0.2: {}
@@ -9406,10 +9097,6 @@ snapshots:
       no-case: 3.0.4
       tslib: 2.8.1
       upper-case-first: 2.0.2
-
-  cascade-extend@2.1.10:
-    dependencies:
-      '@cabloy/extend': 3.1.10
 
   ccount@2.0.1: {}
 
@@ -12312,8 +11999,6 @@ snapshots:
 
   passport-strategy@1.0.0: {}
 
-  password-hash-salt@1.0.11: {}
-
   path-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
@@ -13073,8 +12758,6 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.2.7
 
-  table-identity@1.0.10: {}
-
   tapable@2.2.2: {}
 
   tar-stream@1.6.2:
@@ -13407,320 +13090,6 @@ snapshots:
   vary@1.1.2: {}
 
   vfile-location@3.2.0: {}
-
-  vona-cli-set-api@1.0.29(@babel/core@7.27.4)(@babel/traverse@7.27.4)(@swc/core@1.11.29(@swc/helpers@0.5.17))(@types/node@22.15.29)(typescript@5.8.3):
-    dependencies:
-      '@babel/plugin-proposal-decorators': 7.27.1(@babel/core@7.27.4)
-      '@babel/plugin-transform-class-properties': 7.27.1(@babel/core@7.27.4)
-      '@babel/plugin-transform-typescript': 7.27.1(@babel/core@7.27.4)
-      '@cabloy/cli': 3.0.24(vue@3.5.16(typescript@5.8.3))
-      '@cabloy/dotenv': 1.1.10
-      '@cabloy/extend': 3.1.10
-      '@cabloy/module-glob': 5.2.11
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/word-utils': 2.0.1
-      '@rollup/plugin-alias': 5.1.1(rollup@4.41.1)
-      '@rollup/plugin-babel': 6.0.4(@babel/core@7.27.4)(rollup@4.41.1)
-      '@rollup/plugin-commonjs': 28.0.3(rollup@4.41.1)
-      '@rollup/plugin-json': 6.1.0(rollup@4.41.1)
-      '@rollup/plugin-node-resolve': 16.0.1(rollup@4.41.1)
-      '@rollup/plugin-replace': 6.0.2(rollup@4.41.1)
-      '@rollup/plugin-terser': 0.4.4(rollup@4.41.1)
-      babel-plugin-transform-typescript-metadata: 0.3.2(@babel/core@7.27.4)(@babel/traverse@7.27.4)
-      babel-plugin-zova-bean-module: 1.1.1
-      chalk: 3.0.0
-      cli-table3: 0.6.5
-      compressing: 1.10.3
-      fs-extra: 11.3.0
-      globby: 14.1.0
-      gogocode: 1.0.55(vue@3.5.16(typescript@5.8.3))
-      lodash: 4.17.21
-      nodemon: 3.1.10
-      randomatic: 3.1.1
-      rimraf: 6.0.1
-      rollup: 4.41.1
-      ts-node: 10.9.2(@swc/core@1.11.29(@swc/helpers@0.5.17))(@types/node@22.15.29)(typescript@5.8.3)
-      urllib: 4.6.11
-      uuid: 11.1.0
-      why-is-node-running: 3.2.2
-      yargs-parser: 21.1.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@babel/traverse'
-      - '@swc/core'
-      - '@swc/wasm'
-      - '@types/babel__core'
-      - '@types/node'
-      - bluebird
-      - supports-color
-      - typescript
-      - vue
-
-  vona-core@5.0.17:
-    dependencies:
-      '@asteasolutions/zod-to-openapi': 7.3.2(zod@3.25.51)
-      '@cabloy/compose': 2.0.14
-      '@cabloy/extend': 3.1.10
-      '@cabloy/json5': 1.0.18
-      '@cabloy/localeutil': 2.0.10
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/module-info-pro': 1.0.26
-      '@cabloy/set': 1.0.17
-      '@cabloy/utils': 1.0.25
-      '@cabloy/word-utils': 2.0.1
-      fs-extra: 10.1.0
-      koa: 3.0.0
-      reflect-metadata: 0.2.2
-      retry: 0.13.1
-      triple-beam: 1.4.1
-      uuid: 11.1.0
-      winston: 3.17.0
-      winston-daily-rotate-file: 5.0.0(winston@3.17.0)
-      zod: 3.25.51
-    transitivePeerDependencies:
-      - supports-color
-
-  vona-mock@6.0.17:
-    dependencies:
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/module-info-pro': 1.0.26
-      vona-core: 5.0.17
-    transitivePeerDependencies:
-      - supports-color
-
-  vona-module-a-aspect@5.0.9: {}
-
-  vona-module-a-auth@5.0.9: {}
-
-  vona-module-a-authsimple@5.0.11:
-    dependencies:
-      password-hash-salt: 1.0.11
-
-  vona-module-a-bean@5.0.9: {}
-
-  vona-module-a-body@5.0.9:
-    dependencies:
-      co-body: 6.2.0
-      type-is: 1.6.18
-
-  vona-module-a-broadcast@5.0.9: {}
-
-  vona-module-a-cache@5.0.9:
-    dependencies:
-      lru-cache: 11.1.0
-      object-hash: 3.0.0
-
-  vona-module-a-core@5.0.14:
-    dependencies:
-      '@cabloy/deps': 1.0.19
-      '@cabloy/json5': 1.0.18
-      '@cabloy/module-info': 1.3.18
-      '@cabloy/set': 1.0.17
-      '@cabloy/utils': 1.0.25
-      '@cabloy/word-utils': 2.0.1
-      boxen: 8.0.1
-      chalk: 5.4.1
-      cli-table3: 0.6.5
-      fs-extra: 11.3.0
-      koa-override: 4.0.0
-      moment: 2.30.1
-      retry: 0.13.1
-      uuid: 11.1.0
-      vona-shared: 1.0.17
-      winston: 3.17.0
-
-  vona-module-a-database@5.0.19:
-    dependencies:
-      bignumber.js: 9.3.0
-      knex: 3.1.0
-      table-identity: 1.0.10
-    transitivePeerDependencies:
-      - better-sqlite3
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - sqlite3
-      - supports-color
-      - tedious
-
-  vona-module-a-databasedialect@5.0.9:
-    dependencies:
-      mysql2: 3.14.1
-      pg: 8.16.0
-      pg-types: 4.0.2
-    transitivePeerDependencies:
-      - pg-native
-
-  vona-module-a-election@5.0.9: {}
-
-  vona-module-a-error@5.0.9:
-    dependencies:
-      cookie: 1.0.2
-      mustache: 4.2.0
-      stack-trace: 1.0.0-pre2
-      stream-wormhole: 2.0.1
-
-  vona-module-a-event@5.0.9: {}
-
-  vona-module-a-executor@5.0.9:
-    dependencies:
-      koa-compose: 4.1.0
-
-  vona-module-a-i18n@5.0.9: {}
-
-  vona-module-a-index@5.0.9: {}
-
-  vona-module-a-instance@5.0.9:
-    dependencies:
-      async: 3.2.6
-
-  vona-module-a-jwt@5.0.9:
-    dependencies:
-      '@types/jsonwebtoken': 9.0.8
-      jsonwebtoken: 9.0.2
-      ms: 2.1.3
-
-  vona-module-a-logger@5.0.9:
-    dependencies:
-      pino-std-serializers: 7.0.0
-
-  vona-module-a-menu@5.0.9: {}
-
-  vona-module-a-meta@5.0.9: {}
-
-  vona-module-a-onion@5.0.9: {}
-
-  vona-module-a-openapi@5.0.11:
-    dependencies:
-      '@asteasolutions/zod-to-openapi': 7.3.2(zod@3.25.51)
-      '@cabloy/zod-errors-custom': 1.0.13
-      '@cabloy/zod-query': 1.0.14
-      '@zhennann/currency': 2.0.0
-      openapi3-ts: 4.4.0
-      zod: 3.25.51
-
-  vona-module-a-openapischema@5.0.9: {}
-
-  vona-module-a-printtip@5.0.9: {}
-
-  vona-module-a-queue@5.0.9:
-    dependencies:
-      bullmq: 5.53.2
-    transitivePeerDependencies:
-      - supports-color
-
-  vona-module-a-redis@5.0.9:
-    dependencies:
-      ioredis: 5.6.1
-    transitivePeerDependencies:
-      - supports-color
-
-  vona-module-a-redlock@5.0.9(ioredis@5.6.1):
-    dependencies:
-      '@sesamecare-oss/redlock': 1.4.0(ioredis@5.6.1)
-    transitivePeerDependencies:
-      - ioredis
-
-  vona-module-a-schedule@5.0.9: {}
-
-  vona-module-a-security@5.0.9:
-    dependencies:
-      '@eggjs/ip': 2.1.0
-      '@koa/cors': 5.0.0
-      egg-path-matching: 2.1.0
-      matcher: 5.0.0
-      type-is: 1.6.18
-
-  vona-module-a-startup@5.0.9: {}
-
-  vona-module-a-static@5.0.9:
-    dependencies:
-      '@cabloy/koa-static-cache': 6.0.1
-      koa-range: 0.3.0
-      ylru: 2.0.0
-    transitivePeerDependencies:
-      - supports-color
-
-  vona-module-a-summer@5.0.9: {}
-
-  vona-module-a-swagger@5.0.13: {}
-
-  vona-module-a-upload@5.0.9:
-    dependencies:
-      '@types/busboy': 1.5.4
-      busboy: 1.6.0
-      tmp: 0.2.3
-
-  vona-module-a-user@5.0.9: {}
-
-  vona-module-a-validation@5.0.9: {}
-
-  vona-module-a-version@5.0.9: {}
-
-  vona-module-a-vona@5.0.12: {}
-
-  vona-module-a-web@5.0.9:
-    dependencies:
-      find-my-way: 9.3.0
-
-  vona-module-a-worker@5.0.9: {}
-
-  vona-shared@1.0.17: {}
-
-  vona-suite-a-vona@5.0.15(ioredis@5.6.1):
-    dependencies:
-      vona-module-a-aspect: 5.0.9
-      vona-module-a-auth: 5.0.9
-      vona-module-a-authsimple: 5.0.11
-      vona-module-a-bean: 5.0.9
-      vona-module-a-body: 5.0.9
-      vona-module-a-broadcast: 5.0.9
-      vona-module-a-cache: 5.0.9
-      vona-module-a-core: 5.0.14
-      vona-module-a-database: 5.0.19
-      vona-module-a-databasedialect: 5.0.9
-      vona-module-a-election: 5.0.9
-      vona-module-a-error: 5.0.9
-      vona-module-a-event: 5.0.9
-      vona-module-a-executor: 5.0.9
-      vona-module-a-i18n: 5.0.9
-      vona-module-a-index: 5.0.9
-      vona-module-a-instance: 5.0.9
-      vona-module-a-jwt: 5.0.9
-      vona-module-a-logger: 5.0.9
-      vona-module-a-menu: 5.0.9
-      vona-module-a-meta: 5.0.9
-      vona-module-a-onion: 5.0.9
-      vona-module-a-openapi: 5.0.11
-      vona-module-a-openapischema: 5.0.9
-      vona-module-a-printtip: 5.0.9
-      vona-module-a-queue: 5.0.9
-      vona-module-a-redis: 5.0.9
-      vona-module-a-redlock: 5.0.9(ioredis@5.6.1)
-      vona-module-a-schedule: 5.0.9
-      vona-module-a-security: 5.0.9
-      vona-module-a-startup: 5.0.9
-      vona-module-a-static: 5.0.9
-      vona-module-a-summer: 5.0.9
-      vona-module-a-swagger: 5.0.13
-      vona-module-a-upload: 5.0.9
-      vona-module-a-user: 5.0.9
-      vona-module-a-validation: 5.0.9
-      vona-module-a-version: 5.0.9
-      vona-module-a-vona: 5.0.12
-      vona-module-a-web: 5.0.9
-      vona-module-a-worker: 5.0.9
-    transitivePeerDependencies:
-      - better-sqlite3
-      - ioredis
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - sqlite3
-      - supports-color
-      - tedious
 
   vue-eslint-parser@10.1.3(eslint@9.28.0):
     dependencies:
