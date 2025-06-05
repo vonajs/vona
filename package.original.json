@@ -47,7 +47,6 @@
     "vona": "workspace:^"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.4",
     "lerna": "^8.2.2"
   }
 }
