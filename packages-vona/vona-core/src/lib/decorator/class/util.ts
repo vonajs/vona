@@ -8,6 +8,6 @@ export const ParseModuleNameLevel = ParseModuleNameLevelInit + 5;
 
 export function parseModuleName(beanClass: Constructable) {
   // beanInfo
-  const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass);
+  const beanInfo = appMetadata.getOwnMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass);
   return beanInfo?.module || _parseModuleName(ParseModuleNameLevel);
 }
