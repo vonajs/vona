@@ -1,7 +1,7 @@
 {
   "name": "vona-cli",
   "type": "module",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "vona cli",
   "publishConfig": {
     "access": "public"
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@cabloy/cli": "^3.0.24",
-    "vona-cli-set-api": "^1.0.31"
+    "vona-cli-set-api": "^1.0.32"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
