@@ -709,6 +709,10 @@ importers:
         version: 6.0.1
 
   packages-utils/process-helper:
+    dependencies:
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@swc/core@1.11.29(@swc/helpers@0.5.17))(@types/node@22.15.29)(typescript@5.8.3)
     devDependencies:
       clean-package:
         specifier: ^2.2.0
