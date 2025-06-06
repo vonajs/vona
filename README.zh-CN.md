@@ -33,7 +33,7 @@ Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任�
 * Redis: 必须
 * MySQL/Postgresql: 选择一个你想用的
 
-## 快速开始
+## 准备工作
 
 1. 安装命令行工具
 
@@ -41,14 +41,20 @@ Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任�
 $ pnpm add -g vona-cli@latest
 ```
 
-2. 创建项目
+2. 安装Vscode插件：Vona - Official
+
+该插件提供了大量菜单，用于快速创建各类资源的代码骨架
+
+## 快速开始
+
+1. 创建项目
 
 ``` bash
 $ vona :create:project projectName
 $ cd projectName
 ```
 
-3. 修改.env文件
+2. 修改.env文件
 
 `env/.env`:
 
@@ -66,19 +72,19 @@ DATABASE_CLIENT_MYSQL_PASSWORD =
 REDIS_DEFAULT_PASSWORD =
 ```
 
-4. 启动开发服务
+3. 启动开发服务
 
 ``` bash
 $ npm run dev
 ```
 
-5. 单元测试
+4. 单元测试
 
 ``` bash
 $ npm run test
 ```
 
-6. 构建
+5. 构建
 
 ``` bash
 $ npm run build

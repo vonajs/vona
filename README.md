@@ -33,7 +33,7 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 * Redis: Required
 * MySQL/Postgresql: Choose what you want to use
 
-## Quick Start
+## Preparation
 
 1. Install command-line tools
 
@@ -41,14 +41,20 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 $ pnpm add -g vona-cli@latest
 ```
 
-2. Create Project
+2. Install Vscode extension: Vona - Official
+
+This extension provides a large number of menus for quickly creating code skeletons for various resources
+
+## Quick Start
+
+1. Create Project
 
 ``` bash
 $ vona :create:project projectName
 $ cd projectName
 ```
 
-3. Modify .env file
+2. Modify .env file
 
 `env/.env`:
 
@@ -66,19 +72,19 @@ DATABASE_CLIENT_MYSQL_PASSWORD =
 REDIS_DEFAULT_PASSWORD =
 ```
 
-4. Start Dev Server
+3. Start Dev Server
 
 ``` bash
 $ npm run dev
 ```
 
-5. Unit test
+4. Unit test
 
 ``` bash
 $ npm run test
 ```
 
-6. Build
+5. Build
 
 ``` bash
 $ npm run build
