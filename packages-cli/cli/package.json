@@ -47,6 +47,9 @@
   },
   "dependencies": {
     "@cabloy/cli": "^3.0.25",
+    "@cabloy/process-helper": "^2.0.16",
+    "fs-extra": "^11.2.0",
+    "ts-node": "^10.9.2",
     "vona-cli-set-api": "^1.0.45"
   },
   "devDependencies": {

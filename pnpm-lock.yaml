@@ -27,7 +27,7 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/utils':
-        specifier: ^1.0.25
+        specifier: ^1.0.26
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -230,6 +230,9 @@ importers:
       vona-module-cabloy-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/cabloy-socket
+      vona-module-demo-book:
+        specifier: workspace:^
+        version: link:src/module/demo-book
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
@@ -265,7 +268,7 @@ importers:
         version: 3.25.51
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.24
+        specifier: ^3.0.25
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -301,7 +304,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.17
+        specifier: ^6.0.19
         version: link:packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -388,6 +391,15 @@ importers:
       '@cabloy/cli':
         specifier: ^3.0.25
         version: link:../cabloy-cli
+      '@cabloy/process-helper':
+        specifier: ^2.0.16
+        version: link:../../packages-utils/process-helper
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.3.0
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@swc/core@1.11.29(@swc/helpers@0.5.17))(@types/node@22.15.29)(typescript@5.8.3)
       vona-cli-set-api:
         specifier: ^1.0.45
         version: link:../cli-set-api
@@ -885,6 +897,15 @@ importers:
         version: 6.0.1
 
   packages-vona/vona-shared:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/module/demo-book:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
