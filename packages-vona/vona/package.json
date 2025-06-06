@@ -43,7 +43,8 @@
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "postpack": "clean-package restore",
+    "version": "node ./scripts/versionTemplate.ts"
   },
   "dependencies": {
     "vona-core": "^5.0.18",
