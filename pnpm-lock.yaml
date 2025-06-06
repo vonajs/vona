@@ -401,7 +401,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.11.29(@swc/helpers@0.5.17))(@types/node@22.15.29)(typescript@5.8.3)
       vona-cli-set-api:
-        specifier: ^1.0.46
+        specifier: ^1.0.47
         version: link:../cli-set-api
     devDependencies:
       clean-package:
