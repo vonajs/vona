@@ -60,15 +60,11 @@ $ cd projectName
 
 ``` bash
 # database
-
 DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
-
 DATABASE_CLIENT_PG_PASSWORD =
-
 DATABASE_CLIENT_MYSQL_PASSWORD =
 
 # redis
-
 REDIS_DEFAULT_PASSWORD =
 ```
 
