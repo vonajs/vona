@@ -38,7 +38,7 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 1. Install command-line tools
 
 ``` bash
-$ pnpm add -g ts-node@latest
+$ pnpm add -g tsx@latest
 $ pnpm add -g vona-cli@latest
 ```
 
