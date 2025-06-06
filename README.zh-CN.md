@@ -38,6 +38,7 @@ Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任�
 1. 安装命令行工具
 
 ``` bash
+$ pnpm add -g ts-node@latest
 $ pnpm add -g vona-cli@latest
 ```
 
