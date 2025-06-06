@@ -41,9 +41,6 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {
-    "ts-node": "^10.9.2"
-  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
