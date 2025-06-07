@@ -5,7 +5,7 @@ import type { ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDb } from './db.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { EnumTransactionPropagation, TransactionIsolationLevels } from '../types/transaction.ts';
+import { TransactionIsolationLevels } from '../types/transaction.ts';
 import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
@@ -32,25 +32,25 @@ export class ServiceTransaction extends BeanBase {
     // transactionOptions
     const transactionOptions = Object.assign({}, options, { propagation: undefined });
     // propagation
-    const propagation = options?.propagation ?? EnumTransactionPropagation.REQUIRED;
-    if (propagation === EnumTransactionPropagation.REQUIRED) {
+    const propagation = options?.propagation ?? 'REQUIRED';
+    if (propagation === 'REQUIRED') {
       // required
       return this._isolationLevelRequired(fn, transactionOptions);
-    } else if (propagation === EnumTransactionPropagation.SUPPORTS) {
+    } else if (propagation === 'SUPPORTS') {
       // supports
       if (this.inTransaction) {
         return this._isolationLevelRequired(fn, transactionOptions);
       } else {
         return fn();
       }
-    } else if (propagation === EnumTransactionPropagation.MANDATORY) {
+    } else if (propagation === 'MANDATORY') {
       // mandatory
       if (this.inTransaction) {
         return this._isolationLevelRequired(fn, transactionOptions);
       } else {
         throw new Error('transaction error: EnumTransactionPropagation.MANDATORY');
       }
-    } else if (propagation === EnumTransactionPropagation.REQUIRES_NEW) {
+    } else if (propagation === 'REQUIRES_NEW') {
       // requires_new
       if (!this.inTransaction) {
         return this._isolationLevelRequired(fn, transactionOptions);
@@ -61,13 +61,13 @@ export class ServiceTransaction extends BeanBase {
           }, transactionOptions);
         }, this._db.info);
       }
-    } else if (propagation === EnumTransactionPropagation.NOT_SUPPORTED) {
+    } else if (propagation === 'NOT_SUPPORTED') {
       if (!this.inTransaction) {
         return fn();
       } else {
         return this.bean.database.newDbIsolate(fn, this._db.info);
       }
-    } else if (propagation === EnumTransactionPropagation.NEVER) {
+    } else if (propagation === 'NEVER') {
       if (!this.inTransaction) {
         return fn();
       } else {

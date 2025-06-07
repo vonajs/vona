@@ -9,20 +9,13 @@ export enum EnumTransactionIsolationLevels {
   SNAPSHOT = 5,
 }
 
-export enum EnumTransactionPropagation {
-  REQUIRED = 0,
-  SUPPORTS = 1,
-  MANDATORY = 2,
-  REQUIRES_NEW = 3,
-  NOT_SUPPORTED = 4,
-  NEVER = 5,
-}
+export type TypeTransactionPropagation = 'REQUIRED' | 'SUPPORTS' | 'MANDATORY' | 'REQUIRES_NEW' | 'NOT_SUPPORTED' | 'NEVER';
 
 // export type TransactionPropagation=''
 export interface ITransactionOptions {
   isolationLevel?: EnumTransactionIsolationLevels;
   readOnly?: boolean;
-  propagation?: EnumTransactionPropagation;
+  propagation?: TypeTransactionPropagation;
 }
 
 export interface ITransactionConsistencyCommitOptions {
