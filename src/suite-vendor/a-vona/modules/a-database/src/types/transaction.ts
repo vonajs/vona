@@ -1,19 +1,19 @@
-export const TransactionIsolationLevels = [undefined, 'read uncommitted', 'read committed', 'repeatable read', 'serializable', 'snapshot'];
+export const TransactionIsolationLevelsMap = {
+  DEFAULT: undefined,
+  READ_UNCOMMITTED: 'read uncommitted',
+  READ_COMMITTED: 'read committed',
+  REPEATABLE_READ: 'repeatable read',
+  SERIALIZABLE: 'serializable',
+  SNAPSHOT: 'snapshot',
+};
 
-export enum EnumTransactionIsolationLevels {
-  DEFAULT = 0,
-  READ_UNCOMMITTED = 1,
-  READ_COMMITTED = 2,
-  REPEATABLE_READ = 3,
-  SERIALIZABLE = 4,
-  SNAPSHOT = 5,
-}
+export type TypeTransactionIsolationLevels = 'DEFAULT' | 'READ_UNCOMMITTED' | 'READ_COMMITTED' | 'REPEATABLE_READ' | 'SERIALIZABLE' | 'SNAPSHOT';
 
 export type TypeTransactionPropagation = 'REQUIRED' | 'SUPPORTS' | 'MANDATORY' | 'REQUIRES_NEW' | 'NOT_SUPPORTED' | 'NEVER';
 
 // export type TransactionPropagation=''
 export interface ITransactionOptions {
-  isolationLevel?: EnumTransactionIsolationLevels;
+  isolationLevel?: TypeTransactionIsolationLevels;
   readOnly?: boolean;
   propagation?: TypeTransactionPropagation;
 }

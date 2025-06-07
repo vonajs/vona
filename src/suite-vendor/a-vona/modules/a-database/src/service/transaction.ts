@@ -5,7 +5,7 @@ import type { ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDb } from './db.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { TransactionIsolationLevels } from '../types/transaction.ts';
+import { TransactionIsolationLevelsMap } from '../types/transaction.ts';
 import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
@@ -133,7 +133,7 @@ export class ServiceTransaction extends BeanBase {
 function _translateTransactionOptions(options?: ITransactionOptions): Knex.TransactionConfig | undefined {
   if (!options) return undefined;
   return {
-    isolationLevel: TransactionIsolationLevels[options.isolationLevel ?? 0] as any,
+    isolationLevel: TransactionIsolationLevelsMap[options.isolationLevel ?? 'DEFAULT'] as any,
     readOnly: options.readOnly,
   };
 }
