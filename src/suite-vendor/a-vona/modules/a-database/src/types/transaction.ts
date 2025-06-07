@@ -6,7 +6,7 @@ export enum EnumTransactionIsolationLevels {
   READ_COMMITTED = 2,
   REPEATABLE_READ = 3,
   SERIALIZABLE = 4,
-  snapshot = 5,
+  SNAPSHOT = 5,
 }
 
 export enum EnumTransactionPropagation {
