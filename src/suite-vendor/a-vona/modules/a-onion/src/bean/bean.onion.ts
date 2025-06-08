@@ -39,7 +39,11 @@ export class BeanOnion extends BeanBase {
   }
 
   public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
-    return checkMeta(meta, this.app.config.meta);
+    let metaCurrent = this.app.config.meta;
+    if (this.app.ctx) {
+      metaCurrent = Object.assign({}, metaCurrent, { instanceName: this.app.ctx.instanceName });
+    }
+    return checkMeta(meta, metaCurrent);
   }
 }
 
