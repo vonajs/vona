@@ -53,14 +53,19 @@ export class CliBinBuild extends BeanCliBase {
       workers: argv.workers,
     };
     const { env, modulesMeta } = await generateVonaMeta(configMeta, configOptions);
-    await rimraf(path.join(projectPath, 'dist'));
-    await this._rollup(projectPath, env);
-    await this._assets(projectPath, modulesMeta);
+    const outDir = path.join(projectPath, _getOutDir());
+    await rimraf(outDir);
+    await this._rollup(projectPath, env, outDir);
+    await this._assets(projectPath, modulesMeta, outDir);
     await rimraf(path.join(projectPath, '.vona'));
+    // copy
+    const outReleasesDir = path.join(projectPath, _getOutReleasesDir());
+    await rimraf(outReleasesDir);
+    fse.copySync(outDir, outReleasesDir);
   }
 
-  async _assets(projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>) {
-    const assetsPath = path.join(projectPath, 'dist/assets');
+  async _assets(_projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>, outDir: string) {
+    const assetsPath = path.join(outDir, 'assets');
     for (const relativeName in modulesMeta.modules) {
       const module = modulesMeta.modules[relativeName];
       if (!module.package.files) continue;
@@ -75,7 +80,7 @@ export class CliBinBuild extends BeanCliBase {
     }
   }
 
-  async _rollup(projectPath: string, env: NodeJS.ProcessEnv) {
+  async _rollup(projectPath: string, env: NodeJS.ProcessEnv, outDir: string) {
     const aliasEntries: aliasImport.Alias[] = [];
     for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious', 'cloudflare:sockets']) {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
@@ -129,7 +134,7 @@ export class CliBinBuild extends BeanCliBase {
     };
 
     const outputOption: OutputOptions = {
-      dir: path.join(projectPath, 'dist'),
+      dir: outDir,
       // file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
       sourcemap: process.env.BUILD_SOURCEMAP === 'true',
@@ -148,4 +153,12 @@ export class CliBinBuild extends BeanCliBase {
       }
     }
   }
+}
+
+function _getOutDir() {
+  return process.env.BUILD_OUTDIR || `dist/${process.env.META_FLAVOR}`;
+}
+
+function _getOutReleasesDir() {
+  return `dist-releases/${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
 }
