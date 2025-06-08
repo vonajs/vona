@@ -14,7 +14,7 @@ import terserImport from '@rollup/plugin-terser';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
-import { generateConfigDefine, getOutDir, getOutReleasesDir, patchFlavor } from '../utils.ts';
+import { generateConfigDefine, getOutDir, getOutReleasesDir } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -45,7 +45,7 @@ export class CliBinBuild extends BeanCliBase {
   async _build(projectPath: string) {
     const { argv } = this.context;
     const mode: VonaMetaMode = 'prod';
-    const flavor: VonaMetaFlavor = patchFlavor(argv.flavor);
+    const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
     const configOptions: VonaBinConfigOptions = {
       appDir: projectPath,

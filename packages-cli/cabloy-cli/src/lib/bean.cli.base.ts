@@ -1,5 +1,6 @@
 import type { CmdOptions } from '../types/argv.ts';
 import { glob } from '@cabloy/module-glob';
+import { patchFlavor } from '../utils.ts';
 import { LocalCommon } from './local.common.ts';
 import { LocalConsole } from './local.console.ts';
 import { LocalHelper } from './local.helper.ts';
@@ -62,6 +63,10 @@ export class BeanCliBase {
   }
 
   async execute(): Promise<any> {
+    const { argv } = this.context;
+    if ((argv as any).flavor) {
+      (argv as any).flavor = patchFlavor((argv as any).flavor);
+    }
     await this._loadModulesMeta();
   }
 

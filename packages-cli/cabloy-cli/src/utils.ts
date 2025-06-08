@@ -1,3 +1,4 @@
+import type { VonaMetaFlavor } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import boxen from 'boxen';
 import chalk from 'chalk';
@@ -43,4 +44,8 @@ export async function getPackageInfo(packageName: string) {
     throw new Error(message);
   }
   return result.data;
+}
+
+export function patchFlavor(flavor?: VonaMetaFlavor | VonaMetaFlavor[]): VonaMetaFlavor | undefined {
+  return Array.isArray(flavor) ? flavor[flavor.length - 1] : flavor;
 }
