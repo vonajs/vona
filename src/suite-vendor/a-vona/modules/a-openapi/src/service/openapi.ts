@@ -9,7 +9,7 @@ import type {
   RequestMappingMetadata,
   TypeRequestMethod,
 } from 'vona-module-a-web';
-import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions } from '../types/api.ts';
+import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions, TypeGenerateJsonScene } from '../types/api.ts';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -42,7 +42,7 @@ export class ServiceOpenapi extends BeanBase {
     const generator =
       version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
-    this._translate(apiObj);
+    this._translate(apiObj, 'api');
     return apiObj as IOpenAPIObject[K];
   }
 
@@ -54,11 +54,11 @@ export class ServiceOpenapi extends BeanBase {
     const generator =
       version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
-    this._translate(apiObj);
+    this._translate(apiObj, 'rest');
     return apiObj as IOpenAPIObject[K];
   }
 
-  private _translate(apiObj: OpenAPIObject30 | OpenAPIObject31) {
+  private _translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
     // paths
     if (apiObj.paths) {
       for (const key in apiObj.paths) {
@@ -68,10 +68,10 @@ export class ServiceOpenapi extends BeanBase {
           this._translateStrings(methodObj, ['description', 'summary']);
           // parameters
           for (const parameterObj of methodObj.parameters || []) {
-            this._translateSchema(parameterObj.schema);
+            this._translateSchema(parameterObj.schema, generateJsonScene);
           }
           // requestBody
-          this._translateSchema(methodObj.requestBody?.content?.['application/json']?.schema);
+          this._translateSchema(methodObj.requestBody?.content?.['application/json']?.schema, generateJsonScene);
         }
       }
     }
@@ -79,20 +79,24 @@ export class ServiceOpenapi extends BeanBase {
     if (apiObj.components?.schemas) {
       for (const key in apiObj.components.schemas) {
         const schema = apiObj.components.schemas[key];
-        this._translateSchema(schema);
+        this._translateSchema(schema, generateJsonScene);
       }
     }
   }
 
-  private _translateSchema(schema: any) {
+  private _translateSchema(schema: any, generateJsonScene: TypeGenerateJsonScene) {
     if (!schema) return;
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
     this._translateStrings(schema, ['title', 'description']);
+    if (generateJsonScene === 'api' && !schema.description && schema.title) {
+      schema.description = schema.title;
+      delete schema.title;
+    }
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
       for (const prop in properties) {
         const propObj = properties[prop];
-        this._translateSchema(propObj);
+        this._translateSchema(propObj, generateJsonScene);
       }
     }
   }

@@ -24,6 +24,8 @@ export interface IOpenApiOptions {
   headers?: IOpenApiHeader[];
 }
 
+export type TypeGenerateJsonScene = 'api' | 'rest';
+
 export type TypeOpenApiVersion = 'V30' | 'V31';
 export interface IOpenAPIObject {
   V30: OpenAPIObject30;
