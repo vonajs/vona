@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { ClassMapped } from 'vona';
@@ -24,6 +25,6 @@ export class EntityInstance extends ClassMapped.omit(EntityBaseSimple, ['iid']) 
 export interface IInstanceStartupQueueInfo {
   resolve: Function;
   reject: Function;
-  instanceName: string;
+  instanceName: keyof IInstanceRecord;
   options: IInstanceStartupOptions;
 }

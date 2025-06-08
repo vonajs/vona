@@ -1,4 +1,4 @@
-import type { ConfigInstanceBase, VonaConfig } from 'vona';
+import type { ConfigInstanceBase, IInstanceRecord, VonaConfig } from 'vona';
 import type { EntityInstance } from '../entity/instance.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
@@ -25,12 +25,12 @@ export class BeanInstance extends BeanBase {
     await this.scope.service.instance.instanceChanged();
   }
 
-  async get(instanceName?: string | null) {
+  async get(instanceName?: keyof IInstanceRecord | null) {
     if (isNil(instanceName)) this.app.throw(403);
     return await this._get(instanceName);
   }
 
-  private async _get(instanceName: string): Promise<EntityInstance | null> {
+  private async _get(instanceName: keyof IInstanceRecord): Promise<EntityInstance | null> {
     // get
     const instance = await this.modelInstance.get({ name: instanceName });
     if (instance) return instance;

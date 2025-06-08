@@ -1,5 +1,5 @@
 import type { VonaOnionOptionsMeta } from '@cabloy/module-info';
-import type { IDecoratorBeanOptionsBase, PowerPartial } from 'vona';
+import type { IDecoratorBeanOptionsBase, IInstanceRecord, PowerPartial } from 'vona';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
@@ -28,7 +28,9 @@ export interface IOnionOptionsDeps<T> {
   dependents?: T[] | T;
 }
 
-export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {}
+export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
+  instance?: keyof IInstanceRecord;
+}
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
 

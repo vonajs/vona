@@ -1,4 +1,4 @@
-import type { VonaConfig } from 'vona';
+import type { IInstanceRecord, VonaConfig } from 'vona';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
 import { isNil, sleep } from '@cabloy/utils';
@@ -21,12 +21,12 @@ export class ServiceInstance extends BeanBase {
     return this.app.meta[SymbolCacheIntancesConfig];
   }
 
-  getConfigInstanceBase(instanceName: string) {
+  getConfigInstanceBase(instanceName: keyof IInstanceRecord) {
     const instances = this.app.config.instances || [{ instanceName: '', password: '' }];
     return instances.find(item => item.instanceName === instanceName);
   }
 
-  getConfig(instanceName?: string | undefined | null): VonaConfig | undefined {
+  getConfig(instanceName?: keyof IInstanceRecord | undefined | null): VonaConfig | undefined {
     if (isNil(instanceName) && this.ctx?.instance) {
       instanceName = this.ctx?.instanceName;
     }
@@ -66,11 +66,11 @@ export class ServiceInstance extends BeanBase {
     return true;
   }
 
-  async resetCache(instanceName: string) {
+  async resetCache(instanceName: keyof IInstanceRecord) {
     await this._cacheInstanceConfig(instanceName, true);
   }
 
-  private async _cacheInstanceConfig(instanceName: string, force: boolean) {
+  private async _cacheInstanceConfig(instanceName: keyof IInstanceRecord, force: boolean) {
     if (this.__cacheIntancesConfig[instanceName] && !force) return;
     let instance = await this.bean.instance.get(instanceName);
     if (!instance) this.app.throw(403);
@@ -84,7 +84,7 @@ export class ServiceInstance extends BeanBase {
   }
 
   // options: force/instanceBase
-  async instanceStartup(instanceName: string, options?: IInstanceStartupOptions) {
+  async instanceStartup(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
     if (!options) options = {};
     if (!options.configInstanceBase) {
       options.configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);

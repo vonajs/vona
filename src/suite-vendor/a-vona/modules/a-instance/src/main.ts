@@ -1,4 +1,4 @@
-import type { IModuleMain, VonaContext } from 'vona';
+import type { IInstanceRecord, IModuleMain, VonaContext } from 'vona';
 import type { IInstanceConfig } from './config/config.ts';
 import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.ts';
@@ -12,7 +12,7 @@ export class Main extends BeanSimple implements IModuleMain {
     this.app.context.__getInstanceName = function (this: VonaContext) {
       return __getInstanceName(this, options);
     };
-    this.app.context.__setInstanceName = function (this: VonaContext, instanceName: string) {
+    this.app.context.__setInstanceName = function (this: VonaContext, instanceName: keyof IInstanceRecord) {
       return __setInstanceName(this, instanceName);
     };
   }
@@ -20,7 +20,7 @@ export class Main extends BeanSimple implements IModuleMain {
   async configLoaded(_config: any) {}
 }
 
-function __setInstanceName(ctx: VonaContext, instanceName: string | undefined | null) {
+function __setInstanceName(ctx: VonaContext, instanceName: keyof IInstanceRecord | undefined | null) {
   ctx[SymbolInstanceName] = instanceName;
 }
 
