@@ -14,7 +14,7 @@ import terserImport from '@rollup/plugin-terser';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
-import { generateConfigDefine } from '../utils.ts';
+import { generateConfigDefine, getOutDir, getOutReleasesDir, patchFlavor } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -45,7 +45,7 @@ export class CliBinBuild extends BeanCliBase {
   async _build(projectPath: string) {
     const { argv } = this.context;
     const mode: VonaMetaMode = 'prod';
-    const flavor: VonaMetaFlavor = argv.flavor || 'normal';
+    const flavor: VonaMetaFlavor = patchFlavor(argv.flavor);
     const configMeta: VonaConfigMeta = { flavor, mode };
     const configOptions: VonaBinConfigOptions = {
       appDir: projectPath,
@@ -53,13 +53,13 @@ export class CliBinBuild extends BeanCliBase {
       workers: argv.workers,
     };
     const { env, modulesMeta } = await generateVonaMeta(configMeta, configOptions);
-    const outDir = path.join(projectPath, _getOutDir());
+    const outDir = path.join(projectPath, getOutDir());
     await rimraf(outDir);
     await this._rollup(projectPath, env, outDir);
     await this._assets(projectPath, modulesMeta, outDir);
     await rimraf(path.join(projectPath, '.vona'));
     // copy
-    const outReleasesDir = path.join(projectPath, _getOutReleasesDir());
+    const outReleasesDir = path.join(projectPath, getOutReleasesDir());
     await rimraf(outReleasesDir);
     fse.copySync(outDir, outReleasesDir);
   }
@@ -153,12 +153,4 @@ export class CliBinBuild extends BeanCliBase {
       }
     }
   }
-}
-
-function _getOutDir() {
-  return process.env.BUILD_OUTDIR || `dist/${process.env.META_FLAVOR}`;
-}
-
-function _getOutReleasesDir() {
-  return `dist-releases/${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
 }

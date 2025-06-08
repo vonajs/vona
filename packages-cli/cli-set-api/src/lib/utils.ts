@@ -1,4 +1,4 @@
-import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
+import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -70,4 +70,17 @@ export async function saveJSONFile(fileName: string, json: object) {
 
 export function pathToHref(fileName: string): string {
   return pathToFileURL(fileName).href;
+}
+
+export function getOutDir() {
+  return process.env.BUILD_OUTDIR || `dist/${process.env.META_FLAVOR}`;
+}
+
+export function getOutReleasesDir() {
+  return `dist-releases/${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
+}
+
+export function patchFlavor(flavor?: VonaMetaFlavor | VonaMetaFlavor[]): VonaMetaFlavor {
+  if (Array.isArray(flavor)) return flavor[flavor.length - 1];
+  return flavor || 'normal';
 }
