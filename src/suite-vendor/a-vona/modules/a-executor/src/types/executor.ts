@@ -1,4 +1,4 @@
-import type { ContextState, ILocaleInfos, PowerPartial } from 'vona';
+import type { ContextState, IInstanceRecord, ILocaleInfos, PowerPartial } from 'vona';
 import type { IDbInfo, ITransactionOptions } from 'vona-module-a-database';
 import type { ConfigOnions } from 'vona-module-a-onion';
 
@@ -17,7 +17,7 @@ export interface INewCtxOptions extends INewCtxBaseOptions {
 
 export interface INewCtxBaseOptions {
   locale?: keyof ILocaleInfos;
-  instanceName?: string | undefined | null;
+  instanceName?: keyof IInstanceRecord | undefined | null;
   instance?: boolean;
   transaction?: boolean;
   transactionOptions?: ITransactionOptions;
@@ -42,6 +42,6 @@ export interface IPerformActionOptions {
 export interface IGeneralInfoOptions {
   dbInfo?: IDbInfo;
   locale?: keyof ILocaleInfos;
-  instanceName?: string | undefined | null;
+  instanceName?: keyof IInstanceRecord | undefined | null;
   extraData?: INewCtxExtraData;
 }

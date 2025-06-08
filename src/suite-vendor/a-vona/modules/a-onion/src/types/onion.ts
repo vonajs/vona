@@ -29,7 +29,7 @@ export interface IOnionOptionsDeps<T> {
 }
 
 export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
-  instance?: keyof IInstanceRecord | (Array<keyof IInstanceRecord>);
+  instanceName?: keyof IInstanceRecord | (Array<keyof IInstanceRecord>);
 }
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
