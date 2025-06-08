@@ -307,7 +307,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.19
+        specifier: ^6.0.20
         version: link:packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -794,7 +794,7 @@ importers:
         specifier: ^5.0.20
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1149,7 +1149,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.0.12
+        specifier: ^5.0.13
         version: link:modules/a-onion
       vona-module-a-openapi:
         specifier: ^5.0.15
