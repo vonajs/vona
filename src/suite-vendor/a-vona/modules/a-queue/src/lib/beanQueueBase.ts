@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from 'vona';
 import type { IQueuePushOptions, IQueueRecord } from '../types/queue.ts';
 import { BeanBase } from 'vona';
 
@@ -14,7 +15,7 @@ export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
     );
   }
 
-  getQueue(instanceName?: string) {
+  getQueue(instanceName?: keyof IInstanceRecord) {
     return this.$scope.queue.service.queue.getQueue(this.$onionName as keyof IQueueRecord, instanceName);
   }
 }

@@ -1,4 +1,4 @@
-import type { PowerPartial } from 'vona';
+import type { IInstanceRecord, PowerPartial } from 'vona';
 import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
 
 export type TypeAuthenticateIntention = 'login' | 'associate' | 'migrate';
@@ -11,7 +11,7 @@ export interface IAuthenticateState {
 export interface IAuthenticateStrategyState extends IAuthenticateState {
   accessToken?: string;
   authProviderId: number;
-  instanceName: string;
+  instanceName: keyof IInstanceRecord;
 }
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {

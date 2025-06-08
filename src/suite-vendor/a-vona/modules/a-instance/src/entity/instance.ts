@@ -4,6 +4,7 @@ import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { ClassMapped } from 'vona';
 import { Entity, EntityBaseSimple } from 'vona-module-a-database';
 import { Api } from 'vona-module-a-openapi';
+import z from 'zod';
 
 export interface IEntityOptionsInstance extends IDecoratorEntityOptions {}
 
@@ -12,8 +13,8 @@ export class EntityInstance extends ClassMapped.omit(EntityBaseSimple, ['iid']) 
   @Api.field()
   disabled: boolean;
 
-  @Api.field()
-  name: string;
+  @Api.field(z.string())
+  name: keyof IInstanceRecord;
 
   @Api.field()
   title: string;
