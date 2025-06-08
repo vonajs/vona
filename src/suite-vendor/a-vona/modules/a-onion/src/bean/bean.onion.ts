@@ -32,6 +32,7 @@ export class BeanOnion extends BeanBase {
     if (!this.checkOnionOptionsMeta(options.meta)) return false;
     if (isNil(selector) || selector === false) return true;
     if (isNil(options.match) && isNil(options.ignore)) return true;
+    matchThis = matchThis ?? this.app;
     return (
       (!isNil(options.match) && __onionMatchSelector(options.match, selector, matchThis, ...matchArgs)) ||
       (!isNil(options.ignore) && !__onionMatchSelector(options.ignore, selector, matchThis, ...matchArgs))
