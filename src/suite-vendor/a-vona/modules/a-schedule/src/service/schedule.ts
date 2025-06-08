@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from 'vona';
 import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
 import { BeanBase, beanFullNameFromOnionName, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-web';
@@ -77,7 +78,7 @@ export class ServiceSchedule extends BeanBase {
     return `${instanceName}.${beanFullNameFromOnionName(cast<string>(scheduleName), 'schedule')}`; // not use :
   }
 
-  public async loadSchedules(instanceName?: string | undefined | null) {
+  public async loadSchedules(instanceName?: keyof IInstanceRecord | undefined | null) {
     if (instanceName === undefined) instanceName = this.ctx.instanceName;
     for (const scheduleItem of this.bean.onion.schedule.getOnionsEnabled()) {
       const scheduleName = scheduleItem.name;
@@ -85,7 +86,7 @@ export class ServiceSchedule extends BeanBase {
     }
   }
 
-  public async addSchedule(scheduleName: keyof IScheduleRecord, instanceName?: string | undefined | null) {
+  public async addSchedule(scheduleName: keyof IScheduleRecord, instanceName?: keyof IInstanceRecord | undefined | null) {
     if (instanceName === undefined) instanceName = this.ctx.instanceName;
     const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
     if (!scheduleItem) return;
