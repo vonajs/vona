@@ -1,8 +1,8 @@
-import type { ConfigInstanceBase } from 'vona';
+import type { ConfigInstanceBase, IInstanceRecord } from 'vona';
 
 export interface IMetaVersionOptions {
   scene: 'update' | 'init' | 'test';
-  instanceName?: string;
+  instanceName?: keyof IInstanceRecord;
 }
 
 export interface IMetaVersionOptionsInner extends IMetaVersionOptions {

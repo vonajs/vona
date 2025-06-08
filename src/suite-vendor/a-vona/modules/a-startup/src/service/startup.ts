@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.ts';
 import path from 'node:path';
@@ -77,7 +78,7 @@ export class ServiceStartup extends BeanBase {
     }
   }
 
-  async runStartup(startupName: string, instanceName?: string | null, options?: IInstanceStartupOptions) {
+  async runStartup(startupName: string, instanceName?: keyof IInstanceRecord | null, options?: IInstanceStartupOptions) {
     const startup = this.bean.onion.startup.onionsNormal[startupName];
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // normal
@@ -98,7 +99,7 @@ export class ServiceStartup extends BeanBase {
 
   async _runStartupLock(
     startup: IOnionSlice<IDecoratorStartupOptions>,
-    instanceName?: string | null,
+    instanceName?: keyof IInstanceRecord | null,
     options?: IInstanceStartupOptions,
   ) {
     // ignore debounce for test
@@ -117,7 +118,7 @@ export class ServiceStartup extends BeanBase {
 
   async _runStartupInner(
     startup: IOnionSlice<IDecoratorStartupOptions>,
-    instanceName?: string | null,
+    instanceName?: keyof IInstanceRecord | null,
     options?: IInstanceStartupOptions,
   ) {
     this.$logger.silly(
@@ -138,7 +139,7 @@ export class ServiceStartup extends BeanBase {
     );
   }
 
-  async runStartupInstance(instanceName: string, options?: IInstanceStartupOptions) {
+  async runStartupInstance(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
     // run startups: not after
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;

@@ -1,4 +1,4 @@
-import type { ConfigInstanceBase } from 'vona';
+import type { ConfigInstanceBase, IInstanceRecord } from 'vona';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
@@ -37,7 +37,7 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  async __instanceInit(instanceName: string | undefined | null, instanceBase?: ConfigInstanceBase) {
+  async __instanceInit(instanceName: keyof IInstanceRecord | undefined | null, instanceBase?: ConfigInstanceBase) {
     if (instanceName === undefined || instanceName === null) {
       throw new Error('instance name is not valid');
     }
@@ -51,7 +51,7 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  async __instanceTest(instanceName: string) {
+  async __instanceTest(instanceName: keyof IInstanceRecord) {
     await this.__check({ scene: 'test', instanceName });
   }
 
