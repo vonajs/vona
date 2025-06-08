@@ -29,9 +29,6 @@ import {
   SymbolUseOnionLocal,
 } from '../types/onion.ts';
 
-const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
-const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
-
 @ProxyDisable()
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
@@ -39,9 +36,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   sceneMeta: OnionSceneMeta;
   onionsNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
   onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
-
-  private [SymbolOnionsEnabled]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
-  private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
   _cacheOnionsGlobal: Function[];
   _cacheOnionsHandler: Record<string, Function[]> = {};
@@ -66,17 +60,15 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return compose(onions);
   }
 
-  getOnionsEnabled(_selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
-    const selector = typeof _selector === 'string' ? _selector : '';
-    if (!this[SymbolOnionsEnabled][selector]) {
-      this[SymbolOnionsEnabled][selector] = this.onionsGlobal.filter(onionSlice => {
-        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
-        return this.bean.onion.checkOnionOptionsEnabled(onionOptions, _selector, matchThis, ...matchArgs);
-      }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
-      const message = `getOnionsEnabled#${this.sceneName}${selector ? `#${selector}` : ''} ${JSON.stringify(this[SymbolOnionsEnabled][selector])}`;
-      this.$loggerChild('onion').verbose(message);
-    }
-    return this[SymbolOnionsEnabled][selector];
+  getOnionsEnabled(selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const onions = this.onionsGlobal.filter(onionSlice => {
+      const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
+      return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector, matchThis, ...matchArgs);
+    }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
+    const selector2 = typeof selector === 'string' ? selector : '';
+    const message = `getOnionsEnabled#${this.sceneName}${selector2 ? `#${selector2}` : ''} ${JSON.stringify(onions)}`;
+    this.$loggerChild('onion').verbose(message);
+    return onions;
   }
 
   getOnionsEnabledOfMeta(beanName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
@@ -91,15 +83,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this.onionsNormal[onionName];
   }
 
-  getOnionsEnabledWrapped(wrapFn: Function, _selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
-    const selector = typeof _selector === 'string' ? _selector : '';
-    if (!this[SymbolOnionsEnabledWrapped][selector]) {
-      const onions = this.getOnionsEnabled(_selector, matchThis, ...matchArgs);
-      this[SymbolOnionsEnabledWrapped][selector] = onions.map(item => {
-        return wrapFn(item);
-      });
-    }
-    return this[SymbolOnionsEnabledWrapped][selector];
+  getOnionsEnabledWrapped(wrapFn: Function, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const onions = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
+    return onions.map(item => {
+      return wrapFn(item);
+    });
   }
 
   public get composedOnionsGlobal() {
