@@ -1,7 +1,7 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
 import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
-import type { TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
+import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -36,7 +36,7 @@ const SymbolProdRootPath = Symbol('SymbolProdRootPath');
 export class AppUtil extends BeanSimple {
   private [SymbolProdRootPath]: string;
 
-  instanceStarted(instanceName: string): boolean {
+  instanceStarted(instanceName: keyof IInstanceRecord): boolean {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[instanceName];
   }
 
@@ -268,7 +268,7 @@ export function compose(chains, adapter?) {
   return _compose(chains, adapter);
 }
 
-export function instanceDesp(instanceName: string | null | undefined): string {
+export function instanceDesp(instanceName: keyof IInstanceRecord | null | undefined): string {
   if (instanceName === undefined || instanceName === null) return '~';
   return instanceName || '-';
 }

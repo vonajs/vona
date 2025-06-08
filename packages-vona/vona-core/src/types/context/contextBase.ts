@@ -1,13 +1,14 @@
 import type { BeanContainer, Constructable, ILocaleInfos, MetadataKey } from '../../lib/index.ts';
 import type { VonaConfig } from '../config/config.ts';
+import type { IInstanceRecord } from '../config/instance.ts';
 import type { VonaContext } from './index.ts';
 
 export interface ContextBase {
   get bean(): BeanContainer;
   get locale(): keyof ILocaleInfos;
   set locale(value: keyof ILocaleInfos);
-  get instanceName(): string | undefined | null;
-  set instanceName(value: string | undefined | null);
+  get instanceName(): keyof IInstanceRecord | undefined | null;
+  set instanceName(value: keyof IInstanceRecord | undefined | null);
   get config(): VonaConfig;
   get innerAccess(): boolean;
   set innerAccess(value: boolean);

@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from '../../types/config/instance.ts';
 import type { ContextBase } from '../../types/context/contextBase.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { MetadataKey } from './metadata.ts';
@@ -26,11 +27,11 @@ export const contextBase: ContextBase = {
     const self = cast(this);
     self.__setLocale(value);
   },
-  get instanceName(): string | undefined | null {
+  get instanceName(): keyof IInstanceRecord | undefined | null {
     const self = cast(this);
     return self.__getInstanceName();
   },
-  set instanceName(value: string | undefined | null) {
+  set instanceName(value: keyof IInstanceRecord | undefined | null) {
     const self = cast(this);
     self.__setInstanceName(value);
   },
