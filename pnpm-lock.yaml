@@ -401,7 +401,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.55
+        specifier: ^1.0.56
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -510,7 +510,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -791,10 +791,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.26
+        specifier: ^5.0.27
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -886,7 +886,7 @@ importers:
         specifier: ^1.0.27
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1089,7 +1089,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-aspect
       vona-module-a-auth:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-auth
       vona-module-a-authsimple:
         specifier: ^5.0.13
@@ -1107,7 +1107,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-cache
       vona-module-a-core:
-        specifier: ^5.0.26
+        specifier: ^5.0.27
         version: link:modules/a-core
       vona-module-a-database:
         specifier: ^5.0.22
@@ -1125,7 +1125,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-event
       vona-module-a-executor:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-executor
       vona-module-a-i18n:
         specifier: ^5.0.11
@@ -1134,7 +1134,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-instance
       vona-module-a-jwt:
         specifier: ^5.0.11
@@ -1149,10 +1149,10 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.14
+        specifier: ^5.0.15
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.11
@@ -1161,22 +1161,22 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-printtip
       vona-module-a-queue:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-queue
       vona-module-a-redis:
         specifier: ^5.0.11
         version: link:modules/a-redis
       vona-module-a-redlock:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-redlock
       vona-module-a-schedule:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-schedule
       vona-module-a-security:
         specifier: ^5.0.11
         version: link:modules/a-security
       vona-module-a-startup:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-startup
       vona-module-a-static:
         specifier: ^5.0.11
@@ -1197,7 +1197,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.14
@@ -1378,7 +1378,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.19
+        specifier: ^6.0.20
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
