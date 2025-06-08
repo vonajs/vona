@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from 'vona';
 import type {
   IDecoratorQueueOptions,
   IQueueCallbacks,
@@ -32,7 +33,7 @@ export class ServiceQueue extends BeanBase {
     return this._queuePush(info, true);
   }
 
-  loadQueueWorkers(instanceName?: string | undefined | null) {
+  loadQueueWorkers(instanceName?: keyof IInstanceRecord | undefined | null) {
     for (const queueItem of this.bean.onion.queue.getOnionsEnabled()) {
       const info: IQueueJobContext<unknown> = {
         queueName: queueItem.name as never,
@@ -189,7 +190,7 @@ export class ServiceQueue extends BeanBase {
     return this._queues[queueKey];
   }
 
-  getQueue(queueName: keyof IQueueRecord, instanceName?: string | undefined | null) {
+  getQueue(queueName: keyof IQueueRecord, instanceName?: keyof IInstanceRecord | undefined | null) {
     return this._getQueue({
       queueName,
       data: undefined as any,
