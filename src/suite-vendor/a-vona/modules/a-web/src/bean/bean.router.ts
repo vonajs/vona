@@ -1,6 +1,7 @@
 import type { Constructable, VonaContext } from 'vona';
 import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
 import type { IDecoratorControllerOptions } from '../types/controller.ts';
+import type { TypeRequestMethod } from '../types/request.ts';
 import * as ModuleInfo from '@cabloy/module-info';
 import Router from 'find-my-way';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
@@ -10,7 +11,7 @@ import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapi';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.ts';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
-import { RequestMethod, SymbolRequestMappingHandler } from '../types/request.ts';
+import { SymbolRequestMappingHandler } from '../types/request.ts';
 
 const SymbolRouteComposeMiddlewaresCache = Symbol('SymbolRouteComposeMiddlewaresCache');
 
@@ -98,7 +99,7 @@ export class BeanRouter extends BeanBase {
       actionKey,
     )!;
     const actionPath: RegExp | string = handlerMetadata.path || '';
-    const actionMethod: RequestMethod = handlerMetadata.method || RequestMethod.GET;
+    const actionMethod: TypeRequestMethod = handlerMetadata.method || 'get';
     // routePath
     const routePath = app.util.combineApiPathControllerAndAction(
       info.relativeName,

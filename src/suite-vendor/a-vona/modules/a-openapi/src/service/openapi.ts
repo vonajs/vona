@@ -7,6 +7,7 @@ import type {
 import type {
   IDecoratorControllerOptions,
   RequestMappingMetadata,
+  TypeRequestMethod,
 } from 'vona-module-a-web';
 import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions } from '../types/api.ts';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
@@ -23,7 +24,6 @@ import {
   LocaleModuleNameSeparator,
 } from 'vona';
 import {
-  RequestMethod,
   Service,
   SymbolRequestMappingHandler,
 } from 'vona-module-a-web';
@@ -200,7 +200,7 @@ export class ServiceOpenapi extends BeanBase {
       actionKey,
     )!;
     const actionPath: string = handlerMetadata.path || '';
-    const actionMethod: RequestMethod = handlerMetadata.method || RequestMethod.GET;
+    const actionMethod: TypeRequestMethod = handlerMetadata.method || 'get';
 
     // routePath
     const routePath = app.util.combineApiPathControllerAndAction(

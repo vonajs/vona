@@ -1,6 +1,6 @@
 import type Router from 'find-my-way';
 import type { Constructable } from 'vona';
-import type { RequestMethod } from './request.ts';
+import type { TypeRequestMethod } from './request.ts';
 
 export interface ContextRouteMetadata {
   meta: any;
@@ -14,7 +14,7 @@ export interface ContextRoute {
   controllerBeanFullName: string;
   action: string;
   route: ContextRouteMetadata;
-  routeMethod: RequestMethod;
+  routeMethod: TypeRequestMethod;
   routePath: string | RegExp;
   routePathRaw: string | RegExp;
 }
