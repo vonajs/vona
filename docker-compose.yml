@@ -3,6 +3,7 @@ version: '3.7'
 services:
   app:
     depends_on:
+      - pg
       - mysql
       - redis
     build:
@@ -14,7 +15,7 @@ services:
     volumes:
       - ./docker-compose/output/app/vona:/root/vona
       - ./docker-compose/logs/app:/root/logs
-    command: [./scripts/wait-for-it.sh, 'mysql:3306', 'redis:6379', -s, --, ./scripts/app-init.sh]
+    command: [./scripts/wait-for-it.sh, 'pg:5432', 'mysql:3306', 'redis:6379', -s, --, ./scripts/app-init.sh]
 
   nginx:
     image: nginx:latest
@@ -28,6 +29,21 @@ services:
       - ./docker-compose/logs/nginx:/var/log/nginx
       - ./docker-compose/config/nginx/conf.d:/etc/nginx/conf.d
 
+  pg:
+    image: postgres:17
+    restart: always
+    ports:
+      - '35432:5432'
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    volumes:
+      - ./docker-compose/data/pg:/var/lib/postgresql/data 
+    environment:
+      POSTGRES_DB: vona
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '!%{9avv.Tw2LmcYP'
+ 
   mysql:
     image: mysql:8.1
     command:
