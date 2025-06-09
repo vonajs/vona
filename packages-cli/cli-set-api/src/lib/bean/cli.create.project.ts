@@ -65,6 +65,8 @@ export class CliCreateProject extends BeanCliBase {
       snippetsPath: null,
       boilerplatePath: `create/project/${template}/boilerplate`,
     });
+    // create docker-compose/data/pg
+    fse.ensureDirSync(path.join(targetDir, 'docker-compose/data/pg'));
     // copy package.json
     fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
     // npm run init
