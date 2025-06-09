@@ -3,6 +3,8 @@ import { metadataCustomSnippet } from '@cabloy/cli';
 import { catchError } from '@cabloy/utils';
 import { locale_transform } from '../utils.ts';
 
+const __resources = { Name: 'Name', Description: 'Description' };
+
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     module: string;
@@ -22,6 +24,6 @@ export default metadataCustomSnippet({
     return fs.readFileSync(targetFile).toString('utf8');
   },
   async transform({ ast, argv }) {
-    return locale_transform({ ast, argv });
+    return locale_transform({ ast, argv, resources: __resources });
   },
 });

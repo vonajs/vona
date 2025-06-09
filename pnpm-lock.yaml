@@ -233,6 +233,9 @@ importers:
       vona-module-demo-book:
         specifier: workspace:^
         version: link:src/module/demo-book
+      vona-module-demo-order:
+        specifier: workspace:^
+        version: link:src/module/demo-order
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
@@ -906,6 +909,15 @@ importers:
         version: 6.0.1
 
   src/module/demo-book:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/module/demo-order:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
