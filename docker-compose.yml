@@ -12,8 +12,7 @@ services:
     ports:
       - '7202:7102'
     volumes:
-      - ./docker-compose/output/app/dist:/root/output/app/dist
-      - ./docker-compose/output/app/cabloy:/root/cabloy
+      - ./docker-compose/output/app/vona:/root/vona
       - ./docker-compose/logs/app:/root/logs
     command: [./scripts/wait-for-it.sh, 'mysql:3306', 'redis:6379', -s, --, ./scripts/app-init.sh]
 
@@ -25,8 +24,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./docker-compose/output/app/dist:/usr/share/nginx/app/dist
-      - ./docker-compose/output/app/cabloy:/usr/share/nginx/app/cabloy
+      - ./docker-compose/output/app/vona:/usr/share/nginx/app/vona
       - ./docker-compose/logs/nginx:/var/log/nginx
       - ./docker-compose/config/nginx/conf.d:/etc/nginx/conf.d
 
@@ -49,7 +47,7 @@ services:
       - ./docker-compose/data/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'CDf#lV+q5I1RB2KR'
-      MYSQL_DATABASE: cabloy
+      MYSQL_DATABASE: vona
       MYSQL_USER: web_user
       MYSQL_PASSWORD: '!%{9mov.Tw3LmcYP'
     security_opt:
