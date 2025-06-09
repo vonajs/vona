@@ -53,7 +53,7 @@ export class CliCreateProject extends BeanCliBase {
     argv.DATABASE_CLIENT_MYSQL_USER = 'web_user';
     argv.DATABASE_CLIENT_MYSQL_PASSWORD = randomize('*', 16, { exclude: '\\\'"$' });
     argv.DATABASE_CLIENT_MYSQL_PASSWORD_ROOT = randomize('*', 16, { exclude: '\\\'"$' });
-    argv.DATABASE_CLIENT_PG_USER = 'web_user';
+    argv.DATABASE_CLIENT_PG_USER = 'postgres';
     argv.DATABASE_CLIENT_PG_PASSWORD = randomize('*', 16, { exclude: '\\\'"$' });
     argv.DATABASE_CLIENT_PG_PASSWORD_ROOT = randomize('*', 16, { exclude: '\\\'"$' });
     // template
