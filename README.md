@@ -87,6 +87,14 @@ $ npm run test
 $ npm run build
 ```
 
+## Docker Compose
+
+``` bash
+$ npm run build:docker
+$ sudo docker-compose build
+$ sudo docker-compose up
+```
+
 ## Stay In Touch
 
 - [Twitter](https://x.com/zhennann2024)
