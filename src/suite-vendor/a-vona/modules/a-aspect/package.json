@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-aspect",
   "type": "module",
-  "version": "5.0.11",
+  "version": "5.0.12",
   "title": "a-aspect",
   "vonaModule": {
     "dependencies": {},
