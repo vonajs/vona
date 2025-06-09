@@ -62,6 +62,29 @@ export class CliBinBuild extends BeanCliBase {
     const outReleasesDir = path.join(projectPath, getOutReleasesDir());
     await rimraf(outReleasesDir);
     fse.copySync(outDir, outReleasesDir);
+    // copy
+    if (process.env.BUILD_COPY_DIST) {
+      const envDist = path.isAbsolute(process.env.BUILD_COPY_DIST)
+        ? process.env.BUILD_COPY_DIST
+        : path.join(projectPath, process.env.BUILD_COPY_DIST);
+      const outDirCopy = path.join(envDist, path.basename(outDir));
+      fse.removeSync(outDirCopy);
+      fse.copySync(
+        outDir,
+        outDirCopy,
+      );
+    }
+    if (process.env.BUILD_COPY_RELEASE) {
+      const envRelease = path.isAbsolute(process.env.BUILD_COPY_RELEASE)
+        ? process.env.BUILD_COPY_RELEASE
+        : path.join(projectPath, process.env.BUILD_COPY_RELEASE);
+      const outReleasesDirCopy = path.join(envRelease, path.basename(outReleasesDir));
+      fse.removeSync(outReleasesDirCopy);
+      fse.copySync(
+        outDir,
+        outReleasesDirCopy,
+      );
+    }
   }
 
   async _assets(_projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>, outDir: string) {
