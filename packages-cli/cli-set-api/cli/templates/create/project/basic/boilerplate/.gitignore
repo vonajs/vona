@@ -38,6 +38,7 @@ src/backend/typing/mine.d.ts
 /docker-compose
 !/docker-compose/config
 !/docker-compose/data/mysql/.gitkeep
+!/docker-compose/data/pg/.gitkeep
 !/docker-compose/data/redis/.gitkeep
 !/docker-compose/logs/app/.gitkeep
 !/docker-compose/logs/nginx/.gitkeep
