@@ -29,7 +29,7 @@ services:
       - ./docker-compose/config/nginx/conf.d:/etc/nginx/conf.d
 
   mysql:
-    image: mysql:latest
+    image: mysql:8
     command:
       - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
@@ -40,6 +40,7 @@ services:
       - --slow_query_log=1
       - --long_query_time=0.5
       - --log-queries-not-using-indexes=1
+      - --lower_case_table_names=0
     restart: always
     ports:
       - '33306:3306'
