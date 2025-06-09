@@ -41,7 +41,7 @@ src/backend/typing/mine.d.ts
 !/docker-compose/data/redis/.gitkeep
 !/docker-compose/logs/app/.gitkeep
 !/docker-compose/logs/nginx/.gitkeep
-!/docker-compose/output/app/cabloy/.gitkeep
+!/docker-compose/output/app/vona/.gitkeep
 !/docker-compose/output/app/dist/.gitkeep
 
 /src/backend/demo

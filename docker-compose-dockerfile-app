@@ -1,6 +1,6 @@
 FROM node:24
 
-RUN mkdir -p /opt/node/app
+RUN mkdir -p /opt/node/app/dist
 WORKDIR /opt/node/app
 
 COPY ./dist/docker /opt/node/app/dist/docker
