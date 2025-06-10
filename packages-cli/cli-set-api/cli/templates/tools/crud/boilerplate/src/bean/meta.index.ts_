@@ -1,0 +1,17 @@
+import type { IMetaOptionsIndex } from 'vona-module-a-index';
+import { BeanBase } from 'vona';
+import { $tableColumns } from 'vona-module-a-database';
+import { Meta } from 'vona-module-a-meta';
+import { EntityOrder } from '../entity/order.ts';
+
+const tableColumns = $tableColumns(
+  () => EntityOrder,
+  entity => entity.name,
+);
+@Meta<IMetaOptionsIndex>({
+  indexes: {
+    // demoOrder: 'name', // 没有类型提示
+    ...tableColumns,
+  },
+})
+export class MetaIndex extends BeanBase {}
