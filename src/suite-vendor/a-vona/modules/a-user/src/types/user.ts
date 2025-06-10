@@ -2,6 +2,10 @@ import type { ILocaleInfos } from 'vona';
 import type { TableIdentity } from 'vona-module-a-database';
 import type { IAuthUserProfile } from './authProfile.ts';
 
+export interface IUserNameRecord {
+  admin: never;
+}
+
 export interface IUserIdRecord {
   '-1': 'anonymous';
 }
