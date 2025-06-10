@@ -78,3 +78,4 @@ src/backend/typing/mine.d.ts
 sftp-config.json
 sftp-config-.json
 /.assets
+packages-docs/.vitepress/cache
