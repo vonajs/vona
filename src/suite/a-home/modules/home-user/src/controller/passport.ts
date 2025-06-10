@@ -17,6 +17,7 @@ export interface IControllerOptionsPassport extends IDecoratorControllerOptions 
 @Controller<IControllerOptionsPassport>('passport')
 export class ControllerPassport extends BeanBase {
   @Web.get('current')
+  @Passport.public()
   @Api.body(v.optional(), v.object(DtoPassport))
   current(): DtoPassport | undefined {
     return this._combineDtoPassport();
@@ -106,7 +107,7 @@ export class ControllerPassport extends BeanBase {
 
   private _combineDtoPassport(): DtoPassport | undefined {
     const passport = this.bean.passport.getCurrent();
-    if (!passport) return;
+    if (!passport || !passport.auth) return;
     return {
       user: passport.user as EntityUser,
       auth: { id: passport.auth!.id },
