@@ -26,7 +26,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      # - run: npm install
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9    
       - run: cp package.original.json package.json
       - run: npm run init
       - run: npm run cov
