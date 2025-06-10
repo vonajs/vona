@@ -404,7 +404,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.61
+        specifier: ^1.0.62
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -797,7 +797,7 @@ importers:
         specifier: ^5.0.20
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.29
+        specifier: ^5.0.30
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1143,13 +1143,13 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-i18n
       vona-module-a-index:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-index
       vona-module-a-instance:
         specifier: ^5.0.12
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-jwt
       vona-module-a-logger:
         specifier: ^5.0.11
@@ -1203,7 +1203,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-upload
       vona-module-a-user:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-user
       vona-module-a-validation:
         specifier: ^5.0.11
