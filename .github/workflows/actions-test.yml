@@ -21,6 +21,7 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_PASSWORD: ''
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
