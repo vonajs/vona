@@ -4,13 +4,13 @@ import { $tableColumns } from 'vona-module-a-database';
 import { Meta } from 'vona-module-a-meta';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 
-const tableColumns = $tableColumns(
+const tableColumns<%=argv.resourceNameCapitalize%> = $tableColumns(
   () => Entity<%=argv.resourceNameCapitalize%>,
   entity => entity.name,
 );
 @Meta<IMetaOptionsIndex>({
   indexes: {
-    ...tableColumns,
+    ...tableColumns<%=argv.resourceNameCapitalize%>,
   },
 })
 export class MetaIndex extends BeanBase {}
