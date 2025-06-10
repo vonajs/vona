@@ -2,15 +2,14 @@ import type { IMetaOptionsIndex } from 'vona-module-a-index';
 import { BeanBase } from 'vona';
 import { $tableColumns } from 'vona-module-a-database';
 import { Meta } from 'vona-module-a-meta';
-import { EntityOrder } from '../entity/order.ts';
+import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 
 const tableColumns = $tableColumns(
-  () => EntityOrder,
+  () => Entity<%=argv.resourceNameCapitalize%>,
   entity => entity.name,
 );
 @Meta<IMetaOptionsIndex>({
   indexes: {
-    // demoOrder: 'name', // 没有类型提示
     ...tableColumns,
   },
 })
