@@ -2,15 +2,15 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export const shared = defineConfig({
-  title: 'Zova',
-  description: 'A vue3 framework with ioc',
+  title: 'Vona',
+  description: 'An intuitive, elegant and powerful Node.js framework',
   base: '/',
   markdown: {
     lineNumbers: true,
   },
   themeConfig: {
     editLink: {
-      pattern: 'https://github.com/cabloy/zova/edit/main/zova-docs/:path',
+      pattern: 'https://github.com/vonajs/vona/edit/main/packages-docs/:path',
     },
     search: {
       provider: 'local',

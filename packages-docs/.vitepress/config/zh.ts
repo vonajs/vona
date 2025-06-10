@@ -1,4 +1,5 @@
-import { DefaultTheme, defineConfig } from 'vitepress';
+import type { DefaultTheme } from 'vitepress';
+import { defineConfig } from 'vitepress';
 
 export const zh = defineConfig({
   lang: 'zh-CN',
@@ -9,14 +10,13 @@ export const zh = defineConfig({
     ],
     sidebar: {
       '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },
-      '/zh/cabloy/': { base: '/zh/cabloy/', items: sidebarCabloy() },
     },
     footer: {
       message: '基于 MIT 许可发布',
-      copyright: `版权所有 © 2016-present Zova`,
+      copyright: '版权所有 © 2016-present Vona',
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/cabloy/zova' },
+      { icon: 'github', link: 'https://github.com/vonajs/vona' },
       { icon: 'x', link: 'https://twitter.com/zhennann2024' },
       { icon: 'youtube', link: 'https://www.youtube.com/@cabloyjs' },
     ],
@@ -28,7 +28,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       text: '开始',
       items: [
-        { text: '为什么需要Vue3+IOC', link: 'start/why' },
         { text: '简介', link: 'start/introduction' },
         { text: '快速上手', link: 'start/quick-start' },
         { text: 'VS Code 插件', link: 'start/zova-vscode' },
@@ -40,17 +39,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '基础',
       items: [
         {
-          text: 'Vue组件',
-          base: '/zh/guide/essentials/component/',
-          items: [
-            { text: '页面组件', link: 'page' },
-            { text: '子组件', link: 'child' },
-            { text: '子组件成员', link: 'child-members' },
-            { text: 'v-model', link: 'v-model' },
-            { text: '组件(高级)', link: 'component-advanced' },
-          ],
-        },
-        {
           text: '模块化体系',
           base: '/zh/guide/essentials/modularization/',
           items: [
@@ -61,7 +49,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'IOC控制反转',
+          text: 'IOC容器',
           base: '/zh/guide/essentials/ioc/',
           items: [
             { text: '简介', link: 'introduction' },
@@ -106,47 +94,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'Layout布局',
-          base: '/zh/guide/techniques/layout/',
-          link: 'introduction',
-        },
-        {
-          text: 'Fetch',
-          base: '/zh/guide/techniques/fetch/',
-          link: 'introduction',
-        },
-        {
-          text: 'Mock',
-          base: '/zh/guide/techniques/mock/',
-          link: 'introduction',
-        },
-        {
-          text: '图标',
-          base: '/zh/guide/techniques/icon/',
-          link: 'icon-engine',
-        },
-        {
-          text: 'CSS-in-JS: 样式&主题',
-          base: '/zh/guide/techniques/css-in-js/',
-          items: [
-            { text: '简介', link: 'introduction' },
-            { text: '$style', link: 'style' },
-            { text: '$css', link: 'css' },
-            { text: '$token', link: 'token' },
-            { text: '$theme', link: 'theme' },
-          ],
-        },
-        {
-          text: 'Model: 统一数据源',
-          base: '/zh/guide/techniques/model/',
-          items: [
-            { text: '简介', link: 'introduction' },
-            { text: '异步数据', link: 'async-data' },
-            { text: '同步数据', link: 'sync-data' },
-            { text: 'API', link: 'api' },
-          ],
-        },
-        {
           text: 'SSR',
           base: '/zh/guide/techniques/ssr/',
           items: [
@@ -175,18 +122,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       ],
     },
     {
-      collapsed: true,
-      text: 'Vue生态支持',
-      items: [
-        { text: '传统写法', link: 'vue/legacy' },
-        { text: 'Pinia', link: 'vue/pinia' },
-        { text: 'Composables', link: 'vue/composables' },
-        { text: 'Provide/Inject', link: 'vue/provide-inject' },
-        { text: 'Refs', link: 'vue/refs' },
-        { text: 'Others', link: 'vue/others' },
-      ],
-    },
-    {
       text: '资源',
       items: [
         { text: '常见问题', link: 'resources/faq' },
@@ -196,27 +131,5 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     { text: '致谢', link: 'others/thanks' },
     { text: 'License', link: 'others/license' },
-  ];
-}
-
-function sidebarCabloy(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: 'Cabloy',
-      items: [{ text: '简介', link: 'start/introduction' }],
-    },
-    {
-      text: '资源',
-      items: [
-        { text: '视频', link: 'resources/videos' },
-        {
-          text: '文章',
-          items: [
-            { text: '比nestjs更优雅的ioc: 基础篇', link: 'resources/articles/ioc-basic' },
-            { text: '比nestjs更优雅的ioc: 跨模块访问资源', link: 'resources/articles/ioc-cross-module' },
-          ],
-        },
-      ],
-    },
   ];
 }
