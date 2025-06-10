@@ -1,5 +1,7 @@
 import type { SignOptions } from 'jsonwebtoken';
 
+export const ErrorMessageJwtExpired = 'jwt expired';
+
 export interface IJwtToken {
   accessToken: string;
   refreshToken: string;
