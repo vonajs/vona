@@ -2,7 +2,7 @@ name: actions-test
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   test:
     strategy:
