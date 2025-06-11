@@ -28,6 +28,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       text: 'Getting Started',
       items: [
+        { text: 'Introduction', link: 'start/introduction' },
         { text: 'Quick Start', link: 'start/quick-start' },
         { text: 'VS Code Extension', link: 'start/vona-vscode' },
         { text: 'Update', link: 'start/update' },

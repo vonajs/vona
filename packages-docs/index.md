@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/start/quick-start
+      link: /guide/start/introduction
     - theme: alt
       text: Github
       link: https://github.com/vonajs/vona
