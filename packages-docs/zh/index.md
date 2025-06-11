@@ -9,18 +9,18 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /zh/guide/start/introduction
+      link: /zh/guide/start/quick-start
     - theme: alt
       text: Github
       link: https://github.com/vonajs/vona
 
 features:
   - title: IOC容器
-    details: Zova提供的IOC容器概念更加清晰，功能更加强大，是应对大型业务系统开发的利器
+    details: Vona提供的IOC容器概念更加清晰，功能更加强大，是应对大型业务系统开发的利器
   - title: AOP
-    details: AOP
+    details: 提供了更加完善的Aop编程能力，包括前置切面、主体切面、客体切面
   - title: 多租户
-    details: 多租户
+    details: 内置了开箱即用的多租户能力
   - title: 模块化体系
-    details: 在一个大型的 Web 业务系统当中，随着业务的增长和变更，为了避免代码失控，有必要将系统拆分为一个个相对独立的模块，这就是 Zova 采用模块化体系的缘由。在 Zova 中，一个模块就是一个天然的拆包边界，在 build 构建时，自动打包成一个独立的异步 Chunk，告别 Vite 配置的烦恼，同时可以有效避免构建产物的碎片化。特别是在大型业务系统中，这种优势尤其明显
+    details: 在一个大型的 Web 业务系统当中，随着业务的增长和变更，为了避免代码失控，有必要将系统拆分为一个个相对独立的模块
 ---
