@@ -13,7 +13,7 @@ importers:
     dependencies:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.3.0
-        version: 7.3.2(zod@3.25.51)
+        version: 7.3.2(zod@3.25.61)
       '@cabloy/deps':
         specifier: ^1.0.19
         version: link:packages-utils/deps
@@ -267,8 +267,8 @@ importers:
         specifier: ^3.17.0
         version: 3.17.0
       zod:
-        specifier: ^3.23.8
-        version: 3.25.51
+        specifier: ^3.25.58
+        version: 3.25.61
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.29
@@ -404,7 +404,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.63
+        specifier: ^1.0.64
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -513,7 +513,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.20
+        specifier: ^5.0.21
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -806,10 +806,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.20
+        specifier: ^5.0.21
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.30
+        specifier: ^5.0.31
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -823,7 +823,7 @@ importers:
     dependencies:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.3.0
-        version: 7.3.2(zod@3.25.51)
+        version: 7.3.2(zod@3.25.61)
       '@cabloy/compose':
         specifier: ^2.0.14
         version: link:../../packages-utils/compose
@@ -876,8 +876,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(winston@3.17.0)
       zod:
-        specifier: ^3.23.8
-        version: 3.25.51
+        specifier: ^3.25.58
+        version: 3.25.61
     devDependencies:
       '@types/koa':
         specifier: ^2.15.0
@@ -901,7 +901,7 @@ importers:
         specifier: ^1.0.27
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.20
+        specifier: ^5.0.21
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1131,7 +1131,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-cache
       vona-module-a-core:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-core
       vona-module-a-database:
         specifier: ^5.0.22
@@ -1176,7 +1176,7 @@ importers:
         specifier: ^5.0.13
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.11
@@ -1402,7 +1402,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.20
+        specifier: ^6.0.21
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -1593,7 +1593,7 @@ importers:
     dependencies:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.3.0
-        version: 7.3.2(zod@3.25.51)
+        version: 7.3.2(zod@3.25.61)
       '@cabloy/zod-errors-custom':
         specifier: ^1.0.13
         version: link:../../../../../packages-utils/zod-errors-custom
@@ -1607,8 +1607,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       zod:
-        specifier: ^3.23.8
-        version: 3.25.51
+        specifier: ^3.25.58
+        version: 3.25.61
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -8326,11 +8326,11 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.25.51:
-    resolution: {integrity: sha512-TQSnBldh+XSGL+opiSIq0575wvDPqu09AqWe1F7JhUMKY+M91/aGlK4MhpVNO7MgYfHcVCB1ffwAUTJzllKJqg==}
-
   zod@3.25.57:
     resolution: {integrity: sha512-6tgzLuwVST5oLUxXTmBqoinKMd3JeesgbgseXeFasKKj8Q1FCZrHnbqJOyiEvr4cVAlbug+CgIsmJ8cl/pU5FA==}
+
+  zod@3.25.61:
+    resolution: {integrity: sha512-fzfJgUw78LTNnHujj9re1Ov/JJQkRZZGDMcYqSx7Hp4rPOkKywaFHq0S6GoHeXs0wGNE/sIOutkXgnwzrVOGCQ==}
 
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
@@ -8503,10 +8503,10 @@ snapshots:
       package-manager-detector: 1.3.0
       tinyexec: 1.0.1
 
-  '@asteasolutions/zod-to-openapi@7.3.2(zod@3.25.51)':
+  '@asteasolutions/zod-to-openapi@7.3.2(zod@3.25.61)':
     dependencies:
       openapi3-ts: 4.4.0
-      zod: 3.25.51
+      zod: 3.25.61
 
   '@azu/format-text@1.0.2': {}
 
@@ -9130,8 +9130,8 @@ snapshots:
       express-rate-limit: 7.5.0(express@5.1.0)
       pkce-challenge: 5.0.0
       raw-body: 3.0.0
-      zod: 3.25.57
-      zod-to-json-schema: 3.24.5(zod@3.25.57)
+      zod: 3.25.61
+      zod-to-json-schema: 3.24.5(zod@3.25.61)
     transitivePeerDependencies:
       - supports-color
 
@@ -15758,13 +15758,13 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.24.5(zod@3.25.57):
+  zod-to-json-schema@3.24.5(zod@3.25.61):
     dependencies:
-      zod: 3.25.57
-
-  zod@3.25.51: {}
+      zod: 3.25.61
 
   zod@3.25.57: {}
+
+  zod@3.25.61: {}
 
   zwitch@1.0.5: {}
 
