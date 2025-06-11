@@ -113,6 +113,9 @@ export class CliBinBuild extends BeanCliBase {
 
     const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
     const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
+    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
+    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
 
     const plugins = [
       alias({
@@ -137,9 +140,9 @@ export class CliBinBuild extends BeanCliBase {
         plugins: [
           [babelPluginZovaBeanModule, { brandName: 'vona' }],
           [babelPluginTransformTypescriptMetadata],
-          ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
-          ['@babel/plugin-transform-class-properties', { loose: true }],
-          ['@babel/plugin-transform-typescript'],
+          [babelPluginProposalDecorators, { version: 'legacy' }],
+          [babelPluginTransformClassProperties, { loose: true }],
+          [babelPluginTransformTypescript],
         ],
       }),
     ];
