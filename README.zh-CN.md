@@ -18,6 +18,10 @@ Vona 是一款直观、优雅、强大的 Node.js 框架，用于快速开发任
 [download-image]: https://img.shields.io/npm/dm/vona?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/vona
 
+## 文档
+
+- [快速开始](https://vona.js.org/guide/start/introduction.html)
+
 ## 特性
 
 [Click here](https://juejin.cn/post/7509709812857110582)
