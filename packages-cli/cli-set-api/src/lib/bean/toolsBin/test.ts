@@ -44,7 +44,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
   let coverageIncludeGlobs: string[] = [];
   if (coverage) {
     if (fse.existsSync(path.join(projectPath, 'packages-vona/vona-core'))) {
-      coverageIncludeGlobs = coverageIncludeGlobs.concat(['packages-vona/vona-core/**/*.ts', 'src/module-vendor/**/*.ts', 'src/suite-vendor/**/*.ts']);
+      coverageIncludeGlobs = coverageIncludeGlobs.concat(['packages-vona/vona-core/**/*.ts', 'src/suite-vendor/a-vona/**/*.ts']);
     } else {
       coverageIncludeGlobs = coverageIncludeGlobs.concat(['src/module/**/*.ts', 'src/suite/**/*.ts']);
     }
