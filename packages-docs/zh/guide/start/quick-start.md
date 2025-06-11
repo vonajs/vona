@@ -1,62 +1,63 @@
 # 快速上手
 
-## 创建一个Zova应用
+## 准备工作
 
-### 1. 前置条件
+1. 安装命令行工具
 
-- npm包管理器：pnpm
-
-```bash
-$ npm install -g pnpm
+``` bash
+$ pnpm add -g tsx@latest
+$ pnpm add -g vona-cli@latest
 ```
 
-- 命令行工具：zova-cli
+2. 安装Vscode插件：[Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
 
-```bash
-$ pnpm add -g zova-cli
+该插件提供了大量菜单，用于快速创建各类资源的代码骨架
+
+## 快速开始
+
+1. 创建项目
+
+``` bash
+$ vona :create:project projectName
+$ cd projectName
 ```
 
-- VS Code插件：[Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
+2. 修改.env文件
 
-强烈建议安装此VS Code插件，从而获得更便捷、更愉悦的开发体验
+`env/.env`:
 
-### 2. 创建项目
+``` bash
+# database
+DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_CLIENT_PG_PASSWORD =
+DATABASE_CLIENT_MYSQL_PASSWORD =
 
-```bash
-$ zova :create:project projectName
+# redis
+REDIS_DEFAULT_PASSWORD =
 ```
 
-1. 直接在命令行执行`zova`创建一个项目，名称为`projectName`
-2. 命令行会列出模版列表，当前提供的模版如下：
+3. 启动开发服务
 
-   - zova + antdv
-   - zova + element-plus
-   - zova + quasar
-   - zova + vuetify
-   - zova only
-
-3. 在这里，我们选择`zova only`
-
-### 3. 安装依赖
-
-```bash
-$ pnpm install
-```
-
-### 4. 启动开发服务
-
-```bash
+``` bash
 $ npm run dev
 ```
 
-### 5. 构建项目
+4. 单元测试
 
-```bash
+``` bash
+$ npm run test
+```
+
+5. 构建
+
+``` bash
 $ npm run build
 ```
 
-### 6. 预览
+## Docker Compose
 
-```bash
-$ npm run preview
+``` bash
+$ npm run build:docker
+$ sudo docker-compose build
+$ sudo docker-compose up
 ```
