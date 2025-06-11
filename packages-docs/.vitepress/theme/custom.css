@@ -5,6 +5,9 @@
   .VPHomeHero {
     .container {
       .text {
+        max-width: 900px;
+      }
+      .tagline {
         max-width: 800px;
       }
     }
