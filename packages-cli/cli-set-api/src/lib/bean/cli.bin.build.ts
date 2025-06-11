@@ -112,6 +112,7 @@ export class CliBinBuild extends BeanCliBase {
     const replaceValues = generateConfigDefine(env, ['NODE_ENV', 'META_MODE', 'META_FLAVOR']);
 
     const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
 
     const plugins = [
       alias({
@@ -135,7 +136,7 @@ export class CliBinBuild extends BeanCliBase {
         configFile: false,
         plugins: [
           [babelPluginZovaBeanModule, { brandName: 'vona' }],
-          ['babel-plugin-transform-typescript-metadata'],
+          [babelPluginTransformTypescriptMetadata],
           ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
           ['@babel/plugin-transform-class-properties', { loose: true }],
           ['@babel/plugin-transform-typescript'],
