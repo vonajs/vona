@@ -48,8 +48,3 @@ Zova has planned the modules/suites so that we can start business development im
 | env                                  | [Env](../../techniques/env/introduction.md)                                                                   |
 | src/front/config/config              | [Config](../../techniques/config/introduction.md)                                                             |
 | src/front/config/locales.ts          | [I18n](../scope/locale.md)                                                                                    |
-| legacy                               | [Legacy Usage](../../vue/legacy.md)                                                                           |
-| src/suite/a-home/modules/home-base   | [API](../../techniques/api/introduction.md) [Navigation Guards](../../techniques/router/navigation-guards.md) |
-| src/suite/a-home/modules/home-icon   | [Icon](../../techniques/icon/icon-engine.md)                                                                  |
-| src/suite/a-home/modules/home-index  | [Route Alias](../../techniques/router/route-alias.md)                                                         |
-| src/suite/a-home/modules/home-layout | [Route Fields: meta.layout](../../techniques/router/route-fields.md#meta-layout)                              |

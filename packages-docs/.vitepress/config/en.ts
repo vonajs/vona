@@ -28,9 +28,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       text: 'Getting Started',
       items: [
-        { text: 'Introduction', link: 'start/introduction' },
         { text: 'Quick Start', link: 'start/quick-start' },
-        { text: 'VS Code Extension', link: 'start/zova-vscode' },
+        { text: 'VS Code Extension', link: 'start/vona-vscode' },
         { text: 'Update', link: 'start/update' },
       ],
     },
@@ -53,14 +52,10 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/essentials/ioc/',
           items: [
             { text: 'Introduction', link: 'introduction' },
-            { text: 'Anonymous Bean', link: 'anonymous-bean' },
-            { text: 'Named Bean: Store', link: 'store-bean' },
-            { text: 'Named Bean: General', link: 'named-bean' },
             { text: 'Bean Identifier', link: 'bean-identifier' },
             { text: 'Inject', link: 'inject' },
             { text: 'Inject(API)', link: 'inject-api' },
             { text: 'BeanBase', link: 'bean-base' },
-            { text: 'Lifecycle', link: 'lifecycle' },
           ],
         },
         {
@@ -81,29 +76,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: 'Techniques',
       items: [
-        {
-          text: 'Router',
-          base: '/guide/techniques/router/',
-          items: [
-            { text: 'Route Fields', link: 'route-fields' },
-            { text: 'Route Alias', link: 'route-alias' },
-            { text: 'Navigation Guards', link: 'navigation-guards' },
-            { text: 'Route Query', link: 'route-query' },
-            { text: 'Route Params', link: 'route-params' },
-            { text: 'zod', link: 'zod' },
-          ],
-        },
-        {
-          text: 'SSR',
-          base: '/guide/techniques/ssr/',
-          items: [
-            { text: 'Introduction', link: 'introduction' },
-            { text: 'Init Data', link: 'init-data' },
-            { text: 'ClientOnly', link: 'client-only' },
-            { text: 'SEO Meta', link: 'seo-meta' },
-            { text: 'env', link: 'env' },
-          ],
-        },
         {
           text: 'Env',
           base: '/guide/techniques/env/',

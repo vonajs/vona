@@ -36,27 +36,3 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 | $emit  | emit        |
 | $slots | slots       |
 | $attrs | attrs       |
-
-## Extended Members
-
-When a project is created, there will be some modules present in the project, providing us with basic capabilities for further development
-
-| Name                                                    | Description                                        |
-| ------------------------------------------------------- | -------------------------------------------------- |
-| [$fetch](../../techniques/api/introduction.md)            | Api object provided by module `home-base`          |
-| [$scopeBase](../../essentials/scope/introduction.md)    | Scope object provided by module `home-base`        |
-| [$css](../../techniques/css-in-js/css.md)           | Global style object provided by module `home-base` |
-| [$pinia](../../vue/pinia.md)                            | Pinia object provided by module `a-pinia`          |
-| [$queryClient](../../techniques/model/introduction.md)  | QueryClient object provided by module `a-model`    |
-| [$router](../../techniques/router/navigation-guards.md) | Router object provided by module `a-router`        |
-| [$style](../../techniques/css-in-js/style.md)           | Style method provided by module `a-style`          |
-| [$theme](../../techniques/css-in-js/theme.md)           | Theme object provided by module `a-style`          |
-| [$token](../../techniques/css-in-js/token.md)           | Token object provided by module `a-style`          |
-
-Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box. Different UI libraries will also inject objects into the `BeanBase` base class according to their own needs
-
-| 名称     | 说明                                            |
-| -------- | ----------------------------------------------- |
-| $antdv   | Provided by module `antdv-adapter` of Antdv     |
-| $q       | Provided by module `quasar-adapter` of Quasar   |
-| $vuetify | Provided by module `vuetify-adapter` of Vuetify |

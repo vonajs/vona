@@ -28,9 +28,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       text: '开始',
       items: [
-        { text: '简介', link: 'start/introduction' },
         { text: '快速上手', link: 'start/quick-start' },
-        { text: 'VS Code 插件', link: 'start/zova-vscode' },
+        { text: 'VS Code 插件', link: 'start/vona-vscode' },
         { text: '框架升级', link: 'start/update' },
       ],
     },
@@ -53,14 +52,10 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/essentials/ioc/',
           items: [
             { text: '简介', link: 'introduction' },
-            { text: '匿名Bean', link: 'anonymous-bean' },
-            { text: '具名Bean: Store', link: 'store-bean' },
-            { text: '具名Bean: 通用', link: 'named-bean' },
             { text: 'Bean标识', link: 'bean-identifier' },
             { text: '注入', link: 'inject' },
             { text: '注入(API)', link: 'inject-api' },
             { text: 'BeanBase基类', link: 'bean-base' },
-            { text: '生命周期', link: 'lifecycle' },
           ],
         },
         {
@@ -81,29 +76,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: '技术',
       items: [
-        {
-          text: '路由',
-          base: '/zh/guide/techniques/router/',
-          items: [
-            { text: '路由字段', link: 'route-fields' },
-            { text: '路由别名', link: 'route-alias' },
-            { text: '导航守卫', link: 'navigation-guards' },
-            { text: '路由Query', link: 'route-query' },
-            { text: '路由Params', link: 'route-params' },
-            { text: 'zod', link: 'zod' },
-          ],
-        },
-        {
-          text: 'SSR',
-          base: '/zh/guide/techniques/ssr/',
-          items: [
-            { text: '简介', link: 'introduction' },
-            { text: '初始化数据', link: 'init-data' },
-            { text: 'ClientOnly', link: 'client-only' },
-            { text: 'SEO Meta', link: 'seo-meta' },
-            { text: 'env', link: 'env' },
-          ],
-        },
         {
           text: 'Env环境变量',
           base: '/zh/guide/techniques/env/',
