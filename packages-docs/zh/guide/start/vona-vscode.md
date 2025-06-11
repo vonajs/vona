@@ -1,56 +1,65 @@
-# VS Code 插件: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
+# VS Code 插件: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
 
-An extension offering commands and tools to make your experience with Zova more pleasant!
+该插件提供了大量菜单，用于快速创建各类资源的代码骨架
 
-## Features
+## 特性
 
-### Zova Create
+### Vona Bean
+
+- Aop
+- Aop Method
+- Auth Provider
+- Broadcast
+- Cache Mem
+- Cache Redis
+- Database Dialect
+- Event
+- Event Listener
+- Filter
+- Global
+- Guard
+- Interceptor
+- Middleware
+- Middleware System
+- Pipe
+- Queue
+- Schedule
+- Startup
+- Summer Cache
+
+### Vona Create
 
 - Suite
 - Module
-- Page
-- Component
-- Api
-- Mock
-
-### Zova Bean
-
-- Local
+- Controller
+- Dto
+- Entity
 - Model
-- Store
-- Style
-- Theme
-- Tool
-- General
+- Service
+- Test
 
-### Zova Init
+### Vona Init
 
-- Icon
 - Config
 - Constant
-- Locale
 - Error
-- Legacy
+- Locale
+- Main
 - Monkey
+- Static Resources
 
-### Zova Refactor
+### Vona Meta
 
-- Add Page Query
-- Add Page Params
-- Rename Page
+- Election
+- Index
+- Print Tip
+- Redlock
+- static
+- Version
 
-- Add Component Props
-- Add Component Emits
-- Add Component Slots
-- Add v-model
-- Convert to Generic Component
-- Rename Component
-
-- Create Another Render Bean
-- Create Another Style Bean
-
-### Zova Tools
+### Vona Tools
 
 - Generate .metadata
+- Generate Crud
 
 **Enjoy!**
