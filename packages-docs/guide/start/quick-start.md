@@ -1,62 +1,63 @@
 # Quick Start
 
-## Creating a Zova Application
+## Preparation
 
-### 1. Prerequisites
+1. Install command-line tools
 
-- install pnpm
-
-```bash
-$ npm install -g pnpm
+``` bash
+$ pnpm add -g tsx@latest
+$ pnpm add -g vona-cli@latest
 ```
 
-- install command-line tools
+2. Install Vscode extension: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
 
-```bash
-$ pnpm add -g zova-cli
+This extension provides a large number of menus for quickly creating code skeletons for various resources
+
+## Quick Start
+
+1. Create Project
+
+``` bash
+$ vona :create:project projectName
+$ cd projectName
 ```
 
-- VS Code Extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
+2. Modify .env file
 
-It is strongly recommended to install this VS Code extension to obtain a more convenient and pleasant development experience
+`env/.env`:
 
-### 2. Create Project
+``` bash
+# database
+DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_CLIENT_PG_PASSWORD =
+DATABASE_CLIENT_MYSQL_PASSWORD =
 
-```bash
-$ zova :create:project projectName
+# redis
+REDIS_DEFAULT_PASSWORD =
 ```
 
-1. Directly execute `zova` on the command line to create a project named `projectName`
-2. The command line will output a list of templates, and the currently provided templates are as follows:
+3. Start Dev Server
 
-   - zova + antdv
-   - zova + element-plus
-   - zova + quasar
-   - zova + vuetify
-   - zova only
-
-3. Here, we choose `zova only`
-
-### 3. Install Dependencies
-
-```bash
-$ pnpm install
-```
-
-### 4. Start Dev Server
-
-```bash
+``` bash
 $ npm run dev
 ```
 
-### 5. Build
+4. Unit test
 
-```bash
+``` bash
+$ npm run test
+```
+
+5. Build
+
+``` bash
 $ npm run build
 ```
 
-### 6. Preview
+## Docker Compose
 
-```bash
-$ npm run preview
+``` bash
+$ npm run build:docker
+$ sudo docker-compose build
+$ sudo docker-compose up
 ```

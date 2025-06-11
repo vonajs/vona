@@ -4,7 +4,7 @@
 
 ### 1. 前置条件
 
-- npm 包管理器：pnpm
+- npm包管理器：pnpm
 
 ```bash
 $ npm install -g pnpm
@@ -16,9 +16,9 @@ $ npm install -g pnpm
 $ pnpm add -g zova-cli
 ```
 
-- VS Code 插件：[Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
+- VS Code插件：[Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
 
-强烈建议安装此 VS Code 插件，从而获得更便捷、更愉悦的开发体验
+强烈建议安装此VS Code插件，从而获得更便捷、更愉悦的开发体验
 
 ### 2. 创建项目
 

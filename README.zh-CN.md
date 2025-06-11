@@ -45,7 +45,7 @@ $ pnpm add -g tsx@latest
 $ pnpm add -g vona-cli@latest
 ```
 
-2. 安装Vscode插件：Vona - Official
+2. 安装Vscode插件：[Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
 
 该插件提供了大量菜单，用于快速创建各类资源的代码骨架
 
