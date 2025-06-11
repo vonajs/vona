@@ -24,7 +24,7 @@ Vona 是一款直观、优雅、强大的 Node.js 框架，用于快速开发任
 
 ## 特性
 
-[Click here](https://juejin.cn/post/7509709812857110582)
+- [Click here](https://juejin.cn/post/7509709812857110582)
 
 ## 技术栈
 

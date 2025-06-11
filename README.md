@@ -24,7 +24,7 @@ Vona is an intuitive, elegant and powerful Node.js framework for rapidly develop
 
 ## Features
 
-[Click here](https://juejin.cn/post/7509709812857110582)
+- [Click here](https://juejin.cn/post/7509709812857110582)
 
 ## Technology Stack
 
