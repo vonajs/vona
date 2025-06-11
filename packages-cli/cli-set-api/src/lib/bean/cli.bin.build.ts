@@ -14,7 +14,7 @@ import terserImport from '@rollup/plugin-terser';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
-import { generateConfigDefine, getOutDir, getOutReleasesDir } from '../utils.ts';
+import { generateConfigDefine, getAbsolutePathOfModule, getOutDir, getOutReleasesDir } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -110,6 +110,9 @@ export class CliBinBuild extends BeanCliBase {
     }
 
     const replaceValues = generateConfigDefine(env, ['NODE_ENV', 'META_MODE', 'META_FLAVOR']);
+
+    const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
+
     const plugins = [
       alias({
         entries: aliasEntries,
@@ -131,7 +134,7 @@ export class CliBinBuild extends BeanCliBase {
         babelrc: false,
         configFile: false,
         plugins: [
-          ['babel-plugin-zova-bean-module', { brandName: 'vona' }],
+          [babelPluginZovaBeanModule, { brandName: 'vona' }],
           ['babel-plugin-transform-typescript-metadata'],
           ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
           ['@babel/plugin-transform-class-properties', { loose: true }],
