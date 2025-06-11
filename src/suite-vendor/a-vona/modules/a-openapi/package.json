@@ -46,7 +46,7 @@
     "@cabloy/zod-query": "^1.0.14",
     "@zhennann/currency": "^2.0.0",
     "openapi3-ts": "^4.4.0",
-    "zod": "^3.23.8"
+    "zod": "^3.25.58"
   },
   "clean-package": {
     "indent": 2,
