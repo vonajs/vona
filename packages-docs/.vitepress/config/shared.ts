@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress';
 export const shared = defineConfig({
   title: 'Vona',
   description: 'An intuitive, elegant and powerful Node.js framework',
-  base: '/',
+  base: '/vona',
   markdown: {
     lineNumbers: true,
   },
