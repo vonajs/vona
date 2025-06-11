@@ -51,6 +51,8 @@
   "devDependencies": {
     "@cabloy/lint": "^5.0.16",
     "eslint": "^9.20.1",
-    "lerna": "^8.2.2"
+    "lerna": "^8.2.2",
+    "textlint": "^14.8.0",
+    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2"
   }
 }
