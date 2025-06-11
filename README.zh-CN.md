@@ -6,12 +6,15 @@ Vona 是一款直观、优雅、强大的Node.js框架，用于快速开发任�
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
+[![Test coverage][cov-image]][cov-url]
 [![NPM download][download-image]][download-url]
 
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: https://github.com/vonajs/vona/blob/master/LICENSE
 [npm-image]: https://img.shields.io/npm/v/vona.svg?style=flat-square
 [npm-url]: https://npmjs.com/package/vona
+[cov-image]: https://img.shields.io/codecov/c/github/vonajs/vona.svg?style=flat-square
+[cov-url]: https://app.codecov.io/github/vonajs/vona
 [download-image]: https://img.shields.io/npm/dm/vona?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/vona
 
