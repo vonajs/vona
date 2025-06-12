@@ -20,8 +20,8 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: ''
-          MYSQL_PASSWORD: ''
+          MYSQL_ROOT_PASSWORD: 'root'
+          MYSQL_PASSWORD: 'root'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -33,4 +33,4 @@ jobs:
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init
-      - run: DATABASE_DEFAULT_CLIENT=mysql DATABASE_CLIENT_MYSQL_HOST=127.0.0.1 npm run test
+      - run: DATABASE_DEFAULT_CLIENT=mysql DATABASE_CLIENT_MYSQL_HOST=127.0.0.1 DATABASE_CLIENT_MYSQL_PASSWORD=root npm run test
