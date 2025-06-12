@@ -16,11 +16,12 @@ jobs:
         ports:
           - 6379:6379
       mysql:
-        image: mysql:5.7
+        image: mysql:8.1
         ports:
-          - 3306:3306  
+          - 3306:3306
+        command: --default-authentication-plugin=mysql_native_password  
         env:
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ROOT_PASSWORD: 'root'
           MYSQL_PASSWORD: ''
     steps:
       - uses: actions/checkout@v2
@@ -33,4 +34,4 @@ jobs:
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init
-      - run: DATABASE_DEFAULT_CLIENT=mysql DATABASE_CLIENT_MYSQL_HOST=0.0.0.0 npm run test
+      - run: DATABASE_DEFAULT_CLIENT=mysql npm run test
