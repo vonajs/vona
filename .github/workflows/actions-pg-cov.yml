@@ -1,4 +1,4 @@
-name: actions-pg-test
+name: actions-pg-cov
 on:
   push:
     branches:
@@ -33,4 +33,9 @@ jobs:
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init
-      - run: npm run test
+      - run: npm run cov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
