@@ -13,25 +13,3 @@
 在跨模块注入 bean 时，我们不建议直接`基于Class类型`注入，而是`基于Bean标识`注入。基于 Bean 标识注入有以下优点：
 
 1. `避免出现循环引用出错的问题`：在复杂的业务场景中，经常会出现多个 Bean 之间相互引用的情况。基于 Bean 标识注入可以非常直观的支持循环引用的场景，不会出现错误提示，没有任何心智负担
-
-## 依赖注入：基于Class类型
-
-假设我们要在模块 home-index 的 ControllerHome 中注入模块 home-base 提供的 ServiceMenu，代码如下：
-
-``` typescript
-import { ServiceMenu } from 'vona-module-a-menu';
-export class ControllerHome {
-  @Use()
-  $$menu: ServiceMenu;
-}  
-```
-
-## 依赖注入：基于Bean标识
-
-``` typescript
-import type { ServiceMenu } from 'vona-module-a-menu';
-export class ControllerHome {
-  @Use('home-base.service.menu')
-  $$menu: ServiceMenu;
-}  
-```
