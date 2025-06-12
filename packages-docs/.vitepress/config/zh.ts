@@ -55,6 +55,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '简介', link: 'introduction' },
             { text: 'Bean标识', link: 'bean-identifier' },
             { text: '依赖注入', link: 'dependency-injection' },
+            { text: '依赖查找', link: 'dependency-lookup' },
             { text: '注入(API)', link: 'inject-api' },
             { text: 'BeanBase基类', link: 'bean-base' },
           ],
