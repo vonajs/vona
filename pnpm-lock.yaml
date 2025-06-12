@@ -251,6 +251,15 @@ importers:
       vona-module-home-user:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-user
+      vona-module-pear-dish:
+        specifier: workspace:^
+        version: link:src/suite/pear-diancan/modules/pear-dish
+      vona-module-pear-store:
+        specifier: workspace:^
+        version: link:src/suite/pear-diancan/modules/pear-store
+      vona-module-pear-table:
+        specifier: workspace:^
+        version: link:src/suite/pear-diancan/modules/pear-table
       vona-module-test-cabloy:
         specifier: workspace:^
         version: link:src/suite-vendor/test-cabloy/modules/test-cabloy
@@ -1928,6 +1937,45 @@ importers:
         version: 6.0.1
 
   src/suite/a-home/modules/home-user:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite/pear-diancan:
+    dependencies:
+      vona-module-pear-dish:
+        specifier: workspace:^
+        version: link:modules/pear-dish
+      vona-module-pear-store:
+        specifier: workspace:^
+        version: link:modules/pear-store
+      vona-module-pear-table:
+        specifier: workspace:^
+        version: link:modules/pear-table
+
+  src/suite/pear-diancan/modules/pear-dish:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite/pear-diancan/modules/pear-store:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite/pear-diancan/modules/pear-table:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
