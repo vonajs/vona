@@ -1,5 +1,5 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
-import type { IUserBase } from 'vona-module-a-user';
+import type { IUserBase, IUserNameRecord } from 'vona-module-a-user';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
@@ -25,7 +25,7 @@ export class ControllerPassport extends BeanBase {
   @Api.body(v.object(DtoJwtToken))
   @Passport.public()
   async login(@Arg.body('name') name: string): Promise<IJwtToken> {
-    const jwt = await this.bean.passport.signinMock(name);
+    const jwt = await this.bean.passport.signinMock(name as keyof IUserNameRecord);
     return jwt;
   }
 
