@@ -233,6 +233,9 @@ importers:
       vona-module-demo-book:
         specifier: workspace:^
         version: link:src/module/demo-book
+      vona-module-demo-dish:
+        specifier: workspace:^
+        version: link:src/module/demo-dish
       vona-module-demo-order:
         specifier: workspace:^
         version: link:src/module/demo-order
@@ -301,7 +304,7 @@ importers:
         specifier: ^8.2.2
         version: 8.2.2(@swc/core@1.11.29(@swc/helpers@0.5.17))(encoding@0.1.13)
       textlint:
-        specifier: ^14.2.0
+        specifier: ^14.8.0
         version: 14.8.0
       textlint-rule-ja-space-between-half-and-full-width:
         specifier: ^2.4.2
@@ -316,7 +319,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.20
+        specifier: ^6.0.21
         version: link:packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -921,6 +924,15 @@ importers:
         version: 6.0.1
 
   src/module/demo-book:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/module/demo-dish:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
