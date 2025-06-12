@@ -2,7 +2,7 @@ import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadDataBase } f
 import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
-import type { IUserBase } from '../types/user.ts';
+import type { IUserBase, IUserNameRecord } from '../types/user.ts';
 import { catchError } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -94,7 +94,7 @@ export class BeanPassport extends BeanBase {
     return await this.signin(passport, options);
   }
 
-  public async signinMock(name?: string, options?: ISigninOptions): Promise<IJwtToken> {
+  public async signinMock(name?: keyof IUserNameRecord, options?: ISigninOptions): Promise<IJwtToken> {
     return await this.signinSystem('mock', (-10000 - ++this._mockCounter) as any, name, options);
   }
 
