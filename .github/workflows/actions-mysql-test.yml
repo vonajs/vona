@@ -1,4 +1,4 @@
-name: actions-test
+name: actions-mysql-test
 on:
   push:
     branches:
@@ -15,13 +15,12 @@ jobs:
         image: redis:latest
         ports:
           - 6379:6379
-      pg:
-        image: postgres:17
+      mysql:
+        image: mysql:8.1
         ports:
-          - 5432:5432
+          - 3306:3306
         env:
-          POSTGRES_PASSWORD: ''
-          POSTGRES_HOST_AUTH_METHOD: trust
+          MYSQL_PASSWORD: ''
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -34,9 +33,3 @@ jobs:
       - run: npm i tsx -g 
       - run: npm run init
       - run: npm run test
-      - run: npm run cov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
