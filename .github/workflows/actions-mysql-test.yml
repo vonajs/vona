@@ -33,4 +33,4 @@ jobs:
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init
-      - run: DATABASE_DEFAULT_CLIENT=mysql npm run test
+      - run: DATABASE_DEFAULT_CLIENT=mysql DATABASE_CLIENT_MYSQL_HOST=0.0.0.0 npm run test
