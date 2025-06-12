@@ -1,0 +1,24 @@
+name: actions-tsc
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [24]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10    
+      - run: cp package.original.json package.json
+      - run: npm i tsx -g 
+      - run: npm run init
+      - run: npm run tsc
