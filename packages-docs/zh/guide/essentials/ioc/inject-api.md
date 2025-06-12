@@ -1,38 +1,53 @@
-# 注入(API)
+# 依赖查找(API)
 
-## @Use
+Vona 还提供了一组 API，使我们可以更加灵活的查找 bean 实例
 
-通过`@Use`装饰器函数注入 Bean 实例
+## _getBean
 
-```typescript
-export declare function Use(options?: IDecoratorUseOptions): PropertyDecorator;
-export declare function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator;
+1. 基于 Bean class 查找
+
+``` typescript
+import { ServiceMenu } from 'vona-module-home-base';
+const serviceMenu = app.bean._getBean(ServiceMenu);
 ```
 
-- 没有参数
-  - 通过 Bean Class 的类型注入
-- beanFullName
-  - 通过 Bean 标识注入
-- options: IDecoratorUseOptions
-  - 注入参数
+2. 基于 Bean 标识查找
 
-```typescript
-export interface IDecoratorUseOptions {
-  beanFullName?: keyof IBeanRecord;
-  name?: string;
-  injectionScope?: InjectionScope;
-}
+``` typescript
+const serviceMenu = app.bean._getBean('home-base.service.menu');
 ```
 
-- beanFullName
-  - Optional
-  - 通过 Bean 标识注入
-- name
-  - Optional
-  - 通过注册名注入
-- injectionScope: `app/ctx/new/host/skipSelf`
+3. 查找全局 Bean
 
-  - Optional
-  - 缺省值：使用 Bean 在定义时指定的值
+``` typescript
+import { BeanJwt } from 'vona-module-a-jwt';
+const beanJwt = app.bean._getBean(BeanJwt);
 
-- `特殊注入规则`：如果没有指定任何注入参数，而且也没有指定 Bean Class 的类型，那么就直接使用`变量名`在 bean 容器中查找已存在的 bean 实例
+const beanJwt2 = app.bean._getBean('jwt');
+
+const beanJwt3 = app.bean.jwt;
+```
+
+## _newBean
+
+1. 基于 Bean class 查找
+
+``` typescript
+import { ServiceMenu } from 'vona-module-home-base';
+const serviceMenu = app.bean._newBean(ServiceMenu);
+```
+
+2. 基于 Bean 标识查找
+
+``` typescript
+const serviceMenu = app.bean._newBean('home-base.service.menu');
+```
+
+3. 查找全局 Bean
+
+``` typescript
+import { BeanJwt } from 'vona-module-a-jwt';
+const beanJwt = app.bean._newBean(BeanJwt);
+
+const beanJwt2 = app.bean._newBean('jwt');
+```

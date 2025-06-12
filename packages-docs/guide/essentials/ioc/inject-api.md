@@ -1,38 +1,53 @@
-# Inject(API)
+# Dependency Lookup (API)
 
-## @Use
+Vona also provides a set of APIs that allow us to lookup bean instances more flexibly
 
-Inject Bean instance through `@Use` decorator function
+## _getBean
 
-```typescript
-export declare function Use(options?: IDecoratorUseOptions): PropertyDecorator;
-export declare function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator;
+1. Lookup based on Bean class
+
+``` typescript
+import { ServiceMenu } from 'vona-module-home-base';
+const serviceMenu = app.bean._getBean(ServiceMenu);
 ```
 
-- No parameters
-  - Inject through Bean Class type
-- beanFullName
-  - Inject through Bean identifier
-- options: IDecoratorUseOptions
-  - Injection parameters
+2. Lookup based on Bean identifier
 
-```typescript
-export interface IDecoratorUseOptions {
-  beanFullName?: keyof IBeanRecord;
-  name?: string;
-  injectionScope?: InjectionScope;
-}
+``` typescript
+const serviceMenu = app.bean._getBean('home-base.service.menu');
 ```
 
-- beanFullName
-  - Optional
-  - Inject through Bean identifier
-- name
-  - Optional
-  - Inject through variable name
-- injectionScope: `app/ctx/new/host/skipSelf`
+3. Lookup global beans
 
-  - Optional
-  - Default: Use the value specified when the bean is defined
+``` typescript
+import { BeanJwt } from 'vona-module-a-jwt';
+const beanJwt = app.bean._getBean(BeanJwt);
 
-- `Special injection rule`: If no injection parameters are specified and the type of the bean class is not specified, then the `variable name` is used directly to find the existing bean instance in the bean container
+const beanJwt2 = app.bean._getBean('jwt');
+
+const beanJwt3 = app.bean.jwt;
+```
+
+## _newBean
+
+1. Lookup based on Bean class
+
+``` typescript
+import { ServiceMenu } from 'vona-module-home-base';
+const serviceMenu = app.bean._newBean(ServiceMenu);
+```
+
+2. Lookup based on Bean identifier
+
+``` typescript
+const serviceMenu = app.bean._newBean('home-base.service.menu');
+```
+
+3. Lookup global beans
+
+``` typescript
+import { BeanJwt } from 'vona-module-a-jwt';
+const beanJwt = app.bean._newBean(BeanJwt);
+
+const beanJwt2 = app.bean._newBean('jwt');
+```

@@ -56,7 +56,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Bean Identifier', link: 'bean-identifier' },
             { text: 'Dependency injection', link: 'dependency-injection' },
             { text: 'Dependency lookup', link: 'dependency-lookup' },
-            { text: 'Inject(API)', link: 'inject-api' },
+            { text: 'Dependency lookup(API)', link: 'inject-api' },
             { text: 'BeanBase', link: 'bean-base' },
           ],
         },
