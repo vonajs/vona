@@ -20,7 +20,7 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: 'root'
+          MYSQL_ROOT_PASSWORD: ''
           MYSQL_PASSWORD: ''
     steps:
       - uses: actions/checkout@v2
