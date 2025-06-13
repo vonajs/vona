@@ -5,14 +5,14 @@
 ## 初始化代码骨架
 
 ::: tip
-右键菜单 - [模块路径]: `Zova Init/Locale`
+右键菜单 - [模块路径]: `Vona Init/Locale`
 :::
 
 ## 定义语言资源
 
-以模块`demo-basic`为例，定义模块的语言资源：
+以模块`home-index`为例，定义模块的语言资源：
 
-英文：`src/suite/a-demo/modules/demo-basic/src/config/locale/en-us.ts`
+英文：`src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
 
 ```typescript{2}
 export default {
@@ -20,7 +20,7 @@ export default {
 };
 ```
 
-中文：`src/suite/a-demo/modules/demo-basic/src/config/locale/zh-cn.ts`
+中文：`src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
 
 ```typescript{2}
 export default {
@@ -33,8 +33,8 @@ export default {
 可以通过 Scope 实例提供的`locale`对象获取模块的语言资源
 
 ```typescript{3-9}
-export class TestA {
-  protected async __init__() {
+class ControllerHome {
+  index() {
     // use current locale
     const message1 = this.scope.locale.HelloWorld();
     // use locale en-us
@@ -46,25 +46,17 @@ export class TestA {
 }
 ```
 
-- 动图演示
-  ![scope-locale](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-locale.gif)
-
 ## 跨模块使用语言资源
 
-```typescript{1,4-5,8-14}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
-
-  protected async __init__() {
+```typescript{3-9}
+class ControllerHome {
+  index() {
     // use current locale
-    const message1 = this.$$scopeModuleDemoBasic.locale.HelloWorld();
+    const message1 = this.$scope.homeIndex.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.$$scopeModuleDemoBasic.locale.HelloWorld.locale('en-us');
+    const message2 = this.$scope.homeIndex.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.$$scopeModuleDemoBasic.locale.HelloWorld.locale('zh-cn');
+    const message3 = this.$scope.homeIndex.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -74,24 +66,24 @@ export class TestA {
 
 可以使用`项目级别`的语言资源覆盖`模块级别`的语言资源
 
-英文：`src/front/config/locale/en-us.ts`
+英文：`src/backend/config/locale/en-us.ts`
 
 ```typescript{3-5}
 export default {
   modules: {
-    'demo-basic': {
+    'home-index': {
       HelloWorld: 'Hello World!!!',
     },
   },
 };
 ```
 
-中文：`src/front/config/locale/zh-cn.ts`
+中文：`src/backend/config/locale/zh-cn.ts`
 
 ```typescript{3-5}
 export default {
   modules: {
-    'demo-basic': {
+    'home-index': {
       HelloWorld: '您好世界!!!',
     },
   },
