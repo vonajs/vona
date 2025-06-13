@@ -5,21 +5,21 @@
 ## 初始化代码骨架
 
 ::: tip
-右键菜单 - [模块路径]: `Zova Init/Config`
+右键菜单 - [模块路径]: `Vona Init/Config`
 :::
 
 ## 定义Config
 
-以模块`demo-basic`为例，定义模块的 Config 配置：
+以模块`home-index`为例，定义模块的 Config 配置：
 
-`src/suite/a-demo/modules/demo-basic/src/config/config.ts`
+`src/suite/a-home/modules/home-index/src/config/config.ts`
 
 ```typescript{3}
-export const config = (_sys: ZovaSys) => {
+export function config(_app: VonaApplication) {
   return {
-    prompt: 'Hello World',
+    title: 'Hello World',
   };
-};
+}
 ```
 
 - 直接定义所需要的配置字段即可，系统会自动提取 Config 的类型信息
@@ -28,30 +28,20 @@ export const config = (_sys: ZovaSys) => {
 
 可以通过 Scope 实例获取模块的 Config 配置
 
-```typescript{3-4}
-export class TestA {
-  protected async __init__() {
-    const message = this.scope.config.prompt;
-    console.log(message);
+```typescript{3}
+class ControllerHome {
+  index() {
+    console.log(this.scope.config.title);
   }
 }
 ```
 
-- 动图演示
-  ![scope-config](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-config.gif)
-
 ## 跨模块使用Config
 
-```typescript{1,4-5,8-9}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
-
-  protected async __init__() {
-    const message = this.$$scopeModuleDemoBasic.config.prompt;
-    console.log(message);
+```typescript{3}
+class ControllerHome {
+  index() {
+    console.log(this.$scope.homeIndex.config.title);
   }
 }
 ```
@@ -60,16 +50,16 @@ export class TestA {
 
 可以使用`项目级别`的 Config 配置覆盖`模块级别`的 Config 配置
 
-`src/front/config/config/config.ts`
+`src/backend/config/config/config.ts`
 
 ```typescript{6-8}
-export default function (_sys: ZovaSys) {
-  const config: ZovaConfigOptional = {};
+export default function (_appInfo: VonaAppInfo) {
+  const config = {} as VonaConfigOptional;
 
   // modules
   config.modules = {
-    'demo-basic': {
-      prompt: 'Hello World!!!',
+    'home-index': {
+      title: 'Hello World!!',
     },
   };
 
@@ -77,4 +67,4 @@ export default function (_sys: ZovaSys) {
 }
 ```
 
-- 将模块`demo-basic`的`prompt`修改为`Hello World!!!`
+- 将模块`home-index`的`title`修改为`Hello World!!`

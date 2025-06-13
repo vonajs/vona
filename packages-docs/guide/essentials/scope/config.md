@@ -5,21 +5,21 @@ Modules can individually provide their own `Config` configuration
 ## Initialize code skeleton
 
 ::: tip
-Context Menu - [Module Path]: `Zova Init/Config`
+Context Menu - [Module Path]: `Vona Init/Config`
 :::
 
 ## Define Config
 
-Taking the module `demo-basic` as an example, define the `Config` configuration of the module:
+Taking the module `home-index` as an example, define the `Config` configuration of the module:
 
-`src/suite/a-demo/modules/demo-basic/src/config/config.ts`
+`src/suite/a-home/modules/home-index/src/config/config.ts`
 
 ```typescript{3}
-export const config = (_sys: ZovaSys) => {
+export function config(_app: VonaApplication) {
   return {
-    prompt: 'Hello World',
+    title: 'Hello World',
   };
-};
+}
 ```
 
 - Just define the required configuration fields directly, and the system will automatically extract the type information of config
@@ -28,30 +28,20 @@ export const config = (_sys: ZovaSys) => {
 
 The `Config` configuration of the module can be obtained through the `Scope` instance
 
-```typescript{3-4}
-export class TestA {
-  protected async __init__() {
-    const message = this.scope.config.prompt;
-    console.log(message);
+```typescript{3}
+class ControllerHome {
+  index() {
+    console.log(this.scope.config.title);
   }
 }
 ```
 
-- Gif Demonstration
-  ![scope-config](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-config.gif)
-
 ## Use Config cross-module
 
-```typescript{1,4-5,8-9}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
-
-  protected async __init__() {
-    const message = this.$$scopeModuleDemoBasic.config.prompt;
-    console.log(message);
+```typescript{3}
+class ControllerHome {
+  index() {
+    console.log(this.$scope.homeIndex.config.title);
   }
 }
 ```
@@ -60,16 +50,16 @@ export class TestA {
 
 You can use `project-level` Config to override `module-level` Config
 
-`src/front/config/config/config.ts`
+`src/backend/config/config/config.ts`
 
 ```typescript{6-8}
-export default function (_sys: ZovaSys) {
-  const config: ZovaConfigOptional = {};
+export default function (_appInfo: VonaAppInfo) {
+  const config = {} as VonaConfigOptional;
 
   // modules
   config.modules = {
-    'demo-basic': {
-      prompt: 'Hello World!!!',
+    'home-index': {
+      title: 'Hello World!!',
     },
   };
 
@@ -77,4 +67,4 @@ export default function (_sys: ZovaSys) {
 }
 ```
 
-- Change the `prompt` of the module `demo-basic` to `Hello World!!!`
+- Change the `title` of the module `home-index` to `Hello World!!`
