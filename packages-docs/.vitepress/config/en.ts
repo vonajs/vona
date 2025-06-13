@@ -73,6 +73,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Error Exception', link: 'error' },
             { text: 'Service', link: 'service' },
             { text: 'Model', link: 'model' },
+            { text: 'Entity', link: 'entity' },
           ],
         },
       ],
