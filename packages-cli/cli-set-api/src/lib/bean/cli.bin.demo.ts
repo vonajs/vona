@@ -8,6 +8,7 @@ import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     flavor?: VonaMetaFlavor;
+    retainRuntime?: boolean;
   }
 }
 
@@ -26,7 +27,7 @@ export class CliBinDemo extends BeanCliBase {
     const mode: VonaMetaMode = 'local';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
-    if (!fse.existsSync(path.join(projectPath, '.vona'))) {
+    if (!argv.retainRuntime || !fse.existsSync(path.join(projectPath, '.vona'))) {
       const configOptions: VonaBinConfigOptions = {
         appDir: projectPath,
         runtimeDir: '.vona',
