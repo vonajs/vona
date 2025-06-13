@@ -30,7 +30,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'start/introduction' },
         { text: 'Quick Start', link: 'start/quick-start' },
-        { text: 'VS Code Extension', link: 'start/vona-vscode' },
+        { text: 'Cli Commands', link: 'start/cli' },
+        { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Update', link: 'start/update' },
       ],
     },

@@ -30,7 +30,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: '简介', link: 'start/introduction' },
         { text: '快速上手', link: 'start/quick-start' },
-        { text: 'VS Code 插件', link: 'start/vona-vscode' },
+        { text: 'Cli命令', link: 'start/cli' },
+        { text: '菜单命令', link: 'start/menu' },
         { text: '框架升级', link: 'start/update' },
       ],
     },
