@@ -5,14 +5,14 @@ Modules can individually provide their own `Constant`
 ## Initialize code skeleton
 
 ::: tip
-Context Menu - [Module Path]: `Zova Init/Constant`
+Context Menu - [Module Path]: `Vona Init/Constant`
 :::
 
 ## Define Constant
 
-Taking the module `demo-basic` as an example, define the `Constant` of the module:
+Taking the module `home-index` as an example, define the `Constant` of the module:
 
-`src/suite/a-demo/modules/demo-basic/src/config/constants.ts`
+`src/suite/a-home/modules/home-index/src/config/constants.ts`
 
 ```typescript{2-5}
 export const constants = {
@@ -29,32 +29,22 @@ export const constants = {
 
 The `Constant` of the module can be obtained through the `Scope` instance
 
-```typescript{3-5}
-export class TestA {
-  protected async __init__() {
-    const male = this.scope.constant.gender.male;
-    const female = this.scope.constant.gender.female;
-    console.log(male, female);
+```typescript{3-4}
+class ControllerHome {
+  index() {
+    console.log(this.scope.constant.gender.male);
+    console.log(this.scope.constant.gender.female);
   }
 }
 ```
 
-- Gif Demonstration
-  ![scope-constant](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-constant.gif)
-
 ## Use Constant cross-module
 
-```typescript{1,4-5,8-10}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
-
-  protected async __init__() {
-    const male = this.$$scopeModuleDemoBasic.constant.gender.male;
-    const female = this.$$scopeModuleDemoBasic.constant.gender.female;
-    console.log(male, female);
+```typescript{3-4}
+class ControllerHome {
+  index() {
+    console.log(this.$scope.homeIndex.constant.gender.male);
+    console.log(this.$scope.homeIndex.constant.gender.female);
   }
 }
 ```

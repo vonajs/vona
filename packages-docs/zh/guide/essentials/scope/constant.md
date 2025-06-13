@@ -5,14 +5,14 @@
 ## 初始化代码骨架
 
 ::: tip
-右键菜单 - [模块路径]: `Zova Init/Constant`
+右键菜单 - [模块路径]: `Vona Init/Constant`
 :::
 
 ## 定义Constant
 
-以模块`demo-basic`为例，定义模块的 Constant 常量：
+以模块`home-index`为例，定义模块的 Constant 常量：
 
-`src/suite/a-demo/modules/demo-basic/src/config/constants.ts`
+`src/suite/a-home/modules/home-index/src/config/constants.ts`
 
 ```typescript{2-5}
 export const constants = {
@@ -29,32 +29,22 @@ export const constants = {
 
 可以通过 Scope 实例获取模块的 Constant 常量
 
-```typescript{3-5}
-export class TestA {
-  protected async __init__() {
-    const male = this.scope.constant.gender.male;
-    const female = this.scope.constant.gender.female;
-    console.log(male, female);
+```typescript{3-4}
+class ControllerHome {
+  index() {
+    console.log(this.scope.constant.gender.male);
+    console.log(this.scope.constant.gender.female);
   }
 }
 ```
 
-- 动图演示
-  ![scope-constant](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-constant.gif)
-
 ## 跨模块使用Constant
 
-```typescript{1,4-5,8-10}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
-
-  protected async __init__() {
-    const male = this.$$scopeModuleDemoBasic.constant.gender.male;
-    const female = this.$$scopeModuleDemoBasic.constant.gender.female;
-    console.log(male, female);
+```typescript{3-4}
+class ControllerHome {
+  index() {
+    console.log(this.$scope.homeIndex.constant.gender.male);
+    console.log(this.$scope.homeIndex.constant.gender.female);
   }
 }
 ```
