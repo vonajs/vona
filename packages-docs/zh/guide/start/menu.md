@@ -1,8 +1,12 @@
-# VS Code 插件: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
+# 菜单命令
 
-该插件提供了大量菜单，用于快速创建各类资源的代码骨架
+Vona 在 Cli 命令的基础上提供了大量菜单命令，通过菜单来执行 Cli 命令，从而显著降低心智负担，提升开发体验
 
-## 特性
+## VS Code 插件: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
+
+为了使用菜单命令，需要安装该插件
+
+## 菜单清单
 
 ### Vona Bean
 

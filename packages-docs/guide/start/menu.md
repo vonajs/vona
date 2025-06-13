@@ -1,8 +1,12 @@
-# VS Code Extension: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
+# Menu Commands
 
-This extension provides a large number of menus for quickly creating code skeletons for various resources
+Vona provides a large number of menu commands based on Cli commands. Cli commands can be executed through menus, which significantly reduces the mental burden and improves the development experience
 
-## Features
+## VS Code Extension: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
+
+In order to use menu commands, you need to install this extension
+
+## Menu cheat sheet
 
 ### Vona Bean
 
