@@ -5,6 +5,7 @@ import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
+import { getAbsolutePathOfModule } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -36,6 +37,9 @@ export class CliBinTest extends BeanCliBase {
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
+    if (argv.coverage) {
+      await this._outputCoverageReportViewer(projectPath);
+    }
     await rimraf(path.join(projectPath, '.vona'));
   }
 
@@ -57,6 +61,20 @@ export class CliBinTest extends BeanCliBase {
       args.push('--import=why-is-node-running/include');
     }
     args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
+    await this.helper.spawnExe({
+      cmd: 'node',
+      args,
+      options: {
+        cwd: projectPath,
+      },
+    });
+  }
+
+  async _outputCoverageReportViewer(projectPath: string) {
+    // lcovCliFile
+    const lcovCliFile = getAbsolutePathOfModule('@lcov-viewer/cli/lib/index.js', '');
+    // run
+    const args: string[] = [lcovCliFile, 'lcov', '-o', './coverage/report', './coverage/lcov.info'];
     await this.helper.spawnExe({
       cmd: 'node',
       args,

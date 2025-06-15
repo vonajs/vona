@@ -95,9 +95,9 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
     if (coverage) {
       const reporterDir = path.join(projectPath, 'coverage');
       fse.ensureDirSync(reporterDir);
-      const reporter = createWriteStream(path.join(reporterDir, 'lcov.info'));
+      const reporterLcov = createWriteStream(path.join(reporterDir, 'lcov.info'));
       testStream.compose(lcov)
-        .pipe(reporter);
+        .pipe(reporterLcov);
     } else {
       testStream.compose(tap)
         .pipe(process.stdout);
