@@ -2,7 +2,7 @@ import { createWriteStream } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
-import { lcov, tap } from 'node:test/reporters';
+import { lcov, spec } from 'node:test/reporters';
 import { sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
 import fse from 'fs-extra';
@@ -99,7 +99,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       testStream.compose(lcov)
         .pipe(reporterLcov);
     } else {
-      testStream.compose(tap)
+      testStream.compose(spec)
         .pipe(process.stdout);
     }
   });
