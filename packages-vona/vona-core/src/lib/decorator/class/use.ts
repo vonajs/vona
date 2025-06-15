@@ -25,7 +25,9 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
     let beanFullName: string | undefined = options.beanFullName;
     if (!beanFullName) {
       beanFullName = appResource.getBeanFullName(beanClass);
-      if (!beanFullName) throw new Error(`beanFullName not found for: ${beanClass.name}`);
+      if (!beanFullName) {
+        throw new Error(`@Use not found valid beanFullName for: ${target.constructor.name}.${String(prop)}`);
+      }
     }
     // record
     appResource.addUse(target, {
