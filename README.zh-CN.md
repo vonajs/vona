@@ -20,7 +20,7 @@ Vona 是一款直观、优雅、强大的 Node.js 框架，用于快速开发任
 
 ## 文档
 
-- [快速开始](https://vona.js.org/guide/start/introduction.html)
+- [快速上手](https://vona.js.org/zh/guide/start/quick-start.html)
 
 ## 特性
 
@@ -39,68 +39,6 @@ Vona 是一款直观、优雅、强大的 Node.js 框架，用于快速开发任
 
 * Redis: 必须
 * MySQL/Postgresql: 选择一个你想用的
-
-## 准备工作
-
-1. 安装命令行工具
-
-``` bash
-$ pnpm add -g tsx@latest
-$ pnpm add -g vona-cli@latest
-```
-
-2. 安装 Vscode 插件：[Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
-
-该插件提供了大量菜单，用于快速创建各类资源的代码骨架
-
-## 快速开始
-
-1. 创建项目
-
-``` bash
-$ vona :create:project projectName
-$ cd projectName
-```
-
-2. 修改.env 文件
-
-`env/.env`:
-
-``` bash
-# database
-DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
-DATABASE_CLIENT_PG_PASSWORD =
-DATABASE_CLIENT_MYSQL_PASSWORD =
-
-# redis
-REDIS_DEFAULT_PASSWORD =
-```
-
-3. 启动开发服务
-
-``` bash
-$ npm run dev
-```
-
-4. 单元测试
-
-``` bash
-$ npm run test
-```
-
-5. 构建
-
-``` bash
-$ npm run build
-```
-
-## Docker Compose
-
-``` bash
-$ npm run build:docker
-$ sudo docker-compose build
-$ sudo docker-compose up
-```
 
 ## 联系方式
 
