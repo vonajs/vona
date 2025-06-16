@@ -59,15 +59,28 @@ export class ServiceBody extends BeanBase {
     return await parser[bodyType](ctx.req, parserOptions);
   }
 
-  async respond(body: any, contentType?: TypeResponseContentType) {
+  async respond(body: any, contentType?: TypeResponseContentType, httpCode?: number) {
+    if (!httpCode) httpCode = this.getResponseHttpCode(200);
     if (!contentType) contentType = this.getResponseContentType();
     if (contentType === 'application/json') {
       this.app.success(body);
+      this.ctx.response.status = httpCode;
     } else {
-      this.ctx.response.status = 200;
+      this.ctx.response.status = httpCode;
       this.ctx.response.type = contentType;
       this.ctx.response.body = body;
     }
+  }
+
+  getResponseHttpCode(defaultCode: number = 200): number {
+    let httpCode: number | undefined;
+    const controller = this.ctx.getController();
+    if (controller) {
+      const handlerName = this.ctx.getHandlerName();
+      const options = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      httpCode = options?.httpCode;
+    }
+    return httpCode ?? defaultCode;
   }
 
   getResponseContentType(): TypeResponseContentType {

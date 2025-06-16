@@ -11,6 +11,14 @@ export function setPublic(target: object, prop?: MetadataKey, _descriptor?: Prop
   options.public = value;
 }
 
+function httpCode(httpCode: number): MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    options.httpCode = httpCode;
+    return descriptor;
+  } as any;
+}
+
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
@@ -78,4 +86,4 @@ function headers(headers: IOpenApiHeader[]): ClassDecorator & MethodDecorator {
   } as any;
 }
 
-export const Api = { field: Field, contentType, body, bodyCustom, exclude, tags, header, headers };
+export const Api = { field: Field, httpCode, contentType, body, bodyCustom, exclude, tags, header, headers };

@@ -15,6 +15,7 @@ export interface IOpenApiOptions {
   public?: boolean;
   description?: string;
   summary?: string;
+  httpCode?: number;
   contentType?: TypeResponseContentType;
   bodySchema?: z.ZodSchema;
   bodySchemaWrapper?: SchemaLikeCreate | false;
