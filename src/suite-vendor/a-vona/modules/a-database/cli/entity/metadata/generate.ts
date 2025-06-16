@@ -6,10 +6,12 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const contentColumns: string[] = [];
   const contentFields: string[] = [];
   for (const globFile of globFiles) {
-    const { className, beanName } = globFile;
+    const { className, beanName, fileContent } = globFile;
     const opionsName = `IEntityOptions${toUpperCaseFirstChar(beanName)}`;
+    const tableName = __parseTableName(fileContent);
     contentColumns.push(`
     export interface ${className} {
+      get $table(): '${tableName}';
       $column: <K extends keyof Omit<${className}, '$column' | '$columns' | '$table'>>(column: K) => K;
       $columns: <K extends keyof Omit<${className}, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
     }`);
@@ -28,4 +30,15 @@ declare module 'vona-module-${moduleName}' {
 /** ${sceneName}: end */
 `;
   return content;
+}
+
+function __parseTableName(fileContent: string): string | false {
+  let matched = fileContent.match(/@Entity<.*?>\(\{[\s\S]*?table: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
+  if (!matched) {
+    matched = fileContent.match(/@Entity<.*?>\(([^)]*)\)/);
+  }
+  if (!matched) return false;
+  const controllerPath = matched[1];
+  if (controllerPath === '') return '';
+  return controllerPath.split(',')[0].replaceAll("'", '');
 }
