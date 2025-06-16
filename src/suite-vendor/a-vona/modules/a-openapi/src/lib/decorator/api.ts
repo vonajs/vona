@@ -86,4 +86,19 @@ function headers(headers: IOpenApiHeader[]): ClassDecorator & MethodDecorator {
   } as any;
 }
 
-export const Api = { field: Field, httpCode, contentType, body, bodyCustom, exclude, tags, header, headers };
+function setHeader(field: { [key: string]: string | string[] }): ClassDecorator & MethodDecorator;
+function setHeader(field: string, val: string | string[]): ClassDecorator & MethodDecorator;
+function setHeader(field: any, val?: any): ClassDecorator & MethodDecorator {
+  return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+    if (!options.setHeaders) options.setHeaders = {};
+    if (typeof field === 'string') {
+      options.setHeaders[field] = val;
+    } else {
+      Object.assign(options.setHeaders, field);
+    }
+    return descriptor;
+  } as any;
+}
+
+export const Api = { field: Field, httpCode, contentType, body, bodyCustom, exclude, tags, header, headers, setHeader };

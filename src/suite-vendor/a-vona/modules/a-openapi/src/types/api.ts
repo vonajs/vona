@@ -23,6 +23,7 @@ export interface IOpenApiOptions {
   tags?: string[];
   operationId?: string;
   headers?: IOpenApiHeader[];
+  setHeaders?: { [key: string]: string | string[] };
 }
 
 export type TypeGenerateJsonScene = 'api' | 'rest';
