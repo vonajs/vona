@@ -12,4 +12,17 @@ vona :tools:crud student --module=demo-student
 
 ## 菜单命令
 
+::: tip
+右键菜单 - [模块路径]: `Vona Tools/Generate Crud`
+:::
 
+## 目录结构
+
+|名称|描述|
+|--|--|
+|||
+|||
+|||
+|||
+|||
+|||
