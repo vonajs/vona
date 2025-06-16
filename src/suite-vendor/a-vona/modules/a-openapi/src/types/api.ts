@@ -11,6 +11,8 @@ export interface IOpenApiHeader {
   description?: string;
 }
 
+export interface IResponseHeaders { [key: string]: string | string[] }
+
 export interface IOpenApiOptions {
   public?: boolean;
   description?: string;
@@ -23,7 +25,7 @@ export interface IOpenApiOptions {
   tags?: string[];
   operationId?: string;
   headers?: IOpenApiHeader[];
-  setHeaders?: { [key: string]: string | string[] };
+  setHeaders?: IResponseHeaders;
 }
 
 export type TypeGenerateJsonScene = 'api' | 'rest';

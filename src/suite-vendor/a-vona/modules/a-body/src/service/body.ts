@@ -1,4 +1,4 @@
-import type { IOpenApiOptions, TypeResponseContentType } from 'vona-module-a-openapi';
+import type { IOpenApiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapi';
 import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
 import parser from 'co-body';
 import { appMetadata, BeanBase } from 'vona';
@@ -59,6 +59,12 @@ export class ServiceBody extends BeanBase {
     return await parser[bodyType](ctx.req, parserOptions);
   }
 
+  async setHeaders() {
+    const headers = this.getResponseHeaders();
+    if (!headers) return;
+    this.ctx.set(headers);
+  }
+
   async respond(body: any, contentType?: TypeResponseContentType, httpCode?: number) {
     if (!httpCode) httpCode = this.getResponseHttpCode(200);
     if (!contentType) contentType = this.getResponseContentType();
@@ -69,6 +75,15 @@ export class ServiceBody extends BeanBase {
       this.ctx.response.status = httpCode;
       this.ctx.response.type = contentType;
       this.ctx.response.body = body;
+    }
+  }
+
+  getResponseHeaders(): IResponseHeaders | undefined {
+    const controller = this.ctx.getController();
+    if (controller) {
+      const handlerName = this.ctx.getHandlerName();
+      const options = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      return options?.setHeaders;
     }
   }
 
