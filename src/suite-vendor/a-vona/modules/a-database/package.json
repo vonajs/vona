@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-database",
   "type": "module",
-  "version": "5.0.23",
+  "version": "5.0.24",
   "title": "a-database",
   "vonaModule": {
     "capabilities": {

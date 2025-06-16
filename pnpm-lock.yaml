@@ -27,7 +27,7 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/utils':
-        specifier: ^1.0.26
+        specifier: ^1.0.27
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -283,7 +283,7 @@ importers:
         version: 3.25.61
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.29
+        specifier: ^3.0.30
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -328,7 +328,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.22
+        specifier: ^6.0.23
         version: link:packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -422,7 +422,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.70
+        specifier: ^1.0.71
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -824,7 +824,7 @@ importers:
         specifier: ^5.0.23
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.33
+        specifier: ^5.0.34
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1146,7 +1146,7 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-bean
       vona-module-a-body:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-body
       vona-module-a-broadcast:
         specifier: ^5.0.11
@@ -1158,7 +1158,7 @@ importers:
         specifier: ^5.0.30
         version: link:modules/a-core
       vona-module-a-database:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-database
       vona-module-a-databasedialect:
         specifier: ^5.0.11
@@ -1200,7 +1200,7 @@ importers:
         specifier: ^5.0.13
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.16
+        specifier: ^5.0.17
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.11
