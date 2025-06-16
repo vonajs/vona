@@ -33,6 +33,17 @@ ShortName: {providerId}-{moduleName}
 
 ## Create Module
 
+### 1. Cli command
+
+``` bash
+$ vona :create:module moduleName [--suite=]
+```
+
+- moduleName: this name of module
+- suite: this name of suite, maybe empty
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Project Path/src/module]: `Vona Create/Module`
 
@@ -43,4 +54,4 @@ Context Menu - [Project Path/src/suite/suite-name/modules]: `Vona Create/Module`
 Context Menu - [Project Path/src/suite-vendor/suite-name/modules]: `Vona Create/Module`
 :::
 
-Enter the module name according to the prompt, such as `test-home`, and the VSCode extension will automatically create the code skeleton of the module
+Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module

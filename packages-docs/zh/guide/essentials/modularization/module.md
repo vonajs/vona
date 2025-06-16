@@ -34,6 +34,17 @@
 
 ## 新建模块
 
+### 1. Cli 命令
+
+``` bash
+$ vona :create:module moduleName [--suite=]
+```
+
+- moduleName：模块名称
+- suite：套件名称，允许为空
+
+### 2. 菜单命令
+
 ::: tip
 右键菜单 - [项目路径/src/module]: `Vona Create/Module`
 
@@ -44,4 +55,4 @@
 右键菜单 - [项目路径/src/suite-vendor/suite-name/modules]: `Vona Create/Module`
 :::
 
-依据提示输入模块的名称，比如`test-home`，VSCode 插件会自动创建模块的代码骨架
+依据提示输入模块的名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架
