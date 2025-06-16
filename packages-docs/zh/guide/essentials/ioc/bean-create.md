@@ -4,12 +4,12 @@
 
 ## 举例：创建Service Bean
 
-在模块 home-index 中创建一个 Service Bean：Role
+在模块 demo-student 中创建一个 Service Bean：`student`
 
 ### 1. Cli 命令
 
 ``` bash
-$ vona :create:bean service role --module=home-index
+$ vona :create:bean service student --module=demo-student
 ```
 
 ### 2. 菜单命令
@@ -20,12 +20,12 @@ $ vona :create:bean service role --module=home-index
 
 ## 举例：创建全局Bean
 
-在模块 home-index 中创建一个全局 Bean：Test
+在模块 demo-student 中创建一个全局 Bean：`test`
 
 ### 1. Cli 命令
 
 ``` bash
-$ vona :create:bean bean test --module=home-index
+$ vona :create:bean bean test --module=demo-student
 ```
 
 ### 2. 菜单命令

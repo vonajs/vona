@@ -4,10 +4,10 @@ Vona provides a large number of Cli commands for generating code skeletons for v
 
 ## Example
 
-Create a Service: Role in the module home-index, the command is as follows:
+Create a Service: `student` in the module demo-student, the command is as follows:
 
 ``` bash
-$ vona :create:bean service role --module=home-index
+$ vona :create:bean service student --module=demo-student
 ```
 
 ## Command usage
