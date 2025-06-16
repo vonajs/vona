@@ -18,12 +18,10 @@ $ vona :create:bean controller student --module=demo-student
 
 ## Controller定义
 
-``` typescript
-export interface IControllerOptionsStudent extends IDecoratorControllerOptions {}
-
+``` typescript{1,3}
 @Controller<IControllerOptionsStudent>('student')
 export class ControllerStudent extends BeanBase {
-  @Web.post()
+  @Web.post('')
   @Api.body(v.object(EntityStudent))
   async create(@Arg.body() student: DtoStudentCreate): Promise<EntityStudent> {
     return await this.scope.service.student.create(student);
@@ -31,15 +29,12 @@ export class ControllerStudent extends BeanBase {
 }
 ```
 
-- IControllerOptionsStudent: 用于提供 Controller 的扩展信息
-- @Controller: Controller 装饰器
-- 'student': 控制器的 Path
-- ControllerStudent: Controller Class，继承自基类 BeanBase
-- create method: Controller Action
+- Controller Path: `'student'`
+- Action Path : `''`
 
 ## 路由
 
-通过装饰器设置的路由，会自动注册到系统路由表中。路由地址由 Controller Path 和 Action Path 组合而成
+通过装饰器设置的路由，会自动注册到系统路由表中。路由路径由 Controller Path 和 Action Path 组合而成
 
 ### 常规格式
 

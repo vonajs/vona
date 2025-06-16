@@ -16,14 +16,12 @@ $ vona :create:bean controller student --module=demo-student
 Context Menu - [Module Path]: `Vona Create/Controller`
 :::
 
-## Controller definition
+## Controller Definition
 
-``` typescript
-export interface IControllerOptionsStudent extends IDecoratorControllerOptions {}
-
+``` typescript{1,3}
 @Controller<IControllerOptionsStudent>('student')
 export class ControllerStudent extends BeanBase {
-  @Web.post()
+  @Web.post('')
   @Api.body(v.object(EntityStudent))
   async create(@Arg.body() student: DtoStudentCreate): Promise<EntityStudent> {
     return await this.scope.service.student.create(student);
@@ -31,11 +29,8 @@ export class ControllerStudent extends BeanBase {
 }
 ```
 
-- IControllerOptionsStudent: used to provide extended information of Controller
-- @Controller: Controller decorator
-- 'student': Controller's Path
-- ControllerStudent: Controller Class, inherited from the base class BeanBase
-- create method: Controller Action
+- Controller Path: `'student'`
+- Action Path : `''`
 
 ## Routes
 
