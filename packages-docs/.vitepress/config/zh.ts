@@ -32,6 +32,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: '快速上手', link: 'start/quick-start' },
         { text: 'Cli命令', link: 'start/cli' },
         { text: '菜单命令', link: 'start/menu' },
+        { text: 'Demo练习场', link: 'start/demo' },
         { text: '框架升级', link: 'start/update' },
       ],
     },
@@ -74,6 +75,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Service', link: 'service' },
             { text: 'Model', link: 'model' },
             { text: 'Entity', link: 'entity' },
+          ],
+        },
+        {
+          text: 'API',
+          base: '/zh/guide/essentials/api/',
+          items: [
+            { text: '创建CRUD', link: 'crud' },
+            { text: 'Controller', link: 'controller' },
           ],
         },
       ],

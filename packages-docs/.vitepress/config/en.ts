@@ -32,6 +32,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Quick Start', link: 'start/quick-start' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
+        { text: 'Demo Playground', link: 'start/demo' },
         { text: 'Update', link: 'start/update' },
       ],
     },
@@ -74,6 +75,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Service', link: 'service' },
             { text: 'Model', link: 'model' },
             { text: 'Entity', link: 'entity' },
+          ],
+        },
+        {
+          text: 'API',
+          base: '/guide/essentials/api/',
+          items: [
+            { text: 'Create CRUD', link: 'crud' },
+            { text: 'Controller', link: 'controller' },
           ],
         },
       ],
