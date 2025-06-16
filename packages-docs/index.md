@@ -16,7 +16,7 @@ hero:
 
 features:
   - title: IOC Container
-    details: The IOC container provided by Vona has a clearer concept and more powerful functions, which is a powerful tool for the development of large-scale business systems
+    details: Recommended to use the `dependency lookup` strategy, so as to use fewer decorator functions and fewer type annotations, making the IOC container more concise and intuitive
   - title: AOP
     details: Provides more complete Aop programming capabilities, including pre-controller-action aspect, subject aspect, and object aspect
   - title: Multi-tenancy

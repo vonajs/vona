@@ -16,7 +16,7 @@ hero:
 
 features:
   - title: IOC容器
-    details: Vona提供的IOC容器概念更加清晰，功能更加强大，是应对大型业务系统开发的利器
+    details: 优先使用`依赖查找`策略，从而使用更少的装饰器函数，使用更少的类型标注，从而让IOC容器更加简洁、直观
   - title: AOP
     details: 提供了更加完善的Aop编程能力，包括前置切面、主体切面、客体切面
   - title: 多租户
