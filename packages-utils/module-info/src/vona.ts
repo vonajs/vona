@@ -1,4 +1,4 @@
-export type VonaMetaFlavor = 'normal' | 'docker' | keyof VonaMetaFlavorExtend;
+export type VonaMetaFlavor = 'normal' | 'docker' | 'ci' | keyof VonaMetaFlavorExtend;
 export type VonaMetaMode = 'local' | 'prod' | 'test';
 export interface VonaConfigMeta {
   flavor: VonaMetaFlavor;
