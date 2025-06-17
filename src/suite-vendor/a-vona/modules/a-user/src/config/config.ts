@@ -12,6 +12,7 @@ export function config(_app: VonaApplication) {
       passport: 'home-user:passportAdapter' as keyof IServiceRecord,
       userInner: 'home-user:userInnerAdapter' as keyof IServiceRecord,
       authInner: 'home-user:authInnerAdapter' as keyof IServiceRecord,
+      roleInner: 'home-user:roleInnerAdapter' as keyof IServiceRecord,
     },
   };
 }

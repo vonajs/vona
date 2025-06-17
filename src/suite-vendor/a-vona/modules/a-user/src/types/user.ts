@@ -25,8 +25,8 @@ export interface IUserAdapter {
 export interface IUserInnerAdapter {
   createByProfile(profile: IAuthUserProfile): Promise<IUserBase>;
   createAnonymous(): Promise<IUserBase>;
-  getByName(name: string): Promise<IUserBase | undefined>;
-  get(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
+  findOneByName(name: string): Promise<IUserBase | undefined>;
+  findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   update(user: Partial<IUserBase>): Promise<void>;
-  delete(user: Partial<IUserBase>): Promise<void>;
+  remove(user: Partial<IUserBase>): Promise<void>;
 }
