@@ -2,6 +2,7 @@ import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadDataBase } f
 import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
+import type { IRoleBase } from '../types/role.ts';
 import type { IUserBase, IUserNameRecord } from '../types/user.ts';
 import { catchError } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -55,6 +56,10 @@ export class BeanPassport extends BeanBase {
 
   public getCurrentAuth(): IAuthBase | undefined {
     return this.ctx.state.passport?.auth;
+  }
+
+  public getCurrentRoles(): IRoleBase[] | undefined {
+    return this.ctx.state.passport?.roles;
   }
 
   public async signin(passport: IPassportBase, options?: ISigninOptions): Promise<IJwtToken> {
