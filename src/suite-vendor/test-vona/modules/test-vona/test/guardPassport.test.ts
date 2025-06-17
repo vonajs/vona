@@ -4,6 +4,25 @@ import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('guardPassport.test.ts', () => {
+  it('action:guardPassport:userName', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      const jwt = await app.bean.passport.signinMock();
+      const res = await app.bean.executor.performAction('get', '/test/vona/guardPassport/testUserName', {
+        innerAccess: false,
+        authToken: jwt.accessToken,
+      });
+      assert.equal(res, undefined);
+      const [_, err] = await catchError(() => {
+        return app.bean.executor.performAction('get', '/test/vona/guardPassport/testUserNameFail', {
+          innerAccess: false,
+          authToken: jwt.accessToken,
+        });
+      });
+      assert.equal(err?.code, 403);
+      await app.bean.passport.signout();
+    });
+  });
+
   it('action:guardPassport:roleName', async () => {
     await app.bean.executor.mockCtx(async () => {
       const jwt = await app.bean.passport.signinMock();
