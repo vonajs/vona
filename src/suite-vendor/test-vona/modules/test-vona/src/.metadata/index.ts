@@ -60,28 +60,31 @@ import type { IControllerOptionsCacheRedis } from '../controller/cacheRedis.ts';
 
 // @ts-ignore ignore
 import type { ControllerCacheRedis } from '../controller/cacheRedis.ts';
+import type { IControllerOptionsGuardPassport } from '../controller/guardPassport.ts';
+// @ts-ignore ignore
+import type { ControllerGuardPassport } from '../controller/guardPassport.ts';
 import type { IControllerOptionsOnion } from '../controller/onion.ts';
 // @ts-ignore ignore
 import type { ControllerOnion } from '../controller/onion.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
 // @ts-ignore ignore
 import type { ControllerPassport } from '../controller/passport.ts';
+
 import type { IControllerOptionsPerformAction } from '../controller/performAction.ts';
 // @ts-ignore ignore
 import type { ControllerPerformAction } from '../controller/performAction.ts';
-
 import type { IControllerOptionsQueue } from '../controller/queue.ts';
 // @ts-ignore ignore
 import type { ControllerQueue } from '../controller/queue.ts';
 import type { IControllerOptionsSummer } from '../controller/summer.ts';
 // @ts-ignore ignore
 import type { ControllerSummer } from '../controller/summer.ts';
-import type { IControllerOptionsTail } from '../controller/tail.ts';
-// @ts-ignore ignore
-import type { ControllerTail } from '../controller/tail.ts';
 /** service: end */
 /** service: begin */
 
+import type { IControllerOptionsTail } from '../controller/tail.ts';
+// @ts-ignore ignore
+import type { ControllerTail } from '../controller/tail.ts';
 import type { IControllerOptionsTransaction } from '../controller/transaction.ts';
 // @ts-ignore ignore
 import type { ControllerTransaction } from '../controller/transaction.ts';
@@ -189,6 +192,7 @@ export interface IModuleEntity {
 declare module 'vona-module-test-vona' {
 
   export interface EntityTest {
+    get $table(): 'testVona';
     $column: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
@@ -437,11 +441,11 @@ declare module 'vona-module-test-vona' {
     fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser['fieldsMore']>;
   }
 }
+export * from '../controller/guardPassport.ts';
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
 export * from '../controller/performAction.ts';
 export * from '../controller/queue.ts';
-export * from '../controller/summer.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -496,6 +500,7 @@ declare module 'vona' {
     'test-vona.service.transaction': ServiceTransaction;
   }
 }
+export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
 export * from '../controller/transaction.ts';
 export * from '../controller/upload.ts';
@@ -521,6 +526,7 @@ declare module 'vona-module-a-web' {
     'test-vona:bean': IControllerOptionsBean;
     'test-vona:cacheMem': IControllerOptionsCacheMem;
     'test-vona:cacheRedis': IControllerOptionsCacheRedis;
+    'test-vona:guardPassport': IControllerOptionsGuardPassport;
     'test-vona:onion': IControllerOptionsOnion;
     'test-vona:passport': IControllerOptionsPassport;
     'test-vona:performAction': IControllerOptionsPerformAction;
@@ -545,6 +551,11 @@ declare module 'vona-module-test-vona' {
   }
 
   export interface ControllerCacheRedis {
+    /** @internal */
+    get scope(): ScopeModuleTestVona;
+  }
+
+  export interface ControllerGuardPassport {
     /** @internal */
     get scope(): ScopeModuleTestVona;
   }
@@ -603,6 +614,10 @@ declare module 'vona-module-test-vona' {
     actions?: TypeControllerOptionsActions<ControllerCacheRedis>;
   }
 
+  export interface IControllerOptionsGuardPassport {
+    actions?: TypeControllerOptionsActions<ControllerGuardPassport>;
+  }
+
   export interface IControllerOptionsOnion {
     actions?: TypeControllerOptionsActions<ControllerOnion>;
   }
@@ -639,6 +654,10 @@ declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord {
     '/test/vona/bean/test': undefined;
     '/test/vona/bean/service': undefined;
+    '/test/vona/guardPassport/testUserName': undefined;
+    '/test/vona/guardPassport/testUserNameFail': undefined;
+    '/test/vona/guardPassport/testRoleName': undefined;
+    '/test/vona/guardPassport/testRoleNameFail': undefined;
     '/': undefined;
     '/test/vona/onion/echo3/:userId': undefined;
     '/test/vona/onion/echo5': undefined;

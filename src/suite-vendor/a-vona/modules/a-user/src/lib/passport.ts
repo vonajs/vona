@@ -34,6 +34,7 @@ export interface IDecoratorGroupPassport {
   admin: typeof Admin;
   public: typeof Public;
   userName: typeof UserName;
+  roleName: typeof RoleName;
 }
 
 export const Passport: IDecoratorGroupPassport = {
