@@ -5,6 +5,7 @@ import type { EventOn } from 'vona-module-a-event';
 import type { BeanAuthInner } from '../bean/bean.authInner.ts';
 import type { BeanPassport } from '../bean/bean.passport.ts';
 
+import type { BeanRoleInner } from '../bean/bean.roleInner.ts';
 import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
 /** event: begin */
@@ -38,7 +39,7 @@ import 'vona';
 
 export * from '../bean/bean.authInner.ts';
 export * from '../bean/bean.passport.ts';
-export * from '../bean/bean.userInner.ts';
+export * from '../bean/bean.roleInner.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IGuardRecordGlobal {
@@ -68,6 +69,7 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
+export * from '../bean/bean.userInner.ts';
 /** bean: end */
 /** event: begin */
 export * from '../bean/event.createUserAnonymous.ts';
@@ -88,6 +90,11 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 
+  export interface BeanRoleInner {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
+
   export interface BeanUserInner {
     /** @internal */
     get scope(): ScopeModuleAUser;
@@ -97,6 +104,7 @@ declare module 'vona' {
   export interface IBeanRecordGlobal {
     authInner: BeanAuthInner;
     passport: BeanPassport;
+    roleInner: BeanRoleInner;
     userInner: BeanUserInner;
   }
 }
