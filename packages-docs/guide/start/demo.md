@@ -71,6 +71,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
     // signin as user: admin
     await app.bean.passport.signinMock();
+    // do something
     // signout
     await app.bean.passport.signout();
   });
