@@ -1,5 +1,6 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IMetaOptionsIndex } from 'vona-module-a-index';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { config } from '../config/config.ts';
@@ -9,15 +10,14 @@ import type { IControllerOptionsPassport } from '../controller/passport.ts';
 // @ts-ignore ignore
 import type { ControllerPassport } from '../controller/passport.ts';
 import type { IDtoOptionsAuth } from '../dto/auth.ts';
+
 /** dto: end */
 /** dto: begin */
 import type { DtoAuth } from '../dto/auth.ts';
-
 import type { IDtoOptionsPassport } from '../dto/passport.ts';
 import type { DtoPassport } from '../dto/passport.ts';
 import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
 import type { DtoPassportJwt } from '../dto/passportJwt.ts';
-
 import type { IEntityOptionsRole } from '../entity/role.ts';
 /** entity: end */
 /** entity: begin */
@@ -57,13 +57,11 @@ import 'vona';
 import 'vona';
 /** model: end */
 /** meta: begin */
+export * from '../bean/meta.index.ts';
 export * from '../bean/meta.version.ts';
 /** controller: end */
 /** config: begin */
 export * from '../config/config.ts';
-/** service: end */
-/** controller: begin */
-export * from '../controller/passport.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
@@ -115,11 +113,13 @@ declare module 'vona-module-home-user' {
     fields?: TypeEntityOptionsFields<EntityUserRole, IEntityOptionsUserRole['fieldsMore']>;
   }
 }
+/** service: end */
+/** controller: begin */
+export * from '../controller/passport.ts';
 /** meta: end */
 /** dto: begin */
 export * from '../dto/auth.ts';
 export * from '../dto/passport.ts';
-export * from '../dto/passportJwt.ts';
 declare module 'vona-module-a-database' {
 
   export interface IModelRecord {
@@ -151,16 +151,23 @@ export interface IModuleModel {
   user: ModelUser;
   userRole: ModelUserRole;
 }
+export * from '../dto/passportJwt.ts';
 /** entity: begin */
 export * from '../entity/role.ts';
 declare module 'vona' {
 
   export interface IMetaRecord {
+    'home-user:index': IMetaOptionsIndex;
     'home-user:version': never;
   }
 
 }
 declare module 'vona-module-home-user' {
+
+  export interface MetaIndex {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
 
   export interface MetaVersion {
     /** @internal */

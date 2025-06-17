@@ -4,8 +4,8 @@ import type { EventOn } from 'vona-module-a-event';
 /** bean: begin */
 import type { BeanAuthInner } from '../bean/bean.authInner.ts';
 import type { BeanPassport } from '../bean/bean.passport.ts';
-
 import type { BeanRoleInner } from '../bean/bean.roleInner.ts';
+
 import type { BeanUserInner } from '../bean/bean.userInner.ts';
 /** event: end */
 /** event: begin */
@@ -15,13 +15,14 @@ import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous
 import type { TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult } from '../bean/event.createUserAnonymous.ts';
 import type { EventSignin } from '../bean/event.signin.ts';
 import type { TypeEventSigninData, TypeEventSigninResult } from '../bean/event.signin.ts';
-
 import type { EventSignout } from '../bean/event.signout.ts';
+
 import type { TypeEventSignoutData, TypeEventSignoutResult } from '../bean/event.signout.ts';
 /** guard: end */
 /** bean: begin */
 import type { IGuardOptionsAdmin } from '../bean/guard.admin.ts';
 import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
+import type { IGuardOptionsRoleName } from '../bean/guard.roleName.ts';
 import type { IGuardOptionsUserName } from '../bean/guard.userName.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
@@ -40,6 +41,7 @@ import 'vona';
 export * from '../bean/bean.authInner.ts';
 export * from '../bean/bean.passport.ts';
 export * from '../bean/bean.roleInner.ts';
+export * from '../bean/bean.userInner.ts';
 declare module 'vona-module-a-aspect' {
 
   export interface IGuardRecordGlobal {
@@ -48,6 +50,7 @@ declare module 'vona-module-a-aspect' {
 
   export interface IGuardRecordLocal {
     'a-user:admin': IGuardOptionsAdmin;
+    'a-user:roleName': IGuardOptionsRoleName;
     'a-user:userName': IGuardOptionsUserName;
   }
 
@@ -64,17 +67,23 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 
+  export interface GuardRoleName {
+    /** @internal */
+    get scope(): ScopeModuleAUser;
+  }
+
   export interface GuardUserName {
     /** @internal */
     get scope(): ScopeModuleAUser;
   }
 }
-export * from '../bean/bean.userInner.ts';
 /** bean: end */
 /** event: begin */
 export * from '../bean/event.createUserAnonymous.ts';
 export * from '../bean/event.signin.ts';
 export * from '../bean/event.signout.ts';
+/** guard: begin */
+export * from '../bean/guard.admin.ts';
 declare module 'vona' {
 
 }
@@ -108,9 +117,8 @@ declare module 'vona' {
     userInner: BeanUserInner;
   }
 }
-/** guard: begin */
-export * from '../bean/guard.admin.ts';
 export * from '../bean/guard.passport.ts';
+export * from '../bean/guard.roleName.ts';
 export * from '../bean/guard.userName.ts';
 declare module 'vona' {
 
