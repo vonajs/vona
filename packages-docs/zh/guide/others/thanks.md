@@ -1,6 +1,5 @@
 # 致谢
 
-致敬：bullmq，zod，openapi
-- 向 Angular 表达感谢，Angular 激发了在 Vue 中实现 ioc 容器的灵感
-- 向 React 表达感谢，React 首创的 JSX 语法显著提升了前端的开发效率和开发体验
-- 向 Vue 表达感谢，Vue 提供了非常强大的响应式系统和生态。如果没有这些生态的支持，Zova 的实现将非常困难
+- 向 Bullmq 表达感谢，Vona 基于 Bullmq 实现了队列、定时任务、广播、系统启动项，等能力
+- 向 Zod 表达感谢，为 Vona 提供了全方位的类型校验机制
+- 向 Zod-to-openapi 表达感谢，为 Vona 提供了非常便利的工具，从 Zod schema 生成 Openapi/swagger 文档

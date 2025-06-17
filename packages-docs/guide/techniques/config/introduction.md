@@ -1,8 +1,10 @@
 # Config
 
+Vona loads config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
+
 ## meta & config file
 
-Zova loads config files from the `src/front/config/config` directory. File loading based on `meta` conditions is also supported. For specific rules, see: [meta & .env file](../env/introduction.md)
+Vona loads config files from the `src/backend/config/config` directory. File loading based on `meta` conditions is also supported. For specific rules, see: [meta & .env file](../env/introduction.md)
 
 ### For example
 
@@ -10,34 +12,29 @@ Execute `npm run dev` on the command line, then the corresponding meta variable 
 
 | Name    | Value         |
 | ------- | ------------- |
-| mode    | 'development' |
-| flavor  | 'admin'       |
-| appMode | 'ssr'         |
+| mode    | 'local' |
+| flavor  | 'normal'       |
 
 The system will automatically load the configuration in the following files and merge them:
 
 ```txt
 config.ts
-config.admin.ts
-config.admin.development.ts
-config.admin.development.ssr.ts
+config.normal.ts
+config.normal.local.ts
 config.mine.ts
-config.admin.mine.ts
-config.admin.development.mine.ts
-config.admin.development.ssr.mine.ts
+config.normal.mine.ts
+config.normal.local.mine.ts
 ```
 
 ## Use global config
 
-The global config object can be obtained directly through `this.sys.config` in any bean instance
+The global config object can be obtained directly through `this.app.config` in any bean instance
 
-```typescript{5}
-export class StoreApi {
-  private [SymbolFetch]: AxiosInstance;
-
-  protected async __init__() {
-    const baseURL = `${this.sys.config.api.baseURL || ''}${this.sys.config.api.prefix || ''}/`;
-    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
+```typescript{4}
+@Service()
+export class ServiceDatabase extends BeanBase {
+  get configDatabase() {
+    return this.app.config.database;
   }
 }
 ```
@@ -63,15 +60,5 @@ Some variables exist in both `env` and `config`. The basic logic is as follows:
 
 | Variables in env | Variables in config |
 | ---------------- | ------------------- |
-| META_MODE        | meta.mode           |
-| META_FLAVOR      | meta.flavor         |
-| META_APP_MODE    | meta.appMode        |
-| APP_ROUTER_MODE  | env.appRouterMode   |
-| APP_ROUTER_BASE  | env.appRouterBase   |
-| APP_PUBLIC_PATH  | env.appPublicPath   |
-| APP_NAME         | env.appName         |
-| APP_TITLE        | env.appTitle        |
-| APP_VERSION      | env.appVersion      |
-| API_BASE_URL     | api.baseURL         |
-| API_PREFIX       | api.prefix          |
-| API_JWT          | api.jwt             |
+| process.env.META_MODE       | app.config.meta.mode         |
+| process.env.META_FLAVOR     | app.config.meta.flavor       |

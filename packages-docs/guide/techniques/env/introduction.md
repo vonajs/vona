@@ -1,12 +1,12 @@
 # Env
 
-Zova exposes env variables on the special `process.env` object, which are statically replaced at build time
+Vona exposes env variables on the special `process.env` object
 
-Zova loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Vona loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
 ## meta & .env file
 
-Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional environment variables from the following files in the directory `env`:
+Vona uses [dotenv](https://github.com/motdotla/dotenv) to load additional environment variables from the following files in the directory `env`:
 
 ```txt
 .env                # loaded in all cases
@@ -15,36 +15,33 @@ Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 .env.[meta].mine    # only loaded in specified condition, ignored by git
 ```
 
-- `[meta]` can be `any combination` of the following three field values
+- `[meta]` can be `any combination` of the following two variables
 
 | Name    | Description                                                                          |
 | ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'development' \| 'production' \| string;                                             |
-| flavor  | 'front' \| 'admin' \| string;                                                        |
-| appMode | 'spa' \| 'ssr' \| 'pwa' \| 'cordova' \| 'capacitor' \| 'electron' \| 'bex' \| string |
-
-- `appMode`: for more info, see [Commands List: Mode](https://quasar.dev/quasar-cli-vite/commands-list#mode)
+| mode    | 'test' \|'local' \| 'prod'                                            |
+| flavor  | 'normal' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
 
 ## npm scripts
 
 Corresponding to the multi-dimensional variables, the command line script is also divided into three parts, such as:
 
+Corresponding to the multidimensional variables, the correspondence between the commands and the scripts are as follows:
+
 ```bash
-$ npm run dev:ssr:admin
-$ npm run build:ssr:admin
+$ npm run test
+$ npm run dev
+$ npm run build
+$ npm run build:docker
 ```
 
-For convenience, we can set the most commonly used scripts as aliases, for example:
-
-```json
+``` json
 "scripts": {
-  "dev": "npm run dev:ssr:admin",
-  "build": "npm run build:ssr:admin",
-  "preview": "npm run preview:ssr",
-  "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
-  "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
-  "preview:ssr": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr/index.js\"",
-},
+  "test": "vona :bin:test --flavor=normal",
+  "dev": "vona :bin:dev --flavor=normal",
+  "build": "vona :bin:build --flavor=normal",
+  "build:docker": "vona :bin:build --flavor=docker", 
+}
 ```
 
 ### For example
@@ -53,26 +50,23 @@ Execute `npm run dev` on the command line, then the corresponding meta variable 
 
 | Name    | Value         |
 | ------- | ------------- |
-| mode    | 'development' |
-| flavor  | 'admin'       |
-| appMode | 'ssr'         |
+| mode    | 'local' |
+| flavor  | 'normal'       |
 
 The system will automatically load the environment variables in the following files and merge them:
 
 ```txt
 .env
-.env.admin
-.env.admin.development
-.env.admin.development.ssr
+.env.normal
+.env.normal.local
 .env.mine
-.env.admin.mine
-.env.admin.development.mine
-.env.admin.development.ssr.mine
+.env.normal.mine
+.env.normal.local.mine
 ```
 
 ## Built-in env variables
 
-To further achieve out-of-box functionality, Zova provides several built-in env variables:
+To further achieve out-of-box functionality, Vona provides several built-in env variables:
 
 ### meta
 
@@ -80,34 +74,25 @@ To further achieve out-of-box functionality, Zova provides several built-in env 
 | ------------- | ----------------- |
 | META_MODE     | mode              |
 | META_FLAVOR   | flavor            |
-| META_APP_MODE | appMode           |
 | NODE_ENV      | equal `META_MODE` |
 
 ### App
 
 | Name            | Description                                                                              |
 | --------------- | ---------------------------------------------------------------------------------------- |
-| APP_ROUTER_MODE | [Vue Router: History Modes](https://router.vuejs.org/guide/essentials/history-mode.html) |
-| APP_ROUTER_BASE | [Vue Router: base](https://router.vuejs.org/api/interfaces/RouterHistory.html#base)      |
-| APP_PUBLIC_PATH | [Vite: Public Base Path](https://vitejs.dev/guide/build.html#public-base-path)           |
 | APP_NAME        | App Name                                                                                 |
 | APP_TITLE       | App Title                                                                                |
 | APP_VERSION     | App Version                                                                              |
-
-### Dev server
-
-| Name            | Description                                                                                    |
-| --------------- | ---------------------------------------------------------------------------------------------- |
-| DEV_SERVER_HOSTNAME | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
-| DEV_SERVER_PORT | Dev server port                                                                                |
 
 ### Build
 
 | Name          | Description                         |
 | ------------- | ----------------------------------- |
 | BUILD_OUTDIR  | Specify the output directory        |
+|BUILD_SOURCEMAP| Sourcemap|
 | BUILD_MINIFY  | Whether to enable minify            |
-| BUILD_ANALYZE | Whether to display the analyze info |
+|BUILD_COPY_DIST|Copy dist to the specified directory|
+|BUILD_COPY_RELEASE|Copy dist-releases to the specified directory|
 
 ### Suite/Module
 
@@ -116,44 +101,39 @@ To further achieve out-of-box functionality, Zova provides several built-in env 
 | PROJECT_DISABLED_MODULES | List of disabled modules |
 | PROJECT_DISABLED_SUITES  | List of disabled suites  |
 
-### API
+### database
 
-| Name         | Description           |
-| ------------ | --------------------- |
-| API_BASE_URL |                       |
-| API_PREFIX   |                       |
-| API_JWT      | Whether to enable JWT |
+Vona supports multiple databases. In order to use it out of the box, two datasource definitions are provided: `pg`/`mysql`, and the default datasource is `pg`
 
-### PINIA
+| Name                     | Description          |
+| ------------------------ | -------------- |
+| DATABASE_DEFAULT_CLIENT |the default datasource |
 
-| Name          | Description             |
-| ------------- | ----------------------- |
-| PINIA_ENABLED | Whether to enable Pinia |
+* pg
 
-### Proxy
+| Name                     | Description         |
+| ------------------------ | -------------- |
+| DATABASE_CLIENT_PG_HOST  |  |
+| DATABASE_CLIENT_PG_PORT |  |
+| DATABASE_CLIENT_PG_USER  |  |
+| DATABASE_CLIENT_PG_PASSWORD |  |
+| DATABASE_CLIENT_PG_DATABASE  |  |
 
-| Name               | Description                                                                                               |
-| ------------------ | --------------------------------------------------------------------------------------------------------- |
-| PROXY_API_ENABLED  | Whether to enable proxy: [Vite: server.proxy](https://vitejs.dev/config/server-options.html#server-proxy) |
-| PROXY_API_BASE_URL | proxy target                                                                                              |
-| PROXY_API_PREFIX   | proxy key                                                                                                 |
+* mysql
 
-### SSR
+| Name                     | Description           |
+| ------------------------ | -------------- |
+| DATABASE_CLIENT_MYSQL_HOST |  |
+|  DATABASE_CLIENT_MYSQL_PORT |  |
+| DATABASE_CLIENT_MYSQL_USER |  |
+|  DATABASE_CLIENT_MYSQL_PASSWORD |  |
+| DATABASE_CLIENT_MYSQL_DATABASE |  |
 
-See: [SSR](../ssr/env.md)
+### redis
 
-### Mock
-
-See: [Mock](../mock/introduction.md)
-
-## Dynamic environment variables
-
-The following are the environment variables set according to the runtime environment:
-
-| Name   | Description    |
-| ------ | -------------- |
-| SSR    | If SSR mode    |
-| DEV    | If Development |
-| PROD   | If Production  |
-| CLIENT | If Client      |
-| SERVER | If Server      |
+| Name                     | Description        |
+| ------------------------ | -------------- |
+|REDIS_DEFAULT_HOST||
+|REDIS_DEFAULT_PORT||
+|REDIS_DEFAULT_PASSWORD||
+|REDIS_DEFAULT_DB||

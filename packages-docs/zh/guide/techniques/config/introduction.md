@@ -1,8 +1,10 @@
 # Config配置
 
+Vona 基于多维变量加载 Config 配置，从而提供更加灵活的配置机制，支持更复杂的业务场景
+
 ## meta与config文件
 
-Zova 从`src/front/config/config`目录中加载 config 文件。同样支持基于`meta`条件的文件加载，具体规则参见：[meta与.env文件](../env/introduction.md)
+Vona 从`src/backend/config/config`目录中加载 config 文件。同样支持基于`meta`条件的文件加载，具体规则参见：[meta与.env文件](../env/introduction.md)
 
 ### 举例
 
@@ -10,36 +12,31 @@ Zova 从`src/front/config/config`目录中加载 config 文件。同样支持基
 
 | 名称    | 值            |
 | ------- | ------------- |
-| mode    | 'development' |
-| flavor  | 'admin'       |
-| appMode | 'ssr'         |
+| mode    | 'local' |
+| flavor  | 'normal'       |
 
 系统就会自动加载下列文件中的 Config 配置，并进行合并:
 
 ```txt
 config.ts
-config.admin.ts
-config.admin.development.ts
-config.admin.development.ssr.ts
+config.normal.ts
+config.normal.local.ts
 config.mine.ts
-config.admin.mine.ts
-config.admin.development.mine.ts
-config.admin.development.ssr.mine.ts
+config.normal.mine.ts
+config.normal.local.mine.ts
 ```
 
 ## 访问全局config
 
-在任何 bean 实例中可以直接通过`this.sys.config`访问全局 config 对象
+在任何 bean 实例中可以直接通过`this.app.config`访问全局 config 对象
 
-```typescript{5}
-export class StoreApi {
-  private [SymbolFetch]: AxiosInstance;
-
-  protected async __init__() {
-    const baseURL = `${this.sys.config.api.baseURL || ''}${this.sys.config.api.prefix || ''}/`;
-    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
+```typescript{4}
+@Service()
+export class ServiceDatabase extends BeanBase {
+  get configDatabase() {
+    return this.app.config.database;
   }
-}
+}  
 ```
 
 ## 访问模块config
@@ -63,15 +60,5 @@ export class StoreApi {
 
 | env中的变量     | config中的变量    |
 | --------------- | ----------------- |
-| META_MODE       | meta.mode         |
-| META_FLAVOR     | meta.flavor       |
-| META_APP_MODE   | meta.appMode      |
-| APP_ROUTER_MODE | env.appRouterMode |
-| APP_ROUTER_BASE | env.appRouterBase |
-| APP_PUBLIC_PATH | env.appPublicPath |
-| APP_NAME        | env.appName       |
-| APP_TITLE       | env.appTitle      |
-| APP_VERSION     | env.appVersion    |
-| API_BASE_URL    | api.baseURL       |
-| API_PREFIX      | api.prefix        |
-| API_JWT         | api.jwt           |
+| process.env.META_MODE       | app.config.meta.mode         |
+| process.env.META_FLAVOR     | app.config.meta.flavor       |

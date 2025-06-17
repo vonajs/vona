@@ -1,5 +1,5 @@
 # Thanks
 
-- Thanks to Angular that ioc container of Zova was in part inspired by Angular
-- Thanks to React that React’s pioneering JSX syntax has significantly improved the efficiency and experience of front-end development
-- Thanks to Vue that Vue provides a very powerful reactive system and ecosystem. Without the support of these ecosystems, Zova would be difficult to implement
+- Thanks to Bullmq, Vona implements queue, schedule, broadcast, startup, etc. based on Bullmq
+- Thanks to Zod, which provides Vona with a comprehensive type verification mechanism
+- Thanks to Zod-to-openapi, which provides Vona with a very convenient tool to generate Openapi/swagger documents from Zod schema

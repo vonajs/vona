@@ -19,7 +19,7 @@ Zova 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载�
 
 | 名称    | 类型                                                                                 |
 | ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'test' \|'local' \| 'prod' ;                                             |
+| mode    | 'test' \|'local' \| 'prod'                                             |
 | flavor  | 'normal' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
 
 ## npm scripts
@@ -89,8 +89,6 @@ $ npm run build:docker
 | BUILD_OUTDIR  | 指定输出目录     |
 |BUILD_SOURCEMAP| Sourcemap|
 | BUILD_MINIFY  | 是否最小化       |
-| BUILD_INLINEDYNAMICIMPORTS | 是否内联动态导入模块 |
-|BUILD_LOG_CIRCULAR_DEPENDENCY| 如果有循环依赖，是否打印信息|
 |BUILD_COPY_DIST|将dist拷贝至指定目录|
 |BUILD_COPY_RELEASE|将dist-releases拷贝至指定目录|
 
@@ -137,4 +135,3 @@ Vona 支持多数据库。为了开箱即用，提供了两个数据源的定义
 |REDIS_DEFAULT_PORT||
 |REDIS_DEFAULT_PASSWORD||
 |REDIS_DEFAULT_DB||
-
