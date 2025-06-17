@@ -35,7 +35,7 @@ $ npm run demo
 ``` typescript{2-4}
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    // in ctx
+    // do something in ctx
   });
 }
 ```
