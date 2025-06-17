@@ -66,7 +66,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 ### 3. 模拟登录和退出登录
 
-``` typescript{3-6}
+``` typescript{3-7}
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
     // signin as user: admin
