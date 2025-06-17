@@ -4,7 +4,7 @@ import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceAuthInnerAdapter extends BeanBase implements IAuthInnerAdapter {
-  get(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined> {
-    return this.scope.model.auth.get(auth);
+  async findOne(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined> {
+    return await this.scope.model.auth.get(auth);
   }
 }

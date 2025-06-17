@@ -21,5 +21,5 @@ export interface ISigninOptions {
 }
 
 export interface IAuthInnerAdapter {
-  get(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
+  findOne(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
 }

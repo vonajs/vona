@@ -14,8 +14,8 @@ export class BeanAuthInner extends BeanBase {
     return this._authInnerAdapter;
   }
 
-  async get(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined> {
+  async findOne(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined> {
     if (String(auth.id).charAt(0) === '-') return auth as unknown as IAuthBase;
-    return await this.authInnerAdapter.get(auth);
+    return await this.authInnerAdapter.findOne(auth);
   }
 }
