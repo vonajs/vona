@@ -17,11 +17,11 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     return { id: -1, name: 'anonymous', avatar: undefined, locale: undefined } as IUserBase;
   }
 
-  async getByName(name: string): Promise<IUserBase | undefined> {
-    return await this.get({ name });
+  async findOneByName(name: string): Promise<IUserBase | undefined> {
+    return await this.findOne({ name });
   }
 
-  async get(user: Partial<IUser>): Promise<IUserBase | undefined> {
+  async findOne(user: Partial<IUser>): Promise<IUserBase | undefined> {
     return await this.scope.model.user.get(user);
   }
 
@@ -29,7 +29,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     await this.scope.model.user.update(user);
   }
 
-  async delete(user: Partial<IUser>): Promise<void> {
+  async remove(user: Partial<IUser>): Promise<void> {
     await this.scope.model.user.delete(user);
   }
 }

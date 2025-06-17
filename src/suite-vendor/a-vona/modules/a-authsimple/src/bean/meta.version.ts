@@ -19,7 +19,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
   async init(options: IMetaVersionInitOptions) {
     if (options.version === 1) {
       // admin
-      const userAdmin = await this.bean.userInner.getByName('admin');
+      const userAdmin = await this.bean.userInner.findOneByName('admin');
       if (userAdmin) {
         const password = options.password || this.scope.config.passwordDefault.admin;
         await this.bean.authSimple.add(userAdmin.id, password);

@@ -23,19 +23,19 @@ export class BeanUserInner extends BeanBase {
     return this.userInnerAdapter.createAnonymous();
   }
 
-  getByName(name: string): Promise<IUserBase | undefined> {
-    return this.userInnerAdapter.getByName(name);
+  findOneByName(name: string): Promise<IUserBase | undefined> {
+    return this.userInnerAdapter.findOneByName(name);
   }
 
-  get(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
-    return this.userInnerAdapter.get(user);
+  findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
+    return this.userInnerAdapter.findOne(user);
   }
 
   update(user: Partial<IUserBase>): Promise<void> {
     return this.userInnerAdapter.update(user);
   }
 
-  delete(user: Partial<IUserBase>): Promise<void> {
-    return this.userInnerAdapter.delete(user);
+  remove(user: Partial<IUserBase>): Promise<void> {
+    return this.userInnerAdapter.remove(user);
   }
 }
