@@ -36,13 +36,16 @@ export function ExtendTableBuilder(app: VonaApplication) {
     _basicFields.call(this, options, 'number');
     return this;
   });
-  knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName?: string) {
+  knex.TableBuilder.extend('tableIdentity', function (this: knex.Knex.TableBuilder, columnName: string) {
     const _idType = scope.config.table.idType;
     if (_idType === 'string') {
-      return this.bigInteger(columnName ?? 'userId'); // default value is null
+      return this.bigInteger(columnName); // default value is null
     } else if (_idType === 'number') {
-      return this.integer(columnName ?? 'userId'); // default value is null
+      return this.integer(columnName); // default value is null
     }
+  });
+  knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName?: string) {
+    return this.tableIdentity(columnName ?? 'userId');
   });
   knex.TableBuilder.extend('int0', function (this: knex.Knex.TableBuilder, columnName: string) {
     return this.integer(columnName).defaultTo(0);
@@ -67,6 +70,7 @@ declare module 'knex' {
     interface TableBuilder {
       basicFields(options?: IBasicFieldsOptions): Knex.TableBuilder;
       basicFieldsSimple(options?: IBasicFieldsOptions): Knex.TableBuilder;
+      tableIdentity(columnName?: string): Knex.ColumnBuilder;
       userId(columnName?: string): Knex.ColumnBuilder;
       int0(columnName: string): Knex.ColumnBuilder;
       int1(columnName: string): Knex.ColumnBuilder;
