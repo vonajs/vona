@@ -92,6 +92,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Techniques',
       items: [
         {
+          text: 'Validation',
+          base: '/guide/techniques/validation/',
+          link: 'introduction',
+        },
+        {
           text: 'Env',
           base: '/guide/techniques/env/',
           link: 'introduction',

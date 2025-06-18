@@ -92,6 +92,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '技术',
       items: [
         {
+          text: '参数校验',
+          base: '/zh/guide/techniques/validation/',
+          link: 'introduction',
+        },
+        {
           text: 'Env环境变量',
           base: '/zh/guide/techniques/env/',
           link: 'introduction',

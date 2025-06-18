@@ -89,12 +89,76 @@ For example, the homepage of the project has the following route:
 |--|--|--|
 |any value|//|/|
 
-## Request Query
+## Request Method
 
-## Request Params
+Vona uses decorators to define request methods. These decorators are put into a group `@Web`. Because there are many decorators, the grouping mechanism can reduce the mental burden. For example: we set a `post` method for `create`:
 
-## Request Body
+``` typescript
+import { Web } from 'vona-module-a-web';
 
-## Request Headers
+class ControllerStudent {
+  @Web.post()
+  async create() {}
+}
+```
+
+* Method decorator list
+
+|Name|Description|
+|--|--|
+|@Web.post|post|
+|@Web.get|get|
+|@Web.delete|delete|
+|@Web.put|put|
+|@Web.patch|patch|
+|@Web.options|options|
+|@Web.head|head|
+
+## Request Parameters
+
+We need to get various parameters from the request, such as `Query`, `Params`, `Body`, `Headers`, etc. Similarly, Vona also provides many decorators for obtaining parameters. We also put all parameter decorators into the group `@Arg` to reduce the mental burden. For example, if we want to obtain the data of a student, the requested URL is `/?id=1`:
+
+``` typescript
+class ControllerStudent3 {
+  @Web.get()
+  findOne(@Arg.query('id') id: number) {}
+}
+```
+
+Depending on the characteristics of the parameters, different types of parameters allow the specification of field names, such as specifying `id` in the query decorator. We can also obtain the entire query object without specifying the field name
+
+For example, the URL is `/?id=1&name=tom`:
+
+``` typescript
+class DtoStudentInfo {
+  id: number;
+  name: string;
+}
+
+class ControllerStudent3 {
+  @Web.get()
+  findOne(@Arg.query() query: DtoStudentInfo) {
+    console.log(query.id, query.name);
+  }
+}
+```
+
+* Parameter decorator list
+
+|Name|Description|
+|--|--|
+|@Arg.param|Param|
+|@Arg.query|Query|
+|@Arg.body|Body|
+|@Arg.headers|Headers|
+|@Arg.fields|Fields|
+|@Arg.field|Field|
+|@Arg.files|Files|
+|@Arg.file|File|
+|@Arg.user|The current user|
+
+## Parameter Validation
+
+Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is provided to verify request parameters. See: [Validation](../../techniques/validation/introduction.md)
 
 ## Response Body
