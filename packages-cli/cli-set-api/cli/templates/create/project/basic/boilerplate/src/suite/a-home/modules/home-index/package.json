@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-index",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.5",
   "title": "home-index",
   "vonaModule": {
     "dependencies": {
@@ -26,12 +26,11 @@
   },
   "files": [
     "dist",
-    "static",
-    "test"
+    "static"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "tsc:publish": "npm run clean && tsc -p tsconfig.build.json",
+    "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
@@ -41,7 +40,6 @@
     "indent": 2,
     "remove": [
       "clean-package",
-      "devDependencies",
       "exports.\\..import"
     ]
   },
