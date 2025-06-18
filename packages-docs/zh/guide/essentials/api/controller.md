@@ -34,7 +34,9 @@ export class ControllerStudent extends BeanBase {
 
 ## 路由
 
-通过装饰器设置的路由，会自动注册到系统路由表中。路由路径由 Controller Path 和 Action Path 组合而成
+与`Fastify`一样，Vona 也采用[find-my-way](https://github.com/delvedor/find-my-way)作为路由库。所有使用了`@Web`装饰器的 Controller Action，会自动注册到路由表中
+
+路由路径由 Controller Path 和 Action Path 组合而成
 
 ### 常规格式
 

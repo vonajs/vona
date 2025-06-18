@@ -34,7 +34,9 @@ export class ControllerStudent extends BeanBase {
 
 ## Routes
 
-The routes set by the decorator will be automatically registered in the system routing table. The route path is composed of the Controller Path and the Action Path
+Like `Fastify`, Vona also uses [find-my-way](https://github.com/delvedor/find-my-way) as the routing library. All Controller Actions that use the `@Web` decorator will be automatically registered in the routing table
+
+The route path is composed of the Controller Path and the Action Path
 
 ### General format
 
