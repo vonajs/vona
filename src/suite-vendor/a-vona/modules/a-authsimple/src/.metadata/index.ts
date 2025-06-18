@@ -65,6 +65,7 @@ export interface IModuleEntity {
 declare module 'vona-module-a-authsimple' {
 
   export interface EntityAuthSimple {
+    get $table(): 'aAuthSimple';
     $column: <K extends keyof Omit<EntityAuthSimple, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityAuthSimple, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }

@@ -104,6 +104,7 @@ export interface IModuleEntity {
 declare module 'vona-module-a-instance' {
 
   export interface EntityInstance {
+    get $table(): 'aInstance';
     $column: <K extends keyof Omit<EntityInstance, '$column' | '$columns' | '$table'>>(column: K) => K;
     $columns: <K extends keyof Omit<EntityInstance, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
