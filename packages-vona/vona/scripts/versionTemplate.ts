@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import fse from 'fs-extra';
 
 async function versionTemplate() {
   // version
@@ -13,7 +14,11 @@ async function versionTemplate() {
   pkgContent = pkgContent.replace(/"vona": "\^([^"]*)"/, () => {
     return `"vona": "^${version}"`;
   });
-  fs.writeFile(pkgFile, pkgContent);
+  await fse.writeFile(pkgFile, pkgContent);
+  // cp a-home
+  const suiteHomeSrc = path.resolve(fileURLToPath(import.meta.url), '../../../../src/suite/a-home');
+  const suiteHomeDest = path.resolve(fileURLToPath(import.meta.url), '../../../../packages-cli/cli-set-api/cli/templates/create/project/basic/boilerplate/src/suite/a-home');
+  await fse.copy(suiteHomeSrc, suiteHomeDest);
 }
 
 versionTemplate();
