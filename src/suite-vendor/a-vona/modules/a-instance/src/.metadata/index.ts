@@ -110,7 +110,7 @@ declare module 'vona-module-a-instance' {
   }
 
   export interface IEntityOptionsInstance {
-    fields?: TypeEntityOptionsFields<EntityInstance, IEntityOptionsInstance['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityInstance, IEntityOptionsInstance['_fieldsMore_']>;
   }
 }
 /** broadcast: end */

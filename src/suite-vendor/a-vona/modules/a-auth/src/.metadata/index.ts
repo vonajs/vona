@@ -101,11 +101,11 @@ declare module 'vona-module-a-auth' {
   }
 
   export interface IEntityOptionsAuth {
-    fields?: TypeEntityOptionsFields<EntityAuth, IEntityOptionsAuth['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityAuth, IEntityOptionsAuth['_fieldsMore_']>;
   }
 
   export interface IEntityOptionsAuthProvider {
-    fields?: TypeEntityOptionsFields<EntityAuthProvider, IEntityOptionsAuthProvider['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityAuthProvider, IEntityOptionsAuthProvider['_fieldsMore_']>;
   }
 }
 /** bean: end */

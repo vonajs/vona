@@ -198,7 +198,7 @@ declare module 'vona-module-test-vona' {
   }
 
   export interface IEntityOptionsTest {
-    fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;
   }
 }
 /** bean: end */
@@ -434,11 +434,11 @@ declare module 'vona-module-test-vona' {
 declare module 'vona-module-test-vona' {
 
   export interface IDtoOptionsProfile {
-    fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsUser {
-    fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser['_fieldsMore_']>;
   }
 }
 export * from '../controller/guardPassport.ts';

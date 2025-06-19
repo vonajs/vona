@@ -97,15 +97,15 @@ declare module 'vona-module-a-version' {
   }
 
   export interface IEntityOptionsVersion {
-    fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion['_fieldsMore_']>;
   }
 
   export interface IEntityOptionsVersionInit {
-    fields?: TypeEntityOptionsFields<EntityVersionInit, IEntityOptionsVersionInit['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityVersionInit, IEntityOptionsVersionInit['_fieldsMore_']>;
   }
 
   export interface IEntityOptionsViewRecord {
-    fields?: TypeEntityOptionsFields<EntityViewRecord, IEntityOptionsViewRecord['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityViewRecord, IEntityOptionsViewRecord['_fieldsMore_']>;
   }
 }
 export * from '../bean/startup.databaseName.ts';

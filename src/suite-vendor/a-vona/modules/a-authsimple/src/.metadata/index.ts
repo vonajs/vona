@@ -71,7 +71,7 @@ declare module 'vona-module-a-authsimple' {
   }
 
   export interface IEntityOptionsAuthSimple {
-    fields?: TypeEntityOptionsFields<EntityAuthSimple, IEntityOptionsAuthSimple['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityAuthSimple, IEntityOptionsAuthSimple['_fieldsMore_']>;
   }
 }
 /** authProvider: end */
@@ -164,7 +164,7 @@ declare module 'vona-module-a-authsimple' {
 declare module 'vona-module-a-authsimple' {
 
   export interface IDtoOptionsAuthSimple {
-    fields?: TypeEntityOptionsFields<DtoAuthSimple, IDtoOptionsAuthSimple['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoAuthSimple, IDtoOptionsAuthSimple['_fieldsMore_']>;
   }
 }
 /** entity: end */

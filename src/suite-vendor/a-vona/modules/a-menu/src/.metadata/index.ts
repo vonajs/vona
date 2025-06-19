@@ -85,27 +85,27 @@ declare module 'vona-module-a-menu' {
 declare module 'vona-module-a-menu' {
 
   export interface IDtoOptionsMenuGroup {
-    fields?: TypeEntityOptionsFields<DtoMenuGroup, IDtoOptionsMenuGroup['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoMenuGroup, IDtoOptionsMenuGroup['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsMenuItem {
-    fields?: TypeEntityOptionsFields<DtoMenuItem, IDtoOptionsMenuItem['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoMenuItem, IDtoOptionsMenuItem['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsMenuItemMeta {
-    fields?: TypeEntityOptionsFields<DtoMenuItemMeta, IDtoOptionsMenuItemMeta['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoMenuItemMeta, IDtoOptionsMenuItemMeta['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsMenuItemMetaParams {
-    fields?: TypeEntityOptionsFields<DtoMenuItemMetaParams, IDtoOptionsMenuItemMetaParams['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoMenuItemMetaParams, IDtoOptionsMenuItemMetaParams['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsMenuItemMetaQuery {
-    fields?: TypeEntityOptionsFields<DtoMenuItemMetaQuery, IDtoOptionsMenuItemMetaQuery['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoMenuItemMetaQuery, IDtoOptionsMenuItemMetaQuery['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsMenus {
-    fields?: TypeEntityOptionsFields<DtoMenus, IDtoOptionsMenus['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoMenus, IDtoOptionsMenus['_fieldsMore_']>;
   }
 }
 /** dto: end */

@@ -102,15 +102,15 @@ declare module 'vona-module-home-user' {
   }
 
   export interface IEntityOptionsRole {
-    fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;
   }
 
   export interface IEntityOptionsUser {
-    fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['_fieldsMore_']>;
   }
 
   export interface IEntityOptionsUserRole {
-    fields?: TypeEntityOptionsFields<EntityUserRole, IEntityOptionsUserRole['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<EntityUserRole, IEntityOptionsUserRole['_fieldsMore_']>;
   }
 }
 /** service: end */
@@ -194,15 +194,15 @@ declare module 'vona-module-home-user' {
 declare module 'vona-module-home-user' {
 
   export interface IDtoOptionsAuth {
-    fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsPassport {
-    fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['_fieldsMore_']>;
   }
 
   export interface IDtoOptionsPassportJwt {
-    fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['fieldsMore']>;
+    fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['_fieldsMore_']>;
   }
 }
 export * from '../model/user.ts';
