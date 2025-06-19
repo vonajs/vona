@@ -7,7 +7,7 @@ export interface IDtoRecord {}
 export interface IDecoratorDtoOptions<FieldsMore = never> {
   independent?: boolean;
   openapi?: TypeOpenAPIMetadata;
-  fieldsMore?: FieldsMore;
+  _fieldsMore_?: FieldsMore;
 }
 
 declare module 'vona-module-a-onion' {

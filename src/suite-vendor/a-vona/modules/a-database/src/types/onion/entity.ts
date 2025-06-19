@@ -8,7 +8,7 @@ export interface IDecoratorEntityOptions<FieldsMore = never> {
   table?: string;
   independent?: boolean;
   openapi?: TypeOpenAPIMetadata;
-  fieldsMore?: FieldsMore;
+  _fieldsMore_?: FieldsMore;
 }
 
 declare module 'vona-module-a-onion' {
