@@ -159,7 +159,15 @@ class ControllerStudent3 {
 
 ## 参数校验  
 
-Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验，参见：[参数校验](../../techniques/validation/introduction.md)
+Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验
+
+- 参见：[参数校验](../../techniques/validation/introduction.md)
+
+## Swagger/OpenAPI
+
+Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的 Swagger/OpenAPI。Vona 中的 OpenAPI 仍然延续[参数校验](../../techniques/validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 OpenAPI 相关的信息
+
+- 参见：[Swagger/OpenAPI](../../techniques/openapi/introduction.md)
 
 ## Response Body
 

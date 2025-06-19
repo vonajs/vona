@@ -97,6 +97,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'Swagger/OpenAPI',
+          base: '/zh/guide/techniques/openapi/',
+          link: 'introduction',
+        },
+        {
           text: 'Env环境变量',
           base: '/zh/guide/techniques/env/',
           link: 'introduction',
