@@ -6,7 +6,7 @@ Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请�
 
 如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而进行校验
 
-比如，`findOne(@Arg.query('id') id: string)`，id 的类型是`string`，那么自动推断出来的 Schema 就是：`z.string()`
+比如，`findOne(@Arg.query('id') id: number)`，id 的类型是`number`，那么自动推断出来的 Schema 就是：`z.number()`
 
 再比如，`findOne(@Arg.query() query: DtoStudentInfo)`，query 的类型是 Dto: `DtoStudentInfo`，那么自动推断出来的 Schema 就是：`z.object({...})`
 
@@ -75,7 +75,7 @@ class ControllerStudent3 {
 ``` typescript
 class ControllerStudent3 {
   @Web.get()
-  findOne(@Arg.query('id', v.array(Number)) id: number) {}
+  findOne(@Arg.query('ids', v.array(Number)) ids: number[]) {}
 }
 ```
 
@@ -84,7 +84,7 @@ class ControllerStudent3 {
 ``` typescript
 class ControllerStudent3 {
   @Web.get()
-  findOne(@Arg.query('id', v.array(z.number())) id: number) {}
+  findOne(@Arg.query('ids', v.array(z.number())) ids: number[]) {}
 }
 ```
 

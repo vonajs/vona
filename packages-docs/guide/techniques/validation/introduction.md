@@ -6,7 +6,7 @@ Vona provides a very concise and flexible mechanism for verifying request parame
 
 If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema for verification
 
-For example, `findOne(@Arg.query('id') id: string)`, the type of id is `string`, then the automatically inferred Schema is: `z.string()`
+For example, `findOne(@Arg.query('id') id: number)`, the type of id is `number`, then the automatically inferred Schema is: `z.number()`
 
 For another example, `findOne(@Arg.query() query: DtoStudentInfo)`, the type of query is Dto: `DtoStudentInfo`, then the automatically inferred Schema is: `z.object({...})`
 
@@ -70,12 +70,12 @@ class ControllerStudent3 {
 
 ## 4. Special tool: Array
 
-For Array type parameters, Vona also provides convenient tools. For example, we require ids to be `number[]`:
+For Array type parameters, Vona also provides convenient tools. For example, we require `ids` to be `number[]`:
 
 ``` typescript
 class ControllerStudent3 {
   @Web.get()
-  findOne(@Arg.query('id', v.array(Number)) id: number) {}
+  findOne(@Arg.query('ids', v.array(Number)) ids: number[]) {}
 }
 ```
 
@@ -84,7 +84,7 @@ Equivalent to:
 ``` typescript
 class ControllerStudent3 {
   @Web.get()
-  findOne(@Arg.query('id', v.array(z.number())) id: number) {}
+  findOne(@Arg.query('ids', v.array(z.number())) ids: number[]) {}
 }
 ```
 
