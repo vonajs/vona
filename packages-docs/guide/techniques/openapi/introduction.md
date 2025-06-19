@@ -1,10 +1,10 @@
 # Swagger/OpenAPI
 
-Vona implements a very convenient `Swagger/OpenAPI` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/OpenAPI` in Vona still uses the decorators in [Validation](../validation/introduction.md), and provides extension tools to set up metadata related to OpenAPI
+Vona implements a very convenient `Swagger/OpenAPI` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/OpenAPI` in Vona still uses the decorators in [Validation](../validation/introduction.md), and provides extension tools to set metadata related to OpenAPI
 
-## 1. Automatically infer Zod Schema: basic type/Dto/Entity
+## 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the parameter type is `basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema, and automatically generate OpenAPI metadata
+If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema, and automatically generate OpenAPI metadata
 
 For example, `findOne(@Arg.query('id') id: number)`, the type of id is `number`, then the automatically inferred Schema is: `z.number()`. Then, the automatically generated Swagger/OpenAPI is as follows:
 
@@ -20,9 +20,9 @@ For example, `findOne(@Arg.query('id', z.number().min(6)) id: number)`, we speci
 
 ![](../../../assets/img/openapi/openapi-3.png)
 
-## 3. Extend the properties of Zod Schema
+## 3. Extending Zod Schema properties
 
-For example, `findOne(@Arg.query('id', v.default(3), v.optional()) id: number)`. First, the system automatically infers the schema as `z.number()`, then appends the `optional` and `default` attributes in turn, and finally generates the schema: `z.number().optional().default(3)`. Then, the automatically generated Swagger/OpenAPI is as follows:
+For example, `findOne(@Arg.query('id', v.default(3), v.optional()) id: number)`. First, the system automatically infers the schema as `z.number()`, then appends the `optional` and `default` attributes in sequence, and finally generates the schema: `z.number().optional().default(3)`. Then, the automatically generated Swagger/OpenAPI is as follows:
 
 ![](../../../assets/img/openapi/openapi-4.png)
 
@@ -46,16 +46,17 @@ Vona also provides many extension tools for setting metadata related to OpenAPI
 |v.example|example|
 
 ### 1. Example: v.title
+
 For example, we can specify `title` as `Name` for OpenAPI
 
 ``` typescript
 class ControllerStudent3 {
-@Web.get()
-findOne(@Arg.query('name', v.title('Name')) name: string) {}
+  @Web.get()
+  findOne(@Arg.query('name', v.title('Name')) name: string) {}
 }
 ```
 
-The automatically generated Swagger/OpenAPI is as follows: (Since Swagger is not displayed on the interface title information, we directly view the OpenAPI json data)
+The automatically generated Swagger/OpenAPI is as follows: (Since Swagger do not display title information, we directly view the OpenAPI json data)
 
 ![](../../../assets/img/openapi/openapi-6.png)
 
@@ -65,8 +66,8 @@ We can use `v.openapi` to set more metadata at once. For example, we can specify
 
 ``` typescript
 class ControllerStudent3 {
-@Web.get()
-findOne(@Arg.query('name', v.openapi({ title: 'Name', example: 'Tom' })) name: string) {}
+  @Web.get()
+  findOne(@Arg.query('name', v.openapi({ title: 'Name', example: 'Tom' })) name: string) {}
 }
 ```
 
@@ -74,19 +75,19 @@ The automatically generated Swagger/OpenAPI is as follows:
 
 ![](../../../assets/img/openapi/openapi-7.png)
 
-## I18n internationalization
+## I18n
 
-Vona provides I18n internationalization for OpenAPI. For example, `title` is `Name`, and the steps to support multiple languages ​​are as follows:
+Vona provides I18n for OpenAPI. For example, `title` is `Name`, and the steps to support i18n ​​are as follows:
 
 ### 1. Provide language resources
 
-For how to add language resources, see: [I18n internationalization](../../essentials/scope/locale.md)
+For how to add language resources, see: [I18n](../../essentials/scope/locale.md)
 
 * English: `src/module/demo-student/src/config/locale/en-us.ts`
 
 ``` typescript
 export default {
-Name: 'Name',
+  Name: 'Name',
 };
 ```
 
@@ -94,24 +95,24 @@ Name: 'Name',
 
 ``` typescript
 export default {
-Name: '姓名',
+  Name: '姓名',
 };
 ```
 
 ### 2. Use $locale
 
-Use the `$locale` method for language translation, and support automatic type hints for language resources
+Use the `$locale` method for language translation, and support auto-complete hints for language resources
 
 ``` typescript
 import { $locale } from '../.metadata/index.ts';
 
 class ControllerStudent3 {
-@Web.get()
-findOne(@Arg.query('name', v.title($locale('Name'))) name: string) {}
+  @Web.get()
+  findOne(@Arg.query('name', v.title($locale('Name'))) name: string) {}
 }
 ```
 
-The automatically generated Swagger/OpenAPI is as follows:
+The automatically generated Swagger/OpenAPI are as follows:
 
 * English: http://localhost:7102/swagger/json?x-vona-locale=en-us
 
