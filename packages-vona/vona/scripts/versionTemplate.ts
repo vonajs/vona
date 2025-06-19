@@ -10,8 +10,10 @@ async function versionTemplate() {
   // change
   const pkgFile = path.resolve(fileURLToPath(import.meta.url), '../../../../packages-cli/cli-set-api/cli/templates/create/project/basic/boilerplate/package.original.json');
   let pkgContent = (await fs.readFile(pkgFile)).toString();
-  pkgContent=pkgContent.replace(/"vona": "\^([^"]*)"/, () => { return `"vona": "^${version}"` });
-  fs.writeFile(pkgFile,pkgContent);
+  pkgContent = pkgContent.replace(/"vona": "\^([^"]*)"/, () => {
+    return `"vona": "^${version}"`;
+  });
+  fs.writeFile(pkgFile, pkgContent);
 }
 
 versionTemplate();
