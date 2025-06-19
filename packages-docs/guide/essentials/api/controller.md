@@ -159,6 +159,14 @@ class ControllerStudent3 {
 
 ## Parameter Validation
 
-Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is provided to verify request parameters. See: [Validation](../../techniques/validation/introduction.md)
+Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is provided to verify request parameters
+
+- See: [Validation](../../techniques/validation/introduction.md)
+
+## Swagger/OpenAPI
+
+Vona implements a very convenient `Swagger/OpenAPI` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/OpenAPI` in Vona still uses the decorators in [Validation](../../techniques/validation/introduction.md), and provides extension tools to set up metadata related to OpenAPI
+
+- See: [Swagger/OpenAPI](../../techniques/openapi/introduction.md)
 
 ## Response Body
