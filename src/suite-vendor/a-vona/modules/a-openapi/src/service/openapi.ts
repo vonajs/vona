@@ -15,6 +15,7 @@ import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@astea
 import * as ModuleInfo from '@cabloy/module-info';
 import { isEmptyObject } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { getTypeName } from '@cabloy/zod-query';
 import {
   appMetadata,
   appResource,
@@ -322,6 +323,9 @@ export class ServiceOpenapi extends BeanBase {
           };
         } else {
           // others
+          if (getTypeName(schema) === 'ZodAny') {
+            throw new Error(`Invalid OpenAPI argument type: ${argumentType} in action ${actionKey} of controller ${controller.name}`);
+          }
           const name = argumentType === 'param' ? 'params' : argumentType;
           request[name] = schema;
         }

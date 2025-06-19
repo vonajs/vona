@@ -202,6 +202,7 @@ export function coerceWithNil(data: any, fn?: Function) {
 
 function _getInnerType(schema: any) {
   let innerType = schema._def.innerType;
+  if (!innerType) return schema;
   while (innerType._def.innerType) {
     innerType = innerType._def.innerType;
   }
@@ -215,6 +216,10 @@ function _getTypeName(schema: any) {
     typeName = schema.typeName;
   }
   return typeName;
+}
+
+export function getTypeName(schema: any) {
+  return _getTypeName(_getInnerType(schema));
 }
 
 // function _coerce(instance, input, fn) {
