@@ -28,6 +28,95 @@ Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zo
 
 ## 4. 特殊工具：Array
 
-比如，`findOne(@Arg.query('id', v.array(Number)) id: number)`，我们指定 ids 为`number[]`首先，系统自动推断出 schema 为`z.number()`，然后，依次附加`optional`和`default`属性，最终会生成 schema：`z.number().optional().default(3)`。那么，自动生成的 Swagger/OpenAPI 如下：
+比如，`findOne(@Arg.query('ids', v.array(Number)) ids: number[])`，我们指定 ids 为`number[]`。那么，自动生成的 Swagger/OpenAPI 如下：
 
-![](../../../assets/img/openapi/openapi-4.png)
+![](../../../assets/img/openapi/openapi-5.png)
+
+## 扩展工具
+
+Vona 还提供了许多扩展工具，用于设置与 OpenAPI 相关的元数据
+
+|名称|说明|
+|--|--|
+|v.default|default|
+|v.optional|optional|
+|v.openapi|openapi|
+|v.title|title|
+|v.description|description|
+|v.example|example|
+
+### 1. 举例：v.title
+比如，我们可以为 OpenAPI 指定`title`为`Name`
+
+``` typescript
+class ControllerStudent3 {
+  @Web.get()
+  findOne(@Arg.query('name', v.title('Name')) name: string) {}
+}  
+```
+
+自动生成的 Swagger/OpenAPI 如下：(由于 Swagger 没有在界面显示 title 信息，我们直接查看 OpenAPI json 数据)
+
+![](../../../assets/img/openapi/openapi-6.png)
+
+### 2. 举例：v.openapi
+
+我们可以使用`v.openapi`一次设置更多的元数据。比如，我们可以为 OpenAPI 指定`title`为`Name`，`example`为`Tom`
+
+``` typescript
+class ControllerStudent3 {
+  @Web.get()
+  findOne(@Arg.query('name', v.openapi({ title: 'Name', example: 'Tom' })) name: string) {}
+}  
+```
+
+自动生成的 Swagger/OpenAPI 如下：
+
+![](../../../assets/img/openapi/openapi-7.png)
+
+## I18n国际化
+
+Vona 为 OpenAPI 提供了 I18n 国际化。比如，`title`为`Name`，支持多语言的步骤如下：
+
+### 1. 提供语言资源
+
+如何添加语言资源，参见：[I18n国际化](../../essentials/scope/locale.md)
+
+* 英文：`src/module/demo-student/src/config/locale/en-us.ts`
+
+``` typescript
+export default {
+  Name: 'Name',
+};
+```
+
+* 中文：`src/module/demo-student/src/config/locale/zh-cn.ts`
+
+``` typescript
+export default {
+  Name: '名称',
+};
+```
+
+### 2. 使用$locale
+
+使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
+
+``` typescript
+import { $locale } from '../.metadata/index.ts';
+
+class ControllerStudent3 {
+  @Web.get()
+  findOne(@Arg.query('name', v.title($locale('Name'))) name: string) {}
+}  
+```
+
+自动生成的 Swagger/OpenAPI 如下：
+
+* 英文：http://localhost:7102/swagger/json?x-vona-locale=en-us
+
+![](../../../assets/img/openapi/openapi-8.png)
+
+* 中文：http://localhost:7102/swagger/json?x-vona-locale=zh-cn
+
+![](../../../assets/img/openapi/openapi-9.png)
