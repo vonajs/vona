@@ -245,12 +245,13 @@ export class ServiceOpenapi extends BeanBase {
       security,
       description: actionOpenApiOptions?.description,
       summary: actionOpenApiOptions?.summary,
-      request: this._collectRequest(controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions),
+      request: this._collectRequest(info, controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions),
       responses: this._collectResponses(controller, actionKey, actionOpenApiOptions),
     });
   }
 
   private _collectRequest(
+    info: ModuleInfo.IModuleInfo,
     controller: Constructable,
     actionKey: string,
     actionOpenApiOptions: IOpenApiOptions | undefined,
@@ -310,6 +311,10 @@ export class ServiceOpenapi extends BeanBase {
           }
         }
         if (!schema) continue;
+        // check schema
+        if (getTypeName(schema) === 'ZodAny') {
+          throw new Error(`Invalid OpenAPI argument type: ${info.relativeName}:${controller.name}.${actionKey}#${argumentType}`);
+        }
         // record
         if (argumentType === 'body') {
           // body
@@ -323,9 +328,6 @@ export class ServiceOpenapi extends BeanBase {
           };
         } else {
           // others
-          if (getTypeName(schema) === 'ZodAny') {
-            throw new Error(`Invalid OpenAPI argument type: ${argumentType} in action ${actionKey} of controller ${controller.name}`);
-          }
           const name = argumentType === 'param' ? 'params' : argumentType;
           request[name] = schema;
         }
