@@ -1,13 +1,14 @@
 import type { IPassportAdapter, IPassportBase } from 'vona-module-a-user';
 import type { IPassport, IPayloadData } from '../types/passport.ts';
-import type { IUser } from '../types/user.ts';
 import { BeanBase } from 'vona';
+import { $getRoleName } from 'vona-module-a-user';
 import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
-  async isAdmin(user: IUser): Promise<boolean> {
-    return user.name === 'admin';
+  async isAdmin(passport: IPassport | undefined): Promise<boolean> {
+    if (!passport || !passport.roles) return false;
+    return passport.roles.some(item => $getRoleName(item) === 'admin');
   }
 
   async setCurrent(passport: IPassport | undefined): Promise<IPassport | undefined> {

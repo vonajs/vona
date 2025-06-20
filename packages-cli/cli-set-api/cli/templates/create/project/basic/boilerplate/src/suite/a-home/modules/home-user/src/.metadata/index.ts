@@ -65,9 +65,9 @@ export * from '../config/config.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'home-user:role': IEntityOptionsRole;
-    'home-user:user': IEntityOptionsUser;
-    'home-user:userRole': IEntityOptionsUserRole;
+    'home-user:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
+    'home-user:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
+    'home-user:userRole': Omit<IEntityOptionsUserRole, '_fieldsMore_'>;
   }
 
 }
@@ -182,9 +182,9 @@ export * from '../model/role.ts';
 declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'home-user:auth': IDtoOptionsAuth;
-    'home-user:passport': IDtoOptionsPassport;
-    'home-user:passportJwt': IDtoOptionsPassportJwt;
+    'home-user:auth': Omit<IDtoOptionsAuth, '_fieldsMore_'>;
+    'home-user:passport': Omit<IDtoOptionsPassport, '_fieldsMore_'>;
+    'home-user:passportJwt': Omit<IDtoOptionsPassportJwt, '_fieldsMore_'>;
   }
 
 }
