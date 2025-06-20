@@ -2,6 +2,25 @@
 
 Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/OpenAPI`。Vona 中的 `Swagger/OpenAPI` 仍然延续[参数校验](../validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 OpenAPI 相关的元数据
 
+## URL
+
+Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
+
+|名称|URL|
+|--|--|
+|Swagger|http://localhost:7102/swagger|
+|Openapi json| http://localhost:7102/swagger/json|
+|Openapi json V3.1| http://localhost:7102/swagger/json?version=V31|
+|Openapi json V3.0| http://localhost:7102/swagger/json?version=V30|
+
+- Openapi json 默认是`V3.1`
+
+此外，Vona 还内置了[RapiDoc](https://rapidocweb.com/)，提供了更加优雅的 UI
+
+|名称|URL|
+|--|--|
+|RapiDoc|http://localhost:7102/rapidoc|
+
 ## 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
 如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而自动生成 OpenAPI 元数据

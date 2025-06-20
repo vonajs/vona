@@ -2,6 +2,25 @@
 
 Vona implements a very convenient `Swagger/OpenAPI` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/OpenAPI` in Vona still uses the decorators in [Validation](../validation/introduction.md), and provides extension tools to set metadata related to OpenAPI
 
+## URL
+
+Vona has a built-in `Swagger` module, which we can access directly through the URL:
+
+|Name|URL|
+|--|--|
+|Swagger|http://localhost:7102/swagger|
+|Openapi json| http://localhost:7102/swagger/json|
+|Openapi json V3.1| http://localhost:7102/swagger/json?version=V31|
+|Openapi json V3.0| http://localhost:7102/swagger/json?version=V30|
+
+- The default version of Openapi json is `V3.1`
+
+In addition, Vona also has built-in [RapiDoc](https://rapidocweb.com/), which provides a more elegant UI
+
+|Name|URL|
+|--|--|
+|RapiDoc|http://localhost:7102/rapidoc|
+
 ## 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
 If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema, and automatically generate OpenAPI metadata
