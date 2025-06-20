@@ -33,17 +33,34 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
 
   const localeNames = Object.keys(ctx.app.meta.locales);
 
+  const queryField = options.queryField;
+  const headerField = options.headerField;
+  const cookieField = options.cookieField;
+
+  let locale: string | undefined = '';
+  let localeOrigin: string = '';
+
+  const cookieLocale = cookieField && ctx.cookies.get(cookieField, { signed: false });
+
   // 1. Query
-  let locale = ctx.query[options.queryField];
-  let localeOrigin = 'query';
+  if (!locale && queryField) {
+    locale = ctx.request.query[queryField];
+    localeOrigin = 'query';
+  }
 
   // 2. Header
-  if (!locale) {
-    locale = ctx.req.headers[options.headerField];
+  if (!locale && headerField) {
+    locale = ctx.request.headers[headerField] as string;
     localeOrigin = 'header';
   }
 
-  // 3. Header
+  // 3. Cookie
+  if (!locale && cookieField) {
+    locale = cookieLocale;
+    localeOrigin = 'cookie';
+  }
+
+  // 4. Header: Accept
   if (!locale) {
     // Accept-Language: zh-CN,zh;q=0.5
     // Accept-Language: zh-CN
@@ -68,12 +85,12 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
         localeOrigin = 'header';
       }
     }
+  }
 
-    // all missing, set it to defaultLocale
-    if (!locale) {
-      locale = options.defaultLocale;
-      localeOrigin = 'default';
-    }
+  // all missing, set it to defaultLocale
+  if (!locale) {
+    locale = options.defaultLocale;
+    localeOrigin = 'default';
   }
 
   // cookie alias
@@ -88,9 +105,26 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
     locale = options.defaultLocale;
   }
 
+  // if header not send, set the locale cookie
+  if (cookieField && options.writeCookie && cookieLocale !== locale && !ctx.headerSent) {
+    updateCookie(ctx, options, locale);
+  }
+
   ctx[SymbolLocale] = locale;
   ctx[SymbolLocaleOrigin] = localeOrigin;
   return locale;
+}
+
+function updateCookie(ctx: VonaContext, options: I18nConfig, locale: string) {
+  const cookieOptions = {
+    // make sure brower javascript can read the cookie
+    httpOnly: false,
+    maxAge: options.cookieMaxAge,
+    signed: false,
+    domain: options.cookieDomain,
+    overwrite: true,
+  };
+  ctx.cookies.set(options.cookieField!, locale, cookieOptions);
 }
 
 function formatLocale(locale) {
