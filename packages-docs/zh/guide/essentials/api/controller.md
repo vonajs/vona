@@ -171,3 +171,113 @@ Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zo
 
 ## Response Body
 
+Vona 提供了与[参数校验](../../techniques/validation/introduction.md)类似的机制，指定 Response body 的类型，并自动生成 Swagger/OpenAPI 元数据
+
+### 1. 自动推断Zod Schema：基础类型/Dto/Entity
+
+如果 body 类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/OpenAPI
+
+* 举例：string
+
+``` typescript{3}
+class ControllerStudent {
+  @Web.get()
+  findOne(): string {
+    return 'Tom';
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-10.png)
+
+* 举例：EntityStudent
+
+``` typescript{3}
+class ControllerStudent {
+  @Web.get()
+  findOne(): EntityStudent {
+    return {} as EntityStudent;
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-11.png)
+
+* 可自动推断的类型清单
+
+|名称|说明|
+|--|--|
+|string|z.string()|
+|number|z.number()|
+|boolean|z.boolean()|
+|Dto|z.object({...})|
+|Entity|z.object({...})|
+
+### 2. 指定Zod Schema
+
+我们还可以显式的指定 Zod Schema，并自动生成 Swagger/OpenAPI
+
+* 举例：string[]
+
+使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../../techniques/validation/introduction.md)一致
+
+``` typescript{5}
+import { Api } from 'vona-module-a-openapi';
+
+class ControllerStudent {
+  @Web.get()
+  @Api.body(v.array(String))
+  findOne(): string[] {
+    return ['Tom'];
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-12.png)
+
+* 举例：Promise&lt;EntityStudent&gt;
+
+``` typescript{3}
+class ControllerStudent {
+  @Web.get()
+  @Api.body(EntityStudent)
+  async findOne(): Promise<EntityStudent> {
+    return {} as EntityStudent;
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-13.png)
+
+## Response Body包装对象
+
+在默认情况下，Vona 自动为 Response body 提供一个包装对象。比如，我们要返回 string 类型的 body，那么实际返回的数据类型是：
+
+``` typescript
+{
+  code: string;
+  message: string;
+  data: string;
+}
+```
+
+我们还可以使用装饰器`@Api.bodyCustom`来自定义包装对象
+
+### 1. 禁用包装对象
+
+可以禁用包装对象，直接返回 Response body 本身
+
+``` typescript{3}
+class ControllerStudent {
+  @Web.get()
+  @Api.bodyCustom(false)
+  findOne(): string {
+    return 'Tom';
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-14.png)
+
+### 2. 提供自定义包装对象
+
