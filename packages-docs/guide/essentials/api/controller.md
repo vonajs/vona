@@ -171,33 +171,33 @@ Vona implements a very convenient `Swagger/OpenAPI` based on [@asteasolutions/zo
 
 ## Response Body
 
-Vona provides a mechanism similar to [parameter validation](../../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/OpenAPI metadata
+Vona provides a mechanism similar to [Validation](../../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/OpenAPI metadata
 
-### 1. Automatically infer Zod Schema: basic type/Dto/Entity
+### 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the body type is `basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/OpenAPI
+If the body type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/OpenAPI
 
-* Example: string
+* Example: `string`
 
 ``` typescript{3}
 class ControllerStudent {
-@Web.get()
-findOne(): string {
-return 'Tom';
-}
+  @Web.get()
+  findOne(): string {
+    return 'Tom';
+  }
 }
 ```
 
 ![](../../../assets/img/openapi/openapi-10.png)
 
-* Example: EntityStudent
+* Example: `EntityStudent`
 
 ``` typescript{3}
 class ControllerStudent {
-@Web.get()
-findOne(): EntityStudent {
-return {} as EntityStudent;
-}
+  @Web.get()
+  findOne(): EntityStudent {
+    return {} as EntityStudent;
+  }
 }
 ```
 
@@ -217,33 +217,33 @@ return {} as EntityStudent;
 
 We can also explicitly specify Zod Schema and automatically generate Swagger/OpenAPI
 
-* Example: string[]
+* Example: `string[]`
 
-Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [parameter validation](../../techniques/validation/introduction.md)
+Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [Validation](../../techniques/validation/introduction.md)
 
 ``` typescript{5}
 import { Api } from 'vona-module-a-openapi';
 
 class ControllerStudent {
-@Web.get()
-@Api.body(v.array(String))
-findOne(): string[] {
-return ['Tom'];
-}
+  @Web.get()
+  @Api.body(v.array(String))
+  findOne(): string[] {
+    return ['Tom'];
+  }
 }
 ```
 
 ![](../../../assets/img/openapi/openapi-12.png)
 
-* Example: Promise&lt;EntityStudent&gt;
+* Example: `Promise<EntityStudent>`
 
 ``` typescript{3}
 class ControllerStudent {
-@Web.get()
-@Api.body(EntityStudent)
-async findOne(): Promise<EntityStudent> {
-return {} as EntityStudent;
-}
+  @Web.get()
+  @Api.body(EntityStudent)
+  async findOne(): Promise<EntityStudent> {
+    return {} as EntityStudent;
+  }
 }
 ```
 
@@ -251,13 +251,13 @@ return {} as EntityStudent;
 
 ## Response Body Wrapper Object
 
-By default, Vona automatically provides a wrapper object for the Response body. For example, if we want to return a body of type string, the actual returned data type is:
+By default, Vona automatically provides a wrapper object for the Response body. For example, if we want to return a body of type `string`, the actual returned data type is:
 
 ``` typescript
 {
-code: string;
-message: string;
-data: string;
+  code: string;
+  message: string;
+  data: string;
 }
 ```
 
@@ -269,11 +269,11 @@ You can disable the wrapper object and directly return the Response body itself
 
 ``` typescript{3}
 class ControllerStudent {
-@Web.get()
-@Api.bodyCustom(false)
-findOne(): string {
-return 'Tom';
-}
+  @Web.get()
+  @Api.bodyCustom(false)
+  findOne(): string {
+    return 'Tom';
+  }
 }
 ```
 
@@ -285,11 +285,11 @@ return 'Tom';
 
 ``` typescript
 export function bodySchemaWrapperCustom(bodySchema: any) {
-return z.object({
-status: z.number(),
-msg: z.string(),
-data: bodySchema,
-});
+  return z.object({
+    status: z.number(),
+    msg: z.string(),
+    data: bodySchema,
+  });
 }
 ```
 
@@ -297,11 +297,11 @@ data: bodySchema,
 
 ``` typescript{3}
 class ControllerStudent {
-@Web.get()
-@Api.bodyCustom(bodySchemaWrapperCustom)
-findOne(): string {
-return 'Tom';
-}
+  @Web.get()
+  @Api.bodyCustom(bodySchemaWrapperCustom)
+  findOne(): string {
+    return 'Tom';
+  }
 }
 ```
 
@@ -311,11 +311,11 @@ return 'Tom';
 
 ``` typescript{3}
 class ControllerStudent {
-@Web.get()
-@Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
-async findOne(): Promise<EntityStudent> {
-return {} as EntityStudent;
-}
+  @Web.get()
+  @Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
+  async findOne(): Promise<EntityStudent> {
+    return {} as EntityStudent;
+  }
 }
 ```
 

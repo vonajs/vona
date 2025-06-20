@@ -177,7 +177,7 @@ Vona 提供了与[参数校验](../../techniques/validation/introduction.md)类�
 
 如果 body 类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/OpenAPI
 
-* 举例：string
+* 举例：`string`
 
 ``` typescript{3}
 class ControllerStudent {
@@ -190,7 +190,7 @@ class ControllerStudent {
 
 ![](../../../assets/img/openapi/openapi-10.png)
 
-* 举例：EntityStudent
+* 举例：`EntityStudent`
 
 ``` typescript{3}
 class ControllerStudent {
@@ -217,7 +217,7 @@ class ControllerStudent {
 
 我们还可以显式的指定 Zod Schema，并自动生成 Swagger/OpenAPI
 
-* 举例：string[]
+* 举例：`string[]`
 
 使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../../techniques/validation/introduction.md)一致
 
@@ -235,7 +235,7 @@ class ControllerStudent {
 
 ![](../../../assets/img/openapi/openapi-12.png)
 
-* 举例：Promise&lt;EntityStudent&gt;
+* 举例：`Promise<EntityStudent>`
 
 ``` typescript{3}
 class ControllerStudent {
