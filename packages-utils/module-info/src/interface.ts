@@ -81,6 +81,7 @@ export interface OnionSceneMeta {
   optionsDynamic?: boolean;
   optionsPackage?: boolean;
   optionsMatchExpression?: boolean;
+  optionsCustomInterfaceTemplate?: string;
   optionsGlobalInterfaceName?: string;
   optionsGlobalInterfaceFrom?: string;
   scopeResource?: boolean;

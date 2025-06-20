@@ -11,6 +11,7 @@
     "onions": {
       "dto": {
         "sceneIsolate": true,
+        "optionsCustomInterfaceTemplate": "Omit<{{optionsCustomInterface}}, '_fieldsMore_'>",
         "optionsGlobalInterfaceName": "IDecoratorDtoOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
         "boilerplate": "cli/dto/boilerplate",

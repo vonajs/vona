@@ -1,4 +1,5 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
+import { replaceTemplate } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.ts';
 
@@ -40,10 +41,18 @@ export async function generateOnions(
         `import type { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
       );
     }
+    // valueOptionsCustomInterface
+    let valueOptionsCustomInterface = fileInfo.optionsCustomInterface;
+    if (valueOptionsCustomInterface && sceneMeta.optionsCustomInterfaceTemplate) {
+      valueOptionsCustomInterface = replaceTemplate(
+        sceneMeta.optionsCustomInterfaceTemplate,
+        { optionsCustomInterface: valueOptionsCustomInterface },
+      );
+    }
     // record
     if (fileInfo.isGlobal) {
-      if (fileInfo.optionsCustomInterface) {
-        contentRecordsGlobal.push(`'${beanNameFull}': ${fileInfo.optionsCustomInterface};`);
+      if (valueOptionsCustomInterface) {
+        contentRecordsGlobal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
       } else {
         if (sceneMeta.optionsGlobalInterfaceName) {
           contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
@@ -53,8 +62,8 @@ export async function generateOnions(
         }
       }
     } else {
-      if (fileInfo.optionsCustomInterface) {
-        contentRecordsLocal.push(`'${beanNameFull}': ${fileInfo.optionsCustomInterface};`);
+      if (valueOptionsCustomInterface) {
+        contentRecordsLocal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
       } else {
         contentRecordsLocal.push(`'${beanNameFull}': never;`);
       }
