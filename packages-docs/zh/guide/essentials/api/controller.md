@@ -281,3 +281,42 @@ class ControllerStudent {
 
 ### 2. 提供自定义包装对象
 
+* 首先，定义包装函数：
+
+``` typescript
+export function bodySchemaWrapperCustom(bodySchema: any) {
+  return z.object({
+    status: z.number(),
+    msg: z.string(),
+    data: bodySchema,
+  });
+}
+```
+
+* 然后将包装函数`bodySchemaWrapperCustom`传入装饰器`@Api.bodyCustom`
+
+``` typescript{3}
+class ControllerStudent {
+  @Web.get()
+  @Api.bodyCustom(bodySchemaWrapperCustom)
+  findOne(): string {
+    return 'Tom';
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-15.png)
+
+* 如果 Response body 的类型是`Promise<EntityStudent>`，那么代码如下：
+
+``` typescript{3}
+class ControllerStudent {
+  @Web.get()
+  @Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
+  async findOne(): Promise<EntityStudent> {
+    return {} as EntityStudent;
+  }
+}  
+```
+
+![](../../../assets/img/openapi/openapi-16.png)
