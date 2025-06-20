@@ -340,16 +340,16 @@ importers:
         specifier: ^7.26.5
         version: 7.27.5
       '@cabloy/module-glob':
-        specifier: ^5.2.13
+        specifier: ^5.2.14
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../../packages-utils/module-info
       '@cabloy/process-helper':
         specifier: ^2.0.18
         version: link:../../packages-utils/process-helper
       '@cabloy/utils':
-        specifier: ^1.0.27
+        specifier: ^1.0.28
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -413,7 +413,7 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.30
+        specifier: ^3.0.31
         version: link:../cabloy-cli
       '@cabloy/process-helper':
         specifier: ^2.0.18
@@ -422,7 +422,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.76
+        specifier: ^1.0.77
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -444,7 +444,7 @@ importers:
         specifier: ^7.26.8
         version: 7.27.1(@babel/core@7.27.4)
       '@cabloy/cli':
-        specifier: ^3.0.30
+        specifier: ^3.0.31
         version: link:../cabloy-cli
       '@cabloy/dotenv':
         specifier: ^1.1.10
@@ -453,10 +453,10 @@ importers:
         specifier: ^3.1.10
         version: link:../../packages-utils/extend
       '@cabloy/module-glob':
-        specifier: ^5.2.13
+        specifier: ^5.2.14
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../../packages-utils/module-info
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -534,7 +534,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -676,10 +676,10 @@ importers:
   packages-utils/module-glob:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../module-info
       '@cabloy/utils':
-        specifier: ^1.0.27
+        specifier: ^1.0.28
         version: link:../utils
       boxen:
         specifier: ^4.2.0
@@ -716,7 +716,7 @@ importers:
   packages-utils/module-info-pro:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../module-info
       stack-utils:
         specifier: ^2.0.6
@@ -777,7 +777,7 @@ importers:
   packages-utils/utils:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../module-info
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -821,10 +821,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.35
+        specifier: ^5.0.36
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -855,16 +855,16 @@ importers:
         specifier: ^2.0.10
         version: link:../../packages-utils/localeutil
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
-        specifier: ^1.0.28
+        specifier: ^1.0.29
         version: link:../../packages-utils/module-info-pro
       '@cabloy/set':
         specifier: ^1.0.17
         version: link:../../packages-utils/set
       '@cabloy/utils':
-        specifier: ^1.0.27
+        specifier: ^1.0.28
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -913,13 +913,13 @@ importers:
   packages-vona/vona-mock:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
-        specifier: ^1.0.28
+        specifier: ^1.0.29
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1140,10 +1140,10 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-aspect
       vona-module-a-auth:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-auth
       vona-module-a-authsimple:
-        specifier: ^5.0.14
+        specifier: ^5.0.15
         version: link:modules/a-authsimple
       vona-module-a-bean:
         specifier: ^5.0.11
@@ -1158,10 +1158,10 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-cache
       vona-module-a-core:
-        specifier: ^5.0.30
+        specifier: ^5.0.31
         version: link:modules/a-core
       vona-module-a-database:
-        specifier: ^5.0.25
+        specifier: ^5.0.26
         version: link:modules/a-database
       vona-module-a-databasedialect:
         specifier: ^5.0.11
@@ -1179,22 +1179,22 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-executor
       vona-module-a-i18n:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-i18n
       vona-module-a-index:
         specifier: ^5.0.12
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.0.12
+        specifier: ^5.0.13
         version: link:modules/a-jwt
       vona-module-a-logger:
         specifier: ^5.0.11
         version: link:modules/a-logger
       vona-module-a-menu:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-menu
       vona-module-a-meta:
         specifier: ^5.0.11
@@ -1203,7 +1203,7 @@ importers:
         specifier: ^5.0.13
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.17
+        specifier: ^5.0.18
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.11
@@ -1242,19 +1242,19 @@ importers:
         specifier: ^5.0.11
         version: link:modules/a-upload
       vona-module-a-user:
-        specifier: ^5.0.14
+        specifier: ^5.0.15
         version: link:modules/a-user
       vona-module-a-validation:
         specifier: ^5.0.11
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.14
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.12
+        specifier: ^5.0.13
         version: link:modules/a-web
       vona-module-a-worker:
         specifier: ^5.0.11
@@ -1350,13 +1350,13 @@ importers:
         specifier: ^1.0.18
         version: link:../../../../../packages-utils/json5
       '@cabloy/module-info':
-        specifier: ^1.3.20
+        specifier: ^1.3.21
         version: link:../../../../../packages-utils/module-info
       '@cabloy/set':
         specifier: ^1.0.17
         version: link:../../../../../packages-utils/set
       '@cabloy/utils':
-        specifier: ^1.0.27
+        specifier: ^1.0.28
         version: link:../../../../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -1393,7 +1393,7 @@ importers:
         version: 3.17.0
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.30
+        specifier: ^3.0.31
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
         specifier: ^1.7.36
@@ -1429,7 +1429,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.23
+        specifier: ^6.0.24
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -1625,7 +1625,7 @@ importers:
         specifier: ^1.0.13
         version: link:../../../../../packages-utils/zod-errors-custom
       '@cabloy/zod-query':
-        specifier: ^1.0.14
+        specifier: ^1.0.15
         version: link:../../../../../packages-utils/zod-query
       '@zhennann/currency':
         specifier: ^2.0.0
