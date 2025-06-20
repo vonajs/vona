@@ -19,7 +19,7 @@ export function config(_app: VonaApplication) {
       headerField: 'x-vona-locale',
       cookieField: 'locale',
       localeAlias: {},
-      writeCookie: false,
+      writeCookie: true,
       cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
     } as I18nConfig,
   };
