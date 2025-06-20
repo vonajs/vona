@@ -50,7 +50,7 @@ export * from '../bean/authProvider.simple.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-authsimple:authSimple': IEntityOptionsAuthSimple;
+    'a-authsimple:authSimple': Omit<IEntityOptionsAuthSimple, '_fieldsMore_'>;
   }
 
 }
@@ -154,7 +154,7 @@ export * from '../entity/authSimple.ts';
 declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'a-authsimple:authSimple': IDtoOptionsAuthSimple;
+    'a-authsimple:authSimple': Omit<IDtoOptionsAuthSimple, '_fieldsMore_'>;
   }
 
 }

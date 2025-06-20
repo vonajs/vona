@@ -60,9 +60,9 @@ export * from '../bean/startup.databaseInit.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-version:version': IEntityOptionsVersion;
-    'a-version:versionInit': IEntityOptionsVersionInit;
-    'a-version:viewRecord': IEntityOptionsViewRecord;
+    'a-version:version': Omit<IEntityOptionsVersion, '_fieldsMore_'>;
+    'a-version:versionInit': Omit<IEntityOptionsVersionInit, '_fieldsMore_'>;
+    'a-version:viewRecord': Omit<IEntityOptionsViewRecord, '_fieldsMore_'>;
   }
 
 }

@@ -70,12 +70,12 @@ export * from '../dto/menus.ts';
 declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'a-menu:menuGroup': IDtoOptionsMenuGroup;
-    'a-menu:menuItem': IDtoOptionsMenuItem;
-    'a-menu:menuItemMeta': IDtoOptionsMenuItemMeta;
-    'a-menu:menuItemMetaParams': IDtoOptionsMenuItemMetaParams;
-    'a-menu:menuItemMetaQuery': IDtoOptionsMenuItemMetaQuery;
-    'a-menu:menus': IDtoOptionsMenus;
+    'a-menu:menuGroup': Omit<IDtoOptionsMenuGroup, '_fieldsMore_'>;
+    'a-menu:menuItem': Omit<IDtoOptionsMenuItem, '_fieldsMore_'>;
+    'a-menu:menuItemMeta': Omit<IDtoOptionsMenuItemMeta, '_fieldsMore_'>;
+    'a-menu:menuItemMetaParams': Omit<IDtoOptionsMenuItemMetaParams, '_fieldsMore_'>;
+    'a-menu:menuItemMetaQuery': Omit<IDtoOptionsMenuItemMetaQuery, '_fieldsMore_'>;
+    'a-menu:menus': Omit<IDtoOptionsMenus, '_fieldsMore_'>;
   }
 
 }

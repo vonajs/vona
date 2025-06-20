@@ -72,8 +72,8 @@ export * from '../bean/bean.authProvider.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-auth:auth': IEntityOptionsAuth;
-    'a-auth:authProvider': IEntityOptionsAuthProvider;
+    'a-auth:auth': Omit<IEntityOptionsAuth, '_fieldsMore_'>;
+    'a-auth:authProvider': Omit<IEntityOptionsAuthProvider, '_fieldsMore_'>;
   }
 
 }

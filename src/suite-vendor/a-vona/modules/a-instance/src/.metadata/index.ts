@@ -89,7 +89,7 @@ export * from '../bean/broadcast.resetCache.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'a-instance:instance': IEntityOptionsInstance;
+    'a-instance:instance': Omit<IEntityOptionsInstance, '_fieldsMore_'>;
   }
 
 }

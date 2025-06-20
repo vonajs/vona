@@ -51,7 +51,7 @@ export * from '../config/config.ts';
 declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'a-jwt:jwtToken': IDtoOptionsJwtToken;
+    'a-jwt:jwtToken': Omit<IDtoOptionsJwtToken, '_fieldsMore_'>;
   }
 
 }

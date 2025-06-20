@@ -177,7 +177,7 @@ export * from '../bean/bean.testCtx.ts';
 declare module 'vona-module-a-database' {
 
   export interface IEntityRecord {
-    'test-vona:test': IEntityOptionsTest;
+    'test-vona:test': Omit<IEntityOptionsTest, '_fieldsMore_'>;
   }
 
 }
@@ -423,8 +423,8 @@ export * from '../controller/cacheRedis.ts';
 declare module 'vona-module-a-web' {
 
   export interface IDtoRecord {
-    'test-vona:profile': IDtoOptionsProfile;
-    'test-vona:user': IDtoOptionsUser;
+    'test-vona:profile': Omit<IDtoOptionsProfile, '_fieldsMore_'>;
+    'test-vona:user': Omit<IDtoOptionsUser, '_fieldsMore_'>;
   }
 
 }
