@@ -82,20 +82,14 @@ declare module 'vona-module-a-auth' {
 
 }
 export interface IModuleEntity {
-  auth: TypeMetaEntity<EntityAuth>;
-  authProvider: TypeMetaEntity<EntityAuthProvider>;
+  auth: TypeMetaEntity<EntityAuth, EntityAuthTableName>;
+  authProvider: TypeMetaEntity<EntityAuthProvider, EntityAuthProviderTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityAuthTableName = 'aAuth';
+export type EntityAuthProviderTableName = 'aAuthProvider';
 declare module 'vona-module-a-auth' {
-
-  export interface EntityAuth {
-    get $table(): 'aAuth';
-  }
-
-  export interface EntityAuthProvider {
-    get $table(): 'aAuthProvider';
-  }
 
   export interface IEntityOptionsAuth {
     fields?: TypeEntityOptionsFields<EntityAuth, IEntityOptionsAuth['_fieldsMore_']>;

@@ -59,15 +59,12 @@ declare module 'vona-module-a-authsimple' {
 
 }
 export interface IModuleEntity {
-  authSimple: TypeMetaEntity<EntityAuthSimple>;
+  authSimple: TypeMetaEntity<EntityAuthSimple, EntityAuthSimpleTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityAuthSimpleTableName = 'aAuthSimple';
 declare module 'vona-module-a-authsimple' {
-
-  export interface EntityAuthSimple {
-    get $table(): 'aAuthSimple';
-  }
 
   export interface IEntityOptionsAuthSimple {
     fields?: TypeEntityOptionsFields<EntityAuthSimple, IEntityOptionsAuthSimple['_fieldsMore_']>;

@@ -186,15 +186,12 @@ declare module 'vona-module-test-vona' {
 
 }
 export interface IModuleEntity {
-  test: TypeMetaEntity<EntityTest>;
+  test: TypeMetaEntity<EntityTest, EntityTestTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityTestTableName = 'testVona';
 declare module 'vona-module-test-vona' {
-
-  export interface EntityTest {
-    get $table(): 'testVona';
-  }
 
   export interface IEntityOptionsTest {
     fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;

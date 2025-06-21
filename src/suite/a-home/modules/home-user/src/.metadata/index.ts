@@ -76,25 +76,16 @@ declare module 'vona-module-home-user' {
 
 }
 export interface IModuleEntity {
-  role: TypeMetaEntity<EntityRole>;
-  user: TypeMetaEntity<EntityUser>;
-  userRole: TypeMetaEntity<EntityUserRole>;
+  role: TypeMetaEntity<EntityRole, EntityRoleTableName>;
+  user: TypeMetaEntity<EntityUser, EntityUserTableName>;
+  userRole: TypeMetaEntity<EntityUserRole, EntityUserRoleTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityRoleTableName = 'homeRole';
+export type EntityUserTableName = 'homeUser';
+export type EntityUserRoleTableName = 'homeUserRole';
 declare module 'vona-module-home-user' {
-
-  export interface EntityRole {
-    get $table(): 'homeRole';
-  }
-
-  export interface EntityUser {
-    get $table(): 'homeUser';
-  }
-
-  export interface EntityUserRole {
-    get $table(): 'homeUserRole';
-  }
 
   export interface IEntityOptionsRole {
     fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;

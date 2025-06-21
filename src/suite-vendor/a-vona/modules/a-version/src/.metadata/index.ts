@@ -71,25 +71,16 @@ declare module 'vona-module-a-version' {
 
 }
 export interface IModuleEntity {
-  version: TypeMetaEntity<EntityVersion>;
-  versionInit: TypeMetaEntity<EntityVersionInit>;
-  viewRecord: TypeMetaEntity<EntityViewRecord>;
+  version: TypeMetaEntity<EntityVersion, EntityVersionTableName>;
+  versionInit: TypeMetaEntity<EntityVersionInit, EntityVersionInitTableName>;
+  viewRecord: TypeMetaEntity<EntityViewRecord, EntityViewRecordTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityVersionTableName = 'aVersion';
+export type EntityVersionInitTableName = 'aVersionInit';
+export type EntityViewRecordTableName = 'aViewRecord';
 declare module 'vona-module-a-version' {
-
-  export interface EntityVersion {
-    get $table(): 'aVersion';
-  }
-
-  export interface EntityVersionInit {
-    get $table(): 'aVersionInit';
-  }
-
-  export interface EntityViewRecord {
-    get $table(): 'aViewRecord';
-  }
 
   export interface IEntityOptionsVersion {
     fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion['_fieldsMore_']>;

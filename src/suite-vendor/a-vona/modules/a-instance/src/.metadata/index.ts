@@ -98,15 +98,12 @@ declare module 'vona-module-a-instance' {
 
 }
 export interface IModuleEntity {
-  instance: TypeMetaEntity<EntityInstance>;
+  instance: TypeMetaEntity<EntityInstance, EntityInstanceTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityInstanceTableName = 'aInstance';
 declare module 'vona-module-a-instance' {
-
-  export interface EntityInstance {
-    get $table(): 'aInstance';
-  }
 
   export interface IEntityOptionsInstance {
     fields?: TypeEntityOptionsFields<EntityInstance, IEntityOptionsInstance['_fieldsMore_']>;
