@@ -1,5 +1,5 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { replaceTemplate, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { globBeanFiles } from './utils.ts';
 
 export async function generateScopeResources(
@@ -18,7 +18,11 @@ export async function generateScopeResources(
     const { fileNameJSRelative, className, beanName, isIgnore } = globFile;
     if (isIgnore) continue;
     contentImports.push(`import type { ${className} } from '${fileNameJSRelative}';`);
-    contentRecords.push(`'${beanName}': ${className};`);
+    let typeClassName = className;
+    if (sceneMeta.scopeResourceTypeTemplate) {
+      typeClassName = replaceTemplate(sceneMeta.scopeResourceTypeTemplate, { className })!;
+    }
+    contentRecords.push(`'${beanName}': ${typeClassName};`);
   }
   if (contentImports.length === 0) return '';
   // combine

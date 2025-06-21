@@ -85,6 +85,7 @@ export interface OnionSceneMeta {
   optionsGlobalInterfaceName?: string;
   optionsGlobalInterfaceFrom?: string;
   scopeResource?: boolean;
+  scopeResourceTypeTemplate?: string;
   beanGeneral?: boolean;
   snippets?: string;
   boilerplate?: string;
