@@ -81,20 +81,14 @@ declare module 'vona-module-a-version' {
 
   export interface EntityVersion {
     get $table(): 'aVersion';
-    $column: <K extends keyof Omit<EntityVersion, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityVersion, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityVersionInit {
     get $table(): 'aVersionInit';
-    $column: <K extends keyof Omit<EntityVersionInit, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityVersionInit, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityViewRecord {
     get $table(): 'aViewRecord';
-    $column: <K extends keyof Omit<EntityViewRecord, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityViewRecord, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface IEntityOptionsVersion {

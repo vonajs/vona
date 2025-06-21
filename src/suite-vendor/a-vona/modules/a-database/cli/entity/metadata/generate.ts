@@ -12,8 +12,6 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentColumns.push(`
     export interface ${className} {
       get $table(): '${tableName}';
-      $column: <K extends keyof Omit<${className}, '$column' | '$columns' | '$table'>>(column: K) => K;
-      $columns: <K extends keyof Omit<${className}, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
     }`);
     contentFields.push(`
     export interface ${opionsName} {
