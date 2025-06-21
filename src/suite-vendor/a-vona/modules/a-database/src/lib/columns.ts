@@ -11,8 +11,15 @@ export function $columns<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   extract: (classEntity: T) => any | any[] | undefined,
 ): string | string[] | undefined {
-  const columns = appMetadata.getMetadata(SymbolDecoratorRuleColumn, _prepareClassEntity(classEntity).prototype);
-  return extract(columns as any);
+  const columnsAll = $columnsAll(classEntity);
+  return extract(columnsAll as any);
+}
+
+export function $columnsAll<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): Record<string, string> {
+  const columns = appMetadata.getMetadata<Record<string, string>>(SymbolDecoratorRuleColumn, _prepareClassEntity(classEntity).prototype);
+  return columns!;
 }
 
 export function $tableColumns<T>(
