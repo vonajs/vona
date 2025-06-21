@@ -22,3 +22,7 @@ export function Entity<T extends IDecoratorEntityOptions<any>>(table?: T | strin
     mergeFieldsOpenAPIMetadata(target);
   });
 }
+
+export type TypeMetaEntity<T> = {
+  [key in keyof T]: key extends '$table' ? T[key] : key;
+};
