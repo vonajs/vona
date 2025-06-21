@@ -11,12 +11,14 @@ const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 const BeanModuleModel = Symbol('BeanScopeBase#BeanModuleModel');
+const BeanModuleEntity = Symbol('BeanScopeBase#BeanModuleEntity');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleUtil]: BeanScopeUtil;
   private [BeanModuleModel]: BeanBase;
+  private [BeanModuleEntity]: BeanBase;
   private __onionMetaNames: Record<string, boolean>;
   private __scenes: Record<string, BeanScopeScene> = {};
   private __metas: Record<string, unknown> = {};
@@ -78,6 +80,13 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleModel] = this.bean._newBean('a-database.service.modelResolver' as any, moduleBelong);
       }
       return this[BeanModuleModel];
+    }
+    // entity
+    if (prop === 'entity') {
+      if (!this[BeanModuleEntity]) {
+        this[BeanModuleEntity] = this.bean._newBean('a-database.service.entityResolver' as any, moduleBelong);
+      }
+      return this[BeanModuleEntity];
     }
     // meta
     if (this.onionMetaNames[prop]) {

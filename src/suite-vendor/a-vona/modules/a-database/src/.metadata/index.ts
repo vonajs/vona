@@ -34,6 +34,7 @@ import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceDb } from '../service/db.ts';
+import type { ServiceEntityResolver } from '../service/entityResolver.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
@@ -175,6 +176,7 @@ export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage.ts';
 export * from '../service/databaseClient.ts';
 export * from '../service/db.ts';
+export * from '../service/entityResolver.ts';
 declare module 'vona-module-a-web' {
 
   export interface IServiceRecord {
@@ -184,6 +186,7 @@ declare module 'vona-module-a-web' {
     'a-database:databaseAsyncLocalStorage': never;
     'a-database:databaseClient': never;
     'a-database:db': never;
+    'a-database:entityResolver': never;
     'a-database:modelResolver': never;
     'a-database:transaction': never;
     'a-database:transactionConsistency‌': never;
@@ -222,6 +225,11 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 
+  export interface ServiceEntityResolver {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
   export interface ServiceModelResolver {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -244,6 +252,7 @@ export interface IModuleService {
   databaseAsyncLocalStorage: ServiceDatabaseAsyncLocalStorage;
   databaseClient: ServiceDatabaseClient;
   db: ServiceDb;
+  entityResolver: ServiceEntityResolver;
   modelResolver: ServiceModelResolver;
   transaction: ServiceTransaction;
   transactionConsistency‌: ServiceTransactionConsistency‌;
@@ -256,6 +265,7 @@ declare module 'vona' {
     'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
     'a-database.service.databaseClient': ServiceDatabaseClient;
     'a-database.service.db': ServiceDb;
+    'a-database.service.entityResolver': ServiceEntityResolver;
     'a-database.service.modelResolver': ServiceModelResolver;
     'a-database.service.transaction': ServiceTransaction;
     'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;
