@@ -2,20 +2,20 @@ import type { IDecoratorModelOptions } from '../types/onion/model.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 
-const BeanModuleScope = Symbol('ModelResolver:BeanModuleScope');
+const SymbolModuleScope = Symbol('SymbolModuleScope');
 
 @Service()
 export class ServiceModelResolver extends BeanBase {
-  private [BeanModuleScope]: string;
+  protected [SymbolModuleScope]: string;
 
-  constructor(moduleScope) {
+  constructor(moduleScope: string) {
     super();
-    this[BeanModuleScope] = moduleScope;
+    this[SymbolModuleScope] = moduleScope;
   }
 
   protected __get__(prop: string) {
-    const beanFullName = `${this[BeanModuleScope]}.model.${prop}`;
-    const onionName = `${this[BeanModuleScope]}:${prop}`;
+    const beanFullName = `${this[SymbolModuleScope]}.model.${prop}`;
+    const onionName = `${this[SymbolModuleScope]}:${prop}`;
     const onionOptions = this.bean.onion.model.getOnionOptions<IDecoratorModelOptions>(onionName as any);
     const clientName = onionOptions?.clientName;
     // clientName

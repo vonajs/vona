@@ -2,21 +2,21 @@ import { appResource, BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { $columnsAll } from '../lib/columns.ts';
 
-const BeanModuleScope = Symbol('EntityResolver#ModuleScope');
+const SymbolModuleScope = Symbol('SymbolModuleScope');
 
 @Service()
 export class ServiceEntityResolver extends BeanBase {
-  private [BeanModuleScope]: string;
+  protected [SymbolModuleScope]: string;
   private __instances: Record<string, any> = {};
 
-  constructor(moduleScope) {
+  constructor(moduleScope: string) {
     super();
-    this[BeanModuleScope] = moduleScope;
+    this[SymbolModuleScope] = moduleScope;
   }
 
   protected __get__(prop: string) {
     if (!this.__instances[prop]) {
-      const beanFullName = `${this[BeanModuleScope]}.entity.${prop}`;
+      const beanFullName = `${this[SymbolModuleScope]}.entity.${prop}`;
       const beanOptions = appResource.getBean(beanFullName)!;
       this.__instances[prop] = $columnsAll(beanOptions.beanClass, true);
     }
