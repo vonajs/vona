@@ -33,6 +33,12 @@ jobs:
       - run: npm i tsx -g 
       - run: npm i vona-cli -g
       - run: vona :create:project vona-test --template=basic
+      - run: vona :create:module demo-student
+        working-directory: vona-test
+      - run: pnpm install
+        working-directory: vona-test
+      - run: vona :tools:crud student --module=demo-student
+        working-directory: vona-test  
       - run: npm run test
         working-directory: vona-test
       - run: npm run build
