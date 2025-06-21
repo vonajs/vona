@@ -194,8 +194,6 @@ declare module 'vona-module-test-vona' {
 
   export interface EntityTest {
     get $table(): 'testVona';
-    $column: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityTest, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface IEntityOptionsTest {

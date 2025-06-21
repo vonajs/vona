@@ -86,20 +86,14 @@ declare module 'vona-module-home-user' {
 
   export interface EntityRole {
     get $table(): 'homeRole';
-    $column: <K extends keyof Omit<EntityRole, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityRole, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUser {
     get $table(): 'homeUser';
-    $column: <K extends keyof Omit<EntityUser, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityUser, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUserRole {
     get $table(): 'homeUserRole';
-    $column: <K extends keyof Omit<EntityUserRole, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityUserRole, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface IEntityOptionsRole {
