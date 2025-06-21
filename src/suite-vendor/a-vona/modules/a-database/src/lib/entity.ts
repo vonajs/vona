@@ -23,6 +23,6 @@ export function Entity<T extends IDecoratorEntityOptions<any>>(table?: T | strin
   });
 }
 
-export type TypeMetaEntity<T> = Required<{
-  [key in keyof T]: key extends '$table' ? T[key] : key;
-}>;
+export type TypeMetaEntity<T, N> = Required<{
+  [key in keyof T]: key;
+}> & { $table: N };

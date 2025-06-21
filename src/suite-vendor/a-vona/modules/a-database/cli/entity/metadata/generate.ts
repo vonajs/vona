@@ -9,10 +9,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const { className, beanName, fileContent } = globFile;
     const opionsName = `IEntityOptions${toUpperCaseFirstChar(beanName)}`;
     const tableName = __parseTableName(fileContent);
-    contentColumns.push(`
-    export interface ${className} {
-      get $table(): '${tableName}';
-    }`);
+    contentColumns.push(`export type ${className}TableName = '${tableName}';`);
     contentFields.push(`
     export interface ${opionsName} {
       fields?: TypeEntityOptionsFields<${className}, ${opionsName}['_fieldsMore_']>;
@@ -21,8 +18,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   if (contentColumns.length === 0 && contentFields.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
+${contentColumns.join('\n')}
 declare module 'vona-module-${moduleName}' {
-  ${contentColumns.join('\n')}
   ${contentFields.join('\n')}
 }
 /** ${sceneName}: end */
