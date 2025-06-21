@@ -1,4 +1,5 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
+import type { TypeMetaEntity } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
@@ -70,9 +71,9 @@ declare module 'vona-module-a-version' {
 
 }
 export interface IModuleEntity {
-  version: EntityVersion;
-  versionInit: EntityVersionInit;
-  viewRecord: EntityViewRecord;
+  version: TypeMetaEntity<EntityVersion>;
+  versionInit: TypeMetaEntity<EntityVersionInit>;
+  viewRecord: TypeMetaEntity<EntityViewRecord>;
 }
 /** entity: end */
 /** entity: begin */
