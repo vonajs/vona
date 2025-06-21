@@ -5,7 +5,7 @@ export interface ICommandArgv {
   projectPath: string;
   cliFullName: string;
   vscode: boolean;
-  cicd: boolean;
+  ci: boolean;
   _: string[];
 }
 
