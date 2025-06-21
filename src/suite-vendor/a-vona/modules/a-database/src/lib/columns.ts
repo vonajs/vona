@@ -1,6 +1,6 @@
 import type { Constructable } from 'vona';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
-import { appMetadata, appResource } from 'vona';
+import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapi';
 
 export function $column<T>(classEntity: () => Constructable<T>, extract: (classEntity: T) => any): string {
@@ -20,10 +20,16 @@ export function $tableColumns<T>(
   extract: (classEntity: T) => any | any[] | undefined,
 ): Record<string, string | string[] | undefined> {
   // tableName
-  const beanOptionsEntity = appResource.getBean(classEntity());
-  const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
-  const tableName = entityOptions.table!;
+  const tableName = $tableName(classEntity());
   // columns
   const names = $columns(classEntity, extract);
   return { [tableName]: names };
+}
+
+export function $tableName<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): string {
+  const beanOptionsEntity = appResource.getBean(classEntity.name ? classEntity : cast(classEntity)());
+  const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
+  return entityOptions.table!;
 }

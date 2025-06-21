@@ -1,14 +1,14 @@
 import type { ServiceDb } from '../../service/db.ts';
 import type {
   IDatabaseClientRecord,
-  IDecoratorEntityOptions,
   IDecoratorModelOptions,
   IModelMethodOptionsGeneral,
   IModelUpdateOptionsGeneral,
 } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
-import { appResource, BeanBase, cast } from 'vona';
+import { BeanBase, cast } from 'vona';
+import { $tableName } from '../../lib/columns.ts';
 
 const SymbolModelDb = Symbol('SymbolModelDb');
 
@@ -52,9 +52,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   get table(): string {
     let table = this.options.table;
     if (!table && this.options.entity) {
-      const beanOptionsEntity = appResource.getBean(this.options.entity);
-      const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
-      table = entityOptions.table;
+      table = $tableName(this.options.entity);
     }
     return table!;
   }
