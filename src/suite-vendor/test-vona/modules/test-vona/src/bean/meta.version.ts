@@ -10,8 +10,8 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       const entity = this.scope.entity.test;
       await this.bean.model.createTable(entity.$table, table => {
         table.basicFields();
-        table.string(entity.$column('title'), 255);
-        table.string(entity.$column('description'), 255);
+        table.string(entity.title, 255);
+        table.string(entity.description, 255);
       });
     }
   }

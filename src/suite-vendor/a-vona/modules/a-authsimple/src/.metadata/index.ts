@@ -1,4 +1,5 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+import type { TypeMetaEntity } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { IAuthProviderOptionsSimple } from '../bean/authProvider.simple.ts';
@@ -58,7 +59,7 @@ declare module 'vona-module-a-authsimple' {
 
 }
 export interface IModuleEntity {
-  authSimple: EntityAuthSimple;
+  authSimple: TypeMetaEntity<EntityAuthSimple>;
 }
 /** entity: end */
 /** entity: begin */

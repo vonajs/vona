@@ -11,19 +11,19 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       await this.bean.model.createTable(entityAuth.$table, table => {
         table.basicFields();
         table.userId();
-        table.integer(entityAuth.$column('authProviderId'));
-        table.string(entityAuth.$column('profileId'), 255);
-        table.text(entityAuth.$column('profile'));
+        table.integer(entityAuth.authProviderId);
+        table.string(entityAuth.profileId, 255);
+        table.text(entityAuth.profile);
       });
       // aAuthProvider
       const entityAuthProvider = this.scope.entity.authProvider;
       await this.bean.model.createTable(entityAuthProvider.$table, table => {
         table.basicFieldsSimple();
-        table.boolean(entityAuthProvider.$column('disabled')).defaultTo(false);
-        table.string(entityAuthProvider.$column('module'), 255);
-        table.string(entityAuthProvider.$column('providerName'), 255);
-        table.string(entityAuthProvider.$column('clientName'), 255);
-        table.json(entityAuthProvider.$column('clientOptions'));
+        table.boolean(entityAuthProvider.disabled).defaultTo(false);
+        table.string(entityAuthProvider.module, 255);
+        table.string(entityAuthProvider.providerName, 255);
+        table.string(entityAuthProvider.clientName, 255);
+        table.json(entityAuthProvider.clientOptions);
       });
     }
   }

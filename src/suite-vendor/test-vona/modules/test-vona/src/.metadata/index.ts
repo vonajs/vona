@@ -1,9 +1,10 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'vona';
 import type { IDecoratorAopOptions } from 'vona-module-a-aspect';
-
 import type { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+
 import type { IDecoratorCacheMemOptions } from 'vona-module-a-cache';
 import type { IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+import type { TypeMetaEntity } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
 import type { IDecoratorEventListenerOptions } from 'vona-module-a-event';
@@ -185,7 +186,7 @@ declare module 'vona-module-test-vona' {
 
 }
 export interface IModuleEntity {
-  test: EntityTest;
+  test: TypeMetaEntity<EntityTest>;
 }
 /** entity: end */
 /** entity: begin */

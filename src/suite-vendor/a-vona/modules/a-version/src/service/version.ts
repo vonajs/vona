@@ -66,8 +66,8 @@ export class ServiceVersion extends BeanBase {
       if (!hasTableVersion) {
         await this.bean.model.createTable(entity.$table, table => {
           table.basicFieldsSimple({ deleted: false, iid: false });
-          table.string(entity.$column('module'), 255);
-          table.integer(entity.$column('version'));
+          table.string(entity.module, 255);
+          table.integer(entity.version);
         });
       }
     }

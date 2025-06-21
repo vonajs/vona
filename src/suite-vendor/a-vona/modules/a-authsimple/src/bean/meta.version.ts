@@ -11,7 +11,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
       await this.bean.model.createTable(entity.$table, table => {
         table.basicFields();
         table.userId();
-        table.text(entity.$column('hash'));
+        table.text(entity.hash);
       });
     }
   }

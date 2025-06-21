@@ -1,4 +1,5 @@
 import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleErrors, TypeModuleLocales } from 'vona';
+import type { TypeMetaEntity } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { EventOn } from 'vona-module-a-event';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
@@ -81,8 +82,8 @@ declare module 'vona-module-a-auth' {
 
 }
 export interface IModuleEntity {
-  auth: EntityAuth;
-  authProvider: EntityAuthProvider;
+  auth: TypeMetaEntity<EntityAuth>;
+  authProvider: TypeMetaEntity<EntityAuthProvider>;
 }
 /** entity: end */
 /** entity: begin */
