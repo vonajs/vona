@@ -1,4 +1,5 @@
 import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+import type { TypeMetaEntity } from 'vona-module-a-database';
 import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import type { IMetaOptionsIndex } from 'vona-module-a-index';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
@@ -75,9 +76,9 @@ declare module 'vona-module-home-user' {
 
 }
 export interface IModuleEntity {
-  role: EntityRole;
-  user: EntityUser;
-  userRole: EntityUserRole;
+  role: TypeMetaEntity<EntityRole>;
+  user: TypeMetaEntity<EntityUser>;
+  userRole: TypeMetaEntity<EntityUserRole>;
 }
 /** entity: end */
 /** entity: begin */
@@ -85,20 +86,14 @@ declare module 'vona-module-home-user' {
 
   export interface EntityRole {
     get $table(): 'homeRole';
-    $column: <K extends keyof Omit<EntityRole, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityRole, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUser {
     get $table(): 'homeUser';
-    $column: <K extends keyof Omit<EntityUser, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityUser, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUserRole {
     get $table(): 'homeUserRole';
-    $column: <K extends keyof Omit<EntityUserRole, '$column' | '$columns' | '$table'>>(column: K) => K;
-    $columns: <K extends keyof Omit<EntityUserRole, '$column' | '$columns' | '$table'>>(...columns: K[]) => K[];
   }
 
   export interface IEntityOptionsRole {
