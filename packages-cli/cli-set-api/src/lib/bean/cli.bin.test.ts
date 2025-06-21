@@ -37,7 +37,7 @@ export class CliBinTest extends BeanCliBase {
     };
     const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
     await this._run(projectPath, modulesMeta);
-    if (argv.coverage) {
+    if (argv.coverage && !argv.ci) {
       await this._outputCoverageReportViewer(projectPath);
     }
     await rimraf(path.join(projectPath, '.vona'));

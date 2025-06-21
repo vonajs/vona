@@ -33,7 +33,7 @@ jobs:
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init
-      - run: npm run cov
+      - run: npm run cov -- --ci
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
