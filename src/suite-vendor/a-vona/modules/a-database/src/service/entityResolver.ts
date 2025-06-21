@@ -1,6 +1,6 @@
 import { appResource, BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { $columnsAll, $tableName } from '../lib/columns.ts';
+import { $columnsAll } from '../lib/columns.ts';
 
 const BeanModuleScope = Symbol('EntityResolver#ModuleScope');
 
@@ -18,9 +18,7 @@ export class ServiceEntityResolver extends BeanBase {
     if (!this.__instances[prop]) {
       const beanFullName = `${this[BeanModuleScope]}.entity.${prop}`;
       const beanOptions = appResource.getBean(beanFullName)!;
-      const columns = $columnsAll(beanOptions.beanClass);
-      const tableName = $tableName(beanOptions.beanClass);
-      this.__instances[prop] = { ...columns, $table: tableName };
+      this.__instances[prop] = $columnsAll(beanOptions.beanClass, true);
     }
     return this.__instances[prop];
   }
