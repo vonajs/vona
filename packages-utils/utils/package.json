@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/utils",
   "type": "module",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "cabloy utils",
   "publishConfig": {
     "access": "public"
