@@ -1,4 +1,4 @@
-import type * as CelJS from 'cel-js' with { 'resolution-mode': 'import' };
+import type * as Celjs from 'cel-js' with { 'resolution-mode': 'import' };
 import type { CstNode } from 'chevrotain';
 import * as celjs from 'cel-js';
 import { isNil } from './check.ts';
@@ -48,6 +48,6 @@ export function evaluate(
   return expression;
 }
 
-export function parse(expression: string): CelJS.ParseResult {
+export function parse(expression: string): Celjs.ParseResult {
   return celjs.parse(expression);
 }
