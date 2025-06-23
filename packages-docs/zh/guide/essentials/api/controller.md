@@ -374,3 +374,69 @@ class ControllerStudent {
 ``` typescript
 @Api.tags(['Student'])
 ```
+
+## Action options
+
+### 1. 举例
+
+可以在定义 Action 的请求方法时传递更多选项
+
+``` typescript
+class ControllerBook {
+  @Web.get(':id', {
+    tags: ['Book'],
+    description: 'Find a book',
+  })
+  findOne(@Arg.param('id') id: number): EntityBook {}
+}
+```
+
+- tags: 设置在 Swagger/Openapi 中的分组信息
+- description:  设置在 Swagger/Openapi 中的描述信息
+
+### 2. description支持多语言国际化
+
+首先，定义语言资源：
+
+* 英文：`src/module/demo-student/src/config/locale/en-us.ts`
+
+``` typescript
+export default {
+  FindBook: 'Find a book',
+};
+```
+
+* 中文：`src/module/demo-student/src/config/locale/zh-cn.ts`
+
+``` typescript
+export default {
+  FindBook: '查找一本书',
+};
+```
+
+使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
+
+``` typescript
+import { $locale } from '../.metadata/index.ts';
+
+@Web.get(':id', {
+  description: $locale('FindBook'),
+})
+```
+
+### 3. Action options
+
+|名称|描述|
+|--|--|
+|public|是否需要Request Header: `authentication`，默认为true|
+|description|API的描述|
+|summary|API的摘要|
+|httpCode|Response的响应码|
+|contentType|Response的响应类型|
+|bodySchema|Response body的Schema|
+|bodySchemaWrapper|Response body的包装对象|
+|exclude|不在 Swagger/Openapi 元数据中显示此 API|
+|tags|API的标签分组|
+|operationId|API的操作Id，默认为methodName|
+|headers|定义Resquest Headers|
+|setHeaders|设置Response Headers|
