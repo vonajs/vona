@@ -320,3 +320,57 @@ class ControllerStudent {
 ```
 
 ![](../../../assets/img/openapi/openapi-16.png)
+
+## 更多Swagger/Openapi配置
+
+### 1. @Api.contentType
+
+设置 Response 的响应类型
+
+``` typescript
+@Api.contentType('application/xml')
+```
+
+### 2. @Api.exclude
+
+不在 Swagger/Openapi 元数据中显示此 API。此装饰器可作用于 Controller/Action
+
+``` typescript
+@Api.exclude()
+```
+
+### 3. @Api.header/@Api.headers
+
+定义 Request headers
+
+``` typescript
+@Api.header({ name: 'x-request-header', description: 'request header' })
+// 一次定义多个headers
+@Api.headers([{ name: 'x-request-header', description: 'request header' }])
+```
+
+### 4. @Api.httpCode
+
+设置 Response 的响应码
+
+``` typescript
+@Api.httpCode(400)
+```
+
+### 5. @Api.setHeader
+
+设置 Response 的响应码
+
+``` typescript
+@Api.setHeader('x-response-header', 'value')
+// 一次设置多个headers
+@Api.setHeader({ 'x-response-header1': 'value1', 'x-response-header2': 'value2' })
+```
+
+### 6. @Api.tags
+
+设置在 Swagger/Openapi 中的分组信息。此装饰器可作用于 Controller/Action
+
+``` typescript
+@Api.tags(['Student'])
+```

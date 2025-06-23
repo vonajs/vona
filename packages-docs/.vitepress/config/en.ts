@@ -32,6 +32,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Quick Start', link: 'start/quick-start' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
+        { text: 'Scripts', link: 'start/scripts' },
         { text: 'Demo Playground', link: 'start/demo' },
         { text: 'Update', link: 'start/update' },
       ],
