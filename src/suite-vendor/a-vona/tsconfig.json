@@ -124,6 +124,9 @@
     },
     {
       "path": "modules/a-openapischema/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-caching/tsconfig.build.json"
     }
   ],
   "exclude": [

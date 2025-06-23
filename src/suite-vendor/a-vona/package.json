@@ -14,6 +14,7 @@
     "vona-module-a-body": "^5.0.12",
     "vona-module-a-broadcast": "^5.0.11",
     "vona-module-a-cache": "^5.0.11",
+    "vona-module-a-caching": "workspace:^",
     "vona-module-a-core": "^5.0.34",
     "vona-module-a-database": "^5.0.29",
     "vona-module-a-databasedialect": "^5.0.11",
