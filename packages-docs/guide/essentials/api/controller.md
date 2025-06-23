@@ -435,7 +435,7 @@ import { $locale } from '../.metadata/index.ts';
 |contentType|Response content type|
 |bodySchema|Response body schema|
 |bodySchemaWrapper|Response body wrapper|
-|exclude|Whether to display this API in Swagger/Openapi metadata, default is false|
+|exclude|Whether to exclude this API in Swagger/Openapi metadata, default is false|
 |tags|API tag grouping|
 |operationId|API operation ID, default is methodName|
 |headers|Define Request Headers|
@@ -449,22 +449,22 @@ You can pass more options when defining a Controller
 
 ``` typescript
 @Controller('book', {
-exclude: false,
-tags: ['Book'],
+  exclude: false,
+  tags: ['Book'],
 })
 class ControllerBook {}
 ```
 
 - exclude: Do not display all APIs of this Controller in Swagger/Openapi metadata
-- tags: API
+- tags: API tag grouping
 
 ### 2. Controller options list
 
 |Name|Description|
 |--|--|
-|exclude|Do not display all APIs of this Controller in Swagger/Openapi metadata|
+|exclude|Whether to exclude all APIs of this Controller in Swagger/Openapi metadata, default is false|
 |tags|API tag grouping|
-|actions|Define Action options|
+|actions|Define Actions options|
 |enable|Whether to enable Controller|
 |meta|Enable Controller based on conditions|
 
@@ -472,26 +472,26 @@ class ControllerBook {}
 
 Controller options can be configured in App config
 
-For example, by default, `http://localhost:7102/swagger` is only valid in unit test/local development environment. If you want to make Swagger accessible in the production environment, you can configure it in App config
+For example, by default, `http://localhost:7102/swagger` is only valid in `test`/`local` environment. If you want to make Swagger accessible in the `prod` environment, you can configure it in App config
 
 `src/backend/config/config/config.prod.ts`
 
 ``` typescript
 // onions
 config.onions = {
-controller: {
-'a-swagger:swagger': {
-meta: {
-mode: ['test', 'local', 'prod'],
-},
-},
-},
+  controller: {
+    'a-swagger:swagger': {
+      meta: {
+        mode: ['test', 'local', 'prod'],
+      },
+    },
+  },
 };
 ```
 
 ### 4. actions
 
-Provide actions options in Controller options, allowing us to configure the Action options in any Controller in App config
+Provide `actions` options in Controller options, allowing us to configure the Action options in any Controller in App config
 
 For example, we set the action options of `findOne` in the `ControllerBook` class in App config:
 
@@ -500,14 +500,14 @@ For example, we set the action options of `findOne` in the `ControllerBook` clas
 ``` typescript
 // onions
 config.onions = {
-controller: {
-'demo-student:book': {
-actions: { 
-findOne: { 
-description: 'Find a book!!!', 
-}, 
-}, 
-}, 
-},
+  controller: {
+    'demo-student:book': {
+      actions: { 
+        findOne: { 
+          description: 'Find a book!!!', 
+        }, 
+      }, 
+    }, 
+  },
 };
 ```

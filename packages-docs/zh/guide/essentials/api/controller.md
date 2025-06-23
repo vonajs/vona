@@ -435,7 +435,7 @@ import { $locale } from '../.metadata/index.ts';
 |contentType|Response的响应类型|
 |bodySchema|Response body的Schema|
 |bodySchemaWrapper|Response body的包装对象|
-|exclude|是否在 Swagger/Openapi 元数据中显示此 API，默认为false|
+|exclude|是否在 Swagger/Openapi 元数据中排除此 API，默认为false|
 |tags|API的标签分组|
 |operationId|API的操作Id，默认为methodName|
 |headers|定义Resquest Headers|
@@ -462,9 +462,9 @@ class ControllerBook {}
 
 |名称|描述|
 |--|--|
-|exclude|不在 Swagger/Openapi 元数据中显示此 Controller 的所有 API|
+|exclude|是否在 Swagger/Openapi 元数据中排除此 Controller 的所有 API，默认为false|
 |tags|API 的标签分组|
-|actions|定义Action options|
+|actions|定义Actions options|
 |enable|是否启用Controller|
 |meta|根据条件启用Controller|
 
@@ -472,7 +472,7 @@ class ControllerBook {}
 
 可以在 App config 中配置 Controller options
 
-比如，在默认情况下，`http://localhost:7102/swagger`只能在单元测试/本地开发环境有效。如果要让 Swagger 在生产环境也能访问，那么，可以在 App config 中进行配置
+比如，在默认情况下，`http://localhost:7102/swagger`只能在`test`/`local`环境有效。如果要让 Swagger 在`prod`环境也能访问，那么，可以在 App config 中进行配置
 
 `src/backend/config/config/config.prod.ts`
 
