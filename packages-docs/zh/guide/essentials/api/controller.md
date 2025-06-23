@@ -392,7 +392,7 @@ class ControllerBook {
 ```
 
 - tags: 设置在 Swagger/Openapi 中的分组信息
-- description:  设置在 Swagger/Openapi 中的描述信息
+- description: 设置在 Swagger/Openapi 中的描述信息
 
 ### 2. description支持多语言国际化
 
@@ -424,7 +424,7 @@ import { $locale } from '../.metadata/index.ts';
 })
 ```
 
-### 3. Action options
+### 3. Action options清单
 
 |名称|描述|
 |--|--|
@@ -440,3 +440,75 @@ import { $locale } from '../.metadata/index.ts';
 |operationId|API的操作Id，默认为methodName|
 |headers|定义Resquest Headers|
 |setHeaders|设置Response Headers|
+
+## Controller options
+
+### 1. 举例
+
+可以在定义 Controller 时传递更多选项
+
+``` typescript
+@Controller('book', {
+  exclude: false,
+  tags: ['Book'],
+})
+class ControllerBook {}
+```
+
+- exclude: 不在 Swagger/Openapi 元数据中显示此 Controller 的所有 API
+- tags: API 的标签分组
+
+### 2. Controller options清单
+
+|名称|描述|
+|--|--|
+|exclude|不在 Swagger/Openapi 元数据中显示此 Controller 的所有 API|
+|tags|API 的标签分组|
+|actions|定义Action options|
+|enable|是否启用Controller|
+|meta|根据条件启用Controller|
+
+### 3. App config配置
+
+可以在 App config 中配置 Controller options
+
+比如，在默认情况下，`http://localhost:7102/swagger`只能在单元测试/本地开发环境有效。如果要让 Swagger 在生产环境也能访问，那么，可以在 App config 中进行配置
+
+`src/backend/config/config/config.prod.ts`
+
+``` typescript
+// onions
+config.onions = {
+  controller: {
+    'a-swagger:swagger': {
+      meta: {
+        mode: ['test', 'local', 'prod'],
+      },
+    },
+  },
+};
+```
+
+### 4. actions
+
+在 Controller options 中提供 actions 选项，从而允许我们在 App config 中配置任何 Controller 中的 Action options
+
+比如，我们在 App config 中设置`ControllerBook`类中的`findOne`的 action options：
+
+`src/backend/config/config/config.local.ts`
+
+``` typescript
+// onions
+config.onions = {
+  controller: {
+    'demo-student:book': {
+      actions: {
+        findOne: {
+          description: 'Find a book!!!',
+        },
+      },
+    },
+  },
+};
+```
+
