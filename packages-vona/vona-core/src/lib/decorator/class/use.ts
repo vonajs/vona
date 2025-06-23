@@ -7,7 +7,7 @@ import type {
   IInjectSelectorInfo,
   IUsePrepareArgResult,
 } from '../index.ts';
-import { evaluateExpressions } from '@cabloy/utils';
+import { evaluateExpressions, isNilOrEmptyString } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.ts';
 import { appResource } from '../../core/resource.ts';
 
@@ -58,6 +58,10 @@ export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecorator
   if (!selectorInfo) {
     selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
+  if (!selectorInfo && !isNilOrEmptyString(useOptions.selector)) {
+    const selector = evaluateExpressions(useOptions.selector, beanInstance);
+    return { withSelector: true, args: [selector] };
+  }
   return selectorInfo ?? { withSelector: false, args: [] };
 }
 
@@ -70,7 +74,7 @@ function __prepareInjectSelectorInfo_descriptor(
   const res: IUsePrepareArgResult = fnGet.call(beanInstance);
   if (!res) return;
   const withSelector = res.withSelector ?? false;
-  const args = res.args.map(arg => arg());
+  const args = res.args.map(arg => typeof arg === 'function' ? arg() : arg);
   return { withSelector, args };
 }
 
