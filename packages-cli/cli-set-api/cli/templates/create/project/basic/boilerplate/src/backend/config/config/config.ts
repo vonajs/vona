@@ -6,5 +6,8 @@ export default function (_appInfo: VonaAppInfo) {
   // modules
   config.modules = {};
 
+  // onions
+  config.onions = {};
+
   return config;
 }
