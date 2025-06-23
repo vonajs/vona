@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.43",
+  "version": "5.0.44",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -47,7 +47,7 @@
     "vona-module-a-validation": "^5.0.11",
     "vona-module-a-version": "^5.0.16",
     "vona-module-a-vona": "^5.0.16",
-    "vona-module-a-web": "^5.0.13",
+    "vona-module-a-web": "^5.0.14",
     "vona-module-a-worker": "^5.0.11"
   },
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
