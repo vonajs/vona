@@ -14,10 +14,13 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     options = path || {} as any;
   }
   return createBeanDecorator('controller', options, false, false, target => {
+    // beanOptions
+    const beanOptions = appResource.getBean(target);
     // IOpenApiOptions
     const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
     for (const key of ['exclude', 'tags']) {
-      if (options![key] !== undefined) optionsMeta[key] = options![key];
+      const option = cast(beanOptions?.options)[key];
+      if (option !== undefined) optionsMeta[key] = option;
     }
     // IOpenApiOptions
     mergeActionsOpenAPIMetadata(target);
