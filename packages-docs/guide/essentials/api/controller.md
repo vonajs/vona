@@ -320,3 +320,194 @@ class ControllerStudent {
 ```
 
 ![](../../../assets/img/openapi/openapi-16.png)
+
+## More Swagger/Openapi configuration
+
+### 1. @Api.contentType
+
+Set the response content type
+
+``` typescript
+@Api.contentType('application/xml')
+```
+
+### 2. @Api.exclude
+
+Do not display this API in Swagger/Openapi metadata. This decorator can be used in Controller/Action
+
+``` typescript
+@Api.exclude()
+```
+
+### 3. @Api.header/@Api.headers
+
+Define Request headers
+
+``` typescript
+@Api.header({ name: 'x-request-header', description: 'request header' })
+// Define multiple headers at once
+@Api.headers([{ name: 'x-request-header', description: 'request header' }])
+```
+
+### 4. @Api.httpCode
+
+Set the response http code
+
+``` typescript
+@Api.httpCode(400)
+```
+
+### 5. @Api.setHeader
+
+Set the response headers 
+
+``` typescript
+@Api.setHeader('x-response-header', 'value')
+// Set multiple headers at once
+@Api.setHeader({ 'x-response-header1': 'value1', 'x-response-header2': 'value2' })
+```
+
+### 6. @Api.tags
+
+Set the grouping information in Swagger/Openapi. This decorator can be used for Controller/Action
+
+``` typescript
+@Api.tags(['Student'])
+```
+
+## Action options
+
+### 1. Example
+
+You can pass more options when defining the request method of Action
+
+``` typescript
+class ControllerBook {
+  @Web.get(':id', {
+    tags: ['Book'],
+    description: 'Find a book',
+  })
+  findOne(@Arg.param('id') id: number): EntityBook {}
+}
+```
+
+- tags: Set the grouping information in Swagger/Openapi
+- description: Set the description information in Swagger/Openapi
+
+### 2. description supports i18n
+
+First, define the language resources:
+
+* English: `src/module/demo-student/src/config/locale/en-us.ts`
+
+``` typescript
+export default {
+  FindBook: 'Find a book',
+};
+```
+
+* Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
+
+``` typescript
+export default {
+  FindBook: 'Find a book',
+};
+```
+
+Use the `$locale` method for language translation, and support automatic type hints for language resources
+
+``` typescript
+import { $locale } from '../.metadata/index.ts';
+
+@Web.get(':id', {
+  description: $locale('FindBook'),
+})
+```
+
+### 3. Action options list
+
+|Name|Description|
+|--|--|
+|public|Whether need Request Header: `authentication`, default is true|
+|description|API description|
+|summary|API summary|
+|httpCode|Response http code|
+|contentType|Response content type|
+|bodySchema|Response body schema|
+|bodySchemaWrapper|Response body wrapper|
+|exclude|Whether to display this API in Swagger/Openapi metadata, default is false|
+|tags|API tag grouping|
+|operationId|API operation ID, default is methodName|
+|headers|Define Request Headers|
+|setHeaders|Set Response Headers|
+
+## Controller options
+
+### 1. Example
+
+You can pass more options when defining a Controller
+
+``` typescript
+@Controller('book', {
+exclude: false,
+tags: ['Book'],
+})
+class ControllerBook {}
+```
+
+- exclude: Do not display all APIs of this Controller in Swagger/Openapi metadata
+- tags: API
+
+### 2. Controller options list
+
+|Name|Description|
+|--|--|
+|exclude|Do not display all APIs of this Controller in Swagger/Openapi metadata|
+|tags|API tag grouping|
+|actions|Define Action options|
+|enable|Whether to enable Controller|
+|meta|Enable Controller based on conditions|
+
+### 3. App config configuration
+
+Controller options can be configured in App config
+
+For example, by default, `http://localhost:7102/swagger` is only valid in unit test/local development environment. If you want to make Swagger accessible in the production environment, you can configure it in App config
+
+`src/backend/config/config/config.prod.ts`
+
+``` typescript
+// onions
+config.onions = {
+controller: {
+'a-swagger:swagger': {
+meta: {
+mode: ['test', 'local', 'prod'],
+},
+},
+},
+};
+```
+
+### 4. actions
+
+Provide actions options in Controller options, allowing us to configure the Action options in any Controller in App config
+
+For example, we set the action options of `findOne` in the `ControllerBook` class in App config:
+
+`src/backend/config/config/config.local.ts`
+
+``` typescript
+// onions
+config.onions = {
+controller: {
+'demo-student:book': {
+actions: { 
+findOne: { 
+description: 'Find a book!!!', 
+}, 
+}, 
+}, 
+},
+};
+```

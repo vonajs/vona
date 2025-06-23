@@ -359,7 +359,7 @@ class ControllerStudent {
 
 ### 5. @Api.setHeader
 
-设置 Response 的响应码
+设置 Response 的 Headers
 
 ``` typescript
 @Api.setHeader('x-response-header', 'value')
@@ -435,7 +435,7 @@ import { $locale } from '../.metadata/index.ts';
 |contentType|Response的响应类型|
 |bodySchema|Response body的Schema|
 |bodySchemaWrapper|Response body的包装对象|
-|exclude|不在 Swagger/Openapi 元数据中显示此 API|
+|exclude|是否在 Swagger/Openapi 元数据中显示此 API，默认为false|
 |tags|API的标签分组|
 |operationId|API的操作Id，默认为methodName|
 |headers|定义Resquest Headers|
