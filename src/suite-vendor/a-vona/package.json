@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.44",
+  "version": "5.0.45",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -29,7 +29,7 @@
     "vona-module-a-logger": "^5.0.11",
     "vona-module-a-menu": "^5.0.12",
     "vona-module-a-meta": "^5.0.11",
-    "vona-module-a-onion": "^5.0.13",
+    "vona-module-a-onion": "^5.0.14",
     "vona-module-a-openapi": "^5.0.20",
     "vona-module-a-openapischema": "^5.0.11",
     "vona-module-a-printtip": "^5.0.11",
@@ -47,7 +47,7 @@
     "vona-module-a-validation": "^5.0.11",
     "vona-module-a-version": "^5.0.16",
     "vona-module-a-vona": "^5.0.16",
-    "vona-module-a-web": "^5.0.14",
+    "vona-module-a-web": "^5.0.15",
     "vona-module-a-worker": "^5.0.11"
   },
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
