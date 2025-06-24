@@ -24,7 +24,7 @@ export interface IApiPathPatchRecord {}
 
 export interface IControllerRecord {}
 
-export interface IDecoratorControllerOptions extends IOnionOptionsEnable {
+export interface IDecoratorControllerOptions extends IOnionOptionsEnable<'instanceName'> {
   path?: string;
   exclude?: boolean;
   tags?: string[];

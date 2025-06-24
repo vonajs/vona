@@ -9,9 +9,9 @@ export type IOnionExecuteCustom = (beanInstance: any, data: any, options: any, n
 export type TypeUseOnionOmitOptionsGlobal<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
 export type TypeUseOnionOmitOptionsEnable<T> = Omit<T, 'enable' | 'meta'>;
 
-export interface IOnionOptionsEnable {
+export interface IOnionOptionsEnable<OmitMetaFields extends string = never> {
   enable?: boolean;
-  meta?: IOnionOptionsMeta;
+  meta?: Omit<IOnionOptionsMeta, OmitMetaFields>;
 }
 
 export type TypeOnionOptionsMatchFunction = (this: any, ...args: any[]) => boolean;
