@@ -1,75 +1,77 @@
-import type { BeanScopeUtil } from 'vona';
+/* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.event.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-event' {
+  
+        export interface BeanEvent {
+          /** @internal */
+          get scope(): ScopeModuleAEvent;
+        } 
+}
 /** bean: end */
 /** bean: begin */
 import type { BeanEvent } from '../bean/bean.event.ts';
-/** service: end */
-/** service: begin */
-import type { ServiceEventListener } from '../service/eventListener.ts';
-/** service: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-
-import { Scope } from 'vona-module-a-bean';
-/** bean: begin */
-import 'vona';
-/** service: end */
-/** service: begin */
-
-import 'vona';
-import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../bean/bean.event.ts';
-declare module 'vona' {
-
-}
-declare module 'vona-module-a-event' {
-
-  export interface BeanEvent {
-    /** @internal */
-    get scope(): ScopeModuleAEvent;
-  }
-}
+import 'vona';  
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    event: BeanEvent;
+    'event': BeanEvent;
   }
 }
 /** bean: end */
 /** service: begin */
 export * from '../service/eventListener.ts';
+
+import 'vona';
 declare module 'vona-module-a-web' {
+  
+    export interface IServiceRecord {
+      'a-event:eventListener': never;
+    }
 
-  export interface IServiceRecord {
-    'a-event:eventListener': never;
-  }
-
+  
 }
 declare module 'vona-module-a-event' {
-
-  export interface ServiceEventListener {
-    /** @internal */
-    get scope(): ScopeModuleAEvent;
-  }
+  
+        export interface ServiceEventListener {
+          /** @internal */
+          get scope(): ScopeModuleAEvent;
+        } 
 }
+/** service: end */
+/** service: begin */
+import type { ServiceEventListener } from '../service/eventListener.ts';
 export interface IModuleService {
-  eventListener: ServiceEventListener;
+  'eventListener': ServiceEventListener;
 }
+/** service: end */
+/** service: begin */
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-event.service.eventListener': ServiceEventListener;
   }
 }
+/** service: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAEvent extends BeanScopeBase {}
 
 export interface ScopeModuleAEvent {
   util: BeanScopeUtil;
-  service: IModuleService;
+service: IModuleService;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-event': ScopeModuleAEvent;
@@ -78,7 +80,10 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     event: ScopeModuleAEvent;
   }
+  
+  
 
+  
 }
 
 /** scope: end */

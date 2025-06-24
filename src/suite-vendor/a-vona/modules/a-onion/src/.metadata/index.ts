@@ -1,47 +1,47 @@
-import type { BeanScopeUtil } from 'vona';
+/* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.onion.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-onion' {
+  
+        export interface BeanOnion {
+          /** @internal */
+          get scope(): ScopeModuleAOnion;
+        } 
+}
 /** bean: end */
 /** bean: begin */
 import type { BeanOnion } from '../bean/bean.onion.ts';
-/** main: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
-
-/** bean: begin */
-import 'vona';
-import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../bean/bean.onion.ts';
-declare module 'vona' {
-
-}
-declare module 'vona-module-a-onion' {
-
-  export interface BeanOnion {
-    /** @internal */
-    get scope(): ScopeModuleAOnion;
-  }
-}
+import 'vona';  
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    onion: BeanOnion;
+    'onion': BeanOnion;
   }
-}
-/** service: end */
-/** main: begin */
-export * from '../main.ts';
-declare module 'vona-module-a-web' {
-
-}
-declare module 'vona-module-a-onion' {
-
 }
 /** bean: end */
 /** service: begin */
 export * from '../service/onion_.ts';
+
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+  
+}
+declare module 'vona-module-a-onion' {
+   
+}
+/** service: end */
+/** main: begin */
+export * from '../main.ts';
+/** main: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAOnion extends BeanScopeBase {}
@@ -49,6 +49,8 @@ export class ScopeModuleAOnion extends BeanScopeBase {}
 export interface ScopeModuleAOnion {
   util: BeanScopeUtil;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-onion': ScopeModuleAOnion;
@@ -57,7 +59,10 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     onion: ScopeModuleAOnion;
   }
+  
+  
 
+  
 }
 
 /** scope: end */

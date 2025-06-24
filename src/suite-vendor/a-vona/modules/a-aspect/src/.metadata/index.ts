@@ -1,61 +1,62 @@
-import type { BeanScopeUtil } from 'vona';
+/* eslint-disable */
+/** service: begin */
+export * from '../service/aop.ts';
+export * from '../service/filter.ts';
+
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IServiceRecord {
+      'a-aspect:aop': never;
+'a-aspect:filter': never;
+    }
+
+  
+}
+declare module 'vona-module-a-aspect' {
+  
+        export interface ServiceAop {
+          /** @internal */
+          get scope(): ScopeModuleAAspect;
+        }
+
+        export interface ServiceFilter {
+          /** @internal */
+          get scope(): ScopeModuleAAspect;
+        } 
+}
 /** service: end */
 /** service: begin */
 import type { ServiceAop } from '../service/aop.ts';
 import type { ServiceFilter } from '../service/filter.ts';
-/** service: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-/** service: end */
-/** service: begin */
-
-import { Scope } from 'vona-module-a-bean';
-/** service: begin */
-import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../service/aop.ts';
-export * from '../service/filter.ts';
-declare module 'vona-module-a-web' {
-
-  export interface IServiceRecord {
-    'a-aspect:aop': never;
-    'a-aspect:filter': never;
-  }
-
-}
-declare module 'vona-module-a-aspect' {
-
-  export interface ServiceAop {
-    /** @internal */
-    get scope(): ScopeModuleAAspect;
-  }
-
-  export interface ServiceFilter {
-    /** @internal */
-    get scope(): ScopeModuleAAspect;
-  }
-}
 export interface IModuleService {
-  aop: ServiceAop;
-  filter: ServiceFilter;
+  'aop': ServiceAop;
+'filter': ServiceFilter;
 }
+/** service: end */
+/** service: begin */
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-aspect.service.aop': ServiceAop;
-    'a-aspect.service.filter': ServiceFilter;
+'a-aspect.service.filter': ServiceFilter;
   }
 }
+/** service: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAAspect extends BeanScopeBase {}
 
 export interface ScopeModuleAAspect {
   util: BeanScopeUtil;
-  service: IModuleService;
+service: IModuleService;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-aspect': ScopeModuleAAspect;
@@ -64,7 +65,10 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     aspect: ScopeModuleAAspect;
   }
+  
+  
 
+  
 }
 
 /** scope: end */

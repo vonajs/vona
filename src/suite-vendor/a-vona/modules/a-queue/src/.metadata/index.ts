@@ -1,78 +1,80 @@
-import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
-
+/* eslint-disable */
 /** startup: begin */
-import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
-import type { config } from '../config/config.ts';
+export * from '../bean/startup.loadQueueWorkers.ts';
+
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  
+    export interface IStartupRecord {
+      'a-queue:loadQueueWorkers': IDecoratorStartupOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-queue' {
+  
+        export interface StartupLoadQueueWorkers {
+          /** @internal */
+          get scope(): ScopeModuleAQueue;
+        } 
+}
+/** startup: end */
+/** service: begin */
+export * from '../service/queue.ts';
+
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IServiceRecord {
+      'a-queue:queue': never;
+    }
+
+  
+}
+declare module 'vona-module-a-queue' {
+  
+        export interface ServiceQueue {
+          /** @internal */
+          get scope(): ScopeModuleAQueue;
+        } 
+}
 /** service: end */
 /** service: begin */
 import type { ServiceQueue } from '../service/queue.ts';
+export interface IModuleService {
+  'queue': ServiceQueue;
+}
 /** service: end */
 /** service: begin */
 
-/** monkey: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
 import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../bean/startup.loadQueueWorkers.ts';
-declare module 'vona-module-a-startup' {
-
-  export interface IStartupRecord {
-    'a-queue:loadQueueWorkers': IDecoratorStartupOptions;
-  }
-
-}
-declare module 'vona-module-a-queue' {
-
-  export interface StartupLoadQueueWorkers {
-    /** @internal */
-    get scope(): ScopeModuleAQueue;
-  }
-}
-/** service: end */
-/** config: begin */
-export * from '../config/config.ts';
-declare module 'vona-module-a-web' {
-
-  export interface IServiceRecord {
-    'a-queue:queue': never;
-  }
-
-}
-declare module 'vona-module-a-queue' {
-
-  export interface ServiceQueue {
-    /** @internal */
-    get scope(): ScopeModuleAQueue;
-  }
-}
-export interface IModuleService {
-  queue: ServiceQueue;
-}
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-queue.service.queue': ServiceQueue;
   }
 }
+/** service: end */
+/** config: begin */
+export * from '../config/config.ts';
+import type { config } from '../config/config.ts';
 /** config: end */
 /** monkey: begin */
 export * from '../monkey.ts';
-/** startup: end */
-/** service: begin */
-export * from '../service/queue.ts';
+/** monkey: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAQueue extends BeanScopeBase {}
 
 export interface ScopeModuleAQueue {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
+config: TypeModuleConfig<typeof config>;
+service: IModuleService;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-queue': ScopeModuleAQueue;
@@ -81,11 +83,12 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     queue: ScopeModuleAQueue;
   }
-
+  
   export interface IBeanScopeConfig {
     'a-queue': ReturnType<typeof config>;
   }
 
+  
 }
 
 /** scope: end */

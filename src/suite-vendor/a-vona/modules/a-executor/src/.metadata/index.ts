@@ -1,75 +1,77 @@
-import type { BeanScopeUtil } from 'vona';
+/* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.executor.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-executor' {
+  
+        export interface BeanExecutor {
+          /** @internal */
+          get scope(): ScopeModuleAExecutor;
+        } 
+}
 /** bean: end */
 /** bean: begin */
 import type { BeanExecutor } from '../bean/bean.executor.ts';
-/** service: end */
-/** service: begin */
-import type { ServiceExecutor } from '../service/executor.ts';
-/** service: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-
-import { Scope } from 'vona-module-a-bean';
-/** bean: begin */
-import 'vona';
-/** service: end */
-/** service: begin */
-
-import 'vona';
-import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../bean/bean.executor.ts';
-declare module 'vona' {
-
-}
-declare module 'vona-module-a-executor' {
-
-  export interface BeanExecutor {
-    /** @internal */
-    get scope(): ScopeModuleAExecutor;
-  }
-}
+import 'vona';  
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    executor: BeanExecutor;
+    'executor': BeanExecutor;
   }
 }
 /** bean: end */
 /** service: begin */
 export * from '../service/executor.ts';
+
+import 'vona';
 declare module 'vona-module-a-web' {
+  
+    export interface IServiceRecord {
+      'a-executor:executor': never;
+    }
 
-  export interface IServiceRecord {
-    'a-executor:executor': never;
-  }
-
+  
 }
 declare module 'vona-module-a-executor' {
-
-  export interface ServiceExecutor {
-    /** @internal */
-    get scope(): ScopeModuleAExecutor;
-  }
+  
+        export interface ServiceExecutor {
+          /** @internal */
+          get scope(): ScopeModuleAExecutor;
+        } 
 }
+/** service: end */
+/** service: begin */
+import type { ServiceExecutor } from '../service/executor.ts';
 export interface IModuleService {
-  executor: ServiceExecutor;
+  'executor': ServiceExecutor;
 }
+/** service: end */
+/** service: begin */
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-executor.service.executor': ServiceExecutor;
   }
 }
+/** service: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAExecutor extends BeanScopeBase {}
 
 export interface ScopeModuleAExecutor {
   util: BeanScopeUtil;
-  service: IModuleService;
+service: IModuleService;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-executor': ScopeModuleAExecutor;
@@ -78,7 +80,10 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     executor: ScopeModuleAExecutor;
   }
+  
+  
 
+  
 }
 
 /** scope: end */

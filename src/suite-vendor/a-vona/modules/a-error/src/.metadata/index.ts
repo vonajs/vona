@@ -1,104 +1,105 @@
-import type { BeanScopeUtil, TypeModuleConfig } from 'vona';
+/* eslint-disable */
+/** filter: begin */
+export * from '../bean/filter.error.ts';
+import type { IFilterOptionsError } from '../bean/filter.error.ts';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  
+    export interface IFilterRecordGlobal {
+      'a-error:error': IFilterOptionsError;
+    }
+
+  
+}
+declare module 'vona-module-a-error' {
+  
+        export interface FilterError {
+          /** @internal */
+          get scope(): ScopeModuleAError;
+        } 
+}
+/** filter: end */
+/** bean: begin */
+export * from '../bean/bean.error.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-error' {
+  
+        export interface BeanError {
+          /** @internal */
+          get scope(): ScopeModuleAError;
+        } 
+}
 /** bean: end */
 /** bean: begin */
 import type { BeanError } from '../bean/bean.error.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'error': BeanError;
+  }
+}
+/** bean: end */
+/** service: begin */
+export * from '../service/errorView.ts';
 
-/** filter: end */
-/** bean: begin */
-import type { IFilterOptionsError } from '../bean/filter.error.ts';
-import type { config } from '../config/config.ts';
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IServiceRecord {
+      'a-error:errorView': never;
+    }
+
+  
+}
+declare module 'vona-module-a-error' {
+  
+        export interface ServiceErrorView {
+          /** @internal */
+          get scope(): ScopeModuleAError;
+        } 
+}
 /** service: end */
 /** service: begin */
 import type { ServiceErrorView } from '../service/errorView.ts';
-
-/** main: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
+export interface IModuleService {
+  'errorView': ServiceErrorView;
+}
 /** service: end */
 /** service: begin */
 
 import 'vona';
-import 'vona';
-import 'vona';
-import 'vona';
-import 'vona';
-
-import 'vona';
-
-export * from '../bean/bean.error.ts';
-declare module 'vona-module-a-aspect' {
-
-  export interface IFilterRecordGlobal {
-    'a-error:error': IFilterOptionsError;
-  }
-
-}
-declare module 'vona-module-a-error' {
-
-  export interface FilterError {
-    /** @internal */
-    get scope(): ScopeModuleAError;
-  }
-}
-/** filter: begin */
-export * from '../bean/filter.error.ts';
-declare module 'vona' {
-
-}
-declare module 'vona-module-a-error' {
-
-  export interface BeanError {
-    /** @internal */
-    get scope(): ScopeModuleAError;
-  }
-}
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    error: BeanError;
-  }
-}
-/** service: end */
-/** config: begin */
-export * from '../config/config.ts';
-declare module 'vona-module-a-web' {
-
-  export interface IServiceRecord {
-    'a-error:errorView': never;
-  }
-
-}
-declare module 'vona-module-a-error' {
-
-  export interface ServiceErrorView {
-    /** @internal */
-    get scope(): ScopeModuleAError;
-  }
-}
-export interface IModuleService {
-  errorView: ServiceErrorView;
-}
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-error.service.errorView': ServiceErrorView;
   }
 }
+/** service: end */
+/** config: begin */
+export * from '../config/config.ts';
+import type { config } from '../config/config.ts';
 /** config: end */
 /** main: begin */
 export * from '../main.ts';
-/** bean: end */
-/** service: begin */
-export * from '../service/errorView.ts';
+/** main: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAError extends BeanScopeBase {}
 
 export interface ScopeModuleAError {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
+config: TypeModuleConfig<typeof config>;
+service: IModuleService;
 }
 
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-error': ScopeModuleAError;
@@ -107,11 +108,12 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     error: ScopeModuleAError;
   }
-
+  
   export interface IBeanScopeConfig {
     'a-error': ReturnType<typeof config>;
   }
 
+  
 }
 
 /** scope: end */

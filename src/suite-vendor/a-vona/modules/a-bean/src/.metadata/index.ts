@@ -1,9 +1,7 @@
-import type { BeanScopeUtil } from 'vona';
+/* eslint-disable */
 /** scope: begin */
-import { BeanScopeBase } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from '../lib/scope.ts';
-
-import 'vona';
 
 @Scope()
 export class ScopeModuleABean extends BeanScopeBase {}
@@ -11,6 +9,8 @@ export class ScopeModuleABean extends BeanScopeBase {}
 export interface ScopeModuleABean {
   util: BeanScopeUtil;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-bean': ScopeModuleABean;
@@ -19,7 +19,10 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     bean: ScopeModuleABean;
   }
+  
+  
 
+  
 }
 
 /** scope: end */

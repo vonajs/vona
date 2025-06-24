@@ -1,79 +1,36 @@
-import type { BeanScopeUtil, TypeLocaleBase, TypeModuleErrors, TypeModuleLocales } from 'vona';
+/* eslint-disable */
 import type { TypeMetaEntity } from 'vona-module-a-database';
-import type { IDecoratorModelOptions } from 'vona-module-a-database';
-import type { EventOn } from 'vona-module-a-event';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
-import type { IDecoratorStartupOptions } from 'vona-module-a-startup';
-/** event: end */
-/** event: begin */
-import type { EventVersionDone } from '../bean/event.versionDone.ts';
-/** event: end */
-/** event: begin */
-import type { TypeEventVersionDoneData, TypeEventVersionDoneResult } from '../bean/event.versionDone.ts';
-import type { Errors } from '../config/errors.ts';
-
+/** entity: begin */
+export * from '../entity/version.ts';
+export * from '../entity/versionInit.ts';
+export * from '../entity/viewRecord.ts';
 import type { IEntityOptionsVersion } from '../entity/version.ts';
+import type { IEntityOptionsVersionInit } from '../entity/versionInit.ts';
+import type { IEntityOptionsViewRecord } from '../entity/viewRecord.ts';
+import 'vona';
+declare module 'vona-module-a-database' {
+  
+    export interface IEntityRecord {
+      'a-version:version': Omit<IEntityOptionsVersion, '_fieldsMore_'>;
+'a-version:versionInit': Omit<IEntityOptionsVersionInit, '_fieldsMore_'>;
+'a-version:viewRecord': Omit<IEntityOptionsViewRecord, '_fieldsMore_'>;
+    }
+
+  
+}
+declare module 'vona-module-a-version' {
+   
+}
 /** entity: end */
 /** entity: begin */
 import type { EntityVersion } from '../entity/version.ts';
-
-import type { IEntityOptionsVersionInit } from '../entity/versionInit.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
-import type { IEntityOptionsViewRecord } from '../entity/viewRecord.ts';
 import type { EntityViewRecord } from '../entity/viewRecord.ts';
-
-/** model: end */
-/** model: begin */
-import type { ModelViewRecord } from '../model/viewRecord.ts';
-/** service: end */
-/** service: begin */
-import type { ServiceDatabase } from '../service/database.ts';
-
-import type { ServiceVersion } from '../service/version.ts';
-
-/** error: end */
-/** scope: begin */
-import { BeanScopeBase } from 'vona';
-import { Scope } from 'vona-module-a-bean';
-/** service: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.ts';
-/** service: end */
-/** service: begin */
-
-import locale_zh_cn from '../config/locale/zh-cn.ts';
-import 'vona';
-import 'vona';
-import 'vona';
-import 'vona';
-import 'vona';
-
-import 'vona';
-/** model: end */
-/** event: begin */
-export * from '../bean/event.versionDone.ts';
-/** event: end */
-/** meta: begin */
-export * from '../bean/meta.version.ts';
-/** meta: end */
-/** startup: begin */
-export * from '../bean/startup.databaseInit.ts';
-declare module 'vona-module-a-database' {
-
-  export interface IEntityRecord {
-    'a-version:version': Omit<IEntityOptionsVersion, '_fieldsMore_'>;
-    'a-version:versionInit': Omit<IEntityOptionsVersionInit, '_fieldsMore_'>;
-    'a-version:viewRecord': Omit<IEntityOptionsViewRecord, '_fieldsMore_'>;
-  }
-
-}
-declare module 'vona-module-a-version' {
-
-}
 export interface IModuleEntity {
-  version: TypeMetaEntity<EntityVersion, EntityVersionTableName>;
-  versionInit: TypeMetaEntity<EntityVersionInit, EntityVersionInitTableName>;
-  viewRecord: TypeMetaEntity<EntityViewRecord, EntityViewRecordTableName>;
+  'version': TypeMetaEntity<EntityVersion,EntityVersionTableName>;
+'versionInit': TypeMetaEntity<EntityVersionInit,EntityVersionInitTableName>;
+'viewRecord': TypeMetaEntity<EntityViewRecord,EntityViewRecordTableName>;
 }
 /** entity: end */
 /** entity: begin */
@@ -81,157 +38,206 @@ export type EntityVersionTableName = 'aVersion';
 export type EntityVersionInitTableName = 'aVersionInit';
 export type EntityViewRecordTableName = 'aViewRecord';
 declare module 'vona-module-a-version' {
+  
+    export interface IEntityOptionsVersion {
+      fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion['_fieldsMore_']>;
+    }
 
-  export interface IEntityOptionsVersion {
-    fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion['_fieldsMore_']>;
-  }
+    export interface IEntityOptionsVersionInit {
+      fields?: TypeEntityOptionsFields<EntityVersionInit, IEntityOptionsVersionInit['_fieldsMore_']>;
+    }
 
-  export interface IEntityOptionsVersionInit {
-    fields?: TypeEntityOptionsFields<EntityVersionInit, IEntityOptionsVersionInit['_fieldsMore_']>;
-  }
-
-  export interface IEntityOptionsViewRecord {
-    fields?: TypeEntityOptionsFields<EntityViewRecord, IEntityOptionsViewRecord['_fieldsMore_']>;
-  }
+    export interface IEntityOptionsViewRecord {
+      fields?: TypeEntityOptionsFields<EntityViewRecord, IEntityOptionsViewRecord['_fieldsMore_']>;
+    }
 }
-export * from '../bean/startup.databaseName.ts';
+/** entity: end */
+/** model: begin */
+export * from '../model/viewRecord.ts';
+
+import { type IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
+  
+    export interface IModelRecord {
+      'a-version:viewRecord': IDecoratorModelOptions;
+    }
 
-  export interface IModelRecord {
-    'a-version:viewRecord': IDecoratorModelOptions;
-  }
-
+  
 }
 declare module 'vona-module-a-version' {
-
-  export interface ModelViewRecord {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
+  
+        export interface ModelViewRecord {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        } 
 }
+/** model: end */
+/** model: begin */
+import type { ModelViewRecord } from '../model/viewRecord.ts';
 export interface IModuleModel {
-  viewRecord: ModelViewRecord;
+  'viewRecord': ModelViewRecord;
 }
-export * from '../bean/startup.instanceInit.ts';
-declare module 'vona' {
+/** model: end */
+/** event: begin */
+export * from '../bean/event.versionDone.ts';
 
+import 'vona';
+declare module 'vona' {
+  
+  
 }
 declare module 'vona-module-a-version' {
-
-  export interface EventVersionDone {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
+  
+        export interface EventVersionDone {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        } 
 }
+/** event: end */
+/** event: begin */
+import type { EventVersionDone } from '../bean/event.versionDone.ts';
 export interface IModuleEvent {
-  versionDone: EventVersionDone;
+  'versionDone': EventVersionDone;
 }
+/** event: end */
+/** event: begin */
+import type { TypeEventVersionDoneData, TypeEventVersionDoneResult } from '../bean/event.versionDone.ts';
+import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-version:versionDone': EventOn<TypeEventVersionDoneData, TypeEventVersionDoneResult>;
   }
 }
-/** locale: end */
-/** error: begin */
-export * from '../config/errors.ts';
+/** event: end */
+/** meta: begin */
+export * from '../bean/meta.version.ts';
+
+import 'vona';
 declare module 'vona' {
+  
+    export interface IMetaRecord {
+      'a-version:version': never;
+    }
 
-  export interface IMetaRecord {
-    'a-version:version': never;
-  }
-
+  
 }
 declare module 'vona-module-a-version' {
-
-  export interface MetaVersion {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
+  
+        export interface MetaVersion {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        } 
 }
-/** entity: begin */
-export * from '../entity/version.ts';
-export * from '../entity/versionInit.ts';
-export * from '../entity/viewRecord.ts';
+/** meta: end */
+/** startup: begin */
+export * from '../bean/startup.databaseInit.ts';
+export * from '../bean/startup.databaseName.ts';
+export * from '../bean/startup.instanceInit.ts';
+
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
 declare module 'vona-module-a-startup' {
+  
+    export interface IStartupRecord {
+      'a-version:databaseInit': IDecoratorStartupOptions;
+'a-version:databaseName': IDecoratorStartupOptions;
+'a-version:instanceInit': IDecoratorStartupOptions;
+    }
 
-  export interface IStartupRecord {
-    'a-version:databaseInit': IDecoratorStartupOptions;
-    'a-version:databaseName': IDecoratorStartupOptions;
-    'a-version:instanceInit': IDecoratorStartupOptions;
-  }
-
+  
 }
 declare module 'vona-module-a-version' {
+  
+        export interface StartupDatabaseInit {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        }
 
-  export interface StartupDatabaseInit {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
+        export interface StartupDatabaseName {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        }
 
-  export interface StartupDatabaseName {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface StartupInstanceInit {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
+        export interface StartupInstanceInit {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        } 
 }
-/** entity: end */
-/** model: begin */
-export * from '../model/viewRecord.ts';
 /** startup: end */
 /** service: begin */
 export * from '../service/database.ts';
+export * from '../service/version.ts';
+
+import 'vona';
 declare module 'vona-module-a-web' {
+  
+    export interface IServiceRecord {
+      'a-version:database': never;
+'a-version:version': never;
+    }
 
-  export interface IServiceRecord {
-    'a-version:database': never;
-    'a-version:version': never;
-  }
-
+  
 }
 declare module 'vona-module-a-version' {
+  
+        export interface ServiceDatabase {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        }
 
-  export interface ServiceDatabase {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface ServiceVersion {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
+        export interface ServiceVersion {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        } 
 }
+/** service: end */
+/** service: begin */
+import type { ServiceDatabase } from '../service/database.ts';
+import type { ServiceVersion } from '../service/version.ts';
 export interface IModuleService {
-  database: ServiceDatabase;
-  version: ServiceVersion;
+  'database': ServiceDatabase;
+'version': ServiceVersion;
 }
+/** service: end */
+/** service: begin */
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-version.service.database': ServiceDatabase;
-    'a-version.service.version': ServiceVersion;
+'a-version.service.version': ServiceVersion;
   }
 }
+/** service: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
 export const locales = {
   'en-us': locale_en_us,
-  'zh-cn': locale_zh_cn,
+'zh-cn': locale_zh_cn,
 };
-export * from '../service/version.ts';
+/** locale: end */
+/** error: begin */
+export * from '../config/errors.ts';
+import type { Errors } from '../config/errors.ts';
+/** error: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAVersion extends BeanScopeBase {}
 
 export interface ScopeModuleAVersion {
   util: BeanScopeUtil;
-  error: TypeModuleErrors<typeof Errors>;
-  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  entity: IModuleEntity;
-  model: IModuleModel;
-  event: IModuleEvent;
-  service: IModuleService;
+error: TypeModuleErrors<typeof Errors>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+entity: IModuleEntity;
+model: IModuleModel;
+event: IModuleEvent;
+service: IModuleService;
 }
+
+import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-version': ScopeModuleAVersion;
@@ -240,6 +246,8 @@ declare module 'vona' {
   export interface IBeanScopeContainer {
     version: ScopeModuleAVersion;
   }
+  
+  
 
   export interface IBeanScopeLocale {
     'a-version': (typeof locales)[TypeLocaleBase];
