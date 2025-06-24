@@ -7,7 +7,7 @@ We know that `IOC`(Inversion of Control) is an effective architectural design fo
 There are two types of ioc containers in Vona:
 
 1. `global ioc container`(referred to as app container): During system initialization, a unique global bean container will be automatically created. Bean instances created in this container are all singleton mode
-2. `request ioc container`(referred to as ctx container): When  requests coming, the system will create a bean container for each of them
+2. `request ioc container`(referred to as ctx container): When requests coming, the system will create a bean container for each of them
 
 ## Bean Class
 

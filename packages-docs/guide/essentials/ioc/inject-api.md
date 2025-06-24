@@ -8,46 +8,88 @@ Vona also provides a set of APIs that allow us to lookup bean instances more fle
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
-const serviceMenu = app.bean._getBean(ServiceMenu);
+
+class ControllerMenu {
+  async test() {
+    const serviceMenu = this.bean._getBean(ServiceMenu);
+  }
+}
 ```
+
+- this.bean === this.app.bean, which is the global ioc container
 
 2. Lookup based on Bean identifier
 
 ``` typescript
-const serviceMenu = app.bean._getBean('home-base.service.menu');
+class ControllerMenu {
+  async test() {
+    const serviceMenu = this.bean._getBean('home-base.service.menu');
+  }
+}
 ```
 
 3. Lookup global beans
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
-const beanJwt = app.bean._getBean(BeanJwt);
 
-const beanJwt2 = app.bean._getBean('jwt');
+class ControllerMenu {
+  async test() {
+    const beanJwt1 = this.bean._getBean(BeanJwt);
+    const beanJwt2 = this.bean._getBean('jwt');
+    const beanJwt3 = this.bean.jwt;
+    // beanJwt1 === beanJwt2 === beanJwt3
+  }
+}
+```
 
-const beanJwt3 = app.bean.jwt;
+4. Request scope
+
+If we want to create a request-scope Bean instance, we only need to invoke the `_getBean` method of the ctx container
+
+``` typescript
+class ControllerMenu {
+  async test() {
+    const serviceMenu1 = this.ctx.bean._getBean(ServiceMenu);
+    const serviceMenu2 = this.ctx.bean._getBean('home-base.service.menu');
+    // serviceMenu1 === serviceMenu2
+  }
+}
 ```
 
 ## _newBean
 
-1. Lookup based on Bean class
+1. Create new instance based on Bean class
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
-const serviceMenu = app.bean._newBean(ServiceMenu);
+
+class ControllerMenu {
+  async test() {
+    const serviceMenu = this.bean._newBean(ServiceMenu);
+  }
+}
 ```
 
-2. Lookup based on Bean identifier
+2. Create new instance based on Bean identifier
 
 ``` typescript
-const serviceMenu = app.bean._newBean('home-base.service.menu');
+class ControllerMenu {
+  async test() {
+    const serviceMenu = this.bean._newBean('home-base.service.menu');
+  }
+}
 ```
 
-3. Lookup global beans
+3. Create new instance of global beans
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
-const beanJwt = app.bean._newBean(BeanJwt);
 
-const beanJwt2 = app.bean._newBean('jwt');
+class ControllerMenu {
+  async test() {
+    const beanJwt1 = this.bean._newBean(BeanJwt);
+    const beanJwt2 = this.bean._newBean('jwt');
+  }
+}
 ```

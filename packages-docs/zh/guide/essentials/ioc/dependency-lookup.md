@@ -7,7 +7,7 @@
 假设我们要在模块 home-base 的 ControllerMenu 中查找本模块提供的 ServiceMenu，代码如下：
 
 ``` typescript
-export class ControllerMenu {
+class ControllerMenu {
   async test() {
     return await this.scope.service.menu.retrieveMenus('');
   }
@@ -21,7 +21,7 @@ export class ControllerMenu {
 假设我们要在模块 home-index 的 ControllerHome 中查找模块 home-base 提供的 ServiceMenu，代码如下：
 
 ``` typescript
-export class ControllerMenu {
+class ControllerMenu {
   async test() {
     return await this.$scope.homeBase.service.menu.retrieveMenus('');
   }
@@ -35,7 +35,7 @@ export class ControllerMenu {
 假设我们要在模块 home-index 的 ControllerHome 中查找模块 a-jwt 提供的全局 bean`BeanJwt`，代码如下：
 
 ``` typescript
-export class ControllerMenu {
+class ControllerMenu {
   async test() {
     return await this.bean.jwt.create({});
   }

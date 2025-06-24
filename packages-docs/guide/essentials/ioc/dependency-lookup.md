@@ -7,7 +7,7 @@ In addition to `Dependency Injection`, Vona also provides `Dependency Lookup`. I
 Suppose we want to lookup the ServiceMenu provided by this module home-base in the ControllerMenu of the current module, the code is as follows:
 
 ``` typescript
-export class ControllerMenu {
+class ControllerMenu {
   async test() {
     return await this.scope.service.menu.retrieveMenus('');
   }
@@ -21,7 +21,7 @@ export class ControllerMenu {
 Suppose we want to lookup the ServiceMenu provided by the module home-base in the ControllerHome of the module home-index, the code is as follows:
 
 ``` typescript
-export class ControllerMenu {
+class ControllerMenu {
   async test() {
     return await this.$scope.homeBase.service.menu.retrieveMenus('');
   }
@@ -35,7 +35,7 @@ export class ControllerMenu {
 Suppose we want to lookup the global bean `BeanJwt` provided by module a-jwt in ControllerHome of module home-index, the code is as follows:
 
 ``` typescript
-export class ControllerMenu {
+class ControllerMenu {
   async test() {
     return await this.bean.jwt.create({});
   }

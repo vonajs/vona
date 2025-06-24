@@ -62,3 +62,79 @@ export class ControllerStudent {
 
 ## 2. 依赖查找
 
+* 本模块查找
+
+``` typescript
+class ControllerStudent {
+  findOne() {
+    return this.scope.service.student.findOne();
+  }
+}
+```
+
+* 跨模块查找
+
+``` typescript
+class ControllerStudent {
+  findOne() {
+    return this.$scope.demoStudent.service.student.findOne();
+  }
+}
+```
+
+## 3. 依赖查找(API)
+
+### _getBean
+
+1. 基于 Bean class 查找
+
+``` typescript
+class ControllerStudent {
+  findOne() {
+    const serviceStudent = this.bean._getBean(ServiceStudent);
+    return serviceStudent.findOne();
+  }
+}
+```
+
+- this.bean === this.app.bean，就是全局 ioc 容器
+
+2. 基于 Bean 标识查找
+
+``` typescript
+class ControllerStudent {
+  findOne() {
+    const serviceStudent = this.bean._getBean('demo-student.service.student');
+    return serviceStudent.findOne();
+  }
+}
+```
+
+### 请求级别
+
+如果我们要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法
+
+``` typescript
+class ControllerStudent {
+  findOne() {
+    const serviceStudent1 = this.ctx.bean._getBean(ServiceStudent);
+    const serviceStudent2 = this.ctx.bean._getBean('demo-student.service.student');
+    // serviceStudent1 === serviceStudent2
+  }
+}
+```
+
+### _newBean
+
+1. 基于 Bean class 查找
+
+``` typescript
+import { ServiceMenu } from 'vona-module-home-base';
+const serviceMenu = app.bean._newBean(ServiceMenu);
+```
+
+2. 基于 Bean 标识查找
+
+``` typescript
+const serviceMenu = app.bean._newBean('home-base.service.menu');
+```
