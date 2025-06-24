@@ -136,10 +136,12 @@ export class CliToolsMetadata extends BeanCliBase {
     // empty
     if (!content.trim()) {
       content = 'export {};';
+    } else {
+      content = `/* eslint-disable */\n${content}`;
     }
     // save
     await fse.writeFile(metaIndexFile, content);
-    await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
+    // await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
     // generate this
     await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
     // index
