@@ -27,3 +27,5 @@ export class ControllerHome {
   $$menu: ServiceMenu;
 }  
 ```
+
+- 由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识

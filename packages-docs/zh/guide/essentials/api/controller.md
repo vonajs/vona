@@ -29,8 +29,11 @@ export class ControllerStudent extends BeanBase {
 }
 ```
 
-- Controller Path: `'student'`
-- Action Path : `''`
+- 继承自`BeanBase`基类
+- 使用`Controller`装饰器
+
+- 行 1: Controller Path: `'student'`
+- 行 3: Action Path : `''`
 
 ## 路由
 

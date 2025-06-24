@@ -27,3 +27,5 @@ export class ControllerHome {
   $$menu: ServiceMenu;
 }  
 ```
+
+- Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified

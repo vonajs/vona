@@ -84,6 +84,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: '创建CRUD', link: 'crud' },
             { text: 'Controller', link: 'controller' },
+            { text: 'Service', link: 'service' },
           ],
         },
       ],

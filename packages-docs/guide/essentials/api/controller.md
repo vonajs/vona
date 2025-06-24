@@ -29,8 +29,11 @@ export class ControllerStudent extends BeanBase {
 }
 ```
 
-- Controller Path: `'student'`
-- Action Path : `''`
+- Inherited from the `BeanBase` class
+- Use the `Controller` decorator
+
+- Line 1: Controller Path: `'student'`
+- Line 3: Action Path : `''`
 
 ## Routes
 
