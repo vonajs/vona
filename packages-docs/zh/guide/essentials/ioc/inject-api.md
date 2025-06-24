@@ -59,7 +59,7 @@ class ControllerMenu {
 
 ## _newBean
 
-1. 基于 Bean class 创建实例
+1. 基于 Bean class 创建新实例
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
@@ -71,7 +71,7 @@ class ControllerMenu {
 }
 ```
 
-2. 基于 Bean 标识创建实例
+2. 基于 Bean 标识创建新实例
 
 ``` typescript
 class ControllerMenu {
@@ -81,7 +81,7 @@ class ControllerMenu {
 }
 ```
 
-3. 创建全局 Bean 实例
+3. 创建全局 Bean 的新实例
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';

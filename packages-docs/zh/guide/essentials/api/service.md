@@ -126,14 +126,14 @@ class ControllerStudent {
 
 ### _newBean
 
-1. 基于 Bean class 查找
+1. 基于 Bean class 创建新实例
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
 const serviceMenu = app.bean._newBean(ServiceMenu);
 ```
 
-2. 基于 Bean 标识查找
+2. 基于 Bean 标识创建新实例
 
 ``` typescript
 const serviceMenu = app.bean._newBean('home-base.service.menu');
