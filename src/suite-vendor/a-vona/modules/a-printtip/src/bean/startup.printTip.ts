@@ -7,7 +7,7 @@ import { Startup } from 'vona-module-a-startup';
 const __tipBegin = '=================== tip: begin ===================';
 const __tipEnd = '=================== tip: end =====================';
 
-@Startup({ debounce: true, after: true, meta: { mode: 'local' } })
+@Startup({ debounce: true, after: true, meta: { mode: 'dev' } })
 export class StartupPrintTip extends BeanBase implements IStartupExecute {
   async execute() {
     setTimeout(async () => {

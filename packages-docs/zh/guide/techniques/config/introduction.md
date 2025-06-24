@@ -12,7 +12,7 @@ Vona 从`src/backend/config/config`目录中加载 config 文件。同样支持�
 
 | 名称    | 值            |
 | ------- | ------------- |
-| mode    | 'local' |
+| mode    | 'dev' |
 | flavor  | 'normal'       |
 
 系统就会自动加载下列文件中的 Config 配置，并进行合并:

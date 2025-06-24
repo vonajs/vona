@@ -19,7 +19,7 @@ Vona uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 
 | Name    | Description                                                                          |
 | ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'test' \|'local' \| 'prod'                                            |
+| mode    | 'test' \|'dev' \| 'prod'                                            |
 | flavor  | 'normal' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
 
 ## npm scripts
@@ -50,7 +50,7 @@ Execute `npm run dev` on the command line, then the corresponding meta variable 
 
 | Name    | Value         |
 | ------- | ------------- |
-| mode    | 'local' |
+| mode    | 'dev' |
 | flavor  | 'normal'       |
 
 The system will automatically load the environment variables in the following files and merge them:

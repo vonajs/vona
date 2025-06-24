@@ -12,7 +12,7 @@ Execute `npm run dev` on the command line, then the corresponding meta variable 
 
 | Name    | Value         |
 | ------- | ------------- |
-| mode    | 'local' |
+| mode    | 'dev' |
 | flavor  | 'normal'       |
 
 The system will automatically load the configuration in the following files and merge them:

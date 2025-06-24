@@ -34,7 +34,7 @@ const __SWAGGER_HTML__ = `<!DOCTYPE html>
 `;
 export interface IControllerOptionsSwagger extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsSwagger>({ path: '//swagger', exclude: true, meta: { mode: ['local', 'test'] } })
+@Controller<IControllerOptionsSwagger>({ path: '//swagger', exclude: true, meta: { mode: ['dev', 'test'] } })
 export class ControllerSwagger extends BeanBase {
   @Web.get()
   @Passport.public()

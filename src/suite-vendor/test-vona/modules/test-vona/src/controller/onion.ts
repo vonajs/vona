@@ -12,10 +12,10 @@ import { DtoUser } from '../dto/user.ts';
 
 export interface IControllerOptionsOnion extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsOnion>({ path: 'onion', tags: ['Onion'], meta: { mode: ['local', 'test'] } })
+@Controller<IControllerOptionsOnion>({ path: 'onion', tags: ['Onion'], meta: { mode: ['dev', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Web.get('/')
-  @Aspect.aopMethod('a-database:transaction', { enable: true, meta: { mode: 'local' } })
+  @Aspect.aopMethod('a-database:transaction', { enable: true, meta: { mode: 'dev' } })
   @Aspect.guardGlobal('a-user:passport', { public: true })
   index() {
     return this.ctx.db.inTransaction;
@@ -24,8 +24,8 @@ export class ControllerOnion extends BeanBase {
 
   @Web.post('//echo')
   @Aspect.guardGlobal('a-user:passport', { public: true })
-  @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
-  @Core.gate({ gate: { mode: 'local' } })
+  @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'dev' } })
+  @Core.gate({ gate: { mode: 'dev' } })
   @Aspect.aopMethod('a-database:transaction', { isolationLevel: 'SERIALIZABLE', readOnly: true })
   @Database.transaction({ isolationLevel: 'READ_COMMITTED', readOnly: false })
   @Api.body(v.optional(), z.string())
@@ -40,7 +40,7 @@ export class ControllerOnion extends BeanBase {
   }
 
   @Web.post('echo2/:userId/:userName')
-  // @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
+  // @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'dev' } })
   @Aspect.guardGlobal('a-user:passport', { public: true })
   // echo2(@Arg.query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   echo2(

@@ -127,7 +127,7 @@ async function getFullPath(
   filename: string,
   options: IMiddlewareSystemOptionsStatic,
 ): Promise<string | true | undefined> {
-  if (process.env.META_MODE === 'local') {
+  if (process.env.META_MODE === 'dev') {
     ctx[SymbolStaticGetFullPathInner] = () => {
       return _getFullPathInner(ctx, dir, filename, options);
     };

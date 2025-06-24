@@ -485,7 +485,7 @@ config.onions = {
   controller: {
     'a-swagger:swagger': {
       meta: {
-        mode: ['test', 'local', 'prod'],
+        mode: ['test', 'dev', 'prod'],
       },
     },
   },

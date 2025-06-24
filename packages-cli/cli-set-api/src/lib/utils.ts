@@ -11,7 +11,7 @@ export function getEnvMeta(configMeta: VonaConfigMeta) {
 }
 
 export function getNodeEnv(mode: VonaMetaMode) {
-  return mode === 'test' ? 'test' : mode === 'local' ? 'development' : 'production';
+  return mode === 'test' ? 'test' : mode === 'dev' ? 'development' : 'production';
 }
 
 export function resolveTemplatePath(file: string) {

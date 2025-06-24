@@ -19,7 +19,7 @@ Zova 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载�
 
 | 名称    | 类型                                                                                 |
 | ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'test' \|'local' \| 'prod'                                             |
+| mode    | 'test' \|'dev' \| 'prod'                                             |
 | flavor  | 'normal' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
 
 ## npm scripts
@@ -48,7 +48,7 @@ $ npm run build:docker
 
 | 名称    | 值            |
 | ------- | ------------- |
-| mode    | 'local' |
+| mode    | 'dev' |
 | flavor  | 'normal'       |
 
 系统就会自动依次加载下列文件中的环境变量，并进行合并:

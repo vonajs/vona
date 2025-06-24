@@ -13,7 +13,7 @@ import { combineLoggerDefault } from './loggerDefault.ts';
 export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
   let config: VonaConfigOptional = configDefault(appInfo, env);
   const mode = appInfo.configMeta.mode;
-  if (mode === 'local') {
+  if (mode === 'dev') {
     config = deepExtend(config, configLocal(env));
   } else if (mode === 'prod') {
     config = deepExtend(config, configProd(env));
@@ -92,7 +92,7 @@ export function configTest(_env: VonaConfigEnv): VonaConfigOptional {
 function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
   const mode = appInfo.configMeta.mode;
   let loggerDir: string;
-  if (mode === 'test' || mode === 'local') {
+  if (mode === 'test' || mode === 'dev') {
     loggerDir = path.join(appInfo.projectPath, '.app/logs');
   } else {
     loggerDir = path.join(os.homedir(), 'vona', appInfo.name, 'logs');
@@ -104,7 +104,7 @@ function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
 function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
   const mode = appInfo.configMeta.mode;
   let publicDir: string;
-  if (mode === 'test' || mode === 'local') {
+  if (mode === 'test' || mode === 'dev') {
     publicDir = path.join(appInfo.projectPath, '.app/public');
   } else {
     publicDir = path.join(os.homedir(), 'vona', appInfo.name, 'public');
@@ -124,7 +124,7 @@ export async function combineConfigDefault<T>(
 ): Promise<PowerPartial<T>> {
   let config = await configDefault(app);
   const mode = app.config.meta.mode;
-  if (mode === 'local' && configLocal) {
+  if (mode === 'dev' && configLocal) {
     config = deepExtend(config, await configLocal(app));
   } else if (mode === 'prod' && configProd) {
     config = deepExtend(config, await configProd(app));

@@ -11,7 +11,7 @@ import { z } from 'zod';
 
 export interface IControllerOptionsUpload extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsUpload>({ path: 'upload', meta: { mode: ['test', 'local'] } })
+@Controller<IControllerOptionsUpload>({ path: 'upload', meta: { mode: ['test', 'dev'] } })
 export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()

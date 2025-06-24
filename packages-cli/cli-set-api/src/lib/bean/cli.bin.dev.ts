@@ -26,7 +26,7 @@ export class CliBinDev extends BeanCliBase {
 
   async _dev(projectPath: string) {
     const { argv } = this.context;
-    const mode: VonaMetaMode = 'local';
+    const mode: VonaMetaMode = 'dev';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
     const configOptions: VonaBinConfigOptions = {
