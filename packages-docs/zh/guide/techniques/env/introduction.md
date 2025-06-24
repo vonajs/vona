@@ -56,10 +56,10 @@ $ npm run build:docker
 ```txt
 .env
 .env.normal
-.env.normal.local
+.env.normal.dev
 .env.mine
 .env.normal.mine
-.env.normal.local.mine
+.env.normal.dev.mine
 ```
 
 ## 内置环境变量

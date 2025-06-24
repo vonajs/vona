@@ -20,10 +20,10 @@ Vona 从`src/backend/config/config`目录中加载 config 文件。同样支持�
 ```txt
 config.ts
 config.normal.ts
-config.normal.local.ts
+config.normal.dev.ts
 config.mine.ts
 config.normal.mine.ts
-config.normal.local.mine.ts
+config.normal.dev.mine.ts
 ```
 
 ## 访问全局config

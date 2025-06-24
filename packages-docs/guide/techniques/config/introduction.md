@@ -20,10 +20,10 @@ The system will automatically load the configuration in the following files and 
 ```txt
 config.ts
 config.normal.ts
-config.normal.local.ts
+config.normal.dev.ts
 config.mine.ts
 config.normal.mine.ts
-config.normal.local.mine.ts
+config.normal.dev.mine.ts
 ```
 
 ## Use global config

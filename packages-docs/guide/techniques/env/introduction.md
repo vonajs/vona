@@ -58,10 +58,10 @@ The system will automatically load the environment variables in the following fi
 ```txt
 .env
 .env.normal
-.env.normal.local
+.env.normal.dev
 .env.mine
 .env.normal.mine
-.env.normal.local.mine
+.env.normal.dev.mine
 ```
 
 ## Built-in env variables

@@ -58,7 +58,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     }
 
     if (status >= 500 && !this.app.meta.isProd) {
-      // provide detail error stack in local env
+      // provide detail error stack in test/dev env
       errorJson.stack = err.stack;
       errorJson.name = err.name;
       for (const key in err) {

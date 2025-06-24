@@ -36,7 +36,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
   }
 
   async _removePublicDir() {
-    // only for test/local env
+    // only for test/dev env
     if (this.app.meta.isProd) return;
     // path
     const publicPath = await this.app.util.getPublicPathPhysical();
