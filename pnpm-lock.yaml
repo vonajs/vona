@@ -827,7 +827,7 @@ importers:
         specifier: ^5.0.29
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1176,7 +1176,7 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-election
       vona-module-a-error:
-        specifier: ^5.0.12
+        specifier: ^5.0.13
         version: link:modules/a-error
       vona-module-a-event:
         specifier: ^5.0.12
@@ -1254,7 +1254,7 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.17
+        specifier: ^5.0.18
         version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.17

@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.46",
+  "version": "5.0.47",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -19,7 +19,7 @@
     "vona-module-a-database": "^5.0.30",
     "vona-module-a-databasedialect": "^5.0.12",
     "vona-module-a-election": "^5.0.12",
-    "vona-module-a-error": "^5.0.12",
+    "vona-module-a-error": "^5.0.13",
     "vona-module-a-event": "^5.0.12",
     "vona-module-a-executor": "^5.0.13",
     "vona-module-a-i18n": "^5.0.13",
@@ -45,7 +45,7 @@
     "vona-module-a-upload": "^5.0.12",
     "vona-module-a-user": "^5.0.16",
     "vona-module-a-validation": "^5.0.12",
-    "vona-module-a-version": "^5.0.17",
+    "vona-module-a-version": "^5.0.18",
     "vona-module-a-vona": "^5.0.17",
     "vona-module-a-web": "^5.0.16",
     "vona-module-a-worker": "^5.0.12"
