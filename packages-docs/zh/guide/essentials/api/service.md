@@ -2,7 +2,7 @@
 
 ## 创建Service
 
-比如，我们在模块 demo-student 中创建一个 Controller: `student`
+比如，我们在模块 demo-student 中创建一个 Service: `student`
 
 ### 1. Cli命令
 
@@ -92,7 +92,6 @@ class ControllerStudent {
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._getBean(ServiceStudent);
-    return serviceStudent.findOne();
   }
 }
 ```
@@ -105,7 +104,6 @@ class ControllerStudent {
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._getBean('demo-student.service.student');
-    return serviceStudent.findOne();
   }
 }
 ```
@@ -130,11 +128,20 @@ class ControllerStudent {
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
-const serviceMenu = app.bean._newBean(ServiceMenu);
+
+class ControllerStudent {
+  findOne() {
+    const serviceMenu = this.bean._newBean(ServiceMenu);
+  }
+}
 ```
 
 2. 基于 Bean 标识创建新实例
 
 ``` typescript
-const serviceMenu = app.bean._newBean('home-base.service.menu');
+class ControllerStudent {
+  findOne() {
+    const serviceMenu = this.bean._newBean('home-base.service.menu');
+  }
+}
 ```
