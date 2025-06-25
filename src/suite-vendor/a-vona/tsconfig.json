@@ -127,6 +127,9 @@
     },
     {
       "path": "modules/a-caching/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-aspectutils/tsconfig.build.json"
     }
   ],
   "exclude": [

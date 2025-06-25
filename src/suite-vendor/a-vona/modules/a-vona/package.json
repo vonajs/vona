@@ -6,6 +6,7 @@
   "vonaModule": {
     "dependencies": {
       "a-aspect": "5.0.0",
+      "a-aspectutils": "5.0.0",
       "a-auth": "5.0.0",
       "a-authsimple": "5.0.0",
       "a-bean": "5.0.0",

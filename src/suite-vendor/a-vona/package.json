@@ -8,6 +8,7 @@
   "files": [],
   "dependencies": {
     "vona-module-a-aspect": "^5.0.13",
+    "vona-module-a-aspectutils": "workspace:^",
     "vona-module-a-auth": "^5.0.17",
     "vona-module-a-authsimple": "^5.0.18",
     "vona-module-a-bean": "^5.0.12",
