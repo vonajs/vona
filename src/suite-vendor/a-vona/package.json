@@ -33,6 +33,7 @@
     "vona-module-a-onion": "^5.0.15",
     "vona-module-a-openapi": "^5.0.21",
     "vona-module-a-openapischema": "^5.0.12",
+    "vona-module-a-openapiutils": "workspace:^",
     "vona-module-a-printtip": "^5.0.12",
     "vona-module-a-queue": "^5.0.13",
     "vona-module-a-redis": "^5.0.12",

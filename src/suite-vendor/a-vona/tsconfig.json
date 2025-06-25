@@ -130,6 +130,9 @@
     },
     {
       "path": "modules/a-aspectutils/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-openapiutils/tsconfig.build.json"
     }
   ],
   "exclude": [
