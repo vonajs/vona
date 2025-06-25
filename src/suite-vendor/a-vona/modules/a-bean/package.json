@@ -11,6 +11,13 @@
         "optionsNone": true,
         "boilerplate": "cli/bean/boilerplate",
         "metadataCustom": "cli/bean/metadata/generate.ts"
+      },
+      "service": {
+        "sceneIsolate": true,
+        "scopeResource": true,
+        "beanGeneral": true,
+        "optionsGlobalInterfaceFrom": "vona-module-a-bean",
+        "boilerplate": "cli/service/boilerplate"
       }
     }
   },

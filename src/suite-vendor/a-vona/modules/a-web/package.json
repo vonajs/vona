@@ -17,13 +17,6 @@
         "boilerplate": "cli/dto/boilerplate",
         "metadataCustom": "cli/dto/metadata/generate.ts"
       },
-      "service": {
-        "sceneIsolate": true,
-        "scopeResource": true,
-        "beanGeneral": true,
-        "optionsGlobalInterfaceFrom": "vona-module-a-web",
-        "boilerplate": "cli/service/boilerplate"
-      },
       "controller": {
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorControllerOptions",
