@@ -431,7 +431,6 @@ import { $locale } from '../.metadata/index.ts';
 
 |Name|Description|
 |--|--|
-|public|Whether need Request Header: `authentication`, default is true|
 |description|API description|
 |summary|API summary|
 |httpCode|Response http code|

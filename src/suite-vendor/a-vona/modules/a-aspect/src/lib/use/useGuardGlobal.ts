@@ -2,7 +2,7 @@ import type { MetadataKey } from 'vona';
 import type { TypeUseOnionOmitOptionsGlobal } from 'vona-module-a-onion';
 import type { IGuardRecordGlobal } from '../../types/guard.ts';
 import { isNil } from '@cabloy/utils';
-import { setPublic } from 'vona-module-a-openapi';
+import { setPublic } from 'vona-module-a-openapiutils';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.ts';
 
 export function UseGuardGlobal<T extends keyof IGuardRecordGlobal>(

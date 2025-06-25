@@ -431,7 +431,6 @@ import { $locale } from '../.metadata/index.ts';
 
 |名称|描述|
 |--|--|
-|public|是否需要Request Header: `authentication`，默认为true|
 |description|API的描述|
 |summary|API的摘要|
 |httpCode|Response的响应码|
