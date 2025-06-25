@@ -269,9 +269,6 @@ importers:
       vona-module-pear-table:
         specifier: workspace:^
         version: link:src/suite/pear-diancan/modules/pear-table
-      vona-module-test-vona:
-        specifier: workspace:^
-        version: link:src/suite-vendor/test-vona/modules/test-vona
       vona-shared:
         specifier: ^1.0.17
         version: link:packages-vona/vona-shared
@@ -339,6 +336,9 @@ importers:
       vona-module-test-ssr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/test-ssr
+      vona-module-test-vona:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/test-vona
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2
@@ -1934,13 +1934,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
-  src/suite-vendor/test-vona:
-    dependencies:
-      vona-module-test-vona:
-        specifier: workspace:^
-        version: link:modules/test-vona
-
-  src/suite-vendor/test-vona/modules/test-vona:
+  src/suite-vendor/a-vona/modules/test-vona:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
