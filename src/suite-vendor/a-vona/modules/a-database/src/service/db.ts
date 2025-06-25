@@ -4,8 +4,8 @@ import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } fro
 import type { ITransactionConsistencyCommitOptions } from '../types/transaction.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { BeanBase } from 'vona';
-import { ServiceColumns } from 'vona-module-a-database';
 import { Service } from 'vona-module-a-bean';
+import { ServiceColumns } from 'vona-module-a-database';
 import { ServiceTransaction } from './transaction.ts';
 
 @Service()
