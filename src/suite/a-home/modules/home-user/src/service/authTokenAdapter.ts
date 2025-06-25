@@ -1,7 +1,7 @@
 import type { IAuthTokenAdapter, IUserBase } from 'vona-module-a-user';
 import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase, createHash, uuidv4 } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapter {

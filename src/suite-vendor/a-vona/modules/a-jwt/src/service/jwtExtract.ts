@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { parseAuthHeader } from '../lib/authHeader.ts';
 
 @Service()

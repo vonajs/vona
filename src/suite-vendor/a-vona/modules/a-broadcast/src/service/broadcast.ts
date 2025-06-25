@@ -1,7 +1,7 @@
 import type { Redis } from 'ioredis';
 import type { IBroadcastExecute, IBroadcastJobContext, IDecoratorBroadcastOptions } from '../types/broadcast.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceBroadcast extends BeanBase {

@@ -11,7 +11,7 @@ import type {
 } from '../types/version.ts';
 import chalk from 'chalk';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceVersion extends BeanBase {

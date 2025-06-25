@@ -1,7 +1,7 @@
 import type { FunctionAsync } from 'vona';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { ServiceDb } from '../service/db.ts';
 
 @Service()

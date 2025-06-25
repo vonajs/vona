@@ -1,6 +1,6 @@
 import type { IMenus } from 'vona-module-a-menu';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceMenu extends BeanBase {

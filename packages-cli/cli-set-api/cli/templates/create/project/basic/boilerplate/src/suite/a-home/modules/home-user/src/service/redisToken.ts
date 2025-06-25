@@ -1,7 +1,7 @@
 import type { IUserBase } from 'vona-module-a-user';
 import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceRedisToken extends BeanBase {

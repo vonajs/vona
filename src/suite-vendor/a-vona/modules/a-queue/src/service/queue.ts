@@ -14,7 +14,7 @@ import type {
 } from '../types/queue.ts';
 import * as Bull from 'bullmq';
 import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceQueue extends BeanBase {

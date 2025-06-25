@@ -2,8 +2,8 @@ import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { IGeneralInfoOptions, IPerformActionOptions } from '../types/executor.ts';
 import { combineParamsAndQuery } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
+import { Service } from 'vona-module-a-bean';
 import { Log } from 'vona-module-a-logger';
-import { Service } from 'vona-module-a-web';
 import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Service()

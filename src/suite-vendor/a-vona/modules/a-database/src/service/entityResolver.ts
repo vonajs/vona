@@ -1,5 +1,5 @@
 import { appResource, BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { $columnsAll } from '../lib/columns.ts';
 
 const SymbolModuleScope = Symbol('SymbolModuleScope');

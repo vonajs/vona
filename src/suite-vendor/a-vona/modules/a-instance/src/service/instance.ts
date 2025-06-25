@@ -4,7 +4,7 @@ import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
 import { isNil, sleep } from '@cabloy/utils';
 import async from 'async';
 import { BeanBase, deepExtend } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 const SymbolQueueInstanceStartup = Symbol('SymbolQueueInstanceStartup');
 const SymbolCacheIntancesConfig = Symbol('SymbolCacheIntancesConfig');

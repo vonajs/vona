@@ -1,7 +1,7 @@
 import type { TableIdentity } from 'vona-module-a-database';
 import * as passwordHash from 'password-hash-salt';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceAuthSimple extends BeanBase {

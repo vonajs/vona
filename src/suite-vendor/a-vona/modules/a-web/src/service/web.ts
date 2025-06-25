@@ -1,7 +1,8 @@
 import type { Constructable, MetadataKey } from 'vona';
-import type { RequestMappingMetadata } from 'vona-module-a-web';
+import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
 import { appMetadata, appResource, BeanBase } from 'vona';
-import { Service, SymbolRequestMappingHandler } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
+import { SymbolRequestMappingHandler } from '../types/request.ts';
 
 @Service()
 export class ServiceWeb extends BeanBase {

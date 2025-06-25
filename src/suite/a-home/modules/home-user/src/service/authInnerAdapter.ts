@@ -1,7 +1,7 @@
 import type { IAuthBase, IAuthInnerAdapter } from 'vona-module-a-user';
 import type { IAuth } from '../types/auth.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceAuthInnerAdapter extends BeanBase implements IAuthInnerAdapter {

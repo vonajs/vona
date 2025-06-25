@@ -2,7 +2,7 @@ import type { TableIdentity } from 'table-identity';
 import type { IRoleBase, IRoleInnerAdapter } from 'vona-module-a-user';
 import type { IRole } from '../types/role.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceRoleInnerAdapter extends BeanBase implements IRoleInnerAdapter {

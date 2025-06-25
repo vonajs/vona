@@ -2,7 +2,7 @@ import type { Constructable, IBeanRecord } from 'vona';
 import type { IDecoratorAopOptions } from '../types/aop.ts';
 import type { IUseAopMethodPropMetadata } from '../types/aopMethod.ts';
 import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, deepExtend, ProxyDisable } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { SymbolDecoratorUseAopMethod } from '../types/aopMethod.ts';
 
 @ProxyDisable()

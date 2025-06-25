@@ -1,7 +1,7 @@
 import type { ITableColumns, ITableColumnsDefault } from '../types/columns.ts';
 import type { IDatabaseClientRecord } from '../types/database.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 const SymbolColumnsCache = Symbol('SymbolColumnsCache');
 const SymbolColumnsDefaultCache = Symbol('SymbolColumnsDefaultCache');

@@ -5,7 +5,7 @@ import path from 'node:path';
 import { isNil } from '@cabloy/utils';
 import fse from 'fs-extra';
 import { BeanBase, cast } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceStartup extends BeanBase {

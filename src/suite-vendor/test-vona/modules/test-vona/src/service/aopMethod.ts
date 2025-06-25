@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 class ServiceAopMethodBase extends BeanBase {
   @Aspect.aopMethod('test-vona:test', { wrapper: '+' })

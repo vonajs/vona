@@ -1,7 +1,7 @@
 import type { IInstanceRecord } from 'vona';
 import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
 import { BeanBase, beanFullNameFromOnionName, cast, deepExtend } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceSchedule extends BeanBase {

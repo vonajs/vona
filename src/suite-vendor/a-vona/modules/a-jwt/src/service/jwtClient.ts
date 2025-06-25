@@ -1,7 +1,7 @@
 import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IPayloadDataBase } from '../types/jwt.ts';
 import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceJwtClient extends BeanBase {

@@ -6,7 +6,7 @@ import type {
   TSummerCacheActionOptions,
 } from '../types/summerCache.ts';
 import { cast } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()

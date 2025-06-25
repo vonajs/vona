@@ -4,7 +4,7 @@ import type { FunctionAny, FunctionAsync } from 'vona';
 import type { ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDb } from './db.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { TransactionIsolationLevelsMap } from '../types/transaction.ts';
 import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 

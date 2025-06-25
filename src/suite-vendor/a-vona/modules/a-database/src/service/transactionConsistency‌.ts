@@ -1,7 +1,7 @@
 import type { FunctionAny } from 'vona';
 import { AsyncResource } from 'node:async_hooks';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceTransactionConsistency‌ extends BeanBase {

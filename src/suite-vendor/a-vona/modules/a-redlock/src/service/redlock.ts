@@ -3,7 +3,7 @@ import type { FunctionAsync } from 'vona';
 import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 import { Redlock } from '@sesamecare-oss/redlock';
 import { BeanBase, instanceDesp } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceRedlock extends BeanBase {

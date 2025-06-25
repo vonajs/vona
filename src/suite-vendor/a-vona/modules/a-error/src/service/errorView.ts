@@ -5,7 +5,7 @@ import cookie from 'cookie';
 import Mustache from 'mustache';
 import * as StackTrace from 'stack-trace';
 import { BeanBase, cast } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 const startingSlashRegex = /\\|\//;
 

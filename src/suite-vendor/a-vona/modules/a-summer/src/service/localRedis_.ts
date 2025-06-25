@@ -1,7 +1,7 @@
 import type { BeanCacheRedisBase } from 'vona-module-a-cache';
 import type { ICacheLayeredBase } from '../common/cacheLayeredBase.ts';
 import type { TSummerCacheActionOptions } from '../types/summerCache.ts';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()

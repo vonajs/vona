@@ -1,6 +1,6 @@
 import type { IFilterComposeData, IFilterJson } from '../types/filter.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceFilter extends BeanBase {

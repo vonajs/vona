@@ -24,7 +24,7 @@ import {
   deepExtend,
   ProxyDisable,
 } from 'vona';
-import { Service } from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
 import {
   SymbolUseOnionLocal,
 } from '../types/onion.ts';
