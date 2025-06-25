@@ -1,14 +1,16 @@
 {
   "name": "vona-module-a-aspectutils",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-aspectutils",
   "vonaModule": {
     "dependencies": {}
   },
   "description": "",
   "author": "",
-  "keywords": ["Vona Module"],
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -20,7 +22,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist", "static"],
+  "files": [
+    "dist",
+    "static"
+  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc -p tsconfig.build.json",
@@ -36,7 +41,6 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

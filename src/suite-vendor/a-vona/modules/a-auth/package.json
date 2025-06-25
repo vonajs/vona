@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-auth",
   "type": "module",
-  "version": "5.0.17",
+  "version": "5.0.18",
   "title": "a-auth",
   "vonaModule": {
     "fileVersion": 1,

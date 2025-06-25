@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-user",
   "type": "module",
-  "version": "5.0.16",
+  "version": "5.0.17",
   "title": "a-user",
   "vonaModule": {
     "dependencies": {}
