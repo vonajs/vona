@@ -392,7 +392,7 @@ export class BeanContainer {
     let chains: MetadataKey[] = [];
     // aop
     if (!proxyDisable && beanOptions && cast(beanOptions.scene) !== 'aop') {
-      const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
+      const beanAop = this.app.bean._getBean('a-aspectutils.service.aop' as never) as any;
       const aops = beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);
@@ -400,7 +400,7 @@ export class BeanContainer {
     }
     // aop method
     if (!proxyDisable && beanOptions) {
-      const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
+      const beanAop = this.app.bean._getBean('a-aspectutils.service.aop' as never) as any;
       if (beanAop.hasAopMethods(beanOptions?.beanFullName)) {
         chains.push(SymbolProxyAopMethod);
       }
@@ -501,7 +501,7 @@ export class BeanContainer {
   }
 
   private _getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, prop: string) {
-    const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
+    const beanAop = this.app.bean._getBean('a-aspectutils.service.aop' as never) as any;
     const aopMethods = beanAop.findAopMethodsMatched(beanFullName, prop);
     for (const aopMethod of aopMethods) {
       let fn;

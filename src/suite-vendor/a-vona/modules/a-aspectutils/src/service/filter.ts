@@ -1,4 +1,4 @@
-import type { IFilterComposeData, IFilterJson } from '../types/filter.ts';
+import type { IFilterComposeData, IFilterJson } from 'vona-module-a-aspect';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 

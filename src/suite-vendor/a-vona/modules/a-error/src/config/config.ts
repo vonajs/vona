@@ -1,5 +1,5 @@
 import type { VonaApplication, VonaContext } from 'vona';
-import type { ServiceFilter } from 'vona-module-a-aspect';
+import type { ServiceFilter } from 'vona-module-a-aspectutils';
 import { accepts } from '../lib/utils.ts';
 
 export function config(_app: VonaApplication) {
@@ -37,7 +37,7 @@ export function config(_app: VonaApplication) {
 
 async function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
   return await ctx.app.ctxStorage.run(ctx as any, async () => {
-    const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as ServiceFilter;
+    const beanFilter = ctx.app.bean._getBean('a-aspectutils.service.filter' as never) as ServiceFilter;
     return await beanFilter.performErrorFilters(err, method);
   });
 }
