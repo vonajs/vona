@@ -1,8 +1,7 @@
 import type { MetadataKey } from 'vona';
-import type { IOpenApiHeader, IOpenApiOptions, TypeResponseContentType } from '../../types/api.ts';
-import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
+import type { IOpenApiHeader, IOpenApiOptions, SchemaLike, SchemaLikeCreate, TypeResponseContentType } from 'vona-module-a-openapiutils';
 import { appMetadata } from 'vona';
-import { SymbolOpenApiOptions } from '../../types/api.ts';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 import { Field } from './field.ts';
 

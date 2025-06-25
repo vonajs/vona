@@ -4,12 +4,8 @@ import type {
   Constructable,
   IDecoratorBeanOptionsBase,
 } from 'vona';
-import type {
-  IDecoratorControllerOptions,
-  RequestMappingMetadata,
-  TypeRequestMethod,
-} from 'vona-module-a-web';
-import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions, TypeGenerateJsonScene } from '../types/api.ts';
+import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
+import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -25,11 +21,11 @@ import {
   LocaleModuleNameSeparator,
 } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
 import { bodySchemaWrapperDefault } from '../lib/schema/bodySchemaWrapper.ts';
 import { $schema } from '../lib/schema/schema.ts';
-import { SymbolOpenApiOptions } from '../types/api.ts';
 import { SymbolRouteHandlersArgumentsMeta } from '../types/decorator.ts';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field', 'files', 'file'];
