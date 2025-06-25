@@ -1,9 +1,10 @@
 import type { Constructable } from 'vona';
-import type { IOpenApiOptions } from 'vona-module-a-openapi';
+import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend } from 'vona';
-import { mergeFieldsOpenAPIMetadata, SymbolOpenApiOptions } from 'vona-module-a-openapi';
+import { mergeFieldsOpenAPIMetadata } from 'vona-module-a-openapi';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
 export function Controller<T extends IDecoratorControllerOptions>(path?: string, options?: Omit<T, 'path'>): ClassDecorator;
