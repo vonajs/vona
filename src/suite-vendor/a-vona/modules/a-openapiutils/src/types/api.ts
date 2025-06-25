@@ -1,7 +1,7 @@
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
 import type { VonaApplication } from 'vona';
-import type { z } from 'zod';
+import type z from 'zod';
 import type { SchemaLikeCreate } from './decorator.ts';
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
@@ -12,6 +12,20 @@ export interface IOpenApiHeader {
 }
 
 export interface IResponseHeaders { [key: string]: string | string[] }
+
+export type TypeGenerateJsonScene = 'api' | 'rest';
+
+export type TypeOpenApiVersion = 'V30' | 'V31';
+export interface IOpenAPIObject {
+  V30: OpenAPIObject30;
+  V31: OpenAPIObject31;
+}
+export interface IOpenAPISchemaObject {
+  V30: SchemaObject30;
+  V31: SchemaObject31;
+}
+
+export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => object) | object>;
 
 export interface IOpenApiOptions {
   public?: boolean;
@@ -27,20 +41,6 @@ export interface IOpenApiOptions {
   headers?: IOpenApiHeader[];
   setHeaders?: IResponseHeaders;
 }
-
-export type TypeGenerateJsonScene = 'api' | 'rest';
-
-export type TypeOpenApiVersion = 'V30' | 'V31';
-export interface IOpenAPIObject {
-  V30: OpenAPIObject30;
-  V31: OpenAPIObject31;
-}
-export interface IOpenAPISchemaObject {
-  V30: SchemaObject30;
-  V31: SchemaObject31;
-}
-
-export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => object) | object>;
 
 export type TypeResponseContentType =
   | 'application/json'

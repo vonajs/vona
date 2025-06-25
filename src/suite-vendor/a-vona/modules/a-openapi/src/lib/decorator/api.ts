@@ -6,11 +6,6 @@ import { SymbolOpenApiOptions } from '../../types/api.ts';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 import { Field } from './field.ts';
 
-export function setPublic(target: object, prop?: MetadataKey, _descriptor?: PropertyDescriptor, value?: boolean) {
-  const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
-  options.public = value;
-}
-
 function httpCode(httpCode: number): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
