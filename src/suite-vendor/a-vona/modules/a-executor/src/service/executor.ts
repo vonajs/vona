@@ -2,13 +2,13 @@ import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { IGeneralInfoOptions, IPerformActionOptions } from '../types/executor.ts';
 import { combineParamsAndQuery } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
+import { Aspect } from 'vona-module-a-aspect';
 import { Service } from 'vona-module-a-bean';
-import { Log } from 'vona-module-a-logger';
 import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Service()
 export class ServiceExecutor extends BeanBase {
-  @Log({ level: 'debug' })
+  @Aspect.aopMethod('a-logger:log', { level: 'debug' })
   async performActionInner<
     METHOD extends keyof IApiPathRecordMethodMap,
   >(method: METHOD,
