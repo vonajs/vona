@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
-import type { ISchemaObjectOptions, SchemaLike } from '../../../types/decorator.ts';
+import type { SchemaLike } from 'vona-module-a-openapiutils';
+import type { ISchemaObjectOptions } from '../../../types/decorator.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';

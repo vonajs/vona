@@ -1,5 +1,5 @@
 import type { VonaApplication } from 'vona';
-import type { IServiceRecord } from 'vona-module-a-web';
+import type { IServiceRecord } from 'vona-module-a-bean';
 import type { TypeAuthToken } from '../types/auth.ts';
 
 export function config(_app: VonaApplication) {
