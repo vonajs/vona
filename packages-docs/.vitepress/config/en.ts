@@ -85,6 +85,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Create CRUD', link: 'crud' },
             { text: 'Controller', link: 'controller' },
             { text: 'Service', link: 'service' },
+            { text: 'Model', link: 'model' },
           ],
         },
       ],
