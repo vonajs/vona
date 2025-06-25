@@ -1,8 +1,8 @@
 import type { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
+import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z, ZodTypeAny } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
-import type { IOpenApiOptions } from './api.ts';
 import type { IComponentRecord } from './component.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';

@@ -1,8 +1,8 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenAPIMetadata } from '../types/rest.ts';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
+import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
-import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from '../types/decorator.ts';
 
 export function getTargetDecoratorRules(target: object) {
   registerMappedClassMetadataKey(target, SymbolDecoratorRule, {

@@ -1,6 +1,6 @@
 import type { Constructable } from 'vona';
+import type { SchemaLike, SchemaLikeCreate } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
-import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
 import { cast, isClassStrict } from 'vona';
 import { $schema } from './schema.ts';
 

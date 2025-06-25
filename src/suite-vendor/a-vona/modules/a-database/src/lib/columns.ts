@@ -2,7 +2,7 @@ import type { Constructable } from 'vona';
 import type { TypeMetaEntity } from '../types/entity.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { appMetadata, appResource, cast } from 'vona';
-import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapi';
+import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 
 export function $column<T>(classEntity: (() => Constructable<T>) | Constructable<T>, extract: (classEntity: TypeMetaEntity<T>) => any): string {
   return $columns(classEntity, extract) as unknown as string;

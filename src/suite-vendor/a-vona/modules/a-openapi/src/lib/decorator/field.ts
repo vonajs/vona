@@ -1,5 +1,5 @@
 import type { MetadataKey } from 'vona';
-import type { SchemaLike } from '../../types/decorator.ts';
+import type { SchemaLike } from 'vona-module-a-openapiutils';
 import { appMetadata } from 'vona';
 import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 import { getTargetDecoratorRuleColumns, getTargetDecoratorRules } from '../utils.ts';

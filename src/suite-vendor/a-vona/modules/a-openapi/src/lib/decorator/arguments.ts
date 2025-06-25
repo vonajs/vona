@@ -1,4 +1,4 @@
-import type { SchemaLike } from '../../types/decorator.ts';
+import type { SchemaLike } from 'vona-module-a-openapiutils';
 import { createPipesArgumentDecorator } from './pipesArgument.ts';
 
 function Param(): ParameterDecorator;

@@ -1,10 +1,6 @@
 import type { MetadataKey } from 'vona';
-import type {
-  RouteHandlerArgumentMetaDecorator,
-  RouteHandlerArgumentType,
-  SchemaLike,
-  TypeExtractValue,
-} from '../../types/decorator.ts';
+import type { SchemaLike } from 'vona-module-a-openapiutils';
+import type { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType, TypeExtractValue } from '../../types/decorator.ts';
 import { appMetadata } from 'vona';
 import { z } from 'zod';
 import {

@@ -1,9 +1,9 @@
-import type { IOpenApiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapi';
+import type { IOpenApiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapiutils';
 import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
 import parser from 'co-body';
 import { appMetadata, BeanBase } from 'vona';
-import { SymbolOpenApiOptions } from 'vona-module-a-openapi';
 import { Service } from 'vona-module-a-bean';
+import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { getIsEnabledBodyAs, getMimeTypes, isTypes } from '../lib/utils.ts';
 import { SymbolDisableBodyParser } from '../types/bodyParser.ts';
 

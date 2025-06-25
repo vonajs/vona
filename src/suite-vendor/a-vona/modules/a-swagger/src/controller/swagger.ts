@@ -1,4 +1,4 @@
-import type { IOpenAPIObject } from 'vona-module-a-openapi';
+import type { IOpenAPIObject } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api, Arg, v } from 'vona-module-a-openapi';
