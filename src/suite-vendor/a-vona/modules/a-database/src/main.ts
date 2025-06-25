@@ -11,7 +11,7 @@ const SymbolTransactionConsistency = Symbol('SymbolTransactionConsistency');
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
     // config
-    const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault, configLocal, configProd, configTest);
+    const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault, configDev, configProd, configTest);
     this.app.config.database = deepExtend({}, _configDefault, this.app.config.database);
   }
 
@@ -97,7 +97,7 @@ export async function configDefault(app: VonaApplication): Promise<PowerPartial<
   };
 }
 
-async function configLocal(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
+async function configDev(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
   return {
     testDatabase: true,
     base: {

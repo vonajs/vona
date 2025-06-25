@@ -14,7 +14,7 @@ export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv
   let config: VonaConfigOptional = configDefault(appInfo, env);
   const mode = appInfo.configMeta.mode;
   if (mode === 'dev') {
-    config = deepExtend(config, configLocal(env));
+    config = deepExtend(config, configDev(env));
   } else if (mode === 'prod') {
     config = deepExtend(config, configProd(env));
   } else if (mode === 'test') {
@@ -65,7 +65,7 @@ export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaCon
   };
 }
 
-export function configLocal(_env: VonaConfigEnv): VonaConfigOptional {
+export function configDev(_env: VonaConfigEnv): VonaConfigOptional {
   return {
     proxy: {
       enabled: true,
@@ -118,14 +118,14 @@ export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial
 export async function combineConfigDefault<T>(
   app: VonaApplication,
   configDefault: TypeConfigLoader<T>,
-  configLocal?: TypeConfigLoader<T>,
+  configDev?: TypeConfigLoader<T>,
   configProd?: TypeConfigLoader<T>,
   configTest?: TypeConfigLoader<T>,
 ): Promise<PowerPartial<T>> {
   let config = await configDefault(app);
   const mode = app.config.meta.mode;
-  if (mode === 'dev' && configLocal) {
-    config = deepExtend(config, await configLocal(app));
+  if (mode === 'dev' && configDev) {
+    config = deepExtend(config, await configDev(app));
   } else if (mode === 'prod' && configProd) {
     config = deepExtend(config, await configProd(app));
   } else if (mode === 'test' && configTest) {
