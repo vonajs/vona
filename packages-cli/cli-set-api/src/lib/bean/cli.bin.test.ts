@@ -88,7 +88,7 @@ export class CliBinTest extends BeanCliBase {
     const patterns: string[] = [];
     for (const moduleName in modulesMeta.modules) {
       const module = modulesMeta.modules[moduleName];
-      if(module.info.node_modules) continue;
+      if (module.info.node_modules) continue;
       const testDir = path.join(module.root, 'test');
       if (fse.existsSync(testDir)) {
         const relativePath = path.relative(projectPath, module.root);

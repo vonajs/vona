@@ -7,6 +7,14 @@
     "fileVersion": 1,
     "dependencies": {
       "a-vona": "5.0.0"
+    },
+    "capabilities": {
+      "meta": {
+        "mode": [
+          "dev",
+          "test"
+        ]
+      }
     }
   },
   "description": "",

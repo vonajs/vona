@@ -269,15 +269,6 @@ importers:
       vona-module-pear-table:
         specifier: workspace:^
         version: link:src/suite/pear-diancan/modules/pear-table
-      vona-module-test-cabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/test-cabloy/modules/test-cabloy
-      vona-module-test-rest:
-        specifier: workspace:^
-        version: link:src/suite-vendor/test-cabloy/modules/test-rest
-      vona-module-test-ssr:
-        specifier: workspace:^
-        version: link:src/suite-vendor/test-cabloy/modules/test-ssr
       vona-module-test-vona:
         specifier: workspace:^
         version: link:src/suite-vendor/test-vona/modules/test-vona
@@ -337,8 +328,17 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.29
+        specifier: ^6.0.30
         version: link:packages-vona/vona-mock
+      vona-module-test-cabloy:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/test-cabloy
+      vona-module-test-rest:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/test-rest
+      vona-module-test-ssr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/test-ssr
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2
@@ -1143,6 +1143,33 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
+  src/suite-vendor/a-cabloy/modules/test-cabloy:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/test-rest:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-cabloy/modules/test-ssr:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
@@ -1899,45 +1926,6 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-worker:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/test-cabloy:
-    dependencies:
-      vona-module-test-cabloy:
-        specifier: workspace:^
-        version: link:modules/test-cabloy
-      vona-module-test-rest:
-        specifier: workspace:^
-        version: link:modules/test-rest
-      vona-module-test-ssr:
-        specifier: workspace:^
-        version: link:modules/test-ssr
-
-  src/suite-vendor/test-cabloy/modules/test-cabloy:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/test-cabloy/modules/test-rest:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/test-cabloy/modules/test-ssr:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
