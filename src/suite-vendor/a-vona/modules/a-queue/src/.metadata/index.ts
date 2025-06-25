@@ -1,29 +1,9 @@
 /* eslint-disable */
-/** startup: begin */
-export * from '../bean/startup.loadQueueWorkers.ts';
-
-import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
-declare module 'vona-module-a-startup' {
-  
-    export interface IStartupRecord {
-      'a-queue:loadQueueWorkers': IDecoratorStartupOptions;
-    }
-
-  
-}
-declare module 'vona-module-a-queue' {
-  
-        export interface StartupLoadQueueWorkers {
-          /** @internal */
-          get scope(): ScopeModuleAQueue;
-        } 
-}
-/** startup: end */
 /** service: begin */
 export * from '../service/queue.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-queue:queue': never;
@@ -54,6 +34,26 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** startup: begin */
+export * from '../bean/startup.loadQueueWorkers.ts';
+
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  
+    export interface IStartupRecord {
+      'a-queue:loadQueueWorkers': IDecoratorStartupOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-queue' {
+  
+        export interface StartupLoadQueueWorkers {
+          /** @internal */
+          get scope(): ScopeModuleAQueue;
+        } 
+}
+/** startup: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

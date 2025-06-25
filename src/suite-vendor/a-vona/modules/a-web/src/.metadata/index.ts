@@ -24,31 +24,11 @@ declare module 'vona' {
   }
 }
 /** bean: end */
-/** startup: begin */
-export * from '../bean/startup.listen.ts';
-
-import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
-declare module 'vona-module-a-startup' {
-  
-    export interface IStartupRecord {
-      'a-web:listen': IDecoratorStartupOptions;
-    }
-
-  
-}
-declare module 'vona-module-a-web' {
-  
-        export interface StartupListen {
-          /** @internal */
-          get scope(): ScopeModuleAWeb;
-        } 
-}
-/** startup: end */
 /** service: begin */
 export * from '../service/web.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-web:web': never;
@@ -79,6 +59,26 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** startup: begin */
+export * from '../bean/startup.listen.ts';
+
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  
+    export interface IStartupRecord {
+      'a-web:listen': IDecoratorStartupOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-web' {
+  
+        export interface StartupListen {
+          /** @internal */
+          get scope(): ScopeModuleAWeb;
+        } 
+}
+/** startup: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

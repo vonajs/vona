@@ -111,6 +111,51 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/auth.ts';
+export * from '../service/authInnerAdapter.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-auth:auth': never;
+'a-auth:authInnerAdapter': never;
+    }
+
+  
+}
+declare module 'vona-module-a-auth' {
+  
+        export interface ServiceAuth {
+          /** @internal */
+          get scope(): ScopeModuleAAuth;
+        }
+
+        export interface ServiceAuthInnerAdapter {
+          /** @internal */
+          get scope(): ScopeModuleAAuth;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceAuth } from '../service/auth.ts';
+import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
+export interface IModuleService {
+  'auth': ServiceAuth;
+'authInnerAdapter': ServiceAuthInnerAdapter;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-auth.service.auth': ServiceAuth;
+'a-auth.service.authInnerAdapter': ServiceAuthInnerAdapter;
+  }
+}
+/** service: end */
 /** event: begin */
 export * from '../bean/event.accountMigration.ts';
 export * from '../bean/event.issuePassport.ts';
@@ -189,51 +234,6 @@ declare module 'vona-module-a-auth' {
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
-/** service: begin */
-export * from '../service/auth.ts';
-export * from '../service/authInnerAdapter.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-auth:auth': never;
-'a-auth:authInnerAdapter': never;
-    }
-
-  
-}
-declare module 'vona-module-a-auth' {
-  
-        export interface ServiceAuth {
-          /** @internal */
-          get scope(): ScopeModuleAAuth;
-        }
-
-        export interface ServiceAuthInnerAdapter {
-          /** @internal */
-          get scope(): ScopeModuleAAuth;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceAuth } from '../service/auth.ts';
-import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
-export interface IModuleService {
-  'auth': ServiceAuth;
-'authInnerAdapter': ServiceAuthInnerAdapter;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-auth.service.auth': ServiceAuth;
-'a-auth.service.authInnerAdapter': ServiceAuthInnerAdapter;
-  }
-}
-/** service: end */
 /** controller: begin */
 export * from '../controller/passport.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
@@ -300,9 +300,9 @@ error: TypeModuleErrors<typeof Errors>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
+service: IModuleService;
 event: IModuleEvent;
 redlock: MetaRedlock;
-service: IModuleService;
 }
 
 import 'vona';

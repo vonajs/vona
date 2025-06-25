@@ -25,37 +25,12 @@ declare module 'vona' {
   }
 }
 /** bean: end */
-/** dto: begin */
-export * from '../dto/jwtToken.ts';
-import type { IDtoOptionsJwtToken } from '../dto/jwtToken.ts';
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IDtoRecord {
-      'a-jwt:jwtToken': Omit<IDtoOptionsJwtToken, '_fieldsMore_'>;
-    }
-
-  
-}
-declare module 'vona-module-a-jwt' {
-   
-}
-/** dto: end */
-/** dto: begin */
-import type { DtoJwtToken } from '../dto/jwtToken.ts'; 
-declare module 'vona-module-a-jwt' {
-  
-    export interface IDtoOptionsJwtToken {
-      fields?: TypeEntityOptionsFields<DtoJwtToken, IDtoOptionsJwtToken['_fieldsMore_']>;
-    }
-}
-/** dto: end */
 /** service: begin */
 export * from '../service/jwtClient.ts';
 export * from '../service/jwtExtract.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-jwt:jwtClient': never;
@@ -95,6 +70,31 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** dto: begin */
+export * from '../dto/jwtToken.ts';
+import type { IDtoOptionsJwtToken } from '../dto/jwtToken.ts';
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IDtoRecord {
+      'a-jwt:jwtToken': Omit<IDtoOptionsJwtToken, '_fieldsMore_'>;
+    }
+
+  
+}
+declare module 'vona-module-a-jwt' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoJwtToken } from '../dto/jwtToken.ts'; 
+declare module 'vona-module-a-jwt' {
+  
+    export interface IDtoOptionsJwtToken {
+      fields?: TypeEntityOptionsFields<DtoJwtToken, IDtoOptionsJwtToken['_fieldsMore_']>;
+    }
+}
+/** dto: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

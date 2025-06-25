@@ -1,35 +1,9 @@
 /* eslint-disable */
-/** cacheRedis: begin */
-export * from '../bean/cacheRedis.election.ts';
-
-import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
-declare module 'vona-module-a-cache' {
-  
-    export interface ICacheRedisRecord {
-      'a-election:election': IDecoratorCacheRedisOptions;
-    }
-
-  
-}
-declare module 'vona-module-a-election' {
-  
-        export interface CacheRedisElection {
-          /** @internal */
-          get scope(): ScopeModuleAElection;
-        } 
-}
-/** cacheRedis: end */
-/** cacheRedis: begin */
-import type { CacheRedisElection } from '../bean/cacheRedis.election.ts';
-export interface IModuleCacheRedis {
-  'election': CacheRedisElection;
-}
-/** cacheRedis: end */
 /** service: begin */
 export * from '../service/election.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-election:election': never;
@@ -60,6 +34,32 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.election.ts';
+
+import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  
+    export interface ICacheRedisRecord {
+      'a-election:election': IDecoratorCacheRedisOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-election' {
+  
+        export interface CacheRedisElection {
+          /** @internal */
+          get scope(): ScopeModuleAElection;
+        } 
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import type { CacheRedisElection } from '../bean/cacheRedis.election.ts';
+export interface IModuleCacheRedis {
+  'election': CacheRedisElection;
+}
+/** cacheRedis: end */
 /** monkey: begin */
 export * from '../monkey.ts';
 /** monkey: end */
@@ -72,8 +72,8 @@ export class ScopeModuleAElection extends BeanScopeBase {}
 
 export interface ScopeModuleAElection {
   util: BeanScopeUtil;
-cacheRedis: IModuleCacheRedis;
 service: IModuleService;
+cacheRedis: IModuleCacheRedis;
 }
 
 import 'vona';

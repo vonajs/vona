@@ -1,5 +1,40 @@
 /* eslint-disable */
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+/** service: begin */
+export * from '../service/menu.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-menu:menu': never;
+    }
+
+  
+}
+declare module 'vona-module-a-menu' {
+  
+        export interface ServiceMenu {
+          /** @internal */
+          get scope(): ScopeModuleAMenu;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceMenu } from '../service/menu.ts';
+export interface IModuleService {
+  'menu': ServiceMenu;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-menu.service.menu': ServiceMenu;
+  }
+}
+/** service: end */
 /** event: begin */
 export * from '../bean/event.retrieveMenus.ts';
 
@@ -96,41 +131,6 @@ declare module 'vona-module-a-menu' {
     }
 }
 /** dto: end */
-/** service: begin */
-export * from '../service/menu.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-menu:menu': never;
-    }
-
-  
-}
-declare module 'vona-module-a-menu' {
-  
-        export interface ServiceMenu {
-          /** @internal */
-          get scope(): ScopeModuleAMenu;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceMenu } from '../service/menu.ts';
-export interface IModuleService {
-  'menu': ServiceMenu;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-menu.service.menu': ServiceMenu;
-  }
-}
-/** service: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -140,8 +140,8 @@ export class ScopeModuleAMenu extends BeanScopeBase {}
 
 export interface ScopeModuleAMenu {
   util: BeanScopeUtil;
-event: IModuleEvent;
 service: IModuleService;
+event: IModuleEvent;
 }
 
 import 'vona';

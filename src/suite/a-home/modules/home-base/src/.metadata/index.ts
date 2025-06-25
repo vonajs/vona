@@ -4,7 +4,7 @@ import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 export * from '../service/menu.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'home-base:menu': never;

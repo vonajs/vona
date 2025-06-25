@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** service: begin */
+export * from '../service/schedule.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-schedule:schedule': never;
+    }
+
+  
+}
+declare module 'vona-module-a-schedule' {
+  
+        export interface ServiceSchedule {
+          /** @internal */
+          get scope(): ScopeModuleASchedule;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceSchedule } from '../service/schedule.ts';
+export interface IModuleService {
+  'schedule': ServiceSchedule;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-schedule.service.schedule': ServiceSchedule;
+  }
+}
+/** service: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.ts';
 
@@ -68,41 +103,6 @@ declare module 'vona-module-a-schedule' {
         } 
 }
 /** startup: end */
-/** service: begin */
-export * from '../service/schedule.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-schedule:schedule': never;
-    }
-
-  
-}
-declare module 'vona-module-a-schedule' {
-  
-        export interface ServiceSchedule {
-          /** @internal */
-          get scope(): ScopeModuleASchedule;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceSchedule } from '../service/schedule.ts';
-export interface IModuleService {
-  'schedule': ServiceSchedule;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-schedule.service.schedule': ServiceSchedule;
-  }
-}
-/** service: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -117,9 +117,9 @@ export class ScopeModuleASchedule extends BeanScopeBase {}
 export interface ScopeModuleASchedule {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+service: IModuleService;
 redlock: MetaRedlock;
 queue: IModuleQueue;
-service: IModuleService;
 }
 
 import 'vona';

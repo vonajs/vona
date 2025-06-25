@@ -28,7 +28,7 @@ declare module 'vona' {
 export * from '../service/eventListener.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-event:eventListener': never;

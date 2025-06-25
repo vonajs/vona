@@ -123,6 +123,41 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/instance.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-instance:instance': never;
+    }
+
+  
+}
+declare module 'vona-module-a-instance' {
+  
+        export interface ServiceInstance {
+          /** @internal */
+          get scope(): ScopeModuleAInstance;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceInstance } from '../service/instance.ts';
+export interface IModuleService {
+  'instance': ServiceInstance;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-instance.service.instance': ServiceInstance;
+  }
+}
+/** service: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.reload.ts';
 export * from '../bean/broadcast.resetCache.ts';
@@ -195,41 +230,6 @@ declare module 'vona-module-a-instance' {
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
-/** service: begin */
-export * from '../service/instance.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-instance:instance': never;
-    }
-
-  
-}
-declare module 'vona-module-a-instance' {
-  
-        export interface ServiceInstance {
-          /** @internal */
-          get scope(): ScopeModuleAInstance;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceInstance } from '../service/instance.ts';
-export interface IModuleService {
-  'instance': ServiceInstance;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-instance.service.instance': ServiceInstance;
-  }
-}
-/** service: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -258,9 +258,9 @@ config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
+service: IModuleService;
 broadcast: IModuleBroadcast;
 redlock: MetaRedlock;
-service: IModuleService;
 }
 
 import 'vona';

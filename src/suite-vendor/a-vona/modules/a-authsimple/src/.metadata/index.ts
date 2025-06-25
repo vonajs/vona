@@ -109,6 +109,41 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/authSimple.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-authsimple:authSimple': never;
+    }
+
+  
+}
+declare module 'vona-module-a-authsimple' {
+  
+        export interface ServiceAuthSimple {
+          /** @internal */
+          get scope(): ScopeModuleAAuthsimple;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceAuthSimple } from '../service/authSimple.ts';
+export interface IModuleService {
+  'authSimple': ServiceAuthSimple;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-authsimple.service.authSimple': ServiceAuthSimple;
+  }
+}
+/** service: end */
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
@@ -154,41 +189,6 @@ declare module 'vona-module-a-authsimple' {
     }
 }
 /** dto: end */
-/** service: begin */
-export * from '../service/authSimple.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-authsimple:authSimple': never;
-    }
-
-  
-}
-declare module 'vona-module-a-authsimple' {
-  
-        export interface ServiceAuthSimple {
-          /** @internal */
-          get scope(): ScopeModuleAAuthsimple;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceAuthSimple } from '../service/authSimple.ts';
-export interface IModuleService {
-  'authSimple': ServiceAuthSimple;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-authsimple.service.authSimple': ServiceAuthSimple;
-  }
-}
-/** service: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

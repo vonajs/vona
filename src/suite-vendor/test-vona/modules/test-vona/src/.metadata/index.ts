@@ -131,6 +131,81 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/aopMethod.ts';
+export * from '../service/test.ts';
+export * from '../service/testApp.ts';
+export * from '../service/testClass.ts';
+export * from '../service/transaction.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'test-vona:aopMethod': never;
+'test-vona:test': never;
+'test-vona:testApp': never;
+'test-vona:testClass': never;
+'test-vona:transaction': never;
+    }
+
+  
+}
+declare module 'vona-module-test-vona' {
+  
+        export interface ServiceAopMethod {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ServiceTest {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ServiceTestApp {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ServiceTestClass {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ServiceTransaction {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceAopMethod } from '../service/aopMethod.ts';
+import type { ServiceTest } from '../service/test.ts';
+import type { ServiceTestApp } from '../service/testApp.ts';
+import type { ServiceTestClass } from '../service/testClass.ts';
+import type { ServiceTransaction } from '../service/transaction.ts';
+export interface IModuleService {
+  'aopMethod': ServiceAopMethod;
+'test': ServiceTest;
+'testApp': ServiceTestApp;
+'testClass': ServiceTestClass;
+'transaction': ServiceTransaction;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'test-vona.service.aopMethod': ServiceAopMethod;
+'test-vona.service.test': ServiceTest;
+'test-vona.service.testApp': ServiceTestApp;
+'test-vona.service.testClass': ServiceTestClass;
+'test-vona.service.transaction': ServiceTransaction;
+  }
+}
+/** service: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.test.ts';
 
@@ -392,81 +467,6 @@ declare module 'vona-module-test-vona' {
     }
 }
 /** dto: end */
-/** service: begin */
-export * from '../service/aopMethod.ts';
-export * from '../service/test.ts';
-export * from '../service/testApp.ts';
-export * from '../service/testClass.ts';
-export * from '../service/transaction.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'test-vona:aopMethod': never;
-'test-vona:test': never;
-'test-vona:testApp': never;
-'test-vona:testClass': never;
-'test-vona:transaction': never;
-    }
-
-  
-}
-declare module 'vona-module-test-vona' {
-  
-        export interface ServiceAopMethod {
-          /** @internal */
-          get scope(): ScopeModuleTestVona;
-        }
-
-        export interface ServiceTest {
-          /** @internal */
-          get scope(): ScopeModuleTestVona;
-        }
-
-        export interface ServiceTestApp {
-          /** @internal */
-          get scope(): ScopeModuleTestVona;
-        }
-
-        export interface ServiceTestClass {
-          /** @internal */
-          get scope(): ScopeModuleTestVona;
-        }
-
-        export interface ServiceTransaction {
-          /** @internal */
-          get scope(): ScopeModuleTestVona;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceAopMethod } from '../service/aopMethod.ts';
-import type { ServiceTest } from '../service/test.ts';
-import type { ServiceTestApp } from '../service/testApp.ts';
-import type { ServiceTestClass } from '../service/testClass.ts';
-import type { ServiceTransaction } from '../service/transaction.ts';
-export interface IModuleService {
-  'aopMethod': ServiceAopMethod;
-'test': ServiceTest;
-'testApp': ServiceTestApp;
-'testClass': ServiceTestClass;
-'transaction': ServiceTransaction;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'test-vona.service.aopMethod': ServiceAopMethod;
-'test-vona.service.test': ServiceTest;
-'test-vona.service.testApp': ServiceTestApp;
-'test-vona.service.testClass': ServiceTestClass;
-'test-vona.service.transaction': ServiceTransaction;
-  }
-}
-/** service: end */
 /** controller: begin */
 export * from '../controller/bean.ts';
 export * from '../controller/cacheMem.ts';
@@ -713,13 +713,13 @@ config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
+service: IModuleService;
 broadcast: IModuleBroadcast;
 cacheMem: IModuleCacheMem;
 cacheRedis: IModuleCacheRedis;
 event: IModuleEvent;
 queue: IModuleQueue;
 summerCache: IModuleSummerCache;
-service: IModuleService;
 }
 
 import 'vona';

@@ -78,6 +78,51 @@ export interface IModuleModel {
   'viewRecord': ModelViewRecord;
 }
 /** model: end */
+/** service: begin */
+export * from '../service/database.ts';
+export * from '../service/version.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-version:database': never;
+'a-version:version': never;
+    }
+
+  
+}
+declare module 'vona-module-a-version' {
+  
+        export interface ServiceDatabase {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        }
+
+        export interface ServiceVersion {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceDatabase } from '../service/database.ts';
+import type { ServiceVersion } from '../service/version.ts';
+export interface IModuleService {
+  'database': ServiceDatabase;
+'version': ServiceVersion;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-version.service.database': ServiceDatabase;
+'a-version.service.version': ServiceVersion;
+  }
+}
+/** service: end */
 /** event: begin */
 export * from '../bean/event.versionDone.ts';
 
@@ -163,51 +208,6 @@ declare module 'vona-module-a-version' {
         } 
 }
 /** startup: end */
-/** service: begin */
-export * from '../service/database.ts';
-export * from '../service/version.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-version:database': never;
-'a-version:version': never;
-    }
-
-  
-}
-declare module 'vona-module-a-version' {
-  
-        export interface ServiceDatabase {
-          /** @internal */
-          get scope(): ScopeModuleAVersion;
-        }
-
-        export interface ServiceVersion {
-          /** @internal */
-          get scope(): ScopeModuleAVersion;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceDatabase } from '../service/database.ts';
-import type { ServiceVersion } from '../service/version.ts';
-export interface IModuleService {
-  'database': ServiceDatabase;
-'version': ServiceVersion;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-version.service.database': ServiceDatabase;
-'a-version.service.version': ServiceVersion;
-  }
-}
-/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
@@ -233,8 +233,8 @@ error: TypeModuleErrors<typeof Errors>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
-event: IModuleEvent;
 service: IModuleService;
+event: IModuleEvent;
 }
 
 import 'vona';

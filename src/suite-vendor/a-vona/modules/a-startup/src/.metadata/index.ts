@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** service: begin */
+export * from '../service/startup.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-startup:startup': never;
+    }
+
+  
+}
+declare module 'vona-module-a-startup' {
+  
+        export interface ServiceStartup {
+          /** @internal */
+          get scope(): ScopeModuleAStartup;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceStartup } from '../service/startup.ts';
+export interface IModuleService {
+  'startup': ServiceStartup;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-startup.service.startup': ServiceStartup;
+  }
+}
+/** service: end */
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.startupDebounce.ts';
 
@@ -48,41 +83,6 @@ declare module 'vona-module-a-startup' {
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
-/** service: begin */
-export * from '../service/startup.ts';
-
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IServiceRecord {
-      'a-startup:startup': never;
-    }
-
-  
-}
-declare module 'vona-module-a-startup' {
-  
-        export interface ServiceStartup {
-          /** @internal */
-          get scope(): ScopeModuleAStartup;
-        } 
-}
-/** service: end */
-/** service: begin */
-import type { ServiceStartup } from '../service/startup.ts';
-export interface IModuleService {
-  'startup': ServiceStartup;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-startup.service.startup': ServiceStartup;
-  }
-}
-/** service: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -100,9 +100,9 @@ export class ScopeModuleAStartup extends BeanScopeBase {}
 export interface ScopeModuleAStartup {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+service: IModuleService;
 cacheRedis: IModuleCacheRedis;
 redlock: MetaRedlock;
-service: IModuleService;
 }
 
 import 'vona';

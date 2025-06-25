@@ -31,7 +31,7 @@ export * from '../service/localMem_.ts';
 export * from '../service/localRedis_.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
   
 }

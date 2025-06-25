@@ -4,7 +4,7 @@ export * from '../service/aop.ts';
 export * from '../service/filter.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-aspect:aop': never;

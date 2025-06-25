@@ -3,7 +3,7 @@
 export * from '../service/redlock.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-redlock:redlock': never;

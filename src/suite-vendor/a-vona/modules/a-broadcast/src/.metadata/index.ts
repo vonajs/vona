@@ -3,7 +3,7 @@
 export * from '../service/broadcast.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-broadcast:broadcast': never;

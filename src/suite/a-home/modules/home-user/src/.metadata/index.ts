@@ -97,74 +97,6 @@ export interface IModuleModel {
 'userRole': ModelUserRole;
 }
 /** model: end */
-/** meta: begin */
-export * from '../bean/meta.index.ts';
-export * from '../bean/meta.version.ts';
-import type { IMetaOptionsIndex } from 'vona-module-a-index';
-import 'vona';
-declare module 'vona' {
-  
-    export interface IMetaRecord {
-      'home-user:index': IMetaOptionsIndex;
-'home-user:version': never;
-    }
-
-  
-}
-declare module 'vona-module-home-user' {
-  
-        export interface MetaIndex {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        }
-
-        export interface MetaVersion {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        } 
-}
-/** meta: end */
-/** dto: begin */
-export * from '../dto/auth.ts';
-export * from '../dto/passport.ts';
-export * from '../dto/passportJwt.ts';
-import type { IDtoOptionsAuth } from '../dto/auth.ts';
-import type { IDtoOptionsPassport } from '../dto/passport.ts';
-import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IDtoRecord {
-      'home-user:auth': Omit<IDtoOptionsAuth, '_fieldsMore_'>;
-'home-user:passport': Omit<IDtoOptionsPassport, '_fieldsMore_'>;
-'home-user:passportJwt': Omit<IDtoOptionsPassportJwt, '_fieldsMore_'>;
-    }
-
-  
-}
-declare module 'vona-module-home-user' {
-   
-}
-/** dto: end */
-/** dto: begin */
-import type { DtoAuth } from '../dto/auth.ts';
-import type { DtoPassport } from '../dto/passport.ts';
-import type { DtoPassportJwt } from '../dto/passportJwt.ts'; 
-declare module 'vona-module-home-user' {
-  
-    export interface IDtoOptionsAuth {
-      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['_fieldsMore_']>;
-    }
-
-    export interface IDtoOptionsPassport {
-      fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['_fieldsMore_']>;
-    }
-
-    export interface IDtoOptionsPassportJwt {
-      fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['_fieldsMore_']>;
-    }
-}
-/** dto: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
 export * from '../service/authTokenAdapter.ts';
@@ -174,7 +106,7 @@ export * from '../service/roleInnerAdapter.ts';
 export * from '../service/userInnerAdapter.ts';
 
 import 'vona';
-declare module 'vona-module-a-web' {
+declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'home-user:authInnerAdapter': never;
@@ -250,6 +182,74 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** meta: begin */
+export * from '../bean/meta.index.ts';
+export * from '../bean/meta.version.ts';
+import type { IMetaOptionsIndex } from 'vona-module-a-index';
+import 'vona';
+declare module 'vona' {
+  
+    export interface IMetaRecord {
+      'home-user:index': IMetaOptionsIndex;
+'home-user:version': never;
+    }
+
+  
+}
+declare module 'vona-module-home-user' {
+  
+        export interface MetaIndex {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+        export interface MetaVersion {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        } 
+}
+/** meta: end */
+/** dto: begin */
+export * from '../dto/auth.ts';
+export * from '../dto/passport.ts';
+export * from '../dto/passportJwt.ts';
+import type { IDtoOptionsAuth } from '../dto/auth.ts';
+import type { IDtoOptionsPassport } from '../dto/passport.ts';
+import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IDtoRecord {
+      'home-user:auth': Omit<IDtoOptionsAuth, '_fieldsMore_'>;
+'home-user:passport': Omit<IDtoOptionsPassport, '_fieldsMore_'>;
+'home-user:passportJwt': Omit<IDtoOptionsPassportJwt, '_fieldsMore_'>;
+    }
+
+  
+}
+declare module 'vona-module-home-user' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoAuth } from '../dto/auth.ts';
+import type { DtoPassport } from '../dto/passport.ts';
+import type { DtoPassportJwt } from '../dto/passportJwt.ts'; 
+declare module 'vona-module-home-user' {
+  
+    export interface IDtoOptionsAuth {
+      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['_fieldsMore_']>;
+    }
+
+    export interface IDtoOptionsPassport {
+      fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['_fieldsMore_']>;
+    }
+
+    export interface IDtoOptionsPassportJwt {
+      fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['_fieldsMore_']>;
+    }
+}
+/** dto: end */
 /** controller: begin */
 export * from '../controller/passport.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
