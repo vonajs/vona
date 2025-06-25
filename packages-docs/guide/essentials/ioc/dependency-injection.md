@@ -14,7 +14,7 @@ Suppose we want to inject the ServiceMenu provided by the module home-base into 
 import { ServiceMenu } from 'vona-module-a-menu';
 export class ControllerHome {
   @Use()
-  $$menu: ServiceMenu;
+  menu: ServiceMenu;
 }  
 ```
 
@@ -24,7 +24,7 @@ export class ControllerHome {
 import type { ServiceMenu } from 'vona-module-a-menu';
 export class ControllerHome {
   @Use('home-base.service.menu')
-  $$menu: ServiceMenu;
+  menu: ServiceMenu;
 }  
 ```
 

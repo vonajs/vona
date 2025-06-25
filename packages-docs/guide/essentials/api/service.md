@@ -45,7 +45,7 @@ import { ServiceStudent } from '../service/student.ts';
 
 class ControllerStudent {
   @Use()
-  $$serviceStudent: ServiceStudent;
+  serviceStudent: ServiceStudent;
 }
 ```
 
@@ -56,7 +56,7 @@ import type { ServiceStudent } from '../service/student.ts';
 
 export class ControllerStudent {
   @Use('demo-student.service.student')
-  $$serviceStudent: ServiceStudent;
+  serviceStudent: ServiceStudent;
 }
 ```
 

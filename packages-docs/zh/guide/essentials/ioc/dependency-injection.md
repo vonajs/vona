@@ -14,7 +14,7 @@ Vona 采用模块化体系，Bean Class 都由不同的模块提供。注入模�
 import { ServiceMenu } from 'vona-module-a-menu';
 export class ControllerHome {
   @Use()
-  $$menu: ServiceMenu;
+  menu: ServiceMenu;
 }  
 ```
 
@@ -24,7 +24,7 @@ export class ControllerHome {
 import type { ServiceMenu } from 'vona-module-a-menu';
 export class ControllerHome {
   @Use('home-base.service.menu')
-  $$menu: ServiceMenu;
+  menu: ServiceMenu;
 }  
 ```
 

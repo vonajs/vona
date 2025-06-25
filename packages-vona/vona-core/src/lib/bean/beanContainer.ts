@@ -51,7 +51,6 @@ export class BeanContainer {
   public async dispose() {
     const beanInstances = this[SymbolBeanContainerInstances];
     for (const prop in beanInstances) {
-      if (prop.startsWith('$$')) continue;
       const beanInstance = cast(beanInstances[prop]);
       if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
         await beanInstance.__dispose__();
