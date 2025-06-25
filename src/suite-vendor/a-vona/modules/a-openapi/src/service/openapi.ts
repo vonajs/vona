@@ -24,10 +24,8 @@ import {
   HttpStatus,
   LocaleModuleNameSeparator,
 } from 'vona';
-import {
-  Service,
-  SymbolRequestMappingHandler,
-} from 'vona-module-a-web';
+import { Service } from 'vona-module-a-bean';
+import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
 import { bodySchemaWrapperDefault } from '../lib/schema/bodySchemaWrapper.ts';
 import { $schema } from '../lib/schema/schema.ts';
