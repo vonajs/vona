@@ -10,7 +10,8 @@ export class ServiceCaching extends BeanBase {
     return `${this.$beanFullName}_${options.cacheProp ?? prop}_${args[0]}`;
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', _cacheKeyFn: 'cacheKey' })
+  // cacheKey: '#!# concat(prop,args[0])'
+  @Caching.get({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey' })
   async get(id: number): Promise<TSummerCacheTestData> {
     return {
       id,

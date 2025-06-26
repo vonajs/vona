@@ -47,6 +47,8 @@ export function evaluate(
   context?: Record<string, unknown>,
   functions?: Record<string, CallableFunction>,
 ): unknown {
+  // functions
+  functions = _prepareFunctions(functions);
   // CstNode
   if (typeof expression === 'object' && expression.children) {
     return celjs.evaluate(expression, context, functions);
@@ -64,4 +66,12 @@ export function evaluate(
 
 export function parse(expression: string): Celjs.ParseResult {
   return celjs.parse(expression);
+}
+
+function _prepareFunctions(functions?: Record<string, CallableFunction>) {
+  return Object.assign({
+    concat: (...args) => {
+      return args.reduce((accumulator, current) => `${accumulator}${current}`, '');
+    },
+  }, functions);
 }
