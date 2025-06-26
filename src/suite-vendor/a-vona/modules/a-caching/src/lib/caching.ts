@@ -1,14 +1,8 @@
-import type { BeanBase } from 'vona';
-import type { TypeCachingActionOptions } from '../types/caching.ts';
-import { cast } from 'vona';
+import type { IAopMethodOptionsCachingGet } from '../bean/aopMethod.cachingGet.ts';
+import { Aspect } from 'vona-module-a-aspect';
 
-export function combineKey(options: TypeCachingActionOptions, args: [], receiver: BeanBase, prop: string) {
-  if (options.cacheKeyFn) {
-    if (typeof options.cacheKeyFn === 'string') {
-      if (!receiver[options.cacheKeyFn]) {
-        throw new Error(`cacheKeyFn not found: ${cast(receiver).$beanFullName}.${prop}`);
-      }
-      return receiver[options.cacheKeyFn](options, args, receiver, prop);
-    }
-  }
+function Get(options?: Partial<IAopMethodOptionsCachingGet>): MethodDecorator {
+  return Aspect.aopMethod('a-caching:cachingGet', options);
 }
+
+export const Caching = { get: Get };

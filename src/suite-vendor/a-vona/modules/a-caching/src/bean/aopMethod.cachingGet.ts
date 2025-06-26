@@ -4,7 +4,7 @@ import type { TypeCachingActionOptions } from '../types/caching.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanAopMethodBase, beanFullNameFromOnionName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
-import { combineKey } from '../lib/caching.ts';
+import { combineKey } from '../lib/utils.ts';
 
 export interface IAopMethodOptionsCachingGet extends IDecoratorAopMethodOptions, TypeCachingActionOptions {}
 
