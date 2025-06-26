@@ -143,7 +143,7 @@ class ServiceStudent {
 |table|Table name corresponding to model. If entity parameter is passed, the table name is automatically obtained from entity|
 |disableDeleted|Whether to disable soft deletion, the default is false|
 |disableInstance|Whether to disable multi-instance/multi-tenant, the default is false|
-|clientName|Specify the data source name|
+|clientName|Specify the datasource name|
 |cacheOptions|Configure cache parameters, enable redis-based cache by default|
 
 ## App config configuration
@@ -226,7 +226,7 @@ class ModelBook {}
 config.onions = {
   model: {
     'demo-student:student': {
-      clientName: 'mysql', // Use data source: mysql
+      clientName: 'mysql', // Use datasource: mysql
     },
   },
 };
@@ -261,13 +261,13 @@ class ModelStudent {}
 ``` typescript
 @Model({ cacheOptions: {
   mode: 'all', // all/mem/redis
-    mem: {
-      max: 500,
-      ttl: 5 * 1000, // 5s
-    },
-    redis: {
-      ttl: 5 * 1000, // 5s
-    },
+  mem: {
+    max: 500,
+    ttl: 5 * 1000, // 5sß
+  },
+  redis: {
+    ttl: 5 * 1000, // 5s
+  },
 } })
 class ModelStudent {}
 ```
