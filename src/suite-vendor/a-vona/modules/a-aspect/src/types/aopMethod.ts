@@ -1,5 +1,5 @@
 import type { Next, NextSync, OmitNever } from 'vona';
-import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 
 export const SymbolDecoratorUseAopMethod = Symbol('SymbolDecoratorUseAopMethod');
 export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord = any> {
@@ -22,7 +22,7 @@ export interface IAopMethodExecute {
   execute(options: IDecoratorAopMethodOptions, args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any;
 }
 
-export interface IDecoratorAopMethodOptions extends IOnionOptionsEnable {}
+export interface IDecoratorAopMethodOptions extends TypeOnionOptionsEnableSimple {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

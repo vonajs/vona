@@ -14,6 +14,8 @@ export interface IOnionOptionsEnable<OmitMetaFields extends string = never> {
   meta?: Omit<IOnionOptionsMeta, OmitMetaFields>;
 }
 
+export type TypeOnionOptionsEnableSimple = IOnionOptionsEnable<'instanceName'>;
+
 export type TypeOnionOptionsMatchFunction = (this: any, ...args: any[]) => boolean;
 export type TypeOnionOptionsMatchRule<T> = T | RegExp | TypeOnionOptionsMatchFunction;
 export type TypeOnionOptionsMatchRules<T> = (TypeOnionOptionsMatchRule<T>)[] | TypeOnionOptionsMatchRule<T>;
