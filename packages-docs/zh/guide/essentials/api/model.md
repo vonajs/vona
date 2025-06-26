@@ -244,3 +244,58 @@ class ServiceStudent {
   }
 }
 ```
+
+## 缓存
+
+Vona Model 默认启用了缓存，从而使系统在默认情况下就具备非常高的性能。我们还可以设置缓存配置
+
+### 1. 禁用缓存
+
+``` typescript
+@Model({ cacheOptions: false })
+class ModelStudent {}
+```
+
+### 2. 在 Model options 中配置缓存
+
+``` typescript
+@Model({ cacheOptions: {
+  mode: 'all', // all/mem/redis
+  mem: {
+    max: 500,
+    ttl: 5 * 1000, // 5s
+  },
+  redis: {
+    ttl: 5 * 1000, // 5s
+  },
+} })
+class ModelStudent {}
+```
+
+- mode：缓存模式，支持`二级缓存`/`mem缓存`/`redis缓存`。默认使用的是`redis缓存`
+- mem：`mem缓存`配置
+- redis：`redis缓存`配置
+
+### 3. 在 App config 中配置缓存
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'demo-student:student': {
+      cacheOptions: {
+        mode: 'all', // all/mem/redis
+        mem: {
+          max: 500,
+          ttl: 5 * 1000, // 5s
+        },
+        redis: {
+          ttl: 5 * 1000, // 5s
+        },
+      }
+    },
+  },
+};
+```
