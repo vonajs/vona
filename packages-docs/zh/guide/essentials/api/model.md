@@ -193,3 +193,54 @@ class ServiceStudent {
   }
 }
 ```
+
+## 数据源
+
+Vona 支持多数据库、多数据源。可以针对任何一个数据源调用 Model 的方法
+
+### 1. 默认数据源
+
+在默认情况下，Model 使用的是系统设置的缺省数据源
+
+`env/.env`
+
+``` bash
+DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+```
+
+### 2. 静态数据源
+
+* 在 Model options 中指定数据源
+
+``` typescript{1}
+@Model({ clientName: 'mysql' })
+class ModelBook {}
+```
+
+* 在 App config 中指定数据源
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'demo-student:student': {
+      clientName: 'mysql',    // 使用数据源：mysql
+    },
+  },
+};
+```
+
+### 3. 动态数据源
+
+我们还可以在代码中动态指定数据源
+
+``` typescript
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    const modelMysql = this.scope.model.student.newInstance('mysql');
+    return await modelMysql.select();
+  }
+}
+```
