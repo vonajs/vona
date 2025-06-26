@@ -6,6 +6,6 @@ export type TypeCachingActionOptions =
   & {
     cacheName: keyof ISummerCacheRecord;
     cacheKey?: any;
-    cacheKeyFn?: ((args: [], prop: string, receiver: BeanBase, options: TypeCachingActionOptions) => any) | string;
+    cacheKeyFn?: ((args: [], prop: string, options: TypeCachingActionOptions, receiver: BeanBase) => any) | string;
     cacheProp?: string;
   };

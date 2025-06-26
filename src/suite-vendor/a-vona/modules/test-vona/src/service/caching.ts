@@ -6,7 +6,7 @@ import { Caching } from 'vona-module-a-caching';
 
 @Service()
 export class ServiceCaching extends BeanBase {
-  cacheKey(args: any[], prop: string, _receiver: BeanBase, options: TypeCachingActionOptions) {
+  cacheKey(args: any[], prop: string, options: TypeCachingActionOptions, _receiver: BeanBase) {
     return `${this.$beanFullName}_${options.cacheProp ?? prop}_${args[0]}`;
   }
 
