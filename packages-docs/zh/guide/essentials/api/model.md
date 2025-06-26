@@ -146,6 +146,26 @@ class ServiceStudent {
 |clientName|指定数据源名称|
 |cacheOptions|配置缓存参数，默认启用基于redis的缓存|
 
+## App config配置
+
+可以在 App config 中配置 Model options
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'demo-student:student': {
+      disableDeleted: true,   // 禁用软删除
+      disableInstance: true,  // 禁用多实例/多租户
+      cacheOptions: false,    // 禁用缓存
+      clientName: 'mysql',    // 使用数据源：mysql
+    },
+  },
+};
+```
+
 ## 软删除, 多实例/多租户
 
 Model 默认自动启用软删除，当删除一条数据时，并不进行物理删除，而是设置字段 deleted 的值为 true

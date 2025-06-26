@@ -146,6 +146,26 @@ class ServiceStudent {
 |clientName|Specify the data source name|
 |cacheOptions|Configure cache parameters, enable redis-based cache by default|
 
+## App config configuration
+
+Model options can be configured in App config
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'demo-student:student': {
+      disableDeleted: true,   // disable soft deletion
+      disableInstance: true,  // disable multi-instance/multi-tenant
+      cacheOptions: false,    // disable cache
+      clientName: 'mysql',    // use datasource：mysql
+    },
+  },
+};
+```
+
 ## Soft deletion, multi-instance/multi-tenant
 
 Model automatically enables soft deletion by default. When data deleting, it is not physically deleted, but the value of the field `deleted` is set to `true`
