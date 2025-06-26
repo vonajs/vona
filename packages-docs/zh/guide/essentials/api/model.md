@@ -135,7 +135,7 @@ class ServiceStudent {
 }
 ```
 
-## @Model装饰器参数
+## Model Options
 
 |名称|说明|
 |--|--|

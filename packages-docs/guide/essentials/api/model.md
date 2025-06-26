@@ -135,7 +135,7 @@ class ServiceStudent {
 }
 ```
 
-## @Model decorator parameters
+## Model Options
 
 |Name|Description|
 |--|--|
