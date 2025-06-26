@@ -5,6 +5,7 @@ export type TypeCachingActionOptions =
   Pick<TSummerCacheActionOptions<unknown, unknown>, 'mode' | 'ignoreNull' | 'ttl' | 'updateAgeOnGet' | 'broadcastOnSet'>
   & {
     cacheName: keyof ISummerCacheRecord;
-    cacheKey: any;
-    cacheKeyFn: ((options: TypeCachingActionOptions, args: [], receiver: BeanBase, prop: string) => any) | string;
+    cacheKey?: any;
+    cacheKeyFn?: ((args: [], prop: string, receiver: BeanBase, options: TypeCachingActionOptions) => any) | string;
+    cacheProp?: string;
   };

@@ -6,9 +6,9 @@ export function combineKey(options: TypeCachingActionOptions, args: [], receiver
   if (options.cacheKeyFn) {
     if (typeof options.cacheKeyFn === 'string') {
       if (!receiver[options.cacheKeyFn]) {
-        throw new Error(`cacheKeyFn not found: ${cast(receiver).$beanFullName}.${prop}`);
+        throw new Error(`cacheKeyFn not found: ${cast(receiver).$beanFullName}#${options.cacheKeyFn}`);
       }
-      return receiver[options.cacheKeyFn](options, args, receiver, prop);
+      return receiver[options.cacheKeyFn](args, prop, receiver, options);
     }
   }
 }
