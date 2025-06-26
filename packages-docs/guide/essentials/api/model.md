@@ -193,3 +193,109 @@ class ServiceStudent {
   }
 }
 ```
+
+## Datasource
+
+Vona supports `multi-database` and `multi-datasource`. Model methods can be invoked for any datasource
+
+### 1. Default datasource
+
+By default, Model uses the default datasource set by the system
+
+`env/.env`
+
+``` bash
+DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+```
+
+### 2. Static datasource
+
+* Specify the datasource in Model options
+
+``` typescript{1}
+@Model({ clientName: 'mysql' })
+class ModelBook {}
+```
+
+* Specify the datasource in App config
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'demo-student:student': {
+      clientName: 'mysql', // Use data source: mysql
+    },
+  },
+};
+```
+
+### 3. Dynamic datasource
+
+We can also specify the datasource dynamically in the code
+
+``` typescript
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    const modelMysql = this.scope.model.student.newInstance('mysql');
+    return await modelMysql.select();
+  }
+}
+```
+
+## Cache
+
+Vona Model has cache enabled by default, making the system high performant by default. We can also set cache configuration
+
+### 1. Disable cache
+
+``` typescript
+@Model({ cacheOptions: false })
+class ModelStudent {}
+```
+
+### 2. Configure cache in Model options
+
+``` typescript
+@Model({ cacheOptions: {
+  mode: 'all', // all/mem/redis
+    mem: {
+      max: 500,
+      ttl: 5 * 1000, // 5s
+    },
+    redis: {
+      ttl: 5 * 1000, // 5s
+    },
+} })
+class ModelStudent {}
+```
+
+- mode: cache mode, supports `tow-level cache`/`mem cache`/`redis cache`. The default is `redis cache`
+- mem: `mem cache` configuration
+- redis: `redis cache` configuration
+
+### 3. Configure cache in App config
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'demo-student:student': {
+      cacheOptions: {
+        mode: 'all', // all/mem/redis
+        mem: {
+          max: 500,
+          ttl: 5 * 1000, // 5s
+        },
+        redis: {
+          ttl: 5 * 1000, // 5s
+        },
+      }
+    },
+  },
+};
+```
