@@ -247,7 +247,11 @@ class ServiceStudent {
 
 ## 缓存
 
-Vona Model 默认启用了缓存，从而使系统在默认情况下就具备非常高的性能。我们还可以设置缓存配置
+Vona Model 默认启用了缓存，从而使系统在默认情况下就具备非常高的性能
+
+Model 支持`二级缓存`/`mem缓存`/`redis缓存`。默认使用的是`redis缓存`。因为`redis缓存`可以在分布式场景下保持数据的一致性，而`mem缓存`在分布式场景下同步数据有延时。如果业务数据变更不频繁，可以使用`mem缓存`或者`二级缓存`，从而获得更高性能
+
+如何设置缓存配置：
 
 ### 1. 禁用缓存
 
@@ -272,7 +276,7 @@ class ModelStudent {}
 class ModelStudent {}
 ```
 
-- mode：缓存模式，支持`二级缓存`/`mem缓存`/`redis缓存`。默认使用的是`redis缓存`
+- mode：缓存模式
 - mem：`mem缓存`配置
 - redis：`redis缓存`配置
 

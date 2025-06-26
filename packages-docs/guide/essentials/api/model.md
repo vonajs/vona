@@ -247,7 +247,11 @@ class ServiceStudent {
 
 ## Cache
 
-Vona Model has cache enabled by default, making the system high performant by default. We can also set cache configuration
+Vona Model has cache enabled by default, making the system high performant by default
+
+Model supports `secondary cache`/`mem cache`/`redis cache`. `redis cache` is used by default. Because `redis cache` can maintain data consistency in distributed scenarios, while `mem cache` has a delay in synchronizing data in distributed scenarios. If business data changes infrequently, you can use `mem cache` or `secondary cache` to achieve higher performance
+
+How to set cache configuration:
 
 ### 1. Disable cache
 
@@ -272,7 +276,7 @@ class ModelStudent {}
 class ModelStudent {}
 ```
 
-- mode: cache mode, supports `tow-level cache`/`mem cache`/`redis cache`. The default is `redis cache`
+- mode: cache mode
 - mem: `mem cache` configuration
 - redis: `redis cache` configuration
 
