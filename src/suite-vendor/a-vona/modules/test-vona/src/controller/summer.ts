@@ -1,5 +1,5 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import type { SummerCacheTest } from '../bean/summerCache.test.ts';
+import type { SummerCacheTest, TSummerCacheTestData } from '../bean/summerCache.test.ts';
 import assert from 'node:assert';
 import { sleep } from '@cabloy/utils';
 import { BeanBase, retry } from 'vona';
@@ -30,8 +30,8 @@ export class ControllerSummer extends BeanBase {
     cacheOtherModule = this.bean.summer.cache(`${__ThisModule__}.summerCache.${name}`) as SummerCacheTest;
     assert.equal(cache, cacheOtherModule);
 
-    let value;
-    let values;
+    let value: TSummerCacheTestData | null | undefined;
+    let values: Array<TSummerCacheTestData | null | undefined>;
 
     // get: peek
     value = await cache.peek(key1);
@@ -39,22 +39,22 @@ export class ControllerSummer extends BeanBase {
 
     // get
     value = await cache.get(key1);
-    assert.equal(value.id, key1.id);
+    assert.equal(value?.id, key1.id);
 
     // get: peek
     value = await cache.peek(key1);
-    assert.equal(value.id, key1.id);
+    assert.equal(value?.id, key1.id);
     value = await cache.peek(key1, { mode: 'mem' });
-    assert.equal(value.id, key1.id);
+    assert.equal(value?.id, key1.id);
     value = await cache.peek(key1, { mode: 'redis' });
-    assert.equal(value.id, key1.id);
+    assert.equal(value?.id, key1.id);
 
     // get: peek sleep for mem stale
     await sleep(900);
 
     // get: peek again
     value = await cache.peek(key1, { mode: 'redis' });
-    assert.equal(value.id, key1.id);
+    assert.equal(value?.id, key1.id);
     await retry({ retries: 3 }, async () => {
       await sleep(100);
       value = await cache.peek(key1, { mode: 'mem' });
@@ -76,21 +76,21 @@ export class ControllerSummer extends BeanBase {
     // mget
     //   mem cache graph: key1
     value = await cache.get(key1);
-    assert.equal(value.id, key1.id);
+    assert.equal(value?.id, key1.id);
     //   mem cache graph: key2 key3
     values = await cache.mget([key1, key2, key3]); // todo: maybe has bug
-    assert.equal(values[0].id, key1.id); // todo: maybe has bug
-    assert.equal(values[1].id, key2.id);
-    assert.equal(values[2].id, key3.id);
+    assert.equal(values[0]?.id, key1.id); // todo: maybe has bug
+    assert.equal(values[1]?.id, key2.id);
+    assert.equal(values[2]?.id, key3.id);
     //   mem cache graph: key3 key1
     values = await cache.mget([key1, key2, key3]);
-    assert.equal(values[0].id, key1.id);
-    assert.equal(values[1].id, key2.id);
-    assert.equal(values[2].id, key3.id);
+    assert.equal(values[0]?.id, key1.id);
+    assert.equal(values[1]?.id, key2.id);
+    assert.equal(values[2]?.id, key3.id);
 
     // mget: peek
     value = await cache.peek(key2, { mode: 'redis' });
-    assert.equal(value.id, key2.id);
+    assert.equal(value?.id, key2.id);
     value = await cache.peek(key2, { mode: 'mem' });
     assert.equal(value, undefined);
 
@@ -109,11 +109,11 @@ export class ControllerSummer extends BeanBase {
 
     // clear
     values = await cache.mget([key1, key2, key3]);
-    assert.equal(values[2].id, key3.id);
+    assert.equal(values[2]?.id, key3.id);
     value = await cache.peek(key3, { mode: 'redis' });
-    assert.equal(value.id, key3.id);
+    assert.equal(value?.id, key3.id);
     value = await cache.peek(key3, { mode: 'mem' });
-    assert.equal(value.id, key3.id);
+    assert.equal(value?.id, key3.id);
 
     await cache.clear();
 

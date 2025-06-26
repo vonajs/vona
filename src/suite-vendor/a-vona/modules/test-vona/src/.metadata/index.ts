@@ -133,6 +133,7 @@ declare module 'vona' {
 /** bean: end */
 /** service: begin */
 export * from '../service/aopMethod.ts';
+export * from '../service/caching.ts';
 export * from '../service/test.ts';
 export * from '../service/testApp.ts';
 export * from '../service/testClass.ts';
@@ -143,6 +144,7 @@ declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'test-vona:aopMethod': never;
+'test-vona:caching': never;
 'test-vona:test': never;
 'test-vona:testApp': never;
 'test-vona:testClass': never;
@@ -154,6 +156,11 @@ declare module 'vona-module-a-bean' {
 declare module 'vona-module-test-vona' {
   
         export interface ServiceAopMethod {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ServiceCaching {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
@@ -181,12 +188,14 @@ declare module 'vona-module-test-vona' {
 /** service: end */
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
+import type { ServiceCaching } from '../service/caching.ts';
 import type { ServiceTest } from '../service/test.ts';
 import type { ServiceTestApp } from '../service/testApp.ts';
 import type { ServiceTestClass } from '../service/testClass.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 export interface IModuleService {
   'aopMethod': ServiceAopMethod;
+'caching': ServiceCaching;
 'test': ServiceTest;
 'testApp': ServiceTestApp;
 'testClass': ServiceTestClass;
@@ -199,6 +208,7 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'test-vona.service.aopMethod': ServiceAopMethod;
+'test-vona.service.caching': ServiceCaching;
 'test-vona.service.test': ServiceTest;
 'test-vona.service.testApp': ServiceTestApp;
 'test-vona.service.testClass': ServiceTestClass;
