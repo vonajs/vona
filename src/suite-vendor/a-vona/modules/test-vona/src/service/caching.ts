@@ -69,8 +69,8 @@ export class ServiceCaching extends BeanBase {
     // do nothing
   }
 
-  @Caching.
+  @Caching.clear({ cacheName: 'test-vona:test' })
   async clear(): Promise<void> {
-
+    // do nothing
   }
 }
