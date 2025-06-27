@@ -53,7 +53,7 @@ export class ServiceCaching extends BeanBase {
     // do nothing
   }
 
-  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: '#!#get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey([args[0]])', cacheValue: '#!#{id:args[1].id,name:args[1].name+"!"}' })
+  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: '#!#get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey([args[0]])', cacheValue: '#!#{"id": get(args[1],"id"), "name": get(args[1],"name")+"!"}' })
   async set2(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }
