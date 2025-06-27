@@ -11,8 +11,16 @@ function cacheKeyFn(this: ServiceCaching, args: [], prop: string, options: TypeC
 
 @Service()
 export class ServiceCaching extends BeanBase {
-  cacheKey(args: any[], prop: string, options: TypeCachingActionOptions, _receiver: BeanBase) {
+  cacheKey(args: any[], prop: string, options: TypeCachingActionOptions) {
     return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
+  }
+
+  cacheKeySet(args: any[], prop: string, options: TypeCachingActionOptions) {
+    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args.slice(0, -1))}`;
+  }
+
+  cacheValueSet(args: any[], _prop: string, _options: TypeCachingActionOptions) {
+    return args[args.length - 1];
   }
 
   // cacheKey: '#!# concat(prop,args[0])'
@@ -38,5 +46,10 @@ export class ServiceCaching extends BeanBase {
   @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test' })
   async get4(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
+  }
+
+  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn: 'cacheKeySet', cacheValueFn: 'cacheValueSet' })
+  async set(_id: number, _value: TSummerCacheTestData): Promise<void> {
+    // do nothing
   }
 }

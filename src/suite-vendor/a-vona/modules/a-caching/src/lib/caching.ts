@@ -1,8 +1,16 @@
 import type { IAopMethodOptionsCachingGet } from '../bean/aopMethod.cachingGet.ts';
+import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
 import { Aspect } from 'vona-module-a-aspect';
 
 function Get(options?: Partial<IAopMethodOptionsCachingGet>): MethodDecorator {
   return Aspect.aopMethod('a-caching:cachingGet', options);
 }
 
-export const Caching = { get: Get };
+function Set(options?: Partial<IAopMethodOptionsCachingSet>): MethodDecorator {
+  return Aspect.aopMethod('a-caching:cachingSet', options);
+}
+
+export const Caching = {
+  get: Get,
+  set: Set,
+};

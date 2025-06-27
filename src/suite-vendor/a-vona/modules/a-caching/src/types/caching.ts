@@ -1,11 +1,13 @@
 import type { BeanBase } from 'vona';
 import type { ISummerCacheRecord, TSummerCacheActionOptions } from 'vona-module-a-summer';
 
+export type TypeCacheKeyFn = (args: [], prop: string, options: TypeCachingActionOptions, receiver: BeanBase) => any;
+
 export type TypeCachingActionOptions =
   Pick<TSummerCacheActionOptions<unknown, unknown>, 'mode' | 'ignoreNull' | 'ttl' | 'updateAgeOnGet' | 'broadcastOnSet'>
   & {
     cacheName: keyof ISummerCacheRecord;
     cacheKey?: any;
-    cacheKeyFn?: ((args: [], prop: string, options: TypeCachingActionOptions, receiver: BeanBase) => any) | string;
+    cacheKeyFn?: TypeCacheKeyFn | string;
     cacheProp?: string;
   };
