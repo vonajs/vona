@@ -28,11 +28,17 @@ describe('caching.test.ts', () => {
       assert.equal(res.id, res6.id);
       assert.equal(`${res.name}!`, res6.name);
       // set: cacheKey/cacheValue
-      await scopeTest.service.caching.set2(2, { ...res, name: `${res.name}!` });
+      // await scopeTest.service.caching.set2(2, { ...res, name: `${res.name}!` });
       // get again
-      const res7 = await scopeTest.service.caching.get4(2);
-      assert.equal(res.id, res7.id);
-      assert.equal(`${res.name}!`, res7.name);
+      // const res7 = await scopeTest.service.caching.get4(2);
+      // assert.equal(res.id, res7.id);
+      // assert.equal(`${res.name}!`, res7.name);
+      // set: no cacheValue/cacheValueFn
+      await scopeTest.service.caching.set3(2, { ...res, name: `${res.name}!` });
+      // get again
+      const res8 = await scopeTest.service.caching.get4(2);
+      assert.equal(res.id, res8.id);
+      assert.equal(`${res.name}!`, res8.name);
     });
   });
 });
