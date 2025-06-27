@@ -1,6 +1,7 @@
 import type { BeanBase } from 'vona';
+import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
 import type { TypeCachingActionOptions } from '../types/caching.ts';
-import { evaluateExpressions } from '@cabloy/utils';
+import { evaluateExpressions, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
 
@@ -28,6 +29,27 @@ export function combineCachingKey(options: TypeCachingActionOptions, args: [], r
   return `${cast(receiver).$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
 }
 
-export function combineCachingValue(options: TypeCachingActionOptions, args: [], receiver: BeanBase, prop: string) {
-
+export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: [], receiver: BeanBase, prop: string, value: any) {
+  // cacheValueFn
+  if (!isNil(options.cacheValueFn)) {
+    if (typeof options.cacheValueFn === 'string') {
+      if (!receiver[options.cacheValueFn]) {
+        throw new Error(`cacheValueFn not found: ${cast(receiver).$beanFullName}#${options.cacheValueFn}`);
+      }
+      return receiver[options.cacheValueFn](value, args, prop, options, receiver);
+    }
+    return options.cacheValueFn.call(receiver, value, args, prop, options, receiver);
+  }
+  // cacheValue
+  if (!isNil(options.cacheValue)) {
+    return evaluateExpressions(options.cacheValue, {
+      value,
+      args,
+      prop,
+      options,
+      self: receiver,
+    });
+  }
+  // default
+  return value;
 }
