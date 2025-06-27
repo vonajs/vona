@@ -1,14 +1,17 @@
 /* eslint-disable */
 /** aopMethod: begin */
+export * from '../bean/aopMethod.cachingDel.ts';
 export * from '../bean/aopMethod.cachingGet.ts';
 export * from '../bean/aopMethod.cachingSet.ts';
+import type { IAopMethodOptionsCachingDel } from '../bean/aopMethod.cachingDel.ts';
 import type { IAopMethodOptionsCachingGet } from '../bean/aopMethod.cachingGet.ts';
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
     export interface IAopMethodRecord {
-      'a-caching:cachingGet': IAopMethodOptionsCachingGet;
+      'a-caching:cachingDel': IAopMethodOptionsCachingDel;
+'a-caching:cachingGet': IAopMethodOptionsCachingGet;
 'a-caching:cachingSet': IAopMethodOptionsCachingSet;
     }
 
@@ -16,6 +19,11 @@ declare module 'vona-module-a-aspect' {
 }
 declare module 'vona-module-a-caching' {
   
+        export interface AopMethodCachingDel {
+          /** @internal */
+          get scope(): ScopeModuleACaching;
+        }
+
         export interface AopMethodCachingGet {
           /** @internal */
           get scope(): ScopeModuleACaching;

@@ -39,6 +39,11 @@ describe('caching.test.ts', () => {
       const res8 = await scopeTest.service.caching.get4(2);
       assert.equal(res.id, res8.id);
       assert.equal(`${res.name}!`, res8.name);
+      // del
+      await scopeTest.service.caching.del(2);
+      // get again
+      const res9 = await scopeTest.service.caching.get4(2);
+      assert.equal(res9, undefined);
     });
   });
 });

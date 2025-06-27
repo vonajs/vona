@@ -63,4 +63,9 @@ export class ServiceCaching extends BeanBase {
   async set3(_id: number, value: TSummerCacheTestData): Promise<TSummerCacheTestData> {
     return value;
   }
+
+  @Caching.del({ cacheName: 'test-vona:test', cacheProp: 'test' })
+  async del(_id: number): Promise<void> {
+    // do nothing
+  }
 }
