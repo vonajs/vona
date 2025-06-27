@@ -12,3 +12,5 @@ export type TypeCachingActionOptions =
     cacheKeyFn?: TypeCacheKeyFn | string;
     cacheProp?: string;
   };
+
+export type TypeCachingActionClearOptions = Omit<TypeCachingActionOptions, 'cacheKey' | 'cacheKeyFn' | 'cacheProp'>;

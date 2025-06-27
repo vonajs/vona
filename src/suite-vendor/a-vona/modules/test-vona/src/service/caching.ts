@@ -68,4 +68,9 @@ export class ServiceCaching extends BeanBase {
   async del(_id: number): Promise<void> {
     // do nothing
   }
+
+  @Caching.
+  async clear(): Promise<void> {
+
+  }
 }
