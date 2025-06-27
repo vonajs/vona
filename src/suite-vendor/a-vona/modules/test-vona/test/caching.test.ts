@@ -44,6 +44,15 @@ describe('caching.test.ts', () => {
       // get again
       const res9 = await scopeTest.service.caching.get4(2);
       assert.equal(res9, undefined);
+      // cache again
+      const res10 = await scopeTest.service.caching.get(2);
+      assert.equal(res10.id, 2);
+      const res11 = await scopeTest.service.caching.get4(2);
+      assert.equal(res11.id, 2);
+      // clear
+      await scopeTest.service.caching.clear();
+      const res12 = await scopeTest.service.caching.get4(2);
+      assert.equal(res12, undefined);
     });
   });
 });
