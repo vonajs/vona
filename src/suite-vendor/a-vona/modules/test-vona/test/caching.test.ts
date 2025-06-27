@@ -21,12 +21,18 @@ describe('caching.test.ts', () => {
       // get: cacheKey(default) not hit cache
       const res5 = await scopeTest.service.caching.get4(5);
       assert.equal(res5, undefined);
-      // set
+      // set: cacheKeyFn/cacheValueFn
       await scopeTest.service.caching.set(2, { ...res, name: `${res.name}!` });
       // get again
       const res6 = await scopeTest.service.caching.get4(2);
       assert.equal(res.id, res6.id);
       assert.equal(`${res.name}!`, res6.name);
+      // set: cacheKey/cacheValue
+      await scopeTest.service.caching.set2(2, { ...res, name: `${res.name}!` });
+      // get again
+      const res7 = await scopeTest.service.caching.get4(2);
+      assert.equal(res.id, res7.id);
+      assert.equal(`${res.name}!`, res7.name);
     });
   });
 });
