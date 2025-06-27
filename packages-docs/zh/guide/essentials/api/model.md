@@ -140,7 +140,7 @@ class ServiceStudent {
 |名称|说明|
 |--|--|
 |entity|model对应的entity|
-|table|model对应的表名，如果传入了entity参数，那么自动从entity获取表名|
+|table|model对应的表名，如果为空，则从entity获取表名|
 |disableDeleted|是否禁用软删除，默认为false|
 |disableInstance|是否禁用多实例/多租户，默认为false|
 |clientName|指定数据源名称|

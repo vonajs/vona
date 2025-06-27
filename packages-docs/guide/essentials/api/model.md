@@ -140,7 +140,7 @@ class ServiceStudent {
 |Name|Description|
 |--|--|
 |entity|Entity corresponding to model|
-|table|Table name corresponding to model. If entity parameter is passed, the table name is automatically obtained from entity|
+|table|Table name corresponding to model. If empty, the table name is automatically obtained from entity|
 |disableDeleted|Whether to disable soft deletion, the default is false|
 |disableInstance|Whether to disable multi-instance/multi-tenant, the default is false|
 |clientName|Specify the datasource name|
