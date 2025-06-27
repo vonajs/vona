@@ -325,7 +325,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.30
+        specifier: ^6.0.31
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -797,6 +797,9 @@ importers:
       chevrotain:
         specifier: ^11.0.3
         version: 11.0.3
+      object-hash:
+        specifier: ^3.0.0
+        version: 3.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0

@@ -2,6 +2,7 @@ import type * as Celjs from 'cel-js' with { 'resolution-mode': 'import' };
 import type { CstNode } from 'chevrotain';
 import * as celjs from 'cel-js';
 import { isNil } from './check.ts';
+import { hashkey } from './hash.ts';
 import { getProperty } from './utils.ts';
 
 export const CeljsPrefix = '#!#';
@@ -76,6 +77,9 @@ function _prepareFunctions(functions?: Record<string, CallableFunction>) {
     },
     get: (obj: object | undefined, name: string, sep?: string) => {
       return getProperty(obj, name, sep);
+    },
+    hashkey: (key: any): string => {
+      return hashkey(key);
     },
   }, functions);
 }

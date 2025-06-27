@@ -1,16 +1,10 @@
-import objectHash from 'object-hash';
+import { hashkey } from '@cabloy/utils';
 
 export function getKeyHash(key: any): string {
-  if (key === undefined || key === null) {
+  if (key === undefined || key === null || key === false) {
     throw new Error('key is required');
   }
-  if (Array.isArray(key) || typeof key === 'object') {
-    return objectHash(key, { respectType: false });
-  }
-  if (typeof key !== 'string') {
-    return String(key);
-  }
-  return key;
+  return hashkey(key);
 }
 
 export function getKeysHash(keys: any[]): string[] {
