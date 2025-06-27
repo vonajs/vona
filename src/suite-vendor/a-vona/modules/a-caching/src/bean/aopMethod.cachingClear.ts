@@ -13,7 +13,7 @@ export class AopMethodCachingClear extends BeanAopMethodBase implements IAopMeth
     const value = await next();
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
-    await cache.clear();
+    await cache.clear(options);
     // ok
     return value;
   }

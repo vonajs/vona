@@ -23,7 +23,7 @@ export class AopMethodCachingSet extends BeanAopMethodBase implements IAopMethod
     const cacheValue = combineCachingValue(options, args, receiver, prop, value);
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
-    await cache.set(cacheValue, key);
+    await cache.set(cacheValue, key, options);
     // ok
     return value;
   }

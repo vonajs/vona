@@ -18,7 +18,7 @@ export class AopMethodCachingDel extends BeanAopMethodBase implements IAopMethod
     if (isNil(key) || key === false || key === '') return value;
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
-    await cache.del(key);
+    await cache.del(key, options);
     // ok
     return value;
   }
