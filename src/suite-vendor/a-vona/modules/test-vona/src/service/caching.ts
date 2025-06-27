@@ -29,9 +29,14 @@ export class ServiceCaching extends BeanBase {
     return undefined as any;
   }
 
-  // +options.cacheProp+getKeyHash(args)
   @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: '#!#get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey(args)' })
   async get3(_id: number): Promise<TSummerCacheTestData> {
+    return undefined as any;
+  }
+
+  // default cacheKey
+  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test' })
+  async get4(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 }
