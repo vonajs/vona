@@ -2,6 +2,7 @@ import type * as Celjs from 'cel-js' with { 'resolution-mode': 'import' };
 import type { CstNode } from 'chevrotain';
 import * as celjs from 'cel-js';
 import { isNil } from './check.ts';
+import { getProperty } from './utils.ts';
 
 export const CeljsPrefix = '#!#';
 
@@ -70,8 +71,11 @@ export function parse(expression: string): Celjs.ParseResult {
 
 function _prepareFunctions(functions?: Record<string, CallableFunction>) {
   return Object.assign({
-    concat: (...args) => {
+    concat: (...args): string => {
       return args.reduce((accumulator, current) => `${accumulator}${current}`, '');
+    },
+    get: (obj: object | undefined, name: string, sep?: string) => {
+      return getProperty(obj, name, sep);
     },
   }, functions);
 }

@@ -21,7 +21,7 @@ export function combineKey(options: TypeCachingActionOptions, args: [], receiver
       args,
       prop,
       options,
-      receiver,
+      self: receiver,
     });
   }
   // default

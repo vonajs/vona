@@ -6,7 +6,7 @@ import { getKeyHash } from 'vona-module-a-cache';
 import { Caching } from 'vona-module-a-caching';
 
 function cacheKeyFn(this: ServiceCaching, args: [], prop: string, options: TypeCachingActionOptions): any {
-  return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`; 
+  return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
 }
 
 @Service()
@@ -25,10 +25,13 @@ export class ServiceCaching extends BeanBase {
   }
 
   @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn })
-  async get2(id: number): Promise<TSummerCacheTestData> {
-    return {
-      id,
-      name: `name_${id}`,
-    };
+  async get2(_id: number): Promise<TSummerCacheTestData> {
+    return undefined as any;
+  }
+
+  // +options.cacheProp+getKeyHash(args)
+  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: '#!#get(self,"$beanFullName")+"_"+options.cacheProp' })
+  async get3(_id: number): Promise<TSummerCacheTestData> {
+    return undefined as any;
   }
 }

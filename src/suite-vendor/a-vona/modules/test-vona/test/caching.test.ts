@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('caching.test.ts', () => {
+describe('caching.test.ts', () => {
   it('action:caching', async () => {
     await app.bean.executor.mockCtx(async () => {
       const scopeTest = app.bean.scope('test-vona');
@@ -12,6 +12,9 @@ describe.only('caching.test.ts', () => {
       // get: cacheKeyFn(function)
       const res2 = await scopeTest.service.caching.get2(2);
       assert.equal(res.id, res2.id);
+      // get: cacheKey(celjs expression)
+      const res3 = await scopeTest.service.caching.get3(2);
+      assert.equal(res.id, res3.id);
     });
   });
 });
