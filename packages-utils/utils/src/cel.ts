@@ -3,9 +3,8 @@ import type { CstNode } from 'chevrotain';
 import * as celjs from '@cabloy/cel-js';
 import { isNil } from './check.ts';
 import { hashkey } from './hash.ts';
+import { StringPrefixCel, StringPrefixRaw } from './types.ts';
 import { getProperty } from './utils.ts';
-
-export const CeljsPrefix = '#!#';
 
 export function evaluateExpressions<T = any>(
   expressions: any,
@@ -36,8 +35,8 @@ function _evaluateExpressionInner<T = any>(
   if (isNil(expression)) return _returnExpressionWithDry(expression, dry);
   if (typeof expression === 'object') return evaluateExpressions(expression, context, functions, dry);
   if (typeof expression !== 'string') return _returnExpressionWithDry(expression, dry);
-  if (!expression.startsWith(CeljsPrefix)) return _returnExpressionWithDry(expression, dry);
-  return dry ? true as any : evaluate(expression.substring(CeljsPrefix.length), context, functions);
+  if (!expression.startsWith(StringPrefixCel)) return _returnExpressionWithDry(expression, dry);
+  return dry ? true as any : evaluate(expression.substring(StringPrefixCel.length), context, functions);
 }
 
 function _returnExpressionWithDry(expression: any, dry?: boolean) {
@@ -57,8 +56,8 @@ export function evaluate<T = any>(
   }
   // string
   if (typeof expression === 'string') {
-    if (expression.startsWith(CeljsPrefix)) {
-      return expression.substring(CeljsPrefix.length) as any;
+    if (expression.startsWith(StringPrefixRaw)) {
+      return expression.substring(StringPrefixRaw.length) as any;
     }
     return celjs.evaluate(expression, context as any, functions) as any;
   }

@@ -80,7 +80,6 @@ export interface OnionSceneMeta {
   optionsArgumentPipe?: boolean;
   optionsDynamic?: boolean;
   optionsPackage?: boolean;
-  optionsMatchExpression?: boolean;
   optionsCustomInterfaceTemplate?: string;
   optionsGlobalInterfaceName?: string;
   optionsGlobalInterfaceFrom?: string;
