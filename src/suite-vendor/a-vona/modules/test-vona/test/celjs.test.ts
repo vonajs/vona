@@ -6,6 +6,6 @@ import { app } from 'vona-mock';
 describe('celjs.test.ts', () => {
   it('action:celjs', async () => {
     const beanJwt = app.bean.jwt;
-    assert.equal(evaluateExpressions('#!#app.config', beanJwt), 'ss');
+    assert.equal(evaluateExpressions('#!#self.app.config.server.workers', { self: beanJwt }) > 0, true);
   });
 });
