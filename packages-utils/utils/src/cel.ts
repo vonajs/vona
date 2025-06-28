@@ -1,6 +1,6 @@
-import type * as Celjs from 'cel-js' with { 'resolution-mode': 'import' };
+import type * as Celjs from '@cabloy/cel-js' with { 'resolution-mode': 'import' };
 import type { CstNode } from 'chevrotain';
-import * as celjs from 'cel-js';
+import * as celjs from '@cabloy/cel-js';
 import { isNil } from './check.ts';
 import { hashkey } from './hash.ts';
 import { getProperty } from './utils.ts';

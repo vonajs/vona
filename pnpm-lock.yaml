@@ -785,15 +785,15 @@ importers:
 
   packages-utils/utils:
     dependencies:
+      '@cabloy/cel-js':
+        specifier: ^0.7.1
+        version: 0.7.1
       '@cabloy/module-info':
         specifier: ^1.3.23
         version: link:../module-info
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
-      cel-js:
-        specifier: ^0.3.1
-        version: 0.3.1
       chevrotain:
         specifier: ^11.0.3
         version: 11.0.3
@@ -1387,9 +1387,6 @@ importers:
       lru-cache:
         specifier: ^11.0.2
         version: 11.1.0
-      object-hash:
-        specifier: ^3.0.0
-        version: 3.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -2289,6 +2286,10 @@ packages:
   '@babel/types@7.27.3':
     resolution: {integrity: sha512-Y1GkI4ktrtvmawoSq+4FCVHNryea6uR+qUQy0AGxLSsjCX0nVmkYQMBLHDkXZuo5hGx7eYdnIaslsdBFm7zbUw==}
     engines: {node: '>=6.9.0'}
+
+  '@cabloy/cel-js@0.7.1':
+    resolution: {integrity: sha512-cyVGGBmEoVf4bbdsgM5kHpHls8AUJ7F+ZWN2gNMViAcbvAIfarMmc0J5ppZ63gP/S53pfZTqMimmJ41DLGgjag==}
+    engines: {node: '>=18.0.0'}
 
   '@cabloy/koa-static-cache@6.0.1':
     resolution: {integrity: sha512-B7dF43O1gE5Whwn+MwNanjXZUTqpv/e2TmKIyyzdcVjH6o7ENesebxiDXJAAjkX6dpg3Bijpq6acBE38VKGJSQ==}
@@ -4096,10 +4097,6 @@ packages:
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
-
-  cel-js@0.3.1:
-    resolution: {integrity: sha512-6F0A4zSkHeZsQi+4WqejeTbi3rUq1itiBduOStfWiRbqGWkKbAbx7lLaxSh6r67RIA+Pp3XOxfTNYfhkKemTJA==}
-    engines: {node: '>=18.0.0'}
 
   chalk@3.0.0:
     resolution: {integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==}
@@ -7194,8 +7191,8 @@ packages:
     resolution: {integrity: sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==}
     engines: {node: '>=8'}
 
-  ramda@0.30.0:
-    resolution: {integrity: sha512-13Y0iMhIQuAm/wNGBL/9HEqIfRGmNmjKnTPlKWfA9f7dnDkr8d45wQ+S7+ZLh/Pq9PdcGxkqKUEA7ySu1QSd9Q==}
+  ramda@0.30.1:
+    resolution: {integrity: sha512-tEF5I22zJnuclswcZMc8bDIrwRHRzf+NqVEmqg50ShAZMP7MWeR/RGDthfM/p+BlqvF2fXAzpn8i+SJcYD3alw==}
 
   randomatic@3.1.1:
     resolution: {integrity: sha512-TuDE5KxZ0J461RVjrJZCJc+J+zCkTb1MbH9AQUq68sMhOMcy9jLcb3BrZKgp9q9Ncltdg4QVqWrH02W2EFFVYw==}
@@ -8800,6 +8797,11 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
+
+  '@cabloy/cel-js@0.7.1':
+    dependencies:
+      chevrotain: 11.0.3
+      ramda: 0.30.1
 
   '@cabloy/koa-static-cache@6.0.1':
     dependencies:
@@ -10823,11 +10825,6 @@ snapshots:
   ccount@1.1.0: {}
 
   ccount@2.0.1: {}
-
-  cel-js@0.3.1:
-    dependencies:
-      chevrotain: 11.0.3
-      ramda: 0.30.0
 
   chalk@3.0.0:
     dependencies:
@@ -14446,7 +14443,7 @@ snapshots:
 
   quick-lru@4.0.1: {}
 
-  ramda@0.30.0: {}
+  ramda@0.30.1: {}
 
   randomatic@3.1.1:
     dependencies:
