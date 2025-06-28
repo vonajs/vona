@@ -23,7 +23,6 @@ export class ServiceCaching extends BeanBase {
     return args[args.length - 1];
   }
 
-  // cacheKey: '#!# concat(prop,args[0])'
   @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn: 'cacheKey' })
   async get(id: number): Promise<TSummerCacheTestData> {
     return {
@@ -37,7 +36,7 @@ export class ServiceCaching extends BeanBase {
     return undefined as any;
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: '#!#get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey(args)' })
+  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey(args)' })
   async get3(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
@@ -54,7 +53,7 @@ export class ServiceCaching extends BeanBase {
   }
 
   //
-  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: '#!#get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey([args[0]])', cacheValue: '#!#{"id": args[1].id, "name": args[1].name}' })
+  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://get(self,"$beanFullName")+"_"+options.cacheProp+"_"+hashkey([args[0]])', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
   async set2(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }

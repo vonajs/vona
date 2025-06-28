@@ -1,5 +1,5 @@
 import { evaluateExpressions } from './cel.ts';
-import { StringPrefixRegexp } from './types.ts';
+import { StringPrefixCel, StringPrefixRegexp } from './types.ts';
 import { evaluateSimple } from './utils.ts';
 
 export type TypeMatchSelectorFunction = (this: any, ...args: any[]) => boolean;
@@ -13,8 +13,8 @@ export function matchSelector<T>(match: TypeMatchSelectorRules<T>, selector: str
       match = evaluateSimple(match.substring(StringPrefixRegexp.length));
     }
     return (
-      (typeof match === 'string' && match.startsWith('#!#') && !!evaluateExpressions(match, { selector, context: matchArgs[0], args: matchArgs })) ||
-      (typeof match === 'string' && !match.startsWith('#!#') && typeof selector === 'string' && match === selector) ||
+      (typeof match === 'string' && match.startsWith(StringPrefixCel) && !!evaluateExpressions(match, { selector, context: matchArgs[0], args: matchArgs })) ||
+      (typeof match === 'string' && !match.startsWith(StringPrefixCel) && typeof selector === 'string' && match === selector) ||
       (match instanceof RegExp && typeof selector === 'string' && match.test(selector)) ||
       (typeof match === 'function' && (match as any).call(matchThis, selector, ...matchArgs))
     );
