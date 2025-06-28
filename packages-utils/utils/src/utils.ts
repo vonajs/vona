@@ -65,19 +65,33 @@ function _getProperty<T>(_obj: object | undefined, name: string, sep: string | u
   let obj = _obj as object;
   const names = name.split(sep || '.');
   // loop
-  for (const name of names) {
+  for (const _name of names) {
+    const [name, index] = _parsePropertyKey(_name);
     if (__keysIgnore.includes(name)) throw new Error(`invalid prop: ${name}`);
-    if (obj[name] === undefined || obj[name] === null) {
+    if (obj[name] === undefined) { // not check obj[name] === null
       if (forceObject) {
-        obj[name] = {};
+        if (index === undefined) {
+          obj[name] = {};
+        } else {
+          obj[name] = [];
+        }
       } else {
         obj = obj[name];
         break;
       }
     }
     obj = obj[name];
+    if (index !== undefined) {
+      obj = obj[index];
+    }
   }
   return obj as T | undefined;
+}
+
+function _parsePropertyKey(name: string): [string, number | undefined] {
+  const matched = name.match((/([^[]+)\[(\d+)\]/));
+  if (!matched) return [name, undefined];
+  return [matched[1], Number.parseInt(matched[2])];
 }
 
 export function createFunction(expression: string, scopeKeys?: string[]): Function {
