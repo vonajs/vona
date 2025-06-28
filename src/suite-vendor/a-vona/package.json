@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.51",
+  "version": "5.0.52",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -16,7 +16,7 @@
     "vona-module-a-broadcast": "^5.0.13",
     "vona-module-a-cache": "^5.0.13",
     "vona-module-a-caching": "workspace:^",
-    "vona-module-a-core": "^5.0.41",
+    "vona-module-a-core": "^5.0.42",
     "vona-module-a-database": "^5.0.32",
     "vona-module-a-databasedialect": "^5.0.12",
     "vona-module-a-election": "^5.0.13",
