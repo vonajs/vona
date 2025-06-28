@@ -59,12 +59,14 @@ export function getPropertyObject<T>(obj: object | undefined, name: string, sep?
   return _getProperty<T>(obj, name, sep, true);
 }
 
+const __keysIgnore = ['constructor', 'prototype', '__proto__'];
 function _getProperty<T>(_obj: object | undefined, name: string, sep: string | undefined, forceObject: boolean): T | undefined {
   if (!_obj) return undefined;
   let obj = _obj as object;
   const names = name.split(sep || '.');
   // loop
   for (const name of names) {
+    if (__keysIgnore.includes(name)) throw new Error(`invalid prop: ${name}`);
     if (obj[name] === undefined || obj[name] === null) {
       if (forceObject) {
         obj[name] = {};
