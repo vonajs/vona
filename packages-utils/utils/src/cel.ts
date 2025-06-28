@@ -9,7 +9,7 @@ export const CeljsPrefix = '#!#';
 
 export function evaluateExpressions(
   expressions: any,
-  context?: Record<string, unknown>,
+  context?: object,
   functions?: Record<string, CallableFunction>,
   dry?: boolean,
 ): unknown {
@@ -29,7 +29,7 @@ export function evaluateExpressions(
 
 function _evaluateExpressionInner(
   expression: any,
-  context?: Record<string, unknown>,
+  context?: object,
   functions?: Record<string, CallableFunction>,
   dry?: boolean,
 ): unknown {
@@ -46,21 +46,21 @@ function _returnExpressionWithDry(expression: any, dry?: boolean) {
 
 export function evaluate(
   expression: CstNode | string,
-  context?: Record<string, unknown>,
+  context?: object,
   functions?: Record<string, CallableFunction>,
 ): unknown {
   // functions
   functions = _prepareFunctions(functions);
   // CstNode
   if (typeof expression === 'object' && expression.children) {
-    return celjs.evaluate(expression, context, functions);
+    return celjs.evaluate(expression, context as any, functions);
   }
   // string
   if (typeof expression === 'string') {
     if (expression.startsWith(CeljsPrefix)) {
       return expression.substring(CeljsPrefix.length);
     }
-    return celjs.evaluate(expression, context, functions);
+    return celjs.evaluate(expression, context as any, functions);
   }
   // others
   return expression;
