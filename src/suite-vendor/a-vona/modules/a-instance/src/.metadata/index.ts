@@ -65,6 +65,11 @@ export interface IModuleEntity {
 /** entity: end */
 /** entity: begin */
 export type EntityInstanceTableName = 'aInstance';
+declare module 'vona-module-a-database' {
+  export interface ITableRecord {
+    'aInstance': never;
+  }
+}
 declare module 'vona-module-a-instance' {
   
     export interface IEntityOptionsInstance {

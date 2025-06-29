@@ -25,6 +25,11 @@ export interface IModuleEntity {
 /** entity: end */
 /** entity: begin */
 export type EntityAuthSimpleTableName = 'aAuthSimple';
+declare module 'vona-module-a-database' {
+  export interface ITableRecord {
+    'aAuthSimple': never;
+  }
+}
 declare module 'vona-module-a-authsimple' {
   
     export interface IEntityOptionsAuthSimple {

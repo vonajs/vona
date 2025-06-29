@@ -73,6 +73,11 @@ export interface IModuleEntity {
 /** entity: end */
 /** entity: begin */
 export type EntityTestTableName = 'testVona';
+declare module 'vona-module-a-database' {
+  export interface ITableRecord {
+    'testVona': never;
+  }
+}
 declare module 'vona-module-test-vona' {
   
     export interface IEntityOptionsTest {

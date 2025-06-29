@@ -38,6 +38,13 @@ export interface IModuleEntity {
 export type EntityRoleTableName = 'homeRole';
 export type EntityUserTableName = 'homeUser';
 export type EntityUserRoleTableName = 'homeUserRole';
+declare module 'vona-module-a-database' {
+  export interface ITableRecord {
+    'homeRole': never;
+'homeUser': never;
+'homeUserRole': never;
+  }
+}
 declare module 'vona-module-home-user' {
   
     export interface IEntityOptionsRole {

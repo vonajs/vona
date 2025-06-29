@@ -32,6 +32,12 @@ export interface IModuleEntity {
 /** entity: begin */
 export type EntityAuthTableName = 'aAuth';
 export type EntityAuthProviderTableName = 'aAuthProvider';
+declare module 'vona-module-a-database' {
+  export interface ITableRecord {
+    'aAuth': never;
+'aAuthProvider': never;
+  }
+}
 declare module 'vona-module-a-auth' {
   
     export interface IEntityOptionsAuth {

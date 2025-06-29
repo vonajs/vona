@@ -37,6 +37,13 @@ export interface IModuleEntity {
 export type EntityVersionTableName = 'aVersion';
 export type EntityVersionInitTableName = 'aVersionInit';
 export type EntityViewRecordTableName = 'aViewRecord';
+declare module 'vona-module-a-database' {
+  export interface ITableRecord {
+    'aVersion': never;
+'aVersionInit': never;
+'aViewRecord': never;
+  }
+}
 declare module 'vona-module-a-version' {
   
     export interface IEntityOptionsVersion {
