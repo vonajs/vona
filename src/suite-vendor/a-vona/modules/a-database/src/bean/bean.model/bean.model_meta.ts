@@ -50,7 +50,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
-  get table(): keyof ITableRecord {
+  getTable(): keyof ITableRecord {
     const table = this.options.table;
     if (table) {
       if (typeof table === 'string') return table;
