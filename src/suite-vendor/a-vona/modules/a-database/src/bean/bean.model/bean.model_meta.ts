@@ -51,11 +51,15 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
   }
 
   get table(): keyof ITableRecord {
-    let table = this.options.table;
-    if (!table && this.options.entity) {
-      table = $tableName(this.options.entity);
+    const table = this.options.table;
+    if (table) {
+      if (typeof table === 'string') return table;
+      return table.call(this) as any;
     }
-    return table!;
+    if (this.options.entity) {
+      return $tableName(this.options.entity);
+    }
+    throw new Error(`not found table of ${this.$beanFullName}`);
   }
 
   get options(): IDecoratorModelOptions {

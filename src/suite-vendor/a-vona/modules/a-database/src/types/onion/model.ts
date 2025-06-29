@@ -1,15 +1,16 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDatabaseClientRecord } from '../database.ts';
-import type { IDecoratorEntityOptions } from './entity.ts';
+import type { EntityBaseEmpty } from '../entityBaseEmpty.ts';
 import type { ITableRecord } from './table.ts';
 
 export interface IModelRecord {}
 
-export interface IDecoratorModelOptions<T = unknown> {
+export interface IDecoratorModelOptions<T extends EntityBaseEmpty = EntityBaseEmpty> {
   entity?: Constructable<T>;
-  table?: keyof ITableRecord;
+  table?: ((this: BeanModelMeta<T>) => string) | keyof ITableRecord;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
@@ -21,7 +22,7 @@ export interface IDecoratorModelOptions<T = unknown> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    model: ServiceOnion<IDecoratorModelOptions<IDecoratorEntityOptions>, keyof IModelRecord>;
+    model: ServiceOnion<IDecoratorModelOptions<EntityBaseEmpty>, keyof IModelRecord>;
   }
 }
 
