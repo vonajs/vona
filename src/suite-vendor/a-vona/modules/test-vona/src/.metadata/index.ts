@@ -87,12 +87,14 @@ declare module 'vona-module-test-vona' {
 /** entity: end */
 /** model: begin */
 export * from '../model/test.ts';
+export * from '../model/testDynamicTable.ts';
 
 import { type IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
       'test-vona:test': IDecoratorModelOptions;
+'test-vona:testDynamicTable': IDecoratorModelOptions;
     }
 
   
@@ -102,13 +104,20 @@ declare module 'vona-module-test-vona' {
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ModelTestDynamicTable {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
         } 
 }
 /** model: end */
 /** model: begin */
 import type { ModelTest } from '../model/test.ts';
+import type { ModelTestDynamicTable } from '../model/testDynamicTable.ts';
 export interface IModuleModel {
   'test': ModelTest;
+'testDynamicTable': ModelTestDynamicTable;
 }
 /** model: end */
 /** bean: begin */

@@ -13,7 +13,7 @@ import { $tableName } from '../../lib/columns.ts';
 
 const SymbolModelDb = Symbol('SymbolModelDb');
 
-export class BeanModelMeta<TRecord extends {}> extends BeanBase {
+export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   private [SymbolModelDb]: ServiceDb;
 
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
@@ -55,7 +55,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
     if (table && typeof table === 'function') {
-      return table.call(this, defaultTable, method, methodParams, methodOptions) as any;
+      return table.call(this, defaultTable!, method, methodParams, methodOptions) as any;
     }
     if (defaultTable) return defaultTable;
     throw new Error(`not found table of ${this.$beanFullName}`);

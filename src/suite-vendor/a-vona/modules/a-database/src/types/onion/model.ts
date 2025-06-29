@@ -12,7 +12,7 @@ export interface IModelRecord {}
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (
     this: BeanModelMeta<T>,
-    defaultTable?: keyof ITableRecord,
+    defaultTable: keyof ITableRecord,
     method?: string,
     methodParams?: any[],
     methodOptions?: IModelMethodOptionsGeneral,
