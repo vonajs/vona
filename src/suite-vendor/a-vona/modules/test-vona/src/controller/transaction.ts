@@ -16,14 +16,14 @@ export class ControllerTransaction extends BeanBase {
   @Database.transaction()
   @Passport.public()
   async fail(@Arg.body() item: object) {
-    await this.app.bean.model.update(`${tableNameFail}`, item);
-    await this.app.bean.model.update(`${tableNameFail}error`, item);
+    await this.app.bean.model.update(`${tableNameFail}` as any, item);
+    await this.app.bean.model.update(`${tableNameFail}error` as any, item);
   }
 
   @Web.post('success')
   @Database.transaction()
   @Passport.public()
   async success(@Arg.body() item: object) {
-    await this.app.bean.model.update(tableNameSuccess, item);
+    await this.app.bean.model.update(tableNameSuccess as any, item);
   }
 }

@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
-import { Database } from 'vona-module-a-database';
 import { Service } from 'vona-module-a-bean';
+import { Database } from 'vona-module-a-database';
 
 const tableNameFail = '__tempTransactionFail';
 const tableNameSuccess = '__tempTransactionSuccess';
@@ -9,12 +9,12 @@ const tableNameSuccess = '__tempTransactionSuccess';
 export class ServiceTransaction extends BeanBase {
   @Database.transaction()
   async fail(item: object) {
-    await this.app.bean.model.update(`${tableNameFail}`, item);
-    await this.app.bean.model.update(`${tableNameFail}error`, item);
+    await this.app.bean.model.update(`${tableNameFail}` as any, item);
+    await this.app.bean.model.update(`${tableNameFail}error` as any, item);
   }
 
   @Database.transaction()
   async success(item: object) {
-    await this.app.bean.model.update(tableNameSuccess, item);
+    await this.app.bean.model.update(tableNameSuccess as any, item);
   }
 }
