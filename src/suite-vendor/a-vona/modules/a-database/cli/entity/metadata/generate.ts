@@ -33,7 +33,7 @@ function __parseTableName(fileContent: string): string | false {
     matched = fileContent.match(/@Entity<.*?>\(([^)]*)\)/);
   }
   if (!matched) return false;
-  const controllerPath = matched[1];
-  if (controllerPath === '') return '';
-  return controllerPath.split(',')[0].replaceAll("'", '');
+  const tableName = matched[1];
+  if (tableName === '') return '';
+  return tableName.split(',')[0].replaceAll("'", '');
 }
