@@ -52,13 +52,12 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
 
   getTable(method?: string, methodParams?: any[], methodOptions?: IModelMethodOptionsGeneral): keyof ITableRecord {
     const table = this.options.table;
-    if (table) {
-      if (typeof table === 'string') return table;
-      return table.call(this, method, methodParams, methodOptions) as any;
+    if (table && typeof table === 'string') return table;
+    const defaultTable = this.options.entity && $tableName(this.options.entity);
+    if (table && typeof table === 'function') {
+      return table.call(this, defaultTable, method, methodParams, methodOptions) as any;
     }
-    if (this.options.entity) {
-      return $tableName(this.options.entity);
-    }
+    if (defaultTable) return defaultTable;
     throw new Error(`not found table of ${this.$beanFullName}`);
   }
 
