@@ -1,11 +1,12 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { TypeOpenAPIMetadata } from 'vona-module-a-openapi';
+import type { ITableRecord } from './table.ts';
 
 export interface IEntityRecord {}
 
 export interface IDecoratorEntityOptions<FieldsMore = never> {
-  table?: string;
+  table?: keyof ITableRecord;
   independent?: boolean;
   openapi?: TypeOpenAPIMetadata;
   _fieldsMore_?: FieldsMore;

@@ -90,4 +90,14 @@ describe('database.test.ts', () => {
       await scopeTest.model.test.delete({ id: entityTest.id });
     });
   });
+  it('action:model:dynamicTableName', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // scope
+      const scopeTest = app.bean.scope('test-vona');
+      const modelTest = scopeTest.model.test;
+      assert.equal(modelTest.options.clientName, 'default');
+      const modelTest2 = scopeTest.model.test;
+      assert.equal(modelTest, modelTest2);
+    });
+  });
 });

@@ -3,12 +3,13 @@ import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { IDatabaseClientRecord } from '../database.ts';
 import type { IDecoratorEntityOptions } from './entity.ts';
+import type { ITableRecord } from './table.ts';
 
 export interface IModelRecord {}
 
 export interface IDecoratorModelOptions<T = unknown> {
   entity?: Constructable<T>;
-  table?: string;
+  table?: keyof ITableRecord;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
