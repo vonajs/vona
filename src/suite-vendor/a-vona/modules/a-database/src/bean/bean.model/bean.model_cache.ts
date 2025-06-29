@@ -66,10 +66,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       ids = table;
       table = undefined;
     }
-    // not use cache if specified table
-    if (table && table !== this.getTable('mget', [table, ids], options)) {
-      return (await super.mget(table, ids, options)) as TRecord[];
-    }
     // table
     table = table || this.getTable('mget', [table, ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -108,10 +104,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       options = params;
       params = table;
       table = undefined;
-    }
-    // not use cache if specified table
-    if (table && table !== this.getTable('select', [table, params], options)) {
-      return await super.select(table, params, options);
     }
     // table
     table = table || this.getTable('select', [table, params], options);
@@ -153,10 +145,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       where = table;
       table = undefined;
     }
-    // not use cache if specified table
-    if (table && table !== this.getTable('get', [table, where], options)) {
-      return await super.get(table, where, options);
-    }
     // table
     table = table || this.getTable('get', [table, where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -190,10 +178,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       options = data;
       data = table;
       table = undefined;
-    }
-    // not use cache if specified table
-    if (table && table !== this.getTable('update', [table, data], options)) {
-      return await super.update(table, data, options);
     }
     // table
     table = table || this.getTable('update', [table, data], options);
@@ -241,10 +225,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       options = where;
       where = table;
       table = undefined;
-    }
-    // not use cache if specified table
-    if (table && table !== this.getTable('delete', [table, where], options)) {
-      return await super.delete(table, where, options);
     }
     // table
     table = table || this.getTable('delete', [table, where], options);
