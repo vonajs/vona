@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord } from '../../types/index.ts';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
@@ -9,7 +9,7 @@ import { BeanModelMeta } from './bean.model_meta.ts';
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   async prepareData(item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
-  async prepareData(table: string, item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
+  async prepareData(table: keyof ITableRecord, item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
   async prepareData(table?, item?): Promise<[TRecord, TRecord]> {
     if (typeof table !== 'string') {
       item = table;
@@ -39,12 +39,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return [data, dataOriginal] as [TRecord, TRecord];
   }
 
-  async defaultData(table?: string): Promise<TRecord> {
+  async defaultData(table?: keyof ITableRecord): Promise<TRecord> {
     table = table || this.getTable('defaultData', [table], undefined);
     return await this.db.columns.defaultData(table) as TRecord;
   }
 
-  async columns(table?: string): Promise<ITableColumns> {
+  async columns(table?: keyof ITableRecord): Promise<ITableColumns> {
     table = table || this.getTable('columns', [table], undefined);
     return await this.db.columns.columns(table);
   }
@@ -137,7 +137,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     this.buildOffset(builder, page.index);
   }
 
-  prepareWhere(builder: Knex.QueryBuilder, table?: string, where?, options?: IModelMethodOptionsGeneral) {
+  prepareWhere(builder: Knex.QueryBuilder, table?: keyof ITableRecord, where?, options?: IModelMethodOptionsGeneral) {
     // table
     table = table || this.getTable('prepareWhere', [builder, table, where], options);
     if (!table) throw new Error('should specify the table name');
@@ -183,7 +183,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return res[keys[0]];
   }
 
-  protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptionsGeneral) {
+  protected _prepareWhereByOptions(table: keyof ITableRecord, where, options?: IModelMethodOptionsGeneral) {
     // disableInstance: should check if specified
     const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
     if (where[columnNameInstance] === undefined && where.iid === undefined) {

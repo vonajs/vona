@@ -5,6 +5,7 @@ import type {
   IModelMethodOptionsGeneral,
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
+  ITableRecord,
   TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
@@ -19,7 +20,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]>;
   async mget(
-    table: string,
+    table: keyof ITableRecord,
     ids: (TableIdentity | object)[],
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]>;
@@ -87,7 +88,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
   async select(
-    table: string,
+    table: keyof ITableRecord,
     params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
@@ -143,7 +144,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined>;
   async get(
-    table: string,
+    table: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined>;
@@ -181,7 +182,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   }
 
   async count(params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-  async count(table: string, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+  async count(table: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
   async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<BigNumber> {
     if (typeof table !== 'string') {
       options = params;
@@ -217,7 +218,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord>;
   async insert(
-    table: string,
+    table: keyof ITableRecord,
     data?: Partial<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord>;
@@ -230,7 +231,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
   async batchInsert(
-    table: string,
+    table: keyof ITableRecord,
     data: Partial<TRecord>[],
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]>;
@@ -283,7 +284,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelUpdateOptionsGeneral<TRecord>,
   ): Promise<void>;
   async update(
-    table: string,
+    table: keyof ITableRecord,
     data?: Partial<TRecord>,
     options?: IModelUpdateOptionsGeneral<TRecord>,
   ): Promise<void>;
@@ -330,7 +331,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     options?: IModelMethodOptionsGeneral,
   ): Promise<void>;
   async delete(
-    table: string,
+    table: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptionsGeneral,
   ): Promise<void>;

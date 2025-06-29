@@ -57,7 +57,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord[]>;
   async mget(
-    table: string,
+    table: keyof ITableRecord,
     ids: (TableIdentity | object)[],
     options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord[]>;
@@ -96,7 +96,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelMethodOptions,
   ): Promise<TRecord[]>;
   async select(
-    table: string,
+    table: keyof ITableRecord,
     params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord[]>;
@@ -132,7 +132,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord | undefined>;
   async get(
-    table: string,
+    table: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord | undefined>;
@@ -170,7 +170,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void>;
   async update(
-    table: string,
+    table: keyof ITableRecord,
     data?: Partial<TRecord>,
     options?: IModelUpdateOptions<TRecord>,
   ): Promise<void>;
@@ -217,7 +217,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void>;
   async delete(
-    table: string,
+    table: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<void>;

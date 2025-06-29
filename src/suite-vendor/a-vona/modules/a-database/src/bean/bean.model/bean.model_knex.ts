@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, ITableRecord } from '../../types/index.ts';
 import { BeanModelUtils } from './bean.model_utils.ts';
 
 export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
@@ -22,7 +22,7 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     options?: IModelMethodOptionsGeneral,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table: string,
+    table: keyof ITableRecord,
     options?: IModelMethodOptionsGeneral,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
