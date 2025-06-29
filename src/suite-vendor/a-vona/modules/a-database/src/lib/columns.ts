@@ -32,12 +32,12 @@ export function $columnsAll<T>(
 export function $tableColumns<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   extract: (classEntity: TypeMetaEntity<T>) => any | any[] | undefined,
-): Record<string, string | string[] | undefined> {
+): Record<keyof ITableRecord, string | string[] | undefined> {
   // tableName
   const tableName = $tableName(classEntity);
   // columns
   const names = $columns(classEntity, extract);
-  return { [tableName]: names };
+  return { [tableName]: names } as any;
 }
 
 export function $tableName<T>(
