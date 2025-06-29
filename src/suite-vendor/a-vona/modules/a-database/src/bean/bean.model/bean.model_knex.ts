@@ -11,7 +11,7 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     table?: Knex.TableDescriptor,
   ): Knex.QueryBuilder<TRecord2, TResult2[]> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable('builder', [table], undefined);
     if (table) {
       return this.connection(table);
     }
@@ -34,7 +34,7 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
       table = undefined;
     }
     // table
-    table = table || this.getTable();
+    table = table || this.getTable('builderSelect', [table], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // builder
     const builder = this.builder<TRecord2, TResult2>(table);
