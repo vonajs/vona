@@ -15,7 +15,7 @@ describe('transaction.test.ts', () => {
         table.string('name');
       });
       // create a new item
-      const res = await app.bean.model.insert(tableNameFail, {
+      const res = await app.bean.model.insert(tableNameFail as any, {
         name: 'hello',
       });
       const id = res.id;
@@ -32,7 +32,7 @@ describe('transaction.test.ts', () => {
       } catch (_err) {}
 
       // check name
-      const item = await app.bean.model.get(tableNameFail, {
+      const item = await app.bean.model.get(tableNameFail as any, {
         id,
       });
       assert.notEqual(item.name, itemNew.name);
@@ -50,7 +50,7 @@ describe('transaction.test.ts', () => {
         table.string('name');
       });
       // create a new item
-      const res = await app.bean.model.insert(tableNameFail, {
+      const res = await app.bean.model.insert(tableNameFail as any, {
         name: 'hello',
       });
       const id = res.id;
@@ -65,7 +65,7 @@ describe('transaction.test.ts', () => {
       } catch (_err) {}
 
       // check name
-      const item = await app.bean.model.get(tableNameFail, {
+      const item = await app.bean.model.get(tableNameFail as any, {
         id,
       });
       assert.notEqual(item.name, itemNew.name);
@@ -84,7 +84,7 @@ describe('transaction.test.ts', () => {
         table.string('name');
       });
       // create a new item
-      const res = await app.bean.model.insert(tableNameSuccess, {
+      const res = await app.bean.model.insert(tableNameSuccess as any, {
         name: 'hello',
       });
       const id = res.id;
@@ -99,7 +99,7 @@ describe('transaction.test.ts', () => {
       });
 
       // check name
-      const item = await app.bean.model.get(tableNameSuccess, {
+      const item = await app.bean.model.get(tableNameSuccess as any, {
         id,
       });
       assert.equal(item.name, itemNew.name);
@@ -117,7 +117,7 @@ describe('transaction.test.ts', () => {
         table.string('name');
       });
       // create a new item
-      const res = await app.bean.model.insert(tableNameSuccess, {
+      const res = await app.bean.model.insert(tableNameSuccess as any, {
         name: 'hello',
       });
       const id = res.id;
@@ -130,7 +130,7 @@ describe('transaction.test.ts', () => {
       await scopeTest.service.transaction.success(itemNew);
 
       // check name
-      const item = await app.bean.model.get(tableNameSuccess, {
+      const item = await app.bean.model.get(tableNameSuccess as any, {
         id,
       });
       assert.equal(item.name, itemNew.name);
