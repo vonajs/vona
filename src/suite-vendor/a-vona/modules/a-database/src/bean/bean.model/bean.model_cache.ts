@@ -78,7 +78,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return (await super.mget(table, ids, options)) as TRecord[];
     }
     // cache
-    const cache = this.__cacheInstance;
+    const cache = this.__getCacheInstance(table);
     let items = await cache.mget(ids, {
       mget: async ids => {
         return await super._mget(table, ids, { disableDeleted: true });
@@ -227,7 +227,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options = Object.assign({}, options, { where: { id } });
     await super.update(table, data, options);
     // delete cache
-    await this.__deleteCache_key(id);
+    await this.__deleteCache_key(id, table);
   }
 
   async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void>;
@@ -268,16 +268,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // delete by id/ids
     await super.delete(table, { id } as any, options);
     // delete cache
-    await this.__deleteCache_key(id);
+    await this.__deleteCache_key(id, table);
   }
 
   private async __get_notkey(
-    table: string,
+    table: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
-    const cache = this.__cacheInstance;
+    const cache = this.__getCacheInstance(table);
     const cacheKey = { where, options };
     const data = await cache.get(cacheKey, {
       get: async () => {
@@ -294,18 +294,18 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return data2 as TRecord;
     }
     // delete cache
-    await this.__deleteCache_notkey(cacheKey);
+    await this.__deleteCache_notkey(cacheKey, table);
     // get again
     return await this.__get_notkey(table, where, options);
   }
 
   private async __get_key(
-    table: string,
+    table: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
-    const cache = this.__cacheInstance;
+    const cache = this.__getCacheInstance(table);
     const item: TRecord | null | undefined = await cache.get(cast(where).id, {
       get: async () => {
         // where: maybe contain aux key
@@ -366,8 +366,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return true;
   }
 
-  private async __deleteCache_key(id) {
-    const cache = this.__cacheInstance;
+  private async __deleteCache_key(id, table: keyof ITableRecord) {
+    const cache = this.__getCacheInstance(table);
     if (Array.isArray(id)) {
       await cache.mdel(id);
     } else {
@@ -375,8 +375,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
   }
 
-  private async __deleteCache_notkey(cacheKey) {
-    const cache = this.__cacheInstance;
+  private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {
+    const cache = this.__getCacheInstance(table);
     await cache.del(cacheKey);
   }
 
