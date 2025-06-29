@@ -4,6 +4,7 @@ import type {
   IDecoratorModelOptions,
   IModelMethodOptionsGeneral,
   IModelUpdateOptionsGeneral,
+  ITableRecord,
 } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
@@ -49,7 +50,7 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
-  get table(): string {
+  get table(): keyof ITableRecord {
     let table = this.options.table;
     if (!table && this.options.entity) {
       table = $tableName(this.options.entity);
