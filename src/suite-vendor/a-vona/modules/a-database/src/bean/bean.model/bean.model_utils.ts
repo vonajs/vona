@@ -16,7 +16,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
       table = undefined;
     }
     // table
-    table = table || this.getTable();
+    table = table || this.getTable('prepareData', [table, item], undefined);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // item
     if (!item) return [{}, {}] as [TRecord, TRecord];
@@ -40,12 +40,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   async defaultData(table?: string): Promise<TRecord> {
-    table = table || this.getTable();
+    table = table || this.getTable('defaultData', [table], undefined);
     return await this.db.columns.defaultData(table) as TRecord;
   }
 
   async columns(table?: string): Promise<ITableColumns> {
-    table = table || this.getTable();
+    table = table || this.getTable('columns', [table], undefined);
     return await this.db.columns.columns(table);
   }
 
@@ -139,7 +139,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
 
   prepareWhere(builder: Knex.QueryBuilder, table?: string, where?, options?: IModelMethodOptionsGeneral) {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable('prepareWhere', [builder, table, where], options);
     if (!table) throw new Error('should specify the table name');
     // disableInstance/disableDeleted
     const disableWhere = {};
