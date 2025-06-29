@@ -4,11 +4,13 @@ import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDatabaseClientRecord } from '../database.ts';
 import type { EntityBaseEmpty } from '../entityBaseEmpty.ts';
+import type { IModelMethodOptionsGeneral } from '../model.ts';
 import type { ITableRecord } from './table.ts';
 
 export interface IModelRecord {}
 
-export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> = (this: BeanModelMeta<T>, method?: string, args?: any[]) => string;
+export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
+  (this: BeanModelMeta<T>, method?: string, methodParams?: any[], methodOptions?: IModelMethodOptionsGeneral) => string;
 
 export interface IDecoratorModelOptions<T extends EntityBaseEmpty = EntityBaseEmpty> {
   entity?: Constructable<T>;
