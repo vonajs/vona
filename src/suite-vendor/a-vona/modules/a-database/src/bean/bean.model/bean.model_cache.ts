@@ -5,6 +5,7 @@ import type {
   IModelMethodOptions,
   IModelSelectParams,
   IModelUpdateOptions,
+  ITableRecord,
   TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
@@ -12,20 +13,15 @@ import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { BeanModel } from '../bean.model.ts';
 
-const SymbolCacheName = Symbol('SymbolCacheName');
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
-  private [SymbolCacheName]: string;
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
 
-  private get __cacheName() {
-    if (!this[SymbolCacheName]) {
-      const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this.db.clientName);
-      this[SymbolCacheName] = `${this.$beanFullName}:${clientNameReal}`;
-    }
-    return this[SymbolCacheName];
+  private __getCacheName(table: keyof ITableRecord) {
+    const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this.db.clientName);
+    return `${this.$beanFullName}:${clientNameReal}:${table}`;
   }
 
   private get __cacheOptions() {
@@ -50,9 +46,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.options.cacheNotKey !== false;
   }
 
-  async clearCache() {
+  async clearCache(table: keyof ITableRecord) {
     if (!this.__cacheEnabled) return;
-    await this.__cacheInstance.clear();
+    await this.__getCacheInstance(table).clear();
   }
 
   async mget(
@@ -384,9 +380,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await cache.del(cacheKey);
   }
 
-  private get __cacheInstance() {
+  private __getCacheInstance(table: keyof ITableRecord) {
     if (this.__cacheOptions === false) throw new Error('cache disabled');
-    return this.app.bean.summer.cache<any, any>(this.__cacheName, this.__cacheOptions);
+    return this.app.bean.summer.cache<any, any>(this.__getCacheName(table), this.__cacheOptions);
   }
 
   private __cacheOptionsInner() {
