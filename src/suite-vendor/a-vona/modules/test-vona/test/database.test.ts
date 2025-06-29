@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
+import moment from 'moment';
 import { app } from 'vona-mock';
 
 describe('database.test.ts', () => {
@@ -94,10 +95,31 @@ describe('database.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('test-vona');
+      const entityTest = scopeTest.entity.test;
       const modelTest = scopeTest.model.test;
-      assert.equal(modelTest.options.clientName, 'default');
-      const modelTest2 = scopeTest.model.test;
-      assert.equal(modelTest, modelTest2);
+      // tableName
+      const tableName = `${entityTest.$table}_${moment().format('YYYYMMDD')}`;
+      // create table
+      await app.bean.model.createTable(tableName, table => {
+        table.basicFields();
+        table.string(entityTest.title, 255);
+        table.string(entityTest.description, 255);
+      });
+      // insert
+      const item = await modelTest.insert({ title: 'title', description: 'description' });
+      // get
+      const item2 = await modelTest.get({ id: item.id });
+      assert.equal(item2?.id, item.id);
+      // get by tableName
+      const item3 = await app.bean.model.get(tableName as any, { id: item.id });
+      assert.equal(item3.id, item.id);
+      // delete
+      await modelTest.delete({ id: item.id });
+      // get by tableName
+      const item4 = await app.bean.model.get(tableName as any, { id: item.id });
+      assert.equal(item4, undefined);
+      // drop table
+      await app.bean.model.dropTable(tableName);
     });
   });
 });
