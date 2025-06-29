@@ -96,7 +96,7 @@ describe('database.test.ts', () => {
       // scope
       const scopeTest = app.bean.scope('test-vona');
       const entityTest = scopeTest.entity.test;
-      const modelTest = scopeTest.model.test;
+      const modelTest = scopeTest.model.testDynamicTable;
       // tableName
       const tableName = `${entityTest.$table}_${moment().format('YYYYMMDD')}`;
       // create table
