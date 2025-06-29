@@ -1,4 +1,4 @@
-import type { Constructable, OmitNever } from 'vona';
+import type { Constructable, OmitNever, VonaContext } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
@@ -11,8 +11,9 @@ export interface IModelRecord {}
 
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (
-    this: BeanModelMeta<T>,
+    ctx: VonaContext,
     defaultTable: keyof ITableRecord,
+    modelInstance: BeanModelMeta<T>,
     method?: string,
     methodParams?: any[],
     methodOptions?: IModelMethodOptionsGeneral,

@@ -55,7 +55,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
     if (table && typeof table === 'function') {
-      return table.call(this, defaultTable!, method, methodParams, methodOptions) as any;
+      return table(this.ctx, defaultTable!, this, method, methodParams, methodOptions) as any;
     }
     if (defaultTable) return defaultTable;
     throw new Error(`not found table of ${this.$beanFullName}`);

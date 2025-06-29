@@ -1,9 +1,11 @@
-import type { BeanModelMeta, ITableRecord } from 'vona-module-a-database';
+import type { VonaContext } from 'vona';
+import type { ITableRecord } from 'vona-module-a-database';
+import moment from 'moment';
 import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityTest } from '../entity/test.ts';
 
-@Model({ entity: EntityTest, table(this: BeanModelMeta<EntityTest>, defaultTable: keyof ITableRecord) {
-  this.app;
-  return defaultTable;
+@Model({ entity: EntityTest, table(ctx: VonaContext, defaultTable: keyof ITableRecord) {
+  if (ctx.instanceName !== '') return defaultTable;
+  return `${defaultTable}_${moment().format('YYYYMMDD')}`;
 } })
 export class ModelTestDynamicTable extends BeanModelBase<EntityTest> {}
