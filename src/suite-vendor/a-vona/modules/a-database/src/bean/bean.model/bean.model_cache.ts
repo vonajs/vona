@@ -46,8 +46,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.options.cacheNotKey !== false;
   }
 
-  async clearCache(table: keyof ITableRecord) {
+  async clearCache(table?: keyof ITableRecord) {
     if (!this.__cacheEnabled) return;
+    table = table || this.getTable('clearCache', [table], undefined);
     await this.__getCacheInstance(table).clear();
   }
 
