@@ -8,7 +8,7 @@ import type { ITableRecord } from './table.ts';
 
 export interface IModelRecord {}
 
-export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> = (this: BeanModelMeta<T>) => string;
+export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> = (this: BeanModelMeta<T>, method?: string, args?: any[]) => string;
 
 export interface IDecoratorModelOptions<T extends EntityBaseEmpty = EntityBaseEmpty> {
   entity?: Constructable<T>;

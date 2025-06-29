@@ -50,11 +50,11 @@ export class BeanModelMeta<TRecord extends {}> extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
-  getTable(): keyof ITableRecord {
+  getTable(method?: string, args?: any[]): keyof ITableRecord {
     const table = this.options.table;
     if (table) {
       if (typeof table === 'string') return table;
-      return table.call(this) as any;
+      return table.call(this, method, args) as any;
     }
     if (this.options.entity) {
       return $tableName(this.options.entity);

@@ -114,7 +114,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       table = undefined;
     }
     // not use cache if specified table
-    if (table && table !== this.getTable()) {
+    if (table && table !== this.getTable('select', [table, params, options])) {
       return await super.select(table, params, options);
     }
     // table
