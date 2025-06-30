@@ -18,7 +18,7 @@ export function getTargetDecoratorRuleColumns(target: object) {
   return appMetadata.getOwnMetadataMap(true, SymbolDecoratorRuleColumn, target);
 }
 
-export function mergeFieldsOpenAPIMetadata(target: Constructable) {
+export function mergeFieldsOpenapiMetadata(target: Constructable) {
   // rules
   const rules = getTargetDecoratorRules(target.prototype);
   // beanOptions

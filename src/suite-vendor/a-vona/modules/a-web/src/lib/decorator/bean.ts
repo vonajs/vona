@@ -3,7 +3,7 @@ import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend } from 'vona';
-import { mergeFieldsOpenAPIMetadata } from 'vona-module-a-openapi';
+import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapi';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
@@ -30,7 +30,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
 
 export function Dto<T extends IDecoratorDtoOptions<any>>(options?: Omit<T, '_fieldsMore_'>): ClassDecorator {
   return createBeanDecorator('dto', options, false, false, target => {
-    mergeFieldsOpenAPIMetadata(target);
+    mergeFieldsOpenapiMetadata(target);
   });
 }
 
