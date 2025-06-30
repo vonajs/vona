@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { TypeOpenAPIMetadata } from '../types/rest.ts';
+import type { TypeOpenapiMetadata } from '../types/rest.ts';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
@@ -26,7 +26,7 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
   const fields = cast(beanOptions?.options)?.fields;
   if (!fields) return;
   for (const key in fields) {
-    const field: TypeOpenAPIMetadata | z.ZodSchema = fields[key];
+    const field: TypeOpenapiMetadata | z.ZodSchema = fields[key];
     if (!field) continue;
     const schemaCurrent: z.ZodSchema | undefined = rules[key] as any;
     if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {

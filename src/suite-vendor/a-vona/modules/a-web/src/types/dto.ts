@@ -1,12 +1,12 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import type { TypeOpenAPIMetadata } from 'vona-module-a-openapi';
+import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 
 export interface IDtoRecord {}
 
 export interface IDecoratorDtoOptions<FieldsMore = never> {
   independent?: boolean;
-  openapi?: TypeOpenAPIMetadata;
+  openapi?: TypeOpenapiMetadata;
   _fieldsMore_?: FieldsMore;
 }
 
