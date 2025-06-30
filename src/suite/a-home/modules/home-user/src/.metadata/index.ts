@@ -106,9 +106,7 @@ export interface IModuleModel {
 /** model: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
-export * from '../service/authTokenAdapter.ts';
 export * from '../service/passportAdapter.ts';
-export * from '../service/redisToken.ts';
 export * from '../service/roleInnerAdapter.ts';
 export * from '../service/userInnerAdapter.ts';
 
@@ -117,9 +115,7 @@ declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'home-user:authInnerAdapter': never;
-'home-user:authTokenAdapter': never;
 'home-user:passportAdapter': never;
-'home-user:redisToken': never;
 'home-user:roleInnerAdapter': never;
 'home-user:userInnerAdapter': never;
     }
@@ -133,17 +129,7 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
-        export interface ServiceAuthTokenAdapter {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        }
-
         export interface ServicePassportAdapter {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        }
-
-        export interface ServiceRedisToken {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
@@ -161,16 +147,12 @@ declare module 'vona-module-home-user' {
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
-import type { ServiceAuthTokenAdapter } from '../service/authTokenAdapter.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
-import type { ServiceRedisToken } from '../service/redisToken.ts';
 import type { ServiceRoleInnerAdapter } from '../service/roleInnerAdapter.ts';
 import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 export interface IModuleService {
   'authInnerAdapter': ServiceAuthInnerAdapter;
-'authTokenAdapter': ServiceAuthTokenAdapter;
 'passportAdapter': ServicePassportAdapter;
-'redisToken': ServiceRedisToken;
 'roleInnerAdapter': ServiceRoleInnerAdapter;
 'userInnerAdapter': ServiceUserInnerAdapter;
 }
@@ -181,9 +163,7 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'home-user.service.authInnerAdapter': ServiceAuthInnerAdapter;
-'home-user.service.authTokenAdapter': ServiceAuthTokenAdapter;
 'home-user.service.passportAdapter': ServicePassportAdapter;
-'home-user.service.redisToken': ServiceRedisToken;
 'home-user.service.roleInnerAdapter': ServiceRoleInnerAdapter;
 'home-user.service.userInnerAdapter': ServiceUserInnerAdapter;
   }

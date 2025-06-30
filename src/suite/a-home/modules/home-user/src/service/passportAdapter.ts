@@ -1,8 +1,8 @@
 import type { IPassportAdapter, IPassportBase } from 'vona-module-a-user';
 import type { IPassport, IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
-import { $getRoleName } from 'vona-module-a-user';
 import { Service } from 'vona-module-a-bean';
+import { $getRoleName } from 'vona-module-a-user';
 
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
