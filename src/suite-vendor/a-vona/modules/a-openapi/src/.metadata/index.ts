@@ -34,6 +34,32 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.json.ts';
+
+import { type IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+declare module 'vona-module-a-summer' {
+  
+    export interface ISummerCacheRecord {
+      'a-openapi:json': IDecoratorSummerCacheOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-openapi' {
+  
+        export interface SummerCacheJson {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapi;
+        } 
+}
+/** summerCache: end */
+/** summerCache: begin */
+import type { SummerCacheJson } from '../bean/summerCache.json.ts';
+export interface IModuleSummerCache {
+  'json': SummerCacheJson;
+}
+/** summerCache: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -61,6 +87,7 @@ export interface ScopeModuleAOpenapi {
 config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 service: IModuleService;
+summerCache: IModuleSummerCache;
 }
 
 import 'vona';

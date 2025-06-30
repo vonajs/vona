@@ -21,6 +21,7 @@ import {
   LocaleModuleNameSeparator,
 } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { Caching } from 'vona-module-a-caching';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -32,6 +33,13 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field',
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
+  generateJsonCacheKey(args: any[], prop: string) {
+    const version = args[0] ?? 'V31';
+    const locale = this.ctx.locale;
+    return `${prop}_${version}_${locale}`;
+  }
+
+  @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
   generateJson<K extends keyof IOpenAPIObject>(version: K = 'V31' as any): IOpenAPIObject[K] {
     const registry = this._collectRegistry();
     const generator =
