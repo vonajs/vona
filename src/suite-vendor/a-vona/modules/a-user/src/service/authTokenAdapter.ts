@@ -9,7 +9,7 @@ export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapt
   async create(payloadData: IPayloadDataBase): Promise<IPayloadDataBase> {
     const authIdStr = this._getAuthId(payloadData)?.toString();
     const token = (authIdStr === '-1') ? createHash(authIdStr) : uuidv4();
-    const payloadDataNew = Object.assign({}, payloadData, { token });
+    const payloadDataNew = Object.assign({}, payloadData, { [this.scope.config.payloadData.fields.token]: token });
     await this.scope.service.redisToken.create(payloadDataNew);
     return payloadDataNew;
   }
