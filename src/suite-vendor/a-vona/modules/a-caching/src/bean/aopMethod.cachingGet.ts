@@ -1,10 +1,9 @@
 import type { Next } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type { TypeCachingActionOptions } from '../types/caching.ts';
-import { isNil } from '@cabloy/utils';
 import { BeanAopMethodBase, beanFullNameFromOnionName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
-import { combineCachingKey } from '../lib/utils.ts';
+import { combineCachingKey, isCachingKeyValid } from '../lib/utils.ts';
 
 export interface IAopMethodOptionsCachingGet extends IDecoratorAopMethodOptions, TypeCachingActionOptions {}
 
@@ -13,7 +12,7 @@ export class AopMethodCachingGet extends BeanAopMethodBase implements IAopMethod
   async execute(options: IAopMethodOptionsCachingGet, args: [], next: Next, receiver: any, prop: string): Promise<any> {
     // key
     const key = combineCachingKey(options, args, receiver, prop);
-    if (isNil(key) || key === false || key === '') return next();
+    if (!isCachingKeyValid(key)) return next();
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
     return await cache.get(key, Object.assign({}, options, { get: () => {

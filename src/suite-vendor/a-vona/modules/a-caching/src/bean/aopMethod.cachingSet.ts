@@ -1,10 +1,9 @@
 import type { Next } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type { TypeCacheValueFn, TypeCachingActionOptions } from '../types/caching.ts';
-import { isNil } from '@cabloy/utils';
 import { BeanAopMethodBase, beanFullNameFromOnionName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
-import { combineCachingKey, combineCachingValue } from '../lib/utils.ts';
+import { combineCachingKey, combineCachingValue, isCachingKeyValid } from '../lib/utils.ts';
 
 export interface IAopMethodOptionsCachingSet extends IDecoratorAopMethodOptions, TypeCachingActionOptions {
   cacheValue?: any;
@@ -18,7 +17,7 @@ export class AopMethodCachingSet extends BeanAopMethodBase implements IAopMethod
     const value = await next();
     // key
     const key = combineCachingKey(options, args, receiver, prop);
-    if (isNil(key) || key === false || key === '') return value;
+    if (!isCachingKeyValid(key)) return value;
     // value
     const cacheValue = combineCachingValue(options, args, receiver, prop, value);
     // cache

@@ -57,3 +57,7 @@ export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: 
   // default
   return value;
 }
+
+export function isCachingKeyValid(key: any) {
+  return !isNil(key) && key !== false && key !== '';
+}
