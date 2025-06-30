@@ -20,6 +20,41 @@ declare module 'vona-module-a-swagger' {
         } 
 }
 /** meta: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.rapidoc.ts';
+export * from '../bean/summerCache.swagger.ts';
+
+import { type IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+declare module 'vona-module-a-summer' {
+  
+    export interface ISummerCacheRecord {
+      'a-swagger:rapidoc': IDecoratorSummerCacheOptions;
+'a-swagger:swagger': IDecoratorSummerCacheOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-swagger' {
+  
+        export interface SummerCacheRapidoc {
+          /** @internal */
+          get scope(): ScopeModuleASwagger;
+        }
+
+        export interface SummerCacheSwagger {
+          /** @internal */
+          get scope(): ScopeModuleASwagger;
+        } 
+}
+/** summerCache: end */
+/** summerCache: begin */
+import type { SummerCacheRapidoc } from '../bean/summerCache.rapidoc.ts';
+import type { SummerCacheSwagger } from '../bean/summerCache.swagger.ts';
+export interface IModuleSummerCache {
+  'rapidoc': SummerCacheRapidoc;
+'swagger': SummerCacheSwagger;
+}
+/** summerCache: end */
 /** controller: begin */
 export * from '../controller/rapidoc.ts';
 export * from '../controller/swagger.ts';
@@ -86,6 +121,7 @@ export class ScopeModuleASwagger extends BeanScopeBase {}
 export interface ScopeModuleASwagger {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+summerCache: IModuleSummerCache;
 }
 
 import 'vona';

@@ -1,5 +1,6 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
+import { Caching } from 'vona-module-a-caching';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { $apiPath, Controller, Web } from 'vona-module-a-web';
@@ -30,6 +31,7 @@ export class ControllerRapidoc extends BeanBase {
   @Web.get()
   @Passport.public()
   @Api.contentType('text/html')
+  @Caching.get({ cacheName: 'a-swagger:rapidoc' })
   async index(@Arg.query('version', v.default('V31')) version: string): Promise<string> {
     // signin
     let accessToken = '';
