@@ -1,7 +1,7 @@
-import type { IOpenAPIObject } from 'vona-module-a-openapiutils';
+import type { IOpenapiObject } from 'vona-module-a-openapiutils';
 
 export interface IOpenapiSchema {
-  doc: IOpenAPIObject['V31'];
+  doc: IOpenapiObject['V31'];
   meta?: IOpenapiSchemaMeta;
 }
 

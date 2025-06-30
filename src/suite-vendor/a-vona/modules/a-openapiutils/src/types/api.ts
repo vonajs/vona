@@ -16,11 +16,11 @@ export interface IResponseHeaders { [key: string]: string | string[] }
 export type TypeGenerateJsonScene = 'api' | 'rest';
 
 export type TypeOpenApiVersion = 'V30' | 'V31';
-export interface IOpenAPIObject {
+export interface IOpenapiObject {
   V30: OpenAPIObject30;
   V31: OpenAPIObject31;
 }
-export interface IOpenAPISchemaObject {
+export interface IOpenapiSchemaObject {
   V30: SchemaObject30;
   V31: SchemaObject31;
 }

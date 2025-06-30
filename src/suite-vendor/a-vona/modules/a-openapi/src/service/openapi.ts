@@ -4,7 +4,7 @@ import type {
   Constructable,
   IDecoratorBeanOptionsBase,
 } from 'vona';
-import type { IOpenApiHeader, IOpenAPIObject, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
+import type { IOpenApiHeader, IOpenapiObject, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
@@ -48,17 +48,17 @@ export class ServiceOpenapi extends BeanBase {
   }
 
   @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
-  async generateJson<K extends keyof IOpenAPIObject>(version: K = 'V31' as any): Promise<IOpenAPIObject[K]> {
+  async generateJson<K extends keyof IOpenapiObject>(version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
     const registry = this._collectRegistry();
     const generator =
       version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj, 'api');
-    return apiObj as IOpenAPIObject[K];
+    return apiObj as IOpenapiObject[K];
   }
 
   @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonOfControllerActionCacheKey' })
-  async generateJsonOfControllerAction<K extends keyof IOpenAPIObject>(controller: Constructable, actionKey: string, version: K = 'V31' as any): Promise<IOpenAPIObject[K]> {
+  async generateJsonOfControllerAction<K extends keyof IOpenapiObject>(controller: Constructable, actionKey: string, version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
     const registry = new OpenAPIRegistry();
     const beanOptions = appResource.getBean(controller);
     if (!beanOptions) throw new Error('invalid controller');
@@ -67,7 +67,7 @@ export class ServiceOpenapi extends BeanBase {
       version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this._translate(apiObj, 'rest');
-    return apiObj as IOpenAPIObject[K];
+    return apiObj as IOpenapiObject[K];
   }
 
   private _translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
@@ -324,7 +324,7 @@ export class ServiceOpenapi extends BeanBase {
         if (!schema) continue;
         // check schema
         if (getTypeName(schema) === 'ZodAny') {
-          throw new Error(`Invalid OpenAPI argument type: ${info.relativeName}:${controller.name}.${actionKey}#${argumentType}`);
+          throw new Error(`Invalid Openapi argument type: ${info.relativeName}:${controller.name}.${actionKey}#${argumentType}`);
         }
         // record
         if (argumentType === 'body') {

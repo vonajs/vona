@@ -1,4 +1,4 @@
-import type { IOpenAPIObject } from 'vona-module-a-openapiutils';
+import type { IOpenapiObject } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Caching } from 'vona-module-a-caching';
@@ -65,7 +65,7 @@ export class ControllerSwagger extends BeanBase {
   @Passport.public()
   @Api.contentType('text/plain')
   async json(@Arg.query('version', v.default('V31')) version: string): Promise<string> {
-    const json = await this.$scope.openapi.service.openapi.generateJson(version as unknown as keyof IOpenAPIObject);
+    const json = await this.$scope.openapi.service.openapi.generateJson(version as unknown as keyof IOpenapiObject);
     return JSON.stringify(json, null, 2);
   }
 }

@@ -24,7 +24,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
       if (option !== undefined) optionsMeta[key] = option;
     }
     // IOpenApiOptions
-    mergeActionsOpenAPIMetadata(target);
+    mergeActionsOpenapiMetadata(target);
   });
 }
 
@@ -34,7 +34,7 @@ export function Dto<T extends IDecoratorDtoOptions<any>>(options?: Omit<T, '_fie
   });
 }
 
-export function mergeActionsOpenAPIMetadata(target: Constructable) {
+export function mergeActionsOpenapiMetadata(target: Constructable) {
   // beanOptions
   const beanOptions = appResource.getBean(target);
   const actions = cast(beanOptions?.options)?.actions;
