@@ -166,19 +166,19 @@ Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is p
 
 - See: [Validation](../../techniques/validation/introduction.md)
 
-## Swagger/OpenAPI
+## Swagger/Openapi
 
-Vona implements a very convenient `Swagger/OpenAPI` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/OpenAPI` in Vona still uses the decorators in [Validation](../../techniques/validation/introduction.md), and provides extension tools to set metadata related to OpenAPI
+Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../../techniques/validation/introduction.md), and provides extension tools to set metadata related to Openapi
 
-- See: [Swagger/OpenAPI](../../techniques/openapi/introduction.md)
+- See: [Swagger/Openapi](../../techniques/openapi/introduction.md)
 
 ## Response Body
 
-Vona provides a mechanism similar to [Validation](../../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/OpenAPI metadata
+Vona provides a mechanism similar to [Validation](../../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/Openapi metadata
 
 ### 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the body type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/OpenAPI
+If the body type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi
 
 * Example: `string`
 
@@ -218,7 +218,7 @@ class ControllerStudent {
 
 ### 2. Specify Zod Schema
 
-We can also explicitly specify Zod Schema and automatically generate Swagger/OpenAPI
+We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi
 
 * Example: `string[]`
 

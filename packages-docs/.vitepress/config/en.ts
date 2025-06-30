@@ -86,6 +86,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Controller', link: 'controller' },
             { text: 'Service', link: 'service' },
             { text: 'Model', link: 'model' },
+            { text: 'Entity', link: 'entity' },
           ],
         },
       ],
@@ -100,7 +101,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: 'Swagger/OpenAPI',
+          text: 'Swagger/Openapi',
           base: '/guide/techniques/openapi/',
           link: 'introduction',
         },
