@@ -71,8 +71,12 @@ export function parse(expression: string): Celjs.ParseResult {
 
 function _prepareFunctions(functions?: Record<string, CallableFunction>) {
   return Object.assign({
-    concat: (...args): string => {
-      return args.reduce((accumulator, current) => `${accumulator}${current}`, '');
+    concat: (...args: any[]): any[] => {
+      return [].concat(...args);
+    },
+    join: (arr?: [], sep?: string): string => {
+      if (!arr) return '';
+      return arr.join(sep);
     },
     get: (obj: object | undefined, name: string, sep?: string) => {
       return getProperty(obj, name, sep);
