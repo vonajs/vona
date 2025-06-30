@@ -18,6 +18,9 @@ describe('celjs.test.ts', () => {
       // array
       assert.deepEqual(evaluateExpressions('cel://concat(1,[2,3],4)'), [1, 2, 3, 4]);
       assert.deepEqual(evaluateExpressions('cel://join(concat(1,[2,3],4),"_")'), '1_2_3_4');
+      // +
+      assert.equal(evaluateExpressions('cel://1+"a"'), '1a');
+      assert.equal(evaluateExpressions('cel://"a"+1'), 'a1');
     });
   });
 });
