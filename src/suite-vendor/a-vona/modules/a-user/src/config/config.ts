@@ -14,5 +14,15 @@ export function config(_app: VonaApplication) {
       authInner: 'home-user:authInnerAdapter' as keyof IServiceRecord,
       roleInner: 'home-user:roleInnerAdapter' as keyof IServiceRecord,
     },
+    payloadData: {
+      fields: {
+        authId: 'authId',
+        userId: 'userId',
+        token: 'token',
+      },
+    },
+    redisToken: {
+      maxAge: 30 * 24 * 60 * 60,
+    },
   };
 }

@@ -87,6 +87,51 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/authTokenAdapter.ts';
+export * from '../service/redisToken.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-user:authTokenAdapter': never;
+'a-user:redisToken': never;
+    }
+
+  
+}
+declare module 'vona-module-a-user' {
+  
+        export interface ServiceAuthTokenAdapter {
+          /** @internal */
+          get scope(): ScopeModuleAUser;
+        }
+
+        export interface ServiceRedisToken {
+          /** @internal */
+          get scope(): ScopeModuleAUser;
+        } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceAuthTokenAdapter } from '../service/authTokenAdapter.ts';
+import type { ServiceRedisToken } from '../service/redisToken.ts';
+export interface IModuleService {
+  'authTokenAdapter': ServiceAuthTokenAdapter;
+'redisToken': ServiceRedisToken;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-user.service.authTokenAdapter': ServiceAuthTokenAdapter;
+'a-user.service.redisToken': ServiceRedisToken;
+  }
+}
+/** service: end */
 /** event: begin */
 export * from '../bean/event.createUserAnonymous.ts';
 export * from '../bean/event.signin.ts';
@@ -172,6 +217,7 @@ export class ScopeModuleAUser extends BeanScopeBase {}
 export interface ScopeModuleAUser {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+service: IModuleService;
 event: IModuleEvent;
 }
 
