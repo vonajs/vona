@@ -163,3 +163,82 @@ class EntityStudent {
 ## Swagger/Openapi
 
 Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据
+
+|名称|说明|
+|--|--|
+|v.default|default|
+|v.optional|optional|
+|v.openapi|openapi|
+|v.title|title|
+|v.description|description|
+|v.example|example|
+
+### 1. 举例：v.title
+
+`title='Name'`
+
+``` typescript
+class EntityStudent {
+  @Api.field(v.title('Name'))
+  name: string;
+}  
+```
+
+![](../../../assets/img/openapi/openapi-23.png)
+
+### 2. 举例：v.openapi
+
+我们可以使用`v.openapi`一次设置更多的元数据
+
+`title='Name', example='Tom'`
+
+``` typescript
+class EntityStudent {
+  @Api.field(v.openapi({ title: 'Name', example: 'Tom' }))
+  name: string;
+}  
+```
+
+![](../../../assets/img/openapi/openapi-24.png)
+
+## I18n国际化
+
+Vona 为 Openapi 提供了 I18n 国际化。比如，`title`为`Name`，支持多语言的步骤如下：
+
+### 1. 提供语言资源
+
+如何添加语言资源，参见：[I18n国际化](../../essentials/scope/locale.md)
+
+* 英文：`src/module/demo-student/src/config/locale/en-us.ts`
+
+``` typescript
+export default {
+  Name: 'Name',
+};
+```
+
+* 中文：`src/module/demo-student/src/config/locale/zh-cn.ts`
+
+``` typescript
+export default {
+  Name: '名称',
+};
+```
+
+### 2. 使用$locale
+
+使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
+
+``` typescript
+import { $locale } from '../.metadata/index.ts';
+
+@Api.field(v.title($locale('Name')))
+```
+
+- 英文
+
+![](../../../assets/img/openapi/openapi-25.png)
+
+- 中文
+
+![](../../../assets/img/openapi/openapi-26.png)
