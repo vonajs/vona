@@ -140,11 +140,13 @@ class ServiceStudent {
 |名称|说明|
 |--|--|
 |entity|model对应的entity|
-|table|model对应的表名，如果为空，则从entity获取表名|
+|table|model对应的表名|
 |disableDeleted|是否禁用软删除，默认为false|
 |disableInstance|是否禁用多实例/多租户，默认为false|
 |clientName|指定数据源名称|
 |cacheOptions|配置缓存参数，默认启用基于redis的缓存|
+
+- table: 如果为空，则从 entity 获取表名。也可以指定函数，实现动态分表的能力
 
 ## App config配置
 
@@ -165,6 +167,20 @@ config.onions = {
   },
 };
 ```
+
+## 动态分表
+
+Model 支持动态分表的能力。比如，我们对 Order 进行分表处理，将每天的订单存入`order_YYYYMMDD`格式的数据表中
+
+``` typescript
+@Model({ table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
+  return `${defaultTable}_${moment().format('YYYYMMDD')}`;
+} })
+class ModelOrder {}
+```
+
+- ctx: 可以基于当前请求的上下文来动态生成表名
+- defaultTable: 默认的表名
 
 ## 软删除, 多实例/多租户
 

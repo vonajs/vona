@@ -140,11 +140,13 @@ class ServiceStudent {
 |Name|Description|
 |--|--|
 |entity|Entity corresponding to model|
-|table|Table name corresponding to model. If empty, the table name is automatically obtained from entity|
+|table|Table name corresponding to model |
 |disableDeleted|Whether to disable soft deletion, the default is false|
 |disableInstance|Whether to disable multi-instance/multi-tenant, the default is false|
 |clientName|Specify the datasource name|
 |cacheOptions|Configure cache parameters, enable redis-based cache by default|
+
+- table: If it is empty, the table name is automatically obtained from entity. You can also specify a function to achieve dynamic table partitioning
 
 ## App config configuration
 
@@ -165,6 +167,20 @@ config.onions = {
   },
 };
 ```
+
+## Dynamic table partitioning
+
+Model supports dynamic table partitioning. For example, we partition the Order table and store the daily orders in a data table in the format of `order_YYYYMMDD`
+
+``` typescript
+@Model({ table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
+  return `${defaultTable}_${moment().format('YYYYMMDD')}`;
+} })
+class ModelOrder {}
+```
+
+- ctx: can dynamically generate table name based on the context of the current request
+- defaultTable: default table name
 
 ## Soft deletion, multi-instance/multi-tenant
 
