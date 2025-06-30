@@ -146,7 +146,9 @@ class ServiceStudent {
 |clientName|指定数据源名称|
 |cacheOptions|配置缓存参数，默认启用基于redis的缓存|
 
-- table: 如果为空，则从 entity 获取表名。也可以指定函数，实现动态分表的能力
+- table: 
+  - 如果为空，则从 entity 获取表名
+  - 可以指定函数，实现动态分表的能力
 
 ## App config配置
 

@@ -146,7 +146,9 @@ class ServiceStudent {
 |clientName|Specify the datasource name|
 |cacheOptions|Configure cache parameters, enable redis-based cache by default|
 
-- table: If it is empty, the table name is automatically obtained from entity. You can also specify a function to achieve dynamic table partitioning
+- table: 
+  - If it is empty, the table name is automatically obtained from entity
+  - You can also specify a function to achieve dynamic table partitioning
 
 ## App config configuration
 
