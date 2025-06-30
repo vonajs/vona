@@ -179,8 +179,8 @@ Vona also provides many extension tools for setting metadata related to Openapi
 
 ``` typescript
 class EntityStudent {
-@Api.field(v.title('Name'))
-name: string;
+  @Api.field(v.title('Name'))
+  name: string;
 }
 ```
 
@@ -194,26 +194,26 @@ We can use `v.openapi` to set more metadata at once
 
 ``` typescript
 class EntityStudent {
-@Api.field(v.openapi({ title: 'Name', example: 'Tom' }))
-name: string;
+  @Api.field(v.openapi({ title: 'Name', example: 'Tom' }))
+  name: string;
 }
 ```
 
 ![](../../../assets/img/openapi/openapi-24.png)
 
-## I18n Internationalization
+## I18n
 
-Vona provides I18n internationalization for Openapi. For example, `title` is `Name`, and the steps to support multiple languages ​​are as follows:
+Vona provides I18n for Openapi. For example, `title` is `Name`, and the steps to support multiple languages ​​are as follows:
 
 ### 1. Provide language resources
 
-For how to add language resources, see: [I18n internationalization](../../essentials/scope/locale.md)
+For how to add language resources, see: [I18n](../../essentials/scope/locale.md)
 
 * English: `src/module/demo-student/src/config/locale/en-us.ts`
 
 ``` typescript
 export default {
-Name: 'Name',
+  Name: 'Name',
 };
 ```
 
@@ -221,7 +221,7 @@ Name: 'Name',
 
 ``` typescript
 export default {
-Name: '姓名',
+  Name: '姓名',
 };
 ```
 
