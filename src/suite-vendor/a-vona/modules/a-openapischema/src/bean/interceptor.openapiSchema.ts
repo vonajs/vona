@@ -15,7 +15,7 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
     const data: TypeEventRetrieveOpenapiSchemaData = { route: this.ctx.route };
     const body = await this.scope.event.retrieveOpenapiSchema.emit(data, async data => {
       // doc
-      const doc = this.$scope.openapi.service.openapi.generateJsonOfControllerAction(data.route.controller, data.route.action, 'V31');
+      const doc = await this.$scope.openapi.service.openapi.generateJsonOfControllerAction(data.route.controller, data.route.action, 'V31');
       return { doc };
     });
     this.app.success(body);

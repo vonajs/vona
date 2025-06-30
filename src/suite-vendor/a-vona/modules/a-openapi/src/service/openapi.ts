@@ -33,10 +33,18 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field',
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  generateJsonCacheKey(args: any[], prop: string) {
+  protected generateJsonCacheKey(args: any[], prop: string) {
     const version = args[0] ?? 'V31';
     const locale = this.ctx.locale;
     return `${prop}_${version}_${locale}`;
+  }
+
+  protected generateJsonOfControllerActionCacheKey(args: any[], prop: string) {
+    const [controller, actionKey, version] = args;
+    const beanOptions = appResource.getBean(controller)!;
+    const beanFullName = beanOptions.beanFullName;
+    const locale = this.ctx.locale;
+    return `${prop}_${beanFullName}_${actionKey}_${version ?? 'V31'}_${locale}`;
   }
 
   @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
@@ -49,7 +57,8 @@ export class ServiceOpenapi extends BeanBase {
     return apiObj as IOpenAPIObject[K];
   }
 
-  generateJsonOfControllerAction<K extends keyof IOpenAPIObject>(controller: Constructable, actionKey: string, version: K = 'V31' as any): IOpenAPIObject[K] {
+  @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonOfControllerActionCacheKey' })
+  async generateJsonOfControllerAction<K extends keyof IOpenAPIObject>(controller: Constructable, actionKey: string, version: K = 'V31' as any): Promise<IOpenAPIObject[K]> {
     const registry = new OpenAPIRegistry();
     const beanOptions = appResource.getBean(controller);
     if (!beanOptions) throw new Error('invalid controller');
