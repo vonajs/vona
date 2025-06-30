@@ -2,7 +2,7 @@ import type { ILoggerClientChildRecord, ILoggerClientRecord, LoggerLevel, Next, 
 import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
 import { evaluateExpressions } from '@cabloy/utils';
-import { BeanAopMethodBase, SymbolBeanFullName } from 'vona';
+import { BeanAopMethodBase, cast, SymbolBeanFullName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
@@ -83,7 +83,11 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
   }
 
   _getContext(options: IAopMethodOptionsLog, receiver: any) {
-    return evaluateExpressions(options.context, { self: receiver });
+    return evaluateExpressions(options.context, {
+      self: receiver,
+      app: cast(receiver).app,
+      ctx: cast(receiver).ctx,
+    });
   }
 
   _logResult(profiler: winston.Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {

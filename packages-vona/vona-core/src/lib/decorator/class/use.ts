@@ -59,7 +59,7 @@ export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecorator
     selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
   if (!selectorInfo && !isNilOrEmptyString(useOptions.selector)) {
-    const selector = evaluateExpressions(useOptions.selector, { self: beanInstance });
+    const selector = evaluateExpressions(useOptions.selector, { self: beanInstance, app: beanInstance.app, ctx: beanInstance.ctx });
     return { withSelector: true, args: [selector] };
   }
   return selectorInfo ?? { withSelector: false, args: [] };
@@ -87,6 +87,6 @@ function __prepareInjectSelectorInfo_init(
   const withSelector = init.withSelector ?? false;
   const _args = init.args ?? [init.arg];
   if (!_args) return;
-  const args = _args.map(arg => evaluateExpressions(arg, { self: beanInstance }));
+  const args = _args.map(arg => evaluateExpressions(arg, { self: beanInstance, app: beanInstance.app, ctx: beanInstance.ctx }));
   return { withSelector, args };
 }

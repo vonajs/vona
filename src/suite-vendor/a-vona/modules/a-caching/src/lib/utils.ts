@@ -23,6 +23,8 @@ export function combineCachingKey(options: TypeCachingActionOptions, args: [], r
       prop,
       options,
       self: receiver,
+      app: cast(receiver).app,
+      ctx: cast(receiver).ctx,
     });
   }
   // default
@@ -48,6 +50,8 @@ export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: 
       prop,
       options,
       self: receiver,
+      app: cast(receiver).app,
+      ctx: cast(receiver).ctx,
     });
   }
   // default
