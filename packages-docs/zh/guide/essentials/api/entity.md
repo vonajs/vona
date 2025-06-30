@@ -41,7 +41,7 @@ export class EntityStudent extends EntityBase {}
 
 ### 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
-如果 body 类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/Openapi
+如果字段类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/Openapi
 
 * 举例：`string`
 
