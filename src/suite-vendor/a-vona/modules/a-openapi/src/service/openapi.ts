@@ -40,7 +40,7 @@ export class ServiceOpenapi extends BeanBase {
   }
 
   @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
-  generateJson<K extends keyof IOpenAPIObject>(version: K = 'V31' as any): IOpenAPIObject[K] {
+  async generateJson<K extends keyof IOpenAPIObject>(version: K = 'V31' as any): Promise<IOpenAPIObject[K]> {
     const registry = this._collectRegistry();
     const generator =
       version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
