@@ -197,7 +197,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     } else {
       const where = data.id !== undefined ? Object.assign({}, options?.where, { id: data.id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const items = await this.select(table, { where, columns: ['id'] }, options);
+      const items = await this.select(table, { where, columns: ['id' as any] }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -235,7 +235,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return await super.delete(table, where, options);
     }
     // check where and get id
-    const items = await this.select(table, { where, columns: ['id'] }, options);
+    const items = await this.select(table, { where, columns: ['id' as any] }, options);
     if (items.length === 0) {
       // donothing
       return;
