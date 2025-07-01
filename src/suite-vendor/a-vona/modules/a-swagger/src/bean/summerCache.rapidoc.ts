@@ -4,7 +4,7 @@ import { BeanSummerCacheBase, SummerCache } from 'vona-module-a-summer';
 export type TSummerCacheRapidocKey = any;
 export type TSummerCacheRapidocData = any;
 
-@SummerCache({ mode: 'mem' })
+@SummerCache({ preset: 'mem' })
 export class SummerCacheRapidoc
   extends BeanSummerCacheBase<TSummerCacheRapidocKey, TSummerCacheRapidocData>
   implements ISummerCacheGet<TSummerCacheRapidocKey, TSummerCacheRapidocData> {
