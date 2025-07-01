@@ -265,7 +265,7 @@ import { $locale } from '../.metadata/index.ts';
 class EntityStudent {}
 ```
 
-支持 I18n 国际化
+* 支持 I18n 国际化
 
 （创建语言资源：略）
 
@@ -280,7 +280,9 @@ class EntityStudent {}
 
 ### 2. 举例：fields
 
-将字段 age 验证规则改为：`number，可选，默认值为16`
+将字段`age`验证规则改为：`number，可选，默认值为16`
+
+将字段`name`的 openapi 信息改为：`title: 'Student Name'`
 
 ``` typescript
 @Entity({
@@ -304,7 +306,7 @@ config.onions = {
   entity: {
     'demo-student:student': {
       openapi: { 
-        description: 'Student'
+        description: 'Student',
       },
       fields: {
         age: z.number().optional().default(16),

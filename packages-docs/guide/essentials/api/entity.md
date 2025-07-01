@@ -260,12 +260,12 @@ Provide description information for entity so that it can be displayed in Swagge
 
 ``` typescript
 @Entity({
-openapi: { description: 'Student' },
+  openapi: { description: 'Student' },
 })
 class EntityStudent {}
 ```
 
-Support I18n internationalization
+* Support I18n
 
 (Creating language resources: omitted)
 
@@ -273,20 +273,22 @@ Support I18n internationalization
 import { $locale } from '../.metadata/index.ts';
 
 @Entity({
-openapi: { description: $locale('Student') },
+  openapi: { description: $locale('Student') },
 })
 class EntityStudent {}
 ```
 
 ### 2. Example: fields
 
-Change the validation rule of the field age to: `number, optional, default value is 16`
+Change the validation rules of the field `age` to: `number, optional, default value is 16`
+
+Change the openapi metadata of the field `name` to: `title: 'Student Name'`
 
 ``` typescript
 @Entity({
 fields: {
-age: z.number().optional().default(16),
-name: { title: 'Student Name' },
+  age: z.number().optional().default(16),
+  name: { title: 'Student Name' },
 },
 })
 class EntityStudent {}
@@ -301,17 +303,17 @@ Entity options can be configured in App config
 ``` typescript
 // onions
 config.onions = {
-entity: {
-'demo-student:student': {
-openapi: {
-description: 'Student'
-},
-fields: {
-age: z.number().optional().default(16),
-name: { title: 'Student Name' },
-},
-},
-},
+  entity: {
+    'demo-student:student': {
+      openapi: {
+        description: 'Student',
+      },
+      fields: {
+        age: z.number().optional().default(16),
+        name: { title: 'Student Name' },
+      },
+    },
+  },
 };
 ```
 
@@ -327,4 +329,4 @@ By default, entity inherits from the base class `EntityBase`. EntityBase provide
 |deleted|boolean|Soft deletion|
 |iid|number|Instance ID/Tenant ID|
 
-- id: Use the TableIdentity type to support business systems of any size
+- id: Use the `TableIdentity` type to support business systems of any size
