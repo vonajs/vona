@@ -4,4 +4,5 @@ export type TypeModelWhere<TRecord> = {
 };
 
 // not use Extract<keyof TRecord, 'string'>
-export type TypeModelColumns<TRecord> = (keyof TRecord) | Array<keyof TRecord>;
+export type TypeModelColumn<TRecord> = keyof TRecord | '*';
+export type TypeModelColumns<TRecord> = TypeModelColumn<TRecord> | Array<TypeModelColumn<TRecord>>;
