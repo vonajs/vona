@@ -27,7 +27,7 @@ export interface IModelSelectParams<TRecord> {
   alias?: string;
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
-  columns?: any;
+  columns?: TypeModelColumns<TRecord>;
   joins?: IModelSelectParamsJoin[];
   orders?: IModelSelectParamsOrder[];
   limit?: number;
