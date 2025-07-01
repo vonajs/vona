@@ -4,7 +4,7 @@ import { BeanSummerCacheBase, SummerCache } from 'vona-module-a-summer';
 export type TSummerCacheSwaggerKey = any;
 export type TSummerCacheSwaggerData = any;
 
-@SummerCache()
+@SummerCache({ mode: 'mem' })
 export class SummerCacheSwagger
   extends BeanSummerCacheBase<TSummerCacheSwaggerKey, TSummerCacheSwaggerData>
   implements ISummerCacheGet<TSummerCacheSwaggerKey, TSummerCacheSwaggerData> {
