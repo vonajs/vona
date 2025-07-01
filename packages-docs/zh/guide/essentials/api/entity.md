@@ -315,4 +315,17 @@ config.onions = {
 };
 ```
 
-## 
+## 基类：EntityBase
+
+默认情况下，entity 继承自基类`EntityBase`。EntityBase 内置提供了几个常用字段。可以根据业务需要实现自己的基类
+
+|名称|类型|说明|
+|--|--|--|
+|id|TableIdentity|TableIdentity是string和number的联合类型|
+|createdAt|Date|创建时间|
+|updatedAt|Date|更新时间|
+|deleted|boolean|软删除|
+|iid|number|实例Id/租户Id|
+
+- id：使用 TableIdentity 类型，从而支持任何规模的业务系统
+
