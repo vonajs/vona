@@ -286,10 +286,10 @@ Change the openapi metadata of the field `name` to: `title: 'Student Name'`
 
 ``` typescript
 @Entity({
-fields: {
-  age: z.number().optional().default(16),
-  name: { title: 'Student Name' },
-},
+  fields: {
+    age: z.number().optional().default(16),
+    name: { title: 'Student Name' },
+  },
 })
 class EntityStudent {}
 ```
