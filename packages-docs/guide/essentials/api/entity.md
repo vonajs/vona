@@ -242,3 +242,89 @@ import { $locale } from '../.metadata/index.ts';
 - Chinese
 
 ![](../../../assets/img/openapi/openapi-26.png)
+
+## Entity Options
+
+|Name|Description|
+|--|--|
+|table|The table name corresponding to entity|
+|independent|Whether to display independently in Swagger/Openapi, the default is false|
+|openapi|Metadata related to Swagger/Openapi|
+|fields|Define Fields options|
+
+- independent: If the Controller Action references entity, then the entity is automatically output to Swagger/Openapi. If `independent: true` is specified, the entity will always be output to Swagger/Openapi
+
+### 1. Example: openapi
+
+Provide description information for entity so that it can be displayed in Swagger/Openapi
+
+``` typescript
+@Entity({
+openapi: { description: 'Student' },
+})
+class EntityStudent {}
+```
+
+Support I18n internationalization
+
+(Creating language resources: omitted)
+
+``` typescript
+import { $locale } from '../.metadata/index.ts';
+
+@Entity({
+openapi: { description: $locale('Student') },
+})
+class EntityStudent {}
+```
+
+### 2. Example: fields
+
+Change the validation rule of the field age to: `number, optional, default value is 16`
+
+``` typescript
+@Entity({
+fields: {
+age: z.number().optional().default(16),
+name: { title: 'Student Name' },
+},
+})
+class EntityStudent {}
+```
+
+## App config configuration
+
+Entity options can be configured in App config
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+entity: {
+'demo-student:student': {
+openapi: {
+description: 'Student'
+},
+fields: {
+age: z.number().optional().default(16),
+name: { title: 'Student Name' },
+},
+},
+},
+};
+```
+
+## Base class: EntityBase
+
+By default, entity inherits from the base class `EntityBase`. EntityBase provides several commonly used fields. You can implement your own base class according to business needs
+
+|Name|Type|Description|
+|--|--|--|
+|id|TableIdentity|TableIdentity is a union type of string and number|
+|createdAt|Date|Creation time|
+|updatedAt|Date|Update time|
+|deleted|boolean|Soft deletion|
+|iid|number|Instance ID/Tenant ID|
+
+- id: Use the TableIdentity type to support business systems of any size

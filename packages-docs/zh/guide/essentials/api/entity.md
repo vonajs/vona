@@ -328,4 +328,3 @@ config.onions = {
 |iid|number|实例Id/租户Id|
 
 - id：使用 TableIdentity 类型，从而支持任何规模的业务系统
-
