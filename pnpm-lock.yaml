@@ -27,7 +27,7 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/utils':
-        specifier: ^1.0.34
+        specifier: ^1.0.36
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -280,7 +280,7 @@ importers:
         version: 3.25.61
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.38
+        specifier: ^3.0.40
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -325,7 +325,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.34
+        specifier: ^6.0.36
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -836,7 +836,7 @@ importers:
         specifier: ^5.0.36
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.54
+        specifier: ^5.0.55
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1206,7 +1206,7 @@ importers:
         specifier: ^5.0.44
         version: link:modules/a-core
       vona-module-a-database:
-        specifier: ^5.0.34
+        specifier: ^5.0.35
         version: link:modules/a-database
       vona-module-a-databasedialect:
         specifier: ^5.0.12
@@ -1248,7 +1248,7 @@ importers:
         specifier: ^5.0.17
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.15
@@ -1281,10 +1281,10 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-summer
       vona-module-a-swagger:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:modules/a-swagger
       vona-module-a-upload:
         specifier: ^5.0.12
