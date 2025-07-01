@@ -242,3 +242,77 @@ import { $locale } from '../.metadata/index.ts';
 - 中文
 
 ![](../../../assets/img/openapi/openapi-26.png)
+
+## Entity Options
+
+|名称|说明|
+|--|--|
+|table|entity对应的表名|
+|independent|是否独立显示在Swagger/Openapi中，默认为false|
+|openapi|与Swagger/Openapi相关的元数据|
+|fields|定义Fields options|
+
+- independent: 如果 Controller Action 引用了 entity，那么该 entity 就是自动输出到 Swagger/Openapi 中。如果指定`independent: true`，那么该 entity 就总会输出到 Swagger/Openapi 中
+
+### 1. 举例：openapi
+
+为 entity 提供 description 信息，从而在 Swagger/Openapi 中显示
+
+``` typescript
+@Entity({
+  openapi: { description: 'Student' },
+})
+class EntityStudent {}
+```
+
+支持 I18n 国际化
+
+（创建语言资源：略）
+
+``` typescript
+import { $locale } from '../.metadata/index.ts';
+
+@Entity({
+  openapi: { description: $locale('Student') },
+})
+class EntityStudent {}
+```
+
+### 2. 举例：fields
+
+将字段 age 验证规则改为：`number，可选，默认值为16`
+
+``` typescript
+@Entity({
+  fields: {
+    age: z.number().optional().default(16),
+    name: { title: 'Student Name' },
+  },
+})
+class EntityStudent {}
+```
+
+## App config配置
+
+可以在 App config 中配置 Entity options
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      openapi: { 
+        description: 'Student'
+      },
+      fields: {
+        age: z.number().optional().default(16),
+        name: { title: 'Student Name' },
+      },
+    },
+  },
+};
+```
+
+## 
