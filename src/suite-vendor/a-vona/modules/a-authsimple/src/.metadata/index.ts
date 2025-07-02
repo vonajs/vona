@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeMetaEntity } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
 export * from '../entity/authSimple.ts';
@@ -20,7 +20,7 @@ declare module 'vona-module-a-authsimple' {
 /** entity: begin */
 import type { EntityAuthSimple } from '../entity/authSimple.ts';
 export interface IModuleEntity {
-  'authSimple': TypeMetaEntity<EntityAuthSimple,EntityAuthSimpleTableName>;
+  'authSimple': TypeEntityMeta<EntityAuthSimple,EntityAuthSimpleTableName>;
 }
 /** entity: end */
 /** entity: begin */

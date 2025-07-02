@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeMetaEntity } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** middleware: begin */
 export * from '../bean/middleware.instance.ts';
@@ -60,7 +60,7 @@ declare module 'vona-module-a-instance' {
 /** entity: begin */
 import type { EntityInstance } from '../entity/instance.ts';
 export interface IModuleEntity {
-  'instance': TypeMetaEntity<EntityInstance,EntityInstanceTableName>;
+  'instance': TypeEntityMeta<EntityInstance,EntityInstanceTableName>;
 }
 /** entity: end */
 /** entity: begin */

@@ -20,7 +20,7 @@
         "optionsGlobalInterfaceName": "IDecoratorEntityOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-database",
         "scopeResource": true,
-        "scopeResourceTypeTemplate": "TypeMetaEntity<{{className}},{{className}}TableName>",
+        "scopeResourceTypeTemplate": "TypeEntityMeta<{{className}},{{className}}TableName>",
         "boilerplate": "cli/entity/boilerplate",
         "metadataCustom": "cli/entity/metadata/generate.ts"
       },

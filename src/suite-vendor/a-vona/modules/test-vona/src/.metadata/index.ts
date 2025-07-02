@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeMetaEntity } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** aop: begin */
@@ -68,7 +68,7 @@ declare module 'vona-module-test-vona' {
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
 export interface IModuleEntity {
-  'test': TypeMetaEntity<EntityTest,EntityTestTableName>;
+  'test': TypeEntityMeta<EntityTest,EntityTestTableName>;
 }
 /** entity: end */
 /** entity: begin */

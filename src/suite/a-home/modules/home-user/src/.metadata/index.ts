@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeMetaEntity } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -29,9 +29,9 @@ import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import type { EntityUserRole } from '../entity/userRole.ts';
 export interface IModuleEntity {
-  'role': TypeMetaEntity<EntityRole,EntityRoleTableName>;
-'user': TypeMetaEntity<EntityUser,EntityUserTableName>;
-'userRole': TypeMetaEntity<EntityUserRole,EntityUserRoleTableName>;
+  'role': TypeEntityMeta<EntityRole,EntityRoleTableName>;
+'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
+'userRole': TypeEntityMeta<EntityUserRole,EntityUserRoleTableName>;
 }
 /** entity: end */
 /** entity: begin */

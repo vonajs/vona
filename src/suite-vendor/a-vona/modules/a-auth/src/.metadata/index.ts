@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeMetaEntity } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -25,8 +25,8 @@ declare module 'vona-module-a-auth' {
 import type { EntityAuth } from '../entity/auth.ts';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 export interface IModuleEntity {
-  'auth': TypeMetaEntity<EntityAuth,EntityAuthTableName>;
-'authProvider': TypeMetaEntity<EntityAuthProvider,EntityAuthProviderTableName>;
+  'auth': TypeEntityMeta<EntityAuth,EntityAuthTableName>;
+'authProvider': TypeEntityMeta<EntityAuthProvider,EntityAuthProviderTableName>;
 }
 /** entity: end */
 /** entity: begin */

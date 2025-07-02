@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeMetaEntity } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
 export * from '../entity/version.ts';
@@ -28,9 +28,9 @@ import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
 import type { EntityViewRecord } from '../entity/viewRecord.ts';
 export interface IModuleEntity {
-  'version': TypeMetaEntity<EntityVersion,EntityVersionTableName>;
-'versionInit': TypeMetaEntity<EntityVersionInit,EntityVersionInitTableName>;
-'viewRecord': TypeMetaEntity<EntityViewRecord,EntityViewRecordTableName>;
+  'version': TypeEntityMeta<EntityVersion,EntityVersionTableName>;
+'versionInit': TypeEntityMeta<EntityVersionInit,EntityVersionInitTableName>;
+'viewRecord': TypeEntityMeta<EntityViewRecord,EntityViewRecordTableName>;
 }
 /** entity: end */
 /** entity: begin */

@@ -1,17 +1,17 @@
 import type { Constructable } from 'vona';
-import type { TypeMetaEntity } from '../types/entity.ts';
+import type { TypeEntityMeta } from '../types/entity.ts';
 import type { ITableRecord } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 
-export function $column<T>(classEntity: (() => Constructable<T>) | Constructable<T>, extract: (classEntity: TypeMetaEntity<T>) => any): string {
+export function $column<T>(classEntity: (() => Constructable<T>) | Constructable<T>, extract: (classEntity: TypeEntityMeta<T>) => any): string {
   return $columns(classEntity, extract) as unknown as string;
 }
 
 export function $columns<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
-  extract: (classEntity: TypeMetaEntity<T>) => any | any[] | undefined,
+  extract: (classEntity: TypeEntityMeta<T>) => any | any[] | undefined,
 ): string | string[] | undefined {
   const columnsAll = $columnsAll(classEntity, true);
   return extract(columnsAll as any);
@@ -31,7 +31,7 @@ export function $columnsAll<T>(
 
 export function $tableColumns<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
-  extract: (classEntity: TypeMetaEntity<T>) => any | any[] | undefined,
+  extract: (classEntity: TypeEntityMeta<T>) => any | any[] | undefined,
 ): Record<keyof ITableRecord, string | string[] | undefined> {
   // tableName
   const tableName = $tableName(classEntity);
