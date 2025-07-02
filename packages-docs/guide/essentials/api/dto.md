@@ -2,7 +2,7 @@
 
 ## Create Dto
 
-For example, we create a Dto in the module demo-student: `studentCreate`
+For example, we create a Dto `studentCreate` in the module demo-student
 
 ### 1. Cli command
 
@@ -13,27 +13,27 @@ $ vona :create:bean dto studentCreate --module=demo-student
 ### 2. Menu command
 
 ::: tip
-Right-click menu - [Module path]: `Vona Create/Dto`
+Context Menu - [Module Path]: `Vona Create/Dto`
 :::
 
-## Dto definition
+## Dto Definition
 
 ``` typescript
 @Dto<IDtoOptionsStudentCreate>()
 export class DtoStudentCreate {}
 ```
 
-- Use Dto decorator
+- Use `Dto` decorator
 
 ## @Api.field
 
 Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata
 
-The usage of `@Api.field` in Dto is the same as that of Entity
+The usage of `@Api.field` in `Dto` is the same as that of `Entity`
 
-- See: [Entity](./entity.md)
+  - See: [Entity](./entity.md)
 
-* Example:
+### Example
 
 - `name`: `string, min(3), title: 'Name'(supports I18n)`
 

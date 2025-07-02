@@ -30,9 +30,10 @@ export class DtoStudentCreate {}
 一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据
 
 Dto 中`@Api.field`的使用方式与 Entity 一致
+
   - 参见：[Entity](./entity.md)
 
-* 举例：
+### 举例
 
 - `name`: `string, min(3), title: 'Name'(支持I18n)`
 - `description`: `string, 可选, title: 'Description'(支持I18n)`
