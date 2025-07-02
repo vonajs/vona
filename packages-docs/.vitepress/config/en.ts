@@ -87,6 +87,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Service', link: 'service' },
             { text: 'Model', link: 'model' },
             { text: 'Entity', link: 'entity' },
+            { text: 'Dto', link: 'dto' },
           ],
         },
       ],
