@@ -23,6 +23,10 @@ export function getMappedClassMetadataKeys(target: object): MappedClassMetadataK
   return appMetadata.getMetadata<MappedClassMetadataKeys>(SymbolMappedClassMetadataKeys, target);
 }
 
+export function setMappedClassMetadataKeys(target: object, metadataKeys?: MappedClassMetadataKeys) {
+  return appMetadata.defineMetadata(SymbolMappedClassMetadataKeys, metadataKeys, target);
+}
+
 export function copyPropertiesOfClasses(target: Constructable, sources: Constructable[], filter?: Function) {
   for (const source of sources) {
     copyProperties(target, source, ['constructor', 'prototype', 'length', 'name'], filter); // copy static
@@ -65,6 +69,7 @@ export function copyMetadataOfClasses(target: object, sources: object[], transfo
       Object.assign(metadataKeys, _metadataKeys);
     }
   }
+  setMappedClassMetadataKeys(target, metadataKeys);
   //
   for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
     const metadataKeyOptions = metadataKeys[metadataKey];

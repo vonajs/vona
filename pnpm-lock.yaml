@@ -239,15 +239,6 @@ importers:
       vona-module-cabloy-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/cabloy-socket
-      vona-module-demo-book:
-        specifier: workspace:^
-        version: link:src/module/demo-book
-      vona-module-demo-dish:
-        specifier: workspace:^
-        version: link:src/module/demo-dish
-      vona-module-demo-order:
-        specifier: workspace:^
-        version: link:src/module/demo-order
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
@@ -942,33 +933,6 @@ importers:
         version: 6.0.1
 
   packages-vona/vona-shared:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/demo-book:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/demo-dish:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/demo-order:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
