@@ -56,7 +56,7 @@ class DtoStudentCreate {
 |openapi|与Swagger/Openapi相关的元数据|
 |fields|定义Fields options|
 
-- independent: 如果 Controller Action 引用了 entity，那么该 entity 就是自动输出到 Swagger/Openapi 中。如果指定`independent: true`，那么该 entity 就总会输出到 Swagger/Openapi 中
+- independent: 如果 Controller Action 引用了 dto，那么该 dto 就是自动输出到 Swagger/Openapi 中。如果指定`independent: true`，那么该 dto 就总会输出到 Swagger/Openapi 中
 
 ### 1. 举例：openapi
 
@@ -141,7 +141,7 @@ config.onions = {
 
 ### 1. ClassMapped.pick
 
-从`EntityStudent`中提取`name`和`description`两个字段，生成 Dto`DtoStudentCreate`
+从`EntityStudent`中提取`name`和`description`两个字段，生成 Dto `DtoStudentCreate`
 
 ``` typescript
 class DtoStudentCreate extends ClassMapped.pick(EntityStudent, ['name', 'description']) {}
@@ -149,13 +149,13 @@ class DtoStudentCreate extends ClassMapped.pick(EntityStudent, ['name', 'descrip
 
 ### 2. ClassMapped.partial
 
-将`DtoStudentCreate`中所有字段改为可选，生成 Dto`DtoStudentUpdate`
+将`DtoStudentCreate`中所有字段改为可选，生成 Dto `DtoStudentUpdate`
 
 ``` typescript
 class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate) {}
 ```
 
-将`DtoStudentCreate`中的字段`name`改为可选，生成 Dto`DtoStudentUpdate`
+将`DtoStudentCreate`中的字段`name`改为可选，生成 Dto `DtoStudentUpdate`
 
 ``` typescript
 class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate, ['name']) {}
@@ -163,7 +163,7 @@ class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate, ['name']) {
 
 ### 3. ClassMapped.omit
 
-将`EntityStudent`中的字段`id`排除，生成 Dto`DtoStudentOther`
+将`EntityStudent`中的字段`id`排除，生成 Dto `DtoStudentOther`
 
 ``` typescript
 class DtoStudentOther extends ClassMapped.omit(EntityStudent, ['id']) {}
@@ -171,7 +171,7 @@ class DtoStudentOther extends ClassMapped.omit(EntityStudent, ['id']) {}
 
 ### 4. ClassMapped.mixin
 
-将多个 Class 中的字段进行合并，生成新的 Dto`DtoStudentOther`
+将多个 Class 中的字段进行合并，生成新的 Dto `DtoStudentOther`
 
 ``` typescript
 class DtoStudentOther extends ClassMapped.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
