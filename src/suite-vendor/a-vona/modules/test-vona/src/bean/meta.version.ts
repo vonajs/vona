@@ -6,12 +6,37 @@ import { Meta } from 'vona-module-a-meta';
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
-      // testVona
-      const entity = this.scope.entity.test;
-      await this.bean.model.createTable(entity.$table, table => {
+      // testVonaTest
+      const entityTest = this.scope.entity.test;
+      await this.bean.model.createTable(entityTest.$table, table => {
         table.basicFields();
-        table.string(entity.title, 255);
-        table.string(entity.description, 255);
+        table.string(entityTest.title, 255);
+        table.string(entityTest.description, 255);
+      });
+
+      // testVonaUser
+      const entityUser = this.scope.entity.user;
+      await this.bean.model.createTable(entityUser.$table, table => {
+        table.basicFields();
+        table.string(entityUser.name, 255);
+      });
+      // testVonaRole
+      const entityRole = this.scope.entity.role;
+      await this.bean.model.createTable(entityRole.$table, table => {
+        table.basicFields();
+        table.string(entityRole.name, 255);
+      });
+      // testVonaPost
+      const entityPost = this.scope.entity.post;
+      await this.bean.model.createTable(entityPost.$table, table => {
+        table.basicFields();
+        table.string(entityPost.title, 255);
+      });
+      // testVonaPostContent
+      const entityPostContent = this.scope.entity.postContent;
+      await this.bean.model.createTable(entityPostContent.$table, table => {
+        table.basicFields();
+        table.string(entityPostContent.content, 255);
       });
     }
   }
