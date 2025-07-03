@@ -88,6 +88,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Model', link: 'model' },
             { text: 'Entity', link: 'entity' },
             { text: 'Dto', link: 'dto' },
+            { text: '迁移与变更', link: 'version' },
           ],
         },
       ],
