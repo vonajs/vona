@@ -130,21 +130,44 @@ declare module 'vona-module-test-vona' {
 }
 /** entity: end */
 /** model: begin */
+export * from '../model/post.ts';
+export * from '../model/postContent.ts';
+export * from '../model/role.ts';
 export * from '../model/test.ts';
 export * from '../model/testDynamicTable.ts';
+export * from '../model/user.ts';
 
 import { type IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'test-vona:test': IDecoratorModelOptions;
+      'test-vona:post': IDecoratorModelOptions;
+'test-vona:postContent': IDecoratorModelOptions;
+'test-vona:role': IDecoratorModelOptions;
+'test-vona:test': IDecoratorModelOptions;
 'test-vona:testDynamicTable': IDecoratorModelOptions;
+'test-vona:user': IDecoratorModelOptions;
     }
 
   
 }
 declare module 'vona-module-test-vona' {
   
+        export interface ModelPost {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ModelPostContent {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ModelRole {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -153,15 +176,28 @@ declare module 'vona-module-test-vona' {
         export interface ModelTestDynamicTable {
           /** @internal */
           get scope(): ScopeModuleTestVona;
+        }
+
+        export interface ModelUser {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
         } 
 }
 /** model: end */
 /** model: begin */
+import type { ModelPost } from '../model/post.ts';
+import type { ModelPostContent } from '../model/postContent.ts';
+import type { ModelRole } from '../model/role.ts';
 import type { ModelTest } from '../model/test.ts';
 import type { ModelTestDynamicTable } from '../model/testDynamicTable.ts';
+import type { ModelUser } from '../model/user.ts';
 export interface IModuleModel {
-  'test': ModelTest;
+  'post': ModelPost;
+'postContent': ModelPostContent;
+'role': ModelRole;
+'test': ModelTest;
 'testDynamicTable': ModelTestDynamicTable;
+'user': ModelUser;
 }
 /** model: end */
 /** bean: begin */
