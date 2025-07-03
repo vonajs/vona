@@ -17,6 +17,14 @@ export class ControllerCacheMem extends BeanBase {
     let res;
     let value;
 
+    // set/get
+    this.scope.cacheMem.test.set({ name: 'zhen.nann' }, '__immutable__');
+    value = this.scope.cacheMem.test.get('__immutable__');
+    assert.deepEqual(value, { name: 'zhen.nann' });
+    value.name = 'zhennann';
+    value = this.scope.cacheMem.test.get('__immutable__');
+    assert.deepEqual(value, { name: 'zhen.nann' });
+
     // set
     value = this.scope.cacheMem.test.getset('zhen.nann');
     assert.equal(value, undefined);

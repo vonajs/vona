@@ -45,7 +45,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
-    return cache.get(keyHash, options);
+    const _value = cache.get(keyHash, options);
+    return _value ? JSON.parse(_value) : undefined;
   }
 
   public mget(keys: KEY[], options?: ICacheMemGetOptions): Array<DATA | null | undefined> {
@@ -53,7 +54,10 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const cache = this.__cacheInstance;
     if (!cache) return [];
     const keysHash = this.__getKeysHash(keys);
-    return keysHash.map(keyHash => cache.get(keyHash, options));
+    return keysHash.map(keyHash => {
+      const _value = cache.get(keyHash, options);
+      return _value ? JSON.parse(_value) : undefined;
+    });
   }
 
   public peek(key?: KEY): DATA | null | undefined {
@@ -69,7 +73,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const keyHash = this.__getKeyHash(key);
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
     const broadcastOnSet = options?.broadcastOnSet ?? this._cacheOptions.broadcastOnSet;
-    cache.set(keyHash, value, { ttl });
+    cache.set(keyHash, JSON.stringify(value), { ttl });
     if (broadcastOnSet) {
       if (broadcastOnSet === 'del') {
         this.$scope.cache.broadcast.memDel.emit({
@@ -106,7 +110,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     for (let i = 0; i < keys.length; i++) {
       const keyHash = this.__getKeyHash(keys[i]);
       keysHash.push(keyHash);
-      cache.set(keyHash, values[i], { ttl });
+      cache.set(keyHash, JSON.stringify(values[i]), { ttl });
     }
     if (broadcastOnSet) {
       if (broadcastOnSet === 'del') {
@@ -191,14 +195,14 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
   protected __setRaw(value: DATA, keyHash: string, _key: KEY, options: ICacheMemSetOptions) {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
-    cache.set(keyHash, value, options);
+    cache.set(keyHash, JSON.stringify(value), options);
   }
 
   protected __msetRaw(values: DATA[], keysHash: string[], _keys: KEY[], options: ICacheMemSetOptions) {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     for (let i = 0; i < keysHash.length; i++) {
-      cache.set(keysHash[i], values[i], options);
+      cache.set(keysHash[i], JSON.stringify(values[i]), options);
     }
   }
 
