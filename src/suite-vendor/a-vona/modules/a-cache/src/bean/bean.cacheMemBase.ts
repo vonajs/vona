@@ -64,7 +64,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
-    return cache.peek(keyHash);
+    const _value = cache.peek(keyHash);
+    return _value ? JSON.parse(_value) : undefined;
   }
 
   public set(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): void {
