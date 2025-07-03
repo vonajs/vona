@@ -13,7 +13,6 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
         table.string(entityTest.title, 255);
         table.string(entityTest.description, 255);
       });
-
       // testVonaUser
       const entityUser = this.scope.entity.user;
       await this.bean.model.createTable(entityUser.$table, table => {
@@ -25,6 +24,13 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       await this.bean.model.createTable(entityRole.$table, table => {
         table.basicFields();
         table.string(entityRole.name, 255);
+      });
+      // testVonaRoleUser
+      const entityRoleUser = this.scope.entity.roleUser;
+      await this.bean.model.createTable(entityRoleUser.$table, table => {
+        table.basicFields();
+        table.tableIdentity(entityRoleUser.userId);
+        table.tableIdentity(entityRoleUser.roleId);
       });
       // testVonaPost
       const entityPost = this.scope.entity.post;

@@ -53,11 +53,13 @@ declare module 'vona-module-test-vona' {
 export * from '../entity/post.ts';
 export * from '../entity/postContent.ts';
 export * from '../entity/role.ts';
+export * from '../entity/roleUser.ts';
 export * from '../entity/test.ts';
 export * from '../entity/user.ts';
 import type { IEntityOptionsPost } from '../entity/post.ts';
 import type { IEntityOptionsPostContent } from '../entity/postContent.ts';
 import type { IEntityOptionsRole } from '../entity/role.ts';
+import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
 import 'vona';
@@ -67,6 +69,7 @@ declare module 'vona-module-a-database' {
       'test-vona:post': Omit<IEntityOptionsPost, '_fieldsMore_'>;
 'test-vona:postContent': Omit<IEntityOptionsPostContent, '_fieldsMore_'>;
 'test-vona:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
+'test-vona:roleUser': Omit<IEntityOptionsRoleUser, '_fieldsMore_'>;
 'test-vona:test': Omit<IEntityOptionsTest, '_fieldsMore_'>;
 'test-vona:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
     }
@@ -81,12 +84,14 @@ declare module 'vona-module-test-vona' {
 import type { EntityPost } from '../entity/post.ts';
 import type { EntityPostContent } from '../entity/postContent.ts';
 import type { EntityRole } from '../entity/role.ts';
+import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityTest } from '../entity/test.ts';
 import type { EntityUser } from '../entity/user.ts';
 export interface IModuleEntity {
   'post': TypeEntityMeta<EntityPost,EntityPostTableName>;
 'postContent': TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
 'role': TypeEntityMeta<EntityRole,EntityRoleTableName>;
+'roleUser': TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
 'test': TypeEntityMeta<EntityTest,EntityTestTableName>;
 'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
 }
@@ -95,6 +100,7 @@ export interface IModuleEntity {
 export type EntityPostTableName = 'testVonaPost';
 export type EntityPostContentTableName = 'testVonaPostContent';
 export type EntityRoleTableName = 'testVonaRole';
+export type EntityRoleUserTableName = 'testVonaRoleUser';
 export type EntityTestTableName = 'testVonaTest';
 export type EntityUserTableName = 'testVonaUser';
 declare module 'vona-module-a-database' {
@@ -102,6 +108,7 @@ declare module 'vona-module-a-database' {
     'testVonaPost': never;
 'testVonaPostContent': never;
 'testVonaRole': never;
+'testVonaRoleUser': never;
 'testVonaTest': never;
 'testVonaUser': never;
   }
@@ -120,6 +127,10 @@ declare module 'vona-module-test-vona' {
       fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;
     }
 
+    export interface IEntityOptionsRoleUser {
+      fields?: TypeEntityOptionsFields<EntityRoleUser, IEntityOptionsRoleUser['_fieldsMore_']>;
+    }
+
     export interface IEntityOptionsTest {
       fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;
     }
@@ -133,6 +144,7 @@ declare module 'vona-module-test-vona' {
 export * from '../model/post.ts';
 export * from '../model/postContent.ts';
 export * from '../model/role.ts';
+export * from '../model/roleUser.ts';
 export * from '../model/test.ts';
 export * from '../model/testDynamicTable.ts';
 export * from '../model/user.ts';
@@ -144,6 +156,7 @@ declare module 'vona-module-a-database' {
       'test-vona:post': IDecoratorModelOptions;
 'test-vona:postContent': IDecoratorModelOptions;
 'test-vona:role': IDecoratorModelOptions;
+'test-vona:roleUser': IDecoratorModelOptions;
 'test-vona:test': IDecoratorModelOptions;
 'test-vona:testDynamicTable': IDecoratorModelOptions;
 'test-vona:user': IDecoratorModelOptions;
@@ -168,6 +181,11 @@ declare module 'vona-module-test-vona' {
           get scope(): ScopeModuleTestVona;
         }
 
+        export interface ModelRoleUser {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -188,6 +206,7 @@ declare module 'vona-module-test-vona' {
 import type { ModelPost } from '../model/post.ts';
 import type { ModelPostContent } from '../model/postContent.ts';
 import type { ModelRole } from '../model/role.ts';
+import type { ModelRoleUser } from '../model/roleUser.ts';
 import type { ModelTest } from '../model/test.ts';
 import type { ModelTestDynamicTable } from '../model/testDynamicTable.ts';
 import type { ModelUser } from '../model/user.ts';
@@ -195,6 +214,7 @@ export interface IModuleModel {
   'post': ModelPost;
 'postContent': ModelPostContent;
 'role': ModelRole;
+'roleUser': ModelRoleUser;
 'test': ModelTest;
 'testDynamicTable': ModelTestDynamicTable;
 'user': ModelUser;
