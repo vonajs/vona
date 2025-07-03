@@ -51,17 +51,6 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // ids maybe empty
     if (ids.length === 0) return [];
-    // ids maybe object[]
-    if (typeof ids[0] === 'object') {
-      const result: (TRecord | undefined)[] = [];
-      for (const id of ids) {
-        // get from db directly
-        // item maybe undefined
-        const item = await this._get(id as object);
-        result.push(item);
-      }
-      return result;
-    }
     // params
     const params: IModelSelectParams<TRecord> = {
       where: {

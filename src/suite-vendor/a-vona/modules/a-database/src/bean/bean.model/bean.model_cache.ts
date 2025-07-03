@@ -53,12 +53,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   async mget(
-    ids: (TableIdentity | object)[],
+    ids: TableIdentity[],
     options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord[]>;
   async mget(
     table: keyof ITableRecord,
-    ids: (TableIdentity | object)[],
+    ids: TableIdentity[],
     options?: IModelGetOptions<TRecord>,
   ): Promise<TRecord[]>;
   async mget(table, ids, options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
