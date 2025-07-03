@@ -51,12 +51,18 @@ declare module 'vona-module-test-vona' {
 /** aopMethod: end */
 /** entity: begin */
 export * from '../entity/test.ts';
+export * from '../entity/test1.ts';
+export * from '../entity/user.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
+import type { IEntityOptionsTest } from '../entity/test1.ts';
+import type { IEntityOptionsUser } from '../entity/user.ts';
 import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
       'test-vona:test': Omit<IEntityOptionsTest, '_fieldsMore_'>;
+'test-vona:test1': Omit<IEntityOptionsTest, '_fieldsMore_'>;
+'test-vona:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
     }
 
   
@@ -67,21 +73,37 @@ declare module 'vona-module-test-vona' {
 /** entity: end */
 /** entity: begin */
 import type { EntityTest } from '../entity/test.ts';
+import type { EntityTest1 } from '../entity/test1.ts';
+import type { EntityUser } from '../entity/user.ts';
 export interface IModuleEntity {
   'test': TypeEntityMeta<EntityTest,EntityTestTableName>;
+'test1': TypeEntityMeta<EntityTest1,EntityTest1TableName>;
+'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
 }
 /** entity: end */
 /** entity: begin */
-export type EntityTestTableName = 'testVona';
+export type EntityTestTableName = 'testVonaTest';
+export type EntityTest1TableName = 'testVona';
+export type EntityUserTableName = 'testVonaUser';
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
-    'testVona': never;
+    'testVonaTest': never;
+'testVona': never;
+'testVonaUser': never;
   }
 }
 declare module 'vona-module-test-vona' {
   
     export interface IEntityOptionsTest {
       fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;
+    }
+
+    export interface IEntityOptionsTest1 {
+      fields?: TypeEntityOptionsFields<EntityTest1, IEntityOptionsTest1['_fieldsMore_']>;
+    }
+
+    export interface IEntityOptionsUser {
+      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['_fieldsMore_']>;
     }
 }
 /** entity: end */
