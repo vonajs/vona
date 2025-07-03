@@ -16,12 +16,12 @@ import { BeanModelView } from './bean.model_view.ts';
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */
   async mget(
-    ids: (TableIdentity | object)[],
+    ids: TableIdentity[],
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]>;
   async mget(
     table: keyof ITableRecord,
-    ids: (TableIdentity | object)[],
+    ids: TableIdentity[],
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]>;
   async mget(
