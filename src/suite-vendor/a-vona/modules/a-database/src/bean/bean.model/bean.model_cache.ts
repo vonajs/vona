@@ -7,6 +7,7 @@ import type {
   IModelUpdateOptions,
   ITableRecord,
   TableIdentity,
+  TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
 import { cast, deepExtend } from 'vona';
@@ -88,7 +89,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return false;
       return true;
     });
-    return this.__filterMGetColumns(items, options);
+    return this.__filterMGetColumns(items, options?.columns);
   }
 
   async select(
@@ -160,12 +161,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (!this.__checkCacheKeyValid(where)) {
       // not key
       if (this.__cacheNotKey) {
-        return this.__filterGetColumns(await this.__get_notkey(table, where, options), options);
+        return this.__filterGetColumns(await this.__get_notkey(table, where, options), options?.columns);
       }
       return await super.get(table, where, options);
     }
     // key
-    return this.__filterGetColumns(await this.__get_key(table, where, options), options);
+    return this.__filterGetColumns(await this.__get_key(table, where, options), options?.columns);
   }
 
   async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void>;
@@ -300,16 +301,15 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return item;
   }
 
-  private __filterMGetColumns(items: any[], options?: IModelGetOptions<TRecord>) {
-    if (items.length === 0 || !options?.columns) return items;
+  private __filterMGetColumns(items: any[], columns?: TypeModelColumns<TRecord>) {
+    if (items.length === 0 || !columns) return items;
     return items.map(item => {
-      return this.__filterGetColumns(item, options);
+      return this.__filterGetColumns(item, columns);
     });
   }
 
-  private __filterGetColumns(data, options?: IModelGetOptions<TRecord>) {
-    if (!data || !options?.columns) return data;
-    let columns = options?.columns;
+  private __filterGetColumns(data, columns?: TypeModelColumns<TRecord>) {
+    if (!data || !columns) return data;
     if (!Array.isArray(columns)) columns = cast(columns).split(',');
     const data2 = {};
     for (let column of cast(columns)) {
