@@ -2,10 +2,10 @@ import type { IDecoratorEntityOptions } from 'vona-module-a-database';
 import { Entity, EntityBase } from 'vona-module-a-database';
 import { Api } from 'vona-module-a-openapi';
 
-export interface IEntityOptionsUser extends IDecoratorEntityOptions {}
+export interface IEntityOptionsRole extends IDecoratorEntityOptions {}
 
-@Entity<IEntityOptionsUser>('testVonaUser')
-export class EntityUser extends EntityBase {
+@Entity<IEntityOptionsRole>('testVonaRole')
+export class EntityRole extends EntityBase {
   @Api.field()
   name: string;
 }

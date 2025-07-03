@@ -50,18 +50,24 @@ declare module 'vona-module-test-vona' {
 }
 /** aopMethod: end */
 /** entity: begin */
+export * from '../entity/post.ts';
+export * from '../entity/postContent.ts';
+export * from '../entity/role.ts';
 export * from '../entity/test.ts';
-export * from '../entity/test1.ts';
 export * from '../entity/user.ts';
+import type { IEntityOptionsPost } from '../entity/post.ts';
+import type { IEntityOptionsPostContent } from '../entity/postContent.ts';
+import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
-import type { IEntityOptionsTest } from '../entity/test1.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
 import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'test-vona:test': Omit<IEntityOptionsTest, '_fieldsMore_'>;
-'test-vona:test1': Omit<IEntityOptionsTest, '_fieldsMore_'>;
+      'test-vona:post': Omit<IEntityOptionsPost, '_fieldsMore_'>;
+'test-vona:postContent': Omit<IEntityOptionsPostContent, '_fieldsMore_'>;
+'test-vona:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
+'test-vona:test': Omit<IEntityOptionsTest, '_fieldsMore_'>;
 'test-vona:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
     }
 
@@ -72,34 +78,50 @@ declare module 'vona-module-test-vona' {
 }
 /** entity: end */
 /** entity: begin */
+import type { EntityPost } from '../entity/post.ts';
+import type { EntityPostContent } from '../entity/postContent.ts';
+import type { EntityRole } from '../entity/role.ts';
 import type { EntityTest } from '../entity/test.ts';
-import type { EntityTest1 } from '../entity/test1.ts';
 import type { EntityUser } from '../entity/user.ts';
 export interface IModuleEntity {
-  'test': TypeEntityMeta<EntityTest,EntityTestTableName>;
-'test1': TypeEntityMeta<EntityTest1,EntityTest1TableName>;
+  'post': TypeEntityMeta<EntityPost,EntityPostTableName>;
+'postContent': TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
+'role': TypeEntityMeta<EntityRole,EntityRoleTableName>;
+'test': TypeEntityMeta<EntityTest,EntityTestTableName>;
 'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
 }
 /** entity: end */
 /** entity: begin */
+export type EntityPostTableName = 'testVonaPost';
+export type EntityPostContentTableName = 'testVonaPostContent';
+export type EntityRoleTableName = 'testVonaRole';
 export type EntityTestTableName = 'testVonaTest';
-export type EntityTest1TableName = 'testVona';
 export type EntityUserTableName = 'testVonaUser';
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
-    'testVonaTest': never;
-'testVona': never;
+    'testVonaPost': never;
+'testVonaPostContent': never;
+'testVonaRole': never;
+'testVonaTest': never;
 'testVonaUser': never;
   }
 }
 declare module 'vona-module-test-vona' {
   
-    export interface IEntityOptionsTest {
-      fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;
+    export interface IEntityOptionsPost {
+      fields?: TypeEntityOptionsFields<EntityPost, IEntityOptionsPost['_fieldsMore_']>;
     }
 
-    export interface IEntityOptionsTest1 {
-      fields?: TypeEntityOptionsFields<EntityTest1, IEntityOptionsTest1['_fieldsMore_']>;
+    export interface IEntityOptionsPostContent {
+      fields?: TypeEntityOptionsFields<EntityPostContent, IEntityOptionsPostContent['_fieldsMore_']>;
+    }
+
+    export interface IEntityOptionsRole {
+      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;
+    }
+
+    export interface IEntityOptionsTest {
+      fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;
     }
 
     export interface IEntityOptionsUser {
