@@ -10,9 +10,9 @@ import type {
 } from '../../types/index.ts';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
-import { BeanModelView } from './bean.model_view.ts';
+import { BeanModelCrud } from './bean.model_crud.ts';
 
-export class BeanModelCrudTable<TRecord extends {}> extends BeanModelView<TRecord> {
+export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrud<TRecord> {
   /** not hold undefined item if not exists */
   async mget(
     ids: TableIdentity[],

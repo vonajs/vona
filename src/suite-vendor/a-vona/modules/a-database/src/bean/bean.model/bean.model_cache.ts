@@ -12,12 +12,12 @@ import type {
 } from '../../types/index.ts';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
-import { BeanModel } from '../bean.model.ts';
+import { BeanModelCrud } from './bean.model_crud.ts';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
 
-export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
+export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
 
   private __getCacheName(table: keyof ITableRecord) {
