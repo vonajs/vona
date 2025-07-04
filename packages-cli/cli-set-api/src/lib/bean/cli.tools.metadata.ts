@@ -173,17 +173,32 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
   }
 
   async _generateIndex(modulePath: string) {
-    const jsExport = "export * from './.metadata/index.ts';";
+    let jsContent = '';
     const jsFile = path.join(modulePath, 'src/index.ts');
-    let jsContent;
     if (fse.existsSync(jsFile)) {
       jsContent = (await fse.readFile(jsFile)).toString();
-      if (jsContent.includes(jsExport)) return;
-      jsContent = `${jsExport}\n${jsContent}`;
-      jsContent = jsContent.replace('export {};\n', '');
-    } else {
-      jsContent = `${jsExport}\n`;
     }
+    // jsTypes
+    const jsTypes = "export * from './types/index.ts';";
+    const jsTypesFile = path.join(modulePath, 'src/types/index.ts');
+    if (fse.existsSync(jsTypesFile) && !jsContent.includes(jsTypes)) {
+      jsContent = `${jsTypes}\n${jsContent}`;
+    }
+    // jsLib
+    const jsLib = "export * from './lib/index.ts';";
+    const jsLibFile = path.join(modulePath, 'src/lib/index.ts');
+    if (fse.existsSync(jsLibFile) && !jsContent.includes(jsLib)) {
+      jsContent = `${jsLib}\n${jsContent}`;
+    }
+    // jsMetadata
+    const jsMetadata = "export * from './.metadata/index.ts';";
+    const jsMetadataFile = path.join(modulePath, 'src/.metadata/index.ts');
+    if (fse.existsSync(jsMetadataFile) && !jsContent.includes(jsMetadata)) {
+      jsContent = `${jsMetadata}\n${jsContent}`;
+    }
+    // trim empty
+    jsContent = jsContent.replace('export {};\n', '');
+    // write
     await fse.writeFile(jsFile, jsContent);
   }
 }
