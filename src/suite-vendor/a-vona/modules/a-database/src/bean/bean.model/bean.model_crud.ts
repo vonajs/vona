@@ -14,14 +14,11 @@ import { BeanModelView } from './bean.model_view.ts';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */
-  async mget(
-    ids: TableIdentity[],
-    options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<(TRecord | undefined)[]> {
+  async mget(ids: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord[]> {
     // mget
     const items = await this._mget(undefined, ids, options);
     // filter
-    return items.filter(item => !!item);
+    return items.filter(item => !!item) as any;
   }
 
   /** hold undefined item if not exists */
@@ -56,10 +53,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return result;
   }
 
-  async select(
-    params?: IModelSelectParams<TRecord>,
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord[]> {
+  async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
     return await this._select(undefined, params, options);
   }
 
@@ -101,10 +95,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return (await builder) as TRecord[];
   }
 
-  async get(
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<TRecord | undefined> {
+  async get(where?: TypeModelWhere<TRecord>, options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord | undefined> {
     return await this._get(undefined, where, options);
   }
 
