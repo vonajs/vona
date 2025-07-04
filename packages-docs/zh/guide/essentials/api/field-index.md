@@ -39,10 +39,12 @@ export class MetaIndex extends BeanBase {}
 class MetaIndex {}
 ```
 
-- demoStudent: 数据表名
-- 'name': 字段名，类型为`string | string[]`
+- `demoStudent`: 数据表名
+- `'name'`: 字段名，类型为`string | string[]`
 
 ## 配置字段索引：类型化风格
+
+为了让代码质量更高，更容易维护，我们还可以使用类型化的代码风格
 
 ``` typescript
 @Meta({
@@ -56,3 +58,26 @@ class MetaIndex {}
 class MetaIndex {}
 ```
 
+- `$tableColumns`：构造类型化的表名和字段名
+
+## App config配置
+
+可以在 App config 中配置字段索引
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  meta: {
+    'demo-student:index': {
+      indexes: {
+        ...$tableColumns(
+          () => EntityStudent,
+          entity => entity.name,
+        ),
+      },
+    },
+  },
+};
+```

@@ -35,7 +35,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Scripts', link: 'start/scripts' },
         { text: 'Demo练习场', link: 'start/demo' },
         { text: '框架升级', link: 'start/update' },
-        { text: '字段索引', link: 'start/field-index' },
       ],
     },
     {
@@ -90,6 +89,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Entity', link: 'entity' },
             { text: 'Dto', link: 'dto' },
             { text: '迁移与变更', link: 'version' },
+            { text: '字段索引', link: 'field-index' },
           ],
         },
       ],

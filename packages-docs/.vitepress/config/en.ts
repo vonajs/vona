@@ -76,7 +76,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Service', link: 'service' },
             { text: 'Model', link: 'model' },
             { text: 'Entity', link: 'entity' },
-            { text: 'Field Index', link: 'start/field-index' },
           ],
         },
         {
@@ -90,6 +89,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Entity', link: 'entity' },
             { text: 'Dto', link: 'dto' },
             { text: 'Migration & Changes', link: 'version' },
+            { text: 'Field Index', link: 'field-index' },
           ],
         },
       ],
