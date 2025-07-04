@@ -14,6 +14,7 @@ import { CliDefaultList } from './bean/cli.default.list.ts';
 import { CliInitConfig } from './bean/cli.init.config.ts';
 import { CliInitConstant } from './bean/cli.init.constant.ts';
 import { CliInitError } from './bean/cli.init.error.ts';
+import { CliInitLib } from './bean/cli.init.lib.ts';
 import { CliInitLocale } from './bean/cli.init.locale.ts';
 import { CliInitMain } from './bean/cli.init.main.ts';
 import { CliInitMonkey } from './bean/cli.init.monkey.ts';
@@ -43,6 +44,7 @@ export const beans = {
   'init.monkey': CliInitMonkey,
   'init.main': CliInitMain,
   'init.static': CliInitStatic,
+  'init.lib': CliInitLib,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.crud': CliToolsCrud,

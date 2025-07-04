@@ -14,6 +14,7 @@ import defaultList from './command/default.list.ts';
 import initConfig from './command/init.config.ts';
 import initConstant from './command/init.constant.ts';
 import initError from './command/init.error.ts';
+import initLib from './command/init.lib.ts';
 import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
 import initMonkey from './command/init.monkey.ts';
@@ -50,6 +51,7 @@ export const commands = {
     monkey: initMonkey,
     main: initMain,
     static: initStatic,
+    lib: initLib,
   },
   refactor: {},
   tools: {
