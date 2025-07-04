@@ -43,4 +43,34 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     // ready
     return builder;
   }
+
+  async query(value: Knex.Value): Promise<TRecord[]>;
+  async query(
+    sql: string,
+    binding: Knex.RawBinding,
+  ): Promise<TRecord[]>;
+  async query(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Promise<TRecord[]>;
+  async query(sql, bindings?): Promise<TRecord[]> {
+    const raw = this.connection.raw(sql, bindings);
+    const result = await raw;
+    // dialect
+    return this.dialect.query(result) as unknown as TRecord[];
+  }
+
+  async queryOne(value: Knex.Value): Promise<TRecord | undefined>;
+  async queryOne(
+    sql: string,
+    binding: Knex.RawBinding,
+  ): Promise<TRecord | undefined>;
+  async queryOne(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Promise<TRecord | undefined>;
+  async queryOne(sql, bindings?): Promise<TRecord | undefined> {
+    const res = await this.query(sql, bindings);
+    return res[0] as unknown as TRecord | undefined;
+  }
 }
