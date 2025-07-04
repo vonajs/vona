@@ -90,6 +90,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Dto', link: 'dto' },
             { text: '迁移与变更', link: 'version' },
             { text: '字段索引', link: 'field-index' },
+            { text: '单元测试', link: 'unit-test' },
           ],
         },
       ],

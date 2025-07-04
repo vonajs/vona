@@ -90,6 +90,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Dto', link: 'dto' },
             { text: 'Migration & Changes', link: 'version' },
             { text: 'Field Indexes', link: 'field-index' },
+            { text: 'Unit test', link: 'unit-test' },
           ],
         },
       ],
