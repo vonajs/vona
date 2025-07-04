@@ -202,18 +202,15 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async update(
     data?: Partial<TRecord>,
     options?: IModelUpdateOptionsGeneral<TRecord>,
-  ): Promise<void>;
-  async update(
-    table: keyof ITableRecord,
+  ): Promise<void> {
+    return await this._update(undefined, data, options);
+  }
+
+  protected async _update(
+    table?: keyof ITableRecord,
     data?: Partial<TRecord>,
     options?: IModelUpdateOptionsGeneral<TRecord>,
-  ): Promise<void>;
-  async update(table?, data?, options?): Promise<void> {
-    if (typeof table !== 'string') {
-      options = data;
-      data = table;
-      table = undefined;
-    }
+  ): Promise<void> {
     // table
     table = table || this.getTable('update', [table, data], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -222,18 +219,18 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // where
     const where = Object.assign({}, options?.where);
     // id
-    if (data.id) {
-      where.id = data.id;
-      delete data.id;
+    if (cast(data).id) {
+      cast(where).id = cast(data).id;
+      delete cast(data).id;
     }
     // disableUpdateTime
     if (!this._checkDisableUpdateTimeByOptions(options)) {
-      data.updatedAt = new Date();
+      cast(data).updatedAt = new Date();
     }
     // builder
     const builder = this.builder<TRecord>(table);
     // update
-    builder.update(data);
+    builder.update(data as any);
     // where
     const wheres = this.prepareWhere(builder, table, where, options);
     if (wheres === false) {
@@ -249,24 +246,21 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async delete(
     where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<void>;
-  async delete(
-    table: keyof ITableRecord,
+  ): Promise<void> {
+    return await this._delete(undefined, where, options);
+  }
+
+  protected async _delete(
+    table?: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<void>;
-  async delete(table?, where?, options?): Promise<void> {
-    if (typeof table !== 'string') {
-      options = where;
-      where = table;
-      table = undefined;
-    }
+  ): Promise<void> {
     // table
     table = table || this.getTable('delete', [table, where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
-      await this.update(table, { deleted: true } as any, Object.assign({}, options, { where }));
+      await this._update(table, { deleted: true } as any, Object.assign({}, options, { where }));
       return;
     }
     // builder
