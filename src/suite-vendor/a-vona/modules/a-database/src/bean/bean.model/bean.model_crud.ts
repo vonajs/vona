@@ -128,23 +128,20 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return item as unknown as TRecord;
   }
 
-  async count(params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-  async count(table: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-  async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<BigNumber> {
-    if (typeof table !== 'string') {
-      options = params;
-      params = table;
-      table = undefined;
-    }
+  async count(params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber> {
+    return await this._count(undefined, params, options);
+  }
+
+  protected async _count(table?: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber> {
     // table
     table = table || this.getTable('count', [table, params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
     // table alias
-    table = params.alias ? `${table} as ${params.alias}` : table;
+    table = params.alias ? `${table} as ${params.alias}` as any : table;
     // builder
-    const builder = this.builder<TRecord2>(table);
+    const builder = this.builder<TRecord>(table);
     // count
     this.buildCount(builder, params.count, params.distinct);
     // joins
