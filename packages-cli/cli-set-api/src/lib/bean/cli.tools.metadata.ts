@@ -200,5 +200,6 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
     jsContent = jsContent.replace('export {};\n', '');
     // write
     await fse.writeFile(jsFile, jsContent);
+    await this.helper.formatFile({ fileName: jsFile, logPrefix: 'format: ' });
   }
 }
