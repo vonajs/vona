@@ -17,39 +17,24 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async mget(
     ids: TableIdentity[],
     options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<(TRecord | undefined)[]>;
-  async mget(
-    table: keyof ITableRecord,
-    ids: TableIdentity[],
-    options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<(TRecord | undefined)[]>;
-  async mget(
-    table?,
-    ids?,
-    options?,
   ): Promise<(TRecord | undefined)[]> {
     // mget
-    const items = await this._mget(table, ids, options);
+    const items = await this._mget(undefined, ids, options);
     // filter
     return items.filter(item => !!item);
   }
 
   /** hold undefined item if not exists */
   protected async _mget(
-    table?,
-    ids?,
-    options?,
+    table?: keyof ITableRecord,
+    ids?: TableIdentity[],
+    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]> {
-    if (typeof table !== 'string') {
-      options = ids;
-      ids = table;
-      table = undefined;
-    }
     // table
     table = table || this.getTable('_mget', [table, ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // ids maybe empty
-    if (ids.length === 0) return [];
+    if (!ids || ids.length === 0) return [];
     // params
     const params: IModelSelectParams<TRecord> = {
       where: {
@@ -74,33 +59,22 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async select(
     params?: IModelSelectParams<TRecord>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord[]>;
-  async select(
-    table: keyof ITableRecord,
-    params?: IModelSelectParams<TRecord>,
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord[]>;
-  async select(table?, params?, options?): Promise<TRecord[]> {
-    return await this._select(table, params, options);
+  ): Promise<TRecord[]> {
+    return await this._select(undefined, params, options);
   }
 
   protected async _select(
-    table?,
-    params?,
-    options?,
+    table?: keyof ITableRecord,
+    params?: IModelSelectParams<TRecord>,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]> {
-    if (typeof table !== 'string') {
-      options = params;
-      params = table;
-      table = undefined;
-    }
     // table
     table = table || this.getTable('_select', [table, params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
     // table alias
-    table = params.alias ? `${table} as ${params.alias}` : table;
+    table = params.alias ? `${table} as ${params.alias}` as any : table;
     // builder
     const builder = this.builder<TRecord, TRecord>(table);
     // columns
