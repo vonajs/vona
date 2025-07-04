@@ -140,6 +140,7 @@ const roles = app.bean.passport.getCurrentRoles();
 await app.bean.passport.signinMock();
 await app.bean.passport.signout();
 ```
+
 ### 8. 工具：assert
 
 Vona 使用 Node 内置的断言库
@@ -167,7 +168,7 @@ await app.bean.executor.mockCtx(async () => {
     // do something
   }
 });
-```    
+```
 
 * 使用 catchError
 
@@ -182,6 +183,7 @@ await app.bean.executor.mockCtx(async () => {
   // do somthing on err
 });
 ```
+
 ### 10. 完整的Crud测试
 
 ``` typescript
