@@ -157,39 +157,24 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return this.extractCount(res);
   }
 
-  async insert(
-    data?: Partial<TRecord>,
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord>;
-  async insert(
-    table: keyof ITableRecord,
-    data?: Partial<TRecord>,
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord>;
-  async insert(table?, data?, options?): Promise<TRecord[] | TRecord> {
-    return await this.batchInsert(table, data, options);
+  async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
+    return await this._batchInsert(undefined, data, options) as Promise<TRecord>;
   }
 
-  async batchInsert(
-    data: Partial<TRecord>[],
+  async batchInsert(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+    return await this._batchInsert(undefined, data, options) as Promise<TRecord[]>;
+  }
+
+  protected async _batchInsert(
+    table?: keyof ITableRecord,
+    data?: Partial<TRecord> | Partial<TRecord>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord[]>;
-  async batchInsert(
-    table: keyof ITableRecord,
-    data: Partial<TRecord>[],
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<TRecord[]>;
-  async batchInsert(table?, data?, options?): Promise<TRecord[] | TRecord> {
-    if (typeof table !== 'string') {
-      options = data;
-      data = table;
-      table = undefined;
-    }
+  ): Promise<TRecord | TRecord[]> {
     // table
     table = table || this.getTable('batchInsert', [table, data], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
-    data = data || {};
+    data = data || {} as any;
     const datasTemp = Array.isArray(data) ? data : [data];
     // options
     const datas: any[] = [];
