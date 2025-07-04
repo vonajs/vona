@@ -1,4 +1,4 @@
-# Field Index
+# Field Indexes
 
 Vona provides a mechanism to create field indexes. Just declare the field indexes and the system will automatically create them
 

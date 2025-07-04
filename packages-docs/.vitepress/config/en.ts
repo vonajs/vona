@@ -89,7 +89,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Entity', link: 'entity' },
             { text: 'Dto', link: 'dto' },
             { text: 'Migration & Changes', link: 'version' },
-            { text: 'Field Index', link: 'field-index' },
+            { text: 'Field Indexes', link: 'field-index' },
           ],
         },
       ],
