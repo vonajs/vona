@@ -78,7 +78,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // builder
     const builder = this.builder<TRecord, TRecord>(table);
     // columns
-    builder.select(params.columns);
+    builder.select(params.columns as any);
     // distinct
     this.buildDistinct(builder, params.distinct);
     // joins
@@ -104,30 +104,15 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async get(
     where?: TypeModelWhere<TRecord>,
     options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<TRecord | undefined>;
-  async get(
-    table: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<TRecord | undefined>;
-  async get(
-    table?,
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined> {
-    return await this._get(table, where, options);
+    return await this._get(undefined, where, options);
   }
 
   protected async _get(
-    table?,
+    table?: keyof ITableRecord,
     where?: TypeModelWhere<TRecord>,
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined> {
-    if (typeof table !== 'string') {
-      options = where;
-      where = table;
-      table = undefined;
-    }
     // table
     table = table || this.getTable('_get', [table, where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
