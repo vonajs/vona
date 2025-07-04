@@ -19,6 +19,7 @@ import { CliInitLocale } from './bean/cli.init.locale.ts';
 import { CliInitMain } from './bean/cli.init.main.ts';
 import { CliInitMonkey } from './bean/cli.init.monkey.ts';
 import { CliInitStatic } from './bean/cli.init.static.ts';
+import { CliInitTypes } from './bean/cli.init.types.ts';
 import { CliToolsCrud } from './bean/cli.tools.crud.ts';
 import { CliToolsDeps } from './bean/cli.tools.deps.ts';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
@@ -45,6 +46,7 @@ export const beans = {
   'init.main': CliInitMain,
   'init.static': CliInitStatic,
   'init.lib': CliInitLib,
+  'init.types': CliInitTypes,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.crud': CliToolsCrud,
