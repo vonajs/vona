@@ -7,6 +7,17 @@ import type { EntityBaseEmpty } from '../entityBaseEmpty.ts';
 import type { IModelMethodOptionsGeneral } from '../model.ts';
 import type { ITableRecord } from './table.ts';
 
+export type TypeModelRelationType = 'hasOne' | 'BelongsTo' | 'hasMany' | 'BelongsToMany';
+export type TypeModelRelations<RelationNames extends string = never> = {
+  [key in ((RelationNames extends string ? RelationNames : never))]?: TypeModelRelation;
+};
+
+export interface TypeModelRelation<Model extends BeanModelMeta = BeanModelMeta> {
+  type: 'hasOne';
+  model: (() => Constructable<Model>) | Constructable<Model>;
+  key: string;
+}
+
 export interface IModelRecord {}
 
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
@@ -19,7 +30,7 @@ export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
     methodOptions?: IModelMethodOptionsGeneral,
   ) => string;
 
-export interface IDecoratorModelOptions {
+export interface IDecoratorModelOptions<RelationNames extends string = never> {
   entity?: Constructable<EntityBaseEmpty>;
   table?: TypeDynamicTableName<EntityBaseEmpty> | keyof ITableRecord;
   disableDeleted?: boolean;
@@ -29,6 +40,7 @@ export interface IDecoratorModelOptions {
   cacheKeyAux?: string;
   cacheNotKey?: boolean;
   clientName?: keyof IDatabaseClientRecord;
+  relations?: TypeModelRelations<RelationNames>;
 }
 
 declare module 'vona-module-a-onion' {
