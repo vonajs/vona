@@ -99,77 +99,48 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return await this.mget(ids, options2);
   }
 
-  async get(
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelGetOptions<TRecord>,
-  ): Promise<TRecord | undefined>;
-  async get(
-    table: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelGetOptions<TRecord>,
-  ): Promise<TRecord | undefined>;
-  async get(
-    table?,
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelGetOptions<TRecord>,
-  ): Promise<TRecord | undefined> {
-    if (typeof table !== 'string') {
-      options = where;
-      where = table;
-      table = undefined;
-    }
+  async get(where?: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
     // table
-    table = table || this.getTable('get', [where], options);
+    const table = this.getTable('get', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return await super.get(table, where, options);
+      return await super._get(table, where, options);
     }
     if (cast(where).id && typeof cast(where).id === 'object') {
       // for example: id: { op: '<', val: flowNodeId },
-      return await super.get(table, where, options);
+      return await super._get(table, where, options);
     }
     if (!this.__checkCacheKeyValid(where)) {
       // not key
       if (this.__cacheNotKey) {
         return this.__filterGetColumns(await this.__get_notkey(table, where, options), options?.columns);
       }
-      return await super.get(table, where, options);
+      return await super._get(table, where, options);
     }
     // key
     return this.__filterGetColumns(await this.__get_key(table, where, options), options?.columns);
   }
 
-  async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void>;
-  async update(
-    table: keyof ITableRecord,
-    data?: Partial<TRecord>,
-    options?: IModelUpdateOptions<TRecord>,
-  ): Promise<void>;
-  async update(table?, data?, options?): Promise<void> {
-    if (typeof table !== 'string') {
-      options = data;
-      data = table;
-      table = undefined;
-    }
+  async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void> {
     // table
-    table = table || this.getTable('update', [data], options);
+    const table = this.getTable('update', [data], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return await super.update(table, data, options);
+      return await super._update(table, data, options);
     }
     // check where and get id
     let id;
     if (!options?.where) {
-      if (data.id === undefined) {
+      if (cast(data).id === undefined) {
         throw new Error('id should be specified for update method');
       }
-      id = data.id;
+      id = cast(data).id;
     } else {
-      const where = data.id !== undefined ? Object.assign({}, options?.where, { id: data.id }) : options?.where;
+      const where = cast(data).id !== undefined ? Object.assign({}, options?.where, { id: cast(data).id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const items = await this.select(table, { where, columns: ['id' as any] }, options);
+      const items = await this.select({ where, columns: ['id' as any] }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -182,7 +153,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     }
     // update by id/ids
     options = Object.assign({}, options, { where: { id } });
-    await super.update(table, data, options);
+    await super._update(table, data, options);
     // delete cache
     await this.__deleteCache_key(id, table);
   }
@@ -318,7 +289,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return true;
   }
 
-  private async __deleteCache_key(id, table: keyof ITableRecord) {
+  private async __deleteCache_key(id: TableIdentity | TableIdentity[], table: keyof ITableRecord) {
     const cache = this.__getCacheInstance(table);
     if (Array.isArray(id)) {
       await cache.mdel(id);
