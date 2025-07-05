@@ -8,12 +8,11 @@ export interface IModelOptionsPost extends IDecoratorModelOptions<'postContent'>
 @Model<IModelOptionsPost>({
   entity: EntityPost,
   relations: {
-    postContent: $relation.hasOne(ModelPostContent,'postId'),
-    // postContent: { type: 'hasOne', model: () => ModelPostContent, key: 'postId' },
+    postContent: $relation.hasOne(ModelPostContent, 'postId'),
   },
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
   test() {
-    this.scope.model.postContent.
+    // this.scope.model.postContent
   }
 }

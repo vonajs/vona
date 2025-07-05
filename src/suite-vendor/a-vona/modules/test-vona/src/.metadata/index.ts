@@ -232,6 +232,38 @@ export interface IModuleModel {
 'user': ModelUser;
 }
 /** model: end */
+/** model: begin */
+declare module 'vona-module-test-vona' {
+  export interface ModelPost {
+      $entity: EntityPost;
+      $entityMeta: EntityPostMeta;
+    }
+export interface ModelPostContent {
+      $entity: EntityPostContent;
+      $entityMeta: EntityPostContentMeta;
+    }
+export interface ModelRole {
+      $entity: EntityRole;
+      $entityMeta: EntityRoleMeta;
+    }
+export interface ModelRoleUser {
+      $entity: EntityRoleUser;
+      $entityMeta: EntityRoleUserMeta;
+    }
+export interface ModelTest {
+      $entity: EntityTest;
+      $entityMeta: EntityTestMeta;
+    }
+export interface ModelTestDynamicTable {
+      $entity: EntityTest;
+      $entityMeta: EntityTestMeta;
+    }
+export interface ModelUser {
+      $entity: EntityUser;
+      $entityMeta: EntityUserMeta;
+    }
+}
+/** model: end */
 /** bean: begin */
 export * from '../bean/bean.testCtx.ts';
 

@@ -5,9 +5,15 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const { sceneName, moduleName, globFiles } = options;
   const contentRecords: string[] = [];
   for (const globFile of globFiles) {
-    const { className, beanName } = globFile;
+    const { className, beanName, fileContent } = globFile;
+    const entityName = __parseEntityName(fileContent);
+    const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${toUpperCaseFirstChar(beanName)}`;
     console.log(className, opionsName);
+    contentRecords.push(`export interface ${className} {
+      $entity: ${entityName};
+      $entityMeta: ${entityMetaName};
+    }`);
     // contentRecords.push(`'${tableName}': never;`);
   }
   if (contentRecords.length === 0) return '';
@@ -21,13 +27,10 @@ declare module 'vona-module-${moduleName}' {
   return content;
 }
 
-function __parseTableName(fileContent: string): string | false {
-  let matched = fileContent.match(/@Entity<.*?>\(\{[\s\S]*?table: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
-  if (!matched) {
-    matched = fileContent.match(/@Entity<.*?>\(([^)]*)\)/);
-  }
+function __parseEntityName(fileContent: string): string | false {
+  const matched = fileContent.match(/@Model<.*?>\(\{[\s\S]*?entity: (Entity\S+)[\s\S]*?\}[\s\S]*?\)\s*export class/);
   if (!matched) return false;
-  const tableName = matched[1];
-  if (tableName === '') return '';
-  return tableName.split(',')[0].replaceAll("'", '');
+  const entityName = matched[1];
+  if (entityName === '') return '';
+  return entityName.split(',')[0];
 }
