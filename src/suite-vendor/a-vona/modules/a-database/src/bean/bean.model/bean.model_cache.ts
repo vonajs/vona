@@ -59,7 +59,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return (await super.mget(table, ids, options)) as TRecord[];
+      return (await super._mget(table, ids, options)) as TRecord[];
     }
     // cache
     const cache = this.__getCacheInstance(table);
@@ -71,7 +71,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     });
     // filter disableDeleted
     items = items.filter(item => {
-      if (!item) return false;
       if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return false;
       return true;
     });
