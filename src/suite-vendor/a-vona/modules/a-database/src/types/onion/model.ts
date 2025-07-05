@@ -19,9 +19,9 @@ export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
     methodOptions?: IModelMethodOptionsGeneral,
   ) => string;
 
-export interface IDecoratorModelOptions<T extends EntityBaseEmpty = EntityBaseEmpty> {
-  entity?: Constructable<T>;
-  table?: TypeDynamicTableName<T> | keyof ITableRecord;
+export interface IDecoratorModelOptions {
+  entity?: Constructable<EntityBaseEmpty>;
+  table?: TypeDynamicTableName<EntityBaseEmpty> | keyof ITableRecord;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
@@ -33,7 +33,7 @@ export interface IDecoratorModelOptions<T extends EntityBaseEmpty = EntityBaseEm
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    model: ServiceOnion<IDecoratorModelOptions<EntityBaseEmpty>, keyof IModelRecord>;
+    model: ServiceOnion<IDecoratorModelOptions, keyof IModelRecord>;
   }
 }
 
