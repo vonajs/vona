@@ -35,17 +35,11 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelCrudInner<TRecor
     return await this._batchInsert(undefined, data, options) as Promise<TRecord[]>;
   }
 
-  async update(
-    data?: Partial<TRecord>,
-    options?: IModelUpdateOptionsGeneral<TRecord>,
-  ): Promise<void> {
+  async update(data?: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<void> {
     return await this._update(undefined, data, options);
   }
 
-  async delete(
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<void> {
+  async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral): Promise<void> {
     return await this._delete(undefined, where, options);
   }
 }
