@@ -27,6 +27,24 @@ export class EntityStudent extends EntityBase {}
 - 使用 Entity 装饰器
 - 设置对应的数据表名
 
+## 数据表名
+
+Vona 是模块化系统，不同的模块可以独立管理自身的数据表。为了避免表名的冲突，Vona 约定了数据表名默认的组合机制。当然，你也可以提供自己的表名，但需要自行评估表名冲突的风险
+
+### 1. 常规格式
+
+``` bash
+tableName = moduleName + entityName
+```
+
+比如，模块 demo-student 的 entity `book`，对应的数据表名是：`demoStudentBook`
+
+### 2. 简化规则
+
+如果`entityName`与`moduleName`重名，那么自动去除重复部分
+
+比如，模块 demo-student 的 entity `student`，对应的数据表名是：`demoStudent`
+
 ## @Api.field
 
 一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据

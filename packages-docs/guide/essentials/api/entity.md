@@ -27,6 +27,24 @@ export class EntityStudent extends EntityBase {}
 - Use the `Entity` decorator
 - Set the corresponding data table name
 
+## table name
+
+Vona is a modular system, and different modules can manage their own data tables independently. In order to avoid table name conflicts, Vona has agreed on a default combination mechanism for data table names. Of course, you can also provide your own table name, but you need to evaluate the risk of table name conflicts yourself
+
+### 1. General format
+
+``` bash
+tableName = moduleName + entityName
+```
+
+For example, the entity `book` of the module demo-student has a corresponding data table name of: `demoStudentBook`
+
+### 2. Simplified rules
+
+If `entityName` has the same name as `moduleName`, the duplicate part will be automatically removed
+
+For example, the entity `student` of the module demo-student has a corresponding data table name of: `demoStudent`
+
 ## @Api.field
 
 Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata
