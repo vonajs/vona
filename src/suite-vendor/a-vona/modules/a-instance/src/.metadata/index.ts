@@ -60,11 +60,12 @@ declare module 'vona-module-a-instance' {
 /** entity: begin */
 import type { EntityInstance } from '../entity/instance.ts';
 export interface IModuleEntity {
-  'instance': TypeEntityMeta<EntityInstance,EntityInstanceTableName>;
+  'instance': EntityInstanceMeta;
 }
 /** entity: end */
 /** entity: begin */
 export type EntityInstanceTableName = 'aInstance';
+export type EntityInstanceMeta=TypeEntityMeta<EntityInstance,EntityInstanceTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
     'aInstance': never;

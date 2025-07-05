@@ -25,13 +25,15 @@ declare module 'vona-module-a-auth' {
 import type { EntityAuth } from '../entity/auth.ts';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 export interface IModuleEntity {
-  'auth': TypeEntityMeta<EntityAuth,EntityAuthTableName>;
-'authProvider': TypeEntityMeta<EntityAuthProvider,EntityAuthProviderTableName>;
+  'auth': EntityAuthMeta;
+'authProvider': EntityAuthProviderMeta;
 }
 /** entity: end */
 /** entity: begin */
 export type EntityAuthTableName = 'aAuth';
 export type EntityAuthProviderTableName = 'aAuthProvider';
+export type EntityAuthMeta=TypeEntityMeta<EntityAuth,EntityAuthTableName>;
+export type EntityAuthProviderMeta=TypeEntityMeta<EntityAuthProvider,EntityAuthProviderTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
     'aAuth': never;

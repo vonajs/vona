@@ -29,15 +29,18 @@ import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import type { EntityUserRole } from '../entity/userRole.ts';
 export interface IModuleEntity {
-  'role': TypeEntityMeta<EntityRole,EntityRoleTableName>;
-'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
-'userRole': TypeEntityMeta<EntityUserRole,EntityUserRoleTableName>;
+  'role': EntityRoleMeta;
+'user': EntityUserMeta;
+'userRole': EntityUserRoleMeta;
 }
 /** entity: end */
 /** entity: begin */
 export type EntityRoleTableName = 'homeRole';
 export type EntityUserTableName = 'homeUser';
 export type EntityUserRoleTableName = 'homeUserRole';
+export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
+export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
+export type EntityUserRoleMeta=TypeEntityMeta<EntityUserRole,EntityUserRoleTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
     'homeRole': never;

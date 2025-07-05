@@ -20,11 +20,12 @@ declare module 'vona-module-a-authsimple' {
 /** entity: begin */
 import type { EntityAuthSimple } from '../entity/authSimple.ts';
 export interface IModuleEntity {
-  'authSimple': TypeEntityMeta<EntityAuthSimple,EntityAuthSimpleTableName>;
+  'authSimple': EntityAuthSimpleMeta;
 }
 /** entity: end */
 /** entity: begin */
 export type EntityAuthSimpleTableName = 'aAuthSimple';
+export type EntityAuthSimpleMeta=TypeEntityMeta<EntityAuthSimple,EntityAuthSimpleTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
     'aAuthSimple': never;

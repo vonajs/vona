@@ -28,15 +28,18 @@ import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
 import type { EntityViewRecord } from '../entity/viewRecord.ts';
 export interface IModuleEntity {
-  'version': TypeEntityMeta<EntityVersion,EntityVersionTableName>;
-'versionInit': TypeEntityMeta<EntityVersionInit,EntityVersionInitTableName>;
-'viewRecord': TypeEntityMeta<EntityViewRecord,EntityViewRecordTableName>;
+  'version': EntityVersionMeta;
+'versionInit': EntityVersionInitMeta;
+'viewRecord': EntityViewRecordMeta;
 }
 /** entity: end */
 /** entity: begin */
 export type EntityVersionTableName = 'aVersion';
 export type EntityVersionInitTableName = 'aVersionInit';
 export type EntityViewRecordTableName = 'aViewRecord';
+export type EntityVersionMeta=TypeEntityMeta<EntityVersion,EntityVersionTableName>;
+export type EntityVersionInitMeta=TypeEntityMeta<EntityVersionInit,EntityVersionInitTableName>;
+export type EntityViewRecordMeta=TypeEntityMeta<EntityViewRecord,EntityViewRecordTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
     'aVersion': never;
