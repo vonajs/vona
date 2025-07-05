@@ -154,18 +154,24 @@ export * from '../model/roleUser.ts';
 export * from '../model/test.ts';
 export * from '../model/testDynamicTable.ts';
 export * from '../model/user.ts';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IModelOptionsPost } from '../model/post.ts';
+import type { IModelOptionsPostContent } from '../model/postContent.ts';
+import type { IModelOptionsRole } from '../model/role.ts';
+import type { IModelOptionsRoleUser } from '../model/roleUser.ts';
+import type { IModelOptionsTest } from '../model/test.ts';
+import type { IModelOptionsTestDynamicTable } from '../model/testDynamicTable.ts';
+import type { IModelOptionsUser } from '../model/user.ts';
+import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'test-vona:post': IDecoratorModelOptions;
-'test-vona:postContent': IDecoratorModelOptions;
-'test-vona:role': IDecoratorModelOptions;
-'test-vona:roleUser': IDecoratorModelOptions;
-'test-vona:test': IDecoratorModelOptions;
-'test-vona:testDynamicTable': IDecoratorModelOptions;
-'test-vona:user': IDecoratorModelOptions;
+      'test-vona:post': IModelOptionsPost;
+'test-vona:postContent': IModelOptionsPostContent;
+'test-vona:role': IModelOptionsRole;
+'test-vona:roleUser': IModelOptionsRoleUser;
+'test-vona:test': IModelOptionsTest;
+'test-vona:testDynamicTable': IModelOptionsTestDynamicTable;
+'test-vona:user': IModelOptionsUser;
     }
 
   

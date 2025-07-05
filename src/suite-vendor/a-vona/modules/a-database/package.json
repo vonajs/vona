@@ -29,7 +29,8 @@
         "optionsGlobalInterfaceName": "IDecoratorModelOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-database",
         "scopeResource": true,
-        "boilerplate": "cli/model/boilerplate"
+        "boilerplate": "cli/model/boilerplate",
+        "metadataCustom": "cli/model/metadata/generate.ts"
       },
       "databaseDialect": {
         "beanGeneral": true,
