@@ -14,6 +14,8 @@ export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMet
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL['$entityMeta'] | string;
+  autoload?: boolean;
+  columns;
 }
 
 export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {

@@ -37,8 +37,7 @@ project
 
 Vona has planned the modules/suites so that we can start business development immediately in the specified directory. The following conventions are only suggestions and are not mandatory:
 
-1. Suite `suite/a-demo`: Contains some test or demo code, which can be disabled during build
-2. Suite `suite/a-home`: Development in this suite
+2. Suite `suite/a-home`: Is the starting point for business development, and any code in the suite can be modified as needed
 3. `Grow into a large-scale system`: As the business expands, more suites and modules can be created to split the system business
 
 ## Directory cheat sheet
@@ -49,5 +48,5 @@ Vona has planned the modules/suites so that we can start business development im
 | env                                  | [Env](../../techniques/env/introduction.md)                                                                   |
 | src/front/config/config              | [Config](../../techniques/config/introduction.md)                                                             |
 | src/front/config/locales.ts          | [I18n](../scope/locale.md)                                                                                    |
-| src/backend/demo          | Demo playground                                                                    |
+| src/backend/demo          | [Demo playground](../../start/demo.md)                                                                    |
 | src/backend/typing         | Project-level type definitions                                                                    |

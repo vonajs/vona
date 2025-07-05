@@ -37,7 +37,7 @@ project
 
 Vona 对模块/套件进行了规划，方便我们在约定的目录立即开始业务开发。以下约定仅仅是建议，没有强制约束：
 
-2. 套件`suite/a-home`：业务开发在这个套件中展开
+2. 套件`suite/a-home`： 是业务开发的起点，可以根据需要修改该套件的任何代码
 3. `成长为大型系统`：随着业务的扩展，可以创建更多的套件和模块，对系统业务进行拆分
 
 ## 目录说明
@@ -48,5 +48,5 @@ Vona 对模块/套件进行了规划，方便我们在约定的目录立即开�
 | env                                  | [Env](../../techniques/env/introduction.md)                                                          |
 | src/backend/config/config              | [Config](../../techniques/config/introduction.md)                                                    |
 | src/backend/config/locales.ts          | [I18n国际化](../scope/locale.md)                                                                     |
-| src/backend/demo          | Demo练习场                                                                    |
+| src/backend/demo          | [Demo练习场](../../start/demo.md)                                                                    |
 | src/backend/typing         | 项目级别的类型定义                                                                    |
