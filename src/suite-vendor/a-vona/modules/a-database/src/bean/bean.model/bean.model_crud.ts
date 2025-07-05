@@ -15,10 +15,7 @@ import { BeanModelView } from './bean.model_view.ts';
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */
   async mget(ids: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord[]> {
-    // mget
-    const items = await this._mget(undefined, ids, options);
-    // filter
-    return items.filter(item => !!item) as any;
+    return await this._mget(undefined, ids, options);
   }
 
   /** hold undefined item if not exists */
@@ -26,7 +23,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     table?: keyof ITableRecord,
     ids?: TableIdentity[],
     options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<(TRecord | undefined)[]> {
+  ): Promise<TRecord[]> {
     // table
     table = table || this.getTable('_mget', [ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -45,10 +42,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
     const items = await this._select(table, params, options2);
     // sort
-    const result: (TRecord | undefined)[] = [];
+    const result: TRecord[] = [];
     for (const id of ids) {
       // item maybe undefined
-      result.push(items.find(item => cast(item).id === id));
+      const item = items.find(item => cast(item).id === id);
+      if (item) {
+        result.push(item);
+      }
     }
     return result;
   }
