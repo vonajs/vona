@@ -5,18 +5,8 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDatabaseClientRecord } from '../database.ts';
 import type { EntityBaseEmpty } from '../entityBaseEmpty.ts';
 import type { IModelMethodOptionsGeneral } from '../model.ts';
+import type { TypeModelRelations } from '../relations.ts';
 import type { ITableRecord } from './table.ts';
-
-export type TypeModelRelationType = 'hasOne' | 'BelongsTo' | 'hasMany' | 'BelongsToMany';
-export type TypeModelRelations<RelationNames extends string = never> = {
-  [key in ((RelationNames extends string ? RelationNames : never))]?: TypeModelRelation;
-};
-
-export interface TypeModelRelation<Model extends BeanModelMeta = BeanModelMeta> {
-  type: 'hasOne';
-  model: (() => Constructable<Model>) | Constructable<Model>;
-  key: string;
-}
 
 export interface IModelRecord {}
 

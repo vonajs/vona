@@ -5,6 +5,7 @@ import type {
   IModelMethodOptionsGeneral,
   IModelUpdateOptionsGeneral,
   ITableRecord,
+  TypeEntityMeta,
 } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
@@ -14,6 +15,9 @@ import { $tableName } from '../../lib/columns.ts';
 const SymbolModelDb = Symbol('SymbolModelDb');
 
 export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
+  public $entity: TRecord;
+  public $entityMeta: TypeEntityMeta<TRecord>;
+
   private [SymbolModelDb]: ServiceDb;
 
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
