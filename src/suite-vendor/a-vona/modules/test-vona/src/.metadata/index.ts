@@ -88,12 +88,12 @@ import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityTest } from '../entity/test.ts';
 import type { EntityUser } from '../entity/user.ts';
 export interface IModuleEntity {
-  'post': TypeEntityMeta<EntityPost,EntityPostTableName>;
-'postContent': TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
-'role': TypeEntityMeta<EntityRole,EntityRoleTableName>;
-'roleUser': TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
-'test': TypeEntityMeta<EntityTest,EntityTestTableName>;
-'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
+  'post': EntityPostMeta;
+'postContent': EntityPostContentMeta;
+'role': EntityRoleMeta;
+'roleUser': EntityRoleUserMeta;
+'test': EntityTestMeta;
+'user': EntityUserMeta;
 }
 /** entity: end */
 /** entity: begin */
@@ -103,6 +103,12 @@ export type EntityRoleTableName = 'testVonaRole';
 export type EntityRoleUserTableName = 'testVonaRoleUser';
 export type EntityTestTableName = 'testVonaTest';
 export type EntityUserTableName = 'testVonaUser';
+export type EntityPostMeta=TypeEntityMeta<EntityPost,EntityPostTableName>;
+export type EntityPostContentMeta=TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
+export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
+export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
+export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
+export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
     'testVonaPost': never;
