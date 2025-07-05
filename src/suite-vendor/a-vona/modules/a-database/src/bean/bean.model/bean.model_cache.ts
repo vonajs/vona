@@ -158,27 +158,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     await this.__deleteCache_key(id, table);
   }
 
-  async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void>;
-  async delete(
-    table: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelMethodOptions,
-  ): Promise<void>;
-  async delete(table?, where?, options?): Promise<void> {
-    if (typeof table !== 'string') {
-      options = where;
-      where = table;
-      table = undefined;
-    }
+  async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void> {
     // table
-    table = table || this.getTable('delete', [where], options);
+    const table = this.getTable('delete', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return await super.delete(table, where, options);
+      return await super._delete(table, where, options);
     }
     // check where and get id
-    const items = await this.select(table, { where, columns: ['id' as any] }, options);
+    const items = await this.select({ where, columns: ['id' as any] }, options);
     if (items.length === 0) {
       // donothing
       return;
@@ -190,7 +179,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       id = items.map(item => cast(item).id);
     }
     // delete by id/ids
-    await super.delete(table, { id } as any, options);
+    await super._delete(table, { id } as any, options);
     // delete cache
     await this.__deleteCache_key(id, table);
   }
