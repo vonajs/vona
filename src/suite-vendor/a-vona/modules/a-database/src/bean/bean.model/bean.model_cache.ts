@@ -49,27 +49,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
 
   async clearCache(table?: keyof ITableRecord) {
     if (!this.__cacheEnabled) return;
-    table = table || this.getTable('clearCache', [table], undefined);
+    table = table || this.getTable('clearCache', [], undefined);
     await this.__getCacheInstance(table).clear();
   }
 
-  async mget(
-    ids: TableIdentity[],
-    options?: IModelGetOptions<TRecord>,
-  ): Promise<TRecord[]>;
-  async mget(
-    table: keyof ITableRecord,
-    ids: TableIdentity[],
-    options?: IModelGetOptions<TRecord>,
-  ): Promise<TRecord[]>;
-  async mget(table, ids, options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
-    if (typeof table !== 'string') {
-      options = ids;
-      ids = table;
-      table = undefined;
-    }
+  async mget(ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
     // table
-    table = table || this.getTable('mget', [table, ids], options);
+    const table = this.getTable('mget', [ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
@@ -108,7 +94,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       table = undefined;
     }
     // table
-    table = table || this.getTable('select', [table, params], options);
+    table = table || this.getTable('select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
@@ -148,7 +134,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       table = undefined;
     }
     // table
-    table = table || this.getTable('get', [table, where], options);
+    table = table || this.getTable('get', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
@@ -182,7 +168,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       table = undefined;
     }
     // table
-    table = table || this.getTable('update', [table, data], options);
+    table = table || this.getTable('update', [data], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
@@ -229,7 +215,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       table = undefined;
     }
     // table
-    table = table || this.getTable('delete', [table, where], options);
+    table = table || this.getTable('delete', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
