@@ -195,7 +195,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     const data = await cache.get(cacheKey, {
       get: async () => {
         const options = Object.assign({}, cacheKey.options, { columns: ['id'] });
-        return await super.get(table, cacheKey.where, options as any);
+        return await super._get(table, cacheKey.where, options as any);
       },
       ignoreNull: true,
       db: this.db,
@@ -223,7 +223,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       get: async () => {
         // where: maybe contain aux key
         // disableInstance: use the model options, not use options by outer
-        return await super.get(table, where, { disableDeleted: true });
+        return await super._get(table, where, { disableDeleted: true });
       },
       db: this.db,
     });
