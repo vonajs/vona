@@ -18,34 +18,29 @@ export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMet
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL['$entity'] | string;
-  options?: IModelRelationHasOneOptions<MODEL>;
+  options?: IModelRelationOptionsOne<MODEL>;
 }
 
 export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'belongsTo';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODELSelf['$entity'] | string;
-  options?: IModelRelationBelongsToOptions<MODEL>;
+  options?: IModelRelationOptionsOne<MODEL>;
 }
 
 export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'hasMany';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL['$entity'] | string;
-  options?: IModelRelationHasManyOptions<MODEL>;
+  options?: IModelRelationOptionsMany<MODEL>;
 }
 
-export interface IModelRelationHasOneOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta> {
   autoload?: boolean;
   columns?: TypeModelColumns<MODEL['$entity']>;
 }
 
-export interface IModelRelationBelongsToOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
-  autoload?: boolean;
-  columns?: TypeModelColumns<MODEL['$entity']>;
-}
-
-export interface IModelRelationHasManyOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanModelMeta> {
   autoload?: boolean;
   columns?: TypeModelColumns<MODEL['$entity']>;
   where?: TypeModelWhere<MODEL['$entity']>;
