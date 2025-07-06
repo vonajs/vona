@@ -9,7 +9,9 @@ export type TypeModelRelations<RelationNames extends string = never> = {
 };
 
 export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
-  IModelRelationHasOne<MODELTarget> | IModelRelationBelongsTo<MODELSelf, MODELTarget>;
+  IModelRelationHasOne<MODELTarget> |
+  IModelRelationBelongsTo<MODELSelf, MODELTarget> |
+  IModelRelationHasMany<MODELTarget>;
 
 // use optional ? for app config
 export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta> {
@@ -24,6 +26,13 @@ export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanM
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODELSelf['$entity'] | string;
   options?: IModelRelationBelongsToOptions<MODEL>;
+}
+
+export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta> {
+  type?: 'hasMany';
+  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  key?: keyof MODEL['$entity'] | string;
+  options?: IModelRelationHasManyOptions<MODEL>;
 }
 
 export interface IModelRelationHasOneOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
