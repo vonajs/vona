@@ -21,6 +21,6 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
   test() {
-    // this.scope.model.postContent
+    this.scope.model.post.select({ include: { user: '' } });
   }
 }

@@ -233,34 +233,42 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database'; 
 declare module 'vona-module-test-vona' {
   export interface ModelPost {
       $entity: EntityPost;
       $entityMeta: EntityPostMeta;
+      select(params?: IModelSelectParams<EntityPost,IModelOptionsPost>, options?: IModelMethodOptions): Promise<EntityPost[]>;
     }
 export interface ModelPostContent {
       $entity: EntityPostContent;
       $entityMeta: EntityPostContentMeta;
+      select(params?: IModelSelectParams<EntityPostContent,IModelOptionsPostContent>, options?: IModelMethodOptions): Promise<EntityPostContent[]>;
     }
 export interface ModelRole {
       $entity: EntityRole;
       $entityMeta: EntityRoleMeta;
+      select(params?: IModelSelectParams<EntityRole,IModelOptionsRole>, options?: IModelMethodOptions): Promise<EntityRole[]>;
     }
 export interface ModelRoleUser {
       $entity: EntityRoleUser;
       $entityMeta: EntityRoleUserMeta;
+      select(params?: IModelSelectParams<EntityRoleUser,IModelOptionsRoleUser>, options?: IModelMethodOptions): Promise<EntityRoleUser[]>;
     }
 export interface ModelTest {
       $entity: EntityTest;
       $entityMeta: EntityTestMeta;
+      select(params?: IModelSelectParams<EntityTest,IModelOptionsTest>, options?: IModelMethodOptions): Promise<EntityTest[]>;
     }
 export interface ModelTestDynamicTable {
       $entity: EntityTest;
       $entityMeta: EntityTestMeta;
+      select(params?: IModelSelectParams<EntityTest,IModelOptionsTestDynamicTable>, options?: IModelMethodOptions): Promise<EntityTest[]>;
     }
 export interface ModelUser {
       $entity: EntityUser;
       $entityMeta: EntityUserMeta;
+      select(params?: IModelSelectParams<EntityUser,IModelOptionsUser>, options?: IModelMethodOptions): Promise<EntityUser[]>;
     }
 }
 /** model: end */

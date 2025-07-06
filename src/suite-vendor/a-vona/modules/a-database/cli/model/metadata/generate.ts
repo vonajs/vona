@@ -6,19 +6,21 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const contentRecords: string[] = [];
   for (const globFile of globFiles) {
     const { className, beanName, fileContent } = globFile;
+    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const entityName = __parseEntityName(fileContent);
     const entityMetaName = `${entityName}Meta`;
-    const opionsName = `IModelOptions${toUpperCaseFirstChar(beanName)}`;
-    console.log(className, opionsName);
+    const opionsName = `IModelOptions${beanNameCapitalize}`;
     contentRecords.push(`export interface ${className} {
       $entity: ${entityName};
       $entityMeta: ${entityMetaName};
+      select(params?: IModelSelectParams<${entityName},${opionsName}>, options?: IModelMethodOptions): Promise<${entityName}[]>;
     }`);
     // contentRecords.push(`'${tableName}': never;`);
   }
   if (contentRecords.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database'; 
 declare module 'vona-module-${moduleName}' {
   ${contentRecords.join('\n')}
 }

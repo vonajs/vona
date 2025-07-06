@@ -2,6 +2,7 @@ import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
+import type { IDecoratorModelOptions } from './onion/model.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
 
@@ -54,3 +55,7 @@ export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanMod
   limit?: number;
   offset?: number;
 }
+
+export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions> = {
+  [relationName in keyof ModelOptions['relations'] ]?: string;
+};
