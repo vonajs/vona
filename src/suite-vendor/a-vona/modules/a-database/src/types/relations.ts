@@ -5,6 +5,9 @@ import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
+export interface TypeModelRelations {
+  [key: string]: TypeModelRelation<any, any>;
+}
 
 export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
   IModelRelationHasOne<MODELTarget> |
@@ -57,5 +60,11 @@ export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanMod
 }
 
 export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions> = {
-  [relationName in keyof ModelOptions['relations'] ]?: string;
+  [relationName in keyof ModelOptions['relations'] ]?: boolean | TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
 };
+
+export type TypeModelParamsRelationOptions<Relation> = Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>;
+
+export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : never;
+export type TypeUtilGetRelationModel<Relation> = Relation extends { model?: infer MODEL } ? MODEL : never;
+export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : never;
