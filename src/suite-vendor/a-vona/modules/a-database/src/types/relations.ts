@@ -31,3 +31,8 @@ export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanM
   autoload?: boolean;
   columns?: TypeModelColumns<MODEL['$entity']>;
 }
+
+export interface IModelRelationBelongsToOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
+  autoload?: boolean;
+  columns?: TypeModelColumns<MODEL['$entity']>;
+}
