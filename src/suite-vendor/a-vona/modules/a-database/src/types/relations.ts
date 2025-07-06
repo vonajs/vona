@@ -4,9 +4,6 @@ import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
-export type TypeModelRelations<RelationNames extends string = never> = {
-  [key in ((RelationNames extends string ? RelationNames : never))]?: TypeModelRelation;
-};
 
 export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
   IModelRelationHasOne<MODELTarget> |

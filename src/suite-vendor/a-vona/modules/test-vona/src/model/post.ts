@@ -1,10 +1,16 @@
-import type { IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IDecoratorModelOptions, IModelRelationBelongsTo, IModelRelationHasOne } from 'vona-module-a-database';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityPost } from '../entity/post.ts';
 import { ModelPostContent } from './postContent.ts';
 import { ModelUser } from './user.ts';
 
-export interface IModelOptionsPost extends IDecoratorModelOptions<'postContent' | 'user'> {}
+// <'postContent' | 'user'>
+export interface IModelOptionsPost extends IDecoratorModelOptions {
+  relations: {
+    postContent: IModelRelationHasOne<ModelPostContent>;
+    user: IModelRelationBelongsTo<ModelPost, ModelUser>;
+  };
+}
 
 @Model<IModelOptionsPost>({
   entity: EntityPost,
