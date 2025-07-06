@@ -1,4 +1,4 @@
-import type { Constructable } from 'vona';
+import type { Constructable, TypeClassOfClassLike } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -59,12 +59,16 @@ export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanMod
   offset?: number;
 }
 
-export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions> = {
-  [relationName in keyof ModelOptions['relations'] ]?: boolean | TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
-};
+export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions | unknown> = ModelOptions extends IDecoratorModelOptions ? {
+  [relationName in keyof ModelOptions['relations'] ]?: TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
+} : never;
 
-export type TypeModelParamsRelationOptions<Relation> = Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>;
+export type TypeModelParamsRelationOptions<Relation> =
+  boolean
+  | Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>
+  & { include?: TypeModelParamsInclude<TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>> };
 
-export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : never;
-export type TypeUtilGetRelationModel<Relation> = Relation extends { model?: infer MODEL } ? MODEL : never;
-export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : never;
+export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : unknown;
+export type TypeUtilGetRelationModel<Relation> = TypeClassOfClassLike<Relation extends { model?: infer MODEL } ? MODEL : unknown>;
+export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : unknown;
+export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model['$modelOptions'] : unknown;

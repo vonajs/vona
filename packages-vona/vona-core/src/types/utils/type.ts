@@ -4,4 +4,5 @@ export interface Type<T = any> extends Function {
   new (...args: any[]): T;
 }
 
-export type TypeClassOfClassLike<ClassLike> = ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result : never;
+export type TypeClassOfClassLike<ClassLike> =
+  ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result : unknown;
