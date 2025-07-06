@@ -22,7 +22,7 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 export class ModelPost extends BeanModelBase<EntityPost> {
   test() {
     this.scope.model.post.select({ include: {
-      postContent: { columns: ['content'] },
+      postContent: { 'columns':['content'] },
       // user: { type: 'belongsTo' },
     } });
   }

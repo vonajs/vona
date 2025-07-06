@@ -13,6 +13,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentRecords.push(`export interface ${className} {
       $entity: ${entityName};
       $entityMeta: ${entityMetaName};
+      // $modelOptions: ${opionsName};
       select(params?: IModelSelectParams<${entityName},${opionsName}>, options?: IModelMethodOptions): Promise<${entityName}[]>;
     }`);
     // contentRecords.push(`'${tableName}': never;`);
