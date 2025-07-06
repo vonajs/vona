@@ -32,6 +32,15 @@ export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMe
   options?: IModelRelationOptionsMany<MODEL>;
 }
 
+export interface IModelRelationBelongsToMany<MODELMiddle extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
+  type?: 'belongsToMany';
+  modelMiddle?: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>;
+  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  keyFrom?: keyof MODELMiddle['$entity'] | string;
+  keyTo?: keyof MODELMiddle['$entity'] | string;
+  options?: IModelRelationOptionsMany<MODEL>;
+}
+
 export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta> {
   autoload?: boolean;
   columns?: TypeModelColumns<MODEL['$entity']>;
