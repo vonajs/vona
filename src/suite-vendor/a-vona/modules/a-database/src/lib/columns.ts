@@ -1,20 +1,15 @@
 import type { Constructable } from 'vona';
-import type { TypeEntityMeta } from '../types/entity.ts';
 import type { ITableRecord } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 
-export function $column<T>(classEntity: (() => Constructable<T>) | Constructable<T>, extract: (classEntity: TypeEntityMeta<T>) => any): string {
-  return $columns(classEntity, extract) as unknown as string;
+export function $column<T>(key: keyof T): keyof T {
+  return key;
 }
 
-export function $columns<T>(
-  classEntity: (() => Constructable<T>) | Constructable<T>,
-  extract: (classEntity: TypeEntityMeta<T>) => any | any[] | undefined,
-): string | string[] | undefined {
-  const columnsAll = $columnsAll(classEntity, true);
-  return extract(columnsAll as any);
+export function $columns<T>(key?: (keyof T) | Array<keyof T> | undefined): (keyof T) | Array<keyof T> | undefined {
+  return key;
 }
 
 export function $columnsAll<T>(
@@ -31,8 +26,8 @@ export function $columnsAll<T>(
 
 export function $tableColumns<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
-  key?: keyof T | Array<keyof T> | undefined,
-): Record<keyof ITableRecord, keyof T | Array<keyof T> | undefined> {
+  key?: (keyof T) | Array<keyof T> | undefined,
+): Record<keyof ITableRecord, (keyof T) | Array<keyof T> | undefined> {
   // tableName
   const tableName = $tableName(classEntity);
   return { [tableName]: key } as any;
