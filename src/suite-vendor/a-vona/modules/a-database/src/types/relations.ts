@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { TypeModelColumns } from './modelPro.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
 export type TypeModelRelations<RelationNames extends string = never> = {
@@ -13,13 +14,13 @@ export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, M
 export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  key?: keyof MODEL['$entityMeta'] | string;
+  key?: keyof MODEL['$entity'] | string;
   autoload?: boolean;
-  columns;
+  columns?: TypeModelColumns<MODEL['$entity']>;
 }
 
 export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'belongsTo';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  key?: keyof MODELSelf['$entityMeta'] | string;
+  key?: keyof MODELSelf['$entity'] | string;
 }
