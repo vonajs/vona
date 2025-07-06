@@ -1,12 +1,14 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelRelationBelongsTo, IModelRelationHasOne } from '../types/relations.ts';
+import type { IModelRelationBelongsTo, IModelRelationHasOne, IModelRelationHasOneOptions } from '../types/relations.ts';
 
 export function hasOne<MODEL extends BeanModelMeta>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL['$entity'],
+  options?: IModelRelationHasOneOptions<MODEL>,
 ): IModelRelationHasOne {
-  return { type: 'hasOne', model: classModel, key } as any;
+  options = options ?? {};
+  return { type: 'hasOne', model: classModel, key, ...options } as any;
 }
 
 export function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta>(

@@ -19,8 +19,15 @@ export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMet
   columns?: TypeModelColumns<MODEL['$entity']>;
 }
 
+export interface IModelRelationHasOneOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
+  autoload?: boolean;
+  columns?: TypeModelColumns<MODEL['$entity']>;
+}
+
 export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'belongsTo';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODELSelf['$entity'] | string;
+  autoload?: boolean;
+  columns?: TypeModelColumns<MODEL['$entity']>;
 }
