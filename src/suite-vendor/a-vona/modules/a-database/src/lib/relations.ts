@@ -42,4 +42,5 @@ export const $relation = {
   hasOne,
   belongsTo,
   hasMany,
+  belongsToMany,
 };

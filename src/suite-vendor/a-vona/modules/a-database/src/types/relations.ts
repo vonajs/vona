@@ -14,21 +14,21 @@ export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, M
 export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  key?: keyof MODEL['$entity'] | string;
+  key?: keyof MODEL['$entity'];
   options?: IModelRelationOptionsOne<MODEL>;
 }
 
 export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'belongsTo';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  key?: keyof MODELSelf['$entity'] | string;
+  key?: keyof MODELSelf['$entity'];
   options?: IModelRelationOptionsOne<MODEL>;
 }
 
 export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta> {
   type?: 'hasMany';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  key?: keyof MODEL['$entity'] | string;
+  key?: keyof MODEL['$entity'];
   options?: IModelRelationOptionsMany<MODEL>;
 }
 
@@ -36,8 +36,8 @@ export interface IModelRelationBelongsToMany<MODELMiddle extends BeanModelMeta =
   type?: 'belongsToMany';
   modelMiddle?: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>;
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  keyFrom?: keyof MODELMiddle['$entity'] | string;
-  keyTo?: keyof MODELMiddle['$entity'] | string;
+  keyFrom?: keyof MODELMiddle['$entity'];
+  keyTo?: keyof MODELMiddle['$entity'];
   options?: IModelRelationOptionsMany<MODEL>;
 }
 
