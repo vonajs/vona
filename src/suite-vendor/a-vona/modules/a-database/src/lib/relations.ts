@@ -7,8 +7,7 @@ export function hasOne<MODEL extends BeanModelMeta>(
   key: keyof MODEL['$entity'],
   options?: IModelRelationHasOneOptions<MODEL>,
 ): IModelRelationHasOne {
-  options = options ?? {};
-  return { type: 'hasOne', model: classModel, key, ...options } as any;
+  return { type: 'hasOne', model: classModel, key, options } as any;
 }
 
 export function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta>(
@@ -17,8 +16,16 @@ export function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanMod
   key: keyof MODELSelf['$entity'],
   options?: IModelRelationBelongsToOptions<MODEL>,
 ): IModelRelationBelongsTo {
+  return { type: 'belongsTo', model: classModel, key, options } as any;
+}
+
+export function hasMany<MODEL extends BeanModelMeta>(
+  classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
+  key: keyof MODEL['$entity'],
+  options?: IModelRelationHasManyOptions<MODEL>,
+): IModelRelationHasMany {
   options = options ?? {};
-  return { type: 'belongsTo', model: classModel, key, ...options } as any;
+  return { type: 'hasMany', model: classModel, key, ...options } as any;
 }
 
 export const $relation = {

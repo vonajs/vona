@@ -21,7 +21,7 @@ export type IModelSelectParamsJoin = [
 // order
 export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
-export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
+export type IModelSelectParamsOrder<TRecord> = [keyof TRecord, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
 export interface IModelSelectParams<TRecord> {
   alias?: string;
@@ -29,7 +29,7 @@ export interface IModelSelectParams<TRecord> {
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
   joins?: IModelSelectParamsJoin[];
-  orders?: IModelSelectParamsOrder[];
+  orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;
   page?: IModelSelectParamsPage;

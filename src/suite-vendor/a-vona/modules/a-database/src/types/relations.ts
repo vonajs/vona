@@ -1,6 +1,7 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { TypeModelColumns } from './modelPro.ts';
+import type { IModelSelectParamsOrder } from './model.ts';
+import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
 export type TypeModelRelations<RelationNames extends string = never> = {
@@ -15,8 +16,14 @@ export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMet
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL['$entity'] | string;
-  autoload?: boolean;
-  columns?: TypeModelColumns<MODEL['$entity']>;
+  options?: IModelRelationHasOneOptions<MODEL>;
+}
+
+export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
+  type?: 'belongsTo';
+  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  key?: keyof MODELSelf['$entity'] | string;
+  options?: IModelRelationBelongsToOptions<MODEL>;
 }
 
 export interface IModelRelationHasOneOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
@@ -24,15 +31,16 @@ export interface IModelRelationHasOneOptions<MODEL extends BeanModelMeta = BeanM
   columns?: TypeModelColumns<MODEL['$entity']>;
 }
 
-export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
-  type?: 'belongsTo';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
-  key?: keyof MODELSelf['$entity'] | string;
+export interface IModelRelationBelongsToOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
   autoload?: boolean;
   columns?: TypeModelColumns<MODEL['$entity']>;
 }
 
-export interface IModelRelationBelongsToOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationHasManyOptions<MODEL extends BeanModelMeta = BeanModelMeta> {
   autoload?: boolean;
   columns?: TypeModelColumns<MODEL['$entity']>;
+  where?: TypeModelWhere<MODEL['$entity']>;
+  orders?: IModelSelectParamsOrder<MODEL['$entity']>[];
+  limit?: number;
+  offset?: number;
 }
