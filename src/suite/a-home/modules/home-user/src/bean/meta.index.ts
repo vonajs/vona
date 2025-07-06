@@ -8,9 +8,9 @@ import { EntityUserRole } from '../entity/userRole.ts';
 
 @Meta<IMetaOptionsIndex>({
   indexes: {
-    ...$tableColumns(() => EntityUser, entity => entity.name),
-    ...$tableColumns(() => EntityRole, entity => entity.name),
-    ...$tableColumns(() => EntityUserRole, entity => [entity.userId, entity.roleId]),
+    ...$tableColumns(() => EntityUser, 'name'),
+    ...$tableColumns(() => EntityRole, 'name'),
+    ...$tableColumns(() => EntityUserRole, ['userId', 'roleId']),
   },
 })
 export class MetaIndex extends BeanBase {}

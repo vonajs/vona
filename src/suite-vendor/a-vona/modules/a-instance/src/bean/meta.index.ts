@@ -6,10 +6,7 @@ import { EntityInstance } from '../entity/instance.ts';
 
 @Meta<IMetaOptionsIndex>({
   indexes: {
-    ...$tableColumns(
-      () => EntityInstance,
-      entity => entity.name,
-    ),
+    ...$tableColumns(() => EntityInstance, 'name'),
   },
 })
 export class MetaIndex extends BeanBase {}

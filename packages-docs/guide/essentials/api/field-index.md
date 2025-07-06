@@ -49,10 +49,7 @@ In order to make the code higher quality and easier to maintain, we can also use
 ``` typescript
 @Meta({
   indexes: {
-    ...$tableColumns(
-      () => EntityStudent,
-      entity => entity.name,
-    ),
+    ...$tableColumns(() => EntityStudent, 'name'),
   },
 })
 class MetaIndex {}
@@ -72,10 +69,7 @@ config.onions = {
   meta: {
     'demo-student:index': {
       indexes: {
-        ...$tableColumns(
-          () => EntityStudent,
-          entity => entity.name,
-        ),
+        ...$tableColumns(() => EntityStudent, 'name'),
       },
     },
   },
