@@ -26,7 +26,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
         columns: ['content'],
         include: { post: { include: { user: { columns: 'name' } } } },
       },
-      // user: { type: 'belongsTo' },
+      user: { columns: 'name' },
     } });
   }
 }
