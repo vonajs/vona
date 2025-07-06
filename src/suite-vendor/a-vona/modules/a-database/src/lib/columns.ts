@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { ITableRecord } from '../types/index.ts';
+import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
@@ -12,6 +12,14 @@ export function $columns<T>(key?: (keyof T) | Array<keyof T> | undefined): (keyo
   return key;
 }
 
+export function $columnsAll<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+  withTableName: true,
+): TypeEntityMeta<T>;
+export function $columnsAll<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+  withTableName?: false,
+): Omit<TypeEntityMeta<T>, '$table'>;
 export function $columnsAll<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   withTableName?: boolean,
