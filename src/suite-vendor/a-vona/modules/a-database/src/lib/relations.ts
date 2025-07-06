@@ -4,14 +4,14 @@ import type { IModelRelationBelongsTo, IModelRelationHasOne } from '../types/rel
 
 export function hasOne<MODEL extends BeanModelMeta>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  key: keyof MODEL['$entityMeta'],
+  key: keyof MODEL['$entity'],
 ): IModelRelationHasOne {
   return { type: 'hasOne', model: classModel, key } as any;
 }
 
 export function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  key: keyof MODELSelf['$entityMeta'],
+  key: keyof MODELSelf['$entity'],
 ): IModelRelationBelongsTo {
   return { type: 'belongsTo', model: classModel, key } as any;
 }

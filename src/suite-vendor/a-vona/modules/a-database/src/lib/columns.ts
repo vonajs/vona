@@ -31,13 +31,11 @@ export function $columnsAll<T>(
 
 export function $tableColumns<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
-  extract: (classEntity: TypeEntityMeta<T>) => any | any[] | undefined,
-): Record<keyof ITableRecord, string | string[] | undefined> {
+  key?: keyof T | Array<keyof T> | undefined,
+): Record<keyof ITableRecord, keyof T | Array<keyof T> | undefined> {
   // tableName
   const tableName = $tableName(classEntity);
-  // columns
-  const names = $columns(classEntity, extract);
-  return { [tableName]: names } as any;
+  return { [tableName]: key } as any;
 }
 
 export function $tableName<T>(
