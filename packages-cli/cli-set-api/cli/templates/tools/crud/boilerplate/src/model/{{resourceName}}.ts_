@@ -1,5 +1,8 @@
+import type { IDecoratorModelOptions } from 'vona-module-a-database';
 import { BeanModelBase, Model } from 'vona-module-a-database';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 
-@Model({ entity: Entity<%=argv.resourceNameCapitalize%> })
+export interface IModelOptions<%=argv.resourceNameCapitalize%> extends IDecoratorModelOptions<'postContent'> {}
+
+@Model<IModelOptions<%=argv.resourceNameCapitalize%>>({ entity: Entity<%=argv.resourceNameCapitalize%> })
 export class Model<%=argv.resourceNameCapitalize%> extends BeanModelBase<Entity<%=argv.resourceNameCapitalize%>> {}
