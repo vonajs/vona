@@ -124,7 +124,7 @@ export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorMod
 
 export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
   [RelationName in (keyof TModelOptions['relations'])]:
-  TInclude extends {} ?
+  TInclude[RelationName] extends {} | boolean ?
     TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
     TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
 };

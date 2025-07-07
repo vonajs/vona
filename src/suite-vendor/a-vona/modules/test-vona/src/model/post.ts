@@ -48,9 +48,9 @@ export class ModelPost extends BeanModelBase<EntityPost> {
 
     const items2 = await this.scope.model.post.select({
       with: {
-        // user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+        user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
       },
     });
-    console.log(items2[0]);
+    console.log(items2[0].);
   }
 }
