@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
 import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
@@ -13,9 +14,9 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'home-user:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
-'home-user:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
-'home-user:userRole': Omit<IEntityOptionsUserRole, '_fieldsMore_'>;
+      'home-user:role': IEntityOptionsRole;
+'home-user:user': IEntityOptionsUser;
+'home-user:userRole': IEntityOptionsUserRole;
     }
 
   
@@ -51,15 +52,15 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-home-user' {
   
     export interface IEntityOptionsRole {
-      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsUser {
-      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsUserRole {
-      fields?: TypeEntityOptionsFields<EntityUserRole, IEntityOptionsUserRole['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityUserRole, IEntityOptionsUserRole[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** entity: end */
@@ -67,14 +68,16 @@ declare module 'vona-module-home-user' {
 export * from '../model/role.ts';
 export * from '../model/user.ts';
 export * from '../model/userRole.ts';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IModelOptionsRole } from '../model/role.ts';
+import type { IModelOptionsUser } from '../model/user.ts';
+import type { IModelOptionsUserRole } from '../model/userRole.ts';
+import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'home-user:role': IDecoratorModelOptions;
-'home-user:user': IDecoratorModelOptions;
-'home-user:userRole': IDecoratorModelOptions;
+      'home-user:role': IModelOptionsRole;
+'home-user:user': IModelOptionsUser;
+'home-user:userRole': IModelOptionsUserRole;
     }
 
   
@@ -105,6 +108,30 @@ export interface IModuleModel {
   'role': ModelRole;
 'user': ModelUser;
 'userRole': ModelUserRole;
+}
+/** model: end */
+/** model: begin */
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+declare module 'vona-module-home-user' {
+  export interface ModelRole {
+      [SymbolKeyEntity]: EntityRole;
+      [SymbolKeyEntityMeta]: EntityRoleMeta;
+      [SymbolKeyModelOptions]: IModelOptionsRole;
+      select(params?: IModelSelectParams<EntityRole,IModelOptionsRole>, options?: IModelMethodOptions): Promise<EntityRole[]>;
+    }
+export interface ModelUser {
+      [SymbolKeyEntity]: EntityUser;
+      [SymbolKeyEntityMeta]: EntityUserMeta;
+      [SymbolKeyModelOptions]: IModelOptionsUser;
+      select(params?: IModelSelectParams<EntityUser,IModelOptionsUser>, options?: IModelMethodOptions): Promise<EntityUser[]>;
+    }
+export interface ModelUserRole {
+      [SymbolKeyEntity]: EntityUserRole;
+      [SymbolKeyEntityMeta]: EntityUserRoleMeta;
+      [SymbolKeyModelOptions]: IModelOptionsUserRole;
+      select(params?: IModelSelectParams<EntityUserRole,IModelOptionsUserRole>, options?: IModelMethodOptions): Promise<EntityUserRole[]>;
+    }
 }
 /** model: end */
 /** service: begin */
@@ -210,9 +237,9 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'home-user:auth': Omit<IDtoOptionsAuth, '_fieldsMore_'>;
-'home-user:passport': Omit<IDtoOptionsPassport, '_fieldsMore_'>;
-'home-user:passportJwt': Omit<IDtoOptionsPassportJwt, '_fieldsMore_'>;
+      'home-user:auth': IDtoOptionsAuth;
+'home-user:passport': IDtoOptionsPassport;
+'home-user:passportJwt': IDtoOptionsPassportJwt;
     }
 
   
@@ -228,15 +255,15 @@ import type { DtoPassportJwt } from '../dto/passportJwt.ts';
 declare module 'vona-module-home-user' {
   
     export interface IDtoOptionsAuth {
-      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPassport {
-      fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPassportJwt {
-      fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */

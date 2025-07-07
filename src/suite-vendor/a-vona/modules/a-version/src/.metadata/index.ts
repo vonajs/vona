@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
 import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -12,9 +13,9 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'a-version:version': Omit<IEntityOptionsVersion, '_fieldsMore_'>;
-'a-version:versionInit': Omit<IEntityOptionsVersionInit, '_fieldsMore_'>;
-'a-version:viewRecord': Omit<IEntityOptionsViewRecord, '_fieldsMore_'>;
+      'a-version:version': IEntityOptionsVersion;
+'a-version:versionInit': IEntityOptionsVersionInit;
+'a-version:viewRecord': IEntityOptionsViewRecord;
     }
 
   
@@ -50,26 +51,26 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-a-version' {
   
     export interface IEntityOptionsVersion {
-      fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityVersion, IEntityOptionsVersion[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsVersionInit {
-      fields?: TypeEntityOptionsFields<EntityVersionInit, IEntityOptionsVersionInit['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityVersionInit, IEntityOptionsVersionInit[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsViewRecord {
-      fields?: TypeEntityOptionsFields<EntityViewRecord, IEntityOptionsViewRecord['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityViewRecord, IEntityOptionsViewRecord[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** entity: end */
 /** model: begin */
 export * from '../model/viewRecord.ts';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IModelOptionsViewRecord } from '../model/viewRecord.ts';
+import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'a-version:viewRecord': IDecoratorModelOptions;
+      'a-version:viewRecord': IModelOptionsViewRecord;
     }
 
   
@@ -86,6 +87,18 @@ declare module 'vona-module-a-version' {
 import type { ModelViewRecord } from '../model/viewRecord.ts';
 export interface IModuleModel {
   'viewRecord': ModelViewRecord;
+}
+/** model: end */
+/** model: begin */
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+declare module 'vona-module-a-version' {
+  export interface ModelViewRecord {
+      [SymbolKeyEntity]: EntityViewRecord;
+      [SymbolKeyEntityMeta]: EntityViewRecordMeta;
+      [SymbolKeyModelOptions]: IModelOptionsViewRecord;
+      select(params?: IModelSelectParams<EntityViewRecord,IModelOptionsViewRecord>, options?: IModelMethodOptions): Promise<EntityViewRecord[]>;
+    }
 }
 /** model: end */
 /** service: begin */

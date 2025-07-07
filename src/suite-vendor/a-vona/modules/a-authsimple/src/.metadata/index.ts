@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
 import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -8,7 +9,7 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'a-authsimple:authSimple': Omit<IEntityOptionsAuthSimple, '_fieldsMore_'>;
+      'a-authsimple:authSimple': IEntityOptionsAuthSimple;
     }
 
   
@@ -34,18 +35,18 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-a-authsimple' {
   
     export interface IEntityOptionsAuthSimple {
-      fields?: TypeEntityOptionsFields<EntityAuthSimple, IEntityOptionsAuthSimple['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityAuthSimple, IEntityOptionsAuthSimple[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** entity: end */
 /** model: begin */
 export * from '../model/authSimple.ts';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IModelOptionsAuthSimple } from '../model/authSimple.ts';
+import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'a-authsimple:authSimple': IDecoratorModelOptions;
+      'a-authsimple:authSimple': IModelOptionsAuthSimple;
     }
 
   
@@ -62,6 +63,18 @@ declare module 'vona-module-a-authsimple' {
 import type { ModelAuthSimple } from '../model/authSimple.ts';
 export interface IModuleModel {
   'authSimple': ModelAuthSimple;
+}
+/** model: end */
+/** model: begin */
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+declare module 'vona-module-a-authsimple' {
+  export interface ModelAuthSimple {
+      [SymbolKeyEntity]: EntityAuthSimple;
+      [SymbolKeyEntityMeta]: EntityAuthSimpleMeta;
+      [SymbolKeyModelOptions]: IModelOptionsAuthSimple;
+      select(params?: IModelSelectParams<EntityAuthSimple,IModelOptionsAuthSimple>, options?: IModelMethodOptions): Promise<EntityAuthSimple[]>;
+    }
 }
 /** model: end */
 /** authProvider: begin */
@@ -177,7 +190,7 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'a-authsimple:authSimple': Omit<IDtoOptionsAuthSimple, '_fieldsMore_'>;
+      'a-authsimple:authSimple': IDtoOptionsAuthSimple;
     }
 
   
@@ -191,7 +204,7 @@ import type { DtoAuthSimple } from '../dto/authSimple.ts';
 declare module 'vona-module-a-authsimple' {
   
     export interface IDtoOptionsAuthSimple {
-      fields?: TypeEntityOptionsFields<DtoAuthSimple, IDtoOptionsAuthSimple['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoAuthSimple, IDtoOptionsAuthSimple[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
