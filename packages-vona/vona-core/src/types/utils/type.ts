@@ -5,4 +5,4 @@ export interface Type<T = any> extends Function {
 }
 
 export type TypeClassOfClassLike<ClassLike> =
-  ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result : unknown;
+  ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result : undefined;

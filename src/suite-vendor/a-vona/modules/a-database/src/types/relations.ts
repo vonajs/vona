@@ -1,4 +1,4 @@
-import type { Constructable, TypeClassOfClassLike } from 'vona';
+import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -83,14 +83,22 @@ export type TypeModelParamsRelationOptions<Relation> =
   | Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>
   & { include?: TypeModelParamsInclude<TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>> };
 
-export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : unknown;
-export type TypeUtilGetRelationModel<Relation> = TypeClassOfClassLike<Relation extends { model?: infer MODEL } ? MODEL : unknown>;
+export type TypeModelClassOfClassLike<ClassLike> =
+  ClassLike extends
+  ((() => Constructable<infer Result extends BeanModelMeta>) | Constructable<infer Result extends BeanModelMeta>)
+    ? Result : undefined;
+
+export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : undefined;
+export type TypeUtilGetRelationModel<Relation> =
+  TypeModelClassOfClassLike<Relation extends
+  { model?: infer MODEL extends ((() => Constructable<BeanModelMeta>) | Constructable<BeanModelMeta>) }
+    ? MODEL : undefined>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
-export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : unknown;
-export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : unknown;
-export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> =
+export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : undefined;
+export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
+export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
-export type TypeUtilGetModelEntity<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : unknown;
+export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
 
 export type TypeUtilGetRelationEntityByType<Relation> =
   TypeUtilGetEntityByType<TypeUtilGetRelationEntity<Relation>, TypeUtilGetRelationType<Relation>>;
