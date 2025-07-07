@@ -1,4 +1,4 @@
-import type { Constructable } from 'vona';
+import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -116,7 +116,8 @@ export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH
 
 export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions | undefined, TParams> =
   TRecord &
-  (TModelOptions extends IDecoratorModelOptions ? TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>> : {});
+  (TModelOptions extends IDecoratorModelOptions ?
+    OmitNever<TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>> : {});
 
 export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
   [RelationName in (keyof TModelOptions['relations'])]:
