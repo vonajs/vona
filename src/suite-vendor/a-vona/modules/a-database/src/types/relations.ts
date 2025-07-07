@@ -1,4 +1,5 @@
 import type { Constructable, Type, TypeClassOfClassLike } from 'vona';
+import type { number } from 'zod/v4';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -93,18 +94,25 @@ export type TypeUtilGetModelEntity<Model extends BeanModelMeta | unknown> = Mode
 
 export type TypeUtilGetRelationEntityByType<Relation> =
   TypeUtilGetEntityByType<TypeUtilGetRelationEntity<Relation>, TypeUtilGetRelationType<Relation>>;
-export type TypeUtilGetEntityByType<TRecord, TYPE> = TYPE extends 'hasMany' | 'belongsToMany' ? TRecord[] : TRecord | undefined;
+export type TypeUtilGetEntityByType<TRecord, TYPE> = TYPE extends 'hasMany' | 'belongsToMany' ? Array<TRecord> : TRecord | undefined;
 
-export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE } ? INCLUDE : unknown;
-export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH } ? WITH : unknown;
+export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
+export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH } ? WITH : undefined;
 
 export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions, TParams> =
   TRecord &
   TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>;
 
-export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude> = {
-  [RelationName in (keyof TModelOptions['relations'])]: TInclude extends unknown ? TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]> : TInclude[RelationName] extends false ? never : number | undefined;
+export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
+  [RelationName in (keyof TModelOptions['relations'])]:
+  TInclude extends undefined ?
+    TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]> :
+    TypeModelRelationResultMergeIncludeItem<TModelOptions['relations'][RelationName], TInclude[RelationName]>;
 };
 
 export type TypeModelRelationResultMergeAutoload<Relation> =
   TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation> : never;
+
+export type TypeModelRelationResultMergeIncludeItem<Relation, IncludeItem> =
+  IncludeItem extends false ? never :
+  IncludeItem extends true ? TypeUtilGetRelationEntityByType<Relation> : undefined;
