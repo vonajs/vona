@@ -24,11 +24,11 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     const users = await this.scope.model.user.select({
       include: {
         roles: {
-          include: { users: false },
+          include: { users: { include: { posts: true } } },
         },
       },
     });
-    console.log(users[0].roles[0].users);
+    console.log(users[0].roles[0].users[0].posts[0].user?.name);
     const items = await this.scope.model.post.select({
       include: {
         postContent: {
