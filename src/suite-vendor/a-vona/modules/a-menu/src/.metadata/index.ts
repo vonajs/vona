@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** service: begin */
 export * from '../service/menu.ts';
@@ -83,12 +84,12 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'a-menu:menuGroup': Omit<IDtoOptionsMenuGroup, '_fieldsMore_'>;
-'a-menu:menuItem': Omit<IDtoOptionsMenuItem, '_fieldsMore_'>;
-'a-menu:menuItemMeta': Omit<IDtoOptionsMenuItemMeta, '_fieldsMore_'>;
-'a-menu:menuItemMetaParams': Omit<IDtoOptionsMenuItemMetaParams, '_fieldsMore_'>;
-'a-menu:menuItemMetaQuery': Omit<IDtoOptionsMenuItemMetaQuery, '_fieldsMore_'>;
-'a-menu:menus': Omit<IDtoOptionsMenus, '_fieldsMore_'>;
+      'a-menu:menuGroup': IDtoOptionsMenuGroup;
+'a-menu:menuItem': IDtoOptionsMenuItem;
+'a-menu:menuItemMeta': IDtoOptionsMenuItemMeta;
+'a-menu:menuItemMetaParams': IDtoOptionsMenuItemMetaParams;
+'a-menu:menuItemMetaQuery': IDtoOptionsMenuItemMetaQuery;
+'a-menu:menus': IDtoOptionsMenus;
     }
 
   
@@ -107,27 +108,27 @@ import type { DtoMenus } from '../dto/menus.ts';
 declare module 'vona-module-a-menu' {
   
     export interface IDtoOptionsMenuGroup {
-      fields?: TypeEntityOptionsFields<DtoMenuGroup, IDtoOptionsMenuGroup['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoMenuGroup, IDtoOptionsMenuGroup[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsMenuItem {
-      fields?: TypeEntityOptionsFields<DtoMenuItem, IDtoOptionsMenuItem['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoMenuItem, IDtoOptionsMenuItem[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsMenuItemMeta {
-      fields?: TypeEntityOptionsFields<DtoMenuItemMeta, IDtoOptionsMenuItemMeta['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoMenuItemMeta, IDtoOptionsMenuItemMeta[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsMenuItemMetaParams {
-      fields?: TypeEntityOptionsFields<DtoMenuItemMetaParams, IDtoOptionsMenuItemMetaParams['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoMenuItemMetaParams, IDtoOptionsMenuItemMetaParams[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsMenuItemMetaQuery {
-      fields?: TypeEntityOptionsFields<DtoMenuItemMetaQuery, IDtoOptionsMenuItemMetaQuery['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoMenuItemMetaQuery, IDtoOptionsMenuItemMetaQuery[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsMenus {
-      fields?: TypeEntityOptionsFields<DtoMenus, IDtoOptionsMenus['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoMenus, IDtoOptionsMenus[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */

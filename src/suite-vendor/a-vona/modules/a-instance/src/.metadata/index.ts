@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
 import type { TypeEntityMeta } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** middleware: begin */
@@ -48,7 +49,7 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'a-instance:instance': Omit<IEntityOptionsInstance, '_fieldsMore_'>;
+      'a-instance:instance': IEntityOptionsInstance;
     }
 
   
@@ -74,18 +75,18 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-a-instance' {
   
     export interface IEntityOptionsInstance {
-      fields?: TypeEntityOptionsFields<EntityInstance, IEntityOptionsInstance['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityInstance, IEntityOptionsInstance[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** entity: end */
 /** model: begin */
 export * from '../model/instance.ts';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
+import type { IModelOptionsInstance } from '../model/instance.ts';
+import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'a-instance:instance': IDecoratorModelOptions;
+      'a-instance:instance': IModelOptionsInstance;
     }
 
   
@@ -102,6 +103,18 @@ declare module 'vona-module-a-instance' {
 import type { ModelInstance } from '../model/instance.ts';
 export interface IModuleModel {
   'instance': ModelInstance;
+}
+/** model: end */
+/** model: begin */
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+declare module 'vona-module-a-instance' {
+  export interface ModelInstance {
+      [SymbolKeyEntity]: EntityInstance;
+      [SymbolKeyEntityMeta]: EntityInstanceMeta;
+      [SymbolKeyModelOptions]: IModelOptionsInstance;
+      select(params?: IModelSelectParams<EntityInstance,IModelOptionsInstance>, options?: IModelMethodOptions): Promise<EntityInstance[]>;
+    }
 }
 /** model: end */
 /** bean: begin */

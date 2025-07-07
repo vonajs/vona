@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** bean: begin */
 export * from '../bean/bean.jwt.ts';
@@ -77,7 +78,7 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'a-jwt:jwtToken': Omit<IDtoOptionsJwtToken, '_fieldsMore_'>;
+      'a-jwt:jwtToken': IDtoOptionsJwtToken;
     }
 
   
@@ -91,7 +92,7 @@ import type { DtoJwtToken } from '../dto/jwtToken.ts';
 declare module 'vona-module-a-jwt' {
   
     export interface IDtoOptionsJwtToken {
-      fields?: TypeEntityOptionsFields<DtoJwtToken, IDtoOptionsJwtToken['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoJwtToken, IDtoOptionsJwtToken[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
