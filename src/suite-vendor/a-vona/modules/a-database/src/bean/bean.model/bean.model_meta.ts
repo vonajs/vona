@@ -1,21 +1,15 @@
 import type { ServiceDb } from '../../service/db.ts';
-import type {
-  IDatabaseClientRecord,
-  IDecoratorModelOptions,
-  IModelMethodOptionsGeneral,
-  IModelUpdateOptionsGeneral,
-  ITableRecord,
-  TypeEntityMeta,
-} from '../../types/index.ts';
+import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast } from 'vona';
 import { $tableName } from '../../lib/columns.ts';
+import { SymbolKeyEntity } from '../../types/index.ts';
 
 const SymbolModelDb = Symbol('SymbolModelDb');
 
 export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
-  public $entity: TRecord;
+  public [SymbolKeyEntity]: TRecord;
   public $entityMeta: TypeEntityMeta<TRecord>;
   public $modelOptions: unknown;
 

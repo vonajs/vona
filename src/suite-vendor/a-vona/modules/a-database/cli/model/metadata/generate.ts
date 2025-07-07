@@ -11,7 +11,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
     contentRecords.push(`export interface ${className} {
-      $entity: ${entityName};
+      [SymbolKeyEntity]: ${entityName};
       $entityMeta: ${entityMetaName};
       $modelOptions: ${opionsName};
       select(params?: IModelSelectParams<${entityName},${opionsName}>, options?: IModelMethodOptions): Promise<${entityName}[]>;
@@ -21,7 +21,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   if (contentRecords.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
-import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database'; 
+import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import { SymbolKeyEntity } from 'vona-module-a-database';
 declare module 'vona-module-${moduleName}' {
   ${contentRecords.join('\n')}
 }

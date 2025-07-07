@@ -1,10 +1,10 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relations.ts';
+import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne, TypeSymbolKeyEntity } from '../types/relations.ts';
 
 export function hasOne<MODEL extends BeanModelMeta>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  key: keyof MODEL['$entity'],
+  key: keyof MODEL[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<MODEL>,
 ): IModelRelationHasOne<MODEL> {
   return { type: 'hasOne', model: classModel, key, options };
@@ -13,7 +13,7 @@ export function hasOne<MODEL extends BeanModelMeta>(
 export function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanModelMeta>(
   _classModelSelf: (() => Constructable<MODELSelf>) | Constructable<MODELSelf>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  key: keyof MODELSelf['$entity'],
+  key: keyof MODELSelf[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<MODEL>,
 ): IModelRelationBelongsTo<MODELSelf, MODEL> {
   return { type: 'belongsTo', model: classModel, key, options };
@@ -21,7 +21,7 @@ export function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanMod
 
 export function hasMany<MODEL extends BeanModelMeta>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  key: keyof MODEL['$entity'],
+  key: keyof MODEL[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsMany<MODEL>,
 ): IModelRelationHasMany<MODEL> {
   options = options ?? {};
@@ -31,8 +31,8 @@ export function hasMany<MODEL extends BeanModelMeta>(
 export function belongsToMany<MODELMiddle extends BeanModelMeta, MODEL extends BeanModelMeta>(
   classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  keyFrom: keyof MODELMiddle['$entity'],
-  keyTo: keyof MODELMiddle['$entity'],
+  keyFrom: keyof MODELMiddle[TypeSymbolKeyEntity],
+  keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsMany<MODEL>,
 ): IModelRelationBelongsToMany<MODELMiddle, MODEL> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
