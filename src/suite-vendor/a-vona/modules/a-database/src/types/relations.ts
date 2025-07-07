@@ -93,6 +93,7 @@ export type TypeUtilGetRelationModel<Relation> =
   TypeModelClassOfClassLike<Relation extends
   { model?: infer MODEL extends ((() => Constructable<BeanModelMeta>) | Constructable<BeanModelMeta>) }
     ? MODEL : undefined>;
+export type TypeUtilGetRelationModelOptions<Relation> = TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : undefined;
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
@@ -100,16 +101,22 @@ export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
 
-export type TypeUtilGetRelationEntityByType<Relation> =
-  TypeUtilGetEntityByType<TypeUtilGetRelationEntity<Relation>, TypeUtilGetRelationType<Relation>>;
-export type TypeUtilGetEntityByType<TRecord, TYPE> = TYPE extends 'hasMany' | 'belongsToMany' ? Array<TRecord> : TRecord | undefined;
+export type TypeUtilGetRelationEntityByType<Relation, TInclude extends {} | undefined> =
+  TypeUtilGetEntityByType<
+    TypeUtilGetRelationEntity<Relation>,
+    TypeUtilGetRelationType<Relation>,
+    TypeUtilGetRelationModelOptions<Relation>,
+    TInclude
+  >;
+export type TypeUtilGetEntityByType<TRecord, TYPE, TModelOptions extends IDecoratorModelOptions | undefined, TInclude extends {} | undefined> =
+  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModelOptions, TInclude>> : TypeModelRelationResult<TRecord, TModelOptions, TInclude> | undefined;
 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH } ? WITH : undefined;
 
-export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions, TParams> =
+export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions | undefined, TParams> =
   TRecord &
-  TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>;
+  (TModelOptions extends IDecoratorModelOptions ? TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>> : {});
 
 export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
   [RelationName in (keyof TModelOptions['relations'])]:
@@ -119,8 +126,10 @@ export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecorator
 };
 
 export type TypeModelRelationResultMergeAutoload<Relation> =
-  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation> : never;
+  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
 
 export type TypeModelRelationResultMergeIncludeItem<Relation, IncludeItem> =
   IncludeItem extends false ? never :
-  IncludeItem extends true ? TypeUtilGetRelationEntityByType<Relation> : undefined;
+  IncludeItem extends true ?
+    TypeUtilGetRelationEntityByType<Relation, undefined> :
+    TypeUtilGetRelationEntityByType<Relation, TypeUtilGetParamsInlcude<IncludeItem>>;
