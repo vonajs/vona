@@ -1,5 +1,4 @@
-import type { Constructable, Type, TypeClassOfClassLike } from 'vona';
-import type { number } from 'zod/v4';
+import type { Constructable, TypeClassOfClassLike } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -75,7 +74,7 @@ export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanMod
   offset?: number;
 }
 
-export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions | unknown> = ModelOptions extends IDecoratorModelOptions ? {
+export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions | undefined> = ModelOptions extends IDecoratorModelOptions ? {
   [relationName in keyof ModelOptions['relations'] ]?: TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
 } : never;
 
@@ -89,7 +88,8 @@ export type TypeUtilGetRelationModel<Relation> = TypeClassOfClassLike<Relation e
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : unknown;
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : unknown;
-export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : unknown;
+export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> =
+  Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : unknown;
 
 export type TypeUtilGetRelationEntityByType<Relation> =

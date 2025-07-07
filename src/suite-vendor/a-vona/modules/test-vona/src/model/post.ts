@@ -28,17 +28,17 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     });
     console.log(users[0].roles);
     const items = await this.scope.model.post.select({
-      // include: {
-      //   postContent: {
-      //     columns: ['content'],
-      //     include: { post: { include: { user: { columns: 'name' } } } },
-      //   },
-      //   user: { columns: 'name' },
-      // },
+      include: {
+        postContent: {
+          columns: ['content'],
+          include: { post: { include: { user: { columns: 'name' } } } },
+        },
+        user: { columns: 'name' },
+      },
       with: {
         user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
       },
     });
-    console.log(items[0].user?.name);
+    console.log(items[0].postContent.);
   }
 }

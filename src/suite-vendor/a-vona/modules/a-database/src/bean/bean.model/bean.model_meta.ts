@@ -11,7 +11,7 @@ const SymbolModelDb = Symbol('SymbolModelDb');
 export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public [SymbolKeyEntity]: TRecord;
   public [SymbolKeyEntityMeta]: TypeEntityMeta<TRecord>;
-  public [SymbolKeyModelOptions]: unknown;
+  public [SymbolKeyModelOptions]: IDecoratorModelOptions;
 
   private [SymbolModelDb]: ServiceDb;
 
