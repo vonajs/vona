@@ -21,12 +21,17 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
   test() {
-    this.scope.model.post.select({ include: {
-      postContent: {
-        columns: ['content'],
-        include: { post: { include: { user: { columns: 'name' } } } },
+    this.scope.model.post.select({
+      include: {
+        postContent: {
+          columns: ['content'],
+          include: { post: { include: { user: { columns: 'name' } } } },
+        },
+        user: { columns: 'name' },
       },
-      user: { columns: 'name' },
-    } });
+      with: {
+        user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+      },
+    });
   }
 }

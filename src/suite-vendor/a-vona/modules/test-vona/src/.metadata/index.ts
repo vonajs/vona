@@ -241,43 +241,43 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyEntity]: EntityPost;
       [SymbolKeyEntityMeta]: EntityPostMeta;
       [SymbolKeyModelOptions]: IModelOptionsPost;
-      select(params?: IModelSelectParams<EntityPost,IModelOptionsPost>, options?: IModelMethodOptions): Promise<EntityPost[]>;
+      select<T extends IModelSelectParams<EntityPost,IModelOptionsPost>>(params?: T, options?: IModelMethodOptions): Promise<EntityPost[]>;
     }
 export interface ModelPostContent {
       [SymbolKeyEntity]: EntityPostContent;
       [SymbolKeyEntityMeta]: EntityPostContentMeta;
       [SymbolKeyModelOptions]: IModelOptionsPostContent;
-      select(params?: IModelSelectParams<EntityPostContent,IModelOptionsPostContent>, options?: IModelMethodOptions): Promise<EntityPostContent[]>;
+      select<T extends IModelSelectParams<EntityPostContent,IModelOptionsPostContent>>(params?: T, options?: IModelMethodOptions): Promise<EntityPostContent[]>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
       [SymbolKeyEntityMeta]: EntityRoleMeta;
       [SymbolKeyModelOptions]: IModelOptionsRole;
-      select(params?: IModelSelectParams<EntityRole,IModelOptionsRole>, options?: IModelMethodOptions): Promise<EntityRole[]>;
+      select<T extends IModelSelectParams<EntityRole,IModelOptionsRole>>(params?: T, options?: IModelMethodOptions): Promise<EntityRole[]>;
     }
 export interface ModelRoleUser {
       [SymbolKeyEntity]: EntityRoleUser;
       [SymbolKeyEntityMeta]: EntityRoleUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsRoleUser;
-      select(params?: IModelSelectParams<EntityRoleUser,IModelOptionsRoleUser>, options?: IModelMethodOptions): Promise<EntityRoleUser[]>;
+      select<T extends IModelSelectParams<EntityRoleUser,IModelOptionsRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<EntityRoleUser[]>;
     }
 export interface ModelTest {
       [SymbolKeyEntity]: EntityTest;
       [SymbolKeyEntityMeta]: EntityTestMeta;
       [SymbolKeyModelOptions]: IModelOptionsTest;
-      select(params?: IModelSelectParams<EntityTest,IModelOptionsTest>, options?: IModelMethodOptions): Promise<EntityTest[]>;
+      select<T extends IModelSelectParams<EntityTest,IModelOptionsTest>>(params?: T, options?: IModelMethodOptions): Promise<EntityTest[]>;
     }
 export interface ModelTestDynamicTable {
       [SymbolKeyEntity]: EntityTest;
       [SymbolKeyEntityMeta]: EntityTestMeta;
       [SymbolKeyModelOptions]: IModelOptionsTestDynamicTable;
-      select(params?: IModelSelectParams<EntityTest,IModelOptionsTestDynamicTable>, options?: IModelMethodOptions): Promise<EntityTest[]>;
+      select<T extends IModelSelectParams<EntityTest,IModelOptionsTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<EntityTest[]>;
     }
 export interface ModelUser {
       [SymbolKeyEntity]: EntityUser;
       [SymbolKeyEntityMeta]: EntityUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsUser;
-      select(params?: IModelSelectParams<EntityUser,IModelOptionsUser>, options?: IModelMethodOptions): Promise<EntityUser[]>;
+      select<T extends IModelSelectParams<EntityUser,IModelOptionsUser>>(params?: T, options?: IModelMethodOptions): Promise<EntityUser[]>;
     }
 }
 /** model: end */
