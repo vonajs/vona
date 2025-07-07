@@ -36,6 +36,7 @@ export interface IModelSelectParams<TRecord, ModelOptions extends IDecoratorMode
   offset?: number;
   page?: IModelSelectParamsPage;
   include?: TypeModelParamsInclude<ModelOptions>;
+  with?: Record<string, unknown>;
 }
 
 export interface IModelCountParams<TRecord> {

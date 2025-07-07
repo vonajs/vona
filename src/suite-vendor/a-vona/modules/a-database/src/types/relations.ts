@@ -130,9 +130,9 @@ export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecorator
 };
 
 export type TypeModelRelationResultMergeWith<TWith extends {} | undefined> =
-TWith extends {} ?
-    { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithWrapper<TWith[RelationName]> }
-  : {};
+  TWith extends {} ?
+      { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithWrapper<TWith[RelationName]> }
+    : {};
 
 export type TypeModelRelationResultMergeAutoload<Relation> =
   TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
