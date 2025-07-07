@@ -5,7 +5,11 @@ import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
+export const SymbolKeyEntityMeta = Symbol('$entityMeta');
+export const SymbolKeyModelOptions = Symbol('$modelOptions');
 export type TypeSymbolKeyEntity = typeof SymbolKeyEntity;
+export type TypeSymbolKeyEntityMeta = typeof SymbolKeyEntityMeta;
+export type TypeSymbolKeyModelOptions = typeof SymbolKeyModelOptions;
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
 export interface TypeModelRelations {
@@ -74,4 +78,4 @@ export type TypeModelParamsRelationOptions<Relation> =
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : unknown;
 export type TypeUtilGetRelationModel<Relation> = TypeClassOfClassLike<Relation extends { model?: infer MODEL } ? MODEL : unknown>;
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : unknown;
-export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model['$modelOptions'] : unknown;
+export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : unknown;

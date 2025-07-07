@@ -12,8 +12,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const opionsName = `IModelOptions${beanNameCapitalize}`;
     contentRecords.push(`export interface ${className} {
       [SymbolKeyEntity]: ${entityName};
-      $entityMeta: ${entityMetaName};
-      $modelOptions: ${opionsName};
+      [SymbolKeyEntityMeta]: ${entityMetaName};
+      [SymbolKeyModelOptions]: ${opionsName};
       select(params?: IModelSelectParams<${entityName},${opionsName}>, options?: IModelMethodOptions): Promise<${entityName}[]>;
     }`);
     // contentRecords.push(`'${tableName}': never;`);
