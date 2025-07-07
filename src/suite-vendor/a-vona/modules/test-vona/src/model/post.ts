@@ -29,6 +29,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
       },
     });
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
+
     const items = await this.scope.model.post.select({
       include: {
         postContent: {
@@ -43,5 +44,13 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     });
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);
+    console.log(items[0].user3?.name);
+
+    const items2 = await this.scope.model.post.select({
+      with: {
+        // user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+      },
+    });
+    console.log(items2[0]);
   }
 }

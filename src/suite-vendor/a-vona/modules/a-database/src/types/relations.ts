@@ -112,12 +112,15 @@ export type TypeUtilGetEntityByType<TRecord, TYPE, TModelOptions extends IDecora
   TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModelOptions, IncludeWrapper>> : TypeModelRelationResult<TRecord, TModelOptions, IncludeWrapper> | undefined;
 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
-export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH } ? WITH : undefined;
+export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
 
 export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions | undefined, TParams> =
   TRecord &
   (TModelOptions extends IDecoratorModelOptions ?
-    OmitNever<TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>> : {});
+      (
+        OmitNever<TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>> &
+        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TParams>>>
+      ) : {});
 
 export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
   [RelationName in (keyof TModelOptions['relations'])]:
@@ -125,6 +128,11 @@ export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecorator
     TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
     TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
 };
+
+export type TypeModelRelationResultMergeWith<TWith extends {} | undefined> =
+TWith extends {} ?
+    { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithWrapper<TWith[RelationName]> }
+  : {};
 
 export type TypeModelRelationResultMergeAutoload<Relation> =
   TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
@@ -134,3 +142,9 @@ export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper>
   IncludeWrapper extends true ?
     TypeUtilGetRelationEntityByType<Relation, undefined> :
     IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> : never;
+
+export type TypeModelRelationResultMergeWithWrapper<WithWrapper> =
+  WithWrapper extends false ? never :
+  WithWrapper extends true ?
+    never :
+    WithWrapper extends {} ? TypeUtilGetRelationEntityByType<WithWrapper, WithWrapper> : never;
