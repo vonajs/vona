@@ -1,4 +1,4 @@
-import type { Constructable, TypeClassOfClassLike } from 'vona';
+import type { Constructable, Type, TypeClassOfClassLike } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -22,43 +22,51 @@ export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, M
   IModelRelationHasMany<MODELTarget>;
 
 // use optional ? for app config
-export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOne<MODEL>;
+  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationBelongsTo<MODELSelf extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationBelongsTo<
+  MODELSelf extends BeanModelMeta = BeanModelMeta,
+  MODEL extends BeanModelMeta = BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+> {
   type?: 'belongsTo';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODELSelf[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOne<MODEL>;
+  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
   type?: 'hasMany';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL>;
+  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationBelongsToMany<MODELMiddle extends BeanModelMeta = BeanModelMeta, MODEL extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationBelongsToMany<
+  MODELMiddle extends BeanModelMeta = BeanModelMeta,
+  MODEL extends BeanModelMeta = BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+> {
   type?: 'belongsToMany';
   modelMiddle?: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>;
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
   keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL>;
+  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta> {
-  autoload?: boolean;
+export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+  autoload?: AUTOLOAD;
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
 }
 
-export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanModelMeta> {
-  autoload?: boolean;
+export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+  autoload?: AUTOLOAD;
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
   where?: TypeModelWhere<MODEL[TypeSymbolKeyEntity]>;
   orders?: IModelSelectParamsOrder<MODEL[TypeSymbolKeyEntity]>[];
@@ -77,5 +85,26 @@ export type TypeModelParamsRelationOptions<Relation> =
 
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : unknown;
 export type TypeUtilGetRelationModel<Relation> = TypeClassOfClassLike<Relation extends { model?: infer MODEL } ? MODEL : unknown>;
+export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : unknown;
+export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : unknown;
 export type TypeUtilGetModelOptions<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : unknown;
+export type TypeUtilGetModelEntity<Model extends BeanModelMeta | unknown> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : unknown;
+
+export type TypeUtilGetRelationEntityByType<Relation> =
+  TypeUtilGetEntityByType<TypeUtilGetRelationEntity<Relation>, TypeUtilGetRelationType<Relation>>;
+export type TypeUtilGetEntityByType<TRecord, TYPE> = TYPE extends 'hasMany' | 'belongsToMany' ? TRecord[] : TRecord | undefined;
+
+export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE } ? INCLUDE : unknown;
+export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH } ? WITH : unknown;
+
+export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions, TParams> =
+  TRecord &
+  TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>;
+
+export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude> = {
+  [RelationName in (keyof TModelOptions['relations'])]: TInclude extends unknown ? TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]> : TInclude[RelationName] extends false ? never : number | undefined;
+};
+
+export type TypeModelRelationResultMergeAutoload<Relation> =
+  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation> : never;

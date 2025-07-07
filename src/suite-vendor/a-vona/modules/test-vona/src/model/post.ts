@@ -8,7 +8,7 @@ import { ModelUser } from './user.ts';
 export interface IModelOptionsPost extends IDecoratorModelOptions {
   relations: {
     postContent: IModelRelationHasOne<ModelPostContent>;
-    user: IModelRelationBelongsTo<ModelPost, ModelUser>;
+    user: IModelRelationBelongsTo<ModelPost, ModelUser, true>;
   };
 }
 
@@ -20,18 +20,25 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
   },
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
-  test() {
-    this.scope.model.post.select({
+  async test() {
+    const users = await this.scope.model.user.select({
       include: {
-        postContent: {
-          columns: ['content'],
-          include: { post: { include: { user: { columns: 'name' } } } },
-        },
-        user: { columns: 'name' },
-      },
-      with: {
-        user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+        roles: true,
       },
     });
+    console.log(users[0].roles);
+    const items = await this.scope.model.post.select({
+      // include: {
+      //   postContent: {
+      //     columns: ['content'],
+      //     include: { post: { include: { user: { columns: 'name' } } } },
+      //   },
+      //   user: { columns: 'name' },
+      // },
+      with: {
+        user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+      },
+    });
+    console.log(items[0].user?.name);
   }
 }

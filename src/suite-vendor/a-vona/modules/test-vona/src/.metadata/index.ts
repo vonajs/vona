@@ -234,50 +234,50 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import type { IModelMethodOptions, IModelSelectParams, TypeModelRelationResult } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-test-vona' {
   export interface ModelPost {
       [SymbolKeyEntity]: EntityPost;
       [SymbolKeyEntityMeta]: EntityPostMeta;
       [SymbolKeyModelOptions]: IModelOptionsPost;
-      select<T extends IModelSelectParams<EntityPost,IModelOptionsPost>>(params?: T, options?: IModelMethodOptions): Promise<EntityPost[]>;
+      select<T extends IModelSelectParams<EntityPost,IModelOptionsPost>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
     }
 export interface ModelPostContent {
       [SymbolKeyEntity]: EntityPostContent;
       [SymbolKeyEntityMeta]: EntityPostContentMeta;
       [SymbolKeyModelOptions]: IModelOptionsPostContent;
-      select<T extends IModelSelectParams<EntityPostContent,IModelOptionsPostContent>>(params?: T, options?: IModelMethodOptions): Promise<EntityPostContent[]>;
+      select<T extends IModelSelectParams<EntityPostContent,IModelOptionsPostContent>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, IModelOptionsPostContent, T>[]>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
       [SymbolKeyEntityMeta]: EntityRoleMeta;
       [SymbolKeyModelOptions]: IModelOptionsRole;
-      select<T extends IModelSelectParams<EntityRole,IModelOptionsRole>>(params?: T, options?: IModelMethodOptions): Promise<EntityRole[]>;
+      select<T extends IModelSelectParams<EntityRole,IModelOptionsRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, IModelOptionsRole, T>[]>;
     }
 export interface ModelRoleUser {
       [SymbolKeyEntity]: EntityRoleUser;
       [SymbolKeyEntityMeta]: EntityRoleUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsRoleUser;
-      select<T extends IModelSelectParams<EntityRoleUser,IModelOptionsRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<EntityRoleUser[]>;
+      select<T extends IModelSelectParams<EntityRoleUser,IModelOptionsRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, IModelOptionsRoleUser, T>[]>;
     }
 export interface ModelTest {
       [SymbolKeyEntity]: EntityTest;
       [SymbolKeyEntityMeta]: EntityTestMeta;
       [SymbolKeyModelOptions]: IModelOptionsTest;
-      select<T extends IModelSelectParams<EntityTest,IModelOptionsTest>>(params?: T, options?: IModelMethodOptions): Promise<EntityTest[]>;
+      select<T extends IModelSelectParams<EntityTest,IModelOptionsTest>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTest, T>[]>;
     }
 export interface ModelTestDynamicTable {
       [SymbolKeyEntity]: EntityTest;
       [SymbolKeyEntityMeta]: EntityTestMeta;
       [SymbolKeyModelOptions]: IModelOptionsTestDynamicTable;
-      select<T extends IModelSelectParams<EntityTest,IModelOptionsTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<EntityTest[]>;
+      select<T extends IModelSelectParams<EntityTest,IModelOptionsTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTestDynamicTable, T>[]>;
     }
 export interface ModelUser {
       [SymbolKeyEntity]: EntityUser;
       [SymbolKeyEntityMeta]: EntityUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsUser;
-      select<T extends IModelSelectParams<EntityUser,IModelOptionsUser>>(params?: T, options?: IModelMethodOptions): Promise<EntityUser[]>;
+      select<T extends IModelSelectParams<EntityUser,IModelOptionsUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, IModelOptionsUser, T>[]>;
     }
 }
 /** model: end */
