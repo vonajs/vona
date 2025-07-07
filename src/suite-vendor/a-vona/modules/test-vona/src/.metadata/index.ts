@@ -234,7 +234,7 @@ export interface IModuleModel {
 /** model: end */
 /** model: begin */
 import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
-import { SymbolKeyEntity } from 'vona-module-a-database';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-test-vona' {
   export interface ModelPost {
       [SymbolKeyEntity]: EntityPost;

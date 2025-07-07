@@ -22,7 +22,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   // combine
   const content = `/** ${sceneName}: begin */
 import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
-import { SymbolKeyEntity } from 'vona-module-a-database';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-${moduleName}' {
   ${contentRecords.join('\n')}
 }
