@@ -129,6 +129,7 @@ export type TypeModelRelationResultMergeAutoload<Relation> =
   TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
 
 export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper> =
-  IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> :
+  IncludeWrapper extends false ? never :
   IncludeWrapper extends true ?
-    TypeUtilGetRelationEntityByType<Relation, undefined> : never;
+    TypeUtilGetRelationEntityByType<Relation, undefined> :
+    IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> : never;
