@@ -66,12 +66,12 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'test-vona:post': Omit<IEntityOptionsPost, '_fieldsMore_'>;
-'test-vona:postContent': Omit<IEntityOptionsPostContent, '_fieldsMore_'>;
-'test-vona:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
-'test-vona:roleUser': Omit<IEntityOptionsRoleUser, '_fieldsMore_'>;
-'test-vona:test': Omit<IEntityOptionsTest, '_fieldsMore_'>;
-'test-vona:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
+      'test-vona:post': IEntityOptionsPost;
+'test-vona:postContent': IEntityOptionsPostContent;
+'test-vona:role': IEntityOptionsRole;
+'test-vona:roleUser': IEntityOptionsRoleUser;
+'test-vona:test': IEntityOptionsTest;
+'test-vona:user': IEntityOptionsUser;
     }
 
   
@@ -122,27 +122,27 @@ declare module 'vona-module-a-database' {
 declare module 'vona-module-test-vona' {
   
     export interface IEntityOptionsPost {
-      fields?: TypeEntityOptionsFields<EntityPost, IEntityOptionsPost['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityPost, IEntityOptionsPost[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsPostContent {
-      fields?: TypeEntityOptionsFields<EntityPostContent, IEntityOptionsPostContent['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityPostContent, IEntityOptionsPostContent[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsRole {
-      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsRoleUser {
-      fields?: TypeEntityOptionsFields<EntityRoleUser, IEntityOptionsRoleUser['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityRoleUser, IEntityOptionsRoleUser[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsTest {
-      fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityTest, IEntityOptionsTest[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsUser {
-      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** entity: end */
@@ -627,8 +627,8 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'test-vona:profile': Omit<IDtoOptionsProfile, '_fieldsMore_'>;
-'test-vona:user': Omit<IDtoOptionsUser, '_fieldsMore_'>;
+      'test-vona:profile': IDtoOptionsProfile;
+'test-vona:user': IDtoOptionsUser;
     }
 
   
@@ -643,11 +643,11 @@ import type { DtoUser } from '../dto/user.ts';
 declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsProfile {
-      fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsUser {
-      fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */

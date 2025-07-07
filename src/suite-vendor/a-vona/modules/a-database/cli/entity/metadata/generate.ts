@@ -16,7 +16,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentRecords.push(`'${tableName}': never;`);
     contentFields.push(`
     export interface ${opionsName} {
-      fields?: TypeEntityOptionsFields<${className}, ${opionsName}['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<${className}, ${opionsName}[TypeSymbolKeyFieldsMore]>;
     }`);
   }
   if (contentColumns.length === 0 && contentEntityMetas.length === 0 && contentRecords.length === 0 && contentFields.length === 0) return '';

@@ -28,7 +28,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
   });
 }
 
-export function Dto<T extends IDecoratorDtoOptions<any>>(options?: Omit<T, '_fieldsMore_'>): ClassDecorator {
+export function Dto<T extends IDecoratorDtoOptions<any>>(options?: T): ClassDecorator {
   return createBeanDecorator('dto', options, false, false, target => {
     mergeFieldsOpenapiMetadata(target);
   });

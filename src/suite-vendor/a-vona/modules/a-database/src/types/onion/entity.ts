@@ -1,15 +1,16 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { SymbolKeyFieldsMore } from '../entity.ts';
 import type { ITableRecord } from './table.ts';
 
 export interface IEntityRecord {}
 
 export interface IDecoratorEntityOptions<FieldsMore = never> {
+  [SymbolKeyFieldsMore]?: FieldsMore;
   table?: keyof ITableRecord;
   independent?: boolean;
   openapi?: TypeOpenapiMetadata;
-  _fieldsMore_?: FieldsMore;
 }
 
 declare module 'vona-module-a-onion' {

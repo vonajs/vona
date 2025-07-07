@@ -16,7 +16,6 @@
     "onions": {
       "entity": {
         "sceneIsolate": true,
-        "optionsCustomInterfaceTemplate": "Omit<{{optionsCustomInterface}}, '_fieldsMore_'>",
         "optionsGlobalInterfaceName": "IDecoratorEntityOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-database",
         "scopeResource": true,
