@@ -101,15 +101,15 @@ export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
 
-export type TypeUtilGetRelationEntityByType<Relation, TInclude extends {} | undefined> =
+export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} | undefined> =
   TypeUtilGetEntityByType<
     TypeUtilGetRelationEntity<Relation>,
     TypeUtilGetRelationType<Relation>,
     TypeUtilGetRelationModelOptions<Relation>,
-    TInclude
+    IncludeWrapper
   >;
-export type TypeUtilGetEntityByType<TRecord, TYPE, TModelOptions extends IDecoratorModelOptions | undefined, TInclude extends {} | undefined> =
-  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModelOptions, TInclude>> : TypeModelRelationResult<TRecord, TModelOptions, TInclude> | undefined;
+export type TypeUtilGetEntityByType<TRecord, TYPE, TModelOptions extends IDecoratorModelOptions | undefined, IncludeWrapper extends {} | undefined> =
+  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModelOptions, IncludeWrapper>> : TypeModelRelationResult<TRecord, TModelOptions, IncludeWrapper> | undefined;
 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH } ? WITH : undefined;
@@ -121,15 +121,14 @@ export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorMod
 export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
   [RelationName in (keyof TModelOptions['relations'])]:
   TInclude extends {} ?
-    TypeModelRelationResultMergeIncludeItem<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
+    TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
     TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
 };
 
 export type TypeModelRelationResultMergeAutoload<Relation> =
   TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
 
-export type TypeModelRelationResultMergeIncludeItem<Relation, IncludeItem> =
-  IncludeItem extends false ? never :
-  IncludeItem extends true ?
-    TypeUtilGetRelationEntityByType<Relation, undefined> :
-    TypeUtilGetRelationEntityByType<Relation, TypeUtilGetParamsInlcude<IncludeItem>>;
+export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper> =
+  IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> :
+  IncludeWrapper extends true ?
+    TypeUtilGetRelationEntityByType<Relation, undefined> : never;

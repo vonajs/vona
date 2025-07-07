@@ -39,7 +39,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
         user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
       },
     });
-    console.log(items[0].postContent?.post);
+    console.log(items[0].postContent?.post?.user.);
     console.log(items[0].user?.roles);
   }
 }
