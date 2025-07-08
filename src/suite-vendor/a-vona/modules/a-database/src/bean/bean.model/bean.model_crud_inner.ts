@@ -57,8 +57,6 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
-    // table alias
-    table = params.alias ? `${table} as ${params.alias}` as any : table;
     // builder
     const builder = this.builder<TRecord, TRecord>(table);
     // columns
@@ -111,8 +109,6 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
-    // table alias
-    table = params.alias ? `${table} as ${params.alias}` as any : table;
     // builder
     const builder = this.builder<TRecord>(table);
     // count

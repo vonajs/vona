@@ -49,12 +49,22 @@ export type IModelSelectParams<
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>
 >;
 
-export interface IModelCountParams<TRecord> {
-  count?: any;
-  distinct?: any;
+export interface TypeBuildModelCountParams<TRecord, TableNames, ColumnNames> {
+  count?: (keyof TRecord);
+  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord>;
-  joins?: IModelSelectParamsJoin[];
+  joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
 }
+
+export type IModelCountParams<
+  TRecord,
+  Model extends BeanModelMeta = BeanModelMeta,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+> = TypeBuildModelCountParams<
+  TRecord,
+  TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>
+>;
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 export type IModelUpdateOptions<TRecord> = Omit<IModelUpdateOptionsGeneral<TRecord>, 'disableInstance'>;
