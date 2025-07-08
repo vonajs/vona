@@ -174,6 +174,9 @@ export type TypeEntityTableColumnNamesOfModelClass<TModel extends BeanModelMeta>
 export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
     TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
 
+export type TypeEntityTableColumnNamesOfModelSelf<TModel extends BeanModelMeta> =
+  TypeEntityTableColumnNames<TModel[TypeSymbolKeyEntityMeta]> | TypeEntityTableColumnNamesShort<TModel[TypeSymbolKeyEntity]>;
+
 export type TypeEntityTableColumnNamesOfGeneral<
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
   TModel extends BeanModelMeta,
@@ -182,8 +185,26 @@ export type TypeEntityTableColumnNamesOfGeneral<
       (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>) :
       (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>);
 
-export type TypeEntityTableColumnNamesOfModelSelf<TModel extends BeanModelMeta> =
-  TypeEntityTableColumnNames<TModel[TypeSymbolKeyEntityMeta]> | TypeEntityTableColumnNamesShort<TModel[TypeSymbolKeyEntity]>;
+export type TypeEntityTableNames<EntityMeta extends { $table: string } | undefined> =
+  EntityMeta extends { $table: infer TableName } ? TableName : never;
+
+export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
+  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
+}>;
+
+export type TypeEntityTableNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
+    TypeEntityTableNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
+
+export type TypeEntityTableNamesOfModelClass<TModel extends BeanModelMeta> =
+  TypeEntityTableNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
+
+export type TypeEntityTableNamesOfGeneral<
+  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+  TModel extends BeanModelMeta,
+> =
+  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
+    TypeEntityTableNamesOfModelJoins<TModelJoins> :
+    TypeEntityTableNamesOfModelClass<TModel>;
 
 // const a: TypeMap<[ModelPost, ModelUser]> = '';
 // const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';

@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IModelClassRecord } from './onion/model.ts';
-import type { TypeEntityTableColumnNamesOfGeneral, TypeModelParamsInclude } from './relations.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableNamesOfGeneral, TypeModelParamsInclude } from './relations.ts';
 
 // join
 export type IModelSelectParamsJoinType =
@@ -15,9 +15,9 @@ export type IModelSelectParamsJoinType =
   | 'fullOuterJoin'
   | 'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
-export type IModelSelectParamsJoin<ColumnNames> = [
+export type IModelSelectParamsJoin<TableNames, ColumnNames> = [
   IModelSelectParamsJoinType,
-  Knex.TableDescriptor,
+  TableNames,
   [ColumnNames, ColumnNames][] | Knex.JoinCallback,
 ];
 
@@ -35,7 +35,7 @@ export interface IModelSelectParams<
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>>[];
+  joins?: IModelSelectParamsJoin<TypeEntityTableNamesOfGeneral<ModelJoins, Model>, TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>>[];
   orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;
