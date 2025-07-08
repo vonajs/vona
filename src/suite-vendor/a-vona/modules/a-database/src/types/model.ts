@@ -14,10 +14,10 @@ export type IModelSelectParamsJoinType =
   | 'fullOuterJoin'
   | 'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
-export type IModelSelectParamsJoin<ColumnNames> = [
+export type IModelSelectParamsJoin<ColumnNames extends string> = [
   IModelSelectParamsJoinType,
   Knex.TableDescriptor,
-  [ColumnNames, ColumnNames] | Knex.JoinCallback,
+  [ColumnNames, ColumnNames][] | Knex.JoinCallback,
 ];
 
 // order
@@ -34,7 +34,7 @@ export interface IModelSelectParams<
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfModelJoins<ModelJoins>>[];
+  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfModelOptions<ModelOptions>>[];
   orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;
