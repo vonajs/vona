@@ -4,6 +4,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
   const contentRecords: string[] = [];
+  const contentModels: string[] = [];
   for (const globFile of globFiles) {
     const { className, beanName, fileContent } = globFile;
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
@@ -14,18 +15,24 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
       [SymbolKeyModelOptions]: ${opionsName};
-      select<ModelJoins extends (keyof IModelRecord) | (keyof IModelRecord)[], T extends IModelSelectParams<${entityName},${opionsName},ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<${entityName},${opionsName},ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${opionsName}>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
     }`);
+    contentModels.push(`'${moduleName}:${beanName}': ${className};`);
     // contentRecords.push(`'${tableName}': never;`);
   }
-  if (contentRecords.length === 0) return '';
+  if (contentRecords.length === 0 && contentModels.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
-import type { IModelMethodOptions, IModelRecord, IModelSelectParams, TypeModelRelationResult } from 'vona-module-a-database';
+import type { IModelMethodOptions, IModelClassRecord, IModelSelectParams, TypeModelRelationResult } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-${moduleName}' {
   ${contentRecords.join('\n')}
+}
+declare module 'vona-module-a-database' {
+  export interface IModelClassRecord {
+    ${contentModels.join('\n')}
+  }
 }
 /** ${sceneName}: end */
 `;

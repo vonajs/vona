@@ -8,6 +8,7 @@ import type { IModelMethodOptionsGeneral } from '../model.ts';
 import type { ITableRecord } from './table.ts';
 
 export interface IModelRecord {}
+export interface IModelClassRecord {}
 
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (

@@ -30,7 +30,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     });
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
 
-    const items = await this.scope.model.post.select(['test-vona:user'], {
+    const items = await this.scope.model.post.select(['test-vona:user', 'test-vona:post'], {
       include: {
         postContent: {
           columns: ['content'],
@@ -44,7 +44,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
       joins: [[
         'innerJoin',
         'demoUser',
-        [['testVonaPostContent.postId','testVonaUser.id']],
+        [['testVonaUser.id', 'testVonaUser.iid']],
       ]],
     });
     console.log(items[0].postContent?.post?.user);
