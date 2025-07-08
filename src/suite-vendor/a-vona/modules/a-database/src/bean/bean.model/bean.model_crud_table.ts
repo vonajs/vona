@@ -12,15 +12,15 @@ import type {
 import { BeanModelCrudInner } from './bean.model_crud_inner.ts';
 
 export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<TRecord> {
-  async mget(table: keyof ITableRecord, ids: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord[]> {
+  async mget(table: keyof ITableRecord, ids: TableIdentity[], options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>): Promise<TRecord[]> {
     return await this._mget(table, ids, options);
   }
 
-  async select(table: keyof ITableRecord, params?: IModelSelectParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+  async select(table: keyof ITableRecord, params?: Omit<IModelSelectParams<TRecord>, 'include' | 'with'>, options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
     return await this._select(table, params, options);
   }
 
-  async get(table: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord | undefined> {
+  async get(table: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>): Promise<TRecord | undefined> {
     return await this._get(table, where, options);
   }
 
