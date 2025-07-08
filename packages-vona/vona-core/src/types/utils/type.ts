@@ -6,3 +6,5 @@ export interface Type<T = any> extends Function {
 
 export type TypeClassOfClassLike<ClassLike> =
   ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result : undefined;
+
+export type TypeRecordValues<Record> = Record[keyof Record];

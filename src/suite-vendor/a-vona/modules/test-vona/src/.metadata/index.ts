@@ -241,7 +241,7 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyEntity]: EntityPost;
       [SymbolKeyEntityMeta]: EntityPostMeta;
       [SymbolKeyModelOptions]: IModelOptionsPost;
-      select<K extends keyof IModelRecord, T extends IModelSelectParams<EntityPost,IModelOptionsPost>>(modelJoins: K | K[], params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
+      select<ModelJoins extends (keyof IModelRecord) | (keyof IModelRecord)[], T extends IModelSelectParams<EntityPost,IModelOptionsPost,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
       select<T extends IModelSelectParams<EntityPost,IModelOptionsPost>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
     }
 export interface ModelPostContent {

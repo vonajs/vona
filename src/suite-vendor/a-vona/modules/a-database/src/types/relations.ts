@@ -1,5 +1,5 @@
-import type { Constructable, OmitNever } from 'vona';
-import type { EntityPost, EntityPostMeta, EntityUserMeta, ModelPost, ModelUser } from 'vona-module-test-vona';
+import type { Constructable, OmitNever, TypeRecordValues } from 'vona';
+import type { EntityPost, EntityPostMeta, EntityUserMeta, IModelOptionsPost, ModelPost, ModelUser } from 'vona-module-test-vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -96,11 +96,14 @@ export type TypeUtilGetRelationModel<Relation> =
     ? MODEL : undefined>;
 export type TypeUtilGetRelationModelOptions<Relation> = TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
+export type TypeUtilGetRelationEntityMeta<Relation> = TypeUtilGetModelEntityMeta<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : undefined;
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
 export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
+export type TypeUtilGetModelEntityMeta<Model extends BeanModelMeta | undefined> =
+  Model extends BeanModelMeta ? Model[TypeSymbolKeyEntityMeta] : undefined;
 
 export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} | undefined> =
   TypeUtilGetEntityByType<
@@ -150,11 +153,22 @@ export type TypeModelRelationResultMergeWithWrapper<WithWrapper> =
     never :
     WithWrapper extends {} ? TypeUtilGetRelationEntityByType<WithWrapper, WithWrapper> : never;
 
-export type TypeEntityTableColumnNames<EntityMeta extends { $table: string }> = keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] };
+export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
 
-export type TypeMap<A extends BeanModelMeta[]> = TypeEntityTableColumnNames<A[number][TypeSymbolKeyEntityMeta]>;
+export type TypeEntityTableColumnNamesOfModels<A extends BeanModelMeta[]> = TypeEntityTableColumnNames<A[number][TypeSymbolKeyEntityMeta]>;
+
+export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
+  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
+}>;
 
 // const a: TypeMap<[ModelPost, ModelUser]> = '';
 // const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';
 // const c: TypeEntityTableColumnNames<EntityPostMeta> | TypeEntityTableColumnNames<EntityUserMeta> = '';
+// const d: TypeModelRelationModelsOfModelOptions<IModelOptionsPost>;
+
+// type ttt =  { [key in keyof IModelOptionsPost as keyof IModelOptionsPost[key]]: IModelOptionsPost[key] };
+
+// interface info { user: 'a' | 'b'; post: 'c' | 'd' }
+// type keyinfo = info[keyof info];
+const e: TypeEntityTableColumnNamesOfModelOptions<IModelOptionsPost> = '';
