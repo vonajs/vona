@@ -30,7 +30,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     });
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
 
-    const items = await this.scope.model.post.select({
+    const items = await this.scope.model.post.select(['test-vona:user'], {
       include: {
         postContent: {
           columns: ['content'],
@@ -41,6 +41,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
       with: {
         user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
       },
+
     });
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);

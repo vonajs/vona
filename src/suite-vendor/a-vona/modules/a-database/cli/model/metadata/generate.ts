@@ -14,6 +14,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
       [SymbolKeyModelOptions]: ${opionsName};
+      select<K extends keyof IModelRecord, T extends IModelSelectParams<${entityName},${opionsName}>>(modelJoins: K | K[], params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${opionsName}>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
     }`);
     // contentRecords.push(`'${tableName}': never;`);
@@ -21,7 +22,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   if (contentRecords.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
-import type { IModelMethodOptions, IModelSelectParams, TypeModelRelationResult } from 'vona-module-a-database';
+import type { IModelMethodOptions, IModelRecord, IModelSelectParams, TypeModelRelationResult } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-${moduleName}' {
   ${contentRecords.join('\n')}
