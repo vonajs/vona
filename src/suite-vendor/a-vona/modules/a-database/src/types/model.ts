@@ -1,8 +1,8 @@
 import type { Knex } from 'knex';
-import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
-import type {  IModelClassRecord } from './onion/model.ts';
-import type { TypeEntityTableColumnNamesOfGeneral,  TypeModelParamsInclude } from './relations.ts';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
+import type { IModelClassRecord } from './onion/model.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeModelParamsInclude } from './relations.ts';
 
 // join
 export type IModelSelectParamsJoinType =

@@ -22,28 +22,29 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 export class ModelPost extends BeanModelBase<EntityPost> {
   async test() {
     const users = await this.scope.model.user.select(
-       //['test-vona:user', 'test-vona:post'],
-       undefined,
+      // ['test-vona:user', 'test-vona:post'],
+      undefined,
       {
-        include:{}
+        include: {},
       // include: {
       //   roles: {
       //     include: { users: { include: { posts: true } } },
       //   },
       // },
-    });
+      },
+    );
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
 
     // ['test-vona:user', 'test-vona:post'],
     const items = await this.scope.model.post.select(
       // ['test-vona:user', 'test-vona:post'],
-      //undefined,
+      // undefined,
       {
         include: {
           postContent: {
             columns: ['content'],
-            include: { 
-              post: { include: { user: { columns: 'name' } } }
+            include: {
+              post: { include: { user: { columns: 'name' } } },
             },
           },
           user: { columns: 'name' },
@@ -51,9 +52,9 @@ export class ModelPost extends BeanModelBase<EntityPost> {
         with: {
           user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
         },
-        joins:[['innerJoin','',[['testVonaUser.id','testVonaUser.id']]]]
+        joins: ['innerJoin', '', [['testVonaUser.id', 'testVonaUser.id']]],
       },
-      //['test-vona:user', 'test-vona:post'],
+      ['test-vona:user'],
     );
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);
