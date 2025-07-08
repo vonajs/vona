@@ -25,10 +25,12 @@ describe('modelRelations.test.ts', () => {
         where: {
           id: [post1.id, post2.id],
         },
+        orders: [['id', 'asc']],
         include: { postContent: true },
       });
       assert.equal(posts.length, 2);
-      console.log(posts);
+      assert.equal(posts[0].postContent?.content, 'content1');
+      assert.equal(posts[1].postContent, undefined);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
