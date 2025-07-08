@@ -1,4 +1,5 @@
 import type { Constructable, OmitNever } from 'vona';
+import type { EntityPost, EntityPostMeta, EntityUserMeta, ModelPost, ModelUser } from 'vona-module-test-vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -151,3 +152,9 @@ export type TypeModelRelationResultMergeWithWrapper<WithWrapper> =
 
 export type TypeEntityTableColumnNames<EntityMeta extends { $table: string }> = keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] };
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
+
+export type TypeMap<A extends BeanModelMeta[]> = TypeEntityTableColumnNames<A[number][TypeSymbolKeyEntityMeta]>;
+
+// const a: TypeMap<[ModelPost, ModelUser]> = '';
+// const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';
+// const c: TypeEntityTableColumnNames<EntityPostMeta> | TypeEntityTableColumnNames<EntityUserMeta> = '';
