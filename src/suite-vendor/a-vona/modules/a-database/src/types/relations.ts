@@ -1,5 +1,4 @@
 import type { Constructable, OmitNever, TypeConfirmArray, TypeRecordValues } from 'vona';
-import type { IModelOptionsPost, ModelPost } from 'vona-module-test-vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -78,9 +77,10 @@ export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanMod
 export type TypeModelParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
 
-export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecoratorModelOptions | undefined> = ModelOptions extends IDecoratorModelOptions ? {
-  [relationName in keyof ModelOptions['relations'] ]?: TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
-} : never;
+export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecoratorModelOptions | undefined> =
+  ModelOptions extends IDecoratorModelOptions ? {
+    [relationName in keyof ModelOptions['relations'] ]?: TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
+  } : never;
 
 export type TypeModelParamsRelationOptions<Relation> =
   boolean

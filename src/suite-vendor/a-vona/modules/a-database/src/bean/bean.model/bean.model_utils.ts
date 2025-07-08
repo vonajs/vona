@@ -80,16 +80,20 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return buildWhere(builder, wheres);
   }
 
-  buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin) {
+  buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin<string, string>) {
     if (!join) return;
     const [joinType, joinTable, joinOn] = join;
     builder[joinType](joinTable, cast(joinOn));
   }
 
-  buildJoins(builder: Knex.QueryBuilder, joins?: IModelSelectParamsJoin[]) {
+  buildJoins(builder: Knex.QueryBuilder, joins?: IModelSelectParamsJoin<string, string>[]) {
     if (!joins) return;
     for (const [joinType, joinTable, joinOn] of joins) {
-      builder[joinType](joinTable, cast(joinOn));
+      if (Array.isArray(joinOn)) {
+        builder[joinType](joinTable, ...joinOn);
+      } else {
+        builder[joinType](joinTable, joinOn);
+      }
     }
   }
 
@@ -104,11 +108,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildCount(builder: Knex.QueryBuilder, count: any, distinct: any) {
+  buildCount(builder: Knex.QueryBuilder, count?: keyof TRecord, distinct?: boolean | (keyof TRecord) | (keyof TRecord)[]) {
     if (count !== undefined) {
       builder.count(count);
     } else if (distinct !== undefined && distinct !== false) {
-      builder.count(this.raw(`distinct ${this.toIdentifier(distinct)}`));
+      builder.count(this.raw(`distinct ${this.toIdentifier(distinct as any)}`));
     } else {
       builder.count();
     }

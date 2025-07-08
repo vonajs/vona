@@ -18,7 +18,7 @@ export type IModelSelectParamsJoinType =
 export type IModelSelectParamsJoin<TableNames, ColumnNames> = [
   IModelSelectParamsJoinType,
   TableNames,
-  [ColumnNames, ColumnNames][] | Knex.JoinCallback,
+  [ColumnNames, ColumnNames] | Knex.JoinCallback,
 ];
 
 // order

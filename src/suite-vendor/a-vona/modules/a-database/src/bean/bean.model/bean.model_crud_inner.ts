@@ -76,8 +76,6 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     this.buildLimit(builder, params.limit);
     // offset
     this.buildOffset(builder, params.offset);
-    // page
-    this.buildPage(builder, params.page);
     // ready
     this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
     return (await builder) as TRecord[];

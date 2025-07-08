@@ -50,7 +50,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
         with: {
           user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
         },
-        joins: [['innerJoin', 'testVonaUser', [['id', 'testVonaPost.id']]]],
+        joins: [['innerJoin', 'testVonaUser', ['id', 'testVonaPost.id']]],
         distinct: ['userId'],
         orders: [['testVonaPost.id', 'asc', 'first']],
       },
@@ -61,6 +61,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     console.log(items[0].user3?.name);
 
     const count = await this.scope.model.post.count({ count: 'id' });
+    console.log(count);
 
     const items2 = await this.scope.model.post.select({
       // include: { user: false },
