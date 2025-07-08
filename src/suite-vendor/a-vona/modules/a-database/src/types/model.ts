@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
-import type { IDecoratorModelOptions } from './onion/model.ts';
-import type { TypeModelParamsInclude, TypeModelRelationModelsOfModelOptions } from './relations.ts';
+import type { IDecoratorModelOptions, IModelRecord } from './onion/model.ts';
+import type { TypeEntityTableColumnNamesOfModelJoins, TypeEntityTableColumnNamesOfModelOptions, TypeModelParamsInclude, TypeModelRelationModelsOfModelOptions } from './relations.ts';
 
 // join
 export type IModelSelectParamsJoinType =
@@ -13,11 +13,11 @@ export type IModelSelectParamsJoinType =
   | 'rightOuterJoin'
   | 'fullOuterJoin'
   | 'crossJoin';
-export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
-export type IModelSelectParamsJoin = [
+// export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
+export type IModelSelectParamsJoin<ColumnNames> = [
   IModelSelectParamsJoinType,
   Knex.TableDescriptor,
-  IModelSelectParamsJoinOnMap | Knex.JoinCallback,
+  [ColumnNames, ColumnNames] | Knex.JoinCallback,
 ];
 
 // order
@@ -28,13 +28,13 @@ export type IModelSelectParamsOrder<TRecord> = [keyof TRecord, IModelSelectParam
 export interface IModelSelectParams<
   TRecord,
   ModelOptions extends IDecoratorModelOptions = IDecoratorModelOptions,
-  ModelJoins = undefined,
+  ModelJoins extends (keyof IModelRecord) | (keyof IModelRecord)[] | undefined = undefined,
 > {
   alias?: string;
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin[];
+  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfModelJoins<ModelJoins>>[];
   orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;

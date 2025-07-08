@@ -162,6 +162,10 @@ export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDeco
   [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
 }>;
 
+export type TypeEntityTableColumnNamesOfModelJoins<TModelOptions extends (keyof IModelRecord) | (keyof IModelRecord)[] | undefined> = TypeRecordValues<{
+  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
+}>;
+
 // const a: TypeMap<[ModelPost, ModelUser]> = '';
 // const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';
 // const c: TypeEntityTableColumnNames<EntityPostMeta> | TypeEntityTableColumnNames<EntityUserMeta> = '';

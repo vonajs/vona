@@ -14,7 +14,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
       [SymbolKeyModelOptions]: ${opionsName};
-      select<K extends keyof IModelRecord, T extends IModelSelectParams<${entityName},${opionsName}>>(modelJoins: K | K[], params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
+      select<ModelJoins extends (keyof IModelRecord) | (keyof IModelRecord)[], T extends IModelSelectParams<${entityName},${opionsName},ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${opionsName}>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
     }`);
     // contentRecords.push(`'${tableName}': never;`);
