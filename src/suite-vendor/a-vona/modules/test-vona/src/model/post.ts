@@ -71,5 +71,14 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     });
     console.log(items2[0].user?.name);
     console.log(items2[0].user3?.name);
+
+    const items3 = await this.scope.model.post.mget([], {
+      include: { postContent: true },
+      with: {
+        user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+      },
+    });
+    console.log(items3[0].postContent?.content);
+    console.log(items3[0].user3?.name);
   }
 }

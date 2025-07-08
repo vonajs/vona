@@ -68,7 +68,7 @@ export type IModelCountParams<
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 export type IModelUpdateOptions<TRecord> = Omit<IModelUpdateOptionsGeneral<TRecord>, 'disableInstance'>;
-export type IModelGetOptions<TRecord> = Omit<IModelGetOptionsGeneral<TRecord>, 'disableInstance'>;
+export type IModelGetOptions<TRecord, Model extends BeanModelMeta = BeanModelMeta> = Omit<IModelGetOptionsGeneral<TRecord, Model>, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
@@ -80,8 +80,10 @@ export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptions
   disableUpdateTime?: boolean;
 }
 
-export interface IModelGetOptionsGeneral<TRecord> extends IModelMethodOptionsGeneral {
+export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta = BeanModelMeta> extends IModelMethodOptionsGeneral {
   columns?: TypeModelColumns<TRecord>;
+  include?: TypeModelParamsInclude<Model>;
+  with?: Record<string, unknown>;
 }
 
 export interface IModelSelectParamsPage {
