@@ -86,7 +86,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       return await super._select(table, params, options);
     }
     // 1: select id
-    const columnId = `${params?.alias ? params?.alias : table}.id`;
+    const columnId = `${table}.id`;
     const params2: IModelSelectParams<TRecord> = Object.assign({}, params, { columns: [columnId] });
     const items = await super._select(table, params2, options);
     if (items.length === 0) {
