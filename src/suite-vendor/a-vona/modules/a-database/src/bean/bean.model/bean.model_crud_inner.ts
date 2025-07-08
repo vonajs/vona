@@ -82,8 +82,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   }
 
   protected async _get(
-    table?: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
+    table: keyof ITableRecord | undefined,
+    where: TypeModelWhere<TRecord>,
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined> {
     // table

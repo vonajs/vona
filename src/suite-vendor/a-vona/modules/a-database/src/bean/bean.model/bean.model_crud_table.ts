@@ -20,7 +20,7 @@ export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<T
     return await this._select(table, params, options);
   }
 
-  async get(table: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>): Promise<TRecord | undefined> {
+  async get(table: keyof ITableRecord, where: TypeModelWhere<TRecord>, options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>): Promise<TRecord | undefined> {
     return await this._get(table, where, options);
   }
 

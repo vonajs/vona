@@ -99,7 +99,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return await this.mget(ids, options2);
   }
 
-  async get(where?: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
+  async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
     // table
     const table = this.getTable('get', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -186,7 +186,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
 
   private async __get_notkey(
     table: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
+    where: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
@@ -214,7 +214,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
 
   private async __get_key(
     table: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
+    where: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
