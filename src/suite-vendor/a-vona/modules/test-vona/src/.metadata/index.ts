@@ -241,49 +241,49 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyEntity]: EntityPost;
       [SymbolKeyEntityMeta]: EntityPostMeta;
       [SymbolKeyModelOptions]: IModelOptionsPost;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
       select<T extends IModelSelectParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, IModelOptionsPost, T>[]>;
     }
 export interface ModelPostContent {
       [SymbolKeyEntity]: EntityPostContent;
       [SymbolKeyEntityMeta]: EntityPostContentMeta;
       [SymbolKeyModelOptions]: IModelOptionsPostContent;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, IModelOptionsPostContent, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, IModelOptionsPostContent, T>[]>;
       select<T extends IModelSelectParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, IModelOptionsPostContent, T>[]>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
       [SymbolKeyEntityMeta]: EntityRoleMeta;
       [SymbolKeyModelOptions]: IModelOptionsRole;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, IModelOptionsRole, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, IModelOptionsRole, T>[]>;
       select<T extends IModelSelectParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, IModelOptionsRole, T>[]>;
     }
 export interface ModelRoleUser {
       [SymbolKeyEntity]: EntityRoleUser;
       [SymbolKeyEntityMeta]: EntityRoleUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsRoleUser;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, IModelOptionsRoleUser, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, IModelOptionsRoleUser, T>[]>;
       select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, IModelOptionsRoleUser, T>[]>;
     }
 export interface ModelTest {
       [SymbolKeyEntity]: EntityTest;
       [SymbolKeyEntityMeta]: EntityTestMeta;
       [SymbolKeyModelOptions]: IModelOptionsTest;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTest, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTest, T>[]>;
       select<T extends IModelSelectParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTest, T>[]>;
     }
 export interface ModelTestDynamicTable {
       [SymbolKeyEntity]: EntityTest;
       [SymbolKeyEntityMeta]: EntityTestMeta;
       [SymbolKeyModelOptions]: IModelOptionsTestDynamicTable;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTestDynamicTable, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTestDynamicTable, T>[]>;
       select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, IModelOptionsTestDynamicTable, T>[]>;
     }
 export interface ModelUser {
       [SymbolKeyEntity]: EntityUser;
       [SymbolKeyEntityMeta]: EntityUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsUser;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, IModelOptionsUser, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, IModelOptionsUser, T>[]>;
       select<T extends IModelSelectParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, IModelOptionsUser, T>[]>;
     }
 }

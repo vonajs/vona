@@ -15,7 +15,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
       [SymbolKeyModelOptions]: ${opionsName};
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<${entityName},${className},ModelJoins>>(modelJoins: ModelJoins, params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<${entityName},${className},ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${className}>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
     }`);
     contentModels.push(`'${moduleName}:${beanName}': ${className};`);
