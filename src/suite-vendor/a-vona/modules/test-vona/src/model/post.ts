@@ -23,14 +23,12 @@ export class ModelPost extends BeanModelBase<EntityPost> {
   async test() {
     const users = await this.scope.model.user.select(
       // ['test-vona:user', 'test-vona:post'],
-      undefined,
       {
-        include: {},
-      // include: {
-      //   roles: {
-      //     include: { users: { include: { posts: true } } },
-      //   },
-      // },
+        include: {
+          roles: {
+            include: { users: { include: { posts: true } } },
+          },
+        },
       },
     );
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
@@ -52,9 +50,9 @@ export class ModelPost extends BeanModelBase<EntityPost> {
         with: {
           user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
         },
-        joins: ['innerJoin', '', [['testVonaUser.id', 'testVonaUser.id']]],
+        joins: [['innerJoin', '', [['id', 'testVonaPost.id']]]],
       },
-      ['test-vona:user'],
+      // ['test-vona:user'],
     );
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);
