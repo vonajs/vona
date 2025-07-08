@@ -148,3 +148,6 @@ export type TypeModelRelationResultMergeWithWrapper<WithWrapper> =
   WithWrapper extends true ?
     never :
     WithWrapper extends {} ? TypeUtilGetRelationEntityByType<WithWrapper, WithWrapper> : never;
+
+export type TypeEntityTableColumnNames<EntityMeta extends { $table: string }> = keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] };
+export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;

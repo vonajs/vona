@@ -41,7 +41,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
       with: {
         user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
       },
-
+      joins: [['innerJoin','demoUser',{''}]],
     });
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);
