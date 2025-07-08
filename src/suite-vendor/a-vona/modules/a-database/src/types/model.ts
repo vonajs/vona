@@ -24,18 +24,16 @@ export type IModelSelectParamsJoin<TableNames, ColumnNames> = [
 // order
 export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
-export type IModelSelectParamsOrder<TRecord> = [keyof TRecord, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
+export type IModelSelectParamsOrder<ColumnNames> = [ColumnNames, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
 export interface TypeBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames> {
-  alias?: string;
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
   joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
-  orders?: IModelSelectParamsOrder<TRecord>[];
+  orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
-  page?: IModelSelectParamsPage;
   include?: TypeModelParamsInclude<Model>;
   with?: Record<string, unknown>;
 }
@@ -52,7 +50,6 @@ export type IModelSelectParams<
 >;
 
 export interface IModelCountParams<TRecord> {
-  alias?: string;
   count?: any;
   distinct?: any;
   where?: TypeModelWhere<TRecord>;

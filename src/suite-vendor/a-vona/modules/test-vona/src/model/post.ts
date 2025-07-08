@@ -52,6 +52,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
         },
         joins: [['innerJoin', 'testVonaUser', [['id', 'testVonaPost.id']]]],
         distinct: ['userId'],
+        orders: [['testVonaPost.id', 'asc', 'first']],
       },
       // ['test-vona:user','test-vona:role'],
     );
