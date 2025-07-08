@@ -1,5 +1,4 @@
 import type { Constructable, OmitNever, TypeConfirmArray, TypeRecordValues } from 'vona';
-import type { EntityPost, EntityPostMeta, EntityUserMeta, IModelOptionsPost, ModelPost, ModelUser } from 'vona-module-test-vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
@@ -182,6 +181,6 @@ export type TypeEntityTableColumnNamesOfGeneral<
 
 // interface info { user: 'a' | 'b'; post: 'c' | 'd' }
 // type keyinfo = info[keyof info];
-const e: TypeEntityTableColumnNamesOfModelOptions<IModelOptionsPost> = '';
+// const e: TypeEntityTableColumnNamesOfModelOptions<IModelOptionsPost> = '';
 
-const f: TypeEntityTableColumnNamesOfModelJoins<['test-vona:post', 'test-vona:user']> = '';
+// const f: TypeEntityTableColumnNamesOfModelJoins<['test-vona:post', 'test-vona:user']> = '';

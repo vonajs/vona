@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnNamesOfModelJoins, TypeEntityTableColumnNamesOfModelOptions, TypeModelParamsInclude, TypeModelRelationModelsOfModelOptions } from './relations.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeModelParamsInclude } from './relations.ts';
 
 // join
 export type IModelSelectParamsJoinType =
