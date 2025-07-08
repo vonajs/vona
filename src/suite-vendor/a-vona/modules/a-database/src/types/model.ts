@@ -26,16 +26,12 @@ export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder<TRecord> = [keyof TRecord, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
-export interface IModelSelectParams<
-  TRecord,
-  Model extends BeanModelMeta = BeanModelMeta,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
-> {
+export interface TypeBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames> {
   alias?: string;
-  distinct?: any;
+  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin<TypeEntityTableNamesOfGeneral<ModelJoins, Model>, TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>>[];
+  joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;
@@ -43,6 +39,17 @@ export interface IModelSelectParams<
   include?: TypeModelParamsInclude<Model>;
   with?: Record<string, unknown>;
 }
+
+export type IModelSelectParams<
+  TRecord,
+  Model extends BeanModelMeta = BeanModelMeta,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+> = TypeBuildModelSelectParams<
+  TRecord,
+  Model,
+  TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>
+>;
 
 export interface IModelCountParams<TRecord> {
   alias?: string;

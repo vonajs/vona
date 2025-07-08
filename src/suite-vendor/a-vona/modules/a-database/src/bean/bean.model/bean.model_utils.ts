@@ -93,10 +93,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildDistinct(builder: Knex.QueryBuilder, distinct: any) {
+  buildDistinct(builder: Knex.QueryBuilder, distinct?: boolean | (keyof TRecord) | (keyof TRecord)[]) {
     if (distinct === undefined || distinct === false) return;
     if (distinct === true) {
       builder.distinct();
+    } else if (Array.isArray(distinct)) {
+      builder.distinct(...distinct);
     } else {
       builder.distinct(distinct);
     }
