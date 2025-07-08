@@ -1,7 +1,8 @@
 import type { Knex } from 'knex';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
-import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeEntityTableColumnNamesOfGeneral, TypeModelParamsInclude } from './relations.ts';
+import type {  IModelClassRecord } from './onion/model.ts';
+import type { TypeEntityTableColumnNamesOfGeneral,  TypeModelParamsInclude } from './relations.ts';
+import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 
 // join
 export type IModelSelectParamsJoinType =
@@ -27,19 +28,19 @@ export type IModelSelectParamsOrder<TRecord> = [keyof TRecord, IModelSelectParam
 
 export interface IModelSelectParams<
   TRecord,
-  ModelOptions extends IDecoratorModelOptions = IDecoratorModelOptions,
+  Model extends BeanModelMeta = BeanModelMeta,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   alias?: string;
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfGeneral<ModelJoins, ModelOptions>>[];
+  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>>[];
   orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;
   page?: IModelSelectParamsPage;
-  include?: TypeModelParamsInclude<ModelOptions>;
+  include?: TypeModelParamsInclude<Model>;
   with?: Record<string, unknown>;
 }
 

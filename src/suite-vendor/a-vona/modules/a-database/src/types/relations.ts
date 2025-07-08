@@ -3,6 +3,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
+import type { IModelOptionsPost } from 'vona-module-test-vona';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -74,14 +75,17 @@ export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanMod
   offset?: number;
 }
 
-export type TypeModelParamsInclude<ModelOptions extends IDecoratorModelOptions | undefined> = ModelOptions extends IDecoratorModelOptions ? {
+export type TypeModelParamsInclude<MODEL extends BeanModelMeta | undefined> = 
+  TypeModelParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>
+
+export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecoratorModelOptions | undefined> = ModelOptions extends IDecoratorModelOptions ? {
   [relationName in keyof ModelOptions['relations'] ]?: TypeModelParamsRelationOptions<ModelOptions['relations'][relationName]>;
 } : never;
 
 export type TypeModelParamsRelationOptions<Relation> =
   boolean
   | Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>
-  & { include?: TypeModelParamsInclude<TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>> };
+  & { include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>> };
 
 export type TypeModelClassOfClassLike<ClassLike> =
   ClassLike extends
@@ -157,20 +161,34 @@ export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
 
 export type TypeEntityTableColumnNamesOfModels<A extends BeanModelMeta[]> = TypeEntityTableColumnNames<A[number][TypeSymbolKeyEntityMeta]>;
 
+// export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeEntityTableColumnNames<TypeRecordValues<{
+//   [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>;
+// }>>;
 export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
   [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
 }>;
+
+export type TypeEntityTableColumnNamesOfModelClass<TModel extends BeanModelMeta> = 
+  TypeEntityTableColumnNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
 
 export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
     TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
 
 export type TypeEntityTableColumnNamesOfGeneral<
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
-  TModelOptions extends IDecoratorModelOptions,
+  TModel extends BeanModelMeta,
 > =
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
     TypeEntityTableColumnNamesOfModelJoins<TModelJoins> :
-    TypeEntityTableColumnNamesOfModelOptions<TModelOptions>;
+    TypeEntityTableColumnNamesOfModelClass<TModel>;
+
+// export type TypeEntityTableColumnNamesOfGeneral<
+//   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+//   _TModelOptions extends IDecoratorModelOptions,
+// > =
+//   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
+//     TypeEntityTableColumnNamesOfModelJoins<TModelJoins> :
+//     '';    
 
 // const a: TypeMap<[ModelPost, ModelUser]> = '';
 // const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';
@@ -181,6 +199,6 @@ export type TypeEntityTableColumnNamesOfGeneral<
 
 // interface info { user: 'a' | 'b'; post: 'c' | 'd' }
 // type keyinfo = info[keyof info];
-// const e: TypeEntityTableColumnNamesOfModelOptions<IModelOptionsPost> = '';
+//  const e: TypeEntityTableColumnNamesOfModelOptions<IModelOptionsPost> = '';
 
 // const f: TypeEntityTableColumnNamesOfModelJoins<['test-vona:post', 'test-vona:user']> = '';

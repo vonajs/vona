@@ -21,32 +21,42 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
   async test() {
-    const users = await this.scope.model.user.select({
-      include: {
-        roles: {
-          include: { users: { include: { posts: true } } },
-        },
-      },
+    const users = await this.scope.model.user.select(
+       //['test-vona:user', 'test-vona:post'],
+       undefined,
+      {
+        include:{}
+      // include: {
+      //   roles: {
+      //     include: { users: { include: { posts: true } } },
+      //   },
+      // },
     });
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
 
     // ['test-vona:user', 'test-vona:post'],
     const items = await this.scope.model.post.select(
       // ['test-vona:user', 'test-vona:post'],
+      //undefined,
       {
         include: {
           postContent: {
             columns: ['content'],
-            include: { post: { include: { user: { columns: 'name' } } } },
+            include: { 
+              post: { include: { user: { columns: 'name' } } }
+            },
           },
           user: { columns: 'name' },
         },
         with: {
           user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
         },
-        joins: [
-          ['innerJoin', 'sss', [['testVonaUser.id', 'testVonaUser.id']]],
-        ],
+        joins:[['innerJoin','',[['testVonaUser.id','testVonaUser.iid']]]]
+        // joins: [[
+        //   'innerJoin','',[['testVonaUser.id','testVonaUser.id'] as any]
+        // ]],
+        // joins: ['testVonaUser.id', 'testVonaPostContent.id'],
+        // joins: { from:'' },
         // joins: [[
         //   'innerJoin',
         //   'demoUser',
