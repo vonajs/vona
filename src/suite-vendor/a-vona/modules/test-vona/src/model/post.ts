@@ -30,23 +30,29 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     });
     console.log(users[0].roles[0].users[0].posts[0].user?.name);
 
-    const items = await this.scope.model.post.select(['test-vona:user', 'test-vona:post'], {
-      include: {
-        postContent: {
-          columns: ['content'],
-          include: { post: { include: { user: { columns: 'name' } } } },
+    // ['test-vona:user', 'test-vona:post'],
+    const items = await this.scope.model.post.select(
+      {
+        include: {
+          postContent: {
+            columns: ['content'],
+            include: { post: { include: { user: { columns: 'name' } } } },
+          },
+          user: { columns: 'name' },
         },
-        user: { columns: 'name' },
+        with: {
+          user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+        },
+        joins: [[
+
+          // 'innerJoin',
+          // 'demoUser',
+          // // [['testVonaUser.id', 'testVonaUser.iid']],
+          // // [['testVonaPost.id', 'testVonaUser.id']],
+          // [['']],
+        ]],
       },
-      with: {
-        user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
-      },
-      joins: [[
-        'innerJoin',
-        'demoUser',
-        [['testVonaUser.id', 'testVonaUser.iid']],
-      ]],
-    });
+    );
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);
     console.log(items[0].user3?.name);

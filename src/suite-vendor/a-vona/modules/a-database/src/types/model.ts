@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeEntityTableColumnNamesOfModelJoins, TypeEntityTableColumnNamesOfModelOptions, TypeModelParamsInclude, TypeModelRelationModelsOfModelOptions } from './relations.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnNamesOfModelJoins, TypeEntityTableColumnNamesOfModelOptions, TypeModelParamsInclude, TypeModelRelationModelsOfModelOptions } from './relations.ts';
 
 // join
 export type IModelSelectParamsJoinType =
@@ -34,7 +34,7 @@ export interface IModelSelectParams<
   distinct?: any;
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfModelJoins<ModelJoins>>[];
+  joins?: IModelSelectParamsJoin<TypeEntityTableColumnNamesOfGeneral<ModelJoins, ModelOptions>>[];
   orders?: IModelSelectParamsOrder<TRecord>[];
   limit?: number;
   offset?: number;

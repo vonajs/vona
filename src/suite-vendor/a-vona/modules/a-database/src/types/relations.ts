@@ -162,9 +162,16 @@ export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDeco
   [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
 }>;
 
-export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined> =
+export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
+    TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
+
+export type TypeEntityTableColumnNamesOfGeneral<
+  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+  TModelOptions extends IDecoratorModelOptions,
+> =
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
-    TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]> : never;
+    TypeEntityTableColumnNamesOfModelJoins<TModelJoins> :
+    TypeEntityTableColumnNamesOfModelOptions<TModelOptions>;
 
 // const a: TypeMap<[ModelPost, ModelUser]> = '';
 // const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';
