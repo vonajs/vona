@@ -59,7 +59,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return (await super._mget(table, ids, options)) as TRecord[];
+      const entities = (await super._mget(table, ids, options)) as TRecord[];
+      return await this.$scope.database.service.relations.handleRelationsMany(entities, this, options as any, options);
     }
     // cache
     const cache = this.__getCacheInstance(table);
@@ -74,7 +75,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return false;
       return true;
     });
-    return this.__filterMGetColumns(items, options?.columns);
+    items = this.__filterMGetColumns(items, options?.columns);
+    return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
   }
 
   async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {

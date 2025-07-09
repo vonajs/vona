@@ -62,6 +62,11 @@ describe('modelRelations.test.ts', () => {
       assert.equal(roles.length, 2);
       assert.equal(roles[0].users.length, 2);
       assert.equal(roles[1].users.length, 1);
+      //
+      const roles2 = await scopeTest.model.role.mget([role1.id, role2.id], { include: { users: true } });
+      assert.equal(roles2.length, 2);
+      assert.equal(roles2[0].users.length, 2);
+      assert.equal(roles2[1].users.length, 1);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
