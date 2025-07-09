@@ -20,7 +20,7 @@ export type TypeDataBaseConfigDialects = Record<
 export function config(_app: VonaApplication) {
   return {
     table: {
-      idType: 'string' as TableIdentityType,
+      identityType: 'string' as TableIdentityType,
     },
     model: {
       disableDeleted: false,

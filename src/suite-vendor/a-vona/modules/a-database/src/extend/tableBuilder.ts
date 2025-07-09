@@ -12,13 +12,13 @@ export interface IBasicFieldsOptions {
 
 export function ExtendTableBuilder(app: VonaApplication) {
   const scope = app.bean.scope(__ThisModule__);
-  function _basicFields(this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions, idType?: TableIdentityType) {
+  function _basicFields(this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions, identityType?: TableIdentityType) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) {
-      const _idType = idType ?? scope.config.table.idType;
-      if (_idType === 'string') {
+      const _identityType = identityType ?? scope.config.table.identityType;
+      if (_identityType === 'string') {
         this.bigIncrements();
-      } else if (_idType === 'number') {
+      } else if (_identityType === 'number') {
         this.increments();
       }
     }
@@ -37,10 +37,10 @@ export function ExtendTableBuilder(app: VonaApplication) {
     return this;
   });
   knex.TableBuilder.extend('tableIdentity', function (this: knex.Knex.TableBuilder, columnName: string) {
-    const _idType = scope.config.table.idType;
-    if (_idType === 'string') {
+    const _identityType = scope.config.table.identityType;
+    if (_identityType === 'string') {
       return this.bigInteger(columnName); // default value is null
-    } else if (_idType === 'number') {
+    } else if (_identityType === 'number') {
       return this.integer(columnName); // default value is null
     }
   });

@@ -347,4 +347,17 @@ config.onions = {
 |deleted|boolean|软删除|
 |iid|number|实例Id/租户Id|
 
-- id：使用 TableIdentity 类型，从而支持任何规模的业务系统
+## id: TableIdentity
+
+关键字段`id`使用`TableIdentity`类型，从而支持任何规模的业务系统。当我们使用`int64`作为数据库字段类型时，从数据库读取出来的值是`string`类型
+
+``` typescript
+export type TableIdentity = string | number;
+```
+
+* 设置默认字段类型
+
+在创建数据表时，系统会根据当前的配置使用`int`或者`int64`作为 id 字段的类型，默认为`int64`
+
+``
+
