@@ -40,6 +40,17 @@ describe('modelRelations.test.ts', () => {
       });
       assert.equal(postContents.length, 1);
       assert.equal(postContents[0].post?.title, 'post1');
+      // relation: hasMany
+      const users = await scopeTest.model.user.select({
+        where: {
+          id: [user1.id, user2.id],
+        },
+        orders: [['id', 'asc']],
+        include: { posts: true },
+      });
+      assert.equal(users.length, 2);
+      assert.equal(users[0].posts.length, 2);
+      assert.equal(users[0].posts.length, 0);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
