@@ -44,19 +44,20 @@ export class ModelPost extends BeanModelBase<EntityPost> {
             include: {
               // post: { include: { user: { columns: 'name' } } },
             },
-            with:{
-              post:$relationDynamic.belongsTo(()=>ModelPostContent,()=>ModelPost,'postId',{
-                include:{
-                  'postContent':true
-                }})
+            with: {
+              post: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
+                include: {
+                  'postContent': true
+                }
+              })
             }
           },
           user: { columns: 'name' },
         },
-        with:  {
+        with: {
           user3: $relationDynamic.belongsTo(ModelPost, () => ModelUser, 'userId', {
-             include:{'posts':true}, columns: ['id', 'name'] 
-          }) 
+            include: { 'posts': true }, columns: ['id', 'name']
+          })
         },
         joins: [['innerJoin', 'testVonaUser', ['id', 'testVonaPost.id']]],
         distinct: ['userId'],

@@ -25,16 +25,13 @@ export type TypeModelParamsRelationOptions<Relation> =
     with?: Record<string, unknown>;
   };
 
-export type TypeModelClassOfClassLike<ClassLike> =
-  ClassLike extends
-  ((() => Constructable<infer Result extends BeanModelMeta>) | Constructable<infer Result extends BeanModelMeta>)
-    ? Result : undefined;
-
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : undefined;
 export type TypeUtilGetRelationModel<Relation> =
-  TypeModelClassOfClassLike<Relation extends
-  { model?: infer MODEL extends ((() => Constructable<BeanModelMeta>) | Constructable<BeanModelMeta>) }
-    ? MODEL : undefined>;
+  Relation extends { model?: () => Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
+  Relation extends { model?: () => infer MODEL extends BeanModelMeta } ? MODEL :
+  Relation extends { model?: Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
+  Relation extends { model?: infer MODEL extends BeanModelMeta } ? MODEL : undefined;
+
 export type TypeUtilGetRelationModelOptions<Relation> = TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntityMeta<Relation> = TypeUtilGetModelEntityMeta<TypeUtilGetRelationModel<Relation>>;
@@ -157,3 +154,6 @@ export type TypeEntityTableNamesOfGeneral<
 
 // const f: TypeEntityTableColumnNamesOfModelJoins<['test-vona:post', 'test-vona:user']> | TypeEntityTableColumnNamesOfModelSelf<ModelPost> = '';
 //  const f2: TypeEntityTableColumnNamesOfModelSelf<ModelPost>='';
+
+// const a: TypeModelRelationResultMergeWithRelation<{ type: 'belongsTo'; model: ModelPost; options: { include: { postContent: true } } }>;
+// a?.user.
