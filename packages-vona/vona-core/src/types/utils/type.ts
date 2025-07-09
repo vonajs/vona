@@ -5,6 +5,8 @@ export interface Type<T = any> extends Function {
 }
 
 export type TypeClassOfClassLike<ClassLike> =
+  ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result :
+  ClassLike extends ((() => infer Result) | infer Result) ? Result :
   ClassLike extends () => Constructable<infer Result> ? Result :
   ClassLike extends () => infer Result ? Result :
   ClassLike extends Constructable<infer Result> ? Result :
