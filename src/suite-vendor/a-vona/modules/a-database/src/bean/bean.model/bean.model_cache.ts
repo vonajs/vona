@@ -83,13 +83,17 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   }
 
   async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+    const items = await this.__select_raw(params, options);
+    return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
+  }
+
+  async __select_raw(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
     // table
     const table = this.getTable('select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      const entities = await super._select(table, params, options);
-      return await this.$scope.database.service.relations.handleRelationsMany(entities, this, params as any, options);
+      return await super._select(table, params, options);
     }
     // 1: select id
     const columnId = `${table}.id`;
@@ -102,8 +106,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     // 2: mget
     const ids = items.map(item => cast(item).id);
     const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
-    const entities = await this.mget(ids, options2);
-    return await this.$scope.database.service.relations.handleRelationsMany(entities, this, params as any, options);
+    return await this.__mget_raw(ids, options2);
   }
 
   async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
