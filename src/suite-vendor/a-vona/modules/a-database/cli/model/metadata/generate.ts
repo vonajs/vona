@@ -15,10 +15,10 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
       [SymbolKeyModelOptions]: ${opionsName};
-      get<T extends IModelGetOptions<${entityName},${className}>>(where: TypeModelWhere<${entityName}>, options?: T): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T> | undefined>;
-      mget<T extends IModelGetOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<${entityName},${className},ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
-      select<T extends IModelSelectParams<${entityName},${className}>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${opionsName}, T>[]>;
+      get<T extends IModelGetOptions<${entityName},${className}>>(where: TypeModelWhere<${entityName}>, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;
+      mget<T extends IModelGetOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<${entityName},${className},ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
+      select<T extends IModelSelectParams<${entityName},${className}>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<${entityName},${className},ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<${entityName},${className}>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }`);
