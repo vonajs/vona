@@ -121,12 +121,12 @@ export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
 
-export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TParams> =
+export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation> =
   TRecord &
   (TModel extends BeanModelMeta ?
       (
-        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TParams>>> &
-        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TParams>>>
+        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
+        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>
       ) : {});
 
 export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
