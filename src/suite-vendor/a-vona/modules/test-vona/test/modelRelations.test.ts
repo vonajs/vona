@@ -51,6 +51,17 @@ describe('modelRelations.test.ts', () => {
       assert.equal(users.length, 2);
       assert.equal(users[0].posts.length, 2);
       assert.equal(users[1].posts.length, 0);
+      // relation: belongsToMany
+      const roles = await scopeTest.model.role.select({
+        where: {
+          id: [role1.id, role2.id],
+        },
+        orders: [['id', 'asc']],
+        include: { users: true },
+      });
+      assert.equal(roles.length, 2);
+      assert.equal(roles[0].users.length, 2);
+      assert.equal(roles[1].users.length, 1);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
