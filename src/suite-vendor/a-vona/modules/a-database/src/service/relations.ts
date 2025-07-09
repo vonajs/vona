@@ -29,13 +29,22 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
+    const modelTarget = this.__getModelTarget(modelCurrent, model);
+    const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
+    const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
-      const modelTarget = this.__getModelTarget(modelCurrent, model);
       const idsFrom = entities.map(item => cast(item).id);
-      const options2 = deepExtend({}, options, { where: { [key]: idsFrom } });
-      const items = await modelTarget.select(options2, methodOptions);
+      const options2 = deepExtend({}, optionsReal, { where: { [key]: idsFrom } });
+      const items = await modelTarget.select(options2, methodOptionsReal);
       for (const entity of entities) {
         entity[relationName] = items.find(item => item[key] === cast(entity).id);
+      }
+    } else if (type === 'belongsTo') {
+      const idsTo = entities.map(item => cast(item)[key]);
+      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+      const items = await modelTarget.mget(idsTo, options2);
+      for (const entity of entities) {
+        entity[relationName] = items.find(item => item.id === cast(entity)[key]);
       }
     }
   }
