@@ -146,20 +146,3 @@ export type TypeEntityTableNamesOfGeneral<
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
     TypeEntityTableNamesOfModelJoins<TModelJoins> :
     TypeEntityTableNamesOfModelClass<TModel>;
-
-// const a: TypeMap<[ModelPost, ModelUser]> = '';
-// const b: TypeEntityTableColumnNames<EntityPostMeta | EntityUserMeta> = '';
-// const c: TypeEntityTableColumnNames<EntityPostMeta> | TypeEntityTableColumnNames<EntityUserMeta> = '';
-// const d: TypeModelRelationModelsOfModelOptions<IModelOptionsPost>;
-
-// type ttt =  { [key in keyof IModelOptionsPost as keyof IModelOptionsPost[key]]: IModelOptionsPost[key] };
-
-// interface info { user: 'a' | 'b'; post: 'c' | 'd' }
-// type keyinfo = info[keyof info];
-//  const e: TypeEntityTableColumnNamesOfModelOptions<IModelOptionsPost> = '';
-
-// const f: TypeEntityTableColumnNamesOfModelJoins<['test-vona:post', 'test-vona:user']> | TypeEntityTableColumnNamesOfModelSelf<ModelPost> = '';
-//  const f2: TypeEntityTableColumnNamesOfModelSelf<ModelPost>='';
-
-// const a: TypeModelRelationResultMergeWithRelation<{ type: 'belongsTo'; model: ModelPost; options: { include: { postContent: true } } }>;
-// a?.user.
