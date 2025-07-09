@@ -1,5 +1,5 @@
 import type { IDecoratorModelOptions, IModelRelationBelongsTo, IModelRelationHasOne } from 'vona-module-a-database';
-import { $relation, BeanModelBase, Model } from 'vona-module-a-database';
+import { $relation, $relationDynamic, BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityPost } from '../entity/post.ts';
 import { ModelPostContent } from './postContent.ts';
 import { ModelUser } from './user.ts';
@@ -42,13 +42,18 @@ export class ModelPost extends BeanModelBase<EntityPost> {
           postContent: {
             columns: ['content'],
             include: {
-              post: { include: { user: { columns: 'name' } } },
+              // post: { include: { user: { columns: 'name' } } },
             },
+            with:{
+              post:$relation.belongsTo(()=>ModelPostContent,()=>ModelPost,'postId')
+            }
           },
           user: { columns: 'name' },
         },
-        with: {
-          user3: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { columns: ['id', 'name'] }),
+        with:  {
+          user3: $relationDynamic.belongsTo(ModelPost, () => ModelUser, 'userId', {
+             include:{'posts':true}, columns: ['id', 'name'] 
+          }) 
         },
         joins: [['innerJoin', 'testVonaUser', ['id', 'testVonaPost.id']]],
         distinct: ['userId'],
@@ -58,7 +63,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     );
     console.log(items[0].postContent?.post?.user);
     console.log(items[0].user?.name);
-    console.log(items[0].user3?.name);
+    console.log(items[0].user3?.posts );
 
     const count = await this.scope.model.post.count({ count: 'id' });
     console.log(count);
@@ -91,3 +96,6 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     console.log(item?.user3?.name);
   }
 }
+
+const a: { post: { include: { user: { columns: 'name' } } } } & { post: true };
+a.post.include.

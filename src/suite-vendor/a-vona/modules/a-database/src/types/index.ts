@@ -12,5 +12,7 @@ export * from './model.ts';
 export * from './modelPro.ts';
 export * from './onion/index.ts';
 export * from './relations.ts';
+export * from './relationsDef.ts';
+export * from './relationsDefDynamic.ts';
 export * from './tableIdentity.ts';
 export * from './transaction.ts';
