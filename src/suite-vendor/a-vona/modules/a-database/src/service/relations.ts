@@ -46,6 +46,8 @@ export class ServiceRelations extends BeanBase {
       for (const entity of entities) {
         entity[relationName] = items.find(item => item.id === cast(entity)[key]);
       }
+    } else if (type === 'hasMany') {
+
     }
   }
 
@@ -80,6 +82,8 @@ export class ServiceRelations extends BeanBase {
           withReal = relationCur.with;
         } else if (relationDef.options?.autoload) {
           relationReal = relationDef;
+        } else {
+          continue;
         }
         relations.push([key, relationReal, includeReal, withReal]);
       }
