@@ -189,7 +189,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   private async __handleRelationMany(entities: TRecord[], optionsRelation?: IModelMethodOptionsRelation) {
     if (!optionsRelation) return entities;
     // collect
-    const relations = [];
+    const relations: [any, any][] = [];
     // include
     if (optionsRelation.include && this.options.relations) {
       for (const key in this.options.relations) {
@@ -197,18 +197,30 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
         const relationCur = optionsRelation.include[key];
         let relationReal;
         let includeReal;
-        if(relationCur===false){ 
+        if (relationCur === false) {
           continue;
+        } else if (relationCur === true) {
+          relationReal = relationDef;
+        } else if (typeof relationCur === 'object') {
+          relationReal = deepExtend({}, relationDef, { options: relationCur });
+          includeReal = relationCur.include;
+        } else if (relationDef.options?.autoload) {
+          relationReal = relationDef;
         }
-        else if(relationCur===true){
-          relationReal=relationDef;
-        }
-        else if(typeof relationCur==='object') {
-          relationReal=deepExtend({},relationDef,{options:relationCur});
-          includeReal=relationCur.include;
-        }
+        relations.push([relationReal, includeReal]);
       }
     }
+    // with
+    if (optionsRelation.with) {
+      for (const key in optionsRelation.with) {
+        const relationReal = optionsRelation.with[key];
+        relations.push([relationReal, undefined]);
+      }
+    }
+    // relations
+    // for (const [relationReal, includeReal] of relations) {
+
+    // }
   }
 
   private async __get_notkey(
