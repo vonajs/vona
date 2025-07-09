@@ -59,7 +59,7 @@ export interface IModelRelationBelongsToManyDynamic<
 }
 
 export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
-  extends IModelRelationIncludeWrapper<MODEL>, IModelRelationOptionsOne<MODEL, AUTOLOAD> {}
+  extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsOne<MODEL, AUTOLOAD>, 'autoload'> {}
 
 export interface IModelRelationOptionsManyDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
-  extends IModelRelationIncludeWrapper<MODEL>, IModelRelationOptionsMany<MODEL, AUTOLOAD> {}
+  extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsMany<MODEL, AUTOLOAD>, 'autoload'> {}
