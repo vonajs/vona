@@ -26,7 +26,8 @@ export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder<ColumnNames> = [ColumnNames, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
-export interface TypeBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames> {
+export interface IBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames>
+  extends IModelMethodOptionsRelation<Model> {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
@@ -34,15 +35,13 @@ export interface TypeBuildModelSelectParams<TRecord, Model extends BeanModelMeta
   orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
-  include?: TypeModelParamsInclude<Model>;
-  with?: Record<string, unknown>;
 }
 
 export type IModelSelectParams<
   TRecord,
   Model extends BeanModelMeta = BeanModelMeta,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
-> = TypeBuildModelSelectParams<
+> = IBuildModelSelectParams<
   TRecord,
   Model,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
@@ -80,13 +79,17 @@ export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptions
   disableUpdateTime?: boolean;
 }
 
-export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta = BeanModelMeta> extends IModelMethodOptionsGeneral {
+export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta = BeanModelMeta>
+  extends IModelMethodOptionsGeneral, IModelMethodOptionsRelation<Model> {
   columns?: TypeModelColumns<TRecord>;
-  include?: TypeModelParamsInclude<Model>;
-  with?: Record<string, unknown>;
 }
 
 export interface IModelSelectParamsPage {
   index?: number;
   size?: number;
+}
+
+export interface IModelMethodOptionsRelation<Model extends BeanModelMeta = BeanModelMeta> {
+  include?: TypeModelParamsInclude<Model>;
+  with?: Record<string, unknown>;
 }
