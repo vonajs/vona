@@ -45,7 +45,10 @@ export class ModelPost extends BeanModelBase<EntityPost> {
               // post: { include: { user: { columns: 'name' } } },
             },
             with:{
-              post:$relation.belongsTo(()=>ModelPostContent,()=>ModelPost,'postId')
+              post:$relationDynamic.belongsTo(()=>ModelPostContent,()=>ModelPost,'postId',{
+                include:{
+                  'postContent':true
+                }})
             }
           },
           user: { columns: 'name' },
@@ -61,9 +64,9 @@ export class ModelPost extends BeanModelBase<EntityPost> {
       },
       // ['test-vona:user','test-vona:role'],
     );
-    console.log(items[0].postContent?.post?.user);
+    console.log(items[0].postContent?.post.);
     console.log(items[0].user?.name);
-    console.log(items[0].user3?.posts );
+    console.log(items[0].user3?. );
 
     const count = await this.scope.model.post.count({ count: 'id' });
     console.log(count);

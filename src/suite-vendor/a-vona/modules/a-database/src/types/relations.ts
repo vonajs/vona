@@ -20,7 +20,10 @@ export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecorator
 export type TypeModelParamsRelationOptions<Relation> =
   boolean
   | Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>
-  & { include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>> };
+  & {
+    include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>>;
+    with?: Record<string, unknown>;
+  };
 
 export type TypeModelClassOfClassLike<ClassLike> =
   ClassLike extends
@@ -35,7 +38,7 @@ export type TypeUtilGetRelationModel<Relation> =
 export type TypeUtilGetRelationModelOptions<Relation> = TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntityMeta<Relation> = TypeUtilGetModelEntityMeta<TypeUtilGetRelationModel<Relation>>;
-export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS } ? OPTIONS : undefined;
+export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS extends {} } ? OPTIONS : undefined;
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
 export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
@@ -73,7 +76,7 @@ export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecorator
 
 export type TypeModelRelationResultMergeWith<TWith extends {} | undefined> =
   TWith extends {} ?
-      { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithWrapper<TWith[RelationName]> }
+      { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithRelation<TWith[RelationName]> }
     : {};
 
 export type TypeModelRelationResultMergeAutoload<Relation> =
@@ -85,11 +88,11 @@ export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper>
     TypeUtilGetRelationEntityByType<Relation, undefined> :
     IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> : never;
 
-export type TypeModelRelationResultMergeWithWrapper<WithWrapper> =
-  WithWrapper extends false ? never :
-  WithWrapper extends true ?
+export type TypeModelRelationResultMergeWithRelation<WithRelation> =
+  WithRelation extends false ? never :
+  WithRelation extends true ?
     never :
-    WithWrapper extends {} ? TypeUtilGetRelationEntityByType<WithWrapper, WithWrapper> : never;
+    WithRelation extends {} ? TypeUtilGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
 
 export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
