@@ -112,20 +112,20 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
   TypeUtilGetEntityByType<
     TypeUtilGetRelationEntity<Relation>,
     TypeUtilGetRelationType<Relation>,
-    TypeUtilGetRelationModelOptions<Relation>,
+    TypeUtilGetRelationModel<Relation>,
     IncludeWrapper
   >;
-export type TypeUtilGetEntityByType<TRecord, TYPE, TModelOptions extends IDecoratorModelOptions | undefined, IncludeWrapper extends {} | undefined> =
-  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModelOptions, IncludeWrapper>> : TypeModelRelationResult<TRecord, TModelOptions, IncludeWrapper> | undefined;
+export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined> =
+  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper>> : TypeModelRelationResult<TRecord, TModel, IncludeWrapper> | undefined;
 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
 
-export type TypeModelRelationResult<TRecord, TModelOptions extends IDecoratorModelOptions | undefined, TParams> =
+export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TParams> =
   TRecord &
-  (TModelOptions extends IDecoratorModelOptions ?
+  (TModel extends BeanModelMeta ?
       (
-        OmitNever<TypeModelRelationResultMergeInclude<TModelOptions, TypeUtilGetParamsInlcude<TParams>>> &
+        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TParams>>> &
         OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TParams>>>
       ) : {});
 
