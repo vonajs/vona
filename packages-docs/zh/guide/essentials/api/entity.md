@@ -359,5 +359,17 @@ export type TableIdentity = string | number;
 
 在创建数据表时，系统会根据当前的配置使用`int`或者`int64`作为 id 字段的类型，默认为`int64`
 
-``
+`src/backend/config/config/config.dev.ts`
 
+``` typescript
+// modules
+config.modules = {
+  'a-database': {
+    'table': {
+      // number -> int
+      // string -> int64
+      identityType: 'number',
+    },
+  },
+};
+```

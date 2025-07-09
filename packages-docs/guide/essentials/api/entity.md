@@ -348,3 +348,30 @@ By default, entity inherits from the base class `EntityBase`. EntityBase provide
 |iid|number|Instance ID/Tenant ID|
 
 - id: Use the `TableIdentity` type to support business systems of any size
+
+## id: TableIdentity
+
+The key field `id` uses the `TableIdentity` type to support business systems of any size. When we use `int64` as the database field type, the value read from the database is of `string` type
+
+``` typescript
+export type TableIdentity = string | number;
+```
+
+* Set the default field type
+
+When creating a data table, the system will use `int` or `int64` as the type of the id field according to the current configuration, and the default is `int64`
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-database': {
+    'table': {
+      // number -> int
+      // string -> int64
+      identityType: 'number',
+    },
+  },
+};
+```
