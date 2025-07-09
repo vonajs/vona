@@ -1,6 +1,6 @@
 import type { Constructable, OmitNever, TypeConfirmArray, TypeRecordValues } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelSelectParamsOrder } from './model.ts';
+import type { IModelRelationIncludeWrapper, IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
 
@@ -60,12 +60,14 @@ export interface IModelRelationBelongsToMany<
   options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
+  extends IModelRelationIncludeWrapper<MODEL> {
   autoload?: AUTOLOAD;
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
 }
 
-export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
+  extends IModelRelationIncludeWrapper<MODEL> {
   autoload?: AUTOLOAD;
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
   where?: TypeModelWhere<MODEL[TypeSymbolKeyEntity]>;

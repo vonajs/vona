@@ -27,7 +27,7 @@ export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder<ColumnNames> = [ColumnNames, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
 export interface IBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames>
-  extends IModelMethodOptionsRelation<Model> {
+  extends IModelRelationIncludeWrapper<Model> {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
@@ -80,7 +80,7 @@ export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptions
 }
 
 export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta = BeanModelMeta>
-  extends IModelMethodOptionsGeneral, IModelMethodOptionsRelation<Model> {
+  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
   columns?: TypeModelColumns<TRecord>;
 }
 
@@ -89,7 +89,7 @@ export interface IModelSelectParamsPage {
   size?: number;
 }
 
-export interface IModelMethodOptionsRelation<Model extends BeanModelMeta = BeanModelMeta> {
+export interface IModelRelationIncludeWrapper<Model extends BeanModelMeta = BeanModelMeta> {
   include?: TypeModelParamsInclude<Model>;
   with?: Record<string, unknown>;
 }
