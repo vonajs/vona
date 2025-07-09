@@ -54,13 +54,17 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   }
 
   async mget(ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
+    const items = await this.__mget_raw(ids, options);
+    return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
+  }
+
+  private async __mget_raw(ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
     // table
     const table = this.getTable('mget', [ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      const entities = (await super._mget(table, ids, options)) as TRecord[];
-      return await this.$scope.database.service.relations.handleRelationsMany(entities, this, options as any, options);
+      return (await super._mget(table, ids, options)) as TRecord[];
     }
     // cache
     const cache = this.__getCacheInstance(table);
@@ -75,8 +79,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return false;
       return true;
     });
-    items = this.__filterMGetColumns(items, options?.columns);
-    return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
+    return this.__filterMGetColumns(items, options?.columns);
   }
 
   async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {

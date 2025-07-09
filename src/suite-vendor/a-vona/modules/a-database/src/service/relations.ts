@@ -12,6 +12,7 @@ export class ServiceRelations extends BeanBase {
     includeWrapper?: IModelRelationIncludeWrapper<TModel>,
     methodOptions?: IModelMethodOptions,
   ) {
+    if (entities.length === 0) return entities;
     // relations
     const relations = this.__handleRelationsCollection(modelCurrent, includeWrapper);
     if (!relations) return entities;
