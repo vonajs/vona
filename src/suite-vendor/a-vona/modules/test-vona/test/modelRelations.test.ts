@@ -50,7 +50,7 @@ describe('modelRelations.test.ts', () => {
       });
       assert.equal(users.length, 2);
       assert.equal(users[0].posts.length, 2);
-      assert.equal(users[0].posts.length, 0);
+      assert.equal(users[1].posts.length, 0);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
