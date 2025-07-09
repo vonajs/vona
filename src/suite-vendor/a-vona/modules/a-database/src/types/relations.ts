@@ -27,10 +27,16 @@ export type TypeModelParamsRelationOptions<Relation> =
 
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : undefined;
 export type TypeUtilGetRelationModel<Relation> =
-  Relation extends { model?: () => Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
-  Relation extends { model?: () => infer MODEL extends BeanModelMeta } ? MODEL :
-  Relation extends { model?: Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
-  Relation extends { model?: infer MODEL extends BeanModelMeta } ? MODEL : undefined;
+  Relation extends
+  { model?: ((() => Constructable<infer MODEL extends BeanModelMeta>) | Constructable<infer MODEL extends BeanModelMeta>) }
+    ? MODEL :
+    Relation extends
+    { model?: ((() => infer MODEL extends BeanModelMeta) | infer MODEL extends BeanModelMeta) }
+      ? MODEL :
+      Relation extends { model?: () => Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
+      Relation extends { model?: () => infer MODEL extends BeanModelMeta } ? MODEL :
+      Relation extends { model?: Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
+      Relation extends { model?: infer MODEL extends BeanModelMeta } ? MODEL : undefined;
 
 export type TypeUtilGetRelationModelOptions<Relation> = TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;

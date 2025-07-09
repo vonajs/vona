@@ -47,17 +47,18 @@ export class ModelPost extends BeanModelBase<EntityPost> {
             with: {
               post: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
                 include: {
-                  'postContent': true
-                }
-              })
-            }
+                  postContent: true,
+                },
+              }),
+            },
           },
           user: { columns: 'name' },
         },
         with: {
           user3: $relationDynamic.belongsTo(ModelPost, () => ModelUser, 'userId', {
-            include: { 'posts': true }, columns: ['id', 'name']
-          })
+            include: { posts: true },
+            columns: ['id', 'name'],
+          }),
         },
         joins: [['innerJoin', 'testVonaUser', ['id', 'testVonaPost.id']]],
         distinct: ['userId'],
@@ -65,9 +66,9 @@ export class ModelPost extends BeanModelBase<EntityPost> {
       },
       // ['test-vona:user','test-vona:role'],
     );
-    console.log(items[0].postContent?.post.);
+    console.log(items[0].postContent?.post);
     console.log(items[0].user?.name);
-    console.log(items[0].user3?. );
+    console.log(items[0].user3);
 
     const count = await this.scope.model.post.count({ count: 'id' });
     console.log(count);
@@ -101,5 +102,5 @@ export class ModelPost extends BeanModelBase<EntityPost> {
   }
 }
 
-const a: { post: { include: { user: { columns: 'name' } } } } & { post: true };
-a.post.include.
+// const a: { post: { include: { user: { columns: 'name' } } } } & { post: true };
+// a.post.include.
