@@ -47,7 +47,17 @@ export class ServiceRelations extends BeanBase {
         entity[relationName] = items.find(item => item.id === cast(entity)[key]);
       }
     } else if (type === 'hasMany') {
-
+      const idsFrom = entities.map(item => cast(item).id);
+      const options2 = deepExtend({}, optionsReal, { where: { [key]: idsFrom } });
+      const items = await modelTarget.select(options2, methodOptionsReal);
+      for (const entity of entities) {
+        entity[relationName] = [];
+        for (const item of items) {
+          if (item[key] === cast(entity).id) {
+            entity[relationName].push(item);
+          }
+        }
+      }
     }
   }
 
