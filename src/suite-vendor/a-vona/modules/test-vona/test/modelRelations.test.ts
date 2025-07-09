@@ -31,6 +31,15 @@ describe('modelRelations.test.ts', () => {
       assert.equal(posts.length, 2);
       assert.equal(posts[0].postContent?.content, 'content1');
       assert.equal(posts[1].postContent, undefined);
+      // relation: belongsTo
+      const postContents = await scopeTest.model.postContent.select({
+        where: {
+          id: postContent1.id,
+        },
+        include: { post: true },
+      });
+      assert.equal(postContents.length, 1);
+      assert.equal(postContents[0].post?.title, 'post1');
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
