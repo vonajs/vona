@@ -31,6 +31,10 @@ export class ServiceRelations extends BeanBase {
     }
   }
 
+  private __getModelTarget<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(modelCurrent: TModel) {
+
+  }
+
   private __handleRelationsCollection<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
     modelCurrent: TModel,
     includeWrapper?: IModelRelationIncludeWrapper<TModel>,

@@ -9,6 +9,8 @@ export interface TypeModelRelations {
   [key: string]: TypeModelRelation<any, any>;
 }
 
+export type TypeModelClassLike<MODEL extends BeanModelMeta> = (() => Constructable<MODEL>) | Constructable<MODEL>;
+
 export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
   IModelRelationHasOne<MODELTarget> |
   IModelRelationBelongsTo<MODELSelf, MODELTarget> |
@@ -17,7 +19,7 @@ export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, M
 // use optional ? for app config
 export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
   type?: 'hasOne';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
   options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
 }
@@ -28,14 +30,14 @@ export interface IModelRelationBelongsTo<
   AUTOLOAD extends boolean = false,
 > {
   type?: 'belongsTo';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  model?: TypeModelClassLike<MODEL>;
   key?: keyof MODELSelf[TypeSymbolKeyEntity];
   options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
 }
 
 export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
   type?: 'hasMany';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
   options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
 }
@@ -46,8 +48,8 @@ export interface IModelRelationBelongsToMany<
   AUTOLOAD extends boolean = false,
 > {
   type?: 'belongsToMany';
-  modelMiddle?: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>;
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  modelMiddle?: TypeModelClassLike<MODELMiddle>;
+  model?: TypeModelClassLike<MODEL>;
   keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
   keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
   options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;

@@ -1,8 +1,7 @@
-import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from './model.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
-import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from './relationsDef.ts';
+import type { IModelRelationOptionsMany, IModelRelationOptionsOne, TypeModelClassLike } from './relationsDef.ts';
 
 export type TypeModelRelationDynamic<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
   IModelRelationHasOneDynamic<MODELTarget> |
@@ -16,7 +15,7 @@ export interface IModelRelationHasOneDynamic<
   OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD> = {},
 > {
   type?: 'hasOne';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
   options?: OPTIONS;
 }
@@ -28,7 +27,7 @@ export interface IModelRelationBelongsToDynamic<
   OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD> = {},
 > {
   type?: 'belongsTo';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  model?: TypeModelClassLike<MODEL>;
   key?: keyof MODELSelf[TypeSymbolKeyEntity];
   options?: OPTIONS;
 }
@@ -39,7 +38,7 @@ export interface IModelRelationHasManyDynamic<
   OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
 > {
   type?: 'hasMany';
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
   options?: OPTIONS;
 }
@@ -51,8 +50,8 @@ export interface IModelRelationBelongsToManyDynamic<
   OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
 > {
   type?: 'belongsToMany';
-  modelMiddle?: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>;
-  model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
+  modelMiddle?: TypeModelClassLike<MODELMiddle>;
+  model?: TypeModelClassLike<MODEL>;
   keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
   keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
   options?: OPTIONS;
