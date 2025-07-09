@@ -9,7 +9,7 @@ export interface TypeModelRelations {
   [key: string]: TypeModelRelation<any, any>;
 }
 
-export type TypeModelClassLike<MODEL extends BeanModelMeta> = (() => Constructable<MODEL>) | Constructable<MODEL>;
+export type TypeModelClassLike<MODEL extends BeanModelMeta = BeanModelMeta> = (() => Constructable<MODEL>) | Constructable<MODEL>;
 
 export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
   IModelRelationHasOne<MODELTarget> |

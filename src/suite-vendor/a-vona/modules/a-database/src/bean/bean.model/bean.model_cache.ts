@@ -83,7 +83,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheEnabled) {
-      return await super._select(table, params, options);
+      const entities = await super._select(table, params, options);
+      return await this.$scope.database.service.relations.handleRelationsMany(entities, this, params as any, options);
     }
     // 1: select id
     const columnId = `${table}.id`;
@@ -96,7 +97,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     // 2: mget
     const ids = items.map(item => cast(item).id);
     const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
-    return await this.mget(ids, options2);
+    const entities = await this.mget(ids, options2);
+    return await this.$scope.database.service.relations.handleRelationsMany(entities, this, params as any, options);
   }
 
   async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
