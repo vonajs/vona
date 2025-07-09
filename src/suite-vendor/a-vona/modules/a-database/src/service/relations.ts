@@ -58,6 +58,21 @@ export class ServiceRelations extends BeanBase {
           }
         }
       }
+    } else if (type === 'belongsToMany') {
+      const modelTargetMiddle = this.__getModelTarget(modelCurrent, modelMiddle);
+      const idsFrom = entities.map(item => cast(item).id);
+      const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
+      const idsTo = itemsMiddle.map(item => item[keyTo]);
+      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+      const items = await modelTarget.mget(idsTo, options2);
+      for (const entity of entities) {
+        entity[relationName] = [];
+        for (const itemMiddle of itemsMiddle) {
+          if (itemMiddle[keyFrom] === cast(entity).id) {
+            entity[relationName].push(items.find(item => item.id === cast(itemMiddle)[keyTo]));
+          }
+        }
+      }
     }
   }
 
