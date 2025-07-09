@@ -3,7 +3,6 @@ import type {
   EntityBase,
   IModelGetOptions,
   IModelMethodOptions,
-  IModelMethodOptionsRelation,
   IModelSelectParams,
   IModelUpdateOptions,
   ITableRecord,
@@ -11,7 +10,6 @@ import type {
   TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
-import type { BeanModelMeta } from './bean.model_meta.ts';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
@@ -184,43 +182,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     await super._delete(table, { id } as any, options);
     // delete cache
     await this.__deleteCache_key(id, table);
-  }
-
-  private async __handleRelationMany(entities: TRecord[], optionsRelation?: IModelMethodOptionsRelation) {
-    if (!optionsRelation) return entities;
-    // collect
-    const relations: [any, any][] = [];
-    // include
-    if (optionsRelation.include && this.options.relations) {
-      for (const key in this.options.relations) {
-        const relationDef = this.options.relations[key];
-        const relationCur = optionsRelation.include[key];
-        let relationReal;
-        let includeReal;
-        if (relationCur === false) {
-          continue;
-        } else if (relationCur === true) {
-          relationReal = relationDef;
-        } else if (typeof relationCur === 'object') {
-          relationReal = deepExtend({}, relationDef, { options: relationCur });
-          includeReal = relationCur.include;
-        } else if (relationDef.options?.autoload) {
-          relationReal = relationDef;
-        }
-        relations.push([relationReal, includeReal]);
-      }
-    }
-    // with
-    if (optionsRelation.with) {
-      for (const key in optionsRelation.with) {
-        const relationReal = optionsRelation.with[key];
-        relations.push([relationReal, undefined]);
-      }
-    }
-    // relations
-    // for (const [relationReal, includeReal] of relations) {
-
-    // }
   }
 
   private async __get_notkey(
