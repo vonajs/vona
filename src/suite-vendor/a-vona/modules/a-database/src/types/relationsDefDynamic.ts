@@ -10,42 +10,52 @@ export type TypeModelRelationDynamic<MODELSelf extends BeanModelMeta = BeanModel
   IModelRelationHasManyDynamic<MODELTarget>;
 
 // use optional ? for app config
-export interface IModelRelationHasOneDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationHasOneDynamic<
+  MODEL extends BeanModelMeta = BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD> = {},
+> {
   type?: 'hasOne';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD>;
+  options?: OPTIONS;
 }
 
 export interface IModelRelationBelongsToDynamic<
   MODELSelf extends BeanModelMeta = BeanModelMeta,
   MODEL extends BeanModelMeta = BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD> = {},
 > {
   type?: 'belongsTo';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODELSelf[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD>;
+  options?: OPTIONS;
 }
 
-export interface IModelRelationHasManyDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationHasManyDynamic<
+  MODEL extends BeanModelMeta = BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
+> {
   type?: 'hasMany';
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD>;
+  options?: OPTIONS;
 }
 
 export interface IModelRelationBelongsToManyDynamic<
   MODELMiddle extends BeanModelMeta = BeanModelMeta,
   MODEL extends BeanModelMeta = BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
 > {
   type?: 'belongsToMany';
   modelMiddle?: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>;
   model?: (() => Constructable<MODEL>) | Constructable<MODEL>;
   keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
   keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD>;
+  options?: OPTIONS;
 }
 
 export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
