@@ -47,5 +47,77 @@
       "}"
     ],
     "description": "aop.action"
+  },
+  "record.loggerclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordloggerclient",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface ILoggerClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.loggerclient"
+  },
+  "record.redisclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordredisclient",
+    "body": [
+      "declare module 'vona-module-a-redis' {",
+      "  export interface IRedisClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.redisclient"
+  },
+  "record.databaseclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recorddatabaseclient",
+    "body": [
+      "declare module 'vona-module-a-database' {",
+      "  export interface IDatabaseClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.databaseclient"
+  },
+  "record.username": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordusername",
+    "body": [
+      "declare module 'vona-module-a-user' {",
+      "  export interface IUserNameRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.username"
+  },
+  "record.rolename": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordrolename",
+    "body": [
+      "declare module 'vona-module-a-user' {",
+      "  export interface IRoleNameRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.rolename"
+  },
+  "record.instance": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordinstance",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface IInstanceRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.instance"
   }
 }
