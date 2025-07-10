@@ -9,7 +9,7 @@ export * from './entityBaseInner.ts';
 export * from './entityBaseSimple.ts';
 export * from './logger.ts';
 export * from './model.ts';
-export * from './modelPro.ts';
+export * from './modelWhere.ts';
 export * from './onion/index.ts';
 export * from './relations.ts';
 export * from './relationsColumns.ts';
