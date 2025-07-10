@@ -182,7 +182,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
       return await super._delete(table, where, options);
     }
     // check where and get id
-    const items = await this.select({ where, columns: ['id' as any] }, options);
+    const items = await this.__select_raw({ where, columns: ['id' as any] }, options);
     if (items.length === 0) {
       // donothing
       return;
