@@ -1,6 +1,5 @@
 import type { Knex } from 'knex';
 import type { TypeRecordValues } from 'vona';
-import type { EntityPost } from 'vona-module-test-vona';
 
 export const Op = {
   and: '_and_',
@@ -19,6 +18,8 @@ export type TypeModelColumnValue<Column> = Column | Column[] | Knex.Raw;
 
 export type TypeModelWhere<TRecord> = {
   [prop in keyof TRecord]?: TRecord[prop] | Array<TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
+} & {
+  [key in TypeOpsTop]?: TypeModelWhere<TRecord>
 };
 
 export type TypeModelWhereFieldAll<TRecord, Column> = {
@@ -33,5 +34,3 @@ export type TypeModelWhereFieldTop<TRecord, Column> = {
 
 export type TypeModelColumn<TRecord> = keyof TRecord | '*';
 export type TypeModelColumns<TRecord> = TypeModelColumn<TRecord> | Array<TypeModelColumn<TRecord>>;
-
-const a: TypeModelWhere<EntityPost> = { iid: { _eq_: 1 } };
