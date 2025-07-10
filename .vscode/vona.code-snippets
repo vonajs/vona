@@ -71,5 +71,17 @@
       "}"
     ],
     "description": "record.databaseclient"
+  },
+  "record.username": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordusername",
+    "body": [
+      "declare module 'vona-module-a-user' {",
+      "  export interface IUserNameRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.username"
   }
 }
