@@ -17,7 +17,7 @@ export type IModelSelectParamsJoinType =
   | 'fullOuterJoin'
   | 'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
-export type IModelSelectParamsJoin<TableNames, ColumnNames> = [
+export type IModelSelectParamsJoin<TRecord, TableNames = '', ColumnNames = keyof TRecord> = [
   IModelSelectParamsJoinType,
   TableNames,
   [ColumnNames, ColumnNames] | Knex.JoinCallback,
@@ -57,7 +57,12 @@ export type IModelSelectParams<
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
 > : IBuildModelSelectParams<TRecord>;
 
-export interface IBuildModelCountParams<TRecord, TableNames, ColumnNames, Columns extends {} | undefined> {
+export interface IBuildModelCountParams<
+  TRecord,
+  TableNames = '',
+  ColumnNames = keyof TRecord,
+  Columns extends {} | undefined = undefined,
+> {
   column?: (keyof TRecord);
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord, Columns>;
@@ -66,14 +71,14 @@ export interface IBuildModelCountParams<TRecord, TableNames, ColumnNames, Column
 
 export type IModelCountParams<
   TRecord,
-  Model extends BeanModelMeta = BeanModelMeta,
+  Model extends BeanModelMeta | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
-> = IBuildModelCountParams<
+> = Model extends BeanModelMeta ? IBuildModelCountParams<
   TRecord,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
->;
+> : IBuildModelCountParams<TRecord>;
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 export type IModelUpdateOptions<TRecord> = Omit<IModelUpdateOptionsGeneral<TRecord>, 'disableInstance'>;
