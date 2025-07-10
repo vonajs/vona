@@ -7,11 +7,12 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceRelations extends BeanBase {
   public async handleRelationsOne<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
-    entity: TRecord,
+    entity: TRecord | undefined,
     modelCurrent: TModel,
     includeWrapper?: IModelRelationIncludeWrapper<TModel>,
     methodOptions?: IModelMethodOptions,
   ) {
+    if (!entity) return entity;
     // relations
     const relations = this.__handleRelationsCollection(modelCurrent, includeWrapper);
     if (!relations) return entity;
