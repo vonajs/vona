@@ -11,7 +11,7 @@ export const Op = {
   eq: '_eq_',
 } as const;
 
-export type TypeOpsTop = TypeRecordValues<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>;
+export type TypeOpsJoint = TypeRecordValues<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>;
 export type TypeOpsNormal = TypeRecordValues<Pick<typeof Op, 'eq'>>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
@@ -20,17 +20,17 @@ export type TypeModelColumnValue<Column> = Column | Column[] | Knex.Raw | '_skip
 export type TypeModelWhere<TRecord> = {
   [prop in keyof TRecord]?: TypeModelColumnValue<TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
 } & {
-  [key in TypeOpsTop]?: TypeModelWhere<TRecord>
+  [key in TypeOpsJoint]?: TypeModelWhere<TRecord>
 };
 
 export type TypeModelWhereFieldAll<TRecord, Column> = {
-  [key in TypeOpsTop]?: TypeModelWhereFieldAll<TRecord, Column>
+  [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>
 } & {
   [key in TypeOpsNormal]?: TypeModelColumnValue<Column>
 };
 
-export type TypeModelWhereFieldTop<TRecord, Column> = {
-  [key in TypeOpsTop]?: TypeModelWhereFieldAll<TRecord, Column>
+export type TypeModelWhereFieldJoint<TRecord, Column> = {
+  [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>
 };
 
 export type TypeModelColumn<TRecord> = keyof TRecord | '*';
