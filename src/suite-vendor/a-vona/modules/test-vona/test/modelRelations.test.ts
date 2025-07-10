@@ -31,6 +31,12 @@ describe('modelRelations.test.ts', () => {
       assert.equal(posts.length, 2);
       assert.equal(posts[0].postContent?.content, 'content1');
       assert.equal(posts[1].postContent, undefined);
+      // relation: hasOne: get
+      const postGet = await scopeTest.model.post.get(
+        { id: post1.id },
+        { include: { postContent: true } },
+      );
+      assert.equal(postGet?.postContent?.content, 'content1');
       // relation: belongsTo
       const postContents = await scopeTest.model.postContent.select({
         where: {
@@ -40,6 +46,12 @@ describe('modelRelations.test.ts', () => {
       });
       assert.equal(postContents.length, 1);
       assert.equal(postContents[0].post?.title, 'post1');
+      // relation: belongsTo: get
+      const postContentGet = await scopeTest.model.postContent.get(
+        { id: postContent1.id },
+        { include: { post: true } },
+      );
+      assert.equal(postContentGet?.post?.title, 'post1');
       // relation: hasMany
       const users = await scopeTest.model.user.select({
         where: {
@@ -51,6 +63,12 @@ describe('modelRelations.test.ts', () => {
       assert.equal(users.length, 2);
       assert.equal(users[0].posts.length, 2);
       assert.equal(users[1].posts.length, 0);
+      // relation: hasMany: get
+      const userGet = await scopeTest.model.user.get(
+        { id: user1.id },
+        { include: { posts: true } },
+      );
+      assert.equal(userGet?.posts.length, 2);
       // relation: belongsToMany
       const roles = await scopeTest.model.role.select({
         where: {
@@ -62,7 +80,13 @@ describe('modelRelations.test.ts', () => {
       assert.equal(roles.length, 2);
       assert.equal(roles[0].users.length, 2);
       assert.equal(roles[1].users.length, 1);
-      //
+      // relation: belongsToMany: get
+      const roleGet = await scopeTest.model.role.get(
+        { id: role1.id },
+        { include: { users: true } },
+      );
+      assert.equal(roleGet?.users.length, 2);
+      // relation: belongsToMany: mget
       const roles2 = await scopeTest.model.role.mget([role1.id, role2.id], { include: { users: true } });
       assert.equal(roles2.length, 2);
       assert.equal(roles2[0].users.length, 2);
