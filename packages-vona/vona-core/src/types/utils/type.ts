@@ -12,6 +12,6 @@ export type TypeClassOfClassLike<ClassLike> =
   ClassLike extends Constructable<infer Result> ? Result :
   ClassLike extends infer Result ? Result : undefined;
 
-export type TypeRecordValues<Record> = Record[keyof Record];
+export type TypeRecordValues<TRecord> = TRecord[keyof TRecord];
 
 export type TypeConfirmArray<A> = A extends any[] ? A : A[];
