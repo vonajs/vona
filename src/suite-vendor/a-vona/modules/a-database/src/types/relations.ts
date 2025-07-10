@@ -1,6 +1,6 @@
-import type { Constructable, OmitNever, TypeConfirmArray, TypeRecordValues } from 'vona';
+import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
+import type { IDecoratorModelOptions } from './onion/model.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -96,53 +96,3 @@ export type TypeModelRelationResultMergeWithRelation<WithRelation> =
   WithRelation extends true ?
     never :
     WithRelation extends {} ? TypeUtilGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
-
-export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
-export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
-
-export type TypeEntityTableColumnNamesOfModels<A extends BeanModelMeta[]> = TypeEntityTableColumnNames<A[number][TypeSymbolKeyEntityMeta]>;
-
-// export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeEntityTableColumnNames<TypeRecordValues<{
-//   [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>;
-// }>>;
-export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
-  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
-}>;
-
-export type TypeEntityTableColumnNamesOfModelClass<TModel extends BeanModelMeta> =
-  TypeEntityTableColumnNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
-
-export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
-    TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
-
-export type TypeEntityTableColumnNamesOfModelSelf<TModel extends BeanModelMeta> =
-  TypeEntityTableColumnNames<TModel[TypeSymbolKeyEntityMeta]> | TypeEntityTableColumnNamesShort<TModel[TypeSymbolKeyEntity]>;
-
-export type TypeEntityTableColumnNamesOfGeneral<
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
-  TModel extends BeanModelMeta,
-> =
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
-      (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>) :
-      (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>);
-
-export type TypeEntityTableNames<EntityMeta extends { $table: string } | undefined> =
-  EntityMeta extends { $table: infer TableName } ? TableName : never;
-
-export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
-  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
-}>;
-
-export type TypeEntityTableNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
-    TypeEntityTableNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
-
-export type TypeEntityTableNamesOfModelClass<TModel extends BeanModelMeta> =
-  TypeEntityTableNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
-
-export type TypeEntityTableNamesOfGeneral<
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
-  TModel extends BeanModelMeta,
-> =
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
-    TypeEntityTableNamesOfModelJoins<TModelJoins> :
-    TypeEntityTableNamesOfModelClass<TModel>;
