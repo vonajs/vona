@@ -106,15 +106,25 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-instance' {
   export interface ModelInstance {
       [SymbolKeyEntity]: EntityInstance;
       [SymbolKeyEntityMeta]: EntityInstanceMeta;
       [SymbolKeyModelOptions]: IModelOptionsInstance;
-      select(params?: IModelSelectParams<EntityInstance,IModelOptionsInstance>, options?: IModelMethodOptions): Promise<EntityInstance[]>;
+      get<T extends IModelGetOptions<EntityInstance,ModelInstance>>(where: TypeModelWhere<EntityInstance>, options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityInstance,ModelInstance>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
+      select<T extends IModelSelectParams<EntityInstance,ModelInstance>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
+      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityInstance,ModelInstance,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      count<T extends IModelCountParams<EntityInstance,ModelInstance>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }
+}
+declare module 'vona-module-a-database' {
+  export interface IModelClassRecord {
+    'a-instance:instance': ModelInstance;
+  }
 }
 /** model: end */
 /** bean: begin */

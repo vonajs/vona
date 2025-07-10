@@ -90,15 +90,25 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-version' {
   export interface ModelViewRecord {
       [SymbolKeyEntity]: EntityViewRecord;
       [SymbolKeyEntityMeta]: EntityViewRecordMeta;
       [SymbolKeyModelOptions]: IModelOptionsViewRecord;
-      select(params?: IModelSelectParams<EntityViewRecord,IModelOptionsViewRecord>, options?: IModelMethodOptions): Promise<EntityViewRecord[]>;
+      get<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(where: TypeModelWhere<EntityViewRecord>, options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityViewRecord,ModelViewRecord,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
+      select<T extends IModelSelectParams<EntityViewRecord,ModelViewRecord>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
+      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityViewRecord,ModelViewRecord,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      count<T extends IModelCountParams<EntityViewRecord,ModelViewRecord>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }
+}
+declare module 'vona-module-a-database' {
+  export interface IModelClassRecord {
+    'a-version:viewRecord': ModelViewRecord;
+  }
 }
 /** model: end */
 /** service: begin */

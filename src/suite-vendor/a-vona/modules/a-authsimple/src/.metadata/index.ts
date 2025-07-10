@@ -66,15 +66,25 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-authsimple' {
   export interface ModelAuthSimple {
       [SymbolKeyEntity]: EntityAuthSimple;
       [SymbolKeyEntityMeta]: EntityAuthSimpleMeta;
       [SymbolKeyModelOptions]: IModelOptionsAuthSimple;
-      select(params?: IModelSelectParams<EntityAuthSimple,IModelOptionsAuthSimple>, options?: IModelMethodOptions): Promise<EntityAuthSimple[]>;
+      get<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(where: TypeModelWhere<EntityAuthSimple>, options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
+      select<T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
+      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      count<T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }
+}
+declare module 'vona-module-a-database' {
+  export interface IModelClassRecord {
+    'a-authsimple:authSimple': ModelAuthSimple;
+  }
 }
 /** model: end */
 /** authProvider: begin */

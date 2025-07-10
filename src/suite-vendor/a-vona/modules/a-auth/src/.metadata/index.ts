@@ -89,21 +89,37 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelMethodOptions, IModelSelectParams } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-auth' {
   export interface ModelAuth {
       [SymbolKeyEntity]: EntityAuth;
       [SymbolKeyEntityMeta]: EntityAuthMeta;
       [SymbolKeyModelOptions]: IModelOptionsAuth;
-      select(params?: IModelSelectParams<EntityAuth,IModelOptionsAuth>, options?: IModelMethodOptions): Promise<EntityAuth[]>;
+      get<T extends IModelGetOptions<EntityAuth,ModelAuth>>(where: TypeModelWhere<EntityAuth>, options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityAuth,ModelAuth>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityAuth,ModelAuth,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
+      select<T extends IModelSelectParams<EntityAuth,ModelAuth>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
+      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityAuth,ModelAuth,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      count<T extends IModelCountParams<EntityAuth,ModelAuth>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }
 export interface ModelAuthProvider {
       [SymbolKeyEntity]: EntityAuthProvider;
       [SymbolKeyEntityMeta]: EntityAuthProviderMeta;
       [SymbolKeyModelOptions]: IModelOptionsAuthProvider;
-      select(params?: IModelSelectParams<EntityAuthProvider,IModelOptionsAuthProvider>, options?: IModelMethodOptions): Promise<EntityAuthProvider[]>;
+      get<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(where: TypeModelWhere<EntityAuthProvider>, options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
+      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
+      select<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
+      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      count<T extends IModelCountParams<EntityAuthProvider,ModelAuthProvider>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }
+}
+declare module 'vona-module-a-database' {
+  export interface IModelClassRecord {
+    'a-auth:auth': ModelAuth;
+'a-auth:authProvider': ModelAuthProvider;
+  }
 }
 /** model: end */
 /** bean: begin */
