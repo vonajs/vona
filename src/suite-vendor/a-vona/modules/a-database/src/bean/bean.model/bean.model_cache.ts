@@ -87,7 +87,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
   }
 
-  async __select_raw(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+  private async __select_raw(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
     // table
     const table = this.getTable('select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -110,6 +110,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   }
 
   async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
+    const item=await this.__get_raw(where,options);
+    return await this.$scope.database.service.relations.handleRelationsOne(item, this, options as any, options);
+  }
+
+  private async __get_raw(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
     // table
     const table = this.getTable('get', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
