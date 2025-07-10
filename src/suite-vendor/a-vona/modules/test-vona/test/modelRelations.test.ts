@@ -153,7 +153,7 @@ describe('modelRelations.test.ts', () => {
           'testVonaUser.id': user2.id,
         } as any,
         orders: [['testVonaUser.id', 'asc']],
-      }, 'test-vona:user');
+      }, ['test-vona:user']);
       assert.equal(itemsJoins2.length, 0);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
