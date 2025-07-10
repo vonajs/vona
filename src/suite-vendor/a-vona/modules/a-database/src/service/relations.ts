@@ -142,10 +142,10 @@ export class ServiceRelations extends BeanBase {
     // collect
     const relations: [string, any, any, any][] = [];
     // include
-    if (includeWrapper.include && modelCurrent.options.relations) {
+    if (modelCurrent.options.relations) {
       for (const key in modelCurrent.options.relations) {
         const relationDef = modelCurrent.options.relations[key];
-        const relationCur = includeWrapper.include[key];
+        const relationCur = includeWrapper.include?.[key];
         let relationReal;
         let includeReal;
         let withReal;

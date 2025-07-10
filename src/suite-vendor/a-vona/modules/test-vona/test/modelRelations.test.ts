@@ -52,6 +52,11 @@ describe('modelRelations.test.ts', () => {
         { include: { post: true } },
       );
       assert.equal(postContentGet?.post?.title, 'post1');
+      // relation: belongsTo: autoload
+      const postAutoload = await scopeTest.model.post.get(
+        { id: post1.id },
+      );
+      assert.equal(postAutoload!.user?.id, postAutoload!.userId);
       // relation: hasMany
       const users = await scopeTest.model.user.select({
         where: {
