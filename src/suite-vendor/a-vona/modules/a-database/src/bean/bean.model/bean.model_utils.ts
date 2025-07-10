@@ -108,9 +108,9 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildCount(builder: Knex.QueryBuilder, count?: keyof TRecord, distinct?: boolean | (keyof TRecord) | (keyof TRecord)[]) {
-    if (count !== undefined) {
-      builder.count(count);
+  buildCount(builder: Knex.QueryBuilder, column?: keyof TRecord, distinct?: boolean | (keyof TRecord) | (keyof TRecord)[]) {
+    if (column !== undefined) {
+      builder.count(column);
     } else if (distinct !== undefined && distinct !== false) {
       builder.count(this.raw(`distinct ${this.toIdentifier(distinct as any)}`));
     } else {

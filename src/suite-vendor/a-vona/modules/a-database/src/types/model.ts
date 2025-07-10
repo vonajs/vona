@@ -49,7 +49,7 @@ export type IModelSelectParams<
 >;
 
 export interface IBuildModelCountParams<TRecord, TableNames, ColumnNames> {
-  count?: (keyof TRecord);
+  column?: (keyof TRecord);
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord>;
   joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
