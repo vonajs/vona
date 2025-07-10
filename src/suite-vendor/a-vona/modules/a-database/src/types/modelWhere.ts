@@ -2,6 +2,7 @@ import type { Knex } from 'knex';
 import type { TypeRecordValues } from 'vona';
 
 export const Op = {
+  skip: '_skip_',
   and: '_and_',
   or: '_or_',
   not: '_not_',
@@ -14,7 +15,7 @@ export type TypeOpsTop = TypeRecordValues<Pick<typeof Op, 'and' | 'or' | 'not' |
 export type TypeOpsNormal = TypeRecordValues<Pick<typeof Op, 'eq'>>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
-export type TypeModelColumnValue<Column> = Column | Column[] | Knex.Raw;
+export type TypeModelColumnValue<Column> = Column | Column[] | Knex.Raw | '_skip_';
 
 export type TypeModelWhere<TRecord> = {
   [prop in keyof TRecord]?: TRecord[prop] | Array<TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
