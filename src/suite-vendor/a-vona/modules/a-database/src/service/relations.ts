@@ -51,25 +51,41 @@ export class ServiceRelations extends BeanBase {
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
       const idFrom = cast(entity).id;
-      const where = { [key]: idFrom };
-      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-      entity[relationName] = await modelTarget.get(where, options2);
+      if (!idFrom) {
+        entity[relationName] = undefined;
+      } else {
+        const where = { [key]: idFrom };
+        const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+        entity[relationName] = await modelTarget.get(where, options2);
+      }
     } else if (type === 'belongsTo') {
       const idTo = cast(entity)[key];
-      const where = { id: idTo };
-      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-      entity[relationName] = await modelTarget.get(where, options2);
+      if (!idTo) {
+        entity[relationName] = undefined;
+      } else {
+        const where = { id: idTo };
+        const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+        entity[relationName] = await modelTarget.get(where, options2);
+      }
     } else if (type === 'hasMany') {
       const idFrom = cast(entity).id;
-      const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
-      entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
+      if (!idFrom) {
+        entity[relationName] = [];
+      } else {
+        const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
+        entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
+      }
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelCurrent, modelMiddle);
       const idFrom = cast(entity).id;
-      const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idFrom } }, methodOptionsReal);
-      const idsTo = itemsMiddle.map(item => item[keyTo]);
-      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-      entity[relationName] = await modelTarget.mget(idsTo, options2);
+      if (!idFrom) {
+        entity[relationName] = [];
+      } else {
+        const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idFrom } }, methodOptionsReal);
+        const idsTo = itemsMiddle.map(item => item[keyTo]);
+        const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+        entity[relationName] = await modelTarget.mget(idsTo, options2);
+      }
     }
   }
 
