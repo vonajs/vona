@@ -83,5 +83,17 @@
       "}"
     ],
     "description": "record.username"
+  },
+  "record.rolename": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordrolename",
+    "body": [
+      "declare module 'vona-module-a-user' {",
+      "  export interface IRoleNameRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.rolename"
   }
 }
