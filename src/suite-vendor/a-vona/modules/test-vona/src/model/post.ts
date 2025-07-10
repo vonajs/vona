@@ -73,7 +73,7 @@ export class ModelPost extends BeanModelBase<EntityPost> {
     console.log(items[0].user3?.posts[0].title);
     console.log(items[0].user3?.postContent?.content);
 
-    const count = await this.scope.model.post.count({ count: 'id' });
+    const count = await this.scope.model.post.count({ column: 'id' });
     console.log(count);
 
     const items2 = await this.scope.model.post.select({

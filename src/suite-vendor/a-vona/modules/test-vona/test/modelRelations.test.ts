@@ -1,6 +1,8 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
+import { $relationDynamic } from 'vona-module-a-database';
+import { ModelPost, ModelPostContent, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
 
 describe('modelRelations.test.ts', () => {
   it('action:modelRelations', async () => {
@@ -105,6 +107,36 @@ describe('modelRelations.test.ts', () => {
       assert.equal(roles2.length, 2);
       assert.equal(roles2[0].users.length, 2);
       assert.equal(roles2[1].users.length, 1);
+      // relation: include + with
+      const items = await scopeTest.model.post.select(
+        {
+          include: {
+            postContent: {
+              include: {
+                post: { include: { user: { columns: '*' } } },
+              },
+              with: {
+                post3: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
+                  include: {
+                    postContent: true,
+                  },
+                }),
+              },
+            },
+          },
+          with: {
+            user3: $relationDynamic.belongsTo(ModelPost, () => ModelUser, 'userId', {
+              include: { posts: true },
+              with: { roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelPostContent, 'userId', 'roleId') },
+              columns: ['id', 'name'],
+            }),
+          },
+        },
+      );
+      assert.equal(Object.keys(items[0].postContent!.post!.user!).length > 5, true);
+      assert.equal(items[0].postContent?.post3?.postContent?.content !== undefined, true);
+      assert.equal(items[0].user3!.posts.length > 0, true);
+      assert.equal(items[0].user3!.roles.length > 0, true);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
       await scopeTest.model.post.delete({ id: post1.id });
