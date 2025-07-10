@@ -48,6 +48,18 @@
     ],
     "description": "aop.action"
   },
+  "record.loggerclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordloggerclient",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface ILoggerClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.loggerclient"
+  },
   "record.redisclient": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordredisclient",
@@ -95,5 +107,17 @@
       "}"
     ],
     "description": "record.rolename"
+  },
+  "record.instance": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordinstance",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface IInstanceRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.instance"
   }
 }
