@@ -138,14 +138,13 @@ export class ServiceRelations extends BeanBase {
     modelCurrent: TModel,
     includeWrapper?: IModelRelationIncludeWrapper<TModel>,
   ) {
-    if (!includeWrapper) return;
     // collect
     const relations: [string, any, any, any][] = [];
     // include
     if (modelCurrent.options.relations) {
       for (const key in modelCurrent.options.relations) {
         const relationDef = modelCurrent.options.relations[key];
-        const relationCur = includeWrapper.include?.[key];
+        const relationCur = includeWrapper?.include?.[key];
         let relationReal;
         let includeReal;
         let withReal;
@@ -166,7 +165,7 @@ export class ServiceRelations extends BeanBase {
       }
     }
     // with
-    if (includeWrapper.with) {
+    if (includeWrapper?.with) {
       for (const key in includeWrapper.with) {
         const relationReal: any = includeWrapper.with[key];
         if (!relationReal) continue;
