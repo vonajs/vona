@@ -39,7 +39,7 @@ export interface IBuildModelSelectParams<
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord, Columns>;
   columns?: TypeModelColumns<TRecord>;
-  joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
+  joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
@@ -66,7 +66,7 @@ export interface IBuildModelCountParams<
   column?: (keyof TRecord);
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord, Columns>;
-  joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
+  joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
 }
 
 export type IModelCountParams<
