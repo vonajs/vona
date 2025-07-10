@@ -110,7 +110,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   }
 
   async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
-    const item=await this.__get_raw(where,options);
+    const item = await this.__get_raw(where, options);
+    if (!item) return item;
     return await this.$scope.database.service.relations.handleRelationsOne(item, this, options as any, options);
   }
 

@@ -7,12 +7,11 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceRelations extends BeanBase {
   public async handleRelationsOne<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
-    entity: TRecord | undefined,
+    entity: TRecord,
     modelCurrent: TModel,
     includeWrapper?: IModelRelationIncludeWrapper<TModel>,
     methodOptions?: IModelMethodOptions,
   ) {
-    if (!entity) return entity;
     // relations
     const relations = this.__handleRelationsCollection(modelCurrent, includeWrapper);
     if (!relations) return entity;
@@ -50,46 +49,26 @@ export class ServiceRelations extends BeanBase {
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
-      const idsFrom = entities.map(item => cast(item).id);
-      const options2 = deepExtend({}, optionsReal, { where: { [key]: idsFrom } });
-      const items = await modelTarget.select(options2, methodOptionsReal);
-      for (const entity of entities) {
-        entity[relationName] = items.find(item => item[key] === cast(entity).id);
-      }
-    } else if (type === 'belongsTo') {
-      const idsTo = entities.map(item => cast(item)[key]);
+      const idFrom = cast(entity).id;
+      const where = { [key]: idFrom };
       const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-      const items = await modelTarget.mget(idsTo, options2);
-      for (const entity of entities) {
-        entity[relationName] = items.find(item => item.id === cast(entity)[key]);
-      }
+      entity[relationName] = await modelTarget.get(where, options2);
+    } else if (type === 'belongsTo') {
+      const idTo = cast(entity)[key];
+      const where = { id: idTo };
+      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+      entity[relationName] = await modelTarget.get(where, options2);
     } else if (type === 'hasMany') {
-      const idsFrom = entities.map(item => cast(item).id);
-      const options2 = deepExtend({}, optionsReal, { where: { [key]: idsFrom } });
-      const items = await modelTarget.select(options2, methodOptionsReal);
-      for (const entity of entities) {
-        entity[relationName] = [];
-        for (const item of items) {
-          if (item[key] === cast(entity).id) {
-            entity[relationName].push(item);
-          }
-        }
-      }
+      const idFrom = cast(entity).id;
+      const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
+      entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelCurrent, modelMiddle);
-      const idsFrom = entities.map(item => cast(item).id);
-      const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
+      const idFrom = cast(entity).id;
+      const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idFrom } }, methodOptionsReal);
       const idsTo = itemsMiddle.map(item => item[keyTo]);
       const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-      const items = await modelTarget.mget(idsTo, options2);
-      for (const entity of entities) {
-        entity[relationName] = [];
-        for (const itemMiddle of itemsMiddle) {
-          if (itemMiddle[keyFrom] === cast(entity).id) {
-            entity[relationName].push(items.find(item => item.id === cast(itemMiddle)[keyTo]));
-          }
-        }
-      }
+      entity[relationName] = await modelTarget.mget(idsTo, options2);
     }
   }
 
