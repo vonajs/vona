@@ -37,6 +37,15 @@ describe('modelRelations.test.ts', () => {
         { include: { postContent: true } },
       );
       assert.equal(postGet?.postContent?.content, 'content1');
+      // relation: hasOne: columns
+      const postGetColumns = await scopeTest.model.post.get(
+        { id: post1.id },
+        { columns: ['id'], include: { postContent: { columns: ['id'] } } },
+      );
+      assert.equal(postGetColumns?.postContent?.content, undefined);
+      assert.equal(Object.keys(postGetColumns!.postContent!).length, 1);
+      console.log(Object.keys(postGetColumns!));
+      assert.equal(Object.keys(postGetColumns!).length, 1 + 2);
       // relation: belongsTo
       const postContents = await scopeTest.model.postContent.select({
         where: {

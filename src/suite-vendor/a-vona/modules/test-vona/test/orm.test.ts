@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('orm.test.ts', () => {
+describe('orm.test.ts', () => {
   it('action:orm:hasOne', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
