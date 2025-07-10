@@ -54,10 +54,22 @@
     "body": [
       "declare module 'vona-module-a-redis' {",
       "  export interface IRedisClientRecord {",
-      "    xxx$0: never;",
+      "    $0: never;",
       "  }",
       "}"
     ],
     "description": "record.redisclient"
+  },
+  "record.databaseclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recorddatabaseclient",
+    "body": [
+      "declare module 'vona-module-a-database' {",
+      "  export interface IDatabaseClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.databaseclient"
   }
 }
