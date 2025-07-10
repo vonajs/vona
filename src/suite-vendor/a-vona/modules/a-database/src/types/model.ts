@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelParamsInclude } from './relations.ts';
-import type { TypeEntityTableColumnNamesOfGeneral } from './relationsColumns.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 // join
@@ -28,10 +28,10 @@ export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
 export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder<ColumnNames> = [ColumnNames, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
-export interface IBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames>
+export interface IBuildModelSelectParams<TRecord, Model extends BeanModelMeta, TableNames, ColumnNames, Columns>
   extends IModelRelationIncludeWrapper<Model> {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  where?: TypeModelWhere<TRecord>;
+  where?: Columns extends {} ? TypeModelWhere<Columns> : TypeModelWhere<TRecord>;
   columns?: TypeModelColumns<TRecord>;
   joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];
@@ -47,13 +47,14 @@ export type IModelSelectParams<
   TRecord,
   Model,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
-  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
+  TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
 >;
 
-export interface IBuildModelCountParams<TRecord, TableNames, ColumnNames> {
+export interface IBuildModelCountParams<TRecord, TableNames, ColumnNames, Columns> {
   column?: (keyof TRecord);
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  where?: TypeModelWhere<TRecord>;
+  where?: Columns extends {} ? TypeModelWhere<Columns> : TypeModelWhere<TRecord>;
   joins?: IModelSelectParamsJoin<TableNames, ColumnNames>[];
 }
 
@@ -64,7 +65,8 @@ export type IModelCountParams<
 > = IBuildModelCountParams<
   TRecord,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
-  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
+  TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
 >;
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;

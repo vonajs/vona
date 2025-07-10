@@ -142,7 +142,7 @@ describe('modelRelations.test.ts', () => {
         joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
         where: {
           'testVonaUser.id': user1.id,
-        } as any,
+        },
         orders: [['testVonaUser.id', 'asc']],
       });
       assert.equal(itemsJoins.length, 2);
@@ -151,7 +151,7 @@ describe('modelRelations.test.ts', () => {
         joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
         where: {
           'testVonaUser.id': user2.id,
-        } as any,
+        },
         orders: [['testVonaUser.id', 'asc']],
       }, ['test-vona:user']);
       assert.equal(itemsJoins2.length, 0);
