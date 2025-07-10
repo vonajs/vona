@@ -44,7 +44,6 @@ describe('modelRelations.test.ts', () => {
       );
       assert.equal(postGetColumns?.postContent?.content, undefined);
       assert.equal(Object.keys(postGetColumns!.postContent!).length, 1);
-      console.log(Object.keys(postGetColumns!));
       assert.equal(Object.keys(postGetColumns!).length, 1 + 2);// .user + .postContent
       // relation: belongsTo
       const postContents = await scopeTest.model.postContent.select({
@@ -66,6 +65,7 @@ describe('modelRelations.test.ts', () => {
         { id: post1.id },
       );
       assert.equal(postAutoload!.user?.id, postAutoload!.userId);
+      assert.equal(Object.keys(postAutoload!.user!).length, 2); // id + name
       // relation: hasMany
       const users = await scopeTest.model.user.select({
         where: {
