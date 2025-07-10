@@ -45,7 +45,7 @@ describe('modelRelations.test.ts', () => {
       assert.equal(postGetColumns?.postContent?.content, undefined);
       assert.equal(Object.keys(postGetColumns!.postContent!).length, 1);
       console.log(Object.keys(postGetColumns!));
-      assert.equal(Object.keys(postGetColumns!).length, 1 + 2);
+      assert.equal(Object.keys(postGetColumns!).length, 1 + 2);// .user + .postContent
       // relation: belongsTo
       const postContents = await scopeTest.model.postContent.select({
         where: {
