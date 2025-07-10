@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsOrder } from './model.ts';
-import type { TypeModelColumns, TypeModelWhere } from './modelPro.ts';
+import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
