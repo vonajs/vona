@@ -17,10 +17,13 @@ export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
 export type TypeModelColumnValue<Column> = Column | Column[] | Knex.Raw | '_skip_';
 
-export type TypeModelWhere<TRecord> = {
+export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> =
+  Columns extends {} ? TypeModelWhereInner<Columns> | Knex.Raw : TypeModelWhereInner<TRecord> | Knex.Raw;
+
+export type TypeModelWhereInner<TRecord> = {
   [prop in keyof TRecord]?: TypeModelColumnValue<TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
 } & {
-  [key in TypeOpsJoint]?: TypeModelWhere<TRecord>
+  [key in TypeOpsJoint]?: TypeModelWhereInner<TRecord>
 };
 
 export type TypeModelWhereFieldAll<TRecord, Column> = {
