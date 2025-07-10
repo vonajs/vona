@@ -1,6 +1,7 @@
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type {
   EntityBase,
+  IModelClassRecord,
   IModelGetOptions,
   IModelMethodOptions,
   IModelSelectParams,
@@ -82,7 +83,19 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return this.__filterMGetColumns(items, options?.columns);
   }
 
-  async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+  //  <ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost, ModelPost, ModelJoins>>
+
+  async select(
+    params: IModelSelectParams<TRecord>,
+    modelJoins: (keyof IModelClassRecord) | (keyof IModelClassRecord)[],
+    options?: IModelMethodOptions,
+  ): Promise<TRecord[]>;
+  async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]>;
+  async select(params?: IModelSelectParams<TRecord>, modelJoins?: any, options?: any): Promise<TRecord[]> {
+    if (typeof modelJoins === 'object') {
+      options = modelJoins;
+      modelJoins = undefined;
+    }
     const items = await this.__select_raw(params, options);
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
   }
