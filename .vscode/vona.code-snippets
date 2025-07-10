@@ -48,9 +48,9 @@
     ],
     "description": "aop.action"
   },
-  "record.redis": {
+  "record.redisclient": {
     "scope": "typescript,typescriptreact",
-    "prefix": "recordredis",
+    "prefix": "recordredisclient",
     "body": [
       "declare module 'vona-module-a-redis' {",
       "  export interface IRedisClientRecord {",
@@ -58,6 +58,6 @@
       "  }",
       "}"
     ],
-    "description": "record.redis"
+    "description": "record.redisclient"
   }
 }
