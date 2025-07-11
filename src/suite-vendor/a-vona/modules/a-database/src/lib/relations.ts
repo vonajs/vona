@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
@@ -20,13 +21,19 @@ function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanModelMeta,
   return { type: 'belongsTo', model: classModel, key, options };
 }
 
-function hasMany<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>(
+function hasMany<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>,
+  options?: OPTIONS,
+  _modelJoins?: ModelJoins,
 ): IModelRelationHasMany<MODEL, AUTOLOAD> {
-  options = options ?? {};
-  return { type: 'hasMany', model: classModel, key, ...options };
+  const options2 = options ?? {};
+  return { type: 'hasMany', model: classModel, key, ...options2 };
 }
 
 function belongsToMany<MODELMiddle extends BeanModelMeta, MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>(

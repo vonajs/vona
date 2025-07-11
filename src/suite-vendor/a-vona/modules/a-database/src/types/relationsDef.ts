@@ -1,8 +1,11 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelSelectParamsOrder } from './model.ts';
+import type { IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
+import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
+import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
 // export interface TypeModelRelations {
@@ -60,11 +63,31 @@ export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta, AUTOLOAD 
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
 }
 
-export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
+export type IModelRelationOptionsMany<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+> = IBuildModelRelationOptionsMany<
+  MODEL[TypeSymbolKeyEntity],
+  AUTOLOAD,
+  TypeEntityTableNamesOfGeneral<ModelJoins, MODEL>,
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, MODEL>,
+  TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>
+>;
+
+export interface IBuildModelRelationOptionsMany<
+  TRecord,
+  AUTOLOAD extends boolean = false,
+  TableNames = undefined,
+  ColumnNames = keyof TRecord,
+  Columns extends {} | undefined = undefined,
+> {
   autoload?: AUTOLOAD;
-  columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
-  where?: TypeModelWhere<MODEL[TypeSymbolKeyEntity]>;
-  orders?: IModelSelectParamsOrder<MODEL[TypeSymbolKeyEntity]>[];
+  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  columns?: TypeModelColumns<TRecord>;
+  where?: TypeModelWhere<TRecord, Columns>;
+  joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
+  orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
 }

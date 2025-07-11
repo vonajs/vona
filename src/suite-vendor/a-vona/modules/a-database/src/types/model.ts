@@ -38,8 +38,8 @@ export interface IBuildModelSelectParams<
 >
   extends IModelRelationIncludeWrapper<Model> {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  where?: TypeModelWhere<TRecord, Columns>;
   columns?: TypeModelColumns<TRecord>;
+  where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
