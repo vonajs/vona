@@ -85,8 +85,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
 
   //  <ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost, ModelPost, ModelJoins>>
 
-  async select(
-    params?: IModelSelectParams<TRecord>,
+  async select<T extends IModelSelectParams<TRecord>>(
+    params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: (keyof IModelClassRecord) | (keyof IModelClassRecord)[],
   ): Promise<TRecord[]> {
