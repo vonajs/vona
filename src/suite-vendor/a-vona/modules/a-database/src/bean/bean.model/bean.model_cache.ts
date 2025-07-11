@@ -54,7 +54,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     await this.__getCacheInstance(table).clear();
   }
 
-  async mget(ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
+  async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<TRecord[]> {
     const items = await this.__mget_raw(ids, options);
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
   }
@@ -118,7 +118,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return await this.__mget_raw(ids, options2);
   }
 
-  async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
+  async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<TRecord | undefined> {
     const item: TRecord | undefined = await this.__get_raw(where, options);
     return await this.$scope.database.service.relations.handleRelationsOne(item, this, options as any, options);
   }
