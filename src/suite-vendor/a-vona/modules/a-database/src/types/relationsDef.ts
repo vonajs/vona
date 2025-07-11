@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
-import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
+import type { IBuildModelSelectParamsBasic } from './model.ts';
+import type { TypeModelColumns } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
@@ -81,13 +81,6 @@ export interface IBuildModelRelationOptionsMany<
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
-> {
+> extends IBuildModelSelectParamsBasic<TRecord, TableNames, ColumnNames, Columns> {
   autoload?: AUTOLOAD;
-  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  columns?: TypeModelColumns<TRecord>;
-  where?: TypeModelWhere<TRecord, Columns>;
-  joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
-  orders?: IModelSelectParamsOrder<ColumnNames>[];
-  limit?: number;
-  offset?: number;
 }

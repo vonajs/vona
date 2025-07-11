@@ -35,8 +35,16 @@ export interface IBuildModelSelectParams<
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
->
-  extends IModelRelationIncludeWrapper<Model> {
+> extends
+  IModelRelationIncludeWrapper<Model>,
+  IBuildModelSelectParamsBasic<TRecord, TableNames, ColumnNames, Columns> {}
+
+export interface IBuildModelSelectParamsBasic<
+  TRecord,
+  TableNames = undefined,
+  ColumnNames = keyof TRecord,
+  Columns extends {} | undefined = undefined,
+> {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   columns?: TypeModelColumns<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
