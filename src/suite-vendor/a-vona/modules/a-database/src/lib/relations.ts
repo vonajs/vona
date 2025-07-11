@@ -50,7 +50,7 @@ function belongsToMany<
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
 ): IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD> {
-  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
+  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options: options as any };
 }
 
 export const $relation = {
