@@ -39,6 +39,7 @@ function hasMany<
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: OPTIONS,
+  _modelJoins?: ModelJoins,
 ): IModelRelationHasManyDynamic<MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
   options = options ?? {} as any;
   return { type: 'hasMany', model: classModel, key, ...options };
@@ -56,6 +57,7 @@ function belongsToMany<
   keyFrom: keyof MODELMiddle[TypeSymbolKeyEntity],
   keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
   options?: OPTIONS,
+  _modelJoins?: ModelJoins,
 ): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
