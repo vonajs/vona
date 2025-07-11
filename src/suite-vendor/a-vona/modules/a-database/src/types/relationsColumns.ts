@@ -32,9 +32,10 @@ export type TypeModelsOfModelOptions<TModelOptions extends IDecoratorModelOption
   }>;
 
 export type TypeModelOnionNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TypeRecordValues<{
-    [RelationName in keyof TModelOptions['relations']]: TypeUtilGetModelOnionName<TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>>;
-  }>;
+  TModelOptions['relations'] extends {} ?
+    TypeRecordValues<{
+      [RelationName in keyof TModelOptions['relations']]: TypeUtilGetModelOnionName<TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>>;
+    }> : never;
 
 export type TypeRecordModelValues<TRecord extends Record<string, BeanModelMeta | undefined>> = TRecord[keyof TRecord];
 
