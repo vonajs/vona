@@ -6,24 +6,29 @@ import { ModelUser } from './user.ts';
 
 // <'postContent' | 'user'>
 export interface IModelOptionsPost extends IDecoratorModelOptions {
-  relations: {
-    postContent: IModelRelationHasOne<ModelPostContent>;
-    user: IModelRelationBelongsTo<ModelPost, ModelUser, true>;
-  };
+  // relations: {
+  //   postContent: IModelRelationHasOne<ModelPostContent>;
+  //   user: IModelRelationBelongsTo<ModelPost, ModelUser, true>;
+  // };
 }
 
 @Model<IModelOptionsPost>({
   entity: EntityPost,
-  relations: {
-    postContent: $relation.hasOne(() => ModelPostContent, 'postId'),
-    user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
-  },
+  // relations: {
+  //   postContent: $relation.hasOne(() => ModelPostContent, 'postId'),
+  //   user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
+  // },
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
   async test() {
+    await this.scope.model.post.select({ where: { id: 1 } });
+
     const users = await this.scope.model.user.select(
       // ['test-vona:user', 'test-vona:post'],
       {
+        where: {
+          'testVonaUser.iid': 'testVonaUser.iid',
+        },
         include: {
           roles: {
             include: { users: { include: { posts: true } } },

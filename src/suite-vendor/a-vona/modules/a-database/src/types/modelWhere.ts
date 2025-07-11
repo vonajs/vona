@@ -15,13 +15,13 @@ export type TypeOpsJoint = TypeRecordValues<Pick<typeof Op, 'and' | 'or' | 'not'
 export type TypeOpsNormal = TypeRecordValues<Pick<typeof Op, 'eq'>>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
-export type TypeModelColumnValue<Column> = Column | Column[] | Knex.Raw | '_skip_';
+export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Column[] | Knex.Raw | '_skip_';
 
 export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> =
   Columns extends {} ? TypeModelWhereInner<Columns> | Knex.Raw : TypeModelWhereInner<TRecord> | Knex.Raw;
 
 export type TypeModelWhereInner<TRecord> = {
-  [prop in keyof TRecord]?: TypeModelColumnValue<TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
+  [prop in keyof TRecord]?: TypeModelColumnValue<TRecord, TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
 } & {
   [key in TypeOpsJoint]?: TypeModelWhereInner<TRecord>
 };
@@ -29,7 +29,7 @@ export type TypeModelWhereInner<TRecord> = {
 export type TypeModelWhereFieldAll<TRecord, Column> = {
   [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>
 } & {
-  [key in TypeOpsNormal]?: TypeModelColumnValue<Column>
+  [key in TypeOpsNormal]?: TypeModelColumnValue<TRecord, Column>
 };
 
 export type TypeModelWhereFieldJoint<TRecord, Column> = {
