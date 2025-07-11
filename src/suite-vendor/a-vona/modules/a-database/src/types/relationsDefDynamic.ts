@@ -3,14 +3,14 @@ import type { IModelRelationIncludeWrapper } from './model.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
 import type { IModelRelationOptionsMany, IModelRelationOptionsOne, TypeModelClassLike } from './relationsDef.ts';
 
-export type TypeModelRelationDynamic<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
-  IModelRelationHasOneDynamic<MODELTarget> |
-  IModelRelationBelongsToDynamic<MODELSelf, MODELTarget> |
-  IModelRelationHasManyDynamic<MODELTarget>;
+// export type TypeModelRelationDynamic<MODELSelf extends BeanModelMeta | undefined, MODELTarget extends BeanModelMeta> =
+//   IModelRelationHasOneDynamic<MODELTarget> |
+//   IModelRelationBelongsToDynamic<MODELSelf, MODELTarget> |
+//   IModelRelationHasManyDynamic<MODELTarget>;
 
 // use optional ? for app config
 export interface IModelRelationHasOneDynamic<
-  MODEL extends BeanModelMeta = BeanModelMeta,
+  MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD> = {},
 > {
@@ -21,8 +21,8 @@ export interface IModelRelationHasOneDynamic<
 }
 
 export interface IModelRelationBelongsToDynamic<
-  MODELSelf extends BeanModelMeta = BeanModelMeta,
-  MODEL extends BeanModelMeta = BeanModelMeta,
+  MODELSelf extends BeanModelMeta,
+  MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD> = {},
 > {
@@ -33,7 +33,7 @@ export interface IModelRelationBelongsToDynamic<
 }
 
 export interface IModelRelationHasManyDynamic<
-  MODEL extends BeanModelMeta = BeanModelMeta,
+  MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
 > {
@@ -44,8 +44,8 @@ export interface IModelRelationHasManyDynamic<
 }
 
 export interface IModelRelationBelongsToManyDynamic<
-  MODELMiddle extends BeanModelMeta = BeanModelMeta,
-  MODEL extends BeanModelMeta = BeanModelMeta,
+  MODELMiddle extends BeanModelMeta,
+  MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
 > {
@@ -57,8 +57,8 @@ export interface IModelRelationBelongsToManyDynamic<
   options?: OPTIONS;
 }
 
-export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
+export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>
   extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsOne<MODEL, AUTOLOAD>, 'autoload'> {}
 
-export interface IModelRelationOptionsManyDynamic<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false>
+export interface IModelRelationOptionsManyDynamic<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>
   extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsMany<MODEL, AUTOLOAD>, 'autoload'> {}
