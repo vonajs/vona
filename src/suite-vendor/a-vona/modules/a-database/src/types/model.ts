@@ -31,7 +31,6 @@ export type IModelSelectParamsOrder<ColumnNames> = [ColumnNames, IModelSelectPar
 export interface IBuildModelSelectParams<
   TRecord,
   Model extends BeanModelMeta | undefined = undefined,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   TableNames = '',
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
@@ -40,7 +39,6 @@ export interface IBuildModelSelectParams<
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   where?: TypeModelWhere<TRecord, Columns>;
   columns?: TypeModelColumns<TRecord>;
-  joinsModel?: ModelJoins;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
@@ -54,7 +52,6 @@ export type IModelSelectParams<
 > = Model extends BeanModelMeta ? IBuildModelSelectParams<
   TRecord,
   Model,
-  ModelJoins,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>

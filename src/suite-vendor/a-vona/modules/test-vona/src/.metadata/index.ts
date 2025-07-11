@@ -293,7 +293,7 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyModelOptions]: IModelOptionsPost;
       get<T extends IModelGetOptions<EntityPost,ModelPost>>(where: TypeModelWhere<EntityPost>, options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPost,ModelPost>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      select<T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPost>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
+      select<T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPost>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
       select<T extends IModelSelectParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityPost,ModelPost,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -304,7 +304,7 @@ export interface ModelPostContent {
       [SymbolKeyModelOptions]: IModelOptionsPostContent;
       get<T extends IModelGetOptions<EntityPostContent,ModelPostContent>>(where: TypeModelWhere<EntityPostContent>, options?: T): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPostContent,ModelPostContent>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
-      select<T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPostContent>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
+      select<T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPostContent>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
       select<T extends IModelSelectParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityPostContent,ModelPostContent,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -315,7 +315,7 @@ export interface ModelRole {
       [SymbolKeyModelOptions]: IModelOptionsRole;
       get<T extends IModelGetOptions<EntityRole,ModelRole>>(where: TypeModelWhere<EntityRole>, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRole>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRole>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
       select<T extends IModelSelectParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -326,7 +326,7 @@ export interface ModelRoleUser {
       [SymbolKeyModelOptions]: IModelOptionsRoleUser;
       get<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(where: TypeModelWhere<EntityRoleUser>, options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
-      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRoleUser>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
+      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRoleUser>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
       select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRoleUser,ModelRoleUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -337,7 +337,7 @@ export interface ModelTest {
       [SymbolKeyModelOptions]: IModelOptionsTest;
       get<T extends IModelGetOptions<EntityTest,ModelTest>>(where: TypeModelWhere<EntityTest>, options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTest, T> | undefined>;
       mget<T extends IModelGetOptions<EntityTest,ModelTest>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
-      select<T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTest>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
+      select<T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTest>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
       select<T extends IModelSelectParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityTest,ModelTest,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -348,7 +348,7 @@ export interface ModelTestDynamicTable {
       [SymbolKeyModelOptions]: IModelOptionsTestDynamicTable;
       get<T extends IModelGetOptions<EntityTest,ModelTestDynamicTable>>(where: TypeModelWhere<EntityTest>, options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T> | undefined>;
       mget<T extends IModelGetOptions<EntityTest,ModelTestDynamicTable>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
-      select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTestDynamicTable>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
+      select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTestDynamicTable>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
       select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityTest,ModelTestDynamicTable,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -359,7 +359,7 @@ export interface ModelUser {
       [SymbolKeyModelOptions]: IModelOptionsUser;
       get<T extends IModelGetOptions<EntityUser,ModelUser>>(where: TypeModelWhere<EntityUser>, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelUser>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelUser>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
       select<T extends IModelSelectParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
