@@ -2,7 +2,6 @@ import type { TypeConfirmArray, TypeRecordValues } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
 import type { TypeSymbolKeyEntity, TypeSymbolKeyEntityMeta, TypeUtilGetModelOnionName, TypeUtilGetModelOptions, TypeUtilGetRelationEntityMeta, TypeUtilGetRelationModel } from './relations.ts';
-import { never } from 'zod/v4';
 
 export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
