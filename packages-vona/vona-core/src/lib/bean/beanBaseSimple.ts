@@ -17,7 +17,7 @@ export class BeanBaseSimple extends BeanSimple {
     return appResource._getModuleName(this[SymbolBeanFullName]);
   }
 
-  protected get $beanFullName() {
+  public get $beanFullName() {
     return this[SymbolBeanFullName];
   }
 
@@ -25,7 +25,7 @@ export class BeanBaseSimple extends BeanSimple {
     return appResource.getBean(this[SymbolBeanFullName])!;
   }
 
-  protected get $onionName() {
+  public get $onionName() {
     const parts = this.$beanFullName.split('.');
     return `${parts[0]}:${parts[2]}`;
   }

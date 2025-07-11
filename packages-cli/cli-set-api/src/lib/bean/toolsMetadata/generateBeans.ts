@@ -4,7 +4,6 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { globby } from 'globby';
 import { checkIgnoreOfParts, getScopeModuleName } from './utils.ts';
 
-// todo: remove
 export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName: string, modulePath: string) {
   const scopeModuleName = getScopeModuleName(moduleName);
   // ignore
