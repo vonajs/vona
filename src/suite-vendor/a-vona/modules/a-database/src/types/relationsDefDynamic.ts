@@ -1,5 +1,6 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from './model.ts';
+import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
 import type { IModelRelationOptionsMany, IModelRelationOptionsOne, TypeModelClassLike } from './relationsDef.ts';
 
@@ -35,7 +36,8 @@ export interface IModelRelationBelongsToDynamic<
 export interface IModelRelationHasManyDynamic<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
@@ -47,7 +49,8 @@ export interface IModelRelationBelongsToManyDynamic<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD> = {},
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'belongsToMany';
   modelMiddle?: TypeModelClassLike<MODELMiddle>;
@@ -60,5 +63,9 @@ export interface IModelRelationBelongsToManyDynamic<
 export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>
   extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsOne<MODEL, AUTOLOAD>, 'autoload'> {}
 
-export interface IModelRelationOptionsManyDynamic<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>
-  extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsMany<MODEL, AUTOLOAD>, 'autoload'> {}
+export interface IModelRelationOptionsManyDynamic<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+>
+  extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins>, 'autoload'> {}

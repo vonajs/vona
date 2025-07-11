@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationBelongsToDynamic, IModelRelationBelongsToManyDynamic, IModelRelationHasManyDynamic, IModelRelationHasOneDynamic, IModelRelationOptionsManyDynamic, IModelRelationOptionsOneDynamic } from '../types/relationsDefDynamic.ts';
 
@@ -32,12 +33,13 @@ function belongsTo<
 function hasMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: OPTIONS,
-): IModelRelationHasManyDynamic<MODEL, AUTOLOAD, OPTIONS> {
+): IModelRelationHasManyDynamic<MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
   options = options ?? {} as any;
   return { type: 'hasMany', model: classModel, key, ...options };
 }
@@ -46,14 +48,15 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   keyFrom: keyof MODELMiddle[TypeSymbolKeyEntity],
   keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
   options?: OPTIONS,
-): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, AUTOLOAD, OPTIONS> {
+): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
 
