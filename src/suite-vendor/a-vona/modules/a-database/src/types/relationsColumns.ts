@@ -22,9 +22,10 @@ export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDeco
 }>;
 
 export type TypeEntityTableColumnsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TypeEntityTableColumnsOfModelDirect<TypeRecordModelValues<{
-    [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
-  }>>;
+  TModelOptions['relations'] extends {} ?
+    TypeEntityTableColumnsOfModelDirect<TypeRecordModelValues<{
+      [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
+    }>> : {};
 
 export type TypeModelsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
   TypeRecordModelValues<{
@@ -35,7 +36,7 @@ export type TypeModelOnionNamesOfModelOptions<TModelOptions extends IDecoratorMo
   TModelOptions['relations'] extends {} ?
     TypeRecordValues<{
       [RelationName in keyof TModelOptions['relations']]: TypeUtilGetModelOnionName<TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>>;
-    }> : never;
+    }> : undefined; // not use never
 
 export type TypeRecordModelValues<TRecord extends Record<string, BeanModelMeta | undefined>> = TRecord[keyof TRecord];
 
