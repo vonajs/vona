@@ -14,7 +14,9 @@ export type TypeOpsJointPostfix<Op> = {
   [KEY in keyof Op]: Op[KEY] | (KEY extends string ? `_${KEY}_${number}` : never)
 };
 
-export type TypeOpsJoint = TypeRecordValues<TypeOpsJointPostfix<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>>;
+// not use TypeOpsJointPostfix, which cause type not take affect for table.field
+// export type TypeOpsJoint = TypeRecordValues<TypeOpsJointPostfix<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>>;
+export type TypeOpsJoint = TypeRecordValues<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>;
 export type TypeOpsNormal = TypeRecordValues<Pick<typeof Op, 'eq'>>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
