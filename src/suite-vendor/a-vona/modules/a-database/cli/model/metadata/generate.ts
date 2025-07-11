@@ -19,8 +19,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       mget<T extends IModelGetOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<${className}>>(params: T, options: IModelMethodOptions | undefined, modelJoins: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${className},TypeModelOnionNamesOfModelClass<${className}>>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<${entityName},${className},ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<${entityName},${className}>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      count<T extends IModelCountParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<${className}>>(params: T, options: IModelMethodOptionsGeneral | undefined, modelJoins: ModelJoins): Promise<BigNumber>;
+      count<T extends IModelCountParams<${entityName},${className},TypeModelOnionNamesOfModelClass<${className}>>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
     }`);
     contentModels.push(`'${moduleName}:${beanName}': ${className};`);
     // contentRecords.push(`'${tableName}': never;`);
