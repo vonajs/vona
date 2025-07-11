@@ -89,15 +89,30 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ModelRole {
+            get $beanFullName(): 'home-user.model.role';
+            get $onionName(): 'home-user:role';
+          }
+
         export interface ModelUser {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ModelUser {
+            get $beanFullName(): 'home-user.model.user';
+            get $onionName(): 'home-user:user';
+          }
+
         export interface ModelUserRole {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface ModelUserRole {
+            get $beanFullName(): 'home-user.model.userRole';
+            get $onionName(): 'home-user:userRole';
+          } 
 }
 /** model: end */
 /** model: begin */
@@ -111,7 +126,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, TypeModelOnionNamesOfModelClass } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-home-user' {
   export interface ModelRole {
@@ -120,10 +135,8 @@ declare module 'vona-module-home-user' {
       [SymbolKeyModelOptions]: IModelOptionsRole;
       get<T extends IModelGetOptions<EntityRole,ModelRole>>(where: TypeModelWhere<EntityRole>, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      select<T extends IModelSelectParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelRole>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+      count<T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelRole>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelUser {
       [SymbolKeyEntity]: EntityUser;
@@ -131,10 +144,8 @@ export interface ModelUser {
       [SymbolKeyModelOptions]: IModelOptionsUser;
       get<T extends IModelGetOptions<EntityUser,ModelUser>>(where: TypeModelWhere<EntityUser>, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      select<T extends IModelSelectParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelUser>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+      count<T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelUser>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelUserRole {
       [SymbolKeyEntity]: EntityUserRole;
@@ -142,10 +153,8 @@ export interface ModelUserRole {
       [SymbolKeyModelOptions]: IModelOptionsUserRole;
       get<T extends IModelGetOptions<EntityUserRole,ModelUserRole>>(where: TypeModelWhere<EntityUserRole>, options?: T): Promise<TypeModelRelationResult<EntityUserRole, ModelUserRole, T> | undefined>;
       mget<T extends IModelGetOptions<EntityUserRole,ModelUserRole>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUserRole, ModelUserRole, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityUserRole,ModelUserRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUserRole, ModelUserRole, T>[]>;
-      select<T extends IModelSelectParams<EntityUserRole,ModelUserRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUserRole, ModelUserRole, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityUserRole,ModelUserRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityUserRole,ModelUserRole>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityUserRole,ModelUserRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelUserRole>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUserRole, ModelUserRole, T>[]>;
+      count<T extends IModelCountParams<EntityUserRole,ModelUserRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelUserRole>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
 declare module 'vona-module-a-database' {
@@ -181,20 +190,40 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ServiceAuthInnerAdapter {
+            get $beanFullName(): 'home-user.service.authInnerAdapter';
+            get $onionName(): 'home-user:authInnerAdapter';
+          }
+
         export interface ServicePassportAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
+
+          export interface ServicePassportAdapter {
+            get $beanFullName(): 'home-user.service.passportAdapter';
+            get $onionName(): 'home-user:passportAdapter';
+          }
 
         export interface ServiceRoleInnerAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ServiceRoleInnerAdapter {
+            get $beanFullName(): 'home-user.service.roleInnerAdapter';
+            get $onionName(): 'home-user:roleInnerAdapter';
+          }
+
         export interface ServiceUserInnerAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface ServiceUserInnerAdapter {
+            get $beanFullName(): 'home-user.service.userInnerAdapter';
+            get $onionName(): 'home-user:userInnerAdapter';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -242,10 +271,20 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface MetaIndex {
+            get $beanFullName(): 'home-user.meta.index';
+            get $onionName(): 'home-user:index';
+          }
+
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'home-user.meta.version';
+            get $onionName(): 'home-user:version';
+          } 
 }
 /** meta: end */
 /** dto: begin */
@@ -306,7 +345,12 @@ declare module 'vona-module-home-user' {
         export interface ControllerPassport {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface ControllerPassport {
+            get $beanFullName(): 'home-user.controller.passport';
+            get $onionName(): 'home-user:passport';
+          } 
 }
 /** controller: end */
 /** controller: begin */

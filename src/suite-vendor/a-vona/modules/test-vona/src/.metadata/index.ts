@@ -25,8 +25,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface AopRegExp {
-            $beanFullName: 'test-vona.aop.regExp';
-            $onionName: 'test-vona:regExp';
+            get $beanFullName(): 'test-vona.aop.regExp';
+            get $onionName(): 'test-vona:regExp';
           }
 
         export interface AopSimple {
@@ -35,8 +35,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface AopSimple {
-            $beanFullName: 'test-vona.aop.simple';
-            $onionName: 'test-vona:simple';
+            get $beanFullName(): 'test-vona.aop.simple';
+            get $onionName(): 'test-vona:simple';
           } 
 }
 /** aop: end */
@@ -60,8 +60,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface AopMethodTest {
-            $beanFullName: 'test-vona.aopMethod.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.aopMethod.test';
+            get $onionName(): 'test-vona:test';
           } 
 }
 /** aopMethod: end */
@@ -200,8 +200,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelPost {
-            $beanFullName: 'test-vona.model.post';
-            $onionName: 'test-vona:post';
+            get $beanFullName(): 'test-vona.model.post';
+            get $onionName(): 'test-vona:post';
           }
 
         export interface ModelPostContent {
@@ -210,8 +210,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelPostContent {
-            $beanFullName: 'test-vona.model.postContent';
-            $onionName: 'test-vona:postContent';
+            get $beanFullName(): 'test-vona.model.postContent';
+            get $onionName(): 'test-vona:postContent';
           }
 
         export interface ModelRole {
@@ -220,8 +220,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelRole {
-            $beanFullName: 'test-vona.model.role';
-            $onionName: 'test-vona:role';
+            get $beanFullName(): 'test-vona.model.role';
+            get $onionName(): 'test-vona:role';
           }
 
         export interface ModelRoleUser {
@@ -230,8 +230,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelRoleUser {
-            $beanFullName: 'test-vona.model.roleUser';
-            $onionName: 'test-vona:roleUser';
+            get $beanFullName(): 'test-vona.model.roleUser';
+            get $onionName(): 'test-vona:roleUser';
           }
 
         export interface ModelTest {
@@ -240,8 +240,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelTest {
-            $beanFullName: 'test-vona.model.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.model.test';
+            get $onionName(): 'test-vona:test';
           }
 
         export interface ModelTestDynamicTable {
@@ -250,8 +250,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelTestDynamicTable {
-            $beanFullName: 'test-vona.model.testDynamicTable';
-            $onionName: 'test-vona:testDynamicTable';
+            get $beanFullName(): 'test-vona.model.testDynamicTable';
+            get $onionName(): 'test-vona:testDynamicTable';
           }
 
         export interface ModelUser {
@@ -260,8 +260,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ModelUser {
-            $beanFullName: 'test-vona.model.user';
-            $onionName: 'test-vona:user';
+            get $beanFullName(): 'test-vona.model.user';
+            get $onionName(): 'test-vona:user';
           } 
 }
 /** model: end */
@@ -293,10 +293,8 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyModelOptions]: IModelOptionsPost;
       get<T extends IModelGetOptions<EntityPost,ModelPost>>(where: TypeModelWhere<EntityPost>, options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPost,ModelPost>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      select<T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPost>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      select<T extends IModelSelectParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityPost,ModelPost,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityPost,ModelPost>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPost>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
+      count<T extends IModelCountParams<EntityPost>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPost>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelPostContent {
       [SymbolKeyEntity]: EntityPostContent;
@@ -304,10 +302,8 @@ export interface ModelPostContent {
       [SymbolKeyModelOptions]: IModelOptionsPostContent;
       get<T extends IModelGetOptions<EntityPostContent,ModelPostContent>>(where: TypeModelWhere<EntityPostContent>, options?: T): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPostContent,ModelPostContent>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
-      select<T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPostContent>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
-      select<T extends IModelSelectParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityPostContent,ModelPostContent,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPostContent>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
+      count<T extends IModelCountParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPostContent>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
@@ -315,10 +311,8 @@ export interface ModelRole {
       [SymbolKeyModelOptions]: IModelOptionsRole;
       get<T extends IModelGetOptions<EntityRole,ModelRole>>(where: TypeModelWhere<EntityRole>, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRole>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      select<T extends IModelSelectParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelRole>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+      count<T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelRole>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelRoleUser {
       [SymbolKeyEntity]: EntityRoleUser;
@@ -326,10 +320,8 @@ export interface ModelRoleUser {
       [SymbolKeyModelOptions]: IModelOptionsRoleUser;
       get<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(where: TypeModelWhere<EntityRoleUser>, options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
-      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRoleUser>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
-      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRoleUser,ModelRoleUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelRoleUser>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
+      count<T extends IModelCountParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelRoleUser>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelTest {
       [SymbolKeyEntity]: EntityTest;
@@ -337,10 +329,8 @@ export interface ModelTest {
       [SymbolKeyModelOptions]: IModelOptionsTest;
       get<T extends IModelGetOptions<EntityTest,ModelTest>>(where: TypeModelWhere<EntityTest>, options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTest, T> | undefined>;
       mget<T extends IModelGetOptions<EntityTest,ModelTest>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
-      select<T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTest>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
-      select<T extends IModelSelectParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityTest,ModelTest,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelTest>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
+      count<T extends IModelCountParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelTest>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelTestDynamicTable {
       [SymbolKeyEntity]: EntityTest;
@@ -348,10 +338,8 @@ export interface ModelTestDynamicTable {
       [SymbolKeyModelOptions]: IModelOptionsTestDynamicTable;
       get<T extends IModelGetOptions<EntityTest,ModelTestDynamicTable>>(where: TypeModelWhere<EntityTest>, options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T> | undefined>;
       mget<T extends IModelGetOptions<EntityTest,ModelTestDynamicTable>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
-      select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTestDynamicTable>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
-      select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityTest,ModelTestDynamicTable,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
+      count<T extends IModelCountParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelUser {
       [SymbolKeyEntity]: EntityUser;
@@ -359,10 +347,8 @@ export interface ModelUser {
       [SymbolKeyModelOptions]: IModelOptionsUser;
       get<T extends IModelGetOptions<EntityUser,ModelUser>>(where: TypeModelWhere<EntityUser>, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelUser>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      select<T extends IModelSelectParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelUser>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+      count<T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelUser>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
 declare module 'vona-module-a-database' {
@@ -432,8 +418,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ServiceAopMethod {
-            $beanFullName: 'test-vona.service.aopMethod';
-            $onionName: 'test-vona:aopMethod';
+            get $beanFullName(): 'test-vona.service.aopMethod';
+            get $onionName(): 'test-vona:aopMethod';
           }
 
         export interface ServiceCaching {
@@ -442,8 +428,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ServiceCaching {
-            $beanFullName: 'test-vona.service.caching';
-            $onionName: 'test-vona:caching';
+            get $beanFullName(): 'test-vona.service.caching';
+            get $onionName(): 'test-vona:caching';
           }
 
         export interface ServiceTest {
@@ -452,8 +438,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ServiceTest {
-            $beanFullName: 'test-vona.service.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.service.test';
+            get $onionName(): 'test-vona:test';
           }
 
         export interface ServiceTestApp {
@@ -462,8 +448,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ServiceTestApp {
-            $beanFullName: 'test-vona.service.testApp';
-            $onionName: 'test-vona:testApp';
+            get $beanFullName(): 'test-vona.service.testApp';
+            get $onionName(): 'test-vona:testApp';
           }
 
         export interface ServiceTestClass {
@@ -472,8 +458,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ServiceTestClass {
-            $beanFullName: 'test-vona.service.testClass';
-            $onionName: 'test-vona:testClass';
+            get $beanFullName(): 'test-vona.service.testClass';
+            get $onionName(): 'test-vona:testClass';
           }
 
         export interface ServiceTransaction {
@@ -482,8 +468,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ServiceTransaction {
-            $beanFullName: 'test-vona.service.transaction';
-            $onionName: 'test-vona:transaction';
+            get $beanFullName(): 'test-vona.service.transaction';
+            get $onionName(): 'test-vona:transaction';
           } 
 }
 /** service: end */
@@ -537,8 +523,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface BroadcastTest {
-            $beanFullName: 'test-vona.broadcast.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.broadcast.test';
+            get $onionName(): 'test-vona:test';
           } 
 }
 /** broadcast: end */
@@ -568,8 +554,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface CacheMemTest {
-            $beanFullName: 'test-vona.cacheMem.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.cacheMem.test';
+            get $onionName(): 'test-vona:test';
           } 
 }
 /** cacheMem: end */
@@ -599,8 +585,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface CacheRedisTest {
-            $beanFullName: 'test-vona.cacheRedis.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.cacheRedis.test';
+            get $onionName(): 'test-vona:test';
           } 
 }
 /** cacheRedis: end */
@@ -626,8 +612,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface EventHelloEcho {
-            $beanFullName: 'test-vona.event.helloEcho';
-            $onionName: 'test-vona:helloEcho';
+            get $beanFullName(): 'test-vona.event.helloEcho';
+            get $onionName(): 'test-vona:helloEcho';
           } 
 }
 /** event: end */
@@ -666,8 +652,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface EventListenerHelloEcho {
-            $beanFullName: 'test-vona.eventListener.helloEcho';
-            $onionName: 'test-vona:helloEcho';
+            get $beanFullName(): 'test-vona.eventListener.helloEcho';
+            get $onionName(): 'test-vona:helloEcho';
           } 
 }
 /** eventListener: end */
@@ -691,8 +677,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface MetaVersion {
-            $beanFullName: 'test-vona.meta.version';
-            $onionName: 'test-vona:version';
+            get $beanFullName(): 'test-vona.meta.version';
+            get $onionName(): 'test-vona:version';
           } 
 }
 /** meta: end */
@@ -716,8 +702,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface QueueTest {
-            $beanFullName: 'test-vona.queue.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.queue.test';
+            get $onionName(): 'test-vona:test';
           } 
 }
 /** queue: end */
@@ -749,8 +735,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ScheduleTest {
-            $beanFullName: 'test-vona.schedule.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.schedule.test';
+            get $onionName(): 'test-vona:test';
           }
 
         export interface ScheduleTest3 {
@@ -759,8 +745,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ScheduleTest3 {
-            $beanFullName: 'test-vona.schedule.test3';
-            $onionName: 'test-vona:test3';
+            get $beanFullName(): 'test-vona.schedule.test3';
+            get $onionName(): 'test-vona:test3';
           } 
 }
 /** schedule: end */
@@ -784,8 +770,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface SummerCacheTest {
-            $beanFullName: 'test-vona.summerCache.test';
-            $onionName: 'test-vona:test';
+            get $beanFullName(): 'test-vona.summerCache.test';
+            get $onionName(): 'test-vona:test';
           } 
 }
 /** summerCache: end */
@@ -881,8 +867,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerBean {
-            $beanFullName: 'test-vona.controller.bean';
-            $onionName: 'test-vona:bean';
+            get $beanFullName(): 'test-vona.controller.bean';
+            get $onionName(): 'test-vona:bean';
           }
 
         export interface ControllerCacheMem {
@@ -891,8 +877,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerCacheMem {
-            $beanFullName: 'test-vona.controller.cacheMem';
-            $onionName: 'test-vona:cacheMem';
+            get $beanFullName(): 'test-vona.controller.cacheMem';
+            get $onionName(): 'test-vona:cacheMem';
           }
 
         export interface ControllerCacheRedis {
@@ -901,8 +887,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerCacheRedis {
-            $beanFullName: 'test-vona.controller.cacheRedis';
-            $onionName: 'test-vona:cacheRedis';
+            get $beanFullName(): 'test-vona.controller.cacheRedis';
+            get $onionName(): 'test-vona:cacheRedis';
           }
 
         export interface ControllerGuardPassport {
@@ -911,8 +897,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerGuardPassport {
-            $beanFullName: 'test-vona.controller.guardPassport';
-            $onionName: 'test-vona:guardPassport';
+            get $beanFullName(): 'test-vona.controller.guardPassport';
+            get $onionName(): 'test-vona:guardPassport';
           }
 
         export interface ControllerOnion {
@@ -921,8 +907,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerOnion {
-            $beanFullName: 'test-vona.controller.onion';
-            $onionName: 'test-vona:onion';
+            get $beanFullName(): 'test-vona.controller.onion';
+            get $onionName(): 'test-vona:onion';
           }
 
         export interface ControllerPassport {
@@ -931,8 +917,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerPassport {
-            $beanFullName: 'test-vona.controller.passport';
-            $onionName: 'test-vona:passport';
+            get $beanFullName(): 'test-vona.controller.passport';
+            get $onionName(): 'test-vona:passport';
           }
 
         export interface ControllerPerformAction {
@@ -941,8 +927,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerPerformAction {
-            $beanFullName: 'test-vona.controller.performAction';
-            $onionName: 'test-vona:performAction';
+            get $beanFullName(): 'test-vona.controller.performAction';
+            get $onionName(): 'test-vona:performAction';
           }
 
         export interface ControllerQueue {
@@ -951,8 +937,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerQueue {
-            $beanFullName: 'test-vona.controller.queue';
-            $onionName: 'test-vona:queue';
+            get $beanFullName(): 'test-vona.controller.queue';
+            get $onionName(): 'test-vona:queue';
           }
 
         export interface ControllerSummer {
@@ -961,8 +947,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerSummer {
-            $beanFullName: 'test-vona.controller.summer';
-            $onionName: 'test-vona:summer';
+            get $beanFullName(): 'test-vona.controller.summer';
+            get $onionName(): 'test-vona:summer';
           }
 
         export interface ControllerTail {
@@ -971,8 +957,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerTail {
-            $beanFullName: 'test-vona.controller.tail';
-            $onionName: 'test-vona:tail';
+            get $beanFullName(): 'test-vona.controller.tail';
+            get $onionName(): 'test-vona:tail';
           }
 
         export interface ControllerTransaction {
@@ -981,8 +967,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerTransaction {
-            $beanFullName: 'test-vona.controller.transaction';
-            $onionName: 'test-vona:transaction';
+            get $beanFullName(): 'test-vona.controller.transaction';
+            get $onionName(): 'test-vona:transaction';
           }
 
         export interface ControllerUpload {
@@ -991,8 +977,8 @@ declare module 'vona-module-test-vona' {
         }
 
           export interface ControllerUpload {
-            $beanFullName: 'test-vona.controller.upload';
-            $onionName: 'test-vona:upload';
+            get $beanFullName(): 'test-vona.controller.upload';
+            get $onionName(): 'test-vona:upload';
           } 
 }
 /** controller: end */

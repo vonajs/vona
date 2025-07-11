@@ -1,4 +1,4 @@
-import type { IDecoratorModelOptions, IModelRelationBelongsTo, IModelRelationHasOne } from 'vona-module-a-database';
+import type { IDecoratorModelOptions, IModelRelationBelongsTo, IModelRelationHasOne, TypeModelOnionNamesOfModelClass, TypeModelsOfModelClass, TypeModelWhere } from 'vona-module-a-database';
 import { $relation, $relationDynamic, BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityPost } from '../entity/post.ts';
 import { ModelPostContent } from './postContent.ts';
@@ -21,7 +21,12 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 })
 export class ModelPost extends BeanModelBase<EntityPost> {
   async test() {
-    await this.scope.model.post.select({ where: { id: 1 } });
+    await this.scope.model.post.select({
+      where: { },
+      orders: [['testVonaPost.id', 'asc']],
+      joins: [['innerJoin', 'testVonaPost', ['testVonaUser.createdAt', 'testVonaRole.iid']]],
+      // joins:[['innerJoin','aAuth',['aAuth.iid','testVonaPost.iid']]]
+    });
 
     const users = await this.scope.model.user.select(
       // ['test-vona:user', 'test-vona:post'],
