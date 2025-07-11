@@ -1,7 +1,8 @@
 import type { TypeConfirmArray, TypeRecordValues } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeSymbolKeyEntity, TypeSymbolKeyEntityMeta, TypeUtilGetModelOptions, TypeUtilGetRelationEntityMeta, TypeUtilGetRelationModel } from './relations.ts';
+import type { TypeSymbolKeyEntity, TypeSymbolKeyEntityMeta, TypeUtilGetModelOnionName, TypeUtilGetModelOptions, TypeUtilGetRelationEntityMeta, TypeUtilGetRelationModel } from './relations.ts';
+import { never } from 'zod/v4';
 
 export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
@@ -26,6 +27,16 @@ export type TypeEntityTableColumnsOfModelOptions<TModelOptions extends IDecorato
     [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
   }>>;
 
+export type TypeModelsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
+  TypeRecordModelValues<{
+    [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
+  }>;
+
+export type TypeModelOnionNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
+  TypeRecordValues<{
+    [RelationName in keyof TModelOptions['relations']]: TypeUtilGetModelOnionName<TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>>;
+  }>;
+
 export type TypeRecordModelValues<TRecord extends Record<string, BeanModelMeta | undefined>> = TRecord[keyof TRecord];
 
 export type TypeEntityTableColumnNamesOfModelClass<TModel extends BeanModelMeta> =
@@ -33,6 +44,12 @@ export type TypeEntityTableColumnNamesOfModelClass<TModel extends BeanModelMeta>
 
 export type TypeEntityTableColumnsOfModelClass<TModel extends BeanModelMeta> =
   TypeEntityTableColumnsOfModelOptions<TypeUtilGetModelOptions<TModel>>;
+
+export type TypeModelsOfModelClass<TModel extends BeanModelMeta> =
+  TypeModelsOfModelOptions<TypeUtilGetModelOptions<TModel>>;
+
+export type TypeModelOnionNamesOfModelClass<TModel extends BeanModelMeta> =
+  TypeModelOnionNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
 
 export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
     TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;

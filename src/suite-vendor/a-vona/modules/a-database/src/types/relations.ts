@@ -48,6 +48,8 @@ export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
 export type TypeUtilGetModelEntityMeta<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyEntityMeta] : undefined;
+export type TypeUtilGetModelOnionName<Model extends BeanModelMeta | undefined> =
+  Model extends BeanModelMeta ? Model['$onionName'] : undefined;
 
 export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} | undefined> =
   TypeUtilGetEntityByType<

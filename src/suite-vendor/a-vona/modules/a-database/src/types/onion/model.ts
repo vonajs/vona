@@ -30,7 +30,8 @@ export interface IDecoratorModelOptions {
   cacheKeyAux?: string;
   cacheNotKey?: boolean;
   clientName?: keyof IDatabaseClientRecord;
-  relations?: {}; // Record<never, never>; // should not use TypeModelRelations;
+  // should not use TypeModelRelations or {}
+  relations?: Record<never, never>;
 }
 
 declare module 'vona-module-a-onion' {

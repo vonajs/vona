@@ -24,10 +24,20 @@ declare module 'vona-module-test-vona' {
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface AopRegExp {
+            $beanFullName: 'test-vona.aop.regExp';
+            $onionName: 'test-vona:regExp';
+          }
+
         export interface AopSimple {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface AopSimple {
+            $beanFullName: 'test-vona.aop.simple';
+            $onionName: 'test-vona:simple';
+          } 
 }
 /** aop: end */
 /** aopMethod: begin */
@@ -47,7 +57,12 @@ declare module 'vona-module-test-vona' {
         export interface AopMethodTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface AopMethodTest {
+            $beanFullName: 'test-vona.aopMethod.test';
+            $onionName: 'test-vona:test';
+          } 
 }
 /** aopMethod: end */
 /** entity: begin */
@@ -184,35 +199,70 @@ declare module 'vona-module-test-vona' {
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ModelPost {
+            $beanFullName: 'test-vona.model.post';
+            $onionName: 'test-vona:post';
+          }
+
         export interface ModelPostContent {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ModelPostContent {
+            $beanFullName: 'test-vona.model.postContent';
+            $onionName: 'test-vona:postContent';
+          }
 
         export interface ModelRole {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ModelRole {
+            $beanFullName: 'test-vona.model.role';
+            $onionName: 'test-vona:role';
+          }
+
         export interface ModelRoleUser {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ModelRoleUser {
+            $beanFullName: 'test-vona.model.roleUser';
+            $onionName: 'test-vona:roleUser';
+          }
 
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ModelTest {
+            $beanFullName: 'test-vona.model.test';
+            $onionName: 'test-vona:test';
+          }
+
         export interface ModelTestDynamicTable {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ModelTestDynamicTable {
+            $beanFullName: 'test-vona.model.testDynamicTable';
+            $onionName: 'test-vona:testDynamicTable';
+          }
+
         export interface ModelUser {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface ModelUser {
+            $beanFullName: 'test-vona.model.user';
+            $onionName: 'test-vona:user';
+          } 
 }
 /** model: end */
 /** model: begin */
@@ -234,7 +284,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, TypeModelOnionNamesOfModelClass } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-test-vona' {
   export interface ModelPost {
@@ -243,7 +293,7 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyModelOptions]: IModelOptionsPost;
       get<T extends IModelGetOptions<EntityPost,ModelPost>>(where: TypeModelWhere<EntityPost>, options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPost,ModelPost>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
+      select<T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPost>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
       select<T extends IModelSelectParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityPost,ModelPost,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityPost,ModelPost>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -254,7 +304,7 @@ export interface ModelPostContent {
       [SymbolKeyModelOptions]: IModelOptionsPostContent;
       get<T extends IModelGetOptions<EntityPostContent,ModelPostContent>>(where: TypeModelWhere<EntityPostContent>, options?: T): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPostContent,ModelPostContent>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
+      select<T extends IModelSelectParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelPostContent>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
       select<T extends IModelSelectParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityPostContent, ModelPostContent, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityPostContent,ModelPostContent,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityPostContent,ModelPostContent>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -265,7 +315,7 @@ export interface ModelRole {
       [SymbolKeyModelOptions]: IModelOptionsRole;
       get<T extends IModelGetOptions<EntityRole,ModelRole>>(where: TypeModelWhere<EntityRole>, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRole>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
       select<T extends IModelSelectParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityRole,ModelRole>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -276,7 +326,7 @@ export interface ModelRoleUser {
       [SymbolKeyModelOptions]: IModelOptionsRoleUser;
       get<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(where: TypeModelWhere<EntityRoleUser>, options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
+      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelRoleUser>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
       select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityRoleUser,ModelRoleUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityRoleUser,ModelRoleUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -287,7 +337,7 @@ export interface ModelTest {
       [SymbolKeyModelOptions]: IModelOptionsTest;
       get<T extends IModelGetOptions<EntityTest,ModelTest>>(where: TypeModelWhere<EntityTest>, options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTest, T> | undefined>;
       mget<T extends IModelGetOptions<EntityTest,ModelTest>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
+      select<T extends IModelSelectParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTest>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
       select<T extends IModelSelectParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTest, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityTest,ModelTest,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityTest,ModelTest>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -298,7 +348,7 @@ export interface ModelTestDynamicTable {
       [SymbolKeyModelOptions]: IModelOptionsTestDynamicTable;
       get<T extends IModelGetOptions<EntityTest,ModelTestDynamicTable>>(where: TypeModelWhere<EntityTest>, options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T> | undefined>;
       mget<T extends IModelGetOptions<EntityTest,ModelTestDynamicTable>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
+      select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelTestDynamicTable>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
       select<T extends IModelSelectParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityTest, ModelTestDynamicTable, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityTest,ModelTestDynamicTable,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityTest,ModelTestDynamicTable>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -309,7 +359,7 @@ export interface ModelUser {
       [SymbolKeyModelOptions]: IModelOptionsUser;
       get<T extends IModelGetOptions<EntityUser,ModelUser>>(where: TypeModelWhere<EntityUser>, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
       mget<T extends IModelGetOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<ModelUser>>(params: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
       select<T extends IModelSelectParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
       count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
       count<T extends IModelCountParams<EntityUser,ModelUser>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
@@ -381,30 +431,60 @@ declare module 'vona-module-test-vona' {
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ServiceAopMethod {
+            $beanFullName: 'test-vona.service.aopMethod';
+            $onionName: 'test-vona:aopMethod';
+          }
+
         export interface ServiceCaching {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ServiceCaching {
+            $beanFullName: 'test-vona.service.caching';
+            $onionName: 'test-vona:caching';
+          }
 
         export interface ServiceTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ServiceTest {
+            $beanFullName: 'test-vona.service.test';
+            $onionName: 'test-vona:test';
+          }
+
         export interface ServiceTestApp {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ServiceTestApp {
+            $beanFullName: 'test-vona.service.testApp';
+            $onionName: 'test-vona:testApp';
+          }
 
         export interface ServiceTestClass {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ServiceTestClass {
+            $beanFullName: 'test-vona.service.testClass';
+            $onionName: 'test-vona:testClass';
+          }
+
         export interface ServiceTransaction {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface ServiceTransaction {
+            $beanFullName: 'test-vona.service.transaction';
+            $onionName: 'test-vona:transaction';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -454,7 +534,12 @@ declare module 'vona-module-test-vona' {
         export interface BroadcastTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface BroadcastTest {
+            $beanFullName: 'test-vona.broadcast.test';
+            $onionName: 'test-vona:test';
+          } 
 }
 /** broadcast: end */
 /** broadcast: begin */
@@ -480,7 +565,12 @@ declare module 'vona-module-test-vona' {
         export interface CacheMemTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface CacheMemTest {
+            $beanFullName: 'test-vona.cacheMem.test';
+            $onionName: 'test-vona:test';
+          } 
 }
 /** cacheMem: end */
 /** cacheMem: begin */
@@ -506,7 +596,12 @@ declare module 'vona-module-test-vona' {
         export interface CacheRedisTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface CacheRedisTest {
+            $beanFullName: 'test-vona.cacheRedis.test';
+            $onionName: 'test-vona:test';
+          } 
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */
@@ -528,7 +623,12 @@ declare module 'vona-module-test-vona' {
         export interface EventHelloEcho {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface EventHelloEcho {
+            $beanFullName: 'test-vona.event.helloEcho';
+            $onionName: 'test-vona:helloEcho';
+          } 
 }
 /** event: end */
 /** event: begin */
@@ -563,7 +663,12 @@ declare module 'vona-module-test-vona' {
         export interface EventListenerHelloEcho {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface EventListenerHelloEcho {
+            $beanFullName: 'test-vona.eventListener.helloEcho';
+            $onionName: 'test-vona:helloEcho';
+          } 
 }
 /** eventListener: end */
 /** meta: begin */
@@ -583,7 +688,12 @@ declare module 'vona-module-test-vona' {
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface MetaVersion {
+            $beanFullName: 'test-vona.meta.version';
+            $onionName: 'test-vona:version';
+          } 
 }
 /** meta: end */
 /** queue: begin */
@@ -603,7 +713,12 @@ declare module 'vona-module-test-vona' {
         export interface QueueTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface QueueTest {
+            $beanFullName: 'test-vona.queue.test';
+            $onionName: 'test-vona:test';
+          } 
 }
 /** queue: end */
 /** queue: begin */
@@ -633,10 +748,20 @@ declare module 'vona-module-test-vona' {
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ScheduleTest {
+            $beanFullName: 'test-vona.schedule.test';
+            $onionName: 'test-vona:test';
+          }
+
         export interface ScheduleTest3 {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface ScheduleTest3 {
+            $beanFullName: 'test-vona.schedule.test3';
+            $onionName: 'test-vona:test3';
+          } 
 }
 /** schedule: end */
 /** summerCache: begin */
@@ -656,7 +781,12 @@ declare module 'vona-module-test-vona' {
         export interface SummerCacheTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface SummerCacheTest {
+            $beanFullName: 'test-vona.summerCache.test';
+            $onionName: 'test-vona:test';
+          } 
 }
 /** summerCache: end */
 /** summerCache: begin */
@@ -750,60 +880,120 @@ declare module 'vona-module-test-vona' {
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ControllerBean {
+            $beanFullName: 'test-vona.controller.bean';
+            $onionName: 'test-vona:bean';
+          }
+
         export interface ControllerCacheMem {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ControllerCacheMem {
+            $beanFullName: 'test-vona.controller.cacheMem';
+            $onionName: 'test-vona:cacheMem';
+          }
 
         export interface ControllerCacheRedis {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ControllerCacheRedis {
+            $beanFullName: 'test-vona.controller.cacheRedis';
+            $onionName: 'test-vona:cacheRedis';
+          }
+
         export interface ControllerGuardPassport {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ControllerGuardPassport {
+            $beanFullName: 'test-vona.controller.guardPassport';
+            $onionName: 'test-vona:guardPassport';
+          }
 
         export interface ControllerOnion {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ControllerOnion {
+            $beanFullName: 'test-vona.controller.onion';
+            $onionName: 'test-vona:onion';
+          }
+
         export interface ControllerPassport {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ControllerPassport {
+            $beanFullName: 'test-vona.controller.passport';
+            $onionName: 'test-vona:passport';
+          }
 
         export interface ControllerPerformAction {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ControllerPerformAction {
+            $beanFullName: 'test-vona.controller.performAction';
+            $onionName: 'test-vona:performAction';
+          }
+
         export interface ControllerQueue {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ControllerQueue {
+            $beanFullName: 'test-vona.controller.queue';
+            $onionName: 'test-vona:queue';
+          }
 
         export interface ControllerSummer {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ControllerSummer {
+            $beanFullName: 'test-vona.controller.summer';
+            $onionName: 'test-vona:summer';
+          }
+
         export interface ControllerTail {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
+
+          export interface ControllerTail {
+            $beanFullName: 'test-vona.controller.tail';
+            $onionName: 'test-vona:tail';
+          }
 
         export interface ControllerTransaction {
           /** @internal */
           get scope(): ScopeModuleTestVona;
         }
 
+          export interface ControllerTransaction {
+            $beanFullName: 'test-vona.controller.transaction';
+            $onionName: 'test-vona:transaction';
+          }
+
         export interface ControllerUpload {
           /** @internal */
           get scope(): ScopeModuleTestVona;
-        } 
+        }
+
+          export interface ControllerUpload {
+            $beanFullName: 'test-vona.controller.upload';
+            $onionName: 'test-vona:upload';
+          } 
 }
 /** controller: end */
 /** controller: begin */
