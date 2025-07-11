@@ -8,7 +8,6 @@ import type {
   TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
-import type { BeanModelMeta } from './bean.model_meta.ts';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { BeanModelView } from './bean.model_view.ts';
@@ -48,7 +47,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return result;
   }
 
-  protected async _select<T extends IModelSelectParams<TRecord, BeanModelMeta>>(
+  protected async _select<T extends IModelSelectParams<TRecord>>(
     table?: keyof ITableRecord,
     params?: T,
     options?: IModelMethodOptionsGeneral,
@@ -57,7 +56,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table = table || this.getTable('_select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
-    const params2 = params || {} as IModelSelectParams<TRecord, BeanModelMeta>;
+    const params2 = params || {} as IModelSelectParams<TRecord>;
     // builder
     const builder = this.builder<TRecord, TRecord>(table);
     // columns

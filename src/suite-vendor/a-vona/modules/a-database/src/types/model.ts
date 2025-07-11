@@ -48,7 +48,8 @@ export interface IBuildModelSelectParams<
 
 export type IModelSelectParams<
   TRecord,
-  Model extends BeanModelMeta | undefined = undefined,
+  // not use undefined as default value
+  Model extends BeanModelMeta = BeanModelMeta,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > = IBuildModelSelectParams<
   TRecord,
@@ -72,7 +73,7 @@ export interface IBuildModelCountParams<
 
 export type IModelCountParams<
   TRecord,
-  Model extends BeanModelMeta | undefined = undefined,
+  Model extends BeanModelMeta = BeanModelMeta,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > = IBuildModelCountParams<
   TRecord,
