@@ -11,7 +11,6 @@ import type {
   TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
-import type { BeanModelMeta } from './bean.model_meta.ts';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
@@ -83,8 +82,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     });
     return this.__filterMGetColumns(items, options?.columns);
   }
-
-  //  <ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost, ModelPost, ModelJoins>>
 
   async select<
     T extends IModelSelectParams<TRecord>,
