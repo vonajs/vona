@@ -50,13 +50,13 @@ export type IModelSelectParams<
   Model extends BeanModelMeta | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > =
-  Model extends BeanModelMeta ? IBuildModelSelectParams<
-    TRecord,
-    Model,
-    TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
-    TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
-    TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
-  > : IBuildModelSelectParams<TRecord>;
+Model extends BeanModelMeta ? IBuildModelSelectParams<
+  TRecord,
+  Model,
+  TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
+  TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
+> : IBuildModelSelectParams<TRecord>;
 
 export interface IBuildModelCountParams<
   TRecord,
