@@ -1,4 +1,3 @@
-import type { Knex } from 'knex';
 import type { TypeRecordValues } from 'vona';
 
 export const Op = {
@@ -19,7 +18,8 @@ export type TypeOpsJoint = TypeRecordValues<TypeOpsJointPostfix<Pick<typeof Op, 
 export type TypeOpsNormal = TypeRecordValues<Pick<typeof Op, 'eq'>>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
-export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Column[] | Knex.Raw | '_skip_';
+// not use Knex.Raw
+export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Column[] | '_skip_';
 
 export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> =
   Columns extends {} ? TypeModelWhereInner<Columns> : TypeModelWhereInner<TRecord>;

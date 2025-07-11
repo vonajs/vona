@@ -36,7 +36,7 @@ export interface IModelRelationBelongsToDynamic<
 export interface IModelRelationHasManyDynamic<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> = {},
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'hasMany';
@@ -49,7 +49,7 @@ export interface IModelRelationBelongsToManyDynamic<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> = {},
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'belongsToMany';

@@ -33,7 +33,8 @@ function belongsTo<
 function hasMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  // not use `| undefined = undefined` or `= {}`
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
@@ -49,7 +50,8 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean,
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  // not use `| undefined = undefined` or `= {}`
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
