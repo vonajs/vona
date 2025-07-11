@@ -17,9 +17,11 @@ export type TypeEntityTableColumnNamesOfModels<A extends BeanModelMeta[]> = Type
 // export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeEntityTableColumnNames<TypeRecordValues<{
 //   [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>;
 // }>>;
-export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
-  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
-}>;
+export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
+  TModelOptions['relations'] extends {} ?
+    TypeRecordValues<{
+      [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>
+    }> : never;
 
 export type TypeEntityTableColumnsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
   TModelOptions['relations'] extends {} ?
@@ -28,9 +30,10 @@ export type TypeEntityTableColumnsOfModelOptions<TModelOptions extends IDecorato
     }>> : {};
 
 export type TypeModelsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TypeRecordModelValues<{
-    [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
-  }>;
+  TModelOptions['relations'] extends {} ?
+    TypeRecordModelValues<{
+      [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
+    }> : never;
 
 export type TypeModelOnionNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
   TModelOptions['relations'] extends {} ?

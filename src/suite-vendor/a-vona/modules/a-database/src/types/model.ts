@@ -44,7 +44,6 @@ export interface IBuildModelSelectParams<
   orders?: IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
-  test: Columns;
 }
 
 export type IModelSelectParams<

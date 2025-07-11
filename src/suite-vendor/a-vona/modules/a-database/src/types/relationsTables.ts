@@ -6,9 +6,11 @@ import type { TypeSymbolKeyEntityMeta, TypeUtilGetModelOptions, TypeUtilGetRelat
 export type TypeEntityTableNames<EntityMeta extends { $table: string } | undefined> =
   EntityMeta extends { $table: infer TableName } ? TableName : never;
 
-export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TypeRecordValues<{
-  [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
-}>;
+export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
+  TModelOptions['relations'] extends {} ?
+    TypeRecordValues<{
+      [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>;
+    }> : never;
 
 export type TypeEntityTableNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
     TypeEntityTableNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
