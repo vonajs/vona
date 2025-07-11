@@ -18,11 +18,11 @@ export type IModelSelectParamsJoinType =
   | 'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
 export type IModelSelectParamsJoin<TRecord, TableNames = '', ColumnNames = keyof TRecord> =
- [
-   IModelSelectParamsJoinType,
-   TableNames,
-  [ColumnNames, ColumnNames] | Knex.JoinCallback,
- ];
+  [
+    IModelSelectParamsJoinType,
+    TableNames,
+    [ColumnNames, ColumnNames] | Knex.JoinCallback,
+  ];
 
 // order
 export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
