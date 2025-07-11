@@ -16,12 +16,7 @@ declare module 'vona-module-a-queue' {
         export interface ServiceQueue {
           /** @internal */
           get scope(): ScopeModuleAQueue;
-        }
-
-          export interface ServiceQueue {
-            get $beanFullName(): 'a-queue.service.queue';
-            get $onionName(): 'a-queue:queue';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -56,12 +51,7 @@ declare module 'vona-module-a-queue' {
         export interface StartupLoadQueueWorkers {
           /** @internal */
           get scope(): ScopeModuleAQueue;
-        }
-
-          export interface StartupLoadQueueWorkers {
-            get $beanFullName(): 'a-queue.startup.loadQueueWorkers';
-            get $onionName(): 'a-queue:loadQueueWorkers';
-          } 
+        } 
 }
 /** startup: end */
 /** config: begin */

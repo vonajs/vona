@@ -16,12 +16,7 @@ declare module 'vona-module-a-core' {
         export interface MiddlewareGate {
           /** @internal */
           get scope(): ScopeModuleACore;
-        }
-
-          export interface MiddlewareGate {
-            get $beanFullName(): 'a-core.middleware.gate';
-            get $onionName(): 'a-core:gate';
-          } 
+        } 
 }
 /** middleware: end */
 /** middlewareSystem: begin */
@@ -46,20 +41,10 @@ declare module 'vona-module-a-core' {
           get scope(): ScopeModuleACore;
         }
 
-          export interface MiddlewareSystemNotfound {
-            get $beanFullName(): 'a-core.middlewareSystem.notfound';
-            get $onionName(): 'a-core:notfound';
-          }
-
         export interface MiddlewareSystemOverrideMethod {
           /** @internal */
           get scope(): ScopeModuleACore;
-        }
-
-          export interface MiddlewareSystemOverrideMethod {
-            get $beanFullName(): 'a-core.middlewareSystem.overrideMethod';
-            get $onionName(): 'a-core:overrideMethod';
-          } 
+        } 
 }
 /** middlewareSystem: end */
 /** meta: begin */
@@ -79,12 +64,7 @@ declare module 'vona-module-a-core' {
         export interface MetaStatic {
           /** @internal */
           get scope(): ScopeModuleACore;
-        }
-
-          export interface MetaStatic {
-            get $beanFullName(): 'a-core.meta.static';
-            get $onionName(): 'a-core:static';
-          } 
+        } 
 }
 /** meta: end */
 /** meta static: begin */

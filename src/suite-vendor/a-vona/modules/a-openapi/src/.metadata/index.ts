@@ -16,12 +16,7 @@ declare module 'vona-module-a-openapi' {
         export interface ServiceOpenapi {
           /** @internal */
           get scope(): ScopeModuleAOpenapi;
-        }
-
-          export interface ServiceOpenapi {
-            get $beanFullName(): 'a-openapi.service.openapi';
-            get $onionName(): 'a-openapi:openapi';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -56,12 +51,7 @@ declare module 'vona-module-a-openapi' {
         export interface SummerCacheJson {
           /** @internal */
           get scope(): ScopeModuleAOpenapi;
-        }
-
-          export interface SummerCacheJson {
-            get $beanFullName(): 'a-openapi.summerCache.json';
-            get $onionName(): 'a-openapi:json';
-          } 
+        } 
 }
 /** summerCache: end */
 /** summerCache: begin */

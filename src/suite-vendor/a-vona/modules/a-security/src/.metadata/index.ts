@@ -21,20 +21,10 @@ declare module 'vona-module-a-security' {
           get scope(): ScopeModuleASecurity;
         }
 
-          export interface MiddlewareSystemCors {
-            get $beanFullName(): 'a-security.middlewareSystem.cors';
-            get $onionName(): 'a-security:cors';
-          }
-
         export interface MiddlewareSystemSecurities {
           /** @internal */
           get scope(): ScopeModuleASecurity;
-        }
-
-          export interface MiddlewareSystemSecurities {
-            get $beanFullName(): 'a-security.middlewareSystem.securities';
-            get $onionName(): 'a-security:securities';
-          } 
+        } 
 }
 /** middlewareSystem: end */
 /** bean: begin */

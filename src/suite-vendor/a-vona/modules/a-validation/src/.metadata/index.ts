@@ -16,12 +16,7 @@ declare module 'vona-module-a-validation' {
         export interface PipeValid {
           /** @internal */
           get scope(): ScopeModuleAValidation;
-        }
-
-          export interface PipeValid {
-            get $beanFullName(): 'a-validation.pipe.valid';
-            get $onionName(): 'a-validation:valid';
-          } 
+        } 
 }
 /** pipe: end */
 /** bean: begin */

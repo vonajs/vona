@@ -16,12 +16,7 @@ declare module 'vona-module-a-error' {
         export interface FilterError {
           /** @internal */
           get scope(): ScopeModuleAError;
-        }
-
-          export interface FilterError {
-            get $beanFullName(): 'a-error.filter.error';
-            get $onionName(): 'a-error:error';
-          } 
+        } 
 }
 /** filter: end */
 /** bean: begin */
@@ -66,12 +61,7 @@ declare module 'vona-module-a-error' {
         export interface ServiceErrorView {
           /** @internal */
           get scope(): ScopeModuleAError;
-        }
-
-          export interface ServiceErrorView {
-            get $beanFullName(): 'a-error.service.errorView';
-            get $onionName(): 'a-error:errorView';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */

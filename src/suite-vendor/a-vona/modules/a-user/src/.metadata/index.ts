@@ -27,30 +27,15 @@ declare module 'vona-module-a-user' {
           get scope(): ScopeModuleAUser;
         }
 
-          export interface GuardPassport {
-            get $beanFullName(): 'a-user.guard.passport';
-            get $onionName(): 'a-user:passport';
-          }
-
         export interface GuardRoleName {
           /** @internal */
           get scope(): ScopeModuleAUser;
         }
 
-          export interface GuardRoleName {
-            get $beanFullName(): 'a-user.guard.roleName';
-            get $onionName(): 'a-user:roleName';
-          }
-
         export interface GuardUserName {
           /** @internal */
           get scope(): ScopeModuleAUser;
-        }
-
-          export interface GuardUserName {
-            get $beanFullName(): 'a-user.guard.userName';
-            get $onionName(): 'a-user:userName';
-          } 
+        } 
 }
 /** guard: end */
 /** bean: begin */
@@ -123,20 +108,10 @@ declare module 'vona-module-a-user' {
           get scope(): ScopeModuleAUser;
         }
 
-          export interface ServiceAuthTokenAdapter {
-            get $beanFullName(): 'a-user.service.authTokenAdapter';
-            get $onionName(): 'a-user:authTokenAdapter';
-          }
-
         export interface ServiceRedisToken {
           /** @internal */
           get scope(): ScopeModuleAUser;
-        }
-
-          export interface ServiceRedisToken {
-            get $beanFullName(): 'a-user.service.redisToken';
-            get $onionName(): 'a-user:redisToken';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -174,30 +149,15 @@ declare module 'vona-module-a-user' {
           get scope(): ScopeModuleAUser;
         }
 
-          export interface EventCreateUserAnonymous {
-            get $beanFullName(): 'a-user.event.createUserAnonymous';
-            get $onionName(): 'a-user:createUserAnonymous';
-          }
-
         export interface EventSignin {
           /** @internal */
           get scope(): ScopeModuleAUser;
         }
 
-          export interface EventSignin {
-            get $beanFullName(): 'a-user.event.signin';
-            get $onionName(): 'a-user:signin';
-          }
-
         export interface EventSignout {
           /** @internal */
           get scope(): ScopeModuleAUser;
-        }
-
-          export interface EventSignout {
-            get $beanFullName(): 'a-user.event.signout';
-            get $onionName(): 'a-user:signout';
-          } 
+        } 
 }
 /** event: end */
 /** event: begin */
@@ -240,12 +200,7 @@ declare module 'vona-module-a-user' {
         export interface MetaPrintTip {
           /** @internal */
           get scope(): ScopeModuleAUser;
-        }
-
-          export interface MetaPrintTip {
-            get $beanFullName(): 'a-user.meta.printTip';
-            get $onionName(): 'a-user:printTip';
-          } 
+        } 
 }
 /** meta: end */
 /** config: begin */

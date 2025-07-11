@@ -53,50 +53,25 @@ declare module 'vona-module-a-cache' {
           get scope(): ScopeModuleACache;
         }
 
-          export interface BroadcastMemClear {
-            get $beanFullName(): 'a-cache.broadcast.memClear';
-            get $onionName(): 'a-cache:memClear';
-          }
-
         export interface BroadcastMemDel {
           /** @internal */
           get scope(): ScopeModuleACache;
         }
-
-          export interface BroadcastMemDel {
-            get $beanFullName(): 'a-cache.broadcast.memDel';
-            get $onionName(): 'a-cache:memDel';
-          }
 
         export interface BroadcastMemMultiDel {
           /** @internal */
           get scope(): ScopeModuleACache;
         }
 
-          export interface BroadcastMemMultiDel {
-            get $beanFullName(): 'a-cache.broadcast.memMultiDel';
-            get $onionName(): 'a-cache:memMultiDel';
-          }
-
         export interface BroadcastMemMultiSet {
           /** @internal */
           get scope(): ScopeModuleACache;
         }
 
-          export interface BroadcastMemMultiSet {
-            get $beanFullName(): 'a-cache.broadcast.memMultiSet';
-            get $onionName(): 'a-cache:memMultiSet';
-          }
-
         export interface BroadcastMemSet {
           /** @internal */
           get scope(): ScopeModuleACache;
-        }
-
-          export interface BroadcastMemSet {
-            get $beanFullName(): 'a-cache.broadcast.memSet';
-            get $onionName(): 'a-cache:memSet';
-          } 
+        } 
 }
 /** broadcast: end */
 /** broadcast: begin */

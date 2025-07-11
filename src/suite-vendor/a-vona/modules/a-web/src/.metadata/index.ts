@@ -41,12 +41,7 @@ declare module 'vona-module-a-web' {
         export interface ServiceWeb {
           /** @internal */
           get scope(): ScopeModuleAWeb;
-        }
-
-          export interface ServiceWeb {
-            get $beanFullName(): 'a-web.service.web';
-            get $onionName(): 'a-web:web';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -81,12 +76,7 @@ declare module 'vona-module-a-web' {
         export interface StartupListen {
           /** @internal */
           get scope(): ScopeModuleAWeb;
-        }
-
-          export interface StartupListen {
-            get $beanFullName(): 'a-web.startup.listen';
-            get $onionName(): 'a-web:listen';
-          } 
+        } 
 }
 /** startup: end */
 /** config: begin */

@@ -16,12 +16,7 @@ declare module 'vona-module-a-schedule' {
         export interface ServiceSchedule {
           /** @internal */
           get scope(): ScopeModuleASchedule;
-        }
-
-          export interface ServiceSchedule {
-            get $beanFullName(): 'a-schedule.service.schedule';
-            get $onionName(): 'a-schedule:schedule';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -56,12 +51,7 @@ declare module 'vona-module-a-schedule' {
         export interface MetaRedlock {
           /** @internal */
           get scope(): ScopeModuleASchedule;
-        }
-
-          export interface MetaRedlock {
-            get $beanFullName(): 'a-schedule.meta.redlock';
-            get $onionName(): 'a-schedule:redlock';
-          } 
+        } 
 }
 /** meta: end */
 /** meta redlock: begin */
@@ -84,12 +74,7 @@ declare module 'vona-module-a-schedule' {
         export interface QueueSchedule {
           /** @internal */
           get scope(): ScopeModuleASchedule;
-        }
-
-          export interface QueueSchedule {
-            get $beanFullName(): 'a-schedule.queue.schedule';
-            get $onionName(): 'a-schedule:schedule';
-          } 
+        } 
 }
 /** queue: end */
 /** queue: begin */
@@ -115,12 +100,7 @@ declare module 'vona-module-a-schedule' {
         export interface StartupLoadSchedules {
           /** @internal */
           get scope(): ScopeModuleASchedule;
-        }
-
-          export interface StartupLoadSchedules {
-            get $beanFullName(): 'a-schedule.startup.loadSchedules';
-            get $onionName(): 'a-schedule:loadSchedules';
-          } 
+        } 
 }
 /** startup: end */
 /** config: begin */

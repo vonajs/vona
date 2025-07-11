@@ -45,20 +45,10 @@ declare module 'vona-module-a-worker' {
           get scope(): ScopeModuleAWorker;
         }
 
-          export interface BroadcastExitAll {
-            get $beanFullName(): 'a-worker.broadcast.exitAll';
-            get $onionName(): 'a-worker:exitAll';
-          }
-
         export interface BroadcastReloadAll {
           /** @internal */
           get scope(): ScopeModuleAWorker;
-        }
-
-          export interface BroadcastReloadAll {
-            get $beanFullName(): 'a-worker.broadcast.reloadAll';
-            get $onionName(): 'a-worker:reloadAll';
-          } 
+        } 
 }
 /** broadcast: end */
 /** broadcast: begin */
@@ -86,12 +76,7 @@ declare module 'vona-module-a-worker' {
         export interface CacheRedisWorkerAlive {
           /** @internal */
           get scope(): ScopeModuleAWorker;
-        }
-
-          export interface CacheRedisWorkerAlive {
-            get $beanFullName(): 'a-worker.cacheRedis.workerAlive';
-            get $onionName(): 'a-worker:workerAlive';
-          } 
+        } 
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */

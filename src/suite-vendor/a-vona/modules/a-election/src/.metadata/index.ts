@@ -16,12 +16,7 @@ declare module 'vona-module-a-election' {
         export interface ServiceElection {
           /** @internal */
           get scope(): ScopeModuleAElection;
-        }
-
-          export interface ServiceElection {
-            get $beanFullName(): 'a-election.service.election';
-            get $onionName(): 'a-election:election';
-          } 
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -56,12 +51,7 @@ declare module 'vona-module-a-election' {
         export interface CacheRedisElection {
           /** @internal */
           get scope(): ScopeModuleAElection;
-        }
-
-          export interface CacheRedisElection {
-            get $beanFullName(): 'a-election.cacheRedis.election';
-            get $onionName(): 'a-election:election';
-          } 
+        } 
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */

@@ -17,12 +17,7 @@ declare module 'vona-module-a-swagger' {
         export interface MetaPrintTip {
           /** @internal */
           get scope(): ScopeModuleASwagger;
-        }
-
-          export interface MetaPrintTip {
-            get $beanFullName(): 'a-swagger.meta.printTip';
-            get $onionName(): 'a-swagger:printTip';
-          } 
+        } 
 }
 /** meta: end */
 /** summerCache: begin */
@@ -46,20 +41,10 @@ declare module 'vona-module-a-swagger' {
           get scope(): ScopeModuleASwagger;
         }
 
-          export interface SummerCacheRapidoc {
-            get $beanFullName(): 'a-swagger.summerCache.rapidoc';
-            get $onionName(): 'a-swagger:rapidoc';
-          }
-
         export interface SummerCacheSwagger {
           /** @internal */
           get scope(): ScopeModuleASwagger;
-        }
-
-          export interface SummerCacheSwagger {
-            get $beanFullName(): 'a-swagger.summerCache.swagger';
-            get $onionName(): 'a-swagger:swagger';
-          } 
+        } 
 }
 /** summerCache: end */
 /** summerCache: begin */
@@ -92,20 +77,10 @@ declare module 'vona-module-a-swagger' {
           get scope(): ScopeModuleASwagger;
         }
 
-          export interface ControllerRapidoc {
-            get $beanFullName(): 'a-swagger.controller.rapidoc';
-            get $onionName(): 'a-swagger:rapidoc';
-          }
-
         export interface ControllerSwagger {
           /** @internal */
           get scope(): ScopeModuleASwagger;
-        }
-
-          export interface ControllerSwagger {
-            get $beanFullName(): 'a-swagger.controller.swagger';
-            get $onionName(): 'a-swagger:swagger';
-          } 
+        } 
 }
 /** controller: end */
 /** controller: begin */
