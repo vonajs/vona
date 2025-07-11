@@ -36,12 +36,19 @@ function hasMany<
   return { type: 'hasMany', model: classModel, key, ...options2 };
 }
 
-function belongsToMany<MODELMiddle extends BeanModelMeta, MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>(
+function belongsToMany<
+  MODELMiddle extends BeanModelMeta,
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+>(
   classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   keyFrom: keyof MODELMiddle[TypeSymbolKeyEntity],
   keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>,
+  options?: OPTIONS,
+  _modelJoins?: ModelJoins,
 ): IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
