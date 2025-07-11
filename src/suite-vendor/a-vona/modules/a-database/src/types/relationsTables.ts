@@ -20,8 +20,10 @@ export type TypeEntityTableNamesOfModelClass<TModel extends BeanModelMeta> =
 
 export type TypeEntityTableNamesOfGeneral<
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
-  TModel extends BeanModelMeta,
+  TModel extends BeanModelMeta | undefined,
 > =
+TModel extends BeanModelMeta ?
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
     TypeEntityTableNamesOfModelJoins<TModelJoins> :
-    TypeEntityTableNamesOfModelClass<TModel>;
+    TypeEntityTableNamesOfModelClass<TModel>
+  : undefined;

@@ -69,16 +69,20 @@ export type TypeEntityTableColumnsOfModelSelf<TModel extends BeanModelMeta> =
 
 export type TypeEntityTableColumnNamesOfGeneral<
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
-  TModel extends BeanModelMeta,
+  TModel extends BeanModelMeta | undefined,
 > =
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
-      (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>) :
-      (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>);
+  TModel extends BeanModelMeta ?
+    TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
+        (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>) :
+        (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>)
+    : undefined;
 
 export type TypeEntityTableColumnsOfGeneral<
   TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
-  TModel extends BeanModelMeta,
+  TModel extends BeanModelMeta | undefined,
 > =
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
-      (TypeEntityTableColumnsOfModelJoins<TModelJoins> & TypeEntityTableColumnsOfModelSelf<TModel>) :
-      (TypeEntityTableColumnsOfModelClass<TModel> & TypeEntityTableColumnsOfModelSelf<TModel>);
+  TModel extends BeanModelMeta ?
+    TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
+        (TypeEntityTableColumnsOfModelJoins<TModelJoins> & TypeEntityTableColumnsOfModelSelf<TModel>) :
+        (TypeEntityTableColumnsOfModelClass<TModel> & TypeEntityTableColumnsOfModelSelf<TModel>)
+    : undefined;

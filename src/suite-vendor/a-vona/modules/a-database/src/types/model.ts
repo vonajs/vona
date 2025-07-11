@@ -17,7 +17,7 @@ export type IModelSelectParamsJoinType =
   | 'fullOuterJoin'
   | 'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
-export type IModelSelectParamsJoin<TRecord, TableNames = '', ColumnNames = keyof TRecord> =
+export type IModelSelectParamsJoin<TRecord, TableNames = undefined, ColumnNames = keyof TRecord> =
   [
     IModelSelectParamsJoinType,
     TableNames,
@@ -32,7 +32,7 @@ export type IModelSelectParamsOrder<ColumnNames> = [ColumnNames, IModelSelectPar
 export interface IBuildModelSelectParams<
   TRecord,
   Model extends BeanModelMeta | undefined = undefined,
-  TableNames = '',
+  TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 >
@@ -50,18 +50,17 @@ export type IModelSelectParams<
   TRecord,
   Model extends BeanModelMeta | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
-> =
-Model extends BeanModelMeta ? IBuildModelSelectParams<
+> = IBuildModelSelectParams<
   TRecord,
   Model,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
-> : IBuildModelSelectParams<TRecord>;
+>;
 
 export interface IBuildModelCountParams<
   TRecord,
-  TableNames = '',
+  TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
@@ -75,12 +74,12 @@ export type IModelCountParams<
   TRecord,
   Model extends BeanModelMeta | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
-> = Model extends BeanModelMeta ? IBuildModelCountParams<
+> = IBuildModelCountParams<
   TRecord,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
-> : IBuildModelCountParams<TRecord>;
+>;
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 export type IModelUpdateOptions<TRecord> = Omit<IModelUpdateOptionsGeneral<TRecord>, 'disableInstance'>;
