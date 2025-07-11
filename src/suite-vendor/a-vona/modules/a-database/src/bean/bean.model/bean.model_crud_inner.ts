@@ -8,6 +8,7 @@ import type {
   TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
+import type { BeanModelMeta } from './bean.model_meta.ts';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { BeanModelView } from './bean.model_view.ts';
@@ -47,35 +48,35 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return result;
   }
 
-  protected async _select(
+  protected async _select<T extends IModelSelectParams<TRecord, BeanModelMeta>>(
     table?: keyof ITableRecord,
-    params?: IModelSelectParams<TRecord>,
+    params?: T,
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord[]> {
     // table
     table = table || this.getTable('_select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // params
-    params = params || {};
+    const params2 = params || {} as IModelSelectParams<TRecord, BeanModelMeta>;
     // builder
     const builder = this.builder<TRecord, TRecord>(table);
     // columns
-    builder.select(params.columns as any);
+    builder.select(params2.columns as any);
     // distinct
-    this.buildDistinct(builder, params.distinct);
+    this.buildDistinct(builder, params2.distinct);
     // joins
-    this.buildJoins(builder, params.joins);
+    this.buildJoins(builder, params2.joins);
     // where
-    const wheres = this.prepareWhere(builder, table, params.where, options);
+    const wheres = this.prepareWhere(builder, table, params2.where, options);
     if (wheres === false) {
       return [] as TRecord[];
     }
     // orders
-    this.buildOrders(builder, params.orders);
+    this.buildOrders(builder, params2.orders);
     // limit
-    this.buildLimit(builder, params.limit);
+    this.buildLimit(builder, params2.limit);
     // offset
-    this.buildOffset(builder, params.offset);
+    this.buildOffset(builder, params2.offset);
     // ready
     this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
     return (await builder) as TRecord[];

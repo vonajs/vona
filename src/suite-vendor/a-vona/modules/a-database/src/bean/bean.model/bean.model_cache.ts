@@ -11,6 +11,7 @@ import type {
   TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
+import type { BeanModelMeta } from './bean.model_meta.ts';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
@@ -86,7 +87,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   //  <ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost, ModelPost, ModelJoins>>
 
   async select<
-    T extends IModelSelectParams<TRecord>,
+    T extends IModelSelectParams<TRecord, BeanModelMeta>,
     ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
   >(
     params?: T,
@@ -97,7 +98,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
   }
 
-  private async __select_raw(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+  private async __select_raw(params?: IModelSelectParams<TRecord, BeanModelMeta>, options?: IModelMethodOptions): Promise<TRecord[]> {
     // table
     const table = this.getTable('select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
