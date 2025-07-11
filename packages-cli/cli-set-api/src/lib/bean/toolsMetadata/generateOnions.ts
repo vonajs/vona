@@ -1,7 +1,6 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import { replaceTemplate } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { beanFullNameFromOnionName } from 'vona-core';
 import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.ts';
 
 export async function generateOnions(
@@ -23,7 +22,6 @@ export async function generateOnions(
   let needImportOptionsGlobalInterface;
   for (const globFile of globFiles) {
     const { fileContent, fileNameJSRelative, sceneName, className, beanNameFull, isIgnore, isVirtual } = globFile;
-    const isBeanGlobal = fileNameJSRelative.includes('../bean/bean.');
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue; // get scope() also can be ignored
     // get scope() also can be ignored
@@ -33,13 +31,6 @@ export async function generateOnions(
           /** @internal */
           get scope(): ${scopeModuleName};
         }`);
-      if (!isBeanGlobal) {
-        contentScopes.push(`
-          export interface ${className} {
-            get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
-            get $onionName(): '${beanNameFull}';
-          }`);
-      }
     }
     if (sceneMeta.optionsNone) continue;
     // fileInfo

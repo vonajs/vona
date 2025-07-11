@@ -80,13 +80,13 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return buildWhere(builder, wheres);
   }
 
-  buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin<TRecord>) {
+  buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin<TRecord, ''>) {
     if (!join) return;
     const [joinType, joinTable, joinOn] = join;
     builder[joinType](joinTable, cast(joinOn));
   }
 
-  buildJoins(builder: Knex.QueryBuilder, joins?: IModelSelectParamsJoin<TRecord>[]) {
+  buildJoins(builder: Knex.QueryBuilder, joins?: IModelSelectParamsJoin<TRecord, ''>[]) {
     if (!joins) return;
     for (const [joinType, joinTable, joinOn] of joins) {
       if (Array.isArray(joinOn)) {

@@ -22,30 +22,15 @@ declare module 'vona-module-a-databasedialect' {
           get scope(): ScopeModuleADatabasedialect;
         }
 
-          export interface DatabaseDialectMysql {
-            get $beanFullName(): 'a-databasedialect.databaseDialect.mysql';
-            get $onionName(): 'a-databasedialect:mysql';
-          }
-
         export interface DatabaseDialectMysql3 {
           /** @internal */
           get scope(): ScopeModuleADatabasedialect;
         }
 
-          export interface DatabaseDialectMysql3 {
-            get $beanFullName(): 'a-databasedialect.databaseDialect.mysql3';
-            get $onionName(): 'a-databasedialect:mysql3';
-          }
-
         export interface DatabaseDialectPg {
           /** @internal */
           get scope(): ScopeModuleADatabasedialect;
-        }
-
-          export interface DatabaseDialectPg {
-            get $beanFullName(): 'a-databasedialect.databaseDialect.pg';
-            get $onionName(): 'a-databasedialect:pg';
-          } 
+        } 
 }
 /** databaseDialect: end */
 /** databaseDialect: begin */

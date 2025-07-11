@@ -1,4 +1,5 @@
 import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
+import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { TypeModelClassLike } from '../types/relationsDef.ts';
 import { isNil } from '@cabloy/utils';
@@ -145,7 +146,12 @@ export class ServiceRelations extends BeanBase {
     }
   }
 
-  private __getModelTarget<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(modelCurrent: TModel, modelClassTarget: TypeModelClassLike) {
+  private __getModelTarget<
+    TRecord extends {},
+    TModel extends BeanModelCrud<TRecord>,
+  >(modelCurrent: TModel,
+    modelClassTarget: TypeModelClassLike<BeanModelMeta>,
+  ) {
     const modelClass2 = modelClassTarget.name ? modelClassTarget : cast(modelClassTarget)();
     const beanFullName = appResource.getBeanFullName(modelClass2);
     return this.app.bean._newBean(beanFullName, cast(modelCurrent).db);
