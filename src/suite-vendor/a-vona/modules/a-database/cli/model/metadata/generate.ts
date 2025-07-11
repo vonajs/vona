@@ -17,10 +17,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyModelOptions]: ${opionsName};
       get<T extends IModelGetOptions<${entityName},${className}>>(where: TypeModelWhere<${entityName}>, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;
       mget<T extends IModelGetOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
-      select<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<${className}>>(params: T, options: IModelMethodOptions | undefined, modelJoins: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
-      select<T extends IModelSelectParams<${entityName},${className},TypeModelOnionNamesOfModelClass<${className}>>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
-      count<T extends IModelCountParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] = TypeModelOnionNamesOfModelClass<${className}>>(params: T, options: IModelMethodOptionsGeneral | undefined, modelJoins: ModelJoins): Promise<BigNumber>;
-      count<T extends IModelCountParams<${entityName},${className},TypeModelOnionNamesOfModelClass<${className}>>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<${className}>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
+      count<T extends IModelCountParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<${className}>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }`);
     contentModels.push(`'${moduleName}:${beanName}': ${className};`);
     // contentRecords.push(`'${tableName}': never;`);

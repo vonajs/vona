@@ -86,12 +86,10 @@ export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
   //  <ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityPost, ModelPost, ModelJoins>>
 
   async select(
-    params: IModelSelectParams<TRecord>,
-    options: IModelMethodOptions,
-    modelJoins: (keyof IModelClassRecord) | (keyof IModelClassRecord)[],
-  ): Promise<TRecord[]>;
-  async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]>;
-  async select(params?: IModelSelectParams<TRecord>, options?: any, _modelJoins?: any): Promise<TRecord[]> {
+    params?: IModelSelectParams<TRecord>,
+    options?: IModelMethodOptions,
+    _modelJoins?: (keyof IModelClassRecord) | (keyof IModelClassRecord)[],
+  ): Promise<TRecord[]> {
     const items = await this.__select_raw(params, options);
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
   }
