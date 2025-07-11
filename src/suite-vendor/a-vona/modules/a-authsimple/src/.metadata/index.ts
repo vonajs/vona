@@ -56,7 +56,12 @@ declare module 'vona-module-a-authsimple' {
         export interface ModelAuthSimple {
           /** @internal */
           get scope(): ScopeModuleAAuthsimple;
-        } 
+        }
+
+          export interface ModelAuthSimple {
+            get $beanFullName(): 'a-authsimple.model.authSimple';
+            get $onionName(): 'a-authsimple:authSimple';
+          } 
 }
 /** model: end */
 /** model: begin */
@@ -66,7 +71,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, TypeModelOnionNamesOfModelClass } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-authsimple' {
   export interface ModelAuthSimple {
@@ -75,10 +80,8 @@ declare module 'vona-module-a-authsimple' {
       [SymbolKeyModelOptions]: IModelOptionsAuthSimple;
       get<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(where: TypeModelWhere<EntityAuthSimple>, options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
-      select<T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelAuthSimple>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
+      count<T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelAuthSimple>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
 declare module 'vona-module-a-database' {
@@ -104,7 +107,12 @@ declare module 'vona-module-a-authsimple' {
         export interface AuthProviderSimple {
           /** @internal */
           get scope(): ScopeModuleAAuthsimple;
-        } 
+        }
+
+          export interface AuthProviderSimple {
+            get $beanFullName(): 'a-authsimple.authProvider.simple';
+            get $onionName(): 'a-authsimple:simple';
+          } 
 }
 /** authProvider: end */
 /** authProvider: begin */
@@ -155,7 +163,12 @@ declare module 'vona-module-a-authsimple' {
         export interface ServiceAuthSimple {
           /** @internal */
           get scope(): ScopeModuleAAuthsimple;
-        } 
+        }
+
+          export interface ServiceAuthSimple {
+            get $beanFullName(): 'a-authsimple.service.authSimple';
+            get $onionName(): 'a-authsimple:authSimple';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -190,7 +203,12 @@ declare module 'vona-module-a-authsimple' {
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleAAuthsimple;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-authsimple.meta.version';
+            get $onionName(): 'a-authsimple:version';
+          } 
 }
 /** meta: end */
 /** dto: begin */

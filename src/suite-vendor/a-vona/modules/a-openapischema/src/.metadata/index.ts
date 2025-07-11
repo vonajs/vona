@@ -16,7 +16,12 @@ declare module 'vona-module-a-openapischema' {
         export interface InterceptorOpenapiSchema {
           /** @internal */
           get scope(): ScopeModuleAOpenapischema;
-        } 
+        }
+
+          export interface InterceptorOpenapiSchema {
+            get $beanFullName(): 'a-openapischema.interceptor.openapiSchema';
+            get $onionName(): 'a-openapischema:openapiSchema';
+          } 
 }
 /** interceptor: end */
 /** event: begin */
@@ -32,7 +37,12 @@ declare module 'vona-module-a-openapischema' {
         export interface EventRetrieveOpenapiSchema {
           /** @internal */
           get scope(): ScopeModuleAOpenapischema;
-        } 
+        }
+
+          export interface EventRetrieveOpenapiSchema {
+            get $beanFullName(): 'a-openapischema.event.retrieveOpenapiSchema';
+            get $onionName(): 'a-openapischema:retrieveOpenapiSchema';
+          } 
 }
 /** event: end */
 /** event: begin */

@@ -16,7 +16,12 @@ declare module 'vona-module-a-printtip' {
         export interface StartupPrintTip {
           /** @internal */
           get scope(): ScopeModuleAPrinttip;
-        } 
+        }
+
+          export interface StartupPrintTip {
+            get $beanFullName(): 'a-printtip.startup.printTip';
+            get $onionName(): 'a-printtip:printTip';
+          } 
 }
 /** startup: end */
 /** config: begin */

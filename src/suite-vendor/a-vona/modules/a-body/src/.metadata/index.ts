@@ -16,7 +16,12 @@ declare module 'vona-module-a-body' {
         export interface InterceptorBody {
           /** @internal */
           get scope(): ScopeModuleABody;
-        } 
+        }
+
+          export interface InterceptorBody {
+            get $beanFullName(): 'a-body.interceptor.body';
+            get $onionName(): 'a-body:body';
+          } 
 }
 /** interceptor: end */
 /** bean: begin */
@@ -61,7 +66,12 @@ declare module 'vona-module-a-body' {
         export interface ServiceBody {
           /** @internal */
           get scope(): ScopeModuleABody;
-        } 
+        }
+
+          export interface ServiceBody {
+            get $beanFullName(): 'a-body.service.body';
+            get $onionName(): 'a-body:body';
+          } 
 }
 /** service: end */
 /** service: begin */

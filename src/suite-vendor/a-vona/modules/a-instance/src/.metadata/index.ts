@@ -19,7 +19,12 @@ declare module 'vona-module-a-instance' {
         export interface MiddlewareInstance {
           /** @internal */
           get scope(): ScopeModuleAInstance;
-        } 
+        }
+
+          export interface MiddlewareInstance {
+            get $beanFullName(): 'a-instance.middleware.instance';
+            get $onionName(): 'a-instance:instance';
+          } 
 }
 /** middleware: end */
 /** middlewareSystem: begin */
@@ -39,7 +44,12 @@ declare module 'vona-module-a-instance' {
         export interface MiddlewareSystemAppReady {
           /** @internal */
           get scope(): ScopeModuleAInstance;
-        } 
+        }
+
+          export interface MiddlewareSystemAppReady {
+            get $beanFullName(): 'a-instance.middlewareSystem.appReady';
+            get $onionName(): 'a-instance:appReady';
+          } 
 }
 /** middlewareSystem: end */
 /** entity: begin */
@@ -96,7 +106,12 @@ declare module 'vona-module-a-instance' {
         export interface ModelInstance {
           /** @internal */
           get scope(): ScopeModuleAInstance;
-        } 
+        }
+
+          export interface ModelInstance {
+            get $beanFullName(): 'a-instance.model.instance';
+            get $onionName(): 'a-instance:instance';
+          } 
 }
 /** model: end */
 /** model: begin */
@@ -106,7 +121,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, TypeModelOnionNamesOfModelClass } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-instance' {
   export interface ModelInstance {
@@ -115,10 +130,8 @@ declare module 'vona-module-a-instance' {
       [SymbolKeyModelOptions]: IModelOptionsInstance;
       get<T extends IModelGetOptions<EntityInstance,ModelInstance>>(where: TypeModelWhere<EntityInstance>, options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T> | undefined>;
       mget<T extends IModelGetOptions<EntityInstance,ModelInstance>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
-      select<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
-      select<T extends IModelSelectParams<EntityInstance,ModelInstance>>(params?: T, options?: IModelMethodOptions): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
-      count<ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[], T extends IModelCountParams<EntityInstance,ModelInstance,ModelJoins>>(params: T, modelJoins: ModelJoins, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
-      count<T extends IModelCountParams<EntityInstance,ModelInstance>>(params?: T, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelInstance>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
+      count<T extends IModelCountParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelInstance>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
 declare module 'vona-module-a-database' {
@@ -169,7 +182,12 @@ declare module 'vona-module-a-instance' {
         export interface ServiceInstance {
           /** @internal */
           get scope(): ScopeModuleAInstance;
-        } 
+        }
+
+          export interface ServiceInstance {
+            get $beanFullName(): 'a-instance.service.instance';
+            get $onionName(): 'a-instance:instance';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -208,10 +226,20 @@ declare module 'vona-module-a-instance' {
           get scope(): ScopeModuleAInstance;
         }
 
+          export interface BroadcastReload {
+            get $beanFullName(): 'a-instance.broadcast.reload';
+            get $onionName(): 'a-instance:reload';
+          }
+
         export interface BroadcastResetCache {
           /** @internal */
           get scope(): ScopeModuleAInstance;
-        } 
+        }
+
+          export interface BroadcastResetCache {
+            get $beanFullName(): 'a-instance.broadcast.resetCache';
+            get $onionName(): 'a-instance:resetCache';
+          } 
 }
 /** broadcast: end */
 /** broadcast: begin */
@@ -245,15 +273,30 @@ declare module 'vona-module-a-instance' {
           get scope(): ScopeModuleAInstance;
         }
 
+          export interface MetaIndex {
+            get $beanFullName(): 'a-instance.meta.index';
+            get $onionName(): 'a-instance:index';
+          }
+
         export interface MetaRedlock {
           /** @internal */
           get scope(): ScopeModuleAInstance;
         }
 
+          export interface MetaRedlock {
+            get $beanFullName(): 'a-instance.meta.redlock';
+            get $onionName(): 'a-instance:redlock';
+          }
+
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleAInstance;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-instance.meta.version';
+            get $onionName(): 'a-instance:version';
+          } 
 }
 /** meta: end */
 /** meta redlock: begin */

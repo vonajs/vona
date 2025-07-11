@@ -293,8 +293,8 @@ declare module 'vona-module-test-vona' {
       [SymbolKeyModelOptions]: IModelOptionsPost;
       get<T extends IModelGetOptions<EntityPost,ModelPost>>(where: TypeModelWhere<EntityPost>, options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T> | undefined>;
       mget<T extends IModelGetOptions<EntityPost,ModelPost>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      select<T extends IModelSelectParams<EntityPost,ModelPost>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPost>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
-      count<T extends IModelCountParams<EntityPost>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPost>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
+      select<T extends IModelSelectParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPost>>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityPost, ModelPost, T>[]>;
+      count<T extends IModelCountParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = TypeModelOnionNamesOfModelClass<ModelPost>>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 export interface ModelPostContent {
       [SymbolKeyEntity]: EntityPostContent;

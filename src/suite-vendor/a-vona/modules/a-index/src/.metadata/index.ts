@@ -16,7 +16,12 @@ declare module 'vona-module-a-index' {
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleAIndex;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-index.meta.version';
+            get $onionName(): 'a-index:version';
+          } 
 }
 /** meta: end */
 /** config: begin */
