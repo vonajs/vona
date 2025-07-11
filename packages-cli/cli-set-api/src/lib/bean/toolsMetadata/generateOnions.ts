@@ -36,8 +36,8 @@ export async function generateOnions(
       if (!isBeanGlobal) {
         contentScopes.push(`
           export interface ${className} {
-            $beanFullName: '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
-            $onionName: '${beanNameFull}';
+            get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
+            get $onionName(): '${beanNameFull}';
           }`);
       }
     }
