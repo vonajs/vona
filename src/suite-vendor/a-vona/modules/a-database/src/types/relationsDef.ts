@@ -5,19 +5,19 @@ import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
 
 export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belongsToMany';
-export interface TypeModelRelations {
-  [key: string]: TypeModelRelation<any, any>;
-}
+// export interface TypeModelRelations {
+//   [key: string]: TypeModelRelation<any, any>;
+// }
 
-export type TypeModelClassLike<MODEL extends BeanModelMeta = BeanModelMeta> = (() => Constructable<MODEL>) | Constructable<MODEL>;
+export type TypeModelClassLike<MODEL extends BeanModelMeta> = (() => Constructable<MODEL>) | Constructable<MODEL>;
 
-export type TypeModelRelation<MODELSelf extends BeanModelMeta = BeanModelMeta, MODELTarget extends BeanModelMeta = BeanModelMeta> =
-  IModelRelationHasOne<MODELTarget> |
-  IModelRelationBelongsTo<MODELSelf, MODELTarget> |
-  IModelRelationHasMany<MODELTarget>;
+// export type TypeModelRelation<MODELSelf extends BeanModelMeta | undefined, MODELTarget extends BeanModelMeta> =
+//   IModelRelationHasOne<MODELTarget> |
+//   IModelRelationBelongsTo<MODELSelf, MODELTarget> |
+//   IModelRelationHasMany<MODELTarget>;
 
 // use optional ? for app config
-export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationHasOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
@@ -25,8 +25,8 @@ export interface IModelRelationHasOne<MODEL extends BeanModelMeta = BeanModelMet
 }
 
 export interface IModelRelationBelongsTo<
-  MODELSelf extends BeanModelMeta = BeanModelMeta,
-  MODEL extends BeanModelMeta = BeanModelMeta,
+  MODELSelf extends BeanModelMeta,
+  MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
 > {
   type?: 'belongsTo';
@@ -35,7 +35,7 @@ export interface IModelRelationBelongsTo<
   options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationHasMany<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
@@ -43,8 +43,8 @@ export interface IModelRelationHasMany<MODEL extends BeanModelMeta = BeanModelMe
 }
 
 export interface IModelRelationBelongsToMany<
-  MODELMiddle extends BeanModelMeta = BeanModelMeta,
-  MODEL extends BeanModelMeta = BeanModelMeta,
+  MODELMiddle extends BeanModelMeta,
+  MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
 > {
   type?: 'belongsToMany';
@@ -55,12 +55,12 @@ export interface IModelRelationBelongsToMany<
   options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
   autoload?: AUTOLOAD;
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
 }
 
-export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta = BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationOptionsMany<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
   autoload?: AUTOLOAD;
   columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
   where?: TypeModelWhere<MODEL[TypeSymbolKeyEntity]>;
