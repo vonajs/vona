@@ -153,6 +153,14 @@ function _buildWhereColumnOpNormal<TRecord>(
     builder.whereIn(column, value);
   } else if (op === Op.notIn) {
     builder.whereNotIn(column, value);
+  } else if (op === Op.null) {
+    builder.whereNull(column);
+  } else if (op === Op.notNull) {
+    builder.whereNotNull(column);
+  } else if (op === Op.between) {
+    builder.whereBetween(column, value);
+  } else if (op === Op.notBetween) {
+    builder.whereNotBetween(column, value);
   }
 }
 

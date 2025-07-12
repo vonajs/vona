@@ -2,6 +2,7 @@ import type { Knex } from 'knex';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
+import { Op } from 'vona-module-a-database';
 
 describe.only('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
@@ -83,6 +84,22 @@ describe.only('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" in (1, 2) and 1 = 0 and ((("id" in (2, 3))) or (("iid" not in (3, 4))))');
+      // op: null/notNull
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        id: { _null_: Op.none },
+        iid: { _notNull_: Op.none },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where ("id" is null) and ("iid" is not null)');
+      // op: between/notBetween
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        id: { _between_: [1, 3] },
+        iid: { _notBetween_: [2, 4] },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where ("id" between 1 and 3) and ("iid" not between 2 and 4');
       ///////
       await builder;
       console.log(sql);
