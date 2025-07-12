@@ -6,7 +6,6 @@ import { app } from 'vona-mock';
 describe.only('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
-      console.log('-------------------------------');
       const scopeTest = app.bean.scope('test-vona');
       // op: normal
       let builder = scopeTest.model.post.builder();
@@ -120,9 +119,6 @@ describe.only('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where ("title" like \'a%\' and "title" like \'%b\' and "title" like \'%c%\')');
-      ///////
-      await builder;
-      console.log(sql);
     });
   });
 });
