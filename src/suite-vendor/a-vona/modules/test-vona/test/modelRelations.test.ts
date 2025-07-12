@@ -24,7 +24,7 @@ describe('modelRelations.test.ts', () => {
       // relation: hasOne
       const posts = await scopeTest.model.post.select({
         where: {
-          id: [post1.id, post2.id],
+          id: [postApple.id, postPear.id],
         },
         orders: [['id', 'asc']],
         include: { postContent: true },
@@ -34,13 +34,13 @@ describe('modelRelations.test.ts', () => {
       assert.equal(posts[1].postContent, undefined);
       // relation: hasOne: get
       const postGet = await scopeTest.model.post.get(
-        { id: post1.id },
+        { id: postApple.id },
         { include: { postContent: true } },
       );
       assert.equal(postGet?.postContent?.content, 'action:modelRelations:postContentApple');
       // relation: hasOne: columns
       const postGetColumns = await scopeTest.model.post.get(
-        { id: post1.id },
+        { id: postApple.id },
         { columns: ['id'], include: { postContent: { columns: ['id'] } } },
       );
       assert.equal(postGetColumns?.postContent?.content, undefined);
@@ -49,7 +49,7 @@ describe('modelRelations.test.ts', () => {
       // relation: belongsTo
       const postContents = await scopeTest.model.postContent.select({
         where: {
-          id: postContent1.id,
+          id: postContentApple.id,
         },
         include: { post: true },
       });
@@ -57,20 +57,20 @@ describe('modelRelations.test.ts', () => {
       assert.equal(postContents[0].post?.title, 'action:modelRelations:postApple');
       // relation: belongsTo: get
       const postContentGet = await scopeTest.model.postContent.get(
-        { id: postContent1.id },
+        { id: postContentApple.id },
         { include: { post: true } },
       );
       assert.equal(postContentGet?.post?.title, 'action:modelRelations:postApple');
       // relation: belongsTo: autoload
       const postAutoload = await scopeTest.model.post.get(
-        { id: post1.id },
+        { id: postApple.id },
       );
       assert.equal(postAutoload!.user?.id, postAutoload!.userId);
       assert.equal(Object.keys(postAutoload!.user!).length, 2); // id + name
       // relation: hasMany
       const users = await scopeTest.model.user.select({
         where: {
-          id: [userTom.id, user2.id],
+          id: [userTom.id, userJimmy.id],
         },
         orders: [['id', 'asc']],
         include: { posts: true },
@@ -87,7 +87,7 @@ describe('modelRelations.test.ts', () => {
       // relation: belongsToMany
       const roles = await scopeTest.model.role.select({
         where: {
-          id: [role1.id, role2.id],
+          id: [roleFamily.id, roleFriend.id],
         },
         orders: [['id', 'asc']],
         include: { users: true },
@@ -97,12 +97,12 @@ describe('modelRelations.test.ts', () => {
       assert.equal(roles[1].users.length, 1);
       // relation: belongsToMany: get
       const roleGet = await scopeTest.model.role.get(
-        { id: role1.id },
+        { id: roleFamily.id },
         { include: { users: true } },
       );
       assert.equal(roleGet?.users.length, 2);
       // relation: belongsToMany: mget
-      const roles2 = await scopeTest.model.role.mget([role1.id, role2.id], { include: { users: true } });
+      const roles2 = await scopeTest.model.role.mget([roleFamily.id, roleFriend.id], { include: { users: true } });
       assert.equal(roles2.length, 2);
       assert.equal(roles2[0].users.length, 2);
       assert.equal(roles2[1].users.length, 1);
@@ -149,7 +149,7 @@ describe('modelRelations.test.ts', () => {
       const itemsJoins2 = await scopeTest.model.post.select({
         joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
         where: {
-          'testVonaUser.id': user2.id,
+          'testVonaUser.id': userJimmy.id,
         },
         orders: [['testVonaUser.id', 'asc']],
       }, {}, ['test-vona:user']);
