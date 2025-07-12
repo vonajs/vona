@@ -72,11 +72,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return this.raw(parts.map(_ => '??').join(','), parts);
   }
 
-  checkWhere<TRecord>(where: TypeModelWhere<TRecord>) {
+  checkWhere(where: TypeModelWhere<TRecord>) {
     return checkWhere(where);
   }
 
-  buildWhere<TRecord>(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
+  buildWhere(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
     return buildWhere(builder, wheres);
   }
 
