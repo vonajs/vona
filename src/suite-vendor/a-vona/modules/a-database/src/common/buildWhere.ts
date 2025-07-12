@@ -21,15 +21,23 @@ function _buildWhereInner<TRecord>(
   }
   // and
   if (opJoint === Op.and) {
-    builder.andWhere(builder => {
-      _buildWhereInner_inner(builder, wheres, column);
+    builder.where(builder => {
+      for (const key in wheres) {
+        builder.andWhere(builder => {
+          _buildWhereInner_inner(builder, { [key]: wheres[key] } as any, column);
+        });
+      }
     });
     return;
   }
   // or
   if (opJoint === Op.or) {
-    builder.orWhere(builder => {
-      _buildWhereInner_inner(builder, wheres, column);
+    builder.where(builder => {
+      for (const key in wheres) {
+        builder.orWhere(builder => {
+          _buildWhereInner_inner(builder, { [key]: wheres[key] } as any, column);
+        });
+      }
     });
     return;
   }

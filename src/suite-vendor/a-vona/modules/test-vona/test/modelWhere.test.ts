@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe('modelWhere.test.ts', () => {
+describe.only('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       console.log('-------------------------------');
@@ -18,6 +18,21 @@ describe('modelWhere.test.ts', () => {
         _and_: { iid: 1, id: 2 },
       });
       sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where (("iid" = 1 and "id" = 2))');
+      // op: and: empty
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        _and_: { _and_: {} },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost"');
+      // op: or
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        _or_: { iid: 1, id: 2 },
+      });
+      sql = builder.toQuery();
+      ///////
       console.log(sql);
     });
   });
