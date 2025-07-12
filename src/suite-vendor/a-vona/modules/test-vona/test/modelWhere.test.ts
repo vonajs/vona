@@ -114,6 +114,13 @@ describe.only('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where ("id" > 1 and "id" >= 2 and "id" < 3 and "id" <= 4)');
+      // op: startsWith/endsWith/includes
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        title: { _startsWith_: 'a', _endsWith_: 'b', _includes_: 'c' },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where ("title" like \'a%\' and "title" like \'%b\' and "title" like \'%c%\')');
       ///////
       await builder;
       console.log(sql);

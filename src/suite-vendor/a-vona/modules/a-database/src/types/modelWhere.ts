@@ -20,6 +20,12 @@ export const OpNormal = {
   notNull: '_notNull_',
   between: '_between_',
   notBetween: '_notBetween_',
+  startsWith: '_startsWith_',
+  endsWith: '_endsWith_',
+  includes: '_includes_',
+  startsWithI: '_startsWithI_',
+  endsWithI: '_endsWithI_',
+  includesI: '_includesI_',
   ref: '_ref_',
 } as const;
 export const Op = {

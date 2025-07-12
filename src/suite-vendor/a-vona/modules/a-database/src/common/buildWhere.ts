@@ -169,6 +169,18 @@ function _buildWhereColumnOpNormal<TRecord>(
     builder.whereBetween(column, value);
   } else if (op === Op.notBetween) {
     builder.whereNotBetween(column, value);
+  } else if (op === Op.startsWith) {
+    builder.whereLike(column, `${value}%` as any);
+  } else if (op === Op.endsWith) {
+    builder.whereLike(column, `%${value}` as any);
+  } else if (op === Op.includes) {
+    builder.whereLike(column, `%${value}%` as any);
+  } else if (op === Op.startsWithI) {
+    builder.whereILike(column, `${value}%` as any);
+  } else if (op === Op.endsWithI) {
+    builder.whereILike(column, `%${value}` as any);
+  } else if (op === Op.includesI) {
+    builder.whereILike(column, `%${value}%` as any);
   } else if (op === Op.ref) {
     const app = useApp();
     builder.where(column, '=', app.bean.model.ref(value));
