@@ -137,11 +137,8 @@ function _buildWhereColumn<TRecord>(
   }
   // array
   if (Array.isArray(value)) {
-    if (value.length === 0) {
-      builder.whereIn(column, null as any);
-    } else {
-      builder.whereIn(column, value as []);
-    }
+    // support empty array
+    builder.whereIn(column, value as []);
     return;
   }
   // date
