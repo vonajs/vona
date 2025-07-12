@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelWhere } from '../../types/index.ts';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
@@ -72,11 +72,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return this.raw(parts.map(_ => '??').join(','), parts);
   }
 
-  checkWhere(where) {
+  checkWhere<TRecord>(where: TypeModelWhere<TRecord>) {
     return checkWhere(where);
   }
 
-  buildWhere(builder: Knex.QueryBuilder, wheres) {
+  buildWhere<TRecord>(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
     return buildWhere(builder, wheres);
   }
 
