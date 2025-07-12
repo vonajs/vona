@@ -151,6 +151,12 @@ function _buildWhereColumnOpNormal<TRecord>(
     builder.where(column, '<>', value);
   } else if (op === Op.gt) {
     builder.where(column, '>', value);
+  } else if (op === Op.gte) {
+    builder.where(column, '>=', value);
+  } else if (op === Op.lt) {
+    builder.where(column, '<', value);
+  } else if (op === Op.lte) {
+    builder.where(column, '<=', value);
   } else if (op === Op.in) {
     builder.whereIn(column, value);
   } else if (op === Op.notIn) {

@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { Op } from 'vona-module-a-database';
 
-describe('modelWhere.test.ts', () => {
+describe.only('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       console.log('-------------------------------');
@@ -107,6 +107,13 @@ describe('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where ("iid" = "id")');
+      // op: gt/gte/lt/lte
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        id: { _gt_: 1, _gte_: 2, _lt_: 3, _lte_: 4 },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where ("id" > 1 and "id" >= 2 and "id" < 3 and "id" <= 4)');
       ///////
       await builder;
       console.log(sql);
