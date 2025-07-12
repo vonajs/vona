@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
-import { Op, OpJointValues, OpNormalValues, OpValues } from '../types/modelWhere.ts';
+import { Op, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { formatValue, isRaw } from './utils.ts';
 
 export function buildWhere<TRecord>(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
@@ -88,8 +88,28 @@ function _buildWhereOpJoint<TRecord>(
     builder.where(builder => {
       _buildWhereInner(builder, wheres, column, op);
     });
+    return;
   }
-  // todo:
+  // not
+  if (op === Op.not) {
+    builder.whereNot(builder => {
+      _buildWhereInner(builder, wheres, column);
+    });
+    return;
+  }
+  // exists
+  if (op === Op.exists) {
+    builder.whereExists(builder => {
+      _buildWhereInner(builder, wheres, column);
+    });
+    return;
+  }
+  // notexists
+  if (op === Op.notExists) {
+    builder.whereNotExists(builder => {
+      _buildWhereInner(builder, wheres, column);
+    });
+  }
 }
 
 function _buildWhereColumn<TRecord>(
