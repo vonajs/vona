@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('modelWhere.test.ts', () => {
+describe('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       const scopeTest = app.bean.scope('test-vona');

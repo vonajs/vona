@@ -78,6 +78,40 @@ describe('modelRelations.test.ts', () => {
       assert.equal(users.length, 2);
       assert.equal(users[0].posts.length, 2);
       assert.equal(users[1].posts.length, 0);
+      // relation: hasMany: options.where/orders
+      const userOptions = await scopeTest.model.user.select({
+        where: {
+          id: [userTom.id, userJimmy.id],
+        },
+        orders: [['id', 'asc']],
+        include: { posts: {
+          where: {
+            id: { _in_: [postApple.id, postPear.id] },
+          },
+          orders: [['id', 'desc']],
+        } },
+      });
+      assert.equal(userOptions.length, 2);
+      assert.equal(userOptions[0].posts.length, 2);
+      assert.equal(userOptions[1].posts.length, 0);
+      assert.equal(Number.parseInt(userOptions[0].posts[0].id as any) > Number.parseInt(userOptions[0].posts[1].id as any), true);
+      // relation: hasMany: options.where/orders
+      const userOptions2 = await scopeTest.model.user.select({
+        where: {
+          id: [userTom.id, userJimmy.id],
+        },
+        orders: [['id', 'asc']],
+        include: { posts: {
+          where: {
+            id: { _in_: [postApple.id, postPear.id] },
+            _and_: { id: { _notIn_: [postApple.id, postPear.id] } },
+          },
+          orders: [['id', 'desc']],
+        } },
+      });
+      assert.equal(userOptions2.length, 2);
+      assert.equal(userOptions2[0].posts.length, 0);
+      assert.equal(userOptions2[1].posts.length, 0);
       // relation: hasMany: get
       const userGet = await scopeTest.model.user.get(
         { id: userTom.id },
