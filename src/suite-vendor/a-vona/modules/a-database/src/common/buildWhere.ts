@@ -145,13 +145,13 @@ function _buildWhereColumnOpNormal<TRecord>(
   value: any,
   op: TypeOpsNormal,
 ) {
-  if (op === '_eq_') {
+  if (op === Op.eq) {
     builder.where(column, '=', value);
-  } else if (op === '_gt_') {
+  } else if (op === Op.gt) {
     builder.where(column, '>', value);
-  } else if (op === '_in_') {
+  } else if (op === Op.in) {
     builder.whereIn(column, value);
-  } else if (op === '_notIn_') {
+  } else if (op === Op.notIn) {
     builder.whereNotIn(column, value);
   }
 }
