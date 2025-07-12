@@ -82,6 +82,7 @@ describe.only('modelWhere.test.ts', () => {
         _or_: { id: { _in_: [2, 3] }, iid: { _notIn_: [3, 4] } },
       });
       sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where "id" in (1, 2) and 1 = 0 and ((("id" in (2, 3))) or (("iid" not in (3, 4))))');
       ///////
       await builder;
       console.log(sql);
