@@ -10,18 +10,18 @@ describe('modelRelations.test.ts', () => {
       // scope
       const scopeTest = app.bean.scope('test-vona');
       // test data: create
-      const user1 = await scopeTest.model.user.insert({ name: 'tom' });
-      const user2 = await scopeTest.model.user.insert({ name: 'jimmy' });
-      const role1 = await scopeTest.model.role.insert({ name: 'family' });
-      const role2 = await scopeTest.model.role.insert({ name: 'friend' });
+      const user1 = await scopeTest.model.user.insert({ name: 'action:modelRelations:tom' });
+      const user2 = await scopeTest.model.user.insert({ name: 'action:modelRelations:jimmy' });
+      const role1 = await scopeTest.model.role.insert({ name: 'action:modelRelations:family' });
+      const role2 = await scopeTest.model.role.insert({ name: 'action:modelRelations:friend' });
       await scopeTest.model.roleUser.batchInsert([
         { userId: user1.id, roleId: role1.id },
         { userId: user1.id, roleId: role2.id },
         { userId: user2.id, roleId: role1.id },
       ]);
-      const post1 = await scopeTest.model.post.insert({ title: 'post1', userId: user1.id });
-      const post2 = await scopeTest.model.post.insert({ title: 'post2', userId: user1.id });
-      const postContent1 = await scopeTest.model.postContent.insert({ content: 'content1', postId: post1.id });
+      const post1 = await scopeTest.model.post.insert({ title: 'action:modelRelations:post1', userId: user1.id });
+      const post2 = await scopeTest.model.post.insert({ title: 'action:modelRelations:post2', userId: user1.id });
+      const postContent1 = await scopeTest.model.postContent.insert({ content: 'action:modelRelations:content1', postId: post1.id });
       // relation: hasOne
       const posts = await scopeTest.model.post.select({
         where: {
@@ -31,14 +31,14 @@ describe('modelRelations.test.ts', () => {
         include: { postContent: true },
       });
       assert.equal(posts.length, 2);
-      assert.equal(posts[0].postContent?.content, 'content1');
+      assert.equal(posts[0].postContent?.content, 'action:modelRelations:content1');
       assert.equal(posts[1].postContent, undefined);
       // relation: hasOne: get
       const postGet = await scopeTest.model.post.get(
         { id: post1.id },
         { include: { postContent: true } },
       );
-      assert.equal(postGet?.postContent?.content, 'content1');
+      assert.equal(postGet?.postContent?.content, 'action:modelRelations:content1');
       // relation: hasOne: columns
       const postGetColumns = await scopeTest.model.post.get(
         { id: post1.id },
@@ -55,13 +55,13 @@ describe('modelRelations.test.ts', () => {
         include: { post: true },
       });
       assert.equal(postContents.length, 1);
-      assert.equal(postContents[0].post?.title, 'post1');
+      assert.equal(postContents[0].post?.title, 'action:modelRelations:post1');
       // relation: belongsTo: get
       const postContentGet = await scopeTest.model.postContent.get(
         { id: postContent1.id },
         { include: { post: true } },
       );
-      assert.equal(postContentGet?.post?.title, 'post1');
+      assert.equal(postContentGet?.post?.title, 'action:modelRelations:post1');
       // relation: belongsTo: autoload
       const postAutoload = await scopeTest.model.post.get(
         { id: post1.id },
@@ -153,7 +153,7 @@ describe('modelRelations.test.ts', () => {
           'testVonaUser.id': user2.id,
         },
         orders: [['testVonaUser.id', 'asc']],
-      }, ['test-vona:user']);
+      }, {}, ['test-vona:user']);
       assert.equal(itemsJoins2.length, 0);
       // test data: delete
       await scopeTest.model.postContent.delete({ id: postContent1.id });
