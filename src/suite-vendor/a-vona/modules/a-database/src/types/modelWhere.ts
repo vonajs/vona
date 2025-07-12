@@ -10,6 +10,8 @@ export const OpJoint = {
 export const OpNormal = {
   eq: '_eq_',
   gt: '_gt_',
+  in: '_in_',
+  notIn: '_notIn_',
 } as const;
 export const Op = {
   skip: '_skip_',

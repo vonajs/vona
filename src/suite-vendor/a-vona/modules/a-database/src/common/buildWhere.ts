@@ -28,7 +28,7 @@ function _buildWhereInner<TRecord>(
     const value = wheres[key];
     if (key[0] !== '_') {
       // columns
-      _buildWhereColumn(builder, key, value, Op.eq);
+      _buildWhereColumn(builder, key, value);
     } else if (OpNormalValues.includes(key as any)) {
       // op: normal
       if (column) {
@@ -102,7 +102,7 @@ function _buildWhereColumn<TRecord>(
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
   value: TypeModelColumnValue<TRecord, TRecord[keyof TRecord]> | TypeModelWhereFieldAll<TRecord, TRecord[keyof TRecord]>,
-  op: TypeOpsNormal,
+  op?: TypeOpsNormal,
 ) {
   // skip
   if (value === Op.skip) {
@@ -110,7 +110,7 @@ function _buildWhereColumn<TRecord>(
   }
   // raw
   if (isRaw(value)) {
-    _buildWhereColumnOpNormal(builder, column, value, op);
+    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.eq);
     return;
   }
   // null/undefined
@@ -120,13 +120,12 @@ function _buildWhereColumn<TRecord>(
   }
   // array
   if (Array.isArray(value)) {
-    // support empty array
-    builder.whereIn(column, value as []);
+    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.in);
     return;
   }
   // date
   if (value instanceof Date) {
-    _buildWhereColumnOpNormal(builder, column, value, op);
+    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.eq);
     return;
   }
   // object
@@ -137,7 +136,7 @@ function _buildWhereColumn<TRecord>(
     return;
   }
   // column
-  _buildWhereColumnOpNormal(builder, column, value, op);
+  _buildWhereColumnOpNormal(builder, column, value, op ?? Op.eq);
 }
 
 function _buildWhereColumnOpNormal<TRecord>(
@@ -150,6 +149,10 @@ function _buildWhereColumnOpNormal<TRecord>(
     builder.where(column, '=', value);
   } else if (op === '_gt_') {
     builder.where(column, '>', value);
+  } else if (op === '_in_') {
+    builder.whereIn(column, value);
+  } else if (op === '_notIn_') {
+    builder.whereNotIn(column, value);
   }
 }
 

@@ -74,6 +74,14 @@ describe.only('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where not exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")');
+      // op: array direct/in/notIn
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        id: [1, 2],
+        iid: [],
+        _or_: { id: { _in_: [2, 3] }, iid: { _notIn_: [3, 4] } },
+      });
+      sql = builder.toQuery();
       ///////
       await builder;
       console.log(sql);
