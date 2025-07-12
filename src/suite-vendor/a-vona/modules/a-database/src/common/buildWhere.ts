@@ -64,11 +64,14 @@ function _buildWhereInner_inner<TRecord>(
       } else {
         // not go here
       }
-    } else if (OpJointValues.includes(key as any)) {
-      // op: joint
-      _buildWhereOpJoint(builder, column, value, key as any);
     } else {
-      // ignored, not throw error
+      const op = _checkOpJoint(key as any);
+      if (op) {
+        // op: joint
+        _buildWhereOpJoint(builder, column, value, op);
+      } else {
+        // ignored, not throw error
+      }
     }
   }
 }
@@ -164,6 +167,14 @@ function _buildWhereColumnOpNormal<TRecord>(
   }
 }
 
+function _checkOpJoint(op: TypeOpsJoint) {
+  for (const item of OpJointValues) {
+    if (op.startsWith(item)) {
+      return item;
+    }
+  }
+  return undefined;
+}
 // export function buildWhere(builder: Knex.QueryBuilder, wheres) {
 //   // raw
 //   if (isRaw(wheres)) {
