@@ -18,7 +18,7 @@ describe('modelWhere.test.ts', () => {
         _and_: { iid: 1, id: 2 },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where (("iid" = 1 and "id" = 2))');
+      assert.equal(sql, 'select * from "testVonaPost" where (("iid" = 1) and ("id" = 2))');
       // op: and: empty
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -32,6 +32,7 @@ describe('modelWhere.test.ts', () => {
         _or_: { iid: 1, id: 2 },
       });
       sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where (("iid" = 1) or ("id" = 2))');
       ///////
       console.log(sql);
     });
