@@ -1,8 +1,9 @@
+import type { Knex } from 'knex';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe('modelWhere.test.ts', () => {
+describe.only('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       console.log('-------------------------------');
@@ -33,7 +34,34 @@ describe('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where (("iid" = 1) or ("id" = 2))');
+      // op: or: more
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        _or_: {
+          _and_: { iid: 1, id: 2 },
+          title: 'test',
+        },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where (((("iid" = 1) and ("id" = 2))) or ("title" = \'test\'))');
+      // op: not
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        _not_: { iid: 1, id: 2 },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where not ("iid" = 1 and "id" = 2)');
+      // op: exists
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        _exists_: function (this: Knex.QueryBuilder) {
+          this.select('id').from('testVonaUser').where({ 'testVonaUser.id': app.bean.model.ref('userId') });
+        } as any,
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")');
       ///////
+      await builder;
       console.log(sql);
     });
   });

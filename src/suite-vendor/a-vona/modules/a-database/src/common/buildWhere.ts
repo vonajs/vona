@@ -89,16 +89,12 @@ function _buildWhereOpJoint<TRecord>(
   }
   // exists
   if (op === Op.exists) {
-    builder.whereExists(builder => {
-      _buildWhereInner(builder, wheres, column);
-    });
+    builder.whereExists(wheres as any);
     return;
   }
   // notexists
   if (op === Op.notExists) {
-    builder.whereNotExists(builder => {
-      _buildWhereInner(builder, wheres, column);
-    });
+    builder.whereNotExists(wheres as any);
   }
 }
 
