@@ -8,10 +8,10 @@ describe('orm.test.ts', () => {
       const scopeTest = app.bean.scope('test-vona');
       // create: post/postContent
       const post1 = await scopeTest.model.post.insert({
-        title: 'orm:hasOne:post1',
+        title: 'action:orm:hasOne:post1',
       });
       const postContent1 = await scopeTest.model.postContent.insert({
-        content: 'orm:hasOne:content',
+        content: 'action:orm:hasOne:content',
         postId: post1.id,
       });
       // delete
