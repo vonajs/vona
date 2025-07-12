@@ -28,17 +28,17 @@ function _buildWhereInner<TRecord>(
     const value = wheres[key];
     if (key[0] !== '_') {
       // columns
-      _buildWhereColumn(builder, key as never, value, Op.eq);
+      _buildWhereColumn(builder, key, value, Op.eq);
     } else if (OpNormalValues.includes(key as any)) {
       // op: normal
       if (column) {
-        _buildWhereColumn(builder, column as never, value, key as any);
+        _buildWhereColumn(builder, column, value, key as any);
       } else {
         // not go here
       }
     } else if (OpJointValues.includes(key as any)) {
       // op: joint
-      _buildWhereOpJoint(builder, column as never, value, key as any);
+      _buildWhereOpJoint(builder, column, value, key as any);
     } else {
       // ignored, not throw error
     }
@@ -47,7 +47,7 @@ function _buildWhereInner<TRecord>(
 
 function _buildWhereOpJoint<TRecord>(
   builder: Knex.QueryBuilder,
-  column: keyof TRecord,
+  column: keyof TRecord | undefined,
   wheres: TypeModelWhere<TRecord>,
   op: TypeOpsJoint,
 ) {}
@@ -85,7 +85,7 @@ function _buildWhereColumn<TRecord>(
   // object
   if (typeof value === 'object') {
     builder.where(builder => {
-      _buildWhereInner(builder, value as any, column as never);
+      _buildWhereInner(builder, value as any, column);
     });
     return;
   }
