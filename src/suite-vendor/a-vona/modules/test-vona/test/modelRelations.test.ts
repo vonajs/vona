@@ -7,21 +7,20 @@ import { ModelPost, ModelPostContent, ModelRoleUser, ModelUser } from 'vona-modu
 describe('modelRelations.test.ts', () => {
   it('action:modelRelations', async () => {
     await app.bean.executor.mockCtx(async () => {
+      const prefix = 'action:modelRelations';
       // scope
       const scopeTest = app.bean.scope('test-vona');
       // test data: create
-      const user1 = await scopeTest.model.user.insert({ name: 'action:modelRelations:tom' });
-      const user2 = await scopeTest.model.user.insert({ name: 'action:modelRelations:jimmy' });
-      const role1 = await scopeTest.model.role.insert({ name: 'action:modelRelations:family' });
-      const role2 = await scopeTest.model.role.insert({ name: 'action:modelRelations:friend' });
-      await scopeTest.model.roleUser.batchInsert([
-        { userId: user1.id, roleId: role1.id },
-        { userId: user1.id, roleId: role2.id },
-        { userId: user2.id, roleId: role1.id },
-      ]);
-      const post1 = await scopeTest.model.post.insert({ title: 'action:modelRelations:postApple', userId: user1.id });
-      const post2 = await scopeTest.model.post.insert({ title: 'action:modelRelations:postPear', userId: user1.id });
-      const postContent1 = await scopeTest.model.postContent.insert({ content: 'action:modelRelations:postContentApple', postId: post1.id });
+      const testData = await scopeTest.service.testData.create(prefix);
+      const {
+        userTom,
+        userJimmy,
+        roleFamily,
+        roleFriend,
+        postApple,
+        postPear,
+        postContentApple,
+      } = testData;
       // relation: hasOne
       const posts = await scopeTest.model.post.select({
         where: {
@@ -71,7 +70,7 @@ describe('modelRelations.test.ts', () => {
       // relation: hasMany
       const users = await scopeTest.model.user.select({
         where: {
-          id: [user1.id, user2.id],
+          id: [userTom.id, user2.id],
         },
         orders: [['id', 'asc']],
         include: { posts: true },
@@ -81,7 +80,7 @@ describe('modelRelations.test.ts', () => {
       assert.equal(users[1].posts.length, 0);
       // relation: hasMany: get
       const userGet = await scopeTest.model.user.get(
-        { id: user1.id },
+        { id: userTom.id },
         { include: { posts: true } },
       );
       assert.equal(userGet?.posts.length, 2);
@@ -141,7 +140,7 @@ describe('modelRelations.test.ts', () => {
       const itemsJoins = await scopeTest.model.post.select({
         joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
         where: {
-          'testVonaUser.id': user1.id,
+          'testVonaUser.id': userTom.id,
         },
         orders: [['testVonaUser.id', 'asc']],
       });
@@ -156,15 +155,7 @@ describe('modelRelations.test.ts', () => {
       }, {}, ['test-vona:user']);
       assert.equal(itemsJoins2.length, 0);
       // test data: delete
-      await scopeTest.model.postContent.delete({ id: postContent1.id });
-      await scopeTest.model.post.delete({ id: post1.id });
-      await scopeTest.model.post.delete({ id: post2.id });
-      await scopeTest.model.roleUser.delete({ userId: user1.id });
-      await scopeTest.model.roleUser.delete({ userId: user2.id });
-      await scopeTest.model.role.delete({ id: role1.id });
-      await scopeTest.model.role.delete({ id: role2.id });
-      await scopeTest.model.user.delete({ id: user1.id });
-      await scopeTest.model.user.delete({ id: user2.id });
+      await scopeTest.service.testData.drop(testData);
     });
   });
 });
