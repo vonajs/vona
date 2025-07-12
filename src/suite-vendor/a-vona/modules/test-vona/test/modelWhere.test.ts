@@ -100,6 +100,13 @@ describe('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where ("id" between 1 and 3) and ("iid" not between 2 and 4)');
+      // op: ref
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        iid: { _ref_: 'id' },
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where ("iid" = "id")');
       ///////
       await builder;
       console.log(sql);

@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
-
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
+import { useApp } from 'vona';
 import { Op, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw } from './utils.ts';
 
@@ -163,6 +163,9 @@ function _buildWhereColumnOpNormal<TRecord>(
     builder.whereBetween(column, value);
   } else if (op === Op.notBetween) {
     builder.whereNotBetween(column, value);
+  } else if (op === Op.ref) {
+    const app = useApp();
+    builder.where(column, '=', app.bean.model.ref(value));
   }
 }
 
