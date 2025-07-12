@@ -13,6 +13,34 @@ function _buildWhereInner<TRecord>(
   builder: Knex.QueryBuilder,
   wheres: TypeModelWhere<TRecord>,
   column?: keyof TRecord,
+  opJoint?: TypeOpsJoint,
+) {
+  // skip
+  if (wheres === Op.skip) {
+    return;
+  }
+  // and
+  if (opJoint === Op.and) {
+    builder.andWhere(builder => {
+      _buildWhereInner_inner(builder, wheres, column);
+    });
+    return;
+  }
+  // or
+  if (opJoint === Op.or) {
+    builder.orWhere(builder => {
+      _buildWhereInner_inner(builder, wheres, column);
+    });
+    return;
+  }
+  // normal
+  _buildWhereInner_inner(builder, wheres, column);
+}
+
+function _buildWhereInner_inner<TRecord>(
+  builder: Knex.QueryBuilder,
+  wheres: TypeModelWhere<TRecord>,
+  column?: keyof TRecord,
 ) {
   // skip
   if (wheres === Op.skip) {
@@ -50,7 +78,19 @@ function _buildWhereOpJoint<TRecord>(
   column: keyof TRecord | undefined,
   wheres: TypeModelWhere<TRecord>,
   op: TypeOpsJoint,
-) {}
+) {
+  // skip
+  if (wheres === Op.skip) {
+    return;
+  }
+  // and/or
+  if (op === Op.and || op === Op.or) {
+    builder.where(builder => {
+      _buildWhereInner(builder, wheres, column, op);
+    });
+  }
+  // todo:
+}
 
 function _buildWhereColumn<TRecord>(
   builder: Knex.QueryBuilder,
