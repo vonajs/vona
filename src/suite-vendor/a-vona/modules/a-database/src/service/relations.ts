@@ -1,5 +1,4 @@
 import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
-import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { TypeModelClassLike } from '../types/relationsDef.ts';
 import { isNil } from '@cabloy/utils';
@@ -49,6 +48,7 @@ export class ServiceRelations extends BeanBase {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(modelCurrent, model);
+    const tableNameTarget = modelTarget.getTable('__handleRelationOne', [entity, modelCurrent, relation], methodOptions);
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
@@ -74,7 +74,7 @@ export class ServiceRelations extends BeanBase {
       if (isNil(idFrom)) {
         entity[relationName] = [];
       } else {
-        const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
+        const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
         entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
       }
     } else if (type === 'belongsToMany') {
@@ -100,6 +100,7 @@ export class ServiceRelations extends BeanBase {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(modelCurrent, model);
+    const tableNameTarget = modelTarget.getTable('__handleRelationMany', [entities, modelCurrent, relation], methodOptions);
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
@@ -114,11 +115,11 @@ export class ServiceRelations extends BeanBase {
       const options2 = deepExtend({}, methodOptionsReal, optionsReal);
       const items = await modelTarget.mget(idsTo, options2);
       for (const entity of entities) {
-        entity[relationName] = items.find(item => item.id === cast(entity)[key]);
+        entity[relationName] = items.find(item => cast(item).id === cast(entity)[key]);
       }
     } else if (type === 'hasMany') {
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
-      const options2 = deepExtend({}, optionsReal, { where: { [key]: idsFrom } });
+      const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idsFrom } });
       const items = await modelTarget.select(options2, methodOptionsReal);
       for (const entity of entities) {
         entity[relationName] = [];
@@ -139,7 +140,7 @@ export class ServiceRelations extends BeanBase {
         entity[relationName] = [];
         for (const itemMiddle of itemsMiddle) {
           if (itemMiddle[keyFrom] === cast(entity).id) {
-            entity[relationName].push(items.find(item => item.id === cast(itemMiddle)[keyTo]));
+            entity[relationName].push(items.find(item => cast(item).id === cast(itemMiddle)[keyTo]));
           }
         }
       }
@@ -150,8 +151,8 @@ export class ServiceRelations extends BeanBase {
     TRecord extends {},
     TModel extends BeanModelCrud<TRecord>,
   >(modelCurrent: TModel,
-    modelClassTarget: TypeModelClassLike<BeanModelMeta>,
-  ) {
+    modelClassTarget: TypeModelClassLike<BeanModelCrud<TRecord>>,
+  ): BeanModelCrud<TRecord> {
     const modelClass2 = modelClassTarget.name ? modelClassTarget : cast(modelClassTarget)();
     const beanFullName = appResource.getBeanFullName(modelClass2);
     return this.app.bean._newBean(beanFullName, cast(modelCurrent).db);

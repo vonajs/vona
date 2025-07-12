@@ -102,11 +102,13 @@ describe('modelRelations.test.ts', () => {
         },
         orders: [['id', 'asc']],
         include: { posts: {
+          joins: [['innerJoin', 'testVonaPostContent', ['testVonaPost.id', 'testVonaPostContent.postId']]],
           where: {
-            id: { _in_: [postApple.id, postPear.id] },
-            _and_: { id: { _notIn_: [postApple.id, postPear.id] } },
+            'testVonaPost.id': { _in_: [postApple.id, postPear.id] },
+            '_and_': { 'testVonaPost.id': { _notIn_: [postApple.id, postPear.id] } },
+            'testVonaPostContent.id': [postContentApple.id],
           },
-          orders: [['id', 'desc']],
+          orders: [['testVonaPost.id', 'desc']],
         } },
       });
       assert.equal(userOptions2.length, 2);
