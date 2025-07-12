@@ -16,8 +16,8 @@ export const OpNormal = {
   lte: '_lte_',
   in: '_in_',
   notIn: '_notIn_',
-  null: '_null_',
-  notNull: '_notNull_',
+  is: '_is_',
+  isNot: '_isNot_',
   between: '_between_',
   notBetween: '_notBetween_',
   startsWith: '_startsWith_',
@@ -29,7 +29,6 @@ export const OpNormal = {
   ref: '_ref_',
 } as const;
 export const Op = {
-  none: '_none_',
   skip: '_skip_',
   ...OpJoint,
   ...OpNormal,
@@ -49,7 +48,7 @@ export type TypeOpsNormal = TypeRecordValues<typeof OpNormal>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
 // not use Knex.Raw
-export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Column[] | '_skip_' | '_none_';
+export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Column[] | null | '_skip_';
 
 export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> =
   Columns extends {} ? TypeModelWhereInner<Columns> : TypeModelWhereInner<TRecord>;

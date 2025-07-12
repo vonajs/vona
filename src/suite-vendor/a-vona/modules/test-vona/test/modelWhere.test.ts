@@ -2,7 +2,6 @@ import type { Knex } from 'knex';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { Op } from 'vona-module-a-database';
 
 describe.only('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
@@ -87,8 +86,8 @@ describe.only('modelWhere.test.ts', () => {
       // op: null/notNull
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
-        id: { _null_: Op.none },
-        iid: { _notNull_: Op.none },
+        id: { _is_: null },
+        iid: { _isNot_: undefined },
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where ("id" is null) and ("iid" is not null)');
