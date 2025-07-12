@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { Op } from 'vona-module-a-database';
 
-describe.only('modelWhere.test.ts', () => {
+describe('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       console.log('-------------------------------');
@@ -99,7 +99,7 @@ describe.only('modelWhere.test.ts', () => {
         iid: { _notBetween_: [2, 4] },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where ("id" between 1 and 3) and ("iid" not between 2 and 4');
+      assert.equal(sql, 'select * from "testVonaPost" where ("id" between 1 and 3) and ("iid" not between 2 and 4)');
       ///////
       await builder;
       console.log(sql);
