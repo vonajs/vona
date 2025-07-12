@@ -19,9 +19,9 @@ describe('modelRelations.test.ts', () => {
         { userId: user1.id, roleId: role2.id },
         { userId: user2.id, roleId: role1.id },
       ]);
-      const post1 = await scopeTest.model.post.insert({ title: 'action:modelRelations:post1', userId: user1.id });
-      const post2 = await scopeTest.model.post.insert({ title: 'action:modelRelations:post2', userId: user1.id });
-      const postContent1 = await scopeTest.model.postContent.insert({ content: 'action:modelRelations:content1', postId: post1.id });
+      const post1 = await scopeTest.model.post.insert({ title: 'action:modelRelations:postApple', userId: user1.id });
+      const post2 = await scopeTest.model.post.insert({ title: 'action:modelRelations:postPear', userId: user1.id });
+      const postContent1 = await scopeTest.model.postContent.insert({ content: 'action:modelRelations:postContentApple', postId: post1.id });
       // relation: hasOne
       const posts = await scopeTest.model.post.select({
         where: {
@@ -31,14 +31,14 @@ describe('modelRelations.test.ts', () => {
         include: { postContent: true },
       });
       assert.equal(posts.length, 2);
-      assert.equal(posts[0].postContent?.content, 'action:modelRelations:content1');
+      assert.equal(posts[0].postContent?.content, 'action:modelRelations:postContentApple');
       assert.equal(posts[1].postContent, undefined);
       // relation: hasOne: get
       const postGet = await scopeTest.model.post.get(
         { id: post1.id },
         { include: { postContent: true } },
       );
-      assert.equal(postGet?.postContent?.content, 'action:modelRelations:content1');
+      assert.equal(postGet?.postContent?.content, 'action:modelRelations:postContentApple');
       // relation: hasOne: columns
       const postGetColumns = await scopeTest.model.post.get(
         { id: post1.id },
@@ -55,13 +55,13 @@ describe('modelRelations.test.ts', () => {
         include: { post: true },
       });
       assert.equal(postContents.length, 1);
-      assert.equal(postContents[0].post?.title, 'action:modelRelations:post1');
+      assert.equal(postContents[0].post?.title, 'action:modelRelations:postApple');
       // relation: belongsTo: get
       const postContentGet = await scopeTest.model.postContent.get(
         { id: postContent1.id },
         { include: { post: true } },
       );
-      assert.equal(postContentGet?.post?.title, 'action:modelRelations:post1');
+      assert.equal(postContentGet?.post?.title, 'action:modelRelations:postApple');
       // relation: belongsTo: autoload
       const postAutoload = await scopeTest.model.post.get(
         { id: post1.id },
