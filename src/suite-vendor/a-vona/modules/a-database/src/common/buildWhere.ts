@@ -13,42 +13,6 @@ function _buildWhereInner<TRecord>(
   builder: Knex.QueryBuilder,
   wheres: TypeModelWhere<TRecord>,
   column?: keyof TRecord,
-  opJoint?: TypeOpsJoint,
-) {
-  // skip
-  if (wheres === Op.skip) {
-    return;
-  }
-  // and
-  if (opJoint === Op.and) {
-    builder.where(builder => {
-      for (const key in wheres) {
-        builder.andWhere(builder => {
-          _buildWhereInner_inner(builder, { [key]: wheres[key] } as any, column);
-        });
-      }
-    });
-    return;
-  }
-  // or
-  if (opJoint === Op.or) {
-    builder.where(builder => {
-      for (const key in wheres) {
-        builder.orWhere(builder => {
-          _buildWhereInner_inner(builder, { [key]: wheres[key] } as any, column);
-        });
-      }
-    });
-    return;
-  }
-  // normal
-  _buildWhereInner_inner(builder, wheres, column);
-}
-
-function _buildWhereInner_inner<TRecord>(
-  builder: Knex.QueryBuilder,
-  wheres: TypeModelWhere<TRecord>,
-  column?: keyof TRecord,
 ) {
   // skip
   if (wheres === Op.skip) {
@@ -95,9 +59,24 @@ function _buildWhereOpJoint<TRecord>(
     return;
   }
   // and/or
-  if (op === Op.and || op === Op.or) {
+  if (op === Op.and) {
     builder.where(builder => {
-      _buildWhereInner(builder, wheres, column, op);
+      for (const key in wheres) {
+        builder.andWhere(builder => {
+          _buildWhereInner(builder, { [key]: wheres[key] } as any, column);
+        });
+      }
+    });
+    return;
+  }
+  // or
+  if (op === Op.or) {
+    builder.where(builder => {
+      for (const key in wheres) {
+        builder.orWhere(builder => {
+          _buildWhereInner(builder, { [key]: wheres[key] } as any, column);
+        });
+      }
     });
     return;
   }
