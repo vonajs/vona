@@ -7,6 +7,12 @@ export function getTableOrTableAlias(table: string) {
   return _table.includes(' as ') ? _table.split(' as ')[1].trim() : _table;
 }
 
+export function getTargetColumnName(column: string) {
+  if (column.includes(' as ')) return column.split(' as ')[1].trim();
+  if (column.includes('.')) return column.split('.')[1].trim();
+  return column;
+}
+
 // export function formatValue(value) {
 //   if (typeof value !== 'object' || value instanceof Date) return value;
 //   // date
@@ -29,10 +35,4 @@ export function getTableOrTableAlias(table: string) {
 //   const arr = typeof value.val === 'string' ? value.val.split(',') : value.val;
 //   if (arr.length === 0) return null;
 //   return arr;
-// }
-
-// export function getTargetColumnName(column: string) {
-//   if (column.includes(' as ')) return column.split(' as ')[1].trim();
-//   if (column.includes('.')) return column.split('.')[1].trim();
-//   return column;
 // }
