@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 
-import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsNormal } from '../types/modelWhere.ts';
+import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
 import { Op, OpJointValues, OpNormalValues, OpValues } from '../types/modelWhere.ts';
 import { formatValue, isRaw } from './utils.ts';
@@ -9,10 +9,10 @@ export function buildWhere<TRecord>(builder: Knex.QueryBuilder, wheres: TypeMode
   _buildWhereInner(builder, wheres);
 }
 
-function _buildWhereInner<TRecord, Column extends keyof TRecord>(
+function _buildWhereInner<TRecord>(
   builder: Knex.QueryBuilder,
   wheres: TypeModelWhere<TRecord>,
-  column?: Column,
+  column?: keyof TRecord,
 ) {
   // skip
   if (wheres === Op.skip) {
@@ -38,16 +38,24 @@ function _buildWhereInner<TRecord, Column extends keyof TRecord>(
       }
     } else if (OpJointValues.includes(key as any)) {
       // op: joint
+      _buildWhereOpJoint(builder, column as never, value, key as any);
     } else {
       // ignored, not throw error
     }
   }
 }
 
-function _buildWhereColumn<TRecord, Column extends keyof TRecord>(
+function _buildWhereOpJoint<TRecord>(
   builder: Knex.QueryBuilder,
-  column: Column,
-  value: TypeModelColumnValue<TRecord, TRecord[Column]> | TypeModelWhereFieldAll<TRecord, TRecord[Column]>,
+  column: keyof TRecord,
+  wheres: TypeModelWhere<TRecord>,
+  op: TypeOpsJoint,
+) {}
+
+function _buildWhereColumn<TRecord>(
+  builder: Knex.QueryBuilder,
+  column: keyof TRecord,
+  value: TypeModelColumnValue<TRecord, TRecord[keyof TRecord]> | TypeModelWhereFieldAll<TRecord, TRecord[keyof TRecord]>,
   op: TypeOpsNormal,
 ) {
   // skip
@@ -56,7 +64,7 @@ function _buildWhereColumn<TRecord, Column extends keyof TRecord>(
   }
   // raw
   if (isRaw(value)) {
-    builder.where(column, '=', value as Knex.Raw);
+    _buildWhereColumnOpNormal(builder, column, value, op);
     return;
   }
   // null/undefined
@@ -71,7 +79,7 @@ function _buildWhereColumn<TRecord, Column extends keyof TRecord>(
   }
   // date
   if (value instanceof Date) {
-    builder.where(column, '=', value);
+    _buildWhereColumnOpNormal(builder, column, value, op);
     return;
   }
   // object
@@ -82,12 +90,12 @@ function _buildWhereColumn<TRecord, Column extends keyof TRecord>(
     return;
   }
   // column
-  builder.where(column, '=', value as any);
+  _buildWhereColumnOpNormal(builder, column, value, op);
 }
 
-function _buildWhereColumnOp<TRecord, Column extends keyof TRecord>(
+function _buildWhereColumnOpNormal<TRecord>(
   builder: Knex.QueryBuilder,
-  column: Column,
+  column: keyof TRecord,
   value: any,
   op: TypeOpsNormal,
 ) {
