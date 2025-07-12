@@ -3,7 +3,7 @@ import type { Knex } from 'knex';
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
 import { Op, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
-import { formatValue, isRaw } from './utils.ts';
+import { isRaw } from './utils.ts';
 
 export function buildWhere<TRecord>(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
   _buildWhereInner(builder, wheres);
@@ -206,65 +206,65 @@ function _buildWhereColumnOpNormal<TRecord>(
 //   }
 // }
 
-function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
-  // op
-  let op = value.op || '='; // default is =
-  op = op.includes('like') ? 'like' : op;
-  // op: null/notNull
-  if (op === 'null') {
-    return builder.whereNull(key);
-  }
-  if (op === 'notNull') {
-    return builder.whereNotNull(key);
-  }
-  // value
-  const _value = formatValue(value);
-  // op: like
-  if (op === 'like') {
-    return builder.whereILike(key, _value);
-  }
-  // op: in
-  if (op === 'in') {
-    return builder.whereIn(key, _value);
-  }
-  // op: notIn
-  if (op === 'notIn') {
-    return builder.whereNotIn(key, _value);
-  }
-  // others
-  builder.where(key, _safeOp(op), _value);
-}
+// function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
+//   // op
+//   let op = value.op || '='; // default is =
+//   op = op.includes('like') ? 'like' : op;
+//   // op: null/notNull
+//   if (op === 'null') {
+//     return builder.whereNull(key);
+//   }
+//   if (op === 'notNull') {
+//     return builder.whereNotNull(key);
+//   }
+//   // value
+//   const _value = formatValue(value);
+//   // op: like
+//   if (op === 'like') {
+//     return builder.whereILike(key, _value);
+//   }
+//   // op: in
+//   if (op === 'in') {
+//     return builder.whereIn(key, _value);
+//   }
+//   // op: notIn
+//   if (op === 'notIn') {
+//     return builder.whereNotIn(key, _value);
+//   }
+//   // others
+//   builder.where(key, _safeOp(op), _value);
+// }
 
-function _formatOrAnd(builder: Knex.QueryBuilder, wheres, orAnd) {
-  // or
-  if (orAnd === 'OR') {
-    return _formatOrAnd_or(builder, wheres);
-  }
-  // and
-  return _formatOrAnd_and(builder, wheres);
-}
+// function _formatOrAnd(builder: Knex.QueryBuilder, wheres, orAnd) {
+//   // or
+//   if (orAnd === 'OR') {
+//     return _formatOrAnd_or(builder, wheres);
+//   }
+//   // and
+//   return _formatOrAnd_and(builder, wheres);
+// }
 
-function _formatOrAnd_or(builder: Knex.QueryBuilder, wheres) {
-  builder.where(builder => {
-    for (const where of wheres) {
-      builder.orWhere(builder => {
-        buildWhere(builder, where);
-      });
-    }
-  });
-}
+// function _formatOrAnd_or(builder: Knex.QueryBuilder, wheres) {
+//   builder.where(builder => {
+//     for (const where of wheres) {
+//       builder.orWhere(builder => {
+//         buildWhere(builder, where);
+//       });
+//     }
+//   });
+// }
 
-function _formatOrAnd_and(builder: Knex.QueryBuilder, wheres) {
-  builder.where(builder => {
-    for (const where of wheres) {
-      builder.andWhere(builder => {
-        buildWhere(builder, where);
-      });
-    }
-  });
-}
+// function _formatOrAnd_and(builder: Knex.QueryBuilder, wheres) {
+//   builder.where(builder => {
+//     for (const where of wheres) {
+//       builder.andWhere(builder => {
+//         buildWhere(builder, where);
+//       });
+//     }
+//   });
+// }
 
-function _safeOp(op) {
-  if (op === 'notIn') return 'not in';
-  return op.replace(/[\\.*#%'"`;, ]/g, '');
-}
+// function _safeOp(op) {
+//   if (op === 'notIn') return 'not in';
+//   return op.replace(/[\\.*#%'"`;, ]/g, '');
+// }
