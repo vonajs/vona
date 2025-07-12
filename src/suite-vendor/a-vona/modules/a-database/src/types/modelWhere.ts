@@ -1,14 +1,23 @@
 import type { TypeRecordValues } from 'vona';
 
-export const Op = {
-  skip: '_skip_',
+export const OpJoint = {
   and: '_and_',
   or: '_or_',
   not: '_not_',
   exists: '_exists_',
   notExists: '_notExists_',
+} as const;
+export const OpNormal = {
   eq: '_eq_',
 } as const;
+export const Op = {
+  skip: '_skip_',
+  ...OpJoint,
+  ...OpNormal,
+} as const;
+export const OpJointValues = Object.values(OpJoint);
+export const OpNormalValues = Object.values(OpNormal);
+export const OpValues = Object.values(Op);
 
 export type TypeOpsJointPostfix<Op> = {
   [KEY in keyof Op]: Op[KEY] | (KEY extends string ? `_${KEY}_${number}` : never)
@@ -31,17 +40,17 @@ export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> 
 export type TypeModelWhereInner<TRecord> = {
   [prop in keyof TRecord]?: TypeModelColumnValue<TRecord, TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
 } & {
-  [key in TypeOpsJoint]?: TypeModelWhereInner<TRecord>
+  [key in TypeOpsJoint]?: TypeModelWhereInner<TRecord>;
 };
 
 export type TypeModelWhereFieldAll<TRecord, Column> = {
-  [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>
+  [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>;
 } & {
-  [key in TypeOpsNormal]?: TypeModelColumnValue<TRecord, Column>
+  [key in TypeOpsNormal]?: TypeModelColumnValue<TRecord, Column>;
 };
 
 export type TypeModelWhereFieldJoint<TRecord, Column> = {
-  [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>
+  [key in TypeOpsJoint]?: TypeModelWhereFieldAll<TRecord, Column>;
 };
 
 export type TypeModelColumn<TRecord> = keyof TRecord | '*';
