@@ -9,6 +9,7 @@ export const OpJoint = {
 } as const;
 export const OpNormal = {
   eq: '_eq_',
+  gt: '_gt_',
 } as const;
 export const Op = {
   skip: '_skip_',
@@ -25,8 +26,8 @@ export type TypeOpsJointPostfix<Op> = {
 
 // not use TypeOpsJointPostfix, which cause type not take affect for table.field
 // export type TypeOpsJoint = TypeRecordValues<TypeOpsJointPostfix<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>>;
-export type TypeOpsJoint = TypeRecordValues<Pick<typeof Op, 'and' | 'or' | 'not' | 'exists' | 'notExists'>>;
-export type TypeOpsNormal = TypeRecordValues<Pick<typeof Op, 'eq'>>;
+export type TypeOpsJoint = TypeRecordValues<typeof OpJoint>;
+export type TypeOpsNormal = TypeRecordValues<typeof OpNormal>;
 export type TypeOpsAll = TypeRecordValues<typeof Op>;
 
 // not use Knex.Raw

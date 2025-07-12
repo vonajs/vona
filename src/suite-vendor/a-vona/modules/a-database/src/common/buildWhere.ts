@@ -148,6 +148,8 @@ function _buildWhereColumnOpNormal<TRecord>(
 ) {
   if (op === '_eq_') {
     builder.where(column, '=', value);
+  } else if (op === '_gt_') {
+    builder.where(column, '>', value);
   }
 }
 

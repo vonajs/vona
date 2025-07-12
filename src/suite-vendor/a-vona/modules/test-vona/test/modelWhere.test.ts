@@ -13,6 +13,11 @@ describe.only('modelWhere.test.ts', () => {
       scopeTest.model.post.buildWhere(builder, { id: 1 });
       let sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" = 1');
+      // op: normal: joint
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, { id: { _or_: { _eq_: 3, _gt_: 4 } } });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where ((("id" = 3) or ("id" > 4)))');
       // op: and
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -60,6 +65,15 @@ describe.only('modelWhere.test.ts', () => {
       });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")');
+      // op: notExists
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, {
+        _notExists_: function (this: Knex.QueryBuilder) {
+          this.select('id').from('testVonaUser').where({ 'testVonaUser.id': app.bean.model.ref('userId') });
+        } as any,
+      });
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where not exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")');
       ///////
       await builder;
       console.log(sql);
