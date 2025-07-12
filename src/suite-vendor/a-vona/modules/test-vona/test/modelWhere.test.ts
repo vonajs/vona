@@ -1,6 +1,6 @@
+import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { Op } from 'vona-module-a-database';
 
 describe('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
@@ -10,8 +10,7 @@ describe('modelWhere.test.ts', () => {
       const builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, { id: 1 });
       const sql = builder.toQuery();
-      console.log('-----------------');
-      console.log(sql);
+      assert.equal(sql, 'select * from "testVonaPost" where "id" = 1');
     });
   });
 });
