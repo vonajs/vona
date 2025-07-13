@@ -1,4 +1,3 @@
-import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { ServiceDb } from '../../service/db.ts';
 import type {
   EntityBase,
@@ -13,40 +12,17 @@ import type {
   TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
-import { cast, deepExtend } from 'vona';
+import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
-const SymbolCacheOptions = Symbol('SymbolCacheOptions');
-const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
-
 export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
-  private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
   public cacheEntity: ServiceCacheEntity;
 
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
     super.__init__(clientNameSelector);
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
-  }
-
-  private __getCacheName(table: keyof ITableRecord) {
-    const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this.db.clientName);
-    return `${this.$beanFullName}:${clientNameReal}:${table}`;
-  }
-
-  private get __cacheOptions() {
-    if (this[SymbolCacheOptions] === undefined) {
-      this[SymbolCacheOptions] = this.__cacheOptionsInner();
-    }
-    return this[SymbolCacheOptions];
-  }
-
-  private get __cacheEnabled() {
-    if (this[SymbolCacheEnabled] === undefined) {
-      this[SymbolCacheEnabled] = this.__cacheEnabledInner();
-    }
-    return this[SymbolCacheEnabled];
   }
 
   private get __cacheKeyAux() {
@@ -323,44 +299,5 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {
     const cache = this.__getCacheInstance(table);
     await cache.del(cacheKey);
-  }
-
-  private __getCacheInstance(table: keyof ITableRecord) {
-    if (this.__cacheOptions === false) throw new Error('cache disabled');
-    return this.app.bean.summer.cache<any, any>(this.__getCacheName(table), this.__cacheOptions);
-  }
-
-  private __cacheOptionsInner() {
-    if (this.options.cacheOptions === false) return false;
-    // options
-    let _cacheOptions = this.options.cacheOptions ?? {};
-    // preset
-    let configPreset;
-    let preset = _cacheOptions.preset;
-    if (!preset && !_cacheOptions.mode) preset = this.scopeDatabase.config.summer.presetDefault;
-    if (preset) {
-      configPreset = this.scopeDatabase.config.summer.preset[preset];
-    }
-    // extend
-    _cacheOptions = deepExtend(
-      {
-        enable: this.scopeDatabase.config.summer.enable,
-        meta: this.scopeDatabase.config.summer.meta,
-        redis: { client: this.scopeDatabase.config.summer.redis.client },
-      },
-      configPreset,
-      _cacheOptions,
-      { preset: undefined },
-    );
-    // ok
-    return _cacheOptions;
-  }
-
-  private __cacheEnabledInner() {
-    if (this.__cacheOptions === false) return false;
-    // enable
-    if (!this.bean.onion.checkOnionOptionsEnabled(this.__cacheOptions)) return false;
-    // default
-    return true;
   }
 }

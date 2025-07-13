@@ -30,7 +30,6 @@ export interface IDecoratorModelOptions {
     query?: IDecoratorSummerCacheOptions | false;
     entity?: IDecoratorSummerCacheOptions | false;
   };
-  cacheOptions?: IDecoratorSummerCacheOptions | false;
   cacheKeyAux?: string;
   cacheNotKey?: boolean;
   clientName?: keyof IDatabaseClientRecord;

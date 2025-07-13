@@ -29,7 +29,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return cast<BeanModel>(this);
   }
 
-  protected get db() {
+  public get db() {
     return this[SymbolModelDb] ?? this.bean.database.current;
   }
 
