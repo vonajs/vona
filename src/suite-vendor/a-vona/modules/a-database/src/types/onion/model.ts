@@ -10,11 +10,7 @@ export interface IModelRecord {}
 export interface IModelClassRecord {}
 
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
-  (
-    ctx: VonaContext,
-    defaultTable: keyof ITableRecord,
-    modelInstance: BeanModelMeta<T>,
-  ) => string;
+  (ctx: VonaContext, defaultTable: keyof ITableRecord, modelInstance: BeanModelMeta<T>) => string;
 
 export interface IDecoratorModelOptions {
   entity?: Constructable<EntityBaseEmpty>;
