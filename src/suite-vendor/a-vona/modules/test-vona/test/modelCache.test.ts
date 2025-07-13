@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('modelCache.test.ts', () => {
+describe('modelCache.test.ts', () => {
   it('action:modelCache:cacheQuery', async () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelCache:cacheQuery';
