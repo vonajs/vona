@@ -33,10 +33,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.options.cacheKeyAux;
   }
 
-  private get __cacheNotKey() {
-    return this.options.cacheNotKey !== false;
-  }
-
   async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
     // table
     const table = this.getTable('insert', [data], options);
@@ -97,13 +93,17 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
   ): Promise<TRecord[]> {
-    const items = await this.__select_raw(params, options);
+    const items = await this.__select_raw(undefined, params, options);
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
   }
 
-  private async __select_raw(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+  private async __select_raw(
+    table: keyof ITableRecord | undefined,
+    params?: IModelSelectParams<TRecord>,
+    options?: IModelMethodOptions,
+  ): Promise<TRecord[]> {
     // table
-    const table = this.getTable('select', [params], options);
+    table = table || this.getTable('select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
@@ -156,16 +156,21 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!this.cacheEntity.enabled) {
       return await super._get(table, where, options);
     }
-    if (cast(where).id && typeof cast(where).id === 'object') {
-      // for example: id: { op: '<', val: flowNodeId },
-      return await super._get(table, where, options);
-    }
     if (!this.__checkCacheKeyValid(where)) {
       // not key
-      if (this.__cacheNotKey) {
-        return this.__filterGetColumns(await this.__get_notkey(table, where, options), options?.columns);
+      if (!this.cacheQuery.enabled) {
+        return await super._get(table, where, options);
       }
-      return await super._get(table, where, options);
+      // by cache query
+      // params
+      const params: IModelSelectParams<TRecord> = { where };
+      if (options?.columns) {
+        params.columns = options?.columns;
+      }
+      // select
+      const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
+      const items = await this.__select_raw(table, params, options2);
+      return items[0];
     }
     // key
     return this.__filterGetColumns(await this.__get_key(table, where, options), options?.columns);
@@ -189,7 +194,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     } else {
       const where = cast(data).id !== undefined ? Object.assign({}, options?.where, { id: cast(data).id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const items = await this.__select_raw({ where, columns: ['id' as any] }, options);
+      const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -216,7 +221,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return await super._delete(table, where, options);
     }
     // check where and get id
-    const items = await this.__select_raw({ where, columns: ['id' as any] }, options);
+    const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
     if (items.length === 0) {
       // donothing
       return;
