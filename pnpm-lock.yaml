@@ -236,9 +236,6 @@ importers:
       vona-module-a-worker:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-worker
-      vona-module-cabloy-socket:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/cabloy-socket
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
@@ -316,7 +313,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.36
+        specifier: ^6.0.37
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -982,9 +979,6 @@ importers:
       vona-module-a-status:
         specifier: workspace:^
         version: link:modules/a-status
-      vona-module-cabloy-socket:
-        specifier: workspace:^
-        version: link:modules/cabloy-socket
 
   src/suite-vendor/a-cabloy/modules/a-authgithub:
     dependencies:
@@ -1040,6 +1034,9 @@ importers:
 
   src/suite-vendor/a-cabloy/modules/a-socket:
     dependencies:
+      '@cabloy/socket':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/socket
       '@types/ws':
         specifier: ^8.18.0
         version: 8.18.1
@@ -1089,19 +1086,6 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-cabloy/modules/a-status:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/suite-vendor/a-cabloy/modules/cabloy-socket:
-    dependencies:
-      '@cabloy/socket':
-        specifier: workspace:^
-        version: link:../../../../../packages-utils/socket
     devDependencies:
       clean-package:
         specifier: ^2.2.0
