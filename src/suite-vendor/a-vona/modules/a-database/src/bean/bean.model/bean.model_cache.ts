@@ -5,6 +5,7 @@ import type {
   IModelClassRecord,
   IModelGetOptions,
   IModelMethodOptions,
+  IModelMethodOptionsGeneral,
   IModelSelectParams,
   IModelUpdateOptions,
   ITableRecord,
@@ -34,6 +35,28 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private get __cacheNotKey() {
     return this.options.cacheNotKey !== false;
+  }
+
+  async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
+    // table
+    const table = this.getTable('insert', [data], options);
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    // insert
+    const res = await this._batchInsert(table, data, options) as Promise<TRecord>;
+    // clear cache
+    await this.cacheQuery.clear(table);
+    return res;
+  }
+
+  async batchInsert(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+    // table
+    const table = this.getTable('batchInsert', [data], options);
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    // insert
+    const res = await this._batchInsert(table, data, options) as Promise<TRecord[]>;
+    // clear cache
+    await this.cacheQuery.clear(table);
+    return res;
   }
 
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<TRecord[]> {
