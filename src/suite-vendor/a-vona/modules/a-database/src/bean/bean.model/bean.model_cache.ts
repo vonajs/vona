@@ -15,13 +15,16 @@ import type {
 import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity.ts';
+import { ServiceCacheQuery } from '../../service/cacheQuery.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
 export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
+  public cacheQuery: ServiceCacheQuery;
   public cacheEntity: ServiceCacheEntity;
 
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
     super.__init__(clientNameSelector);
+    this.cacheQuery = this.bean._newBean(ServiceCacheQuery, this);
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
   }
 
@@ -81,12 +84,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
-      return await super._select(table, params, options);
+      return await this.__select_cache(table, params, options);
     }
     // 1: select id
     const columnId = `${table}.id`;
     const params2: IModelSelectParams<TRecord> = Object.assign({}, params, { columns: [columnId] });
-    const items = await super._select(table, params2, options);
+    const items = await this.__select_cache(table, params2, options);
     if (items.length === 0) {
       // donothing
       return [] as TRecord[];
@@ -95,6 +98,26 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const ids = items.map(item => cast(item).id);
     const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
     return await this.__mget_raw(ids, options2);
+  }
+
+  private async __select_cache(table: keyof ITableRecord, params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+    // check if cache
+    if (!this.cacheQuery.enabled) {
+      return await super._select(table, params, options);
+    }
+    // builder
+    const builder = this._select_buildParams(table, params, options);
+    const sql = builder.toQuery();
+    const key = { sql };
+    // cache
+    const cache = this.cacheQuery.getInstance(table);
+    const items = await cache.get(key, {
+      get: async () => {
+        return await super._select(table, params, options);
+      },
+      db: this.db,
+    });
+    return items;
   }
 
   async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<TRecord | undefined> {

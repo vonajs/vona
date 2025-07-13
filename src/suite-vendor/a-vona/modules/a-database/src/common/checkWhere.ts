@@ -1,10 +1,10 @@
-export function checkWhere(where) {
-  if (where === true || where === false) return where;
-  if (where === undefined || where === null) {
-    return true;
-  }
-  return where;
-}
+// export function checkWhere(where) {
+//   if (where === true || where === false) return where;
+//   if (where === undefined || where === null) {
+//     return true;
+//   }
+//   return where;
+// }
 
 // import { formatValueArray, isRaw } from './utils.ts';
 

@@ -1,3 +1,4 @@
+import type { BigNumber } from 'bignumber.js';
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -9,7 +10,6 @@ import type {
   TypeModelWhere,
 } from '../../types/index.ts';
 import { isNil } from '@cabloy/utils';
-import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { BeanModelView } from './bean.model_view.ts';
 
@@ -64,6 +64,14 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // table
     table = table || this.getTable('_select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    // builder
+    const builder = this._select_buildParams(table, params, options);
+    // ready
+    this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
+    return (await builder) as TRecord[];
+  }
+
+  protected _select_buildParams<T extends IModelSelectParams<TRecord>>(table: keyof ITableRecord, params?: T, options?: IModelMethodOptionsGeneral) {
     // params
     const params2 = params || {} as IModelSelectParams<TRecord>;
     // builder
@@ -75,19 +83,15 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // joins
     this.buildJoins(builder, params2.joins);
     // where
-    const wheres = this.prepareWhere(builder, table, params2.where, options);
-    if (wheres === false) {
-      return [] as TRecord[];
-    }
+    this.prepareWhere(builder, table, params2.where, options);
     // orders
     this.buildOrders(builder, params2.orders);
     // limit
     this.buildLimit(builder, params2.limit);
     // offset
     this.buildOffset(builder, params2.offset);
-    // ready
-    this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
-    return (await builder) as TRecord[];
+    // ok
+    return builder;
   }
 
   protected async _get(
@@ -123,10 +127,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // joins
     this.buildJoins(builder, params.joins);
     // where
-    const wheres = this.prepareWhere(builder, table, params.where, options);
-    if (wheres === false) {
-      return BigNumber(0);
-    }
+    this.prepareWhere(builder, table, params.where, options);
     // ready
     this.$loggerChild('model').debug('model.count: %s', builder.toQuery());
     const res = await builder;
@@ -202,11 +203,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // update
     builder.update(data as any);
     // where
-    const wheres = this.prepareWhere(builder, table, where, options);
-    if (wheres === false) {
-      // do nothing
-      return;
-    }
+    this.prepareWhere(builder, table, where, options);
     // debug
     this.$loggerChild('model').debug('model.update: %s', builder.toQuery());
     // ready
@@ -231,11 +228,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // delete
     builder.delete();
     // where
-    const wheres = this.prepareWhere(builder, table, where, options);
-    if (wheres === false) {
-      // do nothing
-      return;
-    }
+    this.prepareWhere(builder, table, where, options);
     // debug
     this.$loggerChild('model').debug('model.delete: %s', builder.toQuery());
     // ready

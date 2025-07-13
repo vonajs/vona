@@ -3,7 +3,6 @@ import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectPa
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
-import { checkWhere } from '../../common/checkWhere.ts';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
@@ -72,11 +71,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return this.raw(parts.map(_ => '??').join(','), parts);
   }
 
-  checkWhere(where: TypeModelWhere<TRecord>) {
-    return checkWhere(where);
-  }
+  // checkWhere(where: TypeModelWhere<TRecord>) {
+  //   return checkWhere(where);
+  // }
 
-  buildWhere(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
+  buildWhere(builder: Knex.QueryBuilder, wheres?: TypeModelWhere<TRecord>) {
+    if (!wheres) return;
     return buildWhere(this.connection, builder, wheres);
   }
 
@@ -143,7 +143,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     this.buildOffset(builder, page.index);
   }
 
-  prepareWhere(builder: Knex.QueryBuilder, table?: keyof ITableRecord, where?, options?: IModelMethodOptionsGeneral) {
+  prepareWhere(builder: Knex.QueryBuilder, table?: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral) {
     // table
     table = table || this.getTable('prepareWhere', [builder, where], options);
     if (!table) throw new Error('should specify the table name');
@@ -151,13 +151,8 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     const disableWhere = {};
     this._prepareWhereByOptions(table, disableWhere, options);
     builder.where(disableWhere);
-    // check
-    const wheres = this.checkWhere(where);
-    if (wheres === false || wheres === true) {
-      return wheres;
-    }
     // build
-    this.buildWhere(builder, wheres);
+    this.buildWhere(builder, where);
   }
 
   extractCount(result: Array<object> | object, columnName?: string): BigNumber {
