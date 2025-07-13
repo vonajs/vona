@@ -9,17 +9,28 @@ describe.only('modelCache.test.ts', () => {
       // scope
       const scopeTest = app.bean.scope('test-vona');
       // create
-      const _user = await scopeTest.model.user.insert({ name: `${prefix}:1` });
+      const user = await scopeTest.model.user.insert({ name: `${prefix}:1` });
       // select
       let items = await scopeTest.model.user.select({ where: { name: `${prefix}:1` } });
       assert.equal(items.length, 1);
       // select again
       items = await scopeTest.model.user.select({ where: { name: `${prefix}:1` } });
       assert.equal(items.length, 1);
-      // delete
-      await scopeTest.model.user.delete({ name: `${prefix}:1` });
+      // get
+      const user2 = await scopeTest.model.user.get({ id: user.id });
+      const user3 = await scopeTest.model.user.get({ name: `${prefix}:1` });
+      const user4 = await scopeTest.model.user.get({ name: `${prefix}:1` });
+      assert.equal(user2?.id, user3?.id);
+      assert.equal(user3?.id, user4?.id);
+      // update
+      await scopeTest.model.user.update({ id: user.id, name: `${prefix}:2` });
       // select
-      items = await scopeTest.model.user.select({ where: { name: `${prefix}:1` } });
+      items = await scopeTest.model.user.select({ where: { name: `${prefix}:2` } });
+      assert.equal(items.length, 1);
+      // delete
+      await scopeTest.model.user.delete({ name: `${prefix}:2` });
+      // select
+      items = await scopeTest.model.user.select({ where: { name: `${prefix}:2` } });
       assert.equal(items.length, 0);
     });
   });
