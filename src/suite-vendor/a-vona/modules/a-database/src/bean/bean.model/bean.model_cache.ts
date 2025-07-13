@@ -35,7 +35,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
     // table
-    const table = this.getTable('insert', [data], options);
+    const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // insert
     const res = await this._batchInsert(table, data, options) as Promise<TRecord>;
@@ -46,7 +46,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async batchInsert(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
     // table
-    const table = this.getTable('batchInsert', [data], options);
+    const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // insert
     const res = await this._batchInsert(table, data, options) as Promise<TRecord[]>;
@@ -182,7 +182,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void> {
     // table
-    const table = this.getTable('update', [data], options);
+    const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
@@ -218,7 +218,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void> {
     // table
-    const table = this.getTable('delete', [where], options);
+    const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
