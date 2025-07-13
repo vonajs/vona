@@ -26,6 +26,10 @@ export interface IDecoratorModelOptions {
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
+  cache?: {
+    query?: IDecoratorSummerCacheOptions | false;
+    entity?: IDecoratorSummerCacheOptions | false;
+  };
   cacheOptions?: IDecoratorSummerCacheOptions | false;
   cacheKeyAux?: string;
   cacheNotKey?: boolean;
