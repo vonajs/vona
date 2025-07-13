@@ -284,7 +284,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (this.__cacheKeyAux) {
       keys = keys.filter(item => item !== this.__cacheKeyAux);
     }
-    return keys.length === 1 && keys[0] === 'id';
+    return keys.length === 1 && keys[0] === 'id' && (['number', 'string', 'bigint'].includes(typeof where.id));
   }
 
   private __checkCacheNotKeyDataValid(where, data) {
