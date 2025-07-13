@@ -135,6 +135,26 @@ class ServiceStudent {
 }
 ```
 
+### 3. 原生Sql
+
+可以直接执行原生 Sql 语句
+
+``` typescript
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    return await this.scope.model.student.query('select * from demoStudent');
+  }
+}
+```
+
+``` typescript
+class ServiceStudent {
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
+    return await this.scope.model.student.queryOne('select * from demoStudent where id=?', [id]);
+  }
+}
+```
+
 ## Model Options
 
 |名称|说明|

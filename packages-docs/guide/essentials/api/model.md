@@ -135,6 +135,26 @@ class ServiceStudent {
 }
 ```
 
+### 3. Raw Sql
+
+Raw Sql statements can be executed directly
+
+``` typescript
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    return await this.scope.model.student.query('select * from demoStudent');
+  }
+}
+```
+
+``` typescript
+class ServiceStudent {
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
+    return await this.scope.model.student.queryOne('select * from demoStudent where id=?', [id]);
+  }
+}
+```
+
 ## Model Options
 
 |Name|Description|
