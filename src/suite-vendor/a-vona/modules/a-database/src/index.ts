@@ -1,3 +1,5 @@
+import 'bignumber.js';
+
 export * from './.metadata/index.ts';
 export * from './bean/bean.model/bean.model_meta.ts';
 export * from './common/index.ts';
