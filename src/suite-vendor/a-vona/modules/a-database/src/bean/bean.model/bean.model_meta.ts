@@ -49,12 +49,12 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
-  getTable(method?: string, methodParams?: any[], methodOptions?: IModelMethodOptionsGeneral): keyof ITableRecord {
+  getTable(): keyof ITableRecord {
     const table = this.options.table;
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
     if (table && typeof table === 'function') {
-      return table(this.ctx, defaultTable!, this, method, methodParams, methodOptions) as any;
+      return table(this.ctx, defaultTable!, this) as any;
     }
     if (defaultTable) return defaultTable;
     throw new Error(`not found table of ${this.$beanFullName}`);

@@ -56,13 +56,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<TRecord[]> {
-    const items = await this.__mget_raw(ids, options);
+    const items = await this.__mget_raw(undefined, ids, options);
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
   }
 
-  private async __mget_raw(ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
+  private async __mget_raw(table: keyof ITableRecord | undefined, ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
     // table
-    const table = this.getTable('mget', [ids], options);
+    table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
@@ -103,7 +103,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
   ): Promise<TRecord[]> {
     // table
-    table = table || this.getTable('select', [params], options);
+    table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
@@ -120,7 +120,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // 2: mget
     const ids = items.map(item => cast(item).id);
     const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
-    return await this.__mget_raw(ids, options2);
+    return await this.__mget_raw(table, ids, options2);
   }
 
   private async __select_cache(table: keyof ITableRecord, params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
@@ -144,13 +144,17 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<TRecord | undefined> {
-    const item: TRecord | undefined = await this.__get_raw(where, options);
+    const item: TRecord | undefined = await this.__get_raw(undefined, where, options);
     return await this.$scope.database.service.relations.handleRelationsOne(item, this, options as any, options);
   }
 
-  private async __get_raw(where: TypeModelWhere<TRecord>, options?: IModelGetOptions<TRecord>): Promise<TRecord | undefined> {
+  private async __get_raw(
+    table: keyof ITableRecord | undefined,
+    where: TypeModelWhere<TRecord>,
+    options?: IModelGetOptions<TRecord>,
+  ): Promise<TRecord | undefined> {
     // table
-    const table = this.getTable('get', [where], options);
+    table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.cacheEntity.enabled) {
