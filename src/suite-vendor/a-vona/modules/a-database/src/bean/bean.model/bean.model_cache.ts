@@ -47,7 +47,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return (await super._mget(table, ids, options)) as TRecord[];
     }
     // cache
-    const cache = this.__getCacheInstance(table);
+    const cache = this.cacheEntity.getInstance(table);
     let items = await cache.mget(ids, {
       mget: async ids => {
         return await super._mget_original(table, ids, { disableDeleted: true });
@@ -80,7 +80,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable('select', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheEnabled) {
+    if (!this.cacheEntity.enabled) {
       return await super._select(table, params, options);
     }
     // 1: select id
@@ -107,7 +107,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable('get', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheEnabled) {
+    if (!this.cacheEntity.enabled) {
       return await super._get(table, where, options);
     }
     if (cast(where).id && typeof cast(where).id === 'object') {
@@ -130,7 +130,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable('update', [data], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheEnabled) {
+    if (!this.cacheEntity.enabled) {
       return await super._update(table, data, options);
     }
     // check where and get id
@@ -166,7 +166,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable('delete', [where], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheEnabled) {
+    if (!this.cacheEntity.enabled) {
       return await super._delete(table, where, options);
     }
     // check where and get id
@@ -193,7 +193,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
-    const cache = this.__getCacheInstance(table);
+    const cache = this.cacheEntity.getInstance(table);
     const cacheKey = { where, options };
     const data = await cache.get(cacheKey, {
       get: async () => {
@@ -221,7 +221,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
-    const cache = this.__getCacheInstance(table);
+    const cache = this.cacheEntity.getInstance(table);
     const item: TRecord | null | undefined = await cache.get(cast(where).id, {
       get: async () => {
         // where: maybe contain aux key
@@ -281,17 +281,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return true;
   }
 
-  private async __deleteCache_key(id: TableIdentity | TableIdentity[], table: keyof ITableRecord) {
-    const cache = this.__getCacheInstance(table);
-    if (Array.isArray(id)) {
-      await cache.mdel(id);
-    } else {
-      await cache.del(id);
-    }
+  private async __deleteCache_key(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
+    await this.cacheEntity.del(id,table);
   }
 
   private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {
-    const cache = this.__getCacheInstance(table);
+    const cache = this.cacheEntity.getInstance(table);
     await cache.del(cacheKey);
   }
 }

@@ -3,6 +3,7 @@ import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import type { TableIdentity } from '../types/tableIdentity.ts';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
@@ -46,8 +47,20 @@ export class ServiceCacheEntity extends BeanBase {
 
   public async clear(table?: keyof ITableRecord) {
     if (!this.enabled) return;
-    table = table || this._model.getTable('clearCache', [], undefined);
-    await this.getInstance(table).clear();
+    table = table || this._model.getTable('cacheEntityClear', [], undefined);
+    const cache = this.getInstance(table);
+    await cache.clear();
+  }
+
+  public async del(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
+    if (!this.enabled) return;
+    table = table || this._model.getTable('cacheEntityDel', [id], undefined);
+    const cache = this.getInstance(table);
+    if (Array.isArray(id)) {
+      await cache.mdel(id);
+    } else {
+      await cache.del(id);
+    }
   }
 
   private _getCacheEnabledInner() {
