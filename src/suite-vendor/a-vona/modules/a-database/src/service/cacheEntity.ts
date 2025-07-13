@@ -27,4 +27,8 @@ export class ServiceCacheEntity extends ModelCacheBase {
       await cache.del(id);
     }
   }
+
+  public get keyAux() {
+    return this._model.options.cache?.keyAux;
+  }
 }

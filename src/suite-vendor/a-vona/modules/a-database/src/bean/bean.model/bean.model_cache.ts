@@ -29,10 +29,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
   }
 
-  private get __cacheKeyAux() {
-    return this.options.cacheKeyAux;
-  }
-
   async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
     // table
     const table = this.getTable();
@@ -285,8 +281,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private __checkCacheKeyValid(where) {
     let keys = Object.keys(where);
-    if (this.__cacheKeyAux) {
-      keys = keys.filter(item => item !== this.__cacheKeyAux);
+    if (this.cacheEntity.keyAux) {
+      keys = keys.filter(item => item !== this.cacheEntity.keyAux);
     }
     return keys.length === 1 && keys[0] === 'id' && (['number', 'string', 'bigint'].includes(typeof where.id));
   }

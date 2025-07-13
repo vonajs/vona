@@ -21,8 +21,8 @@ export interface IDecoratorModelOptions {
   cache?: {
     query?: IDecoratorSummerCacheOptions | false;
     entity?: IDecoratorSummerCacheOptions | false;
+    keyAux?: string;
   };
-  cacheKeyAux?: string;
   clientName?: keyof IDatabaseClientRecord;
   // should not use TypeModelRelations or {}
   relations?: Record<never, never>;
