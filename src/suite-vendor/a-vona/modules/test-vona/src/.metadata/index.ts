@@ -314,6 +314,41 @@ export interface ModelUser {
       select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
       count<T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
+  export interface IModelOptionsPost {
+      cache?: {
+        keyAux?: keyof EntityPost;
+      };
+    }
+export interface IModelOptionsPostContent {
+      cache?: {
+        keyAux?: keyof EntityPostContent;
+      };
+    }
+export interface IModelOptionsRole {
+      cache?: {
+        keyAux?: keyof EntityRole;
+      };
+    }
+export interface IModelOptionsRoleUser {
+      cache?: {
+        keyAux?: keyof EntityRoleUser;
+      };
+    }
+export interface IModelOptionsTest {
+      cache?: {
+        keyAux?: keyof EntityTest;
+      };
+    }
+export interface IModelOptionsTestDynamicTable {
+      cache?: {
+        keyAux?: keyof EntityTest;
+      };
+    }
+export interface IModelOptionsUser {
+      cache?: {
+        keyAux?: keyof EntityUser;
+      };
+    }
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {
