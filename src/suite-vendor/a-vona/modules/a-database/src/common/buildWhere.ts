@@ -1,15 +1,15 @@
 import type { Knex } from 'knex';
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
-import { useApp } from 'vona';
 import { Op, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw } from './utils.ts';
 
-export function buildWhere<TRecord>(builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
-  _buildWhereInner(builder, wheres);
+export function buildWhere<TRecord>(knex: Knex, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
+  _buildWhereInner(knex, builder, wheres);
 }
 
 function _buildWhereInner<TRecord>(
+  knex: Knex,
   builder: Knex.QueryBuilder,
   wheres: TypeModelWhere<TRecord>,
   column?: keyof TRecord,
@@ -28,11 +28,11 @@ function _buildWhereInner<TRecord>(
     const value = wheres[key];
     if (key[0] !== '_') {
       // columns
-      _buildWhereColumn(builder, key, value);
+      _buildWhereColumn(knex, builder, key, value);
     } else if (OpNormalValues.includes(key as any)) {
       // op: normal
       if (column) {
-        _buildWhereColumn(builder, column, value, key as any);
+        _buildWhereColumn(knex, builder, column, value, key as any);
       } else {
         // not go here
       }
@@ -40,7 +40,7 @@ function _buildWhereInner<TRecord>(
       const op = _checkOpJoint(key as any);
       if (op) {
         // op: joint
-        _buildWhereOpJoint(builder, column, value, op);
+        _buildWhereOpJoint(knex, builder, column, value, op);
       } else {
         // ignored, not throw error
       }
@@ -49,6 +49,7 @@ function _buildWhereInner<TRecord>(
 }
 
 function _buildWhereOpJoint<TRecord>(
+  knex: Knex,
   builder: Knex.QueryBuilder,
   column: keyof TRecord | undefined,
   wheres: TypeModelWhere<TRecord>,
@@ -63,7 +64,7 @@ function _buildWhereOpJoint<TRecord>(
     builder.where(builder => {
       for (const key in wheres) {
         builder.andWhere(builder => {
-          _buildWhereInner(builder, { [key]: wheres[key] } as any, column);
+          _buildWhereInner(knex, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -74,7 +75,7 @@ function _buildWhereOpJoint<TRecord>(
     builder.where(builder => {
       for (const key in wheres) {
         builder.orWhere(builder => {
-          _buildWhereInner(builder, { [key]: wheres[key] } as any, column);
+          _buildWhereInner(knex, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -83,7 +84,7 @@ function _buildWhereOpJoint<TRecord>(
   // not
   if (op === Op.not) {
     builder.whereNot(builder => {
-      _buildWhereInner(builder, wheres, column);
+      _buildWhereInner(knex, builder, wheres, column);
     });
     return;
   }
@@ -99,6 +100,7 @@ function _buildWhereOpJoint<TRecord>(
 }
 
 function _buildWhereColumn<TRecord>(
+  knex: Knex,
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
   value: TypeModelColumnValue<TRecord, TRecord[keyof TRecord]> | TypeModelWhereFieldAll<TRecord, TRecord[keyof TRecord]>,
@@ -110,36 +112,37 @@ function _buildWhereColumn<TRecord>(
   }
   // raw
   if (isRaw(value)) {
-    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.eq);
+    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.eq);
     return;
   }
   // null/undefined
   if (isNil(value)) {
-    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.is);
+    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.is);
     return;
   }
   // array
   if (Array.isArray(value)) {
-    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.in);
+    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.in);
     return;
   }
   // date
   if (value instanceof Date) {
-    _buildWhereColumnOpNormal(builder, column, value, op ?? Op.eq);
+    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.eq);
     return;
   }
   // object
   if (typeof value === 'object') {
     builder.where(builder => {
-      _buildWhereInner(builder, value as any, column);
+      _buildWhereInner(knex, builder, value as any, column);
     });
     return;
   }
   // column
-  _buildWhereColumnOpNormal(builder, column, value, op ?? Op.eq);
+  _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.eq);
 }
 
 function _buildWhereColumnOpNormal<TRecord>(
+  knex: Knex,
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
   value: any,
@@ -182,8 +185,7 @@ function _buildWhereColumnOpNormal<TRecord>(
   } else if (op === Op.includesI) {
     builder.whereILike(column, `%${value}%` as any);
   } else if (op === Op.ref) {
-    const app = useApp();
-    builder.where(column, '=', app.bean.model.ref(value));
+    builder.where(column, '=', knex.ref(value));
   }
 }
 
