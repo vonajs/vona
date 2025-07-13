@@ -238,34 +238,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     await this.__deleteCache_key(id, table);
   }
 
-  private async __get_notkey(
-    table: keyof ITableRecord,
-    where: TypeModelWhere<TRecord>,
-    options?: IModelMethodOptions,
-  ): Promise<TRecord | null | undefined> {
-    // cache
-    const cache = this.cacheEntity.getInstance(table);
-    const cacheKey = { where, options };
-    const data = await cache.get(cacheKey, {
-      get: async () => {
-        const options = Object.assign({}, cacheKey.options, { columns: ['id'] });
-        return await super._get(table, cacheKey.where, options as any);
-      },
-      ignoreNull: true,
-      db: this.db,
-    });
-    if (!data) return data;
-    // check if exists and valid
-    const data2 = await this.__get_key(table, { id: data.id } as any, options);
-    if (data2 && this.__checkCacheNotKeyDataValid(where, data2)) {
-      return data2 as TRecord;
-    }
-    // delete cache
-    await this.__deleteCache_notkey(cacheKey, table);
-    // get again
-    return await this.__get_notkey(table, where, options);
-  }
-
   private async __get_key(
     table: keyof ITableRecord,
     where: TypeModelWhere<TRecord>,
@@ -315,30 +287,58 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return keys.length === 1 && keys[0] === 'id' && (['number', 'string', 'bigint'].includes(typeof where.id));
   }
 
-  private __checkCacheNotKeyDataValid(where, data) {
-    for (const key in where) {
-      const a = where[key];
-      const b = data[key];
-      if (typeof a === 'string' || typeof b === 'string') {
-        if (String(a).toLowerCase() !== String(b).toLowerCase()) return false;
-      } else if (typeof a === 'boolean' || typeof b === 'boolean') {
-        if (Boolean(a) !== Boolean(b)) return false;
-      } else if (a === null || a === undefined || b === null || b === undefined) {
-        if ((a || null) !== (b || null)) return false;
-      } else {
-        if (a !== b) return false;
-      }
-    }
-    return true;
-  }
-
   private async __deleteCache_key(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
     await this.cacheQuery.clear(table);
   }
-
-  private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {
-    const cache = this.cacheEntity.getInstance(table);
-    await cache.del(cacheKey);
-  }
 }
+
+// private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {
+//   const cache = this.cacheEntity.getInstance(table);
+//   await cache.del(cacheKey);
+// }
+
+// private async __get_notkey(
+//   table: keyof ITableRecord,
+//   where: TypeModelWhere<TRecord>,
+//   options?: IModelMethodOptions,
+// ): Promise<TRecord | null | undefined> {
+//   // cache
+//   const cache = this.cacheEntity.getInstance(table);
+//   const cacheKey = { where, options };
+//   const data = await cache.get(cacheKey, {
+//     get: async () => {
+//       const options = Object.assign({}, cacheKey.options, { columns: ['id'] });
+//       return await super._get(table, cacheKey.where, options as any);
+//     },
+//     ignoreNull: true,
+//     db: this.db,
+//   });
+//   if (!data) return data;
+//   // check if exists and valid
+//   const data2 = await this.__get_key(table, { id: data.id } as any, options);
+//   if (data2 && this.__checkCacheNotKeyDataValid(where, data2)) {
+//     return data2 as TRecord;
+//   }
+//   // delete cache
+//   await this.__deleteCache_notkey(cacheKey, table);
+//   // get again
+//   return await this.__get_notkey(table, where, options);
+// }
+
+// private __checkCacheNotKeyDataValid(where, data) {
+//   for (const key in where) {
+//     const a = where[key];
+//     const b = data[key];
+//     if (typeof a === 'string' || typeof b === 'string') {
+//       if (String(a).toLowerCase() !== String(b).toLowerCase()) return false;
+//     } else if (typeof a === 'boolean' || typeof b === 'boolean') {
+//       if (Boolean(a) !== Boolean(b)) return false;
+//     } else if (a === null || a === undefined || b === null || b === undefined) {
+//       if ((a || null) !== (b || null)) return false;
+//     } else {
+//       if (a !== b) return false;
+//     }
+//   }
+//   return true;
+// }
