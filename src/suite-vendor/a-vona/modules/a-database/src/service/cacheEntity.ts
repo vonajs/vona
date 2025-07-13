@@ -1,9 +1,9 @@
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
+import type { TableIdentity } from '../types/tableIdentity.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import type { TableIdentity } from '../types/tableIdentity.ts';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
