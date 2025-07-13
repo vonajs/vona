@@ -1,4 +1,4 @@
-import type { BigNumber } from 'bignumber.js';
+import 'bignumber.js';
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -114,7 +114,11 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return item as unknown as TRecord;
   }
 
-  protected async _count(table?: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber> {
+  protected async _count(
+    table?: keyof ITableRecord,
+    params?: IModelCountParams<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<BigNumber> {
     // table
     table = table || this.getTable('count', [params], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
