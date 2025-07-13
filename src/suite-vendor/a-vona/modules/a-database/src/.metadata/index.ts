@@ -49,6 +49,7 @@ declare module 'vona' {
 /** bean: end */
 /** service: begin */
 export * from '../service/cacheEntity.ts';
+export * from '../service/cacheQuery.ts';
 export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
 export * from '../service/database.ts';
@@ -66,6 +67,7 @@ declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-database:cacheEntity': never;
+'a-database:cacheQuery': never;
 'a-database:columns': never;
 'a-database:columnsCache': never;
 'a-database:database': never;
@@ -84,6 +86,11 @@ declare module 'vona-module-a-bean' {
 declare module 'vona-module-a-database' {
   
         export interface ServiceCacheEntity {
+          /** @internal */
+          get scope(): ScopeModuleADatabase;
+        }
+
+        export interface ServiceCacheQuery {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
@@ -146,6 +153,7 @@ declare module 'vona-module-a-database' {
 /** service: end */
 /** service: begin */
 import type { ServiceCacheEntity } from '../service/cacheEntity.ts';
+import type { ServiceCacheQuery } from '../service/cacheQuery.ts';
 import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
@@ -159,6 +167,7 @@ import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
 export interface IModuleService {
   'cacheEntity': ServiceCacheEntity;
+'cacheQuery': ServiceCacheQuery;
 'columns': ServiceColumns;
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
@@ -178,6 +187,7 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-database.service.cacheEntity': ServiceCacheEntity;
+'a-database.service.cacheQuery': ServiceCacheQuery;
 'a-database.service.columns': ServiceColumns;
 'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;

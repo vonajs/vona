@@ -6,6 +6,8 @@ import type { TypeModelParamsInclude } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
+export type TypeModelCacheType = 'query' | 'entity';
+
 // join
 export type IModelSelectParamsJoinType =
   | 'join'
