@@ -4,18 +4,28 @@ import { socketCabloyEventRecord, socketCabloyEventRecordReverse } from '../type
 const SymbolPerformActionId = Symbol('SymbolPerformActionId');
 const SymbolPerformActionRecord = Symbol('SymbolPerformActionRecord');
 
+const __cabloyEventPrefix = '_:';
+
 WebSocket.prototype.sendEvent = function (eventName: keyof ISocketCabloyEventRecord, data: any) {
   const eventNameInner = socketCabloyEventRecord[eventName] ?? eventName;
-  this.send(JSON.stringify([eventNameInner, data]));
+  this.send(__cabloyEventPrefix + JSON.stringify([eventNameInner, data]));
 };
 
 WebSocket.prototype.parseEvent = function (event: MessageEvent) {
   const data = event.data;
-  const packetInner = (data && typeof data === 'string') ? JSON.parse(data) : [undefined, data];
-  const eventName = socketCabloyEventRecordReverse[packetInner[0]] ?? packetInner[0];
-  const packet: TypeSocketPacketCabloy = [eventName, packetInner[1]];
-  if (packet[0] === 'performActionBack') {
-    const result = packet[1];
+  let packet: TypeSocketPacketCabloy;
+  if (typeof data === 'string' && data.startsWith(__cabloyEventPrefix)) {
+    const packetInner = JSON.parse(data.substring(__cabloyEventPrefix.length));
+    const eventName = socketCabloyEventRecordReverse[packetInner[0]] ?? packetInner[0];
+    packet = [eventName, packetInner[1]];
+  } else {
+    packet = [undefined, data];
+  }
+  const eventName = packet[0];
+  const result = packet[1] as any;
+  if (eventName === 'ready') {
+    this.onReady();
+  } else if (eventName === 'performActionBack') {
     const id = result.i;
     const performActionBack = this[SymbolPerformActionRecord][id];
     delete this[SymbolPerformActionRecord][id];
@@ -29,6 +39,10 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
         performActionBack.reject(err);
       }
     }
+  } else if (eventName !== undefined) {
+    this.onEvent(eventName, result as never, event);
+  } else {
+    this.onFallback(event);
   }
   return packet;
 };
@@ -51,7 +65,7 @@ WebSocket.prototype.performAction = function (
       b: options?.body,
       h: options?.headers,
     };
-    this.sendEvent('performAction', data);
+    this.sendEvent('performAction' as never, data as never);
   });
 };
 

@@ -1,13 +1,16 @@
 export interface ISocketCabloyEventRecord {
-  performAction: never;
-  performActionBack: never;
+  // ready: never;
+  // performAction: never;
+  // performActionBack: never;
 }
 
 export const socketCabloyEventRecord = {
+  ready: '_a',
   performAction: '_b',
   performActionBack: '_c',
 };
 export const socketCabloyEventRecordReverse = {
+  _a: 'ready',
   _b: 'performAction',
   _c: 'performActionBack',
 };
@@ -27,23 +30,22 @@ export interface ISocketCabloyPerformActionOptionsInner {
   h?: object;
 }
 
-export type TypeSocketPacketCabloy = [keyof ISocketCabloyEventRecord | undefined, any];
+export type TypeSocketPacketCabloy<K extends keyof ISocketCabloyEventRecord = never> = [K, ISocketCabloyEventRecord[K]] | [undefined, any];
+
+export interface ISendEventOptions {
+  mask?: boolean | undefined;
+  binary?: boolean | undefined;
+  compress?: boolean | undefined;
+  fin?: boolean | undefined;
+}
 
 declare global {
   interface WebSocket {
+    onReady(): void;
+    onEvent<K extends keyof ISocketCabloyEventRecord>(eventName: K, data: ISocketCabloyEventRecord[K], event: MessageEvent): void;
+    onFallback(event: MessageEvent): void;
     parseEvent(event: MessageEvent): TypeSocketPacketCabloy;
-    sendEvent(eventName: keyof ISocketCabloyEventRecord, data: any, cb?: (err?: Error) => void): void;
-    sendEvent(
-      eventName: keyof ISocketCabloyEventRecord,
-      data: any,
-      options: {
-        mask?: boolean | undefined;
-        binary?: boolean | undefined;
-        compress?: boolean | undefined;
-        fin?: boolean | undefined;
-      },
-      cb?: (err?: Error) => void,
-    ): void;
+    sendEvent<K extends keyof ISocketCabloyEventRecord>(eventName: K, data: ISocketCabloyEventRecord[K] | undefined): void;
     performAction(method: TypeSocketCabloyPerformActionMethod,
       path: string,
       options?: ISocketCabloyPerformActionOptions,
