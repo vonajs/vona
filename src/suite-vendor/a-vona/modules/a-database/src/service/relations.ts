@@ -15,7 +15,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     if (!entity) return entity;
     // relations
-    const relations = this.__handleRelationsCollection(modelCurrent, includeWrapper);
+    const relations = this.__handleRelationsCollection(modelCurrent as any, includeWrapper);
     if (!relations) return entity;
     for (const relation of relations) {
       await this.__handleRelationOne(entity, modelCurrent, relation, methodOptions);
@@ -31,7 +31,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     if (entities.length === 0) return entities;
     // relations
-    const relations = this.__handleRelationsCollection(modelCurrent, includeWrapper);
+    const relations = this.__handleRelationsCollection(modelCurrent as any, includeWrapper);
     if (!relations) return entities;
     for (const relation of relations) {
       await this.__handleRelationMany(entities, modelCurrent, relation, methodOptions);
@@ -47,7 +47,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(modelCurrent, model);
+    const modelTarget = this.__getModelTarget(modelCurrent as any, model);
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -78,7 +78,7 @@ export class ServiceRelations extends BeanBase {
         entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
       }
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelCurrent, modelMiddle);
+      const modelTargetMiddle = this.__getModelTarget(modelCurrent as any, modelMiddle);
       const idFrom = cast(entity).id;
       if (isNil(idFrom)) {
         entity[relationName] = [];
@@ -99,7 +99,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(modelCurrent, model);
+    const modelTarget = this.__getModelTarget(modelCurrent as any, model);
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -130,7 +130,7 @@ export class ServiceRelations extends BeanBase {
         }
       }
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelCurrent, modelMiddle);
+      const modelTargetMiddle = this.__getModelTarget(modelCurrent as any, modelMiddle);
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
       const idsTo = itemsMiddle.map(item => item[keyTo]);
