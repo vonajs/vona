@@ -1,6 +1,8 @@
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import type { ServiceDb } from '../../service/db.ts';
 import type {
   EntityBase,
+  IDatabaseClientRecord,
   IModelClassRecord,
   IModelGetOptions,
   IModelMethodOptions,
@@ -13,13 +15,20 @@ import type {
 } from '../../types/index.ts';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
+import { ServiceCacheEntity } from '../../service/cacheEntity.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
 
-export class BeanModelCache<TRecord extends {}> extends BeanModelCrud<TRecord> {
+export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
+  public cacheEntity: ServiceCacheEntity;
+
+  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
+    super.__init__(clientNameSelector);
+    this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
+  }
 
   private __getCacheName(table: keyof ITableRecord) {
     const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this.db.clientName);
