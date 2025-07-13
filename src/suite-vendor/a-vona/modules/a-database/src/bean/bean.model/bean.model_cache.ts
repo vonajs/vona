@@ -306,6 +306,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private async __deleteCache_key(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
+    await this.cacheQuery.clear(table);
   }
 
   private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {
