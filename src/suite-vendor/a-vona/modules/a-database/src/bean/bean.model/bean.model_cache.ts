@@ -33,12 +33,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.options.cacheNotKey !== false;
   }
 
-  async clearCache(table?: keyof ITableRecord) {
-    if (!this.__cacheEnabled) return;
-    table = table || this.getTable('clearCache', [], undefined);
-    await this.__getCacheInstance(table).clear();
-  }
-
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<TRecord[]> {
     const items = await this.__mget_raw(ids, options);
     return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
@@ -49,7 +43,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable('mget', [ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheEnabled) {
+    if (!this.cacheEntity.enabled) {
       return (await super._mget(table, ids, options)) as TRecord[];
     }
     // cache
