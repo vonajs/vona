@@ -8,6 +8,7 @@ import type {
   TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
+import { isNil } from '@cabloy/utils';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { BeanModelView } from './bean.model_view.ts';
@@ -18,6 +19,16 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     ids?: TableIdentity[],
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord[]> {
+    const items = await this._mget_original(table, ids, options);
+    return items.filter(item => !isNil(item));
+  }
+
+  // with undefined
+  protected async _mget_original(
+    table?: keyof ITableRecord,
+    ids?: TableIdentity[],
+    options?: IModelGetOptionsGeneral<TRecord>,
+  ): Promise<(TRecord | undefined)[]> {
     // table
     table = table || this.getTable('_mget', [ids], options);
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -36,13 +47,11 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
     const items = await this._select(table, params, options2);
     // sort
-    const result: TRecord[] = [];
+    const result: (TRecord | undefined)[] = [];
     for (const id of ids) {
       // item maybe undefined
       const item = items.find(item => cast(item).id === id);
-      if (item) {
-        result.push(item);
-      }
+      result.push(item);
     }
     return result;
   }

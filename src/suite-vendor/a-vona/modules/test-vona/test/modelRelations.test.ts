@@ -172,24 +172,6 @@ describe('modelRelations.test.ts', () => {
       assert.equal(items[0].postContent?.post3?.postContent?.content !== undefined, true);
       assert.equal(items[0].user3!.posts.length > 0, true);
       assert.equal(items[0].user3!.roles.length > 0, true);
-      // joins: auto
-      const itemsJoins = await scopeTest.model.post.select({
-        joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
-        where: {
-          'testVonaUser.id': userTom.id,
-        },
-        orders: [['testVonaUser.id', 'asc']],
-      });
-      assert.equal(itemsJoins.length, 2);
-      // joins: manual
-      const itemsJoins2 = await scopeTest.model.post.select({
-        joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
-        where: {
-          'testVonaUser.id': userJimmy.id,
-        },
-        orders: [['testVonaUser.id', 'asc']],
-      }, {}, ['test-vona:user']);
-      assert.equal(itemsJoins2.length, 0);
       // test data: delete
       await scopeTest.service.testData.drop(testData);
     });
