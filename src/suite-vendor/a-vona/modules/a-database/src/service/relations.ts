@@ -48,7 +48,7 @@ export class ServiceRelations extends BeanBase {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(modelCurrent, model);
-    const tableNameTarget = modelTarget.getTable('__handleRelationOne', [entity, modelCurrent, relation], methodOptions);
+    const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
@@ -100,7 +100,7 @@ export class ServiceRelations extends BeanBase {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(modelCurrent, model);
-    const tableNameTarget = modelTarget.getTable('__handleRelationMany', [entities, modelCurrent, relation], methodOptions);
+    const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {

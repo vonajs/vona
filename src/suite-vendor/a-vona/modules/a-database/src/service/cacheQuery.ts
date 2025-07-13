@@ -11,7 +11,7 @@ export class ServiceCacheQuery extends ModelCacheBase {
 
   public async clear(table?: keyof ITableRecord) {
     if (!this.enabled) return;
-    table = table || this._model.getTable('cacheQueryClear', [], undefined);
+    table = table || this._model.getTable();
     const cache = this.getInstance(table);
     await cache.clear();
   }
