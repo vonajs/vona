@@ -124,7 +124,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private async __select_cache(table: keyof ITableRecord, params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
     // check if cache
-    if (!this.cacheQuery.enabled) {
+    if (this._checkDisableCacheQueryByOptions(options)) {
       return await super._select(table, params, options);
     }
     // builder
@@ -161,7 +161,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     }
     if (!this.__checkCacheKeyValid(where)) {
       // not key
-      if (!this.cacheQuery.enabled) {
+      if (this._checkDisableCacheQueryByOptions(options)) {
         return await super._get(table, where, options);
       }
       // by cache query
