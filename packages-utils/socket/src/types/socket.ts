@@ -1,18 +1,20 @@
-export interface ISocketCabloyEventRecord {
-  // ready: never;
-  // performAction: never;
-  // performActionBack: never;
+export interface ISocketCabloyEventRecordSystem {
+  sysReady: never;
+  sysPerformAction: never;
+  sysPerformActionBack: never;
 }
 
+export interface ISocketCabloyEventRecord {}
+
 export const socketCabloyEventRecord = {
-  ready: '_a',
-  performAction: '_b',
-  performActionBack: '_c',
+  sysReady: '_a',
+  sysPerformAction: '_b',
+  sysPerformActionBack: '_c',
 };
 export const socketCabloyEventRecordReverse = {
-  _a: 'ready',
-  _b: 'performAction',
-  _c: 'performActionBack',
+  _a: 'sysReady',
+  _b: 'sysPerformAction',
+  _c: 'sysPerformActionBack',
 };
 
 export type TypeSocketCabloyPerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
@@ -30,7 +32,7 @@ export interface ISocketCabloyPerformActionOptionsInner {
   h?: object;
 }
 
-export type TypeSocketPacketCabloy<K extends keyof ISocketCabloyEventRecord = never> = [K, ISocketCabloyEventRecord[K]] | [undefined, any];
+export type TypeSocketPacketCabloy<K extends keyof ISocketCabloyEventRecord = never> = [K | undefined, ISocketCabloyEventRecord[K] | any];
 
 export interface ISendEventOptions {
   mask?: boolean | undefined;

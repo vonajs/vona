@@ -1,4 +1,4 @@
-import type { ISocketCabloyEventRecord, ISocketCabloyPerformActionOptions, ISocketCabloyPerformActionOptionsInner, TypeSocketCabloyPerformActionMethod, TypeSocketPacketCabloy } from '../types/socket.ts';
+import type { ISocketCabloyEventRecord, ISocketCabloyEventRecordSystem, ISocketCabloyPerformActionOptions, ISocketCabloyPerformActionOptionsInner, TypeSocketCabloyPerformActionMethod, TypeSocketPacketCabloy } from '../types/socket.ts';
 import { socketCabloyEventRecord, socketCabloyEventRecordReverse } from '../types/socket.ts';
 
 const SymbolPerformActionId = Symbol('SymbolPerformActionId');
@@ -21,11 +21,11 @@ WebSocket.prototype.parseEvent = function (event: MessageEvent) {
   } else {
     packet = [undefined, data];
   }
-  const eventName = packet[0];
+  const eventName: keyof ISocketCabloyEventRecord | undefined = packet[0];
   const result = packet[1] as any;
-  if (eventName === 'ready') {
+  if (eventName === ('sysReady' satisfies keyof ISocketCabloyEventRecordSystem)) {
     this.onReady();
-  } else if (eventName === 'performActionBack') {
+  } else if (eventName === ('sysPerformActionBack' satisfies keyof ISocketCabloyEventRecordSystem)) {
     const id = result.i;
     const performActionBack = this[SymbolPerformActionRecord][id];
     delete this[SymbolPerformActionRecord][id];
@@ -65,7 +65,7 @@ WebSocket.prototype.performAction = function (
       b: options?.body,
       h: options?.headers,
     };
-    this.sendEvent('performAction' as never, data as never);
+    this.sendEvent('sysPerformAction' satisfies keyof ISocketCabloyEventRecordSystem as never, data as never);
   });
 };
 
