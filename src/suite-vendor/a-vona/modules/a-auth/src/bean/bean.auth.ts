@@ -51,7 +51,7 @@ export class BeanAuth extends BeanBase {
     const callbackURLRelative = $apiPath('/auth/passport/callback');
     const callbackURL = this.app.util.getAbsoluteUrlByApiPath(callbackURLRelative);
     // strategyState
-    const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAuthToken();
+    const accessToken = stateIntention === 'login' ? undefined : await this.bean.passport.createOauthAccessToken();
     const strategyState: IAuthenticateStrategyState = Object.assign({}, options?.state, {
       accessToken,
       authProviderId: entityAuthProvider.id,

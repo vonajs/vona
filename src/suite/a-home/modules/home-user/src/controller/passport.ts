@@ -100,7 +100,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('createOauthCode')
   @Api.body(z.string())
-  async createOauthCode(@Arg.query('path', v.optional()) path?: string): Promise<string> {
+  async createTempAccessToken(@Arg.query('path', v.optional()) path?: string): Promise<string> {
     return await this.bean.passport.createOauthCode({ path });
   }
 
