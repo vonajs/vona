@@ -18,7 +18,7 @@ export function Entity<T extends IDecoratorEntityOptions<any>>(table?: T | strin
   //   throw new Error(`entity table exists: ${tableName}`);
   // }
   // __tableNames.add(tableName);
-  return createBeanDecorator('entity', options, false, false, target => {
+  return createBeanDecorator('entity', options, false, target => {
     mergeFieldsOpenapiMetadata(target);
   });
 }

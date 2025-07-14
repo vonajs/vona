@@ -7,7 +7,6 @@ export function createBeanDecorator<T>(
   scene: keyof IBeanSceneRecord,
   options?: T,
   optionsPrimitive?: boolean,
-  virtual?: boolean,
   fn?: (target: Constructable) => void,
 ): ClassDecorator {
   return function (target) {
@@ -24,7 +23,6 @@ export function createBeanDecorator<T>(
       beanClass,
       options,
       optionsPrimitive,
-      virtual,
     });
     // fn
     fn?.(beanClass);

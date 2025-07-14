@@ -14,7 +14,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
   } else {
     options = path || {} as any;
   }
-  return createBeanDecorator('controller', options, false, false, target => {
+  return createBeanDecorator('controller', options, false, target => {
     // beanOptions
     const beanOptions = appResource.getBean(target);
     // IOpenApiOptions
@@ -29,7 +29,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
 }
 
 export function Dto<T extends IDecoratorDtoOptions<any>>(options?: T): ClassDecorator {
-  return createBeanDecorator('dto', options, false, false, target => {
+  return createBeanDecorator('dto', options, false, target => {
     mergeFieldsOpenapiMetadata(target);
   });
 }
