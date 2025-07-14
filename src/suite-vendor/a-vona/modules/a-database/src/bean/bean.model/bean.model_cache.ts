@@ -294,6 +294,20 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     await this.cacheEntity.del(id, table);
     await this.cacheQuery.clear(table);
   }
+
+  protected _checkDisableCacheQueryByOptions(options?: IModelMethodOptionsGeneral) {
+    if (options?.disableCacheQuery === true || options?.disableCacheQuery === false) {
+      return options?.disableCacheQuery;
+    }
+    return !this.cacheQuery.enabled;
+  }
+
+  protected _checkDisableCacheEntityByOptions(options?: IModelMethodOptionsGeneral) {
+    if (options?.disableCacheEntity === true || options?.disableCacheEntity === false) {
+      return options?.disableCacheEntity;
+    }
+    return !this.cacheEntity.enabled;
+  }
 }
 
 // private async __deleteCache_notkey(cacheKey, table: keyof ITableRecord) {

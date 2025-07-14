@@ -99,6 +99,8 @@ export type IModelGetOptions<TRecord, Model extends BeanModelMeta | undefined = 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
   disableInstance?: boolean;
+  disableCacheQuery?: boolean;
+  disableCacheEntity?: boolean;
 }
 
 export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptionsGeneral {
