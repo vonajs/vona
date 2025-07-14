@@ -1,11 +1,13 @@
 import type { ICacheMemGetOptions, ICacheMemSetOptions } from '../types/cache.ts';
 import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 import { LRUCache } from 'lru-cache';
-import { Virtual } from 'vona-module-a-bean';
+import { Virtual } from 'vona';
+import { Bean } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
+@Bean()
 @Virtual()
 export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheMemOptions, KEY> {
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorCacheMemOptions) {

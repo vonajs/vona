@@ -4,9 +4,10 @@ import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../types/dialect.ts';
 import type { TableIdentity } from '../types/tableIdentity.ts';
 import { isNil, safeBoolean } from '@cabloy/utils';
-import { BeanBase } from 'vona';
-import { Virtual } from 'vona-module-a-bean';
+import { BeanBase, Virtual } from 'vona';
+import { Bean } from 'vona-module-a-bean';
 
+@Bean()
 @Virtual()
 export class BeanDatabaseDialectBase extends BeanBase {
   getConfigBase(): ConfigDatabaseClient | undefined {
