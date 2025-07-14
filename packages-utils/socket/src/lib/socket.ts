@@ -80,7 +80,3 @@ WebSocket.prototype.closeEvents = function () {
     callback.reject(err);
   }
 };
-
-WebSocket.prototype.handshake = async function (headers?: object): Promise<any> {
-  return await this.performAction('post', 'handshake', { headers });
-};
