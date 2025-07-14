@@ -1,4 +1,4 @@
-import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IPayloadDataBase } from '../types/jwt.ts';
+import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IJwtVerifyOptions, IPayloadDataBase } from '../types/jwt.ts';
 import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -61,7 +61,7 @@ export class ServiceJwtClient extends BeanBase {
     });
   }
 
-  async verify(token?: string): Promise<IPayloadDataBase | undefined> {
+  async verify(token?: string, options?: IJwtVerifyOptions): Promise<IPayloadDataBase | undefined> {
     if (!token && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
@@ -71,10 +71,17 @@ export class ServiceJwtClient extends BeanBase {
         // check field client
         if (payload[this.fieldClient] !== this._clientName) return this.app.throw(401);
         // check field path
-        if (payload[this.fieldPath] && payload[this.fieldPath] !== this.ctx.route.routePathRaw) return this.app.throw(401);
+        if (!this._checkVerifyPath(payload[this.fieldPath], options?.path)) return this.app.throw(401);
         // passed
         resolve(payload[this.fieldData]);
       });
     });
+  }
+
+  _checkVerifyPath(pathTarget: string | string[] | undefined, pathReal: string | undefined) {
+    if (!pathTarget) return true;
+    const path = pathReal ?? String(this.ctx.route.routePathRaw);
+    if (Array.isArray(pathTarget) && !pathTarget.includes(path)) return false;
+    return pathTarget === path;
   }
 }

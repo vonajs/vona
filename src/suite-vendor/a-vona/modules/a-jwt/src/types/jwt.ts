@@ -22,6 +22,10 @@ export interface IJwtSignOptions {
   temp?: boolean;
 }
 
+export interface IJwtVerifyOptions {
+  path?: string;
+}
+
 export interface IJwtClientOptions {
   secret?: string;
   signOptions: SignOptions;
