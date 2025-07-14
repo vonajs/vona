@@ -64,7 +64,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.cacheEntity.enabled) {
+    if (this._checkDisableCacheEntityByOptions(options)) {
       return (await super._mget(table, ids, options)) as TRecord[];
     }
     // cache
@@ -105,7 +105,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.cacheEntity.enabled) {
+    if (this._checkDisableCacheEntityByOptions(options)) {
       return await this.__select_cache(table, params, options);
     }
     // 1: select id
@@ -156,7 +156,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.cacheEntity.enabled) {
+    if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._get(table, where, options);
     }
     if (!this.__checkCacheKeyValid(where)) {
@@ -184,7 +184,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.cacheEntity.enabled) {
+    if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._update(table, data, options);
     }
     // check where and get id
@@ -220,7 +220,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.cacheEntity.enabled) {
+    if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._delete(table, where, options);
     }
     // check where and get id
