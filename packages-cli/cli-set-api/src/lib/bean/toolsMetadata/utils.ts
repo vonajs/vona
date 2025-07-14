@@ -45,6 +45,7 @@ export async function globBeanFiles(
       (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
+    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const fileContent = isIgnore ? '' : fse.readFileSync(filePath).toString();
     const isVirtual = fileContent.includes('@Virtual()');
     result.push({
@@ -58,6 +59,7 @@ export async function globBeanFiles(
       className,
       beanName,
       beanNameFull,
+      beanNameCapitalize,
       isIgnore,
       isVirtual,
     });

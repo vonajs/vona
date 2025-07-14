@@ -144,6 +144,7 @@ export interface IGlobBeanFile {
   className: string;
   beanName: string;
   beanNameFull: string;
+  beanNameCapitalize: string;
   isIgnore: boolean;
   isVirtual: boolean;
 }
