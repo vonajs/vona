@@ -4,7 +4,6 @@ import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
-import { generateBeans } from './toolsMetadata/generateBeans.ts';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.ts';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.ts';
 import { generateMain, generateMonkey } from './toolsMetadata/generateMonkey.ts';
@@ -62,8 +61,6 @@ export class CliToolsMetadata extends BeanCliBase {
     const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     // content
     let content = '';
-    // beans
-    content += await generateBeans(onionScenesMeta, moduleName, modulePath);
     // onions
     const scopeResources = {};
     for (const sceneName in onionScenesMeta) {
