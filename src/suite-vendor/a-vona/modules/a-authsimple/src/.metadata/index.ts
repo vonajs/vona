@@ -80,6 +80,11 @@ declare module 'vona-module-a-authsimple' {
       select<T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
       count<T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
+  export interface IModelOptionsAuthSimple {
+      cache?: {
+        keyAux?: keyof EntityAuthSimple;
+      };
+    }
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {

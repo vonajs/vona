@@ -147,6 +147,21 @@ export interface ModelUserRole {
       select<T extends IModelSelectParams<EntityUserRole,ModelUserRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUserRole, ModelUserRole, T>[]>;
       count<T extends IModelCountParams<EntityUserRole,ModelUserRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
+  export interface IModelOptionsRole {
+      cache?: {
+        keyAux?: keyof EntityRole;
+      };
+    }
+export interface IModelOptionsUser {
+      cache?: {
+        keyAux?: keyof EntityUser;
+      };
+    }
+export interface IModelOptionsUserRole {
+      cache?: {
+        keyAux?: keyof EntityUserRole;
+      };
+    }
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {
@@ -330,6 +345,7 @@ export interface IApiPathPostRecord{
 '/home/user/passport/login': undefined;
 '/home/user/passport/refreshAuthToken': undefined;
 '/home/user/passport/createPassportJwtFromOauthCode': undefined;
+'/home/user/passport/createOauthCode': undefined;
     }
 
 }
