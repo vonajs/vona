@@ -160,7 +160,7 @@ export class BeanPassport extends BeanBase {
     // payloadData
     const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
     // jwt token
-    return await this.bean.jwt.createTemp(payloadData, options);
+    return await this.bean.jwt.createTempAuthToken(payloadData, options);
   }
 
   public async createOauthAccessToken(options?: IJwtSignOptions) {

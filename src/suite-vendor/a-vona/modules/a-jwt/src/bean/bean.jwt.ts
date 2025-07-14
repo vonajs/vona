@@ -26,7 +26,7 @@ export class BeanJwt extends BeanBase {
     };
   }
 
-  async createTemp(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+  async createTempAuthToken(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
     return await this.get('access').sign(payloadData, Object.assign({}, options, { temp: true }));
   }
 
