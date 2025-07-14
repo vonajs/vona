@@ -16,7 +16,12 @@ declare module 'vona-module-a-database' {
         export interface AopMethodTransaction {
           /** @internal */
           get scope(): ScopeModuleADatabase;
-        } 
+        }
+
+          export interface AopMethodTransaction {
+            get $beanFullName(): 'a-database.aopMethod.transaction';
+            get $onionName(): 'a-database:transaction';
+          } 
 }
 /** aopMethod: end */
 /** bean: begin */
@@ -90,65 +95,130 @@ declare module 'vona-module-a-database' {
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceCacheEntity {
+            get $beanFullName(): 'a-database.service.cacheEntity';
+            get $onionName(): 'a-database:cacheEntity';
+          }
+
         export interface ServiceCacheQuery {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
+
+          export interface ServiceCacheQuery {
+            get $beanFullName(): 'a-database.service.cacheQuery';
+            get $onionName(): 'a-database:cacheQuery';
+          }
 
         export interface ServiceColumns {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceColumns {
+            get $beanFullName(): 'a-database.service.columns';
+            get $onionName(): 'a-database:columns';
+          }
+
         export interface ServiceColumnsCache {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
+
+          export interface ServiceColumnsCache {
+            get $beanFullName(): 'a-database.service.columnsCache';
+            get $onionName(): 'a-database:columnsCache';
+          }
 
         export interface ServiceDatabase {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceDatabase {
+            get $beanFullName(): 'a-database.service.database';
+            get $onionName(): 'a-database:database';
+          }
+
         export interface ServiceDatabaseAsyncLocalStorage {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
+
+          export interface ServiceDatabaseAsyncLocalStorage {
+            get $beanFullName(): 'a-database.service.databaseAsyncLocalStorage';
+            get $onionName(): 'a-database:databaseAsyncLocalStorage';
+          }
 
         export interface ServiceDatabaseClient {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceDatabaseClient {
+            get $beanFullName(): 'a-database.service.databaseClient';
+            get $onionName(): 'a-database:databaseClient';
+          }
+
         export interface ServiceDb {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
+
+          export interface ServiceDb {
+            get $beanFullName(): 'a-database.service.db';
+            get $onionName(): 'a-database:db';
+          }
 
         export interface ServiceEntityResolver {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceEntityResolver {
+            get $beanFullName(): 'a-database.service.entityResolver';
+            get $onionName(): 'a-database:entityResolver';
+          }
+
         export interface ServiceModelResolver {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
+
+          export interface ServiceModelResolver {
+            get $beanFullName(): 'a-database.service.modelResolver';
+            get $onionName(): 'a-database:modelResolver';
+          }
 
         export interface ServiceRelations {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceRelations {
+            get $beanFullName(): 'a-database.service.relations';
+            get $onionName(): 'a-database:relations';
+          }
+
         export interface ServiceTransaction {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface ServiceTransaction {
+            get $beanFullName(): 'a-database.service.transaction';
+            get $onionName(): 'a-database:transaction';
+          }
+
         export interface ServiceTransactionConsistency‌ {
           /** @internal */
           get scope(): ScopeModuleADatabase;
-        } 
+        }
+
+          export interface ServiceTransactionConsistency‌ {
+            get $beanFullName(): 'a-database.service.transactionConsistency‌';
+            get $onionName(): 'a-database:transactionConsistency‌';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -223,10 +293,20 @@ declare module 'vona-module-a-database' {
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface BroadcastColumnsClear {
+            get $beanFullName(): 'a-database.broadcast.columnsClear';
+            get $onionName(): 'a-database:columnsClear';
+          }
+
         export interface BroadcastDatabaseClientReload {
           /** @internal */
           get scope(): ScopeModuleADatabase;
-        } 
+        }
+
+          export interface BroadcastDatabaseClientReload {
+            get $beanFullName(): 'a-database.broadcast.databaseClientReload';
+            get $onionName(): 'a-database:databaseClientReload';
+          } 
 }
 /** broadcast: end */
 /** broadcast: begin */
@@ -254,15 +334,30 @@ declare module 'vona-module-a-database' {
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface EventClientNameReal {
+            get $beanFullName(): 'a-database.event.clientNameReal';
+            get $onionName(): 'a-database:clientNameReal';
+          }
+
         export interface EventColumnsClear {
           /** @internal */
           get scope(): ScopeModuleADatabase;
         }
 
+          export interface EventColumnsClear {
+            get $beanFullName(): 'a-database.event.columnsClear';
+            get $onionName(): 'a-database:columnsClear';
+          }
+
         export interface EventDatabaseClientReload {
           /** @internal */
           get scope(): ScopeModuleADatabase;
-        } 
+        }
+
+          export interface EventDatabaseClientReload {
+            get $beanFullName(): 'a-database.event.databaseClientReload';
+            get $onionName(): 'a-database:databaseClientReload';
+          } 
 }
 /** event: end */
 /** event: begin */

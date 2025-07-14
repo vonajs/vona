@@ -16,7 +16,12 @@ declare module 'vona-module-a-static' {
         export interface MiddlewareSystemStatic {
           /** @internal */
           get scope(): ScopeModuleAStatic;
-        } 
+        }
+
+          export interface MiddlewareSystemStatic {
+            get $beanFullName(): 'a-static.middlewareSystem.static';
+            get $onionName(): 'a-static:static';
+          } 
 }
 /** middlewareSystem: end */
 /** event: begin */
@@ -32,7 +37,12 @@ declare module 'vona-module-a-static' {
         export interface EventResolvePath {
           /** @internal */
           get scope(): ScopeModuleAStatic;
-        } 
+        }
+
+          export interface EventResolvePath {
+            get $beanFullName(): 'a-static.event.resolvePath';
+            get $onionName(): 'a-static:resolvePath';
+          } 
 }
 /** event: end */
 /** event: begin */

@@ -80,7 +80,12 @@ declare module 'vona-module-a-version' {
         export interface ModelViewRecord {
           /** @internal */
           get scope(): ScopeModuleAVersion;
-        } 
+        }
+
+          export interface ModelViewRecord {
+            get $beanFullName(): 'a-version.model.viewRecord';
+            get $onionName(): 'a-version:viewRecord';
+          } 
 }
 /** model: end */
 /** model: begin */
@@ -97,8 +102,6 @@ declare module 'vona-module-a-version' {
       [SymbolKeyEntity]: EntityViewRecord;
       [SymbolKeyEntityMeta]: EntityViewRecordMeta;
       [SymbolKeyModelOptions]: IModelOptionsViewRecord;
-      get $beanFullName(): 'a-version.model.viewRecord';
-      get $onionName(): 'a-version:viewRecord';
       get<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(where: TypeModelWhere<EntityViewRecord>, options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T> | undefined>;
       mget<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
       select<T extends IModelSelectParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
@@ -137,10 +140,20 @@ declare module 'vona-module-a-version' {
           get scope(): ScopeModuleAVersion;
         }
 
+          export interface ServiceDatabase {
+            get $beanFullName(): 'a-version.service.database';
+            get $onionName(): 'a-version:database';
+          }
+
         export interface ServiceVersion {
           /** @internal */
           get scope(): ScopeModuleAVersion;
-        } 
+        }
+
+          export interface ServiceVersion {
+            get $beanFullName(): 'a-version.service.version';
+            get $onionName(): 'a-version:version';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -174,7 +187,12 @@ declare module 'vona-module-a-version' {
         export interface EventVersionDone {
           /** @internal */
           get scope(): ScopeModuleAVersion;
-        } 
+        }
+
+          export interface EventVersionDone {
+            get $beanFullName(): 'a-version.event.versionDone';
+            get $onionName(): 'a-version:versionDone';
+          } 
 }
 /** event: end */
 /** event: begin */
@@ -209,7 +227,12 @@ declare module 'vona-module-a-version' {
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleAVersion;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-version.meta.version';
+            get $onionName(): 'a-version:version';
+          } 
 }
 /** meta: end */
 /** startup: begin */
@@ -235,15 +258,30 @@ declare module 'vona-module-a-version' {
           get scope(): ScopeModuleAVersion;
         }
 
+          export interface StartupDatabaseInit {
+            get $beanFullName(): 'a-version.startup.databaseInit';
+            get $onionName(): 'a-version:databaseInit';
+          }
+
         export interface StartupDatabaseName {
           /** @internal */
           get scope(): ScopeModuleAVersion;
         }
 
+          export interface StartupDatabaseName {
+            get $beanFullName(): 'a-version.startup.databaseName';
+            get $onionName(): 'a-version:databaseName';
+          }
+
         export interface StartupInstanceInit {
           /** @internal */
           get scope(): ScopeModuleAVersion;
-        } 
+        }
+
+          export interface StartupInstanceInit {
+            get $beanFullName(): 'a-version.startup.instanceInit';
+            get $onionName(): 'a-version:instanceInit';
+          } 
 }
 /** startup: end */
 /** locale: begin */

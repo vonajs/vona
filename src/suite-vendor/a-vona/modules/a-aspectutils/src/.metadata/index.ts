@@ -20,10 +20,20 @@ declare module 'vona-module-a-aspectutils' {
           get scope(): ScopeModuleAAspectutils;
         }
 
+          export interface ServiceAop {
+            get $beanFullName(): 'a-aspectutils.service.aop';
+            get $onionName(): 'a-aspectutils:aop';
+          }
+
         export interface ServiceFilter {
           /** @internal */
           get scope(): ScopeModuleAAspectutils;
-        } 
+        }
+
+          export interface ServiceFilter {
+            get $beanFullName(): 'a-aspectutils.service.filter';
+            get $onionName(): 'a-aspectutils:filter';
+          } 
 }
 /** service: end */
 /** service: begin */

@@ -41,7 +41,12 @@ declare module 'vona-module-a-redis' {
         export interface ServiceRedisClient {
           /** @internal */
           get scope(): ScopeModuleARedis;
-        } 
+        }
+
+          export interface ServiceRedisClient {
+            get $beanFullName(): 'a-redis.service.redisClient';
+            get $onionName(): 'a-redis:redisClient';
+          } 
 }
 /** service: end */
 /** service: begin */

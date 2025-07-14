@@ -16,7 +16,12 @@ declare module 'vona-module-a-logger' {
         export interface MiddlewareSystemHttpLog {
           /** @internal */
           get scope(): ScopeModuleALogger;
-        } 
+        }
+
+          export interface MiddlewareSystemHttpLog {
+            get $beanFullName(): 'a-logger.middlewareSystem.httpLog';
+            get $onionName(): 'a-logger:httpLog';
+          } 
 }
 /** middlewareSystem: end */
 /** aopMethod: begin */
@@ -36,7 +41,12 @@ declare module 'vona-module-a-logger' {
         export interface AopMethodLog {
           /** @internal */
           get scope(): ScopeModuleALogger;
-        } 
+        }
+
+          export interface AopMethodLog {
+            get $beanFullName(): 'a-logger.aopMethod.log';
+            get $onionName(): 'a-logger:log';
+          } 
 }
 /** aopMethod: end */
 /** bean: begin */
@@ -81,7 +91,12 @@ declare module 'vona-module-a-logger' {
         export interface BroadcastSetLevel {
           /** @internal */
           get scope(): ScopeModuleALogger;
-        } 
+        }
+
+          export interface BroadcastSetLevel {
+            get $beanFullName(): 'a-logger.broadcast.setLevel';
+            get $onionName(): 'a-logger:setLevel';
+          } 
 }
 /** broadcast: end */
 /** broadcast: begin */

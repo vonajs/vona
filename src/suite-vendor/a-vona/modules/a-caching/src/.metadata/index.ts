@@ -27,20 +27,40 @@ declare module 'vona-module-a-caching' {
           get scope(): ScopeModuleACaching;
         }
 
+          export interface AopMethodCachingClear {
+            get $beanFullName(): 'a-caching.aopMethod.cachingClear';
+            get $onionName(): 'a-caching:cachingClear';
+          }
+
         export interface AopMethodCachingDel {
           /** @internal */
           get scope(): ScopeModuleACaching;
         }
+
+          export interface AopMethodCachingDel {
+            get $beanFullName(): 'a-caching.aopMethod.cachingDel';
+            get $onionName(): 'a-caching:cachingDel';
+          }
 
         export interface AopMethodCachingGet {
           /** @internal */
           get scope(): ScopeModuleACaching;
         }
 
+          export interface AopMethodCachingGet {
+            get $beanFullName(): 'a-caching.aopMethod.cachingGet';
+            get $onionName(): 'a-caching:cachingGet';
+          }
+
         export interface AopMethodCachingSet {
           /** @internal */
           get scope(): ScopeModuleACaching;
-        } 
+        }
+
+          export interface AopMethodCachingSet {
+            get $beanFullName(): 'a-caching.aopMethod.cachingSet';
+            get $onionName(): 'a-caching:cachingSet';
+          } 
 }
 /** aopMethod: end */
 /** scope: begin */

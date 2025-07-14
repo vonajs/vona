@@ -17,7 +17,12 @@ declare module 'vona-module-home-base' {
         export interface ServiceMenu {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        } 
+        }
+
+          export interface ServiceMenu {
+            get $beanFullName(): 'home-base.service.menu';
+            get $onionName(): 'home-base:menu';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -52,7 +57,12 @@ declare module 'vona-module-home-base' {
         export interface ControllerMenu {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        } 
+        }
+
+          export interface ControllerMenu {
+            get $beanFullName(): 'home-base.controller.menu';
+            get $onionName(): 'home-base:menu';
+          } 
 }
 /** controller: end */
 /** controller: begin */

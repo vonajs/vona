@@ -16,7 +16,12 @@ declare module 'vona-module-a-redlock' {
         export interface ServiceRedlock {
           /** @internal */
           get scope(): ScopeModuleARedlock;
-        } 
+        }
+
+          export interface ServiceRedlock {
+            get $beanFullName(): 'a-redlock.service.redlock';
+            get $onionName(): 'a-redlock:redlock';
+          } 
 }
 /** service: end */
 /** service: begin */

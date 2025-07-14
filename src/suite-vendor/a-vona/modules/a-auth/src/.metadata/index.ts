@@ -74,10 +74,20 @@ declare module 'vona-module-a-auth' {
           get scope(): ScopeModuleAAuth;
         }
 
+          export interface ModelAuth {
+            get $beanFullName(): 'a-auth.model.auth';
+            get $onionName(): 'a-auth:auth';
+          }
+
         export interface ModelAuthProvider {
           /** @internal */
           get scope(): ScopeModuleAAuth;
-        } 
+        }
+
+          export interface ModelAuthProvider {
+            get $beanFullName(): 'a-auth.model.authProvider';
+            get $onionName(): 'a-auth:authProvider';
+          } 
 }
 /** model: end */
 /** model: begin */
@@ -96,8 +106,6 @@ declare module 'vona-module-a-auth' {
       [SymbolKeyEntity]: EntityAuth;
       [SymbolKeyEntityMeta]: EntityAuthMeta;
       [SymbolKeyModelOptions]: IModelOptionsAuth;
-      get $beanFullName(): 'a-auth.model.auth';
-      get $onionName(): 'a-auth:auth';
       get<T extends IModelGetOptions<EntityAuth,ModelAuth>>(where: TypeModelWhere<EntityAuth>, options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuth,ModelAuth>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
       select<T extends IModelSelectParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
@@ -107,8 +115,6 @@ export interface ModelAuthProvider {
       [SymbolKeyEntity]: EntityAuthProvider;
       [SymbolKeyEntityMeta]: EntityAuthProviderMeta;
       [SymbolKeyModelOptions]: IModelOptionsAuthProvider;
-      get $beanFullName(): 'a-auth.model.authProvider';
-      get $onionName(): 'a-auth:authProvider';
       get<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(where: TypeModelWhere<EntityAuthProvider>, options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
       select<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
@@ -186,10 +192,20 @@ declare module 'vona-module-a-auth' {
           get scope(): ScopeModuleAAuth;
         }
 
+          export interface ServiceAuth {
+            get $beanFullName(): 'a-auth.service.auth';
+            get $onionName(): 'a-auth:auth';
+          }
+
         export interface ServiceAuthInnerAdapter {
           /** @internal */
           get scope(): ScopeModuleAAuth;
-        } 
+        }
+
+          export interface ServiceAuthInnerAdapter {
+            get $beanFullName(): 'a-auth.service.authInnerAdapter';
+            get $onionName(): 'a-auth:authInnerAdapter';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -226,10 +242,20 @@ declare module 'vona-module-a-auth' {
           get scope(): ScopeModuleAAuth;
         }
 
+          export interface EventAccountMigration {
+            get $beanFullName(): 'a-auth.event.accountMigration';
+            get $onionName(): 'a-auth:accountMigration';
+          }
+
         export interface EventIssuePassport {
           /** @internal */
           get scope(): ScopeModuleAAuth;
-        } 
+        }
+
+          export interface EventIssuePassport {
+            get $beanFullName(): 'a-auth.event.issuePassport';
+            get $onionName(): 'a-auth:issuePassport';
+          } 
 }
 /** event: end */
 /** event: begin */
@@ -274,15 +300,30 @@ declare module 'vona-module-a-auth' {
           get scope(): ScopeModuleAAuth;
         }
 
+          export interface MetaPrintTip {
+            get $beanFullName(): 'a-auth.meta.printTip';
+            get $onionName(): 'a-auth:printTip';
+          }
+
         export interface MetaRedlock {
           /** @internal */
           get scope(): ScopeModuleAAuth;
         }
 
+          export interface MetaRedlock {
+            get $beanFullName(): 'a-auth.meta.redlock';
+            get $onionName(): 'a-auth:redlock';
+          }
+
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleAAuth;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-auth.meta.version';
+            get $onionName(): 'a-auth:version';
+          } 
 }
 /** meta: end */
 /** meta redlock: begin */
@@ -305,7 +346,12 @@ declare module 'vona-module-a-auth' {
         export interface ControllerPassport {
           /** @internal */
           get scope(): ScopeModuleAAuth;
-        } 
+        }
+
+          export interface ControllerPassport {
+            get $beanFullName(): 'a-auth.controller.passport';
+            get $onionName(): 'a-auth:passport';
+          } 
 }
 /** controller: end */
 /** controller: begin */
