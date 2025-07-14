@@ -1,6 +1,5 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { beanFullNameFromOnionName } from 'vona';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles } = options;
@@ -8,7 +7,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const contentModels: string[] = [];
   const contentModelsOptions: string[] = [];
   for (const globFile of globFiles) {
-    const { className, beanName, beanNameFull, fileContent } = globFile;
+    const { className, beanName, fileContent } = globFile;
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const entityName = __parseEntityName(fileContent);
     const entityMetaName = `${entityName}Meta`;
@@ -17,8 +16,6 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
       [SymbolKeyModelOptions]: ${opionsName};
-      get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
-      get $onionName(): '${beanNameFull}';
       get<T extends IModelGetOptions<${entityName},${className}>>(where: TypeModelWhere<${entityName}>, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;
       mget<T extends IModelGetOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
