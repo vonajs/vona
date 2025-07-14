@@ -1,3 +1,4 @@
+import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { TypeModelClassLike } from '../types/relationsDef.ts';
@@ -7,47 +8,50 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceRelations extends BeanBase {
-  public async handleRelationsOne<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
+  protected _model: BeanModelCache;
+
+  protected __init__(model: BeanModelCache) {
+    this._model = model;
+  }
+
+  public async handleRelationsOne<TRecord extends {}>(
     entity: TRecord | undefined,
-    modelCurrent: TModel,
-    includeWrapper?: IModelRelationIncludeWrapper<TModel>,
+    includeWrapper?: IModelRelationIncludeWrapper,
     methodOptions?: IModelMethodOptions,
   ) {
     if (!entity) return entity;
     // relations
-    const relations = this.__handleRelationsCollection(modelCurrent as any, includeWrapper);
+    const relations = this.__handleRelationsCollection(includeWrapper);
     if (!relations) return entity;
     for (const relation of relations) {
-      await this.__handleRelationOne(entity, modelCurrent, relation, methodOptions);
+      await this.__handleRelationOne(entity, relation, methodOptions);
     }
     return entity;
   }
 
-  public async handleRelationsMany<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
+  public async handleRelationsMany<TRecord extends {}>(
     entities: TRecord[],
-    modelCurrent: TModel,
-    includeWrapper?: IModelRelationIncludeWrapper<TModel>,
+    includeWrapper?: IModelRelationIncludeWrapper,
     methodOptions?: IModelMethodOptions,
   ) {
     if (entities.length === 0) return entities;
     // relations
-    const relations = this.__handleRelationsCollection(modelCurrent as any, includeWrapper);
+    const relations = this.__handleRelationsCollection(includeWrapper);
     if (!relations) return entities;
     for (const relation of relations) {
-      await this.__handleRelationMany(entities, modelCurrent, relation, methodOptions);
+      await this.__handleRelationMany(entities, relation, methodOptions);
     }
     return entities;
   }
 
-  private async __handleRelationOne<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
+  private async __handleRelationOne<TRecord extends {}>(
     entity: TRecord,
-    modelCurrent: TModel,
     relation: [string, any, any, any],
     methodOptions?: IModelMethodOptions,
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(modelCurrent as any, model);
+    const modelTarget = this.__getModelTarget(model);
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -78,7 +82,7 @@ export class ServiceRelations extends BeanBase {
         entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
       }
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelCurrent as any, modelMiddle);
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle);
       const idFrom = cast(entity).id;
       if (isNil(idFrom)) {
         entity[relationName] = [];
@@ -91,15 +95,14 @@ export class ServiceRelations extends BeanBase {
     }
   }
 
-  private async __handleRelationMany<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
+  private async __handleRelationMany<TRecord extends {}>(
     entities: TRecord[],
-    modelCurrent: TModel,
     relation: [string, any, any, any],
     methodOptions?: IModelMethodOptions,
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(modelCurrent as any, model);
+    const modelTarget = this.__getModelTarget(model);
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -130,7 +133,7 @@ export class ServiceRelations extends BeanBase {
         }
       }
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelCurrent as any, modelMiddle);
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle);
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
       const idsTo = itemsMiddle.map(item => item[keyTo]);
@@ -147,28 +150,20 @@ export class ServiceRelations extends BeanBase {
     }
   }
 
-  private __getModelTarget<
-    TRecord extends {},
-    TModel extends BeanModelCrud<TRecord>,
-  >(modelCurrent: TModel,
-    modelClassTarget: TypeModelClassLike<BeanModelCrud<TRecord>>,
-  ): BeanModelCrud<TRecord> {
+  private __getModelTarget<TRecord extends {}>(modelClassTarget: TypeModelClassLike<BeanModelCrud<TRecord>>): BeanModelCrud<TRecord> {
     const modelClass2 = modelClassTarget.name ? modelClassTarget : cast(modelClassTarget)();
     const beanFullName = appResource.getBeanFullName(modelClass2);
-    return this.app.bean._newBean(beanFullName, cast(modelCurrent).db);
+    return this.app.bean._newBean(beanFullName, this._model.db);
   }
 
-  private __handleRelationsCollection<TRecord extends {}, TModel extends BeanModelCrud<TRecord>>(
-    modelCurrent: TModel,
-    includeWrapper?: IModelRelationIncludeWrapper<TModel>,
-  ) {
+  private __handleRelationsCollection(includeWrapper?: IModelRelationIncludeWrapper) {
     // collect
     const relations: [string, any, any, any][] = [];
     // include
-    if (modelCurrent.options.relations) {
-      for (const key in modelCurrent.options.relations) {
-        const relationDef = modelCurrent.options.relations[key];
-        const relationCur = includeWrapper?.include?.[key];
+    if (this._model.options.relations) {
+      for (const key in this._model.options.relations) {
+        const relationDef = this._model.options.relations[key];
+        const relationCur: any = includeWrapper?.include?.[key];
         let relationReal;
         let includeReal;
         let withReal;

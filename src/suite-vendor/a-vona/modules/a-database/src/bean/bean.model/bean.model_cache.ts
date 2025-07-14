@@ -17,16 +17,19 @@ import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity.ts';
 import { ServiceCacheQuery } from '../../service/cacheQuery.ts';
+import { ServiceRelations } from '../../service/relations.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
 export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
   public cacheQuery: ServiceCacheQuery;
   public cacheEntity: ServiceCacheEntity;
+  protected relations: ServiceRelations;
 
   protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
     super.__init__(clientNameSelector);
     this.cacheQuery = this.bean._newBean(ServiceCacheQuery, this);
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
+    this.relations = this.bean._newBean(ServiceRelations, this);
   }
 
   async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
@@ -53,7 +56,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<TRecord[]> {
     const items = await this.__mget_raw(undefined, ids, options);
-    return await this.$scope.database.service.relations.handleRelationsMany(items, this, options as any, options);
+    return await this.relations.handleRelationsMany(items, options as any, options);
   }
 
   private async __mget_raw(table: keyof ITableRecord | undefined, ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
@@ -90,7 +93,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     _modelJoins?: ModelJoins,
   ): Promise<TRecord[]> {
     const items = await this.__select_raw(undefined, params, options);
-    return await this.$scope.database.service.relations.handleRelationsMany(items, this, params as any, options);
+    return await this.relations.handleRelationsMany(items, params as any, options);
   }
 
   private async __select_raw(
@@ -141,7 +144,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<TRecord | undefined> {
     const item: TRecord | undefined = await this.__get_raw(undefined, where, options);
-    return await this.$scope.database.service.relations.handleRelationsOne(item, this, options as any, options);
+    return await this.relations.handleRelationsOne(item, options as any, options);
   }
 
   private async __get_raw(
