@@ -35,7 +35,7 @@ export class AppResource extends BeanSimple {
   addBean(beanOptions: Partial<IDecoratorBeanOptionsBase>) {
     let { module, scene, name, beanClass, options, optionsPrimitive } = beanOptions;
     // virtual
-    const virtual = appMetadata.getMetadata<boolean>(SymbolDecoratorVirtual, beanClass!);
+    const virtual = appMetadata.getOwnMetadata<boolean>(SymbolDecoratorVirtual, beanClass!);
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
