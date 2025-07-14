@@ -173,11 +173,21 @@ export class BeanPassport extends BeanBase {
     return await this.bean.jwt.createOauth(payloadData, options);
   }
 
-  public async createOauthCode(accessToken: string, options?: IJwtSignOptions) {
+  public async createOauthCode(options?: IJwtSignOptions) {
+    // current
+    const passport = this.getCurrent();
+    if (!passport) return this.app.throw(401);
+    // payloadData
+    const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
+    // code
+    return await this.bean.jwt.createOauthCode(payloadData, options);
+  }
+
+  public async createOauthCodeFromAccessToken(accessToken: string, options?: IJwtSignOptions) {
     // payloadData
     const payloadData = await this.bean.jwt.get('access').verify(accessToken);
     if (!payloadData) return this.app.throw(401);
-    // create
+    // code
     return await this.bean.jwt.createOauthCode(payloadData, options);
   }
 

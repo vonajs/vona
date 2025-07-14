@@ -98,6 +98,12 @@ export class ControllerPassport extends BeanBase {
     return this._combineDtoPassportJwt(jwt);
   }
 
+  @Web.post('createOauthCode')
+  @Api.body(z.string())
+  async createOauthCode(@Arg.query('path', v.optional()) path?: string): Promise<string> {
+    return await this.bean.passport.createOauthCode({ path });
+  }
+
   private _combineDtoPassportJwt(jwt?: IJwtToken): DtoPassportJwt {
     if (!jwt) this.app.throw(403);
     return {
