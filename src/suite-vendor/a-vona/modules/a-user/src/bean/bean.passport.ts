@@ -163,14 +163,14 @@ export class BeanPassport extends BeanBase {
     return await this.bean.jwt.createTempAuthToken(payloadData, options);
   }
 
-  public async createOauthAccessToken(options?: IJwtSignOptions) {
+  public async createOauthAuthToken(options?: IJwtSignOptions) {
     // current
     const passport = this.getCurrent();
     if (!passport) return this.app.throw(401);
     // payloadData
     const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
     // jwt token
-    return await this.bean.jwt.createOauthAccessToken(payloadData, options);
+    return await this.bean.jwt.createOauthAuthToken(payloadData, options);
   }
 
   public async createOauthCode(options?: IJwtSignOptions) {
@@ -183,9 +183,9 @@ export class BeanPassport extends BeanBase {
     return await this.bean.jwt.createOauthCode(payloadData, options);
   }
 
-  public async createOauthCodeFromOauthAccessToken(oauthAccessToken: string, options?: IJwtSignOptions) {
+  public async createOauthCodeFromOauthAuthToken(accessToken: string, options?: IJwtSignOptions) {
     // payloadData
-    const payloadData = await this.bean.jwt.get('access').verify(oauthAccessToken);
+    const payloadData = await this.bean.jwt.get('access').verify(accessToken);
     if (!payloadData) return this.app.throw(401);
     // code
     return await this.bean.jwt.createOauthCode(payloadData, options);

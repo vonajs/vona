@@ -30,7 +30,7 @@ export class BeanJwt extends BeanBase {
     return await this.get('access').sign(payloadData, Object.assign({}, options, { temp: true }));
   }
 
-  async createOauthAccessToken(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+  async createOauthAuthToken(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
     return await this.get('oauth').sign(payloadData, options);
   }
 
