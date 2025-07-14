@@ -107,11 +107,6 @@ declare module 'vona-module-a-version' {
       select<T extends IModelSelectParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
       count<T extends IModelCountParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
-  export interface IModelOptionsViewRecord {
-      cache?: {
-        keyAux?: keyof EntityViewRecord;
-      };
-    }
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {

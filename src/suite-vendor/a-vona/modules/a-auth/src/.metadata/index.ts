@@ -120,16 +120,6 @@ export interface ModelAuthProvider {
       select<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
       count<T extends IModelCountParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
-  export interface IModelOptionsAuth {
-      cache?: {
-        keyAux?: keyof EntityAuth;
-      };
-    }
-export interface IModelOptionsAuthProvider {
-      cache?: {
-        keyAux?: keyof EntityAuthProvider;
-      };
-    }
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {
