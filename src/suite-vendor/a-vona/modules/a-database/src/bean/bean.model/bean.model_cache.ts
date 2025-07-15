@@ -121,7 +121,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // 1: special check
     if (params?.columns) {
       const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
-      if (this.__checkIfOnlyId(columnsTarget, table)) {
+      if (this.__checkIfOnlyKey(columnsTarget, table)) {
         // just return
         return items;
       }
@@ -169,7 +169,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._get(table, where, options);
     }
-    if (!this.__checkCacheKeyValid(where, table)) {
+    const id = this.__checkCacheKeyValid(where, table);
+    if (isNil(id)) {
       // not key
       if (this._checkDisableCacheQueryByOptions(options)) {
         return await super._get(table, where, options);
@@ -186,7 +187,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return items[0];
     }
     // key
-    return this.__filterGetColumns(await this.__get_key(table, where, options), options?.columns);
+    return this.__filterGetColumns(await this.__get_key(id, table, where, options), options?.columns);
   }
 
   async update(data: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void> {
@@ -198,7 +199,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return await super._update(table, data, options);
     }
     // check where and get id
-    let id = cast(data).id;
+    let id = this.__checkCacheKeyValid(data, table, true);
     if (!options?.where) {
       if (isNil(id)) {
         throw new Error('id should be specified for update method');
@@ -254,13 +255,14 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   private async __get_key(
+    id: any,
     table: keyof ITableRecord,
     where: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord | null | undefined> {
     // cache
     const cache = this.cacheEntity.getInstance(table);
-    const item: TRecord | null | undefined = await cache.get(cast(where).id, {
+    const item: TRecord | null | undefined = await cache.get(id, {
       get: async () => {
         // where: maybe contain aux key
         // disableInstance: use the model options, not use options by outer
@@ -333,20 +335,22 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return !this.cacheEntity.enabled;
   }
 
-  private __checkIfOnlyId(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord): string | false {
+  private __checkIfOnlyKey(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord, noCheckLength?: boolean): string | false {
     const columnId = `${table}.id`;
-    if (this.cacheEntity.keyAux) {
-      keys = keys.filter(item => item !== this.cacheEntity.keyAux);
+    if (!noCheckLength) {
+      if (this.cacheEntity.keyAux) {
+        keys = keys.filter(item => item !== this.cacheEntity.keyAux);
+      }
+      if (keys.length !== 1) return false;
     }
-    if (keys.length !== 1) return false;
     if (keys[0] === 'id') return 'id';
     if (keys[0] === columnId) return columnId;
     return false;
   }
 
-  private __checkCacheKeyValid(where: {} | undefined, table: keyof ITableRecord) {
+  private __checkCacheKeyValid(where: {} | undefined, table: keyof ITableRecord, noCheckLength?: boolean) {
     if (!where) return undefined;
-    const columnId = this.__checkIfOnlyId(Object.keys(where), table);
+    const columnId = this.__checkIfOnlyKey(Object.keys(where), table, noCheckLength);
     if (!columnId) return undefined;
     return ['number', 'string', 'bigint'].includes(typeof where[columnId])
       ? where[columnId]
