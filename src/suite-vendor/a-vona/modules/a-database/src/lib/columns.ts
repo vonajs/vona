@@ -1,6 +1,7 @@
 import type { Constructable } from 'vona';
 import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
+import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 
@@ -50,5 +51,5 @@ export function $tableName<T>(
 }
 
 function _prepareClassEntity<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
-  return classEntity.name ? classEntity as Constructable<T> : cast(classEntity)();
+  return isClass(classEntity) ? classEntity as Constructable<T> : cast(classEntity)();
 }

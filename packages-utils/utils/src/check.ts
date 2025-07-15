@@ -45,6 +45,10 @@ export const isConstructor = (val: any): boolean => val === 'constructor';
 export const isEmpty = (array: any): boolean => !(array && array.length > 0);
 export const isSymbol = (val: any): val is symbol => typeof val === 'symbol';
 
+export function isClass(fn: any) {
+  return typeof fn === 'function' && fn.prototype?.constructor === fn;
+}
+
 export function isPromise(obj: any): obj is Promise<any> {
   return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }

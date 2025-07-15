@@ -1,7 +1,7 @@
 import type { ServiceDb } from '../../service/db.ts';
 import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelTargetClassLike } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
-import { isNil } from '@cabloy/utils';
+import { isClass, isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
 import { $tableName } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
@@ -110,7 +110,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public newInstanceTarget<TRecordTarget extends {} = {}>(
     modelClassTarget: TypeModelTargetClassLike<TRecordTarget>,
   ): BeanModelMeta<TRecordTarget> {
-    const modelClass2 = modelClassTarget.prototype?.constructor === modelClassTarget ? modelClassTarget : cast(modelClassTarget)();
+    const modelClass2 = isClass(modelClassTarget) ? modelClassTarget : cast(modelClassTarget)();
     const beanFullName = appResource.getBeanFullName(modelClass2);
     return this.app.bean._newBean(beanFullName, this.db);
   }
