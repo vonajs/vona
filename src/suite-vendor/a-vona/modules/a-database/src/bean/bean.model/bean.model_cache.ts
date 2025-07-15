@@ -10,6 +10,7 @@ import type {
   IModelUpdateOptions,
   ITableRecord,
   TableIdentity,
+  TypeModelColumn,
   TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
@@ -120,7 +121,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // 1: special check
     if (params?.columns) {
       const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
-      if (columnsTarget.length === 1 && ['id', columnId].includes(String(columnsTarget[0]))) {
+      if (this._checkIfOnlyId(columnsTarget, table)) {
         // just return
         return items;
       }
@@ -231,17 +232,22 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._delete(table, where, options);
     }
-    // check where and get id
-    const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
-    if (items.length === 0) {
-      // donothing
-      return;
-    }
+    // id
     let id;
-    if (items.length === 1) {
-      id = cast(items[0]).id;
+    if (where && this._checkIfOnlyId(Object.keys(where), table)) {
+      id = cast(where).id;
     } else {
-      id = items.map(item => cast(item).id);
+      // check where and get id
+      const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
+      if (items.length === 0) {
+        // donothing
+        return;
+      }
+      if (items.length === 1) {
+        id = cast(items[0]).id;
+      } else {
+        id = items.map(item => cast(item).id);
+      }
     }
     // delete by id/ids
     await super._delete(table, { id } as any, options);
@@ -335,6 +341,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return options?.disableCacheEntity;
     }
     return !this.cacheEntity.enabled;
+  }
+
+  private _checkIfOnlyId(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord) {
+    const columnId = `${table}.id`;
+    return keys.length === 1 && ['id', columnId].includes(String(keys[0]));
   }
 }
 
