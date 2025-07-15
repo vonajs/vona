@@ -24,7 +24,7 @@ export interface IDecoratorModelOptions {
   cache?: {
     query?: IDecoratorSummerCacheOptions | false;
     entity?: IDecoratorSummerCacheOptions | false;
-    keyAux?: string;
+    keysAux?: string | string[];
     modelsClear?: TypeModelTargetClassLike | TypeModelTargetClassLike[];
   };
   clientName?: keyof IDatabaseClientRecord;

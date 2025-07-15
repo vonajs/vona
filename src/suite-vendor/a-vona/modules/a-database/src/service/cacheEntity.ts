@@ -28,7 +28,7 @@ export class ServiceCacheEntity extends ModelCacheBase {
     }
   }
 
-  public get keyAux() {
-    return this._model.options.cache?.keyAux;
+  public get keysAux() {
+    return this._model.options.cache?.keysAux;
   }
 }

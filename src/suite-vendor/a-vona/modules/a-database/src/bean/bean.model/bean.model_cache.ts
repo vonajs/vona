@@ -338,8 +338,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   private __checkIfOnlyKey(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord, noCheckLength?: boolean): string | false {
     const columnId = `${table}.id`;
     if (!noCheckLength) {
-      if (this.cacheEntity.keyAux) {
-        keys = keys.filter(item => item !== this.cacheEntity.keyAux);
+      const keysAux = this.cacheEntity.keysAux;
+      if (keysAux) {
+        const keysAux2 = Array.isArray(keysAux) ? keysAux : [keysAux];
+        keys = keys.filter(item => !keysAux2.includes(String(item)));
       }
       if (keys.length !== 1) return false;
     }
