@@ -4,6 +4,7 @@ import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDatabaseClientRecord } from '../database.ts';
 import type { EntityBaseEmpty } from '../entityBaseEmpty.ts';
+import type { TypeModelClassLike } from '../relationsDef.ts';
 import type { ITableRecord } from './table.ts';
 
 export interface IModelRecord {}
@@ -11,6 +12,8 @@ export interface IModelClassRecord {}
 
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (ctx: VonaContext, defaultTable: keyof ITableRecord, modelInstance: BeanModelMeta<T>) => string;
+
+export type TypeModelTargetClassLike<TRecord extends EntityBaseEmpty = EntityBaseEmpty> = TypeModelClassLike<BeanModelMeta<TRecord>>;
 
 export interface IDecoratorModelOptions {
   entity?: Constructable<EntityBaseEmpty>;
@@ -22,6 +25,7 @@ export interface IDecoratorModelOptions {
     query?: IDecoratorSummerCacheOptions | false;
     entity?: IDecoratorSummerCacheOptions | false;
     keyAux?: string;
+    modelsClear?: TypeModelTargetClassLike | TypeModelTargetClassLike[];
   };
   clientName?: keyof IDatabaseClientRecord;
   // should not use TypeModelRelations or {}
