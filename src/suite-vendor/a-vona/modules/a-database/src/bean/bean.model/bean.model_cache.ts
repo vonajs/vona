@@ -220,7 +220,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options = Object.assign({}, options, { where: { id } });
     await super._update(table, data, options);
     // delete cache
-    await this.__deleteCache_key(id, table);
+    await this.cacheEntityDel(id, table);
   }
 
   async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void> {
@@ -246,7 +246,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // delete by id/ids
     await super._delete(table, { id } as any, options);
     // delete cache
-    await this.__deleteCache_key(id, table);
+    await this.cacheEntityDel(id, table);
   }
 
   private async __get_key(
@@ -298,8 +298,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return keys.length === 1 && keys[0] === 'id' && (['number', 'string', 'bigint'].includes(typeof where.id));
   }
 
-  private async __deleteCache_key(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
+  public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
+    await this.cacheQueryClear(table);
+  }
+
+  public async cacheEntityClear(table?: keyof ITableRecord) {
+    await this.cacheEntity.clear(table);
     await this.cacheQueryClear(table);
   }
 
