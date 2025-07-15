@@ -40,7 +40,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // insert
     const res = await this._batchInsert(table, data, options) as Promise<TRecord>;
     // clear cache
-    await this.clearCacheQuery(table);
+    await this.cacheQueryClear(table);
     return res;
   }
 
@@ -51,7 +51,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // insert
     const res = await this._batchInsert(table, data, options) as Promise<TRecord[]>;
     // clear cache
-    await this.clearCacheQuery(table);
+    await this.cacheQueryClear(table);
     return res;
   }
 
@@ -300,21 +300,21 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private async __deleteCache_key(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
-    await this.clearCacheQuery(table);
+    await this.cacheQueryClear(table);
   }
 
-  public async clearCacheQuery(table?: keyof ITableRecord) {
+  public async cacheQueryClear(table?: keyof ITableRecord) {
     await this.cacheQuery.clear(table);
-    await this._clearCacheQueryModelsClear();
+    await this._cacheQueryClearModelsClear();
   }
 
-  private async _clearCacheQueryModelsClear() {
+  private async _cacheQueryClearModelsClear() {
     const modelsClear = this.options.cache?.modelsClear;
     if (!modelsClear) return;
     const modelsClear2 = Array.isArray(modelsClear) ? modelsClear : [modelsClear];
     for (const modelClear of modelsClear2) {
       const modelTarget = this.newInstanceTarget(modelClear) as typeof this;
-      await modelTarget.clearCacheQuery();
+      await modelTarget.cacheQueryClear();
     }
   }
 
