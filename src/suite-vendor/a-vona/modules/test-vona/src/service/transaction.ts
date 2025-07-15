@@ -9,12 +9,12 @@ const tableNameSuccess = '__tempTransactionSuccess';
 export class ServiceTransaction extends BeanBase {
   @Database.transaction()
   async fail(item: object) {
-    await this.app.bean.model.update(`${tableNameFail}` as any, item);
-    await this.app.bean.model.update(`${tableNameFail}error` as any, item);
+    await this.bean.model.update(`${tableNameFail}` as any, item);
+    await this.bean.model.update(`${tableNameFail}error` as any, item);
   }
 
   @Database.transaction()
   async success(item: object) {
-    await this.app.bean.model.update(tableNameSuccess as any, item);
+    await this.bean.model.update(tableNameSuccess as any, item);
   }
 }

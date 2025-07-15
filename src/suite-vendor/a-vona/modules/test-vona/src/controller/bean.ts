@@ -20,16 +20,16 @@ export class ControllerBean extends BeanBase {
     let res;
 
     // app.bean
-    assert.equal(this.app.bean._getBean('test-vona.service.testApp'), this.app.bean['test-vona.service.testApp']);
+    assert.equal(this.bean._getBean('test-vona.service.testApp'), this.bean['test-vona.service.testApp']);
 
-    res = this.app.bean['test-vona.service.testApp'].actionSync({ a, b });
+    res = this.bean['test-vona.service.testApp'].actionSync({ a, b });
     assert.equal(res, `${a + b}:regexpaop`);
 
-    res = await this.app.bean['test-vona.service.testApp'].actionAsync({ a, b });
+    res = await this.bean['test-vona.service.testApp'].actionAsync({ a, b });
     assert.equal(res, `${a + b}:regexpaop`);
 
     // ctx.bean: global
-    assert.equal(this.bean.testCtx, this.app.bean.testCtx);
+    assert.equal(this.bean.testCtx, this.bean.testCtx);
 
     // magic
     res = cast(this.bean.testCtx).magic;
@@ -63,9 +63,9 @@ export class ControllerBean extends BeanBase {
 
     // magic of self
     cast(this.bean.testCtx).magicSelf = '__magicSelf__';
-    res = cast(this.app.bean.testCtx).magicSelf;
+    res = cast(this.bean.testCtx).magicSelf;
     assert.equal(res, '__magicSelf__');
-    res = cast(this.app.bean.testCtx)['magic:self'];
+    res = cast(this.bean.testCtx)['magic:self'];
     assert.equal(res, '__magicSelf__');
   }
 
