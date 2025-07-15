@@ -49,6 +49,10 @@ export function isClass(fn: any) {
   return typeof fn === 'function' && !!fn.name && fn.prototype?.constructor === fn;
 }
 
+export function isClassStrict(fn: any) {
+  return typeof fn === 'function' && /^class(?:\s|\{)/.test(fn.toString());
+}
+
 export function isPromise(obj: any): obj is Promise<any> {
   return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
