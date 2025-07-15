@@ -383,8 +383,16 @@ export interface IApiPathPostRecord{
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
+export const locales = {
+  'en-us': locale_en_us,
+'zh-cn': locale_zh_cn,
+};
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -393,6 +401,7 @@ export class ScopeModuleHomeUser extends BeanScopeBase {}
 export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
 service: IModuleService;
@@ -412,7 +421,12 @@ declare module 'vona' {
     'home-user': ReturnType<typeof config>;
   }
 
-  
+  export interface IBeanScopeLocale {
+    'home-user': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {
+  return `home-user::${key}`;
+}
 /** scope: end */
