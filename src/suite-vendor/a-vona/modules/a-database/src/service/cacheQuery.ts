@@ -10,17 +10,6 @@ export class ServiceCacheQuery extends ModelCacheBase {
   }
 
   public async clear(table?: keyof ITableRecord) {
-    await this.__clear_raw(table);
-    // modelsClear
-    const modelsClear = this._model.options.cache?.modelsClear;
-    if (!modelsClear) return;
-    const modelsClear2 = Array.isArray(modelsClear) ? modelsClear : [modelsClear];
-    for (const modelClear of modelsClear2) {
-
-    }
-  }
-
-  public async __clear_raw(table?: keyof ITableRecord) {
     if (!this.enabled) return;
     table = table || this._model.getTable();
     const cache = this.getInstance(table);

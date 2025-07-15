@@ -3,7 +3,7 @@ import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { TypeModelClassLike } from '../types/relationsDef.ts';
 import { isNil } from '@cabloy/utils';
-import { appResource, BeanBase, cast, deepExtend } from 'vona';
+import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -151,9 +151,7 @@ export class ServiceRelations extends BeanBase {
   }
 
   private __getModelTarget<TRecord extends {}>(modelClassTarget: TypeModelClassLike<BeanModelCrud<TRecord>>): BeanModelCrud<TRecord> {
-    const modelClass2 = modelClassTarget.name ? modelClassTarget : cast(modelClassTarget)();
-    const beanFullName = appResource.getBeanFullName(modelClass2);
-    return this.app.bean._newBean(beanFullName, this._model.db);
+    return this._model.newInstanceTarget(modelClassTarget) as unknown as BeanModelCrud<TRecord>;
   }
 
   private __handleRelationsCollection(includeWrapper?: IModelRelationIncludeWrapper) {

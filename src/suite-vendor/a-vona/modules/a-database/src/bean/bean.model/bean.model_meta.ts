@@ -107,10 +107,10 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.app.bean._newBean(this.$beanFullName as any, clientName);
   }
 
-  public newModelTarget<TRecordTarget extends {} = {}>(
+  public newInstanceTarget<TRecordTarget extends {} = {}>(
     modelClassTarget: TypeModelTargetClassLike<TRecordTarget>,
   ): BeanModelMeta<TRecordTarget> {
-    const modelClass2 = modelClassTarget.name ? modelClassTarget : cast(modelClassTarget)();
+    const modelClass2 = modelClassTarget.prototype?.constructor === modelClassTarget ? modelClassTarget : cast(modelClassTarget)();
     const beanFullName = appResource.getBeanFullName(modelClass2);
     return this.app.bean._newBean(beanFullName, this.db);
   }

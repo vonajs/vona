@@ -1,7 +1,10 @@
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
+import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
+import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelCacheType } from '../types/model.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
+import type { TypeModelClassLike } from '../types/relationsDef.ts';
 import { BeanBase, deepExtend } from 'vona';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
@@ -77,5 +80,9 @@ export class ModelCacheBase extends BeanBase {
     );
     // ok
     return _cacheOptions;
+  }
+
+  protected __getModelTarget<TRecord extends {}>(modelClassTarget: TypeModelClassLike<BeanModelMeta<TRecord>>): BeanModelCrud<TRecord> {
+    return this._model.newInstanceTarget(modelClassTarget) as unknown as BeanModelCrud<TRecord>;
   }
 }
