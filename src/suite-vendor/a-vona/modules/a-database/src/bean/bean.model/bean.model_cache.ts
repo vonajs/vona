@@ -344,10 +344,14 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         keys = keys.filter(item => !keysAux2.includes(String(item)));
       }
       if (keys.length !== 1) return false;
+      if (keys[0] === 'id') return 'id';
+      if (keys[0] === columnId) return columnId;
+      return false;
+    } else {
+      if (keys.includes('id')) return 'id';
+      if (keys.includes(columnId)) return columnId;
+      return false;
     }
-    if (keys[0] === 'id') return 'id';
-    if (keys[0] === columnId) return columnId;
-    return false;
   }
 
   private __checkCacheKeyValid(where: {} | undefined, table: keyof ITableRecord, noCheckLength?: boolean) {
