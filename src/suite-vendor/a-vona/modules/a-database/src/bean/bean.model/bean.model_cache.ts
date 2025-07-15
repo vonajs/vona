@@ -179,7 +179,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.__filterGetColumns(await this.__get_key(table, where, options), options?.columns);
   }
 
-  async update(data?: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void> {
+  async update(data: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>): Promise<void> {
     // table
     const table = this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -188,14 +188,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return await super._update(table, data, options);
     }
     // check where and get id
-    let id;
+    let id = cast(data).id;
     if (!options?.where) {
-      if (cast(data).id === undefined) {
+      if (id === undefined) {
         throw new Error('id should be specified for update method');
       }
-      id = cast(data).id;
     } else {
-      const where = cast(data).id !== undefined ? Object.assign({}, options?.where, { id: cast(data).id }) : options?.where;
+      const where = id !== undefined ? Object.assign({}, options?.where, { id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
       const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
       if (items.length === 0) {
