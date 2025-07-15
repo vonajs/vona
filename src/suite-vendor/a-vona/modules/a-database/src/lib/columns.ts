@@ -13,24 +13,16 @@ export function $columns<T>(key?: (keyof T) | Array<keyof T> | undefined): (keyo
   return key;
 }
 
-export function $columnsAll<T>(
+export function $columnsAll<T, TableName extends boolean>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
-  withTableName: true,
-): TypeEntityMeta<T>;
-export function $columnsAll<T>(
-  classEntity: (() => Constructable<T>) | Constructable<T>,
-  withTableName?: false,
-): Omit<TypeEntityMeta<T>, '$table' | '$comment'>;
-export function $columnsAll<T>(
-  classEntity: (() => Constructable<T>) | Constructable<T>,
-  withTableName?: boolean,
-): Record<string, string> {
+  withTableName?: TableName,
+): TableName extends true ? TypeEntityMeta<T> : Omit<TypeEntityMeta<T>, '$table'> {
   const classEntity2 = _prepareClassEntity(classEntity);
   const columns = appMetadata.getMetadata<Record<string, string>>(SymbolDecoratorRuleColumn, classEntity2.prototype);
-  if (!withTableName) return columns!;
+  if (!withTableName) return columns! as any;
   // tableName
   const tableName = $tableName(classEntity2);
-  return { ...columns, $table: tableName };
+  return { ...columns, $table: tableName } as any;
 }
 
 export function $tableColumns<T>(
