@@ -1,7 +1,8 @@
 import type { Constructable } from 'vona';
 import type { SchemaLike, SchemaLikeCreate } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
-import { cast, isClassStrict } from 'vona';
+import { isClass } from '@cabloy/utils';
+import { cast } from 'vona';
 import { $schema } from './schema.ts';
 
 export function makeSchemaLikes(schemaLikes: SchemaLike[], typeInit: any): z.ZodSchema {
@@ -21,7 +22,7 @@ export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPreviou
     // schema
     return schemaLike as z.ZodSchema;
   } else if (
-    isClassStrict(schemaLike) ||
+    isClass(schemaLike) ||
     ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)
   ) {
     // class
