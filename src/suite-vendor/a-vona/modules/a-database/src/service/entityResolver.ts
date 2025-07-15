@@ -18,7 +18,7 @@ export class ServiceEntityResolver extends BeanBase {
     if (!this.__instances[prop]) {
       const beanFullName = `${this[SymbolModuleScope]}.entity.${prop}`;
       const beanOptions = appResource.getBean(beanFullName)!;
-      this.__instances[prop] = $columnsAll(beanOptions.beanClass, true);
+      this.__instances[prop] = $columnsAll(beanOptions.beanClass, true, true);
     }
     return this.__instances[prop];
   }
