@@ -1,12 +1,12 @@
 import type { IBeanRecord } from '../bean/type.ts';
 import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { MetadataKey } from './metadata.ts';
+import { isClass } from '@cabloy/utils';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { cast } from '../../types/utils/cast.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { useApp } from '../framework/useApp.ts';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.ts';
-import { isClass } from '../utils/isClass.ts';
 import { deepExtend } from '../utils/util.ts';
 import { appMetadata } from './metadata.ts';
 
