@@ -20,7 +20,7 @@ export function $columnsAll<T>(
 export function $columnsAll<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   withTableName?: false,
-): Omit<TypeEntityMeta<T>, '$table'>;
+): Omit<TypeEntityMeta<T>, '$table' | '$comment'>;
 export function $columnsAll<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   withTableName?: boolean,
