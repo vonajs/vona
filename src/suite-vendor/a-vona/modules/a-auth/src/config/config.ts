@@ -1,7 +1,8 @@
 import type { VonaApplication } from 'vona';
+import { $customKey } from 'vona';
 
 export function config(_app: VonaApplication) {
   return {
-    oauthCodeField: 'x-vona-oauth-code',
+    oauthCodeField: $customKey('x-vona-oauth-code'),
   };
 }

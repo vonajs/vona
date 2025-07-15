@@ -1,4 +1,5 @@
 import type { ILocaleInfos, VonaApplication } from 'vona';
+import { $customKey } from 'vona';
 
 export interface I18nConfig {
   defaultLocale: keyof ILocaleInfos;
@@ -15,8 +16,8 @@ export function config(_app: VonaApplication) {
   return {
     i18n: {
       defaultLocale: 'en-us',
-      queryField: 'x-vona-locale',
-      headerField: 'x-vona-locale',
+      queryField: $customKey('x-vona-locale'),
+      headerField: $customKey('x-vona-locale'),
       cookieField: 'locale',
       localeAlias: {},
       writeCookie: true,

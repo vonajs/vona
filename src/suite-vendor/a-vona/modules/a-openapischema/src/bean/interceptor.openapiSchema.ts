@@ -1,7 +1,7 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
 import type { TypeEventRetrieveOpenapiSchemaData } from './event.retrieveOpenapiSchema.ts';
-import { BeanBase } from 'vona';
+import { $customKey, BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
 
 export interface IInterceptorOptionsOpenapiSchema extends IDecoratorInterceptorOptionsGlobal {}
@@ -9,7 +9,7 @@ export interface IInterceptorOptionsOpenapiSchema extends IDecoratorInterceptorO
 @Interceptor<IInterceptorOptionsOpenapiSchema>({ global: true })
 export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorExecute {
   async execute(_options: IInterceptorOptionsOpenapiSchema, next: Next) {
-    const headerOpenapiSchema = this.ctx.headers['x-vona-openapi-schema'];
+    const headerOpenapiSchema = this.ctx.headers[$customKey('x-vona-openapi-schema')];
     if (headerOpenapiSchema?.toString() !== 'true') return next();
     // openapi-schema
     const data: TypeEventRetrieveOpenapiSchemaData = { route: this.ctx.route };
