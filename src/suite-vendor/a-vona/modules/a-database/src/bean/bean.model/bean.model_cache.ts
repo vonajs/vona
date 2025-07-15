@@ -121,7 +121,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // 1: special check
     if (params?.columns) {
       const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
-      if (this._checkIfOnlyId(columnsTarget, table)) {
+      if (this.__checkIfOnlyId(columnsTarget, table)) {
         // just return
         return items;
       }
@@ -169,7 +169,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._get(table, where, options);
     }
-    if (!this.__checkCacheKeyValid(where)) {
+    if (!this.__checkCacheKeyValid(where, table)) {
       // not key
       if (this._checkDisableCacheQueryByOptions(options)) {
         return await super._get(table, where, options);
@@ -233,10 +233,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return await super._delete(table, where, options);
     }
     // id
-    let id;
-    if (where && this._checkIfOnlyId(Object.keys(where), table)) {
-      id = cast(where).id;
-    } else {
+    let id = this.__checkCacheKeyValid(where, table);
+    if (isNil(id)) {
       // check where and get id
       const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
       if (items.length === 0) {
@@ -296,14 +294,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return data2;
   }
 
-  private __checkCacheKeyValid(where) {
-    let keys = Object.keys(where);
-    if (this.cacheEntity.keyAux) {
-      keys = keys.filter(item => item !== this.cacheEntity.keyAux);
-    }
-    return keys.length === 1 && keys[0] === 'id' && (['number', 'string', 'bigint'].includes(typeof where.id));
-  }
-
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
     await this.cacheQueryClear(table);
@@ -343,9 +333,24 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return !this.cacheEntity.enabled;
   }
 
-  private _checkIfOnlyId(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord) {
+  private __checkIfOnlyId(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord): string | false {
     const columnId = `${table}.id`;
-    return keys.length === 1 && ['id', columnId].includes(String(keys[0]));
+    if (this.cacheEntity.keyAux) {
+      keys = keys.filter(item => item !== this.cacheEntity.keyAux);
+    }
+    if (keys.length !== 1) return false;
+    if (keys[0] === 'id') return 'id';
+    if (keys[0] === columnId) return columnId;
+    return false;
+  }
+
+  private __checkCacheKeyValid(where: {} | undefined, table: keyof ITableRecord) {
+    if (!where) return undefined;
+    const columnId = this.__checkIfOnlyId(Object.keys(where), table);
+    if (!columnId) return undefined;
+    return ['number', 'string', 'bigint'].includes(typeof where[columnId])
+      ? where[columnId]
+      : undefined;
   }
 }
 
