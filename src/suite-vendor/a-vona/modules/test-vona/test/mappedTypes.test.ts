@@ -56,7 +56,7 @@ describe('mappedTypes.test.ts', () => {
       });
       assert.deepEqual(dataNew6, { married: true });
       // MixinClass
-      const [, err7] = await catchError(async () => {
+      const [_, err7] = await catchError(async () => {
         return await serviceValidator.validate(ClassMapped.mixin(DtoUser, DtoProfile), data, { strict: true });
       });
       assert.equal(cast(err7?.message)[0]?.path[0], 'email');
