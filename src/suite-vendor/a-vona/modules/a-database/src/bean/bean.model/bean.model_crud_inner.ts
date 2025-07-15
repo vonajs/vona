@@ -190,7 +190,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // where
     const where = Object.assign({}, options?.where);
     // id
-    if (cast(data).id) {
+    if (!isNil(cast(data).id)) {
       cast(where).id = cast(data).id;
       delete cast(data).id;
     }

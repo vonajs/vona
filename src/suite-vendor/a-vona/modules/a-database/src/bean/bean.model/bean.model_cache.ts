@@ -13,6 +13,7 @@ import type {
   TypeModelColumns,
   TypeModelWhere,
 } from '../../types/index.ts';
+import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity.ts';
@@ -116,6 +117,14 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       // donothing
       return [] as TRecord[];
     }
+    // 1: special check
+    if (params?.columns) {
+      const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
+      if (columnsTarget.length === 1 && ['id', columnId].includes(String(columnsTarget[0]))) {
+        // just return
+        return items;
+      }
+    }
     // 2: mget
     const ids = items.map(item => cast(item).id);
     const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
@@ -190,11 +199,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // check where and get id
     let id = cast(data).id;
     if (!options?.where) {
-      if (id === undefined) {
+      if (isNil(id)) {
         throw new Error('id should be specified for update method');
       }
     } else {
-      const where = id !== undefined ? Object.assign({}, options?.where, { id }) : options?.where;
+      const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
       const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
       if (items.length === 0) {
