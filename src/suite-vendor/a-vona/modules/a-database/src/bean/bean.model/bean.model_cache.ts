@@ -222,9 +222,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       } else {
         id = items.map(item => cast(item).id);
       }
+      // update by id/ids
+      options = Object.assign({}, options, { where: { id } });
     }
-    // update by id/ids
-    options = Object.assign({}, options, { where: { id } });
     await super._update(table, data, options);
     // delete cache
     await this.cacheEntityDel(id, table);

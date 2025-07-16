@@ -190,9 +190,12 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // where
     const where = Object.assign({}, options?.where);
     // id
-    if (!isNil(cast(data).id)) {
-      cast(where).id = cast(data).id;
-      delete cast(data).id;
+    const columnId = `${table}.id`;
+    for (const key of ['id', columnId]) {
+      if (!isNil(data[key])) {
+        cast(where).id = data[key];
+        delete data[key];
+      }
     }
     // disableUpdateTime
     if (!this._checkDisableUpdateTimeByOptions(options)) {
