@@ -5,7 +5,7 @@ import { $locale } from '../.metadata/index.ts';
 
 export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecoratorEntityOptions {}
 
-@Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>')
+@Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>', { openapi: { title: $locale('<%=argv.resourceNameCapitalize%>') } })
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(v.openapi({ title: $locale('Name') }), v.min(3))
   name: string;
