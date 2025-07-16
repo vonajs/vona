@@ -12,7 +12,7 @@ export interface INewCtxExtraData {
 }
 
 export interface INewCtxOptions extends INewCtxBaseOptions {
-  dbInfo?: IDbInfo | true;
+  dbInfo?: Partial<IDbInfo>;
 }
 
 export interface INewCtxBaseOptions {

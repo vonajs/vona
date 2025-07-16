@@ -8,4 +8,4 @@ export interface IRedlockLockOptions {
   lockTTL?: number;
 }
 
-export interface IRedlockLockIsolateOptions extends IRedlockLockOptions, IDbInfo {}
+export interface IRedlockLockIsolateOptions extends IRedlockLockOptions, Partial<IDbInfo> {}

@@ -39,7 +39,7 @@ export class ServiceStartup extends BeanBase {
           await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
         },
         {
-          dbInfo: true,
+          dbInfo: { level: 1 },
           instanceName,
         },
       );
@@ -47,7 +47,7 @@ export class ServiceStartup extends BeanBase {
       // all instances
       const instances = await this.bean.executor.newCtx(async () => {
         return await this.bean.instance.list();
-      }, { dbInfo: true });
+      }, { dbInfo: { level: 1 } });
       for (const instance of instances) {
         const instanceName = instance.name;
         // need not await
@@ -56,7 +56,7 @@ export class ServiceStartup extends BeanBase {
             await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
           },
           {
-            dbInfo: true,
+            dbInfo: { level: 1 },
             instanceName,
           },
         );
@@ -71,7 +71,7 @@ export class ServiceStartup extends BeanBase {
           await this.$scope.version.service.version.__instanceTest(instanceName);
         },
         {
-          dbInfo: true,
+          dbInfo: { level: 1 },
           instanceName,
         },
       );
@@ -132,7 +132,7 @@ export class ServiceStartup extends BeanBase {
         await bean.execute(options);
       },
       {
-        dbInfo: true,
+        dbInfo: { level: 1 },
         instanceName,
         transaction: startupOptions.transaction,
       },
