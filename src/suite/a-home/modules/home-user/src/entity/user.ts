@@ -7,7 +7,7 @@ import { $locale } from '../.metadata/index.ts';
 
 export interface IEntityOptionsUser extends IDecoratorEntityOptions {}
 
-@Entity<IEntityOptionsUser>('homeUser')
+@Entity<IEntityOptionsUser>('homeUser', { openapi: { title: $locale('User') } })
 export class EntityUser extends EntityBase {
   @Api.field(v.title($locale('UserName')))
   name: string;
