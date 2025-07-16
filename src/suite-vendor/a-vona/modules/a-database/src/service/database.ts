@@ -4,14 +4,9 @@ import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } fro
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { ServiceDatabaseClient } from './databaseClient.ts';
 
 @Service()
 export class ServiceDatabase extends BeanBase {
-  getClient(dbInfo: IDbInfo | undefined, clientConfig?: ConfigDatabaseClient) {
-    return this.app.bean._getBeanSelector(ServiceDatabaseClient, this.prepareClientNameSelector(dbInfo), clientConfig);
-  }
-
   getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
     if (!client) throw new Error('database dialect not specified');
     const beanFullName = this.scope.config.dialects[client];
@@ -20,24 +15,29 @@ export class ServiceDatabase extends BeanBase {
     return dialect;
   }
 
-  prepareDbInfo(dbInfo?: IDbInfo) {
-    const current = this.bean.database.current;
-    const level = dbInfo?.level ?? current?.level ?? 1; // 0 for outer users
-    const clientName = this.scope.service.database.prepareClientName(
-      dbInfo?.clientName ?? current?.clientName ?? this.app.config.database.defaultClient,
-    ); // dbInfo.clientName maybe 'default'
+  prepareDbInfo(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord): IDbInfo {
+    let level;
+    let clientName;
+    if (typeof dbInfoOrClientName === 'string') {
+      level = undefined;
+      clientName = dbInfoOrClientName;
+    } else {
+      level = dbInfoOrClientName?.level;
+      clientName = dbInfoOrClientName?.clientName;
+    }
+    // check if selector
+    if (clientName && clientName.includes(':')) return clientName;
+    // check if default
+    clientName = this.prepareClientName(clientName);
+    // level
+    level = level ?? this.bean.database.current?.level ?? 0;
     return { level, clientName };
   }
 
-  prepareClientNameSelector(dbInfo?: IDbInfo) {
-    const level = dbInfo?.level;
-    let clientName = dbInfo?.clientName as keyof IDatabaseClientRecord | string;
-    // string
-    if (clientName && clientName.includes(':')) return clientName;
-    // keyof IDatabaseClientRecord
-    clientName = this.isDefaultClientName(clientName as any) ? '' : clientName;
-    if (level === undefined) throw new Error('should specify the db level');
-    return level === 0 ? clientName : `${clientName}:${level}`;
+  prepareClientNameSelector(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord) {
+    const dbInfo = this.prepareDbInfo(dbInfoOrClientName);
+    // combine
+    return dbInfo.level === 0 ? dbInfo.clientName : `${dbInfo.clientName}:${dbInfo.level}`;
   }
 
   parseClientNameSelector(clientNameSelector: string): Required<IDbInfo> {

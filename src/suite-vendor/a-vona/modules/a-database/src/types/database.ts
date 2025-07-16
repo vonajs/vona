@@ -4,8 +4,8 @@ import type { ServiceDb } from '../service/db.ts';
 import type { ConfigDatabase } from './config.ts';
 
 export interface IDbInfo {
-  level?: number;
-  clientName?: keyof IDatabaseClientRecord;
+  level: number;
+  clientName: keyof IDatabaseClientRecord;
 }
 
 export interface IDatabaseClientRecord {

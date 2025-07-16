@@ -1,9 +1,9 @@
 import type { FunctionAsync } from 'vona';
-import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
-import type { IDbInfo } from '../types/database.ts';
+import type { ConfigDatabaseClient } from '../types/config.ts';
+import type { IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { ServiceDb } from '../service/db.ts';
+import { ServiceDatabaseClient } from '../service/databaseClient.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -11,26 +11,30 @@ export class BeanDatabase extends BeanBase {
     return this.scope.service.databaseAsyncLocalStorage.current;
   }
 
-  async newDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfo?: IDbInfo): Promise<RESULT> {
-    const current = this.bean.database.current;
-    const level = (dbInfo?.level ?? current?.level ?? 0) + 1;
-    const clientName = dbInfo?.clientName ?? current?.clientName;
-    return this.newDb(fn, { level, clientName });
+  getClient(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    return this.app.bean._getBeanSelector(
+      ServiceDatabaseClient,
+      this.scope.service.database.prepareClientNameSelector(dbInfoOrClientName),
+      clientConfig,
+    );
   }
 
-  async newDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfo?: IDbInfo): Promise<RESULT> {
+  getDb(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    return this.getClient(dbInfoOrClientName, clientConfig).db;
+  }
+
+  async switchDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord): Promise<RESULT> {
+    const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
+    return this.switchDb(fn, { level: dbInfo.level + 1, clientName: dbInfo.clientName });
+  }
+
+  async switchDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord): Promise<RESULT> {
     const current = this.bean.database.current;
-    const dbInfo2 = this.scope.service.database.prepareDbInfo(dbInfo);
-    if (dbInfo2.level === current?.level && dbInfo2.clientName === current?.clientName) {
+    const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
+    if (dbInfo.level === current?.level && dbInfo.clientName === current?.clientName) {
       return fn();
     }
-    const db = this.createDb(dbInfo2);
+    const db = this.getDb(dbInfo);
     return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
-  }
-
-  createDb(dbInfo: IDbInfo): ServiceDb;
-  createDb(dbInfo: undefined, client: ServiceDatabaseClient): ServiceDb;
-  createDb(dbInfo?: IDbInfo, client?: ServiceDatabaseClient): ServiceDb {
-    return this.app.bean._newBean(ServiceDb, dbInfo, client);
   }
 }
