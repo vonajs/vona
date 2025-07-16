@@ -1,4 +1,5 @@
 import type { Constructable } from 'vona';
+import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
@@ -56,14 +57,23 @@ export function $tableComments<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
 ): Record<string, string> {
   const app = useApp();
+  const classEntity2 = _prepareClassEntity(classEntity);
   // rules
-  const rules = getTargetDecoratorRules(_prepareClassEntity(classEntity).prototype);
+  const rules = getTargetDecoratorRules(classEntity2.prototype);
   const comments = {};
   for (const key in rules) {
     const rule = rules[key] as z.ZodSchema;
     const comment = rule._def.openapi?.metadata?.description || rule._def.openapi?.metadata?.title;
     comments[key] = comment ? app.meta.text(comment) : '';
   }
+  // table comment
+  const beanOptions = appResource.getBean(classEntity2);
+  if (beanOptions) {
+    const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
+    const comment = openapi?.description || openapi?.title;
+    cast(comments).$table = comment ? app.meta.text(comment) : '';
+  }
+  // ok
   return comments;
 }
 
