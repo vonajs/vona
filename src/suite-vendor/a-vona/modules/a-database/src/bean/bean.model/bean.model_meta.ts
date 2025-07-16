@@ -14,17 +14,19 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public [SymbolKeyEntityMeta]: TypeEntityMeta<TRecord>;
   public [SymbolKeyModelOptions]: IDecoratorModelOptions;
 
-  private [SymbolModelDb]: ServiceDb;
+  private [SymbolModelDb]?: ServiceDb;
   private [SymbolModelTable]?: keyof ITableRecord;
 
-  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
+  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
     // clientName
-    if (!isNil(clientNameSelector)) {
-      if (typeof clientNameSelector === 'string') {
-        const serviceDatabase = this.$scope.database.service.database;
-        this[SymbolModelDb] = this.bean.database.createDb(serviceDatabase.parseClientNameSelector(clientNameSelector));
+    if (!isNil(clientName)) {
+      if (typeof clientName === 'string') {
+        this[SymbolModelDb] = this.bean.database.createDb({
+          level: this.bean.database.current.level,
+          clientName,
+        });
       } else {
-        this[SymbolModelDb] = clientNameSelector;
+        this[SymbolModelDb] = clientName;
       }
     }
     // table
@@ -33,10 +35,6 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   protected get self() {
     return cast<BeanModel>(this);
-  }
-
-  public get db() {
-    return this[SymbolModelDb] ?? this.bean.database.current;
   }
 
   protected get connection() {
@@ -55,8 +53,24 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.$scope.version.model.viewRecord;
   }
 
+  public get db() {
+    return this[SymbolModelDb] ?? this._getDb();
+  }
+
+  private _getDb() {
+    const clientName = this.options.clientName;
+    if (!clientName) return this.bean.database.current;
+    return this.bean.database.createDb({
+      level: this.bean.database.current.level,
+      clientName,
+    });
+  }
+
   getTable(): keyof ITableRecord {
-    if (this[SymbolModelTable]) return this[SymbolModelTable];
+    return this[SymbolModelTable] ?? this._getTable();
+  }
+
+  private _getTable() {
     const table = this.options.table;
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
