@@ -36,7 +36,7 @@ export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<T
     return await this._batchInsert(table, data, options) as Promise<TRecord[]>;
   }
 
-  async update(table: keyof ITableRecord, data?: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<void> {
+  async update(table: keyof ITableRecord, data: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<void> {
     return await this._update(table, data, options);
   }
 

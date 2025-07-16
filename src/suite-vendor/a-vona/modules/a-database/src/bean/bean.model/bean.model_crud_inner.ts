@@ -181,10 +181,13 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   }
 
   protected async _update(
-    table: keyof ITableRecord,
+    table: keyof ITableRecord | undefined,
     data: Partial<TRecord>,
     options?: IModelUpdateOptionsGeneral<TRecord>,
   ): Promise<void> {
+    // table
+    table = table || this.getTable();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
     [data] = await this.prepareData(table, data);
     // where
