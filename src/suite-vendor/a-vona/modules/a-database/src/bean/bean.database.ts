@@ -11,7 +11,7 @@ export class BeanDatabase extends BeanBase {
     return this.scope.service.databaseAsyncLocalStorage.current;
   }
 
-  getClient(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+  getClient(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     return this.app.bean._getBeanSelector(
       ServiceDatabaseClient,
       this.scope.service.database.prepareClientNameSelector(dbInfoOrClientName),
@@ -19,16 +19,16 @@ export class BeanDatabase extends BeanBase {
     );
   }
 
-  getDb(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+  getDb(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     return this.getClient(dbInfoOrClientName, clientConfig).db;
   }
 
-  async switchDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord): Promise<RESULT> {
+  async switchDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): Promise<RESULT> {
     const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
     return this.switchDb(fn, { level: dbInfo.level + 1, clientName: dbInfo.clientName });
   }
 
-  async switchDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord): Promise<RESULT> {
+  async switchDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): Promise<RESULT> {
     const current = this.bean.database.current;
     const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
     if (dbInfo.level === current?.level && dbInfo.clientName === current?.clientName) {

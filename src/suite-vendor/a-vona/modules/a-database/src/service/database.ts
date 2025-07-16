@@ -15,7 +15,7 @@ export class ServiceDatabase extends BeanBase {
     return dialect;
   }
 
-  prepareDbInfo(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord): IDbInfo {
+  prepareDbInfo(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): IDbInfo {
     let level;
     let clientName;
     if (typeof dbInfoOrClientName === 'string') {
@@ -34,13 +34,13 @@ export class ServiceDatabase extends BeanBase {
     return { level, clientName };
   }
 
-  prepareClientNameSelector(dbInfoOrClientName?: IDbInfo | keyof IDatabaseClientRecord) {
+  prepareClientNameSelector(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord) {
     const dbInfo = this.prepareDbInfo(dbInfoOrClientName);
     // combine
     return dbInfo.level === 0 ? dbInfo.clientName : `${dbInfo.clientName}:${dbInfo.level}`;
   }
 
-  parseClientNameSelector(clientNameSelector: string): Required<IDbInfo> {
+  parseClientNameSelector(clientNameSelector: string): IDbInfo {
     if (isNil(clientNameSelector)) throw new Error('invalid clientNameSelector');
     const [clientName, level] = clientNameSelector.split(':');
     return {
