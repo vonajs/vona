@@ -31,14 +31,13 @@ export class ServiceDatabase extends BeanBase {
 
   prepareClientNameSelector(dbInfo?: IDbInfo) {
     const level = dbInfo?.level;
-    const clientName = dbInfo?.clientName as keyof IDatabaseClientRecord | string;
+    let clientName = dbInfo?.clientName as keyof IDatabaseClientRecord | string;
     // string
     if (clientName && clientName.includes(':')) return clientName;
-    if (clientName === '') return clientName;
     // keyof IDatabaseClientRecord
-    const clientName2 = this.isDefaultClientName(clientName as any) ? '' : clientName;
+    clientName = this.isDefaultClientName(clientName as any) ? '' : clientName;
     if (level === undefined) throw new Error('should specify the db level');
-    return level === 0 ? clientName2 : `${clientName2}:${level}`;
+    return level === 0 ? clientName : `${clientName}:${level}`;
   }
 
   parseClientNameSelector(clientNameSelector: string): Required<IDbInfo> {

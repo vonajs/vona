@@ -27,8 +27,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   public cacheEntity: ServiceCacheEntity;
   protected relations: ServiceRelations;
 
-  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
-    super.__init__(clientNameSelector);
+  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
+    super.__init__(clientName, table);
     this.cacheQuery = this.bean._newBean(ServiceCacheQuery, this);
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
     this.relations = this.bean._newBean(ServiceRelations, this);

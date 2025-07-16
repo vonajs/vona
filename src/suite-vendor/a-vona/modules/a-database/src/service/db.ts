@@ -1,31 +1,21 @@
 import type { FunctionAny } from 'vona';
-import type { BeanDatabaseDialectBase } from 'vona-module-a-database';
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
+import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.ts';
+import type { IDatabaseClientDialectRecord, IDbInfo } from '../types/database.ts';
 import type { ITransactionConsistencyCommitOptions } from '../types/transaction.ts';
 import type { ServiceDatabaseClient } from './databaseClient.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { ServiceColumns } from 'vona-module-a-database';
+import { ServiceColumns } from './columns.ts';
 import { ServiceTransaction } from './transaction.ts';
 
 @Service()
 export class ServiceDb extends BeanBase {
-  private _level: number;
-  private _clientName: keyof IDatabaseClientRecord;
   private _client: ServiceDatabaseClient;
   private _columns: ServiceColumns;
   private _transaction: ServiceTransaction;
 
-  protected __init__(dbInfo?: IDbInfo, client?: ServiceDatabaseClient) {
-    if (client) {
-      this._client = client;
-      this._clientName = client.clientName;
-      this._level = client.level;
-    } else {
-      const dbInfo2 = this.scope.service.database.prepareDbInfo(dbInfo);
-      this._level = dbInfo2.level;
-      this._clientName = dbInfo2.clientName;
-    }
+  protected __init__(client: ServiceDatabaseClient) {
+    this._client = client;
   }
 
   get info(): IDbInfo {
@@ -33,17 +23,14 @@ export class ServiceDb extends BeanBase {
   }
 
   get level() {
-    return this._level;
+    return this._client.level;
   }
 
   get clientName() {
-    return this._clientName;
+    return this._client.clientName;
   }
 
   get client() {
-    if (!this._client) {
-      this._client = this.scope.service.database.getClient({ level: this.level, clientName: this.clientName });
-    }
     return this._client;
   }
 

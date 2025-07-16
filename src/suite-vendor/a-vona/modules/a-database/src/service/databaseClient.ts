@@ -4,6 +4,7 @@ import type { IDatabaseClientRecord } from '../types/database.ts';
 import knex from 'knex';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { ServiceDb } from './db.ts';
 
 export interface IPrepareDatabaseNameResult { database?: string; filename?: string }
 
@@ -14,6 +15,7 @@ export class ServiceDatabaseClient extends BeanBase {
   clientNameSelector: string;
   clientConfig: ConfigDatabaseClient;
   private _knex: Knex;
+  private _db: ServiceDb;
   private _onDatabaseClientReloadCancel?: Function;
 
   get configDatabase() {
@@ -22,6 +24,10 @@ export class ServiceDatabaseClient extends BeanBase {
 
   get connection(): Knex {
     return this._knex;
+  }
+
+  get db(): ServiceDb {
+    return this._db;
   }
 
   protected __init__(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
@@ -50,9 +56,12 @@ export class ServiceDatabaseClient extends BeanBase {
     this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this._knex = knex(this.clientConfig);
+    // db
+    this._db = this.bean._newBean(ServiceDb, this);
   }
 
   private async __close() {
+    this._db = undefined as any;
     if (this._knex) {
       await this._knex.destroy();
       this._knex = undefined as any;
