@@ -204,6 +204,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       if (isNil(id)) {
         throw new Error('id should be specified for update method');
       }
+      const id2 = this.__checkCacheKeyValid(data, table, false);
+      if (!isNil(id2)) {
+        // donothing
+        return;
+      }
     } else {
       const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
