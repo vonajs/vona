@@ -6,7 +6,6 @@ import { appResource, BeanBase, cast } from 'vona';
 import { $tableName } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
-const SymbolModelDbsCache = Symbol('SymbolModelDbsCache');
 const SymbolModelDb = Symbol('SymbolModelDb');
 const SymbolModelTable = Symbol('SymbolModelTable');
 
@@ -15,7 +14,6 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public [SymbolKeyEntityMeta]: TypeEntityMeta<TRecord>;
   public [SymbolKeyModelOptions]: IDecoratorModelOptions;
 
-  private [SymbolModelDbsCache]: Record<string, ServiceDb> = {};
   private [SymbolModelDb]?: ServiceDb;
   private [SymbolModelTable]?: keyof ITableRecord;
 
@@ -23,10 +21,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     // clientName
     if (!isNil(clientName)) {
       if (typeof clientName === 'string') {
-        this[SymbolModelDb] = this.bean.database.createDb({
-          level: this.bean.database.current.level,
-          clientName,
-        });
+        this[SymbolModelDb] = this.bean.database.getDb(clientName);
       } else {
         this[SymbolModelDb] = clientName;
       }
@@ -67,12 +62,8 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     if (typeof clientName === 'function') {
       clientName = clientName(this.ctx, this);
     }
-    const level = this.bean.database.current.level;
-    const cacheKey = `${clientName}:${level}`;
-    if (!this[SymbolModelDbsCache][cacheKey]) {
-      this[SymbolModelDbsCache][cacheKey] = this.bean.database.createDb({ level, clientName });
-    }
-    return this[SymbolModelDbsCache][cacheKey];
+    // db
+    return this.bean.database.getDb(clientName);
   }
 
   getTable(): keyof ITableRecord {
