@@ -7,6 +7,7 @@ import { $tableName } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
 const SymbolModelDb = Symbol('SymbolModelDb');
+const SymbolModelTable = Symbol('SymbolModelTable');
 
 export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public [SymbolKeyEntity]: TRecord;
@@ -14,15 +15,20 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public [SymbolKeyModelOptions]: IDecoratorModelOptions;
 
   private [SymbolModelDb]: ServiceDb;
+  private [SymbolModelTable]?: keyof ITableRecord;
 
-  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb) {
-    if (isNil(clientNameSelector)) return;
-    if (typeof clientNameSelector === 'string') {
-      const serviceDatabase = this.$scope.database.service.database;
-      this[SymbolModelDb] = this.bean.database.createDb(serviceDatabase.parseClientNameSelector(clientNameSelector));
-    } else {
-      this[SymbolModelDb] = clientNameSelector;
+  protected __init__(clientNameSelector?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
+    // clientName
+    if (!isNil(clientNameSelector)) {
+      if (typeof clientNameSelector === 'string') {
+        const serviceDatabase = this.$scope.database.service.database;
+        this[SymbolModelDb] = this.bean.database.createDb(serviceDatabase.parseClientNameSelector(clientNameSelector));
+      } else {
+        this[SymbolModelDb] = clientNameSelector;
+      }
     }
+    // table
+    this[SymbolModelTable] = table;
   }
 
   protected get self() {
@@ -50,6 +56,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   }
 
   getTable(): keyof ITableRecord {
+    if (this[SymbolModelTable]) return this[SymbolModelTable];
     const table = this.options.table;
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
