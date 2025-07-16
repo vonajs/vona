@@ -60,8 +60,13 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   }
 
   private _getDb() {
-    const clientName = this.options.clientName;
+    let clientName = this.options.clientName;
+    // use current
     if (!clientName) return this.bean.database.current;
+    // custom clientName
+    if (typeof clientName === 'function') {
+      clientName = clientName(this.ctx, this);
+    }
     const level = this.bean.database.current.level;
     const cacheKey = `${clientName}:${level}`;
     if (!this[SymbolModelDbsCache][cacheKey]) {

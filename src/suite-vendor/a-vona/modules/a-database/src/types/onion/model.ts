@@ -13,6 +13,9 @@ export interface IModelClassRecord {}
 export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (ctx: VonaContext, defaultTable: keyof ITableRecord, modelInstance: BeanModelMeta<T>) => string;
 
+export type TypeDynamicClientName<T extends EntityBaseEmpty = EntityBaseEmpty> =
+  (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => keyof IDatabaseClientRecord;
+
 export type TypeModelTargetClassLike<TRecord extends EntityBaseEmpty = EntityBaseEmpty> = TypeModelClassLike<BeanModelMeta<TRecord>>;
 
 export interface IDecoratorModelOptions {
@@ -27,7 +30,7 @@ export interface IDecoratorModelOptions {
     keysAux?: string | string[];
     modelsClear?: TypeModelTargetClassLike | TypeModelTargetClassLike[];
   };
-  clientName?: keyof IDatabaseClientRecord;
+  clientName?: TypeDynamicClientName<EntityBaseEmpty> | keyof IDatabaseClientRecord;
   // should not use TypeModelRelations or {}
   relations?: Record<never, never>;
 }
