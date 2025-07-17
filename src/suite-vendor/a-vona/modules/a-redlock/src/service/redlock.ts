@@ -60,7 +60,7 @@ export class ServiceRedlock extends BeanBase {
     return await this.lock(
       resource,
       async () => {
-        return await this.bean.database.newDbIsolate(fn, options);
+        return await this.bean.database.switchDbIsolate(fn, options);
       },
       options,
     );
