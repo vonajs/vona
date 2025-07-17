@@ -55,7 +55,7 @@ export class ServiceTransaction extends BeanBase {
       if (!this.inTransaction) {
         return this._isolationLevelRequired(fn, transactionOptions);
       } else {
-        return this.bean.database.newDbIsolate(() => {
+        return this.bean.database.switchDbIsolate(() => {
           return this.bean.database.current.transaction.begin(() => {
             return fn();
           }, transactionOptions);
@@ -65,7 +65,7 @@ export class ServiceTransaction extends BeanBase {
       if (!this.inTransaction) {
         return fn();
       } else {
-        return this.bean.database.newDbIsolate(fn, this._db.info);
+        return this.bean.database.switchDbIsolate(fn, this._db.info);
       }
     } else if (propagation === 'NEVER') {
       if (!this.inTransaction) {
