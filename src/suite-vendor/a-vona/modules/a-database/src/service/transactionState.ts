@@ -8,7 +8,7 @@ import { ServiceTransactionChain } from './transactionChain.ts';
 export class ServiceTransactionState extends BeanBase {
   private _chains: Record<string, ServiceTransactionChain> = {};
 
-  public getTransactionChain(dbInfo: IDbInfo): ServiceTransactionChain | undefined {
+  public get(dbInfo: IDbInfo): ServiceTransactionChain | undefined {
     const selector = this.scope.service.database.prepareClientNameSelector(dbInfo);
     return this._chains[selector];
   }

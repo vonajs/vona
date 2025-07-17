@@ -21,7 +21,7 @@ export class ServiceTransaction extends BeanBase {
   }
 
   get transactionChain(): ServiceTransactionChain | undefined {
-    return this.transactionState.getTransactionChain(this._db.info);
+    return this.transactionState.get(this._db.info);
   }
 
   get inTransaction() {
