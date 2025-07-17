@@ -1,6 +1,7 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
+import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
@@ -20,7 +21,7 @@ export class BeanExecutor extends BeanBase {
   }
 
   runInBackground(fn: FunctionAsync<void>) {
-    return this.bean.database.newDbIsolate(() => {
+    return this.bean.database.switchDbIsolate(() => {
       return this.newCtx(fn);
     });
   }
@@ -34,17 +35,16 @@ export class BeanExecutor extends BeanBase {
 
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
-    options.dbInfo = options.dbInfo === undefined ? true : options.dbInfo;
+    options.dbInfo = isNil(options.dbInfo) ? { level: 1 } : options.dbInfo;
     options.instanceName = options.instanceName === undefined ? (this.ctx?.instanceName ?? '') : options.instanceName;
     return this.newCtx(fn, options);
   }
 
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
-    if (!options?.dbInfo) return this._newCtxInner(fn, options);
-    const dbInfo = options.dbInfo === true ? {} : options.dbInfo;
-    return this.bean.database.newDb(() => {
+    if (isNil(options?.dbInfo)) return this._newCtxInner(fn, options);
+    return this.bean.database.switchDb(() => {
       return this._newCtxInner(fn, options);
-    }, dbInfo);
+    }, options?.dbInfo);
   }
 
   private async _newCtxInner<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
