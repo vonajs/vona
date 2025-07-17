@@ -42,18 +42,15 @@ export class ServiceDatabase extends BeanBase {
   parseClientNameSelector(clientNameSelector: string): IDbInfo {
     if (isNil(clientNameSelector)) throw new Error('invalid clientNameSelector');
     const [clientName, level] = clientNameSelector.split(':');
+    if (!clientName) throw new Error('clientName must be specified');
     return {
       level: Number(level ?? 0),
-      clientName: clientName as keyof IDatabaseClientRecord || this.app.config.database.defaultClient,
+      clientName: clientName as keyof IDatabaseClientRecord,
     };
   }
 
-  isDefaultClientName(clientName?: keyof IDatabaseClientRecord) {
-    return (!clientName || clientName === 'default' || clientName === this.app.config.database.defaultClient);
-  }
-
   prepareClientName(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
-    return this.isDefaultClientName(clientName) ? this.app.config.database.defaultClient : clientName!;
+    return (!clientName || clientName === 'default') ? this.app.config.database.defaultClient : clientName;
   }
 
   prepareClientNameReal(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
