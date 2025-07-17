@@ -4,7 +4,7 @@ import type { IDatabaseClientRecord } from '../types/database.ts';
 import knex from 'knex';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { ServiceDb } from './db.ts';
+import { ServiceDb } from './db_.ts';
 
 export interface IPrepareDatabaseNameResult { database?: string; filename?: string }
 

@@ -2,7 +2,7 @@ import type knex from 'knex';
 import type { Knex } from 'knex';
 import type { FunctionAny, FunctionAsync } from 'vona';
 import type { ITransactionConsistencyCommitOptions, ITransactionOptions } from '../types/transaction.ts';
-import type { ServiceDb } from './db.ts';
+import type { ServiceDb } from './db_.ts';
 import type { ServiceTransactionChain } from './transactionChain.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';

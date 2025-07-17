@@ -60,7 +60,7 @@ export * from '../service/columnsCache.ts';
 export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage.ts';
 export * from '../service/databaseClient.ts';
-export * from '../service/db.ts';
+export * from '../service/db_.ts';
 export * from '../service/entityResolver.ts';
 export * from '../service/modelResolver.ts';
 export * from '../service/relations.ts';
@@ -81,7 +81,6 @@ declare module 'vona-module-a-bean' {
 'a-database:database': never;
 'a-database:databaseAsyncLocalStorage': never;
 'a-database:databaseClient': never;
-'a-database:db': never;
 'a-database:entityResolver': never;
 'a-database:modelResolver': never;
 'a-database:relations': never;
@@ -164,16 +163,6 @@ declare module 'vona-module-a-database' {
           export interface ServiceDatabaseClient {
             get $beanFullName(): 'a-database.service.databaseClient';
             get $onionName(): 'a-database:databaseClient';
-          }
-
-        export interface ServiceDb {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceDb {
-            get $beanFullName(): 'a-database.service.db';
-            get $onionName(): 'a-database:db';
           }
 
         export interface ServiceEntityResolver {
@@ -265,7 +254,6 @@ import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
-import type { ServiceDb } from '../service/db.ts';
 import type { ServiceEntityResolver } from '../service/entityResolver.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceRelations } from '../service/relations.ts';
@@ -282,7 +270,6 @@ export interface IModuleService {
 'database': ServiceDatabase;
 'databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
 'databaseClient': ServiceDatabaseClient;
-'db': ServiceDb;
 'entityResolver': ServiceEntityResolver;
 'modelResolver': ServiceModelResolver;
 'relations': ServiceRelations;
@@ -305,7 +292,6 @@ declare module 'vona' {
 'a-database.service.database': ServiceDatabase;
 'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
 'a-database.service.databaseClient': ServiceDatabaseClient;
-'a-database.service.db': ServiceDb;
 'a-database.service.entityResolver': ServiceEntityResolver;
 'a-database.service.modelResolver': ServiceModelResolver;
 'a-database.service.relations': ServiceRelations;

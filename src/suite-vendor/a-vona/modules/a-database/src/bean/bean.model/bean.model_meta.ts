@@ -1,4 +1,4 @@
-import type { ServiceDb } from '../../service/db.ts';
+import type { ServiceDb } from '../../service/db_.ts';
 import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelTargetClassLike } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isClass, isNil } from '@cabloy/utils';

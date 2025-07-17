@@ -7,6 +7,7 @@ export * from './entityBase.ts';
 export * from './entityBaseEmpty.ts';
 export * from './entityBaseInner.ts';
 export * from './entityBaseSimple.ts';
+export * from './extra.ts';
 export * from './logger.ts';
 export * from './model.ts';
 export * from './modelWhere.ts';
