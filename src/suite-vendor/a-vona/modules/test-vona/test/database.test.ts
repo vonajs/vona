@@ -12,7 +12,7 @@ describe('database.test.ts', () => {
       // switch
       const clientNames = Object.keys(app.config.database.clients);
       const clientName2 = clientNames.find(item => item !== app.config.database.defaultClient);
-      await app.bean.database.newDb(async () => {
+      await app.bean.database.switchDb(async () => {
         assert.equal(app.ctx.db.clientName, clientName2);
       }, { clientName: clientName2 as any });
       // restore
@@ -36,7 +36,7 @@ describe('database.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
       assert.equal(entityTest.title, 'clientNameDynamic:fail');
       await catchError(async () => {
-        const db = app.bean.database.createDb({ clientName: 'default' });
+        const db = app.bean.database.getDb({ clientName: 'default' });
         await db.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(db);
           assert.equal(modelTest.options.clientName, 'default');
@@ -56,7 +56,7 @@ describe('database.test.ts', () => {
       const scopeTest = app.bean.scope('test-vona');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:success' });
       assert.equal(entityTest.title, 'clientNameDynamic:success');
-      const db = app.bean.database.createDb({ clientName: 'default' });
+      const db = app.bean.database.getDb({ clientName: 'default' });
       await db.transaction.begin(async () => {
         const modelTest = scopeTest.model.test.newInstance(db);
         assert.equal(modelTest.options.clientName, 'default');
@@ -75,7 +75,7 @@ describe('database.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'transaction:compensate:fail' });
       assert.equal(entityTest.title, 'transaction:compensate:fail');
       await catchError(async () => {
-        const db = app.bean.database.createDb({ clientName: 'default' });
+        const db = app.bean.database.getDb({ clientName: 'default' });
         await db.transaction.begin(async () => {
           const modelTest = scopeTest.model.test.newInstance(db);
           assert.equal(modelTest.options.clientName, 'default');
