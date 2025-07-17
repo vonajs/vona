@@ -67,6 +67,7 @@ export * from '../service/relations.ts';
 export * from '../service/transaction.ts';
 export * from '../service/transactionAsyncLocalStorage.ts';
 export * from '../service/transactionConsistency‌.ts';
+export * from '../service/transactionState.ts';
 
 import 'vona';
 declare module 'vona-module-a-bean' {
@@ -86,6 +87,7 @@ declare module 'vona-module-a-bean' {
 'a-database:transaction': never;
 'a-database:transactionAsyncLocalStorage': never;
 'a-database:transactionConsistency‌': never;
+'a-database:transactionState': never;
     }
 
   
@@ -230,6 +232,16 @@ declare module 'vona-module-a-database' {
           export interface ServiceTransactionConsistency‌ {
             get $beanFullName(): 'a-database.service.transactionConsistency‌';
             get $onionName(): 'a-database:transactionConsistency‌';
+          }
+
+        export interface ServiceTransactionState {
+          /** @internal */
+          get scope(): ScopeModuleADatabase;
+        }
+
+          export interface ServiceTransactionState {
+            get $beanFullName(): 'a-database.service.transactionState';
+            get $onionName(): 'a-database:transactionState';
           } 
 }
 /** service: end */
@@ -248,6 +260,7 @@ import type { ServiceRelations } from '../service/relations.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionAsyncLocalStorage } from '../service/transactionAsyncLocalStorage.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
+import type { ServiceTransactionState } from '../service/transactionState.ts';
 export interface IModuleService {
   'cacheEntity': ServiceCacheEntity;
 'cacheQuery': ServiceCacheQuery;
@@ -263,6 +276,7 @@ export interface IModuleService {
 'transaction': ServiceTransaction;
 'transactionAsyncLocalStorage': ServiceTransactionAsyncLocalStorage;
 'transactionConsistency‌': ServiceTransactionConsistency‌;
+'transactionState': ServiceTransactionState;
 }
 /** service: end */
 /** service: begin */
@@ -284,6 +298,7 @@ declare module 'vona' {
 'a-database.service.transaction': ServiceTransaction;
 'a-database.service.transactionAsyncLocalStorage': ServiceTransactionAsyncLocalStorage;
 'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;
+'a-database.service.transactionState': ServiceTransactionState;
   }
 }
 /** service: end */
