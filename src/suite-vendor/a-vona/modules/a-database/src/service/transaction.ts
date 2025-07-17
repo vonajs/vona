@@ -1,8 +1,9 @@
 import type knex from 'knex';
 import type { Knex } from 'knex';
 import type { FunctionAny, FunctionAsync } from 'vona';
-import type { ITransactionOptions } from '../types/transaction.ts';
+import type { ITransactionConsistencyCommitOptions, ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDb } from './db.ts';
+import type { ServiceTransactionChain } from './transactionChain.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { TransactionIsolationLevelsMap } from '../types/transaction.ts';
@@ -19,12 +20,16 @@ export class ServiceTransaction extends BeanBase {
     return this.scope.service.transactionAsyncLocalStorage.transactionState;
   }
 
+  get transactionChain(): ServiceTransactionChain | undefined {
+    return this.transactionState.getTransactionChain(this._db.info);
+  }
+
   get inTransaction() {
-    return this._transactionCounter > 0;
+    return !!this.transactionChain;
   }
 
   get connection(): knex.Knex.Transaction | undefined {
-    return this._connection;
+    return this.inTransaction ? this.transactionChain!.connection : undefined;
   }
 
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
@@ -76,20 +81,18 @@ export class ServiceTransaction extends BeanBase {
     throw new Error('transaction error: unknown propagation');
   }
 
-  commit(cb: FunctionAny) {
-    this._transactionConsistency.commit(cb);
+  commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
+    if (options?.ctxPrefer || !this.inTransaction) {
+      this.ctx?.commit(cb);
+    } else {
+      this.transactionChain!.commit(cb);
+    }
   }
 
   compensate(cb: FunctionAny) {
-    this._transactionConsistency.compensate(cb);
-  }
-
-  private async _commitDone() {
-    await this._transactionConsistency.commitDone();
-  }
-
-  private async _compensateDone() {
-    await this._transactionConsistency.compensateDone();
+    if (this.inTransaction) {
+      this.transactionChain!.compensate(cb);
+    }
   }
 
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {

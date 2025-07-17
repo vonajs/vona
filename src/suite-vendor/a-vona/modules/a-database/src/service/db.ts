@@ -53,7 +53,7 @@ export class ServiceDb extends BeanBase {
   }
 
   get connection() {
-    return this.inTransaction ? this.transaction.connection! : this.client.connection;
+    return this.transaction.connection ?? this.client.connection;
   }
 
   get dialectName(): keyof IDatabaseClientDialectRecord {
@@ -65,16 +65,10 @@ export class ServiceDb extends BeanBase {
   }
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
-    if (options?.ctxPrefer || !this.transaction.inTransaction) {
-      this.ctx?.commit(cb);
-    } else {
-      this.transaction.commit(cb);
-    }
+    return this.transaction.commit(cb, options);
   }
 
   compensate(cb: FunctionAny) {
-    if (this.transaction.inTransaction) {
-      this.transaction.compensate(cb);
-    }
+    return this.transaction.compensate(cb);
   }
 }
