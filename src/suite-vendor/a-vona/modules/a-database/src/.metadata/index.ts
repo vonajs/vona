@@ -66,8 +66,8 @@ export * from '../service/modelResolver.ts';
 export * from '../service/relations.ts';
 export * from '../service/transaction.ts';
 export * from '../service/transactionAsyncLocalStorage.ts';
-export * from '../service/transactionChain.ts';
 export * from '../service/transactionConsistency‌.ts';
+export * from '../service/transactionFiber.ts';
 export * from '../service/transactionState.ts';
 
 import 'vona';
@@ -86,8 +86,8 @@ declare module 'vona-module-a-bean' {
 'a-database:relations': never;
 'a-database:transaction': never;
 'a-database:transactionAsyncLocalStorage': never;
-'a-database:transactionChain': never;
 'a-database:transactionConsistency‌': never;
+'a-database:transactionFiber': never;
 'a-database:transactionState': never;
     }
 
@@ -215,16 +215,6 @@ declare module 'vona-module-a-database' {
             get $onionName(): 'a-database:transactionAsyncLocalStorage';
           }
 
-        export interface ServiceTransactionChain {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceTransactionChain {
-            get $beanFullName(): 'a-database.service.transactionChain';
-            get $onionName(): 'a-database:transactionChain';
-          }
-
         export interface ServiceTransactionConsistency‌ {
           /** @internal */
           get scope(): ScopeModuleADatabase;
@@ -233,6 +223,16 @@ declare module 'vona-module-a-database' {
           export interface ServiceTransactionConsistency‌ {
             get $beanFullName(): 'a-database.service.transactionConsistency‌';
             get $onionName(): 'a-database:transactionConsistency‌';
+          }
+
+        export interface ServiceTransactionFiber {
+          /** @internal */
+          get scope(): ScopeModuleADatabase;
+        }
+
+          export interface ServiceTransactionFiber {
+            get $beanFullName(): 'a-database.service.transactionFiber';
+            get $onionName(): 'a-database:transactionFiber';
           }
 
         export interface ServiceTransactionState {
@@ -259,8 +259,8 @@ import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceRelations } from '../service/relations.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionAsyncLocalStorage } from '../service/transactionAsyncLocalStorage.ts';
-import type { ServiceTransactionChain } from '../service/transactionChain.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
+import type { ServiceTransactionFiber } from '../service/transactionFiber.ts';
 import type { ServiceTransactionState } from '../service/transactionState.ts';
 export interface IModuleService {
   'cacheEntity': ServiceCacheEntity;
@@ -275,8 +275,8 @@ export interface IModuleService {
 'relations': ServiceRelations;
 'transaction': ServiceTransaction;
 'transactionAsyncLocalStorage': ServiceTransactionAsyncLocalStorage;
-'transactionChain': ServiceTransactionChain;
 'transactionConsistency‌': ServiceTransactionConsistency‌;
+'transactionFiber': ServiceTransactionFiber;
 'transactionState': ServiceTransactionState;
 }
 /** service: end */
@@ -297,8 +297,8 @@ declare module 'vona' {
 'a-database.service.relations': ServiceRelations;
 'a-database.service.transaction': ServiceTransaction;
 'a-database.service.transactionAsyncLocalStorage': ServiceTransactionAsyncLocalStorage;
-'a-database.service.transactionChain': ServiceTransactionChain;
 'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;
+'a-database.service.transactionFiber': ServiceTransactionFiber;
 'a-database.service.transactionState': ServiceTransactionState;
   }
 }

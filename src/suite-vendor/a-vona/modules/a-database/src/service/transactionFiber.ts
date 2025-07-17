@@ -5,7 +5,7 @@ import { Service } from 'vona-module-a-bean';
 import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
-export class ServiceTransactionChain extends BeanBase {
+export class ServiceTransactionFiber extends BeanBase {
   private _connection: knex.Knex.Transaction;
   private _transactionConsistency: ServiceTransactionConsistency‌;
 

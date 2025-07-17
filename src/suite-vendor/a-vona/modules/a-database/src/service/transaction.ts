@@ -3,7 +3,7 @@ import type { Knex } from 'knex';
 import type { FunctionAny, FunctionAsync } from 'vona';
 import type { ITransactionConsistencyCommitOptions, ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDb } from './db_.ts';
-import type { ServiceTransactionChain } from './transactionChain.ts';
+import type { ServiceTransactionFiber } from './transactionFiber.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { TransactionIsolationLevelsMap } from '../types/transaction.ts';
@@ -20,16 +20,16 @@ export class ServiceTransaction extends BeanBase {
     return this.scope.service.transactionAsyncLocalStorage.transactionState;
   }
 
-  get transactionChain(): ServiceTransactionChain | undefined {
+  get transactionFiber(): ServiceTransactionFiber | undefined {
     return this.transactionState.get(this._db.info);
   }
 
   get inTransaction() {
-    return !!this.transactionChain;
+    return !!this.transactionFiber;
   }
 
   get connection(): knex.Knex.Transaction | undefined {
-    return this.transactionChain?.connection;
+    return this.transactionFiber?.connection;
   }
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
@@ -37,18 +37,18 @@ export class ServiceTransaction extends BeanBase {
       this.ctx?.commit(cb);
       return;
     }
-    const chain = this.transactionChain;
-    if (!chain) {
+    const fiber = this.transactionFiber;
+    if (!fiber) {
       this.ctx?.commit(cb);
     } else {
-      chain.commit(cb);
+      fiber.commit(cb);
     }
   }
 
   compensate(cb: FunctionAny) {
-    const chain = this.transactionChain;
-    if (chain) {
-      chain.compensate(cb);
+    const fiber = this.transactionFiber;
+    if (fiber) {
+      fiber.compensate(cb);
     }
   }
 
@@ -104,30 +104,30 @@ export class ServiceTransaction extends BeanBase {
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     let res: RESULT;
     // begin
-    let chain: ServiceTransactionChain | undefined;
+    let fiber: ServiceTransactionFiber | undefined;
     if (!this.inTransaction) {
       const connection = this._db.client.connection;
       const transactionConnection = await connection.transaction(_translateTransactionOptions(options));
-      chain = this.transactionState.add(this._db.info, transactionConnection);
+      fiber = this.transactionState.add(this._db.info, transactionConnection);
     }
     // fn
     try {
       res = await fn();
     } catch (err) {
-      if (chain) {
-        await chain.doRollback();
+      if (fiber) {
+        await fiber.doRollback();
         this.transactionState.remove(this._db.info);
       }
       throw err;
     }
     try {
-      if (chain) {
-        await chain.doCommit();
+      if (fiber) {
+        await fiber.doCommit();
         this.transactionState.remove(this._db.info);
       }
     } catch (err) {
-      if (chain) {
-        await chain.doRollback();
+      if (fiber) {
+        await fiber.doRollback();
         this.transactionState.remove(this._db.info);
       }
       throw err;
