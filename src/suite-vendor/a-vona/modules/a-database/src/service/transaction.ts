@@ -32,6 +32,26 @@ export class ServiceTransaction extends BeanBase {
     return this.transactionChain?.connection;
   }
 
+  commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
+    if (options?.ctxPrefer) {
+      this.ctx?.commit(cb);
+      return;
+    }
+    const chain = this.transactionChain;
+    if (!chain) {
+      this.ctx?.commit(cb);
+    } else {
+      chain.commit(cb);
+    }
+  }
+
+  compensate(cb: FunctionAny) {
+    const chain = this.transactionChain;
+    if (chain) {
+      chain.compensate(cb);
+    }
+  }
+
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     // transactionOptions
     const transactionOptions = Object.assign({}, options, { propagation: undefined });
@@ -79,26 +99,6 @@ export class ServiceTransaction extends BeanBase {
       }
     }
     throw new Error('transaction error: unknown propagation');
-  }
-
-  commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
-    if (options?.ctxPrefer) {
-      this.ctx?.commit(cb);
-      return;
-    }
-    const chain = this.transactionChain;
-    if (!chain) {
-      this.ctx?.commit(cb);
-    } else {
-      chain.commit(cb);
-    }
-  }
-
-  compensate(cb: FunctionAny) {
-    const chain = this.transactionChain;
-    if (chain) {
-      chain.compensate(cb);
-    }
   }
 
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
