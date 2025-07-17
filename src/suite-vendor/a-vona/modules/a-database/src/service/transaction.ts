@@ -29,7 +29,7 @@ export class ServiceTransaction extends BeanBase {
   }
 
   get connection(): knex.Knex.Transaction | undefined {
-    return this.inTransaction ? this.transactionChain!.connection : undefined;
+    return this.transactionChain?.connection;
   }
 
   async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
@@ -82,16 +82,22 @@ export class ServiceTransaction extends BeanBase {
   }
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
-    if (options?.ctxPrefer || !this.inTransaction) {
+    if (options?.ctxPrefer) {
+      this.ctx?.commit(cb);
+      return;
+    }
+    const chain = this.transactionChain;
+    if (!chain) {
       this.ctx?.commit(cb);
     } else {
-      this.transactionChain!.commit(cb);
+      chain.commit(cb);
     }
   }
 
   compensate(cb: FunctionAny) {
-    if (this.inTransaction) {
-      this.transactionChain!.compensate(cb);
+    const chain = this.transactionChain;
+    if (chain) {
+      chain.compensate(cb);
     }
   }
 
