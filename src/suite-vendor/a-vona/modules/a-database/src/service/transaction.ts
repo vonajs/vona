@@ -6,18 +6,17 @@ import type { ServiceDb } from './db.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { TransactionIsolationLevelsMap } from '../types/transaction.ts';
-import { ServiceTransactionConsistency‌ } from './transactionConsistency‌.ts';
 
 @Service()
 export class ServiceTransaction extends BeanBase {
-  private _transactionCounter: number = 0;
-  private _connection?: knex.Knex.Transaction;
   private _db: ServiceDb;
-  private _transactionConsistency: ServiceTransactionConsistency‌;
 
   protected __init__(db: ServiceDb) {
     this._db = db;
-    this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
+  }
+
+  get transactionState() {
+    return this.scope.service.transactionAsyncLocalStorage.transactionState;
   }
 
   get inTransaction() {

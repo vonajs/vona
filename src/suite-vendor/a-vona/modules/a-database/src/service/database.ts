@@ -34,8 +34,7 @@ export class ServiceDatabase extends BeanBase {
     return { level, clientName };
   }
 
-  prepareClientNameSelector(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord) {
-    const dbInfo = this.prepareDbInfo(dbInfoOrClientName);
+  prepareClientNameSelector(dbInfo: IDbInfo) {
     // combine
     return dbInfo.level === 0 ? dbInfo.clientName : `${dbInfo.clientName}:${dbInfo.level}`;
   }

@@ -12,9 +12,11 @@ export class BeanDatabase extends BeanBase {
   }
 
   getClient(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
+    const selector = this.scope.service.database.prepareClientNameSelector(dbInfo);
     return this.app.bean._getBeanSelector(
       ServiceDatabaseClient,
-      this.scope.service.database.prepareClientNameSelector(dbInfoOrClientName),
+      selector,
       clientConfig,
     );
   }
