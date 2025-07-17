@@ -28,21 +28,13 @@ export class ServiceTransactionChain extends BeanBase {
 
   async doCommit() {
     await this._connection.commit();
-    await this._commitDone();
+    await this._transactionConsistency.commitDone();
     this._connection = undefined as any;
   }
 
   async doRollback() {
     await this._connection.rollback();
-    await this._compensateDone();
-    this._connection = undefined as any;
-  }
-
-  private async _commitDone() {
-    await this._transactionConsistency.commitDone();
-  }
-
-  private async _compensateDone() {
     await this._transactionConsistency.compensateDone();
+    this._connection = undefined as any;
   }
 }
