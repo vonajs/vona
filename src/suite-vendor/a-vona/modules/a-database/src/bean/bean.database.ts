@@ -35,6 +35,8 @@ export class BeanDatabase extends BeanBase {
       return fn();
     }
     const db = this.getDb(dbInfo);
-    return this.scope.service.databaseAsyncLocalStorage.run(db, fn);
+    return this.scope.service.databaseAsyncLocalStorage.run(db, () => {
+      return this.scope.service.transactionAsyncLocalStorage.run(fn);
+    });
   }
 }
