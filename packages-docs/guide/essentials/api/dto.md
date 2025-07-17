@@ -186,3 +186,23 @@ You can combine multiple Mapped tool functions
 class DtoStudentUpdate
   extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
 ```
+
+## $Dto tools
+
+Vona also provides commonly used $Dto tools to further simplify the code
+
+### 1. $Dto.create
+
+Take `DtoStudentCreate` as an example. As mentioned earlier, `$Class.pick(EntityStudent, ['name', 'description'])` picks the specified fields from `EntityStudent`. Then, we can change the idea and omit some built-in fields from `EntityStudent`, and the remaining fields are the required fields
+
+``` typescript
+class DtoStudentCreate extends $Dto.create(EntityStudent) {}
+```
+
+### 2. $Dto.update
+
+Similarly, omit some built-in fields from `EntityStudent` and convert them to optional fields to get `DtoStudentUpdate`
+
+``` typescript
+class DtoStudentUpdate extends $Dto.update(EntityStudent) {}
+```
