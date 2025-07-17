@@ -9,7 +9,8 @@ export class ServiceTransactionChain extends BeanBase {
   private _connection: knex.Knex.Transaction;
   private _transactionConsistency: ServiceTransactionConsistency‌;
 
-  protected __init__() {
+  protected __init__(connection: knex.Knex.Transaction) {
+    this._connection = connection;
     this._transactionConsistency = this.app.bean._newBean(ServiceTransactionConsistency‌);
   }
 
@@ -23,6 +24,18 @@ export class ServiceTransactionChain extends BeanBase {
 
   compensate(cb: FunctionAny) {
     this._transactionConsistency.compensate(cb);
+  }
+
+  async doCommit() {
+    await this._connection.commit();
+    await this._commitDone();
+    this._connection = undefined as any;
+  }
+
+  async doRollback() {
+    await this._connection.rollback();
+    await this._compensateDone();
+    this._connection = undefined as any;
   }
 
   private async _commitDone() {

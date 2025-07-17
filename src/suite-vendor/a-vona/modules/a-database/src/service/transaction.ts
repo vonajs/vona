@@ -97,35 +97,33 @@ export class ServiceTransaction extends BeanBase {
 
   private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
     let res: RESULT;
-    try {
-      if (++this._transactionCounter === 1) {
-        const connection = this._db.client.connection;
-        this._connection = await connection.transaction(_translateTransactionOptions(options));
-      }
-    } catch (err) {
-      this._transactionCounter--;
-      throw err;
+    // begin
+    let chain: ServiceTransactionChain | undefined;
+    if (!this.inTransaction) {
+      const connection = this._db.client.connection;
+      const transactionConnection = await connection.transaction(_translateTransactionOptions(options));
+      chain = this.transactionState.add(this._db.info, transactionConnection);
     }
+    // fn
     try {
       res = await fn();
     } catch (err) {
-      if (--this._transactionCounter === 0) {
-        await this._connection!.rollback();
-        await this._compensateDone();
-        this._connection = undefined;
+      if (chain) {
+        await chain.doRollback();
+        this.transactionState.remove(this._db.info);
       }
       throw err;
     }
     try {
-      if (--this._transactionCounter === 0) {
-        await this._connection!.commit();
-        await this._commitDone();
-        this._connection = undefined;
+      if (chain) {
+        await chain.doCommit();
+        this.transactionState.remove(this._db.info);
       }
     } catch (err) {
-      await this._connection!.rollback();
-      await this._compensateDone();
-      this._connection = undefined;
+      if (chain) {
+        await chain.doRollback();
+        this.transactionState.remove(this._db.info);
+      }
       throw err;
     }
     return res;
