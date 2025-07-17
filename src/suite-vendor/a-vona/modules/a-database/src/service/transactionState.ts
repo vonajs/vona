@@ -15,9 +15,9 @@ export class ServiceTransactionState extends BeanBase {
 
   public add(dbInfo: IDbInfo, connection: knex.Knex.Transaction) {
     const selector = this.scope.service.database.prepareClientNameSelector(dbInfo);
-    const chain = this.bean._newBean(ServiceTransactionFiber, connection);
-    this._fibers[selector] = chain;
-    return chain;
+    const fiber = this.bean._newBean(ServiceTransactionFiber, connection);
+    this._fibers[selector] = fiber;
+    return fiber;
   }
 
   public remove(dbInfo: IDbInfo) {
