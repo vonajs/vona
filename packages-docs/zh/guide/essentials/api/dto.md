@@ -139,42 +139,42 @@ config.onions = {
 
 在上面我们为`DtoStudentCreate`定义了两个字段：`name`和`description`。事实上这两个字段在`EntityStudent`中也有定义。为了实现代码复用，提升开发效率，Vona 提供了 4 个 Mapped 工具函数，用于从现有 Class 中派生出目标 Class
 
-### 1. ClassMapped.pick
+### 1. $Class.pick
 
 从`EntityStudent`中提取`name`和`description`两个字段，生成 Dto `DtoStudentCreate`
 
 ``` typescript
-class DtoStudentCreate extends ClassMapped.pick(EntityStudent, ['name', 'description']) {}
+class DtoStudentCreate extends $Class.pick(EntityStudent, ['name', 'description']) {}
 ```
 
-### 2. ClassMapped.partial
+### 2. $Class.partial
 
 将`DtoStudentCreate`中所有字段改为可选，生成 Dto `DtoStudentUpdate`
 
 ``` typescript
-class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate) {}
+class DtoStudentUpdate extends $Class.partial(DtoStudentCreate) {}
 ```
 
 将`DtoStudentCreate`中的字段`name`改为可选，生成 Dto `DtoStudentUpdate`
 
 ``` typescript
-class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate, ['name']) {}
+class DtoStudentUpdate extends $Class.partial(DtoStudentCreate, ['name']) {}
 ```
 
-### 3. ClassMapped.omit
+### 3. $Class.omit
 
 将`EntityStudent`中的字段`id`排除，生成 Dto `DtoStudentOther`
 
 ``` typescript
-class DtoStudentOther extends ClassMapped.omit(EntityStudent, ['id']) {}
+class DtoStudentOther extends $Class.omit(EntityStudent, ['id']) {}
 ```
 
-### 4. ClassMapped.mixin
+### 4. $Class.mixin
 
 将多个 Class 中的字段进行合并，生成新的 Dto `DtoStudentOther`
 
 ``` typescript
-class DtoStudentOther extends ClassMapped.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
+class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
 ```
 
 ### 5. 组合
@@ -183,5 +183,5 @@ class DtoStudentOther extends ClassMapped.mixin(EntityStudent, DtoStudentCreate,
 
 ``` typescript
 class DtoStudentUpdate 
-  extends ClassMapped.partial(ClassMapped.pick(EntityStudent, ['name', 'description'])) {}
+  extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
 ```

@@ -140,42 +140,42 @@ config.onions = {
 
 In the above, we define two fields for `DtoStudentCreate`: `name` and `description`. In fact, these two fields are also defined in `EntityStudent`. In order to achieve code reuse and improve development efficiency, Vona provides `4` Mapped tool functions to derive the target class from the existing class
 
-### 1. ClassMapped.pick
+### 1. $Class.pick
 
 Extract the two fields `name` and `description` from `EntityStudent` to generate Dto `DtoStudentCreate`
 
 ``` typescript
-class DtoStudentCreate extends ClassMapped.pick(EntityStudent, ['name', 'description']) {}
+class DtoStudentCreate extends $Class.pick(EntityStudent, ['name', 'description']) {}
 ```
 
-### 2. ClassMapped.partial
+### 2. $Class.partial
 
 Change all fields in `DtoStudentCreate` to optional and generate Dto `DtoStudentUpdate`
 
 ``` typescript
-class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate) {}
+class DtoStudentUpdate extends $Class.partial(DtoStudentCreate) {}
 ```
 
 Change the field `name` in `DtoStudentCreate` to optional and generate Dto `DtoStudentUpdate`
 
 ``` typescript
-class DtoStudentUpdate extends ClassMapped.partial(DtoStudentCreate, ['name']) {}
+class DtoStudentUpdate extends $Class.partial(DtoStudentCreate, ['name']) {}
 ```
 
-### 3. ClassMapped.omit
+### 3. $Class.omit
 
 Exclude the field `id` in `EntityStudent` and generate Dto `DtoStudentOther`
 
 ``` typescript
-class DtoStudentOther extends ClassMapped.omit(EntityStudent, ['id']) {}
+class DtoStudentOther extends $Class.omit(EntityStudent, ['id']) {}
 ```
 
-### 4. ClassMapped.mixin
+### 4. $Class.mixin
 
 Merge the fields in multiple classes to generate a new Dto `DtoStudentOther`
 
 ``` typescript
-class DtoStudentOther extends ClassMapped.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
+class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
 ```
 
 ### 5. Combination
@@ -184,5 +184,5 @@ You can combine multiple Mapped tool functions
 
 ``` typescript
 class DtoStudentUpdate
-  extends ClassMapped.partial(ClassMapped.pick(EntityStudent, ['name', 'description'])) {}
+  extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
 ```

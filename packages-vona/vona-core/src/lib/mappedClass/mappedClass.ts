@@ -3,7 +3,7 @@ import { OmitClass } from './omitClass.ts';
 import { PartialClass } from './partialClass.ts';
 import { PickClass } from './pickClass.ts';
 
-export const ClassMapped = {
+export const $Class = {
   mixin: MixinClass,
   omit: OmitClass,
   partial: PartialClass,
