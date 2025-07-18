@@ -4,6 +4,7 @@ import type { IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from '../service/databaseClient.ts';
+import { ServiceTransactionAsyncLocalStorage } from '../service/transactionAsyncLocalStorage_.ts';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -38,7 +39,7 @@ export class BeanDatabase extends BeanBase {
     }
     const db = this.getDb(dbInfo);
     return this.scope.service.databaseAsyncLocalStorage.run(db, () => {
-      return this.scope.service.transactionAsyncLocalStorage.run(fn);
+      return this.bean._getBean(ServiceTransactionAsyncLocalStorage).run(fn);
     });
   }
 }

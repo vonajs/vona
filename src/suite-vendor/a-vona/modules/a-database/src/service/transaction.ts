@@ -3,10 +3,11 @@ import type { Knex } from 'knex';
 import type { FunctionAny, FunctionAsync } from 'vona';
 import type { ITransactionConsistencyCommitOptions, ITransactionOptions } from '../types/transaction.ts';
 import type { ServiceDb } from './db_.ts';
-import type { ServiceTransactionFiber } from './transactionFiber.ts';
+import type { ServiceTransactionFiber } from './transactionFiber_.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { TransactionIsolationLevelsMap } from '../types/transaction.ts';
+import { ServiceTransactionAsyncLocalStorage } from './transactionAsyncLocalStorage_.ts';
 
 @Service()
 export class ServiceTransaction extends BeanBase {
@@ -17,7 +18,7 @@ export class ServiceTransaction extends BeanBase {
   }
 
   get transactionState() {
-    return this.scope.service.transactionAsyncLocalStorage.transactionState;
+    return this.bean._getBean(ServiceTransactionAsyncLocalStorage).transactionState;
   }
 
   get transactionFiber(): ServiceTransactionFiber | undefined {

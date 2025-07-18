@@ -2,7 +2,7 @@ import type knex from 'knex';
 import type { IDbInfo } from '../types/index.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { ServiceTransactionFiber } from './transactionFiber.ts';
+import { ServiceTransactionFiber } from './transactionFiber_.ts';
 
 @Service()
 export class ServiceTransactionState extends BeanBase {
