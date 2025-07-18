@@ -59,7 +59,7 @@ export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
 export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage_.ts';
-export * from '../service/databaseClient.ts';
+export * from '../service/databaseClient_.ts';
 export * from '../service/db_.ts';
 export * from '../service/entityResolver_.ts';
 export * from '../service/modelResolver_.ts';
@@ -77,7 +77,6 @@ declare module 'vona-module-a-bean' {
       'a-database:columns': never;
 'a-database:columnsCache': never;
 'a-database:database': never;
-'a-database:databaseClient': never;
 'a-database:relations': never;
 'a-database:transaction': never;
 'a-database:transactionConsistency‌': never;
@@ -117,16 +116,6 @@ declare module 'vona-module-a-database' {
             get $onionName(): 'a-database:database';
           }
 
-        export interface ServiceDatabaseClient {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceDatabaseClient {
-            get $beanFullName(): 'a-database.service.databaseClient';
-            get $onionName(): 'a-database:databaseClient';
-          }
-
         export interface ServiceRelations {
           /** @internal */
           get scope(): ScopeModuleADatabase;
@@ -162,7 +151,6 @@ declare module 'vona-module-a-database' {
 import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
-import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceRelations } from '../service/relations.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
@@ -170,7 +158,6 @@ export interface IModuleService {
   'columns': ServiceColumns;
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
-'databaseClient': ServiceDatabaseClient;
 'relations': ServiceRelations;
 'transaction': ServiceTransaction;
 'transactionConsistency‌': ServiceTransactionConsistency‌;
@@ -184,7 +171,6 @@ declare module 'vona' {
     'a-database.service.columns': ServiceColumns;
 'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;
-'a-database.service.databaseClient': ServiceDatabaseClient;
 'a-database.service.relations': ServiceRelations;
 'a-database.service.transaction': ServiceTransaction;
 'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;

@@ -5,4 +5,10 @@ declare module 'vona-module-a-database' {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
+
+  export interface ServiceDatabaseClient {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
 }
