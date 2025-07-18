@@ -165,7 +165,7 @@ export class ServiceStartup extends BeanBase {
   private async _clearResources() {
     if (!this.app.meta.isTest) return;
     // redis
-    await this.$scope.redis.service.redisClient.clearAllData();
+    await this.$scope.redis.service.redis.clearAllData();
     // .app/public
     await fse.remove(path.join(this.app.config.server.publicDir, '1'));
   }
