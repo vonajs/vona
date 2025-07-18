@@ -58,7 +58,7 @@ export * from '../service/cacheQuery_.ts';
 export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
 export * from '../service/database.ts';
-export * from '../service/databaseAsyncLocalStorage.ts';
+export * from '../service/databaseAsyncLocalStorage_.ts';
 export * from '../service/databaseClient.ts';
 export * from '../service/db_.ts';
 export * from '../service/entityResolver.ts';
@@ -77,7 +77,6 @@ declare module 'vona-module-a-bean' {
       'a-database:columns': never;
 'a-database:columnsCache': never;
 'a-database:database': never;
-'a-database:databaseAsyncLocalStorage': never;
 'a-database:databaseClient': never;
 'a-database:entityResolver': never;
 'a-database:modelResolver': never;
@@ -119,16 +118,6 @@ declare module 'vona-module-a-database' {
           export interface ServiceDatabase {
             get $beanFullName(): 'a-database.service.database';
             get $onionName(): 'a-database:database';
-          }
-
-        export interface ServiceDatabaseAsyncLocalStorage {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceDatabaseAsyncLocalStorage {
-            get $beanFullName(): 'a-database.service.databaseAsyncLocalStorage';
-            get $onionName(): 'a-database:databaseAsyncLocalStorage';
           }
 
         export interface ServiceDatabaseClient {
@@ -206,7 +195,6 @@ declare module 'vona-module-a-database' {
 import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
-import type { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
 import type { ServiceEntityResolver } from '../service/entityResolver.ts';
 import type { ServiceModelResolver } from '../service/modelResolver.ts';
@@ -218,7 +206,6 @@ export interface IModuleService {
   'columns': ServiceColumns;
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
-'databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
 'databaseClient': ServiceDatabaseClient;
 'entityResolver': ServiceEntityResolver;
 'modelResolver': ServiceModelResolver;
@@ -236,7 +223,6 @@ declare module 'vona' {
     'a-database.service.columns': ServiceColumns;
 'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;
-'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
 'a-database.service.databaseClient': ServiceDatabaseClient;
 'a-database.service.entityResolver': ServiceEntityResolver;
 'a-database.service.modelResolver': ServiceModelResolver;
