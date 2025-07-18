@@ -6,7 +6,7 @@ import type { ServiceDatabaseClient } from './databaseClient_.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { ServiceColumns } from './columns.ts';
-import { ServiceTransaction } from './transaction.ts';
+import { ServiceTransaction } from './transaction_.ts';
 
 @Service()
 export class ServiceDb extends BeanBase {

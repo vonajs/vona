@@ -64,11 +64,11 @@ export * from '../service/db_.ts';
 export * from '../service/entityResolver_.ts';
 export * from '../service/modelResolver_.ts';
 export * from '../service/relations_.ts';
-export * from '../service/transaction.ts';
 export * from '../service/transactionAsyncLocalStorage_.ts';
 export * from '../service/transactionConsistency‌_.ts';
 export * from '../service/transactionFiber_.ts';
 export * from '../service/transactionState_.ts';
+export * from '../service/transaction_.ts';
 
 import 'vona';
 declare module 'vona-module-a-bean' {
@@ -77,7 +77,6 @@ declare module 'vona-module-a-bean' {
       'a-database:columns': never;
 'a-database:columnsCache': never;
 'a-database:database': never;
-'a-database:transaction': never;
     }
 
   
@@ -112,16 +111,6 @@ declare module 'vona-module-a-database' {
           export interface ServiceDatabase {
             get $beanFullName(): 'a-database.service.database';
             get $onionName(): 'a-database:database';
-          }
-
-        export interface ServiceTransaction {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceTransaction {
-            get $beanFullName(): 'a-database.service.transaction';
-            get $onionName(): 'a-database:transaction';
           } 
 }
 /** service: end */
@@ -129,12 +118,10 @@ declare module 'vona-module-a-database' {
 import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
-import type { ServiceTransaction } from '../service/transaction.ts';
 export interface IModuleService {
   'columns': ServiceColumns;
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
-'transaction': ServiceTransaction;
 }
 /** service: end */
 /** service: begin */
@@ -145,7 +132,6 @@ declare module 'vona' {
     'a-database.service.columns': ServiceColumns;
 'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;
-'a-database.service.transaction': ServiceTransaction;
   }
 }
 /** service: end */
