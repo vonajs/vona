@@ -2,7 +2,7 @@ import type { FunctionAny } from 'vona';
 import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.ts';
 import type { IDatabaseClientDialectRecord, IDbInfo } from '../types/database.ts';
 import type { ITransactionConsistencyCommitOptions } from '../types/transaction.ts';
-import type { ServiceDatabaseClient } from './databaseClient.ts';
+import type { ServiceDatabaseClient } from './databaseClient_.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { ServiceColumns } from './columns.ts';

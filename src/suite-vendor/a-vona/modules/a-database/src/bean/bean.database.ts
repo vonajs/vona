@@ -4,7 +4,7 @@ import type { IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage_.ts';
-import { ServiceDatabaseClient } from '../service/databaseClient.ts';
+import { ServiceDatabaseClient } from '../service/databaseClient_.ts';
 import { ServiceTransactionAsyncLocalStorage } from '../service/transactionAsyncLocalStorage_.ts';
 
 @Bean()
