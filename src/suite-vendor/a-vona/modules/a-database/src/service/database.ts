@@ -64,7 +64,7 @@ export class ServiceDatabase extends BeanBase {
     this.scope.broadcast.columnsClear.emit({ clientName, tableName });
   }
 
-  __columnsClearRaw(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
+  private __columnsClearRaw(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
     this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientNameReal(clientName), tableName });
   }
 
