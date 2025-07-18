@@ -19,7 +19,7 @@ import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
 import { ServiceCacheQuery } from '../../service/cacheQuery_.ts';
-import { ServiceRelations } from '../../service/relations.ts';
+import { ServiceRelations } from '../../service/relations_.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
 export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
