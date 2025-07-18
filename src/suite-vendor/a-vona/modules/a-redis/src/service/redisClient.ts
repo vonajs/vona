@@ -12,7 +12,7 @@ export class ServiceRedisClient extends BeanBase {
     return this._redisInstance;
   }
 
-  protected __init__(clientName?: string) {
+  protected __init__(clientName: keyof IRedisClientRecord) {
     // instance
     this._redisInstance = this._createClient(clientName);
   }
@@ -21,8 +21,7 @@ export class ServiceRedisClient extends BeanBase {
     await this._redisInstance?.quit();
   }
 
-  private _createClient(clientName?: string): Redis {
-    clientName = clientName || 'default';
+  private _createClient(clientName: keyof IRedisClientRecord): Redis {
     const configRedis = this.app.config.redis;
     const configClient = configRedis.clients[clientName];
     if (!configClient) throw new Error(`redis client not found: ${clientName}`);
