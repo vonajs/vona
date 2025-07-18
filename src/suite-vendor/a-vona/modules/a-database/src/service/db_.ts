@@ -5,7 +5,7 @@ import type { ITransactionConsistencyCommitOptions } from '../types/transaction.
 import type { ServiceDatabaseClient } from './databaseClient_.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { ServiceColumns } from './columns.ts';
+import { ServiceColumns } from './columns_.ts';
 import { ServiceTransaction } from './transaction_.ts';
 
 @Service()

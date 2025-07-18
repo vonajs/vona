@@ -16,4 +16,9 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 
+  export interface ServiceColumnsCache {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
 }

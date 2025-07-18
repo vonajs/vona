@@ -23,7 +23,7 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   if (classType.name === 'BigInt') return z.bigint();
   if (classType.name === 'Array') return z.array(z.any());
   // check if object
-  const rules = classType ? appMetadata.getMetadata(SymbolDecoratorRule, classType) : undefined;
+  const rules = classType.prototype ? appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype) : undefined;
   if (!rules) {
     // not object
     return z.any();

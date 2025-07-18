@@ -55,7 +55,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/cacheEntity_.ts';
 export * from '../service/cacheQuery_.ts';
-export * from '../service/columnsCache.ts';
+export * from '../service/columnsCache_.ts';
 export * from '../service/columns_.ts';
 export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage_.ts';
@@ -74,24 +74,13 @@ import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-database:columnsCache': never;
-'a-database:database': never;
+      'a-database:database': never;
     }
 
   
 }
 declare module 'vona-module-a-database' {
   
-        export interface ServiceColumnsCache {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceColumnsCache {
-            get $beanFullName(): 'a-database.service.columnsCache';
-            get $onionName(): 'a-database:columnsCache';
-          }
-
         export interface ServiceDatabase {
           /** @internal */
           get scope(): ScopeModuleADatabase;
@@ -104,11 +93,9 @@ declare module 'vona-module-a-database' {
 }
 /** service: end */
 /** service: begin */
-import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
 export interface IModuleService {
-  'columnsCache': ServiceColumnsCache;
-'database': ServiceDatabase;
+  'database': ServiceDatabase;
 }
 /** service: end */
 /** service: begin */
@@ -116,8 +103,7 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-database.service.columnsCache': ServiceColumnsCache;
-'a-database.service.database': ServiceDatabase;
+    'a-database.service.database': ServiceDatabase;
   }
 }
 /** service: end */
