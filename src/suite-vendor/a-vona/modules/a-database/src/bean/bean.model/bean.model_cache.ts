@@ -18,7 +18,7 @@ import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
-import { ServiceCacheQuery } from '../../service/cacheQuery.ts';
+import { ServiceCacheQuery } from '../../service/cacheQuery_.ts';
 import { ServiceRelations } from '../../service/relations.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 

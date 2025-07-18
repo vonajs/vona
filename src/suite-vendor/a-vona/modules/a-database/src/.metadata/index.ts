@@ -54,7 +54,7 @@ declare module 'vona' {
 /** bean: end */
 /** service: begin */
 export * from '../service/cacheEntity_.ts';
-export * from '../service/cacheQuery.ts';
+export * from '../service/cacheQuery_.ts';
 export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
 export * from '../service/database.ts';
@@ -74,8 +74,7 @@ import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-database:cacheQuery': never;
-'a-database:columns': never;
+      'a-database:columns': never;
 'a-database:columnsCache': never;
 'a-database:database': never;
 'a-database:databaseAsyncLocalStorage': never;
@@ -92,16 +91,6 @@ declare module 'vona-module-a-bean' {
 }
 declare module 'vona-module-a-database' {
   
-        export interface ServiceCacheQuery {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceCacheQuery {
-            get $beanFullName(): 'a-database.service.cacheQuery';
-            get $onionName(): 'a-database:cacheQuery';
-          }
-
         export interface ServiceColumns {
           /** @internal */
           get scope(): ScopeModuleADatabase;
@@ -214,7 +203,6 @@ declare module 'vona-module-a-database' {
 }
 /** service: end */
 /** service: begin */
-import type { ServiceCacheQuery } from '../service/cacheQuery.ts';
 import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
@@ -227,8 +215,7 @@ import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
 import type { ServiceTransactionState } from '../service/transactionState.ts';
 export interface IModuleService {
-  'cacheQuery': ServiceCacheQuery;
-'columns': ServiceColumns;
+  'columns': ServiceColumns;
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
 'databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
@@ -246,8 +233,7 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-database.service.cacheQuery': ServiceCacheQuery;
-'a-database.service.columns': ServiceColumns;
+    'a-database.service.columns': ServiceColumns;
 'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;
 'a-database.service.databaseAsyncLocalStorage': ServiceDatabaseAsyncLocalStorage;
