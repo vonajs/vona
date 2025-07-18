@@ -55,8 +55,8 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/cacheEntity_.ts';
 export * from '../service/cacheQuery_.ts';
-export * from '../service/columns.ts';
 export * from '../service/columnsCache.ts';
+export * from '../service/columns_.ts';
 export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage_.ts';
 export * from '../service/databaseClient_.ts';
@@ -74,8 +74,7 @@ import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-database:columns': never;
-'a-database:columnsCache': never;
+      'a-database:columnsCache': never;
 'a-database:database': never;
     }
 
@@ -83,16 +82,6 @@ declare module 'vona-module-a-bean' {
 }
 declare module 'vona-module-a-database' {
   
-        export interface ServiceColumns {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceColumns {
-            get $beanFullName(): 'a-database.service.columns';
-            get $onionName(): 'a-database:columns';
-          }
-
         export interface ServiceColumnsCache {
           /** @internal */
           get scope(): ScopeModuleADatabase;
@@ -115,12 +104,10 @@ declare module 'vona-module-a-database' {
 }
 /** service: end */
 /** service: begin */
-import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
 export interface IModuleService {
-  'columns': ServiceColumns;
-'columnsCache': ServiceColumnsCache;
+  'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
 }
 /** service: end */
@@ -129,8 +116,7 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-database.service.columns': ServiceColumns;
-'a-database.service.columnsCache': ServiceColumnsCache;
+    'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;
   }
 }
