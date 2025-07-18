@@ -2,7 +2,7 @@ import type { FunctionAsync } from 'vona';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { ServiceTransactionState } from './transactionState.ts';
+import { ServiceTransactionState } from './transactionState_.ts';
 
 @Service()
 export class ServiceTransactionAsyncLocalStorage extends BeanBase {
