@@ -6,7 +6,7 @@ import { ServiceRedisClient } from '../service/redisClient.ts';
 @Bean()
 export class BeanRedis extends BeanBase {
   getClient(clientName?: keyof IRedisClientRecord) {
-    return this.app.bean._getBeanSelector(ServiceRedisClient, clientName);
+    return this.app.bean._getBeanSelector(ServiceRedisClient, clientName ?? 'default');
   }
 
   get(clientName?: keyof IRedisClientRecord) {
