@@ -61,8 +61,8 @@ export * from '../service/database.ts';
 export * from '../service/databaseAsyncLocalStorage_.ts';
 export * from '../service/databaseClient.ts';
 export * from '../service/db_.ts';
-export * from '../service/entityResolver.ts';
-export * from '../service/modelResolver.ts';
+export * from '../service/entityResolver_.ts';
+export * from '../service/modelResolver_.ts';
 export * from '../service/relations.ts';
 export * from '../service/transaction.ts';
 export * from '../service/transactionAsyncLocalStorage_.ts';
@@ -78,8 +78,6 @@ declare module 'vona-module-a-bean' {
 'a-database:columnsCache': never;
 'a-database:database': never;
 'a-database:databaseClient': never;
-'a-database:entityResolver': never;
-'a-database:modelResolver': never;
 'a-database:relations': never;
 'a-database:transaction': never;
 'a-database:transactionConsistency‌': never;
@@ -129,26 +127,6 @@ declare module 'vona-module-a-database' {
             get $onionName(): 'a-database:databaseClient';
           }
 
-        export interface ServiceEntityResolver {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceEntityResolver {
-            get $beanFullName(): 'a-database.service.entityResolver';
-            get $onionName(): 'a-database:entityResolver';
-          }
-
-        export interface ServiceModelResolver {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceModelResolver {
-            get $beanFullName(): 'a-database.service.modelResolver';
-            get $onionName(): 'a-database:modelResolver';
-          }
-
         export interface ServiceRelations {
           /** @internal */
           get scope(): ScopeModuleADatabase;
@@ -185,8 +163,6 @@ import type { ServiceColumns } from '../service/columns.ts';
 import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceDatabaseClient } from '../service/databaseClient.ts';
-import type { ServiceEntityResolver } from '../service/entityResolver.ts';
-import type { ServiceModelResolver } from '../service/modelResolver.ts';
 import type { ServiceRelations } from '../service/relations.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
 import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
@@ -195,8 +171,6 @@ export interface IModuleService {
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
 'databaseClient': ServiceDatabaseClient;
-'entityResolver': ServiceEntityResolver;
-'modelResolver': ServiceModelResolver;
 'relations': ServiceRelations;
 'transaction': ServiceTransaction;
 'transactionConsistency‌': ServiceTransactionConsistency‌;
@@ -211,8 +185,6 @@ declare module 'vona' {
 'a-database.service.columnsCache': ServiceColumnsCache;
 'a-database.service.database': ServiceDatabase;
 'a-database.service.databaseClient': ServiceDatabaseClient;
-'a-database.service.entityResolver': ServiceEntityResolver;
-'a-database.service.modelResolver': ServiceModelResolver;
 'a-database.service.relations': ServiceRelations;
 'a-database.service.transaction': ServiceTransaction;
 'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;
