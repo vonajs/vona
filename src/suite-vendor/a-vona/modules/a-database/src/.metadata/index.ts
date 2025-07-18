@@ -66,7 +66,7 @@ export * from '../service/modelResolver_.ts';
 export * from '../service/relations.ts';
 export * from '../service/transaction.ts';
 export * from '../service/transactionAsyncLocalStorage_.ts';
-export * from '../service/transactionConsistency‌.ts';
+export * from '../service/transactionConsistency‌_.ts';
 export * from '../service/transactionFiber_.ts';
 export * from '../service/transactionState_.ts';
 
@@ -79,7 +79,6 @@ declare module 'vona-module-a-bean' {
 'a-database:database': never;
 'a-database:relations': never;
 'a-database:transaction': never;
-'a-database:transactionConsistency‌': never;
     }
 
   
@@ -134,16 +133,6 @@ declare module 'vona-module-a-database' {
           export interface ServiceTransaction {
             get $beanFullName(): 'a-database.service.transaction';
             get $onionName(): 'a-database:transaction';
-          }
-
-        export interface ServiceTransactionConsistency‌ {
-          /** @internal */
-          get scope(): ScopeModuleADatabase;
-        }
-
-          export interface ServiceTransactionConsistency‌ {
-            get $beanFullName(): 'a-database.service.transactionConsistency‌';
-            get $onionName(): 'a-database:transactionConsistency‌';
           } 
 }
 /** service: end */
@@ -153,14 +142,12 @@ import type { ServiceColumnsCache } from '../service/columnsCache.ts';
 import type { ServiceDatabase } from '../service/database.ts';
 import type { ServiceRelations } from '../service/relations.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
-import type { ServiceTransactionConsistency‌ } from '../service/transactionConsistency‌.ts';
 export interface IModuleService {
   'columns': ServiceColumns;
 'columnsCache': ServiceColumnsCache;
 'database': ServiceDatabase;
 'relations': ServiceRelations;
 'transaction': ServiceTransaction;
-'transactionConsistency‌': ServiceTransactionConsistency‌;
 }
 /** service: end */
 /** service: begin */
@@ -173,7 +160,6 @@ declare module 'vona' {
 'a-database.service.database': ServiceDatabase;
 'a-database.service.relations': ServiceRelations;
 'a-database.service.transaction': ServiceTransaction;
-'a-database.service.transactionConsistency‌': ServiceTransactionConsistency‌;
   }
 }
 /** service: end */
