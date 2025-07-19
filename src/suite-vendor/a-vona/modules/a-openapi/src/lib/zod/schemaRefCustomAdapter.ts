@@ -71,12 +71,15 @@ function _patchGenerator(generator: any) {
       zodSchema = createSchemaRef(schemaRefParams);
     }
     const refId = Metadata.getRefId(zodSchema);
-    const result = this.generateSimpleSchema(zodSchema);
-    if (refId && this.schemaRefs[refId] === undefined) {
-      this.schemaRefs[refId] = result;
-      return { $ref: this.generateSchemaRef(refId) };
+    if (!refId) {
+      return this.generateSimpleSchema(zodSchema);
     }
-    return result;
+    if (this.schemaRefs[refId] === undefined) {
+      this.schemaRefs[refId] = null;
+      const result = this.generateSimpleSchema(zodSchema);
+      this.schemaRefs[refId] = result;
+    }
+    return { $ref: this.generateSchemaRef(refId) };
   };
   console.log(gen);
 }
