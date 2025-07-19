@@ -2,6 +2,7 @@ import type { Constructable } from 'vona';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type { ISchemaObjectOptions } from '../../types/decorator.ts';
 import type { TypeOpenapiMetadata } from '../../types/rest.ts';
+import { SchemaRefInnerKey } from '@cabloy/zod-query';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
@@ -31,9 +32,7 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
     return z.any();
   }
   // object
-  let schema = z.object(rules as z.ZodRawShape);
-  if (options?.passthrough) schema = schema.passthrough() as any;
-  if (options?.strict) schema = schema.strict() as any;
+  let schema = _createSchemaObject(rules, options);
   // refId
   const beanOptions = appResource.getBean(classType);
   if (beanOptions) {
@@ -51,12 +50,19 @@ export function $schemaRef<T>(schemaLikes: any, classType: any, options?: any): 
     classType = schemaLikes;
     schemaLikes = [];
   }
+  let schema = z.object({});
+  schema = schema.openapi({ [SchemaRefInnerKey]: [schemaLikes, classType, options] } as any);
+  return schema as any;
+}
 
-  const classType2 = classType();
-  return z.custom(async value => {
-    const schema = makeSchemaLikes(schemaLikes, $schema(classType2, options));
-    const res = await schema.safeParseAsync(value);
-    // success/data
-    return res;
-  });
+export function createSchemaRef(params: any[]) {
+  const [schemaLikes, classType, options] = params;
+  return makeSchemaLikes(schemaLikes, $schema(classType(), options));
+}
+
+function _createSchemaObject(rules: {}, options?: ISchemaObjectOptions) {
+  let schema = z.object(rules as z.ZodRawShape);
+  if (options?.passthrough) schema = schema.passthrough() as any;
+  if (options?.strict) schema = schema.strict() as any;
+  return schema;
 }

@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { performSchemaRefCustom } from './schemaRefCustom.ts';
+import { SchemaRefInnerKey } from './types.ts';
 import { isNil } from './utils.ts';
 
 /////////////////////////////////////////
@@ -99,6 +101,11 @@ z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
 
 const _parseObject = z.ZodObject.prototype._parse;
 z.ZodObject.prototype._parse = function (input) {
+  const schemaRefParams = (this as any)._def?.openapi?.metadata?.[SchemaRefInnerKey];
+  if (schemaRefParams) {
+    const schema = performSchemaRefCustom(schemaRefParams);
+    return schema._parse(input);
+  }
   _coerceWithNil(input, () => {
     if (typeof input.data === 'string') {
       input.data = JSON.parse(input.data);
