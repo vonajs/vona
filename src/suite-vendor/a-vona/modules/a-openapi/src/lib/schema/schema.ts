@@ -55,7 +55,8 @@ export function $schemaRef<T>(schemaLikes: any, classType: any, options?: any): 
   const classType2 = classType();
   return z.custom(async value => {
     const schema = makeSchemaLikes(schemaLikes, $schema(classType2, options));
-    const res = await schema.parseAsync(value);
+    const res = await schema.safeParseAsync(value);
+    // success/data
     return res;
   });
 }
