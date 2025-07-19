@@ -16,7 +16,7 @@ describe('dtoRef.test.ts', () => {
           name: 'tom',
           married: 1,
         },
-        users: [{ id: 2, name: 'jimmy', married: 0 }],
+        roles: [{ id: 2, name: 'admin' }],
       };
       const schema = $schema(DtoUserRef);
       const res = await schema.parseAsync(data);
@@ -24,9 +24,9 @@ describe('dtoRef.test.ts', () => {
       assert.equal(cast(res).other, undefined);
       assert.equal(res.user?.name, 'tom');
       assert.equal(cast(res.user)?.married, undefined);
-      assert.equal(res.users?.length, 1);
-      assert.equal(res.users?.[0].name, 'jimmy');
-      assert.equal(cast(res.users?.[0])?.married, undefined);
+      assert.equal(res.roles?.length, 1);
+      assert.equal(res.roles?.[0].name, 'admin');
+      assert.equal(cast(res.roles?.[0])?.id, undefined);
     });
   });
 });

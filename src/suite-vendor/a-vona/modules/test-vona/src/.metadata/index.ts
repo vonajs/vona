@@ -798,9 +798,11 @@ export interface IModuleSummerCache {
 /** summerCache: end */
 /** dto: begin */
 export * from '../dto/profile.ts';
+export * from '../dto/roleRef.ts';
 export * from '../dto/user.ts';
 export * from '../dto/userRef.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
+import type { IDtoOptionsRoleRef } from '../dto/roleRef.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { IDtoOptionsUserRef } from '../dto/userRef.ts';
 import 'vona';
@@ -808,6 +810,7 @@ declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'test-vona:profile': IDtoOptionsProfile;
+'test-vona:roleRef': IDtoOptionsRoleRef;
 'test-vona:user': IDtoOptionsUser;
 'test-vona:userRef': IDtoOptionsUserRef;
     }
@@ -820,12 +823,17 @@ declare module 'vona-module-test-vona' {
 /** dto: end */
 /** dto: begin */
 import type { DtoProfile } from '../dto/profile.ts';
+import type { DtoRoleRef } from '../dto/roleRef.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserRef } from '../dto/userRef.ts'; 
 declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsProfile {
       fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsRoleRef {
+      fields?: TypeEntityOptionsFields<DtoRoleRef, IDtoOptionsRoleRef[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsUser {
@@ -1103,6 +1111,7 @@ declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord{
         '/test/vona/bean/test': undefined;
 '/test/vona/bean/service': undefined;
+'/test/vona/dtoTest': undefined;
 '/test/vona/guardPassport/testUserName': undefined;
 '/test/vona/guardPassport/testUserNameFail': undefined;
 '/test/vona/guardPassport/testRoleName': undefined;
