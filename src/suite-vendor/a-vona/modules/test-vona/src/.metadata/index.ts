@@ -799,14 +799,17 @@ export interface IModuleSummerCache {
 /** dto: begin */
 export * from '../dto/profile.ts';
 export * from '../dto/user.ts';
+export * from '../dto/userRef.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
+import type { IDtoOptionsUserRef } from '../dto/userRef.ts';
 import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'test-vona:profile': IDtoOptionsProfile;
 'test-vona:user': IDtoOptionsUser;
+'test-vona:userRef': IDtoOptionsUserRef;
     }
 
   
@@ -817,7 +820,8 @@ declare module 'vona-module-test-vona' {
 /** dto: end */
 /** dto: begin */
 import type { DtoProfile } from '../dto/profile.ts';
-import type { DtoUser } from '../dto/user.ts'; 
+import type { DtoUser } from '../dto/user.ts';
+import type { DtoUserRef } from '../dto/userRef.ts'; 
 declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsProfile {
@@ -827,12 +831,17 @@ declare module 'vona-module-test-vona' {
     export interface IDtoOptionsUser {
       fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
+
+    export interface IDtoOptionsUserRef {
+      fields?: TypeEntityOptionsFields<DtoUserRef, IDtoOptionsUserRef[TypeSymbolKeyFieldsMore]>;
+    }
 }
 /** dto: end */
 /** controller: begin */
 export * from '../controller/bean.ts';
 export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
+export * from '../controller/dtoTest.ts';
 export * from '../controller/guardPassport.ts';
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
@@ -845,6 +854,7 @@ export * from '../controller/upload.ts';
 import type { IControllerOptionsBean } from '../controller/bean.ts';
 import type { IControllerOptionsCacheMem } from '../controller/cacheMem.ts';
 import type { IControllerOptionsCacheRedis } from '../controller/cacheRedis.ts';
+import type { IControllerOptionsDtoTest } from '../controller/dtoTest.ts';
 import type { IControllerOptionsGuardPassport } from '../controller/guardPassport.ts';
 import type { IControllerOptionsOnion } from '../controller/onion.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
@@ -861,6 +871,7 @@ declare module 'vona-module-a-web' {
       'test-vona:bean': IControllerOptionsBean;
 'test-vona:cacheMem': IControllerOptionsCacheMem;
 'test-vona:cacheRedis': IControllerOptionsCacheRedis;
+'test-vona:dtoTest': IControllerOptionsDtoTest;
 'test-vona:guardPassport': IControllerOptionsGuardPassport;
 'test-vona:onion': IControllerOptionsOnion;
 'test-vona:passport': IControllerOptionsPassport;
@@ -904,6 +915,16 @@ declare module 'vona-module-test-vona' {
           export interface ControllerCacheRedis {
             get $beanFullName(): 'test-vona.controller.cacheRedis';
             get $onionName(): 'test-vona:cacheRedis';
+          }
+
+        export interface ControllerDtoTest {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ControllerDtoTest {
+            get $beanFullName(): 'test-vona.controller.dtoTest';
+            get $onionName(): 'test-vona:dtoTest';
           }
 
         export interface ControllerGuardPassport {
@@ -1005,6 +1026,8 @@ import type { ControllerCacheMem } from '../controller/cacheMem.ts';
 // @ts-ignore ignore
 import type { ControllerCacheRedis } from '../controller/cacheRedis.ts';
 // @ts-ignore ignore
+import type { ControllerDtoTest } from '../controller/dtoTest.ts';
+// @ts-ignore ignore
 import type { ControllerGuardPassport } from '../controller/guardPassport.ts';
 // @ts-ignore ignore
 import type { ControllerOnion } from '../controller/onion.ts';
@@ -1034,6 +1057,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IControllerOptionsCacheRedis {
       actions?: TypeControllerOptionsActions<ControllerCacheRedis>;
+    }
+
+    export interface IControllerOptionsDtoTest {
+      actions?: TypeControllerOptionsActions<ControllerDtoTest>;
     }
 
     export interface IControllerOptionsGuardPassport {
