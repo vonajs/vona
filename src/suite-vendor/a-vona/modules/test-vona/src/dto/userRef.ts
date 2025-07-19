@@ -10,6 +10,6 @@ export class DtoUserRef {
   @Api.field()
   name: string;
 
-  @Api.field(v.ref(() => DtoUser))
+  @Api.field(v.ref([v.optional()], () => DtoUser))
   user?: DtoUserRef;
 }

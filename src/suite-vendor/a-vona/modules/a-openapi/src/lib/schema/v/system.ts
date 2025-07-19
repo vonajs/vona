@@ -19,9 +19,11 @@ export function schemaOptional() {
   };
 }
 
-export function schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions) {
+export function schemaRef<T>(schemaLikes: SchemaLike[], classType: () => Constructable<T>, options?: ISchemaObjectOptions);
+export function schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions);
+export function schemaRef<T>(schemaLikes: any, classType: any, options?: any) {
   return function (_schema: z.ZodSchema): z.ZodSchema<T> {
-    return $schemaRef(classType, options);
+    return $schemaRef(schemaLikes, classType, options);
   };
 }
 

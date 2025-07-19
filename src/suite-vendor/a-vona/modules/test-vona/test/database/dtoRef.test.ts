@@ -10,7 +10,7 @@ describe('dtoRef.test.ts', () => {
       const data = {
         name: 'kevin',
         other: 'other',
-        user: {
+        user_: {
           id: 1,
           name: 'tom',
           married: 1,
