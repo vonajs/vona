@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { cast } from 'vona';
+import { OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import { appResource, cast } from 'vona';
 import { app } from 'vona-mock';
 import { $schema } from 'vona-module-a-openapi';
 import { DtoUserRef } from 'vona-module-test-vona';
@@ -27,6 +28,17 @@ describe('dtoRef.test.ts', () => {
       assert.equal(res.roles?.length, 1);
       assert.equal(res.roles?.[0].name, 'admin');
       assert.equal(cast(res.roles?.[0])?.id, undefined);
+    });
+  });
+  it('action:openapi', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      const registry = new OpenAPIRegistry();
+      const beanOptions = appResource.getBean(DtoUserRef)!;
+      const schema = $schema(beanOptions.beanClass);
+      registry.register(beanOptions.beanFullName, schema);
+      const generator = new OpenApiGeneratorV31(registry.definitions);
+      const apiObj = generator.generateDocument(app.bean.scope('a-openapi').config.generateDocument.V31);
+      console.log(apiObj);
     });
   });
 });
