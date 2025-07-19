@@ -11,4 +11,7 @@ export class DtoUserRef {
 
   @Api.field(v.ref(v.optional(), () => DtoUserRef))
   user?: DtoUserRef;
+
+  @Api.field(v.optional(), v.array(v.ref(() => DtoUserRef)))
+  users?: DtoUserRef[];
 }
