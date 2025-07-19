@@ -1,10 +1,11 @@
 import type { Constructable } from 'vona';
+import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type { ISchemaObjectOptions } from '../../types/decorator.ts';
 import type { TypeOpenapiMetadata } from '../../types/rest.ts';
-import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
+import { makeSchemaLikes } from './makeSchemaLikes.ts';
 
 export function $schema(schemaLike: z.ZodSchema): z.ZodSchema;
 export function $schema(classType: StringConstructor): z.ZodString;
@@ -42,12 +43,19 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   return schema as any;
 }
 
-export function $schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T> {
+export function $schemaRef<T>(schemaLikes: SchemaLike[], classType: () => Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
+export function $schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
+export function $schemaRef<T>(schemaLikes: any, classType: any, options?: any): z.ZodSchema<T> {
+  if (typeof schemaLikes === 'function') {
+    options = classType;
+    classType = schemaLikes;
+    schemaLikes = [];
+  }
+
   const classType2 = classType();
-  return z.custom(value => {
-    const schema = $schema(classType2);
-    console.log(schema);
-    return value;
+  return z.custom(async value => {
+    const schema = makeSchemaLikes(schemaLikes, $schema(classType2, options));
+    const res = await schema.parseAsync(value);
+    return res;
   });
-  return $schema(classType2, options);
 }
