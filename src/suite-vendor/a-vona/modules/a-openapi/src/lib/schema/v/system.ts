@@ -19,16 +19,14 @@ export function schemaOptional() {
   };
 }
 
-export function schemaRef<T>(schemaLikes: SchemaLike[], classType: () => Constructable<T>, options?: ISchemaObjectOptions);
-export function schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions);
-export function schemaRef<T>(schemaLikes: any, classType: any, options?: any) {
-  return function (_schema: z.ZodSchema): z.ZodSchema<T> {
-    return $schemaRef(schemaLikes, classType, options);
+export function schemaRef<T>(...schemaLikes: SchemaLike[]) {
+  return function (_schema?: z.ZodSchema): z.ZodSchema<T> {
+    return $schemaRef(...schemaLikes);
   };
 }
 
 export function schemaObject<T>(classType: Constructable<T>, options?: ISchemaObjectOptions) {
-  return function (_schema: z.ZodSchema): z.ZodSchema<T> {
+  return function (_schema?: z.ZodSchema): z.ZodSchema<T> {
     return $schema(classType, options);
   };
 }

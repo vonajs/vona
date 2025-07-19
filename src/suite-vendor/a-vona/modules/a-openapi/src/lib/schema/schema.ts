@@ -42,22 +42,16 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   return schema as any;
 }
 
-export function $schemaRef<T>(schemaLikes: SchemaLike[], classType: () => Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
-export function $schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
-export function $schemaRef<T>(schemaLikes: any, classType: any, options?: any): z.ZodSchema<T> {
-  if (typeof schemaLikes === 'function') {
-    options = classType;
-    classType = schemaLikes;
-    schemaLikes = [];
-  }
+export function $schemaRef<T>(...schemaLikes: SchemaLike[]): z.ZodSchema<T> {
   let schema = z.object({});
-  schema = schema.openapi({ [SchemaRefInnerKey]: [schemaLikes, classType, options] } as any);
+  schema = schema.openapi({ [SchemaRefInnerKey]: schemaLikes } as any);
   return schema as any;
 }
 
-export function createSchemaRef(params: any[]) {
-  const [schemaLikes, classType, options] = params;
-  return makeSchemaLikes(schemaLikes, $schema(classType(), options));
+export function createSchemaRef(schemaLikes: SchemaLike[]) {
+  const classType = schemaLikes[schemaLikes.length - 1];
+  schemaLikes = schemaLikes.slice(0, schemaLikes.length - 1);
+  return makeSchemaLikes(schemaLikes, $schema(cast(classType)()));
 }
 
 function _createSchemaObject(rules: {}, options?: ISchemaObjectOptions) {
