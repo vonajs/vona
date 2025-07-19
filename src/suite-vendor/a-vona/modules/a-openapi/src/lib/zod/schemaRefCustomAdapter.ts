@@ -81,7 +81,6 @@ function _patchGenerator(generator: any) {
     }
     return { $ref: this.generateSchemaRef(refId) };
   };
-  console.log(gen);
 }
 
 function isZodType(schema, typeName) {

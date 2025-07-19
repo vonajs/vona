@@ -38,7 +38,8 @@ describe('dtoRef.test.ts', () => {
       registry.register(beanOptions.beanFullName, schema);
       const generator = new OpenApiGeneratorV31(registry.definitions);
       const apiObj = generator.generateDocument(app.bean.scope('a-openapi').config.generateDocument.V31);
-      console.log(apiObj);
+      assert.equal(cast(apiObj).components.schemas['test-vona.dto.userRef'].properties.user.$ref, '#/components/schemas/test-vona.dto.userRef');
+      assert.equal(cast(apiObj).components.schemas['test-vona.dto.roleRef'].properties.users.items.$ref, '#/components/schemas/test-vona.dto.userRef');
     });
   });
 });
