@@ -1,1 +1,1 @@
-export const SchemaRefInnerKey = '__SchemaRefInnerKey__';
+export const SymbolSchemaRef = Symbol('SymbolSchemaRef');
