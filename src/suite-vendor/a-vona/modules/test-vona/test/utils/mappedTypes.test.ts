@@ -6,8 +6,8 @@ import { $Class, cast } from 'vona';
 import { app } from 'vona-mock';
 import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
-import { DtoProfile } from '../src/dto/profile.ts';
-import { DtoUser } from '../src/dto/user.ts';
+import { DtoProfile } from '../../src/dto/profile.ts';
+import { DtoUser } from '../../src/dto/user.ts';
 
 interface IDtoOptionsUserWithMarried extends IDecoratorDtoOptions {}
 
