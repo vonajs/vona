@@ -1,6 +1,7 @@
 import type { Constructable } from 'vona';
 import type { ISchemaObjectOptions } from '../../types/decorator.ts';
 import type { TypeOpenapiMetadata } from '../../types/rest.ts';
+import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
@@ -39,4 +40,13 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
     schema = schema.openapi(beanOptions.beanFullName, openapi);
   }
   return schema as any;
+}
+
+export function $schemaRef<T>(classType: (() => Constructable<T>) | Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T> {
+  const classType2 = _prepareClassType(classType);
+  return $schema(classType2, options);
+}
+
+function _prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
+  return isClass(classType) ? classType as Constructable<T> : cast(classType)();
 }
