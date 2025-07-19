@@ -12,7 +12,7 @@ describe('dtoRef.test.ts', () => {
         other: 'other',
         user: {
           id: 1,
-          // name: 'tom',
+          name: 'tom',
           married: 1,
         },
       };
