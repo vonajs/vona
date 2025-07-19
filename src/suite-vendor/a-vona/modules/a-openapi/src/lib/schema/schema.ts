@@ -42,11 +42,12 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   return schema as any;
 }
 
-export function $schemaRef<T>(classType: (() => Constructable<T>) | Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T> {
-  const classType2 = _prepareClassType(classType);
+export function $schemaRef<T>(classType: () => Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T> {
+  const classType2 = classType();
+  return z.custom(value => {
+    const schema = $schema(classType2);
+    console.log(schema);
+    return value;
+  });
   return $schema(classType2, options);
-}
-
-function _prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
-  return isClass(classType) ? classType as Constructable<T> : cast(classType)();
 }
