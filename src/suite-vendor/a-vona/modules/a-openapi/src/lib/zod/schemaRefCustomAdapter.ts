@@ -1,5 +1,5 @@
 import type { VonaApplication } from 'vona';
-import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import { OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { setSchemaRefCustom, SymbolSchemaRef } from '@cabloy/zod-query';
 import { cast } from 'vona';
 import { createSchemaRef } from '../schema/schema.ts';
@@ -10,8 +10,6 @@ export function schemaRefCustomAdapter(_app: VonaApplication) {
   });
 
   const registry = new OpenAPIRegistry();
-  const generator30 = new OpenApiGeneratorV3(registry.definitions);
-  _patchGenerator(generator30);
   const generator31 = new OpenApiGeneratorV31(registry.definitions);
   _patchGenerator(generator31);
 }
