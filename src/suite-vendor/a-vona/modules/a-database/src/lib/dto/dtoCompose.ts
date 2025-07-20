@@ -4,10 +4,8 @@ import type { IDtoComposeParams, TypeDtoComposeResult } from '../../types/dto.ts
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
 import { hashkey } from '@cabloy/utils';
-import { hashCode } from '@cabloy/word-utils';
 import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, v } from 'vona-module-a-openapi';
-import z from 'zod';
 import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
 export function DtoCompose<
@@ -57,36 +55,35 @@ function _DtoCompose_relations<TRecord extends {}, TModel extends BeanModelMeta>
   }
 }
 
-function _DtoCompose_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any]) {
+function _DtoCompose_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any, boolean]) {
   const [relationName, relationReal, includeReal, withReal, autoload] = relation;
-  const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
+  const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
-  if (type === 'hasOne') {
-    const schema = v.lazy(v.optional(), () => {
-      const columns = prepareColumns(options.columns);
-      if (!autoload || !columns) {
-        return _DtoCompose_raw(modelTarget, optionsReal);
-      }
-      // dynamic
-      const entityClass = getClassEntityFromClassModel(modelTarget);
-      const beanFullName = appResource.getBeanFullName(entityClass);
-      const dynamicName = `${beanFullName}_${hashkey(columns)}`;
-      let entityTarget = getSchemaDynamic(dynamicName);
-      if (!entityTarget) {
-        entityTarget = _DtoCompose_raw(modelTarget, optionsReal);
-        addSchemaDynamic(dynamicName, entityTarget);
-      }
-      return entityTarget;
-    });
-    Api.field(schema)(entityClass.prototype, relationName);
-  } else if (type === 'belongsTo') {
+  const schemaLazy = _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
+  const schema = (type === 'hasOne' || type === 'belongsTo')
+    ? v.lazy(v.optional(), schemaLazy)
+    : v.array(v.lazy(schemaLazy));
+  Api.field(schema)(entityClass.prototype, relationName);
+}
 
-  } else if (type === 'hasMany') {
-
-  } else if (type === 'belongsToMany') {
-
-  }
+function _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
+  return () => {
+    const columns = prepareColumns(optionsReal.columns);
+    if (!autoload || !columns) {
+      return _DtoCompose_raw(modelTarget, optionsReal);
+    }
+    // dynamic
+    const entityClass = getClassEntityFromClassModel(modelTarget);
+    const beanFullName = appResource.getBeanFullName(entityClass);
+    const dynamicName = `${beanFullName}_${hashkey(columns)}`;
+    let entityTarget = getSchemaDynamic(dynamicName);
+    if (!entityTarget) {
+      entityTarget = _DtoCompose_raw(modelTarget, optionsReal);
+      addSchemaDynamic(dynamicName, entityTarget);
+    }
+    return entityTarget;
+  };
 }
 
 function _DtoCompose_relations_collection<TModel extends BeanModelMeta>(

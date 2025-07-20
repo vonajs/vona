@@ -39,6 +39,9 @@ describe('dtoCompose.test.ts', () => {
         assert.equal(rules.title._def.typeName, 'ZodString');
         assert.equal(rules.userId._def.typeName, 'ZodUnion');
         assert.equal(rules.iid, undefined);
+        assert.equal(rules.postContent._def.typeName, 'ZodLazy');
+        assert.equal(rules.user._def.typeName, 'ZodLazy');
+        assert.equal(rules.user3._def.typeName, 'ZodLazy');
       });
     });
   });
