@@ -38,24 +38,29 @@ export interface IModelRelationBelongsTo<
   options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
 }
 
-export interface IModelRelationHasMany<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationHasMany<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+> {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
+  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins>;
 }
 
 export interface IModelRelationBelongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'belongsToMany';
   modelMiddle?: TypeModelClassLike<MODELMiddle>;
   model?: TypeModelClassLike<MODEL>;
   keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
   keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD>;
+  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins>;
 }
 
 export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {

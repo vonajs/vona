@@ -42,8 +42,7 @@ function hasMany<
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
 ): IModelRelationHasManyDynamic<MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
-  options = options ?? {} as any;
-  return { type: 'hasMany', model: classModel, key, ...options };
+  return { type: 'hasMany', model: classModel, key, options };
 }
 
 function belongsToMany<

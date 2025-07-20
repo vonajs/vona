@@ -31,9 +31,8 @@ function hasMany<
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationHasMany<MODEL, AUTOLOAD> {
-  const options2 = options ?? {};
-  return { type: 'hasMany', model: classModel, key, ...options2 };
+): IModelRelationHasMany<MODEL, AUTOLOAD, ModelJoins> {
+  return { type: 'hasMany', model: classModel, key, options };
 }
 
 function belongsToMany<
@@ -49,8 +48,8 @@ function belongsToMany<
   keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD> {
-  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options: options as any };
+): IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, ModelJoins> {
+  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
 
 export const $relation = {
