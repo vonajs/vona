@@ -31,10 +31,6 @@ function _DtoCompose_raw<
   let entityClass = getClassEntityFromClassModel(modelClass);
   // columns
   const columns = prepareColumns(params?.columns);
-  if (!columns && !params?.include && !params?.with) {
-    // do nothing
-    return entityClass as any;
-  }
   // always create a new class, no matter if columns empty
   entityClass = $Class.pick(entityClass, columns as any);
   // relations
@@ -69,14 +65,14 @@ function _DtoCompose_relation_handle<TRecord extends {}>(entityClass: Constructa
 
 function _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
   return () => {
-    const columns = prepareColumns(optionsReal.columns);
-    if (!autoload || !columns) {
+    if (!autoload) {
       return _DtoCompose_raw(modelTarget, optionsReal);
     }
     // dynamic
     const entityClass = getClassEntityFromClassModel(modelTarget);
     const beanFullName = appResource.getBeanFullName(entityClass);
-    const dynamicName = `${beanFullName}_${hashkey(columns)}`;
+    const columns = prepareColumns(optionsReal.columns);
+    const dynamicName = `${beanFullName}_${columns ? hashkey(columns) : 'none'}`;
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
       entityTarget = _DtoCompose_raw(modelTarget, optionsReal);

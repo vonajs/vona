@@ -1111,7 +1111,8 @@ declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord{
         '/test/vona/bean/test': undefined;
 '/test/vona/bean/service': undefined;
-'/test/vona/dtoTest': undefined;
+'/test/vona/dtoTest/getUserLazy': undefined;
+'/test/vona/dtoTest/getUserDynamic': undefined;
 '/test/vona/guardPassport/testUserName': undefined;
 '/test/vona/guardPassport/testUserNameFail': undefined;
 '/test/vona/guardPassport/testRoleName': undefined;
