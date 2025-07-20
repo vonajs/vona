@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { $Dto, $relationDynamic } from 'vona-module-a-database';
+import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
 
 describe('dtoCompose.test.ts', () => {
@@ -33,7 +34,11 @@ describe('dtoCompose.test.ts', () => {
             }),
           },
         });
-        console.log(DtoPostNew);
+        const rules: any = getTargetDecoratorRules(DtoPostNew.prototype);
+        assert.equal(rules.id._def.typeName, 'ZodUnion');
+        assert.equal(rules.title._def.typeName, 'ZodString');
+        assert.equal(rules.userId._def.typeName, 'ZodUnion');
+        assert.equal(rules.iid, undefined);
       });
     });
   });
