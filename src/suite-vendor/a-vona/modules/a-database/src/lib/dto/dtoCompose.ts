@@ -12,6 +12,16 @@ export function DtoCompose<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoComposeResult<ModelLike, T>> {
+  return _DtoCompose_raw(modelLike, params);
+}
+
+function _DtoCompose_raw<
+  T extends IDtoComposeParams<ModelLike>,
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+>(
+  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  params?: T,
+): Constructable<TypeDtoComposeResult<ModelLike, T>> {
   // model
   const modelClass = prepareClassModel(modelLike);
   // entity
