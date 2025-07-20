@@ -2,7 +2,6 @@ import type { Constructable } from 'vona';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type { ISchemaObjectOptions } from '../../types/decorator.ts';
 import type { TypeOpenapiMetadata } from '../../types/rest.ts';
-import { SymbolSchemaRef } from '@cabloy/zod-query';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
@@ -43,12 +42,12 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
 }
 
 export function $schemaRef<T>(...schemaLikes: SchemaLike[]): z.ZodSchema<T> {
-  const schema = z.object({});
-  schema._def[SymbolSchemaRef] = schemaLikes;
-  return schema as any;
+  return z.lazy(() => {
+    return _createSchemaRef(schemaLikes);
+  });
 }
 
-export function createSchemaRef(schemaLikes: SchemaLike[]) {
+function _createSchemaRef(schemaLikes: SchemaLike[]) {
   const classType = schemaLikes[schemaLikes.length - 1];
   schemaLikes = schemaLikes.slice(0, schemaLikes.length - 1);
   return makeSchemaLikes(schemaLikes, $schema(cast(classType)()));

@@ -3,7 +3,6 @@ import type { ConfigDatabase } from './types/config.ts';
 import type { IDatabaseClientRecord } from './types/database.ts';
 import { BeanSimple, cast, combineConfigDefault, deepExtend } from 'vona';
 import { ServiceDatabaseAsyncLocalStorage, ServiceTransactionConsistency‌ } from 'vona-module-a-database';
-import { __ThisModule__ } from './.metadata/this.ts';
 import { ExtendKnex } from './extend/index.ts';
 
 const SymbolTransactionConsistency = Symbol('SymbolTransactionConsistency');

@@ -1,14 +1,8 @@
 import type { VonaApplication } from 'vona';
 import { OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { setSchemaRefCustom, SymbolSchemaRef } from '@cabloy/zod-query';
 import { cast } from 'vona';
-import { createSchemaRef } from '../schema/schema.ts';
 
 export function schemaRefCustomAdapter(_app: VonaApplication) {
-  setSchemaRefCustom((params: any[]) => {
-    return createSchemaRef(params);
-  });
-
   const registry = new OpenAPIRegistry();
   const generator31 = new OpenApiGeneratorV31(registry.definitions);
   _patchGenerator(generator31);
@@ -48,9 +42,9 @@ class Metadata {
     return openapi === null || openapi === void 0 ? void 0 : openapi._internal;
   }
 
-  static getSchemaRefParams(zodSchema) {
+  static getLazySchema(zodSchema) {
     const innerSchema = this.unwrapChained(zodSchema);
-    return zodSchema._def?.[SymbolSchemaRef] ?? innerSchema._def?.[SymbolSchemaRef];
+    return zodSchema._def?.getter ?? innerSchema._def?.getter;
   }
 
   static getRefId(zodSchema) {
@@ -64,9 +58,9 @@ function _patchGenerator(generator: any) {
   const gen = Object.getPrototypeOf(cast(generator).generator);
   gen.generateSchemaWithRef = function (zodSchema) {
     // schema ref
-    const schemaRefParams = Metadata.getSchemaRefParams(zodSchema);
-    if (schemaRefParams) {
-      zodSchema = createSchemaRef(schemaRefParams);
+    const lazySchema = Metadata.getLazySchema(zodSchema);
+    if (lazySchema) {
+      zodSchema = lazySchema();
     }
     const refId = Metadata.getRefId(zodSchema);
     if (!refId) {
