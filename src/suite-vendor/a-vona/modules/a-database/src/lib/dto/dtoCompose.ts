@@ -4,7 +4,7 @@ import type { IDtoComposeParams, TypeDtoComposeResult } from '../../types/dto.ts
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
 import { $Class, appResource, deepExtend } from 'vona';
-import { Api } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapi';
 import z from 'zod';
 import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
@@ -54,9 +54,11 @@ function _DtoCompose_relations<TRecord extends {}, TModel extends BeanModelMeta>
 function _DtoCompose_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any]) {
   const [relationName, relationReal, includeReal, withReal] = relation;
   const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
+  const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
   if (type === 'hasOne') {
-    Api.field(z.number())(entityClass.prototype, relationName);
+    const schema = _DtoCompose_raw(modelTarget, optionsReal);
+    Api.field(v.optional(), schema)(entityClass.prototype, relationName);
   } else if (type === 'belongsTo') {
 
   } else if (type === 'hasMany') {
