@@ -66,12 +66,14 @@ declare module 'vona-module-test-vona' {
 }
 /** aopMethod: end */
 /** entity: begin */
+export * from '../entity/category.ts';
 export * from '../entity/post.ts';
 export * from '../entity/postContent.ts';
 export * from '../entity/role.ts';
 export * from '../entity/roleUser.ts';
 export * from '../entity/test.ts';
 export * from '../entity/user.ts';
+import type { IEntityOptionsCategory } from '../entity/category.ts';
 import type { IEntityOptionsPost } from '../entity/post.ts';
 import type { IEntityOptionsPostContent } from '../entity/postContent.ts';
 import type { IEntityOptionsRole } from '../entity/role.ts';
@@ -82,7 +84,8 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IEntityRecord {
-      'test-vona:post': IEntityOptionsPost;
+      'test-vona:category': IEntityOptionsCategory;
+'test-vona:post': IEntityOptionsPost;
 'test-vona:postContent': IEntityOptionsPostContent;
 'test-vona:role': IEntityOptionsRole;
 'test-vona:roleUser': IEntityOptionsRoleUser;
@@ -97,6 +100,7 @@ declare module 'vona-module-test-vona' {
 }
 /** entity: end */
 /** entity: begin */
+import type { EntityCategory } from '../entity/category.ts';
 import type { EntityPost } from '../entity/post.ts';
 import type { EntityPostContent } from '../entity/postContent.ts';
 import type { EntityRole } from '../entity/role.ts';
@@ -104,7 +108,8 @@ import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityTest } from '../entity/test.ts';
 import type { EntityUser } from '../entity/user.ts';
 export interface IModuleEntity {
-  'post': EntityPostMeta;
+  'category': EntityCategoryMeta;
+'post': EntityPostMeta;
 'postContent': EntityPostContentMeta;
 'role': EntityRoleMeta;
 'roleUser': EntityRoleUserMeta;
@@ -113,12 +118,14 @@ export interface IModuleEntity {
 }
 /** entity: end */
 /** entity: begin */
+export type EntityCategoryTableName = 'testVonaCategory';
 export type EntityPostTableName = 'testVonaPost';
 export type EntityPostContentTableName = 'testVonaPostContent';
 export type EntityRoleTableName = 'testVonaRole';
 export type EntityRoleUserTableName = 'testVonaRoleUser';
 export type EntityTestTableName = 'testVonaTest';
 export type EntityUserTableName = 'testVonaUser';
+export type EntityCategoryMeta=TypeEntityMeta<EntityCategory,EntityCategoryTableName>;
 export type EntityPostMeta=TypeEntityMeta<EntityPost,EntityPostTableName>;
 export type EntityPostContentMeta=TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
 export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
@@ -127,7 +134,8 @@ export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 declare module 'vona-module-a-database' {
   export interface ITableRecord {
-    'testVonaPost': never;
+    'testVonaCategory': never;
+'testVonaPost': never;
 'testVonaPostContent': never;
 'testVonaRole': never;
 'testVonaRoleUser': never;
@@ -137,6 +145,10 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-test-vona' {
   
+    export interface IEntityOptionsCategory {
+      fields?: TypeEntityOptionsFields<EntityCategory, IEntityOptionsCategory[TypeSymbolKeyFieldsMore]>;
+    }
+
     export interface IEntityOptionsPost {
       fields?: TypeEntityOptionsFields<EntityPost, IEntityOptionsPost[TypeSymbolKeyFieldsMore]>;
     }
@@ -163,6 +175,7 @@ declare module 'vona-module-test-vona' {
 }
 /** entity: end */
 /** model: begin */
+export * from '../model/category.ts';
 export * from '../model/post.ts';
 export * from '../model/postContent.ts';
 export * from '../model/role.ts';
@@ -170,6 +183,7 @@ export * from '../model/roleUser.ts';
 export * from '../model/test.ts';
 export * from '../model/testDynamicTable.ts';
 export * from '../model/user.ts';
+import type { IModelOptionsCategory } from '../model/category.ts';
 import type { IModelOptionsPost } from '../model/post.ts';
 import type { IModelOptionsPostContent } from '../model/postContent.ts';
 import type { IModelOptionsRole } from '../model/role.ts';
@@ -181,7 +195,8 @@ import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'test-vona:post': IModelOptionsPost;
+      'test-vona:category': IModelOptionsCategory;
+'test-vona:post': IModelOptionsPost;
 'test-vona:postContent': IModelOptionsPostContent;
 'test-vona:role': IModelOptionsRole;
 'test-vona:roleUser': IModelOptionsRoleUser;
@@ -194,6 +209,16 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-test-vona' {
   
+        export interface ModelCategory {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ModelCategory {
+            get $beanFullName(): 'test-vona.model.category';
+            get $onionName(): 'test-vona:category';
+          }
+
         export interface ModelPost {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -266,6 +291,7 @@ declare module 'vona-module-test-vona' {
 }
 /** model: end */
 /** model: begin */
+import type { ModelCategory } from '../model/category.ts';
 import type { ModelPost } from '../model/post.ts';
 import type { ModelPostContent } from '../model/postContent.ts';
 import type { ModelRole } from '../model/role.ts';
@@ -274,7 +300,8 @@ import type { ModelTest } from '../model/test.ts';
 import type { ModelTestDynamicTable } from '../model/testDynamicTable.ts';
 import type { ModelUser } from '../model/user.ts';
 export interface IModuleModel {
-  'post': ModelPost;
+  'category': ModelCategory;
+'post': ModelPost;
 'postContent': ModelPostContent;
 'role': ModelRole;
 'roleUser': ModelRoleUser;
@@ -287,7 +314,16 @@ export interface IModuleModel {
 import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-test-vona' {
-  export interface ModelPost {
+  export interface ModelCategory {
+      [SymbolKeyEntity]: EntityCategory;
+      [SymbolKeyEntityMeta]: EntityCategoryMeta;
+      [SymbolKeyModelOptions]: IModelOptionsCategory;
+      get<T extends IModelGetOptions<EntityCategory,ModelCategory>>(where: TypeModelWhere<EntityCategory>, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityCategory,ModelCategory>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T>[]>;
+      select<T extends IModelSelectParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T>[]>;
+      count<T extends IModelCountParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
+    }
+export interface ModelPost {
       [SymbolKeyEntity]: EntityPost;
       [SymbolKeyEntityMeta]: EntityPostMeta;
       [SymbolKeyModelOptions]: IModelOptionsPost;
@@ -353,7 +389,8 @@ export interface ModelUser {
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {
-    'test-vona:post': ModelPost;
+    'test-vona:category': ModelCategory;
+'test-vona:post': ModelPost;
 'test-vona:postContent': ModelPostContent;
 'test-vona:role': ModelRole;
 'test-vona:roleUser': ModelRoleUser;
