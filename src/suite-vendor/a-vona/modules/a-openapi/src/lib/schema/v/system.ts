@@ -5,7 +5,7 @@ import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';
 import { makeSchemaLike } from '../makeSchemaLikes.ts';
-import { $schema, $schemaRef } from '../schema.ts';
+import { $schema, $schemaLazy } from '../schema.ts';
 
 export function schemaDefault<T>(defaultValue: T) {
   return function (schema: z.ZodSchema): z.ZodSchema {
@@ -19,9 +19,9 @@ export function schemaOptional() {
   };
 }
 
-export function schemaRef<T>(...schemaLikes: SchemaLike[]) {
+export function schemaLazy<T>(...schemaLikes: SchemaLike[]) {
   return function (_schema?: z.ZodSchema): z.ZodSchema<T> {
-    return $schemaRef(...schemaLikes);
+    return $schemaLazy(...schemaLikes);
   };
 }
 

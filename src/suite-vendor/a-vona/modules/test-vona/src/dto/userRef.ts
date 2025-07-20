@@ -10,9 +10,9 @@ export class DtoUserRef {
   @Api.field()
   name: string;
 
-  @Api.field(v.ref(v.optional(), () => DtoUserRef))
+  @Api.field(v.lazy(v.optional(), () => DtoUserRef))
   user?: DtoUserRef;
 
-  @Api.field(v.optional(), v.array(v.ref(() => DtoRoleRef)))
+  @Api.field(v.optional(), v.array(v.lazy(() => DtoRoleRef)))
   roles?: DtoRoleRef[];
 }

@@ -10,6 +10,6 @@ export class DtoRoleRef {
   @Api.field()
   name: string;
 
-  @Api.field(v.optional(), v.array(v.ref(() => DtoUserRef)))
+  @Api.field(v.optional(), v.array(v.lazy(() => DtoUserRef)))
   users?: typeof DtoUserRef;
 }
