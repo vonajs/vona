@@ -798,21 +798,21 @@ export interface IModuleSummerCache {
 /** summerCache: end */
 /** dto: begin */
 export * from '../dto/profile.ts';
-export * from '../dto/roleRef.ts';
+export * from '../dto/roleLazy.ts';
 export * from '../dto/user.ts';
-export * from '../dto/userRef.ts';
+export * from '../dto/userLazy.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
-import type { IDtoOptionsRoleRef } from '../dto/roleRef.ts';
+import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
-import type { IDtoOptionsUserRef } from '../dto/userRef.ts';
+import type { IDtoOptionsUserLazy } from '../dto/userLazy.ts';
 import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'test-vona:profile': IDtoOptionsProfile;
-'test-vona:roleRef': IDtoOptionsRoleRef;
+'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:user': IDtoOptionsUser;
-'test-vona:userRef': IDtoOptionsUserRef;
+'test-vona:userLazy': IDtoOptionsUserLazy;
     }
 
   
@@ -823,25 +823,25 @@ declare module 'vona-module-test-vona' {
 /** dto: end */
 /** dto: begin */
 import type { DtoProfile } from '../dto/profile.ts';
-import type { DtoRoleRef } from '../dto/roleRef.ts';
+import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoUser } from '../dto/user.ts';
-import type { DtoUserRef } from '../dto/userRef.ts'; 
+import type { DtoUserLazy } from '../dto/userLazy.ts'; 
 declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsProfile {
       fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsRoleRef {
-      fields?: TypeEntityOptionsFields<DtoRoleRef, IDtoOptionsRoleRef[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsRoleLazy {
+      fields?: TypeEntityOptionsFields<DtoRoleLazy, IDtoOptionsRoleLazy[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsUser {
       fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsUserRef {
-      fields?: TypeEntityOptionsFields<DtoUserRef, IDtoOptionsUserRef[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsUserLazy {
+      fields?: TypeEntityOptionsFields<DtoUserLazy, IDtoOptionsUserLazy[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
