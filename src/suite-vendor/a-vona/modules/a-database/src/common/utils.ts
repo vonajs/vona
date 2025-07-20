@@ -1,3 +1,10 @@
+import type { Constructable } from 'vona';
+import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { TypeModelColumn, TypeModelColumns } from '../types/modelWhere.ts';
+import type { IModelClassRecord } from '../types/onion/model.ts';
+import { appResource, beanFullNameFromOnionName } from 'vona';
+import { prepareClassType } from 'vona-module-a-openapi';
+
 export function isRaw(raw) {
   return typeof raw?.constructor === 'function' && raw?.constructor?.name === 'Raw';
 }
@@ -11,6 +18,23 @@ export function getTargetColumnName(column: string) {
   if (column.includes(' as ')) return column.split(' as ')[1].trim();
   if (column.includes('.')) return column.split('.')[1].trim();
   return column;
+}
+
+export function prepareColumns<TRecord>(columns?: TypeModelColumns<TRecord>): Array<TypeModelColumn<TRecord>> | undefined {
+  if (!columns) return undefined;
+  columns = Array.isArray(columns) ? columns : [columns];
+  if (columns.includes('*')) return undefined;
+  return columns;
+}
+
+export function prepareClassModel<
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+>(classType: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike): Constructable<ModelLike> {
+  if (typeof classType === 'string') {
+    const beanOptions = appResource.getBean(beanFullNameFromOnionName(classType, 'model'));
+    return beanOptions!.beanClass as any;
+  }
+  return prepareClassType(classType) as any;
 }
 
 // export function formatValue(value) {

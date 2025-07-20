@@ -2,10 +2,10 @@ import type { Constructable } from 'vona';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type { ISchemaObjectOptions } from '../../types/decorator.ts';
 import type { TypeOpenapiMetadata } from '../../types/rest.ts';
-import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
 import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
+import { prepareClassType } from '../utils.ts';
 import { makeSchemaLikes } from './makeSchemaLikes.ts';
 
 export function $schema(schemaLike: z.ZodSchema): z.ZodSchema;
@@ -51,7 +51,7 @@ export function $schemaLazy<T>(...schemaLikes: SchemaLike[]): z.ZodSchema<T> {
 function _createSchemaLazy(schemaLikes: SchemaLike[]) {
   const classType = schemaLikes[schemaLikes.length - 1];
   schemaLikes = schemaLikes.slice(0, schemaLikes.length - 1);
-  const classType2 = _prepareClassType(classType as any);
+  const classType2 = prepareClassType(classType as any);
   return makeSchemaLikes(schemaLikes, $schema(classType2));
 }
 
@@ -60,8 +60,4 @@ function _createSchemaObject(rules: {}, options?: ISchemaObjectOptions) {
   if (options?.passthrough) schema = schema.passthrough() as any;
   if (options?.strict) schema = schema.strict() as any;
   return schema;
-}
-
-function _prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
-  return isClass(classType) ? classType as Constructable<T> : cast(classType)();
 }

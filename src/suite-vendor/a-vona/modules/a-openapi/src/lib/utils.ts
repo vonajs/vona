@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenapiMetadata } from '../types/rest.ts';
+import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
@@ -41,4 +42,8 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
       }
     }
   }
+}
+
+export function prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
+  return isClass(classType) ? classType as Constructable<T> : cast(classType)();
 }
