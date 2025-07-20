@@ -6,8 +6,8 @@ import { app } from 'vona-mock';
 import { $schema } from 'vona-module-a-openapi';
 import { DtoUserLazy } from 'vona-module-test-vona';
 
-describe('dtoRef.test.ts', () => {
-  it('action:dtoRef', async () => {
+describe('dtoLazy.test.ts', () => {
+  it('action:dtoLazy', async () => {
     await app.bean.executor.mockCtx(async () => {
       const data = {
         name: 'kevin',
@@ -38,8 +38,8 @@ describe('dtoRef.test.ts', () => {
       registry.register(beanOptions.beanFullName, schema);
       const generator = new OpenApiGeneratorV31(registry.definitions);
       const apiObj = generator.generateDocument(app.bean.scope('a-openapi').config.generateDocument.V31);
-      assert.equal(cast(apiObj).components.schemas['test-vona.dto.userRef'].properties.user.$ref, '#/components/schemas/test-vona.dto.userRef');
-      assert.equal(cast(apiObj).components.schemas['test-vona.dto.roleRef'].properties.users.items.$ref, '#/components/schemas/test-vona.dto.userRef');
+      assert.equal(cast(apiObj).components.schemas['test-vona.dto.userLazy'].properties.user.$ref, '#/components/schemas/test-vona.dto.userLazy');
+      assert.equal(cast(apiObj).components.schemas['test-vona.dto.roleLazy'].properties.users.items.$ref, '#/components/schemas/test-vona.dto.userLazy');
     });
   });
 });
