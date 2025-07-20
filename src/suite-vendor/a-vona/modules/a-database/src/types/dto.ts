@@ -4,12 +4,14 @@ import type { TypeModelColumns } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelRelationResult, TypeSymbolKeyEntity } from './relations.ts';
 
+export type TypeModelOfModelLike<ModelLike extends BeanModelMeta | (keyof IModelClassRecord)> =
+  ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike] : ModelLike;
+
 export type IDtoComposeParams<
-  // not use undefined as default value
-  TModel extends (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 > = IBuildDtoComposeParams<
-  IModelClassRecord[TModel][TypeSymbolKeyEntity],
-  IModelClassRecord[TModel]
+  TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
+  TypeModelOfModelLike<ModelLike>
 >;
 
 export interface IBuildDtoComposeParams<
@@ -26,11 +28,11 @@ export interface IBuildDtoComposeParamsBasic<
 }
 
 export type TypeDtoComposeResult<
-  ModelName extends (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
   TOptionsRelation,
 > =
 TypeModelRelationResult<
-  IModelClassRecord[ModelName][TypeSymbolKeyEntity],
-  IModelClassRecord[ModelName],
+  TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
+  TypeModelOfModelLike<ModelLike>,
   TOptionsRelation
 >;
