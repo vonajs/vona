@@ -18,4 +18,9 @@ export class ControllerDtoTest extends BeanBase {
   @Api.body($Dto.compose('test-vona:post'))
   getPostDynamic() {
   }
+
+  @Web.get('getCategoryTree')
+  @Api.body($Dto.compose('test-vona:category'))
+  getCategoryTree() {
+  }
 }
