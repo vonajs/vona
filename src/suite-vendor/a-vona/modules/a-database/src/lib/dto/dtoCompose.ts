@@ -5,7 +5,7 @@ import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
 import { hashkey } from '@cabloy/utils';
 import { $Class, appResource, deepExtend } from 'vona';
-import { addSchemaDynamic, Api, getSchemaDynamic, v } from 'vona-module-a-openapi';
+import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
 import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
 export function DtoCompose<
@@ -76,6 +76,7 @@ function _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autolo
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
       entityTarget = _DtoCompose_raw(modelTarget, optionsReal);
+      entityTarget[SymbolSchemaDynamicRefId] = dynamicName;
       addSchemaDynamic(dynamicName, entityTarget);
     }
     return entityTarget;

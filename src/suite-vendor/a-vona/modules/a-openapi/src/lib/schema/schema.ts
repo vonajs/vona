@@ -7,6 +7,7 @@ import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
 import { prepareClassType } from '../utils.ts';
 import { makeSchemaLikes } from './makeSchemaLikes.ts';
+import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
 
 export function $schema(schemaLike: z.ZodSchema): z.ZodSchema;
 export function $schema(classType: StringConstructor): z.ZodString;
@@ -34,10 +35,17 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   // object
   let schema = _createSchemaObject(rules, options);
   // refId
-  const beanOptions = appResource.getBean(classType);
-  if (beanOptions) {
-    const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
-    schema = schema.openapi(beanOptions.beanFullName, openapi);
+  const schemaDynamicRefId = classType[SymbolSchemaDynamicRefId];
+  if (schemaDynamicRefId) {
+    // dynamic
+    schema = schema.openapi(schemaDynamicRefId);
+  } else {
+    // static
+    const beanOptions = appResource.getBean(classType);
+    if (beanOptions) {
+      const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
+      schema = schema.openapi(beanOptions.beanFullName, openapi);
+    }
   }
   return schema as any;
 }
