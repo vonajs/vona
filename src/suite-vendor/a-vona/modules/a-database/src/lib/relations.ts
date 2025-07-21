@@ -2,7 +2,7 @@ import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
-import type { TypeSymbolKeyEntity } from '../types/relations.ts';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
 function hasOne<
@@ -47,17 +47,17 @@ function hasMany<
 }
 
 function belongsToMany<
-  MODELMiddle extends BeanModelMeta,
-  MODEL extends BeanModelMeta,
+  MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = boolean,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
-  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
+  COLUMNS extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
-  classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
-  classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  keyFrom: keyof MODELMiddle[TypeSymbolKeyEntity],
-  keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
+  classModelMiddle: MODELMiddle extends BeanModelMeta ? ((() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>) : MODELMiddle,
+  classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
+  keyFrom: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
+  keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
 ): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {

@@ -1,6 +1,6 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IDecoratorModelOptions } from './onion/model.ts';
+import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -8,6 +8,9 @@ export const SymbolKeyModelOptions = Symbol('$modelOptions');
 export type TypeSymbolKeyEntity = typeof SymbolKeyEntity;
 export type TypeSymbolKeyEntityMeta = typeof SymbolKeyEntityMeta;
 export type TypeSymbolKeyModelOptions = typeof SymbolKeyModelOptions;
+
+export type TypeModelOfModelLike<ModelLike extends BeanModelMeta | (keyof IModelClassRecord)> =
+  ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike] : ModelLike;
 
 export type TypeModelParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
