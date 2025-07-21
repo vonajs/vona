@@ -31,11 +31,12 @@ export interface IModelRelationBelongsTo<
   MODELSelf extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumns<MODEL[TypeSymbolKeyEntity]> = TypeModelColumns<MODEL[TypeSymbolKeyEntity]>,
 > {
   type?: 'belongsTo';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof MODELSelf[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
+  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>;
 }
 
 export interface IModelRelationHasMany<
@@ -63,9 +64,13 @@ export interface IModelRelationBelongsToMany<
   options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins>;
 }
 
-export interface IModelRelationOptionsOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationOptionsOne<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumns<MODEL[TypeSymbolKeyEntity]> = TypeModelColumns<MODEL[TypeSymbolKeyEntity]>,
+> {
   autoload?: AUTOLOAD;
-  columns?: TypeModelColumns<MODEL[TypeSymbolKeyEntity]>;
+  columns?: COLUMNS;
 }
 
 export type IModelRelationOptionsMany<

@@ -43,6 +43,7 @@ export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUti
 export type TypeUtilGetRelationEntityMeta<Relation> = TypeUtilGetModelEntityMeta<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS extends {} } ? OPTIONS : undefined;
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
+export type TypeUtilGetRelationOptionsColumns<Relation> = Relation extends { options?: { columns?: infer COLUMNS } } ? COLUMNS : undefined;
 export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
@@ -56,19 +57,26 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
     TypeUtilGetRelationEntity<Relation>,
     TypeUtilGetRelationType<Relation>,
     TypeUtilGetRelationModel<Relation>,
-    IncludeWrapper
+    IncludeWrapper,
+    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
   >;
-export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined> =
-  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper>> : TypeModelRelationResult<TRecord, TModel, IncludeWrapper> | undefined;
+export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns> =
+  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> : TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
-export type TypeUtilGetParamsColumns<TParams> = TypePrepareColumns<TParams extends { columns?: infer WITH } ? WITH : undefined>;
-export type TypePrepareColumns<TColumns> = TColumns extends '*' | ['*'] ? undefined : TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
-export type TypeEntitySelector<TRecord, TColumns> = [TColumns] extends [keyof TRecord] ? Pick<TRecord, TColumns> : TRecord;
+export type TypeUtilGetParamsColumns<TParams> = TParams extends { columns?: infer COLUMNS } ? COLUMNS : undefined;
+export type TypeUtilPrepareColumns<TColumns> = TColumns extends '*' | ['*'] ? undefined : TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
+export type TypeUtilEntitySelector<TRecord, TColumns> = [TColumns] extends [keyof TRecord] ? Pick<TRecord, TColumns> : TRecord;
+export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined> =
+  TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[] ?
+    TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
 
-export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation> =
-  TypeEntitySelector<TRecord, TypeUtilGetParamsColumns<TOptionsRelation>> &
+export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined> =
+  TypeUtilEntitySelector<
+    TRecord,
+    TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
+  > &
   (TModel extends BeanModelMeta ?
       (
         OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
