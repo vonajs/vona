@@ -1,6 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { TypeModelColumns } from '../types/modelWhere.ts';
+import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
@@ -17,7 +17,7 @@ function belongsTo<
   MODELSelf extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumns<MODEL[TypeSymbolKeyEntity]> = TypeModelColumns<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
 >(
   _classModelSelf: (() => Constructable<MODELSelf>) | Constructable<MODELSelf>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
