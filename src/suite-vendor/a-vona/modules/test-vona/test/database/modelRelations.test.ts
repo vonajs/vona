@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
 import { $relationDynamic } from 'vona-module-a-database';
-import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
+import { ModelPost, ModelPostContent, ModelUser } from 'vona-module-test-vona';
 
 describe('modelRelations.test.ts', () => {
   it('action:modelRelations', async () => {
@@ -175,8 +175,8 @@ describe('modelRelations.test.ts', () => {
               include: { posts: true },
               with: {
                 roles: $relationDynamic.belongsToMany(
-                  () => ModelRoleUser,
-                  () => ModelRole,
+                  'test-vona:roleUser',
+                  'test-vona:role',
                   'userId',
                   'roleId',
                   { columns: ['id', 'name'] },
