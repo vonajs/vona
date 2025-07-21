@@ -63,9 +63,12 @@ export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta 
 
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
+export type TypeUtilGetParamsColumns<TParams> = TypePrepareColumns<TParams extends { columns?: infer WITH } ? WITH : undefined>;
+export type TypePrepareColumns<TColumns> = TColumns extends '*' | ['*'] ? undefined : TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
+export type TypeEntitySelector<TRecord, TColumns> = [TColumns] extends [keyof TRecord] ? Pick<TRecord, TColumns> : TRecord;
 
 export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation> =
-  TRecord &
+  TypeEntitySelector<TRecord, TypeUtilGetParamsColumns<TOptionsRelation>> &
   (TModel extends BeanModelMeta ?
       (
         OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
