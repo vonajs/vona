@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IBuildModelSelectParamsBasic } from './model.ts';
-import type { TypeModelColumn } from './modelWhere.ts';
+import type { TypeModelColumn, TypeModelColumnsPatch } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
@@ -74,7 +74,7 @@ export interface IModelRelationOptionsOne<
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
 > {
   autoload?: AUTOLOAD;
-  columns?: COLUMNS | COLUMNS[];
+  columns?: TypeModelColumnsPatch<MODEL[TypeSymbolKeyEntity], COLUMNS>;
 }
 
 export type IModelRelationOptionsMany<

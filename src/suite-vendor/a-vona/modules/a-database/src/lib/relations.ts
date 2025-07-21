@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
-import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
+import type { IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
 function hasOne<
   MODEL extends BeanModelMeta,
@@ -13,7 +13,7 @@ function hasOne<
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>,
-): IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
+): any { // :  IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
@@ -27,7 +27,7 @@ function belongsTo<
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODELSelf[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>,
-): IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD, COLUMNS> {
+): any { // : IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'belongsTo', model: classModel, key, options };
 }
 
