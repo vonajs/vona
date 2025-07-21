@@ -68,7 +68,7 @@ describe('modelRelations.test.ts', () => {
         { id: postApple.id },
       );
       assert.equal(postAutoload!.user?.id, postAutoload!.userId);
-      assert.equal(postAutoload?.user?.iid, undefined);
+      assert.equal(cast(postAutoload?.user)?.iid, undefined);
       assert.equal(Object.keys(postAutoload!.user!).length, 2); // id + name
       // relation: hasMany
       const users = await scopeTest.model.user.select({
@@ -152,7 +152,7 @@ describe('modelRelations.test.ts', () => {
           include: {
             postContent: {
               include: {
-                post: { include: { user: { columns: '*' } } },
+                post: { include: { user: { columns: ['id'] } } },
               },
               with: {
                 post3: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
@@ -172,7 +172,7 @@ describe('modelRelations.test.ts', () => {
           },
         },
       );
-      assert.equal(Object.keys(items[0].postContent!.post!.user!).length > 5, true);
+      assert.equal(Object.keys(items[0].postContent!.post!.user!).length, 1);
       assert.equal(items[0].postContent?.post3?.postContent?.content !== undefined, true);
       assert.equal(items[0].user3!.posts.length > 0, true);
       assert.equal(items[0].user3!.roles.length > 0, true);

@@ -15,7 +15,7 @@ describe('dtoCompose.test.ts', () => {
             postContent: {
               columns: ['id', 'postId', 'content'],
               include: {
-                post: { include: { user: { columns: '*' } } },
+                post: { include: { user: { columns: ['id'] } } },
               },
               with: {
                 post3: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {

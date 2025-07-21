@@ -7,7 +7,7 @@ import { ModelUser } from './user.ts';
 export interface IModelOptionsPost extends IDecoratorModelOptions {
   relations: {
     postContent: IModelRelationHasOne<ModelPostContent>;
-    user: IModelRelationBelongsTo<ModelPost, ModelUser, true>;
+    user: IModelRelationBelongsTo<ModelPost, ModelUser, true, 'id' | 'name'>;
   };
 }
 

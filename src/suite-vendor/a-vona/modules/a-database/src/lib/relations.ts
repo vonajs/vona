@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { TypeModelColumns } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
@@ -12,12 +13,17 @@ function hasOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>(
   return { type: 'hasOne', model: classModel, key, options };
 }
 
-function belongsTo<MODELSelf extends BeanModelMeta, MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>(
+function belongsTo<
+  MODELSelf extends BeanModelMeta,
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumns<MODEL[TypeSymbolKeyEntity]> = TypeModelColumns<MODEL[TypeSymbolKeyEntity]>,
+>(
   _classModelSelf: (() => Constructable<MODELSelf>) | Constructable<MODELSelf>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODELSelf[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>,
-): IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD> {
+  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>,
+): IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'belongsTo', model: classModel, key, options };
 }
 
