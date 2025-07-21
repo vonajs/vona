@@ -36,8 +36,9 @@ describe('modelRelations.test.ts', () => {
       // relation: hasOne: get
       const postGet = await scopeTest.model.post.get(
         { id: postApple.id },
-        { include: { postContent: true } },
+        { columns: 'id', include: { postContent: true } },
       );
+      assert.equal(cast(postGet)?.iid, undefined);
       assert.equal(postGet?.postContent?.content, 'action:modelRelations:postContentApple');
       // relation: hasOne: columns
       const postGetColumns = await scopeTest.model.post.get(
@@ -67,6 +68,7 @@ describe('modelRelations.test.ts', () => {
         { id: postApple.id },
       );
       assert.equal(postAutoload!.user?.id, postAutoload!.userId);
+      assert.equal(postAutoload?.user?.iid, undefined);
       assert.equal(Object.keys(postAutoload!.user!).length, 2); // id + name
       // relation: hasMany
       const users = await scopeTest.model.user.select({
@@ -139,8 +141,9 @@ describe('modelRelations.test.ts', () => {
       );
       assert.equal(roleGet?.users.length, 2);
       // relation: belongsToMany: mget
-      const roles2 = await scopeTest.model.role.mget([roleFamily.id, roleFriend.id], { include: { users: true } });
+      const roles2 = await scopeTest.model.role.mget([roleFamily.id, roleFriend.id], { columns: ['id', 'name'], include: { users: true } });
       assert.equal(roles2.length, 2);
+      assert.equal(cast(roles2[0]).iid, undefined);
       assert.equal(roles2[0].users.length, 2);
       assert.equal(roles2[1].users.length, 1);
       // relation: include + with

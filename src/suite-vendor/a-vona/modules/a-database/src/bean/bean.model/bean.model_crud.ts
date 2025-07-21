@@ -15,7 +15,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelCrudInner<TRecor
     return await this._mget(undefined, ids, options);
   }
 
-  async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+  async select(params?: IModelSelectParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<Partial<TRecord>[]> {
     return await this._select(undefined, params, options);
   }
 
