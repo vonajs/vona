@@ -107,15 +107,18 @@ describe('modelRelations.test.ts', () => {
           id: [userTom.id, userJimmy.id],
         },
         orders: [['id', 'asc']],
-        include: { posts: {
-          joins: [['innerJoin', 'testVonaPostContent', ['testVonaPost.id', 'testVonaPostContent.postId']]],
-          where: {
-            'testVonaPost.id': { _in_: [postApple.id, postPear.id] },
-            '_and_': { 'testVonaPost.id': { _notIn_: [postApple.id, postPear.id] } },
-            'testVonaPostContent.id': [postContentApple.id],
+        include: {
+          posts: {
+            joins: [['innerJoin', 'testVonaPostContent', ['testVonaPost.id', 'testVonaPostContent.postId']]],
+            where: {
+              'testVonaPost.id': { _in_: [postApple.id, postPear.id] },
+              '_and_': { 'testVonaPost.id': { _notIn_: [postApple.id, postPear.id] } },
+              'testVonaPostContent.id': [postContentApple.id],
+            },
+            orders: [['testVonaPost.id', 'desc']],
           },
-          orders: [['testVonaPost.id', 'desc']],
-        } },
+          roles: true,
+        },
       });
       assert.equal(userOptions2.length, 2);
       assert.equal(userOptions2[0].posts.length, 0);

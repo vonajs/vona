@@ -1,8 +1,9 @@
 import type { ServiceDb } from '../../service/db_.ts';
-import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelTargetClassLike } from '../../types/index.ts';
+import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelClassLike } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
-import { isClass, isNil } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
+import { prepareClassModel } from '../../common/utils.ts';
 import { $tableName } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
@@ -128,12 +129,12 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.app.bean._newBean(this.$beanFullName as any, clientName, table);
   }
 
-  public newInstanceTarget<TRecordTarget extends {} = {}>(
-    modelClassTarget: TypeModelTargetClassLike<TRecordTarget>,
+  public newInstanceTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
+    modelClassTarget: TypeModelClassLike<MODEL>,
     table?: keyof ITableRecord,
-  ): BeanModelMeta<TRecordTarget> {
-    const modelClass2 = isClass(modelClassTarget) ? modelClassTarget : cast(modelClassTarget)();
+  ): BeanModelMeta {
+    const modelClass2 = prepareClassModel(modelClassTarget);
     const beanFullName = appResource.getBeanFullName(modelClass2);
-    return this.app.bean._newBean(beanFullName, this.db, table);
+    return this.app.bean._newBean(beanFullName as any, this.db, table);
   }
 }

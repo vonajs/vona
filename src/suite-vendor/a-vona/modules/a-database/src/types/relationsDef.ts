@@ -12,7 +12,11 @@ export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belong
 //   [key: string]: TypeModelRelation<any, any>;
 // }
 
-export type TypeModelClassLike<MODEL extends BeanModelMeta> = (() => Constructable<MODEL>) | Constructable<MODEL>;
+export type TypeModelClassLike<MODEL extends BeanModelMeta | (keyof IModelClassRecord)> =
+  MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL;
+
+export type TypeModelClassLikeGeneral<MODEL extends BeanModelMeta = BeanModelMeta> =
+  (() => Constructable<MODEL>) | Constructable<MODEL> | keyof IModelClassRecord;
 
 // export type TypeModelRelation<MODELSelf extends BeanModelMeta | undefined, MODELTarget extends BeanModelMeta> =
 //   IModelRelationHasOne<MODELTarget> |

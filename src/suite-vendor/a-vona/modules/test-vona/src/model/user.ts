@@ -16,7 +16,7 @@ export interface IModelOptionsUser extends IDecoratorModelOptions {
   entity: EntityUser,
   relations: {
     posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }),
-    roles: $relation.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', { columns: ['id', 'name'] }),
+    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
   },
 })
 export class ModelUser extends BeanModelBase<EntityUser> {}

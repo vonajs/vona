@@ -321,7 +321,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!modelsClear) return;
     const modelsClear2 = Array.isArray(modelsClear) ? modelsClear : [modelsClear];
     for (const modelClear of modelsClear2) {
-      const modelTarget = this.newInstanceTarget(modelClear) as typeof this;
+      const modelTarget = this.newInstanceTarget(modelClear as any) as typeof this;
       await modelTarget.cacheQueryClear();
     }
   }

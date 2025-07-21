@@ -6,27 +6,28 @@ import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relatio
 import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
 function hasOne<
-  MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
->(
-  classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
-  key: keyof MODEL[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>,
-): any { // :  IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
-  return { type: 'hasOne', model: classModel, key, options };
-}
-
-function belongsTo<
-  MODELSelf extends BeanModelMeta,
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
-  _classModelSelf: (() => Constructable<MODELSelf>) | Constructable<MODELSelf>,
   classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
-  key: keyof MODELSelf[TypeSymbolKeyEntity],
+  key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
+  options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>,
+): any { // :  IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
+  return { type: 'hasOne', model: classModel, key, options };
+}
+
+function belongsTo<
+  MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  AUTOLOAD extends boolean = false,
+  COLUMNS
+  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+>(
+  _classModelSelf: MODELSelf extends BeanModelMeta ? ((() => Constructable<MODELSelf>) | Constructable<MODELSelf>) : MODELSelf,
+  classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
+  key: keyof TypeModelOfModelLike<MODELSelf>[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>,
 ): any { // : IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'belongsTo', model: classModel, key, options };
