@@ -99,7 +99,7 @@ describe('modelRelations.test.ts', () => {
       assert.equal(userOptions.length, 2);
       assert.equal(userOptions[0].posts.length, 2);
       assert.equal(userOptions[1].posts.length, 0);
-      assert.equal(cast(userOptions[1].posts[0]).iid, undefined);
+      assert.equal(cast(userOptions[0].posts[0]).iid, undefined);
       assert.equal(Number.parseInt(userOptions[0].posts[0].id as any) > Number.parseInt(userOptions[0].posts[1].id as any), true);
       // relation: hasMany: options.where/orders
       const userOptions2 = await scopeTest.model.user.select({
