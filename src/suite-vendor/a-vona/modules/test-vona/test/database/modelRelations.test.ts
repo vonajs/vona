@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { cast } from 'vona';
 import { app } from 'vona-mock';
 import { $relationDynamic } from 'vona-module-a-database';
 import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
@@ -43,7 +44,7 @@ describe('modelRelations.test.ts', () => {
         { id: postApple.id },
         { columns: ['id'], include: { postContent: { columns: ['id'] } } },
       );
-      assert.equal(postGetColumns?.postContent?.content, undefined);
+      assert.equal(cast(postGetColumns?.postContent)?.content, undefined);
       assert.equal(Object.keys(postGetColumns!.postContent!).length, 1);
       assert.equal(Object.keys(postGetColumns!).length, 1 + 2);// .user + .postContent
       // relation: belongsTo
@@ -172,6 +173,7 @@ describe('modelRelations.test.ts', () => {
       assert.equal(items[0].postContent?.post3?.postContent?.content !== undefined, true);
       assert.equal(items[0].user3!.posts.length > 0, true);
       assert.equal(items[0].user3!.roles.length > 0, true);
+      assert.equal(cast(items[0].user3)?.iid, undefined);
       // test data: delete
       await scopeTest.service.testData.drop(testData);
     });
