@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
-import type { IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
+import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
 function hasOne<
   MODEL extends BeanModelMeta,
@@ -34,14 +34,15 @@ function belongsTo<
 function hasMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationHasMany<MODEL, AUTOLOAD, ModelJoins> {
+): any { // : IModelRelationHasMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
   return { type: 'hasMany', model: classModel, key, options };
 }
 
@@ -49,7 +50,8 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins> | undefined = undefined,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
@@ -58,7 +60,7 @@ function belongsToMany<
   keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, ModelJoins> {
+): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
 

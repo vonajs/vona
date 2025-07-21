@@ -46,18 +46,20 @@ export interface IModelRelationBelongsTo<
 export interface IModelRelationHasMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins>;
+  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins>;
 }
 
 export interface IModelRelationBelongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'belongsToMany';
@@ -65,7 +67,7 @@ export interface IModelRelationBelongsToMany<
   model?: TypeModelClassLike<MODEL>;
   keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
   keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, ModelJoins>;
+  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins>;
 }
 
 export interface IModelRelationOptionsOne<
@@ -80,10 +82,12 @@ export interface IModelRelationOptionsOne<
 export type IModelRelationOptionsMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > = IBuildModelRelationOptionsMany<
   MODEL[TypeSymbolKeyEntity],
   AUTOLOAD,
+  COLUMNS,
   TypeEntityTableNamesOfGeneral<ModelJoins, MODEL>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, MODEL>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>
@@ -92,9 +96,10 @@ export type IModelRelationOptionsMany<
 export interface IBuildModelRelationOptionsMany<
   TRecord,
   AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
-> extends IBuildModelSelectParamsBasic<TRecord, TableNames, ColumnNames, Columns> {
+> extends IBuildModelSelectParamsBasic<TRecord, COLUMNS, TableNames, ColumnNames, Columns> {
   autoload?: AUTOLOAD;
 }

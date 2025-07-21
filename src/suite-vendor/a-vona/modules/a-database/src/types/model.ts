@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
+import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelParamsInclude } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
@@ -39,16 +39,17 @@ export interface IBuildModelSelectParams<
   Columns extends {} | undefined = undefined,
 > extends
   IModelRelationIncludeWrapper<Model>,
-  IBuildModelSelectParamsBasic<TRecord, TableNames, ColumnNames, Columns> {}
+  IBuildModelSelectParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
 
 export interface IBuildModelSelectParamsBasic<
   TRecord,
+  COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  columns?: TypeModelColumns<TRecord>;
+  columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];

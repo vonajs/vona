@@ -24,6 +24,7 @@ describe('modelRelations.test.ts', () => {
       } = testData;
       // relation: hasOne
       const posts = await scopeTest.model.post.select({
+        columns: ['id', 'title', 'userId'],
         where: {
           id: [postApple.id, postPear.id],
         },
