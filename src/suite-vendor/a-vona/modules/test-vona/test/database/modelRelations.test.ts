@@ -32,6 +32,7 @@ describe('modelRelations.test.ts', () => {
       });
       assert.equal(posts.length, 2);
       assert.equal(posts[0].postContent?.content, 'action:modelRelations:postContentApple');
+      assert.equal(cast(posts[0].postContent)?.iid, undefined);
       assert.equal(posts[1].postContent, undefined);
       // relation: hasOne: get
       const postGet = await scopeTest.model.post.get(

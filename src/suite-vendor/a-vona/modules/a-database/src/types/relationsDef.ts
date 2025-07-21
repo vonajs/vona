@@ -20,11 +20,15 @@ export type TypeModelClassLike<MODEL extends BeanModelMeta> = (() => Constructab
 //   IModelRelationHasMany<MODELTarget>;
 
 // use optional ? for app config
-export interface IModelRelationHasOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false> {
+export interface IModelRelationHasOne<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+> {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>;
+  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>;
 }
 
 export interface IModelRelationBelongsTo<

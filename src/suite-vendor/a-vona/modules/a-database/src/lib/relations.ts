@@ -5,11 +5,15 @@ import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationBelongsTo, IModelRelationBelongsToMany, IModelRelationHasMany, IModelRelationHasOne, IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
-function hasOne<MODEL extends BeanModelMeta, AUTOLOAD extends boolean = false>(
+function hasOne<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+>(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD>,
-): IModelRelationHasOne<MODEL, AUTOLOAD> {
+  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>,
+): IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
