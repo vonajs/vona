@@ -56,7 +56,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return res;
   }
 
-  async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<TRecord[]> {
+  async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<Partial<TRecord>[]> {
     const items = await this.__mget_raw(undefined, ids, options);
     return await this.relations.handleRelationsMany(items, options as any, options);
   }
@@ -152,7 +152,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<TRecord | undefined> {
+  async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<Partial<TRecord> | undefined> {
     const item: TRecord | undefined = await this.__get_raw(undefined, where, options);
     return await this.relations.handleRelationsOne(item, options as any, options);
   }

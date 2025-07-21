@@ -11,7 +11,7 @@ import type {
 import { BeanModelCrudInner } from './bean.model_crud_inner.ts';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelCrudInner<TRecord> {
-  async mget(ids: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord[]> {
+  async mget(ids: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<Partial<TRecord>[]> {
     return await this._mget(undefined, ids, options);
   }
 
@@ -19,7 +19,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelCrudInner<TRecor
     return await this._select(undefined, params, options);
   }
 
-  async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord | undefined> {
+  async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptionsGeneral<TRecord>): Promise<Partial<TRecord> | undefined> {
     return await this._get(undefined, where, options);
   }
 
