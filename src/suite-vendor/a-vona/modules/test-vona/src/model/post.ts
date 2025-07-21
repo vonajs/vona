@@ -6,7 +6,7 @@ import { ModelUser } from './user.ts';
 
 export interface IModelOptionsPost extends IDecoratorModelOptions {
   relations: {
-    postContent: IModelRelationHasOne<ModelPostContent, false, 'id' | 'postId' | 'content'>;
+    postContent: IModelRelationHasOne<ModelPostContent, false, 'id' | 'content'>;
     user: IModelRelationBelongsTo<ModelPost, ModelUser, true, 'id' | 'name'>;
   };
 }
@@ -14,7 +14,7 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 @Model<IModelOptionsPost>({
   entity: EntityPost,
   relations: {
-    postContent: $relation.hasOne(() => ModelPostContent, 'postId', { columns: ['id', 'postId', 'content'] }),
+    postContent: $relation.hasOne(() => ModelPostContent, 'postId', { columns: ['id', 'content'] }),
     user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
   },
 })

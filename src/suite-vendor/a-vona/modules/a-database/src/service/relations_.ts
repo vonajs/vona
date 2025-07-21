@@ -108,10 +108,17 @@ export class ServiceRelations extends BeanBase {
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
-      const options2 = deepExtend({}, optionsReal, { where: { [key]: idsFrom } });
+      const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
+      const options2 = deepExtend({}, optionsReal, { columns, where: { [key]: idsFrom } });
       const items = await modelTarget.select(options2, methodOptionsReal);
       for (const entity of entities) {
-        entity[relationName] = items.find(item => item[key] === cast(entity).id);
+        entity[relationName] = items.find(item => {
+          if (item[key] === cast(entity).id) {
+            if (!withKey) delete item[key];
+            return true;
+          }
+          return false;
+        });
       }
     } else if (type === 'belongsTo') {
       const idsTo = entities.map(item => cast(item)[key]).filter(id => !isNil(id));
