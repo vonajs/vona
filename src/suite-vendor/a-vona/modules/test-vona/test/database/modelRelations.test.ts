@@ -170,7 +170,15 @@ describe('modelRelations.test.ts', () => {
           with: {
             user3: $relationDynamic.belongsTo(ModelPost, () => ModelUser, 'userId', {
               include: { posts: true },
-              with: { roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId') },
+              with: {
+                roles: $relationDynamic.belongsToMany(
+                  () => ModelRoleUser,
+                  () => ModelRole,
+                  'userId',
+                  'roleId',
+                  { columns: ['id', 'name'] },
+                ),
+              },
               columns: ['id', 'name'],
             }),
           },
@@ -180,6 +188,7 @@ describe('modelRelations.test.ts', () => {
       assert.equal(items[0].postContent?.post3?.postContent?.content !== undefined, true);
       assert.equal(items[0].user3!.posts.length > 0, true);
       assert.equal(items[0].user3!.roles.length > 0, true);
+      assert.equal(cast(items[0].user3!.roles[0]).iid, undefined);
       assert.equal(cast(items[0].user3)?.iid, undefined);
       // test data: delete
       await scopeTest.service.testData.drop(testData);
