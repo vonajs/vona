@@ -4,7 +4,6 @@ import type { TypeModelColumns } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelOfModelLike, TypeModelRelationResult, TypeSymbolKeyEntity } from './relations.ts';
 
-
 export type IDtoComposeParams<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 > = IBuildDtoComposeParams<
