@@ -30,42 +30,45 @@ export interface IModelRelationHasOne<
 }
 
 export interface IModelRelationBelongsTo<
-  MODELSelf extends BeanModelMeta,
-  MODEL extends BeanModelMeta,
+  MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS
+  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 > {
   type?: 'belongsTo';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof MODELSelf[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>;
+  key?: keyof TypeModelOfModelLike<MODELSelf>[TypeSymbolKeyEntity];
+  options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>;
 }
 
 export interface IModelRelationHasMany<
-  MODEL extends BeanModelMeta,
+  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS
+  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins>;
+  key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins>;
 }
 
 export interface IModelRelationBelongsToMany<
-  MODELMiddle extends BeanModelMeta,
-  MODEL extends BeanModelMeta,
+  MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS
+  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 > {
   type?: 'belongsToMany';
   modelMiddle?: TypeModelClassLike<MODELMiddle>;
   model?: TypeModelClassLike<MODEL>;
-  keyFrom?: keyof MODELMiddle[TypeSymbolKeyEntity];
-  keyTo?: keyof MODELMiddle[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins>;
+  keyFrom?: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity];
+  keyTo?: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity];
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins>;
 }
 
 export interface IModelRelationOptionsOne<

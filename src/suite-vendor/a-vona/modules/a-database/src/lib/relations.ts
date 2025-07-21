@@ -1,8 +1,7 @@
-import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
-import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
+import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
 
 function hasOne<
@@ -11,7 +10,7 @@ function hasOne<
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
-  classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
+  classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>,
 ): any { // :  IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
@@ -25,8 +24,8 @@ function belongsTo<
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
-  _classModelSelf: MODELSelf extends BeanModelMeta ? ((() => Constructable<MODELSelf>) | Constructable<MODELSelf>) : MODELSelf,
-  classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
+  _classModelSelf: TypeModelClassLike<MODELSelf>,
+  classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODELSelf>[TypeSymbolKeyEntity],
   options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>,
 ): any { // : IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD, COLUMNS> {
@@ -41,7 +40,7 @@ function hasMany<
   OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
-  classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
+  classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
@@ -58,8 +57,8 @@ function belongsToMany<
   OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
-  classModelMiddle: MODELMiddle extends BeanModelMeta ? ((() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>) : MODELMiddle,
-  classModel: MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL,
+  classModelMiddle: TypeModelClassLike<MODELMiddle>,
+  classModel: TypeModelClassLike<MODEL>,
   keyFrom: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   options?: OPTIONS,
