@@ -6,51 +6,47 @@ import type { IModelRelationBelongsToDynamic, IModelRelationBelongsToManyDynamic
 
 function hasOne<
   MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean,
-  OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD>,
+  OPTIONS extends IModelRelationOptionsOneDynamic<MODEL>,
 >(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: OPTIONS,
-): IModelRelationHasOneDynamic<MODEL, AUTOLOAD, OPTIONS> {
+): IModelRelationHasOneDynamic<MODEL, OPTIONS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
 function belongsTo<
   MODELSelf extends BeanModelMeta,
   MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean,
-  OPTIONS extends IModelRelationOptionsOneDynamic<MODEL, AUTOLOAD>,
+  OPTIONS extends IModelRelationOptionsOneDynamic<MODEL>,
 >(
   _classModelSelf: (() => Constructable<MODELSelf>) | Constructable<MODELSelf>,
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODELSelf[TypeSymbolKeyEntity],
   options?: OPTIONS,
-): IModelRelationBelongsToDynamic<MODELSelf, MODEL, AUTOLOAD, OPTIONS> {
+): IModelRelationBelongsToDynamic<MODELSelf, MODEL, OPTIONS> {
   return { type: 'belongsTo', model: classModel, key, options };
 }
 
 function hasMany<
   MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean,
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, ModelJoins>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModel: (() => Constructable<MODEL>) | Constructable<MODEL>,
   key: keyof MODEL[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationHasManyDynamic<MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
+): IModelRelationHasManyDynamic<MODEL, OPTIONS, ModelJoins> {
   return { type: 'hasMany', model: classModel, key, options };
 }
 
 function belongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean,
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, AUTOLOAD, ModelJoins>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<MODEL, ModelJoins>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >(
   classModelMiddle: (() => Constructable<MODELMiddle>) | Constructable<MODELMiddle>,
@@ -59,7 +55,7 @@ function belongsToMany<
   keyTo: keyof MODELMiddle[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, AUTOLOAD, OPTIONS, ModelJoins> {
+): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, OPTIONS, ModelJoins> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
 
