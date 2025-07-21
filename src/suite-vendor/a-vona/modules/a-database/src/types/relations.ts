@@ -12,6 +12,12 @@ export type TypeSymbolKeyModelOptions = typeof SymbolKeyModelOptions;
 export type TypeModelOfModelLike<ModelLike extends BeanModelMeta | (keyof IModelClassRecord)> =
   ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike] : ModelLike;
 
+export type TypeModelClassLike<MODEL extends BeanModelMeta | (keyof IModelClassRecord)> =
+  MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL;
+
+export type TypeModelClassLikeGeneral<MODEL extends BeanModelMeta = BeanModelMeta> =
+  (() => Constructable<MODEL>) | Constructable<MODEL> | keyof IModelClassRecord;
+
 export type TypeModelParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
 

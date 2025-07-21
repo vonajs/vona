@@ -10,7 +10,7 @@ import type {
 } from '../../types/index.ts';
 import { BeanModelCrudInner } from './bean.model_crud_inner.ts';
 
-export class BeanModelCrud<TRecord extends {}> extends BeanModelCrudInner<TRecord> {
+export class BeanModelCrud<TRecord extends {} = {}> extends BeanModelCrudInner<TRecord> {
   async mget(ids: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<Partial<TRecord>[]> {
     return await this._mget(undefined, ids, options);
   }

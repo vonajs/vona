@@ -4,7 +4,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelCacheType } from '../types/model.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
-import type { TypeModelClassLike } from '../types/relationsDef.ts';
+import type { TypeModelClassLike } from '../types/relations.ts';
 import { BeanBase, deepExtend } from 'vona';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');

@@ -1,9 +1,8 @@
-import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IBuildModelSelectParamsBasic } from './model.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
-import type { TypeSymbolKeyEntity } from './relations.ts';
+import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
@@ -12,12 +11,6 @@ export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belong
 //   [key: string]: TypeModelRelation<any, any>;
 // }
 
-export type TypeModelClassLike<MODEL extends BeanModelMeta | (keyof IModelClassRecord)> =
-  MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL;
-
-export type TypeModelClassLikeGeneral<MODEL extends BeanModelMeta = BeanModelMeta> =
-  (() => Constructable<MODEL>) | Constructable<MODEL> | keyof IModelClassRecord;
-
 // export type TypeModelRelation<MODELSelf extends BeanModelMeta | undefined, MODELTarget extends BeanModelMeta> =
 //   IModelRelationHasOne<MODELTarget> |
 //   IModelRelationBelongsTo<MODELSelf, MODELTarget> |
@@ -25,14 +18,15 @@ export type TypeModelClassLikeGeneral<MODEL extends BeanModelMeta = BeanModelMet
 
 // use optional ? for app config
 export interface IModelRelationHasOne<
-  MODEL extends BeanModelMeta,
+  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS
+  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 > {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof MODEL[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsOne<MODEL, AUTOLOAD, COLUMNS>;
+  key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
+  options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>;
 }
 
 export interface IModelRelationBelongsTo<
