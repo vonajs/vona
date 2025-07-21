@@ -6,14 +6,14 @@ import { ModelUser } from './user.ts';
 
 export interface IModelOptionsRole extends IDecoratorModelOptions {
   relations: {
-    users: IModelRelationBelongsToMany<ModelRoleUser, ModelUser>;
+    users: IModelRelationBelongsToMany<ModelRoleUser, ModelUser, false, 'id' | 'name'>;
   };
 }
 
 @Model<IModelOptionsRole>({
   entity: EntityRole,
   relations: {
-    users: $relation.belongsToMany(() => ModelRoleUser, () => ModelUser, 'roleId', 'userId'),
+    users: $relation.belongsToMany(() => ModelRoleUser, () => ModelUser, 'roleId', 'userId', { columns: ['id', 'name'] }),
   },
 })
 export class ModelRole extends BeanModelBase<EntityRole> {}

@@ -33,7 +33,7 @@ function belongsTo<
 
 function hasMany<
   MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean = false,
+  AUTOLOAD extends boolean = boolean,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
@@ -49,7 +49,7 @@ function hasMany<
 function belongsToMany<
   MODELMiddle extends BeanModelMeta,
   MODEL extends BeanModelMeta,
-  AUTOLOAD extends boolean = false,
+  AUTOLOAD extends boolean = boolean,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   OPTIONS extends IModelRelationOptionsMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,

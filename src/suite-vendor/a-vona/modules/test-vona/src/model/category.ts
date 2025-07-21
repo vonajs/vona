@@ -4,14 +4,14 @@ import { EntityCategory } from '../entity/category.ts';
 
 export interface IModelOptionsCategory extends IDecoratorModelOptions {
   relations: {
-    children: IModelRelationHasMany<ModelCategory, true>;
+    children: IModelRelationHasMany<ModelCategory, true, 'id' | 'name' | 'categoryIdParent'>;
   };
 }
 
 @Model<IModelOptionsCategory>({
   entity: EntityCategory,
   relations: {
-    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', { autoload: true, columns: ['id', 'name'] }),
+    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', { autoload: true, columns: ['id', 'name', 'categoryIdParent'] }),
   },
 })
 export class ModelCategory extends BeanModelBase<EntityCategory> {}

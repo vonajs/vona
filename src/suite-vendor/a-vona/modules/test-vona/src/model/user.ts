@@ -7,16 +7,16 @@ import { ModelRoleUser } from './roleUser.ts';
 
 export interface IModelOptionsUser extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole>;
+    posts: IModelRelationHasMany<ModelPost, false, 'id' | 'title'>;
+    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, 'id' | 'name'>;
   };
 }
 
 @Model<IModelOptionsUser>({
   entity: EntityUser,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId'),
-    roles: $relation.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
+    posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }),
+    roles: $relation.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', { columns: ['id', 'name'] }),
   },
 })
 export class ModelUser extends BeanModelBase<EntityUser> {}
