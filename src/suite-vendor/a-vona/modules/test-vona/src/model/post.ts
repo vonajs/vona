@@ -1,7 +1,6 @@
 import type { IDecoratorModelOptions, IModelRelationBelongsTo, IModelRelationHasOne } from 'vona-module-a-database';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityPost } from '../entity/post.ts';
-import { ModelPostContent } from './postContent.ts';
 import { ModelUser } from './user.ts';
 
 export interface IModelOptionsPost extends IDecoratorModelOptions {
@@ -14,7 +13,7 @@ export interface IModelOptionsPost extends IDecoratorModelOptions {
 @Model<IModelOptionsPost>({
   entity: EntityPost,
   relations: {
-    postContent: $relation.hasOne(() => ModelPostContent, 'postId', { columns: ['id', 'content'] }),
+    postContent: $relation.hasOne('test-vona:postContent', 'postId', { columns: ['id', 'content'] }),
     user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
   },
 })
