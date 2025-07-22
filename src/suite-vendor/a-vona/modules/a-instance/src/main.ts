@@ -1,6 +1,6 @@
 import type { IInstanceRecord, IModuleMain, VonaContext } from 'vona';
 import type { IInstanceConfig } from './config/config.ts';
-import { $customKey, BeanSimple } from 'vona';
+import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.ts';
 
 const SymbolInstanceName = Symbol('SymbolInstanceName');
@@ -30,18 +30,30 @@ function __getInstanceName(ctx: VonaContext, options: IInstanceConfig) {
   }
 
   let instanceName;
-  if (options.getInstanceName) {
+
+  // 1. getInstanceName
+  if (instanceName === undefined && options.getInstanceName) {
     instanceName = options.getInstanceName(ctx);
-  } else {
-    // not use query params for safety
-    // header: x-vona-instance-name
-    instanceName = ctx.req.headers[$customKey('x-vona-instance-name')];
-    if (instanceName === 'null') instanceName = null;
   }
+
+  // 2. query
+  if (instanceName === undefined && options.queryField) {
+    instanceName = ctx.request.query[options.queryField];
+  }
+
+  // 3. header
+  if (instanceName === undefined && options.headerField) {
+    instanceName = ctx.request.headers[options.headerField];
+  }
+
+  // 4. subdomains
   if (instanceName === undefined) {
     // subdomains
     instanceName = ctx.subdomains.join('.');
   }
+
+  // special: null
+  if (instanceName === 'null') instanceName = null;
 
   __setInstanceName(ctx, instanceName);
   return instanceName;
