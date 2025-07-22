@@ -1,7 +1,7 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { $Dto } from 'vona-module-a-database';
-import { Api } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapi';
 import { Controller, Web } from 'vona-module-a-web';
 import { DtoUserLazy } from '../dto/userLazy.ts';
 
@@ -20,7 +20,9 @@ export class ControllerDtoTest extends BeanBase {
   }
 
   @Web.get('getCategoryTree')
-  @Api.body($Dto.compose('test-vona:category'))
-  getCategoryTree() {
+  @Api.body(v.array($Dto.compose('test-vona:category', { columns: ['id', 'name'] })))
+  async getCategoryTree() {
+    const items = await this.scope.model.category.select({ columns: ['id', 'name'] });
+    return items;
   }
 }
