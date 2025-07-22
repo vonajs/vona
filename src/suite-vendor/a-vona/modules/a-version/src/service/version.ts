@@ -220,7 +220,7 @@ export class ServiceVersion extends BeanBase {
     await beanVersion.update({ version });
     // insert record
     if (version > 0) {
-      await this.bean.model.builder<EntityVersion>('aVersion').insert({ module: module.info.relativeName, version });
+      await this.scope.model.version.insert({ module: module.info.relativeName, version });
     }
   }
 
