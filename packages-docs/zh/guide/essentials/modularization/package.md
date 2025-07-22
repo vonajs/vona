@@ -56,7 +56,7 @@ Vona 提供的许多核心模块都是采用这种机制实现的。比如，模
 
 ## vonaModule.globalDependenciesDev
 
-如果模块需要提供全局的依赖项，那么，需要配置`vonaModule.globalDependenciesDev`，比如：模块 a-core 的配置：
+如果模块需要提供全局的开发依赖项，那么，需要配置`vonaModule.globalDependenciesDev`，比如：模块 a-core 的配置：
 
 ```typescript
 {
