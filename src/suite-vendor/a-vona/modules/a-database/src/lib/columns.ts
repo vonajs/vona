@@ -4,6 +4,7 @@ import type z from 'zod';
 import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { isClass } from '@cabloy/utils';
+import { ZodMetadata } from '@cabloy/zod-query';
 import { appMetadata, appResource, cast, useApp } from 'vona';
 import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
@@ -87,7 +88,7 @@ export function $tableDefaults<T>(
   const defaults = {};
   for (const key in rules) {
     const rule = rules[key] as z.ZodSchema;
-    defaults[key] = rule._def.openapi?.metadata?.default;
+    defaults[key] = ZodMetadata.getDefaultValue(rule);
   }
   // ok
   return defaults;
