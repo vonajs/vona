@@ -7,7 +7,7 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
 
 @Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>', { openapi: { title: $locale('<%=argv.resourceNameCapitalize%>') } })
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
-  @Api.field(v.openapi({ title: $locale('Name') }), v.min(3))
+  @Api.field(v.openapi({ title: $locale('Name') }), v.default(''), v.min(3))
   name: string;
 
   @Api.field(v.openapi({ title: $locale('Description') }), v.optional())
