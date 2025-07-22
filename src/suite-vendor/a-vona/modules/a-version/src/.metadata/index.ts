@@ -64,19 +64,32 @@ declare module 'vona-module-a-version' {
 }
 /** entity: end */
 /** model: begin */
+export * from '../model/versionInit.ts';
 export * from '../model/viewRecord.ts';
+import type { IModelOptionsVersionInit } from '../model/versionInit.ts';
 import type { IModelOptionsViewRecord } from '../model/viewRecord.ts';
 import 'vona';
 declare module 'vona-module-a-database' {
   
     export interface IModelRecord {
-      'a-version:viewRecord': IModelOptionsViewRecord;
+      'a-version:versionInit': IModelOptionsVersionInit;
+'a-version:viewRecord': IModelOptionsViewRecord;
     }
 
   
 }
 declare module 'vona-module-a-version' {
   
+        export interface ModelVersionInit {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        }
+
+          export interface ModelVersionInit {
+            get $beanFullName(): 'a-version.model.versionInit';
+            get $onionName(): 'a-version:versionInit';
+          }
+
         export interface ModelViewRecord {
           /** @internal */
           get scope(): ScopeModuleAVersion;
@@ -89,16 +102,27 @@ declare module 'vona-module-a-version' {
 }
 /** model: end */
 /** model: begin */
+import type { ModelVersionInit } from '../model/versionInit.ts';
 import type { ModelViewRecord } from '../model/viewRecord.ts';
 export interface IModuleModel {
-  'viewRecord': ModelViewRecord;
+  'versionInit': ModelVersionInit;
+'viewRecord': ModelViewRecord;
 }
 /** model: end */
 /** model: begin */
 import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-a-version' {
-  export interface ModelViewRecord {
+  export interface ModelVersionInit {
+      [SymbolKeyEntity]: EntityVersionInit;
+      [SymbolKeyEntityMeta]: EntityVersionInitMeta;
+      [SymbolKeyModelOptions]: IModelOptionsVersionInit;
+      get<T extends IModelGetOptions<EntityVersionInit,ModelVersionInit>>(where: TypeModelWhere<EntityVersionInit>, options?: T): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityVersionInit,ModelVersionInit>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T>[]>;
+      select<T extends IModelSelectParams<EntityVersionInit,ModelVersionInit,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T>[]>;
+      count<T extends IModelCountParams<EntityVersionInit,ModelVersionInit,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
+    }
+export interface ModelViewRecord {
       [SymbolKeyEntity]: EntityViewRecord;
       [SymbolKeyEntityMeta]: EntityViewRecordMeta;
       [SymbolKeyModelOptions]: IModelOptionsViewRecord;
@@ -110,7 +134,8 @@ declare module 'vona-module-a-version' {
 }
 declare module 'vona-module-a-database' {
   export interface IModelClassRecord {
-    'a-version:viewRecord': ModelViewRecord;
+    'a-version:versionInit': ModelVersionInit;
+'a-version:viewRecord': ModelViewRecord;
   }
 }
 /** model: end */

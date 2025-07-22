@@ -233,15 +233,11 @@ export class ServiceVersion extends BeanBase {
     }
     // insert record
     if (version > 0) {
-      await this.bean.model.insert(
-        'aVersionInit',
-        {
-          instanceName: options.instanceName,
-          module: module.info.relativeName,
-          version,
-        },
-        { disableInstance: true, disableDeleted: true },
-      );
+      await this.scope.model.versionInit.insert({
+        instanceName: options.instanceName,
+        module: module.info.relativeName,
+        version,
+      });
     }
   }
 
