@@ -1,7 +1,7 @@
-import type { VonaApplication, VonaContext } from 'vona';
+import type { IInstanceRecord, VonaApplication, VonaContext } from 'vona';
 
 export interface IInstanceConfig {
-  getInstanceName?: (ctx: VonaContext) => string | undefined | null;
+  getInstanceName?: (ctx: VonaContext) => keyof IInstanceRecord | undefined | null;
 }
 
 export function config(_app: VonaApplication) {
