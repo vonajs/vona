@@ -834,10 +834,12 @@ export interface IModuleSummerCache {
 }
 /** summerCache: end */
 /** dto: begin */
+export * from '../dto/categoryTree.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
 export * from '../dto/user.ts';
 export * from '../dto/userLazy.ts';
+import type { IDtoOptionsCategoryTree } from '../dto/categoryTree.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
@@ -846,7 +848,8 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'test-vona:profile': IDtoOptionsProfile;
+      'test-vona:categoryTree': IDtoOptionsCategoryTree;
+'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:user': IDtoOptionsUser;
 'test-vona:userLazy': IDtoOptionsUserLazy;
@@ -859,12 +862,17 @@ declare module 'vona-module-test-vona' {
 }
 /** dto: end */
 /** dto: begin */
+import type { DtoCategoryTree } from '../dto/categoryTree.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserLazy } from '../dto/userLazy.ts'; 
 declare module 'vona-module-test-vona' {
   
+    export interface IDtoOptionsCategoryTree {
+      fields?: TypeEntityOptionsFields<DtoCategoryTree, IDtoOptionsCategoryTree[TypeSymbolKeyFieldsMore]>;
+    }
+
     export interface IDtoOptionsProfile {
       fields?: TypeEntityOptionsFields<DtoProfile, IDtoOptionsProfile[TypeSymbolKeyFieldsMore]>;
     }
@@ -1150,6 +1158,8 @@ declare module 'vona-module-a-web' {
 '/test/vona/bean/service': undefined;
 '/test/vona/dtoTest/getUserLazy': undefined;
 '/test/vona/dtoTest/getUserDynamic': undefined;
+'/test/vona/dtoTest/getCategoryTree': undefined;
+'/test/vona/dtoTest/getCategoryTree2': undefined;
 '/test/vona/guardPassport/testUserName': undefined;
 '/test/vona/guardPassport/testUserNameFail': undefined;
 '/test/vona/guardPassport/testRoleName': undefined;
