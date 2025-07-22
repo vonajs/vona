@@ -4,6 +4,7 @@ import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.ts';
+import { $tableDefaults } from '../../lib/columns.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
@@ -39,6 +40,9 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   async defaultData(table?: keyof ITableRecord): Promise<TRecord> {
+    if (this.options.entity) {
+      return $tableDefaults(this.options.entity) as any;
+    }
     table = table || this.getTable();
     return await this.db.columns.defaultData(table) as TRecord;
   }

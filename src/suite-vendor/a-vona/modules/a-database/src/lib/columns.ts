@@ -81,11 +81,11 @@ export function $tableComments<T>(
 
 export function $tableDefaults<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
-): Record<string, string> {
+): Record<string, any> {
   const classEntity2 = _prepareClassEntity(classEntity);
   // rules
   const rules = getTargetDecoratorRules(classEntity2.prototype);
-  const defaults = {};
+  const defaults: Record<string, any> = {};
   for (const key in rules) {
     const rule = rules[key] as z.ZodSchema;
     defaults[key] = ZodMetadata.getDefaultValue(rule);
