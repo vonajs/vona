@@ -8,16 +8,17 @@ describe('database.test.ts', () => {
   it('action:database:switchClient', async () => {
     await app.bean.executor.mockCtx(async () => {
       const scopeDatabase = app.bean.scope('a-database');
+      const defaultClientName = scopeDatabase.service.database.getDefaultClientName();
       // current
-      assert.equal(app.ctx.db.clientName, scopeDatabase.service.database.getDefaultClientName());
+      assert.equal(app.ctx.db.clientName, defaultClientName);
       // switch
       const clientNames = Object.keys(app.config.database.clients);
-      const clientName2 = clientNames.find(item => item !== scopeDatabase.service.database.getDefaultClientName());
+      const clientName2 = clientNames.find(item => item !== defaultClientName);
       await app.bean.database.switchDb(async () => {
         assert.equal(app.ctx.db.clientName, clientName2);
       }, { clientName: clientName2 as any });
       // restore
-      assert.equal(app.ctx.db.clientName, scopeDatabase.service.database.getDefaultClientName());
+      assert.equal(app.ctx.db.clientName, defaultClientName);
     });
   });
   it('action:model:clientName', async () => {
