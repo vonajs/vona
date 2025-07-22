@@ -50,7 +50,15 @@ export class ServiceDatabase extends BeanBase {
   }
 
   prepareClientName(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
-    return (!clientName || clientName === 'default') ? this.app.config.database.defaultClient : clientName;
+    return (!clientName || clientName === 'default') ? this.getDefaultClientName() : clientName;
+  }
+
+  getDefaultClientName(): keyof IDatabaseClientRecord {
+    let defaultClient = this.app.config.database.defaultClient;
+    if (typeof defaultClient === 'function') {
+      defaultClient = defaultClient(this.ctx);
+    }
+    return defaultClient;
   }
 
   prepareClientNameReal(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
