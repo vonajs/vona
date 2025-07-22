@@ -16,22 +16,23 @@ export function $columns<T>(key?: (keyof T) | Array<keyof T> | undefined): (keyo
   return key;
 }
 
-export function $columnsAll<T, TableName extends boolean, Comment extends boolean>(
+export function $columnsAll<T, TableName extends boolean, Meta extends boolean>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   withTableName?: TableName,
-  withComment?: Comment,
+  withMeta?: Meta,
 ): TableName extends true ?
-      (Comment extends true ? TypeEntityMeta<T> : Omit<TypeEntityMeta<T>, '$comment'>) :
-      (Comment extends true ? Omit<TypeEntityMeta<T>, '$table'> : Omit<TypeEntityMeta<T>, '$table' | '$comment'>) {
+      (Meta extends true ? TypeEntityMeta<T> : Omit<TypeEntityMeta<T>, '$comment' | '$default'>) :
+      (Meta extends true ? Omit<TypeEntityMeta<T>, '$table'> : Omit<TypeEntityMeta<T>, '$table' | '$comment' | '$default'>) {
   const classEntity2 = _prepareClassEntity(classEntity);
   let columns = appMetadata.getMetadata<Record<string, string>>(SymbolDecoratorRuleColumn, classEntity2.prototype);
   if (withTableName) {
     const tableName = $tableName(classEntity2);
     columns = { ...columns, $table: tableName } as any;
   }
-  if (withComment) {
+  if (withMeta) {
     const comments = $tableComments(classEntity2);
-    columns = { ...columns, $comment: comments } as any;
+    const defaults = $tableDefaults(classEntity2);
+    columns = { ...columns, $comment: comments, $default: defaults } as any;
   }
   return columns as any;
 }
@@ -75,6 +76,21 @@ export function $tableComments<T>(
   }
   // ok
   return comments;
+}
+
+export function $tableDefaults<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): Record<string, string> {
+  const classEntity2 = _prepareClassEntity(classEntity);
+  // rules
+  const rules = getTargetDecoratorRules(classEntity2.prototype);
+  const defaults = {};
+  for (const key in rules) {
+    const rule = rules[key] as z.ZodSchema;
+    defaults[key] = rule._def.openapi?.metadata?.default;
+  }
+  // ok
+  return defaults;
 }
 
 function _prepareClassEntity<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Constructable<T> {

@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
 import type { TypeSymbolKeyEntity, TypeSymbolKeyEntityMeta, TypeUtilGetModelOnionName, TypeUtilGetModelOptions, TypeUtilGetRelationEntityMeta, TypeUtilGetRelationModel } from './relations.ts';
 
-export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' | '$comment' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
+export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' | '$comment' | '$default' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
 
 export type TypeEntityTableColumns<Entity extends {} | undefined, EntityMeta extends { $table: string } | undefined> = Entity extends { } ? EntityMeta extends { $table: string } ? { [K in keyof Entity as K extends string ? `${EntityMeta['$table']}.${K}` : never ]: Entity[K] } : {} : {};
