@@ -28,7 +28,7 @@ export class ServiceDatabase extends BeanBase {
     // check if selector
     if (clientName && clientName.includes(':')) return clientName;
     // check if default
-    clientName = this.prepareClientName(clientName);
+    clientName = this.prepareClientName(clientName ?? this.bean.database.current?.clientName);
     // level
     level = level ?? this.bean.database.current?.level ?? 0;
     return { level, clientName };
