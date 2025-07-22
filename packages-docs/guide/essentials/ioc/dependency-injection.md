@@ -11,7 +11,7 @@ Vona adopts a modular system, and Bean Classes are provided by different modules
 Suppose we want to inject the ServiceMenu provided by the module home-base into the ControllerHome of the module home-index. The code is as follows:
 
 ``` typescript
-import { ServiceMenu } from 'vona-module-a-menu';
+import { ServiceMenu } from 'vona-module-home-base';
 export class ControllerHome {
   @Use()
   menu: ServiceMenu;
@@ -21,11 +21,11 @@ export class ControllerHome {
 ## Dependency injection: Based on Bean identifier
 
 ``` typescript
-import type { ServiceMenu } from 'vona-module-a-menu';
+import type { ServiceMenu } from 'vona-module-home-base';
 export class ControllerHome {
   @Use('home-base.service.menu')
   menu: ServiceMenu;
 }  
 ```
 
-- Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified
+- Since the imported `ServiceMenu` is of `type`, the Bean identifier of the Service needs to be specified

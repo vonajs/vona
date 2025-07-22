@@ -21,7 +21,7 @@ class ControllerMenu {
 Suppose we want to lookup the ServiceMenu provided by the module home-base in the ControllerHome of the module home-index, the code is as follows:
 
 ``` typescript
-class ControllerMenu {
+class ControllerHome {
   async test() {
     return await this.$scope.homeBase.service.menu.retrieveMenus('');
   }
@@ -35,7 +35,7 @@ class ControllerMenu {
 Suppose we want to lookup the global bean `BeanJwt` provided by module a-jwt in ControllerHome of module home-index, the code is as follows:
 
 ``` typescript
-class ControllerMenu {
+class ControllerHome {
   async test() {
     return await this.bean.jwt.create({});
   }

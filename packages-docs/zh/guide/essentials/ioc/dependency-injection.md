@@ -11,7 +11,7 @@ Vona 采用模块化体系，Bean Class 都由不同的模块提供。注入模�
 假设我们要在模块 home-index 的 ControllerHome 中注入模块 home-base 提供的 ServiceMenu，代码如下：
 
 ``` typescript
-import { ServiceMenu } from 'vona-module-a-menu';
+import { ServiceMenu } from 'vona-module-home-base';
 export class ControllerHome {
   @Use()
   menu: ServiceMenu;
@@ -21,11 +21,11 @@ export class ControllerHome {
 ## 依赖注入：基于Bean标识
 
 ``` typescript
-import type { ServiceMenu } from 'vona-module-a-menu';
+import type { ServiceMenu } from 'vona-module-home-base';
 export class ControllerHome {
   @Use('home-base.service.menu')
   menu: ServiceMenu;
 }  
 ```
 
-- 由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识
+- 由于导入的 ServiceMenu 是 type，因此需要指定 Service 的 Bean 标识
