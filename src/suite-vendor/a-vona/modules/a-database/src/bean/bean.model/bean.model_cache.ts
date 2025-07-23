@@ -35,19 +35,29 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
-    // table
-    const table = this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
-    // insert
-    const res = await this._batchInsert(table, data, options) as Promise<TRecord>;
-    // clear cache
-    await this.cacheQueryClear(table);
-    return res;
+    if (!data) data = {};
+    const items = await this.batchInsert([data], options);
+    return items[0];
   }
 
   async batchInsert(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+    return await this.batchMutate(data, options);
+  }
+
+  async mutate(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
+    if (!data) data = {};
+    const items = await this.batchMutate([data], options);
+    return items[0];
+  }
+
+  async batchMutate(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+    const items = await this.__batchMutate_raw(undefined, data, options);
+    return await this.relations.handleRelationsMutate(items, options as any, options);
+  }
+
+  async __batchMutate_raw(table: keyof ITableRecord | undefined, data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
     // table
-    const table = this.getTable();
+    table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // insert
     const res = await this._batchInsert(table, data, options) as Promise<TRecord[]>;
