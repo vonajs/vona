@@ -200,26 +200,35 @@ export class ServiceRelations extends BeanBase {
       children = await modelTarget.batchMutate(children, methodOptionsReal);
       const result: TRecord[] = entities.concat();
       for (let index = 0; index < children.length; index++) {
-        result[indexes[index]] = children[index];
+        result[indexes[index]][relationName] = children[index];
       }
       return result;
     } else if (type === 'belongsTo') {
       // do nothing
       return entities;
     } else if (type === 'hasMany') {
-      const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
-      const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
-      const options2 = deepExtend({}, optionsReal, { columns, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
-      const items = await modelTarget.select(options2, methodOptionsReal);
-      for (const entity of entities) {
-        entity[relationName] = [];
-        for (const item of items) {
-          if (item[key] === cast(entity).id) {
-            if (!withKey) delete item[key];
-            entity[relationName].push(item);
+      const indexes: number[] = [];
+      let children: any[] = [];
+      for (let index = 0; index < entities.length; index++) {
+        const entity = entities[index];
+        if (entity[relationName]) {
+          for (const child of entity[relationName]) {
+            indexes.push(index);
+            children.push(Object.assign({}, child, { [key]: cast(entity).id }));
           }
         }
       }
+      children = await modelTarget.batchMutate(children, methodOptionsReal);
+      const result: TRecord[] = entities.concat();
+      for (const entity of result) {
+        if (entity[relationName]) {
+          entity[relationName] = [];
+        }
+      }
+      for (let index = 0; index < children.length; index++) {
+        result[indexes[index]][relationName].push(children[index]);
+      }
+      return result;
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
