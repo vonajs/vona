@@ -5,6 +5,7 @@ import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelParamsInclude } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
+import type { TypeModelMutateParamsInclude } from './relationsMutate.ts';
 
 export type TypeModelCacheType = 'query' | 'entity';
 
@@ -108,17 +109,17 @@ export interface IModelMethodOptionsGeneral {
 }
 
 export interface IModelInsertOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
 }
 
 export interface IModelUpdateOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
   where?: TypeModelWhere<TRecord>;
   disableUpdateTime?: boolean;
 }
 
 export interface IModelDeleteOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
 }
 
 export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
@@ -127,7 +128,7 @@ export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta | 
 }
 
 export interface IModelMutateOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
 }
 
 export interface IModelSelectParamsPage {
@@ -137,5 +138,10 @@ export interface IModelSelectParamsPage {
 
 export interface IModelRelationIncludeWrapper<Model extends BeanModelMeta | undefined = undefined> {
   include?: TypeModelParamsInclude<Model>;
+  with?: Record<string, unknown>;
+}
+
+export interface IModelMutateRelationIncludeWrapper<Model extends BeanModelMeta | undefined = undefined> {
+  include?: TypeModelMutateParamsInclude<Model>;
   with?: Record<string, unknown>;
 }

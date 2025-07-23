@@ -17,6 +17,7 @@ export * from './relations.ts';
 export * from './relationsColumns.ts';
 export * from './relationsDef.ts';
 export * from './relationsDefDynamic.ts';
+export * from './relationsMutate.ts';
 export * from './relationsTables.ts';
 export * from './tableIdentity.ts';
 export * from './transaction.ts';

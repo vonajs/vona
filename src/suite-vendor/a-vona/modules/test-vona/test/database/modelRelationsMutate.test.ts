@@ -15,6 +15,14 @@ describe('modelRelationsMutate.test.ts', () => {
       ]);
       assert.equal(roles.length, 2);
       assert.equal(roles[0].id !== undefined, true);
+      // insert: users
+      const users = await scopeTest.model.user.insertBulk([
+        {
+          name: `${prefix}:tom`,
+          posts:[{}],
+        },
+      ],{'include':{'posts':true}});
+      // users[0]
       // delete: roles
       await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
       const roles2 = await scopeTest.model.role.select({

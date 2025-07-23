@@ -159,6 +159,9 @@ export class CliToolsMetadata extends BeanCliBase {
     if (content.includes('TypeSymbolKeyFieldsMore')) {
       content = `import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';\n${content}`;
     }
+    if (content.includes('PowerPartial')) {
+      content = `import type { PowerPartial } from 'vona';\n${content}`;
+    }
     return content;
   }
 
