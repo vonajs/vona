@@ -13,13 +13,13 @@ export type TypeModelMutateParamsIncludeByModelOptions<ModelOptions extends IDec
 
 export type TypeModelMutateParamsRelationOptions<Relation> =
   boolean
-  & {
+  | {
     include?: TypeModelMutateParamsInclude<TypeUtilGetRelationModel<Relation>>;
     with?: Record<string, unknown>;
   };
 
 export type TypeModelMutateRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
-  [RelationName in (keyof TModelOptions['relations'])]?:
+  [RelationName in (keyof TModelOptions['relations'])]: // not use ?: for OmitNever take effect
   TInclude[RelationName] extends {} | boolean ?
     TypeModelMutateRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
     TypeModelMutateRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
@@ -49,8 +49,8 @@ export type TypeModelMutateRelationData<TRecord, TModel extends BeanModelMeta | 
   Partial<TRecord> &
   (TModel extends BeanModelMeta ?
     (
-      OmitNever<TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
-      OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>
+      Partial<OmitNever<TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>>> &
+      Partial<OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>>
     ) : {});
 
 
