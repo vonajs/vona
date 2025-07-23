@@ -43,17 +43,17 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items[0];
   }
 
-  async batchInsert<T extends IModelInsertOptions<TRecord>>(data: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
-    return await this.__batchInsert_raw_with_relations(undefined, data, options);
+  async batchInsert<T extends IModelInsertOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
+    return await this.__batchInsert_raw_with_relations(undefined, items, options);
   }
 
   async __batchInsert_raw_with_relations<T extends IModelInsertOptions<TRecord>>(
     table: keyof ITableRecord | undefined,
-    data: Partial<TRecord>[],
+    items: Partial<TRecord>[],
     options?: T,
   ): Promise<TRecord[]> {
-    const items = await this.__batchInsert_raw(table, data, options);
-    return await this.relations.handleRelationsMutate(items, options as any, options);
+    const itemsNew = await this.__batchInsert_raw(table, items, options);
+    return await this.relations.handleRelationsMutate(itemsNew, options as any, options);
   }
 
   async __batchInsert_raw(
