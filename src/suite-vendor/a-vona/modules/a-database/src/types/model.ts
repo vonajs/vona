@@ -126,10 +126,8 @@ export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta | 
   columns?: TypeModelColumns<TRecord>;
 }
 
-export interface IModelMutateOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
+export interface IModelMutateOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
   extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
-  where?: TypeModelWhere<TRecord>;
-  disableUpdateTime?: boolean;
 }
 
 export interface IModelSelectParamsPage {
