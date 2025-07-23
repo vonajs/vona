@@ -60,7 +60,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     // type
     if (['bit', 'bool', 'boolean'].includes(type)) return safeBoolean(value);
     if (['int'].includes(type)) return this._safeNumber(value);
-    if (this._columnTypePrefixes(type, ['timestamp']) && value === 'CURRENT_TIMESTAMP') return new Date();
+    if (this._columnTypePrefixes(type, ['timestamp']) && value === 'CURRENT_TIMESTAMP') return undefined; // new Date();
     if (this._columnTypePrefixes(type, ['float', 'double'])) return this._safeNumber(value);
     if (this._columnTypePrefixes(type, ['tinyint', 'smallint', 'mediumint', 'bigint', 'numeric', 'integer'])) {
       return this._safeNumber(value);
