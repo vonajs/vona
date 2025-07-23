@@ -61,6 +61,21 @@ export class ServiceRelations extends BeanBase {
     return entities;
   }
 
+  public async handleRelationsDelete<TRecord extends {}>(
+    entities: TRecord[],
+    includeWrapper?: IModelRelationIncludeWrapper,
+    methodOptions?: IModelMethodOptions,
+  ) {
+    if (entities.length === 0) return entities;
+    // relations
+    const relations = this.__handleRelationsCollection(includeWrapper);
+    if (!relations) return entities;
+    for (const relation of relations) {
+      entities = await this.__handleRelationDelete(entities, relation, methodOptions);
+    }
+    return entities;
+  }
+
   private async __handleRelationOne<TRecord extends {}>(
     entity: TRecord,
     relation: [string, any, any, any],
@@ -177,6 +192,103 @@ export class ServiceRelations extends BeanBase {
   }
 
   private async __handleRelationMutate<TRecord extends {}>(
+    entities: TRecord[],
+    relation: [string, any, any, any],
+    methodOptions?: IModelMethodOptions,
+  ) {
+    const [relationName, relationReal, includeReal, withReal] = relation;
+    const { type, modelMiddle, model, keyFrom, keyTo, key } = relationReal;
+    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
+    const methodOptionsReal = Object.assign({}, methodOptions, { include: includeReal, with: withReal });
+    if (type === 'hasOne') {
+      let children: any[] = [];
+      for (let index = 0; index < entities.length; index++) {
+        const entity = entities[index];
+        if (entity[relationName]) {
+          children.push(Object.assign({}, entity[relationName], { [key]: cast(entity).id }));
+        }
+      }
+      children = await modelTarget.batchMutate(children, methodOptionsReal);
+      const result: TRecord[] = entities.concat();
+      for (const entity of result) {
+        if (entity[relationName]) {
+          entity[relationName] = children.find(item => item[key] === cast(entity).id);
+        }
+      }
+      return result;
+    } else if (type === 'belongsTo') {
+      // do nothing
+      return entities;
+    } else if (type === 'hasMany') {
+      let children: any[] = [];
+      for (let index = 0; index < entities.length; index++) {
+        const entity = entities[index];
+        if (entity[relationName] && entity[relationName].length > 0) {
+          for (const child of entity[relationName]) {
+            children.push(Object.assign({}, child, { [key]: cast(entity).id }));
+          }
+        }
+      }
+      children = await modelTarget.batchMutate(children, methodOptionsReal);
+      const result: TRecord[] = entities.concat();
+      for (const entity of result) {
+        if (entity[relationName]) {
+          entity[relationName] = [];
+          for (const child of children) {
+            if (child[key] === cast(entity).id) {
+              entity[relationName].push(child);
+            }
+          }
+        }
+      }
+      return result;
+    } else if (type === 'belongsToMany') {
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCache;
+      let children: any[] = [];
+      for (let index = 0; index < entities.length; index++) {
+        const entity = entities[index];
+        if (entity[relationName] && entity[relationName].length > 0) {
+          const idsTo = entity[relationName].map(item => item.id);
+          const itemsMiddle = await cast(modelTargetMiddle).__select_raw(
+            undefined,
+            { where: { [keyFrom]: cast(entity).id, [keyTo]: idsTo } },
+            methodOptionsReal,
+          );
+          for (const child of entity[relationName]) {
+            const itemMiddle = itemsMiddle.find(item => item[keyTo] === child.id);
+            if (!itemMiddle) {
+              if (!child.deleted) {
+                // add
+                children.push({ [keyFrom]: cast(entity).id, [keyTo]: child.id });
+              }
+            } else {
+              if (child.deleted) {
+                // delete
+                children.push({ id: itemMiddle.id, deleted: child.deleted });
+              }
+            }
+          }
+        }
+      }
+      children = await modelTargetMiddle.batchMutate(children, methodOptionsReal);
+      const result: TRecord[] = entities.concat();
+      for (const entity of result) {
+        if (entity[relationName]) {
+          entity[relationName] = [];
+          for (const child of children) {
+            if (child[keyFrom] === cast(entity).id) {
+              entity[relationName].push({ id: child[keyTo] });
+            }
+          }
+        }
+      }
+      return result;
+    }
+    // do nothing
+    return entities;
+  }
+
+  private async __handleRelationDelete<TRecord extends {}>(
     entities: TRecord[],
     relation: [string, any, any, any],
     methodOptions?: IModelMethodOptions,
