@@ -19,7 +19,7 @@ describe('modelRelationsMutate.test.ts', () => {
       const users = await scopeTest.model.user.insertBulk([
         {
           name: `${prefix}:tom`,
-          posts:[{}],
+          posts:[{}]
         },
       ],{'include':{'posts':{}}});
       // users[0]

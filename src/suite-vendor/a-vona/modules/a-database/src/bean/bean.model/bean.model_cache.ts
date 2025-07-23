@@ -37,13 +37,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this.relations = this.bean._newBean(ServiceRelations, this);
   }
 
-  async insert<T extends IModelInsertOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<Partial<TRecord>> {
+  async insert<T extends IModelInsertOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<TRecord> {
     if (!data) data = {};
     const items = await this.insertBulk([data], options);
     return items[0];
   }
 
-  async insertBulk<T extends IModelInsertOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
+  async insertBulk<T extends IModelInsertOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
     const itemsNew = await this.__insertBulk_raw(undefined, items, options);
     return await this.relations.handleRelationsMutate(itemsNew, options as any, options);
   }
