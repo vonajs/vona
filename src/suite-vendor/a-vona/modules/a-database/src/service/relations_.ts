@@ -208,7 +208,7 @@ export class ServiceRelations extends BeanBase {
           children.push(Object.assign({}, entity[relationName], { [key]: cast(entity).id }));
         }
       }
-      children = await modelTarget.batchMutate(children, methodOptionsReal);
+      children = await modelTarget.mutateBulk(children, methodOptionsReal);
       const result: TRecord[] = entities.concat();
       for (const entity of result) {
         if (entity[relationName]) {
@@ -229,7 +229,7 @@ export class ServiceRelations extends BeanBase {
           }
         }
       }
-      children = await modelTarget.batchMutate(children, methodOptionsReal);
+      children = await modelTarget.mutateBulk(children, methodOptionsReal);
       const result: TRecord[] = entities.concat();
       for (const entity of result) {
         if (entity[relationName]) {
@@ -270,7 +270,7 @@ export class ServiceRelations extends BeanBase {
           }
         }
       }
-      children = await modelTargetMiddle.batchMutate(children, methodOptionsReal);
+      children = await modelTargetMiddle.mutateBulk(children, methodOptionsReal);
       const result: TRecord[] = entities.concat();
       for (const entity of result) {
         if (entity[relationName]) {
@@ -300,14 +300,14 @@ export class ServiceRelations extends BeanBase {
     if (type === 'hasOne' || type === 'hasMany') {
       const children = await cast(modelTarget).__select_raw(undefined, { columns: 'id', where: { [key]: ids } }, methodOptionsReal);
       const idsTo = children.map(item => item.id);
-      await modelTarget.batchDelete(idsTo, methodOptionsReal);
+      await modelTarget.deleteBulk(idsTo, methodOptionsReal);
     } else if (type === 'belongsTo') {
       // do nothing
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCache;
       const itemsMiddle = await cast(modelTargetMiddle).__select_raw(undefined, { columns: 'id', where: { [keyFrom]: ids } }, methodOptionsReal);
       const idsMiddle = itemsMiddle.map(item => item.id);
-      await modelTargetMiddle.batchDelete(idsMiddle, methodOptionsReal);
+      await modelTargetMiddle.deleteBulk(idsMiddle, methodOptionsReal);
     }
   }
 

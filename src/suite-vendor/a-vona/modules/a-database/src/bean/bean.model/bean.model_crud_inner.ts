@@ -137,7 +137,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return this.extractCount(res);
   }
 
-  protected async _batchInsert(
+  protected async _insertBulk(
     table?: keyof ITableRecord,
     data?: Partial<TRecord> | Partial<TRecord>[],
     options?: IModelMethodOptionsGeneral,

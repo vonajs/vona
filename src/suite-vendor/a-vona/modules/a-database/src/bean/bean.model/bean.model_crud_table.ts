@@ -29,11 +29,11 @@ export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<T
   }
 
   async insert(table: keyof ITableRecord, data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
-    return await this._batchInsert(table, data, options) as Promise<TRecord>;
+    return await this._insertBulk(table, data, options) as Promise<TRecord>;
   }
 
-  async batchInsert(table: keyof ITableRecord, data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
-    return await this._batchInsert(table, data, options) as Promise<TRecord[]>;
+  async insertBulk(table: keyof ITableRecord, data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+    return await this._insertBulk(table, data, options) as Promise<TRecord[]>;
   }
 
   async update(table: keyof ITableRecord, data: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<void> {
