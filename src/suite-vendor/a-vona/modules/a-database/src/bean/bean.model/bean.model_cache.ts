@@ -3,7 +3,9 @@ import type {
   EntityBase,
   IDatabaseClientRecord,
   IModelClassRecord,
+  IModelDeleteOptions,
   IModelGetOptions,
+  IModelInsertOptions,
   IModelMethodOptions,
   IModelMethodOptionsGeneral,
   IModelMutateOptions,
@@ -35,13 +37,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this.relations = this.bean._newBean(ServiceRelations, this);
   }
 
-  async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
+  async insert<T extends IModelInsertOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<TRecord> {
     if (!data) data = {};
     const items = await this.batchInsert([data], options);
     return items[0];
   }
 
-  async batchInsert(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+  async batchInsert<T extends IModelInsertOptions<TRecord>>(data: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
     const items = await this.__batchInsert_raw(undefined, data, options);
     return await this.relations.handleRelationsMutate(items, options as any, options);
   }
@@ -223,7 +225,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async update<T extends IModelUpdateOptions<TRecord>>(data: Partial<TRecord>, options?: T): Promise<void> {
     await this.__update_raw(undefined, data, options);
-    return await this.relations.handleRelationsMutate([data], options as any, options);
+    await this.relations.handleRelationsMutate([data], options as any, options);
   }
 
   async __update_raw(
@@ -270,9 +272,16 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     await this.cacheEntityDel(id, table);
   }
 
-  async delete(where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void> {
+  async delete<T extends IModelDeleteOptions<TRecord>>(where?: TypeModelWhere<TRecord>, options?: T): Promise<void> {
+    await this.__delete_raw(undefined, where, options);
+    if (where) {
+      await this.relations.handleRelationsDelete([where], options as any, options);
+    }
+  }
+
+  async __delete_raw(table: keyof ITableRecord | undefined, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void> {
     // table
-    const table = this.getTable();
+    table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
