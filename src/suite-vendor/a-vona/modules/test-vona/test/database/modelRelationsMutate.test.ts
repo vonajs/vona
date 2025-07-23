@@ -19,10 +19,18 @@ describe('modelRelationsMutate.test.ts', () => {
       const users = await scopeTest.model.user.insertBulk([
         {
           name: `${prefix}:tom`,
-          posts:[{}]
+          posts: [{
+            title: `${prefix}:postApple`,
+          }],
+          roles: [{
+            id: roles[0].id,
+          }],
         },
-      ],{'include':{'posts':{}}});
-      // users[0]
+      ], { include: {
+        posts: { include: { postContent: true } },
+        roles: true,
+      } });
+      assert.equal(users.length, 1);
       // delete: roles
       await scopeTest.model.role.deleteBulk(roles.map(item => item.id!));
       const roles2 = await scopeTest.model.role.select({
