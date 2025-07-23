@@ -23,7 +23,7 @@ export class ServiceTestData extends BeanBase {
     const userJimmy = await scopeTest.model.user.insert({ name: `${prefix}:jimmy` });
     const roleFamily = await scopeTest.model.role.insert({ name: `${prefix}:family` });
     const roleFriend = await scopeTest.model.role.insert({ name: `${prefix}:friend` });
-    await scopeTest.model.roleUser.batchInsert([
+    await scopeTest.model.roleUser.insertBulk([
       { userId: userTom.id, roleId: roleFamily.id },
       { userId: userTom.id, roleId: roleFriend.id },
       { userId: userJimmy.id, roleId: roleFamily.id },
