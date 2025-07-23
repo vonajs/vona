@@ -31,7 +31,7 @@ export class BeanModelCrud<TRecord extends {} = {}> extends BeanModelCrudInner<T
     return await this._insertBulk(undefined, data, options) as Promise<TRecord>;
   }
 
-  async insertBulk(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+  async insertBulk(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<Partial<TRecord>[]> {
     return await this._insertBulk(undefined, data, options) as Promise<TRecord[]>;
   }
 

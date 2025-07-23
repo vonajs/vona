@@ -24,7 +24,7 @@ describe('modelRelationsMutate.test.ts', () => {
       ],{'include':{'posts':true}});
       // users[0]
       // delete: roles
-      await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
+      await scopeTest.model.role.deleteBulk(roles.map(item => item.id!));
       const roles2 = await scopeTest.model.role.select({
         where: {
           id: roles.map(item => item.id),

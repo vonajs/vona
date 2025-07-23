@@ -20,7 +20,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       mget<T extends IModelGetOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
       select<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;
       count<T extends IModelCountParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
-      insertBulk<T extends IModelInsertOptions<${entityName},${className}>>(items: PowerPartial<TypeModelMutationRelationData<${entityName},${className}, T>>[], options?: T): Promise<TypeModelMutationRelationData<${entityName},${className}, T>[]>;
+      insertBulk<T extends IModelInsertOptions<${entityName},${className}>>(items: TypeModelMutateRelationData<${entityName},${className}, T>[], options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>[]>;
     }`);
     contentModels.push(`'${moduleName}:${beanName}': ${className};`);
     // only override cache.keyAux which not enough
@@ -33,7 +33,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   if (contentRecords.length === 0 && contentModels.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutationRelationData } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-${moduleName}' {
   ${contentRecords.join('\n')}
