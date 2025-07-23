@@ -21,13 +21,13 @@ describe('modelRelationsMutate.test.ts', () => {
           name: `${prefix}:tom`,
           posts:[{}],
         },
-      ],{'include':{'posts':true}});
+      ],{'include':{'posts':{}}});
       // users[0]
       // delete: roles
       await scopeTest.model.role.deleteBulk(roles.map(item => item.id!));
       const roles2 = await scopeTest.model.role.select({
         where: {
-          id: roles.map(item => item.id),
+          id: roles.map(item => item.id!),
         },
       }, { disableDeleted: true });
       assert.equal(roles2.length, 2);
