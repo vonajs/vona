@@ -115,7 +115,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const itemsMutateNew = await this.relations.handleRelationsMutate(itemsMutate, options as any, options);
     let result: TRecord[] = [];
     for (let index = 0; index < indexesMutate.length; index++) {
-      result[indexesMutate[index]] = itemsMutateNew[index];
+      result[indexesMutate[index]] = itemsMutateNew[index] as any;
     }
     result = result.filter(item => !!item); // fitler deleted items
     // delete
