@@ -119,7 +119,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     }
     result = result.filter(item => !!item); // fitler deleted items
     // delete
-    await this.__batchDelete_raw_with_relations(table, itemsDelete, options);
+    const idsDelete = itemsDelete.map(item => cast(item).id);
+    await this.__batchDelete_raw_with_relations(table, idsDelete, options);
     // ok
     return result;
   }
@@ -325,25 +326,22 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   async delete<T extends IModelDeleteOptions<TRecord>>(where?: TypeModelWhere<TRecord>, options?: T): Promise<void> {
     const ids = await this.__delete_raw(undefined, where, options);
     if (!isNil(ids)) {
-      const items = (ids as []).map(id => {
-        return { id };
-      });
-      await this.relations.handleRelationsDelete(items, options as any, options);
+      await this.relations.handleRelationsDelete(ids as [], options as any, options);
     }
   }
 
-  async batchDelete<T extends IModelDeleteOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<void> {
-    return await this.__batchDelete_raw_with_relations(undefined, items, options);
+  async batchDelete<T extends IModelDeleteOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<void> {
+    return await this.__batchDelete_raw_with_relations(undefined, ids, options);
   }
 
   async __batchDelete_raw_with_relations<T extends IModelDeleteOptions<TRecord>>(
     table: keyof ITableRecord | undefined,
-    items: Partial<TRecord>[],
+    ids: TableIdentity[],
     options?: T,
   ): Promise<void> {
-    const ids = items.map(item => cast(item).id);
+    if (ids.length === 0) return;
     await this.__delete_raw(table, { id: ids } as any, options);
-    await this.relations.handleRelationsDelete(items, options as any, options);
+    await this.relations.handleRelationsDelete(ids, options as any, options);
   }
 
   async __delete_raw(
@@ -373,6 +371,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         id = items.map(item => cast(item).id);
       }
     }
+    if (Array.isArray(id) && id.length === 0) return;
     // delete by id/ids
     await super._delete(table, { id } as any, options);
     // delete cache

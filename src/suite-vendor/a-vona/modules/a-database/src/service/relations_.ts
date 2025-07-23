@@ -4,6 +4,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike } from '../types/relations.ts';
+import type { TableIdentity } from '../types/tableIdentity.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -61,17 +62,17 @@ export class ServiceRelations extends BeanBase {
     return entities;
   }
 
-  public async handleRelationsDelete<TRecord extends {}>(
-    entities: TRecord[],
+  public async handleRelationsDelete(
+    ids: TableIdentity[],
     includeWrapper?: IModelRelationIncludeWrapper,
     methodOptions?: IModelMethodOptions,
   ) {
-    if (entities.length === 0) return entities;
+    if (ids.length === 0) return;
     // relations
     const relations = this.__handleRelationsCollection(includeWrapper);
-    if (!relations) return entities;
+    if (!relations) return;
     for (const relation of relations) {
-      await this.__handleRelationDelete(entities, relation, methodOptions);
+      await this.__handleRelationDelete(ids, relation, methodOptions);
     }
   }
 
@@ -287,8 +288,8 @@ export class ServiceRelations extends BeanBase {
     return entities;
   }
 
-  private async __handleRelationDelete<TRecord extends {}>(
-    entities: TRecord[],
+  private async __handleRelationDelete(
+    ids: TableIdentity[],
     relation: [string, any, any, any],
     methodOptions?: IModelMethodOptions,
   ) {
@@ -297,16 +298,16 @@ export class ServiceRelations extends BeanBase {
     const modelTarget = this.__getModelTarget(model) as BeanModelCache;
     const methodOptionsReal = Object.assign({}, methodOptions, { include: includeReal, with: withReal });
     if (type === 'hasOne' || type === 'hasMany') {
-      const idsFrom = entities.map(item => cast(item).id);
-      const children = await cast(modelTarget).__select_raw(undefined, { columns: 'id', where: { [key]: idsFrom } }, methodOptionsReal);
-      await modelTarget.batchDelete(children, methodOptionsReal);
+      const children = await cast(modelTarget).__select_raw(undefined, { columns: 'id', where: { [key]: ids } }, methodOptionsReal);
+      const idsTo = children.map(item => item.id);
+      await modelTarget.batchDelete(idsTo, methodOptionsReal);
     } else if (type === 'belongsTo') {
       // do nothing
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCache;
-      const idsFrom = entities.map(item => cast(item).id);
-      const itemsMiddle = await cast(modelTargetMiddle).__select_raw(undefined, { columns: 'id', where: { [keyFrom]: idsFrom } }, methodOptionsReal);
-      await modelTargetMiddle.batchDelete(itemsMiddle, methodOptionsReal);
+      const itemsMiddle = await cast(modelTargetMiddle).__select_raw(undefined, { columns: 'id', where: { [keyFrom]: ids } }, methodOptionsReal);
+      const idsMiddle = itemsMiddle.map(item => item.id);
+      await modelTargetMiddle.batchDelete(idsMiddle, methodOptionsReal);
     }
   }
 
