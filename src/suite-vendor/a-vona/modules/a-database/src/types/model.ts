@@ -94,8 +94,9 @@ export type IModelCountParams<
 >;
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
-export type IModelUpdateOptions<TRecord> = Omit<IModelUpdateOptionsGeneral<TRecord>, 'disableInstance'>;
+export type IModelUpdateOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelUpdateOptionsGeneral<TRecord, Model>, 'disableInstance'>;
 export type IModelGetOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelGetOptionsGeneral<TRecord, Model>, 'disableInstance'>;
+export type IModelMutateOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelMutateOptionsGeneral<TRecord, Model>, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
@@ -104,7 +105,8 @@ export interface IModelMethodOptionsGeneral {
   disableCacheEntity?: boolean;
 }
 
-export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptionsGeneral {
+export interface IModelUpdateOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
+  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
   where?: TypeModelWhere<TRecord>;
   disableUpdateTime?: boolean;
 }
@@ -112,6 +114,12 @@ export interface IModelUpdateOptionsGeneral<TRecord> extends IModelMethodOptions
 export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
   extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
   columns?: TypeModelColumns<TRecord>;
+}
+
+export interface IModelMutateOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
+  extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
+  where?: TypeModelWhere<TRecord>;
+  disableUpdateTime?: boolean;
 }
 
 export interface IModelSelectParamsPage {
