@@ -46,6 +46,21 @@ export class ServiceRelations extends BeanBase {
     return entities;
   }
 
+  public async handleRelationsMutate<TRecord extends {}>(
+    entities: TRecord[],
+    includeWrapper?: IModelRelationIncludeWrapper,
+    methodOptions?: IModelMethodOptions,
+  ) {
+    if (entities.length === 0) return entities;
+    // relations
+    const relations = this.__handleRelationsCollection(includeWrapper);
+    if (!relations) return entities;
+    for (const relation of relations) {
+      entities = await this.__handleRelationMutate(entities, relation, methodOptions);
+    }
+    return entities;
+  }
+
   private async __handleRelationOne<TRecord extends {}>(
     entity: TRecord,
     relation: [string, any, any, any],
@@ -129,6 +144,68 @@ export class ServiceRelations extends BeanBase {
       for (const entity of entities) {
         entity[relationName] = items.find(item => cast(item).id === cast(entity)[key]);
       }
+    } else if (type === 'hasMany') {
+      const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
+      const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
+      const options2 = deepExtend({}, optionsReal, { columns, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+      const items = await modelTarget.select(options2, methodOptionsReal);
+      for (const entity of entities) {
+        entity[relationName] = [];
+        for (const item of items) {
+          if (item[key] === cast(entity).id) {
+            if (!withKey) delete item[key];
+            entity[relationName].push(item);
+          }
+        }
+      }
+    } else if (type === 'belongsToMany') {
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
+      const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
+      const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
+      const idsTo = itemsMiddle.map(item => item[keyTo]);
+      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+      const items = await modelTarget.mget(idsTo, options2);
+      for (const entity of entities) {
+        entity[relationName] = [];
+        for (const itemMiddle of itemsMiddle) {
+          if (itemMiddle[keyFrom] === cast(entity).id) {
+            entity[relationName].push(items.find(item => cast(item).id === cast(itemMiddle)[keyTo]));
+          }
+        }
+      }
+    }
+  }
+
+  private async __handleRelationMutate<TRecord extends {}>(
+    entities: TRecord[],
+    relation: [string, any, any, any],
+    methodOptions?: IModelMethodOptions,
+  ) {
+    const [relationName, relationReal, includeReal, withReal] = relation;
+    const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
+    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
+    const tableNameTarget = modelTarget.getTable();
+    const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
+    const methodOptionsReal = Object.assign({}, methodOptions, { include: includeReal, with: withReal });
+    if (type === 'hasOne') {
+      const indexes: number[] = [];
+      let children: any[] = [];
+      for (let index = 0; index < entities.length; index++) {
+        const entity = entities[index];
+        if (entity[relationName]) {
+          indexes.push(index);
+          children.push(Object.assign({}, entity[relationName], { [key]: cast(entity).id }));
+        }
+      }
+      children = await modelTarget.batchMutate(children, methodOptionsReal);
+      const result: TRecord[] = entities.concat();
+      for (let index = 0; index < children.length; index++) {
+        result[indexes[index]] = children[index];
+      }
+      return result;
+    } else if (type === 'belongsTo') {
+      // do nothing
+      return entities;
     } else if (type === 'hasMany') {
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
