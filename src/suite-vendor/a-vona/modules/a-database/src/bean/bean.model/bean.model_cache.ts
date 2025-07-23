@@ -44,15 +44,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async batchInsert<T extends IModelInsertOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
-    return await this.__batchInsert_raw_with_relations(undefined, items, options);
-  }
-
-  async __batchInsert_raw_with_relations<T extends IModelInsertOptions<TRecord>>(
-    table: keyof ITableRecord | undefined,
-    items: Partial<TRecord>[],
-    options?: T,
-  ): Promise<TRecord[]> {
-    const itemsNew = await this.__batchInsert_raw(table, items, options);
+    const itemsNew = await this.__batchInsert_raw(undefined, items, options);
     return await this.relations.handleRelationsMutate(itemsNew, options as any, options);
   }
 
@@ -113,15 +105,23 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         indexesInsert.push(index);
       }
     }
-    // perform
-    const itemsInsertNew = await this.__batchInsert_raw_with_relations(table, itemsInsert, options);
-    // await this.__batch;
-
-    // insert
-    const res = await this._batchInsert(table, data, options) as Promise<TRecord[]>;
-    // clear cache
-    await this.cacheQueryClear(table);
-    return res;
+    // insert/update
+    const itemsInsertNew = await this.__batchInsert_raw(table, itemsInsert, options);
+    await this.__batchUpdate_raw(table, itemsUpdate, options);
+    const itemsMutate = itemsInsert.map((item, index) => {
+      return Object.assign({}, item, { id: cast(itemsInsertNew[index]).id });
+    }).concat(itemsUpdate as any);
+    const indexesMutate = indexesInsert.concat(indexesUpdate);
+    const itemsMutateNew = await this.relations.handleRelationsMutate(itemsMutate, options as any, options);
+    let result: TRecord[] = [];
+    for (let index = 0; index < indexesMutate.length; index++) {
+      result[indexesMutate[index]] = itemsMutateNew[index];
+    }
+    result = result.filter(item => !!item); // fitler deleted items
+    // delete
+    await this.__batchDelete_raw_with_relations(table, itemsDelete, options);
+    // ok
+    return result;
   }
 
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<Partial<TRecord>[]> {
@@ -264,10 +264,18 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async batchUpdate<T extends IModelUpdateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
-    for (const item of items) {
-      await this.__update_raw(undefined, item, options);
-    }
+    await this.__batchUpdate_raw(undefined, items, options);
     return await this.relations.handleRelationsMutate(items, options as any, options);
+  }
+
+  async __batchUpdate_raw<T extends IModelUpdateOptions<TRecord>>(
+    table: keyof ITableRecord | undefined,
+    items: Partial<TRecord>[],
+    options?: T,
+  ): Promise<void> {
+    for (const item of items) {
+      await this.__update_raw(table, item, options);
+    }
   }
 
   async __update_raw(
@@ -315,19 +323,34 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async delete<T extends IModelDeleteOptions<TRecord>>(where?: TypeModelWhere<TRecord>, options?: T): Promise<void> {
-    await this.__delete_raw(undefined, where, options);
-    if (where) {
-      await this.relations.handleRelationsDelete([where], options as any, options);
+    const ids = await this.__delete_raw(undefined, where, options);
+    if (!isNil(ids)) {
+      const items = (ids as []).map(id => {
+        return { id };
+      });
+      await this.relations.handleRelationsDelete(items, options as any, options);
     }
   }
 
   async batchDelete<T extends IModelDeleteOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<void> {
-    for (const item of items) {
-      await this.delete(item, options);
-    }
+    return await this.__batchDelete_raw_with_relations(undefined, items, options);
   }
 
-  async __delete_raw(table: keyof ITableRecord | undefined, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptions): Promise<void> {
+  async __batchDelete_raw_with_relations<T extends IModelDeleteOptions<TRecord>>(
+    table: keyof ITableRecord | undefined,
+    items: Partial<TRecord>[],
+    options?: T,
+  ): Promise<void> {
+    const ids = items.map(item => cast(item).id);
+    await this.__delete_raw(table, { id: ids } as any, options);
+    await this.relations.handleRelationsDelete(items, options as any, options);
+  }
+
+  async __delete_raw(
+    table: keyof ITableRecord | undefined,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelMethodOptions,
+  ): Promise<TableIdentity[] | void> {
     // table
     table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -354,6 +377,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     await super._delete(table, { id } as any, options);
     // delete cache
     await this.cacheEntityDel(id, table);
+    // id
+    return Array.isArray(id) ? id : [id];
   }
 
   private async __get_key(
@@ -460,7 +485,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!where) return undefined;
     const columnId = this.__checkIfOnlyKey(Object.keys(where), table, noCheckLength);
     if (!columnId) return undefined;
-    return ['number', 'string', 'bigint'].includes(typeof where[columnId])
+    return ['number', 'string', 'bigint', 'array'].includes(typeof where[columnId])
       ? where[columnId]
       : undefined;
   }
