@@ -53,10 +53,10 @@ export class ServiceRelations extends BeanBase {
     includeWrapper: IModelRelationIncludeWrapper | undefined,
     methodOptions: IModelMethodOptions | undefined,
   ) {
-    if (entities.length === 0) return entities;
+    if (entitiesResult.length === 0) return entitiesResult;
     // relations
     const relations = this.__handleRelationsCollection(includeWrapper);
-    if (!relations) return entities;
+    if (!relations) return entitiesResult;
     for (const relation of relations) {
       entitiesResult = await this.__handleRelationMutate(entitiesResult, entities, relation, methodOptions);
     }
@@ -222,7 +222,7 @@ export class ServiceRelations extends BeanBase {
       return result;
     } else if (type === 'belongsTo') {
       // do nothing
-      return entities;
+      return entitiesResult;
     } else if (type === 'hasMany') {
       let children: any[] = [];
       for (let index = 0; index < entities.length; index++) {
@@ -293,7 +293,7 @@ export class ServiceRelations extends BeanBase {
       return result;
     }
     // do nothing
-    return entities;
+    return entitiesResult;
   }
 
   private async __handleRelationDelete(
