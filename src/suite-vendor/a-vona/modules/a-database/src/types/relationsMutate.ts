@@ -1,7 +1,7 @@
 import type { OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
-import type { TypeModelRelationResultMergeWith, TypeUtilGetModelOptions, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType } from './relations.ts';
+import type { TypeUtilGetModelOptions, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType } from './relations.ts';
 
 export type TypeModelMutateParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelMutateParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
@@ -45,10 +45,21 @@ export type TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper exten
 export type TypeUtilMutateGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined> =
     TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper>> | undefined : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper> | undefined;
 
+export type TypeModelMutateRelationResultMergeWith<TWith extends {} | undefined> =
+  TWith extends {} ?
+      { [RelationName in (keyof TWith)]: TypeModelMutateRelationResultMergeWithRelation<TWith[RelationName]> }
+    : {};
+
+export type TypeModelMutateRelationResultMergeWithRelation<WithRelation> =
+  WithRelation extends false ? never :
+  WithRelation extends true ?
+    never :
+    WithRelation extends {} ? TypeUtilMutateGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
+
 export type TypeModelMutateRelationData<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation> =
   Partial<TRecord> &
   (TModel extends BeanModelMeta ?
       (
       Partial<OmitNever<TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>>> &
-      Partial<OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>>
+      Partial<OmitNever<TypeModelMutateRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>>
       ) : {});
