@@ -156,6 +156,9 @@ describe('modelRelations.test.ts', () => {
       // relation: include + with
       const items = await scopeTest.model.post.select(
         {
+          where: {
+            id: postApple.id,
+          },
           include: {
             postContent: {
               include: {
