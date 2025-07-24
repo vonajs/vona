@@ -50,14 +50,15 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async __insertBulk_raw(
     table: keyof ITableRecord | undefined,
-    data: Partial<TRecord>[],
+    items: Partial<TRecord>[],
     options?: IModelMutateOptions<TRecord>,
   ): Promise<TRecord[]> {
+    if (items.length === 0) return [];
     // table
     table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // insert
-    const res = await this._insertBulk(table, data, options) as Promise<TRecord[]>;
+    const res = await this._insertBulk(table, items, options) as Promise<TRecord[]>;
     // clear cache
     await this.cacheQueryClear(table);
     return res;
