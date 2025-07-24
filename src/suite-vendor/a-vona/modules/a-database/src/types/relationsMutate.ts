@@ -1,7 +1,7 @@
 import type { OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
-import type { TypeModelRelationResultMergeInclude, TypeModelRelationResultMergeWith, TypeUtilGetModelOptions, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType } from './relations.ts';
+import type { TypeModelRelationResultMergeWith, TypeUtilGetModelOptions, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType } from './relations.ts';
 
 export type TypeModelMutateParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelMutateParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
