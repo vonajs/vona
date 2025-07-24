@@ -265,8 +265,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async update<T extends IModelUpdateOptions<TRecord>>(data: Partial<TRecord>, options?: T): Promise<void> {
-    await this.__update_raw(undefined, data, options);
-    await this.relations.handleRelationsMutate([data], [data], options as any, options);
+    const ids = await this.__update_raw(undefined, data, options);
+    if (!ids || ids.length === 0) return;
+    const dataNew = [Object.assign({}, data, { id: ids[0] })];
+    await this.relations.handleRelationsMutate(dataNew, dataNew, options as any, options);
   }
 
   async updateBulk<T extends IModelUpdateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
@@ -289,7 +291,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table: keyof ITableRecord | undefined,
     data: Partial<TRecord>,
     options?: IModelUpdateOptions<TRecord>,
-  ): Promise<void> {
+  ): Promise<TableIdentity[] | void> {
     // table
     table = table || this.getTable();
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
@@ -303,6 +305,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       if (isNil(id)) {
         throw new Error('id should be specified for update method');
       }
+      if (Array.isArray(id) && id.length === 0) return;
       const id2 = this.__checkCacheKeyValid(data, table, false);
       if (!isNil(id2)) {
         // donothing
@@ -327,6 +330,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     await super._update(table, data, options);
     // delete cache
     await this.cacheEntityDel(id, table);
+    // id
+    return Array.isArray(id) ? id : [id];
   }
 
   async delete<T extends IModelDeleteOptions<TRecord>>(where?: TypeModelWhere<TRecord>, options?: T): Promise<void> {

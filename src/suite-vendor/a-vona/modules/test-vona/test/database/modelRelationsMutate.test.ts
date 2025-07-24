@@ -36,6 +36,11 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(users.length, 1);
       const post = await scopeTest.model.post.get({ id: users[0].posts[0].id }, { include: { postContent: true } });
       assert.equal(post?.postContent?.content, `${prefix}:postContentApple`);
+      // update: users
+      await scopeTest.model.user.update({
+        id: users[0].id,
+
+      }, { include: {} });
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: { posts: true, roles: true },
