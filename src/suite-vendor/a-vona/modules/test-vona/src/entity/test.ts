@@ -12,4 +12,7 @@ export class EntityTest extends EntityBase {
 
   @Api.field()
   description: string;
+
+  @Api.field(v.default(() => { return new Date(); }))
+  testDate: Date;
 }

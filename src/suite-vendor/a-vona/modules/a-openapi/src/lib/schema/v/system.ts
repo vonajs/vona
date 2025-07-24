@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { makeSchemaLike } from '../makeSchemaLikes.ts';
 import { $schema, $schemaLazy } from '../schema.ts';
 
-export function schemaDefault<T>(defaultValue: T) {
+export function schemaDefault(defaultValue: any | Function) {
   return function (schema: z.ZodSchema): z.ZodSchema {
     return schema.default(defaultValue);
   };
