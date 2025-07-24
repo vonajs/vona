@@ -30,7 +30,7 @@ export class ModelCacheBase extends BeanBase {
   }
 
   public getName(table: keyof ITableRecord) {
-    const clientNameReal = this.$scope.database.service.database.prepareClientNameReal(this._model.db.clientName);
+    const clientNameReal = this.$scope.orm.service.database.prepareClientNameReal(this._model.db.clientName);
     return `${this.$beanFullName}:${clientNameReal}:${table}:${this._cacheType}`;
   }
 
