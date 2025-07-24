@@ -1,7 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { includes } from 'zod/v4';
 
 describe('modelRelationsMutate.test.ts', () => {
   it('action:modelRelationsMutate', async () => {
@@ -123,8 +122,7 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(usersMutateCheck?.posts[0].title, `${prefix}:postApple-mutate`);
       assert.equal(usersMutateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-mutate`);
       assert.equal(usersMutateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
-      console.log(usersUpdateCheck?.roles);
-      assert.equal(usersUpdateCheck?.roles.length, 0);
+      assert.equal(usersMutateCheck?.roles.length, 0);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: { posts: true, roles: true },
