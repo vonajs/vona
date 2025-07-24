@@ -30,7 +30,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<(TRecord | undefined)[]> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // ids maybe empty
     if (!ids || ids.length === 0) return [];
     // params
@@ -62,7 +62,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<TRecord[]> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // builder
     const builder = this._select_buildParams(table, params, options);
     // ready
@@ -100,7 +100,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<TRecord | undefined> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // params
     const params: IModelSelectParams<TRecord> = { where, limit: 1 };
     if (options?.columns) {
@@ -120,7 +120,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<BigNumber> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
     // builder
@@ -144,7 +144,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<TRecord | TRecord[]> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // data
     data = data || {} as any;
     const datasTemp = Array.isArray(data) ? data : [data];
@@ -187,7 +187,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<void> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // data
     [data] = await this.prepareData(table, data);
     // where
@@ -223,7 +223,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
   ): Promise<void> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
       await this._update(table, { deleted: true } as any, Object.assign({}, options, { where }));

@@ -17,7 +17,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // item
     if (!item) return [{}, {}] as [TRecord, TRecord];
     // columns

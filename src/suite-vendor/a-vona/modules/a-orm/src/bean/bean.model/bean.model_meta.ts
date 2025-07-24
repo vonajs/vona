@@ -43,8 +43,8 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.db.dialect;
   }
 
-  public get scopeDatabase() {
-    return this.$scope.database;
+  public get scopeOrm() {
+    return this.$scope.orm;
   }
 
   public get modelViewRecord() {
@@ -88,19 +88,19 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   get disableInstance() {
     return this.options.disableInstance === undefined
-      ? this.scopeDatabase.config.model.disableInstance
+      ? this.scopeOrm.config.model.disableInstance
       : this.options.disableInstance;
   }
 
   get disableDeleted() {
     return this.options.disableDeleted === undefined
-      ? this.scopeDatabase.config.model.disableDeleted
+      ? this.scopeOrm.config.model.disableDeleted
       : this.options.disableDeleted;
   }
 
   get disableUpdateTime() {
     return this.options.disableUpdateTime === undefined
-      ? this.scopeDatabase.config.model.disableUpdateTime
+      ? this.scopeOrm.config.model.disableUpdateTime
       : this.options.disableUpdateTime;
   }
 

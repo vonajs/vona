@@ -59,7 +59,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (items.length === 0) return [];
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // insert
     const res = await this._insertBulk(table, items, options) as Promise<TRecord[]>;
     // clear cache
@@ -84,7 +84,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   ): Promise<TRecord[]> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check
     const indexesInsert: number[] = [];
     const indexesUpdate: number[] = [];
@@ -138,7 +138,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   private async __mget_raw(table: keyof ITableRecord | undefined, ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
       return (await super._mget(table, ids, options)) as TRecord[];
@@ -179,7 +179,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   ): Promise<TRecord[]> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await this.__select_cache(table, params, options);
@@ -238,7 +238,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   ): Promise<TRecord | undefined> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._get(table, where, options);
@@ -294,7 +294,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   ): Promise<TableIdentity[] | void> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._update(table, data, options);
@@ -362,7 +362,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   ): Promise<TableIdentity[] | void> {
     // table
     table = table || this.getTable();
-    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
       return await super._delete(table, where, options);
