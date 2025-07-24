@@ -121,7 +121,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-orm';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-instance' {
   export interface ModelInstance {
@@ -132,6 +132,14 @@ declare module 'vona-module-a-instance' {
       mget<T extends IModelGetOptions<EntityInstance,ModelInstance>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
       select<T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
       count<T extends IModelCountParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
+      insert<T extends IModelInsertOptions<EntityInstance,ModelInstance>>(data?: TypeModelMutateRelationData<EntityInstance,ModelInstance, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityInstance,ModelInstance, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityInstance,ModelInstance>>(items: TypeModelMutateRelationData<EntityInstance,ModelInstance, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityInstance,ModelInstance, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityInstance,ModelInstance>>(data: TypeModelMutateRelationData<EntityInstance,ModelInstance, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityInstance,ModelInstance>>(items: TypeModelMutateRelationData<EntityInstance,ModelInstance, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityInstance,ModelInstance, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityInstance,ModelInstance>>(where?: TypeModelWhere<EntityInstance>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityInstance,ModelInstance>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityInstance,ModelInstance>>(data?: TypeModelMutateRelationData<EntityInstance,ModelInstance, T>, options?: T): Promise<TypeModelMutateRelationData<EntityInstance,ModelInstance, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityInstance,ModelInstance>>(items: TypeModelMutateRelationData<EntityInstance,ModelInstance, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityInstance,ModelInstance, T>[]>;
     }
 }
 declare module 'vona-module-a-orm' {

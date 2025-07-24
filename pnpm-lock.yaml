@@ -110,9 +110,6 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
-      vona-module-a-database:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-database
       vona-module-a-datasharding:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-datasharding
@@ -164,6 +161,9 @@ importers:
       vona-module-a-openapiutils:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-openapiutils
+      vona-module-a-orm:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-orm
       vona-module-a-ormdialect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-ormdialect
@@ -1153,9 +1153,6 @@ importers:
       vona-module-a-core:
         specifier: ^5.0.45
         version: link:modules/a-core
-      vona-module-a-database:
-        specifier: ^5.0.36
-        version: link:modules/a-database
       vona-module-a-election:
         specifier: ^5.0.13
         version: link:modules/a-election
@@ -1201,6 +1198,9 @@ importers:
       vona-module-a-openapiutils:
         specifier: workspace:^
         version: link:modules/a-openapiutils
+      vona-module-a-orm:
+        specifier: ^5.0.36
+        version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.12
         version: link:modules/a-ormdialect
@@ -1446,25 +1446,6 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
 
-  src/suite-vendor/a-vona/modules/a-database:
-    dependencies:
-      bignumber.js:
-        specifier: ^9.1.2
-        version: 9.3.0
-      knex:
-        specifier: ^3.1.0
-        version: 3.1.0
-      table-identity:
-        specifier: ^1.0.10
-        version: link:../../../../../packages-utils/table-identity
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
   src/suite-vendor/a-vona/modules/a-election:
     devDependencies:
       clean-package:
@@ -1650,6 +1631,25 @@ importers:
       openapi3-ts:
         specifier: ^4.4.0
         version: 4.4.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-orm:
+    dependencies:
+      bignumber.js:
+        specifier: ^9.1.2
+        version: 9.3.0
+      knex:
+        specifier: ^3.1.0
+        version: 3.1.0
+      table-identity:
+        specifier: ^1.0.10
+        version: link:../../../../../packages-utils/table-identity
     devDependencies:
       clean-package:
         specifier: ^2.2.0
