@@ -5,7 +5,7 @@ import { $relationDynamic, $relationMutate } from 'vona-module-a-database';
 import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelRelationsMutate.test.ts', () => {
-  it.only('action:modelRelationsMutate', async () => {
+  it('action:modelRelationsMutate', async () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelRelationsMutate';
       // scope
@@ -94,7 +94,9 @@ describe('modelRelationsMutate.test.ts', () => {
           {
             id: users[0].posts[0].id,
             title: `${prefix}:postApple-mutate`,
+            // update
             postContent: {
+              id: users[0].posts[0].postContent?.id,
               content: `${prefix}:postContentApple-mutate`,
             },
           },
