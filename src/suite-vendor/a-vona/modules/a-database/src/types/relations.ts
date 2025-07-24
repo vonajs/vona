@@ -29,10 +29,10 @@ export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecorator
 export type TypeModelParamsRelationOptions<Relation> =
   boolean
   | (Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>
-  & {
-    include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>>;
-    with?: Record<string, unknown>;
-  });
+    & {
+      include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>>;
+      with?: Record<string, unknown>;
+    });
 
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : undefined;
 export type TypeUtilGetRelationModel<Relation> =

@@ -4,8 +4,8 @@ import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeMode
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelParamsInclude } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
-import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 import type { TypeModelMutateParamsInclude } from './relationsMutate.ts';
+import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export type TypeModelCacheType = 'query' | 'entity';
 
