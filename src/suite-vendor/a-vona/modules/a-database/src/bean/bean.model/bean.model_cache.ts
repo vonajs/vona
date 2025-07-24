@@ -275,6 +275,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     items: Partial<TRecord>[],
     options?: T,
   ): Promise<void> {
+    if (items.length === 0) return;
     for (const item of items) {
       await this.__update_raw(table, item, options);
     }
