@@ -17,7 +17,7 @@
     "vona-module-a-cache": "^5.0.13",
     "vona-module-a-caching": "workspace:^",
     "vona-module-a-core": "^5.0.45",
-    "vona-module-a-database": "^5.0.36",
+    "vona-module-a-orm": "^5.0.36",
     "vona-module-a-ormdialect": "^5.0.12",
     "vona-module-a-election": "^5.0.13",
     "vona-module-a-error": "^5.0.14",

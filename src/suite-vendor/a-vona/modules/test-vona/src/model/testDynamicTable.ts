@@ -1,7 +1,7 @@
 import type { VonaContext } from 'vona';
-import type { IDecoratorModelOptions, ITableRecord } from 'vona-module-a-database';
+import type { IDecoratorModelOptions, ITableRecord } from 'vona-module-a-orm';
 import moment from 'moment';
-import { BeanModelBase, Model } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityTest } from '../entity/test.ts';
 
 export interface IModelOptionsTestDynamicTable extends IDecoratorModelOptions {}

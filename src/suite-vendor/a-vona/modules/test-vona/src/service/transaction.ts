@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { Database } from 'vona-module-a-database';
+import { Database } from 'vona-module-a-orm';
 
 const tableNameFail = '__tempTransactionFail';
 const tableNameSuccess = '__tempTransactionSuccess';

@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api, Arg, v } from 'vona-module-a-openapi';

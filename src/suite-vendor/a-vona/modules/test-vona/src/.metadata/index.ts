@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** aop: begin */
@@ -81,7 +81,7 @@ import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'test-vona:category': IEntityOptionsCategory;
@@ -132,7 +132,7 @@ export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
 export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
 export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'testVonaCategory': never;
 'testVonaPost': never;
@@ -192,7 +192,7 @@ import type { IModelOptionsTest } from '../model/test.ts';
 import type { IModelOptionsTestDynamicTable } from '../model/testDynamicTable.ts';
 import type { IModelOptionsUser } from '../model/user.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'test-vona:category': IModelOptionsCategory;
@@ -311,8 +311,8 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions } from 'vona-module-a-database';
-import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-test-vona' {
   export interface ModelCategory {
       [SymbolKeyEntity]: EntityCategory;
@@ -451,7 +451,7 @@ export interface ModelUser {
       mutateBulk<T extends IModelMutateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
     }
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'test-vona:category': ModelCategory;
 'test-vona:post': ModelPost;

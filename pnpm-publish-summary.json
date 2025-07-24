@@ -249,7 +249,7 @@
 			"version": "5.0.8"
 		},
 		{
-			"name": "vona-module-a-database",
+			"name": "vona-module-a-orm",
 			"version": "5.0.16"
 		},
 		{

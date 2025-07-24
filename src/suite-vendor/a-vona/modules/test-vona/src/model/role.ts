@@ -1,5 +1,5 @@
-import type { IDecoratorModelOptions, IModelRelationBelongsToMany } from 'vona-module-a-database';
-import { $relation, BeanModelBase, Model } from 'vona-module-a-database';
+import type { IDecoratorModelOptions, IModelRelationBelongsToMany } from 'vona-module-a-orm';
+import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityRole } from '../entity/role.ts';
 import { ModelRoleUser } from './roleUser.ts';
 import { ModelUser } from './user.ts';

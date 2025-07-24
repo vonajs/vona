@@ -1,5 +1,5 @@
-import type { IDecoratorModelOptions, IModelRelationHasMany } from 'vona-module-a-database';
-import { $relation, BeanModelBase, Model } from 'vona-module-a-database';
+import type { IDecoratorModelOptions, IModelRelationHasMany } from 'vona-module-a-orm';
+import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityCategory } from '../entity/category.ts';
 
 export interface IModelOptionsCategory extends IDecoratorModelOptions {

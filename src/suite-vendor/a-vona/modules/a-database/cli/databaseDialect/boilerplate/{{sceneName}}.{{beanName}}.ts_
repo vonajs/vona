@@ -1,4 +1,4 @@
-import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-database';
+import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
 @DatabaseDialect()
 export class DatabaseDialect<%=argv.beanNameCapitalize%> extends BeanDatabaseDialectBase {}

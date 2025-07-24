@@ -21,7 +21,7 @@
       "path": "modules/a-core/tsconfig.build.json"
     },
     {
-      "path": "modules/a-database/tsconfig.build.json"
+      "path": "modules/a-orm/tsconfig.build.json"
     },
     {
       "path": "modules/a-event/tsconfig.build.json"
