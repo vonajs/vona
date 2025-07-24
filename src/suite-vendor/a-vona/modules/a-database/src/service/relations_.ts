@@ -207,7 +207,22 @@ export class ServiceRelations extends BeanBase {
       for (let index = 0; index < entities.length; index++) {
         const entity = entities[index];
         if (entity[relationName]) {
-          children.push(Object.assign({}, entity[relationName], { [key]: cast(entity).id }));
+          // check if exists if no id
+          let childId;
+          const child = entity[relationName];
+          if (!isNil(child.id)) {
+            childId = child.id;
+          } else {
+            const item: any = await modelTarget.get({ [key]: cast(entity).id });
+            if (item) {
+              childId = item.id;
+            }
+          }
+          children.push(Object.assign(
+            {},
+            entity[relationName],
+            isNil(childId) ? { [key]: cast(entity).id } : { id: childId },
+          ));
         }
       }
       children = await modelTarget.mutateBulk(children, methodOptionsReal);
