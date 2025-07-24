@@ -2,8 +2,8 @@ import type { IInstanceRecord } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { $Class } from 'vona';
-import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapi';
+import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 import z from 'zod';
 
 export interface IEntityOptionsInstance extends IDecoratorEntityOptions {}

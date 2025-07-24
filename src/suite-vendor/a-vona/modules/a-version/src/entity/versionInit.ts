@@ -1,7 +1,7 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import { $Class } from 'vona';
-import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 import { Api } from 'vona-module-a-openapi';
+import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 
 export interface IEntityOptionsVersionInit extends IDecoratorEntityOptions {}
 
