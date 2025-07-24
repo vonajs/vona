@@ -84,7 +84,7 @@
       "path": "modules/a-web/tsconfig.build.json"
     },
     {
-      "path": "modules/a-autumndialect/tsconfig.build.json"
+      "path": "modules/a-ormdialect/tsconfig.build.json"
     },
     {
       "path": "modules/a-printtip/tsconfig.build.json"

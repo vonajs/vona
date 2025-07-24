@@ -8,14 +8,14 @@ import 'vona';
 declare module 'vona' {
   
     export interface IDatabaseDialectRecord {
-      'a-autumndialect:mysql': never;
-'a-autumndialect:mysql3': never;
-'a-autumndialect:pg': never;
+      'a-ormdialect:mysql': never;
+'a-ormdialect:mysql3': never;
+'a-ormdialect:pg': never;
     }
 
   
 }
-declare module 'vona-module-a-autumndialect' {
+declare module 'vona-module-a-ormdialect' {
   
         export interface DatabaseDialectMysql {
           /** @internal */
@@ -23,8 +23,8 @@ declare module 'vona-module-a-autumndialect' {
         }
 
           export interface DatabaseDialectMysql {
-            get $beanFullName(): 'a-autumndialect.databaseDialect.mysql';
-            get $onionName(): 'a-autumndialect:mysql';
+            get $beanFullName(): 'a-ormdialect.databaseDialect.mysql';
+            get $onionName(): 'a-ormdialect:mysql';
           }
 
         export interface DatabaseDialectPg {
@@ -33,8 +33,8 @@ declare module 'vona-module-a-autumndialect' {
         }
 
           export interface DatabaseDialectPg {
-            get $beanFullName(): 'a-autumndialect.databaseDialect.pg';
-            get $onionName(): 'a-autumndialect:pg';
+            get $beanFullName(): 'a-ormdialect.databaseDialect.pg';
+            get $onionName(): 'a-ormdialect:pg';
           } 
 }
 /** databaseDialect: end */
@@ -45,9 +45,9 @@ import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.ts';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-autumndialect.databaseDialect.mysql': DatabaseDialectMysql;
-'a-autumndialect.databaseDialect.mysql3': DatabaseDialectMysql3;
-'a-autumndialect.databaseDialect.pg': DatabaseDialectPg;
+    'a-ormdialect.databaseDialect.mysql': DatabaseDialectMysql;
+'a-ormdialect.databaseDialect.mysql3': DatabaseDialectMysql3;
+'a-ormdialect.databaseDialect.pg': DatabaseDialectPg;
   }
 }
 /** databaseDialect: end */
@@ -65,7 +65,7 @@ export interface ScopeModuleADatabasedialect {
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-autumndialect': ScopeModuleADatabasedialect;
+    'a-ormdialect': ScopeModuleADatabasedialect;
   }
 
   export interface IBeanScopeContainer {
