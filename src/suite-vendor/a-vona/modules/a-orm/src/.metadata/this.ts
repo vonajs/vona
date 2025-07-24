@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-orm';
-export { ScopeModuleADatabase as ScopeModule } from './index.ts';
+export { ScopeModuleAOrm as ScopeModule } from './index.ts';

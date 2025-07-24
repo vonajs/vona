@@ -15,7 +15,7 @@ declare module 'vona-module-a-orm' {
   
         export interface AopMethodTransaction {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface AopMethodTransaction {
@@ -39,7 +39,7 @@ declare module 'vona-module-a-orm' {
   
         export interface BeanDatabase {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         } 
 }
 /** bean: end */
@@ -83,7 +83,7 @@ declare module 'vona-module-a-orm' {
   
         export interface ServiceDatabase {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface ServiceDatabase {
@@ -125,7 +125,7 @@ declare module 'vona-module-a-orm' {
   
         export interface BroadcastColumnsClear {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface BroadcastColumnsClear {
@@ -135,7 +135,7 @@ declare module 'vona-module-a-orm' {
 
         export interface BroadcastDatabaseClientReload {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface BroadcastDatabaseClientReload {
@@ -166,7 +166,7 @@ declare module 'vona-module-a-orm' {
   
         export interface EventClientNameReal {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface EventClientNameReal {
@@ -176,7 +176,7 @@ declare module 'vona-module-a-orm' {
 
         export interface EventColumnsClear {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface EventColumnsClear {
@@ -186,7 +186,7 @@ declare module 'vona-module-a-orm' {
 
         export interface EventDatabaseClientReload {
           /** @internal */
-          get scope(): ScopeModuleADatabase;
+          get scope(): ScopeModuleAOrm;
         }
 
           export interface EventDatabaseClientReload {
@@ -242,9 +242,9 @@ import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModu
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
-export class ScopeModuleADatabase extends BeanScopeBase {}
+export class ScopeModuleAOrm extends BeanScopeBase {}
 
-export interface ScopeModuleADatabase {
+export interface ScopeModuleAOrm {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 error: TypeModuleErrors<typeof Errors>;
@@ -257,11 +257,11 @@ event: IModuleEvent;
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-orm': ScopeModuleADatabase;
+    'a-orm': ScopeModuleAOrm;
   }
 
   export interface IBeanScopeContainer {
-    database: ScopeModuleADatabase;
+    orm: ScopeModuleAOrm;
   }
   
   export interface IBeanScopeConfig {
