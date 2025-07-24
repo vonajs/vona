@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
 export * from '../entity/version.ts';
@@ -10,7 +10,7 @@ import type { IEntityOptionsVersion } from '../entity/version.ts';
 import type { IEntityOptionsVersionInit } from '../entity/versionInit.ts';
 import type { IEntityOptionsViewRecord } from '../entity/viewRecord.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'a-version:version': IEntityOptionsVersion;
@@ -41,7 +41,7 @@ export type EntityViewRecordTableName = 'aViewRecord';
 export type EntityVersionMeta=TypeEntityMeta<EntityVersion,EntityVersionTableName>;
 export type EntityVersionInitMeta=TypeEntityMeta<EntityVersionInit,EntityVersionInitTableName>;
 export type EntityViewRecordMeta=TypeEntityMeta<EntityViewRecord,EntityViewRecordTableName>;
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'aVersion': never;
 'aVersionInit': never;
@@ -71,7 +71,7 @@ import type { IModelOptionsVersion } from '../model/version.ts';
 import type { IModelOptionsVersionInit } from '../model/versionInit.ts';
 import type { IModelOptionsViewRecord } from '../model/viewRecord.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'a-version:version': IModelOptionsVersion;
@@ -125,8 +125,8 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
-import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-version' {
   export interface ModelVersion {
       [SymbolKeyEntity]: EntityVersion;
@@ -156,7 +156,7 @@ export interface ModelViewRecord {
       count<T extends IModelCountParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'a-version:version': ModelVersion;
 'a-version:versionInit': ModelVersionInit;

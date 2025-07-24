@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IRoleAdapter, IRoleBase } from '../types/role.ts';
 
 let __roleAdapter: IRoleAdapter;

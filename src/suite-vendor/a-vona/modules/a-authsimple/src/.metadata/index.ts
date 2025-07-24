@@ -1,12 +1,12 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
 export * from '../entity/authSimple.ts';
 import type { IEntityOptionsAuthSimple } from '../entity/authSimple.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'a-authsimple:authSimple': IEntityOptionsAuthSimple;
@@ -27,7 +27,7 @@ export interface IModuleEntity {
 /** entity: begin */
 export type EntityAuthSimpleTableName = 'aAuthSimple';
 export type EntityAuthSimpleMeta=TypeEntityMeta<EntityAuthSimple,EntityAuthSimpleTableName>;
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'aAuthSimple': never;
   }
@@ -43,7 +43,7 @@ declare module 'vona-module-a-authsimple' {
 export * from '../model/authSimple.ts';
 import type { IModelOptionsAuthSimple } from '../model/authSimple.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'a-authsimple:authSimple': IModelOptionsAuthSimple;
@@ -71,8 +71,8 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
-import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-authsimple' {
   export interface ModelAuthSimple {
       [SymbolKeyEntity]: EntityAuthSimple;
@@ -84,7 +84,7 @@ declare module 'vona-module-a-authsimple' {
       count<T extends IModelCountParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'a-authsimple:authSimple': ModelAuthSimple;
   }

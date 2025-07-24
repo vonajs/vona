@@ -364,7 +364,7 @@ export type TableIdentity = string | number;
 ``` typescript
 // modules
 config.modules = {
-  'a-database': {
+  'a-orm': {
     'table': {
       // number -> int
       // string -> int64

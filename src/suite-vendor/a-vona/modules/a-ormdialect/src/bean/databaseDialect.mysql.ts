@@ -4,12 +4,12 @@ import type {
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
   TableIdentity,
-} from 'vona-module-a-database';
+} from 'vona-module-a-orm';
 import { promisify } from 'node:util';
 import {
   BeanDatabaseDialectBase,
   DatabaseDialect,
-} from 'vona-module-a-database';
+} from 'vona-module-a-orm';
 
 @DatabaseDialect()
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {

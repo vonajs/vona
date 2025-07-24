@@ -1,5 +1,5 @@
 import type { OmitNever } from 'vona';
-import type { SymbolKeyFieldsMore } from 'vona-module-a-database';
+import type { SymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 

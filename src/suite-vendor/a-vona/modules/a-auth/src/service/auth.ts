@@ -4,7 +4,7 @@ import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { TableIdentity } from 'vona-module-a-database';
+import { TableIdentity } from 'vona-module-a-orm';
 
 @Service()
 export class ServiceAuth extends BeanBase {

@@ -154,10 +154,10 @@ export class CliToolsMetadata extends BeanCliBase {
       content = `import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';\n${content}`;
     }
     if (content.includes('TypeEntityMeta')) {
-      content = `import type { TypeEntityMeta } from 'vona-module-a-database';\n${content}`;
+      content = `import type { TypeEntityMeta } from 'vona-module-a-orm';\n${content}`;
     }
     if (content.includes('TypeSymbolKeyFieldsMore')) {
-      content = `import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';\n${content}`;
+      content = `import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';\n${content}`;
     }
     if (content.includes('PowerPartial')) {
       content = `import type { PowerPartial } from 'vona';\n${content}`;

@@ -19,7 +19,7 @@ $ vona :create:bean model student --module=demo-student
 ## Model定义
 
 ``` typescript
-import { BeanModelBase, Model } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityStudent } from '../entity/student.ts';
 
 @Model({ entity: EntityStudent })

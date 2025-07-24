@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IAuthAdapter, IAuthBase, IAuthIdRecord } from '../types/auth.ts';
 
 let __authAdapter: IAuthAdapter;

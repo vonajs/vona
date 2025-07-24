@@ -7,7 +7,7 @@ import { app } from 'vona-mock';
 describe('database.test.ts', () => {
   it('action:database:switchClient', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const scopeDatabase = app.bean.scope('a-database');
+      const scopeDatabase = app.bean.scope('a-orm');
       const defaultClientName = scopeDatabase.service.database.getDefaultClientName();
       // current
       assert.equal(app.ctx.db.clientName, defaultClientName);

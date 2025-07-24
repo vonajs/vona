@@ -1,6 +1,6 @@
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
+import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import { $Class } from 'vona';
-import { Entity, EntityBaseSimple } from 'vona-module-a-database';
+import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapi';
 import { $locale } from '../.metadata/index.ts';
 

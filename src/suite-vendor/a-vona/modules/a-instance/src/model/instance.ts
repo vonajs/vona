@@ -1,5 +1,5 @@
-import type { IDecoratorModelOptions } from 'vona-module-a-database';
-import { BeanModelBase, Model } from 'vona-module-a-database';
+import type { IDecoratorModelOptions } from 'vona-module-a-orm';
+import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityInstance } from '../entity/instance.ts';
 
 export interface IModelOptionsInstance extends IDecoratorModelOptions {}

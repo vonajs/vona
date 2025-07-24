@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IPassportBase } from 'vona-module-a-user';
 import type { IAuth } from './auth.ts';

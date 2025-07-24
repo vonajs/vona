@@ -1,6 +1,6 @@
-import type { ConfigDatabaseClient } from 'vona-module-a-database';
+import type { ConfigDatabaseClient } from 'vona-module-a-orm';
 import { Virtual } from 'vona';
-import { DatabaseDialect } from 'vona-module-a-database';
+import { DatabaseDialect } from 'vona-module-a-orm';
 import { DatabaseDialectMysql } from './databaseDialect.mysql.ts';
 
 @DatabaseDialect()

@@ -1,6 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { TypeBroadcastOnSet } from 'vona-module-a-cache';
-import type { ServiceDb } from 'vona-module-a-database';
+import type { ServiceDb } from 'vona-module-a-orm';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 

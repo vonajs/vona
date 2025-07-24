@@ -1,5 +1,5 @@
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-import { Entity, EntityBase, TableIdentity } from 'vona-module-a-database';
+import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
+import { Entity, EntityBase, TableIdentity } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapi';
 
 export interface IEntityOptionsAuth extends IDecoratorEntityOptions {}

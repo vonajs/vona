@@ -366,7 +366,7 @@ When creating a data table, the system will use `int` or `int64` as the type of 
 ``` typescript
 // modules
 config.modules = {
-  'a-database': {
+  'a-orm': {
     'table': {
       // number -> int
       // string -> int64

@@ -1,6 +1,6 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { Database } from 'vona-module-a-database';
+import { Database } from 'vona-module-a-orm';
 import { Api, Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';

@@ -1,6 +1,6 @@
 import type { PowerPartial } from 'vona';
 import type { EntityAuth, IAuthProviderClientRecord } from 'vona-module-a-auth';
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IAuthProviderSimpleClientOptions, IAuthProviderSimpleClientRecord } from './authProvider.simple.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';

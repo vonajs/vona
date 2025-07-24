@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { $relationMutate } from 'vona-module-a-database';
+import { $relationMutate } from 'vona-module-a-orm';
 import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelRelationsMutate.test.ts', () => {

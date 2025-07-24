@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IRoleBase } from 'vona-module-a-user';
 import type { IRole } from '../types/role.ts';
 import { cast } from 'vona';

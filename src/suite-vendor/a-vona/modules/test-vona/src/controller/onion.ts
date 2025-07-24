@@ -2,7 +2,7 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Core } from 'vona-module-a-core';
-import { Database } from 'vona-module-a-database';
+import { Database } from 'vona-module-a-orm';
 import { Api, Arg, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
@@ -15,7 +15,7 @@ export interface IControllerOptionsOnion extends IDecoratorControllerOptions {}
 @Controller<IControllerOptionsOnion>({ path: 'onion', tags: ['Onion'], meta: { mode: ['dev', 'test'] } })
 export class ControllerOnion extends BeanBase {
   @Web.get('/')
-  @Aspect.aopMethod('a-database:transaction', { enable: true, meta: { mode: 'dev' } })
+  @Aspect.aopMethod('a-orm:transaction', { enable: true, meta: { mode: 'dev' } })
   @Aspect.guardGlobal('a-user:passport', { public: true })
   index() {
     return this.ctx.db.inTransaction;
@@ -26,7 +26,7 @@ export class ControllerOnion extends BeanBase {
   @Aspect.guardGlobal('a-user:passport', { public: true })
   @Aspect.middlewareGlobal('a-core:gate', { gate: { mode: 'dev' } })
   @Core.gate({ gate: { mode: 'dev' } })
-  @Aspect.aopMethod('a-database:transaction', { isolationLevel: 'SERIALIZABLE', readOnly: true })
+  @Aspect.aopMethod('a-orm:transaction', { isolationLevel: 'SERIALIZABLE', readOnly: true })
   @Database.transaction({ isolationLevel: 'READ_COMMITTED', readOnly: false })
   @Api.body(v.optional(), z.string())
   echo(

@@ -1,4 +1,4 @@
-import { BeanModelBase, Model } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityUser } from '../entity/user.ts';
 
 @Model({ entity: EntityUser })

@@ -1,4 +1,4 @@
-import type { ServiceDb } from 'vona-module-a-database';
+import type { ServiceDb } from 'vona-module-a-orm';
 import type { TypeBroadcastOnSet } from './cacheMem.ts';
 
 export interface ICacheRedisGetOptions {

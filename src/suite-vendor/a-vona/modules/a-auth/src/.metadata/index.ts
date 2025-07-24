@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -9,7 +9,7 @@ export * from '../entity/authProvider.ts';
 import type { IEntityOptionsAuth } from '../entity/auth.ts';
 import type { IEntityOptionsAuthProvider } from '../entity/authProvider.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'a-auth:auth': IEntityOptionsAuth;
@@ -35,7 +35,7 @@ export type EntityAuthTableName = 'aAuth';
 export type EntityAuthProviderTableName = 'aAuthProvider';
 export type EntityAuthMeta=TypeEntityMeta<EntityAuth,EntityAuthTableName>;
 export type EntityAuthProviderMeta=TypeEntityMeta<EntityAuthProvider,EntityAuthProviderTableName>;
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'aAuth': never;
 'aAuthProvider': never;
@@ -58,7 +58,7 @@ export * from '../model/authProvider.ts';
 import type { IModelOptionsAuth } from '../model/auth.ts';
 import type { IModelOptionsAuthProvider } from '../model/authProvider.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'a-auth:auth': IModelOptionsAuth;
@@ -99,8 +99,8 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
-import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-auth' {
   export interface ModelAuth {
       [SymbolKeyEntity]: EntityAuth;
@@ -121,7 +121,7 @@ export interface ModelAuthProvider {
       count<T extends IModelCountParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'a-auth:auth': ModelAuth;
 'a-auth:authProvider': ModelAuthProvider;

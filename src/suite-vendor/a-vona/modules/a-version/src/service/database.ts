@@ -1,4 +1,4 @@
-import type { ServiceDatabaseClient } from 'vona-module-a-database';
+import type { ServiceDatabaseClient } from 'vona-module-a-orm';
 import chalk from 'chalk';
 import moment from 'moment';
 import { BeanBase } from 'vona';

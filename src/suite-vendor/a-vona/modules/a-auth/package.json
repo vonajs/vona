@@ -6,7 +6,7 @@
   "vonaModule": {
     "fileVersion": 1,
     "dependencies": {
-      "a-database": "5.0.0"
+      "a-orm": "5.0.0"
     },
     "onions": {
       "authProvider": {

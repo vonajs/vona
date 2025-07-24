@@ -1,6 +1,6 @@
 import type { ILocaleInfos } from 'vona';
-import type { IDecoratorEntityOptions } from 'vona-module-a-database';
-import { Entity, EntityBase } from 'vona-module-a-database';
+import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
+import { Entity, EntityBase } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapi';
 import { z } from 'zod';
 

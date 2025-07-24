@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** middleware: begin */
 export * from '../bean/middleware.instance.ts';
@@ -56,7 +56,7 @@ declare module 'vona-module-a-instance' {
 export * from '../entity/instance.ts';
 import type { IEntityOptionsInstance } from '../entity/instance.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'a-instance:instance': IEntityOptionsInstance;
@@ -77,7 +77,7 @@ export interface IModuleEntity {
 /** entity: begin */
 export type EntityInstanceTableName = 'aInstance';
 export type EntityInstanceMeta=TypeEntityMeta<EntityInstance,EntityInstanceTableName>;
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'aInstance': never;
   }
@@ -93,7 +93,7 @@ declare module 'vona-module-a-instance' {
 export * from '../model/instance.ts';
 import type { IModelOptionsInstance } from '../model/instance.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'a-instance:instance': IModelOptionsInstance;
@@ -121,8 +121,8 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
-import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-instance' {
   export interface ModelInstance {
       [SymbolKeyEntity]: EntityInstance;
@@ -134,7 +134,7 @@ declare module 'vona-module-a-instance' {
       count<T extends IModelCountParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'a-instance:instance': ModelInstance;
   }

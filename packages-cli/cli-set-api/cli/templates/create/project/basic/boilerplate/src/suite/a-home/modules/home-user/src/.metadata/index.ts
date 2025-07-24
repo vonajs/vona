@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -10,7 +10,7 @@ import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
 import type { IEntityOptionsUserRole } from '../entity/userRole.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'home-user:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
@@ -38,7 +38,7 @@ export interface IModuleEntity {
 export type EntityRoleTableName = 'homeRole';
 export type EntityUserTableName = 'homeUser';
 export type EntityUserRoleTableName = 'homeUserRole';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'homeRole': never;
 'homeUser': never;
@@ -65,8 +65,8 @@ export * from '../model/role.ts';
 export * from '../model/user.ts';
 export * from '../model/userRole.ts';
 
-import { type IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona-module-a-database' {
+import { type IDecoratorModelOptions } from 'vona-module-a-orm';
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'home-user:role': IDecoratorModelOptions;

@@ -8,7 +8,7 @@ declare module '@cabloy/cli' {
   }
 }
 
-const __snippet_import1 = 'import { $tableColumns } from \'vona-module-a-database\';\n';
+const __snippet_import1 = 'import { $tableColumns } from \'vona-module-a-orm\';\n';
 const __snippet_import2 = 'import { Entity<%=argv.resourceNameCapitalize%> } from \'../entity/<%=argv.resourceName%>.ts\';\n';
 const __snippet_update = '...$tableColumns(() => Entity<%=argv.resourceNameCapitalize%>, \'name\'),';
 

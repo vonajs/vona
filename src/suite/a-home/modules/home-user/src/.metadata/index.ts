@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-database';
-import type { TypeEntityMeta } from 'vona-module-a-database';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta } from 'vona-module-a-orm';
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
@@ -11,7 +11,7 @@ import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
 import type { IEntityOptionsUserRole } from '../entity/userRole.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'home-user:role': IEntityOptionsRole;
@@ -42,7 +42,7 @@ export type EntityUserRoleTableName = 'homeUserRole';
 export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 export type EntityUserRoleMeta=TypeEntityMeta<EntityUserRole,EntityUserRoleTableName>;
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'homeRole': never;
 'homeUser': never;
@@ -72,7 +72,7 @@ import type { IModelOptionsRole } from '../model/role.ts';
 import type { IModelOptionsUser } from '../model/user.ts';
 import type { IModelOptionsUserRole } from '../model/userRole.ts';
 import 'vona';
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'home-user:role': IModelOptionsRole;
@@ -126,8 +126,8 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-database';
-import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-home-user' {
   export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
@@ -157,7 +157,7 @@ export interface ModelUserRole {
       count<T extends IModelCountParams<EntityUserRole,ModelUserRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
     }
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'home-user:role': ModelRole;
 'home-user:user': ModelUser;

@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
-import { $relationDynamic } from 'vona-module-a-database';
+import { $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost, ModelPostContent, ModelUser } from 'vona-module-test-vona';
 
 describe('modelRelations.test.ts', () => {

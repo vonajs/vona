@@ -19,7 +19,7 @@ Context Menu - [Module Path]: `Vona Create/Model`
 ## Model Definition
 
 ``` typescript
-import { BeanModelBase, Model } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityStudent } from '../entity/student.ts';
 
 @Model({ entity: EntityStudent })

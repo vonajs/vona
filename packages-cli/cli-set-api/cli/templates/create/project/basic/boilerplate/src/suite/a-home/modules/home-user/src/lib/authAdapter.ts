@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IAuthBase } from 'vona-module-a-user';
 import type { IAuth } from '../types/auth.ts';
 import { cast } from 'vona';

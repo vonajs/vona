@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-database';
+import type { TableIdentity } from 'vona-module-a-orm';
 import * as passwordHash from 'password-hash-salt';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
