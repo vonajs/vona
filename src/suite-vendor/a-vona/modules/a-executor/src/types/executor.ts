@@ -1,6 +1,6 @@
 import type { ContextState, IInstanceRecord, ILocaleInfos, PowerPartial } from 'vona';
-import type { IDbInfo, ITransactionOptions } from 'vona-module-a-orm';
 import type { ConfigOnions } from 'vona-module-a-onion';
+import type { IDbInfo, ITransactionOptions } from 'vona-module-a-orm';
 
 export const SymbolRouterMiddleware = Symbol('SymbolRouterMiddleware');
 
