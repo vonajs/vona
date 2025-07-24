@@ -27,15 +27,16 @@ export class ServiceColumns extends BeanBase {
 
   async columns(tableName?: string): Promise<ITableColumns> {
     if (!tableName) return {};
-    let columns = this.serviceColumnsCache.columnsCache[tableName];
+    let columns = this.serviceColumnsCache.getColumnsCache(tableName);
     if (!columns) {
       const dialect = this.db.dialect;
       const connection = this.db.connection;
       const map = await connection(tableName).columnInfo();
-      columns = this.serviceColumnsCache.columnsCache[tableName] = {};
+      columns = {};
       for (const name in map) {
         columns[name] = dialect.coerceColumn(map[name]);
       }
+      this.serviceColumnsCache.setColumnsCache(tableName, columns);
     }
     return columns;
   }
