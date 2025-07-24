@@ -31,8 +31,12 @@ describe('modelRelationsMutate.test.ts', () => {
         roles: true,
       } });
       assert.equal(users.length, 1);
+      // delete: users
+      await scopeTest.model.user.deleteBulk(users.map(item => item.id));
+      const roleUsers = await scopeTest.model.roleUser.select({ where: { userId: users.map(item => item.id) } });
+      assert.equal(roleUsers.length, 0);
       // delete: roles
-      await scopeTest.model.role.deleteBulk(roles.map(item => item.id!));
+      await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
       const roles2 = await scopeTest.model.role.select({
         where: {
           id: roles.map(item => item.id!),
