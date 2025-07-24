@@ -100,13 +100,15 @@ describe('modelRelationsMutate.test.ts', () => {
           },
         ],
         roles: [
-          // insert
+          // delete
           { id: roles[1].id, deleted: true },
         ],
-      }, { include: {
-        posts: { include: { postContent: true } },
-        roles: true,
-      } });
+      }, {
+        include: {
+          posts: { include: { postContent: true } },
+          roles: true,
+        },
+      });
       // check
       const usersMutateCheck = await scopeTest.model.user.get({
         id: users[0].id,
@@ -115,12 +117,13 @@ describe('modelRelationsMutate.test.ts', () => {
           include: { postContent: true },
           orders: [['id', 'asc']],
         },
-        roles: true,
+        roles: { columns: '*' as any },
       } });
       assert.equal(usersMutateCheck?.posts.length, 2);
       assert.equal(usersMutateCheck?.posts[0].title, `${prefix}:postApple-mutate`);
       assert.equal(usersMutateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-mutate`);
       assert.equal(usersMutateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
+      console.log(usersUpdateCheck?.roles);
       assert.equal(usersUpdateCheck?.roles.length, 0);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
