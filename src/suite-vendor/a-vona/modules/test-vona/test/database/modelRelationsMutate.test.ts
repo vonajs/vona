@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
+import { includes } from 'zod/v4';
 
 describe('modelRelationsMutate.test.ts', () => {
   it('action:modelRelationsMutate', async () => {
@@ -34,13 +35,56 @@ describe('modelRelationsMutate.test.ts', () => {
         roles: true,
       } });
       assert.equal(users.length, 1);
+      // check
       const post = await scopeTest.model.post.get({ id: users[0].posts[0].id }, { include: { postContent: true } });
       assert.equal(post?.postContent?.content, `${prefix}:postContentApple`);
       // update: users
-      await scopeTest.model.user.update({
+      const _usersUpdate = await scopeTest.model.user.update({
         id: users[0].id,
-
-      }, { include: {} });
+        posts: [
+          // update
+          {
+            id: users[0].posts[0].id,
+            title: `${prefix}:postApple-update`,
+            postContent: {
+              id: users[0].posts[0].postContent?.id,
+              content: `${prefix}:postContentApple-update`,
+            },
+          },
+          // insert
+          {
+            title: `${prefix}:postPear`,
+            postContent: {
+              content: `${prefix}:postContentPear`,
+            },
+          },
+        ],
+        roles: [
+          // delete
+          { id: users[0].roles[0].id, deleted: true },
+          // insert
+          { id: roles[1].id },
+        ],
+      }, { include: {
+        posts: { include: { postContent: true } },
+        roles: true,
+      } });
+      // check
+      const usersUpdateCheck = await scopeTest.model.user.get({
+        id: users[0].id,
+      }, { include: {
+        posts: {
+          include: { postContent: true },
+          orders: [['id', 'asc']],
+        },
+        roles: true,
+      } });
+      assert.equal(usersUpdateCheck?.posts.length, 2);
+      assert.equal(usersUpdateCheck?.posts[0].title, `${prefix}:postApple-update`);
+      assert.equal(usersUpdateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-update`);
+      assert.equal(usersUpdateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
+      assert.equal(usersUpdateCheck?.roles.length, 1);
+      assert.equal(usersUpdateCheck?.roles[0].id, roles[1].id);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: { posts: true, roles: true },

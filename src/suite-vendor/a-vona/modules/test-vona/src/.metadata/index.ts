@@ -311,7 +311,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions } from 'vona-module-a-database';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions } from 'vona-module-a-database';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-database';
 declare module 'vona-module-test-vona' {
   export interface ModelCategory {
@@ -324,6 +324,8 @@ declare module 'vona-module-test-vona' {
       count<T extends IModelCountParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityCategory,ModelCategory>>(data?: TypeModelMutateRelationData<EntityCategory,ModelCategory, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityCategory,ModelCategory, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityCategory,ModelCategory>>(items: TypeModelMutateRelationData<EntityCategory,ModelCategory, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityCategory,ModelCategory, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityCategory,ModelCategory>>(data: TypeModelMutateRelationData<EntityCategory,ModelCategory, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityCategory,ModelCategory>>(items: TypeModelMutateRelationData<EntityCategory,ModelCategory, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategory, T>[]>;
       delete<T extends IModelDeleteOptions<EntityCategory,ModelCategory>>(where?: TypeModelWhere<EntityCategory>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityCategory,ModelCategory>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -337,6 +339,8 @@ export interface ModelPost {
       count<T extends IModelCountParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityPost,ModelPost>>(data?: TypeModelMutateRelationData<EntityPost,ModelPost, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityPost,ModelPost, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityPost,ModelPost>>(items: TypeModelMutateRelationData<EntityPost,ModelPost, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityPost,ModelPost, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityPost,ModelPost>>(data: TypeModelMutateRelationData<EntityPost,ModelPost, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityPost,ModelPost>>(items: TypeModelMutateRelationData<EntityPost,ModelPost, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPost,ModelPost, T>[]>;
       delete<T extends IModelDeleteOptions<EntityPost,ModelPost>>(where?: TypeModelWhere<EntityPost>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityPost,ModelPost>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -350,6 +354,8 @@ export interface ModelPostContent {
       count<T extends IModelCountParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityPostContent,ModelPostContent>>(data?: TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityPostContent,ModelPostContent>>(items: TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityPostContent,ModelPostContent>>(data: TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityPostContent,ModelPostContent>>(items: TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>[]>;
       delete<T extends IModelDeleteOptions<EntityPostContent,ModelPostContent>>(where?: TypeModelWhere<EntityPostContent>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityPostContent,ModelPostContent>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -363,6 +369,8 @@ export interface ModelRole {
       count<T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityRole,ModelRole>>(data?: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityRole,ModelRole, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityRole,ModelRole, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityRole,ModelRole>>(data: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>[]>;
       delete<T extends IModelDeleteOptions<EntityRole,ModelRole>>(where?: TypeModelWhere<EntityRole>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -376,6 +384,8 @@ export interface ModelRoleUser {
       count<T extends IModelCountParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityRoleUser,ModelRoleUser>>(data?: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityRoleUser,ModelRoleUser>>(items: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityRoleUser,ModelRoleUser>>(data: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityRoleUser,ModelRoleUser>>(items: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[]>;
       delete<T extends IModelDeleteOptions<EntityRoleUser,ModelRoleUser>>(where?: TypeModelWhere<EntityRoleUser>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityRoleUser,ModelRoleUser>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -389,6 +399,8 @@ export interface ModelTest {
       count<T extends IModelCountParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityTest,ModelTest>>(data?: TypeModelMutateRelationData<EntityTest,ModelTest, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityTest,ModelTest, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityTest,ModelTest>>(items: TypeModelMutateRelationData<EntityTest,ModelTest, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityTest,ModelTest, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityTest,ModelTest>>(data: TypeModelMutateRelationData<EntityTest,ModelTest, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityTest,ModelTest>>(items: TypeModelMutateRelationData<EntityTest,ModelTest, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityTest,ModelTest, T>[]>;
       delete<T extends IModelDeleteOptions<EntityTest,ModelTest>>(where?: TypeModelWhere<EntityTest>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityTest,ModelTest>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -402,6 +414,8 @@ export interface ModelTestDynamicTable {
       count<T extends IModelCountParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityTest,ModelTestDynamicTable>>(data?: TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityTest,ModelTestDynamicTable>>(items: TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityTest,ModelTestDynamicTable>>(data: TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityTest,ModelTestDynamicTable>>(items: TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>[]>;
       delete<T extends IModelDeleteOptions<EntityTest,ModelTestDynamicTable>>(where?: TypeModelWhere<EntityTest>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityTest,ModelTestDynamicTable>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
@@ -415,6 +429,8 @@ export interface ModelUser {
       count<T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityUser,ModelUser>>(data?: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUser, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUser, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityUser,ModelUser>>(data: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<void>;
+      updateBulk<T extends IModelUpdateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
       delete<T extends IModelDeleteOptions<EntityUser,ModelUser>>(where?: TypeModelWhere<EntityUser>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<void>;
     }
