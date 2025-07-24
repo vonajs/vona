@@ -85,6 +85,43 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(usersUpdateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
       assert.equal(usersUpdateCheck?.roles.length, 1);
       assert.equal(usersUpdateCheck?.roles[0].id, roles[1].id);
+      // mutate: users
+      const _usersMutate = await scopeTest.model.user.mutate({
+        id: users[0].id,
+        posts: [
+          // update
+          {
+            id: users[0].posts[0].id,
+            title: `${prefix}:postApple-mutate`,
+            postContent: {
+              id: users[0].posts[0].postContent?.id,
+              content: `${prefix}:postContentApple-mutate`,
+            },
+          },
+        ],
+        roles: [
+          // insert
+          { id: roles[1].id, deleted: true },
+        ],
+      }, { include: {
+        posts: { include: { postContent: true } },
+        roles: true,
+      } });
+      // check
+      const usersMutateCheck = await scopeTest.model.user.get({
+        id: users[0].id,
+      }, { include: {
+        posts: {
+          include: { postContent: true },
+          orders: [['id', 'asc']],
+        },
+        roles: true,
+      } });
+      assert.equal(usersMutateCheck?.posts.length, 2);
+      assert.equal(usersMutateCheck?.posts[0].title, `${prefix}:postApple-mutate`);
+      assert.equal(usersMutateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-mutate`);
+      assert.equal(usersMutateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
+      assert.equal(usersUpdateCheck?.roles.length, 0);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: { posts: true, roles: true },

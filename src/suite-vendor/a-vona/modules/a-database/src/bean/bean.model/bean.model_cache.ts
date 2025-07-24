@@ -67,13 +67,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return res;
   }
 
-  async mutate<T extends IModelMutateOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<TRecord> {
+  async mutate<T extends IModelMutateOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<Partial<TRecord>> {
     if (!data) data = {};
     const items = await this.mutateBulk([data], options);
     return items[0];
   }
 
-  async mutateBulk<T extends IModelMutateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
+  async mutateBulk<T extends IModelMutateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
     return await this.__mutateBulk_raw(undefined, items, options);
   }
 
