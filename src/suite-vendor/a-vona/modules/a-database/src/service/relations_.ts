@@ -48,18 +48,19 @@ export class ServiceRelations extends BeanBase {
   }
 
   public async handleRelationsMutate<TRecord extends {}>(
+    entitiesResult: TRecord[],
     entities: TRecord[],
-    includeWrapper?: IModelRelationIncludeWrapper,
-    methodOptions?: IModelMethodOptions,
+    includeWrapper: IModelRelationIncludeWrapper | undefined,
+    methodOptions: IModelMethodOptions | undefined,
   ) {
     if (entities.length === 0) return entities;
     // relations
     const relations = this.__handleRelationsCollection(includeWrapper);
     if (!relations) return entities;
     for (const relation of relations) {
-      entities = await this.__handleRelationMutate(entities, relation, methodOptions);
+      entitiesResult = await this.__handleRelationMutate(entitiesResult, entities, relation, methodOptions);
     }
-    return entities;
+    return entitiesResult;
   }
 
   public async handleRelationsDelete(
@@ -192,6 +193,7 @@ export class ServiceRelations extends BeanBase {
   }
 
   private async __handleRelationMutate<TRecord extends {}>(
+    entitiesResult: TRecord[],
     entities: TRecord[],
     relation: [string, any, any, any],
     methodOptions?: IModelMethodOptions,
@@ -209,10 +211,12 @@ export class ServiceRelations extends BeanBase {
         }
       }
       children = await modelTarget.mutateBulk(children, methodOptionsReal);
-      const result: TRecord[] = entities.concat();
-      for (const entity of result) {
+      const result: TRecord[] = entitiesResult.concat();
+      for (let index = 0; index < entities.length; index++) {
+        const entityResult = result[index];
+        const entity = entities[index];
         if (entity[relationName]) {
-          entity[relationName] = children.find(item => item[key] === cast(entity).id);
+          entityResult[relationName] = children.find(item => item[key] === cast(entity).id);
         }
       }
       return result;
@@ -230,13 +234,15 @@ export class ServiceRelations extends BeanBase {
         }
       }
       children = await modelTarget.mutateBulk(children, methodOptionsReal);
-      const result: TRecord[] = entities.concat();
-      for (const entity of result) {
+      const result: TRecord[] = entitiesResult.concat();
+      for (let index = 0; index < entities.length; index++) {
+        const entityResult = result[index];
+        const entity = entities[index];
         if (entity[relationName]) {
-          entity[relationName] = [];
+          entityResult[relationName] = [];
           for (const child of children) {
             if (child[key] === cast(entity).id) {
-              entity[relationName].push(child);
+              entityResult[relationName].push(child);
             }
           }
         }
@@ -271,13 +277,15 @@ export class ServiceRelations extends BeanBase {
         }
       }
       children = await modelTargetMiddle.mutateBulk(children, methodOptionsReal);
-      const result: TRecord[] = entities.concat();
-      for (const entity of result) {
+      const result: TRecord[] = entitiesResult.concat();
+      for (let index = 0; index < entities.length; index++) {
+        const entityResult = result[index];
+        const entity = entities[index];
         if (entity[relationName]) {
-          entity[relationName] = [];
+          entityResult[relationName] = [];
           for (const child of children) {
             if (child[keyFrom] === cast(entity).id) {
-              entity[relationName].push({ id: child[keyTo] });
+              entityResult[relationName].push({ id: child[keyTo] });
             }
           }
         }

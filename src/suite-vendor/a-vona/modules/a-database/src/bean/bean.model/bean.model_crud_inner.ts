@@ -153,9 +153,9 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     const datasOriginal: any[] = [];
     for (const dataTemp of datasTemp) {
       // first
-      this._prepareInsertDataByOptions(dataTemp, options);
+      const dataTemp2 = this._prepareInsertDataByOptions(dataTemp, options);
       // then
-      const [dataNew, dataNewOriginal] = await this.prepareData(table, dataTemp);
+      const [dataNew, dataNewOriginal] = await this.prepareData(table, dataTemp2);
       datas.push(dataNew);
       datasOriginal.push(dataNewOriginal);
     }

@@ -209,25 +209,27 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   protected _prepareInsertDataByOptions(data, options?: IModelMethodOptionsGeneral) {
+    const result = Object.assign({}, data);
     // disableInstance: should check if specified
     const columnNameInstance = 'iid';
-    if (data[columnNameInstance] === undefined) {
+    if (result[columnNameInstance] === undefined) {
       if (!this._checkDisableInstanceByOptions(options)) {
-        data[columnNameInstance] = this.ctx.instance.id;
+        result[columnNameInstance] = this.ctx.instance.id;
       }
     }
     // disableDeleted: should check if specified
     const columnNameDeleted = 'deleted';
-    if (data[columnNameDeleted] === undefined) {
+    if (result[columnNameDeleted] === undefined) {
       if (!this._checkDisableDeletedByOptions(options)) {
-        data[columnNameDeleted] = false;
+        result[columnNameDeleted] = false;
       }
     }
     // createdAt/updatedAt
     for (const key of ['createdAt', 'updatedAt']) {
-      if (data[key] === undefined) {
-        data[key] = new Date();
+      if (result[key] === undefined) {
+        result[key] = new Date();
       }
     }
+    return result;
   }
 }

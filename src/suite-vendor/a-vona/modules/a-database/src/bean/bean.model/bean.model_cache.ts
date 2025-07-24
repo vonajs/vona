@@ -44,8 +44,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async insertBulk<T extends IModelInsertOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
-    const itemsNew = await this.__insertBulk_raw(undefined, items, options);
-    return await this.relations.handleRelationsMutate(itemsNew, options as any, options);
+    const itemsResult = await this.__insertBulk_raw(undefined, items, options);
+    const itemsNew = items.map((item, index) => {
+      return Object.assign({}, item, { id: cast(itemsResult[index]).id });
+    });
+    return await this.relations.handleRelationsMutate(itemsResult, itemsNew as any, options as any, options);
   }
 
   async __insertBulk_raw(
@@ -112,11 +115,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const itemsMutate = itemsInsert.map((item, index) => {
       return Object.assign({}, item, { id: cast(itemsInsertNew[index]).id });
     }).concat(itemsUpdate as any);
+    let itemsMutateResult = itemsInsertNew.concat(itemsUpdate as any);
     const indexesMutate = indexesInsert.concat(indexesUpdate);
-    const itemsMutateNew = await this.relations.handleRelationsMutate(itemsMutate, options as any, options);
+    itemsMutateResult = await this.relations.handleRelationsMutate(itemsMutateResult, itemsMutate as any, options as any, options);
     let result: TRecord[] = [];
     for (let index = 0; index < indexesMutate.length; index++) {
-      result[indexesMutate[index]] = itemsMutateNew[index] as any;
+      result[indexesMutate[index]] = itemsMutateResult[index] as any;
     }
     result = result.filter(item => !!item); // fitler deleted items
     // delete
@@ -262,12 +266,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async update<T extends IModelUpdateOptions<TRecord>>(data: Partial<TRecord>, options?: T): Promise<void> {
     await this.__update_raw(undefined, data, options);
-    await this.relations.handleRelationsMutate([data], options as any, options);
+    await this.relations.handleRelationsMutate([data], [data], options as any, options);
   }
 
   async updateBulk<T extends IModelUpdateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
     await this.__updateBulk_raw(undefined, items, options);
-    return await this.relations.handleRelationsMutate(items, options as any, options);
+    return await this.relations.handleRelationsMutate(items, items, options as any, options);
   }
 
   async __updateBulk_raw<T extends IModelUpdateOptions<TRecord>>(
