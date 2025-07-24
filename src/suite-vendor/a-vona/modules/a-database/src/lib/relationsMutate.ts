@@ -1,7 +1,7 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
-import type { IModelRelationBelongsToDynamic, IModelRelationBelongsToManyDynamic, IModelRelationHasManyDynamic, IModelRelationHasOneDynamic } from '../types/relationsDefDynamic.ts';
+import type { IModelRelationBelongsToManyDynamic, IModelRelationHasManyDynamic, IModelRelationHasOneDynamic } from '../types/relationsDefDynamic.ts';
 import type { IModelRelationOptionsManyMutate, IModelRelationOptionsOneMutate } from '../types/relationsDefMutate.ts';
 
 function hasOne<
@@ -15,18 +15,18 @@ function hasOne<
   return { type: 'hasOne', model: classModel, key, options };
 }
 
-function belongsTo<
-  MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsOneMutate<TypeModelOfModelLike<MODEL>>,
->(
-  _classModelSelf: TypeModelClassLike<MODELSelf>,
-  classModel: TypeModelClassLike<MODEL>,
-  key: keyof TypeModelOfModelLike<MODELSelf>[TypeSymbolKeyEntity],
-  options?: OPTIONS,
-): IModelRelationBelongsToDynamic<MODELSelf, MODEL, OPTIONS> {
-  return { type: 'belongsTo', model: classModel, key, options };
-}
+// function belongsTo<
+//   MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
+//   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+//   OPTIONS extends IModelRelationOptionsOneMutate<TypeModelOfModelLike<MODEL>>,
+// >(
+//   _classModelSelf: TypeModelClassLike<MODELSelf>,
+//   classModel: TypeModelClassLike<MODEL>,
+//   key: keyof TypeModelOfModelLike<MODELSelf>[TypeSymbolKeyEntity],
+//   options?: OPTIONS,
+// ): IModelRelationBelongsToDynamic<MODELSelf, MODEL, OPTIONS> {
+//   return { type: 'belongsTo', model: classModel, key, options };
+// }
 
 function hasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
@@ -54,7 +54,7 @@ function belongsToMany<
 
 export const $relationMutate = {
   hasOne,
-  belongsTo,
+  // belongsTo,
   hasMany,
   belongsToMany,
 };
