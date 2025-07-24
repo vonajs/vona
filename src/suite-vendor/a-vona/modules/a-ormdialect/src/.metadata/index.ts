@@ -19,7 +19,7 @@ declare module 'vona-module-a-ormdialect' {
   
         export interface DatabaseDialectMysql {
           /** @internal */
-          get scope(): ScopeModuleADatabasedialect;
+          get scope(): ScopeModuleAOrmdialect;
         }
 
           export interface DatabaseDialectMysql {
@@ -29,7 +29,7 @@ declare module 'vona-module-a-ormdialect' {
 
         export interface DatabaseDialectPg {
           /** @internal */
-          get scope(): ScopeModuleADatabasedialect;
+          get scope(): ScopeModuleAOrmdialect;
         }
 
           export interface DatabaseDialectPg {
@@ -56,20 +56,20 @@ import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
-export class ScopeModuleADatabasedialect extends BeanScopeBase {}
+export class ScopeModuleAOrmdialect extends BeanScopeBase {}
 
-export interface ScopeModuleADatabasedialect {
+export interface ScopeModuleAOrmdialect {
   util: BeanScopeUtil;
 }
 
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-ormdialect': ScopeModuleADatabasedialect;
+    'a-ormdialect': ScopeModuleAOrmdialect;
   }
 
   export interface IBeanScopeContainer {
-    databasedialect: ScopeModuleADatabasedialect;
+    ormdialect: ScopeModuleAOrmdialect;
   }
   
   
