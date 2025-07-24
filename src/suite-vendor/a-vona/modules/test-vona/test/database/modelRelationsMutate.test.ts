@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { $relationDynamic, $relationMutate } from 'vona-module-a-database';
+import { $relationMutate } from 'vona-module-a-database';
 import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelRelationsMutate.test.ts', () => {
@@ -171,10 +171,12 @@ describe('modelRelationsMutate.test.ts', () => {
             id: roles[0].id,
           }],
         },
-      ], { include: {
-        posts: { include: { postContent: true } },
-        roles: true,
-      } });
+      ], {
+        with: {
+          posts: $relationMutate.hasMany(ModelPost, 'userId', { include: { postContent: true } }),
+          roles: $relationMutate.belongsToMany(ModelRoleUser, ModelRole, 'userId', 'roleId'),
+        },
+      });
       assert.equal(users.length, 1);
       // check
       const post = await scopeTest.model.post.get({ id: users[0].posts[0].id }, { include: { postContent: true } });
@@ -206,10 +208,12 @@ describe('modelRelationsMutate.test.ts', () => {
           // insert
           { id: roles[1].id },
         ],
-      }, { include: {
-        posts: { include: { postContent: true } },
-        roles: true,
-      } });
+      }, {
+        with: {
+          posts: $relationMutate.hasMany(ModelPost, 'userId', { include: { postContent: true } }),
+          roles: $relationMutate.belongsToMany(ModelRoleUser, ModelRole, 'userId', 'roleId'),
+        },
+      });
       // check
       const usersUpdateCheck = await scopeTest.model.user.get({
         id: users[0].id,
@@ -246,9 +250,9 @@ describe('modelRelationsMutate.test.ts', () => {
           { id: roles[1].id, deleted: true },
         ],
       }, {
-        include: {
-          posts: { include: { postContent: true } },
-          roles: true,
+        with: {
+          posts: $relationMutate.hasMany(ModelPost, 'userId', { include: { postContent: true } }),
+          roles: $relationMutate.belongsToMany(ModelRoleUser, ModelRole, 'userId', 'roleId'),
         },
       });
       // check
@@ -268,7 +272,10 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(usersMutateCheck?.roles.length, 0);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
-        include: { posts: true, roles: true },
+        with: {
+          posts: $relationMutate.hasMany(ModelPost, 'userId', { include: { postContent: true } }),
+          roles: $relationMutate.belongsToMany(ModelRoleUser, ModelRole, 'userId', 'roleId'),
+        },
       });
       const roleUsers = await scopeTest.model.roleUser.select({ where: { userId: users.map(item => item.id) } });
       assert.equal(roleUsers.length, 0);
