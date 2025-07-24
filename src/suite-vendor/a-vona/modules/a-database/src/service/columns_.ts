@@ -43,16 +43,17 @@ export class ServiceColumns extends BeanBase {
 
   async defaultData(tableName?: string): Promise<ITableColumnsDefault> {
     if (!tableName) return {};
-    if (!this.serviceColumnsCache.columnsDefaultCache[tableName]) {
-      const data = {};
+    let data = this.serviceColumnsCache.getColumnsDefaultCache(tableName);
+    if (!data) {
+      data = {};
       // columns
       const columns = await this.columns(tableName);
       for (const columnName in columns) {
         data[columnName] = columns[columnName].default;
       }
-      this.serviceColumnsCache.columnsDefaultCache[tableName] = data;
+      this.serviceColumnsCache.setColumnsDefaultCache(tableName, data);
     }
-    return this.serviceColumnsCache.columnsDefaultCache[tableName];
+    return data;
   }
 
   columnsClear(tableName?: string) {

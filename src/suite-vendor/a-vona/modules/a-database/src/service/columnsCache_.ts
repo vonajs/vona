@@ -28,8 +28,16 @@ export class ServiceColumnsCache extends BeanBase {
     this._onColumnsClearCancel?.();
   }
 
-  get columnsDefaultCache() {
-    return this[SymbolColumnsDefaultCache];
+  getColumnsDefaultCache(table: string) {
+    return this[SymbolColumnsDefaultCache][table];
+  }
+
+  setColumnsDefaultCache(table: string, data: ITableColumnsDefault) {
+    this[SymbolColumnsDefaultCache][table] = data;
+  }
+
+  deleteColumnsDefaultCache(table: string) {
+    delete this[SymbolColumnsDefaultCache][table];
   }
 
   getColumnsCache(table: string) {
@@ -48,7 +56,7 @@ export class ServiceColumnsCache extends BeanBase {
     if (tableName) {
       const exists = this.getColumnsCache(tableName);
       this.deleteColumnsCache(tableName);
-      delete this.columnsDefaultCache[tableName];
+      this.deleteColumnsDefaultCache(tableName);
       return exists;
     } else {
       const exists = Object.keys(this[SymbolColumnsCache]).length > 0;
