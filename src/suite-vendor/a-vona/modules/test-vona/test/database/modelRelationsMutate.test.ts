@@ -1,6 +1,8 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
+import { $relationDynamic, $relationMutate } from 'vona-module-a-database';
+import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelRelationsMutate.test.ts', () => {
   it('action:modelRelationsMutate', async () => {
@@ -139,6 +141,39 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(roles2.length, 2);
       assert.equal(roles2[0].id !== undefined, true);
       assert.equal(roles2[0].deleted, true);
+    });
+  });
+
+  it('action:modelRelationsMutateWith', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      const prefix = 'action:modelRelationsMutateWith';
+      // scope
+      const scopeTest = app.bean.scope('test-vona');
+      // insert: roles
+      const roles = await scopeTest.model.role.insertBulk([
+        { name: `${prefix}:family` },
+        { name: `${prefix}:friend` },
+      ]);
+      assert.equal(roles.length, 2);
+      assert.equal(roles[0].id !== undefined, true);
+      // insert: users
+      const users = await scopeTest.model.user.insertBulk([
+        {
+          name: `${prefix}:tom`,
+          posts: [{ postContent: { content: '' } }],
+          roles: [{
+            // id: roles[0].id,
+
+          }],
+
+        },
+      ], {
+        with: {
+          posts: $relationMutate.hasMany(ModelPost, 'userId', { include: { postContent: true } }),
+          roles: $relationMutate.belongsToMany(() => ModelRoleUser, ModelRole, 'userId', 'roleId'),
+        },
+      });
+      assert.equal(users.length, 1);
     });
   });
 });
