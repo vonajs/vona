@@ -9,8 +9,8 @@ const SymbolColumnsDefaultCache = Symbol('SymbolColumnsDefaultCache');
 @Service()
 export class ServiceColumnsCache extends BeanBase {
   clientName: keyof IDatabaseClientRecord;
-  private [SymbolColumnsCache]: Record<string, ITableColumns> = {};
-  private [SymbolColumnsDefaultCache]: Record<string, ITableColumnsDefault> = {};
+  protected [SymbolColumnsCache]: Record<string, ITableColumns> = {};
+  protected [SymbolColumnsDefaultCache]: Record<string, ITableColumnsDefault> = {};
   private _onColumnsClearCancel?: Function;
 
   /** real client name */
