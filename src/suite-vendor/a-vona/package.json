@@ -18,7 +18,7 @@
     "vona-module-a-caching": "workspace:^",
     "vona-module-a-core": "^5.0.45",
     "vona-module-a-database": "^5.0.36",
-    "vona-module-a-databasedialect": "^5.0.12",
+    "vona-module-a-autumndialect": "^5.0.12",
     "vona-module-a-election": "^5.0.13",
     "vona-module-a-error": "^5.0.14",
     "vona-module-a-event": "^5.0.13",

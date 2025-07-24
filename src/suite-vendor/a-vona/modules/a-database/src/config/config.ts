@@ -28,9 +28,9 @@ export function config(_app: VonaApplication) {
       disableUpdateTime: false,
     },
     dialects: {
-      mysql: 'a-databasedialect.databaseDialect.mysql',
-      mysql2: 'a-databasedialect.databaseDialect.mysql3',
-      pg: 'a-databasedialect.databaseDialect.pg',
+      mysql: 'a-autumndialect.databaseDialect.mysql',
+      mysql2: 'a-autumndialect.databaseDialect.mysql3',
+      pg: 'a-autumndialect.databaseDialect.pg',
     } as unknown as TypeDataBaseConfigDialects,
     summer: {
       enable: true,

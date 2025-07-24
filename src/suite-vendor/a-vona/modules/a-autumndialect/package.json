@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-a-databasedialect",
+  "name": "vona-module-a-autumndialect",
   "type": "module",
   "version": "5.0.12",
-  "title": "a-databasedialect",
+  "title": "a-autumndialect",
   "vonaModule": {
     "dependencies": {}
   },

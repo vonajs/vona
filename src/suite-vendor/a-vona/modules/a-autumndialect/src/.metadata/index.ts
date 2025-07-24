@@ -8,14 +8,14 @@ import 'vona';
 declare module 'vona' {
   
     export interface IDatabaseDialectRecord {
-      'a-databasedialect:mysql': never;
-'a-databasedialect:mysql3': never;
-'a-databasedialect:pg': never;
+      'a-autumndialect:mysql': never;
+'a-autumndialect:mysql3': never;
+'a-autumndialect:pg': never;
     }
 
   
 }
-declare module 'vona-module-a-databasedialect' {
+declare module 'vona-module-a-autumndialect' {
   
         export interface DatabaseDialectMysql {
           /** @internal */
@@ -23,8 +23,8 @@ declare module 'vona-module-a-databasedialect' {
         }
 
           export interface DatabaseDialectMysql {
-            get $beanFullName(): 'a-databasedialect.databaseDialect.mysql';
-            get $onionName(): 'a-databasedialect:mysql';
+            get $beanFullName(): 'a-autumndialect.databaseDialect.mysql';
+            get $onionName(): 'a-autumndialect:mysql';
           }
 
         export interface DatabaseDialectPg {
@@ -33,8 +33,8 @@ declare module 'vona-module-a-databasedialect' {
         }
 
           export interface DatabaseDialectPg {
-            get $beanFullName(): 'a-databasedialect.databaseDialect.pg';
-            get $onionName(): 'a-databasedialect:pg';
+            get $beanFullName(): 'a-autumndialect.databaseDialect.pg';
+            get $onionName(): 'a-autumndialect:pg';
           } 
 }
 /** databaseDialect: end */
@@ -45,9 +45,9 @@ import type { DatabaseDialectPg } from '../bean/databaseDialect.pg.ts';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-databasedialect.databaseDialect.mysql': DatabaseDialectMysql;
-'a-databasedialect.databaseDialect.mysql3': DatabaseDialectMysql3;
-'a-databasedialect.databaseDialect.pg': DatabaseDialectPg;
+    'a-autumndialect.databaseDialect.mysql': DatabaseDialectMysql;
+'a-autumndialect.databaseDialect.mysql3': DatabaseDialectMysql3;
+'a-autumndialect.databaseDialect.pg': DatabaseDialectPg;
   }
 }
 /** databaseDialect: end */
@@ -65,7 +65,7 @@ export interface ScopeModuleADatabasedialect {
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-databasedialect': ScopeModuleADatabasedialect;
+    'a-autumndialect': ScopeModuleADatabasedialect;
   }
 
   export interface IBeanScopeContainer {
