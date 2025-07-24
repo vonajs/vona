@@ -47,6 +47,13 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
         table.text(entityPostContent.content);
         table.tableIdentity(entityPostContent.postId);
       });
+      // testVonaCategory
+      const entityCategory = this.scope.entity.category;
+      await this.bean.model.createTable(entityCategory.$table, table => {
+        table.basicFields();
+        table.string(entityCategory.name, 255);
+        table.tableIdentity(entityCategory.categoryIdParent);
+      });
     }
   }
 }

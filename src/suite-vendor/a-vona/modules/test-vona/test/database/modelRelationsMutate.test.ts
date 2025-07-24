@@ -291,4 +291,36 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(roles2[0].deleted, true);
     });
   });
+
+  it('action:modelRelationsMutateTree', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      const prefix = 'action:modelRelationsMutateTree';
+      // scope
+      const scopeTest = app.bean.scope('test-vona');
+      // create: categoryTree
+      const categoryTree = await scopeTest.model.category.insert({
+        name: `${prefix}:1`,
+        children: [
+          {
+            name: `${prefix}:1-1`,
+            children: [
+              { name: `${prefix}:1-1-1` },
+              { name: `${prefix}:1-1-2` },
+            ],
+          },
+          {
+            name: `${prefix}:1-2`,
+          },
+        ],
+      });
+      const categoryTreeCheck = await scopeTest.model.category.get({ id: categoryTree.id });
+      assert.equal(categoryTree.id, categoryTreeCheck?.id);
+      const children = categoryTree.children.sort((a, b) => Number(a.id) - Number(b.id));
+      const childrenCheck = categoryTreeCheck!.children.sort((a, b) => Number(a.id) - Number(b.id));
+      assert.equal(children[0].name, childrenCheck[0].name);
+      assert.equal(children[0].name, `${prefix}:1-1`);
+      assert.equal(children[0].children?.length, childrenCheck[0].children.length);
+      assert.equal(children[0].children?.length, 2);
+    });
+  });
 });
