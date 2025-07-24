@@ -9,7 +9,7 @@ export function ExtendSchemaBuilder(app: VonaApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase', 'fetchIndexes'].forEach(method => {
     knex.SchemaBuilder.extend(method, async function (...args) {
       const client = cast<Knex.Client>(cast(this).client).config.client as keyof IDatabaseClientDialectRecord;
-      const dialect = app.bean.scope('a-database').service.database.getDialect(client);
+      const dialect = app.bean.scope('a-orm').service.database.getDialect(client);
       return await dialect[method](this, ...args);
     });
   });

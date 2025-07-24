@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-a-database",
+  "name": "vona-module-a-orm",
   "type": "module",
   "version": "5.0.36",
-  "title": "a-database",
+  "title": "a-orm",
   "vonaModule": {
     "capabilities": {
       "monkey": true
@@ -17,7 +17,7 @@
       "entity": {
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorEntityOptions",
-        "optionsGlobalInterfaceFrom": "vona-module-a-database",
+        "optionsGlobalInterfaceFrom": "vona-module-a-orm",
         "scopeResource": true,
         "scopeResourceTypeTemplate": "{{className}}Meta",
         "boilerplate": "cli/entity/boilerplate",
@@ -26,7 +26,7 @@
       "model": {
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorModelOptions",
-        "optionsGlobalInterfaceFrom": "vona-module-a-database",
+        "optionsGlobalInterfaceFrom": "vona-module-a-orm",
         "scopeResource": true,
         "boilerplate": "cli/model/boilerplate",
         "metadataCustom": "cli/model/metadata/generate.ts"

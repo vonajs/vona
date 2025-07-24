@@ -6,12 +6,12 @@ import 'vona';
 declare module 'vona-module-a-aspect' {
   
     export interface IAopMethodRecord {
-      'a-database:transaction': IAopMethodOptionsTransaction;
+      'a-orm:transaction': IAopMethodOptionsTransaction;
     }
 
   
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
         export interface AopMethodTransaction {
           /** @internal */
@@ -19,8 +19,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface AopMethodTransaction {
-            get $beanFullName(): 'a-database.aopMethod.transaction';
-            get $onionName(): 'a-database:transaction';
+            get $beanFullName(): 'a-orm.aopMethod.transaction';
+            get $onionName(): 'a-orm:transaction';
           } 
 }
 /** aopMethod: end */
@@ -35,7 +35,7 @@ declare module 'vona' {
   
   
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
         export interface BeanDatabase {
           /** @internal */
@@ -74,12 +74,12 @@ import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-database:database': never;
+      'a-orm:database': never;
     }
 
   
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
         export interface ServiceDatabase {
           /** @internal */
@@ -87,8 +87,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface ServiceDatabase {
-            get $beanFullName(): 'a-database.service.database';
-            get $onionName(): 'a-database:database';
+            get $beanFullName(): 'a-orm.service.database';
+            get $onionName(): 'a-orm:database';
           } 
 }
 /** service: end */
@@ -103,7 +103,7 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-database.service.database': ServiceDatabase;
+    'a-orm.service.database': ServiceDatabase;
   }
 }
 /** service: end */
@@ -115,13 +115,13 @@ import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   
     export interface IBroadcastRecord {
-      'a-database:columnsClear': IDecoratorBroadcastOptions;
-'a-database:databaseClientReload': IDecoratorBroadcastOptions;
+      'a-orm:columnsClear': IDecoratorBroadcastOptions;
+'a-orm:databaseClientReload': IDecoratorBroadcastOptions;
     }
 
   
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
         export interface BroadcastColumnsClear {
           /** @internal */
@@ -129,8 +129,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface BroadcastColumnsClear {
-            get $beanFullName(): 'a-database.broadcast.columnsClear';
-            get $onionName(): 'a-database:columnsClear';
+            get $beanFullName(): 'a-orm.broadcast.columnsClear';
+            get $onionName(): 'a-orm:columnsClear';
           }
 
         export interface BroadcastDatabaseClientReload {
@@ -139,8 +139,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface BroadcastDatabaseClientReload {
-            get $beanFullName(): 'a-database.broadcast.databaseClientReload';
-            get $onionName(): 'a-database:databaseClientReload';
+            get $beanFullName(): 'a-orm.broadcast.databaseClientReload';
+            get $onionName(): 'a-orm:databaseClientReload';
           } 
 }
 /** broadcast: end */
@@ -162,7 +162,7 @@ declare module 'vona' {
   
   
 }
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   
         export interface EventClientNameReal {
           /** @internal */
@@ -170,8 +170,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface EventClientNameReal {
-            get $beanFullName(): 'a-database.event.clientNameReal';
-            get $onionName(): 'a-database:clientNameReal';
+            get $beanFullName(): 'a-orm.event.clientNameReal';
+            get $onionName(): 'a-orm:clientNameReal';
           }
 
         export interface EventColumnsClear {
@@ -180,8 +180,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface EventColumnsClear {
-            get $beanFullName(): 'a-database.event.columnsClear';
-            get $onionName(): 'a-database:columnsClear';
+            get $beanFullName(): 'a-orm.event.columnsClear';
+            get $onionName(): 'a-orm:columnsClear';
           }
 
         export interface EventDatabaseClientReload {
@@ -190,8 +190,8 @@ declare module 'vona-module-a-database' {
         }
 
           export interface EventDatabaseClientReload {
-            get $beanFullName(): 'a-database.event.databaseClientReload';
-            get $onionName(): 'a-database:databaseClientReload';
+            get $beanFullName(): 'a-orm.event.databaseClientReload';
+            get $onionName(): 'a-orm:databaseClientReload';
           } 
 }
 /** event: end */
@@ -212,9 +212,9 @@ import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadRe
 import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-database:clientNameReal': EventOn<TypeEventClientNameRealData, TypeEventClientNameRealResult>;
-'a-database:columnsClear': EventOn<TypeEventColumnsClearData, TypeEventColumnsClearResult>;
-'a-database:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
+    'a-orm:clientNameReal': EventOn<TypeEventClientNameRealData, TypeEventClientNameRealResult>;
+'a-orm:columnsClear': EventOn<TypeEventColumnsClearData, TypeEventColumnsClearResult>;
+'a-orm:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
   }
 }
 /** event: end */
@@ -257,7 +257,7 @@ event: IModuleEvent;
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-database': ScopeModuleADatabase;
+    'a-orm': ScopeModuleADatabase;
   }
 
   export interface IBeanScopeContainer {
@@ -265,15 +265,15 @@ declare module 'vona' {
   }
   
   export interface IBeanScopeConfig {
-    'a-database': ReturnType<typeof config>;
+    'a-orm': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {
-    'a-database': (typeof locales)[TypeLocaleBase];
+    'a-orm': (typeof locales)[TypeLocaleBase];
   }
 }
 
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-database::${K}` {
-  return `a-database::${key}`;
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-orm::${K}` {
+  return `a-orm::${key}`;
 }
 /** scope: end */

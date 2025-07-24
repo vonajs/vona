@@ -2,7 +2,7 @@ import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction
 import { Aspect } from 'vona-module-a-aspect';
 
 function Transaction(options?: Partial<IAopMethodOptionsTransaction>): MethodDecorator {
-  return Aspect.aopMethod('a-database:transaction', options);
+  return Aspect.aopMethod('a-orm:transaction', options);
 }
 
 export const Database = {

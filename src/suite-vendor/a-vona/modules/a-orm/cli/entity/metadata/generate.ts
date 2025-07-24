@@ -24,7 +24,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const content = `/** ${sceneName}: begin */
 ${contentColumns.join('\n')}
 ${contentEntityMetas.join('\n')}
-declare module 'vona-module-a-database' {
+declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     ${contentRecords.join('\n')}
   }
