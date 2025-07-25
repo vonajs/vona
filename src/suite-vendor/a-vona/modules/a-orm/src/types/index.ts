@@ -11,6 +11,8 @@ export * from './entityBaseSimple.ts';
 export * from './extra.ts';
 export * from './logger.ts';
 export * from './model.ts';
+export * from './modelAggr.ts';
+export * from './modelGeneral.ts';
 export * from './modelWhere.ts';
 export * from './onion/index.ts';
 export * from './relations.ts';

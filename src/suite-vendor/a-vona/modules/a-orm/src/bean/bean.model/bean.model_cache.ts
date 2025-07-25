@@ -174,10 +174,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   async selectGeneral<
     T extends IModelSelectParams<TRecord>,
     ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+    Aggregate extends boolean | undefined,
   >(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
+    _aggregate?: Aggregate,
   ): Promise<Partial<TRecord>[]> {
     const items = await this.__select_raw(undefined, params, options);
     return await this.relations.handleRelationsMany(items, params as any, options);
