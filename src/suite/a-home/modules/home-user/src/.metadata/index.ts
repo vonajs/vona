@@ -139,7 +139,7 @@ declare module 'vona-module-home-user' {
       count<T extends IModelCountParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityRole,ModelRole>>(data?: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityRole,ModelRole, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityRole,ModelRole, T>>[]>;
-      update<T extends IModelUpdateOptions<EntityRole,ModelRole>>(data: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<void>;
+      update<T extends IModelUpdateOptions<EntityRole,ModelRole>>(data: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>>;
       updateBulk<T extends IModelUpdateOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>[]>;
       delete<T extends IModelDeleteOptions<EntityRole,ModelRole>>(where?: TypeModelWhere<EntityRole>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<void>;
@@ -156,7 +156,7 @@ export interface ModelUser {
       count<T extends IModelCountParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityUser,ModelUser>>(data?: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUser, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUser, T>>[]>;
-      update<T extends IModelUpdateOptions<EntityUser,ModelUser>>(data: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<void>;
+      update<T extends IModelUpdateOptions<EntityUser,ModelUser>>(data: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>>;
       updateBulk<T extends IModelUpdateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
       delete<T extends IModelDeleteOptions<EntityUser,ModelUser>>(where?: TypeModelWhere<EntityUser>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<void>;
@@ -173,7 +173,7 @@ export interface ModelUserRole {
       count<T extends IModelCountParams<EntityUserRole,ModelUserRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityUserRole,ModelUserRole>>(data?: TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityUserRole,ModelUserRole>>(items: TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>>[]>;
-      update<T extends IModelUpdateOptions<EntityUserRole,ModelUserRole>>(data: TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>, options?: T): Promise<void>;
+      update<T extends IModelUpdateOptions<EntityUserRole,ModelUserRole>>(data: TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>>;
       updateBulk<T extends IModelUpdateOptions<EntityUserRole,ModelUserRole>>(items: TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUserRole,ModelUserRole, T>[]>;
       delete<T extends IModelDeleteOptions<EntityUserRole,ModelUserRole>>(where?: TypeModelWhere<EntityUserRole>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<EntityUserRole,ModelUserRole>>(ids: TableIdentity[], options?: T): Promise<void>;

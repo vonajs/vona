@@ -264,11 +264,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.__filterGetColumns(await this.__get_key(id, table, where, options), options?.columns);
   }
 
-  async update<T extends IModelUpdateOptions<TRecord>>(data: Partial<TRecord>, options?: T): Promise<void> {
+  async update<T extends IModelUpdateOptions<TRecord>>(data: Partial<TRecord>, options?: T): Promise<Partial<TRecord>> {
     const ids = await this.__update_raw(undefined, data, options);
-    if (!ids || ids.length === 0) return;
+    if (!ids || ids.length !== 1) return data;
+    // only support =1
     const dataNew = [Object.assign({}, data, { id: ids[0] })];
-    await this.relations.handleRelationsMutate(dataNew, dataNew, options as any, options);
+    const items = await this.relations.handleRelationsMutate(dataNew, dataNew, options as any, options);
+    return items[0];
   }
 
   async updateBulk<T extends IModelUpdateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
@@ -297,7 +299,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // check if cache
     if (this._checkDisableCacheEntityByOptions(options)) {
-      return await super._update(table, data, options);
+      await super._update(table, data, options);
+      return;
     }
     // check where and get id
     let id = this.__checkCacheKeyValid(data, table, true);

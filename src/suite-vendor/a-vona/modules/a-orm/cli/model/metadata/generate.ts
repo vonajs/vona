@@ -22,7 +22,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       count<T extends IModelCountParams<${entityName},${className},ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<${entityName},${className}>>(data?: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<Required<TypeModelMutateRelationData<${entityName},${className}, T>>>;
       insertBulk<T extends IModelInsertOptions<${entityName},${className}>>(items: TypeModelMutateRelationData<${entityName},${className}, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<${entityName},${className}, T>>[]>;
-      update<T extends IModelUpdateOptions<${entityName},${className}>>(data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<void>;
+      update<T extends IModelUpdateOptions<${entityName},${className}>>(data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;
       updateBulk<T extends IModelUpdateOptions<${entityName},${className}>>(items: TypeModelMutateRelationData<${entityName},${className}, T>[], options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>[]>;
       delete<T extends IModelDeleteOptions<${entityName},${className}>>(where?: TypeModelWhere<${entityName}>, options?: T): Promise<void>;
       deleteBulk<T extends IModelDeleteOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<void>;

@@ -184,7 +184,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table: keyof ITableRecord | undefined,
     data: Partial<TRecord>,
     options?: IModelUpdateOptionsGeneral<TRecord>,
-  ): Promise<void> {
+  ): Promise<Partial<TRecord>> {
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
@@ -214,6 +214,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     this.$loggerChild('model').debug('model.update: %s', builder.toQuery());
     // ready
     await builder;
+    // ok
+    return data;
   }
 
   protected async _delete(
