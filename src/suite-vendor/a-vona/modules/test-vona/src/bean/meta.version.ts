@@ -19,6 +19,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       await this.bean.model.createTable(entityUser.$table, table => {
         table.basicFields();
         table.string(entityUser.name, 255);
+        table.integer(entityUser.age);
       });
       // testVonaRole
       const entityRole = this.scope.entity.role;

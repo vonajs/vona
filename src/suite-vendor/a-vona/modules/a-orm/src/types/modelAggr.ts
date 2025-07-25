@@ -1,3 +1,4 @@
+import type { EntityUser } from 'vona-module-test-vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsJoin } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
@@ -7,8 +8,20 @@ import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export type TypeModelSelectAggrParamsAggrs<TRecord, Model extends BeanModelMeta | undefined = undefined> =
   Model extends BeanModelMeta ? {
-    count: TypeModelColumns<TRecord>;
+    count?: TypeModelColumns<TRecord>;
+    sum?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array< TypeEntityTableColumnNamesForAggrs<TRecord>>;
+    avg?:TypeEntityTableColumnNamesForAggrs<TRecord> | Array< TypeEntityTableColumnNamesForAggrs<TRecord>>;
+    max?:TypeEntityTableColumnNamesForAggrs<TRecord> | Array< TypeEntityTableColumnNamesForAggrs<TRecord>>;
+    min?:TypeEntityTableColumnNamesForAggrs<TRecord> | Array< TypeEntityTableColumnNamesForAggrs<TRecord>>;
   } : never;
+
+export type TypeEntityTableColumnNamesForAggrs<Entity> = keyof TypeEntityTableColumnsForAggrs<Entity>;
+
+export type TypeEntityTableColumnsForAggrs<Entity> =
+  Omit<{
+    [K in keyof Entity as Entity[K] extends number|undefined ? K : never ]: Entity[K]
+  },'iid'>;
+
 
 export interface IBuildModelSelectAggrParams<
   TRecord,
