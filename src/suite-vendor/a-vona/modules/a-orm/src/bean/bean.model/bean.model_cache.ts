@@ -9,6 +9,7 @@ import type {
   IModelMethodOptions,
   IModelMethodOptionsGeneral,
   IModelMutateOptions,
+  IModelSelectAggrParams,
   IModelSelectParams,
   IModelUpdateOptions,
   ITableRecord,
@@ -158,6 +159,52 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return true;
     });
     return this.__filterMGetColumns(items, options?.columns);
+  }
+
+  async aggregate<
+    T extends IModelSelectAggrParams<TRecord>,
+    ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+  >(
+    params?: T,
+    options?: IModelMethodOptions,
+    _modelJoins?: ModelJoins,
+  ): Promise<Partial<TRecord>> {
+    const items = await this.__aggregate_raw(undefined, params, options);
+    return items[0];
+  }
+
+  private async __aggregate_raw(
+    table: keyof ITableRecord | undefined,
+    params?: IModelSelectParams<TRecord>,
+    options?: IModelMethodOptions,
+  ): Promise<TRecord[]> {
+    // table
+    table = table || this.getTable();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
+    // check if cache
+    if (this._checkDisableCacheEntityByOptions(options)) {
+      return await this.__select_cache(table, params, options);
+    }
+    // 1: select id
+    const columnId = `${table}.id`;
+    const params2: IModelSelectParams<TRecord> = Object.assign({}, params, { columns: [columnId] });
+    const items = await this.__select_cache(table, params2, options);
+    if (items.length === 0) {
+      // donothing
+      return [] as TRecord[];
+    }
+    // 1: special check
+    if (params?.columns) {
+      const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
+      if (this.__checkIfOnlyKey(columnsTarget, table)) {
+        // just return
+        return items;
+      }
+    }
+    // 2: mget
+    const ids = items.map(item => cast(item).id);
+    const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
+    return await this.__mget_raw(table, ids, options2);
   }
 
   async select<
