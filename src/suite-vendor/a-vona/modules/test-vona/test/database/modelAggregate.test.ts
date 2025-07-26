@@ -1,9 +1,10 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { cast } from 'vona';
 import { app } from 'vona-mock';
 
 describe('modelAggregate.test.ts', () => {
-  it.only('action:modelAggregate', async () => {
+  it('action:modelAggregate', async () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelAggregate';
       // scope
@@ -105,9 +106,30 @@ describe('modelAggregate.test.ts', () => {
       });
       assert.equal(usersStats2.length, 3);
       assert.equal(usersStats2[0].posts.count_all, 2);
-      assert.equal(usersStats2[0].posts.count_title, 2);
+      assert.equal(cast(usersStats2[0].posts).count_title, undefined);
       assert.equal(usersStats2[0].posts.sum_stars, 5);
       assert.equal(usersStats2[0].roles.count_all, 1);
+      // aggr: usersStats: posts: disable
+      const usersStats3 = await scopeTest.model.userStats.select({
+        where: {
+          id: users.map(item => item.id),
+        },
+        orders: [['id', 'asc']],
+        include: {
+          posts: {
+            aggrs: {
+              count: ['*'],
+              sum: [],
+            },
+          },
+          roles: true,
+        },
+      });
+      assert.equal(usersStats3.length, 3);
+      assert.equal(usersStats3[0].posts.count_all, 2);
+      assert.equal(cast(usersStats3[0].posts).count_title, undefined);
+      assert.equal(cast(usersStats3[0].posts).sum_stars, undefined);
+      assert.equal(usersStats3[0].roles.count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {

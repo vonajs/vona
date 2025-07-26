@@ -16,5 +16,16 @@ export type TypeRecordAggrsValues<TRecord extends Record<string, any>> = TRecord
 export type TypeRecordAggrsValuesToObject<AggrValues extends string> = { [K in AggrValues]: BigNumber };
 
 export type TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined> =
-  TypeUtilGetParamsAggrs<IncludeWrapper> extends {} ?
-    TypeUtilGetParamsAggrs<IncludeWrapper> : TypeUtilGetRelationOptionsAggrs<Relation>;
+  TypeUtilGetRelationOptionsAggrs<Relation> extends {} ?
+    TypeUtilGetParamsAggrs<IncludeWrapper> extends {} ?
+      TypeUtilGetAggrsFromRelationAndIncludeWrapper_Mixed<
+        TypeUtilGetRelationOptionsAggrs<Relation>,
+        TypeUtilGetParamsAggrs<IncludeWrapper>
+      > : TypeUtilGetRelationOptionsAggrs<Relation>
+    : undefined;
+
+export type TypeUtilGetAggrsFromRelationAndIncludeWrapper_Mixed<RelationAggrs extends {}, IncludeWrapperAggrs extends {}> = {
+  [K in keyof RelationAggrs]:
+  // @ts-ignore ignore
+  K extends string ? IncludeWrapperAggrs[K] extends string | string[] ? IncludeWrapperAggrs[K] : RelationAggrs[K] : undefined
+};
