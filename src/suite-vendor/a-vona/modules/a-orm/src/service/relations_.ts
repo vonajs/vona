@@ -161,16 +161,27 @@ export class ServiceRelations extends BeanBase {
         entity[relationName] = items.find(item => cast(item).id === cast(entity)[key]);
       }
     } else if (type === 'hasMany') {
-      const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
-      const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
-      const options2 = deepExtend({}, optionsReal, { columns, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
-      const items = await modelTarget.select(options2, methodOptionsReal);
-      for (const entity of entities) {
-        entity[relationName] = [];
-        for (const item of items) {
-          if (item[key] === cast(entity).id) {
-            if (!withKey) delete item[key];
-            entity[relationName].push(item);
+      if (optionsReal.aggrs) {
+        for (const entity of entities) {
+          if (isNil(cast(entity).id)) {
+            entity[relationName] = {};
+          } else {
+            const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: cast(entity).id } });
+            entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
+          }
+        }
+      } else {
+        const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
+        const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
+        const options2 = deepExtend({}, optionsReal, { columns, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+        const items = await modelTarget.select(options2, methodOptionsReal);
+        for (const entity of entities) {
+          entity[relationName] = [];
+          for (const item of items) {
+            if (item[key] === cast(entity).id) {
+              if (!withKey) delete item[key];
+              entity[relationName].push(item);
+            }
           }
         }
       }
@@ -181,7 +192,7 @@ export class ServiceRelations extends BeanBase {
       if (optionsReal.aggrs) {
         for (const entity of entities) {
           const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
-          const options2 = deepExtend({}, optionsReal, { where: { id: idsTo } });
+          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
           entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
         }
       } else {
