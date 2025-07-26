@@ -88,10 +88,10 @@ describe('modelAggregate.test.ts', () => {
           roles: true,
         },
       });
-      // assert.equal(usersStats.length, 3);
-      // assert.equal(usersStats[0].posts.count_all, 2);
-      // assert.equal(usersStats[0].posts.count_title, 2);
-      // assert.equal(usersStats[0].posts.sum_stars, 5);
+      assert.equal(usersStats.length, 3);
+      assert.equal(usersStats[0].posts.count_all, 2);
+      assert.equal(usersStats[0].posts.count_title, 2);
+      assert.equal(usersStats[0].posts.sum_stars, 5);
       assert.equal(usersStats[0].roles.count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {

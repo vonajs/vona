@@ -38,7 +38,6 @@ function hasMany<
   AUTOLOAD extends boolean = boolean,
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
@@ -46,7 +45,7 @@ function hasMany<
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
-  options?: OPTIONS,
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>,
   _modelJoins?: ModelJoins,
   _aggrs?: Aggrs,
 ): any { // : IModelRelationHasMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
@@ -59,7 +58,6 @@ function belongsToMany<
   AUTOLOAD extends boolean = boolean,
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
@@ -69,7 +67,7 @@ function belongsToMany<
   classModel: TypeModelClassLike<MODEL>,
   keyFrom: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
-  options?: OPTIONS,
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>,
   _modelJoins?: ModelJoins,
   _aggrs?: Aggrs,
 ): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
