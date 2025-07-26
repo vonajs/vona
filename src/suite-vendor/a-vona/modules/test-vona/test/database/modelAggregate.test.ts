@@ -20,12 +20,22 @@ describe('modelAggregate.test.ts', () => {
         {
           name: `${prefix}:tom`,
           age: 3,
-          posts: [{
-            title: `${prefix}:postApple`,
-            postContent: {
-              content: `${prefix}:postContentApple`,
+          posts: [
+            {
+              title: `${prefix}:postApple`,
+              stars: 2,
+              postContent: {
+                content: `${prefix}:postContentApple`,
+              },
             },
-          }],
+            {
+              title: `${prefix}:postApple2`,
+              stars: 3,
+              postContent: {
+                content: `${prefix}:postContentApple2`,
+              },
+            },
+          ],
           roles: [{
             id: roles[0].id,
           }],
@@ -35,6 +45,7 @@ describe('modelAggregate.test.ts', () => {
           age: 5,
           posts: [{
             title: `${prefix}:postPear`,
+            stars: 4,
             postContent: {
               content: `${prefix}:postContentPear`,
             },
@@ -78,7 +89,9 @@ describe('modelAggregate.test.ts', () => {
         },
       });
       assert.equal(usersStats.length, 3);
-      assert.equal(usersStats[0].posts.count_all);
+      assert.equal(usersStats[0].posts.count_all, 2);
+      assert.equal(usersStats[0].posts.count_title, 2);
+      assert.equal(usersStats[0].posts.sum_stars, 5);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {

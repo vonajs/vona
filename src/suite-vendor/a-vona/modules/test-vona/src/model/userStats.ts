@@ -7,7 +7,7 @@ import { ModelPost } from './post.ts';
 
 export interface IModelOptionsUserStats extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count: '*' | 'title' }>;
+    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count: '*' | 'title'; sum: 'stars' }>;
     roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count: '*' }>;
   };
 }
@@ -15,7 +15,7 @@ export interface IModelOptionsUserStats extends IDecoratorModelOptions {
 @Model<IModelOptionsUserStats>({
   entity: EntityUserStats,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { aggrs: { count: ['*', 'title'] } }),
+    posts: $relation.hasMany(() => ModelPost, 'userId', { aggrs: { count: ['*', 'title'], sum: 'stars' } }),
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { aggrs: { count: '*' } }),
   },
 })

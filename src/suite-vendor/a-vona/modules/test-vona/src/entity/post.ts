@@ -11,4 +11,7 @@ export class EntityPost extends EntityBase {
 
   @Api.field(v.tableIdentity())
   userId: TableIdentity;
+
+  @Api.field(v.optional())
+  stars?: number;
 }

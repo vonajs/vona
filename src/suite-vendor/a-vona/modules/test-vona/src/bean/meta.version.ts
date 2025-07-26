@@ -40,6 +40,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
         table.basicFields();
         table.string(entityPost.title, 255);
         table.userId();
+        table.integer(entityPost.stars);
       });
       // testVonaPostContent
       const entityPostContent = this.scope.entity.postContent;
