@@ -23,6 +23,8 @@ describe('modelAggregate.test.ts', () => {
           max: 'age',
           min: 'age',
         },
+        where: {
+        },
       });
       assert.equal(usersStat.count_all, 3);
       assert.equal(usersStat.count_age, 2);

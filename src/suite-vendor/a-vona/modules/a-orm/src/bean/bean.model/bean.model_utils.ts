@@ -149,8 +149,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
       if (!columns) continue;
       for (const column of columns) {
         const column2 = `${key}_${column === '*' ? 'all' : column}`;
-        const aggrFunc = `${key}(${column})`;
-        builder.select(this.ref(aggrFunc).as(column2));
+        builder[key](column, { as: column2 });
       }
     }
   }

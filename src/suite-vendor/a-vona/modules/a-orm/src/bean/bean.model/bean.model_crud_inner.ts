@@ -84,6 +84,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     builder.select(params?.columns as any);
     // distinct
     this.buildDistinct(builder, params?.distinct);
+    // aggregate
+    this.buildAggrs(builder, params?.aggrs);
     // joins
     this.buildJoins(builder, params?.joins);
     // where
@@ -94,8 +96,6 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     this.buildLimit(builder, params?.limit);
     // offset
     this.buildOffset(builder, params?.offset);
-    // aggregate
-    this.buildAggrs(builder, params?.aggrs);
     // ok
     return builder;
   }
