@@ -7,16 +7,16 @@ import { ModelPost } from './post.ts';
 
 export interface IModelOptionsUserStats extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost, false, 'id' | 'title'>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, 'id' | 'name'>;
+    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count: '*' | 'title' }>;
+    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count: '*' }>;
   };
 }
 
 @Model<IModelOptionsUserStats>({
   entity: EntityUserStats,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }),
-    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
+    posts: $relation.hasMany(() => ModelPost, 'userId', { aggrs: { count: ['*', 'title'] } }),
+    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { aggrs: { count: '*' } }),
   },
 })
 export class ModelUserStats extends BeanModelBase<EntityUserStats> {}

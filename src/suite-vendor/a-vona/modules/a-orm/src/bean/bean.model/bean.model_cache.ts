@@ -192,7 +192,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
-  ): Promise<Partial<TRecord>[]> {
+  ): Promise<any[]> {
     const items = await this.__select_raw(undefined, params, options);
     return await this.relations.handleRelationsMany(items, params as any, options);
   }

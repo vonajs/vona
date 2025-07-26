@@ -1,6 +1,7 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
+import type { TypeModelAggrRelationResult } from './relationsAggr.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -73,6 +74,7 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
 export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns> =
   TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> : TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
+export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs extends {} } ? Aggrs : undefined;
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
 export type TypeUtilGetParamsColumns<TParams> = TParams extends { columns?: infer COLUMNS } ? COLUMNS : undefined;
@@ -83,6 +85,11 @@ export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWra
     TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
 
 export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined> =
+  TypeUtilGetParamsAggrs<TOptionsRelation> extends {} ?
+    TypeModelAggrRelationResult<TOptionsRelation> :
+    TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns>;
+
+export type TypeModelRelationResult_Normal<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined> =
   TypeUtilEntitySelector<
     TRecord,
     TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>

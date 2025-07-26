@@ -58,12 +58,18 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(userStats.max_age, 5);
       assert.equal(userStats.min_age, 3);
       // aggr: usersStats
-      const usersStats = await scopeTest.model.user.select({
+      const usersStats = await scopeTest.model.userStats.select({
         where: {
           id: users.map(item => item.id),
         },
+        orders: [['id', 'asc']],
+        include: {
+          // 'posts':true // is autoload
+          roles: true,
+        },
       });
       assert.equal(usersStats.length, 3);
+      assert.equal(usersStats[0].posts);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {
@@ -71,6 +77,8 @@ describe('modelAggregate.test.ts', () => {
           roles: true,
         },
       });
+      // delete: roles
+      await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
     });
   });
 });

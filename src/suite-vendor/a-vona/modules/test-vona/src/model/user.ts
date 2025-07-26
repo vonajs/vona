@@ -8,16 +8,16 @@ import { ModelUserStats } from './userStats.ts';
 
 export interface IModelOptionsUser extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost, false, '*', undefined, { count: '*' | 'title' }>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count: '*' }>;
+    posts: IModelRelationHasMany<ModelPost, false, 'id' | 'title'>;
+    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, 'id' | 'name'>;
   };
 }
 
 @Model<IModelOptionsUser>({
   entity: EntityUser,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { aggrs: { count: ['*', 'title'] } }),
-    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { aggrs: { count: '*' } }),
+    posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }),
+    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
   },
   cache: {
     modelsClear: () => ModelUserStats,
