@@ -14,6 +14,7 @@ import type {
   IModelUpdateOptions,
   ITableRecord,
   TableIdentity,
+  TypeModelAggrRelationResult,
   TypeModelColumn,
   TypeModelColumns,
   TypeModelWhere,
@@ -168,9 +169,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
-  ): Promise<Partial<TRecord>> {
+  ): Promise<TypeModelAggrRelationResult<T>> {
     const items = await this.__aggregate_raw(undefined, params, options);
-    return items[0];
+    return items[0] as any;
   }
 
   private async __aggregate_raw(

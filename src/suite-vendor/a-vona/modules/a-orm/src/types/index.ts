@@ -16,6 +16,7 @@ export * from './modelGeneral.ts';
 export * from './modelWhere.ts';
 export * from './onion/index.ts';
 export * from './relations.ts';
+export * from './relationsAggr.ts';
 export * from './relationsColumns.ts';
 export * from './relationsDef.ts';
 export * from './relationsDefDynamic.ts';
