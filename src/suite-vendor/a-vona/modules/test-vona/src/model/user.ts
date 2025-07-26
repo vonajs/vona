@@ -4,6 +4,7 @@ import { EntityUser } from '../entity/user.ts';
 import { ModelPost } from './post.ts';
 import { ModelRole } from './role.ts';
 import { ModelRoleUser } from './roleUser.ts';
+import { ModelUserStats } from './userStats.ts';
 
 export interface IModelOptionsUser extends IDecoratorModelOptions {
   relations: {
@@ -17,6 +18,9 @@ export interface IModelOptionsUser extends IDecoratorModelOptions {
   relations: {
     posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }),
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
+  },
+  cache: {
+    modelsClear: () => ModelUserStats,
   },
 })
 export class ModelUser extends BeanModelBase<EntityUser> {}
