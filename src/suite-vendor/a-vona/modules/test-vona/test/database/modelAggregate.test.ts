@@ -77,14 +77,13 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(userStats.avg_age, 4);
       assert.equal(userStats.max_age, 5);
       assert.equal(userStats.min_age, 3);
-      // aggr: usersStats
+      // aggr: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStats.select({
         where: {
           id: users.map(item => item.id),
         },
         orders: [['id', 'asc']],
         include: {
-          // 'posts':true // is autoload
           roles: true,
         },
       });
@@ -93,6 +92,22 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(usersStats[0].posts.count_title, 2);
       assert.equal(usersStats[0].posts.sum_stars, 5);
       assert.equal(usersStats[0].roles.count_all, 1);
+      // aggr: usersStats: posts: mixed
+      const usersStats2 = await scopeTest.model.userStats.select({
+        where: {
+          id: users.map(item => item.id),
+        },
+        orders: [['id', 'asc']],
+        include: {
+          posts: { aggrs: { count: '*' } },
+          roles: true,
+        },
+      });
+      assert.equal(usersStats2.length, 3);
+      assert.equal(usersStats2[0].posts.count_all, 2);
+      assert.equal(usersStats2[0].posts.count_title, 2);
+      assert.equal(usersStats2[0].posts.sum_stars, 5);
+      assert.equal(usersStats2[0].roles.count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {

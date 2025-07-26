@@ -7,7 +7,7 @@ import { ModelPost } from './post.ts';
 
 export interface IModelOptionsUserStats extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count: '*' | 'title'; sum: 'stars' }>;
+    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count?: '*' | 'title'; sum?: 'stars' }>;
     roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count: '*' }>;
   };
 }

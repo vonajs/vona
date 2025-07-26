@@ -1,7 +1,7 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeModelAggrRelationResult, TypeModelAggrRelationResultAggrs, TypeUtilGetAggrsFromRelationAndIncludeWrapper } from './relationsAggr.ts';
+import type { TypeModelAggrRelationResultAggrs, TypeUtilGetAggrsFromRelationAndIncludeWrapper } from './relationsAggr.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -76,7 +76,7 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
 export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns, Aggrs> =
   TYPE extends 'hasMany' | 'belongsToMany' ?
     Aggrs extends {} ?
-      TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> : 
+      TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> :
       Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> :
     TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
