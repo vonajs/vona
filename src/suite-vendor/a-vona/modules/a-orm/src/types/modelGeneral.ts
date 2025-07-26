@@ -14,19 +14,19 @@ export interface IBuildModelSelectGeneralParams<
   Columns extends {} | undefined = undefined,
 > extends
   IModelRelationIncludeWrapper<Model>,
-  IBuildModelSelectGeneralParamsBasic<TRecord, Model, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
+  IBuildModelSelectGeneralParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
 
 export interface IBuildModelSelectGeneralParamsBasic<
   TRecord,
-  _Model extends BeanModelMeta | undefined = undefined,
   COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
-  aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
+  aggrs?: Aggrs;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];

@@ -1,5 +1,6 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IBuildModelSelectParamsBasic } from './model.ts';
+import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
+import type { IBuildModelSelectGeneralParamsBasic } from './modelGeneral.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
@@ -48,11 +49,12 @@ export interface IModelRelationHasMany<
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins>;
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>;
 }
 
 export interface IModelRelationBelongsToMany<
@@ -62,13 +64,14 @@ export interface IModelRelationBelongsToMany<
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
 > {
   type?: 'belongsToMany';
   modelMiddle?: TypeModelClassLike<MODELMiddle>;
   model?: TypeModelClassLike<MODEL>;
   keyFrom?: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity];
   keyTo?: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins>;
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>;
 }
 
 export interface IModelRelationOptionsOne<
@@ -85,13 +88,15 @@ export type IModelRelationOptionsMany<
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
 > = IBuildModelRelationOptionsMany<
   MODEL[TypeSymbolKeyEntity],
   AUTOLOAD,
   COLUMNS,
   TypeEntityTableNamesOfGeneral<ModelJoins, MODEL>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, MODEL>,
-  TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>
+  TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>,
+  Aggrs
 >;
 
 export interface IBuildModelRelationOptionsMany<
@@ -101,6 +106,7 @@ export interface IBuildModelRelationOptionsMany<
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
-> extends IBuildModelSelectParamsBasic<TRecord, COLUMNS, TableNames, ColumnNames, Columns> {
+  Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = undefined,
+> extends IBuildModelSelectGeneralParamsBasic<TRecord, COLUMNS, TableNames, ColumnNames, Columns, Aggrs> {
   autoload?: AUTOLOAD;
 }

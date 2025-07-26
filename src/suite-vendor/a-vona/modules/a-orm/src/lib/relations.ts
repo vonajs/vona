@@ -1,4 +1,5 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { TypeModelSelectAggrParamsAggrs } from '../types/modelAggr.ts';
 import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
@@ -37,13 +38,17 @@ function hasMany<
   AUTOLOAD extends boolean = boolean,
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
+  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
+  _aggrs?: Aggrs,
 ): any { // : IModelRelationHasMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
   return { type: 'hasMany', model: classModel, key, options };
 }
@@ -54,8 +59,11 @@ function belongsToMany<
   AUTOLOAD extends boolean = boolean,
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins> | undefined = undefined,
+  OPTIONS extends IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs> | undefined = undefined,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
   classModelMiddle: TypeModelClassLike<MODELMiddle>,
   classModel: TypeModelClassLike<MODEL>,
@@ -63,6 +71,7 @@ function belongsToMany<
   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
+  _aggrs?: Aggrs,
 ): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
