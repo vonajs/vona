@@ -1,4 +1,4 @@
-import type { TypeUtilGetParamsAggrs } from './relations.ts';
+import type { TypeUtilGetParamsAggrs, TypeUtilGetRelationOptionsAggrs } from './relations.ts';
 
 export type TypeModelAggrRelationResult<TOptions> =
   TypeModelAggrRelationResultAggrs<TypeUtilGetParamsAggrs<TOptions>>;
@@ -14,3 +14,7 @@ export type TypeModelAggrRelationResultAggr<Aggr extends string, Columns extends
 export type TypeUtilAggrPrepareColumns<TColumns> = TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
 export type TypeRecordAggrsValues<TRecord extends Record<string, any>> = TRecord[keyof TRecord];
 export type TypeRecordAggrsValuesToObject<AggrValues extends string> = { [K in AggrValues]: BigNumber };
+
+export type TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined> =
+  TypeUtilGetParamsAggrs<IncludeWrapper> extends {} ?
+    TypeUtilGetParamsAggrs<IncludeWrapper> : TypeUtilGetRelationOptionsAggrs<Relation>;

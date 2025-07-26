@@ -1,7 +1,7 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeModelAggrRelationResult } from './relationsAggr.ts';
+import type { TypeModelAggrRelationResult, TypeUtilGetAggrsFromRelationAndIncludeWrapper } from './relationsAggr.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -55,6 +55,7 @@ export type TypeUtilGetRelationEntityMeta<Relation> = TypeUtilGetModelEntityMeta
 export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: infer OPTIONS extends {} } ? OPTIONS : undefined;
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
 export type TypeUtilGetRelationOptionsColumns<Relation> = Relation extends { options?: { columns?: infer COLUMNS } } ? COLUMNS : undefined;
+export type TypeUtilGetRelationOptionsAggrs<Relation> = Relation extends { options?: { aggrs?: infer Aggrs } } ? Aggrs : undefined;
 export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
@@ -69,10 +70,15 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
     TypeUtilGetRelationType<Relation>,
     TypeUtilGetRelationModel<Relation>,
     IncludeWrapper,
-    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
+    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
+    TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
   >;
-export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns> =
-  TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> : TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
+export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns, Aggrs> =
+  TYPE extends 'hasMany' | 'belongsToMany' ?
+    Aggrs extends {} ?
+      TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> : 
+      Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> :
+    TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
 export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs extends {} } ? Aggrs : undefined;
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
@@ -84,8 +90,8 @@ export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWra
   TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[] ?
     TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
 
-export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined> =
-  TypeUtilGetParamsAggrs<TOptionsRelation> extends {} ?
+export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined, Aggrs = undefined> =
+  Aggrs extends {} ?
     TypeModelAggrRelationResult<TOptionsRelation> :
     TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns>;
 
