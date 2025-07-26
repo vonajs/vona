@@ -2,6 +2,8 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
+import { $relationDynamic } from 'vona-module-a-orm';
+import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelAggregate.test.ts', () => {
   it('action:modelAggregate', async () => {
@@ -130,6 +132,31 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(cast(usersStats3[0].posts).count_title, undefined);
       assert.equal(cast(usersStats3[0].posts).sum_stars, undefined);
       assert.equal(usersStats3[0].roles.count_all, 1);
+      // aggr: usersStats: with
+      const usersStats4 = await scopeTest.model.userStats.select({
+        where: {
+          id: users.map(item => item.id),
+        },
+        orders: [['id', 'asc']],
+        include: {
+          posts: false,
+          roles: false,
+        },
+        with: {
+          posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
+            aggrs: { count: '*' },
+          }),
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            aggrs: { count: '*' },
+          }),
+        },
+      });
+      assert.equal(usersStats4.length, 3);
+      assert.equal(usersStats4[0].posts.count_all, 2);
+      assert.equal(cast(usersStats4[0].posts).count_title, undefined);
+      assert.equal(cast(usersStats4[0].posts).sum_stars, undefined);
+      assert.equal(usersStats4[0].roles.count_all, 1);
+
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {

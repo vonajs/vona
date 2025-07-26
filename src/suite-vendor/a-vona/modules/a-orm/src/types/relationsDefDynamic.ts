@@ -1,9 +1,12 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelRelationIncludeWrapper } from './model.ts';
-import type { TypeModelColumn } from './modelWhere.ts';
+import type { IModelRelationIncludeWrapper, IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
+import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
+import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
-import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from './relationsDef.ts';
+import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
+import type { IModelRelationOptionsOne } from './relationsDef.ts';
+import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 // export type TypeModelRelationDynamic<MODELSelf extends BeanModelMeta | undefined, MODELTarget extends BeanModelMeta> =
 //   IModelRelationHasOneDynamic<MODELTarget> |
@@ -64,4 +67,48 @@ export interface IModelRelationOptionsManyDynamic<
   MODEL extends BeanModelMeta,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
 >
-  extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsMany<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins>, 'autoload'> {}
+  extends
+  IModelRelationIncludeWrapper<MODEL>,
+  Omit<IModelRelationOptionsManyDynamic_Raw<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins>, 'autoload'> {}
+
+export type IModelRelationOptionsManyDynamic_Raw<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+> = IBuildModelRelationOptionsManyDynamic<
+  MODEL[TypeSymbolKeyEntity],
+  AUTOLOAD,
+  COLUMNS,
+  TypeEntityTableNamesOfGeneral<ModelJoins, MODEL>,
+  TypeEntityTableColumnNamesOfGeneral<ModelJoins, MODEL>,
+  TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>
+>;
+
+export interface IBuildModelRelationOptionsManyDynamic<
+  TRecord,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
+  TableNames = undefined,
+  ColumnNames = keyof TRecord,
+  Columns extends {} | undefined = undefined,
+> extends IBuildModelSelectGeneralParamsBasicDynamic<TRecord, COLUMNS, TableNames, ColumnNames, Columns> {
+  autoload?: AUTOLOAD;
+}
+
+export interface IBuildModelSelectGeneralParamsBasicDynamic<
+  TRecord,
+  COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
+  TableNames = undefined,
+  ColumnNames = keyof TRecord,
+  Columns extends {} | undefined = undefined,
+> {
+  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
+  aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
+  where?: TypeModelWhere<TRecord, Columns>;
+  joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
+  orders?: IModelSelectParamsOrder<ColumnNames>[];
+  limit?: number;
+  offset?: number;
+}
