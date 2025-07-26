@@ -8,7 +8,7 @@ describe('modelAggregate.test.ts', () => {
       const prefix = 'action:modelAggregate';
       // scope
       const scopeTest = app.bean.scope('test-vona');
-      // create
+      // create: users
       const users = await scopeTest.model.user.insertBulk([
         { name: `${prefix}:tom`, age: 3 },
         { name: `${prefix}:jimmy`, age: 5 },
@@ -24,6 +24,7 @@ describe('modelAggregate.test.ts', () => {
           min: 'age',
         },
         where: {
+          name: { _startsWith_: `${prefix}:` },
         },
       });
       assert.equal(usersStat.count_all, 3);
@@ -32,6 +33,8 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(usersStat.avg_age, 4);
       assert.equal(usersStat.max_age, 5);
       assert.equal(usersStat.min_age, 3);
+      // delete: users
+      await scopeTest.model.user.deleteBulk(users.map(item => item.id));
     });
   });
 });

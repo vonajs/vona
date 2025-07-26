@@ -321,6 +321,22 @@ describe('modelRelationsMutate.test.ts', () => {
       assert.equal(children[0].name, `${prefix}:1-1`);
       assert.equal(children[0].children?.length, childrenCheck[0].children.length);
       assert.equal(children[0].children?.length, 2);
+      // delete: categoryTree
+      const items = await scopeTest.model.category.select({
+        where: {
+          name: { _startsWith_: `${prefix}:` },
+        },
+        include: { children: false },
+      });
+      assert.equal(items.length, 5);
+      await scopeTest.model.category.delete({ id: categoryTree.id });
+      const items2 = await scopeTest.model.category.select({
+        where: {
+          name: { _startsWith_: `${prefix}:` },
+        },
+        include: { children: false },
+      });
+      assert.equal(items2.length, 0);
     });
   });
 });
