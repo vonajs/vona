@@ -18,7 +18,7 @@ export interface IBuildModelSelectGeneralParams<
 
 export interface IBuildModelSelectGeneralParamsBasic<
   TRecord,
-  Model extends BeanModelMeta | undefined = undefined,
+  _Model extends BeanModelMeta | undefined = undefined,
   COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
@@ -26,7 +26,7 @@ export interface IBuildModelSelectGeneralParamsBasic<
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
-  aggrs?: TypeModelSelectAggrParamsAggrs<TRecord, Model>;
+  aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];

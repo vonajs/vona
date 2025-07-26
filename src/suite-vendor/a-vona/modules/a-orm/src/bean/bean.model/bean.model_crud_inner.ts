@@ -3,6 +3,7 @@ import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
   IModelMethodOptionsGeneral,
+  IModelSelectGeneralParams,
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
   ITableRecord,
@@ -72,25 +73,29 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return (await builder) as TRecord[];
   }
 
-  protected _select_buildParams<T extends IModelSelectParams<TRecord>>(table: keyof ITableRecord, params?: T, options?: IModelMethodOptionsGeneral) {
-    // params
-    const params2 = params || {} as IModelSelectParams<TRecord>;
+  protected _select_buildParams<T extends IModelSelectGeneralParams<TRecord>>(
+    table: keyof ITableRecord,
+    params?: T,
+    options?: IModelMethodOptionsGeneral,
+  ) {
     // builder
     const builder = this.builder<TRecord, TRecord>(table);
     // columns
-    builder.select(params2.columns as any);
+    builder.select(params?.columns as any);
     // distinct
-    this.buildDistinct(builder, params2.distinct);
+    this.buildDistinct(builder, params?.distinct);
     // joins
-    this.buildJoins(builder, params2.joins);
+    this.buildJoins(builder, params?.joins);
     // where
-    this.prepareWhere(builder, table, params2.where, options);
+    this.prepareWhere(builder, table, params?.where, options);
     // orders
-    this.buildOrders(builder, params2.orders);
+    this.buildOrders(builder, params?.orders);
     // limit
-    this.buildLimit(builder, params2.limit);
+    this.buildLimit(builder, params?.limit);
     // offset
-    this.buildOffset(builder, params2.offset);
+    this.buildOffset(builder, params?.offset);
+    // aggregate
+    this.buildAggrs(builder, params?.aggrs);
     // ok
     return builder;
   }

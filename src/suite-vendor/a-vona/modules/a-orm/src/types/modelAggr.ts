@@ -5,14 +5,13 @@ import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
-export type TypeModelSelectAggrParamsAggrs<TRecord, Model extends BeanModelMeta | undefined = undefined> =
-  Model extends BeanModelMeta ? {
-    count?: TypeModelColumns<TRecord>;
-    sum?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-    avg?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-    max?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-    min?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-  } : never;
+export interface TypeModelSelectAggrParamsAggrs<TRecord> {
+  count?: TypeModelColumns<TRecord>;
+  sum?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+  avg?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+  max?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+  min?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+}
 
 export type TypeEntityTableColumnNamesForAggrs<Entity> = keyof TypeEntityTableColumnsForAggrs<Entity>;
 
@@ -31,13 +30,13 @@ export interface IBuildModelSelectAggrParams<
 
 export interface IBuildModelSelectAggrParamsBasic<
   TRecord,
-  Model extends BeanModelMeta | undefined = undefined,
+  _Model extends BeanModelMeta | undefined = undefined,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  aggrs: TypeModelSelectAggrParamsAggrs<TRecord, Model>;
+  aggrs: TypeModelSelectAggrParamsAggrs<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
 }
