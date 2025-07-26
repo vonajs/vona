@@ -182,30 +182,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
-    // check if cache
-    if (this._checkDisableCacheEntityByOptions(options)) {
-      return await this.__select_cache(table, params, options);
-    }
-    // 1: select id
-    const columnId = `${table}.id`;
-    const params2: IModelSelectParams<TRecord> = Object.assign({}, params, { columns: [columnId] });
-    const items = await this.__select_cache(table, params2, options);
-    if (items.length === 0) {
-      // donothing
-      return [] as TRecord[];
-    }
-    // 1: special check
-    if (params?.columns) {
-      const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
-      if (this.__checkIfOnlyKey(columnsTarget, table)) {
-        // just return
-        return items;
-      }
-    }
-    // 2: mget
-    const ids = items.map(item => cast(item).id);
-    const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
-    return await this.__mget_raw(table, ids, options2);
+    return await this.__select_cache(table, params, options);
   }
 
   async select<
@@ -267,7 +244,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const cache = this.cacheQuery.getInstance(table);
     const items = await cache.get(key, {
       get: async () => {
-        return await super._select(table, params, options);
+        return await super._select(table, params, options, builder);
       },
       db: this.db,
     });

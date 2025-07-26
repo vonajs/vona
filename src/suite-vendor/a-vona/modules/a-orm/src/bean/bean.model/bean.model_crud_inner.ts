@@ -1,3 +1,4 @@
+import type { Knex } from 'knex';
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -59,12 +60,13 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table?: keyof ITableRecord,
     params?: T,
     options?: IModelMethodOptionsGeneral,
+    builder?: Knex.QueryBuilder<TRecord, TRecord[]>,
   ): Promise<TRecord[]> {
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // builder
-    const builder = this._select_buildParams(table, params, options);
+    builder = builder ?? this._select_buildParams(table, params, options);
     // ready
     this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
     return (await builder) as TRecord[];
