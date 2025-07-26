@@ -135,7 +135,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(model) as BeanModelCrud;
+    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -178,14 +178,22 @@ export class ServiceRelations extends BeanBase {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
-      const idsTo = itemsMiddle.map(item => item[keyTo]);
-      const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-      const items = await modelTarget.mget(idsTo, options2);
-      for (const entity of entities) {
-        entity[relationName] = [];
-        for (const itemMiddle of itemsMiddle) {
-          if (itemMiddle[keyFrom] === cast(entity).id) {
-            entity[relationName].push(items.find(item => cast(item).id === cast(itemMiddle)[keyTo]));
+      if (optionsReal.aggrs) {
+        for (const entity of entities) {
+          const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
+          const options2 = deepExtend({}, optionsReal, { where: { id: idsTo } });
+          entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
+        }
+      } else {
+        const idsTo = itemsMiddle.map(item => item[keyTo]);
+        const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+        const items = await modelTarget.mget(idsTo, options2);
+        for (const entity of entities) {
+          entity[relationName] = [];
+          for (const itemMiddle of itemsMiddle) {
+            if (itemMiddle[keyFrom] === cast(entity).id) {
+              entity[relationName].push(items.find(item => cast(item).id === cast(itemMiddle)[keyTo]));
+            }
           }
         }
       }

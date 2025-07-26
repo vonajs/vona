@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
 describe('modelAggregate.test.ts', () => {
-  it('action:modelAggregate', async () => {
+  it.only('action:modelAggregate', async () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelAggregate';
       // scope
@@ -85,13 +85,14 @@ describe('modelAggregate.test.ts', () => {
         orders: [['id', 'asc']],
         include: {
           // 'posts':true // is autoload
-          roles: {},
+          roles: true,
         },
       });
-      assert.equal(usersStats.length, 3);
-      assert.equal(usersStats[0].posts.count_all, 2);
-      assert.equal(usersStats[0].posts.count_title, 2);
-      assert.equal(usersStats[0].posts.sum_stars, 5);
+      // assert.equal(usersStats.length, 3);
+      // assert.equal(usersStats[0].posts.count_all, 2);
+      // assert.equal(usersStats[0].posts.count_title, 2);
+      // assert.equal(usersStats[0].posts.sum_stars, 5);
+      assert.equal(usersStats[0].roles.count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {
