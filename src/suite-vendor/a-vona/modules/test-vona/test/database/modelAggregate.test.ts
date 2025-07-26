@@ -30,7 +30,16 @@ describe('modelAggregate.test.ts', () => {
             id: roles[0].id,
           }],
         },
-        { name: `${prefix}:jimmy`, age: 5 },
+        {
+          name: `${prefix}:jimmy`,
+          age: 5,
+          posts: [{
+            title: `${prefix}:postPear`,
+            postContent: {
+              content: `${prefix}:postContentPear`,
+            },
+          }],
+        },
         { name: `${prefix}:mike` },
       ], {
         include: {
@@ -65,11 +74,11 @@ describe('modelAggregate.test.ts', () => {
         orders: [['id', 'asc']],
         include: {
           // 'posts':true // is autoload
-          roles: true,
+          roles: {},
         },
       });
       assert.equal(usersStats.length, 3);
-      assert.equal(usersStats[0].posts);
+      assert.equal(usersStats[0].posts.count_all);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {
