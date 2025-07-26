@@ -1,5 +1,6 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelWhere } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelSelectAggrParamsAggrs, TypeModelWhere } from '../../types/index.ts';
+import { ensureArray } from '@cabloy/utils';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
@@ -138,6 +139,19 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   buildOffset(builder: Knex.QueryBuilder, offset?: number) {
     if (offset !== undefined) {
       builder.offset(offset);
+    }
+  }
+
+  buildAggrs(builder: Knex.QueryBuilder, aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>) {
+    if (!aggrs) return;
+    for (const key in aggrs) {
+      const columns = ensureArray(aggrs[key]);
+      if (!columns) continue;
+      for (const column of columns) {
+        const column2 = `${key}_${column === '*' ? 'all' : column}`;
+        const aggrFunc = `${key}(${column})`;
+        builder.select(this.ref(aggrFunc).as(column2));
+      }
     }
   }
 

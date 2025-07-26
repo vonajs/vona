@@ -166,3 +166,11 @@ export function defaultPathSerializer(pathName: string, pathParams?: Record<stri
   }
   return pathName;
 }
+
+export function ensureArray(arr: any, sep?: string) {
+  if (arr === undefined || arr === null) return undefined;
+  if (arr === '') return [];
+  if (Array.isArray(arr)) return arr;
+  if (typeof arr === 'string' && sep !== null) return arr.split(sep ?? ',');
+  return [arr];
+}
