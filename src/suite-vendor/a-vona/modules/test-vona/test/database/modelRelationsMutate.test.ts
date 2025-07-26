@@ -31,10 +31,12 @@ describe('modelRelationsMutate.test.ts', () => {
             id: roles[0].id,
           }],
         },
-      ], { include: {
-        posts: { include: { postContent: true } },
-        roles: true,
-      } });
+      ], {
+        include: {
+          posts: { include: { postContent: true } },
+          roles: true,
+        },
+      });
       assert.equal(users.length, 1);
       // check
       const post = await scopeTest.model.post.get({ id: users[0].posts[0].id }, { include: { postContent: true } });

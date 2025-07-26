@@ -73,6 +73,7 @@ export * from '../entity/role.ts';
 export * from '../entity/roleUser.ts';
 export * from '../entity/test.ts';
 export * from '../entity/user.ts';
+export * from '../entity/userStats.ts';
 import type { IEntityOptionsCategory } from '../entity/category.ts';
 import type { IEntityOptionsPost } from '../entity/post.ts';
 import type { IEntityOptionsPostContent } from '../entity/postContent.ts';
@@ -80,6 +81,7 @@ import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
+import type { IEntityOptionsUserStats } from '../entity/userStats.ts';
 import 'vona';
 declare module 'vona-module-a-orm' {
   
@@ -91,6 +93,7 @@ declare module 'vona-module-a-orm' {
 'test-vona:roleUser': IEntityOptionsRoleUser;
 'test-vona:test': IEntityOptionsTest;
 'test-vona:user': IEntityOptionsUser;
+'test-vona:userStats': IEntityOptionsUserStats;
     }
 
   
@@ -107,6 +110,7 @@ import type { EntityRole } from '../entity/role.ts';
 import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityTest } from '../entity/test.ts';
 import type { EntityUser } from '../entity/user.ts';
+import type { EntityUserStats } from '../entity/userStats.ts';
 export interface IModuleEntity {
   'category': EntityCategoryMeta;
 'post': EntityPostMeta;
@@ -115,6 +119,7 @@ export interface IModuleEntity {
 'roleUser': EntityRoleUserMeta;
 'test': EntityTestMeta;
 'user': EntityUserMeta;
+'userStats': EntityUserStatsMeta;
 }
 /** entity: end */
 /** entity: begin */
@@ -125,6 +130,7 @@ export type EntityRoleTableName = 'testVonaRole';
 export type EntityRoleUserTableName = 'testVonaRoleUser';
 export type EntityTestTableName = 'testVonaTest';
 export type EntityUserTableName = 'testVonaUser';
+export type EntityUserStatsTableName = 'testVonaUserStats';
 export type EntityCategoryMeta=TypeEntityMeta<EntityCategory,EntityCategoryTableName>;
 export type EntityPostMeta=TypeEntityMeta<EntityPost,EntityPostTableName>;
 export type EntityPostContentMeta=TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
@@ -132,6 +138,7 @@ export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
 export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
 export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
+export type EntityUserStatsMeta=TypeEntityMeta<EntityUserStats,EntityUserStatsTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'testVonaCategory': never;
@@ -141,6 +148,7 @@ declare module 'vona-module-a-orm' {
 'testVonaRoleUser': never;
 'testVonaTest': never;
 'testVonaUser': never;
+'testVonaUserStats': never;
   }
 }
 declare module 'vona-module-test-vona' {
@@ -172,6 +180,10 @@ declare module 'vona-module-test-vona' {
     export interface IEntityOptionsUser {
       fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
+
+    export interface IEntityOptionsUserStats {
+      fields?: TypeEntityOptionsFields<EntityUserStats, IEntityOptionsUserStats[TypeSymbolKeyFieldsMore]>;
+    }
 }
 /** entity: end */
 /** model: begin */
@@ -183,6 +195,7 @@ export * from '../model/roleUser.ts';
 export * from '../model/test.ts';
 export * from '../model/testDynamicTable.ts';
 export * from '../model/user.ts';
+export * from '../model/userStats.ts';
 import type { IModelOptionsCategory } from '../model/category.ts';
 import type { IModelOptionsPost } from '../model/post.ts';
 import type { IModelOptionsPostContent } from '../model/postContent.ts';
@@ -191,6 +204,7 @@ import type { IModelOptionsRoleUser } from '../model/roleUser.ts';
 import type { IModelOptionsTest } from '../model/test.ts';
 import type { IModelOptionsTestDynamicTable } from '../model/testDynamicTable.ts';
 import type { IModelOptionsUser } from '../model/user.ts';
+import type { IModelOptionsUserStats } from '../model/userStats.ts';
 import 'vona';
 declare module 'vona-module-a-orm' {
   
@@ -203,6 +217,7 @@ declare module 'vona-module-a-orm' {
 'test-vona:test': IModelOptionsTest;
 'test-vona:testDynamicTable': IModelOptionsTestDynamicTable;
 'test-vona:user': IModelOptionsUser;
+'test-vona:userStats': IModelOptionsUserStats;
     }
 
   
@@ -287,6 +302,16 @@ declare module 'vona-module-test-vona' {
           export interface ModelUser {
             get $beanFullName(): 'test-vona.model.user';
             get $onionName(): 'test-vona:user';
+          }
+
+        export interface ModelUserStats {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ModelUserStats {
+            get $beanFullName(): 'test-vona.model.userStats';
+            get $onionName(): 'test-vona:userStats';
           } 
 }
 /** model: end */
@@ -299,6 +324,7 @@ import type { ModelRoleUser } from '../model/roleUser.ts';
 import type { ModelTest } from '../model/test.ts';
 import type { ModelTestDynamicTable } from '../model/testDynamicTable.ts';
 import type { ModelUser } from '../model/user.ts';
+import type { ModelUserStats } from '../model/userStats.ts';
 export interface IModuleModel {
   'category': ModelCategory;
 'post': ModelPost;
@@ -308,6 +334,7 @@ export interface IModuleModel {
 'test': ModelTest;
 'testDynamicTable': ModelTestDynamicTable;
 'user': ModelUser;
+'userStats': ModelUserStats;
 }
 /** model: end */
 /** model: begin */
@@ -458,6 +485,24 @@ export interface ModelUser {
       mutateBulk<T extends IModelMutateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
     }
+export interface ModelUserStats {
+      [SymbolKeyEntity]: EntityUserStats;
+      [SymbolKeyEntityMeta]: EntityUserStatsMeta;
+      [SymbolKeyModelOptions]: IModelOptionsUserStats;
+      get<T extends IModelGetOptions<EntityUserStats,ModelUserStats>>(where: TypeModelWhere<EntityUserStats>, options?: T): Promise<TypeModelRelationResult<EntityUserStats, ModelUserStats, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityUserStats,ModelUserStats>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUserStats, ModelUserStats, T>[]>;
+      select<T extends IModelSelectParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUserStats, ModelUserStats, T>[]>;
+      count<T extends IModelCountParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
+      insert<T extends IModelInsertOptions<EntityUserStats,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityUserStats,ModelUserStats>>(data: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityUserStats,ModelUserStats>>(where?: TypeModelWhere<EntityUserStats>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityUserStats,ModelUserStats>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityUserStats,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[]>;
+      aggregate<T extends IModelSelectAggrParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+    }
 }
 declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
@@ -469,6 +514,7 @@ declare module 'vona-module-a-orm' {
 'test-vona:test': ModelTest;
 'test-vona:testDynamicTable': ModelTestDynamicTable;
 'test-vona:user': ModelUser;
+'test-vona:userStats': ModelUserStats;
   }
 }
 /** model: end */

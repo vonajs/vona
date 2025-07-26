@@ -8,14 +8,38 @@ describe('modelAggregate.test.ts', () => {
       const prefix = 'action:modelAggregate';
       // scope
       const scopeTest = app.bean.scope('test-vona');
+      // insert: roles
+      const roles = await scopeTest.model.role.insertBulk([
+        { name: `${prefix}:family` },
+        { name: `${prefix}:friend` },
+      ]);
+      assert.equal(roles.length, 2);
+      assert.equal(roles[0].id !== undefined, true);
       // create: users
       const users = await scopeTest.model.user.insertBulk([
-        { name: `${prefix}:tom`, age: 3 },
+        {
+          name: `${prefix}:tom`,
+          age: 3,
+          posts: [{
+            title: `${prefix}:postApple`,
+            postContent: {
+              content: `${prefix}:postContentApple`,
+            },
+          }],
+          roles: [{
+            id: roles[0].id,
+          }],
+        },
         { name: `${prefix}:jimmy`, age: 5 },
         { name: `${prefix}:mike` },
-      ]);
-      // aggr
-      const usersStat = await scopeTest.model.user.aggregate({
+      ], {
+        include: {
+          posts: { include: { postContent: true } },
+          roles: true,
+        },
+      });
+      // aggr: user
+      const userStats = await scopeTest.model.user.aggregate({
         aggrs: {
           count: ['*', 'age'],
           sum: ['age'],
@@ -27,14 +51,26 @@ describe('modelAggregate.test.ts', () => {
           name: { _startsWith_: `${prefix}:` },
         },
       });
-      assert.equal(usersStat.count_all, 3);
-      assert.equal(usersStat.count_age, 2);
-      assert.equal(usersStat.sum_age, 8);
-      assert.equal(usersStat.avg_age, 4);
-      assert.equal(usersStat.max_age, 5);
-      assert.equal(usersStat.min_age, 3);
+      assert.equal(userStats.count_all, 3);
+      assert.equal(userStats.count_age, 2);
+      assert.equal(userStats.sum_age, 8);
+      assert.equal(userStats.avg_age, 4);
+      assert.equal(userStats.max_age, 5);
+      assert.equal(userStats.min_age, 3);
+      // aggr: usersStats
+      const usersStats = await scopeTest.model.user.select({
+        where: {
+          id: users.map(item => item.id),
+        },
+      });
+      assert.equal(usersStats.length, 3);
       // delete: users
-      await scopeTest.model.user.deleteBulk(users.map(item => item.id));
+      await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
+        include: {
+          posts: { include: { postContent: true } },
+          roles: true,
+        },
+      });
     });
   });
 });
