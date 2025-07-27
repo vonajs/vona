@@ -13,7 +13,10 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const tableName = __parseTableName(fileContent);
     contentColumns.push(`export type ${className}TableName = '${tableName}';`);
     contentEntityMetas.push(`export type ${className}Meta=TypeEntityMeta<${className},${className}TableName>;`);
-    contentRecords.push(`'${tableName}': never;`);
+    const contentRecordItem = `'${tableName}': never;`;
+    if (!contentRecords.includes(contentRecordItem)) {
+      contentRecords.push(contentRecordItem);
+    }
     contentFields.push(`
     export interface ${opionsName} {
       fields?: TypeEntityOptionsFields<${className}, ${opionsName}[TypeSymbolKeyFieldsMore]>;

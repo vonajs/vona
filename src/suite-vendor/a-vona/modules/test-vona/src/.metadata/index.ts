@@ -148,7 +148,6 @@ declare module 'vona-module-a-orm' {
 'testVonaRoleUser': never;
 'testVonaTest': never;
 'testVonaUser': never;
-'testVonaUser': never;
   }
 }
 declare module 'vona-module-test-vona' {
