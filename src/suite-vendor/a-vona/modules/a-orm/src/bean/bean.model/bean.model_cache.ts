@@ -10,6 +10,7 @@ import type {
   IModelMethodOptionsGeneral,
   IModelMutateOptions,
   IModelSelectAggrParams,
+  IModelSelectGroupParams,
   IModelSelectParams,
   IModelUpdateOptions,
   ITableRecord,
@@ -17,6 +18,7 @@ import type {
   TypeModelAggrRelationResult,
   TypeModelColumn,
   TypeModelColumns,
+  TypeModelGroupRelationResult,
   TypeModelWhere,
 } from '../../types/index.ts';
 import { isNil } from '@cabloy/utils';
