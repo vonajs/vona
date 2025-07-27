@@ -64,7 +64,6 @@ describe('modelGroup.test.ts', () => {
       // group: user
       const usersGroup = await scopeTest.model.user.group({
         groups: ['name'],
-        columns: ['name'],
         aggrs: {
           count: ['*', 'age'],
           sum: ['age'],
@@ -77,6 +76,7 @@ describe('modelGroup.test.ts', () => {
         },
       });
       assert.equal(usersGroup.length, 3);
+      assert.equal(usersGroup[0].name, '');
       // assert.equal(userStats.count_all, 3);
       // assert.equal(userStats.count_age, 2);
       // assert.equal(userStats.sum_age, 8);

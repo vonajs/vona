@@ -153,7 +153,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   buildGroups(builder: Knex.QueryBuilder, groups?: TypeModelColumnsStrict<TRecord>) {
     if (!groups) return;
     groups = ensureArray(groups)!;
-    builder.groupBy(...groups);
+    builder.groupBy(groups);
     return groups;
   }
 
