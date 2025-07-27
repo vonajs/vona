@@ -64,6 +64,7 @@ describe('modelGroup.test.ts', () => {
       // group: user
       const usersGroup = await scopeTest.model.user.group({
         groups: ['name'],
+        columns: ['name'],
         aggrs: {
           count: ['*', 'age'],
           sum: ['age'],

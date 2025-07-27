@@ -24,6 +24,7 @@ export interface IBuildModelSelectGroupParamsBasic<
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
   groups: TypeModelColumnsStrict<TRecord>;
+  columns?: TypeModelColumnsStrict<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   having?: any;
