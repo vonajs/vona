@@ -357,7 +357,7 @@ declare module 'vona-module-test-vona' {
       mutate<T extends IModelMutateOptions<EntityCategory,ModelCategory>>(data?: TypeModelMutateRelationData<EntityCategory,ModelCategory, T>, options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategory, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityCategory,ModelCategory>>(items: TypeModelMutateRelationData<EntityCategory,ModelCategory, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategory, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityCategory, T>[]>;
     }
 export interface ModelPost {
       [SymbolKeyEntity]: EntityPost;
@@ -376,7 +376,7 @@ export interface ModelPost {
       mutate<T extends IModelMutateOptions<EntityPost,ModelPost>>(data?: TypeModelMutateRelationData<EntityPost,ModelPost, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPost,ModelPost, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityPost,ModelPost>>(items: TypeModelMutateRelationData<EntityPost,ModelPost, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPost,ModelPost, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityPost,ModelPost,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityPost, T>[]>;
     }
 export interface ModelPostContent {
       [SymbolKeyEntity]: EntityPostContent;
@@ -395,7 +395,7 @@ export interface ModelPostContent {
       mutate<T extends IModelMutateOptions<EntityPostContent,ModelPostContent>>(data?: TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityPostContent,ModelPostContent>>(items: TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPostContent,ModelPostContent, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityPostContent, T>[]>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
@@ -414,7 +414,7 @@ export interface ModelRole {
       mutate<T extends IModelMutateOptions<EntityRole,ModelRole>>(data?: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityRole, T>[]>;
     }
 export interface ModelRoleUser {
       [SymbolKeyEntity]: EntityRoleUser;
@@ -433,7 +433,7 @@ export interface ModelRoleUser {
       mutate<T extends IModelMutateOptions<EntityRoleUser,ModelRoleUser>>(data?: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityRoleUser,ModelRoleUser>>(items: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityRoleUser, T>[]>;
     }
 export interface ModelTest {
       [SymbolKeyEntity]: EntityTest;
@@ -452,7 +452,7 @@ export interface ModelTest {
       mutate<T extends IModelMutateOptions<EntityTest,ModelTest>>(data?: TypeModelMutateRelationData<EntityTest,ModelTest, T>, options?: T): Promise<TypeModelMutateRelationData<EntityTest,ModelTest, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityTest,ModelTest>>(items: TypeModelMutateRelationData<EntityTest,ModelTest, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityTest,ModelTest, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityTest,ModelTest,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityTest, T>[]>;
     }
 export interface ModelTestDynamicTable {
       [SymbolKeyEntity]: EntityTest;
@@ -471,7 +471,7 @@ export interface ModelTestDynamicTable {
       mutate<T extends IModelMutateOptions<EntityTest,ModelTestDynamicTable>>(data?: TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>, options?: T): Promise<TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityTest,ModelTestDynamicTable>>(items: TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityTest,ModelTestDynamicTable, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityTest,ModelTestDynamicTable,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityTest, T>[]>;
     }
 export interface ModelUser {
       [SymbolKeyEntity]: EntityUser;
@@ -490,7 +490,7 @@ export interface ModelUser {
       mutate<T extends IModelMutateOptions<EntityUser,ModelUser>>(data?: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
     }
 export interface ModelUserStats {
       [SymbolKeyEntity]: EntityUserStats;
@@ -509,7 +509,7 @@ export interface ModelUserStats {
       mutate<T extends IModelMutateOptions<EntityUserStats,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[]>;
       aggregate<T extends IModelSelectAggrParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUserStats, T>[]>;
     }
 }
 declare module 'vona-module-a-orm' {

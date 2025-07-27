@@ -81,6 +81,7 @@ export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta 
     TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
 export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs extends {} } ? Aggrs : undefined;
+export type TypeUtilGetParamsGroups<TParams> = TParams extends { groups?: infer Groups extends string | string[] } ? Groups : undefined;
 export type TypeUtilGetParamsInlcude<TParams> = TParams extends { include?: infer INCLUDE extends {} } ? INCLUDE : undefined;
 export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH extends {} } ? WITH : undefined;
 export type TypeUtilGetParamsColumns<TParams> = TParams extends { columns?: infer COLUMNS } ? COLUMNS : undefined;

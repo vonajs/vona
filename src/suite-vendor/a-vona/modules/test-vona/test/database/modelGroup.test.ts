@@ -61,8 +61,9 @@ describe('modelGroup.test.ts', () => {
           roles: true,
         },
       });
-      // aggr: user
-      const userStats = await scopeTest.model.user.aggregate({
+      // group: user
+      const usersGroup = await scopeTest.model.user.group({
+        groups: ['name'],
         aggrs: {
           count: ['*', 'age'],
           sum: ['age'],
@@ -74,12 +75,13 @@ describe('modelGroup.test.ts', () => {
           name: { _startsWith_: `${prefix}:` },
         },
       });
-      assert.equal(userStats.count_all, 3);
-      assert.equal(userStats.count_age, 2);
-      assert.equal(userStats.sum_age, 8);
-      assert.equal(userStats.avg_age, 4);
-      assert.equal(userStats.max_age, 5);
-      assert.equal(userStats.min_age, 3);
+      assert.equal(usersGroup.length, 3);
+      // assert.equal(userStats.count_all, 3);
+      // assert.equal(userStats.count_age, 2);
+      // assert.equal(userStats.sum_age, 8);
+      // assert.equal(userStats.avg_age, 4);
+      // assert.equal(userStats.max_age, 5);
+      // assert.equal(userStats.min_age, 3);
       // aggr: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStats.select({
         where: {
