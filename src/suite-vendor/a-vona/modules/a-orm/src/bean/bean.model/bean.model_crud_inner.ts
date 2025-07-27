@@ -84,6 +84,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     builder.select(params?.columns as any);
     // distinct
     this.buildDistinct(builder, params?.distinct);
+    // groups
+    this.buildGroups(builder, params?.groups);
     // aggregate
     this.buildAggrs(builder, params?.aggrs);
     // joins

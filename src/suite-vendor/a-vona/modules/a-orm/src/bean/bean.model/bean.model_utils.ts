@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelSelectAggrParamsAggrs, TypeModelWhere } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumnsStrict, TypeModelSelectAggrParamsAggrs, TypeModelWhere } from '../../types/index.ts';
 import { ensureArray } from '@cabloy/utils';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
@@ -140,6 +140,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     if (offset !== undefined) {
       builder.offset(offset);
     }
+  }
+
+  buildGroups(builder: Knex.QueryBuilder, groups?: TypeModelColumnsStrict<TRecord>) {
+    if (!groups) return;
+    groups = ensureArray(groups)!;
+    builder.groupBy(...groups);
   }
 
   buildAggrs(builder: Knex.QueryBuilder, aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>) {

@@ -6,7 +6,7 @@ import { $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelGroup.test.ts', () => {
-  it('action:modelGroup', async () => {
+  it.only('action:modelGroup', async () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelGroup';
       // scope

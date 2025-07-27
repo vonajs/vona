@@ -195,8 +195,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
   ): Promise<TypeModelGroupRelationResult<TRecord, T>[]> {
-    const items = await this.__group_raw(undefined, params, options);
-    return items[0] as any;
+    return await this.__group_raw(undefined, params, options) as any;
   }
 
   private async __group_raw(
