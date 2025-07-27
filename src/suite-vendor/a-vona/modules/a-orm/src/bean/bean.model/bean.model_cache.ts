@@ -185,6 +185,29 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return await this.__select_cache(table, params, options);
   }
 
+  async group<
+    T extends IModelSelectGroupParams<TRecord>,
+    ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+  >(
+    params?: T,
+    options?: IModelMethodOptions,
+    _modelJoins?: ModelJoins,
+  ): Promise<TypeModelGroupRelationResult<T>> {
+    const items = await this.__group_raw(undefined, params, options);
+    return items[0] as any;
+  }
+
+  private async __group_raw(
+    table: keyof ITableRecord | undefined,
+    params?: IModelSelectParams<TRecord>,
+    options?: IModelMethodOptions,
+  ): Promise<TRecord[]> {
+    // table
+    table = table || this.getTable();
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
+    return await this.__select_cache(table, params, options);
+  }
+
   async select<
     T extends IModelSelectParams<TRecord>,
     ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
