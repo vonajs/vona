@@ -75,3 +75,4 @@ export type TypeModelColumn<TRecord> = keyof TRecord | '*';
 export type TypeModelColumns<TRecord> = TypeModelColumn<TRecord> | Array<TypeModelColumn<TRecord>>;
 export type TypeModelColumnPatch<TRecord, TColumn> = TColumn extends '*' ? TypeModelColumn<TRecord> : TColumn;
 export type TypeModelColumnsPatch<TRecord, TColumn> = TypeModelColumnPatch<TRecord, TColumn> | Array<TypeModelColumnPatch<TRecord, TColumn>>;
+export type TypeModelColumnsStrict<TRecord> = keyof TRecord | Array<keyof TRecord>;

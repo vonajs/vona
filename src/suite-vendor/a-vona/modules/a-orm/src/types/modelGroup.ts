@@ -1,7 +1,7 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsJoin } from './model.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
-import type { TypeModelWhere } from './modelWhere.ts';
+import type { TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
@@ -22,9 +22,14 @@ export interface IBuildModelSelectGroupParamsBasic<
   Columns extends {} | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  aggrs: TypeModelSelectAggrParamsAggrs<TRecord>;
+  aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
+  groups: TypeModelColumnsStrict<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
+  having?: any;
+  orders?: any;
+  limit?: number;
+  offset?: number;
 }
 
 export type IModelSelectGroupParams<
