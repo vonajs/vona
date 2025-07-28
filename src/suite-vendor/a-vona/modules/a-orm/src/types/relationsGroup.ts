@@ -18,7 +18,7 @@ TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> & (Aggrs exte
     { [K in keyof Aggrs]: K extends string ? TypeModelAggrRelationResultAggr<K, TypeUtilAggrPrepareColumns<Aggrs[K]>> : never }
   >> :
     {}) :
-  undefined;
+    {}; // not use undefined
 
 export type TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> =
   Columns extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Columns> ]: K extends keyof TRecord ? TRecord[K] : never } :
