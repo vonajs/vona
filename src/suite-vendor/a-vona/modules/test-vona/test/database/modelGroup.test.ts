@@ -75,18 +75,22 @@ describe('modelGroup.test.ts', () => {
           name: { _startsWith_: `${prefix}:` },
         },
         having: {
-          count_all: { _gt_: BigNumber(1) },
+          _and_: {
+            name: { _startsWith_: `${prefix}:` },
+            max_age: { _isNot_: null },
+          },
+          count_all: { _gt_: BigNumber(0) },
         },
-        orders: [['count_all', 'asc']],
+        orders: [['max_age', 'asc']],
       });
       assert.equal(usersGroup.length, 3);
-      assert.equal(usersGroup[0].name, '');
-      // assert.equal(userStats.count_all, 3);
-      // assert.equal(userStats.count_age, 2);
-      // assert.equal(userStats.sum_age, 8);
-      // assert.equal(userStats.avg_age, 4);
-      // assert.equal(userStats.max_age, 5);
-      // assert.equal(userStats.min_age, 3);
+      assert.equal(usersGroup[0].name, `${prefix}:tom`);
+      assert.equal(usersGroup[0].count_all, 1);
+      assert.equal(usersGroup[0].count_age, 1);
+      assert.equal(usersGroup[0].sum_age, 3);
+      assert.equal(usersGroup[0].avg_age, 3);
+      assert.equal(usersGroup[0].max_age, 3);
+      assert.equal(usersGroup[0].min_age, 3);
       // aggr: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStats.select({
         where: {
