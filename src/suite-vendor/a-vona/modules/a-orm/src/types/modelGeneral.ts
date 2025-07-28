@@ -4,6 +4,7 @@ import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
+import type { TypeModelSelectGroupParamsColumnNames, TypeModelSelectGroupParamsColumns } from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export interface IBuildModelSelectGeneralParams<
@@ -29,9 +30,11 @@ export interface IBuildModelSelectGeneralParamsBasic<
   columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
   aggrs?: Aggrs;
   groups?: Groups;
+  having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord, Groups, Aggrs>>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
-  orders?: IModelSelectParamsOrder<ColumnNames>[];
+  orders?: Groups extends TypeModelColumnsStrict<TRecord> ?
+    IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord, Groups, Aggrs>>[] : IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
 }

@@ -1,7 +1,8 @@
-import type { TypeEntityTableColumnNamesForAggrs } from './modelAggr.ts';
-import type { TypeModelColumn, TypeModelColumnsStrict } from './modelWhere.ts';
+import type BigNumber from 'bignumber.js';
+import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
+import type { TypeModelColumnsStrict } from './modelWhere.ts';
 import type { TypeUtilGetParamsAggrs, TypeUtilGetParamsColumns, TypeUtilGetParamsGroups } from './relations.ts';
-import type { TypeModelAggrRelationResultAggr, TypeRecordAggrsValues, TypeRecordAggrsValuesToObject, TypeUtilAggrPrepareColumns } from './relationsAggr.ts';
+import type { TypeModelAggrRelationResultAggr, TypeModelAggrRelationResultAggrs, TypeRecordAggrsValues, TypeRecordAggrsValuesToObject, TypeUtilAggrPrepareColumns } from './relationsAggr.ts';
 
 export type TypeModelGroupRelationResult<TRecord, TOptions> =
   TypeModelGroupRelationResultGroups<
@@ -26,26 +27,23 @@ export type TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> =
 
 export type TypeModelSelectGroupParamsColumnNames<
   TRecord,
-  ColumnNames extends TypeModelColumnsStrict<TRecord> = TypeModelColumnsStrict<TRecord>,
-  ColumnNamesAggrs
-  extends TypeEntityTableColumnNamesForAggrs<TRecord>
-    | Array<TypeEntityTableColumnNamesForAggrs<TRecord>> | undefined = TypeEntityTableColumnNamesForAggrs<TRecord> |
-      Array<TypeEntityTableColumnNamesForAggrs<TRecord>>,
+  ColumnNames extends TypeModelColumnsStrict<TRecord> | undefined = TypeModelColumnsStrict<TRecord>,
+  Aggrs
+  extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = TypeModelSelectAggrParamsAggrs<TRecord>,
 > =
- TypeUtilAggrPrepareColumns<ColumnNames> | TypeModelAggrRelationResultAggr<'count', TypeModelColumn<TRecord>> | TypeModelAggrRelationResultAggr<'sum' | 'avg' | 'max' | 'min', TypeUtilAggrPrepareColumns<ColumnNamesAggrs>>;
+  TypeUtilAggrPrepareColumns<ColumnNames> |
+  Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> ?
+    keyof TypeModelAggrRelationResultAggrs<Aggrs> : never;
 
 export type TypeModelSelectGroupParamsColumns<
   TRecord,
-  ColumnNames extends TypeModelColumnsStrict<TRecord> = TypeModelColumnsStrict<TRecord>,
-  ColumnNamesAggrs
-  extends TypeEntityTableColumnNamesForAggrs<TRecord>
-    | Array<TypeEntityTableColumnNamesForAggrs<TRecord>> | undefined = TypeEntityTableColumnNamesForAggrs<TRecord> |
-      Array<TypeEntityTableColumnNamesForAggrs<TRecord>>,
+  ColumnNames extends TypeModelColumnsStrict<TRecord> | undefined = TypeModelColumnsStrict<TRecord>,
+  Aggrs
+  extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = TypeModelSelectAggrParamsAggrs<TRecord>,
 > =
-(TypeUtilAggrPrepareColumns<ColumnNames> extends string
-  ? { [K in TypeUtilAggrPrepareColumns<ColumnNames>]: K extends keyof TRecord ? TRecord[K] : never } : {})
-& TypeModelSelectGroupParamsColumnsAggrs<TypeModelAggrRelationResultAggr<'count', TypeModelColumn<TRecord>>>
-& TypeModelSelectGroupParamsColumnsAggrs<TypeModelAggrRelationResultAggr<'sum' | 'avg' | 'max' | 'min', TypeUtilAggrPrepareColumns<ColumnNamesAggrs>>>;
+ (TypeUtilAggrPrepareColumns<ColumnNames> extends string
+   ? { [K in TypeUtilAggrPrepareColumns<ColumnNames>]: K extends keyof TRecord ? TRecord[K] : never } : {})
+ & TypeModelAggrRelationResultAggrs<Aggrs>;
 
 export type TypeModelSelectGroupParamsColumnsAggrs<ColumnNames extends string> =
 { [K in ColumnNames]: BigNumber };

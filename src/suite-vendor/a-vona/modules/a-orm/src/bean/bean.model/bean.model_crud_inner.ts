@@ -93,6 +93,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     this.buildJoins(builder, params?.joins);
     // where
     this.prepareWhere(builder, table, params?.where, options);
+    // having
+    this.buildHaving(builder, params?.having);
     // orders
     this.buildOrders(builder, params?.orders);
     // limit
