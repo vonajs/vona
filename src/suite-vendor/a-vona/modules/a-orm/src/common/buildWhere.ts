@@ -197,8 +197,9 @@ function _buildWhereColumnOpNormal<TRecord>(
 
 function _checkHavingColumn<TRecord>(having: boolean, column: keyof TRecord | string) {
   if (!having) return column;
-  const [aggr, name] = cast<string>(column).split('_');
+  let [aggr, name] = cast<string>(column).split('_');
   if (!OpAggrs.includes(aggr) || !name) return column;
+  if (aggr === 'count' && name === 'all') name = '*';
   return `${_safeOp(aggr)}(${_safeOp(name)})`;
 }
 
