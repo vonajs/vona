@@ -21,11 +21,7 @@ function _buildWhereInner<TRecord>(
   }
   // raw
   if (isRaw(wheres)) {
-    if (having) {
-      builder.havingRaw(wheres as Knex.Raw);
-    } else {
-      builder.whereRaw(wheres as Knex.Raw);
-    }
+    builder[having ? 'havingRaw' : 'whereRaw'](wheres as Knex.Raw);
     return;
   }
   // loop
@@ -67,10 +63,10 @@ function _buildWhereOpJoint<TRecord>(
   }
   // and/or
   if (op === Op.and) {
-    builder.where(builder => {
+    builder[having ? 'having' : 'where'](builder => {
       for (const key in wheres) {
-        builder.andWhere(builder => {
-          _buildWhereInner(knex, builder, { [key]: wheres[key] } as any, column);
+        builder[having ? 'andHaving' : 'andWhere'](builder => {
+          _buildWhereInner(having, knex, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -78,10 +74,10 @@ function _buildWhereOpJoint<TRecord>(
   }
   // or
   if (op === Op.or) {
-    builder.where(builder => {
+    builder[having ? 'having' : 'where'](builder => {
       for (const key in wheres) {
-        builder.orWhere(builder => {
-          _buildWhereInner(knex, builder, { [key]: wheres[key] } as any, column);
+        builder[having ? 'orHaving' : 'orWhere'](builder => {
+          _buildWhereInner(having, knex, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -89,23 +85,24 @@ function _buildWhereOpJoint<TRecord>(
   }
   // not
   if (op === Op.not) {
-    builder.whereNot(builder => {
-      _buildWhereInner(knex, builder, wheres, column);
+    builder[having ? 'havingNot' : 'whereNot'](builder => {
+      _buildWhereInner(having, knex, builder, wheres, column);
     });
     return;
   }
   // exists
   if (op === Op.exists) {
-    builder.whereExists(wheres as any);
+    builder[having ? 'havingExists' : 'whereExists'](wheres as any);
     return;
   }
   // notexists
   if (op === Op.notExists) {
-    builder.whereNotExists(wheres as any);
+    builder[having ? 'havingNotExists' : 'whereNotExists'](wheres as any);
   }
 }
 
 function _buildWhereColumn<TRecord>(
+  having: boolean,
   knex: Knex,
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
@@ -118,36 +115,37 @@ function _buildWhereColumn<TRecord>(
   }
   // raw
   if (isRaw(value)) {
-    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.eq);
+    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
     return;
   }
   // null/undefined
   if (isNil(value)) {
-    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.is);
+    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.is);
     return;
   }
   // array
   if (Array.isArray(value)) {
-    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.in);
+    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.in);
     return;
   }
   // date
   if (value instanceof Date) {
-    _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.eq);
+    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
     return;
   }
   // object
   if (typeof value === 'object') {
-    builder.where(builder => {
-      _buildWhereInner(knex, builder, value as any, column);
+    builder[having ? 'having' : 'where'](builder => {
+      _buildWhereInner(having, knex, builder, value as any, column);
     });
     return;
   }
   // column
-  _buildWhereColumnOpNormal(knex, builder, column, value, op ?? Op.eq);
+  _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
 }
 
 function _buildWhereColumnOpNormal<TRecord>(
+  having: boolean,
   knex: Knex,
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
@@ -155,17 +153,17 @@ function _buildWhereColumnOpNormal<TRecord>(
   op: TypeOpsNormal,
 ) {
   if (op === Op.eq) {
-    builder.where(column, '=', value);
+    builder[having ? 'having' : 'where'](column, '=', value);
   } else if (op === Op.notEq) {
-    builder.where(column, '<>', value);
+    builder[having ? 'having' : 'where'](column, '<>', value);
   } else if (op === Op.gt) {
-    builder.where(column, '>', value);
+    builder[having ? 'having' : 'where'](column, '>', value);
   } else if (op === Op.gte) {
-    builder.where(column, '>=', value);
+    builder[having ? 'having' : 'where'](column, '>=', value);
   } else if (op === Op.lt) {
-    builder.where(column, '<', value);
+    builder[having ? 'having' : 'where'](column, '<', value);
   } else if (op === Op.lte) {
-    builder.where(column, '<=', value);
+    builder[having ? 'having' : 'where'](column, '<=', value);
   } else if (op === Op.in) {
     builder.whereIn(column, value);
   } else if (op === Op.notIn) {
