@@ -1,6 +1,6 @@
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumnsStrict } from './modelWhere.ts';
-import type { TypeUtilGetParamsAggrs, TypeUtilGetParamsColumns, TypeUtilGetParamsGroups } from './relations.ts';
+import type { TypeUtilGetParamsAggrs, TypeUtilGetParamsColumns, TypeUtilGetParamsGroups, TypeUtilGetRelationOptionsGroups } from './relations.ts';
 import type { TypeModelAggrRelationResultAggr, TypeModelAggrRelationResultAggrs, TypeRecordAggrsValues, TypeRecordAggrsValuesToObject, TypeUtilAggrPrepareColumns } from './relationsAggr.ts';
 
 export type TypeModelGroupRelationResult<TRecord, TOptions> =
@@ -46,3 +46,7 @@ export type TypeModelSelectGroupParamsColumns<
 
 export type TypeModelAggrRelationResultAggrsToNumberType<Columns> =
 { [K in keyof Columns]: number | string }; // not use BigNumber
+
+export type TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined> =
+  TypeUtilGetParamsGroups<IncludeWrapper> extends string | string[] ?
+    TypeUtilGetParamsGroups<IncludeWrapper> : TypeUtilGetRelationOptionsGroups<Relation>;

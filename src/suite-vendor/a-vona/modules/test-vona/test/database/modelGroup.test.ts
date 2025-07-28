@@ -92,7 +92,7 @@ describe('modelGroup.test.ts', () => {
       assert.equal(usersGroup[0].max_age, 5);
       assert.equal(usersGroup[0].min_age, 5);
       // group: usersStats: posts: autoload
-      const usersStats = await scopeTest.model.userStats.select({
+      const usersStats = await scopeTest.model.userStatsGroup.select({
         where: {
           id: users.map(item => item.id),
         },
@@ -102,10 +102,10 @@ describe('modelGroup.test.ts', () => {
         },
       });
       assert.equal(usersStats.length, 3);
-      assert.equal(usersStats[0].posts?.count_all, 2);
-      assert.equal(usersStats[0].posts?.count_title, 2);
-      assert.equal(usersStats[0].posts?.sum_stars, 5);
-      assert.equal(usersStats[0].roles?.count_all, 1);
+      assert.equal(usersStats[0].posts[0].count_all, 2);
+      assert.equal(usersStats[0].posts[0].count_title, 2);
+      assert.equal(usersStats[0].posts[0].sum_stars, 5);
+      assert.equal(usersStats[0].roles[0].count_all, 1);
       // aggr: usersStats: posts: mixed
       const usersStats2 = await scopeTest.model.userStats.select({
         where: {

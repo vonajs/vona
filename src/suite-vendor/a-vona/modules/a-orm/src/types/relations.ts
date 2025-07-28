@@ -2,6 +2,7 @@ import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
 import type { TypeModelAggrRelationResultAggrs, TypeUtilGetAggrsFromRelationAndIncludeWrapper } from './relationsAggr.ts';
+import type { TypeModelGroupRelationResultGroups, TypeUtilGetGroupsFromRelationAndIncludeWrapper } from './relationsGroup.ts';
 
 export const SymbolKeyEntity = Symbol('$entity');
 export const SymbolKeyEntityMeta = Symbol('$entityMeta');
@@ -56,6 +57,7 @@ export type TypeUtilGetRelationOptions<Relation> = Relation extends { options?: 
 export type TypeUtilGetRelationOptionsAutoload<Relation> = Relation extends { options?: { autoload?: infer AUTOLOAD } } ? AUTOLOAD : undefined;
 export type TypeUtilGetRelationOptionsColumns<Relation> = Relation extends { options?: { columns?: infer COLUMNS } } ? COLUMNS : undefined;
 export type TypeUtilGetRelationOptionsAggrs<Relation> = Relation extends { options?: { aggrs?: infer Aggrs } } ? Aggrs : undefined;
+export type TypeUtilGetRelationOptionsGroups<Relation> = Relation extends { options?: { groups?: infer Groups } } ? Groups : undefined;
 export type TypeUtilGetModelOptions<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model[TypeSymbolKeyModelOptions] : undefined;
 export type TypeUtilGetModelEntity<Model extends BeanModelMeta | undefined> = Model extends BeanModelMeta ? Model[TypeSymbolKeyEntity] : undefined;
@@ -71,13 +73,24 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
     TypeUtilGetRelationModel<Relation>,
     IncludeWrapper,
     TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
-    TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
+    TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
+    TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
   >;
-export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns, Aggrs> =
+export type TypeUtilGetEntityByType<
+  TRecord,
+  TYPE,
+  TModel extends BeanModelMeta | undefined,
+  IncludeWrapper extends {} | undefined,
+  Columns,
+  Aggrs,
+  Groups,
+> =
   TYPE extends 'hasMany' | 'belongsToMany' ?
-    Aggrs extends {} ?
+    Groups extends string | string[] ?
+      Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs, Groups>> :
+        (Aggrs extends {} ?
       TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> | undefined :
-      Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> :
+          Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>>) :
     TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
 export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs extends {} } ? Aggrs : undefined;
@@ -91,10 +104,19 @@ export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWra
   TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[] ?
     TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
 
-export type TypeModelRelationResult<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined, Aggrs = undefined> =
-  Aggrs extends {} ?
-    TypeModelAggrRelationResultAggrs<Aggrs> :
-    TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns>;
+export type TypeModelRelationResult<
+  TRecord,
+  TModel extends BeanModelMeta | undefined,
+  TOptionsRelation,
+  TColumns = undefined,
+  Aggrs = undefined,
+  Groups = undefined,
+> =
+  Groups extends string | string[] ?
+    TypeModelGroupRelationResultGroups<TRecord, Aggrs, Groups, TColumns> :
+    Aggrs extends {} ?
+      TypeModelAggrRelationResultAggrs<Aggrs> :
+      TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns>;
 
 export type TypeModelRelationResult_Normal<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined> =
   TypeUtilEntitySelector<
