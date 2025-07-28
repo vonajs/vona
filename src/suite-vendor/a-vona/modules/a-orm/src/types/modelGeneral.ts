@@ -19,7 +19,7 @@ export interface IBuildModelSelectGeneralParams<
 
 export interface IBuildModelSelectGeneralParamsBasic<
   TRecord,
-  COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
+  COLUMNS extends TypeModelColumn<TRecord> | undefined = TypeModelColumn<TRecord>,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
@@ -27,7 +27,7 @@ export interface IBuildModelSelectGeneralParamsBasic<
   Groups extends TypeModelColumnsStrict<TRecord> | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
+  columns?: Groups extends TypeModelColumnsStrict<TRecord> ? COLUMNS : TypeModelColumnsPatch<TRecord, COLUMNS>;
   aggrs?: Aggrs;
   groups?: Groups;
   having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord, Groups, Aggrs>>;

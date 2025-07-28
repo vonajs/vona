@@ -7,8 +7,9 @@ import { ModelPost } from './post.ts';
 
 export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }, 'title' | Array<'title'>>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count?: '*' }, 'name'>;
+    // columns：默认为undefined
+    posts: IModelRelationHasMany<ModelPost, true, undefined, undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }, 'title' | Array<'title'>>;
+    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, undefined, undefined, { count?: '*' }, 'name'>;
   };
 }
 

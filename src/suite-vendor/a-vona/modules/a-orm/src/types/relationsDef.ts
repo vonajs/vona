@@ -47,7 +47,9 @@ export interface IModelRelationHasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
   COLUMNS
-  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  extends TypeModelColumn<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
@@ -63,7 +65,9 @@ export interface IModelRelationBelongsToMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
   COLUMNS
-  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  extends TypeModelColumn<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
@@ -88,7 +92,7 @@ export interface IModelRelationOptionsOne<
 export type IModelRelationOptionsMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
@@ -106,7 +110,7 @@ export type IModelRelationOptionsMany<
 export interface IBuildModelRelationOptionsMany<
   TRecord,
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<TRecord> = TypeModelColumn<TRecord>,
+  COLUMNS extends TypeModelColumn<TRecord> | undefined = TypeModelColumn<TRecord>,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
