@@ -1,9 +1,10 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelSelectParamsJoin } from './model.ts';
+import type { IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
+import type { TypeModelSelectGroupParamsColumnNames, TypeModelSelectGroupParamsColumns } from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export interface IBuildModelSelectGroupParams<
@@ -27,8 +28,8 @@ export interface IBuildModelSelectGroupParamsBasic<
   columns?: TypeModelColumnsStrict<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
-  having?: any;
-  orders?: any;
+  having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>;
+  orders?: IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord>>[];
   limit?: number;
   offset?: number;
 }

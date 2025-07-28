@@ -74,6 +74,10 @@ describe('modelGroup.test.ts', () => {
         where: {
           name: { _startsWith_: `${prefix}:` },
         },
+        having: {
+          count_all: { _gt_: BigNumber(1) },
+        },
+        orders: [['count_all', 'asc']],
       });
       assert.equal(usersGroup.length, 3);
       assert.equal(usersGroup[0].name, '');
