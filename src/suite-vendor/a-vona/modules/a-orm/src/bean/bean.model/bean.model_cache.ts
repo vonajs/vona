@@ -200,13 +200,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private async __group_raw(
     table: keyof ITableRecord | undefined,
-    params?: IModelSelectParams<TRecord>,
+    params?: IModelSelectGroupParams<TRecord>,
     options?: IModelMethodOptions,
   ): Promise<TRecord[]> {
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
-    return await this.__select_cache(table, params, options);
+    return await this.__select_cache(table, params as any, options);
   }
 
   async select<
