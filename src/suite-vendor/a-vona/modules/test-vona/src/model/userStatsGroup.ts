@@ -7,7 +7,7 @@ import { ModelPost } from './post.ts';
 
 export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
   relations: {
-    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }, 'title'>;
+    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }, 'title' | Array<'title'>>;
     roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count?: '*' }, 'name'>;
   };
 }
@@ -15,7 +15,7 @@ export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
 @Model<IModelOptionsUserStatsGroup>({
   entity: EntityUserStatsGroup,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' } }),
+    posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' }, orders: [['title', 'asc']] }),
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { groups: 'name', aggrs: { count: '*' } }),
   },
 })

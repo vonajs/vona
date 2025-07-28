@@ -30,7 +30,7 @@ export type TypeModelSelectGroupParamsColumnNames<
   Aggrs
   extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = TypeModelSelectAggrParamsAggrs<TRecord>,
 > =
-  TypeUtilAggrPrepareColumns<ColumnNames> |
+  (ColumnNames extends TypeModelColumnsStrict<TRecord> ? TypeUtilAggrPrepareColumns<ColumnNames> : never) |
   (Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> ?
     keyof TypeModelAggrRelationResultAggrs<Aggrs> : never);
 
