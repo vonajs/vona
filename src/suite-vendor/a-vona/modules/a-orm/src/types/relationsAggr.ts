@@ -1,3 +1,4 @@
+import type BigNumber from 'bignumber.js';
 import type { TypeUtilGetParamsAggrs, TypeUtilGetRelationOptionsAggrs } from './relations.ts';
 
 export type TypeModelAggrRelationResult<TOptions> =

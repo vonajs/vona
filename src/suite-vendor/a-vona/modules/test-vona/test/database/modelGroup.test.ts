@@ -1,12 +1,13 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import BigNumber from 'bignumber.js';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
 import { $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost, ModelRole, ModelRoleUser } from 'vona-module-test-vona';
 
 describe('modelGroup.test.ts', () => {
-  it.only('action:modelGroup', async () => {
+  it('action:modelGroup', async () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelGroup';
       // scope
