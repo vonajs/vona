@@ -1,3 +1,5 @@
+import type { TypeEntityTableColumnNamesForAggrs } from './modelAggr.ts';
+import type { TypeModelColumn, TypeModelColumnsStrict } from './modelWhere.ts';
 import type { TypeUtilGetParamsAggrs, TypeUtilGetParamsColumns, TypeUtilGetParamsGroups } from './relations.ts';
 import type { TypeModelAggrRelationResultAggr, TypeRecordAggrsValues, TypeRecordAggrsValuesToObject, TypeUtilAggrPrepareColumns } from './relationsAggr.ts';
 
@@ -21,3 +23,13 @@ TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> & (Aggrs exte
 export type TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> =
   Columns extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Columns> ]: K extends keyof TRecord ? TRecord[K] : never } :
   Groups extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Groups> ]: K extends keyof TRecord ? TRecord[K] : never } : {};
+
+export type TypeModelSelectGroupParamsColumnNames<
+  TRecord,
+  ColumnNames extends TypeModelColumnsStrict<TRecord> = TypeModelColumnsStrict<TRecord>,
+  ColumnNamesAggrs
+  extends TypeEntityTableColumnNamesForAggrs<TRecord>
+    | Array<TypeEntityTableColumnNamesForAggrs<TRecord>> | undefined = TypeEntityTableColumnNamesForAggrs<TRecord> |
+      Array<TypeEntityTableColumnNamesForAggrs<TRecord>>,
+> =
+ TypeUtilAggrPrepareColumns<ColumnNames> | TypeModelAggrRelationResultAggr<'count', TypeModelColumn<TRecord>> | TypeModelAggrRelationResultAggr<'sum' | 'avg' | 'max' | 'min', TypeUtilAggrPrepareColumns<ColumnNamesAggrs>>;

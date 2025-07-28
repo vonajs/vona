@@ -9,7 +9,7 @@ Aggrs extends {} ?
     { [K in keyof Aggrs]: K extends string ? TypeModelAggrRelationResultAggr<K, TypeUtilAggrPrepareColumns<Aggrs[K]>> : never }
   >> : undefined;
 
-export type TypeModelAggrRelationResultAggr<Aggr extends string, Columns extends string | undefined> = Columns extends string ? `${Aggr}_${Columns extends '*' ? 'all' : Columns}` : never;
+export type TypeModelAggrRelationResultAggr<Aggr extends string, Columns extends string | number | symbol | undefined> = Columns extends string ? `${Aggr}_${Columns extends '*' ? 'all' : Columns}` : never;
 
 export type TypeUtilAggrPrepareColumns<TColumns> = TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
 export type TypeRecordAggrsValues<TRecord extends Record<string, any>> = TRecord[keyof TRecord];

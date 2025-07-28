@@ -11,4 +11,7 @@ export class EntityUser extends EntityBase {
 
   @Api.field(v.optional())
   age?: number;
+
+  @Api.field(v.optional())
+  scores?: number;
 }
