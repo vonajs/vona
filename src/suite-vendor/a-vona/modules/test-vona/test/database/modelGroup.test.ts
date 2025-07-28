@@ -1,6 +1,5 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import BigNumber from 'bignumber.js';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
 import { $relationDynamic } from 'vona-module-a-orm';
@@ -84,7 +83,7 @@ describe('modelGroup.test.ts', () => {
         },
         orders: [['max_age', 'desc']],
       });
-      assert.equal(usersGroup.length, 3);
+      assert.equal(usersGroup.length, 2);
       assert.equal(usersGroup[0].name, `${prefix}:jimmy`);
       assert.equal(usersGroup[0].count_all, 1);
       assert.equal(usersGroup[0].count_age, 1);

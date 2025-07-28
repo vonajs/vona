@@ -261,7 +261,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return await super._select(table, params, options);
     }
     // builder
-    const builder = this._select_buildParams(table, params, options);
+    const builder = this._select_buildParams(table, params as any, options);
     const sql = builder.toQuery();
     const key = { sql };
     // cache
