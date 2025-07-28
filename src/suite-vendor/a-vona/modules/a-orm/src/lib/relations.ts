@@ -1,6 +1,6 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelSelectAggrParamsAggrs } from '../types/modelAggr.ts';
-import type { TypeModelColumn } from '../types/modelWhere.ts';
+import type { TypeModelColumn, TypeModelColumnsStrict } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationOptionsMany, IModelRelationOptionsOne } from '../types/relationsDef.ts';
@@ -42,12 +42,16 @@ function hasMany<
   Aggrs extends TypeModelSelectAggrParamsAggrs<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
   > | undefined = TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  Groups extends TypeModelColumnsStrict<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>,
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>,
   _modelJoins?: ModelJoins,
   _aggrs?: Aggrs,
+  _groups?: Groups,
 ): any { // : IModelRelationHasMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
   return { type: 'hasMany', model: classModel, key, options };
 }
@@ -62,12 +66,15 @@ function belongsToMany<
   Aggrs extends TypeModelSelectAggrParamsAggrs<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
   > | undefined = TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  Groups extends TypeModelColumnsStrict<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
   classModelMiddle: TypeModelClassLike<MODELMiddle>,
   classModel: TypeModelClassLike<MODEL>,
   keyFrom: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>,
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>,
   _modelJoins?: ModelJoins,
   _aggrs?: Aggrs,
 ): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {

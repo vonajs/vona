@@ -1,7 +1,7 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { IBuildModelSelectGeneralParamsBasic } from './modelGeneral.ts';
-import type { TypeModelColumn, TypeModelColumnsPatch } from './modelWhere.ts';
+import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
@@ -89,6 +89,7 @@ export type IModelRelationOptionsMany<
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
+  Groups extends TypeModelColumnsStrict<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
 > = IBuildModelRelationOptionsMany<
   MODEL[TypeSymbolKeyEntity],
   AUTOLOAD,
@@ -96,7 +97,8 @@ export type IModelRelationOptionsMany<
   TypeEntityTableNamesOfGeneral<ModelJoins, MODEL>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, MODEL>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>,
-  Aggrs
+  Aggrs,
+  Groups
 >;
 
 export interface IBuildModelRelationOptionsMany<
@@ -107,6 +109,7 @@ export interface IBuildModelRelationOptionsMany<
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = undefined,
-> extends IBuildModelSelectGeneralParamsBasic<TRecord, COLUMNS, TableNames, ColumnNames, Columns, Aggrs> {
+  Groups extends TypeModelColumnsStrict<TRecord> | undefined = undefined,
+> extends IBuildModelSelectGeneralParamsBasic<TRecord, COLUMNS, TableNames, ColumnNames, Columns, Aggrs, Groups> {
   autoload?: AUTOLOAD;
 }

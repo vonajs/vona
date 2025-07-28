@@ -15,8 +15,8 @@ export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
 @Model<IModelOptionsUserStatsGroup>({
   entity: EntityUserStatsGroup,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, aggrs: { count: ['*', 'title'], sum: 'stars' } }),
-    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { aggrs: { count: '*' } }),
+    posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' } }),
+    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { groups: 'name', aggrs: { count: '*' } }),
   },
 })
 export class ModelUserStatsGroup extends BeanModelBase<EntityUserStatsGroup> {}
