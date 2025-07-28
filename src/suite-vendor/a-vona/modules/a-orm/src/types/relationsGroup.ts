@@ -1,4 +1,3 @@
-import type BigNumber from 'bignumber.js';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumnsStrict } from './modelWhere.ts';
 import type { TypeUtilGetParamsAggrs, TypeUtilGetParamsColumns, TypeUtilGetParamsGroups } from './relations.ts';
@@ -43,7 +42,7 @@ export type TypeModelSelectGroupParamsColumns<
 > =
  (TypeUtilAggrPrepareColumns<ColumnNames> extends string
    ? { [K in TypeUtilAggrPrepareColumns<ColumnNames>]: K extends keyof TRecord ? TRecord[K] : never } : {})
- & TypeModelAggrRelationResultAggrs<Aggrs>;
+ & TypeModelAggrRelationResultAggrsToNumberType<TypeModelAggrRelationResultAggrs<Aggrs>>;
 
-export type TypeModelSelectGroupParamsColumnsAggrs<ColumnNames extends string> =
-{ [K in ColumnNames]: BigNumber };
+export type TypeModelAggrRelationResultAggrsToNumberType<Columns> =
+{ [K in keyof Columns]: number | string }; // not use BigNumber

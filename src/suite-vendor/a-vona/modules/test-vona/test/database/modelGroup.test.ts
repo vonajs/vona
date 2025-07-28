@@ -80,7 +80,7 @@ describe('modelGroup.test.ts', () => {
             name: { _startsWith_: `${prefix}:` },
             max_age: { _isNot_: null },
           },
-          count_all: { _gt_: BigNumber(0) },
+          count_all: { _gt_: 0 },
         },
         orders: [['max_age', 'desc']],
       });
