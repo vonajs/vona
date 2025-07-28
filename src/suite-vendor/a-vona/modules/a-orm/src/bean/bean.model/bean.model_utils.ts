@@ -181,8 +181,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   buildHaving(builder: Knex.QueryBuilder, having: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>) {
-    builder.having(this.raw('count(*)'), '>', '0');
-    // return buildWhere(this.connection, builder, having);
+    return buildWhere(this.connection, builder, having, true);
   }
 
   prepareWhere(builder: Knex.QueryBuilder, table?: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral) {

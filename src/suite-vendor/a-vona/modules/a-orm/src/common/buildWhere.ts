@@ -4,11 +4,12 @@ import { isNil } from '@cabloy/utils';
 import { Op, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw } from './utils.ts';
 
-export function buildWhere<TRecord>(knex: Knex, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>) {
-  _buildWhereInner(knex, builder, wheres);
+export function buildWhere<TRecord>(knex: Knex, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>, having: boolean = false) {
+  _buildWhereInner(having, knex, builder, wheres);
 }
 
 function _buildWhereInner<TRecord>(
+  having: boolean,
   knex: Knex,
   builder: Knex.QueryBuilder,
   wheres: TypeModelWhere<TRecord>,
@@ -20,7 +21,11 @@ function _buildWhereInner<TRecord>(
   }
   // raw
   if (isRaw(wheres)) {
-    builder.whereRaw(wheres as Knex.Raw);
+    if (having) {
+      builder.havingRaw(wheres as Knex.Raw);
+    } else {
+      builder.whereRaw(wheres as Knex.Raw);
+    }
     return;
   }
   // loop
@@ -28,11 +33,11 @@ function _buildWhereInner<TRecord>(
     const value = wheres[key];
     if (key[0] !== '_') {
       // columns
-      _buildWhereColumn(knex, builder, key, value);
+      _buildWhereColumn(having, knex, builder, key, value);
     } else if (OpNormalValues.includes(key as any)) {
       // op: normal
       if (column) {
-        _buildWhereColumn(knex, builder, column, value, key as any);
+        _buildWhereColumn(having, knex, builder, column, value, key as any);
       } else {
         // not go here
       }
@@ -40,7 +45,7 @@ function _buildWhereInner<TRecord>(
       const op = _checkOpJoint(key as any);
       if (op) {
         // op: joint
-        _buildWhereOpJoint(knex, builder, column, value, op);
+        _buildWhereOpJoint(having, knex, builder, column, value, op);
       } else {
         // ignored, not throw error
       }
@@ -49,6 +54,7 @@ function _buildWhereInner<TRecord>(
 }
 
 function _buildWhereOpJoint<TRecord>(
+  having: boolean,
   knex: Knex,
   builder: Knex.QueryBuilder,
   column: keyof TRecord | undefined,
