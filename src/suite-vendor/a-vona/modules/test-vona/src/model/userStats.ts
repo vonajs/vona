@@ -9,7 +9,7 @@ export interface IModelOptionsUserStats extends IDecoratorModelOptions {
   relations: {
     // aggrs：需要支持宿主形式
     posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count: '*' }>;
+    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count?: '*' }>;
   };
 }
 

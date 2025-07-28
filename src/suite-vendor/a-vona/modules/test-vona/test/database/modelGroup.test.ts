@@ -91,7 +91,7 @@ describe('modelGroup.test.ts', () => {
       assert.equal(usersGroup[0].avg_age, 5);
       assert.equal(usersGroup[0].max_age, 5);
       assert.equal(usersGroup[0].min_age, 5);
-      // aggr: usersStats: posts: autoload
+      // group: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStats.select({
         where: {
           id: users.map(item => item.id),
