@@ -5,7 +5,6 @@ import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike } from '../types/relations.ts';
 import type { TableIdentity } from '../types/tableIdentity.ts';
-import { group } from 'node:console';
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -164,9 +163,20 @@ export class ServiceRelations extends BeanBase {
     } else if (type === 'hasMany') {
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       if (optionsReal.groups) {
-
+        const groups = [`${tableNameTarget}.${key}`].concat(optionsReal.groups);
+        const options2 = deepExtend({}, optionsReal, { groups, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+        const items = await modelTarget.group(options2, methodOptionsReal);
+        for (const entity of entities) {
+          entity[relationName] = [];
+          for (const item of items) {
+            if (item[key] === cast(entity).id) {
+              delete item[key];
+              entity[relationName].push(item);
+            }
+          }
+        }
       } else if (optionsReal.aggrs) {
-        const options2 = deepExtend({}, optionsReal, { group: `${tableNameTarget}.${key}`, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+        const options2 = deepExtend({}, optionsReal, { groups: `${tableNameTarget}.${key}`, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
         const items = await modelTarget.group(options2, methodOptionsReal);
         for (const entity of entities) {
           entity[relationName] = items.find(item => item[key] === cast(entity).id);
@@ -189,7 +199,13 @@ export class ServiceRelations extends BeanBase {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
-      if (optionsReal.aggrs) {
+      if (optionsReal.groups) {
+        for (const entity of entities) {
+          const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
+          const options2 = deepExtend({}, optionsReal, { groups: optionsReal.groups, where: { [`${tableNameTarget}.id`]: idsTo } });
+          entity[relationName] = await modelTarget.group(options2, methodOptionsReal);
+        }
+      } else if (optionsReal.aggrs) {
         for (const entity of entities) {
           const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
           const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
