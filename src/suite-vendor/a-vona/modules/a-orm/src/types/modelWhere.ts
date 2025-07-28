@@ -1,5 +1,7 @@
 import type { TypeRecordValues } from 'vona';
 
+export const OpAggrs = ['count', 'sum', 'avg', 'max', 'min'];
+
 export const OpJoint = {
   and: '_and_',
   or: '_or_',

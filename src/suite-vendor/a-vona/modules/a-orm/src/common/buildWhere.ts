@@ -1,7 +1,8 @@
 import type { Knex } from 'knex';
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
-import { Op, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
+import { cast } from 'vona';
+import { Op, OpAggrs, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw } from './utils.ts';
 
 export function buildWhere<TRecord>(knex: Knex, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>, having: boolean = false) {
@@ -148,10 +149,11 @@ function _buildWhereColumnOpNormal<TRecord>(
   having: boolean,
   knex: Knex,
   builder: Knex.QueryBuilder,
-  column: keyof TRecord,
+  column: keyof TRecord | string,
   value: any,
   op: TypeOpsNormal,
 ) {
+  column = _checkHavingColumn(having, column) as string;
   if (op === Op.eq) {
     builder[having ? 'having' : 'where'](column, '=', value);
   } else if (op === Op.notEq) {
@@ -165,32 +167,39 @@ function _buildWhereColumnOpNormal<TRecord>(
   } else if (op === Op.lte) {
     builder[having ? 'having' : 'where'](column, '<=', value);
   } else if (op === Op.in) {
-    builder.whereIn(column, value);
+    builder[having ? 'havingIn' : 'whereIn'](column, value);
   } else if (op === Op.notIn) {
-    builder.whereNotIn(column, value);
+    builder[having ? 'havingNotIn' : 'whereNotIn'](column, value);
   } else if (op === Op.is) {
-    builder.whereNull(column);
+    builder[having ? 'havingNull' : 'whereNull'](column);
   } else if (op === Op.isNot) {
-    builder.whereNotNull(column);
+    builder[having ? 'havingNotNull' : 'whereNotNull'](column);
   } else if (op === Op.between) {
-    builder.whereBetween(column, value);
+    builder[having ? 'havingBetween' : 'whereBetween'](column, value);
   } else if (op === Op.notBetween) {
-    builder.whereNotBetween(column, value);
+    builder[having ? 'havingNotBetween' : 'whereNotBetween'](column, value);
   } else if (op === Op.startsWith) {
-    builder.whereLike(column, `${value}%` as any);
+    builder[having ? 'havingLike' : 'whereLike'](column, `${value}%` as any);
   } else if (op === Op.endsWith) {
-    builder.whereLike(column, `%${value}` as any);
+    builder[having ? 'havingLike' : 'whereLike'](column, `%${value}` as any);
   } else if (op === Op.includes) {
-    builder.whereLike(column, `%${value}%` as any);
+    builder[having ? 'havingLike' : 'whereLike'](column, `%${value}%` as any);
   } else if (op === Op.startsWithI) {
-    builder.whereILike(column, `${value}%` as any);
+    builder[having ? 'havingILike' : 'whereILike'](column, `${value}%` as any);
   } else if (op === Op.endsWithI) {
-    builder.whereILike(column, `%${value}` as any);
+    builder[having ? 'havingILike' : 'whereILike'](column, `%${value}` as any);
   } else if (op === Op.includesI) {
-    builder.whereILike(column, `%${value}%` as any);
+    builder[having ? 'havingILike' : 'whereILike'](column, `%${value}%` as any);
   } else if (op === Op.ref) {
-    builder.where(column, '=', knex.ref(value));
+    builder[having ? 'having' : 'where'](column, '=', knex.ref(value));
   }
+}
+
+function _checkHavingColumn<TRecord>(having: boolean, column: keyof TRecord | string) {
+  if (!having) return column;
+  const [aggr, name] = cast<string>(column).split('_');
+  if (!OpAggrs.includes(aggr) || !name) return column;
+  return `${_safeOp(aggr)}(${_safeOp(name)})`;
 }
 
 function _checkOpJoint(op: TypeOpsJoint) {
@@ -201,6 +210,11 @@ function _checkOpJoint(op: TypeOpsJoint) {
   }
   return undefined;
 }
+
+function _safeOp(op) {
+  return op.replace(/[\\.*#%'"`;,() ]/g, '');
+}
+
 // export function buildWhere(builder: Knex.QueryBuilder, wheres) {
 //   // raw
 //   if (isRaw(wheres)) {
@@ -299,9 +313,4 @@ function _checkOpJoint(op: TypeOpsJoint) {
 //       });
 //     }
 //   });
-// }
-
-// function _safeOp(op) {
-//   if (op === 'notIn') return 'not in';
-//   return op.replace(/[\\.*#%'"`;, ]/g, '');
 // }
