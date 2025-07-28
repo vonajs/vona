@@ -1,7 +1,7 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper, IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
-import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
+import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
@@ -106,6 +106,7 @@ export interface IBuildModelSelectGeneralParamsBasicDynamic<
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
   aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
+  groups?: TypeModelColumnsStrict<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?: IModelSelectParamsOrder<ColumnNames>[];
