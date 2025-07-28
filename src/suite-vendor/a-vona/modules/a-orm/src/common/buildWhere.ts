@@ -153,7 +153,7 @@ function _buildWhereColumnOpNormal<TRecord>(
   value: any,
   op: TypeOpsNormal,
 ) {
-  column = _checkHavingColumn(having, column) as string;
+  column = _checkHavingColumn(knex, column) as string;
   if (op === Op.eq) {
     builder[having ? 'having' : 'where'](column, '=', value);
   } else if (op === Op.notEq) {
@@ -195,12 +195,11 @@ function _buildWhereColumnOpNormal<TRecord>(
   }
 }
 
-function _checkHavingColumn<TRecord>(having: boolean, column: keyof TRecord | string) {
-  if (!having) return column;
+function _checkHavingColumn<TRecord>(knex: Knex, column: keyof TRecord | string) {
   let [aggr, name] = cast<string>(column).split('_');
   if (!OpAggrs.includes(aggr) || !name) return column;
   if (aggr === 'count' && name === 'all') name = '*';
-  return `${_safeOp(aggr)}(${_safeColumn(name)})`;
+  return knex.raw(`${_safeOp(aggr)}(${_safeColumn(name)})`);
 }
 
 function _checkOpJoint(op: TypeOpsJoint) {
