@@ -82,16 +82,16 @@ describe('modelGroup.test.ts', () => {
           },
           count_all: { _gt_: BigNumber(0) },
         },
-        orders: [['max_age', 'asc']],
+        orders: [['max_age', 'desc']],
       });
       assert.equal(usersGroup.length, 3);
-      assert.equal(usersGroup[0].name, `${prefix}:tom`);
+      assert.equal(usersGroup[0].name, `${prefix}:jimmy`);
       assert.equal(usersGroup[0].count_all, 1);
       assert.equal(usersGroup[0].count_age, 1);
-      assert.equal(usersGroup[0].sum_age, 3);
-      assert.equal(usersGroup[0].avg_age, 3);
-      assert.equal(usersGroup[0].max_age, 3);
-      assert.equal(usersGroup[0].min_age, 3);
+      assert.equal(usersGroup[0].sum_age, 5);
+      assert.equal(usersGroup[0].avg_age, 5);
+      assert.equal(usersGroup[0].max_age, 5);
+      assert.equal(usersGroup[0].min_age, 5);
       // aggr: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStats.select({
         where: {
