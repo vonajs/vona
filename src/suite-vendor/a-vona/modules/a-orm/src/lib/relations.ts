@@ -41,10 +41,10 @@ function hasMany<
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  > | undefined = undefined, // TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   Groups extends TypeModelColumnsStrict<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = undefined,// TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  > | undefined = undefined, // TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
@@ -65,10 +65,10 @@ function belongsToMany<
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  > | undefined = undefined, // TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   Groups extends TypeModelColumnsStrict<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = undefined,// TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  > | undefined = undefined, // TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 >(
   classModelMiddle: TypeModelClassLike<MODELMiddle>,
   classModel: TypeModelClassLike<MODEL>,
