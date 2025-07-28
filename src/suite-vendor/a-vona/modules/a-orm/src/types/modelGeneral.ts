@@ -33,9 +33,11 @@ export interface IBuildModelSelectGeneralParamsBasic<
   having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord, Groups, Aggrs>>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
-  orders?: Groups extends TypeModelColumnsStrict<TRecord> ?
-    IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord, Groups, Aggrs>>[]
-    : IModelSelectParamsOrder<ColumnNames>[];
+  orders?:
+  Groups extends TypeModelColumnsStrict<TRecord> ?
+    IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord, Groups, Aggrs>>[] :
+      (Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> ? never :
+      IModelSelectParamsOrder<ColumnNames>[]);
   limit?: number;
   offset?: number;
 }
