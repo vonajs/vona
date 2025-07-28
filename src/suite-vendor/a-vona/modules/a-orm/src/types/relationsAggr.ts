@@ -26,6 +26,5 @@ export type TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapp
 
 export type TypeUtilGetAggrsFromRelationAndIncludeWrapper_Mixed<RelationAggrs extends {}, IncludeWrapperAggrs extends {}> = {
   [K in keyof RelationAggrs]:
-  // @ts-ignore ignore
-  K extends string ? IncludeWrapperAggrs[K] extends string | string[] ? IncludeWrapperAggrs[K] : RelationAggrs[K] : undefined
+  K extends string ? K extends keyof IncludeWrapperAggrs ? IncludeWrapperAggrs[K] : RelationAggrs[K] : undefined
 };
