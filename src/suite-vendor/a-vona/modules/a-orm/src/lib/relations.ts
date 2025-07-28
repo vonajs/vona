@@ -77,6 +77,7 @@ function belongsToMany<
   options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>,
   _modelJoins?: ModelJoins,
   _aggrs?: Aggrs,
+  _groups?: Groups,
 ): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
