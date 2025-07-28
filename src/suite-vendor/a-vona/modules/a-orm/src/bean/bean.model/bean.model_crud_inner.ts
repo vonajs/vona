@@ -1,3 +1,4 @@
+import type BigNumber from 'bignumber.js';
 import type { Knex } from 'knex';
 import type {
   IModelCountParams,
