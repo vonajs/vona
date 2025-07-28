@@ -50,11 +50,12 @@ export interface IModelRelationHasMany<
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
+  Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
   key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>;
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>;
 }
 
 export interface IModelRelationBelongsToMany<
@@ -65,13 +66,14 @@ export interface IModelRelationBelongsToMany<
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
+  Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
 > {
   type?: 'belongsToMany';
   modelMiddle?: TypeModelClassLike<MODELMiddle>;
   model?: TypeModelClassLike<MODEL>;
   keyFrom?: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity];
   keyTo?: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity];
-  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs>;
+  options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>;
 }
 
 export interface IModelRelationOptionsOne<
