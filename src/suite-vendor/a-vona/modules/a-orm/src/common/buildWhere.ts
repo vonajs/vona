@@ -66,8 +66,8 @@ function _buildWhereOpJoint<TRecord>(
   if (op === Op.and) {
     builder[having ? 'having' : 'where'](builder => {
       for (const key in wheres) {
-        builder[having ? 'andHaving' : 'andWhere'](builder => {
-          _buildWhereInner(having, knex, builder, { [key]: wheres[key] } as any, column);
+        builder.andWhere(builder => {
+          _buildWhereInner(false, knex, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -77,8 +77,8 @@ function _buildWhereOpJoint<TRecord>(
   if (op === Op.or) {
     builder[having ? 'having' : 'where'](builder => {
       for (const key in wheres) {
-        builder[having ? 'orHaving' : 'orWhere'](builder => {
-          _buildWhereInner(having, knex, builder, { [key]: wheres[key] } as any, column);
+        builder.orWhere(builder => {
+          _buildWhereInner(false, knex, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -87,7 +87,7 @@ function _buildWhereOpJoint<TRecord>(
   // not
   if (op === Op.not) {
     builder[having ? 'havingNot' : 'whereNot'](builder => {
-      _buildWhereInner(having, knex, builder, wheres, column);
+      _buildWhereInner(false, knex, builder, wheres, column);
     });
     return;
   }
@@ -137,7 +137,7 @@ function _buildWhereColumn<TRecord>(
   // object
   if (typeof value === 'object') {
     builder[having ? 'having' : 'where'](builder => {
-      _buildWhereInner(having, knex, builder, value as any, column);
+      _buildWhereInner(false, knex, builder, value as any, column);
     });
     return;
   }
