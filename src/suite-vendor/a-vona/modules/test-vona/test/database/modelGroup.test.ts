@@ -102,9 +102,10 @@ describe('modelGroup.test.ts', () => {
         },
       });
       assert.equal(usersStats.length, 3);
-      assert.equal(usersStats[0].posts[0].count_all, 2);
-      assert.equal(usersStats[0].posts[0].count_title, 2);
-      assert.equal(usersStats[0].posts[0].sum_stars, 5);
+      assert.equal(usersStats[0].posts[0].title, `${prefix}:postApple2`);
+      assert.equal(usersStats[0].posts[0].count_all, 1);
+      assert.equal(usersStats[0].posts[0].count_title, 1);
+      assert.equal(usersStats[0].posts[0].sum_stars, 3);
       assert.equal(usersStats[0].roles[0].count_all, 1);
       // aggr: usersStats: posts: mixed
       const usersStats2 = await scopeTest.model.userStats.select({
