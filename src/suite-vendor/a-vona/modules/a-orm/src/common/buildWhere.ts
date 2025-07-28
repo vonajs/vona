@@ -200,7 +200,7 @@ function _checkHavingColumn<TRecord>(having: boolean, column: keyof TRecord | st
   let [aggr, name] = cast<string>(column).split('_');
   if (!OpAggrs.includes(aggr) || !name) return column;
   if (aggr === 'count' && name === 'all') name = '*';
-  return `${_safeOp(aggr)}(${_safeOp(name)})`;
+  return `${_safeOp(aggr)}(${_safeColumn(name)})`;
 }
 
 function _checkOpJoint(op: TypeOpsJoint) {
@@ -214,6 +214,10 @@ function _checkOpJoint(op: TypeOpsJoint) {
 
 function _safeOp(op) {
   return op.replace(/[\\.*#%'"`;,() ]/g, '');
+}
+
+function _safeColumn(column) {
+  return column.replace(/[\\.#%'"`;,() ]/g, '');
 }
 
 // export function buildWhere(builder: Knex.QueryBuilder, wheres) {
