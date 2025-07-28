@@ -30,14 +30,16 @@ function belongsTo<
 function hasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationHasManyDynamic<MODEL, OPTIONS, ModelJoins> {
+  _group?: Group,
+): IModelRelationHasManyDynamic<MODEL, OPTIONS, ModelJoins, Group> {
   return { type: 'hasMany', model: classModel, key, options };
 }
 
@@ -45,8 +47,9 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 >(
   classModelMiddle: TypeModelClassLike<MODELMiddle>,
   classModel: TypeModelClassLike<MODEL>,
@@ -54,7 +57,8 @@ function belongsToMany<
   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   options?: OPTIONS,
   _modelJoins?: ModelJoins,
-): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, OPTIONS, ModelJoins> {
+  _group?: Group,
+): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, OPTIONS, ModelJoins, Group> {
   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
 }
 

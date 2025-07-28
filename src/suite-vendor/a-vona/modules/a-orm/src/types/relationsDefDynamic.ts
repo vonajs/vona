@@ -6,6 +6,7 @@ import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { IModelRelationOptionsOne } from './relationsDef.ts';
+import type { TypeModelSelectGroupParamsColumnNames } from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 // export type TypeModelRelationDynamic<MODELSelf extends BeanModelMeta | undefined, MODELTarget extends BeanModelMeta> =
@@ -37,8 +38,9 @@ export interface IModelRelationBelongsToDynamic<
 
 export interface IModelRelationHasManyDynamic<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins> = {},
+  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> = {},
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
@@ -49,8 +51,9 @@ export interface IModelRelationHasManyDynamic<
 export interface IModelRelationBelongsToManyDynamic<
   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins> = {},
+  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> = {},
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 > {
   type?: 'belongsToMany';
   modelMiddle?: TypeModelClassLike<MODELMiddle>;
@@ -66,23 +69,26 @@ export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta>
 export interface IModelRelationOptionsManyDynamic<
   MODEL extends BeanModelMeta,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 >
   extends
   IModelRelationIncludeWrapper<MODEL>,
-  Omit<IModelRelationOptionsManyDynamic_Raw<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins>, 'autoload'> {}
+  Omit<IModelRelationOptionsManyDynamic_Raw<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins, Group>, 'autoload'> {}
 
 export type IModelRelationOptionsManyDynamic_Raw<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 > = IBuildModelRelationOptionsManyDynamic<
   MODEL[TypeSymbolKeyEntity],
   AUTOLOAD,
   COLUMNS,
   TypeEntityTableNamesOfGeneral<ModelJoins, MODEL>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, MODEL>,
-  TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>
+  TypeEntityTableColumnsOfGeneral<ModelJoins, MODEL>,
+  Group
 >;
 
 export interface IBuildModelRelationOptionsManyDynamic<
@@ -92,7 +98,8 @@ export interface IBuildModelRelationOptionsManyDynamic<
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
-> extends IBuildModelSelectGeneralParamsBasicDynamic<TRecord, COLUMNS, TableNames, ColumnNames, Columns> {
+  Group extends boolean | undefined = undefined,
+> extends IBuildModelSelectGeneralParamsBasicDynamic<TRecord, COLUMNS, TableNames, ColumnNames, Columns, Group> {
   autoload?: AUTOLOAD;
 }
 
@@ -102,6 +109,7 @@ export interface IBuildModelSelectGeneralParamsBasicDynamic<
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
+  Group extends boolean | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
   columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
@@ -109,7 +117,9 @@ export interface IBuildModelSelectGeneralParamsBasicDynamic<
   groups?: TypeModelColumnsStrict<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
-  orders?: IModelSelectParamsOrder<ColumnNames>[];
+  orders?: Group extends true ?
+    IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord>>[] :
+    IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
 }

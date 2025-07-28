@@ -107,8 +107,8 @@ describe('modelGroup.test.ts', () => {
       assert.equal(usersStats[0].posts[0].count_title, 1);
       assert.equal(usersStats[0].posts[0].sum_stars, 3);
       assert.equal(usersStats[0].roles[0].count_all, 1);
-      // aggr: usersStats: posts: mixed
-      const usersStats2 = await scopeTest.model.userStats.select({
+      // group: usersStats: posts: mixed
+      const usersStats2 = await scopeTest.model.userStatsGroup.select({
         where: {
           id: users.map(item => item.id),
         },
@@ -119,12 +119,13 @@ describe('modelGroup.test.ts', () => {
         },
       });
       assert.equal(usersStats2.length, 3);
-      assert.equal(usersStats2[0].posts?.count_all, 2);
-      assert.equal(cast(usersStats2[0].posts).count_title, undefined);
-      assert.equal(usersStats2[0].posts?.sum_stars, 5);
-      assert.equal(usersStats2[0].roles?.count_all, 1);
-      // aggr: usersStats: posts: disable
-      const usersStats3 = await scopeTest.model.userStats.select({
+      assert.equal(usersStats2[0].posts[0].title, `${prefix}:postApple2`);
+      assert.equal(usersStats2[0].posts[0].count_all, 1);
+      assert.equal(cast(usersStats2[0].posts[0]).count_title, undefined);
+      assert.equal(usersStats2[0].posts[0].sum_stars, 3);
+      assert.equal(usersStats2[0].roles[0].count_all, 1);
+      // group: usersStats: posts: disable
+      const usersStats3 = await scopeTest.model.userStatsGroup.select({
         where: {
           id: users.map(item => item.id),
         },
@@ -140,12 +141,13 @@ describe('modelGroup.test.ts', () => {
         },
       });
       assert.equal(usersStats3.length, 3);
-      assert.equal(usersStats3[0].posts?.count_all, 2);
-      assert.equal(cast(usersStats3[0].posts).count_title, undefined);
-      assert.equal(cast(usersStats3[0].posts).sum_stars, undefined);
-      assert.equal(usersStats3[0].roles?.count_all, 1);
+      assert.equal(usersStats3[0].posts[0].title, `${prefix}:postApple2`);
+      assert.equal(usersStats3[0].posts[0].count_all, 1);
+      assert.equal(cast(usersStats3[0].posts[0]).count_title, undefined);
+      assert.equal(cast(usersStats3[0].posts[0]).sum_stars, undefined);
+      assert.equal(usersStats3[0].roles[0].count_all, 1);
       // aggr: usersStats: with
-      const usersStats4 = await scopeTest.model.userStats.select({
+      const usersStats4 = await scopeTest.model.userStatsGroup.select({
         where: {
           id: users.map(item => item.id),
         },
@@ -156,19 +158,22 @@ describe('modelGroup.test.ts', () => {
         },
         with: {
           posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
+            groups: 'title',
             aggrs: { count: '*' },
-          }),
+            orders: [['title', 'desc']],
+          }, undefined, true),
           roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            groups: 'name',
             aggrs: { count: '*' },
           }),
         },
       });
       assert.equal(usersStats4.length, 3);
-      assert.equal(usersStats4[0].posts?.count_all, 2);
-      assert.equal(cast(usersStats4[0].posts).count_title, undefined);
-      assert.equal(cast(usersStats4[0].posts).sum_stars, undefined);
-      assert.equal(usersStats4[0].roles?.count_all, 1);
-
+      assert.equal(usersStats4[0].posts[0].title, `${prefix}:postApple2`);
+      assert.equal(usersStats4[0].posts[0].count_all, 1);
+      assert.equal(cast(usersStats4[0].posts[0]).count_title, undefined);
+      assert.equal(cast(usersStats4[0].posts[0]).sum_stars, undefined);
+      assert.equal(usersStats4[0].roles[0].count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {
