@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumns, TypeModelColumnsStrict, TypeModelSelectAggrParamsAggrs, TypeModelWhere } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumns, TypeModelColumnsStrict, TypeModelSelectAggrParamsAggrs, TypeModelSelectGroupParamsColumns, TypeModelWhere } from '../../types/index.ts';
 import { ensureArray } from '@cabloy/utils';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
@@ -173,6 +173,16 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     if (!page) return;
     this.buildLimit(builder, page.size);
     this.buildOffset(builder, page.index);
+  }
+
+  prepareHaving(builder: Knex.QueryBuilder, having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>) {
+    if (!having) return;
+    this.buildHaving(builder, having);
+  }
+
+  buildHaving(builder: Knex.QueryBuilder, having: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>) {
+    builder.having('count_all', '>', BigNumber(0));
+    // return buildWhere(this.connection, builder, having);
   }
 
   prepareWhere(builder: Knex.QueryBuilder, table?: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral) {

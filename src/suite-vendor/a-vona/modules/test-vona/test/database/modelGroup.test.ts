@@ -82,7 +82,7 @@ describe('modelGroup.test.ts', () => {
           },
           count_all: { _gt_: BigNumber(0) },
         },
-        orders: [['', 'desc']],
+        orders: [['max_age', 'desc']],
       });
       assert.equal(usersGroup.length, 3);
       assert.equal(usersGroup[0].name, `${prefix}:jimmy`);

@@ -68,7 +68,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // builder
-    builder = builder ?? this._select_buildParams(table, params, options);
+    builder = builder ?? this._select_buildParams(table, params as any, options);
     // ready
     this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
     return (await builder) as TRecord[];
@@ -94,7 +94,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // where
     this.prepareWhere(builder, table, params?.where, options);
     // having
-    this.buildHaving(builder, params?.having);
+    this.prepareHaving(builder, params?.having);
     // orders
     this.buildOrders(builder, params?.orders);
     // limit
