@@ -91,10 +91,10 @@ describe('modelAggregate.test.ts', () => {
         },
       });
       assert.equal(usersStats.length, 3);
-      assert.equal(usersStats[0].posts.count_all, 2);
-      assert.equal(usersStats[0].posts.count_title, 2);
-      assert.equal(usersStats[0].posts.sum_stars, 5);
-      assert.equal(usersStats[0].roles.count_all, 1);
+      assert.equal(usersStats[0].posts?.count_all, 2);
+      assert.equal(usersStats[0].posts?.count_title, 2);
+      assert.equal(usersStats[0].posts?.sum_stars, 5);
+      assert.equal(usersStats[0].roles?.count_all, 1);
       // aggr: usersStats: posts: mixed
       const usersStats2 = await scopeTest.model.userStats.select({
         where: {
@@ -107,10 +107,10 @@ describe('modelAggregate.test.ts', () => {
         },
       });
       assert.equal(usersStats2.length, 3);
-      assert.equal(usersStats2[0].posts.count_all, 2);
+      assert.equal(usersStats2[0].posts?.count_all, 2);
       assert.equal(cast(usersStats2[0].posts).count_title, undefined);
-      assert.equal(usersStats2[0].posts.sum_stars, 5);
-      assert.equal(usersStats2[0].roles.count_all, 1);
+      assert.equal(usersStats2[0].posts?.sum_stars, 5);
+      assert.equal(usersStats2[0].roles?.count_all, 1);
       // aggr: usersStats: posts: disable
       const usersStats3 = await scopeTest.model.userStats.select({
         where: {
@@ -128,10 +128,10 @@ describe('modelAggregate.test.ts', () => {
         },
       });
       assert.equal(usersStats3.length, 3);
-      assert.equal(usersStats3[0].posts.count_all, 2);
+      assert.equal(usersStats3[0].posts?.count_all, 2);
       assert.equal(cast(usersStats3[0].posts).count_title, undefined);
       assert.equal(cast(usersStats3[0].posts).sum_stars, undefined);
-      assert.equal(usersStats3[0].roles.count_all, 1);
+      assert.equal(usersStats3[0].roles?.count_all, 1);
       // aggr: usersStats: with
       const usersStats4 = await scopeTest.model.userStats.select({
         where: {
@@ -152,10 +152,10 @@ describe('modelAggregate.test.ts', () => {
         },
       });
       assert.equal(usersStats4.length, 3);
-      assert.equal(usersStats4[0].posts.count_all, 2);
+      assert.equal(usersStats4[0].posts?.count_all, 2);
       assert.equal(cast(usersStats4[0].posts).count_title, undefined);
       assert.equal(cast(usersStats4[0].posts).sum_stars, undefined);
-      assert.equal(usersStats4[0].roles.count_all, 1);
+      assert.equal(usersStats4[0].roles?.count_all, 1);
 
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {

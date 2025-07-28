@@ -76,7 +76,7 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
 export type TypeUtilGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined, Columns, Aggrs> =
   TYPE extends 'hasMany' | 'belongsToMany' ?
     Aggrs extends {} ?
-      TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> :
+      TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> | undefined :
       Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>> :
     TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
 
