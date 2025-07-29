@@ -73,7 +73,6 @@ export * from '../entity/role.ts';
 export * from '../entity/roleUser.ts';
 export * from '../entity/test.ts';
 export * from '../entity/user.ts';
-export * from '../entity/userStats.ts';
 export * from '../entity/userStatsGroup.ts';
 import type { IEntityOptionsCategory } from '../entity/category.ts';
 import type { IEntityOptionsPost } from '../entity/post.ts';
@@ -82,7 +81,6 @@ import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
-import type { IEntityOptionsUserStats } from '../entity/userStats.ts';
 import type { IEntityOptionsUserStatsGroup } from '../entity/userStatsGroup.ts';
 import 'vona';
 declare module 'vona-module-a-orm' {
@@ -95,7 +93,6 @@ declare module 'vona-module-a-orm' {
 'test-vona:roleUser': IEntityOptionsRoleUser;
 'test-vona:test': IEntityOptionsTest;
 'test-vona:user': IEntityOptionsUser;
-'test-vona:userStats': IEntityOptionsUserStats;
 'test-vona:userStatsGroup': IEntityOptionsUserStatsGroup;
     }
 
@@ -113,7 +110,6 @@ import type { EntityRole } from '../entity/role.ts';
 import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityTest } from '../entity/test.ts';
 import type { EntityUser } from '../entity/user.ts';
-import type { EntityUserStats } from '../entity/userStats.ts';
 import type { EntityUserStatsGroup } from '../entity/userStatsGroup.ts';
 export interface IModuleEntity {
   'category': EntityCategoryMeta;
@@ -123,7 +119,6 @@ export interface IModuleEntity {
 'roleUser': EntityRoleUserMeta;
 'test': EntityTestMeta;
 'user': EntityUserMeta;
-'userStats': EntityUserStatsMeta;
 'userStatsGroup': EntityUserStatsGroupMeta;
 }
 /** entity: end */
@@ -135,7 +130,6 @@ export type EntityRoleTableName = 'testVonaRole';
 export type EntityRoleUserTableName = 'testVonaRoleUser';
 export type EntityTestTableName = 'testVonaTest';
 export type EntityUserTableName = 'testVonaUser';
-export type EntityUserStatsTableName = 'testVonaUser';
 export type EntityUserStatsGroupTableName = 'testVonaUser';
 export type EntityCategoryMeta=TypeEntityMeta<EntityCategory,EntityCategoryTableName>;
 export type EntityPostMeta=TypeEntityMeta<EntityPost,EntityPostTableName>;
@@ -144,7 +138,6 @@ export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
 export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
 export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
-export type EntityUserStatsMeta=TypeEntityMeta<EntityUserStats,EntityUserStatsTableName>;
 export type EntityUserStatsGroupMeta=TypeEntityMeta<EntityUserStatsGroup,EntityUserStatsGroupTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
@@ -185,10 +178,6 @@ declare module 'vona-module-test-vona' {
 
     export interface IEntityOptionsUser {
       fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser[TypeSymbolKeyFieldsMore]>;
-    }
-
-    export interface IEntityOptionsUserStats {
-      fields?: TypeEntityOptionsFields<EntityUserStats, IEntityOptionsUserStats[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsUserStatsGroup {
@@ -519,23 +508,23 @@ export interface ModelUser {
       group<T extends IModelSelectGroupParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
     }
 export interface ModelUserStats {
-      [SymbolKeyEntity]: EntityUserStats;
-      [SymbolKeyEntityMeta]: EntityUserStatsMeta;
+      [SymbolKeyEntity]: EntityUser;
+      [SymbolKeyEntityMeta]: EntityUserMeta;
       [SymbolKeyModelOptions]: IModelOptionsUserStats;
-      get<T extends IModelGetOptions<EntityUserStats,ModelUserStats>>(where: TypeModelWhere<EntityUserStats>, options?: T): Promise<TypeModelRelationResult<EntityUserStats, ModelUserStats, T> | undefined>;
-      mget<T extends IModelGetOptions<EntityUserStats,ModelUserStats>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUserStats, ModelUserStats, T>[]>;
-      select<T extends IModelSelectParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUserStats, ModelUserStats, T>[]>;
-      count<T extends IModelCountParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
-      insert<T extends IModelInsertOptions<EntityUserStats,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>>;
-      insertBulk<T extends IModelInsertOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>[]>;
-      update<T extends IModelUpdateOptions<EntityUserStats,ModelUserStats>>(data: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>;
-      updateBulk<T extends IModelUpdateOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[]>;
-      delete<T extends IModelDeleteOptions<EntityUserStats,ModelUserStats>>(where?: TypeModelWhere<EntityUserStats>, options?: T): Promise<void>;
-      deleteBulk<T extends IModelDeleteOptions<EntityUserStats,ModelUserStats>>(ids: TableIdentity[], options?: T): Promise<void>;
-      mutate<T extends IModelMutateOptions<EntityUserStats,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>>;
-      mutateBulk<T extends IModelMutateOptions<EntityUserStats,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUserStats,ModelUserStats, T>[]>;
-      aggregate<T extends IModelSelectAggrParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
-      group<T extends IModelSelectGroupParams<EntityUserStats,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUserStats, T>[]>;
+      get<T extends IModelGetOptions<EntityUser,ModelUserStats>>(where: TypeModelWhere<EntityUser>, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityUser,ModelUserStats>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T>[]>;
+      select<T extends IModelSelectParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T>[]>;
+      count<T extends IModelCountParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
+      insert<T extends IModelInsertOptions<EntityUser,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUser,ModelUserStats, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUserStats, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityUser,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUser,ModelUserStats, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUserStats, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityUser,ModelUserStats>>(data: TypeModelMutateRelationData<EntityUser,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUserStats, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityUser,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUser,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUserStats, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityUser,ModelUserStats>>(where?: TypeModelWhere<EntityUser>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityUser,ModelUserStats>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityUser,ModelUserStats>>(data?: TypeModelMutateRelationData<EntityUser,ModelUserStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUserStats, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityUser,ModelUserStats>>(items: TypeModelMutateRelationData<EntityUser,ModelUserStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUserStats, T>[]>;
+      aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
     }
 export interface ModelUserStatsGroup {
       [SymbolKeyEntity]: EntityUserStatsGroup;
