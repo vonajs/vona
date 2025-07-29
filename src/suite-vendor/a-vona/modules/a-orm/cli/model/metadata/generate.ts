@@ -1,4 +1,5 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type GoGoCode from 'gogocode';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles, cli } = options;
@@ -7,6 +8,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   // const contentModelsOptions: string[] = [];
   for (const globFile of globFiles) {
     const { className, beanName, fileContent, beanNameCapitalize } = globFile;
+    const ast = cli.helper.gogocode(fileContent);
+    const relations = __parseRelations(ast);
     const entityName = __parseEntityName(fileContent);
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
@@ -61,4 +64,8 @@ function __parseEntityName(fileContent: string): string | false {
   const entityName = matched[1];
   if (entityName === '') return '';
   return entityName.split(',')[0];
+}
+
+function __parseRelations(ast: GoGoCode.GoGoAST) {
+
 }
