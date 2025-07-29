@@ -104,10 +104,12 @@ function __parseRelation(nodeRelation: t.ObjectProperty) {
 
 function __parseRelationHasMany(args: t.Node[]) {
   // classModel
-  const classModel = __parseRelationClassModel(args[0]);
+  const classModel = __parseRelation_classModel(args[0]);
+  // key
+  const key = __parseRelation_key(args[1]);
 }
 
-function __parseRelationClassModel(node: t.Node) {
+function __parseRelation_classModel(node: t.Node) {
   if (t.isArrowFunctionExpression(node)) {
     return (node.body as t.Identifier).name;
   } else if (t.isIdentifier(node)) {
@@ -115,5 +117,12 @@ function __parseRelationClassModel(node: t.Node) {
   } else if (t.isStringLiteral(node)) {
     return node.value;
   }
-  throw new Error('not support classModel');
+  throw new Error('invalid classModel');
+}
+
+function __parseRelation_key(node: t.Node) {
+  if (t.isStringLiteral(node)) {
+    return node.value;
+  }
+  throw new Error('invalid support key');
 }

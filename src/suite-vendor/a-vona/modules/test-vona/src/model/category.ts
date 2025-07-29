@@ -11,7 +11,7 @@ export interface IModelOptionsCategory extends IDecoratorModelOptions {
 @Model<IModelOptionsCategory>({
   entity: EntityCategory,
   relations: {
-    children: $relation.hasMany('test-vona:category', 'categoryIdParent', { autoload: true, columns: ['id', 'name'] }),
+    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', { autoload: true, columns: ['id', 'name'] }),
   },
 })
 export class ModelCategory extends BeanModelBase<EntityCategory> {}
