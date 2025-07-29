@@ -107,6 +107,8 @@ function __parseRelationHasMany(args: t.Node[]) {
   const classModel = __parseRelation_classModel(args[0]);
   // key
   const key = __parseRelation_key(args[1]);
+  // options
+  const options = __parseRelation_options(args[2]);
 }
 
 function __parseRelation_classModel(node: t.Node) {
@@ -125,4 +127,19 @@ function __parseRelation_key(node: t.Node) {
     return node.value;
   }
   throw new Error('invalid support key');
+}
+
+function __parseRelation_options(node: t.Node) {
+  if (!node) return undefined;
+  if (!t.isObjectExpression(node)) throw new Error('invalid support options');
+  let autoload;
+  for (const _nodeProperty of node.properties) {
+    const nodeProperty = _nodeProperty as t.ObjectProperty;
+    const key = (nodeProperty.key as t.Identifier).name;
+    if (key === 'autoload') {
+      autoload = (nodeProperty.value as t.BooleanLiteral).value;
+    }
+  }
+  console.log(autoload);
+  return { autoload };
 }

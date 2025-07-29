@@ -27,7 +27,9 @@ export interface IBuildModelSelectGeneralParamsBasic<
   Groups extends TypeModelColumnsStrict<TRecord> | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  columns?: Groups extends TypeModelColumnsStrict<TRecord> ? COLUMNS : TypeModelColumnsPatch<TRecord, COLUMNS>;
+  columns?: Groups extends TypeModelColumnsStrict<TRecord> ?
+      (COLUMNS extends string ? (COLUMNS | Array<COLUMNS>) : COLUMNS) :
+    TypeModelColumnsPatch<TRecord, COLUMNS>;
   aggrs?: Aggrs;
   groups?: Groups;
   having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord, Groups, Aggrs>>;
