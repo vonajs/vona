@@ -1,3 +1,4 @@
+import type * as t from '@babel/types';
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type GoGoCode from 'gogocode';
 
@@ -10,8 +11,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   for (const globFile of globFiles) {
     const { className, beanName, fileContent, beanNameCapitalize } = globFile;
     const ast = cli.helper.gogocode(fileContent);
-    const relations = __parseRelations(ast);
-    const entityName = __parseEntityName(fileContent);
+    const astNodes = ast.find(`@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`).match.$$$1;
+    const entityName = __parseEntityName(astNodes);
+    const relations = __parseRelations(ast, className);
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
     if (relations.length > 0) {
@@ -67,6 +69,13 @@ declare module 'vona-module-a-orm' {
   return content;
 }
 
+function __getAstNode(astNodes: Array<{
+  node: t.Node;
+  value: string;
+}>, name: string) {
+
+}
+
 function __parseEntityName(fileContent: string): string | false {
   const matched = fileContent.match(/@Model<.*?>\(\{[\s\S]*?entity: (Entity\S+)[\s\S]*?\}[\s\S]*?\)\s*export class/);
   if (!matched) return false;
@@ -75,6 +84,6 @@ function __parseEntityName(fileContent: string): string | false {
   return entityName.split(',')[0];
 }
 
-function __parseRelations(ast: GoGoCode.GoGoAST) {
+function __parseRelations(ast: GoGoCode.GoGoAST, className: string) {
   return [];
 }
