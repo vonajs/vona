@@ -7,6 +7,6 @@ export interface IModelRelationOptionsManyStatic<
   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >
-  extends IModelRelationOptionsManyDynamic<MODEL, ModelJoins, Group> {
+  extends Omit<IModelRelationOptionsManyDynamic<MODEL, ModelJoins, Group>, 'include' | 'with'> {
   autoload?: boolean;
 }
