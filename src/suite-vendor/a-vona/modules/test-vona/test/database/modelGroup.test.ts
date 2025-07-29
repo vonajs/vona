@@ -158,7 +158,7 @@ describe('modelGroup.test.ts', () => {
         },
         with: {
           posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
-            groups: 'title',
+            groups: ['title'],
             aggrs: { count: '*' },
             orders: [['title', 'desc']],
           }, undefined, true),

@@ -88,3 +88,52 @@ export const $relation = {
   hasMany,
   belongsToMany,
 };
+
+// function hasMany<
+//   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+//   AUTOLOAD extends boolean = boolean,
+//   COLUMNS
+//   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+//   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+//   Aggrs extends TypeModelSelectAggrParamsAggrs<
+//     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+//   > | undefined = undefined, // TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+//   Groups extends TypeModelColumnsStrict<
+//     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+//   > | undefined = undefined, // TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+// >(
+//   classModel: TypeModelClassLike<MODEL>,
+//   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
+//   options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>,
+//   _modelJoins?: ModelJoins,
+//   _aggrs?: Aggrs,
+//   _groups?: Groups,
+// ): any { // : IModelRelationHasMany<MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
+//   return { type: 'hasMany', model: classModel, key, options };
+// }
+
+// function belongsToMany<
+//   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
+//   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+//   AUTOLOAD extends boolean = boolean,
+//   COLUMNS
+//   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+//   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+//   Aggrs extends TypeModelSelectAggrParamsAggrs<
+//     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+//   > | undefined = undefined, // TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+//   Groups extends TypeModelColumnsStrict<
+//     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+//   > | undefined = undefined, // TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+// >(
+//   classModelMiddle: TypeModelClassLike<MODELMiddle>,
+//   classModel: TypeModelClassLike<MODEL>,
+//   keyFrom: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
+//   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
+//   options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>,
+//   _modelJoins?: ModelJoins,
+//   _aggrs?: Aggrs,
+//   _groups?: Groups,
+// ): any { // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
+//   return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
+// }
