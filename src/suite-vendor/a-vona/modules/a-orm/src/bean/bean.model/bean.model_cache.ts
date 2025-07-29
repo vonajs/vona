@@ -244,7 +244,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // 1: special check
     if (params?.columns) {
       const columnsTarget = Array.isArray(params?.columns) ? params?.columns : [params?.columns];
-      if (this.__checkIfOnlyKey(columnsTarget, table)) {
+      if (this.__checkIfOnlyKey(columnsTarget as any, table)) {
         // just return
         return items;
       }
