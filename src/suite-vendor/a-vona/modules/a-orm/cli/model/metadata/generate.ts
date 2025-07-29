@@ -1,7 +1,5 @@
-import type { types as t } from '@babel/core';
-import type * as t from '@babel/types';
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
-import type GoGoCode from 'gogocode';
+import { types as t } from '@babel/core';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles, cli } = options;
@@ -84,12 +82,38 @@ function __parseEntityName(node: t.ObjectProperty): string {
 }
 
 function __parseRelations(node: t.ObjectProperty) {
+  const relations: string[] = [];
   const nodeRelations = node.value as t.ObjectExpression;
-  for(const nodeRelation of nodeRelations.properties){
-    const relationName=((nodeRelation as t.ObjectProperty).key as t.Identifier).name;
-    const callExpression=((nodeRelation as t.ObjectProperty).value as t.CallExpression);
-    const relationType= ((callExpression.callee as t.MemberExpression).property as t.Identifier).name;
-    console.log(relationName,relationType);
+  for (const nodeRelation of nodeRelations.properties) {
+    relations.push(__parseRelation(nodeRelation as t.ObjectProperty));
   }
-  return [];
+  return relations;
+}
+
+function __parseRelation(nodeRelation: t.ObjectProperty) {
+  const relationName = (nodeRelation.key as t.Identifier).name;
+  const callExpression = nodeRelation.value as t.CallExpression;
+  const relationType = ((callExpression.callee as t.MemberExpression).property as t.Identifier).name;
+  const args: t.Node[] = callExpression.arguments;
+  // hasMany
+  if (relationType === 'hasMany') {
+    return `${relationName}: ${__parseRelationHasMany(args)}`;
+  }
+  return '';
+}
+
+function __parseRelationHasMany(args: t.Node[]) {
+  // classModel
+  const classModel = __parseRelationClassModel(args[0]);
+}
+
+function __parseRelationClassModel(node: t.Node) {
+  if (t.isArrowFunctionExpression(node)) {
+    return (node.body as t.Identifier).name;
+  } else if (t.isIdentifier(node)) {
+    return node.name;
+  } else if (t.isStringLiteral(node)) {
+    return node.value;
+  }
+  throw new Error('not support classModel');
 }
