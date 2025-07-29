@@ -2,7 +2,7 @@ import type { IDecoratorModelOptions, IModelRelationBelongsToMany, IModelRelatio
 import type { ModelRole } from './role.ts';
 import type { ModelRoleUser } from './roleUser.ts';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
-import { EntityUserStatsGroup } from '../entity/userStatsGroup.ts';
+import { EntityUser } from '../entity/user.ts';
 import { ModelPost } from './post.ts';
 
 export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
@@ -14,10 +14,10 @@ export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
 }
 
 @Model<IModelOptionsUserStatsGroup>({
-  entity: EntityUserStatsGroup,
+  entity: EntityUser,
   relations: {
     posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' }, orders: [['title', 'desc']] }, undefined, true),
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { groups: ['name'], aggrs: { count: '*' }, orders: [['name', 'asc']] }, undefined, true),
   },
 })
-export class ModelUserStatsGroup extends BeanModelBase<EntityUserStatsGroup> {}
+export class ModelUserStatsGroup extends BeanModelBase<EntityUser> {}
