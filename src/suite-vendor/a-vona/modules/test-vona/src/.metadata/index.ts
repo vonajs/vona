@@ -1,8 +1,6 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
-import type { TypeEntityMeta } from 'vona-module-a-orm';
-import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
-import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TypeEntityMeta,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** aop: begin */
 export * from '../bean/aop.regExp.ts';
 export * from '../bean/aop.simple.ts';
