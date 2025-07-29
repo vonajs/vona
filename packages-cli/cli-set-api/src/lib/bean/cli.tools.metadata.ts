@@ -147,22 +147,17 @@ export class CliToolsMetadata extends BeanCliBase {
 
   _generatePatch(content: string) {
     if (!content) return content;
-    if (content.includes('TypeEntityOptionsFields')) {
-      content = `import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';\n${content}`;
-    }
-    if (content.includes('TypeControllerOptionsActions')) {
-      content = `import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';\n${content}`;
-    }
-    if (content.includes('TypeEntityMeta')) {
-      content = `import type { TypeEntityMeta } from 'vona-module-a-orm';\n${content}`;
-    }
-    if (content.includes('TypeSymbolKeyFieldsMore')) {
-      content = `import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';\n${content}`;
-    }
-    if (content.includes('PowerPartial')) {
-      content = `import type { PowerPartial } from 'vona';\n${content}`;
-    }
+    content = this._generatePatch_resources(content, 'vona-module-a-openapi', ['TypeEntityOptionsFields', 'TypeControllerOptionsActions'], true);
+    content = this._generatePatch_resources(content, 'vona-module-a-orm', ['TypeEntityMeta', 'TypeSymbolKeyFieldsMore'], true);
+    content = this._generatePatch_resources(content, 'vona', ['PowerPartial'], true);
     return content;
+  }
+
+  _generatePatch_resources(content: string, packageName: string, resources: string[], type: boolean) {
+    const items = resources.filter(item => content.includes(item));
+    if (items.length === 0) return content;
+    const importContent = `import ${type ? 'type ' : ''}{ ${items.join(',')} } from '${packageName}';`;
+    return `${importContent}\n${content}`;
   }
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {

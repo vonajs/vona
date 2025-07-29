@@ -3,6 +3,7 @@ import type GoGoCode from 'gogocode';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles, cli } = options;
+  const contentRelations: string[] = [];
   const contentRecords: string[] = [];
   const contentModels: string[] = [];
   // const contentModelsOptions: string[] = [];
@@ -13,6 +14,13 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const entityName = __parseEntityName(fileContent);
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
+    if (relations.length > 0) {
+      contentRelations.push(`export interface ${opionsName} {
+        relations: {
+          ${relations.join('\n')}
+        };
+      }`);
+    }
     contentRecords.push(`export interface ${className} {
       [SymbolKeyEntity]: ${entityName};
       [SymbolKeyEntityMeta]: ${entityMetaName};
@@ -40,12 +48,13 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     //   };
     // }`);
   }
-  if (contentRecords.length === 0 && contentModels.length === 0) return '';
+  if (contentRelations.length === 0 && contentRecords.length === 0 && contentModels.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
 import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-${moduleName}' {
+  ${contentRelations.join('\n')}
   ${contentRecords.join('\n')}
 }
 declare module 'vona-module-a-orm' {
@@ -67,5 +76,5 @@ function __parseEntityName(fileContent: string): string | false {
 }
 
 function __parseRelations(ast: GoGoCode.GoGoAST) {
-
+  return [];
 }
