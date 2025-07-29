@@ -84,5 +84,12 @@ function __parseEntityName(node: t.ObjectProperty): string {
 }
 
 function __parseRelations(node: t.ObjectProperty) {
+  const nodeRelations = node.value as t.ObjectExpression;
+  for(const nodeRelation of nodeRelations.properties){
+    const relationName=((nodeRelation as t.ObjectProperty).key as t.Identifier).name;
+    const callExpression=((nodeRelation as t.ObjectProperty).value as t.CallExpression);
+    const relationType= ((callExpression.callee as t.MemberExpression).property as t.Identifier).name;
+    console.log(relationName,relationType);
+  }
   return [];
 }
