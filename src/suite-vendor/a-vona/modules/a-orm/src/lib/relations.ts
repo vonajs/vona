@@ -1,19 +1,15 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { TypeModelColumn } from '../types/modelWhere.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
-import type { IModelRelationOptionsOne } from '../types/relationsDef.ts';
-import type { IModelRelationOptionsManyStatic } from './relationsStatic.ts';
+import type { IModelRelationOptionsManyStatic, IModelRelationOptionsOneStatic } from './relationsStatic.ts';
 
 function hasOne<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  AUTOLOAD extends boolean = false,
-  COLUMNS
-  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  OPTIONS extends IModelRelationOptionsOneStatic<TypeModelOfModelLike<MODEL>>,
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>,
+  options?: OPTIONS,
 ): any { // :  IModelRelationHasOne<MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
@@ -21,14 +17,12 @@ function hasOne<
 function belongsTo<
   MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  AUTOLOAD extends boolean = false,
-  COLUMNS
-  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  OPTIONS extends IModelRelationOptionsOneStatic<TypeModelOfModelLike<MODEL>>,
 >(
   _classModelSelf: TypeModelClassLike<MODELSelf>,
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODELSelf>[TypeSymbolKeyEntity],
-  options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>,
+  options?: OPTIONS,
 ): any { // : IModelRelationBelongsTo<MODELSelf, MODEL, AUTOLOAD, COLUMNS> {
   return { type: 'belongsTo', model: classModel, key, options };
 }
