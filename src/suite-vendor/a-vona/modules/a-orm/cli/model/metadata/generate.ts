@@ -97,7 +97,7 @@ function __parseRelation(nodeRelation: t.ObjectProperty) {
   const args: t.Node[] = callExpression.arguments;
   // hasMany
   if (relationType === 'hasMany') {
-    return `${relationName}: ${__parseRelationHasMany(args)}`;
+    return `${relationName}: ${__parseRelationHasMany(args)};`;
   }
   return '';
 }
@@ -105,10 +105,12 @@ function __parseRelation(nodeRelation: t.ObjectProperty) {
 function __parseRelationHasMany(args: t.Node[]) {
   // classModel
   const classModel = __parseRelation_classModel(args[0]);
-  // key
-  const key = __parseRelation_key(args[1]);
+  // // key
+  // const key = __parseRelation_key(args[1]);
   // options
   const options = __parseRelation_options(args[2]);
+  // combine
+  return `IModelRelationHasMany<${classModel}, ${options.autoload}, ${options.columns}>`;
 }
 
 function __parseRelation_classModel(node: t.Node) {
@@ -130,16 +132,57 @@ function __parseRelation_key(node: t.Node) {
 }
 
 function __parseRelation_options(node: t.Node) {
+  const options = __parseRelation_options_inner(node);
+  let autoload;
+  let columns;
+  let groups;
+  // autoload
+  if (options?.autoload) {
+    autoload = 'true';
+  } else {
+    autoload = 'false';
+  }
+  // groups
+  groups = options?.groups;
+  // columns
+  if (!options?.columns) {
+    if (options?.groups) {
+      columns = 'undefined';
+    } else {
+      columns = '*';
+    }
+  } else {
+    if (options?.columns.includes('*')) {
+      columns = '*';
+    } else {
+      columns = options?.columns.map(item => `'${item}'`).join('|');
+    }
+  }
+  return { autoload, columns, groups };
+}
+
+function __parseRelation_options_inner(node: t.Node) {
   if (!node) return undefined;
   if (!t.isObjectExpression(node)) throw new Error('invalid support options');
   let autoload;
+  let columns: string[] | undefined;
+  let groups;
   for (const _nodeProperty of node.properties) {
     const nodeProperty = _nodeProperty as t.ObjectProperty;
     const key = (nodeProperty.key as t.Identifier).name;
     if (key === 'autoload') {
       autoload = (nodeProperty.value as t.BooleanLiteral).value;
+    } else if (key === 'columns') {
+      columns = __parseColumns(nodeProperty);
     }
   }
-  console.log(autoload);
-  return { autoload };
+  return { autoload, columns, groups };
+}
+
+function __parseColumns(node: t.ObjectProperty) {
+  if (t.isArrayExpression(node.value)) {
+    return node.value.elements.map(item => (item as t.StringLiteral).value);
+  } else if (t.isStringLiteral(node.value)) {
+    return [node.value.value];
+  }
 }
