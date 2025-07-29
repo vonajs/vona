@@ -1,14 +1,12 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
-  const { sceneName, moduleName, globFiles } = options;
+  const { sceneName, moduleName, globFiles, cli } = options;
   const contentRecords: string[] = [];
   const contentModels: string[] = [];
   // const contentModelsOptions: string[] = [];
   for (const globFile of globFiles) {
-    const { className, beanName, fileContent } = globFile;
-    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
+    const { className, beanName, fileContent, beanNameCapitalize } = globFile;
     const entityName = __parseEntityName(fileContent);
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
