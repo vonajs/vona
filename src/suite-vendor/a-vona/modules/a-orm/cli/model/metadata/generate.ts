@@ -1,3 +1,4 @@
+import type { types as t } from '@babel/core';
 import type * as t from '@babel/types';
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type GoGoCode from 'gogocode';
@@ -12,8 +13,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const { className, beanName, fileContent, beanNameCapitalize } = globFile;
     const ast = cli.helper.gogocode(fileContent);
     const astNodes = ast.find(`@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`).match.$$$1;
-    const entityName = __parseEntityName(astNodes);
-    const relations = __parseRelations(ast, className);
+    const entityName = __parseEntityName(__getAstNode(astNodes as any, 'entity'));
+    const relations = __parseRelations(__getAstNode(astNodes as any, 'relations'));
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
     if (relations.length > 0) {
@@ -69,21 +70,19 @@ declare module 'vona-module-a-orm' {
   return content;
 }
 
-function __getAstNode(astNodes: Array<{
-  node: t.Node;
-  value: string;
-}>, name: string) {
-
+function __getAstNode(astNodes: Array<t.ObjectProperty>, name: string) {
+  return astNodes.find(node => (node.key as t.Identifier).name === name) as t.ObjectProperty;
 }
 
-function __parseEntityName(fileContent: string): string | false {
-  const matched = fileContent.match(/@Model<.*?>\(\{[\s\S]*?entity: (Entity\S+)[\s\S]*?\}[\s\S]*?\)\s*export class/);
-  if (!matched) return false;
-  const entityName = matched[1];
-  if (entityName === '') return '';
-  return entityName.split(',')[0];
+function __parseEntityName(node: t.ObjectProperty): string {
+  return (node.value as t.Identifier).name;
+  // const matched = fileContent.match(/@Model<.*?>\(\{[\s\S]*?entity: (Entity\S+)[\s\S]*?\}[\s\S]*?\)\s*export class/);
+  // if (!matched) return false;
+  // const entityName = matched[1];
+  // if (entityName === '') return '';
+  // return entityName.split(',')[0];
 }
 
-function __parseRelations(ast: GoGoCode.GoGoAST, className: string) {
+function __parseRelations(node: t.ObjectProperty) {
   return [];
 }
