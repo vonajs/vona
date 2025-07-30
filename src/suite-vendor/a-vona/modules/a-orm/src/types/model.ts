@@ -1,7 +1,6 @@
 import type { Knex } from 'knex';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
-import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelParamsInclude, TypeModelsClassLikeGeneral } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeModelMutateParamsInclude } from './relationsMutate.ts';
