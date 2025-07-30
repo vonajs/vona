@@ -97,7 +97,7 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-auth' {
   
@@ -108,7 +108,6 @@ declare module 'vona-module-a-auth' {
       get<T extends IModelGetOptions<EntityAuth,ModelAuth>>(where: TypeModelWhere<EntityAuth>, options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuth,ModelAuth>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
       select<T extends IModelSelectParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
-      count<T extends IModelCountParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityAuth,ModelAuth>>(data?: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityAuth,ModelAuth, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityAuth,ModelAuth>>(items: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityAuth,ModelAuth, T>>[]>;
       update<T extends IModelUpdateOptions<EntityAuth,ModelAuth>>(data: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuth,ModelAuth, T>>;
@@ -117,6 +116,7 @@ declare module 'vona-module-a-auth' {
       deleteBulk<T extends IModelDeleteOptions<EntityAuth,ModelAuth>>(ids: TableIdentity[], options?: T): Promise<void>;
       mutate<T extends IModelMutateOptions<EntityAuth,ModelAuth>>(data?: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuth,ModelAuth, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityAuth,ModelAuth>>(items: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityAuth,ModelAuth, T>[]>;
+      count<T extends IModelSelectCountParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
       aggregate<T extends IModelSelectAggrParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityAuth, T>[]>;
     }
@@ -127,7 +127,6 @@ export interface ModelAuthProvider {
       get<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(where: TypeModelWhere<EntityAuthProvider>, options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
       select<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
-      count<T extends IModelCountParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptionsGeneral, modelJoins?: ModelJoins): Promise<BigNumber>;
       insert<T extends IModelInsertOptions<EntityAuthProvider,ModelAuthProvider>>(data?: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>>>;
       insertBulk<T extends IModelInsertOptions<EntityAuthProvider,ModelAuthProvider>>(items: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>>[]>;
       update<T extends IModelUpdateOptions<EntityAuthProvider,ModelAuthProvider>>(data: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>>;
@@ -136,6 +135,7 @@ export interface ModelAuthProvider {
       deleteBulk<T extends IModelDeleteOptions<EntityAuthProvider,ModelAuthProvider>>(ids: TableIdentity[], options?: T): Promise<void>;
       mutate<T extends IModelMutateOptions<EntityAuthProvider,ModelAuthProvider>>(data?: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityAuthProvider,ModelAuthProvider>>(items: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>[]>;
+      count<T extends IModelSelectCountParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
       aggregate<T extends IModelSelectAggrParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityAuthProvider, T>[]>;
     }
