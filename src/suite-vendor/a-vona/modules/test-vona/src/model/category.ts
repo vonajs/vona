@@ -1,12 +1,8 @@
-import type { IDecoratorModelOptions, IModelRelationHasMany } from 'vona-module-a-orm';
+import type { IDecoratorModelOptions } from 'vona-module-a-orm';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityCategory } from '../entity/category.ts';
 
-export interface IModelOptionsCategory extends IDecoratorModelOptions {
-  relations: {
-    children: IModelRelationHasMany<ModelCategory, true, 'id' | 'name'>;
-  };
-}
+export interface IModelOptionsCategory extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsCategory>({
   entity: EntityCategory,

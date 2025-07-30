@@ -1,14 +1,10 @@
-import type { IDecoratorModelOptions, IModelRelationBelongsToMany } from 'vona-module-a-orm';
+import type { IDecoratorModelOptions } from 'vona-module-a-orm';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityRole } from '../entity/role.ts';
 import { ModelRoleUser } from './roleUser.ts';
 import { ModelUser } from './user.ts';
 
-export interface IModelOptionsRole extends IDecoratorModelOptions {
-  relations: {
-    users: IModelRelationBelongsToMany<ModelRoleUser, ModelUser, false, 'id' | 'name'>;
-  };
-}
+export interface IModelOptionsRole extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsRole>({
   entity: EntityRole,

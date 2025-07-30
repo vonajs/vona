@@ -3,6 +3,7 @@ import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityUser } from '../entity/user.ts';
 import { ModelPost } from './post.ts';
 import { ModelUserStats } from './userStats.ts';
+import { ModelUserStatsGroup } from './userStatsGroup.ts';
 
 export interface IModelOptionsUser extends IDecoratorModelOptions {}
 
@@ -13,7 +14,7 @@ export interface IModelOptionsUser extends IDecoratorModelOptions {}
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
   },
   cache: {
-    modelsClear: () => ModelUserStats,
+    modelsClear: [() => ModelUserStats, () => ModelUserStatsGroup],
   },
 })
 export class ModelUser extends BeanModelBase<EntityUser> {}
