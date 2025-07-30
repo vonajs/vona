@@ -43,7 +43,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
       } as any,
     };
     if (options?.columns) {
-      params.columns = options?.columns;
+      params.columns = options?.columns as any;
     }
     // select
     const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
@@ -116,7 +116,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // params
     const params: IModelSelectParams<TRecord> = { where, limit: 1 };
     if (options?.columns) {
-      params.columns = options?.columns;
+      params.columns = options?.columns as any;
     }
     // select
     const items = await this._select(table, params, options);

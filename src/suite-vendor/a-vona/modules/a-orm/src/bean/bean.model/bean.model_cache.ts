@@ -302,7 +302,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       // params
       const params: IModelSelectParams<TRecord> = { where };
       if (options?.columns) {
-        params.columns = options?.columns;
+        params.columns = options?.columns as any;
       }
       // select
       const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
@@ -366,7 +366,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     } else {
       const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
+      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -423,7 +423,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     let id = this.__checkCacheKeyValid(where, table);
     if (isNil(id)) {
       // check where and get id
-      const items = await this.__select_raw(table, { where, columns: ['id' as any] }, options);
+      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
       if (items.length === 0) {
         // donothing
         return;
