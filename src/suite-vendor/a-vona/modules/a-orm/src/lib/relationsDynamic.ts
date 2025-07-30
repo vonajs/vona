@@ -31,7 +31,7 @@ function hasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   // not use `| undefined = undefined` or `= {}`
   OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >(
   classModel: TypeModelClassLike<MODEL>,

@@ -46,7 +46,7 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   OPTIONS extends IModelRelationOptionsManyStatic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >(
   classModelMiddle: TypeModelClassLike<MODELMiddle>,
@@ -72,7 +72,7 @@ export const $relation = {
 //   AUTOLOAD extends boolean = boolean,
 //   COLUMNS
 //   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-//   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+//   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
 //   Aggrs extends TypeModelSelectAggrParamsAggrs<
 //     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
 //   > | undefined = undefined, // TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
@@ -96,7 +96,7 @@ export const $relation = {
 //   AUTOLOAD extends boolean = boolean,
 //   COLUMNS
 //   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-//   ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+//   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
 //   Aggrs extends TypeModelSelectAggrParamsAggrs<
 //     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
 //   > | undefined = undefined, // TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,

@@ -2,7 +2,6 @@ import type { ServiceDb } from '../../service/db_.ts';
 import type {
   EntityBase,
   IDatabaseClientRecord,
-  IModelClassRecord,
   IModelDeleteOptions,
   IModelGetOptions,
   IModelInsertOptions,
@@ -19,6 +18,7 @@ import type {
   TypeModelColumn,
   TypeModelColumns,
   TypeModelGroupRelationResult,
+  TypeModelsClassLikeGeneral,
   TypeModelWhere,
 } from '../../types/index.ts';
 import { isNil } from '@cabloy/utils';
@@ -166,7 +166,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async aggregate<
     T extends IModelSelectAggrParams<TRecord>,
-    ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
   >(
     params?: T,
     options?: IModelMethodOptions,
@@ -189,7 +189,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async group<
     T extends IModelSelectGroupParams<TRecord>,
-    ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
   >(
     params?: T,
     options?: IModelMethodOptions,
@@ -211,7 +211,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async select<
     T extends IModelSelectParams<TRecord>,
-    ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
   >(
     params?: T,
     options?: IModelMethodOptions,
