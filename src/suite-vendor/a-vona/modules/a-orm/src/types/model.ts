@@ -72,12 +72,13 @@ export type IModelSelectParams<
 
 export interface IBuildModelCountParams<
   TRecord,
+  _Model extends BeanModelMeta | undefined = undefined,
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
-  column?: (keyof TRecord);
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  column?: TypeModelColumn<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
 }
@@ -88,6 +89,7 @@ export type IModelCountParams<
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
 > = IBuildModelCountParams<
   TRecord,
+  Model,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnNamesOfGeneral<ModelJoins, Model>,
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
