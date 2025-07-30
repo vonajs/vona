@@ -371,13 +371,13 @@ export interface IModelOptionsUser {
       }
 export interface IModelOptionsUserStats {
         relations: {
-          posts: IModelRelationHasMany<ModelPost, true, '*',undefined,undefined,undefined>;
+          posts: IModelRelationHasMany<ModelPost, true, '*',undefined,{ count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> },undefined>;
 
         };
       }
 export interface IModelOptionsUserStatsGroup {
         relations: {
-          posts: IModelRelationHasMany<ModelPost, true, undefined,undefined,undefined,'title' | Array<'title'>>;
+          posts: IModelRelationHasMany<ModelPost, true, undefined,undefined,{ count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> },'title' | Array<'title'>>;
 
         };
       }

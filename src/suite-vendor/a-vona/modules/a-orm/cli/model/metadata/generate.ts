@@ -151,12 +151,21 @@ function __parseRelation_modelJoins(node?: t.Node) {
 function __parseRelation_aggrs(node?: t.Node) {
   if (!node) return 'undefined';
   if (t.isIdentifier(node) && node.name === 'undefined') return 'undefined';
-  return 'undefined';
+  const aggrs = __parseRelation_aggrs_inner(node as t.ObjectExpression);
+  return `{ ${aggrs.join(';')} }`;
 }
 
-function __parseRelation_groups(node?: t.Node) {
-  if (!node) return 'undefined';
-  if (t.isIdentifier(node) && node.name === 'undefined') return 'undefined';
+function __parseRelation_aggrs_inner(node: t.ObjectExpression) {
+  const aggrs: string[] = [];
+  for (const _nodeProperty of node.properties) {
+    const nodeProperty = _nodeProperty as t.ObjectProperty;
+    const key = (nodeProperty.key as t.Identifier).name;
+    const value = __parseColumns(nodeProperty);
+    if (value) {
+      aggrs.push(`${key}?: ${__joinColumnsType(value, true)}`);
+    }
+  }
+  return aggrs;
 }
 
 function __parseRelation_options(node: t.Node) {
@@ -164,6 +173,7 @@ function __parseRelation_options(node: t.Node) {
   let autoload;
   let columns;
   let groups;
+  let aggrs;
   // autoload
   if (options?.autoload) {
     autoload = 'true';
@@ -175,6 +185,12 @@ function __parseRelation_options(node: t.Node) {
     groups = 'undefined';
   } else {
     groups = __joinColumnsType(options?.groups, true);
+  }
+  // aggrs
+  if (!options?.aggrs) {
+    aggrs = 'undefined';
+  } else {
+    aggrs = options?.aggrs;
   }
   // columns
   if (!options?.columns) {
@@ -190,7 +206,7 @@ function __parseRelation_options(node: t.Node) {
       columns = __joinColumnsType(options?.columns, false);
     }
   }
-  return { autoload, columns, groups };
+  return { autoload, columns, groups, aggrs };
 }
 
 function __parseRelation_options_inner(node: t.Node) {
@@ -199,6 +215,7 @@ function __parseRelation_options_inner(node: t.Node) {
   let autoload;
   let columns: string[] | undefined;
   let groups;
+  let aggrs;
   for (const _nodeProperty of node.properties) {
     const nodeProperty = _nodeProperty as t.ObjectProperty;
     const key = (nodeProperty.key as t.Identifier).name;
@@ -208,9 +225,11 @@ function __parseRelation_options_inner(node: t.Node) {
       columns = __parseColumns(nodeProperty);
     } else if (key === 'groups') {
       groups = __parseColumns(nodeProperty);
+    } else if (key === 'aggrs') {
+      aggrs = __parseRelation_aggrs(nodeProperty.value);
     }
   }
-  return { autoload, columns, groups };
+  return { autoload, columns, groups, aggrs };
 }
 
 function __parseColumns(node: t.ObjectProperty) {
