@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeEntityMeta,TypeSymbolKeyFieldsMore,IModelRelationBelongsTo,IModelRelationHasMany,IModelRelationBelongsToMany } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeSymbolKeyFieldsMore,IModelRelationHasOne,IModelRelationBelongsTo,IModelRelationHasMany,IModelRelationBelongsToMany } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** aop: begin */
 export * from '../bean/aop.regExp.ts';
@@ -349,13 +349,13 @@ declare module 'vona-module-test-vona' {
       }
 export interface IModelOptionsPost {
         relations: {
-          
-
+          postContent: IModelRelationHasOne<'test-vona:postContent', false, 'id'|'content'>;
+user: IModelRelationBelongsTo<ModelPost, ModelUser, true, 'id'|'name'>;
         };
       }
 export interface IModelOptionsPostContent {
         relations: {
-          
+          post: IModelRelationBelongsTo<ModelPostContent, ModelPost, false, '*'>;
         };
       }
 export interface IModelOptionsRole {
