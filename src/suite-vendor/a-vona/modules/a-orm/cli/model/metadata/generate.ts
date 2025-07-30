@@ -96,14 +96,39 @@ function __parseRelation(nodeRelation: t.ObjectProperty) {
   const callExpression = nodeRelation.value as t.CallExpression;
   const relationType = ((callExpression.callee as t.MemberExpression).property as t.Identifier).name;
   const args: t.Node[] = callExpression.arguments;
-  // hasMany
-  if (relationType === 'hasMany') {
+  // relation
+  if (relationType === 'hasOne') {
+    return `${relationName}: ${__parseRelationHasOne(args)};`;
+  } else if(relationType==='belongsTo'){
+    return `${relationName}: ${__parseRelationBelongsTo(args)};`;
+  } else if (relationType === 'hasMany') {
     return `${relationName}: ${__parseRelationHasMany(args)};`;
   } else if (relationType === 'belongsToMany') {
     return `${relationName}: ${__parseRelationBelongsToMany(args)};`;
   }
   return '';
 }
+
+function __parseRelationHasOne(args: t.Node[]) {
+  // classModel
+  const classModel = __parseRelation_classModel(args[0]);
+  // options
+  const options = __parseRelation_options(args[2]);
+  // combine
+  return `IModelRelationHasOne<${classModel}, ${options.autoload}, ${options.columns}>`;
+}
+
+function __parseRelationBelongsTo(args: t.Node[]) {
+  // classModelSelf
+  const classModelSelf = __parseRelation_classModel(args[0]);
+  // classModel
+  const classModel = __parseRelation_classModel(args[1]);
+  // options
+  const options = __parseRelation_options(args[3]);
+  // combine
+  return `IModelRelationBelongsTo<${classModelSelf}, ${classModel}, ${options.autoload}, ${options.columns}>`;
+}
+
 
 function __parseRelationHasMany(args: t.Node[]) {
   // classModel
