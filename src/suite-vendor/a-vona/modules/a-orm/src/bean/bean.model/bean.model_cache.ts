@@ -9,6 +9,7 @@ import type {
   IModelMethodOptions,
   IModelMethodOptionsGeneral,
   IModelMutateOptions,
+  IModelRecord,
   IModelSelectAggrParams,
   IModelSelectCountParams,
   IModelSelectGroupParams,
@@ -17,6 +18,7 @@ import type {
   ITableRecord,
   TableIdentity,
   TypeModelAggrRelationResult,
+  TypeModelClassLikeGeneral,
   TypeModelColumn,
   TypeModelColumns,
   TypeModelGroupRelationResult,
@@ -31,10 +33,13 @@ import { ServiceCacheQuery } from '../../service/cacheQuery_.ts';
 import { ServiceRelations } from '../../service/relations_.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
+const SymbolModelsClearAll = Symbol('SymbolModelsClearAll');
+
 export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
   public cacheQuery: ServiceCacheQuery;
   public cacheEntity: ServiceCacheEntity;
   protected relations: ServiceRelations;
+  protected [SymbolModelsClearAll]: Record<keyof IModelRecord, TypeModelClassLikeGeneral[]>;
 
   protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
     super.__init__(clientName, table);
@@ -519,13 +524,49 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   private async _cacheQueryClearModelsClear() {
-    const modelsClear = this.options.cache?.modelsClear;
-    if (!modelsClear) return;
-    const modelsClear2 = Array.isArray(modelsClear) ? modelsClear : [modelsClear];
-    for (const modelClear of modelsClear2) {
+    const modelsClear = this._getModelsClear();
+    if (!modelsClear || modelsClear.length === 0) return;
+    for (const modelClear of modelsClear) {
       const modelTarget = this.newInstanceTarget(modelClear as any) as typeof this;
       await modelTarget.cacheQueryClear();
     }
+  }
+
+  private _getModelsClear(modelName?: keyof IModelRecord): TypeModelClassLikeGeneral[] {
+    const modelsClearAll = this._getModelsClearAll();
+    return modelsClearAll[modelName ?? this.$onionName];
+  }
+
+  private _getModelsClearAll() {
+    if (!this[SymbolModelsClearAll]) {
+      this[SymbolModelsClearAll] = this._collectModelsClearAll();
+    }
+    return this[SymbolModelsClearAll];
+  }
+
+  private _collectModelsClearAll() {
+    const modelsClearAll: Record<keyof IModelRecord, TypeModelClassLikeGeneral[]> = {} as any;
+    const onionSlices = this.bean.onion.model.getOnionsEnabled();
+    for (const onionSlice of onionSlices) {
+      const modelName = onionSlice.name;
+      if (!modelsClearAll[modelName]) modelsClearAll[modelName] = [];
+      //
+      const modelsClear = onionSlice.beanOptions.options?.cache?.modelsClear;
+      if (modelsClear) {
+        const modelsClear2 = Array.isArray(modelsClear) ? modelsClear : [modelsClear];
+        modelsClearAll[modelName].push(...modelsClear2);
+      }
+      //
+      const modelsClearedBy = onionSlice.beanOptions.options?.cache?.modelsClearedBy;
+      if (modelsClearedBy) {
+        const modelsClearedBy2 = Array.isArray(modelsClearedBy) ? modelsClearedBy : [modelsClearedBy];
+        for (const modelName2 of modelsClearedBy2) {
+          if (!modelsClearAll[modelName2]) modelsClearAll[modelName2] = [];
+          modelsClearAll[modelName2].push(modelName);
+        }
+      }
+    }
+    return modelsClearAll;
   }
 
   protected _checkDisableCacheQueryByOptions(options?: IModelMethodOptionsGeneral) {

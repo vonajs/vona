@@ -16,6 +16,9 @@ export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
 export type TypeDynamicClientName<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => keyof IDatabaseClientRecord;
 
+export type TypeModelsClearedByFn<T extends EntityBaseEmpty = EntityBaseEmpty> =
+  (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => Promise<void>;
+
 export interface IDecoratorModelOptions {
   entity?: Constructable<EntityBaseEmpty>;
   table?: TypeDynamicTableName<EntityBaseEmpty> | keyof ITableRecord;
@@ -27,6 +30,8 @@ export interface IDecoratorModelOptions {
     entity?: IDecoratorSummerCacheOptions | false;
     keysAux?: string | string[];
     modelsClear?: TypeModelClassLikeGeneral | TypeModelClassLikeGeneral[];
+    modelsClearedBy?: keyof IModelClassRecord | (keyof IModelClassRecord)[];// TypeModelClassLikeGeneral | TypeModelClassLikeGeneral[];
+    modelsClearedByFn?: TypeModelsClearedByFn<EntityBaseEmpty>;
   };
   clientName?: TypeDynamicClientName<EntityBaseEmpty> | keyof IDatabaseClientRecord;
   // should not use TypeModelRelations or {}
