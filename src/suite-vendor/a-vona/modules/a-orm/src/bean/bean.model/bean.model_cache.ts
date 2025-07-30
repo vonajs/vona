@@ -200,7 +200,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
-    return await this.__select_cache(table, params, options);
+    const items = await this.__select_cache(table, params, options);
+    return this.convertItemsToBigNumber(items) as any;
   }
 
   async group<
@@ -222,7 +223,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
-    return await this.__select_cache(table, params as any, options);
+    const items = await this.__select_cache(table, params as any, options);
+    return this.convertItemsToBigNumber(items) as any;
   }
 
   async select<
