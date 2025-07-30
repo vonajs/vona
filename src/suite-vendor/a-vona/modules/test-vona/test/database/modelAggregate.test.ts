@@ -61,6 +61,14 @@ describe('modelAggregate.test.ts', () => {
           roles: true,
         },
       });
+      // count: user
+      const userCount = await scopeTest.model.user.count({
+        column: '*',
+        where: {
+          name: { _startsWith_: `${prefix}:` },
+        },
+      });
+      assert.equal(userCount, 3);
       // aggr: user
       const userStats = await scopeTest.model.user.aggregate({
         aggrs: {
