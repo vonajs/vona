@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeEntityMeta,TypeSymbolKeyFieldsMore,IModelRelationHasMany } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeSymbolKeyFieldsMore,IModelRelationBelongsTo,IModelRelationHasMany,IModelRelationBelongsToMany } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** aop: begin */
 export * from '../bean/aop.regExp.ts';
@@ -360,25 +360,25 @@ export interface IModelOptionsPostContent {
       }
 export interface IModelOptionsRole {
         relations: {
-          
+          users: IModelRelationBelongsToMany<ModelRoleUser, ModelUser, false, 'id'|'name',undefined,undefined,undefined>;
         };
       }
 export interface IModelOptionsUser {
         relations: {
           posts: IModelRelationHasMany<ModelPost, false, 'id'|'title',undefined,undefined,undefined>;
-
+roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, 'id'|'name',undefined,undefined,undefined>;
         };
       }
 export interface IModelOptionsUserStats {
         relations: {
           posts: IModelRelationHasMany<ModelPost, true, '*',undefined,{ count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> },undefined>;
-
+roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, '*',undefined,{ count?: '*' | Array<'*'> },undefined>;
         };
       }
 export interface IModelOptionsUserStatsGroup {
         relations: {
           posts: IModelRelationHasMany<ModelPost, true, undefined,undefined,{ count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> },'title' | Array<'title'>>;
-
+roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, undefined,undefined,{ count?: '*' | Array<'*'> },'name' | Array<'name'>>;
         };
       }
   export interface ModelCategory {

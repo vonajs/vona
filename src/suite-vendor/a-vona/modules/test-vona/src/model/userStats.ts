@@ -1,17 +1,9 @@
-import type { IDecoratorModelOptions, IModelRelationBelongsToMany, IModelRelationHasMany } from 'vona-module-a-orm';
-import type { ModelRole } from './role.ts';
-import type { ModelRoleUser } from './roleUser.ts';
+import type { IDecoratorModelOptions } from 'vona-module-a-orm';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityUser } from '../entity/user.ts';
 import { ModelPost } from './post.ts';
 
-export interface IModelOptionsUserStats extends IDecoratorModelOptions {
-  relations: {
-    // aggrs：需要支持宿主形式
-    posts: IModelRelationHasMany<ModelPost, true, '*', undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, '*', undefined, { count?: '*' }>;
-  };
-}
+export interface IModelOptionsUserStats extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsUserStats>({
   entity: EntityUser,

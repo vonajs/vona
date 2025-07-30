@@ -1,17 +1,9 @@
-import type { IDecoratorModelOptions, IModelRelationBelongsToMany, IModelRelationHasMany } from 'vona-module-a-orm';
-import type { ModelRole } from './role.ts';
-import type { ModelRoleUser } from './roleUser.ts';
+import type { IDecoratorModelOptions } from 'vona-module-a-orm';
 import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityUser } from '../entity/user.ts';
 import { ModelPost } from './post.ts';
 
-export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {
-  relations: {
-    // columns：默认为undefined
-    posts: IModelRelationHasMany<ModelPost, true, undefined, undefined, { count?: '*' | 'title' | Array<'*' | 'title'>; sum?: 'stars' | Array<'stars'> }, 'title' | Array<'title'>>;
-    roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, undefined, undefined, { count?: '*' }, 'name'>;
-  };
-}
+export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsUserStatsGroup>({
   entity: EntityUser,

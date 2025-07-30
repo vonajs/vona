@@ -119,16 +119,16 @@ function __parseRelationHasMany(args: t.Node[]) {
 }
 
 function __parseRelationBelongsToMany(args: t.Node[]) {
+  // classModelMiddle
+  const classModelMiddle = __parseRelation_classModel(args[0]);
   // classModel
-  const classModel = __parseRelation_classModel(args[0]);
-  // // key
-  // const key = __parseRelation_key(args[1]);
+  const classModel = __parseRelation_classModel(args[1]);
   // options
-  const options = __parseRelation_options(args[2]);
+  const options = __parseRelation_options(args[4]);
   // modelJoins
-  const modelJoins = __parseRelation_modelJoins(args[3]);
+  const modelJoins = __parseRelation_modelJoins(args[5]);
   // combine
-  return `IModelRelationHasMany<${classModel}, ${options.autoload}, ${options.columns},${modelJoins},${options.aggrs},${options.groups}>`;
+  return `IModelRelationBelongsToMany<${classModelMiddle}, ${classModel}, ${options.autoload}, ${options.columns},${modelJoins},${options.aggrs},${options.groups}>`;
 }
 
 function __parseRelation_classModel(node: t.Node) {
