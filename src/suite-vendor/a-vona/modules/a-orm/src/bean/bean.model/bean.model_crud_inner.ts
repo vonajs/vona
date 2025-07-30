@@ -129,7 +129,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table?: keyof ITableRecord,
     params?: IModelCountParams<TRecord>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<BigNumber> {
+  ): Promise<BigNumber | undefined> {
     // table
     table = table || this.getTable();
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
@@ -146,7 +146,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // ready
     this.$loggerChild('model').debug('model.count: %s', builder.toQuery());
     const res = await builder;
-    return this.extractCount(res);
+    return this.extractFirstNumber(res);
   }
 
   protected async _insertBulk(
