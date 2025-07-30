@@ -1,6 +1,6 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
-import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
+import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationOptionsManyStatic, IModelRelationOptionsOneStatic } from './relationsStatic.ts';
 
 function hasOne<
@@ -30,7 +30,7 @@ function belongsTo<
 function hasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   OPTIONS extends IModelRelationOptionsManyStatic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >(
   classModel: TypeModelClassLike<MODEL>,

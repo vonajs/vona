@@ -11,14 +11,23 @@ export type TypeSymbolKeyEntity = typeof SymbolKeyEntity;
 export type TypeSymbolKeyEntityMeta = typeof SymbolKeyEntityMeta;
 export type TypeSymbolKeyModelOptions = typeof SymbolKeyModelOptions;
 
-export type TypeModelOfModelLike<ModelLike extends BeanModelMeta | (keyof IModelClassRecord)> =
-  ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike] : ModelLike;
+export type TypeModelOfModelLike<
+  ModelLike extends
+  (() => Constructable<BeanModelMeta>) | Constructable<BeanModelMeta> | (() => BeanModelMeta) | BeanModelMeta | (keyof IModelClassRecord),
+> =
+  ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike] :
+  ModelLike extends () => Constructable<infer MODEL> ? MODEL :
+  ModelLike extends Constructable<infer MODEL> ? MODEL :
+  ModelLike extends () => infer MODEL ? MODEL : ModelLike;
 
 export type TypeModelClassLike<MODEL extends BeanModelMeta | (keyof IModelClassRecord)> =
   MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL;
 
 export type TypeModelClassLikeGeneral<MODEL extends BeanModelMeta = BeanModelMeta> =
-  (() => Constructable<MODEL>) | Constructable<MODEL> | keyof IModelClassRecord;
+  (() => Constructable<MODEL>) | Constructable<MODEL> | (() => BeanModelMeta) | BeanModelMeta | keyof IModelClassRecord;
+
+export type TypeModelsClassLikeGeneral<MODEL extends BeanModelMeta = BeanModelMeta> =
+  TypeModelClassLikeGeneral<MODEL> | Array<TypeModelClassLikeGeneral<MODEL>>;
 
 export type TypeModelParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;

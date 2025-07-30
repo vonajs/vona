@@ -365,7 +365,7 @@ export interface IModelOptionsRole {
       }
 export interface IModelOptionsUser {
         relations: {
-          posts: IModelRelationHasMany<ModelPost, false, 'id'|'title',undefined,undefined,undefined>;
+          posts: IModelRelationHasMany<ModelPost, false, 'id'|'title',['test-vona:user',ModelPostContent],undefined,undefined>;
 roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, 'id'|'name',undefined,undefined,undefined>;
         };
       }

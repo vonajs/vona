@@ -3,7 +3,7 @@ import type { IModelRelationIncludeWrapper, IModelSelectParamsJoin, IModelSelect
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
-import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
+import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { IModelRelationOptionsOne } from './relationsDef.ts';
 import type { TypeModelSelectGroupParamsColumnNames } from './relationsGroup.ts';
@@ -68,7 +68,7 @@ export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta>
 
 export interface IModelRelationOptionsManyDynamic<
   MODEL extends BeanModelMeta,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >
   extends
@@ -79,7 +79,7 @@ export type IModelRelationOptionsManyDynamic_Raw<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 > = IBuildModelRelationOptionsManyDynamic<
   MODEL[TypeSymbolKeyEntity],

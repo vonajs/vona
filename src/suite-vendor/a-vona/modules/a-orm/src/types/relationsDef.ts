@@ -3,7 +3,7 @@ import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { IBuildModelSelectGeneralParamsBasic } from './modelGeneral.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
-import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from './relations.ts';
+import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
@@ -50,7 +50,7 @@ export interface IModelRelationHasMany<
   extends TypeModelColumn<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
   > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
 > {
@@ -93,7 +93,7 @@ export type IModelRelationOptionsMany<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
 > = IBuildModelRelationOptionsMany<

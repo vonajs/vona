@@ -1,7 +1,7 @@
 import type { TypeConfirmArray, TypeRecordValues } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
-import type { TypeSymbolKeyEntity, TypeSymbolKeyEntityMeta, TypeUtilGetModelOnionName, TypeUtilGetModelOptions, TypeUtilGetRelationEntityMeta, TypeUtilGetRelationModel } from './relations.ts';
+import type { IDecoratorModelOptions } from './onion/model.ts';
+import type { TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity, TypeSymbolKeyEntityMeta, TypeUtilGetModelOnionName, TypeUtilGetModelOptions, TypeUtilGetRelationEntityMeta, TypeUtilGetRelationModel } from './relations.ts';
 
 export type TypeEntityTableColumnNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: string } ? (keyof { [K in keyof EntityMeta as K extends '$table' | '$comment' | '$default' ? never : K extends string ? `${EntityMeta['$table']}.${K}` : never ]: EntityMeta[K] }) : never;
 export type TypeEntityTableColumnNamesShort<Entity> = keyof Entity;
@@ -55,11 +55,11 @@ export type TypeModelsOfModelClass<TModel extends BeanModelMeta> =
 export type TypeModelOnionNamesOfModelClass<TModel extends BeanModelMeta> =
   TypeModelOnionNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
 
-export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
-    TypeEntityTableColumnNames<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]][TypeSymbolKeyEntityMeta]>;
+export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> =
+    TypeEntityTableColumnNames<TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>[TypeSymbolKeyEntityMeta]>;
 
-export type TypeEntityTableColumnsOfModelJoins<TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[]> =
-    TypeEntityTableColumnsOfModelDirect<IModelClassRecord[TypeConfirmArray<TModelJoins>[number]]>;
+export type TypeEntityTableColumnsOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> =
+    TypeEntityTableColumnsOfModelDirect<TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>>;
 
 export type TypeEntityTableColumnNamesOfModelSelf<TModel extends BeanModelMeta> =
   TypeEntityTableColumnNames<TModel[TypeSymbolKeyEntityMeta]> | TypeEntityTableColumnNamesShort<TModel[TypeSymbolKeyEntity]>;
@@ -68,21 +68,21 @@ export type TypeEntityTableColumnsOfModelSelf<TModel extends BeanModelMeta> =
   TypeEntityTableColumnsOfModelDirect<TModel> & TypeEntityTableColumnsShort<TModel[TypeSymbolKeyEntity]>;
 
 export type TypeEntityTableColumnNamesOfGeneral<
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+  TModelJoins extends TypeModelsClassLikeGeneral | undefined,
   TModel extends BeanModelMeta | undefined,
 > =
   TModel extends BeanModelMeta ?
-    TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
+    TModelJoins extends TypeModelsClassLikeGeneral ?
         (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>) :
         (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>)
     : undefined;
 
 export type TypeEntityTableColumnsOfGeneral<
-  TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined,
+  TModelJoins extends TypeModelsClassLikeGeneral | undefined,
   TModel extends BeanModelMeta | undefined,
 > =
   TModel extends BeanModelMeta ?
-    TModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] ?
+    TModelJoins extends TypeModelsClassLikeGeneral ?
         (TypeEntityTableColumnsOfModelJoins<TModelJoins> & TypeEntityTableColumnsOfModelSelf<TModel>) :
         (TypeEntityTableColumnsOfModelClass<TModel> & TypeEntityTableColumnsOfModelSelf<TModel>)
     : undefined;
