@@ -9,7 +9,7 @@ describe('dtoCompose.test.ts', () => {
   it('action:dtoCompose', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
-        const DtoPostNew = $Dto.compose(ModelPost, {
+        const DtoPostNew = $Dto.result(ModelPost, {
           columns: ['id', 'title', 'userId'],
           include: {
             postContent: {
@@ -48,7 +48,7 @@ describe('dtoCompose.test.ts', () => {
   it('action:dtoCompose:categoryTree', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
-        const DtoCategoryTree = $Dto.compose('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
+        const DtoCategoryTree = $Dto.result('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
         const rules: any = getTargetDecoratorRules(DtoCategoryTree.prototype);
         assert.equal(rules.children._def.typeName, 'ZodEffects');
         assert.equal(rules.iid, undefined);

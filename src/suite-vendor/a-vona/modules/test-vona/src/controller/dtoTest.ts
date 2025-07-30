@@ -16,12 +16,12 @@ export class ControllerDtoTest extends BeanBase {
   }
 
   @Web.get('getUserDynamic')
-  @Api.body($Dto.compose('test-vona:post'))
+  @Api.body($Dto.result('test-vona:post'))
   getPostDynamic() {
   }
 
   @Web.get('getCategoryTree')
-  @Api.body(v.array($Dto.compose('test-vona:category', { columns: ['id', 'name'] })))
+  @Api.body(v.array($Dto.result('test-vona:category', { columns: ['id', 'name'] })))
   async getCategoryTree() {
     const items = await this.scope.model.category.select({ columns: ['id', 'name'] });
     return items;

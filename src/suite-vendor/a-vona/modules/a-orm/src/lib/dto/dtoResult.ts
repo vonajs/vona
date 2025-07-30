@@ -8,17 +8,17 @@ import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
 import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
-export function DtoCompose<
+export function DtoResult<
   T extends IDtoComposeParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoComposeResult<ModelLike, T>> {
-  return _DtoCompose_raw(modelLike, params);
+  return _DtoResult_raw(modelLike, params);
 }
 
-function _DtoCompose_raw<
+function _DtoResult_raw<
   T extends IDtoComposeParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
@@ -34,39 +34,39 @@ function _DtoCompose_raw<
   // always create a new class, no matter if columns empty
   entityClass = $Class.pick(entityClass, columns as any);
   // relations
-  _DtoCompose_relations(modelClass, entityClass, params as any);
+  _DtoResult_relations(modelClass, entityClass, params as any);
   return entityClass as any;
 }
 
-function _DtoCompose_relations<TRecord extends {}, TModel extends BeanModelMeta>(
+function _DtoResult_relations<TRecord extends {}, TModel extends BeanModelMeta>(
   modelClass: Constructable<TModel>,
   entityClass: Constructable<TRecord>,
   includeWrapper?: IModelRelationIncludeWrapper,
 ) {
   // relations
-  const relations = _DtoCompose_relations_collection(modelClass, includeWrapper);
+  const relations = _DtoResult_relations_collection(modelClass, includeWrapper);
   if (!relations) return;
   for (const relation of relations) {
-    _DtoCompose_relation_handle(entityClass, relation);
+    _DtoResult_relation_handle(entityClass, relation);
   }
 }
 
-function _DtoCompose_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any, boolean]) {
+function _DtoResult_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any, boolean]) {
   const [relationName, relationReal, includeReal, withReal, autoload] = relation;
   const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
-  const schemaLazy = _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
+  const schemaLazy = _DtoResult_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
   const schema = (type === 'hasOne' || type === 'belongsTo')
     ? v.lazy(v.optional(), schemaLazy)
     : v.array(v.lazy(schemaLazy));
   Api.field(schema)(entityClass.prototype, relationName);
 }
 
-function _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
+function _DtoResult_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
   return () => {
     if (!autoload) {
-      return _DtoCompose_raw(modelTarget, optionsReal);
+      return _DtoResult_raw(modelTarget, optionsReal);
     }
     // dynamic
     const entityClass = getClassEntityFromClassModel(modelTarget);
@@ -75,7 +75,7 @@ function _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autolo
     const dynamicName = `${beanFullName}_${columns ? hashkey(columns) : 'none'}`;
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
-      entityTarget = _DtoCompose_raw(modelTarget, optionsReal);
+      entityTarget = _DtoResult_raw(modelTarget, optionsReal);
       entityTarget[SymbolSchemaDynamicRefId] = dynamicName;
       addSchemaDynamic(dynamicName, entityTarget);
     }
@@ -83,7 +83,7 @@ function _DtoCompose_relation_handle_schemaLazy(modelTarget, optionsReal, autolo
   };
 }
 
-function _DtoCompose_relations_collection<TModel extends BeanModelMeta>(
+function _DtoResult_relations_collection<TModel extends BeanModelMeta>(
   modelClass: Constructable<TModel>,
   includeWrapper?: IModelRelationIncludeWrapper,
 ) {
