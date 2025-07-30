@@ -3,7 +3,7 @@ import type { TypeUtilGetParamsAggrs, TypeUtilGetRelationOptionsAggrs } from './
 
 export type TypeModelAggrRelationResult<TOptions> =
 TypeUtilGetParamsAggrs<TOptions> extends {} ?
-  TypeModelAggrRelationResultAggrs<TypeUtilGetParamsAggrs<TOptions>> : undefined;
+  TypeModelAggrRelationResultAggrs<TypeUtilGetParamsAggrs<TOptions>> : {}; // not use undefined
 
 export type TypeModelAggrRelationResultAggrs<Aggrs> =
 Aggrs extends {} ?

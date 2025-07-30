@@ -12,6 +12,7 @@ export * from './extra.ts';
 export * from './logger.ts';
 export * from './model.ts';
 export * from './modelAggr.ts';
+export * from './modelCount.ts';
 export * from './modelGeneral.ts';
 export * from './modelGroup.ts';
 export * from './modelWhere.ts';

@@ -1,3 +1,4 @@
+import type BigNumber from 'bignumber.js';
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
   EntityBase,
@@ -9,6 +10,7 @@ import type {
   IModelMethodOptionsGeneral,
   IModelMutateOptions,
   IModelSelectAggrParams,
+  IModelSelectCountParams,
   IModelSelectGroupParams,
   IModelSelectParams,
   IModelUpdateOptions,
@@ -162,6 +164,20 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return true;
     });
     return this.__filterMGetColumns(items, options?.columns);
+  }
+
+  async count<
+    T extends IModelSelectCountParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
+    params?: T,
+    options?: IModelMethodOptions,
+    _modelJoins?: ModelJoins,
+  ): Promise<BigNumber> {
+    const column = params?.column ?? '*';
+    const params2 = Object.assign({}, params, { aggrs: { count: column }, column: undefined });
+    const item = await this.aggregate(params2, options);
+    return this.extractCount(item);
   }
 
   async aggregate<
