@@ -177,7 +177,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const column = params?.column ?? '*';
     const params2 = Object.assign({}, params, { aggrs: { count: column }, column: undefined });
     const item = await this.aggregate(params2, options);
-    return this.extractFirstNumber(item);
+    return this.extractFirstValue(item);
   }
 
   async aggregate<
