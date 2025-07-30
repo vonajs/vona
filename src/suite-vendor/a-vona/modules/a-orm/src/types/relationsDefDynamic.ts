@@ -39,7 +39,7 @@ export interface IModelRelationBelongsToDynamic<
 export interface IModelRelationHasManyDynamic<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> = {},
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 > {
   type?: 'hasMany';
@@ -52,7 +52,7 @@ export interface IModelRelationBelongsToManyDynamic<
   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> = {},
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 > {
   type?: 'belongsToMany';

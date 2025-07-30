@@ -2,7 +2,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper, IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
-import type { IModelClassRecord } from './onion/model.ts';
+import type { TypeModelsClassLikeGeneral } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeModelSelectGroupParamsColumnNames, TypeModelSelectGroupParamsColumns } from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
@@ -48,7 +48,7 @@ export type IModelSelectGeneralParams<
   TRecord,
   // not use undefined as default value
   Model extends BeanModelMeta = BeanModelMeta,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
 > = IBuildModelSelectGeneralParams<
   TRecord,
   Model,

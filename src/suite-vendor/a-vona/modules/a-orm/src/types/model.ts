@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
-import type { TypeModelParamsInclude } from './relations.ts';
+import type { TypeModelParamsInclude, TypeModelsClassLikeGeneral } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeModelMutateParamsInclude } from './relationsMutate.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
@@ -62,7 +62,7 @@ export type IModelSelectParams<
   TRecord,
   // not use undefined as default value
   Model extends BeanModelMeta = BeanModelMeta,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
 > = IBuildModelSelectParams<
   TRecord,
   Model,
@@ -86,7 +86,7 @@ export interface IBuildModelCountParams<
 export type IModelCountParams<
   TRecord,
   Model extends BeanModelMeta = BeanModelMeta,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
 > = IBuildModelCountParams<
   TRecord,
   TypeEntityTableNamesOfGeneral<ModelJoins, Model>,

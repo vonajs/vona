@@ -68,7 +68,7 @@ export interface IModelRelationBelongsToMany<
   extends TypeModelColumn<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
   > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
-  ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
 > {
