@@ -5,8 +5,8 @@ import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { $Dto, $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
 
-describe('dtoCompose.test.ts', () => {
-  it('action:dtoCompose', async () => {
+describe('dtoResult.test.ts', () => {
+  it('action:dtoResult', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
         const DtoPostNew = $Dto.result(ModelPost, {
@@ -45,7 +45,7 @@ describe('dtoCompose.test.ts', () => {
       });
     });
   });
-  it('action:dtoCompose:categoryTree', async () => {
+  it('action:dtoResult:categoryTree', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
         const DtoCategoryTree = $Dto.result('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
