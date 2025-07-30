@@ -1,6 +1,5 @@
 /* eslint-disable */
-import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
-import type { TypeEntityMeta } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** entity: begin */
 export * from '../entity/authSimple.ts';
@@ -71,9 +70,10 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
-import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions } from 'vona-module-a-orm';
+import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-authsimple' {
+  
   export interface ModelAuthSimple {
       [SymbolKeyEntity]: EntityAuthSimple;
       [SymbolKeyEntityMeta]: EntityAuthSimpleMeta;
@@ -90,6 +90,8 @@ declare module 'vona-module-a-authsimple' {
       deleteBulk<T extends IModelDeleteOptions<EntityAuthSimple,ModelAuthSimple>>(ids: TableIdentity[], options?: T): Promise<void>;
       mutate<T extends IModelMutateOptions<EntityAuthSimple,ModelAuthSimple>>(data?: TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityAuthSimple,ModelAuthSimple>>(items: TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>[]>;
+      aggregate<T extends IModelSelectAggrParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends (keyof IModelClassRecord) | (keyof IModelClassRecord)[] | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityAuthSimple, T>[]>;
     }
 }
 declare module 'vona-module-a-orm' {
