@@ -15,7 +15,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const relations = __parseRelations(__getAstNode(astNodes as any, 'relations'));
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
-    if (relations.length > 0) {
+    if (relations && relations.length > 0) {
       contentRelations.push(`export interface ${opionsName} {
         relations: {
           ${relations.join('\n')}
@@ -81,7 +81,8 @@ function __parseEntityName(node: t.ObjectProperty): string {
   // return entityName.split(',')[0];
 }
 
-function __parseRelations(node: t.ObjectProperty) {
+function __parseRelations(node?: t.ObjectProperty) {
+  if (!node) return;
   const relations: string[] = [];
   const nodeRelations = node.value as t.ObjectExpression;
   for (const nodeRelation of nodeRelations.properties) {
@@ -109,8 +110,10 @@ function __parseRelationHasMany(args: t.Node[]) {
   // const key = __parseRelation_key(args[1]);
   // options
   const options = __parseRelation_options(args[2]);
+  // modelJoins
+  const modelJoins = __parseRelation_modelJoins(args[3]);
   // combine
-  return `IModelRelationHasMany<${classModel}, ${options.autoload}, ${options.columns}>`;
+  return `IModelRelationHasMany<${classModel}, ${options.autoload}, ${options.columns},${modelJoins},${options.aggrs},${options.groups}>`;
 }
 
 function __parseRelation_classModel(node: t.Node) {
@@ -119,7 +122,7 @@ function __parseRelation_classModel(node: t.Node) {
   } else if (t.isIdentifier(node)) {
     return node.name;
   } else if (t.isStringLiteral(node)) {
-    return node.value;
+    return `'${node.value}'`;
   }
   throw new Error('invalid classModel');
 }
@@ -128,7 +131,32 @@ function __parseRelation_key(node: t.Node) {
   if (t.isStringLiteral(node)) {
     return node.value;
   }
-  throw new Error('invalid support key');
+  throw new Error('invalid key');
+}
+
+function __parseRelation_modelJoins(node?: t.Node) {
+  if (!node) return 'undefined';
+  if (t.isIdentifier(node) && node.name === 'undefined') return 'undefined';
+  let modelJoins;
+  if (t.isArrayExpression(node)) {
+    modelJoins = node.elements.map(item => __parseRelation_classModel(item!));
+  } else {
+    modelJoins = [__parseRelation_classModel(node)];
+  }
+  return `[${modelJoins.join(',')}]`;
+  // const content = `${modelJoins.join('|')}`;
+  // return `${content} | Array<${content}>`;
+}
+
+function __parseRelation_aggrs(node?: t.Node) {
+  if (!node) return 'undefined';
+  if (t.isIdentifier(node) && node.name === 'undefined') return 'undefined';
+  return 'undefined';
+}
+
+function __parseRelation_groups(node?: t.Node) {
+  if (!node) return 'undefined';
+  if (t.isIdentifier(node) && node.name === 'undefined') return 'undefined';
 }
 
 function __parseRelation_options(node: t.Node) {
@@ -143,19 +171,23 @@ function __parseRelation_options(node: t.Node) {
     autoload = 'false';
   }
   // groups
-  groups = options?.groups;
+  if (!options?.groups) {
+    groups = 'undefined';
+  } else {
+    groups = __joinColumnsType(options?.groups, true);
+  }
   // columns
   if (!options?.columns) {
     if (options?.groups) {
       columns = 'undefined';
     } else {
-      columns = '*';
+      columns = '\'*\'';
     }
   } else {
     if (options?.columns.includes('*')) {
-      columns = '*';
+      columns = '\'*\'';
     } else {
-      columns = options?.columns.map(item => `'${item}'`).join('|');
+      columns = __joinColumnsType(options?.columns, false);
     }
   }
   return { autoload, columns, groups };
@@ -163,7 +195,7 @@ function __parseRelation_options(node: t.Node) {
 
 function __parseRelation_options_inner(node: t.Node) {
   if (!node) return undefined;
-  if (!t.isObjectExpression(node)) throw new Error('invalid support options');
+  if (!t.isObjectExpression(node)) throw new Error('invalid options');
   let autoload;
   let columns: string[] | undefined;
   let groups;
@@ -174,6 +206,8 @@ function __parseRelation_options_inner(node: t.Node) {
       autoload = (nodeProperty.value as t.BooleanLiteral).value;
     } else if (key === 'columns') {
       columns = __parseColumns(nodeProperty);
+    } else if (key === 'groups') {
+      groups = __parseColumns(nodeProperty);
     }
   }
   return { autoload, columns, groups };
@@ -185,4 +219,9 @@ function __parseColumns(node: t.ObjectProperty) {
   } else if (t.isStringLiteral(node.value)) {
     return [node.value.value];
   }
+}
+
+function __joinColumnsType(columns: string[], withArray: boolean) {
+  const temp = columns.map(item => `'${item}'`).join('|');
+  return withArray ? `${temp} | Array<${temp}>` : temp;
 }

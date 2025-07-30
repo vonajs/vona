@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeEntityMeta,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeSymbolKeyFieldsMore,IModelRelationHasMany } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** aop: begin */
 export * from '../bean/aop.regExp.ts';
@@ -342,7 +342,45 @@ export interface IModuleModel {
 import type { IModelCountParams, IModelGetOptions, IModelMethodOptions, IModelMethodOptionsGeneral, IModelClassRecord, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-test-vona' {
-  
+  export interface IModelOptionsCategory {
+        relations: {
+          children: IModelRelationHasMany<ModelCategory, true, 'id'|'name',undefined,undefined,undefined>;
+        };
+      }
+export interface IModelOptionsPost {
+        relations: {
+          
+
+        };
+      }
+export interface IModelOptionsPostContent {
+        relations: {
+          
+        };
+      }
+export interface IModelOptionsRole {
+        relations: {
+          
+        };
+      }
+export interface IModelOptionsUser {
+        relations: {
+          posts: IModelRelationHasMany<ModelPost, false, 'id'|'title',undefined,undefined,undefined>;
+
+        };
+      }
+export interface IModelOptionsUserStats {
+        relations: {
+          posts: IModelRelationHasMany<ModelPost, true, '*',undefined,undefined,undefined>;
+
+        };
+      }
+export interface IModelOptionsUserStatsGroup {
+        relations: {
+          posts: IModelRelationHasMany<ModelPost, true, undefined,undefined,undefined,'title' | Array<'title'>>;
+
+        };
+      }
   export interface ModelCategory {
       [SymbolKeyEntity]: EntityCategory;
       [SymbolKeyEntityMeta]: EntityCategoryMeta;
