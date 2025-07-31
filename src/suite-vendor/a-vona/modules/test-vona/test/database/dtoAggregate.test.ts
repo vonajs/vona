@@ -24,6 +24,7 @@ describe('dtoAggregate.test.ts', () => {
         assert.equal(rules.sum_age._def.typeName, 'ZodOptional');
         assert.equal(rules.avg_age._def.typeName, 'ZodOptional');
         assert.equal(rules.max_age, undefined);
+        assert.equal(rules.min_age, undefined);
       });
     });
   });
