@@ -105,6 +105,7 @@ export type IModelMutateOptions<TRecord, Model extends BeanModelMeta | undefined
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
   disableInstance?: boolean;
+  disableUpdateTime?: boolean;
   disableCacheQuery?: boolean;
   disableCacheEntity?: boolean;
 }
@@ -116,7 +117,6 @@ export interface IModelInsertOptionsGeneral<_TRecord, Model extends BeanModelMet
 export interface IModelUpdateOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
   extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
   where?: TypeModelWhere<TRecord>;
-  disableUpdateTime?: boolean;
 }
 
 export interface IModelDeleteOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
