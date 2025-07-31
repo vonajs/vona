@@ -1,7 +1,6 @@
 import type { Constructable, OmitNever, VonaContext } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDatabaseClientRecord } from '../database.ts';
 import type { EntityBaseEmpty } from '../entityBaseEmpty.ts';
 import type { TypeModelClassLikeGeneral } from '../relations.ts';
@@ -10,26 +9,26 @@ import type { ITableRecord } from './table.ts';
 export interface IModelRecord {}
 export interface IModelClassRecord {}
 
-export type TypeDynamicTableName<T extends EntityBaseEmpty = EntityBaseEmpty> =
-  (ctx: VonaContext, defaultTable: keyof ITableRecord, modelInstance: BeanModelMeta<T>) => string;
+export type TypeDynamicTableName =
+  (ctx: VonaContext, defaultTable: keyof ITableRecord, modelInstance: any) => string;
 
-export type TypeDynamicClientName<T extends EntityBaseEmpty = EntityBaseEmpty> =
-  (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => keyof IDatabaseClientRecord;
+export type TypeDynamicClientName =
+  (ctx: VonaContext, modelInstance: any) => keyof IDatabaseClientRecord;
 
-export type TypeModelsClearedByFn<T extends EntityBaseEmpty = EntityBaseEmpty> =
-  (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => Promise<void>;
+export type TypeModelsClearedByFn =
+  (ctx: VonaContext, modelInstance: any) => Promise<void>;
 
-export type TypeSoftDeletionPruneFn<T extends EntityBaseEmpty = EntityBaseEmpty> =
-  (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => Promise<void>;
+export type TypeSoftDeletionPruneHandler =
+  (ctx: VonaContext, modelInstance: any) => Promise<void>;
 
 export interface ISoftDeletionPrune {
-  pruneFn?: TypeSoftDeletionPruneFn;
+  handler?: TypeSoftDeletionPruneHandler;
   expired?: number;
 }
 
 export interface IDecoratorModelOptions {
   entity?: Constructable<EntityBaseEmpty>;
-  table?: TypeDynamicTableName<EntityBaseEmpty> | keyof ITableRecord;
+  table?: TypeDynamicTableName | keyof ITableRecord;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
@@ -40,9 +39,9 @@ export interface IDecoratorModelOptions {
     keysAux?: string | string[];
     modelsClear?: TypeModelClassLikeGeneral | TypeModelClassLikeGeneral[];
     modelsClearedBy?: keyof IModelClassRecord | (keyof IModelClassRecord)[];// TypeModelClassLikeGeneral | TypeModelClassLikeGeneral[];
-    modelsClearedByFn?: TypeModelsClearedByFn<EntityBaseEmpty>;
+    modelsClearedByFn?: TypeModelsClearedByFn;
   };
-  clientName?: TypeDynamicClientName<EntityBaseEmpty> | keyof IDatabaseClientRecord;
+  clientName?: TypeDynamicClientName | keyof IDatabaseClientRecord;
   // should not use TypeModelRelations or {}
   relations?: Record<never, never>;
 }

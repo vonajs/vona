@@ -24,11 +24,11 @@ export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExec
     onionSlice: IOnionSlice<IDecoratorModelOptions, keyof IModelRecord, unknown>,
     softDeletionPrune: ISoftDeletionPrune,
   ) {
-    const pruneFn = softDeletionPrune.pruneFn;
+    const handler = softDeletionPrune.handler;
     const expired = softDeletionPrune.expired ?? this.scope.config.softDeletionPrune.expired;
     const modelTarget = this.bean._getBean<T>(onionSlice.beanOptions.beanFullName as any);
-    if (pruneFn) {
-      await pruneFn(this.ctx, modelTarget);
+    if (handler) {
+      await handler(this.ctx, modelTarget);
     } else {
       const expiredTime = new Date(Date.now() - expired);
       await modelTarget.delete({

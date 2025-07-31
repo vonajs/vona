@@ -6,8 +6,16 @@ import { EntityTest } from '../entity/test.ts';
 
 export interface IModelOptionsTestDynamicTable extends IDecoratorModelOptions {}
 
-@Model<IModelOptionsTestDynamicTable>({ entity: EntityTest, table(ctx: VonaContext, defaultTable: keyof ITableRecord) {
-  if (ctx.instanceName !== '') return defaultTable;
-  return `${defaultTable}_${moment().format('YYYYMMDD')}`;
-} })
+@Model<IModelOptionsTestDynamicTable>({
+  entity: EntityTest,
+  table(ctx: VonaContext, defaultTable: keyof ITableRecord) {
+    if (ctx.instanceName !== '') return defaultTable;
+    return `${defaultTable}_${moment().format('YYYYMMDD')}`;
+  },
+  softDeletionPrune: {
+    handler: async (_ctx, _modelInstance: ModelTestDynamicTable) => {
+      // do nothing
+    },
+  },
+})
 export class ModelTestDynamicTable extends BeanModelBase<EntityTest> {}
