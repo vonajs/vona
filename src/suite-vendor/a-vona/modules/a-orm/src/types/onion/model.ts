@@ -19,7 +19,11 @@ export type TypeModelsClearedByFn =
   (ctx: VonaContext, modelInstance: any) => Promise<void>;
 
 export type TypeSoftDeletionPruneHandler =
-  (ctx: VonaContext, modelInstance: any) => Promise<void>;
+  (ctx: VonaContext, modelInstance: any, options: ISoftDeletionPruneHandlerOptions) => Promise<void>;
+
+export interface ISoftDeletionPruneHandlerOptions {
+  expired: number;
+}
 
 export interface ISoftDeletionPrune {
   handler?: TypeSoftDeletionPruneHandler;

@@ -26,7 +26,7 @@ export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExec
     const expired = softDeletionPrune.expired ?? this.scope.config.softDeletionPrune.expired;
     const modelTarget = this.bean._getBean<T>(onionSlice.beanOptions.beanFullName as any);
     if (handler) {
-      await handler(this.ctx, modelTarget);
+      await handler(this.ctx, modelTarget, { expired });
     } else {
       const expiredTime = new Date(Date.now() - expired);
       await modelTarget.delete({
