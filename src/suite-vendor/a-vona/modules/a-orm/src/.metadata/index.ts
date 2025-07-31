@@ -218,6 +218,31 @@ declare module 'vona-module-a-event' {
   }
 }
 /** event: end */
+/** schedule: begin */
+export * from '../bean/schedule.softDeletionPrune.ts';
+
+import { type IDecoratorScheduleOptions } from 'vona-module-a-schedule';
+declare module 'vona-module-a-schedule' {
+  
+    export interface IScheduleRecord {
+      'a-orm:softDeletionPrune': IDecoratorScheduleOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-orm' {
+  
+        export interface ScheduleSoftDeletionPrune {
+          /** @internal */
+          get scope(): ScopeModuleAOrm;
+        }
+
+          export interface ScheduleSoftDeletionPrune {
+            get $beanFullName(): 'a-orm.schedule.softDeletionPrune';
+            get $onionName(): 'a-orm:softDeletionPrune';
+          } 
+}
+/** schedule: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

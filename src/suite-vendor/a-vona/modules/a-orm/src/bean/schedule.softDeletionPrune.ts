@@ -3,6 +3,6 @@ import { BeanBase } from 'vona';
 import { Schedule } from 'vona-module-a-schedule';
 
 @Schedule({ repeat: {} })
-export class Schedule<%=argv.beanNameCapitalize%> extends BeanBase implements IScheduleExecute {
+export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExecute {
   async execute() {}
 }
