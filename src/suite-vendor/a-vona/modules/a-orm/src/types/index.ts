@@ -2,7 +2,7 @@ export * from './columns.ts';
 export * from './config.ts';
 export * from './database.ts';
 export * from './dialect.ts';
-export * from './dto.ts';
+export * from './dtoGet.ts';
 export * from './entity.ts';
 export * from './entityBase.ts';
 export * from './entityBaseEmpty.ts';
