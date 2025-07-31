@@ -8,8 +8,11 @@ describe('model.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('test-vona');
+      // create
       const item = await scopeTest.model.test.insert();
       assert.equal(isNil(item.testDate), false);
+      // delete
+      await scopeTest.model.test.delete({ id: item.id });
     });
   });
 });

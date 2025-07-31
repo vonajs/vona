@@ -28,6 +28,7 @@ export function config(_app: VonaApplication) {
       disableUpdateTime: false,
     },
     softDeletionPrune: {
+      enable: true,
       expired: 14 * 24 * 3600 * 1000,
     },
     dialects: {
