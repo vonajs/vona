@@ -27,8 +27,8 @@ export function config(_app: VonaApplication) {
       disableInstance: false,
       disableUpdateTime: false,
     },
-    softDeletion: {
-
+    softDeletionPrune: {
+      expired: 14 * 24 * 3600 * 1000,
     },
     dialects: {
       mysql: 'a-ormdialect.databaseDialect.mysql',

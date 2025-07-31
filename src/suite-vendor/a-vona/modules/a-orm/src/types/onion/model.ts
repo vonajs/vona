@@ -19,12 +19,21 @@ export type TypeDynamicClientName<T extends EntityBaseEmpty = EntityBaseEmpty> =
 export type TypeModelsClearedByFn<T extends EntityBaseEmpty = EntityBaseEmpty> =
   (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => Promise<void>;
 
+export type TypeSoftDeletionPruneFn<T extends EntityBaseEmpty = EntityBaseEmpty> =
+  (ctx: VonaContext, modelInstance: BeanModelMeta<T>) => Promise<void>;
+
+export interface ISoftDeletionPrune {
+  pruneFn?: TypeSoftDeletionPruneFn;
+  expired?: number;
+}
+
 export interface IDecoratorModelOptions {
   entity?: Constructable<EntityBaseEmpty>;
   table?: TypeDynamicTableName<EntityBaseEmpty> | keyof ITableRecord;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
+  softDeletionPrune?: ISoftDeletionPrune | boolean;
   cache?: {
     query?: IDecoratorSummerCacheOptions | false;
     entity?: IDecoratorSummerCacheOptions | false;
