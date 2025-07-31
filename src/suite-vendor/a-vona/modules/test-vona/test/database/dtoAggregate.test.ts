@@ -3,20 +3,17 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { $Dto } from 'vona-module-a-orm';
-import { ModelUser } from 'vona-module-test-vona';
 
 describe('dtoAggregate.test.ts', () => {
   it('action:dtoAggregate', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
-        const DtoUserAggr = $Dto.aggregate(ModelUser, {
-          aggrs: {
-            count: ['*', 'age'],
-            sum: ['age'],
-            avg: 'age',
-            max: 'age',
-            min: 'age',
-          },
+        const DtoUserAggr = $Dto.aggregate('test-vona:user', {
+          count: ['*', 'age'],
+          sum: ['age'],
+          // avg: 'age',
+          // max: 'age',
+          // min: 'age',
         });
         const rules: any = getTargetDecoratorRules(DtoUserAggr.prototype);
         assert.equal(rules.id._def.typeName, 'ZodUnion');

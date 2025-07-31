@@ -2,22 +2,16 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelSelectAggrParamsAggrs } from '../modelAggr.ts';
 import type { IModelClassRecord } from '../onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../relations.ts';
-import type { TypeModelAggrRelationResult } from '../relationsAggr.ts';
+import type { TypeModelAggrRelationResultAggrs } from '../relationsAggr.ts';
 
-export type IDtoAggrParams<
+export interface IDtoAggrParamsAggrs<AggrCount = undefined, AggrSum = undefined> {
+  count?: AggrCount;
+  sum?: AggrSum;
+}
+export interface IDtoAggrParams<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
-> = IBuildDtoAggrParams<
-  TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
-  TypeModelOfModelLike<ModelLike>
->;
-
-export interface IBuildDtoAggrParams<
-  TRecord,
-  _Model extends BeanModelMeta,
-> extends IBuildDtoAggrParamsBasic<TRecord> {}
-
-export interface IBuildDtoAggrParamsBasic<TRecord> {
-  aggrs: TypeModelSelectAggrParamsAggrs<TRecord>;
+> {
+  aggrs: TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>;
 }
 
-export type TypeDtoAggrResult<TOptions> = TypeModelAggrRelationResult<TOptions>;
+export type TypeDtoAggrResult<Aggrs> = TypeModelAggrRelationResultAggrs<Aggrs>;
