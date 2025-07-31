@@ -1,4 +1,4 @@
-import { schemaEmail, schemaIp, schemaMax, schemaMin, schemaTableIdentity, schemaUrl, schemaUuid } from './v/helpers.ts';
+import { schemaBigNumber, schemaEmail, schemaIp, schemaMax, schemaMin, schemaTableIdentity, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import { schemaArray, schemaDefault, schemaLazy, schemaObject, schemaOptional } from './v/system.ts';
 
@@ -16,6 +16,7 @@ export const v = {
   min: schemaMin,
   max: schemaMax,
   tableIdentity: schemaTableIdentity,
+  bigNumber: schemaBigNumber,
   // openapi
   openapi: schemaOpenapi,
   title: schemaTitle,

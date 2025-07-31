@@ -50,3 +50,9 @@ export function schemaTableIdentity() {
     return z.union([z.string(), z.number()]);
   };
 }
+
+export function schemaBigNumber() {
+  return function (_schema: any): any {
+    return z.union([z.string(), z.number()]);
+  };
+}
