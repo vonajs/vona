@@ -94,6 +94,10 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.options.disableDeleted ?? this.scopeOrm.config.model.disableDeleted;
   }
 
+  get disableCreateTime() {
+    return this.options.disableCreateTime ?? this.scopeOrm.config.model.disableCreateTime;
+  }
+
   get disableUpdateTime() {
     return this.options.disableUpdateTime ?? this.scopeOrm.config.model.disableUpdateTime;
   }
@@ -104,6 +108,10 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   protected _checkDisableDeletedByOptions(options?: IModelMethodOptionsGeneral) {
     return options?.disableDeleted ?? this.disableDeleted;
+  }
+
+  protected _checkDisableCreateTimeByOptions(options?: IModelUpdateOptionsGeneral<TRecord>) {
+    return options?.disableCreateTime ?? this.disableCreateTime;
   }
 
   protected _checkDisableUpdateTimeByOptions(options?: IModelUpdateOptionsGeneral<TRecord>) {

@@ -25,6 +25,7 @@ export function config(_app: VonaApplication) {
     model: {
       disableDeleted: false,
       disableInstance: false,
+      disableCreateTime: false,
       disableUpdateTime: false,
     },
     softDeletionPrune: {

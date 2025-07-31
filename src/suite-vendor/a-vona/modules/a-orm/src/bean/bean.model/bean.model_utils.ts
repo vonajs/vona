@@ -275,9 +275,14 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
       }
     }
     // createdAt/updatedAt
-    for (const key of ['createdAt', 'updatedAt']) {
-      if (result[key] === undefined) {
-        result[key] = new Date();
+    if (result.createdAt === undefined) {
+      if (!this._checkDisableCreateTimeByOptions(options)) {
+        result.createdAt = new Date();
+      }
+    }
+    if (result.updatedAt === undefined) {
+      if (!this._checkDisableUpdateTimeByOptions(options)) {
+        result.updatedAt = new Date();
       }
     }
     return result;

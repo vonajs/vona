@@ -31,6 +31,7 @@ export interface IDecoratorModelOptions {
   table?: TypeDynamicTableName | keyof ITableRecord;
   disableDeleted?: boolean;
   disableInstance?: boolean;
+  disableCreateTime?: boolean;
   disableUpdateTime?: boolean;
   softDeletionPrune?: ISoftDeletionPrune | boolean;
   cache?: {
