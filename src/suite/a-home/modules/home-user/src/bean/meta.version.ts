@@ -22,9 +22,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         table.string(entityUser.avatar, 255).comment(entityUser.$comment.avatar);
         table.string(entityUser.locale, 255).comment(entityUser.$comment.locale);
       });
-      // homeUserRole
-      const entityUserRole = this.scope.entity.userRole;
-      await this.bean.model.createTable(entityUserRole.$table, table => {
+      // homeRoleUser
+      const entityRoleUser = this.scope.entity.roleUser;
+      await this.bean.model.createTable(entityRoleUser.$table, table => {
         table.basicFields();
         table.tableIdentity('userId');
         table.tableIdentity('roleId');
@@ -45,7 +45,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         locale: undefined,
       });
       // userRole: admin
-      await this.scope.model.userRole.insert({
+      await this.scope.model.roleUser.insert({
         userId: userAdmin.id,
         roleId: roleAdmin.id,
       });
