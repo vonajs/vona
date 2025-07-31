@@ -23,7 +23,7 @@ export class BeanRoleInner extends BeanBase {
     return this.roleInnerAdapter.findOne(role);
   }
 
-  findAllByUserId(userId: TableIdentity): Promise<IRoleBase[]> {
+  findAllByUserId(userId: TableIdentity): Promise<IRoleBase[] | undefined> {
     return this.roleInnerAdapter.findAllByUserId(userId);
   }
 }
