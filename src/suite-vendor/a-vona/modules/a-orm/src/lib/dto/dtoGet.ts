@@ -1,6 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
-import type { IDtoComposeParams, TypeDtoComposeResult } from '../../types/dto.ts';
+import type { IDtoGetParams, TypeDtoGetResult } from '../../types/dto.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
 import { hashkey } from '@cabloy/utils';
@@ -9,22 +9,22 @@ import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } 
 import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
 export function DtoGet<
-  T extends IDtoComposeParams<ModelLike>,
+  T extends IDtoGetParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
-): Constructable<TypeDtoComposeResult<ModelLike, T>> {
+): Constructable<TypeDtoGetResult<ModelLike, T>> {
   return _DtoGet_raw(modelLike, params);
 }
 
 function _DtoGet_raw<
-  T extends IDtoComposeParams<ModelLike>,
+  T extends IDtoGetParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
-): Constructable<TypeDtoComposeResult<ModelLike, T>> {
+): Constructable<TypeDtoGetResult<ModelLike, T>> {
   // model
   const modelClass = prepareClassModel(modelLike);
   // entity
