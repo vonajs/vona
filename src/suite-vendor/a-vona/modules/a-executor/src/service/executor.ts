@@ -74,11 +74,11 @@ export class ServiceExecutor extends BeanBase {
     const clientName = options?.dbInfo?.clientName ?? current?.clientName;
     const locale = options?.locale === undefined ? this.ctx?.locale : options.locale;
     const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
-    options = {
+    options = Object.assign({}, options, {
       dbInfo: { level, clientName },
       locale,
       instanceName,
-    };
+    });
     if (this.ctx) {
       options = deepExtend({ extraData: { request: { headers: {} } } }, options)!;
       // extraData: headers
