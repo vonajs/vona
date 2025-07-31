@@ -162,7 +162,10 @@ export class CliToolsMetadata extends BeanCliBase {
   }
 
   _generatePatch_resources(content: string, packageName: string, resources: string[], type: boolean) {
-    const items = resources.filter(item => content.includes(item));
+    const items = resources.filter(item => {
+      const regexp = new RegExp(`${item}[\\[\\]<,;?:\\s]`);
+      return !!regexp.exec(content);
+    });
     if (items.length === 0) return content;
     const importContent = `import ${type ? 'type ' : ''}{ ${items.join(',')} } from '${packageName}';`;
     return `${importContent}\n${content}`;

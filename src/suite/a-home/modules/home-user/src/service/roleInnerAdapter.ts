@@ -15,6 +15,7 @@ export class ServiceRoleInnerAdapter extends BeanBase implements IRoleInnerAdapt
   }
 
   async findAllByUserId(userId: TableIdentity): Promise<IRoleBase[]> {
+    await this.scope.model.user.get({ id: userId }, { include: {} });
     const userRoles = await this.scope.model.userRole.select({ where: { userId } });
     return await this.scope.model.role.select({ where: { id: userRoles.map(item => item.roleId) } });
   }
