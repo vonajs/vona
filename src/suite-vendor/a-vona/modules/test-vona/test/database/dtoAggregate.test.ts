@@ -11,18 +11,19 @@ describe('dtoAggregate.test.ts', () => {
         const DtoUserAggr = $Dto.aggregate('test-vona:user', {
           count: ['*', 'age'],
           sum: ['age'],
-          // avg: 'age',
+          avg: 'age',
           // max: 'age',
           // min: 'age',
         });
         const rules: any = getTargetDecoratorRules(DtoUserAggr.prototype);
-        assert.equal(rules.id._def.typeName, 'ZodUnion');
-        assert.equal(rules.title._def.typeName, 'ZodString');
-        assert.equal(rules.userId._def.typeName, 'ZodUnion');
-        assert.equal(rules.iid, undefined);
-        assert.equal(rules.postContent._def.typeName, 'ZodLazy');
-        assert.equal(rules.user._def.typeName, 'ZodLazy');
-        assert.equal(rules.user3._def.typeName, 'ZodLazy');
+        assert.equal(rules.count_all._def.typeName, 'ZodOptional');
+        assert.equal(rules.count_all._def.innerType._def.typeName, 'ZodUnion');
+        assert.equal(rules.count_all._def.innerType._def.options[0]._def.typeName, 'ZodString');
+        assert.equal(rules.count_all._def.innerType._def.options[1]._def.typeName, 'ZodNumber');
+        assert.equal(rules.count_age._def.typeName, 'ZodOptional');
+        assert.equal(rules.sum_age._def.typeName, 'ZodOptional');
+        assert.equal(rules.avg_age._def.typeName, 'ZodOptional');
+        assert.equal(rules.max_age, undefined);
       });
     });
   });
