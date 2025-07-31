@@ -87,42 +87,27 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   }
 
   get disableInstance() {
-    return this.options.disableInstance === undefined
-      ? this.scopeOrm.config.model.disableInstance
-      : this.options.disableInstance;
+    return this.options.disableInstance ?? this.scopeOrm.config.model.disableInstance;
   }
 
   get disableDeleted() {
-    return this.options.disableDeleted === undefined
-      ? this.scopeOrm.config.model.disableDeleted
-      : this.options.disableDeleted;
+    return this.options.disableDeleted ?? this.scopeOrm.config.model.disableDeleted;
   }
 
   get disableUpdateTime() {
-    return this.options.disableUpdateTime === undefined
-      ? this.scopeOrm.config.model.disableUpdateTime
-      : this.options.disableUpdateTime;
+    return this.options.disableUpdateTime ?? this.scopeOrm.config.model.disableUpdateTime;
   }
 
   protected _checkDisableInstanceByOptions(options?: IModelMethodOptionsGeneral) {
-    if (options?.disableInstance === true || options?.disableInstance === false) {
-      return options?.disableInstance;
-    }
-    return this.disableInstance;
+    return options?.disableInstance ?? this.disableInstance;
   }
 
   protected _checkDisableDeletedByOptions(options?: IModelMethodOptionsGeneral) {
-    if (options?.disableDeleted === true || options?.disableDeleted === false) {
-      return options?.disableDeleted;
-    }
-    return this.disableDeleted;
+    return options?.disableDeleted ?? this.disableDeleted;
   }
 
   protected _checkDisableUpdateTimeByOptions(options?: IModelUpdateOptionsGeneral<TRecord>) {
-    if (options?.disableUpdateTime === true || options?.disableUpdateTime === false) {
-      return options?.disableUpdateTime;
-    }
-    return this.disableUpdateTime;
+    return options?.disableUpdateTime ?? this.disableUpdateTime;
   }
 
   public newInstance(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord): this {
