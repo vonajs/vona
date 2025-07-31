@@ -5,11 +5,11 @@ import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { $Dto, $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
 
-describe('dtoResult.test.ts', () => {
-  it('action:dtoResult', async () => {
+describe('dtoGet.test.ts', () => {
+  it('action:dtoGet', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
-        const DtoPostNew = $Dto.result(ModelPost, {
+        const DtoPostNew = $Dto.get(ModelPost, {
           columns: ['id', 'title', 'userId'],
           include: {
             postContent: {
@@ -45,10 +45,10 @@ describe('dtoResult.test.ts', () => {
       });
     });
   });
-  it('action:dtoResult:categoryTree', async () => {
+  it('action:dtoGet:categoryTree', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
-        const DtoCategoryTree = $Dto.result('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
+        const DtoCategoryTree = $Dto.get('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
         const rules: any = getTargetDecoratorRules(DtoCategoryTree.prototype);
         assert.equal(rules.children._def.typeName, 'ZodEffects');
         assert.equal(rules.iid, undefined);

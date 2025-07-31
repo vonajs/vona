@@ -5,4 +5,4 @@ import { Dto } from 'vona-module-a-web';
 export interface IDtoOptionsCategoryTree extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsCategoryTree>()
-export class DtoCategoryTree extends $Dto.result('test-vona:category', { columns: ['id', 'name'] }) {}
+export class DtoCategoryTree extends $Dto.get('test-vona:category', { columns: ['id', 'name'] }) {}

@@ -8,17 +8,17 @@ import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
 import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
-export function DtoResult<
+export function DtoGet<
   T extends IDtoComposeParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoComposeResult<ModelLike, T>> {
-  return _DtoResult_raw(modelLike, params);
+  return _DtoGet_raw(modelLike, params);
 }
 
-function _DtoResult_raw<
+function _DtoGet_raw<
   T extends IDtoComposeParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
@@ -34,39 +34,39 @@ function _DtoResult_raw<
   // always create a new class, no matter if columns empty
   entityClass = $Class.pick(entityClass, columns as any);
   // relations
-  _DtoResult_relations(modelClass, entityClass, params as any);
+  _DtoGet_relations(modelClass, entityClass, params as any);
   return entityClass as any;
 }
 
-function _DtoResult_relations<TRecord extends {}, TModel extends BeanModelMeta>(
+function _DtoGet_relations<TRecord extends {}, TModel extends BeanModelMeta>(
   modelClass: Constructable<TModel>,
   entityClass: Constructable<TRecord>,
   includeWrapper?: IModelRelationIncludeWrapper,
 ) {
   // relations
-  const relations = _DtoResult_relations_collection(modelClass, includeWrapper);
+  const relations = _DtoGet_relations_collection(modelClass, includeWrapper);
   if (!relations) return;
   for (const relation of relations) {
-    _DtoResult_relation_handle(entityClass, relation);
+    _DtoGet_relation_handle(entityClass, relation);
   }
 }
 
-function _DtoResult_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any, boolean]) {
+function _DtoGet_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any, boolean]) {
   const [relationName, relationReal, includeReal, withReal, autoload] = relation;
   const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
-  const schemaLazy = _DtoResult_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
+  const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
   const schema = (type === 'hasOne' || type === 'belongsTo')
     ? v.lazy(v.optional(), schemaLazy)
     : v.array(v.lazy(schemaLazy));
   Api.field(schema)(entityClass.prototype, relationName);
 }
 
-function _DtoResult_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
+function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
   return () => {
     if (!autoload) {
-      return _DtoResult_raw(modelTarget, optionsReal);
+      return _DtoGet_raw(modelTarget, optionsReal);
     }
     // dynamic
     const entityClass = getClassEntityFromClassModel(modelTarget);
@@ -75,7 +75,7 @@ function _DtoResult_relation_handle_schemaLazy(modelTarget, optionsReal, autoloa
     const dynamicName = `${beanFullName}_${columns ? hashkey(columns) : 'none'}`;
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
-      entityTarget = _DtoResult_raw(modelTarget, optionsReal);
+      entityTarget = _DtoGet_raw(modelTarget, optionsReal);
       entityTarget[SymbolSchemaDynamicRefId] = dynamicName;
       addSchemaDynamic(dynamicName, entityTarget);
     }
@@ -83,7 +83,7 @@ function _DtoResult_relation_handle_schemaLazy(modelTarget, optionsReal, autoloa
   };
 }
 
-function _DtoResult_relations_collection<TModel extends BeanModelMeta>(
+function _DtoGet_relations_collection<TModel extends BeanModelMeta>(
   modelClass: Constructable<TModel>,
   includeWrapper?: IModelRelationIncludeWrapper,
 ) {
