@@ -7,6 +7,8 @@ import { ensureArray, hashkey } from '@cabloy/utils';
 import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
+import { DtoAggregate } from './dtoAggregate.ts';
+import { DtoGroup } from './dtoGroup.ts';
 
 export function DtoGet<
   T extends IDtoGetParams<ModelLike>,
@@ -84,7 +86,13 @@ function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) 
 }
 
 function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal) {
-  return _DtoGet_raw(modelTarget, optionsReal);
+  if (optionsReal.groups) {
+    return DtoGroup(modelTarget, optionsReal.groups, optionsReal.aggrs, optionsReal.columns);
+  } else if (optionsReal.aggrs) {
+    return DtoAggregate(modelTarget, optionsReal.aggrs);
+  } else {
+    return _DtoGet_raw(modelTarget, optionsReal);
+  }
 }
 
 function _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal) {
