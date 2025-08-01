@@ -6,7 +6,7 @@ import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onio
 import { hashkey } from '@cabloy/utils';
 import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
-import { prepareClassModel, prepareColumns } from '../../common/utils.ts';
+import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
 
 export function DtoGet<
   T extends IDtoGetParams<ModelLike>,
@@ -127,10 +127,4 @@ function _DtoGet_relations_collection<TModel extends BeanModelMeta>(
     }
   }
   return relations;
-}
-
-function getClassEntityFromClassModel<T>(modelClass: Constructable<T>) {
-  const beanOptions = appResource.getBean(modelClass);
-  const options: IDecoratorModelOptions = beanOptions!.options!;
-  return options.entity!;
 }

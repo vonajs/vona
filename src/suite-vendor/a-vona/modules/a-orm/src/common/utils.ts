@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns } from '../types/modelWhere.ts';
-import type { IModelClassRecord } from '../types/onion/model.ts';
+import type { IDecoratorModelOptions, IModelClassRecord } from '../types/onion/model.ts';
 import { appResource, beanFullNameFromOnionName } from 'vona';
 import { prepareClassType } from 'vona-module-a-openapi';
 
@@ -35,6 +35,12 @@ export function prepareClassModel<
     return beanOptions!.beanClass as any;
   }
   return prepareClassType(classType) as any;
+}
+
+export function getClassEntityFromClassModel<T>(modelClass: Constructable<T>) {
+  const beanOptions = appResource.getBean(modelClass);
+  const options: IDecoratorModelOptions = beanOptions!.options!;
+  return options.entity!;
 }
 
 // export function formatValue(value) {

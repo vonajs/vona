@@ -1,5 +1,5 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
-import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
+import { PickClassInner } from 'vona';
 
 export function PickClass<T>(
   classRef: Constructable<T>,
@@ -14,13 +14,5 @@ export function PickClass<T, K extends keyof T>(
   keys?: K[],
 ) {
   abstract class TargetClass {}
-  copyMetadataOfClasses(TargetClass.prototype, [classRef.prototype], (rules, key) => {
-    if (!keys || keys.includes(key)) {
-      return rules[key];
-    }
-  });
-  copyPropertiesOfClasses(TargetClass as any, [classRef], key => {
-    return !keys || keys.includes(key);
-  });
-  return TargetClass as any;
+  return PickClassInner(TargetClass as any, classRef, keys as any);
 }

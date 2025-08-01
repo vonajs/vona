@@ -21,17 +21,28 @@ function _DtoAggregate_raw<
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 >(
-  _modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   abstract class TargetClass {}
+  return _DtoAggregate_inner(TargetClass as any, modelLike, aggrs);
+}
+
+export function _DtoAggregate_inner<
+  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+>(
+  classTarget: Constructable,
+  _modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  aggrs: Aggrs,
+): Constructable<TypeDtoAggrResult<Aggrs>> {
   for (const key in aggrs) {
     const columns = ensureArray(aggrs[key]);
     if (!columns) continue;
     for (const column of columns) {
       const column2 = `${key}_${column === '*' ? 'all' : column}`;
-      Api.field(v.optional(), v.bigNumber())(TargetClass.prototype, column2);
+      Api.field(v.optional(), v.bigNumber())(classTarget.prototype, column2);
     }
   }
-  return TargetClass as any;
+  return classTarget as any;
 }
