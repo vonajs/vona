@@ -1,8 +1,11 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDtoGetParams, TypeDtoGetResult } from '../../types/dto/dtoGet.ts';
+import type { IDtoMutateParams, TypeDtoMutateResult } from '../../types/dto/dtoMutate.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
+import type { TypeModelColumnsStrict } from '../../types/modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
 import { ensureArray, hashkey } from '@cabloy/utils';
 import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
@@ -11,13 +14,15 @@ import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoGroup } from './dtoGroup.ts';
 
 export function DtoMutate<
-  T extends IDtoGetParams<ModelLike>,
+  T extends IDtoMutateParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  ColumnsOmitDefault extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
-): Constructable<TypeDtoGetResult<ModelLike, T>> {
-  return _DtoGet_raw(modelLike, params);
+  columnsOmitDefault?: ColumnsOmitDefault,
+): Constructable<TypeDtoMutateResult<ModelLike, T, ColumnsOmitDefault>> {
+  return _DtoMutate_raw(modelLike, params);
 }
 
 function _DtoGet_raw<
