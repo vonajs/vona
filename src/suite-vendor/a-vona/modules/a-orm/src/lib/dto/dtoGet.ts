@@ -59,9 +59,18 @@ function _DtoGet_relation_handle<TRecord extends {}>(entityClass: Constructable<
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
   const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
-  const schema = (type === 'hasOne' || type === 'belongsTo')
-    ? v.lazy(v.optional(), schemaLazy)
-    : v.array(v.lazy(schemaLazy));
+  let schema;
+  if ((type === 'hasOne' || type === 'belongsTo')) {
+    schema = v.lazy(v.optional(), schemaLazy);
+  } else {
+    if (optionsReal.groups) {
+      schema = v.array(v.lazy(schemaLazy));
+    } else if (optionsReal.aggrs) {
+      schema = v.lazy(v.optional(), schemaLazy);
+    } else {
+      schema = v.array(v.lazy(schemaLazy));
+    }
+  }
   Api.field(schema)(entityClass.prototype, relationName);
 }
 
