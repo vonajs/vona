@@ -36,8 +36,8 @@ describe('dtoAggregate.test.ts', () => {
         rules = getTargetDecoratorRules(DtoUserStats.prototype);
         assert.equal(rules.name._def.typeName, 'ZodString');
         assert.equal(rules.iid, undefined);
-        assert.equal(rules.posts._def.typeName, 'ZodEffects');
-        assert.equal(rules.roles._def.typeName, 'ZodEffects');
+        assert.equal(rules.posts._def.typeName, 'ZodLazy');
+        assert.equal(rules.roles._def.typeName, 'ZodLazy');
       });
     });
   });
