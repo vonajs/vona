@@ -9,6 +9,7 @@ import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } 
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
 import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoGroup } from './dtoGroup.ts';
+import { _DtoMutate_raw } from './dtoMutate.ts';
 
 export function DtoGet<
   T extends IDtoGetParams<ModelLike>,
@@ -40,25 +41,30 @@ function _DtoGet_raw<
   return entityClass as any;
 }
 
-function _DtoGet_relations<TRecord extends {}, TModel extends BeanModelMeta>(
+export function _DtoGet_relations<TRecord extends {}, TModel extends BeanModelMeta>(
   modelClass: Constructable<TModel>,
   entityClass: Constructable<TRecord>,
   includeWrapper?: IModelRelationIncludeWrapper,
+  mutate?: boolean,
 ) {
   // relations
   const relations = _DtoGet_relations_collection(modelClass, includeWrapper);
   if (!relations) return;
   for (const relation of relations) {
-    _DtoGet_relation_handle(entityClass, relation);
+    _DtoGet_relation_handle(entityClass, relation, mutate);
   }
 }
 
-function _DtoGet_relation_handle<TRecord extends {}>(entityClass: Constructable<TRecord>, relation: [string, any, any, any, boolean]) {
+function _DtoGet_relation_handle<TRecord extends {}>(
+  entityClass: Constructable<TRecord>,
+  relation: [string, any, any, any, boolean],
+  mutate?: boolean,
+) {
   const [relationName, relationReal, includeReal, withReal, autoload] = relation;
   const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
-  const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload);
+  const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutate);
   let schema;
   if ((type === 'hasOne' || type === 'belongsTo')) {
     schema = v.lazy(v.optional(), schemaLazy);
@@ -74,19 +80,19 @@ function _DtoGet_relation_handle<TRecord extends {}>(entityClass: Constructable<
   Api.field(schema)(entityClass.prototype, relationName);
 }
 
-function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
+function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutate?: boolean) {
   return () => {
     if (!autoload) {
-      return _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal);
+      return _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutate);
     }
     // dynamic
     const entityClass = getClassEntityFromClassModel(modelTarget);
     const beanFullName = appResource.getBeanFullName(entityClass);
-    const _hashkey = _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal);
+    const _hashkey = _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal, mutate);
     const dynamicName = `${beanFullName}_${_hashkey}`;
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
-      entityTarget = _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal);
+      entityTarget = _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutate);
       entityTarget[SymbolSchemaDynamicRefId] = dynamicName;
       addSchemaDynamic(dynamicName, entityTarget);
     }
@@ -94,21 +100,25 @@ function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) 
   };
 }
 
-function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal) {
-  if (optionsReal.groups) {
-    return DtoGroup(modelTarget, optionsReal.groups, optionsReal.aggrs, optionsReal.columns);
-  } else if (optionsReal.aggrs) {
-    return DtoAggregate(modelTarget, optionsReal.aggrs);
+function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutate?: boolean) {
+  if (mutate) {
+    return _DtoMutate_raw(modelTarget, optionsReal, undefined); // columnsOmitDefault: undefined
   } else {
-    return _DtoGet_raw(modelTarget, optionsReal);
+    if (optionsReal.groups) {
+      return DtoGroup(modelTarget, optionsReal.groups, optionsReal.aggrs, optionsReal.columns);
+    } else if (optionsReal.aggrs) {
+      return DtoAggregate(modelTarget, optionsReal.aggrs);
+    } else {
+      return _DtoGet_raw(modelTarget, optionsReal);
+    }
   }
 }
 
-function _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal) {
+function _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal, mutate?: boolean) {
   const columns = prepareColumns(optionsReal.columns);
   const aggrs = ensureArray(optionsReal.aggrs);
   const groups = ensureArray(optionsReal.groups);
-  return (columns || aggrs || groups) ? hashkey({ columns, aggrs, groups }) : 'none';
+  return (columns || aggrs || groups || mutate) ? hashkey({ columns, aggrs, groups, mutate }) : 'none';
 }
 
 function _DtoGet_relations_collection<TModel extends BeanModelMeta>(
