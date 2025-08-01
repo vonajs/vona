@@ -35,6 +35,11 @@ export class ControllerDtoTest extends BeanBase {
   createUser() {
   }
 
+  @Web.patch('updateUser/:id')
+  @Api.body(v.object($Dto.update('test-vona:user')))
+  updateUser() {
+  }
+
   @Web.get('getCategoryTree')
   @Api.body(v.array($Dto.get('test-vona:category', { columns: ['id', 'name'] })))
   async getCategoryTree() {
