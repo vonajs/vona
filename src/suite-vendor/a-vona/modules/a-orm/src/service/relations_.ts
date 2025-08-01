@@ -130,8 +130,16 @@ export class ServiceRelations extends BeanBase {
       } else {
         const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idFrom } }, methodOptionsReal);
         const idsTo = itemsMiddle.map(item => item[keyTo]);
-        const options2 = deepExtend({}, methodOptionsReal, optionsReal);
-        entity[relationName] = await modelTarget.mget(idsTo, options2);
+        if (optionsReal.groups) {
+          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
+          entity[relationName] = await modelTarget.group(options2, methodOptionsReal);
+        } else if (optionsReal.aggrs) {
+          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
+          entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
+        } else {
+          const options2 = deepExtend({}, methodOptionsReal, optionsReal);
+          entity[relationName] = await modelTarget.mget(idsTo, options2);
+        }
       }
     }
   }
