@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDtoGetParams, TypeDtoGetResult } from '../../types/dto/dtoGet.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
-import { hashkey } from '@cabloy/utils';
+import { ensureArray, hashkey } from '@cabloy/utils';
 import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
@@ -66,21 +66,32 @@ function _DtoGet_relation_handle<TRecord extends {}>(entityClass: Constructable<
 function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload) {
   return () => {
     if (!autoload) {
-      return _DtoGet_raw(modelTarget, optionsReal);
+      return _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal);
     }
     // dynamic
     const entityClass = getClassEntityFromClassModel(modelTarget);
     const beanFullName = appResource.getBeanFullName(entityClass);
-    const columns = prepareColumns(optionsReal.columns);
-    const dynamicName = `${beanFullName}_${columns ? hashkey(columns) : 'none'}`;
+    const _hashkey = _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal);
+    const dynamicName = `${beanFullName}_${_hashkey}`;
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
-      entityTarget = _DtoGet_raw(modelTarget, optionsReal);
+      entityTarget = _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal);
       entityTarget[SymbolSchemaDynamicRefId] = dynamicName;
       addSchemaDynamic(dynamicName, entityTarget);
     }
     return entityTarget;
   };
+}
+
+function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal) {
+  return _DtoGet_raw(modelTarget, optionsReal);
+}
+
+function _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal) {
+  const columns = prepareColumns(optionsReal.columns);
+  const aggrs = ensureArray(optionsReal.aggrs);
+  const groups = ensureArray(optionsReal.groups);
+  return (columns || aggrs || groups) ? hashkey({ columns, aggrs, groups }) : 'none';
 }
 
 function _DtoGet_relations_collection<TModel extends BeanModelMeta>(
