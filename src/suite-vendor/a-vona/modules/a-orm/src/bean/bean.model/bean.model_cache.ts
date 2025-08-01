@@ -110,7 +110,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
           itemsDelete.push(item);
           indexesDelete.push(index);
         } else {
-          // donothing
+          // donothing, rather than throw error
         }
       } else if (!isNil(cast(item).id)) {
         itemsUpdate.push(item);
