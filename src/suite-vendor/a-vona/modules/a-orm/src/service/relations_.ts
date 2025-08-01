@@ -84,7 +84,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(model) as BeanModelCrud;
+    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -111,8 +111,16 @@ export class ServiceRelations extends BeanBase {
       if (isNil(idFrom)) {
         entity[relationName] = [];
       } else {
-        const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
-        entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
+        if (optionsReal.groups) {
+          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
+          entity[relationName] = await modelTarget.group(options2, methodOptionsReal);
+        } else if (optionsReal.aggrs) {
+          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
+          entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
+        } else {
+          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
+          entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
+        }
       }
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;

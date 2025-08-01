@@ -164,7 +164,26 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(cast(usersStats4[0].posts).count_title, undefined);
       assert.equal(cast(usersStats4[0].posts).sum_stars, undefined);
       assert.equal(usersStats4[0].roles?.count_all, 1);
-
+      const userStats4 = await scopeTest.model.userStats.get({
+        id: users[0].id,
+      }, {
+        include: {
+          posts: false,
+          roles: false,
+        },
+        with: {
+          posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
+            aggrs: { count: '*' },
+          }),
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            aggrs: { count: '*' },
+          }),
+        },
+      });
+      assert.equal(userStats4?.posts?.count_all, 2);
+      assert.equal(cast(userStats4?.posts).count_title, undefined);
+      assert.equal(cast(userStats4?.posts).sum_stars, undefined);
+      assert.equal(userStats4?.roles?.count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {
