@@ -5,7 +5,7 @@ import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { $Dto } from 'vona-module-a-orm';
 import { ModelUserStats } from 'vona-module-test-vona';
 
-describe.only('dtoAggregate.test.ts', () => {
+describe('dtoAggregate.test.ts', () => {
   it('action:dtoAggregate', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
@@ -36,6 +36,8 @@ describe.only('dtoAggregate.test.ts', () => {
         rules = getTargetDecoratorRules(DtoUserStats.prototype);
         assert.equal(rules.name._def.typeName, 'ZodString');
         assert.equal(rules.iid, undefined);
+        assert.equal(rules.posts._def.typeName, 'ZodEffects');
+        assert.equal(rules.roles._def.typeName, 'ZodEffects');
       });
     });
   });
