@@ -146,7 +146,7 @@ describe('modelGroup.test.ts', () => {
       assert.equal(cast(usersStats3[0].posts[0]).count_title, undefined);
       assert.equal(cast(usersStats3[0].posts[0]).sum_stars, undefined);
       assert.equal(usersStats3[0].roles[0].count_all, 1);
-      // aggr: usersStats: with
+      // group: usersStats: with
       const usersStats4 = await scopeTest.model.userStatsGroup.select({
         where: {
           id: users.map(item => item.id),
@@ -174,6 +174,31 @@ describe('modelGroup.test.ts', () => {
       assert.equal(cast(usersStats4[0].posts[0]).count_title, undefined);
       assert.equal(cast(usersStats4[0].posts[0]).sum_stars, undefined);
       assert.equal(usersStats4[0].roles[0].count_all, 1);
+      // group: get
+      const userStats4 = await scopeTest.model.userStatsGroup.get({
+        id: users[0].id,
+      }, {
+        include: {
+          posts: false,
+          roles: false,
+        },
+        with: {
+          posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
+            groups: ['title'],
+            aggrs: { count: '*' },
+            orders: [['title', 'desc']],
+          }, undefined, true),
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            groups: 'name',
+            aggrs: { count: '*' },
+          }),
+        },
+      });
+      assert.equal(userStats4?.posts[0].title, `${prefix}:postApple2`);
+      assert.equal(userStats4?.posts[0].count_all, 1);
+      assert.equal(cast(userStats4?.posts[0]).count_title, undefined);
+      assert.equal(cast(userStats4?.posts[0]).sum_stars, undefined);
+      assert.equal(userStats4?.roles[0].count_all, 1);
       // delete: users
       await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
         include: {

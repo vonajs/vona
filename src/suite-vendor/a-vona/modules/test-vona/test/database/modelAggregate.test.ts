@@ -164,6 +164,7 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(cast(usersStats4[0].posts).count_title, undefined);
       assert.equal(cast(usersStats4[0].posts).sum_stars, undefined);
       assert.equal(usersStats4[0].roles?.count_all, 1);
+      // aggr: get
       const userStats4 = await scopeTest.model.userStats.get({
         id: users[0].id,
       }, {
