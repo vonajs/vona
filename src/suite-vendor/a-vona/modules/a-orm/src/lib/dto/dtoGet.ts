@@ -68,7 +68,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   if (mutate) {
     let schema;
     if ((type === 'hasOne' || type === 'belongsTo')) {
-      schema = v.lazy(schemaLazy);
+      schema = v.lazy(v.optional(), schemaLazy);
     } else {
       schema = v.array(v.lazy(schemaLazy));
     }
@@ -112,7 +112,7 @@ function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, 
 
 function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutate?: boolean) {
   if (mutate) {
-    return _DtoMutate_raw(modelTarget, optionsReal, undefined); // columnsOmitDefault: undefined
+    return _DtoMutate_raw(modelTarget, optionsReal, undefined, false); // columnsOmitDefault: undefined
   } else {
     if (optionsReal.groups) {
       return DtoGroup(modelTarget, optionsReal.groups, optionsReal.aggrs, optionsReal.columns);

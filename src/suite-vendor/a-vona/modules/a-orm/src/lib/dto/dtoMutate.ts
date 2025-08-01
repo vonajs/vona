@@ -15,7 +15,7 @@ export function DtoMutate<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoMutateResult<ModelLike, T>> {
-  return _DtoMutate_raw(modelLike, params);
+  return _DtoMutate_raw(modelLike, params, undefined, true);
 }
 
 export function _DtoMutate_raw<
@@ -26,13 +26,19 @@ export function _DtoMutate_raw<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
   columnsOmitDefault?: ColumnsOmitDefault,
+  topLevel?: boolean,
 ): Constructable<TypeDtoMutateResult<ModelLike, T>> {
   // model
   const modelClass = prepareClassModel(modelLike);
   // entity
   let entityClass = getClassEntityFromClassModel(modelClass);
   // columns
-  if (params?.columns) {
+  const columns = prepareColumns(params?.columns);
+  if (columns) {
+    if (!topLevel) {
+      if (!columns.includes('deleted' as any)) columns.unshift('deleted' as any);
+      if (!columns.includes('id' as any)) columns.unshift('id' as any);
+    }
     entityClass = $Class.pick(entityClass, prepareColumns(params?.columns) as any);
   } else {
     entityClass = $Class.omit(entityClass, prepareColumns(columnsOmitDefault ?? ['iid', 'createdAt', 'updatedAt'] as any) as any);

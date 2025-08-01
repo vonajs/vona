@@ -31,12 +31,12 @@ export class ControllerDtoTest extends BeanBase {
   }
 
   @Web.post('createUser')
-  @Api.body(v.object($Dto.create('test-vona:user')))
+  @Api.body(v.object($Dto.create('test-vona:user', { include: { posts: true } })))
   createUser() {
   }
 
   @Web.patch('updateUser/:id')
-  @Api.body(v.object($Dto.update('test-vona:user')))
+  @Api.body(v.object($Dto.update('test-vona:user', { include: { posts: true } })))
   updateUser() {
   }
 
