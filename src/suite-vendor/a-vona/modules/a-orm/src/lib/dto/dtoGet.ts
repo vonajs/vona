@@ -65,19 +65,29 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
   const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutate);
-  let schema;
-  if ((type === 'hasOne' || type === 'belongsTo')) {
-    schema = v.lazy(v.optional(), schemaLazy);
-  } else {
-    if (optionsReal.groups) {
-      schema = v.array(v.lazy(schemaLazy));
-    } else if (optionsReal.aggrs) {
-      schema = v.lazy(v.optional(), schemaLazy);
+  if (mutate) {
+    let schema;
+    if ((type === 'hasOne' || type === 'belongsTo')) {
+      schema = v.lazy(schemaLazy);
     } else {
       schema = v.array(v.lazy(schemaLazy));
     }
+    Api.field(v.optional(), schema)(entityClass.prototype, relationName);
+  } else {
+    let schema;
+    if ((type === 'hasOne' || type === 'belongsTo')) {
+      schema = v.lazy(v.optional(), schemaLazy);
+    } else {
+      if (optionsReal.groups) {
+        schema = v.array(v.lazy(schemaLazy));
+      } else if (optionsReal.aggrs) {
+        schema = v.lazy(v.optional(), schemaLazy);
+      } else {
+        schema = v.array(v.lazy(schemaLazy));
+      }
+    }
+    Api.field(schema)(entityClass.prototype, relationName);
   }
-  Api.field(schema)(entityClass.prototype, relationName);
 }
 
 function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutate?: boolean) {
