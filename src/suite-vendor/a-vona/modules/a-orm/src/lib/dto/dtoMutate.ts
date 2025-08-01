@@ -43,6 +43,9 @@ export function _DtoMutate_raw<
   } else {
     entityClass = $Class.omit(entityClass, prepareColumns(columnsOmitDefault ?? ['iid', 'createdAt', 'updatedAt'] as any) as any);
   }
+  if (!topLevel) {
+    entityClass = $Class.partial(entityClass, ['id', 'deleted'] as any);
+  }
   // relations
   _DtoGet_relations(modelClass, entityClass, params as any, true);
   return entityClass as any;
