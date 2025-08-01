@@ -20,6 +20,16 @@ export class ControllerDtoTest extends BeanBase {
   getPostDynamic() {
   }
 
+  @Web.get('getUserStats')
+  @Api.body($Dto.get('test-vona:userStats'))
+  getUserStats() {
+  }
+
+  @Web.get('getUserStatsGroup')
+  @Api.body($Dto.get('test-vona:userStatsGroup'))
+  getUserStatsGroup() {
+  }
+
   @Web.get('getCategoryTree')
   @Api.body(v.array($Dto.get('test-vona:category', { columns: ['id', 'name'] })))
   async getCategoryTree() {

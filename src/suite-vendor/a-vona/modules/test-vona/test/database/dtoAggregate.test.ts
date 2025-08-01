@@ -5,7 +5,7 @@ import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { $Dto } from 'vona-module-a-orm';
 import { ModelUserStats } from 'vona-module-test-vona';
 
-describe('dtoAggregate.test.ts', () => {
+describe.only('dtoAggregate.test.ts', () => {
   it('action:dtoAggregate', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.mockCtx(async () => {
