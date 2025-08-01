@@ -1,6 +1,7 @@
 import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoCreate } from './dtoCreate.ts';
 import { DtoGet } from './dtoGet.ts';
+import { DtoGroup } from './dtoGroup.ts';
 import { DtoUpdate } from './dtoUpdate.ts';
 
 export const $Dto = {
@@ -8,4 +9,5 @@ export const $Dto = {
   update: DtoUpdate,
   get: DtoGet,
   aggregate: DtoAggregate,
+  group: DtoGroup,
 };
