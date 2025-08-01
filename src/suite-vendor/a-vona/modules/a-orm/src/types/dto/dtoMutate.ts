@@ -2,7 +2,8 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IModelClassRecord } from '../onion/model.ts';
-import type { TypeModelOfModelLike, TypeModelRelationResult, TypeSymbolKeyEntity, TypeUtilEntitySelector } from '../relations.ts';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../relations.ts';
+import type { TypeModelMutateRelationData } from '../relationsMutate.ts';
 
 export type IDtoMutateParams<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
@@ -22,34 +23,14 @@ export interface IBuildDtoMutateParamsBasic<
   TRecord,
 > {
   columns?: TypeModelColumnsStrict<TRecord>;
-  columnsOmit?: TypeModelColumnsStrict<TRecord>;
 }
 
 export type TypeDtoMutateResult<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
   TOptionsRelation,
-  ColumnsOmitDefault extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
 > =
-TypeModelRelationResult<
+TypeModelMutateRelationData<
   TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
   TypeModelOfModelLike<ModelLike>,
-  TOptionsRelation,
+  TOptionsRelation
 >;
-
-export type TypeModelRelationResult_DtoMutate<
-  TRecord,
-  TModel extends BeanModelMeta | undefined,
-  TOptionsRelation,
-  TColumns = undefined,
-  TColumnsOmit = undefined,
-  TColumnsOmitDefault = undefined,
-> =
-  TypeUtilEntitySelector<
-    TRecord,
-    TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
-  > &
-  (TModel extends BeanModelMeta ?
-      (
-        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
-        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>
-      ) : {});

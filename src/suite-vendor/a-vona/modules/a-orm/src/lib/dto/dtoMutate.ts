@@ -1,6 +1,5 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
-import type { IDtoGetParams, TypeDtoGetResult } from '../../types/dto/dtoGet.ts';
 import type { IDtoMutateParams, TypeDtoMutateResult } from '../../types/dto/dtoMutate.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { TypeModelColumnsStrict } from '../../types/modelWhere.ts';
@@ -16,30 +15,32 @@ import { DtoGroup } from './dtoGroup.ts';
 export function DtoMutate<
   T extends IDtoMutateParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+>(
+  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  params?: T,
+): Constructable<TypeDtoMutateResult<ModelLike, T>> {
+  return _DtoMutate_raw(modelLike, params);
+}
+
+export function _DtoMutate_raw<
+  T extends IDtoMutateParams<ModelLike>,
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
   ColumnsOmitDefault extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
   columnsOmitDefault?: ColumnsOmitDefault,
-): Constructable<TypeDtoMutateResult<ModelLike, T, ColumnsOmitDefault>> {
-  return _DtoMutate_raw(modelLike, params);
-}
-
-function _DtoGet_raw<
-  T extends IDtoGetParams<ModelLike>,
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
->(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
-  params?: T,
-): Constructable<TypeDtoGetResult<ModelLike, T>> {
+): Constructable<TypeDtoMutateResult<ModelLike, T>> {
   // model
   const modelClass = prepareClassModel(modelLike);
   // entity
   let entityClass = getClassEntityFromClassModel(modelClass);
   // columns
-  const columns = prepareColumns(params?.columns);
-  // always create a new class, no matter if columns empty
-  entityClass = $Class.pick(entityClass, columns as any);
+  if (params?.columns) {
+    entityClass = $Class.pick(entityClass, prepareColumns(params?.columns) as any);
+  } else {
+    entityClass = $Class.omit(entityClass, prepareColumns(columnsOmitDefault ?? ['iid', 'createdAt', 'updatedAt'] as any) as any);
+  }
   // relations
   _DtoGet_relations(modelClass, entityClass, params as any);
   return entityClass as any;

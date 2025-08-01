@@ -1,11 +1,16 @@
 import type { Constructable } from 'vona';
-import type { EntityBase } from '../../types/entityBase.ts';
+import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
+import type { IDtoMutateParams, TypeDtoMutateResult } from '../../types/dto/dtoMutate.ts';
+import type { IModelClassRecord } from '../../types/onion/model.ts';
 import { $Class } from 'vona';
-import { DtoCreate } from './dtoCreate.ts';
+import { _DtoMutate_raw } from './dtoMutate.ts';
 
-export function DtoUpdate<T extends EntityBase, KS extends (keyof T)[] | undefined = undefined>(
-  classRef: Constructable<T>,
-  omitKeys?: KS,
-): Constructable<Partial<Omit<T, KS extends string[] ? KS[number] : 'id' | 'iid' | 'deleted' | 'createdAt' | 'updatedAt'>>> {
-  return $Class.partial(DtoCreate(classRef, omitKeys));
+export function DtoUpdate<
+  T extends IDtoMutateParams<ModelLike>,
+  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+>(
+  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  params?: T,
+): Constructable<Partial<TypeDtoMutateResult<ModelLike, T>>> {
+  return $Class.partial(_DtoMutate_raw(modelLike, params, ['iid', 'deleted', 'createdAt', 'updatedAt'] as any));
 }
