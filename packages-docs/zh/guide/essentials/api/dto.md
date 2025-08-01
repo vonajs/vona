@@ -195,7 +195,7 @@ Vona 还提供了常用的$Dto 工具，从而进一步简化代码
 仍以`DtoStudentCreate`为例。前面提到，`$Class.pick(EntityStudent, ['name', 'description'])`是从`EntityStudent`中提取指定的字段。那么，可以换一个思路，从`EntityStudent`中排除掉一些内置字段，剩下的就是所需要的字段
 
 ``` typescript
-class DtoStudentCreate extends $Dto.create(EntityStudent) {}
+class DtoStudentCreate extends $Dto.create(() => ModelStudent) {}
 ```
 
 ### 2. $Dto.update
@@ -203,5 +203,5 @@ class DtoStudentCreate extends $Dto.create(EntityStudent) {}
 同样，从`EntityStudent`中排除掉一些内置字段，并且转换为可选字段，就得到了`DtoStudentUpdate`
 
 ``` typescript
-class DtoStudentUpdate extends $Dto.update(EntityStudent) {}
+class DtoStudentUpdate extends $Dto.update(() => ModelStudent) {}
 ```
