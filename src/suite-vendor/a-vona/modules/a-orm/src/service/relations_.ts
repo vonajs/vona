@@ -109,7 +109,7 @@ export class ServiceRelations extends BeanBase {
     } else if (type === 'hasMany') {
       const idFrom = cast(entity).id;
       if (isNil(idFrom)) {
-        entity[relationName] = [];
+        entity[relationName] = optionsReal.groups ? [] : optionsReal.aggrs ? undefined : [];
       } else {
         if (optionsReal.groups) {
           const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
@@ -126,7 +126,7 @@ export class ServiceRelations extends BeanBase {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
       const idFrom = cast(entity).id;
       if (isNil(idFrom)) {
-        entity[relationName] = [];
+        entity[relationName] = optionsReal.groups ? [] : optionsReal.aggrs ? undefined : [];
       } else {
         const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idFrom } }, methodOptionsReal);
         const idsTo = itemsMiddle.map(item => item[keyTo]);
