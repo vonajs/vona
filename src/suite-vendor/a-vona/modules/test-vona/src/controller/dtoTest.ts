@@ -4,6 +4,7 @@ import { Api, Arg, v } from 'vona-module-a-openapi';
 import { $Dto, TableIdentity } from 'vona-module-a-orm';
 import { Controller, Web } from 'vona-module-a-web';
 import { DtoCategoryTree } from '../dto/categoryTree.ts';
+import { DtoUserCreate } from '../dto/userCreate.ts';
 import { DtoUserLazy } from '../dto/userLazy.ts';
 
 export interface IControllerOptionsDtoTest extends IDecoratorControllerOptions {}
@@ -32,7 +33,7 @@ export class ControllerDtoTest extends BeanBase {
 
   @Web.post('createUser')
   createUser(
-    @Arg.body(v.object($Dto.create('test-vona:user', { include: { posts: true } }))) _user: any,
+    @Arg.body(v.object(DtoUserCreate)) _user: DtoUserCreate,
   ) {
   }
 

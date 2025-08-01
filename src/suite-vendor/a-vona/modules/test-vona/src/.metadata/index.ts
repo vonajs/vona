@@ -1025,11 +1025,13 @@ export * from '../dto/categoryTree.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
 export * from '../dto/user.ts';
+export * from '../dto/userCreate.ts';
 export * from '../dto/userLazy.ts';
 import type { IDtoOptionsCategoryTree } from '../dto/categoryTree.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
+import type { IDtoOptionsUserCreate } from '../dto/userCreate.ts';
 import type { IDtoOptionsUserLazy } from '../dto/userLazy.ts';
 import 'vona';
 declare module 'vona-module-a-web' {
@@ -1039,6 +1041,7 @@ declare module 'vona-module-a-web' {
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:user': IDtoOptionsUser;
+'test-vona:userCreate': IDtoOptionsUserCreate;
 'test-vona:userLazy': IDtoOptionsUserLazy;
     }
 
@@ -1053,6 +1056,7 @@ import type { DtoCategoryTree } from '../dto/categoryTree.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoUser } from '../dto/user.ts';
+import type { DtoUserCreate } from '../dto/userCreate.ts';
 import type { DtoUserLazy } from '../dto/userLazy.ts'; 
 declare module 'vona-module-test-vona' {
   
@@ -1070,6 +1074,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsUser {
       fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsUserCreate {
+      fields?: TypeEntityOptionsFields<DtoUserCreate, IDtoOptionsUserCreate[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsUserLazy {
@@ -1345,6 +1353,8 @@ declare module 'vona-module-a-web' {
 '/test/vona/bean/service': undefined;
 '/test/vona/dtoTest/getUserLazy': undefined;
 '/test/vona/dtoTest/getUserDynamic': undefined;
+'/test/vona/dtoTest/getUserStats': undefined;
+'/test/vona/dtoTest/getUserStatsGroup': undefined;
 '/test/vona/dtoTest/getCategoryTree': undefined;
 '/test/vona/dtoTest/getCategoryTree2': undefined;
 '/test/vona/guardPassport/testUserName': undefined;
@@ -1361,6 +1371,7 @@ declare module 'vona-module-a-web' {
 export interface IApiPathPostRecord{
         '/test/vona/cacheMem': undefined;
 '/test/vona/cacheRedis': undefined;
+'/test/vona/dtoTest/createUser': undefined;
 '//echo': undefined;
 '/test/vona/onion/echo2/:userId/:userName': undefined;
 '/test/vona/onion/echo4': undefined;
@@ -1377,6 +1388,9 @@ export interface IApiPathPostRecord{
 '/test/vona/upload/fields': undefined;
 '/test/vona/upload/file': undefined;
 '/test/vona/upload/files': undefined;
+    }
+export interface IApiPathPatchRecord{
+        '/test/vona/dtoTest/updateUser/:id': undefined;
     }
 
 }
