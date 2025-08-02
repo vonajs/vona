@@ -118,16 +118,17 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return options?.disableUpdateTime ?? this.disableUpdateTime;
   }
 
-  public newInstance(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord): this {
-    return this.app.bean._newBean(this.$beanFullName as any, clientName, table);
+  public newInstance(client?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord): this {
+    return this.app.bean._newBean(this.$beanFullName as any, client ?? this.db, table);
   }
 
   public newInstanceTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
     modelClassTarget: TypeModelClassLike<MODEL>,
+    client?: keyof IDatabaseClientRecord | ServiceDb,
     table?: keyof ITableRecord,
   ): BeanModelMeta {
     const modelClass2 = prepareClassModel(modelClassTarget);
     const beanFullName = appResource.getBeanFullName(modelClass2);
-    return this.app.bean._newBean(beanFullName as any, this.db, table);
+    return this.app.bean._newBean(beanFullName as any, client ?? this.db, table);
   }
 }
