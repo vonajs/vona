@@ -102,8 +102,8 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.options.disableUpdateTime ?? this.scopeOrm.config.model.disableUpdateTime;
   }
 
-  protected _prepareDisableInstanceByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral) {
-    const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
+  protected _prepareDisableInstanceByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral, useRaw?: boolean) {
+    const columnNameInstance = useRaw ? 'iid' : `${getTableOrTableAlias(table)}.iid`;
     if (this._checkDisableInstanceByOptions(options)) {
       delete data.iid;
       delete data[columnNameInstance];
@@ -121,8 +121,8 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return data;
   }
 
-  protected _prepareDisableDeletedByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral) {
-    const columnNameDeleted = `${getTableOrTableAlias(table)}.deleted`;
+  protected _prepareDisableDeletedByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral, useRaw?: boolean) {
+    const columnNameDeleted = useRaw ? 'deleted' : `${getTableOrTableAlias(table)}.deleted`;
     if (this._checkDisableDeletedByOptions(options)) {
       // do nothing
     } else {

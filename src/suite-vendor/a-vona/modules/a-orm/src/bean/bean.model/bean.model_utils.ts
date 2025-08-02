@@ -249,9 +249,9 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   protected _prepareInsertDataByOptions(table: keyof ITableRecord, data, options?: IModelMethodOptionsGeneral) {
     let result = Object.assign({}, data);
     // disableInstance: should not check if specified
-    result = this._prepareDisableInstanceByOptions(table, result, options);
+    result = this._prepareDisableInstanceByOptions(table, result, options, true);
     // disableDeleted: should not check if specified
-    result = this._prepareDisableDeletedByOptions(table, result, options);
+    result = this._prepareDisableDeletedByOptions(table, result, options, true);
     // createdAt/updatedAt
     if (isNil(result.createdAt)) {
       if (!this._checkDisableCreateTimeByOptions(options)) {
