@@ -135,7 +135,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
       client = options?.client ? 'initial' : 'inherit';
     }
     if (client === 'initial') {
-      return this.app.bean._newBean(beanFullName as any, client ?? this.db, table);
+      return this.app.bean._newBean(beanFullName as any, undefined, table);
     } else if (client === 'inherit') {
       client = this.db;
     }
