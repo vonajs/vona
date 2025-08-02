@@ -131,7 +131,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     const beanOptions = appResource.getBean(modelClass2);
     const beanFullName = beanOptions!.beanFullName;
     const options = beanOptions?.options as IDecoratorModelOptions | undefined;
-    if (client === 'auto') {
+    if (isNil(client) || client === 'auto') {
       client = options?.client ? 'initial' : 'inherit';
     }
     if (client === 'initial') {
