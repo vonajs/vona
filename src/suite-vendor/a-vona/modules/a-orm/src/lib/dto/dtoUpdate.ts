@@ -12,5 +12,5 @@ export function DtoUpdate<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<Partial<TypeDtoMutateResult<ModelLike, T>>> {
-  return $Class.partial(_DtoMutate_raw(modelLike, params, ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] as any, true));
+  return $Class.partial(_DtoMutate_raw(modelLike, params, 'update', ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] as any, true));
 }

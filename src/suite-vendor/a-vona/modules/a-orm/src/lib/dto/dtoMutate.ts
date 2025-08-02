@@ -1,6 +1,6 @@
 import type { Constructable } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
-import type { IDtoMutateParams, TypeDtoMutateResult } from '../../types/dto/dtoMutate.ts';
+import type { IDtoMutateParams, TypeDtoMutateResult, TypeDtoMutateType } from '../../types/dto/dtoMutate.ts';
 import type { TypeModelColumnsStrict } from '../../types/modelWhere.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
@@ -15,7 +15,7 @@ export function DtoMutate<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoMutateResult<ModelLike, T>> {
-  return _DtoMutate_raw(modelLike, params, undefined, true);
+  return _DtoMutate_raw(modelLike, params, 'mutate', undefined, true);
 }
 
 export function _DtoMutate_raw<
@@ -25,6 +25,7 @@ export function _DtoMutate_raw<
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
+  mutateTypeTopLevel?: TypeDtoMutateType,
   columnsOmitDefault?: ColumnsOmitDefault,
   topLevel?: boolean,
 ): Constructable<TypeDtoMutateResult<ModelLike, T>> {
@@ -35,18 +36,19 @@ export function _DtoMutate_raw<
   // columns
   const columns = prepareColumns(params?.columns);
   if (columns) {
-    if (!topLevel) {
+    if (!topLevel && mutateTypeTopLevel !== 'create') {
       if (!columns.includes('deleted' as any)) columns.unshift('deleted' as any);
       if (!columns.includes('id' as any)) columns.unshift('id' as any);
     }
     entityClass = $Class.pick(entityClass, prepareColumns(params?.columns) as any);
   } else {
-    entityClass = $Class.omit(entityClass, prepareColumns(columnsOmitDefault ?? ['iid', 'createdAt', 'updatedAt'] as any) as any);
+    const columns = columnsOmitDefault ?? (mutateTypeTopLevel === 'create' ? ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] : ['iid', 'createdAt', 'updatedAt']);
+    entityClass = $Class.omit(entityClass, prepareColumns(columns as any) as any);
   }
-  if (!topLevel) {
+  if (!topLevel && mutateTypeTopLevel !== 'create') {
     entityClass = $Class.partial(entityClass, ['id', 'deleted'] as any);
   }
   // relations
-  _DtoGet_relations(modelClass, entityClass, params as any, true);
+  _DtoGet_relations(modelClass, entityClass, params as any, mutateTypeTopLevel);
   return entityClass as any;
 }

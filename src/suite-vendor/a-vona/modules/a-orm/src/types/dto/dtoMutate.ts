@@ -5,6 +5,8 @@ import type { IModelClassRecord } from '../onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../relations.ts';
 import type { TypeModelMutateRelationData } from '../relationsMutate.ts';
 
+export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
+
 export type IDtoMutateParams<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
 > = IBuildDtoMutateParams<
