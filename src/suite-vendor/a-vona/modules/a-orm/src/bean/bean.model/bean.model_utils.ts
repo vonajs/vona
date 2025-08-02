@@ -189,9 +189,8 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     table = table || this.getTable();
     if (!table) throw new Error('should specify the table name');
     // disableInstance/disableDeleted
-    const disableWhere = {};
-    this._prepareWhereByOptions(table, disableWhere, options);
-    builder.where(disableWhere);
+    where = Object.assign({}, where);
+    where = this._prepareWhereByOptions(table, where, options);
     // build
     this.buildWhere(builder, where);
   }

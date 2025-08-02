@@ -203,9 +203,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // data
     [data] = await this.prepareData(table, data);
     // where
-    let where = Object.assign({}, options?.where);
-    // iid
-    where = this._prepareDisableInstanceByOptions(table, where, options);
+    const where = Object.assign({}, options?.where);
     // id
     const columnId = `${table}.id`;
     for (const key of ['id', columnId]) {
