@@ -259,22 +259,12 @@ export class ServiceRelations extends BeanBase {
       for (let index = 0; index < entities.length; index++) {
         const entity = entities[index];
         if (entity[relationName]) {
-          // check if exists if no id
-          let childId;
-          const child = entity[relationName];
-          if (!isNil(child.id)) {
-            childId = child.id;
-          } else {
-            const item: any = await modelTarget.get({ [key]: cast(entity).id });
-            if (item) {
-              childId = item.id;
-            }
+          // donot checkif has id of entity[relationName], for safety
+          const item: any = await modelTarget.get({ [key]: cast(entity).id });
+          if (!isNil(item?.id) && !isNil(entity[relationName].id) && item?.id !== entity[relationName].id) {
+            throw new Error(`invalid id: ${entity[relationName].id}`);
           }
-          children.push(Object.assign(
-            {},
-            entity[relationName],
-            isNil(childId) ? { [key]: cast(entity).id } : { id: childId },
-          ));
+          children.push(Object.assign({}, entity[relationName], { [key]: cast(entity).id, id: item?.id }));
         }
       }
       children = await modelTarget.mutateBulk(children, methodOptionsReal);
@@ -295,8 +285,19 @@ export class ServiceRelations extends BeanBase {
       for (let index = 0; index < entities.length; index++) {
         const entity = entities[index];
         if (entity[relationName] && entity[relationName].length > 0) {
+          const entityId = cast(entity).id;
+          const idsTo = entity[relationName].map(item => item.id).filter(id => !isNil(id));
+          const itemsTarget = await cast(modelTarget).__select_raw(
+            undefined,
+            { where: { [key]: entityId, id: idsTo } },
+            methodOptionsReal,
+          );
+          const idsTarget = itemsTarget.map(item => item.id);
           for (const child of entity[relationName]) {
-            children.push(Object.assign({}, child, { [key]: cast(entity).id }));
+            if (!isNil(child.id) && !idsTarget.includes(child.id)) {
+              throw new Error(`invalid id: ${child.id}`);
+            }
+            children.push(Object.assign({}, child, { [key]: entityId }));
           }
         }
       }
