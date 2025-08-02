@@ -46,7 +46,7 @@ export interface IDecoratorModelOptions {
     modelsClearedBy?: keyof IModelClassRecord | (keyof IModelClassRecord)[];// TypeModelClassLikeGeneral | TypeModelClassLikeGeneral[];
     modelsClearedByFn?: TypeModelsClearedByFn;
   };
-  clientName?: TypeDynamicClientName | keyof IDatabaseClientRecord;
+  client?: TypeDynamicClientName | keyof IDatabaseClientRecord;
   // should not use TypeModelRelations or {}
   relations?: Record<never, never>;
 }

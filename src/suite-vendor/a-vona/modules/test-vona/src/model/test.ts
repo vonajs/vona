@@ -4,5 +4,5 @@ import { EntityTest } from '../entity/test.ts';
 
 export interface IModelOptionsTest extends IDecoratorModelOptions {}
 
-@Model<IModelOptionsTest>({ entity: EntityTest, clientName: 'default' })
+@Model<IModelOptionsTest>({ entity: EntityTest, client: 'default' })
 export class ModelTest extends BeanModelBase<EntityTest> {}

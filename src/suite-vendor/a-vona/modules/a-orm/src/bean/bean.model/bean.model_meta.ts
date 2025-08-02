@@ -56,7 +56,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   }
 
   private _getDb() {
-    let clientName = this.options.clientName;
+    let clientName = this.options.client;
     // use current
     if (!clientName) return this.bean.database.current;
     // custom clientName
