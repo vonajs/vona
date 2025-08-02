@@ -2,6 +2,7 @@ import type { OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
 import type { TypeUtilGetModelOptions, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType } from './relations.ts';
+import type { IModelRelationOptionsMetaWrapper } from './relationsDef.ts';
 
 export type TypeModelMutateParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelMutateParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
@@ -13,10 +14,11 @@ export type TypeModelMutateParamsIncludeByModelOptions<ModelOptions extends IDec
 
 export type TypeModelMutateParamsRelationOptions<Relation> =
   boolean
-  | {
-    include?: TypeModelMutateParamsInclude<TypeUtilGetRelationModel<Relation>>;
-    with?: Record<string, unknown>;
-  };
+  | (IModelRelationOptionsMetaWrapper
+    & {
+      include?: TypeModelMutateParamsInclude<TypeUtilGetRelationModel<Relation>>;
+      with?: Record<string, unknown>;
+    });
 
 export type TypeModelMutateRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
   [RelationName in (keyof TModelOptions['relations'])]: // not use ?: for OmitNever take effect

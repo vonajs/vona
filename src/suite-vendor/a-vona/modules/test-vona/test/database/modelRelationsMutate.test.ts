@@ -334,7 +334,7 @@ describe('modelRelationsMutate.test.ts', () => {
         include: { children: false },
       });
       assert.equal(items.length, 5);
-      await scopeTest.model.category.delete({ id: categoryTree.id });
+      await scopeTest.model.category.delete({ id: categoryTree.id }, { include: { children: { meta: { client: 'auto' } } } });
       const items2 = await scopeTest.model.category.select({
         where: {
           name: { _startsWith_: `${prefix}:` },
