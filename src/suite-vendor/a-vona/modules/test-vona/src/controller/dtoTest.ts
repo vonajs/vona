@@ -6,6 +6,7 @@ import { Controller, Web } from 'vona-module-a-web';
 import { DtoCategoryTree } from '../dto/categoryTree.ts';
 import { DtoUserCreate } from '../dto/userCreate.ts';
 import { DtoUserLazy } from '../dto/userLazy.ts';
+import { DtoUserUpdate } from '../dto/userUpdate.ts';
 
 export interface IControllerOptionsDtoTest extends IDecoratorControllerOptions {}
 
@@ -33,15 +34,17 @@ export class ControllerDtoTest extends BeanBase {
 
   @Web.post('createUser')
   createUser(
-    @Arg.body(v.object(DtoUserCreate)) _user: DtoUserCreate,
+    @Arg.body(v.object(DtoUserCreate)) user: DtoUserCreate,
   ) {
+    return this.scope.model.user.insert(user);
   }
 
   @Web.patch('updateUser/:id')
   updateUser(
-    @Arg.param('id') _id: TableIdentity,
-    @Arg.body(v.object($Dto.update('test-vona:user', { include: { posts: true } }))) _user: any,
+    @Arg.param('id') id: TableIdentity,
+    @Arg.body(v.object(DtoUserUpdate)) user: DtoUserUpdate,
   ) {
+    return this.scope.model.user.update(user, { where: { id } });
   }
 
   @Web.get('getCategoryTree')

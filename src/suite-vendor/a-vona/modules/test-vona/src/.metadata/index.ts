@@ -1027,12 +1027,14 @@ export * from '../dto/roleLazy.ts';
 export * from '../dto/user.ts';
 export * from '../dto/userCreate.ts';
 export * from '../dto/userLazy.ts';
+export * from '../dto/userUpdate.ts';
 import type { IDtoOptionsCategoryTree } from '../dto/categoryTree.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { IDtoOptionsUserCreate } from '../dto/userCreate.ts';
 import type { IDtoOptionsUserLazy } from '../dto/userLazy.ts';
+import type { IDtoOptionsUserUpdate } from '../dto/userUpdate.ts';
 import 'vona';
 declare module 'vona-module-a-web' {
   
@@ -1043,6 +1045,7 @@ declare module 'vona-module-a-web' {
 'test-vona:user': IDtoOptionsUser;
 'test-vona:userCreate': IDtoOptionsUserCreate;
 'test-vona:userLazy': IDtoOptionsUserLazy;
+'test-vona:userUpdate': IDtoOptionsUserUpdate;
     }
 
   
@@ -1057,7 +1060,8 @@ import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserCreate } from '../dto/userCreate.ts';
-import type { DtoUserLazy } from '../dto/userLazy.ts'; 
+import type { DtoUserLazy } from '../dto/userLazy.ts';
+import type { DtoUserUpdate } from '../dto/userUpdate.ts'; 
 declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsCategoryTree {
@@ -1082,6 +1086,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsUserLazy {
       fields?: TypeEntityOptionsFields<DtoUserLazy, IDtoOptionsUserLazy[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsUserUpdate {
+      fields?: TypeEntityOptionsFields<DtoUserUpdate, IDtoOptionsUserUpdate[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
