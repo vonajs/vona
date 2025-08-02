@@ -137,7 +137,7 @@ export interface IBuildModelRelationOptionsMany<
 }
 
 export interface IModelRelationOptionsMetaBasic {
-  client?: keyof IDatabaseClientRecord | ServiceDb;
+  client?: 'auto' | 'initial' | 'inherit' | keyof IDatabaseClientRecord | ServiceDb;
   table?: keyof ITableRecord;
 }
 
