@@ -92,7 +92,19 @@ export interface IModelRelationOptionsOne<
   columns?: TypeModelColumnsPatch<MODEL[TypeSymbolKeyEntity], COLUMNS>;
 }
 
-export type IModelRelationOptionsMany<
+export interface IModelRelationOptionsMany<
+  MODEL extends BeanModelMeta,
+  AUTOLOAD extends boolean = false,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
+  Groups extends TypeModelColumnsStrict<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
+>
+  extends
+  IModelRelationOptionsMetaWrapper,
+  IModelRelationOptionsMany_Raw<MODEL, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups> {}
+
+export type IModelRelationOptionsMany_Raw<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
