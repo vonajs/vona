@@ -5,7 +5,7 @@ import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, Ty
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
-import type { IModelRelationOptionsMetaWrapper, IModelRelationOptionsOne } from './relationsDef.ts';
+import type { IModelRelationOptionsMetaWrapper } from './relationsDef.ts';
 import type { TypeModelSelectGroupParamsColumnNames } from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
@@ -66,8 +66,9 @@ export interface IModelRelationBelongsToManyDynamic<
 export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta>
   extends
   IModelRelationOptionsMetaWrapper,
-  IModelRelationIncludeWrapper<MODEL>,
-  Omit<IModelRelationOptionsOne<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>>, 'autoload'> {}
+  IModelRelationIncludeWrapper<MODEL> {
+  columns?: TypeModelColumnsPatch<MODEL[TypeSymbolKeyEntity], TypeModelColumn<MODEL[TypeSymbolKeyEntity]>>;
+}
 
 export interface IModelRelationOptionsManyDynamic<
   MODEL extends BeanModelMeta,

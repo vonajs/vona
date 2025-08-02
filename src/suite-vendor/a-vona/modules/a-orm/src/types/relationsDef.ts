@@ -87,7 +87,8 @@ export interface IModelRelationOptionsOne<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
-> {
+> extends
+  IModelRelationOptionsMetaWrapper {
   autoload?: AUTOLOAD;
   columns?: TypeModelColumnsPatch<MODEL[TypeSymbolKeyEntity], COLUMNS>;
 }
