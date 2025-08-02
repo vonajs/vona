@@ -4,6 +4,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike } from '../types/relations.ts';
+import type { IModelRelationOptionsMetaBasic } from '../types/relationsDef.ts';
 import type { TableIdentity } from '../types/tableIdentity.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
@@ -84,7 +85,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
+    const modelTarget = this.__getModelTarget(model, options.meta) as BeanModelCache;
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -123,7 +124,7 @@ export class ServiceRelations extends BeanBase {
         }
       }
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle, options.meta?.middle) as BeanModelCrud;
       const idFrom = cast(entity).id;
       if (isNil(idFrom)) {
         entity[relationName] = optionsReal.groups ? [] : optionsReal.aggrs ? undefined : [];
@@ -151,7 +152,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
-    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
+    const modelTarget = this.__getModelTarget(model, options.meta) as BeanModelCache;
     const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
@@ -212,7 +213,7 @@ export class ServiceRelations extends BeanBase {
         }
       }
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCrud;
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle, options.meta?.middle) as BeanModelCrud;
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
       if (optionsReal.groups) {
@@ -250,8 +251,8 @@ export class ServiceRelations extends BeanBase {
     methodOptions?: IModelMethodOptions,
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
-    const { type, modelMiddle, model, keyFrom, keyTo, key } = relationReal;
-    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
+    const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
+    const modelTarget = this.__getModelTarget(model, options.meta) as BeanModelCache;
     const methodOptionsReal = Object.assign({}, methodOptions, { include: includeReal, with: withReal });
     if (type === 'hasOne') {
       let children: any[] = [];
@@ -315,7 +316,7 @@ export class ServiceRelations extends BeanBase {
       }
       return result;
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCache;
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle, options.meta?.middle) as BeanModelCache;
       let children: any[] = [];
       for (let index = 0; index < entities.length; index++) {
         const entity = entities[index];
@@ -368,8 +369,8 @@ export class ServiceRelations extends BeanBase {
     methodOptions?: IModelMethodOptions,
   ) {
     const [_relationName, relationReal, includeReal, withReal] = relation;
-    const { type, modelMiddle, model, keyFrom, key } = relationReal;
-    const modelTarget = this.__getModelTarget(model) as BeanModelCache;
+    const { type, modelMiddle, model, keyFrom, key, options } = relationReal;
+    const modelTarget = this.__getModelTarget(model, options.meta) as BeanModelCache;
     const methodOptionsReal = Object.assign({}, methodOptions, { include: includeReal, with: withReal });
     if (type === 'hasOne' || type === 'hasMany') {
       const children = await cast(modelTarget).__select_raw(undefined, { columns: 'id', where: { [key]: ids } }, methodOptionsReal);
@@ -378,7 +379,7 @@ export class ServiceRelations extends BeanBase {
     } else if (type === 'belongsTo') {
       // do nothing
     } else if (type === 'belongsToMany') {
-      const modelTargetMiddle = this.__getModelTarget(modelMiddle) as BeanModelCache;
+      const modelTargetMiddle = this.__getModelTarget(modelMiddle, options.meta?.middle) as BeanModelCache;
       const itemsMiddle = await cast(modelTargetMiddle).__select_raw(undefined, { columns: 'id', where: { [keyFrom]: ids } }, methodOptionsReal);
       const idsMiddle = itemsMiddle.map(item => item.id);
       await modelTargetMiddle.deleteBulk(idsMiddle, methodOptionsReal);
@@ -395,6 +396,7 @@ export class ServiceRelations extends BeanBase {
 
   private __getModelTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
     modelClassTarget: TypeModelClassLike<MODEL>,
+    meta: IModelRelationOptionsMetaBasic,
   ): BeanModelMeta {
     return this._model.newInstanceTarget(modelClassTarget);
   }
