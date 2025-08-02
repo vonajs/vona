@@ -1,8 +1,11 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { ServiceDb } from '../service/db_.ts';
+import type { IDatabaseClientRecord } from './database.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { IBuildModelSelectGeneralParamsBasic } from './modelGeneral.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict } from './modelWhere.ts';
 import type { IModelClassRecord } from './onion/model.ts';
+import type { ITableRecord } from './onion/table.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
@@ -118,4 +121,13 @@ export interface IBuildModelRelationOptionsMany<
   Groups extends TypeModelColumnsStrict<TRecord> | undefined = undefined,
 > extends IBuildModelSelectGeneralParamsBasic<TRecord, COLUMNS, TableNames, ColumnNames, Columns, Aggrs, Groups> {
   autoload?: AUTOLOAD;
+}
+
+export interface IModelRelationOptionsMetaBasic {
+  client?: keyof IDatabaseClientRecord | ServiceDb;
+  table?: keyof ITableRecord;
+}
+
+export interface IModelRelationOptionsMeta extends IModelRelationOptionsMetaBasic {
+  middle?: IModelRelationOptionsMetaBasic;
 }
