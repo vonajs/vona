@@ -5,7 +5,7 @@ import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, Ty
 import type { IModelClassRecord } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
-import type { IModelRelationOptionsOne } from './relationsDef.ts';
+import type { IModelRelationOptionsMetaWrapper, IModelRelationOptionsOne } from './relationsDef.ts';
 import type { TypeModelSelectGroupParamsColumnNames } from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
@@ -64,7 +64,10 @@ export interface IModelRelationBelongsToManyDynamic<
 }
 
 export interface IModelRelationOptionsOneDynamic<MODEL extends BeanModelMeta>
-  extends IModelRelationIncludeWrapper<MODEL>, Omit<IModelRelationOptionsOne<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>>, 'autoload'> {}
+  extends
+  IModelRelationOptionsMetaWrapper,
+  IModelRelationIncludeWrapper<MODEL>,
+  Omit<IModelRelationOptionsOne<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>>, 'autoload'> {}
 
 export interface IModelRelationOptionsManyDynamic<
   MODEL extends BeanModelMeta,
@@ -72,6 +75,7 @@ export interface IModelRelationOptionsManyDynamic<
   Group extends boolean | undefined = undefined,
 >
   extends
+  IModelRelationOptionsMetaWrapper,
   IModelRelationIncludeWrapper<MODEL>,
   Omit<IModelRelationOptionsManyDynamic_Raw<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins, Group>, 'autoload'> {}
 

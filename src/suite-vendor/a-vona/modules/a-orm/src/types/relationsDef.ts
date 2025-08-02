@@ -131,3 +131,7 @@ export interface IModelRelationOptionsMetaBasic {
 export interface IModelRelationOptionsMeta extends IModelRelationOptionsMetaBasic {
   middle?: IModelRelationOptionsMetaBasic;
 }
+
+export interface IModelRelationOptionsMetaWrapper {
+  meta?: IModelRelationOptionsMeta;
+}
