@@ -239,23 +239,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   protected _prepareWhereByOptions(table: keyof ITableRecord, where, options?: IModelMethodOptionsGeneral) {
-    // disableInstance: should check if specified
-    const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
-    if (where[columnNameInstance] === undefined && where.iid === undefined) {
-      if (!this._checkDisableInstanceByOptions(options)) {
-        if (!this.ctx.instance) {
-          throw new Error('ctx.instance not exists');
-        }
-        where[columnNameInstance] = this.ctx.instance.id;
-      }
-    }
-    // disableDeleted: should check if specified
-    const columnNameDeleted = `${getTableOrTableAlias(table)}.deleted`;
-    if (where[columnNameDeleted] === undefined && where.deleted === undefined) {
-      if (!this._checkDisableDeletedByOptions(options)) {
-        where[columnNameDeleted] = false;
-      }
-    }
+    // disableInstance: should not check if specified
+    where = this._prepareDisableInstanceByOptions(table, where, options);
+    // disableDeleted: should not check if specified
+    where = this._prepareDisableDeletedByOptions(table, where, options);
+    // ok
+    return where;
   }
 
   protected _prepareInsertDataByOptions(data, options?: IModelMethodOptionsGeneral) {

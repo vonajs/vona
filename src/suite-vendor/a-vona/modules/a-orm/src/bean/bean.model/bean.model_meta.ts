@@ -3,7 +3,7 @@ import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, 
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
-import { prepareClassModel } from '../../common/utils.ts';
+import { getTableOrTableAlias, prepareClassModel } from '../../common/utils.ts';
 import { $tableName } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
@@ -100,6 +100,36 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   get disableUpdateTime() {
     return this.options.disableUpdateTime ?? this.scopeOrm.config.model.disableUpdateTime;
+  }
+
+  protected _prepareDisableInstanceByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral) {
+    const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
+    if (this._checkDisableInstanceByOptions(options)) {
+      delete data.iid;
+      delete data[columnNameInstance];
+    } else {
+      delete data.iid;
+      if (!isNil(options?.iid)) {
+        data[columnNameInstance] = options?.iid;
+      } else {
+        if (!this.ctx.instance) {
+          throw new Error('ctx.instance not exists');
+        }
+        data[columnNameInstance] = this.ctx.instance.id;
+      }
+    }
+    return data;
+  }
+
+  protected _prepareDisableDeletedByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral) {
+    const columnNameDeleted = `${getTableOrTableAlias(table)}.deleted`;
+    if (this._checkDisableDeletedByOptions(options)) {
+      // do nothing
+    } else {
+      delete data.deleted; // force
+      data[columnNameDeleted] = false;
+    }
+    return data;
   }
 
   protected _checkDisableInstanceByOptions(options?: IModelMethodOptionsGeneral) {

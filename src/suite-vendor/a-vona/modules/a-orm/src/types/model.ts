@@ -109,6 +109,7 @@ export interface IModelMethodOptionsGeneral {
   disableUpdateTime?: boolean;
   disableCacheQuery?: boolean;
   disableCacheEntity?: boolean;
+  iid?: number;
 }
 
 export interface IModelInsertOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
