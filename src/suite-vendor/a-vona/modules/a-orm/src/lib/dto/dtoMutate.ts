@@ -36,9 +36,17 @@ export function _DtoMutate_raw<
   // columns
   const columns = prepareColumns(params?.columns);
   if (columns) {
-    if (!topLevel && mutateTypeTopLevel !== 'create') {
-      if (!columns.includes('deleted' as any)) columns.unshift('deleted' as any);
-      if (!columns.includes('id' as any)) columns.unshift('id' as any);
+    if (!topLevel) {
+      if (mutateTypeTopLevel === 'create') {
+        for (const key of ['deleted', 'id']) {
+          const index = columns.indexOf(key as any);
+          if (index > -1) columns.splice(index, 1);
+        }
+      } else {
+        for (const key of ['deleted', 'id']) {
+          if (!columns.includes(key as any)) columns.unshift(key as any);
+        }
+      }
     }
     entityClass = $Class.pick(entityClass, prepareColumns(params?.columns) as any);
   } else {
