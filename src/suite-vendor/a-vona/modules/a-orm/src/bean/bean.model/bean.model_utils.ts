@@ -4,7 +4,7 @@ import { ensureArray, isNil } from '@cabloy/utils';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere, isAggrColumn } from '../../common/buildWhere.ts';
-import { getTableOrTableAlias, isRaw } from '../../common/utils.ts';
+import { isRaw } from '../../common/utils.ts';
 import { $tableDefaults } from '../../lib/columns.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
@@ -247,31 +247,25 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return where;
   }
 
-  protected _prepareInsertDataByOptions(data, options?: IModelMethodOptionsGeneral) {
-    const result = Object.assign({}, data);
-    // disableInstance: should check if specified
-    const columnNameInstance = 'iid';
-    if (result[columnNameInstance] === undefined) {
-      if (!this._checkDisableInstanceByOptions(options)) {
-        result[columnNameInstance] = this.ctx.instance.id;
-      }
-    }
-    // disableDeleted: should check if specified
-    const columnNameDeleted = 'deleted';
-    if (result[columnNameDeleted] === undefined) {
-      if (!this._checkDisableDeletedByOptions(options)) {
-        result[columnNameDeleted] = false;
-      }
-    }
+  protected _prepareInsertDataByOptions(table: keyof ITableRecord, data, options?: IModelMethodOptionsGeneral) {
+    let result = Object.assign({}, data);
+    // disableInstance: should not check if specified
+    result = this._prepareDisableInstanceByOptions(table, result, options);
+    // disableDeleted: should not check if specified
+    result = this._prepareDisableDeletedByOptions(table, result, options);
     // createdAt/updatedAt
-    if (result.createdAt === undefined) {
+    if (isNil(result.createdAt)) {
       if (!this._checkDisableCreateTimeByOptions(options)) {
         result.createdAt = new Date();
+      } else {
+        delete result.createdAt;
       }
     }
-    if (result.updatedAt === undefined) {
+    if (isNil(result.updatedAt)) {
       if (!this._checkDisableUpdateTimeByOptions(options)) {
         result.updatedAt = new Date();
+      } else {
+        delete result.updatedAt;
       }
     }
     return result;
