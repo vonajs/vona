@@ -1,5 +1,5 @@
 import type { ServiceDb } from '../../service/db_.ts';
-import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelClassLike } from '../../types/index.ts';
+import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelClassLike, TypeModelRelationOptionsMetaClient } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
@@ -124,11 +124,21 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   public newInstanceTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
     modelClassTarget: TypeModelClassLike<MODEL>,
-    client?: keyof IDatabaseClientRecord | ServiceDb,
+    client?: TypeModelRelationOptionsMetaClient,
     table?: keyof ITableRecord,
   ): BeanModelMeta {
     const modelClass2 = prepareClassModel(modelClassTarget);
-    const beanFullName = appResource.getBeanFullName(modelClass2);
+    const beanOptions = appResource.getBean(modelClass2);
+    const beanFullName = beanOptions!.beanFullName;
+    const options = beanOptions?.options as IDecoratorModelOptions | undefined;
+    if (client === 'auto') {
+      client = options?.client ? 'initial' : 'inherit';
+    }
+    if (client === 'initial') {
+      return this.app.bean._newBean(beanFullName as any, client ?? this.db, table);
+    } else if (client === 'inherit') {
+      client = this.db;
+    }
     return this.app.bean._newBean(beanFullName as any, client ?? this.db, table);
   }
 }

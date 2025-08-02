@@ -396,9 +396,9 @@ export class ServiceRelations extends BeanBase {
 
   private __getModelTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
     modelClassTarget: TypeModelClassLike<MODEL>,
-    meta: IModelRelationOptionsMetaBasic,
+    meta: IModelRelationOptionsMetaBasic | undefined,
   ): BeanModelMeta {
-    return this._model.newInstanceTarget(modelClassTarget);
+    return this._model.newInstanceTarget(modelClassTarget, meta?.client, meta?.table);
   }
 
   private __handleRelationsCollection(includeWrapper?: IModelRelationIncludeWrapper) {

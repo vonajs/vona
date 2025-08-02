@@ -137,7 +137,7 @@ export interface IBuildModelRelationOptionsMany<
 }
 
 export interface IModelRelationOptionsMetaBasic {
-  client?: 'auto' | 'initial' | 'inherit' | keyof IDatabaseClientRecord | ServiceDb;
+  client?: TypeModelRelationOptionsMetaClient;
   table?: keyof ITableRecord;
 }
 
@@ -148,3 +148,5 @@ export interface IModelRelationOptionsMeta extends IModelRelationOptionsMetaBasi
 export interface IModelRelationOptionsMetaWrapper {
   meta?: IModelRelationOptionsMeta;
 }
+
+export type TypeModelRelationOptionsMetaClient = 'auto' | 'initial' | 'inherit' | keyof IDatabaseClientRecord | ServiceDb;
