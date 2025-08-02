@@ -387,20 +387,25 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         return;
       }
     } else {
-      const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
-      options = Object.assign({}, options, { where: undefined });
-      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
-      if (items.length === 0) {
-        // donothing
-        return;
-      }
-      if (items.length === 1) {
-        id = cast(items[0]).id;
+      const id2 = this.__checkCacheKeyValid(options?.where, table, false);
+      if (id2) {
+        id = id2;
       } else {
-        id = items.map(item => cast(item).id);
+        const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
+        options = Object.assign({}, options, { where: undefined });
+        const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
+        if (items.length === 0) {
+        // donothing
+          return;
+        }
+        if (items.length === 1) {
+          id = cast(items[0]).id;
+        } else {
+          id = items.map(item => cast(item).id);
+        }
+        // update by id/ids
+        options = Object.assign({}, options, { where: { id } });
       }
-      // update by id/ids
-      options = Object.assign({}, options, { where: { id } });
     }
     await super._update(table, data, options);
     // delete cache
