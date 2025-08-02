@@ -61,7 +61,7 @@ describe('database.test.ts', () => {
       const db = app.bean.database.getDb({ clientName: 'default' });
       await db.transaction.begin(async () => {
         const modelTest = scopeTest.model.test.newInstance(db);
-        assert.equal(modelTest.options.clientName, 'default');
+        assert.equal(modelTest.options.client, 'default');
         await modelTest.update({ id: entityTest.id, title: 'clientNameDynamic:success_1' });
       });
       const entityTest2 = await scopeTest.model.test.get({ id: entityTest.id });
