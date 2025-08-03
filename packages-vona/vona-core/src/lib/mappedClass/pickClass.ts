@@ -1,5 +1,5 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
-import { PickClassInner } from 'vona';
+import { PickClassInner } from './pickClassInner.ts';
 
 export function PickClass<T>(
   classRef: Constructable<T>,
