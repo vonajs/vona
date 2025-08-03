@@ -434,7 +434,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.115
+        specifier: ^1.0.116
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -546,7 +546,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.38
+        specifier: ^5.0.39
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -827,10 +827,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.38
+        specifier: ^5.0.39
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.57
+        specifier: ^5.0.58
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -928,7 +928,7 @@ importers:
         specifier: ^1.0.33
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.38
+        specifier: ^5.0.39
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1160,7 +1160,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-caching
       vona-module-a-core:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.14
@@ -1464,7 +1464,7 @@ importers:
         specifier: ^5.7.3
         version: 5.8.3
       vona-mock:
-        specifier: ^6.0.38
+        specifier: ^6.0.39
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
