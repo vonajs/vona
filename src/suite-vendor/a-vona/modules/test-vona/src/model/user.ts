@@ -6,7 +6,7 @@ import { ModelPostContent } from './postContent.ts';
 import { ModelUserStats } from './userStats.ts';
 import { ModelUserStatsGroup } from './userStatsGroup.ts';
 
-export interface IModelOptionsUser extends IDecoratorModelOptions {}
+export interface IModelOptionsUser extends IDecoratorModelOptions<EntityUser> {}
 
 @Model<IModelOptionsUser>({
   entity: EntityUser,

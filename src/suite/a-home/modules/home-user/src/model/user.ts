@@ -4,7 +4,7 @@ import { EntityUser } from '../entity/user.ts';
 import { ModelRole } from './role.ts';
 import { ModelRoleUser } from './roleUser.ts';
 
-export interface IModelOptionsUser extends IDecoratorModelOptions {}
+export interface IModelOptionsUser extends IDecoratorModelOptions<EntityUser> {}
 
 @Model<IModelOptionsUser>({
   entity: EntityUser,

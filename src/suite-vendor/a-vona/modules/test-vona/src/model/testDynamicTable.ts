@@ -4,7 +4,7 @@ import moment from 'moment';
 import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityTest } from '../entity/test.ts';
 
-export interface IModelOptionsTestDynamicTable extends IDecoratorModelOptions {}
+export interface IModelOptionsTestDynamicTable extends IDecoratorModelOptions<EntityTest> {}
 
 @Model<IModelOptionsTestDynamicTable>({
   entity: EntityTest,

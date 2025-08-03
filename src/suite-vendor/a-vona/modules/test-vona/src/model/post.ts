@@ -3,7 +3,7 @@ import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityPost } from '../entity/post.ts';
 import { ModelUser } from './user.ts';
 
-export interface IModelOptionsPost extends IDecoratorModelOptions {}
+export interface IModelOptionsPost extends IDecoratorModelOptions<EntityPost> {}
 
 @Model<IModelOptionsPost>({
   entity: EntityPost,

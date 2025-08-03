@@ -3,7 +3,7 @@ import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityUser } from '../entity/user.ts';
 import { ModelPost } from './post.ts';
 
-export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions {}
+export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions<EntityUser> {}
 
 @Model<IModelOptionsUserStatsGroup>({
   entity: EntityUser,
