@@ -240,7 +240,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
-      const options2 = Object.assign({}, options, { where, disableDeleted: true, deleted: undefined });
+      // need not set options2: disableDeleted: true, deleted: undefined
+      const options2 = Object.assign({}, options, { where });
       await this._update(table, { deleted: true } as any, options2);
       return;
     }
