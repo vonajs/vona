@@ -123,27 +123,39 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   protected _prepareDisableDeletedByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral, useRaw?: boolean) {
     const columnNameDeleted = useRaw ? 'deleted' : `${getTableOrTableAlias(table)}.deleted`;
-    if (!isNil(options?.deleted)) {
-      if (!this.disableDeleted) {
-        delete data.deleted; // force
-        data[columnNameDeleted] = options?.deleted;
-      }
-    } else {
-      if (this._checkDisableDeletedByOptions(options)) {
-        // do nothing
-      } else {
-        delete data.deleted; // force
-        data[columnNameDeleted] = false;
-      }
+    const deleted = this._prepareDisableDeletedByOptionsSimple(options);
+    if (!isNil(deleted)) {
+      delete data.deleted; // force
+      data[columnNameDeleted] = deleted;
     }
     return data;
+  }
+
+  protected _prepareDisableDeletedByOptionsSimple(options?: IModelMethodOptionsGeneral): boolean | undefined {
+    if (!isNil(options?.deleted)) {
+      if (!this.disableDeleted) {
+        return options?.deleted;
+      }
+    } else {
+      if (this._checkDisableDeletedByOptions2(options)) {
+        // do nothing
+      } else {
+        return false;
+      }
+    }
+    return undefined;
+  }
+
+  protected _checkIfEntityValidByDeleted(entity: any, options?: IModelMethodOptionsGeneral) {
+    const deleted = this._prepareDisableDeletedByOptionsSimple(options);
+    return isNil(deleted) || Boolean(entity.deleted) === Boolean(deleted);
   }
 
   protected _checkDisableInstanceByOptions(options?: IModelMethodOptionsGeneral) {
     return options?.disableInstance ?? this.disableInstance;
   }
 
-  protected _checkDisableDeletedByOptions(options?: IModelMethodOptionsGeneral) {
+  protected _checkDisableDeletedByOptions2(options?: IModelMethodOptionsGeneral) {
     return options?.disableDeleted ?? this.disableDeleted;
   }
 
