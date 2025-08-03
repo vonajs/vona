@@ -3,17 +3,18 @@ import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapi';
 import { Entity, EntityBase } from 'vona-module-a-orm';
 import { z } from 'zod';
+import { $locale } from '../.metadata/index.ts';
 
 export interface IEntityOptionsUser extends IDecoratorEntityOptions {}
 
-@Entity<IEntityOptionsUser>('homeUser')
+@Entity<IEntityOptionsUser>('homeUser', { openapi: { title: $locale('User') } })
 export class EntityUser extends EntityBase {
-  @Api.field()
+  @Api.field(v.title($locale('UserName')))
   name: string;
 
-  @Api.field(v.optional())
+  @Api.field(v.title($locale('UserAvatar')), v.optional())
   avatar?: string;
 
-  @Api.field(z.string().optional())
+  @Api.field(v.title($locale('UserLocale')), z.string().optional())
   locale?: keyof ILocaleInfos | undefined;
 }

@@ -3,14 +3,14 @@ import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 import { $tableColumns } from 'vona-module-a-orm';
 import { EntityRole } from '../entity/role.ts';
+import { EntityRoleUser } from '../entity/roleUser.ts';
 import { EntityUser } from '../entity/user.ts';
-import { EntityUserRole } from '../entity/userRole.ts';
 
 @Meta<IMetaOptionsIndex>({
   indexes: {
     ...$tableColumns(() => EntityUser, 'name'),
     ...$tableColumns(() => EntityRole, 'name'),
-    ...$tableColumns(() => EntityUserRole, ['userId', 'roleId']),
+    ...$tableColumns(() => EntityRoleUser, ['userId', 'roleId']),
   },
 })
 export class MetaIndex extends BeanBase {}

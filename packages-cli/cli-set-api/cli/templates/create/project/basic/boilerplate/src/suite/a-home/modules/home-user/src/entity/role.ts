@@ -1,11 +1,12 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
-import { Api } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapi';
 import { Entity, EntityBase } from 'vona-module-a-orm';
+import { $locale } from '../.metadata/index.ts';
 
 export interface IEntityOptionsRole extends IDecoratorEntityOptions {}
 
-@Entity<IEntityOptionsRole>('homeRole')
+@Entity<IEntityOptionsRole>('homeRole', { openapi: { title: $locale('Role') } })
 export class EntityRole extends EntityBase {
-  @Api.field()
+  @Api.field(v.title($locale('RoleName')))
   name: string;
 }

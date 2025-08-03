@@ -1,21 +1,20 @@
 /* eslint-disable */
-import type { TypeEntityMeta } from 'vona-module-a-orm';
-import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
-import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore,IModelRelationBelongsToMany } from 'vona-module-a-orm';
+import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** entity: begin */
 export * from '../entity/role.ts';
+export * from '../entity/roleUser.ts';
 export * from '../entity/user.ts';
-export * from '../entity/userRole.ts';
 import type { IEntityOptionsRole } from '../entity/role.ts';
+import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
-import type { IEntityOptionsUserRole } from '../entity/userRole.ts';
 import 'vona';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
-      'home-user:role': Omit<IEntityOptionsRole, '_fieldsMore_'>;
-'home-user:user': Omit<IEntityOptionsUser, '_fieldsMore_'>;
-'home-user:userRole': Omit<IEntityOptionsUserRole, '_fieldsMore_'>;
+      'home-user:role': IEntityOptionsRole;
+'home-user:roleUser': IEntityOptionsRoleUser;
+'home-user:user': IEntityOptionsUser;
     }
 
   
@@ -26,52 +25,57 @@ declare module 'vona-module-home-user' {
 /** entity: end */
 /** entity: begin */
 import type { EntityRole } from '../entity/role.ts';
+import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityUser } from '../entity/user.ts';
-import type { EntityUserRole } from '../entity/userRole.ts';
 export interface IModuleEntity {
-  'role': TypeEntityMeta<EntityRole,EntityRoleTableName>;
-'user': TypeEntityMeta<EntityUser,EntityUserTableName>;
-'userRole': TypeEntityMeta<EntityUserRole,EntityUserRoleTableName>;
+  'role': EntityRoleMeta;
+'roleUser': EntityRoleUserMeta;
+'user': EntityUserMeta;
 }
 /** entity: end */
 /** entity: begin */
 export type EntityRoleTableName = 'homeRole';
+export type EntityRoleUserTableName = 'homeRoleUser';
 export type EntityUserTableName = 'homeUser';
-export type EntityUserRoleTableName = 'homeUserRole';
+export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
+export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
+export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'homeRole': never;
+'homeRoleUser': never;
 'homeUser': never;
-'homeUserRole': never;
   }
 }
 declare module 'vona-module-home-user' {
   
     export interface IEntityOptionsRole {
-      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityRole, IEntityOptionsRole[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IEntityOptionsRoleUser {
+      fields?: TypeEntityOptionsFields<EntityRoleUser, IEntityOptionsRoleUser[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsUser {
-      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser['_fieldsMore_']>;
-    }
-
-    export interface IEntityOptionsUserRole {
-      fields?: TypeEntityOptionsFields<EntityUserRole, IEntityOptionsUserRole['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<EntityUser, IEntityOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** entity: end */
 /** model: begin */
 export * from '../model/role.ts';
+export * from '../model/roleUser.ts';
 export * from '../model/user.ts';
-export * from '../model/userRole.ts';
-
-import { type IDecoratorModelOptions } from 'vona-module-a-orm';
+import type { IModelOptionsRole } from '../model/role.ts';
+import type { IModelOptionsRoleUser } from '../model/roleUser.ts';
+import type { IModelOptionsUser } from '../model/user.ts';
+import 'vona';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
-      'home-user:role': IDecoratorModelOptions;
-'home-user:user': IDecoratorModelOptions;
-'home-user:userRole': IDecoratorModelOptions;
+      'home-user:role': IModelOptionsRole;
+'home-user:roleUser': IModelOptionsRoleUser;
+'home-user:user': IModelOptionsUser;
     }
 
   
@@ -83,25 +87,115 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ModelRole {
+            get $beanFullName(): 'home-user.model.role';
+            get $onionName(): 'home-user:role';
+          }
+
+        export interface ModelRoleUser {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ModelRoleUser {
+            get $beanFullName(): 'home-user.model.roleUser';
+            get $onionName(): 'home-user:roleUser';
+          }
+
         export interface ModelUser {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
 
-        export interface ModelUserRole {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        } 
+          export interface ModelUser {
+            get $beanFullName(): 'home-user.model.user';
+            get $onionName(): 'home-user:user';
+          } 
 }
 /** model: end */
 /** model: begin */
 import type { ModelRole } from '../model/role.ts';
+import type { ModelRoleUser } from '../model/roleUser.ts';
 import type { ModelUser } from '../model/user.ts';
-import type { ModelUserRole } from '../model/userRole.ts';
 export interface IModuleModel {
   'role': ModelRole;
+'roleUser': ModelRoleUser;
 'user': ModelUser;
-'userRole': ModelUserRole;
+}
+/** model: end */
+/** model: begin */
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
+declare module 'vona-module-home-user' {
+  export interface IModelOptionsUser {
+        relations: {
+          roles: IModelRelationBelongsToMany<ModelRoleUser, ModelRole, false, 'id'|'name',undefined,undefined,undefined>;
+        };
+      }
+  export interface ModelRole {
+      [SymbolKeyEntity]: EntityRole;
+      [SymbolKeyEntityMeta]: EntityRoleMeta;
+      [SymbolKeyModelOptions]: IModelOptionsRole;
+      get<T extends IModelGetOptions<EntityRole,ModelRole>>(where: TypeModelWhere<EntityRole>, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+      select<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+      insert<T extends IModelInsertOptions<EntityRole,ModelRole>>(data?: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityRole,ModelRole, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityRole,ModelRole, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityRole,ModelRole>>(data: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityRole,ModelRole>>(where?: TypeModelWhere<EntityRole>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityRole,ModelRole>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityRole,ModelRole>>(data?: TypeModelMutateRelationData<EntityRole,ModelRole, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityRole,ModelRole>>(items: TypeModelMutateRelationData<EntityRole,ModelRole, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRole,ModelRole, T>[]>;
+      count<T extends IModelSelectCountParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityRole, T>[]>;
+    }
+export interface ModelRoleUser {
+      [SymbolKeyEntity]: EntityRoleUser;
+      [SymbolKeyEntityMeta]: EntityRoleUserMeta;
+      [SymbolKeyModelOptions]: IModelOptionsRoleUser;
+      get<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(where: TypeModelWhere<EntityRoleUser>, options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityRoleUser,ModelRoleUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
+      select<T extends IModelSelectParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRoleUser, ModelRoleUser, T>[]>;
+      insert<T extends IModelInsertOptions<EntityRoleUser,ModelRoleUser>>(data?: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityRoleUser,ModelRoleUser>>(items: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityRoleUser,ModelRoleUser>>(data: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityRoleUser,ModelRoleUser>>(items: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityRoleUser,ModelRoleUser>>(where?: TypeModelWhere<EntityRoleUser>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityRoleUser,ModelRoleUser>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityRoleUser,ModelRoleUser>>(data?: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityRoleUser,ModelRoleUser>>(items: TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityRoleUser,ModelRoleUser, T>[]>;
+      count<T extends IModelSelectCountParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityRoleUser,ModelRoleUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityRoleUser, T>[]>;
+    }
+export interface ModelUser {
+      [SymbolKeyEntity]: EntityUser;
+      [SymbolKeyEntityMeta]: EntityUserMeta;
+      [SymbolKeyModelOptions]: IModelOptionsUser;
+      get<T extends IModelGetOptions<EntityUser,ModelUser>>(where: TypeModelWhere<EntityUser>, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+      select<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+      insert<T extends IModelInsertOptions<EntityUser,ModelUser>>(data?: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUser, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityUser,ModelUser, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityUser,ModelUser>>(data: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityUser,ModelUser>>(where?: TypeModelWhere<EntityUser>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityUser,ModelUser>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityUser,ModelUser>>(data?: TypeModelMutateRelationData<EntityUser,ModelUser, T>, options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityUser,ModelUser>>(items: TypeModelMutateRelationData<EntityUser,ModelUser, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityUser,ModelUser, T>[]>;
+      count<T extends IModelSelectCountParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
+    }
+}
+declare module 'vona-module-a-orm' {
+  export interface IModelClassRecord {
+    'home-user:role': ModelRole;
+'home-user:roleUser': ModelRoleUser;
+'home-user:user': ModelUser;
+  }
 }
 /** model: end */
 /** service: begin */
@@ -129,20 +223,40 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ServiceAuthInnerAdapter {
+            get $beanFullName(): 'home-user.service.authInnerAdapter';
+            get $onionName(): 'home-user:authInnerAdapter';
+          }
+
         export interface ServicePassportAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
+
+          export interface ServicePassportAdapter {
+            get $beanFullName(): 'home-user.service.passportAdapter';
+            get $onionName(): 'home-user:passportAdapter';
+          }
 
         export interface ServiceRoleInnerAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface ServiceRoleInnerAdapter {
+            get $beanFullName(): 'home-user.service.roleInnerAdapter';
+            get $onionName(): 'home-user:roleInnerAdapter';
+          }
+
         export interface ServiceUserInnerAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface ServiceUserInnerAdapter {
+            get $beanFullName(): 'home-user.service.userInnerAdapter';
+            get $onionName(): 'home-user:userInnerAdapter';
+          } 
 }
 /** service: end */
 /** service: begin */
@@ -190,10 +304,20 @@ declare module 'vona-module-home-user' {
           get scope(): ScopeModuleHomeUser;
         }
 
+          export interface MetaIndex {
+            get $beanFullName(): 'home-user.meta.index';
+            get $onionName(): 'home-user:index';
+          }
+
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'home-user.meta.version';
+            get $onionName(): 'home-user:version';
+          } 
 }
 /** meta: end */
 /** dto: begin */
@@ -207,9 +331,9 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'home-user:auth': Omit<IDtoOptionsAuth, '_fieldsMore_'>;
-'home-user:passport': Omit<IDtoOptionsPassport, '_fieldsMore_'>;
-'home-user:passportJwt': Omit<IDtoOptionsPassportJwt, '_fieldsMore_'>;
+      'home-user:auth': IDtoOptionsAuth;
+'home-user:passport': IDtoOptionsPassport;
+'home-user:passportJwt': IDtoOptionsPassportJwt;
     }
 
   
@@ -225,15 +349,15 @@ import type { DtoPassportJwt } from '../dto/passportJwt.ts';
 declare module 'vona-module-home-user' {
   
     export interface IDtoOptionsAuth {
-      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPassport {
-      fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoPassport, IDtoOptionsPassport[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPassportJwt {
-      fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt['_fieldsMore_']>;
+      fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
@@ -254,7 +378,12 @@ declare module 'vona-module-home-user' {
         export interface ControllerPassport {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
-        } 
+        }
+
+          export interface ControllerPassport {
+            get $beanFullName(): 'home-user.controller.passport';
+            get $onionName(): 'home-user:passport';
+          } 
 }
 /** controller: end */
 /** controller: begin */
@@ -278,6 +407,7 @@ export interface IApiPathPostRecord{
 '/home/user/passport/login': undefined;
 '/home/user/passport/refreshAuthToken': undefined;
 '/home/user/passport/createPassportJwtFromOauthCode': undefined;
+'/home/user/passport/createTempAuthToken': undefined;
     }
 
 }
@@ -286,8 +416,16 @@ export interface IApiPathPostRecord{
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
+export const locales = {
+  'en-us': locale_en_us,
+'zh-cn': locale_zh_cn,
+};
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -296,6 +434,7 @@ export class ScopeModuleHomeUser extends BeanScopeBase {}
 export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
 service: IModuleService;
@@ -315,7 +454,12 @@ declare module 'vona' {
     'home-user': ReturnType<typeof config>;
   }
 
-  
+  export interface IBeanScopeLocale {
+    'home-user': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {
+  return `home-user::${key}`;
+}
 /** scope: end */

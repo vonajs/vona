@@ -17,7 +17,12 @@ declare module 'vona-module-home-index' {
         export interface MetaPrintTip {
           /** @internal */
           get scope(): ScopeModuleHomeIndex;
-        } 
+        }
+
+          export interface MetaPrintTip {
+            get $beanFullName(): 'home-index.meta.printTip';
+            get $onionName(): 'home-index:printTip';
+          } 
 }
 /** meta: end */
 /** controller: begin */
@@ -37,7 +42,12 @@ declare module 'vona-module-home-index' {
         export interface ControllerHome {
           /** @internal */
           get scope(): ScopeModuleHomeIndex;
-        } 
+        }
+
+          export interface ControllerHome {
+            get $beanFullName(): 'home-index.controller.home';
+            get $onionName(): 'home-index:home';
+          } 
 }
 /** controller: end */
 /** controller: begin */
