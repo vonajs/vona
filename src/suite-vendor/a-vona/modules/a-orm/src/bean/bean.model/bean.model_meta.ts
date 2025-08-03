@@ -123,11 +123,18 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
 
   protected _prepareDisableDeletedByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral, useRaw?: boolean) {
     const columnNameDeleted = useRaw ? 'deleted' : `${getTableOrTableAlias(table)}.deleted`;
-    if (this._checkDisableDeletedByOptions(options)) {
-      // do nothing
+    if (!isNil(options?.deleted)) {
+      if (!this.disableDeleted) {
+        delete data.deleted; // force
+        data[columnNameDeleted] = options?.deleted;
+      }
     } else {
-      delete data.deleted; // force
-      data[columnNameDeleted] = false;
+      if (this._checkDisableDeletedByOptions(options)) {
+        // do nothing
+      } else {
+        delete data.deleted; // force
+        data[columnNameDeleted] = false;
+      }
     }
     return data;
   }
