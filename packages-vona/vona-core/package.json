@@ -44,6 +44,7 @@
     "@cabloy/set": "^1.0.17",
     "@cabloy/utils": "^1.0.38",
     "@cabloy/word-utils": "^2.0.1",
+    "chalk": "^5.3.0",
     "fs-extra": "^10.1.0",
     "koa": "^3.0.0",
     "reflect-metadata": "^0.2.2",
