@@ -137,7 +137,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
         return options?.deleted;
       }
     } else {
-      if (this._checkDisableDeletedByOptions2(options)) {
+      if (this._checkDisableDeletedByOptions(options)) {
         // do nothing
       } else {
         return false;
@@ -155,7 +155,8 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return options?.disableInstance ?? this.disableInstance;
   }
 
-  protected _checkDisableDeletedByOptions2(options?: IModelMethodOptionsGeneral) {
+  protected _checkDisableDeletedByOptions(options?: IModelMethodOptionsGeneral) {
+    if (this.disableDeleted) return true;
     return options?.disableDeleted ?? this.disableDeleted;
   }
 

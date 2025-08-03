@@ -1,7 +1,6 @@
 import type BigNumber from 'bignumber.js';
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
-  EntityBase,
   IDatabaseClientRecord,
   IModelDeleteOptions,
   IModelGetOptions,
@@ -165,7 +164,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // filter disableDeleted
     items = items.filter(item => {
       if (!item) return false;
-      if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return false;
+      if (!this._checkIfEntityValidByDeleted(item, options)) return false;
       return true;
     });
     return this.__filterMGetColumns(items, options?.columns);
@@ -488,7 +487,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       db: this.db,
     });
     if (!item) return item;
-    if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return undefined;
+    if (!this._checkIfEntityValidByDeleted(item, options)) return undefined;
     return item;
   }
 
