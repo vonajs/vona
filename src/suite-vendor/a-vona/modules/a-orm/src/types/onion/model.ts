@@ -31,7 +31,7 @@ export interface ISoftDeletionPrune {
   expired?: number;
 }
 
-export interface IDecoratorModelOptions<TRecord extends EntityBaseEmpty> {
+export interface IDecoratorModelOptions<TRecord extends EntityBaseEmpty = EntityBaseEmpty> {
   entity?: Constructable<TRecord>;
   table?: TypeDynamicTableName | keyof ITableRecord;
   disableDeleted?: boolean;
