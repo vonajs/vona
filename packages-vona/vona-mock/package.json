@@ -1,7 +1,7 @@
 {
   "name": "vona-mock",
   "type": "module",
-  "version": "6.0.37",
+  "version": "6.0.38",
   "description": "vona mock",
   "publishConfig": {
     "access": "public"
@@ -34,9 +34,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.24",
-    "@cabloy/module-info-pro": "^1.0.32",
-    "vona-core": "^5.0.37"
+    "@cabloy/module-info": "^1.3.25",
+    "@cabloy/module-info-pro": "^1.0.33",
+    "vona-core": "^5.0.38"
   },
   "clean-package": {
     "indent": 2,
