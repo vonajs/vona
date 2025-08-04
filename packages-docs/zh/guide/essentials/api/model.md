@@ -163,8 +163,12 @@ class ServiceStudent {
 |table|model对应的表名|
 |disableDeleted|是否禁用软删除，默认为false|
 |disableInstance|是否禁用多实例/多租户，默认为false|
-|clientName|指定数据源名称|
-|cacheOptions|配置缓存参数，默认启用基于redis的缓存|
+|disableCreateTime|是否禁用创建时间。默认为false，系统自动为新数据设置创建时间|
+|disableUpdateTime|是否禁用更新时间。默认为false，系统自动为要修改的数据设置更新时间|
+|softDeletionPrune|是否自动清理软删除数据|
+|cache|配置缓存参数，默认启用基于redis的缓存|
+|client|指定数据源名称|
+|relations|指定模型关系，支持：1:1，1:n，n:1，n:n|
 
 - table: 
   - 如果为空，则从 entity 获取表名
