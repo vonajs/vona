@@ -224,7 +224,7 @@ select "demoStudent"."id" from "demoStudent"
 - iid: instance Id
 - deleted: soft deletion
 
-### Temporarily disable soft deletion
+### 1. Temporarily disable soft deletion
 
 We can also temporarily specify the `soft deletion` parameter when executing the model method
 
@@ -236,7 +236,7 @@ class ServiceStudent {
 }
 ```
 
-### Prune soft deleted data
+### 2. Prune soft deleted data
 
 The system automatically cleans up expired soft deleted data. `softDeletionPrune` supports the following configurations:
 

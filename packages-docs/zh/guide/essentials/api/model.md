@@ -224,7 +224,7 @@ select "demoStudent"."id" from "demoStudent"
 - iid：实例 Id
 - deleted：软删除
 
-### 临时禁用软删除
+### 1. 临时禁用软删除
 
 我们也可以在执行 model 方法时临时指定`软删除`参数
 
@@ -236,7 +236,7 @@ class ServiceStudent {
 }
 ```
 
-### 清理软删除
+### 2. 清理软删除数据
 
 系统会自动清理过期的软删除数据，`softDeletionPrune`支持以下配置：
 
