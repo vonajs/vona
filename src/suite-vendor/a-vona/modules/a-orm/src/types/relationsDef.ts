@@ -149,4 +149,4 @@ export interface IModelRelationOptionsMetaWrapper {
   meta?: IModelRelationOptionsMeta;
 }
 
-export type TypeModelRelationOptionsMetaClient = 'auto' | 'initial' | 'inherit' | keyof IDatabaseClientRecord | ServiceDb;
+export type TypeModelRelationOptionsMetaClient = '_auto_' | '_initial_' | '_inherit_' | keyof IDatabaseClientRecord | ServiceDb;

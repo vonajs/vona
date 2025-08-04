@@ -181,12 +181,12 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     const beanOptions = appResource.getBean(modelClass2);
     const beanFullName = beanOptions!.beanFullName;
     const options = beanOptions?.options as IDecoratorModelOptions | undefined;
-    if (isNil(client) || client === 'auto') {
-      client = options?.client ? 'initial' : 'inherit';
+    if (isNil(client) || client === '_auto_') {
+      client = options?.client ? '_initial_' : '_inherit_';
     }
-    if (client === 'initial') {
+    if (client === '_initial_') {
       return this.app.bean._newBean(beanFullName as any, undefined, table);
-    } else if (client === 'inherit') {
+    } else if (client === '_inherit_') {
       client = this.db;
     }
     return this.app.bean._newBean(beanFullName as any, client ?? this.db, table);
