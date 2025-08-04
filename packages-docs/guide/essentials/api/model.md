@@ -163,8 +163,12 @@ class ServiceStudent {
 |table|Table name corresponding to model |
 |disableDeleted|Whether to disable soft deletion, the default is false|
 |disableInstance|Whether to disable multi-instance/multi-tenant, the default is false|
-|clientName|Specify the datasource name|
-|cacheOptions|Configure cache parameters, enable redis-based cache by default|
+|disableCreateTime|Whether to disable create time. The default value is false, and the system automatically sets the create time for new data|
+|disableUpdateTime|Whether to disable update time. The default value is false, and the system automatically sets the update time for the data to be modified|
+|softDeletionPrune|Whether to automatically clean up soft deleted data|
+|client|Specify the datasource|
+|cache|Configure cache parameters, enable redis-based cache by default|
+|relations|Specify models relationship, support: 1:1, 1:n, n:1, n:n|
 
 - table: 
   - If it is empty, the table name is automatically obtained from entity
@@ -183,8 +187,8 @@ config.onions = {
     'demo-student:student': {
       disableDeleted: true,   // disable soft deletion
       disableInstance: true,  // disable multi-instance/multi-tenant
-      cacheOptions: false,    // disable cache
-      clientName: 'mysql',    // use datasource：mysql
+      client: 'mysql',    // use datasource：mysql
+      cache: false,    // disable cache
     },
   },
 };
@@ -232,6 +236,15 @@ class ServiceStudent {
 }
 ```
 
+### Prune soft deleted data
+
+The system automatically cleans up expired soft deleted data. `softDeletionPrune` supports the following configurations:
+
+- boolean: true/false
+- {handler, expired}:
+  - handler: Provides a custom prune function
+  - expired: Specifies an expiration time
+
 ## Datasource
 
 Vona supports `multi-database` and `multi-datasource`. Model methods can be invoked for any datasource
@@ -270,7 +283,21 @@ config.onions = {
 };
 ```
 
-### 3. Dynamic datasource
+### 3. Adaptive datasource
+
+In complex systems, we may need to use a different datasource based on the current request environment. To do this, we can use `Adaptive datasource`:
+
+``` typescript
+@Model({
+  client: (ctx: VonaContext) => {
+    if (ctx.headers['xxx-xxx'] === 'xxx') return 'mysql';
+    return 'pg';
+  },
+})
+export class ModelOrder {}
+```
+
+### 4. Dynamic datasource
 
 We can also specify the datasource dynamically in the code
 
@@ -294,21 +321,27 @@ How to set cache configuration:
 ### 1. Disable cache
 
 ``` typescript
-@Model({ cacheOptions: false })
+@Model({ cache: false })
 class ModelStudent {}
 ```
 
 ### 2. Configure cache in Model options
 
 ``` typescript
-@Model({ cacheOptions: {
-  mode: 'all', // all/mem/redis
-  mem: {
-    max: 500,
-    ttl: 5 * 1000, // 5sß
+``` typescript
+@Model({ cache: {
+  entity: {
+    mode: 'all', // all/mem/redis
+    mem: {
+      max: 500,
+      ttl: 5 * 1000, // 5s
+    },
+    redis: {
+      ttl: 5 * 1000, // 5s
+    }, 
   },
-  redis: {
-    ttl: 5 * 1000, // 5s
+  query: {
+    ...
   },
 } })
 class ModelStudent {}
@@ -327,17 +360,36 @@ class ModelStudent {}
 config.onions = {
   model: {
     'demo-student:student': {
-      cacheOptions: {
-        mode: 'all', // all/mem/redis
-        mem: {
-          max: 500,
-          ttl: 5 * 1000, // 5s
+      cache: {
+        entity: {
+          mode: 'all', // all/mem/redis
+          mem: {
+            max: 500,
+            ttl: 5 * 1000, // 5s
+          },
+          redis: {
+            ttl: 5 * 1000, // 5s
+          },
         },
-        redis: {
-          ttl: 5 * 1000, // 5s
+        query: {
+          ...
         },
       }
     },
   },
 };
 ```
+
+### 4. Entity Cache and Query Cache
+
+Vona provides two types of caches: `Entity Cache` and `Query Cache`:
+
+- `Entity Cache`: Caches data using the `Id` field as the cache key
+- `Query Cache`: Caches data using the `query condition hash` as the cache key
+
+> Question 1: Some may ask, doesn't the `Query Cache` take up a lot of space?
+>   - On the contrary, the `Query Cache` uses the query condition hash as the cache key and the queried `Ids` as the cache value, thus saving more cache space. The system automatically uses the `Ids` to retrieve cached data from the `Entity Cache` and assembles it into the final query result
+
+> Question 2: How do we ensure cached data consistency?
+>   - When data changes, the `Entity Cache` for the current data is automatically cleared, and all `Query Caches` for the current model are automatically cleared
+

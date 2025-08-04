@@ -166,8 +166,8 @@ class ServiceStudent {
 |disableCreateTime|是否禁用创建时间。默认为false，系统自动为新数据设置创建时间|
 |disableUpdateTime|是否禁用更新时间。默认为false，系统自动为要修改的数据设置更新时间|
 |softDeletionPrune|是否自动清理软删除数据|
+|client|指定数据源|
 |cache|配置缓存参数，默认启用基于redis的缓存|
-|client|指定数据源名称|
 |relations|指定模型关系，支持：1:1，1:n，n:1，n:n|
 
 - table: 
@@ -187,8 +187,8 @@ config.onions = {
     'demo-student:student': {
       disableDeleted: true,   // 禁用软删除
       disableInstance: true,  // 禁用多实例/多租户
-      cacheOptions: false,    // 禁用缓存
-      clientName: 'mysql',    // 使用数据源：mysql
+      client: 'mysql',    // 使用数据源：mysql
+      cache: false,    // 禁用缓存
     },
   },
 };
@@ -236,6 +236,15 @@ class ServiceStudent {
 }
 ```
 
+### 清理软删除
+
+系统会自动清理过期的软删除数据，`softDeletionPrune`支持以下配置：
+
+- boolean: 是否启动软删除
+- {handler, expired}:
+  - handler: 提供自定义的清理函数
+  - expired: 指定过期时间。如果没有指定，则使用系统指定的过期时间
+
 ## 数据源
 
 Vona 支持`多数据库`、`多数据源`。可以针对任何一个数据源调用 Model 的方法
@@ -255,7 +264,7 @@ DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
 * 在 Model options 中指定数据源
 
 ``` typescript{1}
-@Model({ clientName: 'mysql' })
+@Model({ client: 'mysql' })
 class ModelBook {}
 ```
 
@@ -268,13 +277,27 @@ class ModelBook {}
 config.onions = {
   model: {
     'demo-student:student': {
-      clientName: 'mysql',    // 使用数据源：mysql
+      client: 'mysql',    // 使用数据源：mysql
     },
   },
 };
 ```
 
-### 3. 动态数据源
+### 3. 自适应数据源
+
+在复杂的系统中，我们还会遇到一些需求，就是针对当前请求的环境使用不同的数据源，那么就可以使用`自适应数据源`：
+
+``` typescript
+@Model({
+  client: (ctx: VonaContext) => {
+    if (ctx.headers['xxx-xxx'] === 'xxx') return 'mysql';
+    return 'pg';
+  },
+})
+export class ModelOrder {}
+```
+
+### 4. 动态数据源
 
 我们还可以在代码中动态指定数据源
 
@@ -298,21 +321,26 @@ Model 支持`二级缓存`/`mem缓存`/`redis缓存`。默认使用的是`redis�
 ### 1. 禁用缓存
 
 ``` typescript
-@Model({ cacheOptions: false })
+@Model({ cache: false })
 class ModelStudent {}
 ```
 
 ### 2. 在 Model options 中配置缓存
 
 ``` typescript
-@Model({ cacheOptions: {
-  mode: 'all', // all/mem/redis
-  mem: {
-    max: 500,
-    ttl: 5 * 1000, // 5s
+@Model({ cache: {
+  entity: {
+    mode: 'all', // all/mem/redis
+    mem: {
+      max: 500,
+      ttl: 5 * 1000, // 5s
+    },
+    redis: {
+      ttl: 5 * 1000, // 5s
+    }, 
   },
-  redis: {
-    ttl: 5 * 1000, // 5s
+  query: {
+    ...
   },
 } })
 class ModelStudent {}
@@ -331,17 +359,36 @@ class ModelStudent {}
 config.onions = {
   model: {
     'demo-student:student': {
-      cacheOptions: {
-        mode: 'all', // all/mem/redis
-        mem: {
-          max: 500,
-          ttl: 5 * 1000, // 5s
+      cache: {
+        entity: {
+          mode: 'all', // all/mem/redis
+          mem: {
+            max: 500,
+            ttl: 5 * 1000, // 5s
+          },
+          redis: {
+            ttl: 5 * 1000, // 5s
+          },
         },
-        redis: {
-          ttl: 5 * 1000, // 5s
+        query: {
+          ...
         },
       }
     },
   },
 };
 ```
+
+### 4. Entity缓存和Query缓存
+
+Vona 提供了两类缓存：`Entity缓存`和 `Query缓存`:
+
+- `Entity缓存`: 以`Id字段`为主键的缓存数据
+- `Query缓存`: 以`查询条件`的 hash 值为主键的缓存数据
+
+> 疑问 1: 那么有人会问，`Query缓存`岂不是非常占用空间？
+>   - 恰恰相反，`Query缓存`将`查询条件`的 hash 作为主键，将查询到的 `Ids` 作为缓存值，因此，更加节约缓存空间。系统自动使用`Ids`从`Entity缓存`中获取缓存数据，并组装成最终的查询结果
+
+> 疑问 2: 如何确保缓存数据的一致性？
+>   - 当有数据变更时，会自动清理当前数据的`Entity缓存`，并自动清理当前Model的所有`Query缓存`
+
