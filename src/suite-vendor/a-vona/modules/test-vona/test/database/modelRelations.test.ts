@@ -162,7 +162,7 @@ describe('modelRelations.test.ts', () => {
           include: {
             postContent: {
               include: {
-                post: { include: { user: { columns: ['id'] } }, meta: { client: 'auto' } },
+                post: { include: { user: { columns: ['id'] } }, meta: { client: '_auto_' } },
               },
               with: {
                 post3: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
@@ -182,7 +182,7 @@ describe('modelRelations.test.ts', () => {
                   'test-vona:role',
                   'userId',
                   'roleId',
-                  { columns: ['id', 'name'], meta: { client: 'auto' } },
+                  { columns: ['id', 'name'], meta: { client: '_auto_' } },
                 ),
               },
               columns: ['id', 'name'],
