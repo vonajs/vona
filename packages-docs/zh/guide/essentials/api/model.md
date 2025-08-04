@@ -384,7 +384,7 @@ config.onions = {
 Vona 提供了两类缓存：`Entity缓存`和 `Query缓存`:
 
 - `Entity缓存`: EntityId -> Entity
-- `Query缓存`:  Hash of Query Cluase -> Ids
+- `Query缓存`:  Hash of Query Clause -> Ids
 
 > 疑问 1: 那么有人会问，`Query缓存`岂不是非常占用空间？
 >   - 恰恰相反，一条`Query缓存`所占用的空间=`hash`+`ids`，因此，更加节约缓存空间。系统自动使用`Ids`从`Entity缓存`中获取缓存数据，并组装成最终的查询结果

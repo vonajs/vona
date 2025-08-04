@@ -385,7 +385,7 @@ config.onions = {
 Vona provides two types of caches: `Entity Cache` and `Query Cache`:
 
 - `Entity Cache`: EntityId -> Entity
-- `Query Cache`: Hash of Query Cluase -> Ids
+- `Query Cache`: Hash of Query Clause -> Ids
 
 > Question 1: Some may ask, doesn't the `Query Cache` take up a lot of space?
 >   - On the contrary, the space occupied by a `Query cache` is equal to `hash` + `ids`, thus saving more cache space. The system automatically uses the `Ids` to retrieve cached data from the `Entity Cache` and assembles it into the final query result
