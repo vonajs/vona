@@ -64,7 +64,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const [relationName, relationReal, includeReal, withReal, autoload] = relation;
   const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
-  const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
+  const optionsReal = deepExtend({}, options, { include: includeReal, with: withReal });
   const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel);
   if (mutateTypeTopLevel) {
     let schema;
