@@ -434,7 +434,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.120
+        specifier: ^1.0.121
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -830,7 +830,7 @@ importers:
         specifier: ^5.0.40
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.61
+        specifier: ^5.0.62
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1208,7 +1208,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.39
+        specifier: ^5.0.40
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.13
