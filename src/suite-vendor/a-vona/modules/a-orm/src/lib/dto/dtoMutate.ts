@@ -4,6 +4,7 @@ import type { IDtoMutateParams, TypeDtoMutateResult, TypeDtoMutateType } from '.
 import type { TypeModelColumnsStrict } from '../../types/modelWhere.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
+import { mutate } from 'mutate-on-copy';
 import { $Class } from 'vona';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
 import { _DtoGet_relations } from './dtoGet.ts';
@@ -34,21 +35,29 @@ export function _DtoMutate_raw<
   // entity
   let entityClass = getClassEntityFromClassModel(modelClass);
   // columns
-  const columns = prepareColumns(params?.columns);
+  let columns = prepareColumns(params?.columns);
   if (columns) {
     if (!topLevel) {
       if (mutateTypeTopLevel === 'create') {
         for (const key of ['deleted', 'id']) {
           const index = columns.indexOf(key as any);
-          if (index > -1) columns.splice(index, 1);
+          if (index > -1) {
+            columns = mutate(columns, copyState => {
+              copyState.splice(index, 1);
+            });
+          }
         }
       } else {
         for (const key of ['deleted', 'id']) {
-          if (!columns.includes(key as any)) columns.unshift(key as any);
+          if (!columns.includes(key as any)) {
+            columns = mutate(columns, copyState => {
+              copyState.unshift(key as any);
+            });
+          }
         }
       }
     }
-    entityClass = $Class.pick(entityClass, prepareColumns(params?.columns) as any);
+    entityClass = $Class.pick(entityClass, columns);
   } else {
     const columns = columnsOmitDefault ?? (mutateTypeTopLevel === 'create' ? ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] : ['iid', 'createdAt', 'updatedAt']);
     entityClass = $Class.omit(entityClass, prepareColumns(columns as any) as any);

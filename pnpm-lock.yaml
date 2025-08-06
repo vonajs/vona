@@ -68,6 +68,9 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      mutate-on-copy:
+        specifier: ^1.0.1
+        version: 1.0.1
       retry:
         specifier: ^0.13.1
         version: 0.13.1
@@ -1405,6 +1408,9 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      mutate-on-copy:
+        specifier: ^1.0.1
+        version: 1.0.1
       retry:
         specifier: ^0.13.1
         version: 0.13.1
@@ -6465,6 +6471,9 @@ packages:
   mustache@4.2.0:
     resolution: {integrity: sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==}
     hasBin: true
+
+  mutate-on-copy@1.0.1:
+    resolution: {integrity: sha512-uOoP67+QfTdq65fyRhOGVHtz1FZaVkqTF0YGxV/V4yCJ75pluopyJ8r1m4tft36DrY++7MmVnOrFwDTQsNMG2Q==}
 
   mute-stream@0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
@@ -13708,6 +13717,8 @@ snapshots:
       minimatch: 3.0.5
 
   mustache@4.2.0: {}
+
+  mutate-on-copy@1.0.1: {}
 
   mute-stream@0.0.8: {}
 
