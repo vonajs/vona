@@ -270,7 +270,7 @@ import { $locale } from '../.metadata/index.ts';
 |openapi|与Swagger/Openapi相关的元数据|
 |fields|定义Fields options|
 
-- independent: 如果 Controller Action 引用了 entity，那么该 entity 就是自动输出到 Swagger/Openapi 中。如果指定`independent: true`，那么该 entity 就总会输出到 Swagger/Openapi 中
+- independent: 如果 Controller Action 引用了 entity，那么该 entity 就会自动输出到 Swagger/Openapi 中。如果指定`independent: true`，那么该 entity 就总会输出到 Swagger/Openapi 中
 
 ### 1. 举例：openapi
 

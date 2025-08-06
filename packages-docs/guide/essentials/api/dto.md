@@ -57,7 +57,7 @@ class DtoStudentCreate {
 |openapi|Metadata related to Swagger/Openapi|
 |fields|Define Fields options|
 
-- independent: If the Controller Action references an dto, the dto is automatically exported to Swagger/Openapi. If `independent: true` is specified, the dto will always be output to Swagger/Openapi
+- independent: If the Controller Action references an dto, the dto will be automatically output to Swagger/Openapi. If `independent: true` is specified, the dto will always be output to Swagger/Openapi
 
 ### 1. Example: openapi
 
