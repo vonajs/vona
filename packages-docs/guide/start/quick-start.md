@@ -36,6 +36,10 @@ DATABASE_CLIENT_MYSQL_PASSWORD =
 REDIS_DEFAULT_PASSWORD =
 ```
 
+::: warning
+For development and test environments, it is recommended to use the system default database name so that the system can automatically create a test database
+:::
+
 3. Start Dev Server
 
 ``` bash
