@@ -833,7 +833,7 @@ importers:
         specifier: ^5.0.40
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.63
+        specifier: ^5.0.64
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1253,7 +1253,7 @@ importers:
         specifier: ^5.0.20
         version: link:modules/a-user
       vona-module-a-validation:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-validation
       vona-module-a-version:
         specifier: ^5.0.23
