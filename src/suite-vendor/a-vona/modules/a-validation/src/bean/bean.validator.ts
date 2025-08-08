@@ -59,6 +59,11 @@ export class BeanValidator extends BeanBase {
       this.app.throw(errorHttpStatusCode);
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
+    if (issues && typeof issues === 'object') {
+      issues.toString = function () {
+        return JSON.stringify(this);
+      };
+    }
     return this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
   }
 
