@@ -10,18 +10,18 @@ import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from 
 import { _DtoGet_relations } from './dtoGet.ts';
 
 export function DtoMutate<
-  T extends IDtoMutateParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  T extends IDtoMutateParams<ModelLike> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
-): Constructable<TypeDtoMutateResult<ModelLike, T,'mutate',undefined,true>> {
+): Constructable<TypeDtoMutateResult<ModelLike, T, 'mutate', undefined, true>> {
   return _DtoMutate_raw(modelLike, params, 'mutate', undefined, true);
 }
 
 export function _DtoMutate_raw<
-  T extends IDtoMutateParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  T extends IDtoMutateParams<ModelLike> | undefined = undefined,
   ColumnsOmitDefault extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,

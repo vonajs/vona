@@ -5,8 +5,8 @@ import type { IModelClassRecord } from '../../types/onion/model.ts';
 import { _DtoMutate_raw } from './dtoMutate.ts';
 
 export function DtoUpdate<
-  T extends IDtoMutateParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  T extends IDtoMutateParams<ModelLike> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,

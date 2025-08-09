@@ -13,8 +13,8 @@ import { DtoGroup } from './dtoGroup.ts';
 import { _DtoMutate_raw } from './dtoMutate.ts';
 
 export function DtoGet<
-  T extends IDtoGetParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  T extends IDtoGetParams<ModelLike> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
@@ -23,8 +23,8 @@ export function DtoGet<
 }
 
 function _DtoGet_raw<
-  T extends IDtoGetParams<ModelLike>,
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  T extends IDtoGetParams<ModelLike> | undefined = undefined,
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
@@ -67,7 +67,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
   const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel);
   if (mutateTypeTopLevel) {
-    if(type==='belongsTo' || type==='belongsToMany'){
+    if (type === 'belongsTo' || type === 'belongsToMany') {
       // donot mutate
       return;
     }
