@@ -153,7 +153,7 @@ type TypeDtoMutateRelationResultEntityInner<
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
 > =
-Columns extends string | string[] ?
+[Columns] extends [string | string[]] ?
   TypeDtoMutateRelationResultEntityFromColumns<TRecord, Columns, TMutateTypeTopLevel, TTopLevel> :
   TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault>;
 
