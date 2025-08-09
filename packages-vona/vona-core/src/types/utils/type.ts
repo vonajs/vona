@@ -15,3 +15,5 @@ export type TypeClassOfClassLike<ClassLike> =
 export type TypeRecordValues<TRecord> = TRecord[keyof TRecord];
 
 export type TypeConfirmArray<A> = A extends any[] ? A : A[];
+
+export type TypeOmitStringUnion<Strs, Keys> = Strs extends Keys ? never : Strs;

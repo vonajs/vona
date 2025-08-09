@@ -109,6 +109,9 @@ export type TypeUtilGetParamsWith<TParams> = TParams extends { with?: infer WITH
 export type TypeUtilGetParamsColumns<TParams> = TParams extends { columns?: infer COLUMNS } ? COLUMNS : undefined;
 export type TypeUtilPrepareColumns<TColumns> = TColumns extends '*' | ['*'] ? undefined : TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
 export type TypeUtilEntitySelector<TRecord, TColumns> = [TColumns] extends [keyof TRecord] ? Pick<TRecord, TColumns> : TRecord;
+export type TypeUtilEntityOmit<TRecord, TColumns> = [TColumns] extends [keyof TRecord] ? Omit<TRecord, TColumns> : TRecord;
+export type TypeUtilEntityPartial<TRecord, TColumns> =
+  [TColumns] extends [keyof TRecord] ? Partial<Pick<TRecord, TColumns>> & Omit<TRecord, TColumns> : TRecord;
 export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined> =
   TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[] ?
     TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;

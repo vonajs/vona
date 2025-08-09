@@ -1,9 +1,10 @@
+import type { OmitNever } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IModelClassRecord } from '../onion/model.ts';
-import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../relations.ts';
-import type { TypeModelMutateRelationData } from '../relationsMutate.ts';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetParamsColumns, TypeUtilPrepareColumns } from '../relations.ts';
+import { extend } from '@cabloy/extend';
 
 export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
 
@@ -30,9 +31,77 @@ export interface IBuildDtoMutateParamsBasic<
 export type TypeDtoMutateResult<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
   TOptionsRelation,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TColumnsOmitDefault extends string | string[] | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
 > =
-TypeModelMutateRelationData<
+TypeDtoMutateRelationResult<
   TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
   TypeModelOfModelLike<ModelLike>,
-  TOptionsRelation
+  TOptionsRelation,
+  TMutateTypeTopLevel,
+  TColumnsOmitDefault,
+  TTopLevel
 >;
+
+export type TypeDtoMutateRelationResult<
+  TRecord,
+  TModel extends BeanModelMeta | undefined,
+  TOptionsRelation,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TColumnsOmitDefault extends string | string[] | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> =
+  TypeDtoMutateRelationResultEntity<TRecord, TypeUtilGetParamsColumns<TOptionsRelation>, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>
+ &
+  (TModel extends BeanModelMeta ?
+      (
+        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
+        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>
+      ) : {});
+
+type TypeDtoMutateRelationResultEntity<
+  TRecord,
+  Columns = undefined,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TColumnsOmitDefault extends string | string[] | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> = TypeDtoMutateRelationResultPatch<
+  TypeDtoMutateRelationResultEntityInner<TRecord, Columns, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>,
+  TMutateTypeTopLevel,
+  TTopLevel
+>;
+
+type TypeDtoMutateRelationResultPatch<
+  TRecordResult,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> = TTopLevel extends false ? TMutateTypeTopLevel extends 'update' | 'mutate' ?
+  TypeUtilEntityPartial<TRecordResult, 'id' | 'deleted'> : TRecordResult : TRecordResult;
+
+type TypeDtoMutateRelationResultEntityInner<
+  TRecord,
+  Columns = undefined,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TColumnsOmitDefault extends string | string[] | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> = Columns extends string | string[] ?
+  TypeDtoMutateRelationResultEntityFromColumns<TRecord, Columns, TMutateTypeTopLevel, TTopLevel> :
+  TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>;
+
+type TypeDtoMutateRelationResultEntityFromColumns<
+  TRecord,
+  Columns = undefined,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> = undefined;
+
+type TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<
+  TRecord,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TColumnsOmitDefault extends string | string[] | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> = undefined;
+
+// TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
+// TypeUtilEntitySelector<TRecord
