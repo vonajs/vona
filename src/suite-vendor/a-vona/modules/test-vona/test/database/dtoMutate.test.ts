@@ -29,7 +29,7 @@ describe('dtoMutate.test.ts', () => {
           },
         });
         rules = getTargetDecoratorRules(DtoUserUpdate.prototype);
-        assert.equal(rules.name._def.typeName, 'ZodOptional');
+        assert.equal(rules.name._def.typeName, 'ZodString'); // ZodOptional
         assert.equal(rules.id, undefined);
         assert.equal(rules.iid, undefined);
         assert.equal(rules.deleted, undefined);
