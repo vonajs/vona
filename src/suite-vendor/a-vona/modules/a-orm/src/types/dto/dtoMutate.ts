@@ -3,10 +3,7 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../onion/model.ts';
-import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetColumnsFromRelationAndIncludeWrapper, TypeUtilGetModelOptions, TypeUtilGetParamsColumns, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationType, TypeUtilPrepareColumns } from '../relations.ts';
-import type { TypeUtilGetAggrsFromRelationAndIncludeWrapper } from '../relationsAggr.ts';
-import type { TypeUtilGetGroupsFromRelationAndIncludeWrapper } from '../relationsGroup.ts';
-import { extend } from '@cabloy/extend';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetColumnsFromRelationAndIncludeWrapper, TypeUtilGetModelOptions, TypeUtilGetParamsColumns, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType, TypeUtilPrepareColumns } from '../relations.ts';
 
 export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
 
@@ -33,7 +30,7 @@ export interface IBuildDtoMutateParamsBasic<
 export type TypeDtoMutateResult<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
   TOptionsRelation,
-  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TMutateTypeTopLevel extends TypeDtoMutateType,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
 > =
@@ -46,11 +43,11 @@ TypeDtoMutateRelationResult<
   TTopLevel
 >;
 
-export type TypeDtoMutateRelationResult<
+type TypeDtoMutateRelationResult<
   TRecord,
   TModel extends BeanModelMeta | undefined,
   TOptionsRelation,
-  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TMutateTypeTopLevel extends TypeDtoMutateType,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
   TColumns = undefined,
@@ -65,56 +62,67 @@ export type TypeDtoMutateRelationResult<
  &
   (TModel extends BeanModelMeta ?
       (
-        OmitNever<TypeDtoMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
-        OmitNever<TypeDtoMutateModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>
+        OmitNever<TypeDtoMutateRelationResultMergeInclude<TMutateTypeTopLevel,TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
+        OmitNever<TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel,TypeUtilGetParamsWith<TOptionsRelation>>>
       ) : {});
 
-type TypeDtoMutateRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
+type TypeDtoMutateRelationResultMergeInclude<
+  TMutateTypeTopLevel extends TypeDtoMutateType,
+  TModelOptions extends IDecoratorModelOptions,
+  TInclude extends {} | undefined,
+> = {
   [RelationName in (keyof TModelOptions['relations'])]:
   TInclude[RelationName] extends {} | boolean ?
-    TypeDtoMutateRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
-    TypeDtoMutateRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
+    TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel, TModelOptions['relations'][RelationName], TInclude[RelationName]> :
+    TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]>;
 };
 
- type TypeDtoMutateModelRelationResultMergeWith<TWith extends {} | undefined> =
+type TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel extends TypeDtoMutateType, TWith extends {} | undefined> =
   TWith extends {} ?
-      { [RelationName in (keyof TWith)]: TypeDtoMutateRelationResultMergeWithRelation<TWith[RelationName]> }
+      { [RelationName in (keyof TWith)]: TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel, TWith[RelationName]> }
     : {};
 
- type TypeDtoMutateRelationResultMergeIncludeWrapper<Relation, IncludeWrapper> =
+type TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel extends TypeDtoMutateType, Relation, IncludeWrapper> =
   IncludeWrapper extends false ? never :
   IncludeWrapper extends true ?
-    TypeUtilGetRelationEntityByType<Relation, undefined> :
-    IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> : never;
+    TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, undefined> :
+    IncludeWrapper extends {} ? TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, IncludeWrapper> : never;
 
-export type TypeDtoMutateRelationResultMergeAutoload<Relation> =
-  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
+type TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel extends TypeDtoMutateType, Relation> =
+  TypeUtilGetRelationOptionsAutoload<Relation> extends true ?
+    TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, undefined> : never;
 
-export type TypeDtoMutateRelationResultMergeWithRelation<WithRelation> =
+type TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel extends TypeDtoMutateType, WithRelation> =
   WithRelation extends false ? never :
   WithRelation extends true ?
     never :
-    WithRelation extends {} ? TypeUtilGetDtoMutateRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
+    WithRelation extends {} ?
+      TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
 
-export type TypeUtilGetDtoMutateRelationEntityByType<Relation, IncludeWrapper extends {} | undefined> =
+type TypeUtilGetDtoMutateRelationEntityByType<
+  TMutateTypeTopLevel extends TypeDtoMutateType,
+  Relation,
+  IncludeWrapper extends {} | undefined,
+> =
   TypeUtilGetDtoMutateEntityByType<
+    TMutateTypeTopLevel,
     TypeUtilGetRelationEntity<Relation>,
     TypeUtilGetRelationType<Relation>,
     TypeUtilGetRelationModel<Relation>,
     IncludeWrapper,
-    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
+    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
   >;
-export type TypeUtilGetDtoMutateEntityByType<
+type TypeUtilGetDtoMutateEntityByType<
+  TMutateTypeTopLevel extends TypeDtoMutateType,
   TRecord,
   TYPE,
   TModel extends BeanModelMeta | undefined,
   IncludeWrapper extends {} | undefined,
   Columns,
-
 > =
   TYPE extends 'hasMany' | 'belongsToMany' ?
-    Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, Columns>> | undefined :
-    TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
+    Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined :
+    TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
 
 type TypeDtoMutateRelationResultEntity<
   TRecord,
