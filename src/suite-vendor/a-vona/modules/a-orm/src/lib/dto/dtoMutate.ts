@@ -15,7 +15,7 @@ export function DtoMutate<
 >(
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
-): Constructable<TypeDtoMutateResult<ModelLike, T>> {
+): Constructable<TypeDtoMutateResult<ModelLike, T,'mutate',undefined,true>> {
   return _DtoMutate_raw(modelLike, params, 'mutate', undefined, true);
 }
 
@@ -29,7 +29,7 @@ export function _DtoMutate_raw<
   mutateTypeTopLevel?: TypeDtoMutateType,
   columnsOmitDefault?: ColumnsOmitDefault,
   topLevel?: boolean,
-): Constructable<TypeDtoMutateResult<ModelLike, T>> {
+) {
   // model
   const modelClass = prepareClassModel(modelLike);
   // entity
