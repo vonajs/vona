@@ -182,6 +182,7 @@ type TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<
     TColumnsOmitDefault
   >>
 >;
+
 type TypeDtoMutateRelationResultPrepareColumns<
   TColumns = undefined,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
