@@ -43,7 +43,7 @@ TypeDtoMutateRelationResult<
   TTopLevel
 >;
 
-type TypeDtoMutateRelationResult<
+export type TypeDtoMutateRelationResult<
   TRecord,
   TModel extends BeanModelMeta | undefined,
   TOptionsRelation,
@@ -62,8 +62,10 @@ type TypeDtoMutateRelationResult<
  &
   (TModel extends BeanModelMeta ?
       (
-        OmitNever<TypeDtoMutateRelationResultMergeInclude<TMutateTypeTopLevel,TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
-        OmitNever<TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel,TypeUtilGetParamsWith<TOptionsRelation>>>
+        OmitNever<
+          TypeDtoMutateRelationResultMergeInclude<TMutateTypeTopLevel, TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>
+        > &
+        OmitNever<TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel, TypeUtilGetParamsWith<TOptionsRelation>>>
       ) : {});
 
 type TypeDtoMutateRelationResultMergeInclude<
@@ -120,7 +122,7 @@ type TypeUtilGetDtoMutateEntityByType<
   IncludeWrapper extends {} | undefined,
   Columns,
 > =
-  TYPE extends 'belongsTo' |'belongsToMany'? never:
+  TYPE extends 'belongsTo' | 'belongsToMany' ? never :
   TYPE extends 'hasMany' | 'belongsToMany' ?
     Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined :
     TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
@@ -150,7 +152,8 @@ type TypeDtoMutateRelationResultEntityInner<
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-> = Columns extends string | string[] ?
+> =
+Columns extends string | string[] ?
   TypeDtoMutateRelationResultEntityFromColumns<TRecord, Columns, TMutateTypeTopLevel, TTopLevel> :
   TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault>;
 
