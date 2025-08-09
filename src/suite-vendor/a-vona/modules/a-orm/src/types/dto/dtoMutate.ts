@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IModelClassRecord } from '../onion/model.ts';
-import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetParamsColumns, TypeUtilPrepareColumns } from '../relations.ts';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetParamsColumns, TypeUtilPrepareColumns } from '../relations.ts';
 import { extend } from '@cabloy/extend';
 
 export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
@@ -100,8 +100,22 @@ type TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<
   TRecord,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
-  TTopLevel extends boolean | undefined = undefined,
-> = undefined;
+> = TypeUtilEntityOmit<
+  TRecord,
+  TypeDtoMutateRelationResultPrepareColumnsOmitDefault<
+    TMutateTypeTopLevel,
+    TColumnsOmitDefault
+  >
+>;
+
+type TypeDtoMutateRelationResultPrepareColumnsOmitDefault<
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TColumnsOmitDefault extends string | string[] | undefined = undefined,
+> = TypeUtilPrepareColumns<TColumnsOmitDefault extends string | string[] ?
+  TColumnsOmitDefault :
+  TMutateTypeTopLevel extends 'create' ?
+      ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] :
+      ['iid', 'createdAt', 'updatedAt']>;
 
 // TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
 // TypeUtilEntitySelector<TRecord
