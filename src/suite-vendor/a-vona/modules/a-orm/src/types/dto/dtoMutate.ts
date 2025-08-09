@@ -1,4 +1,4 @@
-import type { OmitNever } from 'vona';
+import type { OmitNever, TypeOmitStringUnion } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
@@ -87,14 +87,21 @@ type TypeDtoMutateRelationResultEntityInner<
   TTopLevel extends boolean | undefined = undefined,
 > = Columns extends string | string[] ?
   TypeDtoMutateRelationResultEntityFromColumns<TRecord, Columns, TMutateTypeTopLevel, TTopLevel> :
-  TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>;
+  TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault>;
 
 type TypeDtoMutateRelationResultEntityFromColumns<
   TRecord,
   Columns = undefined,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-> = undefined;
+> = TypeUtilEntitySelector<
+  TRecord,
+  TypeUtilPrepareColumns<TypeDtoMutateRelationResultPrepareColumns<
+    TypeUtilPrepareColumns<Columns>,
+    TMutateTypeTopLevel,
+    TTopLevel
+  >>
+>;
 
 type TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<
   TRecord,
@@ -102,20 +109,28 @@ type TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
 > = TypeUtilEntityOmit<
   TRecord,
-  TypeDtoMutateRelationResultPrepareColumnsOmitDefault<
+  TypeUtilPrepareColumns<TypeDtoMutateRelationResultPrepareColumnsOmitDefault<
     TMutateTypeTopLevel,
     TColumnsOmitDefault
-  >
+  >>
 >;
+type TypeDtoMutateRelationResultPrepareColumns<
+  TColumns = undefined,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+> = TTopLevel extends true ? TColumns :
+TMutateTypeTopLevel extends 'create' ?
+  TypeOmitStringUnion<TColumns, 'deleted' | 'id'> : (TColumns | 'deleted' | 'id')
+;
 
 type TypeDtoMutateRelationResultPrepareColumnsOmitDefault<
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
-> = TypeUtilPrepareColumns<TColumnsOmitDefault extends string | string[] ?
+> = TColumnsOmitDefault extends string | string[] ?
   TColumnsOmitDefault :
   TMutateTypeTopLevel extends 'create' ?
       ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] :
-      ['iid', 'createdAt', 'updatedAt']>;
+      ['iid', 'createdAt', 'updatedAt'];
 
 // TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
 // TypeUtilEntitySelector<TRecord
