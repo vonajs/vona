@@ -67,6 +67,10 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
   const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel);
   if (mutateTypeTopLevel) {
+    if(type==='belongsTo' || type==='belongsToMany'){
+      // donot mutate
+      return;
+    }
     let schema;
     if ((type === 'hasOne' || type === 'belongsTo')) {
       schema = v.lazy(v.optional(), schemaLazy);

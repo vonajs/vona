@@ -120,6 +120,7 @@ type TypeUtilGetDtoMutateEntityByType<
   IncludeWrapper extends {} | undefined,
   Columns,
 > =
+  TYPE extends 'belongsTo' |'belongsToMany'? never:
   TYPE extends 'hasMany' | 'belongsToMany' ?
     Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined :
     TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
