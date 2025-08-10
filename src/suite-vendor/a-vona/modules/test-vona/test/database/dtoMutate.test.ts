@@ -36,6 +36,20 @@ describe('dtoMutate.test.ts', () => {
         assert.equal(rules.createdAt, undefined);
         assert.equal(rules.updatedAt, undefined);
         assert.equal(rules.posts._def.typeName, 'ZodOptional');
+        // create: not mutate post(belongsTo)
+        const DtoPostCreate = $Dto.create('test-vona:post', {
+          include: {
+            postContent: true,
+            user: true,
+          },
+        });
+        rules = getTargetDecoratorRules(DtoPostCreate.prototype);
+        assert.equal(rules.title._def.typeName, 'ZodString'); // ZodOptional
+        assert.equal(rules.stars._def.typeName, 'ZodOptional');
+        assert.equal(rules.userId._def.typeName, 'ZodUnion');
+        assert.equal(rules.postContent._def.typeName, 'ZodOptional');
+        assert.equal(rules.user, undefined);
+        assert.equal(rules.id, undefined);
       });
     });
   });
