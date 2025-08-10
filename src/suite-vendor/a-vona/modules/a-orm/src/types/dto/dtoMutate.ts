@@ -71,15 +71,17 @@ export type TypeDtoMutateRelationResult<
 type TypeDtoMutateRelationResultMergeInclude<
   TMutateTypeTopLevel extends TypeDtoMutateType,
   TModelOptions extends IDecoratorModelOptions,
-  TInclude extends {} | undefined,
+  TInclude extends {} | undefined | unknown,
 > = {
   [RelationName in (keyof TModelOptions['relations'])]:
-  TInclude[RelationName] extends {} | boolean ?
-    TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel, TModelOptions['relations'][RelationName], TInclude[RelationName]> :
+  TInclude extends {} ?
+    TInclude[RelationName] extends {} | boolean ?
+      TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel, TModelOptions['relations'][RelationName], TInclude[RelationName]> :
+      TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]> :
     TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]>;
 };
 
-type TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel extends TypeDtoMutateType, TWith extends {} | undefined> =
+type TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel extends TypeDtoMutateType, TWith extends {} | undefined | unknown> =
   TWith extends {} ?
       { [RelationName in (keyof TWith)]: TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel, TWith[RelationName]> }
     : {};
@@ -104,7 +106,7 @@ type TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel extends Ty
 type TypeUtilGetDtoMutateRelationEntityByType<
   TMutateTypeTopLevel extends TypeDtoMutateType,
   Relation,
-  IncludeWrapper extends {} | undefined,
+  IncludeWrapper extends {} | undefined | unknown,
 > =
   TypeUtilGetDtoMutateEntityByType<
     TMutateTypeTopLevel,
@@ -119,7 +121,7 @@ type TypeUtilGetDtoMutateEntityByType<
   TRecord,
   TYPE,
   TModel extends BeanModelMeta | undefined,
-  IncludeWrapper extends {} | undefined,
+  IncludeWrapper extends {} | undefined | unknown,
   Columns,
 > =
   TYPE extends 'belongsTo' | 'belongsToMany' ? never :

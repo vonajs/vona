@@ -20,10 +20,12 @@ export type TypeModelMutateParamsRelationOptions<Relation> =
       with?: Record<string, unknown>;
     });
 
-export type TypeModelMutateRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined> = {
+export type TypeModelMutateRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined | unknown> = {
   [RelationName in (keyof TModelOptions['relations'])]: // not use ?: for OmitNever take effect
-  TInclude[RelationName] extends {} | boolean ?
-    TypeModelMutateRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
+  TInclude extends {} ?
+    TInclude[RelationName] extends {} | boolean ?
+      TypeModelMutateRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
+      TypeModelMutateRelationResultMergeAutoload<TModelOptions['relations'][RelationName]> :
     TypeModelMutateRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
 };
 
@@ -36,7 +38,7 @@ export type TypeModelMutateRelationResultMergeIncludeWrapper<Relation, IncludeWr
     TypeUtilMutateGetRelationEntityByType<Relation, undefined> :
     IncludeWrapper extends {} ? TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper> : never;
 
-export type TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper extends {} | undefined> =
+export type TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper extends {} | undefined | unknown> =
   TypeUtilMutateGetEntityByType<
     TypeUtilGetRelationEntity<Relation>,
     TypeUtilGetRelationType<Relation>,
@@ -44,10 +46,10 @@ export type TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper exten
     IncludeWrapper
   >;
 
-export type TypeUtilMutateGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined> =
+export type TypeUtilMutateGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined | unknown> =
     TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper>> | undefined : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper> | undefined;
 
-export type TypeModelMutateRelationResultMergeWith<TWith extends {} | undefined> =
+export type TypeModelMutateRelationResultMergeWith<TWith extends {} | undefined | unknown> =
   TWith extends {} ?
       { [RelationName in (keyof TWith)]: TypeModelMutateRelationResultMergeWithRelation<TWith[RelationName]> }
     : {};
