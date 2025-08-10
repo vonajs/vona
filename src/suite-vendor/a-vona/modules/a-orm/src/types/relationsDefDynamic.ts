@@ -17,7 +17,7 @@ import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 // use optional ? for app config
 export interface IModelRelationHasOneDynamic<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> = {},
+  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
 > {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
@@ -28,7 +28,7 @@ export interface IModelRelationHasOneDynamic<
 export interface IModelRelationBelongsToDynamic<
   MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> = {},
+  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
 > {
   type?: 'belongsTo';
   model?: TypeModelClassLike<MODEL>;
@@ -51,7 +51,7 @@ export interface IModelRelationHasManyDynamic<
 export interface IModelRelationBelongsToManyDynamic<
   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> = {},
+  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> | undefined = undefined,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 > {

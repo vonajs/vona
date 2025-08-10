@@ -5,7 +5,7 @@ import type { IModelRelationBelongsToDynamic, IModelRelationBelongsToManyDynamic
 
 function hasOne<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>>,
+  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
 >(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
@@ -17,7 +17,7 @@ function hasOne<
 function belongsTo<
   MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
-  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>>,
+  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
 >(
   _classModelSelf: TypeModelClassLike<MODELSelf>,
   classModel: TypeModelClassLike<MODEL>,
@@ -47,7 +47,7 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>,
+  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> | undefined = undefined,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >(
