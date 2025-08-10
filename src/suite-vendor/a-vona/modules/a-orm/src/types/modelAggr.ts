@@ -1,17 +1,25 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsJoin } from './model.ts';
-import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
+import type { TypeModelColumns, TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { TypeModelsClassLikeGeneral } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export interface TypeModelSelectAggrParamsAggrs<TRecord> {
   count?: TypeModelColumns<TRecord>;
-  sum?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-  avg?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-  max?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
-  min?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+  sum?: TypeModelColumnsStrict<TRecord>;
+  avg?: TypeModelColumnsStrict<TRecord>;
+  max?: TypeModelColumnsStrict<TRecord>;
+  min?: TypeModelColumnsStrict<TRecord>;
 }
+
+// export interface TypeModelSelectAggrParamsAggrs<TRecord> {
+//   count?: TypeModelColumns<TRecord>;
+//   sum?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+//   avg?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+//   max?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+//   min?: TypeEntityTableColumnNamesForAggrs<TRecord> | Array<TypeEntityTableColumnNamesForAggrs<TRecord>>;
+// }
 
 export type TypeEntityTableColumnNamesForAggrs<Entity> = keyof TypeEntityTableColumnsForAggrs<Entity>;
 
