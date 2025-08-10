@@ -49,7 +49,7 @@ export type TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper exten
 
 export type TypeUtilMutateGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined | unknown> =
     TYPE extends 'belongsTo' ? never :
-    TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> :
+    TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined :
     TYPE extends 'hasMany' ? Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper>> | undefined : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper> | undefined;
 
 export type TypeModelMutateRelationResultMergeWith<TWith extends {} | undefined | unknown> =

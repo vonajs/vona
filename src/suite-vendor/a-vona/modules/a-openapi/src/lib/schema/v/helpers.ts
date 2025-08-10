@@ -46,7 +46,7 @@ export function schemaMax(max: number, message?: errorUtil.ErrMessage) {
 }
 
 export function schemaTableIdentity() {
-  return function (_schema: any): any {
+  return function (_schema?: any): any {
     return z.union([z.string(), z.number()]);
   };
 }

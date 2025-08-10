@@ -7,6 +7,7 @@ import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onio
 import { ensureArray, hashkey } from '@cabloy/utils';
 import { $Class, appResource, deepExtend } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
+import z from 'zod';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
 import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoGroup } from './dtoGroup.ts';
@@ -67,12 +68,14 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
   const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel);
   if (mutateTypeTopLevel) {
-    if (type === 'belongsTo' || type === 'belongsToMany') {
+    if (type === 'belongsTo') {
       // donot mutate
       return;
     }
     let schema;
-    if ((type === 'hasOne' || type === 'belongsTo')) {
+    if (type === 'belongsToMany') {
+      schema = v.array(z.object({ id: (v.tableIdentity())(), deleted: z.boolean().optional() }));
+    } else if (type === 'hasOne') {
       schema = v.lazy(v.optional(), schemaLazy);
     } else {
       schema = v.array(v.lazy(schemaLazy));
