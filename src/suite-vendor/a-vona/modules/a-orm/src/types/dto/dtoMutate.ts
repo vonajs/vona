@@ -4,6 +4,7 @@ import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetColumnsFromRelationAndIncludeWrapper, TypeUtilGetModelOptions, TypeUtilGetParamsColumns, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType, TypeUtilPrepareColumns } from '../relations.ts';
+import type { TableIdentity } from '../tableIdentity.ts';
 
 export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
 
@@ -124,8 +125,9 @@ type TypeUtilGetDtoMutateEntityByType<
   IncludeWrapper extends {} | undefined | unknown,
   Columns,
 > =
-  TYPE extends 'belongsTo' | 'belongsToMany' ? never :
-  TYPE extends 'hasMany' | 'belongsToMany' ?
+  TYPE extends 'belongsTo' ? never :
+  TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined :
+  TYPE extends 'hasMany' ?
     Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined :
     TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
 

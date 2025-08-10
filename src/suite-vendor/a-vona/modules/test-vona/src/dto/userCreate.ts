@@ -4,5 +4,5 @@ import { Dto } from 'vona-module-a-web';
 
 export interface IDtoOptionsUserCreate extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsUserCreate>()
-export class DtoUserCreate extends $Dto.create('test-vona:user', { include: { posts: true } }) {}
+@Dto<IDtoOptionsUserCreate>({ independent: true })
+export class DtoUserCreate extends $Dto.create('test-vona:user', { include: { roles: true, posts: true } }) {}
