@@ -17,7 +17,7 @@ export type TypeUtilAggrPrepareColumns<TColumns> = TColumns extends string[] ? T
 export type TypeRecordAggrsValues<TRecord extends Record<string, any>> = TRecord[keyof TRecord];
 export type TypeRecordAggrsValuesToObject<AggrValues extends string> = { [K in AggrValues]: BigNumber | undefined };
 
-export type TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined> =
+export type TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined | unknown> =
   TypeUtilGetRelationOptionsAggrs<Relation> extends {} ?
     TypeUtilGetParamsAggrs<IncludeWrapper> extends {} ?
       TypeUtilGetAggrsFromRelationAndIncludeWrapper_Mixed<
