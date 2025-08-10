@@ -85,6 +85,7 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
     TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
     TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
   >;
+
 export type TypeUtilGetEntityByType<
   TRecord,
   TYPE,
