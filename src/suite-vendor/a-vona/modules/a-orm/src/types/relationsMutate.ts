@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'table-identity';
 import type { OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
@@ -47,7 +48,9 @@ export type TypeUtilMutateGetRelationEntityByType<Relation, IncludeWrapper exten
   >;
 
 export type TypeUtilMutateGetEntityByType<TRecord, TYPE, TModel extends BeanModelMeta | undefined, IncludeWrapper extends {} | undefined | unknown> =
-    TYPE extends 'hasMany' | 'belongsToMany' ? Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper>> | undefined : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper> | undefined;
+    TYPE extends 'belongsTo' ? never :
+    TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> :
+    TYPE extends 'hasMany' ? Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper>> | undefined : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper> | undefined;
 
 export type TypeModelMutateRelationResultMergeWith<TWith extends {} | undefined | unknown> =
   TWith extends {} ?
