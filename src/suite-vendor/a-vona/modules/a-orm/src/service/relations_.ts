@@ -196,7 +196,11 @@ export class ServiceRelations extends BeanBase {
         const options2 = deepExtend({}, optionsReal, { groups: `${tableNameTarget}.${key}`, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
         const items = await modelTarget.group(options2, methodOptionsReal);
         for (const entity of entities) {
-          entity[relationName] = items.find(item => item[key] === cast(entity).id);
+          const item = items.find(item => item[key] === cast(entity).id);
+          if (item) {
+            delete item[key];
+          }
+          entity[relationName] = item;
         }
       } else {
         const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
