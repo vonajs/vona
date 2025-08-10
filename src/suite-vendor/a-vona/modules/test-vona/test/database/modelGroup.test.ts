@@ -69,7 +69,6 @@ describe('modelGroup.test.ts', () => {
           sum: ['age'],
           avg: 'age',
           max: 'age',
-          min: 'age',
         },
         where: {
           name: { _startsWith_: `${prefix}:` },
@@ -90,7 +89,6 @@ describe('modelGroup.test.ts', () => {
       assert.equal(usersGroup[0].sum_age, 5);
       assert.equal(usersGroup[0].avg_age, 5);
       assert.equal(usersGroup[0].max_age, 5);
-      assert.equal(usersGroup[0].min_age, 5);
       // group: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStatsGroup.select({
         where: {

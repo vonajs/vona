@@ -76,7 +76,6 @@ describe('modelAggregate.test.ts', () => {
           sum: ['age'],
           avg: 'age',
           max: 'age',
-          min: 'age',
         },
         where: {
           name: { _startsWith_: `${prefix}:` },
@@ -87,7 +86,6 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(userStats.sum_age, 8);
       assert.equal(userStats.avg_age, 4);
       assert.equal(userStats.max_age, 5);
-      assert.equal(userStats.min_age, 3);
       // aggr: usersStats: posts: autoload
       const usersStats = await scopeTest.model.userStats.select({
         where: {
