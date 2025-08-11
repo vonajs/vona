@@ -9,6 +9,6 @@ export class EntityCategory extends EntityBase {
   @Api.field()
   name: string;
 
-  @Api.field(v.tableIdentity())
-  categoryIdParent: TableIdentity;
+  @Api.field(v.optional(), v.tableIdentity())
+  categoryIdParent?: TableIdentity;
 }

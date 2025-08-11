@@ -364,7 +364,7 @@ declare module 'vona-module-test-vona' {
       }
 export interface IModelOptionsCategoryChain {
         relations: {
-          parent: IModelRelationBelongsTo<ModelCategory, ModelCategory, true, 'id'|'name'|'categoryIdParent'>;
+          parent: IModelRelationBelongsTo<ModelCategoryChain, ModelCategoryChain, true, 'id'|'name'|'categoryIdParent'>;
         };
       }
 export interface IModelOptionsPost {
