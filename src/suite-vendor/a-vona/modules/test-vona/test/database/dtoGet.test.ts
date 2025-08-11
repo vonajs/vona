@@ -39,9 +39,9 @@ describe('dtoGet.test.ts', () => {
         assert.equal(rules.title._def.typeName, 'ZodString');
         assert.equal(rules.userId._def.typeName, 'ZodUnion');
         assert.equal(rules.iid, undefined);
-        assert.equal(rules.postContent._def.typeName, 'ZodLazy');
-        assert.equal(rules.user._def.typeName, 'ZodLazy');
-        assert.equal(rules.user3._def.typeName, 'ZodLazy');
+        assert.equal(rules.postContent._def.typeName, 'ZodOptional');
+        assert.equal(rules.user._def.typeName, 'ZodOptional');
+        assert.equal(rules.user3._def.typeName, 'ZodOptional');
       });
     });
   });
@@ -52,6 +52,9 @@ describe('dtoGet.test.ts', () => {
         const rules: any = getTargetDecoratorRules(DtoCategoryTree.prototype);
         assert.equal(rules.children._def.typeName, 'ZodEffects');
         assert.equal(rules.iid, undefined);
+        const DtoCategoryChain = $Dto.get('test-vona:categoryChain', { columns: ['id', 'name', 'categoryIdParent'] });
+        const _apiJson = await app.bean.scope('a-openapi').service.openapi.generateJsonOfClass(DtoCategoryChain);
+        // console.log(JSON.stringify(apiJson.components));
       });
     });
   });
