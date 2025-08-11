@@ -70,6 +70,31 @@ export class ServiceOpenapi extends BeanBase {
     return apiObj as IOpenapiObject[K];
   }
 
+  // need not cache
+  async generateJsonOfClass<K extends keyof IOpenapiObject>(schemaClass: Constructable, version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
+    return await this.generateJsonOfClasses([schemaClass], version);
+  }
+
+  // need not cache
+  async generateJsonOfClasses<K extends keyof IOpenapiObject>(schemaClasses: Constructable[], version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
+    const registry = new OpenAPIRegistry();
+    // schema: independent
+    let counter = 0;
+    for (const schemaClass of schemaClasses) {
+      const schema = $schema(schemaClass);
+      let beanFullName = appResource.getBeanFullName(schemaClass);
+      if (!beanFullName) {
+        beanFullName = `${schemaClass.name}_${counter++}`;
+      }
+      registry.register(beanFullName, schema);
+    }
+    const generator =
+      version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+    const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
+    this._translate(apiObj, 'rest');
+    return apiObj as IOpenapiObject[K];
+  }
+
   private _translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
     // paths
     if (apiObj.paths) {
