@@ -83,18 +83,25 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     Api.field(v.optional(), schema)(entityClass.prototype, relationName);
   } else {
     let schema;
+    let optional = false;
     if ((type === 'hasOne' || type === 'belongsTo')) {
-      schema = v.lazy(v.optional(), schemaLazy);
+      schema = v.lazy(schemaLazy);
+      optional = true;
     } else {
       if (optionsReal.groups) {
         schema = v.array(v.lazy(schemaLazy));
       } else if (optionsReal.aggrs) {
-        schema = v.lazy(v.optional(), schemaLazy);
+        schema = v.lazy(schemaLazy);
+        optional = true;
       } else {
         schema = v.array(v.lazy(schemaLazy));
       }
     }
-    Api.field(schema)(entityClass.prototype, relationName);
+    if (optional) {
+      Api.field(v.optional(), schema)(entityClass.prototype, relationName);
+    } else {
+      Api.field(schema)(entityClass.prototype, relationName);
+    }
   }
 }
 
