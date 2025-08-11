@@ -76,7 +76,8 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     if (type === 'belongsToMany') {
       schema = v.array(z.object({ id: (v.tableIdentity())(), deleted: z.boolean().optional() }));
     } else if (type === 'hasOne') {
-      schema = v.lazy(v.optional(), schemaLazy);
+      schema = v.lazy(schemaLazy);
+      // optional = true;
     } else {
       schema = v.array(v.lazy(schemaLazy));
     }
