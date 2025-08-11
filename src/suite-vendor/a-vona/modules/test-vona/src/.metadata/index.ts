@@ -174,6 +174,7 @@ declare module 'vona-module-test-vona' {
 /** entity: end */
 /** model: begin */
 export * from '../model/category.ts';
+export * from '../model/categoryChain.ts';
 export * from '../model/post.ts';
 export * from '../model/postContent.ts';
 export * from '../model/role.ts';
@@ -184,6 +185,7 @@ export * from '../model/user.ts';
 export * from '../model/userStats.ts';
 export * from '../model/userStatsGroup.ts';
 import type { IModelOptionsCategory } from '../model/category.ts';
+import type { IModelOptionsCategoryChain } from '../model/categoryChain.ts';
 import type { IModelOptionsPost } from '../model/post.ts';
 import type { IModelOptionsPostContent } from '../model/postContent.ts';
 import type { IModelOptionsRole } from '../model/role.ts';
@@ -198,6 +200,7 @@ declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
       'test-vona:category': IModelOptionsCategory;
+'test-vona:categoryChain': IModelOptionsCategoryChain;
 'test-vona:post': IModelOptionsPost;
 'test-vona:postContent': IModelOptionsPostContent;
 'test-vona:role': IModelOptionsRole;
@@ -221,6 +224,16 @@ declare module 'vona-module-test-vona' {
           export interface ModelCategory {
             get $beanFullName(): 'test-vona.model.category';
             get $onionName(): 'test-vona:category';
+          }
+
+        export interface ModelCategoryChain {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ModelCategoryChain {
+            get $beanFullName(): 'test-vona.model.categoryChain';
+            get $onionName(): 'test-vona:categoryChain';
           }
 
         export interface ModelPost {
@@ -316,6 +329,7 @@ declare module 'vona-module-test-vona' {
 /** model: end */
 /** model: begin */
 import type { ModelCategory } from '../model/category.ts';
+import type { ModelCategoryChain } from '../model/categoryChain.ts';
 import type { ModelPost } from '../model/post.ts';
 import type { ModelPostContent } from '../model/postContent.ts';
 import type { ModelRole } from '../model/role.ts';
@@ -327,6 +341,7 @@ import type { ModelUserStats } from '../model/userStats.ts';
 import type { ModelUserStatsGroup } from '../model/userStatsGroup.ts';
 export interface IModuleModel {
   'category': ModelCategory;
+'categoryChain': ModelCategoryChain;
 'post': ModelPost;
 'postContent': ModelPostContent;
 'role': ModelRole;
@@ -345,6 +360,11 @@ declare module 'vona-module-test-vona' {
   export interface IModelOptionsCategory {
         relations: {
           children: IModelRelationHasMany<ModelCategory, true, 'id'|'name',undefined,undefined,undefined>;
+        };
+      }
+export interface IModelOptionsCategoryChain {
+        relations: {
+          parent: IModelRelationBelongsTo<ModelCategory, ModelCategory, true, 'id'|'name'|'categoryIdParent'>;
         };
       }
 export interface IModelOptionsPost {
@@ -399,6 +419,25 @@ roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false
       count<T extends IModelSelectCountParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
       aggregate<T extends IModelSelectAggrParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityCategory, T>[]>;
+    }
+export interface ModelCategoryChain {
+      [SymbolKeyEntity]: EntityCategory;
+      [SymbolKeyEntityMeta]: EntityCategoryMeta;
+      [SymbolKeyModelOptions]: IModelOptionsCategoryChain;
+      get<T extends IModelGetOptions<EntityCategory,ModelCategoryChain>>(where: TypeModelWhere<EntityCategory>, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityCategory,ModelCategoryChain>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T>[]>;
+      select<T extends IModelSelectParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T>[]>;
+      insert<T extends IModelInsertOptions<EntityCategory,ModelCategoryChain>>(data?: TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityCategory,ModelCategoryChain>>(items: TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityCategory,ModelCategoryChain>>(data: TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>, options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityCategory,ModelCategoryChain>>(items: TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityCategory,ModelCategoryChain>>(where?: TypeModelWhere<EntityCategory>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityCategory,ModelCategoryChain>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityCategory,ModelCategoryChain>>(data?: TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>, options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityCategory,ModelCategoryChain>>(items: TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityCategory,ModelCategoryChain, T>[]>;
+      count<T extends IModelSelectCountParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityCategory, T>[]>;
     }
 export interface ModelPost {
       [SymbolKeyEntity]: EntityPost;
@@ -575,6 +614,7 @@ export interface ModelUserStatsGroup {
 declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'test-vona:category': ModelCategory;
+'test-vona:categoryChain': ModelCategoryChain;
 'test-vona:post': ModelPost;
 'test-vona:postContent': ModelPostContent;
 'test-vona:role': ModelRole;
