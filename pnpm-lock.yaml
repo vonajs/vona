@@ -331,7 +331,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.40
+        specifier: ^6.0.41
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -833,7 +833,7 @@ importers:
         specifier: ^5.0.41
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.66
+        specifier: ^5.0.67
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1202,7 +1202,7 @@ importers:
         specifier: ^5.0.17
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.16
@@ -1211,7 +1211,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.42
+        specifier: ^5.0.43
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.13
