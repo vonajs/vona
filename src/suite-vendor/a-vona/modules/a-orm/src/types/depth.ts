@@ -1,3 +1,4 @@
+export type TypeDepthPrevMax = 50;
 export type TypeDepthPrev = [
   never,
   0,

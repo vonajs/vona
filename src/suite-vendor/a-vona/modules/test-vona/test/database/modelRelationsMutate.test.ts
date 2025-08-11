@@ -331,6 +331,8 @@ describe('modelRelationsMutate.test.ts', () => {
         id: children[0].children![0].id,
       });
       assert.equal(categoryChain?.parent?.id, children[0].id);
+      assert.equal(categoryChain?.parent?.parent?.id, categoryTree.id);
+      assert.equal(categoryChain?.parent?.parent?.parent, undefined);
       // delete: categoryTree
       const items = await scopeTest.model.category.select({
         where: {

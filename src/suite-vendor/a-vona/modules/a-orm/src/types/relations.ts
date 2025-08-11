@@ -1,5 +1,6 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
+import type { TypeDepthPrev, TypeDepthPrevMax } from './depth.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from './onion/model.ts';
 import type { TypeModelAggrRelationResultAggrs, TypeUtilGetAggrsFromRelationAndIncludeWrapper } from './relationsAggr.ts';
 import type { TypeModelGroupRelationResultGroups, TypeUtilGetGroupsFromRelationAndIncludeWrapper } from './relationsGroup.ts';
@@ -75,7 +76,11 @@ export type TypeUtilGetModelEntityMeta<Model extends BeanModelMeta | undefined> 
 export type TypeUtilGetModelOnionName<Model extends BeanModelMeta | undefined> =
   Model extends BeanModelMeta ? Model['$onionName'] : undefined;
 
-export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} | undefined | unknown> =
+export type TypeUtilGetRelationEntityByType<
+  Relation,
+  IncludeWrapper extends {} | undefined | unknown,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
+> =
   TypeUtilGetEntityByType<
     TypeUtilGetRelationEntity<Relation>,
     TypeUtilGetRelationType<Relation>,
@@ -83,7 +88,8 @@ export type TypeUtilGetRelationEntityByType<Relation, IncludeWrapper extends {} 
     IncludeWrapper,
     TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
     TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
-    TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
+    TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
+    Depth
   >;
 
 export type TypeUtilGetEntityByType<
@@ -94,6 +100,7 @@ export type TypeUtilGetEntityByType<
   Columns,
   Aggrs,
   Groups,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > =
   TYPE extends 'hasMany' | 'belongsToMany' ?
     Groups extends string | string[] ?
@@ -101,7 +108,10 @@ export type TypeUtilGetEntityByType<
         (Aggrs extends {} ?
       TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> | undefined :
           Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>>) :
-    TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns> | undefined;
+      ([Depth] extends [never] ?
+        undefined :
+          (TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, undefined, undefined, TypeDepthPrev[Depth]> | undefined)
+      );
 
 export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs } ? Aggrs : undefined;
 export type TypeUtilGetParamsGroups<TParams> = TParams extends { groups?: infer Groups } ? Groups : undefined; // not use Groups extends string |string[]
@@ -124,49 +134,63 @@ export type TypeModelRelationResult<
   TColumns = undefined,
   Aggrs = undefined,
   Groups = undefined,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > =
   Groups extends string | string[] ?
     TypeModelGroupRelationResultGroups<TRecord, Aggrs, Groups, TColumns> :
     Aggrs extends {} ?
       TypeModelAggrRelationResultAggrs<Aggrs> :
-      TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns>;
+      TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns, Depth>;
 
-export type TypeModelRelationResult_Normal<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation, TColumns = undefined> =
+export type TypeModelRelationResult_Normal<
+  TRecord,
+  TModel extends BeanModelMeta | undefined,
+  TOptionsRelation,
+  TColumns = undefined,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
+> =
   TypeUtilEntitySelector<
     TRecord,
     TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
   > &
   (TModel extends BeanModelMeta ?
       (
-        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>> &
-        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>>>
+        OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>, Depth>> &
+        OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>, Depth>>
       ) : {});
 
-export type TypeModelRelationResultMergeInclude<TModelOptions extends IDecoratorModelOptions, TInclude extends {} | undefined | unknown> = {
+export type TypeModelRelationResultMergeInclude<
+  TModelOptions extends IDecoratorModelOptions,
+  TInclude extends {} | undefined | unknown,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
+> = {
   [RelationName in (keyof TModelOptions['relations'])]:
   TInclude extends {} ?
     TInclude[RelationName] extends {} | boolean ?
-      TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName]> :
-      TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]> :
-    TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName]>;
+      TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName], Depth> :
+      TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName], Depth> :
+    TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName], Depth>;
 };
 
-export type TypeModelRelationResultMergeWith<TWith extends {} | undefined | unknown> =
+export type TypeModelRelationResultMergeWith<
+  TWith extends {} | undefined | unknown,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
+> =
   TWith extends {} ?
-      { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithRelation<TWith[RelationName]> }
+      { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithRelation<TWith[RelationName], Depth> }
     : {};
 
-export type TypeModelRelationResultMergeAutoload<Relation> =
-  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined> : never;
+export type TypeModelRelationResultMergeAutoload<Relation, Depth extends TypeDepthPrev[number] = TypeDepthPrevMax> =
+  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined, Depth> : never;
 
-export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper> =
+export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper, Depth extends TypeDepthPrev[number] = TypeDepthPrevMax> =
   IncludeWrapper extends false ? never :
   IncludeWrapper extends true ?
-    TypeUtilGetRelationEntityByType<Relation, undefined> :
-    IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper> : never;
+    TypeUtilGetRelationEntityByType<Relation, undefined, Depth> :
+    IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper, Depth> : never;
 
-export type TypeModelRelationResultMergeWithRelation<WithRelation> =
+export type TypeModelRelationResultMergeWithRelation<WithRelation, Depth extends TypeDepthPrev[number] = TypeDepthPrevMax> =
   WithRelation extends false ? never :
   WithRelation extends true ?
     never :
-    WithRelation extends {} ? TypeUtilGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
+    WithRelation extends {} ? TypeUtilGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>, Depth> : never;
