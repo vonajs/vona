@@ -74,7 +74,7 @@ To further achieve out-of-box functionality, Vona provides several built-in env 
 | ------------- | ----------------- |
 | META_MODE     | mode              |
 | META_FLAVOR   | flavor            |
-| NODE_ENV      | equal `META_MODE` |
+| NODE_ENV      | `test`/`development`/`production` |
 
 ### App
 

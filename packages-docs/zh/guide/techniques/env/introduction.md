@@ -72,7 +72,7 @@ $ npm run build:docker
 | ------------- | ------------- |
 | META_MODE     | mode          |
 | META_FLAVOR   | flavor        |
-| NODE_ENV      | 等于META_MODE |
+| NODE_ENV      | `test`/`development`/`production` |
 
 ### 应用
 
