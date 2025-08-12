@@ -105,16 +105,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: 'Validation',
-          base: '/guide/techniques/validation/',
-          link: 'introduction',
-        },
-        {
-          text: 'Swagger/Openapi',
-          base: '/guide/techniques/openapi/',
-          link: 'introduction',
-        },
-        {
           text: 'Env',
           base: '/guide/techniques/env/',
           link: 'introduction',
@@ -122,6 +112,16 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Config',
           base: '/guide/techniques/config/',
+          link: 'introduction',
+        },
+        {
+          text: 'Validation',
+          base: '/guide/techniques/validation/',
+          link: 'introduction',
+        },
+        {
+          text: 'Swagger/Openapi',
+          base: '/guide/techniques/openapi/',
           link: 'introduction',
         },
       ],

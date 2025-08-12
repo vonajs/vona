@@ -105,16 +105,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: '参数校验',
-          base: '/zh/guide/techniques/validation/',
-          link: 'introduction',
-        },
-        {
-          text: 'Swagger/Openapi',
-          base: '/zh/guide/techniques/openapi/',
-          link: 'introduction',
-        },
-        {
           text: 'Env环境变量',
           base: '/zh/guide/techniques/env/',
           link: 'introduction',
@@ -122,6 +112,16 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Config配置',
           base: '/zh/guide/techniques/config/',
+          link: 'introduction',
+        },
+        {
+          text: '参数校验',
+          base: '/zh/guide/techniques/validation/',
+          link: 'introduction',
+        },
+        {
+          text: 'Swagger/Openapi',
+          base: '/zh/guide/techniques/openapi/',
           link: 'introduction',
         },
       ],
