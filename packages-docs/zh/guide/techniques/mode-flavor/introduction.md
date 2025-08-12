@@ -8,9 +8,9 @@ Vona 基于`多维变量`加载 Env 环境变量和 Config 配置，从而提供
 
 Vona 提供了三个运行环境：
 
-* test：测试环境
-* dev：开发环境
-* prod：生成环境
+* `test`：测试环境
+* `dev`：开发环境
+* `prod`：生成环境
 
 ### 1. 启用运行环境
 
@@ -66,9 +66,9 @@ app.meta.isProd
 
 为了开箱即用，Vona 提供了几个内置 Flavor：
 
-* normal：默认的 Flavor
-* docker：用于 docker 环境
-* ci：用于 ci 环境
+* `normal`：默认的 Flavor
+* `docker`：用于 docker 环境
+* `ci`：用于 ci 环境
 
 ### 2. 启用Flavor
 
