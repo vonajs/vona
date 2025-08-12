@@ -100,6 +100,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Techniques',
       items: [
         {
+          text: 'Runtime Environments & Flavor',
+          base: '/guide/techniques/mode-flavor/',
+          link: 'introduction',
+        },
+        {
           text: 'Validation',
           base: '/guide/techniques/validation/',
           link: 'introduction',

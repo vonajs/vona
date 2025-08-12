@@ -59,7 +59,7 @@ export class ServiceDatabase extends BeanBase {
     let databaseName = client.getDatabaseName();
     const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
     // dev/debug db
-    if (this.app.meta.isLocal) {
+    if (this.app.meta.isDev) {
       // if enable testDatabase
       const enableTestDatabase = this.configDatabase.testDatabase;
       // check

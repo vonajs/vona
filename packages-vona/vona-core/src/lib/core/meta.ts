@@ -21,7 +21,7 @@ export class AppMeta extends BeanSimple {
   ctxCounter: CtxCounter;
   isProd: boolean;
   isTest: boolean;
-  isLocal: boolean;
+  isDev: boolean;
   error: ErrorClass;
   logger: AppLogger;
   locale: AppLocale;
@@ -84,7 +84,7 @@ export class AppMeta extends BeanSimple {
     const mode = this.app.config.meta.mode;
     this.isProd = mode === 'prod';
     this.isTest = mode === 'test';
-    this.isLocal = mode === 'dev';
+    this.isDev = mode === 'dev';
   }
 
   async waitAppStarted() {

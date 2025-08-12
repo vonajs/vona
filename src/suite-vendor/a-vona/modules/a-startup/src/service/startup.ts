@@ -32,7 +32,7 @@ export class ServiceStartup extends BeanBase {
     }
 
     // version init : force: should be false
-    if (this.app.meta.isTest || this.app.meta.isLocal) {
+    if (this.app.meta.isTest || this.app.meta.isDev) {
       const instanceName = '';
       await this.bean.executor.newCtx(
         async () => {

@@ -44,7 +44,7 @@ export class ControllerSwagger extends BeanBase {
   async index(@Arg.query('version', v.default('V31')) version: string): Promise<string> {
     // signin
     let accessToken = '';
-    if (this.app.meta.isLocal || this.app.meta.isTest) {
+    if (this.app.meta.isDev || this.app.meta.isTest) {
       const jwt = await this.bean.passport.signinSystem('swagger', '-2');
       accessToken = jwt.accessToken;
     }

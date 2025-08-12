@@ -100,6 +100,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '技术',
       items: [
         {
+          text: '运行环境与Flavor',
+          base: '/zh/guide/techniques/mode-flavor/',
+          link: 'introduction',
+        },
+        {
           text: '参数校验',
           base: '/zh/guide/techniques/validation/',
           link: 'introduction',
