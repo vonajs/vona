@@ -50,7 +50,7 @@ app.config.meta.mode === 'dev'
 app.config.meta.mode === 'prod'
 ```
 
-简化写法
+* 简化写法
 
 ``` typescript
 app.meta.isTest

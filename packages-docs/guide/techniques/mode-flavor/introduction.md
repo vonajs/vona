@@ -22,6 +22,7 @@ $ npm run test
 $ npm run cov
 $ npm run db:reset
 # dev
+$ npm run dev
 $ npm run dev:one
 # prod
 $ npm run start
@@ -31,9 +32,9 @@ $ npm run start:docker
 
 ### 2. How to Determine the Current Runtime Environment
 
-* Determining with Env
+* Determining with `Env`
 
-Using Env to determine the current runtime environment supports tree-shaking during builds. Capabilities
+Using Env to determine the current runtime environment supports `tree-shaking` during builds
 
 ``` typescript
 process.env.META_MODE === 'test'
@@ -41,7 +42,7 @@ process.env.META_MODE === 'dev'
 process.env.META_MODE === 'prod'
 ```
 
-* Determined by Config
+* Determined by `Config`
 
 ``` typescript
 app.config.meta.mode === 'test'
@@ -49,7 +50,7 @@ app.config.meta.mode === 'dev'
 app.config.meta.mode === 'prod'
 ```
 
-Simplified Notation
+* Simplified Notation
 
 ``` typescript
 app.meta.isTest
@@ -59,11 +60,11 @@ app.meta.isProd
 
 ## Flavor
 
-For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Vona specifically provides a Flavor mechanism. The combination of runtime environments and flavors allows us to conveniently define configuration information for various scenarios.
+For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Vona specifically provides a `Flavor` mechanism. The combination of `runtime environments` and `flavors` allows us to conveniently define configuration information for various scenarios
 
 ### 1. Built-in Flavors
 
-For out-of-the-box use, Vona provides several built-in flavors:
+For out-of-the-box, Vona provides several built-in flavors:
 
 * `normal`: The default flavor
 * `docker`: For use in a Docker environment
@@ -71,7 +72,7 @@ For out-of-the-box use, Vona provides several built-in flavors:
 
 ### 2. Enabling a Flavor
 
-Enabling the corresponding flavor by passing command parameters
+Enabling the corresponding flavor by passing the command parameter: `--flavor`
 
 ``` bash
 # normal
@@ -85,9 +86,9 @@ $ npm run build -- --flavor=ci
 
 ### 3. How to Determine the Current Flavor
 
-* Determining via Env
+* Determining via `Env`
 
-Using Env to determine the current flavor supports tree-shaking during builds.
+Using Env to determine the current flavor supports tree-shaking during builds
 
 ``` typescript
 process.env.META_FLAVOR === 'normal'
@@ -95,7 +96,7 @@ process.env.META_FLAVOR === 'docker'
 process.env.META_FLAVOR === 'ci'
 ```
 
-* Determine via Config
+* Determine via `Config`
 
 ``` typescript
 app.config.meta.flavor === 'normal'
@@ -107,9 +108,9 @@ app.config.meta.flavor === 'ci'
 
 You can create a flavor based on any business need, such as customer, project, organization, etc.
 
-For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A.
+For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A
 
-* Enabling a Flavor
+* Enabling the Flavor
 
 ``` bash
 $ npm run dev -- --flavor=customA
@@ -124,12 +125,12 @@ app.config.meta.flavor === 'customA'
 
 ### 5. Add Flavor Type Definition
 
-You can add a Flavor type definition to provide type hints for Flavor-determining code.
+You can add a Flavor type definition to provide type hints for Flavor-determining code
 
 ``` typescript
 declare module '@cabloy/module-info' {
-export interface VonaMetaFlavorExtend {
-customA: never;
-}
+  export interface VonaMetaFlavorExtend {
+    customA: never;
+  }
 }
 ```
