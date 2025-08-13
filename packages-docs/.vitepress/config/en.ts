@@ -115,6 +115,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'Multi-instance/Multi-tenancy',
+          base: '/guide/techniques/instance/',
+          link: 'introduction',
+        },
+        {
           text: 'Validation',
           base: '/guide/techniques/validation/',
           link: 'introduction',

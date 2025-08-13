@@ -115,6 +115,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: '多实例/多租户',
+          base: '/zh/guide/techniques/instance/',
+          link: 'introduction',
+        },
+        {
           text: '参数校验',
           base: '/zh/guide/techniques/validation/',
           link: 'introduction',

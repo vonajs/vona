@@ -125,7 +125,7 @@ class ServiceStudent {
 
 ### 2. builderSelect
 
-The `builderSelect` method also obtains an instance of the knex query builder. Unlike `builder`, `builderSelect` supports `soft deletion` and `multi-instance/multi-tenant`
+The `builderSelect` method also obtains an instance of the knex query builder. Unlike `builder`, `builderSelect` supports `soft deletion` and `multi-instance/multi-tenancy`
 
 ``` typescript
 class ServiceStudent {
@@ -162,7 +162,7 @@ class ServiceStudent {
 |entity|Entity corresponding to model|
 |table|Table name corresponding to model |
 |disableDeleted|Whether to disable soft deletion, the default is false|
-|disableInstance|Whether to disable multi-instance/multi-tenant, the default is false|
+|disableInstance|Whether to disable multi-instance/multi-tenancy, the default is false|
 |disableCreateTime|Whether to disable create time. The default value is false, and the system automatically sets the create time for new data|
 |disableUpdateTime|Whether to disable update time. The default value is false, and the system automatically sets the update time for the data to be modified|
 |softDeletionPrune|Whether to automatically clean up soft deleted data|
@@ -186,7 +186,7 @@ config.onions = {
   model: {
     'demo-student:student': {
       disableDeleted: true,   // disable soft deletion
-      disableInstance: true,  // disable multi-instance/multi-tenant
+      disableInstance: true,  // disable multi-instance/multi-tenancy
       client: 'mysql',    // use datasource：mysql
       cache: false,    // disable cache
     },
@@ -208,11 +208,11 @@ class ModelOrder {}
 - ctx: can dynamically generate table name based on the context of the current request
 - defaultTable: default table name
 
-## Soft deletion, multi-instance/multi-tenant
+## Soft deletion, multi-instance/multi-tenancy
 
 Model automatically enables soft deletion by default. When data deleting, it is not physically deleted, but the value of the field `deleted` is set to `true`
 
-Model supports multi-instance/multi-tenant by default. When performing CRUD operations on data, the instance id is automatically obtained from the Request context and passed into the sql statement
+Model supports multi-instance/multi-tenancy by default. When performing CRUD operations on data, the instance id is automatically obtained from the Request context and passed into the sql statement
 
 For example, execute `model.student.select()`, then the generated sql is as follows:
 
