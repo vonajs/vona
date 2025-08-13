@@ -1,4 +1,5 @@
 export default {
+  Name: '名称',
   User: '用户',
   UserId: '用户Id',
   Test: '测试',
@@ -7,4 +8,10 @@ export default {
   TestApples_0: '没有苹果',
   TestNameApples_: '%s有%d个苹果',
   TestNameApples_0_1: '%s没有苹果',
+  Order: '订单',
+  OrderNo: '订单号',
+  Remark: '备注',
+  Price: '单价',
+  Quantity: '数量',
+  Amount: '金额',
 };

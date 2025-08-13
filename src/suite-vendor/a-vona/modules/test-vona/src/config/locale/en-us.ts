@@ -1,4 +1,5 @@
 export default {
+  Name: 'Name',
   User: 'User',
   UserId: 'User Id',
   Test: 'Test',
@@ -9,4 +10,10 @@ export default {
   TestNameApples_: '%s has %d apples',
   TestNameApples_0_1: '%s has no apples',
   TestNameApples_1_1: '%s has one apple',
+  Order: 'Order',
+  OrderNo: 'Order No',
+  Remark: 'Remark',
+  Price: 'Price',
+  Quantity: 'Quantity',
+  Amount: 'Amount',
 };

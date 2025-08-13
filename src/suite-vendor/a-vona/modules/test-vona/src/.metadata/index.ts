@@ -65,15 +65,19 @@ declare module 'vona-module-test-vona' {
 /** aopMethod: end */
 /** entity: begin */
 export * from '../entity/category.ts';
+export * from '../entity/order.ts';
 export * from '../entity/post.ts';
 export * from '../entity/postContent.ts';
+export * from '../entity/product.ts';
 export * from '../entity/role.ts';
 export * from '../entity/roleUser.ts';
 export * from '../entity/test.ts';
 export * from '../entity/user.ts';
 import type { IEntityOptionsCategory } from '../entity/category.ts';
+import type { IEntityOptionsOrder } from '../entity/order.ts';
 import type { IEntityOptionsPost } from '../entity/post.ts';
 import type { IEntityOptionsPostContent } from '../entity/postContent.ts';
+import type { IEntityOptionsProduct } from '../entity/product.ts';
 import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
@@ -83,8 +87,10 @@ declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
       'test-vona:category': IEntityOptionsCategory;
+'test-vona:order': IEntityOptionsOrder;
 'test-vona:post': IEntityOptionsPost;
 'test-vona:postContent': IEntityOptionsPostContent;
+'test-vona:product': IEntityOptionsProduct;
 'test-vona:role': IEntityOptionsRole;
 'test-vona:roleUser': IEntityOptionsRoleUser;
 'test-vona:test': IEntityOptionsTest;
@@ -99,16 +105,20 @@ declare module 'vona-module-test-vona' {
 /** entity: end */
 /** entity: begin */
 import type { EntityCategory } from '../entity/category.ts';
+import type { EntityOrder } from '../entity/order.ts';
 import type { EntityPost } from '../entity/post.ts';
 import type { EntityPostContent } from '../entity/postContent.ts';
+import type { EntityProduct } from '../entity/product.ts';
 import type { EntityRole } from '../entity/role.ts';
 import type { EntityRoleUser } from '../entity/roleUser.ts';
 import type { EntityTest } from '../entity/test.ts';
 import type { EntityUser } from '../entity/user.ts';
 export interface IModuleEntity {
   'category': EntityCategoryMeta;
+'order': EntityOrderMeta;
 'post': EntityPostMeta;
 'postContent': EntityPostContentMeta;
+'product': EntityProductMeta;
 'role': EntityRoleMeta;
 'roleUser': EntityRoleUserMeta;
 'test': EntityTestMeta;
@@ -117,15 +127,19 @@ export interface IModuleEntity {
 /** entity: end */
 /** entity: begin */
 export type EntityCategoryTableName = 'testVonaCategory';
+export type EntityOrderTableName = 'testVonaOrder';
 export type EntityPostTableName = 'testVonaPost';
 export type EntityPostContentTableName = 'testVonaPostContent';
+export type EntityProductTableName = 'testVonaProduct';
 export type EntityRoleTableName = 'testVonaRole';
 export type EntityRoleUserTableName = 'testVonaRoleUser';
 export type EntityTestTableName = 'testVonaTest';
 export type EntityUserTableName = 'testVonaUser';
 export type EntityCategoryMeta=TypeEntityMeta<EntityCategory,EntityCategoryTableName>;
+export type EntityOrderMeta=TypeEntityMeta<EntityOrder,EntityOrderTableName>;
 export type EntityPostMeta=TypeEntityMeta<EntityPost,EntityPostTableName>;
 export type EntityPostContentMeta=TypeEntityMeta<EntityPostContent,EntityPostContentTableName>;
+export type EntityProductMeta=TypeEntityMeta<EntityProduct,EntityProductTableName>;
 export type EntityRoleMeta=TypeEntityMeta<EntityRole,EntityRoleTableName>;
 export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTableName>;
 export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
@@ -133,8 +147,10 @@ export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
     'testVonaCategory': never;
+'testVonaOrder': never;
 'testVonaPost': never;
 'testVonaPostContent': never;
+'testVonaProduct': never;
 'testVonaRole': never;
 'testVonaRoleUser': never;
 'testVonaTest': never;
@@ -147,12 +163,20 @@ declare module 'vona-module-test-vona' {
       fields?: TypeEntityOptionsFields<EntityCategory, IEntityOptionsCategory[TypeSymbolKeyFieldsMore]>;
     }
 
+    export interface IEntityOptionsOrder {
+      fields?: TypeEntityOptionsFields<EntityOrder, IEntityOptionsOrder[TypeSymbolKeyFieldsMore]>;
+    }
+
     export interface IEntityOptionsPost {
       fields?: TypeEntityOptionsFields<EntityPost, IEntityOptionsPost[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsPostContent {
       fields?: TypeEntityOptionsFields<EntityPostContent, IEntityOptionsPostContent[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IEntityOptionsProduct {
+      fields?: TypeEntityOptionsFields<EntityProduct, IEntityOptionsProduct[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IEntityOptionsRole {
@@ -175,8 +199,11 @@ declare module 'vona-module-test-vona' {
 /** model: begin */
 export * from '../model/category.ts';
 export * from '../model/categoryChain.ts';
+export * from '../model/order.ts';
+export * from '../model/orderStats.ts';
 export * from '../model/post.ts';
 export * from '../model/postContent.ts';
+export * from '../model/product.ts';
 export * from '../model/role.ts';
 export * from '../model/roleUser.ts';
 export * from '../model/test.ts';
@@ -186,8 +213,11 @@ export * from '../model/userStats.ts';
 export * from '../model/userStatsGroup.ts';
 import type { IModelOptionsCategory } from '../model/category.ts';
 import type { IModelOptionsCategoryChain } from '../model/categoryChain.ts';
+import type { IModelOptionsOrder } from '../model/order.ts';
+import type { IModelOptionsOrderStats } from '../model/orderStats.ts';
 import type { IModelOptionsPost } from '../model/post.ts';
 import type { IModelOptionsPostContent } from '../model/postContent.ts';
+import type { IModelOptionsProduct } from '../model/product.ts';
 import type { IModelOptionsRole } from '../model/role.ts';
 import type { IModelOptionsRoleUser } from '../model/roleUser.ts';
 import type { IModelOptionsTest } from '../model/test.ts';
@@ -201,8 +231,11 @@ declare module 'vona-module-a-orm' {
     export interface IModelRecord {
       'test-vona:category': IModelOptionsCategory;
 'test-vona:categoryChain': IModelOptionsCategoryChain;
+'test-vona:order': IModelOptionsOrder;
+'test-vona:orderStats': IModelOptionsOrderStats;
 'test-vona:post': IModelOptionsPost;
 'test-vona:postContent': IModelOptionsPostContent;
+'test-vona:product': IModelOptionsProduct;
 'test-vona:role': IModelOptionsRole;
 'test-vona:roleUser': IModelOptionsRoleUser;
 'test-vona:test': IModelOptionsTest;
@@ -236,6 +269,26 @@ declare module 'vona-module-test-vona' {
             get $onionName(): 'test-vona:categoryChain';
           }
 
+        export interface ModelOrder {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ModelOrder {
+            get $beanFullName(): 'test-vona.model.order';
+            get $onionName(): 'test-vona:order';
+          }
+
+        export interface ModelOrderStats {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ModelOrderStats {
+            get $beanFullName(): 'test-vona.model.orderStats';
+            get $onionName(): 'test-vona:orderStats';
+          }
+
         export interface ModelPost {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -254,6 +307,16 @@ declare module 'vona-module-test-vona' {
           export interface ModelPostContent {
             get $beanFullName(): 'test-vona.model.postContent';
             get $onionName(): 'test-vona:postContent';
+          }
+
+        export interface ModelProduct {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ModelProduct {
+            get $beanFullName(): 'test-vona.model.product';
+            get $onionName(): 'test-vona:product';
           }
 
         export interface ModelRole {
@@ -330,8 +393,11 @@ declare module 'vona-module-test-vona' {
 /** model: begin */
 import type { ModelCategory } from '../model/category.ts';
 import type { ModelCategoryChain } from '../model/categoryChain.ts';
+import type { ModelOrder } from '../model/order.ts';
+import type { ModelOrderStats } from '../model/orderStats.ts';
 import type { ModelPost } from '../model/post.ts';
 import type { ModelPostContent } from '../model/postContent.ts';
+import type { ModelProduct } from '../model/product.ts';
 import type { ModelRole } from '../model/role.ts';
 import type { ModelRoleUser } from '../model/roleUser.ts';
 import type { ModelTest } from '../model/test.ts';
@@ -342,8 +408,11 @@ import type { ModelUserStatsGroup } from '../model/userStatsGroup.ts';
 export interface IModuleModel {
   'category': ModelCategory;
 'categoryChain': ModelCategoryChain;
+'order': ModelOrder;
+'orderStats': ModelOrderStats;
 'post': ModelPost;
 'postContent': ModelPostContent;
+'product': ModelProduct;
 'role': ModelRole;
 'roleUser': ModelRoleUser;
 'test': ModelTest;
@@ -365,6 +434,18 @@ declare module 'vona-module-test-vona' {
 export interface IModelOptionsCategoryChain {
         relations: {
           parent: IModelRelationBelongsTo<ModelCategoryChain, ModelCategoryChain, true, 'id'|'name'|'categoryIdParent'>;
+        };
+      }
+export interface IModelOptionsOrder {
+        relations: {
+          user: IModelRelationBelongsTo<ModelOrder, ModelUser, true, 'id'|'name'>;
+products: IModelRelationHasMany<ModelProduct, true, 'id'|'name'|'price'|'quantity'|'amount',undefined,undefined,undefined>;
+        };
+      }
+export interface IModelOptionsOrderStats {
+        relations: {
+          productStats: IModelRelationHasMany<ModelProduct, true, '*',undefined,{ count?: '*' | Array<'*'>;sum?: 'amount' | Array<'amount'> },undefined>;
+productsGroups: IModelRelationHasMany<ModelProduct, false, undefined,undefined,{ count?: '*' | Array<'*'>;sum?: 'amount' | Array<'amount'> },'id' | Array<'id'>>;
         };
       }
 export interface IModelOptionsPost {
@@ -439,6 +520,44 @@ export interface ModelCategoryChain {
       aggregate<T extends IModelSelectAggrParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityCategory, T>[]>;
     }
+export interface ModelOrder {
+      [SymbolKeyEntity]: EntityOrder;
+      [SymbolKeyEntityMeta]: EntityOrderMeta;
+      [SymbolKeyModelOptions]: IModelOptionsOrder;
+      get<T extends IModelGetOptions<EntityOrder,ModelOrder>>(where: TypeModelWhere<EntityOrder>, options?: T): Promise<TypeModelRelationResult<EntityOrder, ModelOrder, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityOrder,ModelOrder>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityOrder, ModelOrder, T>[]>;
+      select<T extends IModelSelectParams<EntityOrder,ModelOrder,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityOrder, ModelOrder, T>[]>;
+      insert<T extends IModelInsertOptions<EntityOrder,ModelOrder>>(data?: TypeModelMutateRelationData<EntityOrder,ModelOrder, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityOrder,ModelOrder, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityOrder,ModelOrder>>(items: TypeModelMutateRelationData<EntityOrder,ModelOrder, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityOrder,ModelOrder, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityOrder,ModelOrder>>(data: TypeModelMutateRelationData<EntityOrder,ModelOrder, T>, options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrder, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityOrder,ModelOrder>>(items: TypeModelMutateRelationData<EntityOrder,ModelOrder, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrder, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityOrder,ModelOrder>>(where?: TypeModelWhere<EntityOrder>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityOrder,ModelOrder>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityOrder,ModelOrder>>(data?: TypeModelMutateRelationData<EntityOrder,ModelOrder, T>, options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrder, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityOrder,ModelOrder>>(items: TypeModelMutateRelationData<EntityOrder,ModelOrder, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrder, T>[]>;
+      count<T extends IModelSelectCountParams<EntityOrder,ModelOrder,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityOrder,ModelOrder,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityOrder,ModelOrder,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityOrder, T>[]>;
+    }
+export interface ModelOrderStats {
+      [SymbolKeyEntity]: EntityOrder;
+      [SymbolKeyEntityMeta]: EntityOrderMeta;
+      [SymbolKeyModelOptions]: IModelOptionsOrderStats;
+      get<T extends IModelGetOptions<EntityOrder,ModelOrderStats>>(where: TypeModelWhere<EntityOrder>, options?: T): Promise<TypeModelRelationResult<EntityOrder, ModelOrderStats, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityOrder,ModelOrderStats>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityOrder, ModelOrderStats, T>[]>;
+      select<T extends IModelSelectParams<EntityOrder,ModelOrderStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityOrder, ModelOrderStats, T>[]>;
+      insert<T extends IModelInsertOptions<EntityOrder,ModelOrderStats>>(data?: TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityOrder,ModelOrderStats>>(items: TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityOrder,ModelOrderStats>>(data: TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityOrder,ModelOrderStats>>(items: TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityOrder,ModelOrderStats>>(where?: TypeModelWhere<EntityOrder>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityOrder,ModelOrderStats>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityOrder,ModelOrderStats>>(data?: TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>, options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityOrder,ModelOrderStats>>(items: TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityOrder,ModelOrderStats, T>[]>;
+      count<T extends IModelSelectCountParams<EntityOrder,ModelOrderStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityOrder,ModelOrderStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityOrder,ModelOrderStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityOrder, T>[]>;
+    }
 export interface ModelPost {
       [SymbolKeyEntity]: EntityPost;
       [SymbolKeyEntityMeta]: EntityPostMeta;
@@ -476,6 +595,25 @@ export interface ModelPostContent {
       count<T extends IModelSelectCountParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
       aggregate<T extends IModelSelectAggrParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityPostContent,ModelPostContent,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityPostContent, T>[]>;
+    }
+export interface ModelProduct {
+      [SymbolKeyEntity]: EntityProduct;
+      [SymbolKeyEntityMeta]: EntityProductMeta;
+      [SymbolKeyModelOptions]: IModelOptionsProduct;
+      get<T extends IModelGetOptions<EntityProduct,ModelProduct>>(where: TypeModelWhere<EntityProduct>, options?: T): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityProduct,ModelProduct>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T>[]>;
+      select<T extends IModelSelectParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T>[]>;
+      insert<T extends IModelInsertOptions<EntityProduct,ModelProduct>>(data?: TypeModelMutateRelationData<EntityProduct,ModelProduct, T>, options?: T): Promise<Required<TypeModelMutateRelationData<EntityProduct,ModelProduct, T>>>;
+      insertBulk<T extends IModelInsertOptions<EntityProduct,ModelProduct>>(items: TypeModelMutateRelationData<EntityProduct,ModelProduct, T>[], options?: T): Promise<Required<TypeModelMutateRelationData<EntityProduct,ModelProduct, T>>[]>;
+      update<T extends IModelUpdateOptions<EntityProduct,ModelProduct>>(data: TypeModelMutateRelationData<EntityProduct,ModelProduct, T>, options?: T): Promise<TypeModelMutateRelationData<EntityProduct,ModelProduct, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityProduct,ModelProduct>>(items: TypeModelMutateRelationData<EntityProduct,ModelProduct, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityProduct,ModelProduct, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityProduct,ModelProduct>>(where?: TypeModelWhere<EntityProduct>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityProduct,ModelProduct>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityProduct,ModelProduct>>(data?: TypeModelMutateRelationData<EntityProduct,ModelProduct, T>, options?: T): Promise<TypeModelMutateRelationData<EntityProduct,ModelProduct, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityProduct,ModelProduct>>(items: TypeModelMutateRelationData<EntityProduct,ModelProduct, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityProduct,ModelProduct, T>[]>;
+      count<T extends IModelSelectCountParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityProduct, T>[]>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
@@ -615,8 +753,11 @@ declare module 'vona-module-a-orm' {
   export interface IModelClassRecord {
     'test-vona:category': ModelCategory;
 'test-vona:categoryChain': ModelCategoryChain;
+'test-vona:order': ModelOrder;
+'test-vona:orderStats': ModelOrderStats;
 'test-vona:post': ModelPost;
 'test-vona:postContent': ModelPostContent;
+'test-vona:product': ModelProduct;
 'test-vona:role': ModelRole;
 'test-vona:roleUser': ModelRoleUser;
 'test-vona:test': ModelTest;
@@ -1062,6 +1203,9 @@ export interface IModuleSummerCache {
 /** summerCache: end */
 /** dto: begin */
 export * from '../dto/categoryTree.ts';
+export * from '../dto/orderCreate.ts';
+export * from '../dto/orderResult.ts';
+export * from '../dto/orderUpdate.ts';
 export * from '../dto/postCreate.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
@@ -1070,6 +1214,9 @@ export * from '../dto/userCreate.ts';
 export * from '../dto/userLazy.ts';
 export * from '../dto/userUpdate.ts';
 import type { IDtoOptionsCategoryTree } from '../dto/categoryTree.ts';
+import type { IDtoOptionsOrderCreate } from '../dto/orderCreate.ts';
+import type { IDtoOptionsOrderResult } from '../dto/orderResult.ts';
+import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
@@ -1082,6 +1229,9 @@ declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'test-vona:categoryTree': IDtoOptionsCategoryTree;
+'test-vona:orderCreate': IDtoOptionsOrderCreate;
+'test-vona:orderResult': IDtoOptionsOrderResult;
+'test-vona:orderUpdate': IDtoOptionsOrderUpdate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
@@ -1099,6 +1249,9 @@ declare module 'vona-module-test-vona' {
 /** dto: end */
 /** dto: begin */
 import type { DtoCategoryTree } from '../dto/categoryTree.ts';
+import type { DtoOrderCreate } from '../dto/orderCreate.ts';
+import type { DtoOrderResult } from '../dto/orderResult.ts';
+import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
@@ -1110,6 +1263,18 @@ declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsCategoryTree {
       fields?: TypeEntityOptionsFields<DtoCategoryTree, IDtoOptionsCategoryTree[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsOrderCreate {
+      fields?: TypeEntityOptionsFields<DtoOrderCreate, IDtoOptionsOrderCreate[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsOrderResult {
+      fields?: TypeEntityOptionsFields<DtoOrderResult, IDtoOptionsOrderResult[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsOrderUpdate {
+      fields?: TypeEntityOptionsFields<DtoOrderUpdate, IDtoOptionsOrderUpdate[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPostCreate {
