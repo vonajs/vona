@@ -9,6 +9,7 @@ Vona 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需�
 在测试环境和开发环境中，系统默认分配了一个缺省实例：
 
 `src/backend/config/config/config.test.ts`
+
 `src/backend/config/config/config.dev.ts`
 
 ``` typescript
@@ -137,7 +138,7 @@ await this.scope.model.student.delete({ id: 1 });
 
 ``` typescript
 await this.scope.model.student.builder().where({
-  iid: this.ctx.instance.id
+  iid: this.ctx.instance.id,
   name: 'Tom',
 });
 ```
