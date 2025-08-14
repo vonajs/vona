@@ -1,6 +1,6 @@
 # 配置
 
-## Config配置
+## App Config配置
 
 我们可以在 App Config 中进行 ORM 配置：
 
@@ -84,6 +84,28 @@ export async function configDefault(app: VonaApplication): Promise<PowerPartial<
 * `clients.pg.client`：使用 Postgresql 方言`pg`
 * `clients.mysql.client`：使用 Mysql 方言`mysql2`
 * `base.pool`：通用的连接池配置
+
+为了方便配置，内置数据源从 env 环境变量获取配置参数。因此，对于内置数据源我们可以直接通过 env 来提供配置信息
+
+`env/.env`
+
+``` typescript
+# database
+
+DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+
+DATABASE_CLIENT_PG_HOST = 127.0.0.1
+DATABASE_CLIENT_PG_PORT = 5432
+DATABASE_CLIENT_PG_USER = postgres
+DATABASE_CLIENT_PG_PASSWORD = 
+DATABASE_CLIENT_PG_DATABASE = postgres
+
+DATABASE_CLIENT_MYSQL_HOST = 127.0.0.1
+DATABASE_CLIENT_MYSQL_PORT = 3306
+DATABASE_CLIENT_MYSQL_USER = root
+DATABASE_CLIENT_MYSQL_PASSWORD = 
+DATABASE_CLIENT_MYSQL_DATABASE = mysql
+```
 
 ## 添加新数据源
 
