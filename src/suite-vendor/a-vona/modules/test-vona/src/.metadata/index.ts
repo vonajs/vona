@@ -423,6 +423,28 @@ export interface IModuleModel {
 }
 /** model: end */
 /** model: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'test-vona.model.category': ModelCategory;
+'test-vona.model.categoryChain': ModelCategoryChain;
+'test-vona.model.order': ModelOrder;
+'test-vona.model.orderStats': ModelOrderStats;
+'test-vona.model.post': ModelPost;
+'test-vona.model.postContent': ModelPostContent;
+'test-vona.model.product': ModelProduct;
+'test-vona.model.role': ModelRole;
+'test-vona.model.roleUser': ModelRoleUser;
+'test-vona.model.test': ModelTest;
+'test-vona.model.testDynamicTable': ModelTestDynamicTable;
+'test-vona.model.user': ModelUser;
+'test-vona.model.userStats': ModelUserStats;
+'test-vona.model.userStatsGroup': ModelUserStatsGroup;
+  }
+}
+/** model: end */
+/** model: begin */
 import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-test-vona' {

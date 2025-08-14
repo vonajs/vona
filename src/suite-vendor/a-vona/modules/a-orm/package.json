@@ -28,6 +28,7 @@
         "optionsGlobalInterfaceName": "IDecoratorModelOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-orm",
         "scopeResource": true,
+        "beanGeneral": true,
         "boilerplate": "cli/model/boilerplate",
         "metadataCustom": "cli/model/metadata/generate.ts"
       },
