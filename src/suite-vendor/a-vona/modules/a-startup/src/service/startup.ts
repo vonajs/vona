@@ -51,7 +51,7 @@ export class ServiceStartup extends BeanBase {
       for (const instance of instances) {
         const instanceName = instance.name;
         // need not await
-        this.bean.executor.newCtx(
+        const res = this.bean.executor.newCtx(
           async () => {
             await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
           },
@@ -60,6 +60,9 @@ export class ServiceStartup extends BeanBase {
             instanceName,
           },
         );
+        if (this.app.config.server.listen.disable) {
+          await res;
+        }
       }
     }
 
