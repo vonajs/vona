@@ -106,19 +106,19 @@ DATABASE_CLIENT_MYSQL_PASSWORD =
 DATABASE_CLIENT_MYSQL_DATABASE = mysql
 ```
 
-## Add a New Data Source
+## Add a New Datasource
 
-If we want to add a new data source for the production environment, named `pgOrder`, using the database dialect `pg`, we can do the following:
+If we want to add a new datasource for the production environment, named `pgOrder`, using the database dialect `pg`, we can do the following:
 
 ### 1. Add Type Definitions
 
-Add type definitions for the new data source
+Add type definitions for the new datasource
 
 ``` typescript
 declare module 'vona-module-a-orm' {
-export interface IDatabaseClientRecord {
-pgOrder: never;
-}
+  export interface IDatabaseClientRecord {
+    pgOrder: never;
+  }
 }
 ```
 
@@ -129,24 +129,24 @@ pgOrder: never;
 ``` typescript
 // orm
 config.database = {
-clients: {
-pgOrder: {
-client: 'pg',
-connection: {
-host: '127.0.0.1',
-port: 5432,
-user: 'postgres',
-password: '',
-database: 'postgres',
-},
-},
-},
+  clients: {
+    pgOrder: {
+      client: 'pg',
+      connection: {
+        host: '127.0.0.1',
+        port: 5432,
+        user: 'postgres',
+        password: '',
+        database: 'postgres',
+      },
+    },
+  },
 };
 ```
 
-## How to Use a Data Source
+## How to Use Datasource
 
-### 1. Obtaining a Specified Data Source
+### 1. Obtaining a Specified Datasource
 
 ``` typescript
 const pg = app.bean.database.getClient('pg');
@@ -154,17 +154,17 @@ const mysql = app.bean.database.getClient('mysql');
 const pgOrder = app.bean.database.getClient('pgOrder');
 ```
 
-### 2. Obtaining the Default Data Source
+### 2. Obtaining the Default Datasource
 
-The default data source is determined by the `defaultClient` configuration option.
+The default datasource is determined by the `defaultClient` configuration option
 
 ``` typescript
 const clientDefault = app.bean.database.getClient('default');
 ```
 
-### 3. Obtaining the Knex Instance Corresponding to the Data Source
+### 3. Obtaining the Knex Instance Corresponding to the Datasource
 
-The system creates different Knex instances for different data sources. Use these Knex instances to operate the database.
+The system creates different Knex instances for different datasources. Use these Knex instances to operate the database
 
 ``` typescript
 const pg = app.bean.database.getClient('pg');
@@ -174,18 +174,18 @@ const clientDefault = app.bean.database.getClient('default');
 const items = clientDefault.db.connection.select('*').from('tableName');
 ```
 
-### 4. Getting the Current Data Source
+### 4. Obtaining the Current Datasource
 
-In real-world code, we might use any data source. We can use the following code to get the current data source in the context:
+In real-world code, we might use any datasource. We can use the following code to get the current datasource in the context:
 
 ``` typescript
 const current = app.bean.database.current;
 const items = current.connection.select('*').from('tableName');
 ```
 
-## Advanced Customization of the Default Data Source
+## Advanced Customization of the Default Datasource
 
-Let's first look at the type definition for the default data source:
+Let's first look at the type definition for the default datasource:
 
 ``` typescript
 export type TypeDefaultClientNameFn = (ctx: VonaContext) => keyof IDatabaseClientRecord;
@@ -198,17 +198,16 @@ defaultClient: TypeDefaultClientName;
 }
 ```
 
-As you can see, `defaultClient` can also be passed a custom function. We can use this custom function to determine which data source to use based on the request context:
+As you can see, `defaultClient` can also be passed a custom function. We can use this custom function to determine which datasource to use based on the request context:
 
 `src/backend/config/config/config.prod.ts`
 
 ``` typescript
 // orm
 config.database = {
-defaultClient: (ctx: VonaContext) => {
-if (ctx.headers.xxx === 'yyy') return 'pg';
-
-return 'mysql';
-},
+  defaultClient: (ctx: VonaContext) => {
+    if (ctx.headers.xxx === 'yyy') return 'pg';
+    return 'mysql';
+  },
 };
 ```
