@@ -71,8 +71,8 @@ config.modules = {
 系统按以下次序，依次判断当前实例名，当获取到实例名时则停止判断流程
 
 1. 如果提供了`getInstanceName`，则调用此函数
-2. 如果`headerField`不为空，则从 request header 中获取
-3. 如果`queryField`不为空，则从 request query 中获取
+2. 如果`queryField`不为空，则从 request query 中获取
+3. 如果`headerField`不为空，则从 request header 中获取
 4. 从域名中解析实例名
 
 ### 3. 如何从域名中解析实例名

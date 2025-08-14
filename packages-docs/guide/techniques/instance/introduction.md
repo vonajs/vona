@@ -71,8 +71,8 @@ config.modules = {
 The system determines the current instance name in the following order. The determination process stops when the instance name is obtained
 
 1. If `getInstanceName` is provided, this function is called
-2. If `headerField` is not empty, the instance name is obtained from the request header
-3. If `queryField` is not empty, the instance name is obtained from the request query
+2. If `queryField` is not empty, the instance name is obtained from the request query
+3. If `headerField` is not empty, the instance name is obtained from the request header
 4. Resolve the instance name from the domain name
 
 ### 3. How to resolve the instance name from the domain name
