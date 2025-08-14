@@ -26,9 +26,15 @@ export async function closeApp(terminate?: boolean) {
 }
 
 export async function createGeneralApp(projectPath: string, envRuntime?: Partial<NodeJS.ProcessEnv>) {
-  const testFile = path.join(projectPath, '.vona/app.ts');
-  const testInstance = await import(pathToHref(testFile));
-  return await testInstance.createSingleApp(envRuntime);
+  if (process.env.META_MODE === 'prod') {
+    const testFile = path.join(projectPath, `dist/${process.env.META_FLAVOR}/bootstrap.js`);
+    const testInstance = await import(pathToHref(testFile));
+    return await testInstance.appBootstrap;
+  } else {
+    const testFile = path.join(projectPath, '.vona/app.ts');
+    const testInstance = await import(pathToHref(testFile));
+    return await testInstance.createSingleApp(envRuntime);
+  }
 }
 
 // export async function reloadApp() {

@@ -7,6 +7,7 @@ import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
+    mode?: VonaMetaMode;
     flavor?: VonaMetaFlavor;
     retainRuntime?: boolean;
   }
@@ -24,7 +25,7 @@ export class CliBinDemo extends BeanCliBase {
 
   async _demo(projectPath: string) {
     const { argv } = this.context;
-    const mode: VonaMetaMode = 'dev';
+    const mode: VonaMetaMode = argv.mode || 'dev';
     const flavor: VonaMetaFlavor = argv.flavor || 'normal';
     const configMeta: VonaConfigMeta = { flavor, mode };
     if (!argv.retainRuntime || !fse.existsSync(path.join(projectPath, '.vona'))) {

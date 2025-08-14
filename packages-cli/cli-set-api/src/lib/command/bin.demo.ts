@@ -6,6 +6,10 @@ export default {
     usage: 'vona :bin:demo [index.ts] [--flavor=] [--retainRuntime=]',
   },
   options: {
+    mode: {
+      description: 'mode',
+      type: 'string',
+    },
     flavor: {
       description: 'flavor',
       type: 'string',
