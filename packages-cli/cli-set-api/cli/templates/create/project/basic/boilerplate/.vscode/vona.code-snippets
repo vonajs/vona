@@ -48,6 +48,18 @@
     ],
     "description": "aop.action"
   },
+  "record.flavor": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordflavor",
+    "body": [
+      "declare module '@cabloy/module-info' {",
+      "  export interface VonaMetaFlavorExtend {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.flavor"
+  },
   "record.loggerclient": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordloggerclient",
