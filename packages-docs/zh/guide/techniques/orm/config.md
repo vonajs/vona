@@ -183,3 +183,32 @@ const items = clientDefault.db.connection.select('*').from('tableName');
 const current = app.bean.database.current;
 const items = current.connection.select('*').from('tableName');
 ```
+
+## 默认数据源的高级定制
+
+我们先来看默认数据源的类型定义：
+
+``` typescript
+export type TypeDefaultClientNameFn = (ctx: VonaContext) => keyof IDatabaseClientRecord;
+
+export type TypeDefaultClientName = TypeDefaultClientNameFn | keyof IDatabaseClientRecord;
+
+export interface ConfigDatabase {
+  defaultClient: TypeDefaultClientName;
+  ...
+}
+```
+
+从中可以看到`defaultClient`还可以传入自定义函数。我们可以通过自定义函数根据请求的上下文自行决定使用哪个数据源：
+
+`src/backend/config/config/config.prod.ts`
+
+``` typescript
+// orm
+config.database = {
+  defaultClient: (ctx: VonaContext) => {
+    if (ctx.headers.xxx === 'yyy') return 'pg';
+    return 'mysql';
+  },
+};
+```
