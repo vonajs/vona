@@ -151,9 +151,9 @@ await this.scope.model.student.builderSelect().where({
 });
 ```
 
-### 4. Using Native SQL to Access the Database
+### 4. Using Raw SQL to Access the Database
 
-If you use `Native SQL` to access the database, you will need to add `Instance Id` yourself
+If you use `Raw SQL` to access the database, you will need to add `Instance Id` yourself
 
 ``` typescript
 await this.scope.model.student.query(
