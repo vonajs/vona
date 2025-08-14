@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-core",
   "type": "module",
-  "version": "5.0.51",
+  "version": "5.0.52",
   "title": "a-core",
   "vonaModule": {
     "dependencies": {},
@@ -107,7 +107,7 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.8.1",
     "typescript": "^5.9.2",
-    "vona-mock": "^6.0.42",
+    "vona-mock": "^6.0.43",
     "why-is-node-running": "^3.2.2"
   },
   "clean-package": {
