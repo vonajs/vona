@@ -88,7 +88,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "recorddatabaseclient",
     "body": [
-      "declare module 'vona-module-a-database' {",
+      "declare module 'vona-module-a-orm' {",
       "  export interface IDatabaseClientRecord {",
       "    $0: never;",
       "  }",
