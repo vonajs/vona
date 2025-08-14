@@ -23,7 +23,7 @@ export class ServiceInstance extends BeanBase {
 
   getConfigInstanceBase(instanceName: keyof IInstanceRecord) {
     const instances = this.app.config.instances || [{ instanceName: '', password: '' }];
-    return instances.find(item => item.instanceName === instanceName);
+    return instances.find(item => item.name === instanceName);
   }
 
   getConfig(instanceName?: keyof IInstanceRecord | undefined | null): VonaConfig | undefined {

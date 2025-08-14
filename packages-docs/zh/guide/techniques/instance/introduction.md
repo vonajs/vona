@@ -15,13 +15,13 @@ Vona 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需�
 ``` typescript
 // instances
 config.instances = [
-  { instanceName: '', password: '', title: '', config: {} },
+  { name: '', password: '', title: '', config: {} },
 ];
 ```
 
 |名称|说明|
 |--|--|
-|instanceName|实例名|
+|name|实例名|
 |password|实例中用户`admin`的初始密码，默认是`123456`|
 |title|网站标题|
 |config|实例的配置信息|
@@ -34,8 +34,8 @@ config.instances = [
 
 ``` typescript
 config.instances = [
-  { instanceName: '', password: '', title: '', config: {} },
-  { instanceName: 'vona', password: '', title: '', config: {} },
+  { name: '', password: '', title: '', config: {} },
+  { name: 'vona', password: '', title: '', config: {} },
 ];
 ```
 

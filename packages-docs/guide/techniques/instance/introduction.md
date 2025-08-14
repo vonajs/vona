@@ -15,13 +15,13 @@ In the test and development environments, a default instance is assigned by defa
 ``` typescript
 // instances
 config.instances = [
-  { instanceName: '', password: '', title: '', config: {} },
+  { name: '', password: '', title: '', config: {} },
 ];
 ```
 
 |Name|Description|
 |--|--|
-|instanceName|Instance name|
+|name|Instance name|
 |password|Initial password for the `admin` user in the instance, defaults to `123456`|
 |title|Website title|
 |config|Instance configuration information|
@@ -34,8 +34,8 @@ In the production environment, you need to configure instance information yourse
 
 ``` typescript
 config.instances = [
-  { instanceName: '', password: '', title: '', config: {} },
-  { instanceName: 'cabloy.store', password: '', title: '', config: {} },
+  { name: '', password: '', title: '', config: {} },
+  { name: 'cabloy.store', password: '', title: '', config: {} },
 ];
 ```
 

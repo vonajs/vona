@@ -49,11 +49,11 @@ export class BeanInstance extends BeanBase {
 
   private async _registerLock(configInstanceBase: ConfigInstanceBase) {
     // get again
-    let instance = await this.modelInstance.get({ name: configInstanceBase.instanceName });
+    let instance = await this.modelInstance.get({ name: configInstanceBase.name });
     if (instance) return instance;
     // insert
     instance = {
-      name: configInstanceBase.instanceName,
+      name: configInstanceBase.name,
       title: configInstanceBase.title,
       config: JSON.stringify(configInstanceBase.config || {}),
       disabled: false,

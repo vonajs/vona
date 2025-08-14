@@ -5,7 +5,7 @@ export interface IInstanceRecord {
 }
 
 export interface ConfigInstanceBase {
-  instanceName: keyof IInstanceRecord;
+  name: keyof IInstanceRecord;
   password?: string;
   title?: string;
   config?: VonaConfigOptional;

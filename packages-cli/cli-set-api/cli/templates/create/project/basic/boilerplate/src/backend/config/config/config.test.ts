@@ -5,7 +5,7 @@ export default function (_appInfo: VonaAppInfo) {
 
   // instances
   config.instances = [
-    { instanceName: '', password: '', title: '' },
+    { name: '', password: '', title: '' },
   ];
 
   // modules
