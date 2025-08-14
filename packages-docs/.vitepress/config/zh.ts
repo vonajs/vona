@@ -44,6 +44,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '模块化体系',
           base: '/zh/guide/essentials/modularization/',
+          collapsed: true,
           items: [
             { text: '模块', link: 'module' },
             { text: '套件', link: 'suite' },
@@ -54,6 +55,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'IOC容器',
           base: '/zh/guide/essentials/ioc/',
+          collapsed: true,
           items: [
             { text: '简介', link: 'introduction' },
             { text: 'Bean标识', link: 'bean-identifier' },
@@ -67,6 +69,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '模块Scope',
           base: '/zh/guide/essentials/scope/',
+          collapsed: true,
           items: [
             { text: '简介', link: 'introduction' },
             { text: 'Config配置', link: 'config' },
@@ -81,6 +84,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'API',
           base: '/zh/guide/essentials/api/',
+          collapsed: true,
           items: [
             { text: '创建CRUD', link: 'crud' },
             { text: 'Controller', link: 'controller' },
@@ -118,6 +122,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           text: '多实例/多租户',
           base: '/zh/guide/techniques/instance/',
           link: 'introduction',
+        },
+        {
+          text: 'Vona ORM',
+          base: '/zh/guide/techniques/orm/',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+            { text: '配置', link: 'config' },
+          ],
         },
         {
           text: '参数校验',

@@ -44,6 +44,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Modularization',
           base: '/guide/essentials/modularization/',
+          collapsed: true,
           items: [
             { text: 'Module', link: 'module' },
             { text: 'Suite', link: 'suite' },
@@ -54,6 +55,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'IOC',
           base: '/guide/essentials/ioc/',
+          collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Bean Identifier', link: 'bean-identifier' },
@@ -67,6 +69,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Module Scope',
           base: '/guide/essentials/scope/',
+          collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Config', link: 'config' },
@@ -81,6 +84,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'API',
           base: '/guide/essentials/api/',
+          collapsed: true,
           items: [
             { text: 'Create CRUD', link: 'crud' },
             { text: 'Controller', link: 'controller' },
@@ -118,6 +122,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           text: 'Multi-instance/Multi-tenancy',
           base: '/guide/techniques/instance/',
           link: 'introduction',
+        },
+        {
+          text: 'Vona ORM',
+          base: '/guide/techniques/orm/',
+          collapsed: true,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+            { text: 'Config', link: 'config' },
+          ],
         },
         {
           text: 'Validation',
