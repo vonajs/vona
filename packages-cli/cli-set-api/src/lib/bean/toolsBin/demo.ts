@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fse from 'fs-extra';
-import { closeApp, createGeneralApp, pathToHref } from 'vona-core';
+import { createGeneralApp, pathToHref } from 'vona-core';
 import parser from 'yargs-parser';
 
 const __template = `import type { IArgv, VonaApplication } from 'vona';
@@ -33,5 +33,5 @@ async function demoRun(projectPath: string) {
   const demoInstance = await import(pathToHref(demoFile));
   await demoInstance.main(app, argv);
   // close
-  await closeApp();
+  await app.close();
 }

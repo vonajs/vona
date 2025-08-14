@@ -7,6 +7,7 @@ import http from 'node:http';
 import KoaApplication from 'koa';
 import { cast } from '../../types/utils/cast.ts';
 import { BeanContainer } from '../bean/beanContainer.ts';
+import { closeApp } from '../framework/useApp.ts';
 import { AppUtil } from '../utils/util.ts';
 import { VonaAsyncLocalStorage } from './asyncLocalStorage.ts';
 import { contextBase } from './context.ts';
@@ -85,5 +86,9 @@ export class VonaApplication extends KoaApplication {
     }
     const response = res ?? new http.ServerResponse(request as any);
     return this.createContext(request as any, response) as unknown as VonaContext;
+  }
+
+  async close(terminate?: boolean) {
+    await closeApp(terminate);
   }
 }
