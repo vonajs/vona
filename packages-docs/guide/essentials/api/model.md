@@ -54,6 +54,16 @@ class ServiceStudent {
 }
 ```
 
+You can also use `bean._getBean` to get the Model instance directly from the IOC container:
+
+``` typescript
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    return await this.bean._getBean('demo-student.model.student').select();
+  }
+}
+```
+
 ## CRUD
 
 Here, we only introduce basic CRUD operations

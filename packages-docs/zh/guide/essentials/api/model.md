@@ -54,6 +54,16 @@ class ServiceStudent {
 }
 ```
 
+也可以使用`bean._getBean`从 IOC 容器中直接获取 Model 实例：
+
+``` typescript
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    return await this.bean._getBean('demo-student.model.student').select();
+  }
+}
+```
+
 ## CRUD
 
 在这里，我们仅介绍基本的 CRUD 操作

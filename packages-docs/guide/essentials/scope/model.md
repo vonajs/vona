@@ -33,3 +33,13 @@ class ControllerHome {
   }
 }
 ```
+
+You can also use `bean._getBean` to get the Model instance directly from the IOC container:
+
+``` typescript
+class ControllerHome {
+  async index() {
+    const menus = await this.bean._getBean('home-base.model.menu').select();
+  }
+}
+```

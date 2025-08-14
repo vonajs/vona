@@ -33,3 +33,13 @@ class ControllerHome {
   }
 }
 ```
+
+也可以使用`bean._getBean`从 IOC 容器中直接获取 Model 实例：
+
+``` typescript
+class ControllerHome {
+  async index() {
+    const menus = await this.bean._getBean('home-base.model.menu').select();
+  }
+}
+```
