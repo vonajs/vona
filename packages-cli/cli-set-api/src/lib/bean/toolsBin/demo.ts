@@ -7,7 +7,10 @@ import parser from 'yargs-parser';
 
 const __template = `import type { IArgv, VonaApplication } from 'vona';
 
-export async function main(app: VonaApplication, _argv: IArgv) {}
+export async function main(app: VonaApplication, _argv: IArgv) {
+  console.log(import.meta.filename);
+  console.log(app.config.meta);
+}
 `;
 
 const projectPath = process.argv[2];
