@@ -45,5 +45,3 @@ jobs:
         working-directory: vona-test
       - run: SERVER_LISTEN_DISABLE=true npm run demo -- --mode=prod
         working-directory: vona-test
-      - run: SERVER_LISTEN_DISABLE=true npm run demo -- --mode=prod
-        working-directory: vona-test  
