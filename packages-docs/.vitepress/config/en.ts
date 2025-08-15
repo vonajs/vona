@@ -132,6 +132,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'ORM Config', link: 'config' },
             { text: 'Database Strategy', link: 'strategy' },
             { text: 'ORM Basics', link: 'basics' },
+            { text: 'CRUD(Select)', link: 'crud-select' },
           ],
         },
         {
