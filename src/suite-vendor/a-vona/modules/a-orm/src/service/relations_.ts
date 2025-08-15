@@ -263,7 +263,7 @@ export class ServiceRelations extends BeanBase {
       for (let index = 0; index < entities.length; index++) {
         const entity = entities[index];
         if (entity[relationName]) {
-          // donot checkif has id of entity[relationName], for safety
+          // donot check if has id of entity[relationName], for safety
           const item: any = await modelTarget.get({ [key]: cast(entity).id });
           if (!isNil(item?.id) && !isNil(entity[relationName].id) && item?.id !== entity[relationName].id) {
             throw new Error(`invalid id: ${entity[relationName].id}`);

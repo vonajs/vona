@@ -168,6 +168,9 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
       const dataTemp2 = this._prepareInsertDataByOptions(table, dataTemp, options);
       // then
       const [dataNew, dataNewOriginal] = await this.prepareData(table, dataTemp2);
+      if (isNil(cast(dataNewOriginal).id) && Object.prototype.hasOwnProperty.call(dataNewOriginal, 'id')) {
+        delete cast(dataNewOriginal).id;
+      }
       datas.push(dataNew);
       datasOriginal.push(dataNewOriginal);
     }
