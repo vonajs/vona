@@ -5,15 +5,7 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServicePost extends BeanBase {
   async select() {
-    return await this.scope.model.post.select(
-      {
-        joins: [
-          ['innerJoin', ''],
-        ],
-      },
-      {},
-      ['test-vona:order', 'test-vona:user'],
-    );
+    return await this.scope.model.post.select();
   }
 
   async select2() {
