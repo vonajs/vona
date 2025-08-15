@@ -2,7 +2,7 @@
 
 下面以模块`test-vona`为例，讲解 CRUD 中 Select 的用法
 
-## Select基本操作
+## 基本查询
 
 模块`test-vona`中定义了 Model`Post`，可以这样查询`Post`的数据
 
@@ -97,7 +97,7 @@ class ServicePost {
 |include|静态关系|
 |with|动态关系|
 
-### 1. orders
+## orders
 
 是数组类型，可以指定多个 orders：
 
@@ -112,7 +112,7 @@ async select() {
 }
 ```
 
-### 2. joins
+## joins
 
 可以通过`joins`关联多个数据表
 
@@ -155,4 +155,4 @@ class ModelPost {}
 
 ![](../../../assets/img/orm/select/select-3.png)
 
-## Where
+## where

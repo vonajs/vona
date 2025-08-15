@@ -2,7 +2,7 @@
 
 The following uses the `test-vona` module as an example to explain the usage of `Select` in CRUD
 
-## Basic Select Operations
+## Basic Query
 
 The `test-vona` module defines the `Post` model. You can query `Post` data as follows
 
@@ -97,7 +97,7 @@ class ServicePost {
 |include|Static relationships|
 |with|Dynamic relationships|
 
-### 1. orders
+## orders
 
 This is an array type, and multiple orders can be specified:
 
@@ -112,7 +112,7 @@ async select() {
 }
 ```
 
-### 2. joins
+## joins
 
 You can use `joins` to join multiple tables
 
@@ -155,4 +155,4 @@ We can also specify multiple models:
 
 ![](../../../assets/img/orm/select/select-3.png)
 
-## Where
+## where
