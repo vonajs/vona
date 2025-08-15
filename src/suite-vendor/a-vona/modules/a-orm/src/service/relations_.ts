@@ -291,12 +291,17 @@ export class ServiceRelations extends BeanBase {
         if (entity[relationName] && entity[relationName].length > 0) {
           const entityId = cast(entity).id;
           const idsTo = entity[relationName].map(item => item.id).filter(id => !isNil(id));
-          const itemsTarget = await cast(modelTarget).__select_raw(
-            undefined,
-            { where: { [key]: entityId, id: idsTo } },
-            methodOptionsReal,
-          );
-          const idsTarget = itemsTarget.map(item => item.id);
+          let idsTarget;
+          if (idsTo.length === 0) {
+            idsTarget = [];
+          } else {
+            const itemsTarget = await cast(modelTarget).__select_raw(
+              undefined,
+              { where: { [key]: entityId, id: idsTo } },
+              methodOptionsReal,
+            );
+            idsTarget = itemsTarget.map(item => item.id);
+          }
           for (const child of entity[relationName]) {
             if (!isNil(child.id) && !idsTarget.includes(child.id)) {
               throw new Error(`invalid id: ${child.id}`);
