@@ -150,9 +150,9 @@ config.database = {
 ### 1. 获取指定数据源
 
 ``` typescript
-const pg = app.bean.database.getClient('pg');
-const mysql = app.bean.database.getClient('mysql');
-const pgOrder = app.bean.database.getClient('pgOrder');
+const pg = app.bean.database.getDb('pg');
+const mysql = app.bean.database.getDb('mysql');
+const pgOrder = app.bean.database.getDb('pgOrder');
 ```
 
 ### 2. 获取默认数据源
@@ -160,7 +160,7 @@ const pgOrder = app.bean.database.getClient('pgOrder');
 默认数据源由配置项`defaultClient`决定
 
 ``` typescript
-const clientDefault = app.bean.database.getClient('default');
+const dbDefault = app.bean.database.getDb('default');
 ```
 
 ### 3. 获取数据源对应的 knex 实例
@@ -168,11 +168,11 @@ const clientDefault = app.bean.database.getClient('default');
 系统为不同的数据源创建了不同的 knex 实例，使用 knex 实例操作数据库
 
 ``` typescript
-const pg = app.bean.database.getClient('pg');
-const items = pg.db.connection.select('*').from('tableName');
+const pg = app.bean.database.getDb('pg');
+const items = pg.connection.select('*').from('tableName');
 
-const clientDefault = app.bean.database.getClient('default');
-const items = clientDefault.db.connection.select('*').from('tableName');
+const dbDefault = app.bean.database.getDb('default');
+const items = dbDefault.connection.select('*').from('tableName');
 ```
 
 ### 4. 获取当前数据源

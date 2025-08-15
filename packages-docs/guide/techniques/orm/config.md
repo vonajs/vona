@@ -149,9 +149,9 @@ config.database = {
 ### 1. Obtaining a Specified Datasource
 
 ``` typescript
-const pg = app.bean.database.getClient('pg');
-const mysql = app.bean.database.getClient('mysql');
-const pgOrder = app.bean.database.getClient('pgOrder');
+const pg = app.bean.database.getDb('pg');
+const mysql = app.bean.database.getDb('mysql');
+const pgOrder = app.bean.database.getDb('pgOrder');
 ```
 
 ### 2. Obtaining the Default Datasource
@@ -159,7 +159,7 @@ const pgOrder = app.bean.database.getClient('pgOrder');
 The default datasource is determined by the `defaultClient` configuration option
 
 ``` typescript
-const clientDefault = app.bean.database.getClient('default');
+const dbDefault = app.bean.database.getDb('default');
 ```
 
 ### 3. Obtaining the Knex Instance Corresponding to the Datasource
@@ -167,11 +167,11 @@ const clientDefault = app.bean.database.getClient('default');
 The system creates different Knex instances for different datasources. Use these Knex instances to operate the database
 
 ``` typescript
-const pg = app.bean.database.getClient('pg');
-const items = pg.db.connection.select('*').from('tableName');
+const pg = app.bean.database.getDb('pg');
+const items = pg.connection.select('*').from('tableName');
 
-const clientDefault = app.bean.database.getClient('default');
-const items = clientDefault.db.connection.select('*').from('tableName');
+const dbDefault = app.bean.database.getDb('default');
+const items = dbDefault.connection.select('*').from('tableName');
 ```
 
 ### 4. Obtaining the Current Datasource
