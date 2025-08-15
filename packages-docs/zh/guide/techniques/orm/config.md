@@ -1,4 +1,4 @@
-# 配置
+# ORM配置
 
 ## App Config配置
 

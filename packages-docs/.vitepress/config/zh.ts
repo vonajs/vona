@@ -129,7 +129,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: '介绍', link: 'introduction' },
-            { text: '配置', link: 'config' },
+            { text: 'ORM配置', link: 'config' },
           ],
         },
         {

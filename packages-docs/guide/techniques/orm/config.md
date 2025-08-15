@@ -1,4 +1,4 @@
-# Configuration
+# ORM Config
 
 ## App Config Configuration
 

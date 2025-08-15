@@ -129,7 +129,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
-            { text: 'Config', link: 'config' },
+            { text: 'ORM Config', link: 'config' },
           ],
         },
         {
