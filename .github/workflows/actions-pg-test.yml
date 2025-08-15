@@ -34,5 +34,5 @@ jobs:
       - run: npm i tsx -g 
       - run: npm run init
       - run: npm run test
-      - run: npm run build
+      - run: npm run build -- --flavor=ci
       - run: SERVER_LISTEN_DISABLE=true npm run demo -- --mode=prod --flavor=ci
