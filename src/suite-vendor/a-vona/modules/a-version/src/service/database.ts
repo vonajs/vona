@@ -14,7 +14,7 @@ export class ServiceDatabase extends BeanBase {
   }
 
   get databasePrefix() {
-    return `cabloy${__separator}test${__separator}${this.app.name}${__separator}`;
+    return `vona${__separator}test${__separator}${this.app.name}${__separator}`;
   }
 
   async databaseInitStartup() {

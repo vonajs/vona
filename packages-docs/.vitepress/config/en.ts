@@ -130,6 +130,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'ORM Config', link: 'config' },
+            { text: 'Database Strategy', link: 'strategy' },
           ],
         },
         {

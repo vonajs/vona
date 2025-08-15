@@ -130,6 +130,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: '介绍', link: 'introduction' },
             { text: 'ORM配置', link: 'config' },
+            { text: '数据库策略', link: 'strategy' },
           ],
         },
         {
