@@ -16,7 +16,17 @@ class ServicePost {
 }
 ```
 
-### 2. get
+### 2. count
+
+``` typescript
+class ServicePost {
+  async count() {
+    return await this.scope.model.post.count();
+  }
+}
+```
+
+### 3. get
 
 ``` typescript
 class ServicePost {
@@ -26,12 +36,12 @@ class ServicePost {
 }
 ```
 
-### 3. count
+### 4. mget
 
 ``` typescript
 class ServicePost {
-  async count() {
-    return await this.scope.model.post.count();
+  async mget(ids: TableIdentity[]) {
+    return await this.scope.model.post.mget(ids);
   }
 }
 ```
