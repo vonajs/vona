@@ -56,7 +56,7 @@ async select<
   params?: T,
   options?: IModelMethodOptions,
   _modelJoins?: ModelJoins,
-): Promise<any[]>;
+): Promise<TRecord[]>;
 ```
 
 * Example: A relatively complex select query:

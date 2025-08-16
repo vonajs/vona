@@ -56,7 +56,7 @@ async select<
   params?: T,
   options?: IModelMethodOptions,
   _modelJoins?: ModelJoins,
-): Promise<any[]>;
+): Promise<TRecord[]>;
 ```
 
 * 举例：一个相对复杂的 select 查询：
