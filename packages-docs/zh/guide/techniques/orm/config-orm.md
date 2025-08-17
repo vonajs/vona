@@ -1,6 +1,6 @@
 # ORM配置
 
-Vona ORM 是由模块 a-orm 提供的核心能力，可以在 App config 中修改模块的配置：
+Vona ORM 是由模块`a-orm`提供的核心能力，可以在 App config 中修改模块的配置：
 
 `src/backend/config/config/config.ts`
 
@@ -63,7 +63,7 @@ export function config(_app: VonaApplication) {
 
 |名称|说明|
 |--|--|
-|table.identityType|数据表关键字段`Id`的类型：`string`/`number`|
+|table.identityType|数据表关键字段`id`的类型：`string`/`number`|
 |model|model的通用设置|
 |softDeletionPrune|软删除数据清理设置|
 |dialects|系统支持的数据库方言|
