@@ -40,7 +40,7 @@ $ npm run demo
 
 ## Production Environment
 
-In the production environment, you must manually create a database and specify the database name in the [Datasource Config](./datasource-config.md)
+In the production environment, you must manually create a database and specify the database name in the [Datasource Config](./config-datasource.md)
 
 ``` bash
 $ npm run start
