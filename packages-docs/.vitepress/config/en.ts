@@ -129,7 +129,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
-            { text: 'ORM Config', link: 'config' },
+            { text: 'Datasource Config', link: 'config-datasource' },
+            { text: 'ORM Config', link: 'config-orm' },
             { text: 'Database Strategy', link: 'strategy' },
             { text: 'ORM Basics', link: 'basics' },
             { text: 'CRUD(Select)', link: 'crud-select' },

@@ -129,7 +129,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: '介绍', link: 'introduction' },
-            { text: 'ORM配置', link: 'config' },
+            { text: '数据源配置', link: 'config-datasource' },
+            { text: 'ORM配置', link: 'config-orm' },
             { text: '数据库策略', link: 'strategy' },
             { text: 'ORM基础', link: 'basics' },
             { text: 'CRUD(Select)', link: 'crud-select' },

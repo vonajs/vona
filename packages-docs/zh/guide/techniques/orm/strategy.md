@@ -40,7 +40,7 @@ $ npm run demo
 
 ## 生产环境
 
-在`生产环境`需要手工创建数据库，并在`ORM配置`中指定该数据库名称
+在`生产环境`需要手工创建数据库，并在[数据源配置](./datasource-config.md)中指定该数据库名称
 
 ``` bash
 $ npm run start
