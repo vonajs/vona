@@ -26,7 +26,7 @@ $ npm run start
 # 以单进程模式启动服务
 $ npm run start:one
 # 在docker环境中，以单进程模式启动服务
-$ npm run build:docker
+$ npm run start:docker
 ```
 
 ## test/cov
@@ -48,8 +48,7 @@ $ npm run tsc
 
 ## demo练习场
 
-* 首次执行时自动创建 Demo 源码文件
-* 后续执行时自动运行 Demo 源码文件
+自动运行 Demo 源码文件，如果文件不存在则自动创建
 
 ``` bash
 $ npm run demo

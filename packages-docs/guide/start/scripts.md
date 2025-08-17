@@ -26,7 +26,7 @@ $ npm run start
 # Start the service in single process mode
 $ npm run start:one
 # Start the service in single process mode in a docker environment
-$ npm run build:docker
+$ npm run start:docker
 ```
 
 ## test/cov
@@ -48,8 +48,7 @@ $ npm run tsc
 
 ## demo playground
 
-* Automatically create a Demo source code file when executing for the first time
-* Automatically run thie Demo source code file when executing later
+Automatically run the Demo source code file and automatically create it if it does not exist
 
 ``` bash
 $ npm run demo
