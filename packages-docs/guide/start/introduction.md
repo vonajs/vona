@@ -2,7 +2,7 @@
 
 ## What is Vona?
 
-Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size
+Vona is an intuitive, elegant and powerful Node.js web framework for rapidly developing enterprise applications of any size. It pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
 
 ## Philosophy
 

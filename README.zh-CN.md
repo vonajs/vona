@@ -2,7 +2,7 @@
 
 # Vona 是什么
 
-Vona 是一款直观、优雅、强大的 Node.js 框架，用于快速开发任何规模的企业级应用
+Vona 是一款直观、优雅、强大的 Node.js Web 框架，用于快速开发任何规模的企业级应用。首创 DTO 动态推断与生成能力，从而显著提升开发效率和开发体验
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
