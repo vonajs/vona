@@ -397,9 +397,27 @@ class ServicePost {
 
 * \_not_
 
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        _not_: {
+          title: { _includes_: 'ai' },
+          stars: { _gt_: 20 },
+        },
+      },
+    });
+  }
+}
+```
 
+`select * from "testVonaPost" where not (("title" like '%ai%') and ("stars" > 20))`
 
 * \_exists_
+
+
+
 
 ## where：raw
 
