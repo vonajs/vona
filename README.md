@@ -42,7 +42,7 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 * `Bean global singleton`: `Async Local Storage` is used under the hood to implement a complete global singleton mechanism, ensuring very low memory usage and significantly improving garbage collection performance
 * `Multi-tenancy`: Supports the development of multi-tenancy SaaS systems with a shared database schema, but data generated during operation is isolated
 * `Multi-database and multi-datasource`: Supports multi-database and multi-datasource, and provides out-of-the-box read-write splitting and dynamic datasource capabilities
-* `Database Transactions`: Built-in database transaction capabilities and support for transaction propagation mechanisms
+* `Database Transaction`: Built-in database transaction capabilities and support for transaction propagation mechanisms
 * `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
 * `Cli Commands`: Provides a large number of Cli commands for generating code skeletons for various resources
 * `Menu Commands`: Execute Cli commands through the menus, significantly reducing mental overhead and improving the development experience
