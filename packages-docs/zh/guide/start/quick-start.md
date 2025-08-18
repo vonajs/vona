@@ -26,6 +26,10 @@ $ vona :create:project projectName
 $ cd projectName
 ```
 
+::: warning
+在 Windows 中，需要使用`管理员身份`打开`终端`或者`VSCode`
+:::
+
 2. 修改.env 文件
 
 `env/.env`:

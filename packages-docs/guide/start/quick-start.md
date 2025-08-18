@@ -22,6 +22,10 @@ $ vona :create:project projectName
 $ cd projectName
 ```
 
+::: warning
+In Windows, you need to open `Terminal` or `VSCode` as an `administrator`
+:::
+
 2. Modify .env file
 
 `env/.env`:
