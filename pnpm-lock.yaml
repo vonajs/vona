@@ -277,7 +277,7 @@ importers:
         version: 3.25.61
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.42
+        specifier: ^3.0.44
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -437,7 +437,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.145
+        specifier: ^1.0.146
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -833,7 +833,7 @@ importers:
         specifier: ^5.0.44
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.76
+        specifier: ^5.0.77
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
