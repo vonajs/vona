@@ -5,7 +5,13 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServicePost extends BeanBase {
   async select() {
-    return await this.scope.model.post.select();
+    return await this.scope.model.post.select({
+      where: {
+        title: {
+          _in_: ['ai', 'web'],
+        },
+      },
+    });
   }
 
   async select2() {

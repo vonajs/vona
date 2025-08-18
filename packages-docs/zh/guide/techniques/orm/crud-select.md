@@ -165,4 +165,84 @@ class ModelPost {}
 
 ![](../../../assets/img/orm/select/select-3.png)
 
-## where
+## where: 普通操作符
+
+### 1. 基本用法
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        title: { _includes_: 'ai' },
+        stars: { _gt_: 20 },
+      },
+    });
+  }
+}
+```
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        stars: {
+          _gt_: 20,
+          _lt_: 50,
+        },
+      },
+    });
+  }
+}
+```
+
+### 2. 普通操作符清单
+
+|名称|说明|
+|--|--|
+|\_eq_||
+|\_notEq_||
+|\_gt_||
+|\_gte_||
+|\_lt_||
+|\_lte_||
+|\_in_||
+|\_notIn_||
+|\_is_||
+|\_isNot_||
+|\_between_||
+|\_notBetween_||
+|\_startsWith_||
+|\_endsWith_||
+|\_includes_||
+|\_startsWithI_|非敏感的字符串操作符|
+|\_endsWithI_|非敏感的字符串操作符|
+|\_includesI_|非敏感的字符串操作符|
+|\_ref_|value为标识符|
+|\_skip_|忽略当前条件|
+
+### 3. 用法举例
+
+* Array
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        title: {
+          _in_: ['ai', 'web'],
+        },
+      },
+    });
+  }
+}
+```
+
+
+## where：连接操作符
+
+## where：raw
+
+## where：ref
