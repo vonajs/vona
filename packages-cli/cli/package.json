@@ -1,7 +1,7 @@
 {
   "name": "vona-cli",
   "type": "module",
-  "version": "1.0.138",
+  "version": "1.0.139",
   "description": "vona cli",
   "publishConfig": {
     "access": "public"
