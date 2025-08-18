@@ -165,7 +165,7 @@ class ModelPost {}
 
 ![](../../../assets/img/orm/select/select-3.png)
 
-## where: 普通操作符
+## where：普通操作符
 
 ### 1. 基本用法
 
@@ -433,6 +433,52 @@ class ServicePost {
 }
 ```
 
+`select * from "testVonaPost" where exists (select * from "testVonaPostContent" where "postId" = "testVonaPost"."id")`
+
 ## where：raw
 
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: this.scope.model.post.raw('?? > ?', ['stars', 20]) as any,
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where "stars" > 20`
+
 ## where：ref
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          '_eq_': this.scope.model.post.ref('title') as any,
+        }
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "title")`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          '_eq_': this.scope.model.post.ref('testVonaPost.title') as any,
+        }
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "testVonaPost"."title")`
