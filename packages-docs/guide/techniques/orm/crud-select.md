@@ -46,7 +46,7 @@ class ServicePost {
 }
 ```
 
-### Select Type Definition
+## Select Type Definition
 
 ``` typescript
 async select<
