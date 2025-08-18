@@ -345,6 +345,62 @@ class ServicePost {
 
 ## where：连接操作符
 
+### 1. 基本用法
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        _or_: {
+          title: { _includes_: 'ai' },
+          stars: { _gt_: 20 },
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ((("title" like '%ai%')) or (("stars" > 20)))`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        stars: {
+          _or_: {
+            _lt_: 20,
+            _gt_: 50,
+          },
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ((("stars" < 20) or ("stars" > 50)))`
+
+### 2. 连接操作符清单
+
+|名称|说明|
+|--|--|
+|\_and_||
+|\_or_||
+|\_not_||
+|\_exists_||
+|\_notExists_||
+
+### 3. 用法举例
+
+* \_not_
+
+
+
+* \_exists_
+
 ## where：raw
 
 ## where：ref
