@@ -1,3 +1,4 @@
+import type { VonaApplication } from 'vona-core';
 import { createWriteStream } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -7,7 +8,7 @@ import { sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
 import fse from 'fs-extra';
 import { globby } from 'globby';
-import { closeApp, createGeneralApp } from 'vona-core';
+import { createGeneralApp } from 'vona-core';
 import whyIsNodeRunning from 'why-is-node-running';
 import { resolveTemplatePath } from '../../utils.ts';
 
@@ -60,6 +61,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
     'src/suite-vendor/*/modules/*/templates/**/*.ts',
   ];
   return new Promise(resolve => {
+    let app: VonaApplication;
     const testStream = run({
       isolation: 'none',
       concurrency,
@@ -70,7 +72,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       cwd: projectPath,
       files,
       setup: async () => {
-        await createGeneralApp(projectPath);
+        app = await createGeneralApp(projectPath);
       },
     } as any)
       .on('test:coverage', data => {
@@ -81,7 +83,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       })
       .on('test:pass', async t => {
         if (t.name === '---done---') {
-          await closeApp();
+          await app.close();
           // handles
           if (process.env.TEST_WHYISNODERUNNING === 'true') {
             await sleep(2000);
