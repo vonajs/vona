@@ -209,8 +209,8 @@ class ServicePost {
 |\_lte_||
 |\_in_||
 |\_notIn_||
-|\_is_||
-|\_isNot_||
+|\_is_|value值为`null`或`undefined`|
+|\_isNot_|value值为`null`或`undefined`|
 |\_between_||
 |\_notBetween_||
 |\_startsWith_||
@@ -240,6 +240,8 @@ class ServicePost {
 }
 ```
 
+`select * from "testVonaPost" where ("title" in ('ai', 'web'))`
+
 ``` typescript
 class ServicePost {
   async select() {
@@ -251,6 +253,8 @@ class ServicePost {
   }
 }
 ```
+
+`select * from "testVonaPost" where "title" in ('ai', 'web')`
 
 * 判空
 
@@ -268,6 +272,8 @@ class ServicePost {
 }
 ```
 
+`select * from "testVonaPost" where ("title" is null)`
+
 ``` typescript
 class ServicePost {
   async select() {
@@ -279,6 +285,12 @@ class ServicePost {
   }
 }
 ```
+
+`select * from "testVonaPost" where "title" is null`
+
+* \_ref_
+
+
 
 
 ## where：连接操作符
