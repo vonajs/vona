@@ -416,8 +416,22 @@ class ServicePost {
 
 * \_exists_
 
-
-
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        _exists_: function (builder: Knex.QueryBuilder) {
+          builder
+            .select('*')
+            .from('testVonaPostContent')
+            .where('postId', this.scope.model.post.ref('testVonaPost.id'));
+        } as any,
+      },
+    });
+  }
+}
+```
 
 ## where：raw
 
