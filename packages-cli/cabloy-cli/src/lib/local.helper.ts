@@ -340,8 +340,9 @@ export class LocalHelper {
 }
 
 function _formatFileDisable(fileName: string) {
-  if (/.env$/.test(fileName)) return true;
-  if (/.env\..*$/.test(fileName)) return true;
+  const baseName = path.basename(fileName);
+  if (/.env\..*$/.test(baseName)) return true;
+  if (['.env', 'docker-compose-dockerfile-app', 'docker-compose.yml'].includes(baseName)) return true;
   return false;
 }
 
