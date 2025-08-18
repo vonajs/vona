@@ -240,6 +240,46 @@ class ServicePost {
 }
 ```
 
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        title: ['ai', 'web'],
+      },
+    });
+  }
+}
+```
+
+* 判空
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          _is_: null,
+        },
+      },
+    });
+  }
+}
+```
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: null,
+      },
+    });
+  }
+}
+```
+
 
 ## where：连接操作符
 

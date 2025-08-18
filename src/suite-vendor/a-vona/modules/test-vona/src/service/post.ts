@@ -7,9 +7,7 @@ export class ServicePost extends BeanBase {
   async select() {
     return await this.scope.model.post.select({
       where: {
-        title: {
-          _in_: ['ai', 'web'],
-        },
+        title: null,
       },
     });
   }
