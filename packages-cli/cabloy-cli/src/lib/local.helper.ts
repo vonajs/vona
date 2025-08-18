@@ -176,6 +176,7 @@ export class LocalHelper {
   }
 
   async formatFile({ fileName, logPrefix }: any) {
+    if (_formatFileDisable(fileName)) return;
     return await this.processHelper.formatFile({ fileName, logPrefix });
   }
 
@@ -336,6 +337,12 @@ export class LocalHelper {
   pathToHref(fileName: string): string {
     return pathToFileURL(fileName).href;
   }
+}
+
+function _formatFileDisable(fileName: string) {
+  if (/.env$/.test(fileName)) return true;
+  if (/.env\..*$/.test(fileName)) return true;
+  return false;
 }
 
 // async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
