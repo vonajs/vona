@@ -165,4 +165,320 @@ We can also specify multiple models:
 
 ![](../../../assets/img/orm/select/select-3.png)
 
-## where
+## where: Normal Operators
+
+### 1. Basic usage
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        title: { _includes_: 'ai' },
+        stars: { _gt_: 20 },
+      },
+    });
+  }
+}
+```
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        stars: {
+          _gt_: 20,
+          _lt_: 50,
+        },
+      },
+    });
+  }
+}
+```
+
+### 2. List of Normal Operators
+
+|Name|Description|
+|--|--|
+|\_eq_||
+|\_notEq_||
+|\_gt_||
+|\_gte_||
+|\_lt_||
+|\_lte_||
+|\_in_||
+|\_notIn_||
+|\_is_|value值为`null`或`undefined`|
+|\_isNot_|value值为`null`或`undefined`|
+|\_between_||
+|\_notBetween_||
+|\_startsWith_||
+|\_endsWith_||
+|\_includes_||
+|\_startsWithI_|Insensitive string operator|
+|\_endsWithI_|Insensitive string operator|
+|\_includesI_|Insensitive string operator|
+|\_ref_|value is an identifier|
+|\_skip_|If value is equal to `_skip`, ignore the current contition|
+
+### 3. Examples
+
+* Array
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        title: {
+          _in_: ['ai', 'web'],
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" in ('ai', 'web'))`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        title: ['ai', 'web'],
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where "title" in ('ai', 'web')`
+
+* Check if empty
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          _is_: null,
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" is null)`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: null,
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where "title" is null`
+
+* \_ref_
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          _ref_: 'title',
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "title")`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          _ref_: 'testVonaPost.title',
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "testVonaPost"."title")`
+
+* \_skip_
+
+``` typescript
+class ServicePost {
+  async select() {
+    const where = {
+      title: { _includes_: 'ai' },
+      stars: { _gt_: 20 },
+    };
+    return await this.scope.model.post.select({
+      where: {
+        ...where,
+        stars: '_skip_' as const,
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" like '%ai%')`
+
+## where: Joint Operators
+
+### 1. Basic Usage
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        _or_: {
+          title: { _includes_: 'ai' },
+          stars: { _gt_: 20 },
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ((("title" like '%ai%')) or (("stars" > 20)))`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        stars: {
+          _or_: {
+            _lt_: 20,
+            _gt_: 50,
+          },
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ((("stars" < 20) or ("stars" > 50)))`
+
+### 2. List of Joint Operators
+
+|Name|Description|
+|--|--|
+|\_and_||
+|\_or_||
+|\_not_||
+|\_exists_||
+|\_notExists_||
+
+### 3. Examples
+
+* \_not_
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        _not_: {
+          title: { _includes_: 'ai' },
+          stars: { _gt_: 20 },
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where not (("title" like '%ai%') and ("stars" > 20))`
+
+* \_exists_
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: {
+        _exists_: function (builder: Knex.QueryBuilder) {
+          builder
+            .select('*')
+            .from('testVonaPostContent')
+            .where('postId', this.scope.model.post.ref('testVonaPost.id'));
+        } as any,
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where exists (select * from "testVonaPostContent" where "postId" = "testVonaPost"."id")`
+
+## where：raw
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+      where: this.scope.model.post.raw('?? > ?', ['stars', 20]) as any,
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where "stars" > 20`
+
+## where：ref
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          '_eq_': this.scope.model.post.ref('title') as any,
+        }
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "title")`
+
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          '_eq_': this.scope.model.post.ref('testVonaPost.title') as any,
+        }
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "testVonaPost"."title")`
