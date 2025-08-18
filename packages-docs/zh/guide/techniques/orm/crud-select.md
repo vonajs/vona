@@ -220,7 +220,7 @@ class ServicePost {
 |\_endsWithI_|非敏感的字符串操作符|
 |\_includesI_|非敏感的字符串操作符|
 |\_ref_|value为标识符|
-|\_skip_|忽略当前条件|
+|\_skip_|如果value等于`_skip`，则忽略当前条件|
 
 ### 3. 用法举例
 
@@ -290,8 +290,58 @@ class ServicePost {
 
 * \_ref_
 
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          _ref_: 'title',
+        },
+      },
+    });
+  }
+}
+```
 
+`select * from "testVonaPost" where ("title" = "title")`
 
+``` typescript
+class ServicePost {
+  async select() {
+    return await this.scope.model.post.select({
+       where: {
+        title: {
+          _ref_: 'testVonaPost.title',
+        },
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" = "testVonaPost"."title")`
+
+* \_skip_
+
+``` typescript
+class ServicePost {
+  async select() {
+    const where = {
+      title: { _includes_: 'ai' },
+      stars: { _gt_: 20 },
+    };
+    return await this.scope.model.post.select({
+      where: {
+        ...where,
+        stars: '_skip_' as const,
+      },
+    });
+  }
+}
+```
+
+`select * from "testVonaPost" where ("title" like '%ai%')`
 
 ## where：连接操作符
 

@@ -7,7 +7,7 @@ export class ServicePost extends BeanBase {
   async select() {
     return await this.scope.model.post.select({
       where: {
-        title: null,
+        stars: '_skip_',
       },
     });
   }
