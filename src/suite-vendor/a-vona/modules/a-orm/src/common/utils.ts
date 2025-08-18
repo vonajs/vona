@@ -9,6 +9,10 @@ export function isRaw(raw) {
   return typeof raw?.constructor === 'function' && raw?.constructor?.name === 'Raw';
 }
 
+export function isRef(ref) {
+  return typeof ref?.constructor === 'function' && ref?.constructor?.name === 'Ref';
+}
+
 export function getTableOrTableAlias(table: string) {
   const _table = table.toString();
   return _table.includes(' as ') ? _table.split(' as ')[1].trim() : _table;

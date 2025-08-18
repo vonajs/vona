@@ -7,10 +7,15 @@ describe('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       const scopeTest = app.bean.scope('test-vona');
-      // op: normal
+      // ref
       let builder = scopeTest.model.post.builder();
-      scopeTest.model.post.buildWhere(builder, { id: 1 });
+      scopeTest.model.post.buildWhere(builder, { id: scopeTest.model.post.ref('id') as any });
       let sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where "id" = "id"');
+      // op: normal
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, { id: 1 });
+      sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" = 1');
       // op: normal: joint
       builder = scopeTest.model.post.builder();

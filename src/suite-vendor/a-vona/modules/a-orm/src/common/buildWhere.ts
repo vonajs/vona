@@ -3,7 +3,7 @@ import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, Type
 import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { Op, OpAggrs, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
-import { isRaw } from './utils.ts';
+import { isRaw, isRef } from './utils.ts';
 
 export function buildWhere<TRecord>(knex: Knex, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>, having: boolean = false) {
   _buildWhereInner(having, knex, builder, wheres);
@@ -115,7 +115,7 @@ function _buildWhereColumn<TRecord>(
     return;
   }
   // raw
-  if (isRaw(value)) {
+  if (isRaw(value) || isRef(value)) {
     _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
     return;
   }
