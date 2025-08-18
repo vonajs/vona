@@ -16,6 +16,11 @@ describe('modelWhere.test.ts', () => {
       scopeTest.model.post.buildWhere(builder, { id: scopeTest.model.post.ref('testVonaPost.id') as any });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" = "testVonaPost"."id"');
+      // raw
+      builder = scopeTest.model.post.builder();
+      scopeTest.model.post.buildWhere(builder, scopeTest.model.post.raw('"id" = ?', 1) as any);
+      sql = builder.toQuery();
+      assert.equal(sql, 'select * from "testVonaPost" where "id" = 1');
       // op: normal
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, { id: 1 });
