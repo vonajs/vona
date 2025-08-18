@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
 import { lcov, spec } from 'node:test/reporters';
-import { sleep } from '@cabloy/utils';
+import { catchError, sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
 import fse from 'fs-extra';
 import { globby } from 'globby';
@@ -83,7 +83,12 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       })
       .on('test:pass', async t => {
         if (t.name === '---done---') {
-          await app.close();
+          const [_, err] = await catchError(() => {
+            return app.close();
+          });
+          if (err) {
+            console.error(err);
+          }
           // handles
           if (process.env.TEST_WHYISNODERUNNING === 'true') {
             await sleep(2000);
