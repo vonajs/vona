@@ -428,7 +428,7 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.42
+        specifier: ^3.0.43
         version: link:../cabloy-cli
       '@cabloy/process-helper':
         specifier: ^2.0.18
@@ -437,7 +437,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.141
+        specifier: ^1.0.142
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -459,7 +459,7 @@ importers:
         specifier: ^7.26.8
         version: 7.27.1(@babel/core@7.28.0)
       '@cabloy/cli':
-        specifier: ^3.0.42
+        specifier: ^3.0.43
         version: link:../cabloy-cli
       '@cabloy/dotenv':
         specifier: ^1.1.10
@@ -833,7 +833,7 @@ importers:
         specifier: ^5.0.44
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.74
+        specifier: ^5.0.75
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1163,7 +1163,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-caching
       vona-module-a-core:
-        specifier: ^5.0.53
+        specifier: ^5.0.54
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.14
@@ -1425,7 +1425,7 @@ importers:
         version: 3.17.0
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.42
+        specifier: ^3.0.43
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
         specifier: ^1.7.36
