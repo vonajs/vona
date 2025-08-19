@@ -29,11 +29,11 @@ export class ServiceBroadcast extends BeanBase {
   }
 
   public async disposePub() {
-    await this.__pub?.quit();
+    await this.__pub?.disconnect();
   }
 
   public async disposeSub() {
-    await this.__sub?.quit();
+    await this.__sub?.disconnect();
   }
 
   emit<DATA>(info: IBroadcastJobContext<DATA>) {
