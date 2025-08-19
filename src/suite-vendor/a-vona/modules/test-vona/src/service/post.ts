@@ -4,6 +4,23 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServicePost extends BeanBase {
+  async create() {
+    const post = await this.scope.model.post.insert({
+      title: 'Post001',
+    });
+    console.log(post.id);
+    return post;
+  }
+
+  async createBulk() {
+    const posts = await this.scope.model.post.insertBulk([
+      { title: 'Post001' },
+      { title: 'Post002' },
+    ]);
+    console.log(posts[0].id, posts[1].id);
+    return posts;
+  }
+
   async select() {
     return await this.scope.model.post.select({
       where: {
