@@ -35,6 +35,31 @@ class ServicePost {
 
 ``` typescript
 class ServicePost {
+  async update() {
+    const post = await this.scope.model.post.update({
+      id: 1,
+      title: 'Post001-Update',
+    });
+    return post;
+  }
+}
+```
+
+``` typescript
+class ServicePost {
+  async update2() {
+    const post = await this.scope.model.post.update(
+      {
+        title: 'Post001-Update',
+      },
+      {
+        where: {
+          title: { _startsWith_: 'Post001' },
+        },
+      },
+    );
+    return post;
+  }
 }
 ```
 
@@ -42,6 +67,13 @@ class ServicePost {
 
 ``` typescript
 class ServicePost {
+  async updateBulk() {
+    const posts = await this.scope.model.post.updateBulk([
+      { id: 1, title: 'Post001-Update' },
+      { id: 2, title: 'Post002-Update' },
+    ]);
+    return posts;
+  }
 }
 ```
 
@@ -49,6 +81,23 @@ class ServicePost {
 
 ``` typescript
 class ServicePost {
+  async delete() {
+    await this.scope.model.post.delete({
+      id: 1,
+    });
+  }
+}
+```
+
+``` typescript
+class ServicePost {
+  async delete2() {
+    await this.scope.model.post.delete({
+      title: {
+        _startsWith_: 'Post',
+      },
+    });
+  }
 }
 ```
 
@@ -56,6 +105,9 @@ class ServicePost {
 
 ``` typescript
 class ServicePost {
+  async deleteBulk() {
+    await this.scope.model.post.deleteBulk([1, 2]);
+  }
 }
 ```
 

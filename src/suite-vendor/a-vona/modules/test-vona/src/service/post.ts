@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+import type { EntityPost } from '../entity/post.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -19,6 +20,54 @@ export class ServicePost extends BeanBase {
     ]);
     console.log(posts[0].id, posts[1].id);
     return posts;
+  }
+
+  async update() {
+    const post = await this.scope.model.post.update({
+      id: 1,
+      title: 'Post001-Update',
+    });
+    return post;
+  }
+
+  async update2() {
+    const post = await this.scope.model.post.update(
+      {
+        title: 'Post001-Update',
+      },
+      {
+        where: {
+          title: { _startsWith_: 'Post001' },
+        },
+      },
+    );
+    return post;
+  }
+
+  async updateBulk() {
+    const posts = await this.scope.model.post.updateBulk([
+      { id: 1, title: 'Post001-Update' },
+      { id: 2, title: 'Post002-Update' },
+    ]);
+    return posts;
+  }
+
+  async delete() {
+    await this.scope.model.post.delete({
+      id: 1,
+    });
+  }
+
+  async delete2() {
+    await this.scope.model.post.delete({
+      title: {
+        _startsWith_: 'Post',
+      },
+    });
+  }
+
+  async deleteBulk() {
+    await this.scope.model.post.deleteBulk([1, 2]);
   }
 
   async select() {
