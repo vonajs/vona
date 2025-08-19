@@ -2,6 +2,8 @@
 
 下面以模块`test-vona`为例，讲解 CRUD 中 Insert/Update/Delete 的用法
 
+此外，Vona ORM 还提供了 Mutate 操作，可以根据传入数据的特征执行相应的变更操作
+
 ## insert
 
 ``` typescript
@@ -113,8 +115,32 @@ class ServicePost {
 
 ## mutate
 
+`mutate`是`insert/update/delete`的混合操作，系统会根据传入数据的特征执行相应的变更操作
+
+|数据特征|变更操作|
+|--|--|
+|不存在`id`字段|insert|
+|存在`id`字段|update|
+|存在`id`字段，并且`deleted`字段值为`true`|delete|
+
 ``` typescript
 class ServicePost {
+  async mutate() {
+    // insert
+    const post = await this.scope.model.post.mutate({
+      title: 'Post001',
+    });
+    // update
+    await this.scope.model.post.mutate({
+      id: post.id,
+      title: 'Post001-Update',
+    });
+    // delete
+    await this.scope.model.post.mutate({
+      id: post.id,
+      deleted: true,
+    });
+  }
 }
 ```
 
@@ -122,5 +148,15 @@ class ServicePost {
 
 ``` typescript
 class ServicePost {
+  async mutateBulk() {
+    await this.scope.model.post.mutateBulk([
+      // insert
+      { title: 'Post003' },
+      // update
+      { id: 1, title: 'Post001-Update' },
+      // delete
+      { id: 2, deleted: true },
+    ]);
+  }
 }
 ```

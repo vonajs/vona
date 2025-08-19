@@ -70,6 +70,34 @@ export class ServicePost extends BeanBase {
     await this.scope.model.post.deleteBulk([1, 2]);
   }
 
+  async mutate() {
+    // insert
+    const post = await this.scope.model.post.mutate({
+      title: 'Post001',
+    });
+    // update
+    await this.scope.model.post.mutate({
+      id: post.id,
+      title: 'Post001-Update',
+    });
+    // delete
+    await this.scope.model.post.mutate({
+      id: post.id,
+      deleted: true,
+    });
+  }
+
+  async mutateBulk() {
+    await this.scope.model.post.mutateBulk([
+      // insert
+      { title: 'Post003' },
+      // update
+      { id: 1, title: 'Post001-Update' },
+      // delete
+      { id: 2, deleted: true },
+    ]);
+  }
+
   async select() {
     return await this.scope.model.post.select({
       where: {
