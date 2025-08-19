@@ -437,7 +437,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.148
+        specifier: ^1.0.149
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -833,7 +833,7 @@ importers:
         specifier: ^5.0.44
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.78
+        specifier: ^5.0.79
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1220,10 +1220,10 @@ importers:
         specifier: ^5.0.13
         version: link:modules/a-printtip
       vona-module-a-queue:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-queue
       vona-module-a-redis:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-redis
       vona-module-a-redlock:
         specifier: ^5.0.16
