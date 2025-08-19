@@ -37,7 +37,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "ioredis": "^5.4.1"
+    "ioredis": "^5.7.0"
   },
   "clean-package": {
     "indent": 2,
