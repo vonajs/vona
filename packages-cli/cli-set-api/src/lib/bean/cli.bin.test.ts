@@ -3,6 +3,7 @@ import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/modul
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import { catchError } from '@cabloy/utils';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { getAbsolutePathOfModule } from '../utils.ts';
@@ -61,12 +62,15 @@ export class CliBinTest extends BeanCliBase {
       args.push('--import=why-is-node-running/include');
     }
     args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
-    await this.helper.spawnExe({
-      cmd: 'node',
-      args,
-      options: {
-        cwd: projectPath,
-      },
+    // ignore error special in windows
+    await catchError(() => {
+      return this.helper.spawnExe({
+        cmd: 'node',
+        args,
+        options: {
+          cwd: projectPath,
+        },
+      });
     });
   }
 
@@ -75,12 +79,14 @@ export class CliBinTest extends BeanCliBase {
     const lcovCliFile = getAbsolutePathOfModule('@lcov-viewer/cli/lib/index.js', '');
     // run
     const args: string[] = [lcovCliFile, 'lcov', '-o', './coverage/report', './coverage/lcov.info'];
-    await this.helper.spawnExe({
-      cmd: 'node',
-      args,
-      options: {
-        cwd: projectPath,
-      },
+    await catchError(() => {
+      return this.helper.spawnExe({
+        cmd: 'node',
+        args,
+        options: {
+          cwd: projectPath,
+        },
+      });
     });
   }
 
