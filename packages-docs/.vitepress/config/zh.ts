@@ -133,7 +133,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'ORM配置', link: 'config-orm' },
             { text: '数据库策略', link: 'strategy' },
             { text: 'ORM基础', link: 'basics' },
-            { text: 'CRUD(Select)', link: 'crud-select' },
+            { text: 'CRUD(查询)', link: 'crud-select' },
+            { text: 'CRUD(插入/更新/删除)', link: 'crud-cud' },
           ],
         },
         {
