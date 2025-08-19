@@ -1,6 +1,6 @@
 # CRUD(查询)
 
-下面以模块`test-vona`为例，讲解 CRUD 中 Select 的用法
+下面以模块`test-vona`为例，讲解 CRUD 中`Select`的用法
 
 ## 基本查询
 
