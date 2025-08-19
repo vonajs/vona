@@ -437,7 +437,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.147
+        specifier: ^1.0.148
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -833,7 +833,7 @@ importers:
         specifier: ^5.0.44
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.77
+        specifier: ^5.0.78
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1154,7 +1154,7 @@ importers:
         specifier: ^5.0.15
         version: link:modules/a-body
       vona-module-a-broadcast:
-        specifier: ^5.0.14
+        specifier: ^5.0.15
         version: link:modules/a-broadcast
       vona-module-a-cache:
         specifier: ^5.0.14
@@ -1223,7 +1223,7 @@ importers:
         specifier: ^5.0.15
         version: link:modules/a-queue
       vona-module-a-redis:
-        specifier: ^5.0.14
+        specifier: ^5.0.15
         version: link:modules/a-redis
       vona-module-a-redlock:
         specifier: ^5.0.16
