@@ -1,5 +1,4 @@
 import type { TableIdentity } from 'table-identity';
-import type { EntityPost } from '../entity/post.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -9,7 +8,7 @@ export class ServicePost extends BeanBase {
     const post = await this.scope.model.post.insert({
       title: 'Post001',
     });
-    console.log(post.id);
+    // console.log(post.id);
     return post;
   }
 
@@ -18,7 +17,7 @@ export class ServicePost extends BeanBase {
       { title: 'Post001' },
       { title: 'Post002' },
     ]);
-    console.log(posts[0].id, posts[1].id);
+    // console.log(posts[0].id, posts[1].id);
     return posts;
   }
 
