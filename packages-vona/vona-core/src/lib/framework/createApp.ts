@@ -9,6 +9,18 @@ import { combineAppConfigDefault } from '../core/config.ts';
 import { deepExtend, prepareEnv } from '../utils/util.ts';
 import { Start } from './start.ts';
 
+export async function createAppMaster(bootstrapOptions: BootstrapOptions) {
+  globalThis.__bootstrapOptions__ = bootstrapOptions;
+  const { modulesMeta, locales, config, env, AppMonkey } = bootstrapOptions;
+  globalThis.__app__ = __createApp({
+    modulesMeta,
+    locales,
+    config,
+    env,
+    AppMonkey,
+  });
+}
+
 export async function createApp(bootstrapOptions: BootstrapOptions) {
   while (globalThis.__creating__) {
     await sleep(100);

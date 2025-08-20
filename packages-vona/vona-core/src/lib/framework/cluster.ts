@@ -1,11 +1,12 @@
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import cluster from 'node:cluster';
-import { createApp } from './createApp.ts';
+import { createApp, createAppMaster } from './createApp.ts';
 import { handleProcessMaster, handleProcessWork } from './process.ts';
 
 export async function startCluster(workers: number, bootstrapOptions: BootstrapOptions) {
   if (cluster.isPrimary) {
     handleProcessMaster();
+    createAppMaster(bootstrapOptions);
 
     // console.log(`Primary ${process.pid} is running`);
 
