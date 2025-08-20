@@ -135,6 +135,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'ORM基础', link: 'basics' },
             { text: 'CRUD(查询)', link: 'crud-select' },
             { text: 'CRUD(插入/更新/删除)', link: 'crud-cud' },
+            { text: '数据库事务', link: 'transaction' },
           ],
         },
         {
