@@ -49,7 +49,7 @@ export function schemaMax(max: number, message?: errorUtil.ErrMessage) {
 export function schemaTableIdentity() {
   const app = useApp();
   const ormConfig = app.util.getModuleConfigRaw('a-orm');
-  const _identityType = ormConfig.table.identityType;
+  const _identityType = ormConfig?.table.identityType ?? 'string';
   return function (_schema?: any): any {
     if (_identityType === 'string') {
       return z.string();
