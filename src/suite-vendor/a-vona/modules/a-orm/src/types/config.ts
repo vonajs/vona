@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 import type { VonaContext } from 'vona';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from './database.ts';
 
-export type TypeDefaultClientNameFn = (ctx: VonaContext) => keyof IDatabaseClientRecord;
+export type TypeDefaultClientNameFn = (ctx?: VonaContext) => keyof IDatabaseClientRecord;
 
 export type TypeDefaultClientName = TypeDefaultClientNameFn | keyof IDatabaseClientRecord;
 

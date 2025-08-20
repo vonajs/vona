@@ -206,8 +206,8 @@ export interface ConfigDatabase {
 ``` typescript
 // orm
 config.database = {
-  defaultClient: (ctx: VonaContext) => {
-    if (ctx.headers.xxx === 'yyy') return 'pg';
+  defaultClient: (ctx?: VonaContext) => {
+    if (ctx?.headers.xxx === 'yyy') return 'pg';
     return 'mysql';
   },
 };
