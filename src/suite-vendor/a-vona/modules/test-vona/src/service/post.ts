@@ -5,26 +5,21 @@ import { Database } from 'vona-module-a-orm';
 
 @Service()
 export class ServicePost extends BeanBase {
-  @Database.transaction({
-    isolationLevel: 'READ_COMMITTED',
-    propagation: 'REQUIRED',
-  })
+  @Database.transaction()
   async transaction() {
     const db = this.app.bean.database.getDb({ clientName: 'default' });
     await db.transaction.begin(async () => {
-    }, {
-      isolationLevel: 'READ_COMMITTED',
-      propagation: 'REQUIRED',
+      const scopeTest = this.app.bean.scope('test-vona');
+      const modelPost = scopeTest.model.post.newInstance(db);
+      const post = await modelPost.insert({ title: 'Post001' });
+      await this.bean.cache.redis('cache').set(post, 'Post001', { db });
     });
     // insert
     const post = await this.scope.model.post.insert({
       title: 'Post001',
     });
-    // update
-    await this.scope.model.post.update({
-      id: post.id,
-      title: 'Post001-Update',
-    });
+    // cache
+    await this.bean.cache.redis('cache').set(post, 'Post001');
   }
 
   async create() {
