@@ -131,5 +131,17 @@
       "}"
     ],
     "description": "record.instance"
+  },
+  "record.host": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordhost",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface IHostRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.host"
   }
 }
