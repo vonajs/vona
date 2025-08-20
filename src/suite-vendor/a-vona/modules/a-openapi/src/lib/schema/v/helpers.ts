@@ -1,5 +1,6 @@
 import type { IpVersion } from 'zod';
 import type { errorUtil } from '../../zod/errorUtil.ts';
+import { useApp } from 'vona';
 import { z } from 'zod';
 
 export function schemaEmail(message?: errorUtil.ErrMessage) {
@@ -46,8 +47,16 @@ export function schemaMax(max: number, message?: errorUtil.ErrMessage) {
 }
 
 export function schemaTableIdentity() {
+  const app = useApp();
+  const ormConfig = app.util.getModuleConfigRaw('a-orm');
+  const _identityType = ormConfig.table.identityType;
   return function (_schema?: any): any {
-    return z.union([z.string(), z.number()]);
+    if (_identityType === 'string') {
+      return z.string();
+    } else if (_identityType === 'number') {
+      return z.number();
+    }
+    throw new Error('not support');
   };
 }
 

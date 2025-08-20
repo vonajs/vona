@@ -2,6 +2,7 @@ import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
 import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
 import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
+import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -261,6 +262,14 @@ export class AppUtil extends BeanSimple {
   accepts() {
     if (this.ctx.acceptJSON) return 'json';
     return 'html';
+  }
+
+  getModuleConfigRaw<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K]['config'] {
+    let config = this.app.config.modules[moduleName as any];
+    if (!config) {
+      config = this.app.config.modules[moduleName as any] = {} as any;
+    }
+    return config;
   }
 }
 
