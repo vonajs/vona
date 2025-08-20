@@ -264,7 +264,7 @@ export class AppUtil extends BeanSimple {
     return 'html';
   }
 
-  getModuleConfigRaw<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K]['config'] {
+  getModuleConfigRaw<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
     let config = this.app.config.modules[moduleName as any];
     if (!config) {
       config = this.app.config.modules[moduleName as any] = {} as any;
