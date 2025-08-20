@@ -108,7 +108,7 @@ Vona ORM 支持数据库事务传播机制
 this.app.bean.database.current.commit(async () => {
   // do something when success
 });
-```   
+```
 
 ### 2. 失败补偿
 
