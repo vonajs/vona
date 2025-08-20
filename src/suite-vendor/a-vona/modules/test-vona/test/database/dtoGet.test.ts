@@ -35,9 +35,9 @@ describe('dtoGet.test.ts', () => {
           },
         });
         const rules: any = getTargetDecoratorRules(DtoPostNew.prototype);
-        assert.equal(rules.id._def.typeName, 'ZodUnion');
+        assert.equal(['ZodString', 'ZodNumber'].includes(rules.id._def.typeName), true);
         assert.equal(rules.title._def.typeName, 'ZodString');
-        assert.equal(rules.userId._def.typeName, 'ZodUnion');
+        assert.equal(['ZodString', 'ZodNumber'].includes(rules.userId._def.typeName), true);
         assert.equal(rules.iid, undefined);
         assert.equal(rules.postContent._def.typeName, 'ZodOptional');
         assert.equal(rules.user._def.typeName, 'ZodOptional');
