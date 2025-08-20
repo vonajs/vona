@@ -4,6 +4,9 @@ export interface IInstanceRecord {
   '': never;
 }
 
+export interface IHostRecord {
+}
+
 export interface ConfigInstanceBase {
   name: keyof IInstanceRecord;
   password?: string;

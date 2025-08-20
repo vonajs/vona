@@ -42,7 +42,10 @@ export class BeanOnion extends BeanBase {
   public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
     let metaCurrent = this.app.config.meta;
     if (this.app.ctx) {
-      metaCurrent = Object.assign({}, metaCurrent, { instanceName: this.app.ctx.instanceName });
+      metaCurrent = Object.assign({}, metaCurrent, {
+        instanceName: this.app.ctx.instanceName,
+        host: this.app.ctx.host,
+      });
     }
     return checkMeta(meta, metaCurrent);
   }

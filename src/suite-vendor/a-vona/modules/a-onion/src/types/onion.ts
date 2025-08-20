@@ -1,5 +1,5 @@
 import type { VonaOnionOptionsMeta } from '@cabloy/module-info';
-import type { IDecoratorBeanOptionsBase, IInstanceRecord, PowerPartial } from 'vona';
+import type { IDecoratorBeanOptionsBase, IHostRecord, IInstanceRecord, PowerPartial } from 'vona';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
@@ -32,6 +32,7 @@ export interface IOnionOptionsDeps<T> {
 
 export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
   instanceName?: keyof IInstanceRecord | (Array<keyof IInstanceRecord>);
+  host?: keyof IHostRecord | (Array<keyof IHostRecord>);
 }
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
