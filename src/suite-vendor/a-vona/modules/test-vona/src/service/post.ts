@@ -1,9 +1,23 @@
 import type { TableIdentity } from 'table-identity';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { Database } from 'vona-module-a-orm';
 
 @Service()
 export class ServicePost extends BeanBase {
+  @Database.transaction()
+  async transaction() {
+    // insert
+    const post = await this.scope.model.post.insert({
+      title: 'Post001',
+    });
+    // update
+    await this.scope.model.post.update({
+      id: post.id,
+      title: 'Post001-Update',
+    });
+  }
+
   async create() {
     const post = await this.scope.model.post.insert({
       title: 'Post001',
