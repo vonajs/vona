@@ -1,10 +1,17 @@
 # 数据库事务
 
-Vona ORM 对数据库事务提供了完整的支持
+Vona ORM 对数据库事务提供了完整的支持，提供了直观、优雅、强大的特性：
+
+1. 使用装饰器启用事务
+2. 事务传播机制
+3. 事务补偿机制
+4. 确保数据库与缓存数据一致性
 
 ## 使用装饰器启用事务
 
 ``` typescript
+import { Database } from 'vona-module-a-orm';
+
 class ServicePost {
   @Database.transaction()
   async transaction() {
@@ -26,24 +33,28 @@ class ServicePost {
 ### 1. 使用当前数据源
 
 ``` typescript
-const db = this.app.bean.database.current;
-await db.transaction.begin(async () => {
-  const scopeTest = this.app.bean.scope('test-vona');
-  const modelPost = scopeTest.model.post;
-  await modelPost.update({ id: 1, title: 'Post001_Update' });
-});
+class ServicePost {
+  async transactionManually() {
+    const db = this.bean.database.current;
+    await db.transaction.begin(async () => {
+      await this.scope.model.post.update({ id: 1, title: 'Post001_Update' });
+    });
+  }
+}
 ```
 
 ### 2. 使用指定数据源
 
 ``` typescript
-// get datasource by clientName
-const db = this.app.bean.database.getDb({ clientName: 'default' });
-await db.transaction.begin(async () => {
-  const scopeTest = this.app.bean.scope('test-vona');
-  const modelPost = scopeTest.model.post.newInstance(db);
-  await modelPost.update({ id: 1, title: 'Post001_Update' });
-});
+class ServicePost {
+  async transactionManually() {
+    const db = this.bean.database.getDb({ clientName: 'default' });
+    await db.transaction.begin(async () => {
+      const modelPost = this.scope.model.post.newInstance(db);
+      await modelPost.update({ id: 1, title: 'Post001_Update' });
+    });
+  }
+}
 ```
 
 ## 事务参数
