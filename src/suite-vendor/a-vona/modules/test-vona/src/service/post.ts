@@ -5,6 +5,15 @@ import { Database } from 'vona-module-a-orm';
 
 @Service()
 export class ServicePost extends BeanBase {
+  async relationBelongsTo() {
+    const postContent = await this.scope.model.postContent.select({
+      include: {
+        post: true,
+      },
+    });
+    console.log(postContent[0]?.post?.title);
+  }
+
   async relationHasOne() {
     // insert
     const postCreate = await this.scope.model.post.insert(

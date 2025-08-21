@@ -33,7 +33,7 @@ class ModelPost {}
 |--|--|
 |relations.postContent|Relation Name|
 |$relation.hasOne|定义`1:1`关系|
-|ModelPostContent|目标模型|
+|ModelPostContent|目标Model|
 |'postId'|外键|
 |columns|要查询的字段列表|
 
@@ -102,3 +102,47 @@ class ServicePost {
   }
 }  
 ```
+
+## belongsTo
+
+### 1. 定义关系
+
+``` typescript
+@Model({
+  entity: EntityPostContent,
+  relations: {
+    post: $relation.belongsTo(ModelPostContent, () => ModelPost, 'postId'),
+  },
+})
+class ModelPostContent {}
+```
+
+|名称|说明|
+|--|--|
+|relations.post|Relation Name|
+|$relation.belongsTo|定义`1:1`关系|
+|ModelPostContent|源Model|
+|ModelPost|目标Model|
+|'postId'|外键|
+
+### 2. 使用关系
+
+在 Model 中定义的 belongsTo 关系只用于查询操作。通过`include`指定需要查询的关系，比如`post: true`，那么，系统在查询 Model PostContent 的同时，也会查询 Model Post
+
+``` typescript
+class ServicePost {
+  async relationBelongsTo() {
+    const postContent = await this.scope.model.postContent.select({
+      include: {
+        post: true,
+      },
+    });
+    console.log(postContent[0]?.post?.title);
+  }
+}
+```
+
+## 参数说明
+
+1. Model 类型：三种形式+数组
+2. columns
