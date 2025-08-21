@@ -19,7 +19,8 @@ export class ServicePost extends BeanBase {
     const db = this.bean.database.getDb({ clientName: 'default' });
     await db.transaction.begin(async () => {
       const modelPost = this.scope.model.post.newInstance(db);
-      await modelPost.update({ id: 1, title: 'Post001_Update' });
+      const post = await modelPost.insert({ title: 'Post001' });
+      await this.scope.cacheRedis.post.set(post, post.id, { db });
     });
   }
 

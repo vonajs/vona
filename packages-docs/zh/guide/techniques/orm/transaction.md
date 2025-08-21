@@ -158,13 +158,16 @@ class ServicePost {
 - 当新建数据后，将数据放入 redis 缓存中。如果这个事务出现异常，就会进行数据回滚，同时缓存数据也会回滚，从而让数据库数据与缓存数据保持一致
 
 ``` typescript
-const db = this.app.bean.database.getDb({ clientName: 'default' });
-await db.transaction.begin(async () => {
-  const scopeTest = this.app.bean.scope('test-vona');
-  const modelPost = scopeTest.model.post.newInstance(db);
-  const post = await modelPost.insert({ title: 'Post001' });
-  await this.bean.cache.redis('cache').set(post, 'Post001', { db });
-});
+class ServicePost {
+  async transactionManually() {
+    const db = this.bean.database.getDb({ clientName: 'default' });
+    await db.transaction.begin(async () => {
+      const modelPost = this.scope.model.post.newInstance(db);
+      const post = await modelPost.insert({ title: 'Post001' });
+      await this.scope.cacheRedis.post.set(post, post.id, { db });
+    });
+  }
+}  
 ```
 
 - 如果对指定的数据库进行操作，那么就需要将数据库对象`db`传入缓存，从而让缓存针对数据库对象`db`执行相应的补偿操作。当数据库事务回滚时，让数据库数据与缓存数据保持一致
