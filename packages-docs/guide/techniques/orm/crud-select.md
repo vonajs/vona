@@ -90,7 +90,6 @@ class ServicePost {
 |disableUpdateTime|boolean|false|Disable automatic update time setting|
 |disableCacheQuery|boolean|false|Disable `Cache Query`|
 |disableCacheEntity|boolean|false|Disable `Cache Entity`|
-|iid|number|undefined|Can explicitly set the `instance Id`|
 |deleted|boolean|undefined|Can explicitly set the `deleted` value|
 
 ## Select Parameter: Params

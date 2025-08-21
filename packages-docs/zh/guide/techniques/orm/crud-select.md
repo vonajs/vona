@@ -90,7 +90,6 @@ class ServicePost {
 |disableUpdateTime|boolean|false|是否禁止自动设置更新时间|
 |disableCacheQuery|boolean|false|是否禁用`Cache Query`|
 |disableCacheEntity|boolean|false|是否禁用`Cache Entity`|
-|iid|number|undefined|可以显式设置`实例Id`|
 |deleted|boolean|undefined|可以显式设置`deleted`值|
 
 ## Select参数：Params
