@@ -27,11 +27,13 @@ export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
     updateAgeOnGet?: boolean;
     updateAgeOnHas?: boolean;
     broadcastOnSet?: TypeBroadcastOnSet;
+    disableInstance?: boolean;
   };
   redis?: {
-    ttl: number;
+    ttl?: number;
     updateAgeOnGet?: boolean;
     client?: keyof IRedisClientRecord;
+    disableInstance?: boolean;
   };
   ignoreNull?: boolean;
 }

@@ -20,7 +20,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!this.app[SUMMERCACHEMEMORY]) {
       this.app[SUMMERCACHEMEMORY] = {};
     }
-    const instanceName = this._cacheOptions.disableInstance ? SymbolInstanceNameDisable : this.ctx.instanceName;
+    // this.ctx.instance should exist if !disableInstance
+    const instanceName = this._cacheOptions.disableInstance ? SymbolInstanceNameDisable : this.ctx.instance.name;
     if (!this.app[SUMMERCACHEMEMORY][instanceName]) {
       this.app[SUMMERCACHEMEMORY][instanceName] = {};
     }

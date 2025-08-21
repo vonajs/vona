@@ -5,7 +5,7 @@ import type { IRedisClientRecord } from 'vona-module-a-redis';
 export interface ICacheRedisRecord {}
 
 export interface IDecoratorCacheRedisOptions extends IOnionOptionsEnable {
-  ttl: number;
+  ttl?: number;
   updateAgeOnGet?: boolean;
   client?: keyof IRedisClientRecord;
   disableInstance?: boolean;
