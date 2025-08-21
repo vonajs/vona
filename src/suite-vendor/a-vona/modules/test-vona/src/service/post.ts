@@ -5,6 +5,61 @@ import { Database } from 'vona-module-a-orm';
 
 @Service()
 export class ServicePost extends BeanBase {
+  async relationHasMany() {
+    // insert
+    const postCreate = await this.scope.model.user.insert(
+      {
+        title: 'Post001',
+        postContent: {
+          content: 'This is a post',
+        },
+      },
+      {
+        include: {
+          postContent: true,
+        },
+      },
+    );
+    // get
+    const post = await this.scope.model.post.get(
+      {
+        id: postCreate.id,
+      },
+      {
+        include: {
+          postContent: true,
+        },
+      },
+    );
+    // update
+    await this.scope.model.post.update(
+      {
+        id: postCreate.id,
+        title: 'Post001-Update',
+        postContent: {
+          content: 'This is a post-changed',
+        },
+      },
+      {
+        include: {
+          postContent: true,
+        },
+      },
+    );
+    // delete
+    await this.scope.model.post.delete(
+      {
+        id: postCreate.id,
+      },
+      {
+        include: {
+          postContent: true,
+        },
+      },
+    );
+    console.log(post?.postContent?.id);
+  }
+
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
       include: {
