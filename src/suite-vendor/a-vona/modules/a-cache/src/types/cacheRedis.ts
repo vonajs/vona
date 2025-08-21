@@ -8,6 +8,7 @@ export interface IDecoratorCacheRedisOptions extends IOnionOptionsEnable {
   ttl: number;
   updateAgeOnGet?: boolean;
   client?: keyof IRedisClientRecord;
+  disableInstance?: boolean;
 }
 
 declare module 'vona-module-a-onion' {
