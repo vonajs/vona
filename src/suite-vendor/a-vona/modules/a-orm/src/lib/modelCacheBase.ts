@@ -69,7 +69,13 @@ export class ModelCacheBase extends BeanBase {
       {
         enable: this.scopeOrm.config.summer.enable,
         meta: this.scopeOrm.config.summer.meta,
-        redis: { client: this.scopeOrm.config.summer.redis.client },
+        mem: {
+          disableInstance: this._model.disableInstance,
+        },
+        redis: {
+          disableInstance: this._model.disableInstance,
+          client: this.scopeOrm.config.summer.redis.client,
+        },
       },
       configPreset,
       _cacheOptions,
