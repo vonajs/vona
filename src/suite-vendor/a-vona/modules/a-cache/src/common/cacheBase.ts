@@ -1,5 +1,5 @@
 import type { IOnionOptionsEnable } from 'vona-module-a-onion';
-import { BeanBase } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { getKeyHash } from '../lib/utils.ts';
 
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
@@ -46,5 +46,13 @@ export class CacheBase<CACHEOPTIONS extends IOnionOptionsEnable = IOnionOptionsE
 
   protected __getKeysHash(keys: KEY[]): string[] {
     return keys.map(key => this.__getKeyHash(key));
+  }
+
+  protected __getInstanceIdScope(): number {
+    if (cast(this._cacheOptions).disableInstance) return 0;
+    if (!this.ctx?.instance) {
+      throw new Error(`should set 'disableInstance: true' for ${this._cacheName}`);
+    }
+    return this.ctx.instance.id;
   }
 }

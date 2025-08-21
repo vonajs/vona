@@ -6,7 +6,6 @@ import { Bean } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
-const SymbolInstanceNameDisable = Symbol('SymbolInstanceNameDisable');
 
 @Bean()
 @Virtual()
@@ -20,12 +19,11 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     if (!this.app[SUMMERCACHEMEMORY]) {
       this.app[SUMMERCACHEMEMORY] = {};
     }
-    // this.ctx.instance should exist if !disableInstance
-    const instanceName = this._cacheOptions.disableInstance ? SymbolInstanceNameDisable : this.ctx.instance.name;
-    if (!this.app[SUMMERCACHEMEMORY][instanceName]) {
-      this.app[SUMMERCACHEMEMORY][instanceName] = {};
+    const iid = this.__getInstanceIdScope();
+    if (!this.app[SUMMERCACHEMEMORY][iid]) {
+      this.app[SUMMERCACHEMEMORY][iid] = {};
     }
-    return this.app[SUMMERCACHEMEMORY][instanceName];
+    return this.app[SUMMERCACHEMEMORY][iid];
   }
 
   private get lruCache(): LRUCache<string, any> {
