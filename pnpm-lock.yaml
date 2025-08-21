@@ -437,7 +437,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.151
+        specifier: ^1.0.152
         version: link:../cli-set-api
     devDependencies:
       clean-package:
