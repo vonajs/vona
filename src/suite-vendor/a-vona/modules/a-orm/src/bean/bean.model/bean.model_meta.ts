@@ -109,14 +109,10 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
       delete data[columnNameInstance];
     } else {
       delete data.iid;
-      if (!isNil(options?.iid)) {
-        data[columnNameInstance] = options?.iid;
-      } else {
-        if (!this.ctx.instance) {
-          throw new Error('ctx.instance not exists');
-        }
-        data[columnNameInstance] = this.ctx.instance.id;
+      if (!this.ctx.instance) {
+        throw new Error('ctx.instance not exists');
       }
+      data[columnNameInstance] = this.ctx.instance.id;
     }
     return data;
   }
@@ -151,8 +147,8 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return isNil(deleted) || Boolean(entity.deleted) === Boolean(deleted);
   }
 
-  protected _checkDisableInstanceByOptions(options?: IModelMethodOptionsGeneral) {
-    return options?.disableInstance ?? this.disableInstance;
+  protected _checkDisableInstanceByOptions(_options?: IModelMethodOptionsGeneral) {
+    return this.disableInstance;
   }
 
   protected _checkDisableDeletedByOptions(options?: IModelMethodOptionsGeneral) {

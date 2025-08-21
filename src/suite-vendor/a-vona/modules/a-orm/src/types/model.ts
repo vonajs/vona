@@ -95,21 +95,19 @@ export type IModelCountParams<
   TypeEntityTableColumnsOfGeneral<ModelJoins, Model>
 >;
 
-export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
-export type IModelInsertOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelInsertOptionsGeneral<TRecord, Model>, 'disableInstance'>;
-export type IModelUpdateOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelUpdateOptionsGeneral<TRecord, Model>, 'disableInstance'>;
-export type IModelDeleteOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelDeleteOptionsGeneral<TRecord, Model>, 'disableInstance'>;
-export type IModelGetOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelGetOptionsGeneral<TRecord, Model>, 'disableInstance'>;
-export type IModelMutateOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = Omit<IModelMutateOptionsGeneral<TRecord, Model>, 'disableInstance'>;
+export type IModelMethodOptions = IModelMethodOptionsGeneral;
+export type IModelInsertOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = IModelInsertOptionsGeneral<TRecord, Model>;
+export type IModelUpdateOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = IModelUpdateOptionsGeneral<TRecord, Model>;
+export type IModelDeleteOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = IModelDeleteOptionsGeneral<TRecord, Model>;
+export type IModelGetOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = IModelGetOptionsGeneral<TRecord, Model>;
+export type IModelMutateOptions<TRecord, Model extends BeanModelMeta | undefined = undefined> = IModelMutateOptionsGeneral<TRecord, Model>;
 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
-  disableInstance?: boolean;
   disableCreateTime?: boolean;
   disableUpdateTime?: boolean;
   disableCacheQuery?: boolean;
   disableCacheEntity?: boolean;
-  iid?: number;
   deleted?: boolean;
 }
 
