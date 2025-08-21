@@ -11,21 +11,9 @@ export interface IModelOptionsInstance extends IDecoratorModelOptions<EntityInst
   cache: {
     entity: {
       preset: 'allWithIgnoreNull',
-      mem: {
-        disableInstance: true,
-      },
-      redis: {
-        disableInstance: true,
-      },
     },
     query: {
       preset: 'allWithIgnoreNull',
-      mem: {
-        disableInstance: true,
-      },
-      redis: {
-        disableInstance: true,
-      },
     },
   },
 })
