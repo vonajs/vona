@@ -437,7 +437,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.150
+        specifier: ^1.0.151
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -549,7 +549,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.44
+        specifier: ^5.0.45
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -830,10 +830,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.44
+        specifier: ^5.0.45
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.79
+        specifier: ^5.0.80
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -931,7 +931,7 @@ importers:
         specifier: ^1.0.34
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.44
+        specifier: ^5.0.45
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1157,13 +1157,13 @@ importers:
         specifier: ^5.0.15
         version: link:modules/a-broadcast
       vona-module-a-cache:
-        specifier: ^5.0.14
+        specifier: ^5.0.15
         version: link:modules/a-cache
       vona-module-a-caching:
         specifier: workspace:^
         version: link:modules/a-caching
       vona-module-a-core:
-        specifier: ^5.0.55
+        specifier: ^5.0.56
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.14
@@ -1184,7 +1184,7 @@ importers:
         specifier: ^5.0.14
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-instance
       vona-module-a-jwt:
         specifier: ^5.0.16
@@ -1199,10 +1199,10 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.0.17
+        specifier: ^5.0.18
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.28
+        specifier: ^5.0.29
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.16
@@ -1211,7 +1211,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.13
@@ -1241,7 +1241,7 @@ importers:
         specifier: ^5.0.13
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-summer
       vona-module-a-swagger:
         specifier: ^5.0.22
@@ -1265,7 +1265,7 @@ importers:
         specifier: ^5.0.21
         version: link:modules/a-web
       vona-module-a-worker:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-worker
 
   src/suite-vendor/a-vona/modules/a-aspect:
@@ -1470,7 +1470,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.44
+        specifier: ^6.0.45
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
