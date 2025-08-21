@@ -1023,19 +1023,31 @@ export interface IModuleCacheMem {
 }
 /** cacheMem: end */
 /** cacheRedis: begin */
+export * from '../bean/cacheRedis.post.ts';
 export * from '../bean/cacheRedis.test.ts';
 
 import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
 declare module 'vona-module-a-cache' {
   
     export interface ICacheRedisRecord {
-      'test-vona:test': IDecoratorCacheRedisOptions;
+      'test-vona:post': IDecoratorCacheRedisOptions;
+'test-vona:test': IDecoratorCacheRedisOptions;
     }
 
   
 }
 declare module 'vona-module-test-vona' {
   
+        export interface CacheRedisPost {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface CacheRedisPost {
+            get $beanFullName(): 'test-vona.cacheRedis.post';
+            get $onionName(): 'test-vona:post';
+          }
+
         export interface CacheRedisTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -1048,9 +1060,11 @@ declare module 'vona-module-test-vona' {
 }
 /** cacheRedis: end */
 /** cacheRedis: begin */
+import type { CacheRedisPost } from '../bean/cacheRedis.post.ts';
 import type { CacheRedisTest } from '../bean/cacheRedis.test.ts';
 export interface IModuleCacheRedis {
-  'test': CacheRedisTest;
+  'post': CacheRedisPost;
+'test': CacheRedisTest;
 }
 /** cacheRedis: end */
 /** event: begin */

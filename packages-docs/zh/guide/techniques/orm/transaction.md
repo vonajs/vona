@@ -72,16 +72,20 @@ class ServicePost {
 ```
 
 ``` diff
-const db = this.app.bean.database.getDb({ clientName: 'default' });
-await db.transaction.begin(
-  async () => {
-  ...
-  },
-+ {
-+   isolationLevel: 'READ_COMMITTED',
-+   propagation: 'REQUIRED',
-+ }
-);
+class ServicePost {
+  async transactionManually() {
+    const db = this.bean.database.getDb({ clientName: 'default' });
+    await db.transaction.begin(
+      async () => {
+        ...
+      },
+      {
++       isolationLevel: 'READ_COMMITTED',
++       propagation: 'REQUIRED',
+      }
+    );
+  }
+}  
 ```
 
 ## 事务参数：isolationLevel
@@ -116,7 +120,7 @@ Vona ORM 支持数据库事务传播机制
 ### 1. 成功补偿
 
 ``` typescript
-this.app.bean.database.current.commit(async () => {
+this.bean.database.current.commit(async () => {
   // do something when success
 });
 ```
@@ -124,7 +128,7 @@ this.app.bean.database.current.commit(async () => {
 ### 2. 失败补偿
 
 ``` typescript
-this.app.bean.database.current.compensate(async () => {
+this.bean.database.current.compensate(async () => {
   // do something when failed
 });
 ```
@@ -146,7 +150,7 @@ class ServicePost {
       title: 'Post001',
     });
     // cache
-    await this.bean.cache.redis('cache').set(post, 'Post001');
+    await this.scope.cacheRedis.post.set(post, post.id);
   }
 }  
 ```
@@ -163,4 +167,4 @@ await db.transaction.begin(async () => {
 });
 ```
 
-- 如果对指定的数据库进行操作，那么就需要将数据库对象传入缓存，从而让缓存针对指定的数据库执行相应的补偿操作。当数据库事务回滚时，让数据库数据与缓存数据保持一致
+- 如果对指定的数据库进行操作，那么就需要将数据库对象`db`传入缓存，从而让缓存针对数据库对象`db`执行相应的补偿操作。当数据库事务回滚时，让数据库数据与缓存数据保持一致

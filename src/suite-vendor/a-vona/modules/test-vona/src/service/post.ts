@@ -11,11 +11,8 @@ export class ServicePost extends BeanBase {
     const post = await this.scope.model.post.insert({
       title: 'Post001',
     });
-    // update
-    await this.scope.model.post.update({
-      id: post.id,
-      title: 'Post001-Update',
-    });
+    // cache
+    await this.scope.cacheRedis.post.set(post, post.id);
   }
 
   async transactionManually() {
