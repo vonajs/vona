@@ -92,7 +92,7 @@ class ServicePost {
 
 |名称|说明|
 |--|--|
-|DEFAULT|数据库提供的缺省配置|
+|DEFAULT|数据库相关的缺省isolationLevel|
 |READ_UNCOMMITTED||
 |READ_COMMITTED||
 |REPEATABLE_READ||
@@ -141,6 +141,8 @@ Vona 系统对数据库事务与缓存进行了适配，当数据库事务失败
 
 针对这个场景，Vona 提供了内置的解决方案
 
+### 1. 使用当前数据源
+
 ``` typescript
 class ServicePost {
   @Database.transaction()
@@ -156,6 +158,8 @@ class ServicePost {
 ```
 
 - 当新建数据后，将数据放入 redis 缓存中。如果这个事务出现异常，就会进行数据回滚，同时缓存数据也会回滚，从而让数据库数据与缓存数据保持一致
+
+### 2. 使用指定数据源
 
 ``` typescript
 class ServicePost {

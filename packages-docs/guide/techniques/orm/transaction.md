@@ -1,13 +1,13 @@
-# 数据库事务
+# Transaction
 
-Vona ORM 对数据库事务提供了完整的支持，提供了直观、优雅、强大的特性：
+Vona ORM provides comprehensive support for database transaction, offering intuitive, elegant, and powerful features:
 
-1. 使用装饰器启用事务
-2. 事务传播机制
-3. 事务补偿机制
-4. 确保数据库与缓存数据一致性
+1. Enabling transaction using decorator
+2. Transaction propagation mechanism
+3. Transaction compensation mechanism
+4. Ensuring database and cache data consistency
 
-## 使用装饰器启用事务
+## Enabling transaction using decorator
 
 ``` typescript
 import { Database } from 'vona-module-a-orm';
@@ -28,9 +28,9 @@ class ServicePost {
 }  
 ```
 
-## 手工启用事务
+## Manually Enabling Transaction
 
-### 1. 使用当前数据源
+### 1. Using the current datasource
 
 ``` typescript
 class ServicePost {
@@ -43,7 +43,7 @@ class ServicePost {
 }
 ```
 
-### 2. 使用指定数据源
+### 2. Using the specified datasource
 
 ``` typescript
 class ServicePost {
@@ -57,7 +57,7 @@ class ServicePost {
 }
 ```
 
-## 事务参数
+## Transaction parameters
 
 ``` diff
 class ServicePost {
@@ -88,11 +88,11 @@ class ServicePost {
 }  
 ```
 
-## 事务参数：isolationLevel
+## Transaction parameter: isolationLevel
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|DEFAULT|数据库提供的缺省配置|
+|DEFAULT|Database-specific default isolationLevel|
 |READ_UNCOMMITTED||
 |READ_COMMITTED||
 |REPEATABLE_READ||
@@ -100,24 +100,24 @@ class ServicePost {
 |SNAPSHOT||
 
 
-## 事务参数：propagation
+## Transaction parameter: propagation
 
-Vona ORM 支持数据库事务传播机制
+Vona ORM supports database transaction propagation mechanism
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|REQUIRED|默认的事务传播级别。如果当前存在事务, 则加入该事务。如果当前没有事务, 则创建一个新的事务|
-|SUPPORTS|如果当前存在事务，则加入该事务. 如果当前没有事务, 则以非事务的方式继续运行|
-|MANDATORY|强制性。如果当前存在事务, 则加入该事务。如果当前没有事务，则抛出异常|
-|REQUIRES_NEW|创建一个新的事务。如果当前存在事务, 则把当前事务挂起。也就是说不管外部方法是否开启事务，总是开启新的事务, 且开启的事务相互独立, 互不干扰|
-|NOT_SUPPORTED|以非事务方式运行。如果当前存在事务，则把当前事务挂起(不用)|
-|NEVER|以非事务方式运行。如果当前存在事务，则抛出异常|
+|REQUIRED|Default transaction propagation level. If a transaction currently exists, join it. If no transaction currently exists, create a new one
+|SUPPORTS|If a transaction currently exists, join it. If no transaction currently exists, continue in non-transactional mode
+|MANDATORY|Mandatory. If a transaction currently exists, join it. If no transaction currently exists, throw an exception
+|REQUIRES_NEW|Create a new transaction. If a transaction currently exists, suspend the current one. This means that regardless of whether the external method starts a transaction, a new transaction is always started. These transactions are independent and do not interfere with each other |
+|NOT_SUPPORTED| Runs in non-transactional mode. If a transaction already exists, the current transaction is suspended (not used) |
+|NEVER| Runs in non-transactional mode. If a transaction already exists, an exception is thrown |
 
-## 事务补偿机制
+## Transaction Compensation Mechanism
 
-当事务成功或者失败时执行一些逻辑
+Executes logic when a transaction succeeds or fails
 
-### 1. 成功补偿
+### 1. Success Compensation
 
 ``` typescript
 this.bean.database.current.commit(async () => {
@@ -125,7 +125,7 @@ this.bean.database.current.commit(async () => {
 });
 ```
 
-### 2. 失败补偿
+### 2. Failure Compensation
 
 ``` typescript
 this.bean.database.current.compensate(async () => {
@@ -133,13 +133,15 @@ this.bean.database.current.compensate(async () => {
 });
 ```
 
-## 事务与Cache数据一致性
+## Transaction and Cache Data Consistency
 
-许多框架使用最简短的用例来证明是否高性能，而忽略了业务复杂性带来的性能挑战。随着业务的增长和变更，项目性能就会断崖式下降，各种优化补救方案让项目代码繁杂冗长。而 Vona 正视大型业务的复杂性，从框架核心引入缓存策略，并实现了`二级缓存`、`Query缓存`和`Entity缓存`等机制，轻松应对大型业务系统的开发，可以始终保持代码的优雅和直观
+Many frameworks use minimal use cases to demonstrate high performance, ignoring the performance challenges brought about by business complexity. As business grows and changes, project performance can plummet. Various optimization and mitigation measures can lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses by integrating caching strategies into its core framework. It implements mechanisms such as `two-layer cache`, `query cache`, and `entity cache`, making it easy to develop large-scale business systems while maintaining elegant and intuitive code
 
-Vona 系统对数据库事务与缓存进行了适配，当数据库事务失败时会自动执行缓存的补偿操作，从而让数据库数据与缓存数据始终保持一致
+The Vona system adapts to database transaction and caching. When a database transaction fails, it automatically performs cache compensation operations, ensuring that database and cache data remain consistent
 
-针对这个场景，Vona 提供了内置的解决方案
+For this scenario, Vona provides a built-in solution
+
+### 1. Using the current datasource
 
 ``` typescript
 class ServicePost {
@@ -155,7 +157,9 @@ class ServicePost {
 }  
 ```
 
-- 当新建数据后，将数据放入 redis 缓存中。如果这个事务出现异常，就会进行数据回滚，同时缓存数据也会回滚，从而让数据库数据与缓存数据保持一致
+- When new data is created, it is cached in Redis. If an exception occurs in this transaction, the data will be rolled back, and the cached data will also be rolled back, ensuring that the database data is consistent with the cached data
+
+### 2. Using the specified datasource
 
 ``` typescript
 class ServicePost {
@@ -170,4 +174,4 @@ class ServicePost {
 }  
 ```
 
-- 如果对指定的数据库进行操作，那么就需要将数据库对象`db`传入缓存，从而让缓存针对数据库对象`db`执行相应的补偿操作。当数据库事务回滚时，让数据库数据与缓存数据保持一致
+- If operations are performed on a specific database, the database object `db` must be passed to the cache, allowing the cache to perform corresponding compensation operations on the database object `db`. When the database transaction is rolled back, the database data is kept consistent with the cached data
