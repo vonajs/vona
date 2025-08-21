@@ -255,6 +255,15 @@ class ServicePost {
 class ModelUser {}
 ```
 
+|名称|说明|
+|--|--|
+|relations.roles|关系名|
+|$relation.belongsToMany|定义`n:n`关系|
+|'test-vona:roleUser'|中间Model|
+|'test-vona:role'|目标Model|
+|'userId'|外键|
+|'roleId'|外键|
+|columns|要查询的字段列表|
 
 ### 2. 使用关系
 
