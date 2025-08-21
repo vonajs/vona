@@ -136,6 +136,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'CRUD(Select)', link: 'crud-select' },
             { text: 'CRUD(Insert/Update/Delete)', link: 'crud-cud' },
             { text: 'Transaction', link: 'transaction' },
+            { text: 'Relations(Static)', link: 'relations-static' },
+            { text: 'Relations(Dynamic)', link: 'relations-dynamic' },
           ],
         },
         {
