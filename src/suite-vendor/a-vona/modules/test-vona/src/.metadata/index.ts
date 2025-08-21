@@ -472,7 +472,7 @@ productsGroups: IModelRelationHasMany<ModelProduct, false, undefined,undefined,{
       }
 export interface IModelOptionsPost {
         relations: {
-          postContent: IModelRelationHasOne<'test-vona:postContent', false, 'id'|'content'>;
+          postContent: IModelRelationHasOne<ModelPostContent, false, 'id'|'content'>;
 user: IModelRelationBelongsTo<ModelPost, ModelUser, true, 'id'|'name'>;
         };
       }
@@ -818,6 +818,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/aopMethod.ts';
 export * from '../service/caching.ts';
+export * from '../service/order.ts';
 export * from '../service/post.ts';
 export * from '../service/test.ts';
 export * from '../service/testApp.ts';
@@ -831,6 +832,7 @@ declare module 'vona-module-a-bean' {
     export interface IServiceRecord {
       'test-vona:aopMethod': never;
 'test-vona:caching': never;
+'test-vona:order': never;
 'test-vona:post': never;
 'test-vona:test': never;
 'test-vona:testApp': never;
@@ -861,6 +863,16 @@ declare module 'vona-module-test-vona' {
           export interface ServiceCaching {
             get $beanFullName(): 'test-vona.service.caching';
             get $onionName(): 'test-vona:caching';
+          }
+
+        export interface ServiceOrder {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ServiceOrder {
+            get $beanFullName(): 'test-vona.service.order';
+            get $onionName(): 'test-vona:order';
           }
 
         export interface ServicePost {
@@ -927,6 +939,7 @@ declare module 'vona-module-test-vona' {
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
 import type { ServiceCaching } from '../service/caching.ts';
+import type { ServiceOrder } from '../service/order.ts';
 import type { ServicePost } from '../service/post.ts';
 import type { ServiceTest } from '../service/test.ts';
 import type { ServiceTestApp } from '../service/testApp.ts';
@@ -936,6 +949,7 @@ import type { ServiceTransaction } from '../service/transaction.ts';
 export interface IModuleService {
   'aopMethod': ServiceAopMethod;
 'caching': ServiceCaching;
+'order': ServiceOrder;
 'post': ServicePost;
 'test': ServiceTest;
 'testApp': ServiceTestApp;
@@ -951,6 +965,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'test-vona.service.aopMethod': ServiceAopMethod;
 'test-vona.service.caching': ServiceCaching;
+'test-vona.service.order': ServiceOrder;
 'test-vona.service.post': ServicePost;
 'test-vona.service.test': ServiceTest;
 'test-vona.service.testApp': ServiceTestApp;

@@ -147,80 +147,88 @@ class ServicePost {
 ### 1. 定义关系
 
 ``` typescript
-import { ModelPost } from './post.ts';
+import { ModelProduct } from './product.ts';
 
 @Model({
-  entity: EntityUser,
+  entity: EntityOrder,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }),
+    products: $relation.hasMany(() => ModelProduct, 'orderId', {
+      columns: ['id', 'name', 'price', 'quantity', 'amount'],
+    }),
   },
 })
-class ModelUser {}
+class ModelOrder {}
 ```
 
 |名称|说明|
 |--|--|
-|relations.posts|关系名|
+|relations.products|关系名|
 |$relation.hasMany|定义`1:n`关系|
-|ModelPost|目标Model|
-|'userId'|外键|
+|ModelProduct|目标Model|
+|'orderId'|外键|
 |columns|要查询的字段列表|
 
 ### 2. 使用关系
 
-在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`posts: true`，那么，系统在操作 Model User 的同时，也会操作 Model Post
+在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
 
 ``` typescript
 class ServicePost {
-  async relationHasOne() {
+  async relationHasMany() {
     // insert
-    const postCreate = await this.scope.model.post.insert(
+    const orderCreate = await this.scope.model.order.insert(
       {
-        title: 'Post001',
-        postContent: {
-          content: 'This is a post',
-        },
+        orderNo: 'Order001',
+        products: [
+          { name: 'Apple' },
+          { name: 'Pear' },
+        ],
       },
       {
         include: {
-          postContent: true,
+          products: true,
         },
       },
     );
     // get
-    const post = await this.scope.model.post.get(
+    const _order = await this.scope.model.order.get(
       {
-        id: postCreate.id,
+        id: orderCreate.id,
       },
       {
         include: {
-          postContent: true,
+          products: true,
         },
       },
     );
     // update
-    await this.scope.model.post.update(
+    await this.scope.model.order.update(
       {
-        id: postCreate.id,
-        title: 'Post001-Update',
-        postContent: {
-          content: 'This is a post-changed',
-        },
+        id: orderCreate.id,
+        orderNo: 'Order001-Update',
+        products: [
+          // create product: Peach
+          { name: 'Peach' },
+          // update product: Apple
+          { id: orderCreate.products[0].id, name: 'Apple-Update' },
+          // delete product: Pear
+          { id: orderCreate.products[1].id, deleted: true },
+        ],
       },
       {
         include: {
-          postContent: true,
+          products: true,
         },
       },
     );
     // delete
-    await this.scope.model.post.delete(
+    await this.scope.model.order.delete(
       {
-        id: postCreate.id,
+        id: orderCreate.id,
       },
       {
         include: {
-          postContent: true,
+          products: true,
         },
       },
     );
@@ -228,6 +236,27 @@ class ServicePost {
 }  
 ```
 
+- 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
+  - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
+
+## belongsToMany
+
+### 1. 定义关系
+
+定义`n:n`关系需要中间 Model。比如，Model User 和 Model Role 是`n:n`，需要提供中间 Model RoleUser
+
+``` typescript
+@Model({
+  entity: EntityUser,
+  relations: {
+    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
+  },
+})
+class ModelUser {}
+```
+
+
+### 2. 使用关系
 
 ## 参数说明
 
