@@ -346,6 +346,34 @@ export class ServiceUser extends BeanBase {
 
 接下来我们实现一棵目录树，来演示如何利用`autoload`实现一个树形结构
 
+### 1. 定义关系
+
+``` typescript
+import { ModelProduct } from './product.ts';
+
+@Model({
+  entity: EntityOrder,
+  relations: {
+    products: $relation.hasMany(() => ModelProduct, 'orderId', {
+      columns: ['id', 'name', 'price', 'quantity', 'amount'],
+    }),
+  },
+})
+class ModelOrder {}
+```
+
+|名称|说明|
+|--|--|
+|relations.products|关系名|
+|$relation.hasMany|定义`1:n`关系|
+|ModelProduct|目标Model|
+|'orderId'|外键|
+|columns|要查询的字段列表|
+
+### 2. 使用关系
+
+在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+
 
 ## 参数说明
 

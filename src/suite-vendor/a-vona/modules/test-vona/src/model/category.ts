@@ -8,7 +8,10 @@ export interface IModelOptionsCategory extends IDecoratorModelOptions<EntityCate
 @Model<IModelOptionsCategory>({
   entity: EntityCategory,
   relations: {
-    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', { autoload: true, columns: ['id', 'name'] }),
+    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', {
+      autoload: true,
+      columns: ['id', 'name'],
+    }),
   },
   cache: {
     modelsClear: () => ModelCategoryChain,
