@@ -4,6 +4,31 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceCategory extends BeanBase {
+  async categoryTreeReverse() {
+    // create
+    const treeCreate = await this.scope.model.category.insert({
+      name: 'Category-1',
+      children: [
+        {
+          name: 'Category-1-1',
+          children: [
+            { name: 'Category-1-1-1' },
+          ],
+        },
+        {
+          name: 'Category-1-2',
+        },
+      ],
+    });
+    // 'Category-1-1-1'
+    const subCategoryId = treeCreate.children[0].children?.[0].id;
+    // get: reverse
+    const subCategory = await this.scope.model.categoryChain.get({
+      id: subCategoryId,
+    });
+    assert.equal(subCategory?.parent?.parent?.id, treeCreate.id);
+  }
+
   async categoryTree() {
     // create
     const treeCreate = await this.scope.model.category.insert({
