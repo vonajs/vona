@@ -111,7 +111,7 @@ class ServicePost {
 @Model({
   entity: EntityPostContent,
   relations: {
-    post: $relation.belongsTo(() => ModelPostContent, () => ModelPost, 'postId'),
+    post: $relation.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', { columns: '*' }),
   },
 })
 class ModelPostContent {}
@@ -120,10 +120,11 @@ class ModelPostContent {}
 |名称|说明|
 |--|--|
 |relations.post|关系名|
-|$relation.belongsTo|定义`1:1`关系|
+|$relation.belongsTo|定义`1:1`/`n:1`关系|
 |ModelPostContent|源Model|
 |ModelPost|目标Model|
 |'postId'|外键|
+|columns|要查询的字段列表|
 
 ### 2. 使用关系
 
@@ -521,4 +522,3 @@ class ServiceCategory {
 |ModelPost|Model Class|
 |() => ModelPost|通过函数延迟加载，从而避免触发循环依赖的错误|
 |'test-vona:post'|当跨模块使用Model时，一般直接使用Model名|
-
