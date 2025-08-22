@@ -332,11 +332,16 @@ export class ServiceRelations extends BeanBase {
         const entity = entities[index];
         if (entity[relationName] && entity[relationName].length > 0) {
           const idsTo = entity[relationName].map(item => item.id);
-          const itemsMiddle = await cast(modelTargetMiddle).__select_raw(
-            undefined,
-            { where: { [keyFrom]: cast(entity).id, [keyTo]: idsTo } },
-            methodOptionsReal,
-          );
+          let itemsMiddle;
+          if (idsTo.length === 0) {
+            itemsMiddle = [];
+          } else {
+            itemsMiddle = await cast(modelTargetMiddle).__select_raw(
+              undefined,
+              { where: { [keyFrom]: cast(entity).id, [keyTo]: idsTo } },
+              methodOptionsReal,
+            );
+          }
           for (const child of entity[relationName]) {
             const itemMiddle = itemsMiddle.find(item => item[keyTo] === child.id);
             if (!itemMiddle) {
