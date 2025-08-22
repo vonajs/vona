@@ -339,15 +339,15 @@ class ServiceUser {
 
 ## autoload
 
-通过前面的演示可以看到，如果要对关系进行操作，需要通过`include`指定对应的关系选项
+As you can see from the previous demonstration, if you want to operate on a relation, you need to specify the corresponding relation option using `include`
 
-如果需要关联的关系属于频繁操作，那么可以设置关系`autoload: true`，从而省去`include`选项
+If the relation you want to operate on is frequently, you can set `autoload: true` on the relation, thus omitting the `include` option
 
-## 树形结构
+## Tree structure
 
-接下来我们实现一棵目录树，来演示如何利用`autoload`实现一个树形结构
+Next, we implement a directory tree to demonstrate how to use `autoload` to implement a tree structure
 
-### 1. 定义关系
+### 1. Define the relation
 
 ``` typescript
 @Model({
@@ -362,19 +362,19 @@ class ServiceUser {
 class ModelCategory {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|relations.children|关系名|
-|$relation.hasMany|定义`1:n`关系|
-|ModelCategory|目标Model|
-|'categoryIdParent'|外键|
-|autoload|自动加载|
-|columns|要查询的字段列表|
+|relations.children|Relation Name|
+|$relation.hasMany|`1:n`|
+|ModelCategory|Target Model|
+|'categoryIdParent'|Foreign key|
+|autoload|Autoload|
+|columns|List of fields to query|
 
-### 2. 使用关系
+### 2. Using relations
 
-* 由于定义了与自身的 hasMany 关系，从而形成树形结构。此树形结构可以用于所有 CRUD 操作
-* 由于定义了`autoload: true`，那么，系统在操作主数据的同时，也会自动操作 children
+* Because a `hasMany` relation is defined with itself, a tree structure is formed. This tree structure can be used for all `CRUD` operations
+* Because `autoload: true` is defined, the system automatically operates on children while operating on the main data
 
 ``` typescript
 class ServiceCategory {
@@ -421,11 +421,11 @@ class ServiceCategory {
 }
 ```
 
-## 树形结构（反向查询）
+## Tree structure (reverse query)
 
-前面演示的是如何从父级向子级查询一棵目录树，接下来演示从子级向父级查询目录树
+The previous demonstration shows how to query a directory tree from the parent to the children. The following demonstration shows how to query a directory tree from the child to the parent
 
-### 1. 定义关系
+### 1. Define the relation
 
 ``` typescript
 @Model({
@@ -440,20 +440,20 @@ class ServiceCategory {
 class ModelCategoryChain {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|relations.parent|关系名|
-|$relation.belongsTo|定义`n:1`关系|
-|ModelCategoryChain|源Model|
-|ModelCategoryChain|目标Model|
-|'categoryIdParent'|外键|
-|autoload|自动加载|
-|columns|要查询的字段列表|
+|relations.parent|Relation Name|
+|$relation.belongsTo|`n:1`|
+|ModelCategoryChain|Source Model|
+|ModelCategoryChain|Target Model|
+|'categoryIdParent'|Foreign key|
+|autoload|Autoload|
+|columns|List of fields to query|
 
-### 2. 使用关系
+### 2. Using relations
 
-* 由于定义了与自身的 belongsTo 关系，从而形成反向的树形结构。此树形结构只用于查询操作
-* 由于定义了`autoload: true`，那么，系统在查询子目录的同时，也会自动查询 parent
+* Due to the `belongsTo` relation defined with itself, an inverted tree structure is formed. This tree structure is only used for query operation
+* Due to `autoload: true` being defined, the system will automatically query the parent directories when querying subdirectory
 
 ``` typescript
 class ServiceCategory {
@@ -484,33 +484,33 @@ class ServiceCategory {
 }
 ```
 
-## 关系选项
+## Relation Options
 
 ### 1. $relation.hasOne/$relation.belongsTo
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|autoload|自动加载|
-|columns|要查询的字段列表|
-|meta.client|定义关系所使用的数据源|
-|meta.table|定义关系所使用的数据表|
+|autoload|Autoload|
+|columns|List of fields to query|
+|meta.client|Define the datasource used by the relation, which can realize cross-datasource relation query|
+|meta.table|Define the data table used by the relation|
 
 ### 2. $relation.hasMany/$relation.belongsToMany
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|autoload|自动加载|
-|columns|要查询的字段列表|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
-|distinct|是否启用 distinct|
-|where|条件语句|
-|joins|关联表|
-|orders|排序|
-|limit|可用于分页查询|
-|offset|可用于分页查询|
-|aggrs|聚合查询|
-|groups|分组查询|
+|autoload|Autoload|
+|columns|List of fields to query|
+|meta.client|Define the datasource used by the relation, which can realize cross-datasource relation query|
+|meta.table|Define the data table used by the relation|
+|distinct|Whether to enable distinct|
+|where|Conditional statement|
+|joins|Related tables|
+|orders|Sorting|
+|limit|Can be used for paginated queries|
+|offset|Can be used for paginated queries|
+|aggrs|Aggregate query|
+|groups|Group-by query|
 
 ## Model参数
 

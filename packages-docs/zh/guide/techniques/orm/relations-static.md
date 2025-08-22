@@ -492,7 +492,7 @@ class ServiceCategory {
 |--|--|
 |autoload|自动加载|
 |columns|要查询的字段列表|
-|meta.client|定义关系所使用的数据源|
+|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
 |meta.table|定义关系所使用的数据表|
 
 ### 2. $relation.hasMany/$relation.belongsToMany
