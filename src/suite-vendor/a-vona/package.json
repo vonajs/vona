@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.82",
+  "version": "5.0.83",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -40,7 +40,7 @@
     "vona-module-a-redlock": "^5.0.16",
     "vona-module-a-schedule": "^5.0.15",
     "vona-module-a-security": "^5.0.14",
-    "vona-module-a-startup": "^5.0.17",
+    "vona-module-a-startup": "^5.0.18",
     "vona-module-a-static": "^5.0.13",
     "vona-module-a-summer": "^5.0.16",
     "vona-module-a-swagger": "^5.0.22",
