@@ -825,6 +825,7 @@ export * from '../service/testApp.ts';
 export * from '../service/testClass.ts';
 export * from '../service/testData.ts';
 export * from '../service/transaction.ts';
+export * from '../service/user.ts';
 
 import 'vona';
 declare module 'vona-module-a-bean' {
@@ -839,6 +840,7 @@ declare module 'vona-module-a-bean' {
 'test-vona:testClass': never;
 'test-vona:testData': never;
 'test-vona:transaction': never;
+'test-vona:user': never;
     }
 
   
@@ -933,6 +935,16 @@ declare module 'vona-module-test-vona' {
           export interface ServiceTransaction {
             get $beanFullName(): 'test-vona.service.transaction';
             get $onionName(): 'test-vona:transaction';
+          }
+
+        export interface ServiceUser {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ServiceUser {
+            get $beanFullName(): 'test-vona.service.user';
+            get $onionName(): 'test-vona:user';
           } 
 }
 /** service: end */
@@ -946,6 +958,7 @@ import type { ServiceTestApp } from '../service/testApp.ts';
 import type { ServiceTestClass } from '../service/testClass.ts';
 import type { ServiceTestData } from '../service/testData.ts';
 import type { ServiceTransaction } from '../service/transaction.ts';
+import type { ServiceUser } from '../service/user.ts';
 export interface IModuleService {
   'aopMethod': ServiceAopMethod;
 'caching': ServiceCaching;
@@ -956,6 +969,7 @@ export interface IModuleService {
 'testClass': ServiceTestClass;
 'testData': ServiceTestData;
 'transaction': ServiceTransaction;
+'user': ServiceUser;
 }
 /** service: end */
 /** service: begin */
@@ -972,6 +986,7 @@ declare module 'vona' {
 'test-vona.service.testClass': ServiceTestClass;
 'test-vona.service.testData': ServiceTestData;
 'test-vona.service.transaction': ServiceTransaction;
+'test-vona.service.user': ServiceUser;
   }
 }
 /** service: end */

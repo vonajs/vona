@@ -267,74 +267,85 @@ class ModelUser {}
 
 ### 2. 使用关系
 
-在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser
 
 ``` typescript
-class ServicePost {
-  async relationHasMany() {
-    // insert
-    const orderCreate = await this.scope.model.order.insert(
+export class ServiceUser extends BeanBase {
+  async relationBelongsToMany() {
+    // insert: roles
+    const roles = await this.scope.model.role.insertBulk([
+      { name: 'role-family' },
+      { name: 'role-friend' },
+    ]);
+    const roleIdFamily = roles[0].id;
+    const roleIdFriend = roles[1].id;
+    // insert: user
+    const userCreate = await this.scope.model.user.insert(
       {
-        orderNo: 'Order001',
-        products: [
-          { name: 'Apple' },
-          { name: 'Pear' },
+        name: 'Tom',
+        roles: [{
+          id: roleIdFamily,
+        }],
+      },
+      {
+        include: {
+          roles: true,
+        },
+      },
+    );
+    // get: user
+    await this.scope.model.user.get(
+      {
+        id: userCreate.id,
+      },
+      {
+        include: {
+          roles: true,
+        },
+      },
+    );
+    // update: user
+    await this.scope.model.user.update(
+      {
+        id: userCreate.id,
+        roles: [
+          // delete
+          { id: roleIdFamily, deleted: true },
+          // insert
+          { id: roleIdFriend },
         ],
       },
       {
         include: {
-          products: true,
+          roles: true,
         },
       },
     );
-    // get
-    const _order = await this.scope.model.order.get(
+    // delete: user
+    await this.scope.model.user.delete(
       {
-        id: orderCreate.id,
+        id: userCreate.id,
       },
       {
         include: {
-          products: true,
-        },
-      },
-    );
-    // update
-    await this.scope.model.order.update(
-      {
-        id: orderCreate.id,
-        orderNo: 'Order001-Update',
-        products: [
-          // create product: Peach
-          { name: 'Peach' },
-          // update product: Apple
-          { id: orderCreate.products[0].id, name: 'Apple-Update' },
-          // delete product: Pear
-          { id: orderCreate.products[1].id, deleted: true },
-        ],
-      },
-      {
-        include: {
-          products: true,
-        },
-      },
-    );
-    // delete
-    await this.scope.model.order.delete(
-      {
-        id: orderCreate.id,
-      },
-      {
-        include: {
-          products: true,
+          roles: true,
         },
       },
     );
   }
-}  
+}
 ```
 
-- 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
-  - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
+## autoload
+
+通过前面的演示可以看到，如果要对关系进行操作，需要通过`include`指定对应的关系选项
+
+如果需要关联的关系属于频繁操作，那么可以设置关系`autoload: true`，从而省去`include`选项
+
+## 树形结构
+
+接下来我们实现一棵目录树，来演示如何利用`autoload`实现一个树形结构
+
 
 ## 参数说明
 
