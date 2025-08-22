@@ -20,7 +20,7 @@ export class ServiceOrder extends BeanBase {
       },
     );
     // get
-    const _order = await this.scope.model.order.get(
+    await this.scope.model.order.get(
       {
         id: orderCreate.id,
       },
