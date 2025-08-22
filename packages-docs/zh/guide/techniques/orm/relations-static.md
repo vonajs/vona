@@ -349,30 +349,76 @@ export class ServiceUser extends BeanBase {
 ### 1. 定义关系
 
 ``` typescript
-import { ModelProduct } from './product.ts';
-
 @Model({
-  entity: EntityOrder,
+  entity: EntityCategory,
   relations: {
-    products: $relation.hasMany(() => ModelProduct, 'orderId', {
-      columns: ['id', 'name', 'price', 'quantity', 'amount'],
+    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', {
+      autoload: true,
+      columns: ['id', 'name'],
     }),
   },
 })
-class ModelOrder {}
+class ModelCategory {}
 ```
 
 |名称|说明|
 |--|--|
-|relations.products|关系名|
+|relations.children|关系名|
 |$relation.hasMany|定义`1:n`关系|
-|ModelProduct|目标Model|
-|'orderId'|外键|
+|ModelCategory|目标Model|
+|'categoryIdParent'|外键|
+|autoload|自动加载|
 |columns|要查询的字段列表|
 
 ### 2. 使用关系
 
-在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+* 由于定义了与自身的 hasMany 关系，从而形成树形结构。此树形结构可以用于所有 CRUD 操作
+* 由于定义了`autoload: true`，那么，系统在操作主数据的同时，也会自动操作 children
+
+``` typescript
+class ServiceCategory {
+  async categoryTree() {
+    // create
+    const treeCreate = await this.scope.model.category.insert({
+      name: 'Category-1',
+      children: [
+        {
+          name: 'Category-1-1',
+          children: [
+            { name: 'Category-1-1-1' },
+          ],
+        },
+        {
+          name: 'Category-1-2',
+        },
+      ],
+    });
+    // get
+    const tree = await this.scope.model.category.get({
+      id: treeCreate.id,
+    });
+    assert.equal(tree?.children.length, 2);
+    assert.equal(tree?.children[0].children.length, 1);
+    // update
+    await this.scope.model.category.update({
+      id: treeCreate.id,
+      name: 'Category-1-Update',
+      children: [
+        // create
+        { name: 'Category-1-3' },
+        // update
+        { id: treeCreate.children[0].id, name: 'Category-1-1-Update' },
+        // delete
+        { id: treeCreate.children[1].id, deleted: true },
+      ],
+    });
+    // delete
+    await this.scope.model.category.delete({
+      id: treeCreate.id,
+    });
+  }
+}
+```
 
 
 ## 参数说明
