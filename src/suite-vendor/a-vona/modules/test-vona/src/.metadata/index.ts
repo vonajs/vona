@@ -818,6 +818,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/aopMethod.ts';
 export * from '../service/caching.ts';
+export * from '../service/category.ts';
 export * from '../service/order.ts';
 export * from '../service/post.ts';
 export * from '../service/test.ts';
@@ -833,6 +834,7 @@ declare module 'vona-module-a-bean' {
     export interface IServiceRecord {
       'test-vona:aopMethod': never;
 'test-vona:caching': never;
+'test-vona:category': never;
 'test-vona:order': never;
 'test-vona:post': never;
 'test-vona:test': never;
@@ -865,6 +867,16 @@ declare module 'vona-module-test-vona' {
           export interface ServiceCaching {
             get $beanFullName(): 'test-vona.service.caching';
             get $onionName(): 'test-vona:caching';
+          }
+
+        export interface ServiceCategory {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ServiceCategory {
+            get $beanFullName(): 'test-vona.service.category';
+            get $onionName(): 'test-vona:category';
           }
 
         export interface ServiceOrder {
@@ -951,6 +963,7 @@ declare module 'vona-module-test-vona' {
 /** service: begin */
 import type { ServiceAopMethod } from '../service/aopMethod.ts';
 import type { ServiceCaching } from '../service/caching.ts';
+import type { ServiceCategory } from '../service/category.ts';
 import type { ServiceOrder } from '../service/order.ts';
 import type { ServicePost } from '../service/post.ts';
 import type { ServiceTest } from '../service/test.ts';
@@ -962,6 +975,7 @@ import type { ServiceUser } from '../service/user.ts';
 export interface IModuleService {
   'aopMethod': ServiceAopMethod;
 'caching': ServiceCaching;
+'category': ServiceCategory;
 'order': ServiceOrder;
 'post': ServicePost;
 'test': ServiceTest;
@@ -979,6 +993,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'test-vona.service.aopMethod': ServiceAopMethod;
 'test-vona.service.caching': ServiceCaching;
+'test-vona.service.category': ServiceCategory;
 'test-vona.service.order': ServiceOrder;
 'test-vona.service.post': ServicePost;
 'test-vona.service.test': ServiceTest;
