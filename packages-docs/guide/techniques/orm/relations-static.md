@@ -512,12 +512,12 @@ class ServiceCategory {
 |aggrs|Aggregate query|
 |groups|Group-by query|
 
-## Model参数
+## Parameter: Model
 
-在定义关系时需要提供参数：`源Model`/`目标Model`/`中间Model`，支持以下类型：
+When defining a relation, you need to provide the following parameters: `Source Model`, `Target Model`, and `Intermediate Model`. The following types are supported:
 
-|名称|说明|
+|Name|Description|
 |--|--|
 |ModelPost|Model Class|
-|() => ModelPost|通过函数延迟加载，从而避免触发循环依赖的错误|
-|'test-vona:post'|当跨模块使用Model时，一般直接使用Model名|
+|() => ModelPost|Use a function to delay loading to avoid circular dependency errors|
+|'test-vona:post'|When using models across modules, typically use the model name directly|
