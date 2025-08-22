@@ -10,7 +10,7 @@ Vona ORM 提供了 4 种关系：
 |--|--|
 |hasOne|`1:1`|
 |belongsTo|`1:1`/`n:1`|
-|hasMany|`1:n`|
+|hasMany|`1:n`。可以实现`主表-明细表`，以及`主表-多级明细表`的功能|
 |belongsToMany|`n:n`|
 
 ## hasOne
@@ -484,7 +484,41 @@ class ServiceCategory {
 }
 ```
 
-## 参数说明
+## 关系选项
 
-1. Model 类型：三种形式+数组
-2. columns
+### 1. $relation.hasOne/$relation.belongsTo
+
+|名称|说明|
+|--|--|
+|autoload|自动加载|
+|columns|要查询的字段列表|
+|meta.client|定义关系所使用的数据源|
+|meta.table|定义关系所使用的数据表|
+
+### 2. $relation.hasMany/$relation.belongsToMany
+
+|名称|说明|
+|--|--|
+|autoload|自动加载|
+|columns|要查询的字段列表|
+|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
+|meta.table|定义关系所使用的数据表|
+|distinct|是否启用 distinct|
+|where|条件语句|
+|joins|关联表|
+|orders|排序|
+|limit|可用于分页查询|
+|offset|可用于分页查询|
+|aggrs|聚合查询|
+|groups|分组查询|
+
+## Model参数
+
+在定义关系时需要提供参数：`源Model`/`目标Model`/`中间Model`，支持以下类型：
+
+|名称|说明|
+|--|--|
+|ModelPost|Model Class|
+|() => ModelPost|通过函数延迟加载，从而避免触发循环依赖的错误|
+|'test-vona:post'|当跨模块使用Model时，一般直接使用Model名|
+
