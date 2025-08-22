@@ -267,6 +267,75 @@ class ModelUser {}
 
 ### 2. 使用关系
 
+在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+
+``` typescript
+class ServicePost {
+  async relationHasMany() {
+    // insert
+    const orderCreate = await this.scope.model.order.insert(
+      {
+        orderNo: 'Order001',
+        products: [
+          { name: 'Apple' },
+          { name: 'Pear' },
+        ],
+      },
+      {
+        include: {
+          products: true,
+        },
+      },
+    );
+    // get
+    const _order = await this.scope.model.order.get(
+      {
+        id: orderCreate.id,
+      },
+      {
+        include: {
+          products: true,
+        },
+      },
+    );
+    // update
+    await this.scope.model.order.update(
+      {
+        id: orderCreate.id,
+        orderNo: 'Order001-Update',
+        products: [
+          // create product: Peach
+          { name: 'Peach' },
+          // update product: Apple
+          { id: orderCreate.products[0].id, name: 'Apple-Update' },
+          // delete product: Pear
+          { id: orderCreate.products[1].id, deleted: true },
+        ],
+      },
+      {
+        include: {
+          products: true,
+        },
+      },
+    );
+    // delete
+    await this.scope.model.order.delete(
+      {
+        id: orderCreate.id,
+      },
+      {
+        include: {
+          products: true,
+        },
+      },
+    );
+  }
+}  
+```
+
+- 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
+  - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
+
 ## 参数说明
 
 1. Model 类型：三种形式+数组
