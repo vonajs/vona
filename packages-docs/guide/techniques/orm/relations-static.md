@@ -10,7 +10,7 @@ Vona ORM provides 4 relations:
 |--|--|
 |hasOne|`1:1`|
 |belongsTo|`1:1`/`n:1`|
-|hasMany|`1:n`. It can realize the functions of `main-detailed` and `main-detailed(multi-level)`|
+|hasMany|`1:n`. It can realize the functions of `main-details` and `main-details(multi-level)`|
 |belongsToMany|`n:n`|
 
 ## hasOne
@@ -126,9 +126,9 @@ class ModelPostContent {}
 |'postId'|Foreign key|
 |columns|List of fields to query|
 
-### 2. 使用关系
+### 2. Using relations
 
-在 Model 中定义的 belongsTo 关系只用于查询操作。通过`include`指定需要查询的关系，比如`post: true`，那么，系统在查询 Model PostContent 的同时，也会查询 Model Post
+The `belongsTo` relation defined in the Model is only used for query operation. Use `include` to specify the relation to be queried, such as `post: true`, then the system will query the Model Post while querying the Model PostContent
 
 ``` typescript
 class ServicePost {
@@ -145,7 +145,7 @@ class ServicePost {
 
 ## hasMany
 
-### 1. 定义关系
+### 1. Define the relation
 
 ``` typescript
 import { ModelProduct } from './product.ts';
@@ -161,17 +161,17 @@ import { ModelProduct } from './product.ts';
 class ModelOrder {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|relations.products|关系名|
-|$relation.hasMany|定义`1:n`关系|
-|ModelProduct|目标Model|
-|'orderId'|外键|
-|columns|要查询的字段列表|
+|relations.products|Relation Name|
+|$relation.hasMany|`1:n`|
+|ModelProduct|Target Model|
+|'orderId'|Foreign key|
+|columns|List of fields to query|
 
-### 2. 使用关系
+### 2. Using relations
 
-在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+The `hasMany` relation defined in the Model can be used for all `CRUD` operations. Use `include` to specify the relation to be operated, such as `products: true`, then the system will operate on the Model Product while operating on the Model Order
 
 ``` typescript
 class ServicePost {
@@ -237,14 +237,14 @@ class ServicePost {
 }  
 ```
 
-- 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
-  - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
+- When updating main table data, you can also update detail table data simultaneously (including Insert/Update/Delete operations)
+  - See: [CRUD (Insert/Update/Delete) - Mutate](./crud-cud.md#mutate)
 
 ## belongsToMany
 
-### 1. 定义关系
+### 1. Define the relation
 
-定义`n:n`关系需要中间 Model。比如，Model User 和 Model Role 是`n:n`，需要提供中间 Model RoleUser
+Defining an `n:n` relation requires an intermediate Model. For example, if the Model User and Model Role are `n:n`, you need to provide an intermediate Model RoleUser
 
 ``` typescript
 @Model({
@@ -256,22 +256,22 @@ class ServicePost {
 class ModelUser {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|relations.roles|关系名|
-|$relation.belongsToMany|定义`n:n`关系|
-|'test-vona:roleUser'|中间Model|
-|'test-vona:role'|目标Model|
-|'userId'|外键|
-|'roleId'|外键|
-|columns|要查询的字段列表|
+|relations.roles|Relation Name|
+|$relation.belongsToMany|`n:n`|
+|'test-vona:roleUser'|Middle Model|
+|'test-vona:role'|Target Model|
+|'userId'|Foreign key|
+|'roleId'|Foreign key|
+|columns|List of fields to query|
 
-### 2. 使用关系
+### 2. Using relations
 
-在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser
+The `belongsToMany` relation defined in the Model can be used for all `CRUD` operations. It is important to emphasize that the CRUD operations here are for the intermediate Model, not the target Model. By specifying the relation to be operated on by `include`, such as `roles: true`, the system will operate on the intermediate Model RoleUser at the same time as the Model User
 
 ``` typescript
-export class ServiceUser extends BeanBase {
+class ServiceUser {
   async relationBelongsToMany() {
     // insert: roles
     const roles = await this.scope.model.role.insertBulk([
@@ -457,7 +457,6 @@ class ModelCategoryChain {}
 
 ``` typescript
 class ServiceCategory {
-  export class ServiceCategory extends BeanBase {
   async categoryTreeReverse() {
     // create
     const treeCreate = await this.scope.model.category.insert({

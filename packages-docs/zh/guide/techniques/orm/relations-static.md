@@ -271,7 +271,7 @@ class ModelUser {}
 在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser
 
 ``` typescript
-export class ServiceUser extends BeanBase {
+class ServiceUser {
   async relationBelongsToMany() {
     // insert: roles
     const roles = await this.scope.model.role.insertBulk([
@@ -457,7 +457,6 @@ class ModelCategoryChain {}
 
 ``` typescript
 class ServiceCategory {
-  export class ServiceCategory extends BeanBase {
   async categoryTreeReverse() {
     // create
     const treeCreate = await this.scope.model.category.insert({
