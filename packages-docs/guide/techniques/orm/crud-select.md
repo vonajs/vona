@@ -148,7 +148,7 @@ As mentioned earlier, you can define relationships between multiple entities in 
 @Model({
   relations: {
     postContent: $relation.hasOne('test-vona:postContent', 'postId', { columns: ['id', 'content'] }),
-    user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
+    user: $relation.belongsTo(() => ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
   },
 })
 class ModelPost {}

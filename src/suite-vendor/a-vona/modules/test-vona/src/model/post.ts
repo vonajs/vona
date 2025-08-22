@@ -10,7 +10,7 @@ export interface IModelOptionsPost extends IDecoratorModelOptions<EntityPost> {}
   entity: EntityPost,
   relations: {
     postContent: $relation.hasOne(ModelPostContent, 'postId', { columns: ['id', 'content'] }),
-    user: $relation.belongsTo(ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
+    user: $relation.belongsTo(() => ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
   },
 })
 export class ModelPost extends BeanModelBase<EntityPost> {}

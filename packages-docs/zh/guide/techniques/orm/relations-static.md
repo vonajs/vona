@@ -111,7 +111,7 @@ class ServicePost {
 @Model({
   entity: EntityPostContent,
   relations: {
-    post: $relation.belongsTo(ModelPostContent, () => ModelPost, 'postId'),
+    post: $relation.belongsTo(() => ModelPostContent, () => ModelPost, 'postId'),
   },
 })
 class ModelPostContent {}

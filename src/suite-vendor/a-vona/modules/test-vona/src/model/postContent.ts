@@ -8,7 +8,7 @@ export interface IModelOptionsPostContent extends IDecoratorModelOptions<EntityP
 @Model<IModelOptionsPostContent>({
   entity: EntityPostContent,
   relations: {
-    post: $relation.belongsTo(ModelPostContent, () => ModelPost, 'postId'),
+    post: $relation.belongsTo(() => ModelPostContent, () => ModelPost, 'postId'),
   },
   cache: {
     modelsClear: () => ModelPost,
