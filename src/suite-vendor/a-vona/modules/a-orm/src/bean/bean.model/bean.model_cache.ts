@@ -141,6 +141,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<Partial<TRecord>[]> {
+    if (ids.length === 0) return [];
     const items = await this.__mget_raw(undefined, ids, options);
     return await this.relations.handleRelationsMany(items, options as any, options);
   }

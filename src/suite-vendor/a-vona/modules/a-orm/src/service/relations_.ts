@@ -160,7 +160,12 @@ export class ServiceRelations extends BeanBase {
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
       const options2 = deepExtend({}, optionsReal, { columns, where: { [key]: idsFrom } });
-      const items = await modelTarget.select(options2, methodOptionsReal);
+      let items;
+      if (idsFrom.length === 0) {
+        items = [];
+      } else {
+        items = await modelTarget.select(options2, methodOptionsReal);
+      }
       for (const entity of entities) {
         entity[relationName] = items.find(item => {
           if (item[key] === cast(entity).id) {
@@ -219,7 +224,12 @@ export class ServiceRelations extends BeanBase {
     } else if (type === 'belongsToMany') {
       const modelTargetMiddle = this.__getModelTarget(modelMiddle, options?.meta?.middle) as BeanModelCrud;
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
-      const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
+      let itemsMiddle;
+      if (idsFrom.length === 0) {
+        itemsMiddle = [];
+      } else {
+        itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idsFrom } }, methodOptionsReal);
+      }
       if (optionsReal.groups) {
         for (const entity of entities) {
           const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
