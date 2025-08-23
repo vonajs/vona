@@ -14,12 +14,13 @@ export class ControllerQueue extends BeanBase {
   @Passport.public()
   async pushAsync() {
     const res = await this.scope.queue.test.pushAsync({ a: 1, b: 2 });
+    this.$logger.silly(`queue test await done: 1 + 2 = ${res}`);
     assert.equal(res, 3);
   }
 
   @Web.post('push')
   @Passport.public()
   push() {
-    this.scope.queue.test.push({ a: 1, b: 2 });
+    this.scope.queue.test.push({ a: 2, b: 3 });
   }
 }
