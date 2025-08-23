@@ -17,7 +17,7 @@ export type TypeDynamicClientName =
   (ctx: VonaContext, modelInstance: any) => keyof IDatabaseClientRecord;
 
 export type TypeModelsClearedByFn =
-  (ctx: VonaContext, modelInstance: any) => Promise<void>;
+  (ctx: VonaContext, modelTarget: any, modelSource: any) => Promise<void>;
 
 export type TypeSoftDeletionPruneHandler =
   (ctx: VonaContext, modelInstance: any, options: ISoftDeletionPruneHandlerOptions) => Promise<void>;

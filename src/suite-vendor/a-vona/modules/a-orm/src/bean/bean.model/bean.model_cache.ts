@@ -534,7 +534,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       const modelTarget = this.newInstanceTarget(modelClear as any) as typeof this;
       const modelsClearedByFn = modelTarget.options.cache?.modelsClearedByFn;
       if (modelsClearedByFn) {
-        await modelsClearedByFn(this.ctx, modelTarget);
+        await modelsClearedByFn(this.ctx, modelTarget, this);
       } else {
         await modelTarget.cacheQueryClear();
       }
