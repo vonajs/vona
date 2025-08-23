@@ -36,6 +36,7 @@ export interface IQueueQueue {
   queue: Bull.Queue;
   queueEvents: Bull.QueueEvents;
   queueEventsOptions: Bull.QueueEventsOptions;
+  queueEventsReady?: boolean;
 }
 
 export interface IQueueQueues {

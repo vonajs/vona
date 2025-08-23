@@ -12,6 +12,7 @@ import type {
   IQueueWorks,
   TypeQueueJob,
 } from '../types/queue.ts';
+import { sleep } from '@cabloy/utils';
 import * as Bull from 'bullmq';
 import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -218,8 +219,8 @@ export class ServiceQueue extends BeanBase {
     // queueConfig.options: queue/worker/job/limiter
     const jobOptionsBase = queueConfig?.options?.job;
     // queue
-    const queueItem = this._ensureQueue(info);
-    const queue = queueItem.queue;
+    const queueQueue = this._ensureQueue(info);
+    const queue = queueQueue.queue;
     // job
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
@@ -235,7 +236,7 @@ export class ServiceQueue extends BeanBase {
     // async
     return new Promise((resolve, reject) => {
       // queue events
-      return queueItem.queueEvents.waitUntilReady().then(() => {
+      return this._queueEventsReady(queueQueue).then(() => {
         // callback
         this._queueCallbacks[jobId] = {
           info,
@@ -250,6 +251,13 @@ export class ServiceQueue extends BeanBase {
         return reject(err);
       });
     });
+  }
+
+  async _queueEventsReady(queueQueue: IQueueQueue) {
+    if (queueQueue.queueEventsReady) return;
+    await queueQueue.queueEvents.waitUntilReady();
+    await sleep(this.scope.config.queueEvents.waitUntilReady);
+    queueQueue.queueEventsReady = true;
   }
 
   _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
