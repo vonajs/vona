@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.85",
+  "version": "5.0.86",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -35,7 +35,7 @@
     "vona-module-a-orm": "^5.0.49",
     "vona-module-a-ormdialect": "^5.0.13",
     "vona-module-a-printtip": "^5.0.13",
-    "vona-module-a-queue": "^5.0.16",
+    "vona-module-a-queue": "^5.0.17",
     "vona-module-a-redis": "^5.0.16",
     "vona-module-a-redlock": "^5.0.16",
     "vona-module-a-schedule": "^5.0.15",
