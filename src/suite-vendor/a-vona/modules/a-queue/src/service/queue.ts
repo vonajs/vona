@@ -218,7 +218,8 @@ export class ServiceQueue extends BeanBase {
     // queueConfig.options: queue/worker/job/limiter
     const jobOptionsBase = queueConfig?.options?.job;
     // queue
-    const queue = this._getQueue(info);
+    const queueItem = this._ensureQueue(info);
+    const queue = queueItem.queue;
     // job
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
@@ -233,16 +234,21 @@ export class ServiceQueue extends BeanBase {
     }
     // async
     return new Promise((resolve, reject) => {
-      // callback
-      this._queueCallbacks[jobId] = {
-        info,
-        callback: (err, data) => {
-          if (err) return reject(err);
-          resolve(data as unknown as RESULT);
-        },
-      };
-      // add job
-      return queue.add(jobName, info, jobOptions);
+      // queue events
+      return queueItem.queueEvents.waitUntilReady().then(() => {
+        // callback
+        this._queueCallbacks[jobId] = {
+          info,
+          callback: (err, data) => {
+            if (err) return reject(err);
+            resolve(data as unknown as RESULT);
+          },
+        };
+        // add job
+        return queue.add(jobName, info, jobOptions);
+      }).catch(err => {
+        return reject(err);
+      });
     });
   }
 
