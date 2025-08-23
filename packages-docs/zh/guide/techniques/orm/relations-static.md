@@ -408,9 +408,9 @@ class ServiceCategory {
         // create
         { name: 'Category-1-3' },
         // update
-        { id: treeCreate.children[0].id, name: 'Category-1-1-Update' },
+        { id: treeCreate.children?.[0].id, name: 'Category-1-1-Update' },
         // delete
-        { id: treeCreate.children[1].id, deleted: true },
+        { id: treeCreate.children?.[1].id, deleted: true },
       ],
     });
     // delete
@@ -474,7 +474,7 @@ class ServiceCategory {
       ],
     });
     // 'Category-1-1-1'
-    const subCategoryId = treeCreate.children[0].children?.[0].id;
+    const subCategoryId = treeCreate.children?.[0].children?.[0].id;
     // get: reverse
     const subCategory = await this.scope.model.categoryChain.get({
       id: subCategoryId,
