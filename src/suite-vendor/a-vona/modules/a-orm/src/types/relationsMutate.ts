@@ -63,8 +63,13 @@ export type TypeModelMutateRelationResultMergeWithRelation<WithRelation> =
     never :
     WithRelation extends {} ? TypeUtilMutateGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
 
-export type TypeModelMutateRelationData<TRecord, TModel extends BeanModelMeta | undefined, TOptionsRelation> =
-  Partial<TRecord> &
+export type TypeModelMutateRelationData<
+  TRecord,
+  TModel extends BeanModelMeta | undefined,
+  TOptionsRelation,
+  TForInsertResult extends boolean | undefined = undefined,
+> =
+  (TForInsertResult extends true ? TRecord : Partial<TRecord>) &
   (TModel extends BeanModelMeta ?
       (
       Partial<OmitNever<TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>>> &
