@@ -211,9 +211,9 @@ class ServicePost {
           // create product: Peach
           { name: 'Peach' },
           // update product: Apple
-          { id: orderCreate.products[0].id, name: 'Apple-Update' },
+          { id: orderCreate.products?.[0].id, name: 'Apple-Update' },
           // delete product: Pear
-          { id: orderCreate.products[1].id, deleted: true },
+          { id: orderCreate.products?.[1].id, deleted: true },
         ],
       },
       {
