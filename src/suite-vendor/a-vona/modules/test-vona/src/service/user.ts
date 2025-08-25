@@ -1,5 +1,8 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { $relationDynamic } from 'vona-module-a-orm';
+import { ModelRole } from '../model/role.ts';
+import { ModelRoleUser } from '../model/roleUser.ts';
 
 @Service()
 export class ServiceUser extends BeanBase {
@@ -20,8 +23,8 @@ export class ServiceUser extends BeanBase {
         }],
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
         },
       },
     );
@@ -31,8 +34,10 @@ export class ServiceUser extends BeanBase {
         id: userCreate.id,
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            columns: ['id', 'name'],
+          }),
         },
       },
     );
@@ -48,8 +53,10 @@ export class ServiceUser extends BeanBase {
         ],
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            columns: ['id', 'name'],
+          }),
         },
       },
     );
@@ -59,8 +66,8 @@ export class ServiceUser extends BeanBase {
         id: userCreate.id,
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
         },
       },
     );

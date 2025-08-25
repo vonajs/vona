@@ -190,7 +190,7 @@ class ServiceOrder {
 
 |名称|说明|
 |--|--|
-|with.products2|关系名|
+|with.products2|关系名。由于`test-vona`模块已经定义了静态关系`products`，并且是自动加载的。为了演示起见，使用不同的关系名`products2`|
 |$relationDynamic.hasMany|定义`1:n`关系|
 |ModelProduct|目标Model|
 |'orderId'|外键|
@@ -198,33 +198,7 @@ class ServiceOrder {
 
 ## belongsToMany
 
-### 1. 定义关系
-
-定义`n:n`关系需要中间 Model。比如，Model User 和 Model Role 是`n:n`，需要提供中间 Model RoleUser
-
-``` typescript
-@Model({
-  entity: EntityUser,
-  relations: {
-    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
-  },
-})
-class ModelUser {}
-```
-
-|名称|说明|
-|--|--|
-|relations.roles|关系名|
-|$relation.belongsToMany|定义`n:n`关系|
-|'test-vona:roleUser'|中间Model|
-|'test-vona:role'|目标Model|
-|'userId'|外键|
-|'roleId'|外键|
-|columns|要查询的字段列表|
-
-### 2. 使用关系
-
-在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser
+直接在 CRUD 操作中通过`with`指定动态关系，需要提供中间 Model RoleUser。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model
 
 ``` typescript
 class ServiceUser {
@@ -245,8 +219,8 @@ class ServiceUser {
         }],
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
         },
       },
     );
@@ -256,8 +230,10 @@ class ServiceUser {
         id: userCreate.id,
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            columns: ['id', 'name'],
+          }),
         },
       },
     );
@@ -273,8 +249,10 @@ class ServiceUser {
         ],
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
+            columns: ['id', 'name'],
+          }),
         },
       },
     );
@@ -284,14 +262,24 @@ class ServiceUser {
         id: userCreate.id,
       },
       {
-        include: {
-          roles: true,
+        with: {
+          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
         },
       },
     );
   }
 }
 ```
+
+|名称|说明|
+|--|--|
+|with.roles|关系名|
+|$relationDynamic.belongsToMany|定义`n:n`关系|
+|ModelRoleUser|中间Model|
+|ModelRole|目标Model|
+|'userId'|外键|
+|'roleId'|外键|
+|columns|要查询的字段列表|
 
 ## autoload
 
