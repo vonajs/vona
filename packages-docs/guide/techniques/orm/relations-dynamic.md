@@ -1,14 +1,14 @@
-# 动态关系
+# Relations(Dynamic)
 
-在大型业务系统中，我们会创建大量 Models，这些 Models 之间的关联众多，我们不可能将所有关联通过`静态关系`的机制事先声明出来。特别是当存在大量业务模块，这些 Models 散落在不同的业务模块中，那么通过`静态关系`事先声明所有的关联关系也变得不太现实。如果事先没有定义`静态关系`，在实际代码中，我们就需要提供一种使用`动态关系`的机制，让我们的查询、类型推断、DTO 推断与生成等能力得以正常使用
+In large-scale business systems, we create numerous models with numerous relations between them. It's impossible to declare all relations using `static relations`. This is especially true when there are numerous business modules with models scattered across them. Declaring all relations using `static relations` becomes impractical. Without pre-defined `static relations`, we need to implement a mechanism for using `dynamic relations` in our code to enable querying, type inference, and DTO inference and generation
 
-下面以模块`test-vona`为例，讲解`动态关系`的用法
+The following uses `test-vona` module as an example to explain how to use `dynamic relations`
 
-## 4种关系
+## Four kinds of Relations
 
-Vona ORM 提供了 4 种动态关系：
+Vona ORM provides 4 kinds of dynamic relations:
 
-|名称|说明|
+|Name|Description|
 |--|--|
 |hasOne|`1:1`|
 |belongsTo|`1:1`/`n:1`|

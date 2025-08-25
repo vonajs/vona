@@ -2,9 +2,9 @@
 
 The following is to use the module `test-vona` as an example to explain the usage of `static relations`
 
-## Relations
+## Four kinds of Relations
 
-Vona ORM provides 4 relations:
+Vona ORM provides 4 kinds of relations:
 
 |Name|Description|
 |--|--|
