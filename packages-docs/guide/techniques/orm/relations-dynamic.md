@@ -12,12 +12,12 @@ Vona ORM provides 4 kinds of dynamic relations:
 |--|--|
 |hasOne|`1:1`|
 |belongsTo|`1:1`/`n:1`|
-|hasMany|`1:n`。可以实现`主表-明细表`，以及`主表-多级明细表`的功能|
+|hasMany|`1:n`. It can realize the functions of `main-details` and `main-details(multi-level)`|
 |belongsToMany|`n:n`|
 
 ## hasOne
 
-直接在 CRUD 操作中通过`with`指定动态关系
+Specify dynamic relations directly in CRUD operations using `with`
 
 ``` typescript
 class ServicePost {
@@ -79,17 +79,17 @@ class ServicePost {
 }  
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|with.postContent|关系名|
-|$relationDynamic.hasOne|定义`1:1`关系|
-|ModelPostContent|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
+|with.postContent|Relation Name|
+|$relationDynamic.hasOne|`1:1`|
+|ModelPostContent|Taget Model|
+|'postId'|Foreign key|
+|columns|List of fields to query|
 
 ## belongsTo
 
-belongsTo 关系只用于查询操作。直接在查询操作中通过`with`指定动态关系
+The `belongsTo` relation is only used for query operations. Specify dynamic relations directly in the query operation through `with`
 
 ``` typescript
 class ServicePost {
@@ -106,18 +106,18 @@ class ServicePost {
 }
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|with.post|关系名|
-|$relationDynamic.belongsTo|定义`1:1`/`n:1`关系|
-|ModelPostContent|源Model|
-|ModelPost|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
+|with.post|Relation Name|
+|$relationDynamic.belongsTo|`1:1`/`n:1`|
+|ModelPostContent|Source Model|
+|ModelPost|Target Model|
+|'postId'|Foreign key|
+|columns|List of fields to query|
 
 ## hasMany
 
-直接在 CRUD 操作中通过`with`指定动态关系
+Specify dynamic relations directly in CRUD operations using `with`
 
 ``` typescript
 class ServiceOrder {
@@ -185,20 +185,21 @@ class ServiceOrder {
 }  
 ```
 
-- 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
-  - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
+- When updating main table data, you can also update detail table data simultaneously (including Insert/Update/Delete operations)
+  - See: [CRUD (Insert/Update/Delete) - Mutate](./crud-cud.md#mutate)
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|with.products2|关系名。由于`test-vona`模块已经定义了静态关系`products`，并且是自动加载的。为了演示起见，使用不同的关系名`products2`|
-|$relationDynamic.hasMany|定义`1:n`关系|
-|ModelProduct|目标Model|
-|'orderId'|外键|
-|columns|要查询的字段列表|
+|with.products2|Relation Name. Since `test-vona` module already defines the static relation `products` which `autoload` be set `true`. For demonstration purposes, a different relation name `products2` is used|
+|$relationDynamic.hasMany|`1:n`|
+|ModelProduct|Target Model|
+|'orderId'|Foreign key|
+|columns|List of fields to query|
+
 
 ## belongsToMany
 
-直接在 CRUD 操作中通过`with`指定动态关系，需要提供中间 Model RoleUser。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model
+Directly specifying a dynamic relation using `with` in CRUD operations requires providing the intermediate model `RoleUser`. It should be emphasized that the CRUD operations here are for the intermediate model, not the target model
 
 ``` typescript
 class ServiceUser {
@@ -271,21 +272,21 @@ class ServiceUser {
 }
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|with.roles|关系名|
-|$relationDynamic.belongsToMany|定义`n:n`关系|
-|ModelRoleUser|中间Model|
-|ModelRole|目标Model|
-|'userId'|外键|
-|'roleId'|外键|
-|columns|要查询的字段列表|
+|with.roles|Relation Name|
+|$relationDynamic.belongsToMany|`n:n`|
+|ModelRoleUser|Middle Model|
+|ModelRole|Target Model|
+|'userId'|Foreign key|
+|'roleId'|Foreign key|
+|columns|List of fields to query|
 
-## 树形结构
+## Tree structure
 
-由于树形结构是与自身关联的多级关系，因此使用`autoload: true`的`静态关系`最方便，代码也最简洁
+Since the tree structure references itself, using a static relation with `autoload: true` is most convenient and concise way to write code
 
-为了演示起见，我们仍然通过`动态关系`来实现树形结构
+For demonstration purposes, we'll still implement the tree structure using a `dynamic relation`
 
 ``` typescript
 class ServiceCategory {
@@ -377,50 +378,50 @@ class ServiceCategory {
 }
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|with.children2|关系名。由于`test-vona`模块已经定义了静态关系`children`，并且是自动加载的。为了演示起见，使用不同的关系名`children2`|
-|$relationDynamic.hasMany|定义`1:n`关系|
-|ModelCategory|目标Model|
-|'categoryIdParent'|外键|
-|columns|要查询的字段列表|
+|with.children2|Relation Name. Since `test-vona` module already defines the static relation `children` which `autoload` be set `true`. For demonstration purposes, a different relation name `children2` is used|
+|$relationDynamic.hasMany|`1:n`|
+|ModelCategory|Target Model|
+|'categoryIdParent'|Foreign key|
+|columns|List of fields to query|
 
-## 关系选项
+## Relation Options
 
 ### 1. $relationDynamic.hasOne/$relationDynamic.belongsTo
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|columns|要查询的字段列表|
-|include|指定嵌套的静态关系|
-|with|指定嵌套的动态关系|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
+|columns|List of fields to query|
+|include|Specifying nested static relations|
+|with|Specifying nested dynamic relations|
+|meta.client|Define the datasource used by the relation, which can realize cross-datasource relation query|
+|meta.table|Define the data table used by the relation|
 
 ### 2. $relationDynamic.hasMany/$relationDynamic.belongsToMany
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|columns|要查询的字段列表|
-|include|指定嵌套的静态关系|
-|with|指定嵌套的动态关系|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
-|distinct|是否启用 distinct|
-|where|条件语句|
-|joins|关联表|
-|orders|排序|
-|limit|可用于分页查询|
-|offset|可用于分页查询|
-|aggrs|聚合查询|
-|groups|分组查询|
+|columns|List of fields to query|
+|include|Specifying nested static relations|
+|with|Specifying nested dynamic relations|
+|meta.client|Define the datasource used by the relation, which can realize cross-datasource relation query|
+|meta.table|Define the data table used by the relation|
+|distinct|Whether to enable distinct|
+|where|Conditional statement|
+|joins|Related tables|
+|orders|Sorting|
+|limit|Can be used for paginated queries|
+|offset|Can be used for paginated queries|
+|aggrs|Aggregate query|
+|groups|Group-by query|
 
-## Model参数
+## Parameter: Model
 
-在定义关系时需要提供参数：`源Model`/`目标Model`/`中间Model`，支持以下类型：
+When defining a relation, you need to provide the following parameters: `Source Model`, `Target Model`, and `Intermediate Model`. The following types are supported:
 
-|名称|说明|
+|Name|Description|
 |--|--|
 |ModelPost|Model Class|
-|() => ModelPost|通过函数延迟加载，从而避免触发循环依赖的错误|
-|'test-vona:post'|当跨模块使用Model时，一般直接使用Model名|
+|() => ModelPost|Use a function to delay loading to avoid circular dependency errors|
+|'test-vona:post'|When using models across modules, typically use the model name directly|
