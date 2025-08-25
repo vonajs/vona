@@ -1,5 +1,7 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { $relationDynamic } from 'vona-module-a-orm';
+import { ModelProduct } from '../model/product.ts';
 
 @Service()
 export class ServiceOrder extends BeanBase {
@@ -8,14 +10,14 @@ export class ServiceOrder extends BeanBase {
     const orderCreate = await this.scope.model.order.insert(
       {
         orderNo: 'Order001',
-        products: [
+        products2: [
           { name: 'Apple' },
           { name: 'Pear' },
         ],
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId'),
         },
       },
     );
@@ -25,8 +27,10 @@ export class ServiceOrder extends BeanBase {
         id: orderCreate.id,
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
+            columns: ['id', 'name', 'price', 'quantity', 'amount'],
+          }),
         },
       },
     );
@@ -35,7 +39,7 @@ export class ServiceOrder extends BeanBase {
       {
         id: orderCreate.id,
         orderNo: 'Order001-Update',
-        products: [
+        products2: [
           // create product: Peach
           { name: 'Peach' },
           // update product: Apple
@@ -45,8 +49,8 @@ export class ServiceOrder extends BeanBase {
         ],
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId'),
         },
       },
     );
@@ -56,8 +60,8 @@ export class ServiceOrder extends BeanBase {
         id: orderCreate.id,
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId'),
         },
       },
     );

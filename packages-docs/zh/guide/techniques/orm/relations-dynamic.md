@@ -32,9 +32,7 @@ class ServicePost {
       },
       {
         with: {
-          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId', {
-            columns: ['id', 'content'],
-          }),
+          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId'),
         },
       },
     );
@@ -62,9 +60,7 @@ class ServicePost {
       },
       {
         with: {
-          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId', {
-            columns: ['id', 'content'],
-          }),
+          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId'),
         },
       },
     );
@@ -121,33 +117,7 @@ class ServicePost {
 
 ## hasMany
 
-### 1. 定义关系
-
-``` typescript
-import { ModelProduct } from './product.ts';
-
-@Model({
-  entity: EntityOrder,
-  relations: {
-    products: $relation.hasMany(() => ModelProduct, 'orderId', {
-      columns: ['id', 'name', 'price', 'quantity', 'amount'],
-    }),
-  },
-})
-class ModelOrder {}
-```
-
-|名称|说明|
-|--|--|
-|relations.products|关系名|
-|$relation.hasMany|定义`1:n`关系|
-|ModelProduct|目标Model|
-|'orderId'|外键|
-|columns|要查询的字段列表|
-
-### 2. 使用关系
-
-在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+直接在 CRUD 操作中通过`with`指定动态关系
 
 ``` typescript
 class ServiceOrder {
@@ -156,25 +126,27 @@ class ServiceOrder {
     const orderCreate = await this.scope.model.order.insert(
       {
         orderNo: 'Order001',
-        products: [
+        products2: [
           { name: 'Apple' },
           { name: 'Pear' },
         ],
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId'),
         },
       },
     );
     // get
-    const _order = await this.scope.model.order.get(
+    await this.scope.model.order.get(
       {
         id: orderCreate.id,
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
+            columns: ['id', 'name', 'price', 'quantity', 'amount'],
+          }),
         },
       },
     );
@@ -183,7 +155,7 @@ class ServiceOrder {
       {
         id: orderCreate.id,
         orderNo: 'Order001-Update',
-        products: [
+        products2: [
           // create product: Peach
           { name: 'Peach' },
           // update product: Apple
@@ -193,8 +165,8 @@ class ServiceOrder {
         ],
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId'),
         },
       },
     );
@@ -204,8 +176,8 @@ class ServiceOrder {
         id: orderCreate.id,
       },
       {
-        include: {
-          products: true,
+        with: {
+          products2: $relationDynamic.hasMany(() => ModelProduct, 'orderId'),
         },
       },
     );
@@ -215,6 +187,14 @@ class ServiceOrder {
 
 - 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
   - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
+
+|名称|说明|
+|--|--|
+|with.products2|关系名|
+|$relationDynamic.hasMany|定义`1:n`关系|
+|ModelProduct|目标Model|
+|'orderId'|外键|
+|columns|要查询的字段列表|
 
 ## belongsToMany
 
