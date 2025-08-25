@@ -1,1 +1,1 @@
-export {};
+export * from './captchaProvider.ts';
