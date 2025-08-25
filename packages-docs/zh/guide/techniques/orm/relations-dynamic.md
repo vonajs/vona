@@ -150,7 +150,7 @@ class ModelOrder {}
 在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
 
 ``` typescript
-class ServicePost {
+class ServiceOrder {
   async relationHasMany() {
     // insert
     const orderCreate = await this.scope.model.order.insert(
