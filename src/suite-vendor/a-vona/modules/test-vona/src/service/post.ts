@@ -1,7 +1,9 @@
 import type { TableIdentity } from 'table-identity';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { Database } from 'vona-module-a-orm';
+import { $relationDynamic, Database } from 'vona-module-a-orm';
+import { ModelPost } from '../model/post.ts';
+import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
@@ -24,8 +26,10 @@ export class ServicePost extends BeanBase {
         },
       },
       {
-        include: {
-          postContent: true,
+        with: {
+          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId', {
+            columns: ['id', 'content'],
+          }),
         },
       },
     );
@@ -35,8 +39,10 @@ export class ServicePost extends BeanBase {
         id: postCreate.id,
       },
       {
-        include: {
-          postContent: true,
+        with: {
+          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId', {
+            columns: ['id', 'content'],
+          }),
         },
       },
     );
@@ -50,8 +56,10 @@ export class ServicePost extends BeanBase {
         },
       },
       {
-        include: {
-          postContent: true,
+        with: {
+          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId', {
+            columns: ['id', 'content'],
+          }),
         },
       },
     );
@@ -61,8 +69,8 @@ export class ServicePost extends BeanBase {
         id: postCreate.id,
       },
       {
-        include: {
-          postContent: true,
+        with: {
+          postContent: $relationDynamic.hasOne(() => ModelPostContent, 'postId'),
         },
       },
     );
