@@ -4,7 +4,14 @@
   "version": "5.0.1",
   "title": "a-captcha",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "captchaProvider": {
+        "optionsGlobalInterfaceName": "IDecoratorCaptchaProviderOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-captcha",
+        "boilerplate": "cli/captchaProvider/boilerplate"
+      }
+    }
   },
   "description": "",
   "author": "",
