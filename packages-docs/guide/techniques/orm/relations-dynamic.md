@@ -284,7 +284,7 @@ class ServiceUser {
 
 ## Tree structure
 
-Since the tree structure references itself, using a static relation with `autoload: true` is most convenient and concise way to write code
+Since the tree structure references itself, using a `static relation` with `autoload: true` is most convenient and concise way to write code
 
 For demonstration purposes, we'll still implement the tree structure using a `dynamic relation`
 
