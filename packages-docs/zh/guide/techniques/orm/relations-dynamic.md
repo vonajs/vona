@@ -385,86 +385,25 @@ class ServiceCategory {
 |'categoryIdParent'|外键|
 |columns|要查询的字段列表|
 
-## 树形结构（反向查询）
-
-前面演示的是如何从父级向子级查询一棵目录树，接下来演示从子级向父级查询目录树
-
-### 1. 定义关系
-
-``` typescript
-@Model({
-  entity: EntityCategory,
-  relations: {
-    parent: $relation.belongsTo(() => ModelCategoryChain, () => ModelCategoryChain, 'categoryIdParent', {
-      autoload: true,
-      columns: ['id', 'name', 'categoryIdParent'],
-    }),
-  },
-})
-class ModelCategoryChain {}
-```
-
-|名称|说明|
-|--|--|
-|relations.parent|关系名|
-|$relation.belongsTo|定义`n:1`关系|
-|ModelCategoryChain|源Model|
-|ModelCategoryChain|目标Model|
-|'categoryIdParent'|外键|
-|autoload|自动加载|
-|columns|要查询的字段列表|
-
-### 2. 使用关系
-
-* 由于定义了与自身的 belongsTo 关系，从而形成反向的树形结构。此树形结构只用于查询操作
-* 由于定义了`autoload: true`，那么，系统在查询子目录的同时，也会自动查询 parent
-
-``` typescript
-class ServiceCategory {
-  async categoryTreeReverse() {
-    // create
-    const treeCreate = await this.scope.model.category.insert({
-      name: 'Category-1',
-      children: [
-        {
-          name: 'Category-1-1',
-          children: [
-            { name: 'Category-1-1-1' },
-          ],
-        },
-        {
-          name: 'Category-1-2',
-        },
-      ],
-    });
-    // 'Category-1-1-1'
-    const subCategoryId = treeCreate.children?.[0].children?.[0].id;
-    // get: reverse
-    const subCategory = await this.scope.model.categoryChain.get({
-      id: subCategoryId,
-    });
-    assert.equal(subCategory?.parent?.parent?.id, treeCreate.id);
-  }
-}
-```
-
 ## 关系选项
 
-### 1. $relation.hasOne/$relation.belongsTo
+### 1. $relationDynamic.hasOne/$relationDynamic.belongsTo
 
 |名称|说明|
 |--|--|
-|autoload|自动加载|
 |columns|要查询的字段列表|
+|include|指定嵌套的静态关系|
+|with|指定嵌套的动态关系|
 |meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
 |meta.table|定义关系所使用的数据表|
 
-### 2. $relation.hasMany/$relation.belongsToMany
+### 2. $relationDynamic.hasMany/$relationDynamic.belongsToMany
 
 |名称|说明|
 |--|--|
-|autoload|自动加载|
 |columns|要查询的字段列表|
+|include|指定嵌套的静态关系|
+|with|指定嵌套的动态关系|
 |meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
 |meta.table|定义关系所使用的数据表|
 |distinct|是否启用 distinct|
