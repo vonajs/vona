@@ -256,7 +256,10 @@ export class ServiceQueue extends BeanBase {
   async _queueEventsReady(queueQueue: IQueueQueue) {
     if (queueQueue.queueEventsReady) return;
     await queueQueue.queueEvents.waitUntilReady();
-    await sleep(this.scope.config.queueEvents.waitUntilReady);
+    const waitUntilReady = this.scope.config.queueEvents.waitUntilReady;
+    if (waitUntilReady) {
+      await sleep(waitUntilReady);
+    }
     queueQueue.queueEventsReady = true;
   }
 
