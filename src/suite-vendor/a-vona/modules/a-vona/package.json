@@ -15,6 +15,7 @@
       "a-cache": "5.0.0",
       "a-caching": "5.0.0",
       "a-captcha": "5.0.0",
+      "a-captchasimple": "5.0.0",
       "a-core": "5.0.0",
       "a-orm": "5.0.0",
       "a-ormdialect": "5.0.0",

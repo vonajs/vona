@@ -119,6 +119,9 @@ importers:
       vona-module-a-captcha:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-captcha
+      vona-module-a-captchasimple:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-captchasimple
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
@@ -1168,6 +1171,9 @@ importers:
       vona-module-a-captcha:
         specifier: workspace:^
         version: link:modules/a-captcha
+      vona-module-a-captchasimple:
+        specifier: workspace:^
+        version: link:modules/a-captchasimple
       vona-module-a-core:
         specifier: ^5.0.56
         version: link:modules/a-core
@@ -1371,6 +1377,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-captcha:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-captchasimple:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
