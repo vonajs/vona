@@ -9,8 +9,10 @@ import { ModelPostContent } from '../model/postContent.ts';
 export class ServicePost extends BeanBase {
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
-      include: {
-        post: true,
+      with: {
+        post: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
+          columns: ['id', 'title'],
+        }),
       },
     });
     console.log(postContent[0]?.post?.title);

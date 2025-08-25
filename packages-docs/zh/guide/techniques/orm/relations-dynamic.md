@@ -93,43 +93,31 @@ class ServicePost {
 
 ## belongsTo
 
-### 1. 定义关系
-
-``` typescript
-@Model({
-  entity: EntityPostContent,
-  relations: {
-    post: $relation.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', { columns: '*' }),
-  },
-})
-class ModelPostContent {}
-```
-
-|名称|说明|
-|--|--|
-|relations.post|关系名|
-|$relation.belongsTo|定义`1:1`/`n:1`关系|
-|ModelPostContent|源Model|
-|ModelPost|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
-
-### 2. 使用关系
-
-在 Model 中定义的 belongsTo 关系只用于查询操作。通过`include`指定需要查询的关系，比如`post: true`，那么，系统在查询 Model PostContent 的同时，也会查询 Model Post
+belongsTo 关系只用于查询操作。直接在查询操作中通过`with`指定动态关系
 
 ``` typescript
 class ServicePost {
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
-      include: {
-        post: true,
+      with: {
+        post: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
+          columns: ['id', 'title'],
+        }),
       },
     });
     console.log(postContent[0]?.post?.title);
   }
 }
 ```
+
+|名称|说明|
+|--|--|
+|with.post|关系名|
+|$relationDynamic.belongsTo|定义`1:1`/`n:1`关系|
+|ModelPostContent|源Model|
+|ModelPost|目标Model|
+|'postId'|外键|
+|columns|要查询的字段列表|
 
 ## hasMany
 
