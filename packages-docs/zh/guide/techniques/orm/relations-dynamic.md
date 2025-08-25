@@ -281,89 +281,109 @@ class ServiceUser {
 |'roleId'|外键|
 |columns|要查询的字段列表|
 
-## autoload
-
-通过前面的演示可以看到，如果要对关系进行操作，需要通过`include`指定对应的关系选项
-
-如果需要关联的关系属于频繁操作，那么可以设置关系`autoload: true`，从而省去`include`选项
-
 ## 树形结构
 
-接下来我们实现一棵目录树，来演示如何利用`autoload`实现一个树形结构
+由于树形结构是与自身关联的多级关系，因此使用`autoload: true`的`静态关系`最方便，代码也最简洁
 
-### 1. 定义关系
+为了演示起见，我们仍然通过`动态关系`来实现树形结构
 
 ``` typescript
-@Model({
-  entity: EntityCategory,
-  relations: {
-    children: $relation.hasMany(() => ModelCategory, 'categoryIdParent', {
-      autoload: true,
-      columns: ['id', 'name'],
-    }),
-  },
-})
-class ModelCategory {}
+class ServiceCategory {
+  async categoryTreeDynamic() {
+    // create
+    const treeCreate = await this.scope.model.category.insert(
+      {
+        name: 'Category-1',
+        children2: [
+          {
+            name: 'Category-1-1',
+            children2: [
+              { name: 'Category-1-1-1' },
+            ],
+          },
+          {
+            name: 'Category-1-2',
+          },
+        ],
+      },
+      {
+        with: {
+          children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
+            with: {
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
+              }),
+            },
+          }),
+        },
+      },
+    );
+    // get
+    const tree = await this.scope.model.category.get(
+      {
+        id: treeCreate.id,
+      },
+      {
+        with: {
+          children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
+            columns: ['id', 'name'],
+            with: {
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
+                columns: ['id', 'name'],
+              }),
+            },
+          }),
+        },
+      },
+    );
+    assert.equal(tree?.children2.length, 2);
+    assert.equal(tree?.children2[0].children2.length, 1);
+    // update
+    await this.scope.model.category.update(
+      {
+        id: treeCreate.id,
+        name: 'Category-1-Update',
+        children2: [
+          // create
+          { name: 'Category-1-3' },
+          // update
+          { id: treeCreate.children2?.[0].id, name: 'Category-1-1-Update' },
+          // delete
+          { id: treeCreate.children2?.[1].id, deleted: true },
+        ],
+      },
+      {
+        with: {
+          children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent'),
+        },
+      },
+    );
+    // delete
+    await this.scope.model.category.delete(
+      {
+        id: treeCreate.id,
+      },
+      {
+        with: {
+          children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
+            with: {
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
+              }),
+            },
+          }),
+        },
+      },
+    );
+  }
+}
 ```
 
 |名称|说明|
 |--|--|
-|relations.children|关系名|
-|$relation.hasMany|定义`1:n`关系|
+|with.children2|关系名。由于`test-vona`模块已经定义了静态关系`children`，并且是自动加载的。为了演示起见，使用不同的关系名`children2`|
+|$relationDynamic.hasMany|定义`1:n`关系|
 |ModelCategory|目标Model|
 |'categoryIdParent'|外键|
-|autoload|自动加载|
 |columns|要查询的字段列表|
-
-### 2. 使用关系
-
-* 由于定义了与自身的 hasMany 关系，从而形成树形结构。此树形结构可以用于所有 CRUD 操作
-* 由于定义了`autoload: true`，那么，系统在操作主数据的同时，也会自动操作 children
-
-``` typescript
-class ServiceCategory {
-  async categoryTree() {
-    // create
-    const treeCreate = await this.scope.model.category.insert({
-      name: 'Category-1',
-      children: [
-        {
-          name: 'Category-1-1',
-          children: [
-            { name: 'Category-1-1-1' },
-          ],
-        },
-        {
-          name: 'Category-1-2',
-        },
-      ],
-    });
-    // get
-    const tree = await this.scope.model.category.get({
-      id: treeCreate.id,
-    });
-    assert.equal(tree?.children.length, 2);
-    assert.equal(tree?.children[0].children.length, 1);
-    // update
-    await this.scope.model.category.update({
-      id: treeCreate.id,
-      name: 'Category-1-Update',
-      children: [
-        // create
-        { name: 'Category-1-3' },
-        // update
-        { id: treeCreate.children?.[0].id, name: 'Category-1-1-Update' },
-        // delete
-        { id: treeCreate.children?.[1].id, deleted: true },
-      ],
-    });
-    // delete
-    await this.scope.model.category.delete({
-      id: treeCreate.id,
-    });
-  }
-}
-```
 
 ## 树形结构（反向查询）
 
