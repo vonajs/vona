@@ -1,5 +1,5 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
-import svgCaptcha from 'svg-captcha-fixed';
+import svgCaptcha, { ConfigObject } from 'svg-captcha-fixed';
 import { BeanBase } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
 
@@ -7,9 +7,20 @@ export type TypeCaptchaProviderSimpleToken = string;
 export type TypeCaptchaProviderSimplePayload = string;
 export type TypeCaptchaProviderSimpleData = ICaptchaProviderData<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload>;
 
-export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProviderOptions {}
+export type TypeCaptchaProviderSimpleType = 'char' | 'math';
+export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProviderOptions {
+  type: TypeCaptchaProviderSimpleType;
+  opts: ConfigObject;
+}
 
-@CaptchaProvider<ICaptchaProviderOptionsSimple>()
+@CaptchaProvider<ICaptchaProviderOptionsSimple>({
+  type: 'char',
+  opts: {
+    size: 4,
+    color: true,
+    noise: 3,
+  },
+})
 export class CaptchaProviderSimple
   extends BeanBase implements ICaptchaProviderExecute<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload> {
   async create(_options: ICaptchaProviderOptionsSimple): Promise<TypeCaptchaProviderSimpleData> {
