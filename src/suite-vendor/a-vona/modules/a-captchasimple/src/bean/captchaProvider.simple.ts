@@ -1,4 +1,5 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
+import { getRandomInt } from '@cabloy/utils';
 import svgCaptcha, { ConfigObject } from 'svg-captcha-fixed';
 import { BeanBase } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
@@ -8,23 +9,25 @@ export type TypeCaptchaProviderSimplePayload = string;
 export type TypeCaptchaProviderSimpleData = ICaptchaProviderData<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload>;
 
 export type TypeCaptchaProviderSimpleType = 'char' | 'math';
+const CaptchaProviderSimpleTypes = ['char', 'math'] as const;
 export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProviderOptions {
-  type: TypeCaptchaProviderSimpleType;
+  type?: TypeCaptchaProviderSimpleType;
   opts: ConfigObject;
 }
 
 @CaptchaProvider<ICaptchaProviderOptionsSimple>({
-  type: 'char',
   opts: {
     size: 4,
-    color: true,
-    noise: 3,
   },
 })
 export class CaptchaProviderSimple
   extends BeanBase implements ICaptchaProviderExecute<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload> {
   async create(options: ICaptchaProviderOptionsSimple): Promise<TypeCaptchaProviderSimpleData> {
-    const captcha = options.type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
+    let type = options.type;
+    if (!type) {
+      type = CaptchaProviderSimpleTypes[getRandomInt(2, 0)];
+    }
+    const captcha = type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
     return { token: captcha.text, payload: captcha.data };
   }
 
