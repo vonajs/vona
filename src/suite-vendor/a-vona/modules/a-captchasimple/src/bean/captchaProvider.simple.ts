@@ -23,8 +23,8 @@ export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProvider
 })
 export class CaptchaProviderSimple
   extends BeanBase implements ICaptchaProviderExecute<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload> {
-  async create(_options: ICaptchaProviderOptionsSimple): Promise<TypeCaptchaProviderSimpleData> {
-    const captcha = svgCaptcha.create();
+  async create(options: ICaptchaProviderOptionsSimple): Promise<TypeCaptchaProviderSimpleData> {
+    const captcha = options.type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
     return { token: captcha.text, payload: captcha.data };
   }
 
