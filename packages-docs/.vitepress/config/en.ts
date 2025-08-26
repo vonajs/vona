@@ -139,6 +139,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Transaction', link: 'transaction' },
             { text: 'Relations(Static)', link: 'relations-static' },
             { text: 'Relations(Dynamic)', link: 'relations-dynamic' },
+            { text: 'Aggregate & Group', link: 'aggr-group' },
           ],
         },
         {

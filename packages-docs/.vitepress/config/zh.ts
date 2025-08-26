@@ -139,6 +139,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '数据库事务', link: 'transaction' },
             { text: '静态关系', link: 'relations-static' },
             { text: '动态关系', link: 'relations-dynamic' },
+            { text: '聚合与分组', link: 'aggr-group' },
           ],
         },
         {
