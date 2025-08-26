@@ -19,6 +19,7 @@ export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProvider
 @CaptchaProvider<ICaptchaProviderOptionsSimple>({
   opts: {
     size: 4,
+    color: true,
   },
 })
 export class CaptchaProviderSimple
