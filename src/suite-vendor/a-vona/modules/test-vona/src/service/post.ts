@@ -7,6 +7,33 @@ import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
+  async group() {
+    await this.scope.model.post.group({
+      groups: 'userId',
+      aggrs: {
+        count: '*',
+        sum: 'stars',
+      },
+    });
+  }
+
+  async aggregate() {
+    const result = await this.scope.model.post.aggregate({
+      aggrs: {
+        count: ['*', 'stars'],
+        sum: 'stars',
+        avg: 'stars',
+        min: 'stars',
+        max: 'stars',
+      },
+    });
+    return result;
+  }
+
+  async count() {
+    return await this.scope.model.post.count();
+  }
+
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
       with: {
@@ -223,7 +250,7 @@ export class ServicePost extends BeanBase {
     return await this.scope.model.post.mget(ids);
   }
 
-  async count() {
-    return await this.scope.model.post.count();
-  }
+  // async count() {
+  //   return await this.scope.model.post.count();
+  // }
 }

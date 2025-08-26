@@ -821,6 +821,7 @@ export * from '../service/caching.ts';
 export * from '../service/category.ts';
 export * from '../service/order.ts';
 export * from '../service/post.ts';
+export * from '../service/product.ts';
 export * from '../service/test.ts';
 export * from '../service/testApp.ts';
 export * from '../service/testClass.ts';
@@ -837,6 +838,7 @@ declare module 'vona-module-a-bean' {
 'test-vona:category': never;
 'test-vona:order': never;
 'test-vona:post': never;
+'test-vona:product': never;
 'test-vona:test': never;
 'test-vona:testApp': never;
 'test-vona:testClass': never;
@@ -897,6 +899,16 @@ declare module 'vona-module-test-vona' {
           export interface ServicePost {
             get $beanFullName(): 'test-vona.service.post';
             get $onionName(): 'test-vona:post';
+          }
+
+        export interface ServiceProduct {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ServiceProduct {
+            get $beanFullName(): 'test-vona.service.product';
+            get $onionName(): 'test-vona:product';
           }
 
         export interface ServiceTest {
@@ -966,6 +978,7 @@ import type { ServiceCaching } from '../service/caching.ts';
 import type { ServiceCategory } from '../service/category.ts';
 import type { ServiceOrder } from '../service/order.ts';
 import type { ServicePost } from '../service/post.ts';
+import type { ServiceProduct } from '../service/product.ts';
 import type { ServiceTest } from '../service/test.ts';
 import type { ServiceTestApp } from '../service/testApp.ts';
 import type { ServiceTestClass } from '../service/testClass.ts';
@@ -978,6 +991,7 @@ export interface IModuleService {
 'category': ServiceCategory;
 'order': ServiceOrder;
 'post': ServicePost;
+'product': ServiceProduct;
 'test': ServiceTest;
 'testApp': ServiceTestApp;
 'testClass': ServiceTestClass;
@@ -996,6 +1010,7 @@ declare module 'vona' {
 'test-vona.service.category': ServiceCategory;
 'test-vona.service.order': ServiceOrder;
 'test-vona.service.post': ServicePost;
+'test-vona.service.product': ServiceProduct;
 'test-vona.service.test': ServiceTest;
 'test-vona.service.testApp': ServiceTestApp;
 'test-vona.service.testClass': ServiceTestClass;
