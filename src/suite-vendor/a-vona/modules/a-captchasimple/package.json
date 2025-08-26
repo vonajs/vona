@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "svg64": "^2.0.0",
     "svg-captcha-fixed": "^1.5.2"
   },
   "devDependencies": {

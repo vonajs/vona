@@ -1390,6 +1390,9 @@ importers:
       svg-captcha-fixed:
         specifier: ^1.5.2
         version: 1.5.2
+      svg64:
+        specifier: ^2.0.0
+        version: 2.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -7818,6 +7821,9 @@ packages:
   svg-captcha-fixed@1.5.2:
     resolution: {integrity: sha512-BRnoEq7u3ZRxFvYmPbCer7k6OhZ3gXd9LELmPOFBVCMHnqsS3meTjrWpn6vu986uxzU/Yx8L8I6ZpAppdmfjTQ==}
     engines: {node: '>=4.x'}
+
+  svg64@2.0.0:
+    resolution: {integrity: sha512-EVgAisxMctUNDSjKGFcx4tkcFrvdqtLIy/MdbBdqcwfpPwsBcwoSKQi+WYoc82c4XWFNVVIwpCup3rpY+M9KJw==}
 
   synckit@0.11.8:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
@@ -15195,6 +15201,8 @@ snapshots:
   svg-captcha-fixed@1.5.2:
     dependencies:
       opentype.js: 0.7.3
+
+  svg64@2.0.0: {}
 
   synckit@0.11.8:
     dependencies:

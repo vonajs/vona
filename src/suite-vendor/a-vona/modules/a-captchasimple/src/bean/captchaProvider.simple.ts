@@ -1,5 +1,6 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
 import { getRandomInt } from '@cabloy/utils';
+import svg64 from 'svg64';
 import svgCaptcha, { ConfigObject } from 'svg-captcha-fixed';
 import { BeanBase } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
@@ -28,7 +29,7 @@ export class CaptchaProviderSimple
       type = CaptchaProviderSimpleTypes[getRandomInt(2, 0)];
     }
     const captcha = type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
-    return { token: captcha.text, payload: captcha.data };
+    return { token: captcha.text, payload: svg64(captcha.data) };
   }
 
   async verify(
