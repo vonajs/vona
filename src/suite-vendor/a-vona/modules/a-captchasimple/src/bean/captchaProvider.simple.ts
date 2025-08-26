@@ -1,20 +1,27 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
+import svgCaptcha from 'svg-captcha-fixed';
 import { BeanBase } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
 
-export type TypeCaptchaProviderSimpleToken = any;
-export type TypeCaptchaProviderSimplePayload = any;
+export type TypeCaptchaProviderSimpleToken = string;
+export type TypeCaptchaProviderSimplePayload = string;
 export type TypeCaptchaProviderSimpleData = ICaptchaProviderData<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload>;
 
 export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProviderOptions {}
 
 @CaptchaProvider<ICaptchaProviderOptionsSimple>()
-export class CaptchaProviderSimple extends BeanBase implements ICaptchaProviderExecute {
+export class CaptchaProviderSimple
+  extends BeanBase implements ICaptchaProviderExecute<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload> {
   async create(_options: ICaptchaProviderOptionsSimple): Promise<TypeCaptchaProviderSimpleData> {
-    throw new Error('Not Implemented');
+    const captcha = svgCaptcha.create();
+    return { token: captcha.text, payload: captcha.data };
   }
 
-  async verify(_options: ICaptchaProviderOptionsSimple): Promise<boolean> {
+  async verify(
+    _token: TypeCaptchaProviderSimpleToken,
+    _tokenInput: TypeCaptchaProviderSimpleToken,
+    _options: ICaptchaProviderOptionsSimple,
+  ): Promise<boolean> {
     return false;
   }
 }

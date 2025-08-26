@@ -1386,6 +1386,10 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-captchasimple:
+    dependencies:
+      svg-captcha-fixed:
+        specifier: ^1.5.2
+        version: 1.5.2
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -6716,6 +6720,10 @@ packages:
   openapi3-ts@4.4.0:
     resolution: {integrity: sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==}
 
+  opentype.js@0.7.3:
+    resolution: {integrity: sha512-Veui5vl2bLonFJ/SjX/WRWJT3SncgiZNnKUyahmXCc2sa1xXW15u3R/3TN5+JFiP7RsjK5ER4HA5eWaEmV9deA==}
+    hasBin: true
+
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -7807,6 +7815,10 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  svg-captcha-fixed@1.5.2:
+    resolution: {integrity: sha512-BRnoEq7u3ZRxFvYmPbCer7k6OhZ3gXd9LELmPOFBVCMHnqsS3meTjrWpn6vu986uxzU/Yx8L8I6ZpAppdmfjTQ==}
+    engines: {node: '>=4.x'}
+
   synckit@0.11.8:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -7892,6 +7904,9 @@ packages:
   tildify@2.0.0:
     resolution: {integrity: sha512-Cc+OraorugtXNfs50hU9KS369rFXCfgGLpfCfvlc+Ud5u6VWmUQsOAa9HbTvheQdYnrdJqqv1e5oIqXppMYnSw==}
     engines: {node: '>=8'}
+
+  tiny-inflate@1.0.3:
+    resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
 
   tinyexec@1.0.1:
     resolution: {integrity: sha512-5uC6DDlmeqiOwCPmK9jMSdOuZTh8bU39Ys6yidB+UTt5hfZUPGAypSgFRiEp+jbi9qH40BLDvy85jIU88wKSqw==}
@@ -14018,6 +14033,10 @@ snapshots:
     dependencies:
       yaml: 2.8.0
 
+  opentype.js@0.7.3:
+    dependencies:
+      tiny-inflate: 1.0.3
+
   optionator@0.9.4:
     dependencies:
       deep-is: 0.1.4
@@ -15173,6 +15192,10 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  svg-captcha-fixed@1.5.2:
+    dependencies:
+      opentype.js: 0.7.3
+
   synckit@0.11.8:
     dependencies:
       '@pkgr/core': 0.2.7
@@ -15297,6 +15320,8 @@ snapshots:
   through@2.3.8: {}
 
   tildify@2.0.0: {}
+
+  tiny-inflate@1.0.3: {}
 
   tinyexec@1.0.1: {}
 
