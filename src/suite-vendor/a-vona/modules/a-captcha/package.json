@@ -10,6 +10,11 @@
         "optionsGlobalInterfaceName": "IDecoratorCaptchaProviderOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-captcha",
         "boilerplate": "cli/captchaProvider/boilerplate"
+      },
+      "captchaScene": {
+        "optionsGlobalInterfaceName": "IDecoratorCaptchaSceneOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-captcha",
+        "boilerplate": "cli/captchaScene/boilerplate"
       }
     }
   },
