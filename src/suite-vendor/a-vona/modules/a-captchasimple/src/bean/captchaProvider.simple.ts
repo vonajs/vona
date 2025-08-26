@@ -18,10 +18,10 @@ export class CaptchaProviderSimple
   }
 
   async verify(
-    _token: TypeCaptchaProviderSimpleToken,
-    _tokenInput: TypeCaptchaProviderSimpleToken,
+    token: TypeCaptchaProviderSimpleToken,
+    tokenInput: TypeCaptchaProviderSimpleToken,
     _options: ICaptchaProviderOptionsSimple,
   ): Promise<boolean> {
-    return false;
+    return !!tokenInput && !!token && tokenInput.toLowerCase() === token.toLowerCase();
   }
 }
