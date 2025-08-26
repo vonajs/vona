@@ -41,6 +41,9 @@
       "exports.\\..import"
     ]
   },
+  "dependencies": {
+    "svg-captcha-fixed": "^1.5.2"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
