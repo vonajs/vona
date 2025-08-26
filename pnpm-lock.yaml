@@ -1387,9 +1387,9 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-captchasimple:
     dependencies:
-      svg-captcha-fixed:
-        specifier: ^1.5.2
-        version: 1.5.2
+      '@zhennann/svg-captcha':
+        specifier: ^1.5.0
+        version: 1.5.0
       svg64:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3793,6 +3793,10 @@ packages:
   '@zhennann/ejs@3.0.1':
     resolution: {integrity: sha512-AkfhJ8D8X+sLyBTl5Lrp7nT0Gg4apE+9CcPk5EFolC3O0Qhom4QDUJxaczElsSyNzbSAkFNRzcNW9MTeJQOv3w==}
     engines: {node: '>=0.10.0'}
+
+  '@zhennann/svg-captcha@1.5.0':
+    resolution: {integrity: sha512-OHRZGfWDgRuhgmAC22DdscKU/4FnPuMBmgs/ehxq5udQCpP0ia/mH2chdTyPQvmIq5Iu+WUuWJDKtkvmTJWU7A==}
+    engines: {node: '>=4.x'}
 
   '@zkochan/js-yaml@0.0.7':
     resolution: {integrity: sha512-nrUSn7hzt7J6JWgWGz78ZYI8wj+gdIJdk0Ynjpp8l+trkn58Uqsf6RYrYkEK+3X18EX+TNdtJI0WxAtc+L84SQ==}
@@ -7818,10 +7822,6 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svg-captcha-fixed@1.5.2:
-    resolution: {integrity: sha512-BRnoEq7u3ZRxFvYmPbCer7k6OhZ3gXd9LELmPOFBVCMHnqsS3meTjrWpn6vu986uxzU/Yx8L8I6ZpAppdmfjTQ==}
-    engines: {node: '>=4.x'}
-
   svg64@2.0.0:
     resolution: {integrity: sha512-EVgAisxMctUNDSjKGFcx4tkcFrvdqtLIy/MdbBdqcwfpPwsBcwoSKQi+WYoc82c4XWFNVVIwpCup3rpY+M9KJw==}
 
@@ -10548,6 +10548,10 @@ snapshots:
   '@zhennann/currency@2.0.0': {}
 
   '@zhennann/ejs@3.0.1': {}
+
+  '@zhennann/svg-captcha@1.5.0':
+    dependencies:
+      opentype.js: 0.7.3
 
   '@zkochan/js-yaml@0.0.7':
     dependencies:
@@ -15197,10 +15201,6 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
-
-  svg-captcha-fixed@1.5.2:
-    dependencies:
-      opentype.js: 0.7.3
 
   svg64@2.0.0: {}
 

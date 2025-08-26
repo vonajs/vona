@@ -42,8 +42,8 @@
     ]
   },
   "dependencies": {
-    "svg64": "^2.0.0",
-    "svg-captcha-fixed": "^1.5.2"
+    "@zhennann/svg-captcha": "^1.5.0",
+    "svg64": "^2.0.0"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

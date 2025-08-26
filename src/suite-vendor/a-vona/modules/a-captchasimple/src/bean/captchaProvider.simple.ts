@@ -1,7 +1,7 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
 import { getRandomInt } from '@cabloy/utils';
+import svgCaptcha, { ConfigObject } from '@zhennann/svg-captcha';
 import svg64 from 'svg64';
-import svgCaptcha, { ConfigObject } from 'svg-captcha-fixed';
 import { BeanBase } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
 
