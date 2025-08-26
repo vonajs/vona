@@ -8,13 +8,15 @@ import { ModelPostContent } from '../model/postContent.ts';
 @Service()
 export class ServicePost extends BeanBase {
   async group() {
-    await this.scope.model.post.group({
+    const result = await this.scope.model.post.group({
       groups: 'userId',
       aggrs: {
         count: '*',
         sum: 'stars',
       },
+      orders: [['count_all', 'desc']],
     });
+    return result;
   }
 
   async aggregate() {
