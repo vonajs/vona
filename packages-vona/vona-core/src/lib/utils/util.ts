@@ -30,6 +30,7 @@ export interface IModuleAssetSceneRecord {
   static: never;
   templates: never;
   site: never;
+  fonts: never;
 }
 
 const SymbolProdRootPath = Symbol('SymbolProdRootPath');
