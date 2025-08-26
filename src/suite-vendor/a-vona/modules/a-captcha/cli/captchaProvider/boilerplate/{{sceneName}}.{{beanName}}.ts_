@@ -2,19 +2,19 @@ import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaPr
 import { BeanBase } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
 
-export type TypeCaptchaProviderSimpleToken = any;
-export type TypeCaptchaProviderSimplePayload = any;
-export type TypeCaptchaProviderSimpleData = ICaptchaProviderData<TypeCaptchaProviderSimpleToken, TypeCaptchaProviderSimplePayload>;
+export type TypeCaptchaProvider<%=argv.beanNameCapitalize%>Token = any;
+export type TypeCaptchaProvider<%=argv.beanNameCapitalize%>Payload = any;
+export type TypeCaptchaProvider<%=argv.beanNameCapitalize%>Data = ICaptchaProviderData<TypeCaptchaProvider<%=argv.beanNameCapitalize%>Token, TypeCaptchaProvider<%=argv.beanNameCapitalize%>Payload>;
 
-export interface ICaptchaProviderOptionsSimple extends IDecoratorCaptchaProviderOptions {}
+export interface ICaptchaProviderOptions<%=argv.beanNameCapitalize%> extends IDecoratorCaptchaProviderOptions {}
 
-@CaptchaProvider<ICaptchaProviderOptionsSimple>()
-export class CaptchaProviderSimple extends BeanBase implements ICaptchaProviderExecute {
-  async create(_options: ICaptchaProviderOptionsSimple): Promise<TypeCaptchaProviderSimpleData> {
+@CaptchaProvider<ICaptchaProviderOptions<%=argv.beanNameCapitalize%>>()
+export class CaptchaProvider<%=argv.beanNameCapitalize%> extends BeanBase implements ICaptchaProviderExecute {
+  async create(_options: ICaptchaProviderOptions<%=argv.beanNameCapitalize%>): Promise<TypeCaptchaProvider<%=argv.beanNameCapitalize%>Data> {
     throw new Error('Not Implemented');
   }
 
-  async verify(_options: ICaptchaProviderOptionsSimple): Promise<boolean> {
+  async verify(_options: ICaptchaProviderOptions<%=argv.beanNameCapitalize%>): Promise<boolean> {
     return false;
   }
 }
