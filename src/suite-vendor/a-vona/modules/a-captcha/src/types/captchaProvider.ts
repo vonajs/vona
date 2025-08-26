@@ -3,6 +3,16 @@ import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-o
 
 export interface ICaptchaProviderRecord {}
 
+export interface ICaptchaProviderExecute {
+  create(options: IDecoratorCaptchaProviderOptions): Promise<ICaptchaProviderData>;
+  verify(options: IDecoratorCaptchaProviderOptions): Promise<boolean>;
+}
+
+export interface ICaptchaProviderData<TOKEN = any, PAYLOAD = any> {
+  token: TOKEN;
+  payload: PAYLOAD;
+}
+
 export interface IDecoratorCaptchaProviderOptions extends TypeOnionOptionsEnableSimple {}
 
 declare module 'vona-module-a-onion' {
