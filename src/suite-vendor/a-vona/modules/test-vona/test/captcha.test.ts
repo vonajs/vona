@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe('captcha.test.ts', () => {
+describe.only('captcha.test.ts', () => {
   it('action:captcha', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create
@@ -13,7 +13,12 @@ describe('captcha.test.ts', () => {
       assert.equal(captchaData?.provider, 'a-captchasimple:simple');
       // token
       const token = captchaData?.token;
-      // verify
+      // verify: false
+      const verifiedFalse = await app.bean.captcha.verify(captcha.id, `${token}!`);
+      assert.equal(verifiedFalse, false);
+      // verify: true
+      const verifiedTrue = await app.bean.captcha.verify(captcha.id, token);
+      assert.equal(verifiedTrue, true);
     });
   });
 });
