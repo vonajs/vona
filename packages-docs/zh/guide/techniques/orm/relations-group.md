@@ -93,6 +93,7 @@ Vona ORM 自动推断出`users`的类型
   relations: {
     posts: $relation.hasMany(() => ModelPost, 'userId', {
 +     autoload: true,
+      groups: 'id',
       aggrs: {
         count: '*',
         sum: 'stars',
@@ -100,15 +101,15 @@ Vona ORM 自动推断出`users`的类型
     }),
   },
 })
-class ModelUserStats {}
+class ModelUserStatsGroup {}
 ```
 
 ### 2. 使用关系
 
 ``` typescript
 class ServiceUser {
-  async relationAggregate() {
-    const users = await this.scope.model.userStats.select();
+  async relationGroup() {
+    const users = await this.scope.model.userStatsGroup.select();
     return users;
   }
 }
