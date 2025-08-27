@@ -85,12 +85,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this[SymbolOnionsEnabled][selector];
   }
 
-  getOnionsEnabledOfMeta(beanName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
-    return this.getOnionsEnabled(selector, matchThis, ...matchArgs).filter(item => item.beanOptions.name === beanName);
+  getOnionsEnabledOfMeta(useCache: boolean, beanName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const method = useCache ? 'getOnionsEnabledCached' : 'getOnionsEnabled';
+    return this[method](selector, matchThis, ...matchArgs).filter(item => item.beanOptions.name === beanName);
   }
 
-  getOnionSliceEnabled(onionName: ONIONNAME, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
-    return this.getOnionsEnabled(selector, matchThis, ...matchArgs).find(item => item.name === onionName);
+  getOnionSliceEnabled(useCache: boolean, onionName: ONIONNAME, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const method = useCache ? 'getOnionsEnabledCached' : 'getOnionsEnabled';
+    return this[method](selector, matchThis, ...matchArgs).find(item => item.name === onionName);
   }
 
   getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {

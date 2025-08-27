@@ -16,7 +16,7 @@ export class BeanCaptcha extends BeanBase {
     for (const key in providers) {
       const providerOptions = providers[key];
       if (providerOptions === false) continue;
-      const onionSlice = this.bean.onion.captchaProvider.getOnionSliceEnabled(key as any);
+      const onionSlice = this.bean.onion.captchaProvider.getOnionSliceEnabled(true, key as any);
       if (!onionSlice) continue;
       const onionOptions = onionSlice.beanOptions.options;
       providersNew[key] = deepExtend({}, onionOptions, providerOptions);

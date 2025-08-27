@@ -36,7 +36,7 @@ export class ControllerPassport extends BeanBase {
     // clientName
     const clientName = entityAuthProvider.clientName ?? 'default';
     // onionSlice
-    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(authProviderName as any);
+    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(false, authProviderName as any);
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
     const onionOptions = onionSlice.beanOptions.options!;
     // clientOptions
