@@ -10,7 +10,7 @@ const SymbolProviders = Symbol('SymbolProviders');
 
 @Bean()
 export class BeanCaptcha extends BeanBase {
-  private [SymbolProviders]: Record<keyof ICaptchaSceneRecord, ICaptchaProviderRecord> = {} as any;
+  protected [SymbolProviders]: Record<keyof ICaptchaSceneRecord, ICaptchaProviderRecord> = {} as any;
 
   async create(sceneName: keyof ICaptchaSceneRecord): Promise<ICaptchaData> {
     // resolve provider
