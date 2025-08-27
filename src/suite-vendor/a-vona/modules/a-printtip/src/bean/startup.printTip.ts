@@ -18,7 +18,7 @@ export class StartupPrintTip extends BeanBase implements IStartupExecute {
   async _print() {
     //
     const outputs: IMetaPrintTipInfoInner[] = [];
-    const onions = this.bean.onion.meta.getOnionsEnabledOfMeta('printTip');
+    const onions = this.bean.onion.meta.getOnionsEnabledOfMeta(true, 'printTip');
     for (const onion of onions) {
       const beanInstance = this.bean._getBean<IMetaPrintTipExecute>(onion.beanOptions.beanFullName as any);
       const res = await beanInstance.execute();
