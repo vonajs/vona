@@ -8,7 +8,14 @@ export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions<Enti
 @Model<IModelOptionsUserStatsGroup>({
   entity: EntityUser,
   relations: {
-    posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' }, orders: [['title', 'desc']] }, undefined, true),
+    posts: $relation.hasMany(() => ModelPost, 'userId', {
+      groups: 'id',
+      aggrs: {
+        count: '*',
+        sum: 'stars',
+      },
+    }),
+    // posts: $relation.hasMany(() => ModelPost, 'userId', { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' }, orders: [['title', 'desc']] }, undefined, true),
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { groups: ['name'], aggrs: { count: '*' }, orders: [['name', 'asc']] }, undefined, true),
   },
 })

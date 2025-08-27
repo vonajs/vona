@@ -500,7 +500,7 @@ roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false
       }
 export interface IModelOptionsUserStatsGroup {
         relations: {
-          posts: IModelRelationHasMany<ModelPost, true, undefined,undefined,{ count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> },'title' | Array<'title'>>;
+          posts: IModelRelationHasMany<ModelPost, false, undefined,undefined,{ count?: '*' | Array<'*'>;sum?: 'stars' | Array<'stars'> },'id' | Array<'id'>>;
 roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, undefined,undefined,{ count?: '*' | Array<'*'> },'name' | Array<'name'>>;
         };
       }
