@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('captcha.test.ts', () => {
+describe('captcha.test.ts', () => {
   it('action:captcha', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create
