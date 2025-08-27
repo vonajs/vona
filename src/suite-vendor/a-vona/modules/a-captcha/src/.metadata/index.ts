@@ -55,8 +55,12 @@ export interface IModuleCacheRedis {
   'captcha': CacheRedisCaptcha;
 }
 /** cacheRedis: end */
+/** config: begin */
+export * from '../config/config.ts';
+import type { config } from '../config/config.ts';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -64,6 +68,7 @@ export class ScopeModuleACaptcha extends BeanScopeBase {}
 
 export interface ScopeModuleACaptcha {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 cacheRedis: IModuleCacheRedis;
 }
 
@@ -77,7 +82,9 @@ declare module 'vona' {
     captcha: ScopeModuleACaptcha;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-captcha': ReturnType<typeof config>;
+  }
 
   
 }

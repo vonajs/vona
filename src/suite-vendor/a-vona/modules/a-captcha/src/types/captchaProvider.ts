@@ -13,7 +13,10 @@ export interface ICaptchaProviderData<TOKEN = any, PAYLOAD = any> {
   payload: PAYLOAD;
 }
 
-export interface IDecoratorCaptchaProviderOptions extends TypeOnionOptionsEnableSimple {}
+export interface IDecoratorCaptchaProviderOptions extends TypeOnionOptionsEnableSimple {
+  ttl?: number;
+  ttlSecondary?: number;
+}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
