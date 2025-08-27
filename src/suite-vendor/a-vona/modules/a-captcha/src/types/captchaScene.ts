@@ -8,12 +8,13 @@ export type ICaptchaSceneOptionsProviders = {
   [K in keyof ICaptchaProviderRecord]?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[K]>> | boolean;
 };
 
-export type ICaptchaSceneOptionsProvidersStrict = {
-  [K in keyof ICaptchaProviderRecord]?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[K]>> ;
-};
+export interface ICaptchaSceneOptionsResolverResult<T extends keyof ICaptchaProviderRecord = keyof ICaptchaProviderRecord> {
+  name: T;
+  options?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[T]>>;
+}
 
 export type TypeCaptchaSceneOptionsResolver =
-  (ctx: VonaContext, providers: (keyof ICaptchaProviderRecord)[]) => Promise<keyof ICaptchaProviderRecord>;
+  (ctx: VonaContext, providers: ICaptchaProviderRecord) => Promise<keyof ICaptchaProviderRecord>;
 
 export interface IDecoratorCaptchaSceneOptions {
   resolver?: TypeCaptchaSceneOptionsResolver;
