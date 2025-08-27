@@ -39,11 +39,11 @@ Vona ORM automatically infers the type of `users`
 |columns|The group columns to be displayed. If it is empty, the columns specified by the `groups` parameter will be displayed|
 |aggrs|The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
 
-## 静态关系
+## Static Relation
 
-### 1. 定义关系
+### 1. Define the relation
 
-为了演示起见，新建一个 Model UserStatsGroup，定义一个静态关系`posts`
+For demonstration purposes, create a new Model `UserStatsGroup` and define a static relation `posts`
 
 ``` typescript
 @Model({
@@ -61,7 +61,7 @@ Vona ORM automatically infers the type of `users`
 class ModelUserStatsGroup {}
 ```
 
-### 2. 使用关系
+### 2. Using relations
 
 ``` typescript
 class ServiceUser {
@@ -76,15 +76,15 @@ class ServiceUser {
 }
 ```
 
-Vona ORM 自动推断出`users`的类型
+Vona ORM automatically infers the type of `users`
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-6.png)
 
 ## autoload
 
-也可以将静态关系设为`autoload: true`，从而实现自动加载，也可以让代码进一步简化
+You can also set the static relation to `autoload: true` to achieve automatic loading, which can also further simplify the code
 
-### 1. 定义关系
+### 1. Define the relation
 
 ``` diff
 @Model({
@@ -103,7 +103,7 @@ Vona ORM 自动推断出`users`的类型
 class ModelUserStatsGroup {}
 ```
 
-### 2. 使用关系
+### 2. Using relations
 
 ``` typescript
 class ServiceUser {
