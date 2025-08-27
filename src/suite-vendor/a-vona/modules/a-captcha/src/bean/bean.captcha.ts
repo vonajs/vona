@@ -17,8 +17,7 @@ export class BeanCaptcha extends BeanBase {
     const provider = await this._resolveProvider(sceneName);
     if (!provider) throw new Error(`not found captcha provider for scene: ${sceneName}`);
     // create
-    const beanFullName = beanFullNameFromOnionName(provider.name, 'captchaProvider');
-    const beanInstance = this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
+    const beanInstance = this._getProviderInstance(provider.name);
     const captcha = await beanInstance.create(provider.options);
     // data
     const id = uuidv4();
@@ -38,8 +37,7 @@ export class BeanCaptcha extends BeanBase {
       return tokenSecondary === token;
     }
     // provider
-    const beanFullName = beanFullNameFromOnionName(captchaData.provider, 'captchaProvider');
-    const beanInstance = this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
+    const beanInstance = this._getProviderInstance(captchaData.provider);
     const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
     // verify
     const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
@@ -70,6 +68,11 @@ export class BeanCaptcha extends BeanBase {
 
   async getCaptchaData(id: string) {
     return await this.scope.cacheRedis.captcha.get(id);
+  }
+
+  private _getProviderInstance(providerName: keyof ICaptchaProviderRecord) {
+    const beanFullName = beanFullNameFromOnionName(providerName, 'captchaProvider');
+    return this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
   }
 
   private _getProviderOptions(sceneName: keyof ICaptchaSceneRecord, providerName: keyof ICaptchaProviderRecord) {
