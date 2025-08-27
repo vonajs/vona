@@ -14,6 +14,7 @@ export interface ICaptchaProviderData<TOKEN = any, PAYLOAD = any> {
 }
 
 export interface IDecoratorCaptchaProviderOptions extends TypeOnionOptionsEnableSimple {
+  secondary?: boolean;
   ttl?: number;
   ttlSecondary?: number;
 }

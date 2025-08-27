@@ -24,9 +24,58 @@ export class BeanCaptcha extends BeanBase {
     const id = uuidv4();
     const captchaData: ICaptchaDataCache = { scene: sceneName, provider: provider.name, token: captcha.token };
     // cache
-    await this.scope.cacheRedis.captcha.set(captchaData, `first:${id}`, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
+    await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
     // ok
     return { id, provider: provider.name, payload: captcha.payload };
+  }
+
+  async verify(id: string, token: any) {
+    let captchaData = await this.getCaptchaData(id);
+    if (!captchaData) return false;
+    // tokenSecondary
+    const tokenSecondary = captchaData.tokenSecondary;
+    if (tokenSecondary) {
+      return tokenSecondary === token;
+    }
+    // provider
+    const beanFullName = beanFullNameFromOnionName(captchaData.provider, 'captchaProvider');
+    const beanInstance = this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
+    const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
+    // verify
+    const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
+    if (!verified) {
+      // do nothing
+      return verified;
+    }
+    // secondary/cache
+    if (providerOptions.secondary) {
+      // tokenSecondary
+      const tokenSecondary = uuidv4();
+      captchaData = { ...captchaData, token: undefined, tokenSecondary };
+      // update cache
+      await this.scope.cacheRedis.captcha.set(
+        captchaData,
+        id,
+        { ttl: providerOptions.ttlSecondary ?? this.scope.config.captchaProvider.ttlSecondary },
+      );
+      // ok
+      return tokenSecondary;
+    } else {
+      // delete cache
+      await this.scope.cacheRedis.captcha.del(id);
+      // ok
+      return verified;
+    }
+  }
+
+  async getCaptchaData(id: string) {
+    return await this.scope.cacheRedis.captcha.get(id);
+  }
+
+  private _getProviderOptions(sceneName: keyof ICaptchaSceneRecord, providerName: keyof ICaptchaProviderRecord) {
+    // providers
+    const providers = this._getProviders(sceneName);
+    return providers[providerName];
   }
 
   private async _resolveProvider(sceneName: keyof ICaptchaSceneRecord): Promise<ICaptchaSceneOptionsResolverResult | undefined> {
