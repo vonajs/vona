@@ -36,11 +36,11 @@ Vona ORM automatically infers the type of `users`
 |'userId'|Foreign key|
 |aggrs|The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
 
-## 静态关系
+## Static Relation
 
-### 1. 定义关系
+### 1. Define the relation
 
-为了演示起见，新建一个 Model UserStats，定义一个静态关系`posts`
+For demonstration purposes, create a new Model `UserStats` and define a static relation `posts`
 
 ``` typescript
 @Model({
@@ -57,7 +57,7 @@ Vona ORM automatically infers the type of `users`
 class ModelUserStats {}
 ```
 
-### 2. 使用关系
+### 2. Using relations
 
 ``` typescript
 class ServiceUser {
@@ -72,15 +72,15 @@ class ServiceUser {
 }
 ```
 
-Vona ORM 自动推断出`users`的类型
+Vona ORM automatically infers the type of `users`
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-4.png)
 
 ## autoload
 
-也可以将静态关系设为`autoload: true`，从而实现自动加载，也可以让代码进一步简化
+You can also set the static relation to `autoload: true` to achieve automatic loading, which can also further simplify the code
 
-### 1. 定义关系
+### 1. Define the relation
 
 ``` diff
 @Model({
@@ -98,7 +98,7 @@ Vona ORM 自动推断出`users`的类型
 class ModelUserStats {}
 ```
 
-### 2. 使用关系
+### 2. Using relations
 
 ``` typescript
 class ServiceUser {
