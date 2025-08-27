@@ -29,6 +29,9 @@ import {
   SymbolUseOnionLocal,
 } from '../types/onion.ts';
 
+const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
+const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
+
 @ProxyDisable()
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
@@ -36,6 +39,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   sceneMeta: OnionSceneMeta;
   onionsNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
   onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
+
+  private [SymbolOnionsEnabled]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
+  private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
   _cacheOnionsGlobal: Function[];
   _cacheOnionsHandler: Record<string, Function[]> = {};
@@ -71,6 +77,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return onions;
   }
 
+  getOnionsEnabledCached(_selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const selector = typeof _selector === 'string' ? _selector : '';
+    if (!this[SymbolOnionsEnabled][selector]) {
+      this[SymbolOnionsEnabled][selector] = this.getOnionsEnabled(_selector, matchThis, ...matchArgs);
+    }
+    return this[SymbolOnionsEnabled][selector];
+  }
+
   getOnionsEnabledOfMeta(beanName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
     return this.getOnionsEnabled(selector, matchThis, ...matchArgs).filter(item => item.beanOptions.name === beanName);
   }
@@ -88,6 +102,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return onions.map(item => {
       return wrapFn(item);
     });
+  }
+
+  getOnionsEnabledWrappedCached(wrapFn: Function, _selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const selector = typeof _selector === 'string' ? _selector : '';
+    if (!this[SymbolOnionsEnabledWrapped][selector]) {
+      this[SymbolOnionsEnabledWrapped][selector] = this.getOnionsEnabledWrapped(wrapFn, _selector, matchThis, ...matchArgs);
+    }
+    return this[SymbolOnionsEnabledWrapped][selector];
   }
 
   public get composedOnionsGlobal() {
