@@ -140,6 +140,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '静态关系', link: 'relations-static' },
             { text: '动态关系', link: 'relations-dynamic' },
             { text: '聚合与分组', link: 'aggr-group' },
+            { text: '基于关系的聚合', link: 'relations-aggr' },
+            { text: '基于关系的分组', link: 'relations-group' },
           ],
         },
         {

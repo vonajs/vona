@@ -140,6 +140,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Relations(Static)', link: 'relations-static' },
             { text: 'Relations(Dynamic)', link: 'relations-dynamic' },
             { text: 'Aggregate & Group', link: 'aggr-group' },
+            { text: 'Aggregate on Relations', link: 'relations-aggr' },
+            { text: 'Group on Relations', link: 'relations-group' },
           ],
         },
         {
