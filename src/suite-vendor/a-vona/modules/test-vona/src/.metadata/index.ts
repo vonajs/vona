@@ -494,7 +494,7 @@ roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false
       }
 export interface IModelOptionsUserStats {
         relations: {
-          posts: IModelRelationHasMany<ModelPost, false, '*',undefined,{ count?: '*' | Array<'*'>;sum?: 'stars' | Array<'stars'> },undefined>;
+          posts: IModelRelationHasMany<ModelPost, true, '*',undefined,{ count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> },undefined>;
 roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, '*',undefined,{ count?: '*' | Array<'*'> },undefined>;
         };
       }

@@ -1,21 +1,11 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $relationDynamic } from 'vona-module-a-orm';
-import { ModelPost } from '../model/post.ts';
 import { ModelRole } from '../model/role.ts';
 import { ModelRoleUser } from '../model/roleUser.ts';
 
 @Service()
 export class ServiceUser extends BeanBase {
-  async relationAggregate() {
-    const users = await this.scope.model.userStats.select({
-      include: {
-        posts: true,
-      },
-    });
-    return users;
-  }
-
   async relationBelongsToMany() {
     // insert: roles
     const roles = await this.scope.model.role.insertBulk([
