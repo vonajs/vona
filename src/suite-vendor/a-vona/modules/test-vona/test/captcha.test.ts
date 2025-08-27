@@ -6,8 +6,7 @@ describe('captcha.test.ts', () => {
   it('action:captcha', async () => {
     await app.bean.executor.mockCtx(async () => {
       const captcha = await app.bean.captcha.create('a-captchasimple:simple');
-      assert.equal(captcha.sceneName, 'a-captchasimple:simple');
-      assert.equal(captcha.providerName, 'a-captchasimple:simple');
+      assert.equal(captcha.provider, 'a-captchasimple:simple');
     });
   });
 });
