@@ -2,12 +2,13 @@ import type { ICaptchaProviderRecord } from './captchaProvider.ts';
 import type { ICaptchaSceneRecord } from './captchaScene.ts';
 
 export interface ICaptchaDataCache {
-  id: string;
-  sceneName: keyof ICaptchaSceneRecord;
-  providerName: keyof ICaptchaProviderRecord;
+  scene: keyof ICaptchaSceneRecord;
+  provider: keyof ICaptchaProviderRecord;
   token: any;
 }
 
-export interface ICaptchaData extends ICaptchaDataCache {
+export interface ICaptchaData {
+  id: string;
+  provider: keyof ICaptchaProviderRecord;
   payload: any;
 }

@@ -22,16 +22,11 @@ export class BeanCaptcha extends BeanBase {
     const captcha = await beanInstance.create(provider.options);
     // data
     const id = uuidv4();
-    const captchaData: ICaptchaDataCache = {
-      id,
-      sceneName,
-      providerName: provider.name,
-      token: captcha.token,
-    };
+    const captchaData: ICaptchaDataCache = { scene: sceneName, provider: provider.name, token: captcha.token };
     // cache
     await this.scope.cacheRedis.captcha.set(captchaData, `first:${id}`, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
     // ok
-    return { ...captchaData, payload: captcha.payload };
+    return { id, provider: provider.name, payload: captcha.payload };
   }
 
   private async _resolveProvider(sceneName: keyof ICaptchaSceneRecord): Promise<ICaptchaSceneOptionsResolverResult | undefined> {
