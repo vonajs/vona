@@ -10,7 +10,7 @@ export type ICaptchaSceneOptionsProviders = {
 
 export interface ICaptchaSceneOptionsResolverResult<T extends keyof ICaptchaProviderRecord = keyof ICaptchaProviderRecord> {
   name: T;
-  options?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[T]>>;
+  options: ICaptchaProviderRecord[T];
 }
 
 export type TypeCaptchaSceneOptionsResolver =

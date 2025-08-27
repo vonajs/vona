@@ -1,8 +1,8 @@
 import type { VonaContext } from 'vona';
-import type { ICaptchaProviderRecord } from '../types/captchaProvider.ts';
+import type { ICaptchaProviderExecute, ICaptchaProviderRecord } from '../types/captchaProvider.ts';
 import type { ICaptchaSceneOptionsProviders, ICaptchaSceneOptionsResolverResult, ICaptchaSceneRecord } from '../types/captchaScene.ts';
 import { getRandomInt } from '@cabloy/utils';
-import { BeanBase, deepExtend } from 'vona';
+import { BeanBase, beanFullNameFromOnionName, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 const SymbolProviders = Symbol('SymbolProviders');
@@ -15,7 +15,10 @@ export class BeanCaptcha extends BeanBase {
     // resolve provider
     const provider = await this._resolveProvider(sceneName);
     if (!provider) throw new Error(`not found captcha provider for scene: ${sceneName}`);
-    console.log(provider);
+    // create
+    const beanFullName = beanFullNameFromOnionName(provider.name, 'captchaProvider');
+    const beanInstance = this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
+    const captcha = await beanInstance.create(provider.options);
   }
 
   private async _resolveProvider(sceneName: keyof ICaptchaSceneRecord): Promise<ICaptchaSceneOptionsResolverResult | undefined> {

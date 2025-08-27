@@ -24,6 +24,37 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.captcha.ts';
+
+import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  
+    export interface ICacheRedisRecord {
+      'a-captcha:captcha': IDecoratorCacheRedisOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-captcha' {
+  
+        export interface CacheRedisCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleACaptcha;
+        }
+
+          export interface CacheRedisCaptcha {
+            get $beanFullName(): 'a-captcha.cacheRedis.captcha';
+            get $onionName(): 'a-captcha:captcha';
+          } 
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import type { CacheRedisCaptcha } from '../bean/cacheRedis.captcha.ts';
+export interface IModuleCacheRedis {
+  'captcha': CacheRedisCaptcha;
+}
+/** cacheRedis: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -33,6 +64,7 @@ export class ScopeModuleACaptcha extends BeanScopeBase {}
 
 export interface ScopeModuleACaptcha {
   util: BeanScopeUtil;
+cacheRedis: IModuleCacheRedis;
 }
 
 import 'vona';
