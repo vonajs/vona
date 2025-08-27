@@ -34,7 +34,7 @@ export const shared = defineConfig({
     [
       'script',
       {
-        async: 'true',
+        async: '',
         src: 'https://www.googletagmanager.com/gtag/js?id=G-2NYR9RGRL4',
       },
     ],
