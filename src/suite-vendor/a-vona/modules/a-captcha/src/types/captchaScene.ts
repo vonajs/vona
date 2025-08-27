@@ -1,9 +1,29 @@
-import type { OmitNever } from 'vona';
-import type { ServiceOnion } from 'vona-module-a-onion';
+import type { OmitNever, PowerPartial, VonaContext } from 'vona';
+import type { ServiceOnion, TypeUseOnionOmitOptionsEnable } from 'vona-module-a-onion';
+import type { ICaptchaProviderRecord } from './captchaProvider.ts';
 
 export interface ICaptchaSceneRecord {}
 
-export interface IDecoratorCaptchaSceneOptions {}
+export type ICaptchaSceneOptionsProviders = {
+  [K in keyof ICaptchaProviderRecord]?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[K]>> | boolean;
+};
+
+export type ICaptchaSceneOptionsProvidersStrict = {
+  [K in keyof ICaptchaProviderRecord]?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[K]>> ;
+};
+
+export interface ICaptchaSceneOptionsResolverResult<T extends keyof ICaptchaProviderRecord = keyof ICaptchaProviderRecord> {
+  provider: T;
+  options?: PowerPartial<TypeUseOnionOmitOptionsEnable<ICaptchaProviderRecord[T]>>;
+}
+
+export type TypeCaptchaSceneOptionsResolver =
+  (ctx: VonaContext, providers: ICaptchaSceneOptionsProvidersStrict) => Promise<ICaptchaSceneOptionsResolverResult>;
+
+export interface IDecoratorCaptchaSceneOptions {
+  resolver?: TypeCaptchaSceneOptionsResolver;
+  providers: ICaptchaSceneOptionsProviders;
+}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

@@ -24,6 +24,31 @@ declare module 'vona-module-a-captchasimple' {
           } 
 }
 /** captchaProvider: end */
+/** captchaScene: begin */
+export * from '../bean/captchaScene.simple.ts';
+
+import { type IDecoratorCaptchaSceneOptions } from 'vona-module-a-captcha';
+declare module 'vona-module-a-captcha' {
+  
+    export interface ICaptchaSceneRecord {
+      'a-captchasimple:simple': IDecoratorCaptchaSceneOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-captchasimple' {
+  
+        export interface CaptchaSceneSimple {
+          /** @internal */
+          get scope(): ScopeModuleACaptchasimple;
+        }
+
+          export interface CaptchaSceneSimple {
+            get $beanFullName(): 'a-captchasimple.captchaScene.simple';
+            get $onionName(): 'a-captchasimple:simple';
+          } 
+}
+/** captchaScene: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
