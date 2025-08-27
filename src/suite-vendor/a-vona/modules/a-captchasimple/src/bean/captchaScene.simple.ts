@@ -6,7 +6,7 @@ import { CaptchaScene } from 'vona-module-a-captcha';
     return { provider: 'a-captchasimple:simple', options: undefined };
   },
   providers: {
-    'a-captchasimple:simple': {},
+    'a-captchasimple:simple': true,
   },
 })
 export class CaptchaSceneSimple extends BeanBase {}
