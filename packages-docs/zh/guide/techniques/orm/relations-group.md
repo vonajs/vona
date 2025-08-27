@@ -29,7 +29,6 @@ Vona ORM 自动推断出`users`的类型
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-5.png)
 
-
 |名称|说明|
 |--|--|
 |with.posts|关系名|
