@@ -28,6 +28,13 @@ export class BeanCaptcha extends BeanBase {
     return { id, provider: provider.name, payload: captcha.payload };
   }
 
+  async refresh(id: string, sceneName: keyof ICaptchaSceneRecord) {
+    // delete cache
+    await this.scope.cacheRedis.captcha.del(id);
+    // create
+    return await this.create(sceneName);
+  }
+
   async verify(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
     const captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
