@@ -28,12 +28,16 @@ export class BeanCaptcha extends BeanBase {
     return { id, provider: provider.name, payload: captcha.payload };
   }
 
-  async verify(id: string, token: unknown) {
-    let captchaData = await this.getCaptchaData(id);
+  async verify(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
+    const captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
+    // scene
+    if (captchaData.scene !== sceneName) return false;
     // tokenSecondary
     const tokenSecondary = captchaData.token2;
     if (tokenSecondary) {
+      // delete cache
+      await this.scope.cacheRedis.captcha.del(id);
       return tokenSecondary === token;
     }
     // provider
@@ -42,28 +46,41 @@ export class BeanCaptcha extends BeanBase {
     // verify
     const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
     if (!verified) {
-      // do nothing
-      return verified;
+      // do not mutate cache
+      return false;
     }
-    // secondary/cache
-    if (providerOptions.secondary) {
-      // tokenSecondary
-      const tokenSecondary = uuidv4();
-      captchaData = { ...captchaData, token: undefined, token2: tokenSecondary };
-      // update cache
-      await this.scope.cacheRedis.captcha.set(
-        captchaData,
-        id,
-        { ttl: providerOptions.ttlSecondary ?? this.scope.config.captchaProvider.ttlSecondary },
-      );
-      // ok
-      return tokenSecondary;
-    } else {
-      // delete cache
-      await this.scope.cacheRedis.captcha.del(id);
-      // ok
-      return verified;
+    // delete cache
+    await this.scope.cacheRedis.captcha.del(id);
+    // ok
+    return true;
+  }
+
+  async verifyImmediate(id: string, token: unknown): Promise<false | string> {
+    let captchaData = await this.getCaptchaData(id);
+    if (!captchaData) return false;
+    // tokenSecondary
+    let tokenSecondary = captchaData.token2;
+    if (tokenSecondary) return tokenSecondary; // maybe called more times
+    // provider
+    const beanInstance = this._getProviderInstance(captchaData.provider);
+    const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
+    // verify
+    const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
+    if (!verified) {
+      // do not mutate cache
+      return false;
     }
+    // tokenSecondary
+    tokenSecondary = uuidv4();
+    captchaData = { ...captchaData, token: undefined, token2: tokenSecondary };
+    // update cache
+    await this.scope.cacheRedis.captcha.set(
+      captchaData,
+      id,
+      { ttl: providerOptions.ttlSecondary ?? this.scope.config.captchaProvider.ttlSecondary },
+    );
+    // ok
+    return tokenSecondary;
   }
 
   async getCaptchaData(id: string) {
