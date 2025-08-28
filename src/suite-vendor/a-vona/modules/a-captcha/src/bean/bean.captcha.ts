@@ -28,7 +28,7 @@ export class BeanCaptcha extends BeanBase {
     return { id, provider: provider.name, payload: captcha.payload };
   }
 
-  async verify(id: string, token: any) {
+  async verify(id: string, token: unknown) {
     let captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
     // tokenSecondary
