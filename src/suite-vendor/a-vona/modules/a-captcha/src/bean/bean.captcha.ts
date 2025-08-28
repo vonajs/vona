@@ -32,7 +32,7 @@ export class BeanCaptcha extends BeanBase {
     let captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
     // tokenSecondary
-    const tokenSecondary = captchaData.tokenSecondary;
+    const tokenSecondary = captchaData.token2;
     if (tokenSecondary) {
       return tokenSecondary === token;
     }
@@ -49,7 +49,7 @@ export class BeanCaptcha extends BeanBase {
     if (providerOptions.secondary) {
       // tokenSecondary
       const tokenSecondary = uuidv4();
-      captchaData = { ...captchaData, token: undefined, tokenSecondary };
+      captchaData = { ...captchaData, token: undefined, token2: tokenSecondary };
       // update cache
       await this.scope.cacheRedis.captcha.set(
         captchaData,

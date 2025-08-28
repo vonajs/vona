@@ -5,7 +5,7 @@ export interface ICaptchaDataCache {
   scene: keyof ICaptchaSceneRecord;
   provider: keyof ICaptchaProviderRecord;
   token?: any;
-  tokenSecondary?: string;
+  token2?: string;
 }
 
 export interface ICaptchaData {
