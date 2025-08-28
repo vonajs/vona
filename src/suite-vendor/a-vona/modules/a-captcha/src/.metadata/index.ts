@@ -1,5 +1,6 @@
 /* eslint-disable */
-import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** bean: begin */
 export * from '../bean/bean.captcha.ts';
 
@@ -56,6 +57,31 @@ export interface IModuleCacheRedis {
   'captcha': CacheRedisCaptcha;
 }
 /** cacheRedis: end */
+/** dto: begin */
+export * from '../dto/captchaData.ts';
+import type { IDtoOptionsCaptchaData } from '../dto/captchaData.ts';
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IDtoRecord {
+      'a-captcha:captchaData': IDtoOptionsCaptchaData;
+    }
+
+  
+}
+declare module 'vona-module-a-captcha' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoCaptchaData } from '../dto/captchaData.ts'; 
+declare module 'vona-module-a-captcha' {
+  
+    export interface IDtoOptionsCaptchaData {
+      fields?: TypeEntityOptionsFields<DtoCaptchaData, IDtoOptionsCaptchaData[TypeSymbolKeyFieldsMore]>;
+    }
+}
+/** dto: end */
 /** controller: begin */
 export * from '../controller/captcha.ts';
 import type { IControllerOptionsCaptcha } from '../controller/captcha.ts';
@@ -90,7 +116,12 @@ declare module 'vona-module-a-captcha' {
       actions?: TypeControllerOptionsActions<ControllerCaptcha>;
     }
 }
+declare module 'vona-module-a-web' {
+  export interface IApiPathPostRecord{
+        '/captcha/create': undefined;
+    }
 
+}
 /** controller: end */
 /** config: begin */
 export * from '../config/config.ts';
