@@ -94,6 +94,20 @@ export class BeanCaptcha extends BeanBase {
     return await this.scope.cacheRedis.captcha.get(id);
   }
 
+  async updateCaptchaToken(id: string, token: unknown) {
+    let captchaData = await this.getCaptchaData(id);
+    if (!captchaData) return this.app.throw(403);
+    // provider
+    const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
+    // update cache
+    captchaData = { ...captchaData, token };
+    await this.scope.cacheRedis.captcha.set(
+      captchaData,
+      id,
+      { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl },
+    );
+  }
+
   private _getProviderInstance(providerName: keyof ICaptchaProviderRecord) {
     const beanFullName = beanFullNameFromOnionName(providerName, 'captchaProvider');
     return this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
