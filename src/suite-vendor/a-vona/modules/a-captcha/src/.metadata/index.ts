@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** bean: begin */
 export * from '../bean/bean.captcha.ts';
 
@@ -55,6 +56,42 @@ export interface IModuleCacheRedis {
   'captcha': CacheRedisCaptcha;
 }
 /** cacheRedis: end */
+/** controller: begin */
+export * from '../controller/captcha.ts';
+import type { IControllerOptionsCaptcha } from '../controller/captcha.ts';
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IControllerRecord {
+      'a-captcha:captcha': IControllerOptionsCaptcha;
+    }
+
+  
+}
+declare module 'vona-module-a-captcha' {
+  
+        export interface ControllerCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleACaptcha;
+        }
+
+          export interface ControllerCaptcha {
+            get $beanFullName(): 'a-captcha.controller.captcha';
+            get $onionName(): 'a-captcha:captcha';
+          } 
+}
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerCaptcha } from '../controller/captcha.ts';
+declare module 'vona-module-a-captcha' {
+  
+    export interface IControllerOptionsCaptcha {
+      actions?: TypeControllerOptionsActions<ControllerCaptcha>;
+    }
+}
+
+/** controller: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
