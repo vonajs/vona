@@ -1,10 +1,10 @@
-# Cache
+# Caching
 
 Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive
 
-## Out-of-the-Box Use
+## Out-of-the-Box
 
-Vona ORM provides an out-of-the-box caching mechanism. Simply operate the ORM as usual, and the system will handle caching internally and ensure cached data consistency.
+Vona ORM provides an `out-of-the-box` caching mechanism. Simply operate the ORM as usual, and the system will handle caching internally and ensure cached data consistency
 
 ## Entity Caching
 

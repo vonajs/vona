@@ -142,7 +142,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Aggregate & Group', link: 'aggr-group' },
             { text: 'Aggregate on Relations', link: 'relations-aggr' },
             { text: 'Group on Relations', link: 'relations-group' },
-            { text: 'Cache', link: 'cache' },
+            { text: 'Caching', link: 'caching' },
           ],
         },
         {
