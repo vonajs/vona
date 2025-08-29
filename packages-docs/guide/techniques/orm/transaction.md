@@ -133,7 +133,7 @@ this.bean.database.current.compensate(async () => {
 });
 ```
 
-## Transaction and Cache Data Consistency
+## Transaction and Cache Data Consistency {#transaction-cache-consistency}
 
 Many frameworks use minimal use cases to demonstrate high performance, ignoring the performance challenges brought about by business complexity. As business grows and changes, project performance can plummet. Various optimization and mitigation measures can lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses by integrating caching strategies into its core framework. It implements mechanisms such as `two-layer cache`, `query cache`, and `entity cache`, making it easy to develop large-scale business systems while maintaining elegant and intuitive code
 

@@ -112,3 +112,103 @@ class ServiceUser extends BeanBase {
   2. 通过 Hash：`xxxxxx`判断是否存在 Query 缓存
       - 如果存在，则直接取得缓存作为最终数据
       - 如果不存在，则通过 where + aggrs 查询出最终数据，并创建缓存
+
+## 缓存配置
+
+为了实现开箱即用的效果，系统提供了默认的缓存配置。我们也可以提供自定义配置
+
+### 1. Model Options
+
+可以在 Model Options 中配置缓存，比如：
+
+``` typescript
+@Model({
+  entity: EntityUser,
+  cache: {
+    entity: {
+      mode: 'redis',
+      redis: {
+        ttl: 2 * 3600 * 1000, // 2h
+      },
+    },
+    query: {
+      mode: 'all',
+      redis: {
+        ttl: 3 * 3600 * 1000, // 3h
+      },
+    },
+  },
+})
+class ModelUser {}
+```
+
+* 完整配置如下：
+
+|名称|说明|
+|--|--|
+|cache.entity|Entity缓存配置。可参考`Summer（二级缓存）`的配置|
+|cache.query|Query缓存配置。可参考`Summer（二级缓存）`的配置|
+|cache.modelsClear|当Query缓存数据被清除时，可以同时清除其他相关Models的Query缓存|
+|cache.modelsClearedBy|当其他Models的Query缓存数据被清除时，可以同时清除当前Model的Query缓存|
+|cache.modelsClearedByFn|当其他Models的Query缓存数据被清除时，可以执行自定义函数，从而实现定制化的清除逻辑。比如在`动态分表`的场景中，就可以使用此机制清除不同数据表的Query缓存|
+
+### 2. App config配置
+
+可以在 App config 中配置 Model options
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'test-vona:user': {
+      cache: {
+        entity: {
+          mode: 'redis',
+          redis: {
+            ttl: 2 * 3600 * 1000, // 2h
+          },
+        },
+        query: {
+          mode: 'redis',
+          redis: {
+            ttl: 3 * 3600 * 1000, // 3h
+          },
+        },
+      },
+    },
+  },
+};
+```
+
+## FAQ: Query缓存是否大量占用Redis空间？
+
+1. 由于`Query缓存`仅缓存`Id数组`和`统计数据`，而且缓存 Key 是 Hash，因此缓存空间占用非常小，甚至比`Entity缓存`还要轻量
+2. 所有 Models 都可以定制缓存参数，可以基于不同业务的数据特点和用户访问频率，设置不同的`ttl`时间
+
+## FAQ: 如何保持缓存数据的一致性？
+
+1. 当调用 Model 方法执行变更操作时（包括 Create/Update/Delete），系统会自动删除变更数据的`Entity缓存`，同时清除 Model 对应的所有`Query缓存`
+
+2. 可以设置`modelsClear/modelsClearedBy/modelsClearedByFn`，从而在清除`Query缓存`时，同时清除相关 Models 的`Query缓存`
+
+比如，Model `UserStats`和 Model `UserStatsGroup`分别是与 Model `User`相关的 Model，专门用于查询 User 的聚合和分组数据。当我们`Create/Update/Delete`用户数据时，不仅要清除 Model `User`的`Query缓存`，还要清除 Model `UserStats`和 Model `UserStatsGroup`的`Query缓存`。那么，可以如下配置：
+
+``` typescript
+import { ModelUserStats } from './userStats.ts';
+import { ModelUserStatsGroup } from './userStatsGroup.ts';
+
+@Model({
+  entity: EntityUser,
+  cache: {
+    modelsClear: [() => ModelUserStats, () => ModelUserStatsGroup],
+  },
+})
+class ModelUser {}
+```
+
+3. 数据库事务与 cache 数据一致性
+
+Vona 系统对数据库事务与缓存进行了适配，当数据库事务失败时会自动执行缓存的补偿操作，从而让数据库数据与缓存数据始终保持一致
+  - 参见：[事务与Cache数据一致性](./transaction.md#transaction-cache-consistency)
