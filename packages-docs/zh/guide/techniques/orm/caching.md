@@ -209,7 +209,7 @@ import { ModelUserStatsGroup } from './userStatsGroup.ts';
 class ModelUser {}
 ```
 
-3. 数据库事务与 cache 数据一致性
+3. 数据库事务与 Cache 数据一致性
 
 Vona 系统对数据库事务与缓存进行了适配，当数据库事务失败时会自动执行缓存的补偿操作，从而让数据库数据与缓存数据始终保持一致
   - 参见：[事务与Cache数据一致性](./transaction.md#transaction-cache-consistency)
