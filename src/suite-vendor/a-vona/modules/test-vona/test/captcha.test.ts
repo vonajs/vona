@@ -34,7 +34,15 @@ describe('captcha.test.ts', () => {
         },
       });
       assert.equal(captcha.provider, providerName);
-      //
+      // refresh
+      const captcha2: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/refresh', {
+        body: {
+          id: captcha.id,
+          scene: sceneName,
+        },
+      });
+      assert.equal(captcha2.provider, providerName);
+      assert.notEqual(captcha2.id, captcha.id);
     });
   });
 });

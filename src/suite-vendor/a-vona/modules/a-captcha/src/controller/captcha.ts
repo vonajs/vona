@@ -16,7 +16,12 @@ export class ControllerCaptcha extends BeanBase {
     return await this.bean.captcha.create(scene as any);
   }
 
-  async refresh() {}
+  @Web.post('refresh')
+  @Api.body(DtoCaptchaData)
+  @Passport.public()
+  async refresh(@Arg.body('id') id: string, @Arg.body('scene') scene: string) {
+    return await this.bean.captcha.refresh(id, scene as any);
+  }
 
   async verifyImmediate() {}
 }

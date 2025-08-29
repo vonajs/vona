@@ -119,6 +119,7 @@ declare module 'vona-module-a-captcha' {
 declare module 'vona-module-a-web' {
   export interface IApiPathPostRecord{
         '/captcha/create': undefined;
+'/captcha/refresh': undefined;
     }
 
 }
