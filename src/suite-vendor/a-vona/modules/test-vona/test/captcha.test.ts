@@ -64,6 +64,17 @@ describe('captcha.test.ts', () => {
         },
       });
       assert.equal(!!tokenSecondary, true);
+      // verify
+      await app.bean.executor.performAction('post', '/test/vona/captcha/signin', {
+        body: {
+          username: 'xxx',
+          password: 'xxx',
+          captcha: {
+            id: captcha2.id,
+            token: tokenSecondary,
+          },
+        },
+      });
     });
   });
 });

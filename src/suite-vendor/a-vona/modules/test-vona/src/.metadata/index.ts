@@ -1421,6 +1421,7 @@ declare module 'vona-module-test-vona' {
 export * from '../controller/bean.ts';
 export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
+export * from '../controller/captcha.ts';
 export * from '../controller/dtoTest.ts';
 export * from '../controller/guardPassport.ts';
 export * from '../controller/onion.ts';
@@ -1434,6 +1435,7 @@ export * from '../controller/upload.ts';
 import type { IControllerOptionsBean } from '../controller/bean.ts';
 import type { IControllerOptionsCacheMem } from '../controller/cacheMem.ts';
 import type { IControllerOptionsCacheRedis } from '../controller/cacheRedis.ts';
+import type { IControllerOptionsCaptcha } from '../controller/captcha.ts';
 import type { IControllerOptionsDtoTest } from '../controller/dtoTest.ts';
 import type { IControllerOptionsGuardPassport } from '../controller/guardPassport.ts';
 import type { IControllerOptionsOnion } from '../controller/onion.ts';
@@ -1451,6 +1453,7 @@ declare module 'vona-module-a-web' {
       'test-vona:bean': IControllerOptionsBean;
 'test-vona:cacheMem': IControllerOptionsCacheMem;
 'test-vona:cacheRedis': IControllerOptionsCacheRedis;
+'test-vona:captcha': IControllerOptionsCaptcha;
 'test-vona:dtoTest': IControllerOptionsDtoTest;
 'test-vona:guardPassport': IControllerOptionsGuardPassport;
 'test-vona:onion': IControllerOptionsOnion;
@@ -1495,6 +1498,16 @@ declare module 'vona-module-test-vona' {
           export interface ControllerCacheRedis {
             get $beanFullName(): 'test-vona.controller.cacheRedis';
             get $onionName(): 'test-vona:cacheRedis';
+          }
+
+        export interface ControllerCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ControllerCaptcha {
+            get $beanFullName(): 'test-vona.controller.captcha';
+            get $onionName(): 'test-vona:captcha';
           }
 
         export interface ControllerDtoTest {
@@ -1606,6 +1619,8 @@ import type { ControllerCacheMem } from '../controller/cacheMem.ts';
 // @ts-ignore ignore
 import type { ControllerCacheRedis } from '../controller/cacheRedis.ts';
 // @ts-ignore ignore
+import type { ControllerCaptcha } from '../controller/captcha.ts';
+// @ts-ignore ignore
 import type { ControllerDtoTest } from '../controller/dtoTest.ts';
 // @ts-ignore ignore
 import type { ControllerGuardPassport } from '../controller/guardPassport.ts';
@@ -1637,6 +1652,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IControllerOptionsCacheRedis {
       actions?: TypeControllerOptionsActions<ControllerCacheRedis>;
+    }
+
+    export interface IControllerOptionsCaptcha {
+      actions?: TypeControllerOptionsActions<ControllerCaptcha>;
     }
 
     export interface IControllerOptionsDtoTest {
@@ -1703,6 +1722,7 @@ declare module 'vona-module-a-web' {
 export interface IApiPathPostRecord{
         '/test/vona/cacheMem': undefined;
 '/test/vona/cacheRedis': undefined;
+'/test/vona/captcha/signin': undefined;
 '/test/vona/dtoTest/createUser': undefined;
 '//echo': undefined;
 '/test/vona/onion/echo2/:userId/:userName': undefined;

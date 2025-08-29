@@ -59,12 +59,15 @@ export interface IModuleCacheRedis {
 /** cacheRedis: end */
 /** dto: begin */
 export * from '../dto/captchaData.ts';
+export * from '../dto/captchaVerify.ts';
 import type { IDtoOptionsCaptchaData } from '../dto/captchaData.ts';
+import type { IDtoOptionsCaptchaVerify } from '../dto/captchaVerify.ts';
 import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'a-captcha:captchaData': IDtoOptionsCaptchaData;
+'a-captcha:captchaVerify': IDtoOptionsCaptchaVerify;
     }
 
   
@@ -74,11 +77,16 @@ declare module 'vona-module-a-captcha' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoCaptchaData } from '../dto/captchaData.ts'; 
+import type { DtoCaptchaData } from '../dto/captchaData.ts';
+import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts'; 
 declare module 'vona-module-a-captcha' {
   
     export interface IDtoOptionsCaptchaData {
       fields?: TypeEntityOptionsFields<DtoCaptchaData, IDtoOptionsCaptchaData[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsCaptchaVerify {
+      fields?: TypeEntityOptionsFields<DtoCaptchaVerify, IDtoOptionsCaptchaVerify[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
