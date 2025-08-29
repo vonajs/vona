@@ -839,7 +839,7 @@ importers:
         specifier: ^5.0.46
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.90
+        specifier: ^5.0.91
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
