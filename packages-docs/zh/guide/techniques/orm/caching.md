@@ -51,8 +51,8 @@ class ServiceUser extends BeanBase {
 |--|--|
 |Hash of query clause|Array of Id|
 
-- 缓存 Key：为了节约缓存空间，并且提升缓存查询性能，系统将`查询语句`生成`Hash`，作为缓存 Key
-- 缓存 Value：系统将查询出的目标数据的`Id数组`作为缓存 Value
+- `缓存 Key`：为了节约缓存空间，并且提升缓存查询性能，系统将`查询语句`生成`Hash`，作为缓存 Key
+- `缓存 Value`：系统将查询出的目标数据的`Id数组`作为缓存 Value
 
 #### 举例
 
@@ -185,6 +185,7 @@ config.onions = {
 ## FAQ: Query缓存是否大量占用Redis空间？
 
 1. 由于`Query缓存`仅缓存`Id数组`和`统计数据`，而且缓存 Key 是 Hash，因此缓存空间占用非常小，甚至比`Entity缓存`还要轻量
+
 2. 所有 Models 都可以定制缓存参数，可以基于不同业务的数据特点和用户访问频率，设置不同的`ttl`时间
 
 ## FAQ: 如何保持缓存数据的一致性？
