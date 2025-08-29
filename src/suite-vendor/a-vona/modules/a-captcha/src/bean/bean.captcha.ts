@@ -24,8 +24,12 @@ export class BeanCaptcha extends BeanBase {
     const captchaData: ICaptchaDataCache = { scene: sceneName, provider: provider.name, token: captcha.token };
     // cache
     await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
-    // ok
-    return { id, provider: provider.name, payload: captcha.payload };
+    // result
+    const result: ICaptchaData = { id, provider: provider.name, payload: captcha.payload };
+    if (this.scope.config.captcha.showToken) {
+      result.token = captcha.token;
+    }
+    return result;
   }
 
   async refresh(id: string, sceneName: keyof ICaptchaSceneRecord) {

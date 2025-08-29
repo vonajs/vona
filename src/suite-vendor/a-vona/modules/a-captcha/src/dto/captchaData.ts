@@ -13,5 +13,8 @@ export class DtoCaptchaData {
   provider: string;
 
   @Api.field()
+  token: unknown;
+
+  @Api.field()
   payload: unknown;
 }

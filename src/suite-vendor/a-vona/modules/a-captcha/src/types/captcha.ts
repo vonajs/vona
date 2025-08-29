@@ -11,5 +11,6 @@ export interface ICaptchaDataCache {
 export interface ICaptchaData {
   id: string;
   provider: keyof ICaptchaProviderRecord;
+  token?: unknown;
   payload: unknown;
 }
