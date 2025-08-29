@@ -1,6 +1,6 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { DtoCaptchaVerify } from 'vona-module-a-captcha';
+import { Aspect } from 'vona-module-a-aspect';
 import { Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
@@ -11,12 +11,10 @@ export interface IControllerOptionsCaptcha extends IDecoratorControllerOptions {
 export class ControllerCaptcha extends BeanBase {
   @Web.post('signin')
   @Passport.public()
+  @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
   async signin(
     @Arg.body('username') _username: string,
     @Arg.body('password') _password: string,
-    @Arg.body('captcha') captcha: DtoCaptchaVerify,
   ) {
-    const verified = await this.bean.captcha.verify(captcha.id, captcha.token, 'a-captchasimple:simple');
-    if (!verified) this.app.throw(403);
   }
 }
