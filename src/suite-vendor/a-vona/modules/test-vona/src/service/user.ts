@@ -6,6 +6,30 @@ import { ModelRoleUser } from '../model/roleUser.ts';
 
 @Service()
 export class ServiceUser extends BeanBase {
+  async userStats() {
+    const userStats = await this.scope.model.user.aggregate({
+      aggrs: {
+        count: '*',
+        sum: 'scores',
+        max: 'age',
+        min: 'age',
+      },
+      where: {
+        scores: { _gt_: 30 },
+      },
+    });
+    return userStats;
+  }
+
+  async findUsers() {
+    const users = await this.scope.model.user.select({
+      where: {
+        age: { _gt_: 18 },
+      },
+    });
+    return users;
+  }
+
   async relationBelongsToMany() {
     // insert: roles
     const roles = await this.scope.model.role.insertBulk([
