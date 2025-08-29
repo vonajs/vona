@@ -72,8 +72,8 @@ class ServiceUser extends BeanBase {
 * When the `user.select` method is executed, the system executes the following logic:
   1. Calculate the Hash: `xxxxxx` based on the `where` clause
   2. Use the Hash: `xxxxxx` to determine whether the `query cache` exists
-    - If it exists, directly retrieve the `Id array`
-    - If it doesn't exist, retrieve the `Id array` using the `where` clause and create a cache
+      - If it exists, directly retrieve the `Id array`
+      - If it doesn't exist, retrieve the `Id array` using the `where` clause and create a cache
   3. Use the `Id array` to retrieve the final data from the `Entity cache`
 
 ### 2. Aggregate and Group
@@ -110,8 +110,8 @@ class ServiceUser extends BeanBase {
 * When the `user.aggregate` method is executed, the system executes the following logic:
   1. Calculates the hash `xxxxxx` based on `where` + `aggrs`
   2. Determines whether a `query cache` exists using hash `xxxxxx`
-    - If it exists, directly retrieves the cache as the final data
-    - If it doesn't exist, retrieves the final data using `where` + `aggrs` and creates a cache
+      - If it exists, directly retrieves the cache as the final data
+      - If it doesn't exist, retrieves the final data using `where` + `aggrs` and creates a cache
 
 ## Cache Configuration
 
