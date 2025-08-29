@@ -64,7 +64,7 @@ describe('captcha.test.ts', () => {
         },
       });
       assert.equal(!!tokenSecondary, true);
-      // verify
+      // verify: ok
       await app.bean.executor.performAction('post', '/test/vona/captcha/signin', {
         body: {
           username: 'xxx',
