@@ -162,8 +162,16 @@ declare module 'vona-module-a-web' {
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
+export const locales = {
+  'en-us': locale_en_us,
+'zh-cn': locale_zh_cn,
+};
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -172,6 +180,7 @@ export class ScopeModuleACaptcha extends BeanScopeBase {}
 export interface ScopeModuleACaptcha {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 cacheRedis: IModuleCacheRedis;
 }
 
@@ -189,7 +198,12 @@ declare module 'vona' {
     'a-captcha': ReturnType<typeof config>;
   }
 
-  
+  export interface IBeanScopeLocale {
+    'a-captcha': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-captcha::${K}` {
+  return `a-captcha::${key}`;
+}
 /** scope: end */

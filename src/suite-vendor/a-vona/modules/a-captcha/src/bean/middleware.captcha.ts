@@ -18,11 +18,28 @@ export class MiddlewareCaptcha extends BeanBase implements IMiddlewareExecute {
     const sceneName = options.scene;
     if (!sceneName) throw new Error('please specify the captcha scene name');
     // captcha
-    const captcha: DtoCaptchaVerify | undefined = this.ctx.request.body[options.bodyField!];
+    const bodyField = options.bodyField!;
+    const captcha: DtoCaptchaVerify | undefined = this.ctx.request.body[bodyField];
     if (!captcha) throw new Error('not found captcha data');
     const verified = await this.bean.captcha.verify(captcha.id, captcha.token, sceneName);
-    if (!verified) this.app.throw(403);
+    if (!verified) throw combineCaptchaError(bodyField, this.scope.locale.CaptchaInvalid());
     // next
     return next();
   }
+}
+
+function combineCaptchaError(bodyField: string, message: string) {
+  // error
+  const error = new Error();
+  error.code = 422;
+  error.message = [
+    {
+      code: 'custom',
+      path: [
+        bodyField,
+      ],
+      message,
+    },
+  ] as any;
+  return error;
 }
