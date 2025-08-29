@@ -3,6 +3,7 @@ import { BeanBase } from 'vona';
 import { Api, Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
+import z from 'zod';
 import { DtoCaptchaData } from '../dto/captchaData.ts';
 
 export interface IControllerOptionsCaptcha extends IDecoratorControllerOptions {}
@@ -23,5 +24,12 @@ export class ControllerCaptcha extends BeanBase {
     return await this.bean.captcha.refresh(id, scene as any);
   }
 
-  async verifyImmediate() {}
+  @Web.post('verifyImmediate')
+  @Api.body(z.string())
+  @Passport.public()
+  async verifyImmediate(@Arg.body('id') id: string, @Arg.body('token') token: unknown): Promise<string> {
+    const verified = await this.bean.captcha.verifyImmediate(id, token);
+    if (!verified) this.app.throw(403);
+    return verified;
+  }
 }

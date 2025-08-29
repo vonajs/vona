@@ -120,6 +120,7 @@ declare module 'vona-module-a-web' {
   export interface IApiPathPostRecord{
         '/captcha/create': undefined;
 '/captcha/refresh': undefined;
+'/captcha/verifyImmediate': undefined;
     }
 
 }
