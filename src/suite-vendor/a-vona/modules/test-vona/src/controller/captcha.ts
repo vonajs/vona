@@ -1,13 +1,14 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
-import { Arg } from 'vona-module-a-openapi';
+import { Api, Arg } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsCaptcha extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsCaptcha>({ path: 'captcha', meta: { mode: ['test', 'dev'] } })
+@Controller<IControllerOptionsCaptcha>({ path: 'captcha', meta: { mode: 'test' } })
+@Api.exclude()
 export class ControllerCaptcha extends BeanBase {
   @Web.post('signin')
   @Passport.public()
