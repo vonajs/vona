@@ -1,13 +1,14 @@
+import type { ICaptchaData } from 'vona-module-a-captcha';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
 describe('captcha.test.ts', () => {
+  // scene/provider
+  const sceneName = 'a-captchasimple:simple';
+  const providerName = 'a-captchasimple:simple';
   it('action:captcha', async () => {
     await app.bean.executor.mockCtx(async () => {
-      // scene/provider
-      const sceneName = 'a-captchasimple:simple';
-      const providerName = 'a-captchasimple:simple';
       // create
       const captcha = await app.bean.captcha.create(sceneName);
       assert.equal(captcha.provider, providerName);
@@ -22,6 +23,18 @@ describe('captcha.test.ts', () => {
       // verify: true
       const verifiedTrue = await app.bean.captcha.verify(captcha.id, token, sceneName);
       assert.equal(verifiedTrue, true);
+    });
+  });
+  it('action:captcha api', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // create
+      const captcha: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/create', {
+        body: {
+          scene: sceneName,
+        },
+      });
+      assert.equal(captcha.provider, providerName);
+      //
     });
   });
 });
