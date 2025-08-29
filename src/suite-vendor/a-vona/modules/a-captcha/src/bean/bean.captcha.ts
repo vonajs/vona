@@ -135,6 +135,7 @@ export class BeanCaptcha extends BeanBase {
   private _getProviders(sceneName: keyof ICaptchaSceneRecord) {
     if (!this[SymbolProviders][sceneName]) {
       const onionSlice = this.bean.onion.captchaScene.getOnionSlice(sceneName);
+      if (!onionSlice) throw new Error(`not found captcha scene: ${sceneName}`);
       const onionOptions = onionSlice.beanOptions.options;
       this[SymbolProviders][sceneName] = this._prepareProviders(onionOptions?.providers);
     }
