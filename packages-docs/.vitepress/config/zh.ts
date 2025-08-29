@@ -142,6 +142,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '聚合与分组', link: 'aggr-group' },
             { text: '基于关系的聚合', link: 'relations-aggr' },
             { text: '基于关系的分组', link: 'relations-group' },
+            { text: '缓存', link: 'cache' },
           ],
         },
         {
