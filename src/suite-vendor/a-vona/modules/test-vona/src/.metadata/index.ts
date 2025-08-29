@@ -1320,6 +1320,7 @@ export * from '../dto/orderUpdate.ts';
 export * from '../dto/postCreate.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
+export * from '../dto/signin.ts';
 export * from '../dto/user.ts';
 export * from '../dto/userCreate.ts';
 export * from '../dto/userLazy.ts';
@@ -1331,6 +1332,7 @@ import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
+import type { IDtoOptionsSignin } from '../dto/signin.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { IDtoOptionsUserCreate } from '../dto/userCreate.ts';
 import type { IDtoOptionsUserLazy } from '../dto/userLazy.ts';
@@ -1346,6 +1348,7 @@ declare module 'vona-module-a-web' {
 'test-vona:postCreate': IDtoOptionsPostCreate;
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
+'test-vona:signin': IDtoOptionsSignin;
 'test-vona:user': IDtoOptionsUser;
 'test-vona:userCreate': IDtoOptionsUserCreate;
 'test-vona:userLazy': IDtoOptionsUserLazy;
@@ -1366,6 +1369,7 @@ import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
+import type { DtoSignin } from '../dto/signin.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserCreate } from '../dto/userCreate.ts';
 import type { DtoUserLazy } from '../dto/userLazy.ts';
@@ -1398,6 +1402,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsRoleLazy {
       fields?: TypeEntityOptionsFields<DtoRoleLazy, IDtoOptionsRoleLazy[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsSignin {
+      fields?: TypeEntityOptionsFields<DtoSignin, IDtoOptionsSignin[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsUser {
