@@ -184,32 +184,32 @@ config.onions = {
 
 ## FAQ: Does the query cache occupy a large amount of Redis space?
 
-1. Because the Query Cache only caches the ID array and statistics data, and the cache key is a hash, its cache space usage is very small, even lighter than the Entity Cache
+1. Because the Query Cache only caches the `Id array` and `statistics data`, and the cache key is a `hash`, its cache space usage is very small, even lighter than the `Entity Cache`
 
-2. All models can have custom cache parameters, allowing you to set different TTL times based on the data characteristics of different businesses and user access frequency
+2. All models can have custom cache parameters, allowing you to set different `ttl` based on the data characteristics of different businesses and user access frequency
 
 ## FAQ: How do I maintain cached data consistency?
 
-1. When a model method is called to perform a change operation (including Create/Update/Delete), the system automatically deletes the Entity Cache for the changed data and clears all Query Caches corresponding to the model.
+1. When a model method is called to perform a mutate operation (including Create/Update/Delete), the system automatically deletes the `Entity Cache` for the changed data and clears all `Query Cache` corresponding to the model
 
-2. You can set the modelsClear/modelsClearedBy/modelsClearedByFn methods to clear the Query Cache of related models when clearing the Query Cache.
+2. You can set the options `modelsClear/modelsClearedBy/modelsClearedByFn` to clear the `Query Cache` of related models when clearing the `Query Cache`
 
-For example, the UserStats and UserStatsGroup models are related to the User model and are specifically used to query aggregated and grouped data for users, respectively. When we `Create/Update/Delete` user data, we need to clear not only the `Query cache` of Model `User`, but also the `Query cache` of Model `UserStats` and Model `UserStatsGroup`. Then, you can configure it as follows:
+For example, the `UserStats` and `UserStatsGroup` models are related to the `User` model and are specifically used to query aggregated and grouped data for users, respectively. When we `Create/Update/Delete` user data, we need to clear not only the `Query cache` of Model `User`, but also the `Query cache` of Model `UserStats` and Model `UserStatsGroup`. Then, you can configure it as follows:
 
 ``` typescript
 import { ModelUserStats } from './userStats.ts';
 import { ModelUserStatsGroup } from './userStatsGroup.ts';
 
 @Model({
-entity: EntityUser,
-cache: {
-modelsClear: [() => ModelUserStats, () => ModelUserStatsGroup],
-},
+  entity: EntityUser,
+  cache: {
+    modelsClear: [() => ModelUserStats, () => ModelUserStatsGroup],
+  },
 })
 class ModelUser {}
 ```
 
 3. Database Transactions and Cache Data Consistency
 
-The Vona system adapts to database transactions and caches. When a database transaction fails, it automatically performs cache compensation operations, ensuring that database and cache data are always consistent.
-- See: [Transaction and Cache Data Consistency](./transaction.md#transaction-cache-consistency)
+The Vona system adapts to database transaction and caching. When a database transaction fails, it automatically performs cache compensation operations, ensuring that database and cache data remain consistent
+  - See: [Transaction and Cache Data Consistency](./transaction.md#transaction-cache-consistency)
