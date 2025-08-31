@@ -337,7 +337,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.45
+        specifier: ^6.0.46
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -839,7 +839,7 @@ importers:
         specifier: ^5.0.46
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.91
+        specifier: ^5.0.92
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
