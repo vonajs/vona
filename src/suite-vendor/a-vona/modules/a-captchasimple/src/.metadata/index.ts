@@ -1,26 +1,26 @@
 /* eslint-disable */
 /** captchaProvider: begin */
-export * from '../bean/captchaProvider.simple.ts';
-import type { ICaptchaProviderOptionsSimple } from '../bean/captchaProvider.simple.ts';
+export * from '../bean/captchaProvider.imageText.ts';
+import type { ICaptchaProviderOptionsSimple } from '../bean/captchaProvider.imageText.ts';
 import 'vona';
 declare module 'vona-module-a-captcha' {
   
     export interface ICaptchaProviderRecord {
-      'a-captchasimple:simple': ICaptchaProviderOptionsSimple;
+      'a-captchasimple:imageText': ICaptchaProviderOptionsSimple;
     }
 
   
 }
 declare module 'vona-module-a-captchasimple' {
   
-        export interface CaptchaProviderSimple {
+        export interface CaptchaProviderImageText {
           /** @internal */
           get scope(): ScopeModuleACaptchasimple;
         }
 
-          export interface CaptchaProviderSimple {
-            get $beanFullName(): 'a-captchasimple.captchaProvider.simple';
-            get $onionName(): 'a-captchasimple:simple';
+          export interface CaptchaProviderImageText {
+            get $beanFullName(): 'a-captchasimple.captchaProvider.imageText';
+            get $onionName(): 'a-captchasimple:imageText';
           } 
 }
 /** captchaProvider: end */
