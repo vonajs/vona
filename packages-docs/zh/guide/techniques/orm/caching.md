@@ -136,6 +136,10 @@ class ServiceUser extends BeanBase {
       redis: {
         ttl: 3 * 3600 * 1000, // 3h
       },
+      mem: {
+        max: 5000,
+        ttl: 1 * 3600 * 1000, // 1h
+      },
     },
   },
 })
@@ -171,9 +175,13 @@ config.onions = {
           },
         },
         query: {
-          mode: 'redis',
+          mode: 'all',
           redis: {
             ttl: 3 * 3600 * 1000, // 3h
+          },
+          mem: {
+            max: 5000,
+            ttl: 1 * 3600 * 1000, // 1h
           },
         },
       },
