@@ -7,7 +7,7 @@ import { app } from 'vona-mock';
 describe('captcha.test.ts', () => {
   // scene/provider
   const sceneName = 'a-captchasimple:simple';
-  const providerName = 'a-captchasimple:simple';
+  const providerName = 'a-captchasimple:imageText';
   it('action:captcha', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create

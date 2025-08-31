@@ -1,12 +1,12 @@
 /* eslint-disable */
 /** captchaProvider: begin */
 export * from '../bean/captchaProvider.imageText.ts';
-import type { ICaptchaProviderOptionsSimple } from '../bean/captchaProvider.imageText.ts';
+import type { ICaptchaProviderOptionsImageText } from '../bean/captchaProvider.imageText.ts';
 import 'vona';
 declare module 'vona-module-a-captcha' {
   
     export interface ICaptchaProviderRecord {
-      'a-captchasimple:imageText': ICaptchaProviderOptionsSimple;
+      'a-captchasimple:imageText': ICaptchaProviderOptionsImageText;
     }
 
   
