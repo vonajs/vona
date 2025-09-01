@@ -2,3 +2,5 @@ export * from './dtoAggregate.ts';
 export * from './dtoGet.ts';
 export * from './dtoGroup.ts';
 export * from './dtoMutate.ts';
+export * from './dtoQueryBase.ts';
+export * from './dtoQueryPageBase.ts';
