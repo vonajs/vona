@@ -1,13 +1,21 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import type { EntityPost } from '../entity/post.ts';
+import type { DtoPostQuery } from '../dto/postQuery.ts';
 import { BeanBase } from 'vona';
-import { Controller } from 'vona-module-a-web';
+import { Api, v } from 'vona-module-a-openapi';
+import { ArgQuery } from 'vona-module-a-orm';
+import { Passport } from 'vona-module-a-user';
+import { Controller, Web } from 'vona-module-a-web';
+import { EntityPost } from '../entity/post.ts';
 
 export interface IControllerOptionsPost extends IDecoratorControllerOptions {}
 
 @Controller<IControllerOptionsPost>('post', { meta: { mode: ['test', 'dev'] } })
 export class ControllerPost extends BeanBase {
-  async findMany(): Promise<EntityPost[]> {
+  @Web.get('findMany')
+  @Api.body(v.array(EntityPost))
+  @Passport.public()
+  async findMany(@ArgQuery({}) query: DtoPostQuery): Promise<EntityPost[]> {
+    console.log(query);
     return await this.scope.service.post.findMany();
   }
 }

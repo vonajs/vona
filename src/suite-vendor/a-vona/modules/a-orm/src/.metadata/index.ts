@@ -1,4 +1,29 @@
 /* eslint-disable */
+/** pipe: begin */
+export * from '../bean/pipe.query.ts';
+import type { IPipeOptionsQuery } from '../bean/pipe.query.ts';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  
+  
+export interface IPipeRecordLocal {
+  'a-orm:query': IPipeOptionsQuery;
+}
+
+}
+declare module 'vona-module-a-orm' {
+  
+        export interface PipeQuery {
+          /** @internal */
+          get scope(): ScopeModuleAOrm;
+        }
+
+          export interface PipeQuery {
+            get $beanFullName(): 'a-orm.pipe.query';
+            get $onionName(): 'a-orm:query';
+          } 
+}
+/** pipe: end */
 /** aopMethod: begin */
 export * from '../bean/aopMethod.transaction.ts';
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
