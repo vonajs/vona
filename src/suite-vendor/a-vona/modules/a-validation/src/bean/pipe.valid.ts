@@ -1,10 +1,10 @@
-import type { IDecoratorPipeOptions, IPipeTransform } from 'vona-module-a-aspect';
+import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from '../types/validatorOptions.ts';
 import { BeanBase, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
-export interface IPipeOptionsValid extends IDecoratorPipeOptions, ValidatorOptions {}
+export interface IPipeOptionsValid extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
 @Pipe<IPipeOptionsValid>({
   // ValidatorOptions

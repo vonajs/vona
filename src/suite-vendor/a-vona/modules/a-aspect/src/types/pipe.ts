@@ -12,19 +12,18 @@ export interface IPipeTransform<T = any, R = any> {
   transform(value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions): Promise<R>;
 }
 
-export interface IDecoratorPipeOptionsInner {
+export interface IDecoratorPipeOptionsArgument {
   type?: RouteHandlerArgumentType;
   field?: string;
   schema?: z.ZodSchema;
   extractValue?: TypeExtractValue;
 }
 
-export interface IDecoratorPipeOptions extends IOnionOptionsEnable, IDecoratorPipeOptionsInner {}
+export interface IDecoratorPipeOptions extends IOnionOptionsEnable {}
 
 export interface IDecoratorPipeOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IPipeRecordGlobal>,
-  IDecoratorPipeOptionsInner {
+  IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   global: true;
 }
 

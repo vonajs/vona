@@ -1,12 +1,12 @@
 import type { MetadataKey } from 'vona';
-import type { IDecoratorPipeOptions, IPipeTransform } from 'vona-module-a-aspect';
+import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import { appMetadata, BeanBase } from 'vona';
 import { Pipe, setArgumentPipe } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from 'vona-module-a-openapi';
 
-export interface IPipeOptionsQuery extends IDecoratorPipeOptions {}
+export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument {}
 
 @Pipe<IPipeOptionsQuery>()
 export class PipeQuery extends BeanBase implements IPipeTransform<any> {
