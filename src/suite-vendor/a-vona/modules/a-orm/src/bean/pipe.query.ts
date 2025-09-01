@@ -11,10 +11,10 @@ export interface IPipeOptionsQuery extends IDecoratorPipeOptions {}
 @Pipe<IPipeOptionsQuery>()
 export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsQuery) {
-    if (options.schema) {
-      // validateSchema
-      return await this.bean.validator.validateSchema(options.schema, value, { passthrough: false, strict: false }, metadata.field);
-    }
+    if (!options.schema) throw new Error(`should specify the schema of pipeQuery: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
+    // validateSchema
+    value = await this.bean.validator.validateSchema(options.schema, value, { passthrough: false, strict: false }, metadata.field);
+    // ok
     return value;
   }
 }
