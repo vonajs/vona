@@ -14,7 +14,7 @@ export class ControllerPost extends BeanBase {
   @Web.get('findMany')
   @Api.body(v.array(EntityPost))
   @Passport.public()
-  async findMany(@ArgQuery({}) query: DtoPostQuery): Promise<EntityPost[]> {
+  async findMany(@ArgQuery() query: DtoPostQuery): Promise<EntityPost[]> {
     console.log(query);
     return await this.scope.service.post.findMany();
   }
