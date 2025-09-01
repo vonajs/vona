@@ -1,7 +1,8 @@
 import type { OmitNever } from 'vona';
 import type { IOnionOptionsBase, IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
-import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import type { RouteHandlerArgumentMeta, RouteHandlerArgumentType, TypeExtractValue } from 'vona-module-a-openapi';
 import type { IApiPathRecord } from 'vona-module-a-web';
+import type z from 'zod';
 
 export interface IPipeRecordGlobal {}
 export interface IPipeRecordLocal {}
@@ -11,11 +12,19 @@ export interface IPipeTransform<T = any, R = any> {
   transform(value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions): Promise<R>;
 }
 
-export interface IDecoratorPipeOptions extends IOnionOptionsEnable {}
+export interface IDecoratorPipeOptionsInner {
+  type?: RouteHandlerArgumentType;
+  field?: string;
+  schema?: z.ZodSchema;
+  extractValue?: TypeExtractValue;
+}
+
+export interface IDecoratorPipeOptions extends IOnionOptionsEnable, IDecoratorPipeOptionsInner {}
 
 export interface IDecoratorPipeOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IPipeRecordGlobal> {
+  IOnionOptionsDeps<keyof IPipeRecordGlobal>,
+  IDecoratorPipeOptionsInner {
   global: true;
 }
 
