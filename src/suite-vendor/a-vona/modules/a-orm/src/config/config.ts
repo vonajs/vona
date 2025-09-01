@@ -19,6 +19,14 @@ export type TypeDataBaseConfigDialects = Record<
 
 export function config(_app: VonaApplication) {
   return {
+    rest: {
+      query: {
+        pageSize: {
+          default: 20,
+          max: 100,
+        },
+      },
+    },
     table: {
       identityType: 'string' as TableIdentityType,
     },
