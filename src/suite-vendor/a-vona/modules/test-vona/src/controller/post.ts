@@ -19,6 +19,13 @@ export class ControllerPost extends BeanBase {
   async findMany(@ArgQuery(DtoPostQuery) params: IFindManyParams): Promise<EntityPost[]> {
     console.log(params);
     assert.deepEqual(params.columns, ['*']);
+    assert.deepEqual(params.where, {
+      stars: { _gt_: 12 },
+      title: { _includesI_: 'ai' },
+    });
+    assert.deepEqual(params.orders, [['createdAt', 'desc']]);
+    assert.equal(params.offset, 30);
+    assert.equal(params.limit, 30);
     return await this.scope.service.post.findMany(params);
   }
 }

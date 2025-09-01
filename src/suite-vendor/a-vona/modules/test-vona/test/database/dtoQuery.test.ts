@@ -12,6 +12,9 @@ describe.only('dtoQuery.test.ts', () => {
               _gt_: 12,
             },
           },
+          orders: [['createdAt', 'desc']],
+          pageNo: 2,
+          pageSize: 30,
           title: 'ai',
         },
       });
