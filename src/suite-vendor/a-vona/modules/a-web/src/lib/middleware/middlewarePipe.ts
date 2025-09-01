@@ -8,7 +8,6 @@ import {
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-openapi';
-import { valid } from 'vona-module-a-validation';
 import { extractValue } from './extractValue.ts';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
@@ -132,10 +131,16 @@ function _collectArgumentMiddlewares(
 ) {
   if (!argMeta.pipes) return;
   return argMeta.pipes.map(pipe => {
+    let pipeName;
+    let options;
     if (typeof pipe !== 'function') {
-      pipe = valid({ schema: pipe }) as Function;
+      pipeName = 'a-validation:valid';
+      options = { schema: pipe };
+    } else {
+      const pipeInfo = pipe();
+      pipeName = pipeInfo.pipeName;
+      options = pipeInfo.options;
     }
-    const { pipeName, options } = pipe();
     const item = onionPipe.onionsNormal[pipeName];
     if (!item) throw new Error(`${onionPipe.sceneName} not found: ${pipeName}`);
     return {
