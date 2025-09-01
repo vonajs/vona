@@ -35,14 +35,14 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
 
       const argSchema = makeSchemaLikes(paramSchemaLikes, metaType);
 
-      argsMeta.push({
+      argsMeta[index] = {
         index,
         type: paramType,
         field: paramField,
         pipes: [argSchema],
         schema: argSchema,
         extractValue,
-      });
+      };
     };
   };
 }
