@@ -6,9 +6,10 @@ describe.only('dtoQuery.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction('get', '/test/vona/post/findMany', {
         query: {
+          columns: '*',
           where: {
             stars: {
-              __get__: 12,
+              _gt_: 12,
             },
           },
           title: 'ai',

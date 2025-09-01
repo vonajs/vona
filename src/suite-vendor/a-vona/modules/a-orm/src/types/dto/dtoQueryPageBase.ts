@@ -9,9 +9,9 @@ const pageSizeDefault = ormConfig?.rest?.query?.pageSize?.default ?? 20;
 const pageSizeMax = ormConfig?.rest?.query?.pageSize?.max ?? 100;
 
 export class DtoQueryPageBase extends DtoQueryBase {
-  @Api.field(z.number().min(1).optional().default(1))
+  @Api.field(z.number().min(1).default(1))
   pageNo: number;
 
-  @Api.field(z.number().min(1).max(pageSizeMax).optional().default(pageSizeDefault))
+  @Api.field(z.number().min(1).max(pageSizeMax).default(pageSizeDefault))
   pageSize: number;
 }

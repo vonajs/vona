@@ -1,5 +1,6 @@
 import type { IFindManyParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
 import { ArgQuery } from 'vona-module-a-orm';
@@ -17,6 +18,7 @@ export class ControllerPost extends BeanBase {
   @Passport.public()
   async findMany(@ArgQuery(DtoPostQuery) params: IFindManyParams): Promise<EntityPost[]> {
     console.log(params);
+    assert.deepEqual(params.columns, ['*']);
     return await this.scope.service.post.findMany(params);
   }
 }
