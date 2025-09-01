@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+import type { EntityPost } from '../entity/post.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $relationDynamic, Database } from 'vona-module-a-orm';
@@ -7,6 +8,10 @@ import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
+  async findMany(): Promise<EntityPost[]> {
+    return await this.scope.model.post.select();
+  }
+
   async group() {
     const result = await this.scope.model.post.group({
       groups: 'userId',

@@ -1318,6 +1318,7 @@ export * from '../dto/orderCreate.ts';
 export * from '../dto/orderResult.ts';
 export * from '../dto/orderUpdate.ts';
 export * from '../dto/postCreate.ts';
+export * from '../dto/postQuery.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
 export * from '../dto/signin.ts';
@@ -1330,6 +1331,7 @@ import type { IDtoOptionsOrderCreate } from '../dto/orderCreate.ts';
 import type { IDtoOptionsOrderResult } from '../dto/orderResult.ts';
 import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
+import type { IDtoOptionsPostQuery } from '../dto/postQuery.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsSignin } from '../dto/signin.ts';
@@ -1346,6 +1348,7 @@ declare module 'vona-module-a-web' {
 'test-vona:orderResult': IDtoOptionsOrderResult;
 'test-vona:orderUpdate': IDtoOptionsOrderUpdate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
+'test-vona:postQuery': IDtoOptionsPostQuery;
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:signin': IDtoOptionsSignin;
@@ -1367,6 +1370,7 @@ import type { DtoOrderCreate } from '../dto/orderCreate.ts';
 import type { DtoOrderResult } from '../dto/orderResult.ts';
 import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
+import type { DtoPostQuery } from '../dto/postQuery.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoSignin } from '../dto/signin.ts';
@@ -1394,6 +1398,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsPostCreate {
       fields?: TypeEntityOptionsFields<DtoPostCreate, IDtoOptionsPostCreate[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsPostQuery {
+      fields?: TypeEntityOptionsFields<DtoPostQuery, IDtoOptionsPostQuery[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsProfile {
@@ -1435,6 +1443,7 @@ export * from '../controller/guardPassport.ts';
 export * from '../controller/onion.ts';
 export * from '../controller/passport.ts';
 export * from '../controller/performAction.ts';
+export * from '../controller/post.ts';
 export * from '../controller/queue.ts';
 export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
@@ -1449,6 +1458,7 @@ import type { IControllerOptionsGuardPassport } from '../controller/guardPasspor
 import type { IControllerOptionsOnion } from '../controller/onion.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
 import type { IControllerOptionsPerformAction } from '../controller/performAction.ts';
+import type { IControllerOptionsPost } from '../controller/post.ts';
 import type { IControllerOptionsQueue } from '../controller/queue.ts';
 import type { IControllerOptionsSummer } from '../controller/summer.ts';
 import type { IControllerOptionsTail } from '../controller/tail.ts';
@@ -1467,6 +1477,7 @@ declare module 'vona-module-a-web' {
 'test-vona:onion': IControllerOptionsOnion;
 'test-vona:passport': IControllerOptionsPassport;
 'test-vona:performAction': IControllerOptionsPerformAction;
+'test-vona:post': IControllerOptionsPost;
 'test-vona:queue': IControllerOptionsQueue;
 'test-vona:summer': IControllerOptionsSummer;
 'test-vona:tail': IControllerOptionsTail;
@@ -1568,6 +1579,16 @@ declare module 'vona-module-test-vona' {
             get $onionName(): 'test-vona:performAction';
           }
 
+        export interface ControllerPost {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ControllerPost {
+            get $beanFullName(): 'test-vona.controller.post';
+            get $onionName(): 'test-vona:post';
+          }
+
         export interface ControllerQueue {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -1639,6 +1660,8 @@ import type { ControllerPassport } from '../controller/passport.ts';
 // @ts-ignore ignore
 import type { ControllerPerformAction } from '../controller/performAction.ts';
 // @ts-ignore ignore
+import type { ControllerPost } from '../controller/post.ts';
+// @ts-ignore ignore
 import type { ControllerQueue } from '../controller/queue.ts';
 // @ts-ignore ignore
 import type { ControllerSummer } from '../controller/summer.ts';
@@ -1684,6 +1707,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IControllerOptionsPerformAction {
       actions?: TypeControllerOptionsActions<ControllerPerformAction>;
+    }
+
+    export interface IControllerOptionsPost {
+      actions?: TypeControllerOptionsActions<ControllerPost>;
     }
 
     export interface IControllerOptionsQueue {
