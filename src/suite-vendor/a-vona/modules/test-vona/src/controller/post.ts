@@ -1,3 +1,4 @@
+import type { IFindManyParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
@@ -14,8 +15,8 @@ export class ControllerPost extends BeanBase {
   @Web.get('findMany')
   @Api.body(v.array(EntityPost))
   @Passport.public()
-  async findMany(@ArgQuery(DtoPostQuery) query: DtoPostQuery): Promise<EntityPost[]> {
-    console.log(query);
-    return await this.scope.service.post.findMany();
+  async findMany(@ArgQuery(DtoPostQuery) params: IFindManyParams): Promise<EntityPost[]> {
+    console.log(params);
+    return await this.scope.service.post.findMany(params);
   }
 }

@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+import type { IFindManyParams } from 'vona-module-a-orm';
 import type { EntityPost } from '../entity/post.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -8,8 +9,8 @@ import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
-  async findMany(): Promise<EntityPost[]> {
-    return await this.scope.model.post.select();
+  async findMany(params: IFindManyParams): Promise<EntityPost[]> {
+    return await this.scope.model.post.select(params);
   }
 
   async group() {
