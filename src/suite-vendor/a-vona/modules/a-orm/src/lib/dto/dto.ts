@@ -2,6 +2,7 @@ import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoCreate } from './dtoCreate.ts';
 import { DtoGet } from './dtoGet.ts';
 import { DtoGroup } from './dtoGroup.ts';
+import { DtoQueryPage } from './dtoQueryPage.ts';
 import { DtoUpdate } from './dtoUpdate.ts';
 
 export const $Dto = {
@@ -10,4 +11,5 @@ export const $Dto = {
   get: DtoGet,
   aggregate: DtoAggregate,
   group: DtoGroup,
+  queryPage: DtoQueryPage,
 };
