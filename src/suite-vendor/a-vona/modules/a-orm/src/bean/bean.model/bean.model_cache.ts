@@ -241,7 +241,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     modelJoins?: ModelJoins,
   ): Promise<any> {
     // count
-    const paramsCount = Object.assign({}, params, { orders: undefined, limit: undefined, offset: undefined });
+    const paramsCount = Object.assign({}, params, { columns: undefined, orders: undefined, limit: undefined, offset: undefined });
     let count = await this.count(paramsCount, options, modelJoins);
     if (!count) count = BigNumber(0);
     // list
@@ -252,7 +252,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       list = await this.select(params, options, modelJoins);
     }
     // ok
-    return { list, count };
+    return { list, total: count };
   }
 
   async select<
