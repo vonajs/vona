@@ -17,7 +17,7 @@ export class ControllerPost extends BeanBase {
   @Passport.public()
   async findMany(@Arg.queryPro(DtoPostQuery) params: IQueryParams<EntityPost>): Promise<EntityPost[]> {
     console.log(params);
-    assert.deepEqual(params.columns, ['*']);
+    assert.deepEqual(params.columns, ['id', 'title']);
     assert.deepEqual(params.where, {
       'stars': { _gt_: 12 },
       'title': { _includesI_: 'ai' },
