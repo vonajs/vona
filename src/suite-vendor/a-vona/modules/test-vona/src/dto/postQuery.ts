@@ -6,4 +6,4 @@ import { EntityPost } from '../entity/post.ts';
 export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsPostQuery>()
-export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title', 'createdAt']) {}
+export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {}
