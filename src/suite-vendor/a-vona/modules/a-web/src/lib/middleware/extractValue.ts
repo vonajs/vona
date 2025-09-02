@@ -8,6 +8,7 @@ export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMeta
 }
 
 export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgumentType, field: string | undefined) {
+  if (!type) throw new Error('argument type should not empty');
   const req = ctx.request as any;
   const res = ctx.response as any;
   const modes = {

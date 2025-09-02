@@ -60,8 +60,9 @@ export class BeanValidator extends BeanBase {
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
     if (issues && typeof issues === 'object') {
+      const app = this.app;
       issues.toString = function () {
-        if (this.app.meta.isProd) {
+        if (app.meta.isProd) {
           return JSON.stringify(this);
         } else {
           return JSON.stringify(this, null, 2);
