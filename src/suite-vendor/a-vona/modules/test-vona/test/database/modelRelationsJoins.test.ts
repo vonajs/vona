@@ -32,6 +32,17 @@ describe('modelRelationsJoins.test.ts', () => {
         orders: [['testVonaUser.id', 'asc']],
       }, {}, ['test-vona:user']);
       assert.equal(itemsJoins2.length, 0);
+      // joins: manual: no table prefix
+      const itemsJoins3 = await scopeTest.model.post.select({
+        columns: ['id', 'title'],
+        joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
+        where: {
+          'testVonaUser.id': userJimmy.id,
+          'userId': userJimmy.id,
+        },
+        orders: [['testVonaUser.id', 'asc'], ['userId', 'asc']],
+      }, {}, ['test-vona:user']);
+      assert.equal(itemsJoins3.length, 0);
       // test data: delete
       await scopeTest.service.testData.drop(testData);
     });
