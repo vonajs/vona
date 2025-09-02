@@ -38,7 +38,7 @@ export function schemaArray(schemaLike?: SchemaLike, params?: z.RawCreateParams 
         val = coerceWithNil(val);
         if (isNil(val)) return val;
         if (typeof val !== 'string') return val;
-        if (isNil(params?.separator) && val[0] === '[') return JSON.parse(val);
+        if (val.startsWith('[') && val.endsWith(']')) return JSON.parse(val);
         return val.split(params?.separator ?? ',');
       },
       z.array(makeSchemaLike(schemaLike ?? schema, z.any()), params),
