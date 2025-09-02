@@ -2,24 +2,31 @@ import type { MetadataKey } from 'vona';
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
+import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
 import type { IQueryParams } from '../types/model.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-query';
-import { appMetadata, BeanBase, cast } from 'vona';
+import { appMetadata, BeanBase, cast, HttpStatus } from 'vona';
 import { Pipe, setArgumentPipe } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from 'vona-module-a-openapi';
 
-export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument {}
+export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
 const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 
-@Pipe<IPipeOptionsQuery>()
+@Pipe<IPipeOptionsQuery>({
+  // ValidatorOptions
+  disableErrorMessages: false,
+  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+  passthrough: false,
+  strict: false,
+})
 export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsQuery) {
     if (!options.schema) throw new Error(`should specify the schema of pipeQuery: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
     // validateSchema
-    value = await this.bean.validator.validateSchema(options.schema, value, { passthrough: false, strict: false }, metadata.field);
+    value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
     // transform
     value = this._transform(value, options.schema);
     // ok
