@@ -90,7 +90,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
       }
       // check where
       if (params.where![fullName]) continue;
-
+      // default handle
       const typeName = fieldSchema._def.typeName;
       if (typeName === 'ZodString') {
         params.where![fullName] = { _includesI_: value[key] };
