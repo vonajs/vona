@@ -1,15 +1,12 @@
-import type { MetadataKey } from 'vona';
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
-import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type { IQueryParams } from 'vona-module-a-orm';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-query';
-import { appMetadata, BeanBase, cast, HttpStatus } from 'vona';
-import { createArgumentPipe, Pipe, setArgumentPipe } from 'vona-module-a-aspect';
-import { makeSchemaLikes } from 'vona-module-a-openapi';
+import { BeanBase, cast, HttpStatus } from 'vona';
+import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
