@@ -5,4 +5,5 @@ export * from './behavior.ts';
 export * from './component.ts';
 export * from './database.ts';
 export * from './decorator.ts';
+export * from './query.ts';
 export * from './rest.ts';
