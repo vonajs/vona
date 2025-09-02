@@ -123,11 +123,19 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
         if (res === true || res === false) continue;
       }
       // default transform
-      const typeName = fieldSchema._def.typeName;
-      if (typeName === 'ZodString') {
-        params.where![fullName] = { _includesI_: value[key] };
-      } else {
+      let op = openapi?.query?.op;
+      if (!op) {
+        const typeName = fieldSchema._def.typeName;
+        if (typeName === 'ZodString') {
+          op = '_includesI_';
+        } else {
+          op = '_eq_';
+        }
+      }
+      if (op === '_eq_') {
         params.where![fullName] = value[key];
+      } else {
+        params.where![fullName] = { [op]: value[key] };
       }
     }
     return params;

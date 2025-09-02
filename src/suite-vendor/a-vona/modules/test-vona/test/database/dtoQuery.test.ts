@@ -16,6 +16,7 @@ describe('dtoQuery.test.ts', () => {
           pageNo: 2,
           pageSize: 30,
           title: 'ai',
+          userName: 'tom',
         },
       });
     });
