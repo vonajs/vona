@@ -6,7 +6,7 @@ describe('dtoQuery.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction('get', '/test/vona/post/findMany', {
         query: {
-          columns: '*',
+          columns: ['id', 'title'],
           where: {
             stars: {
               _gt_: 12,
