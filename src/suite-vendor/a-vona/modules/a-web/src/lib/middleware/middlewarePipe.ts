@@ -131,16 +131,7 @@ function _collectArgumentMiddlewares(
 ) {
   if (!argMeta.pipes) return;
   return argMeta.pipes.map(pipe => {
-    let pipeName;
-    let options;
-    if (typeof pipe !== 'function') {
-      pipeName = 'a-web:valid';
-      options = { schema: pipe };
-    } else {
-      const pipeInfo = pipe();
-      pipeName = pipeInfo.pipeName;
-      options = pipeInfo.options;
-    }
+    const { pipeName, options } = pipe();
     const item = onionPipe.onionsNormal[pipeName];
     if (!item) throw new Error(`${onionPipe.sceneName} not found: ${pipeName}`);
     return {
