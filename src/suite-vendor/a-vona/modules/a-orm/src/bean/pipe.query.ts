@@ -3,7 +3,7 @@ import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransfo
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type z from 'zod';
-import type { IFindManyParams } from '../types/model.ts';
+import type { IQueryParams } from '../types/model.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-query';
 import { appMetadata, BeanBase, cast } from 'vona';
@@ -35,7 +35,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
 
   // system: columns/where/orders/pageNo/pageSize
   private _transformSystem(value: any) {
-    const params: IFindManyParams = {};
+    const params: IQueryParams = {};
     // columns
     if (!isNil(value.columns)) params.columns = value.columns;
     // where
@@ -61,7 +61,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     return params;
   }
 
-  private _transformFields(params: IFindManyParams, value: any, schema: z.ZodSchema) {
+  private _transformFields(params: IQueryParams, value: any, schema: z.ZodSchema) {
     for (const key in value) {
       if (__FieldsSystem.includes(key)) continue;
       if (params.where![key]) continue;

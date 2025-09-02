@@ -1,5 +1,5 @@
 import type { TableIdentity } from 'table-identity';
-import type { IFindManyParams } from 'vona-module-a-orm';
+import type { IQueryParams } from 'vona-module-a-orm';
 import type { EntityPost } from '../entity/post.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -9,7 +9,7 @@ import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
-  async findMany(params: IFindManyParams): Promise<EntityPost[]> {
+  async findMany(params: IQueryParams): Promise<EntityPost[]> {
     return await this.scope.model.post.select(params);
   }
 
