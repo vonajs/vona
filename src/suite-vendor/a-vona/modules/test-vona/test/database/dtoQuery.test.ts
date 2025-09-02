@@ -6,13 +6,13 @@ describe('dtoQuery.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction('get', '/test/vona/post/findMany', {
         query: {
-          columns: ['id', 'title'],
+          columns: 'id,title', // ['id', 'title'],
           where: {
             stars: {
               _gt_: 12,
             },
           },
-          orders: [['createdAt', 'desc']],
+          orders: [['testVonaPost.createdAt', 'desc']],
           pageNo: 2,
           pageSize: 30,
           title: 'ai',

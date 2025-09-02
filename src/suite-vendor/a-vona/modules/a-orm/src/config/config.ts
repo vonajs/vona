@@ -25,9 +25,6 @@ export function config(_app: VonaApplication) {
           default: 20,
           max: 100,
         },
-        orders: {
-          default: 'createdAt,desc',
-        },
       },
     },
     table: {

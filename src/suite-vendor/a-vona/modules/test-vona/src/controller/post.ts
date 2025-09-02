@@ -23,10 +23,9 @@ export class ControllerPost extends BeanBase {
       'title': { _includesI_: 'ai' },
       'testVonaUser.name': 'tom',
     });
-    assert.deepEqual(params.orders, [['createdAt', 'desc']]);
+    assert.deepEqual(params.orders, [['testVonaPost.createdAt', 'desc']]);
     assert.equal(params.offset, 30);
     assert.equal(params.limit, 30);
-    delete params.orders;
     return await this.scope.service.post.findMany(params);
   }
 }

@@ -64,7 +64,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     // orders
     if (!isNil(value.orders)) {
       if (typeof value.orders === 'string') {
-        if (value.orders[0] === '[') {
+        if (value.orders.startsWith('[') && value.orders.endsWith(']')) {
           params.orders = JSON.parse(value.orders);
         } else {
           params.orders = [value.orders.split(',')];
