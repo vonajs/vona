@@ -301,6 +301,7 @@ export class ServiceOpenapi extends BeanBase {
     const argsMapIsolate: any = {};
     let isUpload;
     for (const argMeta of argsMeta) {
+      if (!argMeta) continue;
       if (!__ArgumentTypes.includes(argMeta.type)) continue;
       if (['fields', 'field', 'files', 'file'].includes(argMeta.type)) {
         isUpload = true;
