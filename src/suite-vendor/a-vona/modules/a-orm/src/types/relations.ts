@@ -1,3 +1,4 @@
+import type BigNumber from 'bignumber.js';
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeDepthPrev, TypeDepthPrevMax } from './depth.ts';
@@ -126,6 +127,19 @@ export type TypeUtilEntityPartial<TRecord, TColumns> =
 export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined | unknown> =
   TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[] ?
     TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
+
+export interface TypeModelSelectAndCount<
+  TRecord,
+  TModel extends BeanModelMeta | undefined,
+  TOptionsRelation,
+  TColumns = undefined,
+  Aggrs = undefined,
+  Groups = undefined,
+  Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
+> {
+  list: TypeModelRelationResult<TRecord, TModel, TOptionsRelation, TColumns, Aggrs, Groups, Depth>[];
+  total: BigNumber;
+}
 
 export type TypeModelRelationResult<
   TRecord,
