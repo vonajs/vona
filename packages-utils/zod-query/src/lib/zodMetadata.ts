@@ -1,3 +1,5 @@
+import type z from 'zod';
+
 export class ZodMetadata {
   static unwrapUntil(schema, typeName?) {
     if (typeName && isZodType(schema, typeName)) {
@@ -46,6 +48,14 @@ export class ZodMetadata {
     let _a;
     // eslint-disable-next-line
     return (_a = this.getInternalMetadata(zodSchema)) === null || _a === void 0 ? void 0 : _a.refId;
+  }
+
+  static getFieldSchema(schema: any, key: string): z.ZodSchema {
+    return schema.shape[key];
+  }
+
+  static getOpenapiMetadata(schema: any) {
+    return schema._def.openapi?.metadata;
   }
 }
 
