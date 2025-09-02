@@ -1,4 +1,4 @@
-import type { IFindManyParams } from 'vona-module-a-orm';
+import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
@@ -16,7 +16,7 @@ export class ControllerPost extends BeanBase {
   @Web.get('findMany')
   @Api.body(v.array(EntityPost))
   @Passport.public()
-  async findMany(@ArgQuery(DtoPostQuery) params: IFindManyParams): Promise<EntityPost[]> {
+  async findMany(@ArgQuery(DtoPostQuery) params: IQueryParams): Promise<EntityPost[]> {
     console.log(params);
     assert.deepEqual(params.columns, ['*']);
     assert.deepEqual(params.where, {

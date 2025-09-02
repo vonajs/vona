@@ -1,18 +1,10 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
 import { PickClassInner } from './pickClassInner.ts';
 
-export function PickClass<T>(
+export function PickClass<T, KEYS extends Array<keyof T> | undefined = undefined>(
   classRef: Constructable<T>,
-  keys?: undefined,
-): Constructable<T>;
-export function PickClass<T, K extends keyof T>(
-  classRef: Constructable<T>,
-  keys: K[],
-): Constructable<Pick<T, (typeof keys)[number]>>;
-export function PickClass<T, K extends keyof T>(
-  classRef: Constructable<T>,
-  keys?: K[],
-) {
+  keys?: KEYS,
+): KEYS extends any[] ? Constructable<Pick<T, KEYS[number]>> : Constructable<T> {
   abstract class TargetClass {}
   return PickClassInner(TargetClass as any, classRef, keys as any);
 }

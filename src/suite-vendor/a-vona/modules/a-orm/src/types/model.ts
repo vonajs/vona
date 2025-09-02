@@ -57,7 +57,7 @@ export interface IBuildModelSelectParamsBasic<
   offset?: number;
 }
 
-export type IFindManyParams<TRecord = any> = IModelSelectParams<TRecord>;
+export type IQueryParams<TRecord = any> = IModelSelectParams<TRecord>;
 
 export type IModelSelectParams<
   TRecord,
