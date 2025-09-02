@@ -3,9 +3,8 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
-import { ArgQuery } from 'vona-module-a-orm';
 import { Passport } from 'vona-module-a-user';
-import { Controller, Web } from 'vona-module-a-web';
+import { ArgQuery, Controller, Web } from 'vona-module-a-web';
 import { DtoPostQuery } from '../dto/postQuery.ts';
 import { EntityPost } from '../entity/post.ts';
 

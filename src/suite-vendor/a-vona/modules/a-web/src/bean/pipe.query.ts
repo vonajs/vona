@@ -2,9 +2,9 @@ import type { MetadataKey } from 'vona';
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
+import type { IQueryParams } from 'vona-module-a-orm';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
-import type { IQueryParams } from '../types/model.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-query';
 import { appMetadata, BeanBase, cast, HttpStatus } from 'vona';
@@ -90,6 +90,6 @@ export const ArgQuery = function (...schemaLikes: SchemaLike[]): any {
     const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
     const metaType = paramtypes[index];
     const schema = makeSchemaLikes(schemaLikes, metaType);
-    setArgumentPipe('a-orm:query', { type: 'query', schema }, target, prop, index);
+    setArgumentPipe('a-web:query', { type: 'query', schema }, target, prop, index);
   };
 };
