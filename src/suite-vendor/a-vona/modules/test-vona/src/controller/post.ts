@@ -17,16 +17,17 @@ export class ControllerPost extends BeanBase {
   @Api.body(DtoPostQueryRes)
   @Passport.public()
   async findMany(@Arg.queryPro(DtoPostQuery) params: IQueryParams<EntityPost>) {
-    console.log(params);
-    assert.deepEqual(params.columns, ['id', 'title']);
-    assert.deepEqual(params.where, {
-      'stars': { _gt_: 12 },
-      'title': { _includesI_: 'ai' },
-      'testVonaUser.name': 'tom',
-    });
-    assert.deepEqual(params.orders, [['testVonaPost.createdAt', 'desc']]);
-    assert.equal(params.offset, 30);
-    assert.equal(params.limit, 30);
+    if (this.app.meta.isTest) {
+      assert.deepEqual(params.columns, ['id', 'title']);
+      assert.deepEqual(params.where, {
+        'stars': { _gt_: 12 },
+        'title': { _includesI_: 'ai' },
+        'testVonaUser.name': 'tom',
+      });
+      assert.deepEqual(params.orders, [['testVonaPost.createdAt', 'desc']]);
+      assert.equal(params.offset, 30);
+      assert.equal(params.limit, 30);
+    }
     return await this.scope.service.post.findMany(params);
   }
 }
