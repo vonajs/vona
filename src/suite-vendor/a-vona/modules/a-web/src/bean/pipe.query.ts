@@ -8,7 +8,7 @@ import type z from 'zod';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-query';
 import { appMetadata, BeanBase, cast, HttpStatus } from 'vona';
-import { Pipe, setArgumentPipe } from 'vona-module-a-aspect';
+import { createArgumentPipe, Pipe, setArgumentPipe } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from 'vona-module-a-openapi';
 
 export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
@@ -85,7 +85,9 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   }
 }
 
-export const ArgQuery = function (...schemaLikes: SchemaLike[]): any {
+export const ArgQuery = createArgumentPipe('a-web:query');
+
+export const ArgQuerySimple = function (...schemaLikes: SchemaLike[]): any {
   return function (target: object, prop: MetadataKey | undefined, index: number) {
     const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
     const metaType = paramtypes[index];
