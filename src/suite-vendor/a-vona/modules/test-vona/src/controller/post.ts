@@ -19,12 +19,14 @@ export class ControllerPost extends BeanBase {
     console.log(params);
     assert.deepEqual(params.columns, ['*']);
     assert.deepEqual(params.where, {
-      stars: { _gt_: 12 },
-      title: { _includesI_: 'ai' },
+      'stars': { _gt_: 12 },
+      'title': { _includesI_: 'ai' },
+      'testVonaUser.name': 'tom',
     });
     assert.deepEqual(params.orders, [['createdAt', 'desc']]);
     assert.equal(params.offset, 30);
     assert.equal(params.limit, 30);
+    delete params.orders;
     return await this.scope.service.post.findMany(params);
   }
 }
