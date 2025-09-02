@@ -26,7 +26,17 @@ class ServicePost {
 }
 ```
 
-### 3. get
+### 3. select and count
+
+``` typescript
+class ServicePost {
+  async selectAndCount() {
+    return await this.scope.model.post.selectAndCount();
+  }
+}
+```
+
+### 4. get
 
 ``` typescript
 class ServicePost {
@@ -36,7 +46,7 @@ class ServicePost {
 }
 ```
 
-### 4. mget
+### 5. mget
 
 ``` typescript
 class ServicePost {
