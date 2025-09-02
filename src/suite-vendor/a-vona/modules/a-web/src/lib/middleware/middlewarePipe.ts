@@ -41,7 +41,7 @@ async function _transformArguments(
   // args
   const args = Array.from({ length: paramtypes.length });
   for (let index = args.length - 1; index >= 0; index--) {
-    const argMeta = argsMeta.find(item => item.index === index);
+    const argMeta = argsMeta.find(item => item?.index === index);
     if (!argMeta) continue;
     // extractValue
     const value = await _extractArgumentValue(ctx, argMeta);
