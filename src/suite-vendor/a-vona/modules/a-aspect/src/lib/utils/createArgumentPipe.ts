@@ -44,11 +44,12 @@ export function setArgumentPipe<T extends keyof IPipeRecord>(
   );
 
   const argMeta = argsMeta[index];
+  const pipe = () => {
+    return createArgumentPipeInfo(pipeName, options);
+  };
 
   if (argMeta) {
-    argMeta.pipes.push(() => {
-      return createArgumentPipeInfo(pipeName, options);
-    });
+    argMeta.pipes.push(pipe);
     if (!isNil(options?.type)) argMeta.type = options.type;
     if (!isNil(options?.field)) argMeta.field = options.field;
     if (!isNil(options?.schema)) argMeta.schema = options.schema;
@@ -58,9 +59,7 @@ export function setArgumentPipe<T extends keyof IPipeRecord>(
       index,
       type: options?.type as any,
       field: options?.field,
-      pipes: [() => {
-        return createArgumentPipeInfo(pipeName, options);
-      }],
+      pipes: [pipe],
       schema: options?.schema as any,
       extractValue: options?.extractValue,
     };

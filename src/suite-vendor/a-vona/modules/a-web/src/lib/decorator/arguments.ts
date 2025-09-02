@@ -1,4 +1,8 @@
+import type { MetadataKey } from 'vona';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
+import { appMetadata } from 'vona';
+import { setArgumentPipe } from 'vona-module-a-aspect';
+import { makeSchemaLikes } from 'vona-module-a-openapi';
 import { createPipesArgumentDecorator } from './pipesArgument.ts';
 
 function Param(): ParameterDecorator;
@@ -61,6 +65,15 @@ function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
 }
 
+function ArgQueryPro(...schemaLikes: SchemaLike[]): any {
+  return function (target: object, prop: MetadataKey | undefined, index: number) {
+    const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
+    const metaType = paramtypes[index];
+    const schema = makeSchemaLikes(schemaLikes, metaType);
+    setArgumentPipe('a-web:query', { type: 'query', schema }, target, prop, index);
+  };
+};
+
 export const Arg = {
   param: Param,
   query: Query,
@@ -71,4 +84,5 @@ export const Arg = {
   files: Files,
   file: File,
   user: User,
+  queryPro: ArgQueryPro,
 };
