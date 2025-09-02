@@ -40,7 +40,7 @@ describe('modelRelationsJoins.test.ts', () => {
           'testVonaUser.id': userJimmy.id,
           'userId': userJimmy.id,
         },
-        orders: [['testVonaUser.id', 'asc'], ['testVonaPost.id', 'asc']],
+        orders: [['testVonaUser.id', 'asc'], ['testVonaPost.createdAt', 'asc']],
       }, {}, ['test-vona:user']);
       assert.equal(itemsJoins3.length, 0);
       // test data: delete
