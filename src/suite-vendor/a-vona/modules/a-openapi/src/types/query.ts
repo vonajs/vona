@@ -7,4 +7,5 @@ export interface ISchemaObjectExtensionFieldQueryJoin {
 }
 export interface ISchemaObjectExtensionFieldQuery {
   join?: ISchemaObjectExtensionFieldQueryJoin;
+  originalName?: string;
 }
