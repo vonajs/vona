@@ -23,4 +23,4 @@ export class PipeValid extends BeanBase implements IPipeTransform<any> {
   }
 }
 
-export const valid = createArgumentPipe('a-web:valid');
+export const ArgValid = createArgumentPipe('a-web:valid');
