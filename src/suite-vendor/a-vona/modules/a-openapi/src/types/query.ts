@@ -1,7 +1,7 @@
 import type { IModelSelectParamsJoinType, ITableRecord } from 'vona-module-a-orm';
 
 export interface ISchemaObjectExtensionFieldQueryJoin {
-  type: IModelSelectParamsJoinType;
+  type?: IModelSelectParamsJoinType;
   table: keyof ITableRecord;
   on: [string, string];
 }

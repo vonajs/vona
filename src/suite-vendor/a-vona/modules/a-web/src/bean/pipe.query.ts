@@ -1,5 +1,5 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
-import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { IQueryParams } from 'vona-module-a-orm';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
@@ -68,14 +68,34 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   private _transformFields(params: IQueryParams, value: any, schema: z.ZodSchema) {
     for (const key in value) {
       if (__FieldsSystem.includes(key)) continue;
-      if (params.where![key]) continue;
-      const innerSchema = ZodMetadata.unwrapChained(cast(schema).shape[key]);
-      if (!innerSchema) continue;
-      const typeName = innerSchema._def.typeName;
-      if (typeName === 'ZodString') {
-        params.where![key] = { _includesI_: value[key] };
+      const fieldSchema = ZodMetadata.unwrapChained(cast(schema).shape[key]);
+      if (!fieldSchema) continue;
+      // openapi
+      const openapi: ISchemaObjectExtensionField = ZodMetadata.getInternalMetadata(cast(schema).shape[key]);
+      // name
+      const originalName = openapi.query?.originalName ?? key;
+      let fullName: string;
+      // joins
+      if (openapi.query?.join) {
+        if (!params.joins)params.joins = [];
+        const joinType = openapi.query.join.type ?? 'innerJoin';
+        const joinTable = openapi.query.join.table;
+        const joinOn = openapi.query.join.on;
+        if (params.joins.findIndex(item => item[1] === joinTable) === -1) {
+          params.joins.push([joinType, joinTable, joinOn] as any);
+        }
+        fullName = `${joinTable}.${originalName}`;
       } else {
-        params.where![key] = value[key];
+        fullName = originalName;
+      }
+      // check where
+      if (params.where![fullName]) continue;
+
+      const typeName = fieldSchema._def.typeName;
+      if (typeName === 'ZodString') {
+        params.where![fullName] = { _includesI_: value[key] };
+      } else {
+        params.where![fullName] = value[key];
       }
     }
     return params;
