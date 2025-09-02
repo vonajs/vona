@@ -1,12 +1,9 @@
 import type { MetadataKey } from 'vona';
+import type { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType, TypeExtractValue } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
-import type { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType, TypeExtractValue } from '../../types/decorator.ts';
 import { appMetadata } from 'vona';
+import { makeSchemaLikes, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapi';
 import { z } from 'zod';
-import {
-  SymbolRouteHandlersArgumentsMeta,
-} from '../../types/decorator.ts';
-import { makeSchemaLikes } from '../schema/makeSchemaLikes.ts';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {
   return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
