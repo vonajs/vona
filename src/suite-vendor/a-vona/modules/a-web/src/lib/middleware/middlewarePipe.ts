@@ -134,7 +134,7 @@ function _collectArgumentMiddlewares(
     let pipeName;
     let options;
     if (typeof pipe !== 'function') {
-      pipeName = 'a-validation:valid';
+      pipeName = 'a-web:valid';
       options = { schema: pipe };
     } else {
       const pipeInfo = pipe();

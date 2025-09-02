@@ -1,29 +1,4 @@
 /* eslint-disable */
-/** pipe: begin */
-export * from '../bean/pipe.valid.ts';
-import type { IPipeOptionsValid } from '../bean/pipe.valid.ts';
-import 'vona';
-declare module 'vona-module-a-aspect' {
-  
-  
-export interface IPipeRecordLocal {
-  'a-validation:valid': IPipeOptionsValid;
-}
-
-}
-declare module 'vona-module-a-validation' {
-  
-        export interface PipeValid {
-          /** @internal */
-          get scope(): ScopeModuleAValidation;
-        }
-
-          export interface PipeValid {
-            get $beanFullName(): 'a-validation.pipe.valid';
-            get $onionName(): 'a-validation:valid';
-          } 
-}
-/** pipe: end */
 /** bean: begin */
 export * from '../bean/bean.validator.ts';
 

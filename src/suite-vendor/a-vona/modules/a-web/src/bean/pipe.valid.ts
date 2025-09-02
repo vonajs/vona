@@ -1,6 +1,6 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
-import type { ValidatorOptions } from '../types/validatorOptions.ts';
+import type { ValidatorOptions } from 'vona-module-a-validation';
 import { BeanBase, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
@@ -23,4 +23,4 @@ export class PipeValid extends BeanBase implements IPipeTransform<any> {
   }
 }
 
-export const valid = createArgumentPipe('a-validation:valid');
+export const valid = createArgumentPipe('a-web:valid');

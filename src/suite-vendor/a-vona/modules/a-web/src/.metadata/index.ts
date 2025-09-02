@@ -1,4 +1,29 @@
 /* eslint-disable */
+/** pipe: begin */
+export * from '../bean/pipe.valid.ts';
+import type { IPipeOptionsValid } from '../bean/pipe.valid.ts';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  
+  
+export interface IPipeRecordLocal {
+  'a-web:valid': IPipeOptionsValid;
+}
+
+}
+declare module 'vona-module-a-web' {
+  
+        export interface PipeValid {
+          /** @internal */
+          get scope(): ScopeModuleAWeb;
+        }
+
+          export interface PipeValid {
+            get $beanFullName(): 'a-web.pipe.valid';
+            get $onionName(): 'a-web:valid';
+          } 
+}
+/** pipe: end */
 /** bean: begin */
 export * from '../bean/bean.router.ts';
 
