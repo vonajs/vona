@@ -1,4 +1,3 @@
-import type BigNumber from 'bignumber.js';
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
   IDatabaseClientRecord,
@@ -25,6 +24,7 @@ import type {
   TypeModelWhere,
 } from '../../types/index.ts';
 import { isNil } from '@cabloy/utils';
+import BigNumber from 'bignumber.js';
 import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
@@ -230,6 +230,29 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     const items = await this.__select_cache(table, params as any, options);
     return this.convertItemsToBigNumber(items) as any;
+  }
+
+  async selectAndCount<
+    T extends IModelSelectParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
+    params?: T,
+    options?: IModelMethodOptions,
+    modelJoins?: ModelJoins,
+  ): Promise<any> {
+    // count
+    const paramsCount = Object.assign({}, params, { orders: undefined, limit: undefined, offset: undefined });
+    let count = await this.count(paramsCount, options, modelJoins);
+    if (!count) count = BigNumber(0);
+    // list
+    let list;
+    if (count.eq(0)) {
+      list = [];
+    } else {
+      list = await this.select(params, options, modelJoins);
+    }
+    // ok
+    return { list, count };
   }
 
   async select<
