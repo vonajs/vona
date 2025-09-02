@@ -1333,6 +1333,7 @@ export * from '../dto/orderResult.ts';
 export * from '../dto/orderUpdate.ts';
 export * from '../dto/postCreate.ts';
 export * from '../dto/postQuery.ts';
+export * from '../dto/postQueryRes.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
 export * from '../dto/signin.ts';
@@ -1346,6 +1347,7 @@ import type { IDtoOptionsOrderResult } from '../dto/orderResult.ts';
 import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
 import type { IDtoOptionsPostQuery } from '../dto/postQuery.ts';
+import type { IDtoOptionsPostQueryRes } from '../dto/postQueryRes.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsSignin } from '../dto/signin.ts';
@@ -1363,6 +1365,7 @@ declare module 'vona-module-a-web' {
 'test-vona:orderUpdate': IDtoOptionsOrderUpdate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
 'test-vona:postQuery': IDtoOptionsPostQuery;
+'test-vona:postQueryRes': IDtoOptionsPostQueryRes;
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:signin': IDtoOptionsSignin;
@@ -1385,6 +1388,7 @@ import type { DtoOrderResult } from '../dto/orderResult.ts';
 import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
 import type { DtoPostQuery } from '../dto/postQuery.ts';
+import type { DtoPostQueryRes } from '../dto/postQueryRes.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoSignin } from '../dto/signin.ts';
@@ -1416,6 +1420,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsPostQuery {
       fields?: TypeEntityOptionsFields<DtoPostQuery, IDtoOptionsPostQuery[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsPostQueryRes {
+      fields?: TypeEntityOptionsFields<DtoPostQueryRes, IDtoOptionsPostQueryRes[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsProfile {

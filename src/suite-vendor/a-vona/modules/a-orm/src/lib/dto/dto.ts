@@ -4,6 +4,7 @@ import { DtoGet } from './dtoGet.ts';
 import { DtoGroup } from './dtoGroup.ts';
 import { DtoQuery } from './dtoQuery.ts';
 import { DtoQueryPage } from './dtoQueryPage.ts';
+import { DtoSelectAndCount } from './dtoSelectAndCount.ts';
 import { DtoUpdate } from './dtoUpdate.ts';
 
 export const $Dto = {
@@ -14,4 +15,5 @@ export const $Dto = {
   group: DtoGroup,
   query: DtoQuery,
   queryPage: DtoQueryPage,
+  selectAndCount: DtoSelectAndCount,
 };
