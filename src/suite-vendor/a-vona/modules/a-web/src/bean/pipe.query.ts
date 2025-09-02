@@ -22,7 +22,7 @@ export interface IPipeOptionsQueryTransformInfo {
   key: string;
   value: any;
   schema: z.ZodSchema;
-  openapi: ISchemaObjectExtensionField;
+  openapi?: ISchemaObjectExtensionField;
 }
 export type TypePipeOptionsQueryTransform =
   (ctx: VonaContext, info: IPipeOptionsQueryTransformInfo) => boolean | undefined;
@@ -88,12 +88,12 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
       const fieldSchema = ZodMetadata.unwrapChained(cast(options.schema).shape[key]);
       if (!fieldSchema) continue;
       // openapi
-      const openapi: ISchemaObjectExtensionField = ZodMetadata.getInternalMetadata(cast(options.schema).shape[key]);
+      const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getInternalMetadata(cast(options.schema).shape[key]);
       // name
-      const originalName = openapi.query?.originalName ?? key;
+      const originalName = openapi?.query?.originalName ?? key;
       let fullName: string;
       // joins
-      if (openapi.query?.join) {
+      if (openapi?.query?.join) {
         if (!params.joins)params.joins = [];
         const joinType = openapi.query.join.type ?? 'innerJoin';
         const joinTable = openapi.query.join.table;
