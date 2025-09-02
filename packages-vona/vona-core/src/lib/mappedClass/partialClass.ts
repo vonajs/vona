@@ -4,6 +4,13 @@ import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 export type TypePartialClass<T, KEYS extends Array<keyof T> | undefined = undefined> =
   KEYS extends any[] ? Constructable<Partial<Pick<T, KEYS[number]>> & Omit<T, KEYS[number]>> : Constructable<Partial<T>>;
 
+export function PartialClass<T>(
+  classRef: Constructable<T>,
+): Constructable<Partial<T>>;
+export function PartialClass<T, KEYS extends Array<keyof T>>(
+  classRef: Constructable<T>,
+  keys: KEYS,
+): Constructable<Partial<Pick<T, KEYS[number]>> & Omit<T, KEYS[number]>>;
 export function PartialClass<T, KEYS extends Array<keyof T> | undefined = undefined>(
   classRef: Constructable<T>,
   keys?: KEYS,
