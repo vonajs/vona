@@ -1,8 +1,8 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { Api, Arg, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapi';
 import { $Dto, TableIdentity } from 'vona-module-a-orm';
-import { Controller, Web } from 'vona-module-a-web';
+import { Arg, Controller, Web } from 'vona-module-a-web';
 import { DtoCategoryTree } from '../dto/categoryTree.ts';
 import { DtoUserCreate } from '../dto/userCreate.ts';
 import { DtoUserLazy } from '../dto/userLazy.ts';

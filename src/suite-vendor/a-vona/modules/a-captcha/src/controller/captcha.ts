@@ -1,8 +1,8 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { Api, Arg } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
-import { Controller, Web } from 'vona-module-a-web';
+import { Arg, Controller, Web } from 'vona-module-a-web';
 import z from 'zod';
 import { DtoCaptchaData } from '../dto/captchaData.ts';
 

@@ -3,10 +3,10 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
-import { Api, Arg, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapi';
 import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
-import { Controller, Web } from 'vona-module-a-web';
+import { Arg, Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
 
 export interface IControllerOptionsUpload extends IDecoratorControllerOptions {}
