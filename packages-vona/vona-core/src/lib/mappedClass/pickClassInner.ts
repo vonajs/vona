@@ -1,21 +1,14 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
-export function PickClassInner<T>(
+export type TypePickClass<T, KEYS extends Array<keyof T> | undefined = undefined> =
+  KEYS extends any[] ? Constructable<Pick<T, KEYS[number]>> : Constructable<T>;
+
+export function PickClassInner<T, KEYS extends Array<keyof T> | undefined = undefined>(
   classTarget: Constructable,
   classRef: Constructable<T>,
-  keys?: undefined,
-): Constructable<T>;
-export function PickClassInner<T, K extends keyof T>(
-  classTarget: Constructable,
-  classRef: Constructable<T>,
-  keys: K[],
-): Constructable<Pick<T, (typeof keys)[number]>>;
-export function PickClassInner<T, K extends keyof T>(
-  classTarget: Constructable,
-  classRef: Constructable<T>,
-  keys?: K[],
-) {
+  keys?: KEYS,
+): TypePickClass<T, KEYS> {
   copyMetadataOfClasses(classTarget.prototype, [classRef.prototype], (rules, key) => {
     if (!keys || keys.includes(key)) {
       return rules[key];
