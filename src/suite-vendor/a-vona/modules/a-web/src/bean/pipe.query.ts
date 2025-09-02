@@ -1,3 +1,4 @@
+import type { VonaContext } from 'vona';
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { IQueryParams } from 'vona-module-a-orm';
@@ -8,7 +9,23 @@ import { ZodMetadata } from '@cabloy/zod-query';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
-export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
+export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
+  transform?: TypePipeOptionsQueryTransform;
+}
+
+export interface IPipeOptionsQueryTransformInfo {
+  params: IQueryParams;
+  query: any;
+  options: IPipeOptionsQuery;
+  originalName: string;
+  fullName: string;
+  key: string;
+  value: any;
+  schema: z.ZodSchema;
+  openapi: ISchemaObjectExtensionField;
+}
+export type TypePipeOptionsQueryTransform =
+  (ctx: VonaContext, info: IPipeOptionsQueryTransformInfo) => boolean | undefined;
 
 const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 
@@ -25,16 +42,16 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     // validateSchema
     value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
     // transform
-    value = this._transform(value, options.schema);
+    value = this._transform(value, options);
     // ok
     return value;
   }
 
-  private _transform(value: any, schema: z.ZodSchema) {
+  private _transform(value: any, options: IPipeOptionsQuery) {
     // 1. system: columns/where/orders/pageNo/pageSize
     const params = this._transformSystem(value);
     // 2. fields
-    return this._transformFields(params, value, schema);
+    return this._transformFields(params, value, options);
   }
 
   // system: columns/where/orders/pageNo/pageSize
@@ -65,13 +82,13 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     return params;
   }
 
-  private _transformFields(params: IQueryParams, value: any, schema: z.ZodSchema) {
+  private _transformFields(params: IQueryParams, value: any, options: IPipeOptionsQuery) {
     for (const key in value) {
       if (__FieldsSystem.includes(key)) continue;
-      const fieldSchema = ZodMetadata.unwrapChained(cast(schema).shape[key]);
+      const fieldSchema = ZodMetadata.unwrapChained(cast(options.schema).shape[key]);
       if (!fieldSchema) continue;
       // openapi
-      const openapi: ISchemaObjectExtensionField = ZodMetadata.getInternalMetadata(cast(schema).shape[key]);
+      const openapi: ISchemaObjectExtensionField = ZodMetadata.getInternalMetadata(cast(options.schema).shape[key]);
       // name
       const originalName = openapi.query?.originalName ?? key;
       let fullName: string;
@@ -90,7 +107,22 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
       }
       // check where
       if (params.where![fullName]) continue;
-      // default handle
+      // custom transform
+      if (options.transform) {
+        const res = options.transform(this.ctx, {
+          params,
+          query: value,
+          options,
+          originalName,
+          fullName,
+          key,
+          value: value[key],
+          schema: fieldSchema,
+          openapi,
+        });
+        if (res === true || res === false) continue;
+      }
+      // default transform
       const typeName = fieldSchema._def.typeName;
       if (typeName === 'ZodString') {
         params.where![fullName] = { _includesI_: value[key] };
