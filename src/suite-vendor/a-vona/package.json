@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.95",
+  "version": "5.0.96",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -18,7 +18,7 @@
     "vona-module-a-caching": "workspace:^",
     "vona-module-a-captcha": "workspace:^",
     "vona-module-a-captchasimple": "workspace:^",
-    "vona-module-a-core": "^5.0.58",
+    "vona-module-a-core": "^5.0.59",
     "vona-module-a-election": "^5.0.14",
     "vona-module-a-error": "^5.0.15",
     "vona-module-a-event": "^5.0.14",
