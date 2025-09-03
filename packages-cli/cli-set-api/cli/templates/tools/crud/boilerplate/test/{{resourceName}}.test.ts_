@@ -1,4 +1,4 @@
-import type { Dto<%=argv.resourceNameCapitalize%>Create, Dto<%=argv.resourceNameCapitalize%>Update, Entity<%=argv.resourceNameCapitalize%> } from 'vona-module-<%=argv.moduleInfo.relativeName%>';
+import type { Dto<%=argv.resourceNameCapitalize%>Create, Dto<%=argv.resourceNameCapitalize%>QueryRes, Dto<%=argv.resourceNameCapitalize%>Update, Entity<%=argv.resourceNameCapitalize%> } from 'vona-module-<%=argv.moduleInfo.relativeName%>';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
@@ -21,9 +21,9 @@ describe('<%=argv.resourceName%>.test.ts', () => {
       // create
       const <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('post', '<%=argv.moduleActionPathRaw%>', { body: data });
       assert.equal(<%=argv.resourceName%>.name, data.name);
-      // findAll
-      const <%=argv.resourceName%>s: Entity<%=argv.resourceNameCapitalize%>[] = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>');
-      assert.equal(<%=argv.resourceName%>s.findIndex(item => item.name === data.name) > -1, true);
+      // findMany
+      const queryRes: Entity<%=argv.resourceNameCapitalize%>[] = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>');
+      assert.equal(queryRes.list.findIndex(item => item.name === data.name) > -1, true);
       // update
       await app.bean.executor.performAction('patch', '<%=argv.moduleActionPathRaw%>/:id', {
         params: { id: <%=argv.resourceName%>.id },
