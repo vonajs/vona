@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { IQueryParams, TableIdentity } from 'vona-module-a-orm';
 import type { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resourceName%>Create.ts';
 import type { Dto<%=argv.resourceNameCapitalize%>QueryRes } from '../dto/<%=argv.resourceName%>QueryRes.ts';
 import type { Dto<%=argv.resourceNameCapitalize%>Update } from '../dto/<%=argv.resourceName%>Update.ts';
