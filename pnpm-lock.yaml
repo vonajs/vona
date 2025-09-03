@@ -443,7 +443,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.168
+        specifier: ^1.0.169
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -839,7 +839,7 @@ importers:
         specifier: ^5.0.47
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.94
+        specifier: ^5.0.95
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
