@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
-import type { TypeModelParamsInclude, TypeModelsClassLikeGeneral } from './relations.ts';
+import type { TypeModelOfModelLike, TypeModelParamsInclude, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeModelMutateParamsInclude } from './relationsMutate.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
@@ -57,7 +57,10 @@ export interface IBuildModelSelectParamsBasic<
   offset?: number;
 }
 
-export type IQueryParams<TRecord = any> = IModelSelectParams<TRecord>;
+export type IQueryParams<
+  Model extends BeanModelMeta = BeanModelMeta,
+  ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
+> = IModelSelectParams<TypeModelOfModelLike<Model>[TypeSymbolKeyEntity], Model, ModelJoins>;
 
 export type IModelSelectParams<
   TRecord,
