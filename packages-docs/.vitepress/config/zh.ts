@@ -143,6 +143,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '基于关系的聚合', link: 'relations-aggr' },
             { text: '基于关系的分组', link: 'relations-group' },
             { text: '缓存', link: 'caching' },
+            {
+              text: 'DTO推断与生成',
+              base: '/zh/guide/techniques/orm/dto',
+              collapsed: true,
+              items: [
+                { text: '介绍', link: 'introduction' },
+              ],
+            },
           ],
         },
         {

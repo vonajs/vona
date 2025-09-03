@@ -143,6 +143,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Aggregate on Relations', link: 'relations-aggr' },
             { text: 'Group on Relations', link: 'relations-group' },
             { text: 'Caching', link: 'caching' },
+            {
+              text: 'DTO infer & generation',
+              base: '/guide/techniques/orm/dto',
+              collapsed: true,
+              items: [
+                { text: 'Introduction', link: 'introduction' },
+              ],
+            },
           ],
         },
         {
