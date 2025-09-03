@@ -33,7 +33,7 @@ describe('dtoQuery.test.ts', () => {
       assert.equal(resEcho.offset, 30);
       assert.equal(resEcho.limit, 30);
       // findMany
-      const res = await app.bean.executor.performAction('get', '/test/vona/post/findManyEcho', {
+      const res = await app.bean.executor.performAction('get', '/test/vona/post/findMany', {
         query: {
           columns: 'id,title', // ['id', 'title'],
           where: {
