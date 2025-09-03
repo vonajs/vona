@@ -45,7 +45,7 @@
     }
   },
   "dependencies": {
-    "vona": "^5.0.101"
+    "vona": "^5.0.102"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.16",
