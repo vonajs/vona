@@ -1775,6 +1775,7 @@ declare module 'vona-module-a-web' {
 '/test/vona/onion/echo6': undefined;
 '/test/vona/passport/echo/:name': undefined;
 '/test/vona/passport/isAuthenticated': undefined;
+'/test/vona/post/findManyEcho': undefined;
 '/test/vona/post/findMany': undefined;
     }
 export interface IApiPathPostRecord{
