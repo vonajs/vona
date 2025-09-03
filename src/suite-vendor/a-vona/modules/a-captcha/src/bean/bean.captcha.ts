@@ -33,10 +33,27 @@ export class BeanCaptcha extends BeanBase {
   }
 
   async refresh(id: string, sceneName: keyof ICaptchaSceneRecord) {
-    // delete cache
-    await this.scope.cacheRedis.captcha.del(id);
+    let captchaData = await this.getCaptchaData(id);
+    if (!captchaData) {
+      // create
+      return await this.create(sceneName);
+    }
+    // scene
+    if (captchaData.scene !== sceneName) this.app.throw(403);
     // create
-    return await this.create(sceneName);
+    const beanInstance = this._getProviderInstance(captchaData.provider);
+    const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
+    const captcha = await beanInstance.create(providerOptions);
+    // data
+    captchaData = { scene: sceneName, provider: captchaData.provider, token: captcha.token };
+    // cache
+    await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
+    // result
+    const result: ICaptchaData = { id, provider: captchaData.provider, payload: captcha.payload };
+    if (this.scope.config.captcha.showToken) {
+      result.token = captcha.token;
+    }
+    return result;
   }
 
   async verify(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
