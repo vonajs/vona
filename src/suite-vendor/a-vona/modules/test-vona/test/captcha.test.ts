@@ -43,7 +43,7 @@ describe('captcha.test.ts', () => {
         },
       });
       assert.equal(captcha2.provider, providerName);
-      assert.notEqual(captcha2.id, captcha.id);
+      assert.equal(captcha2.id, captcha.id);
       // get token
       const captchaData = await app.bean.captcha.getCaptchaData(captcha2.id);
       // verifyImmediate: error
