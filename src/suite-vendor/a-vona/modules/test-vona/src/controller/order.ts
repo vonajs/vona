@@ -1,10 +1,8 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
-import { $Dto } from 'vona-module-a-orm';
 import { Controller, Web } from 'vona-module-a-web';
 import { DtoOrderResult } from '../dto/orderResult.ts';
-import { ModelOrder } from '../model/order.ts';
 
 export interface IControllerOptionsOrder extends IDecoratorControllerOptions {}
 
