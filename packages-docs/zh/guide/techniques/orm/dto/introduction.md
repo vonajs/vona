@@ -107,7 +107,7 @@ export class DtoOrderResult
 
 3. 现在，我们再使用`DtoOrderResult`重构前面的 API 代码：
 
-``` typescript
+``` diff
 class ControllerOrder {
   @Web.get('findAll')
 + @Api.body(v.array(DtoOrderResult))
