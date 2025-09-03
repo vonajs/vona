@@ -145,7 +145,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Caching', link: 'caching' },
             {
               text: 'DTO infer & generation',
-              base: '/guide/techniques/orm/dto',
+              base: '/guide/techniques/orm/dto/',
               collapsed: true,
               items: [
                 { text: 'Introduction', link: 'introduction' },

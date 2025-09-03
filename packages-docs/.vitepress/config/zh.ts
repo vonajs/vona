@@ -145,7 +145,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '缓存', link: 'caching' },
             {
               text: 'DTO推断与生成',
-              base: '/zh/guide/techniques/orm/dto',
+              base: '/zh/guide/techniques/orm/dto/',
               collapsed: true,
               items: [
                 { text: '介绍', link: 'introduction' },
