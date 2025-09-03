@@ -443,7 +443,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.0
       vona-cli-set-api:
-        specifier: ^1.0.165
+        specifier: ^1.0.166
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -555,7 +555,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -836,10 +836,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.92
+        specifier: ^5.0.93
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -937,7 +937,7 @@ importers:
         specifier: ^1.0.34
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1142,7 +1142,7 @@ importers:
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-aspect
       vona-module-a-aspectutils:
         specifier: workspace:^
@@ -1175,7 +1175,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.57
+        specifier: ^5.0.58
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.14
@@ -1214,7 +1214,7 @@ importers:
         specifier: ^5.0.19
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.29
+        specifier: ^5.0.30
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.16
@@ -1223,7 +1223,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.49
+        specifier: ^5.0.50
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.13
@@ -1256,7 +1256,7 @@ importers:
         specifier: ^5.0.16
         version: link:modules/a-summer
       vona-module-a-swagger:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-swagger
       vona-module-a-upload:
         specifier: ^5.0.13
@@ -1265,7 +1265,7 @@ importers:
         specifier: ^5.0.21
         version: link:modules/a-user
       vona-module-a-validation:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-validation
       vona-module-a-version:
         specifier: ^5.0.27
@@ -1274,7 +1274,7 @@ importers:
         specifier: ^5.0.20
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.21
+        specifier: ^5.0.22
         version: link:modules/a-web
       vona-module-a-worker:
         specifier: ^5.0.14
@@ -1507,7 +1507,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.46
+        specifier: ^6.0.47
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -1665,7 +1665,7 @@ importers:
         specifier: ^1.0.13
         version: link:../../../../../packages-utils/zod-errors-custom
       '@cabloy/zod-query':
-        specifier: ^1.0.16
+        specifier: ^1.0.17
         version: link:../../../../../packages-utils/zod-query
       '@zhennann/currency':
         specifier: ^2.0.0

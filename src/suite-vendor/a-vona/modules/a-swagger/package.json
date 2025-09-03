@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-swagger",
   "type": "module",
-  "version": "5.0.22",
+  "version": "5.0.23",
   "title": "a-swagger",
   "vonaModule": {
     "dependencies": {
