@@ -1463,6 +1463,7 @@ export * from '../controller/captcha.ts';
 export * from '../controller/dtoTest.ts';
 export * from '../controller/guardPassport.ts';
 export * from '../controller/onion.ts';
+export * from '../controller/order.ts';
 export * from '../controller/passport.ts';
 export * from '../controller/performAction.ts';
 export * from '../controller/post.ts';
@@ -1478,6 +1479,7 @@ import type { IControllerOptionsCaptcha } from '../controller/captcha.ts';
 import type { IControllerOptionsDtoTest } from '../controller/dtoTest.ts';
 import type { IControllerOptionsGuardPassport } from '../controller/guardPassport.ts';
 import type { IControllerOptionsOnion } from '../controller/onion.ts';
+import type { IControllerOptionsOrder } from '../controller/order.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
 import type { IControllerOptionsPerformAction } from '../controller/performAction.ts';
 import type { IControllerOptionsPost } from '../controller/post.ts';
@@ -1497,6 +1499,7 @@ declare module 'vona-module-a-web' {
 'test-vona:dtoTest': IControllerOptionsDtoTest;
 'test-vona:guardPassport': IControllerOptionsGuardPassport;
 'test-vona:onion': IControllerOptionsOnion;
+'test-vona:order': IControllerOptionsOrder;
 'test-vona:passport': IControllerOptionsPassport;
 'test-vona:performAction': IControllerOptionsPerformAction;
 'test-vona:post': IControllerOptionsPost;
@@ -1579,6 +1582,16 @@ declare module 'vona-module-test-vona' {
           export interface ControllerOnion {
             get $beanFullName(): 'test-vona.controller.onion';
             get $onionName(): 'test-vona:onion';
+          }
+
+        export interface ControllerOrder {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ControllerOrder {
+            get $beanFullName(): 'test-vona.controller.order';
+            get $onionName(): 'test-vona:order';
           }
 
         export interface ControllerPassport {
@@ -1678,6 +1691,8 @@ import type { ControllerGuardPassport } from '../controller/guardPassport.ts';
 // @ts-ignore ignore
 import type { ControllerOnion } from '../controller/onion.ts';
 // @ts-ignore ignore
+import type { ControllerOrder } from '../controller/order.ts';
+// @ts-ignore ignore
 import type { ControllerPassport } from '../controller/passport.ts';
 // @ts-ignore ignore
 import type { ControllerPerformAction } from '../controller/performAction.ts';
@@ -1721,6 +1736,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IControllerOptionsOnion {
       actions?: TypeControllerOptionsActions<ControllerOnion>;
+    }
+
+    export interface IControllerOptionsOrder {
+      actions?: TypeControllerOptionsActions<ControllerOrder>;
     }
 
     export interface IControllerOptionsPassport {
