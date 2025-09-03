@@ -12,7 +12,7 @@ export class ServicePost extends BeanBase {
     return await this.scope.model.post.selectAndCount(
       {
         ...params,
-        include: { user: true },
+        include: { postContent: true },
       },
     );
   }

@@ -6,4 +6,4 @@ import { ModelPost } from '../model/post.ts';
 export interface IDtoOptionsPostQueryRes extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsPostQueryRes>()
-export class DtoPostQueryRes extends $Dto.selectAndCount(() => ModelPost) {}
+export class DtoPostQueryRes extends $Dto.selectAndCount(() => ModelPost, { include: { postContent: true } }) {}
