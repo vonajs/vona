@@ -76,7 +76,7 @@ class ControllerOrder {
 }
 ```
 
-- `@Api.body`：标注返回结果类型
+- `@Api.body`：标注返回结果
 - `v.array`: 标注数组
 - `$Dto.get`: 用于动态推断与生成 DTO
 
