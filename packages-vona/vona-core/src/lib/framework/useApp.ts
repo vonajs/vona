@@ -26,6 +26,11 @@ export async function closeApp(terminate?: boolean) {
 }
 
 export async function createGeneralApp(projectPath: string, envRuntime?: Partial<NodeJS.ProcessEnv>) {
+  if (envRuntime) {
+    for (const key of Object.keys(envRuntime)) {
+      process.env[key] = envRuntime[key];
+    }
+  }
   if (process.env.META_MODE === 'prod') {
     const testFile = path.join(projectPath, `dist/${process.env.META_FLAVOR}/bootstrap.js`);
     const testInstance = await import(pathToHref(testFile));
@@ -33,7 +38,7 @@ export async function createGeneralApp(projectPath: string, envRuntime?: Partial
   } else {
     const testFile = path.join(projectPath, '.vona/app.ts');
     const testInstance = await import(pathToHref(testFile));
-    return await testInstance.createSingleApp(envRuntime);
+    return await testInstance.createSingleApp();
   }
 }
 

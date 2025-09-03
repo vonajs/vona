@@ -4,18 +4,12 @@ import config from './config.ts';
 import env from './env.ts';
 <%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
-export async function createSingleApp(envRuntime?: NodeJS.ProcessEnv) {
-  const env2 = envRuntime ? Object.assign({}, env, envRuntime) : env;
-  if (envRuntime) {
-    for (const key of Object.keys(envRuntime)) {
-      process.env[key] = envRuntime[key];
-    }
-  }
+export async function createSingleApp() {
   return await createApp({
     modulesMeta: () => import('./modules-meta.ts'),
     locales,
     config,
-    env: env2,
+    env,
     <%=appMonkey?'AppMonkey,':''%>
   });
 }
