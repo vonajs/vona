@@ -5,11 +5,17 @@ import env from './env.ts';
 <%=appMonkey?"import { AppMonkey } from '../src/backend/config/monkey.ts';":''%>
 
 export async function createSingleApp(envRuntime?: NodeJS.ProcessEnv) {
+  const env2 = envRuntime ? Object.assign({}, env, envRuntime) : env;
+  if (envRuntime) {
+    for (const key of Object.keys(envRuntime)) {
+      process.env[key] = envRuntime[key];
+    }
+  }
   return await createApp({
     modulesMeta: () => import('./modules-meta.ts'),
     locales,
     config,
-    env: envRuntime ? Object.assign({}, env, envRuntime) : env,
+    env: env2,
     <%=appMonkey?'AppMonkey,':''%>
   });
 }
