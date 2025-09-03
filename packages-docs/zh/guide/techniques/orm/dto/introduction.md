@@ -23,7 +23,7 @@ Vona ORM 提供了以下 DTO：
 
 下面以 Order/Product 为例，演示如何针对`主表-明细表`进行查询操作
 
-### 1. Model关系定义
+## 1. Model关系定义
 
 先在 Model Order 中定义与 Model Product 的`1:n`关系
 
@@ -39,7 +39,7 @@ Vona ORM 提供了以下 DTO：
 class ModelOrder {}
 ```
 
-### 2. 创建Api端点
+## 2. 创建Api端点
 
 创建 Controller，提供 findAll 方法
 
@@ -56,7 +56,7 @@ class ControllerOrder {
 }
 ```
 
-### 3. 动态推断与生成DTO
+## 3. 动态推断与生成DTO
 
 由于此 Api 返回的结果是`主表-明细表`结构，我们不能简单的使用`EntityOrder数组`来标注返回类型。而是使用 DTO 进行动态推断与生成
 
@@ -84,7 +84,7 @@ class ControllerOrder {
 
 ![](../../../../assets/img/orm/dto/dto-1.png)
 
-### 4. 封装DTO
+## 4. 封装DTO
 
 我们还可以创建一个新的 DTO class，将前面的`$Dto.get`动态推断代码封装起来，从而用于其他地方
 
