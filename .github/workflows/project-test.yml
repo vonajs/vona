@@ -43,5 +43,5 @@ jobs:
         working-directory: vona-test
       - run: npm run build -- --flavor=ci
         working-directory: vona-test
-      - run: SERVER_LISTEN_DISABLE=true npm run demo -- --mode=prod --flavor=ci
+      - run: npm run demo -- --mode=prod --flavor=ci
         working-directory: vona-test

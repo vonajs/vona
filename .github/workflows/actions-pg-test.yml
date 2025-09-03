@@ -35,4 +35,4 @@ jobs:
       - run: npm run init
       - run: npm run test
       - run: npm run build -- --flavor=ci
-      - run: SERVER_LISTEN_DISABLE=true npm run demo -- --mode=prod --flavor=ci
+      - run: npm run demo -- --mode=prod --flavor=ci
