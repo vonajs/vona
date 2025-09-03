@@ -80,15 +80,15 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
   }
 
   async test(_options: IMetaVersionTestOptions) {
-    // user: admin
-    const userAdmin = await this.bean.userInner.findOneByName('admin');
+    // user: Kevin
+    const userKevin = await this.scope.model.user.insert({ name: 'Kevin' });
     // create: post/postContent
     await this.scope.model.post.insert({
       title: 'test:post001',
       postContent: {
         content: 'this is a test post!',
       },
-      userId: userAdmin?.id,
+      userId: userKevin?.id,
     }, {
       include: { postContent: true },
     });
