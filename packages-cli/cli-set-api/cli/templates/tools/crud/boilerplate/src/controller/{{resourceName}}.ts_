@@ -1,9 +1,12 @@
 import type { TableIdentity } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resourceName%>Create.ts';
+import { Dto<%=argv.resourceNameCapitalize%>Query } from '../dto/<%=argv.resourceName%>Query.ts';
+import { Dto<%=argv.resourceNameCapitalize%>QueryRes } from '../dto/<%=argv.resourceName%>QueryRes.ts';
 import { Dto<%=argv.resourceNameCapitalize%>Update } from '../dto/<%=argv.resourceName%>Update.ts';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 
@@ -18,9 +21,12 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   @Web.get()
-  @Api.body(v.array(v.object(Entity<%=argv.resourceNameCapitalize%>)))
-  async findAll(): Promise<Entity<%=argv.resourceNameCapitalize%>[]> {
-    return await this.scope.service.<%=argv.resourceName%>.findAll();
+  @Api.body(Dto<%=argv.resourceNameCapitalize%>QueryRes)
+  async findMany(@Arg.queryPro(Dto<%=argv.resourceNameCapitalize%>Query) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
+    if (!params.orders) {
+      params.orders = [['<%=argv.moduleResourceName%>.createdAt', 'desc']];
+    }
+    return await this.scope.service.<%=argv.resourceName%>.findMany(params);
   }
 
   @Web.get(':id')
