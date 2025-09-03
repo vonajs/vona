@@ -22,7 +22,7 @@ describe('<%=argv.resourceName%>.test.ts', () => {
       const <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('post', '<%=argv.moduleActionPathRaw%>', { body: data });
       assert.equal(<%=argv.resourceName%>.name, data.name);
       // findMany
-      const queryRes: Entity<%=argv.resourceNameCapitalize%>[] = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>');
+      const queryRes: Dto<%=argv.resourceNameCapitalize%>QueryRes = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>');
       assert.equal(queryRes.list.findIndex(item => item.name === data.name) > -1, true);
       // update
       await app.bean.executor.performAction('patch', '<%=argv.moduleActionPathRaw%>/:id', {
