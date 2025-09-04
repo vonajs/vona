@@ -1,11 +1,11 @@
+import type { TableIdentity } from 'table-identity';
 import type { ILocaleInfos } from 'vona';
-import type { TableIdentity } from 'vona-module-a-orm';
 import type { IUserBase } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
 import { cast } from 'vona';
 import { setUserAdapter } from 'vona-module-a-user';
 
-setUserAdapter({ getUserId, getUserName, getUserAvatar, getUserLocale, getUserAnonymous });
+setUserAdapter({ getUserId, getUserName, getUserAvatar, getUserEmail, getUserMobile, getUserActivated, getUserLocale, getUserAnonymous });
 
 function getUserId(user: IUserBase): TableIdentity {
   return cast<IUser>(user).id;
@@ -17,6 +17,18 @@ function getUserName(user: IUserBase): string {
 
 function getUserAvatar(user: IUserBase): string | undefined {
   return cast<IUser>(user).avatar;
+}
+
+function getUserEmail(user: IUserBase): string | undefined {
+  return cast<IUser>(user).email;
+}
+
+function getUserMobile(user: IUserBase): string | undefined {
+  return cast<IUser>(user).mobile;
+}
+
+function getUserActivated(user: IUserBase): boolean {
+  return cast<IUser>(user).activated;
 }
 
 function getUserLocale(user: IUserBase): keyof ILocaleInfos | undefined {

@@ -1,4 +1,5 @@
-import type { IDecoratorEntityOptions, TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
+import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapi';
 import { Entity, EntityBase } from 'vona-module-a-orm';
 

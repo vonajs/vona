@@ -15,6 +15,15 @@ export class EntityUser extends EntityBase {
   @Api.field(v.title($locale('UserAvatar')), v.optional())
   avatar?: string;
 
+  @Api.field(v.title($locale('UserEmail')), v.optional())
+  email?: string;
+
+  @Api.field(v.title($locale('UserMobile')), v.optional())
+  mobile?: string;
+
+  @Api.field(v.title($locale('UserActivated')), v.default(false))
+  activated: boolean;
+
   @Api.field(v.title($locale('UserLocale')), z.string().optional())
   locale?: keyof ILocaleInfos | undefined;
 }

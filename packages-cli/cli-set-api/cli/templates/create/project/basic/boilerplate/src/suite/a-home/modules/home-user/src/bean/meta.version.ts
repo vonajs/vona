@@ -1,4 +1,5 @@
 import type { IMetaVersionInit, IMetaVersionInitOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type { IUser } from '../types/user.ts';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
@@ -20,6 +21,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         table.basicFields();
         table.string(entityUser.name, 255).comment(entityUser.$comment.name);
         table.string(entityUser.avatar, 255).comment(entityUser.$comment.avatar);
+        table.string(entityUser.email, 255).comment(entityUser.$comment.email);
+        table.string(entityUser.mobile, 255).comment(entityUser.$comment.mobile);
+        table.boolean(entityUser.activated).defaultTo(entityUser.$default.activated).comment(entityUser.$comment.activated);
         table.string(entityUser.locale, 255).comment(entityUser.$comment.locale);
       });
       // homeRoleUser
@@ -35,20 +39,15 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
   async init(options: IMetaVersionInitOptions) {
     if (options.version === 1) {
       // role: admin
-      const roleAdmin = await this.scope.model.role.insert({
+      await this.scope.model.role.insert({
         name: 'admin',
       });
       // user: admin
-      const userAdmin = await this.scope.model.user.insert({
+      await this.bean.userInner.register({
         name: 'admin',
         avatar: ':emoji:flower',
         locale: undefined,
-      });
-      // userRole: admin
-      await this.scope.model.roleUser.insert({
-        userId: userAdmin.id,
-        roleId: roleAdmin.id,
-      });
+      } as IUser, true);
     }
   }
 }
