@@ -10,14 +10,14 @@ Vona ORM provides the following DTOs:
 
 |Name|Description|
 |--|--|
-|get|Annotate the return result|
-|query|Annotate the query parameters|
-|queryPage|Annotate the query parameters with paging|
-|selectAndCount|Annotate the return result with paging|
-|create|Annotate the Create parameters|
-|update|Annotate the Update parameters|
-|aggregate|Annotate the return result of the aggregation operation|
-|group|Annotate the return result of the grouping operation|
+|$Dto.get|Annotate the return result|
+|$Dto.query|Annotate the query parameters|
+|$Dto.queryPage|Annotate the query parameters with paging|
+|$Dto.selectAndCount|Annotate the return result with paging|
+|$Dto.create|Annotate the Create parameters|
+|$Dto.update|Annotate the Update parameters|
+|$Dto.aggregate|Annotate the return result of the aggregation operation|
+|$Dto.group|Annotate the return result of the grouping operation|
 
 ## DTO Usage
 
