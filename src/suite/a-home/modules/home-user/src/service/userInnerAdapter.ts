@@ -10,7 +10,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     return await this.scope.model.user.insert(user);
   }
 
-  async createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
+  async userOfProfile(profile: IAuthUserProfile): Promise<IUserBase> {
     return {
       name: profile.username!,
       avatar: profile.photos?.[0].value,
@@ -18,7 +18,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
     } as unknown as IUserBase;
   }
 
-  async createAnonymous(): Promise<IUserBase> {
+  async userAnonymous(): Promise<IUserBase> {
     return { id: -1, name: 'anonymous', avatar: undefined, locale: undefined } as IUserBase;
   }
 
