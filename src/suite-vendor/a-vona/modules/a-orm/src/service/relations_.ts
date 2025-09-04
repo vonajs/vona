@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'table-identity';
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
@@ -5,7 +6,6 @@ import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike } from '../types/relations.ts';
 import type { IModelRelationOptionsMetaBasic } from '../types/relationsDef.ts';
-import type { TableIdentity } from '../types/tableIdentity.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';

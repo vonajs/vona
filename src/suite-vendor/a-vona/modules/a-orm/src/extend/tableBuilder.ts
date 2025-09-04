@@ -1,5 +1,5 @@
+import type { TableIdentityType } from 'table-identity';
 import type { VonaApplication } from 'vona';
-import type { TableIdentityType } from '../types/tableIdentity.ts';
 import knex from 'knex';
 import { __ThisModule__ } from '../.metadata/this.ts';
 

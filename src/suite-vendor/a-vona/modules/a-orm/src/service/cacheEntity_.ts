@@ -1,6 +1,6 @@
+import type { TableIdentity } from 'table-identity';
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
-import type { TableIdentity } from '../types/tableIdentity.ts';
 import { Service } from 'vona-module-a-bean';
 import { ModelCacheBase } from '../lib/modelCacheBase.ts';
 

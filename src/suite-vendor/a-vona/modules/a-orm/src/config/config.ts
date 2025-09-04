@@ -1,10 +1,10 @@
+import type { TableIdentityType } from 'table-identity';
 import type { TypeBeanRecordGeneralSelectorKeys, VonaApplication } from 'vona';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
 import type {
   TSummerCachePreset,
 } from 'vona-module-a-summer';
 import type { IDatabaseClientDialectRecord } from '../types/database.ts';
-import type { TableIdentityType } from '../types/tableIdentity.ts';
 import {
   configAll,
   configAllWithIgnoreNull,
