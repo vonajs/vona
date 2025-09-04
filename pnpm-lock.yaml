@@ -337,7 +337,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.47
+        specifier: ^6.0.48
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
