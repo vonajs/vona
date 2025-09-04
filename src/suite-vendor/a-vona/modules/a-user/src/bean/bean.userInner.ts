@@ -31,9 +31,9 @@ export class BeanUserInner extends BeanBase {
     return userNew;
   }
 
-  async registerByProfile(profile: IAuthUserProfile, autoActivate?: boolean): Promise<IUserBase> {
+  async registerByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
     const user = await this.userInnerAdapter.userOfProfile(profile);
-    return await this.register(user, autoActivate);
+    return await this.register(user, profile.confirmed);
   }
 
   createAnonymous(): Promise<IUserBase> {
