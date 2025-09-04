@@ -20,6 +20,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         table.basicFields();
         table.string(entityUser.name, 255).comment(entityUser.$comment.name);
         table.string(entityUser.avatar, 255).comment(entityUser.$comment.avatar);
+        table.string(entityUser.email, 255).comment(entityUser.$comment.email);
+        table.string(entityUser.mobile, 255).comment(entityUser.$comment.mobile);
+        table.boolean(entityUser.activated).defaultTo(entityUser.$default.activated).comment(entityUser.$comment.activated);
         table.string(entityUser.locale, 255).comment(entityUser.$comment.locale);
       });
       // homeRoleUser

@@ -4,5 +4,8 @@ export default {
   User: 'User',
   UserName: 'User Name',
   UserAvatar: 'Avatar',
+  UserEmail: 'Email',
+  UserMobile: 'Mobile',
+  UserActivated: 'Activated',
   UserLocale: 'Language',
 };

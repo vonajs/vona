@@ -20,6 +20,18 @@ export function $getUserAvatar(user: IUserBase): string | undefined {
   return __userAdapter.getUserAvatar(user);
 }
 
+export function $getUserEmail(user: IUserBase): string | undefined {
+  return __userAdapter.getUserEmail(user);
+}
+
+export function $getUserMobile(user: IUserBase): string | undefined {
+  return __userAdapter.getUserMobile(user);
+}
+
+export function $getUserActivated(user: IUserBase): boolean {
+  return __userAdapter.getUserActivated(user);
+}
+
 export function $getUserLocale(user: IUserBase): keyof ILocaleInfos | undefined {
   return __userAdapter.getUserLocale(user);
 }

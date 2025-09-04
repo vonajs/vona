@@ -4,6 +4,9 @@ import type { TypeAuthToken } from '../types/auth.ts';
 
 export function config(_app: VonaApplication) {
   return {
+    user: {
+      autoActivate: false,
+    },
     passport: {
       refreshAuthToken: 'recreate' as TypeAuthToken,
     },
