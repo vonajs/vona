@@ -1,10 +1,10 @@
+import type { TableIdentity } from 'table-identity';
 import type { OmitNever, TypeOmitStringUnion } from 'vona';
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetColumnsFromRelationAndIncludeWrapper, TypeUtilGetModelOptions, TypeUtilGetParamsColumns, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType, TypeUtilPrepareColumns } from '../relations.ts';
-import type { TableIdentity } from '../tableIdentity.ts';
 
 export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
 

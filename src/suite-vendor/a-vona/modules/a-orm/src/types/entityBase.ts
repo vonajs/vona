@@ -1,4 +1,4 @@
-import type { TableIdentity } from './tableIdentity.ts';
+import type { TableIdentity } from 'table-identity';
 import { Api, OrderCoreBase, v } from 'vona-module-a-openapi';
 import { $locale } from '../.metadata/index.ts';
 import { EntityBaseInner } from './entityBaseInner.ts';

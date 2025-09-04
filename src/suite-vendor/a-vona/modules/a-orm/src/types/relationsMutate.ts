@@ -1,9 +1,9 @@
+import type { TableIdentity } from 'table-identity';
 import type { OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IDecoratorModelOptions } from './onion/model.ts';
 import type { TypeUtilGetModelOptions, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType } from './relations.ts';
 import type { IModelRelationOptionsMetaWrapper } from './relationsDef.ts';
-import type { TableIdentity } from './tableIdentity.ts';
 
 export type TypeModelMutateParamsInclude<MODEL extends BeanModelMeta | undefined> =
   TypeModelMutateParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
