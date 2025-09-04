@@ -2,9 +2,9 @@ import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-u
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
+import { TableIdentity } from 'table-identity';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { TableIdentity } from 'vona-module-a-orm';
 
 @Service()
 export class ServiceAuth extends BeanBase {
