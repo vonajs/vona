@@ -1,14 +1,13 @@
-import type { TypeUseOnionOmitOptionsGlobal } from 'vona-module-a-onion';
-import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
 import type { IGuardOptionsRoleName } from '../bean/guard.roleName.ts';
 import type { IGuardOptionsUserName } from '../bean/guard.userName.ts';
 import { Aspect } from 'vona-module-a-aspect';
 
-function Public(
-  options?: Partial<TypeUseOnionOmitOptionsGlobal<IGuardOptionsPassport>>,
-): ClassDecorator & MethodDecorator {
-  const _public = options?.public === undefined ? true : options.public;
+function Public(_public: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.guardGlobal('a-user:passport', { public: _public });
+}
+
+function Activated(activated: boolean = true): ClassDecorator & MethodDecorator {
+  return Aspect.guardGlobal('a-user:passport', { activated });
 }
 
 function UserName(
@@ -31,6 +30,7 @@ function Admin(
 
 export interface IDecoratorGroupPassport {
   public: typeof Public;
+  activated: typeof Activated;
   userName: typeof UserName;
   roleName: typeof RoleName;
   admin: typeof Admin;
@@ -38,6 +38,7 @@ export interface IDecoratorGroupPassport {
 
 export const Passport: IDecoratorGroupPassport = {
   public: Public,
+  activated: Activated,
   userName: UserName,
   roleName: RoleName,
   admin: Admin,
