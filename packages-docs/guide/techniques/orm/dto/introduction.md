@@ -2,7 +2,7 @@
 
 When developing backend API services, DTOs are crucial for `parameter validation` and `Swagger metadata generation`. If DTOs can't be automatically inferred, similar to type inference, then we still need to manually create them. As the business grows, complex relations between models make manually creating DTOs increasingly cumbersome
 
-Vona ORM provides a convenient tool that allows us to intuitively and dynamically infer DTOs, just like type inference, freeing us up and significantly improving productivity. It can even be said that the ability to automatically infer DTOs is a significant `milestone` in building a Node.js backend framework with a brand new development experience
+Vona ORM pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity. It can even be said that being able to automatically infer and generate DTOs is a very important `milestone` in building a more elegant Node.js backend framework
 
 ## DTO List
 
