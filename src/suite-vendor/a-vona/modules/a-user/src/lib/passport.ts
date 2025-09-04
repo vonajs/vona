@@ -6,7 +6,8 @@ function Public(_public: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.guardGlobal('a-user:passport', { public: _public });
 }
 
-function Activated(activated: boolean = true): ClassDecorator & MethodDecorator {
+// true/false/undefined
+function Activated(activated?: boolean): ClassDecorator & MethodDecorator {
   return Aspect.guardGlobal('a-user:passport', { activated });
 }
 

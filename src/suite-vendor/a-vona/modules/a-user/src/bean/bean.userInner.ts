@@ -2,7 +2,6 @@ import type { IAuthUserProfile } from '../types/authProfile.ts';
 import type { IUserBase, IUserInnerAdapter } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { $getUserActivated } from '../lib/user.ts';
 
 @Bean()
 export class BeanUserInner extends BeanBase {

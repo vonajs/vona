@@ -6,7 +6,7 @@ import { Guard } from 'vona-module-a-aspect';
 
 export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
   public: boolean;
-  activated: boolean;
+  activated?: boolean;
   checkAuthToken: boolean; // default is true
 }
 
@@ -32,8 +32,13 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
       // 401 for this guard, 403 for the next guards
       return this.app.throw(401);
     }
-    if (options.activated && this.bean.passport.isAuthenticated && !this.bean.passport.isActivated) {
-      return this.app.throw(403);
+    if (this.bean.passport.isAuthenticated) {
+      if (options.activated === true && !this.bean.passport.isActivated) {
+        return this.app.throw(403);
+      }
+      if (options.activated === false && this.bean.passport.isActivated) {
+        return this.app.throw(403);
+      }
     }
     // check innerAccess
     if (this.ctx.innerAccess) return true;
