@@ -75,7 +75,6 @@ $Dto.get(() => ModelOrder, {
   entity: EntityOrder,
   relations: {
     productStats: $relation.hasMany(() => ModelProduct, 'orderId', {
-      autoload: true,
       aggrs: {
         count: '*',
         sum: 'amount',
@@ -113,4 +112,50 @@ $Dto.get(() => ModelOrder, {
 
 ## 6. 基于静态关系的分组
 
+以 Order/Product 为例，演示`1:n`关系
+
+### Model关系定义
+
+先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
+
+``` typescript
+@Model({
+  entity: EntityOrder,
+  relations: {
+    productsGroups: $relation.hasMany(() => ModelProduct, 'orderId', {
+      groups: 'id',
+      aggrs: {
+        count: '*',
+        sum: 'amount',
+      },
+    }),
+  },
+})
+export class ModelOrderStats {}
+```
+
+### 动态推断与生成DTO
+
+``` typescript
+$Dto.get(() => ModelOrderStats, {
+  include: {
+    productsGroups: true,
+  },
+});
+```
+
 ## 7. 基于动态关系的分组
+
+``` typescript
+$Dto.get(() => ModelOrder, {
+  with: {
+    productsGroups: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
+      groups: 'id',
+      aggrs: {
+        count: '*',
+        sum: 'amount',
+      },
+    }),
+  },
+});
+```
