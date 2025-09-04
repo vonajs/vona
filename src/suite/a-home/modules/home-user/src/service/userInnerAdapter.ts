@@ -11,11 +11,11 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
   }
 
   async createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
-    return await this.scope.model.user.insert({
+    return {
       name: profile.username!,
       avatar: profile.photos?.[0].value,
       locale: undefined,
-    });
+    } as unknown as IUserBase;
   }
 
   async createAnonymous(): Promise<IUserBase> {
