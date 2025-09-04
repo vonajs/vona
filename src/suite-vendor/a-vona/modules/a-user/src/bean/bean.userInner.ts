@@ -2,6 +2,7 @@ import type { IAuthUserProfile } from '../types/authProfile.ts';
 import type { IUserBase, IUserInnerAdapter } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { $getUserActivated } from '../lib/user.ts';
 
 @Bean()
 export class BeanUserInner extends BeanBase {
@@ -16,6 +17,11 @@ export class BeanUserInner extends BeanBase {
   }
 
   async activate(user: IUserBase) {
+    // check
+    const userCheck = await this.userInnerAdapter.findOne({ id: user.id });
+    if (!userCheck) this.app.throw(403);
+    if ($getUserActivated(userCheck)) this.app.throw(403);
+    // activate
     await this.scope.event.activate.emit(user, async () => {
       await this.userInnerAdapter.setActivated(user.id, true);
     });
