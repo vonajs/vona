@@ -10,7 +10,7 @@
 |include|Static relationships|
 |with|Dynamic relationships|
 
-## 1. 一般用法
+## 1. General Usage
 
 ``` typescript
 $Dto.get(() => ModelOrder);
@@ -20,13 +20,13 @@ $Dto.get(() => ModelOrder);
 $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 ```
 
-## 2. 静态关系
+## 2. Static Relation
 
-以 Order/Product 为例，演示`1:n`关系
+Take Order/Product as an example to demonstrate the `1:n` relation
 
-### Model关系定义
+### Model relation definition
 
-先在 Model Order 中定义与 Model Product 的`1:n`关系
+First define a `1:n` relation between Model `Order` and Model `Product`
 
 ``` typescript
 @Model({
@@ -40,7 +40,7 @@ $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 class ModelOrder {}
 ```
 
-### 动态推断与生成DTO
+### Dynamically inferring and generating DTO
 
 ``` typescript
 $Dto.get(() => ModelOrder, {
@@ -50,7 +50,7 @@ $Dto.get(() => ModelOrder, {
 });
 ```
 
-## 3. 动态关系
+## 3. Dynamic Relation
 
 ``` typescript
 $Dto.get(() => ModelOrder, {
@@ -62,13 +62,13 @@ $Dto.get(() => ModelOrder, {
 });
 ```
 
-## 4. 基于静态关系的聚合
+## 4. Aggregation based on static relation
 
-以 Order/Product 为例，演示`1:n`关系
+Take Order/Product as an example to demonstrate the `1:n` relation
 
-### Model关系定义
+### Model relation definition
 
-先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
+First define a `1:n` relation between Model `OrderStats` and Model `Product`
 
 ``` typescript
 @Model({
@@ -85,7 +85,7 @@ $Dto.get(() => ModelOrder, {
 export class ModelOrderStats {}
 ```
 
-### 动态推断与生成DTO
+### Dynamically inferring and generating DTO
 
 ``` typescript
 $Dto.get(() => ModelOrderStats, {
@@ -95,7 +95,7 @@ $Dto.get(() => ModelOrderStats, {
 });
 ```
 
-## 5. 基于动态关系的聚合
+## 5. Aggregation based on dynamic relation
 
 ``` typescript
 $Dto.get(() => ModelOrder, {
@@ -110,13 +110,13 @@ $Dto.get(() => ModelOrder, {
 });
 ```
 
-## 6. 基于静态关系的分组
+## 6. Grouping based on static relation
 
-以 Order/Product 为例，演示`1:n`关系
+Take Order/Product as an example to demonstrate the `1:n` relation
 
-### Model关系定义
+### Model relation definition
 
-先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
+First define a `1:n` relation between Model `OrderStats` and Model `Product`
 
 ``` typescript
 @Model({
@@ -134,7 +134,7 @@ $Dto.get(() => ModelOrder, {
 export class ModelOrderStats {}
 ```
 
-### 动态推断与生成DTO
+### Dynamically inferring and generating DTO
 
 ``` typescript
 $Dto.get(() => ModelOrderStats, {
@@ -144,7 +144,7 @@ $Dto.get(() => ModelOrderStats, {
 });
 ```
 
-## 7. 基于动态关系的分组
+## 7. Grouping based on dynamic relation
 
 ``` typescript
 $Dto.get(() => ModelOrder, {
