@@ -1,5 +1,5 @@
 import type { ILocaleInfos } from 'vona';
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
 import type { IAuthUserProfile } from './authProfile.ts';
 
 export interface IUserNameRecord {

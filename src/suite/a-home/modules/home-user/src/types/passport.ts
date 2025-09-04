@@ -1,5 +1,5 @@
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
 import type { IPassportBase } from 'vona-module-a-user';
 import type { IAuth } from './auth.ts';
 import type { IUser } from './user.ts';

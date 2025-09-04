@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
 import type { IAuthUserProfile, IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
 import { BeanBase } from 'vona';

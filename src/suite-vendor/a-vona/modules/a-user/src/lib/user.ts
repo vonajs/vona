@@ -1,5 +1,5 @@
 import type { ILocaleInfos } from 'vona';
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
 import type { IUserAdapter, IUserBase, IUserIdRecord } from '../types/user.ts';
 
 let __userAdapter: IUserAdapter;

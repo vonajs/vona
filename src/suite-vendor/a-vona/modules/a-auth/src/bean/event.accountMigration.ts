@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventAccountMigrationData {

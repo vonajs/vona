@@ -1,4 +1,4 @@
-import type { TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
 
 export interface IAuthIdRecord {
   '-1': 'dev';
