@@ -26,5 +26,4 @@ export * from './relationsDefMutate.ts';
 export * from './relationsGroup.ts';
 export * from './relationsMutate.ts';
 export * from './relationsTables.ts';
-export * from './tableIdentity.ts';
 export * from './transaction.ts';
