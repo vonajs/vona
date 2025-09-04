@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'table-identity';
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
   IDatabaseClientRecord,
@@ -14,7 +15,6 @@ import type {
   IModelSelectParams,
   IModelUpdateOptions,
   ITableRecord,
-  TableIdentity,
   TypeModelAggrRelationResult,
   TypeModelClassLikeGeneral,
   TypeModelColumn,

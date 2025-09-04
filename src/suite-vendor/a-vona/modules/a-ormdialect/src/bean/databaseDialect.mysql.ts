@@ -1,9 +1,9 @@
 import type { Knex } from 'knex';
+import type { TableIdentity } from 'table-identity';
 import type {
   ConfigDatabaseClient,
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
-  TableIdentity,
 } from 'vona-module-a-orm';
 import { promisify } from 'node:util';
 import {

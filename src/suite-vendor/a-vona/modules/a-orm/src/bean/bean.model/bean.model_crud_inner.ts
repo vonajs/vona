@@ -1,5 +1,6 @@
 import type BigNumber from 'bignumber.js';
 import type { Knex } from 'knex';
+import type { TableIdentity } from 'table-identity';
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -8,7 +9,6 @@ import type {
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
   ITableRecord,
-  TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
 import { isNil } from '@cabloy/utils';

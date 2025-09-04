@@ -147,6 +147,7 @@ export class CliToolsMetadata extends BeanCliBase {
 
   _generatePatch(content: string) {
     if (!content) return content;
+    content = this._generatePatch_resources(content, 'table-identity', ['TableIdentity'], true);
     content = this._generatePatch_resources(content, 'vona-module-a-openapi', ['TypeEntityOptionsFields', 'TypeControllerOptionsActions'], true);
     content = this._generatePatch_resources(content, 'vona-module-a-orm', [
       'TypeEntityMeta',

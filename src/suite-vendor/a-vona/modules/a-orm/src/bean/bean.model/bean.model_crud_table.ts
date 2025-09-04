@@ -1,4 +1,5 @@
 import type BigNumber from 'bignumber.js';
+import type { TableIdentity } from 'table-identity';
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -6,7 +7,6 @@ import type {
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
   ITableRecord,
-  TableIdentity,
   TypeModelWhere,
 } from '../../types/index.ts';
 import { BeanModelCrudInner } from './bean.model_crud_inner.ts';
