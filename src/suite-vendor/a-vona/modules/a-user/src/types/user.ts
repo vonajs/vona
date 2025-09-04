@@ -26,10 +26,12 @@ export interface IUserAdapter {
 }
 
 export interface IUserInnerAdapter {
+  create(user: Partial<IUserBase>): Promise<IUserBase>;
   createByProfile(profile: IAuthUserProfile): Promise<IUserBase>;
   createAnonymous(): Promise<IUserBase>;
   findOneByName(name: string): Promise<IUserBase | undefined>;
   findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   update(user: Partial<IUserBase>): Promise<void>;
   remove(user: Partial<IUserBase>): Promise<void>;
+  setActivated(id: TableIdentity, activated: boolean): Promise<void>;
 }

@@ -15,6 +15,21 @@ export class BeanUserInner extends BeanBase {
     return this._userInnerAdapter;
   }
 
+  async activate(user: IUserBase) {
+    await this.scope.event.activate.emit(user, async () => {
+      await this.userInnerAdapter.setActivated(user.id, true);
+    });
+  }
+
+  async register(user: Partial<IUserBase>, autoActivate?: boolean): Promise<IUserBase> {
+    autoActivate = autoActivate ?? this.scope.config.user.autoActivate;
+    const userNew = await this.userInnerAdapter.create(user);
+    if (autoActivate) {
+      await this.activate(userNew);
+    }
+    return userNew;
+  }
+
   createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
     return this.userInnerAdapter.createByProfile(profile);
   }

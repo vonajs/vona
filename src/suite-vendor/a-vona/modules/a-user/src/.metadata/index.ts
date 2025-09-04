@@ -158,6 +158,7 @@ declare module 'vona' {
 }
 /** service: end */
 /** event: begin */
+export * from '../bean/event.activate.ts';
 export * from '../bean/event.createUserAnonymous.ts';
 export * from '../bean/event.signin.ts';
 export * from '../bean/event.signout.ts';
@@ -169,6 +170,16 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-user' {
   
+        export interface EventActivate {
+          /** @internal */
+          get scope(): ScopeModuleAUser;
+        }
+
+          export interface EventActivate {
+            get $beanFullName(): 'a-user.event.activate';
+            get $onionName(): 'a-user:activate';
+          }
+
         export interface EventCreateUserAnonymous {
           /** @internal */
           get scope(): ScopeModuleAUser;
@@ -201,23 +212,27 @@ declare module 'vona-module-a-user' {
 }
 /** event: end */
 /** event: begin */
+import type { EventActivate } from '../bean/event.activate.ts';
 import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.ts';
 import type { EventSignin } from '../bean/event.signin.ts';
 import type { EventSignout } from '../bean/event.signout.ts';
 export interface IModuleEvent {
-  'createUserAnonymous': EventCreateUserAnonymous;
+  'activate': EventActivate;
+'createUserAnonymous': EventCreateUserAnonymous;
 'signin': EventSignin;
 'signout': EventSignout;
 }
 /** event: end */
 /** event: begin */
+import type { TypeEventActivateData, TypeEventActivateResult } from '../bean/event.activate.ts';
 import type { TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult } from '../bean/event.createUserAnonymous.ts';
 import type { TypeEventSigninData, TypeEventSigninResult } from '../bean/event.signin.ts';
 import type { TypeEventSignoutData, TypeEventSignoutResult } from '../bean/event.signout.ts';
 import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-user:createUserAnonymous': EventOn<TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult>;
+    'a-user:activate': EventOn<TypeEventActivateData, TypeEventActivateResult>;
+'a-user:createUserAnonymous': EventOn<TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult>;
 'a-user:signin': EventOn<TypeEventSigninData, TypeEventSigninResult>;
 'a-user:signout': EventOn<TypeEventSignoutData, TypeEventSignoutResult>;
   }

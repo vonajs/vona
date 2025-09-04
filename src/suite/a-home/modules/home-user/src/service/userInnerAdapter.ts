@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'vona-module-a-orm';
 import type { IAuthUserProfile, IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
 import { BeanBase } from 'vona';
@@ -5,6 +6,10 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapter {
+  async create(user: Partial<IUser>): Promise<IUserBase> {
+    return await this.scope.model.user.insert(user);
+  }
+
   async createByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
     return await this.scope.model.user.insert({
       name: profile.username!,
@@ -31,5 +36,9 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
 
   async remove(user: Partial<IUser>): Promise<void> {
     await this.scope.model.user.delete(user);
+  }
+
+  async setActivated(id: TableIdentity, activated: boolean): Promise<void> {
+    await this.scope.model.user.update({ id, activated });
   }
 }
