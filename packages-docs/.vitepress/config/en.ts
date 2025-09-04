@@ -149,6 +149,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               collapsed: true,
               items: [
                 { text: 'Introduction', link: 'introduction' },
+                { text: '$Dto.get', link: 'get' },
               ],
             },
           ],

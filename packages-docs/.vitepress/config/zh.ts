@@ -149,6 +149,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               collapsed: true,
               items: [
                 { text: '介绍', link: 'introduction' },
+                { text: '$Dto.get', link: 'get' },
               ],
             },
           ],
