@@ -1,6 +1,7 @@
 /* eslint-disable */
 import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
+import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/auth.ts';
 export * from '../entity/authProvider.ts';
@@ -107,7 +108,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-auth' {
   
@@ -117,6 +118,7 @@ declare module 'vona-module-a-auth' {
       [SymbolKeyModelOptions]: IModelOptionsAuth;
       get<T extends IModelGetOptions<EntityAuth,ModelAuth>>(where: TypeModelWhere<EntityAuth>, options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuth,ModelAuth>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityAuth, ModelAuth, T>>;
       select<T extends IModelSelectParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T>[]>;
       insert<T extends IModelInsertOptions<EntityAuth,ModelAuth>>(data?: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuth,ModelAuth, T, true>>;
       insertBulk<T extends IModelInsertOptions<EntityAuth,ModelAuth>>(items: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityAuth,ModelAuth, T, true>[]>;
@@ -136,6 +138,7 @@ export interface ModelAuthProvider {
       [SymbolKeyModelOptions]: IModelOptionsAuthProvider;
       get<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(where: TypeModelWhere<EntityAuthProvider>, options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityAuthProvider, ModelAuthProvider, T>>;
       select<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
       insert<T extends IModelInsertOptions<EntityAuthProvider,ModelAuthProvider>>(data?: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T, true>>;
       insertBulk<T extends IModelInsertOptions<EntityAuthProvider,ModelAuthProvider>>(items: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T, true>[]>;

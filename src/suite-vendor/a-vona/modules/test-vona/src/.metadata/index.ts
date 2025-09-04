@@ -1,6 +1,7 @@
 /* eslint-disable */
 import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore,IModelRelationHasOne,IModelRelationBelongsTo,IModelRelationHasMany,IModelRelationBelongsToMany } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
+import type { TableIdentity } from 'table-identity';
 /** aop: begin */
 export * from '../bean/aop.regExp.ts';
 export * from '../bean/aop.simple.ts';
@@ -445,7 +446,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-test-vona' {
   export interface IModelOptionsCategory {
@@ -1792,6 +1793,7 @@ declare module 'vona-module-a-web' {
 '/test/vona/onion/echo3/:userId': undefined;
 '/test/vona/onion/echo5': undefined;
 '/test/vona/onion/echo6': undefined;
+'/test/vona/order/findAll': undefined;
 '/test/vona/passport/echo/:name': undefined;
 '/test/vona/passport/isAuthenticated': undefined;
 '/test/vona/post/findManyEcho': undefined;

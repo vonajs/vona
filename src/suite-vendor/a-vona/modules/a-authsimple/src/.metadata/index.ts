@@ -1,6 +1,7 @@
 /* eslint-disable */
 import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/authSimple.ts';
 import type { IEntityOptionsAuthSimple } from '../entity/authSimple.ts';
@@ -79,7 +80,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-authsimple' {
   
@@ -89,6 +90,7 @@ declare module 'vona-module-a-authsimple' {
       [SymbolKeyModelOptions]: IModelOptionsAuthSimple;
       get<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(where: TypeModelWhere<EntityAuthSimple>, options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T> | undefined>;
       mget<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityAuthSimple, ModelAuthSimple, T>>;
       select<T extends IModelSelectParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T>[]>;
       insert<T extends IModelInsertOptions<EntityAuthSimple,ModelAuthSimple>>(data?: TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T, true>>;
       insertBulk<T extends IModelInsertOptions<EntityAuthSimple,ModelAuthSimple>>(items: TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T, true>[]>;

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/version.ts';
 export * from '../entity/versionInit.ts';
@@ -135,7 +136,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TableIdentity, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-version' {
   
@@ -145,6 +146,7 @@ declare module 'vona-module-a-version' {
       [SymbolKeyModelOptions]: IModelOptionsVersion;
       get<T extends IModelGetOptions<EntityVersion,ModelVersion>>(where: TypeModelWhere<EntityVersion>, options?: T): Promise<TypeModelRelationResult<EntityVersion, ModelVersion, T> | undefined>;
       mget<T extends IModelGetOptions<EntityVersion,ModelVersion>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityVersion, ModelVersion, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityVersion,ModelVersion,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityVersion, ModelVersion, T>>;
       select<T extends IModelSelectParams<EntityVersion,ModelVersion,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityVersion, ModelVersion, T>[]>;
       insert<T extends IModelInsertOptions<EntityVersion,ModelVersion>>(data?: TypeModelMutateRelationData<EntityVersion,ModelVersion, T>, options?: T): Promise<TypeModelMutateRelationData<EntityVersion,ModelVersion, T, true>>;
       insertBulk<T extends IModelInsertOptions<EntityVersion,ModelVersion>>(items: TypeModelMutateRelationData<EntityVersion,ModelVersion, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityVersion,ModelVersion, T, true>[]>;
@@ -164,6 +166,7 @@ export interface ModelVersionInit {
       [SymbolKeyModelOptions]: IModelOptionsVersionInit;
       get<T extends IModelGetOptions<EntityVersionInit,ModelVersionInit>>(where: TypeModelWhere<EntityVersionInit>, options?: T): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T> | undefined>;
       mget<T extends IModelGetOptions<EntityVersionInit,ModelVersionInit>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityVersionInit,ModelVersionInit,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityVersionInit, ModelVersionInit, T>>;
       select<T extends IModelSelectParams<EntityVersionInit,ModelVersionInit,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T>[]>;
       insert<T extends IModelInsertOptions<EntityVersionInit,ModelVersionInit>>(data?: TypeModelMutateRelationData<EntityVersionInit,ModelVersionInit, T>, options?: T): Promise<TypeModelMutateRelationData<EntityVersionInit,ModelVersionInit, T, true>>;
       insertBulk<T extends IModelInsertOptions<EntityVersionInit,ModelVersionInit>>(items: TypeModelMutateRelationData<EntityVersionInit,ModelVersionInit, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityVersionInit,ModelVersionInit, T, true>[]>;
@@ -183,6 +186,7 @@ export interface ModelViewRecord {
       [SymbolKeyModelOptions]: IModelOptionsViewRecord;
       get<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(where: TypeModelWhere<EntityViewRecord>, options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T> | undefined>;
       mget<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityViewRecord, ModelViewRecord, T>>;
       select<T extends IModelSelectParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T>[]>;
       insert<T extends IModelInsertOptions<EntityViewRecord,ModelViewRecord>>(data?: TypeModelMutateRelationData<EntityViewRecord,ModelViewRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityViewRecord,ModelViewRecord, T, true>>;
       insertBulk<T extends IModelInsertOptions<EntityViewRecord,ModelViewRecord>>(items: TypeModelMutateRelationData<EntityViewRecord,ModelViewRecord, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityViewRecord,ModelViewRecord, T, true>[]>;
