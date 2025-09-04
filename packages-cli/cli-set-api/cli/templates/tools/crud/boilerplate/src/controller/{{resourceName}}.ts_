@@ -1,4 +1,5 @@
-import type { IQueryParams, TableIdentity } from 'vona-module-a-orm';
+import type { TableIdentity } from 'table-identity';
+import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 import { BeanBase } from 'vona';
