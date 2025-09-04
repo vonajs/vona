@@ -16,11 +16,11 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
       email: profile.emails?.[0].value,
       avatar: profile.photos?.[0].value,
       locale: undefined,
-    } as unknown as IUserBase;
+    } as IUser;
   }
 
   async createAnonymous(): Promise<IUserBase> {
-    return { id: -1, name: 'anonymous', avatar: undefined, locale: undefined } as IUserBase;
+    return { id: -1, name: 'anonymous', avatar: undefined, locale: undefined } as IUser;
   }
 
   async findOneByName(name: string): Promise<IUserBase | undefined> {
