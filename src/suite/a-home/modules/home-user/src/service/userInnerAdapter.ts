@@ -13,12 +13,13 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
   async userOfProfile(profile: IAuthUserProfile): Promise<IUserBase> {
     return {
       name: profile.username!,
+      email: profile.emails?.[0].value,
       avatar: profile.photos?.[0].value,
       locale: undefined,
     } as unknown as IUserBase;
   }
 
-  async userAnonymous(): Promise<IUserBase> {
+  async createAnonymous(): Promise<IUserBase> {
     return { id: -1, name: 'anonymous', avatar: undefined, locale: undefined } as IUserBase;
   }
 

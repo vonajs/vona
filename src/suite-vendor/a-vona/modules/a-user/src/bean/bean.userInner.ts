@@ -22,7 +22,8 @@ export class BeanUserInner extends BeanBase {
   }
 
   async register(user: Partial<IUserBase>, autoActivate?: boolean): Promise<IUserBase> {
-    autoActivate = autoActivate ?? this.scope.config.user.autoActivate;
+    // config.user.autoActivate > autoActivate
+    autoActivate = this.scope.config.user.autoActivate ? true : autoActivate;
     const userNew = await this.userInnerAdapter.create(user);
     if (autoActivate) {
       await this.activate(userNew);
@@ -35,8 +36,8 @@ export class BeanUserInner extends BeanBase {
     return await this.register(user, autoActivate);
   }
 
-  userAnonymous(): Promise<IUserBase> {
-    return this.userInnerAdapter.userAnonymous();
+  createAnonymous(): Promise<IUserBase> {
+    return this.userInnerAdapter.createAnonymous();
   }
 
   findOneByName(name: string): Promise<IUserBase | undefined> {
