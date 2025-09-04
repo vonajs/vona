@@ -1,5 +1,5 @@
-import type { ILocaleInfos } from 'vona';
 import type { TableIdentity } from 'table-identity';
+import type { ILocaleInfos } from 'vona';
 import type { IUserBase } from 'vona-module-a-user';
 import type { IUser } from '../types/user.ts';
 import { cast } from 'vona';
