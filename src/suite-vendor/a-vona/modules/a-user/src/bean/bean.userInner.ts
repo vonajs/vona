@@ -17,11 +17,6 @@ export class BeanUserInner extends BeanBase {
   }
 
   async activate(user: IUserBase) {
-    // check
-    const userCheck = await this.userInnerAdapter.findOne({ id: user.id });
-    if (!userCheck) this.app.throw(403);
-    if ($getUserActivated(userCheck)) this.app.throw(403);
-    // activate
     await this.scope.event.activate.emit(user, async () => {
       await this.userInnerAdapter.setActivated(user.id, true);
     });
