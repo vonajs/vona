@@ -45,9 +45,6 @@ export class AuthProviderSimple extends BeanBase implements IAuthProviderVerify 
       if (clientOptions.locale) {
         profile.locale = clientOptions.locale;
       }
-      if (clientOptions.confirmed) {
-        profile.confirmed = clientOptions.confirmed;
-      }
       return profile;
     } else {
       if (!clientOptions.username || !clientOptions.password) return this.app.throw(401);
