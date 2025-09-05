@@ -25,7 +25,7 @@ export class ControllerPassport extends BeanBase {
     return await this.bean.executor.newCtx(async () => {
       cast(this.ctx.req).query = { code, state: stateQuery };
       return await this._callback(strategyState);
-    }, { instanceName: strategyState.instanceName, instance: true });
+    }, { locale: strategyState.locale, instanceName: strategyState.instanceName, instance: true });
   }
 
   private async _callback(strategyState: IAuthenticateStrategyState) {

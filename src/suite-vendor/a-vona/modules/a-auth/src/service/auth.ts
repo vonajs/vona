@@ -20,8 +20,6 @@ export class ServiceAuth extends BeanBase {
     const profileUser = await beanAuthProvider.verify(strategyVerifyArgs ?? [], clientOptions, onionOptions, state);
     // confirmed
     if (isNil(profileUser.confirmed)) profileUser.confirmed = clientOptions.confirmed;
-    // locale
-    if (isNil(profileUser.locale)) profileUser.locale = this.ctx.locale;
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, state);
     // signin
