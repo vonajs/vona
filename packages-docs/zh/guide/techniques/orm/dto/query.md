@@ -24,11 +24,11 @@ export class DtoOrderQuery extends DtoQueryBase {}
 
 由于`DtoOrderQuery`继承自`DtoQueryBase`，因此，有以下成员字段：
 
-|名称|说明|
-|--|--|
-|columns|要查询的字段清单|
-|where|条件语句|
-|orders|排序|
+|名称|说明|举例|
+|--|--|--|
+|columns|要查询的字段清单|`*`, `id,orderNo,remark`, `["id","orderNo","remark"]`|
+|where|条件语句|`{ "orderNo": { "_include_":  "order001" } }`|
+|orders|排序|`orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]`|
 
 ## 标注Query参数
 
@@ -57,3 +57,6 @@ class ControllerOrder extends BeanBase {
 - `@Arg.queryPro`：对 Query 参数进行 transform 的 Pipe，需要传入参数`DtoOrderQuery`
 - `IQueryParams`: Pipe 对 Query 参数进行 transform 后的数据类型为`IQueryParams`，需要传入泛型参数`ModelOrder`，从而与`model.order.select`方法的参数类型相匹配
 
+基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
+
+![](../../../../assets/img/orm/dto/dto-2.png)
