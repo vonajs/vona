@@ -10,6 +10,7 @@ export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOpt
   username?: string;
   password?: string;
   email?: string;
+  avatar?: string;
   locale?: keyof ILocaleInfos;
 }
 
@@ -38,8 +39,14 @@ export class AuthProviderSimple extends BeanBase implements IAuthProviderVerify 
       if (clientOptions.email) {
         profile.emails = [{ value: clientOptions.email }];
       }
+      if (clientOptions.avatar) {
+        profile.photos = [{ value: clientOptions.avatar }];
+      }
       if (clientOptions.locale) {
         profile.locale = clientOptions.locale;
+      }
+      if (clientOptions.confirmed) {
+        profile.confirmed = clientOptions.confirmed;
       }
       return profile;
     } else {

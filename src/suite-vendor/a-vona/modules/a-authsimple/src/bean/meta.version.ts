@@ -1,9 +1,9 @@
-import type { IMetaVersionInit, IMetaVersionInitOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
 @Meta()
-export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVersionInit {
+export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
       // aAuthSimple
@@ -12,17 +12,6 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         table.basicFields();
         table.text(entity.hash);
       });
-    }
-  }
-
-  async init(options: IMetaVersionInitOptions) {
-    if (options.version === 1) {
-      // admin
-      const userAdmin = await this.bean.userInner.findOneByName('admin');
-      if (userAdmin) {
-        const password = options.password || this.scope.config.passwordDefault.admin;
-        await this.bean.authSimple.add(userAdmin.id, password);
-      }
     }
   }
 }

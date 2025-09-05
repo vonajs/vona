@@ -1,5 +1,4 @@
 import type { IMetaVersionInit, IMetaVersionInitOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
-import type { IUser } from '../types/user.ts';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
@@ -43,11 +42,12 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         name: 'admin',
       });
       // user: admin
-      await this.bean.userInner.register({
-        name: 'admin',
+      await this.bean.authSimple.authenticate({
+        username: 'admin',
+        password: options.password || this.scope.config.passwordDefault.admin,
         avatar: ':emoji:flower',
-        locale: undefined,
-      } as IUser, true);
+        confirmed: true,
+      });
     }
   }
 }
