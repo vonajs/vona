@@ -21,10 +21,11 @@ export class BeanUserInner extends BeanBase {
     });
   }
 
-  async register(user: Partial<IUserBase>, autoActivate?: boolean): Promise<IUserBase> {
-    // config.user.autoActivate > autoActivate
-    autoActivate = this.scope.config.user.autoActivate ? true : autoActivate;
+  async register(user: Partial<IUserBase>, confirmed?: boolean): Promise<IUserBase> {
+    // user
     const userNew = await this.userInnerAdapter.create(user);
+    // config.user.autoActivate > confirmed
+    const autoActivate = this.scope.config.user.autoActivate ? true : confirmed;
     if (autoActivate) {
       await this.activate(userNew);
     }
