@@ -12,7 +12,7 @@ export interface IAuthProviderOptions<%=argv.beanNameCapitalize%> extends IDecor
   IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions
 > {}
 
-@AuthProvider<IAuthProviderOptions<%=argv.beanNameCapitalize%>>({ redirect: false })
+@AuthProvider<IAuthProviderOptions<%=argv.beanNameCapitalize%>>()
 export class AuthProvider<%=argv.beanNameCapitalize%> extends BeanBase implements IAuthProviderVerify {
   async verify(
     _args: TypeStrategyVerifyArgs,
