@@ -21,16 +21,16 @@ export class ControllerPassport extends BeanBase {
     const code = this.ctx.query.code as string;
     const stateQuery = this.ctx.query.state as string;
     if (!stateQuery) this.app.throw(403);
-    const state: IAuthenticateStrategyState = await this.bean.jwt.get('oauthstate').verify(stateQuery) as unknown as IAuthenticateStrategyState;
+    const strategyState: IAuthenticateStrategyState = await this.bean.jwt.get('oauthstate').verify(stateQuery) as unknown as IAuthenticateStrategyState;
     return await this.bean.executor.newCtx(async () => {
       cast(this.ctx.req).query = { code, state: stateQuery };
-      return await this._callback(state);
-    }, { instanceName: state.instanceName, instance: true });
+      return await this._callback(strategyState);
+    }, { instanceName: strategyState.instanceName, instance: true });
   }
 
-  private async _callback(state: IAuthenticateStrategyState) {
+  private async _callback(strategyState: IAuthenticateStrategyState) {
     // authProvider
-    const entityAuthProvider = await this.bean.authProvider.get({ id: state.authProviderId });
+    const entityAuthProvider = await this.bean.authProvider.get({ id: strategyState.authProviderId });
     if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
     const authProviderName = `${entityAuthProvider.module}:${entityAuthProvider.providerName}`;
     // clientName
@@ -62,7 +62,7 @@ export class ControllerPassport extends BeanBase {
             beanAuthProvider,
             clientOptions,
             onionOptions,
-            state,
+            strategyState,
             args,
           );
           // code
@@ -73,8 +73,8 @@ export class ControllerPassport extends BeanBase {
             return resolve(jwt2);
           } else {
             // redirect
-            if (!state.redirect) return reject(new Error('redirect not specified'));
-            return this.ctx.redirect(`${state.redirect}?${this.scope.config.oauthCodeField}=${encodeURIComponent(code)}`);
+            if (!strategyState.redirect) return reject(new Error('redirect not specified'));
+            return this.ctx.redirect(`${strategyState.redirect}?${this.scope.config.oauthCodeField}=${encodeURIComponent(code)}`);
           }
         } catch (err) {
           reject(err);

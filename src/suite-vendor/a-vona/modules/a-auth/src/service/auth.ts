@@ -16,7 +16,7 @@ export class ServiceAuth extends BeanBase {
     state?: IAuthenticateStrategyState,
     strategyVerifyArgs?: TypeStrategyVerifyArgs,
   ) {
-    const profileUser = await beanAuthProvider.verify(strategyVerifyArgs ?? [], clientOptions, onionOptions);
+    const profileUser = await beanAuthProvider.verify(strategyVerifyArgs ?? [], clientOptions, onionOptions, state);
     // confirmed
     if (profileUser.confirmed === undefined) profileUser.confirmed = clientOptions.confirmed;
     // issuePassport

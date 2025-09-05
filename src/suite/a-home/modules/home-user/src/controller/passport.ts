@@ -30,6 +30,14 @@ export class ControllerPassport extends BeanBase {
     return await this.bean.passport.signout();
   }
 
+  @Web.post('register')
+  @Passport.public()
+  @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
+  @Api.body(v.object(DtoPassportJwt))
+  async register() {
+
+  }
+
   @Web.post('login')
   @Passport.public()
   @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })

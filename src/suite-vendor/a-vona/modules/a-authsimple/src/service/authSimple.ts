@@ -5,12 +5,12 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceAuthSimple extends BeanBase {
-  async add(userId: TableIdentity | undefined, password: string) {
+  async create(password: string) {
     // hash
     password = password || this.scope.config.passwordDefault.normal;
     const hash = await this.calcPasswordHash(password);
     // auth simple
-    return await this.scope.model.authSimple.insert({ userId, hash });
+    return await this.scope.model.authSimple.insert({ hash });
   }
 
   async verifyPassword(userId: TableIdentity, password: string): Promise<TableIdentity | undefined> {

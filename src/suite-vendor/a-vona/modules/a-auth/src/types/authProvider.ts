@@ -1,6 +1,7 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IAuthUserProfile } from 'vona-module-a-user';
+import type { IAuthenticateStrategyState } from './auth.ts';
 
 export interface IAuthProviderRecord {}
 
@@ -44,7 +45,12 @@ export interface IAuthProviderStrategy {
 }
 
 export interface IAuthProviderVerify {
-  verify(args: TypeStrategyVerifyArgs, clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<IAuthUserProfile>;
+  verify(
+    args: TypeStrategyVerifyArgs,
+    clientOptions: IAuthProviderClientOptions,
+    options: IDecoratorAuthProviderOptions,
+    state?: IAuthenticateStrategyState,
+  ): Promise<IAuthUserProfile>;
 }
 
 declare module 'vona-module-a-onion' {
