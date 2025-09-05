@@ -1,8 +1,6 @@
 import type { IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import type { DtoLogin } from '../dto/login.ts';
-import type { DtoRegister } from '../dto/register.ts';
 import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
@@ -12,8 +10,10 @@ import { Api, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
+import { DtoLogin } from '../dto/login.ts';
 import { DtoPassport } from '../dto/passport.ts';
 import { DtoPassportJwt } from '../dto/passportJwt.ts';
+import { DtoRegister } from '../dto/register.ts';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
 
