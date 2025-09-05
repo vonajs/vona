@@ -1330,6 +1330,7 @@ export interface IModuleSummerCache {
 /** dto: begin */
 export * from '../dto/categoryTree.ts';
 export * from '../dto/orderCreate.ts';
+export * from '../dto/orderQuery.ts';
 export * from '../dto/orderResult.ts';
 export * from '../dto/orderUpdate.ts';
 export * from '../dto/postCreate.ts';
@@ -1344,6 +1345,7 @@ export * from '../dto/userLazy.ts';
 export * from '../dto/userUpdate.ts';
 import type { IDtoOptionsCategoryTree } from '../dto/categoryTree.ts';
 import type { IDtoOptionsOrderCreate } from '../dto/orderCreate.ts';
+import type { IDtoOptionsOrderQuery } from '../dto/orderQuery.ts';
 import type { IDtoOptionsOrderResult } from '../dto/orderResult.ts';
 import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
@@ -1362,6 +1364,7 @@ declare module 'vona-module-a-web' {
     export interface IDtoRecord {
       'test-vona:categoryTree': IDtoOptionsCategoryTree;
 'test-vona:orderCreate': IDtoOptionsOrderCreate;
+'test-vona:orderQuery': IDtoOptionsOrderQuery;
 'test-vona:orderResult': IDtoOptionsOrderResult;
 'test-vona:orderUpdate': IDtoOptionsOrderUpdate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
@@ -1385,6 +1388,7 @@ declare module 'vona-module-test-vona' {
 /** dto: begin */
 import type { DtoCategoryTree } from '../dto/categoryTree.ts';
 import type { DtoOrderCreate } from '../dto/orderCreate.ts';
+import type { DtoOrderQuery } from '../dto/orderQuery.ts';
 import type { DtoOrderResult } from '../dto/orderResult.ts';
 import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
@@ -1405,6 +1409,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsOrderCreate {
       fields?: TypeEntityOptionsFields<DtoOrderCreate, IDtoOptionsOrderCreate[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsOrderQuery {
+      fields?: TypeEntityOptionsFields<DtoOrderQuery, IDtoOptionsOrderQuery[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsOrderResult {
