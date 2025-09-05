@@ -47,7 +47,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         password: options.password || this.scope.config.passwordDefault.admin,
         avatar: ':emoji:flower',
         confirmed: true,
-      });
+      }, 'register', 'default');
     }
   }
 }

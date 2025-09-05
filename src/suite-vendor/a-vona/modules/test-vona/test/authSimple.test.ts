@@ -37,6 +37,7 @@ describe('authSimple.test.ts', () => {
       // login again
       const jwt2 = await app.bean.authSimple.authenticate(
         { username: 'admin', password: '123456' },
+        'login',
         'default',
       );
       assert.equal(!!jwt2?.accessToken, true);
