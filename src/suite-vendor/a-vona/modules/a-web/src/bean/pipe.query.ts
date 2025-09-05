@@ -17,11 +17,11 @@ export interface IPipeOptionsQueryTransformInfo {
   params: IQueryParams;
   query: any;
   options: IPipeOptionsQuery;
-  originalName: string;
-  fullName: string;
-  key: string;
-  value: any;
-  schema: z.ZodSchema;
+  originalName?: string;
+  fullName?: string;
+  key?: string;
+  value?: any;
+  schema?: z.ZodSchema;
   openapi?: ISchemaObjectExtensionField;
 }
 export type TypePipeOptionsQueryTransform =
@@ -139,9 +139,15 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   }
 
   private _transformFields(params: IQueryParams, value: any, options: IPipeOptionsQuery) {
+    // loop
     for (const key in value) {
       this._transformField(key, value[key], params, value, options);
     }
+    // custom transform
+    if (options.transform) {
+      options.transform(this.ctx, { params, query: value, options });
+    }
+    // ok
     return params;
   }
 }
