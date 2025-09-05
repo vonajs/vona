@@ -1,4 +1,4 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
+import type { IAuthenticateStrategyState, IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
@@ -21,6 +21,7 @@ export class AuthProviderSimple extends BeanBase implements IAuthProviderVerify 
     _args: TypeStrategyVerifyArgs,
     clientOptions: IAuthProviderSimpleClientOptions,
     _options: IAuthProviderOptionsSimple,
+    _state?: IAuthenticateStrategyState,
   ): Promise<IAuthUserProfile> {
     if (!clientOptions.username || !clientOptions.password) return this.app.throw(401);
     // user

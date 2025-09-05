@@ -1,4 +1,4 @@
-import type { IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
+import type { IAuthenticateStrategyState, IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
@@ -17,7 +17,8 @@ export class AuthProvider<%=argv.beanNameCapitalize%> extends BeanBase implement
   async verify(
     _args: TypeStrategyVerifyArgs,
     _clientOptions: IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions,
-    _options: IAuthProviderOptions<%=argv.beanNameCapitalize%>
+    _options: IAuthProviderOptions<%=argv.beanNameCapitalize%>,
+    _state?: IAuthenticateStrategyState,
   ): Promise<IAuthUserProfile> {
     // profile
     const profile: IAuthUserProfile = {
