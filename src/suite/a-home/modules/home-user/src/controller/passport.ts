@@ -39,18 +39,17 @@ export class ControllerPassport extends BeanBase {
 
   @Web.get('login/:module/:providerName/:clientName?')
   @Passport.public()
-  @Api.body(v.object(DtoPassportJwt))
   async login<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
     @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
     @Arg.query('redirect', v.optional()) redirect?: string,
-  ): Promise<DtoPassportJwt> {
-    const jwt = await this.bean.auth.authenticate(`${module}:${providerName}` as T, {
+  ) {
+    // only support oauth, so not return jwt to client
+    await this.bean.auth.authenticate(`${module}:${providerName}` as T, {
       state: { intention: 'login', redirect },
       clientName,
     });
-    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('associate/:module/:providerName/:clientName?')
