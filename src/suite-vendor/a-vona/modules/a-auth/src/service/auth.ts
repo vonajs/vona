@@ -105,7 +105,7 @@ export class ServiceAuth extends BeanBase {
       }
       // ready
       passport.user = userCurrent;
-    } else if (stateIntention === 'login') {
+    } else if (stateIntention === 'login' || stateIntention === 'register') {
       // check if user exists
       let entityUser: IUserBase | undefined;
       if (entityAuth.userId) {

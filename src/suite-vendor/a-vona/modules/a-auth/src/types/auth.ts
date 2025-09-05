@@ -1,7 +1,7 @@
 import type { IInstanceRecord, PowerPartial } from 'vona';
 import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
 
-export type TypeAuthenticateIntention = 'login' | 'associate' | 'migrate';
+export type TypeAuthenticateIntention = 'register' | 'login' | 'associate' | 'migrate';
 
 export interface IAuthenticateState {
   intention?: TypeAuthenticateIntention;
