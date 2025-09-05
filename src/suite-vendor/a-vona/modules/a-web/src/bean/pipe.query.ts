@@ -82,61 +82,65 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     return params;
   }
 
+  private _transformField(key: string, fieldValue: any, params: IQueryParams, value: any, options: IPipeOptionsQuery) {
+    if (__FieldsSystem.includes(key)) return;
+    const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, key));
+    if (!fieldSchema) return;
+    // openapi
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
+    // name
+    const originalName = openapi?.query?.originalName ?? key;
+    let fullName: string;
+    // joins
+    if (openapi?.query?.join) {
+      if (!params.joins)params.joins = [];
+      const joinType = openapi.query.join.type ?? 'innerJoin';
+      const joinTable = openapi.query.join.table;
+      const joinOn = openapi.query.join.on;
+      if (params.joins.findIndex(item => item[1] === joinTable) === -1) {
+        params.joins.push([joinType, joinTable, joinOn] as any);
+      }
+      fullName = `${joinTable}.${originalName}`;
+    } else {
+      fullName = originalName;
+    }
+    // check where
+    if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
+    // custom transform
+    if (options.transform) {
+      const res = options.transform(this.ctx, {
+        params,
+        query: value,
+        options,
+        originalName,
+        fullName,
+        key,
+        value: fieldValue,
+        schema: fieldSchema,
+        openapi,
+      });
+      if (res === true || res === false) return;
+    }
+    // default transform
+    let op = openapi?.query?.op;
+    if (!op) {
+      const typeName = fieldSchema._def.typeName;
+      if (typeName === 'ZodString') {
+        op = '_includesI_';
+      } else {
+        op = '_eq_';
+      }
+    }
+    if (op === '_eq_') {
+      params.where![fullName] = fieldValue;
+    } else {
+      params.where![fullName] = { [op]: fieldValue };
+    }
+  }
+
   private _transformFields(params: IQueryParams, value: any, options: IPipeOptionsQuery) {
     for (const key in value) {
-      if (__FieldsSystem.includes(key)) continue;
-      const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, key));
-      if (!fieldSchema) continue;
-      // openapi
-      const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
-      // name
-      const originalName = openapi?.query?.originalName ?? key;
-      let fullName: string;
-      // joins
-      if (openapi?.query?.join) {
-        if (!params.joins)params.joins = [];
-        const joinType = openapi.query.join.type ?? 'innerJoin';
-        const joinTable = openapi.query.join.table;
-        const joinOn = openapi.query.join.on;
-        if (params.joins.findIndex(item => item[1] === joinTable) === -1) {
-          params.joins.push([joinType, joinTable, joinOn] as any);
-        }
-        fullName = `${joinTable}.${originalName}`;
-      } else {
-        fullName = originalName;
-      }
-      // check where
-      if (params.where![fullName]) continue;
-      // custom transform
-      if (options.transform) {
-        const res = options.transform(this.ctx, {
-          params,
-          query: value,
-          options,
-          originalName,
-          fullName,
-          key,
-          value: value[key],
-          schema: fieldSchema,
-          openapi,
-        });
-        if (res === true || res === false) continue;
-      }
-      // default transform
-      let op = openapi?.query?.op;
-      if (!op) {
-        const typeName = fieldSchema._def.typeName;
-        if (typeName === 'ZodString') {
-          op = '_includesI_';
-        } else {
-          op = '_eq_';
-        }
-      }
-      if (op === '_eq_') {
-        params.where![fullName] = value[key];
-      } else {
-        params.where![fullName] = { [op]: value[key] };
-      }
+      this._transformField(key, value[key], params, value, options);
     }
     return params;
   }
