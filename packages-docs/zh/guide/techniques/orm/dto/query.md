@@ -60,3 +60,36 @@ class ControllerOrder extends BeanBase {
 基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
 
 ![](../../../../assets/img/orm/dto/dto-2.png)
+
+## $Dto.query
+
+如果需要在 DTO 中添加业务字段的查询条件，可以使用`$Dto.query`
+
+``` diff
+@Dto()
+export class DtoOrderQuery
++ extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {}
+```
+
+- `$Dto.query`：自动从`EntityOrder`中提取字段`orderNo/remark`，然后与`DtoQueryBase`成员字段进行合并
+
+基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
+
+![](../../../../assets/img/orm/dto/dto-3.png)
+
+## 添加自定义字段
+
+还可以直接在 DTO 中添加自定义字段
+
+``` diff
+@Dto()
+export class DtoOrderQuery
++ extends $Dto.query(EntityOrder, ['remark']) {
++ @Api.field(v.optional())
++ orderNo?: string;
+}
+```
+
+- 从`EntityOrder`中自动提取字段`remark`
+- 添加自定义字段`orderNo`
+
