@@ -1,11 +1,12 @@
 import type { IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { DtoLogin } from '../dto/login.ts';
+import type { DtoRegister } from '../dto/register.ts';
 import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
-import { DtoAuthSimple } from 'vona-module-a-authsimple';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
@@ -34,16 +35,17 @@ export class ControllerPassport extends BeanBase {
   @Passport.public()
   @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
-  async register() {
-
+  async register(@Arg.body() data: DtoLogin) {
+    const jwt = await this.bean.authSimple.authenticate(data, 'register', 'default');
+    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.post('login')
   @Passport.public()
   @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
-  async loginSimple(@Arg.body() clientOptions: DtoAuthSimple): Promise<DtoPassportJwt> {
-    const jwt = await this.bean.authSimple.authenticate(clientOptions, 'default');
+  async loginSimple(@Arg.body() data: DtoRegister): Promise<DtoPassportJwt> {
+    const jwt = await this.bean.authSimple.authenticate(data, 'login', 'default');
     return this._combineDtoPassportJwt(jwt);
   }
 

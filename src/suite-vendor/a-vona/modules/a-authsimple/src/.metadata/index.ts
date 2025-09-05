@@ -232,31 +232,6 @@ declare module 'vona-module-a-authsimple' {
           } 
 }
 /** meta: end */
-/** dto: begin */
-export * from '../dto/authSimple.ts';
-import type { IDtoOptionsAuthSimple } from '../dto/authSimple.ts';
-import 'vona';
-declare module 'vona-module-a-web' {
-  
-    export interface IDtoRecord {
-      'a-authsimple:authSimple': IDtoOptionsAuthSimple;
-    }
-
-  
-}
-declare module 'vona-module-a-authsimple' {
-   
-}
-/** dto: end */
-/** dto: begin */
-import type { DtoAuthSimple } from '../dto/authSimple.ts'; 
-declare module 'vona-module-a-authsimple' {
-  
-    export interface IDtoOptionsAuthSimple {
-      fields?: TypeEntityOptionsFields<DtoAuthSimple, IDtoOptionsAuthSimple[TypeSymbolKeyFieldsMore]>;
-    }
-}
-/** dto: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
