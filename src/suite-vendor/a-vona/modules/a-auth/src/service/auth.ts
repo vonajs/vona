@@ -2,6 +2,7 @@ import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-u
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
+import { isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -18,7 +19,9 @@ export class ServiceAuth extends BeanBase {
   ) {
     const profileUser = await beanAuthProvider.verify(strategyVerifyArgs ?? [], clientOptions, onionOptions, state);
     // confirmed
-    if (profileUser.confirmed === undefined) profileUser.confirmed = clientOptions.confirmed;
+    if (isNil(profileUser.confirmed)) profileUser.confirmed = clientOptions.confirmed;
+    // locale
+    if (isNil(profileUser.locale)) profileUser.locale = this.ctx.locale;
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, state);
     // signin

@@ -15,7 +15,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
       name: profile.username!,
       email: profile.emails?.[0].value,
       avatar: profile.photos?.[0].value,
-      locale: undefined,
+      locale: profile.locale,
     } as IUser;
   }
 
