@@ -4,6 +4,7 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
+import { Aspect } from 'vona-module-a-aspect';
 import { DtoAuthSimple } from 'vona-module-a-authsimple';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, v } from 'vona-module-a-openapi';
@@ -31,6 +32,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('login')
   @Passport.public()
+  @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
   async loginSimple(@Arg.body() clientOptions: DtoAuthSimple): Promise<DtoPassportJwt> {
     const jwt = await this.bean.authSimple.authenticate(clientOptions, 'default');
