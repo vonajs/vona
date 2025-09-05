@@ -11,8 +11,8 @@ Vona ORM 提供了以下 DTO：
 |名称|说明|
 |--|--|
 |$Dto.get|标注返回结果|
-|$Dto.query|标注Query参数|
-|$Dto.queryPage|标注带分页的Query参数|
+|$Dto.query/DtoQueryBase|标注Query参数|
+|$Dto.queryPage/DtoQueryPageBase|标注带分页的Query参数|
 |$Dto.selectAndCount|标注带分页的返回结果|
 |$Dto.create|标注Create参数|
 |$Dto.update|标注Update参数|

@@ -150,6 +150,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: 'Introduction', link: 'introduction' },
                 { text: '$Dto.get', link: 'get' },
+                { text: '$Dto.query/DtoQueryBase', link: 'query' },
               ],
             },
           ],

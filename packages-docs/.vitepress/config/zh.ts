@@ -150,6 +150,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: '介绍', link: 'introduction' },
                 { text: '$Dto.get', link: 'get' },
+                { text: '$Dto.query/DtoQueryBase', link: 'query' },
               ],
             },
           ],
