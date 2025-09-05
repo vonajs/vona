@@ -13,11 +13,17 @@ export class ServiceAuthSimple extends BeanBase {
     return await this.scope.model.authSimple.insert({ hash });
   }
 
+  async getByUserId(userId: TableIdentity) {
+    const auth = await this.$scope.auth.model.auth.get({ userId });
+    if (!auth) return;
+    return await this.scope.model.authSimple.get({ id: auth.profileId });
+  }
+
   async verifyPassword(userId: TableIdentity, password: string): Promise<TableIdentity | undefined> {
     // check
     if (!password) return;
     // authSimple
-    const authSimple = await this.scope.model.authSimple.get({ userId });
+    const authSimple = await this.getByUserId(userId);
     if (!authSimple) return;
     // verify
     const res = await this.verifyPasswordHash(password, authSimple.hash);
