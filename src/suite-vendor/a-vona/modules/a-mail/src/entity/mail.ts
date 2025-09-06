@@ -9,7 +9,7 @@ export interface IEntityOptionsMail extends IDecoratorEntityOptions {}
 @Entity<IEntityOptionsMail>('mail')
 export class EntityMail extends EntityBase {
   @Api.field(z.string().optional())
-  clientName?: keyof IMailClientRecord;
+  client?: keyof IMailClientRecord;
 
   @Api.field(v.optional())
   from?: string;

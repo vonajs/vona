@@ -1,19 +1,19 @@
 import type { Address } from 'nodemailer/lib/mailer/index.js';
 import type { IMailClientRecord, IMailOptions } from '../types/config.ts';
-import nodemailer from 'nodemailer';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanMail extends BeanBase {
   async send(mail: IMailOptions, clientName?: keyof IMailClientRecord) {
-    await this.scope.model.mail.insert({
-      clientName,
+    const mailNew = await this.scope.model.mail.insert({
+      client: clientName,
       from: __parseFrom(mail.from),
       to: __parseTo(mail.to),
       subject: mail.subject,
       message: mail,
     });
+    this.scope.queue.mail.push({ mailId: mailNew.id });
   }
 }
 

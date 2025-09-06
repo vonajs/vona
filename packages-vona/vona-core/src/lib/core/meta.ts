@@ -22,6 +22,7 @@ export class AppMeta extends BeanSimple {
   isProd: boolean;
   isTest: boolean;
   isDev: boolean;
+  isLocal: boolean;
   error: ErrorClass;
   logger: AppLogger;
   locale: AppLocale;
@@ -85,6 +86,7 @@ export class AppMeta extends BeanSimple {
     this.isProd = mode === 'prod';
     this.isTest = mode === 'test';
     this.isDev = mode === 'dev';
+    this.isLocal = this.isTest || this.isDev;
   }
 
   async waitAppStarted() {

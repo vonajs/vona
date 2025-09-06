@@ -136,6 +136,46 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/mail.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-mail:mail': never;
+    }
+
+  
+}
+declare module 'vona-module-a-mail' {
+  
+        export interface ServiceMail {
+          /** @internal */
+          get scope(): ScopeModuleAMail;
+        }
+
+          export interface ServiceMail {
+            get $beanFullName(): 'a-mail.service.mail';
+            get $onionName(): 'a-mail:mail';
+          } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceMail } from '../service/mail.ts';
+export interface IModuleService {
+  'mail': ServiceMail;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-mail.service.mail': ServiceMail;
+  }
+}
+/** service: end */
 /** queue: begin */
 export * from '../bean/queue.mail.ts';
 
@@ -183,6 +223,7 @@ export interface ScopeModuleAMail {
 config: TypeModuleConfig<typeof config>;
 entity: IModuleEntity;
 model: IModuleModel;
+service: IModuleService;
 queue: IModuleQueue;
 }
 
