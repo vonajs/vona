@@ -13,7 +13,15 @@ export class BeanMail extends BeanBase {
       subject: mail.subject,
       message: mail,
     });
-    this.scope.queue.mail.push({ mailId: mailNew.id });
+    if (this.app.meta.isTest) {
+      this.ctx.commit(async () => {
+        await this.scope.queue.mail.pushAsync({ mailId: mailNew.id });
+      });
+    } else {
+      this.ctx.commit(() => {
+        this.scope.queue.mail.push({ mailId: mailNew.id });
+      });
+    }
   }
 }
 
