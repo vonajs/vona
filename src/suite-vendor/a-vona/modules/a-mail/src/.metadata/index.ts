@@ -1,6 +1,7 @@
 /* eslint-disable */
-import type { TypeEntityMeta,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/mail.ts';
 import type { IEntityOptionsMail } from '../entity/mail.ts';
@@ -38,6 +39,103 @@ declare module 'vona-module-a-mail' {
     }
 }
 /** entity: end */
+/** model: begin */
+export * from '../model/mail.ts';
+import type { IModelOptionsMail } from '../model/mail.ts';
+import 'vona';
+declare module 'vona-module-a-orm' {
+  
+    export interface IModelRecord {
+      'a-mail:mail': IModelOptionsMail;
+    }
+
+  
+}
+declare module 'vona-module-a-mail' {
+  
+        export interface ModelMail {
+          /** @internal */
+          get scope(): ScopeModuleAMail;
+        }
+
+          export interface ModelMail {
+            get $beanFullName(): 'a-mail.model.mail';
+            get $onionName(): 'a-mail:mail';
+          } 
+}
+/** model: end */
+/** model: begin */
+import type { ModelMail } from '../model/mail.ts';
+export interface IModuleModel {
+  'mail': ModelMail;
+}
+/** model: end */
+/** model: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-mail.model.mail': ModelMail;
+  }
+}
+/** model: end */
+/** model: begin */
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
+declare module 'vona-module-a-mail' {
+  
+  export interface ModelMail {
+      [SymbolKeyEntity]: EntityMail;
+      [SymbolKeyEntityMeta]: EntityMailMeta;
+      [SymbolKeyModelOptions]: IModelOptionsMail;
+      get<T extends IModelGetOptions<EntityMail,ModelMail>>(where: TypeModelWhere<EntityMail>, options?: T): Promise<TypeModelRelationResult<EntityMail, ModelMail, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityMail,ModelMail>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityMail, ModelMail, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityMail, ModelMail, T>>;
+      select<T extends IModelSelectParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityMail, ModelMail, T>[]>;
+      insert<T extends IModelInsertOptions<EntityMail,ModelMail>>(data?: TypeModelMutateRelationData<EntityMail,ModelMail, T>, options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T, true>>;
+      insertBulk<T extends IModelInsertOptions<EntityMail,ModelMail>>(items: TypeModelMutateRelationData<EntityMail,ModelMail, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T, true>[]>;
+      update<T extends IModelUpdateOptions<EntityMail,ModelMail>>(data: TypeModelMutateRelationData<EntityMail,ModelMail, T>, options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityMail,ModelMail>>(items: TypeModelMutateRelationData<EntityMail,ModelMail, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityMail,ModelMail>>(where?: TypeModelWhere<EntityMail>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityMail,ModelMail>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityMail,ModelMail>>(data?: TypeModelMutateRelationData<EntityMail,ModelMail, T>, options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityMail,ModelMail>>(items: TypeModelMutateRelationData<EntityMail,ModelMail, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T>[]>;
+      count<T extends IModelSelectCountParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityMail, T>[]>;
+    }
+}
+declare module 'vona-module-a-orm' {
+  export interface IModelClassRecord {
+    'a-mail:mail': ModelMail;
+  }
+}
+/** model: end */
+/** bean: begin */
+export * from '../bean/bean.mail.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-mail' {
+  
+        export interface BeanMail {
+          /** @internal */
+          get scope(): ScopeModuleAMail;
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import type { BeanMail } from '../bean/bean.mail.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'mail': BeanMail;
+  }
+}
+/** bean: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -53,6 +151,7 @@ export interface ScopeModuleAMail {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 entity: IModuleEntity;
+model: IModuleModel;
 }
 
 import 'vona';
