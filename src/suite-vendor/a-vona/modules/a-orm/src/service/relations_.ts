@@ -415,7 +415,7 @@ export class ServiceRelations extends BeanBase {
     if (!columns) return [columns, true];
     columns = Array.isArray(columns) ? columns : [columns];
     if (columns.includes('*') || columns.includes(key)) return [columns, true];
-    columns.push(key);
+    columns = columns.concat(key);
     return [columns, false];
   }
 
