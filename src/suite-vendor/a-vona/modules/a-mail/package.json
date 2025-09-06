@@ -4,6 +4,7 @@
   "version": "5.0.0",
   "title": "a-mail",
   "vonaModule": {
+    "fileVersion": 1,
     "dependencies": {}
   },
   "description": "",

@@ -176,6 +176,31 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** meta: begin */
+export * from '../bean/meta.version.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IMetaRecord {
+      'a-mail:version': never;
+    }
+
+  
+}
+declare module 'vona-module-a-mail' {
+  
+        export interface MetaVersion {
+          /** @internal */
+          get scope(): ScopeModuleAMail;
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-mail.meta.version';
+            get $onionName(): 'a-mail:version';
+          } 
+}
+/** meta: end */
 /** queue: begin */
 export * from '../bean/queue.mail.ts';
 
