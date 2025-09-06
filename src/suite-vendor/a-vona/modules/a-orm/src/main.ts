@@ -51,7 +51,7 @@ export class Main extends BeanSimple implements IModuleMain {
       enumerable: false,
       get() {
         return function (this: VonaContext) {
-          cast(this).transactionConsistency.commitDone();
+          return cast(this).transactionConsistency.commitDone();
         };
       },
     });
