@@ -4,14 +4,7 @@
   "version": "5.0.0",
   "title": "a-mail",
   "vonaModule": {
-    "dependencies": {},
-    "onions": {
-      "mailProvider": {
-        "optionsGlobalInterfaceName": "IDecoratorMailProviderOptions",
-        "optionsGlobalInterfaceFrom": "vona-module-a-mail",
-        "boilerplate": "cli/mailProvider/boilerplate"
-      }
-    }
+    "dependencies": {}
   },
   "description": "",
   "author": "",
