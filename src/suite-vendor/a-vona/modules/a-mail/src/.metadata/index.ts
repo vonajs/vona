@@ -136,6 +136,37 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** queue: begin */
+export * from '../bean/queue.mail.ts';
+
+import { type IDecoratorQueueOptions } from 'vona-module-a-queue';
+declare module 'vona-module-a-queue' {
+  
+    export interface IQueueRecord {
+      'a-mail:mail': IDecoratorQueueOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-mail' {
+  
+        export interface QueueMail {
+          /** @internal */
+          get scope(): ScopeModuleAMail;
+        }
+
+          export interface QueueMail {
+            get $beanFullName(): 'a-mail.queue.mail';
+            get $onionName(): 'a-mail:mail';
+          } 
+}
+/** queue: end */
+/** queue: begin */
+import type { QueueMail } from '../bean/queue.mail.ts';
+export interface IModuleQueue {
+  'mail': QueueMail;
+}
+/** queue: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -152,6 +183,7 @@ export interface ScopeModuleAMail {
 config: TypeModuleConfig<typeof config>;
 entity: IModuleEntity;
 model: IModuleModel;
+queue: IModuleQueue;
 }
 
 import 'vona';
