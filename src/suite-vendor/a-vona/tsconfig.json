@@ -142,6 +142,9 @@
     },
     {
       "path": "modules/a-captchasimple/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-mail/tsconfig.build.json"
     }
   ],
   "exclude": [
