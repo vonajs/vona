@@ -38,8 +38,12 @@ declare module 'vona-module-a-mail' {
     }
 }
 /** entity: end */
+/** config: begin */
+export * from '../config/config.ts';
+import type { config } from '../config/config.ts';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -47,6 +51,7 @@ export class ScopeModuleAMail extends BeanScopeBase {}
 
 export interface ScopeModuleAMail {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 entity: IModuleEntity;
 }
 
@@ -60,7 +65,9 @@ declare module 'vona' {
     mail: ScopeModuleAMail;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-mail': ReturnType<typeof config>;
+  }
 
   
 }
