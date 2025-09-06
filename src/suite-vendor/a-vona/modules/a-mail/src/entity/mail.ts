@@ -22,4 +22,7 @@ export class EntityMail extends EntityBase {
 
   @Api.field()
   message: IMailOptions;
+
+  @Api.field(v.optional())
+  error?: string;
 }

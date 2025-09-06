@@ -15,6 +15,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
         table.text(entity.to);
         table.text(entity.subject);
         table.json(entity.message);
+        table.text(entity.error);
       });
     }
   }
