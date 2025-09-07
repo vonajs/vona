@@ -7,7 +7,9 @@ export function config(_app: VonaApplication) {
     clients: {
       system: {
         transport: {},
-        defaults: {},
+        defaults: {
+          from: 'admin@cabloy.com',
+        },
       },
     },
   } as ConfigMail;
