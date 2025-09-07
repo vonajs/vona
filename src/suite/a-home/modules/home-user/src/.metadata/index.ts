@@ -215,6 +215,7 @@ declare module 'vona-module-a-orm' {
 /** model: end */
 /** service: begin */
 export * from '../service/authInnerAdapter.ts';
+export * from '../service/mail.ts';
 export * from '../service/passportAdapter.ts';
 export * from '../service/roleInnerAdapter.ts';
 export * from '../service/userInnerAdapter.ts';
@@ -224,6 +225,7 @@ declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'home-user:authInnerAdapter': never;
+'home-user:mail': never;
 'home-user:passportAdapter': never;
 'home-user:roleInnerAdapter': never;
 'home-user:userInnerAdapter': never;
@@ -241,6 +243,16 @@ declare module 'vona-module-home-user' {
           export interface ServiceAuthInnerAdapter {
             get $beanFullName(): 'home-user.service.authInnerAdapter';
             get $onionName(): 'home-user:authInnerAdapter';
+          }
+
+        export interface ServiceMail {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ServiceMail {
+            get $beanFullName(): 'home-user.service.mail';
+            get $onionName(): 'home-user:mail';
           }
 
         export interface ServicePassportAdapter {
@@ -276,11 +288,13 @@ declare module 'vona-module-home-user' {
 /** service: end */
 /** service: begin */
 import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
+import type { ServiceMail } from '../service/mail.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 import type { ServiceRoleInnerAdapter } from '../service/roleInnerAdapter.ts';
 import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 export interface IModuleService {
   'authInnerAdapter': ServiceAuthInnerAdapter;
+'mail': ServiceMail;
 'passportAdapter': ServicePassportAdapter;
 'roleInnerAdapter': ServiceRoleInnerAdapter;
 'userInnerAdapter': ServiceUserInnerAdapter;
@@ -292,6 +306,7 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'home-user.service.authInnerAdapter': ServiceAuthInnerAdapter;
+'home-user.service.mail': ServiceMail;
 'home-user.service.passportAdapter': ServicePassportAdapter;
 'home-user.service.roleInnerAdapter': ServiceRoleInnerAdapter;
 'home-user.service.userInnerAdapter': ServiceUserInnerAdapter;
@@ -300,12 +315,14 @@ declare module 'vona' {
 /** service: end */
 /** eventListener: begin */
 export * from '../bean/eventListener.activate.ts';
+export * from '../bean/eventListener.register.ts';
 
 import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   
     export interface IEventListenerRecord {
       'home-user:activate': IDecoratorEventListenerOptions;
+'home-user:register': IDecoratorEventListenerOptions;
     }
 
   
@@ -320,6 +337,16 @@ declare module 'vona-module-home-user' {
           export interface EventListenerActivate {
             get $beanFullName(): 'home-user.eventListener.activate';
             get $onionName(): 'home-user:activate';
+          }
+
+        export interface EventListenerRegister {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface EventListenerRegister {
+            get $beanFullName(): 'home-user.eventListener.register';
+            get $onionName(): 'home-user:register';
           } 
 }
 /** eventListener: end */
