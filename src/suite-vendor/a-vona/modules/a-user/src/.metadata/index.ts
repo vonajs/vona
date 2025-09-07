@@ -160,6 +160,7 @@ declare module 'vona' {
 /** event: begin */
 export * from '../bean/event.activate.ts';
 export * from '../bean/event.createUserAnonymous.ts';
+export * from '../bean/event.register.ts';
 export * from '../bean/event.signin.ts';
 export * from '../bean/event.signout.ts';
 
@@ -190,6 +191,16 @@ declare module 'vona-module-a-user' {
             get $onionName(): 'a-user:createUserAnonymous';
           }
 
+        export interface EventRegister {
+          /** @internal */
+          get scope(): ScopeModuleAUser;
+        }
+
+          export interface EventRegister {
+            get $beanFullName(): 'a-user.event.register';
+            get $onionName(): 'a-user:register';
+          }
+
         export interface EventSignin {
           /** @internal */
           get scope(): ScopeModuleAUser;
@@ -214,11 +225,13 @@ declare module 'vona-module-a-user' {
 /** event: begin */
 import type { EventActivate } from '../bean/event.activate.ts';
 import type { EventCreateUserAnonymous } from '../bean/event.createUserAnonymous.ts';
+import type { EventRegister } from '../bean/event.register.ts';
 import type { EventSignin } from '../bean/event.signin.ts';
 import type { EventSignout } from '../bean/event.signout.ts';
 export interface IModuleEvent {
   'activate': EventActivate;
 'createUserAnonymous': EventCreateUserAnonymous;
+'register': EventRegister;
 'signin': EventSignin;
 'signout': EventSignout;
 }
@@ -226,6 +239,7 @@ export interface IModuleEvent {
 /** event: begin */
 import type { TypeEventActivateData, TypeEventActivateResult } from '../bean/event.activate.ts';
 import type { TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult } from '../bean/event.createUserAnonymous.ts';
+import type { TypeEventRegisterData, TypeEventRegisterResult } from '../bean/event.register.ts';
 import type { TypeEventSigninData, TypeEventSigninResult } from '../bean/event.signin.ts';
 import type { TypeEventSignoutData, TypeEventSignoutResult } from '../bean/event.signout.ts';
 import type { EventOn } from 'vona-module-a-event'; 
@@ -233,6 +247,7 @@ declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-user:activate': EventOn<TypeEventActivateData, TypeEventActivateResult>;
 'a-user:createUserAnonymous': EventOn<TypeEventCreateUserAnonymousData, TypeEventCreateUserAnonymousResult>;
+'a-user:register': EventOn<TypeEventRegisterData, TypeEventRegisterResult>;
 'a-user:signin': EventOn<TypeEventSigninData, TypeEventSigninResult>;
 'a-user:signout': EventOn<TypeEventSignoutData, TypeEventSignoutResult>;
   }
