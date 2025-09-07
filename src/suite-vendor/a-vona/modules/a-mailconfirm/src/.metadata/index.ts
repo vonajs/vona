@@ -1,4 +1,44 @@
 /* eslint-disable */
+/** service: begin */
+export * from '../service/mail.ts';
+
+import 'vona';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-mailconfirm:mail': never;
+    }
+
+  
+}
+declare module 'vona-module-a-mailconfirm' {
+  
+        export interface ServiceMail {
+          /** @internal */
+          get scope(): ScopeModuleAMailconfirm;
+        }
+
+          export interface ServiceMail {
+            get $beanFullName(): 'a-mailconfirm.service.mail';
+            get $onionName(): 'a-mailconfirm:mail';
+          } 
+}
+/** service: end */
+/** service: begin */
+import type { ServiceMail } from '../service/mail.ts';
+export interface IModuleService {
+  'mail': ServiceMail;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-mailconfirm.service.mail': ServiceMail;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
@@ -17,6 +57,7 @@ export class ScopeModuleAMailconfirm extends BeanScopeBase {}
 export interface ScopeModuleAMailconfirm {
   util: BeanScopeUtil;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+service: IModuleService;
 }
 
 import 'vona';

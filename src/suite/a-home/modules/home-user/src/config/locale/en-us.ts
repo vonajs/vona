@@ -1,11 +1,4 @@
 export default {
-  ConfirmationEmailExpired: 'This email confirmation link has expired',
-  ConfirmationEmailSucceeded: 'Your email address has been confirmed',
-  ConfirmationEmailSubject,
-  ConfirmationEmailBody,
-  PasswordResetEmailExpired: 'This password reset link has expired',
-  PasswordResetEmailSubject,
-  PasswordResetEmailBody,
   Role: 'Role',
   RoleName: 'Role Name',
   User: 'User',
