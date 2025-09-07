@@ -7,15 +7,21 @@ export interface IControllerOptionsMail extends IDecoratorControllerOptions {}
 
 @Controller<IControllerOptionsMail>('mail')
 export class ControllerMail extends BeanBase {
-  @Web.get('emailConfirm')
+  @Web.get('emailConfirmCallback')
   @Passport.public()
-  async emailConfirm(@Arg.query('token') token: string) {
-
+  async emailConfirmCallback(@Arg.query('token') token: string) {
+    // cache
+    const data = await this.scope.cacheRedis.emailConfirm.get(token);
+    if (data) {
+      await this.scope.cacheRedis.emailConfirm.del(token);
+    }
+    // emit
+    await this.scope.event.emailConfirmCallback.emit(data);
   }
 
-  @Web.get('passwordReset')
+  @Web.get('passwordResetCallback')
   @Passport.public()
-  async passwordReset(@Arg.query('token') token: string) {
+  async passwordResetCallback(@Arg.query('token') token: string) {
 
   }
 }

@@ -13,7 +13,7 @@ export class ServiceMail extends BeanBase {
     if (!email) throw new Error(`email should not empty: ${$getUserName(user)}`);
     // link
     const token = uuidv4();
-    const callbackURLRelative = $apiPath('/mailconfirm/mail/emailConfirm');
+    const callbackURLRelative = $apiPath('/mailconfirm/mail/emailConfirmCallback');
     const callbackURL = this.app.util.getAbsoluteUrlByApiPath(callbackURLRelative);
     const link = combineQueries(callbackURL, { token });
     // siteName

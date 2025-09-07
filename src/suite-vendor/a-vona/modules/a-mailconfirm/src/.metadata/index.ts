@@ -71,6 +71,42 @@ export interface IModuleCacheRedis {
   'emailConfirm': CacheRedisEmailConfirm;
 }
 /** cacheRedis: end */
+/** event: begin */
+export * from '../bean/event.emailConfirmCallback.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-mailconfirm' {
+  
+        export interface EventEmailConfirmCallback {
+          /** @internal */
+          get scope(): ScopeModuleAMailconfirm;
+        }
+
+          export interface EventEmailConfirmCallback {
+            get $beanFullName(): 'a-mailconfirm.event.emailConfirmCallback';
+            get $onionName(): 'a-mailconfirm:emailConfirmCallback';
+          } 
+}
+/** event: end */
+/** event: begin */
+import type { EventEmailConfirmCallback } from '../bean/event.emailConfirmCallback.ts';
+export interface IModuleEvent {
+  'emailConfirmCallback': EventEmailConfirmCallback;
+}
+/** event: end */
+/** event: begin */
+import type { TypeEventEmailConfirmCallbackData, TypeEventEmailConfirmCallbackResult } from '../bean/event.emailConfirmCallback.ts';
+import type { EventOn } from 'vona-module-a-event'; 
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-mailconfirm:emailConfirmCallback': EventOn<TypeEventEmailConfirmCallbackData, TypeEventEmailConfirmCallbackResult>;
+  }
+}
+/** event: end */
 /** controller: begin */
 export * from '../controller/mail.ts';
 import type { IControllerOptionsMail } from '../controller/mail.ts';
@@ -107,8 +143,8 @@ declare module 'vona-module-a-mailconfirm' {
 }
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord{
-        '/mailconfirm/mail/emailConfirm': undefined;
-'/mailconfirm/mail/passwordReset': undefined;
+        '/mailconfirm/mail/emailConfirmCallback': undefined;
+'/mailconfirm/mail/passwordResetCallback': undefined;
     }
 
 }
@@ -133,6 +169,7 @@ export interface ScopeModuleAMailconfirm {
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 service: IModuleService;
 cacheRedis: IModuleCacheRedis;
+event: IModuleEvent;
 }
 
 import 'vona';
