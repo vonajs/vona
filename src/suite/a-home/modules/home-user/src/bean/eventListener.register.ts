@@ -12,11 +12,11 @@ export class EventListenerRegister
   extends BeanBase
   implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
-    // next
+    // next: registered
     const user = await next() as IUser;
-    // mail activate
+    // mail: activate
     if (!data.autoActivate && user.email) {
-      await this.scope.service.mail.emailConfirm(user);
+      await this.$scope.mailconfirm.service.mail.emailConfirm(user);
     }
     return user;
   }
