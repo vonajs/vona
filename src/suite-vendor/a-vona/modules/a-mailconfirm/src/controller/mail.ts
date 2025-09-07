@@ -16,7 +16,7 @@ export class ControllerMail extends BeanBase {
       await this.scope.cacheRedis.emailConfirm.del(token);
     }
     // emit
-    await this.scope.event.emailConfirmCallback.emit(data);
+    return await this.scope.event.emailConfirmCallback.emit(data);
   }
 
   @Web.get('passwordResetCallback')

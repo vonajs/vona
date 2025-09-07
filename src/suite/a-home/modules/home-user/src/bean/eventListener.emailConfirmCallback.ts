@@ -10,8 +10,15 @@ type TypeEventResult = TypeEventEmailConfirmCallbackResult;
 export class EventListenerEmailConfirmCallback
   extends BeanBase
   implements IEventExecute<TypeEventData, TypeEventResult> {
-  async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
-    // next
-    return next();
+  async execute(data: TypeEventData, _next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+    // check cache
+    if (!data) {
+      return this.scope.locale.ConfirmationEmailExpired();
+    }
+    // activate
+    const user = await this.bean.userInner.findOne({ id: data.userId });
+    await this.bean.userInner.activate(user!);
+    // ok
+    return this.scope.locale.ConfirmationEmailSucceeded();
   }
 }
