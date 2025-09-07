@@ -1,4 +1,7 @@
 export default {
+  ConfirmationEmailExpired: 'This email confirmation link has expired',
+  ConfirmationEmailSucceeded: 'Your email address has been confirmed',
+  PasswordResetEmailExpired: 'This password reset link has expired',
   Role: 'Role',
   RoleName: 'Role Name',
   User: 'User',

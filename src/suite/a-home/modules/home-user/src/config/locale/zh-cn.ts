@@ -1,4 +1,7 @@
 export default {
+  ConfirmationEmailExpired: '确认邮件链接已经过期',
+  ConfirmationEmailSucceeded: '您的邮件地址已经确认',
+  PasswordResetEmailExpired: '重置密码链接已经过期',
   Role: '角色',
   RoleName: '角色名',
   User: '用户',
