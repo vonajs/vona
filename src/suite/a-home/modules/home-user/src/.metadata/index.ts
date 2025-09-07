@@ -301,6 +301,7 @@ declare module 'vona' {
 /** eventListener: begin */
 export * from '../bean/eventListener.activate.ts';
 export * from '../bean/eventListener.emailConfirmCallback.ts';
+export * from '../bean/eventListener.passwordResetCallback.ts';
 export * from '../bean/eventListener.register.ts';
 
 import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
@@ -309,6 +310,7 @@ declare module 'vona-module-a-event' {
     export interface IEventListenerRecord {
       'home-user:activate': IDecoratorEventListenerOptions;
 'home-user:emailConfirmCallback': IDecoratorEventListenerOptions;
+'home-user:passwordResetCallback': IDecoratorEventListenerOptions;
 'home-user:register': IDecoratorEventListenerOptions;
     }
 
@@ -334,6 +336,16 @@ declare module 'vona-module-home-user' {
           export interface EventListenerEmailConfirmCallback {
             get $beanFullName(): 'home-user.eventListener.emailConfirmCallback';
             get $onionName(): 'home-user:emailConfirmCallback';
+          }
+
+        export interface EventListenerPasswordResetCallback {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface EventListenerPasswordResetCallback {
+            get $beanFullName(): 'home-user.eventListener.passwordResetCallback';
+            get $onionName(): 'home-user:passwordResetCallback';
           }
 
         export interface EventListenerRegister {
