@@ -96,15 +96,19 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     for (const order of params.orders) {
       const field = order[0] as string;
       if (field.includes('.')) continue;
-      let tableOfField = table;
+      let tableCurrent = table;
+      let fieldCurrent = field;
       const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, field));
       if (fieldSchema) {
         const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
         if (openapi?.query?.table) {
-          tableOfField = openapi?.query?.table;
+          tableCurrent = openapi?.query?.table;
+        }
+        if (openapi?.query?.originalName) {
+          fieldCurrent = openapi?.query?.originalName;
         }
       }
-      cast(order)[0] = `${tableOfField}.${field}`;
+      cast(order)[0] = `${tableCurrent}.${fieldCurrent}`;
     }
   }
 

@@ -16,6 +16,7 @@ describe('dtoQuery.test.ts', () => {
               _gt_: 12,
             },
           },
+          // orders: [['userName', 'asc']],
           // orders: [['testVonaPost.createdAt', 'asc']],
           pageNo: 2,
           pageSize: 30,
