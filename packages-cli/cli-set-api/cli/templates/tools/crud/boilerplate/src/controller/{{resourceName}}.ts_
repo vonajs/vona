@@ -28,9 +28,6 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   @Web.get()
   @Api.body(Dto<%=argv.resourceNameCapitalize%>QueryRes)
   async findMany(@Arg.queryPro(Dto<%=argv.resourceNameCapitalize%>Query) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
-    if (!params.orders) {
-      params.orders = [['<%=argv.moduleResourceName%>.createdAt', 'desc']];
-    }
     return await this.scope.service.<%=argv.resourceName%>.findMany(params);
   }
 

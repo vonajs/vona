@@ -23,9 +23,6 @@ export class ControllerPost extends BeanBase {
   @Api.body(DtoPostQueryRes)
   @Passport.public()
   async findMany(@Arg.queryPro(DtoPostQuery) params: IQueryParams<ModelPost>) {
-    if (!params.orders) {
-      params.orders = [['testVonaPost.createdAt', 'desc']];
-    }
     return await this.scope.service.post.findMany(params);
   }
 }

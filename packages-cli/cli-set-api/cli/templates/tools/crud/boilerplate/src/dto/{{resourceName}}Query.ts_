@@ -5,5 +5,7 @@ import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resour
 
 export interface IDtoOptions<%=argv.resourceNameCapitalize%>Query extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Query>()
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Query>({
+  openapi: { query: { table: $tableName(Entity<%=argv.resourceNameCapitalize%>) } },
+})
 export class Dto<%=argv.resourceNameCapitalize%>Query extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name']) {}
