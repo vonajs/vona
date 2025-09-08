@@ -6,6 +6,7 @@ export interface ISchemaObjectExtensionFieldQueryJoin {
   on: [string, string];
 }
 export interface ISchemaObjectExtensionFieldQuery {
+  table?: string;
   join?: ISchemaObjectExtensionFieldQueryJoin;
   originalName?: string;
   op?: TypeOpsNormal;
