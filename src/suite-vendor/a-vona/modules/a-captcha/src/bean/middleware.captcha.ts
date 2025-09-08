@@ -1,22 +1,24 @@
 import type { Next } from 'vona';
-import type { IDecoratorMiddlewareOptions, IMiddlewareExecute } from 'vona-module-a-aspect';
+import type { IDecoratorMiddlewareOptionsGlobal, IMiddlewareExecute } from 'vona-module-a-aspect';
 import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts';
 import type { ICaptchaSceneRecord } from '../types/captchaScene.ts';
 import { BeanBase } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
 
-export interface IMiddlewareOptionsCaptcha extends IDecoratorMiddlewareOptions {
+export interface IMiddlewareOptionsCaptcha extends IDecoratorMiddlewareOptionsGlobal {
   scene?: keyof ICaptchaSceneRecord;
   bodyField?: string;
 }
 
 @Middleware<IMiddlewareOptionsCaptcha>({
+  global: true,
+  dependencies: 'a-instance:instance',
   bodyField: 'captcha',
 })
 export class MiddlewareCaptcha extends BeanBase implements IMiddlewareExecute {
   async execute(options: IMiddlewareOptionsCaptcha, next: Next) {
     const sceneName = options.scene;
-    if (!sceneName) throw new Error('please specify the captcha scene name');
+    if (!sceneName) return next();
     // captcha
     const bodyField = options.bodyField!;
     const captcha: DtoCaptchaVerify | undefined = this.ctx.request.body[bodyField];
