@@ -7,17 +7,17 @@ export interface IDtoOptionsRegister extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsRegister>()
 export class DtoRegister {
-  @Api.field()
+  @Api.field(v.min(3))
   username: string;
+
+  @Api.field(v.email())
+  email: string;
 
   @Api.field(v.min(6))
   password: string;
 
   @Api.field(v.min(6))
   passwordAgain: string;
-
-  @Api.field(v.email())
-  email: string;
 
   @Api.field()
   captcha: DtoCaptchaVerify;
