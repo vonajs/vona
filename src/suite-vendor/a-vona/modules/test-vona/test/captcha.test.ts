@@ -8,7 +8,7 @@ describe('captcha.test.ts', () => {
   // scene/provider
   const sceneName = 'a-captchasimple:simple';
   const providerName = 'a-captchasimple:imageText';
-  it('action:captcha', async () => {
+  it('action:captcha:error', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create
       const captcha = await app.bean.captcha.create(sceneName);
@@ -23,7 +23,22 @@ describe('captcha.test.ts', () => {
       assert.equal(verifiedFalse, false);
       // verify: false
       const verifiedFalse2 = await app.bean.captcha.verify(captcha.id, token, sceneName);
-      assert.equal(verifiedFalse2, true);
+      assert.equal(verifiedFalse2, false);
+    });
+  });
+  it('action:captcha:ok', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      // create
+      const captcha = await app.bean.captcha.create(sceneName);
+      assert.equal(captcha.provider, providerName);
+      // get
+      const captchaData = await app.bean.captcha.getCaptchaData(captcha.id);
+      assert.equal(captchaData?.provider, providerName);
+      // token
+      const token = captchaData?.token;
+      // verify: true
+      const verifiedTrue = await app.bean.captcha.verify(captcha.id, token, sceneName);
+      assert.equal(verifiedTrue, true);
     });
   });
   it('action:captcha api:error', async () => {
