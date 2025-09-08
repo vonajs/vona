@@ -91,7 +91,6 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema);
     const table = openapi?.query?.table;
-    if (!table) return;
     // loop
     for (const order of params.orders) {
       const field = order[0] as string;
@@ -108,7 +107,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
           fieldCurrent = openapi?.query?.originalName;
         }
       }
-      cast(order)[0] = `${tableCurrent}.${fieldCurrent}`;
+      cast(order)[0] = tableCurrent ? `${tableCurrent}.${fieldCurrent}` : fieldCurrent;
     }
   }
 

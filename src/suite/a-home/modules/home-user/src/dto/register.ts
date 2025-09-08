@@ -17,7 +17,7 @@ export class DtoRegister {
   password: string;
 
   @Api.field(v.min(6))
-  passwordAgain: string;
+  passwordConfirm: string;
 
   @Api.field()
   captcha: DtoCaptchaVerify;
