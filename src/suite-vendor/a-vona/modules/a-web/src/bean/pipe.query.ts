@@ -203,4 +203,4 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   }
 }
 
-export const ArgQuery = createArgumentPipe('a-web:query');
+export const ArgQueryPro = createArgumentPipe('a-web:query');

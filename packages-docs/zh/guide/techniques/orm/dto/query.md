@@ -219,6 +219,66 @@ Query Transform 返回值有以下几种：
 
 我们也可以为`Query Transform`提供自定义名称，比如：`myCustomQueryTransform`
 
-``` typescript
+``` diff
+class ControllerOrder {
++ myCustomQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++   if (info.key === 'userName') {
++     info.params.where![info.fullName] = info.value;
++     return true;
++   }
++   return undefined;
++ }
+
+  @Web.get('findAll')
+  @Api.body(v.array(DtoOrderResult))
+  async findAll(
++   @ArgQueryPro({
++     type: 'query',
++     schema: $schema(DtoOrderQuery),
++     transformFn: 'myCustomQueryTransform',
++   }) params: IQueryParams<ModelOrder>,
+  ): Promise<DtoOrderResult[]> {
+    return this.scope.model.order.select({
+      ...params,
+      include: {
+        products: true,
+      },
+    });
+  }
+}
 ```
 
+- `@ArgQueryPro`：对 Query 参数进行 transform 的 Pipe，传入参数`transformFn`
+
+### 3. 自定义函数
+
+也可以直接为参数`transformFn`提供自定义函数：
+
+``` diff
++ function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++   if (info.key === 'userName') {
++     info.params.where![info.fullName] = info.value;
++     return true;
++   }
++   return undefined;
++ }
+
+class ControllerOrder {
+  @Web.get('findAll')
+  @Api.body(v.array(DtoOrderResult))
+  async findAll(
++   @ArgQueryPro({
++     type: 'query',
++     schema: $schema(DtoOrderQuery),
++     transformFn: myCustomQueryTransform,
++   }) params: IQueryParams<ModelOrder>,
+  ): Promise<DtoOrderResult[]> {
+    return this.scope.model.order.select({
+      ...params,
+      include: {
+        products: true,
+      },
+    });
+  }
+}
+```
