@@ -1,4 +1,5 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+import { DtoCaptchaVerify } from 'vona-module-a-captcha';
 import { Api } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 
@@ -11,4 +12,7 @@ export class DtoLogin {
 
   @Api.field()
   password: string;
+
+  @Api.field()
+  captcha: DtoCaptchaVerify;
 }
