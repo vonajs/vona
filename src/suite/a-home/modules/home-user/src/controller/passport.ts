@@ -44,14 +44,14 @@ export class ControllerPassport extends BeanBase {
   @Passport.public()
   @Aspect.middleware('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
-  async loginSimple(@Arg.body() data: DtoRegister): Promise<DtoPassportJwt> {
+  async login(@Arg.body() data: DtoRegister): Promise<DtoPassportJwt> {
     const jwt = await this.bean.authSimple.authenticate(data, 'login', 'default');
     return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('login/:module/:providerName/:clientName?')
   @Passport.public()
-  async login<T extends keyof IAuthProviderRecord>(
+  async loginOauth<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
     @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
