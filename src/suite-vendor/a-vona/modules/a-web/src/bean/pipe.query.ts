@@ -92,14 +92,12 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     const originalName = openapi?.query?.originalName ?? key;
     let fullName: string;
     // joins
+    let joinInfo;
     if (openapi?.query?.join) {
-      if (!params.joins)params.joins = [];
       const joinType = openapi.query.join.type ?? 'innerJoin';
       const joinTable = openapi.query.join.table;
       const joinOn = openapi.query.join.on;
-      if (params.joins.findIndex(item => item[1] === joinTable) === -1) {
-        params.joins.push([joinType, joinTable, joinOn] as any);
-      }
+      joinInfo = [joinType, joinTable, joinOn];
       fullName = `${joinTable}.${originalName}`;
     } else {
       fullName = originalName;
@@ -118,7 +116,17 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
       schema: fieldSchema,
       openapi,
     });
-    if (resTransform === true || resTransform === false) return;
+    // res: ignore
+    if (resTransform === false) return;
+    // join
+    if (joinInfo) {
+      if (!params.joins) params.joins = [];
+      if (params.joins.findIndex(item => item[1] === joinInfo.joinTable) === -1) {
+        params.joins.push(joinInfo);
+      }
+    }
+    // res: done
+    if (resTransform === true) return;
     // default transform
     let op = openapi?.query?.op;
     if (!op) {
