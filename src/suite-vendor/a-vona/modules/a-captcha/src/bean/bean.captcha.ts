@@ -65,9 +65,7 @@ export class BeanCaptcha extends BeanBase {
     const tokenSecondary = captchaData.token2;
     if (tokenSecondary) {
       // delete cache
-      this.ctx.commit(async () => {
-        await this.scope.cacheRedis.captcha.del(id);
-      });
+      await this.scope.cacheRedis.captcha.del(id);
       return tokenSecondary === token;
     }
     // provider
@@ -80,9 +78,7 @@ export class BeanCaptcha extends BeanBase {
       return false;
     }
     // delete cache
-    this.ctx.commit(async () => {
-      await this.scope.cacheRedis.captcha.del(id);
-    });
+    await this.scope.cacheRedis.captcha.del(id);
     // ok
     return true;
   }
