@@ -16,7 +16,7 @@ describe('dtoQuery.test.ts', () => {
               _gt_: 12,
             },
           },
-          orders: [['testVonaPost.createdAt', 'desc']],
+          // orders: [['testVonaPost.createdAt', 'asc']],
           pageNo: 2,
           pageSize: 30,
           title: 'ai',

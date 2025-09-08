@@ -6,7 +6,7 @@ import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-query';
-import { BeanBase, HttpStatus } from 'vona';
+import { BeanBase, cast, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
@@ -51,7 +51,11 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     // 1. system: columns/where/orders/pageNo/pageSize
     const params = this._transformSystem(value);
     // 2. fields
-    return this._transformFields(params, value, options);
+    this._transformFields(params, value, options);
+    // 3. system: orders
+    this._transformOrders(params, options);
+    // ok
+    return params;
   }
 
   // system: columns/where/orders/pageNo/pageSize
@@ -80,6 +84,20 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     }
     // ok
     return params;
+  }
+
+  private _transformOrders(params: IQueryParams, options: IPipeOptionsQuery) {
+    if (!params.orders) return;
+    // openapi
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema);
+    const table = openapi?.query?.table;
+    if (!table) return;
+    // loop
+    for (const order of params.orders) {
+      const field = order[0] as string;
+      if (field.includes('.')) continue;
+      cast(order)[0] = `${table}.${field}`;
+    }
   }
 
   private _transformField(key: string, fieldValue: any, params: IQueryParams, value: any, options: IPipeOptionsQuery) {
@@ -151,8 +169,6 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     }
     // custom transform
     this._performTransformFn(options, { params, query: value, options });
-    // ok
-    return params;
   }
 
   private _performTransformFn(options: IPipeOptionsQuery, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
