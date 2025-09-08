@@ -11,7 +11,7 @@ export interface IControllerOptionsCaptcha extends IDecoratorControllerOptions {
 export class ControllerCaptcha extends BeanBase {
   @Web.post('signin')
   @Passport.public()
-  @Aspect.middlewareGlobal('a-captcha:captcha', { scene: 'a-captchasimple:simple' })
+  @Aspect.middlewareGlobal('a-captcha:captchaVerify', { scene: 'a-captchasimple:simple' })
   async signin(@Arg.body() _user: DtoSignin) {
   }
 }
