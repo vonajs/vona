@@ -21,6 +21,10 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
     return await this.scope.service.<%=argv.resourceName%>.create(<%=argv.resourceName%>);
   }
 
+  findManyQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+    return undefined;
+  }
+
   @Web.get()
   @Api.body(Dto<%=argv.resourceNameCapitalize%>QueryRes)
   async findMany(@Arg.queryPro(Dto<%=argv.resourceNameCapitalize%>Query) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
