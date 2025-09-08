@@ -57,7 +57,7 @@ export class BeanCaptcha extends BeanBase {
   }
 
   async verify(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
-    const captchaData = await this.getCaptchaData(id);
+    let captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
     // scene
     if (captchaData.scene !== sceneName) return false;
@@ -72,9 +72,16 @@ export class BeanCaptcha extends BeanBase {
     const beanInstance = this._getProviderInstance(captchaData.provider);
     const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
     // verify
+    if (!captchaData.token) return false;
     const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
     if (!verified) {
-      // do not mutate cache
+      // update token. not delete cache for refresh
+      captchaData = { ...captchaData, token: undefined };
+      await this.scope.cacheRedis.captcha.set(
+        captchaData,
+        id,
+        { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl },
+      );
       return false;
     }
     // delete cache
@@ -86,6 +93,7 @@ export class BeanCaptcha extends BeanBase {
   async verifyImmediate(id: string, token: unknown): Promise<false | string> {
     let captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
+    if (!captchaData.token) return false;
     // tokenSecondary
     let tokenSecondary = captchaData.token2;
     if (tokenSecondary) return tokenSecondary; // maybe called more times
@@ -95,8 +103,13 @@ export class BeanCaptcha extends BeanBase {
     // verify
     const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
     if (!verified) {
-      // delete cache
-      await this.scope.cacheRedis.captcha.del(id);
+      // update token. not delete cache for refresh
+      captchaData = { ...captchaData, token: undefined };
+      await this.scope.cacheRedis.captcha.set(
+        captchaData,
+        id,
+        { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl },
+      );
       return false;
     }
     // tokenSecondary
