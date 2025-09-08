@@ -1,6 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 import type { IQueryParams } from 'vona-module-a-orm';
-import type { IDecoratorControllerOptions, IPipeOptionsQueryTransformInfo } from 'vona-module-a-web';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
@@ -19,10 +19,6 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   @Api.body(v.object(Entity<%=argv.resourceNameCapitalize%>))
   async create(@Arg.body() <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Create): Promise<Entity<%=argv.resourceNameCapitalize%>> {
     return await this.scope.service.<%=argv.resourceName%>.create(<%=argv.resourceName%>);
-  }
-
-  findManyQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {
-    return undefined;
   }
 
   @Web.get()

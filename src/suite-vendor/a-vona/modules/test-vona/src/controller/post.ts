@@ -1,5 +1,5 @@
 import type { IQueryParams } from 'vona-module-a-orm';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { IDecoratorControllerOptions, IPipeOptionsQueryTransformInfo } from 'vona-module-a-web';
 import type { ModelPost } from '../model/post.ts';
 import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
@@ -17,6 +17,10 @@ export class ControllerPost extends BeanBase {
   @Passport.public()
   findManyEcho(@Arg.queryPro(DtoPostQuery) params: IQueryParams<ModelPost>) {
     return params;
+  }
+
+  findManyQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+    return undefined;
   }
 
   @Web.get('findMany')
