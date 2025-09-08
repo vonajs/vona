@@ -1,5 +1,5 @@
 import type { IQueryParams } from 'vona-module-a-orm';
-import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import type { IDecoratorControllerOptions, IPipeOptionsQueryTransformInfo } from 'vona-module-a-web';
 import type { ModelOrder } from '../model/order.ts';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
@@ -18,10 +18,18 @@ export class ControllerOrder extends BeanBase {
     return await this.scope.model.order.insert(data);
   }
 
+  myCustomQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+    if (info.key === 'userName') {
+      info.params.where![info.fullName] = info.value;
+      return true;
+    }
+    return undefined;
+  }
+
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-    @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
+    @Arg.queryPro(DtoOrderQuery, 'myCustomQueryTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,

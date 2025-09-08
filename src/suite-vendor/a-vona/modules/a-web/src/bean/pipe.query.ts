@@ -17,8 +17,8 @@ export interface IPipeOptionsQueryTransformInfo {
   params: IQueryParams;
   query: any;
   options: IPipeOptionsQuery;
-  originalName?: string;
-  fullName?: string;
+  originalName: string;
+  fullName: string;
   key?: string;
   value?: any;
   schema?: z.ZodSchema;
@@ -179,7 +179,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
       this._transformField(key, value[key], params, value, options);
     }
     // custom transform
-    this._performTransformFn(options, { params, query: value, options });
+    this._performTransformFn(options, { params, query: value, options } as IPipeOptionsQueryTransformInfo);
   }
 
   private _performTransformFn(options: IPipeOptionsQuery, info: IPipeOptionsQueryTransformInfo): boolean | undefined {

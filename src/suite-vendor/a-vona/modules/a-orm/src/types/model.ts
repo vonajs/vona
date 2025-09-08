@@ -10,14 +10,14 @@ export type TypeModelCacheType = 'query' | 'entity';
 
 // join
 export type IModelSelectParamsJoinType =
-  | 'join'
-  | 'innerJoin'
-  | 'leftJoin'
-  | 'leftOuterJoin'
-  | 'rightJoin'
-  | 'rightOuterJoin'
-  | 'fullOuterJoin'
-  | 'crossJoin';
+  | 'join' |
+  'innerJoin' |
+  'leftJoin' |
+  'leftOuterJoin' |
+  'rightJoin' |
+  'rightOuterJoin' |
+  'fullOuterJoin' |
+  'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
 export type IModelSelectParamsJoin<TRecord, TableNames = undefined, ColumnNames = keyof TRecord> =
   [
