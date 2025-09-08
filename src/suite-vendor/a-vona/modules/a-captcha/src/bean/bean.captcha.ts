@@ -94,9 +94,6 @@ export class BeanCaptcha extends BeanBase {
     let captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
     if (!captchaData.token) return false;
-    // tokenSecondary
-    let tokenSecondary = captchaData.token2;
-    if (tokenSecondary) return tokenSecondary; // maybe called more times
     // provider
     const beanInstance = this._getProviderInstance(captchaData.provider);
     const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
@@ -113,7 +110,7 @@ export class BeanCaptcha extends BeanBase {
       return false;
     }
     // tokenSecondary
-    tokenSecondary = uuidv4();
+    const tokenSecondary = uuidv4();
     captchaData = { ...captchaData, token: undefined, token2: tokenSecondary };
     // update cache
     await this.scope.cacheRedis.captcha.set(
