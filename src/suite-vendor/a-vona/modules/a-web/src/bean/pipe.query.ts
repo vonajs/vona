@@ -10,7 +10,7 @@ import { BeanBase, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
-  transform?: TypePipeOptionsQueryTransform;
+  transformFn?: TypePipeOptionsQueryTransform | string;
 }
 
 export interface IPipeOptionsQueryTransformInfo {
@@ -107,20 +107,18 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     // check where
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
     // custom transform
-    if (options.transform) {
-      const res = options.transform(this.ctx, {
-        params,
-        query: value,
-        options,
-        originalName,
-        fullName,
-        key,
-        value: fieldValue,
-        schema: fieldSchema,
-        openapi,
-      });
-      if (res === true || res === false) return;
-    }
+    const resTransform = this._performTransformFn(options, {
+      params,
+      query: value,
+      options,
+      originalName,
+      fullName,
+      key,
+      value: fieldValue,
+      schema: fieldSchema,
+      openapi,
+    });
+    if (resTransform === true || resTransform === false) return;
     // default transform
     let op = openapi?.query?.op;
     if (!op) {
@@ -144,11 +142,29 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
       this._transformField(key, value[key], params, value, options);
     }
     // custom transform
-    if (options.transform) {
-      options.transform(this.ctx, { params, query: value, options });
-    }
+    this._performTransformFn(options, { params, query: value, options });
     // ok
     return params;
+  }
+
+  private _performTransformFn(options: IPipeOptionsQuery, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+    if (options.transformFn) {
+      if (typeof options.transformFn === 'string') {
+        const controller = this.ctx.getControllerBean();
+        if (!controller[options.transformFn]) {
+          throw new Error(`transformFn not found: ${this.ctx.getControllerBeanFullName()}`);
+        }
+        return controller[options.transformFn](info);
+      } else {
+        return options.transformFn(this.ctx, info);
+      }
+    } else {
+      const controller = this.ctx.getControllerBean();
+      const transformFn = `${String(this.ctx.getHandlerName())}QueryTransform`;
+      if (controller[transformFn]) {
+        return controller[transformFn](info);
+      }
+    }
   }
 }
 

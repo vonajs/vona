@@ -171,9 +171,8 @@ export class BeanRouter extends BeanBase {
 }
 
 function classControllerMiddleware(ctx: VonaContext) {
-  const beanFullName = ctx.getControllerBeanFullName();
-  const handlerName = ctx.getHandler()!.name;
-  const controller = ctx.app.bean._getBean(beanFullName as any) as any;
+  const handlerName = ctx.getHandlerName()!;
+  const controller = ctx.getControllerBean();
   return controller[handlerName](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
 }
 

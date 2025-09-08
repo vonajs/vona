@@ -16,6 +16,7 @@ export interface ContextBase {
   set ctxCaller(value: VonaContext);
   getController: () => Constructable | undefined;
   getControllerPrototype: () => object | undefined;
+  getControllerBean: <T = any>() => T | undefined;
   getControllerBeanFullName: () => string | undefined;
   getHandler: () => Function | undefined;
   getHandlerName: () => MetadataKey | undefined;

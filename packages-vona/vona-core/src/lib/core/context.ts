@@ -65,6 +65,13 @@ export const contextBase: ContextBase = {
     return controller.prototype;
   },
 
+  getControllerBean<T = any>(): T | undefined {
+    const self = cast<VonaContext>(this);
+    const beanFullName = self.getControllerBeanFullName();
+    if (!beanFullName) return;
+    return self.app.bean._getBean(beanFullName as any);
+  },
+
   getControllerBeanFullName(): string | undefined {
     const self = cast<VonaContext>(this);
     const controller = self.getController();
