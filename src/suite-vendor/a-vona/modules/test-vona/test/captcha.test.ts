@@ -21,9 +21,9 @@ describe('captcha.test.ts', () => {
       // verify: false
       const verifiedFalse = await app.bean.captcha.verify(captcha.id, `${token}!`, sceneName);
       assert.equal(verifiedFalse, false);
-      // verify: true
-      const verifiedTrue = await app.bean.captcha.verify(captcha.id, token, sceneName);
-      assert.equal(verifiedTrue, true);
+      // verify: false
+      const verifiedFalse2 = await app.bean.captcha.verify(captcha.id, token, sceneName);
+      assert.equal(verifiedFalse2, true);
     });
   });
   it('action:captcha api:error', async () => {
