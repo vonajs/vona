@@ -7,11 +7,11 @@ import type { IMiddlewareOptionsCaptcha } from '../bean/middleware.captcha.ts';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
-  
-export interface IMiddlewareRecordLocal {
-  'a-captcha:captcha': IMiddlewareOptionsCaptcha;
-}
+    export interface IMiddlewareRecordGlobal {
+      'a-captcha:captcha': IMiddlewareOptionsCaptcha;
+    }
 
+  
 }
 declare module 'vona-module-a-captcha' {
   
