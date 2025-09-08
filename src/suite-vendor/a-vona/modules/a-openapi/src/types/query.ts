@@ -7,7 +7,8 @@ export interface ISchemaObjectExtensionFieldQueryJoin {
 }
 export interface ISchemaObjectExtensionFieldQuery {
   table?: string;
-  join?: ISchemaObjectExtensionFieldQueryJoin;
+  joinType?: IModelSelectParamsJoinType;
+  joinOn?: [string, string];
   originalName?: string;
   op?: TypeOpsNormal;
 }

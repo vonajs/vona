@@ -111,10 +111,10 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     let fullName: string;
     // joins
     let joinInfo;
-    if (openapi?.query?.join) {
-      const joinType = openapi.query.join.type ?? 'innerJoin';
-      const joinTable = openapi.query.join.table;
-      const joinOn = openapi.query.join.on;
+    if (openapi?.query?.joinOn) {
+      const joinType = openapi.query.joinType ?? 'innerJoin';
+      const joinTable = openapi.query.table;
+      const joinOn = openapi.query.joinOn;
       joinInfo = [joinType, joinTable, joinOn];
       fullName = `${joinTable}.${originalName}`;
     } else {

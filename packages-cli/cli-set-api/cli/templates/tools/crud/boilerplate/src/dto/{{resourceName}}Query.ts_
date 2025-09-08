@@ -1,5 +1,5 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import { $Dto } from 'vona-module-a-orm';
+import { $Dto, $tableName } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
 

@@ -12,11 +12,8 @@ export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}
 export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {
   @Api.field(v.optional(), v.openapi({
     query: {
-      join: {
-        type: 'innerJoin',
-        table: 'testVonaUser',
-        on: ['userId', 'testVonaUser.id'],
-      },
+      table: 'testVonaUser',
+      joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
       op: '_eq_',
     },
