@@ -2,27 +2,27 @@
 import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** middleware: begin */
-export * from '../bean/middleware.captcha.ts';
-import type { IMiddlewareOptionsCaptcha } from '../bean/middleware.captcha.ts';
+export * from '../bean/middleware.captchaVerify.ts';
+import type { IMiddlewareOptionsCaptchaVerify } from '../bean/middleware.captchaVerify.ts';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareRecordGlobal {
-      'a-captcha:captcha': IMiddlewareOptionsCaptcha;
+      'a-captcha:captchaVerify': IMiddlewareOptionsCaptchaVerify;
     }
 
   
 }
 declare module 'vona-module-a-captcha' {
   
-        export interface MiddlewareCaptcha {
+        export interface MiddlewareCaptchaVerify {
           /** @internal */
           get scope(): ScopeModuleACaptcha;
         }
 
-          export interface MiddlewareCaptcha {
-            get $beanFullName(): 'a-captcha.middleware.captcha';
-            get $onionName(): 'a-captcha:captcha';
+          export interface MiddlewareCaptchaVerify {
+            get $beanFullName(): 'a-captcha.middleware.captchaVerify';
+            get $onionName(): 'a-captcha:captchaVerify';
           } 
 }
 /** middleware: end */
