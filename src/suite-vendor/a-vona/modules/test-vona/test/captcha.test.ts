@@ -56,9 +56,19 @@ describe('captcha.test.ts', () => {
         });
       });
       assert.equal(error?.code, 403);
+      // verifyImmediate: error again
+      const [_2, error2] = await catchError(() => {
+        return app.bean.executor.performAction('post', '/captcha/verifyImmediate', {
+          body: {
+            id: captcha2.id,
+            token: captchaData?.token,
+          },
+        });
+      });
+      assert.equal(error2?.code, 403);
     });
   });
-  it.only('action:captcha api:ok', async () => {
+  it('action:captcha api:ok', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create
       const captcha: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/create', {

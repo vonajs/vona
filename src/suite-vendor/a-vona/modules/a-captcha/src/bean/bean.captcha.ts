@@ -95,7 +95,8 @@ export class BeanCaptcha extends BeanBase {
     // verify
     const verified = await beanInstance.verify(captchaData.token, token, providerOptions);
     if (!verified) {
-      // do not mutate cache
+      // delete cache
+      await this.scope.cacheRedis.captcha.del(id);
       return false;
     }
     // tokenSecondary
