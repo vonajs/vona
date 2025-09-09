@@ -13,6 +13,6 @@ export class DtoLogin {
   @Api.field(v.min(6))
   password: string;
 
-  @Api.field()
+  @Api.field(v.openapi({ captcha: { scene: 'a-captchasimple:simple' } }))
   captcha: DtoCaptchaVerify;
 }
