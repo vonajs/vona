@@ -1,6 +1,6 @@
 import type { IInstanceRecord } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.ts';
+import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute, IStartupRecord } from '../types/startup.ts';
 import path from 'node:path';
 import { isNil } from '@cabloy/utils';
 import fse from 'fs-extra';
@@ -100,8 +100,8 @@ export class ServiceStartup extends BeanBase {
     );
   }
 
-  async _runStartupLock(
-    startup: IOnionSlice<IDecoratorStartupOptions>,
+  async _runStartupLock<T extends keyof IStartupRecord>(
+    startup: IOnionSlice<IStartupRecord, T>,
     instanceName?: keyof IInstanceRecord | null,
     options?: IInstanceStartupOptions,
   ) {
@@ -119,8 +119,8 @@ export class ServiceStartup extends BeanBase {
     await this._runStartupInner(startup, instanceName, options);
   }
 
-  async _runStartupInner(
-    startup: IOnionSlice<IDecoratorStartupOptions>,
+  async _runStartupInner<T extends keyof IStartupRecord>(
+    startup: IOnionSlice<IStartupRecord, T>,
     instanceName?: keyof IInstanceRecord | null,
     options?: IInstanceStartupOptions,
   ) {
