@@ -3,7 +3,6 @@ import type { CurrencyOptions } from '@zhennann/currency';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z, ZodTypeAny } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
-import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
 import type { IComponentRecord } from './component.ts';
 import type { ISchemaObjectExtensionFieldQuery } from './query.ts';
 import 'openapi3-ts/oas30';
@@ -21,7 +20,6 @@ export interface ISchemaObjectExtensionFieldRest {
 export interface ISchemaObjectExtensionField {
   rest?: ISchemaObjectExtensionFieldRest;
   query?: ISchemaObjectExtensionFieldQuery;
-  captcha?: ISchemaObjectExtensionFieldCaptcha;
 }
 
 declare module 'openapi3-ts/oas30' {
