@@ -12,6 +12,8 @@ export const OpJoint = {
 export const OpNormal = {
   eq: '_eq_',
   notEq: '_notEq_',
+  eqI: '_eqI_',
+  notEqI: '_notEqI_',
   gt: '_gt_',
   gte: '_gte_',
   lt: '_lt_',
@@ -54,8 +56,8 @@ export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Col
 
 export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> =
   Columns extends {} ? TypeModelWhereInner<Columns> : TypeModelWhereInner<TRecord>;
-  // not use Knex.Raw
-  // Columns extends {} ? TypeModelWhereInner<Columns> | Knex.Raw : TypeModelWhereInner<TRecord> | Knex.Raw;
+// not use Knex.Raw
+// Columns extends {} ? TypeModelWhereInner<Columns> | Knex.Raw : TypeModelWhereInner<TRecord> | Knex.Raw;
 
 export type TypeModelWhereInner<TRecord> = {
   [prop in keyof TRecord]?: TypeModelColumnValue<TRecord, TRecord[prop]> | TypeModelWhereFieldAll<TRecord, TRecord[prop]>;
@@ -76,6 +78,6 @@ export type TypeModelWhereFieldJoint<TRecord, Column> = {
 export type TypeModelColumn<TRecord> = keyof TRecord | '*';
 export type TypeModelColumns<TRecord> = TypeModelColumn<TRecord> | Array<TypeModelColumn<TRecord>>;
 export type TypeModelColumnPatch<TRecord, TColumn> = TColumn extends '*' ? TypeModelColumn<TRecord> : TColumn;
-export type TypeModelColumnsPatch<TRecord, TColumn> = [TColumn] extends [string] ?
-    (TypeModelColumnPatch<TRecord, TColumn> | Array<TypeModelColumnPatch<TRecord, TColumn>>) : TColumn;
+export type TypeModelColumnsPatch<TRecord, TColumn> = [TColumn] extends [string]
+  ? (TypeModelColumnPatch<TRecord, TColumn> | Array<TypeModelColumnPatch<TRecord, TColumn>>) : TColumn;
 export type TypeModelColumnsStrict<TRecord> = keyof TRecord | Array<keyof TRecord>;

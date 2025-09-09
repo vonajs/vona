@@ -158,6 +158,12 @@ function _buildWhereColumnOpNormal<TRecord>(
     builder[having ? 'having' : 'where'](column, '=', value);
   } else if (op === Op.notEq) {
     builder[having ? 'having' : 'where'](column, '<>', value);
+  } else if (op === Op.eqI) {
+    builder[having ? 'havingILike' : 'whereILike'](column, value);
+  } else if (op === Op.notEqI) {
+    builder[having ? 'havingNot' : 'whereNot']((builder: Knex.QueryBuilder) => {
+      builder[having ? 'havingILike' : 'whereILike'](column, value);
+    });
   } else if (op === Op.gt) {
     builder[having ? 'having' : 'where'](column, '>', value);
   } else if (op === Op.gte) {

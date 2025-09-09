@@ -15,7 +15,7 @@ export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {
       table: 'testVonaUser',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
-      op: '_eq_',
+      op: '_eqI_',
     },
   }))
   userName?: string;
