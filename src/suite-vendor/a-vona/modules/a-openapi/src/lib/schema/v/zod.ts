@@ -1,9 +1,9 @@
 import type { IZodRefineRecord } from 'vona-module-a-zod';
 import type z from 'zod';
 
-export function schemaZodRefine<T extends keyof IZodRefineRecord>(zodRefineName: T, options?: Partial<IZodRefineRecord[T]>) {
+export function schemaZodRefine<T extends keyof IZodRefineRecord>(_zodRefineName: T, _options?: Partial<IZodRefineRecord[T]>) {
   return function (schema: z.ZodSchema): z.ZodSchema {
-    return schema.superRefine(async (value, refinementCtx) => {
+    return schema.superRefine(async (value, _refinementCtx) => {
       console.log(value);
     });
   };
