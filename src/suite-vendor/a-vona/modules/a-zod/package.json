@@ -4,7 +4,14 @@
   "version": "5.0.0",
   "title": "a-zod",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "zodRefine": {
+        "optionsGlobalInterfaceName": "IDecoratorZodRefineOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-zod",
+        "boilerplate": "cli/zodRefine/boilerplate"
+      }
+    }
   },
   "description": "",
   "author": "",
