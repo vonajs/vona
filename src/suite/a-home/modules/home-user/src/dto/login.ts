@@ -7,7 +7,7 @@ export interface IDtoOptionsLogin extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsLogin>()
 export class DtoLogin {
-  @Api.field()
+  @Api.field(v.min(3))
   username: string;
 
   @Api.field(v.min(6))
