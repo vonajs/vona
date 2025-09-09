@@ -507,12 +507,12 @@ export interface IApiPathPostRecord{
 /** controller: end */
 /** zodRefine: begin */
 export * from '../bean/zodRefine.usernameUnique.ts';
-
-import { type IDecoratorZodRefineOptions } from 'vona-module-a-zod';
+import type { IZodRefineOptionsUsernameUnique } from '../bean/zodRefine.usernameUnique.ts';
+import 'vona';
 declare module 'vona-module-a-zod' {
   
     export interface IZodRefineRecord {
-      'home-user:usernameUnique': IDecoratorZodRefineOptions;
+      'home-user:usernameUnique': IZodRefineOptionsUsernameUnique;
     }
 
   
