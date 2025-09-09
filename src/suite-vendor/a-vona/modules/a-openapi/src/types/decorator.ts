@@ -25,22 +25,22 @@ export interface RouteHandlerArgumentMeta {
 }
 
 export type RouteHandlerArgumentType =
-  | 'request'
-  | 'response'
-  | 'body'
-  | 'query'
-  | 'param'
-  | 'headers'
-  | 'session'
-  | 'fields'
-  | 'field'
-  | 'files'
-  | 'file'
-  | 'host'
-  | 'ip'
-  | 'rawBody'
-  | 'string'
-  | 'user';
+  | 'request' |
+  'response' |
+  'body' |
+  'query' |
+  'param' |
+  'headers' |
+  'session' |
+  'fields' |
+  'field' |
+  'files' |
+  'file' |
+  'host' |
+  'ip' |
+  'rawBody' |
+  'string' |
+  'user';
 
 export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
 export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgumentsValue');

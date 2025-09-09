@@ -1,6 +1,6 @@
 import type { MetadataKey } from 'vona';
 import type { RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
-import type { IPipeRecord } from '../../types/pipe.ts';
+import type { IDecoratorPipeOptionsArgument, IPipeRecord } from '../../types/pipe.ts';
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import { SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapi';
@@ -30,7 +30,7 @@ export function createArgumentPipe<T extends keyof IPipeRecord>(pipeName: T) {
 
 export function setArgumentPipe<T extends keyof IPipeRecord>(
   pipeName: T,
-  options: Partial<IPipeRecord[T]> | undefined,
+  options: Partial<IPipeRecord[T] & IDecoratorPipeOptionsArgument> | undefined,
   target: object,
   prop: MetadataKey | undefined,
   index: number,
