@@ -1,6 +1,5 @@
 import type { IInstanceRecord } from 'vona';
 import type {
-  IDecoratorQueueOptions,
   IQueueCallbacks,
   IQueueExecute,
   IQueueJobContext,
@@ -71,7 +70,7 @@ export class ServiceQueue extends BeanBase {
     // prefix
     const prefix = `bull_${app.name}:queue`;
     // queue config
-    const queueConfig = app.bean.onion.queue.getOnionOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = app.bean.onion.queue.getOnionOptions(info.queueName);
     // queueConfig.options: queue/worker/job/redlock
     const workerOptions = queueConfig?.options?.worker;
     const redlockOptions = queueConfig?.options?.redlock;
@@ -142,7 +141,7 @@ export class ServiceQueue extends BeanBase {
     // prefix
     const prefix = `bull_${app.name}:queue`;
     // queue config
-    const queueConfig = app.bean.onion.queue.getOnionOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = app.bean.onion.queue.getOnionOptions(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
     const queueOptions = queueConfig?.options?.queue;
 
@@ -215,7 +214,7 @@ export class ServiceQueue extends BeanBase {
 
   async _queuePush<DATA, RESULT>(info: IQueueJobContext<DATA>, isAsync: boolean): Promise<RESULT> {
     // queue config
-    const queueConfig = this.bean.onion.queue.getOnionOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = this.bean.onion.queue.getOnionOptions(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
     const jobOptionsBase = queueConfig?.options?.job;
     // queue
@@ -272,7 +271,7 @@ export class ServiceQueue extends BeanBase {
     const info = job.data;
     // queue config
     const queueItem = this.bean.onion.queue.getOnionSlice(info.queueName);
-    const queueConfig = this.bean.onion.queue.getOnionOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = this.bean.onion.queue.getOnionOptions(info.queueName);
     // execute
     return await this.bean.executor.newCtx(
       async () => {

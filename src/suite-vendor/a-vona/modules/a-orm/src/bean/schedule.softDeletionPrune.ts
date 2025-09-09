@@ -1,6 +1,6 @@
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IScheduleExecute } from 'vona-module-a-schedule';
-import type { IDecoratorModelOptions, IModelRecord, ISoftDeletionPrune } from '../types/onion/model.ts';
+import type { IModelRecord, ISoftDeletionPrune } from '../types/onion/model.ts';
 import type { BeanModelCache } from './bean.model/bean.model_cache.ts';
 import { BeanBase } from 'vona';
 import { Schedule } from 'vona-module-a-schedule';
@@ -18,13 +18,13 @@ export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExec
     }
   }
 
-  private async _modulePrune<T extends BeanModelCache>(
-    onionSlice: IOnionSlice<IDecoratorModelOptions, keyof IModelRecord, unknown>,
+  private async _modulePrune<MODULE extends BeanModelCache, T extends keyof IModelRecord>(
+    onionSlice: IOnionSlice<IModelRecord, T, unknown>,
     softDeletionPrune: ISoftDeletionPrune,
   ) {
     const handler = softDeletionPrune.handler;
     const expired = softDeletionPrune.expired ?? this.scope.config.softDeletionPrune.expired;
-    const modelTarget = this.bean._getBean<T>(onionSlice.beanOptions.beanFullName as any);
+    const modelTarget = this.bean._getBean<MODULE>(onionSlice.beanOptions.beanFullName as any);
     if (handler) {
       await handler(this.ctx, modelTarget, { expired });
     } else {

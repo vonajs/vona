@@ -46,7 +46,7 @@ export class ServiceBroadcast extends BeanBase {
     const isEmitter = info.callerId === this.__callerId;
     // broadcast config
     const broadcastItem = this.bean.onion.broadcast.getOnionSlice(info.broadcastName);
-    const broadcastConfig = this.bean.onion.broadcast.getOnionOptions<IDecoratorBroadcastOptions>(info.broadcastName);
+    const broadcastConfig = this.bean.onion.broadcast.getOnionOptions(info.broadcastName);
     // execute
     return await this.bean.executor.newCtx(
       async () => {
