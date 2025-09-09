@@ -7,7 +7,7 @@ export interface IDtoOptionsRegister extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsRegister>()
 export class DtoRegister {
-  @Api.field(v.min(3))
+  @Api.field(v.refine('home-user:usernameUnique'), v.min(3))
   username: string;
 
   @Api.field(v.email())
