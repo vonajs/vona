@@ -507,14 +507,17 @@ export interface IApiPathPostRecord{
 /** controller: end */
 /** zodRefine: begin */
 export * from '../bean/zodRefine.emailUnique.ts';
+export * from '../bean/zodRefine.passwordConfirm.ts';
 export * from '../bean/zodRefine.usernameUnique.ts';
 import type { IZodRefineOptionsEmailUnique } from '../bean/zodRefine.emailUnique.ts';
+import type { IZodRefineOptionsPasswordConfirm } from '../bean/zodRefine.passwordConfirm.ts';
 import type { IZodRefineOptionsUsernameUnique } from '../bean/zodRefine.usernameUnique.ts';
 import 'vona';
 declare module 'vona-module-a-zod' {
   
     export interface IZodRefineRecord {
       'home-user:emailUnique': IZodRefineOptionsEmailUnique;
+'home-user:passwordConfirm': IZodRefineOptionsPasswordConfirm;
 'home-user:usernameUnique': IZodRefineOptionsUsernameUnique;
     }
 
@@ -530,6 +533,16 @@ declare module 'vona-module-home-user' {
           export interface ZodRefineEmailUnique {
             get $beanFullName(): 'home-user.zodRefine.emailUnique';
             get $onionName(): 'home-user:emailUnique';
+          }
+
+        export interface ZodRefinePasswordConfirm {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ZodRefinePasswordConfirm {
+            get $beanFullName(): 'home-user.zodRefine.passwordConfirm';
+            get $onionName(): 'home-user:passwordConfirm';
           }
 
         export interface ZodRefineUsernameUnique {

@@ -5,7 +5,9 @@ import { Dto } from 'vona-module-a-web';
 
 export interface IDtoOptionsRegister extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsRegister>()
+@Dto<IDtoOptionsRegister>({
+  pipes: v.refine('home-user:passwordConfirm'),
+})
 export class DtoRegister {
   @Api.field(v.refine('home-user:usernameUnique'), v.min(3))
   username: string;
