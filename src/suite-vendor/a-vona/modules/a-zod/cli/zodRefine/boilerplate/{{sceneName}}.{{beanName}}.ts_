@@ -1,13 +1,10 @@
-import type { IDecoratorPipeOptions, IPipeTransform } from 'vona-module-a-aspect';
-import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import type { IDecoratorZodRefineOptions, IZodRefineExecute, TypeRefinementCtx } from 'vona-module-a-zod';
 import { BeanBase } from 'vona';
-import { Pipe } from 'vona-module-a-aspect';
+import { ZodRefine } from 'vona-module-a-zod';
 
-export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
+export interface IZodRefineOptions<%=argv.beanNameCapitalize%> extends IDecoratorZodRefineOptions {}
 
-@Pipe<IPipeOptions<%=argv.beanNameCapitalize%>>()
-export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeTransform<any> {
-  async transform(value: any, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
-    return value;
-  }
+@ZodRefine<IZodRefineOptions<%=argv.beanNameCapitalize%>>()
+export class ZodRefine<%=argv.beanNameCapitalize%> extends BeanBase implements IZodRefineExecute<any> {
+  async execute(_value: any, _refinementCtx: TypeRefinementCtx, _options: IZodRefineOptions<%=argv.beanNameCapitalize%>) {}
 }
