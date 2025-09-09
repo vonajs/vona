@@ -13,8 +13,9 @@ export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipe
   transformFn?: TypePipeOptionsQueryTransform | string;
 }
 
+export type TypeQueryParamsPatch = IQueryParams & { where: {} };
 export interface IPipeOptionsQueryTransformInfo {
-  params: IQueryParams;
+  params: TypeQueryParamsPatch;
   query: any;
   options: IPipeOptionsQuery;
   originalName: string;
@@ -60,7 +61,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
 
   // system: columns/where/orders/pageNo/pageSize
   private _transformSystem(value: any) {
-    const params: IQueryParams = {};
+    const params = {} as TypeQueryParamsPatch;
     // columns
     if (!isNil(value.columns)) params.columns = value.columns;
     // where
@@ -86,7 +87,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     return params;
   }
 
-  private _transformOrders(params: IQueryParams, options: IPipeOptionsQuery) {
+  private _transformOrders(params: TypeQueryParamsPatch, options: IPipeOptionsQuery) {
     if (!params.orders) return;
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema);
@@ -111,7 +112,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     }
   }
 
-  private _transformField(key: string, fieldValue: any, params: IQueryParams, value: any, options: IPipeOptionsQuery) {
+  private _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsQuery) {
     if (__FieldsSystem.includes(key)) return;
     const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, key));
     if (!fieldSchema) return;
@@ -173,7 +174,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     }
   }
 
-  private _transformFields(params: IQueryParams, value: any, options: IPipeOptionsQuery) {
+  private _transformFields(params: TypeQueryParamsPatch, value: any, options: IPipeOptionsQuery) {
     // loop
     for (const key in value) {
       this._transformField(key, value[key], params, value, options);
