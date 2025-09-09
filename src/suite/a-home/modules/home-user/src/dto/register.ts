@@ -10,7 +10,7 @@ export class DtoRegister {
   @Api.field(v.refine('home-user:usernameUnique'), v.min(3))
   username: string;
 
-  @Api.field(v.email())
+  @Api.field(v.refine('home-user:emailUnique'), v.email())
   email: string;
 
   @Api.field(v.min(6), v.max(20))

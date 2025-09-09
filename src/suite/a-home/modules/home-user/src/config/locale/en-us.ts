@@ -12,4 +12,5 @@ export default {
   UserActivated: 'Activated',
   UserLocale: 'Language',
   UsernameExists: 'Username Exists',
+  EmailExists: 'Email Exists',
 };

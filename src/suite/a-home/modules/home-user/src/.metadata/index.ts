@@ -506,19 +506,32 @@ export interface IApiPathPostRecord{
 }
 /** controller: end */
 /** zodRefine: begin */
+export * from '../bean/zodRefine.emailUnique.ts';
 export * from '../bean/zodRefine.usernameUnique.ts';
+import type { IZodRefineOptionsEmailUnique } from '../bean/zodRefine.emailUnique.ts';
 import type { IZodRefineOptionsUsernameUnique } from '../bean/zodRefine.usernameUnique.ts';
 import 'vona';
 declare module 'vona-module-a-zod' {
   
     export interface IZodRefineRecord {
-      'home-user:usernameUnique': IZodRefineOptionsUsernameUnique;
+      'home-user:emailUnique': IZodRefineOptionsEmailUnique;
+'home-user:usernameUnique': IZodRefineOptionsUsernameUnique;
     }
 
   
 }
 declare module 'vona-module-home-user' {
   
+        export interface ZodRefineEmailUnique {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ZodRefineEmailUnique {
+            get $beanFullName(): 'home-user.zodRefine.emailUnique';
+            get $onionName(): 'home-user:emailUnique';
+          }
+
         export interface ZodRefineUsernameUnique {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
