@@ -4,7 +4,6 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
-import { Captcha } from 'vona-module-a-captcha';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
