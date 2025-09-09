@@ -1,6 +1,7 @@
 import { schemaBigNumber, schemaEmail, schemaIp, schemaMax, schemaMin, schemaTableIdentity, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import { schemaArray, schemaDefault, schemaLazy, schemaObject, schemaOptional } from './v/system.ts';
+import { schemaZodRefine } from './v/zod.ts';
 
 export const v = {
   lazy: schemaLazy,
@@ -22,4 +23,6 @@ export const v = {
   title: schemaTitle,
   description: schemaDescription,
   example: schemaExample,
+  // zod
+  refine: schemaZodRefine,
 };
