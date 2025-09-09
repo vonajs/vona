@@ -1,5 +1,5 @@
-import type { DtoCaptchaVerify } from 'vona-module-a-captcha';
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+import { DtoCaptchaVerify } from 'vona-module-a-captcha';
 import { Api, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 
