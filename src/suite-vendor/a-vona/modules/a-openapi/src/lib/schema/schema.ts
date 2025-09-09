@@ -43,6 +43,10 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
     // static
     const beanOptions = appResource.getBean(classType);
     if (beanOptions) {
+      const pipes: SchemaLike | SchemaLike[] = cast(beanOptions.options)?.pipes;
+      if (pipes) {
+        schema = makeSchemaLikes(pipes, schema) as any;
+      }
       const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
       schema = schema.openapi(beanOptions.beanFullName, openapi);
     }
