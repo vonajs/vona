@@ -54,7 +54,7 @@ class ControllerOrder extends BeanBase {
 }
 ```
 
-- `@Arg.queryPro`：对 Query 参数进行 transform 的 Pipe，需要传入参数`DtoOrderQuery`
+- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，需要传入参数`DtoOrderQuery`
 - `IQueryParams`: Pipe 对 Query 参数进行 transform 后的数据类型为`IQueryParams`，需要传入泛型参数`ModelOrder`，从而与`model.order.select`方法的参数类型相匹配
 
 基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
@@ -207,7 +207,7 @@ class ControllerOrder {
 
 ### 2. Query Transform返回值
 
-Query Transform 返回值有以下几种：
+Query Transform 返回值如下：
 
 |名称|说明|
 |--|--|
@@ -232,11 +232,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @ArgQueryPro({
-+     type: 'query',
-+     schema: $schema(DtoOrderQuery),
-+     transformFn: 'myCustomQueryTransform',
-+   }) params: IQueryParams<ModelOrder>,
++   @Arg.queryPro(DtoOrderQuery, 'myCustomQueryTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,
@@ -248,7 +244,7 @@ class ControllerOrder {
 }
 ```
 
-- `@ArgQueryPro`：对 Query 参数进行 transform 的 Pipe，传入参数`transformFn`
+- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，传入参数`'myCustomQueryTransform'`
 
 ### 3. 自定义函数
 
@@ -267,11 +263,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @ArgQueryPro({
-+     type: 'query',
-+     schema: $schema(DtoOrderQuery),
-+     transformFn: myCustomQueryTransform,
-+   }) params: IQueryParams<ModelOrder>,
++   @Arg.queryPro(DtoOrderQuery, myCustomQueryTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,
