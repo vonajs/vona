@@ -1,14 +1,10 @@
-import type { IDecoratorPipeOptions } from 'vona-module-a-aspect';
-import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
-import type { IZodRefineExecute } from 'vona-module-a-zod';
+import type { IDecoratorZodRefineOptions, IZodRefineExecute, TypeRefinementCtx } from 'vona-module-a-zod';
 import { BeanBase } from 'vona';
-import { Pipe } from 'vona-module-a-aspect';
+import { ZodRefine } from 'vona-module-a-zod';
 
-export interface IPipeOptionsUsernameUnique extends IDecoratorPipeOptions {}
+export interface IZodRefineOptionsUsernameUnique extends IDecoratorZodRefineOptions {}
 
-@Pipe<IPipeOptionsUsernameUnique>()
+@ZodRefine<IZodRefineOptionsUsernameUnique>()
 export class ZodRefineUsernameUnique extends BeanBase implements IZodRefineExecute<any> {
-  async execute(value: any, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsUsernameUnique) {
-    return value;
-  }
+  async execute(_value: any, _refinementCtx: TypeRefinementCtx, _options: IZodRefineOptionsUsernameUnique) {}
 }

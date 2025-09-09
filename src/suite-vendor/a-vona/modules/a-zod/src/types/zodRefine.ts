@@ -1,3 +1,29 @@
+import type { OmitNever } from 'vona';
+import type { ServiceOnion } from 'vona-module-a-onion';
+import type { RefinementCtx } from 'zod';
+
+export type TypeRefinementCtx = RefinementCtx;
+
+export interface IZodRefineRecord {}
+
 export interface IZodRefineExecute<T = any, R = any> {
-  execute(value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorZodRefineOptions): Promise<R>;
+  execute(value: T, refinementCtx: TypeRefinementCtx, options: IDecoratorZodRefineOptions): Promise<R>;
+}
+
+export interface IDecoratorZodRefineOptions {}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    zodRefine: ServiceOnion<IDecoratorZodRefineOptions, keyof IZodRefineRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    zodRefine: OmitNever<IZodRefineRecord>;
+  }
+
+  export interface IBeanSceneRecord {
+    zodRefine: never;
+  }
 }
