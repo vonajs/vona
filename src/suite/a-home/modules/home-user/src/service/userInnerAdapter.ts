@@ -24,7 +24,7 @@ export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapt
   }
 
   async findOneByName(name: string): Promise<IUserBase | undefined> {
-    return await this.findOne({ name });
+    return await this.scope.model.user.get({ name: { _eqI_: name } });
   }
 
   async findOne(user: Partial<IUser>): Promise<IUserBase | undefined> {

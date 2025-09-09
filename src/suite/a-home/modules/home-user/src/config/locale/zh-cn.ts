@@ -11,4 +11,5 @@ export default {
   UserMobile: '手机号',
   UserActivated: '已激活',
   UserLocale: '语言',
+  UsernameExists: '用户名已存在',
 };

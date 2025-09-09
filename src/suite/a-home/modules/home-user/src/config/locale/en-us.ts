@@ -11,4 +11,5 @@ export default {
   UserMobile: 'Mobile',
   UserActivated: 'Activated',
   UserLocale: 'Language',
+  UsernameExists: 'Username Exists',
 };
