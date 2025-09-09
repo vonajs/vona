@@ -13,4 +13,5 @@ export default {
   UserLocale: '语言',
   UsernameExists: '用户名已存在',
   EmailExists: '电子邮件已存在',
+  PasswordsNotMatch: '密码不一致',
 };

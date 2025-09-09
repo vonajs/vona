@@ -13,4 +13,5 @@ export default {
   UserLocale: 'Language',
   UsernameExists: 'Username Exists',
   EmailExists: 'Email Exists',
+  PasswordsNotMatch: 'Passwords do not match',
 };
