@@ -38,13 +38,13 @@ export class ServiceBody extends BeanBase {
     };
 
     const bodyType =
-  options.detectJSON?.(ctx) || shouldParseBodyAs('json')
-    ? 'json'
-    : shouldParseBodyAs('form')
-      ? 'form'
-      : shouldParseBodyAs('text') || shouldParseBodyAs('xml')
-        ? 'text'
-        : null;
+      options.detectJSON?.(ctx) || shouldParseBodyAs('json')
+        ? 'json'
+        : shouldParseBodyAs('form')
+          ? 'form'
+          : shouldParseBodyAs('text') || shouldParseBodyAs('xml')
+            ? 'text'
+            : null;
 
     if (!bodyType) return {} as Record<string, string>;
     const parserOptions = {
