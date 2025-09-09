@@ -6,7 +6,7 @@ export interface IDecoratorDatabaseDialectOptions {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    databaseDialect: ServiceOnion<IDecoratorDatabaseDialectOptions, keyof IDatabaseDialectRecord>;
+    databaseDialect: ServiceOnion<IDatabaseDialectRecord>;
   }
 }
 

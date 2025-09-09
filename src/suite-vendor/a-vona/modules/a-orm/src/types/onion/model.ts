@@ -54,7 +54,7 @@ export interface IDecoratorModelOptions<TRecord extends EntityBaseEmpty = any> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    model: ServiceOnion<IDecoratorModelOptions, keyof IModelRecord>;
+    model: ServiceOnion<IModelRecord>;
   }
 }
 

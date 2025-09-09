@@ -24,7 +24,7 @@ export interface IDecoratorBroadcastOptions {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    broadcast: ServiceOnion<IDecoratorBroadcastOptions, keyof IBroadcastRecord>;
+    broadcast: ServiceOnion<IBroadcastRecord>;
   }
 }
 

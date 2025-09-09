@@ -1,5 +1,5 @@
 import type { Constructable, Next, VonaContext } from 'vona';
-import type { IDecoratorPipeOptionsGlobal, IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
+import type { IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IOnionExecuteCustom } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
@@ -128,7 +128,7 @@ function composePipes(
 }
 
 function _collectArgumentMiddlewares(
-  onionPipe: ServiceOnion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>,
+  onionPipe: ServiceOnion<IPipeRecord>,
   argMeta: RouteHandlerArgumentMetaDecorator,
 ) {
   if (!argMeta.pipes) return;

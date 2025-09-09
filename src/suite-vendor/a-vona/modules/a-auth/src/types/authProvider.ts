@@ -55,7 +55,7 @@ export interface IAuthProviderVerify {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    authProvider: ServiceOnion<IDecoratorAuthProviderOptions, keyof IAuthProviderRecord>;
+    authProvider: ServiceOnion<IAuthProviderRecord>;
   }
 }
 

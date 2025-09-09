@@ -8,7 +8,7 @@ export interface IDecoratorEventOptions {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    event: ServiceOnion<IDecoratorEventOptions, keyof IEventRecord>;
+    event: ServiceOnion<IEventRecord>;
   }
 }
 

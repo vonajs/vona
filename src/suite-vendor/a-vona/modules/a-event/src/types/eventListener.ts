@@ -21,7 +21,7 @@ export interface IDecoratorEventListenerOptions
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    eventListener: ServiceOnion<IDecoratorEventListenerOptions, keyof IEventListenerRecord>;
+    eventListener: ServiceOnion<IEventListenerRecord>;
   }
 }
 

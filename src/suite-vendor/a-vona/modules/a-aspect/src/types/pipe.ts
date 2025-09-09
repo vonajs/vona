@@ -32,7 +32,7 @@ export interface IDecoratorPipeOptionsGlobal
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    pipe: ServiceOnion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
+    pipe: ServiceOnion<IPipeRecord>;
   }
 }
 

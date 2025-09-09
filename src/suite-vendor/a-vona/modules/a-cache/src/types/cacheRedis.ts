@@ -13,7 +13,7 @@ export interface IDecoratorCacheRedisOptions extends IOnionOptionsEnable {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    cacheRedis: ServiceOnion<IDecoratorCacheRedisOptions, keyof ICacheRedisRecord>;
+    cacheRedis: ServiceOnion<ICacheRedisRecord>;
   }
 }
 

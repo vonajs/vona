@@ -10,7 +10,7 @@ export interface IDecoratorAopOptions
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    aop: ServiceOnion<IDecoratorAopOptions, keyof IAopRecord>;
+    aop: ServiceOnion<IAopRecord>;
   }
 }
 

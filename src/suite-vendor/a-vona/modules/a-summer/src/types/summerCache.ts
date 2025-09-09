@@ -52,7 +52,7 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    summerCache: ServiceOnion<IDecoratorSummerCacheOptions, keyof ISummerCacheRecord>;
+    summerCache: ServiceOnion<ISummerCacheRecord>;
   }
 }
 

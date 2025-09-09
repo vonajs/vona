@@ -20,7 +20,7 @@ export interface IDecoratorMiddlewareOptionsGlobal
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    middleware: ServiceOnion<IDecoratorMiddlewareOptionsGlobal, keyof IMiddlewareRecord>;
+    middleware: ServiceOnion<IMiddlewareRecord>;
   }
 }
 

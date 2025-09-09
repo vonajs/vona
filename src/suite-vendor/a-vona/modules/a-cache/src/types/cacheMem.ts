@@ -16,7 +16,7 @@ export interface IDecoratorCacheMemOptions extends IOnionOptionsEnable {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    cacheMem: ServiceOnion<IDecoratorCacheMemOptions, keyof ICacheMemRecord>;
+    cacheMem: ServiceOnion<ICacheMemRecord>;
   }
 }
 

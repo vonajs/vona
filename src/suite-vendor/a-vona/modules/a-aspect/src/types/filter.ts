@@ -33,7 +33,7 @@ export interface IFilterComposeData {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    filter: ServiceOnion<IDecoratorFilterOptionsGlobal, keyof IFilterRecord>;
+    filter: ServiceOnion<IFilterRecord>;
   }
 }
 

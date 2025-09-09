@@ -15,7 +15,7 @@ export interface IDecoratorEntityOptions<FieldsMore = never> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    entity: ServiceOnion<IDecoratorEntityOptions, keyof IEntityRecord>;
+    entity: ServiceOnion<IEntityRecord>;
   }
 }
 

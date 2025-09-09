@@ -20,7 +20,7 @@ export interface IDecoratorGuardOptionsGlobal
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    guard: ServiceOnion<IDecoratorGuardOptionsGlobal, keyof IGuardRecord>;
+    guard: ServiceOnion<IGuardRecord>;
   }
 }
 

@@ -20,7 +20,7 @@ export interface IDecoratorCaptchaProviderOptions extends TypeOnionOptionsEnable
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    captchaProvider: ServiceOnion<IDecoratorCaptchaProviderOptions, keyof ICaptchaProviderRecord>;
+    captchaProvider: ServiceOnion<ICaptchaProviderRecord>;
   }
 }
 

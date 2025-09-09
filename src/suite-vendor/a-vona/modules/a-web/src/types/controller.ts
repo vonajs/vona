@@ -31,7 +31,7 @@ export interface IDecoratorControllerOptions extends TypeOnionOptionsEnableSimpl
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    controller: ServiceOnion<IDecoratorControllerOptions, keyof IControllerRecord>;
+    controller: ServiceOnion<IControllerRecord>;
   }
 }
 

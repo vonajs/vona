@@ -14,7 +14,7 @@ export interface IDecoratorMiddlewareSystemOptions
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    middlewareSystem: ServiceOnion<IDecoratorMiddlewareSystemOptions, keyof IMiddlewareSystemRecord>;
+    middlewareSystem: ServiceOnion<IMiddlewareSystemRecord>;
   }
 }
 

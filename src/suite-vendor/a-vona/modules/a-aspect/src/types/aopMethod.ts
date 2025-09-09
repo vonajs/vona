@@ -26,7 +26,7 @@ export interface IDecoratorAopMethodOptions extends TypeOnionOptionsEnableSimple
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    aopMethod: ServiceOnion<IDecoratorAopMethodOptions, keyof IAopMethodRecord>;
+    aopMethod: ServiceOnion<IAopMethodRecord>;
   }
 }
 

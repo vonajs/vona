@@ -13,7 +13,7 @@ export interface IDecoratorDtoOptions<FieldsMore = never> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    dto: ServiceOnion<IDecoratorDtoOptions, keyof IDtoRecord>;
+    dto: ServiceOnion<IDtoRecord>;
   }
 }
 

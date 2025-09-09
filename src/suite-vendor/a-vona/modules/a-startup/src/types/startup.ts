@@ -21,7 +21,7 @@ export interface IInstanceStartupOptions {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    startup: ServiceOnion<IDecoratorStartupOptions, keyof IStartupRecord>;
+    startup: ServiceOnion<IStartupRecord>;
   }
 }
 

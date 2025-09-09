@@ -23,7 +23,7 @@ export interface IDecoratorCaptchaSceneOptions {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    captchaScene: ServiceOnion<IDecoratorCaptchaSceneOptions, keyof ICaptchaSceneRecord>;
+    captchaScene: ServiceOnion<ICaptchaSceneRecord>;
   }
 }
 

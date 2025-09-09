@@ -20,7 +20,7 @@ export interface IDecoratorInterceptorOptionsGlobal
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    interceptor: ServiceOnion<IDecoratorInterceptorOptionsGlobal, keyof IInterceptorRecord>;
+    interceptor: ServiceOnion<IInterceptorRecord>;
   }
 }
 
