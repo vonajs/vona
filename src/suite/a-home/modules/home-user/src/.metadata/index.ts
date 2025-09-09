@@ -505,6 +505,31 @@ export interface IApiPathPostRecord{
 
 }
 /** controller: end */
+/** zodRefine: begin */
+export * from '../bean/zodRefine.usernameUnique.ts';
+
+import { type IDecoratorZodRefineOptions } from 'vona-module-a-zod';
+declare module 'vona-module-a-zod' {
+  
+    export interface IZodRefineRecord {
+      'home-user:usernameUnique': IDecoratorZodRefineOptions;
+    }
+
+  
+}
+declare module 'vona-module-home-user' {
+  
+        export interface ZodRefineUsernameUnique {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ZodRefineUsernameUnique {
+            get $beanFullName(): 'home-user.zodRefine.usernameUnique';
+            get $onionName(): 'home-user:usernameUnique';
+          } 
+}
+/** zodRefine: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
