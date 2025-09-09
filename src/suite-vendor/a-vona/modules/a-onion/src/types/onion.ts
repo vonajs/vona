@@ -4,6 +4,10 @@ import type { IDecoratorBeanOptionsBase, IHostRecord, IInstanceRecord, PowerPart
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
 
+export type TypeOnionsNormal<ONIONRECORD> = {
+  [KEY in keyof ONIONRECORD]: IOnionSlice<ONIONRECORD, KEY>;
+};
+
 export type IOnionExecuteCustom = (beanInstance: any, data: any, options: any, next: Function) => any;
 
 export type TypeUseOnionOmitOptionsGlobal<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
@@ -37,9 +41,9 @@ export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
 
-export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
+export interface IOnionSlice<ONIONRECORD = unknown, ONIONNAME extends keyof ONIONRECORD = any, T = unknown> {
   name: ONIONNAME;
-  beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
+  beanOptions: IDecoratorBeanOptionsBase<T, ONIONRECORD[ONIONNAME]>;
 }
 
 export interface ConfigOnions {}

@@ -14,7 +14,7 @@ export interface IDecoratorZodRefineOptions {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    zodRefine: ServiceOnion<IDecoratorZodRefineOptions, keyof IZodRefineRecord>;
+    zodRefine: ServiceOnion<IZodRefineRecord>;
   }
 }
 
