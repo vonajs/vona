@@ -1,9 +1,5 @@
 import type { IModuleMain, Next, VonaContext } from 'vona';
-import type {
-  IDecoratorMiddlewareSystemOptions,
-  IMiddlewareSystemExecute,
-  IMiddlewareSystemRecord,
-} from 'vona-module-a-aspect';
+import type { IMiddlewareSystemExecute, IMiddlewareSystemRecord } from 'vona-module-a-aspect';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import Router from 'find-my-way';
 import { BeanSimple, compose } from 'vona';
@@ -44,7 +40,7 @@ export class Main extends BeanSimple implements IModuleMain {
 
   async configLoaded(_config: any) {}
 
-  private _wrapOnion(item: IOnionSlice<IDecoratorMiddlewareSystemOptions, keyof IMiddlewareSystemRecord>) {
+  private _wrapOnion<T extends keyof IMiddlewareSystemRecord>(item: IOnionSlice<IMiddlewareSystemRecord, T>) {
     const fn = (_ctx: VonaContext, next: Next) => {
       const options = item.beanOptions.options!;
       if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {

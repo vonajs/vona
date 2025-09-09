@@ -1,5 +1,5 @@
 import type { IInstanceRecord } from 'vona';
-import type { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
+import type { IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
 import { BeanBase, beanFullNameFromOnionName, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -14,7 +14,7 @@ export class ServiceSchedule extends BeanBase {
     }
     // schedule config
     const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
-    const scheduleConfig = this.bean.onion.schedule.getOnionOptions<IDecoratorScheduleOptions>(scheduleName);
+    const scheduleConfig = this.bean.onion.schedule.getOnionOptions(scheduleName);
     // execute
     return await this.bean.executor.newCtx(
       async () => {
@@ -60,7 +60,7 @@ export class ServiceSchedule extends BeanBase {
       return false;
     }
     // check if changed
-    const scheduleConfig = this.app.bean.onion.schedule.getOnionOptions<IDecoratorScheduleOptions>(scheduleName);
+    const scheduleConfig = this.app.bean.onion.schedule.getOnionOptions(scheduleName);
     const scheduleHashActive = this.$scope.queue.service.queue.getRepeatKey(
       job.name,
       job.data!.options!.jobOptions!.repeat!,
