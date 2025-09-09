@@ -28,7 +28,7 @@ describe('dtoQuery.test.ts', () => {
       assert.deepEqual(resEcho.where, {
         'stars': { _gt_: 12 },
         'title': { _includesI_: 'ai' },
-        'testVonaUser.name': 'tom',
+        'testVonaUser.name': { _eqI_: 'tom' },
       });
       assert.deepEqual(resEcho.orders, [['testVonaPost.createdAt', 'desc']]);
       assert.equal(resEcho.offset, 30);
