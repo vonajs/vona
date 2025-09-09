@@ -54,7 +54,8 @@
     "vona-module-a-version": "^5.0.28",
     "vona-module-a-vona": "^5.0.20",
     "vona-module-a-web": "^5.0.22",
-    "vona-module-a-worker": "^5.0.14"
+    "vona-module-a-worker": "^5.0.14",
+    "vona-module-a-zod": "workspace:^"
   },
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
 }

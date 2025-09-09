@@ -51,7 +51,8 @@
       "a-validation": "5.0.0",
       "a-version": "5.0.0",
       "a-web": "5.0.0",
-      "a-worker": "5.0.0"
+      "a-worker": "5.0.0",
+      "a-zod": "5.0.0"
     }
   },
   "description": "",

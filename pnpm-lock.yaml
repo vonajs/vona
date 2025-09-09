@@ -257,6 +257,9 @@ importers:
       vona-module-a-worker:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-worker
+      vona-module-a-zod:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-zod
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
@@ -1291,6 +1294,9 @@ importers:
       vona-module-a-worker:
         specifier: ^5.0.14
         version: link:modules/a-worker
+      vona-module-a-zod:
+        specifier: workspace:^
+        version: link:modules/a-zod
 
   src/suite-vendor/a-vona/modules/a-aspect:
     devDependencies:
@@ -1978,6 +1984,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-worker:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-zod:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
