@@ -3,6 +3,7 @@ import type { IDecoratorPipeOptionsGlobal, IPipeRecord, IPipeTransform } from 'v
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IOnionExecuteCustom } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
+import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import {
   SymbolRouteHandlersArgumentsMeta,
@@ -68,6 +69,7 @@ async function _transformArgument(
 ) {
   // pipes
   const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, value, options, _next) => {
+    if (!isNil(options.argIndex) && argMeta.index !== options.argIndex) return value;
     return beanInstance.transform(value, metadata, options);
   });
   if (pipes.length === 0) return value;

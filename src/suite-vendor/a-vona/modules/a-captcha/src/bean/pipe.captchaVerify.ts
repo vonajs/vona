@@ -13,11 +13,10 @@ export interface IPipeOptionsCaptchaVerify extends IDecoratorPipeOptionsGlobal {
 @Pipe<IPipeOptionsCaptchaVerify>({
   global: true,
   bodyField: 'captcha',
+  argIndex: 0,
 })
 export class PipeCaptchaVerify extends BeanBase implements IPipeTransform<any> {
-  async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsCaptchaVerify) {
-    // only take effect for index: 0
-    if (metadata.index !== 0) return value;
+  async transform(value: any, _metadata: RouteHandlerArgumentMeta, options: IPipeOptionsCaptchaVerify) {
     // scene
     const sceneName = options.scene;
     if (!sceneName) return value;

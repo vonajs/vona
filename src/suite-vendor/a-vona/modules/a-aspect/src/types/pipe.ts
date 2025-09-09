@@ -19,12 +19,15 @@ export interface IDecoratorPipeOptionsArgument {
   extractValue?: TypeExtractValue;
 }
 
-export interface IDecoratorPipeOptions extends IOnionOptionsEnable {}
+export interface IDecoratorPipeOptions extends IOnionOptionsEnable {
+  argIndex?: number;
+}
 
 export interface IDecoratorPipeOptionsGlobal
   extends IOnionOptionsBase<keyof IApiPathRecord>,
   IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   global: true;
+  argIndex?: number;
 }
 
 declare module 'vona-module-a-onion' {
