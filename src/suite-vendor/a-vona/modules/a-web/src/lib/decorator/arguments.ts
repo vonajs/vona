@@ -1,6 +1,7 @@
 import type { Constructable, MetadataKey } from 'vona';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type z from 'zod';
+import type { TypePipeOptionsQueryTransform } from '../../bean/pipe.query.ts';
 import { setArgumentPipe } from 'vona-module-a-aspect';
 import { $schema } from 'vona-module-a-openapi';
 import { createPipesArgumentDecorator } from './pipesArgument.ts';
@@ -65,10 +66,10 @@ function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
 }
 
-function ArgQueryPro(schemaLike: z.ZodSchema | Constructable): any {
+function ArgQueryPro(schemaLike: z.ZodSchema | Constructable, transformFn?: TypePipeOptionsQueryTransform | string): any {
   return function (target: object, prop: MetadataKey | undefined, index: number) {
     const schema = $schema(schemaLike as any);
-    setArgumentPipe('a-web:query', { type: 'query', schema }, target, prop, index);
+    setArgumentPipe('a-web:query', { type: 'query', schema, transformFn }, target, prop, index);
   };
 };
 
