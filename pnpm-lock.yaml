@@ -1702,13 +1702,13 @@ importers:
   src/suite-vendor/a-vona/modules/a-openapi:
     dependencies:
       '@asteasolutions/zod-to-openapi':
-        specifier: ^7.3.0
-        version: 7.3.2(zod@3.25.61)
+        specifier: ^8.1.0
+        version: 8.1.0(zod@4.1.5)
       '@cabloy/zod-errors-custom':
-        specifier: ^1.0.13
+        specifier: ^2.0.0
         version: link:../../../../../packages-utils/zod-errors-custom
       '@cabloy/zod-query':
-        specifier: ^1.0.17
+        specifier: ^2.0.0
         version: link:../../../../../packages-utils/zod-query
       '@zhennann/currency':
         specifier: ^2.0.0
@@ -1717,8 +1717,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       zod:
-        specifier: ^3.25.58
-        version: 3.25.61
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -2228,6 +2228,11 @@ packages:
     resolution: {integrity: sha512-Wvl+jHwSgYrRc3tQLMG7Qxq6wn0WjDk8E9ZA0lAyW73FqK18XPHVIKpk0lA6L0S+zmzzNKTndeV2v/Or0LyfHQ==}
     peerDependencies:
       zod: ^3.20.2
+
+  '@asteasolutions/zod-to-openapi@8.1.0':
+    resolution: {integrity: sha512-tQFxVs05J/6QXXqIzj6rTRk3nj1HFs4pe+uThwE95jL5II2JfpVXkK+CqkO7aT0Do5AYqO6LDrKpleLUFXgY+g==}
+    peerDependencies:
+      zod: ^4.0.0
 
   '@aws-crypto/sha256-browser@5.2.0':
     resolution: {integrity: sha512-AXfN/lGotSQwu6HNcEsIASo7kWXZ5HYWvfOmSNKDsEqC4OashTp8alTmaz+F7TC2L083SFv5RdB+qU3Vs1kZqw==}
@@ -8812,6 +8817,9 @@ packages:
   zod@3.25.61:
     resolution: {integrity: sha512-fzfJgUw78LTNnHujj9re1Ov/JJQkRZZGDMcYqSx7Hp4rPOkKywaFHq0S6GoHeXs0wGNE/sIOutkXgnwzrVOGCQ==}
 
+  zod@4.1.5:
+    resolution: {integrity: sha512-rcUUZqlLJgBC33IT3PNMgsCq6TzLQEG/Ei/KTCU0PedSWRMAXoOUN+4t/0H+Q8bdnLPdqUYnvboJT0bn/229qg==}
+
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
 
@@ -8985,6 +8993,11 @@ snapshots:
     dependencies:
       openapi3-ts: 4.4.0
       zod: 3.25.61
+
+  '@asteasolutions/zod-to-openapi@8.1.0(zod@4.1.5)':
+    dependencies:
+      openapi3-ts: 4.4.0
+      zod: 4.1.5
 
   '@aws-crypto/sha256-browser@5.2.0':
     dependencies:
@@ -16929,6 +16942,8 @@ snapshots:
       zod: 3.25.61
 
   zod@3.25.61: {}
+
+  zod@4.1.5: {}
 
   zwitch@1.0.5: {}
 
