@@ -230,7 +230,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     // final options
     let options;
     if (optionsPrimitive) {
-      options = optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
+      options = optionsCustom ?? optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
     } else {
       options = deepExtend(
         {},
