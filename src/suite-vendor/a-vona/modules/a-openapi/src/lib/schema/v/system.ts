@@ -41,7 +41,7 @@ export function schemaArray(schemaLike?: SchemaLike, params?: z.core.$ZodArrayPa
         if (val.startsWith('[') && val.endsWith(']')) return JSON.parse(val);
         return val.split(params?.separator ?? ',');
       },
-      z.array(makeSchemaLike(schemaLike ?? schema as any, z.any()), params),
+      z.array(makeSchemaLike(schemaLike ?? schema, z.any()), params),
       // z.array(makeSchemaLike(schemaLike, schema), params),
     );
   };

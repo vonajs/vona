@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@asteasolutions/zod-to-openapi':
-        specifier: ^7.3.0
-        version: 7.3.2(zod@3.25.61)
+        specifier: ^8.1.0
+        version: 8.1.0(zod@4.1.5)
       '@babel/core':
         specifier: ^7.28.0
         version: 7.28.0
@@ -288,8 +288,8 @@ importers:
         specifier: ^3.17.0
         version: 3.17.0
       zod:
-        specifier: ^3.25.58
-        version: 3.25.61
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.44
@@ -864,8 +864,8 @@ importers:
   packages-vona/vona-core:
     dependencies:
       '@asteasolutions/zod-to-openapi':
-        specifier: ^7.3.0
-        version: 7.3.2(zod@3.25.61)
+        specifier: ^8.1.0
+        version: 8.1.0(zod@4.1.5)
       '@cabloy/compose':
         specifier: ^2.0.14
         version: link:../../packages-utils/compose
@@ -921,8 +921,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(winston@3.17.0)
       zod:
-        specifier: ^3.25.58
-        version: 3.25.61
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       '@types/koa':
         specifier: ^2.15.0
@@ -2223,11 +2223,6 @@ packages:
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
-
-  '@asteasolutions/zod-to-openapi@7.3.2':
-    resolution: {integrity: sha512-Wvl+jHwSgYrRc3tQLMG7Qxq6wn0WjDk8E9ZA0lAyW73FqK18XPHVIKpk0lA6L0S+zmzzNKTndeV2v/Or0LyfHQ==}
-    peerDependencies:
-      zod: ^3.20.2
 
   '@asteasolutions/zod-to-openapi@8.1.0':
     resolution: {integrity: sha512-tQFxVs05J/6QXXqIzj6rTRk3nj1HFs4pe+uThwE95jL5II2JfpVXkK+CqkO7aT0Do5AYqO6LDrKpleLUFXgY+g==}
@@ -8988,11 +8983,6 @@ snapshots:
     dependencies:
       package-manager-detector: 1.3.0
       tinyexec: 1.0.1
-
-  '@asteasolutions/zod-to-openapi@7.3.2(zod@3.25.61)':
-    dependencies:
-      openapi3-ts: 4.4.0
-      zod: 3.25.61
 
   '@asteasolutions/zod-to-openapi@8.1.0(zod@4.1.5)':
     dependencies:

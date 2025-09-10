@@ -21,7 +21,7 @@ export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPreviou
   if (!schemaLike) return schemaPrevious;
   if (Object.prototype.hasOwnProperty.call(schemaLike, 'parseAsync')) {
     // schema
-    return schemaLike as unknown as z.ZodType;
+    return schemaLike as z.ZodType;
   } else if (
     isClass(schemaLike) ||
     ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)
