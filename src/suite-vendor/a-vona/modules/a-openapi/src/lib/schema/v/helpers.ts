@@ -1,4 +1,3 @@
-import type { IpVersion } from 'zod';
 import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
 import type { errorUtil } from '../../zod/errorUtil.ts';
 import { useApp } from 'vona';
@@ -22,16 +21,15 @@ export function schemaUuid(message?: errorUtil.ErrMessage) {
   };
 }
 
-export function schemaIp(
-  options?:
-    | string |
-    {
-      version?: IpVersion;
-      message?: string;
-    },
-) {
-  return function (schema: z.ZodString): z.ZodString {
-    return schema.ip(options);
+export function schemaIPv4(options?: string | z.core.$ZodIPv4Params) {
+  return function (_schema: z.ZodString): z.ZodIPv4 {
+    return z.ipv4(options);
+  };
+}
+
+export function schemaIPv6(options?: string | z.core.$ZodIPv6Params) {
+  return function (_schema: z.ZodString): z.ZodIPv6 {
+    return z.ipv6(options);
   };
 }
 
