@@ -66,7 +66,7 @@ export function schemaBigNumber() {
 }
 
 export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
-  return function (schema: z.ZodSchema): any {
+  return function (schema: z.ZodType): any {
     return schema.openapi({ captcha: options });
   };
 }

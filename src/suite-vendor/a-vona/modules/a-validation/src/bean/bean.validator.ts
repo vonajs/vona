@@ -29,7 +29,7 @@ export class BeanValidator extends BeanBase {
   }
 
   async validateSchema<T, V = T>(
-    schema: z.ZodSchema<T> | undefined,
+    schema: z.ZodType<T> | undefined,
     value: V,
     options?: Partial<ValidatorOptions>,
     path?: string,
@@ -46,7 +46,7 @@ export class BeanValidator extends BeanBase {
   }
 
   private async _validateSchema<T, V = T>(
-    schema: z.ZodSchema<T> | undefined,
+    schema: z.ZodType<T> | undefined,
     value: V,
     options?: Partial<ValidatorOptions>,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {

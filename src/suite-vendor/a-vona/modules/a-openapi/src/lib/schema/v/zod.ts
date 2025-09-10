@@ -3,7 +3,7 @@ import type z from 'zod';
 import { beanFullNameFromOnionName, useApp } from 'vona';
 
 export function schemaZodRefine<T extends keyof IZodRefineRecord>(zodRefineName: T, options?: Partial<IZodRefineRecord[T]>) {
-  return function (schema: z.ZodSchema): z.ZodSchema {
+  return function (schema: z.ZodType): z.ZodType {
     return schema.superRefine(async (value, refinementCtx) => {
       const app = useApp();
       const options2 = app.bean.onion.zodRefine.getOnionOptionsDynamic(zodRefineName, options);

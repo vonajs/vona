@@ -66,7 +66,7 @@ function User(...schemaLikes: SchemaLike[]): ParameterDecorator {
   return createPipesArgumentDecorator('user')(undefined, ...schemaLikes);
 }
 
-function ArgQueryPro(schemaLike: z.ZodSchema | Constructable, transformFn?: TypePipeOptionsQueryTransform | string): any {
+function ArgQueryPro(schemaLike: z.ZodType | Constructable, transformFn?: TypePipeOptionsQueryTransform | string): any {
   return function (target: object, prop: MetadataKey | undefined, index: number) {
     const schema = $schema(schemaLike as any);
     setArgumentPipe('a-web:query', { type: 'query', schema, transformFn }, target, prop, index);

@@ -8,31 +8,31 @@ import { makeSchemaLike } from '../makeSchemaLikes.ts';
 import { $schema, $schemaLazy } from '../schema.ts';
 
 export function schemaDefault(defaultValue: any | Function) {
-  return function (schema: z.ZodSchema): z.ZodSchema {
+  return function (schema: z.ZodType): z.ZodType {
     return schema.default(defaultValue);
   };
 }
 
 export function schemaOptional() {
-  return function (schema: z.ZodSchema): z.ZodSchema {
+  return function (schema: z.ZodType): z.ZodType {
     return schema.optional();
   };
 }
 
 export function schemaLazy<T>(...schemaLikes: SchemaLike[]) {
-  return function (_schema?: z.ZodSchema): z.ZodSchema<T> {
+  return function (_schema?: z.ZodType): z.ZodType<T> {
     return $schemaLazy(...schemaLikes);
   };
 }
 
 export function schemaObject<T>(classType: Constructable<T>, options?: ISchemaObjectOptions) {
-  return function (_schema?: z.ZodSchema): z.ZodSchema<T> {
+  return function (_schema?: z.ZodType): z.ZodType<T> {
     return $schema(classType, options);
   };
 }
 
 export function schemaArray(schemaLike?: SchemaLike, params?: z.core.$ZodArrayParams & { separator?: string }) {
-  return function (schema: z.ZodSchema): z.ZodSchema {
+  return function (schema: z.ZodType): z.ZodType {
     return z.preprocess(
       val => {
         val = coerceWithNil(val);

@@ -42,7 +42,7 @@ export type TypeSchemaScene = 'table' | 'form';
 export type TypeOpenapiMetadata<T extends ZodTypeAny = ZodTypeAny> = Partial<ZodOpenAPIMetadata<z.input<T>>>;
 
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
-  [key in ((keyof T) | (More extends string ? More : never))]?: TypeOpenapiMetadata | z.ZodSchema;
+  [key in ((keyof T) | (More extends string ? More : never))]?: TypeOpenapiMetadata | z.ZodType;
 };
 
 export type TypeControllerOptionsActions<T extends {}> = {

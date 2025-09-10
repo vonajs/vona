@@ -22,7 +22,7 @@ export interface IPipeOptionsQueryTransformInfo {
   fullName: string;
   key?: string;
   value?: any;
-  schema?: z.ZodSchema;
+  schema?: z.ZodType;
   openapi?: ISchemaObjectExtensionField;
 }
 export type TypePipeOptionsQueryTransform =

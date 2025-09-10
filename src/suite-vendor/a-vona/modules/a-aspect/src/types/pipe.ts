@@ -15,7 +15,7 @@ export interface IPipeTransform<T = any, R = any> {
 export interface IDecoratorPipeOptionsArgument {
   type?: RouteHandlerArgumentType;
   field?: string;
-  schema?: z.ZodSchema;
+  schema?: z.ZodType;
   extractValue?: TypeExtractValue;
 }
 

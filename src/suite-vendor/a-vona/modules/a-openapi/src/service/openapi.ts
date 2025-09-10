@@ -339,7 +339,7 @@ export class ServiceOpenapi extends BeanBase {
       };
     } else {
       for (const argumentType of __ArgumentTypes) {
-        let schema: z.ZodSchema | undefined = argsMapIsolate[argumentType];
+        let schema: z.ZodType | undefined = argsMapIsolate[argumentType];
         if (argsMapWithField[argumentType]) {
           if (!schema) {
             schema = z.object(argsMapWithField[argumentType]);
@@ -404,7 +404,7 @@ export class ServiceOpenapi extends BeanBase {
     contentType: string,
   ) {
     // bodySchema
-    let bodySchema: z.ZodSchema;
+    let bodySchema: z.ZodType;
     if (actionOpenApiOptions?.bodySchema) {
       bodySchema = actionOpenApiOptions.bodySchema;
     } else {

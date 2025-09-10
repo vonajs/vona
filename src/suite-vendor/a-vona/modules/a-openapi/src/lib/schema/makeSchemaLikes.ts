@@ -5,10 +5,10 @@ import { isClass } from '@cabloy/utils';
 import { cast } from 'vona';
 import { $schema } from './schema.ts';
 
-export function makeSchemaLikes(schemaLikes: SchemaLike | SchemaLike[], typeInit: any): z.ZodSchema {
+export function makeSchemaLikes(schemaLikes: SchemaLike | SchemaLike[], typeInit: any): z.ZodType {
   if (!Array.isArray(schemaLikes)) schemaLikes = [schemaLikes];
   // default schema
-  let argSchema: z.ZodSchema = $schema(typeInit);
+  let argSchema: z.ZodType = $schema(typeInit);
   // loop
   for (let index = schemaLikes.length - 1; index >= 0; index--) {
     const schemaLike = schemaLikes[index];

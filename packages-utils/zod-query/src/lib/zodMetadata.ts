@@ -50,7 +50,7 @@ export class ZodMetadata {
     return (_a = this.getInternalMetadata(zodSchema)) === null || _a === void 0 ? void 0 : _a.refId;
   }
 
-  static getFieldSchema(schema: any, key: string): z.ZodSchema {
+  static getFieldSchema(schema: any, key: string): z.ZodType {
     return schema.shape[key];
   }
 

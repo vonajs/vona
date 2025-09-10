@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 export function getTargetDecoratorRules(target: object) {
   registerMappedClassMetadataKey(target, SymbolDecoratorRule, {
-    partialClass: (meta: z.ZodSchema) => {
+    partialClass: (meta: z.ZodType) => {
       return meta.optional();
     },
   });
@@ -27,11 +27,11 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
   const fields = cast(beanOptions?.options)?.fields;
   if (!fields) return;
   for (const key in fields) {
-    const field: TypeOpenapiMetadata | z.ZodSchema = fields[key];
+    const field: TypeOpenapiMetadata | z.ZodType = fields[key];
     if (!field) continue;
-    const schemaCurrent: z.ZodSchema | undefined = rules[key] as any;
+    const schemaCurrent: z.ZodType | undefined = rules[key] as any;
     if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
-      const schema: z.ZodSchema = field as any;
+      const schema: z.ZodType = field as any;
       rules[key] = schema.openapi(deepExtend({}, schemaCurrent?._def.openapi?.metadata, schema._def.openapi?.metadata));
     } else {
       // use deepExtend for sure strict

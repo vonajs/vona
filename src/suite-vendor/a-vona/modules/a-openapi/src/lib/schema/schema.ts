@@ -9,14 +9,14 @@ import { prepareClassType } from '../utils.ts';
 import { makeSchemaLikes } from './makeSchemaLikes.ts';
 import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
 
-export function $schema(schemaLike: z.ZodSchema): z.ZodSchema;
+export function $schema(schemaLike: z.ZodType): z.ZodType;
 export function $schema(classType: StringConstructor): z.ZodString;
 export function $schema(classType: NumberConstructor): z.ZodNumber;
 export function $schema(classType: BooleanConstructor): z.ZodBoolean;
 export function $schema(classType: DateConstructor): z.ZodDate;
 export function $schema(classType: BigIntConstructor): z.ZodBigInt;
 export function $schema(classType: ArrayConstructor): z.ZodArray<z.ZodAny>;
-export function $schema<T>(classType: Constructable<T>, options?: ISchemaObjectOptions): z.ZodSchema<T>;
+export function $schema<T>(classType: Constructable<T>, options?: ISchemaObjectOptions): z.ZodType<T>;
 export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   if (!classType) return z.any();
   if (classType.parseAsync) return classType;
@@ -54,7 +54,7 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   return schema as any;
 }
 
-export function $schemaLazy<T>(...schemaLikes: SchemaLike[]): z.ZodSchema<T> {
+export function $schemaLazy<T>(...schemaLikes: SchemaLike[]): z.ZodType<T> {
   return z.lazy(() => {
     return _createSchemaLazy(schemaLikes);
   });

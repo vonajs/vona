@@ -64,7 +64,7 @@ export function $tableComments<T>(
   const rules = getTargetDecoratorRules(classEntity2.prototype);
   const comments = {};
   for (const key in rules) {
-    const rule = rules[key] as z.ZodSchema;
+    const rule = rules[key] as z.ZodType;
     const comment = rule._def.openapi?.metadata?.description || rule._def.openapi?.metadata?.title;
     comments[key] = comment ? app.meta.text(comment) : '';
   }
@@ -87,7 +87,7 @@ export function $tableDefaults<T>(
   const rules = getTargetDecoratorRules(classEntity2.prototype);
   const defaults: Record<string, any> = {};
   for (const key in rules) {
-    const rule = rules[key] as z.ZodSchema;
+    const rule = rules[key] as z.ZodType;
     defaults[key] = ZodMetadata.getDefaultValue(rule);
   }
   // ok

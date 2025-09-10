@@ -33,7 +33,7 @@ export interface IOpenApiOptions {
   summary?: string;
   httpCode?: number;
   contentType?: TypeResponseContentType;
-  bodySchema?: z.ZodSchema;
+  bodySchema?: z.ZodType;
   bodySchemaWrapper?: SchemaLikeCreate | false;
   exclude?: boolean;
   tags?: string[];
