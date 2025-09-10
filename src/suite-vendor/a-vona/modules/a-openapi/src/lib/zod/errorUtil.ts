@@ -1,7 +1,7 @@
 export declare namespace errorUtil {
   type ErrMessage =
-    | string
-    | {
+    | string |
+    {
       message?: string;
     };
   const errToObj: (message?: ErrMessage) => {

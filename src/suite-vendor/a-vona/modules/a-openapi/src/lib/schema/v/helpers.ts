@@ -3,43 +3,43 @@ import type { errorUtil } from '../../zod/errorUtil.ts';
 import { useApp } from 'vona';
 import { z } from 'zod';
 
-export function schemaEmail(message?: errorUtil.ErrMessage) {
-  return function (schema: z.ZodString): z.ZodString {
-    return schema.email(message);
+export function schemaEmail(params?: string | z.core.$ZodEmailParams) {
+  return function (_schema: z.ZodString): z.ZodEmail {
+    return z.email(params);
   };
 }
 
-export function schemaUrl(message?: errorUtil.ErrMessage) {
-  return function (schema: z.ZodString): z.ZodString {
-    return schema.url(message);
+export function schemaUrl(params?: string | z.core.$ZodURLParams) {
+  return function (_schema: z.ZodString): z.ZodURL {
+    return z.url(params);
   };
 }
 
-export function schemaUuid(message?: errorUtil.ErrMessage) {
-  return function (schema: z.ZodString): z.ZodString {
-    return schema.uuid(message);
+export function schemaUuid(params?: string | z.core.$ZodUUIDParams) {
+  return function (_schema: z.ZodString): z.ZodUUID {
+    return z.uuid(params);
   };
 }
 
-export function schemaIPv4(options?: string | z.core.$ZodIPv4Params) {
+export function schemaIPv4(params?: string | z.core.$ZodIPv4Params) {
   return function (_schema: z.ZodString): z.ZodIPv4 {
-    return z.ipv4(options);
+    return z.ipv4(params);
   };
 }
 
-export function schemaIPv6(options?: string | z.core.$ZodIPv6Params) {
+export function schemaIPv6(params?: string | z.core.$ZodIPv6Params) {
   return function (_schema: z.ZodString): z.ZodIPv6 {
-    return z.ipv6(options);
+    return z.ipv6(params);
   };
 }
 
-export function schemaMin(min: number, message?: errorUtil.ErrMessage) {
+export function schemaMin(min: number, params?: errorUtil.ErrMessage) {
   return function (schema: any): any {
     return schema.min(min, message);
   };
 }
 
-export function schemaMax(max: number, message?: errorUtil.ErrMessage) {
+export function schemaMax(max: number, params?: errorUtil.ErrMessage) {
   return function (schema: any): any {
     return schema.max(max, message);
   };
