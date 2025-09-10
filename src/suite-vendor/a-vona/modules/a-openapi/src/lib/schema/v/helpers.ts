@@ -1,4 +1,5 @@
 import type { IpVersion } from 'zod';
+import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
 import type { errorUtil } from '../../zod/errorUtil.ts';
 import { useApp } from 'vona';
 import { z } from 'zod';
@@ -23,8 +24,8 @@ export function schemaUuid(message?: errorUtil.ErrMessage) {
 
 export function schemaIp(
   options?:
-    | string
-    | {
+    | string |
+    {
       version?: IpVersion;
       message?: string;
     },
@@ -63,5 +64,11 @@ export function schemaTableIdentity() {
 export function schemaBigNumber() {
   return function (_schema: any): any {
     return z.union([z.string(), z.number()]);
+  };
+}
+
+export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
+  return function (schema: z.ZodSchema): any {
+    return schema.openapi({ captcha: options });
   };
 }
