@@ -9,7 +9,7 @@ import { prepareClassType } from '../utils.ts';
 import { makeSchemaLikes } from './makeSchemaLikes.ts';
 import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
 
-export function $schema(schemaLike: z.ZodType): z.ZodType;
+export function $schema<T>(schemaLike: z.ZodType<T>): z.ZodType<T>;
 export function $schema(classType: StringConstructor): z.ZodString;
 export function $schema(classType: NumberConstructor): z.ZodNumber;
 export function $schema(classType: BooleanConstructor): z.ZodBoolean;
@@ -54,13 +54,13 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   return schema as any;
 }
 
-export function $schemaLazy<T>(...schemaLikes: SchemaLike[]): z.ZodType<T> {
+export function $schemaLazy<T>(...schemaLikes: SchemaLike<T>[]): z.ZodType<T> {
   return z.lazy(() => {
     return _createSchemaLazy(schemaLikes);
   });
 }
 
-function _createSchemaLazy(schemaLikes: SchemaLike[]) {
+function _createSchemaLazy<T>(schemaLikes: SchemaLike<T>[]): z.ZodType<T> {
   const classType = schemaLikes[schemaLikes.length - 1];
   schemaLikes = schemaLikes.slice(0, schemaLikes.length - 1);
   const classType2 = prepareClassType(classType as any);

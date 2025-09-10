@@ -19,7 +19,7 @@ export function schemaOptional() {
   };
 }
 
-export function schemaLazy<T>(...schemaLikes: SchemaLike[]) {
+export function schemaLazy<T>(...schemaLikes: SchemaLike<T>[]) {
   return function (_schema?: z.ZodType): z.ZodType<T> {
     return $schemaLazy(...schemaLikes);
   };
