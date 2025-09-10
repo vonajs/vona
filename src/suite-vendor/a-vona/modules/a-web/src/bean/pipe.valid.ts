@@ -10,7 +10,7 @@ export interface IPipeOptionsValid extends IDecoratorPipeOptions, IDecoratorPipe
   // ValidatorOptions
   disableErrorMessages: false,
   errorHttpStatusCode: HttpStatus.BAD_REQUEST,
-  passthrough: false,
+  loose: false,
   strict: false,
 })
 export class PipeValid extends BeanBase implements IPipeTransform<any> {

@@ -34,7 +34,7 @@ const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
   // ValidatorOptions
   disableErrorMessages: false,
   errorHttpStatusCode: HttpStatus.BAD_REQUEST,
-  passthrough: false,
+  loose: false,
   strict: false,
 })
 export class PipeQuery extends BeanBase implements IPipeTransform<any> {

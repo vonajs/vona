@@ -2,7 +2,7 @@ import type { Constructable, Type, VonaContext } from 'vona';
 import type { z } from 'zod';
 
 export interface ISchemaObjectOptions {
-  passthrough?: boolean;
+  loose?: boolean;
   strict?: boolean;
 }
 

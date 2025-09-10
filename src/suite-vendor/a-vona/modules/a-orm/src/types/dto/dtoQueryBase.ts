@@ -10,7 +10,7 @@ export class DtoQueryBase {
   @Api.field(v.optional(), v.array(String, { separator: ',' }))
   columns?: string[];
 
-  @Api.field(v.optional(), z.object({}).passthrough())
+  @Api.field(v.optional(), z.looseObject(z.object({})))
   where?: object;
 
   @Api.field(v.default(ordersDefault), v.optional(), z.union([z.string(), z.array(z.array(z.string()))]))
