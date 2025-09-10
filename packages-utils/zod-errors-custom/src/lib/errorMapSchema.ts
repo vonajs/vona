@@ -30,20 +30,18 @@ const __zodTypes = [
   'ZodLazy',
   'ZodLiteral',
   'ZodEnum',
-  'ZodNativeEnum',
   'ZodPromise',
   'ZodOptional',
   'ZodNullable',
   'ZodDefault',
   'ZodCatch',
   'ZodNaN',
-  'ZodBranded',
-  'ZodPipeline',
   'ZodReadonly',
 ];
 
 export function setErrorMapSchema(localeAdapterFn: LocaleAdapterFn) {
   for (const typeName of __zodTypes) {
+    if (!z[typeName]) throw new Error(`${typeName} does not exist`);
     const _parseOriginal = z[typeName].prototype._parse;
     z[typeName].prototype._parse = function (this: any, input) {
       if (this._def.errorMap && this._def.errorMap.name === 'customMap' && !this._def._errorMapPatched) {
