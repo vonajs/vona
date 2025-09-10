@@ -41,9 +41,7 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {
-    "openapi3-ts": "^4.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

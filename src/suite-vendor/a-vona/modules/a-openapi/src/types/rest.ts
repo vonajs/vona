@@ -1,7 +1,7 @@
 import type { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
-import type { z, ZodTypeAny } from 'zod';
+import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
 import type { IComponentRecord } from './component.ts';
@@ -39,7 +39,7 @@ export type TypeFieldRenderComponentProvider = (keyof IComponentRecord) | (keyof
 
 export type TypeSchemaScene = 'table' | 'form';
 
-export type TypeOpenapiMetadata<T extends ZodTypeAny = ZodTypeAny> = Partial<ZodOpenAPIMetadata<z.input<T>>>;
+export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Partial<ZodOpenAPIMetadata<z.input<T>>>;
 
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
   [key in ((keyof T) | (More extends string ? More : never))]?: TypeOpenapiMetadata | z.ZodType;

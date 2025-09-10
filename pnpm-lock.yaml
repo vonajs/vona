@@ -71,6 +71,9 @@ importers:
       mutate-on-copy:
         specifier: ^1.0.1
         version: 1.0.1
+      openapi3-ts:
+        specifier: ^4.5.0
+        version: 4.5.0
       retry:
         specifier: ^0.13.1
         version: 0.13.1
@@ -1714,8 +1717,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       openapi3-ts:
-        specifier: ^4.4.0
-        version: 4.4.0
+        specifier: ^4.5.0
+        version: 4.5.0
       zod:
         specifier: ^4.1.5
         version: 4.1.5
@@ -1737,10 +1740,6 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-openapiutils:
-    dependencies:
-      openapi3-ts:
-        specifier: ^4.4.0
-        version: 4.4.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -7052,6 +7051,9 @@ packages:
 
   openapi3-ts@4.4.0:
     resolution: {integrity: sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==}
+
+  openapi3-ts@4.5.0:
+    resolution: {integrity: sha512-jaL+HgTq2Gj5jRcfdutgRGLosCy/hT8sQf6VOy+P+g36cZOjI1iukdPnijC+4CmeRzg/jEllJUboEic2FhxhtQ==}
 
   opentype.js@0.7.3:
     resolution: {integrity: sha512-Veui5vl2bLonFJ/SjX/WRWJT3SncgiZNnKUyahmXCc2sa1xXW15u3R/3TN5+JFiP7RsjK5ER4HA5eWaEmV9deA==}
@@ -15018,6 +15020,10 @@ snapshots:
   openapi3-ts@4.4.0:
     dependencies:
       yaml: 2.8.0
+
+  openapi3-ts@4.5.0:
+    dependencies:
+      yaml: 2.8.1
 
   opentype.js@0.7.3:
     dependencies:

@@ -1,5 +1,4 @@
 import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
-import type { errorUtil } from '../../zod/errorUtil.ts';
 import { useApp } from 'vona';
 import { z } from 'zod';
 
@@ -33,15 +32,23 @@ export function schemaIPv6(params?: string | z.core.$ZodIPv6Params) {
   };
 }
 
-export function schemaMin(min: number, params?: errorUtil.ErrMessage) {
-  return function (schema: any): any {
-    return schema.min(min, message);
+export function schemaMin(min: number, params?: string | z.core.$ZodCheckMinLengthParams | z.core.$ZodCheckGreaterThanParams) {
+  return function (schema: z.ZodString | z.ZodNumber): z.ZodString | z.ZodNumber {
+    if (schema.type === 'string') {
+      return schema.min(min, params as string | z.core.$ZodCheckMinLengthParams);
+    } else {
+      return schema.min(min, params as string | z.core.$ZodCheckGreaterThanParams);
+    }
   };
 }
 
-export function schemaMax(max: number, params?: errorUtil.ErrMessage) {
-  return function (schema: any): any {
-    return schema.max(max, message);
+export function schemaMax(max: number, params?: string | z.core.$ZodCheckMaxLengthParams | z.core.$ZodCheckLessThanParams) {
+  return function (schema: z.ZodString | z.ZodNumber): z.ZodString | z.ZodNumber {
+    if (schema.type === 'string') {
+      return schema.max(max, params as string | z.core.$ZodCheckMaxLengthParams);
+    } else {
+      return schema.max(max, params as string | z.core.$ZodCheckLessThanParams);
+    }
   };
 }
 
@@ -49,7 +56,7 @@ export function schemaTableIdentity() {
   const app = useApp();
   const ormConfig = app.util.getModuleConfigRaw('a-orm');
   const _identityType = ormConfig?.table.identityType ?? 'string';
-  return function (_schema?: any): any {
+  return function (_schema?: any): z.ZodString | z.ZodNumber {
     if (_identityType === 'string') {
       return z.string();
     } else if (_identityType === 'number') {
