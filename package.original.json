@@ -22,7 +22,7 @@
     "node": ">=24.4.0"
   },
   "scripts": {
-    "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile",
+    "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile && pnpm dedupe",
     "vona": "node ./packages-cli/cli/src/bin/vona.ts",
     "demo": "npm run vona :bin:demo -- --flavor=normal",
     "db:reset": "npm run prerun && npm run vona :bin:dbReset -- --flavor=normal",
