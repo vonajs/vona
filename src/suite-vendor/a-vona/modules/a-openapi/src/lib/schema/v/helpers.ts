@@ -67,13 +67,13 @@ export function schemaTableIdentity() {
 }
 
 export function schemaBigNumber() {
-  return function (_schema: any): any {
+  return function (_schema: any): z.ZodType {
     return z.union([z.string(), z.number()]);
   };
 }
 
 export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
-  return function (schema: z.ZodType): any {
+  return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({ captcha: options });
   };
 }
