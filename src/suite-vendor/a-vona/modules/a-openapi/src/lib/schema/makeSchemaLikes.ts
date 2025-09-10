@@ -17,11 +17,11 @@ export function makeSchemaLikes(schemaLikes: SchemaLike | SchemaLike[], typeInit
   return argSchema;
 }
 
-export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPrevious: z.ZodSchema): z.ZodSchema {
+export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPrevious: z.ZodType): z.ZodType {
   if (!schemaLike) return schemaPrevious;
   if (Object.prototype.hasOwnProperty.call(schemaLike, 'parseAsync')) {
     // schema
-    return schemaLike as z.ZodSchema;
+    return schemaLike as unknown as z.ZodType;
   } else if (
     isClass(schemaLike) ||
     ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)

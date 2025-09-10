@@ -31,7 +31,7 @@ export function schemaObject<T>(classType: Constructable<T>, options?: ISchemaOb
   };
 }
 
-export function schemaArray(schemaLike?: SchemaLike, params?: z.RawCreateParams & { separator?: string }) {
+export function schemaArray(schemaLike?: SchemaLike, params?: z.core.$ZodArrayParams & { separator?: string }) {
   return function (schema: z.ZodSchema): z.ZodSchema {
     return z.preprocess(
       val => {
@@ -41,7 +41,7 @@ export function schemaArray(schemaLike?: SchemaLike, params?: z.RawCreateParams 
         if (val.startsWith('[') && val.endsWith(']')) return JSON.parse(val);
         return val.split(params?.separator ?? ',');
       },
-      z.array(makeSchemaLike(schemaLike ?? schema, z.any()), params),
+      z.array(makeSchemaLike(schemaLike ?? schema as any, z.any()), params),
       // z.array(makeSchemaLike(schemaLike, schema), params),
     );
   };
