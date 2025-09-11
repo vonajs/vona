@@ -2,7 +2,7 @@ import type { VonaBinConfigOptions } from './types.ts';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { copyTemplateIfNeed } from '../../utils.ts';
+import { copyTemplateIfNeed, pathToHref } from '../../utils.ts';
 
 const __ImportZodCore = 'zod/v4/core';
 
@@ -57,7 +57,7 @@ export const $ZodType =`,
 }
 
 function parseZodCorePath(appDir: string) {
-  const require = createRequire(appDir);
+  const require = createRequire(pathToHref(path.join(appDir, '/')));
   const fileCoreIndex = require.resolve(__ImportZodCore);
   return path.dirname(fileCoreIndex);
 }
