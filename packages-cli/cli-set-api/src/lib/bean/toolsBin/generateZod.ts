@@ -7,6 +7,7 @@ const __ImportZodCore = 'zod/v4/core';
 
 export async function generateZod() {
   await __generateZodCoreUtil();
+  await __generateZodCoreSchemas();
 }
 
 async function __generateZodCoreUtil() {
@@ -28,6 +29,28 @@ export function finalizeIssue`,
       'const message = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ??',
       `const msg = unwrapMessage(iss.inst?._zod.def?.error?.(iss));
         const message = (__localeAdapterFn?__localeAdapterFn(msg):msg) ??`,
+    );
+  fse.writeFileSync(fileSrc, contentNew);
+}
+
+async function __generateZodCoreSchemas() {
+  const pathZodCore = parseZodCorePath();
+  const fileSrc = path.join(pathZodCore, 'schemas.js');
+  const fileSrcBak = path.join(pathZodCore, 'schemas-origin.js');
+  copyTemplateIfNeed(fileSrc, fileSrcBak);
+  const content = fse.readFileSync(fileSrcBak).toString();
+  const contentNew = content
+    .replace(
+      'export const $ZodType =',
+      `let __parseAdapterFn;
+export function setParseAdapter(parseAdapterFn) {
+    __parseAdapterFn = parseAdapterFn;
+}
+export const $ZodType =`,
+    )
+    .replace(
+      'inst._zod.run = inst._zod.parse;',
+      'inst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, inst._zod.parse) : inst._zod.parse;',
     );
   fse.writeFileSync(fileSrc, contentNew);
 }
