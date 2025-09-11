@@ -8,6 +8,7 @@ const __ImportOpenapi = '@asteasolutions/zod-to-openapi';
 
 export async function generateOpenapi(configOptions: VonaBinConfigOptions) {
   await __generateOpenapiIndex(configOptions);
+  await __generateOpenapiIndexDts(configOptions);
 }
 
 function __generateOpenapiIndex(configOptions: VonaBinConfigOptions) {
@@ -20,6 +21,20 @@ function __generateOpenapiIndex(configOptions: VonaBinConfigOptions) {
     .replace(
       'class Metadata {',
       'export class Metadata {',
+    );
+  fse.writeFileSync(fileSrc, contentNew);
+}
+
+function __generateOpenapiIndexDts(configOptions: VonaBinConfigOptions) {
+  const pathIndex = parseOpenapiPath(configOptions.appDir);
+  const fileSrc = path.join(pathIndex, 'index.d.ts');
+  const fileSrcBak = path.join(pathIndex, 'index-origin.d.ts');
+  copyTemplateIfNeed(fileSrc, fileSrcBak);
+  const content = fse.readFileSync(fileSrcBak).toString();
+  const contentNew = content
+    .replace(
+      'export { zodToOpenAPIRegistry } from \'./metadata\';',
+      'export { Metadata, zodToOpenAPIRegistry } from \'./metadata\';',
     );
   fse.writeFileSync(fileSrc, contentNew);
 }

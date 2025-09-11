@@ -1,4 +1,5 @@
 import type z from 'zod';
+import { Metadata } from '@asteasolutions/zod-to-openapi';
 
 export class ZodMetadata {
   static unwrapUntil(schema, typeName?) {
