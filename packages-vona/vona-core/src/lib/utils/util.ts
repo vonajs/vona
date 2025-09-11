@@ -4,6 +4,7 @@ import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
 import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
 import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
+import type { ZodLocaleErrors } from './zod-enhance.ts';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -15,6 +16,7 @@ import fse from 'fs-extra';
 import * as uuid from 'uuid';
 import { cast } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
+import { zodSetLocaleErrors } from './zod-enhance.ts';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
@@ -270,6 +272,10 @@ export class AppUtil extends BeanSimple {
   >(moduleName: K,
   ): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG | undefined : undefined {
     return this.app.config.modules[moduleName as any];
+  }
+
+  setLocaleErrors(localeErrors: ZodLocaleErrors, localeDefault?: string) {
+    return zodSetLocaleErrors(this.app, localeErrors, localeDefault);
   }
 }
 
