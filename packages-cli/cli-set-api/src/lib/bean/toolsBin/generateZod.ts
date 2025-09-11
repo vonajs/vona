@@ -19,7 +19,7 @@ async function __generateZodCoreUtil() {
     .replace(
       'export function finalizeIssue',
       `let __localeAdapterFn;
-export function setlLocaleAdapter(localeAdapterFn) {
+export function setLocaleAdapter(localeAdapterFn) {
   __localeAdapterFn=localeAdapterFn;
 }
 export function finalizeIssue`,
