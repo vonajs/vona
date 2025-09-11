@@ -6,6 +6,7 @@ import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
 import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from '../../utils.ts';
+import { generateZod } from './generateZod.ts';
 
 export async function generateEntryFiles(
   configMeta: VonaConfigMeta,
@@ -21,6 +22,8 @@ export async function generateEntryFiles(
   await __generateEnvJson();
   // app
   await __generateApp();
+  // zod
+  await generateZod();
 
   //////////////////////////////
 

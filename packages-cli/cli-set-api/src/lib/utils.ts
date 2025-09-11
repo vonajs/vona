@@ -81,3 +81,9 @@ export function getOutDir() {
 export function getOutReleasesDir() {
   return `dist-releases/${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
 }
+
+export function copyTemplateIfNeed(fileSrc: string, fileDest: string) {
+  if (!fse.existsSync(fileDest)) {
+    fse.copyFileSync(fileSrc, fileDest);
+  }
+}
