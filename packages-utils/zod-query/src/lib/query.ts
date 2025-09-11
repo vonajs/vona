@@ -1,6 +1,20 @@
 import { z } from 'zod';
 import { isNil } from './utils.ts';
 
+interface IParsePayload {
+  value: any;
+  issues: any[];
+}
+export function setParseAdapter() {
+  ((z.core) as any).setParseAdapter(__parseAdapter);
+}
+
+function __parseAdapter(inst: z.ZodType, parse) {
+  return (payload: IParsePayload, _) => {
+    return parse(payload, _);
+  };
+}
+
 /////////////////////////////////////////
 /////////////////////////////////////////
 /// ///////                     /////////
