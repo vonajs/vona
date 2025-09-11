@@ -23,7 +23,7 @@ export async function generateEntryFiles(
   // app
   await __generateApp();
   // zod
-  await generateZod();
+  await generateZod(configOptions);
 
   //////////////////////////////
 

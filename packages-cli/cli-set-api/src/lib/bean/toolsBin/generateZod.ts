@@ -1,3 +1,4 @@
+import type { VonaBinConfigOptions } from './types.ts';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import fse from 'fs-extra';
@@ -5,13 +6,13 @@ import { copyTemplateIfNeed } from '../../utils.ts';
 
 const __ImportZodCore = 'zod/v4/core';
 
-export async function generateZod() {
-  await __generateZodCoreUtil();
-  await __generateZodCoreSchemas();
+export async function generateZod(configOptions: VonaBinConfigOptions) {
+  await __generateZodCoreUtil(configOptions);
+  await __generateZodCoreSchemas(configOptions);
 }
 
-async function __generateZodCoreUtil() {
-  const pathZodCore = parseZodCorePath();
+async function __generateZodCoreUtil(configOptions: VonaBinConfigOptions) {
+  const pathZodCore = parseZodCorePath(configOptions.appDir);
   const fileSrc = path.join(pathZodCore, 'util.js');
   const fileSrcBak = path.join(pathZodCore, 'util-origin.js');
   copyTemplateIfNeed(fileSrc, fileSrcBak);
@@ -33,8 +34,8 @@ export function finalizeIssue`,
   fse.writeFileSync(fileSrc, contentNew);
 }
 
-async function __generateZodCoreSchemas() {
-  const pathZodCore = parseZodCorePath();
+async function __generateZodCoreSchemas(configOptions: VonaBinConfigOptions) {
+  const pathZodCore = parseZodCorePath(configOptions.appDir);
   const fileSrc = path.join(pathZodCore, 'schemas.js');
   const fileSrcBak = path.join(pathZodCore, 'schemas-origin.js');
   copyTemplateIfNeed(fileSrc, fileSrcBak);
@@ -55,8 +56,8 @@ export const $ZodType =`,
   fse.writeFileSync(fileSrc, contentNew);
 }
 
-function parseZodCorePath() {
-  const require = createRequire(import.meta.url);
+function parseZodCorePath(appDir: string) {
+  const require = createRequire(appDir);
   const fileCoreIndex = require.resolve(__ImportZodCore);
   return path.dirname(fileCoreIndex);
 }
