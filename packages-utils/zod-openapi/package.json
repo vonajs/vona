@@ -51,6 +51,9 @@
       "exports.\\..import"
     ]
   },
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^8.1.0"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

@@ -836,6 +836,19 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
 
+  packages-utils/zod-openapi:
+    dependencies:
+      '@asteasolutions/zod-to-openapi':
+        specifier: ^8.1.0
+        version: 8.1.0(zod@4.1.5)
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
   packages-utils/zod-query:
     devDependencies:
       clean-package:
