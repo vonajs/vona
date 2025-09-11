@@ -21,6 +21,10 @@ function __generateOpenapiIndex(configOptions: VonaBinConfigOptions) {
     .replace(
       'class Metadata {',
       'export class Metadata {',
+    )
+    .replace(
+      'function isZodType(',
+      'export function isZodType(',
     );
   fse.writeFileSync(fileSrc, contentNew);
 }
@@ -31,11 +35,12 @@ function __generateOpenapiIndexDts(configOptions: VonaBinConfigOptions) {
   const fileSrcBak = path.join(pathIndex, 'index-origin.d.ts');
   copyTemplateIfNeed(fileSrc, fileSrcBak);
   const content = fse.readFileSync(fileSrcBak).toString();
-  const contentNew = content
+  let contentNew = content
     .replace(
       'export { zodToOpenAPIRegistry } from \'./metadata\';',
       'export { Metadata, zodToOpenAPIRegistry } from \'./metadata\';',
     );
+  contentNew += '\nexport function isZodType<T>(schema: z.ZodType<T>, typeNames: string | string[]): boolean;\n';
   fse.writeFileSync(fileSrc, contentNew);
 }
 

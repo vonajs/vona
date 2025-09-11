@@ -1,67 +1,42 @@
+import type { ZodOpenAPIInternalMetadata } from '@asteasolutions/zod-to-openapi/dist/zod-extensions.js';
 import type z from 'zod';
-import { Metadata } from '@asteasolutions/zod-to-openapi';
+import { isZodType, Metadata } from '@asteasolutions/zod-to-openapi';
 
 export class ZodMetadata {
   static unwrapUntil(schema, typeName?) {
-    if (typeName && isZodType(schema, typeName)) {
-      return schema;
-    }
-    if (isZodType(schema, 'ZodOptional') ||
-      isZodType(schema, 'ZodNullable') ||
-      isZodType(schema, 'ZodBranded')) {
-      return this.unwrapUntil(schema.unwrap(), typeName);
-    }
-    if (isZodType(schema, 'ZodDefault') || isZodType(schema, 'ZodReadonly')) {
-      return this.unwrapUntil(schema._def.innerType, typeName);
-    }
-    if (isZodType(schema, 'ZodEffects')) {
-      return this.unwrapUntil(schema._def.schema, typeName);
-    }
-    if (isZodType(schema, 'ZodPipeline')) {
-      return this.unwrapUntil(schema._def.in, typeName);
-    }
-    return typeName ? undefined : schema;
+    return (Metadata as any).unwrapUntil(schema, typeName);
   }
 
-  static unwrapChained(schema) {
-    return this.unwrapUntil(schema);
+  static unwrapChained(schema: z.ZodType): z.ZodType {
+    return Metadata.unwrapChained(schema);
   }
 
-  static getDefaultValue(zodSchema) {
-    const unwrapped = this.unwrapUntil(zodSchema, 'ZodDefault');
-    return unwrapped === null || unwrapped === void 0 ? void 0 : unwrapped._def.defaultValue();
+  static getDefaultValue<T>(zodSchema: z.ZodType): T | undefined {
+    return Metadata.getDefaultValue(zodSchema);
   }
 
-  static getInternalMetadata(zodSchema) {
-    const innerSchema = this.unwrapChained(zodSchema);
-    const openapi = zodSchema._def.openapi
-      ? zodSchema._def.openapi
-      : innerSchema._def.openapi;
-    return openapi === null || openapi === void 0 ? void 0 : openapi._internal;
+  static getInternalMetadata<T>(zodSchema: z.ZodType<T>): ZodOpenAPIInternalMetadata | undefined {
+    return Metadata.getInternalMetadata(zodSchema);
   }
 
-  static getLazySchema(zodSchema) {
-    const innerSchema = this.unwrapChained(zodSchema);
-    return zodSchema._def?.getter ?? innerSchema._def?.getter;
+  static getLazySchema<T>(zodSchema: z.ZodType<T>) {
+    const innerSchema = this.unwrapChained(zodSchema) as z.ZodLazy;
+    return (zodSchema as z.ZodLazy)._zod.def.getter ?? innerSchema._zod.def.getter;
   }
 
-  static getRefId(zodSchema) {
-    let _a;
-    // eslint-disable-next-line
-    return (_a = this.getInternalMetadata(zodSchema)) === null || _a === void 0 ? void 0 : _a.refId;
+  static getRefId<T>(zodSchema: z.ZodType<T>): string | undefined {
+    return Metadata.getRefId(zodSchema);
   }
 
   static getFieldSchema(schema: any, key: string): z.ZodType {
     return schema.shape[key];
   }
 
-  static getOpenapiMetadata(schema: any) {
-    return schema._def.openapi?.metadata;
+  static getOpenapiMetadata<T>(zodSchema: z.ZodType<T>) {
+    return Metadata.getOpenApiMetadata(zodSchema);
   }
-}
 
-export function isZodType(schema, typeName) {
-  let _a;
-  // eslint-disable-next-line
-  return ((_a = schema === null || schema === void 0 ? void 0 : schema._def) === null || _a === void 0 ? void 0 : _a.typeName) === typeName;
+  static isZodType<T>(schema: z.ZodType<T>, typeNames: string | string[]): boolean {
+    return isZodType(schema, typeNames);
+  }
 }
