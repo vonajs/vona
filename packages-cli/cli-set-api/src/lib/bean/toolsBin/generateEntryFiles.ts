@@ -6,7 +6,6 @@ import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
 import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from '../../utils.ts';
-import { generateOpenapi } from './generateOpenapi.ts';
 import { generateZod } from './generateZod.ts';
 
 export async function generateEntryFiles(
@@ -25,8 +24,6 @@ export async function generateEntryFiles(
   await __generateApp();
   // zod
   await generateZod(configOptions);
-  // openapi
-  await generateOpenapi(configOptions);
 
   //////////////////////////////
 

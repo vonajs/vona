@@ -34,7 +34,6 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^8.1.0",
     "@cabloy/compose": "^2.0.14",
     "@cabloy/extend": "^3.1.10",
     "@cabloy/json5": "^1.0.18",
