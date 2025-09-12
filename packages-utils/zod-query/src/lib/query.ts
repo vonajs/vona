@@ -14,6 +14,10 @@ export function setParseAdapter(zodMetadata: any) {
 
 function __parseAdapter(inst: z.ZodType, parse) {
   return (payload: IParsePayload, _) => {
+    const type = inst.type;
+    switch (type) {
+      case 'string':return __parseString(inst, parse, payload, _);
+    }
     return parse(payload, _);
   };
 }
@@ -26,17 +30,17 @@ function __parseAdapter(inst: z.ZodType, parse) {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-const _parseString = z.ZodString.prototype._parse;
-z.ZodString.prototype._parse = function (this: z.ZodString, input) {
-  if ((this as any)._def?.openapi?.metadata?.format === 'binary' && !isNil(input.data)) {
+function __parseString(inst, parse, payload: IParsePayload, _) {
+  const metadata = ZodMetadata?.getOpenapiMetadata(inst);
+  if (metadata?.format === 'binary' && !isNil(payload.value)) {
     // ignore upload file
-    return { status: 'valid', value: input.data };
+    return payload;
   }
-  _coerce(input, () => {
-    input.data = String(input.data);
+  _coerce(payload, () => {
+    payload.value = String(payload.value);
   });
-  return _parseString.call(this, input);
-};
+  return parse(payload, _);
+}
 
 /////////////////////////////////////////
 /////////////////////////////////////////
@@ -46,13 +50,12 @@ z.ZodString.prototype._parse = function (this: z.ZodString, input) {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-const _parseNumber = z.ZodNumber.prototype._parse;
-z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
-  _coerceWithNil(input, () => {
-    input.data = Number(input.data);
+function __parseNumber(inst, parse, payload: IParsePayload, _) {
+  _coerceWithNil(payload, () => {
+    payload.value = Number(payload.value);
   });
-  return _parseNumber.call(this, input);
-};
+  return parse(payload, _);
+}
 
 /////////////////////////////////////////
 /////////////////////////////////////////
@@ -193,8 +196,8 @@ z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-function _coerce(input, fn?: Function) {
-  if (!isNil(input.data)) {
+function _coerce(payload: IParsePayload, fn?: Function) {
+  if (!isNil(payload.value)) {
     fn?.();
   }
 }
