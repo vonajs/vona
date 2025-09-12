@@ -223,28 +223,9 @@ export function coerceWithNil(value: any, fn?: Function) {
   return payload.value;
 }
 
-function _getInnerType(schema: any) {
-  let innerType = schema._def.innerType;
-  if (!innerType) return schema;
-  while (innerType._def.innerType) {
-    innerType = innerType._def.innerType;
-  }
-  return innerType;
+export function getInnerTypeName(schema: z.ZodType) {
+  return Metadata.unwrapUntil(schema).type;
 }
-
-function _getTypeName(schema: any) {
-  let typeName = schema.typeName;
-  while (!typeName) {
-    schema = schema._def;
-    typeName = schema.typeName;
-  }
-  return typeName;
-}
-
-export function getTypeName(schema: any) {
-  return _getTypeName(_getInnerType(schema));
-}
-
 // function _coerce(instance, input, fn) {
 //   if (instance._def.coerce !== false) {
 //     if (instance._def.coerce === true) instance._def.coerce = undefined as any;

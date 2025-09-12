@@ -10,7 +10,7 @@ import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import * as ModuleInfo from '@cabloy/module-info';
 import { isEmptyObject } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { getTypeName } from '@cabloy/zod-query';
+import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import {
   appMetadata,
@@ -349,7 +349,7 @@ export class ServiceOpenapi extends BeanBase {
         }
         if (!schema) continue;
         // check schema
-        if (getTypeName(schema) === 'ZodAny') {
+        if (getInnerTypeName(schema) === 'any') {
           throw new Error(`Invalid Openapi argument type: ${info.relativeName}:${controller.name}.${actionKey}#${argumentType}`);
         }
         // record
