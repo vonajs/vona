@@ -1,6 +1,6 @@
 import type { VonaApplication } from 'vona';
-import { OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { ZodMetadata } from '@cabloy/zod-query';
+import { OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { cast } from 'vona';
 
 export function schemaRefCustomAdapter(_app: VonaApplication) {
