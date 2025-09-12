@@ -1,6 +1,5 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type z from 'zod';
 import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { isClass } from '@cabloy/utils';
@@ -64,7 +63,7 @@ export function $tableComments<T>(
   const rules = getTargetDecoratorRules(classEntity2.prototype);
   const comments = {};
   for (const key in rules) {
-    const rule = rules[key];
+    const rule = rules[key]!;
     const metadata = ZodMetadata.getOpenapiMetadata(rule);
     const comment = metadata?.description || metadata?.title;
     comments[key] = comment ? app.meta.text(comment) : '';
@@ -88,7 +87,7 @@ export function $tableDefaults<T>(
   const rules = getTargetDecoratorRules(classEntity2.prototype);
   const defaults: Record<string, any> = {};
   for (const key in rules) {
-    const rule = rules[key] as z.ZodType;
+    const rule = rules[key]!;
     defaults[key] = ZodMetadata.getDefaultValue(rule);
   }
   // ok

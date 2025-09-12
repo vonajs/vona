@@ -1,3 +1,4 @@
+import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -33,21 +34,21 @@ describe('dtoGet.test.ts', () => {
           }),
         },
       });
-      const rules: any = getTargetDecoratorRules(DtoPostNew.prototype);
-      assert.equal(['ZodString', 'ZodNumber'].includes(rules.id._def.typeName), true);
-      assert.equal(rules.title._def.typeName, 'ZodString');
-      assert.equal(['ZodString', 'ZodNumber'].includes(rules.userId._def.typeName), true);
+      const rules: TypeDecoratorRules = getTargetDecoratorRules(DtoPostNew.prototype);
+      assert.equal(['string', 'number'].includes(rules.id?.type as string), true);
+      assert.equal(rules.title?.type === 'string', true);
+      assert.equal(['string', 'number'].includes(rules.userId?.type as string), true);
       assert.equal(rules.iid, undefined);
-      assert.equal(rules.postContent._def.typeName, 'ZodOptional');
-      assert.equal(rules.user._def.typeName, 'ZodOptional');
-      assert.equal(rules.user3._def.typeName, 'ZodOptional');
+      assert.equal(rules.postContent?.type === 'optional', true);
+      assert.equal(rules.user?.type === 'optional', true);
+      assert.equal(rules.user3?.type === 'optional', true);
     });
   });
   it('action:dtoGet:categoryTree', async () => {
     await app.bean.executor.mockCtx(async () => {
       const DtoCategoryTree = $Dto.get('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
-      const rules: any = getTargetDecoratorRules(DtoCategoryTree.prototype);
-      assert.equal(rules.children._def.typeName, 'ZodEffects');
+      const rules: TypeDecoratorRules = getTargetDecoratorRules(DtoCategoryTree.prototype);
+      assert.equal(rules.children?.type === 'pipe', true); // ZodEffect
       assert.equal(rules.iid, undefined);
       const DtoCategoryChain = $Dto.get('test-vona:categoryChain', { columns: ['id', 'name', 'categoryIdParent'] });
       const _apiJson = await app.bean.scope('a-openapi').service.openapi.generateJsonOfClass(DtoCategoryChain);

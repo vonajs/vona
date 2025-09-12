@@ -1,3 +1,4 @@
+import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -12,15 +13,15 @@ describe('dtoMutate.test.ts', () => {
       const DtoUserCreate = $Dto.create('test-vona:user', {
         include: { posts: true },
       });
-      let rules: any;
+      let rules: TypeDecoratorRules;
       rules = getTargetDecoratorRules(DtoUserCreate.prototype);
-      assert.equal(rules.name._def.typeName, 'ZodString');
+      assert.equal(rules.name?.type === 'string', true);
       assert.equal(rules.id, undefined);
       assert.equal(rules.iid, undefined);
       assert.equal(rules.deleted, undefined);
       assert.equal(rules.createdAt, undefined);
       assert.equal(rules.updatedAt, undefined);
-      assert.equal(rules.posts._def.typeName, 'ZodOptional');
+      assert.equal(rules.posts?.type === 'optional', true);
       // update
       const DtoUserUpdate = $Dto.update('test-vona:user', {
         with: {
@@ -28,13 +29,13 @@ describe('dtoMutate.test.ts', () => {
         },
       });
       rules = getTargetDecoratorRules(DtoUserUpdate.prototype);
-      assert.equal(rules.name._def.typeName, 'ZodString'); // ZodOptional
+      assert.equal(rules.name?.type === 'string', true); // ZodOptional
       assert.equal(rules.id, undefined);
       assert.equal(rules.iid, undefined);
       assert.equal(rules.deleted, undefined);
       assert.equal(rules.createdAt, undefined);
       assert.equal(rules.updatedAt, undefined);
-      assert.equal(rules.posts._def.typeName, 'ZodOptional');
+      assert.equal(rules.posts?.type === 'optional', true);
       // create: not mutate post(belongsTo)
       const DtoPostCreate = $Dto.create('test-vona:post', {
         include: {
@@ -43,10 +44,10 @@ describe('dtoMutate.test.ts', () => {
         },
       });
       rules = getTargetDecoratorRules(DtoPostCreate.prototype);
-      assert.equal(rules.title._def.typeName, 'ZodString'); // ZodOptional
-      assert.equal(rules.stars._def.typeName, 'ZodOptional');
-      assert.equal(['ZodString', 'ZodNumber'].includes(rules.userId._def.typeName), true);
-      assert.equal(rules.postContent._def.typeName, 'ZodOptional');
+      assert.equal(rules.title?.type === 'string', true); // ZodOptional
+      assert.equal(rules.stars?.type === 'optional', true);
+      assert.equal(['string', 'number'].includes(rules.userId?.type as string), true);
+      assert.equal(rules.postContent?.type === 'optional', true);
       assert.equal(rules.user, undefined);
       assert.equal(rules.id, undefined);
     });
