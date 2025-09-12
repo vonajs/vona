@@ -64,7 +64,7 @@ export function $tableComments<T>(
   const rules = getTargetDecoratorRules(classEntity2.prototype);
   const comments = {};
   for (const key in rules) {
-    const rule = rules[key] as z.ZodType;
+    const rule = rules[key];
     const metadata = ZodMetadata.getOpenapiMetadata(rule);
     const comment = metadata?.description || metadata?.title;
     comments[key] = comment ? app.meta.text(comment) : '';

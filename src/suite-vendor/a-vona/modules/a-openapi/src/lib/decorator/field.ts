@@ -10,7 +10,7 @@ export function Field(...schemaLikes: SchemaLike[]): PropertyDecorator {
     const rules = getTargetDecoratorRules(target);
     // rule
     const metaType = appMetadata.getDesignType(target, prop);
-    rules[prop] = makeSchemaLikes(schemaLikes, metaType);
+    rules[prop as string] = makeSchemaLikes(schemaLikes, metaType);
     //
     const columns = getTargetDecoratorRuleColumns(target);
     columns[prop] = prop;

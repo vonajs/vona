@@ -1,4 +1,5 @@
 import type { Constructable } from 'vona';
+import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
 import type { TypeOpenapiMetadata } from '../types/rest.ts';
 import { isClass } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
@@ -6,7 +7,7 @@ import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadata
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
 
-export function getTargetDecoratorRules(target: object) {
+export function getTargetDecoratorRules(target: object): TypeDecoratorRules {
   registerMappedClassMetadataKey(target, SymbolDecoratorRule, {
     partialClass: (meta: z.ZodType) => {
       return meta.optional();
@@ -30,7 +31,7 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
   for (const key in fields) {
     const field: TypeOpenapiMetadata | z.ZodType = fields[key];
     if (!field) continue;
-    const schemaCurrent: z.ZodType | undefined = rules[key] as any;
+    const schemaCurrent = rules[key];
     const metadataCurrent = schemaCurrent ? ZodMetadata.getOpenapiMetadata(schemaCurrent) : undefined;
     if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
       const schema: z.ZodType = field as any;
