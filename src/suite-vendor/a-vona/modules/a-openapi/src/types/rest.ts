@@ -1,4 +1,4 @@
-import type { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
+import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';

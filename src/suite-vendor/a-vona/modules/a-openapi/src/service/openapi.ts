@@ -7,11 +7,11 @@ import type {
 import type { IOpenApiHeader, IOpenapiObject, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
-import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import * as ModuleInfo from '@cabloy/module-info';
 import { isEmptyObject } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { getTypeName } from '@cabloy/zod-query';
+import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import {
   appMetadata,
   appResource,

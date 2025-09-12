@@ -1,4 +1,4 @@
-import type { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
+import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
 import type { z } from 'zod';
 
 export function schemaOpenapi<T extends z.ZodType>(metadata: Partial<ZodOpenAPIMetadata<z.input<T>>>): T;
