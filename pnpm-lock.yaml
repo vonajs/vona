@@ -36,8 +36,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.0
-        version: 8.1.0(zod@4.1.5)
+        specifier: ^8.1.1
+        version: 8.1.1(zod@4.1.5)
       '@sesamecare-oss/redlock':
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.7.0)
@@ -1729,6 +1729,9 @@ importers:
       '@cabloy/zod-errors-custom':
         specifier: ^2.0.0
         version: link:../../../../../packages-utils/zod-errors-custom
+      '@cabloy/zod-openapi':
+        specifier: ^1.0.0
+        version: link:../../../../../packages-utils/zod-openapi
       '@cabloy/zod-query':
         specifier: ^2.0.0
         version: link:../../../../../packages-utils/zod-query
@@ -2511,11 +2514,6 @@ packages:
 
   '@cabloy/word-utils@2.0.1':
     resolution: {integrity: sha512-kZx3fdk8sOX9JpVv6Q7y6r+rbqZ0KvE8NukbvsQfSvOngV7Yi3dF8PmefCDJWuPqn6YZ4PdxKxCOWaYTrVQPQA==}
-
-  '@cabloy/zod-to-openapi@8.1.0':
-    resolution: {integrity: sha512-ctv4pReqXW7utROxp1dNOze4yFZ36AVoOoFVNe6TdXsC7HgFlHDxtLK1SBJoPC35G/CIusOsJCFqVwf11vEGSA==}
-    peerDependencies:
-      zod: ^4.0.0
 
   '@cabloy/zod-to-openapi@8.1.1':
     resolution: {integrity: sha512-btm05WXlAcAbOcMN4vzIpr0KbLYJnylH49IwsYNN5x107o4vSG+FLi97HFT3LCHHi9pSpSVzmTjDIApeSRV2jw==}
@@ -9494,11 +9492,6 @@ snapshots:
       - supports-color
 
   '@cabloy/word-utils@2.0.1': {}
-
-  '@cabloy/zod-to-openapi@8.1.0(zod@4.1.5)':
-    dependencies:
-      openapi3-ts: 4.5.0
-      zod: 4.1.5
 
   '@cabloy/zod-to-openapi@8.1.1(zod@4.1.5)':
     dependencies:

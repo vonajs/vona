@@ -4,7 +4,7 @@ import type z from 'zod';
 import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { isClass } from '@cabloy/utils';
-import { ZodMetadata } from '@cabloy/zod-query';
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, useApp } from 'vona';
 import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
@@ -21,9 +21,9 @@ export function $columnsAll<T, TableName extends boolean, Meta extends boolean>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
   withTableName?: TableName,
   withMeta?: Meta,
-): TableName extends true ?
-      (Meta extends true ? TypeEntityMeta<T> : Omit<TypeEntityMeta<T>, '$comment' | '$default'>) :
-      (Meta extends true ? Omit<TypeEntityMeta<T>, '$table'> : Omit<TypeEntityMeta<T>, '$table' | '$comment' | '$default'>) {
+): TableName extends true
+  ? (Meta extends true ? TypeEntityMeta<T> : Omit<TypeEntityMeta<T>, '$comment' | '$default'>)
+  : (Meta extends true ? Omit<TypeEntityMeta<T>, '$table'> : Omit<TypeEntityMeta<T>, '$table' | '$comment' | '$default'>) {
   const classEntity2 = _prepareClassEntity(classEntity);
   let columns = appMetadata.getMetadata<Record<string, string>>(SymbolDecoratorRuleColumn, classEntity2.prototype);
   if (withTableName) {

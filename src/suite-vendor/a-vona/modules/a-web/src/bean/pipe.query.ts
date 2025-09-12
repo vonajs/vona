@@ -5,7 +5,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
 import { isNil } from '@cabloy/utils';
-import { ZodMetadata } from '@cabloy/zod-query';
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
