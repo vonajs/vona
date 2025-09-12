@@ -90,7 +90,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
   private _transformOrders(params: TypeQueryParamsPatch, options: IPipeOptionsQuery) {
     if (!params.orders) return;
     // openapi
-    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema);
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema!);
     const table = openapi?.query?.table;
     // loop
     for (const order of params.orders) {
