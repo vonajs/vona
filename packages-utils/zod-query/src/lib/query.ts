@@ -21,6 +21,8 @@ function __parseAdapter(inst: z.ZodType, parse) {
       case 'bigint': return __parseBigInt(inst, parse, payload, _);
       case 'boolean': return __parseBoolean(inst, parse, payload, _);
       case 'date': return __parseDate(inst, parse, payload, _);
+      case 'object': return __parseObject(inst, parse, payload, _);
+      case 'array': return __parseArray(inst, parse, payload, _);
     }
     return parse(payload, _);
   };
@@ -118,15 +120,14 @@ function __parseDate(_inst, parse, payload: IParsePayload, _) {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-const _parseObject = z.ZodObject.prototype._parse;
-z.ZodObject.prototype._parse = function (input) {
+function __parseObject(_inst, parse, payload: IParsePayload, _) {
   _coerceWithNil(payload, () => {
     if (typeof payload.value === 'string') {
       payload.value = JSON.parse(payload.value);
     }
   });
   return parse(payload, _);
-};
+}
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -136,8 +137,7 @@ z.ZodObject.prototype._parse = function (input) {
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-const _parseArray = z.ZodArray.prototype._parse;
-z.ZodArray.prototype._parse = function (input) {
+function __parseArray(_inst, parse, payload: IParsePayload, _) {
   _coerceWithNil(payload, () => {
     if (typeof payload.value === 'string') {
       if (payload.value.startsWith('[') && payload.value.endsWith(']')) {
@@ -148,7 +148,7 @@ z.ZodArray.prototype._parse = function (input) {
     }
   });
   return parse(payload, _);
-};
+}
 
 ///////////////////////////////////////////
 ///////////////////////////////////////////
