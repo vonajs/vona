@@ -10,7 +10,6 @@ import { BeanContainer } from '../bean/beanContainer.ts';
 import { closeApp } from '../framework/useApp.ts';
 import { AppUtil } from '../utils/util.ts';
 import { zodEnhance } from '../utils/zod-enhance.ts';
-import { zodExtendOpenApi } from '../utils/zod-openapi.ts';
 import { VonaAsyncLocalStorage } from './asyncLocalStorage.ts';
 import { contextBase } from './context.ts';
 import { AppMeta } from './meta.ts';
@@ -51,7 +50,6 @@ export class VonaApplication extends KoaApplication {
       Object.defineProperty(this.context, key, desc);
     }
     // zod
-    zodExtendOpenApi();
     zodEnhance(this);
   }
 

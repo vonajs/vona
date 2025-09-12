@@ -1,6 +1,7 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenapiMetadata } from '../types/rest.ts';
 import { isClass } from '@cabloy/utils';
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
@@ -30,9 +31,16 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
     const field: TypeOpenapiMetadata | z.ZodType = fields[key];
     if (!field) continue;
     const schemaCurrent: z.ZodType | undefined = rules[key] as any;
+    const metadataCurrent = schemaCurrent ? ZodMetadata.getOpenapiMetadata(schemaCurrent) : undefined;
     if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
       const schema: z.ZodType = field as any;
-      rules[key] = schema.openapi(deepExtend({}, schemaCurrent?._def.openapi?.metadata, schema._def.openapi?.metadata));
+      // todo: metadata中是否包含refId，如果包含就要排除，然后把metadata合并至field中
+      const metadataCustom = ZodMetadata.getOpenapiMetadata(schema);
+      const refIdCurrent = ZodMetadata.getRefId(schemaCurrent!);
+      const refId = ZodMetadata.getRefId(schema);
+      rules[key] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
+      const refIdNew = ZodMetadata.getRefId(rules[key] as any);
+      console.log(refIdNew);
     } else {
       // use deepExtend for sure strict
       if (schemaCurrent) {
