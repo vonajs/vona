@@ -1,5 +1,7 @@
 import { z } from 'zod';
+import { Metadata } from './metadata.ts';
 import { isNil } from './utils.ts';
+import { isZodType } from './zod-is-type.ts';
 
 interface IParsePayload {
   value: any;
@@ -23,6 +25,8 @@ function __parseAdapter(inst: z.ZodType, parse) {
       case 'date': return __parseDate(inst, parse, payload, _);
       case 'object': return __parseObject(inst, parse, payload, _);
       case 'array': return __parseArray(inst, parse, payload, _);
+      case 'optional': return __parseOptional(inst, parse, payload, _);
+      case 'default': return __parseDefault(inst, parse, payload, _);
     }
     return parse(payload, _);
   };
@@ -158,18 +162,17 @@ function __parseArray(_inst, parse, payload: IParsePayload, _) {
 ///////////////////////////////////////////
 ///////////////////////////////////////////
 
-const _parseOptional = z.ZodOptional.prototype._parse;
-z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
-  if (_getTypeName(_getInnerType(this)) === 'ZodString') {
-    _coerce(input);
+function __parseOptional(_inst, parse, payload: IParsePayload, _) {
+  if (isZodType(Metadata.unwrapUntil(_inst), 'ZodString')) {
+    _coerce(payload);
   } else {
-    _coerceWithNil(input);
+    _coerceWithNil(payload);
   }
   if (payload.value === null) {
     payload.value = undefined;
   }
   return parse(payload, _);
-};
+}
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
@@ -179,15 +182,14 @@ z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
-const _parseDefault = z.ZodDefault.prototype._parse;
-z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
-  if (_getTypeName(_getInnerType(this)) === 'ZodString') {
-    _coerce(input);
+function __parseDefault(_inst, parse, payload: IParsePayload, _) {
+  if (isZodType(Metadata.unwrapUntil(_inst), 'ZodString')) {
+    _coerce(payload);
   } else {
-    _coerceWithNil(input);
+    _coerceWithNil(payload);
   }
   return parse(payload, _);
-};
+}
 
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -199,26 +201,26 @@ z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
 
 function _coerce(payload: IParsePayload, fn?: Function) {
   if (!isNil(payload.value)) {
-    fn?.();
+    fn?.(payload);
   }
 }
 
-function _coerceWithNil(input, fn?: Function) {
+function _coerceWithNil(payload: IParsePayload, fn?: Function) {
   if (!isNil(payload.value)) {
     if (payload.value === 'undefined' || payload.value === '') {
       payload.value = undefined;
     } else if (payload.value === 'null') {
       payload.value = null;
     } else {
-      fn?.();
+      fn?.(payload);
     }
   }
 }
 
-export function coerceWithNil(data: any, fn?: Function) {
-  const input = { data };
-  _coerceWithNil(input, fn);
-  return data;
+export function coerceWithNil(value: any, fn?: Function) {
+  const payload = { value, issues: [] };
+  _coerceWithNil(payload, fn);
+  return payload.value;
 }
 
 function _getInnerType(schema: any) {
