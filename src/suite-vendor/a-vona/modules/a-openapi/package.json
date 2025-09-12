@@ -44,7 +44,7 @@
   "dependencies": {
     "@cabloy/zod-errors-custom": "^2.0.0",
     "@cabloy/zod-query": "^2.0.0",
-    "@cabloy/zod-to-openapi": "^8.1.0",
+    "@cabloy/zod-to-openapi": "^8.1.1",
     "@zhennann/currency": "^2.0.0",
     "openapi3-ts": "^4.5.0",
     "zod": "^4.1.5"
