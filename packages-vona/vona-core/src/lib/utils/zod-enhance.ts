@@ -2,6 +2,7 @@ import type { ILocaleInfos } from 'vona';
 import type z from 'zod';
 import type { VonaApplication } from '../core/application.ts';
 import { setLocaleAdapter, setLocaleErrors } from '@cabloy/zod-errors-custom';
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { setParseAdapter } from '@cabloy/zod-query';
 
 export type ZodLocaleError = () => { localeError: z.core.$ZodErrorMap };
@@ -11,7 +12,7 @@ export function zodEnhance(app: VonaApplication) {
   setLocaleAdapter((text: string, ...args: any[]) => {
     return app.meta.text(text, ...args);
   });
-  setParseAdapter();
+  setParseAdapter(ZodMetadata);
 }
 
 export function zodSetLocaleErrors(app: VonaApplication, localeErrors: ZodLocaleErrors, localeDefault?: string) {

@@ -1,6 +1,7 @@
-import type { ZodOpenAPIInternalMetadata } from '@asteasolutions/zod-to-openapi/dist/zod-extensions.js';
+import type { ZodTypes } from '@cabloy/zod-to-openapi/dist/lib/zod-is-type.js';
+import type { ZodOpenAPIInternalMetadata } from '@cabloy/zod-to-openapi/dist/zod-extensions.js';
 import type z from 'zod';
-import { isZodType, Metadata } from '@asteasolutions/zod-to-openapi';
+import { isZodType, Metadata } from '@cabloy/zod-to-openapi';
 
 export class ZodMetadata {
   static unwrapUntil(schema, typeName?) {
@@ -36,7 +37,9 @@ export class ZodMetadata {
     return Metadata.getOpenApiMetadata(zodSchema);
   }
 
-  static isZodType<T>(schema: z.ZodType<T>, typeNames: string | string[]): boolean {
-    return isZodType(schema, typeNames);
+  static isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName[]): schema is ZodTypes[TypeName];
+  static isZodType<TypeName extends keyof ZodTypes>(schema: object, typeName: TypeName): schema is ZodTypes[TypeName];
+  static isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName | TypeName[]): boolean {
+    return isZodType(schema, typeNames as any);
   }
 }

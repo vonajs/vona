@@ -5,7 +5,10 @@ interface IParsePayload {
   value: any;
   issues: any[];
 }
-export function setParseAdapter() {
+
+let ZodMetadata: any;
+export function setParseAdapter(zodMetadata: any) {
+  ZodMetadata = zodMetadata;
   ((z.core) as any).setParseAdapter(__parseAdapter);
 }
 
