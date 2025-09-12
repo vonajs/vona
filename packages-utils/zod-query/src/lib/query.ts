@@ -16,7 +16,9 @@ function __parseAdapter(inst: z.ZodType, parse) {
   return (payload: IParsePayload, _) => {
     const type = inst.type;
     switch (type) {
-      case 'string':return __parseString(inst, parse, payload, _);
+      case 'string': return __parseString(inst, parse, payload, _);
+      case 'number': return __parseNumber(inst, parse, payload, _);
+      case 'bigint': return __parseBigInt(inst, parse, payload, _);
     }
     return parse(payload, _);
   };
@@ -50,7 +52,7 @@ function __parseString(inst, parse, payload: IParsePayload, _) {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-function __parseNumber(inst, parse, payload: IParsePayload, _) {
+function __parseNumber(_inst, parse, payload: IParsePayload, _) {
   _coerceWithNil(payload, () => {
     payload.value = Number(payload.value);
   });
@@ -65,13 +67,12 @@ function __parseNumber(inst, parse, payload: IParsePayload, _) {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-const _parseBigInt = z.ZodBigInt.prototype._parse;
-z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
-  _coerceWithNil(input, () => {
-    input.data = BigInt(input.data);
+function __parseBigInt(_inst, parse, payload: IParsePayload, _) {
+  _coerceWithNil(payload, () => {
+    payload.value = BigInt(payload.value);
   });
-  return _parseBigInt.call(this, input);
-};
+  return parse(payload, _);
+}
 
 //////////////////////////////////////////
 //////////////////////////////////////////
@@ -83,14 +84,14 @@ z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
 
 const _parseBoolean = z.ZodBoolean.prototype._parse;
 z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
-  _coerceWithNil(input, () => {
-    if (input.data === 'false' || input.data === '0') {
-      input.data = false;
+  _coerceWithNil(payload, () => {
+    if (payload.value === 'false' || payload.value === '0') {
+      payload.value = false;
     } else {
-      input.data = Boolean(input.data);
+      payload.value = Boolean(payload.value);
     }
   });
-  return _parseBoolean.call(this, input);
+  return parse(payload, _);
 };
 
 ///////////////////////////////////////
@@ -103,10 +104,10 @@ z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
 
 const _parseDate = z.ZodDate.prototype._parse;
 z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
-  _coerceWithNil(input, () => {
-    input.data = new Date(input.data);
+  _coerceWithNil(payload, () => {
+    payload.value = new Date(payload.value);
   });
-  return _parseDate.call(this, input);
+  return parse(payload, _);
 };
 
 /////////////////////////////////////////
@@ -119,12 +120,12 @@ z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
 
 const _parseObject = z.ZodObject.prototype._parse;
 z.ZodObject.prototype._parse = function (input) {
-  _coerceWithNil(input, () => {
-    if (typeof input.data === 'string') {
-      input.data = JSON.parse(input.data);
+  _coerceWithNil(payload, () => {
+    if (typeof payload.value === 'string') {
+      payload.value = JSON.parse(payload.value);
     }
   });
-  return _parseObject.call(this, input);
+  return parse(payload, _);
 };
 
 ////////////////////////////////////////
@@ -137,16 +138,16 @@ z.ZodObject.prototype._parse = function (input) {
 
 const _parseArray = z.ZodArray.prototype._parse;
 z.ZodArray.prototype._parse = function (input) {
-  _coerceWithNil(input, () => {
-    if (typeof input.data === 'string') {
-      if (input.data.startsWith('[') && input.data.endsWith(']')) {
-        input.data = JSON.parse(input.data);
+  _coerceWithNil(payload, () => {
+    if (typeof payload.value === 'string') {
+      if (payload.value.startsWith('[') && payload.value.endsWith(']')) {
+        payload.value = JSON.parse(payload.value);
       } else {
-        input.data = input.data.split(',');
+        payload.value = payload.value.split(',');
       }
     }
   });
-  return _parseArray.call(this, input);
+  return parse(payload, _);
 };
 
 ///////////////////////////////////////////
@@ -164,10 +165,10 @@ z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
   } else {
     _coerceWithNil(input);
   }
-  if (input.data === null) {
-    input.data = undefined;
+  if (payload.value === null) {
+    payload.value = undefined;
   }
-  return _parseOptional.call(this, input);
+  return parse(payload, _);
 };
 
 ////////////////////////////////////////////
@@ -185,7 +186,7 @@ z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
   } else {
     _coerceWithNil(input);
   }
-  return _parseDefault.call(this, input);
+  return parse(payload, _);
 };
 
 ///////////////////////////////////////
@@ -203,11 +204,11 @@ function _coerce(payload: IParsePayload, fn?: Function) {
 }
 
 function _coerceWithNil(input, fn?: Function) {
-  if (!isNil(input.data)) {
-    if (input.data === 'undefined' || input.data === '') {
-      input.data = undefined;
-    } else if (input.data === 'null') {
-      input.data = null;
+  if (!isNil(payload.value)) {
+    if (payload.value === 'undefined' || payload.value === '') {
+      payload.value = undefined;
+    } else if (payload.value === 'null') {
+      payload.value = null;
     } else {
       fn?.();
     }
@@ -245,7 +246,7 @@ export function getTypeName(schema: any) {
 // function _coerce(instance, input, fn) {
 //   if (instance._def.coerce !== false) {
 //     if (instance._def.coerce === true) instance._def.coerce = undefined as any;
-//     if (!isNil(input.data)) {
+//     if (!isNil(payload.value)) {
 //       fn();
 //     }
 //   }
