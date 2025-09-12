@@ -11,9 +11,6 @@ importers:
 
   .:
     dependencies:
-      '@asteasolutions/zod-to-openapi':
-        specifier: ^8.1.0
-        version: 8.1.0(zod@4.1.5)
       '@babel/core':
         specifier: ^7.28.0
         version: 7.28.0
@@ -38,6 +35,9 @@ importers:
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
+      '@cabloy/zod-to-openapi':
+        specifier: ^8.1.0
+        version: 8.1.0(zod@4.1.5)
       '@sesamecare-oss/redlock':
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.7.0)
@@ -879,9 +879,6 @@ importers:
 
   packages-vona/vona-core:
     dependencies:
-      '@asteasolutions/zod-to-openapi':
-        specifier: ^8.1.0
-        version: 8.1.0(zod@4.1.5)
       '@cabloy/compose':
         specifier: ^2.0.14
         version: link:../../packages-utils/compose
@@ -1729,15 +1726,15 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-openapi:
     dependencies:
-      '@asteasolutions/zod-to-openapi':
-        specifier: ^8.1.0
-        version: 8.1.0(zod@4.1.5)
       '@cabloy/zod-errors-custom':
         specifier: ^2.0.0
         version: link:../../../../../packages-utils/zod-errors-custom
       '@cabloy/zod-query':
         specifier: ^2.0.0
         version: link:../../../../../packages-utils/zod-query
+      '@cabloy/zod-to-openapi':
+        specifier: ^8.1.0
+        version: 8.1.0(zod@4.1.5)
       '@zhennann/currency':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2247,11 +2244,6 @@ packages:
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
-
-  '@asteasolutions/zod-to-openapi@8.1.0':
-    resolution: {integrity: sha512-tQFxVs05J/6QXXqIzj6rTRk3nj1HFs4pe+uThwE95jL5II2JfpVXkK+CqkO7aT0Do5AYqO6LDrKpleLUFXgY+g==}
-    peerDependencies:
-      zod: ^4.0.0
 
   '@aws-crypto/sha256-browser@5.2.0':
     resolution: {integrity: sha512-AXfN/lGotSQwu6HNcEsIASo7kWXZ5HYWvfOmSNKDsEqC4OashTp8alTmaz+F7TC2L083SFv5RdB+qU3Vs1kZqw==}
@@ -8908,11 +8900,6 @@ snapshots:
     dependencies:
       package-manager-detector: 1.3.0
       tinyexec: 1.0.1
-
-  '@asteasolutions/zod-to-openapi@8.1.0(zod@4.1.5)':
-    dependencies:
-      openapi3-ts: 4.5.0
-      zod: 4.1.5
 
   '@aws-crypto/sha256-browser@5.2.0':
     dependencies:
