@@ -1,4 +1,5 @@
 import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
+import type z from 'zod';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -6,7 +7,7 @@ import { getTargetDecoratorRules } from 'vona-module-a-openapi';
 import { $Dto } from 'vona-module-a-orm';
 import { ModelUserStats } from 'vona-module-test-vona';
 
-describe.only('dtoAggregate.test.ts', () => {
+describe('dtoAggregate.test.ts', () => {
   it('action:dtoAggregate', async () => {
     await app.bean.executor.mockCtx(async () => {
       // aggr
@@ -20,10 +21,10 @@ describe.only('dtoAggregate.test.ts', () => {
       let rules: TypeDecoratorRules;
       rules = getTargetDecoratorRules(DtoUserAggr.prototype);
       assert.equal(rules.count_all?.type === 'optional', true);
-      assert.equal(rules.count_all?.type === 'union', true);
-      // todo
-      // assert.equal(rules.count_all?._def.innerType._def.options[0]._def.typeName, 'ZodString');
-      // assert.equal(rules.count_all._def.innerType._def.options[1]._def.typeName, 'ZodNumber');
+      const rule_count_all = (rules.count_all as z.ZodOptional)?.def.innerType as z.ZodUnion;
+      assert.equal(rule_count_all.type === 'union', true);
+      assert.equal((rule_count_all.def.options[0] as z.ZodType).type === 'string', true);
+      assert.equal((rule_count_all.def.options[1] as z.ZodType).type === 'number', true);
       assert.equal(rules.count_age?.type === 'optional', true);
       assert.equal(rules.sum_age?.type === 'optional', true);
       assert.equal(rules.avg_age?.type === 'optional', true);
@@ -38,7 +39,7 @@ describe.only('dtoAggregate.test.ts', () => {
       assert.equal(rules.name?.type === 'string', true);
       assert.equal(rules.iid, undefined);
       assert.equal(rules.posts?.type === 'optional', true);
-      assert.equal(rules.roles?.type === 'optional', 'ZodOptional');
+      assert.equal(rules.roles?.type === 'optional', true);
     });
   });
 });

@@ -48,7 +48,7 @@ describe('dtoGet.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const DtoCategoryTree = $Dto.get('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
       const rules: TypeDecoratorRules = getTargetDecoratorRules(DtoCategoryTree.prototype);
-      assert.equal(rules.children?.type === 'pipe', true); // ZodEffect
+      assert.equal(rules.children?.type === 'pipe', true);
       assert.equal(rules.iid, undefined);
       const DtoCategoryChain = $Dto.get('test-vona:categoryChain', { columns: ['id', 'name', 'categoryIdParent'] });
       const _apiJson = await app.bean.scope('a-openapi').service.openapi.generateJsonOfClass(DtoCategoryChain);

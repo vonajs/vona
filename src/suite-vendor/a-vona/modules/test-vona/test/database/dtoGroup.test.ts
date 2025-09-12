@@ -1,4 +1,5 @@
 import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
+import type z from 'zod';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -20,9 +21,10 @@ describe('dtoGroup.test.ts', () => {
       rules = getTargetDecoratorRules(DtoUserAggr.prototype);
       assert.equal(rules.name?.type === 'string', true);
       assert.equal(rules.count_all?.type === 'optional', true);
-      // assert.equal(rules.count_all._def.innerType._def.typeName, 'ZodUnion');
-      // assert.equal(rules.count_all._def.innerType._def.options[0]._def.typeName, 'ZodString');
-      // assert.equal(rules.count_all._def.innerType._def.options[1]._def.typeName, 'ZodNumber');
+      const rule_count_all = (rules.count_all as z.ZodOptional)?.def.innerType as z.ZodUnion;
+      assert.equal(rule_count_all.type === 'union', true);
+      assert.equal((rule_count_all.def.options[0] as z.ZodType).type === 'string', true);
+      assert.equal((rule_count_all.def.options[1] as z.ZodType).type === 'number', true);
       assert.equal(rules.count_age?.type === 'optional', true);
       assert.equal(rules.sum_age?.type === 'optional', true);
       assert.equal(rules.avg_age?.type === 'optional', true);
@@ -36,8 +38,8 @@ describe('dtoGroup.test.ts', () => {
       rules = getTargetDecoratorRules(DtoUserStats.prototype);
       assert.equal(rules.name?.type === 'string', true);
       assert.equal(rules.iid, undefined);
-      assert.equal(rules.posts?.type === 'pipe', true);// ZodEffects
-      assert.equal(rules.roles?.type === 'pipe', true);// ZodEffects
+      assert.equal(rules.posts?.type === 'pipe', true);
+      assert.equal(rules.roles?.type === 'pipe', true);
     });
   });
 });
