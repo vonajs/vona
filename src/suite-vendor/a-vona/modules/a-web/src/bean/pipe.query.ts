@@ -160,8 +160,8 @@ export class PipeQuery extends BeanBase implements IPipeTransform<any> {
     // default transform
     let op = openapi?.query?.op;
     if (!op) {
-      const typeName = fieldSchema._def.typeName;
-      if (typeName === 'ZodString') {
+      const typeName = fieldSchema.type;
+      if (typeName === 'string') {
         op = '_includesI_';
       } else {
         op = '_eq_';

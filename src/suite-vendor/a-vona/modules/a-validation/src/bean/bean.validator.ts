@@ -42,7 +42,7 @@ export class BeanValidator extends BeanBase {
     const schema2 = z.object({ [path]: schema } as z.ZodRawShape);
     const obj = { [path]: value };
     const data = await this._validateSchema(schema2, obj, options);
-    return data[path];
+    return data[path] as any;
   }
 
   private async _validateSchema<T, V = T>(
