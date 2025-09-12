@@ -65,7 +65,8 @@ export function $tableComments<T>(
   const comments = {};
   for (const key in rules) {
     const rule = rules[key] as z.ZodType;
-    const comment = rule._def.openapi?.metadata?.description || rule._def.openapi?.metadata?.title;
+    const metadata = ZodMetadata.getOpenapiMetadata(rule);
+    const comment = metadata?.description || metadata?.title;
     comments[key] = comment ? app.meta.text(comment) : '';
   }
   // table comment
