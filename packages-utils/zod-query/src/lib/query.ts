@@ -19,6 +19,8 @@ function __parseAdapter(inst: z.ZodType, parse) {
       case 'string': return __parseString(inst, parse, payload, _);
       case 'number': return __parseNumber(inst, parse, payload, _);
       case 'bigint': return __parseBigInt(inst, parse, payload, _);
+      case 'boolean': return __parseBoolean(inst, parse, payload, _);
+      case 'date': return __parseDate(inst, parse, payload, _);
     }
     return parse(payload, _);
   };
@@ -82,8 +84,7 @@ function __parseBigInt(_inst, parse, payload: IParsePayload, _) {
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-const _parseBoolean = z.ZodBoolean.prototype._parse;
-z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
+function __parseBoolean(_inst, parse, payload: IParsePayload, _) {
   _coerceWithNil(payload, () => {
     if (payload.value === 'false' || payload.value === '0') {
       payload.value = false;
@@ -92,7 +93,7 @@ z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
     }
   });
   return parse(payload, _);
-};
+}
 
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -102,13 +103,12 @@ z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-const _parseDate = z.ZodDate.prototype._parse;
-z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
+function __parseDate(_inst, parse, payload: IParsePayload, _) {
   _coerceWithNil(payload, () => {
     payload.value = new Date(payload.value);
   });
   return parse(payload, _);
-};
+}
 
 /////////////////////////////////////////
 /////////////////////////////////////////
