@@ -34,17 +34,12 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
     const metadataCurrent = schemaCurrent ? ZodMetadata.getOpenapiMetadata(schemaCurrent) : undefined;
     if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
       const schema: z.ZodType = field as any;
-      // todo: metadata中是否包含refId，如果包含就要排除，然后把metadata合并至field中
       const metadataCustom = ZodMetadata.getOpenapiMetadata(schema);
-      const refIdCurrent = ZodMetadata.getRefId(schemaCurrent!);
-      const refId = ZodMetadata.getRefId(schema);
       rules[key] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
-      const refIdNew = ZodMetadata.getRefId(rules[key] as any);
-      console.log(refIdNew);
     } else {
       // use deepExtend for sure strict
       if (schemaCurrent) {
-        rules[key] = schemaCurrent.openapi(deepExtend({}, schemaCurrent._def.openapi?.metadata, field));
+        rules[key] = schemaCurrent.openapi(deepExtend({}, metadataCurrent, field));
       } else {
         rules[key] = z.any().openapi(deepExtend({}, field));
       }
