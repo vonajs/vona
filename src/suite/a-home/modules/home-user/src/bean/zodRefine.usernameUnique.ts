@@ -1,7 +1,6 @@
 import type { IDecoratorZodRefineOptions, IZodRefineExecute, TypeRefinementCtx } from 'vona-module-a-zod';
 import { BeanBase } from 'vona';
 import { ZodRefine } from 'vona-module-a-zod';
-import z from 'zod';
 
 export interface IZodRefineOptionsUsernameUnique extends IDecoratorZodRefineOptions {}
 
@@ -11,9 +10,8 @@ export class ZodRefineUsernameUnique extends BeanBase implements IZodRefineExecu
     const user = await this.bean.userInner.findOneByName(value);
     if (user) {
       refinementCtx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: 'custom',
         message: this.scope.locale.UsernameExists(),
-        fatal: true,
       });
     }
   }

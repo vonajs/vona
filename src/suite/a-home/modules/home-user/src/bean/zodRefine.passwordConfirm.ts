@@ -1,7 +1,6 @@
 import type { IDecoratorZodRefineOptions, IZodRefineExecute, TypeRefinementCtx } from 'vona-module-a-zod';
 import { BeanBase } from 'vona';
 import { ZodRefine } from 'vona-module-a-zod';
-import z from 'zod';
 
 interface IZodRefinePasswordConfirmValue { password: string; passwordConfirm: string }
 
@@ -12,9 +11,8 @@ export class ZodRefinePasswordConfirm extends BeanBase implements IZodRefineExec
   async execute(value: IZodRefinePasswordConfirmValue, refinementCtx: TypeRefinementCtx, _options: IZodRefineOptionsPasswordConfirm) {
     if (value.password !== value.passwordConfirm) {
       refinementCtx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: 'custom',
         message: this.scope.locale.PasswordsNotMatch(),
-        fatal: true,
         path: ['passwordConfirm'],
       });
     }
