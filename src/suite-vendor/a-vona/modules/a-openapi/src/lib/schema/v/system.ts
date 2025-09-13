@@ -46,3 +46,15 @@ export function schemaArray(schemaLike?: SchemaLike, params?: z.core.$ZodArrayPa
     );
   };
 }
+
+export function schemaStrictObject() {
+  return function (schema: z.ZodObject): z.ZodObject {
+    return z.strictObject(schema.shape);
+  };
+}
+
+export function schemaLooseObject() {
+  return function (schema: z.ZodObject): z.ZodObject {
+    return z.looseObject(schema.shape);
+  };
+}
