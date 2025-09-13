@@ -5,7 +5,7 @@ import { isNil } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('dtoQuery.test.ts', () => {
-  it.only('action:dtoQuery', async () => {
+  it('action:dtoQuery', async () => {
     await app.bean.executor.mockCtx(async () => {
       // findManyEcho
       const resEcho: IQueryParams = await app.bean.executor.performAction('get', '/test/vona/post/findManyEcho', {
