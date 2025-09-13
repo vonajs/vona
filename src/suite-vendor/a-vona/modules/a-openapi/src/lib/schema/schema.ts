@@ -69,7 +69,7 @@ function _createSchemaLazy<T>(schemaLikes: SchemaLike<T>[]): z.ZodType<T> {
 
 function _createSchemaObject(rules: {}, options?: ISchemaObjectOptions) {
   let schema = z.object(rules as z.ZodRawShape);
-  if (options?.loose) schema = z.looseObject(schema) as any;
-  if (options?.strict) schema = z.strictObject(schema) as any;
+  if (options?.loose) schema = z.looseObject(schema.shape) as any;
+  if (options?.strict) schema = z.strictObject(schema.shape) as any;
   return schema;
 }
