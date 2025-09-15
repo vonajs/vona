@@ -17,7 +17,7 @@ export class InterceptorCaptchaVerify extends BeanBase implements IInterceptorEx
   async execute(options: IInterceptorOptionsCaptchaVerify, next: Next) {
     // scene
     const sceneName = options.scene;
-    if (!sceneName) return new Error('should specify the captchaVerify scene name');
+    if (!sceneName) throw new Error('should specify the captchaVerify scene name');
     // captcha
     const bodyField = options.bodyField!;
     const captcha: DtoCaptchaVerify | undefined = this.ctx.request.body[bodyField];
