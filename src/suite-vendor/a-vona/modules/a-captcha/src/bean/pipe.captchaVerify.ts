@@ -6,13 +6,12 @@ import { BeanBase } from 'vona';
 import { Pipe } from 'vona-module-a-aspect';
 
 export interface IPipeOptionsCaptchaVerify extends IDecoratorPipeOptionsGlobal {
-  scene?: keyof ICaptchaSceneRecord;
-  bodyField?: string;
+
 }
 
 @Pipe<IPipeOptionsCaptchaVerify>({
   global: true,
-  bodyField: 'captcha',
+
   argIndex: 0,
 })
 export class PipeCaptchaVerify extends BeanBase implements IPipeTransform<any> {
