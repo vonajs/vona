@@ -4,6 +4,10 @@ import type { ValidatorOptions } from 'vona-module-a-validation';
 import { BeanBase, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
+export type TypePipeValidData = unknown;
+
+export type TypePipeValidResult = TypePipeValidData;
+
 export interface IPipeOptionsValid extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
 @Pipe<IPipeOptionsValid>({
@@ -13,8 +17,8 @@ export interface IPipeOptionsValid extends IDecoratorPipeOptions, IDecoratorPipe
   loose: false,
   strict: false,
 })
-export class PipeValid extends BeanBase implements IPipeTransform<any> {
-  async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValid) {
+export class PipeValid extends BeanBase implements IPipeTransform<TypePipeValidData, TypePipeValidResult> {
+  async transform(value: TypePipeValidData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValid): Promise<TypePipeValidResult> {
     if (options.schema) {
       // validateSchema
       return await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
