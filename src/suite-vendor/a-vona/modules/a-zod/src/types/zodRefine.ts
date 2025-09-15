@@ -6,8 +6,8 @@ export type TypeRefinementCtx = RefinementCtx;
 
 export interface IZodRefineRecord {}
 
-export interface IZodRefineExecute<T = any, R = any> {
-  execute(value: T, refinementCtx: TypeRefinementCtx, options: IDecoratorZodRefineOptions): Promise<R>;
+export interface IZodRefineExecute<T = unknown> {
+  execute(value: T, refinementCtx: TypeRefinementCtx, options: IDecoratorZodRefineOptions): Promise<void>;
 }
 
 export interface IDecoratorZodRefineOptions {}
