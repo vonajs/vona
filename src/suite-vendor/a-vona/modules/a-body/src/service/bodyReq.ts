@@ -11,7 +11,7 @@ export class ServiceBodyReq extends BeanBase {
       options = this.bean.onion.interceptor.getOnionOptionsDynamic('a-body:bodyReq').parser;
     }
     const ctx = this.ctx;
-    if (ctx.request.body !== undefined) return ctx.request.body;
+    if (Object.prototype.hasOwnProperty.call(ctx.request, 'body')) return ctx.request.body;
     if (!options.parsedMethods.includes(ctx.method.toUpperCase())) return;
     // parse
     const response = await this.parseRaw(options);

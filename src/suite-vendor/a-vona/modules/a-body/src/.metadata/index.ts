@@ -117,12 +117,8 @@ declare module 'vona' {
   }
 }
 /** service: end */
-/** config: begin */
-export * from '../config/config.ts';
-import type { config } from '../config/config.ts';
-/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -130,7 +126,6 @@ export class ScopeModuleABody extends BeanScopeBase {}
 
 export interface ScopeModuleABody {
   util: BeanScopeUtil;
-config: TypeModuleConfig<typeof config>;
 service: IModuleService;
 }
 
@@ -144,9 +139,7 @@ declare module 'vona' {
     body: ScopeModuleABody;
   }
   
-  export interface IBeanScopeConfig {
-    'a-body': ReturnType<typeof config>;
-  }
+  
 
   
 }
