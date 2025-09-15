@@ -176,12 +176,10 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     }
     // builder
     const builder = this.builder<TRecord>(table);
-    // insert
-    builder.insert(datas as unknown as any);
-    // debug
-    this.$loggerChild('model').debug('model.insert: %s', builder.toQuery());
+    // // debug
+    // this.$loggerChild('model').debug('model.insert: %s', builder.toQuery());
     // dialect insert
-    const ids = await this.dialect.insert(builder);
+    const ids = await this.dialect.insert(builder, datas);
     // combine
     const result: any[] = [];
     const dataDefault = await this.defaultData(table);

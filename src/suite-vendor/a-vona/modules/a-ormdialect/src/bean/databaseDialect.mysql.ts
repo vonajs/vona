@@ -6,6 +6,7 @@ import type {
   IFetchIndexesResultItem,
 } from 'vona-module-a-orm';
 import { promisify } from 'node:util';
+import { isNil } from '@cabloy/utils';
 import {
   BeanDatabaseDialectBase,
   DatabaseDialect,
@@ -57,9 +58,22 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder): Promise<TableIdentity[]> {
-    const items = await builder;
-    return items;
+  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+    if (datas.length === 0) return [];
+    if (isNil(datas[0].id)) {
+      const ids: TableIdentity[] = [];
+      for (const data of datas) {
+        const builder2 = builder.clone();
+        builder2.insert(data);
+        const items = await builder2;
+        ids.push(items[0]);
+      }
+      return ids;
+    } else {
+      builder.insert(datas);
+      await builder;
+      return datas.map(item => item.id);
+    }
   }
 
   query(result) {

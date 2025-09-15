@@ -33,7 +33,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async insert(_builder: Knex.QueryBuilder): Promise<TableIdentity[]> {
+  async insert(_builder: Knex.QueryBuilder, _datas: any[]): Promise<TableIdentity[]> {
     throw new Error('Not Implemented');
   }
 
