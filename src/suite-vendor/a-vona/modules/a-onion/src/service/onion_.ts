@@ -200,12 +200,12 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return this.getOnionSlice(onionName).beanOptions.options as ONIONRECORD[T] | undefined;
   }
 
-  getOnionOptionsDynamic<T extends keyof ONIONRECORD>(onionName: T, optionsCustom?: ONIONRECORD[T]): ONIONRECORD[T] {
+  getOnionOptionsDynamic<T extends keyof ONIONRECORD>(onionName: T, optionsCustom?: Partial<ONIONRECORD[T]>): ONIONRECORD[T] {
     const item = this.getOnionSlice(onionName);
     return this.combineOnionOptions(item, optionsCustom);
   }
 
-  combineOnionOptions<T extends keyof ONIONRECORD>(item: IOnionSlice<ONIONRECORD, T>, optionsCustom?: ONIONRECORD[T]): ONIONRECORD[T] {
+  combineOnionOptions<T extends keyof ONIONRECORD>(item: IOnionSlice<ONIONRECORD, T>, optionsCustom?: Partial<ONIONRECORD[T]>): ONIONRECORD[T] {
     const ctx = this.ctx;
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
