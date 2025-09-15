@@ -28,7 +28,7 @@ export class ServiceTransactionFiber extends BeanBase {
 
   async doCommit() {
     await this._connection.commit();
-    await this._transactionConsistency.commitDone();
+    await this._transactionConsistency.commitsDone();
     this._connection = undefined as any;
   }
 

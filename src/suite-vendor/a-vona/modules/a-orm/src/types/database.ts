@@ -36,7 +36,7 @@ declare module 'vona' {
   export interface VonaContext {
     get db(): ServiceDb;
     commit(cb: FunctionAny): void;
-    commitDone(): Promise<void>;
+    commitsDone(): Promise<void>;
   }
 
   export interface VonaConfigEnv {

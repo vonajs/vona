@@ -47,11 +47,11 @@ export class Main extends BeanSimple implements IModuleMain {
         };
       },
     });
-    Object.defineProperty(this.app.context, 'commitDone', {
+    Object.defineProperty(this.app.context, 'commitsDone', {
       enumerable: false,
       get() {
         return function (this: VonaContext) {
-          return cast(this).transactionConsistency.commitDone();
+          return cast(this).transactionConsistency.commitsDone();
         };
       },
     });

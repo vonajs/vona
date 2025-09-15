@@ -105,8 +105,8 @@ export class BeanExecutor extends BeanBase {
       } else {
         res = await fn();
       }
-      // commitDone
-      await ctx.commitDone();
+      // commitsDone
+      await ctx.commitsDone();
       // ok
       return res;
     });

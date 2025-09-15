@@ -179,8 +179,8 @@ function classControllerMiddleware(ctx: VonaContext) {
 async function routeStartMiddleware(ctx: VonaContext, next: Function) {
   // next
   const res = await next();
-  // invoke callbackes: handle secondly
-  await ctx.commitDone();
+  // invoke callbacks: handle secondly
+  await ctx.commitsDone();
   // ok
   return res;
 }
@@ -188,8 +188,8 @@ async function routeStartMiddleware(ctx: VonaContext, next: Function) {
 async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
   // next
   const res = await next();
-  // invoke callbackes: handle firstly
-  await ctx.commitDone();
+  // invoke callbacks: handle firstly
+  await ctx.commitsDone();
   // ok
   return res;
 }
@@ -206,7 +206,7 @@ async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
 //     // next
 //     const res = await next();
 //     // invoke callbackes: handle secondly
-//     await ctx.commitDone();
+//     await ctx.commitsDone();
 //     // ok
 //     return res;
 //   };
@@ -225,7 +225,7 @@ async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
 //     // next
 //     const res = await next();
 //     // invoke callbackes: handle firstly
-//     await ctx.commitDone();
+//     await ctx.commitsDone();
 //     // ok
 //     return res;
 //   };

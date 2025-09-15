@@ -16,7 +16,7 @@ export class ServiceTransactionConsistency‌ extends BeanBase {
     this._compensateCallbacks.unshift(AsyncResource.bind(cb));
   }
 
-  async commitDone() {
+  async commitsDone() {
     while (true) {
       const cb = this._commitCallbacks.shift();
       if (!cb) break;
