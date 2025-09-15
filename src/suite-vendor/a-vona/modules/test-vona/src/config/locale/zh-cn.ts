@@ -1,7 +1,7 @@
 export default {
   Name: '名称',
   User: '用户',
-  UserId: '用户Id',
+  UserId: '用户ID',
   Test: '测试',
   TestHelloWorld: '您好，世界',
   TestApples: '%d个苹果',
