@@ -34,7 +34,7 @@ export class ServiceTransactionFiber extends BeanBase {
 
   async doRollback() {
     await this._connection.rollback();
-    await this._transactionConsistency.compensateDone();
+    await this._transactionConsistency.compensatesDone();
     this._connection = undefined as any;
   }
 }

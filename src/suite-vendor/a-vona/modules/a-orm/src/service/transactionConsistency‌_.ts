@@ -25,7 +25,7 @@ export class ServiceTransactionConsistency‌ extends BeanBase {
     this._compensateCallbacks = [];
   }
 
-  async compensateDone() {
+  async compensatesDone() {
     while (true) {
       const cb = this._compensateCallbacks.shift();
       if (!cb) break;
