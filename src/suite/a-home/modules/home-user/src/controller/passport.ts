@@ -33,7 +33,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('register')
   @Passport.public()
-  // @Captcha.verify({ scene: 'a-captchasimple:simple' })
+  @Captcha.verify({ scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
   async register(@Arg.body() data: DtoRegister) {
     const jwt = await this.bean.authSimple.authenticate(data, 'register', 'default');
