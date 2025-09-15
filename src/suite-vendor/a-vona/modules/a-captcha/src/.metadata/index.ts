@@ -26,6 +26,31 @@ declare module 'vona-module-a-captcha' {
           } 
 }
 /** pipe: end */
+/** interceptor: begin */
+export * from '../bean/interceptor.captchaVerify.ts';
+import type { IInterceptorOptionsCaptchaVerify } from '../bean/interceptor.captchaVerify.ts';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  
+  
+export interface IInterceptorRecordLocal {
+  'a-captcha:captchaVerify': IInterceptorOptionsCaptchaVerify;
+}
+
+}
+declare module 'vona-module-a-captcha' {
+  
+        export interface InterceptorCaptchaVerify {
+          /** @internal */
+          get scope(): ScopeModuleACaptcha;
+        }
+
+          export interface InterceptorCaptchaVerify {
+            get $beanFullName(): 'a-captcha.interceptor.captchaVerify';
+            get $onionName(): 'a-captcha:captchaVerify';
+          } 
+}
+/** interceptor: end */
 /** bean: begin */
 export * from '../bean/bean.captcha.ts';
 
