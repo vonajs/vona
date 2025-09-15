@@ -2,7 +2,6 @@ import type { IUploadField, IUploadFile } from 'vona-module-a-upload';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
-import { Aspect } from 'vona-module-a-aspect';
 import { Api, v } from 'vona-module-a-openapi';
 import { File, SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
