@@ -3,11 +3,11 @@ import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vo
 import { BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
 
-export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptionsGlobal {}
+export interface IInterceptorOptionsBodyRes extends IDecoratorInterceptorOptionsGlobal {}
 
-@Interceptor<IInterceptorOptionsBody>({ global: true, dependencies: 'a-openapischema:openapiSchema' })
-export class InterceptorBody extends BeanBase implements IInterceptorExecute {
-  async execute(_options: IInterceptorOptionsBody, next: Next) {
+@Interceptor<IInterceptorOptionsBodyRes>({ global: true, dependencies: 'a-openapischema:openapiSchema' })
+export class InterceptorBodyRes extends BeanBase implements IInterceptorExecute {
+  async execute(_options: IInterceptorOptionsBodyRes, next: Next) {
     // next
     const res = await next();
     // handle
