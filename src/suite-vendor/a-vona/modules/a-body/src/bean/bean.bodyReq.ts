@@ -2,8 +2,8 @@ import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
-export class BeanBody extends BeanBase {
+export class BeanBodyReq extends BeanBase {
   async parse() {
-    return await this.scope.service.body.parse(false);
+    return await this.scope.service.bodyReq.parse(false);
   }
 }

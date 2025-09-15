@@ -25,7 +25,7 @@ declare module 'vona-module-a-body' {
 }
 /** interceptor: end */
 /** bean: begin */
-export * from '../bean/bean.body.ts';
+export * from '../bean/bean.bodyReq.ts';
 
 import 'vona';
 declare module 'vona' {
@@ -34,50 +34,64 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-body' {
   
-        export interface BeanBody {
+        export interface BeanBodyReq {
           /** @internal */
           get scope(): ScopeModuleABody;
         } 
 }
 /** bean: end */
 /** bean: begin */
-import type { BeanBody } from '../bean/bean.body.ts';
+import type { BeanBodyReq } from '../bean/bean.bodyReq.ts';
 import 'vona';  
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    'body': BeanBody;
+    'bodyReq': BeanBodyReq;
   }
 }
 /** bean: end */
 /** service: begin */
-export * from '../service/body.ts';
+export * from '../service/bodyReq.ts';
+export * from '../service/bodyRes.ts';
 
 import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-body:body': never;
+      'a-body:bodyReq': never;
+'a-body:bodyRes': never;
     }
 
   
 }
 declare module 'vona-module-a-body' {
   
-        export interface ServiceBody {
+        export interface ServiceBodyReq {
           /** @internal */
           get scope(): ScopeModuleABody;
         }
 
-          export interface ServiceBody {
-            get $beanFullName(): 'a-body.service.body';
-            get $onionName(): 'a-body:body';
+          export interface ServiceBodyReq {
+            get $beanFullName(): 'a-body.service.bodyReq';
+            get $onionName(): 'a-body:bodyReq';
+          }
+
+        export interface ServiceBodyRes {
+          /** @internal */
+          get scope(): ScopeModuleABody;
+        }
+
+          export interface ServiceBodyRes {
+            get $beanFullName(): 'a-body.service.bodyRes';
+            get $onionName(): 'a-body:bodyRes';
           } 
 }
 /** service: end */
 /** service: begin */
-import type { ServiceBody } from '../service/body.ts';
+import type { ServiceBodyReq } from '../service/bodyReq.ts';
+import type { ServiceBodyRes } from '../service/bodyRes.ts';
 export interface IModuleService {
-  'body': ServiceBody;
+  'bodyReq': ServiceBodyReq;
+'bodyRes': ServiceBodyRes;
 }
 /** service: end */
 /** service: begin */
@@ -85,7 +99,8 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-body.service.body': ServiceBody;
+    'a-body.service.bodyReq': ServiceBodyReq;
+'a-body.service.bodyRes': ServiceBodyRes;
   }
 }
 /** service: end */

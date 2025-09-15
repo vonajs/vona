@@ -8,7 +8,7 @@ import { getIsEnabledBodyAs, getMimeTypes, isTypes } from '../lib/utils.ts';
 import { SymbolDisableBodyParser } from '../types/bodyParser.ts';
 
 @Service()
-export class ServiceBody extends BeanBase {
+export class ServiceBodyReq extends BeanBase {
   async parse(check: boolean) {
     const options = this.scope.config.parser;
     const ctx = this.ctx;
