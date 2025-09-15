@@ -10,5 +10,7 @@ export interface IZodTransformOptions<%=argv.beanNameCapitalize%> extends IDecor
 
 @ZodTransform<IZodTransformOptions<%=argv.beanNameCapitalize%>>()
 export class ZodTransform<%=argv.beanNameCapitalize%> extends BeanBase implements IZodTransformExecute<TypeZodTransform<%=argv.beanNameCapitalize%>Data, TypeZodTransform<%=argv.beanNameCapitalize%>Result> {
-  async execute(_value: TypeZodTransform<%=argv.beanNameCapitalize%>Data, _options: IZodTransformOptions<%=argv.beanNameCapitalize%>): Promise<TypeZodTransform<%=argv.beanNameCapitalize%>Result> {}
+  async execute(value: TypeZodTransform<%=argv.beanNameCapitalize%>Data, _options: IZodTransformOptions<%=argv.beanNameCapitalize%>): Promise<TypeZodTransform<%=argv.beanNameCapitalize%>Result> {
+    return value;
+  }
 }
