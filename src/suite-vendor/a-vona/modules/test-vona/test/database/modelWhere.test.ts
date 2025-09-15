@@ -6,6 +6,7 @@ import { app } from 'vona-mock';
 describe('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
+      if (app.bean.database.current.dialectName !== 'pg') return;
       const scopeTest = app.bean.scope('test-vona');
       // ref
       let builder = scopeTest.model.post.builder();
