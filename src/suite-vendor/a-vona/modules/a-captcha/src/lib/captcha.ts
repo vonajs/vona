@@ -1,8 +1,8 @@
-import type { IPipeOptionsCaptchaVerify } from '../bean/pipe.captchaVerify.ts';
+import type { IInterceptorOptionsCaptchaVerify } from '../bean/interceptor.captchaVerify.ts';
 import { Aspect } from 'vona-module-a-aspect';
 
-function Verify(options?: Partial<IPipeOptionsCaptchaVerify>): MethodDecorator {
-  return Aspect.pipeGlobal('a-captcha:captchaVerify', options);
+function Verify(options?: Partial<IInterceptorOptionsCaptchaVerify>): MethodDecorator {
+  return Aspect.interceptor('a-captcha:captchaVerify', options);
 }
 
 export const Captcha = {
