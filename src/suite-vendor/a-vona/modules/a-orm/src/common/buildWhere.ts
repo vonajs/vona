@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { IDatabaseClientDialectRecord } from '../types/index.ts';
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
@@ -154,6 +155,11 @@ function _buildWhereColumnOpNormal<TRecord>(
   op: TypeOpsNormal,
 ) {
   column = _checkHavingColumn(knex, column) as string;
+  if (_shouldPatchLike(knex)) {
+    if (op === Op.startsWith) op = Op.startsWithI;
+    if (op === Op.endsWith) op = Op.endsWithI;
+    if (op === Op.includes) op = Op.includesI;
+  }
   if (op === Op.eq) {
     builder[having ? 'having' : 'where'](column, '=', value);
   } else if (op === Op.notEq) {
@@ -199,6 +205,15 @@ function _buildWhereColumnOpNormal<TRecord>(
   } else if (op === Op.ref) {
     builder[having ? 'having' : 'where'](column, '=', knex.ref(value));
   }
+}
+
+function _shouldPatchLike(knex: Knex): boolean {
+  const dialectName = _getDialectName(knex);
+  return dialectName === 'mysql' || dialectName === 'mysql2';
+}
+
+function _getDialectName(knex: Knex): keyof IDatabaseClientDialectRecord {
+  return knex.client.config.client;
 }
 
 function _checkHavingColumn<TRecord>(knex: Knex, column: keyof TRecord | string) {
