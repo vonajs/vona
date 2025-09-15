@@ -1,4 +1,4 @@
-import { schemaBigNumber, schemaCaptcha, schemaEmail, schemaIPv4, schemaIPv6, schemaMax, schemaMin, schemaTableIdentity, schemaTrim, schemaUrl, schemaUuid } from './v/helpers.ts';
+import { schemaBigNumber, schemaCaptcha, schemaEmail, schemaIPv4, schemaIPv6, schemaLowercase, schemaMax, schemaMin, schemaRegex, schemaTableIdentity, schemaToLowerCase, schemaToUpperCase, schemaTrim, schemaUppercase, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import { schemaArray, schemaDefault, schemaLazy, schemaLooseObject, schemaObject, schemaOptional, schemaStrictObject } from './v/system.ts';
 import { schemaZodRefine } from './v/zod.ts';
@@ -20,6 +20,11 @@ export const v = {
   min: schemaMin,
   max: schemaMax,
   trim: schemaTrim,
+  toLowerCase: schemaToLowerCase,
+  toUpperCase: schemaToUpperCase,
+  lowercase: schemaLowercase,
+  uppercase: schemaUppercase,
+  regex: schemaRegex,
   tableIdentity: schemaTableIdentity,
   bigNumber: schemaBigNumber,
   captcha: schemaCaptcha,

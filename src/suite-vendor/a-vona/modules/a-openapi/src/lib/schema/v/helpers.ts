@@ -58,6 +58,36 @@ export function schemaTrim() {
   };
 }
 
+export function schemaToLowerCase() {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.toLowerCase();
+  };
+}
+
+export function schemaToUpperCase() {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.toUpperCase();
+  };
+}
+
+export function schemaLowercase(params?: string | z.core.$ZodCheckLowerCaseParams) {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.lowercase(params);
+  };
+}
+
+export function schemaUppercase(params?: string | z.core.$ZodCheckUpperCaseParams) {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.uppercase(params);
+  };
+}
+
+export function schemaRegex(regex: RegExp, params?: string | z.core.$ZodCheckRegexParams) {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.regex(regex, params);
+  };
+}
+
 export function schemaTableIdentity() {
   const app = useApp();
   const ormConfig = app.util.getModuleConfigRaw('a-orm');
