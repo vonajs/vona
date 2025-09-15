@@ -1,18 +1,31 @@
 /* eslint-disable */
 /** interceptor: begin */
+export * from '../bean/interceptor.bodyReq.ts';
 export * from '../bean/interceptor.bodyRes.ts';
+import type { IInterceptorOptionsBodyReq } from '../bean/interceptor.bodyReq.ts';
 import type { IInterceptorOptionsBodyRes } from '../bean/interceptor.bodyRes.ts';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
     export interface IInterceptorRecordGlobal {
-      'a-body:bodyRes': IInterceptorOptionsBodyRes;
+      'a-body:bodyReq': IInterceptorOptionsBodyReq;
+'a-body:bodyRes': IInterceptorOptionsBodyRes;
     }
 
   
 }
 declare module 'vona-module-a-body' {
   
+        export interface InterceptorBodyReq {
+          /** @internal */
+          get scope(): ScopeModuleABody;
+        }
+
+          export interface InterceptorBodyReq {
+            get $beanFullName(): 'a-body.interceptor.bodyReq';
+            get $onionName(): 'a-body:bodyReq';
+          }
+
         export interface InterceptorBodyRes {
           /** @internal */
           get scope(): ScopeModuleABody;
