@@ -52,6 +52,12 @@ export function schemaMax(max: number, params?: string | z.core.$ZodCheckMaxLeng
   };
 }
 
+export function schemaTrim() {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.trim();
+  };
+}
+
 export function schemaTableIdentity() {
   const app = useApp();
   const ormConfig = app.util.getModuleConfigRaw('a-orm');
