@@ -75,6 +75,7 @@ export class ServiceDatabase extends BeanBase {
       }
       // set config and reload client
       await client.changeConfigAndReload(databaseName);
+      this.$logger.silly(chalk.cyan(`dialect: ${client.db.dialectName}`));
       this.$logger.silly(chalk.cyan(`database: ${databaseName}, pid: ${process.pid}`));
     }
     // test db
@@ -94,6 +95,7 @@ export class ServiceDatabase extends BeanBase {
       // set config and reload client
       await client.changeConfigAndReload(databaseName);
       // database ready
+      this.$logger.silly(chalk.cyan(`dialect: ${client.db.dialectName}`));
       this.$logger.silly(chalk.cyan(`database: ${databaseName}, pid: ${process.pid}`));
     }
   }
