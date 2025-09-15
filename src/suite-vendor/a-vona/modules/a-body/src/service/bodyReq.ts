@@ -6,8 +6,10 @@ import { getIsEnabledBodyAs, getMimeTypes, isTypes } from '../lib/utils.ts';
 
 @Service()
 export class ServiceBodyReq extends BeanBase {
-  async parse() {
-    const options = this.scope.config.parser;
+  async parse(options?: BodyParserOptions) {
+    if (!options) {
+      options = this.bean.onion.interceptor.getOnionOptionsDynamic('a-body:bodyReq').parser;
+    }
     const ctx = this.ctx;
     if (ctx.request.body !== undefined) return ctx.request.body;
     if (!options.parsedMethods.includes(ctx.method.toUpperCase())) return;
