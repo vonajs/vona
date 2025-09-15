@@ -8,8 +8,6 @@ declare module 'koa' {
   }
 }
 
-export const SymbolDisableBodyParser = Symbol('SymbolDisableBodyParser');
-
 export const supportedBodyTypes = ['json', 'form', 'text', 'xml'] as const;
 export type BodyType = (typeof supportedBodyTypes)[number];
 
