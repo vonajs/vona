@@ -159,6 +159,8 @@ function _buildWhereColumnOpNormal<TRecord>(
     if (op === Op.startsWith) op = Op.startsWithI;
     if (op === Op.endsWith) op = Op.endsWithI;
     if (op === Op.includes) op = Op.includesI;
+    if (op === Op.eqI) op = Op.eq;
+    if (op === Op.notEqI) op = Op.notEq;
   }
   if (op === Op.eq) {
     builder[having ? 'having' : 'where'](column, '=', value);
