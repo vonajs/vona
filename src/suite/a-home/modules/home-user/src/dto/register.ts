@@ -9,10 +9,10 @@ export interface IDtoOptionsRegister extends IDecoratorDtoOptions {}
   pipes: v.refine('home-user:passwordConfirm'),
 })
 export class DtoRegister {
-  @Api.field(v.refine('home-user:usernameUnique'), v.min(3))
+  @Api.field(v.refine('home-user:usernameUnique'), v.min(3), v.trim())
   username: string;
 
-  @Api.field(v.refine('home-user:emailUnique'), v.email())
+  @Api.field(v.refine('home-user:emailUnique'), v.email(), v.trim())
   email: string;
 
   @Api.field(v.min(6), v.max(20))
