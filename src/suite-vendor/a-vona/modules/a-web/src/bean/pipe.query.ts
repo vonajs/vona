@@ -9,6 +9,10 @@ import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
+export type TypePipeQueryData = unknown;
+
+export type TypePipeQueryResult = TypePipeQueryData;
+
 export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
   transformFn?: TypePipeOptionsQueryTransform | string;
 }
@@ -37,8 +41,8 @@ const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
   loose: false,
   strict: false,
 })
-export class PipeQuery extends BeanBase implements IPipeTransform<any> {
-  async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsQuery) {
+export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryData, TypePipeQueryResult> {
+  async transform(value: TypePipeQueryData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsQuery): Promise<TypePipeQueryResult> {
     if (!options.schema) throw new Error(`should specify the schema of pipeQuery: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
     // validateSchema
     value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
