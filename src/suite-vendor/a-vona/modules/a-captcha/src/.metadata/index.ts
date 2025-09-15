@@ -1,31 +1,6 @@
 /* eslint-disable */
 import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
-/** pipe: begin */
-export * from '../bean/pipe.captchaVerify.ts';
-import type { IPipeOptionsCaptchaVerify } from '../bean/pipe.captchaVerify.ts';
-import 'vona';
-declare module 'vona-module-a-aspect' {
-  
-    export interface IPipeRecordGlobal {
-      'a-captcha:captchaVerify': IPipeOptionsCaptchaVerify;
-    }
-
-  
-}
-declare module 'vona-module-a-captcha' {
-  
-        export interface PipeCaptchaVerify {
-          /** @internal */
-          get scope(): ScopeModuleACaptcha;
-        }
-
-          export interface PipeCaptchaVerify {
-            get $beanFullName(): 'a-captcha.pipe.captchaVerify';
-            get $onionName(): 'a-captcha:captchaVerify';
-          } 
-}
-/** pipe: end */
 /** interceptor: begin */
 export * from '../bean/interceptor.captchaVerify.ts';
 import type { IInterceptorOptionsCaptchaVerify } from '../bean/interceptor.captchaVerify.ts';
