@@ -537,15 +537,25 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
-    await this.cacheQueryClear(table);
+    await this._cacheQueryClearInner(table);
+    if (this.db.inTransaction) {
+      this.db.commit(async () => {
+        await this.cacheEntity.del(id, table);
+        await this._cacheQueryClearInner(table);
+      });
+    }
   }
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
     await this.cacheEntity.clear(table);
-    await this.cacheQueryClear(table);
+    await this._cacheQueryClearInner(table);
   }
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
+    await this._cacheQueryClearInner(table);
+  }
+
+  public async _cacheQueryClearInner(table?: keyof ITableRecord) {
     await this.cacheQuery.clear(table);
     await this._cacheQueryClearModelsClear();
   }
