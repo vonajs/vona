@@ -218,6 +218,37 @@ declare module 'vona-module-a-event' {
   }
 }
 /** event: end */
+/** queue: begin */
+export * from '../bean/queue.doubleDelete.ts';
+
+import { type IDecoratorQueueOptions } from 'vona-module-a-queue';
+declare module 'vona-module-a-queue' {
+  
+    export interface IQueueRecord {
+      'a-orm:doubleDelete': IDecoratorQueueOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-orm' {
+  
+        export interface QueueDoubleDelete {
+          /** @internal */
+          get scope(): ScopeModuleAOrm;
+        }
+
+          export interface QueueDoubleDelete {
+            get $beanFullName(): 'a-orm.queue.doubleDelete';
+            get $onionName(): 'a-orm:doubleDelete';
+          } 
+}
+/** queue: end */
+/** queue: begin */
+import type { QueueDoubleDelete } from '../bean/queue.doubleDelete.ts';
+export interface IModuleQueue {
+  'doubleDelete': QueueDoubleDelete;
+}
+/** queue: end */
 /** schedule: begin */
 export * from '../bean/schedule.softDeletionPrune.ts';
 
@@ -277,6 +308,7 @@ locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 service: IModuleService;
 broadcast: IModuleBroadcast;
 event: IModuleEvent;
+queue: IModuleQueue;
 }
 
 import 'vona';

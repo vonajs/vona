@@ -539,7 +539,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     const inner = async () => {
       await this.cacheEntity.del(id, table);
-      await this._cacheQueryClearInner(table);
+      await this._cacheQueryClearRaw(table);
     };
     await inner();
     if (this.db.inTransaction) {
@@ -553,7 +553,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   public async cacheEntityClear(table?: keyof ITableRecord) {
     const inner = async () => {
       await this.cacheEntity.clear(table);
-      await this._cacheQueryClearInner(table);
+      await this._cacheQueryClearRaw(table);
     };
     await inner();
     if (this.db.inTransaction) {
@@ -566,7 +566,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
     const inner = async () => {
-      await this._cacheQueryClearInner(table);
+      await this._cacheQueryClearRaw(table);
     };
     await inner();
     if (this.db.inTransaction) {
@@ -577,7 +577,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this._shardingCacheDoubleDelete(inner);
   }
 
-  private async _cacheQueryClearInner(table?: keyof ITableRecord) {
+  private async _cacheQueryClearRaw(table?: keyof ITableRecord) {
     await this.cacheQuery.clear(table);
     await this._cacheQueryClearModelsClear();
   }
