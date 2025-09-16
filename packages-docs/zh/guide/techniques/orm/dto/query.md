@@ -97,7 +97,7 @@ export class DtoOrderQuery
 
 我们还可以指定 Openapi 参数，从而支持更多能力
 
-### 1. relations
+### 1. Relations
 
 比如，Model Order 与 Model User 是`n:1`的关系，我们可以在 Query 参数中传入`userName`作为查询条件。那么，需要在 DTO 中添加`userName`字段，并且设置 Openapi 参数
 
@@ -248,7 +248,7 @@ class ControllerOrder {
 
 ### 3. 自定义函数
 
-也可以直接为参数`transformFn`提供自定义函数：
+也可以直接提供自定义函数：
 
 ``` diff
 + function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransformInfo): boolean | undefined {

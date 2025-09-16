@@ -63,7 +63,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 ## $Dto.query
 
-如果需要在 DTO 中添加业务字段的查询条件，可以使用`$Dto.query`
+If you need to add query clause for business fields in DTO, you can use `$Dto.query`
 
 ``` diff
 @Dto()
@@ -71,15 +71,15 @@ export class DtoOrderQuery
 + extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {}
 ```
 
-- `$Dto.query`：自动从`EntityOrder`中提取字段`orderNo/remark`，然后与`DtoQueryBase`成员字段进行合并
+- `$Dto.query`: Automatically extract the field `orderNo/remark` from `EntityOrder` and then merge it with the `DtoQueryBase` member fields
 
-基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
+The automatically generated Swagger/Openapi is as follows:
 
 ![](../../../../assets/img/orm/dto/dto-3.png)
 
-## 添加自定义字段
+## Add custom fields
 
-还可以直接在 DTO 中添加自定义字段
+You can also add custom fields directly in the DTO
 
 ``` diff
 @Dto()
@@ -90,16 +90,16 @@ export class DtoOrderQuery
 }
 ```
 
-- 从`EntityOrder`中自动提取字段`remark`
-- 添加自定义字段`orderNo`
+- Automatically extract the field `remark` from `EntityOrder`
+- Add custom field `orderNo`
 
-## Openapi参数
+## Openapi parameters
 
-我们还可以指定 Openapi 参数，从而支持更多能力
+We can also specify OpenAPI parameters to support more capabilities
 
-### 1. relations
+### 1. Relations
 
-比如，Model Order 与 Model User 是`n:1`的关系，我们可以在 Query 参数中传入`userName`作为查询条件。那么，需要在 DTO 中添加`userName`字段，并且设置 Openapi 参数
+For example, if the Model `Order` and Model `User` have an `n:1` relation, we can pass `userName` as the query condition in the Query parameters. Then, we need to add the `userName` field in the DTO and set the OpenAPI parameters
 
 ``` typescript
 @Dto()
@@ -117,22 +117,22 @@ export class DtoOrderQuery
 }
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|table|关联表名|
-|joinType|关联类型，默认为`innerJoin`|
-|joinOn|关联条件|
-|originalName|原始字段名|
+|table|Table name of relation|
+|joinType|Relation Type, default is `innerJoin`|
+|joinOn|Relation condition|
+|originalName|Original field name|
 
-基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
+The automatically generated Swagger/Openapi is as follows:
 
 ![](../../../../assets/img/orm/dto/dto-4.png)
 
-### 2. 基于relations的orders
+### 2. Orders of relations
 
-当 Model Order 与 Model User 进行联合查询时，`orders`中的字段如果在两个数据表中都存在，那么就必须明确指定表名前缀。比如：`testVonaOrder.createdAt,desc`
+When querying Model `Order` which joins with Model `User`, if the fields in `orders` exist in both tables, you must specify the table name prefix. For example: `testVonaOrder.createdAt,desc`
 
-Vona ORM 内置了基于 relations 的 orders 处理逻辑，只需要在 DTO 中设置 Openapi 参数即可：
+Vona ORM has built-in relations-based orders processing logic. You only need to set the Openapi parameters in the DTO:
 
 ``` diff
 @Dto<IDtoOptionsOrderQuery>({
@@ -156,18 +156,18 @@ export class DtoOrderQuery
 }
 ```
 
-## 自定义Query Transform
+## Custom Query Transform
 
-对于自定义字段，Vona ORM 提供了内置的 Transform 规则。比如：
+For custom fields, Vona ORM provides built-in Transform rules. For example:
 
-- `orderNo`是 string 类型，系统自动转换为条件语句`'orderNo': { _includesI_: 'some input' }`
-- `userName`也是 string 类型，系统自动转换为条件语句`'name': { _includesI_: 'some input' }`
+- `orderNo` is a string, so the system automatically converts it to the conditional statement `'orderNo': { _includesI_: 'some input' }`
+- `userName` is also a string, so the system automatically converts it to the conditional statement `'name': { _includesI_: 'some input' }`
 
-为了支持更复杂的业务需求，可以提供自定义 Query Transform
+To support more complex business needs, you can provide a custom Query Transform
 
-### 1. 约定名称
+### 1. Convention Name
 
-比如，我们在 Controller Order 的`findAll`方法中使用 Query。那么，只需在当前 Controller 中提供`findAllQueryTransform`即可
+For example, we use Query in the `findAll` method of the `Order` controller. Then, we only need to provide `findAllQueryTransform` in the current controller
 
 ``` diff
 @Controller
@@ -191,7 +191,7 @@ class ControllerOrder {
 }
 ```
 
-如果需要将`userName`转换为条件语句`'name': 'some input'`，那么代码如下：
+If you need to convert `userName` into a conditional statement `'name': 'some input'`, the code is as follows:
 
 ``` typescript
 class ControllerOrder {
@@ -205,19 +205,19 @@ class ControllerOrder {
 }  
 ```
 
-### 2. Query Transform返回值
+### 2. Query Transform Return Value
 
-Query Transform 返回值如下：
+Query Transform returns the following values:
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|true|提供了自定义逻辑，忽略系统内置规则|
-|false|没有提供自定义逻辑，忽略系统内置规则|
-|undefined|没有提供自定义逻辑，使用系统内置规则|
+|true|Provides custom logic and ignores system built-in rules|
+|false|No custom logic is provided, ignoring the system's built-in rules|
+|undefined|No custom logic is provided, using the system's built-in rules|
 
-### 2. 自定义名称
+### 2. Custom Name
 
-我们也可以为`Query Transform`提供自定义名称，比如：`myCustomQueryTransform`
+We can also provide a custom name for `Query Transform`, such as: `myCustomQueryTransform`
 
 ``` diff
 class ControllerOrder {
@@ -244,11 +244,11 @@ class ControllerOrder {
 }
 ```
 
-- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，传入参数`'myCustomQueryTransform'`
+- `@Arg.queryPro`: This Pipe transforms the Query parameter, passing in the parameter `'myCustomQueryTransform'`
 
-### 3. 自定义函数
+### 3. Custom Function
 
-也可以直接为参数`transformFn`提供自定义函数：
+You can also provide a custom function directly:
 
 ``` diff
 + function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
