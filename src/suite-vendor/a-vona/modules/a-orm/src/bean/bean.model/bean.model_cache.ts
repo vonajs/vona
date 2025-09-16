@@ -537,44 +537,47 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
-    const inner = async () => {
-      await this.cacheEntity.del(id, table);
-      await this._cacheQueryClearRaw(table);
-    };
-    await inner();
+    await this._cacheEntityDelInner(id, table);
     if (this.db.inTransaction) {
       this.db.commit(async () => {
-        await inner();
+        await this._cacheEntityDelInner(id, table);
       });
     }
     this._shardingCacheDoubleDelete(inner);
+  }
+
+  private async _cacheEntityDelInner(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
+    await this.cacheEntity.del(id, table);
+    await this._cacheQueryClearRaw(table);
   }
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
-    const inner = async () => {
-      await this.cacheEntity.clear(table);
-      await this._cacheQueryClearRaw(table);
-    };
-    await inner();
+    await this._cacheEntityClearInner(table);
     if (this.db.inTransaction) {
       this.db.commit(async () => {
-        await inner();
+        await this._cacheEntityClearInner(table);
       });
     }
     this._shardingCacheDoubleDelete(inner);
   }
 
+  private async _cacheEntityClearInner(table?: keyof ITableRecord) {
+    await this.cacheEntity.clear(table);
+    await this._cacheQueryClearRaw(table);
+  }
+
   public async cacheQueryClear(table?: keyof ITableRecord) {
-    const inner = async () => {
-      await this._cacheQueryClearRaw(table);
-    };
-    await inner();
+    await this._cacheQueryClearInner(table);
     if (this.db.inTransaction) {
       this.db.commit(async () => {
-        await inner();
+        await this._cacheQueryClearInner(table);
       });
     }
     this._shardingCacheDoubleDelete(inner);
+  }
+
+  private async _cacheQueryClearInner(table?: keyof ITableRecord) {
+    await this._cacheQueryClearRaw(table);
   }
 
   private async _cacheQueryClearRaw(table?: keyof ITableRecord) {
