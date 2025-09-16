@@ -7,4 +7,3 @@ export type SchemaLike<T = unknown> = SchemaLikeCreate | z.ZodType<T> | Construc
 export type TypeDecoratorRules = Record<string, z.ZodType | undefined>;
 
 export const SymbolDecoratorRule = Symbol('SymbolDecoratorRule');
-export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');

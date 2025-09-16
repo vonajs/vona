@@ -4,21 +4,32 @@ import type { TypeOpenapiMetadata } from '../types/rest.ts';
 import { isClass } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
-import { SymbolDecoratorRule, SymbolDecoratorRuleColumn } from 'vona-module-a-openapiutils';
+import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
 
-export function getTargetDecoratorRules(target: object): TypeDecoratorRules {
-  registerMappedClassMetadataKey(target, SymbolDecoratorRule, {
-    partialClass: (meta: z.ZodType) => {
-      return meta.optional();
-    },
-  });
+export function getTargetDecoratorRules(target: object, disableRegisterMetadata?: boolean): TypeDecoratorRules {
+  if (!disableRegisterMetadata) {
+    registerMappedClassMetadataKey(target, SymbolDecoratorRule, {
+      partialClass: (meta: z.ZodType) => {
+        return meta.optional();
+      },
+    });
+  }
   return appMetadata.getOwnMetadataMap(true, SymbolDecoratorRule, target);
 }
 
-export function getTargetDecoratorRuleColumns(target: object) {
-  registerMappedClassMetadataKey(target, SymbolDecoratorRuleColumn);
-  return appMetadata.getOwnMetadataMap(true, SymbolDecoratorRuleColumn, target);
+export function getTargetDecoratorRuleColumns(target: object): string[] {
+  const rules = getTargetDecoratorRules(target, true);
+  return Object.keys(rules);
+}
+
+export function getTargetDecoratorRuleColumnsMap(target: object): Record<string, string> {
+  const columns = getTargetDecoratorRuleColumns(target);
+  const map = {};
+  for (const column of columns) {
+    map[column] = column;
+  }
+  return map;
 }
 
 export function mergeFieldsOpenapiMetadata(target: Constructable) {
