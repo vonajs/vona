@@ -14,7 +14,7 @@ export interface TypeQueueDoubleDeleteJobData {
 export type TypeQueueDoubleDeleteJobResult = void;
 
 @Queue({
-  options: { job: { delay: 1 * 1000 } },
+  options: { job: { delay: 3 * 1000 } },
 })
 export class QueueDoubleDelete
   extends BeanQueueBase<TypeQueueDoubleDeleteJobData, TypeQueueDoubleDeleteJobResult>
