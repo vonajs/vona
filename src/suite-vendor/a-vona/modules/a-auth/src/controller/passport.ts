@@ -32,7 +32,7 @@ export class ControllerPassport extends BeanBase {
     // authProvider
     const entityAuthProvider = await this.bean.authProvider.get({ id: strategyState.authProviderId });
     if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
-    const authProviderName = `${entityAuthProvider.module}:${entityAuthProvider.providerName}`;
+    const authProviderName = entityAuthProvider.providerName;
     // clientName
     const clientName = entityAuthProvider.clientName ?? 'default';
     // onionSlice
