@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-mail",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-mail",
   "vonaModule": {
     "fileVersion": 1,
@@ -9,7 +9,9 @@
   },
   "description": "",
   "author": "",
-  "keywords": ["Vona Module"],
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -21,7 +23,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist", "static"],
+  "files": [
+    "dist",
+    "static"
+  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",

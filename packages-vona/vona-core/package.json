@@ -1,7 +1,7 @@
 {
   "name": "vona-core",
   "type": "module",
-  "version": "5.0.48",
+  "version": "5.0.49",
   "description": "vona",
   "publishConfig": {
     "access": "public"
@@ -43,9 +43,9 @@
     "@cabloy/set": "^1.0.17",
     "@cabloy/utils": "^1.0.39",
     "@cabloy/word-utils": "^2.0.1",
-    "@cabloy/zod-errors-custom": "^2.0.0",
-    "@cabloy/zod-openapi": "^1.0.0",
-    "@cabloy/zod-query": "^2.0.0",
+    "@cabloy/zod-errors-custom": "^2.0.1",
+    "@cabloy/zod-openapi": "^1.0.1",
+    "@cabloy/zod-query": "^2.0.1",
     "@cabloy/zod-to-openapi": "^8.1.1",
     "chalk": "^5.3.0",
     "fs-extra": "^10.1.0",
