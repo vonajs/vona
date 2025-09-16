@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+import type { FunctionAny } from 'vona';
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
   IDatabaseClientRecord,
@@ -23,7 +24,7 @@ import type {
   TypeModelsClassLikeGeneral,
   TypeModelWhere,
 } from '../../types/index.ts';
-import { isNil } from '@cabloy/utils';
+import { isNil, sleep } from '@cabloy/utils';
 import BigNumber from 'bignumber.js';
 import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
@@ -546,6 +547,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         await inner();
       });
     }
+    this._shardingCacheDoubleDelete(inner);
   }
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
@@ -559,6 +561,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         await inner();
       });
     }
+    this._shardingCacheDoubleDelete(inner);
   }
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
@@ -571,11 +574,24 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         await inner();
       });
     }
+    this._shardingCacheDoubleDelete(inner);
   }
 
-  public async _cacheQueryClearInner(table?: keyof ITableRecord) {
+  private async _cacheQueryClearInner(table?: keyof ITableRecord) {
     await this.cacheQuery.clear(table);
     await this._cacheQueryClearModelsClear();
+  }
+
+  private _shardingCacheDoubleDelete(fn: FunctionAny) {
+    const doubleDelete = this.scopeOrm.config.sharding.cache.doubleDelete;
+    if (!doubleDelete) return;
+    if (this.db.inTransaction) {
+      this.db.commit(() => {
+        sleep(doubleDelete).then(fn);
+      });
+    } else {
+      sleep(doubleDelete).then(fn);
+    }
   }
 
   private async _cacheQueryClearModelsClear() {
