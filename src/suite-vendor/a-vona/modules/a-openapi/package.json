@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-openapi",
   "type": "module",
-  "version": "5.0.31",
+  "version": "5.0.32",
   "title": "a-openapi",
   "vonaModule": {
     "capabilities": {
@@ -43,7 +43,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/zod-errors-custom": "^2.0.1",
+    "@cabloy/zod-errors-custom": "^2.0.2",
     "@cabloy/zod-openapi": "^1.0.1",
     "@cabloy/zod-query": "^2.0.1",
     "@cabloy/zod-to-openapi": "^8.1.1",
