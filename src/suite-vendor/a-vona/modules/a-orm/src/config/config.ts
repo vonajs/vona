@@ -19,6 +19,11 @@ export type TypeDataBaseConfigDialects = Record<
 
 export function config(_app: VonaApplication) {
   return {
+    sharding: {
+      cache: {
+        doubleDelete: false as number | false,
+      },
+    },
     rest: {
       query: {
         pageSize: {
