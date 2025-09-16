@@ -585,12 +585,16 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   private _shardingCacheDoubleDelete(fn: FunctionAny) {
     const doubleDelete = this.scopeOrm.config.sharding.cache.doubleDelete;
     if (!doubleDelete) return;
+    const inner = async () => {
+      if (this.app.meta.appClose) return;
+      await fn();
+    };
     if (this.db.inTransaction) {
       this.db.commit(() => {
-        sleep(doubleDelete).then(fn);
+        sleep(doubleDelete).then(inner);
       });
     } else {
-      sleep(doubleDelete).then(fn);
+      sleep(doubleDelete).then(inner);
     }
   }
 
