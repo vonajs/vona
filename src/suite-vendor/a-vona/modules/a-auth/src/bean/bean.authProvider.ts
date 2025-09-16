@@ -5,9 +5,8 @@ import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanAuthProvider extends BeanBase {
-  async getByOnionName(onionName: keyof IAuthProviderRecord, clientName?: keyof IAuthProviderClientRecord) {
-    const [module, providerName] = onionName.split(':');
-    return await this.get({ module, providerName, clientName });
+  async getByProviderName(providerName: keyof IAuthProviderRecord, clientName?: keyof IAuthProviderClientRecord) {
+    return await this.get({ providerName, clientName });
   }
 
   async getById(id: number) {
@@ -18,7 +17,7 @@ export class BeanAuthProvider extends BeanBase {
     if (!data.id && !data.clientName) data = { ...data, clientName: 'default' };
     const res = await this.scope.model.authProvider.get(data);
     if (res) return res;
-    if (!data.module || !data.providerName) throw new Error('Invalid auth provider');
+    if (!data.providerName) throw new Error('Invalid auth provider');
     // lock
     return await this.scope.redlock.lockIsolate('authProvider.register', async () => {
       return await this._registerAuthProviderLock(data);
@@ -31,7 +30,6 @@ export class BeanAuthProvider extends BeanBase {
     if (res) return res;
     const dataNew: Partial<EntityAuthProvider> = {
       disabled: false,
-      module: data.module,
       providerName: data.providerName,
       clientName: data.clientName,
       clientOptions: undefined,
