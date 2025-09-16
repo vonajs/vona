@@ -4,14 +4,16 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { EntityRole } from '../entity/role.ts';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
-import { DtoAuthSimple } from 'vona-module-a-authsimple';
+import { Captcha } from 'vona-module-a-captcha';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
+import { DtoLogin } from '../dto/login.ts';
 import { DtoPassport } from '../dto/passport.ts';
 import { DtoPassportJwt } from '../dto/passportJwt.ts';
+import { DtoRegister } from '../dto/register.ts';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
 
@@ -29,28 +31,37 @@ export class ControllerPassport extends BeanBase {
     return await this.bean.passport.signout();
   }
 
+  @Web.post('register')
+  @Passport.public()
+  @Captcha.verify({ scene: 'a-captchasimple:simple' })
+  @Api.body(v.object(DtoPassportJwt))
+  async register(@Arg.body() data: DtoRegister) {
+    const jwt = await this.bean.authSimple.authenticate(data, 'register', 'default');
+    return this._combineDtoPassportJwt(jwt);
+  }
+
   @Web.post('login')
   @Passport.public()
+  @Captcha.verify({ scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
-  async loginSimple(@Arg.body() clientOptions: DtoAuthSimple): Promise<DtoPassportJwt> {
-    const jwt = await this.bean.authSimple.authenticate(clientOptions, 'default');
+  async login(@Arg.body() data: DtoLogin): Promise<DtoPassportJwt> {
+    const jwt = await this.bean.authSimple.authenticate(data, 'login', 'default');
     return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('login/:module/:providerName/:clientName?')
   @Passport.public()
-  @Api.body(v.object(DtoPassportJwt))
-  async login<T extends keyof IAuthProviderRecord>(
+  async loginOauth<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
     @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
     @Arg.query('redirect', v.optional()) redirect?: string,
-  ): Promise<DtoPassportJwt> {
-    const jwt = await this.bean.auth.authenticate(`${module}:${providerName}` as T, {
+  ) {
+    // only support oauth, so not return jwt to client
+    await this.bean.auth.authenticate(`${module}:${providerName}` as T, {
       state: { intention: 'login', redirect },
       clientName,
     });
-    return this._combineDtoPassportJwt(jwt);
   }
 
   @Web.get('associate/:module/:providerName/:clientName?')

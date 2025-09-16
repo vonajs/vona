@@ -300,12 +300,18 @@ declare module 'vona' {
 /** service: end */
 /** eventListener: begin */
 export * from '../bean/eventListener.activate.ts';
+export * from '../bean/eventListener.emailConfirmCallback.ts';
+export * from '../bean/eventListener.passwordResetCallback.ts';
+export * from '../bean/eventListener.register.ts';
 
 import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   
     export interface IEventListenerRecord {
       'home-user:activate': IDecoratorEventListenerOptions;
+'home-user:emailConfirmCallback': IDecoratorEventListenerOptions;
+'home-user:passwordResetCallback': IDecoratorEventListenerOptions;
+'home-user:register': IDecoratorEventListenerOptions;
     }
 
   
@@ -320,6 +326,36 @@ declare module 'vona-module-home-user' {
           export interface EventListenerActivate {
             get $beanFullName(): 'home-user.eventListener.activate';
             get $onionName(): 'home-user:activate';
+          }
+
+        export interface EventListenerEmailConfirmCallback {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface EventListenerEmailConfirmCallback {
+            get $beanFullName(): 'home-user.eventListener.emailConfirmCallback';
+            get $onionName(): 'home-user:emailConfirmCallback';
+          }
+
+        export interface EventListenerPasswordResetCallback {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface EventListenerPasswordResetCallback {
+            get $beanFullName(): 'home-user.eventListener.passwordResetCallback';
+            get $onionName(): 'home-user:passwordResetCallback';
+          }
+
+        export interface EventListenerRegister {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface EventListenerRegister {
+            get $beanFullName(): 'home-user.eventListener.register';
+            get $onionName(): 'home-user:register';
           } 
 }
 /** eventListener: end */
@@ -362,18 +398,24 @@ declare module 'vona-module-home-user' {
 /** meta: end */
 /** dto: begin */
 export * from '../dto/auth.ts';
+export * from '../dto/login.ts';
 export * from '../dto/passport.ts';
 export * from '../dto/passportJwt.ts';
+export * from '../dto/register.ts';
 import type { IDtoOptionsAuth } from '../dto/auth.ts';
+import type { IDtoOptionsLogin } from '../dto/login.ts';
 import type { IDtoOptionsPassport } from '../dto/passport.ts';
 import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
+import type { IDtoOptionsRegister } from '../dto/register.ts';
 import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'home-user:auth': IDtoOptionsAuth;
+'home-user:login': IDtoOptionsLogin;
 'home-user:passport': IDtoOptionsPassport;
 'home-user:passportJwt': IDtoOptionsPassportJwt;
+'home-user:register': IDtoOptionsRegister;
     }
 
   
@@ -384,12 +426,18 @@ declare module 'vona-module-home-user' {
 /** dto: end */
 /** dto: begin */
 import type { DtoAuth } from '../dto/auth.ts';
+import type { DtoLogin } from '../dto/login.ts';
 import type { DtoPassport } from '../dto/passport.ts';
-import type { DtoPassportJwt } from '../dto/passportJwt.ts'; 
+import type { DtoPassportJwt } from '../dto/passportJwt.ts';
+import type { DtoRegister } from '../dto/register.ts'; 
 declare module 'vona-module-home-user' {
   
     export interface IDtoOptionsAuth {
       fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsLogin {
+      fields?: TypeEntityOptionsFields<DtoLogin, IDtoOptionsLogin[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPassport {
@@ -398,6 +446,10 @@ declare module 'vona-module-home-user' {
 
     export interface IDtoOptionsPassportJwt {
       fields?: TypeEntityOptionsFields<DtoPassportJwt, IDtoOptionsPassportJwt[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsRegister {
+      fields?: TypeEntityOptionsFields<DtoRegister, IDtoOptionsRegister[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
@@ -444,6 +496,7 @@ declare module 'vona-module-a-web' {
     }
 export interface IApiPathPostRecord{
         '/home/user/passport/logout': undefined;
+'/home/user/passport/register': undefined;
 '/home/user/passport/login': undefined;
 '/home/user/passport/refreshAuthToken': undefined;
 '/home/user/passport/createPassportJwtFromOauthCode': undefined;
@@ -452,6 +505,57 @@ export interface IApiPathPostRecord{
 
 }
 /** controller: end */
+/** zodRefine: begin */
+export * from '../bean/zodRefine.emailUnique.ts';
+export * from '../bean/zodRefine.passwordConfirm.ts';
+export * from '../bean/zodRefine.usernameUnique.ts';
+import type { IZodRefineOptionsEmailUnique } from '../bean/zodRefine.emailUnique.ts';
+import type { IZodRefineOptionsPasswordConfirm } from '../bean/zodRefine.passwordConfirm.ts';
+import type { IZodRefineOptionsUsernameUnique } from '../bean/zodRefine.usernameUnique.ts';
+import 'vona';
+declare module 'vona-module-a-zod' {
+  
+    export interface IZodRefineRecord {
+      'home-user:emailUnique': IZodRefineOptionsEmailUnique;
+'home-user:passwordConfirm': IZodRefineOptionsPasswordConfirm;
+'home-user:usernameUnique': IZodRefineOptionsUsernameUnique;
+    }
+
+  
+}
+declare module 'vona-module-home-user' {
+  
+        export interface ZodRefineEmailUnique {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ZodRefineEmailUnique {
+            get $beanFullName(): 'home-user.zodRefine.emailUnique';
+            get $onionName(): 'home-user:emailUnique';
+          }
+
+        export interface ZodRefinePasswordConfirm {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ZodRefinePasswordConfirm {
+            get $beanFullName(): 'home-user.zodRefine.passwordConfirm';
+            get $onionName(): 'home-user:passwordConfirm';
+          }
+
+        export interface ZodRefineUsernameUnique {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+          export interface ZodRefineUsernameUnique {
+            get $beanFullName(): 'home-user.zodRefine.usernameUnique';
+            get $onionName(): 'home-user:usernameUnique';
+          } 
+}
+/** zodRefine: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
