@@ -537,64 +537,64 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
-    await this._cacheEntityDelInner(id, table);
+    await this.cacheEntityDelInner(id, table);
     if (this.db.inTransaction) {
       this.db.commit(async () => {
-        await this._cacheEntityDelInner(id, table);
+        await this.cacheEntityDelInner(id, table);
       });
     }
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
       table: this.getTable(),
-      method: '_cacheEntityDelInner',
+      method: 'cacheEntityDelInner',
       args: [id, table],
     });
   }
 
-  private async _cacheEntityDelInner(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
+  public async cacheEntityDelInner(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
-    await this._cacheQueryClearInner(table);
+    await this.cacheQueryClearInner(table);
   }
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
-    await this._cacheEntityClearInner(table);
+    await this.cacheEntityClearInner(table);
     if (this.db.inTransaction) {
       this.db.commit(async () => {
-        await this._cacheEntityClearInner(table);
+        await this.cacheEntityClearInner(table);
       });
     }
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
       table: this.getTable(),
-      method: '_cacheEntityClearInner',
+      method: 'cacheEntityClearInner',
       args: [table],
     });
   }
 
-  private async _cacheEntityClearInner(table?: keyof ITableRecord) {
+  public async cacheEntityClearInner(table?: keyof ITableRecord) {
     await this.cacheEntity.clear(table);
-    await this._cacheQueryClearInner(table);
+    await this.cacheQueryClearInner(table);
   }
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
-    await this._cacheQueryClearInner(table);
+    await this.cacheQueryClearInner(table);
     if (this.db.inTransaction) {
       this.db.commit(async () => {
-        await this._cacheQueryClearInner(table);
+        await this.cacheQueryClearInner(table);
       });
     }
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
       table: this.getTable(),
-      method: '_cacheQueryClearInner',
+      method: 'cacheQueryClearInner',
       args: [table],
     });
   }
 
-  private async _cacheQueryClearInner(table?: keyof ITableRecord) {
+  public async cacheQueryClearInner(table?: keyof ITableRecord) {
     await this.cacheQuery.clear(table);
     await this._cacheQueryClearModelsClear();
   }
@@ -620,7 +620,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       if (modelsClearedByFn) {
         await modelsClearedByFn(this.ctx, modelTarget, this);
       } else {
-        await modelTarget.cacheQueryClear();
+        await modelTarget.cacheQueryClearInner();
       }
     }
   }

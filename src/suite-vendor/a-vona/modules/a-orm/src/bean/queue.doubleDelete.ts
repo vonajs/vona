@@ -7,7 +7,7 @@ export interface TypeQueueDoubleDeleteJobData {
   beanFullName: string;
   clientName: keyof IDatabaseClientRecord;
   table: keyof ITableRecord;
-  method: '_cacheEntityDelInner' | '_cacheEntityClearInner' | '_cacheQueryClearInner';
+  method: 'cacheEntityDelInner' | 'cacheEntityClearInner' | 'cacheQueryClearInner';
   args: any[];
 }
 
