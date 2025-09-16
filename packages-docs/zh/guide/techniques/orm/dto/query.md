@@ -197,7 +197,7 @@ class ControllerOrder {
 class ControllerOrder {
   findAllQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
     if (info.key === 'userName') {
-      info.params.where![info.fullName] = info.value;
+      info.params.where[info.fullName] = info.value;
       return true;
     }
     return undefined;
@@ -223,7 +223,7 @@ Query Transform 返回值如下：
 class ControllerOrder {
 + myCustomQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
 +   if (info.key === 'userName') {
-+     info.params.where![info.fullName] = info.value;
++     info.params.where[info.fullName] = info.value;
 +     return true;
 +   }
 +   return undefined;
@@ -253,7 +253,7 @@ class ControllerOrder {
 ``` diff
 + function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
 +   if (info.key === 'userName') {
-+     info.params.where![info.fullName] = info.value;
++     info.params.where[info.fullName] = info.value;
 +     return true;
 +   }
 +   return undefined;
