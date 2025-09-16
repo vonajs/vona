@@ -2,7 +2,8 @@ import type { IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
 import { BeanQueueBase, Queue } from 'vona-module-a-queue';
 
 export interface TypeQueueDoubleDeleteJobData {
-  method: 'cacheEntityDel' | 'cacheEntityClear' | 'cacheQueryClear';
+  method: '_cacheEntityDelInner' | '_cacheEntityClearInner' | '_cacheQueryClearInner';
+  args: any[];
 }
 
 export type TypeQueueDoubleDeleteJobResult = void;

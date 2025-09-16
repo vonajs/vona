@@ -24,6 +24,7 @@ import type {
   TypeModelsClassLikeGeneral,
   TypeModelWhere,
 } from '../../types/index.ts';
+import type { TypeQueueDoubleDeleteJobData } from '../queue.doubleDelete.ts';
 import { isNil, sleep } from '@cabloy/utils';
 import BigNumber from 'bignumber.js';
 import { cast } from 'vona';
@@ -548,7 +549,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private async _cacheEntityDelInner(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntity.del(id, table);
-    await this._cacheQueryClearRaw(table);
+    await this._cacheQueryClearInner(table);
   }
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
@@ -563,7 +564,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private async _cacheEntityClearInner(table?: keyof ITableRecord) {
     await this.cacheEntity.clear(table);
-    await this._cacheQueryClearRaw(table);
+    await this._cacheQueryClearInner(table);
   }
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
@@ -577,15 +578,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   private async _cacheQueryClearInner(table?: keyof ITableRecord) {
-    await this._cacheQueryClearRaw(table);
-  }
-
-  private async _cacheQueryClearRaw(table?: keyof ITableRecord) {
     await this.cacheQuery.clear(table);
     await this._cacheQueryClearModelsClear();
   }
 
-  private _shardingCacheDoubleDelete(fn: FunctionAny) {
+  private _shardingCacheDoubleDelete(jobData: TypeQueueDoubleDeleteJobData) {
     const doubleDelete = this.scopeOrm.config.sharding.cache.doubleDelete;
     if (!doubleDelete) return;
     const inner = async () => {
