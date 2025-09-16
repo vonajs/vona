@@ -1,9 +1,8 @@
 import type { LocaleAdapterFn, LocaleCurrentAdapterFn, ZodLocaleErrors, ZodLocaleErrorsInstance } from './utils.ts';
-import { cast } from 'vona';
 import { z } from 'zod';
 
 export function setLocaleAdapter(localeAdapterFn: LocaleAdapterFn) {
-  cast(z.util).setLocaleAdapter(localeAdapterFn);
+  (z.util as any).setLocaleAdapter(localeAdapterFn);
 }
 
 export function setLocaleErrors(localeCurrentAdapterFn: LocaleCurrentAdapterFn, localeErrors: ZodLocaleErrors, localeDefault: string = 'en-us') {
