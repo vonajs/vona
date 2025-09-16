@@ -1,5 +1,4 @@
 import type { TableIdentity } from 'table-identity';
-import type { FunctionAny } from 'vona';
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
   IDatabaseClientRecord,
@@ -25,7 +24,7 @@ import type {
   TypeModelWhere,
 } from '../../types/index.ts';
 import type { TypeQueueDoubleDeleteJobData } from '../queue.doubleDelete.ts';
-import { isNil, sleep } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
 import BigNumber from 'bignumber.js';
 import { cast } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
@@ -544,7 +543,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         await this._cacheEntityDelInner(id, table);
       });
     }
-    this._shardingCacheDoubleDelete(inner);
+    this._shardingCacheDoubleDelete({
+      beanFullName: this.$beanFullName,
+      clientName: this.db.clientName,
+      table: this.getTable(),
+      method: '_cacheEntityDelInner',
+      args: [id, table],
+    });
   }
 
   private async _cacheEntityDelInner(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
@@ -559,7 +564,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         await this._cacheEntityClearInner(table);
       });
     }
-    this._shardingCacheDoubleDelete(inner);
+    this._shardingCacheDoubleDelete({
+      beanFullName: this.$beanFullName,
+      clientName: this.db.clientName,
+      table: this.getTable(),
+      method: '_cacheEntityClearInner',
+      args: [table],
+    });
   }
 
   private async _cacheEntityClearInner(table?: keyof ITableRecord) {
@@ -574,7 +585,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         await this._cacheQueryClearInner(table);
       });
     }
-    this._shardingCacheDoubleDelete(inner);
+    this._shardingCacheDoubleDelete({
+      beanFullName: this.$beanFullName,
+      clientName: this.db.clientName,
+      table: this.getTable(),
+      method: '_cacheQueryClearInner',
+      args: [table],
+    });
   }
 
   private async _cacheQueryClearInner(table?: keyof ITableRecord) {
@@ -585,16 +602,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   private _shardingCacheDoubleDelete(jobData: TypeQueueDoubleDeleteJobData) {
     const doubleDelete = this.scopeOrm.config.sharding.cache.doubleDelete;
     if (!doubleDelete) return;
-    const inner = async () => {
-      if (this.app.meta.appClose) return;
-      await fn();
-    };
     if (this.db.inTransaction) {
       this.db.commit(() => {
-        sleep(doubleDelete).then(inner);
+        this.scopeOrm.queue.doubleDelete.push(jobData);
       });
     } else {
-      sleep(doubleDelete).then(inner);
+      this.scopeOrm.queue.doubleDelete.push(jobData);
     }
   }
 
