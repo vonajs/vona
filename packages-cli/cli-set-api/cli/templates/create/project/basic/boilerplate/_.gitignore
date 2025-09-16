@@ -32,7 +32,6 @@ src/backend/typing/mine.d.ts
 # auto created
 .rollup.cache
 .temp-dynamic-*
-/cabloy.json
 /package.json
 
 /docker-compose
