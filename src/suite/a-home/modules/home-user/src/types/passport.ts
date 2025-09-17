@@ -1,11 +1,10 @@
 import type { TableIdentity } from 'table-identity';
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
-import type { IPassportBase } from 'vona-module-a-user';
+import type { IPassportBase, IUserBase } from 'vona-module-a-user';
 import type { IAuth } from './auth.ts';
-import type { IUser } from './user.ts';
 
 export interface IPassport extends IPassportBase {
-  user?: IUser;
+  user?: IUserBase;
   auth?: IAuth;
 }
 

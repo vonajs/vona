@@ -1,6 +1,5 @@
 import type { IEventExecute, NextEvent } from 'vona-module-a-event';
-import type { TypeEventRegisterData, TypeEventRegisterResult } from 'vona-module-a-user';
-import type { IUser } from '../types/user.ts';
+import type { IUserBase, TypeEventRegisterData, TypeEventRegisterResult } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 
@@ -13,7 +12,7 @@ export class EventListenerRegister
   implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
     // next: registered
-    const user = await next() as IUser;
+    const user = await next() as IUserBase;
     // mail: activate
     if (!data.autoActivate && user.email) {
       await this.$scope.mailconfirm.service.mail.emailConfirm(user);
