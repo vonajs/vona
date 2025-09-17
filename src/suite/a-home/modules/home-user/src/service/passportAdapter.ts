@@ -26,7 +26,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     if (!user) return;
     const auth = await this.bean.auth.findOne({ id: payloadData.authId });
     if (!auth) return;
-    const roles = await this.bean.roleInner.findAllByUserId(payloadData.userId);
+    const roles = await this.bean.role.findAllByUserId(payloadData.userId);
     return { user, auth, roles };
   }
 }

@@ -4,7 +4,7 @@ import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
-export class BeanRoleInner extends BeanBase {
+export class BeanRole extends BeanBase {
   private _roleInnerAdapter: IRoleInnerAdapter;
 
   private get roleInnerAdapter(): IRoleInnerAdapter {
