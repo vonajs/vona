@@ -46,7 +46,7 @@ export class ControllerOrder extends BeanBase {
   @Api.body(DtoOrderResultPage)
   async findMany(
     @Arg.queryPro(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
-  ) {
+  ): Promise<DtoOrderResultPage> {
     return this.scope.model.order.selectAndCount({
       ...params,
       include: {

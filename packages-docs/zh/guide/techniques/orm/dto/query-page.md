@@ -43,20 +43,20 @@ export class DtoOrderQueryPage extends DtoQueryPageBase {}
 + import { Arg } from 'vona-module-a-web';
 
 class ControllerOrder extends BeanBase {
-  @Web.get('findAll')
-  @Api.body(v.array(DtoOrderResult))
-  async findAll(
-+   @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
-  ): Promise<DtoOrderResult[]> {
-    return this.scope.model.order.select(params);
+  @Web.get('findMany')
+  @Api.body(DtoOrderResultPage)
+  async findMany(
++   @Arg.queryPro(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
+  ): Promise<DtoOrderResultPage> {
+    return this.scope.model.order.selectAndCount(params);
   }
 }
 ```
 
-- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，需要传入参数`DtoOrderQuery`
-- `IQueryParams`: Pipe 对 Query 参数进行 transform 后的数据类型为`IQueryParams`，需要传入泛型参数`ModelOrder`，从而与`model.order.select`方法的参数类型相匹配
+- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，需要传入参数`DtoOrderQueryPage`
+- `IQueryParams`: Pipe 对 Query 参数进行 transform 后的数据类型为`IQueryParams`，需要传入泛型参数`ModelOrder`，从而与`model.order.selectAndCount`方法的参数类型相匹配
 
-基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
+基于`DtoOrderQueryPage`生成的 Swagger/Openapi 效果如下：
 
-![](../../../../assets/img/orm/dto/dto-2.png)
+![](../../../../assets/img/orm/dto/dto-5.png)
 
