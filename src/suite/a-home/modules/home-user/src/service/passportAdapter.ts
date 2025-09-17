@@ -1,16 +1,16 @@
 import type { IPassportAdapter, IPassportBase } from 'vona-module-a-user';
-import type { IPassport, IPayloadData } from '../types/passport.ts';
+import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
-  async isAdmin(passport: IPassport | undefined): Promise<boolean> {
+  async isAdmin(passport: IPassportBase | undefined): Promise<boolean> {
     if (!passport || !passport.roles) return false;
     return passport.roles.some(item => item.name === 'admin');
   }
 
-  async setCurrent(passport: IPassport | undefined): Promise<IPassport | undefined> {
+  async setCurrent(passport: IPassportBase | undefined): Promise<IPassportBase | undefined> {
     return passport;
   }
 
