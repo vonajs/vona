@@ -24,7 +24,3 @@ export interface ISigninOptions {
   /** default: refresh */
   authToken?: TypeAuthToken;
 }
-
-export interface IAuthInnerAdapter {
-  findOne(auth: Partial<IAuthBase>): Promise<IAuthBase | undefined>;
-}

@@ -21,7 +21,7 @@ export interface IUserBase {
   anonymous?: boolean;
 }
 
-export interface IUserInnerAdapter {
+export interface IUserAdapter {
   create(user: Partial<IUserBase>): Promise<IUserBase>;
   userOfProfile(profile: IAuthUserProfile): Promise<IUserBase>;
   createAnonymous(): Promise<IUserBase>;

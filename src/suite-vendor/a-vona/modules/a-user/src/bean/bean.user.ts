@@ -1,23 +1,23 @@
 import type { IAuthUserProfile } from '../types/authProfile.ts';
-import type { IUserBase, IUserInnerAdapter } from '../types/user.ts';
+import type { IUserAdapter, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanUser extends BeanBase {
-  private _userInnerAdapter: IUserInnerAdapter;
+  private _userInnerAdapter: IUserAdapter;
 
-  private get userInnerAdapter(): IUserInnerAdapter {
+  private get userAdapter(): IUserAdapter {
     if (!this._userInnerAdapter) {
-      const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.userInner, 'service');
-      this._userInnerAdapter = this.bean._getBean<IUserInnerAdapter>(beanFullName as never);
+      const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.user, 'service');
+      this._userInnerAdapter = this.bean._getBean<IUserAdapter>(beanFullName as never);
     }
     return this._userInnerAdapter;
   }
 
   async activate(user: IUserBase) {
     await this.scope.event.activate.emit(user, async user => {
-      await this.userInnerAdapter.setActivated(user.id, true);
+      await this.userAdapter.setActivated(user.id, true);
     });
   }
 
@@ -27,7 +27,7 @@ export class BeanUser extends BeanBase {
     const data = { user, confirmed, autoActivate };
     return await this.scope.event.register.emit(data, async data => {
       // user
-      const userNew = await this.userInnerAdapter.create(data.user);
+      const userNew = await this.userAdapter.create(data.user);
       if (data.autoActivate) {
         await this.activate(userNew);
       }
@@ -36,27 +36,27 @@ export class BeanUser extends BeanBase {
   }
 
   async registerByProfile(profile: IAuthUserProfile): Promise<IUserBase> {
-    const user = await this.userInnerAdapter.userOfProfile(profile);
+    const user = await this.userAdapter.userOfProfile(profile);
     return await this.register(user, profile.confirmed);
   }
 
   createAnonymous(): Promise<IUserBase> {
-    return this.userInnerAdapter.createAnonymous();
+    return this.userAdapter.createAnonymous();
   }
 
   findOneByName(name: string): Promise<IUserBase | undefined> {
-    return this.userInnerAdapter.findOneByName(name);
+    return this.userAdapter.findOneByName(name);
   }
 
   findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
-    return this.userInnerAdapter.findOne(user);
+    return this.userAdapter.findOne(user);
   }
 
   update(user: Partial<IUserBase>): Promise<void> {
-    return this.userInnerAdapter.update(user);
+    return this.userAdapter.update(user);
   }
 
   remove(user: Partial<IUserBase>): Promise<void> {
-    return this.userInnerAdapter.remove(user);
+    return this.userAdapter.remove(user);
   }
 }

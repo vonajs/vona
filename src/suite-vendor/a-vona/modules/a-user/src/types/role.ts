@@ -12,7 +12,7 @@ export interface IRoleBase {
   name: string;
 }
 
-export interface IRoleInnerAdapter {
+export interface IRoleAdapter {
   findOneByName(name: string): Promise<IRoleBase | undefined>;
   findOne(role: Partial<IRoleBase>): Promise<IRoleBase | undefined>;
   findAllByUserId(userId: TableIdentity): Promise<IRoleBase[] | undefined>;
