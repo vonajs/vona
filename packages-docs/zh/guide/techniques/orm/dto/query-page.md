@@ -117,3 +117,5 @@ config.modules = {
 })
 export class DtoOrderQueryPage extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
 ```
+
+- 关于`fields`的更多信息，参见：[API: Dto](../../../essentials/api/dto.md)

@@ -114,6 +114,19 @@ Change the openapi metadata of the field `name` to: `title: 'Student Name'`
 class DtoStudentCreate {}
 ```
 
+Or:
+
+``` typescript
+import z from 'zod';
+
+@Dto({
+  fields: {
+    name: z.string().openapi({ title: 'Student Name' }),
+  },
+})
+class DtoStudentCreate {}
+```
+
 ## App config configuration
 
 Dto options can be configured in App config

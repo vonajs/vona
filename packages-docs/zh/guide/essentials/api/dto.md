@@ -113,6 +113,19 @@ class DtoStudentCreate {}
 class DtoStudentCreate {}
 ```
 
+或者：
+
+``` typescript
+import z from 'zod';
+
+@Dto({
+  fields: {
+    name: z.string().openapi({ title: 'Student Name' }),
+  },
+})
+class DtoStudentCreate {}
+```
+
 ## App config配置
 
 可以在 App config 中配置 Dto options
