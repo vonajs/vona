@@ -10,4 +10,5 @@ These basic ORM concepts were explained in the introduction to the `API`. See:
 
 - [API: Entity](../../essentials/api/entity.md)
 - [API: Model](../../essentials/api/model.md)
+- [API: Dto](../../essentials/api/dto.md)
 - [API: Migration and Changes](../../essentials/api/version.md)

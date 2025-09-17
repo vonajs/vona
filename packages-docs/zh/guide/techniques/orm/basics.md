@@ -10,4 +10,5 @@
 
 - [API: Entity](../../essentials/api/entity.md)
 - [API: Model](../../essentials/api/model.md)
+- [API: Dto](../../essentials/api/dto.md)
 - [API: 迁移与变更](../../essentials/api/version.md)
