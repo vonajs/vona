@@ -31,8 +31,8 @@ export class DtoOrderQueryPage extends DtoQueryPageBase {}
 |columns|要查询的字段清单|`*`, `id,orderNo,remark`, `["id","orderNo","remark"]`|
 |where|条件语句|`{ "orderNo": { "_include_":  "order001" } }`|
 |orders|排序|`orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]`|
-|pageNo|页码|
-|pageSize|每页条数|
+|pageNo|页码|默认值：`1`|
+|pageSize|每页条数|默认值：`20`|
 
 ## 标注Query参数
 
@@ -75,3 +75,41 @@ export class DtoOrderQueryPage
 基于`DtoOrderQueryPage`生成的 Swagger/Openapi 效果如下：
 
 ![](../../../../assets/img/orm/dto/dto-3.png)
+
+## pageSize配置
+
+### 1. App Config
+
+pageSize 默认值为`20`，可以修改 App Config 配置：
+
+`src/backend/config/config/config.dev.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-orm': {
+    rest: {
+      query: {
+        pageSize: {
+          default: 50,
+          max: 200,
+        },
+      },
+    },
+  },
+};
+```
+
+|名称|说明|
+|--|--|
+|default|默认值|
+|max|最大值|
+
+### 2. 业务配置
+
+也可以针对具体的业务，为 Query 参数提供不同的 pageSize 配置：
+
+
+
+
+
