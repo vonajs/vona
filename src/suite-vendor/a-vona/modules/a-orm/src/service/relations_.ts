@@ -5,7 +5,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike } from '../types/relations.ts';
-import type { IModelRelationOptionsMetaBasic } from '../types/relationsDef.ts';
+import type { IModelRelationOptionsMetaBasic, IRelationItem } from '../types/relationsDef.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -19,14 +19,17 @@ export class ServiceRelations extends BeanBase {
   }
 
   public async handleRelationsOne<TRecord extends {}>(
+    relations: IRelationItem[] | undefined,
     entity: TRecord | undefined,
     includeWrapper?: IModelRelationIncludeWrapper,
     methodOptions?: IModelMethodOptions,
   ) {
     if (!entity) return entity;
     // relations
-    const relations = this.__handleRelationsCollection(includeWrapper);
-    if (!relations) return entity;
+    if (!relations) {
+      relations = this.handleRelationsCollection(includeWrapper);
+    }
+    if (relations.length === 0) return entity;
     for (const relation of relations) {
       await this.__handleRelationOne(entity, relation, methodOptions);
     }
@@ -34,14 +37,17 @@ export class ServiceRelations extends BeanBase {
   }
 
   public async handleRelationsMany<TRecord extends {}>(
+    relations: IRelationItem[] | undefined,
     entities: TRecord[],
     includeWrapper?: IModelRelationIncludeWrapper,
     methodOptions?: IModelMethodOptions,
   ) {
     if (entities.length === 0) return entities;
     // relations
-    const relations = this.__handleRelationsCollection(includeWrapper);
-    if (!relations) return entities;
+    if (!relations) {
+      relations = this.handleRelationsCollection(includeWrapper);
+    }
+    if (relations.length === 0) return entities;
     for (const relation of relations) {
       await this.__handleRelationMany(entities, relation, methodOptions);
     }
@@ -56,7 +62,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     if (entitiesResult.length === 0) return entitiesResult;
     // relations
-    const relations = this.__handleRelationsCollection(includeWrapper);
+    const relations = this.handleRelationsCollection(includeWrapper);
     if (!relations) return entitiesResult;
     for (const relation of relations) {
       entitiesResult = await this.__handleRelationMutate(entitiesResult, entities, relation, methodOptions);
@@ -71,7 +77,7 @@ export class ServiceRelations extends BeanBase {
   ) {
     if (ids.length === 0) return;
     // relations
-    const relations = this.__handleRelationsCollection(includeWrapper);
+    const relations = this.handleRelationsCollection(includeWrapper);
     if (!relations) return;
     for (const relation of relations) {
       await this.__handleRelationDelete(ids, relation, methodOptions);
@@ -426,9 +432,9 @@ export class ServiceRelations extends BeanBase {
     return this._model.newInstanceTarget(modelClassTarget, meta?.client, meta?.table);
   }
 
-  private __handleRelationsCollection(includeWrapper?: IModelRelationIncludeWrapper) {
+  public handleRelationsCollection(includeWrapper?: IModelRelationIncludeWrapper): IRelationItem[] {
     // collect
-    const relations: [string, any, any, any][] = [];
+    const relations: IRelationItem[] = [];
     // include
     if (this._model.options.relations) {
       for (const key in this._model.options.relations) {
