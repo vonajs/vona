@@ -9,11 +9,7 @@ export interface IRoleIdRecord {
 
 export interface IRoleBase {
   id: TableIdentity;
-}
-
-export interface IRoleAdapter {
-  getRoleId(role: IRoleBase): TableIdentity;
-  getRoleName(role: IRoleBase): string;
+  name: string;
 }
 
 export interface IRoleInnerAdapter {
