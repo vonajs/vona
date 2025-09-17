@@ -14,7 +14,6 @@ export function config(_app: VonaApplication) {
       authToken: 'a-user:authTokenAdapter' as keyof IServiceRecord,
       passport: 'home-user:passportAdapter' as keyof IServiceRecord,
       userInner: 'home-user:userInnerAdapter' as keyof IServiceRecord,
-      authInner: 'home-user:authInnerAdapter' as keyof IServiceRecord,
       roleInner: 'home-user:roleInnerAdapter' as keyof IServiceRecord,
     },
     payloadData: {

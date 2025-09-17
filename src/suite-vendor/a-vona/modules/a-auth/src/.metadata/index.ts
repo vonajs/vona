@@ -195,14 +195,12 @@ declare module 'vona' {
 /** bean: end */
 /** service: begin */
 export * from '../service/auth.ts';
-export * from '../service/authInnerAdapter.ts';
 
 import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'a-auth:auth': never;
-'a-auth:authInnerAdapter': never;
     }
 
   
@@ -217,25 +215,13 @@ declare module 'vona-module-a-auth' {
           export interface ServiceAuth {
             get $beanFullName(): 'a-auth.service.auth';
             get $onionName(): 'a-auth:auth';
-          }
-
-        export interface ServiceAuthInnerAdapter {
-          /** @internal */
-          get scope(): ScopeModuleAAuth;
-        }
-
-          export interface ServiceAuthInnerAdapter {
-            get $beanFullName(): 'a-auth.service.authInnerAdapter';
-            get $onionName(): 'a-auth:authInnerAdapter';
           } 
 }
 /** service: end */
 /** service: begin */
 import type { ServiceAuth } from '../service/auth.ts';
-import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 export interface IModuleService {
   'auth': ServiceAuth;
-'authInnerAdapter': ServiceAuthInnerAdapter;
 }
 /** service: end */
 /** service: begin */
@@ -244,7 +230,6 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-auth.service.auth': ServiceAuth;
-'a-auth.service.authInnerAdapter': ServiceAuthInnerAdapter;
   }
 }
 /** service: end */

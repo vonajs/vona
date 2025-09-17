@@ -1,3 +1,3 @@
-import type { IAuthBase } from 'vona-module-a-user';
+import type { EntityAuth } from 'vona-module-a-auth';
 
-export interface IAuth extends IAuthBase {}
+export interface IAuth extends EntityAuth {}

@@ -214,7 +214,6 @@ declare module 'vona-module-a-orm' {
 }
 /** model: end */
 /** service: begin */
-export * from '../service/authInnerAdapter.ts';
 export * from '../service/passportAdapter.ts';
 export * from '../service/roleInnerAdapter.ts';
 export * from '../service/userInnerAdapter.ts';
@@ -223,8 +222,7 @@ import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'home-user:authInnerAdapter': never;
-'home-user:passportAdapter': never;
+      'home-user:passportAdapter': never;
 'home-user:roleInnerAdapter': never;
 'home-user:userInnerAdapter': never;
     }
@@ -233,16 +231,6 @@ declare module 'vona-module-a-bean' {
 }
 declare module 'vona-module-home-user' {
   
-        export interface ServiceAuthInnerAdapter {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        }
-
-          export interface ServiceAuthInnerAdapter {
-            get $beanFullName(): 'home-user.service.authInnerAdapter';
-            get $onionName(): 'home-user:authInnerAdapter';
-          }
-
         export interface ServicePassportAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
@@ -275,13 +263,11 @@ declare module 'vona-module-home-user' {
 }
 /** service: end */
 /** service: begin */
-import type { ServiceAuthInnerAdapter } from '../service/authInnerAdapter.ts';
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
 import type { ServiceRoleInnerAdapter } from '../service/roleInnerAdapter.ts';
 import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
 export interface IModuleService {
-  'authInnerAdapter': ServiceAuthInnerAdapter;
-'passportAdapter': ServicePassportAdapter;
+  'passportAdapter': ServicePassportAdapter;
 'roleInnerAdapter': ServiceRoleInnerAdapter;
 'userInnerAdapter': ServiceUserInnerAdapter;
 }
@@ -291,8 +277,7 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'home-user.service.authInnerAdapter': ServiceAuthInnerAdapter;
-'home-user.service.passportAdapter': ServicePassportAdapter;
+    'home-user.service.passportAdapter': ServicePassportAdapter;
 'home-user.service.roleInnerAdapter': ServiceRoleInnerAdapter;
 'home-user.service.userInnerAdapter': ServiceUserInnerAdapter;
   }

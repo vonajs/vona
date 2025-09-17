@@ -1,5 +1,6 @@
 import type { Constructable } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
+import type { EntityAuth } from '../entity/auth.ts';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
@@ -90,5 +91,10 @@ export class BeanAuth extends BeanBase {
       };
       strategy.authenticate(this.ctx.req, strategyOptions);
     });
+  }
+
+  async findOne(auth: Partial<EntityAuth>): Promise<EntityAuth | undefined> {
+    if (String(auth.id).charAt(0) === '-') return auth as unknown as EntityAuth;
+    return await this.scope.model.auth.get(auth);
   }
 }
