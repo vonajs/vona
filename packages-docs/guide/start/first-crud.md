@@ -1,0 +1,43 @@
+# Create the first CRUD API
+
+Next, let's create our first CRUD API to manage `Student` data
+
+## Creating a New Module
+
+First, create a module named `demo-student`. There are two ways to create a module:
+
+### 1. Cli Command
+
+``` bash
+$ vona :create:module demo-student --suite=
+```
+
+### 2. Menu Command
+
+::: tip
+Context menu - [Project Path/src/module]: `Vona Create/Module`
+:::
+
+Follow the prompts and enter the module name `demo-student`. The VSCode plugin will automatically create the module code skeleton
+
+::: warning
+Please make sure you have installed the VSCode extension: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
+:::
+
+## Create CRUD
+
+Next, we'll use Vona's built-in code generator to create the CRUD code skeleton. There are also two methods:
+
+### 1. Cli Command
+
+``` bash
+$ vona :tools:crud student --module=demo-student
+```
+
+### 2. Menu Command
+
+::: tip
+Context menu - [Module Path]: `Vona Tools/Generate Crud`
+:::
+
+Enter the resource name `student` as prompted. The VSCode extension will automatically create the CRUD code skeleton

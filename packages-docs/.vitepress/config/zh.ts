@@ -30,6 +30,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: '简介', link: 'start/introduction' },
         { text: '快速上手', link: 'start/quick-start' },
+        { text: '创建第一个CRUD API', link: 'start/first-crud' },
         { text: 'Cli命令', link: 'start/cli' },
         { text: '菜单命令', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },

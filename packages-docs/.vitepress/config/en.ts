@@ -30,6 +30,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'start/introduction' },
         { text: 'Quick Start', link: 'start/quick-start' },
+        { text: 'Create the first CRUD API', link: 'start/first-crud' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },
