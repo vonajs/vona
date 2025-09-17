@@ -12,17 +12,13 @@ export interface IUserIdRecord {
 
 export interface IUserBase {
   id: TableIdentity;
-}
-
-export interface IUserAdapter {
-  getUserId(user: IUserBase): TableIdentity;
-  getUserName(user: IUserBase): string;
-  getUserAvatar(user: IUserBase): string | undefined;
-  getUserEmail(user: IUserBase): string | undefined;
-  getUserMobile(user: IUserBase): string | undefined;
-  getUserActivated(user: IUserBase): boolean;
-  getUserLocale(user: IUserBase): keyof ILocaleInfos | undefined;
-  getUserAnonymous(user: IUserBase): boolean;
+  name: string;
+  avatar?: string;
+  email?: string;
+  mobile?: string;
+  activated?: boolean;
+  locale?: keyof ILocaleInfos | undefined;
+  anonymous?: boolean;
 }
 
 export interface IUserInnerAdapter {
