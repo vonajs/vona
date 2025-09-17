@@ -68,6 +68,11 @@ export class ServiceDb extends BeanBase {
     return this.transaction.commit(cb, options);
   }
 
+  commitInTransaction(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
+    if (!this.inTransaction) return;
+    return this.transaction.commit(cb, options);
+  }
+
   compensate(cb: FunctionAny) {
     return this.transaction.compensate(cb);
   }

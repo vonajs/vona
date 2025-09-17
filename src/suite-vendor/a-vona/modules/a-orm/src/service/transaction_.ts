@@ -40,7 +40,11 @@ export class ServiceTransaction extends BeanBase {
     }
     const fiber = this.transactionFiber;
     if (!fiber) {
-      this.ctx?.commit(cb);
+      if (options?.immediateIfNotInTransaction) {
+        cb();
+      } else {
+        this.ctx?.commit(cb);
+      }
     } else {
       fiber.commit(cb);
     }

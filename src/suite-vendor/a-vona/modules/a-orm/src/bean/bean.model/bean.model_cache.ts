@@ -538,11 +538,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntityDelInner(id, table);
-    if (this.db.inTransaction) {
-      this.db.commit(async () => {
-        await this.cacheEntityDelInner(id, table);
-      });
-    }
+    this.db.commitInTransaction(async () => {
+      await this.cacheEntityDelInner(id, table);
+    });
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
@@ -559,11 +557,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
     await this.cacheEntityClearInner(table);
-    if (this.db.inTransaction) {
-      this.db.commit(async () => {
-        await this.cacheEntityClearInner(table);
-      });
-    }
+    this.db.commitInTransaction(async () => {
+      await this.cacheEntityClearInner(table);
+    });
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
@@ -580,11 +576,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
     await this.cacheQueryClearInner(table);
-    if (this.db.inTransaction) {
-      this.db.commit(async () => {
-        await this.cacheQueryClearInner(table);
-      });
-    }
+    this.db.commitInTransaction(async () => {
+      await this.cacheQueryClearInner(table);
+    });
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
@@ -602,13 +596,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   private _shardingCacheDoubleDelete(jobData: TypeQueueDoubleDeleteJobData) {
     const doubleDelete = this.scopeOrm.config.sharding.cache.doubleDelete;
     if (!doubleDelete) return;
-    if (this.db.inTransaction) {
-      this.db.commit(() => {
-        this.scopeOrm.queue.doubleDelete.push(jobData);
-      });
-    } else {
+    this.db.commit(() => {
       this.scopeOrm.queue.doubleDelete.push(jobData);
-    }
+    }, { immediateIfNotInTransaction: true });
   }
 
   private async _cacheQueryClearModelsClear() {

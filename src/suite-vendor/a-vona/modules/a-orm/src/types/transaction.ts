@@ -20,4 +20,5 @@ export interface ITransactionOptions {
 
 export interface ITransactionConsistencyCommitOptions {
   ctxPrefer?: boolean;
+  immediateIfNotInTransaction?: boolean;
 }
