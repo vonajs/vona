@@ -1815,6 +1815,7 @@ export interface IApiPathPostRecord{
 '//echo': undefined;
 '/test/vona/onion/echo2/:userId/:userName': undefined;
 '/test/vona/onion/echo4': undefined;
+'/test/vona/order/create': undefined;
 '/test/vona/passport/login': undefined;
 '/test/vona/passport/refresh': undefined;
 '/test/vona/passport/logout': undefined;
