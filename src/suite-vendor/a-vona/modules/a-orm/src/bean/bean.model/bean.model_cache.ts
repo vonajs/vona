@@ -143,8 +143,19 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<Partial<TRecord>[]> {
     if (ids.length === 0) return [];
-    const items = await this.__mget_raw(undefined, ids, options);
-    return await this.relations.handleRelationsMany(items, options as any, options);
+    const relations = this.relations.handleRelationsCollection(options as any);
+    const [options2, refKeys] = this.relations.prepareColumnsByRelations(relations, options);
+    let items = await this.__mget_raw(undefined, ids, options2);
+    if (items.length === 0) return items;
+    items = await this.relations.handleRelationsMany(relations, items, options as any, options);
+    if (refKeys) {
+      for (const item of items) {
+        for (const refKey of refKeys) {
+          delete item![refKey];
+        }
+      }
+    }
+    return items;
   }
 
   private async __mget_raw(table: keyof ITableRecord | undefined, ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
