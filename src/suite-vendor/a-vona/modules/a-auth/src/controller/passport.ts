@@ -6,7 +6,6 @@ import type { IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, T
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Api } from 'vona-module-a-openapi';
-import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
@@ -14,7 +13,7 @@ export interface IControllerOptionsPassport extends IDecoratorControllerOptions 
 @Controller<IControllerOptionsPassport>('passport')
 export class ControllerPassport extends BeanBase {
   @Web.get('callback')
-  @Passport.public()
+  @Aspect.guardGlobal('a-user:passport', { public: true })
   @Aspect.middlewareGlobal('a-instance:instance', { enable: false })
   @Api.exclude()
   async callback() {
