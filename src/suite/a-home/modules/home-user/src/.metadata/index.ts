@@ -382,12 +382,10 @@ declare module 'vona-module-home-user' {
 }
 /** meta: end */
 /** dto: begin */
-export * from '../dto/auth.ts';
 export * from '../dto/login.ts';
 export * from '../dto/passport.ts';
 export * from '../dto/passportJwt.ts';
 export * from '../dto/register.ts';
-import type { IDtoOptionsAuth } from '../dto/auth.ts';
 import type { IDtoOptionsLogin } from '../dto/login.ts';
 import type { IDtoOptionsPassport } from '../dto/passport.ts';
 import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
@@ -396,8 +394,7 @@ import 'vona';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
-      'home-user:auth': IDtoOptionsAuth;
-'home-user:login': IDtoOptionsLogin;
+      'home-user:login': IDtoOptionsLogin;
 'home-user:passport': IDtoOptionsPassport;
 'home-user:passportJwt': IDtoOptionsPassportJwt;
 'home-user:register': IDtoOptionsRegister;
@@ -410,17 +407,12 @@ declare module 'vona-module-home-user' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoAuth } from '../dto/auth.ts';
 import type { DtoLogin } from '../dto/login.ts';
 import type { DtoPassport } from '../dto/passport.ts';
 import type { DtoPassportJwt } from '../dto/passportJwt.ts';
 import type { DtoRegister } from '../dto/register.ts'; 
 declare module 'vona-module-home-user' {
   
-    export interface IDtoOptionsAuth {
-      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth[TypeSymbolKeyFieldsMore]>;
-    }
-
     export interface IDtoOptionsLogin {
       fields?: TypeEntityOptionsFields<DtoLogin, IDtoOptionsLogin[TypeSymbolKeyFieldsMore]>;
     }

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore,IModelRelationBelongsTo } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TableIdentity } from 'table-identity';
 /** entity: begin */
@@ -111,7 +111,11 @@ declare module 'vona' {
 import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-auth' {
-  
+  export interface IModelOptionsAuth {
+        relations: {
+          authProvider: IModelRelationBelongsTo<ModelAuth, ModelAuthProvider, false, 'id'|'providerName'|'clientName'|'disabled'>;
+        };
+      }
   export interface ModelAuth {
       [SymbolKeyEntity]: EntityAuth;
       [SymbolKeyEntityMeta]: EntityAuthMeta;
@@ -336,6 +340,31 @@ declare module 'vona-module-a-auth' {
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
+/** dto: begin */
+export * from '../dto/auth.ts';
+import type { IDtoOptionsAuth } from '../dto/auth.ts';
+import 'vona';
+declare module 'vona-module-a-web' {
+  
+    export interface IDtoRecord {
+      'a-auth:auth': IDtoOptionsAuth;
+    }
+
+  
+}
+declare module 'vona-module-a-auth' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoAuth } from '../dto/auth.ts'; 
+declare module 'vona-module-a-auth' {
+  
+    export interface IDtoOptionsAuth {
+      fields?: TypeEntityOptionsFields<DtoAuth, IDtoOptionsAuth[TypeSymbolKeyFieldsMore]>;
+    }
+}
+/** dto: end */
 /** controller: begin */
 export * from '../controller/passport.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
