@@ -113,7 +113,7 @@ import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'von
 declare module 'vona-module-a-auth' {
   export interface IModelOptionsAuth {
         relations: {
-          authProvider: IModelRelationBelongsTo<ModelAuth, ModelAuthProvider, false, 'id'|'providerName'|'clientName'|'disabled'>;
+          authProvider: IModelRelationBelongsTo<ModelAuth, ModelAuthProvider, false, 'id'|'providerName'|'clientName'>;
         };
       }
   export interface ModelAuth {
