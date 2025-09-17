@@ -85,10 +85,13 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     } else {
       await cache.set(redisKey, JSON.stringify(value));
     }
-    const db = options?.db ?? this.bean.database.current;
-    db?.compensate(async () => {
-      await this.del(key);
-    });
+    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    if (!disableTransactionCompensate) {
+      const db = options?.db ?? this.bean.database.current;
+      db?.compensate(async () => {
+        await this.del(key);
+      });
+    }
   }
 
   public async mset(values: DATA[], keys: KEY[], options?: ICacheRedisSetOptions): Promise<void> {
@@ -107,12 +110,15 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
       }
     }
     await multi.exec();
-    const db = options?.db ?? this.bean.database.current;
-    db?.compensate(async () => {
-      for (const key of keys) {
-        await this.del(key);
-      }
-    });
+    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    if (!disableTransactionCompensate) {
+      const db = options?.db ?? this.bean.database.current;
+      db?.compensate(async () => {
+        for (const key of keys) {
+          await this.del(key);
+        }
+      });
+    }
   }
 
   public async getset(value?: DATA, key?: KEY, options?: ICacheRedisSetOptions): Promise<DATA | null | undefined> {
@@ -128,10 +134,13 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
       const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
       valuePrev = res && res[0][1];
     }
-    const db = options?.db ?? this.bean.database.current;
-    db?.compensate(async () => {
-      await this.del(key);
-    });
+    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    if (!disableTransactionCompensate) {
+      const db = options?.db ?? this.bean.database.current;
+      db?.compensate(async () => {
+        await this.del(key);
+      });
+    }
     return valuePrev ? JSON.parse(valuePrev) : undefined;
   }
 

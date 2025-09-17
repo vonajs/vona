@@ -97,10 +97,13 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         });
       }
     }
-    const db = options?.db ?? this.bean.database.current;
-    db?.compensate(() => {
-      this.del(key);
-    });
+    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    if (!disableTransactionCompensate) {
+      const db = options?.db ?? this.bean.database.current;
+      db?.compensate(() => {
+        this.del(key);
+      });
+    }
   }
 
   public mset(values: DATA[], keys: KEY[], options?: ICacheMemSetOptions): void {
@@ -135,10 +138,13 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         });
       }
     }
-    const db = options?.db ?? this.bean.database.current;
-    db?.compensate(() => {
-      this.mdel(keys);
-    });
+    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    if (!disableTransactionCompensate) {
+      const db = options?.db ?? this.bean.database.current;
+      db?.compensate(() => {
+        this.mdel(keys);
+      });
+    }
   }
 
   public getset(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): DATA | null | undefined {

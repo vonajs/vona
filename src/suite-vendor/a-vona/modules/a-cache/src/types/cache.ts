@@ -9,6 +9,7 @@ export interface ICacheRedisGetOptions {
 export interface ICacheRedisSetOptions {
   ttl?: number;
   db?: ServiceDb;
+  disableTransactionCompensate?: boolean;
 }
 
 export interface ICacheMemGetOptions {
@@ -20,4 +21,5 @@ export interface ICacheMemSetOptions {
   ttl?: number;
   db?: ServiceDb;
   broadcastOnSet?: TypeBroadcastOnSet;
+  disableTransactionCompensate?: boolean;
 }
