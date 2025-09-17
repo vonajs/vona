@@ -264,8 +264,19 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
   ): Promise<any[]> {
-    const items = await this.__select_raw(undefined, params, options);
-    return await this.relations.handleRelationsMany(items, params as any, options);
+    const relations = this.relations.handleRelationsCollection(params as any);
+    const [params2, refKeys] = this.relations.prepareColumnsByRelations(relations, params);
+    let items = await this.__select_raw(undefined, params2, options);
+    if (items.length === 0) return items;
+    items = await this.relations.handleRelationsMany(relations, items, params as any, options);
+    if (refKeys) {
+      for (const item of items) {
+        for (const refKey of refKeys) {
+          delete item![refKey];
+        }
+      }
+    }
+    return items;
   }
 
   private async __select_raw(
