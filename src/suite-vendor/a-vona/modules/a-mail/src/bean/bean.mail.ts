@@ -14,11 +14,11 @@ export class BeanMail extends BeanBase {
       message: mail,
     });
     if (this.app.meta.isTest) {
-      this.ctx.commit(async () => {
+      await this.ctx.db.commit(async () => {
         await this.scope.queue.mail.pushAsync({ mailId: mailNew.id });
       });
     } else {
-      this.ctx.commit(() => {
+      this.ctx.db.commit(() => {
         this.scope.queue.mail.push({ mailId: mailNew.id });
       });
     }
