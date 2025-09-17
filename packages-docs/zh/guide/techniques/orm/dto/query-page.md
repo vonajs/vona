@@ -60,3 +60,18 @@ class ControllerOrder extends BeanBase {
 
 ![](../../../../assets/img/orm/dto/dto-5.png)
 
+## $Dto.queryPage
+
+如果需要在 DTO 中添加业务字段的查询条件，可以使用`$Dto.queryPage`
+
+``` diff
+@Dto()
+export class DtoOrderQueryPage
++ extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
+```
+
+- `$Dto.queryPage`：自动从`EntityOrder`中提取字段`orderNo/remark`，然后与`DtoQueryPageBase`成员字段进行合并
+
+基于`DtoOrderQueryPage`生成的 Swagger/Openapi 效果如下：
+
+![](../../../../assets/img/orm/dto/dto-3.png)
