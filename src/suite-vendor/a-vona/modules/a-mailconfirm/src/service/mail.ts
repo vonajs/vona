@@ -2,15 +2,14 @@ import type { IUserBase } from 'vona-module-a-user';
 import { combineQueries, replaceTemplate } from '@cabloy/utils';
 import { BeanBase, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { $getUserEmail, $getUserName } from 'vona-module-a-user';
 import { $apiPath } from 'vona-module-a-web';
 
 @Service()
 export class ServiceMail extends BeanBase {
   async emailConfirm(user: IUserBase) {
     const userId = user.id;
-    const email = $getUserEmail(user);
-    if (!email) throw new Error(`email should not empty: ${$getUserName(user)}`);
+    const email = user.email;
+    if (!email) throw new Error(`email should not empty: ${user.name}`);
     // link
     const token = uuidv4();
     const callbackURLRelative = $apiPath('/mailconfirm/mail/emailConfirmCallback');
@@ -24,7 +23,7 @@ export class ServiceMail extends BeanBase {
     });
     // email: body
     const body = replaceTemplate(this.scope.locale.ConfirmationEmailBody(), {
-      userName: $getUserName(user),
+      userName: user.name,
       link,
       siteName,
     });
@@ -36,8 +35,8 @@ export class ServiceMail extends BeanBase {
 
   async passwordReset(user: IUserBase) {
     const userId = user.id;
-    const email = $getUserEmail(user);
-    if (!email) throw new Error(`email should not empty: ${$getUserName(user)}`);
+    const email = user.email;
+    if (!email) throw new Error(`email should not empty: ${user.name}`);
     // link
     const token = uuidv4();
     const callbackURLRelative = $apiPath('/mailconfirm/mail/passwordResetCallback');
@@ -51,7 +50,7 @@ export class ServiceMail extends BeanBase {
     });
     // email: body
     const body = replaceTemplate(this.scope.locale.PasswordResetEmailBody(), {
-      userName: $getUserName(user),
+      userName: user.name,
       link,
       siteName,
     });

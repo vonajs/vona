@@ -4,7 +4,6 @@ import type { IRoleNameRecord } from '../types/role.ts';
 import { BeanBase } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
 import { $getRoleName } from '../lib/role.ts';
-import { $getUserAnonymous } from '../lib/user.ts';
 
 export interface IGuardOptionsRoleName extends IDecoratorGuardOptions {
   name?: keyof IRoleNameRecord | (keyof IRoleNameRecord)[];
@@ -18,7 +17,7 @@ export class GuardRoleName extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsRoleName, next: Next): Promise<boolean> {
     if (!options.name) return this.app.throw(403);
     const user = this.bean.passport.getCurrentUser();
-    if (!user || $getUserAnonymous(user)) return this.app.throw(403);
+    if (!user || user.anonymous) return this.app.throw(403);
     const roles = this.bean.passport.getCurrentRoles();
     if (!roles) return this.app.throw(403);
     const roleNames = roles?.map(item => $getRoleName(item) as keyof IRoleNameRecord);

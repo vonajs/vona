@@ -5,7 +5,7 @@ import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';
 import { Api, v } from 'vona-module-a-openapi';
-import { $getUserName, Passport } from 'vona-module-a-user';
+import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}
@@ -17,7 +17,7 @@ export class ControllerPassport extends BeanBase {
   @Passport.public()
   echo(@Arg.param('name') name: string, @Arg.user() user: IUserBase) {
     assert.equal(name, 'admin');
-    assert.equal($getUserName(user), 'admin');
+    assert.equal(user.name, 'admin');
     return { name, user };
   }
 

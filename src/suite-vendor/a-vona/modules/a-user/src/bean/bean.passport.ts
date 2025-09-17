@@ -8,7 +8,6 @@ import { catchError } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $getAuthIdSystem } from '../lib/auth.ts';
-import { $getUserActivated, $getUserAnonymous } from '../lib/user.ts';
 
 @Bean()
 export class BeanPassport extends BeanBase {
@@ -34,12 +33,12 @@ export class BeanPassport extends BeanBase {
 
   public get isAuthenticated(): boolean {
     const user = this.getCurrentUser();
-    return !!user && !$getUserAnonymous(user);
+    return !!user && !user.anonymous;
   }
 
   public get isActivated(): boolean {
     const user = this.getCurrentUser();
-    return !!user && $getUserActivated(user);
+    return !!user && !!user.activated;
   }
 
   public async isAdmin(): Promise<boolean> {

@@ -3,7 +3,6 @@ import type { IDecoratorGuardOptions, IGuardExecute } from 'vona-module-a-aspect
 import type { IUserNameRecord } from '../types/user.ts';
 import { BeanBase } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
-import { $getUserAnonymous, $getUserName } from '../lib/user.ts';
 
 export interface IGuardOptionsUserName extends IDecoratorGuardOptions {
   name?: keyof IUserNameRecord | (keyof IUserNameRecord)[];
@@ -17,8 +16,8 @@ export class GuardUserName extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsUserName, next: Next): Promise<boolean> {
     if (!options.name) return this.app.throw(403);
     const user = this.bean.passport.getCurrentUser();
-    if (!user || $getUserAnonymous(user)) return this.app.throw(403);
-    const userName = $getUserName(user) as keyof IUserNameRecord;
+    if (!user || user.anonymous) return this.app.throw(403);
+    const userName = user.name as keyof IUserNameRecord;
     const optionsName = Array.isArray(options.name) ? options.name : [options.name];
     if (!optionsName.includes(userName)) return this.app.throw(403);
     if (options.passWhenMatched) return true;
