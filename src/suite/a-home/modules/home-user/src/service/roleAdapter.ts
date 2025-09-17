@@ -1,10 +1,10 @@
 import type { TableIdentity } from 'table-identity';
-import type { IRoleBase, IRoleInnerAdapter } from 'vona-module-a-user';
+import type { IRoleAdapter, IRoleBase } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
-export class ServiceRoleInnerAdapter extends BeanBase implements IRoleInnerAdapter {
+export class ServiceRoleAdapter extends BeanBase implements IRoleAdapter {
   async findOneByName(name: string): Promise<IRoleBase | undefined> {
     return await this.scope.model.role.get({ name: { _eqI_: name } });
   }

@@ -1,10 +1,10 @@
 import type { TableIdentity } from 'table-identity';
-import type { IAuthUserProfile, IUserBase, IUserInnerAdapter } from 'vona-module-a-user';
+import type { IAuthUserProfile, IUserAdapter, IUserBase } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
-export class ServiceUserInnerAdapter extends BeanBase implements IUserInnerAdapter {
+export class ServiceUserAdapter extends BeanBase implements IUserAdapter {
   async create(user: Partial<IUserBase>): Promise<IUserBase> {
     return await this.scope.model.user.insert(user);
   }

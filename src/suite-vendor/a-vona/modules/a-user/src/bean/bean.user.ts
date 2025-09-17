@@ -5,14 +5,14 @@ import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanUser extends BeanBase {
-  private _userInnerAdapter: IUserAdapter;
+  private _userAdapter: IUserAdapter;
 
   private get userAdapter(): IUserAdapter {
-    if (!this._userInnerAdapter) {
+    if (!this._userAdapter) {
       const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.user, 'service');
-      this._userInnerAdapter = this.bean._getBean<IUserAdapter>(beanFullName as never);
+      this._userAdapter = this.bean._getBean<IUserAdapter>(beanFullName as never);
     }
-    return this._userInnerAdapter;
+    return this._userAdapter;
   }
 
   async activate(user: IUserBase) {

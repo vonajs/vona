@@ -215,16 +215,16 @@ declare module 'vona-module-a-orm' {
 /** model: end */
 /** service: begin */
 export * from '../service/passportAdapter.ts';
-export * from '../service/roleInnerAdapter.ts';
-export * from '../service/userInnerAdapter.ts';
+export * from '../service/roleAdapter.ts';
+export * from '../service/userAdapter.ts';
 
 import 'vona';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'home-user:passportAdapter': never;
-'home-user:roleInnerAdapter': never;
-'home-user:userInnerAdapter': never;
+'home-user:roleAdapter': never;
+'home-user:userAdapter': never;
     }
 
   
@@ -241,35 +241,35 @@ declare module 'vona-module-home-user' {
             get $onionName(): 'home-user:passportAdapter';
           }
 
-        export interface ServiceRoleInnerAdapter {
+        export interface ServiceRoleAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
 
-          export interface ServiceRoleInnerAdapter {
-            get $beanFullName(): 'home-user.service.roleInnerAdapter';
-            get $onionName(): 'home-user:roleInnerAdapter';
+          export interface ServiceRoleAdapter {
+            get $beanFullName(): 'home-user.service.roleAdapter';
+            get $onionName(): 'home-user:roleAdapter';
           }
 
-        export interface ServiceUserInnerAdapter {
+        export interface ServiceUserAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
         }
 
-          export interface ServiceUserInnerAdapter {
-            get $beanFullName(): 'home-user.service.userInnerAdapter';
-            get $onionName(): 'home-user:userInnerAdapter';
+          export interface ServiceUserAdapter {
+            get $beanFullName(): 'home-user.service.userAdapter';
+            get $onionName(): 'home-user:userAdapter';
           } 
 }
 /** service: end */
 /** service: begin */
 import type { ServicePassportAdapter } from '../service/passportAdapter.ts';
-import type { ServiceRoleInnerAdapter } from '../service/roleInnerAdapter.ts';
-import type { ServiceUserInnerAdapter } from '../service/userInnerAdapter.ts';
+import type { ServiceRoleAdapter } from '../service/roleAdapter.ts';
+import type { ServiceUserAdapter } from '../service/userAdapter.ts';
 export interface IModuleService {
   'passportAdapter': ServicePassportAdapter;
-'roleInnerAdapter': ServiceRoleInnerAdapter;
-'userInnerAdapter': ServiceUserInnerAdapter;
+'roleAdapter': ServiceRoleAdapter;
+'userAdapter': ServiceUserAdapter;
 }
 /** service: end */
 /** service: begin */
@@ -278,8 +278,8 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'home-user.service.passportAdapter': ServicePassportAdapter;
-'home-user.service.roleInnerAdapter': ServiceRoleInnerAdapter;
-'home-user.service.userInnerAdapter': ServiceUserInnerAdapter;
+'home-user.service.roleAdapter': ServiceRoleAdapter;
+'home-user.service.userAdapter': ServiceUserAdapter;
   }
 }
 /** service: end */
