@@ -109,7 +109,11 @@ config.modules = {
 
 也可以针对具体的业务，为 Query 参数提供不同的 pageSize 配置：
 
-
-
-
-
+``` diff
+@Dto({
++ fields: {
++   pageSize: z.number().min(1).max(300).default(30),
++ },
+})
+export class DtoOrderQueryPage extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
+```
