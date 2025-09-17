@@ -7,7 +7,9 @@ import { Api, v } from 'vona-module-a-openapi';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { DtoOrderCreate } from '../dto/orderCreate.ts';
 import { DtoOrderQuery } from '../dto/orderQuery.ts';
+import { DtoOrderQueryPage } from '../dto/orderQueryPage.ts';
 import { DtoOrderResult } from '../dto/orderResult.ts';
+import { DtoOrderResultPage } from '../dto/orderResultPage.ts';
 
 export interface IControllerOptionsOrder extends IDecoratorControllerOptions {}
 
@@ -33,6 +35,19 @@ export class ControllerOrder extends BeanBase {
     @Arg.queryPro(DtoOrderQuery, myCustomQueryTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
+      ...params,
+      include: {
+        products: true,
+      },
+    });
+  }
+
+  @Web.get('findMany')
+  @Api.body(DtoOrderResultPage)
+  async findMany(
+    @Arg.queryPro(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
+  ) {
+    return this.scope.model.order.selectAndCount({
       ...params,
       include: {
         products: true,
