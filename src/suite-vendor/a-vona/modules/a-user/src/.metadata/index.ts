@@ -56,7 +56,7 @@ declare module 'vona-module-a-user' {
 /** bean: begin */
 export * from '../bean/bean.passport.ts';
 export * from '../bean/bean.roleInner.ts';
-export * from '../bean/bean.userInner.ts';
+export * from '../bean/bean.user.ts';
 
 import 'vona';
 declare module 'vona' {
@@ -75,7 +75,7 @@ declare module 'vona-module-a-user' {
           get scope(): ScopeModuleAUser;
         }
 
-        export interface BeanUserInner {
+        export interface BeanUser {
           /** @internal */
           get scope(): ScopeModuleAUser;
         } 
@@ -84,13 +84,13 @@ declare module 'vona-module-a-user' {
 /** bean: begin */
 import type { BeanPassport } from '../bean/bean.passport.ts';
 import type { BeanRoleInner } from '../bean/bean.roleInner.ts';
-import type { BeanUserInner } from '../bean/bean.userInner.ts';
+import type { BeanUser } from '../bean/bean.user.ts';
 import 'vona';  
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     'passport': BeanPassport;
 'roleInner': BeanRoleInner;
-'userInner': BeanUserInner;
+'user': BeanUser;
   }
 }
 /** bean: end */

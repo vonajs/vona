@@ -78,7 +78,7 @@ export class ServiceAuth extends BeanBase {
         await this.accountMigration(userCurrent.id, entityAuth.userId);
       }
       // user
-      const user = await this.bean.userInner.findOne({ id: entityAuth.userId });
+      const user = await this.bean.user.findOne({ id: entityAuth.userId });
       // ready
       passport.user = user;
     } else if (stateIntention === 'associate') {
@@ -110,11 +110,11 @@ export class ServiceAuth extends BeanBase {
       // check if user exists
       let entityUser: IUserBase | undefined;
       if (entityAuth.userId) {
-        entityUser = await this.bean.userInner.findOne({ id: entityAuth.userId });
+        entityUser = await this.bean.user.findOne({ id: entityAuth.userId });
       }
       if (!entityUser) {
         // register user
-        entityUser = await this.bean.userInner.registerByProfile(profileUser);
+        entityUser = await this.bean.user.registerByProfile(profileUser);
         // update auth's userId
         await this.scope.model.auth.update({
           id: entityAuth.id,
@@ -169,6 +169,6 @@ export class ServiceAuth extends BeanBase {
       },
     );
     // remove user
-    await this.bean.userInner.remove({ id: userIdFrom });
+    await this.bean.user.remove({ id: userIdFrom });
   }
 }
