@@ -34,16 +34,10 @@ export class ServiceTransaction extends BeanBase {
   }
 
   commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
-    if (options?.ctxPrefer) {
-      this.ctx?.commit(cb);
-      return;
-    }
     const fiber = this.transactionFiber;
     if (!fiber) {
-      if (options?.immediateIfNotInTransaction) {
+      if (!options?.ignoreIfNotInTransaction) {
         cb();
-      } else {
-        this.ctx?.commit(cb);
       }
     } else {
       fiber.commit(cb);
