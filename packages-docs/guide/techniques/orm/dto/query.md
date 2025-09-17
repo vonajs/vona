@@ -44,12 +44,7 @@ class ControllerOrder extends BeanBase {
   async findAll(
 +   @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
-    return this.scope.model.order.select({
-+     ...params,
-      include: {
-        products: true,
-      },
-    });
+    return this.scope.model.order.select(params);
   }
 }
 ```
@@ -181,12 +176,7 @@ class ControllerOrder {
   async findAll(
     @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
-    return this.scope.model.order.select({
-      ...params,
-      include: {
-        products: true,
-      },
-    });
+    return this.scope.model.order.select(params);
   }
 }
 ```
@@ -234,12 +224,7 @@ class ControllerOrder {
   async findAll(
 +   @Arg.queryPro(DtoOrderQuery, 'myCustomQueryTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
-    return this.scope.model.order.select({
-      ...params,
-      include: {
-        products: true,
-      },
-    });
+    return this.scope.model.order.select(params);
   }
 }
 ```
@@ -265,12 +250,7 @@ class ControllerOrder {
   async findAll(
 +   @Arg.queryPro(DtoOrderQuery, myCustomQueryTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
-    return this.scope.model.order.select({
-      ...params,
-      include: {
-        products: true,
-      },
-    });
+    return this.scope.model.order.select(params);
   }
 }
 ```

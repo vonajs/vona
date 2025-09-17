@@ -48,12 +48,7 @@ class ControllerOrder extends BeanBase {
   async findAll(
 +   @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
-    return this.scope.model.order.select({
-+     ...params,
-      include: {
-        products: true,
-      },
-    });
+    return this.scope.model.order.select(params);
   }
 }
 ```
