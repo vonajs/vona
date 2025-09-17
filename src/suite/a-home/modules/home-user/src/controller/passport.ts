@@ -1,4 +1,4 @@
-import type { IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
+import type { DtoAuth, IAuthenticateOptions, IAuthProviderRecord } from 'vona-module-a-auth';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { EntityRole } from '../entity/role.ts';
@@ -128,7 +128,7 @@ export class ControllerPassport extends BeanBase {
     if (!passport || !passport.auth) return;
     return {
       user: passport.user as EntityUser,
-      auth: { id: passport.auth!.id },
+      auth: passport.auth as DtoAuth,
       roles: passport.roles as EntityRole[],
     };
   }

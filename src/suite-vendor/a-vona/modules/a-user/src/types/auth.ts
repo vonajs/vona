@@ -14,7 +14,7 @@ export interface IAuthProviderBase {
 
 export interface IAuthBase {
   id: TableIdentity;
-  profileId: string;
+  profileId?: string;
   authProvider?: IAuthProviderBase;
 }
 
