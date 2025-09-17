@@ -1,16 +1,15 @@
 import type { TableIdentity } from 'table-identity';
 import type { IRoleBase, IRoleInnerAdapter } from 'vona-module-a-user';
-import type { IRole } from '../types/role.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceRoleInnerAdapter extends BeanBase implements IRoleInnerAdapter {
   async findOneByName(name: string): Promise<IRoleBase | undefined> {
-    return await this.findOne({ name });
+    return await this.scope.model.role.get({ name: { _eqI_: name } });
   }
 
-  async findOne(role: Partial<IRole>): Promise<IRoleBase | undefined> {
+  async findOne(role: Partial<IRoleBase>): Promise<IRoleBase | undefined> {
     return await this.scope.model.role.get(role);
   }
 
