@@ -64,8 +64,8 @@ export class ServiceDb extends BeanBase {
     return this.scope.service.database.getDialect(this.dialectName);
   }
 
-  commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
-    return this.transaction.commit(cb, options);
+  async commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
+    return await this.transaction.commit(cb, options);
   }
 
   compensate(cb: FunctionAny) {

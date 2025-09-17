@@ -33,11 +33,11 @@ export class ServiceTransaction extends BeanBase {
     return this.transactionFiber?.connection;
   }
 
-  commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
+  async commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {
     const fiber = this.transactionFiber;
     if (!fiber) {
       if (!options?.ignoreIfNotInTransaction) {
-        cb();
+        await cb();
       }
     } else {
       fiber.commit(cb);
