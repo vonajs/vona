@@ -324,8 +324,16 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<Partial<TRecord> | undefined> {
     const relations = this.relations.handleRelationsCollection(options);
-    const item: TRecord | undefined = await this.__get_raw(undefined, where, options);
-    return await this.relations.handleRelationsOne(relations, item, options as any, options);
+    const [options2, refKeys] = this.relations.prepareColumnsByRelations(relations, options);
+    let item: TRecord | undefined = await this.__get_raw(undefined, where, options2);
+    if (!item) return item;
+    item = await this.relations.handleRelationsOne(relations, item, options as any, options);
+    if (refKeys) {
+      for (const refKey of refKeys) {
+        delete item![refKey];
+      }
+    }
+    return item;
   }
 
   private async __get_raw(

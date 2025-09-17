@@ -425,6 +425,26 @@ export class ServiceRelations extends BeanBase {
     return [columns, false];
   }
 
+  public prepareColumnsByRelations<T extends { columns?: any }>(relations: IRelationItem[], options?: T): [T | undefined, string[] | undefined] {
+    if (!options || !options.columns) return [options, undefined];
+    const columns = Array.isArray(options.columns) ? options.columns : [options.columns];
+    if (columns.includes('*')) return [options, undefined];
+    // refKeys
+    const refKeys: string[] = [];
+    for (const relation of relations) {
+      const [_relationName, relationReal] = relation;
+      const { type, key } = relationReal;
+      if (type === 'belongsTo') {
+        if (!columns.includes(key)) {
+          columns.push(key);
+          refKeys.push(key);
+        }
+      }
+    }
+    options = refKeys.length === 0 ? options : { ...options, columns };
+    return [options, refKeys];
+  }
+
   private __getModelTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
     modelClassTarget: TypeModelClassLike<MODEL>,
     meta: IModelRelationOptionsMetaBasic | undefined,
