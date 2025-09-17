@@ -1,6 +1,5 @@
 import type { IEventExecute, NextEvent } from 'vona-module-a-event';
-import type { TypeEventActivateData, TypeEventActivateResult } from 'vona-module-a-user';
-import type { IUser } from '../types/user.ts';
+import type { IUserBase, TypeEventActivateData, TypeEventActivateResult } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 
@@ -12,7 +11,7 @@ export class EventListenerActivate
   extends BeanBase
   implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
-    const user = data as IUser;
+    const user = data as IUserBase;
     if (user.name === 'admin') {
       // role: admin
       const roleAdmin = await this.scope.model.role.get({ name: 'admin' });

@@ -9,7 +9,7 @@ export interface IZodRefineOptionsUsernameUnique extends IDecoratorZodRefineOpti
 @ZodRefine<IZodRefineOptionsUsernameUnique>()
 export class ZodRefineUsernameUnique extends BeanBase implements IZodRefineExecute<TypeZodRefineUsernameUniqueData> {
   async execute(value: TypeZodRefineUsernameUniqueData, refinementCtx: TypeRefinementCtx, _options: IZodRefineOptionsUsernameUnique) {
-    const user = await this.bean.userInner.findOneByName(value);
+    const user = await this.bean.user.findOneByName(value);
     if (user) {
       refinementCtx.addIssue({
         code: 'custom',
