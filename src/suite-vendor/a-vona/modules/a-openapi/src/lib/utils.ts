@@ -1,7 +1,7 @@
 import type { Constructable } from 'vona';
 import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
 import type { TypeOpenapiMetadata } from '../types/rest.ts';
-import { isClass } from '@cabloy/utils';
+import { isClass, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
@@ -69,12 +69,18 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
   // merge
   if (Object.prototype.hasOwnProperty.call(fieldRule, 'parseAsync')) {
     const schema: z.ZodType = fieldRule as any;
-    const metadataCustom = ZodMetadata.getOpenapiMetadata(schema);
-    rules[prop] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
+    if (isEmptyObject(metadataCurrent)) {
+      rules[prop] = schema;
+    } else {
+      const metadataCustom = ZodMetadata.getOpenapiMetadata(schema);
+      rules[prop] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
+    }
   } else {
     // use deepExtend for sure strict
     if (schemaCurrent) {
-      rules[prop] = schemaCurrent.openapi(deepExtend({}, metadataCurrent, fieldRule));
+      if (!isEmptyObject(fieldRule)) {
+        rules[prop] = schemaCurrent.openapi(deepExtend({}, metadataCurrent, fieldRule));
+      }
     } else {
       rules[prop] = z.any().openapi(deepExtend({}, fieldRule));
     }
