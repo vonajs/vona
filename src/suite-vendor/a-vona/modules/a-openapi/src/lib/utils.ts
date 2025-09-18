@@ -33,8 +33,6 @@ export function getTargetDecoratorRuleColumnsMap(target: object): Record<string,
 }
 
 export function mergeFieldsOpenapiMetadata(target: Constructable) {
-  // rules
-  const rules = getTargetDecoratorRules(target.prototype);
   // beanOptions
   const beanOptions = appResource.getBean(target);
   const fields = cast(beanOptions?.options)?.fields;
@@ -42,25 +40,12 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
   for (const key in fields) {
     const field: TypeOpenapiMetadata | z.ZodType = fields[key];
     if (!field) continue;
-    const schemaCurrent = rules[key];
-    const metadataCurrent = schemaCurrent ? ZodMetadata.getOpenapiMetadata(schemaCurrent) : undefined;
-    if (Object.prototype.hasOwnProperty.call(field, 'parseAsync')) {
-      const schema: z.ZodType = field as any;
-      const metadataCustom = ZodMetadata.getOpenapiMetadata(schema);
-      rules[key] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
-    } else {
-      // use deepExtend for sure strict
-      if (schemaCurrent) {
-        rules[key] = schemaCurrent.openapi(deepExtend({}, metadataCurrent, field));
-      } else {
-        rules[key] = z.any().openapi(deepExtend({}, field));
-      }
-    }
+    mergeFieldOpenapiMetadata(target.prototype, key, field);
   }
 }
 
+// fieldRule maybe undefined
 export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRule?: TypeOpenapiMetadata | z.ZodType) {
-  if (!fieldRule) return;
   // rules
   const rules = getTargetDecoratorRules(target);
   // rule
@@ -76,13 +61,16 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
       rules[prop] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
     }
   } else {
-    // use deepExtend for sure strict
     if (schemaCurrent) {
       if (!isEmptyObject(fieldRule)) {
         rules[prop] = schemaCurrent.openapi(deepExtend({}, metadataCurrent, fieldRule));
       }
     } else {
-      rules[prop] = z.any().openapi(deepExtend({}, fieldRule));
+      if (isEmptyObject(fieldRule)) {
+        rules[prop] = z.any();
+      } else {
+        rules[prop] = z.any().openapi(fieldRule as object);
+      }
     }
   }
 }
