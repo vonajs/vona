@@ -59,6 +59,28 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
   }
 }
 
+export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRule?: TypeOpenapiMetadata | z.ZodType) {
+  if (!fieldRule) return;
+  // rules
+  const rules = getTargetDecoratorRules(target);
+  // rule
+  const schemaCurrent = rules[prop];
+  const metadataCurrent = schemaCurrent ? ZodMetadata.getOpenapiMetadata(schemaCurrent) : undefined;
+  // merge
+  if (Object.prototype.hasOwnProperty.call(fieldRule, 'parseAsync')) {
+    const schema: z.ZodType = fieldRule as any;
+    const metadataCustom = ZodMetadata.getOpenapiMetadata(schema);
+    rules[prop] = schema.openapi(deepExtend({}, metadataCurrent, metadataCustom));
+  } else {
+    // use deepExtend for sure strict
+    if (schemaCurrent) {
+      rules[prop] = schemaCurrent.openapi(deepExtend({}, metadataCurrent, fieldRule));
+    } else {
+      rules[prop] = z.any().openapi(deepExtend({}, fieldRule));
+    }
+  }
+}
+
 export function prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
   return isClass(classType) ? classType as Constructable<T> : cast(classType)();
 }
