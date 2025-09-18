@@ -176,6 +176,24 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
+  public async expire(key?: KEY, options?: ICacheRedisSetOptions): Promise<void> {
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    const redisKey = this.__getRedisKey(key);
+    const ttl = options?.ttl ?? this._cacheOptions.ttl;
+    if (!ttl) return;
+    // pexpire
+    await cache.pexpire(redisKey, ttl);
+    // compensate
+    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    if (!disableTransactionCompensate) {
+      const db = options?.db ?? this.bean.database.current;
+      db?.compensate(async () => {
+        await this.del(key);
+      });
+    }
+  }
+
   public async lookupKeys(prefix?: string): Promise<string[]> {
     const cache = this.__cacheInstance;
     if (!cache) return [];

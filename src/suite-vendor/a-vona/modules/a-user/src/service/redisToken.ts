@@ -15,7 +15,7 @@ export class ServiceRedisToken extends BeanBase {
   async retrieve(payloadData: IPayloadDataBase): Promise<IPayloadDataBase | undefined> {
     const key = this._getAuthRedisKey(payloadData);
     if (!key) return;
-    const token = await this.redisAuth.get(key);
+    const token = await this.scope.cacheRedis.authToken.get(key);
     if (!token) return;
     return { ...payloadData, [this.scope.config.payloadData.fields.token]: token };
   }
@@ -23,13 +23,13 @@ export class ServiceRedisToken extends BeanBase {
   async create(payloadData: IPayloadDataBase) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key || !this._getToken(payloadData)) return this.app.throw(401);
-    await this.redisAuth.set(key, this._getToken(payloadData), 'EX', this.scope.config.redisToken.maxAge);
+    await this.scope.cacheRedis.authToken.set(this._getToken(payloadData), key);
   }
 
   async refresh(payloadData: IPayloadDataBase) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key) return this.app.throw(401);
-    await this.redisAuth.expire(key, this.scope.config.redisToken.maxAge);
+    await this.scope.cacheRedis.authToken.expire(key);
   }
 
   async remove(payloadData: IPayloadDataBase) {
@@ -50,11 +50,11 @@ export class ServiceRedisToken extends BeanBase {
 
   private _getAuthRedisKey(payloadData: IPayloadDataBase) {
     if (!this.ctx.instance) return;
-    return `authToken:${this.ctx.instance.id}:${this._getUserId(payloadData)}:${this._getAuthId(payloadData)}`;
+    return `${this._getUserId(payloadData)}:${this._getAuthId(payloadData)}`;
   }
 
-  private _getAuthRedisKeyPattern(user: IUserBase, keyPrefix: string | undefined) {
-    return `${keyPrefix ?? ''}authToken:${this.ctx.instance.id}:${user.id}:*`;
+  private _getAuthRedisKeyPrefix(user: IUserBase) {
+    return user.id;
   }
 
   private _getToken(payloadData: IPayloadDataBase) {

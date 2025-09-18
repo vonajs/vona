@@ -1,7 +1,7 @@
 import { BeanCacheRedisBase, CacheRedis } from 'vona-module-a-cache';
 
-export type TCacheRedisAuthTokenKey = any;
-export type TCacheRedisAuthTokenData = any;
+export type TCacheRedisAuthTokenKey = string;
+export type TCacheRedisAuthTokenData = string;
 
 @CacheRedis({
   ttl: 30 * 24 * 60 * 60 * 1000,
