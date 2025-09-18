@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'table-identity';
 import type { VonaContext } from 'vona';
 import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions, IPipeOptionsQueryTransformInfo } from 'vona-module-a-web';
@@ -26,13 +27,16 @@ function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransf
 export class ControllerOrder extends BeanBase {
   @Web.post('create')
   @Api.body(DtoOrderResult)
-  async create(@Arg.body(DtoOrderCreate) data: DtoOrderCreate) {
+  async create(@Arg.body() data: DtoOrderCreate) {
     return await this.scope.model.order.insert(data);
   }
 
   @Web.post('update/:id')
-  async update(@Arg.body(DtoOrderUpdate) data: DtoOrderUpdate) {
-    return await this.scope.model.order.update(data);
+  async update(@Arg.param('id') id: TableIdentity, @Arg.body() data: DtoOrderUpdate) {
+    return await this.scope.model.order.update({
+      ...data,
+      id,
+    });
   }
 
   @Web.get('findAll')
