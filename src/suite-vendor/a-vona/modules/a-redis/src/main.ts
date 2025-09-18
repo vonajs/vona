@@ -30,7 +30,6 @@ export async function configDefault(app: VonaApplication): Promise<PowerPartial<
       broadcast: {},
       cache: { keyPrefix: `cache_${app.name}:` },
       io: { keyPrefix: `io_${app.name}:` },
-      auth: { keyPrefix: `auth_${app.name}:` },
       summer: { keyPrefix: `summer_${app.name}:` },
       model: { keyPrefix: `model_${app.name}:` },
     },
