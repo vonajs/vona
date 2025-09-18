@@ -105,9 +105,9 @@ config.modules = {
 |default|默认值|
 |max|最大值|
 
-### 2. 业务配置
+### 2. DTO配置
 
-也可以针对具体的 Dto 提供不同的 pageSize 配置：
+也可以针对具体的 DTO 提供不同的 pageSize 配置：
 
 ``` diff
 @Dto()

@@ -105,9 +105,9 @@ config.modules = {
 |default|The default value|
 |max|The maxinum value|
 
-### 2. 业务配置
+### 2. DTO configuration
 
-也可以针对具体的 Dto 提供不同的 pageSize 配置：
+You can also provide different `pageSize` configurations for specific DTOs:
 
 ``` diff
 @Dto()
@@ -118,10 +118,10 @@ export class DtoOrderQueryPage
 }
 ```
 
-- `$Class.omit`：从基类中排除字段`pageSize`，从而避免 Typescript 报错
-- 关于`$Class`的更多信息，参见：[API: Dto](../../../essentials/api/dto.md)
+- `$Class.omit`: Exclude the `pageSize` field from the base class to avoid TypeScript errors
+- For more information about `$Class`, see: [API: Dto](../../../essentials/api/dto.md)
 
-或者：
+Or:
 
 ``` diff
 @Dto({
@@ -132,4 +132,4 @@ export class DtoOrderQueryPage
 export class DtoOrderQueryPage extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
 ```
 
-- 关于`fields`的更多信息，参见：[API: Dto](../../../essentials/api/dto.md)
+- For more information about `fields`, see: [API: Dto](../../../essentials/api/dto.md)
