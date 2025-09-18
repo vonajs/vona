@@ -4,6 +4,6 @@ import { BeanCacheRedisBase, CacheRedis } from 'vona-module-a-cache';
 export type TCacheRedisCaptchaKey = string;
 export type TCacheRedisCaptchaData = ICaptchaDataCache;
 
-@CacheRedis()
+@CacheRedis({ disableTransactionCompensate: true })
 export class CacheRedisCaptcha
   extends BeanCacheRedisBase<TCacheRedisCaptchaKey, TCacheRedisCaptchaData> {}

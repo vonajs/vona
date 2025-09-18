@@ -3,5 +3,5 @@ import { BeanCacheRedisBase, CacheRedis } from 'vona-module-a-cache';
 export type TCacheRedisElectionKey = 'leaders';
 export type TCacheRedisElectionData = string[];
 
-@CacheRedis()
+@CacheRedis({ disableTransactionCompensate: true })
 export class CacheRedisElection extends BeanCacheRedisBase<TCacheRedisElectionKey, TCacheRedisElectionData> {}
