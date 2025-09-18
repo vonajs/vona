@@ -1,13 +1,12 @@
 import type { MetadataKey } from 'vona';
-import { getTargetDecoratorRules } from 'vona-module-a-openapi';
+import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
 
 export function Exclude(): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
-    // rules
-    const rules = getTargetDecoratorRules(target);
-    // rule
-    rules[prop as string] = makeSchemaLikes(schemaLikes, metaType);
+    const metadata: TypeOpenapiMetadata = { exclude: true };
+    mergeFieldOpenapiMetadata(target, prop as string, metadata);
   };
 }
 
-export const Serializer = {};
+export const Serializer = { exclude: Exclude };
