@@ -7,7 +7,6 @@ export interface IRedisClientRecord {
   broadcast: never;
   cache: never;
   io: never;
-  auth: never;
   summer: never;
   model: never;
 }

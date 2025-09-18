@@ -5,10 +5,6 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceRedisToken extends BeanBase {
-  private get redisAuth() {
-    return this.bean.redis.get('auth');
-  }
-
   async verify(payloadData: IPayloadDataBase) {
     const payloadData2 = await this.retrieve(payloadData);
     if (!payloadData2) return false;

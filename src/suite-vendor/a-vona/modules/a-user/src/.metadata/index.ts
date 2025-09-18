@@ -149,6 +149,37 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** cacheRedis: begin */
+export * from '../bean/cacheRedis.authToken.ts';
+
+import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
+declare module 'vona-module-a-cache' {
+  
+    export interface ICacheRedisRecord {
+      'a-user:authToken': IDecoratorCacheRedisOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-user' {
+  
+        export interface CacheRedisAuthToken {
+          /** @internal */
+          get scope(): ScopeModuleAUser;
+        }
+
+          export interface CacheRedisAuthToken {
+            get $beanFullName(): 'a-user.cacheRedis.authToken';
+            get $onionName(): 'a-user:authToken';
+          } 
+}
+/** cacheRedis: end */
+/** cacheRedis: begin */
+import type { CacheRedisAuthToken } from '../bean/cacheRedis.authToken.ts';
+export interface IModuleCacheRedis {
+  'authToken': CacheRedisAuthToken;
+}
+/** cacheRedis: end */
 /** event: begin */
 export * from '../bean/event.activate.ts';
 export * from '../bean/event.createUserAnonymous.ts';
@@ -285,6 +316,7 @@ export interface ScopeModuleAUser {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 service: IModuleService;
+cacheRedis: IModuleCacheRedis;
 event: IModuleEvent;
 }
 
