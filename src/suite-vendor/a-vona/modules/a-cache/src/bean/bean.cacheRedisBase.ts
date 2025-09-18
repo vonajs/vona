@@ -185,7 +185,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
   }
 
   private __getRedisKey(key?: KEY | '*'): string {
-    const keyHash = key === '*' ? '*' : this.__getKeyHash(key);
+    const keyHash = this.__getKeyHash(key);
     const iid = this.__getInstanceIdScope();
     return `${iid}!${this._cacheName}!${keyHash}`;
   }

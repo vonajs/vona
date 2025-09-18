@@ -38,7 +38,7 @@ export class CacheBase<CACHEOPTIONS extends IOnionOptionsEnable = IOnionOptionsE
     return undefined;
   }
 
-  protected __getKeyHash(key?: KEY): string {
+  protected __getKeyHash(key?: KEY | '*'): string {
     const cache = this.__cacheInstance;
     if (!cache) throw new Error('cache not enabled');
     return getKeyHash(key ?? 'default');
