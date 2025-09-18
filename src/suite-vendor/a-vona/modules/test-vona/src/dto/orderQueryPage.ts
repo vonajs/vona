@@ -1,4 +1,6 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+import { $Class } from 'vona';
+import { Api } from 'vona-module-a-openapi';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
@@ -11,4 +13,8 @@ export interface IDtoOptionsOrderQueryPage extends IDecoratorDtoOptions {}
     pageSize: z.number().min(1).max(300).default(30),
   },
 })
-export class DtoOrderQueryPage extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
+export class DtoOrderQueryPage
+  extends $Class.omit($Dto.queryPage(EntityOrder, ['orderNo', 'remark']), ['pageSize']) {
+  @Api.field(z.number().min(1).max(300).default(30))
+  pageSize: number;
+}

@@ -110,6 +110,20 @@ config.modules = {
 也可以针对具体的 Dto 提供不同的 pageSize 配置：
 
 ``` diff
+@Dto()
+export class DtoOrderQueryPage
++ extends $Class.omit($Dto.queryPage(EntityOrder, ['orderNo', 'remark']), ['pageSize']) {
++ @Api.field(z.number().min(1).max(300).default(30))
++ pageSize: number;
+}
+```
+
+- `$Class.omit`：从基类中排除字段`pageSize`，从而避免 Typescript 报错
+- 关于`$Class`的更多信息，参见：[API: Dto](../../../essentials/api/dto.md)
+
+或者：
+
+``` diff
 @Dto({
 + fields: {
 +   pageSize: z.number().min(1).max(300).default(30),
