@@ -35,17 +35,13 @@ export class ServiceRedisToken extends BeanBase {
   async remove(payloadData: IPayloadDataBase) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key) return;
-    await this.redisAuth.del(key);
+    await this.scope.cacheRedis.authToken.del(key);
   }
 
   async removeAll(user: IUserBase) {
-    const keyPrefix = this.redisAuth.options.keyPrefix;
-    const keyPattern = this._getAuthRedisKeyPattern(user, keyPrefix);
-    const keys = await this.redisAuth.keys(keyPattern);
-    for (const fullKey of keys) {
-      const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
-      await this.redisAuth.del(key);
-    }
+    const keyPrefix = this._getAuthRedisKeyPrefix(user);
+    const keys = await this.scope.cacheRedis.authToken.lookupKeys(keyPrefix, true);
+    await this.scope.cacheRedis.authToken.mdel(keys);
   }
 
   private _getAuthRedisKey(payloadData: IPayloadDataBase) {
@@ -54,7 +50,7 @@ export class ServiceRedisToken extends BeanBase {
   }
 
   private _getAuthRedisKeyPrefix(user: IUserBase) {
-    return user.id;
+    return `${user.id}`;
   }
 
   private _getToken(payloadData: IPayloadDataBase) {

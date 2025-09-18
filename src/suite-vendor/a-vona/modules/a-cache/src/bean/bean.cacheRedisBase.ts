@@ -194,7 +194,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
-  public async lookupKeys(prefix?: string): Promise<string[]> {
+  public async lookupKeys(prefix?: string, relative?: boolean): Promise<string[]> {
     const cache = this.__cacheInstance;
     if (!cache) return [];
     const redisKey = this.__getRedisKey(`${prefix || ''}*` as any);
@@ -203,16 +203,23 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     const keys = await cache.keys(keyPattern);
     const keysResult: string[] = [];
     for (const fullKey of keys) {
-      const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
+      let key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
+      if (relative) {
+        key = key.substring(this.__getRedisKeyPrefix().length);
+      }
       keysResult.push(key);
     }
     return keysResult;
   }
 
+  private __getRedisKeyPrefix(): string {
+    const iid = this.__getInstanceIdScope();
+    return `${iid}!${this._cacheName}!`;
+  }
+
   private __getRedisKey(key?: KEY | '*'): string {
     const keyHash = this.__getKeyHash(key);
-    const iid = this.__getInstanceIdScope();
-    return `${iid}!${this._cacheName}!${keyHash}`;
+    return `${this.__getRedisKeyPrefix()}${keyHash}`;
   }
 
   private __getRedisKeys(keys: KEY[]): string[] {
