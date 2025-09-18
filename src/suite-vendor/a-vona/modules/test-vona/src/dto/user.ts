@@ -19,5 +19,6 @@ export class DtoUser {
   married: boolean;
 
   @Serializer.exclude()
+  @Api.field(v.min(6))
   password: string;
 }
