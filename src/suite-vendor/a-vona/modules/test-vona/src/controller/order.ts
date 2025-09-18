@@ -10,6 +10,7 @@ import { DtoOrderQuery } from '../dto/orderQuery.ts';
 import { DtoOrderQueryPage } from '../dto/orderQueryPage.ts';
 import { DtoOrderResult } from '../dto/orderResult.ts';
 import { DtoOrderResultPage } from '../dto/orderResultPage.ts';
+import { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 
 export interface IControllerOptionsOrder extends IDecoratorControllerOptions {}
 
@@ -27,6 +28,11 @@ export class ControllerOrder extends BeanBase {
   @Api.body(DtoOrderResult)
   async create(@Arg.body(DtoOrderCreate) data: DtoOrderCreate) {
     return await this.scope.model.order.insert(data);
+  }
+
+  @Web.post('update/:id')
+  async update(@Arg.body(DtoOrderUpdate) data: DtoOrderUpdate) {
+    return await this.scope.model.order.update(data);
   }
 
   @Web.get('findAll')
