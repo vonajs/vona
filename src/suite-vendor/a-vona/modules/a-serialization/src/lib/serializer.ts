@@ -9,9 +9,9 @@ export function Exclude(): PropertyDecorator {
   };
 }
 
-export function Sensitive(): PropertyDecorator {
+export function Transform(): PropertyDecorator {
   return function (_target: object, _prop: MetadataKey) {
   };
 }
 
-export const Serializer = { exclude: Exclude, sensitive: Sensitive };
+export const Serializer = { exclude: Exclude, transform: Transform };
