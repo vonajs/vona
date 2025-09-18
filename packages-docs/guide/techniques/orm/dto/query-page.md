@@ -4,39 +4,39 @@
 
 ## Usage of DtoQueryPageBase
 
-`DtoQueryPageBase`继承自`DtoQueryBase`，提供了与分页相关的 Query 参数：`pageNo`, `pageSize`
+`DtoQueryPageBase` inherits from `DtoQueryBase` and provides paging-related Query parameters: `pageNo`, `pageSize`
 
-### 1. 创建DTO
+### 1. Create DTO
 
-在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
+In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
 ``` typescript
 @Dto()
 export class DtoOrderQueryPage {}
 ```
 
-### 2. 继承DtoQueryPageBase
+### 2. Inherit DtoQueryPageBase
 
 ``` typescript
 @Dto()
 export class DtoOrderQueryPage extends DtoQueryPageBase {}
 ```
 
-## DtoQueryPageBase成员字段
+## DtoQueryPageBase Fields
 
-由于`DtoOrderQueryPage`继承自`DtoQueryPageBase`，因此，有以下成员字段：
+Since `DtoOrderQueryPage` inherits from `DtoQueryPageBase`, it has the following member fields:
 
-|名称|说明|举例|
+|Name|Description|Example|
 |--|--|--|
-|columns|要查询的字段清单|`*`, `id,orderNo,remark`, `["id","orderNo","remark"]`|
-|where|条件语句|`{ "orderNo": { "_include_":  "order001" } }`|
-|orders|排序|`orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]`|
-|pageNo|页码|默认值：`1`|
-|pageSize|每页条数|默认值：`20`|
+|columns|List of fields to query|`*`, `id,orderNo,remark`, `["id","orderNo","remark"]`|
+|where|Query clause|`{ "orderNo": { "_include_":  "order001" } }`|
+|orders|Sorting|`orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]`|
+|pageNo|Page No|Default: `1`|
+|pageSize|Page Size|Default: `20`|
 
-## 标注Query参数
+## Annotating Query Parameters
 
-以 Controller Order 的 findMany 方法为例，标注 Query 参数：
+Taking the `findMany` method of the `Order` controller as an example, we can annotate the Query parameters:
 
 ``` diff
 + import type { IQueryParams } from 'vona-module-a-orm';
@@ -53,16 +53,16 @@ class ControllerOrder extends BeanBase {
 }
 ```
 
-- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，需要传入参数`DtoOrderQueryPage`
-- `IQueryParams`: Pipe 对 Query 参数进行 transform 后的数据类型为`IQueryParams`，需要传入泛型参数`ModelOrder`，从而与`model.order.selectAndCount`方法的参数类型相匹配
+- `@Arg.queryPro`: This Pipe transforms the Query parameter and needs to pass in the parameter `DtoOrderQueryPage`
+- `IQueryParams`: The data type obtained by Pipe transforming the Query parameter is `IQueryParams`, and the generic parameter `ModelOrder` needs to be passed in to match the parameter type of the `model.order.selectAndCount` method
 
-基于`DtoOrderQueryPage`生成的 Swagger/Openapi 效果如下：
+The automatically generated Swagger/Openapi is as follows:
 
 ![](../../../../assets/img/orm/dto/dto-5.png)
 
 ## $Dto.queryPage
 
-如果需要在 DTO 中添加业务字段的查询条件，可以使用`$Dto.queryPage`
+If you need to add query clause for business fields in DTO, you can use `$Dto.queryPage`
 
 ``` diff
 @Dto()
@@ -70,17 +70,17 @@ export class DtoOrderQueryPage
 + extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
 ```
 
-- `$Dto.queryPage`：自动从`EntityOrder`中提取字段`orderNo/remark`，然后与`DtoQueryPageBase`成员字段进行合并
+- `$Dto.queryPage`: Automatically extract the field `orderNo/remark` from `EntityOrder` and then merge it with the `DtoQueryPageBase` member fields
 
-基于`DtoOrderQueryPage`生成的 Swagger/Openapi 效果如下：
+The automatically generated Swagger/Openapi is as follows:
 
-![](../../../../assets/img/orm/dto/dto-3.png)
+![](../../../../assets/img/orm/dto/dto-6.png)
 
-## pageSize配置
+## pageSize configuration
 
 ### 1. App Config
 
-pageSize 默认值为`20`，可以修改 App Config 配置：
+The default value of pageSize is `20`, which can be modified in App Config:
 
 `src/backend/config/config/config.dev.ts`
 
@@ -100,10 +100,10 @@ config.modules = {
 };
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|default|默认值|
-|max|最大值|
+|default|The default value|
+|max|The maxinum value|
 
 ### 2. 业务配置
 

@@ -74,7 +74,7 @@ export class DtoOrderQueryPage
 
 基于`DtoOrderQueryPage`生成的 Swagger/Openapi 效果如下：
 
-![](../../../../assets/img/orm/dto/dto-3.png)
+![](../../../../assets/img/orm/dto/dto-6.png)
 
 ## pageSize配置
 
