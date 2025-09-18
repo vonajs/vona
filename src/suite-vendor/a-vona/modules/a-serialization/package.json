@@ -4,7 +4,14 @@
   "version": "5.0.0",
   "title": "a-serialization",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "serializer": {
+        "optionsGlobalInterfaceName": "IDecoratorSerializerOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-serialization",
+        "boilerplate": "cli/serializer/boilerplate"
+      }
+    }
   },
   "description": "",
   "author": "",
