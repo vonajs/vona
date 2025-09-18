@@ -199,22 +199,8 @@ class DtoStudentUpdate
   extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
 ```
 
-## $Dto工具
+## DTO推断与生成
 
-Vona 还提供了常用的$Dto 工具，从而进一步简化代码
+Vona ORM 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
 
-### 1. $Dto.create
-
-仍以`DtoStudentCreate`为例。前面提到，`$Class.pick(EntityStudent, ['name', 'description'])`是从`EntityStudent`中提取指定的字段。那么，可以换一个思路，从`EntityStudent`中排除掉一些内置字段，剩下的就是所需要的字段
-
-``` typescript
-class DtoStudentCreate extends $Dto.create(() => ModelStudent) {}
-```
-
-### 2. $Dto.update
-
-同样，从`EntityStudent`中排除掉一些内置字段，并且转换为可选字段，就得到了`DtoStudentUpdate`
-
-``` typescript
-class DtoStudentUpdate extends $Dto.update(() => ModelStudent) {}
-```
+- 参见：[DTO推断与生成](../../techniques/orm/dto/introduction.md)
