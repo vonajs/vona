@@ -151,6 +151,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: 'Introduction', link: 'introduction' },
                 { text: '$Dto.get', link: 'get' },
+                { text: '$Dto.selectAndCount', link: 'selectAndCount' },
                 { text: '$Dto.query/DtoQueryBase', link: 'query' },
                 { text: '$Dto.queryPage/DtoQueryPageBase', link: 'query-page' },
               ],
