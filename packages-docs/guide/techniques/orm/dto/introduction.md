@@ -4,9 +4,9 @@ When developing backend API services, DTOs are crucial for `parameter validation
 
 Vona ORM pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` in building a more elegant Node.js backend framework
 
-## DTO List
+## DTO Tools
 
-Vona ORM provides the following DTOs:
+Vona ORM provides the following DTO Tools:
 
 |Name|Description|
 |--|--|
