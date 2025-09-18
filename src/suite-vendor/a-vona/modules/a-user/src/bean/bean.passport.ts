@@ -121,7 +121,8 @@ export class BeanPassport extends BeanBase {
     return userAnonymous;
   }
 
-  public async kickOut(user: IUserBase) {
+  public async kickOut(user?: IUserBase) {
+    if (!user) return;
     await this.authTokenAdapter.removeAll(user);
   }
 
