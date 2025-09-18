@@ -41,3 +41,14 @@ $ vona :tools:crud student --module=demo-student
 :::
 
 依据提示输入资源名称`student`，VSCode 插件会自动创建 CRUD 的代码骨架
+
+## Swagger/Rapidoc
+
+我们可以使用 [Swagger](https://swagger.io)/[Rapidoc](https://rapidocweb.com) 来查看和运行 Student 的 CRUD API
+
+当启动开发服务后，系统自动在终端输出 Swagger/Rapidoc 的 URL 路径：
+
+``` bash
+[a-swagger] swagger: http://localhost:7102/swagger
+[a-swagger] rapidoc: http://localhost:7102/rapidoc
+```
