@@ -215,6 +215,9 @@ importers:
       vona-module-a-security:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-security
+      vona-module-a-serialization:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-serialization
       vona-module-a-socket:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-socket
@@ -1289,6 +1292,9 @@ importers:
       vona-module-a-security:
         specifier: ^5.0.14
         version: link:modules/a-security
+      vona-module-a-serialization:
+        specifier: workspace:^
+        version: link:modules/a-serialization
       vona-module-a-startup:
         specifier: ^5.0.20
         version: link:modules/a-startup
@@ -1888,6 +1894,15 @@ importers:
       type-is:
         specifier: ^1.6.18
         version: 1.6.18
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-serialization:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

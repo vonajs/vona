@@ -44,6 +44,7 @@
     "vona-module-a-redlock": "^5.0.16",
     "vona-module-a-schedule": "^5.0.16",
     "vona-module-a-security": "^5.0.14",
+    "vona-module-a-serialization": "workspace:^",
     "vona-module-a-startup": "^5.0.20",
     "vona-module-a-static": "^5.0.13",
     "vona-module-a-summer": "^5.0.17",

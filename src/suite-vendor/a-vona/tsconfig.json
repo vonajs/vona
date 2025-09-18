@@ -151,6 +151,9 @@
     },
     {
       "path": "modules/a-zod/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-serialization/tsconfig.build.json"
     }
   ],
   "exclude": [
