@@ -170,18 +170,25 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
   public async clear(): Promise<void> {
     const cache = this.__cacheInstance;
     if (!cache) return;
-    const redisKey = this.__getRedisKey('*');
+    const keys = await this.lookupKeys();
+    if (keys.length > 0) {
+      await cache.del(keys);
+    }
+  }
+
+  public async lookupKeys(prefix?: string): Promise<string[]> {
+    const cache = this.__cacheInstance;
+    if (!cache) return [];
+    const redisKey = this.__getRedisKey(`${prefix || ''}*` as any);
     const keyPrefix = cache.options.keyPrefix;
     const keyPattern = `${keyPrefix}${redisKey}`;
     const keys = await cache.keys(keyPattern);
-    const keysDel: string[] = [];
+    const keysResult: string[] = [];
     for (const fullKey of keys) {
       const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
-      keysDel.push(key);
+      keysResult.push(key);
     }
-    if (keysDel.length > 0) {
-      await cache.del(keysDel);
-    }
+    return keysResult;
   }
 
   private __getRedisKey(key?: KEY | '*'): string {
