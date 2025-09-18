@@ -7,8 +7,8 @@
 |Name|Description|
 |--|--|
 |columns|List of fields to be queried|
-|include|Static relationships|
-|with|Dynamic relationships|
+|include|Static relations|
+|with|Dynamic relations|
 
 ## 1. General Usage
 
