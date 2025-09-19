@@ -5,10 +5,11 @@ import type { TypeDtoMutateType } from '../../types/dto/dtoMutate.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
 import { ensureArray, hashkey } from '@cabloy/utils';
-import { $Class, appResource, deepExtend } from 'vona';
+import { $Class, appResource } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
 import z from 'zod';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
+import { handleRelationsCollection } from '../utils.ts';
 import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoGroup } from './dtoGroup.ts';
 import { _DtoMutate_raw } from './dtoMutate.ts';
@@ -152,43 +153,6 @@ function _DtoGet_relations_collection<TModel extends BeanModelMeta>(
   includeWrapper?: IModelRelationIncludeWrapper,
 ) {
   const beanOptions = appResource.getBean(modelClass);
-  const options: IDecoratorModelOptions = beanOptions!.options!;
-  // collect
-  const relations: [string, any, any, any, boolean][] = [];
-  // include
-  if (options.relations) {
-    for (const key in options.relations) {
-      const relationDef = options.relations[key];
-      const relationCur: any = includeWrapper?.include?.[key];
-      let relationReal;
-      let includeReal;
-      let withReal;
-      let autoload;
-      if (relationCur === false) {
-        continue;
-      } else if (relationCur === true) {
-        relationReal = relationDef;
-        autoload = relationDef.options?.autoload;
-      } else if (typeof relationCur === 'object') {
-        relationReal = deepExtend({}, relationDef, { options: relationCur });
-        includeReal = relationCur.include;
-        withReal = relationCur.with;
-      } else if (relationDef.options?.autoload) {
-        relationReal = relationDef;
-        autoload = relationDef.options?.autoload;
-      } else {
-        continue;
-      }
-      relations.push([key, relationReal, includeReal, withReal, autoload]);
-    }
-  }
-  // with
-  if (includeWrapper?.with) {
-    for (const key in includeWrapper.with) {
-      const relationReal: any = includeWrapper.with[key];
-      if (!relationReal) continue;
-      relations.push([key, relationReal, relationReal.options?.include, relationReal.options?.with, false]);
-    }
-  }
-  return relations;
+  const options = beanOptions?.options as IDecoratorModelOptions | undefined;
+  return handleRelationsCollection(options?.relations, includeWrapper);
 }

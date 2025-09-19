@@ -87,7 +87,7 @@ export class ServiceRelations extends BeanBase {
 
   private async __handleRelationOne<TRecord extends {}>(
     entity: TRecord,
-    relation: [string, any, any, any],
+    relation: IRelationItem,
     methodOptions?: IModelMethodOptions,
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
@@ -154,7 +154,7 @@ export class ServiceRelations extends BeanBase {
 
   private async __handleRelationMany<TRecord extends {}>(
     entities: TRecord[],
-    relation: [string, any, any, any],
+    relation: IRelationItem,
     methodOptions?: IModelMethodOptions,
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
@@ -268,7 +268,7 @@ export class ServiceRelations extends BeanBase {
   private async __handleRelationMutate<TRecord extends {}>(
     entitiesResult: TRecord[],
     entities: TRecord[],
-    relation: [string, any, any, any],
+    relation: IRelationItem,
     methodOptions?: IModelMethodOptions,
   ) {
     const [relationName, relationReal, includeReal, withReal] = relation;
@@ -397,7 +397,7 @@ export class ServiceRelations extends BeanBase {
 
   private async __handleRelationDelete(
     ids: TableIdentity[],
-    relation: [string, any, any, any],
+    relation: IRelationItem,
     methodOptions?: IModelMethodOptions,
   ) {
     const [_relationName, relationReal, includeReal, withReal] = relation;
