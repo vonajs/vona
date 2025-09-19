@@ -140,22 +140,23 @@ type TypeDtoMutateRelationResultEntity<
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-  _REFKEY extends string | undefined = undefined,
-> = TypeDtoMutateRelationResultPatch2<
+  REFKEY extends string | undefined = undefined,
+> = TypeDtoMutateRelationResultPatch<
   TypeDtoMutateRelationResultEntityInner<TRecord, Columns, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>,
   TMutateTypeTopLevel,
-  TTopLevel
+  TTopLevel,
+  REFKEY
 >;
 
 // donot take effect, because RefKey is not strict, just as keyof Entity
-// type TypeDtoMutateRelationResultPatch<
-//   TRecordResult,
-//   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
-//   TTopLevel extends boolean | undefined = undefined,
-//   REFKEY extends string | undefined = undefined,
-// > = REFKEY extends string
-//   ? Omit<TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>, REFKEY>
-//   : TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>;
+type TypeDtoMutateRelationResultPatch<
+  TRecordResult,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+  REFKEY extends string | undefined = undefined,
+> = REFKEY extends string
+  ? Omit<TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>, REFKEY>
+  : TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>;
 
 type TypeDtoMutateRelationResultPatch2<
   TRecordResult,
