@@ -113,10 +113,12 @@ function __parseRelation(nodeRelation: t.ObjectProperty) {
 function __parseRelationHasOne(args: t.Node[]) {
   // classModel
   const classModel = __parseRelation_classModel(args[0]);
+  // key
+  const key = __parseRelation_key(args[1]);
   // options
   const options = __parseRelation_options(args[2]);
   // combine
-  return `IModelRelationHasOne<${classModel}, ${options.autoload}, ${options.columns}>`;
+  return `IModelRelationHasOne<${classModel}, '${key}', ${options.autoload}, ${options.columns}>`;
 }
 
 function __parseRelationBelongsTo(args: t.Node[]) {
@@ -133,14 +135,14 @@ function __parseRelationBelongsTo(args: t.Node[]) {
 function __parseRelationHasMany(args: t.Node[]) {
   // classModel
   const classModel = __parseRelation_classModel(args[0]);
-  // // key
-  // const key = __parseRelation_key(args[1]);
+  // key
+  const key = __parseRelation_key(args[1]);
   // options
   const options = __parseRelation_options(args[2]);
   // modelJoins
   const modelJoins = __parseRelation_modelJoins(args[3]);
   // combine
-  return `IModelRelationHasMany<${classModel}, ${options.autoload}, ${options.columns},${modelJoins},${options.aggrs},${options.groups}>`;
+  return `IModelRelationHasMany<${classModel}, '${key}', ${options.autoload}, ${options.columns}, ${modelJoins}, ${options.aggrs}, ${options.groups}>`;
 }
 
 function __parseRelationBelongsToMany(args: t.Node[]) {

@@ -23,13 +23,14 @@ export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belong
 // use optional ? for app config
 export interface IModelRelationHasOne<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity] | undefined = keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   AUTOLOAD extends boolean = false,
   COLUMNS
   extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 > {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
+  key?: KEY;
   options?: IModelRelationOptionsOne<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS>;
 }
 
@@ -48,6 +49,7 @@ export interface IModelRelationBelongsTo<
 
 export interface IModelRelationHasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity] | undefined = keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   AUTOLOAD extends boolean = false,
   COLUMNS
   extends TypeModelColumn<
@@ -59,7 +61,7 @@ export interface IModelRelationHasMany<
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
+  key?: KEY;
   options?: IModelRelationOptionsMany<TypeModelOfModelLike<MODEL>, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups>;
 }
 
