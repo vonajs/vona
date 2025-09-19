@@ -9,6 +9,7 @@ import type { IModelRelationOptionsMetaBasic, IRelationItem } from '../types/rel
 import { isNil } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { handleRelationsCollection } from '../lib/utils.ts';
 
 @Service()
 export class ServiceRelations extends BeanBase {
@@ -453,40 +454,6 @@ export class ServiceRelations extends BeanBase {
   }
 
   public handleRelationsCollection(includeWrapper?: IModelRelationIncludeWrapper): IRelationItem[] {
-    // collect
-    const relations: IRelationItem[] = [];
-    // include
-    if (this._model.options.relations) {
-      for (const key in this._model.options.relations) {
-        const relationDef = this._model.options.relations[key];
-        const relationCur: any = includeWrapper?.include?.[key];
-        let relationReal;
-        let includeReal;
-        let withReal;
-        if (relationCur === false) {
-          continue;
-        } else if (relationCur === true) {
-          relationReal = relationDef;
-        } else if (typeof relationCur === 'object') {
-          relationReal = deepExtend({}, relationDef, { options: relationCur });
-          includeReal = relationCur.include;
-          withReal = relationCur.with;
-        } else if (relationDef.options?.autoload) {
-          relationReal = relationDef;
-        } else {
-          continue;
-        }
-        relations.push([key, relationReal, includeReal, withReal]);
-      }
-    }
-    // with
-    if (includeWrapper?.with) {
-      for (const key in includeWrapper.with) {
-        const relationReal: any = includeWrapper.with[key];
-        if (!relationReal) continue;
-        relations.push([key, relationReal, relationReal.options?.include, relationReal.options?.with]);
-      }
-    }
-    return relations;
+    return handleRelationsCollection(this._model.options.relations, includeWrapper);
   }
 }
