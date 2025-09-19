@@ -107,7 +107,7 @@ export class CliBinBuild extends BeanCliBase {
 
   async _rollup(projectPath: string, env: NodeJS.ProcessEnv, outDir: string) {
     const aliasEntries: aliasImport.Alias[] = [];
-    const dialectDrivers = (process.env.BUILD_DIALECT_DRIVERS || '')?.split(',');
+    const dialectDrivers = (process.env.BUILD_DIALECT_DRIVERS || '').split(',');
     for (const name of __dialectDriversAll) {
       if (dialectDrivers.includes(name)) continue;
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
