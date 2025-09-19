@@ -1340,6 +1340,7 @@ export * from '../dto/postQuery.ts';
 export * from '../dto/postQueryRes.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
+export * from '../dto/serializerTest.ts';
 export * from '../dto/signin.ts';
 export * from '../dto/user.ts';
 export * from '../dto/userCreate.ts';
@@ -1357,6 +1358,7 @@ import type { IDtoOptionsPostQuery } from '../dto/postQuery.ts';
 import type { IDtoOptionsPostQueryRes } from '../dto/postQueryRes.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
+import type { IDtoOptionsSerializerTest } from '../dto/serializerTest.ts';
 import type { IDtoOptionsSignin } from '../dto/signin.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { IDtoOptionsUserCreate } from '../dto/userCreate.ts';
@@ -1378,6 +1380,7 @@ declare module 'vona-module-a-web' {
 'test-vona:postQueryRes': IDtoOptionsPostQueryRes;
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
+'test-vona:serializerTest': IDtoOptionsSerializerTest;
 'test-vona:signin': IDtoOptionsSignin;
 'test-vona:user': IDtoOptionsUser;
 'test-vona:userCreate': IDtoOptionsUserCreate;
@@ -1404,6 +1407,7 @@ import type { DtoPostQuery } from '../dto/postQuery.ts';
 import type { DtoPostQueryRes } from '../dto/postQueryRes.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
+import type { DtoSerializerTest } from '../dto/serializerTest.ts';
 import type { DtoSignin } from '../dto/signin.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserCreate } from '../dto/userCreate.ts';
@@ -1457,6 +1461,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsRoleLazy {
       fields?: TypeEntityOptionsFields<DtoRoleLazy, IDtoOptionsRoleLazy[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsSerializerTest {
+      fields?: TypeEntityOptionsFields<DtoSerializerTest, IDtoOptionsSerializerTest[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsSignin {
@@ -1833,6 +1841,7 @@ export interface IApiPathPostRecord{
 '/test/vona/onion/echo2/:userId/:userName': undefined;
 '/test/vona/onion/echo4': undefined;
 '/test/vona/order/create': undefined;
+'/test/vona/order/update/:id': undefined;
 '/test/vona/passport/login': undefined;
 '/test/vona/passport/refresh': undefined;
 '/test/vona/passport/logout': undefined;

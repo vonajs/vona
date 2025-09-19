@@ -1,7 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { Api, v } from 'vona-module-a-openapi';
-import { Serializer } from 'vona-module-a-serialization';
 import { Dto } from 'vona-module-a-web';
 import { $locale } from '../.metadata/index.ts';
 
@@ -17,8 +16,4 @@ export class DtoUser {
 
   @Api.field()
   married: boolean;
-
-  @Serializer.exclude()
-  @Api.field(v.min(6))
-  password: string;
 }
