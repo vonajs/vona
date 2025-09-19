@@ -4,7 +4,7 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IModelRelationIncludeWrapper } from '../model.ts';
 import type { TypeModelColumnsStrict } from '../modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../onion/model.ts';
-import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetColumnsFromRelationAndIncludeWrapper, TypeUtilGetModelOptions, TypeUtilGetParamsColumns, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType, TypeUtilPrepareColumns } from '../relations.ts';
+import type { TypeModelOfModelLike, TypeSymbolKeyEntity, TypeUtilEntityOmit, TypeUtilEntityPartial, TypeUtilEntitySelector, TypeUtilGetColumnsFromRelationAndIncludeWrapper, TypeUtilGetModelOptions, TypeUtilGetParamsColumns, TypeUtilGetParamsInlcude, TypeUtilGetParamsWith, TypeUtilGetRelationEntity, TypeUtilGetRelationKey, TypeUtilGetRelationModel, TypeUtilGetRelationOptions, TypeUtilGetRelationOptionsAutoload, TypeUtilGetRelationType, TypeUtilPrepareColumns } from '../relations.ts';
 
 export type TypeDtoMutateType = 'create' | 'update' | 'mutate';
 
@@ -52,13 +52,15 @@ export type TypeDtoMutateRelationResult<
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
   TColumns = undefined,
+  REFKEY extends string | undefined = undefined,
 > =
   TypeDtoMutateRelationResultEntity<
     TRecord,
     TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>,
     TMutateTypeTopLevel,
     TColumnsOmitDefault,
-    TTopLevel
+    TTopLevel,
+    REFKEY
   > &
   (TModel extends BeanModelMeta
     ? (
@@ -114,8 +116,8 @@ type TypeUtilGetDtoMutateRelationEntityByType<
     TypeUtilGetRelationType<Relation>,
     TypeUtilGetRelationModel<Relation>,
     IncludeWrapper,
-    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
-    // TypeUtilGetRelationKey<Relation>,
+    TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>,
+    TypeUtilGetRelationKey<Relation>
   >;
 type TypeUtilGetDtoMutateEntityByType<
   TMutateTypeTopLevel extends TypeDtoMutateType,
@@ -124,12 +126,13 @@ type TypeUtilGetDtoMutateEntityByType<
   TModel extends BeanModelMeta | undefined,
   IncludeWrapper extends {} | undefined | unknown,
   Columns,
+  REFKEY extends string | undefined = undefined,
 > =
   TYPE extends 'belongsTo' ? never
   : TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined
   : TYPE extends 'hasMany'
-    ? Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined
-    : TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
+    ? Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns, REFKEY>> | undefined
+    : TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns, REFKEY> | undefined;
 
 type TypeDtoMutateRelationResultEntity<
   TRecord,
@@ -137,13 +140,24 @@ type TypeDtoMutateRelationResultEntity<
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
+  REFKEY extends string | undefined = undefined,
 > = TypeDtoMutateRelationResultPatch<
   TypeDtoMutateRelationResultEntityInner<TRecord, Columns, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>,
   TMutateTypeTopLevel,
-  TTopLevel
+  TTopLevel,
+  REFKEY
 >;
 
 type TypeDtoMutateRelationResultPatch<
+  TRecordResult,
+  TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
+  TTopLevel extends boolean | undefined = undefined,
+  REFKEY extends string | undefined = undefined,
+> = REFKEY extends string
+  ? Omit<TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>, REFKEY>
+  : TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>;
+
+type TypeDtoMutateRelationResultPatch2<
   TRecordResult,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
