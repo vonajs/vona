@@ -27,19 +27,19 @@ export interface IBuildModelSelectGeneralParamsBasic<
   Groups extends TypeModelColumnsStrict<TRecord> | undefined = undefined,
 > {
   distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
-  columns?: Groups extends TypeModelColumnsStrict<TRecord> ?
-      (TColumn extends string ? (TColumn | Array<TColumn>) : TColumn) :
-    TypeModelColumnsPatch<TRecord, TColumn>;
+  columns?: Groups extends TypeModelColumnsStrict<TRecord>
+    ? (TColumn extends string ? (TColumn | Array<TColumn>) : TColumn)
+    : TypeModelColumnsPatch<TRecord, TColumn>;
   aggrs?: Aggrs;
   groups?: Groups;
   having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord, Groups, Aggrs>>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
   orders?:
-  Groups extends TypeModelColumnsStrict<TRecord> ?
-    IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord, Groups, Aggrs>>[] :
-      (Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> ? never :
-      IModelSelectParamsOrder<ColumnNames>[]);
+  Groups extends TypeModelColumnsStrict<TRecord>
+    ? IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord, Groups, Aggrs>>[]
+    : (Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> ? never
+      : IModelSelectParamsOrder<ColumnNames>[]);
   limit?: number;
   offset?: number;
 }
