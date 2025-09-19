@@ -148,7 +148,6 @@ type TypeDtoMutateRelationResultEntity<
   REFKEY
 >;
 
-// donot take effect, because RefKey is not strict, just as keyof Entity
 type TypeDtoMutateRelationResultPatch<
   TRecordResult,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
