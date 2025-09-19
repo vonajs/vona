@@ -58,6 +58,18 @@ export function _DtoMutate_raw<
           }
         }
       }
+      if (relation) {
+        const [_relationName, relationReal] = relation;
+        const { type, key } = relationReal;
+        if (type === 'hasOne' || type === 'hasMany') {
+          const index = columns.indexOf(key);
+          if (index > -1) {
+            columns = mutate(columns, copyState => {
+              copyState.splice(index, 1);
+            });
+          }
+        }
+      }
     }
     entityClass = $Class.pick(entityClass, columns);
   } else {
