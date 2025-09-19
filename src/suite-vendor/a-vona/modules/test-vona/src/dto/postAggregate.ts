@@ -6,10 +6,11 @@ import { ModelPost } from '../model/post.ts';
 export interface IDtoOptionsPostAggregate extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsPostAggregate>()
-export class DtoPostAggregate extends $Dto.aggregate(() => ModelPost, {
-  count: ['*', 'stars'],
-  sum: 'stars',
-  avg: 'stars',
-  min: 'stars',
-  max: 'stars',
-}) {}
+export class DtoPostAggregate
+  extends $Dto.aggregate(() => ModelPost, {
+    count: ['*', 'stars'],
+    sum: 'stars',
+    avg: 'stars',
+    min: 'stars',
+    max: 'stars',
+  }) {}
