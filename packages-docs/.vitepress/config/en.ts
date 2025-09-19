@@ -160,6 +160,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '$Dto.group', link: 'group' },
               ],
             },
+            {
+              text: 'Advanced Features',
+              base: '/guide/techniques/orm/advanced/',
+              collapsed: true,
+              items: [],
+            },
           ],
         },
         {

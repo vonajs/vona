@@ -160,6 +160,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '$Dto.group', link: 'group' },
               ],
             },
+            {
+              text: '高级特性',
+              base: '/zh/guide/techniques/orm/advanced/',
+              collapsed: true,
+              items: [],
+            },
           ],
         },
         {
