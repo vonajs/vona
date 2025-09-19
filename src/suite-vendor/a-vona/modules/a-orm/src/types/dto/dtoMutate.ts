@@ -35,14 +35,14 @@ export type TypeDtoMutateResult<
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
 > =
-TypeDtoMutateRelationResult<
-  TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
-  TypeModelOfModelLike<ModelLike>,
-  TOptionsRelation,
-  TMutateTypeTopLevel,
-  TColumnsOmitDefault,
-  TTopLevel
->;
+  TypeDtoMutateRelationResult<
+    TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
+    TypeModelOfModelLike<ModelLike>,
+    TOptionsRelation,
+    TMutateTypeTopLevel,
+    TColumnsOmitDefault,
+    TTopLevel
+  >;
 
 export type TypeDtoMutateRelationResult<
   TRecord,
@@ -59,10 +59,9 @@ export type TypeDtoMutateRelationResult<
     TMutateTypeTopLevel,
     TColumnsOmitDefault,
     TTopLevel
-  >
- &
-  (TModel extends BeanModelMeta ?
-      (
+  > &
+  (TModel extends BeanModelMeta
+    ? (
         OmitNever<
           TypeDtoMutateRelationResultMergeInclude<TMutateTypeTopLevel, TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>
         > &
@@ -75,34 +74,34 @@ type TypeDtoMutateRelationResultMergeInclude<
   TInclude extends {} | undefined | unknown,
 > = {
   [RelationName in (keyof TModelOptions['relations'])]:
-  TInclude extends {} ?
-    TInclude[RelationName] extends {} | boolean ?
-      TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel, TModelOptions['relations'][RelationName], TInclude[RelationName]> :
-      TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]> :
-    TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]>;
+  TInclude extends {}
+    ? TInclude[RelationName] extends {} | boolean
+      ? TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel, TModelOptions['relations'][RelationName], TInclude[RelationName]>
+      : TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]>
+    : TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel, TModelOptions['relations'][RelationName]>;
 };
 
 type TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel extends TypeDtoMutateType, TWith extends {} | undefined | unknown> =
-  TWith extends {} ?
-      { [RelationName in (keyof TWith)]: TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel, TWith[RelationName]> }
+  TWith extends {}
+    ? { [RelationName in (keyof TWith)]: TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel, TWith[RelationName]> }
     : {};
 
 type TypeDtoMutateRelationResultMergeIncludeWrapper<TMutateTypeTopLevel extends TypeDtoMutateType, Relation, IncludeWrapper> =
-  IncludeWrapper extends false ? never :
-  IncludeWrapper extends true ?
-    TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, undefined> :
-    IncludeWrapper extends {} ? TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, IncludeWrapper> : never;
+  IncludeWrapper extends false ? never
+  : IncludeWrapper extends true
+    ? TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, undefined>
+    : IncludeWrapper extends {} ? TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, IncludeWrapper> : never;
 
 type TypeDtoMutateRelationResultMergeAutoload<TMutateTypeTopLevel extends TypeDtoMutateType, Relation> =
-  TypeUtilGetRelationOptionsAutoload<Relation> extends true ?
-    TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, undefined> : never;
+  TypeUtilGetRelationOptionsAutoload<Relation> extends true
+    ? TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, Relation, undefined> : never;
 
 type TypeDtoMutateRelationResultMergeWithRelation<TMutateTypeTopLevel extends TypeDtoMutateType, WithRelation> =
-  WithRelation extends false ? never :
-  WithRelation extends true ?
-    never :
-    WithRelation extends {} ?
-      TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
+  WithRelation extends false ? never
+  : WithRelation extends true
+    ? never
+    : WithRelation extends {}
+      ? TypeUtilGetDtoMutateRelationEntityByType<TMutateTypeTopLevel, WithRelation, TypeUtilGetRelationOptions<WithRelation>> : never;
 
 type TypeUtilGetDtoMutateRelationEntityByType<
   TMutateTypeTopLevel extends TypeDtoMutateType,
@@ -125,11 +124,11 @@ type TypeUtilGetDtoMutateEntityByType<
   IncludeWrapper extends {} | undefined | unknown,
   Columns,
 > =
-  TYPE extends 'belongsTo' ? never :
-  TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined :
-  TYPE extends 'hasMany' ?
-    Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined :
-    TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
+  TYPE extends 'belongsTo' ? never
+  : TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined
+  : TYPE extends 'hasMany'
+    ? Array<TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns>> | undefined
+    : TypeDtoMutateRelationResult<TRecord, TModel, IncludeWrapper, TMutateTypeTopLevel, undefined, false, Columns> | undefined;
 
 type TypeDtoMutateRelationResultEntity<
   TRecord,
@@ -147,8 +146,8 @@ type TypeDtoMutateRelationResultPatch<
   TRecordResult,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-> = TTopLevel extends false ? TMutateTypeTopLevel extends 'update' | 'mutate' ?
-  TypeUtilEntityPartial<TRecordResult, 'id' | 'deleted'> : TRecordResult : TRecordResult;
+> = TTopLevel extends false ? TMutateTypeTopLevel extends 'update' | 'mutate'
+  ? TypeUtilEntityPartial<TRecordResult, 'id' | 'deleted'> : TRecordResult : TRecordResult;
 
 type TypeDtoMutateRelationResultEntityInner<
   TRecord,
@@ -157,9 +156,9 @@ type TypeDtoMutateRelationResultEntityInner<
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
 > =
-[Columns] extends [string | string[]] ?
-  TypeDtoMutateRelationResultEntityFromColumns<TRecord, Columns, TMutateTypeTopLevel, TTopLevel> :
-  TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault>;
+  [Columns] extends [string | string[]]
+    ? TypeDtoMutateRelationResultEntityFromColumns<TRecord, Columns, TMutateTypeTopLevel, TTopLevel>
+    : TypeDtoMutateRelationResultEntityFromColumnsOmitDefault<TRecord, TMutateTypeTopLevel, TColumnsOmitDefault>;
 
 type TypeDtoMutateRelationResultEntityFromColumns<
   TRecord,
@@ -191,16 +190,16 @@ type TypeDtoMutateRelationResultPrepareColumns<
   TColumns = undefined,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-> = TTopLevel extends true ? TColumns :
-TMutateTypeTopLevel extends 'create' ?
-  TypeOmitStringUnion<TColumns, 'deleted' | 'id'> : (TColumns | 'deleted' | 'id')
+> = TTopLevel extends true ? TColumns
+: TMutateTypeTopLevel extends 'create'
+  ? TypeOmitStringUnion<TColumns, 'deleted' | 'id'> : (TColumns | 'deleted' | 'id')
 ;
 
 type TypeDtoMutateRelationResultPrepareColumnsOmitDefault<
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
-> = TColumnsOmitDefault extends string | string[] ?
-  TColumnsOmitDefault :
-  TMutateTypeTopLevel extends 'create' ?
-      ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] :
-      ['iid', 'createdAt', 'updatedAt'];
+> = TColumnsOmitDefault extends string | string[]
+  ? TColumnsOmitDefault
+  : TMutateTypeTopLevel extends 'create'
+    ? ['id', 'iid', 'deleted', 'createdAt', 'updatedAt']
+    : ['iid', 'createdAt', 'updatedAt'];
