@@ -157,6 +157,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '$Dto.create', link: 'create' },
                 { text: '$Dto.update', link: 'update' },
                 { text: '$Dto.aggregate', link: 'aggregate' },
+                { text: '$Dto.group', link: 'group' },
               ],
             },
           ],
