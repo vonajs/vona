@@ -156,6 +156,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '$Dto.queryPage/DtoQueryPageBase', link: 'query-page' },
                 { text: '$Dto.create', link: 'create' },
                 { text: '$Dto.update', link: 'update' },
+                { text: '$Dto.aggregate', link: 'aggregate' },
               ],
             },
           ],
