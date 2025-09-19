@@ -4,6 +4,7 @@ import type { IDtoMutateParams, TypeDtoMutateResult, TypeDtoMutateType } from '.
 import type { TypeModelColumnsStrict } from '../../types/modelWhere.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
+import type { IRelationItem } from '../../types/relationsDef.ts';
 import { mutate } from 'mutate-on-copy';
 import { $Class } from 'vona';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
@@ -16,7 +17,7 @@ export function DtoMutate<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoMutateResult<ModelLike, T, 'mutate', undefined, true>> {
-  return _DtoMutate_raw(modelLike, params, 'mutate', undefined, true);
+  return _DtoMutate_raw(modelLike, params, 'mutate', undefined, true, undefined);
 }
 
 export function _DtoMutate_raw<
@@ -29,6 +30,7 @@ export function _DtoMutate_raw<
   mutateTypeTopLevel?: TypeDtoMutateType,
   columnsOmitDefault?: ColumnsOmitDefault,
   topLevel?: boolean,
+  relation?: IRelationItem,
 ) {
   // model
   const modelClass = prepareClassModel(modelLike);
@@ -60,6 +62,15 @@ export function _DtoMutate_raw<
     entityClass = $Class.pick(entityClass, columns);
   } else {
     const columns = columnsOmitDefault ?? (mutateTypeTopLevel === 'create' ? ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] : ['iid', 'createdAt', 'updatedAt']);
+    if (relation) {
+      const [_relationName, relationReal] = relation;
+      const { type, key } = relationReal;
+      if (type === 'hasOne' || type === 'hasMany') {
+        if (Array.isArray(columns) && !columns.includes(key)) {
+          columns.push(key);
+        }
+      }
+    }
     entityClass = $Class.omit(entityClass, prepareColumns(columns as any) as any);
   }
   if (!topLevel && mutateTypeTopLevel !== 'create') {

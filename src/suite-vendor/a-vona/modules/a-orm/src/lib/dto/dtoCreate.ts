@@ -11,5 +11,5 @@ export function DtoCreate<
   modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
   params?: T,
 ): Constructable<TypeDtoMutateResult<ModelLike, T, 'create', 'id' | 'iid' | 'deleted' | 'createdAt' | 'updatedAt', true>> {
-  return _DtoMutate_raw(modelLike, params, 'create', ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] as any, true);
+  return _DtoMutate_raw(modelLike, params, 'create', ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] as any, true, undefined);
 }

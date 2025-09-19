@@ -4,6 +4,7 @@ import type { IDtoGetParams, TypeDtoGetResult } from '../../types/dto/dtoGet.ts'
 import type { TypeDtoMutateType } from '../../types/dto/dtoMutate.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
+import type { IRelationItem } from '../../types/relationsDef.ts';
 import { ensureArray, hashkey } from '@cabloy/utils';
 import { $Class, appResource } from 'vona';
 import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
@@ -67,7 +68,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
-  const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel);
+  const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
   if (mutateTypeTopLevel) {
     if (type === 'belongsTo') {
       // donot mutate
@@ -107,10 +108,10 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   }
 }
 
-function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel?: TypeDtoMutateType) {
+function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel?: TypeDtoMutateType, relation?: IRelationItem) {
   return () => {
     if (!autoload) {
-      return _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutateTypeTopLevel);
+      return _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutateTypeTopLevel, relation);
     }
     // dynamic
     const entityClass = getClassEntityFromClassModel(modelTarget);
@@ -119,7 +120,7 @@ function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, 
     const dynamicName = `${beanFullName}_${_hashkey}`;
     let entityTarget = getSchemaDynamic(dynamicName);
     if (!entityTarget) {
-      entityTarget = _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutateTypeTopLevel);
+      entityTarget = _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutateTypeTopLevel, relation);
       entityTarget[SymbolSchemaDynamicRefId] = dynamicName;
       addSchemaDynamic(dynamicName, entityTarget);
     }
@@ -127,9 +128,9 @@ function _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, 
   };
 }
 
-function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutateTypeTopLevel?: TypeDtoMutateType) {
+function _DtoGet_relation_handle_schemaLazy_raw(modelTarget, optionsReal, mutateTypeTopLevel?: TypeDtoMutateType, relation?: IRelationItem) {
   if (mutateTypeTopLevel) {
-    return _DtoMutate_raw(modelTarget, optionsReal, mutateTypeTopLevel, undefined, false); // columnsOmitDefault: undefined
+    return _DtoMutate_raw(modelTarget, optionsReal, mutateTypeTopLevel, undefined, false, relation); // columnsOmitDefault: undefined
   } else {
     if (optionsReal.groups) {
       return DtoGroup(modelTarget, optionsReal.groups, optionsReal.aggrs, optionsReal.columns);
