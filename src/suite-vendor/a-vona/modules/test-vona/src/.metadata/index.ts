@@ -462,7 +462,7 @@ export interface IModelOptionsCategoryChain {
 export interface IModelOptionsOrder {
         relations: {
           user: IModelRelationBelongsTo<ModelOrder, ModelUser, true, 'id'|'name'>;
-products: IModelRelationHasMany<ModelProduct, 'orderId', true, 'id'|'name'|'price'|'quantity'|'amount', undefined, undefined, undefined>;
+products: IModelRelationHasMany<ModelProduct, 'orderId', true, '*', undefined, undefined, undefined>;
         };
       }
 export interface IModelOptionsOrderStats {

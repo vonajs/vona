@@ -52,7 +52,7 @@ export type TypeDtoMutateRelationResult<
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
   TColumns = undefined,
-  REFKEY extends string | undefined = undefined,
+  REFKEY = undefined,
 > =
   TypeDtoMutateRelationResultEntity<
     TRecord,
@@ -126,7 +126,7 @@ type TypeUtilGetDtoMutateEntityByType<
   TModel extends BeanModelMeta | undefined,
   IncludeWrapper extends {} | undefined | unknown,
   Columns,
-  REFKEY extends string | undefined = undefined,
+  REFKEY = undefined,
 > =
   TYPE extends 'belongsTo' ? never
   : TYPE extends 'belongsToMany' ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined
@@ -140,7 +140,7 @@ type TypeDtoMutateRelationResultEntity<
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TColumnsOmitDefault extends string | string[] | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-  REFKEY extends string | undefined = undefined,
+  REFKEY = undefined,
 > = TypeDtoMutateRelationResultPatch<
   TypeDtoMutateRelationResultEntityInner<TRecord, Columns, TMutateTypeTopLevel, TColumnsOmitDefault, TTopLevel>,
   TMutateTypeTopLevel,
@@ -153,9 +153,9 @@ type TypeDtoMutateRelationResultPatch<
   TRecordResult,
   TMutateTypeTopLevel extends TypeDtoMutateType | undefined = undefined,
   TTopLevel extends boolean | undefined = undefined,
-  REFKEY extends string | undefined = undefined,
-> = REFKEY extends string
-  ? Omit<TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>, REFKEY>
+  REFKEY = undefined,
+> = TTopLevel extends false
+  ? TypeUtilEntityOmit<TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>, REFKEY>
   : TypeDtoMutateRelationResultPatch2<TRecordResult, TMutateTypeTopLevel, TTopLevel>;
 
 type TypeDtoMutateRelationResultPatch2<

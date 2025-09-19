@@ -48,9 +48,7 @@ export type TypeModelParamsRelationOptions<Relation> =
     });
 
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : undefined;
-export type TypeUtilGetRelationKey<Relation> =
-  TypeUtilGetRelationKeyInner<Relation> extends string ? TypeUtilGetRelationKeyInner<Relation> : undefined;
-export type TypeUtilGetRelationKeyInner<Relation> = Relation extends { key?: infer KEY } ? KEY : undefined;
+export type TypeUtilGetRelationKey<Relation> = Relation extends { key?: infer KEY } ? KEY : undefined;
 export type TypeUtilGetRelationModel<Relation> =
   Relation extends
   { model?: ((() => Constructable<infer MODEL extends BeanModelMeta>) | Constructable<infer MODEL extends BeanModelMeta>) }
