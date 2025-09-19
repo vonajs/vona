@@ -58,35 +58,21 @@ export function _DtoMutate_raw<
           }
         }
       }
-      if (relation) {
-        const [_relationName, relationReal] = relation;
-        const { type, key } = relationReal;
-        if (type === 'hasOne' || type === 'hasMany') {
-          const index = columns.indexOf(key);
-          if (index > -1) {
-            columns = mutate(columns, copyState => {
-              copyState.splice(index, 1);
-            });
-          }
-        }
-      }
     }
     entityClass = $Class.pick(entityClass, columns);
   } else {
     const columns = columnsOmitDefault ?? (mutateTypeTopLevel === 'create' ? ['id', 'iid', 'deleted', 'createdAt', 'updatedAt'] : ['iid', 'createdAt', 'updatedAt']);
-    if (relation) {
-      const [_relationName, relationReal] = relation;
-      const { type, key } = relationReal;
-      if (type === 'hasOne' || type === 'hasMany') {
-        if (Array.isArray(columns) && !columns.includes(key)) {
-          columns.push(key);
-        }
-      }
-    }
     entityClass = $Class.omit(entityClass, prepareColumns(columns as any) as any);
   }
   if (!topLevel && mutateTypeTopLevel !== 'create') {
     entityClass = $Class.partial(entityClass, ['id', 'deleted'] as any);
+  }
+  if (!topLevel && relation) {
+    const [_relationName, relationReal] = relation;
+    const { type, key } = relationReal;
+    if (type === 'hasOne' || type === 'hasMany') {
+      entityClass = $Class.omit(entityClass, key);
+    }
   }
   // relations
   _DtoGet_relations(modelClass, entityClass, params as any, mutateTypeTopLevel);
