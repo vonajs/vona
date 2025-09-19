@@ -26,7 +26,9 @@ export interface IModelRelationHasOne<
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity] | undefined = keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   AUTOLOAD extends boolean = false,
   COLUMNS
-  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  extends TypeModelColumn<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 > {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
@@ -39,7 +41,9 @@ export interface IModelRelationBelongsTo<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
   AUTOLOAD extends boolean = false,
   COLUMNS
-  extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  extends TypeModelColumn<
+    TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
+  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
 > {
   type?: 'belongsTo';
   model?: TypeModelClassLike<MODEL>;
@@ -88,7 +92,7 @@ export interface IModelRelationBelongsToMany<
 export interface IModelRelationOptionsOne<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
-  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
+  COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
 > extends
   IModelRelationOptionsMetaWrapper {
   autoload?: AUTOLOAD;

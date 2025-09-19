@@ -239,7 +239,7 @@ function __parseRelation_options(node: t.Node) {
     if (options?.groups) {
       columns = 'undefined';
     } else {
-      columns = '\'*\'';
+      columns = 'undefined'; // '\'*\'';
     }
   } else {
     if (options?.columns.includes('*')) {

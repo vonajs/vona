@@ -462,12 +462,12 @@ export interface IModelOptionsCategoryChain {
 export interface IModelOptionsOrder {
         relations: {
           user: IModelRelationBelongsTo<ModelOrder, ModelUser, true, 'id'|'name'>;
-products: IModelRelationHasMany<ModelProduct, 'orderId', true, '*', undefined, undefined, undefined>;
+products: IModelRelationHasMany<ModelProduct, 'orderId', true, 'id'|'name'|'price'|'quantity'|'amount', undefined, undefined, undefined>;
         };
       }
 export interface IModelOptionsOrderStats {
         relations: {
-          productStats: IModelRelationHasMany<ModelProduct, 'orderId', true, '*', undefined, { count?: '*' | Array<'*'>;sum?: 'amount' | Array<'amount'> }, undefined>;
+          productStats: IModelRelationHasMany<ModelProduct, 'orderId', true, undefined, undefined, { count?: '*' | Array<'*'>;sum?: 'amount' | Array<'amount'> }, undefined>;
 productsGroups: IModelRelationHasMany<ModelProduct, 'orderId', false, undefined, undefined, { count?: '*' | Array<'*'>;sum?: 'amount' | Array<'amount'> }, 'id' | Array<'id'>>;
         };
       }
@@ -479,7 +479,7 @@ user: IModelRelationBelongsTo<ModelPost, ModelUser, true, 'id'|'name'>;
       }
 export interface IModelOptionsPostContent {
         relations: {
-          post: IModelRelationBelongsTo<ModelPostContent, ModelPost, false, '*'>;
+          post: IModelRelationBelongsTo<ModelPostContent, ModelPost, false, undefined>;
         };
       }
 export interface IModelOptionsRole {
@@ -495,8 +495,8 @@ roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false
       }
 export interface IModelOptionsUserStats {
         relations: {
-          posts: IModelRelationHasMany<ModelPost, 'userId', true, '*', undefined, { count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> }, undefined>;
-roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, '*',undefined,{ count?: '*' | Array<'*'> },undefined>;
+          posts: IModelRelationHasMany<ModelPost, 'userId', true, undefined, undefined, { count?: '*'|'title' | Array<'*'|'title'>;sum?: 'stars' | Array<'stars'> }, undefined>;
+roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, undefined,undefined,{ count?: '*' | Array<'*'> },undefined>;
         };
       }
 export interface IModelOptionsUserStatsGroup {
