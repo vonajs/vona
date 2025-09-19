@@ -33,6 +33,8 @@ declare module '@cabloy/cli' {
   }
 }
 
+const __dialectDriversAll = ['pg', 'mysql2', 'better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious', 'cloudflare:sockets'];
+
 export class CliBinBuild extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
@@ -105,7 +107,9 @@ export class CliBinBuild extends BeanCliBase {
 
   async _rollup(projectPath: string, env: NodeJS.ProcessEnv, outDir: string) {
     const aliasEntries: aliasImport.Alias[] = [];
-    for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious', 'cloudflare:sockets']) {
+    const dialectDrivers = (process.env.BUILD_DIALECT_DRIVERS || '')?.split(',');
+    for (const name of __dialectDriversAll) {
+      if (dialectDrivers.includes(name)) continue;
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
 

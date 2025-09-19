@@ -34,9 +34,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "mysql2": "^3.12.0",
-    "pg": "^8.13.3",
-    "pg-types": "^4.0.2"
+    "mysql2": "^3.15.0",
+    "pg": "^8.16.3",
+    "pg-types": "^4.1.0"
   },
   "clean-package": {
     "indent": 2,
