@@ -6,12 +6,13 @@ import type { IModelRelationOptionsBelongsToManyMutate, IModelRelationOptionsMan
 
 function hasOne<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   OPTIONS extends IModelRelationOptionsOneMutate<TypeModelOfModelLike<MODEL>>,
 >(
   classModel: TypeModelClassLike<MODEL>,
-  key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
+  key: KEY,
   options?: OPTIONS,
-): IModelRelationHasOneDynamic<MODEL, OPTIONS> {
+): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
@@ -30,13 +31,14 @@ function hasOne<
 
 function hasMany<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   // not use `| undefined = undefined` or `= {}`
   OPTIONS extends IModelRelationOptionsManyMutate<TypeModelOfModelLike<MODEL>>,
 >(
   classModel: TypeModelClassLike<MODEL>,
-  key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
+  key: KEY,
   options?: OPTIONS,
-): IModelRelationHasManyDynamic<MODEL, OPTIONS> {
+): IModelRelationHasManyDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasMany', model: classModel, key, options };
 }
 
