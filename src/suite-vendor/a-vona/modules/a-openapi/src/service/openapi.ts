@@ -124,17 +124,24 @@ export class ServiceOpenapi extends BeanBase {
   private _translateSchema(schema: any, generateJsonScene: TypeGenerateJsonScene) {
     if (!schema) return;
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
+    // schema
     this._translateStrings(schema, ['title', 'description']);
     if (generateJsonScene === 'api' && !schema.description && schema.title) {
       schema.description = schema.title;
       delete schema.title;
     }
+    // properties
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
       for (const prop in properties) {
         const propObj = properties[prop];
         this._translateSchema(propObj, generateJsonScene);
       }
+    }
+    // items
+    const items = cast<SchemaObject30 | SchemaObject31>(schema).items;
+    if (items && typeof items === 'object') {
+      this._translateSchema(items, generateJsonScene);
     }
   }
 
