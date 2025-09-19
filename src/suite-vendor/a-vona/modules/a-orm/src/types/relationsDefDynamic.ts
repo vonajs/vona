@@ -17,11 +17,12 @@ import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 // use optional ? for app config
 export interface IModelRelationHasOneDynamic<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
 > {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
+  key?: KEY;
   options?: OPTIONS;
 }
 
@@ -38,13 +39,14 @@ export interface IModelRelationBelongsToDynamic<
 
 export interface IModelRelationHasManyDynamic<
   MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> | undefined = undefined,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 > {
   type?: 'hasMany';
   model?: TypeModelClassLike<MODEL>;
-  key?: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity];
+  key?: KEY;
   options?: OPTIONS;
 }
 
@@ -122,9 +124,9 @@ export interface IBuildModelSelectGeneralParamsBasicDynamic<
   groups?: TypeModelColumnsStrict<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
-  orders?: Group extends true ?
-    IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord>>[] :
-    IModelSelectParamsOrder<ColumnNames>[];
+  orders?: Group extends true
+    ? IModelSelectParamsOrder<TypeModelSelectGroupParamsColumnNames<TRecord>>[]
+    : IModelSelectParamsOrder<ColumnNames>[];
   limit?: number;
   offset?: number;
 }
