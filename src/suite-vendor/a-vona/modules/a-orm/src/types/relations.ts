@@ -17,10 +17,10 @@ export type TypeModelOfModelLike<
   ModelLike extends
   (() => Constructable<BeanModelMeta>) | Constructable<BeanModelMeta> | (() => BeanModelMeta) | BeanModelMeta | (keyof IModelClassRecord),
 > =
-  ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike] :
-  ModelLike extends () => Constructable<infer MODEL> ? MODEL :
-  ModelLike extends Constructable<infer MODEL> ? MODEL :
-  ModelLike extends () => infer MODEL ? MODEL : ModelLike;
+  ModelLike extends (keyof IModelClassRecord) ? IModelClassRecord[ModelLike]
+  : ModelLike extends () => Constructable<infer MODEL> ? MODEL
+  : ModelLike extends Constructable<infer MODEL> ? MODEL
+  : ModelLike extends () => infer MODEL ? MODEL : ModelLike;
 
 export type TypeModelClassLike<MODEL extends BeanModelMeta | (keyof IModelClassRecord)> =
   MODEL extends BeanModelMeta ? ((() => Constructable<MODEL>) | Constructable<MODEL>) : MODEL;
@@ -40,9 +40,9 @@ export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecorator
   } : never;
 
 export type TypeModelParamsRelationOptions<Relation> =
-  boolean
-  | (Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'>
-    & {
+  boolean |
+  (Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'> &
+    {
       include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>>;
       with?: Record<string, unknown>;
     });
@@ -51,15 +51,15 @@ export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer 
 export type TypeUtilGetRelationModel<Relation> =
   Relation extends
   { model?: ((() => Constructable<infer MODEL extends BeanModelMeta>) | Constructable<infer MODEL extends BeanModelMeta>) }
-    ? MODEL :
-    Relation extends
+    ? MODEL
+    : Relation extends
     { model?: ((() => infer MODEL extends BeanModelMeta) | infer MODEL extends BeanModelMeta) }
-      ? MODEL :
-      Relation extends { model?: () => Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
-      Relation extends { model?: () => infer MODEL extends BeanModelMeta } ? MODEL :
-      Relation extends { model?: Constructable<infer MODEL extends BeanModelMeta> } ? MODEL :
-      Relation extends { model?: infer MODEL extends BeanModelMeta } ? MODEL :
-      Relation extends { model?: infer MODELNAME extends keyof IModelClassRecord } ? IModelClassRecord[MODELNAME] : undefined;
+      ? MODEL
+      : Relation extends { model?: () => Constructable<infer MODEL extends BeanModelMeta> } ? MODEL
+      : Relation extends { model?: () => infer MODEL extends BeanModelMeta } ? MODEL
+      : Relation extends { model?: Constructable<infer MODEL extends BeanModelMeta> } ? MODEL
+      : Relation extends { model?: infer MODEL extends BeanModelMeta } ? MODEL
+      : Relation extends { model?: infer MODELNAME extends keyof IModelClassRecord } ? IModelClassRecord[MODELNAME] : undefined;
 
 export type TypeUtilGetRelationModelOptions<Relation> = TypeUtilGetModelOptions<TypeUtilGetRelationModel<Relation>>;
 export type TypeUtilGetRelationEntity<Relation> = TypeUtilGetModelEntity<TypeUtilGetRelationModel<Relation>>;
@@ -103,15 +103,15 @@ export type TypeUtilGetEntityByType<
   Groups,
   Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > =
-  TYPE extends 'hasMany' | 'belongsToMany' ?
-    Groups extends string | string[] ?
-      Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs, Groups>> :
-        (Aggrs extends {} ?
-      TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> | undefined :
-          Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>>) :
-      ([Depth] extends [never] ?
-        undefined :
-          (TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, undefined, undefined, TypeDepthPrev[Depth]> | undefined)
+  TYPE extends 'hasMany' | 'belongsToMany'
+    ? Groups extends string | string[]
+      ? Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs, Groups>>
+      : (Aggrs extends {}
+          ? TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> | undefined
+          : Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>>)
+    : ([Depth] extends [never]
+        ? undefined
+        : (TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, undefined, undefined, TypeDepthPrev[Depth]> | undefined)
       );
 
 export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs } ? Aggrs : undefined;
@@ -125,8 +125,8 @@ export type TypeUtilEntityOmit<TRecord, TColumns> = [TColumns] extends [keyof TR
 export type TypeUtilEntityPartial<TRecord, TColumns> =
   [TColumns] extends [keyof TRecord] ? Partial<Pick<TRecord, TColumns>> & Omit<TRecord, TColumns> : TRecord;
 export type TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined | unknown> =
-  TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[] ?
-    TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
+  TypeUtilGetParamsColumns<IncludeWrapper> extends string | string[]
+    ? TypeUtilGetParamsColumns<IncludeWrapper> : TypeUtilGetRelationOptionsColumns<Relation>;
 
 export interface TypeModelSelectAndCount<
   TRecord,
@@ -150,11 +150,11 @@ export type TypeModelRelationResult<
   Groups = undefined,
   Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > =
-  Groups extends string | string[] ?
-    TypeModelGroupRelationResultGroups<TRecord, Aggrs, Groups, TColumns> :
-    Aggrs extends {} ?
-      TypeModelAggrRelationResultAggrs<Aggrs> :
-      TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns, Depth>;
+  Groups extends string | string[]
+    ? TypeModelGroupRelationResultGroups<TRecord, Aggrs, Groups, TColumns>
+    : Aggrs extends {}
+      ? TypeModelAggrRelationResultAggrs<Aggrs>
+      : TypeModelRelationResult_Normal<TRecord, TModel, TOptionsRelation, TColumns, Depth>;
 
 export type TypeModelRelationResult_Normal<
   TRecord,
@@ -167,8 +167,8 @@ export type TypeModelRelationResult_Normal<
     TRecord,
     TypeUtilPrepareColumns<TColumns extends string | string[] ? TColumns : TypeUtilGetParamsColumns<TOptionsRelation>>
   > &
-  (TModel extends BeanModelMeta ?
-      (
+  (TModel extends BeanModelMeta
+    ? (
         OmitNever<TypeModelRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>, Depth>> &
         OmitNever<TypeModelRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>, Depth>>
       ) : {});
@@ -179,32 +179,32 @@ export type TypeModelRelationResultMergeInclude<
   Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > = {
   [RelationName in (keyof TModelOptions['relations'])]:
-  TInclude extends {} ?
-    TInclude[RelationName] extends {} | boolean ?
-      TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName], Depth> :
-      TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName], Depth> :
-    TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName], Depth>;
+  TInclude extends {}
+    ? TInclude[RelationName] extends {} | boolean
+      ? TypeModelRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName], Depth>
+      : TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName], Depth>
+    : TypeModelRelationResultMergeAutoload<TModelOptions['relations'][RelationName], Depth>;
 };
 
 export type TypeModelRelationResultMergeWith<
   TWith extends {} | undefined | unknown,
   Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > =
-  TWith extends {} ?
-      { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithRelation<TWith[RelationName], Depth> }
+  TWith extends {}
+    ? { [RelationName in (keyof TWith)]: TypeModelRelationResultMergeWithRelation<TWith[RelationName], Depth> }
     : {};
 
 export type TypeModelRelationResultMergeAutoload<Relation, Depth extends TypeDepthPrev[number] = TypeDepthPrevMax> =
   TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilGetRelationEntityByType<Relation, undefined, Depth> : never;
 
 export type TypeModelRelationResultMergeIncludeWrapper<Relation, IncludeWrapper, Depth extends TypeDepthPrev[number] = TypeDepthPrevMax> =
-  IncludeWrapper extends false ? never :
-  IncludeWrapper extends true ?
-    TypeUtilGetRelationEntityByType<Relation, undefined, Depth> :
-    IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper, Depth> : never;
+  IncludeWrapper extends false ? never
+  : IncludeWrapper extends true
+    ? TypeUtilGetRelationEntityByType<Relation, undefined, Depth>
+    : IncludeWrapper extends {} ? TypeUtilGetRelationEntityByType<Relation, IncludeWrapper, Depth> : never;
 
 export type TypeModelRelationResultMergeWithRelation<WithRelation, Depth extends TypeDepthPrev[number] = TypeDepthPrevMax> =
-  WithRelation extends false ? never :
-  WithRelation extends true ?
-    never :
-    WithRelation extends {} ? TypeUtilGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>, Depth> : never;
+  WithRelation extends false ? never
+  : WithRelation extends true
+    ? never
+    : WithRelation extends {} ? TypeUtilGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>, Depth> : never;

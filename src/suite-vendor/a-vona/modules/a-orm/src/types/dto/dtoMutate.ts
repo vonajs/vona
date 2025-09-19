@@ -115,6 +115,7 @@ type TypeUtilGetDtoMutateRelationEntityByType<
     TypeUtilGetRelationModel<Relation>,
     IncludeWrapper,
     TypeUtilGetColumnsFromRelationAndIncludeWrapper<Relation, IncludeWrapper>
+    // TypeUtilGetRelationKey<Relation>,
   >;
 type TypeUtilGetDtoMutateEntityByType<
   TMutateTypeTopLevel extends TypeDtoMutateType,

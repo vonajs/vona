@@ -68,7 +68,6 @@ function _DtoGet_relation_handle<TRecord extends {}>(
   const { type, model, options } = relationReal;
   const modelTarget = prepareClassModel(model);
   const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
-  const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
   if (mutateTypeTopLevel) {
     if (type === 'belongsTo') {
       // donot mutate
@@ -78,13 +77,17 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     if (type === 'belongsToMany') {
       schema = v.array(z.object({ id: (v.tableIdentity())(), deleted: z.boolean().optional() }));
     } else if (type === 'hasOne') {
+      const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
       schema = v.lazy(schemaLazy);
       // optional = true;
     } else {
+      // hasMany
+      const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
       schema = v.array(v.lazy(schemaLazy));
     }
     Api.field(v.optional(), schema)(entityClass.prototype, relationName);
   } else {
+    const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
     let schema;
     let optional = false;
     if ((type === 'hasOne' || type === 'belongsTo')) {
