@@ -1337,6 +1337,7 @@ export * from '../dto/orderResultPage.ts';
 export * from '../dto/orderUpdate.ts';
 export * from '../dto/postAggregate.ts';
 export * from '../dto/postCreate.ts';
+export * from '../dto/postGroup.ts';
 export * from '../dto/postQuery.ts';
 export * from '../dto/postQueryRes.ts';
 export * from '../dto/profile.ts';
@@ -1356,6 +1357,7 @@ import type { IDtoOptionsOrderResultPage } from '../dto/orderResultPage.ts';
 import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostAggregate } from '../dto/postAggregate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
+import type { IDtoOptionsPostGroup } from '../dto/postGroup.ts';
 import type { IDtoOptionsPostQuery } from '../dto/postQuery.ts';
 import type { IDtoOptionsPostQueryRes } from '../dto/postQueryRes.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
@@ -1379,6 +1381,7 @@ declare module 'vona-module-a-web' {
 'test-vona:orderUpdate': IDtoOptionsOrderUpdate;
 'test-vona:postAggregate': IDtoOptionsPostAggregate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
+'test-vona:postGroup': IDtoOptionsPostGroup;
 'test-vona:postQuery': IDtoOptionsPostQuery;
 'test-vona:postQueryRes': IDtoOptionsPostQueryRes;
 'test-vona:profile': IDtoOptionsProfile;
@@ -1407,6 +1410,7 @@ import type { DtoOrderResultPage } from '../dto/orderResultPage.ts';
 import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostAggregate } from '../dto/postAggregate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
+import type { DtoPostGroup } from '../dto/postGroup.ts';
 import type { DtoPostQuery } from '../dto/postQuery.ts';
 import type { DtoPostQueryRes } from '../dto/postQueryRes.ts';
 import type { DtoProfile } from '../dto/profile.ts';
@@ -1453,6 +1457,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsPostCreate {
       fields?: TypeEntityOptionsFields<DtoPostCreate, IDtoOptionsPostCreate[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsPostGroup {
+      fields?: TypeEntityOptionsFields<DtoPostGroup, IDtoOptionsPostGroup[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsPostQuery {
@@ -1837,6 +1845,7 @@ declare module 'vona-module-a-web' {
 '/test/vona/order/findMany': undefined;
 '/test/vona/passport/echo/:name': undefined;
 '/test/vona/passport/isAuthenticated': undefined;
+'/test/vona/post/group': undefined;
 '/test/vona/post/aggregate': undefined;
 '/test/vona/post/findManyEcho': undefined;
 '/test/vona/post/findMany': undefined;
