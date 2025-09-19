@@ -44,7 +44,7 @@ class ControllerPost {
 }
 ```
 
-- `@Api.body`：传入 DtoPostGroup，用于标注 API 返回值
+- `@Api.body`：传入`v.array(DtoPostGroup)`，用于标注 API 返回值
 
 基于`DtoPostGroup`生成的 Swagger/Openapi 效果如下：
 

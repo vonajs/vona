@@ -1,19 +1,19 @@
 # $Dto.group
 
-`$Dto.group`用于标注分组操作的返回结果
+`$Dto.group` is used to annotate the return result of the grouping operation
 
-## 如何使用
+## How to use
 
-### 1. 创建DTO
+### 1. Create DTO
 
-在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
+In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
 ``` typescript
 @Dto()
 export class DtoPostGroup {}
 ```
 
-### 2. 继承$Dto.group
+### 2. Inherit $Dto.group
 
 ``` diff
 @Dto()
@@ -24,9 +24,9 @@ export class DtoPostGroup
 + }) {}
 ```
 
-## 标注API返回值
+## Annotating API Result
 
-以 Controller Post 的 group 方法为例，标注 API 返回值：
+Taking the `group` method of the `Post` controller as an example, we can annotate the API Result:
 
 ``` diff
 class ControllerPost {
@@ -44,8 +44,8 @@ class ControllerPost {
 }
 ```
 
-- `@Api.body`：传入 DtoPostGroup，用于标注 API 返回值
+- `@Api.body`: passed in `v.array(DtoPostGroup)`, used to annotate the API return value
 
-基于`DtoPostGroup`生成的 Swagger/Openapi 效果如下：
+The automatically generated Swagger/Openapi is as follows:
 
 ![](../../../../assets/img/orm/dto/dto-9.png)
