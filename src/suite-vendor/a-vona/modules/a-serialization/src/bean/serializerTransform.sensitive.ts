@@ -1,4 +1,6 @@
+import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from '../types/serializerTransform.ts';
 import { BeanBase } from 'vona';
+import { SerializerTransform } from '../lib/serializerTransform.ts';
 
 export type TypeSerializerTransformSensitiveValue = unknown;
 
