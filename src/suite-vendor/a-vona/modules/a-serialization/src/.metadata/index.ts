@@ -1,4 +1,29 @@
 /* eslint-disable */
+/** interceptor: begin */
+export * from '../bean/interceptor.serializerTransform.ts';
+import type { IInterceptorOptionsSerializerTransform } from '../bean/interceptor.serializerTransform.ts';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  
+  
+export interface IInterceptorRecordLocal {
+  'a-serialization:serializerTransform': IInterceptorOptionsSerializerTransform;
+}
+
+}
+declare module 'vona-module-a-serialization' {
+  
+        export interface InterceptorSerializerTransform {
+          /** @internal */
+          get scope(): ScopeModuleASerialization;
+        }
+
+          export interface InterceptorSerializerTransform {
+            get $beanFullName(): 'a-serialization.interceptor.serializerTransform';
+            get $onionName(): 'a-serialization:serializerTransform';
+          } 
+}
+/** interceptor: end */
 /** serializerTransform: begin */
 export * from '../bean/serializerTransform.sensitive.ts';
 import type { ISerializerTransformOptionsSensitive } from '../bean/serializerTransform.sensitive.ts';
