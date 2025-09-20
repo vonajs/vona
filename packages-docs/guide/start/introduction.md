@@ -44,8 +44,9 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 |MySQL|>=8|
 |Postgresql|>=17|
 
-* Redis: Required
-* MySQL/Postgresql: Choose what you want to use
+* `Redis`: VonaJS provides the following capabilities based on Redis:
+  - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
+* `MySQL/Postgresql`: Choose what you want to use
 
 ## Stay In Touch
 
