@@ -52,4 +52,14 @@ export class DtoSerializerTest {
     v.email(),
   )
   email5: string;
+
+  @Api.field(
+    v.serializerSensitive({
+      // eslint-disable-next-line
+      patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
+      patternTo: '$1****$3$4',
+    }),
+    v.email(),
+  )
+  email6: string;
 }

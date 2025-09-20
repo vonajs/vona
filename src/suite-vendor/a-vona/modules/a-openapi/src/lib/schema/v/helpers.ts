@@ -127,3 +127,15 @@ export function schemaSerializerTransform<T extends keyof ISerializerTransformRe
     });
   };
 }
+
+export function schemaSerializerSensitive(
+  options?: Partial<ISerializerTransformRecord['a-serialization:sensitive']>,
+) {
+  return function (schema: z.ZodType): z.ZodType {
+    return schema.openapi({
+      serializerTransforms: {
+        'a-serialization:sensitive': options,
+      },
+    });
+  };
+}
