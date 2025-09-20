@@ -15,7 +15,11 @@ export function Transform<T extends keyof ISerializerTransformRecord>(
   options?: Partial<ISerializerTransformRecord[T]>,
 ): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
-    const metadata: TypeOpenapiMetadata = { exclude: true };
+    const metadata: TypeOpenapiMetadata = {
+      serializerTransforms: {
+        [serializerTransformName]: options,
+      },
+    };
     mergeFieldOpenapiMetadata(target, prop as string, metadata);
   };
 }
