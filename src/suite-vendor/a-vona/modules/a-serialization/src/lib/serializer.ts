@@ -24,4 +24,17 @@ function Transform<T extends keyof ISerializerTransformRecord>(
   };
 }
 
-export const Serializer = { exclude: Exclude, transform: Transform };
+function Sensitive(
+  options?: Partial<ISerializerTransformRecord['a-serialization:sensitive']>,
+): PropertyDecorator {
+  return function (target: object, prop: MetadataKey) {
+    const metadata: TypeOpenapiMetadata = {
+      serializerTransforms: {
+        'a-serialization:sensitive': options,
+      },
+    };
+    mergeFieldOpenapiMetadata(target, prop as string, metadata);
+  };
+}
+
+export const Serializer = { exclude: Exclude, transform: Transform, sensitive: Sensitive };

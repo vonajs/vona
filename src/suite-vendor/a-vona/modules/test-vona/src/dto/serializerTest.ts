@@ -26,8 +26,16 @@ export class DtoSerializerTest {
   @Api.field(v.email())
   email2: string;
 
-  @SensitiveEmail()
+  @Serializer.sensitive({
+    // eslint-disable-next-line
+    patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
+    patternTo: '$1****$3$4',
+  })
+  @Api.field(v.email())
   email3: string;
+
+  @SensitiveEmail()
+  email4: string;
 
   @Api.field(
     v.openapi({
@@ -41,7 +49,7 @@ export class DtoSerializerTest {
     }),
     v.email(),
   )
-  email4: string;
+  email5: string;
 
   @Api.field(
     v.serializerTransform('a-serialization:sensitive', {
@@ -51,7 +59,7 @@ export class DtoSerializerTest {
     }),
     v.email(),
   )
-  email5: string;
+  email6: string;
 
   @Api.field(
     v.serializerSensitive({
@@ -61,5 +69,5 @@ export class DtoSerializerTest {
     }),
     v.email(),
   )
-  email6: string;
+  email7: string;
 }
