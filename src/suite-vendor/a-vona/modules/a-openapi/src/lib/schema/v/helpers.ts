@@ -115,6 +115,12 @@ export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
   };
 }
 
+export function schemaSerializerExclude() {
+  return function (schema: z.ZodType): z.ZodType {
+    return schema.openapi({ exclude: true });
+  };
+}
+
 export function schemaSerializerTransform<T extends keyof ISerializerTransformRecord>(
   serializerTransformName: T,
   options?: Partial<ISerializerTransformRecord[T]>,

@@ -12,6 +12,9 @@ export class DtoSerializerTest {
   @Api.field(v.min(6))
   password: string;
 
+  @Api.field(v.serializerExclude(), v.min(6))
+  password2: string;
+
   @Serializer.transform('test-vona:email')
   email: string;
 
