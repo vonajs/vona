@@ -10,4 +10,15 @@ export class DtoSerializerTest {
   @Serializer.exclude()
   @Api.field(v.min(6))
   password: string;
+
+  @Serializer.transform(
+    'a-serialization:sensitive',
+    {
+      // eslint-disable-next-line
+      patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
+      patternTo: '$1****$3$4',
+    },
+  )
+  @Api.field(v.email())
+  email: string;
 }
