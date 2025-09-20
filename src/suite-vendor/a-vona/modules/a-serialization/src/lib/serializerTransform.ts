@@ -1,6 +1,6 @@
-import type { IDecoratorSerializerOptions } from '../types/serializer.ts';
+import type { IDecoratorSerializerTransformOptions } from '../types/serializerTransform.ts';
 import { createBeanDecorator } from 'vona';
 
-export function SerializerTransform<T extends IDecoratorSerializerOptions>(options?: T): ClassDecorator {
+export function SerializerTransform<T extends IDecoratorSerializerTransformOptions>(options?: T): ClassDecorator {
   return createBeanDecorator('serializerTransform', options);
 }

@@ -6,10 +6,10 @@
   "vonaModule": {
     "dependencies": {},
     "onions": {
-      "serializer": {
-        "optionsGlobalInterfaceName": "IDecoratorSerializerOptions",
+      "serializerTransform": {
+        "optionsGlobalInterfaceName": "IDecoratorSerializerTransformOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-serialization",
-        "boilerplate": "cli/serializer/boilerplate"
+        "boilerplate": "cli/serializerTransform/boilerplate"
       }
     }
   },
