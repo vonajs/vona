@@ -1,6 +1,8 @@
 import type { IOpenApiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapiutils';
+import type z from 'zod';
 import { appMetadata, BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { $schema } from 'vona-module-a-openapi';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
 @Service()
@@ -55,5 +57,16 @@ export class ServiceBodyRes extends BeanBase {
     if (this.ctx.acceptJSON) return 'application/json';
     if (this.ctx.accepts('html') === 'html') return 'text/html';
     return 'application/octet-stream';
+  }
+
+  getResponseBodySchema(): z.ZodType | undefined {
+    const controller = this.ctx.getController();
+    if (!controller) return;
+    const handlerName = this.ctx.getHandlerName();
+    const options = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+    if (options?.bodySchema) return options.bodySchema;
+    const metaType = appMetadata.getDesignReturntype(controller.prototype, handlerName);
+    if (!metaType) return;
+    return $schema(metaType as any);
   }
 }
