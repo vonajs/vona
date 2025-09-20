@@ -2,6 +2,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { Api, v } from 'vona-module-a-openapi';
 import { Serializer } from 'vona-module-a-serialization';
 import { Dto } from 'vona-module-a-web';
+import { SensitiveEmail } from '../lib/serializer.ts';
 
 export interface IDtoOptionsSerializerTest extends IDecoratorDtoOptions {}
 
@@ -10,6 +11,9 @@ export class DtoSerializerTest {
   @Serializer.exclude()
   @Api.field(v.min(6))
   password: string;
+
+  @Serializer.transform('test-vona:email')
+  email: string;
 
   @Serializer.transform(
     'a-serialization:sensitive',
@@ -20,5 +24,8 @@ export class DtoSerializerTest {
     },
   )
   @Api.field(v.email())
-  email: string;
+  email2: string;
+
+  @SensitiveEmail()
+  email3: string;
 }
