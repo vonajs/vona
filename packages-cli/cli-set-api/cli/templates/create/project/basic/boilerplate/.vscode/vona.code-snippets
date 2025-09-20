@@ -143,5 +143,15 @@
       "}"
     ],
     "description": "record.host"
+  },
+  "findManyQueryTransform": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "findmanyquerytransform",
+    "body": [
+      "findManyQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {",
+      "  $0return undefined;"
+      "}"
+    ],
+    "description": "findManyQueryTransform"
   }
 }
