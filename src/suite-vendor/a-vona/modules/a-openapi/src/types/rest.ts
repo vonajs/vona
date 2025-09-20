@@ -19,7 +19,6 @@ export interface ISchemaObjectExtensionFieldRest {
 }
 
 export interface ISchemaObjectExtensionField {
-  exclude?: boolean;
   rest?: ISchemaObjectExtensionFieldRest;
   query?: ISchemaObjectExtensionFieldQuery;
   captcha?: ISchemaObjectExtensionFieldCaptcha;
