@@ -1,5 +1,18 @@
 # Quick Start
 
+## Prerequisites
+
+|Name|Version|
+|--|--|
+|Nodejs| >=24.8.0 |
+|Redis|>=7.2.6|
+|MySQL|>=8|
+|Postgresql|>=17|
+
+* `Redis`: VonaJS provides the following capabilities based on Redis:
+  - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
+* `MySQL/Postgresql`: Choose what you want to use
+
 ## Preparation
 
 1. Install command-line tools

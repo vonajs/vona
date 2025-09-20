@@ -37,7 +37,7 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 
 |Name|Version|
 |--|--|
-|Nodejs| >=24.1.0 |
+|Nodejs| >=24.8.0 |
 |Typescript| >=5.7.3 |
 |Koa|>=3.0.0|
 |Redis|>=7.2.6|
