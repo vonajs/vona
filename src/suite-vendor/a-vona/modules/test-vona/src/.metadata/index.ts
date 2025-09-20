@@ -1296,6 +1296,31 @@ declare module 'vona-module-test-vona' {
           } 
 }
 /** schedule: end */
+/** serializer: begin */
+export * from '../bean/serializer.mobile.ts';
+
+import { type IDecoratorSerializerOptions } from 'vona-module-a-serialization';
+declare module 'vona-module-a-serialization' {
+  
+    export interface ISerializerRecord {
+      'test-vona:mobile': IDecoratorSerializerOptions;
+    }
+
+  
+}
+declare module 'vona-module-test-vona' {
+  
+        export interface SerializerMobile {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface SerializerMobile {
+            get $beanFullName(): 'test-vona.serializer.mobile';
+            get $onionName(): 'test-vona:mobile';
+          } 
+}
+/** serializer: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.ts';
 
