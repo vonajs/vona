@@ -1,3 +1,4 @@
+import type { ISerializerTransformRecord } from 'vona-module-a-serialization';
 import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
 import { useApp } from 'vona';
 import { z } from 'zod';
@@ -111,5 +112,18 @@ export function schemaBigNumber() {
 export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({ captcha: options });
+  };
+}
+
+export function schemaSerializerTransform<T extends keyof ISerializerTransformRecord>(
+  serializerTransformName: T,
+  options?: Partial<ISerializerTransformRecord[T]>,
+) {
+  return function (schema: z.ZodType): z.ZodType {
+    return schema.openapi({
+      serializerTransforms: {
+        [serializerTransformName]: options,
+      },
+    });
   };
 }
