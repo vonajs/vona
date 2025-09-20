@@ -2,13 +2,16 @@ import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from 
 import { BeanBase } from 'vona';
 import { SerializerTransform } from '../lib/serializerTransform.ts';
 
-export type TypeSerializerTransformSensitiveValue = unknown;
+export type TypeSerializerTransformSensitiveValue = string;
 
 export type TypeSerializerTransformSensitiveData = unknown;
 
 export type TypeSerializerTransformSensitiveResult = TypeSerializerTransformSensitiveValue;
 
-export interface ISerializerTransformOptionsSensitive extends IDecoratorSerializerTransformOptions {}
+export interface ISerializerTransformOptionsSensitive extends IDecoratorSerializerTransformOptions {
+  patternFrom: RegExp;
+  patternTo: string;
+}
 
 @SerializerTransform<ISerializerTransformOptionsSensitive>()
 export class SerializerTransformSensitive extends BeanBase
@@ -20,8 +23,8 @@ export class SerializerTransformSensitive extends BeanBase
   async transform(
     value: TypeSerializerTransformSensitiveValue,
     _data: TypeSerializerTransformSensitiveData,
-    _options: ISerializerTransformOptionsSensitive,
+    options: ISerializerTransformOptionsSensitive,
   ): Promise<TypeSerializerTransformSensitiveResult> {
-    return value;
+    return value.replace(options.patternFrom, options.patternTo);
   }
 }
