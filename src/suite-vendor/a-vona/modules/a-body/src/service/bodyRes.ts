@@ -36,6 +36,7 @@ export class ServiceBodyRes extends BeanBase {
   }
 
   getResponseHttpCode(defaultCode: number = 200): number {
+    if (this.ctx.response.status !== 404) return this.ctx.response.status;
     let httpCode: number | undefined;
     const controller = this.ctx.getController();
     if (controller) {
@@ -47,6 +48,7 @@ export class ServiceBodyRes extends BeanBase {
   }
 
   getResponseContentType(): TypeResponseContentType {
+    if (this.ctx.response.type) return this.ctx.response.type as TypeResponseContentType;
     const controller = this.ctx.getController();
     if (controller) {
       const handlerName = this.ctx.getHandlerName();
