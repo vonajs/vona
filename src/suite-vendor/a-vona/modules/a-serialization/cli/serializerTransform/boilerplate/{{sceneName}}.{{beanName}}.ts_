@@ -12,7 +12,11 @@ export interface ISerializerTransformOptions<%=argv.beanNameCapitalize%> extends
 
 @SerializerTransform<ISerializerTransformOptions<%=argv.beanNameCapitalize%>>()
 export class SerializerTransform<%=argv.beanNameCapitalize%> extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransform<%=argv.beanNameCapitalize%>Value, TypeSerializerTransform<%=argv.beanNameCapitalize%>Data, TypeSerializerTransform<%=argv.beanNameCapitalize%>Result> {
+  implements ISerializerTransform<
+    TypeSerializerTransform<%=argv.beanNameCapitalize%>Value,
+    TypeSerializerTransform<%=argv.beanNameCapitalize%>Data,
+    TypeSerializerTransform<%=argv.beanNameCapitalize%>Result
+  > {
   async transform(
     value: TypeSerializerTransform<%=argv.beanNameCapitalize%>Value,
     _data: TypeSerializerTransform<%=argv.beanNameCapitalize%>Data,
