@@ -5,11 +5,11 @@ import type { IInterceptorOptionsSerializerTransform } from '../bean/interceptor
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
-  
-export interface IInterceptorRecordLocal {
-  'a-serialization:serializerTransform': IInterceptorOptionsSerializerTransform;
-}
+    export interface IInterceptorRecordGlobal {
+      'a-serialization:serializerTransform': IInterceptorOptionsSerializerTransform;
+    }
 
+  
 }
 declare module 'vona-module-a-serialization' {
   

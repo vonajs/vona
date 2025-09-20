@@ -8,7 +8,6 @@ export interface IInterceptorOptionsSerializerTransform extends IDecoratorInterc
 @Interceptor<IInterceptorOptionsSerializerTransform>({
   global: true,
   dependencies: 'a-body:bodyReq',
-  dependents: 'a-body:bodyRes',
 })
 export class InterceptorSerializerTransform extends BeanBase implements IInterceptorExecute {
   async execute(_options: IInterceptorOptionsSerializerTransform, next: Next) {
