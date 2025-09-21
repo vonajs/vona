@@ -1910,6 +1910,7 @@ export interface IApiPathPostRecord{
 '/test/vona/performAction/echo': undefined;
 '/test/vona/queue/pushAsync': undefined;
 '/test/vona/queue/push': undefined;
+'/test/vona/serializer/echoSimple': undefined;
 '/test/vona/summer': undefined;
 '/test/vona/tail': undefined;
 '/test/vona/transaction/fail': undefined;
