@@ -83,15 +83,15 @@ export class DtoSerializerTest {
   @Serializer.getter((data: DtoSerializerTest) => {
     return `${data.firstName} ${data.lastName}`;
   })
-  @Api.field()
+  @Api.field(v.optional())
   fullName: string;
 
   @Api.field(v.serializerGetter((data: DtoSerializerTest) => {
     return `${data.firstName} ${data.lastName}`;
-  }))
+  }), v.optional())
   fullName2: string;
 
-  @Api.field()
+  @Api.field(v.optional())
   get fullName3(): string {
     return `${this.firstName} ${this.lastName}`;
   }
