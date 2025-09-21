@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe('serializer.test.ts', () => {
+describe.only('serializer.test.ts', () => {
   it('action:serializer', async () => {
     await app.bean.executor.mockCtx(async () => {
       const data = {
@@ -22,7 +22,8 @@ describe('serializer.test.ts', () => {
       const res: DtoSerializerTest = await app.bean.executor.performAction('post', '/test/vona/serializer/echoSimple', {
         body: data,
       });
-      assert.equal(res.password, '123456');
+      assert.equal(res.password, undefined);
+      assert.equal(res.password2, undefined);
     });
   });
 });
