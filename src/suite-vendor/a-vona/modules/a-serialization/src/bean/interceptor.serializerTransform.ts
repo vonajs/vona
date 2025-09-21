@@ -60,15 +60,18 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
         dataPatch[key] = undefined;
         continue;
       }
-      // value
-      const value = data[key];
+      // valuePatch
+      let valuePatch = data[key];
       // inner
-      const valuePatch = await this._transform(value, keySchema);
-      if (valuePatch !== value) {
+      valuePatch = await this._transform(valuePatch, keySchema);
+      // serializerTransforms
+      if (metadata.serializerTransforms) {
+        // loop
+      }
+      // patch
+      if (valuePatch !== data[key]) {
         dataPatch[key] = valuePatch;
       }
-      // serializerTransforms
-      if (!metadata.serializerTransforms) continue;
     }
     if (!isEmptyObject(dataPatch)) {
       data = { ...data, ...dataPatch };
