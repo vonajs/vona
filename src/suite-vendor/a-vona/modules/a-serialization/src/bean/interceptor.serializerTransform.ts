@@ -24,55 +24,55 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
     return await this._transform(body, schema);
   }
 
-  async _transform(body: object, schema: z.ZodType | undefined) {
+  async _transform(data: object, schema: z.ZodType | undefined) {
     // only support array/object
-    if (!body || typeof body !== 'object' || !schema) return body;
+    if (!data || typeof data !== 'object' || !schema) return data;
     // schema
     const innerSchema = ZodMetadata.unwrapChained(schema);
     // array
-    if (Array.isArray(body) && innerSchema.type === 'array') {
-      return await this._transformArray(body, innerSchema as z.ZodArray);
+    if (Array.isArray(data) && innerSchema.type === 'array') {
+      return await this._transformArray(data, innerSchema as z.ZodArray);
     }
-    // body
-    if (!Array.isArray(body) && innerSchema.type === 'object') {
-      return await this._transformObject(body, innerSchema as z.ZodObject);
+    // object
+    if (!Array.isArray(data) && innerSchema.type === 'object') {
+      return await this._transformObject(data, innerSchema as z.ZodObject);
     }
     // others
-    return body;
+    return data;
   }
 
-  async _transformArray(body: object[], schema: z.ZodArray) {
+  async _transformArray(data: object[], schema: z.ZodArray) {
     const res: any[] = [];
-    for (const item of body) {
+    for (const item of data) {
       res.push(await this._transform(item, schema.def.element as any));
     }
     return res;
   }
 
-  async _transformObject(body: object, schema: z.ZodObject) {
-    const bodyPatch = {};
+  async _transformObject(data: object, schema: z.ZodObject) {
+    const dataPatch = {};
     for (const key in schema.shape) {
       const keySchema = schema.shape[key];
       const metadata: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(keySchema);
       if (!metadata) continue;
       // exclude
       if (metadata.exclude) {
-        bodyPatch[key] = undefined;
+        dataPatch[key] = undefined;
         continue;
       }
       // value
-      const value = body[key];
+      const value = data[key];
       // inner
       const valuePatch = await this._transform(value, keySchema);
       if (valuePatch !== value) {
-        bodyPatch[key] = valuePatch;
+        dataPatch[key] = valuePatch;
       }
       // serializerTransforms
       if (!metadata.serializerTransforms) continue;
     }
-    if (!isEmptyObject(bodyPatch)) {
-      body = { ...body, ...bodyPatch };
+    if (!isEmptyObject(dataPatch)) {
+      data = { ...data, ...dataPatch };
     }
-    return body;
+    return data;
   }
 }
