@@ -1,6 +1,7 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapi';
+import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { DtoSerializerTest } from '../dto/serializerTest.ts';
 
@@ -10,6 +11,7 @@ export interface IControllerOptionsSerializer extends IDecoratorControllerOption
 export class ControllerSerializer extends BeanBase {
   @Web.post('echoSimple')
   @Api.body(DtoSerializerTest)
+  @Passport.public()
   echoSimple(@Arg.body() data: DtoSerializerTest) {
     return data;
   }
