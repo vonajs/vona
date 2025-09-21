@@ -58,7 +58,6 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
     if (!isEmptyObject(bodyPatch)) {
       body = { ...body, ...bodyPatch };
     }
-    console.log(innerSchema);
     return body;
   }
 }
