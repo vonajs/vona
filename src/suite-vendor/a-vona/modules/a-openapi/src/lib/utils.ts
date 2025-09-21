@@ -45,7 +45,7 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
 }
 
 // fieldRule maybe undefined
-export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRule?: TypeOpenapiMetadata | z.ZodType) {
+export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRule?: TypeOpenapiMetadata | z.ZodType): TypeDecoratorRules {
   // rules
   const rules = getTargetDecoratorRules(target);
   // rule
@@ -73,6 +73,7 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
       }
     }
   }
+  return rules;
 }
 
 export function prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
