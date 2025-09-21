@@ -7,6 +7,9 @@ export interface ISerializerTransform<VALUE = unknown, DATA = unknown, RESULT = 
   transform(value: VALUE, data: DATA, options: IDecoratorSerializerTransformOptions): Promise<RESULT>;
 }
 
+export type TypeSerializerTransformGetter =
+  <VALUE = unknown, DATA = unknown, RESULT = VALUE>(value: VALUE, data: DATA) => RESULT;
+
 export interface IDecoratorSerializerTransformOptions {}
 
 declare module 'vona-module-a-onion' {

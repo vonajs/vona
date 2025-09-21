@@ -25,19 +25,32 @@ declare module 'vona-module-a-serialization' {
 }
 /** interceptor: end */
 /** serializerTransform: begin */
+export * from '../bean/serializerTransform.getter.ts';
 export * from '../bean/serializerTransform.sensitive.ts';
+import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
 import type { ISerializerTransformOptionsSensitive } from '../bean/serializerTransform.sensitive.ts';
 import 'vona';
 declare module 'vona-module-a-serialization' {
   
     export interface ISerializerTransformRecord {
-      'a-serialization:sensitive': ISerializerTransformOptionsSensitive;
+      'a-serialization:getter': ISerializerTransformOptionsGetter;
+'a-serialization:sensitive': ISerializerTransformOptionsSensitive;
     }
 
   
 }
 declare module 'vona-module-a-serialization' {
   
+        export interface SerializerTransformGetter {
+          /** @internal */
+          get scope(): ScopeModuleASerialization;
+        }
+
+          export interface SerializerTransformGetter {
+            get $beanFullName(): 'a-serialization.serializerTransform.getter';
+            get $onionName(): 'a-serialization:getter';
+          }
+
         export interface SerializerTransformSensitive {
           /** @internal */
           get scope(): ScopeModuleASerialization;

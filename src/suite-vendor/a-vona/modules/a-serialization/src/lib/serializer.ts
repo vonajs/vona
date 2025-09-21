@@ -1,6 +1,6 @@
 import type { MetadataKey } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type { ISerializerTransformRecord } from '../types/serializerTransform.ts';
+import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
 import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
 
 function Exclude(): PropertyDecorator {
@@ -37,4 +37,15 @@ function Sensitive(
   };
 }
 
-export const Serializer = { exclude: Exclude, transform: Transform, sensitive: Sensitive };
+function Getter(getter: TypeSerializerTransformGetter): PropertyDecorator {
+  return function (target: object, prop: MetadataKey) {
+    const metadata: TypeOpenapiMetadata = {
+      serializerTransforms: {
+        'a-serialization:getter': { getter },
+      },
+    };
+    mergeFieldOpenapiMetadata(target, prop as string, metadata);
+  };
+}
+
+export const Serializer = { exclude: Exclude, transform: Transform, sensitive: Sensitive, getter: Getter };
