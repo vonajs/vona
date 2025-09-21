@@ -1,4 +1,4 @@
-import type { ISerializerTransformRecord } from 'vona-module-a-serialization';
+import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from 'vona-module-a-serialization';
 import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
 import { useApp } from 'vona';
 import { z } from 'zod';
@@ -135,12 +135,22 @@ export function schemaSerializerTransform<T extends keyof ISerializerTransformRe
 }
 
 export function schemaSerializerSensitive(
-  options?: Partial<ISerializerTransformRecord['a-serialization:sensitive']>,
+  options: ISerializerTransformRecord['a-serialization:sensitive'],
 ) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       serializerTransforms: {
         'a-serialization:sensitive': options,
+      },
+    });
+  };
+}
+
+export function schemaSerializerGetter(getter: TypeSerializerTransformGetter) {
+  return function (schema: z.ZodType): z.ZodType {
+    return schema.openapi({
+      serializerTransforms: {
+        'a-serialization:getter': { getter },
       },
     });
   };

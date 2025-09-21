@@ -25,7 +25,7 @@ function Transform<T extends keyof ISerializerTransformRecord>(
 }
 
 function Sensitive(
-  options?: Partial<ISerializerTransformRecord['a-serialization:sensitive']>,
+  options: ISerializerTransformRecord['a-serialization:sensitive'],
 ): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
     const metadata: TypeOpenapiMetadata = {
