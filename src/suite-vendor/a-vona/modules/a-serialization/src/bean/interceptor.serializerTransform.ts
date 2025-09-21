@@ -14,6 +14,9 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
     this.bean.onion.interceptor.inspect();
     // next
     const body = await next();
+    if (!body) return body;
+    // schema
+    const schema = this.$scope.body.service.bodyRes.getResponseBodySchema();
     console.log(body);
     return body;
   }

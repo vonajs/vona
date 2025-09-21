@@ -1,12 +1,12 @@
 import type { IOpenApiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapiutils';
 import type z from 'zod';
 import { appMetadata, BeanBase } from 'vona';
-import { Service } from 'vona-module-a-bean';
+import { Bean } from 'vona-module-a-bean';
 import { $schema } from 'vona-module-a-openapi';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
-@Service()
-export class ServiceBodyRes extends BeanBase {
+@Bean()
+export class BeanBodyRes extends BeanBase {
   async setHeaders() {
     const headers = this.getResponseHeaders();
     if (!headers) return;
