@@ -2,7 +2,6 @@ import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField } from 'vona-module-a-openapi';
 import type z from 'zod';
-import type { ZodArray } from 'zod';
 import { isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase } from 'vona';
@@ -19,8 +18,6 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
     this.bean.onion.interceptor.inspect();
     // next
     const body = await next();
-    // only support array/object
-    if (!body || typeof body !== 'object') return body;
     // schema
     const schema = this.bean.bodyRes.getResponseBodySchema();
     // transform
@@ -28,29 +25,47 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
   }
 
   async _transform(body: object, schema: z.ZodType | undefined) {
-    if (!schema) return body;
+    // only support array/object
+    if (!body || typeof body !== 'object' || !schema) return body;
+    // schema
     const innerSchema = ZodMetadata.unwrapChained(schema);
     // array
-    if (innerSchema.type === 'array') {
-      if (!Array.isArray(body)) return body;
-      const res: any[] = [];
-      for (const item of body) {
-        res.push(await this._transform(item, (innerSchema as ZodArray).def.element as any));
-      }
-      return res;
+    if (Array.isArray(body) && innerSchema.type === 'array') {
+      return await this._transformArray(body, innerSchema as z.ZodArray);
     }
     // body
-    if (innerSchema.type !== 'object') return body;
-    const innerSchemaObj = innerSchema as z.ZodObject;
+    if (!Array.isArray(body) && innerSchema.type === 'object') {
+      return await this._transformObject(body, innerSchema as z.ZodObject);
+    }
+    // others
+    return body;
+  }
+
+  async _transformArray(body: object[], schema: z.ZodArray) {
+    const res: any[] = [];
+    for (const item of body) {
+      res.push(await this._transform(item, schema.def.element as any));
+    }
+    return res;
+  }
+
+  async _transformObject(body: object, schema: z.ZodObject) {
     const bodyPatch = {};
-    for (const key in innerSchemaObj.shape) {
-      const keySchema = innerSchemaObj.shape[key];
+    for (const key in schema.shape) {
+      const keySchema = schema.shape[key];
       const metadata: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(keySchema);
       if (!metadata) continue;
       // exclude
       if (metadata.exclude) {
         bodyPatch[key] = undefined;
         continue;
+      }
+      // value
+      const value = body[key];
+      // inner
+      const valuePatch = await this._transform(value, keySchema);
+      if (valuePatch !== value) {
+        bodyPatch[key] = valuePatch;
       }
       // serializerTransforms
       if (!metadata.serializerTransforms) continue;
