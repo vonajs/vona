@@ -27,7 +27,7 @@ export interface IInterceptorOptionsBodyReq extends IDecoratorInterceptorOptions
 export class InterceptorBodyReq extends BeanBase implements IInterceptorExecute {
   async execute(options: IInterceptorOptionsBodyReq, next: Next) {
     // parse
-    await this.scope.service.bodyReq.parse(options.parser);
+    await this.bean.bodyReq.parse(options.parser);
     // next
     return next();
   }

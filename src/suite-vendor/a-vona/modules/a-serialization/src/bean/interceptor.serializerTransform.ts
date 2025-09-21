@@ -16,7 +16,7 @@ export class InterceptorSerializerTransform extends BeanBase implements IInterce
     const body = await next();
     if (!body) return body;
     // schema
-    const schema = this.$scope.body.service.bodyRes.getResponseBodySchema();
+    const schema = this.bean.bodyRes.getResponseBodySchema();
     console.log(body);
     return body;
   }
