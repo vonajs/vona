@@ -73,4 +73,26 @@ export class DtoSerializerTest {
     v.email(),
   )
   email7: string;
+
+  @Api.field()
+  firstName: string;
+
+  @Api.field()
+  lastName: string;
+
+  @Serializer.getter((data: DtoSerializerTest) => {
+    return `${data.firstName} ${data.lastName}`;
+  })
+  @Api.field()
+  fullName: string;
+
+  @Api.field(v.serializerGetter((data: DtoSerializerTest) => {
+    return `${data.firstName} ${data.lastName}`;
+  }))
+  fullName2: string;
+
+  @Api.field()
+  get fullName3(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }

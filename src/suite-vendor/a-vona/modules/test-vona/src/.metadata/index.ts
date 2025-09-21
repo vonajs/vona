@@ -1542,6 +1542,7 @@ export * from '../controller/passport.ts';
 export * from '../controller/performAction.ts';
 export * from '../controller/post.ts';
 export * from '../controller/queue.ts';
+export * from '../controller/serializer.ts';
 export * from '../controller/summer.ts';
 export * from '../controller/tail.ts';
 export * from '../controller/transaction.ts';
@@ -1558,6 +1559,7 @@ import type { IControllerOptionsPassport } from '../controller/passport.ts';
 import type { IControllerOptionsPerformAction } from '../controller/performAction.ts';
 import type { IControllerOptionsPost } from '../controller/post.ts';
 import type { IControllerOptionsQueue } from '../controller/queue.ts';
+import type { IControllerOptionsSerializer } from '../controller/serializer.ts';
 import type { IControllerOptionsSummer } from '../controller/summer.ts';
 import type { IControllerOptionsTail } from '../controller/tail.ts';
 import type { IControllerOptionsTransaction } from '../controller/transaction.ts';
@@ -1578,6 +1580,7 @@ declare module 'vona-module-a-web' {
 'test-vona:performAction': IControllerOptionsPerformAction;
 'test-vona:post': IControllerOptionsPost;
 'test-vona:queue': IControllerOptionsQueue;
+'test-vona:serializer': IControllerOptionsSerializer;
 'test-vona:summer': IControllerOptionsSummer;
 'test-vona:tail': IControllerOptionsTail;
 'test-vona:transaction': IControllerOptionsTransaction;
@@ -1708,6 +1711,16 @@ declare module 'vona-module-test-vona' {
             get $onionName(): 'test-vona:queue';
           }
 
+        export interface ControllerSerializer {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface ControllerSerializer {
+            get $beanFullName(): 'test-vona.controller.serializer';
+            get $onionName(): 'test-vona:serializer';
+          }
+
         export interface ControllerSummer {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -1775,6 +1788,8 @@ import type { ControllerPost } from '../controller/post.ts';
 // @ts-ignore ignore
 import type { ControllerQueue } from '../controller/queue.ts';
 // @ts-ignore ignore
+import type { ControllerSerializer } from '../controller/serializer.ts';
+// @ts-ignore ignore
 import type { ControllerSummer } from '../controller/summer.ts';
 // @ts-ignore ignore
 import type { ControllerTail } from '../controller/tail.ts';
@@ -1830,6 +1845,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IControllerOptionsQueue {
       actions?: TypeControllerOptionsActions<ControllerQueue>;
+    }
+
+    export interface IControllerOptionsSerializer {
+      actions?: TypeControllerOptionsActions<ControllerSerializer>;
     }
 
     export interface IControllerOptionsSummer {
