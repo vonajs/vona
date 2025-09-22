@@ -1,8 +1,9 @@
 import type { ISchemaObjectExtensionField } from 'vona-module-a-openapi';
 import type z from 'zod';
+import type { ISerializerTransform, ISerializerTransformRecord } from '../types/serializerTransform.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
-import { BeanBase } from 'vona';
+import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 @Bean()
@@ -50,6 +51,20 @@ export class BeanSerializer extends BeanBase {
       // serializerTransforms
       if (metadata.serializerTransforms) {
         // loop
+        for (const transformName in metadata.serializerTransforms) {
+          const transformOptions = metadata.serializerTransforms[transformName];
+          const options = this.bean.onion.serializerTransform.getOnionOptionsDynamic(
+            transformName as keyof ISerializerTransformRecord,
+            transformOptions,
+          );
+          // execute
+          const beanFullName = beanFullNameFromOnionName(transformName, 'serializerTransform');
+          const beanInstance = this.bean._getBean<ISerializerTransform>(beanFullName as any);
+          if (!beanInstance) {
+            throw new Error(`serializerTransform bean not found: ${beanFullName}`);
+          }
+          valuePatch = await beanInstance.transform(valuePatch, data, options);
+        }
       }
       // patch
       if (valuePatch !== data[key]) {
