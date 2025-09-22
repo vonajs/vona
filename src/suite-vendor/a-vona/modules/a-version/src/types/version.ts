@@ -1,4 +1,5 @@
-import type { ConfigInstanceBase, IInstanceRecord } from 'vona';
+import type { IInstanceRecord } from 'vona';
+import type { ConfigInstanceBase } from 'vona-module-a-instance';
 
 export interface IMetaVersionOptions {
   scene: 'update' | 'init' | 'test';

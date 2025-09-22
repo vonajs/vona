@@ -1,7 +1,6 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
 import type { ConfigLogger, IBeanScopeConfig } from '../../index.ts';
 import type { PowerPartial } from '../utils/powerPartial.ts';
-import type { ConfigInstanceBase } from './instance.ts';
 
 // @ts-ignore ignore the throw type check of 'development'
 export interface VonaConfig {
@@ -34,7 +33,6 @@ export interface VonaConfig {
   logger: ConfigLogger;
   //
   modules: IBeanScopeConfig;
-  instances: ConfigInstanceBase[];
 }
 
 export type VonaConfigOptional = PowerPartial<VonaConfig>;

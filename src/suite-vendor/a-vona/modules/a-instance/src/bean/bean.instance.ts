@@ -1,5 +1,6 @@
-import type { ConfigInstanceBase, IInstanceRecord, VonaConfig } from 'vona';
+import type { IInstanceRecord, VonaConfig } from 'vona';
 import type { EntityInstance } from '../entity/instance.ts';
+import type { ConfigInstanceBase } from '../types/instance.ts';
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -61,9 +62,13 @@ export class BeanInstance extends BeanBase {
       config: JSON.stringify(configInstanceBase.config || {}),
       disabled: false,
     } as EntityInstance;
+    // id
+    if (configInstanceBase.id) {
+      instance.id = configInstanceBase.id;
+    }
+    // standalone
     if (configInstanceBase.standalone) {
       if (!configInstanceBase.id) throw new Error(`should specify id for standalone instance: ${configInstanceBase.name}`);
-      instance.id = configInstanceBase.id;
       instance.standalone = configInstanceBase.standalone;
     }
     return await this.modelInstance.insert(instance);

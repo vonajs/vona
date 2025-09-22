@@ -60,7 +60,6 @@ export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaCon
     },
     logger,
     //
-    instances: [],
     modules: {},
   };
 }

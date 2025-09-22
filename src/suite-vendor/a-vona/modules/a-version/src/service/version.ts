@@ -1,4 +1,5 @@
-import type { ConfigInstanceBase, IInstanceRecord } from 'vona';
+import type { IInstanceRecord } from 'vona';
+import type { ConfigInstanceBase } from 'vona-module-a-instance';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';

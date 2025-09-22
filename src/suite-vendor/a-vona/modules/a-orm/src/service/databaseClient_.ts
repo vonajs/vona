@@ -120,5 +120,6 @@ export class ServiceDatabaseClient extends BeanBase {
     this.configDatabase.clients[this.clientName] = config;
     // reload
     await this.reload(config);
+    await this.scope.service.database.reloadClients(this.clientName, config);
   }
 }
