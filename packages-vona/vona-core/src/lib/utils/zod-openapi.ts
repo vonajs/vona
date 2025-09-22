@@ -1,4 +1,4 @@
-import { hashkey, isNil } from '@cabloy/utils';
+import { hashkey, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { extendZodWithOpenApi } from '@cabloy/zod-to-openapi';
 import { z } from 'zod';
@@ -14,7 +14,10 @@ export function zodExtendOpenApi() {
     if (!refId) return openapiOriginal.call(this, ...args);
     // metadata
     const metadata = args[0];
-    if (isNil(metadata)) return openapiOriginal.call(this, ...args);
+    if (isEmptyObject(metadata)) {
+      return this;
+      // return openapiOriginal.call(this, ...args);
+    }
     const options = args[1];
     // refId: update
     const refIdNew = `${refId}_${hashkey(metadata)}`;

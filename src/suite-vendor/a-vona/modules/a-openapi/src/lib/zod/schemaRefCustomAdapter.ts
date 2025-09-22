@@ -13,10 +13,7 @@ function _patchGenerator(generator: any) {
   const gen = Object.getPrototypeOf(cast(generator).generator);
   gen.generateSchemaWithRef = function (zodSchema) {
     // schema ref
-    const lazySchema = ZodMetadata.getLazySchema(zodSchema);
-    if (lazySchema) {
-      zodSchema = lazySchema();
-    }
+    zodSchema = ZodMetadata.resolveLazySchema(zodSchema);
     const refId = ZodMetadata.getRefId(zodSchema);
     if (!refId) {
       return this.generateSimpleSchema(zodSchema);

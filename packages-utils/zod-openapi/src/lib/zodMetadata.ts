@@ -25,6 +25,15 @@ export class ZodMetadata {
     return (zodSchema as z.ZodLazy)._zod.def.getter ?? innerSchema._zod.def.getter;
   }
 
+  static resolveLazySchema<T>(zodSchema: z.ZodType<T>) {
+    const getter = this.getLazySchema(zodSchema);
+    if (!getter) return getter;
+    // metadata: first
+    const metadata = this.getOpenapiMetadata(zodSchema);
+    zodSchema = getter() as z.ZodType<T>;
+    return metadata ? zodSchema.openapi(metadata) : zodSchema;
+  }
+
   static getRefId<T>(zodSchema: z.ZodType<T>): string | undefined {
     return Metadata.getRefId(zodSchema);
   }

@@ -7,18 +7,21 @@ export interface IDtoOptionsSerializerLazy extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsSerializerLazy>()
 export class DtoSerializerLazy {
+  @Api.field(
+    v.serializerGetter((value: DtoSerializerSimple) => {
+      return { ...value, password: '111111' };
+    }),
+    v.optional(),
+    v.lazy(
+      () => {
+        return DtoSerializerSimple;
+      },
+    ),
+  )
+  simpleLazy: DtoSerializerSimple;
+
   @Api.field(v.serializerGetter((value: DtoSerializerSimple) => {
     return { ...value, password: '111111' };
   }), v.object(DtoSerializerSimple))
   simple: DtoSerializerSimple;
-
-  @Api.field(v.lazy(
-    v.serializerGetter((value: DtoSerializerSimple) => {
-      return { ...value, password: '111111' };
-    }),
-    () => {
-      return DtoSerializerSimple;
-    },
-  ))
-  simpleLazy: DtoSerializerSimple;
 }
