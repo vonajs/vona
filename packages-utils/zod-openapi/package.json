@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/zod-openapi",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "zod-openapi",
   "publishConfig": {
     "access": "public"
