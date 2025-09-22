@@ -24,6 +24,31 @@ declare module 'vona-module-a-serialization' {
           } 
 }
 /** interceptor: end */
+/** bean: begin */
+export * from '../bean/bean.serializer.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-serialization' {
+  
+        export interface BeanSerializer {
+          /** @internal */
+          get scope(): ScopeModuleASerialization;
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import type { BeanSerializer } from '../bean/bean.serializer.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'serializer': BeanSerializer;
+  }
+}
+/** bean: end */
 /** serializerTransform: begin */
 export * from '../bean/serializerTransform.getter.ts';
 export * from '../bean/serializerTransform.sensitive.ts';
