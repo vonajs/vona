@@ -4,23 +4,23 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
 describe('serializer.test.ts', () => {
-  it('action:serializer', async () => {
+  const dataSimple = {
+    password: '123456',
+    password2: '123456',
+    email: 'kevin@cabloy.com',
+    email2: 'kevin@cabloy.com',
+    email3: 'kevin@cabloy.com',
+    email4: 'kevin@cabloy.com',
+    email5: 'kevin@cabloy.com',
+    email6: 'kevin@cabloy.com',
+    email7: 'kevin@cabloy.com',
+    firstName: 'k',
+    lastName: 'v',
+  } as DtoSerializerSimple;
+  it('action:serializerSimple', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const data = {
-        password: '123456',
-        password2: '123456',
-        email: 'kevin@cabloy.com',
-        email2: 'kevin@cabloy.com',
-        email3: 'kevin@cabloy.com',
-        email4: 'kevin@cabloy.com',
-        email5: 'kevin@cabloy.com',
-        email6: 'kevin@cabloy.com',
-        email7: 'kevin@cabloy.com',
-        firstName: 'k',
-        lastName: 'v',
-      } as DtoSerializerSimple;
       const res: DtoSerializerSimple = await app.bean.executor.performAction('post', '/test/vona/serializer/echoSimple', {
-        body: data,
+        body: dataSimple,
       });
       assert.equal(res.password, undefined);
       assert.equal(res.password2, undefined);
@@ -34,6 +34,14 @@ describe('serializer.test.ts', () => {
       assert.equal(res.fullName, 'k v');
       assert.equal(res.fullName2, 'k v');
       assert.equal(res.fullName3, 'k v');
+    });
+  });
+  it('action:serializerArray', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      const res: DtoSerializerSimple = await app.bean.executor.performAction('post', '/test/vona/serializer/echoArray', {
+        body: [dataSimple],
+      });
+      assert.equal(res[0].password, undefined);
     });
   });
 });
