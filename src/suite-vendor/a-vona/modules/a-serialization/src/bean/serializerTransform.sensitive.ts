@@ -2,7 +2,7 @@ import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from 
 import { BeanBase } from 'vona';
 import { SerializerTransform } from '../lib/serializerTransform.ts';
 
-export type TypeSerializerTransformSensitiveValue = string;
+export type TypeSerializerTransformSensitiveValue = string | undefined;
 
 export type TypeSerializerTransformSensitiveData = unknown;
 
@@ -25,6 +25,6 @@ export class SerializerTransformSensitive extends BeanBase
     _data: TypeSerializerTransformSensitiveData,
     options: ISerializerTransformOptionsSensitive,
   ): Promise<TypeSerializerTransformSensitiveResult> {
-    return value.replace(options.patternFrom, options.patternTo);
+    return value?.replace(options.patternFrom, options.patternTo);
   }
 }
