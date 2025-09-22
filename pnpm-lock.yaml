@@ -36,7 +36,7 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       '@cabloy/zod-openapi':
-        specifier: ^1.0.1
+        specifier: ^1.0.2
         version: link:packages-utils/zod-openapi
       '@cabloy/zod-to-openapi':
         specifier: ^8.1.1
@@ -355,7 +355,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.50
+        specifier: ^6.0.51
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -870,7 +870,7 @@ importers:
         specifier: ^5.0.51
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.103
+        specifier: ^5.0.104
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
