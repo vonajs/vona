@@ -124,6 +124,8 @@ export class ServiceOpenapi extends BeanBase {
   private _translateSchema(schema: any, generateJsonScene: TypeGenerateJsonScene) {
     if (!schema) return;
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
+    // serializerTransforms
+    delete schema.serializerTransforms;
     // schema
     this._translateStrings(schema, ['title', 'description']);
     if (generateJsonScene === 'api' && !schema.description && schema.title) {
