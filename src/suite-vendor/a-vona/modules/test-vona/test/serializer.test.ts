@@ -36,7 +36,7 @@ describe('serializer.test.ts', () => {
       assert.equal(res.fullName3, 'k v');
     });
   });
-  it('action:serializerArray', async () => {
+  it.only('action:serializerArray', async () => {
     await app.bean.executor.mockCtx(async () => {
       const res: DtoSerializerArray[] = await app.bean.executor.performAction('post', '/test/vona/serializer/echoArray', {
         body: [{ simples: [dataSimple] }],

@@ -80,14 +80,14 @@ export class DtoSerializerSimple {
   @Api.field()
   lastName: string;
 
-  @Serializer.getter((data: DtoSerializerSimple) => {
-    return `${data.firstName} ${data.lastName}`;
+  @Serializer.getter(function (this: DtoSerializerSimple) {
+    return `${this.firstName} ${this.lastName}`;
   })
   @Api.field(v.optional())
   fullName: string;
 
-  @Api.field(v.serializerGetter((data: DtoSerializerSimple) => {
-    return `${data.firstName} ${data.lastName}`;
+  @Api.field(v.serializerGetter(function (this: DtoSerializerSimple) {
+    return `${this.firstName} ${this.lastName}`;
   }), v.optional())
   fullName2: string;
 
