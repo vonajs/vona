@@ -11,6 +11,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       await this.bean.model.createTable(entity.$table, table => {
         table.basicFieldsSimple({ iid: false });
         table.boolean(entity.disabled).defaultTo(entity.$default.disabled);
+        table.boolean(entity.standalone).defaultTo(entity.$default.standalone);
         table.string(entity.name, 255);
         table.string(entity.title, 255);
         table.text(entity.config);

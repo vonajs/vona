@@ -12,4 +12,6 @@ export interface ConfigInstanceBase {
   password?: string;
   title?: string;
   config?: VonaConfigOptional;
+  id?: number;
+  standalone?: boolean;
 }
