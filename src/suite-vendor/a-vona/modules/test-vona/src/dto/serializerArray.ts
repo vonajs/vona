@@ -14,8 +14,8 @@ export class DtoSerializerArray {
         password: '111111',
       };
     });
-  }), v.title('Simple'), v.array(v.lazy(() => DtoSerializerSimple)))
-  simplesLazy: DtoSerializerSimple[];
+  }), v.title('Simple'), v.array(DtoSerializerSimple))
+  simples: DtoSerializerSimple[];
 
   @Api.field(v.serializerGetter((value: DtoSerializerSimple[], _data: DtoSerializerArray) => {
     return value.map(item => {
@@ -24,6 +24,6 @@ export class DtoSerializerArray {
         password: '111111',
       };
     });
-  }), v.title('Simple'), v.array(DtoSerializerSimple))
-  simples: DtoSerializerSimple[];
+  }), v.title('Simple'), v.array(v.lazy(() => DtoSerializerSimple)))
+  simplesLazy: DtoSerializerSimple[];
 }
