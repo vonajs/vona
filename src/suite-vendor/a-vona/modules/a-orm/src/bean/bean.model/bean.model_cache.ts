@@ -26,7 +26,7 @@ import type {
 import type { TypeQueueDoubleDeleteJobData } from '../queue.doubleDelete.ts';
 import { isNil } from '@cabloy/utils';
 import BigNumber from 'bignumber.js';
-import { cast } from 'vona';
+import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
 import { ServiceCacheQuery } from '../../service/cacheQuery_.ts';
@@ -383,7 +383,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         params.columns = options?.columns as any;
       }
       // select
-      const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
+      const options2 = deepExtend({}, options, { columns: undefined, cache: { emptyArrayAsNull: true } });
       const items = await this.__select_raw(table, params, options2);
       return items[0];
     }
@@ -447,8 +447,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         id = id2;
       } else {
         const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
-        options = Object.assign({}, options, { where: undefined });
-        const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
+        const options2 = deepExtend({}, options, { where: undefined, cache: { emptyArrayAsNull: true } });
+        const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options2);
         if (items.length === 0) {
         // donothing
           return;
@@ -506,7 +506,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     let id = this.__checkCacheKeyValid(where, table);
     if (isNil(id)) {
       // check where and get id
-      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
+      const options2 = deepExtend({}, options, { cache: { emptyArrayAsNull: true } });
+      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options2);
       if (items.length === 0) {
         // donothing
         return;
