@@ -24,6 +24,14 @@ describe('serializer.test.ts', () => {
       });
       assert.equal(res.password, undefined);
       assert.equal(res.password2, undefined);
+      assert.equal(res.email, 'k****n@cabloy.com');
+      assert.equal(res.email2, 'k****n@cabloy.com');
+      assert.equal(res.email3, 'k****n@cabloy.com');
+      assert.equal(res.email4, 'k****n@cabloy.com');
+      assert.equal(res.email5, 'k****n@cabloy.com');
+      assert.equal(res.email6, 'k****n@cabloy.com');
+      assert.equal(res.email7, 'k****n@cabloy.com');
+      assert.equal(res.fullName, '');
     });
   });
 });

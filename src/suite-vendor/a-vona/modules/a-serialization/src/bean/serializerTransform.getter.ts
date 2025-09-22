@@ -20,10 +20,10 @@ export class SerializerTransformGetter extends BeanBase
     TypeSerializerTransformGetterResult
   > {
   async transform(
-    value: TypeSerializerTransformGetterValue,
-    _data: TypeSerializerTransformGetterData,
-    _options: ISerializerTransformOptionsGetter,
+    _value: TypeSerializerTransformGetterValue,
+    data: TypeSerializerTransformGetterData,
+    options: ISerializerTransformOptionsGetter,
   ): Promise<TypeSerializerTransformGetterResult> {
-    return value;
+    return options.getter.call(data, data);
   }
 }
