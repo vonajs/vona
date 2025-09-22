@@ -363,7 +363,7 @@ export class ServiceOpenapi extends BeanBase {
         if (argumentType === 'body') {
           // body
           request.body = {
-            required: !schema.isOptional(),
+            required: !schema.safeParse(undefined).success,
             content: {
               'application/json': {
                 schema,
