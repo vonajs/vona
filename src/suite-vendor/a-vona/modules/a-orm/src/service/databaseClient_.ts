@@ -116,7 +116,7 @@ export class ServiceDatabaseClient extends BeanBase {
     //   * should not use this.clientConfig.connection, because password is hidden
     const config = this.getClientConfig(this.clientName, true);
     config.connection = Object.assign({}, config.connection, connDatabaseName);
-    // only used by startup, so no consider that workders broadcast
+    // only used by startup, so no consider that workers broadcast
     this.configDatabase.clients[this.clientName] = config;
     // reload
     await this.reload(config);
