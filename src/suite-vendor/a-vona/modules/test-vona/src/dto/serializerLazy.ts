@@ -11,8 +11,10 @@ export class DtoSerializerLazy {
     v.serializerGetter((value: DtoSerializerSimple) => {
       return { ...value, password: '111111' };
     }),
+    v.title('title'),
     v.optional(),
     v.lazy(
+      v.description('description'),
       () => {
         return DtoSerializerSimple;
       },

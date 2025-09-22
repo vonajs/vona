@@ -27,7 +27,7 @@ export class ZodMetadata {
 
   static resolveLazySchema<T>(zodSchema: z.ZodType<T>) {
     const getter = this.getLazySchema(zodSchema);
-    if (!getter) return getter;
+    if (!getter) return zodSchema;
     // metadata: first
     const metadata = this.getOpenapiMetadata(zodSchema);
     zodSchema = getter() as z.ZodType<T>;
