@@ -336,6 +336,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // cache
     const cache = this.cacheQuery.getInstance(table);
     const items = await cache.get(key, {
+      ...options?.cache,
       get: async () => {
         return await super._select(table, params, options, builder);
       },
