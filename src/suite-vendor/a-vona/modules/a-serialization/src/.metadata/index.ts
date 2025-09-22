@@ -1,26 +1,26 @@
 /* eslint-disable */
 /** interceptor: begin */
-export * from '../bean/interceptor.serializerTransform.ts';
-import type { IInterceptorOptionsSerializerTransform } from '../bean/interceptor.serializerTransform.ts';
+export * from '../bean/interceptor.serializer.ts';
+import type { IInterceptorOptionsSerializer } from '../bean/interceptor.serializer.ts';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
   
 export interface IInterceptorRecordLocal {
-  'a-serialization:serializerTransform': IInterceptorOptionsSerializerTransform;
+  'a-serialization:serializer': IInterceptorOptionsSerializer;
 }
 
 }
 declare module 'vona-module-a-serialization' {
   
-        export interface InterceptorSerializerTransform {
+        export interface InterceptorSerializer {
           /** @internal */
           get scope(): ScopeModuleASerialization;
         }
 
-          export interface InterceptorSerializerTransform {
-            get $beanFullName(): 'a-serialization.interceptor.serializerTransform';
-            get $onionName(): 'a-serialization:serializerTransform';
+          export interface InterceptorSerializer {
+            get $beanFullName(): 'a-serialization.interceptor.serializer';
+            get $onionName(): 'a-serialization:serializer';
           } 
 }
 /** interceptor: end */

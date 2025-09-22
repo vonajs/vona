@@ -1,5 +1,6 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
+import { Aspect } from 'vona-module-a-aspect';
 import { Api, v } from 'vona-module-a-openapi';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
@@ -14,6 +15,7 @@ export class ControllerSerializer extends BeanBase {
   @Web.post('echoSimple')
   @Api.body(DtoSerializerSimple)
   @Passport.public()
+  @Aspect.interceptor('a-serialization:serializerTransform')
   echoSimple(@Arg.body() data: DtoSerializerSimple) {
     return data;
   }
