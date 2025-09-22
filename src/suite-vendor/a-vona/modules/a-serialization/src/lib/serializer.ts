@@ -1,7 +1,12 @@
 import type { MetadataKey } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
+import { Aspect } from 'vona-module-a-aspect';
 import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
+
+function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
+  return Aspect.interceptor('a-serialization:serializer', { enable });
+}
 
 function Exclude(): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
@@ -48,4 +53,10 @@ function Getter(getter: TypeSerializerTransformGetter): PropertyDecorator {
   };
 }
 
-export const Serializer = { exclude: Exclude, transform: Transform, sensitive: Sensitive, getter: Getter };
+export const Serializer = {
+  enable: Enable,
+  exclude: Exclude,
+  transform: Transform,
+  sensitive: Sensitive,
+  getter: Getter,
+};
