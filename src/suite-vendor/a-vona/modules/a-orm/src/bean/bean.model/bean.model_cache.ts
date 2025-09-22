@@ -320,8 +320,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     }
     // 2: mget
     const ids = items.map(item => cast(item).id);
-    const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
-    return await this.__mget_raw(table, ids, options2);
+    const options3 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
+    return await this.__mget_raw(table, ids, options3);
   }
 
   private async __select_cache(table: keyof ITableRecord, params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {

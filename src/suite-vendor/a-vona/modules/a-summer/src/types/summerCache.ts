@@ -36,12 +36,14 @@ export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
     disableInstance?: boolean;
   };
   ignoreNull?: boolean;
+  ignoreEmptyArray?: boolean;
 }
 
 export interface TSummerCacheActionOptions<KEY, DATA> {
   enable?: boolean;
   mode?: TSummerCacheMode;
   ignoreNull?: boolean;
+  ignoreEmptyArray?: boolean;
   db?: ServiceDb;
   ttl?: number;
   updateAgeOnGet?: boolean;
