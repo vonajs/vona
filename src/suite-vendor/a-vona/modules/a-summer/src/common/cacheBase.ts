@@ -75,12 +75,14 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   protected __checkValueEmpty(value: DATA | null | undefined, options?: TSummerCacheActionOptions<KEY, DATA>) {
     // undefined
     if (value === undefined) return true;
+    // []
+    const emptyArrayAsNull = options?.emptyArrayAsNull ?? this._cacheOptions.emptyArrayAsNull ?? false;
+    if (emptyArrayAsNull && Array.isArray(value) && value.length === 0) {
+      value = null;
+    }
     // null
     const ignoreNull = options?.ignoreNull ?? this._cacheOptions.ignoreNull ?? false;
     if (ignoreNull && value === null) return true;
-    // []
-    const ignoreEmptyArray = options?.ignoreEmptyArray ?? this._cacheOptions.ignoreEmptyArray ?? false;
-    if (ignoreEmptyArray && Array.isArray(value) && value.length === 0) return true;
     // others
     return false;
   }
