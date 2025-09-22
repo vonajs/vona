@@ -12,7 +12,7 @@ export class BeanSerializer extends BeanBase {
     // only support array/object
     if (!data || typeof data !== 'object' || !schema) return data;
     // schema
-    const innerSchema = ZodMetadata.unwrapChained(schema);
+    const innerSchema = ZodMetadata.unwrapChained(ZodMetadata.resolveLazySchema(schema));
     // array
     if (Array.isArray(data) && innerSchema.type === 'array') {
       return await this._transformArray(data, innerSchema as z.ZodArray);
