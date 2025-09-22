@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { TSummerCacheActionOptions } from 'vona-module-a-summer';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
 import type { TypeModelOfModelLike, TypeModelParamsInclude, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
@@ -114,6 +115,7 @@ export interface IModelMethodOptionsGeneral {
   disableCacheQuery?: boolean;
   disableCacheEntity?: boolean;
   deleted?: boolean;
+  cache?: TSummerCacheActionOptions<unknown, unknown>;
 }
 
 export interface IModelInsertOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
