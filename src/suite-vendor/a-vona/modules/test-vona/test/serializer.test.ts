@@ -39,13 +39,15 @@ describe('serializer.test.ts', () => {
   it('action:serializerArray', async () => {
     await app.bean.executor.mockCtx(async () => {
       const res: DtoSerializerArray[] = await app.bean.executor.performAction('post', '/test/vona/serializer/echoArray', {
-        body: [{ simples: [dataSimple] }],
+        body: [{ simples: [dataSimple], simplesLazy: [dataSimple] }],
       });
       assert.equal(res[0].simples[0].password, '111111');
       assert.equal(res[0].simples[0].password2, undefined);
+      assert.equal(res[0].simplesLazy[0].password, '111111');
+      assert.equal(res[0].simplesLazy[0].password2, undefined);
     });
   });
-  it.only('action:serializerLazy', async () => {
+  it('action:serializerLazy', async () => {
     await app.bean.executor.mockCtx(async () => {
       const res: DtoSerializerLazy = await app.bean.executor.performAction('post', '/test/vona/serializer/echoLazy', {
         body: {
@@ -53,7 +55,6 @@ describe('serializer.test.ts', () => {
           simpleLazy: dataSimple,
         },
       });
-      console.log(res);
       assert.equal(res.simple.password, '111111');
       assert.equal(res.simple.password2, undefined);
       assert.equal(res.simpleLazy.password, '111111');

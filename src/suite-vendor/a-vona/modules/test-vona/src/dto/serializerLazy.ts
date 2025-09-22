@@ -11,6 +11,14 @@ export class DtoSerializerLazy {
     v.serializerGetter((value: DtoSerializerSimple) => {
       return { ...value, password: '111111' };
     }),
+    v.object(DtoSerializerSimple),
+  )
+  simple: DtoSerializerSimple;
+
+  @Api.field(
+    v.serializerGetter((value: DtoSerializerSimple) => {
+      return { ...value, password: '111111' };
+    }),
     v.title('title'),
     v.optional(),
     v.lazy(
@@ -21,9 +29,4 @@ export class DtoSerializerLazy {
     ),
   )
   simpleLazy: DtoSerializerSimple;
-
-  @Api.field(v.serializerGetter((value: DtoSerializerSimple) => {
-    return { ...value, password: '111111' };
-  }), v.object(DtoSerializerSimple))
-  simple: DtoSerializerSimple;
 }
