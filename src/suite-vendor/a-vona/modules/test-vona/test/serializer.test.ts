@@ -1,4 +1,4 @@
-import type { DtoSerializerTest } from 'vona-module-test-vona';
+import type { DtoSerializerSimple } from 'vona-module-test-vona';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -18,8 +18,8 @@ describe('serializer.test.ts', () => {
         email7: 'kevin@cabloy.com',
         firstName: 'k',
         lastName: 'v',
-      } as DtoSerializerTest;
-      const res: DtoSerializerTest = await app.bean.executor.performAction('post', '/test/vona/serializer/echoSimple', {
+      } as DtoSerializerSimple;
+      const res: DtoSerializerSimple = await app.bean.executor.performAction('post', '/test/vona/serializer/echoSimple', {
         body: data,
       });
       assert.equal(res.password, undefined);

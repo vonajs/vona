@@ -4,10 +4,10 @@ import { Serializer } from 'vona-module-a-serialization';
 import { Dto } from 'vona-module-a-web';
 import { SensitiveEmail } from '../lib/serializer.ts';
 
-export interface IDtoOptionsSerializerTest extends IDecoratorDtoOptions {}
+export interface IDtoOptionsSerializerSimple extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsSerializerTest>()
-export class DtoSerializerTest {
+@Dto<IDtoOptionsSerializerSimple>()
+export class DtoSerializerSimple {
   @Serializer.exclude()
   @Api.field(v.min(6))
   password: string;
@@ -80,13 +80,13 @@ export class DtoSerializerTest {
   @Api.field()
   lastName: string;
 
-  @Serializer.getter((data: DtoSerializerTest) => {
+  @Serializer.getter((data: DtoSerializerSimple) => {
     return `${data.firstName} ${data.lastName}`;
   })
   @Api.field(v.optional())
   fullName: string;
 
-  @Api.field(v.serializerGetter((data: DtoSerializerTest) => {
+  @Api.field(v.serializerGetter((data: DtoSerializerSimple) => {
     return `${data.firstName} ${data.lastName}`;
   }), v.optional())
   fullName2: string;
