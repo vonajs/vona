@@ -1368,6 +1368,7 @@ export * from '../dto/postQueryRes.ts';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
 export * from '../dto/serializerArray.ts';
+export * from '../dto/serializerLazy.ts';
 export * from '../dto/serializerSimple.ts';
 export * from '../dto/signin.ts';
 export * from '../dto/user.ts';
@@ -1389,6 +1390,7 @@ import type { IDtoOptionsPostQueryRes } from '../dto/postQueryRes.ts';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsSerializerArray } from '../dto/serializerArray.ts';
+import type { IDtoOptionsSerializerLazy } from '../dto/serializerLazy.ts';
 import type { IDtoOptionsSerializerSimple } from '../dto/serializerSimple.ts';
 import type { IDtoOptionsSignin } from '../dto/signin.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
@@ -1414,6 +1416,7 @@ declare module 'vona-module-a-web' {
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:serializerArray': IDtoOptionsSerializerArray;
+'test-vona:serializerLazy': IDtoOptionsSerializerLazy;
 'test-vona:serializerSimple': IDtoOptionsSerializerSimple;
 'test-vona:signin': IDtoOptionsSignin;
 'test-vona:user': IDtoOptionsUser;
@@ -1444,6 +1447,7 @@ import type { DtoPostQueryRes } from '../dto/postQueryRes.ts';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoSerializerArray } from '../dto/serializerArray.ts';
+import type { DtoSerializerLazy } from '../dto/serializerLazy.ts';
 import type { DtoSerializerSimple } from '../dto/serializerSimple.ts';
 import type { DtoSignin } from '../dto/signin.ts';
 import type { DtoUser } from '../dto/user.ts';
@@ -1510,6 +1514,10 @@ declare module 'vona-module-test-vona' {
 
     export interface IDtoOptionsSerializerArray {
       fields?: TypeEntityOptionsFields<DtoSerializerArray, IDtoOptionsSerializerArray[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsSerializerLazy {
+      fields?: TypeEntityOptionsFields<DtoSerializerLazy, IDtoOptionsSerializerLazy[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsSerializerSimple {
@@ -1920,6 +1928,7 @@ export interface IApiPathPostRecord{
 '/test/vona/queue/push': undefined;
 '/test/vona/serializer/echoSimple': undefined;
 '/test/vona/serializer/echoArray': undefined;
+'/test/vona/serializer/echoLazy': undefined;
 '/test/vona/summer': undefined;
 '/test/vona/tail': undefined;
 '/test/vona/transaction/fail': undefined;
