@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
-describe.only('serializer.test.ts', () => {
+describe('serializer.test.ts', () => {
   it('action:serializer', async () => {
     await app.bean.executor.mockCtx(async () => {
       const data = {
