@@ -11,7 +11,7 @@ export function Field(...schemaLikes: SchemaLike[]): PropertyDecorator {
     const schema = makeSchemaLikes(schemaLikes, metaType);
     const rules = mergeFieldOpenapiMetadata(target, prop as string, schema);
     if (descriptor?.get) {
-      v.serializerGetter(descriptor.get)(rules[prop as string]!);
+      rules[prop as string] = v.serializerGetter(descriptor.get)(rules[prop as string]!);
     }
   };
 }

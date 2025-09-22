@@ -31,7 +31,9 @@ describe('serializer.test.ts', () => {
       assert.equal(res.email5, 'k****n@cabloy.com');
       assert.equal(res.email6, 'k****n@cabloy.com');
       assert.equal(res.email7, 'k****n@cabloy.com');
-      assert.equal(res.fullName, '');
+      assert.equal(res.fullName, 'k v');
+      assert.equal(res.fullName2, 'k v');
+      assert.equal(res.fullName3, 'k v');
     });
   });
 });
