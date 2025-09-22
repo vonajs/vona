@@ -1,4 +1,4 @@
-import type { DtoSerializerSimple } from 'vona-module-test-vona';
+import type { DtoSerializerArray, DtoSerializerSimple } from 'vona-module-test-vona';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -38,10 +38,11 @@ describe('serializer.test.ts', () => {
   });
   it('action:serializerArray', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const res: DtoSerializerSimple = await app.bean.executor.performAction('post', '/test/vona/serializer/echoArray', {
-        body: [dataSimple],
+      const res: DtoSerializerArray[] = await app.bean.executor.performAction('post', '/test/vona/serializer/echoArray', {
+        body: [{ simples: [dataSimple] }],
       });
-      assert.equal(res[0].password, undefined);
+      assert.equal(res[0].simples[0].password, '111111');
+      assert.equal(res[0].simples[0].password2, undefined);
     });
   });
 });

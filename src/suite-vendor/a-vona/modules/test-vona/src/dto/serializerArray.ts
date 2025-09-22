@@ -8,7 +8,12 @@ export interface IDtoOptionsSerializerArray extends IDecoratorDtoOptions {}
 @Dto<IDtoOptionsSerializerArray>()
 export class DtoSerializerArray {
   @Api.field(v.serializerGetter((data: DtoSerializerArray) => {
-    return data.simple.map(item => item.password = '111111');
+    return data.simples.map(item => {
+      return {
+        ...item,
+        password: '111111',
+      };
+    });
   }), v.title('Simple'), v.array(DtoSerializerSimple))
-  simple: DtoSerializerSimple[];
+  simples: DtoSerializerSimple[];
 }
