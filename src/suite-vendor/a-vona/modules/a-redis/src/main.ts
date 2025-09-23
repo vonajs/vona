@@ -15,14 +15,6 @@ export class Main extends BeanSimple implements IModuleMain {
 
 export async function configDefault(app: VonaApplication): Promise<PowerPartial<ConfigRedis>> {
   return {
-    default: {
-      host: app.meta.env.REDIS_DEFAULT_HOST,
-      port: Number.parseInt(app.meta.env.REDIS_DEFAULT_PORT!),
-      password: app.meta.env.REDIS_DEFAULT_PASSWORD,
-      db: Number.parseInt(app.meta.env.REDIS_DEFAULT_DB!),
-      maxRetriesPerRequest: null,
-      enableReadyCheck: false,
-    },
     clients: {
       default: { keyPrefix: `default_${app.name}:` },
       redlock: {},

@@ -8,12 +8,18 @@ export default function (_appInfo: VonaAppInfo) {
     { name: '', password: '', title: '' },
   ];
 
+  // redis
+  config.redis = {
+    clients: {},
+  };
+
   // database
   config.database = {
     testDatabase: true,
     base: {
       pool: { min: 0, max: 1 },
     },
+    clients: {},
   };
 
   // modules

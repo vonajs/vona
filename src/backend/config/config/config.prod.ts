@@ -5,13 +5,13 @@ export default function (_appInfo: VonaAppInfo) {
 
   // instances
   config.instances = [
-    {
-      name: '',
-      password: '',
-      title: '',
-      config: {},
-    },
+    { name: '', password: '', title: '', config: {} },
   ];
+
+  // redis
+  config.redis = {
+    clients: {},
+  };
 
   // database
   config.database = {
@@ -19,6 +19,7 @@ export default function (_appInfo: VonaAppInfo) {
     base: {
       asyncStackTraces: false,
     },
+    clients: {},
   };
 
   // modules
