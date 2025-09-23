@@ -3,7 +3,7 @@ import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 
 declare module 'vona' {
   export interface IInstanceRecord {
-    singleTest: never;
+    shareTest: never;
     isolateTest: never;
   }
 }

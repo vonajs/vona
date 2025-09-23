@@ -15,7 +15,7 @@ export class ServiceDatabase extends BeanBase {
   }
 
   getDatabasePrefix(configInstanceBase?: ConfigInstanceBase) {
-    const instanceName = configInstanceBase?.isolate ? `isolate${__separator}${configInstanceBase.name}` : 'single';
+    const instanceName = configInstanceBase?.isolate ? `isolate${__separator}${configInstanceBase.name}` : 'share';
     return `vona${__separator}test${__separator}${this.app.name}${__separator}${instanceName}${__separator}`;
   }
 

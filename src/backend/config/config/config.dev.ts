@@ -6,7 +6,7 @@ export default function (_appInfo: VonaAppInfo) {
   // instances
   config.instances = [
     { name: '', password: '', title: '' },
-    { name: 'singleTest', password: '', title: '' },
+    { name: 'shareTest', password: '', title: '' },
     { name: 'isolateTest', password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
   ];
 
