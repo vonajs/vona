@@ -1,3 +1,4 @@
+import type { ConfigInstanceBase } from 'vona-module-a-instance';
 import type { ServiceDatabaseClient } from 'vona-module-a-orm';
 import chalk from 'chalk';
 import moment from 'moment';
@@ -13,8 +14,9 @@ export class ServiceDatabase extends BeanBase {
     return this.app.config.database;
   }
 
-  get databasePrefix() {
-    return `vona${__separator}test${__separator}${this.app.name}${__separator}`;
+  getDatabasePrefix(configInstanceBase?: ConfigInstanceBase) {
+    const instanceName = configInstanceBase?.isolate ? `isolate${__separator}${configInstanceBase.name}` : 'single';
+    return `vona${__separator}test${__separator}${this.app.name}${__separator}${instanceName}${__separator}`;
   }
 
   async databaseInitStartup() {
@@ -27,21 +29,23 @@ export class ServiceDatabase extends BeanBase {
     await this.__preparedatabases(false);
   }
 
-  async __fetchDatabases(client: ServiceDatabaseClient) {
+  async __fetchDatabases(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
+    const databasePrefix = this.getDatabasePrefix(configInstanceBase);
     // dbs
-    let dbs = await client.connection.schema.fetchDatabases(this.databasePrefix);
+    let dbs = await client.connection.schema.fetchDatabases(databasePrefix);
     // filter
     dbs = dbs.filter(db => {
-      const _time = db.name.substring(this.databasePrefix.length);
+      const _time = db.name.substring(databasePrefix.length);
       return _time.length === __timeFormat.length;
     });
     // ok
     return dbs;
   }
 
-  async __createDatabase(client: ServiceDatabaseClient) {
+  async __createDatabase(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
+    const databasePrefix = this.getDatabasePrefix(configInstanceBase);
     // create
-    const databaseName = `${this.databasePrefix}${moment().format(__timeFormat)}`;
+    const databaseName = `${databasePrefix}${moment().format(__timeFormat)}`;
     await client.connection.schema.createDatabase(databaseName);
     return databaseName;
   }
@@ -52,33 +56,33 @@ export class ServiceDatabase extends BeanBase {
       await this.__preparedatabase(versionStart);
     }, 'default');
     // isolate
-    const instances = this.app.config.instances;
-    for (const instance of instances) {
-      if (!instance.isolate) continue;
-      if (!instance.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${instance.name}`);
+    for (const configInstanceBase of this.app.config.instances) {
+      if (!configInstanceBase.isolate) continue;
+      if (!configInstanceBase.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${configInstanceBase.name}`);
       await this.bean.database.switchDb(async () => {
-        await this.__preparedatabase(versionStart);
-      }, instance.isolateClient);
+        await this.__preparedatabase(versionStart, configInstanceBase);
+      }, configInstanceBase.isolateClient);
     }
   }
 
-  async __preparedatabase(versionStart: boolean) {
-    await this.__preparedatabaseInner();
+  async __preparedatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+    await this.__preparedatabaseInner(configInstanceBase);
     if (versionStart) {
       await this.scope.service.version.__start();
     }
   }
 
-  async __preparedatabaseInner() {
+  async __preparedatabaseInner(configInstanceBase?: ConfigInstanceBase) {
     if (this.app.meta.isProd) {
       // donothing
       return;
     }
+    const databasePrefix = this.getDatabasePrefix(configInstanceBase);
     // client
     const client = this.bean.database.current.client;
     // get current database name
     let databaseName = client.getDatabaseName();
-    const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
+    const isTestDatabase = databaseName.indexOf(databasePrefix) === 0;
     // dev/debug db
     if (this.app.meta.isDev) {
       // if enable testDatabase
@@ -88,9 +92,9 @@ export class ServiceDatabase extends BeanBase {
         // donothing
         return;
       }
-      const dbs = await this.__fetchDatabases(client);
+      const dbs = await this.__fetchDatabases(client, configInstanceBase);
       if (dbs.length === 0) {
-        databaseName = await this.__createDatabase(client);
+        databaseName = await this.__createDatabase(client, configInstanceBase);
       } else {
         databaseName = dbs[0].name;
       }
@@ -107,12 +111,12 @@ export class ServiceDatabase extends BeanBase {
         return;
       }
       // drop old databases
-      const dbs = await this.__fetchDatabases(client);
+      const dbs = await this.__fetchDatabases(client, configInstanceBase);
       for (const db of dbs) {
         await client.connection.schema.dropDatabase(db.name);
       }
       // create database
-      const databaseName = await this.__createDatabase(client);
+      const databaseName = await this.__createDatabase(client, configInstanceBase);
       // set config and reload client
       await client.changeConfigAndReload(databaseName);
       // database ready
