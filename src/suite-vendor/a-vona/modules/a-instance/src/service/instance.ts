@@ -22,7 +22,7 @@ export class ServiceInstance extends BeanBase {
   }
 
   getConfigInstanceBase(instanceName: keyof IInstanceRecord) {
-    const instances = this.app.config.instances || [{ instanceName: '', password: '' }];
+    const instances = this.app.config.instances;
     return instances.find(item => item.name === instanceName);
   }
 

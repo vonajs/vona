@@ -51,6 +51,15 @@ export class ServiceDatabase extends BeanBase {
     await this.bean.database.switchDb(async () => {
       await this.__preparedatabase(versionStart);
     }, 'default');
+    // isolate
+    const instances = this.app.config.instances;
+    for (const instance of instances) {
+      if (!instance.isolate) continue;
+      if (!instance.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${instance.name}`);
+      await this.bean.database.switchDb(async () => {
+        await this.__preparedatabase(versionStart);
+      }, instance.isolateClient);
+    }
   }
 
   async __preparedatabase(versionStart: boolean) {
