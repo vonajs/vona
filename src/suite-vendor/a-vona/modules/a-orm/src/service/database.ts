@@ -54,9 +54,16 @@ export class ServiceDatabase extends BeanBase {
   }
 
   getDefaultClientName(): keyof IDatabaseClientRecord {
-    let defaultClient = this.app.config.database.defaultClient;
+    const defaultClient = this.app.config.database.defaultClient;
     if (typeof defaultClient === 'function') {
-      defaultClient = defaultClient(this.ctx);
+      return defaultClient(this.ctx);
+    }
+    // check instance
+    if (!isNil(this.ctx?.instanceName)) {
+      const configInstanceBase = this.$scope.instance.service.instance.getConfigInstanceBase(this.ctx.instanceName);
+      if (configInstanceBase?.isolate) {
+        return configInstanceBase.isolateClient!;
+      }
     }
     return defaultClient;
   }
