@@ -19,7 +19,9 @@ export default function (_appInfo: VonaAppInfo) {
     base: {
       asyncStackTraces: false,
     },
-    clients: {},
+    clients: {
+      isolateTest: undefined,
+    },
   };
 
   // modules

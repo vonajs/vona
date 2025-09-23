@@ -1,6 +1,19 @@
 import type { VonaAppInfo, VonaConfigEnv, VonaConfigOptional } from 'vona';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 
+declare module 'vona' {
+  export interface IInstanceRecord {
+    singleTest: never;
+    isolateTest: never;
+  }
+}
+
+declare module 'vona-module-a-orm' {
+  export interface IDatabaseClientRecord {
+    isolateTest: never;
+  }
+}
+
 export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
 
@@ -48,6 +61,11 @@ export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
         },
       },
     },
+  };
+
+  // Multi-Instance/Multi-Tenancy
+  config.database.clients!.isolateTest = {
+    ...config.database.clients![env.DATABASE_DEFAULT_CLIENT as keyof IDatabaseClientRecord],
   };
 
   // modules
