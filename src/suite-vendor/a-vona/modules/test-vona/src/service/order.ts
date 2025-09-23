@@ -5,6 +5,20 @@ import { ModelProduct } from '../model/product.ts';
 
 @Service()
 export class ServiceOrder extends BeanBase {
+  async selectUserOrders() {
+    const userId = 1;
+    const userAndOrders = await this.scope.model.user.get(
+      {
+        id: userId,
+      },
+      {
+        include: {
+          orders: true,
+        },
+      },
+    );
+  }
+
   async relationHasMany() {
     // insert
     const orderCreate = await this.scope.model.order.insert(
