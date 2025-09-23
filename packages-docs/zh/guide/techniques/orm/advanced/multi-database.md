@@ -67,6 +67,10 @@ class ServiceOrder {
 
 1. 添加数据源的类型定义
 
+由于我们要在模块`test-vona`中使用数据源，所以可以在模块`test-vona`中添加类型定义：
+
+`src/suite-vendor/a-vona/modules/test-vona/src/types/index.ts`
+
 ``` typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
@@ -112,11 +116,62 @@ config.database = {
 
 我们可以在代码中动态使用数据源：
 
-``` typescript
-
+``` diff
+class ServiceOrder {
+  async selectUserOrders() {
+    const userId = 1;
++   const modelUser = this.scope.model.user.newInstance('user-pg');
+    const userAndOrders = await modelUser.get(
+      {
+        id: userId,
+      },
+      {
+        include: {
+          orders: true,
+        },
+      },
+    );
+  }
+}  
 ```
 
+- `newInstance`: 传入要使用的数据源名称，返回新的 Model 实例
 
-## 使用数据源：Relation配置
+到目前为止，采用数据源`user-pg`来查询用户信息，采用系统默认数据源查询订单列表
+
+## 使用数据源：Relation选项
+
+我们可以在 relation 选项中指定数据源：
+
+``` diff
+class ServiceOrder {
+  async selectUserOrders() {
+    const userId = 1;
+    const modelUser = this.scope.model.user.newInstance('user-pg');
+    const userAndOrders = await modelUser.get(
+      {
+        id: userId,
+      },
+      {
+        include: {
++         orders: {
++           meta: {
++             client: 'order-mysql',
++           },
++         },
++       },
+      },
+    );
+  }
+}  
+```
+
+- `meta.client`: 指定 relation `orders`要使用的数据源
+
+到目前为止，采用数据源`user-pg`来查询用户信息，采用数据源`order-mysql`来源查询订单列表
 
 ## 使用数据源：Model配置
+
+我们也可以直接在 Model 中配置数据源，从而简化查询数据的代码
+
+
