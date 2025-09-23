@@ -59,7 +59,7 @@ export class ServiceDatabase extends BeanBase {
       return defaultClient(this.ctx);
     }
     // check instance
-    if (!isNil(this.ctx?.instanceName)) {
+    if (!isNil(this.ctx.instanceName)) {
       const configInstanceBase = this.$scope.instance.service.instance.getConfigInstanceBase(this.ctx.instanceName);
       if (configInstanceBase?.isolate) {
         return configInstanceBase.isolateClient!;
