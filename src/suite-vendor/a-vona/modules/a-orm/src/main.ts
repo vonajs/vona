@@ -1,6 +1,5 @@
 import type { FunctionAny, IModuleMain, PowerPartial, VonaApplication, VonaContext } from 'vona';
 import type { ConfigDatabase } from './types/config.ts';
-import type { IDatabaseClientRecord } from './types/database.ts';
 import { BeanSimple, cast, combineConfigDefault, deepExtend } from 'vona';
 import { ServiceDatabaseAsyncLocalStorage, ServiceTransactionConsistency‌ } from 'vona-module-a-orm';
 import { ExtendKnex } from './extend/index.ts';
@@ -60,63 +59,18 @@ export class Main extends BeanSimple implements IModuleMain {
   async configLoaded(_config) {}
 }
 
-export async function configDefault(app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
-  return {
-    testDatabase: false,
-    defaultClient: app.meta.env.DATABASE_DEFAULT_CLIENT as keyof IDatabaseClientRecord,
-    clients: {
-      pg: {
-        client: 'pg',
-        connection: {
-          host: app.meta.env.DATABASE_CLIENT_PG_HOST,
-          port: Number.parseInt(app.meta.env.DATABASE_CLIENT_PG_PORT!),
-          user: app.meta.env.DATABASE_CLIENT_PG_USER,
-          password: app.meta.env.DATABASE_CLIENT_PG_PASSWORD,
-          database: app.meta.env.DATABASE_CLIENT_PG_DATABASE,
-        },
-      },
-      mysql: {
-        client: 'mysql2',
-        connection: {
-          host: app.meta.env.DATABASE_CLIENT_MYSQL_HOST,
-          port: Number.parseInt(app.meta.env.DATABASE_CLIENT_MYSQL_PORT!),
-          user: app.meta.env.DATABASE_CLIENT_MYSQL_USER,
-          password: app.meta.env.DATABASE_CLIENT_MYSQL_PASSWORD,
-          database: app.meta.env.DATABASE_CLIENT_MYSQL_DATABASE,
-        },
-      },
-    },
-    base: {
-      pool: { min: 0, max: 5 },
-      acquireConnectionTimeout: 60000 * 10,
-      asyncStackTraces: true,
-    },
-  };
+export async function configDefault(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
+  return {};
 }
 
 async function configDev(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
-  return {
-    testDatabase: true,
-    base: {
-      pool: { min: 0, max: 1 },
-    },
-  };
+  return {};
 }
 
 async function configProd(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
-  return {
-    testDatabase: false,
-    base: {
-      asyncStackTraces: false,
-    },
-  };
+  return {};
 }
 
 async function configTest(_app: VonaApplication): Promise<PowerPartial<ConfigDatabase>> {
-  return {
-    testDatabase: true,
-    base: {
-      pool: { min: 0, max: 1 },
-    },
-  };
+  return {};
 }

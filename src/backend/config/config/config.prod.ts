@@ -9,10 +9,17 @@ export default function (_appInfo: VonaAppInfo) {
       name: '',
       password: '',
       title: '',
-      config: {
-      },
+      config: {},
     },
   ];
+
+  // database
+  config.database = {
+    testDatabase: false,
+    base: {
+      asyncStackTraces: false,
+    },
+  };
 
   // modules
   config.modules = {};

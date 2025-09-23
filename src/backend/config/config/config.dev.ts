@@ -8,6 +8,14 @@ export default function (_appInfo: VonaAppInfo) {
     { name: '', password: '', title: '' },
   ];
 
+  // database
+  config.database = {
+    testDatabase: true,
+    base: {
+      pool: { min: 0, max: 1 },
+    },
+  };
+
   // modules
   config.modules = {};
 
