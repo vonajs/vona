@@ -41,13 +41,15 @@ export class BeanExecutor extends BeanBase {
   }
 
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
-    if (isNil(options?.dbInfo)) return this._newCtxInner(fn, options);
-    return this.bean.database.switchDb(() => {
-      return this._newCtxInner(fn, options);
-    }, options?.dbInfo);
+    return this._newCtxInnerStep1(() => {
+      if (isNil(options?.dbInfo)) return this._newCtxInnerStep2(fn, options);
+      return this.bean.database.switchDb(() => {
+        return this._newCtxInnerStep2(fn, options);
+      }, options?.dbInfo);
+    }, options);
   }
 
-  private async _newCtxInner<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+  private async _newCtxInnerStep1<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     // innerAccess
     const innerAccess = options.innerAccess !== false;
@@ -87,28 +89,32 @@ export class BeanExecutor extends BeanBase {
           __delegateProperties(ctx, options.extraData);
         }
       }
-      // instance
-      const instanceName = ctx.instanceName; // use default instanceName when undefined
-      if (instanceName !== undefined && instanceName !== null) {
-        ctx.instance = (await this.bean.instance.get(instanceName))!;
-        // start instance
-        if (options.instance) {
-          await this.$scope.instance.service.instance.checkAppReadyInstance(true);
-        }
-      }
-      // execute
-      let res: RESULT;
-      if (options.transaction) {
-        res = await this.bean.database.current.transaction.begin(async () => {
-          return await fn();
-        }, options.transactionOptions);
-      } else {
-        res = await fn();
-      }
-      // commitsDone
-      await ctx.commitsDone();
-      // ok
-      return res;
+      return await fn();
     });
+  }
+
+  private async _newCtxInnerStep2<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+    // instance
+    const instanceName = this.ctx.instanceName; // use default instanceName when undefined
+    if (instanceName !== undefined && instanceName !== null) {
+      this.ctx.instance = (await this.bean.instance.get(instanceName))!;
+      // start instance
+      if (options?.instance) {
+        await this.$scope.instance.service.instance.checkAppReadyInstance(true);
+      }
+    }
+    // execute
+    let res: RESULT;
+    if (options?.transaction) {
+      res = await this.bean.database.current.transaction.begin(async () => {
+        return await fn();
+      }, options?.transactionOptions);
+    } else {
+      res = await fn();
+    }
+    // commitsDone
+    await this.ctx.commitsDone();
+    // ok
+    return res;
   }
 }
