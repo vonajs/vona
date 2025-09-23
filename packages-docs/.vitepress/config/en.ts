@@ -164,7 +164,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               text: 'Advanced Features',
               base: '/guide/techniques/orm/advanced/',
               collapsed: true,
-              items: [],
+              items: [
+                { text: 'Multi-database/Multi-datasource', link: 'multi-database' },
+              ],
             },
           ],
         },

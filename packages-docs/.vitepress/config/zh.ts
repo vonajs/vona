@@ -164,7 +164,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               text: '高级特性',
               base: '/zh/guide/techniques/orm/advanced/',
               collapsed: true,
-              items: [],
+              items: [
+                { text: '多数据库/多数据源', link: 'multi-database' },
+              ],
             },
           ],
         },
