@@ -1,16 +1,9 @@
 import type { TableIdentityType } from 'table-identity';
 import type { TypeBeanRecordGeneralSelectorKeys, VonaApplication } from 'vona';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
-import type {
-  TSummerCachePreset,
-} from 'vona-module-a-summer';
+import type { TSummerCachePreset } from 'vona-module-a-summer';
 import type { IDatabaseClientDialectRecord } from '../types/database.ts';
-import {
-  configAll,
-  configAllWithIgnoreNull,
-  configRedis,
-  configRedisWithIgnoreNull,
-} from 'vona-module-a-summer';
+import { configAll, configAllWithIgnoreNull, configRedis, configRedisWithIgnoreNull } from 'vona-module-a-summer';
 
 export type TypeDataBaseConfigDialects = Record<
   keyof IDatabaseClientDialectRecord,

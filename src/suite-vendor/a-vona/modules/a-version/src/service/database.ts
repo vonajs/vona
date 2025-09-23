@@ -19,14 +19,12 @@ export class ServiceDatabase extends BeanBase {
 
   async databaseInitStartup() {
     // database
-    await this.__database();
-    // version start
-    await this.scope.service.version.__start();
+    await this.__preparedatabases(true);
   }
 
   async databaseNameStartup() {
     // database
-    await this.__database();
+    await this.__preparedatabases(false);
   }
 
   async __fetchDatabases(client: ServiceDatabaseClient) {
@@ -48,7 +46,18 @@ export class ServiceDatabase extends BeanBase {
     return databaseName;
   }
 
-  async __database() {
+  async __preparedatabases(versionStart: boolean) {
+    await this.__preparedatabase(versionStart);
+  }
+
+  async __preparedatabase(versionStart: boolean) {
+    await this.__preparedatabaseInner();
+    if (versionStart) {
+      await this.scope.service.version.__start();
+    }
+  }
+
+  async __preparedatabaseInner() {
     if (this.app.meta.isProd) {
       // donothing
       return;
