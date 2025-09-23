@@ -38,8 +38,8 @@ export class BeanInstance extends BeanBase {
     // instance base
     const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
     if (!configInstanceBase) return null;
-    if (configInstanceBase.standalone && !configInstanceBase.id) {
-      throw new Error(`should specify id for standalone instance: ${configInstanceBase.name}`);
+    if (configInstanceBase.isolate && !configInstanceBase.id) {
+      throw new Error(`should specify id for isolate instance: ${configInstanceBase.name}`);
     }
     // lock
     return await this.scope.redlock.lockIsolate(
@@ -66,10 +66,10 @@ export class BeanInstance extends BeanBase {
     if (configInstanceBase.id) {
       instance.id = configInstanceBase.id;
     }
-    // standalone
-    if (configInstanceBase.standalone) {
-      if (!configInstanceBase.id) throw new Error(`should specify id for standalone instance: ${configInstanceBase.name}`);
-      instance.standalone = configInstanceBase.standalone;
+    // isolate
+    if (configInstanceBase.isolate) {
+      if (!configInstanceBase.id) throw new Error(`should specify id for isolate instance: ${configInstanceBase.name}`);
+      instance.isolate = configInstanceBase.isolate;
     }
     return await this.modelInstance.insert(instance);
   }

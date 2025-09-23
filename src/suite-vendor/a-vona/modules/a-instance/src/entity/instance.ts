@@ -14,7 +14,7 @@ export class EntityInstance extends $Class.omit(EntityBaseSimple, ['iid']) {
   disabled: boolean;
 
   @Api.field(v.default(false))
-  standalone: boolean;
+  isolate: boolean;
 
   @Api.field(z.string())
   name: keyof IInstanceRecord;

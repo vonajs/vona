@@ -9,8 +9,8 @@ export interface ConfigInstanceBase {
   title?: string;
   config?: VonaConfigOptional;
   id?: number;
-  standalone?: boolean;
-  standaloneClient?: keyof IDatabaseClientRecord;
+  isolate?: boolean;
+  isolateClient?: keyof IDatabaseClientRecord;
 }
 
 declare module 'vona' {
