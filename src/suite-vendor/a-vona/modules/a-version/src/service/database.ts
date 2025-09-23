@@ -47,7 +47,10 @@ export class ServiceDatabase extends BeanBase {
   }
 
   async __preparedatabases(versionStart: boolean) {
-    await this.__preparedatabase(versionStart);
+    // default
+    await this.bean.database.switchDb(async () => {
+      await this.__preparedatabase(versionStart);
+    }, 'default');
   }
 
   async __preparedatabase(versionStart: boolean) {
