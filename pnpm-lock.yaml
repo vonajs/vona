@@ -870,7 +870,7 @@ importers:
         specifier: ^5.0.52
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.105
+        specifier: ^5.0.106
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
