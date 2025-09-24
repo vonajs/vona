@@ -137,11 +137,11 @@ class ServiceOrder {
 
 - `newInstance`: Passes the datasource to use and returns a new model instance
 
-So far, we've used the `user-pg` datasource to query user information and the `system default datasource` to query order lists
+So far, we've used the `user-pg` datasource to query user information and the `system default datasource` to query order list
 
-## 使用数据源：Relation动态选项
+## Using Datasources: Relation dynamic options
 
-可以在 relation 选项中动态指定数据源：
+The datasource can be specified dynamically in the relation options:
 
 ``` diff
 class ServiceOrder {
@@ -166,13 +166,13 @@ class ServiceOrder {
 }  
 ```
 
-- `meta.client`: 指定 relation `orders`要使用的数据源
+- `meta.client`: specifies the datasource to be used by relation `orders`
 
-到目前为止，使用数据源`user-pg`查询用户信息，使用数据源`order-mysql`查询订单列表
+So far, we use the datasource `user-pg` to query user information and the datasource `order-mysql` to query order list
 
-## 使用数据源：Model配置
+## Using Datasources: Model options
 
-也可以直接在 Model 中配置数据源，从而简化查询代码
+You can also configure the datasource directly in the Model options to simplify the query code
 
 1. Model Order
 
@@ -197,9 +197,9 @@ class ModelOrder{}
 class ModelUser {}
 ```
 
-3. 查询数据
+3. Query data
 
-现在，又可以使用常规的方式查询用户的订单列表
+Now, you can query the user's order list in the usual way
 
 ``` typescript
 class ServiceOrder {
@@ -219,9 +219,9 @@ class ServiceOrder {
 }  
 ```
 
-## 使用数据源：App Config配置
+## Using Datasources: App config
 
-也可以在 App config 中配置 Model options:
+You can also configure Model options in App config:
 
 `src/backend/config/config/config.ts`
 
@@ -239,11 +239,11 @@ config.onions = {
 };
 ```
 
-于是，也可以使用常规的方式查询用户的订单列表
+Therefore, you can also use the usual way to query the user's order list
 
-## 使用数据源：Relation静态选项
+## Using Datasources: Relation static options
 
-也可以在定义 Relation 时指定静态选项：
+Static options can also be specified when defining a Relation:
 
 ``` diff
 @Model({
@@ -260,4 +260,4 @@ config.onions = {
 class ModelUser {}
 ```
 
-同样，也可以使用常规的方式查询用户的订单列表
+Similarly, you can also use the usual way to query the user's order list
