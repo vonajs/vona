@@ -1,16 +1,16 @@
 # Multi-database/Multi-datasource
 
-Vona ORM 支持`多数据库/多数据源`，特性如下：
+Vona ORM supports `Multi-database/Multi-datasource`, with the following features:
 
-1. 支持多数据库
-    - 例如：Postgresql/MySQL
-    - 持续增加新的数据库支持
-2. 支持多数据源
-3. 支持跨数据库的关联查询
+1. Multi-database
+    - For example: PostgreSQL/MySQL
+    - Support for new database dialects is continuously being added
+2. Multi-datasource
+3. Cross-datasource relation queries
 
-下面以 Model User/Order 为例，通过查询用户的订单列表，来演示`多数据库/多数据源`的使用方法
+The following example uses the `User/Order` model to query a user's order list to demonstrate how to use `Multi-database/Multi-datasource`
 
-## 准备Models
+## Preparing Models
 
 先准备两个 Models：User/Order
 
