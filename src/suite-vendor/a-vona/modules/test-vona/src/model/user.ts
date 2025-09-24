@@ -15,6 +15,16 @@ export interface IModelOptionsUser extends IDecoratorModelOptions<EntityUser> {}
     posts: $relation.hasMany(() => ModelPost, 'userId', { columns: ['id', 'title'] }, ['test-vona:user', ModelPostContent]),
     roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
     orders: $relation.hasMany(() => ModelOrder, 'userId'),
+    ordersA: $relation.hasMany(() => ModelOrder, 'userId', {
+      meta: {
+        client: 'Order_A' as any,
+      },
+    }),
+    ordersB: $relation.hasMany(() => ModelOrder, 'userId', {
+      meta: {
+        client: 'Order_B' as any,
+      },
+    }),
   },
   cache: {
     modelsClear: [() => ModelUserStats, () => ModelUserStatsGroup],

@@ -187,11 +187,12 @@ class ServiceOrder {
 // onions
 config.onions = {
   model: {
-    'test-vona:user': {
-      client: 'user-pg',
-    },
     'test-vona:order': {
-      client: 'order-mysql',
+      table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
+        const user = ctx.app.bean.passport.getCurrentUser();
+        if (!user) return defaultTable;
+        return `Order_${Number(user.id) % 16}`;
+      },
     },
   },
 };
@@ -199,24 +200,50 @@ config.onions = {
 
 于是，也可以使用常规的方式查询用户的订单列表
 
-## 使用数据源：Relation静态选项
+## 使用分表：Relation静态选项
 
 也可以在定义 Relation 时指定静态选项：
+
+1. Model User
+
+假如有一个需求，将订单分为两张表，`用户Id`为奇数使用表`Order_A`，为偶数使用表`Order_B`。那么，可以定义两个 Relations：
 
 ``` diff
 @Model({
   entity: EntityUser,
-  client: 'user-pg',
   relations: {
-    orders: $relation.hasMany(() => ModelOrder, 'userId', {
+    orders: $relation.hasMany(() => ModelOrder, 'userId'),
++   ordersA: $relation.hasMany(() => ModelOrder, 'userId', {
 +     meta: {
-+       client: 'order-mysql',
++       client: 'Order_A' as any,
 +     },
-    }),
++   }),
++   ordersB: $relation.hasMany(() => ModelOrder, 'userId', {
++     meta: {
++       client: 'Order_B' as any,
++     },
++   }),
   },
 })
 class ModelUser {}
 ```
 
-同样，也可以使用常规的方式查询用户的订单列表
+2. 查询数据
 
+``` diff
+class ServiceOrder {
+  async selectOrdersByRelation() {
+    const user = this.bean.passport.getCurrentUser()!;
++   const relationName = Number(user.id) % 2 === 1 ? 'ordersA' : 'ordersB';
+    const userAndOrders = await this.scope.model.user.get({
+      id: user.id,
+    }, {
+      include: {
++       [relationName]: true,
+      },
+    });
+  }
+}  
+```
+
+- 动态判断需要使用的 Relation，从而查询相应`分表`的订单列表
