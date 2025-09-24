@@ -7,9 +7,11 @@ export const en = defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Docs', link: '/guide/start/introduction', activeMatch: '/guide/' },
+      { text: 'Cabloy', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
     ],
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
+      '/cabloy/': { base: '/cabloy/', items: sidebarCabloy() },
     },
     footer: {
       message: 'Released under the MIT License.',
@@ -22,6 +24,12 @@ export const en = defineConfig({
     ],
   },
 });
+
+function sidebarCabloy(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: 'Introduction', link: 'introduction' },
+  ];
+}
 
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [

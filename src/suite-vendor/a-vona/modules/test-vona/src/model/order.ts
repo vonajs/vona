@@ -9,11 +9,6 @@ export interface IModelOptionsOrder extends IDecoratorModelOptions<EntityOrder> 
 
 @Model<IModelOptionsOrder>({
   entity: EntityOrder,
-  // table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
-  //   const user = ctx.app.bean.passport.getCurrentUser();
-  //   if (!user) return defaultTable;
-  //   return `Order_${Number(user.id) % 16}`;
-  // },
   relations: {
     user: $relation.belongsTo(() => ModelOrder, () => ModelUser, 'userId', {
       autoload: true,

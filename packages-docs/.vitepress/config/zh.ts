@@ -7,9 +7,11 @@ export const zh = defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/zh/guide/start/introduction', activeMatch: '/zh/guide/' },
+      { text: 'Cabloy', link: '/zh/cabloy/introduction', activeMatch: '/zh/cabloy/' },
     ],
     sidebar: {
       '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },
+      '/zh/cabloy/': { base: '/zh/cabloy/', items: sidebarCabloy() },
     },
     footer: {
       message: '基于 MIT 许可发布',
@@ -22,6 +24,12 @@ export const zh = defineConfig({
     ],
   },
 });
+
+function sidebarCabloy(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: '介绍', link: 'introduction' },
+  ];
+}
 
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
