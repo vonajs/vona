@@ -12,7 +12,7 @@ Vona ORM 支持`多数据库/多数据源`，特性如下：
 
 ## 准备Models
 
-我们先准备两个 Models：User/Order
+先准备两个 Models：User/Order
 
 1. Model Order
 
@@ -26,7 +26,7 @@ class ModelOrder{}
 2. Model User
 
 ``` typescript
-@Model<IModelOptionsUser>({
+@Model({
   entity: EntityUser,
   relations: {
     orders: $relation.hasMany(() => ModelOrder, 'userId'),
@@ -57,17 +57,17 @@ class ServiceOrder {
 }  
 ```
 
-于是，我们查询到了`userId=1`的用户信息，和该用户的所有订单列表
+于是，查询到了`userId=1`的用户信息，和该用户的所有订单列表
 
 到目前为止，是使用系统默认数据源进行的数据查询
 
 ## 创建多数据源
 
-接下来，我们创建两个数据源： `user-pg`和`order-mysql`
+接下来，创建两个数据源： `user-pg`和`order-mysql`
 
 1. 添加数据源的类型定义
 
-由于我们要在模块`test-vona`中使用数据源，所以可以在模块`test-vona`中添加类型定义：
+由于要在模块`test-vona`中使用数据源，所以可以在模块`test-vona`中添加类型定义：
 
 `src/suite-vendor/a-vona/modules/test-vona/src/types/index.ts`
 
@@ -114,7 +114,7 @@ config.database = {
 
 ## 使用数据源：动态方式
 
-我们可以在代码中动态使用数据源：
+可以在代码中动态使用数据源：
 
 ``` diff
 class ServiceOrder {
@@ -135,13 +135,11 @@ class ServiceOrder {
 }  
 ```
 
-- `newInstance`: 传入要使用的数据源名称，返回新的 Model 实例
+- `newInstance`: 传入要使用的数据源，返回新的 Model 实例
 
-到目前为止，采用数据源`user-pg`来查询用户信息，采用系统默认数据源查询订单列表
+## 使用数据源：Relation动态选项
 
-## 使用数据源：Relation选项
-
-我们可以在 relation 选项中指定数据源：
+可以在 relation 选项中动态指定数据源：
 
 ``` diff
 class ServiceOrder {
@@ -154,12 +152,12 @@ class ServiceOrder {
       },
       {
         include: {
-+         orders: {
+          orders: {
 +           meta: {
 +             client: 'order-mysql',
 +           },
-+         },
-+       },
+          },
+        },
       },
     );
   }
@@ -168,10 +166,94 @@ class ServiceOrder {
 
 - `meta.client`: 指定 relation `orders`要使用的数据源
 
-到目前为止，采用数据源`user-pg`来查询用户信息，采用数据源`order-mysql`来源查询订单列表
+到目前为止，采用数据源`user-pg`来查询用户信息，采用数据源`order-mysql`来查询订单列表
 
 ## 使用数据源：Model配置
 
-我们也可以直接在 Model 中配置数据源，从而简化查询数据的代码
+也可以直接在 Model 中配置数据源，从而简化查询数据的代码
 
+1. Model Order
 
+``` diff
+@Model({
+  entity: EntityOrder,
++ client: 'order-mysql',
+})
+class ModelOrder{}
+```
+
+2. Model User
+
+``` diff
+@Model({
+  entity: EntityUser,
++ client: 'user-pg',
+  relations: {
+    orders: $relation.hasMany(() => ModelOrder, 'userId'),
+  },
+})
+class ModelUser {}
+```
+
+3. 查询数据
+
+现在，又可以采用常规的方式来查询用户的订单列表
+
+``` typescript
+class ServiceOrder {
+  async selectUserOrders() {
+    const userId = 1;
+    const userAndOrders = await this.scope.model.user.get(
+      {
+        id: userId,
+      },
+      {
+        include: {
+          orders: true,
+        },
+      },
+    );
+  }
+}  
+```
+
+## 使用数据源：App Config配置
+
+也可以在 App config 中配置 Model options:
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// onions
+config.onions = {
+  model: {
+    'test-vona:user': {
+      client: 'user-pg',
+    },
+    'test-vona:order': {
+      client: 'order-mysql',
+    },
+  },
+};
+```
+
+于是，也可以采用常规的方式来查询用户的订单列表
+
+## 使用数据源：Relation静态选项
+
+也可以在定义 Relation 时指定静态选项：
+
+``` diff
+@Model({
+  entity: EntityUser,
+  client: 'user-pg',
+  relations: {
+    orders: $relation.hasMany(() => ModelOrder, 'userId', {
++     meta: {
++       client: 'order-mysql',
++     },
+    }),
+  },
+})
+class ModelUser {}
+```
