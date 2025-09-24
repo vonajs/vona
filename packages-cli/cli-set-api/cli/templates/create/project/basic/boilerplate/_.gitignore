@@ -9,6 +9,7 @@ miniprogram_npm
 
 .idea
 .DS_Store
+.nx
 
 *.tsbuildinfo
 

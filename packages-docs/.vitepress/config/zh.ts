@@ -166,6 +166,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               collapsed: true,
               items: [
                 { text: '多数据库/多数据源', link: 'multi-database' },
+                { text: '分表', link: 'table-partitioning' },
               ],
             },
           ],

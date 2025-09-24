@@ -166,6 +166,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               collapsed: true,
               items: [
                 { text: 'Multi-database/Multi-datasource', link: 'multi-database' },
+                { text: 'Table-partitioning', link: 'table-partitioning' },
               ],
             },
           ],
