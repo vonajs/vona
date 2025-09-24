@@ -124,56 +124,60 @@ class ServiceOrder {
 
 到目前为止，使用`默认表名`查询`userId=129`的用户信息，使用`分表`查询该用户的订单列表
 
-## 使用数据源：Model配置
+## 使用分表：Model配置
 
-也可以直接在 Model 中配置数据源，从而简化查询代码
+也可以直接在 Model 中配置分表规则，从而简化查询代码
 
 1. Model Order
 
 ``` diff
 @Model({
   entity: EntityOrder,
-+ client: 'order-mysql',
++ table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
++   const user = ctx.app.bean.passport.getCurrentUser();
++   if (!user) return defaultTable;
++   return `Order_${Number(user.id) % 16}`;
++ },
 })
 class ModelOrder{}
 ```
 
-2. Model User
+- `table`: 指定函数，实现分表规则
+- `passport.getCurrentUser`: 取得当前登录用户
 
-``` diff
-@Model({
-  entity: EntityUser,
-+ client: 'user-pg',
-  relations: {
-    orders: $relation.hasMany(() => ModelOrder, 'userId'),
-  },
-})
-class ModelUser {}
-```
-
-3. 查询数据
+2. 查询数据
 
 现在，又可以使用常规的方式查询用户的订单列表
 
 ``` typescript
 class ServiceOrder {
-  async selectUserOrders() {
-    const userId = 1;
-    const userAndOrders = await this.scope.model.user.get(
-      {
-        id: userId,
+  async selectOrdersDirectly() {
+    const user = this.bean.passport.getCurrentUser()!;
+    const orders = await this.scope.model.order.select({
+      where: {
+        userId: user.id,
       },
-      {
-        include: {
-          orders: true,
-        },
-      },
-    );
+    });
   }
 }  
 ```
 
-## 使用数据源：App Config配置
+``` typescript
+class ServiceOrder {
+  async selectOrdersByRelation() {
+    const user = this.bean.passport.getCurrentUser()!;
+    const userAndOrders = await this.scope.model.user.get({
+      id: user.id,
+    }, {
+      include: {
+        orders: true,
+      },
+    });
+  }
+}  
+```
+
+## 使用分表：App Config配置
 
 也可以在 App config 中配置 Model options:
 
