@@ -40,7 +40,7 @@ class ModelUser {}
 ### 1. 直接查询订单列表
 
 ``` typescript
-class ServiceOrder extends BeanBase {
+class ServiceOrder {
   async selectOrdersDirectly() {
     const userId = 129;
     const orders = await this.scope.model.order.select({
@@ -52,7 +52,7 @@ class ServiceOrder extends BeanBase {
 }  
 ``` 
 
-到目前为止，使用`EntityUser`指定的表名查询`userId=129`的订单列表
+到目前为止，使用`默认表名`查询`userId=129`的订单列表
 
 ### 2. 基于关系查询订单列表
 
@@ -71,7 +71,7 @@ class ServiceOrder {
 }  
 ```
 
-到目前为止，使用`EntityUser`指定的表名查询`userId=129`的用户信息，和该用户的所有订单列表
+到目前为止，使用`默认表名`查询`userId=129`的用户信息，使用`默认表名`查询该用户的订单列表
 
 ## 使用分表：动态方式
 
@@ -79,57 +79,50 @@ class ServiceOrder {
 
 ``` diff
 class ServiceOrder {
-  async selectUserOrders() {
-    const userId = 1;
-+   const modelUser = this.scope.model.user.newInstance('user-pg');
-    const userAndOrders = await modelUser.get(
-      {
-        id: userId,
+  async selectOrdersDirectly() {
+    const userId = 129;
++   const tableName = `Order_${userId % 16}`;
++   const modelOrder = this.scope.model.order.newInstance(undefined, tableName as any);
+    const orders = await modelOrder.select({
+      where: {
+        userId,
       },
-      {
-        include: {
-          orders: true,
-        },
-      },
-    );
+    });
   }
 }  
 ```
 
-- `newInstance`: 传入要使用的数据源，返回新的 Model 实例
+- `newInstance`: 传入要使用的表名，返回新的 Model 实例
 
-到目前为止，使用数据源`user-pg`查询用户信息，使用`系统默认数据源`查询订单列表
+到目前为止，使用`分表`查询`userId=129`的订单列表
 
-## 使用数据源：Relation动态选项
+## 使用分表：Relation动态选项
 
-可以在 relation 选项中动态指定数据源：
+可以在 relation 选项中动态指定表名：
 
 ``` diff
 class ServiceOrder {
-  async selectUserOrders() {
-    const userId = 1;
-    const modelUser = this.scope.model.user.newInstance('user-pg');
-    const userAndOrders = await modelUser.get(
-      {
-        id: userId,
-      },
-      {
-        include: {
-          orders: {
-+           meta: {
-+             client: 'order-mysql',
-+           },
-          },
+  async selectOrdersByRelation() {
+    const userId = 129;
++   const tableName = `Order_${userId % 16}`;
+    const userAndOrders = await this.scope.model.user.get({
+      id: userId,
+    }, {
+      include: {
+        orders: {
++         meta: {
++           table: tableName as any,
++         },
         },
       },
-    );
+    });
   }
 }  
 ```
 
-- `meta.client`: 指定 relation `orders`要使用的数据源
+- `meta.table`: 指定 relation `orders`要使用的表名
 
-到目前为止，使用数据源`user-pg`查询用户信息，使用数据源`order-mysql`查询订单列表
+到目前为止，使用`默认表名`查询`userId=129`的用户信息，使用`分表`查询该用户的订单列表
 
 ## 使用数据源：Model配置
 
