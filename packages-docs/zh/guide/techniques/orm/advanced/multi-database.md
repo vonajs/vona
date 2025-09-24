@@ -172,7 +172,7 @@ class ServiceOrder {
 
 ## 使用数据源：Model配置
 
-也可以直接在 Model 中配置数据源，从而简化查询数据的代码
+也可以直接在 Model 中配置数据源，从而简化查询代码
 
 1. Model Order
 
