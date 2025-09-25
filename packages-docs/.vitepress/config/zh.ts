@@ -28,6 +28,7 @@ export const zh = defineConfig({
 function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   return [
     { text: '介绍', link: 'introduction' },
+    { text: '动态数据源', link: 'dynamic-datasource' },
   ];
 }
 
@@ -175,6 +176,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: '多数据库/多数据源', link: 'multi-database' },
                 { text: '分表', link: 'table-partitioning' },
+                { text: '动态数据源', link: 'dynamic-datasource' },
               ],
             },
           ],

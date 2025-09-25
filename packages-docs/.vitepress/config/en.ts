@@ -28,6 +28,7 @@ export const en = defineConfig({
 function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Introduction', link: 'introduction' },
+    { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
   ];
 }
 
@@ -175,6 +176,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: 'Multi-database/Multi-datasource', link: 'multi-database' },
                 { text: 'Table-partitioning', link: 'table-partitioning' },
+                { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
               ],
             },
           ],
