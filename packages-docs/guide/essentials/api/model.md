@@ -209,14 +209,15 @@ config.onions = {
 Model supports dynamic table partitioning. For example, we partition the Order table and store the daily orders in a data table in the format of `order_YYYYMMDD`
 
 ``` typescript
-@Model({ table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
+@Model({ table: (ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) => {
   return `${defaultTable}_${moment().format('YYYYMMDD')}`;
 } })
 class ModelOrder {}
 ```
 
-- ctx: can dynamically generate table name based on the context of the current request
-- defaultTable: default table name
+- `ctx`: can dynamically generate table name based on the context of the current request
+- `where`: can dynamically generate table name based on the where conditions
+- `defaultTable`: default table name
 
 ## Soft deletion, multi-instance/multi-tenancy
 

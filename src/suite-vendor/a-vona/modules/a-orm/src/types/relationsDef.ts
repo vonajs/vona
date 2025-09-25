@@ -4,8 +4,7 @@ import type { IDatabaseClientRecord } from './database.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { IBuildModelSelectGeneralParamsBasic } from './modelGeneral.ts';
 import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict } from './modelWhere.ts';
-import type { IModelClassRecord } from './onion/model.ts';
-import type { ITableRecord } from './onion/table.ts';
+import type { IModelClassRecord, TypeModelOptionsTable } from './onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
@@ -144,7 +143,7 @@ export interface IBuildModelRelationOptionsMany<
 
 export interface IModelRelationOptionsMetaBasic {
   client?: TypeModelRelationOptionsMetaClient;
-  table?: keyof ITableRecord;
+  table?: TypeModelOptionsTable;
 }
 
 export interface IModelRelationOptionsMeta extends IModelRelationOptionsMetaBasic {

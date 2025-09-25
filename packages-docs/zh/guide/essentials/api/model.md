@@ -209,14 +209,15 @@ config.onions = {
 Model 支持动态分表的能力。比如，我们对 Order 进行分表处理，将每天的订单存入`order_YYYYMMDD`格式的数据表中
 
 ``` typescript
-@Model({ table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
+@Model({ table: (ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) => {
   return `${defaultTable}_${moment().format('YYYYMMDD')}`;
 } })
 class ModelOrder {}
 ```
 
-- ctx: 可以基于当前请求的上下文来动态生成表名
-- defaultTable: 默认的表名
+- `ctx`: 可以基于当前请求的上下文来动态生成表名
+- `where`: 可以基于 where 条件来动态生成表名
+- `defaultTable`: 默认的表名
 
 ## 软删除, 多实例/多租户
 
