@@ -57,7 +57,7 @@ class ServiceOrder {
 }  
 ```
 
-So far, `system default datasource` has been used to query the user information of `userId=1` and a list of all orders for this user
+So far, `system default datasource` has been used to query the user information of `userId=1` and the order list of this user
 
 ## Create Datasources
 
