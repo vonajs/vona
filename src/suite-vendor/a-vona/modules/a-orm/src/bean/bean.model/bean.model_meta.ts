@@ -1,5 +1,5 @@
 import type { ServiceDb } from '../../service/db_.ts';
-import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelClassLike, TypeModelRelationOptionsMetaClient } from '../../types/index.ts';
+import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelClassLike, TypeModelOptionsTable, TypeModelRelationOptionsMetaClient } from '../../types/index.ts';
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
@@ -16,9 +16,9 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public [SymbolKeyModelOptions]: IDecoratorModelOptions;
 
   private [SymbolModelDb]?: ServiceDb;
-  private [SymbolModelTable]?: keyof ITableRecord;
+  private [SymbolModelTable]?: TypeModelOptionsTable;
 
-  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
+  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: TypeModelOptionsTable) {
     // clientName
     if (!isNil(clientName)) {
       if (typeof clientName === 'string') {
@@ -68,11 +68,11 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   }
 
   getTable(where: object | undefined): keyof ITableRecord {
-    return this[SymbolModelTable] ?? this._getTable(where);
+    return this._getTable(where);
   }
 
   private _getTable(where: object | undefined) {
-    const table = this.options.table;
+    const table = this[SymbolModelTable] ?? this.options.table;
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
     if (table && typeof table === 'function') {
@@ -171,12 +171,13 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   public newInstanceTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
     modelClassTarget: TypeModelClassLike<MODEL>,
     client?: TypeModelRelationOptionsMetaClient,
-    table?: keyof ITableRecord,
+    table?: TypeModelOptionsTable,
   ): BeanModelMeta {
     const modelClass2 = prepareClassModel(modelClassTarget);
     const beanOptions = appResource.getBean(modelClass2);
     const beanFullName = beanOptions!.beanFullName;
     const options = beanOptions?.options as IDecoratorModelOptions | undefined;
+    // client
     if (isNil(client) || client === '_auto_') {
       client = options?.client ? '_initial_' : '_inherit_';
     }

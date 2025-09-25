@@ -93,7 +93,6 @@ export class ServiceRelations extends BeanBase {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(model, options?.meta) as BeanModelCache;
-    const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
@@ -120,13 +119,13 @@ export class ServiceRelations extends BeanBase {
         entity[relationName] = optionsReal.groups ? [] : optionsReal.aggrs ? undefined : [];
       } else {
         if (optionsReal.groups) {
-          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
+          const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
           entity[relationName] = await modelTarget.group(options2, methodOptionsReal);
         } else if (optionsReal.aggrs) {
-          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
+          const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
           entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
         } else {
-          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.${key}`]: idFrom } });
+          const options2 = deepExtend({}, optionsReal, { where: { [key]: idFrom } });
           entity[relationName] = await modelTarget.select(options2, methodOptionsReal);
         }
       }
@@ -139,10 +138,10 @@ export class ServiceRelations extends BeanBase {
         const itemsMiddle = await modelTargetMiddle.select({ where: { [keyFrom]: idFrom } }, methodOptionsReal);
         const idsTo = itemsMiddle.map(item => item[keyTo]);
         if (optionsReal.groups) {
-          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
+          const options2 = deepExtend({}, optionsReal, { where: { id: idsTo } });
           entity[relationName] = await modelTarget.group(options2, methodOptionsReal);
         } else if (optionsReal.aggrs) {
-          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
+          const options2 = deepExtend({}, optionsReal, { where: { id: idsTo } });
           entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
         } else {
           const options2 = deepExtend({}, methodOptionsReal, optionsReal);
@@ -160,7 +159,6 @@ export class ServiceRelations extends BeanBase {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(model, options?.meta) as BeanModelCache;
-    const tableNameTarget = modelTarget.getTable();
     const optionsReal = Object.assign({}, options, { include: includeReal, with: withReal });
     const methodOptionsReal = Object.assign({}, methodOptions, { columns: undefined });
     if (type === 'hasOne') {
@@ -192,8 +190,8 @@ export class ServiceRelations extends BeanBase {
     } else if (type === 'hasMany') {
       const idsFrom = entities.map(item => cast(item).id).filter(id => !isNil(id));
       if (optionsReal.groups) {
-        const groups = [`${tableNameTarget}.${key}`].concat(optionsReal.groups);
-        const options2 = deepExtend({}, optionsReal, { groups, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+        const groups = [key].concat(optionsReal.groups);
+        const options2 = deepExtend({}, optionsReal, { groups, where: { [key]: idsFrom } });
         const items = await modelTarget.group(options2, methodOptionsReal);
         for (const entity of entities) {
           entity[relationName] = [];
@@ -205,7 +203,7 @@ export class ServiceRelations extends BeanBase {
           }
         }
       } else if (optionsReal.aggrs) {
-        const options2 = deepExtend({}, optionsReal, { groups: `${tableNameTarget}.${key}`, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+        const options2 = deepExtend({}, optionsReal, { groups: key, where: { [key]: idsFrom } });
         const items = await modelTarget.group(options2, methodOptionsReal);
         for (const entity of entities) {
           const item = items.find(item => item[key] === cast(entity).id);
@@ -216,7 +214,7 @@ export class ServiceRelations extends BeanBase {
         }
       } else {
         const [columns, withKey] = this.__prepareColumnsAndKey(optionsReal.columns, key);
-        const options2 = deepExtend({}, optionsReal, { columns, where: { [`${tableNameTarget}.${key}`]: idsFrom } });
+        const options2 = deepExtend({}, optionsReal, { columns, where: { [key]: idsFrom } });
         const items = await modelTarget.select(options2, methodOptionsReal);
         for (const entity of entities) {
           entity[relationName] = [];
@@ -240,13 +238,13 @@ export class ServiceRelations extends BeanBase {
       if (optionsReal.groups) {
         for (const entity of entities) {
           const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
-          const options2 = deepExtend({}, optionsReal, { groups: optionsReal.groups, where: { [`${tableNameTarget}.id`]: idsTo } });
+          const options2 = deepExtend({}, optionsReal, { groups: optionsReal.groups, where: { id: idsTo } });
           entity[relationName] = await modelTarget.group(options2, methodOptionsReal);
         }
       } else if (optionsReal.aggrs) {
         for (const entity of entities) {
           const idsTo = itemsMiddle.filter(item => item[keyFrom] === cast(entity).id).map(item => item[keyTo]);
-          const options2 = deepExtend({}, optionsReal, { where: { [`${tableNameTarget}.id`]: idsTo } });
+          const options2 = deepExtend({}, optionsReal, { where: { id: idsTo } });
           entity[relationName] = await modelTarget.aggregate(options2, methodOptionsReal);
         }
       } else {

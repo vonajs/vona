@@ -31,9 +31,11 @@ export interface ISoftDeletionPrune {
   expired?: number;
 }
 
+export type TypeModelOptionsTable = TypeDynamicTableName | keyof ITableRecord;
+
 export interface IDecoratorModelOptions<TRecord extends EntityBaseEmpty = any> {
   entity?: Constructable<TRecord>;
-  table?: TypeDynamicTableName | keyof ITableRecord;
+  table?: TypeModelOptionsTable;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableCreateTime?: boolean;
