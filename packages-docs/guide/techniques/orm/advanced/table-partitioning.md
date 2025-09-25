@@ -73,9 +73,9 @@ class ServiceOrder {
 
 So far, we've used the `default` table to query user information of `userId=129` and the order list of this user
 
-## Using Table-partitioning: 动态方式
+## Using Table-partitioning: Dynamic Way
 
-可以在代码中动态使用分表：
+You can use table-partitioning dynamically in your code:
 
 ``` diff
 class ServiceOrder {
@@ -92,13 +92,13 @@ class ServiceOrder {
 }  
 ```
 
-- `newInstance`: 传入要使用的表名，返回新的 Model 实例
+- `newInstance`: Passes the table name to use and returns a new model instance
 
-到目前为止，使用`分表`查询`userId=129`的订单列表
+So far, we've used the `table-partitioning` to query order list
 
-## Using Table-partitioning: Relation动态选项
+## Using Table-partitioning: Relation dynamic options
 
-可以在 relation 选项中动态指定表名：
+The table name can be specified dynamically in the relation options:
 
 ``` diff
 class ServiceOrder {
@@ -120,13 +120,13 @@ class ServiceOrder {
 }  
 ```
 
-- `meta.table`: 指定 relation `orders`要使用的表名
+- `meta.table`: specifies the table name to be used by relation `orders`
 
-到目前为止，使用`默认表名`查询`userId=129`的用户信息，使用`分表`查询该用户的订单列表
+So far, we use the `defalut` table to query user information and the `table-partitioning` to query order list
 
-## Using Table-partitioning: Model配置
+## Using Table-partitioning: Model options
 
-也可以直接在 Model 中配置分表规则，从而简化查询代码
+You can also configure the `table-partitioning` directly in the Model options to simplify the query code
 
 1. Model Order
 
@@ -142,11 +142,11 @@ class ServiceOrder {
 class ModelOrder{}
 ```
 
-- `table`: 指定函数，实现分表规则
+- `table`: Specify a function to implement table-partitioning rules
 
-2. 查询数据
+2. Query data
 
-现在，又可以使用常规的方式查询用户的订单列表
+Now, you can query the user's order list in the usual way
 
 ``` typescript
 class ServiceOrder {
@@ -176,9 +176,9 @@ class ServiceOrder {
 }  
 ```
 
-## Using Table-partitioning: App Config配置
+## Using Table-partitioning: App config
 
-也可以在 App config 中配置 Model options:
+You can also configure Model options in App config:
 
 `src/backend/config/config/config.ts`
 
@@ -197,11 +197,11 @@ config.onions = {
 };
 ```
 
-于是，也可以使用常规的方式查询用户的订单列表
+Therefore, you can also use the usual way to query the user's order list
 
-## Using Table-partitioning: Relation静态选项
+## Using Table-partitioning: Relation static options
 
-也可以在定义 Relation 时指定静态选项：
+Static options can also be specified when defining a Relation:
 
 ``` diff
 @Model({
@@ -221,4 +221,4 @@ config.onions = {
 class ModelUser {}
 ```
 
-同样，也可以使用常规的方式查询用户的订单列表
+Similarly, you can also use the usual way to query the user's order list
