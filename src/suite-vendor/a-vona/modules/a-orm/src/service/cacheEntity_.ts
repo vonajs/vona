@@ -12,14 +12,14 @@ export class ServiceCacheEntity extends ModelCacheBase {
 
   public async clear(table?: keyof ITableRecord) {
     if (!this.enabled) return;
-    table = table || this._model.getTable();
+    table = table || this._model.getTable(undefined);
     const cache = this.getInstance(table);
     await cache.clear();
   }
 
   public async del(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     if (!this.enabled) return;
-    table = table || this._model.getTable();
+    table = table || this._model.getTable(undefined);
     const cache = this.getInstance(table);
     if (Array.isArray(id)) {
       await cache.mdel(id);
