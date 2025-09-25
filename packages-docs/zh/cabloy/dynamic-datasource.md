@@ -74,7 +74,7 @@ await this.bean.datasource.update({
 });
 ```
 
-- `update`: 该操作执行以下逻辑
+- `update`: 该操作执行以下逻辑:
   1. 更新数据表中的数据
   2. 更新系统中已经创建的数据源对象的状态信息
 
@@ -83,3 +83,7 @@ await this.bean.datasource.update({
 ``` typescript
 await this.bean.datasource.remove(entityDatasource.id);
 ```
+
+- `remove`: 该操作执行以下逻辑:
+  1. 删除数据表中的数据
+  2. 销毁系统中已经创建的数据源对象
