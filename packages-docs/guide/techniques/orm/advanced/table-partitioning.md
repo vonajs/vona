@@ -37,7 +37,7 @@ class ModelUser {}
 
 ## Query data
 
-### 1. 直接查询订单列表
+### 1. Query the order list directly
 
 ``` typescript
 class ServiceOrder {
@@ -52,9 +52,9 @@ class ServiceOrder {
 }  
 ``` 
 
-到目前为止，使用`默认表名`查询`userId=129`的订单列表
+So far, we've used the `default` table to query order list of `userId=129`
 
-### 2. 基于关系查询订单列表
+### 2. Query the order list by relation
 
 ``` typescript
 class ServiceOrder {
@@ -71,9 +71,9 @@ class ServiceOrder {
 }  
 ```
 
-到目前为止，使用`默认表名`查询`userId=129`的用户信息，使用`默认表名`查询该用户的订单列表
+So far, we've used the `default` table to query user information of `userId=129` and the order list of this user
 
-## 使用分表：动态方式
+## Using Table-partitioning: 动态方式
 
 可以在代码中动态使用分表：
 
@@ -96,7 +96,7 @@ class ServiceOrder {
 
 到目前为止，使用`分表`查询`userId=129`的订单列表
 
-## 使用分表：Relation动态选项
+## Using Table-partitioning: Relation动态选项
 
 可以在 relation 选项中动态指定表名：
 
@@ -124,7 +124,7 @@ class ServiceOrder {
 
 到目前为止，使用`默认表名`查询`userId=129`的用户信息，使用`分表`查询该用户的订单列表
 
-## 使用分表：Model配置
+## Using Table-partitioning: Model配置
 
 也可以直接在 Model 中配置分表规则，从而简化查询代码
 
@@ -176,7 +176,7 @@ class ServiceOrder {
 }  
 ```
 
-## 使用分表：App Config配置
+## Using Table-partitioning: App Config配置
 
 也可以在 App config 中配置 Model options:
 
@@ -199,7 +199,7 @@ config.onions = {
 
 于是，也可以使用常规的方式查询用户的订单列表
 
-## 使用分表：Relation静态选项
+## Using Table-partitioning: Relation静态选项
 
 也可以在定义 Relation 时指定静态选项：
 
