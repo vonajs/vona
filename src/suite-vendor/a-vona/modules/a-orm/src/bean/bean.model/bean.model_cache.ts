@@ -577,7 +577,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
-      table: this.getTable(),
+      table,
       method: 'cacheEntityDelInner',
       args: [id, table],
     });
@@ -596,7 +596,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
-      table: this.getTable(),
+      table,
       method: 'cacheEntityClearInner',
       args: [table],
     });
@@ -615,7 +615,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
-      table: this.getTable(),
+      table,
       method: 'cacheQueryClearInner',
       args: [table],
     });

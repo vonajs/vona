@@ -6,7 +6,7 @@ import { BeanQueueBase, Queue } from 'vona-module-a-queue';
 export interface TypeQueueDoubleDeleteJobData {
   beanFullName: string;
   clientName: keyof IDatabaseClientRecord;
-  table: keyof ITableRecord;
+  table?: keyof ITableRecord;
   method: 'cacheEntityDelInner' | 'cacheEntityClearInner' | 'cacheQueryClearInner';
   args: any[];
 }
