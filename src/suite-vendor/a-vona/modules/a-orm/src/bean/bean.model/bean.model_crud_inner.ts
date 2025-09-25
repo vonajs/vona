@@ -32,7 +32,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<(TRecord | undefined)[]> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable(undefined);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // ids maybe empty
     if (!ids || ids.length === 0) return [];
@@ -65,7 +65,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     builder?: Knex.QueryBuilder<TRecord, TRecord[]>,
   ): Promise<TRecord[]> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable(params?.where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // builder
     builder = builder ?? this._select_buildParams(table, params as any, options);
@@ -111,7 +111,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     options?: IModelGetOptionsGeneral<TRecord>,
   ): Promise<TRecord | undefined> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable(where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // params
     const params: IModelSelectParams<TRecord> = { where, limit: 1 };
@@ -131,7 +131,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     options?: IModelMethodOptionsGeneral,
   ): Promise<BigNumber | undefined> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable(params?.where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
@@ -154,12 +154,12 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     data?: Partial<TRecord> | Partial<TRecord>[],
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord | TRecord[]> {
-    // table
-    table = table || this.getTable();
-    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // data
     data = data || {} as any;
     const datasTemp = Array.isArray(data) ? data : [data];
+    // table
+    table = table || this.getTable(datasTemp[0]);
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // options
     const datas: any[] = [];
     const datasOriginal: any[] = [];
@@ -199,7 +199,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     options?: IModelUpdateOptionsGeneral<TRecord>,
   ): Promise<Partial<TRecord>> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable(data);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // data
     [data] = await this.prepareData(table, data);
@@ -237,7 +237,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     options?: IModelMethodOptionsGeneral,
   ): Promise<void> {
     // table
-    table = table || this.getTable();
+    table = table || this.getTable(where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
