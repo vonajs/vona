@@ -11,7 +11,7 @@ export interface IModelRecord {}
 export interface IModelClassRecord {}
 
 export type TypeDynamicTableName =
-  (ctx: VonaContext, where: object | undefined, defaultTable: keyof ITableRecord, modelInstance: any) => string;
+  (ctx: VonaContext, where: any | undefined, defaultTable: keyof ITableRecord, modelInstance: any) => string;
 
 export type TypeDynamicClientName =
   (ctx: VonaContext, modelInstance: any) => keyof IDatabaseClientRecord;

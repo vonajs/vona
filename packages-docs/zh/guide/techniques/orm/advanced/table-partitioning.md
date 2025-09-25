@@ -133,17 +133,16 @@ class ServiceOrder {
 ``` diff
 @Model({
   entity: EntityOrder,
-+ table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
-+   const user = ctx.app.bean.passport.getCurrentUser();
-+   if (!user) return defaultTable;
-+   return `Order_${Number(user.id) % 16}`;
++ table(_ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) {
++   const userId = where?.userId;
++   if (!userId) return defaultTable;
++   return `Order_${Number(userId) % 16}`;
 + },
 })
 class ModelOrder{}
 ```
 
 - `table`: 指定函数，实现分表规则
-- `passport.getCurrentUser`: 取得当前登录用户
 
 2. 查询数据
 
@@ -152,10 +151,10 @@ class ModelOrder{}
 ``` typescript
 class ServiceOrder {
   async selectOrdersDirectly() {
-    const user = this.bean.passport.getCurrentUser()!;
+    const userId = 129;
     const orders = await this.scope.model.order.select({
       where: {
-        userId: user.id,
+        userId,
       },
     });
   }
@@ -165,9 +164,9 @@ class ServiceOrder {
 ``` typescript
 class ServiceOrder {
   async selectOrdersByRelation() {
-    const user = this.bean.passport.getCurrentUser()!;
+    const userId = 129;
     const userAndOrders = await this.scope.model.user.get({
-      id: user.id,
+      id: userId,
     }, {
       include: {
         orders: true,
@@ -188,10 +187,10 @@ class ServiceOrder {
 config.onions = {
   model: {
     'test-vona:order': {
-      table: (ctx: VonaContext, defaultTable: keyof ITableRecord) => {
-        const user = ctx.app.bean.passport.getCurrentUser();
-        if (!user) return defaultTable;
-        return `Order_${Number(user.id) % 16}`;
+      table(_ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) {
+        const userId = where?.userId;
+        if (!userId) return defaultTable;
+        return `Order_${Number(userId) % 16}`;
       },
     },
   },
@@ -204,46 +203,22 @@ config.onions = {
 
 也可以在定义 Relation 时指定静态选项：
 
-1. Model User
-
-假如有一个需求，将订单分为两张表，`用户Id`为奇数使用表`Order_A`，为偶数使用表`Order_B`。那么，可以定义两个 Relations：
-
 ``` diff
 @Model({
   entity: EntityUser,
   relations: {
-    orders: $relation.hasMany(() => ModelOrder, 'userId'),
-+   ordersA: $relation.hasMany(() => ModelOrder, 'userId', {
+    orders: $relation.hasMany(() => ModelOrder, 'userId', {
 +     meta: {
-+       client: 'Order_A' as any,
++       table(_ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) {
++         const userId = where?.userId;
++         if (!userId) return defaultTable;
++         return `Order_${Number(userId) % 16}`;
++       },
 +     },
-+   }),
-+   ordersB: $relation.hasMany(() => ModelOrder, 'userId', {
-+     meta: {
-+       client: 'Order_B' as any,
-+     },
-+   }),
+    }),
   },
 })
 class ModelUser {}
 ```
 
-2. 查询数据
-
-``` diff
-class ServiceOrder {
-  async selectOrdersByRelation() {
-    const user = this.bean.passport.getCurrentUser()!;
-+   const relationName = Number(user.id) % 2 === 1 ? 'ordersA' : 'ordersB';
-    const userAndOrders = await this.scope.model.user.get({
-      id: user.id,
-    }, {
-      include: {
-+       [relationName]: true,
-      },
-    });
-  }
-}  
-```
-
-- 动态判断需要使用的 Relation，从而查询相应`分表`的订单列表
+同样，也可以使用常规的方式查询用户的订单列表
