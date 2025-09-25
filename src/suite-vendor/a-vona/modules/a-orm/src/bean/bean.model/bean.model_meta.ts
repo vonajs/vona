@@ -67,16 +67,16 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.bean.database.getDb(clientName);
   }
 
-  getTable(): keyof ITableRecord {
-    return this[SymbolModelTable] ?? this._getTable();
+  getTable(where: object | undefined): keyof ITableRecord {
+    return this[SymbolModelTable] ?? this._getTable(where);
   }
 
-  private _getTable() {
+  private _getTable(where: object | undefined) {
     const table = this.options.table;
     if (table && typeof table === 'string') return table;
     const defaultTable = this.options.entity && $tableName(this.options.entity);
     if (table && typeof table === 'function') {
-      return table(this.ctx, defaultTable!, this) as any;
+      return table(this.ctx, where, defaultTable!, this) as any;
     }
     if (defaultTable) return defaultTable;
     throw new Error(`not found table of ${this.$beanFullName}`);
