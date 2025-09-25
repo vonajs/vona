@@ -492,8 +492,6 @@ export interface IModelOptionsUser {
           posts: IModelRelationHasMany<ModelPost, 'userId', false, 'id'|'title', ['test-vona:user',ModelPostContent], undefined, undefined>;
 roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false, 'id'|'name',undefined,undefined,undefined>;
 orders: IModelRelationHasMany<ModelOrder, 'userId', false, undefined, undefined, undefined, undefined>;
-ordersA: IModelRelationHasMany<ModelOrder, 'userId', false, undefined, undefined, undefined, undefined>;
-ordersB: IModelRelationHasMany<ModelOrder, 'userId', false, undefined, undefined, undefined, undefined>;
         };
       }
 export interface IModelOptionsUserStats {

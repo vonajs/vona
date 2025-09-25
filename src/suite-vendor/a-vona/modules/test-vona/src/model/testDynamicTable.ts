@@ -8,7 +8,7 @@ export interface IModelOptionsTestDynamicTable extends IDecoratorModelOptions<En
 
 @Model<IModelOptionsTestDynamicTable>({
   entity: EntityTest,
-  table(ctx: VonaContext, _where: object | undefined, defaultTable: keyof ITableRecord) {
+  table(ctx: VonaContext, _where: EntityTest | undefined, defaultTable: keyof ITableRecord) {
     if (ctx.instanceName !== '') return defaultTable;
     return `${defaultTable}_${moment().format('YYYYMMDD')}`;
   },
