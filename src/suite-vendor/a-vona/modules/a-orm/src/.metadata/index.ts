@@ -109,6 +109,7 @@ declare module 'vona' {
 /** service: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.columnsClear.ts';
+export * from '../bean/broadcast.databaseClientDispose.ts';
 export * from '../bean/broadcast.databaseClientReload.ts';
 
 import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
@@ -116,6 +117,7 @@ declare module 'vona-module-a-broadcast' {
   
     export interface IBroadcastRecord {
       'a-orm:columnsClear': IDecoratorBroadcastOptions;
+'a-orm:databaseClientDispose': IDecoratorBroadcastOptions;
 'a-orm:databaseClientReload': IDecoratorBroadcastOptions;
     }
 
@@ -133,6 +135,16 @@ declare module 'vona-module-a-orm' {
             get $onionName(): 'a-orm:columnsClear';
           }
 
+        export interface BroadcastDatabaseClientDispose {
+          /** @internal */
+          get scope(): ScopeModuleAOrm;
+        }
+
+          export interface BroadcastDatabaseClientDispose {
+            get $beanFullName(): 'a-orm.broadcast.databaseClientDispose';
+            get $onionName(): 'a-orm:databaseClientDispose';
+          }
+
         export interface BroadcastDatabaseClientReload {
           /** @internal */
           get scope(): ScopeModuleAOrm;
@@ -146,9 +158,11 @@ declare module 'vona-module-a-orm' {
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.ts';
+import type { BroadcastDatabaseClientDispose } from '../bean/broadcast.databaseClientDispose.ts';
 import type { BroadcastDatabaseClientReload } from '../bean/broadcast.databaseClientReload.ts';
 export interface IModuleBroadcast {
   'columnsClear': BroadcastColumnsClear;
+'databaseClientDispose': BroadcastDatabaseClientDispose;
 'databaseClientReload': BroadcastDatabaseClientReload;
 }
 /** broadcast: end */

@@ -17,7 +17,7 @@ export class BroadcastDatabaseClientReload
   async execute(data: TypeBroadcastDatabaseClientReloadJobData, isEmitter?: boolean) {
     const { clientName, clientConfig, extraData } = data;
     if (!isEmitter) {
-      await cast(this.scope.service.database).reloadAllClientsRaw(clientName, clientConfig, extraData);
+      await cast(this.scope.service.database).reloadClientsRaw(clientName, clientConfig, extraData);
     }
   }
 }

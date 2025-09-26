@@ -102,7 +102,7 @@ export class ServiceDatabaseClient extends BeanBase {
     // only used by startup, so no consider that workers broadcast
     this.configDatabase.clients[this.clientName] = config;
     // reload
-    await this.scope.service.database.reloadAllClientsRaw(this.clientName, config);
+    await this.scope.service.database.reloadClientsRaw(this.clientName, config);
     // await this.scope.service.database.reloadClients(this.clientName, config);
   }
 }

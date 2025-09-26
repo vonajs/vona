@@ -106,11 +106,11 @@ export class ServiceDatabase extends BeanBase {
   }
 
   async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
-    await this.reloadAllClientsRaw(clientName, clientConfig, extraData);
+    await this.reloadClientsRaw(clientName, clientConfig, extraData);
     this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig, extraData });
   }
 
-  async reloadAllClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
+  async reloadClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
     await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig, extraData });
     this.__columnsClearRaw(clientName);
   }
