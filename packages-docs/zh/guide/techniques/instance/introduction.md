@@ -12,7 +12,7 @@ Vona 支持以下几种`多实例/多租户`模式：
 
 ### 1. 测试环境、开发环境
 
-在测试环境和开发环境中，系统默认提供了一个`缺省实例`，同时提供了两个`测试实例`，用于演示如何使用`共享模式`和`独立模式`：
+在测试环境和开发环境中，系统默认提供了一个`缺省实例`。同时提供了两个`测试实例`，用于演示如何使用`共享模式`和`独立模式`：
 
 `src/backend/config/config/config.test.ts`
 
@@ -31,9 +31,9 @@ config.instances = [
 
 |名称|说明|
 |--|--|
-|empty|默认实例|
+|empty|缺省实例|
 |shareTest|用于演示`共享模式`，具体而言，`shareTest`与`empty`共享同一个数据库|
-|isolateTest|用于演示`独立模式`，具体而言，就是使用独立的数据库|
+|isolateTest|用于演示`独立模式`，具体而言，`isolateTest`使用独立的数据库|
 
 * 实例属性
 
@@ -62,11 +62,25 @@ config.instances = [
 
 ## 如何添加新实例
 
-下面以实例`shareTest`为例，说明如何添加新实例：
+下面以实例`shareTest`为例，演示如何添加新实例：
 
 ### 1. 添加类型定义
 
+`src/backend/config/config/config.ts`
+
+``` typescript
+declare module 'vona' {
+  export interface IInstanceRecord {
+    shareTest: never;
+  }
+}
+```
+
+- 采用接口合并机制添加新实例的类型定义
+
 ### 2. 增加实例配置
+
+在需要的 config 文件中添加实例配置，比如在测试环境配置新实例：
 
 `src/backend/config/config/config.test.ts`
 
@@ -77,10 +91,7 @@ config.instances = [
 ];
 ```
 
-
-
-
-### 2. 
+- 对于`独立模式`，还需要配置数据源，参见: [数据源配置](../orm/config-datasource.md)
 
 ## 获取当前实例名的规则
 
