@@ -3,11 +3,13 @@ import { appResource } from '../core/resource.ts';
 import { BeanSimple } from './beanSimple.ts';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');
+export const SymbolBeanInstanceKey = Symbol('SymbolBeanInstanceKey');
 export const SymbolModuleBelong = Symbol('SymbolModuleBelong');
 export const SymbolModuleName = Symbol('SymbolModuleName');
 
 export class BeanBaseSimple extends BeanSimple {
   private [SymbolBeanFullName]: string;
+  private [SymbolBeanInstanceKey]: string;
 
   protected get [SymbolModuleBelong]() {
     return appResource._getModuleBelong(this[SymbolBeanFullName]);
@@ -19,6 +21,10 @@ export class BeanBaseSimple extends BeanSimple {
 
   public get $beanFullName() {
     return this[SymbolBeanFullName];
+  }
+
+  public get $beanInstanceKey() {
+    return this[SymbolBeanInstanceKey];
   }
 
   protected get $beanOptions(): IDecoratorBeanOptionsBase {

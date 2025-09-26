@@ -11,7 +11,7 @@ import { __prepareInjectSelectorInfo } from '../decorator/index.ts';
 import { compose } from '../utils/util.ts';
 import { BeanAopBase } from './beanAopBase.ts';
 import { BeanBase } from './beanBase.ts';
-import { SymbolBeanFullName } from './beanBaseSimple.ts';
+import { SymbolBeanFullName, SymbolBeanInstanceKey } from './beanBaseSimple.ts';
 import { BeanSimple } from './beanSimple.ts';
 
 const SymbolProxyMagic = Symbol('SymbolProxyMagic');
@@ -152,6 +152,7 @@ export class BeanContainer {
       const fullName = appResource.getBeanFullName(beanFullName);
       if (fullName) {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
+        __setPropertyValue(beanInstance, SymbolBeanInstanceKey, key);
         this[SymbolBeanContainerInstances][key] = beanInstance;
       }
     }
