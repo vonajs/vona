@@ -17,6 +17,7 @@ export class ServiceDatabaseClient extends BeanBase {
   private _knex: Knex;
   private _db: ServiceDb;
   private _onDatabaseClientReloadCancel?: Function;
+  private _onDatabaseClientDisposeCancel?: Function;
 
   get configDatabase() {
     return this.app.config.database;
@@ -35,10 +36,17 @@ export class ServiceDatabaseClient extends BeanBase {
     this._db = this.bean._newBean(ServiceDb, this);
     // load
     this.__load(clientNameSelector, clientConfig);
-    // event
+    // event: databaseClientReload
     this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async ({ clientName, clientConfig }, next) => {
       if (clientName === this.clientName) {
         await this.reload(clientConfig);
+      }
+      await next();
+    });
+    // event: databaseClientDispose
+    this._onDatabaseClientDisposeCancel = this.scope.event.databaseClientDispose.on(async ({ clientName }, next) => {
+      if (clientName === this.clientName) {
+        await this.__dispose__();
       }
       await next();
     });
@@ -48,6 +56,7 @@ export class ServiceDatabaseClient extends BeanBase {
     this._db = undefined as any;
     await this.__close();
     this._onDatabaseClientReloadCancel?.();
+    this._onDatabaseClientDisposeCancel?.();
   }
 
   private __load(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
