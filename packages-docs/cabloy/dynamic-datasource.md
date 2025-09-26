@@ -54,7 +54,7 @@ await db.transaction.begin(async () => {
 });
 ```
 
-- `db.transaction.begin`: Begin a database transaction on db
+- `db.transaction.begin`: Start a database transaction on db
 
 ## Update datasource
 
