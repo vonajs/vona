@@ -1,12 +1,18 @@
 # Multi-Instance/Multi-Tenancy
 
-Vona supports the development of `multi-tenancy` SaaS systems through the concept of `multi-instance`. Simply launch a single backend service and you can run multiple instances simultaneously. Instances share the same database schema, but the data generated during operation is isolated from each other
+VonaJS supports the development of `multi-tenancy` SaaS systems through the concept of `multi-instance`. Simply launch a single backend service and you can run multiple instances simultaneously
+
+VonaJS supports the following `Multi-Instance/Multi-Tenancy` modes:
+
+1. `Shared Mode`: Multiple instances share the same database, isolating data between them using the `instance ID` field
+2. `Isolated Mode`: Each instance uses its own isolated database
+3. `Hybrid Mode`: Both `shared` and `isolated` modes are supported within a single system, allowing you to specify whether an instance uses a shared or isolated database
 
 ## Instance Configuration
 
 ### 1. Test Environment and Development Environment
 
-In the test and development environments, a default instance is assigned by default:
+In the test and development environments, a `empty` instance is provided by default, and two `test instances` are provided to demonstrate how to use `shared mode` and `isolated mode`:
 
 `src/backend/config/config/config.test.ts`
 
@@ -16,8 +22,20 @@ In the test and development environments, a default instance is assigned by defa
 // instances
 config.instances = [
   { name: '', password: '', title: '', config: {} },
+  { name: 'shareTest', password: '', title: '' },
+  { name: 'isolateTest', password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
 ];
 ```
+
+* Instance List
+
+|Name|Description|
+|--|--|
+|empty|Default instance|
+|shareTest|Used to demonstrate `shared mode`, specifically, `shareTest` shares the same database with `empty`|
+|isolateTest|Used to demonstrate `isolated mode`, specifically, `isolateTest` using an isolated database|
+
+* Instance Fields
 
 |Name|Description|
 |--|--|
@@ -25,6 +43,9 @@ config.instances = [
 |password|Initial password for the `admin` user in the instance, defaults to `123456`|
 |title|Website title|
 |config|Instance configuration information|
+|id|When using `isolated mode`, you must explicitly specify a unique `Instance Id`|
+|isolate|Whether to use `isolated mode`, the default is `shared mode`|
+|isolateClient|When using `isolated mode`, you must explicitly specify `datasource`|
 
 ### 2. Production Environment
 
@@ -35,9 +56,11 @@ In the production environment, you need to configure instance information yourse
 ``` typescript
 config.instances = [
   { name: '', password: '', title: '', config: {} },
-  { name: 'cabloy.store', password: '', title: '', config: {} },
+  { name: 'vona', password: '', title: '', config: {} },
 ];
 ```
+
+
 
 ## Rules for Obtaining the Current Instance Name
 
@@ -115,7 +138,7 @@ const iid = this.ctx.instance.id;
 
 ### 2. Using the Model to Operate the Database
 
-Since data across multi-instance is isolated, you must specify the `instance id` when operating the database. Vona provides a very powerful `Model` object, which can transparently handle multi-instance
+Since data across multi-instance is isolated, you must specify the `instance id` when operating the database. VonaJS provides a very powerful `Model` object, which can transparently handle multi-instance
 
 ``` typescript
 // create
