@@ -63,8 +63,8 @@ config.modules = {
 |名称|说明|
 |--|--|
 |getInstanceName|提供自定义函数，用于获取当前实例名|
-|headerField|从request header中获取当前实例名，header key默认为'x-vona-instance-name'|
-|queryField|从request query中获取当前实例名，query key默认为'x-vona-instance-name'|
+|headerField|从request header中获取当前实例名，header key默认为`x-vona-instance-name`|
+|queryField|从request query中获取当前实例名，query key默认为`x-vona-instance-name`|
 
 ### 2. 规则次序
 

@@ -63,8 +63,8 @@ config.modules = {
 |Name|Description|
 |--|--|
 |getInstanceName|Provides a custom function for obtaining the current instance name|
-|headerField|Gets the current instance name from the request header. The header key defaults to 'x-vona-instance-name'|
-|queryField|Gets the current instance name from the request query. The query key defaults to 'x-vona-instance-name'|
+|headerField|Gets the current instance name from the request header. The header key defaults to `x-vona-instance-name`|
+|queryField|Gets the current instance name from the request query. The query key defaults to `x-vona-instance-name`|
 
 ### 2. Rule Order
 
