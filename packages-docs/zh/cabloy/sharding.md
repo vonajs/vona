@@ -93,6 +93,31 @@ config.modules = {
 
 由于数据库同步有延时，会出现数据不一致性的情况。比如，用户访问 API Write，将数据写入`写数据库`。接下来，用户访问 API Read，此时`读数据库`还没有同步，那么就会读到旧数据库
 
-为了解决以上问题，模块自动提供了一个机制：当用户访问 API Write 时，会自动将`写数据源`存入 Redis 缓存，并设置过期时间。在这个时间之内，用户访问 API Read 时，也会继续使用同一个`写数据源`，从而确保在写入数据后总是可以读取到最新的数据
+为了解决以上问题，模块自动提供了一个机制：当用户访问 API Write 时，会自动将`写数据源`存入`二级缓存`，并设置过期时间。在这个时间之内，用户访问 API Read 时，也会继续使用同一个`写数据源`，从而确保在写入数据后总是可以读取到最新的数据
 
+### 修改过期时间
 
+`二级缓存`的名称是`a-datasharding:datasourceWrite`，可以在 App config 中修改过期时间：
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// onions
+config.onions = {
+  summerCache: {
+    'a-datasharding:datasourceWrite': {
+      mem: {
+        ttl: 3 * 60 * 1000, // 3 minutes
+      },
+      redis: {
+        ttl: 3 * 60 * 1000, // 3 minutes
+      },
+    },
+  },
+};
+```
+
+|名称|说明|
+|--|--|
+|mem.ttl|Mem缓存的过期时间，默认为2分钟|
+|redis.ttl|Redis缓存的过期时间，默认为2分钟|
