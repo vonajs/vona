@@ -58,6 +58,16 @@ export class BeanContainer {
     this[SymbolBeanContainerInstances] = {};
   }
 
+  public async disposeInstance(beanInstanceKey: string) {
+    const beanInstance = this[SymbolBeanContainerInstances][beanInstanceKey] as any;
+    if (beanInstance) {
+      if (!(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
+        await beanInstance.__dispose__();
+      }
+      delete this[SymbolBeanContainerInstances][beanInstanceKey];
+    }
+  }
+
   /** get specific module's scope */
   scope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
   // scope<T>(moduleScope: string): T;

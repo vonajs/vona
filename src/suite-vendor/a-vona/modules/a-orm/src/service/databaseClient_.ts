@@ -46,7 +46,7 @@ export class ServiceDatabaseClient extends BeanBase {
     // event: databaseClientDispose
     this._onDatabaseClientDisposeCancel = this.scope.event.databaseClientDispose.on(async ({ clientName }, next) => {
       if (clientName === this.clientName) {
-        await this.__dispose__();
+        await this.bean.disposeInstance(this.$beanInstanceKey);
       }
       await next();
     });
