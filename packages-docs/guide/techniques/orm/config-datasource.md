@@ -93,6 +93,8 @@ If we want to add a new datasource, named `pgOrder`, using the database dialect 
 
 Add type definitions for the new datasource
 
+`src/backend/config/config/config.ts`
+
 ``` typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
