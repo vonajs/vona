@@ -114,4 +114,14 @@ export class ServiceDatabase extends BeanBase {
     await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig, extraData });
     this.__columnsClearRaw(clientName);
   }
+
+  async disposeClients(clientName?: keyof IDatabaseClientRecord) {
+    await this.disposeClientsRaw(clientName);
+    this.scope.broadcast.databaseClientDispose.emit({ clientName });
+  }
+
+  async disposeClientsRaw(clientName?: keyof IDatabaseClientRecord) {
+    await this.scope.event.databaseClientDispose.emit({ clientName: this.prepareClientName(clientName) });
+    this.__columnsClearRaw(clientName);
+  }
 }
