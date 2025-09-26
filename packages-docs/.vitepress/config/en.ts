@@ -29,6 +29,7 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Introduction', link: 'introduction' },
     { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
+    { text: 'Sharding', link: 'sharding' },
   ];
 }
 
@@ -177,6 +178,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Multi-database/Multi-datasource', link: 'multi-database' },
                 { text: 'Table-partitioning', link: 'table-partitioning' },
                 { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
+                { text: 'Sharding', link: 'sharding' },
               ],
             },
           ],
