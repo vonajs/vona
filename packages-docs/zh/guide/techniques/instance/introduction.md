@@ -1,12 +1,18 @@
 # 多实例/多租户
 
-Vona 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需启动一个后端服务，即可支持多个实例同时运行。实例共享数据表架构，但运行中产生的数据是相互隔离的
+Vona 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需启动一个后端服务，即可支持多个实例同时运行
+
+Vona 支持以下几种`多实例/多租户`模式：
+
+1. `共享模式`：多个实例共享同一个数据库，通过`实例Id`字段隔离多实例之间的数据
+2. `独立模式`：每个实例都使用独立的数据库，从而满足大数据量的业务需求
+3. `混合模式`：在一个系统中同时支持`共享模式`和`独立模式`，从而可以精确指定某个实例使用`共享数据库`还是`独立数据库`
 
 ## 实例配置
 
 ### 1. 测试环境、开发环境
 
-在测试环境和开发环境中，系统默认分配了一个缺省实例：
+在测试环境和开发环境中，系统默认提供了一个`缺省实例`，同时提供了两个`测试实例`，用于演示如何使用`共享模式`和`独立模式`：
 
 `src/backend/config/config/config.test.ts`
 
@@ -16,8 +22,20 @@ Vona 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需�
 // instances
 config.instances = [
   { name: '', password: '', title: '', config: {} },
+  { name: 'shareTest', password: '', title: '' },
+  { name: 'isolateTest', password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
 ];
 ```
+
+* 实例清单
+
+|名称|说明|
+|--|--|
+|empty|默认实例|
+|shareTest|用于演示`共享模式`，具体而言，`shareTest`与`empty`共享同一个数据库|
+|isolateTest|用于演示`独立模式`，具体而言，就是使用独立的数据库|
+
+* 实例属性
 
 |名称|说明|
 |--|--|
@@ -25,6 +43,9 @@ config.instances = [
 |password|实例中用户`admin`的初始密码，默认是`123456`|
 |title|网站标题|
 |config|实例的配置信息|
+|id|当使用`独立模式`时，必须明确指定唯一的`实例Id`|
+|isolate|是否使用`独立模式`，默认为`共享模式`|
+|isolateClient|当使用`独立模式`时，必须明确指定`数据源`|
 
 ### 2. 生产环境
 
@@ -38,6 +59,28 @@ config.instances = [
   { name: 'vona', password: '', title: '', config: {} },
 ];
 ```
+
+## 如何添加新实例
+
+下面以实例`shareTest`为例，说明如何添加新实例：
+
+### 1. 添加类型定义
+
+### 2. 增加实例配置
+
+`src/backend/config/config/config.test.ts`
+
+``` typescript
+// instances
+config.instances = [
+  { name: 'shareTest', password: '', title: '' },
+];
+```
+
+
+
+
+### 2. 
 
 ## 获取当前实例名的规则
 
