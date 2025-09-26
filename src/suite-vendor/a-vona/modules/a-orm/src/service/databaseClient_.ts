@@ -57,6 +57,8 @@ export class ServiceDatabaseClient extends BeanBase {
     await this.__close();
     this._onDatabaseClientReloadCancel?.();
     this._onDatabaseClientDisposeCancel?.();
+    this._onDatabaseClientReloadCancel = undefined;
+    this._onDatabaseClientDisposeCancel = undefined;
   }
 
   private __load(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
