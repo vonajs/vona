@@ -57,7 +57,7 @@ export class ServiceDatabaseClient extends BeanBase {
     this.level = dbInfo.level;
     this.clientName = dbInfo.clientName;
     // config
-    this.clientConfig = clientConfig ? deepExtend({}, clientConfig) : this.getClientConfig(this.clientName);
+    this.clientConfig = clientConfig ? deepExtend({}, clientConfig) : this.scope.service.database.getClientConfig(this.clientName);
     this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this._knex = knex(this.clientConfig);
@@ -73,24 +73,6 @@ export class ServiceDatabaseClient extends BeanBase {
   async reload(clientConfig?: ConfigDatabaseClient) {
     await this.__close();
     this.__load(this.clientNameSelector, clientConfig);
-  }
-
-  getClientConfig(clientName: keyof IDatabaseClientRecord, original: boolean = false): ConfigDatabaseClient {
-    // clientConfig
-    let clientConfig = this.configDatabase.clients[clientName];
-    if (original) return clientConfig;
-    // check
-    if (!clientConfig) {
-      throw new Error(`database config not found: ${clientName}`);
-    }
-    // configBaseClient
-    const dialect = this.scope.service.database.getDialect(clientConfig.client);
-    const configBaseClient = dialect.getConfigBase();
-    // combine
-    const configBase = this.configDatabase.base;
-    clientConfig = deepExtend({}, configBase, configBaseClient, clientConfig);
-    // ready
-    return clientConfig;
   }
 
   getDatabaseName(): string {
@@ -109,16 +91,18 @@ export class ServiceDatabaseClient extends BeanBase {
     return result;
   }
 
-  async changeConfigAndReload(databaseName: string): Promise<void> {
+  // only used by startup, so no consider that workers broadcast
+  async changeConfigConnectionAndReload(databaseName: string): Promise<void> {
     // set databaseName
     const connDatabaseName = this._prepareDatabaseName(databaseName);
     // set config
     //   * should not use this.clientConfig.connection, because password is hidden
-    const config = this.getClientConfig(this.clientName, true);
+    const config = this.scope.service.database.getClientConfig(this.clientName, true);
     config.connection = Object.assign({}, config.connection, connDatabaseName);
     // only used by startup, so no consider that workers broadcast
     this.configDatabase.clients[this.clientName] = config;
     // reload
-    await this.scope.service.database.reloadClients(this.clientName, config);
+    await this.scope.service.database.reloadAllClientsRaw(this.clientName, config);
+    // await this.scope.service.database.reloadClients(this.clientName, config);
   }
 }

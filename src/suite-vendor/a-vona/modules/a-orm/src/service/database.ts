@@ -2,17 +2,39 @@ import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.t
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { isNil } from '@cabloy/utils';
-import { BeanBase } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceDatabase extends BeanBase {
+  get configDatabase() {
+    return this.app.config.database;
+  }
+
   getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
     if (!client) throw new Error('database dialect not specified');
     const beanFullName = this.scope.config.dialects[client];
     const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
     if (!dialect) throw new Error(`database dialect not found: ${client}`);
     return dialect;
+  }
+
+  getClientConfig(clientName: keyof IDatabaseClientRecord, original: boolean = false): ConfigDatabaseClient {
+    // clientConfig
+    let clientConfig = this.configDatabase.clients[clientName];
+    if (original) return clientConfig;
+    // check
+    if (!clientConfig) {
+      throw new Error(`database config not found: ${clientName}`);
+    }
+    // configBaseClient
+    const dialect = this.scope.service.database.getDialect(clientConfig.client);
+    const configBaseClient = dialect.getConfigBase();
+    // combine
+    const configBase = this.configDatabase.base;
+    clientConfig = deepExtend({}, configBase, configBaseClient, clientConfig);
+    // ready
+    return clientConfig;
   }
 
   prepareDbInfo(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): IDbInfo {
@@ -84,11 +106,11 @@ export class ServiceDatabase extends BeanBase {
   }
 
   async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
-    await this.__reloadAllClientsRaw(clientName, clientConfig, extraData);
+    await this.reloadAllClientsRaw(clientName, clientConfig, extraData);
     this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig, extraData });
   }
 
-  private async __reloadAllClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
+  async reloadAllClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
     await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig, extraData });
     this.__columnsClearRaw(clientName);
   }
