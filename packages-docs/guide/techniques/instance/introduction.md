@@ -60,6 +60,38 @@ config.instances = [
 ];
 ```
 
+## How to add a new instance
+
+The following example demonstrates how to add a new instance using the `shareTest` instance:
+
+### 1. Adding Type Definitions
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+declare module 'vona' {
+  export interface IInstanceRecord {
+    shareTest: never;
+  }
+}
+```
+
+- Using the interface merging mechanism to add the type definition for the new instance
+
+### 2. Adding Instance Configuration
+
+Add instance configuration to the required config file, for example, to configure a new instance in the test environment:
+
+`src/backend/config/config/config.test.ts`
+
+``` typescript
+// instances
+config.instances = [
+  { name: 'shareTest', password: '', title: '' },
+];
+```
+
+- For `isolated mode`, you also need to configure a `datasource`. See: [Datasource Config](../orm/config-datasource.md)
 
 
 ## Rules for Obtaining the Current Instance Name
@@ -136,9 +168,9 @@ const instance = this.ctx.instance;
 const iid = this.ctx.instance.id;
 ```
 
-### 2. Using the Model to Operate the Database
+### 2. Using the Model to query data
 
-Since data across multi-instance is isolated, you must specify the `instance id` when operating the database. VonaJS provides a very powerful `Model` object, which can transparently handle multi-instance
+Since data across multi-instance is isolated, you must specify the `instance id` when querying data. VonaJS provides a very powerful `Model` object, which can transparently handle multi-instance
 
 ``` typescript
 // create
@@ -155,9 +187,9 @@ await this.scope.model.student.delete({ id: 1 });
 
 When we use the `student` model to manipulate data, the system automatically sets the `Instance Id`
 
-### 3. Using Query Builder to Operate the Database
+### 3. Using Query Builder to query data
 
-If you use the `builder()` method to operate on the database, you need to add `Instance Id` yourself
+If you use the `builder()` method to query data, you need to add `Instance Id` yourself
 
 ``` typescript
 await this.scope.model.student.builder().where({
@@ -166,7 +198,7 @@ await this.scope.model.student.builder().where({
 });
 ```
 
-If you use the `builderSelect()` method to access the database, the system will automatically add `Instance Id`
+If you use the `builderSelect()` method to query data, the system will automatically add `Instance Id`
 
 ``` typescript
 await this.scope.model.student.builderSelect().where({
@@ -174,9 +206,9 @@ await this.scope.model.student.builderSelect().where({
 });
 ```
 
-### 4. Using Raw SQL to Access the Database
+### 4. Using Raw SQL to query data
 
-If you use `Raw SQL` to access the database, you will need to add `Instance Id` yourself
+If you use `Raw SQL` to query data, you will need to add `Instance Id` yourself
 
 ``` typescript
 await this.scope.model.student.query(
