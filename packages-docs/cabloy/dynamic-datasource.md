@@ -2,7 +2,7 @@
 
 This module allows dynamic creation of datasources during system runtime, thereby managing third-party database data
 
-## Install
+## Install Module
 
 ``` bash
 $ pnpm add vona-module-a-datasource -w

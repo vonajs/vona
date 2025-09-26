@@ -103,7 +103,7 @@ declare module 'vona-module-a-orm' {
 }
 ```
 
-### 2. 增加数据源配置：
+### 2. 增加数据源配置
 
 `src/backend/config/config/config.ts`
 

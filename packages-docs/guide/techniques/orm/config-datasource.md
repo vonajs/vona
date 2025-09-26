@@ -103,7 +103,7 @@ declare module 'vona-module-a-orm' {
 }
 ```
 
-### 2. Add Datasource Configuration:
+### 2. Add Datasource Configuration
 
 `src/backend/config/config/config.ts`
 
