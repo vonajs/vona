@@ -20,7 +20,7 @@ features:
   - title: AOP
     details: Provides more complete Aop programming capabilities, including pre-handle aspect, subject aspect, and object aspect
   - title: Multi-tenancy
-    details: Built-in multi-tenancy capabilities out of the box
+    details: Built-in out-of-the-box multi-tenancy capabilities, supporting both shared and isolated modes
   - title: Modularization
     details: In a large web business system, as the business grows and changes, it is also necessary to divide the system into relatively independent modules in order to avoid code bloating
 ---
