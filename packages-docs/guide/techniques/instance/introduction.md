@@ -47,7 +47,7 @@ When a user accesses the backend API, the backend automatically obtains the curr
 
 Multi-instance is provided by the `a-instance` module. You can modify the module configuration in App Config:
 
-`src/backend/config/config/config.prod.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // modules
