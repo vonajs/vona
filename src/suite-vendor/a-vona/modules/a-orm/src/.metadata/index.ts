@@ -169,6 +169,7 @@ export interface IModuleBroadcast {
 /** event: begin */
 export * from '../bean/event.clientNameReal.ts';
 export * from '../bean/event.columnsClear.ts';
+export * from '../bean/event.databaseClientDispose.ts';
 export * from '../bean/event.databaseClientReload.ts';
 
 import 'vona';
@@ -198,6 +199,16 @@ declare module 'vona-module-a-orm' {
             get $onionName(): 'a-orm:columnsClear';
           }
 
+        export interface EventDatabaseClientDispose {
+          /** @internal */
+          get scope(): ScopeModuleAOrm;
+        }
+
+          export interface EventDatabaseClientDispose {
+            get $beanFullName(): 'a-orm.event.databaseClientDispose';
+            get $onionName(): 'a-orm:databaseClientDispose';
+          }
+
         export interface EventDatabaseClientReload {
           /** @internal */
           get scope(): ScopeModuleAOrm;
@@ -212,22 +223,26 @@ declare module 'vona-module-a-orm' {
 /** event: begin */
 import type { EventClientNameReal } from '../bean/event.clientNameReal.ts';
 import type { EventColumnsClear } from '../bean/event.columnsClear.ts';
+import type { EventDatabaseClientDispose } from '../bean/event.databaseClientDispose.ts';
 import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
 export interface IModuleEvent {
   'clientNameReal': EventClientNameReal;
 'columnsClear': EventColumnsClear;
+'databaseClientDispose': EventDatabaseClientDispose;
 'databaseClientReload': EventDatabaseClientReload;
 }
 /** event: end */
 /** event: begin */
 import type { TypeEventClientNameRealData, TypeEventClientNameRealResult } from '../bean/event.clientNameReal.ts';
 import type { TypeEventColumnsClearData, TypeEventColumnsClearResult } from '../bean/event.columnsClear.ts';
+import type { TypeEventDatabaseClientDisposeData, TypeEventDatabaseClientDisposeResult } from '../bean/event.databaseClientDispose.ts';
 import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult } from '../bean/event.databaseClientReload.ts';
 import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-orm:clientNameReal': EventOn<TypeEventClientNameRealData, TypeEventClientNameRealResult>;
 'a-orm:columnsClear': EventOn<TypeEventColumnsClearData, TypeEventColumnsClearResult>;
+'a-orm:databaseClientDispose': EventOn<TypeEventDatabaseClientDisposeData, TypeEventDatabaseClientDisposeResult>;
 'a-orm:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
   }
 }
