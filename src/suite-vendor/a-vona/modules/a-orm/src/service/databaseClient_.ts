@@ -36,20 +36,6 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     this._db = this.bean._newBean(ServiceDb, this);
     // load
     this.__load(clientNameSelector!, clientConfig);
-    // event: databaseClientReload
-    this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async ({ clientName, clientConfig }, next) => {
-      if (clientName === this.clientName) {
-        await this.reload(clientConfig);
-      }
-      await next();
-    });
-    // event: databaseClientDispose
-    this._onDatabaseClientDisposeCancel = this.scope.event.databaseClientDispose.on(async ({ clientName }, next) => {
-      if (clientName === this.clientName) {
-        await this.bean.disposeInstance(this.$beanInstanceKey);
-      }
-      await next();
-    });
   }
 
   protected async __dispose__() {
