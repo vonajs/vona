@@ -115,7 +115,7 @@ export class ServiceDatabase extends BeanBase {
   async reloadClientsWorker(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     clientName = this.prepareClientName(clientName);
     await this.bean.mutate.reloadInstancesWorker({
-      beanFullName: appResource.getBeanFullName(ServiceDatabaseClient)!,
+      beanFullName: appResource.getBeanFullName(ServiceDatabaseClient) as any,
       data: { clientName, clientConfig },
     });
     this.columnsClearWorker(clientName);
