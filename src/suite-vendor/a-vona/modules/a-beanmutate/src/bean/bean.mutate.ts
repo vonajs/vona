@@ -18,9 +18,12 @@ export class BeanMutate extends BeanBase {
     await this.scope.event.reloadInstances.emit(data);
   }
 
-  async disposeInstances<T>(data: T) {
-    await this.disposeInstancesWorker(data);
-    this.scope.broadcast.disposeInstances.emit(data);
+  async disposeInstances<T>(beanFullName: Constructable, data: T): Promise<void>;
+  async disposeInstances<K extends keyof IBeanRecord, T>(beanFullName: K, data: T): Promise<void>;
+  async disposeInstances<T>(beanFullName: any, data: T): Promise<void> {
+    beanFullName = appResource.getBeanFullName(beanFullName);
+    await this.disposeInstancesWorker({ beanFullName, data });
+    this.scope.broadcast.disposeInstances.emit({ beanFullName, data });
   }
 
   async disposeInstancesWorker(data: TypeEventDisposeInstancesData) {
