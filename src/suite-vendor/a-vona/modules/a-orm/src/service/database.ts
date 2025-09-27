@@ -4,6 +4,7 @@ import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } fro
 import { isNil } from '@cabloy/utils';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { ServiceDatabaseClient } from './databaseClient_.ts';
 
 @Service()
 export class ServiceDatabase extends BeanBase {
@@ -97,15 +98,16 @@ export class ServiceDatabase extends BeanBase {
   }
 
   columnsClear(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
-    this.__columnsClearRaw(clientName, tableName);
+    this.columnsClearWorker(clientName, tableName);
     this.scope.broadcast.columnsClear.emit({ clientName, tableName });
   }
 
-  private __columnsClearRaw(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
+  private columnsClearWorker(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
     this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientNameReal(clientName), tableName });
   }
 
   async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
+    this.bean.mutate.reloadInstances(ServiceDatabaseClient, {});
     await this.reloadClientsRaw(clientName, clientConfig, extraData);
     this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig, extraData });
   }

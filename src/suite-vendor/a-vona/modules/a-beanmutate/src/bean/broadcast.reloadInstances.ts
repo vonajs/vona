@@ -1,7 +1,11 @@
+import type { IBeanRecord } from 'vona';
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export type TypeBroadcastReloadInstancesJobData = unknown;
+export interface TypeBroadcastReloadInstancesJobData {
+  beanFullName: keyof IBeanRecord;
+  data: unknown;
+}
 
 @Broadcast()
 export class BroadcastReloadInstances

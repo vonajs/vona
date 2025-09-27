@@ -1,6 +1,10 @@
+import type { IBeanRecord } from 'vona';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export type TypeEventDisposeInstancesData = unknown;
+export interface TypeEventDisposeInstancesData {
+  beanFullName: keyof IBeanRecord;
+  data: unknown;
+}
 
 export type TypeEventDisposeInstancesResult = void;
 
