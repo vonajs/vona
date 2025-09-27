@@ -89,7 +89,9 @@ config.modules = {
 
 > 模块提供了一个全局拦截器`a-datasharding:datasharding`。该拦截器判断当前 API Method，如果是`POST/PATCH/DELETE/PUT`，那么就使用`写数据源`，否则使用`读数据源`
 
-## 数据一致性
+## 数据一致性: 缓存`写数据源`
+
+### 场景分析：同一个用户
 
 由于数据库同步有延时，会出现数据不一致性的情况。比如，用户访问`Write-API`，将数据写入`写数据库`。接下来，用户访问`Read-API`，此时`读数据库`还没有同步，那么就会读到旧数据
 
@@ -121,3 +123,51 @@ config.onions = {
 |--|--|
 |mem.ttl|Mem缓存的过期时间，默认为2分钟|
 |redis.ttl|Redis缓存的过期时间，默认为2分钟|
+
+## 数据一致性: 缓存双删
+
+### 场景分析：不同用户
+
+Vona ORM 提供了开箱即用的缓存机制，参见：[缓存](../guide/techniques/orm/caching.md)
+
+由于数据库同步有延时，会出现缓存不一致性的情况。比如，用户 A 访问`Write-API`，将数据写入`写数据库`，并自动删除缓存。接下来，用户 B 访问`Read-API`，此时`读数据库`还没有同步，那么就会读到旧数据，并存入缓存
+
+为了解决以上问题，模块`a-orm`提供了`缓存双删`机制：当用户 A 访问`Write-API`时，将数据写入`写数据库`，并自动删除缓存。然后在指定时间之后再次删除缓存，从而确保缓存总是最新数据
+
+### 启用缓存双删
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-orm': {
+    sharding: {
+      cache: {
+        doubleDelete: true,
+      },
+    },
+  },
+};
+```
+
+### 修改缓存双删时间
+
+`缓存双删时间`默认为`3`秒，可以修改如下：
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// onions
+config.onions = {
+  queue: {
+    'a-orm:doubleDelete': {
+      options: {
+        job: {
+          delay: 5 * 1000,
+        },
+      },
+    },
+  },
+};
+```
