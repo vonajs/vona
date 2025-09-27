@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientRecord } from '../types/database.ts';
 import knex from 'knex';
-import { BeanBase, deepExtend } from 'vona';
+import { deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { BeanMutateBase } from 'vona-module-a-beanmutate';
 import { ServiceDb } from './db_.ts';
@@ -39,7 +39,7 @@ export class ServiceDatabaseClient extends BeanMutateBase {
   }
 
   protected async __dispose__() {
-    super.__dispose__();
+    await super.__dispose__();
     this._db = undefined as any;
     await this.__close();
   }
@@ -98,7 +98,7 @@ export class ServiceDatabaseClient extends BeanMutateBase {
   }
 
   // only used by startup, so no consider that workers broadcast
-  async changeConfigConnectionAndReload(databaseName: string): Promise<void> {
+  async changeConfigConnectionAndReloadWorker(databaseName: string): Promise<void> {
     // set databaseName
     const connDatabaseName = this._prepareDatabaseName(databaseName);
     // set config
@@ -108,7 +108,7 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     // only used by startup, so no consider that workers broadcast
     this.configDatabase.clients[this.clientName] = config;
     // reload
-    await this.scope.service.database.reloadClientsRaw(this.clientName, config);
+    await this.scope.service.database.reloadClientsWorker(this.clientName, config);
     // await this.scope.service.database.reloadClients(this.clientName, config);
   }
 }

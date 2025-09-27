@@ -67,9 +67,8 @@ export class AppResource extends BeanSimple {
     return beanOptions2;
   }
 
-  getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
+  getBeanFullName<T>(A: Constructable<T> | undefined): keyof IBeanRecord | undefined;
   getBeanFullName<K extends keyof IBeanRecord>(beanFullName: K | undefined): K | undefined;
-  getBeanFullName(beanFullName: string | undefined): string | undefined;
   getBeanFullName(beanFullName) {
     if (!beanFullName) return beanFullName;
     if (typeof beanFullName === 'function' && isClass(beanFullName)) {
@@ -80,7 +79,6 @@ export class AppResource extends BeanSimple {
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
-  getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName): IDecoratorBeanOptionsBase<T> | undefined {
     const fullName = this.getBeanFullName(beanFullName);
     if (!fullName) return null!;

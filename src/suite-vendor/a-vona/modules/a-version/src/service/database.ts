@@ -99,7 +99,7 @@ export class ServiceDatabase extends BeanBase {
         databaseName = dbs[0].name;
       }
       // set config and reload client
-      await client.changeConfigConnectionAndReload(databaseName);
+      await client.changeConfigConnectionAndReloadWorker(databaseName);
       this.$logger.silly(chalk.cyan(`dialect: ${client.db.dialectName}`));
       this.$logger.silly(chalk.cyan(`database: ${databaseName}, pid: ${process.pid}`));
     }
@@ -118,7 +118,7 @@ export class ServiceDatabase extends BeanBase {
       // create database
       const databaseName = await this.__createDatabase(client, configInstanceBase);
       // set config and reload client
-      await client.changeConfigConnectionAndReload(databaseName);
+      await client.changeConfigConnectionAndReloadWorker(databaseName);
       // database ready
       this.$logger.silly(chalk.cyan(`dialect: ${client.db.dialectName}`));
       this.$logger.silly(chalk.cyan(`database: ${databaseName}, pid: ${process.pid}`));

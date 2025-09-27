@@ -2,7 +2,7 @@ import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.t
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { isNil } from '@cabloy/utils';
-import { BeanBase, deepExtend } from 'vona';
+import { appResource, BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from './databaseClient_.ts';
 
@@ -110,6 +110,15 @@ export class ServiceDatabase extends BeanBase {
     clientName = this.prepareClientName(clientName);
     await this.bean.mutate.reloadInstances(ServiceDatabaseClient, { clientName, clientConfig });
     this.columnsClear(clientName);
+  }
+
+  async reloadClientsWorker(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    clientName = this.prepareClientName(clientName);
+    await this.bean.mutate.reloadInstancesWorker({
+      beanFullName: appResource.getBeanFullName(ServiceDatabaseClient)!,
+      data: { clientName, clientConfig },
+    });
+    this.columnsClearWorker(clientName);
   }
 
   async disposeClients(clientName?: keyof IDatabaseClientRecord) {
