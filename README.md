@@ -47,7 +47,7 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 * `Cli Commands`: Provides a large number of Cli commands for generating code skeletons for various resources
 * `Menu Commands`: Execute Cli commands through the menus, significantly reducing mental overhead and improving the development experience
 * `Configuration Capabilities Based on Multi-Dimensional Variables`: Loads env/config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
-* `More Comprehensive AOP Programming`: Provides more comprehensive AOP programming capabilities, including pre-handle aspect, inner aspect, and outer aspect
+* `More Comprehensive AOP Programming`: Provides more comprehensive AOP programming capabilities, including controller aspect, inner aspect, and outer aspect
 * `SSR Integration`: Provides out-of-the-box SSR rendering capabilities, supporting both the frontend website and the backend admin system
 * `Demo Playground`: Provides a Demo Playground, which allows us to test the code and verify the ideas very conveniently and quickly
 
