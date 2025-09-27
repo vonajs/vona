@@ -89,7 +89,9 @@ Now, let's explain how sharding works:
 
 > The module provides a global interceptor `a-datasharding:datasharding`. This interceptor determines the current API method. If it is `POST/PATCH/DELETE/PUT`, the `write-datasource` is used; otherwise, the `read-datasource` is used
 
-## Data Consistency
+## Data Consistency: Cache `write-datasource`
+
+### Scenario Analysis: The Same User
 
 Data inconsistencies may occur due to database synchronization delays. For example, a user accesses the `Write-API` to write data to the `Write-Database`. Then, when the user accesses the `Read-API`, the `Read-Database` has not yet been synchronized, and the old data will be read
 
@@ -121,3 +123,51 @@ config.onions = {
 |--|--|
 |mem.ttl|Mem cache expiration time, default is 2 minutes|
 |redis.ttl|Redis cache expiration time, default is 2 minutes|
+
+## Data Consistency: Cache Double-Delete
+
+### Scenario Analysis: Different Users
+
+Vona ORM provides an out-of-the-box caching mechanism. See: [Caching](../guide/techniques/orm/caching.md)
+
+Due to database synchronization delays, cache inconsistencies can occur. For example, user A accesses the `Write-API`, writes data to the `Write-Database`, and automatically deletes the cache. Subsequently, user B accesses the `Read-API`. At this point, the `Read-Database` has not yet been synchronized, so the old data is read and stored in the cache
+
+To address this issue, the `a-orm` module provides a `cache-double-delete` mechanism: when user A accesses the `Write-API`, the data is written to the `Write-Database` and the cache is automatically deleted. The cache is then deleted again after a specified timeout, ensuring it always has the latest data
+
+### Enabling cache-double-delete
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-orm': {
+    sharding: {
+      cache: {
+        doubleDelete: true,
+      },
+    },
+  },
+};
+```
+
+### Modifying the cache-double-delete time
+
+The default value for the `cache-double-delete` time is `3` seconds. You can modify it as follows:
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// onions
+config.onions = {
+  queue: {
+    'a-orm:doubleDelete': {
+      options: {
+        job: {
+          delay: 5 * 1000,
+        },
+      },
+    },
+  },
+};
+```
