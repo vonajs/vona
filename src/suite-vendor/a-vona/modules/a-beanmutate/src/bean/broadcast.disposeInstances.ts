@@ -1,11 +1,7 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
-import type { IDatabaseClientRecord } from '../types/database.ts';
-import { cast } from 'vona';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export interface TypeBroadcastDisposeInstancesJobData {
-  clientName?: keyof IDatabaseClientRecord;
-}
+export type TypeBroadcastDisposeInstancesJobData = unknown;
 
 @Broadcast()
 export class BroadcastDisposeInstances

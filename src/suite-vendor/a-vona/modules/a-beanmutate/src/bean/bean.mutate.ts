@@ -3,21 +3,21 @@ import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanMutate extends BeanBase {
-  async reloadInstances() {
-    await this.reloadInstancesWorker(clientName, clientConfig, extraData);
-    this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig, extraData });
+  async reloadInstances<T>(data: T) {
+    await this.reloadInstancesWorker(data);
+    this.scope.broadcast.reloadInstances.emit(data);
   }
 
   async reloadInstancesWorker<T>(data: T) {
-    await this.scope.event.databaseClientReload.emit(data);
+    await this.scope.event.reloadInstances.emit(data);
   }
 
-  async disposeInstances(clientName?: keyof IDatabaseClientRecord) {
-    await this.disposeInstancesWorker(clientName);
-    this.scope.broadcast.databaseClientDispose.emit({ clientName });
+  async disposeInstances<T>(data: T) {
+    await this.disposeInstancesWorker(data);
+    this.scope.broadcast.disposeInstances.emit(data);
   }
 
   async disposeInstancesWorker<T>(data: T) {
-    await this.scope.event.databaseClientDispose.emit(data);
+    await this.scope.event.disposeInstances.emit(data);
   }
 }

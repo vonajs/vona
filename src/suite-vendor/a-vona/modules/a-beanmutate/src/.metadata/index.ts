@@ -25,14 +25,14 @@ declare module 'vona' {
 }
 /** bean: end */
 /** broadcast: begin */
-export * from '../bean/broadcast.databaseClientDispose.ts';
+export * from '../bean/broadcast.disposeInstances.ts';
 export * from '../bean/broadcast.reloadInstances.ts';
 
 import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   
     export interface IBroadcastRecord {
-      'a-beanmutate:databaseClientDispose': IDecoratorBroadcastOptions;
+      'a-beanmutate:disposeInstances': IDecoratorBroadcastOptions;
 'a-beanmutate:reloadInstances': IDecoratorBroadcastOptions;
     }
 
@@ -40,14 +40,14 @@ declare module 'vona-module-a-broadcast' {
 }
 declare module 'vona-module-a-beanmutate' {
   
-        export interface BroadcastDatabaseClientDispose {
+        export interface BroadcastDisposeInstances {
           /** @internal */
           get scope(): ScopeModuleABeanmutate;
         }
 
-          export interface BroadcastDatabaseClientDispose {
-            get $beanFullName(): 'a-beanmutate.broadcast.databaseClientDispose';
-            get $onionName(): 'a-beanmutate:databaseClientDispose';
+          export interface BroadcastDisposeInstances {
+            get $beanFullName(): 'a-beanmutate.broadcast.disposeInstances';
+            get $onionName(): 'a-beanmutate:disposeInstances';
           }
 
         export interface BroadcastReloadInstances {
@@ -62,16 +62,16 @@ declare module 'vona-module-a-beanmutate' {
 }
 /** broadcast: end */
 /** broadcast: begin */
-import type { BroadcastDatabaseClientDispose } from '../bean/broadcast.databaseClientDispose.ts';
+import type { BroadcastDisposeInstances } from '../bean/broadcast.disposeInstances.ts';
 import type { BroadcastReloadInstances } from '../bean/broadcast.reloadInstances.ts';
 export interface IModuleBroadcast {
-  'databaseClientDispose': BroadcastDatabaseClientDispose;
+  'disposeInstances': BroadcastDisposeInstances;
 'reloadInstances': BroadcastReloadInstances;
 }
 /** broadcast: end */
 /** event: begin */
-export * from '../bean/event.databaseClientDispose.ts';
-export * from '../bean/event.databaseClientReload.ts';
+export * from '../bean/event.disposeInstances.ts';
+export * from '../bean/event.reloadInstances.ts';
 
 import 'vona';
 declare module 'vona' {
@@ -80,43 +80,43 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-beanmutate' {
   
-        export interface EventDatabaseClientDispose {
+        export interface EventDisposeInstances {
           /** @internal */
           get scope(): ScopeModuleABeanmutate;
         }
 
-          export interface EventDatabaseClientDispose {
-            get $beanFullName(): 'a-beanmutate.event.databaseClientDispose';
-            get $onionName(): 'a-beanmutate:databaseClientDispose';
+          export interface EventDisposeInstances {
+            get $beanFullName(): 'a-beanmutate.event.disposeInstances';
+            get $onionName(): 'a-beanmutate:disposeInstances';
           }
 
-        export interface EventDatabaseClientReload {
+        export interface EventReloadInstances {
           /** @internal */
           get scope(): ScopeModuleABeanmutate;
         }
 
-          export interface EventDatabaseClientReload {
-            get $beanFullName(): 'a-beanmutate.event.databaseClientReload';
-            get $onionName(): 'a-beanmutate:databaseClientReload';
+          export interface EventReloadInstances {
+            get $beanFullName(): 'a-beanmutate.event.reloadInstances';
+            get $onionName(): 'a-beanmutate:reloadInstances';
           } 
 }
 /** event: end */
 /** event: begin */
-import type { EventDatabaseClientDispose } from '../bean/event.databaseClientDispose.ts';
-import type { EventDatabaseClientReload } from '../bean/event.databaseClientReload.ts';
+import type { EventDisposeInstances } from '../bean/event.disposeInstances.ts';
+import type { EventReloadInstances } from '../bean/event.reloadInstances.ts';
 export interface IModuleEvent {
-  'databaseClientDispose': EventDatabaseClientDispose;
-'databaseClientReload': EventDatabaseClientReload;
+  'disposeInstances': EventDisposeInstances;
+'reloadInstances': EventReloadInstances;
 }
 /** event: end */
 /** event: begin */
-import type { TypeEventDatabaseClientDisposeData, TypeEventDatabaseClientDisposeResult } from '../bean/event.databaseClientDispose.ts';
-import type { TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult } from '../bean/event.databaseClientReload.ts';
+import type { TypeEventDisposeInstancesData, TypeEventDisposeInstancesResult } from '../bean/event.disposeInstances.ts';
+import type { TypeEventReloadInstancesData, TypeEventReloadInstancesResult } from '../bean/event.reloadInstances.ts';
 import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-beanmutate:databaseClientDispose': EventOn<TypeEventDatabaseClientDisposeData, TypeEventDatabaseClientDisposeResult>;
-'a-beanmutate:databaseClientReload': EventOn<TypeEventDatabaseClientReloadData, TypeEventDatabaseClientReloadResult>;
+    'a-beanmutate:disposeInstances': EventOn<TypeEventDisposeInstancesData, TypeEventDisposeInstancesResult>;
+'a-beanmutate:reloadInstances': EventOn<TypeEventReloadInstancesData, TypeEventReloadInstancesResult>;
   }
 }
 /** event: end */
