@@ -124,7 +124,7 @@ config.onions = {
 |mem.ttl|Mem cache expiration time, default is 2 minutes|
 |redis.ttl|Redis cache expiration time, default is 2 minutes|
 
-## Data Consistency: Cache Double-Delete
+## Data Consistency: Cache-Double-Delete
 
 ### Scenario Analysis: Different Users
 
