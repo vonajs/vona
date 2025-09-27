@@ -4,20 +4,19 @@ import type { IDatabaseClientRecord } from '../types/database.ts';
 import knex from 'knex';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { BeanMutateBase } from 'vona-module-a-beanmutate';
 import { ServiceDb } from './db_.ts';
 
 export interface IPrepareDatabaseNameResult { database?: string; filename?: string }
 
 @Service()
-export class ServiceDatabaseClient extends BeanBase {
+export class ServiceDatabaseClient extends BeanMutateBase {
   level: number;
   clientName: keyof IDatabaseClientRecord;
   clientNameSelector: string;
   clientConfig: ConfigDatabaseClient;
   private _knex: Knex;
   private _db: ServiceDb;
-  private _onDatabaseClientReloadCancel?: Function;
-  private _onDatabaseClientDisposeCancel?: Function;
 
   get configDatabase() {
     return this.app.config.database;
@@ -31,11 +30,12 @@ export class ServiceDatabaseClient extends BeanBase {
     return this._db;
   }
 
-  protected __init__(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
+  protected __init__(clientNameSelector?: string, clientConfig?: ConfigDatabaseClient) {
+    super.__init__();
     // db
     this._db = this.bean._newBean(ServiceDb, this);
     // load
-    this.__load(clientNameSelector, clientConfig);
+    this.__load(clientNameSelector!, clientConfig);
     // event: databaseClientReload
     this._onDatabaseClientReloadCancel = this.scope.event.databaseClientReload.on(async ({ clientName, clientConfig }, next) => {
       if (clientName === this.clientName) {
@@ -53,12 +53,21 @@ export class ServiceDatabaseClient extends BeanBase {
   }
 
   protected async __dispose__() {
+    super.__dispose__();
     this._db = undefined as any;
     await this.__close();
-    this._onDatabaseClientReloadCancel?.();
-    this._onDatabaseClientDisposeCancel?.();
-    this._onDatabaseClientReloadCancel = undefined;
-    this._onDatabaseClientDisposeCancel = undefined;
+  }
+
+  protected async onReloadInstance({ clientName, clientConfig }) {
+    if (clientName === this.clientName) {
+      await this.reload(clientConfig);
+    }
+  }
+
+  protected async onDisposeInstance({ clientName }) {
+    if (clientName === this.clientName) {
+      await super.onDisposeInstance({ clientName });
+    }
   }
 
   private __load(clientNameSelector: string, clientConfig?: ConfigDatabaseClient) {
