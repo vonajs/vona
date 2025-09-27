@@ -106,24 +106,15 @@ export class ServiceDatabase extends BeanBase {
     this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientNameReal(clientName), tableName });
   }
 
-  async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
-    this.bean.mutate.reloadInstances(ServiceDatabaseClient, {});
-    await this.reloadClientsRaw(clientName, clientConfig, extraData);
-    this.scope.broadcast.databaseClientReload.emit({ clientName, clientConfig, extraData });
-  }
-
-  async reloadClientsRaw(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, extraData?: any) {
-    await this.scope.event.databaseClientReload.emit({ clientName: this.prepareClientName(clientName), clientConfig, extraData });
-    this.__columnsClearRaw(clientName);
+  async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+    clientName = this.prepareClientName(clientName);
+    await this.bean.mutate.reloadInstances(ServiceDatabaseClient, { clientName, clientConfig });
+    this.columnsClear(clientName);
   }
 
   async disposeClients(clientName?: keyof IDatabaseClientRecord) {
-    await this.disposeClientsRaw(clientName);
-    this.scope.broadcast.databaseClientDispose.emit({ clientName });
-  }
-
-  async disposeClientsRaw(clientName?: keyof IDatabaseClientRecord) {
-    await this.scope.event.databaseClientDispose.emit({ clientName: this.prepareClientName(clientName) });
-    this.__columnsClearRaw(clientName);
+    clientName = this.prepareClientName(clientName);
+    await this.bean.mutate.disposeInstances(ServiceDatabaseClient, { clientName });
+    this.columnsClear(clientName);
   }
 }
