@@ -12,6 +12,7 @@
     "vona-module-a-auth": "^5.0.28",
     "vona-module-a-authsimple": "^5.0.28",
     "vona-module-a-bean": "^5.0.15",
+    "vona-module-a-beanmutate": "workspace:^",
     "vona-module-a-body": "^5.0.17",
     "vona-module-a-broadcast": "^5.0.16",
     "vona-module-a-cache": "^5.0.18",

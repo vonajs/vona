@@ -107,6 +107,9 @@ importers:
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
+      vona-module-a-beanmutate:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-beanmutate
       vona-module-a-body:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-body
@@ -355,7 +358,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.52
+        specifier: ^6.0.53
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -1165,6 +1168,9 @@ importers:
       vona-module-a-bean:
         specifier: ^5.0.15
         version: link:modules/a-bean
+      vona-module-a-beanmutate:
+        specifier: workspace:^
+        version: link:modules/a-beanmutate
       vona-module-a-body:
         specifier: ^5.0.17
         version: link:modules/a-body
@@ -1342,6 +1348,15 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-bean:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-beanmutate:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
