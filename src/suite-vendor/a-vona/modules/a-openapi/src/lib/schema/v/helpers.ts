@@ -92,7 +92,7 @@ export function schemaRegex(regex: RegExp, params?: string | z.core.$ZodCheckReg
 export function schemaTableIdentity() {
   const app = useApp();
   const ormConfig = app.util.getModuleConfigRaw('a-orm');
-  const _identityType = ormConfig?.table.identityType ?? 'string';
+  const _identityType = ormConfig?.table?.identityType ?? 'string';
   return function (_schema?: any): z.ZodString | z.ZodNumber {
     if (_identityType === 'string') {
       return z.string();
