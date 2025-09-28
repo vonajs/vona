@@ -151,9 +151,9 @@ config.modules = {
 };
 ```
 
-### 修改缓存双删时间
+### 修改缓存双删延迟时间
 
-`缓存双删时间`默认为`3`秒，可以修改如下：
+系统采用队列任务执行缓存双删，`队列`名称是`a-orm:doubleDelete`，可以在 App config 中修改缓存双删延迟时间：
 
 `src/backend/config/config/config.ts`
 
@@ -164,10 +164,14 @@ config.onions = {
     'a-orm:doubleDelete': {
       options: {
         job: {
-          delay: 5 * 1000,
+          delay: 5 * 1000, // 5s
         },
       },
     },
   },
 };
 ```
+
+|名称|说明|
+|--|--|
+|job.delay|指定延迟多长时间执行缓存双删任务，默认为`3`秒|

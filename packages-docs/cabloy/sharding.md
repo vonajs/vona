@@ -151,9 +151,9 @@ config.modules = {
 };
 ```
 
-### Modifying the cache-double-delete time
+### Modifying the cache-double-delete delay time
 
-The default value for the `cache-double-delete` time is `3` seconds. You can modify it as follows:
+The system uses a queue task to perform `cache-double-delete`. The queue name is `a-orm:doubleDelete`. You can modify the `cache-double-delete` delay time in App config:
 
 `src/backend/config/config/config.ts`
 
@@ -164,10 +164,14 @@ config.onions = {
     'a-orm:doubleDelete': {
       options: {
         job: {
-          delay: 5 * 1000,
+          delay: 5 * 1000, // 5s
         },
       },
     },
   },
 };
 ```
+
+|Name|Description|
+|--|--|
+|job.delay|Specifies the delay time for performing `cache-double-delete` jobs. The default is `3` seconds|
