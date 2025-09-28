@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-openapi",
   "type": "module",
-  "version": "5.0.34",
+  "version": "5.0.35",
   "title": "a-openapi",
   "vonaModule": {
     "capabilities": {
