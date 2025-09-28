@@ -109,10 +109,10 @@ config.onions = {
   summerCache: {
     'a-datasharding:datasourceWrite': {
       mem: {
-        ttl: 3 * 60 * 1000, // 3 minutes
+        ttl: 5 * 1000, // 5s
       },
       redis: {
-        ttl: 3 * 60 * 1000, // 3 minutes
+        ttl: 5 * 1000, // 5s
       },
     },
   },
@@ -121,8 +121,8 @@ config.onions = {
 
 |Name|Description|
 |--|--|
-|mem.ttl|Mem cache expiration time, default is 2 minutes|
-|redis.ttl|Redis cache expiration time, default is 2 minutes|
+|mem.ttl|Mem cache expiration time, default is `3` seconds|
+|redis.ttl|Redis cache expiration time, default is `3` seconds|
 
 ## Data Consistency: Cache-Double-Delete
 

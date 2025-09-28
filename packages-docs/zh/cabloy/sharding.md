@@ -109,10 +109,10 @@ config.onions = {
   summerCache: {
     'a-datasharding:datasourceWrite': {
       mem: {
-        ttl: 3 * 60 * 1000, // 3 minutes
+        ttl: 5 * 1000, // 5s
       },
       redis: {
-        ttl: 3 * 60 * 1000, // 3 minutes
+        ttl: 5 * 1000, // 5s
       },
     },
   },
@@ -121,8 +121,8 @@ config.onions = {
 
 |名称|说明|
 |--|--|
-|mem.ttl|Mem缓存的过期时间，默认为2分钟|
-|redis.ttl|Redis缓存的过期时间，默认为2分钟|
+|mem.ttl|Mem缓存的过期时间，默认为`3`秒|
+|redis.ttl|Redis缓存的过期时间，默认为`3`秒|
 
 ## 数据一致性: 缓存双删
 
