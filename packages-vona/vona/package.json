@@ -1,7 +1,7 @@
 {
   "name": "vona",
   "type": "module",
-  "version": "5.0.116",
+  "version": "5.0.117",
   "description": "Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size",
   "author": "zhennann",
   "homepage": "https://github.com/vonajs/vona#readme",
@@ -47,8 +47,8 @@
     "version": "node ./scripts/versionTemplate.ts"
   },
   "dependencies": {
-    "vona-core": "^5.0.53",
-    "vona-suite-a-vona": "^5.0.110"
+    "vona-core": "^5.0.54",
+    "vona-suite-a-vona": "^5.0.111"
   },
   "clean-package": {
     "indent": 2,

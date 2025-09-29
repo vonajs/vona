@@ -464,7 +464,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.2
       vona-cli-set-api:
-        specifier: ^1.0.196
+        specifier: ^1.0.197
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -576,7 +576,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.53
+        specifier: ^5.0.54
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -870,10 +870,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.53
+        specifier: ^5.0.54
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.110
+        specifier: ^5.0.111
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -980,7 +980,7 @@ importers:
         specifier: ^1.0.34
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.53
+        specifier: ^5.0.54
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1154,7 +1154,7 @@ importers:
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
-        specifier: ^5.0.17
+        specifier: ^5.0.18
         version: link:modules/a-aspect
       vona-module-a-aspectutils:
         specifier: workspace:^
@@ -1190,7 +1190,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.64
+        specifier: ^5.0.65
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.15
@@ -1235,7 +1235,7 @@ importers:
         specifier: ^5.0.20
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.35
+        specifier: ^5.0.36
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.16
@@ -1543,7 +1543,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.53
+        specifier: ^6.0.54
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
