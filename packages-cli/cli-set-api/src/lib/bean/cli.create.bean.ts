@@ -14,6 +14,7 @@ declare module '@cabloy/cli' {
     beanName: string;
     beanNameCapitalize: string;
     moduleResourceName: string;
+    boilerplate: string;
   }
 }
 
@@ -53,7 +54,7 @@ export class CliCreateBean extends BeanCliBase {
     await this.helper.ensureDir(beanDir);
     // snippets/boilerplate
     const snippets = this._getBoilerplatesOrSnippets('snippets');
-    const boilerplates = this._getBoilerplatesOrSnippets('boilerplate');
+    const boilerplates = this._getBoilerplatesOrSnippets('boilerplate', argv.boilerplate);
     const snippetsName = snippets[`${sceneName}:${argv.beanName}`] || snippets[sceneName];
     const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
     // render
@@ -67,22 +68,24 @@ export class CliCreateBean extends BeanCliBase {
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
   }
 
-  private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets') {
+  private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets', customPath?: string) {
     const result = {};
     // scenes
     const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     for (const sceneName in onionScenesMeta) {
       const onionSceneMeta = onionScenesMeta[sceneName];
-      if (onionSceneMeta[type]) {
-        result[sceneName] = path.join(onionSceneMeta.module!.root, onionSceneMeta[type]!);
+      const scenePath = customPath ?? onionSceneMeta[type];
+      if (scenePath) {
+        result[sceneName] = path.join(onionSceneMeta.module!.root, scenePath);
       }
     }
     // metas
     const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
     for (const sceneName in onionMetasMeta) {
       const onionMetaMeta = onionMetasMeta[sceneName];
-      if (onionMetaMeta[type]) {
-        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, onionMetaMeta[type]!);
+      const scenePath = customPath ?? onionMetaMeta[type];
+      if (scenePath) {
+        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, scenePath);
       }
     }
     return result;
