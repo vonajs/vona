@@ -4,11 +4,11 @@ import { BeanSimple } from '../../beanSimple.ts';
 import { LocaleModuleNameSeparator } from './type.ts';
 
 export class AppLocale extends BeanSimple {
-  get locale(): keyof ILocaleInfos {
+  get current(): keyof ILocaleInfos {
     return this.ctx.locale;
   }
 
-  set locale(value: keyof ILocaleInfos) {
+  set current(value: keyof ILocaleInfos) {
     this.ctx.locale = value;
   }
 
@@ -58,7 +58,7 @@ export class AppLocale extends BeanSimple {
       supportCustomMessage,
       moduleScope ? this.app.meta.localeModules[moduleScope] : undefined,
       this.app.meta.locales,
-      locale || this.locale,
+      locale || this.current,
       key,
       ...args,
     );

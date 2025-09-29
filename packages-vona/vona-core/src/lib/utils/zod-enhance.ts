@@ -17,6 +17,6 @@ export function zodEnhance(app: VonaApplication) {
 
 export function zodSetLocaleErrors(app: VonaApplication, localeErrors: ZodLocaleErrors, localeDefault?: string) {
   setLocaleErrors(() => {
-    return app.meta.locale.locale;
+    return app.meta.locale.current;
   }, localeErrors, localeDefault);
 }
