@@ -43,7 +43,6 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/zod-errors-custom": "^2.0.2",
     "@cabloy/zod-openapi": "^1.0.2",
     "@cabloy/zod-query": "^2.0.1",
     "@cabloy/zod-to-openapi": "^8.1.1",
