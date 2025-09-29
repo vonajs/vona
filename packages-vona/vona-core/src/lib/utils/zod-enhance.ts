@@ -1,5 +1,5 @@
-import type { ILocaleInfos } from 'vona';
 import type z from 'zod';
+import type { ILocaleInfos } from '../bean/resource/locale/type.ts';
 import type { VonaApplication } from '../core/application.ts';
 import { setLocaleAdapter, setLocaleErrors } from '@cabloy/zod-errors-custom';
 import { ZodMetadata } from '@cabloy/zod-openapi';
