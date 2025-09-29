@@ -1,0 +1,14 @@
+import type { NextSync } from 'vona';
+import type { IDecoratorFilterOptionsGlobal, IFilterJson } from 'vona-module-a-aspect';
+import { BeanBase } from 'vona';
+import { Filter } from 'vona-module-a-aspect';
+
+export interface IFilterOptions<%=argv.beanNameCapitalize%> extends IDecoratorFilterOptionsGlobal {}
+
+@Filter<IFilterOptions<%=argv.beanNameCapitalize%>>({ global: true })
+export class Filter<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterJson {
+  async json(_err: Error, _options: IFilterOptions<%=argv.beanNameCapitalize%>, next: NextSync): Promise<boolean> {
+    // next
+    return next();
+  }
+}
