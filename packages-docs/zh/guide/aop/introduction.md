@@ -6,7 +6,6 @@ VonaJS AOP 编程包括三个方面的能力：
 2. `内部切面`: 在 Class 内部，为任何 Class 的任何方法切入逻辑
 3. `外部切面`: 在不改变 Class 源码的前提下，从外部为任何 Class 的任何方法切入逻辑
 
-
 ## 控制器切面
 
 控制器切面包括：
@@ -93,10 +92,9 @@ class ServiceModelResolver {
 2. 将传入的`prop = student`与当前模块名称合并成`beanFullName`
 3. 通过`beanFullName`从全局容器中获取 model 实例，并返回给调用者
 
-
 ## 外部切面
 
-仍以`ServiceStudent`的`update`方法为例，通过`外部切面`来实现日志能力：
+仍以 Class `ServiceStudent`的`update`方法为例，通过`外部切面`来实现日志能力：
 
 ``` typescript
 import { Aop } from 'vona-module-a-aspect';
