@@ -96,5 +96,23 @@ class ServiceModelResolver {
 
 ## 外部切面
 
-仍以`ServiceStudent`的`update`方法为例，通过`外面切面`来实现日志能力：
+仍以`ServiceStudent`的`update`方法为例，通过`外部切面`来实现日志能力：
 
+``` typescript
+import { Aop } from 'vona-module-a-aspect';
+
+@Aop({ match: 'demo-student.service.student' })
+class AopLog {
+  async update(_args: Parameters<any>, next: Function, _receiver: any) {
+    const timeBegin = Date.now();
+    const res = await next();
+    const timeEnd = Date.now();
+    console.log('time: ', timeEnd - timeBegin);
+    return res;
+  }
+}
+```
+
+- `@Aop`: 此装饰器用于实现`外部切面`
+- `match`: 用于将 Class `AopLog`与 Class `ServiceStudent`关联，`ServiceStudent`的 beanFullName 是`demo-student.service.student`
+- `update`: 在`AopLog`中提供与`ServiceStudent`同名的方法`update`，提供自定义逻辑即可
