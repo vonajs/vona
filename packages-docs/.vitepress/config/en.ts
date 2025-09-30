@@ -113,6 +113,35 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: 'AOP Programming',
+      items: [
+        {
+          text: 'Introduction',
+          base: '/zh/guide/aop/',
+          link: 'introduction',
+        },
+        {
+          text: 'Controller Aspect',
+          base: '/zh/guide/aop/controller/',
+          collapsed: true,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+          ],
+        },
+        {
+          text: 'Inner Aspect',
+          base: '/zh/guide/aop/inner/',
+          link: 'introduction',
+        },
+        {
+          text: 'Outer Aspect',
+          base: '/zh/guide/aop/outer/',
+          link: 'introduction',
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: 'Techniques',
       items: [
         {

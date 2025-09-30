@@ -113,6 +113,35 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: 'AOP编程',
+      items: [
+        {
+          text: '介绍',
+          base: '/zh/guide/aop/',
+          link: 'introduction',
+        },
+        {
+          text: '控制器切面',
+          base: '/zh/guide/aop/controller/',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+          ],
+        },
+        {
+          text: '内部切面',
+          base: '/zh/guide/aop/inner/',
+          link: 'introduction',
+        },
+        {
+          text: '外部切面',
+          base: '/zh/guide/aop/outer/',
+          link: 'introduction',
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: '技术',
       items: [
         {
