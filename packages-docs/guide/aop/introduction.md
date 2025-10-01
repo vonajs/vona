@@ -124,4 +124,4 @@ class AopLog {
 
 - `@Aop`: This decorator is used to implement the `external aspect`
 - `match`: This option is used to associate the `AopLog` class with the `ServiceStudent` class, which beanFullName is `demo-student.service.student`
-- `update`: Provide an `update` method with the same name as `ServiceStudent` in `AopLog`, providing custom logic
+- `update`: Provides the `update` method with the same name as `ServiceStudent` in `AopLog` to implement custom logic

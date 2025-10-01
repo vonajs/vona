@@ -124,4 +124,4 @@ class AopLog {
 
 - `@Aop`: 此装饰器用于实现`外部切面`
 - `match`: 用于将 Class `AopLog`与 Class `ServiceStudent`关联，`ServiceStudent`的 beanFullName 是`demo-student.service.student`
-- `update`: 在`AopLog`中提供与`ServiceStudent`同名的方法`update`，提供自定义逻辑即可
+- `update`: 在`AopLog`中提供与`ServiceStudent`同名的方法`update`，实现自定义逻辑即可
