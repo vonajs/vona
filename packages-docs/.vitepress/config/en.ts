@@ -129,13 +129,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'Inner Aspect',
-          base: '/zh/guide/aop/inner/',
+          text: 'Internal Aspect',
+          base: '/zh/guide/aop/internal/',
           link: 'introduction',
         },
         {
-          text: 'Outer Aspect',
-          base: '/zh/guide/aop/outer/',
+          text: 'External Aspect',
+          base: '/zh/guide/aop/external/',
           link: 'introduction',
         },
       ],

@@ -18,7 +18,7 @@ features:
   - title: IOC Container
     details: Recommended to use the `dependency lookup` strategy, so as to use fewer decorator functions and fewer type annotations, making the IOC container more concise and intuitive
   - title: AOP
-    details: Provides more complete Aop programming capabilities, including controller aspect, inner aspect, and outer aspect
+    details: Provides more complete Aop programming capabilities, including controller aspect, internal aspect, and external aspect
   - title: Multi-tenancy
     details: Built-in out-of-the-box multi-tenancy capabilities, supporting both shared and isolated modes
   - title: Modularization

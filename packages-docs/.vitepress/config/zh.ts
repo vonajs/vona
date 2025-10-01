@@ -130,12 +130,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         {
           text: '内部切面',
-          base: '/zh/guide/aop/inner/',
+          base: '/zh/guide/aop/internal/',
           link: 'introduction',
         },
         {
           text: '外部切面',
-          base: '/zh/guide/aop/outer/',
+          base: '/zh/guide/aop/external/',
           link: 'introduction',
         },
       ],
