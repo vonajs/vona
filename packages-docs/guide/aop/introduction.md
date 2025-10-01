@@ -23,7 +23,7 @@ The execution sequence diagram for controller aspects is as follows:
 ![](../../assets/img/aop/aspect-controller.png)
 
 - `Onion Model`: `Middleware` and `Interceptor` support the `Onion Model`, allowing aspect logic to be executed before and after `Controller Action`
-- `Middleware`: Three types of Middleware are provided for different execution sequence nodes: `Middleware System`, `Middleware Global`, and `Middleware Local`, allowing for more refined aspect logic
+- `Middleware`: Three types of Middleware are provided for different execution sequence stages: `Middleware System`, `Middleware Global`, and `Middleware Local`, allowing for more refined aspect logic
 - `Route Match`: Only the `Middleware System` is executed before route matching; the rest are executed after
 - `Filter`: If an exception is thrown at any stage, `Filter` will be executed to customize the processing logic of `error information` and `error log`
 
@@ -123,5 +123,5 @@ class AopLog {
 ```
 
 - `@Aop`: This decorator is used to implement the `external aspect`
-- `match`: This decorator is used to associate the `AopLog` class with the `ServiceStudent` class. The beanFullName is `demo-student.service.student`
+- `match`: This option is used to associate the `AopLog` class with the `ServiceStudent` class, which beanFullName is `demo-student.service.student`
 - `update`: Provide an `update` method with the same name as `ServiceStudent` in `AopLog`, providing custom logic
