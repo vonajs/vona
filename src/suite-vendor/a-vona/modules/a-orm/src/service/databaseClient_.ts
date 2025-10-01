@@ -64,7 +64,6 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     this.clientName = dbInfo.clientName;
     // config
     this.clientConfig = clientConfig ? deepExtend({}, clientConfig) : this.scope.service.database.getClientConfig(this.clientName);
-    this.$loggerChild('database').debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this._knex = knex(this.clientConfig);
   }
