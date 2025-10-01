@@ -125,7 +125,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/aop/controller/',
           collapsed: true,
           items: [
-            { text: '介绍', link: 'introduction' },
+            {
+              text: 'Middleware',
+              items: [
+                { text: '局部中间件', link: 'middleware-local' },
+                { text: '全局中间件', link: 'middleware-global' },
+                { text: '系统中间件', link: 'middleware-system' },
+              ],
+            },
           ],
         },
         {

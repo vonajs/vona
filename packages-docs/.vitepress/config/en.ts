@@ -125,7 +125,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/aop/controller/',
           collapsed: true,
           items: [
-            { text: 'Introduction', link: 'introduction' },
+            {
+              text: 'Middleware',
+              items: [
+                { text: 'Middleware Local', link: 'middleware-local' },
+                { text: 'Middleware Global', link: 'middleware-global' },
+                { text: 'Middleware System', link: 'middleware-system' },
+              ],
+            },
           ],
         },
         {
