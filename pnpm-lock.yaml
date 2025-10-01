@@ -30,7 +30,7 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/utils':
-        specifier: ^1.0.39
+        specifier: ^1.0.40
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -304,7 +304,7 @@ importers:
         version: 4.1.11
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.44
+        specifier: ^3.0.45
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -358,7 +358,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vona-mock:
-        specifier: ^6.0.54
+        specifier: ^6.0.55
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -464,7 +464,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.2
       vona-cli-set-api:
-        specifier: ^1.0.199
+        specifier: ^1.0.200
         version: link:../cli-set-api
     devDependencies:
       clean-package:
