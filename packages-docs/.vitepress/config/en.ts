@@ -117,12 +117,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         {
           text: 'Introduction',
-          base: '/zh/guide/aop/',
+          base: '/guide/aop/',
           link: 'introduction',
         },
         {
           text: 'Controller Aspect',
-          base: '/zh/guide/aop/controller/',
+          base: '/guide/aop/controller/',
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
@@ -130,12 +130,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         {
           text: 'Internal Aspect',
-          base: '/zh/guide/aop/internal/',
+          base: '/guide/aop/internal/',
           link: 'introduction',
         },
         {
           text: 'External Aspect',
-          base: '/zh/guide/aop/external/',
+          base: '/guide/aop/external/',
           link: 'introduction',
         },
       ],
