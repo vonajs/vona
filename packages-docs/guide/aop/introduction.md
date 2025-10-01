@@ -6,7 +6,7 @@ VonaJS AOP programming includes three capabilities:
 2. `Internal Aspect`: Applies logic to any method of any class within a class
 3. `External Aspect`: Applies logic to any method of any class from the outside without changing the class source code
 
-## Controller Aspects
+## Controller Aspect
 
 ### Controller Aspect List
 
@@ -22,18 +22,18 @@ The execution sequence diagram for controller aspects is as follows:
 
 ![](../../assets/img/aop/aspect-controller.png)
 
-- `Onion Ring Model`: `Middleware` and `Interceptor` support the `Onion Ring Model`, allowing aspect logic to be executed before and after `Controller Action`s.
-- `Middleware`: Three types of Middleware are provided for different execution sequence nodes: `Middleware` System, Middleware Global, and Middleware Local, allowing for more refined aspect logic.
-- Route Match: Only the Middleware System is executed before route matching; the rest are executed after.
-- Filter: If an exception is thrown at any stage, the Filter is executed, controlling error handling and error logging.
+- `Onion Model`: `Middleware` and `Interceptor` support the `Onion Model`, allowing aspect logic to be executed before and after `Controller Action`
+- `Middleware`: Three types of Middleware are provided for different execution sequence nodes: `Middleware System`, `Middleware Global`, and `Middleware Local`, allowing for more refined aspect logic
+- `Route Match`: Only the `Middleware System` is executed before route matching; the rest are executed after
+- `Filter`: If an exception is thrown at any stage, `Filter` will be executed to customize the processing logic of `error information` and `error log`
 
-## Internal Aspects
+## Internal Aspect
 
-Internal aspects provide two mechanisms: AOP Methods and Magic Methods.
+Internal aspects provide two mechanisms: `AOP Method` and `Magic Method`
 
-### 1. AOP Methods
+### 1. AOP Method
 
-Directly access logic on class methods using decorators.
+Implement aspect logic directly on Class Method through decorator
 
 #### Example: Database Transactions
 

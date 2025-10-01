@@ -22,10 +22,10 @@ VonaJS AOP 编程包括三个方面的能力：
 
 ![](../../assets/img/aop/aspect-controller.png)
 
-- `洋葱圈模型`: `Middleware`和`Intercepter`支持`洋葱圈模型`，允许在`Controller Action`之前和之后执行切面逻辑
+- `洋葱模型`: `Middleware`和`Intercepter`支持`洋葱模型`，允许在`Controller Action`之前和之后执行切面逻辑
 - `Middleware`: 针对不同的执行时序节点，系统提供了三种 Middleware: `Middleware System`、`Middleware Global`和`Middleware Local`，从而可以实现更精细化的切面逻辑
 - `Route Match`: 只有`Middleware System`在路由匹配之前执行，其余在路由匹配之后执行
-- `Filter`: 任何环节抛出异常，都会执行`Filter`，从而控制错误信息的处理，以及错误日志的处理
+- `Filter`: 任何环节抛出异常，都会执行`Filter`，从而自定义`错误信息`和`错误日志`的处理逻辑
 
 ## 内部切面
 
