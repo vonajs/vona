@@ -112,16 +112,16 @@ import { Aop } from 'vona-module-a-aspect';
 
 @Aop({ match: 'demo-student.service.student' })
 class AopLog {
-async update(_args: Parameters<any>, next: Function, _receiver: any) {
-const timeBegin = Date.now();
-const res = await next();
-const timeEnd = Date.now();
-console.log('time: ', timeEnd - timeBegin);
-return res;
-}
+  async update(_args: Parameters<any>, next: Function, _receiver: any) {
+    const timeBegin = Date.now();
+    const res = await next();
+    const timeEnd = Date.now();
+    console.log('time: ', timeEnd - timeBegin);
+    return res;
+  }
 }
 ```
 
-- `@Aop`: This decorator is used to implement the `external aspect`.
-- `match`: This decorator is used to associate the `AopLog` class with the `ServiceStudent` class. The beanFullName is `demo-student.service.student`.
-- `update`: Provide an `update` method with the same name as `ServiceStudent` in `AopLog`, providing custom logic.
+- `@Aop`: This decorator is used to implement the `external aspect`
+- `match`: This decorator is used to associate the `AopLog` class with the `ServiceStudent` class. The beanFullName is `demo-student.service.student`
+- `update`: Provide an `update` method with the same name as `ServiceStudent` in `AopLog`, providing custom logic
