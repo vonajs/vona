@@ -39,7 +39,7 @@ VonaJS AOP 编程包括三个方面的能力：
 
 ``` diff
 class ServiceStudent {
-+  @Database.transaction()
++ @Database.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.update({
       ...student,
@@ -55,7 +55,7 @@ class ServiceStudent {
 
 ``` diff
 class ServiceStudent {
-+  @Log()
++ @Log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.update({
       ...student,
@@ -76,7 +76,7 @@ class ServiceStudent {
 ``` diff
 class ServiceStudent {
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-+    return await this.scope.model.student.update({
++   return await this.scope.model.student.update({
       ...student,
       id,
     });
@@ -99,8 +99,8 @@ class ServiceModelResolver {
 }
 ```
 
-1. 当调用`this.scope.model.student`时，会自动执行`__get__`方法
-2. 将传入的`prop = student`与当前模块名称合并成`beanFullName`
+1. 当调用`this.scope.model.student`时，会自动执行`__get__`方法，并且传入参数`prop: 'student'`
+2. 将参数`prop`与当前模块名称合并成`beanFullName`
 3. 通过`beanFullName`从全局容器中获取 model 实例，并返回给调用者
 
 ## 外部切面

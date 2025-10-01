@@ -35,56 +35,56 @@ Internal aspects provide two mechanisms: `AOP Method` and `Magic Method`
 
 Implement aspect logic directly on Class Method through decorator
 
-#### Example: Database Transactions
+#### Example: Database Transaction
 
 ``` diff
 class ServiceStudent {
 + @Database.transaction()
-async update(id: TableIdentity, student: DtoStudentUpdate) {
-return await this.scope.model.student.update({
-...student,
-id,
-});
-}
+  async update(id: TableIdentity, student: DtoStudentUpdate) {
+    return await this.scope.model.student.update({
+      ...student,
+      id,
+    });
+  }
 }
 ```
 
-- `@Database.transaction`: Using AOP A decorator implemented using the `Method` mechanism directly provides database transaction capabilities.
+- `@Database.transaction`: A decorator implemented through the `AOP Method` mechanism that can directly provide database transaction capabilities
 
 #### Example: Logging
 
 ``` diff
 class ServiceStudent {
 + @Log()
-async update(id: TableIdentity, student: DtoStudentUpdate) {
-return await this.scope.model.student.update({
-...student,
-id,
-});
-}
+  async update(id: TableIdentity, student: DtoStudentUpdate) {
+    return await this.scope.model.student.update({
+      ...student,
+      id,
+    });
+  }
 }
 ```
 
-- `@Log`: A decorator implemented using the `AOP Method` mechanism directly provides logging capabilities.
+- `@Log`: A decorator implemented using the `AOP Method` mechanism directly provides logging capabilities
 
-### 2. Magic Methods
+### 2. Magic Method
 
-You can access dynamic properties or methods within a class using `__get__` and `__set__`.
+Dynamic properties or methods can be implemented through `__get__` and `__set__` within the Class
 
 #### Example: Obtaining a model instance
 
 ``` diff
 class ServiceStudent {
-async update(id: TableIdentity, student: DtoStudentUpdate) {
-+ return await this.scope.model.student.update({
-...student,
-id,
-});
-}
+  async update(id: TableIdentity, student: DtoStudentUpdate) {
++   return await this.scope.model.student.update({
+      ...student,
+      id,
+    });
+  }
 }
 ```
 
-- `this.scope.model.xxx`: Instead of using dependency injection, `dependency lookup` is used to obtain the model instance directly from the scope object, simplifying the code writing style.
+- `this.scope.model.xxx`: Instead of using `dependency injection`, `dependency lookup` is used to obtain the model instance directly from the scope object, simplifying the code writing style
 
 #### Implementation Idea
 
@@ -92,19 +92,18 @@ The system provides a `ServiceModelResolver` class for dynamic model instance re
 
 ``` typescript
 class ServiceModelResolver {
-protected __get__(prop: string) {
-const beanFullName = `${this[SymbolModuleScope]}.model.${prop}`;
-return this.bean._getBean(beanFullName as any);
-
-}
+  protected __get__(prop: string) {
+    const beanFullName = `${this[SymbolModuleScope]}.model.${prop}`;
+    return this.bean._getBean(beanFullName as any);
+  }
 }
 ```
 
-1. When `this.scope.model.student` is called, the `__get__` method is automatically executed.
-2. The `prop = student` passed in is merged with the current module name to form `beanFullName`.
-3. The model is retrieved from the global container using `beanFullName`. instance and returns it to the caller.
+1. When `this.scope.model.student` is called, the `__get__` method is automatically executed, passing the `prop: 'student'` parameter
+2. The `prop` parameter is combined with the current module name to form `beanFullName`
+3. The model instance is retrieved from the global container using `beanFullName` and returned to the caller
 
-## External Aspects
+## External Aspect
 
 Using the `update` method of the `ServiceStudent` class as an example, we implement logging capabilities through the `external aspect`:
 
