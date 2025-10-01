@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-captcha",
   "type": "module",
-  "version": "5.0.12",
+  "version": "5.0.13",
   "title": "a-captcha",
   "vonaModule": {
     "dependencies": {},
