@@ -2,6 +2,7 @@ import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptions, IInterceptorExecute } from 'vona-module-a-aspect';
 import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts';
 import type { ICaptchaSceneRecord } from '../types/captchaScene.ts';
+import { zodCustomError } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
 
@@ -25,7 +26,7 @@ export class InterceptorCaptchaVerify extends BeanBase implements IInterceptorEx
     if (typeof captcha !== 'object') throw new Error('not found valid captcha data');
     // verify
     const verified = await this.bean.captcha.verify(captcha.id, captcha.token, sceneName);
-    if (!verified) throw this.bean.zod.customError([bodyField], this.scope.locale.CaptchaInvalid());
+    if (!verified) throw zodCustomError([bodyField], this.scope.locale.CaptchaInvalid());
     // next
     return next();
   }

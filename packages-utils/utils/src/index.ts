@@ -5,3 +5,4 @@ export * from './match.ts';
 export * from './types.ts';
 export * from './utils.ts';
 export * from './vona.ts';
+export * from './zod.ts';
