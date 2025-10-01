@@ -8,7 +8,7 @@ VonaJS AOP 编程包括三个方面的能力：
 
 ## 控制器切面
 
-控制器切面包括：
+### 控制器切面清单
 
 * Middleware
 * Guard
@@ -16,9 +16,20 @@ VonaJS AOP 编程包括三个方面的能力：
 * Pipe
 * Filter
 
+### 执行时序图
+
+控制器切面的执行时序图如下：
+
+![](../../assets/img/aop/aspect-controller.png)
+
+- `洋葱圈模型`: `Middleware`和`Intercepter`支持`洋葱圈模型`，允许在`Controller Action`之前和之后执行切面逻辑
+- `Middleware`: 针对不同的执行时序节点，系统提供了三种 Middleware: `Middleware System`、`Middleware Global`和`Middleware Local`，从而可以实现更精细化的切面逻辑
+- `Route Match`: 只有`Middleware System`在路由匹配之前执行，其余在路由匹配之后执行
+- `Filter`: 任何环节抛出异常，都会执行`Filter`，从而控制错误信息的处理，以及错误日志的处理
+
 ## 内部切面
 
-内部切面包括：
+内部切面提供两个机制：`AOP Method`和`魔术方法`
 
 ### 1. AOP Method
 
