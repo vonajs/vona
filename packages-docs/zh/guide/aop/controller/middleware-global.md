@@ -120,3 +120,74 @@ config.onions = {
 
 `使用时指定参数` > `App config配置` > `参数缺省值`
 
+## 中间件顺序
+
+由于全局中间件是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制中间件的加载顺序
+
+### 1. dependencies
+
+比如，系统有一个内置全局中间件`a-instance:instance`，我们希望加载顺序如下：`a-instance:instance` > `Current`
+
+``` diff
+@Middleware({
+  global: true,
++ dependencies: 'a-instance:instance',
+  prefix: 'time',
+})
+class MiddlewareLogger {}
+```
+
+### 2. dependents
+
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-instance:instance`
+
+``` diff
+@Middleware({
+  global: true,
++ dependents: 'a-instance:instance',
+  prefix: 'time',
+})
+class MiddlewareLogger {}
+```
+
+## 中间件启用/禁用
+
+可以针对某些 API 控制全局中间件的`启用/禁用`
+
+### 1. Enable
+
+* 针对某个 API 禁用
+
+``` diff
+class ControllerStudent {
+  @Web.get()
++ @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
+  async findMany() {}
+}
+```
+
+* 针对所有 API 禁用
+
+`src/backend/config/config/config.ts`
+
+``` diff
+// onions
+config.onions = {
+  middleware: {
+    'demo-student:logger': {
++     enable: false,
+    },
+  },
+};
+```
+
+2. Meta: flavor/mode/instanceName/host
+        3. match/ignore
+    
+      5. 中间件启用/禁用
+        1. Enable
+        2. Meta: flavor/mode/instanceName/host
+        3. match/ignore
+      6. 如何查询当前生效的中间件清单
+        1. 直接在controller action方法中调用inspect方法即可
+    
