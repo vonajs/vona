@@ -181,13 +181,58 @@ config.onions = {
 };
 ```
 
-2. Meta: flavor/mode/instanceName/host
-        3. match/ignore
+### 2. Meta
+
+可以让全局中间件在指定的运行环境生效
+
+|名称|类型|说明|
+|--|--|--|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|参见: [多实例/多租户](../../techniques/instance/introduction.md)|
+|host|string\|string[]|主机名|
+
+* 举例
+
+``` diff
+@Middleware<IMiddlewareOptionsLogger>({
+  global: true,
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++   instanceName: '',
++   host: 'localhost:7102',
++ },
+})
+export class MiddlewareLogger {}
+```
+
+### 3. match/ignore
     
-      5. 中间件启用/禁用
-        1. Enable
-        2. Meta: flavor/mode/instanceName/host
-        3. match/ignore
-      6. 如何查询当前生效的中间件清单
-        1. 直接在controller action方法中调用inspect方法即可
-    
+可以针对指定的 API 启用/禁用全局中间件
+
+|名称|类型|说明|
+|--|--|--|
+|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
+|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+
+## 查看当前生效的全局中间件清单
+
+可以直接在 Controller action 方法中输出当前生效的全局中间件清单
+
+``` diff
+class ControllerStudent {
+  @Web.get()
+  async findMany() {
++   this.bean.onion.middleware.inspect();
+  }
+}
+```
+
+- `this.bean.onion`: 取得全局 Service 实例 `onion`
+- `.middleware`: 取得与中间件相关的 Service 实例
+- `.inspect`: 输出当前生效的全局中间件清单
+
+当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+
+![](../../../assets/img/aop/middleware-1.png)

@@ -3,4 +3,5 @@ export interface IInstanceRecord {
 }
 
 export interface IHostRecord {
+  'localhost:7102': never;
 }
