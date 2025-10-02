@@ -28,7 +28,7 @@ class ControllerMenu {
 }
 ```
 
-3. Lookup global beans
+3. Lookup global service beans
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
@@ -81,7 +81,7 @@ class ControllerMenu {
 }
 ```
 
-3. Create new instance of global beans
+3. Create new instance of global service beans
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';

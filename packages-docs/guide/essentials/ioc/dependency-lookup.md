@@ -30,9 +30,9 @@ class ControllerHome {
 
 - Get the scope object of the module home-base through `this.$scope.homeBase` to lookup the service provided by module home-base
 
-## Lookup global beans
+## Lookup global service beans
 
-Suppose we want to lookup the global bean `BeanJwt` provided by module a-jwt in ControllerHome of module home-index, the code is as follows:
+Suppose we want to lookup the global service bean `BeanJwt` provided by module a-jwt in ControllerHome of module home-index, the code is as follows:
 
 ``` typescript
 class ControllerHome {
@@ -42,4 +42,4 @@ class ControllerHome {
 }
 ```
 
-- Get the app bean container through `this.bean` to lookup the global bean
+- Get the app bean container through `this.bean` to lookup the global service bean

@@ -30,9 +30,9 @@ class ControllerHome {
 
 - 通过`this.$scope.homeBase`获取模块 home-base 的 scope 对象，从而找到模块 home-base 提供的 service
 
-## 查找全局bean
+## 查找全局service bean
 
-假设我们要在模块 home-index 的 ControllerHome 中查找模块 a-jwt 提供的全局 bean`BeanJwt`，代码如下：
+假设我们要在模块 home-index 的 ControllerHome 中查找模块 a-jwt 提供的全局 service bean `BeanJwt`，代码如下：
 
 ``` typescript
 class ControllerHome {
@@ -42,4 +42,4 @@ class ControllerHome {
 }  
 ```
 
-- 通过`this.bean`获取 app bean 容器，从而找到全局 bean
+- 通过`this.bean`获取 app bean 容器，从而找到全局 service bean

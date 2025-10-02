@@ -28,7 +28,7 @@ class ControllerMenu {
 }
 ```
 
-3. 查找全局 Bean
+3. 查找全局 service bean
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
@@ -81,7 +81,7 @@ class ControllerMenu {
 }
 ```
 
-3. 创建全局 Bean 的新实例
+3. 创建全局 Service Bean 的新实例
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
