@@ -28,7 +28,7 @@ const entityDatasource = await this.bean.datasource.create({
 });
 ```
 
-- `bean.datasource`: Global bean instance provided by the module
+- `bean.datasource`: Global service instance provided by the module
 
 ## Using datasource
 

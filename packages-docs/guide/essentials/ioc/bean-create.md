@@ -18,9 +18,9 @@ $ vona :create:bean service student --module=demo-student
 Context menu - [Module Path]: `Vona Create/Service`
 :::
 
-## Example: Create global Bean
+## Example: Create Global Service Bean
 
-Create a global Bean `test` in module demo-student
+Create a Global Service Bean `test` in module demo-student
 
 ### 1. Cli command
 
@@ -31,5 +31,5 @@ $ vona :create:bean bean test --module=demo-student
 ### 2. Menu command
 
 ::: tip
-Context menu - [Module Path]: `Vona Bean/Global`
+Context menu - [Module Path]: `Vona Create/Service Global`
 :::

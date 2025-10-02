@@ -28,7 +28,7 @@ const entityDatasource = await this.bean.datasource.create({
 });
 ```
 
-- `bean.datasource`: 模块提供的全局 Bean 实例
+- `bean.datasource`: 模块提供的全局 Service 实例
 
 ## 使用数据源
 
