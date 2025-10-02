@@ -128,9 +128,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             {
               text: 'Middleware',
               items: [
-                { text: 'Middleware Local', link: 'middleware-local' },
-                { text: 'Middleware Global', link: 'middleware-global' },
-                { text: 'Middleware System', link: 'middleware-system' },
+                { text: 'Local Middleware', link: 'middleware-local' },
+                { text: 'Global Middleware', link: 'middleware-global' },
+                { text: 'System Middleware', link: 'middleware-system' },
               ],
             },
           ],
