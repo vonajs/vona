@@ -16,7 +16,7 @@ $ vona :create:bean middleware logger --module=demo-student
 Context Menu - [Module Path]: `Vona Aspect/Middleware`
 :::
 
-## 中间件定义
+## Middleware Definition
 
 ``` typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
@@ -33,12 +33,12 @@ class MiddlewareLogger {
 }
 ```
 
-- `IMiddlewareOptionsLogger`: 定义中间件参数
-- `execute`: 输出执行时长
+- `IMiddlewareOptionsLogger`: Defines middleware parameters
+- `execute`: Outputs execution time
 
-## 使用中间件
+## Using Middleware
 
-### 1. 标注控制器方法
+### 1. Annotating controller actions
 
 ``` diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -51,12 +51,12 @@ class ControllerStudent {
 }
 ```
 
-- `@Aspect.middleware`: 此装饰器用于使用局部中间件，只需传入中间件的名称
-  - logger 中间件属于模块`demo-student`，因此完整的名称是`demo-student:logger`
+- `@Aspect.middleware`: This decorator is used to use local middleware. Simply pass the middleware name
+  - The logger middleware belongs to the `demo-student` module, so the full name is `demo-student:logger`
 
-### 2. 标注控制器类
+### 2. Annotating controller class
 
-可以针对控制器类使用中间件，从而类中所有方法都会应用此中间件
+You can use middleware for controller classes so that all actions in the class will apply this middleware
 
 ``` diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -69,20 +69,20 @@ class ControllerStudent {
 }
 ```
 
-## 中间件参数
+## Middleware Parameters
 
-可以为中间件定义参数，通过参数更灵活的配置中间件逻辑
+You can define parameters for middleware, allowing for more flexible configuration of middleware logic
 
-比如，为 logger 中间件定义`prefix`参数，用于控制输出格式
+For example, define the `prefix` parameter for the logger middleware to control the output format
 
-### 1. 定义参数类型
+### 1. Defining parameter types
 
 ``` diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 + prefix: string;
 }
 ```
-### 2. 提供参数缺省值
+### 2. Providing default values ​​for parameters
 
 ``` diff
 @Middleware<IMiddlewareOptionsLogger>({
@@ -90,7 +90,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 })
 ```
 
-### 3. 使用参数
+### 3. Using Parameters
 
 ``` diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
@@ -112,7 +112,7 @@ class MiddlewareLogger {
 }
 ```
 
-### 4. 使用时指定参数
+### 4. Specify parameters when using
 
 ``` diff
 class ControllerStudent {
@@ -122,11 +122,11 @@ class ControllerStudent {
 }
 ```
 
-- 在使用中间件时直接提供参数值即可
+- When using middleware, just provide the parameter value directly
 
-### 5. App config配置
+### 5. App config
 
-可以在 App config 中配置中间件参数
+Middleware parameters can be configured in App config
 
 `src/backend/config/config/config.ts`
 
@@ -141,6 +141,6 @@ config.onions = {
 };
 ```
 
-### 6. 参数优先级
+### 6. Parameter precedence
 
-`使用时指定参数` > `App config配置` > `参数缺省值`
+`Specify parameters when using` > `App config` > `Default values`
