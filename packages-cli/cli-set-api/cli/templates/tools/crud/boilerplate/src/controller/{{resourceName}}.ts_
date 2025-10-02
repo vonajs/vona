@@ -29,19 +29,19 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
 
   @Web.get(':id')
   @Api.body(v.object(Entity<%=argv.resourceNameCapitalize%>))
-  async findOne(@Arg.param('id') id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%>> {
+  async findOne(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%>> {
     const <%=argv.resourceName%> = await this.scope.service.<%=argv.resourceName%>.findOne(id);
     if (!<%=argv.resourceName%>) this.app.throw(404);
     return <%=argv.resourceName%>;
   }
 
   @Web.patch(':id')
-  async update(@Arg.param('id') id: TableIdentity, @Arg.body() <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Update) {
+  async update(@Arg.param('id', v.tableIdentity()) id: TableIdentity, @Arg.body() <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Update) {
     return await this.scope.service.<%=argv.resourceName%>.update(id, <%=argv.resourceName%>);
   }
 
   @Web.delete(':id')
-  async remove(@Arg.param('id') id: TableIdentity) {
+  async remove(@Arg.param('id', v.tableIdentity()) id: TableIdentity) {
     return await this.scope.service.<%=argv.resourceName%>.remove(id);
   }
 }
