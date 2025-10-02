@@ -8,13 +8,13 @@
 
 比如，模块 home-base 提供了一个 Service bean：ServiceMenu。那么该 bean 对应的标识为：`home-base.service.menu`
 
-## 全局Bean
+## 全局Service Bean
 
-为了进一步简化 Bean 的使用，Vona 提供了全局 Bean 的概念。如果一个 Bean class 的 sceneName 值是`bean`，那么这个 bean class 就是全局 Bean
+为了进一步简化 Bean 的使用，Vona 提供了全局 Service Bean 的概念。如果一个 Bean class 的 sceneName 值是`bean`，那么这个 bean class 就是全局 Service Bean
 
-全局 Bean 的 Bean 标识就是`beanName`
+全局 Service Bean 的 Bean 标识就是`beanName`
 
-例如，模块 a-jwt 提供了一个全局 Bean：`jwt`。那么，这个全局 Bean 的标识就是`jwt`
+例如，模块 a-jwt 提供了一个全局 Service Bean：`jwt`。那么，这个全局 Service Bean 的标识就是`jwt`
 
 
 ## 基于Bean标识注入的优点
