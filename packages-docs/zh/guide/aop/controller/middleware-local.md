@@ -82,6 +82,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 + prefix: string;
 }
 ```
+
 ### 2. 提供参数缺省值
 
 ``` diff

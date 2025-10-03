@@ -38,7 +38,7 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 
 ## 使用中间件
 
-与局部中间件不同，系统会自动加载全局中间件，并使其失效
+与局部中间件不同，系统会自动加载全局中间件，并使其生效
 
 ## 中间件参数
 
@@ -53,6 +53,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 + prefix: string;
 }
 ```
+
 ### 2. 提供参数缺省值
 
 ``` diff
