@@ -58,6 +58,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ``` diff
 @Middleware<IMiddlewareOptionsLogger>({
+  global: true,
 + prefix: 'time',
 })
 ```
@@ -65,11 +66,12 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 3. Using Parameters
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
+export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
   prefix: string;
 }
 
 @Middleware<IMiddlewareOptionsLogger>({
+  global: true,
   prefix: 'time',
 })
 class MiddlewareLogger {
@@ -89,7 +91,7 @@ class MiddlewareLogger {
 ``` diff
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middleware('demo-student:logger', { prefix: 'elapsed' })
++ @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
   async findMany() {}
 }
 ```
@@ -116,3 +118,4 @@ config.onions = {
 ### 6. Parameter precedence
 
 `Specify parameters when using` > `App config` > `Default values`
+
