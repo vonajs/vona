@@ -54,7 +54,7 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 ### 1. 定义参数类型
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
+export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
 + prefix: string;
 }
 ```
@@ -62,8 +62,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 2. 提供参数缺省值
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
+@MiddlewareSystem<IMiddlewareSystemOptionsLogger>({
 + prefix: 'time',
 })
 ```
@@ -71,41 +70,26 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 3. 使用参数
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
+export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
   prefix: string;
 }
 
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
+@MiddlewareSystem<IMiddlewareSystemOptionsLogger>({
   prefix: 'time',
 })
-class MiddlewareLogger {
-  async execute(options: IMiddlewareOptionsLogger, next: Next) {
+class MiddlewareSystemLogger {
+  async execute(options: IMiddlewareSystemOptionsLogger, next: Next) {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);
+-   console.log('time: ', timeEnd - timeBegin);    
 +   console.log(`${options.prefix}: `, timeEnd - timeBegin);
     return res;
   }
 }
 ```
 
-### 4. 使用时指定参数
-
-可以针对某个 API 单独指定全局中间件的参数
-
-``` diff
-class ControllerStudent {
-  @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
-  async findMany() {}
-}
-```
-
-在使用中间件时直接提供参数值即可
-
-### 5. App config配置
+### 4. App config配置
 
 可以在 App config 中配置中间件参数
 
@@ -114,7 +98,7 @@ class ControllerStudent {
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
+  middlewareSystem: {
     'demo-student:logger': {
       prefix: 'elapsed',
     },
@@ -122,38 +106,36 @@ config.onions = {
 };
 ```
 
-### 6. 参数优先级
+### 5. 参数优先级
 
-`使用时指定参数` > `App config配置` > `参数缺省值`
+`App config配置` > `参数缺省值`
 
 ## 中间件顺序
 
-由于全局中间件是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制中间件的加载顺序
+由于系统中间件是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制中间件的加载顺序
 
 ### 1. dependencies
 
-比如，系统有一个内置全局中间件`a-instance:instance`，我们希望加载顺序如下：`a-instance:instance` > `Current`
+比如，系统有一个内置系统中间件`a-core:notfound`，我们希望加载顺序如下：`a-core:notfound` > `Current`
 
 ``` diff
-@Middleware({
-  global: true,
-+ dependencies: 'a-instance:instance',
+@MiddlewareSystem({
++ dependencies: 'a-core:notfound',
   prefix: 'time',
 })
-class MiddlewareLogger {}
+class MiddlewareSystemLogger {}
 ```
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-instance:instance`
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-core:notfound`
 
 ``` diff
-@Middleware({
-  global: true,
-+ dependents: 'a-instance:instance',
+@MiddlewareSystem({
++ dependents: 'a-core:notfound',
   prefix: 'time',
 })
-class MiddlewareLogger {}
+class MiddlewareSystemLogger {}
 ```
 
 ## 中间件启用/禁用
