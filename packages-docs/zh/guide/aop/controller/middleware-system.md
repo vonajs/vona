@@ -144,16 +144,6 @@ class MiddlewareSystemLogger {}
 
 ### 1. Enable
 
-* 针对某个 API 禁用
-
-``` diff
-class ControllerStudent {
-  @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
-  async findMany() {}
-}
-```
-
 * 针对所有 API 禁用
 
 `src/backend/config/config/config.ts`
@@ -161,7 +151,7 @@ class ControllerStudent {
 ``` diff
 // onions
 config.onions = {
-  middleware: {
+  middlewareSystem: {
     'demo-student:logger': {
 +     enable: false,
     },
@@ -183,8 +173,7 @@ config.onions = {
 * 举例
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
+@MiddlewareSystem({
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
@@ -192,7 +181,7 @@ config.onions = {
 +   host: 'localhost:7102',
 + },
 })
-export class MiddlewareLogger {}
+class MiddlewareSystemLogger {}
 ```
 
 ### 3. match/ignore
@@ -204,23 +193,30 @@ export class MiddlewareLogger {}
 |match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
 |ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
 
-## 查看当前生效的全局中间件清单
+系统中间件与全局中间件都支持`match`和`ignore`，但是传入的 API Path 格式不同，以 ControllerStudent 的 findMany API 为例：
 
-可以直接在 Controller action 方法中输出当前生效的全局中间件清单
+- 系统中间件：`/api/demo/student`
+- 全局中间件：`/demo/student`
+
+- 关于 API Path 的更多信息，参见: [Controller](../../essentials/api/controller.md)
+
+## 查看当前生效的系统中间件清单
+
+可以直接在 Controller action 方法中输出当前生效的系统中间件清单
 
 ``` diff
 class ControllerStudent {
   @Web.get()
   async findMany() {
-+   this.bean.onion.middleware.inspect();
++   this.bean.onion.middlewareSystem.inspect();
   }
 }
 ```
 
 - `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.middleware`: 取得与中间件相关的 Service 实例
-- `.inspect`: 输出当前生效的全局中间件清单
+- `.middlewareSystem`: 取得与中间件相关的 Service 实例
+- `.inspect`: 输出当前生效的系统中间件清单
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+当访问`findMany` API 时，会自动在控制台输出当前生效的系统中间件清单，效果如下：
 
-![](../../../assets/img/aop/middleware-1.png)
+![](../../../assets/img/aop/middleware-2.png)

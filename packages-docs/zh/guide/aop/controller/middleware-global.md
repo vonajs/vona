@@ -196,7 +196,7 @@ config.onions = {
 * 举例
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
+@Middleware({
   global: true,
 + meta: {
 +   flavor: 'normal',
@@ -205,7 +205,7 @@ config.onions = {
 +   host: 'localhost:7102',
 + },
 })
-export class MiddlewareLogger {}
+class MiddlewareLogger {}
 ```
 
 ### 3. match/ignore
