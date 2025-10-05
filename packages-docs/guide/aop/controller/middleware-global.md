@@ -219,8 +219,6 @@ You can enable/disable global middleware for some specific APIs
 
 You can directly inspect the currently effective global middleware list in the Controller action
 
-可以直接在 Controller action 中输出当前生效的全局中间件清单
-
 ``` diff
 class ControllerStudent {
   @Web.get()
@@ -230,10 +228,10 @@ class ControllerStudent {
 }
 ```
 
-- `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.middleware`: 取得与中间件相关的 Service 实例
-- `.inspect`: 输出当前生效的全局中间件清单
+- `this.bean.onion`: Get the global Service instance `onion`
+- `.middleware`: Get the Service instance related to the middleware
+- `.inspect`: Output the currently effective global middleware list
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+When accessing the `findMany` API, the current list of global middleware in effect will be automatically output to the console, as shown below:
 
 ![](../../../assets/img/aop/middleware-1.png)
