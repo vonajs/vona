@@ -125,7 +125,7 @@ Since global middlewares ard loaded and enabled by default, VonaJS provides two 
 
 ### 1. dependencies
 
-比如，系统有一个内置全局中间件`a-instance:instance`，我们希望加载顺序如下：`a-instance:instance` > `Current`
+For example, the system has a built-in global middleware `a-instance:instance`, and we hope that the loading order is as follows: `a-instance:instance` > `Current`
 
 ``` diff
 @Middleware({
@@ -138,7 +138,7 @@ class MiddlewareLogger {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-instance:instance`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-instance:instance`
 
 ``` diff
 @Middleware({
@@ -149,13 +149,13 @@ class MiddlewareLogger {}
 class MiddlewareLogger {}
 ```
 
-## 中间件启用/禁用
+## Middleware enable/disable 
 
-可以针对某些 API 控制全局中间件的`启用/禁用`
+You can control `enable/disable` of global middleware for certain APIs
 
 ### 1. Enable
 
-* 针对某个 API 禁用
+* Disabling an API
 
 ``` diff
 class ControllerStudent {
@@ -165,7 +165,7 @@ class ControllerStudent {
 }
 ```
 
-* 针对所有 API 禁用
+* Disable all APIs
 
 `src/backend/config/config/config.ts`
 
@@ -182,16 +182,16 @@ config.onions = {
 
 ### 2. Meta
 
-可以让全局中间件在指定的运行环境生效
+Allows global middleware to take effect in a specified operating environment
 
-|名称|类型|说明|
+|Name|Type|Description|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|instanceName|string\|string[]|参见: [多实例/多租户](../../techniques/instance/introduction.md)|
-|host|string\|string[]|主机名|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../techniques/instance/introduction.md)|
+|host|string\|string[]|Host|
 
-* 举例
+* Example
 
 ``` diff
 @Middleware({
@@ -207,13 +207,13 @@ class MiddlewareLogger {}
 ```
 
 ### 3. match/ignore
-    
-可以针对指定的 API 启用/禁用全局中间件
 
-|名称|类型|说明|
+You can enable/disable global middleware for some specific APIs
+
+|Name|Type|Description|
 |--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
-|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
+|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
 
 ## 查看当前生效的全局中间件清单
 
