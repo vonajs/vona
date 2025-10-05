@@ -127,12 +127,12 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置全局中间件`a-instance:instance`，我们希望加载顺序如下：`a-instance:instance` > `Current`
+比如，系统有一个内置全局中间件`a-core:gate`，我们希望加载顺序如下：`a-core:gate` > `Current`
 
 ``` diff
 @Middleware({
   global: true,
-+ dependencies: 'a-instance:instance',
++ dependencies: 'a-core:gate',
   prefix: 'time',
 })
 class MiddlewareLogger {}
@@ -140,12 +140,12 @@ class MiddlewareLogger {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-instance:instance`
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-core:gate`
 
 ``` diff
 @Middleware({
   global: true,
-+ dependents: 'a-instance:instance',
++ dependents: 'a-core:gate',
   prefix: 'time',
 })
 class MiddlewareLogger {}

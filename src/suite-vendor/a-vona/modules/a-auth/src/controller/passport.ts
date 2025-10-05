@@ -14,7 +14,6 @@ export interface IControllerOptionsPassport extends IDecoratorControllerOptions 
 export class ControllerPassport extends BeanBase {
   @Web.get('callback')
   @Aspect.guardGlobal('a-user:passport', { public: true })
-  @Aspect.middlewareGlobal('a-instance:instance', { enable: false })
   @Api.exclude()
   async callback() {
     const code = this.ctx.query.code as string;

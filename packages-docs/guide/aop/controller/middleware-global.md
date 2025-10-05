@@ -125,12 +125,12 @@ Since global middlewares ard loaded and enabled by default, VonaJS provides two 
 
 ### 1. dependencies
 
-For example, the system has a built-in global middleware `a-instance:instance`, and we hope that the loading order is as follows: `a-instance:instance` > `Current`
+For example, the system has a built-in global middleware `a-core:gate`, and we hope that the loading order is as follows: `a-core:gate` > `Current`
 
 ``` diff
 @Middleware({
   global: true,
-+ dependencies: 'a-instance:instance',
++ dependencies: 'a-core:gate',
   prefix: 'time',
 })
 class MiddlewareLogger {}
@@ -138,12 +138,12 @@ class MiddlewareLogger {}
 
 ### 2. dependents
 
-The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-instance:instance`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-core:gate`
 
 ``` diff
 @Middleware({
   global: true,
-+ dependents: 'a-instance:instance',
++ dependents: 'a-core:gate',
   prefix: 'time',
 })
 class MiddlewareLogger {}
