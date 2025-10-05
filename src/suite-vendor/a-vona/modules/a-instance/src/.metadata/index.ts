@@ -2,39 +2,17 @@
 import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { TableIdentity } from 'table-identity';
-/** middleware: begin */
-export * from '../bean/middleware.instance.ts';
-import type { IMiddlewareOptionsInstance } from '../bean/middleware.instance.ts';
-import 'vona';
-declare module 'vona-module-a-aspect' {
-  
-    export interface IMiddlewareRecordGlobal {
-      'a-instance:instance': IMiddlewareOptionsInstance;
-    }
-
-  
-}
-declare module 'vona-module-a-instance' {
-  
-        export interface MiddlewareInstance {
-          /** @internal */
-          get scope(): ScopeModuleAInstance;
-        }
-
-          export interface MiddlewareInstance {
-            get $beanFullName(): 'a-instance.middleware.instance';
-            get $onionName(): 'a-instance:instance';
-          } 
-}
-/** middleware: end */
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.appReady.ts';
+export * from '../bean/middlewareSystem.instance.ts';
 import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
+import type { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.ts';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {
       'a-instance:appReady': IMiddlewareSystemOptionsAppReady;
+'a-instance:instance': IMiddlewareSystemOptionsInstance;
     }
 
   
@@ -49,6 +27,16 @@ declare module 'vona-module-a-instance' {
           export interface MiddlewareSystemAppReady {
             get $beanFullName(): 'a-instance.middlewareSystem.appReady';
             get $onionName(): 'a-instance:appReady';
+          }
+
+        export interface MiddlewareSystemInstance {
+          /** @internal */
+          get scope(): ScopeModuleAInstance;
+        }
+
+          export interface MiddlewareSystemInstance {
+            get $beanFullName(): 'a-instance.middlewareSystem.instance';
+            get $onionName(): 'a-instance:instance';
           } 
 }
 /** middlewareSystem: end */
