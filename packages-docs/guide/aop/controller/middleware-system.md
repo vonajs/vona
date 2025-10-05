@@ -43,7 +43,7 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 
 ## Using Middleware
 
-Unlike local middleware, the system automatically loads global middlewares and makes them effective
+Unlike local middleware, the system automatically loads system middlewares and makes them effective
 
 ## Middleware Parameters
 
@@ -54,7 +54,7 @@ For example, define the `prefix` parameter for the logger middleware to control 
 ### 1. Defining parameter types
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
+export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
 + prefix: string;
 }
 ```
@@ -62,8 +62,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 2. Providing default values ​​for parameters
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
+@MiddlewareSystem<IMiddlewareSystemOptionsLogger>({
 + prefix: 'time',
 })
 ```
@@ -71,39 +70,26 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 3. Using Parameters
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
+export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
   prefix: string;
 }
 
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
+@MiddlewareSystem<IMiddlewareSystemOptionsLogger>({
   prefix: 'time',
 })
-class MiddlewareLogger {
-  async execute(options: IMiddlewareOptionsLogger, next: Next) {
+class MiddlewareSystemLogger {
+  async execute(options: IMiddlewareSystemOptionsLogger, next: Next) {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);
+-   console.log('time: ', timeEnd - timeBegin);    
 +   console.log(`${options.prefix}: `, timeEnd - timeBegin);
     return res;
   }
 }
 ```
 
-### 4. Specify parameters when using
-
-``` diff
-class ControllerStudent {
-  @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
-  async findMany() {}
-}
-```
-
-- When using middleware, just provide the parameter value directly
-
-### 5. App config
+### 4. App config
 
 Middleware parameters can be configured in App config
 
@@ -112,7 +98,7 @@ Middleware parameters can be configured in App config
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
+  middlewareSystem: {
     'demo-student:logger': {
       prefix: 'elapsed',
     },
@@ -120,38 +106,36 @@ config.onions = {
 };
 ```
 
-### 6. Parameters precedence
+### 5. Parameters precedence
 
-`Specify parameters when using` > `App config` > `Default values`
+`App config` > `Default values`
 
 ## Middleware Order
 
-Since global middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded
+Since system middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded
 
 ### 1. dependencies
 
-For example, the system has a built-in global middleware `a-instance:instance`, and we hope that the loading order is as follows: `a-instance:instance` > `Current`
+For example, the system has a built-in system middleware `a-core:notfound`, and we hope that the loading order is as follows: `a-core:notfound` > `Current`
 
 ``` diff
-@Middleware({
-  global: true,
-+ dependencies: 'a-instance:instance',
+@MiddlewareSystem({
++ dependencies: 'a-core:notfound',
   prefix: 'time',
 })
-class MiddlewareLogger {}
+class MiddlewareSystemLogger {}
 ```
 
 ### 2. dependents
 
-The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-instance:instance`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-core:notfound`
 
 ``` diff
-@Middleware({
-  global: true,
-+ dependents: 'a-instance:instance',
+@MiddlewareSystem({
++ dependents: 'a-core:notfound',
   prefix: 'time',
 })
-class MiddlewareLogger {}
+class MiddlewareSystemLogger {}
 ```
 
 ## Middleware enable/disable 
