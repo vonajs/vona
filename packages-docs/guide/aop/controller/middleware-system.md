@@ -202,21 +202,21 @@ Both system and global middleware support `match` and `ignore`, but the API path
 
 ## Inspect
 
-You can directly inspect the currently effective global middleware list in the Controller action
+You can directly inspect the currently effective system middleware list in the Controller action
 
 ``` diff
 class ControllerStudent {
   @Web.get()
   async findMany() {
-+   this.bean.onion.middleware.inspect();
++   this.bean.onion.middlewareSystem.inspect();
   }
 }
 ```
 
 - `this.bean.onion`: Get the global Service instance `onion`
-- `.middleware`: Get the Service instance related to the middleware
-- `.inspect`: Output the currently effective global middleware list
+- `.middlewareSystem`: Get the Service instance related to the middleware
+- `.inspect`: Output the currently effective system middleware list
 
-When accessing the `findMany` API, the current list of global middleware in effect will be automatically output to the console, as shown below:
+When accessing the `findMany` API, the current list of system middleware in effect will be automatically output to the console, as shown below:
 
-![](../../../assets/img/aop/middleware-1.png)
+![](../../../assets/img/aop/middleware-2.png)
