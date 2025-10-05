@@ -215,9 +215,11 @@ You can enable/disable global middleware for some specific APIs
 |match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
 |ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
 
-## 查看当前生效的全局中间件清单
+## Inspect
 
-可以直接在 Controller action 方法中输出当前生效的全局中间件清单
+You can directly inspect the currently effective global middleware list in the Controller action
+
+可以直接在 Controller action 中输出当前生效的全局中间件清单
 
 ``` diff
 class ControllerStudent {

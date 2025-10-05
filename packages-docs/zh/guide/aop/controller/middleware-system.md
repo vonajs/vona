@@ -202,7 +202,7 @@ class MiddlewareSystemLogger {}
 
 ## 查看当前生效的系统中间件清单
 
-可以直接在 Controller action 方法中输出当前生效的系统中间件清单
+可以直接在 Controller action 中输出当前生效的系统中间件清单
 
 ``` diff
 class ControllerStudent {
