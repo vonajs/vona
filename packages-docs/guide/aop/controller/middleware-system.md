@@ -140,19 +140,9 @@ class MiddlewareSystemLogger {}
 
 ## Middleware enable/disable 
 
-You can control `enable/disable` of global middleware for certain APIs
+You can control `enable/disable` of system middleware for certain APIs
 
 ### 1. Enable
-
-* Disabling an API
-
-``` diff
-class ControllerStudent {
-  @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
-  async findMany() {}
-}
-```
 
 * Disable all APIs
 
@@ -161,7 +151,7 @@ class ControllerStudent {
 ``` diff
 // onions
 config.onions = {
-  middleware: {
+  middlewareSystem: {
     'demo-student:logger': {
 +     enable: false,
     },
@@ -171,7 +161,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows global middleware to take effect in a specified operating environment
+Allows system middleware to take effect in a specified operating environment
 
 |Name|Type|Description|
 |--|--|--|
@@ -183,8 +173,7 @@ Allows global middleware to take effect in a specified operating environment
 * Example
 
 ``` diff
-@Middleware({
-  global: true,
+@MiddlewareSystem({
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
@@ -192,17 +181,24 @@ Allows global middleware to take effect in a specified operating environment
 +   host: 'localhost:7102',
 + },
 })
-class MiddlewareLogger {}
+class MiddlewareSystemLogger {}
 ```
 
 ### 3. match/ignore
 
-You can enable/disable global middleware for some specific APIs
+You can enable/disable system middleware for some specific APIs
 
 |Name|Type|Description|
 |--|--|--|
 |match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
 |ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+
+Both system and global middleware support `match` and `ignore`, but the API path format used is different. For example, consider the `findMany` API in ControllerStudent:
+
+- System middleware: `/api/demo/student`
+- Global middleware: `/demo/student`
+
+- For more information about API paths, see: [Controller](../../essentials/api/controller.md)
 
 ## Inspect
 
