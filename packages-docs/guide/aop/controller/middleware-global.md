@@ -115,7 +115,123 @@ config.onions = {
 };
 ```
 
-### 6. Parameter precedence
+### 6. Parameters precedence
 
 `Specify parameters when using` > `App config` > `Default values`
 
+## Middleware Order
+
+Since global middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded
+
+### 1. dependencies
+
+比如，系统有一个内置全局中间件`a-instance:instance`，我们希望加载顺序如下：`a-instance:instance` > `Current`
+
+``` diff
+@Middleware({
+  global: true,
++ dependencies: 'a-instance:instance',
+  prefix: 'time',
+})
+class MiddlewareLogger {}
+```
+
+### 2. dependents
+
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-instance:instance`
+
+``` diff
+@Middleware({
+  global: true,
++ dependents: 'a-instance:instance',
+  prefix: 'time',
+})
+class MiddlewareLogger {}
+```
+
+## 中间件启用/禁用
+
+可以针对某些 API 控制全局中间件的`启用/禁用`
+
+### 1. Enable
+
+* 针对某个 API 禁用
+
+``` diff
+class ControllerStudent {
+  @Web.get()
++ @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
+  async findMany() {}
+}
+```
+
+* 针对所有 API 禁用
+
+`src/backend/config/config/config.ts`
+
+``` diff
+// onions
+config.onions = {
+  middleware: {
+    'demo-student:logger': {
++     enable: false,
+    },
+  },
+};
+```
+
+### 2. Meta
+
+可以让全局中间件在指定的运行环境生效
+
+|名称|类型|说明|
+|--|--|--|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|参见: [多实例/多租户](../../techniques/instance/introduction.md)|
+|host|string\|string[]|主机名|
+
+* 举例
+
+``` diff
+@Middleware({
+  global: true,
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++   instanceName: '',
++   host: 'localhost:7102',
++ },
+})
+class MiddlewareLogger {}
+```
+
+### 3. match/ignore
+    
+可以针对指定的 API 启用/禁用全局中间件
+
+|名称|类型|说明|
+|--|--|--|
+|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
+|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+
+## 查看当前生效的全局中间件清单
+
+可以直接在 Controller action 方法中输出当前生效的全局中间件清单
+
+``` diff
+class ControllerStudent {
+  @Web.get()
+  async findMany() {
++   this.bean.onion.middleware.inspect();
+  }
+}
+```
+
+- `this.bean.onion`: 取得全局 Service 实例 `onion`
+- `.middleware`: 取得与中间件相关的 Service 实例
+- `.inspect`: 输出当前生效的全局中间件清单
+
+当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+
+![](../../../assets/img/aop/middleware-1.png)
