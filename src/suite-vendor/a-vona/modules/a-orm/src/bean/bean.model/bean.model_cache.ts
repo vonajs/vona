@@ -25,6 +25,7 @@ import type {
 } from '../../types/index.ts';
 import type { TypeQueueDoubleDeleteJobData } from '../queue.doubleDelete.ts';
 import { isNil } from '@cabloy/utils';
+import { parseFirstWord, toLowerCaseFirstChar } from '@cabloy/word-utils';
 import BigNumber from 'bignumber.js';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
@@ -726,4 +727,27 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       ? where[columnId]
       : undefined;
   }
+
+  protected __get__(prop: string) {
+    if (prop.startsWith('getBy')) {
+      const [fieldName, op] = __parseMagicField(prop.substring('getBy'.length));
+      if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
+      return (fieldValue?: string, options?: any) => {
+        return this.get({
+          [fieldName]: fieldValue === undefined
+            ? undefined
+            : {
+                [`_${op}_`]: fieldValue,
+              },
+        } as any, options);
+      };
+    }
+  }
+}
+
+function __parseMagicField(str: string) {
+  const fieldName = parseFirstWord(str, true);
+  if (!fieldName) return [fieldName, undefined];
+  const op = toLowerCaseFirstChar(str.substring(fieldName.length)) || 'eq';
+  return [fieldName, op];
 }
