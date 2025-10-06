@@ -141,6 +141,13 @@ declare module 'vona-module-a-instance' {
       count<T extends IModelSelectCountParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
       aggregate<T extends IModelSelectAggrParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityInstance, T>[]>;
+      getById<T extends IModelGetOptions<EntityInstance,ModelInstance>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityInstance,ModelInstance>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityInstance,ModelInstance>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
+getByDisabled<T extends IModelGetOptions<EntityInstance,ModelInstance>>(disabled?: boolean, options?: T): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T> | undefined>;
+selectByDisabled<T extends IModelSelectParams<EntityInstance,ModelInstance,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(disabled?: boolean, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityInstance, ModelInstance, T>[]>;
     }
 }
 declare module 'vona-module-a-orm' {

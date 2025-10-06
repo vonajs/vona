@@ -733,25 +733,14 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       const [fieldName, op] = __parseMagicField(prop.substring('getBy'.length));
       if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
       return (fieldValue?: any, options?: any) => {
-        return this.get({
-          [fieldName]: fieldValue === undefined
-            ? undefined
-            : {
-                [`_${op}_`]: fieldValue,
-              },
-        } as any, options);
+        const where = __combineMagicWhere(fieldName, op!, fieldValue);
+        return this.get(where as any, options);
       };
     } else if (prop.startsWith('selectBy')) {
       const [fieldName, op] = __parseMagicField(prop.substring('selectBy'.length));
       if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
       return (fieldValue?: any, params?: any, options?: any, modelJoins?: any) => {
-        const where = {
-          [fieldName]: fieldValue === undefined
-            ? undefined
-            : {
-                [`_${op}_`]: fieldValue,
-              },
-        } as any;
+        const where = __combineMagicWhere(fieldName, op!, fieldValue);
         const params2 = params ? deepExtend({}, params, { where }) : { where };
         return this.select(params2, options, modelJoins);
       };
@@ -759,6 +748,15 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 }
 
+function __combineMagicWhere(fieldName: string, op: string, fieldValue?: any) {
+  return {
+    [fieldName]: fieldValue === undefined
+      ? undefined
+      : {
+          [`_${op}_`]: fieldValue,
+        },
+  };
+}
 function __parseMagicField(str: string) {
   const fieldName = parseFirstWord(str, true);
   if (!fieldName) return [fieldName, undefined];
