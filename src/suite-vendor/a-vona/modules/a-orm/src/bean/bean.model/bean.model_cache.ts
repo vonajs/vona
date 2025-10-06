@@ -757,6 +757,7 @@ function __combineMagicWhere(fieldName: string, op: string, fieldValue?: any) {
         },
   };
 }
+
 function __parseMagicField(str: string) {
   const fieldName = parseFirstWord(str, true);
   if (!fieldName) return [fieldName, undefined];
