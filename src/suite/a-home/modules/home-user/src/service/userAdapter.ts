@@ -23,7 +23,7 @@ export class ServiceUserAdapter extends BeanBase implements IUserAdapter {
   }
 
   async findOneByName(name: string): Promise<IUserBase | undefined> {
-    return await this.scope.model.user.get({ name: { _eqI_: name } });
+    return await this.scope.model.user.getByNameEqI(name);
   }
 
   async findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {

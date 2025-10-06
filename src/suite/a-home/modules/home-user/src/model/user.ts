@@ -12,4 +12,8 @@ export interface IModelOptionsUser extends IDecoratorModelOptions<EntityUser> {}
     roles: $relation.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', { columns: ['id', 'name'] }),
   },
 })
-export class ModelUser extends BeanModelBase<EntityUser> {}
+export class ModelUser extends BeanModelBase<EntityUser> {
+  getByEmailEqI(email: string) {
+    return this.get({ email: { _eqI_: email } });
+  }
+}
