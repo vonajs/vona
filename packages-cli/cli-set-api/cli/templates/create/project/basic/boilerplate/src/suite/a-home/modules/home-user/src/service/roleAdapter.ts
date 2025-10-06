@@ -6,7 +6,7 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceRoleAdapter extends BeanBase implements IRoleAdapter {
   async findOneByName(name: string): Promise<IRoleBase | undefined> {
-    return await this.scope.model.role.get({ name: { _eqI_: name } });
+    return await this.scope.model.role.getByNameEqI(name);
   }
 
   async findOne(role: Partial<IRoleBase>): Promise<IRoleBase | undefined> {
