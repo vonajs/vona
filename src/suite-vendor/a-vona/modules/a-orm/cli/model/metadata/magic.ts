@@ -46,12 +46,22 @@ const __MagicFields: Record<string, IMagicField> = {
 };
 
 export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile: IGlobBeanFile, entityName: string) {
+  const { className, file } = globFile;
   const astImportEntity = ast.find(`import { ${entityName} } from '$$$0'`);
-  const fileEntity = path.join(path.dirname(globFile.file), (astImportEntity as any).value.source.value);
+  const fileEntity = path.join(path.dirname(file), (astImportEntity as any).value.source.value);
   const entityInfo = __parseEntityInfo(cli, fileEntity, entityName);
-  const modelInfo = __parseModelInfo(cli, globFile.file, globFile.className);
-  console.log(entityInfo);
-  console.log(modelInfo);
+  const modelInfo = __parseModelInfo(cli, file, className);
+  const contentRecords: string[] = [];
+  for (const fieldName in __MagicFields) {
+    const magicField = __MagicFields[fieldName];
+    if (fieldName === 'id') {
+      if (entityInfo.idType) {
+        contentRecords.push(`getById<T extends IModelGetOptions<${entityName},${className}>>(id: ${entityInfo.idType}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
+      }
+      continue;
+    }
+  }
+  return contentRecords;
 }
 
 function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: string) {
