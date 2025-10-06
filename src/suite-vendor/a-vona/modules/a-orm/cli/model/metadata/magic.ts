@@ -3,6 +3,8 @@ import type { IGlobBeanFile } from '@cabloy/module-info';
 import type GoGoCode from 'gogocode';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { ensureArray } from '@cabloy/utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 type TypeMagicFieldMethod = 'getBy' | 'selectBy';
 type TypeMagicFieldOp = '' | 'eqI';
@@ -55,10 +57,22 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
   for (const fieldName in __MagicFields) {
     const magicField = __MagicFields[fieldName];
     if (fieldName === 'id') {
-      if (entityInfo.idType) {
+      if (!modelInfo.fieldNames.includes('getById') && entityInfo.idType) {
         contentRecords.push(`getById<T extends IModelGetOptions<${entityName},${className}>>(id: ${entityInfo.idType}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
       }
       continue;
+    }
+    for (const method of ensureArray(magicField.methods)!) {
+      const ops = ensureArray(magicField.ops || [''])!;
+      for (const op of ops) {
+        const actionName = `${method}${toUpperCaseFirstChar(fieldName)}${toUpperCaseFirstChar(op)}`;
+        if (modelInfo.fieldNames.includes(actionName)) continue;
+        if (method === 'getBy') {
+          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}?: ${magicField.type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
+        } else if (method === 'selectBy') {
+          contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}?: ${magicField.type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
+        }
+      }
     }
   }
   return contentRecords;
