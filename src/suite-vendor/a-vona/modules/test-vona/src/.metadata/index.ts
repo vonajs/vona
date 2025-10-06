@@ -526,6 +526,10 @@ roles: IModelRelationBelongsToMany<'test-vona:roleUser', 'test-vona:role', false
       aggregate<T extends IModelSelectAggrParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityCategory, T>[]>;
       getById<T extends IModelGetOptions<EntityCategory,ModelCategory>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityCategory,ModelCategory>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityCategory,ModelCategory>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityCategory,ModelCategory,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityCategory, ModelCategory, T>[]>;
     }
 export interface ModelCategoryChain {
       [SymbolKeyEntity]: EntityCategory;
@@ -547,6 +551,10 @@ export interface ModelCategoryChain {
       aggregate<T extends IModelSelectAggrParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityCategory, T>[]>;
       getById<T extends IModelGetOptions<EntityCategory,ModelCategoryChain>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityCategory,ModelCategoryChain>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityCategory,ModelCategoryChain>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityCategory,ModelCategoryChain,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityCategory, ModelCategoryChain, T>[]>;
     }
 export interface ModelOrder {
       [SymbolKeyEntity]: EntityOrder;
@@ -652,6 +660,10 @@ export interface ModelProduct {
       aggregate<T extends IModelSelectAggrParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityProduct, T>[]>;
       getById<T extends IModelGetOptions<EntityProduct,ModelProduct>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityProduct,ModelProduct>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityProduct,ModelProduct>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityProduct,ModelProduct,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityProduct, ModelProduct, T>[]>;
     }
 export interface ModelRole {
       [SymbolKeyEntity]: EntityRole;
@@ -673,6 +685,10 @@ export interface ModelRole {
       aggregate<T extends IModelSelectAggrParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityRole, T>[]>;
       getById<T extends IModelGetOptions<EntityRole,ModelRole>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityRole,ModelRole>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityRole,ModelRole>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityRole, ModelRole, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityRole,ModelRole,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityRole, ModelRole, T>[]>;
     }
 export interface ModelRoleUser {
       [SymbolKeyEntity]: EntityRoleUser;
@@ -757,6 +773,10 @@ export interface ModelUser {
       aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
       getById<T extends IModelGetOptions<EntityUser,ModelUser>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityUser,ModelUser>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityUser,ModelUser>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUser, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityUser,ModelUser,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUser, T>[]>;
     }
 export interface ModelUserStats {
       [SymbolKeyEntity]: EntityUser;
@@ -778,6 +798,10 @@ export interface ModelUserStats {
       aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
       getById<T extends IModelGetOptions<EntityUser,ModelUserStats>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityUser,ModelUserStats>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityUser,ModelUserStats>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityUser,ModelUserStats,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUserStats, T>[]>;
     }
 export interface ModelUserStatsGroup {
       [SymbolKeyEntity]: EntityUser;
@@ -799,6 +823,10 @@ export interface ModelUserStatsGroup {
       aggregate<T extends IModelSelectAggrParams<EntityUser,ModelUserStatsGroup,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityUser,ModelUserStatsGroup,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityUser, T>[]>;
       getById<T extends IModelGetOptions<EntityUser,ModelUserStatsGroup>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStatsGroup, T> | undefined>;
+getByName<T extends IModelGetOptions<EntityUser,ModelUserStatsGroup>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStatsGroup, T> | undefined>;
+getByNameEqI<T extends IModelGetOptions<EntityUser,ModelUserStatsGroup>>(name?: string, options?: T): Promise<TypeModelRelationResult<EntityUser, ModelUserStatsGroup, T> | undefined>;
+selectByName<T extends IModelSelectParams<EntityUser,ModelUserStatsGroup,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUserStatsGroup, T>[]>;
+selectByNameEqI<T extends IModelSelectParams<EntityUser,ModelUserStatsGroup,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(name?: string, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityUser, ModelUserStatsGroup, T>[]>;
     }
 }
 declare module 'vona-module-a-orm' {

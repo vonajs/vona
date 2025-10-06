@@ -62,6 +62,7 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
       }
       continue;
     }
+    if (!entityInfo.fieldNames.includes(fieldName)) continue;
     for (const method of ensureArray(magicField.methods)!) {
       const ops = ensureArray(magicField.ops || [''])!;
       for (const op of ops) {
