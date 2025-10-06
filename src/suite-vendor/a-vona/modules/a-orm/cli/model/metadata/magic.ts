@@ -51,6 +51,7 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
   const entityInfo = __parseEntityInfo(cli, fileEntity, entityName);
   const modelInfo = __parseModelInfo(cli, globFile.file, globFile.className);
   console.log(entityInfo);
+  console.log(modelInfo);
 }
 
 function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: string) {
@@ -70,4 +71,15 @@ function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: str
     fieldNames.push((astNode as any).key.name);
   }
   return { idType, fieldNames };
+}
+
+function __parseModelInfo(cli: BeanCliBase, fileModel: string, modelName: string) {
+  const content = readFileSync(fileModel).toString();
+  const ast = cli.helper.gogocode(content);
+  const astNodes = ast.find(`export class ${modelName} extends $$$0 {$$$1}`).match.$$$1;
+  const fieldNames: string[] = [];
+  for (const astNode of astNodes) {
+    fieldNames.push((astNode as any).key.name);
+  }
+  return { fieldNames };
 }
