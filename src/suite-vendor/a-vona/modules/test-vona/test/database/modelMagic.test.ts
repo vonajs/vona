@@ -19,8 +19,13 @@ describe('modelMagic.test.ts', () => {
       assert.equal(user?.name, name);
       user = await scopeTest.model.user.getByNameEqI(name.toUpperCase());
       assert.equal(user?.name, name);
-      const users = await scopeTest.model.user.selectByName(name, { columns: ['age', 'name'] });
+      const users = await scopeTest.model.user.selectByName(name);
       assert.equal(users[0].name, name);
+      const users2 = await scopeTest.model.user.selectByName(name, {
+        where: { id: item.id },
+        columns: ['age', 'name'],
+      });
+      assert.equal(users2[0].name, name);
       // delete
       await scopeTest.model.user.delete({ id: item.id });
     });

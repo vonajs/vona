@@ -732,7 +732,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (prop.startsWith('getBy')) {
       const [fieldName, op] = __parseMagicField(prop.substring('getBy'.length));
       if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
-      return (fieldValue?: string, options?: any) => {
+      return (fieldValue?: any, options?: any) => {
         return this.get({
           [fieldName]: fieldValue === undefined
             ? undefined
@@ -740,6 +740,20 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
                 [`_${op}_`]: fieldValue,
               },
         } as any, options);
+      };
+    } else if (prop.startsWith('selectBy')) {
+      const [fieldName, op] = __parseMagicField(prop.substring('selectBy'.length));
+      if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
+      return (fieldValue?: any, params?: any, options?: any, modelJoins?: any) => {
+        const where = {
+          [fieldName]: fieldValue === undefined
+            ? undefined
+            : {
+                [`_${op}_`]: fieldValue,
+              },
+        } as any;
+        const params2 = params ? deepExtend({}, params, { where }) : { where };
+        return this.select(params2, options, modelJoins);
       };
     }
   }
