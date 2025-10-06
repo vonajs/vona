@@ -48,7 +48,9 @@ const __MagicFields: Record<string, IMagicField> = {
 export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile: IGlobBeanFile, entityName: string) {
   const astImportEntity = ast.find(`import { ${entityName} } from '$$$0'`);
   const fileEntity = path.join(path.dirname(globFile.file), (astImportEntity as any).value.source.value);
-  __parseEntityInfo(cli, fileEntity, entityName);
+  const entityInfo = __parseEntityInfo(cli, fileEntity, entityName);
+  const modelInfo = __parseModelInfo(cli, globFile.file, globFile.className);
+  console.log(entityInfo);
 }
 
 function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: string) {
@@ -62,6 +64,10 @@ function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: str
     idType = 'TableIdentity';
   }
   const ast = cli.helper.gogocode(content);
-  console.log(ast);
-  return { idType };
+  const astNodes = ast.find(`export class ${entityName} extends $$$0 {$$$1}`).match.$$$1;
+  const fieldNames: string[] = [];
+  for (const astNode of astNodes) {
+    fieldNames.push((astNode as any).key.name);
+  }
+  return { idType, fieldNames };
 }
