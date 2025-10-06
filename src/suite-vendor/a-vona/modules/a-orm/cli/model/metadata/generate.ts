@@ -1,5 +1,6 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import { types as t } from '@babel/core';
+import { __parseMagics } from './magic.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { sceneName, moduleName, globFiles, cli } = options;
@@ -13,6 +14,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const astNodes = ast.find(`@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`).match.$$$1;
     const entityName = __parseEntityName(__getAstNode(astNodes as any, 'entity'));
     const relations = __parseRelations(__getAstNode(astNodes as any, 'relations'));
+    const magics = __parseMagics(cli, ast, globFile, entityName);
     const entityMetaName = `${entityName}Meta`;
     const opionsName = `IModelOptions${beanNameCapitalize}`;
     if (relations && relations.length > 0) {

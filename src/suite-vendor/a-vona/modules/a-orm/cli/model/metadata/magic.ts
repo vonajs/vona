@@ -1,7 +1,13 @@
+import type { BeanCliBase } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
+import type GoGoCode from 'gogocode';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
 type TypeMagicFieldMethod = 'getBy' | 'selectBy';
 type TypeMagicFieldOp = '' | 'eqI';
 interface IMagicField {
-  type: 'auto' | 'string' | 'boolean';
+  type: 'auto' | 'number' | 'TableIdentity' | 'string' | 'boolean';
   methods: TypeMagicFieldMethod | Array<TypeMagicFieldMethod>;
   ops?: TypeMagicFieldOp | Array<TypeMagicFieldOp>;
 }
@@ -38,3 +44,24 @@ const __MagicFields: Record<string, IMagicField> = {
     methods: ['getBy', 'selectBy'],
   },
 };
+
+export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile: IGlobBeanFile, entityName: string) {
+  const astImportEntity = ast.find(`import { ${entityName} } from '$$$0'`);
+  const fileEntity = path.join(path.dirname(globFile.file), (astImportEntity as any).value.source.value);
+  __parseEntityInfo(cli, fileEntity, entityName);
+}
+
+function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: string) {
+  const content = readFileSync(fileEntity).toString();
+  const regexpSimple = new RegExp(`export class ${entityName} extends.*?EntityBaseSimple.*?{`);
+  const regexpBase = new RegExp(`export class ${entityName} extends.*?EntityBase.*?{`);
+  let idType;
+  if (content.match(regexpSimple)) {
+    idType = 'number';
+  } else if (content.match(regexpBase)) {
+    idType = 'TableIdentity';
+  }
+  const ast = cli.helper.gogocode(content);
+  console.log(ast);
+  return { idType };
+}
