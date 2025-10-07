@@ -183,6 +183,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'ORM Basics', link: 'basics' },
             { text: 'CRUD(Select)', link: 'crud-select' },
             { text: 'CRUD(Insert/Update/Delete)', link: 'crud-cud' },
+            { text: 'CRUD(Magic Methods)', link: 'crud-magic' },
             { text: 'Transaction', link: 'transaction' },
             { text: 'Relations(Static)', link: 'relations-static' },
             { text: 'Relations(Dynamic)', link: 'relations-dynamic' },

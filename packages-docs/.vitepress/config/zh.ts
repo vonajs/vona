@@ -183,6 +183,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'ORM基础', link: 'basics' },
             { text: 'CRUD(查询)', link: 'crud-select' },
             { text: 'CRUD(插入/更新/删除)', link: 'crud-cud' },
+            { text: 'CRUD(魔术方法)', link: 'crud-magic' },
             { text: '数据库事务', link: 'transaction' },
             { text: '静态关系', link: 'relations-static' },
             { text: '动态关系', link: 'relations-dynamic' },
