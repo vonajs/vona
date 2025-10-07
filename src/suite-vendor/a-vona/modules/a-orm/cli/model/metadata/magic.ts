@@ -6,9 +6,10 @@ import path from 'node:path';
 import { ensureArray } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-type TypeMagicFieldMethod = 'getBy' | 'selectBy';
+type TypeMagicFieldMethod = 'getBy' | 'selectBy' | 'updateBy' | 'deleteBy';
 type TypeMagicFieldOp = '' | 'eqI';
 interface IMagicField {
+  optional: boolean;
   type: 'auto' | 'number' | 'TableIdentity' | 'string' | 'boolean';
   methods: TypeMagicFieldMethod | Array<TypeMagicFieldMethod>;
   ops?: TypeMagicFieldOp | Array<TypeMagicFieldOp>;
@@ -17,31 +18,38 @@ interface IMagicField {
 // id/name/enabled/disabled/closed/active/current/
 const __MagicFields: Record<string, IMagicField> = {
   id: {
+    optional: false,
     type: 'auto',
-    methods: 'getBy',
+    methods: ['getBy', 'updateBy', 'deleteBy'],
   },
   name: {
+    optional: true,
     type: 'string',
     methods: ['getBy', 'selectBy'],
     ops: ['', 'eqI'],
   },
   enabled: {
+    optional: true,
     type: 'boolean',
     methods: ['getBy', 'selectBy'],
   },
   disabled: {
+    optional: true,
     type: 'boolean',
     methods: ['getBy', 'selectBy'],
   },
   closed: {
+    optional: true,
     type: 'boolean',
     methods: ['getBy', 'selectBy'],
   },
   active: {
+    optional: true,
     type: 'boolean',
     methods: ['getBy', 'selectBy'],
   },
   current: {
+    optional: true,
     type: 'boolean',
     methods: ['getBy', 'selectBy'],
   },
@@ -56,22 +64,17 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
   const contentRecords: string[] = [];
   for (const fieldName in __MagicFields) {
     const magicField = __MagicFields[fieldName];
-    if (fieldName === 'id') {
-      if (!modelInfo.fieldNames.includes('getById') && entityInfo.idType) {
-        contentRecords.push(`getById<T extends IModelGetOptions<${entityName},${className}>>(id: ${entityInfo.idType}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
-      }
-      continue;
-    }
     if (!entityInfo.fieldNames.includes(fieldName)) continue;
     for (const method of ensureArray(magicField.methods)!) {
       const ops = ensureArray(magicField.ops || [''])!;
       for (const op of ops) {
         const actionName = `${method}${toUpperCaseFirstChar(fieldName)}${toUpperCaseFirstChar(op)}`;
         if (modelInfo.fieldNames.includes(actionName)) continue;
+        const type = fieldName === 'id' ? entityInfo.idType : magicField.type;
         if (method === 'getBy') {
-          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}?: ${magicField.type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
+          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${magicField.optional ? '?' : ''}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
         } else if (method === 'selectBy') {
-          contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}?: ${magicField.type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
+          contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}?: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
         }
       }
     }
@@ -95,6 +98,7 @@ function __parseEntityInfo(cli: BeanCliBase, fileEntity: string, entityName: str
   for (const astNode of astNodes) {
     fieldNames.push((astNode as any).key.name);
   }
+  if (idType) fieldNames.push('id');
   return { idType, fieldNames };
 }
 
