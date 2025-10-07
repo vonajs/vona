@@ -77,7 +77,7 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
         } else if (method === 'selectBy') {
           contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}${optional}: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
         } else if (method === 'updateBy') {
-          contentRecords.push(`${actionName}<T extends IModelUpdateOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;`);
+          contentRecords.push(`${actionName}<T extends IModelUpdateOptions<${entityName},${className}>>(${fieldName}: ${type}${optional ? ' | undefined' : ''}, data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;`);
         } else if (method === 'deleteBy') {
           contentRecords.push(`${actionName}<T extends IModelDeleteOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<void>;`);
         }

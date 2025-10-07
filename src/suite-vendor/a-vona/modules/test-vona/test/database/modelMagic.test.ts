@@ -28,6 +28,8 @@ describe('modelMagic.test.ts', () => {
       assert.equal(users2[0].name, name);
       // updateById
       await scopeTest.model.user.updateById(item.id, { age: 18 });
+      user = await scopeTest.model.user.getById(item.id);
+      assert.equal(user?.age, 18);
       // deleteById
       await scopeTest.model.user.deleteById(item.id);
     });

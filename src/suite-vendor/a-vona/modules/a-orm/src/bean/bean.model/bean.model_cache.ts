@@ -744,6 +744,18 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         const params2 = params ? deepExtend({}, params, { where }) : { where };
         return this.select(params2, options, modelJoins);
       };
+    } else if (prop.startsWith('updateBy')) {
+      const [fieldName, op] = __parseMagicField(prop.substring('updateBy'.length));
+      if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
+      return (fieldValue: any, data: any, options?: any) => {
+        const where = __combineMagicWhere(fieldName, op!, fieldValue);
+        if (fieldName === 'id') {
+          data = Object.assign({}, data, where);
+        } else {
+          options = deepExtend({}, options, { where });
+        }
+        return this.update(data, options);
+      };
     }
   }
 }
@@ -752,9 +764,11 @@ function __combineMagicWhere(fieldName: string, op: string, fieldValue?: any) {
   return {
     [fieldName]: fieldValue === undefined
       ? undefined
-      : {
-          [`_${op}_`]: fieldValue,
-        },
+      : op === 'eq'
+        ? fieldValue
+        : {
+            [`_${op}_`]: fieldValue,
+          },
   };
 }
 
