@@ -873,7 +873,7 @@ importers:
         specifier: ^5.0.56
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.116
+        specifier: ^5.0.117
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1160,10 +1160,10 @@ importers:
         specifier: workspace:^
         version: link:modules/a-aspectutils
       vona-module-a-auth:
-        specifier: ^5.0.30
+        specifier: ^5.0.31
         version: link:modules/a-auth
       vona-module-a-authsimple:
-        specifier: ^5.0.29
+        specifier: ^5.0.30
         version: link:modules/a-authsimple
       vona-module-a-bean:
         specifier: ^5.0.15
@@ -1211,7 +1211,7 @@ importers:
         specifier: ^5.0.14
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.30
+        specifier: ^5.0.31
         version: link:modules/a-instance
       vona-module-a-jwt:
         specifier: ^5.0.16
@@ -1292,7 +1292,7 @@ importers:
         specifier: ^5.0.17
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.33
+        specifier: ^5.0.34
         version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.23
