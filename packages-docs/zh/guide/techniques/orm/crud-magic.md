@@ -84,3 +84,18 @@ class ModelPost {
 this.scope.model.post.getByTitle(title);
 this.scope.model.post.selectByTitle(title);
 ```
+
+## 自定义方法优先
+
+如果在 Model 中提供了自定义方法，那么相应的魔术方法就会失效
+
+比如，针对字段`name`，提供方法`getByName`:
+
+``` typescript
+@Model()
+class ModelStudent {
+  getByName(name: string) {
+    return this.get({ name: { _eqI_: name } });
+  }
+}
+```
