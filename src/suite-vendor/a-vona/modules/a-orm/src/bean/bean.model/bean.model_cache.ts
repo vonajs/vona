@@ -756,6 +756,13 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         }
         return this.update(data, options);
       };
+    } else if (prop.startsWith('deleteBy')) {
+      const [fieldName, op] = __parseMagicField(prop.substring('deleteBy'.length));
+      if (!fieldName) throw new Error(`invalid magic method: ${prop}`);
+      return (fieldValue: any, options?: any) => {
+        const where = __combineMagicWhere(fieldName, op!, fieldValue);
+        return this.delete(where as any, options);
+      };
     }
   }
 }
