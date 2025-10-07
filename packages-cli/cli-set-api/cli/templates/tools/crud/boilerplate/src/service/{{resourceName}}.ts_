@@ -15,9 +15,7 @@ export class Service<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   async findMany(params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
-    return await this.scope.model.<%=argv.resourceName%>.selectAndCount({
-      ...params,
-    });
+    return await this.scope.model.<%=argv.resourceName%>.selectAndCount(params);
   }
 
   async findOne(id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
