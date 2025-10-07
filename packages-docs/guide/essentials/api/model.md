@@ -66,7 +66,10 @@ class ServiceStudent {
 
 ## CRUD
 
-Here, we only introduce basic CRUD operations
+Here, we only introduce basic CRUD operations. For more information, see:
+
+- [CRUD (Select)](../../techniques/orm/crud-select.md) 
+- [CRUD(Insert/Update/Delete)](../../techniques/orm/crud-cud.md)
 
 ### 1. Create
 
