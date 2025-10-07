@@ -1,4 +1,4 @@
-# CRUD (Select)
+# CRUD(Select)
 
 The following uses the `test-vona` module as an example to explain the usage of `Select` in CRUD
 

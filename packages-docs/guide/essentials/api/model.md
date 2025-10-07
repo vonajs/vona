@@ -68,8 +68,9 @@ class ServiceStudent {
 
 Here, we only introduce basic CRUD operations. For more information, see:
 
-- [CRUD (Select)](../../techniques/orm/crud-select.md) 
+- [CRUD(Select)](../../techniques/orm/crud-select.md) 
 - [CRUD(Insert/Update/Delete)](../../techniques/orm/crud-cud.md)
+- [CRUD(Magic Methods)](../../techniques/orm/crud-magic.md)
 
 ### 1. Create
 

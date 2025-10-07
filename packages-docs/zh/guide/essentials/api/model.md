@@ -70,6 +70,7 @@ class ServiceStudent {
 
 - [CRUD(查询)](../../techniques/orm/crud-select.md) 
 - [CRUD(插入/更新/删除)](../../techniques/orm/crud-cud.md)
+- [CRUD(魔术方法)](../../techniques/orm/crud-magic.md)
 
 ### 1. Create
 
