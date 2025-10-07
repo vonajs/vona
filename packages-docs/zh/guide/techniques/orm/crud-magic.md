@@ -32,7 +32,7 @@ this.scope.model.student.get({ name: { _eqI_: 'Tom' } });
 
 ## 常用魔术方法
 
-系统会自动检测以下常用字段，如果在 Entity 中声明了字段，就会自动在 Model 中生成对应魔术方法的类型定义：
+系统会自动检测以下常用字段，如果在 Entity 中声明了字段，就会自动为相应 Model 生成该字段的魔术方法的类型定义：
 
 - `id/name/enabled/disabled/closed/active/current`
 
