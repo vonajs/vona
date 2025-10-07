@@ -87,7 +87,7 @@ class ServiceStudent {
   }
   
   async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
-    return await this.scope.model.student.get({ id });
+    return await this.scope.model.student.getById(id);
   }
 }
 ```
@@ -99,10 +99,7 @@ class ServiceStudent {
 ``` typescript
 class ServiceStudent {
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-    return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
+    return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
@@ -112,7 +109,7 @@ class ServiceStudent {
 ``` typescript
 class ServiceStudent {
   async remove(id: TableIdentity) {
-    return await this.scope.model.student.delete({ id });
+    return await this.scope.model.student.deleteById(id);
   }
 }
 ```
