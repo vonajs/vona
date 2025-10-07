@@ -255,7 +255,7 @@ export class ServicePost extends BeanBase {
   }
 
   async get(id: TableIdentity) {
-    return await this.scope.model.post.get({ id });
+    return await this.scope.model.post.getById(id);
   }
 
   async mget(ids: TableIdentity[]) {

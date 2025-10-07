@@ -9,7 +9,7 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceMail extends BeanBase {
   async sendById(id: TableIdentity) {
-    const mail = await this.scope.model.mail.get({ id });
+    const mail = await this.scope.model.mail.getById(id);
     if (!mail) return;
     const clientName = mail.client;
     // client

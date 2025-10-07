@@ -21,7 +21,7 @@ export class Service<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   async findOne(id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
-    return await this.scope.model.<%=argv.resourceName%>.get({ id });
+    return await this.scope.model.<%=argv.resourceName%>.getById(id);
   }
 
   async update(id: TableIdentity, <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Update) {
