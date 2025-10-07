@@ -33,10 +33,7 @@ export class ControllerOrder extends BeanBase {
 
   @Web.post('update/:id')
   async update(@Arg.param('id') id: TableIdentity, @Arg.body() data: DtoOrderUpdate) {
-    return await this.scope.model.order.update({
-      ...data,
-      id,
-    });
+    return await this.scope.model.order.updateById(id, data);
   }
 
   @Web.get('findAll')

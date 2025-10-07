@@ -41,10 +41,7 @@ Implement aspect logic directly on Class Method through decorator
 class ServiceStudent {
 + @Database.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-    return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
+    return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
@@ -57,10 +54,7 @@ class ServiceStudent {
 class ServiceStudent {
 + @Log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-    return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
+    return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
@@ -76,10 +70,7 @@ Dynamic properties or methods can be implemented through `__get__` and `__set__`
 ``` diff
 class ServiceStudent {
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-+   return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
++   return await this.scope.model.student.updateById(id, student);
   }
 }
 ```

@@ -41,10 +41,7 @@ VonaJS AOP 编程包括三个方面的能力：
 class ServiceStudent {
 + @Database.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-    return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
+    return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
@@ -57,10 +54,7 @@ class ServiceStudent {
 class ServiceStudent {
 + @Log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-    return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
+    return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
@@ -76,10 +70,7 @@ class ServiceStudent {
 ``` diff
 class ServiceStudent {
   async update(id: TableIdentity, student: DtoStudentUpdate) {
-+   return await this.scope.model.student.update({
-      ...student,
-      id,
-    });
++   return await this.scope.model.student.updateById(id, student);
   }
 }
 ```

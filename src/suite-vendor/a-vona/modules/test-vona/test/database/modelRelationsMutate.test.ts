@@ -39,7 +39,7 @@ describe('modelRelationsMutate.test.ts', () => {
       });
       assert.equal(users.length, 1);
       // check
-      const post = await scopeTest.model.post.get({ id: users[0].posts[0].id }, { include: { postContent: true } });
+      const post = await scopeTest.model.post.get({ id: users[0].posts?.[0].id }, { include: { postContent: true } });
       assert.equal(post?.postContent?.content, `${prefix}:postContentApple`);
       // update: users
       const _usersUpdate = await scopeTest.model.user.update({
@@ -47,7 +47,7 @@ describe('modelRelationsMutate.test.ts', () => {
         posts: [
           // update
           {
-            id: users[0].posts[0].id,
+            id: users[0].posts?.[0].id,
             title: `${prefix}:postApple-update`,
             // update
             postContent: {
@@ -64,7 +64,7 @@ describe('modelRelationsMutate.test.ts', () => {
         ],
         roles: [
           // delete
-          { id: users[0].roles[0].id, deleted: true },
+          { id: users[0].roles![0].id, deleted: true },
           // insert
           { id: roles[1].id },
         ],
@@ -94,11 +94,11 @@ describe('modelRelationsMutate.test.ts', () => {
         posts: [
           // update
           {
-            id: users[0].posts[0].id,
+            id: users[0].posts![0].id,
             title: `${prefix}:postApple-mutate`,
             // update
             postContent: {
-              id: users[0].posts[0].postContent?.id,
+              id: users[0].posts![0].postContent?.id,
               content: `${prefix}:postContentApple-mutate`,
             },
           },
@@ -184,7 +184,7 @@ describe('modelRelationsMutate.test.ts', () => {
       });
       assert.equal(users.length, 1);
       // check
-      const post = await scopeTest.model.post.get({ id: users[0].posts[0].id }, { include: { postContent: true } });
+      const post = await scopeTest.model.post.get({ id: users[0].posts![0].id }, { include: { postContent: true } });
       assert.equal(post?.postContent?.content, `${prefix}:postContentApple`);
       // update: users
       const _usersUpdate = await scopeTest.model.user.update({
@@ -192,7 +192,7 @@ describe('modelRelationsMutate.test.ts', () => {
         posts: [
           // update
           {
-            id: users[0].posts[0].id,
+            id: users[0].posts![0].id,
             title: `${prefix}:postApple-update`,
             // update
             postContent: {
@@ -209,7 +209,7 @@ describe('modelRelationsMutate.test.ts', () => {
         ],
         roles: [
           // delete
-          { id: users[0].roles[0].id, deleted: true },
+          { id: users[0].roles![0].id, deleted: true },
           // insert
           { id: roles[1].id },
         ],
@@ -241,11 +241,11 @@ describe('modelRelationsMutate.test.ts', () => {
         posts: [
           // update
           {
-            id: users[0].posts[0].id,
+            id: users[0].posts![0].id,
             title: `${prefix}:postApple-mutate`,
             // update
             postContent: {
-              id: users[0].posts[0].postContent?.id,
+              id: users[0].posts![0].postContent?.id,
               content: `${prefix}:postContentApple-mutate`,
             },
           },
@@ -320,7 +320,7 @@ describe('modelRelationsMutate.test.ts', () => {
       });
       const categoryTreeCheck = await scopeTest.model.category.get({ id: categoryTree.id });
       assert.equal(categoryTree.id, categoryTreeCheck?.id);
-      const children = categoryTree.children.sort((a, b) => Number(a.id) - Number(b.id));
+      const children = categoryTree.children!.sort((a, b) => Number(a.id) - Number(b.id));
       const childrenCheck = categoryTreeCheck!.children.sort((a, b) => Number(a.id) - Number(b.id));
       assert.equal(children[0].name, childrenCheck[0].name);
       assert.equal(children[0].name, `${prefix}:1-1`);

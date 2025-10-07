@@ -25,13 +25,10 @@ export class Service<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   async update(id: TableIdentity, <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Update) {
-    return await this.scope.model.<%=argv.resourceName%>.update({
-      ...<%=argv.resourceName%>,
-      id,
-    });
+    return await this.scope.model.<%=argv.resourceName%>.updateById(id, <%=argv.resourceName%>);
   }
 
   async remove(id: TableIdentity) {
-    return await this.scope.model.<%=argv.resourceName%>.delete({ id });
+    return await this.scope.model.<%=argv.resourceName%>.deleteById(id);
   }
 }
