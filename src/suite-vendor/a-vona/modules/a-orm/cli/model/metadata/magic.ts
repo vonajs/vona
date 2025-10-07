@@ -70,11 +70,16 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
       for (const op of ops) {
         const actionName = `${method}${toUpperCaseFirstChar(fieldName)}${toUpperCaseFirstChar(op)}`;
         if (modelInfo.fieldNames.includes(actionName)) continue;
+        const optional = magicField.optional ? '?' : '';
         const type = fieldName === 'id' ? entityInfo.idType : magicField.type;
         if (method === 'getBy') {
-          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${magicField.optional ? '?' : ''}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
+          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
         } else if (method === 'selectBy') {
-          contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}?: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
+          contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}${optional}: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
+        } else if (method === 'updateBy') {
+          contentRecords.push(`${actionName}<T extends IModelUpdateOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;`);
+        } else if (method === 'deleteBy') {
+          contentRecords.push(`${actionName}<T extends IModelDeleteOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<void>;`);
         }
       }
     }

@@ -26,8 +26,10 @@ describe('modelMagic.test.ts', () => {
         columns: ['age', 'name'],
       });
       assert.equal(users2[0].name, name);
-      // delete
-      await scopeTest.model.user.delete({ id: item.id });
+      // updateById
+      await scopeTest.model.user.updateById(item.id, { age: 18 });
+      // deleteById
+      await scopeTest.model.user.deleteById(item.id);
     });
   });
 });
