@@ -160,6 +160,8 @@ declare module 'vona-module-a-version' {
       aggregate<T extends IModelSelectAggrParams<EntityVersion,ModelVersion,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityVersion,ModelVersion,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityVersion, T>[]>;
       getById<T extends IModelGetOptions<EntityVersion,ModelVersion>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityVersion, ModelVersion, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityVersion,ModelVersion>>(id: number, data: TypeModelMutateRelationData<EntityVersion,ModelVersion, T>, options?: T): Promise<TypeModelMutateRelationData<EntityVersion,ModelVersion, T>>;
+deleteById<T extends IModelDeleteOptions<EntityVersion,ModelVersion>>(id: number, options?: T): Promise<void>;
     }
 export interface ModelVersionInit {
       [SymbolKeyEntity]: EntityVersionInit;
@@ -181,6 +183,8 @@ export interface ModelVersionInit {
       aggregate<T extends IModelSelectAggrParams<EntityVersionInit,ModelVersionInit,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityVersionInit,ModelVersionInit,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityVersionInit, T>[]>;
       getById<T extends IModelGetOptions<EntityVersionInit,ModelVersionInit>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityVersionInit, ModelVersionInit, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityVersionInit,ModelVersionInit>>(id: number, data: TypeModelMutateRelationData<EntityVersionInit,ModelVersionInit, T>, options?: T): Promise<TypeModelMutateRelationData<EntityVersionInit,ModelVersionInit, T>>;
+deleteById<T extends IModelDeleteOptions<EntityVersionInit,ModelVersionInit>>(id: number, options?: T): Promise<void>;
     }
 export interface ModelViewRecord {
       [SymbolKeyEntity]: EntityViewRecord;
@@ -202,6 +206,8 @@ export interface ModelViewRecord {
       aggregate<T extends IModelSelectAggrParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityViewRecord,ModelViewRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityViewRecord, T>[]>;
       getById<T extends IModelGetOptions<EntityViewRecord,ModelViewRecord>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityViewRecord, ModelViewRecord, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityViewRecord,ModelViewRecord>>(id: number, data: TypeModelMutateRelationData<EntityViewRecord,ModelViewRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityViewRecord,ModelViewRecord, T>>;
+deleteById<T extends IModelDeleteOptions<EntityViewRecord,ModelViewRecord>>(id: number, options?: T): Promise<void>;
     }
 }
 declare module 'vona-module-a-orm' {

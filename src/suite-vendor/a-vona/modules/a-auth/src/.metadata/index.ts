@@ -136,6 +136,8 @@ declare module 'vona-module-a-auth' {
       aggregate<T extends IModelSelectAggrParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityAuth,ModelAuth,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityAuth, T>[]>;
       getById<T extends IModelGetOptions<EntityAuth,ModelAuth>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityAuth, ModelAuth, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityAuth,ModelAuth>>(id: TableIdentity, data: TypeModelMutateRelationData<EntityAuth,ModelAuth, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuth,ModelAuth, T>>;
+deleteById<T extends IModelDeleteOptions<EntityAuth,ModelAuth>>(id: TableIdentity, options?: T): Promise<void>;
     }
 export interface ModelAuthProvider {
       [SymbolKeyEntity]: EntityAuthProvider;
@@ -157,6 +159,8 @@ export interface ModelAuthProvider {
       aggregate<T extends IModelSelectAggrParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityAuthProvider, T>[]>;
       getById<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityAuthProvider,ModelAuthProvider>>(id: number, data: TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthProvider,ModelAuthProvider, T>>;
+deleteById<T extends IModelDeleteOptions<EntityAuthProvider,ModelAuthProvider>>(id: number, options?: T): Promise<void>;
 getByDisabled<T extends IModelGetOptions<EntityAuthProvider,ModelAuthProvider>>(disabled?: boolean, options?: T): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T> | undefined>;
 selectByDisabled<T extends IModelSelectParams<EntityAuthProvider,ModelAuthProvider,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(disabled?: boolean, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityAuthProvider, ModelAuthProvider, T>[]>;
     }

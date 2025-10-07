@@ -104,6 +104,8 @@ declare module 'vona-module-a-authsimple' {
       aggregate<T extends IModelSelectAggrParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityAuthSimple,ModelAuthSimple,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityAuthSimple, T>[]>;
       getById<T extends IModelGetOptions<EntityAuthSimple,ModelAuthSimple>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityAuthSimple, ModelAuthSimple, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityAuthSimple,ModelAuthSimple>>(id: TableIdentity, data: TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>, options?: T): Promise<TypeModelMutateRelationData<EntityAuthSimple,ModelAuthSimple, T>>;
+deleteById<T extends IModelDeleteOptions<EntityAuthSimple,ModelAuthSimple>>(id: TableIdentity, options?: T): Promise<void>;
     }
 }
 declare module 'vona-module-a-orm' {

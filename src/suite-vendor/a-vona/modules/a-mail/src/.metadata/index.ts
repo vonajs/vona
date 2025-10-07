@@ -104,6 +104,8 @@ declare module 'vona-module-a-mail' {
       aggregate<T extends IModelSelectAggrParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityMail,ModelMail,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityMail, T>[]>;
       getById<T extends IModelGetOptions<EntityMail,ModelMail>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityMail, ModelMail, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityMail,ModelMail>>(id: TableIdentity, data: TypeModelMutateRelationData<EntityMail,ModelMail, T>, options?: T): Promise<TypeModelMutateRelationData<EntityMail,ModelMail, T>>;
+deleteById<T extends IModelDeleteOptions<EntityMail,ModelMail>>(id: TableIdentity, options?: T): Promise<void>;
     }
 }
 declare module 'vona-module-a-orm' {
