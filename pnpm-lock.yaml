@@ -873,7 +873,7 @@ importers:
         specifier: ^5.0.56
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.117
+        specifier: ^5.0.118
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1244,7 +1244,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.62
+        specifier: ^5.0.63
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.16
