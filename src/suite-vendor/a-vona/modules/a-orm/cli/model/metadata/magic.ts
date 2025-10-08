@@ -15,7 +15,7 @@ interface IMagicField {
   ops?: TypeMagicFieldOp | Array<TypeMagicFieldOp>;
 }
 
-// id/name/enabled/disabled/closed/active/current/
+// id/name/enabled/disabled/closed/active
 const __MagicFields: Record<string, IMagicField> = {
   id: {
     optional: false,
@@ -44,11 +44,6 @@ const __MagicFields: Record<string, IMagicField> = {
     methods: ['getBy', 'selectBy'],
   },
   active: {
-    optional: true,
-    type: 'boolean',
-    methods: ['getBy', 'selectBy'],
-  },
-  current: {
     optional: true,
     type: 'boolean',
     methods: ['getBy', 'selectBy'],

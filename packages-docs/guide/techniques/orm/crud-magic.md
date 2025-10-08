@@ -34,7 +34,7 @@ this.scope.model.student.get({ name: { _eqI_: 'Tom' } });
 
 The system automatically detects the following commonly used fields. If a field is declared in an `Entity`, the type definition of the magic method of the field will be automatically generated for the corresponding `Model`:
 
-- `id/name/enabled/disabled/closed/active/current`
+- `id/name/enabled/disabled/closed/active`
 
 Thus, we can enjoy the convenience of magic methods without any additional code
 
