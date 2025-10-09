@@ -139,10 +139,10 @@ export const formatLoggerFilter = Winston.format((info, opts: any) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
   if (opts.strict) {
-    if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return info;
+    if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return __formatLoggerFilterCheckInfo(info);
     return false;
   }
-  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return info;
+  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return __formatLoggerFilterCheckInfo(info);
   return false;
 });
 
@@ -157,3 +157,10 @@ export const formatLoggerConsole = () => {
     return `${timestamp} ${level}${textName}${textBeanFullName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
   });
 };
+
+function __formatLoggerFilterCheckInfo(info) {
+  if (typeof info.message === 'function') {
+    info.message = info.message();
+  }
+  return info;
+}

@@ -174,3 +174,9 @@ export function ensureArray(arr: any, sep?: string) {
   if (typeof arr === 'string' && sep !== null) return arr.split(sep ?? ',');
   return [arr];
 }
+
+export function stringLazy(fn: () => string) {
+  return {
+    toString: fn,
+  };
+}
