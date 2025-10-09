@@ -12,7 +12,7 @@ export class MiddlewareSystemHttpLog extends BeanBase implements IMiddlewareSyst
     const ctx = this.ctx;
     // start
     const req = StdSerializers.req(ctx.req);
-    this.$loggerChild('req').http(JSON.stringify(req));
+    this.$loggerChild('req').http(() => JSON.stringify(req));
     const profiler = this.$loggerChild('res').startTimer();
     // next
     await next();
