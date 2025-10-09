@@ -131,6 +131,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Local Middleware', link: 'middleware-local' },
                 { text: 'Global Middleware', link: 'middleware-global' },
                 { text: 'System Middleware', link: 'middleware-system' },
+                { text: 'Built-in Middleware', link: 'middleware-builtin' },
               ],
             },
             {

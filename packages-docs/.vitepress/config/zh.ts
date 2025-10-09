@@ -131,6 +131,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '局部中间件', link: 'middleware-local' },
                 { text: '全局中间件', link: 'middleware-global' },
                 { text: '系统中间件', link: 'middleware-system' },
+                { text: '内置中间件', link: 'middleware-builtin' },
               ],
             },
             {
