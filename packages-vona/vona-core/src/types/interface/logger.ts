@@ -26,3 +26,13 @@ export interface ConfigLogger {
 }
 
 export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
+
+declare module 'winston' {
+  interface LogMethod {
+    (level: string, message: () => string, ...meta: any[]): any;
+  }
+
+  interface LeveledLogMethod {
+    (message: () => string, ...meta: any[]): any;
+  }
+}

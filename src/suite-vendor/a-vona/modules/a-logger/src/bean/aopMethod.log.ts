@@ -42,7 +42,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     const message = `${receiver[SymbolBeanFullName]}#${prop}(set)`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    logger.log(options.level, `${message} value: ${JSON.stringify(value)}`, context ? { context } : undefined);
+    logger.log(options.level, () => `${message} value: ${JSON.stringify(value)}`, context ? { context } : undefined);
     const profiler = logger.startTimer();
     // next
     try {
@@ -60,7 +60,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`, context ? { context } : undefined);
+    options.args !== false && logger.log(options.level, () => `${message} args: ${JSON.stringify(_args)}`, context ? { context } : undefined);
     const profiler = logger.startTimer();
     // next
     try {
@@ -91,15 +91,25 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
   }
 
   _logResult(profiler: winston.Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
-    const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
-    const info: any = { level: options.level, message: `${message}${textResult}` };
+    const info: any = {
+      level: options.level,
+      message: () => {
+        const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
+        return `${message}${textResult}`;
+      },
+    };
     if (context) info.context = context;
     profiler.done(info);
   }
 
   _logError(profiler: winston.Profiler, context: any, err: Error, _options: IAopMethodOptionsLog, message: string) {
-    const textError = ` error: ${err.message}`;
-    const info: any = { level: 'error', message: `${message}${textError}` };
+    const info: any = {
+      level: 'error',
+      message: () => {
+        const textError = ` error: ${err.message}`;
+        return `${message}${textError}`;
+      },
+    };
     if (context) info.context = context;
     profiler.done(info);
   }

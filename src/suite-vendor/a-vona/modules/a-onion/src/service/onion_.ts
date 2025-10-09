@@ -72,9 +72,11 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
       const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
       return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector, matchThis, ...matchArgs);
     }) as unknown as IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[];
-    const selector2 = typeof selector === 'string' ? selector : '';
-    const message = `getOnionsEnabled#${this.sceneName}${selector2 ? `#${selector2}` : ''} ${JSON.stringify(onions)}`;
-    this.$loggerChild('onion').verbose(message);
+    this.$loggerChild('onion').verbose(() => {
+      const selector2 = typeof selector === 'string' ? selector : '';
+      const message = `getOnionsEnabled#${this.sceneName}${selector2 ? `#${selector2}` : ''} ${JSON.stringify(onions)}`;
+      return message;
+    });
     return onions;
   }
 
