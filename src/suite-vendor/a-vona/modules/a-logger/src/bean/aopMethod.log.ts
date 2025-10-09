@@ -24,7 +24,9 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     const message = `${receiver[SymbolBeanFullName]}#${prop}(get)`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    (!options.auto) && logger.log(options.level, message, context ? { context } : undefined);
+    if (!options.auto) {
+      logger.log(options.level, message, context ? { context } : undefined);
+    }
     const profiler = logger.startTimer();
     // next
     try {
@@ -47,7 +49,9 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     // next
     try {
       const res = next();
-      (!options.auto) && this._logResult(profiler, context, undefined, options, message);
+      if (!options.auto) {
+        this._logResult(profiler, context, undefined, options, message);
+      }
       return res;
     } catch (err: any) {
       this._logError(profiler, context, err, options, message);
