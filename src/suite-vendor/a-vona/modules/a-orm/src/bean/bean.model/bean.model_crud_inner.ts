@@ -144,7 +144,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // where
     this.prepareWhere(builder, table, params.where, options);
     // ready
-    this.$loggerChild('model').debug('model.count: %s', builder.toQuery());
+    this.$loggerChild('model').debug(() => `model.count: ${builder.toQuery()}`);
     const res = await builder;
     return this.extractFirstNumber(res);
   }
@@ -177,7 +177,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // builder
     const builder = this.builder<TRecord>(table);
     // // debug
-    // this.$loggerChild('model').debug('model.insert: %s', builder.toQuery());
+    // this.$loggerChild('model').debug(() => `model.insert: ${builder.toQuery()}`);
     // dialect insert
     const ids = await this.dialect.insert(builder, datas);
     // combine
@@ -224,7 +224,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // where
     this.prepareWhere(builder, table, where, options);
     // debug
-    this.$loggerChild('model').debug('model.update: %s', builder.toQuery());
+    this.$loggerChild('model').debug(() => `model.update: ${builder.toQuery()}`);
     // ready
     await builder;
     // ok
@@ -253,7 +253,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // where
     this.prepareWhere(builder, table, where, options);
     // debug
-    this.$loggerChild('model').debug('model.delete: %s', builder.toQuery());
+    this.$loggerChild('model').debug(() => `model.delete: ${builder.toQuery()}`);
     // ready
     await builder;
   }
