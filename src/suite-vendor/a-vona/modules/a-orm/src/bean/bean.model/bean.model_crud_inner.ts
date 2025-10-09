@@ -70,7 +70,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // builder
     builder = builder ?? this._select_buildParams(table, params as any, options);
     // ready
-    this.$loggerChild('model').debug('model.select: %s', builder.toQuery());
+    this.$loggerChild('model').debug(() => `model.select: ${builder.toQuery()}`);
     return (await builder) as TRecord[];
   }
 
