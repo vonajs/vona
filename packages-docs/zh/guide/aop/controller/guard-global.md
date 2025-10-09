@@ -159,7 +159,7 @@ class GuardAdmin {}
 ``` diff
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
++ @Aspect.guardGlobal('demo-student:admin', { enable: false })
   async findMany() {}
 }
 ```
@@ -171,8 +171,8 @@ class ControllerStudent {
 ``` diff
 // onions
 config.onions = {
-  middleware: {
-    'demo-student:logger': {
+  guard: {
+    'demo-student:admin': {
 +     enable: false,
     },
   },
@@ -181,7 +181,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让全局中间件在指定的运行环境生效
+可以让全局守卫在指定的运行环境生效
 
 |名称|类型|说明|
 |--|--|--|
@@ -193,7 +193,7 @@ config.onions = {
 * 举例
 
 ``` diff
-@Middleware({
+@Guard({
   global: true,
 + meta: {
 +   flavor: 'normal',
@@ -202,35 +202,35 @@ config.onions = {
 +   host: 'localhost:7102',
 + },
 })
-class MiddlewareLogger {}
+class GuardAdmin {}
 ```
 
 ### 3. match/ignore
     
-可以针对指定的 API 启用/禁用全局中间件
+可以针对指定的 API 启用/禁用全局守卫
 
 |名称|类型|说明|
 |--|--|--|
 |match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
 |ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
 
-## 查看当前生效的全局中间件清单
+## 查看当前生效的全局守卫清单
 
-可以直接在 Controller action 中输出当前生效的全局中间件清单
+可以直接在 Controller action 中输出当前生效的全局守卫清单
 
 ``` diff
 class ControllerStudent {
   @Web.get()
   async findMany() {
-+   this.bean.onion.middleware.inspect();
++   this.bean.onion.guard.inspect();
   }
 }
 ```
 
 - `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.middleware`: 取得与中间件相关的 Service 实例
-- `.inspect`: 输出当前生效的全局中间件清单
+- `.guard`: 取得与守卫相关的 Service 实例
+- `.inspect`: 输出当前生效的全局守卫清单
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+当访问`findMany` API 时，会自动在控制台输出当前生效的全局守卫清单，效果如下：
 
-![](../../../assets/img/aop/middleware-1.png)
+![](../../../assets/img/aop/guard-1.png)
