@@ -133,6 +133,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'System Middleware', link: 'middleware-system' },
               ],
             },
+            {
+              text: 'Guard',
+              items: [
+                { text: 'Local Guard', link: 'guard-local' },
+                { text: 'Global Global', link: 'guard-global' },
+              ],
+            },
           ],
         },
         {

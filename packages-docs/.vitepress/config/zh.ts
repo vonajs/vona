@@ -133,6 +133,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '系统中间件', link: 'middleware-system' },
               ],
             },
+            {
+              text: 'Guard',
+              items: [
+                { text: '局部守卫', link: 'guard-local' },
+                { text: '全局守卫', link: 'guard-global' },
+              ],
+            },
           ],
         },
         {
