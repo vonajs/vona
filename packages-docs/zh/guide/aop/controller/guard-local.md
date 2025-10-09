@@ -1,42 +1,40 @@
-# 局部中间件
+# 局部守卫
 
-## 创建中间件
+## 创建守卫
 
-比如，在模块 demo-student 中创建一个 局部中间件: `logger`
+比如，在模块 demo-student 中创建一个 局部守卫: `admin`，用于判断当前用户名是否为`admin`，如果不是则抛出异常
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean middleware logger --module=demo-student
+$ vona :create:bean guard admin --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Aspect/Middleware`
+右键菜单 - [模块路径]: `Vona Aspect/Guard`
 :::
 
-## 中间件定义
+## 守卫定义
 
 ``` typescript
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
+export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {}
 
-@Middleware<IMiddlewareOptionsLogger>()
-class MiddlewareLogger {
-  async execute(_options: IMiddlewareOptionsLogger, next: Next) {
-    const timeBegin = Date.now();
-    const res = await next();
-    const timeEnd = Date.now();
-    console.log('time: ', timeEnd - timeBegin);
-    return res;
+@Guard<IGuardOptionsAdmin>()
+class GuardAdmin {
+  async execute(_options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
+    const user = this.bean.passport.getCurrentUser();
+    if (!user || user.name !== 'admin') this.app.throw(403);
+    // next
+    return next();
   }
 }
 ```
 
-- `IMiddlewareOptionsLogger`: 定义中间件参数
-- `execute`: 输出执行时长
+- `getCurrentUser`: 取得当前用户
 
-## 使用中间件
+## 使用守卫
 
 ### 1. 标注控制器方法
 
@@ -46,69 +44,68 @@ import { Aspect } from 'vona-module-a-aspect';
 @Controller()
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middleware('demo-student:logger')
++ @Aspect.guard('demo-student:admin')
   async findMany() {}
 }
 ```
 
-- `@Aspect.middleware`: 此装饰器用于使用局部中间件，只需传入中间件的名称
-  - logger 中间件属于模块`demo-student`，因此完整的名称是`demo-student:logger`
+- `@Aspect.guard`: 此装饰器用于使用局部守卫，只需传入守卫的名称
+  - admin 守卫属于模块`demo-student`，因此完整的名称是`demo-student:admin`
 
 ### 2. 标注控制器类
 
-可以针对控制器类使用中间件，从而类中所有方法都会应用此中间件
+可以针对控制器类使用守卫，从而类中所有方法都会应用此守卫
 
 ``` diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
-+ @Aspect.middleware('demo-student:logger')
++ @Aspect.guard('demo-student:admin')
 class ControllerStudent {
   @Web.get()
   async findMany() {}
 }
 ```
 
-## 中间件参数
+## 守卫参数
 
-可以为中间件定义参数，通过参数更灵活的配置中间件逻辑
+可以为守卫定义参数，通过参数更灵活的配置守卫逻辑
 
-比如，为 logger 中间件定义`prefix`参数，用于控制输出格式
+比如，为 admin 守卫定义`name`参数，用于控制需要判断的用户名
 
 ### 1. 定义参数类型
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
-+ prefix: string;
+export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
++ name: string;
 }
 ```
 
 ### 2. 提供参数缺省值
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
-+ prefix: 'time',
+@Guard<IGuardOptionsAdmin>({
++ name: 'admin',
 })
 ```
 
 ### 3. 使用参数
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
-  prefix: string;
+export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
+  name: string;
 }
 
-@Middleware<IMiddlewareOptionsLogger>({
-  prefix: 'time',
+@Guard<IGuardOptionsAdmin>({
+  name: 'admin',
 })
-class MiddlewareLogger {
-  async execute(options: IMiddlewareOptionsLogger, next: Next) {
-    const timeBegin = Date.now();
-    const res = await next();
-    const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);
-+   console.log(`${options.prefix}: `, timeEnd - timeBegin);
-    return res;
+export class GuardAdmin extends BeanBase implements IGuardExecute {
+  async execute(options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
+    const user = this.bean.passport.getCurrentUser();
+-   if (!user || user.name !== 'admin') this.app.throw(403);
++   if (!user || user.name !== options.name) this.app.throw(403);
+    // next
+    return next();
   }
 }
 ```
@@ -118,25 +115,25 @@ class MiddlewareLogger {
 ``` diff
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middleware('demo-student:logger', { prefix: 'elapsed' })
++ @Aspect.guard('demo-student:admin', { name: 'other-name' })
   async findMany() {}
 }
 ```
 
-- 在使用中间件时直接提供参数值即可
+- 在使用守卫时直接提供参数值即可
 
 ### 5. App config配置
 
-可以在 App config 中配置中间件参数
+可以在 App config 中配置守卫参数
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
-    'demo-student:logger': {
-      prefix: 'elapsed',
+  guard: {
+    'demo-student:admin': {
+      name: 'other-name',
     },
   },
 };
