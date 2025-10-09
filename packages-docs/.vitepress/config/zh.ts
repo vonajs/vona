@@ -138,6 +138,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: '局部守卫', link: 'guard-local' },
                 { text: '全局守卫', link: 'guard-global' },
+                { text: '内置守卫', link: 'guard-builtin' },
               ],
             },
           ],

@@ -138,6 +138,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               items: [
                 { text: 'Local Guard', link: 'guard-local' },
                 { text: 'Global Global', link: 'guard-global' },
+                { text: 'Built-in Guard', link: 'guard-builtin' },
               ],
             },
           ],
