@@ -97,9 +97,9 @@ class ControllerStudent {
 
 - When using guard, just provide the parameter value directly
 
-### 5. App config配置
+### 5. App config
 
-可以在 App config 中配置守卫参数
+Guard parameters can be configured in App config
 
 `src/backend/config/config/config.ts`
 
@@ -114,9 +114,9 @@ config.onions = {
 };
 ```
 
-### 6. 参数优先级
+### 6. Parameter precedence
 
-`使用时指定参数` > `App config配置` > `参数缺省值`
+`Specify parameters when using` > `App config` > `Default values`
 
 ## 守卫顺序
 
