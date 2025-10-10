@@ -88,6 +88,8 @@ class MiddlewareLogger {
 
 ### 4. Specify parameters when using
 
+You can specify global middleware parameters for a specific API
+
 ``` diff
 class ControllerStudent {
   @Web.get()

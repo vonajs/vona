@@ -115,6 +115,8 @@ class MiddlewareLogger {
 
 ### 4. 使用时指定参数
 
+可以针对某个 API 单独指定局部中间件的参数
+
 ``` diff
 class ControllerStudent {
   @Web.get()

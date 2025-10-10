@@ -98,7 +98,7 @@ class ControllerStudent {
 }
 ```
 
-在使用中间件时直接提供参数值即可
+- 在使用中间件时直接提供参数值即可
 
 ### 5. App config配置
 

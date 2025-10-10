@@ -36,15 +36,15 @@ export class GuardAdmin {
 
 ## Using Guard
 
-与局部守卫不同，系统会自动加载全局守卫，并使其生效
+Unlike local guard, the system automatically loads global guards and makes them effective
 
-## 守卫参数
+## Guard Parameters
 
-可以为守卫定义参数，通过参数更灵活的配置守卫逻辑
+You can define parameters for guard, allowing for more flexible configuration of guard logic
 
-比如，为 admin 守卫定义`name`参数，用于控制需要判断的用户名
+For example, define the `name` parameter for the admin guard to control the username that needs to be judged
 
-### 1. 定义参数类型
+### 1. Defining parameter types
 
 ``` diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
@@ -52,7 +52,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 }
 ```
 
-### 2. 提供参数缺省值
+### 2. Providing default values ​​for parameters
 
 ``` diff
 @Guard<IGuardOptionsAdmin>({
@@ -61,7 +61,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 })
 ```
 
-### 3. 使用参数
+### 3. Using Parameters
 
 ``` diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
@@ -83,7 +83,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 }
 ```
 
-### 4. 使用时指定参数
+### 4. Specify parameters when using
 
 可以针对某个 API 单独指定全局守卫的参数
 
