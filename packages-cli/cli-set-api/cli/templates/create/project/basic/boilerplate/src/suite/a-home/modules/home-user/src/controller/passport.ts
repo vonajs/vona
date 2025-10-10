@@ -42,7 +42,7 @@ export class ControllerPassport extends BeanBase {
 
   @Web.post('login')
   @Passport.public()
-  @Captcha.verify({ scene: 'a-captchasimple:simple' })
+  // @Captcha.verify({ scene: 'a-captchasimple:simple' })
   @Api.body(v.object(DtoPassportJwt))
   async login(@Arg.body() data: DtoLogin): Promise<DtoPassportJwt> {
     const jwt = await this.bean.authSimple.authenticate(data, 'login', 'default');
