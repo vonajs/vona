@@ -1,22 +1,22 @@
-# 全局守卫
+# Global Guard
 
-## 创建守卫
+## Create Guard
 
-比如，在模块 demo-student 中创建一个 全局守卫: `admin`
+For example, create a global guard `admin` in the module demo-student to check whether the current username is `admin`. If not, an exception is thrown
 
-### 1. Cli命令
+### 1. Cli command
 
 ``` bash
 $ vona :create:bean guard admin --module=demo-student --boilerplate=cli/guardGlobal/boilerplate
 ```
 
-### 2. 菜单命令
+### 2. Menu command
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Aspect/Guard Global`
+Context Menu - [Module Path]: `Vona Aspect/Guard Global`
 :::
 
-## 守卫定义
+## Guard Definition
 
 ``` typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {}
@@ -32,9 +32,9 @@ export class GuardAdmin {
 }
 ```
 
-- `getCurrentUser`: 取得当前用户
+- `getCurrentUser`: Get the current user
 
-## 使用守卫
+## Using Guard
 
 与局部守卫不同，系统会自动加载全局守卫，并使其生效
 
