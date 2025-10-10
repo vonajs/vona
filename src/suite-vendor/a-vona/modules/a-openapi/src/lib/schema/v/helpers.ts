@@ -2,8 +2,10 @@ import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from '
 import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
 import { useApp } from 'vona';
 import { z } from 'zod';
+import { $locale } from '../../../.metadata/index.ts';
 
 export function schemaRequired(params?: string | z.core.$ZodStringParams) {
+  params = params || $locale('ZodErrorRequired');
   return function (schema: z.ZodType): z.ZodType {
     schema._zod.def.error = z.util.normalizeParams(params).error;
     return schema;

@@ -74,11 +74,19 @@ export interface IModuleSummerCache {
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.ts';
+import locale_zh_cn from '../config/locale/zh-cn.ts';
+export const locales = {
+  'en-us': locale_en_us,
+'zh-cn': locale_zh_cn,
+};
+/** locale: end */
 /** main: begin */
 export * from '../main.ts';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -87,6 +95,7 @@ export class ScopeModuleAOpenapi extends BeanScopeBase {}
 export interface ScopeModuleAOpenapi {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 service: IModuleService;
 summerCache: IModuleSummerCache;
 }
@@ -105,7 +114,12 @@ declare module 'vona' {
     'a-openapi': ReturnType<typeof config>;
   }
 
-  
+  export interface IBeanScopeLocale {
+    'a-openapi': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-openapi::${K}` {
+  return `a-openapi::${key}`;
+}
 /** scope: end */
