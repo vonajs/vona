@@ -118,13 +118,13 @@ config.onions = {
 
 `Specify parameters when using` > `App config` > `Default values`
 
-## 守卫顺序
+## Guard Order
 
-由于全局守卫是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制守卫的加载顺序
+Since global guards ard loaded and enabled by default, VonaJS provides two parameters to control the order in which guard is loaded
 
 ### 1. dependencies
 
-比如，系统有一个内置全局守卫`a-user:passport`，我们希望加载顺序如下：`a-user:passport` > `Current`
+For example, the system has a built-in global guard `a-user:passport`, and we hope that the loading order is as follows: `a-user:passport` > `Current`
 
 ``` diff
 @Guard({
@@ -137,7 +137,7 @@ class GuardAdmin {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-user:passport`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-user:passport`
 
 ``` diff
 @Guard({
@@ -148,13 +148,13 @@ class GuardAdmin {}
 class GuardAdmin {}
 ```
 
-## 守卫启用/禁用
+## Guard enable/disable
 
-可以针对某些 API 控制全局守卫的`启用/禁用`
+You can control `enable/disable` of global guard for certain APIs
 
 ### 1. Enable
 
-* 针对某个 API 禁用
+* Disable for an API
 
 ``` diff
 class ControllerStudent {
@@ -164,7 +164,7 @@ class ControllerStudent {
 }
 ```
 
-* 针对所有 API 禁用
+* Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
@@ -181,16 +181,16 @@ config.onions = {
 
 ### 2. Meta
 
-可以让全局守卫在指定的运行环境生效
+Allows global guard to take effect in a specified operating environment
 
-|名称|类型|说明|
+|Name|Type|Description|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|instanceName|string\|string[]|参见: [多实例/多租户](../../techniques/instance/introduction.md)|
-|host|string\|string[]|主机名|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../techniques/instance/introduction.md)|
+|host|string\|string[]|Host|
 
-* 举例
+* Example
 
 ``` diff
 @Guard({
@@ -207,16 +207,16 @@ class GuardAdmin {}
 
 ### 3. match/ignore
     
-可以针对指定的 API 启用/禁用全局守卫
+You can enable/disable global guard for some specific APIs    
 
-|名称|类型|说明|
+|Name|Type|Description|
 |--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
-|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
+|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
 
-## 查看当前生效的全局守卫清单
+## Inspect
 
-可以直接在 Controller action 中输出当前生效的全局守卫清单
+You can directly inspect the currently effective global guard list in the Controller action
 
 ``` diff
 class ControllerStudent {
@@ -227,10 +227,10 @@ class ControllerStudent {
 }
 ```
 
-- `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.guard`: 取得与守卫相关的 Service 实例
-- `.inspect`: 输出当前生效的全局守卫清单
+- `this.bean.onion`: Get the global Service instance `onion`
+- `.guard`: Get the Service instance related to the guard
+- `.inspect`: Output the currently effective global guard list
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局守卫清单，效果如下：
+When accessing the `findMany` API, the current list of global guard in effect will be automatically output to the console, as shown below:
 
 ![](../../../assets/img/aop/guard-1.png)

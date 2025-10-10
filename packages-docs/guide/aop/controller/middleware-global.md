@@ -151,13 +151,13 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class MiddlewareLogger {}
 ```
 
-## Middleware enable/disable 
+## Middleware enable/disable
 
 You can control `enable/disable` of global middleware for certain APIs
 
 ### 1. Enable
 
-* Disabling an API
+* Disable for an API
 
 ``` diff
 class ControllerStudent {
@@ -167,7 +167,7 @@ class ControllerStudent {
 }
 ```
 
-* Disable all APIs
+* Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
