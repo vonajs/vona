@@ -59,7 +59,7 @@ class ServiceStudent {
 }
 ```
 
-- `@Log`：通过`AOP Method`机制实现的装饰器，可以直接日志能力
+- `@Log`：通过`AOP Method`机制实现的装饰器，可以直接提供日志能力
 
 ### 2. 魔术方法
 
