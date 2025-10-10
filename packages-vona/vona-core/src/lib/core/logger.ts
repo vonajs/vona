@@ -9,6 +9,7 @@ import { BeanSimple } from '../bean/beanSimple.ts';
 import { deepExtend } from '../utils/util.ts';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
+const SymbolLoggerMessage = Symbol('SymbolLoggerMessage');
 
 export class AppLogger extends BeanSimple {
   private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, Winston.Logger> = {} as any;
@@ -160,7 +161,10 @@ export const formatLoggerConsole = () => {
 
 function __formatLoggerFilterCheckInfo(info) {
   if (typeof info.message === 'function') {
-    info.message = info.message();
+    if (info.message[SymbolLoggerMessage] === undefined) {
+      info.message[SymbolLoggerMessage] = info.message();
+    }
+    info.message = info.message[SymbolLoggerMessage];
   }
   return info;
 }
