@@ -112,6 +112,8 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 ### 4. Specify parameters when using
 
+You can specify local guard parameters for a specific API
+
 ``` diff
 class ControllerStudent {
   @Web.get()

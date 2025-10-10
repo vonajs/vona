@@ -85,7 +85,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 ### 4. Specify parameters when using
 
-可以针对某个 API 单独指定全局守卫的参数
+You can specify global guard parameters for a specific API
 
 ``` diff
 class ControllerStudent {
@@ -95,7 +95,7 @@ class ControllerStudent {
 }
 ```
 
-在使用守卫时直接提供参数值即可
+- When using guard, just provide the parameter value directly
 
 ### 5. App config配置
 
