@@ -65,6 +65,8 @@ import { Passport } from 'vona-module-a-user';
 
 ## 判断当前用户名
 
+判断当前用户名，如果是`admin`则完成判断，如果不等于`admin`，则抛出异常
+
 * 一般用法：
 
 ``` typescript
@@ -82,6 +84,8 @@ import { Passport } from 'vona-module-a-user';
 ```
 
 ## 判断当前用户的角色名
+
+判断当前角色名，如果是`admin`则完成判断，如果不等于`admin`，则抛出异常
 
 * 一般用法：
 
