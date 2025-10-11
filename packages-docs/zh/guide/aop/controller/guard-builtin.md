@@ -117,14 +117,22 @@ import { Passport } from 'vona-module-a-user';
 
 比如，我们同时使用局部守卫`a-user:userName`和`a-user:roleName`。判断规则如下：
 
-- 先判断用户名，如果是`admin`则完成判断
-- 如果用户名不等于`admin`，不抛出异常，而是继续执行后续的局部守卫
-- 再判断角色名，如果是`admin`则完成判断
-- 如果角色名不等于`admin`，则抛出异常
+* 有一个条件满足则完成判断
 
 ``` typescript
-@Passport.userName({ name: 'admin', rejectWhenDismatched: false })
 @Passport.roleName({ name: 'admin' })
+@Passport.userName({ name: 'admin', rejectWhenDismatched: false })
+```
+
+::: warning
+执行顺序：@Passport.userName > @Passport.roleName
+:::
+
+* 两个条件都满足则完成判断
+
+``` typescript
+@Passport.roleName({ name: 'admin' })
+@Passport.userName({ name: 'admin', passWhenMatched: false })
 ```
 
 |名称|说明|
