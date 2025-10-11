@@ -25,20 +25,20 @@ Enables the API to be effective in a specific runtime environment
 
 |Name|Type|Description|
 |--|--|--|
-|flavor|string\|string[]|See: [Runtime Environment and Flavor](../../techniques/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environment and Flavor](../../techniques/mode-flavor/introduction.md)|
-|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenant](../../techniques/instance/introduction.md)|
-|host|string\|string[]|Host Name|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../techniques/instance/introduction.md)|
+|host|string\|string[]|Host|
 
 * Example
 
 ``` typescript
 @Aspect.middlewareGlobal('a-core:gate', {
-gate: {
-flavor: 'normal',
-mode: 'dev',
-instanceName: '',
-host: 'localhost:7102',
-},
+  gate: {
+    flavor: 'normal',
+    mode: 'dev',
+    instanceName: '',
+    host: 'localhost:7102',
+  },
 })
 ```
