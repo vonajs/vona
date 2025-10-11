@@ -115,19 +115,27 @@ import { Passport } from 'vona-module-a-user';
 
 ## Combining Uses
 
-For example, let's use both the `a-user:userName` and `a-user:roleName` local guards. The validation rules are as follows:
+For example, let's use both the local guards `a-user:userName` and `a-user:roleName`. The check rules are as follows:
 
-- First, check the username. If it is `admin`, complete the validation.
-- If the username is not `admin`, do not throw an exception and continue executing the subsequent local guards.
-- Then, check the role name. If it is `admin`, complete the validation.
-- If the role name is not `admin`, throw an exception.
+* If one condition is met, the check is completed
 
 ``` typescript
-@Passport.userName({ name: 'admin', rejectWhenDismatched: false })
 @Passport.roleName({ name: 'admin' })
+@Passport.userName({ name: 'admin', rejectWhenDismatched: false })
+```
+
+::: warning
+Check order: @Passport.userName > @Passport.roleName
+:::
+
+* If both conditions are met, the check is completed
+
+``` typescript
+@Passport.roleName({ name: 'admin' })
+@Passport.userName({ name: 'admin', passWhenMatched: false })
 ```
 
 |Name|Description|
 |--|--|
-|rejectWhenDismatched|Whether to throw an exception when there is a mismatch. Defaults to `true`.
-|passWhenMatched|Whether to complete the validation when there is a match. Defaults to `true`.
+|rejectWhenDismatched|Whether to throw an exception when dismatched. Defaults to `true`|
+|passWhenMatched|Whether to complete the check when matched. Defaults to `true`|
