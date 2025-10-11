@@ -30,9 +30,11 @@ Enables the API to be effective in a specific runtime environment
 |instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../techniques/instance/introduction.md)|
 |host|string\|string[]|Host|
 
-* Example
+* General usage:
 
 ``` typescript
+import { Aspect } from 'vona-module-a-aspect';
+
 @Aspect.middlewareGlobal('a-core:gate', {
   gate: {
     flavor: 'normal',
@@ -41,4 +43,31 @@ Enables the API to be effective in a specific runtime environment
     host: 'localhost:7102',
   },
 })
+```
+
+* Shorthand way:
+
+``` typescript
+import { Core } from 'vona-module-a-core';
+
+@Core.gate({
+  gate: {
+    flavor: 'normal',
+    mode: 'dev',
+    instanceName: '',
+    host: 'localhost:7102',
+  },
+})
+```
+
+* Shorthand principle:
+
+`@Core.gate` still calls `@Aspect.middlewareGlobal`, the code is as follows:
+
+``` typescript
+function Gate(
+  options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>,
+): ClassDecorator & MethodDecorator {
+  return Aspect.middlewareGlobal('a-core:gate', options);
+}
 ```
