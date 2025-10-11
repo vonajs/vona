@@ -51,7 +51,7 @@ describe('dtoGet.test.ts', () => {
       assert.equal(rules.children?.type === 'pipe', true);
       assert.equal(rules.iid, undefined);
       const DtoCategoryChain = $Dto.get('test-vona:categoryChain', { columns: ['id', 'name', 'categoryIdParent'] });
-      const _apiJson = await app.bean.scope('a-openapi').service.openapi.generateJsonOfClass(DtoCategoryChain);
+      const _apiJson = await app.bean.openapi.generateJsonOfClass(DtoCategoryChain);
       // console.log(JSON.stringify(apiJson.components));
     });
   });

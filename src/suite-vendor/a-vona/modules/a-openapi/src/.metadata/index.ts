@@ -1,4 +1,29 @@
 /* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.openapi.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-openapi' {
+  
+        export interface BeanOpenapi {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapi;
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import type { BeanOpenapi } from '../bean/bean.openapi.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'openapi': BeanOpenapi;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/openapi.ts';
 
