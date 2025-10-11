@@ -30,9 +30,11 @@
 |instanceName|string\|string[]|参见: [多实例/多租户](../../techniques/instance/introduction.md)|
 |host|string\|string[]|主机名|
 
-* 举例
+* 一般用法：
 
 ``` typescript
+import { Aspect } from 'vona-module-a-aspect';
+
 @Aspect.middlewareGlobal('a-core:gate', {
   gate: {
     flavor: 'normal',
@@ -41,4 +43,31 @@
     host: 'localhost:7102',
   },
 })
+```
+
+* 简写方式：
+
+``` typescript
+import { Core } from 'vona-module-a-core';
+
+@Core.gate({
+  gate: {
+    flavor: 'normal',
+    mode: 'dev',
+    instanceName: '',
+    host: 'localhost:7102',
+  },
+})
+```
+
+* 简写原理：
+
+`@Core.gate`内部仍然调用的是`@Aspect.middlewareGlobal`，代码如下：
+
+``` typescript
+function Gate(
+  options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>,
+): ClassDecorator & MethodDecorator {
+  return Aspect.middlewareGlobal('a-core:gate', options);
+}
 ```
