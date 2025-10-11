@@ -8,8 +8,9 @@ import type { IOpenApiHeader, IOpenapiObject, IOpenApiOptions, TypeGenerateJsonS
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import * as ModuleInfo from '@cabloy/module-info';
-import { isEmptyObject } from '@cabloy/utils';
+import { isEmptyObject, isNil } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { translateError } from '@cabloy/zod-errors-custom';
 import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import {
@@ -107,6 +108,8 @@ export class ServiceOpenapi extends BeanBase {
       schema.description = schema.title;
       delete schema.title;
     }
+    // errorMessage
+    this._translateErrorMessages(schema);
     // properties
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
@@ -119,6 +122,24 @@ export class ServiceOpenapi extends BeanBase {
     const items = cast<SchemaObject30 | SchemaObject31>(schema).items;
     if (items && typeof items === 'object') {
       this._translateSchema(items, generateJsonScene);
+    }
+  }
+
+  private _translateErrorMessages(obj: any) {
+    if (!obj.errorMessage) return;
+    for (const key in obj.errorMessage) {
+      let error = obj.errorMessage[key];
+      if (typeof error === 'function') {
+        error = error();
+      }
+      const scope = Object.assign({}, obj);
+      if (!isNil(obj.minLength)) scope.minimum = obj.minLength;
+      if (!isNil(obj.exclusiveMinimum)) scope.minimum = obj.exclusiveMinimum;
+      if (!isNil(obj.maxLength)) scope.maximum = obj.maxLength;
+      if (!isNil(obj.exclusiveMaximum)) scope.maximum = obj.exclusiveMaximum;
+      obj.errorMessage[key] = translateError((text: string, ...args: any[]) => {
+        return this.app.meta.text(text, ...args);
+      }, error, scope);
     }
   }
 
