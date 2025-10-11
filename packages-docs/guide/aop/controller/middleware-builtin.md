@@ -45,7 +45,7 @@ import { Aspect } from 'vona-module-a-aspect';
 })
 ```
 
-* Shorthand way:
+* Shorthand:
 
 ``` typescript
 import { Core } from 'vona-module-a-core';
@@ -62,7 +62,7 @@ import { Core } from 'vona-module-a-core';
 
 * Shorthand principle:
 
-`@Core.gate` still calls `@Aspect.middlewareGlobal`, the code is as follows:
+`@Core.gate` still calls `@Aspect.middlewareGlobal` internally, the code is as follows:
 
 ``` typescript
 function Gate(
