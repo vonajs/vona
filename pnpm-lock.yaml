@@ -39,8 +39,8 @@ importers:
         specifier: ^1.0.2
         version: link:packages-utils/zod-openapi
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.3
-        version: 8.1.3(zod@4.1.12)
+        specifier: ^8.1.4
+        version: 8.1.4(zod@4.1.12)
       '@sesamecare-oss/redlock':
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.8.1)
@@ -848,8 +848,8 @@ importers:
   packages-utils/zod-openapi:
     dependencies:
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.3
-        version: 8.1.3(zod@4.1.12)
+        specifier: ^8.1.4
+        version: 8.1.4(zod@4.1.12)
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -925,8 +925,8 @@ importers:
         specifier: ^2.0.1
         version: link:../../packages-utils/zod-query
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.3
-        version: 8.1.3(zod@4.1.12)
+        specifier: ^8.1.4
+        version: 8.1.4(zod@4.1.12)
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -1730,8 +1730,8 @@ importers:
         specifier: ^2.0.1
         version: link:../../../../../packages-utils/zod-query
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.3
-        version: 8.1.3(zod@4.1.12)
+        specifier: ^8.1.4
+        version: 8.1.4(zod@4.1.12)
       '@zhennann/currency':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2522,8 +2522,8 @@ packages:
   '@cabloy/word-utils@2.0.1':
     resolution: {integrity: sha512-kZx3fdk8sOX9JpVv6Q7y6r+rbqZ0KvE8NukbvsQfSvOngV7Yi3dF8PmefCDJWuPqn6YZ4PdxKxCOWaYTrVQPQA==}
 
-  '@cabloy/zod-to-openapi@8.1.3':
-    resolution: {integrity: sha512-ITFRM5WKc7V8P9SGKdfc5CKNjKFa3HTsCLJdwZI2klHeoc3ZkBgYAxzJujI22JWAAPng4PpfX3qazNiZEBWV6w==}
+  '@cabloy/zod-to-openapi@8.1.4':
+    resolution: {integrity: sha512-cGfOXe3Ve2qfLnwGTpZCLM9lq2woK6yeiNMSW8FtHmvBSQXGFTNHl8RUxC29vjk+kT7eLEZ5Fvr4h5guvPs0fg==}
     peerDependencies:
       zod: ^4.0.0
 
@@ -9828,7 +9828,7 @@ snapshots:
 
   '@cabloy/word-utils@2.0.1': {}
 
-  '@cabloy/zod-to-openapi@8.1.3(zod@4.1.12)':
+  '@cabloy/zod-to-openapi@8.1.4(zod@4.1.12)':
     dependencies:
       openapi3-ts: 4.5.0
       zod: 4.1.12
