@@ -9,4 +9,7 @@ export interface TypeDtoSelectAndCountResult<
 > {
   list: TypeDtoGetResult<ModelLike, TOptionsRelation>[];
   total: BigNumber;
+  pageCount: number;
+  pageSize: number;
+  pageNo: number;
 }

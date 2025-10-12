@@ -4,6 +4,7 @@ import type { IDtoGetParams } from '../../types/dto/dtoGet.ts';
 import type { TypeDtoSelectAndCountResult } from '../../types/dto/dtoSelectAndCount.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import { Api, v } from 'vona-module-a-openapi';
+import z from 'zod';
 import { DtoGet } from './dtoGet.ts';
 
 export function DtoSelectAndCount<
@@ -17,5 +18,8 @@ export function DtoSelectAndCount<
   const DtoGetResult = DtoGet(modelLike, params);
   Api.field(v.array(DtoGetResult))(TargetClass.prototype, 'list');
   Api.field(v.bigNumber())(TargetClass.prototype, 'total');
+  Api.field(z.number())(TargetClass.prototype, 'pageCount');
+  Api.field(z.number())(TargetClass.prototype, 'pageSize');
+  Api.field(z.number())(TargetClass.prototype, 'pageNo');
   return TargetClass as any;
 }

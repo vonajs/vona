@@ -271,7 +271,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // pageNo/pageSize/pageCount
     const pageCount = Math.ceil(count.div(pageSize).toNumber());
     // ok
-    return { list, total: count, pageSize, pageNo, pageCount };
+    return { list, total: count, pageCount, pageSize, pageNo };
   }
 
   async select<
