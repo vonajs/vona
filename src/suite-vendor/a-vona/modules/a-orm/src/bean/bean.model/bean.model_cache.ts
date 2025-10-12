@@ -253,6 +253,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
     modelJoins?: ModelJoins,
   ): Promise<any> {
+    // pageNo/pageSize
+    const pageSize = params?.limit;
+    if (!pageSize) throw new Error('should specify the page size');
+    const pageNo = Math.floor(params.offset! / pageSize) + 1;
     // count
     const paramsCount = Object.assign({}, params, { columns: undefined, orders: undefined, limit: undefined, offset: undefined });
     let count = await this.count(paramsCount, options, modelJoins);
@@ -264,8 +268,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     } else {
       list = await this.select(params, options, modelJoins);
     }
+    // pageNo/pageSize/pageCount
+    const pageCount = Math.ceil(count.div(pageSize).toNumber());
     // ok
-    return { list, total: count };
+    return { list, total: count, pageSize, pageNo, pageCount };
   }
 
   async select<
