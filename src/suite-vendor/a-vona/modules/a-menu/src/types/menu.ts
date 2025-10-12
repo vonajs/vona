@@ -1,4 +1,6 @@
-export interface IMenuItemLinkRecord {}
+export interface IMenuItemLinkRecord {
+  '/': never;
+}
 
 export interface IMenus {
   menus?: IMenuItem[];

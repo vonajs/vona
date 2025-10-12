@@ -1,5 +1,5 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import type { IMenuItem, IMenuItemMeta } from '../types/menu.ts';
+import type { IMenuItem, IMenuItemLinkRecord, IMenuItemMeta } from '../types/menu.ts';
 import { Api, v } from 'vona-module-a-openapi';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -30,8 +30,8 @@ export class DtoMenuItem implements IMenuItem {
   @Api.field(v.optional())
   separator?: boolean;
 
-  @Api.field(v.optional())
-  link?: string;
+  @Api.field(v.optional(), z.string())
+  link?: keyof IMenuItemLinkRecord;
 
   @Api.field(v.optional())
   external?: boolean;
