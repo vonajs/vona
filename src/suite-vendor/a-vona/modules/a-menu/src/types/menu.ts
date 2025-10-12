@@ -1,3 +1,5 @@
+export interface IMenuItemLinkRecord {}
+
 export interface IMenus {
   menus?: IMenuItem[];
   groups?: IMenuGroup[];
@@ -18,7 +20,7 @@ export interface IMenuItem {
   order?: number;
   group?: string | string[];
   separator?: boolean;
-  link?: string;
+  link?: keyof IMenuItemLinkRecord;
   external?: boolean;
   target?: string;
   meta?: IMenuItemMeta;
