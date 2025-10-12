@@ -144,6 +144,18 @@
     ],
     "description": "record.host"
   },
+  "record.menuItemLink": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordmenuItemLink",
+    "body": [
+      "declare module 'vona-module-a-menu' {",
+      "  export interface IMenuItemLinkRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.menuItemLink"
+  },
   "findManyQueryTransform": {
     "scope": "typescript,typescriptreact",
     "prefix": "findmanyquerytransform",
