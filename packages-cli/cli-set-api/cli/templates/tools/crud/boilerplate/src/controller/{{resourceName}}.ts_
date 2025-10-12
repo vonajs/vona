@@ -16,9 +16,9 @@ export interface IControllerOptions<%=argv.resourceNameCapitalize%> extends IDec
 @Controller<IControllerOptions<%=argv.resourceNameCapitalize%>>('<%=argv.resourceName%>')
 export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   @Web.post()
-  @Api.body(v.object(Entity<%=argv.resourceNameCapitalize%>))
-  async create(@Arg.body() <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Create): Promise<Entity<%=argv.resourceNameCapitalize%>> {
-    return await this.scope.service.<%=argv.resourceName%>.create(<%=argv.resourceName%>);
+  @Api.body(v.tableIdentity())
+  async create(@Arg.body() <%=argv.resourceName%>: Dto<%=argv.resourceNameCapitalize%>Create): Promise<TableIdentity> {
+    return (await this.scope.service.<%=argv.resourceName%>.create(<%=argv.resourceName%>)).id;
   }
 
   @Web.get()

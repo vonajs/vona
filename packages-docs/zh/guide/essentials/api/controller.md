@@ -22,9 +22,9 @@ $ vona :create:bean controller student --module=demo-student
 @Controller<IControllerOptionsStudent>('student')
 export class ControllerStudent extends BeanBase {
   @Web.post('')
-  @Api.body(v.object(EntityStudent))
-  async create(@Arg.body() student: DtoStudentCreate): Promise<EntityStudent> {
-    return await this.scope.service.student.create(student);
+  @Api.body(v.tableIdentity())
+  async create(@Arg.body() student: DtoStudentCreate): Promise<TableIdentity> {
+    return (await this.scope.service.student.create(student)).id;
   }
 }
 ```

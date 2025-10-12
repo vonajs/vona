@@ -26,9 +26,9 @@ function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransf
 @Controller<IControllerOptionsOrder>('order')
 export class ControllerOrder extends BeanBase {
   @Web.post('create')
-  @Api.body(DtoOrderResult)
-  async create(@Arg.body() data: DtoOrderCreate) {
-    return await this.scope.model.order.insert(data);
+  @Api.body(v.tableIdentity())
+  async create(@Arg.body() data: DtoOrderCreate): Promise<TableIdentity> {
+    return (await this.scope.model.order.insert(data)).id;
   }
 
   @Web.post('update/:id')
