@@ -202,24 +202,24 @@ describe('student.test.ts', () => {
       // login
       await app.bean.passport.signinMock();
       // create
-      const student: EntityStudent = await app.bean.executor.performAction('post', '/demo/student', { body: data });
-      assert.equal(student.name, data.name);
+      const studentId = await app.bean.executor.performAction('post', '/demo/student', { body: data });
+      assert.equal(!!studentId, true);
       // findAll
       const students: EntityStudent[] = await app.bean.executor.performAction('get', '/demo/student');
       assert.equal(students.findIndex(item => item.name === data.name) > -1, true);
       // update
       await app.bean.executor.performAction('patch', '/demo/student/:id', {
-        params: { id: student.id },
+        params: { id: studentId },
         body: dataUpdate,
       });
       // findOne
-      const studentOne: EntityStudent = await app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: student.id } });
-      assert.equal(studentOne.name, dataUpdate.name);
+      const student: EntityStudent = await app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: studentId } });
+      assert.equal(student.name, dataUpdate.name);
       // delete
-      await app.bean.executor.performAction('delete', '/demo/student/:id', { params: { id: studentOne.id } });
+      await app.bean.executor.performAction('delete', '/demo/student/:id', { params: { id: student.id } });
       // findOne
       const [_, err] = await catchError(() => {
-        return app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: studentOne.id } });
+        return app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: student.id } });
       });
       assert.equal(err?.code, 404);
       // logout
