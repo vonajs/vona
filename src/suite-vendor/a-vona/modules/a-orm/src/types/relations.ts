@@ -140,6 +140,9 @@ export interface TypeModelSelectAndCount<
 > {
   list: TypeModelRelationResult<TRecord, TModel, TOptionsRelation, TColumns, Aggrs, Groups, Depth>[];
   total: BigNumber;
+  pageCount: number;
+  pageSize: number;
+  pageNo: number;
 }
 
 export type TypeModelRelationResult<
