@@ -4,7 +4,7 @@ Vona also provides a set of APIs that allow us to lookup bean instances more fle
 
 ## _getBean
 
-1. Lookup based on Bean class
+### 1. Lookup based on Bean class
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
@@ -18,7 +18,7 @@ class ControllerMenu {
 
 - this.bean === this.app.bean, which is the global ioc container
 
-2. Lookup based on Bean identifier
+### 2. Lookup based on Bean identifier
 
 ``` typescript
 class ControllerMenu {
@@ -28,7 +28,7 @@ class ControllerMenu {
 }
 ```
 
-3. Lookup global service beans
+### 3. Lookup global service beans
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
@@ -43,7 +43,7 @@ class ControllerMenu {
 }
 ```
 
-4. Request scope
+### 4. Request scope
 
 If we want to create a request-scope Bean instance, we only need to invoke the `_getBean` method of the ctx container
 
@@ -59,7 +59,7 @@ class ControllerMenu {
 
 ## _newBean
 
-1. Create new instance based on Bean class
+### 1. Create new instance based on Bean class
 
 ``` typescript
 import { ServiceMenu } from 'vona-module-home-base';
@@ -71,7 +71,7 @@ class ControllerMenu {
 }
 ```
 
-2. Create new instance based on Bean identifier
+### 2. Create new instance based on Bean identifier
 
 ``` typescript
 class ControllerMenu {
@@ -81,7 +81,7 @@ class ControllerMenu {
 }
 ```
 
-3. Create new instance of global service beans
+### 3. Create new instance of global service beans
 
 ``` typescript
 import { BeanJwt } from 'vona-module-a-jwt';
