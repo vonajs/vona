@@ -1,4 +1,6 @@
-export interface IMenuItemLinkRecord {
+export interface IMenuItemLinkPresetRecord {}
+
+export interface IMenuItemLinkRecord extends IMenuItemLinkPresetRecord {
   '/': never;
 }
 
