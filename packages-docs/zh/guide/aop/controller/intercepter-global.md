@@ -16,14 +16,14 @@ $ vona :create:bean interceptor logger --module=demo-student --boilerplate=cli/i
 右键菜单 - [模块路径]: `Vona Aspect/Interceptor Global`
 :::
 
-## 中间件定义
+## 拦截器定义
 
 ``` typescript
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
+export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {}
 
-@Middleware<IMiddlewareOptionsLogger>({ global: true })
-export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
-  async execute(_options: IMiddlewareOptionsLogger, next: Next) {
+@Interceptor<IInterceptorOptionsLogger>({ global: true })
+export class InterceptorLogger extends BeanBase implements IInterceptorExecute {
+  async execute(_options: IInterceptorOptionsLogger, next: Next) {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
@@ -33,23 +33,23 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 }
 ```
 
-- `IMiddlewareOptionsLogger`: 定义中间件参数
+- `IInterceptorOptionsLogger`: 定义拦截器参数
 - `execute`: 输出执行时长
 
-## 使用中间件
+## 使用拦截器
 
-与局部中间件不同，系统会自动加载全局中间件，并使其生效
+与局部拦截器不同，系统会自动加载全局拦截器，并使其生效
 
-## 中间件参数
+## 拦截器参数
 
-可以为中间件定义参数，通过参数更灵活的配置中间件逻辑
+可以为拦截器定义参数，通过参数更灵活的配置拦截器逻辑
 
-比如，为 logger 中间件定义`prefix`参数，用于控制输出格式
+比如，为 logger 拦截器定义`prefix`参数，用于控制输出格式
 
 ### 1. 定义参数类型
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
+export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {
 + prefix: string;
 }
 ```
@@ -57,7 +57,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 2. 提供参数缺省值
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
+@Interceptor<IInterceptorOptionsLogger>({
   global: true,
 + prefix: 'time',
 })
@@ -66,16 +66,16 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 ### 3. 使用参数
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
+export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {
   prefix: string;
 }
 
-@Middleware<IMiddlewareOptionsLogger>({
+@Interceptor<IInterceptorOptionsLogger>({
   global: true,
   prefix: 'time',
 })
-class MiddlewareLogger {
-  async execute(options: IMiddlewareOptionsLogger, next: Next) {
+class InterceptorLogger {
+  async execute(options: IInterceptorOptionsLogger, next: Next) {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
@@ -88,28 +88,28 @@ class MiddlewareLogger {
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定全局中间件的参数
+可以针对某个 API 单独指定全局拦截器的参数
 
 ``` diff
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
++ @Aspect.interceptorGlobal('demo-student:logger', { prefix: 'elapsed' })
   async findMany() {}
 }
 ```
 
-- 在使用中间件时直接提供参数值即可
+- 在使用拦截器时直接提供参数值即可
 
 ### 5. App config配置
 
-可以在 App config 中配置中间件参数
+可以在 App config 中配置拦截器参数
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
+  interceptor: {
     'demo-student:logger': {
       prefix: 'elapsed',
     },
@@ -121,39 +121,39 @@ config.onions = {
 
 `使用时指定参数` > `App config配置` > `参数缺省值`
 
-## 中间件顺序
+## 拦截器顺序
 
-由于全局中间件是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制中间件的加载顺序
+由于全局拦截器是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制拦截器的加载顺序
 
 ### 1. dependencies
 
-比如，系统有一个内置全局中间件`a-core:gate`，我们希望加载顺序如下：`a-core:gate` > `Current`
+比如，系统有一个内置全局拦截器`a-body:bodyRes`，我们希望加载顺序如下：`a-body:bodyRes` > `Current`
 
 ``` diff
-@Middleware({
+@Interceptor({
   global: true,
-+ dependencies: 'a-core:gate',
++ dependencies: 'a-body:bodyRes',
   prefix: 'time',
 })
-class MiddlewareLogger {}
+class InterceptorLogger {}
 ```
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-core:gate`
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-body:bodyRes`
 
 ``` diff
-@Middleware({
+@Interceptor({
   global: true,
-+ dependents: 'a-core:gate',
++ dependents: 'a-body:bodyRes',
   prefix: 'time',
 })
-class MiddlewareLogger {}
+class InterceptorLogger {}
 ```
 
-## 中间件启用/禁用
+## 拦截器启用/禁用
 
-可以针对某些 API 控制全局中间件的`启用/禁用`
+可以针对某些 API 控制全局拦截器的`启用/禁用`
 
 ### 1. Enable
 
@@ -162,7 +162,7 @@ class MiddlewareLogger {}
 ``` diff
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
++ @Aspect.interceptorGlobal('demo-student:logger', { enable: false })
   async findMany() {}
 }
 ```
@@ -174,7 +174,7 @@ class ControllerStudent {
 ``` diff
 // onions
 config.onions = {
-  middleware: {
+  interceptor: {
     'demo-student:logger': {
 +     enable: false,
     },
@@ -184,7 +184,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让全局中间件在指定的运行环境生效
+可以让全局拦截器在指定的运行环境生效
 
 |名称|类型|说明|
 |--|--|--|
@@ -196,7 +196,7 @@ config.onions = {
 * 举例
 
 ``` diff
-@Middleware({
+@Interceptor({
   global: true,
 + meta: {
 +   flavor: 'normal',
@@ -205,35 +205,35 @@ config.onions = {
 +   host: 'localhost:7102',
 + },
 })
-class MiddlewareLogger {}
+class InterceptorLogger {}
 ```
 
 ### 3. match/ignore
     
-可以针对指定的 API 启用/禁用全局中间件
+可以针对指定的 API 启用/禁用全局拦截器
 
 |名称|类型|说明|
 |--|--|--|
 |match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
 |ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
 
-## 查看当前生效的全局中间件清单
+## 查看当前生效的全局拦截器清单
 
-可以直接在 Controller action 中输出当前生效的全局中间件清单
+可以直接在 Controller action 中输出当前生效的全局拦截器清单
 
 ``` diff
 class ControllerStudent {
   @Web.get()
   async findMany() {
-+   this.bean.onion.middleware.inspect();
++   this.bean.onion.interceptor.inspect();
   }
 }
 ```
 
 - `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.middleware`: 取得与中间件相关的 Service 实例
-- `.inspect`: 输出当前生效的全局中间件清单
+- `.interceptor`: 取得与拦截器相关的 Service 实例
+- `.inspect`: 输出当前生效的全局拦截器清单
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+当访问`findMany` API 时，会自动在控制台输出当前生效的全局拦截器清单，效果如下：
 
-![](../../../assets/img/aop/middleware-1.png)
+![](../../../assets/img/aop/interceptor-1.png)
