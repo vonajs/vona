@@ -142,6 +142,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Built-in Guard', link: 'guard-builtin' },
               ],
             },
+            {
+              text: 'Intercepter',
+              items: [
+                { text: 'Local Intercepter', link: 'intercepter-local' },
+                { text: 'Global Intercepter', link: 'intercepter-global' },
+                { text: 'Built-in Intercepter', link: 'intercepter-builtin' },
+              ],
+            },
           ],
         },
         {
