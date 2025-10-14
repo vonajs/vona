@@ -143,11 +143,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               ],
             },
             {
-              text: 'Intercepter',
+              text: 'Interceptor',
               items: [
-                { text: '局部拦截器', link: 'intercepter-local' },
-                { text: '全局拦截器', link: 'intercepter-global' },
-                { text: '内置拦截器', link: 'intercepter-builtin' },
+                { text: '局部拦截器', link: 'interceptor-local' },
+                { text: '全局拦截器', link: 'interceptor-global' },
+                { text: '内置拦截器', link: 'interceptor-builtin' },
               ],
             },
           ],

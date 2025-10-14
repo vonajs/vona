@@ -143,11 +143,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
               ],
             },
             {
-              text: 'Intercepter',
+              text: 'Interceptor',
               items: [
-                { text: 'Local Intercepter', link: 'intercepter-local' },
-                { text: 'Global Intercepter', link: 'intercepter-global' },
-                { text: 'Built-in Intercepter', link: 'intercepter-builtin' },
+                { text: 'Local Interceptor', link: 'interceptor-local' },
+                { text: 'Global Interceptor', link: 'interceptor-global' },
+                { text: 'Built-in Interceptor', link: 'interceptor-builtin' },
               ],
             },
           ],
