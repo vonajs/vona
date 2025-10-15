@@ -12,17 +12,17 @@ export type TypeModelGroupRelationResult<TRecord, TOptions> =
   >;
 
 export type TypeModelGroupRelationResultGroups<TRecord, Aggrs, Groups, Columns> =
-Groups extends string | string[] ?
-TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> & (Aggrs extends {} ?
-  TypeRecordAggrsValuesToObject<TypeRecordAggrsValues<
-    { [K in keyof Aggrs]: K extends string ? TypeModelAggrRelationResultAggr<K, TypeUtilAggrPrepareColumns<Aggrs[K]>> : never }
-  >> :
-    {}) :
-    {}; // not use undefined
+  Groups extends string | string[]
+  ? TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> & (Aggrs extends {}
+      ? TypeRecordAggrsValuesToObject<TypeRecordAggrsValues<
+        { [K in keyof Aggrs]: K extends string ? TypeModelAggrRelationResultAggr<K, TypeUtilAggrPrepareColumns<Aggrs[K]>> : never }
+      >>
+      : {})
+    : {}; // not use undefined
 
 export type TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> =
-  Columns extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Columns> ]: K extends keyof TRecord ? TRecord[K] : never } :
-  Groups extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Groups> ]: K extends keyof TRecord ? TRecord[K] : never } : {};
+  Columns extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Columns> ]: K extends keyof TRecord ? TRecord[K] : never }
+  : Groups extends string | string[] ? { [K in TypeUtilAggrPrepareColumns<Groups> ]: K extends keyof TRecord ? TRecord[K] : never } : {};
 
 export type TypeModelSelectGroupParamsColumnNames<
   TRecord,
@@ -31,8 +31,8 @@ export type TypeModelSelectGroupParamsColumnNames<
   extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = TypeModelSelectAggrParamsAggrs<TRecord>,
 > =
   (ColumnNames extends TypeModelColumnsStrict<TRecord> ? TypeUtilAggrPrepareColumns<ColumnNames> : never) |
-  (Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord> ?
-    keyof TypeModelAggrRelationResultAggrs<Aggrs> : never);
+  (Aggrs extends TypeModelSelectAggrParamsAggrs<TRecord>
+    ? keyof TypeModelAggrRelationResultAggrs<Aggrs> : never);
 
 export type TypeModelSelectGroupParamsColumns<
   TRecord,
@@ -41,12 +41,12 @@ export type TypeModelSelectGroupParamsColumns<
   extends TypeModelSelectAggrParamsAggrs<TRecord> | undefined = TypeModelSelectAggrParamsAggrs<TRecord>,
 > =
  (TypeUtilAggrPrepareColumns<ColumnNames> extends string
-   ? { [K in TypeUtilAggrPrepareColumns<ColumnNames>]: K extends keyof TRecord ? TRecord[K] : never } : {})
- & TypeModelAggrRelationResultAggrsToNumberType<TypeModelAggrRelationResultAggrs<Aggrs>>;
+   ? { [K in TypeUtilAggrPrepareColumns<ColumnNames>]: K extends keyof TRecord ? TRecord[K] : never } : {}) &
+   TypeModelAggrRelationResultAggrsToNumberType<TypeModelAggrRelationResultAggrs<Aggrs>>;
 
 export type TypeModelAggrRelationResultAggrsToNumberType<Columns> =
-{ [K in keyof Columns]: number | string }; // not use BigNumber
+  { [K in keyof Columns]: number | string }; // not use BigNumber
 
 export type TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined | unknown> =
-  TypeUtilGetParamsGroups<IncludeWrapper> extends string | string[] ?
-    TypeUtilGetParamsGroups<IncludeWrapper> : TypeUtilGetRelationOptionsGroups<Relation>;
+  TypeUtilGetParamsGroups<IncludeWrapper> extends string | string[]
+    ? TypeUtilGetParamsGroups<IncludeWrapper> : TypeUtilGetRelationOptionsGroups<Relation>;

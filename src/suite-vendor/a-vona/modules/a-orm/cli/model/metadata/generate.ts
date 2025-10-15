@@ -40,7 +40,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       deleteBulk<T extends IModelDeleteOptions<${entityName},${className}>>(ids: TableIdentity[], options?: T): Promise<void>;
       mutate<T extends IModelMutateOptions<${entityName},${className}>>(data?: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;
       mutateBulk<T extends IModelMutateOptions<${entityName},${className}>>(items: TypeModelMutateRelationData<${entityName},${className}, T>[], options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>[]>;
-      count<T extends IModelSelectCountParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<BigNumber | undefined>;
+      count<T extends IModelSelectCountParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<string | undefined>;
       aggregate<T extends IModelSelectAggrParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<${entityName}, T>[]>;
       ${magics.join('\n')}
