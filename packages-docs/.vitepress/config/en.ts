@@ -150,6 +150,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Built-in Interceptor', link: 'interceptor-builtin' },
               ],
             },
+            {
+              text: 'Pipe',
+              items: [
+                { text: 'Local Pipe', link: 'pipe-local' },
+                { text: 'Global Pipe', link: 'pipe-global' },
+                { text: 'Argument Pipe', link: 'pipe-argument' },
+                { text: 'Zod Integration', link: 'pipe-zod' },
+              ],
+            },
           ],
         },
         {

@@ -150,6 +150,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: '内置拦截器', link: 'interceptor-builtin' },
               ],
             },
+            {
+              text: 'Pipe',
+              items: [
+                { text: '局部管道', link: 'pipe-local' },
+                { text: '全局管道', link: 'pipe-global' },
+                { text: '参数管道', link: 'pipe-argument' },
+                { text: 'Zod整合', link: 'pipe-zod' },
+              ],
+            },
           ],
         },
         {
