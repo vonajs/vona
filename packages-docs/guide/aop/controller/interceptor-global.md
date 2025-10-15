@@ -127,12 +127,12 @@ Since global interceptors ard loaded and enabled by default, VonaJS provides two
 
 ### 1. dependencies
 
-For example, the system has a built-in global interceptor `a-core:gate`, and we hope that the loading order is as follows: `a-core:gate` > `Current`
+For example, the system has a built-in global interceptor `a-body:bodyRes`, and we hope that the loading order is as follows: `a-body:bodyRes` > `Current`
 
 ``` diff
 @Interceptor({
   global: true,
-+ dependencies: 'a-core:gate',
++ dependencies: 'a-body:bodyRes',
   prefix: 'time',
 })
 class InterceptorLogger {}
@@ -140,12 +140,12 @@ class InterceptorLogger {}
 
 ### 2. dependents
 
-The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-core:gate`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-body:bodyRes`
 
 ``` diff
 @Interceptor({
   global: true,
-+ dependents: 'a-core:gate',
++ dependents: 'a-body:bodyRes',
   prefix: 'time',
 })
 class InterceptorLogger {}
