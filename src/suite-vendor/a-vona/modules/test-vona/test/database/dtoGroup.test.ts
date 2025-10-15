@@ -21,10 +21,8 @@ describe('dtoGroup.test.ts', () => {
       rules = getTargetDecoratorRules(DtoUserAggr.prototype);
       assert.equal(rules.name?.type === 'string', true);
       assert.equal(rules.count_all?.type === 'optional', true);
-      const rule_count_all = (rules.count_all as z.ZodOptional)?.def.innerType as z.ZodUnion;
-      assert.equal(rule_count_all.type === 'union', true);
-      assert.equal((rule_count_all.def.options[0] as z.ZodType).type === 'string', true);
-      assert.equal((rule_count_all.def.options[1] as z.ZodType).type === 'number', true);
+      const rule_count_all = (rules.count_all as z.ZodOptional)?.def.innerType as z.ZodString;
+      assert.equal(rule_count_all.type === 'string', true);
       assert.equal(rules.count_age?.type === 'optional', true);
       assert.equal(rules.sum_age?.type === 'optional', true);
       assert.equal(rules.avg_age?.type === 'optional', true);
