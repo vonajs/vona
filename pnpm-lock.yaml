@@ -1467,6 +1467,9 @@ importers:
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
+      bignumber.js:
+        specifier: ^9.3.1
+        version: 9.3.1
       boxen:
         specifier: ^8.0.1
         version: 8.0.1
@@ -1769,9 +1772,6 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-orm:
     dependencies:
-      bignumber.js:
-        specifier: ^9.3.1
-        version: 9.3.1
       knex:
         specifier: ^3.1.0
         version: 3.1.0
