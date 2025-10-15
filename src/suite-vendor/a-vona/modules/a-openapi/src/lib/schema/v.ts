@@ -27,7 +27,6 @@ export const v = {
   uppercase: schemaUppercase,
   regex: schemaRegex,
   tableIdentity: schemaTableIdentity,
-  bigNumber: schemaBigNumber,
   captcha: schemaCaptcha,
   serializerExclude: schemaSerializerExclude,
   serializerTransform: schemaSerializerTransform,
