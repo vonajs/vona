@@ -1,4 +1,3 @@
-import type BigNumber from 'bignumber.js';
 import type { Constructable, OmitNever } from 'vona';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeDepthPrev, TypeDepthPrevMax } from './depth.ts';
@@ -139,7 +138,7 @@ export interface TypeModelSelectAndCount<
   Depth extends TypeDepthPrev[number] = TypeDepthPrevMax,
 > {
   list: TypeModelRelationResult<TRecord, TModel, TOptionsRelation, TColumns, Aggrs, Groups, Depth>[];
-  total: BigNumber;
+  total: string;
   pageCount: number;
   pageSize: number;
   pageNo: number;

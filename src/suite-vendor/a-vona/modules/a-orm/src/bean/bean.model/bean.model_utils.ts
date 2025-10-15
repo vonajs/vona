@@ -1,7 +1,6 @@
 import type { Knex } from 'knex';
 import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumn, TypeModelColumns, TypeModelColumnsStrict, TypeModelSelectAggrParamsAggrs, TypeModelSelectGroupParamsColumns, TypeModelWhere } from '../../types/index.ts';
 import { ensureArray, isNil } from '@cabloy/utils';
-import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
 import { buildWhere } from '../../common/buildWhere.ts';
 import { isRaw } from '../../common/utils.ts';
@@ -195,18 +194,18 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     this.buildWhere(builder, where);
   }
 
-  extractCount(result: Array<object> | object, columnName?: string): BigNumber {
+  extractCount(result: Array<object> | object, columnName?: string): string {
     return this.extractFirstNumber(result, 0, columnName)!;
   }
 
-  extractFirstNumber<T = number | BigNumber | undefined>(
+  extractFirstNumber<T = number | string | undefined>(
     result: Array<object> | object,
     defaultValue?: T,
     columnName?: string,
-  ): T extends undefined ? BigNumber | undefined : BigNumber {
+  ): T extends undefined ? string | undefined : string {
     const value = this.extractFirstValue(result, defaultValue, columnName);
     if (value === undefined || value === null) return undefined as any;
-    return BigNumber(value);
+    return String(value);
   }
 
   extractFirstValue(result: Array<object> | object, defaultValue?: any, columnName?: string): any | undefined {

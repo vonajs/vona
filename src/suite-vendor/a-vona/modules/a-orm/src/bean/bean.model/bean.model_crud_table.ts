@@ -1,4 +1,3 @@
-import type BigNumber from 'bignumber.js';
 import type { TableIdentity } from 'table-identity';
 import type {
   IModelCountParams,
@@ -24,7 +23,7 @@ export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<T
     return await this._get(table, where, options);
   }
 
-  async count(table: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<BigNumber | undefined> {
+  async count(table: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<string | undefined> {
     return await this._count(table, params, options);
   }
 

@@ -17,7 +17,7 @@ export function DtoSelectAndCount<
   abstract class TargetClass {}
   const DtoGetResult = DtoGet(modelLike, params);
   Api.field(v.array(DtoGetResult))(TargetClass.prototype, 'list');
-  Api.field(v.bigNumber())(TargetClass.prototype, 'total');
+  Api.field(z.string())(TargetClass.prototype, 'total');
   Api.field(z.number())(TargetClass.prototype, 'pageCount');
   Api.field(z.number())(TargetClass.prototype, 'pageSize');
   Api.field(z.number())(TargetClass.prototype, 'pageNo');

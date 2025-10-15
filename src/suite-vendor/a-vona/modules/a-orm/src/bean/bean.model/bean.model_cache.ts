@@ -191,7 +191,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
-  ): Promise<BigNumber | undefined> {
+  ): Promise<string | undefined> {
     const column = params?.column ?? '*';
     const params2 = Object.assign({}, params, { aggrs: { count: column }, column: undefined });
     const item = await this.aggregate(params2, options);
@@ -260,16 +260,16 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // count
     const paramsCount = Object.assign({}, params, { columns: undefined, orders: undefined, limit: undefined, offset: undefined });
     let count = await this.count(paramsCount, options, modelJoins);
-    if (!count) count = BigNumber(0);
+    if (!count) count = '0';
     // list
     let list;
-    if (count.eq(0)) {
+    if (count === '0') {
       list = [];
     } else {
       list = await this.select(params, options, modelJoins);
     }
     // pageNo/pageSize/pageCount
-    const pageCount = Math.ceil(count.div(pageSize).toNumber());
+    const pageCount = Math.ceil(BigNumber(count).div(pageSize).toNumber());
     // ok
     return { list, total: count, pageCount, pageSize, pageNo };
   }

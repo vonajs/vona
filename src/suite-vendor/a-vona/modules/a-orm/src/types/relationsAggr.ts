@@ -1,4 +1,3 @@
-import type BigNumber from 'bignumber.js';
 import type { TypeUtilGetParamsAggrs, TypeUtilGetRelationOptionsAggrs } from './relations.ts';
 
 export type TypeModelAggrRelationResult<TOptions> =
@@ -15,7 +14,7 @@ export type TypeModelAggrRelationResultAggr<Aggr extends string, Columns extends
 
 export type TypeUtilAggrPrepareColumns<TColumns> = TColumns extends string[] ? TColumns[number] : TColumns extends string ? TColumns : undefined;
 export type TypeRecordAggrsValues<TRecord extends Record<string, any>> = TRecord[keyof TRecord];
-export type TypeRecordAggrsValuesToObject<AggrValues extends string> = { [K in AggrValues]: BigNumber | undefined };
+export type TypeRecordAggrsValuesToObject<AggrValues extends string> = { [K in AggrValues]: string | undefined };
 
 export type TypeUtilGetAggrsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined | unknown> =
   TypeUtilGetRelationOptionsAggrs<Relation> extends {}

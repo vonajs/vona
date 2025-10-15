@@ -1,4 +1,3 @@
-import type BigNumber from 'bignumber.js';
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
 import type {
@@ -129,7 +128,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table?: keyof ITableRecord,
     params?: IModelCountParams<TRecord>,
     options?: IModelMethodOptionsGeneral,
-  ): Promise<BigNumber | undefined> {
+  ): Promise<string | undefined> {
     // table
     table = table || this.getTable(params?.where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();

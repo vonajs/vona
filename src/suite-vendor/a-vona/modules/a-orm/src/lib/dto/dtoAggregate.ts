@@ -6,6 +6,7 @@ import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
 import { ensureArray } from '@cabloy/utils';
 import { Api, v } from 'vona-module-a-openapi';
+import z from 'zod';
 
 export function DtoAggregate<
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
@@ -41,7 +42,7 @@ export function _DtoAggregate_inner<
     if (!columns) continue;
     for (const column of columns) {
       const column2 = `${key}_${column === '*' ? 'all' : column}`;
-      Api.field(v.optional(), v.bigNumber())(classTarget.prototype, column2);
+      Api.field(v.optional(), z.string())(classTarget.prototype, column2);
     }
   }
   return classTarget as any;
