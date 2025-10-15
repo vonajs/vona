@@ -19,20 +19,26 @@ $ vona :create:bean pipe number --module=demo-student
 ## 管道定义
 
 ``` typescript
-export interface IPipeOptionsAdmin extends IDecoratorPipeOptions {}
+export type TypePipeNumberData = unknown;
 
-@Pipe<IPipeOptionsAdmin>()
-class PipeAdmin {
-  async execute(_options: IPipeOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
-    if (!user || user.name !== 'admin') this.app.throw(403);
-    // next
-    return next();
+export type TypePipeNumberResult = number;
+
+export interface IPipeOptionsNumber extends IDecoratorPipeOptions {}
+
+@Pipe<IPipeOptionsNumber>()
+export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
+  async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
+    const valueNew = Number(value);
+    if (Number.isNaN(valueNew)) this.app.throw(400);
+    return valueNew;
   }
 }
 ```
 
-- `getCurrentUser`: 取得当前用户
+- `TypePipeNumberData`: 入参类型
+- `TypePipeNumberResult`: 结果类型
+- `IPipeOptionsNumber`: 定义管道参数
+- `transform`: 对参数进行判断和转换
 
 ## 使用管道
 
@@ -43,14 +49,14 @@ import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.pipe('demo-student:admin')
-  async findMany() {}
+  @Web.get(':id')
++ @Aspect.pipe('demo-student:number')
+  async findOne(id: number) {}
 }
 ```
 
 - `@Aspect.pipe`: 此装饰器用于使用局部管道，只需传入管道的名称
-  - admin 管道属于模块`demo-student`，因此完整的名称是`demo-student:admin`
+  - number 管道属于模块`demo-student`，因此完整的名称是`demo-student:number`
 
 ### 2. 标注控制器类
 
@@ -60,10 +66,10 @@ class ControllerStudent {
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
-+ @Aspect.pipe('demo-student:admin')
++ @Aspect.pipe('demo-student:number')
 class ControllerStudent {
-  @Web.get()
-  async findMany() {}
+  @Web.get(':id')
+  async findOne(id: number) {}
 }
 ```
 
@@ -71,41 +77,40 @@ class ControllerStudent {
 
 可以为管道定义参数，通过参数更灵活的配置管道逻辑
 
-比如，为 admin 管道定义`name`参数，用于控制需要判断的用户名
+比如，为 number 管道定义`errorCode`参数，如果传入的请求参数不是 number 类型就抛出异常，错误代码为`errorCode`
 
 ### 1. 定义参数类型
 
 ``` diff
-export interface IPipeOptionsAdmin extends IDecoratorPipeOptions {
-+ name: string;
+export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
++ errorCode: number;
 }
 ```
 
 ### 2. 提供参数缺省值
 
 ``` diff
-@Pipe<IPipeOptionsAdmin>({
-+ name: 'admin',
+@Pipe<IPipeOptionsNumber>({
++ errorCode: 400,
 })
 ```
 
 ### 3. 使用参数
 
 ``` diff
-export interface IPipeOptionsAdmin extends IDecoratorPipeOptions {
-  name: string;
+export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
+  errorCode: number;
 }
 
-@Pipe<IPipeOptionsAdmin>({
-  name: 'admin',
+@Pipe<IPipeOptionsNumber>({
+  errorCode: 400,
 })
-export class PipeAdmin extends BeanBase implements IPipeExecute {
-  async execute(options: IPipeOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'admin') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
-    // next
-    return next();
+export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
+  async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
+    const valueNew = Number(value);
+-    if (Number.isNaN(valueNew)) this.app.throw(400);
++    if (Number.isNaN(valueNew)) this.app.throw(options.errorCode);
+    return valueNew;
   }
 }
 ```
@@ -116,9 +121,9 @@ export class PipeAdmin extends BeanBase implements IPipeExecute {
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.pipe('demo-student:admin', { name: 'other-name' })
-  async findMany() {}
+  @Web.get(':id')
++ @Aspect.pipe('demo-student:number', { errorCode: 500 })
+  async findOne(id: number) {}
 }
 ```
 
@@ -134,8 +139,8 @@ class ControllerStudent {
 // onions
 config.onions = {
   pipe: {
-    'demo-student:admin': {
-      name: 'other-name',
+    'demo-student:number': {
+      errorCode: 500,
     },
   },
 };
