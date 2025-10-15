@@ -3,7 +3,7 @@ import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectPa
 import { ensureArray, isNil } from '@cabloy/utils';
 import { BigNumber } from 'bignumber.js';
 import { cast } from 'vona';
-import { buildWhere, isAggrColumn } from '../../common/buildWhere.ts';
+import { buildWhere } from '../../common/buildWhere.ts';
 import { isRaw } from '../../common/utils.ts';
 import { $tableDefaults } from '../../lib/columns.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
@@ -195,18 +195,18 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     this.buildWhere(builder, where);
   }
 
-  convertItemsToBigNumber(items: {}[]) {
-    for (const item of items) {
-      for (const key in item) {
-        if (isAggrColumn(key)) {
-          if (!isNil(item[key])) {
-            item[key] = BigNumber(item[key]);
-          }
-        }
-      }
-    }
-    return items;
-  }
+  // convertItemsToBigNumber(items: {}[]) {
+  //   for (const item of items) {
+  //     for (const key in item) {
+  //       if (isAggrColumn(key)) {
+  //         if (!isNil(item[key])) {
+  //           item[key] = BigNumber(item[key]);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return items;
+  // }
 
   extractCount(result: Array<object> | object, columnName?: string): BigNumber {
     return this.extractFirstNumber(result, 0, columnName)!;
