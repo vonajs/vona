@@ -45,7 +45,7 @@ export type TypeModelSelectGroupParamsColumns<
    TypeModelAggrRelationResultAggrsToNumberType<TypeModelAggrRelationResultAggrs<Aggrs>>;
 
 export type TypeModelAggrRelationResultAggrsToNumberType<Columns> =
-  { [K in keyof Columns]: number | string }; // not use BigNumber
+  { [K in keyof Columns]: string }; // not use BigNumber or number | string
 
 export type TypeUtilGetGroupsFromRelationAndIncludeWrapper<Relation, IncludeWrapper extends {} | undefined | unknown> =
   TypeUtilGetParamsGroups<IncludeWrapper> extends string | string[]
