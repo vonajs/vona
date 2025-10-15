@@ -220,7 +220,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     const items = await this.__select_cache(table, params, options);
     return items;
-    // return this.convertItemsToBigNumber(items) as any;
   }
 
   async group<
@@ -244,7 +243,6 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     const items = await this.__select_cache(table, params as any, options);
     return items;
-    // return this.convertItemsToBigNumber(items) as any;
   }
 
   async selectAndCount<

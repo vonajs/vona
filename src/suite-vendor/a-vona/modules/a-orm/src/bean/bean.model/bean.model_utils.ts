@@ -195,19 +195,6 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     this.buildWhere(builder, where);
   }
 
-  // convertItemsToBigNumber(items: {}[]) {
-  //   for (const item of items) {
-  //     for (const key in item) {
-  //       if (isAggrColumn(key)) {
-  //         if (!isNil(item[key])) {
-  //           item[key] = BigNumber(item[key]);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return items;
-  // }
-
   extractCount(result: Array<object> | object, columnName?: string): BigNumber {
     return this.extractFirstNumber(result, 0, columnName)!;
   }

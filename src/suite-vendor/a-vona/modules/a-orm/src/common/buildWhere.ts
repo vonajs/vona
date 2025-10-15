@@ -225,12 +225,6 @@ function _checkHavingColumn<TRecord>(knex: Knex, column: keyof TRecord | string)
   return knex.raw(`${_safeOp(aggr)}(${_safeColumn(name)})`);
 }
 
-// export function isAggrColumn(column: string) {
-//   const [aggr, name] = cast<string>(column).split('_');
-//   if (!OpAggrs.includes(aggr) || !name) return false;
-//   return true;
-// }
-
 function _checkOpJoint(op: TypeOpsJoint) {
   for (const item of OpJointValues) {
     if (op.startsWith(item)) {
