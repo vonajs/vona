@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-mail",
   "type": "module",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "title": "a-mail",
   "vonaModule": {
     "fileVersion": 1,

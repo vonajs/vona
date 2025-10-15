@@ -464,7 +464,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.2
       vona-cli-set-api:
-        specifier: ^1.0.220
+        specifier: ^1.0.221
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -873,7 +873,7 @@ importers:
         specifier: ^5.0.60
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.124
+        specifier: ^5.0.125
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1164,10 +1164,10 @@ importers:
         specifier: workspace:^
         version: link:modules/a-aspectutils
       vona-module-a-auth:
-        specifier: ^5.0.31
+        specifier: ^5.0.32
         version: link:modules/a-auth
       vona-module-a-authsimple:
-        specifier: ^5.0.30
+        specifier: ^5.0.31
         version: link:modules/a-authsimple
       vona-module-a-bean:
         specifier: ^5.0.15
@@ -1194,7 +1194,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.71
+        specifier: ^5.0.72
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.15
@@ -1215,7 +1215,7 @@ importers:
         specifier: ^5.0.14
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.31
+        specifier: ^5.0.32
         version: link:modules/a-instance
       vona-module-a-jwt:
         specifier: ^5.0.16
@@ -1230,7 +1230,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-mailconfirm
       vona-module-a-menu:
-        specifier: ^5.0.15
+        specifier: ^5.0.16
         version: link:modules/a-menu
       vona-module-a-meta:
         specifier: ^5.0.13
@@ -1248,7 +1248,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.65
+        specifier: ^5.0.66
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.16
@@ -1296,7 +1296,7 @@ importers:
         specifier: ^5.0.17
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.34
+        specifier: ^5.0.35
         version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.23
