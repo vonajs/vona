@@ -93,9 +93,9 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
+  @Web.get(':id')
 + @Aspect.pipeGlobal('demo-student:number', { errorCode: 500 })
-  async findMany() {}
+  async findOne(id: number) {}
 }
 ```
 
@@ -128,28 +128,28 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置全局管道`a-user:passport`，我们希望加载顺序如下：`a-user:passport` > `Current`
+比如，系统有一个内置全局管道`a-xxx:yyy`，我们希望加载顺序如下：`a-xxx:yyy` > `Current`
 
 ``` diff
 @Pipe({
   global: true,
-+ dependencies: 'a-user:passport',
++ dependencies: 'a-xxx:yyy',
   errorCode: 400,
 })
-class PipeAdmin {}
+class PipeNumber {}
 ```
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-user:passport`
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-xxx:yyy`
 
 ``` diff
 @Pipe({
   global: true,
-+ dependents: 'a-user:passport',
++ dependents: 'a-xxx:yyy',
   errorCode: 400,
 })
-class PipeAdmin {}
+class PipeNumber {}
 ```
 
 ## 管道启用/禁用
@@ -162,9 +162,9 @@ class PipeAdmin {}
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
+  @Web.get(':id')
 + @Aspect.pipeGlobal('demo-student:number', { enable: false })
-  async findMany() {}
+  async findOne(id: number) {}
 }
 ```
 
@@ -206,7 +206,7 @@ config.onions = {
 +   host: 'localhost:7102',
 + },
 })
-class PipeAdmin {}
+class PipeNumber {}
 ```
 
 ### 3. match/ignore
@@ -224,8 +224,8 @@ class PipeAdmin {}
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-  async findMany() {
+  @Web.get(':id')
+  async findOne(id: number)() {
 +   this.bean.onion.pipe.inspect();
   }
 }
@@ -235,6 +235,6 @@ class ControllerStudent {
 - `.pipe`: 取得与管道相关的 Service 实例
 - `.inspect`: 输出当前生效的全局管道清单
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局管道清单，效果如下：
+当访问`findOne` API 时，会自动在控制台输出当前生效的全局管道清单，效果如下：
 
 ![](../../../assets/img/aop/pipe-1.png)
