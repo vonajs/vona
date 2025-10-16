@@ -108,7 +108,7 @@ export function schemaTableIdentity() {
     } else if (_identityType === 'number') {
       return z.number();
     } else if (_identityType === 'bigint') {
-      return z.string().regex(/\d+/);
+      return z.string().regex(/^\d+$/);
     }
     throw new Error('not support');
   };
