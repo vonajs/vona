@@ -9,7 +9,7 @@ Vona ORM is a core capability provided by the `a-orm` module. You can modify the
 config.modules = {
   'a-orm': {
     table: {
-      identityType: 'string',
+      identityType: 'bigint',
     },
     softDeletionPrune: {
       enable: true,
@@ -63,7 +63,7 @@ export function config(_app: VonaApplication) {
 
 |Name|Description|
 |--|--|
-|table.identityType|Type of the table key field `id`: `string`/`number`/`bigint`|
+|table.identityType|Type of the table key field `id`: `number`/`bigint`|
 |model|General settings for the model|
 |softDeletionPrune|Soft deletion data prune settings|
 |dialects|Supported database dialects|

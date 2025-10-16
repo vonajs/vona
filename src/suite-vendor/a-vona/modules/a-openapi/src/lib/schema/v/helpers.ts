@@ -103,9 +103,7 @@ export function schemaTableIdentity() {
   const ormConfig = app.util.getModuleConfigRaw('a-orm');
   const _identityType = ormConfig?.table?.identityType ?? 'bigint';
   return function (_schema?: any): z.ZodString | z.ZodNumber {
-    if (_identityType === 'string') {
-      return z.string();
-    } else if (_identityType === 'number') {
+    if (_identityType === 'number') {
       return z.number();
     } else if (_identityType === 'bigint') {
       return z.string().regex(/^\d+$/);

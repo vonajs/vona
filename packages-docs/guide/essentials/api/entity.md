@@ -359,7 +359,7 @@ export type TableIdentity = string | number;
 
 * Set the default field type
 
-When creating a data table, the system will use `int` or `int64` as the type of the id field according to the current configuration, and the default is `int64`
+When creating a data table, the system will use `number` or `bigint` as the type of the id field according to the current configuration, and the default is `bigint`
 
 `src/backend/config/config/config.dev.ts`
 
@@ -368,9 +368,7 @@ When creating a data table, the system will use `int` or `int64` as the type of 
 config.modules = {
   'a-orm': {
     'table': {
-      // number -> int
-      // string -> int64
-      identityType: 'number',
+      identityType: 'bigint',
     },
   },
 };

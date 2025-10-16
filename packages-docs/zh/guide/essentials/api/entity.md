@@ -357,7 +357,7 @@ export type TableIdentity = string | number;
 
 * 设置默认字段类型
 
-在创建数据表时，系统会根据当前的配置使用`int`或者`int64`作为 id 字段的类型，默认为`int64`
+在创建数据表时，系统会根据当前的配置使用`number`或者`bigint`作为 id 字段的类型，默认为`bigint`
 
 `src/backend/config/config/config.dev.ts`
 
@@ -366,9 +366,7 @@ export type TableIdentity = string | number;
 config.modules = {
   'a-orm': {
     'table': {
-      // number -> int
-      // string -> int64
-      identityType: 'number',
+      identityType: 'bigint',
     },
   },
 };

@@ -9,7 +9,7 @@ Vona ORM 是由模块`a-orm`提供的核心能力，可以在 App config 中修�
 config.modules = {
   'a-orm': {
     table: {
-      identityType: 'string',
+      identityType: 'bigint',
     },
     softDeletionPrune: {
       enable: true,
@@ -63,7 +63,7 @@ export function config(_app: VonaApplication) {
 
 |名称|说明|
 |--|--|
-|table.identityType|数据表关键字段`id`的类型：`string`/`number`/`bigint`|
+|table.identityType|数据表关键字段`id`的类型：`number`/`bigint`|
 |model|model的通用设置|
 |softDeletionPrune|软删除数据清理设置|
 |dialects|系统支持的数据库方言|
