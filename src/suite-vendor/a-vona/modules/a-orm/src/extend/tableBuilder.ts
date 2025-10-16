@@ -16,10 +16,12 @@ export function ExtendTableBuilder(app: VonaApplication) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) {
       const _identityType = identityType ?? scope.config.table.identityType;
-      if (_identityType === 'string') {
+      if (_identityType === 'bigint') {
         this.bigIncrements();
       } else if (_identityType === 'number') {
         this.increments();
+      } else {
+        throw new Error('Should create column id by yourself');
       }
     }
     if (options.timestamps !== false) this.timestamps(true, true, true);
@@ -38,10 +40,12 @@ export function ExtendTableBuilder(app: VonaApplication) {
   });
   knex.TableBuilder.extend('tableIdentity', function (this: knex.Knex.TableBuilder, columnName: string) {
     const _identityType = scope.config.table.identityType;
-    if (_identityType === 'string') {
+    if (_identityType === 'bigint') {
       return this.bigInteger(columnName); // default value is null
     } else if (_identityType === 'number') {
       return this.integer(columnName); // default value is null
+    } else {
+      throw new Error(`Should create column ${columnName} by yourself`);
     }
   });
   knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName?: string) {

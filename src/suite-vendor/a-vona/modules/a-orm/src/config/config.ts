@@ -29,7 +29,7 @@ export function config(_app: VonaApplication) {
       },
     },
     table: {
-      identityType: 'string' as TableIdentityType,
+      identityType: 'bigint' as TableIdentityType,
     },
     model: {
       disableDeleted: false,

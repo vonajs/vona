@@ -26,7 +26,7 @@ config.modules = {
 export function config(_app: VonaApplication) {
   return {
     table: {
-      identityType: 'string' as TableIdentityType,
+      identityType: 'bigint' as TableIdentityType,
     },
     model: {
       disableDeleted: false,
@@ -63,7 +63,7 @@ export function config(_app: VonaApplication) {
 
 |名称|说明|
 |--|--|
-|table.identityType|数据表关键字段`id`的类型：`string`/`number`|
+|table.identityType|数据表关键字段`id`的类型：`string`/`number`/`bigint`|
 |model|model的通用设置|
 |softDeletionPrune|软删除数据清理设置|
 |dialects|系统支持的数据库方言|

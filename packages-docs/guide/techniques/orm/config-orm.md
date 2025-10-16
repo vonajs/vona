@@ -26,7 +26,7 @@ config.modules = {
 export function config(_app: VonaApplication) {
   return {
     table: {
-      identityType: 'string' as TableIdentityType,
+      identityType: 'bigint' as TableIdentityType,
     },
     model: {
       disableDeleted: false,
@@ -63,7 +63,7 @@ export function config(_app: VonaApplication) {
 
 |Name|Description|
 |--|--|
-|table.identityType|Type of the table key field `id`: `string`/`number`|
+|table.identityType|Type of the table key field `id`: `string`/`number`/`bigint`|
 |model|General settings for the model|
 |softDeletionPrune|Soft deletion data prune settings|
 |dialects|Supported database dialects|
