@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-orm",
   "type": "module",
-  "version": "5.0.67",
+  "version": "5.0.68",
   "title": "a-orm",
   "vonaModule": {
     "capabilities": {
@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "knex": "^3.1.0",
-    "table-identity": "^1.0.11"
+    "table-identity": "^1.0.12"
   },
   "clean-package": {
     "indent": 2,
