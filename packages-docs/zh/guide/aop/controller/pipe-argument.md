@@ -7,6 +7,8 @@
 参数管道并不是独立存在的，而是在`局部管道`的基础上创建。下面以`局部管道`number 为例，演示如何创建参数管道
 
 ``` diff
++ import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
+
 @Pipe()
 class PipeNumber {
   async transform(value: TypePipeNumberData) {
@@ -19,7 +21,7 @@ class PipeNumber {
 + export const ArgNumber = createArgumentPipe('demo-student:number');
 ```
 
-- `createArgumentPipe`: 传入局部管道名称，返回参数管道的装饰器
+- `createArgumentPipe`: 传入局部管道名称，创建参数管道的装饰器
 
 ## 使用参数管道
 
@@ -32,6 +34,7 @@ class ControllerStudent {
 }
 ```
 
+- `@Arg.param`: 是内置参数管道
 - 参数管道顺序：`@Arg.param` > `@ArgNumber`
 
 ## 使用时指定参数
