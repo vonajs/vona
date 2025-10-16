@@ -26,7 +26,7 @@ export type TypePipeNumberResult = number;
 export interface IPipeOptionsNumber extends IDecoratorPipeOptions {}
 
 @Pipe<IPipeOptionsNumber>()
-export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
+class PipeNumber {
   async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
     const valueNew = Number(value);
     if (Number.isNaN(valueNew)) this.app.throw(400);
