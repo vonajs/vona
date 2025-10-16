@@ -49,5 +49,5 @@ class ControllerStudent {
 ::: info
 为什么使用`id: any`?
 
-这是为了演示参数管道的使用。如果使用`id: number`，就已经具备了 number 类型的参数验证，不必使用`@ArgNumber()`
+这是为了演示参数管道的使用。如果使用`id: number`，就已经具备了 number 类型的参数校验能力，不必使用`@ArgNumber()`
 :::
