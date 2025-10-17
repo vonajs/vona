@@ -35,7 +35,10 @@ class PipeNumber {
 }
 ```
 
-- `getCurrentUser`: Get the current user
+- `TypePipeNumberData`: Input parameter type
+- `TypePipeNumberResult`: Result type
+- `IPipeOptionsNumber`: Defines pipe parameters
+- `transform`: Parameter evaluation and conversion
 
 ## Using Pipe
 
@@ -46,9 +49,9 @@ import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
 class ControllerStudent {
-  @Web.get()
+  @Web.get(':id')
 + @Aspect.pipe('demo-student:number')
-  async findMany() {}
+  async findOne(id: number) {}
 }
 ```
 
@@ -65,8 +68,8 @@ import { Aspect } from 'vona-module-a-aspect';
 @Controller()
 + @Aspect.pipe('demo-student:number')
 class ControllerStudent {
-  @Web.get()
-  async findMany() {}
+  @Web.get(':id')
+  async findOne(id: number) {}
 }
 ```
 
@@ -74,41 +77,40 @@ class ControllerStudent {
 
 You can define parameters for pipe, allowing for more flexible configuration of pipe logic
 
-For example, define the `name` parameter for the number pipe to control the username that needs to be judged
+For example, define the `errorCode` parameter for the number pipe. If the incoming request parameter is not of type number, an exception is thrown with the error code `errorCode`
 
 ### 1. Defining parameter types
 
 ``` diff
-export interface IPipeOptionsAdmin extends IDecoratorPipeOptions {
-+ name: string;
+export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
++ errorCode: number;
 }
 ```
 
 ### 2. Providing default values ​​for parameters
 
 ``` diff
-@Pipe<IPipeOptionsAdmin>({
-+ name: 'number',
+@Pipe<IPipeOptionsNumber>({
++ errorCode: 400,
 })
 ```
 
 ### 3. Using Parameters
 
 ``` diff
-export interface IPipeOptionsAdmin extends IDecoratorPipeOptions {
-  name: string;
+export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
+  errorCode: number;
 }
 
-@Pipe<IPipeOptionsAdmin>({
-  name: 'number',
+@Pipe<IPipeOptionsNumber>({
+  errorCode: 400,
 })
-export class PipeAdmin extends BeanBase implements IPipeExecute {
-  async execute(options: IPipeOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'number') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
-    // next
-    return next();
+export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
+  async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
+    const valueNew = Number(value);
+-    if (Number.isNaN(valueNew)) this.app.throw(400);
++    if (Number.isNaN(valueNew)) this.app.throw(options.errorCode);
+    return valueNew;
   }
 }
 ```
@@ -119,9 +121,9 @@ You can specify local pipe parameters for a specific API
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.pipe('demo-student:number', { name: 'other-name' })
-  async findMany() {}
+  @Web.get(':id')
++ @Aspect.pipe('demo-student:number', { errorCode: 500 })
+  async findOne(id: number) {}
 }
 ```
 
@@ -138,7 +140,7 @@ Pipe parameters can be configured in App config
 config.onions = {
   pipe: {
     'demo-student:number': {
-      name: 'other-name',
+      errorCode: 500,
     },
   },
 };
