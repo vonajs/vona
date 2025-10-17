@@ -29,7 +29,7 @@ class ControllerStudent {
 }
 ```
 
-限定最小值：
+指定最小值：
 
 ```diff
 import z from 'zod';
@@ -40,7 +40,7 @@ class ControllerStudent {
 }
 ```
 
-或者
+等价于：
 
 ```diff
 import { v } from 'vona-module-a-openapi';
