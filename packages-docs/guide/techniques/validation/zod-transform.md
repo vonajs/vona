@@ -1,36 +1,36 @@
-# Zod Refine
+# Zod Transform
 
-You can use `Zod Refine` to implement more flexible validation rules
+You can use `Zod Transform` to implement more flexible transform logic
 
-## Create Zod Refine
+## Create Zod Transform
 
-For example, create a Zod Refine `nameExists` in the module demo-student to check if the student name already exists
+For example, create a Zod Transform `nameCapitalize` in the module demo-student to capitalize the first character of a student's name
 
 ### 1. Cli command
 
 ``` bash
-$ vona :create:bean zodRefine nameExists --module=demo-student
+$ vona :create:bean zodTransform nameExists --module=demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path]: `Vona Bean/Zod Refine`
+Context Menu - [Module Path]: `Vona Bean/Zod Transform`
 :::
 
-## Zod Refine Definition
+## Zod Transform Definition
 
 ``` typescript
-export interface TypeZodRefineNameExistsData { name: string }
+export interface TypeZodTransformNameExistsData { name: string }
 
-export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {}
+export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {}
 
-@ZodRefine<IZodRefineOptionsNameExists>()
-class ZodRefineNameExists {
-  async execute(value: TypeZodRefineNameExistsData, refinementCtx: TypeRefinementCtx, _options: IZodRefineOptionsNameExists) {
+@ZodTransform<IZodTransformOptionsNameExists>()
+class ZodTransformNameExists {
+  async execute(value: TypeZodTransformNameExistsData, transformmentCtx: TypeTransformmentCtx, _options: IZodTransformOptionsNameExists) {
     const student = await this.scope.model.student.getByName(value.name);
     if (student) {
-      refinementCtx.addIssue({
+      transformmentCtx.addIssue({
         code: 'custom',
         message: 'Student Exists',
         path: ['name'],
@@ -40,11 +40,11 @@ class ZodRefineNameExists {
 }
 ```
 
-- `TypeZodRefineNameExistsData`: Input parameter type
-- `IZodRefineOptionsNameExists`: Defines Zod Refine parameters
-- `execute`: Validates the input parameter. If the student already exists, `refinementCtx.addIssue` is called to generate a custom error message
+- `TypeZodTransformNameExistsData`: Input parameter type
+- `IZodTransformOptionsNameExists`: Defines Zod Transform parameters
+- `execute`: Validates the input parameter. If the student already exists, `transformmentCtx.addIssue` is called to generate a custom error message
 
-## Using Zod Refine
+## Using Zod Transform
 
 ``` diff
 import { v } from 'vona-module-a-openapi';
@@ -52,23 +52,23 @@ import { v } from 'vona-module-a-openapi';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameExists')) student: DtoStudentCreate) {}
 }
 ```
 
-- `v.refine`: This function is used to use Zod Refine. Simply pass the Zod Refine name
-  - The `nameExists` Zod Refine belongs to the `demo-student` module, so the full name is `demo-student:nameExists`
+- `v.transform`: This function is used to use Zod Transform. Simply pass the Zod Transform name
+  - The `nameExists` Zod Transform belongs to the `demo-student` module, so the full name is `demo-student:nameExists`
 
-## Zod Refine Parameters
+## Zod Transform Parameters
 
-You can define parameters for Zod Refine, allowing for more flexible configuration of Zod Refine logic
+You can define parameters for Zod Transform, allowing for more flexible configuration of Zod Transform logic
 
-For example, define the `errorMessage` parameter for the `nameExists` Zod Refine to provide custom error message
+For example, define the `errorMessage` parameter for the `nameExists` Zod Transform to provide custom error message
 
 ### 1. Defining parameter types
 
 ``` diff
-export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
+export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {
 + errorMessage: string;
 }
 ```
@@ -76,7 +76,7 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 ### 2. Providing default values ​​for parameters
 
 ``` diff
-@ZodRefine<IZodRefineOptionsNameExists>({
+@ZodTransform<IZodTransformOptionsNameExists>({
 + errorMessage: 'Student Exists',
 })
 ```
@@ -84,20 +84,20 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 ### 3. Using Parameters
 
 ``` diff
-export interface TypeZodRefineNameExistsData { name: string }
+export interface TypeZodTransformNameExistsData { name: string }
 
-export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
+export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {
   errorMessage: string;
 }
 
-@ZodRefine<IZodRefineOptionsNameExists>({
+@ZodTransform<IZodTransformOptionsNameExists>({
   errorMessage: 'Student Exists',
 })
-class ZodRefineNameExists {
-  async execute(value: TypeZodRefineNameExistsData, refinementCtx: TypeRefinementCtx, options: IZodRefineOptionsNameExists) {
+class ZodTransformNameExists {
+  async execute(value: TypeZodTransformNameExistsData, transformmentCtx: TypeTransformmentCtx, options: IZodTransformOptionsNameExists) {
     const student = await this.scope.model.student.getByName(value.name);
     if (student) {
-      refinementCtx.addIssue({
+      transformmentCtx.addIssue({
         code: 'custom',
 -       message: 'Student Exists',
 +       message: options.errorMessage,
@@ -110,25 +110,25 @@ class ZodRefineNameExists {
 
 ### 4. Specify parameters when using
 
-You can specify Zod Refine parameters when using
+You can specify Zod Transform parameters when using
 
 ``` diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
 }
 ```
 
 ### 5. App config
 
-Zod Refine parameters can be configured in App config
+Zod Transform parameters can be configured in App config
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
-  zodRefine: {
+  zodTransform: {
     'demo-student:nameExists': {
       errorMessage: 'Student Exists!!!',
     },
