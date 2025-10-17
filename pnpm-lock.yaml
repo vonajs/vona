@@ -81,7 +81,7 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1
       table-identity:
-        specifier: ^1.0.11
+        specifier: ^1.0.12
         version: link:packages-utils/table-identity
       uuid:
         specifier: ^11.0.3
@@ -873,7 +873,7 @@ importers:
         specifier: ^5.0.60
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.127
+        specifier: ^5.0.128
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1239,7 +1239,7 @@ importers:
         specifier: ^5.0.21
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.41
+        specifier: ^5.0.42
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.16
