@@ -249,7 +249,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '参数校验',
           base: '/zh/guide/techniques/validation/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: '参数校验', link: 'introduction' },
+            { text: 'Zod Refine', link: 'zod-refine' },
+            { text: 'Zod Transform', link: 'zod-transform' },
+          ],
         },
         {
           text: 'Swagger/Openapi',

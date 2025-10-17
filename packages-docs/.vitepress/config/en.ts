@@ -249,7 +249,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Validation',
           base: '/guide/techniques/validation/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: 'Validation', link: 'introduction' },
+            { text: 'Zod Refine', link: 'zod-refine' },
+            { text: 'Zod Transform', link: 'zod-transform' },
+          ],
         },
         {
           text: 'Swagger/Openapi',
