@@ -21,18 +21,21 @@ $ vona :create:bean zodRefine nameExists --module=demo-student
 ## Zod Refine定义
 
 ``` typescript
-export type TypeZodRefineNameExistsData = string;
+import type { DtoStudentCreate } from '../dto/studentCreate.ts';
+
+export type TypeZodRefineNameExistsData = DtoStudentCreate;
 
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {}
 
 @ZodRefine<IZodRefineOptionsNameExists>()
 class ZodRefineNameExists {
   async execute(value: TypeZodRefineNameExistsData, refinementCtx: TypeRefinementCtx, _options: IZodRefineOptionsNameExists) {
-    const student = await this.scope.model.student.getByName(value);
+    const student = await this.scope.model.student.getByName(value.name);
     if (student) {
       refinementCtx.addIssue({
         code: 'custom',
         message: 'Student Exists',
+        path: ['name'],
       });
     }
   }
