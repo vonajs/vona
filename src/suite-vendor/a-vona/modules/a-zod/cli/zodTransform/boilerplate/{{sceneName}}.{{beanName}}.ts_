@@ -9,8 +9,12 @@ export type TypeZodTransform<%=argv.beanNameCapitalize%>Result = TypeZodTransfor
 export interface IZodTransformOptions<%=argv.beanNameCapitalize%> extends IDecoratorZodTransformOptions {}
 
 @ZodTransform<IZodTransformOptions<%=argv.beanNameCapitalize%>>()
-export class ZodTransform<%=argv.beanNameCapitalize%> extends BeanBase implements IZodTransformExecute<TypeZodTransform<%=argv.beanNameCapitalize%>Data, TypeZodTransform<%=argv.beanNameCapitalize%>Result> {
-  async execute(value: TypeZodTransform<%=argv.beanNameCapitalize%>Data, _options: IZodTransformOptions<%=argv.beanNameCapitalize%>): Promise<TypeZodTransform<%=argv.beanNameCapitalize%>Result> {
+export class ZodTransform<%=argv.beanNameCapitalize%>
+  extends BeanBase implements IZodTransformExecute<TypeZodTransform<%=argv.beanNameCapitalize%>Data, TypeZodTransform<%=argv.beanNameCapitalize%>Result> {
+  async execute(
+    value: TypeZodTransform<%=argv.beanNameCapitalize%>Data,
+    _options: IZodTransformOptions<%=argv.beanNameCapitalize%>,
+  ): Promise<TypeZodTransform<%=argv.beanNameCapitalize%>Result> {
     return value;
   }
 }
