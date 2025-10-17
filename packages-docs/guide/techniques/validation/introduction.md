@@ -76,7 +76,7 @@ The decorator `@Arg.queryPro` supports more advanced query parameters, including
   - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
   - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
 
-## 4. Tool: v.array
+## 5. Tool: v.array
 
 For Array type parameters, Vona also provides convenient tools. For example, we require `ids` to be `number[]`:
 

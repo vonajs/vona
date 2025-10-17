@@ -45,7 +45,15 @@ For example, `findOne(@Arg.query('id', v.default(3), v.optional()) id: number)`.
 
 ![](../../../assets/img/openapi/openapi-4.png)
 
-## 4. Special tool: Array
+## 4. Decorator: @Arg.queryPro
+
+The decorator `@Arg.queryPro` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
+
+- See:
+  - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
+  - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
+
+## 5. Tool: v.array
 
 For example, `findOne(@Arg.query('ids', v.array(Number)) ids: number[])`, we specify ids as `number[]`. Then, the automatically generated Swagger/Openapi is as follows:
 
@@ -57,8 +65,9 @@ Vona also provides many extension tools for setting metadata related to Openapi
 
 |Name|Description|
 |--|--|
-|v.default|default|
+|v.required|Provide a custom error message for `required`; otherwise, use Zod's built-in error message|
 |v.optional|optional|
+|v.default|default|
 |v.openapi|openapi|
 |v.title|title|
 |v.description|description|

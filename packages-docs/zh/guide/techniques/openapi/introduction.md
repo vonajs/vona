@@ -45,7 +45,15 @@ Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
 
 ![](../../../assets/img/openapi/openapi-4.png)
 
-## 4. 特殊工具：Array
+## 4. 装饰器：@Arg.queryPro
+
+装饰器`@Arg.queryPro`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
+
+- 参见:
+  - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
+  - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
+
+## 5. 工具：v.array
 
 比如，`findOne(@Arg.query('ids', v.array(Number)) ids: number[])`，我们指定 ids 为`number[]`。那么，自动生成的 Swagger/Openapi 如下：
 
@@ -57,8 +65,9 @@ Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据
 
 |名称|说明|
 |--|--|
-|v.default|default|
+|v.required|为`不允许为空`提供自定义错误消息，否则使用Zod内置的错误消息|
 |v.optional|optional|
+|v.default|default|
 |v.openapi|openapi|
 |v.title|title|
 |v.description|description|
