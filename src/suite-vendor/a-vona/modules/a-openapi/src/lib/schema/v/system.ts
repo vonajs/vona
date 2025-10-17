@@ -4,6 +4,7 @@ import type { ISchemaObjectOptions } from '../../../types/decorator.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';
+import { $locale } from '../../../.metadata/index.ts';
 import { makeSchemaLike } from '../makeSchemaLikes.ts';
 import { $schema, $schemaLazy } from '../schema.ts';
 
@@ -56,5 +57,13 @@ export function schemaStrictObject() {
 export function schemaLooseObject() {
   return function (schema: z.ZodObject): z.ZodObject {
     return z.looseObject(schema.shape);
+  };
+}
+
+export function schemaRequired(params?: string | z.core.$ZodStringParams) {
+  params = params || $locale('ZodErrorRequired');
+  return function (schema: z.ZodType): z.ZodType {
+    schema._zod.def.error = z.util.normalizeParams(params).error;
+    return schema;
   };
 }
