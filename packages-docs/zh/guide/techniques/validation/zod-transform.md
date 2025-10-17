@@ -21,28 +21,29 @@ $ vona :create:bean zodTransform nameCapitalize --module=demo-student
 ## Zod Transform定义
 
 ``` typescript
-export interface TypeZodTransformNameExistsData { name: string }
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {}
+export interface TypeZodTransformNameCapitalizeData { name: string }
 
-@ZodTransform<IZodTransformOptionsNameExists>()
-class ZodTransformNameExists {
-  async execute(value: TypeZodTransformNameExistsData, refinementCtx: TypeTransformmentCtx, _options: IZodTransformOptionsNameExists) {
-    const student = await this.scope.model.student.getByName(value.name);
-    if (student) {
-      refinementCtx.addIssue({
-        code: 'custom',
-        message: 'Student Exists',
-        path: ['name'],
-      });
-    }
+export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
+
+export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {}
+
+@ZodTransform<IZodTransformOptionsNameCapitalize>()
+class ZodTransformNameCapitalize {
+  async execute(
+    value: TypeZodTransformNameCapitalizeData,
+    _options: IZodTransformOptionsNameCapitalize,
+  ): Promise<TypeZodTransformNameCapitalizeResult> {
+    return { ...value, name: toUpperCaseFirstChar(value.name) };
   }
 }
 ```
 
-- `TypeZodTransformNameExistsData`: 入参类型
-- `IZodTransformOptionsNameExists`: 定义 Zod Transform 参数
-- `execute`: 对入参进行判断，如果学生已存在，则调用`refinementCtx.addIssue`生成自定义错误消息
+- `TypeZodTransformNameCapitalizeData`: 入参类型
+- `TypeZodTransformNameCapitalizeResult`: 结果类型
+- `IZodTransformOptionsNameCapitalize`: 定义 Zod Transform 参数
+- `execute`: 对入参进行转换
 
 ## 使用Zod Transform
 
@@ -52,58 +53,58 @@ import { v } from 'vona-module-a-openapi';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameCapitalize')) student: DtoStudentCreate) {}
 }
 ```
 
-- `v.refine`: 此工具函数用于使用 Zod Transform，只需传入 Zod Transform 的名称
-  - `nameExists` zod refine 属于模块`demo-student`，因此完整的名称是`demo-student:nameExists`
+- `v.transform`: 此工具函数用于使用 Zod Transform，只需传入 Zod Transform 的名称
+  - `nameCapitalize` zod transform 属于模块`demo-student`，因此完整的名称是`demo-student:nameCapitalize`
 
 ## Zod Transform参数
 
 可以为 Zod Transform 定义参数，通过参数更灵活的配置 Zod Transform 逻辑
 
-比如，为 `nameExists` zod refine 定义`errorMessage`参数，用于提供自定义错误消息
+比如，为 `nameExists` zod transform 定义`lowerCase`参数，用于指定是否将首字符转为小写
 
 ### 1. 定义参数类型
 
 ``` diff
-export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {
-+ errorMessage: string;
+export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
++ lowerCase: boolean;
 }
 ```
 
 ### 2. 提供参数缺省值
 
 ``` diff
-@ZodTransform<IZodTransformOptionsNameExists>({
-+ errorMessage: 'Student Exists',
+@ZodTransform<IZodTransformOptionsNameCapitalize>({
++ lowerCase: false,
 })
 ```
 
 ### 3. 使用参数
 
 ``` diff
-export interface TypeZodTransformNameExistsData { name: string }
+import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {
-  errorMessage: string;
+export interface TypeZodTransformNameCapitalizeData { name: string }
+
+export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
+
+export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
+  lowerCase: boolean;
 }
 
-@ZodTransform<IZodTransformOptionsNameExists>({
-  errorMessage: 'Student Exists',
+@ZodTransform<IZodTransformOptionsNameCapitalize>({
+  lowerCase: false,
 })
-class ZodTransformNameExists {
-  async execute(value: TypeZodTransformNameExistsData, refinementCtx: TypeTransformmentCtx, options: IZodTransformOptionsNameExists) {
-    const student = await this.scope.model.student.getByName(value.name);
-    if (student) {
-      refinementCtx.addIssue({
-        code: 'custom',
--       message: 'Student Exists',
-+       message: options.errorMessage,
-        path: ['name'],
-      });
-    }
+class ZodTransformNameCapitalize {
+  async execute(
+    value: TypeZodTransformNameCapitalizeData,
+    options: IZodTransformOptionsNameCapitalize,
+  ): Promise<TypeZodTransformNameCapitalizeResult> {
+-   return { ...value, name: toUpperCaseFirstChar(value.name) };
++   return { ...value, name: options.lowerCase ? toLowerCaseFirstChar(value.name) : toUpperCaseFirstChar(value.name) };
   }
 }
 ```
