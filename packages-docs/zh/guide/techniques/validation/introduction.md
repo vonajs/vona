@@ -146,8 +146,8 @@ class ControllerStudent3 {
 |v.uuid|uuid|
 |v.ipv4|ipv4|
 |v.ipv6|ipv6|
-|v.min|min，同时支持`string/number`|
-|v.max|max，同时支持`string/number`|
+|v.min|支持`string/number`|
+|v.max|支持`string/number`|
 |v.trim|trim|
 |v.toLowerCase|toLowerCase|
 |v.toUpperCase|toUpperCase|
@@ -170,7 +170,7 @@ class ControllerStudent3 {
 |--|--|
 |serializerExclude|排除字段|
 |serializerTransform|转换字段值|
-|serializerSensitive|脱敏处理|
+|serializerSensitive|字段脱敏处理|
 |serializerGetter|使用Getter生成字段值|
 
 ### 5. Zod Tools
@@ -180,9 +180,9 @@ class ControllerStudent3 {
 |v.refine|提供Zod Refine能力|
 |v.transform|提供Zod Transform能力|
 
-### 4. Special Tools
+### 6. Special Tools
 
 |名称|说明|
 |--|--|
-|v.tableIdentity|tableIdentity。基于当前系统配置，提供`number`或者`bigint`的校验规则|
+|v.tableIdentity|基于当前系统配置，提供`number`或者`bigint`的校验规则|
 |v.captcha|提供验证码选项|

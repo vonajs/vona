@@ -111,43 +111,43 @@ These utility methods for extending Zod Schema are grouped into `v` to reduce th
 
 |Name|Description|
 |--|--|
-|@Arg.param|从Request Params中取值|
-|@Arg.query|从Request Query中取值|
-|@Arg.body|从Request Body中取值|
-|@Arg.headers|从Request Headers中取值|
-|@Arg.fields|从Request Upload中取值|
-|@Arg.field|从Request Upload中取值|
-|@Arg.files|从Request Upload中取值|
-|@Arg.file|从Request Upload中取值|
-|@Arg.user|取得当前用户|
-|@Arg.queryPro|从Request Query中取值|
+|@Arg.param|Gets the value from the request params|
+|@Arg.query|Gets the value from the request query|
+|@Arg.body|Gets the value from the request body|
+|@Arg.headers|Gets the value from the request headers|
+|@Arg.fields|Gets the value from the request upload|
+|@Arg.field|Gets the value from the request upload|
+|@Arg.files|Gets the value from the request upload|
+|@Arg.file|Gets the value from the request upload|
+|@Arg.user|Gets the current user|
+|@Arg.queryPro|Gets the value from the request query|
 
-## 工具清单
+## Tool List
 
 ### 1. Basic Tools
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|v.required|为`不允许为空`提供自定义错误消息，否则使用Zod内置的错误消息|
+|v.required|Provide a custom error message for `required`; otherwise, use Zod's built-in error message|
 |v.optional|optional|
 |v.default|default|
 |v.object|object|
 |v.strictObject|Same as `z.strictObject(schema.shape)`|
 |v.looseObject|Same as `z.looseObject(schema.shape)`|
 |v.array|array|
-|v.lazy|创建Lazy Schema|
+|v.lazy|Create a lazy schema|
 
 ### 2. String Tools
 
-|名称|说明|
+|Name|Description|
 |--|--|
 |v.email|email|
 |v.url|url|
 |v.uuid|uuid|
 |v.ipv4|ipv4|
 |v.ipv6|ipv6|
-|v.min|min，同时支持`string/number`|
-|v.max|max，同时支持`string/number`|
+|v.min|Supports `string/number`|
+|v.max|Supports `string/number`|
 |v.trim|trim|
 |v.toLowerCase|toLowerCase|
 |v.toUpperCase|toUpperCase|
@@ -157,7 +157,7 @@ These utility methods for extending Zod Schema are grouped into `v` to reduce th
 
 ### 3. Openapi Tools
 
-|名称|说明|
+|Name|Description|
 |--|--|
 |v.openapi|openapi|
 |v.title|title|
@@ -166,23 +166,23 @@ These utility methods for extending Zod Schema are grouped into `v` to reduce th
 
 ### 4. Serializer Tools
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|serializerExclude|排除字段|
-|serializerTransform|转换字段值|
-|serializerSensitive|脱敏处理|
-|serializerGetter|使用Getter生成字段值|
+|serializerExclude|Exclude fields|
+|serializerTransform|Transform field values|
+|serializerSensitive|Desensitize fields|
+|serializerGetter|Generate field values ​​using a getter|
 
 ### 5. Zod Tools
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|v.refine|提供Zod Refine能力|
-|v.transform|提供Zod Transform能力|
+|v.refine|Provides `Zod Refine` capabilities|
+|v.transform|Provides `Zod Transform` capabilities|
 
-### 4. Special Tools
+### 6. Special Tools
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|v.tableIdentity|tableIdentity。基于当前系统配置，提供`number`或者`bigint`的校验规则|
-|v.captcha|提供验证码选项|
+|v.tableIdentity|Based on the current system configuration, provides `number` or `bigint` validation rules |
+|v.captcha| Provides captcha options|
