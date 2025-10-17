@@ -2,7 +2,7 @@
 
 ## Create Pipe
 
-For example, create a global pipe `number` in the module demo-student to check whether the current username is `number`. If not, an exception is thrown
+For example, create a global pipe `number` in the module demo-student to convert the request parameter to `number` type
 
 ### 1. Cli command
 
@@ -19,20 +19,26 @@ Context Menu - [Module Path]: `Vona Aspect/Pipe Global`
 ## Pipe Definition
 
 ``` typescript
+export type TypePipeNumberData = unknown;
+
+export type TypePipeNumberResult = number;
+
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {}
 
 @Pipe<IPipeOptionsNumber>({ global: true })
-export class PipeNumber {
-  async execute(_options: IPipeOptionsNumber, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
-    if (!user || user.name !== 'number') this.app.throw(403);
-    // next
-    return next();
+class PipeNumber {
+  async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
+    const valueNew = Number(value);
+    if (Number.isNaN(valueNew)) this.app.throw(400);
+    return valueNew;
   }
 }
 ```
 
-- `getCurrentUser`: Get the current user
+- `TypePipeNumberData`: Input parameter type
+- `TypePipeNumberResult`: Result type
+- `IPipeOptionsNumber`: Defines pipe parameters
+- `transform`: Parameter evaluation and conversion
 
 ## Using Pipe
 
@@ -42,13 +48,13 @@ Unlike local pipe, the system automatically loads global pipes and makes them ef
 
 You can define parameters for pipe, allowing for more flexible configuration of pipe logic
 
-For example, define the `name` parameter for the number pipe to control the username that needs to be judged
+For example, define the `errorCode` parameter for the number pipe. If the incoming request parameter is not of type number, an exception is thrown with the error code `errorCode`
 
 ### 1. Defining parameter types
 
 ``` diff
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
-+ name: string;
++ errorCode: number;
 }
 ```
 
@@ -56,8 +62,7 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 
 ``` diff
 @Pipe<IPipeOptionsNumber>({
-  global: true,
-+ name: 'number',
++ errorCode: 400,
 })
 ```
 
@@ -65,20 +70,19 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 
 ``` diff
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
-  name: string;
+  errorCode: number;
 }
 
 @Pipe<IPipeOptionsNumber>({
   global: true,
-  name: 'number',
+  errorCode: 400,
 })
-export class PipeNumber extends BeanBase implements IPipeExecute {
-  async execute(options: IPipeOptionsNumber, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'number') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
-    // next
-    return next();
+export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
+  async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
+    const valueNew = Number(value);
+-   if (Number.isNaN(valueNew)) this.app.throw(400);
++   if (Number.isNaN(valueNew)) this.app.throw(options.errorCode);
+    return valueNew;
   }
 }
 ```
@@ -89,9 +93,9 @@ You can specify global pipe parameters for a specific API
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.pipeGlobal('demo-student:number', { name: 'other-name' })
-  async findMany() {}
+  @Web.get(':id')
++ @Aspect.pipeGlobal('demo-student:number', { errorCode: 500 })
+  async findOne(id: number) {}
 }
 ```
 
@@ -108,7 +112,7 @@ Pipe parameters can be configured in App config
 config.onions = {
   pipe: {
     'demo-student:number': {
-      name: 'other-name',
+      errorCode: 500,
     },
   },
 };
@@ -124,26 +128,26 @@ Since global pipes ard loaded and enabled by default, VonaJS provides two parame
 
 ### 1. dependencies
 
-For example, the system has a built-in global pipe `a-user:passport`, and we hope that the loading order is as follows: `a-user:passport` > `Current`
+For example, the system has a built-in global pipe `a-xxx:yyy`, and we hope that the loading order is as follows: `a-xxx:yyy` > `Current`
 
 ``` diff
 @Pipe({
   global: true,
-+ dependencies: 'a-user:passport',
-  name: 'number',
++ dependencies: 'a-xxx:yyy',
+  errorCode: 400,
 })
 class PipeNumber {}
 ```
 
 ### 2. dependents
 
-The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-user:passport`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-xxx:yyy`
 
 ``` diff
 @Pipe({
   global: true,
-+ dependents: 'a-user:passport',
-  name: 'number',
++ dependents: 'a-xxx:yyy',
+  errorCode: 400,
 })
 class PipeNumber {}
 ```
@@ -158,9 +162,9 @@ You can control `enable/disable` of global pipe for certain APIs
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
+  @Web.get(':id')
 + @Aspect.pipeGlobal('demo-student:number', { enable: false })
-  async findMany() {}
+  async findOne(id: number) {}
 }
 ```
 
@@ -220,8 +224,8 @@ You can directly inspect the currently effective global pipe list in the Control
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-  async findMany() {
+  @Web.get(':id')
+  async findOne(id: number)() {
 +   this.bean.onion.pipe.inspect();
   }
 }
@@ -231,6 +235,6 @@ class ControllerStudent {
 - `.pipe`: Get the Service instance related to the pipe
 - `.inspect`: Output the currently effective global pipe list
 
-When accessing the `findMany` API, the current list of global pipe in effect will be automatically output to the console, as shown below:
+When accessing the `findOne` API, the current list of global pipe in effect will be automatically output to the console, as shown below:
 
 ![](../../../assets/img/aop/pipe-1.png)
