@@ -116,7 +116,7 @@ class ZodTransformNameCapitalize {
 ``` diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowerCase: true })) student: DtoStudentCreate) {}
 }
 ```
 
@@ -130,8 +130,8 @@ class ControllerStudent {
 // onions
 config.onions = {
   zodTransform: {
-    'demo-student:nameExists': {
-      errorMessage: 'Student Exists!!!',
+    'demo-student:nameCapitalize': {
+      lowerCase: true,
     },
   },
 };
@@ -140,4 +140,3 @@ config.onions = {
 ### 6. 参数优先级
 
 `使用时指定参数` > `App config配置` > `参数缺省值`
-
