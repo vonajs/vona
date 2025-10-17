@@ -64,13 +64,13 @@ class ControllerStudent {
 
 可以为 Zod Transform 定义参数，通过参数更灵活的配置 Zod Transform 逻辑
 
-比如，为 `nameExists` zod transform 定义`lowerCase`参数，用于指定是否将首字符转为小写
+比如，为 `nameCapitalize` zod transform 定义`lowercase`参数，用于指定是否将首字符转为小写
 
 ### 1. 定义参数类型
 
 ``` diff
 export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
-+ lowerCase: boolean;
++ lowercase: boolean;
 }
 ```
 
@@ -78,7 +78,7 @@ export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransfo
 
 ``` diff
 @ZodTransform<IZodTransformOptionsNameCapitalize>({
-+ lowerCase: false,
++ lowercase: false,
 })
 ```
 
@@ -92,11 +92,11 @@ export interface TypeZodTransformNameCapitalizeData { name: string }
 export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
 
 export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
-  lowerCase: boolean;
+  lowercase: boolean;
 }
 
 @ZodTransform<IZodTransformOptionsNameCapitalize>({
-  lowerCase: false,
+  lowercase: false,
 })
 class ZodTransformNameCapitalize {
   async execute(
@@ -104,7 +104,7 @@ class ZodTransformNameCapitalize {
     options: IZodTransformOptionsNameCapitalize,
   ): Promise<TypeZodTransformNameCapitalizeResult> {
 -   return { ...value, name: toUpperCaseFirstChar(value.name) };
-+   return { ...value, name: options.lowerCase ? toLowerCaseFirstChar(value.name) : toUpperCaseFirstChar(value.name) };
++   return { ...value, name: options.lowercase ? toLowerCaseFirstChar(value.name) : toUpperCaseFirstChar(value.name) };
   }
 }
 ```
@@ -116,7 +116,7 @@ class ZodTransformNameCapitalize {
 ``` diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowerCase: true })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
 }
 ```
 
@@ -131,7 +131,7 @@ class ControllerStudent {
 config.onions = {
   zodTransform: {
     'demo-student:nameCapitalize': {
-      lowerCase: true,
+      lowercase: true,
     },
   },
 };

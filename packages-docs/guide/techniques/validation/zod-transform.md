@@ -9,7 +9,7 @@ For example, create a Zod Transform `nameCapitalize` in the module demo-student 
 ### 1. Cli command
 
 ``` bash
-$ vona :create:bean zodTransform nameExists --module=demo-student
+$ vona :create:bean zodTransform nameCapitalize --module=demo-student
 ```
 
 ### 2. Menu command
@@ -21,28 +21,29 @@ Context Menu - [Module Path]: `Vona Bean/Zod Transform`
 ## Zod Transform Definition
 
 ``` typescript
-export interface TypeZodTransformNameExistsData { name: string }
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {}
+export interface TypeZodTransformNameCapitalizeData { name: string }
 
-@ZodTransform<IZodTransformOptionsNameExists>()
-class ZodTransformNameExists {
-  async execute(value: TypeZodTransformNameExistsData, transformmentCtx: TypeTransformmentCtx, _options: IZodTransformOptionsNameExists) {
-    const student = await this.scope.model.student.getByName(value.name);
-    if (student) {
-      transformmentCtx.addIssue({
-        code: 'custom',
-        message: 'Student Exists',
-        path: ['name'],
-      });
-    }
+export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
+
+export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {}
+
+@ZodTransform<IZodTransformOptionsNameCapitalize>()
+class ZodTransformNameCapitalize {
+  async execute(
+    value: TypeZodTransformNameCapitalizeData,
+    _options: IZodTransformOptionsNameCapitalize,
+  ): Promise<TypeZodTransformNameCapitalizeResult> {
+    return { ...value, name: toUpperCaseFirstChar(value.name) };
   }
 }
 ```
 
-- `TypeZodTransformNameExistsData`: Input parameter type
-- `IZodTransformOptionsNameExists`: Defines Zod Transform parameters
-- `execute`: Validates the input parameter. If the student already exists, `transformmentCtx.addIssue` is called to generate a custom error message
+- `TypeZodTransformNameCapitalizeData`: Input parameter type
+- `TypeZodTransformNameCapitalizeResult`: Result type
+- `IZodTransformOptionsNameCapitalize`: Defines Zod Transform parameters
+- `execute`: Transform the input parameters
 
 ## Using Zod Transform
 
@@ -52,58 +53,58 @@ import { v } from 'vona-module-a-openapi';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameExists')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameCapitalize')) student: DtoStudentCreate) {}
 }
 ```
 
 - `v.transform`: This function is used to use Zod Transform. Simply pass the Zod Transform name
-  - The `nameExists` Zod Transform belongs to the `demo-student` module, so the full name is `demo-student:nameExists`
+  - The `nameCapitalize` Zod Transform belongs to the `demo-student` module, so the full name is `demo-student:nameCapitalize`
 
 ## Zod Transform Parameters
 
 You can define parameters for Zod Transform, allowing for more flexible configuration of Zod Transform logic
 
-For example, define the `errorMessage` parameter for the `nameExists` Zod Transform to provide custom error message
+For example, define the `lowercase` parameter for the `nameCapitalize` Zod Transform to specify whether to convert the first character to lowercase
 
 ### 1. Defining parameter types
 
 ``` diff
-export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {
-+ errorMessage: string;
+export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
++ lowercase: boolean;
 }
 ```
 
 ### 2. Providing default values ​​for parameters
 
 ``` diff
-@ZodTransform<IZodTransformOptionsNameExists>({
-+ errorMessage: 'Student Exists',
+@ZodTransform<IZodTransformOptionsNameCapitalize>({
++ lowercase: false,
 })
 ```
 
 ### 3. Using Parameters
 
 ``` diff
-export interface TypeZodTransformNameExistsData { name: string }
+import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export interface IZodTransformOptionsNameExists extends IDecoratorZodTransformOptions {
-  errorMessage: string;
+export interface TypeZodTransformNameCapitalizeData { name: string }
+
+export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
+
+export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
+  lowercase: boolean;
 }
 
-@ZodTransform<IZodTransformOptionsNameExists>({
-  errorMessage: 'Student Exists',
+@ZodTransform<IZodTransformOptionsNameCapitalize>({
+  lowercase: false,
 })
-class ZodTransformNameExists {
-  async execute(value: TypeZodTransformNameExistsData, transformmentCtx: TypeTransformmentCtx, options: IZodTransformOptionsNameExists) {
-    const student = await this.scope.model.student.getByName(value.name);
-    if (student) {
-      transformmentCtx.addIssue({
-        code: 'custom',
--       message: 'Student Exists',
-+       message: options.errorMessage,
-        path: ['name'],
-      });
-    }
+class ZodTransformNameCapitalize {
+  async execute(
+    value: TypeZodTransformNameCapitalizeData,
+    options: IZodTransformOptionsNameCapitalize,
+  ): Promise<TypeZodTransformNameCapitalizeResult> {
+-   return { ...value, name: toUpperCaseFirstChar(value.name) };
++   return { ...value, name: options.lowercase ? toLowerCaseFirstChar(value.name) : toUpperCaseFirstChar(value.name) };
   }
 }
 ```
@@ -115,7 +116,7 @@ You can specify Zod Transform parameters when using
 ``` diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
 }
 ```
 
@@ -129,8 +130,8 @@ Zod Transform parameters can be configured in App config
 // onions
 config.onions = {
   zodTransform: {
-    'demo-student:nameExists': {
-      errorMessage: 'Student Exists!!!',
+    'demo-student:nameCapitalize': {
+      lowercase: true,
     },
   },
 };
