@@ -149,3 +149,26 @@ The automatically generated Swagger/Openapi are as follows:
 * Chinese: http://localhost:7102/swagger/json?x-vona-locale=zh-cn
 
 ![](../../../assets/img/openapi/openapi-9.png)
+
+## Swagger/Openapi Configuration
+
+`Swagger/Openapi` capabilities are provided by the `a-openapi` module, so you can modify the `a-openapi` module configuration in App Config
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-openapi': {
+    generateDocument: {
+      V31: {
+        info: {
+          version: '5.0.0',
+          title: 'Vona',
+          description: 'Vona API',
+        },
+      },
+    },
+  },
+};
+```

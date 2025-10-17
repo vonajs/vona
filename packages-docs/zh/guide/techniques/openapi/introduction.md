@@ -149,3 +149,26 @@ class ControllerStudent3 {
 * 中文：http://localhost:7102/swagger/json?x-vona-locale=zh-cn
 
 ![](../../../assets/img/openapi/openapi-9.png)
+
+## Swagger/Openapi配置
+
+Swagger/Openapi 能力由模块`a-openapi`提供，因此可以在 App Config 中修改`a-openapi`的模块配置
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-openapi': {
+    generateDocument: {
+      V31: {
+        info: {
+          version: '5.0.0',
+          title: 'Vona',
+          description: 'Vona API',
+        },
+      },
+    },
+  },
+};
+```
