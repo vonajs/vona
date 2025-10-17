@@ -21,9 +21,7 @@ $ vona :create:bean zodRefine nameExists --module=demo-student
 ## Zod Refine定义
 
 ``` typescript
-import type { DtoStudentCreate } from '../dto/studentCreate.ts';
-
-export type TypeZodRefineNameExistsData = DtoStudentCreate;
+export interface TypeZodRefineNameExistsData { name: string }
 
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {}
 
@@ -48,7 +46,98 @@ class ZodRefineNameExists {
 
 ## 使用Zod Refine
 
+``` diff
+import { v } from 'vona-module-a-openapi';
 
+@Controller()
+class ControllerStudent {
+  @Web.post()
++ async create(@Arg.body(v.refine('demo-student:nameExists')) student: DtoStudentCreate) {}
+}
+```
 
+- `v.refine`: 此工具函数用于使用 Zod Refine，只需传入 Zod Refine 的名称
+  - `nameExists` zod refine 属于模块`demo-student`，因此完整的名称是`demo-student:nameExists`
+
+## Zod Refine参数
+
+可以为 Zod Refine 定义参数，通过参数更灵活的配置 Zod Refine 逻辑
+
+比如，为 `nameExists` zod refine 定义`errorMessage`参数，用于提供自定义错误消息
+
+### 1. 定义参数类型
+
+``` diff
+export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
++ errorMessage: string;
+}
+```
+
+### 2. 提供参数缺省值
+
+``` diff
+@ZodRefine<IZodRefineOptionsNameExists>({
++ errorMessage: 'Student Exists',
+})
+```
+
+### 3. 使用参数
+
+``` diff
+export interface TypeZodRefineNameExistsData { name: string }
+
+export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
+  errorMessage: string;
+}
+
+@ZodRefine<IZodRefineOptionsNameExists>({
+  errorMessage: 'Student Exists',
+})
+class ZodRefineNameExists {
+  async execute(value: TypeZodRefineNameExistsData, refinementCtx: TypeRefinementCtx, options: IZodRefineOptionsNameExists) {
+    const student = await this.scope.model.student.getByName(value.name);
+    if (student) {
+      refinementCtx.addIssue({
+        code: 'custom',
+-       message: 'Student Exists',
++       message: options.errorMessage,
+        path: ['name'],
+      });
+    }
+  }
+}
+```
+
+### 4. 使用时指定参数
+
+可以在使用时指定 Zod Refine 参数
+
+``` diff
+class ControllerStudent {
+  @Web.post()
++ async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
+}
+```
+
+### 5. App config配置
+
+可以在 App config 中配置 Zod Refine 参数
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// onions
+config.onions = {
+  zodRefine: {
+    'demo-student:nameExists': {
+      errorMessage: 'Student Exists!!!',
+    },
+  },
+};
+```
+
+### 6. 参数优先级
+
+`使用时指定参数` > `App config配置` > `参数缺省值`
 
 
