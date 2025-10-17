@@ -1,6 +1,6 @@
 # Zod Refine
 
-可以使用`Zod Refine`实现更灵活的验证逻辑
+可以使用`Zod Refine`实现更灵活的验证规则
 
 ## 创建Zod Refine
 
@@ -139,5 +139,3 @@ config.onions = {
 ### 6. 参数优先级
 
 `使用时指定参数` > `App config配置` > `参数缺省值`
-
-
