@@ -150,7 +150,7 @@ The automatically generated Swagger/Openapi are as follows:
 
 ![](../../../assets/img/openapi/openapi-9.png)
 
-## Swagger/Openapi Configuration
+## Configuration
 
 `Swagger/Openapi` capabilities are provided by the `a-openapi` module, so you can modify the `a-openapi` module configuration in App Config
 

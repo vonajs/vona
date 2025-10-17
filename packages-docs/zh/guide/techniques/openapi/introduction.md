@@ -150,7 +150,7 @@ class ControllerStudent3 {
 
 ![](../../../assets/img/openapi/openapi-9.png)
 
-## Swagger/Openapi配置
+## 配置
 
 Swagger/Openapi 能力由模块`a-openapi`提供，因此可以在 App Config 中修改`a-openapi`的模块配置
 
