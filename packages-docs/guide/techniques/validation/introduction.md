@@ -68,7 +68,15 @@ class ControllerStudent3 {
 }
 ```
 
-## 4. Special tool: Array
+## 4. Decorator: @Arg.queryPro
+
+The decorator `@Arg.queryPro` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
+
+- See:
+  - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
+  - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
+
+## 4. Tool: v.array
 
 For Array type parameters, Vona also provides convenient tools. For example, we require `ids` to be `number[]`:
 
@@ -99,22 +107,82 @@ class ControllerStudent3 {
 
 These utility methods for extending Zod Schema are grouped into `v` to reduce the mental burden
 
-## `v` tool list
+## Decorator List
 
 |Name|Description|
 |--|--|
-|@v.array|array|
-|@v.default|default|
-|@v.object|object|
-|@v.optional|optional|
-|@v.email|email|
-|@v.url|url|
-|@v.uuid|uuid|
-|@v.ip|ip|
-|@v.min|min|
-|@v.max|max|
-|@v.tableIdentity|tableIdentity|
-|@v.openapi|openapi|
-|@v.title|title|
-|@v.description|description|
-|@v.example|example|
+|@Arg.param|从Request Params中取值|
+|@Arg.query|从Request Query中取值|
+|@Arg.body|从Request Body中取值|
+|@Arg.headers|从Request Headers中取值|
+|@Arg.fields|从Request Upload中取值|
+|@Arg.field|从Request Upload中取值|
+|@Arg.files|从Request Upload中取值|
+|@Arg.file|从Request Upload中取值|
+|@Arg.user|取得当前用户|
+|@Arg.queryPro|从Request Query中取值|
+
+## 工具清单
+
+### 1. Basic Tools
+
+|名称|说明|
+|--|--|
+|v.required|为`不允许为空`提供自定义错误消息，否则使用Zod内置的错误消息|
+|v.optional|optional|
+|v.default|default|
+|v.object|object|
+|v.strictObject|Same as `z.strictObject(schema.shape)`|
+|v.looseObject|Same as `z.looseObject(schema.shape)`|
+|v.array|array|
+|v.lazy|创建Lazy Schema|
+
+### 2. String Tools
+
+|名称|说明|
+|--|--|
+|v.email|email|
+|v.url|url|
+|v.uuid|uuid|
+|v.ipv4|ipv4|
+|v.ipv6|ipv6|
+|v.min|min，同时支持`string/number`|
+|v.max|max，同时支持`string/number`|
+|v.trim|trim|
+|v.toLowerCase|toLowerCase|
+|v.toUpperCase|toUpperCase|
+|v.lowercase|lowercase|
+|v.uppercase|uppercase|
+|v.regex|regex|
+
+### 3. Openapi Tools
+
+|名称|说明|
+|--|--|
+|v.openapi|openapi|
+|v.title|title|
+|v.description|description|
+|v.example|example|
+
+### 4. Serializer Tools
+
+|名称|说明|
+|--|--|
+|serializerExclude|排除字段|
+|serializerTransform|转换字段值|
+|serializerSensitive|脱敏处理|
+|serializerGetter|使用Getter生成字段值|
+
+### 5. Zod Tools
+
+|名称|说明|
+|--|--|
+|v.refine|提供Zod Refine能力|
+|v.transform|提供Zod Transform能力|
+
+### 4. Special Tools
+
+|名称|说明|
+|--|--|
+|v.tableIdentity|tableIdentity。基于当前系统配置，提供`number`或者`bigint`的校验规则|
+|v.captcha|提供验证码选项|

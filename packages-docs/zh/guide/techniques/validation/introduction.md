@@ -70,7 +70,7 @@ class ControllerStudent3 {
 
 ## 4. 装饰器：@Arg.queryPro
 
-参数装饰器`@Arg.queryPro`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
+装饰器`@Arg.queryPro`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
 
 - 参见:
   - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
