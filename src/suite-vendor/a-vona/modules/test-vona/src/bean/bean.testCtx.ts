@@ -12,13 +12,13 @@ class TestCtx0 extends BeanBase {
     this._name = '';
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     if (prop === 'magicSelf') {
       return this['magic:self'];
     }
   }
 
-  protected __set__(prop, value): boolean {
+  protected __set__(prop: string, value: any): boolean {
     if (prop === 'magicSelf') {
       this['magic:self'] = value;
       return true;

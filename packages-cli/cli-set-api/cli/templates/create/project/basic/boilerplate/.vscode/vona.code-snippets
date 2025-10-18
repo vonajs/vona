@@ -121,6 +121,27 @@
     ],
     "description": "aopmethod.set"
   },
+  "aopmagic.get": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmagicget",
+    "body": [
+      "protected __get__(prop: string) {",
+      "  $0",
+      "}"
+    ],
+    "description": "aopmagic.get"
+  },
+  "aopmagic.set": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmagicset",
+    "body": [
+      "protected __set__(prop: string, value: any): boolean {",
+      "  $0",
+      "  return false;",
+      "}"
+    ],
+    "description": "aopmagic.set"
+  },
   "record.flavor": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordflavor",
