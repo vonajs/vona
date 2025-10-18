@@ -19,8 +19,8 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopinit",
     "body": [
-      "protected __init__(_args: Parameters<any>, next: Function, _receiver: any) {",
-      "  await next();",
+      "protected __init__: AopActionInit<BeanClassSome> = (_args, next, _receiver) => {",
+      "  next();",
       "  $0",
       "}"
     ],
