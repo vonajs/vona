@@ -105,6 +105,21 @@ class ControllerStudent3 {
 }
 ```
 
+## 5. 工具：v.lazy
+
+对于可能导致循环引用的 Class，可以使用`v.lazy`创建 lazy schema：
+
+``` typescript
+@Dto()
+export class DtoUserLazy {
+  @Api.field(v.optional(), v.lazy(() => DtoUserLazy))
+  user?: DtoUserLazy;
+
+  @Api.field(v.optional(), v.array(v.lazy(() => DtoRoleLazy)))
+  roles?: DtoRoleLazy[];
+}
+```
+
 ## 装饰器清单
 
 |名称|说明|

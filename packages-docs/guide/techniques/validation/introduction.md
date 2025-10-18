@@ -105,6 +105,21 @@ class ControllerStudent3 {
 }
 ```
 
+## 5. Tool: v.lazy
+
+For classes that may cause circular references, you can use `v.lazy` to create a lazy schema:
+
+``` typescript
+@Dto()
+export class DtoUserLazy {
+  @Api.field(v.optional(), v.lazy(() => DtoUserLazy))
+  user?: DtoUserLazy;
+
+  @Api.field(v.optional(), v.array(v.lazy(() => DtoRoleLazy)))
+  roles?: DtoRoleLazy[];
+}
+```
+
 ## Decorator List
 
 |Name|Description|
