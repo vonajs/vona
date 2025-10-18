@@ -1,4 +1,4 @@
-import type { NextSync } from 'vona';
+import type { Next } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
@@ -9,7 +9,7 @@ export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
 
 @Filter<IFilterOptionsError>({ global: true, logs: {} })
 export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IFilterHtml {
-  async log(err: Error, options: IFilterOptionsError, next: NextSync): Promise<boolean> {
+  async log(err: Error, options: IFilterOptionsError, next: Next): Promise<boolean> {
     // 403->401
     if (err.code === 403) {
       if (!this.bean.passport.isAuthenticated) {
@@ -38,7 +38,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     return true;
   }
 
-  async json(err: Error, _options: IFilterOptionsError, next: NextSync): Promise<boolean> {
+  async json(err: Error, _options: IFilterOptionsError, next: Next): Promise<boolean> {
     // next
     if ((await next()) === true) return true;
 
@@ -74,7 +74,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     return true;
   }
 
-  async html(err: Error, _options: IFilterOptionsError, next: NextSync): Promise<boolean> {
+  async html(err: Error, _options: IFilterOptionsError, next: Next): Promise<boolean> {
     // next
     if ((await next()) === true) return true;
 

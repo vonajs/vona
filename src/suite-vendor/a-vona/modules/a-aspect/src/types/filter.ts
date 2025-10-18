@@ -1,4 +1,4 @@
-import type { NextSync, OmitNever } from 'vona';
+import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsBase, IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
@@ -7,15 +7,15 @@ export interface IFilterRecordLocal {}
 export type IFilterRecord = IFilterRecordGlobal & IFilterRecordLocal;
 
 export interface IFilterLog {
-  log(err: Error, options: IDecoratorFilterOptions, next: NextSync): Promise<boolean>;
+  log(err: Error, options: IDecoratorFilterOptions, next: Next): Promise<boolean>;
 }
 
 export interface IFilterJson {
-  json(err: Error, options: IDecoratorFilterOptions, next: NextSync): Promise<boolean>;
+  json(err: Error, options: IDecoratorFilterOptions, next: Next): Promise<boolean>;
 }
 
 export interface IFilterHtml {
-  html(err: Error, options: IDecoratorFilterOptions, next: NextSync): Promise<boolean>;
+  html(err: Error, options: IDecoratorFilterOptions, next: Next): Promise<boolean>;
 }
 
 export interface IDecoratorFilterOptions extends IOnionOptionsEnable {}
