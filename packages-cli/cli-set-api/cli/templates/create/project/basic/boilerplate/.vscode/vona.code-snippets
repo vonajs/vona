@@ -111,6 +111,16 @@
     ],
     "description": "aopmethod.get"
   },
+  "aopmethod.set": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmethodset",
+    "body": [
+      "set(_options: IDecoratorAopMethodOptions, value: any, next: NextSync, _receiver: any, _prop: string): boolean {",
+      "  return next(value);",
+      "}"
+    ],
+    "description": "aopmethod.set"
+  },
   "record.flavor": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordflavor",
