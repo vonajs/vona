@@ -4,10 +4,10 @@ import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
 class AopSimpleBase extends BeanAopBase {
-  actionSync(_args, next) {
+  actionSync: AopAction<BeanTestCtx, 'actionSync', string> = (_args, next, _receiver) => {
     const result = next();
     return `${result}:simpleaop`;
-  }
+  };
 }
 
 @Aop({ match: 'testCtx', dependencies: 'test-vona:regExp', meta: { mode: 'test' } })

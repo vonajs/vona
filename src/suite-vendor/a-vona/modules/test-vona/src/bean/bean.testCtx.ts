@@ -30,7 +30,7 @@ class TestCtx0 extends BeanBase {
     this._name = value;
   }
 
-  actionSync({ a, b }: any) {
+  actionSync({ a, b }: { a: number; b: number }) {
     return a + b;
   }
 
@@ -38,7 +38,7 @@ class TestCtx0 extends BeanBase {
     return Promise.resolve(a + b);
   }
 
-  async actionAsync2({ a, b }: any) {
+  async actionAsync2({ a, b }: { a: number; b: number }) {
     const name = this.name;
     const value = await this.actionAsync({ a, b });
     return `${name}:${value}`;
@@ -46,7 +46,7 @@ class TestCtx0 extends BeanBase {
 }
 
 class TestCtx1 extends TestCtx0 {
-  async actionAsync3({ a, b }: any) {
+  async actionAsync3({ a, b }: { a: number; b: number }) {
     return await this.actionAsync2({ a, b });
   }
 }

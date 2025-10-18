@@ -41,12 +41,23 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopaction",
     "body": [
-      "async action(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "action: AopAction<BeanTestCtx, 'action'> = async (_args, next, _receiver) => {",
       "  $0",
       "  return await next();",
       "}"
     ],
     "description": "aop.action"
+  },
+  "aop.actionsync": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopactionsync",
+    "body": [
+      "action: AopAction<BeanTestCtx, 'action'> = (_args, next, _receiver) => {",
+      "  $0",
+      "  return next();",
+      "}"
+    ],
+    "description": "aop.actionsync"
   },
   "record.flavor": {
     "scope": "typescript,typescriptreact",

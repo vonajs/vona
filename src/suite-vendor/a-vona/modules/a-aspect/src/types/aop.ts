@@ -1,12 +1,14 @@
-import type { IBeanRecord, Next, OmitNever } from 'vona';
+import type { IBeanRecord, Next, NextSync, OmitNever } from 'vona';
 import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
 
+export type AopActionNext<P, R> = R extends Promise<any> ? Next<P, Awaited<R>> : NextSync<P, R>;
+
 export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> =
-  (args: Parameters<T[NAME]>, next: Next<Parameters<T[NAME]>, Awaited<ReturnType<T[NAME]>>>, _receiver: T)
-  => RESULT extends undefined ? ReturnType<T[NAME]> : Promise<RESULT>;
-export type AopActionSync<T extends {}, NAME extends keyof T, RESULT = undefined> =
-  (args: Parameters<T[NAME]>, next: Next<Parameters<T[NAME]>, ReturnType<T[NAME]>>, _receiver: T)
-  => RESULT extends undefined ? ReturnType<T[NAME]> : RESULT;
+  // @ts-ignore ignore
+  (args: Parameters<T[NAME]>, next: AopActionNext<Parameters<T[NAME]>, ReturnType<T[NAME]>>, _receiver: T)
+  // @ts-ignore ignore
+  => RESULT extends undefined ? ReturnType<T[NAME]> : ReturnType<T[NAME]> extends Promise<any> ? Promise<RESULT> : RESULT;
+
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
