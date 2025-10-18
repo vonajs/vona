@@ -41,7 +41,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopaction",
     "body": [
-      "action: AopAction<BeanTestCtx, 'action'> = async (_args, next, _receiver) => {",
+      "action: AopAction<BeanClassSome, 'action'> = async (_args, next, _receiver) => {",
       "  $0",
       "  return await next();",
       "}"
@@ -52,7 +52,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopactionsync",
     "body": [
-      "action: AopAction<BeanTestCtx, 'action'> = (_args, next, _receiver) => {",
+      "action: AopAction<BeanClassSome, 'action'> = (_args, next, _receiver) => {",
       "  $0",
       "  return next();",
       "}"
