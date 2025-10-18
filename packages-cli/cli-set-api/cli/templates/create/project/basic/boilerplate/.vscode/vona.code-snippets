@@ -37,6 +37,27 @@
     ],
     "description": "aop.__dispose__"
   },
+  "aop.__get__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopget",
+    "body": [
+      "protected __get__(prop: string, next: NextSync) {",
+      "  const value = next();",
+      "  return value;",
+      "}"
+    ],
+    "description": "aop.__get__"
+  },
+  "aop.__set__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopset",
+    "body": [
+      "protected __set__(prop: string, value: any, next: NextSync): boolean {",
+      "  return next(value);",
+      "}"
+    ],
+    "description": "aop.__set__"
+  },
   "aop.getter": {
     "scope": "typescript,typescriptreact",
     "prefix": "aopgetter",
