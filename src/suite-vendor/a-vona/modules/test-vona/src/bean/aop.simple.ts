@@ -1,4 +1,4 @@
-import type { AopAction } from 'vona-module-a-aspect';
+import type { AopAction, AopActionInit } from 'vona-module-a-aspect';
 import type { BeanTestCtx } from 'vona-module-test-vona';
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
@@ -50,6 +50,10 @@ export class AopSimple extends AopSimpleBase {
     value = parts.join(':');
     return next(value);
   }
+
+  protected __init__: AopActionInit<BeanTestCtx> = (_args, next, _receiver) => {
+    next();
+  };
 
   actionAsync: AopAction<BeanTestCtx, 'actionAsync', string> = async (_args, next, _receiver) => {
     const result = await next(_args);

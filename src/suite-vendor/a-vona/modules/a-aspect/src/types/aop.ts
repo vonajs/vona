@@ -3,6 +3,9 @@ import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, Servic
 
 export type AopActionNext<P, R> = R extends Promise<any> ? Next<P, Awaited<R>> : NextSync<P, R>;
 
+// @ts-ignore ignore
+export type AopActionInit<T extends {}> = AopAction<T, '__init__'>;
+
 export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
   (args: Parameters<T[NAME]>, next: AopActionNext<Parameters<T[NAME]>, ReturnType<T[NAME]>>, _receiver: T)
