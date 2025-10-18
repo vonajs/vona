@@ -105,7 +105,7 @@ class ControllerStudent3 {
 }
 ```
 
-## 5. Tool: v.lazy
+## 6. Tool: v.lazy
 
 For classes that may cause circular references, you can use `v.lazy` to create a lazy schema:
 

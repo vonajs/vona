@@ -105,7 +105,7 @@ class ControllerStudent3 {
 }
 ```
 
-## 5. 工具：v.lazy
+## 6. 工具：v.lazy
 
 对于可能导致循环引用的 Class，可以使用`v.lazy`创建 lazy schema：
 
