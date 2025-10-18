@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -68,13 +69,14 @@ export class CliCreateBean extends BeanCliBase {
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
   }
 
-  private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets', customPath?: string) {
+  private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets', custom?: string) {
+    const type2 = custom ? `${type}${toUpperCaseFirstChar(custom)}` : type;
     const result = {};
     // scenes
     const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     for (const sceneName in onionScenesMeta) {
       const onionSceneMeta = onionScenesMeta[sceneName];
-      const scenePath = customPath || onionSceneMeta[type];
+      const scenePath = onionSceneMeta[type2];
       if (scenePath) {
         result[sceneName] = path.join(onionSceneMeta.module!.root, scenePath);
       }
@@ -83,7 +85,7 @@ export class CliCreateBean extends BeanCliBase {
     const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
     for (const sceneName in onionMetasMeta) {
       const onionMetaMeta = onionMetasMeta[sceneName];
-      const scenePath = customPath || onionMetaMeta[type];
+      const scenePath = onionMetaMeta[type2];
       if (scenePath) {
         result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, scenePath);
       }

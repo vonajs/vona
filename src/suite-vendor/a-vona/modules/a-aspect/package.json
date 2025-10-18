@@ -12,7 +12,8 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorFilterOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/filter/boilerplate"
+        "boilerplate": "cli/filter/boilerplate",
+        "boilerplateGlobal": "cli/filterGlobal/boilerplate"
       },
       "pipe": {
         "hasLocal": true,
@@ -21,7 +22,8 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorPipeOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/pipe/boilerplate"
+        "boilerplate": "cli/pipe/boilerplate",
+        "boilerplateGlobal": "cli/pipeGlobal/boilerplate"
       },
       "interceptor": {
         "hasLocal": true,
@@ -29,7 +31,8 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorInterceptorOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/interceptor/boilerplate"
+        "boilerplate": "cli/interceptor/boilerplate",
+        "boilerplateGlobal": "cli/interceptorGlobal/boilerplate"
       },
       "guard": {
         "hasLocal": true,
@@ -37,7 +40,8 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorGuardOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/guard/boilerplate"
+        "boilerplate": "cli/guard/boilerplate",
+        "boilerplateGlobal": "cli/guardGlobal/boilerplate"
       },
       "middleware": {
         "hasLocal": true,
@@ -45,7 +49,8 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/middleware/boilerplate"
+        "boilerplate": "cli/middleware/boilerplate",
+        "boilerplateGlobal": "cli/middlewareGlobal/boilerplate"
       },
       "middlewareSystem": {
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareSystemOptions",
