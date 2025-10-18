@@ -8,6 +8,10 @@ class TestCtx0 extends BeanBase {
     this._name = moduleName;
   }
 
+  protected async __dispose__() {
+
+  }
+
   protected __get__(prop) {
     if (prop === 'magicSelf') {
       return this['magic:self'];

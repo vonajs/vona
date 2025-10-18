@@ -55,6 +55,10 @@ export class AopSimple extends AopSimpleBase {
     next();
   };
 
+  protected __dispose__: AopActionInit<BeanTestCtx> = async (_args, next, _receiver) => {
+    await next();
+  };
+
   actionAsync: AopAction<BeanTestCtx, 'actionAsync', string> = async (_args, next, _receiver) => {
     const result = await next(_args);
     return `${result}:simpleaop`;

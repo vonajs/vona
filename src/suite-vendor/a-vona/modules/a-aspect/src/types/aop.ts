@@ -5,6 +5,8 @@ export type AopActionNext<P, R> = R extends Promise<any> ? Next<P, Awaited<R>> :
 
 // @ts-ignore ignore
 export type AopActionInit<T extends {}> = AopAction<T, '__init__'>;
+// @ts-ignore ignore
+export type AopActionDispose<T extends {}> = AopAction<T, '__dispose__'>;
 
 export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
