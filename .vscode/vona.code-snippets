@@ -31,8 +31,8 @@
     "prefix": "aopdispose",
     "body": [
       "protected __dispose__: AopActionDispose<BeanClassSome> = async (_args, next, _receiver) => {",
-      "  await next();",
       "  $0",
+      "  await next();",
       "}"
     ],
     "description": "aop.__dispose__"
