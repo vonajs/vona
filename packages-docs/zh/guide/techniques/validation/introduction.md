@@ -105,8 +105,6 @@ class ControllerStudent3 {
 }
 ```
 
-这些用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而减轻心智负担
-
 ## 装饰器清单
 
 |名称|说明|
@@ -123,6 +121,8 @@ class ControllerStudent3 {
 |@Arg.queryPro|从Request Query中取值|
 
 ## 工具清单
+
+VonaJS 将用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而减轻心智负担
 
 ### 1. Basic Tools
 

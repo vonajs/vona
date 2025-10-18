@@ -105,8 +105,6 @@ class ControllerStudent3 {
 }
 ```
 
-These utility methods for extending Zod Schema are grouped into `v` to reduce the mental burden
-
 ## Decorator List
 
 |Name|Description|
@@ -123,6 +121,8 @@ These utility methods for extending Zod Schema are grouped into `v` to reduce th
 |@Arg.queryPro|Gets the value from the request query|
 
 ## Tool List
+
+VonaJS puts all the utility methods for extending Zod Schema into the group `v`, thus reducing the mental burden
 
 ### 1. Basic Tools
 
