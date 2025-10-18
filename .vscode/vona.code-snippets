@@ -101,6 +101,16 @@
     ],
     "description": "aop.actionsync"
   },
+  "aopmethod.get": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmethodget",
+    "body": [
+      "get(_options: IDecoratorAopMethodOptions, next: NextSync, _receiver: any, _prop: string) {",
+      "  return next();",
+      "}"
+    ],
+    "description": "aopmethod.get"
+  },
   "record.flavor": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordflavor",
