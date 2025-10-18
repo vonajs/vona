@@ -48,6 +48,16 @@
     ],
     "description": "aop.getter"
   },
+  "aop.setter": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopsetter",
+    "body": [
+      "protected __set_xxx__: AopActionSetter<BeanClassSome, 'xxx'> = function (value, next, _receiver) {",
+      "  return next(value);",
+      "}"
+    ],
+    "description": "aop.setter"
+  },
   "aop.action": {
     "scope": "typescript,typescriptreact",
     "prefix": "aopaction",

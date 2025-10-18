@@ -1,5 +1,5 @@
 import type { NextSync } from 'vona';
-import type { AopAction, AopActionDispose, AopActionGetter, AopActionInit } from 'vona-module-a-aspect';
+import type { AopAction, AopActionDispose, AopActionGetter, AopActionInit, AopActionSetter } from 'vona-module-a-aspect';
 import type { BeanTestCtx } from 'vona-module-test-vona';
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
@@ -42,7 +42,7 @@ export class AopSimple extends AopSimpleBase {
     return `${value}:simpleaop`;
   };
 
-  protected __set_name__(value, next): boolean {
+  protected __set_name__: AopActionSetter<BeanTestCtx, 'name'> = function (value, next, _receiver) {
     const parts = value.split(':');
     const index = parts.indexOf('simpleaop');
     if (index > -1) {
@@ -50,7 +50,7 @@ export class AopSimple extends AopSimpleBase {
     }
     value = parts.join(':');
     return next(value);
-  }
+  };
 
   protected __init__: AopActionInit<BeanTestCtx> = (_args, next, _receiver) => {
     next();

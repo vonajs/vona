@@ -20,6 +20,12 @@ export type AopActionGetter<T extends {}, NAME extends keyof T, RESULT = undefin
   // @ts-ignore ignore
   => RESULT extends undefined ? T[NAME] : T[NAME] extends Promise<any> ? Promise<RESULT> : RESULT;
 
+export type AopActionSetter<T extends {}, NAME extends keyof T, DATA = undefined> =
+  // @ts-ignore ignore
+  (value: DATA extends undefined ? T[NAME] : T[NAME] extends Promise<any> ? Promise<DATA> : DATA, next: AopActionNext<T[NAME], boolean>, _receiver: T)
+  // @ts-ignore ignore
+  => boolean;
+
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
