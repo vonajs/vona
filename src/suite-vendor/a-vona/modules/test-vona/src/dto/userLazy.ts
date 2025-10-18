@@ -10,7 +10,7 @@ export class DtoUserLazy {
   @Api.field()
   name: string;
 
-  @Api.field(v.lazy(v.optional(), () => DtoUserLazy))
+  @Api.field(v.optional(), v.lazy(() => DtoUserLazy))
   user?: DtoUserLazy;
 
   @Api.field(v.optional(), v.array(v.lazy(() => DtoRoleLazy)))
