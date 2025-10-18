@@ -464,7 +464,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.2
       vona-cli-set-api:
-        specifier: ^1.0.226
+        specifier: ^1.0.227
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -873,7 +873,7 @@ importers:
         specifier: ^5.0.60
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.128
+        specifier: ^5.0.129
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1158,7 +1158,7 @@ importers:
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
-        specifier: ^5.0.18
+        specifier: ^5.0.19
         version: link:modules/a-aspect
       vona-module-a-aspectutils:
         specifier: workspace:^
