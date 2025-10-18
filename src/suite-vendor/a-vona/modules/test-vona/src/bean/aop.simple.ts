@@ -1,4 +1,4 @@
-import type { AopAction, AopActionInit } from 'vona-module-a-aspect';
+import type { AopAction, AopActionDispose, AopActionInit } from 'vona-module-a-aspect';
 import type { BeanTestCtx } from 'vona-module-test-vona';
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
@@ -55,7 +55,7 @@ export class AopSimple extends AopSimpleBase {
     next();
   };
 
-  protected __dispose__: AopActionInit<BeanTestCtx> = async (_args, next, _receiver) => {
+  protected __dispose__: AopActionDispose<BeanTestCtx> = async (_args, next, _receiver) => {
     await next();
   };
 

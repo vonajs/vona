@@ -9,7 +9,7 @@ class TestCtx0 extends BeanBase {
   }
 
   protected async __dispose__() {
-
+    this._name = '';
   }
 
   protected __get__(prop) {
