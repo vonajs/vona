@@ -30,7 +30,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopdispose",
     "body": [
-      "protected __dispose__: AopActionDispose<BeanTestCtx> = async (_args, next, _receiver) => {",
+      "protected __dispose__: AopActionDispose<BeanClassSome> = async (_args, next, _receiver) => {",
       "  await next();",
       "  $0",
       "}"
