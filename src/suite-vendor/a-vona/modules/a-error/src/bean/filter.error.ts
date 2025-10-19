@@ -6,6 +6,7 @@ import { Filter } from 'vona-module-a-aspect';
 export type TypeFilterOptionsErrorLogs = {
   [K in keyof TypeAllErrors]?: boolean;
 };
+
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
   logs: TypeFilterOptionsErrorLogs;
 }
