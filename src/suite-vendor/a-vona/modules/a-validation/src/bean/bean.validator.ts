@@ -2,7 +2,7 @@ import type { Constructable } from 'vona';
 import type { ValidatorOptions } from '../types/validatorOptions.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
-import { BeanBase, HttpStatus } from 'vona';
+import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $schema } from 'vona-module-a-openapi';
 import { z } from 'zod';
@@ -50,7 +50,7 @@ export class BeanValidator extends BeanBase {
     value: V,
     options?: Partial<ValidatorOptions>,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
-    const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
+    const errorHttpStatusCode = options?.errorHttpStatusCode ?? 400;
     if (!schema) return value as any;
     const result = await schema?.safeParseAsync(value);
     if (result.success) return result.data as any;
@@ -69,7 +69,7 @@ export class BeanValidator extends BeanBase {
         }
       };
     }
-    return this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
+    return this.app.throw(422, issues);
   }
 
   // private _isPrimitiveValue(value: unknown): boolean {

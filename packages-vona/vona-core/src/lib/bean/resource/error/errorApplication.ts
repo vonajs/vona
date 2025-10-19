@@ -1,4 +1,4 @@
-import type { HttpStatus } from '../../../../types/index.ts';
+import type { TypeErrorsInternal } from 'vona';
 import type { IErrorObject } from './errorObject.ts';
 
 type TypeErrorMethodNames = 'parseFail' | 'parseSuccess';
@@ -12,7 +12,7 @@ interface TypeErrorMethodFail {
 }
 
 interface TypeErrorMethodThrow {
-  (code: HttpStatus | number | string, ...args: any[]): never;
+  (code: keyof TypeErrorsInternal | number, ...args: any[]): never;
 }
 
 interface TypeErrorMethodSuccess {

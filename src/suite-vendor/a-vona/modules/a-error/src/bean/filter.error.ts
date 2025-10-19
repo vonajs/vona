@@ -1,6 +1,6 @@
 import type { Next, TypeAllErrors } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
-import { BeanBase, cast, HttpStatus } from 'vona';
+import { BeanBase, cast, errorsInternal } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
 
 export type TypeFilterOptionsErrorLogs = {
@@ -104,7 +104,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       }
       // 4xx
       this.ctx.status = status;
-      this.ctx.body = `<h2>${status} ${HttpStatus[status]}</h2>`;
+      this.ctx.body = `<h2>${status} ${errorsInternal[status]}</h2>`;
       return true;
     }
     // show simple error format for test

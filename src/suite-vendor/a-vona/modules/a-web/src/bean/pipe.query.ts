@@ -6,7 +6,7 @@ import type { ValidatorOptions } from 'vona-module-a-validation';
 import type z from 'zod';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
-import { BeanBase, cast, HttpStatus } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 export type TypePipeQueryData = unknown;
@@ -37,7 +37,7 @@ const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 @Pipe<IPipeOptionsQuery>({
   // ValidatorOptions
   disableErrorMessages: false,
-  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+  errorHttpStatusCode: 400,
   loose: false,
   strict: false,
 })

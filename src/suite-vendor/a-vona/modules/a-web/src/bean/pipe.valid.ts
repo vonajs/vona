@@ -1,7 +1,7 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
-import { BeanBase, HttpStatus } from 'vona';
+import { BeanBase } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 export type TypePipeValidData = unknown;
@@ -13,7 +13,7 @@ export interface IPipeOptionsValid extends IDecoratorPipeOptions, IDecoratorPipe
 @Pipe<IPipeOptionsValid>({
   // ValidatorOptions
   disableErrorMessages: false,
-  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+  errorHttpStatusCode: 400,
   loose: false,
   strict: false,
 })

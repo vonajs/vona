@@ -1,4 +1,3 @@
-import { HttpStatus } from '../../../../types/enum/httpStatus.ts';
 import { BeanSimple } from '../../beanSimple.ts';
 
 export class ErrorClass extends BeanSimple {
@@ -65,8 +64,7 @@ export class ErrorClass extends BeanSimple {
 
     let message: string;
     if (typeof code === 'number' && code <= 1000) {
-      const httpStatusMessageKey = `HTTPSTATUS_${HttpStatus[code]}`;
-      message = this.app.meta.locale.getText(true, undefined, undefined, httpStatusMessageKey, ...args);
+      message = this.app.meta.locale.getText(true, undefined, undefined, String(code), ...args);
     } else {
       message = this.app.meta.locale.getText(false, module, undefined, text || code, ...args);
     }

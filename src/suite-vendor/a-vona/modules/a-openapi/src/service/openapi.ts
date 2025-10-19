@@ -18,7 +18,6 @@ import {
   appResource,
   BeanBase,
   cast,
-  HttpStatus,
   LocaleModuleNameSeparator,
 } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -398,7 +397,7 @@ export class ServiceOpenapi extends BeanBase {
       },
     };
     // responses
-    const responses = { [HttpStatus.OK]: response };
+    const responses = { 200: response };
     return responses;
   }
 
