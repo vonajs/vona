@@ -18,26 +18,26 @@ export type TypeEntityTableColumnNamesOfModels<A extends BeanModelMeta[]> = Type
 //   [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>;
 // }>>;
 export type TypeEntityTableColumnNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TModelOptions['relations'] extends {} ?
-    TypeRecordValues<{
+  TModelOptions['relations'] extends {}
+    ? TypeRecordValues<{
       [RelationName in keyof TModelOptions['relations']]: TypeEntityTableColumnNames<TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>>
     }> : never;
 
 export type TypeEntityTableColumnsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TModelOptions['relations'] extends {} ?
-    TypeEntityTableColumnsOfModelDirect<TypeRecordModelValues<{
+  TModelOptions['relations'] extends {}
+    ? TypeEntityTableColumnsOfModelDirect<TypeRecordModelValues<{
       [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
     }>> : {};
 
 export type TypeModelsOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TModelOptions['relations'] extends {} ?
-    TypeRecordModelValues<{
+  TModelOptions['relations'] extends {}
+    ? TypeRecordModelValues<{
       [RelationName in keyof TModelOptions['relations']]: TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>;
     }> : never;
 
 export type TypeModelOnionNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
-  TModelOptions['relations'] extends {} ?
-    TypeRecordValues<{
+  TModelOptions['relations'] extends {}
+    ? TypeRecordValues<{
       [RelationName in keyof TModelOptions['relations']]: TypeUtilGetModelOnionName<TypeUtilGetRelationModel<TModelOptions['relations'][RelationName]>>;
     }> : undefined; // not use never
 
@@ -56,10 +56,10 @@ export type TypeModelOnionNamesOfModelClass<TModel extends BeanModelMeta> =
   TypeModelOnionNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
 
 export type TypeEntityTableColumnNamesOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> =
-    TypeEntityTableColumnNames<TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>[TypeSymbolKeyEntityMeta]>;
+  TypeEntityTableColumnNames<TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>[TypeSymbolKeyEntityMeta]>;
 
 export type TypeEntityTableColumnsOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> =
-    TypeEntityTableColumnsOfModelDirect<TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>>;
+  TypeEntityTableColumnsOfModelDirect<TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>>;
 
 export type TypeEntityTableColumnNamesOfModelSelf<TModel extends BeanModelMeta> =
   TypeEntityTableColumnNames<TModel[TypeSymbolKeyEntityMeta]> | TypeEntityTableColumnNamesShort<TModel[TypeSymbolKeyEntity]>;
@@ -71,18 +71,18 @@ export type TypeEntityTableColumnNamesOfGeneral<
   TModelJoins extends TypeModelsClassLikeGeneral | undefined,
   TModel extends BeanModelMeta | undefined,
 > =
-  TModel extends BeanModelMeta ?
-    TModelJoins extends TypeModelsClassLikeGeneral ?
-        (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>) :
-        (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>)
+  TModel extends BeanModelMeta
+    ? TModelJoins extends TypeModelsClassLikeGeneral
+      ? (TypeEntityTableColumnNamesOfModelJoins<TModelJoins> | TypeEntityTableColumnNamesOfModelSelf<TModel>)
+      : (TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>)
     : undefined;
 
 export type TypeEntityTableColumnsOfGeneral<
   TModelJoins extends TypeModelsClassLikeGeneral | undefined,
   TModel extends BeanModelMeta | undefined,
 > =
-  TModel extends BeanModelMeta ?
-    TModelJoins extends TypeModelsClassLikeGeneral ?
-        (TypeEntityTableColumnsOfModelJoins<TModelJoins> & TypeEntityTableColumnsOfModelSelf<TModel>) :
-        (TypeEntityTableColumnsOfModelClass<TModel> & TypeEntityTableColumnsOfModelSelf<TModel>)
+  TModel extends BeanModelMeta
+    ? TModelJoins extends TypeModelsClassLikeGeneral
+      ? (TypeEntityTableColumnsOfModelJoins<TModelJoins> & TypeEntityTableColumnsOfModelSelf<TModel>)
+      : (TypeEntityTableColumnsOfModelClass<TModel> & TypeEntityTableColumnsOfModelSelf<TModel>)
     : undefined;
