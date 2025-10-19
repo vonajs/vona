@@ -4,7 +4,7 @@ import type { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.ts';
 
 export type TypeModuleResourceLocales = Record<string, object>;
 export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;
-export type TypeModuleResourceErrors = Record<number, string>;
+export type TypeModuleResourceErrors = Record<string, number>;
 export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
 export type TypeModuleResourceConfig = (app: VonaApplication) => object | Promise<object>;
 
@@ -12,7 +12,7 @@ export interface IModuleResource {
   Main: new () => IModuleMain;
   Monkey: new () => IMonkeyModule & IMonkeySystem;
   locales: TypeModuleResourceLocales;
-  Errors: TypeModuleResourceErrors;
+  errors: TypeModuleResourceErrors;
   config: TypeModuleResourceConfig;
   constants: unknown;
   controllers: Constructable[];

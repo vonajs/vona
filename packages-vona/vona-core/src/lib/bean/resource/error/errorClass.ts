@@ -53,7 +53,9 @@ export class ErrorClass extends BeanSimple {
     const ebError = this.ebErrors[module];
 
     // convert from enum
+    let text;
     if (ebError && code && typeof code === 'string') {
+      text = code;
       code = ebError[code];
     }
 
@@ -66,7 +68,7 @@ export class ErrorClass extends BeanSimple {
       const httpStatusMessageKey = `HTTPSTATUS_${HttpStatus[code]}`;
       message = this.app.meta.locale.getText(true, undefined, undefined, httpStatusMessageKey, ...args);
     } else {
-      message = this.app.meta.locale.getText(false, module, undefined, ebError ? ebError[code] : code, ...args);
+      message = this.app.meta.locale.getText(false, module, undefined, text || code, ...args);
     }
 
     code = __combineErrorCode(module, code);

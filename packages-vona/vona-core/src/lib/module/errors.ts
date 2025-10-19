@@ -31,7 +31,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       const ebError = (ebErrors[module.info.relativeName] = {});
 
       // module errors
-      if (module.resource.Errors) deepExtend(ebError, module.resource.Errors);
+      if (module.resource.errors) deepExtend(ebError, module.resource.errors);
     }
   }
 }
