@@ -1,6 +1,7 @@
 /** bean merge: bean.instance */
 
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
+import type { errorsInternal } from './resource/error/errorInternal.ts';
 
 export interface IBeanRecordGlobal {}
 export interface IBeanRecordGeneral {}
@@ -21,3 +22,12 @@ export type TypeBeanScopeConfigKeys = keyof IBeanScopeConfig;
 
 export interface IBeanScopeLocale {}
 export type TypeBeanScopeLocaleKeys = keyof IBeanScopeLocale;
+
+export interface IBeanScopeErrors {}
+export type TypeBeanScopeErrorsKeys = keyof IBeanScopeErrors;
+
+export type TypeScopesErrorsHelper<ModuleName extends keyof IBeanScopeErrors> = {
+  [K in keyof IBeanScopeErrors[ModuleName] as `${ModuleName}:${IBeanScopeErrors[ModuleName][K]}` ]: K
+};
+export type TypeScopesErrors = TypeScopesErrorsHelper<keyof IBeanScopeErrors>;
+export type TypeAllErrors = TypeScopesErrors & typeof errorsInternal;

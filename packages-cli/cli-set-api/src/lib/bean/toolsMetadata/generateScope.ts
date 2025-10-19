@@ -81,6 +81,14 @@ declare module 'vona' {
   }`
       : ''
   }
+
+  ${
+    options.errors
+      ? `export interface IBeanScopeErrors {
+    '${moduleName}': typeof errors;
+  }`
+      : ''
+  }
 }
 ${
   options.locales

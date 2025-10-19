@@ -1,13 +1,16 @@
-import type { Next } from 'vona';
+import type { Next, TypeAllErrors } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
 import { BeanBase, cast, HttpStatus } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
 
+export type TypeFilterOptionsErrorLogs = {
+  [K in keyof TypeAllErrors]?: boolean;
+};
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
-  logs: Record<number | string, boolean>;
+  logs: TypeFilterOptionsErrorLogs;
 }
 
-@Filter<IFilterOptionsError>({ global: true, logs: {} })
+@Filter<IFilterOptionsError>({ global: true, logs: { } })
 export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IFilterHtml {
   async log(err: Error, options: IFilterOptionsError, next: Next): Promise<boolean> {
     // 403->401
