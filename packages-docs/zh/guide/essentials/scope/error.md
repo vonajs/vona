@@ -12,7 +12,7 @@
 
 定义 Error 分为两个步骤，以模块`home-index`为例：
 
-### 1. 定义Error枚举
+### 1. 定义Errors常量
 
 `src/suite/a-home/modules/home-index/src/config/errors.ts`
 

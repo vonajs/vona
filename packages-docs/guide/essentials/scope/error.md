@@ -12,7 +12,7 @@ Context Menu - [Module Path]: `Vona Init/Error`
 
 It takes two steps to define `Error`. Taking the module `home-index` as an example:
 
-### 1. Define Error enum
+### 1. Define Errors
 
 `src/suite/a-home/modules/home-index/src/config/errors.ts`
 
