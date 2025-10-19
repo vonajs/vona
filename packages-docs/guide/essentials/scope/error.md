@@ -17,9 +17,9 @@ It takes two steps to define `Error`. Taking the module `home-index` as an examp
 `src/suite/a-home/modules/home-index/src/config/errors.ts`
 
 ```typescript{2}
-export enum Errors {
-  ErrorTest = 1001,
-}
+export const errors = {
+  ErrorTest: 1001,
+} as const;
 ```
 
 - Convention: Error Code > 1000

@@ -259,7 +259,7 @@ export const locales = {
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';
-import type { Errors } from '../config/errors.ts';
+import type { errors } from '../config/errors.ts';
 /** error: end */
 /** main: begin */
 export * from '../main.ts';
@@ -274,7 +274,7 @@ export class ScopeModuleAOrm extends BeanScopeBase {}
 export interface ScopeModuleAOrm {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
-error: TypeModuleErrors<typeof Errors>;
+error: TypeModuleErrors<typeof errors>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 service: IModuleService;
 broadcast: IModuleBroadcast;

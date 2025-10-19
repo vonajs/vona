@@ -1,3 +1,3 @@
-export enum Errors {
-  TheAuthShouldBeEnabled = 1001,
-}
+export const errors = {
+  TheAuthShouldBeEnabled: 1001,
+} as const;

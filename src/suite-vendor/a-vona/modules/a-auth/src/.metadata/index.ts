@@ -428,7 +428,7 @@ export const locales = {
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';
-import type { Errors } from '../config/errors.ts';
+import type { errors } from '../config/errors.ts';
 /** error: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
@@ -440,7 +440,7 @@ export class ScopeModuleAAuth extends BeanScopeBase {}
 export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
-error: TypeModuleErrors<typeof Errors>;
+error: TypeModuleErrors<typeof errors>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
