@@ -13,6 +13,7 @@ export type TypeModelGroupRelationResult<TRecord, TOptions> =
 
 export type TypeModelGroupRelationResultGroups<TRecord, Aggrs, Groups, Columns> =
   Groups extends string | string[]
+    // eslint-disable-next-line style/indent-binary-ops
     ? TypeModelGroupRelationResultGroupsObject<TRecord, Groups, Columns> & (Aggrs extends {}
       ? TypeRecordAggrsValuesToObject<TypeRecordAggrsValues<
         { [K in keyof Aggrs]: K extends string ? TypeModelAggrRelationResultAggr<K, TypeUtilAggrPrepareColumns<Aggrs[K]>> : never }
