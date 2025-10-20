@@ -11,9 +11,23 @@ Filter 通常用于对 Error 的处理和日志输出。为了简化使用，Von
 禁用 errorCode: `422`
 
 ``` diff
+import { Aspect } from 'vona-module-a-aspect';
+
 class ControllerStudent {
   @Web.post()
 + @Aspect.filterGlobal('a-error:error', { logs: { 422: false } })
+  async create(){}
+}
+```
+
+简化写法：
+
+``` diff
+import { Core } from 'vona-module-a-core';
+
+class ControllerStudent {
+  @Web.post()
++ @Core.error({ logs: { 422: false } })
   async create(){}
 }
 ```
@@ -27,9 +41,26 @@ class ControllerStudent {
 由于`ErrorTest`的错误码是`1001`，因此可以禁用 errorCode: `demo-student:1001`
 
 ``` diff
+import { Aspect } from 'vona-module-a-aspect';
+
 class ControllerStudent {
   @Web.post()
 + @Aspect.filterGlobal('a-error:error', { logs: { 'demo-student:1001': false } })
+  async create(){
+    // throw demo-student:1001
++   this.scope.error.ErrorTest.throw();
+  }
+}
+```
+
+简化写法：
+
+``` diff
+import { Core } from 'vona-module-a-core';
+
+class ControllerStudent {
+  @Web.post()
++ @Core.error({ logs: { 'demo-student:1001': false } })
   async create(){
     // throw demo-student:1001
 +   this.scope.error.ErrorTest.throw();
