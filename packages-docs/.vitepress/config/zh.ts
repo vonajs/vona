@@ -159,6 +159,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Zod整合', link: 'pipe-zod' },
               ],
             },
+            {
+              text: 'Filter',
+              items: [
+                { text: '一般用法', link: 'filter-general' },
+                { text: '局部过滤器', link: 'filter-local' },
+                { text: '全局过滤器', link: 'filter-global' },
+              ],
+            },
           ],
         },
         {

@@ -159,6 +159,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Zod Integration', link: 'pipe-zod' },
               ],
             },
+            {
+              text: 'Filter',
+              items: [
+                { text: 'General Usage', link: 'filter-general' },
+                { text: 'Local Filter', link: 'filter-local' },
+                { text: 'Global Filter', link: 'filter-global' },
+              ],
+            },
           ],
         },
         {
