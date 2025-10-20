@@ -6,5 +6,5 @@ export interface IModuleError {
 }
 
 export type TypeModuleErrors<T> = {
-  [prop in string & keyof T]: IModuleError;
+  [prop in keyof T]: IModuleError;
 };
