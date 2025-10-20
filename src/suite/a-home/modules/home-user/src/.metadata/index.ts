@@ -595,6 +595,8 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'home-user': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {

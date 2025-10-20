@@ -370,6 +370,8 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-instance': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-instance::${K}` {

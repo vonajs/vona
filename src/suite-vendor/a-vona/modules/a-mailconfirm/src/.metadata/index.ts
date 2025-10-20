@@ -216,6 +216,8 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-mailconfirm': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-mailconfirm::${K}` {

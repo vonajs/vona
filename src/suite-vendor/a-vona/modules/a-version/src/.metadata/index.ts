@@ -427,6 +427,10 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-version': (typeof locales)[TypeLocaleBase];
   }
+
+  export interface IBeanScopeErrors {
+    'a-version': typeof errors;
+  }
 }
 
 export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-version::${K}` {
