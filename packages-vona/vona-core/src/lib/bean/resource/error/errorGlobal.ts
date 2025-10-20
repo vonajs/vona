@@ -1,6 +1,8 @@
+import type { TypeScopesErrorCodes } from '../../type.ts';
+
 declare global {
   export interface Error {
-    code?: number | string | undefined;
+    code?: TypeScopesErrorCodes | number | undefined;
     status?: number | undefined;
   }
 }

@@ -1,10 +1,10 @@
-import type { Next, TypeAllErrors } from 'vona';
+import type { Next, TypeAllErrorCodes } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
 import { BeanBase, cast, errorsInternal } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
 
 export type TypeFilterOptionsErrorLogs = {
-  [K in keyof TypeAllErrors]?: boolean;
+  [K in TypeAllErrorCodes]?: boolean;
 };
 
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
@@ -34,6 +34,7 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
     // next
     if ((await next()) === true) return true;
 
+    // log
     if (options.logs[err.code!] !== false) {
       this.$logger.error(err);
     }
