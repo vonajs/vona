@@ -19,20 +19,25 @@ $ vona :create:bean filter test --module=demo-student
 ## 过滤器定义
 
 ``` typescript
-export interface IFilterOptionsAdmin extends IDecoratorFilterOptions {}
+export interface IFilterOptionsTest extends IDecoratorFilterOptions {}
 
-@Filter<IFilterOptionsAdmin>()
-class FilterAdmin {
-  async execute(_options: IFilterOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
-    if (!user || user.name !== 'admin') this.app.throw(403);
+@Filter<IFilterOptionsTest>()
+class FilterTest {
+  async log(err: Error, _options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+      console.error(`Custom Error: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
 
-- `getCurrentUser`: 取得当前用户
+- 先调用`next()`，如果返回 true，说明 Error 已经被处理，那么就直接返回
+- 处理指定的 Error，返回 true，就意味着已经处理，忽略系统默认的日志输出行为
 
 ## 使用过滤器
 
@@ -43,14 +48,14 @@ import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.filter('demo-student:admin')
-  async findMany() {}
+  @Web.post()
++ @Aspect.filter('demo-student:test')
+  async create() {}
 }
 ```
 
 - `@Aspect.filter`: 此装饰器用于使用局部过滤器，只需传入过滤器的名称
-  - admin 过滤器属于模块`demo-student`，因此完整的名称是`demo-student:admin`
+  - test 过滤器属于模块`demo-student`，因此完整的名称是`demo-student:test`
 
 ### 2. 标注控制器类
 
@@ -60,10 +65,10 @@ class ControllerStudent {
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
-+ @Aspect.filter('demo-student:admin')
++ @Aspect.filter('demo-student:test')
 class ControllerStudent {
-  @Web.get()
-  async findMany() {}
+  @Web.post()
+  async create() {}
 }
 ```
 
@@ -71,41 +76,45 @@ class ControllerStudent {
 
 可以为过滤器定义参数，通过参数更灵活的配置过滤器逻辑
 
-比如，为 admin 过滤器定义`name`参数，用于控制需要判断的用户名
+比如，为 test 过滤器定义`prefix`参数，用于控制日志输出的格式
 
 ### 1. 定义参数类型
 
 ``` diff
-export interface IFilterOptionsAdmin extends IDecoratorFilterOptions {
-+ name: string;
+export interface IFilterOptionsTest extends IDecoratorFilterOptions {
++  prefix: string;
 }
 ```
 
 ### 2. 提供参数缺省值
 
 ``` diff
-@Filter<IFilterOptionsAdmin>({
-+ name: 'admin',
+@Filter<IFilterOptionsTest>({
++ prefix: 'Custom Error',
 })
 ```
 
 ### 3. 使用参数
 
 ``` diff
-export interface IFilterOptionsAdmin extends IDecoratorFilterOptions {
-  name: string;
+export interface IFilterOptionsTest extends IDecoratorFilterOptions {
+  prefix: string;
 }
 
-@Filter<IFilterOptionsAdmin>({
-  name: 'admin',
+@Filter<IFilterOptionsTest>({
+  prefix: 'Custom Error',
 })
-export class FilterAdmin extends BeanBase implements IFilterExecute {
-  async execute(options: IFilterOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'admin') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
+export class FilterTest extends BeanBase implements IFilterLog {
+  async log(err: Error, options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+-     console.error(`Custom Error: ${err.code}, ${err.message}`);
++     console.error(`${options.prefix}: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
@@ -116,9 +125,9 @@ export class FilterAdmin extends BeanBase implements IFilterExecute {
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.filter('demo-student:admin', { name: 'other-name' })
-  async findMany() {}
+  @Web.post()
++ @Aspect.filter('demo-student:test', { prefix: 'Test Error' })
+  async create(){}
 }
 ```
 
@@ -134,8 +143,8 @@ class ControllerStudent {
 // onions
 config.onions = {
   filter: {
-    'demo-student:admin': {
-      name: 'other-name',
+    'demo-student:test': {
+      prefix: 'Test Error',
     },
   },
 };
