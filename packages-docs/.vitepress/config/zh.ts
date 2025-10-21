@@ -162,7 +162,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             {
               text: 'Filter',
               items: [
-                { text: '一般用法', link: 'filter-general' },
+                { text: '内置过滤器', link: 'filter-builtin' },
                 { text: '局部过滤器', link: 'filter-local' },
                 { text: '全局过滤器', link: 'filter-global' },
               ],

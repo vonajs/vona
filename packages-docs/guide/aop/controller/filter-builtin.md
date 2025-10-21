@@ -1,14 +1,16 @@
-# 一般用法
+# Built-in Filter
 
-Filter 通常用于对 Error 的处理和日志输出。为了简化使用，VonaJS 提供了一个内置全局 Filter: `a-error:error`。通过`a-error:error`可以满足日常的业务需求。如果需要更深入的定制，则可以创建`局部Filter`和`全局Filter`
+## Global Filter: a-error:error
 
-## 禁用日志输出
+Filters are commonly used for error handling and logging. To simplify usage, VonaJS provides a built-in global filter: `a-error:error`. `a-error:error` can meet daily business needs. If you need more in-depth customization, you can create local or global filters
 
-可以针对某个 API 禁用某些 Error 的日志输出，下面以模块 demo-student 的 create 方法为例
+## Disabling Logging
 
-### 1. 禁用内置Error
+You can disable logging for certain errors for a specific API. The following example uses the `create` method of the `demo-student` module
 
-禁用 errorCode: `422`
+### 1. Disabling Built-in Errors
+
+Disabling errorCode: `422`
 
 ``` diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -20,7 +22,7 @@ class ControllerStudent {
 }
 ```
 
-简化写法：
+Simplified:
 
 ``` diff
 import { Core } from 'vona-module-a-core';
@@ -32,13 +34,13 @@ class ControllerStudent {
 }
 ```
 
-### 2. 禁用自定义Error
+### 2. Disabling Custom Errors
 
-比如，在模块 demo-student 中有一个自定义 Error： `ErrorTest`
+For example, in the demo-student module, there is a custom Error: `ErrorTest`
 
-- 如何创建自定义 Error，参见: [Error错误异常](../../essentials/scope/error.md)
+- For how to create custom Errors, see: [Error Exception](../../essentials/scope/error.md)
 
-由于`ErrorTest`的错误码是`1001`，因此可以禁用 errorCode: `demo-student:1001`
+Since the error code for `ErrorTest` is `1001`, we can disable errorCode: `demo-student:1001`
 
 ``` diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -53,7 +55,7 @@ class ControllerStudent {
 }
 ```
 
-简化写法：
+Simplified:
 
 ``` diff
 import { Core } from 'vona-module-a-core';
@@ -70,7 +72,7 @@ class ControllerStudent {
 
 ## App Config
 
-可以在 App Config 中配置 Filter 参数，从而对所有 API 生效
+Filter parameters can be configured in App Config to apply to all APIs
 
 `src/backend/config/config/config.ts`
 
