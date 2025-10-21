@@ -52,14 +52,14 @@ class ServiceStudent {
 
 ``` diff
 class ServiceStudent {
-+ @Log()
++ @Core.log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
 
-- `@Log`：通过`AOP Method`机制实现的装饰器，可以直接提供日志能力
+- `@Core.log`：通过`AOP Method`机制实现的装饰器，可以直接提供日志能力
 
 ### 2. 魔术方法
 

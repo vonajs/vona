@@ -52,14 +52,14 @@ class ServiceStudent {
 
 ``` diff
 class ServiceStudent {
-+ @Log()
++ @Core.log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
 
-- `@Log`: A decorator implemented using the `AOP Method` mechanism directly provides logging capabilities
+- `@Core.log`: A decorator implemented using the `AOP Method` mechanism directly provides logging capabilities
 
 ### 2. Magic Method
 
