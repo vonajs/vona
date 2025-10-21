@@ -1,6 +1,6 @@
 # 一般用法
 
-Filter 通常用于对 Error 的处理和日志输出。为了简化使用，VonaJS 提供了一个内置 Filter `a-error:error`。通过`a-error:error`可以满足日常的业务需求。如果需要更深入的定制，则可以创建`局部Filter`和`全局Filter`
+Filter 通常用于对 Error 的处理和日志输出。为了简化使用，VonaJS 提供了一个内置全局 Filter: `a-error:error`。通过`a-error:error`可以满足日常的业务需求。如果需要更深入的定制，则可以创建`局部Filter`和`全局Filter`
 
 ## 禁用日志输出
 
