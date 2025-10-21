@@ -152,7 +152,7 @@ class FilterTest {}
 @Filter({
   global: true,
 + dependents: 'a-error:error',
-  name: 'test',
+  prefix: 'Custom Error',
 })
 class FilterTest {}
 ```
@@ -167,9 +167,9 @@ class FilterTest {}
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
+  @Web.post()
 + @Aspect.filterGlobal('demo-student:test', { enable: false })
-  async findMany() {}
+  async create() {}
 }
 ```
 
@@ -229,8 +229,8 @@ class FilterTest {}
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-  async findMany() {
+  @Web.post()
+  async create() {
 +   this.bean.onion.filter.inspect();
   }
 }
@@ -240,6 +240,6 @@ class ControllerStudent {
 - `.filter`: 取得与过滤器相关的 Service 实例
 - `.inspect`: 输出当前生效的全局过滤器清单
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局过滤器清单，效果如下：
+当访问`create` API 时，会自动在控制台输出当前生效的全局过滤器清单，效果如下：
 
 ![](../../../assets/img/aop/filter-1.png)
