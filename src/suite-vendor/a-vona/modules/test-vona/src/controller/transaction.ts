@@ -1,7 +1,7 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
+import { Core } from 'vona-module-a-core';
 import { Api } from 'vona-module-a-openapi';
-import { Database } from 'vona-module-a-orm';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 
@@ -13,7 +13,7 @@ export interface IControllerOptionsTransaction extends IDecoratorControllerOptio
 @Api.exclude()
 export class ControllerTransaction extends BeanBase {
   @Web.post('fail')
-  @Database.transaction()
+  @Core.transaction()
   @Passport.public()
   async fail(@Arg.body() item: object) {
     await this.bean.model.update(`${tableNameFail}` as any, item);
@@ -21,7 +21,7 @@ export class ControllerTransaction extends BeanBase {
   }
 
   @Web.post('success')
-  @Database.transaction()
+  @Core.transaction()
   @Passport.public()
   async success(@Arg.body() item: object) {
     await this.bean.model.update(tableNameSuccess as any, item);

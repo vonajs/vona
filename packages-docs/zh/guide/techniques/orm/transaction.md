@@ -10,10 +10,10 @@ Vona ORM 对数据库事务提供了完整的支持，提供了直观、优雅�
 ## 使用装饰器启用事务
 
 ``` typescript
-import { Database } from 'vona-module-a-orm';
+import { Core } from 'vona-module-a-core';
 
 class ServicePost {
-  @Database.transaction()
+  @Core.transaction()
   async transaction() {
     // insert
     const post = await this.scope.model.post.insert({
@@ -61,7 +61,7 @@ class ServicePost {
 
 ``` diff
 class ServicePost {
-  @Database.transaction({
+  @Core.transaction({
 +   isolationLevel: 'READ_COMMITTED',
 +   propagation: 'REQUIRED'
   })
@@ -145,7 +145,7 @@ Vona 系统对数据库事务与缓存进行了适配，当数据库事务失败
 
 ``` typescript
 class ServicePost {
-  @Database.transaction()
+  @Core.transaction()
   async transaction() {
     // insert
     const post = await this.scope.model.post.insert({

@@ -39,14 +39,14 @@ Implement aspect logic directly on Class Method through decorator
 
 ``` diff
 class ServiceStudent {
-+ @Database.transaction()
++ @Core.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
 
-- `@Database.transaction`: A decorator implemented through the `AOP Method` mechanism that can directly provide database transaction capabilities
+- `@Core.transaction`: A decorator implemented through the `AOP Method` mechanism that can directly provide database transaction capabilities
 
 #### Example: Logging
 

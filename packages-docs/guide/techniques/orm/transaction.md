@@ -10,10 +10,10 @@ Vona ORM provides comprehensive support for database transaction, offering intui
 ## Enabling transaction using decorator
 
 ``` typescript
-import { Database } from 'vona-module-a-orm';
+import { Core } from 'vona-module-a-core';
 
 class ServicePost {
-  @Database.transaction()
+  @Core.transaction()
   async transaction() {
     // insert
     const post = await this.scope.model.post.insert({
@@ -61,7 +61,7 @@ class ServicePost {
 
 ``` diff
 class ServicePost {
-  @Database.transaction({
+  @Core.transaction({
 +   isolationLevel: 'READ_COMMITTED',
 +   propagation: 'REQUIRED'
   })
@@ -145,7 +145,7 @@ For this scenario, Vona provides a built-in solution
 
 ``` typescript
 class ServicePost {
-  @Database.transaction()
+  @Core.transaction()
   async transaction() {
     // insert
     const post = await this.scope.model.post.insert({

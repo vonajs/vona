@@ -1,6 +1,7 @@
 import type { IFilterOptionsError } from 'vona-module-a-error';
 import type { IAopMethodOptionsLog } from 'vona-module-a-logger';
 import type { TypeUseOnionOmitOptionsGlobal } from 'vona-module-a-onion';
+import type { IAopMethodOptionsTransaction } from 'vona-module-a-orm';
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
 import { Aspect } from 'vona-module-a-aspect';
 
@@ -16,14 +17,17 @@ function Error(
   return Aspect.filterGlobal('a-error:error', options);
 }
 
-function Log(
-  options?: Partial<IAopMethodOptionsLog>,
-): MethodDecorator {
+function Log(options?: Partial<IAopMethodOptionsLog>): MethodDecorator {
   return Aspect.aopMethod('a-logger:log', options);
+}
+
+function Transaction(options?: Partial<IAopMethodOptionsTransaction>): MethodDecorator {
+  return Aspect.aopMethod('a-orm:transaction', options);
 }
 
 export const Core = {
   gate: Gate,
   error: Error,
   log: Log,
+  transaction: Transaction,
 };

@@ -31,6 +31,20 @@ import { Core } from 'vona-module-a-core';
 
 ## a-orm:transaction
 
+* 一般用法：
 
+``` typescript
+import { Aspect } from 'vona-module-a-aspect';
+
+@Aspect.aopMethod('a-orm:transaction', { isolationLevel: 'READ_COMMITTED', propagation: 'REQUIRED' })
+```
+
+* 简写方式：
+
+``` typescript
+import { Core } from 'vona-module-a-core';
+
+@Core.transaction({ isolationLevel: 'READ_COMMITTED', propagation: 'REQUIRED' })
+```
 
 ## a-caching:cachingGet

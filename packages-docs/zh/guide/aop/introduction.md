@@ -39,14 +39,14 @@ VonaJS AOP 编程包括三个方面的能力：
 
 ``` diff
 class ServiceStudent {
-+ @Database.transaction()
++ @Core.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
 
-- `@Database.transaction`：通过`AOP Method`机制实现的装饰器，可以直接提供数据库事务能力
+- `@Core.transaction`：通过`AOP Method`机制实现的装饰器，可以直接提供数据库事务能力
 
 #### 举例：日志
 

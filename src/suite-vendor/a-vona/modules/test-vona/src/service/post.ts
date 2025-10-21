@@ -2,6 +2,7 @@ import type { TableIdentity } from 'table-identity';
 import type { IQueryParams } from 'vona-module-a-orm';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { Core } from 'vona-module-a-core';
 import { $relationDynamic, Database } from 'vona-module-a-orm';
 import { ModelPost } from '../model/post.ts';
 import { ModelPostContent } from '../model/postContent.ts';
@@ -118,7 +119,7 @@ export class ServicePost extends BeanBase {
     console.log(post?.postContent?.id);
   }
 
-  @Database.transaction()
+  @Core.transaction()
   async transaction() {
     // insert
     const post = await this.scope.model.post.insert({
