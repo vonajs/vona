@@ -4,6 +4,14 @@ Modules can individually provide their own `I18n` language resources
 
 ## Initialize code skeleton
 
+### 1. Cli command
+
+``` bash
+$ vona :init:locale home-index
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Vona Init/Locale`
 :::

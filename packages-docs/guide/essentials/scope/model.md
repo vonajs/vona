@@ -4,6 +4,14 @@ Modules can individually provide their own `Models`
 
 ## Create Model
 
+### 1. Cli command
+
+``` bash
+$ vona :create:bean model menu --module=home-base
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Vona Create/Model`
 :::

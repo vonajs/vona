@@ -4,6 +4,14 @@ Modules can individually provide their own `Error` exceptions
 
 ## Initialize code skeleton
 
+### 1. Cli command
+
+``` bash
+$ vona :init:error home-index
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Vona Init/Error`
 :::

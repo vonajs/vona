@@ -4,6 +4,14 @@ Modules can individually provide their own `Constant`
 
 ## Initialize code skeleton
 
+### 1. Cli command
+
+``` bash
+$ vona :init:constant home-index
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Vona Init/Constant`
 :::
