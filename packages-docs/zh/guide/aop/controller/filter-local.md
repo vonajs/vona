@@ -2,7 +2,7 @@
 
 ## 创建过滤器
 
-比如，在模块 demo-student 中创建一个 局部过滤器: `test`，对自定义错误`demo-student:1001`定制日志输出
+比如，在模块 demo-student 中创建一个局部过滤器: `test`，对自定义错误`demo-student:1001`定制日志输出
 
 ### 1. Cli命令
 

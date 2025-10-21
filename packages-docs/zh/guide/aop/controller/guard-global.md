@@ -2,7 +2,7 @@
 
 ## 创建守卫
 
-比如，在模块 demo-student 中创建一个 全局守卫: `admin`
+比如，在模块 demo-student 中创建一个全局守卫: `admin`，用于判断当前用户名是否为`admin`，如果不是则抛出异常
 
 ### 1. Cli命令
 
