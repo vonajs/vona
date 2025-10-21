@@ -48,3 +48,19 @@ import { Core } from 'vona-module-a-core';
 ```
 
 ## a-caching:cachingGet
+
+* 一般用法：
+
+``` typescript
+import { Aspect } from 'vona-module-a-aspect';
+
+@Aspect.aopMethod('a-caching:cachingGet', { cacheName: 'module-name:xxx' })
+```
+
+* 简写方式：
+
+``` typescript
+import { Caching } from 'vona-module-a-caching';
+
+@Caching.get({ cacheName: 'module-name:xxx' })
+```
