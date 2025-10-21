@@ -464,7 +464,7 @@ importers:
         specifier: ^11.2.0
         version: 11.3.2
       vona-cli-set-api:
-        specifier: ^1.0.237
+        specifier: ^1.0.238
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -873,7 +873,7 @@ importers:
         specifier: ^5.0.63
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.134
+        specifier: ^5.0.135
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1194,7 +1194,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.77
+        specifier: ^5.0.78
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.17
@@ -1221,7 +1221,7 @@ importers:
         specifier: ^5.0.18
         version: link:modules/a-jwt
       vona-module-a-logger:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:modules/a-logger
       vona-module-a-mail:
         specifier: workspace:^
@@ -1248,7 +1248,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.72
+        specifier: ^5.0.73
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.17
@@ -1287,7 +1287,7 @@ importers:
         specifier: ^5.0.25
         version: link:modules/a-swagger
       vona-module-a-upload:
-        specifier: ^5.0.16
+        specifier: ^5.0.17
         version: link:modules/a-upload
       vona-module-a-user:
         specifier: ^5.0.28
