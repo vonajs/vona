@@ -76,13 +76,13 @@ class ControllerStudent {
 
 You can define parameters for filter, allowing for more flexible configuration of filter logic
 
-For example, define the `name` parameter for the test filter to control the username that needs to be judged
+For example, define the `prefix` parameter for the test filter to customize the format of the log output
 
 ### 1. Defining parameter types
 
 ``` diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {
-+ name: string;
++  prefix: string;
 }
 ```
 
@@ -90,7 +90,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 
 ``` diff
 @Filter<IFilterOptionsTest>({
-+ name: 'test',
++ prefix: 'Custom Error',
 })
 ```
 
@@ -98,19 +98,23 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 
 ``` diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {
-  name: string;
+  prefix: string;
 }
 
 @Filter<IFilterOptionsTest>({
-  name: 'test',
+  prefix: 'Custom Error',
 })
-export class FilterTest extends BeanBase implements IFilterExecute {
-  async execute(options: IFilterOptionsTest, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'test') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
+export class FilterTest extends BeanBase implements IFilterLog {
+  async log(err: Error, options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+-     console.error(`Custom Error: ${err.code}, ${err.message}`);
++     console.error(`${options.prefix}: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
@@ -121,9 +125,9 @@ You can specify local filter parameters for a specific API
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.filter('demo-student:test', { name: 'other-name' })
-  async findMany() {}
+  @Web.post()
++ @Aspect.filter('demo-student:test', { prefix: 'Test Error' })
+  async create(){}
 }
 ```
 
@@ -140,7 +144,7 @@ Filter parameters can be configured in App config
 config.onions = {
   filter: {
     'demo-student:test': {
-      name: 'other-name',
+      prefix: 'Test Error',
     },
   },
 };
