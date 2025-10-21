@@ -1,3 +1,4 @@
+import type { IInterceptorOptionsCaptchaVerify } from 'vona-module-a-captcha';
 import type { IFilterOptionsError } from 'vona-module-a-error';
 import type { IAopMethodOptionsLog } from 'vona-module-a-logger';
 import type { TypeUseOnionOmitOptionsGlobal } from 'vona-module-a-onion';
@@ -25,9 +26,14 @@ function Transaction(options?: Partial<IAopMethodOptionsTransaction>): MethodDec
   return Aspect.aopMethod('a-orm:transaction', options);
 }
 
+function CaptchaVerify(options?: Partial<IInterceptorOptionsCaptchaVerify>): MethodDecorator {
+  return Aspect.interceptor('a-captcha:captchaVerify', options);
+}
+
 export const Core = {
   gate: Gate,
   error: Error,
   log: Log,
   transaction: Transaction,
+  captchaVerify: CaptchaVerify,
 };
