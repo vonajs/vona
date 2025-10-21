@@ -8,7 +8,8 @@ export interface IAopMethodOptionsCachingClear extends IDecoratorAopMethodOption
 
 @AopMethod<IAopMethodOptionsCachingClear>()
 export class AopMethodCachingClear extends BeanAopMethodBase implements IAopMethodExecute {
-  async execute(options: IAopMethodOptionsCachingClear, _args: [], next: Next, _receiver: any, _prop: string): Promise<any> {
+  async execute(options: IAopMethodOptionsCachingClear, _args: [], next: Next, receiver: any, prop: string): Promise<any> {
+    if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // next
     const value = await next();
     // cache

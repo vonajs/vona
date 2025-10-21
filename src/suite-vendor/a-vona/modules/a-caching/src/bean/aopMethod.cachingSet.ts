@@ -13,6 +13,7 @@ export interface IAopMethodOptionsCachingSet extends IDecoratorAopMethodOptions,
 @AopMethod<IAopMethodOptionsCachingSet>()
 export class AopMethodCachingSet extends BeanAopMethodBase implements IAopMethodExecute {
   async execute(options: IAopMethodOptionsCachingSet, args: [], next: Next, receiver: any, prop: string): Promise<any> {
+    if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // next
     const value = await next();
     // key

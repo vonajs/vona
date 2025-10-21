@@ -10,6 +10,7 @@ export interface IAopMethodOptionsCachingGet extends IDecoratorAopMethodOptions,
 @AopMethod<IAopMethodOptionsCachingGet>()
 export class AopMethodCachingGet extends BeanAopMethodBase implements IAopMethodExecute {
   async execute(options: IAopMethodOptionsCachingGet, args: [], next: Next, receiver: any, prop: string): Promise<any> {
+    if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // key
     const key = combineCachingKey(options, args, receiver, prop);
     if (!isCachingKeyValid(key)) return next();
