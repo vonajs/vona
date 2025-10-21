@@ -172,7 +172,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Internal Aspect',
           base: '/guide/aop/internal/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: 'AOP Method', link: 'aop-method' },
+            { text: 'Magic Method', link: 'magic-method' },
+            { text: 'Built-in Aspect', link: 'builtin' },
+          ],
         },
         {
           text: 'External Aspect',

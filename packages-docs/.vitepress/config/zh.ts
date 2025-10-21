@@ -172,7 +172,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '内部切面',
           base: '/zh/guide/aop/internal/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: 'AOP Method', link: 'aop-method' },
+            { text: '魔术方法', link: 'magic-method' },
+            { text: '内置切面', link: 'builtin' },
+          ],
         },
         {
           text: '外部切面',
