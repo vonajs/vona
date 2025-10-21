@@ -3,6 +3,7 @@ import type { IFilterOptionsError } from 'vona-module-a-error';
 import type { IAopMethodOptionsLog } from 'vona-module-a-logger';
 import type { TypeUseOnionOmitOptionsGlobal } from 'vona-module-a-onion';
 import type { IAopMethodOptionsTransaction } from 'vona-module-a-orm';
+import type { IInterceptorOptionsUpload } from 'vona-module-a-upload';
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
 import { Aspect } from 'vona-module-a-aspect';
 
@@ -30,10 +31,15 @@ function CaptchaVerify(options?: Partial<IInterceptorOptionsCaptchaVerify>): Met
   return Aspect.interceptor('a-captcha:captchaVerify', options);
 }
 
+function FileUpload(options?: Partial<IInterceptorOptionsUpload>): MethodDecorator {
+  return Aspect.interceptor('a-upload:upload', options);
+}
+
 export const Core = {
   gate: Gate,
   error: Error,
   log: Log,
   transaction: Transaction,
   captchaVerify: CaptchaVerify,
+  fileUpload: FileUpload,
 };

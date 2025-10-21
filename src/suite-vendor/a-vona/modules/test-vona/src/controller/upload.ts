@@ -2,8 +2,9 @@ import type { IUploadField, IUploadFile } from 'vona-module-a-upload';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
+import { Core } from 'vona-module-a-core';
 import { Api, v } from 'vona-module-a-openapi';
-import { File, SymbolUploadValue } from 'vona-module-a-upload';
+import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -14,7 +15,7 @@ export interface IControllerOptionsUpload extends IDecoratorControllerOptions {}
 export class ControllerUpload extends BeanBase {
   @Web.post('fields')
   @Passport.public()
-  @File.upload()
+  @Core.fileUpload()
   @Api.contentType('application/json')
   fields(
     @Arg.fields() fields: IUploadField[],
@@ -29,7 +30,7 @@ export class ControllerUpload extends BeanBase {
 
   @Web.post('file')
   @Passport.public()
-  @File.upload()
+  @Core.fileUpload()
   @Api.contentType('application/json')
   file(@Arg.field('name', v.default('zhennann')) name: string, @Arg.file('welcome') file: IUploadFile) {
     assert.equal(name, 'zhennann');
@@ -39,7 +40,7 @@ export class ControllerUpload extends BeanBase {
 
   @Web.post('files')
   @Passport.public()
-  @File.upload()
+  @Core.fileUpload()
   @Api.contentType('application/json')
   files(
     @Arg.files(v.title('more files')) files: IUploadFile[],
