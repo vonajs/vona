@@ -24,9 +24,9 @@ import { Aspect } from 'vona-module-a-aspect';
 * 简写方式：
 
 ``` typescript
-import { Log } from 'vona-module-a-logger';
+import { Core } from 'vona-module-a-core';
 
-@Log({ level: 'info' })
+@Core.log({ level: 'info' })
 ```
 
 ## a-orm:transaction
