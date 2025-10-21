@@ -2,7 +2,7 @@
 
 ## Create Filter
 
-For example, create a global filter `test` in the module demo-student to check whether the current username is `test`. If not, an exception is thrown
+For example, create a global filter `test` in the module demo-student to customize the log output for the custom error `demo-student:1001`
 
 ### 1. Cli command
 
@@ -22,17 +22,22 @@ Context Menu - [Module Path]: `Vona Aspect/Filter Global`
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {}
 
 @Filter<IFilterOptionsTest>({ global: true })
-export class FilterTest {
-  async execute(_options: IFilterOptionsTest, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
-    if (!user || user.name !== 'test') this.app.throw(403);
+class FilterTest {
+  async log(err: Error, _options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+      console.error(`Custom Error: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
 
-- `getCurrentUser`: Get the current user
+- First call `next()`. If it returns true, the error has been handled, and then return directly
+- Handle the specified error. If true is returned, it means it has been handled, ignoring the system's default logging behavior
 
 ## Using Filter
 
@@ -42,13 +47,13 @@ Unlike local filter, the system automatically loads global filters and makes the
 
 You can define parameters for filter, allowing for more flexible configuration of filter logic
 
-For example, define the `name` parameter for the test filter to control the username that needs to be judged
+For example, define the `prefix` parameter for the test filter to customize the format of the log output
 
 ### 1. Defining parameter types
 
 ``` diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
-+ name: string;
++ prefix: string;
 }
 ```
 
@@ -57,7 +62,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 ``` diff
 @Filter<IFilterOptionsTest>({
   global: true,
-+ name: 'test',
++ prefix: 'Custom Error',
 })
 ```
 
@@ -65,20 +70,24 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ``` diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
-  name: string;
+  prefix: string;
 }
 
 @Filter<IFilterOptionsTest>({
   global: true,
-  name: 'test',
+  prefix: 'Custom Error',
 })
-export class FilterTest extends BeanBase implements IFilterExecute {
-  async execute(options: IFilterOptionsTest, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'test') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
+export class FilterTest extends BeanBase implements IFilterLog {
+  async log(err: Error, options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+-     console.error(`Custom Error: ${err.code}, ${err.message}`);
++     console.error(`${options.prefix}: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
@@ -89,9 +98,9 @@ You can specify global filter parameters for a specific API
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.filterGlobal('demo-student:test', { name: 'other-name' })
-  async findMany() {}
+  @Web.post()
++ @Aspect.filterGlobal('demo-student:test', { prefix: 'Test Error' })
+  async create(){}
 }
 ```
 
@@ -108,7 +117,7 @@ Filter parameters can be configured in App config
 config.onions = {
   filter: {
     'demo-student:test': {
-      name: 'other-name',
+      prefix: 'Test Error',
     },
   },
 };
@@ -124,26 +133,26 @@ Since global filters ard loaded and enabled by default, VonaJS provides two para
 
 ### 1. dependencies
 
-For example, the system has a built-in global filter `a-user:passport`, and we hope that the loading order is as follows: `a-user:passport` > `Current`
+For example, the system has a built-in global filter `a-error:error`, and we hope that the loading order is as follows: `a-error:error` > `Current`
 
 ``` diff
 @Filter({
   global: true,
-+ dependencies: 'a-user:passport',
-  name: 'test',
++ dependencies: 'a-error:error',
+  prefix: 'Custom Error',
 })
 class FilterTest {}
 ```
 
 ### 2. dependents
 
-The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-user:passport`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-error:error`
 
 ``` diff
 @Filter({
   global: true,
-+ dependents: 'a-user:passport',
-  name: 'test',
++ dependents: 'a-error:error',
+  prefix: 'Custom Error',
 })
 class FilterTest {}
 ```
@@ -158,9 +167,9 @@ You can control `enable/disable` of global filter for certain APIs
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
+  @Web.post()
 + @Aspect.filterGlobal('demo-student:test', { enable: false })
-  async findMany() {}
+  async create() {}
 }
 ```
 
@@ -220,8 +229,8 @@ You can directly inspect the currently effective global filter list in the Contr
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-  async findMany() {
+  @Web.post()
+  async create() {
 +   this.bean.onion.filter.inspect();
   }
 }
@@ -231,6 +240,6 @@ class ControllerStudent {
 - `.filter`: Get the Service instance related to the filter
 - `.inspect`: Output the currently effective global filter list
 
-When accessing the `findMany` API, the current list of global filter in effect will be automatically output to the console, as shown below:
+When accessing the `create` API, the current list of global filter in effect will be automatically output to the console, as shown below:
 
 ![](../../../assets/img/aop/filter-1.png)
