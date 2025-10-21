@@ -3,7 +3,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { Core } from 'vona-module-a-core';
-import { $relationDynamic, Database } from 'vona-module-a-orm';
+import { $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost } from '../model/post.ts';
 import { ModelPostContent } from '../model/postContent.ts';
 
