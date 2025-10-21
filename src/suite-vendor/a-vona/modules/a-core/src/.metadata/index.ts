@@ -2,7 +2,7 @@
 /** middleware: begin */
 export * from '../bean/middleware.gate.ts';
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareRecordGlobal {
@@ -29,7 +29,7 @@ export * from '../bean/middlewareSystem.notfound.ts';
 export * from '../bean/middlewareSystem.overrideMethod.ts';
 import type { IMiddlewareSystemOptionsNotfound } from '../bean/middlewareSystem.notfound.ts';
 import type { IMiddlewareSystemOptionsOverrideMethod } from '../bean/middlewareSystem.overrideMethod.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {
@@ -65,8 +65,8 @@ declare module 'vona-module-a-core' {
 /** meta: begin */
 export * from '../bean/meta.static.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-core:static': never;

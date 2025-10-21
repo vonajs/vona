@@ -27,7 +27,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/executor.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

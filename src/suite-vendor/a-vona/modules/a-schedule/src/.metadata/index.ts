@@ -2,7 +2,7 @@
 /** service: begin */
 export * from '../service/schedule.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -42,8 +42,8 @@ declare module 'vona' {
 /** meta: begin */
 export * from '../bean/meta.redlock.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-schedule:redlock': never;

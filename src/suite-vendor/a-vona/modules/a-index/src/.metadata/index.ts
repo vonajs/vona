@@ -2,8 +2,8 @@
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-index:version': never;

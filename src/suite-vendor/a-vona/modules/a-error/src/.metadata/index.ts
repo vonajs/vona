@@ -2,7 +2,7 @@
 /** filter: begin */
 export * from '../bean/filter.error.ts';
 import type { IFilterOptionsError } from '../bean/filter.error.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IFilterRecordGlobal {
@@ -52,7 +52,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/errorView.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

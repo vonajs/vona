@@ -9,7 +9,7 @@ export * from '../entity/user.ts';
 import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -70,7 +70,7 @@ export * from '../model/user.ts';
 import type { IModelOptionsRole } from '../model/role.ts';
 import type { IModelOptionsRoleUser } from '../model/roleUser.ts';
 import type { IModelOptionsUser } from '../model/user.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -235,7 +235,7 @@ export * from '../service/passportAdapter.ts';
 export * from '../service/roleAdapter.ts';
 export * from '../service/userAdapter.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -365,8 +365,8 @@ declare module 'vona-module-home-user' {
 export * from '../bean/meta.index.ts';
 export * from '../bean/meta.version.ts';
 import type { IMetaOptionsIndex } from 'vona-module-a-index';
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'home-user:index': IMetaOptionsIndex;
@@ -407,7 +407,7 @@ import type { IDtoOptionsLogin } from '../dto/login.ts';
 import type { IDtoOptionsPassport } from '../dto/passport.ts';
 import type { IDtoOptionsPassportJwt } from '../dto/passportJwt.ts';
 import type { IDtoOptionsRegister } from '../dto/register.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
@@ -450,7 +450,7 @@ declare module 'vona-module-home-user' {
 /** controller: begin */
 export * from '../controller/passport.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {
@@ -506,7 +506,7 @@ export * from '../bean/zodRefine.usernameUnique.ts';
 import type { IZodRefineOptionsEmailUnique } from '../bean/zodRefine.emailUnique.ts';
 import type { IZodRefineOptionsPasswordConfirm } from '../bean/zodRefine.passwordConfirm.ts';
 import type { IZodRefineOptionsUsernameUnique } from '../bean/zodRefine.usernameUnique.ts';
-import 'vona';
+import 'vona-module-a-zod';
 declare module 'vona-module-a-zod' {
   
     export interface IZodRefineRecord {

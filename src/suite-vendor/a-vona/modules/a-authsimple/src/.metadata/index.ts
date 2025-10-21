@@ -5,7 +5,7 @@ import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/authSimple.ts';
 import type { IEntityOptionsAuthSimple } from '../entity/authSimple.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -42,7 +42,7 @@ declare module 'vona-module-a-authsimple' {
 /** model: begin */
 export * from '../model/authSimple.ts';
 import type { IModelOptionsAuthSimple } from '../model/authSimple.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -117,7 +117,7 @@ declare module 'vona-module-a-orm' {
 /** authProvider: begin */
 export * from '../bean/authProvider.simple.ts';
 import type { IAuthProviderOptionsSimple } from '../bean/authProvider.simple.ts';
-import 'vona';
+import 'vona-module-a-auth';
 declare module 'vona-module-a-auth' {
   
     export interface IAuthProviderRecord {
@@ -173,7 +173,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/authSimple.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -213,8 +213,8 @@ declare module 'vona' {
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-authsimple:version': never;

@@ -2,7 +2,7 @@
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.static.ts';
 import type { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {

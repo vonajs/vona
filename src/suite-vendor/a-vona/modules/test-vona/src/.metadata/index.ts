@@ -42,7 +42,7 @@ declare module 'vona-module-test-vona' {
 /** aopMethod: begin */
 export * from '../bean/aopMethod.test.ts';
 import type { IAopMethodOptionsTest } from '../bean/aopMethod.test.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IAopMethodRecord {
@@ -83,7 +83,7 @@ import type { IEntityOptionsRole } from '../entity/role.ts';
 import type { IEntityOptionsRoleUser } from '../entity/roleUser.ts';
 import type { IEntityOptionsTest } from '../entity/test.ts';
 import type { IEntityOptionsUser } from '../entity/user.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -226,7 +226,7 @@ import type { IModelOptionsTestDynamicTable } from '../model/testDynamicTable.ts
 import type { IModelOptionsUser } from '../model/user.ts';
 import type { IModelOptionsUserStats } from '../model/userStats.ts';
 import type { IModelOptionsUserStatsGroup } from '../model/userStatsGroup.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -915,7 +915,7 @@ export * from '../service/testData.ts';
 export * from '../service/transaction.ts';
 export * from '../service/user.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -1277,8 +1277,8 @@ declare module 'vona-module-test-vona' {
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'test-vona:version': never;
@@ -1370,7 +1370,7 @@ declare module 'vona-module-test-vona' {
 /** serializerTransform: begin */
 export * from '../bean/serializerTransform.email.ts';
 import type { ISerializerTransformOptionsEmail } from '../bean/serializerTransform.email.ts';
-import 'vona';
+import 'vona-module-a-serialization';
 declare module 'vona-module-a-serialization' {
   
     export interface ISerializerTransformRecord {
@@ -1468,7 +1468,7 @@ import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { IDtoOptionsUserCreate } from '../dto/userCreate.ts';
 import type { IDtoOptionsUserLazy } from '../dto/userLazy.ts';
 import type { IDtoOptionsUserUpdate } from '../dto/userUpdate.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
@@ -1651,7 +1651,7 @@ import type { IControllerOptionsSummer } from '../controller/summer.ts';
 import type { IControllerOptionsTail } from '../controller/tail.ts';
 import type { IControllerOptionsTransaction } from '../controller/transaction.ts';
 import type { IControllerOptionsUpload } from '../controller/upload.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

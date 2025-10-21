@@ -9,7 +9,7 @@ export * from '../entity/viewRecord.ts';
 import type { IEntityOptionsVersion } from '../entity/version.ts';
 import type { IEntityOptionsVersionInit } from '../entity/versionInit.ts';
 import type { IEntityOptionsViewRecord } from '../entity/viewRecord.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -70,7 +70,7 @@ export * from '../model/viewRecord.ts';
 import type { IModelOptionsVersion } from '../model/version.ts';
 import type { IModelOptionsVersionInit } from '../model/versionInit.ts';
 import type { IModelOptionsViewRecord } from '../model/viewRecord.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -222,7 +222,7 @@ declare module 'vona-module-a-orm' {
 export * from '../service/database.ts';
 export * from '../service/version.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -312,8 +312,8 @@ declare module 'vona-module-a-event' {
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-version:version': never;

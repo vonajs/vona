@@ -7,7 +7,7 @@ export * from '../entity/auth.ts';
 export * from '../entity/authProvider.ts';
 import type { IEntityOptionsAuth } from '../entity/auth.ts';
 import type { IEntityOptionsAuthProvider } from '../entity/authProvider.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -56,7 +56,7 @@ export * from '../model/auth.ts';
 export * from '../model/authProvider.ts';
 import type { IModelOptionsAuth } from '../model/auth.ts';
 import type { IModelOptionsAuthProvider } from '../model/authProvider.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -208,7 +208,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/auth.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -301,8 +301,8 @@ export * from '../bean/meta.printTip.ts';
 export * from '../bean/meta.redlock.ts';
 export * from '../bean/meta.version.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-auth:printTip': never;
@@ -351,7 +351,7 @@ import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** dto: begin */
 export * from '../dto/auth.ts';
 import type { IDtoOptionsAuth } from '../dto/auth.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
@@ -376,7 +376,7 @@ declare module 'vona-module-a-auth' {
 /** controller: begin */
 export * from '../controller/passport.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

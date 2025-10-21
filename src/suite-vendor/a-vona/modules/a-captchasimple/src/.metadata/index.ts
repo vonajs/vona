@@ -2,7 +2,7 @@
 /** captchaProvider: begin */
 export * from '../bean/captchaProvider.imageText.ts';
 import type { ICaptchaProviderOptionsImageText } from '../bean/captchaProvider.imageText.ts';
-import 'vona';
+import 'vona-module-a-captcha';
 declare module 'vona-module-a-captcha' {
   
     export interface ICaptchaProviderRecord {

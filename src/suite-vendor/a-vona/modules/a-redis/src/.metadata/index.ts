@@ -28,7 +28,7 @@ declare module 'vona' {
 export * from '../service/redis.ts';
 export * from '../service/redisClient_.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

@@ -6,7 +6,7 @@ export * from '../bean/guard.userName.ts';
 import type { IGuardOptionsPassport } from '../bean/guard.passport.ts';
 import type { IGuardOptionsRoleName } from '../bean/guard.roleName.ts';
 import type { IGuardOptionsUserName } from '../bean/guard.userName.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IGuardRecordGlobal {
@@ -98,7 +98,7 @@ declare module 'vona' {
 export * from '../service/authTokenAdapter.ts';
 export * from '../service/redisToken.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -279,8 +279,8 @@ declare module 'vona-module-a-event' {
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-user:printTip': never;

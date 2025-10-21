@@ -2,7 +2,7 @@
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.httpLog.ts';
 import type { IMiddlewareSystemOptionsHttpLog } from '../bean/middlewareSystem.httpLog.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {
@@ -27,7 +27,7 @@ declare module 'vona-module-a-logger' {
 /** aopMethod: begin */
 export * from '../bean/aopMethod.log.ts';
 import type { IAopMethodOptionsLog } from '../bean/aopMethod.log.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IAopMethodRecord {

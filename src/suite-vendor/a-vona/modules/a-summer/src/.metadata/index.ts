@@ -30,7 +30,7 @@ export * from '../service/localFetch_.ts';
 export * from '../service/localMem_.ts';
 export * from '../service/localRedis_.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
   

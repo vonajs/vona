@@ -2,7 +2,7 @@
 /** interceptor: begin */
 export * from '../bean/interceptor.serializer.ts';
 import type { IInterceptorOptionsSerializer } from '../bean/interceptor.serializer.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
   
@@ -54,7 +54,7 @@ export * from '../bean/serializerTransform.getter.ts';
 export * from '../bean/serializerTransform.sensitive.ts';
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
 import type { ISerializerTransformOptionsSensitive } from '../bean/serializerTransform.sensitive.ts';
-import 'vona';
+import 'vona-module-a-serialization';
 declare module 'vona-module-a-serialization' {
   
     export interface ISerializerTransformRecord {

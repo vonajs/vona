@@ -2,7 +2,7 @@
 /** aopMethod: begin */
 export * from '../bean/aopMethod.transaction.ts';
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IAopMethodRecord {
@@ -70,7 +70,7 @@ export * from '../service/transactionFiber_.ts';
 export * from '../service/transactionState_.ts';
 export * from '../service/transaction_.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

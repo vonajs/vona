@@ -4,7 +4,7 @@ import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 /** service: begin */
 export * from '../service/menu.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -90,7 +90,7 @@ import type { IDtoOptionsMenuItemMeta } from '../dto/menuItemMeta.ts';
 import type { IDtoOptionsMenuItemMetaParams } from '../dto/menuItemMetaParams.ts';
 import type { IDtoOptionsMenuItemMetaQuery } from '../dto/menuItemMetaQuery.ts';
 import type { IDtoOptionsMenus } from '../dto/menus.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {

@@ -2,7 +2,7 @@
 /** interceptor: begin */
 export * from '../bean/interceptor.openapiSchema.ts';
 import type { IInterceptorOptionsOpenapiSchema } from '../bean/interceptor.openapiSchema.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IInterceptorRecordGlobal {

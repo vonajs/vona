@@ -3,7 +3,7 @@
 export * from '../service/aop.ts';
 export * from '../service/filter.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

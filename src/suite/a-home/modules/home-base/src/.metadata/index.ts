@@ -3,7 +3,7 @@ import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** service: begin */
 export * from '../service/menu.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -43,7 +43,7 @@ declare module 'vona' {
 /** controller: begin */
 export * from '../controller/menu.ts';
 import type { IControllerOptionsMenu } from '../controller/menu.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

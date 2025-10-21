@@ -2,7 +2,7 @@
 /** interceptor: begin */
 export * from '../bean/interceptor.upload.ts';
 import type { IInterceptorOptionsUpload } from '../bean/interceptor.upload.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
   

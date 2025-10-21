@@ -3,8 +3,8 @@ import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'home-index:printTip': never;
@@ -28,7 +28,7 @@ declare module 'vona-module-home-index' {
 /** controller: begin */
 export * from '../controller/home.ts';
 import type { IControllerOptionsHome } from '../controller/home.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

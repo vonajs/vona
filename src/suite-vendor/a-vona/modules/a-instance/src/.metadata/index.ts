@@ -7,7 +7,7 @@ export * from '../bean/middlewareSystem.appReady.ts';
 export * from '../bean/middlewareSystem.instance.ts';
 import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
 import type { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {
@@ -43,7 +43,7 @@ declare module 'vona-module-a-instance' {
 /** entity: begin */
 export * from '../entity/instance.ts';
 import type { IEntityOptionsInstance } from '../entity/instance.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -80,7 +80,7 @@ declare module 'vona-module-a-instance' {
 /** model: begin */
 export * from '../model/instance.ts';
 import type { IModelOptionsInstance } from '../model/instance.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -186,7 +186,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/instance.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -273,8 +273,8 @@ export * from '../bean/meta.index.ts';
 export * from '../bean/meta.redlock.ts';
 export * from '../bean/meta.version.ts';
 import type { IMetaOptionsIndex } from 'vona-module-a-index';
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-instance:index': IMetaOptionsIndex;

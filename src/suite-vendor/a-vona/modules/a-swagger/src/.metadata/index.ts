@@ -3,8 +3,8 @@ import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-swagger:printTip': never;
@@ -75,7 +75,7 @@ export * from '../controller/rapidoc.ts';
 export * from '../controller/swagger.ts';
 import type { IControllerOptionsRapidoc } from '../controller/rapidoc.ts';
 import type { IControllerOptionsSwagger } from '../controller/swagger.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

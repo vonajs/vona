@@ -4,7 +4,7 @@ export * from '../bean/interceptor.bodyReq.ts';
 export * from '../bean/interceptor.bodyRes.ts';
 import type { IInterceptorOptionsBodyReq } from '../bean/interceptor.bodyReq.ts';
 import type { IInterceptorOptionsBodyRes } from '../bean/interceptor.bodyRes.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IInterceptorRecordGlobal {

@@ -27,7 +27,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/eventListener.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

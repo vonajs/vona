@@ -3,7 +3,7 @@ import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** service: begin */
 export * from '../service/mail.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -139,7 +139,7 @@ declare module 'vona-module-a-event' {
 /** controller: begin */
 export * from '../controller/mail.ts';
 import type { IControllerOptionsMail } from '../controller/mail.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

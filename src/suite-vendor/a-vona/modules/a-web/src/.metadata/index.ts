@@ -4,7 +4,7 @@ export * from '../bean/pipe.query.ts';
 export * from '../bean/pipe.valid.ts';
 import type { IPipeOptionsQuery } from '../bean/pipe.query.ts';
 import type { IPipeOptionsValid } from '../bean/pipe.valid.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
   
@@ -65,7 +65,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/web.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

@@ -2,7 +2,7 @@
 /** service: begin */
 export * from '../service/queue.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {

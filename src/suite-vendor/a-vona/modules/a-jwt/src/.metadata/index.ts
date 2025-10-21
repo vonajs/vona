@@ -30,7 +30,7 @@ declare module 'vona' {
 export * from '../service/jwtClient.ts';
 export * from '../service/jwtExtract.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -84,7 +84,7 @@ declare module 'vona' {
 /** dto: begin */
 export * from '../dto/jwtToken.ts';
 import type { IDtoOptionsJwtToken } from '../dto/jwtToken.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {

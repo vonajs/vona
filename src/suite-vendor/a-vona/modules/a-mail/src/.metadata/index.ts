@@ -5,7 +5,7 @@ import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/mail.ts';
 import type { IEntityOptionsMail } from '../entity/mail.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IEntityRecord {
@@ -42,7 +42,7 @@ declare module 'vona-module-a-mail' {
 /** model: begin */
 export * from '../model/mail.ts';
 import type { IModelOptionsMail } from '../model/mail.ts';
-import 'vona';
+import 'vona-module-a-orm';
 declare module 'vona-module-a-orm' {
   
     export interface IModelRecord {
@@ -142,7 +142,7 @@ declare module 'vona' {
 /** service: begin */
 export * from '../service/mail.ts';
 
-import 'vona';
+import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
@@ -182,8 +182,8 @@ declare module 'vona' {
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
-import 'vona';
-declare module 'vona' {
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-mail:version': never;

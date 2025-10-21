@@ -4,7 +4,7 @@ import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-
 /** interceptor: begin */
 export * from '../bean/interceptor.captchaVerify.ts';
 import type { IInterceptorOptionsCaptchaVerify } from '../bean/interceptor.captchaVerify.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
   
@@ -87,7 +87,7 @@ export * from '../dto/captchaData.ts';
 export * from '../dto/captchaVerify.ts';
 import type { IDtoOptionsCaptchaData } from '../dto/captchaData.ts';
 import type { IDtoOptionsCaptchaVerify } from '../dto/captchaVerify.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
@@ -118,7 +118,7 @@ declare module 'vona-module-a-captcha' {
 /** controller: begin */
 export * from '../controller/captcha.ts';
 import type { IControllerOptionsCaptcha } from '../controller/captcha.ts';
-import 'vona';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {

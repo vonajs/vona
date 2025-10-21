@@ -4,7 +4,7 @@ export * from '../bean/middlewareSystem.cors.ts';
 export * from '../bean/middlewareSystem.securities.ts';
 import type { IMiddlewareSystemOptionsCors } from '../bean/middlewareSystem.cors.ts';
 import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {

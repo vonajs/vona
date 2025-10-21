@@ -8,7 +8,7 @@ import type { IAopMethodOptionsCachingClear } from '../bean/aopMethod.cachingCle
 import type { IAopMethodOptionsCachingDel } from '../bean/aopMethod.cachingDel.ts';
 import type { IAopMethodOptionsCachingGet } from '../bean/aopMethod.cachingGet.ts';
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
-import 'vona';
+import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IAopMethodRecord {
