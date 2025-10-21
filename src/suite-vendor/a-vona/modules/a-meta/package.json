@@ -7,7 +7,7 @@
     "dependencies": {},
     "onions": {
       "meta": {
-        "optionsGlobalInterfaceName": ""
+        "optionsGlobalInterfaceFrom": "vona-module-a-meta"
       }
     }
   },
