@@ -4,6 +4,14 @@
 
 ## 创建Service
 
+### 1. Cli命令
+
+``` bash
+$ vona :create:bean service menu --module=home-base
+```
+
+### 2. 菜单命令
+
 ::: tip
 右键菜单 - [模块路径]: `Vona Create/Service`
 :::

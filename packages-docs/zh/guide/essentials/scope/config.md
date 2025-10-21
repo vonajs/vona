@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :init:config demo-student
+$ vona :init:config home-index
 ```
 
 ### 2. 菜单命令

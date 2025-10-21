@@ -4,6 +4,14 @@
 
 ## 初始化代码骨架
 
+### 1. Cli命令
+
+``` bash
+$ vona :init:locale home-index
+```
+
+### 2. 菜单命令
+
 ::: tip
 右键菜单 - [模块路径]: `Vona Init/Locale`
 :::
