@@ -2,7 +2,7 @@
 
 ## 创建过滤器
 
-比如，在模块 demo-student 中创建一个全局过滤器: `test`
+比如，在模块 demo-student 中创建一个全局过滤器: `test`，对自定义错误`demo-student:1001`定制日志输出
 
 ### 1. Cli命令
 
@@ -22,17 +22,22 @@ $ vona :create:bean filter test --module=demo-student --boilerplate=global
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {}
 
 @Filter<IFilterOptionsTest>({ global: true })
-export class FilterTest {
-  async execute(_options: IFilterOptionsTest, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
-    if (!user || user.name !== 'test') this.app.throw(403);
+class FilterTest {
+  async log(err: Error, _options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+      console.error(`Custom Error: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
 
-- `getCurrentUser`: 取得当前用户
+- 先调用`next()`，如果返回 true，说明 Error 已经被处理，那么就直接返回
+- 处理指定的 Error，返回 true，就意味着已经处理，忽略系统默认的日志输出行为
 
 ## 使用过滤器
 
@@ -42,13 +47,13 @@ export class FilterTest {
 
 可以为过滤器定义参数，通过参数更灵活的配置过滤器逻辑
 
-比如，为 test 过滤器定义`name`参数，用于控制需要判断的用户名
+比如，为 test 过滤器定义`prefix`参数，用于定制日志输出的格式
 
 ### 1. 定义参数类型
 
 ``` diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
-+ name: string;
++  prefix: string;
 }
 ```
 
@@ -57,7 +62,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 ``` diff
 @Filter<IFilterOptionsTest>({
   global: true,
-+ name: 'test',
++ prefix: 'Custom Error',
 })
 ```
 
@@ -65,20 +70,24 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ``` diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
-  name: string;
+  prefix: string;
 }
 
 @Filter<IFilterOptionsTest>({
   global: true,
-  name: 'test',
+  prefix: 'Custom Error',
 })
-export class FilterTest extends BeanBase implements IFilterExecute {
-  async execute(options: IFilterOptionsTest, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
--   if (!user || user.name !== 'test') this.app.throw(403);
-+   if (!user || user.name !== options.name) this.app.throw(403);
+export class FilterTest extends BeanBase implements IFilterLog {
+  async log(err: Error, options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
-    return next();
+    if ((await next()) === true) return true;
+    // custom
+    if (err.code === 'demo-student:1001') {
+-     console.error(`Custom Error: ${err.code}, ${err.message}`);
++     console.error(`${options.prefix}: ${err.code}, ${err.message}`);
+      return true;
+    }
+    return false;
   }
 }
 ```
@@ -89,9 +98,9 @@ export class FilterTest extends BeanBase implements IFilterExecute {
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-+ @Aspect.filterGlobal('demo-student:test', { name: 'other-name' })
-  async findMany() {}
+  @Web.post()
++ @Aspect.filterGlobal('demo-student:test', { prefix: 'Test Error' })
+  async create(){}
 }
 ```
 
@@ -108,7 +117,7 @@ class ControllerStudent {
 config.onions = {
   filter: {
     'demo-student:test': {
-      name: 'other-name',
+      prefix: 'Test Error',
     },
   },
 };
@@ -124,25 +133,25 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置全局过滤器`a-user:passport`，我们希望加载顺序如下：`a-user:passport` > `Current`
+比如，系统有一个内置全局过滤器`a-error:error`，我们希望加载顺序如下：`a-error:error` > `Current`
 
 ``` diff
 @Filter({
   global: true,
-+ dependencies: 'a-user:passport',
-  name: 'test',
++ dependencies: 'a-error:error',
+  prefix: 'Custom Error',
 })
 class FilterTest {}
 ```
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-user:passport`
+`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-error:error`
 
 ``` diff
 @Filter({
   global: true,
-+ dependents: 'a-user:passport',
++ dependents: 'a-error:error',
   name: 'test',
 })
 class FilterTest {}
