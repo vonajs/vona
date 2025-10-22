@@ -55,6 +55,9 @@ class ControllerStudent {
 }
 ```
 
+- `@Aspect.aopMethod`: 此装饰器用于使用 AOP Method，只需传入 AOP Method 的名称
+  - log AOP Method 属于模块`demo-student`，因此完整的名称是`demo-student:log`
+
 ### 2. 标注Service方法
 
 ``` diff
