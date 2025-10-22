@@ -1,7 +1,7 @@
 {
   "name": "vona-core",
   "type": "module",
-  "version": "5.0.63",
+  "version": "5.0.64",
   "description": "vona",
   "publishConfig": {
     "access": "public"
