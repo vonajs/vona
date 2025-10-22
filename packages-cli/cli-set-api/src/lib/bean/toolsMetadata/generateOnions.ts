@@ -26,21 +26,8 @@ export async function generateOnions(
     const isBeanGlobal = fileNameJSRelative.includes('../bean/bean.');
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue; // get scope() also can be ignored
-    // get scope() also can be ignored
-    if (!['entity', 'dto'].includes(sceneName) && !isVirtual) {
-      contentScopes.push(`
-        export interface ${className} {
-          /** @internal */
-          get scope(): ${scopeModuleName};
-        }`);
-      if (!isBeanGlobal) {
-        contentScopes.push(`
-          export interface ${className} {
-            get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
-            get $onionName(): '${beanNameFull}';
-          }`);
-      }
-    }
+    // options
+    let onionOptions;
     if (!sceneMeta.optionsNone) {
       // fileInfo
       const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
@@ -59,7 +46,6 @@ export async function generateOnions(
         );
       }
       // record
-      let onionOptions;
       if (fileInfo.isGlobal) {
         if (valueOptionsCustomInterface) {
           onionOptions = valueOptionsCustomInterface;
@@ -80,6 +66,23 @@ export async function generateOnions(
         } else {
           contentRecordsLocal.push(`'${beanNameFull}': never;`);
         }
+      }
+    }
+    // get scope() also can be ignored
+    if (!['entity', 'dto'].includes(sceneName) && !isVirtual) {
+      contentScopes.push(`
+        export interface ${className} {
+          /** @internal */
+          get scope(): ${scopeModuleName};
+        }`);
+      if (!isBeanGlobal) {
+        const contentOnionOptions = onionOptions ? `get $onionOptions(): ${onionOptions};` : '';
+        contentScopes.push(`
+          export interface ${className} {
+            get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
+            get $onionName(): '${beanNameFull}';
+            ${contentOnionOptions}
+          }`);
       }
     }
   }

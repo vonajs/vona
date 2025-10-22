@@ -26,6 +26,7 @@ declare module 'vona-module-test-vona' {
           export interface AopRegExp {
             get $beanFullName(): 'test-vona.aop.regExp';
             get $onionName(): 'test-vona:regExp';
+            get $onionOptions(): IDecoratorAopOptions;
           }
 
         export interface AopSimple {
@@ -36,6 +37,7 @@ declare module 'vona-module-test-vona' {
           export interface AopSimple {
             get $beanFullName(): 'test-vona.aop.simple';
             get $onionName(): 'test-vona:simple';
+            get $onionOptions(): IDecoratorAopOptions;
           } 
 }
 /** aop: end */
@@ -61,6 +63,7 @@ declare module 'vona-module-test-vona' {
           export interface AopMethodTest {
             get $beanFullName(): 'test-vona.aopMethod.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IAopMethodOptionsTest;
           } 
 }
 /** aopMethod: end */
@@ -258,6 +261,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelCategory {
             get $beanFullName(): 'test-vona.model.category';
             get $onionName(): 'test-vona:category';
+            get $onionOptions(): IModelOptionsCategory;
           }
 
         export interface ModelCategoryChain {
@@ -268,6 +272,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelCategoryChain {
             get $beanFullName(): 'test-vona.model.categoryChain';
             get $onionName(): 'test-vona:categoryChain';
+            get $onionOptions(): IModelOptionsCategoryChain;
           }
 
         export interface ModelOrder {
@@ -278,6 +283,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelOrder {
             get $beanFullName(): 'test-vona.model.order';
             get $onionName(): 'test-vona:order';
+            get $onionOptions(): IModelOptionsOrder;
           }
 
         export interface ModelOrderStats {
@@ -288,6 +294,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelOrderStats {
             get $beanFullName(): 'test-vona.model.orderStats';
             get $onionName(): 'test-vona:orderStats';
+            get $onionOptions(): IModelOptionsOrderStats;
           }
 
         export interface ModelPost {
@@ -298,6 +305,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelPost {
             get $beanFullName(): 'test-vona.model.post';
             get $onionName(): 'test-vona:post';
+            get $onionOptions(): IModelOptionsPost;
           }
 
         export interface ModelPostContent {
@@ -308,6 +316,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelPostContent {
             get $beanFullName(): 'test-vona.model.postContent';
             get $onionName(): 'test-vona:postContent';
+            get $onionOptions(): IModelOptionsPostContent;
           }
 
         export interface ModelProduct {
@@ -318,6 +327,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelProduct {
             get $beanFullName(): 'test-vona.model.product';
             get $onionName(): 'test-vona:product';
+            get $onionOptions(): IModelOptionsProduct;
           }
 
         export interface ModelRole {
@@ -328,6 +338,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelRole {
             get $beanFullName(): 'test-vona.model.role';
             get $onionName(): 'test-vona:role';
+            get $onionOptions(): IModelOptionsRole;
           }
 
         export interface ModelRoleUser {
@@ -338,6 +349,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelRoleUser {
             get $beanFullName(): 'test-vona.model.roleUser';
             get $onionName(): 'test-vona:roleUser';
+            get $onionOptions(): IModelOptionsRoleUser;
           }
 
         export interface ModelTest {
@@ -348,6 +360,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelTest {
             get $beanFullName(): 'test-vona.model.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IModelOptionsTest;
           }
 
         export interface ModelTestDynamicTable {
@@ -358,6 +371,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelTestDynamicTable {
             get $beanFullName(): 'test-vona.model.testDynamicTable';
             get $onionName(): 'test-vona:testDynamicTable';
+            get $onionOptions(): IModelOptionsTestDynamicTable;
           }
 
         export interface ModelUser {
@@ -368,6 +382,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelUser {
             get $beanFullName(): 'test-vona.model.user';
             get $onionName(): 'test-vona:user';
+            get $onionOptions(): IModelOptionsUser;
           }
 
         export interface ModelUserStats {
@@ -378,6 +393,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelUserStats {
             get $beanFullName(): 'test-vona.model.userStats';
             get $onionName(): 'test-vona:userStats';
+            get $onionOptions(): IModelOptionsUserStats;
           }
 
         export interface ModelUserStatsGroup {
@@ -388,6 +404,7 @@ declare module 'vona-module-test-vona' {
           export interface ModelUserStatsGroup {
             get $beanFullName(): 'test-vona.model.userStatsGroup';
             get $onionName(): 'test-vona:userStatsGroup';
+            get $onionOptions(): IModelOptionsUserStatsGroup;
           } 
 }
 /** model: end */
@@ -945,6 +962,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceAopMethod {
             get $beanFullName(): 'test-vona.service.aopMethod';
             get $onionName(): 'test-vona:aopMethod';
+            
           }
 
         export interface ServiceCaching {
@@ -955,6 +973,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceCaching {
             get $beanFullName(): 'test-vona.service.caching';
             get $onionName(): 'test-vona:caching';
+            
           }
 
         export interface ServiceCategory {
@@ -965,6 +984,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceCategory {
             get $beanFullName(): 'test-vona.service.category';
             get $onionName(): 'test-vona:category';
+            
           }
 
         export interface ServiceOrder {
@@ -975,6 +995,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceOrder {
             get $beanFullName(): 'test-vona.service.order';
             get $onionName(): 'test-vona:order';
+            
           }
 
         export interface ServicePost {
@@ -985,6 +1006,7 @@ declare module 'vona-module-test-vona' {
           export interface ServicePost {
             get $beanFullName(): 'test-vona.service.post';
             get $onionName(): 'test-vona:post';
+            
           }
 
         export interface ServiceProduct {
@@ -995,6 +1017,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceProduct {
             get $beanFullName(): 'test-vona.service.product';
             get $onionName(): 'test-vona:product';
+            
           }
 
         export interface ServiceTest {
@@ -1005,6 +1028,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceTest {
             get $beanFullName(): 'test-vona.service.test';
             get $onionName(): 'test-vona:test';
+            
           }
 
         export interface ServiceTestApp {
@@ -1015,6 +1039,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceTestApp {
             get $beanFullName(): 'test-vona.service.testApp';
             get $onionName(): 'test-vona:testApp';
+            
           }
 
         export interface ServiceTestClass {
@@ -1025,6 +1050,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceTestClass {
             get $beanFullName(): 'test-vona.service.testClass';
             get $onionName(): 'test-vona:testClass';
+            
           }
 
         export interface ServiceTestData {
@@ -1035,6 +1061,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceTestData {
             get $beanFullName(): 'test-vona.service.testData';
             get $onionName(): 'test-vona:testData';
+            
           }
 
         export interface ServiceTransaction {
@@ -1045,6 +1072,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceTransaction {
             get $beanFullName(): 'test-vona.service.transaction';
             get $onionName(): 'test-vona:transaction';
+            
           }
 
         export interface ServiceUser {
@@ -1055,6 +1083,7 @@ declare module 'vona-module-test-vona' {
           export interface ServiceUser {
             get $beanFullName(): 'test-vona.service.user';
             get $onionName(): 'test-vona:user';
+            
           } 
 }
 /** service: end */
@@ -1128,6 +1157,7 @@ declare module 'vona-module-test-vona' {
           export interface BroadcastTest {
             get $beanFullName(): 'test-vona.broadcast.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */
@@ -1159,6 +1189,7 @@ declare module 'vona-module-test-vona' {
           export interface CacheMemTest {
             get $beanFullName(): 'test-vona.cacheMem.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IDecoratorCacheMemOptions;
           } 
 }
 /** cacheMem: end */
@@ -1192,6 +1223,7 @@ declare module 'vona-module-test-vona' {
           export interface CacheRedisPost {
             get $beanFullName(): 'test-vona.cacheRedis.post';
             get $onionName(): 'test-vona:post';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           }
 
         export interface CacheRedisTest {
@@ -1202,6 +1234,7 @@ declare module 'vona-module-test-vona' {
           export interface CacheRedisTest {
             get $beanFullName(): 'test-vona.cacheRedis.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           } 
 }
 /** cacheRedis: end */
@@ -1231,6 +1264,7 @@ declare module 'vona-module-test-vona' {
           export interface EventHelloEcho {
             get $beanFullName(): 'test-vona.event.helloEcho';
             get $onionName(): 'test-vona:helloEcho';
+            
           } 
 }
 /** event: end */
@@ -1271,6 +1305,7 @@ declare module 'vona-module-test-vona' {
           export interface EventListenerHelloEcho {
             get $beanFullName(): 'test-vona.eventListener.helloEcho';
             get $onionName(): 'test-vona:helloEcho';
+            get $onionOptions(): IDecoratorEventListenerOptions;
           } 
 }
 /** eventListener: end */
@@ -1296,6 +1331,7 @@ declare module 'vona-module-test-vona' {
           export interface MetaVersion {
             get $beanFullName(): 'test-vona.meta.version';
             get $onionName(): 'test-vona:version';
+            
           } 
 }
 /** meta: end */
@@ -1321,6 +1357,7 @@ declare module 'vona-module-test-vona' {
           export interface QueueTest {
             get $beanFullName(): 'test-vona.queue.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IDecoratorQueueOptions;
           } 
 }
 /** queue: end */
@@ -1354,6 +1391,7 @@ declare module 'vona-module-test-vona' {
           export interface ScheduleTest {
             get $beanFullName(): 'test-vona.schedule.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IDecoratorScheduleOptions;
           }
 
         export interface ScheduleTest3 {
@@ -1364,6 +1402,7 @@ declare module 'vona-module-test-vona' {
           export interface ScheduleTest3 {
             get $beanFullName(): 'test-vona.schedule.test3';
             get $onionName(): 'test-vona:test3';
+            get $onionOptions(): IDecoratorScheduleOptions;
           } 
 }
 /** schedule: end */
@@ -1389,6 +1428,7 @@ declare module 'vona-module-test-vona' {
           export interface SerializerTransformEmail {
             get $beanFullName(): 'test-vona.serializerTransform.email';
             get $onionName(): 'test-vona:email';
+            get $onionOptions(): ISerializerTransformOptionsEmail;
           } 
 }
 /** serializerTransform: end */
@@ -1414,6 +1454,7 @@ declare module 'vona-module-test-vona' {
           export interface SummerCacheTest {
             get $beanFullName(): 'test-vona.summerCache.test';
             get $onionName(): 'test-vona:test';
+            get $onionOptions(): IDecoratorSummerCacheOptions;
           } 
 }
 /** summerCache: end */
@@ -1686,6 +1727,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerBean {
             get $beanFullName(): 'test-vona.controller.bean';
             get $onionName(): 'test-vona:bean';
+            get $onionOptions(): IControllerOptionsBean;
           }
 
         export interface ControllerCacheMem {
@@ -1696,6 +1738,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerCacheMem {
             get $beanFullName(): 'test-vona.controller.cacheMem';
             get $onionName(): 'test-vona:cacheMem';
+            get $onionOptions(): IControllerOptionsCacheMem;
           }
 
         export interface ControllerCacheRedis {
@@ -1706,6 +1749,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerCacheRedis {
             get $beanFullName(): 'test-vona.controller.cacheRedis';
             get $onionName(): 'test-vona:cacheRedis';
+            get $onionOptions(): IControllerOptionsCacheRedis;
           }
 
         export interface ControllerCaptcha {
@@ -1716,6 +1760,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerCaptcha {
             get $beanFullName(): 'test-vona.controller.captcha';
             get $onionName(): 'test-vona:captcha';
+            get $onionOptions(): IControllerOptionsCaptcha;
           }
 
         export interface ControllerDtoTest {
@@ -1726,6 +1771,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerDtoTest {
             get $beanFullName(): 'test-vona.controller.dtoTest';
             get $onionName(): 'test-vona:dtoTest';
+            get $onionOptions(): IControllerOptionsDtoTest;
           }
 
         export interface ControllerGuardPassport {
@@ -1736,6 +1782,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerGuardPassport {
             get $beanFullName(): 'test-vona.controller.guardPassport';
             get $onionName(): 'test-vona:guardPassport';
+            get $onionOptions(): IControllerOptionsGuardPassport;
           }
 
         export interface ControllerOnion {
@@ -1746,6 +1793,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerOnion {
             get $beanFullName(): 'test-vona.controller.onion';
             get $onionName(): 'test-vona:onion';
+            get $onionOptions(): IControllerOptionsOnion;
           }
 
         export interface ControllerOrder {
@@ -1756,6 +1804,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerOrder {
             get $beanFullName(): 'test-vona.controller.order';
             get $onionName(): 'test-vona:order';
+            get $onionOptions(): IControllerOptionsOrder;
           }
 
         export interface ControllerPassport {
@@ -1766,6 +1815,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerPassport {
             get $beanFullName(): 'test-vona.controller.passport';
             get $onionName(): 'test-vona:passport';
+            get $onionOptions(): IControllerOptionsPassport;
           }
 
         export interface ControllerPerformAction {
@@ -1776,6 +1826,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerPerformAction {
             get $beanFullName(): 'test-vona.controller.performAction';
             get $onionName(): 'test-vona:performAction';
+            get $onionOptions(): IControllerOptionsPerformAction;
           }
 
         export interface ControllerPost {
@@ -1786,6 +1837,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerPost {
             get $beanFullName(): 'test-vona.controller.post';
             get $onionName(): 'test-vona:post';
+            get $onionOptions(): IControllerOptionsPost;
           }
 
         export interface ControllerQueue {
@@ -1796,6 +1848,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerQueue {
             get $beanFullName(): 'test-vona.controller.queue';
             get $onionName(): 'test-vona:queue';
+            get $onionOptions(): IControllerOptionsQueue;
           }
 
         export interface ControllerSerializer {
@@ -1806,6 +1859,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerSerializer {
             get $beanFullName(): 'test-vona.controller.serializer';
             get $onionName(): 'test-vona:serializer';
+            get $onionOptions(): IControllerOptionsSerializer;
           }
 
         export interface ControllerSummer {
@@ -1816,6 +1870,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerSummer {
             get $beanFullName(): 'test-vona.controller.summer';
             get $onionName(): 'test-vona:summer';
+            get $onionOptions(): IControllerOptionsSummer;
           }
 
         export interface ControllerTail {
@@ -1826,6 +1881,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerTail {
             get $beanFullName(): 'test-vona.controller.tail';
             get $onionName(): 'test-vona:tail';
+            get $onionOptions(): IControllerOptionsTail;
           }
 
         export interface ControllerTransaction {
@@ -1836,6 +1892,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerTransaction {
             get $beanFullName(): 'test-vona.controller.transaction';
             get $onionName(): 'test-vona:transaction';
+            get $onionOptions(): IControllerOptionsTransaction;
           }
 
         export interface ControllerUpload {
@@ -1846,6 +1903,7 @@ declare module 'vona-module-test-vona' {
           export interface ControllerUpload {
             get $beanFullName(): 'test-vona.controller.upload';
             get $onionName(): 'test-vona:upload';
+            get $onionOptions(): IControllerOptionsUpload;
           } 
 }
 /** controller: end */
