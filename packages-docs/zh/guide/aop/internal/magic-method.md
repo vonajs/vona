@@ -52,3 +52,124 @@ async findOne(id) {
 ```
 
 - 系统自动从 method name `getById`中解析出参数`id`，然后调用实际的 CRUD 方法，这里就是: `get({ id })`
+
+## 创建Class
+
+可以在任何 Class 中实现魔术方法。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `color`，代码如下：
+
+- 如何创建 Service，参见: [Service](../../essentials/api/service.md)
+
+``` typescript
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-bean';
+
+@Service()
+export class ServiceColor extends BeanBase {}
+```
+
+## `__get__`
+
+然后，通过`__get__`实现颜色值的获取
+
+### 1. 添加代码骨架
+
+在 VSCode 编辑器中，输入代码片段`aopmagicget`，自动生成代码骨架:
+
+``` diff
+@Service()
+export class ServiceColor extends BeanBase {
++ protected __get__(prop: string) {}
+}
+```
+
+### 2. 实现自定义逻辑
+
+``` diff
+@Service()
+export class ServiceColor extends BeanBase {
++ private _colors = {
++   red: '#FF0000',
++   green: '#00FF00',
++   blue: '#0000FF',
++ };
+
+  protected __get__(prop: string) {
++   return this._colors[prop];
+  }
+}
+```
+
+### 3. 添加类型合并
+
+通过接口类型合并的机制为颜色提供类型定义
+
+``` typescript
+export interface ServiceColor {
+  red: string;
+  green: string;
+  blue: string;
+}
+```
+
+### 4. 使用魔术方法
+
+```typescript
+async test() {
+  console.log(this.scope.service.color.red);
+  console.log(this.scope.service.color.green);
+  console.log(this.scope.service.color.blue);
+}
+```
+
+## `__set__`
+
+然后，通过`__set__`实现颜色值的设置
+
+### 1. 添加代码骨架
+
+在 VSCode 编辑器中，输入代码片段`aopmagicset`，自动生成代码骨架:
+
+``` diff
+@Service()
+export class ServiceColor extends BeanBase {
++ protected __set__(prop: string, value: any): boolean {
++   return false;
++ }
+}
+```
+
+### 2. 实现自定义逻辑
+
+``` diff
+@Service()
+export class ServiceColor extends BeanBase {
+  protected __set__(prop: string, value: any): boolean {
++   this._colors[prop] = value;
++   return true;
+  }
+}
+```
+
+- 如果为`prop`设置了值，返回`true`，否则返回`false`
+
+### 3. 添加类型合并
+
+通过接口类型合并的机制为颜色提供类型定义
+
+``` diff
+export interface ServiceColor {
+  red: string;
+  green: string;
+  blue: string;
++ black: string;
+}
+```
+
+### 4. 使用魔术方法
+
+```typescript
+async test() {
+  this.scope.service.color.black = '#000000';
+  console.log(this.scope.service.color.black);
+}
+```
