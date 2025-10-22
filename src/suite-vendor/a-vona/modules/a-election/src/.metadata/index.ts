@@ -21,6 +21,7 @@ declare module 'vona-module-a-election' {
           export interface ServiceElection {
             get $beanFullName(): 'a-election.service.election';
             get $onionName(): 'a-election:election';
+            
           } 
 }
 /** service: end */
@@ -61,6 +62,7 @@ declare module 'vona-module-a-election' {
           export interface CacheRedisElection {
             get $beanFullName(): 'a-election.cacheRedis.election';
             get $onionName(): 'a-election:election';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           } 
 }
 /** cacheRedis: end */

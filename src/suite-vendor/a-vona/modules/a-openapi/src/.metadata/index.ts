@@ -46,6 +46,7 @@ declare module 'vona-module-a-openapi' {
           export interface ServiceOpenapi {
             get $beanFullName(): 'a-openapi.service.openapi';
             get $onionName(): 'a-openapi:openapi';
+            
           } 
 }
 /** service: end */
@@ -86,6 +87,7 @@ declare module 'vona-module-a-openapi' {
           export interface SummerCacheJson {
             get $beanFullName(): 'a-openapi.summerCache.json';
             get $onionName(): 'a-openapi:json';
+            get $onionOptions(): IDecoratorSummerCacheOptions;
           } 
 }
 /** summerCache: end */

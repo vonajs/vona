@@ -21,6 +21,7 @@ declare module 'vona-module-a-index' {
           export interface MetaVersion {
             get $beanFullName(): 'a-index.meta.version';
             get $onionName(): 'a-index:version';
+            
           } 
 }
 /** meta: end */

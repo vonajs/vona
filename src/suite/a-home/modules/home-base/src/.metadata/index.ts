@@ -22,6 +22,7 @@ declare module 'vona-module-home-base' {
           export interface ServiceMenu {
             get $beanFullName(): 'home-base.service.menu';
             get $onionName(): 'home-base:menu';
+            
           } 
 }
 /** service: end */
@@ -62,6 +63,7 @@ declare module 'vona-module-home-base' {
           export interface ControllerMenu {
             get $beanFullName(): 'home-base.controller.menu';
             get $onionName(): 'home-base:menu';
+            get $onionOptions(): IControllerOptionsMenu;
           } 
 }
 /** controller: end */

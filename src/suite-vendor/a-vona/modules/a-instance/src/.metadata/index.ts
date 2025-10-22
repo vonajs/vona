@@ -27,6 +27,7 @@ declare module 'vona-module-a-instance' {
           export interface MiddlewareSystemAppReady {
             get $beanFullName(): 'a-instance.middlewareSystem.appReady';
             get $onionName(): 'a-instance:appReady';
+            get $onionOptions(): IMiddlewareSystemOptionsAppReady;
           }
 
         export interface MiddlewareSystemInstance {
@@ -37,6 +38,7 @@ declare module 'vona-module-a-instance' {
           export interface MiddlewareSystemInstance {
             get $beanFullName(): 'a-instance.middlewareSystem.instance';
             get $onionName(): 'a-instance:instance';
+            get $onionOptions(): IMiddlewareSystemOptionsInstance;
           } 
 }
 /** middlewareSystem: end */
@@ -99,6 +101,7 @@ declare module 'vona-module-a-instance' {
           export interface ModelInstance {
             get $beanFullName(): 'a-instance.model.instance';
             get $onionName(): 'a-instance:instance';
+            get $onionOptions(): IModelOptionsInstance;
           } 
 }
 /** model: end */
@@ -205,6 +208,7 @@ declare module 'vona-module-a-instance' {
           export interface ServiceInstance {
             get $beanFullName(): 'a-instance.service.instance';
             get $onionName(): 'a-instance:instance';
+            
           } 
 }
 /** service: end */
@@ -247,6 +251,7 @@ declare module 'vona-module-a-instance' {
           export interface BroadcastReload {
             get $beanFullName(): 'a-instance.broadcast.reload';
             get $onionName(): 'a-instance:reload';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
         export interface BroadcastResetCache {
@@ -257,6 +262,7 @@ declare module 'vona-module-a-instance' {
           export interface BroadcastResetCache {
             get $beanFullName(): 'a-instance.broadcast.resetCache';
             get $onionName(): 'a-instance:resetCache';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */
@@ -294,6 +300,7 @@ declare module 'vona-module-a-instance' {
           export interface MetaIndex {
             get $beanFullName(): 'a-instance.meta.index';
             get $onionName(): 'a-instance:index';
+            get $onionOptions(): IMetaOptionsIndex;
           }
 
         export interface MetaRedlock {
@@ -304,6 +311,7 @@ declare module 'vona-module-a-instance' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-instance.meta.redlock';
             get $onionName(): 'a-instance:redlock';
+            
           }
 
         export interface MetaVersion {
@@ -314,6 +322,7 @@ declare module 'vona-module-a-instance' {
           export interface MetaVersion {
             get $beanFullName(): 'a-instance.meta.version';
             get $onionName(): 'a-instance:version';
+            
           } 
 }
 /** meta: end */

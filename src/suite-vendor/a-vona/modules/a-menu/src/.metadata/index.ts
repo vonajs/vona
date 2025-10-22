@@ -23,6 +23,7 @@ declare module 'vona-module-a-menu' {
           export interface ServiceMenu {
             get $beanFullName(): 'a-menu.service.menu';
             get $onionName(): 'a-menu:menu';
+            
           } 
 }
 /** service: end */
@@ -59,6 +60,7 @@ declare module 'vona-module-a-menu' {
           export interface EventRetrieveMenus {
             get $beanFullName(): 'a-menu.event.retrieveMenus';
             get $onionName(): 'a-menu:retrieveMenus';
+            
           } 
 }
 /** event: end */

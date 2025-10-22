@@ -21,6 +21,7 @@ declare module 'vona-module-a-schedule' {
           export interface ServiceSchedule {
             get $beanFullName(): 'a-schedule.service.schedule';
             get $onionName(): 'a-schedule:schedule';
+            
           } 
 }
 /** service: end */
@@ -61,6 +62,7 @@ declare module 'vona-module-a-schedule' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-schedule.meta.redlock';
             get $onionName(): 'a-schedule:redlock';
+            
           } 
 }
 /** meta: end */
@@ -89,6 +91,7 @@ declare module 'vona-module-a-schedule' {
           export interface QueueSchedule {
             get $beanFullName(): 'a-schedule.queue.schedule';
             get $onionName(): 'a-schedule:schedule';
+            get $onionOptions(): IDecoratorQueueOptions;
           } 
 }
 /** queue: end */
@@ -120,6 +123,7 @@ declare module 'vona-module-a-schedule' {
           export interface StartupLoadSchedules {
             get $beanFullName(): 'a-schedule.startup.loadSchedules';
             get $onionName(): 'a-schedule:loadSchedules';
+            get $onionOptions(): IDecoratorStartupOptions;
           } 
 }
 /** startup: end */

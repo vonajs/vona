@@ -24,6 +24,7 @@ declare module 'vona-module-a-web' {
           export interface PipeQuery {
             get $beanFullName(): 'a-web.pipe.query';
             get $onionName(): 'a-web:query';
+            get $onionOptions(): IPipeOptionsQuery;
           }
 
         export interface PipeValid {
@@ -34,6 +35,7 @@ declare module 'vona-module-a-web' {
           export interface PipeValid {
             get $beanFullName(): 'a-web.pipe.valid';
             get $onionName(): 'a-web:valid';
+            get $onionOptions(): IPipeOptionsValid;
           } 
 }
 /** pipe: end */
@@ -84,6 +86,7 @@ declare module 'vona-module-a-web' {
           export interface ServiceWeb {
             get $beanFullName(): 'a-web.service.web';
             get $onionName(): 'a-web:web';
+            
           } 
 }
 /** service: end */
@@ -124,6 +127,7 @@ declare module 'vona-module-a-web' {
           export interface StartupListen {
             get $beanFullName(): 'a-web.startup.listen';
             get $onionName(): 'a-web:listen';
+            get $onionOptions(): IDecoratorStartupOptions;
           } 
 }
 /** startup: end */

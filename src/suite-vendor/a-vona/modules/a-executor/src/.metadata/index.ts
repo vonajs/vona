@@ -46,6 +46,7 @@ declare module 'vona-module-a-executor' {
           export interface ServiceExecutor {
             get $beanFullName(): 'a-executor.service.executor';
             get $onionName(): 'a-executor:executor';
+            
           } 
 }
 /** service: end */

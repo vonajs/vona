@@ -50,6 +50,7 @@ declare module 'vona-module-a-jwt' {
           export interface ServiceJwtClient {
             get $beanFullName(): 'a-jwt.service.jwtClient';
             get $onionName(): 'a-jwt:jwtClient';
+            
           }
 
         export interface ServiceJwtExtract {
@@ -60,6 +61,7 @@ declare module 'vona-module-a-jwt' {
           export interface ServiceJwtExtract {
             get $beanFullName(): 'a-jwt.service.jwtExtract';
             get $onionName(): 'a-jwt:jwtExtract';
+            
           } 
 }
 /** service: end */

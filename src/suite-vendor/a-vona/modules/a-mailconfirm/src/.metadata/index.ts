@@ -22,6 +22,7 @@ declare module 'vona-module-a-mailconfirm' {
           export interface ServiceMail {
             get $beanFullName(): 'a-mailconfirm.service.mail';
             get $onionName(): 'a-mailconfirm:mail';
+            
           } 
 }
 /** service: end */
@@ -64,6 +65,7 @@ declare module 'vona-module-a-mailconfirm' {
           export interface CacheRedisEmailConfirm {
             get $beanFullName(): 'a-mailconfirm.cacheRedis.emailConfirm';
             get $onionName(): 'a-mailconfirm:emailConfirm';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           }
 
         export interface CacheRedisPasswordReset {
@@ -74,6 +76,7 @@ declare module 'vona-module-a-mailconfirm' {
           export interface CacheRedisPasswordReset {
             get $beanFullName(): 'a-mailconfirm.cacheRedis.passwordReset';
             get $onionName(): 'a-mailconfirm:passwordReset';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           } 
 }
 /** cacheRedis: end */
@@ -104,6 +107,7 @@ declare module 'vona-module-a-mailconfirm' {
           export interface EventEmailConfirmCallback {
             get $beanFullName(): 'a-mailconfirm.event.emailConfirmCallback';
             get $onionName(): 'a-mailconfirm:emailConfirmCallback';
+            
           }
 
         export interface EventPasswordResetCallback {
@@ -114,6 +118,7 @@ declare module 'vona-module-a-mailconfirm' {
           export interface EventPasswordResetCallback {
             get $beanFullName(): 'a-mailconfirm.event.passwordResetCallback';
             get $onionName(): 'a-mailconfirm:passwordResetCallback';
+            
           } 
 }
 /** event: end */
@@ -158,6 +163,7 @@ declare module 'vona-module-a-mailconfirm' {
           export interface ControllerMail {
             get $beanFullName(): 'a-mailconfirm.controller.mail';
             get $onionName(): 'a-mailconfirm:mail';
+            get $onionOptions(): IControllerOptionsMail;
           } 
 }
 /** controller: end */

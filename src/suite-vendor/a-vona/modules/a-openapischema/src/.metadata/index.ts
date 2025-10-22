@@ -21,6 +21,7 @@ declare module 'vona-module-a-openapischema' {
           export interface InterceptorOpenapiSchema {
             get $beanFullName(): 'a-openapischema.interceptor.openapiSchema';
             get $onionName(): 'a-openapischema:openapiSchema';
+            get $onionOptions(): IInterceptorOptionsOpenapiSchema;
           } 
 }
 /** interceptor: end */
@@ -42,6 +43,7 @@ declare module 'vona-module-a-openapischema' {
           export interface EventRetrieveOpenapiSchema {
             get $beanFullName(): 'a-openapischema.event.retrieveOpenapiSchema';
             get $onionName(): 'a-openapischema:retrieveOpenapiSchema';
+            
           } 
 }
 /** event: end */

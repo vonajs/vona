@@ -23,6 +23,7 @@ declare module 'vona-module-a-aspectutils' {
           export interface ServiceAop {
             get $beanFullName(): 'a-aspectutils.service.aop';
             get $onionName(): 'a-aspectutils:aop';
+            
           }
 
         export interface ServiceFilter {
@@ -33,6 +34,7 @@ declare module 'vona-module-a-aspectutils' {
           export interface ServiceFilter {
             get $beanFullName(): 'a-aspectutils.service.filter';
             get $onionName(): 'a-aspectutils:filter';
+            
           } 
 }
 /** service: end */

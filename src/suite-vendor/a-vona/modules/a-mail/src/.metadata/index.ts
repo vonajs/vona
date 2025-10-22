@@ -61,6 +61,7 @@ declare module 'vona-module-a-mail' {
           export interface ModelMail {
             get $beanFullName(): 'a-mail.model.mail';
             get $onionName(): 'a-mail:mail';
+            get $onionOptions(): IModelOptionsMail;
           } 
 }
 /** model: end */
@@ -161,6 +162,7 @@ declare module 'vona-module-a-mail' {
           export interface ServiceMail {
             get $beanFullName(): 'a-mail.service.mail';
             get $onionName(): 'a-mail:mail';
+            
           } 
 }
 /** service: end */
@@ -201,6 +203,7 @@ declare module 'vona-module-a-mail' {
           export interface MetaVersion {
             get $beanFullName(): 'a-mail.meta.version';
             get $onionName(): 'a-mail:version';
+            
           } 
 }
 /** meta: end */
@@ -226,6 +229,7 @@ declare module 'vona-module-a-mail' {
           export interface QueueMail {
             get $beanFullName(): 'a-mail.queue.mail';
             get $onionName(): 'a-mail:mail';
+            get $onionOptions(): IDecoratorQueueOptions;
           } 
 }
 /** queue: end */

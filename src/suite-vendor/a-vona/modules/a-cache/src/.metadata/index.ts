@@ -56,6 +56,7 @@ declare module 'vona-module-a-cache' {
           export interface BroadcastMemClear {
             get $beanFullName(): 'a-cache.broadcast.memClear';
             get $onionName(): 'a-cache:memClear';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
         export interface BroadcastMemDel {
@@ -66,6 +67,7 @@ declare module 'vona-module-a-cache' {
           export interface BroadcastMemDel {
             get $beanFullName(): 'a-cache.broadcast.memDel';
             get $onionName(): 'a-cache:memDel';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
         export interface BroadcastMemMultiDel {
@@ -76,6 +78,7 @@ declare module 'vona-module-a-cache' {
           export interface BroadcastMemMultiDel {
             get $beanFullName(): 'a-cache.broadcast.memMultiDel';
             get $onionName(): 'a-cache:memMultiDel';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
         export interface BroadcastMemMultiSet {
@@ -86,6 +89,7 @@ declare module 'vona-module-a-cache' {
           export interface BroadcastMemMultiSet {
             get $beanFullName(): 'a-cache.broadcast.memMultiSet';
             get $onionName(): 'a-cache:memMultiSet';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
         export interface BroadcastMemSet {
@@ -96,6 +100,7 @@ declare module 'vona-module-a-cache' {
           export interface BroadcastMemSet {
             get $beanFullName(): 'a-cache.broadcast.memSet';
             get $onionName(): 'a-cache:memSet';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */

@@ -76,6 +76,7 @@ declare module 'vona-module-a-auth' {
           export interface ModelAuth {
             get $beanFullName(): 'a-auth.model.auth';
             get $onionName(): 'a-auth:auth';
+            get $onionOptions(): IModelOptionsAuth;
           }
 
         export interface ModelAuthProvider {
@@ -86,6 +87,7 @@ declare module 'vona-module-a-auth' {
           export interface ModelAuthProvider {
             get $beanFullName(): 'a-auth.model.authProvider';
             get $onionName(): 'a-auth:authProvider';
+            get $onionOptions(): IModelOptionsAuthProvider;
           } 
 }
 /** model: end */
@@ -227,6 +229,7 @@ declare module 'vona-module-a-auth' {
           export interface ServiceAuth {
             get $beanFullName(): 'a-auth.service.auth';
             get $onionName(): 'a-auth:auth';
+            
           } 
 }
 /** service: end */
@@ -264,6 +267,7 @@ declare module 'vona-module-a-auth' {
           export interface EventAccountMigration {
             get $beanFullName(): 'a-auth.event.accountMigration';
             get $onionName(): 'a-auth:accountMigration';
+            
           }
 
         export interface EventIssuePassport {
@@ -274,6 +278,7 @@ declare module 'vona-module-a-auth' {
           export interface EventIssuePassport {
             get $beanFullName(): 'a-auth.event.issuePassport';
             get $onionName(): 'a-auth:issuePassport';
+            
           } 
 }
 /** event: end */
@@ -322,6 +327,7 @@ declare module 'vona-module-a-auth' {
           export interface MetaPrintTip {
             get $beanFullName(): 'a-auth.meta.printTip';
             get $onionName(): 'a-auth:printTip';
+            
           }
 
         export interface MetaRedlock {
@@ -332,6 +338,7 @@ declare module 'vona-module-a-auth' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-auth.meta.redlock';
             get $onionName(): 'a-auth:redlock';
+            
           }
 
         export interface MetaVersion {
@@ -342,6 +349,7 @@ declare module 'vona-module-a-auth' {
           export interface MetaVersion {
             get $beanFullName(): 'a-auth.meta.version';
             get $onionName(): 'a-auth:version';
+            
           } 
 }
 /** meta: end */
@@ -395,6 +403,7 @@ declare module 'vona-module-a-auth' {
           export interface ControllerPassport {
             get $beanFullName(): 'a-auth.controller.passport';
             get $onionName(): 'a-auth:passport';
+            get $onionOptions(): IControllerOptionsPassport;
           } 
 }
 /** controller: end */

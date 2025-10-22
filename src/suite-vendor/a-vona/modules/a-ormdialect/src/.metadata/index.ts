@@ -25,6 +25,7 @@ declare module 'vona-module-a-ormdialect' {
           export interface DatabaseDialectMysql {
             get $beanFullName(): 'a-ormdialect.databaseDialect.mysql';
             get $onionName(): 'a-ormdialect:mysql';
+            
           }
 
         export interface DatabaseDialectPg {
@@ -35,6 +36,7 @@ declare module 'vona-module-a-ormdialect' {
           export interface DatabaseDialectPg {
             get $beanFullName(): 'a-ormdialect.databaseDialect.pg';
             get $onionName(): 'a-ormdialect:pg';
+            
           } 
 }
 /** databaseDialect: end */

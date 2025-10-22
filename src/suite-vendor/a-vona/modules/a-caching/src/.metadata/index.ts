@@ -30,6 +30,7 @@ declare module 'vona-module-a-caching' {
           export interface AopMethodCachingClear {
             get $beanFullName(): 'a-caching.aopMethod.cachingClear';
             get $onionName(): 'a-caching:cachingClear';
+            get $onionOptions(): IAopMethodOptionsCachingClear;
           }
 
         export interface AopMethodCachingDel {
@@ -40,6 +41,7 @@ declare module 'vona-module-a-caching' {
           export interface AopMethodCachingDel {
             get $beanFullName(): 'a-caching.aopMethod.cachingDel';
             get $onionName(): 'a-caching:cachingDel';
+            get $onionOptions(): IAopMethodOptionsCachingDel;
           }
 
         export interface AopMethodCachingGet {
@@ -50,6 +52,7 @@ declare module 'vona-module-a-caching' {
           export interface AopMethodCachingGet {
             get $beanFullName(): 'a-caching.aopMethod.cachingGet';
             get $onionName(): 'a-caching:cachingGet';
+            get $onionOptions(): IAopMethodOptionsCachingGet;
           }
 
         export interface AopMethodCachingSet {
@@ -60,6 +63,7 @@ declare module 'vona-module-a-caching' {
           export interface AopMethodCachingSet {
             get $beanFullName(): 'a-caching.aopMethod.cachingSet';
             get $onionName(): 'a-caching:cachingSet';
+            get $onionOptions(): IAopMethodOptionsCachingSet;
           } 
 }
 /** aopMethod: end */

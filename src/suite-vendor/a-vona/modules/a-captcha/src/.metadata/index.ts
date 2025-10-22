@@ -23,6 +23,7 @@ declare module 'vona-module-a-captcha' {
           export interface InterceptorCaptchaVerify {
             get $beanFullName(): 'a-captcha.interceptor.captchaVerify';
             get $onionName(): 'a-captcha:captchaVerify';
+            get $onionOptions(): IInterceptorOptionsCaptchaVerify;
           } 
 }
 /** interceptor: end */
@@ -73,6 +74,7 @@ declare module 'vona-module-a-captcha' {
           export interface CacheRedisCaptcha {
             get $beanFullName(): 'a-captcha.cacheRedis.captcha';
             get $onionName(): 'a-captcha:captcha';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           } 
 }
 /** cacheRedis: end */
@@ -137,6 +139,7 @@ declare module 'vona-module-a-captcha' {
           export interface ControllerCaptcha {
             get $beanFullName(): 'a-captcha.controller.captcha';
             get $onionName(): 'a-captcha:captcha';
+            get $onionOptions(): IControllerOptionsCaptcha;
           } 
 }
 /** controller: end */

@@ -21,6 +21,7 @@ declare module 'vona-module-a-orm' {
           export interface AopMethodTransaction {
             get $beanFullName(): 'a-orm.aopMethod.transaction';
             get $onionName(): 'a-orm:transaction';
+            get $onionOptions(): IAopMethodOptionsTransaction;
           } 
 }
 /** aopMethod: end */
@@ -89,6 +90,7 @@ declare module 'vona-module-a-orm' {
           export interface ServiceDatabase {
             get $beanFullName(): 'a-orm.service.database';
             get $onionName(): 'a-orm:database';
+            
           } 
 }
 /** service: end */
@@ -129,6 +131,7 @@ declare module 'vona-module-a-orm' {
           export interface BroadcastColumnsClear {
             get $beanFullName(): 'a-orm.broadcast.columnsClear';
             get $onionName(): 'a-orm:columnsClear';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */
@@ -157,6 +160,7 @@ declare module 'vona-module-a-orm' {
           export interface EventClientNameReal {
             get $beanFullName(): 'a-orm.event.clientNameReal';
             get $onionName(): 'a-orm:clientNameReal';
+            
           }
 
         export interface EventColumnsClear {
@@ -167,6 +171,7 @@ declare module 'vona-module-a-orm' {
           export interface EventColumnsClear {
             get $beanFullName(): 'a-orm.event.columnsClear';
             get $onionName(): 'a-orm:columnsClear';
+            
           } 
 }
 /** event: end */
@@ -211,6 +216,7 @@ declare module 'vona-module-a-orm' {
           export interface QueueDoubleDelete {
             get $beanFullName(): 'a-orm.queue.doubleDelete';
             get $onionName(): 'a-orm:doubleDelete';
+            get $onionOptions(): IDecoratorQueueOptions;
           } 
 }
 /** queue: end */
@@ -242,6 +248,7 @@ declare module 'vona-module-a-orm' {
           export interface ScheduleSoftDeletionPrune {
             get $beanFullName(): 'a-orm.schedule.softDeletionPrune';
             get $onionName(): 'a-orm:softDeletionPrune';
+            get $onionOptions(): IDecoratorScheduleOptions;
           } 
 }
 /** schedule: end */

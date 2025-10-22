@@ -46,6 +46,7 @@ declare module 'vona-module-a-event' {
           export interface ServiceEventListener {
             get $beanFullName(): 'a-event.service.eventListener';
             get $onionName(): 'a-event:eventListener';
+            
           } 
 }
 /** service: end */

@@ -30,6 +30,7 @@ declare module 'vona-module-a-user' {
           export interface GuardPassport {
             get $beanFullName(): 'a-user.guard.passport';
             get $onionName(): 'a-user:passport';
+            get $onionOptions(): IGuardOptionsPassport;
           }
 
         export interface GuardRoleName {
@@ -40,6 +41,7 @@ declare module 'vona-module-a-user' {
           export interface GuardRoleName {
             get $beanFullName(): 'a-user.guard.roleName';
             get $onionName(): 'a-user:roleName';
+            get $onionOptions(): IGuardOptionsRoleName;
           }
 
         export interface GuardUserName {
@@ -50,6 +52,7 @@ declare module 'vona-module-a-user' {
           export interface GuardUserName {
             get $beanFullName(): 'a-user.guard.userName';
             get $onionName(): 'a-user:userName';
+            get $onionOptions(): IGuardOptionsUserName;
           } 
 }
 /** guard: end */
@@ -118,6 +121,7 @@ declare module 'vona-module-a-user' {
           export interface ServiceAuthTokenAdapter {
             get $beanFullName(): 'a-user.service.authTokenAdapter';
             get $onionName(): 'a-user:authTokenAdapter';
+            
           }
 
         export interface ServiceRedisToken {
@@ -128,6 +132,7 @@ declare module 'vona-module-a-user' {
           export interface ServiceRedisToken {
             get $beanFullName(): 'a-user.service.redisToken';
             get $onionName(): 'a-user:redisToken';
+            
           } 
 }
 /** service: end */
@@ -171,6 +176,7 @@ declare module 'vona-module-a-user' {
           export interface CacheRedisAuthToken {
             get $beanFullName(): 'a-user.cacheRedis.authToken';
             get $onionName(): 'a-user:authToken';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           } 
 }
 /** cacheRedis: end */
@@ -202,6 +208,7 @@ declare module 'vona-module-a-user' {
           export interface EventActivate {
             get $beanFullName(): 'a-user.event.activate';
             get $onionName(): 'a-user:activate';
+            
           }
 
         export interface EventCreateUserAnonymous {
@@ -212,6 +219,7 @@ declare module 'vona-module-a-user' {
           export interface EventCreateUserAnonymous {
             get $beanFullName(): 'a-user.event.createUserAnonymous';
             get $onionName(): 'a-user:createUserAnonymous';
+            
           }
 
         export interface EventRegister {
@@ -222,6 +230,7 @@ declare module 'vona-module-a-user' {
           export interface EventRegister {
             get $beanFullName(): 'a-user.event.register';
             get $onionName(): 'a-user:register';
+            
           }
 
         export interface EventSignin {
@@ -232,6 +241,7 @@ declare module 'vona-module-a-user' {
           export interface EventSignin {
             get $beanFullName(): 'a-user.event.signin';
             get $onionName(): 'a-user:signin';
+            
           }
 
         export interface EventSignout {
@@ -242,6 +252,7 @@ declare module 'vona-module-a-user' {
           export interface EventSignout {
             get $beanFullName(): 'a-user.event.signout';
             get $onionName(): 'a-user:signout';
+            
           } 
 }
 /** event: end */
@@ -298,6 +309,7 @@ declare module 'vona-module-a-user' {
           export interface MetaPrintTip {
             get $beanFullName(): 'a-user.meta.printTip';
             get $onionName(): 'a-user:printTip';
+            
           } 
 }
 /** meta: end */

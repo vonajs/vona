@@ -48,6 +48,7 @@ declare module 'vona-module-a-beanmutate' {
           export interface BroadcastDisposeInstances {
             get $beanFullName(): 'a-beanmutate.broadcast.disposeInstances';
             get $onionName(): 'a-beanmutate:disposeInstances';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
         export interface BroadcastReloadInstances {
@@ -58,6 +59,7 @@ declare module 'vona-module-a-beanmutate' {
           export interface BroadcastReloadInstances {
             get $beanFullName(): 'a-beanmutate.broadcast.reloadInstances';
             get $onionName(): 'a-beanmutate:reloadInstances';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */
@@ -88,6 +90,7 @@ declare module 'vona-module-a-beanmutate' {
           export interface EventDisposeInstances {
             get $beanFullName(): 'a-beanmutate.event.disposeInstances';
             get $onionName(): 'a-beanmutate:disposeInstances';
+            
           }
 
         export interface EventReloadInstances {
@@ -98,6 +101,7 @@ declare module 'vona-module-a-beanmutate' {
           export interface EventReloadInstances {
             get $beanFullName(): 'a-beanmutate.event.reloadInstances';
             get $onionName(): 'a-beanmutate:reloadInstances';
+            
           } 
 }
 /** event: end */

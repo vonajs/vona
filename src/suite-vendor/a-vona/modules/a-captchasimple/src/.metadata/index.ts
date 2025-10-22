@@ -21,6 +21,7 @@ declare module 'vona-module-a-captchasimple' {
           export interface CaptchaProviderImageText {
             get $beanFullName(): 'a-captchasimple.captchaProvider.imageText';
             get $onionName(): 'a-captchasimple:imageText';
+            get $onionOptions(): ICaptchaProviderOptionsImageText;
           } 
 }
 /** captchaProvider: end */
@@ -46,6 +47,7 @@ declare module 'vona-module-a-captchasimple' {
           export interface CaptchaSceneSimple {
             get $beanFullName(): 'a-captchasimple.captchaScene.simple';
             get $onionName(): 'a-captchasimple:simple';
+            get $onionOptions(): IDecoratorCaptchaSceneOptions;
           } 
 }
 /** captchaScene: end */

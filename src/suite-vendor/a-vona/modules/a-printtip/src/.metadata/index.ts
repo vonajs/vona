@@ -21,6 +21,7 @@ declare module 'vona-module-a-printtip' {
           export interface StartupPrintTip {
             get $beanFullName(): 'a-printtip.startup.printTip';
             get $onionName(): 'a-printtip:printTip';
+            get $onionOptions(): IDecoratorStartupOptions;
           } 
 }
 /** startup: end */

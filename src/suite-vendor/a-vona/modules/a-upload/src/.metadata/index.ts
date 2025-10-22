@@ -21,6 +21,7 @@ declare module 'vona-module-a-upload' {
           export interface InterceptorUpload {
             get $beanFullName(): 'a-upload.interceptor.upload';
             get $onionName(): 'a-upload:upload';
+            get $onionOptions(): IInterceptorOptionsUpload;
           } 
 }
 /** interceptor: end */

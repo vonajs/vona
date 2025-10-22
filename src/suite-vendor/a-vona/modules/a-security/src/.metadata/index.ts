@@ -24,6 +24,7 @@ declare module 'vona-module-a-security' {
           export interface MiddlewareSystemCors {
             get $beanFullName(): 'a-security.middlewareSystem.cors';
             get $onionName(): 'a-security:cors';
+            get $onionOptions(): IMiddlewareSystemOptionsCors;
           }
 
         export interface MiddlewareSystemSecurities {
@@ -34,6 +35,7 @@ declare module 'vona-module-a-security' {
           export interface MiddlewareSystemSecurities {
             get $beanFullName(): 'a-security.middlewareSystem.securities';
             get $onionName(): 'a-security:securities';
+            get $onionOptions(): IMiddlewareSystemOptionsSecurities;
           } 
 }
 /** middlewareSystem: end */

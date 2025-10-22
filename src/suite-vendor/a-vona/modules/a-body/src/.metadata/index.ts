@@ -24,6 +24,7 @@ declare module 'vona-module-a-body' {
           export interface InterceptorBodyReq {
             get $beanFullName(): 'a-body.interceptor.bodyReq';
             get $onionName(): 'a-body:bodyReq';
+            get $onionOptions(): IInterceptorOptionsBodyReq;
           }
 
         export interface InterceptorBodyRes {
@@ -34,6 +35,7 @@ declare module 'vona-module-a-body' {
           export interface InterceptorBodyRes {
             get $beanFullName(): 'a-body.interceptor.bodyRes';
             get $onionName(): 'a-body:bodyRes';
+            get $onionOptions(): IInterceptorOptionsBodyRes;
           } 
 }
 /** interceptor: end */

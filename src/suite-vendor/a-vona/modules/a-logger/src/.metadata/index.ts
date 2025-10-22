@@ -21,6 +21,7 @@ declare module 'vona-module-a-logger' {
           export interface MiddlewareSystemHttpLog {
             get $beanFullName(): 'a-logger.middlewareSystem.httpLog';
             get $onionName(): 'a-logger:httpLog';
+            get $onionOptions(): IMiddlewareSystemOptionsHttpLog;
           } 
 }
 /** middlewareSystem: end */
@@ -46,6 +47,7 @@ declare module 'vona-module-a-logger' {
           export interface AopMethodLog {
             get $beanFullName(): 'a-logger.aopMethod.log';
             get $onionName(): 'a-logger:log';
+            get $onionOptions(): IAopMethodOptionsLog;
           } 
 }
 /** aopMethod: end */
@@ -96,6 +98,7 @@ declare module 'vona-module-a-logger' {
           export interface BroadcastSetLevel {
             get $beanFullName(): 'a-logger.broadcast.setLevel';
             get $onionName(): 'a-logger:setLevel';
+            get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */

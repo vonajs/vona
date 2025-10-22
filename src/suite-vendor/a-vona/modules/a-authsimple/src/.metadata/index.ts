@@ -61,6 +61,7 @@ declare module 'vona-module-a-authsimple' {
           export interface ModelAuthSimple {
             get $beanFullName(): 'a-authsimple.model.authSimple';
             get $onionName(): 'a-authsimple:authSimple';
+            get $onionOptions(): IModelOptionsAuthSimple;
           } 
 }
 /** model: end */
@@ -136,6 +137,7 @@ declare module 'vona-module-a-authsimple' {
           export interface AuthProviderSimple {
             get $beanFullName(): 'a-authsimple.authProvider.simple';
             get $onionName(): 'a-authsimple:simple';
+            get $onionOptions(): IAuthProviderOptionsSimple;
           } 
 }
 /** authProvider: end */
@@ -192,6 +194,7 @@ declare module 'vona-module-a-authsimple' {
           export interface ServiceAuthSimple {
             get $beanFullName(): 'a-authsimple.service.authSimple';
             get $onionName(): 'a-authsimple:authSimple';
+            
           } 
 }
 /** service: end */
@@ -232,6 +235,7 @@ declare module 'vona-module-a-authsimple' {
           export interface MetaVersion {
             get $beanFullName(): 'a-authsimple.meta.version';
             get $onionName(): 'a-authsimple:version';
+            
           } 
 }
 /** meta: end */

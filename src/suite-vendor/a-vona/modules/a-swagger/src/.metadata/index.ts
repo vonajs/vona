@@ -22,6 +22,7 @@ declare module 'vona-module-a-swagger' {
           export interface MetaPrintTip {
             get $beanFullName(): 'a-swagger.meta.printTip';
             get $onionName(): 'a-swagger:printTip';
+            
           } 
 }
 /** meta: end */
@@ -49,6 +50,7 @@ declare module 'vona-module-a-swagger' {
           export interface SummerCacheRapidoc {
             get $beanFullName(): 'a-swagger.summerCache.rapidoc';
             get $onionName(): 'a-swagger:rapidoc';
+            get $onionOptions(): IDecoratorSummerCacheOptions;
           }
 
         export interface SummerCacheSwagger {
@@ -59,6 +61,7 @@ declare module 'vona-module-a-swagger' {
           export interface SummerCacheSwagger {
             get $beanFullName(): 'a-swagger.summerCache.swagger';
             get $onionName(): 'a-swagger:swagger';
+            get $onionOptions(): IDecoratorSummerCacheOptions;
           } 
 }
 /** summerCache: end */
@@ -95,6 +98,7 @@ declare module 'vona-module-a-swagger' {
           export interface ControllerRapidoc {
             get $beanFullName(): 'a-swagger.controller.rapidoc';
             get $onionName(): 'a-swagger:rapidoc';
+            get $onionOptions(): IControllerOptionsRapidoc;
           }
 
         export interface ControllerSwagger {
@@ -105,6 +109,7 @@ declare module 'vona-module-a-swagger' {
           export interface ControllerSwagger {
             get $beanFullName(): 'a-swagger.controller.swagger';
             get $onionName(): 'a-swagger:swagger';
+            get $onionOptions(): IControllerOptionsSwagger;
           } 
 }
 /** controller: end */

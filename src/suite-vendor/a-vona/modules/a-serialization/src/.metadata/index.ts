@@ -21,6 +21,7 @@ declare module 'vona-module-a-serialization' {
           export interface InterceptorSerializer {
             get $beanFullName(): 'a-serialization.interceptor.serializer';
             get $onionName(): 'a-serialization:serializer';
+            get $onionOptions(): IInterceptorOptionsSerializer;
           } 
 }
 /** interceptor: end */
@@ -74,6 +75,7 @@ declare module 'vona-module-a-serialization' {
           export interface SerializerTransformGetter {
             get $beanFullName(): 'a-serialization.serializerTransform.getter';
             get $onionName(): 'a-serialization:getter';
+            get $onionOptions(): ISerializerTransformOptionsGetter;
           }
 
         export interface SerializerTransformSensitive {
@@ -84,6 +86,7 @@ declare module 'vona-module-a-serialization' {
           export interface SerializerTransformSensitive {
             get $beanFullName(): 'a-serialization.serializerTransform.sensitive';
             get $onionName(): 'a-serialization:sensitive';
+            get $onionOptions(): ISerializerTransformOptionsSensitive;
           } 
 }
 /** serializerTransform: end */

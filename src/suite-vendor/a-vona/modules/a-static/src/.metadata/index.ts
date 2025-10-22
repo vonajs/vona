@@ -21,6 +21,7 @@ declare module 'vona-module-a-static' {
           export interface MiddlewareSystemStatic {
             get $beanFullName(): 'a-static.middlewareSystem.static';
             get $onionName(): 'a-static:static';
+            get $onionOptions(): IMiddlewareSystemOptionsStatic;
           } 
 }
 /** middlewareSystem: end */
@@ -42,6 +43,7 @@ declare module 'vona-module-a-static' {
           export interface EventResolvePath {
             get $beanFullName(): 'a-static.event.resolvePath';
             get $onionName(): 'a-static:resolvePath';
+            
           } 
 }
 /** event: end */

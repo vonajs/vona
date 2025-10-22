@@ -21,6 +21,7 @@ declare module 'vona-module-a-error' {
           export interface FilterError {
             get $beanFullName(): 'a-error.filter.error';
             get $onionName(): 'a-error:error';
+            get $onionOptions(): IFilterOptionsError;
           } 
 }
 /** filter: end */
@@ -71,6 +72,7 @@ declare module 'vona-module-a-error' {
           export interface ServiceErrorView {
             get $beanFullName(): 'a-error.service.errorView';
             get $onionName(): 'a-error:errorView';
+            
           } 
 }
 /** service: end */

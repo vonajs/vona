@@ -21,6 +21,7 @@ declare module 'vona-module-a-broadcast' {
           export interface ServiceBroadcast {
             get $beanFullName(): 'a-broadcast.service.broadcast';
             get $onionName(): 'a-broadcast:broadcast';
+            
           } 
 }
 /** service: end */

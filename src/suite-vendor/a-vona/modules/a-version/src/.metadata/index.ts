@@ -91,6 +91,7 @@ declare module 'vona-module-a-version' {
           export interface ModelVersion {
             get $beanFullName(): 'a-version.model.version';
             get $onionName(): 'a-version:version';
+            get $onionOptions(): IModelOptionsVersion;
           }
 
         export interface ModelVersionInit {
@@ -101,6 +102,7 @@ declare module 'vona-module-a-version' {
           export interface ModelVersionInit {
             get $beanFullName(): 'a-version.model.versionInit';
             get $onionName(): 'a-version:versionInit';
+            get $onionOptions(): IModelOptionsVersionInit;
           }
 
         export interface ModelViewRecord {
@@ -111,6 +113,7 @@ declare module 'vona-module-a-version' {
           export interface ModelViewRecord {
             get $beanFullName(): 'a-version.model.viewRecord';
             get $onionName(): 'a-version:viewRecord';
+            get $onionOptions(): IModelOptionsViewRecord;
           } 
 }
 /** model: end */
@@ -242,6 +245,7 @@ declare module 'vona-module-a-version' {
           export interface ServiceDatabase {
             get $beanFullName(): 'a-version.service.database';
             get $onionName(): 'a-version:database';
+            
           }
 
         export interface ServiceVersion {
@@ -252,6 +256,7 @@ declare module 'vona-module-a-version' {
           export interface ServiceVersion {
             get $beanFullName(): 'a-version.service.version';
             get $onionName(): 'a-version:version';
+            
           } 
 }
 /** service: end */
@@ -291,6 +296,7 @@ declare module 'vona-module-a-version' {
           export interface EventVersionDone {
             get $beanFullName(): 'a-version.event.versionDone';
             get $onionName(): 'a-version:versionDone';
+            
           } 
 }
 /** event: end */
@@ -331,6 +337,7 @@ declare module 'vona-module-a-version' {
           export interface MetaVersion {
             get $beanFullName(): 'a-version.meta.version';
             get $onionName(): 'a-version:version';
+            
           } 
 }
 /** meta: end */
@@ -360,6 +367,7 @@ declare module 'vona-module-a-version' {
           export interface StartupDatabaseInit {
             get $beanFullName(): 'a-version.startup.databaseInit';
             get $onionName(): 'a-version:databaseInit';
+            get $onionOptions(): IDecoratorStartupOptions;
           }
 
         export interface StartupDatabaseName {
@@ -370,6 +378,7 @@ declare module 'vona-module-a-version' {
           export interface StartupDatabaseName {
             get $beanFullName(): 'a-version.startup.databaseName';
             get $onionName(): 'a-version:databaseName';
+            get $onionOptions(): IDecoratorStartupOptions;
           }
 
         export interface StartupInstanceInit {
@@ -380,6 +389,7 @@ declare module 'vona-module-a-version' {
           export interface StartupInstanceInit {
             get $beanFullName(): 'a-version.startup.instanceInit';
             get $onionName(): 'a-version:instanceInit';
+            get $onionOptions(): IDecoratorStartupOptions;
           } 
 }
 /** startup: end */

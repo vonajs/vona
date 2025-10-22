@@ -47,6 +47,7 @@ declare module 'vona-module-a-redis' {
           export interface ServiceRedis {
             get $beanFullName(): 'a-redis.service.redis';
             get $onionName(): 'a-redis:redis';
+            
           } 
 }
 /** service: end */

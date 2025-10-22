@@ -22,6 +22,7 @@ declare module 'vona-module-home-index' {
           export interface MetaPrintTip {
             get $beanFullName(): 'home-index.meta.printTip';
             get $onionName(): 'home-index:printTip';
+            
           } 
 }
 /** meta: end */
@@ -47,6 +48,7 @@ declare module 'vona-module-home-index' {
           export interface ControllerHome {
             get $beanFullName(): 'home-index.controller.home';
             get $onionName(): 'home-index:home';
+            get $onionOptions(): IControllerOptionsHome;
           } 
 }
 /** controller: end */

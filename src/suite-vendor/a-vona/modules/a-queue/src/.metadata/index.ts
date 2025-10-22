@@ -21,6 +21,7 @@ declare module 'vona-module-a-queue' {
           export interface ServiceQueue {
             get $beanFullName(): 'a-queue.service.queue';
             get $onionName(): 'a-queue:queue';
+            
           } 
 }
 /** service: end */
@@ -61,6 +62,7 @@ declare module 'vona-module-a-queue' {
           export interface StartupLoadQueueWorkers {
             get $beanFullName(): 'a-queue.startup.loadQueueWorkers';
             get $onionName(): 'a-queue:loadQueueWorkers';
+            get $onionOptions(): IDecoratorStartupOptions;
           } 
 }
 /** startup: end */

@@ -21,6 +21,7 @@ declare module 'vona-module-a-startup' {
           export interface ServiceStartup {
             get $beanFullName(): 'a-startup.service.startup';
             get $onionName(): 'a-startup:startup';
+            
           } 
 }
 /** service: end */
@@ -61,6 +62,7 @@ declare module 'vona-module-a-startup' {
           export interface CacheRedisStartupDebounce {
             get $beanFullName(): 'a-startup.cacheRedis.startupDebounce';
             get $onionName(): 'a-startup:startupDebounce';
+            get $onionOptions(): IDecoratorCacheRedisOptions;
           } 
 }
 /** cacheRedis: end */
@@ -92,6 +94,7 @@ declare module 'vona-module-a-startup' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-startup.meta.redlock';
             get $onionName(): 'a-startup:redlock';
+            
           } 
 }
 /** meta: end */
