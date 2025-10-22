@@ -91,6 +91,7 @@ declare module 'vona-module-home-user' {
           export interface ModelRole {
             get $beanFullName(): 'home-user.model.role';
             get $onionName(): 'home-user:role';
+            get $onionOptions(): IModelOptionsRole;
           }
 
         export interface ModelRoleUser {
@@ -101,6 +102,7 @@ declare module 'vona-module-home-user' {
           export interface ModelRoleUser {
             get $beanFullName(): 'home-user.model.roleUser';
             get $onionName(): 'home-user:roleUser';
+            get $onionOptions(): IModelOptionsRoleUser;
           }
 
         export interface ModelUser {
@@ -111,6 +113,7 @@ declare module 'vona-module-home-user' {
           export interface ModelUser {
             get $beanFullName(): 'home-user.model.user';
             get $onionName(): 'home-user:user';
+            get $onionOptions(): IModelOptionsUser;
           } 
 }
 /** model: end */
@@ -256,6 +259,7 @@ declare module 'vona-module-home-user' {
           export interface ServicePassportAdapter {
             get $beanFullName(): 'home-user.service.passportAdapter';
             get $onionName(): 'home-user:passportAdapter';
+            
           }
 
         export interface ServiceRoleAdapter {
@@ -266,6 +270,7 @@ declare module 'vona-module-home-user' {
           export interface ServiceRoleAdapter {
             get $beanFullName(): 'home-user.service.roleAdapter';
             get $onionName(): 'home-user:roleAdapter';
+            
           }
 
         export interface ServiceUserAdapter {
@@ -276,6 +281,7 @@ declare module 'vona-module-home-user' {
           export interface ServiceUserAdapter {
             get $beanFullName(): 'home-user.service.userAdapter';
             get $onionName(): 'home-user:userAdapter';
+            
           } 
 }
 /** service: end */
@@ -328,6 +334,7 @@ declare module 'vona-module-home-user' {
           export interface EventListenerActivate {
             get $beanFullName(): 'home-user.eventListener.activate';
             get $onionName(): 'home-user:activate';
+            get $onionOptions(): IDecoratorEventListenerOptions;
           }
 
         export interface EventListenerEmailConfirmCallback {
@@ -338,6 +345,7 @@ declare module 'vona-module-home-user' {
           export interface EventListenerEmailConfirmCallback {
             get $beanFullName(): 'home-user.eventListener.emailConfirmCallback';
             get $onionName(): 'home-user:emailConfirmCallback';
+            get $onionOptions(): IDecoratorEventListenerOptions;
           }
 
         export interface EventListenerPasswordResetCallback {
@@ -348,6 +356,7 @@ declare module 'vona-module-home-user' {
           export interface EventListenerPasswordResetCallback {
             get $beanFullName(): 'home-user.eventListener.passwordResetCallback';
             get $onionName(): 'home-user:passwordResetCallback';
+            get $onionOptions(): IDecoratorEventListenerOptions;
           }
 
         export interface EventListenerRegister {
@@ -358,6 +367,7 @@ declare module 'vona-module-home-user' {
           export interface EventListenerRegister {
             get $beanFullName(): 'home-user.eventListener.register';
             get $onionName(): 'home-user:register';
+            get $onionOptions(): IDecoratorEventListenerOptions;
           } 
 }
 /** eventListener: end */
@@ -385,6 +395,7 @@ declare module 'vona-module-home-user' {
           export interface MetaIndex {
             get $beanFullName(): 'home-user.meta.index';
             get $onionName(): 'home-user:index';
+            get $onionOptions(): IMetaOptionsIndex;
           }
 
         export interface MetaVersion {
@@ -395,6 +406,7 @@ declare module 'vona-module-home-user' {
           export interface MetaVersion {
             get $beanFullName(): 'home-user.meta.version';
             get $onionName(): 'home-user:version';
+            
           } 
 }
 /** meta: end */
@@ -469,6 +481,7 @@ declare module 'vona-module-home-user' {
           export interface ControllerPassport {
             get $beanFullName(): 'home-user.controller.passport';
             get $onionName(): 'home-user:passport';
+            get $onionOptions(): IControllerOptionsPassport;
           } 
 }
 /** controller: end */
@@ -527,6 +540,7 @@ declare module 'vona-module-home-user' {
           export interface ZodRefineEmailUnique {
             get $beanFullName(): 'home-user.zodRefine.emailUnique';
             get $onionName(): 'home-user:emailUnique';
+            get $onionOptions(): IZodRefineOptionsEmailUnique;
           }
 
         export interface ZodRefinePasswordConfirm {
@@ -537,6 +551,7 @@ declare module 'vona-module-home-user' {
           export interface ZodRefinePasswordConfirm {
             get $beanFullName(): 'home-user.zodRefine.passwordConfirm';
             get $onionName(): 'home-user:passwordConfirm';
+            get $onionOptions(): IZodRefineOptionsPasswordConfirm;
           }
 
         export interface ZodRefineUsernameUnique {
@@ -547,6 +562,7 @@ declare module 'vona-module-home-user' {
           export interface ZodRefineUsernameUnique {
             get $beanFullName(): 'home-user.zodRefine.usernameUnique';
             get $onionName(): 'home-user:usernameUnique';
+            get $onionOptions(): IZodRefineOptionsUsernameUnique;
           } 
 }
 /** zodRefine: end */
