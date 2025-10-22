@@ -59,7 +59,7 @@ export class BeanSerializer extends BeanBase {
           );
           // execute
           const beanFullName = beanFullNameFromOnionName(transformName, 'serializerTransform');
-          const beanInstance = this.bean._getBean<ISerializerTransform>(beanFullName as any);
+          const beanInstance = this.bean._getBean(beanFullName) as ISerializerTransform;
           if (!beanInstance) {
             throw new Error(`serializerTransform bean not found: ${beanFullName}`);
           }

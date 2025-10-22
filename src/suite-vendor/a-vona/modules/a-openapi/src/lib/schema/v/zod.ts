@@ -9,7 +9,7 @@ export function schemaZodRefine<T extends keyof IZodRefineRecord>(zodRefineName:
       const options2 = app.bean.onion.zodRefine.getOnionOptionsDynamic(zodRefineName, options);
       // execute
       const beanFullName = beanFullNameFromOnionName(zodRefineName, 'zodRefine');
-      const beanInstance = app.bean._getBean<IZodRefineExecute>(beanFullName as any);
+      const beanInstance = app.bean._getBean(beanFullName) as unknown as IZodRefineExecute;
       if (!beanInstance) {
         throw new Error(`zodRefine bean not found: ${beanFullName}`);
       }
@@ -25,7 +25,7 @@ export function schemaZodTransform<T extends keyof IZodTransformRecord>(zodTrans
       const options2 = app.bean.onion.zodTransform.getOnionOptionsDynamic(zodTransformName, options);
       // execute
       const beanFullName = beanFullNameFromOnionName(zodTransformName, 'zodTransform');
-      const beanInstance = app.bean._getBean<IZodTransformExecute>(beanFullName as any);
+      const beanInstance = app.bean._getBean(beanFullName) as IZodTransformExecute;
       if (!beanInstance) {
         throw new Error(`zodTransform bean not found: ${beanFullName}`);
       }

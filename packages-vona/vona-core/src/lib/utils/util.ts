@@ -2,7 +2,7 @@ import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
 import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
 import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
-import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
+import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
 import type { ZodLocaleErrors } from './zod-enhance.ts';
 import crypto from 'node:crypto';
@@ -352,8 +352,8 @@ export function prepareEnv(env: Partial<NodeJS.ProcessEnv>): VonaConfigEnv {
   return env2 as unknown as VonaConfigEnv;
 }
 
-export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): string {
-  return onionName.replace(':', `.${sceneName}.`);
+export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): keyof IBeanRecord {
+  return onionName.replace(':', `.${sceneName}.`) as unknown as keyof IBeanRecord;
 }
 
 export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {

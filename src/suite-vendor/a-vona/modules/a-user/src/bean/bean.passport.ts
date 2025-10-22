@@ -18,7 +18,7 @@ export class BeanPassport extends BeanBase {
   private get authTokenAdapter(): IAuthTokenAdapter {
     if (!this._authTokenAdapter) {
       const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.authToken, 'service');
-      this._authTokenAdapter = this.bean._getBean<IAuthTokenAdapter>(beanFullName as never);
+      this._authTokenAdapter = this.bean._getBean(beanFullName) as IAuthTokenAdapter;
     }
     return this._authTokenAdapter;
   }
@@ -26,7 +26,7 @@ export class BeanPassport extends BeanBase {
   private get passportAdapter(): IPassportAdapter {
     if (!this._passportAdapter) {
       const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.passport, 'service');
-      this._passportAdapter = this.bean._getBean<IPassportAdapter>(beanFullName as never);
+      this._passportAdapter = this.bean._getBean(beanFullName) as IPassportAdapter;
     }
     return this._passportAdapter;
   }

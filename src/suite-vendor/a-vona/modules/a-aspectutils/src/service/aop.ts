@@ -57,7 +57,7 @@ export class ServiceAop extends BeanBase {
         const options = deepExtend({}, onionSlice.beanOptions.options, aopMethod.options);
         if (this.bean.onion.checkOnionOptionsEnabled(options)) {
           const beanFullName = beanFullNameFromOnionName(aopMethod.onionName!, 'aopMethod');
-          const beanInstance = this.app.bean._getBean(beanFullName as any);
+          const beanInstance = this.app.bean._getBean(beanFullName);
           aopMethodsMatched.push({
             onionName: aopMethod.onionName,
             beanInstance,

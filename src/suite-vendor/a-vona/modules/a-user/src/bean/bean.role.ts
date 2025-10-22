@@ -10,7 +10,7 @@ export class BeanRole extends BeanBase {
   private get roleAdapter(): IRoleAdapter {
     if (!this._roleAdapter) {
       const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.role, 'service');
-      this._roleAdapter = this.bean._getBean<IRoleAdapter>(beanFullName as never);
+      this._roleAdapter = this.bean._getBean(beanFullName) as IRoleAdapter;
     }
     return this._roleAdapter;
   }

@@ -10,7 +10,7 @@ export class BeanUser extends BeanBase {
   private get userAdapter(): IUserAdapter {
     if (!this._userAdapter) {
       const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.user, 'service');
-      this._userAdapter = this.bean._getBean<IUserAdapter>(beanFullName as never);
+      this._userAdapter = this.bean._getBean(beanFullName) as IUserAdapter;
     }
     return this._userAdapter;
   }

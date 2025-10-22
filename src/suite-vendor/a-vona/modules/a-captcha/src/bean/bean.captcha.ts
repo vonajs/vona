@@ -142,7 +142,7 @@ export class BeanCaptcha extends BeanBase {
 
   private _getProviderInstance(providerName: keyof ICaptchaProviderRecord) {
     const beanFullName = beanFullNameFromOnionName(providerName, 'captchaProvider');
-    return this.bean._getBean<ICaptchaProviderExecute>(beanFullName as any);
+    return this.bean._getBean(beanFullName) as unknown as ICaptchaProviderExecute;
   }
 
   private _getProviderOptions(sceneName: keyof ICaptchaSceneRecord, providerName: keyof ICaptchaProviderRecord) {
