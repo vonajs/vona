@@ -41,40 +41,45 @@ export async function generateOnions(
           }`);
       }
     }
-    if (sceneMeta.optionsNone) continue;
-    // fileInfo
-    const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
-    // import options
-    if (fileInfo.optionsCustomInterface) {
-      contentImports.push(
-        `import type { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
-      );
-    }
-    // valueOptionsCustomInterface
-    let valueOptionsCustomInterface = fileInfo.optionsCustomInterface;
-    if (valueOptionsCustomInterface && sceneMeta.optionsCustomInterfaceTemplate) {
-      valueOptionsCustomInterface = replaceTemplate(
-        sceneMeta.optionsCustomInterfaceTemplate,
-        { optionsCustomInterface: valueOptionsCustomInterface },
-      );
-    }
-    // record
-    if (fileInfo.isGlobal) {
-      if (valueOptionsCustomInterface) {
-        contentRecordsGlobal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
-      } else {
-        if (sceneMeta.optionsGlobalInterfaceName) {
-          contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
-          needImportOptionsGlobalInterface = true;
-        } else {
-          contentRecordsGlobal.push(`'${beanNameFull}': never;`);
-        }
+    if (!sceneMeta.optionsNone) {
+      // fileInfo
+      const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
+      // import options
+      if (fileInfo.optionsCustomInterface) {
+        contentImports.push(
+          `import type { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
+        );
       }
-    } else {
-      if (valueOptionsCustomInterface) {
-        contentRecordsLocal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
+      // valueOptionsCustomInterface
+      let valueOptionsCustomInterface = fileInfo.optionsCustomInterface;
+      if (valueOptionsCustomInterface && sceneMeta.optionsCustomInterfaceTemplate) {
+        valueOptionsCustomInterface = replaceTemplate(
+          sceneMeta.optionsCustomInterfaceTemplate,
+          { optionsCustomInterface: valueOptionsCustomInterface },
+        );
+      }
+      // record
+      let onionOptions;
+      if (fileInfo.isGlobal) {
+        if (valueOptionsCustomInterface) {
+          onionOptions = valueOptionsCustomInterface;
+          contentRecordsGlobal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
+        } else {
+          if (sceneMeta.optionsGlobalInterfaceName) {
+            onionOptions = sceneMeta.optionsGlobalInterfaceName;
+            contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
+            needImportOptionsGlobalInterface = true;
+          } else {
+            contentRecordsGlobal.push(`'${beanNameFull}': never;`);
+          }
+        }
       } else {
-        contentRecordsLocal.push(`'${beanNameFull}': never;`);
+        if (valueOptionsCustomInterface) {
+          onionOptions = valueOptionsCustomInterface;
+          contentRecordsLocal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
+        } else {
+          contentRecordsLocal.push(`'${beanNameFull}': never;`);
+        }
       }
     }
   }
