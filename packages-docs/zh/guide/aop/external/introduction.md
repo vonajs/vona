@@ -1,0 +1,103 @@
+# 外部切面
+
+在不改变 Class 源码的前提下，从外部为任何 Class 的任何方法切入逻辑
+
+## 创建目标Class
+
+可以针对任何 Class 实现外面切面。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `test`，代码如下：
+
+``` typescript
+@Service()
+export class ServiceTest extends BeanBase {
+  private _name: string;
+
+  protected __init__() {
+    this._name = '';
+  }
+
+  protected async __dispose__() {
+    this._name = '';
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(value) {
+    this._name = value;
+  }
+
+  actionSync(a: number, b: number) {
+    return a + b;
+  }
+
+  async actionAsync(a: number, b: number) {
+    return Promise.resolve(a + b);
+  }
+}
+```
+
+## 创建外部切面
+
+接下来，创建一个外部切面`log`，为 Class `ServiceTest`的属性和方法分别提供扩展逻辑
+
+### 1. Cli命令
+
+``` bash
+$ vona :create:bean aop log --module=demo-student
+```
+
+### 2. 菜单命令
+
+::: tip
+右键菜单 - [模块路径]: `Vona Aspect/Aop`
+:::
+
+## AOP定义
+
+``` typescript
+import { BeanAopBase } from 'vona';
+import { Aop } from 'vona-module-a-aspect';
+
+@Aop({ match: 'demo-student.service.test' })
+export class AopLog extends BeanAopBase {}
+```
+
+- `@Aop`: 此装饰器用于实现`外部切面`
+- `match`: 用于将 Class `AopLog`与 Class `ServiceTest`关联，`ServiceTest`的 beanFullName 是`demo-student.service.test`
+
+## 切面：同步方法
+
+为`ServiceTest#actionSync`输出运行时长日志
+
+在 VSCode 编辑器中，输入代码片段`aopactionsync`，自动生成代码骨架:
+
+``` typescript
+action: AopAction<BeanClassSome, 'action'> = (_args, next, _receiver) => {
+  return next();
+};
+```
+
+调整代码，然后添加 log 逻辑
+
+``` typescript
+actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
+  const timeBegin = Date.now();
+  const res = next();
+  const timeEnd = Date.now();
+  console.log('actionSync: ', timeEnd - timeBegin);
+  return res;
+};
+```
+
+- `actionSync`: 提供与`ServiceTest`同名的方法`actionSync`
+
+## 切面：异步方法
+
+## 切面：getter
+
+## 切面：setter
+
+## 切面：`__init__`
+
+## 切面：`__dispose__`
