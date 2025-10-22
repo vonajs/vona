@@ -69,14 +69,14 @@ class ServiceStudent {
 
 ## AOP Method Parameters
 
-You can define parameters for middleware, allowing for more flexible configuration of middleware logic
+You can define parameters for AOP Method, allowing for more flexible configuration of AOP Method logic
 
-For example, define the `prefix` parameter for the logger middleware to control the output format
+For example, define the `prefix` parameter for the log AOP Method to control the output format
 
 ### 1. Defining parameter types
 
 ``` diff
-export interface IAOP MethodOptionsLogger extends IDecoratorAOP MethodOptions {
+export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 + prefix: string;
 }
 ```
@@ -84,7 +84,7 @@ export interface IAOP MethodOptionsLogger extends IDecoratorAOP MethodOptions {
 ### 2. Providing default values ​​for parameters
 
 ``` diff
-@AOP Method<IAOP MethodOptionsLogger>({
+@AopMethod<IAopMethodOptionsLog>({
 + prefix: 'time',
 })
 ```
@@ -92,20 +92,20 @@ export interface IAOP MethodOptionsLogger extends IDecoratorAOP MethodOptions {
 ### 3. Using Parameters
 
 ``` diff
-export interface IAOP MethodOptionsLogger extends IDecoratorAOP MethodOptions {
+export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   prefix: string;
 }
 
-@AOP Method<IAOP MethodOptionsLogger>({
+@AopMethod<IAopMethodOptionsLog>({
   prefix: 'time',
 })
-class AOP MethodLogger {
-  async execute(options: IAOP MethodOptionsLogger, next: Next) {
+class AopMethodLog {
+  async execute(options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<any> {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);
-+   console.log(`${options.prefix}: `, timeEnd - timeBegin);
+-   console.log('time:', timeEnd - timeBegin);
++   console.log(`${options.prefix}:`, timeEnd - timeBegin);
     return res;
   }
 }
@@ -113,17 +113,17 @@ class AOP MethodLogger {
 
 ### 4. Specify parameters when using
 
-You can specify local middleware parameters for a specific API
+You can specify AOP Method parameters for any specific Class Method
 
 ``` diff
 class ControllerStudent {
   @Web.get()
-+ @Aspect.middleware('demo-student:logger', { prefix: 'elapsed' })
++ @Aspect.aopMethod('demo-student:log', { prefix: 'elapsed' })
   async findMany() {}
 }
 ```
 
-- When using middleware, just provide the parameter value directly
+- When using AOP Method, just provide the parameter value directly
 
 ### 5. App config
 
@@ -134,8 +134,8 @@ AOP Method parameters can be configured in App config
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
-    'demo-student:logger': {
+  aopMethod: {
+    'demo-student:log': {
       prefix: 'elapsed',
     },
   },
@@ -145,3 +145,55 @@ config.onions = {
 ### 6. Parameter precedence
 
 `Specify parameters when using` > `App config` > `Default values`
+
+## AOP Method enable/disable
+
+You can control `enable/disable` of AOP Method
+
+### 1. Enable
+
+* Disable for an Class Method
+
+``` diff
+class ControllerStudent {
+  @Web.get()
++ @Aspect.aopMethod('demo-student:log', { enable: false })
+  async findMany() {}
+}
+```
+
+* Disable for Class Methods
+
+`src/backend/config/config/config.ts`
+
+``` diff
+// onions
+config.onions = {
+  aopMethod: {
+    'demo-student:log': {
++     enable: false,
+    },
+  },
+};
+```
+
+### 2. Meta
+
+Allows AOP Method to take effect in a specified operating environment
+
+|Name|Type|Description|
+|--|--|--|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+
+* Example
+
+``` diff
+@AopMethod({
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++ },
+})
+class AopMethodLog {}
+```
