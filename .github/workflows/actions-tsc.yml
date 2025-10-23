@@ -17,7 +17,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@v4
         with:
-          version: 10    
+          version: 10.19.0
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init

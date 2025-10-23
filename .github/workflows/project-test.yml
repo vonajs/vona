@@ -29,7 +29,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@v4
         with:
-          version: 10    
+          version: 10.19.0
       - run: npm i tsx -g 
       - run: npm i vona-cli -g
       - run: vona :create:project vona-test --template=basic
