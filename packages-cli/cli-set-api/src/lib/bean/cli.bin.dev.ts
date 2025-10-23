@@ -46,6 +46,7 @@ export class CliBinDev extends BeanCliBase {
         cwd: projectPath,
         exec: 'node',
         execArgs: ['--experimental-transform-types', '--loader=ts-node/esm'],
+        // execArgs: ['--experimental-transform-types', '--loader=ts-node/esm', '--trace-deprecation'],
         // signal: 'SIGHUP',
       });
       nodemon.on('quit', () => {
