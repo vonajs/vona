@@ -75,7 +75,7 @@
     "randomatic": "^3.1.1",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.8",
-    "ts-node": "^10.9.2",
+    "ts-node-maintained": "^10.9.6",
     "urllib": "^4.6.11",
     "uuid": "^11.1.0",
     "vona-core": "^5.0.66",
