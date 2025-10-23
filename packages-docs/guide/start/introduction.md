@@ -37,7 +37,7 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 
 |Name|Version|
 |--|--|
-|pnpm| >=10.0.0 |
+|pnpm| >=10.19.0 |
 |Nodejs| >=24.8.0 |
 |Typescript| >=5.7.3 |
 |Koa|>=3.0.0|

@@ -4,7 +4,7 @@
 
 |Name|Version|
 |--|--|
-|pnpm| >=10.0.0 |
+|pnpm| >=10.19.0 |
 |Nodejs| >=24.8.0 |
 |Redis|>=7.2.6|
 |MySQL|>=8|
