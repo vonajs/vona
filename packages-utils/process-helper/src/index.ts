@@ -145,13 +145,11 @@ export class ProcessHelper {
   }): Promise<string> {
     options.cwd = options.cwd || this.cwd;
     options.stdio = options.stdio || 'inherit';
-    if (process.platform.startsWith('win')) {
-      options.shell = options.shell ?? true;
-    }
+    options.shell = options.shell ?? true;
     options.gracefull = options.gracefull ?? true;
     return new Promise((resolve, reject) => {
       const logPrefix = options.logPrefix;
-      const proc = ChildProcess.spawn(cmd, args, options);
+      const proc = ChildProcess.spawn(`${cmd} ${args.join(' ')}`, options);
       if (options.gracefull) gracefull(proc);
       let stdout = '';
       let stderr = '';
