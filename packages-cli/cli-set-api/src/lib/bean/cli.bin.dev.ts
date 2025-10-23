@@ -5,6 +5,7 @@ import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import nodemon from 'nodemon';
 import { rimraf } from 'rimraf';
+import { getImportEsm } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -45,8 +46,8 @@ export class CliBinDev extends BeanCliBase {
         script: '.vona/bootstrap.ts',
         cwd: projectPath,
         exec: 'node',
-        execArgs: ['--experimental-transform-types', '--loader=ts-node/esm'],
-        // execArgs: ['--experimental-transform-types', '--loader=ts-node/esm', '--trace-deprecation'],
+        execArgs: ['--experimental-transform-types', getImportEsm()],
+        // execArgs: ['--experimental-transform-types', getImportEsm(), '--trace-deprecation'],
         // signal: 'SIGHUP',
       });
       nodemon.on('quit', () => {

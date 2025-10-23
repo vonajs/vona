@@ -49,3 +49,8 @@ export async function getPackageInfo(packageName: string) {
 export function patchFlavor(flavor?: VonaMetaFlavor | VonaMetaFlavor[]): VonaMetaFlavor | undefined {
   return Array.isArray(flavor) ? flavor[flavor.length - 1] : flavor;
 }
+
+export function getImportEsm() {
+  // return '--loader=ts-node/esm';
+  return '--import=\'./.vona/register.js\'';
+}

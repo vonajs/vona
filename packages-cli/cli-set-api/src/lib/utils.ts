@@ -87,3 +87,8 @@ export function copyTemplateIfNeed(fileSrc: string, fileDest: string) {
     fse.copyFileSync(fileSrc, fileDest);
   }
 }
+
+export function getImportEsm() {
+  // return '--loader=ts-node/esm';
+  return '--import=\'./.vona/register.js\'';
+}

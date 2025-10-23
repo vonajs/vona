@@ -2,7 +2,7 @@ import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
-import { BeanCliBase } from '@cabloy/cli';
+import { BeanCliBase, getImportEsm } from '@cabloy/cli';
 import { catchError } from '@cabloy/utils';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
@@ -61,7 +61,7 @@ export class CliBinTest extends BeanCliBase {
     if (process.env.TEST_WHYISNODERUNNING === 'true') {
       args.push('--import=why-is-node-running/include');
     }
-    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
+    args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
     // ignore error special in windows
     await catchError(() => {
       return this.helper.spawnExe({

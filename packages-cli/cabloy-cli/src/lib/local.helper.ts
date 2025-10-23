@@ -16,6 +16,7 @@ import gogocode from 'gogocode';
 import tmp from 'tmp';
 import { commandsConfig } from '../config.ts';
 import { getRegistry } from '../registry.ts';
+import { getImportEsm } from '../utils.ts';
 
 export interface ITempFileOptions {
   tmpdir?: string;
@@ -234,7 +235,7 @@ export class LocalHelper {
   async invokeCli(args: string[], options) {
     await this.processHelper.spawnExe({
       cmd: 'node',
-      args: ['--experimental-transform-types', '--loader=ts-node/esm', this.parseBrandPath()].concat(args),
+      args: ['--experimental-transform-types', getImportEsm(), this.parseBrandPath()].concat(args),
       options,
     });
   }

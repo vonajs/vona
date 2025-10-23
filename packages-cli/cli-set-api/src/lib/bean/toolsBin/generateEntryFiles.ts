@@ -22,6 +22,8 @@ export async function generateEntryFiles(
   await __generateEnvJson();
   // app
   await __generateApp();
+  // others
+  await __generateOthers();
   // zod
   await generateZod(configOptions);
 
@@ -67,6 +69,17 @@ export async function generateEntryFiles(
       const vars = {
         appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/backend/config/monkey.ts')),
       };
+      await copyTemplateFile(fileSrc, fileDest, vars);
+    }
+  }
+
+  async function __generateOthers() {
+    const templates = [['app/register.js', 'register.js']];
+    for (const [templateSrc, templateDest] of templates) {
+      const fileSrc = resolveTemplatePath(templateSrc);
+      const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, templateDest);
+      await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
+      const vars = {};
       await copyTemplateFile(fileSrc, fileDest, vars);
     }
   }

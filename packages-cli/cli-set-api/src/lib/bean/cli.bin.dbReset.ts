@@ -2,7 +2,7 @@ import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
-import { BeanCliBase } from '@cabloy/cli';
+import { BeanCliBase, getImportEsm } from '@cabloy/cli';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
@@ -46,7 +46,7 @@ export class CliBinDbReset extends BeanCliBase {
     }
     // run
     let args: string[] = [];
-    args = args.concat(['--experimental-transform-types', '--loader=ts-node/esm', testFile, projectPath]);
+    args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath]);
     await this.helper.spawnExe({
       cmd: 'node',
       args,
