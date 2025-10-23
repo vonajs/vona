@@ -90,5 +90,5 @@ export function copyTemplateIfNeed(fileSrc: string, fileDest: string) {
 
 export function getImportEsm() {
   // return '--loader=ts-node/esm';
-  return '--import=\'./.vona/register.js\'';
+  return '--import=./.vona/register.js';
 }
