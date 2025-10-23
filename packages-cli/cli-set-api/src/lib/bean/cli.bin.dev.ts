@@ -46,7 +46,7 @@ export class CliBinDev extends BeanCliBase {
         script: '.vona/bootstrap.ts',
         cwd: projectPath,
         exec: 'node',
-        execArgs: ['--experimental-transform-types', getImportEsm()],
+        execArgs: [getImportEsm()],
         // execArgs: ['--experimental-transform-types', getImportEsm(), '--trace-deprecation'],
         // signal: 'SIGHUP',
       });

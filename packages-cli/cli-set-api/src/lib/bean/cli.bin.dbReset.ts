@@ -47,7 +47,8 @@ export class CliBinDbReset extends BeanCliBase {
     }
     // run
     let args: string[] = [];
-    args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath]);
+    args = args.concat([getImportEsm(), testFile, projectPath]);
+    // args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath]);
     await this.helper.spawnExe({
       cmd: 'node',
       args,

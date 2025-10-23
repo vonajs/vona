@@ -61,7 +61,8 @@ export class CliBinTest extends BeanCliBase {
     if (process.env.TEST_WHYISNODERUNNING === 'true') {
       args.push('--import=why-is-node-running/include');
     }
-    args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
+    args = args.concat([getImportEsm(), testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
+    // args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath, (!!argv.coverage).toString(), patterns.join(',')]);
     // ignore error special in windows
     await catchError(() => {
       return this.helper.spawnExe({

@@ -48,7 +48,8 @@ export class CliBinDemo extends BeanCliBase {
     }
     // run
     let args: string[] = [];
-    args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath]);
+    args = args.concat([getImportEsm(), testFile, projectPath]);
+    // args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath]);
     const pos = process.argv.indexOf(':bin:demo');
     if (pos > -1) {
       args = args.concat(process.argv.slice(pos + 1));
