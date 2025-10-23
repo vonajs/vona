@@ -388,7 +388,7 @@ importers:
         specifier: ^1.3.26
         version: link:../../packages-utils/module-info
       '@cabloy/process-helper':
-        specifier: ^2.0.19
+        specifier: ^2.0.20
         version: link:../../packages-utils/process-helper
       '@cabloy/utils':
         specifier: ^1.0.41
@@ -455,10 +455,10 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.48
+        specifier: ^3.0.49
         version: link:../cabloy-cli
       '@cabloy/process-helper':
-        specifier: ^2.0.19
+        specifier: ^2.0.20
         version: link:../../packages-utils/process-helper
       fs-extra:
         specifier: ^11.2.0
@@ -467,7 +467,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.253
+        specifier: ^1.0.254
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -489,7 +489,7 @@ importers:
         specifier: ^7.26.8
         version: 7.28.0(@babel/core@7.28.4)
       '@cabloy/cli':
-        specifier: ^3.0.48
+        specifier: ^3.0.49
         version: link:../cabloy-cli
       '@cabloy/dotenv':
         specifier: ^1.1.10
@@ -876,7 +876,7 @@ importers:
         specifier: ^5.0.67
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.141
+        specifier: ^5.0.142
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1197,7 +1197,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.84
+        specifier: ^5.0.85
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.18
@@ -1508,7 +1508,7 @@ importers:
         version: 3.18.3
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.48
+        specifier: ^3.0.49
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
         specifier: ^1.7.36
