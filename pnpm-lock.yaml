@@ -304,7 +304,7 @@ importers:
         version: 4.1.12
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.46
+        specifier: ^3.0.47
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
