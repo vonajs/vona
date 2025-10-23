@@ -354,9 +354,6 @@ importers:
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       vona-mock:
         specifier: ^6.0.65
         version: link:packages-vona/vona-mock
