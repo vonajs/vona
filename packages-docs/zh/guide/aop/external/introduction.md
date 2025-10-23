@@ -77,7 +77,7 @@ export class AopLog extends BeanAopBase {}
 在 VSCode 编辑器中，输入代码片段`aopactionsync`，自动生成代码骨架:
 
 ``` typescript
-action: AopAction<BeanClassSome, 'action'> = (_args, next, _receiver) => {
+action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
   return next();
 };
 ```

@@ -69,7 +69,7 @@ export class ServiceColor extends BeanBase {}
 
 ## `__get__`
 
-Then, use `__get__` to retrieve the color value.
+Then, use `__get__` to retrieve the color values
 
 ### 1. Add a code skeleton
 
