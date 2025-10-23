@@ -1,4 +1,4 @@
-import type { TypeErrorsInternal } from 'vona';
+import type { TypeErrorsInternal } from './errorInternal.ts';
 import type { IErrorObject } from './errorObject.ts';
 
 type TypeErrorMethodNames = 'parseFail' | 'parseSuccess';
