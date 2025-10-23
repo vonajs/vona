@@ -143,7 +143,15 @@ export class ServiceColor extends BeanBase {
 ``` diff
 @Service()
 export class ServiceColor extends BeanBase {
+  private _colors = {
+    red: '#FF0000',
+    green: '#00FF00',
+    blue: '#0000FF',
++   black: '',
+  };
+
   protected __set__(prop: string, value: any): boolean {
++   if (this._colors[prop] === undefined) return false;
 +   this._colors[prop] = value;
 +   return true;
   }
