@@ -88,15 +88,14 @@ export class ServiceColor extends BeanBase {
 @Service()
 export class ServiceColor extends BeanBase {
 + private _colors = {
-+ red: '#FF0000',
-+ green: '#00FF00',
-+ blue: '#0000FF',
++   red: '#FF0000',
++   green: '#00FF00',
++   blue: '#0000FF',
 + };
 
-protected __get__(prop: string) {
-+ return this._colors[prop];
-
-}
+  protected __get__(prop: string) {
++   return this._colors[prop];
+  }
 }
 ```
 
@@ -106,25 +105,25 @@ Providing type definitions for colors using interface type merging
 
 ``` typescript
 export interface ServiceColor {
-red: string;
-green: string;
-blue: string;
+  red: string;
+  green: string;
+  blue: string;
 }
 ```
 
-### 4. Using Magic Methods
+### 4. Using Magic Method
 
-``` typescript
+```typescript
 async test() {
-console.log(this.scope.service.color.red);
-console.log(this.scope.service.color.green);
-console.log(this.scope.service.color.blue);
+  console.log(this.scope.service.color.red);
+  console.log(this.scope.service.color.green);
+  console.log(this.scope.service.color.blue);
 }
 ```
 
 ## `__set__`
 
-Then, use `__set__` to set the color value.
+Then, use `__set__` to set the color values
 
 ### 1. Add a code skeleton
 
@@ -134,7 +133,7 @@ In the VSCode editor, enter the code snippet `aopmagicset` to automatically gene
 @Service()
 export class ServiceColor extends BeanBase {
 + protected __set__(prop: string, value: any): boolean {
-+ return false;
++   return false;
 + }
 }
 ```
@@ -144,14 +143,14 @@ export class ServiceColor extends BeanBase {
 ``` diff
 @Service()
 export class ServiceColor extends BeanBase {
-protected __set__(prop: string, value: any): boolean {
-+ this._colors[prop] = value;
-+ return true;
-}
+  protected __set__(prop: string, value: any): boolean {
++   this._colors[prop] = value;
++   return true;
+  }
 }
 ```
 
-- If a value is set for `prop`, return `true`; otherwise, return `false`.
+- If a value is set for `prop`, return `true`; otherwise, return `false`
 
 ### 3. Add type merging
 
