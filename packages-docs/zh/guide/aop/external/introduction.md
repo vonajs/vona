@@ -66,6 +66,10 @@ export class AopLog extends BeanAopBase {}
 - `@Aop`: 此装饰器用于实现`外部切面`
 - `match`: 用于将 Class `AopLog`与 Class `ServiceTest`关联，`ServiceTest`的 beanFullName 是`demo-student.service.test`
 
+|名称|类型|说明|
+|--|--|--|
+|match|string\|regexp\|(string\|regexp)[]|针对哪些 Class 启用|
+
 ## 切面：同步方法
 
 为`ServiceTest#actionSync`输出运行时长日志
