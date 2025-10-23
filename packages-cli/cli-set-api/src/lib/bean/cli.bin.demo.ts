@@ -1,8 +1,9 @@
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
-import { BeanCliBase, getImportEsm } from '@cabloy/cli';
+import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import { getImportEsm } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
