@@ -5,3 +5,24 @@ packages:
   - 'src/suite/*/modules/*'
   - 'src/suite-vendor/*'
   - 'src/suite-vendor/*/modules/*'
+
+hoist: true
+hoistWorkspacePackages: true
+linkWorkspacePackages: 'deep'
+preferWorkspacePackages: true
+autoInstallPeers: true
+publicHoistPattern:
+  - '*babel*'
+  - '*@babel*'
+  - '*eslint*'
+  - '*types*'
+  - 'lerna'
+  - 'vona'
+  - '*vona*'
+  - 'cabloy'
+  - '@cabloy'
+  - '*cabloy*'
+  - '*@cabloy*'
+  - '*why-is-node-running*'
+  - '*ts-node*'
+  - 'zod'
