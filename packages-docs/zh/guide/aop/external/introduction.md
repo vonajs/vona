@@ -224,3 +224,40 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 ```
 
 - `__dispose__`: 提供与`ServiceTest`同名的方法`__dispose__`
+
+## 切面：`__get__`
+
+为`ServiceTest`扩展魔术方法
+
+- 参见: [魔术方法](../internal/magic-method.md)
+
+在 VSCode 编辑器中，输入代码片段`aopget`，自动生成代码骨架:
+
+``` typescript
+protected __get__(prop: string, next: NextSync) {
+  const value = next();
+  return value;
+}
+```
+
+调整代码，然后添加自定义字段`red`
+
+``` typescript
+protected __get__(prop: string, next: NextSync) {
+  if (prop === 'red') return '#FF0000';
+  const value = next();
+  return value;
+}
+```
+
+- `__get__`: 约定的魔术方法名称
+
+通过接口类型合并的机制为颜色提供类型定义
+
+``` typescript
+declare module 'vona-module-demo-student' {
+  export interface ServiceTest {
+    red: string;
+  }
+}
+```

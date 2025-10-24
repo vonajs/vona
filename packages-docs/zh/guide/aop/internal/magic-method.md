@@ -104,10 +104,12 @@ export class ServiceColor extends BeanBase {
 通过接口类型合并的机制为颜色提供类型定义
 
 ``` typescript
-export interface ServiceColor {
-  red: string;
-  green: string;
-  blue: string;
+declare module 'vona-module-demo-student' {
+  export interface ServiceColor {
+    red: string;
+    green: string;
+    blue: string;
+  }
 }
 ```
 
@@ -165,11 +167,13 @@ export class ServiceColor extends BeanBase {
 通过接口类型合并的机制为颜色提供类型定义
 
 ``` diff
-export interface ServiceColor {
-  red: string;
-  green: string;
-  blue: string;
-+ black: string;
+declare module 'vona-module-demo-student' {
+  export interface ServiceColor {
+    red: string;
+    green: string;
+    blue: string;
++   black: string;
+  }
 }
 ```
 
