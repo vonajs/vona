@@ -147,11 +147,33 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 };
 ```
 
-- `__get_name__`: 对应`ServiceTest`的方法`get name`
+- `__get_name__`: 对应`ServiceTest`的 getter 方法`get name`
 
 ## 切面：setter
 
+为`ServiceTest#set name`输出运行时长
 
+在 VSCode 编辑器中，输入代码片段`aopsetter`，自动生成代码骨架:
+
+``` typescript
+protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next, _receiver) {
+  return next(value);
+}
+```
+
+调整代码，然后添加 log 逻辑
+
+``` typescript
+protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, next, _receiver) {
+  const timeBegin = Date.now();
+  const res = next(value);
+  const timeEnd = Date.now();
+  console.log('set name: ', timeEnd - timeBegin);
+  return res;
+};
+```
+
+- `__set_name__`: 对应`ServiceTest`的 setter 方法`set name`
 
 ## 切面：`__init__`
 
