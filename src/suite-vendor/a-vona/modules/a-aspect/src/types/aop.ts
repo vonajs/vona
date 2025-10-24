@@ -1,5 +1,5 @@
 import type { IBeanRecord, Next, NextSync, OmitNever } from 'vona';
-import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsEnableSimple, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
 
 export type AopActionNext<P, R> = R extends Promise<any> ? Next<P, Awaited<R>> : NextSync<P, R>;
 
@@ -29,7 +29,7 @@ export type AopActionSetter<T extends {}, NAME extends keyof T, DATA = undefined
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
-  extends IOnionOptionsEnable,
+  extends TypeOnionOptionsEnableSimple,
   IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IBeanRecord>>,
   IOnionOptionsDeps<keyof IAopRecord> {}
 
