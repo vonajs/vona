@@ -7,9 +7,7 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
     if (!this.app.meta.isDev) return;
     // signin
-    const jwt = await this.app.bean.executor.newCtx(async () => {
-      return await this.bean.passport.signinSystem('dev', '-1');
-    }, { instanceName: '' });
+    const jwt = await this.bean.passport.signinSystem('dev', '-1');
     const accessToken = jwt.accessToken;
     return {
       title: 'access token [admin] [dev]',

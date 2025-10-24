@@ -4,7 +4,7 @@ import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
 import type { IRoleBase } from '../types/role.ts';
 import type { IUserBase, IUserNameRecord } from '../types/user.ts';
-import { catchError } from '@cabloy/utils';
+import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $getAuthIdSystem } from '../lib/auth.ts';
@@ -67,6 +67,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public async signin(passport: IPassportBase, options?: ISigninOptions): Promise<IJwtToken> {
+    if (isNil(this.ctx.instanceName)) throw new Error('should specify instance');
     // current
     await this.setCurrent(passport);
     // event
@@ -96,6 +97,7 @@ export class BeanPassport extends BeanBase {
     name?: string,
     options?: ISigninOptions,
   ): Promise<IJwtToken> {
+    if (isNil(this.ctx.instanceName)) throw new Error('should specify instance');
     const user = await this.bean.user.findOneByName(name ?? 'admin');
     if (!user) return this.app.throw(401);
     const auth = { id: $getAuthIdSystem(authName, authId) };
