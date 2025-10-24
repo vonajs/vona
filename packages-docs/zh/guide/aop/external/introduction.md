@@ -261,3 +261,45 @@ declare module 'vona-module-demo-student' {
   }
 }
 ```
+
+## 切面：`__set__`
+
+为`ServiceTest`扩展魔术方法
+
+- 参见: [魔术方法](../internal/magic-method.md)
+
+在 VSCode 编辑器中，输入代码片段`aopset`，自动生成代码骨架:
+
+``` typescript
+protected __set__(prop: string, value: any, next: NextSync): boolean {
+  return next(value);
+}
+```
+
+调整代码，为自定义字段`red`设置值
+
+``` typescript
+private _colorRed: string | undefined;
+
+protected __set__(prop: string, value: any, next: NextSync): boolean {
+  if (prop === 'red') {
+    this._colorRed = value;
+    return true;
+  }
+  return next(value);
+}
+```
+
+- `__set__`: 约定的魔术方法名称
+- 如果为`prop`设置了值，返回`true`，否则调用`next`方法
+
+然后调整`__get__`的逻辑:
+
+``` diff
+protected __get__(prop: string, next: NextSync) {
+- if (prop === 'red') return '#FF0000';
++ if (prop === 'red') return this._colorRed;
+  const value = next();
+  return value;
+}
+```
