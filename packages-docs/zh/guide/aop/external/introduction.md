@@ -303,3 +303,31 @@ protected __get__(prop: string, next: NextSync) {
   return value;
 }
 ```
+
+## AOP顺序
+
+针对同一个目标 Class，可以关联多个 AOP。所以，VonaJS 提供了两个参数，用于控制 AOP 的执行顺序
+
+### 1. dependencies
+
+比如，另外有一个 AOP `demo-student:log3`，我们希望执行顺序如下：`demo-student:log3` > `Current`
+
+``` diff
+@Aop({
+  match: 'demo-student.service.test',
++ dependencies: 'demo-student:log3',
+})
+class AopLog {}
+```
+
+### 2. dependents
+
+`dependents`的顺序刚好与`dependencies`相反，我们希望执行顺序如下：`Current` > `demo-student:log3`
+
+``` diff
+@Aop({
+  match: 'demo-student.service.test',
++ dependents: 'demo-student:log3',
+})
+class AopLog {}
+```
