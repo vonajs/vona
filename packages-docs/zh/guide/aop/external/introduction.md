@@ -124,31 +124,34 @@ actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiv
 
 ## 切面：getter
 
-为`ServiceTest#actionAsync`输出运行时长
+为`ServiceTest#get name`输出运行时长
 
-在 VSCode 编辑器中，输入代码片段`aopaction`，自动生成代码骨架:
+在 VSCode 编辑器中，输入代码片段`aopgetter`，自动生成代码骨架:
 
 ``` typescript
-action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
-  return await next();
+protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _receiver) {
+  const value = next();
+  return value;
 };
 ```
 
 调整代码，然后添加 log 逻辑
 
 ``` typescript
-actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
+protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _receiver) {
   const timeBegin = Date.now();
-  const res = await next();
+  const value = next();
   const timeEnd = Date.now();
-  console.log('actionAsync: ', timeEnd - timeBegin);
-  return res;
+  console.log('get name: ', timeEnd - timeBegin);
+  return value;
 };
 ```
 
-- `actionAsync`: 提供与`ServiceTest`同名的方法`actionAsync`
+- `__get_name__`: 对应`ServiceTest`的方法`get name`
 
 ## 切面：setter
+
+
 
 ## 切面：`__init__`
 
