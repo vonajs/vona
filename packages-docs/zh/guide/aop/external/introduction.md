@@ -191,13 +191,36 @@ protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
 
 ``` typescript
 protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
-    const timeBegin = Date.now();
-    next();
-    const timeEnd = Date.now();
-    console.log('__init__: ', timeEnd - timeBegin);
-  };
+  const timeBegin = Date.now();
+  next();
+  const timeEnd = Date.now();
+  console.log('__init__: ', timeEnd - timeBegin);
+};
 ```
 
 - `__init__`: 提供与`ServiceTest`同名的方法`__init__`
 
 ## 切面：`__dispose__`
+
+为`ServiceTest#__dispose__`输出运行时长
+
+在 VSCode 编辑器中，输入代码片段`aopdispose`，自动生成代码骨架:
+
+``` typescript
+protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiver) => {
+  await next();
+};
+```
+
+调整代码，然后添加 log 逻辑
+
+``` typescript
+protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _receiver) => {
+  const timeBegin = Date.now();
+  await next();
+  const timeEnd = Date.now();
+  console.log('__dispose__: ', timeEnd - timeBegin);
+};
+```
+
+- `__dispose__`: 提供与`ServiceTest`同名的方法`__dispose__`
