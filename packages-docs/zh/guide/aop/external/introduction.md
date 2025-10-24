@@ -4,7 +4,7 @@
 
 ## 创建目标Class
 
-可以针对任何 Class 实现外面切面。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `test`，代码如下：
+可以针对任何 Class 实现外部切面。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `test`，代码如下：
 
 ``` typescript
 @Service()
@@ -72,7 +72,7 @@ export class AopLog extends BeanAopBase {}
 
 ## 切面：同步方法
 
-为`ServiceTest#actionSync`输出运行时长日志
+为`ServiceTest#actionSync`输出运行时长
 
 在 VSCode 编辑器中，输入代码片段`aopactionsync`，自动生成代码骨架:
 
@@ -98,7 +98,55 @@ actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
 
 ## 切面：异步方法
 
+为`ServiceTest#actionAsync`输出运行时长
+
+在 VSCode 编辑器中，输入代码片段`aopaction`，自动生成代码骨架:
+
+``` typescript
+action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
+  return await next();
+};
+```
+
+调整代码，然后添加 log 逻辑
+
+``` typescript
+actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
+  const timeBegin = Date.now();
+  const res = await next();
+  const timeEnd = Date.now();
+  console.log('actionAsync: ', timeEnd - timeBegin);
+  return res;
+};
+```
+
+- `actionAsync`: 提供与`ServiceTest`同名的方法`actionAsync`
+
 ## 切面：getter
+
+为`ServiceTest#actionAsync`输出运行时长
+
+在 VSCode 编辑器中，输入代码片段`aopaction`，自动生成代码骨架:
+
+``` typescript
+action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
+  return await next();
+};
+```
+
+调整代码，然后添加 log 逻辑
+
+``` typescript
+actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
+  const timeBegin = Date.now();
+  const res = await next();
+  const timeEnd = Date.now();
+  console.log('actionAsync: ', timeEnd - timeBegin);
+  return res;
+};
+```
+
+- `actionAsync`: 提供与`ServiceTest`同名的方法`actionAsync`
 
 ## 切面：setter
 
