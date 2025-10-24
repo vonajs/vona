@@ -332,30 +332,18 @@ class AopLog {}
 class AopLog {}
 ```
 
-## AOP Method启用/禁用
+## AOP启用/禁用
 
-可以针对某些 Class Method 控制 AOP Method 的`启用/禁用`
+可以控制 AOP 的`启用/禁用`
 
 ### 1. Enable
-
-* 针对某个 Class Method 禁用
-
-``` diff
-class ControllerStudent {
-  @Web.get()
-+ @Aspect.aopMethod('demo-student:log', { enable: false })
-  async findMany() {}
-}
-```
-
-* 针对所有 Class Methods 禁用
 
 `src/backend/config/config/config.ts`
 
 ``` diff
 // onions
 config.onions = {
-  aopMethod: {
+  aop: {
     'demo-student:log': {
 +     enable: false,
     },
@@ -365,7 +353,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 AOP Method 在指定的运行环境生效
+可以让 AOP 在指定的运行环境生效
 
 |名称|类型|说明|
 |--|--|--|
@@ -375,13 +363,13 @@ config.onions = {
 * 举例
 
 ``` diff
-@AopMethod({
+@Aop({
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
 + },
 })
-class AopMethodLog {}
+class AopLog {}
 ```
 
 ## 查看当前生效的AOP清单
