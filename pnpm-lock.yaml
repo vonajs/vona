@@ -876,7 +876,7 @@ importers:
         specifier: ^5.0.67
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.143
+        specifier: ^5.0.144
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1161,7 +1161,7 @@ importers:
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
-        specifier: ^5.0.21
+        specifier: ^5.0.22
         version: link:modules/a-aspect
       vona-module-a-aspectutils:
         specifier: workspace:^
