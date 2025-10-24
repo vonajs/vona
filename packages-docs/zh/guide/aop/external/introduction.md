@@ -177,4 +177,27 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 
 ## 切面：`__init__`
 
+为`ServiceTest#__init__`输出运行时长
+
+在 VSCode 编辑器中，输入代码片段`aopinit`，自动生成代码骨架:
+
+``` typescript
+protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
+  next();
+};
+```
+
+调整代码，然后添加 log 逻辑
+
+``` typescript
+protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
+    const timeBegin = Date.now();
+    next();
+    const timeEnd = Date.now();
+    console.log('__init__: ', timeEnd - timeBegin);
+  };
+```
+
+- `__init__`: 提供与`ServiceTest`同名的方法`__init__`
+
 ## 切面：`__dispose__`
