@@ -331,3 +331,75 @@ class AopLog {}
 })
 class AopLog {}
 ```
+
+## AOP Method启用/禁用
+
+可以针对某些 Class Method 控制 AOP Method 的`启用/禁用`
+
+### 1. Enable
+
+* 针对某个 Class Method 禁用
+
+``` diff
+class ControllerStudent {
+  @Web.get()
++ @Aspect.aopMethod('demo-student:log', { enable: false })
+  async findMany() {}
+}
+```
+
+* 针对所有 Class Methods 禁用
+
+`src/backend/config/config/config.ts`
+
+``` diff
+// onions
+config.onions = {
+  aopMethod: {
+    'demo-student:log': {
++     enable: false,
+    },
+  },
+};
+```
+
+### 2. Meta
+
+可以让 AOP Method 在指定的运行环境生效
+
+|名称|类型|说明|
+|--|--|--|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+
+* 举例
+
+``` diff
+@AopMethod({
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++ },
+})
+class AopMethodLog {}
+```
+
+## 查看当前生效的AOP清单
+
+可以直接在目标 Class action 中输出当前生效的 AOP 清单
+
+``` diff
+class ServiceTest {
+  protected async __dispose__() {
++   this.bean.onion.aop.inspect();
+    this._name = '';
+  }
+```
+
+- `this.bean.onion`: 取得全局 Service 实例 `onion`
+- `.aop`: 取得与 AOP 相关的 Service 实例
+- `.inspect`: 输出当前生效的 AOP 清单
+
+当方法被执行时，会自动在控制台输出当前生效的 AOP 清单，效果如下：
+
+![](../../../assets/img/aop/aop-1.png)
