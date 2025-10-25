@@ -7,7 +7,7 @@ import { formatLoggerAxiosError, formatLoggerConsole, formatLoggerFilter } from 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const configDefault: ConfigLogger = {
     rotate: {
-      enable: false,
+      enable: true,
       options(fileName) {
         return {
           filename: `${fileName}-%DATE%.log`,
