@@ -14,6 +14,7 @@ export interface VonaConfigEnv {
   SERVER_LISTEN_PORT: string | undefined;
   SERVER_LISTEN_DISABLE: 'true' | 'false' | undefined;
   TEST_WHYISNODERUNNING: string | undefined;
+  LOGGER_DUMMY: 'true' | 'false' | undefined;
 }
 
 declare global {

@@ -10,6 +10,7 @@ const __tipEnd = '=================== tip: end =====================';
 @Startup({ instance: true, debounce: true, after: true, meta: { mode: 'dev' } })
 export class StartupPrintTip extends BeanBase implements IStartupExecute {
   async execute() {
+    if (this.app.meta.env.LOGGER_DUMMY === 'true') return;
     setTimeout(async () => {
       await this._print();
     }, this.scope.config.delay);
