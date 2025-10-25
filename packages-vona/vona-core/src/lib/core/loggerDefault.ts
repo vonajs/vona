@@ -22,6 +22,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
         this.meta.logger.createTransportFile('error', clientInfo, {
           level: 'error',
           format: format.combine(
+            formatLoggerFilter({ level: 'error', strict: true }),
             format.json(),
           ),
         }),
