@@ -39,7 +39,11 @@ function main() {
   }
   args.push(bootstrapFile);
   const rawArgv = process.argv.slice(2);
-  args = args.concat(rawArgv);
+  if (rawArgv.length === 1 && rawArgv[0] === 'demo') {
+    args = args.concat([':bin:demo', '--dummy']);
+  } else {
+    args = args.concat(rawArgv);
+  }
 
   processHelper.spawnCmd({ cmd: 'tsx', args });
 }
