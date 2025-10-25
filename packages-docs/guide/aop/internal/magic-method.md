@@ -104,10 +104,12 @@ export class ServiceColor extends BeanBase {
 Providing type definitions for colors using interface type merging
 
 ``` typescript
-export interface ServiceColor {
-  red: string;
-  green: string;
-  blue: string;
+declare module 'vona-module-demo-student' {
+  export interface ServiceColor {
+    red: string;
+    green: string;
+    blue: string;
+  }
 }
 ```
 
@@ -165,11 +167,13 @@ export class ServiceColor extends BeanBase {
 Provide type definitions for colors using the interface type merging mechanism
 
 ``` diff
-export interface ServiceColor {
-  red: string;
-  green: string;
-  blue: string;
-+ black: string;
+declare module 'vona-module-demo-student' {
+  export interface ServiceColor {
+    red: string;
+    green: string;
+    blue: string;
++   black: string;
+  }
 }
 ```
 
