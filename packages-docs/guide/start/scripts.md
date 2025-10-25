@@ -51,7 +51,7 @@ $ npm run tsc
 Automatically run the Demo source code file and automatically create it if it does not exist
 
 ``` bash
-$ npm run demo
+$ vona demo
 ```
 
 ## db:reset

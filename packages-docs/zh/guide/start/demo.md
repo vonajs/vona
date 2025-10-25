@@ -9,7 +9,7 @@ Vona 提供了一个 Demo 练习场的功能，允许我们非常方便、快捷
 我们需要新建源码文件：`src/backend/demo/index.ts`。当前，我们并不需要手工创建此文件，而是执行以下命令，自动创建该文件：
 
 ``` bash
-$ npm run demo
+$ vona demo
 ```
 
 ### 2. 编写测试代码
@@ -25,7 +25,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 ### 3. 执行demo文件
 
 ``` bash
-$ npm run demo
+$ vona demo
 ```
 
 ## 举例

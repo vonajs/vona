@@ -33,7 +33,7 @@ In the development environment, you don't need to specify a database name (leave
 ``` bash
 $ npm run dev
 $ npm run dev:one
-$ npm run demo
+$ vona demo
 ```
 
 * In the development environment, you can also manually specify a database name, which will override the default behavior

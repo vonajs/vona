@@ -9,7 +9,7 @@ Vona provides a Demo Playground, which allows us to test the code and verify the
 We need to create a new source code file: `src/backend/demo/index.ts`. Currently, we do not need to create this file manually, but execute the following command to automatically create the file:
 
 ``` bash
-$ npm run demo
+$ vona demo
 ```
 
 ### 2. Write test code
@@ -25,7 +25,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 ### 3. Execute demo file
 
 ``` bash
-$ npm run demo
+$ vona demo
 ```
 
 ## Example

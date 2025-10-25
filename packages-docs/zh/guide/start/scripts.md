@@ -51,7 +51,7 @@ $ npm run tsc
 自动运行 Demo 源码文件，如果文件不存在则自动创建
 
 ``` bash
-$ npm run demo
+$ vona demo
 ```
 
 ## db:reset
