@@ -28,7 +28,7 @@ await demoRun(projectPath);
 
 async function demoRun(projectPath: string) {
   // create
-  const app = await createGeneralApp(projectPath, { SERVER_LISTEN_DISABLE: 'true' });
+  const app = await createGeneralApp(projectPath);
   // demo
   const demoFile = path.join(projectPath, `src/backend/demo/${mainFile}`);
   if (!fse.existsSync(demoFile)) {
