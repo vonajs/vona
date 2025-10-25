@@ -30,7 +30,7 @@ export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaCon
   const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(env.SERVER_WORKERS!);
   // logger
-  const logger = combineLoggerDefault(appInfo);
+  const logger = combineLoggerDefault(appInfo, env);
   return {
     meta: {
       flavor: cast(env).META_FLAVOR,
