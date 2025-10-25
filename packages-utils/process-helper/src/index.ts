@@ -31,7 +31,7 @@ function gracefull(proc) {
 
 export interface IProcessHelperSpawnOptions {
   cwd?: string;
-  silent?: boolean;
+  dummy?: boolean;
   logPrefix?: string;
   stdio?: any;
   shell?: boolean | string;
@@ -156,7 +156,7 @@ export class ProcessHelper {
       let stderr = '';
       proc.stdout?.on('data', async data => {
         stdout += data.toString();
-        if (!options.silent) {
+        if (!options.dummy) {
           await this.console.log({ text: data.toString() }, { logPrefix });
         }
       });

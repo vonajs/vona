@@ -20,7 +20,7 @@ async function checkPnpm() {
     options: {
       stdio: 'pipe',
       shell: true,
-      silent: true,
+      dummy: true,
     },
   });
   const version = res.trimEnd();
