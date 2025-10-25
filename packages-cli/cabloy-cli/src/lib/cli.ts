@@ -37,17 +37,23 @@ export class CliCommand extends BaseCommand {
       rawArgv,
     };
     // log start
-    // eslint-disable-next-line no-console
-    console.log(`${process.env.CabloyCliBrandName} ${chalk.cyan(argv.cliFullName)} at %s\n`, cwd);
+    if (!argv.dummy) {
+      // eslint-disable-next-line no-console
+      console.log(`${process.env.CabloyCliBrandName} ${chalk.cyan(argv.cliFullName)} at %s\n`, cwd);
+    }
     // log meta welcomes
-    this._logMetaWelcomes();
+    if (!argv.dummy) {
+      this._logMetaWelcomes();
+    }
     // prompt
     await this._promptGroups({ context, groups: this.__groups });
     // execute
     const beanCli = new BeanCli();
     await beanCli.execute({ context });
     // done: log cli docs
-    this._logCliDocs();
+    if (!argv.dummy) {
+      this._logCliDocs();
+    }
     // done
     // console.log(chalk.cyan('\n  cli successfully!\n'));
   }
