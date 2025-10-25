@@ -24,7 +24,7 @@
   },
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && npm run prerun && pnpm install --no-frozen-lockfile && pnpm dedupe",
-    "demo": "vona :bin:demo --flavor=normal",
+    "demo": "vona :bin:demo --flavor=demo",
     "db:reset": "npm run prerun && vona :bin:dbReset --flavor=normal",
     "dev": "npm run prerun && vona :bin:dev --workers=2 --flavor=normal",
     "dev:one": "npm run prerun && vona :bin:dev --workers=1 --flavor=normal",

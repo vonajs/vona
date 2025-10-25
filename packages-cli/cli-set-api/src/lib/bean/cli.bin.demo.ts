@@ -27,7 +27,7 @@ export class CliBinDemo extends BeanCliBase {
   async _demo(projectPath: string) {
     const { argv } = this.context;
     const mode: VonaMetaMode = argv.mode || 'dev';
-    const flavor: VonaMetaFlavor = argv.flavor || 'normal';
+    const flavor: VonaMetaFlavor = argv.flavor || 'demo';
     const configMeta: VonaConfigMeta = { flavor, mode };
     if (!argv.retainRuntime || !fse.existsSync(path.join(projectPath, '.vona'))) {
       const configOptions: VonaBinConfigOptions = {
