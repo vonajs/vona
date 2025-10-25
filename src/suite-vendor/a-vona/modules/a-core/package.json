@@ -95,8 +95,8 @@
   },
   "devDependencies": {
     "@cabloy/cli": "^3.0.51",
-    "@swc/core": "^1.7.36",
-    "@swc/helpers": "^0.5.13",
+    "@swc/core": "1.13.20",
+    "@swc/helpers": "^0.5.17",
     "@types/babel__core": "^7.20.5",
     "@types/babel__traverse": "^7.20.5",
     "@types/koa": "^2.15.0",
