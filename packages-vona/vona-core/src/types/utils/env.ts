@@ -15,6 +15,11 @@ export interface VonaConfigEnv {
   SERVER_LISTEN_DISABLE: 'true' | 'false' | undefined;
   TEST_WHYISNODERUNNING: string | undefined;
   LOGGER_DUMMY: 'true' | 'false' | undefined;
+  LOGGER_ROTATE_ENABLE: 'true' | 'false' | undefined;
+  LOGGER_ROTATE_FILENAME: string | undefined;
+  LOGGER_ROTATE_DATEPATTERN: string | undefined;
+  LOGGER_ROTATE_MAXSIZE: string | undefined;
+  LOGGER_ROTATE_MAXFILES: string | undefined;
 }
 
 declare global {
