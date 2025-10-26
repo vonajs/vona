@@ -19,21 +19,21 @@ export class AopSimple extends AopSimpleBase {
     if (prop === 'magic') {
       return 'magic:simpleaop';
     }
-    if (prop === 'name') {
-      return `${value}:simpleaop`;
-    }
+    // if (prop === 'name') {
+    //   return `${value}:simpleaop`;
+    // }
     return value;
   }
 
-  protected __set__(prop: string, value: any, next: NextSync): boolean {
-    if (prop === 'name') {
-      const parts = value.split(':');
-      const index = parts.indexOf('simpleaop');
-      if (index > -1) {
-        parts.splice(index, 1);
-      }
-      value = parts.join(':');
-    }
+  protected __set__(_prop: string, value: any, next: NextSync): boolean {
+    // if (prop === 'name') {
+    //   const parts = value.split(':');
+    //   const index = parts.indexOf('simpleaop');
+    //   if (index > -1) {
+    //     parts.splice(index, 1);
+    //   }
+    //   value = parts.join(':');
+    // }
     return next(value);
   }
 
