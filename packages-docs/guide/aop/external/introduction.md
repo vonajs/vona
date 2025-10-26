@@ -82,7 +82,7 @@ action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加 log 逻辑
+Adjust the code and add log logic
 
 ``` typescript
 actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
@@ -94,11 +94,11 @@ actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
 };
 ```
 
-- `actionSync`: 提供与`ServiceTest`同名的方法`actionSync`
+- `actionSync`: Provides the `actionSync` method with the same name to implement custom logic
 
-## Aspect: 异步方法
+## Aspect: Asynchronous method
 
-为`ServiceTest#actionAsync`输出运行时长
+Outputs execution time for `ServiceTest#actionAsync`
 
 In the VSCode editor, enter the code snippet `aopaction` to automatically generate a code skeleton:
 
@@ -108,7 +108,7 @@ action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加 log 逻辑
+Adjust the code and add log logic
 
 ``` typescript
 actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
@@ -120,11 +120,11 @@ actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiv
 };
 ```
 
-- `actionAsync`: 提供与`ServiceTest`同名的方法`actionAsync`
+- `actionAsync`: Provides the `actionAsync` method with the same name to implement custom logic
 
 ## Aspect: getter
 
-为`ServiceTest#get name`输出运行时长
+Outputs execution time for `ServiceTest#get name`
 
 In the VSCode editor, enter the code snippet `aopgetter` to automatically generate a code skeleton:
 
@@ -135,7 +135,7 @@ protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _rece
 };
 ```
 
-调整代码，然后添加 log 逻辑
+Adjust the code and add log logic
 
 ``` typescript
 protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _receiver) {
@@ -147,7 +147,7 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 };
 ```
 
-- `__get_name__`: 对应`ServiceTest`的 getter 方法`get name`
+- `__get_name__`: Corresponding to the getter method `get name` of `ServiceTest`
 
 ## Aspect: setter
 
@@ -161,7 +161,7 @@ protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next
 }
 ```
 
-调整代码，然后添加 log 逻辑
+Adjust the code and add log logic
 
 ``` typescript
 protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, next, _receiver) {
@@ -187,7 +187,7 @@ protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加 log 逻辑
+Adjust the code and add log logic
 
 ``` typescript
 protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
@@ -212,7 +212,7 @@ protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiv
 };
 ```
 
-调整代码，然后添加 log 逻辑
+Adjust the code and add log logic
 
 ``` typescript
 protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _receiver) => {
@@ -240,7 +240,7 @@ protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加自定义字段`red`
+Adjust the code and add the custom field `red`
 
 ``` typescript
 protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
@@ -276,7 +276,7 @@ protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => 
 };
 ```
 
-调整代码，为自定义字段`red`设置值
+Adjust the code to set the value for the custom field `red`
 
 ``` typescript
 private _colorRed: string | undefined;
@@ -316,7 +316,7 @@ protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _recei
 };
 ```
 
-调整代码，然后为方法`actionSync`和`actionAsync`添加 log 逻辑
+Adjust the code and add log logic for `actionSync` and `actionAsync`
 
 ``` typescript
 protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _receiver) => {
