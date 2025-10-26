@@ -234,20 +234,20 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 在 VSCode 编辑器中，输入代码片段`aopget`，自动生成代码骨架:
 
 ``` typescript
-protected __get__(prop: string, next: NextSync) {
+protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
   const value = next();
   return value;
-}
+};
 ```
 
 调整代码，然后添加自定义字段`red`
 
 ``` typescript
-protected __get__(prop: string, next: NextSync) {
+protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
   if (prop === 'red') return '#FF0000';
   const value = next();
   return value;
-}
+};
 ```
 
 - `__get__`: 约定的魔术方法名称
@@ -271,9 +271,9 @@ declare module 'vona-module-demo-student' {
 在 VSCode 编辑器中，输入代码片段`aopset`，自动生成代码骨架:
 
 ``` typescript
-protected __set__(prop: string, value: any, next: NextSync): boolean {
+protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => {
   return next(value);
-}
+};
 ```
 
 调整代码，为自定义字段`red`设置值
@@ -281,13 +281,13 @@ protected __set__(prop: string, value: any, next: NextSync): boolean {
 ``` typescript
 private _colorRed: string | undefined;
 
-protected __set__(prop: string, value: any, next: NextSync): boolean {
+protected __set__: AopActionSet<ServiceTest> = (prop, value, next, _receiver) => {
   if (prop === 'red') {
     this._colorRed = value;
     return true;
   }
   return next(value);
-}
+};
 ```
 
 - `__set__`: 约定的魔术方法名称
@@ -296,7 +296,7 @@ protected __set__(prop: string, value: any, next: NextSync): boolean {
 然后调整`__get__`的逻辑:
 
 ``` diff
-protected __get__(prop: string, next: NextSync) {
+protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 - if (prop === 'red') return '#FF0000';
 + if (prop === 'red') return this._colorRed;
   const value = next();
