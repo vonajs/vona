@@ -188,6 +188,36 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: '业务抽象层',
+      items: [
+        {
+          text: '用户体系',
+          base: '/zh/guide/bal/user/',
+          collapsed: true,
+          items: [
+            { text: 'User', link: 'user' },
+          ],
+        },
+        {
+          text: '认证体系',
+          base: '/zh/guide/bal/auth/',
+          collapsed: true,
+          items: [
+            { text: 'xxx', link: 'xxx' },
+          ],
+        },
+        {
+          text: '验证码体系',
+          base: '/zh/guide/bal/captcha/',
+          collapsed: true,
+          items: [
+            { text: 'xxx', link: 'xxx' },
+          ],
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: '技术',
       items: [
         {

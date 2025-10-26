@@ -188,6 +188,36 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: 'Business Abstraction Layer',
+      items: [
+        {
+          text: 'User System',
+          base: '/zh/guide/bal/user/',
+          collapsed: true,
+          items: [
+            { text: 'User', link: 'user' },
+          ],
+        },
+        {
+          text: 'Authentication System',
+          base: '/zh/guide/bal/auth/',
+          collapsed: true,
+          items: [
+            { text: 'xxx', link: 'xxx' },
+          ],
+        },
+        {
+          text: 'Captcha System',
+          base: '/zh/guide/bal/captcha/',
+          collapsed: true,
+          items: [
+            { text: 'xxx', link: 'xxx' },
+          ],
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: 'Techniques',
       items: [
         {
