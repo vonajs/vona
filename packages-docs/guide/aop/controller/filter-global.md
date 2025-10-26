@@ -157,7 +157,7 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class FilterTest {}
 ```
 
-## Filter enable/disable
+## Filter Enable/Disable
 
 You can control `enable/disable` of global filter for certain APIs
 

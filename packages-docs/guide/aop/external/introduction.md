@@ -370,7 +370,7 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class AopLog {}
 ```
 
-## AOP enable/disable
+## AOP Enable/Disable
 
 You can control `enable/disable` of AOPs
 

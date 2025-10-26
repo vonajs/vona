@@ -146,7 +146,7 @@ config.onions = {
 
 `Specify parameters when using` > `App config` > `Default values`
 
-## AOP Method enable/disable
+## AOP Method Enable/Disable
 
 You can control `enable/disable` of AOP Method
 

@@ -151,7 +151,7 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class InterceptorLogger {}
 ```
 
-## Interceptor enable/disable
+## Interceptor Enable/Disable
 
 You can control `enable/disable` of global interceptor for certain APIs
 

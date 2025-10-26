@@ -148,7 +148,7 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class GuardAdmin {}
 ```
 
-## Guard enable/disable
+## Guard Enable/Disable
 
 You can control `enable/disable` of global guard for certain APIs
 

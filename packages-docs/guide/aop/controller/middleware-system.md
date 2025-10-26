@@ -138,7 +138,7 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class MiddlewareSystemLogger {}
 ```
 
-## Middleware enable/disable 
+## Middleware Enable/Disable 
 
 You can control `enable/disable` of system middleware for certain APIs
 
