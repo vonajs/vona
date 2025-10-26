@@ -50,7 +50,7 @@ $ vona :create:bean aop log --module=demo-student
 ### 2. Menu command
 
 ::: tip
-右键菜单 - [Module Path]: `Vona Aspect/Aop`
+Context Menu - [Module Path]: `Vona Aspect/Aop`
 :::
 
 ## AOP Definition
@@ -411,8 +411,6 @@ class AopLog {}
 ```
 
 ## Inspect
-
-可以直接在目标 Class action 中输出当前生效的 AOP 清单
 
 You can directly inspect the currently effective AOP list in the target class action
 
