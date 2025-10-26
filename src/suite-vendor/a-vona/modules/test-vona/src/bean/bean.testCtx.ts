@@ -2,7 +2,7 @@ import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 class TestCtx0 extends BeanBase {
-  _name: string;
+  private _name: string;
 
   protected __init__(moduleName: string) {
     this._name = moduleName;

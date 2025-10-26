@@ -1,8 +1,13 @@
-import type { NextSync } from 'vona';
-import type { AopAction, AopActionDispose, AopActionGetter, AopActionInit, AopActionSetter } from 'vona-module-a-aspect';
+import type { AopAction, AopActionDispose, AopActionGet, AopActionGetter, AopActionInit, AopActionSet, AopActionSetter } from 'vona-module-a-aspect';
 import type { BeanTestCtx } from 'vona-module-test-vona';
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
+
+declare module 'vona-module-test-vona' {
+  export interface BeanTestCtx {
+    magic: string;
+  }
+}
 
 class AopSimpleBase extends BeanAopBase {
   actionSync: AopAction<BeanTestCtx, 'actionSync', string> = (_args, next, _receiver) => {
@@ -13,8 +18,7 @@ class AopSimpleBase extends BeanAopBase {
 
 @Aop({ match: 'testCtx', dependencies: 'test-vona:regExp', meta: { mode: 'test' } })
 export class AopSimple extends AopSimpleBase {
-  // magic
-  protected __get__(prop: string, next: NextSync) {
+  protected __get__: AopActionGet<BeanTestCtx> = (prop, next, _receiver) => {
     const value = next();
     if (prop === 'magic') {
       return 'magic:simpleaop';
@@ -23,9 +27,9 @@ export class AopSimple extends AopSimpleBase {
     //   return `${value}:simpleaop`;
     // }
     return value;
-  }
+  };
 
-  protected __set__(_prop: string, value: any, next: NextSync): boolean {
+  protected __set__: AopActionSet<BeanTestCtx> = (_prop, value, next, _receiver) => {
     // if (prop === 'name') {
     //   const parts = value.split(':');
     //   const index = parts.indexOf('simpleaop');
@@ -35,7 +39,7 @@ export class AopSimple extends AopSimpleBase {
     //   value = parts.join(':');
     // }
     return next(value);
-  }
+  };
 
   protected __get_name__: AopActionGetter<BeanTestCtx, 'name'> = function (next, _receiver) {
     const value = next();
