@@ -25,9 +25,9 @@ Enables the API to be effective in a specific runtime environment
 
 |Name|Type|Description|
 |--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
-|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../techniques/instance/introduction.md)|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../env-config/instance/introduction.md)|
 |host|string\|string[]|Host|
 
 * General usage:

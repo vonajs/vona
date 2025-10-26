@@ -91,7 +91,7 @@ config.instances = [
 ];
 ```
 
-- For `isolated mode`, you also need to configure a `datasource`. See: [Datasource Config](../orm/config-datasource.md)
+- For `isolated mode`, you also need to configure a `datasource`. See: [Datasource Config](../../techniques/orm/config-datasource.md)
 
 
 ## Rules for Obtaining the Current Instance Name

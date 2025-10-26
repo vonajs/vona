@@ -185,9 +185,9 @@ config.onions = {
 
 |名称|类型|说明|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|instanceName|string\|string[]|参见: [多实例/多租户](../../techniques/instance/introduction.md)|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|instanceName|string\|string[]|参见: [多实例/多租户](../../env-config/instance/introduction.md)|
 |host|string\|string[]|主机名|
 
 * 举例

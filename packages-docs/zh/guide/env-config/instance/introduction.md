@@ -91,7 +91,7 @@ config.instances = [
 ];
 ```
 
-- 对于`独立模式`，还需要配置数据源，参见: [数据源配置](../orm/config-datasource.md)
+- 对于`独立模式`，还需要配置数据源，参见: [数据源配置](../../techniques/orm/config-datasource.md)
 
 ## 获取当前实例名的规则
 

@@ -45,8 +45,8 @@ Vona 对模块/套件进行了规划，方便我们在约定的目录立即开�
 | 名称                                 | 说明                                                                                                 |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
 |docker-compose|docker-compose模版|
-| env                                  | [Env](../../techniques/env/introduction.md)                                                          |
-| src/backend/config/config              | [Config](../../techniques/config/introduction.md)                                                    |
+| env                                  | [Env](../../env-config/env/introduction.md)                                                          |
+| src/backend/config/config              | [Config](../../env-config/config/introduction.md)                                                    |
 | src/backend/config/locales.ts          | [I18n国际化](../scope/locale.md)                                                                     |
 | src/backend/demo          | [Demo练习场](../../start/demo.md)                                                                    |
 | src/backend/typing         | 项目级别的类型定义                                                                    |
