@@ -70,11 +70,11 @@ export class AopLog extends BeanAopBase {}
 |--|--|--|
 |match|string\|regexp\|(string\|regexp)[]|For which classes to enable|
 
-## Aspect: 同步方法
+## Aspect: Synchronous method
 
-为`ServiceTest#actionSync`输出运行时长
+Outputs execution time for `ServiceTest#actionSync`
 
-在 VSCode 编辑器中，输入代码片段`aopactionsync`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopactionsync` to automatically generate a code skeleton:
 
 ``` typescript
 action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
