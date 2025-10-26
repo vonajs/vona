@@ -192,7 +192,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         {
           text: 'User System',
-          base: '/zh/guide/bal/user/',
+          base: '/guide/bal/user/',
           collapsed: true,
           items: [
             { text: 'User', link: 'user' },
@@ -200,7 +200,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         {
           text: 'Authentication System',
-          base: '/zh/guide/bal/auth/',
+          base: '/guide/bal/auth/',
           collapsed: true,
           items: [
             { text: 'xxx', link: 'xxx' },
@@ -208,7 +208,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         {
           text: 'Captcha System',
-          base: '/zh/guide/bal/captcha/',
+          base: '/guide/bal/captcha/',
           collapsed: true,
           items: [
             { text: 'xxx', link: 'xxx' },
