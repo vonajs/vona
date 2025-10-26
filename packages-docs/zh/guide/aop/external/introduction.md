@@ -304,6 +304,44 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 }
 ```
 
+## 切面：`__method__`
+
+为`ServiceTest`的任何方法扩展逻辑
+
+在 VSCode 编辑器中，输入代码片段`aopmethod`，自动生成代码骨架:
+
+``` typescript
+protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {
+  return next();
+};
+```
+
+调整代码，然后为方法`actionSync`和`actionAsync`添加 log 逻辑
+
+``` typescript
+protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _receiver) => {
+  if (method !== 'actionSync' && method !== 'actionAsync') {
+    return next();
+  }
+  const timeBegin = Date.now();
+  function done(res) {
+    const timeEnd = Date.now();
+    console.log(`method ${method}: `, timeEnd - timeBegin);
+    return res;
+  }
+  const res = next();
+  if (res?.then) {
+    return res.then((res: any) => {
+      return done(res);
+    });
+  }
+  return done(res);
+};
+```
+
+- `__method__`: 约定的魔术方法名称
+- `res?.then`: 判断返回值是否是 Promise 对象，进行不同处理，从而兼容`同步方法`和`异步方法`
+
 ## AOP顺序
 
 针对同一个目标 Class，可以关联多个 AOP。所以，VonaJS 提供了两个参数，用于控制 AOP 的执行顺序
