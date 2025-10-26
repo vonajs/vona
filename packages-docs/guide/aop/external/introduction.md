@@ -100,7 +100,7 @@ actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
 
 为`ServiceTest#actionAsync`输出运行时长
 
-在 VSCode 编辑器中，输入代码片段`aopaction`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopaction` to automatically generate a code skeleton:
 
 ``` typescript
 action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
@@ -126,7 +126,7 @@ actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiv
 
 为`ServiceTest#get name`输出运行时长
 
-在 VSCode 编辑器中，输入代码片段`aopgetter`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopgetter` to automatically generate a code skeleton:
 
 ``` typescript
 protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _receiver) {
@@ -153,7 +153,7 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 
 为`ServiceTest#set name`输出运行时长
 
-在 VSCode 编辑器中，输入代码片段`aopsetter`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopsetter` to automatically generate a code skeleton:
 
 ``` typescript
 protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next, _receiver) {
@@ -179,7 +179,7 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 
 为`ServiceTest#__init__`输出运行时长
 
-在 VSCode 编辑器中，输入代码片段`aopinit`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopinit` to automatically generate a code skeleton:
 
 ``` typescript
 protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
@@ -204,7 +204,7 @@ protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
 
 为`ServiceTest#__dispose__`输出运行时长
 
-在 VSCode 编辑器中，输入代码片段`aopdispose`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopdispose` to automatically generate a code skeleton:
 
 ``` typescript
 protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiver) => {
@@ -231,7 +231,7 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 
 - 参见: [魔术方法](../internal/magic-method.md)
 
-在 VSCode 编辑器中，输入代码片段`aopget`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopget` to automatically generate a code skeleton:
 
 ``` typescript
 protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
@@ -268,7 +268,7 @@ declare module 'vona-module-demo-student' {
 
 - 参见: [魔术方法](../internal/magic-method.md)
 
-在 VSCode 编辑器中，输入代码片段`aopset`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopset` to automatically generate a code skeleton:
 
 ``` typescript
 protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => {
@@ -308,7 +308,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 为`ServiceTest`的任何方法扩展逻辑
 
-在 VSCode 编辑器中，输入代码片段`aopmethod`，自动生成代码骨架:
+In the VSCode editor, enter the code snippet `aopmethod` to automatically generate a code skeleton:
 
 ``` typescript
 protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {
