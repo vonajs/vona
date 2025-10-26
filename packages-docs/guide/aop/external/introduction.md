@@ -227,9 +227,9 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 
 ## Aspect: `__get__`
 
-为`ServiceTest`扩展魔术方法
+Extending magic method for `ServiceTest`
 
-- 参见: [魔术方法](../internal/magic-method.md)
+- See: [Magic Method](../internal/magic-method.md)
 
 In the VSCode editor, enter the code snippet `aopget` to automatically generate a code skeleton:
 
@@ -250,9 +250,9 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 };
 ```
 
-- `__get__`: 约定的魔术方法名称
+- `__get__`: Conventional magic method name
 
-通过接口类型合并的机制为颜色提供类型定义
+Provide type definitions for colors using the interface type merging mechanism
 
 ``` typescript
 declare module 'vona-module-demo-student' {
@@ -264,9 +264,9 @@ declare module 'vona-module-demo-student' {
 
 ## Aspect: `__set__`
 
-为`ServiceTest`扩展魔术方法
+Extending magic method for `ServiceTest`
 
-- 参见: [魔术方法](../internal/magic-method.md)
+- See: [Magic Method](../internal/magic-method.md)
 
 In the VSCode editor, enter the code snippet `aopset` to automatically generate a code skeleton:
 
@@ -290,10 +290,10 @@ protected __set__: AopActionSet<ServiceTest> = (prop, value, next, _receiver) =>
 };
 ```
 
-- `__set__`: 约定的魔术方法名称
-- 如果为`prop`设置了值，返回`true`，否则调用`next`方法
+- `__set__`: Conventional magic method name
+- If a value is set for `prop`, return `true`; otherwise, invoke `next` method
 
-然后调整`__get__`的逻辑:
+Then adjust the `__get__` logic:
 
 ``` diff
 protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
@@ -306,7 +306,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 ## Aspect: `__method__`
 
-为`ServiceTest`的任何方法扩展逻辑
+Extending logic for any method of `ServiceTest`
 
 In the VSCode editor, enter the code snippet `aopmethod` to automatically generate a code skeleton:
 
@@ -339,8 +339,8 @@ protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _rece
 };
 ```
 
-- `__method__`: 约定的魔术方法名称
-- `res?.then`: 判断返回值是否是 Promise 对象，进行不同处理，从而兼容`同步方法`和`异步方法`
+- `__method__`: Conventional magic method name
+- `res?.then`: Determine whether the return value is a Promise object and perform different processing to make it compatible with `synchronous method` and `asynchronous method`
 
 ## AOP顺序
 
