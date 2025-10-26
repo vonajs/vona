@@ -1,10 +1,10 @@
-# 外部切面
+# External Aspect
 
-在不改变 Class 源码的前提下，从外部为任何 Class 的任何方法切入逻辑
+Applies logic to any method of any class from the outside without changing the class source code
 
-## 创建目标Class
+## Create Target Class
 
-可以针对任何 Class 实现外部切面。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `test`，代码如下：
+External aspect can be implemented for any class. Below, taking Service as an example, create a Service `test` in the module demo-student with the following code:
 
 ``` typescript
 @Service()
@@ -37,23 +37,23 @@ export class ServiceTest extends BeanBase {
 }
 ```
 
-## 创建外部切面
+## Create External Aspect
 
-接下来，创建一个外部切面`log`，为 Class `ServiceTest`的属性和方法分别提供扩展逻辑
+Next, create an external aspect `log` to provide extension logic for the properties and methods of Class `ServiceTest`
 
-### 1. Cli命令
+### 1. Cli command
 
 ``` bash
 $ vona :create:bean aop log --module=demo-student
 ```
 
-### 2. 菜单命令
+### 2. Menu command
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Aspect/Aop`
+右键菜单 - [Module Path]: `Vona Aspect/Aop`
 :::
 
-## AOP定义
+## AOP Definition
 
 ``` typescript
 import { BeanAopBase } from 'vona';
@@ -63,14 +63,14 @@ import { Aop } from 'vona-module-a-aspect';
 export class AopLog extends BeanAopBase {}
 ```
 
-- `@Aop`: 此装饰器用于实现`外部切面`
-- `match`: 用于将 Class `AopLog`与 Class `ServiceTest`关联，`ServiceTest`的 beanFullName 是`demo-student.service.test`
+- `@Aop`: This decorator is used to implement the `external aspect`
+- `match`: This option is used to associate the `AopLog` class with the `ServiceTest` class, which beanFullName is `demo-student.service.test`
 
-|名称|类型|说明|
+|name|type|description|
 |--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些 Class 启用|
+|match|string\|regexp\|(string\|regexp)[]|For which classes to enable|
 
-## 切面：同步方法
+## Aspect: 同步方法
 
 为`ServiceTest#actionSync`输出运行时长
 
@@ -96,7 +96,7 @@ actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
 
 - `actionSync`: 提供与`ServiceTest`同名的方法`actionSync`
 
-## 切面：异步方法
+## Aspect: 异步方法
 
 为`ServiceTest#actionAsync`输出运行时长
 
@@ -122,7 +122,7 @@ actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiv
 
 - `actionAsync`: 提供与`ServiceTest`同名的方法`actionAsync`
 
-## 切面：getter
+## Aspect: getter
 
 为`ServiceTest#get name`输出运行时长
 
@@ -149,7 +149,7 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 
 - `__get_name__`: 对应`ServiceTest`的 getter 方法`get name`
 
-## 切面：setter
+## Aspect: setter
 
 为`ServiceTest#set name`输出运行时长
 
@@ -175,7 +175,7 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 
 - `__set_name__`: 对应`ServiceTest`的 setter 方法`set name`
 
-## 切面：`__init__`
+## Aspect: `__init__`
 
 为`ServiceTest#__init__`输出运行时长
 
@@ -200,7 +200,7 @@ protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
 
 - `__init__`: 提供与`ServiceTest`同名的方法`__init__`
 
-## 切面：`__dispose__`
+## Aspect: `__dispose__`
 
 为`ServiceTest#__dispose__`输出运行时长
 
@@ -225,7 +225,7 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 
 - `__dispose__`: 提供与`ServiceTest`同名的方法`__dispose__`
 
-## 切面：`__get__`
+## Aspect: `__get__`
 
 为`ServiceTest`扩展魔术方法
 
@@ -262,7 +262,7 @@ declare module 'vona-module-demo-student' {
 }
 ```
 
-## 切面：`__set__`
+## Aspect: `__set__`
 
 为`ServiceTest`扩展魔术方法
 
@@ -304,7 +304,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 }
 ```
 
-## 切面：`__method__`
+## Aspect: `__method__`
 
 为`ServiceTest`的任何方法扩展逻辑
 
