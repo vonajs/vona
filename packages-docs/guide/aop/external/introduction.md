@@ -177,7 +177,7 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 
 ## Aspect: `__init__`
 
-为`ServiceTest#__init__`输出运行时长
+Outputs execution time for `ServiceTest#__init__`
 
 In the VSCode editor, enter the code snippet `aopinit` to automatically generate a code skeleton:
 
@@ -198,11 +198,11 @@ protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
 };
 ```
 
-- `__init__`: 提供与`ServiceTest`同名的方法`__init__`
+- `__init__`: Provides the `__init__` method with the same name to implement custom logic
 
 ## Aspect: `__dispose__`
 
-为`ServiceTest#__dispose__`输出运行时长
+Outputs execution time for `ServiceTest#__dispose__`
 
 In the VSCode editor, enter the code snippet `aopdispose` to automatically generate a code skeleton:
 
@@ -223,7 +223,7 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 };
 ```
 
-- `__dispose__`: 提供与`ServiceTest`同名的方法`__dispose__`
+- `__dispose__`: Provides the `__dispose__` method with the same name to implement custom logic
 
 ## Aspect: `__get__`
 
