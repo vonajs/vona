@@ -51,6 +51,32 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: 'Environment & Configuration',
+      items: [
+        {
+          text: 'Runtime Environments & Flavor',
+          base: '/guide/env-config/mode-flavor/',
+          link: 'introduction',
+        },
+        {
+          text: 'Env',
+          base: '/guide/env-config/env/',
+          link: 'introduction',
+        },
+        {
+          text: 'Config',
+          base: '/guide/env-config/config/',
+          link: 'introduction',
+        },
+        {
+          text: 'Multi-instance/Multi-tenancy',
+          base: '/guide/env-config/instance/',
+          link: 'introduction',
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: 'Essentials',
       items: [
         {
@@ -220,26 +246,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: 'Techniques',
       items: [
-        {
-          text: 'Runtime Environments & Flavor',
-          base: '/guide/techniques/mode-flavor/',
-          link: 'introduction',
-        },
-        {
-          text: 'Env',
-          base: '/guide/techniques/env/',
-          link: 'introduction',
-        },
-        {
-          text: 'Config',
-          base: '/guide/techniques/config/',
-          link: 'introduction',
-        },
-        {
-          text: 'Multi-instance/Multi-tenancy',
-          base: '/guide/techniques/instance/',
-          link: 'introduction',
-        },
         {
           text: 'Vona ORM',
           base: '/guide/techniques/orm/',
