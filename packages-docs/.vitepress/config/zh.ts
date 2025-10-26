@@ -51,6 +51,32 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: '环境与配置',
+      items: [
+        {
+          text: '运行环境与Flavor',
+          base: '/zh/guide/env-config/mode-flavor/',
+          link: 'introduction',
+        },
+        {
+          text: 'Env环境变量',
+          base: '/zh/guide/env-config/env/',
+          link: 'introduction',
+        },
+        {
+          text: 'Config配置',
+          base: '/zh/guide/env-config/config/',
+          link: 'introduction',
+        },
+        {
+          text: '多实例/多租户',
+          base: '/zh/guide/env-config/instance/',
+          link: 'introduction',
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: '基础',
       items: [
         {
@@ -220,26 +246,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: '技术',
       items: [
-        {
-          text: '运行环境与Flavor',
-          base: '/zh/guide/techniques/mode-flavor/',
-          link: 'introduction',
-        },
-        {
-          text: 'Env环境变量',
-          base: '/zh/guide/techniques/env/',
-          link: 'introduction',
-        },
-        {
-          text: 'Config配置',
-          base: '/zh/guide/techniques/config/',
-          link: 'introduction',
-        },
-        {
-          text: '多实例/多租户',
-          base: '/zh/guide/techniques/instance/',
-          link: 'introduction',
-        },
         {
           text: 'Vona ORM',
           base: '/zh/guide/techniques/orm/',
