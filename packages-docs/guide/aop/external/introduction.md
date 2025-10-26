@@ -151,7 +151,7 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 
 ## Aspect: setter
 
-为`ServiceTest#set name`输出运行时长
+Outputs execution time for `ServiceTest#set name`
 
 In the VSCode editor, enter the code snippet `aopsetter` to automatically generate a code skeleton:
 
@@ -173,7 +173,7 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 };
 ```
 
-- `__set_name__`: 对应`ServiceTest`的 setter 方法`set name`
+- `__set_name__`: Corresponding to the setter method `set name` of `ServiceTest`
 
 ## Aspect: `__init__`
 
