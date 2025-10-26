@@ -348,7 +348,7 @@ protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _rece
 
 ### 1. dependencies
 
-比如，另外有一个 AOP `demo-student:log3`，我们希望执行顺序如下：`demo-student:log3` > `Current`
+比如，还有一个 AOP `demo-student:log3`，我们希望执行顺序如下：`demo-student:log3` > `Current`
 
 ``` diff
 @Aop({

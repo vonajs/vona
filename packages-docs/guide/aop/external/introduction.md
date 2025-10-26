@@ -342,13 +342,13 @@ protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _rece
 - `__method__`: Conventional magic method name
 - `res?.then`: Determine whether the return value is a Promise object and perform different processing to make it compatible with `synchronous method` and `asynchronous method`
 
-## AOP顺序
+## AOP Order
 
-针对同一个目标 Class，可以关联多个 AOP。所以，VonaJS 提供了两个参数，用于控制 AOP 的执行顺序
+For the same target Class, multiple AOPs can be associated. Therefore, VonaJS provides two parameters to control the execution order of AOPs
 
 ### 1. dependencies
 
-比如，另外有一个 AOP `demo-student:log3`，我们希望执行顺序如下：`demo-student:log3` > `Current`
+For example, has another AOP `demo-student:log3`, and we hope that the execution order is as follows: `demo-student:log3` > `Current`
 
 ``` diff
 @Aop({
@@ -360,7 +360,7 @@ class AopLog {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望执行顺序如下：`Current` > `demo-student:log3`
+The order of `dependents` is just the opposite of `dependencies`. We hope that the execution order is as follows: `Current` > `demo-student:log3`
 
 ``` diff
 @Aop({
@@ -370,9 +370,9 @@ class AopLog {}
 class AopLog {}
 ```
 
-## AOP启用/禁用
+## AOP enable/disable
 
-可以控制 AOP 的`启用/禁用`
+You can control `enable/disable` of AOPs
 
 ### 1. Enable
 
@@ -391,14 +391,14 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 AOP 在指定的运行环境生效
+Allows AOPs to take effect in a specified operating environment
 
-|名称|类型|说明|
+|Name|Type|Description|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../techniques/mode-flavor/introduction.md)|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../../techniques/mode-flavor/introduction.md)|
 
-* 举例
+* Example
 
 ``` diff
 @Aop({
@@ -410,9 +410,11 @@ config.onions = {
 class AopLog {}
 ```
 
-## 查看当前生效的AOP清单
+## Inspect
 
 可以直接在目标 Class action 中输出当前生效的 AOP 清单
+
+You can directly inspect the currently effective AOP list in the target class action
 
 ``` diff
 class ServiceTest {
@@ -422,10 +424,10 @@ class ServiceTest {
   }
 ```
 
-- `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.aop`: 取得与 AOP 相关的 Service 实例
-- `.inspect`: 输出当前生效的 AOP 清单
+- `this.bean.onion`: Get the global Service instance `onion`
+- `.aop`: Get the Service instance related to AOP
+- `.inspect`: Output the currently effective AOP list
 
-当方法被执行时，会自动在控制台输出当前生效的 AOP 清单，效果如下：
+When the method is executed, the currently effective AOP list will be automatically output to the console, as shown below:
 
 ![](../../../assets/img/aop/aop-1.png)
