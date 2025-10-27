@@ -4,7 +4,41 @@ Vona loads config files based on multi-dimensional variables, providing a more f
 
 ## meta & config file
 
-Vona loads config files from the `src/backend/config/config` directory. File loading based on `meta` conditions is also supported. For specific rules, see: [meta & .env file](../env/introduction.md)
+Vona loads config files from the `src/backend/config/config` directory and supports file loading based on `meta` conditions:
+
+```txt
+config.ts                # loaded in all cases
+config.[meta].ts         # only loaded in specified condition
+config.mine.ts           # loaded in all cases, ignored by git
+config.[meta].mine.ts    # only loaded in specified condition, ignored by git
+```
+
+- `[meta]` can be `any combination` of the following two variables
+
+| Name    | Description  |
+| ------- | ---------- |
+| mode    | 'test' \|'dev' \| 'prod' |
+| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
+
+## npm scripts
+
+Corresponding to the multidimensional variables, the correspondence between the commands and the scripts are as follows:
+
+```bash
+$ npm run test
+$ npm run dev
+$ npm run build
+$ npm run build:docker
+```
+
+``` json
+"scripts": {
+  "test": "vona :bin:test --flavor=normal",
+  "dev": "vona :bin:dev --flavor=normal",
+  "build": "vona :bin:build --flavor=normal",
+  "build:docker": "vona :bin:build --flavor=docker", 
+}
+```
 
 ### For example
 
@@ -26,39 +60,35 @@ config.normal.mine.ts
 config.normal.dev.mine.ts
 ```
 
-## Use global config
+## Obtaining global config
 
 The global config object can be obtained directly through `this.app.config` in any bean instance
 
-```typescript{4}
-@Service()
-export class ServiceDatabase extends BeanBase {
-  get configDatabase() {
-    return this.app.config.database;
-  }
-}
+```typescript
+this.app.config.server.globalPrefix
+this.app.config.database.defaultClient
 ```
 
-## Use module config
+## Obtaining module config
 
 Modules can individually provide their own `config` configuration, which can be obtained through the `Scope` instance. See: [Config](../../essentials/scope/config.md)
+
+``` typescript
+this.scope.config.title
+this.$scope.homeIndex.config.title
+```
 
 ## Override module config
 
 You can use `project-level` config to override `module-level` config, see: [Config](../../essentials/scope/config.md)
 
-## The relationship between env and config
+`src/backend/config/config/config.ts`
 
-Some variables exist in both `env` and `config`. The basic logic is as follows:
-
-1. Configure the value of the variable in `env`
-2. Let the value in `config` equal the value in `env`
-3. Prioritize using variable values through `config` in code
-4. If you need to use the build-time tree shaking capability, use the value of the variable through `process.env.xxx`
-
-### Variable comparison table
-
-| Variables in env | Variables in config |
-| ---------------- | ------------------- |
-| process.env.META_MODE       | app.config.meta.mode         |
-| process.env.META_FLAVOR     | app.config.meta.flavor       |
+```typescript
+// modules
+config.modules = {
+  'home-index': {
+    title: 'Hello World!!',
+  },
+};
+```

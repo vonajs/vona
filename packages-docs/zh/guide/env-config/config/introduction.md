@@ -81,3 +81,14 @@ this.$scope.homeIndex.config.title
 ## 覆盖模块config
 
 可以使用项目级别的 config 配置覆盖模块级别的 config 配置，参见：[Config配置](../../essentials/scope/config.md)
+
+`src/backend/config/config/config.ts`
+
+```typescript
+// modules
+config.modules = {
+  'home-index': {
+    title: 'Hello World!!',
+  },
+};
+```

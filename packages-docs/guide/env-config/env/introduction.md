@@ -4,7 +4,7 @@ Vona loads environment files based on multi-dimensional variables, providing a m
 
 ## meta & .env file
 
-Vona uses [dotenv](https://github.com/motdotla/dotenv) to load additional environment variables from the following files in the directory `env`:
+Vona uses [dotenv](https://github.com/motdotla/dotenv) to load environment variables from the following files in the directory `env`:
 
 ```txt
 .env                # loaded in all cases
