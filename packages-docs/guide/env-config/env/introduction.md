@@ -1,7 +1,5 @@
 # Env
 
-Vona exposes env variables on the special `process.env` object
-
 Vona loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
 ## meta & .env file
@@ -20,11 +18,9 @@ Vona uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 | Name    | Description                                                                          |
 | ------- | ------------------------------------------------------------------------------------ |
 | mode    | 'test' \|'dev' \| 'prod'                                            |
-| flavor  | 'normal' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
+| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
 
 ## npm scripts
-
-Corresponding to the multi-dimensional variables, the command line script is also divided into three parts, such as:
 
 Corresponding to the multidimensional variables, the correspondence between the commands and the scripts are as follows:
 
@@ -64,9 +60,55 @@ The system will automatically load the environment variables in the following fi
 .env.normal.dev.mine
 ```
 
+## Tree-shaking
+
+VonaJS only supports tree-shaking during builds for the following environment variables: `META_MODE`, `META_FLAVOR`, and `NODE_ENV`
+
+For example:
+
+``` typescript
+if (process.env.META_MODE === 'dev') {
+  console.log('for development')
+}
+```
+
+During builds, this is automatically converted to:
+
+``` typescript
+if ('build' === 'dev') {
+  console.log('for development')
+}
+```
+
+Since the condition is false, tree-shaking is performed
+
+## Obtaining Environment Variables
+
+### 1. process.env
+
+For environment variables that support tree-shaking, use `process.env`
+
+``` typescript
+process.env.META_MODE
+process.env.META_FLAVOR
+process.env.NODE_ENV
+```
+
+- `process.env.NODE_ENV`: For compatibility with the Node.js ecosystem only; `process.env.META_MODE` is preferred
+
+### 2. app.meta.env
+
+For environment variables that don't support tree-shaking, use `app.meta.env` to obtain them
+
+``` typescript
+app.meta.env.APP_NAME
+app.meta.env.APP_TITLE
+app.meta.env.SERVER_LISTEN_PORT
+```
+
 ## Built-in env variables
 
-To further achieve out-of-box functionality, Vona provides several built-in env variables:
+VonaJS provides several built-in env variables:
 
 ### meta
 
@@ -76,30 +118,68 @@ To further achieve out-of-box functionality, Vona provides several built-in env 
 | META_FLAVOR   | flavor            |
 | NODE_ENV      | `test`/`development`/`production` |
 
-### App
+### app
 
-| Name            | Description                                                                              |
-| --------------- | ---------------------------------------------------------------------------------------- |
-| APP_NAME        | App Name                                                                                 |
-| APP_TITLE       | App Title                                                                                |
-| APP_VERSION     | App Version                                                                              |
+| Name            | Description            |
+| --------------- | --------------------- |
+| APP_NAME        | App Name            |
+| APP_TITLE       | App Title         |
+| APP_VERSION     | App Version        |
 
-### Build
+### server
+
+| Name | Description |
+|-|-|
+|SERVER_KEYS||
+|SERVER_GLOBALPREFIX||
+|SERVER_PUBLICDIR||
+|SERVER_LOGGERDIR||
+|SERVER_SUBDOMAINOFFSET||
+|SERVER_WORKERS||
+|SERVER_LISTEN_HOSTNAME||
+|SERVER_LISTEN_PORT||
+|SERVER_LISTEN_DISABLE||
+
+### project
+
+| Name                     | Description              |
+| ------------------------ | ------------------------ |
+| PROJECT_DISABLED_MODULES | List of disabled modules |
+| PROJECT_DISABLED_SUITES  | List of disabled suites  |
+
+### logger
+
+| Name | Description |
+|-|-|
+|LOGGER_CLIENT_DEFAULT||
+|LOGGER_DUMMY||
+|LOGGER_ROTATE_ENABLE||
+|LOGGER_ROTATE_FILENAME||
+|LOGGER_ROTATE_DATEPATTERN||
+|LOGGER_ROTATE_MAXSIZE||
+|LOGGER_ROTATE_MAXFILES||
+
+### build
 
 | Name          | Description                         |
 | ------------- | ----------------------------------- |
 | BUILD_OUTDIR  | Specify the output directory        |
 |BUILD_SOURCEMAP| Sourcemap|
 | BUILD_MINIFY  | Whether to enable minify            |
+|BUILD_INLINEDYNAMICIMPORTS||
+|BUILD_LOG_CIRCULAR_DEPENDENCY||
 |BUILD_COPY_DIST|Copy dist to the specified directory|
 |BUILD_COPY_RELEASE|Copy dist-releases to the specified directory|
+|BUILD_DIALECT_DRIVERS||
 
-### Suite/Module
+### test
 
-| Name                     | Description              |
-| ------------------------ | ------------------------ |
-| PROJECT_DISABLED_MODULES | List of disabled modules |
-| PROJECT_DISABLED_SUITES  | List of disabled suites  |
+| Name | Description |
+|-|-|
+|TEST_CONCURRENCY||
+|TEST_ONLY||
+|TEST_WHYISNODERUNNING||
+|TEST_PATTERNS_IGNORE||
 
 ### database
 
