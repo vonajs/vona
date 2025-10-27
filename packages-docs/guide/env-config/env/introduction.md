@@ -15,10 +15,10 @@ Vona uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 
 - `[meta]` can be `any combination` of the following two variables
 
-| Name    | Description                                                                          |
-| ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'test' \|'dev' \| 'prod'                                            |
-| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
+| Name    | Description  |
+| ------- | ---------- |
+| mode    | 'test' \|'dev' \| 'prod' |
+| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
 
 ## npm scripts
 

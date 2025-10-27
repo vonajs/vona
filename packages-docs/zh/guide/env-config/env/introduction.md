@@ -15,10 +15,10 @@ Vona 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载�
 
 - `[meta]`可以是以下两个字段值的`任意组合`，从而支持基于多维变量的加载机制
 
-| 名称    | 类型                                                                                 |
-| ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'test' \|'dev' \| 'prod'                                             |
-| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
+| 名称    | 类型        |
+| ------- | --------------- |
+| mode    | 'test' \|'dev' \| 'prod'    |
+| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
 
 ## npm scripts
 
