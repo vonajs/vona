@@ -222,6 +222,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: 'User', link: 'user' },
+            { text: 'Role', link: 'role' },
+            { text: 'Passport', link: 'passport' },
           ],
         },
         {

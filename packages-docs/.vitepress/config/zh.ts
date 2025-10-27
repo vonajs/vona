@@ -221,7 +221,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/bal/user/',
           collapsed: true,
           items: [
-            { text: 'User', link: 'user' },
+            { text: '用户', link: 'user' },
+            { text: '角色', link: 'role' },
+            { text: '通行证', link: 'passport' },
           ],
         },
         {
