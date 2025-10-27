@@ -8,9 +8,11 @@ These multi-dimensional variables are the `runtime environments` and `flavors`
 
 Vona provides three runtime environments:
 
-* `test`: Testing environment
-* `dev`: Development environment
-* `prod`: Production environment
+|Name|Description|
+|--|--|
+|test|Testing environment|
+|dev|Development environment|
+|prod|Production environment|
 
 ### 1. Enabling the Runtime Environment
 
@@ -66,9 +68,12 @@ For more complex business scenarios, we often need to provide configuration capa
 
 For out-of-the-box, Vona provides several built-in flavors:
 
-* `normal`: The default flavor
-* `docker`: For use in a Docker environment
-* `ci`: For use in a CI environment
+|Name|Description|
+|--|--|
+|normal|The default flavor|
+|demo|For use in [Demo Playground](../../start/demo.md)|
+|docker|For use in Docker environments|
+|ci|For use in CI environments, such as Github Actions|
 
 ### 2. Enabling a Flavor
 
@@ -125,12 +130,14 @@ app.config.meta.flavor === 'customA'
 
 ### 5. Add Flavor Type Definition
 
-You can add a Flavor type definition to provide type hints for Flavor-determining code
+You can add a Flavor type definition to provide type hints
 
-``` typescript
+In the VSCode editor, enter the code snippet `recordflavor` to automatically generate a code skeleton, and then add a custom Flavor type definition
+
+``` diff
 declare module '@cabloy/module-info' {
   export interface VonaMetaFlavorExtend {
-    customA: never;
++   customA: never;
   }
 }
 ```

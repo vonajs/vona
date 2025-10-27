@@ -8,9 +8,11 @@ Vona 基于`多维变量`加载 Env 环境变量和 Config 配置，从而提供
 
 Vona 提供了三个运行环境：
 
-* `test`：测试环境
-* `dev`：开发环境
-* `prod`：生成环境
+|名称|说明|
+|--|--|
+|test|测试环境|
+|dev|开发环境|
+|prod|生产环境|
 
 ### 1. 启用运行环境
 
@@ -66,9 +68,12 @@ app.meta.isProd
 
 为了开箱即用，Vona 提供了几个内置 Flavor：
 
-* `normal`：默认的 Flavor
-* `docker`：用于 docker 环境
-* `ci`：用于 ci 环境
+|名称|说明|
+|--|--|
+|normal|默认的Flavor|
+|demo|用于[Demo练习场](../../start/demo.md)|
+|docker|用于Docker环境|
+|ci|用于CI环境，比如Github Actions|
 
 ### 2. 启用Flavor
 
@@ -127,12 +132,12 @@ app.config.meta.flavor === 'customA'
 
 可以添加 Flavor 类型定义，让判断 Flavor 的代码有类型提示
 
-``` typescript
+在 VSCode 编辑器中，输入代码片段`recordflavor`，自动生成代码骨架，然后添加自定义的 Flavor 类型定义
+
+``` diff
 declare module '@cabloy/module-info' {
   export interface VonaMetaFlavorExtend {
-    customA: never;
++   customA: never;
   }
 }
 ```
-
-
