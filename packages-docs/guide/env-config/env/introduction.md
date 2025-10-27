@@ -101,9 +101,9 @@ process.env.NODE_ENV
 For environment variables that don't support tree-shaking, use `app.meta.env` to obtain them
 
 ``` typescript
-app.meta.env.APP_NAME
-app.meta.env.APP_TITLE
-app.meta.env.SERVER_LISTEN_PORT
+this.app.meta.env.APP_NAME
+this.app.meta.env.APP_TITLE
+this.app.meta.env.SERVER_LISTEN_PORT
 ```
 
 ## Built-in env variables

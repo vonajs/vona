@@ -101,9 +101,9 @@ process.env.NODE_ENV
 对于不支持 Tree-shaking 能力的环境变量，通过`app.meta.env`来获取
 
 ``` typescript
-app.meta.env.APP_NAME
-app.meta.env.APP_TITLE
-app.meta.env.SERVER_LISTEN_PORT
+this.app.meta.env.APP_NAME
+this.app.meta.env.APP_TITLE
+this.app.meta.env.SERVER_LISTEN_PORT
 ```
 
 ## 内置环境变量
