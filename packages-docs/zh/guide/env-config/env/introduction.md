@@ -1,12 +1,10 @@
 # Env环境变量
 
-Vona 通过`process.env`暴露环境变量
-
 Vona 基于多维变量加载环境文件，从而提供更加灵活的配置机制，支持更复杂的业务场景
 
 ## meta与.env文件
 
-Zova 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载下列文件中的环境变量：
+Vona 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载下列文件中的环境变量：
 
 ```txt
 .env                # 所有情况下都会加载
@@ -20,7 +18,7 @@ Zova 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载�
 | 名称    | 类型                                                                                 |
 | ------- | ------------------------------------------------------------------------------------ |
 | mode    | 'test' \|'dev' \| 'prod'                                             |
-| flavor  | 'normal' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
+| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend                                                    |
 
 ## npm scripts
 
@@ -62,9 +60,55 @@ $ npm run build:docker
 .env.normal.dev.mine
 ```
 
+## Tree-shaking
+
+VonaJS 仅针对以下环境变量支持 build 时的 Tree-shaking 能力: `META_MODE`、`META_FLAVOR`、`NODE_ENV`
+
+比如:
+
+``` typescript
+if (process.env.META_MODE === 'dev') {
+  console.log('for development')
+}
+```
+
+在进行 build 时，会自动转化为:
+
+``` typescript
+if ('build' === 'dev') {
+  console.log('for development')
+}
+```
+
+由于条件为 false，从而实现 Tree-shaking
+
+## 获取环境变量
+
+### 1. process.env
+
+对于支持 Tree-shaking 能力的环境变量，通过`process.env`来获取
+
+``` typescript
+process.env.META_MODE
+process.env.META_FLAVOR
+process.env.NODE_ENV
+```
+
+- `process.env.NODE_ENV`: 仅用于兼容 Nodejs 生态，优先使用`process.env.META_MODE`
+
+### 2. app.meta.env
+
+对于不支持 Tree-shaking 能力的环境变量，通过`app.meta.env`来获取
+
+``` typescript
+app.meta.env.APP_NAME
+app.meta.env.APP_TITLE
+app.meta.env.SERVER_LISTEN_PORT
+```
+
 ## 内置环境变量
 
-为了进一步实现开箱即用的效果，Vona 提供了若干内置的环境变量：
+VonaJS 提供了若干内置的环境变量：
 
 ### meta
 
@@ -74,34 +118,72 @@ $ npm run build:docker
 | META_FLAVOR   | flavor        |
 | NODE_ENV      | `test`/`development`/`production` |
 
-### 应用
+### app
 
-| 名称            | 说明                                                                                     |
-| --------------- | ---------------------------------------------------------------------------------------- |
-| APP_NAME        | 应用名称                                                                                 |
-| APP_TITLE       | 应用标题                                                                                 |
-| APP_VERSION     | 应用版本                                                                                 |
+| 名称            | 说明                                              |
+| ------------ | --------------------------------------------------- |
+| APP_NAME        | 应用名称                                        |
+| APP_TITLE       | 应用标题                                         |
+| APP_VERSION     | 应用版本                                          |
 
-### 构建
+### server
 
-| 名称          | 说明             |
-| ------------- | ---------------- |
-| BUILD_OUTDIR  | 指定输出目录     |
-|BUILD_SOURCEMAP| Sourcemap|
-| BUILD_MINIFY  | 是否最小化       |
-|BUILD_COPY_DIST|将dist拷贝至指定目录|
-|BUILD_COPY_RELEASE|将dist-releases拷贝至指定目录|
+|名称|说明|
+|-|-|
+|SERVER_KEYS||
+|SERVER_GLOBALPREFIX||
+|SERVER_PUBLICDIR||
+|SERVER_LOGGERDIR||
+|SERVER_SUBDOMAINOFFSET||
+|SERVER_WORKERS||
+|SERVER_LISTEN_HOSTNAME||
+|SERVER_LISTEN_PORT||
+|SERVER_LISTEN_DISABLE||
 
-### 套件/模块
+### project
 
 | 名称                     | 说明           |
 | ------------------------ | -------------- |
 | PROJECT_DISABLED_MODULES | 禁用的模块清单 |
 | PROJECT_DISABLED_SUITES  | 禁用的套件清单 |
 
+### logger
+
+|名称|说明|
+|-|-|
+|LOGGER_CLIENT_DEFAULT||
+|LOGGER_DUMMY||
+|LOGGER_ROTATE_ENABLE||
+|LOGGER_ROTATE_FILENAME||
+|LOGGER_ROTATE_DATEPATTERN||
+|LOGGER_ROTATE_MAXSIZE||
+|LOGGER_ROTATE_MAXFILES||
+
+### build
+
+|名称|说明|
+|-|-|
+| BUILD_OUTDIR  | 指定输出目录     |
+|BUILD_SOURCEMAP| Sourcemap|
+| BUILD_MINIFY  | 是否最小化       |
+|BUILD_INLINEDYNAMICIMPORTS||
+|BUILD_LOG_CIRCULAR_DEPENDENCY||
+|BUILD_COPY_DIST|将dist拷贝至指定目录|
+|BUILD_COPY_RELEASE|将dist-releases拷贝至指定目录|
+|BUILD_DIALECT_DRIVERS||
+
+### test
+
+|名称|说明|
+|-|-|
+|TEST_CONCURRENCY||
+|TEST_ONLY||
+|TEST_WHYISNODERUNNING||
+|TEST_PATTERNS_IGNORE||
+
 ### database
 
-Vona 支持多数据库。为了开箱即用，提供了两个数据源的定义：`pg`/`mysql`，默认数据源是`pg`
+VonaJS 支持多数据库。为了开箱即用，提供了两个数据源的定义：`pg`/`mysql`，默认数据源是`pg`
 
 | 名称                     | 说明           |
 | ------------------------ | -------------- |
