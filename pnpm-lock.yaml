@@ -358,7 +358,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.71
+        specifier: ^6.0.72
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -467,7 +467,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.270
+        specifier: ^1.0.271
         version: link:../cli-set-api
     devDependencies:
       clean-package:
