@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-index",
   "type": "module",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "title": "home-index",
   "vonaModule": {
     "dependencies": {
@@ -35,7 +35,6 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {},
   "clean-package": {
     "indent": 2,
     "remove": [
