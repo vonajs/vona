@@ -1,26 +1,26 @@
-import type { IPassportAdapter, IPassportBase } from 'vona-module-a-user';
-import type { IPayloadData } from '../types/passport.ts';
+import type { IPassportAdapter } from 'vona-module-a-user';
+import type { IPassport, IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
-  async isAdmin(passport: IPassportBase | undefined): Promise<boolean> {
+  async isAdmin(passport: IPassport | undefined): Promise<boolean> {
     if (!passport || !passport.roles) return false;
     return passport.roles.some(item => item.name === 'admin');
   }
 
-  async setCurrent(passport: IPassportBase | undefined): Promise<IPassportBase | undefined> {
+  async setCurrent(passport: IPassport | undefined): Promise<IPassport | undefined> {
     return passport;
   }
 
-  async serialize(passport: IPassportBase): Promise<IPayloadData> {
+  async serialize(passport: IPassport): Promise<IPayloadData> {
     const userId = passport.user!.id;
     const authId = passport.auth!.id;
     return { userId, authId };
   }
 
-  async deserialize(payloadData: IPayloadData): Promise<IPassportBase | undefined> {
+  async deserialize(payloadData: IPayloadData): Promise<IPassport | undefined> {
     const user = await this.bean.user.findOne({ id: payloadData.userId });
     if (!user) return;
     const auth = await this.bean.auth.findOne({ id: payloadData.authId });

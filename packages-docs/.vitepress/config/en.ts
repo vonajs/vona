@@ -242,6 +242,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'xxx', link: 'xxx' },
           ],
         },
+        {
+          text: 'Menu System',
+          base: '/guide/bal/menu/',
+          collapsed: true,
+          items: [
+            { text: 'Menu', link: 'menu' },
+            { text: 'SSR Menu(to be done)', link: 'ssr-menu' },
+          ],
+        },
       ],
     },
     {

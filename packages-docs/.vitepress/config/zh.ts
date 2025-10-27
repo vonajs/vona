@@ -242,6 +242,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'xxx', link: 'xxx' },
           ],
         },
+        {
+          text: '菜单体系',
+          base: '/zh/guide/bal/menu/',
+          collapsed: true,
+          items: [
+            { text: '菜单', link: 'menu' },
+            { text: 'SSR菜单(to be done)', link: 'ssr-menu' },
+          ],
+        },
       ],
     },
     {
