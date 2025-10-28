@@ -13,7 +13,7 @@ export class Main extends BeanSimple implements IModuleMain {
 
   async moduleLoading() {}
   async moduleLoaded() {
-    const config = this.bean.scope(__ThisModule__).config;
+    const config = this.app.scope(__ThisModule__).config;
     const self = this;
     // router
     Object.defineProperty(this.app, 'router', {

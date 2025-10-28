@@ -9,7 +9,7 @@ export class Main extends BeanSimple implements IModuleMain {
       'en-us': en,
       'zh-cn': zhCN,
     };
-    this.app.util.setLocaleErrors(localeErrors, this.bean.scope('a-i18n').config.i18n.defaultLocale);
+    this.app.util.setLocaleErrors(localeErrors, this.app.scope('a-i18n').config.i18n.defaultLocale);
   }
 
   async configLoaded(_config: any) {}

@@ -86,7 +86,7 @@ export class ControllerBean extends BeanBase {
     assert.equal(res, 'serviceTest');
 
     // general scope
-    res = this.bean.scope(__ThisModule__).service.test.name;
+    res = this.app.scope(__ThisModule__).service.test.name;
     assert.equal(res, 'serviceTest');
 
     res = this.$scope.testVona.service.test.name;

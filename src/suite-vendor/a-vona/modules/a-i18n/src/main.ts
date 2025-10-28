@@ -9,7 +9,7 @@ const SymbolLocaleOrigin = Symbol('SymbolLocaleOrigin');
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {
-    const options = this.bean.scope(__ThisModule__).config.i18n;
+    const options = this.app.scope(__ThisModule__).config.i18n;
     this.app.context.__getLocale = function (this: VonaContext) {
       return __getLocale(this, options);
     };

@@ -7,7 +7,7 @@ import { onerror } from './lib/onerror.ts';
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {
-    const config = this.bean.scope(__ThisModule__).config;
+    const config = this.app.scope(__ThisModule__).config;
     const app = this.app;
 
     const errorOptions: OnerrorOptions = {};
