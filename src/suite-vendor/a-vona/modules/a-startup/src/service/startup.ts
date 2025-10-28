@@ -35,14 +35,11 @@ export class ServiceStartup extends BeanBase {
     if (this.app.meta.isTest || this.app.meta.isDev) {
       await this._appReadyInstanceStartup('', true);
     } else {
-      // all instances
-      const instances = await this.bean.executor.newCtx(async () => {
-        return await this.bean.instance.list();
-      }, { dbInfo: { level: 1 } });
-      for (const instance of instances) {
+      // only start static instances (defined in config)
+      for (const configInstanceBase of this.app.config.instances) {
         // need not await for prod
         const wait = this.app.config.server.listen.disable;
-        await this._appReadyInstanceStartup(instance.name, wait);
+        await this._appReadyInstanceStartup(configInstanceBase.name, wait);
       }
     }
 
