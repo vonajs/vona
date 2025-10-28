@@ -73,9 +73,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table = table || this.getTable(items[0]);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // insert
-    const res = await this._insertBulk(table, items, options) as Promise<TRecord[]>;
-    // clear cache
-    await this.cacheQueryClear(table);
+    const res = await this._insertBulk(table, items, options) as TRecord[];
+    // delete cache
+    const ids = res.map(item => cast(item).id);
+    await this.cacheEntityDel(ids, table);
     return res;
   }
 
@@ -545,7 +546,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const item: TRecord | null | undefined = await cache.get(id, {
       get: async () => {
         // where: maybe contain aux key
-        return await super._get(table, where, { disableDeleted: true });
+        const item = await super._get(table, where, { disableDeleted: true });
+        return item === undefined ? null : item;
       },
       db: this.db,
     });
