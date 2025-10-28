@@ -1,5 +1,5 @@
 import type { ConfigInstanceBase } from 'vona-module-a-instance';
-import type { ServiceDatabaseClient } from 'vona-module-a-orm';
+import type { IDatabaseClientRecord, ServiceDatabaseClient } from 'vona-module-a-orm';
 import chalk from 'chalk';
 import moment from 'moment';
 import { BeanBase } from 'vona';
@@ -52,17 +52,19 @@ export class ServiceDatabase extends BeanBase {
 
   async __preparedatabases(versionStart: boolean) {
     // default
-    await this.bean.database.switchDb(async () => {
-      await this.__preparedatabase(versionStart);
-    }, 'default');
+    await this.preparedatabase('default', versionStart);
     // isolate
     for (const configInstanceBase of this.app.config.instances) {
       if (!configInstanceBase.isolate) continue;
       if (!configInstanceBase.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${configInstanceBase.name}`);
-      await this.bean.database.switchDb(async () => {
-        await this.__preparedatabase(versionStart, configInstanceBase);
-      }, configInstanceBase.isolateClient);
+      await this.preparedatabase(configInstanceBase.isolateClient, versionStart, configInstanceBase);
     }
+  }
+
+  public async preparedatabase(clientName: keyof IDatabaseClientRecord, versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+    await this.bean.database.switchDb(async () => {
+      await this.__preparedatabase(versionStart, configInstanceBase);
+    }, clientName);
   }
 
   async __preparedatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
