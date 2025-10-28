@@ -47,11 +47,13 @@ this.bean.user.activate(user);
 |update||
 |remove||
 
-
-## 适配器
+## 匿名用户
 
 ## 注册
 
 ## 激活
 
 ## 用户: admin
+
+## 最后讲home-user适配器
+
