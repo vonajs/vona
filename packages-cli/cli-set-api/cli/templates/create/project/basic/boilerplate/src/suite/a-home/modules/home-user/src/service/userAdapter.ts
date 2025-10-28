@@ -1,40 +1,41 @@
 import type { TableIdentity } from 'table-identity';
 import type { IAuthUserProfile, IUserAdapter, IUserBase } from 'vona-module-a-user';
+import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceUserAdapter extends BeanBase implements IUserAdapter {
-  async create(user: Partial<IUserBase>): Promise<IUserBase> {
+  async create(user: Partial<EntityUser>): Promise<EntityUser> {
     return await this.scope.model.user.insert(user);
   }
 
-  async userOfProfile(profile: IAuthUserProfile): Promise<IUserBase> {
+  async userOfProfile(profile: IAuthUserProfile): Promise<Partial<EntityUser>> {
     return {
       name: profile.username!,
       email: profile.emails?.[0].value,
       avatar: profile.photos?.[0].value,
       locale: profile.locale || this.ctx.locale,
-    } as IUserBase;
+    };
   }
 
-  async createAnonymous(): Promise<IUserBase> {
-    return { id: -1, anonymous: true, name: 'anonymous', avatar: undefined, locale: undefined } as IUserBase;
+  async createAnonymous(): Promise<Partial<IUserBase>> {
+    return { id: -1, anonymous: true, name: 'anonymous' };
   }
 
-  async findOneByName(name: string): Promise<IUserBase | undefined> {
+  async findOneByName(name: string): Promise<EntityUser | undefined> {
     return await this.scope.model.user.getByNameEqI(name);
   }
 
-  async findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
+  async findOne(user: Partial<EntityUser>): Promise<EntityUser | undefined> {
     return await this.scope.model.user.get(user);
   }
 
-  async update(user: Partial<IUserBase>): Promise<void> {
+  async update(user: Partial<EntityUser>): Promise<void> {
     await this.scope.model.user.update(user);
   }
 
-  async remove(user: Partial<IUserBase>): Promise<void> {
+  async remove(user: Partial<EntityUser>): Promise<void> {
     await this.scope.model.user.delete(user);
   }
 

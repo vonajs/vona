@@ -9,7 +9,7 @@ export interface IModelOptionsUser extends IDecoratorModelOptions<EntityUser> {}
 @Model<IModelOptionsUser>({
   entity: EntityUser,
   relations: {
-    roles: $relation.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', { columns: ['id', 'name'] }),
+    roles: $relation.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
   },
 })
 export class ModelUser extends BeanModelBase<EntityUser> {

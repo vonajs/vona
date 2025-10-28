@@ -22,7 +22,7 @@ export class EntityUser extends EntityBase {
   mobile?: string;
 
   @Api.field(v.title($locale('UserActivated')), v.default(false))
-  activated: boolean;
+  activated?: boolean;
 
   @Api.field(v.title($locale('UserLocale')), z.string().optional())
   locale?: keyof ILocaleInfos | undefined;
