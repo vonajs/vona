@@ -37,6 +37,7 @@ export class BeanExecutor extends BeanBase {
     options = Object.assign({}, options);
     options.dbInfo = isNil(options.dbInfo) ? { level: 1 } : options.dbInfo;
     options.instanceName = options.instanceName === undefined ? (this.ctx?.instanceName ?? '') : options.instanceName;
+    options.instance = !isNil(options.instanceName);
     return this.newCtx(fn, options);
   }
 
