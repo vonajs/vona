@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'table-identity';
 import type { IAuthUserProfile } from '../types/authProfile.ts';
 import type { IUserAdapter, IUserBase } from '../types/user.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -46,6 +47,10 @@ export class BeanUser extends BeanBase {
 
   async findOneByName(name: string): Promise<IUserBase | undefined> {
     return this.userAdapter.findOneByName(name);
+  }
+
+  async findOneById(id: TableIdentity): Promise<IUserBase | undefined> {
+    return this.userAdapter.findOne({ id });
   }
 
   async findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {

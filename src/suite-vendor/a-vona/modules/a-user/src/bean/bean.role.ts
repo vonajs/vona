@@ -19,6 +19,10 @@ export class BeanRole extends BeanBase {
     return this.roleAdapter.findOneByName(name);
   }
 
+  findOneById(id: TableIdentity): Promise<IRoleBase | undefined> {
+    return this.roleAdapter.findOne({ id });
+  }
+
   findOne(role: Partial<IRoleBase>): Promise<IRoleBase | undefined> {
     return this.roleAdapter.findOne(role);
   }
