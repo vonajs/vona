@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-base",
   "type": "module",
-  "version": "5.0.5",
+  "version": "5.0.7",
   "title": "home-base",
   "vonaModule": {
     "dependencies": {
@@ -33,9 +33,9 @@
     "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "postpack": "clean-package restore",
+    "version": "node ../../../../../scripts/version-home.ts"
   },
-  "dependencies": {},
   "clean-package": {
     "indent": 2,
     "remove": [
