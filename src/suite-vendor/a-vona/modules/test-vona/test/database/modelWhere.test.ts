@@ -7,7 +7,7 @@ describe('modelWhere.test.ts', () => {
   it('action:modelWhere', async () => {
     await app.bean.executor.mockCtx(async () => {
       if (app.bean.database.current.dialectName !== 'pg') return;
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // ref
       let builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, { id: scopeTest.model.post.ref('id') as any });

@@ -7,7 +7,7 @@ import { app } from 'vona-mock';
 describe('database.test.ts', () => {
   it('action:database:switchClient', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const scopeDatabase = app.bean.scope('a-orm');
+      const scopeDatabase = app.scope('a-orm');
       const defaultClientName = scopeDatabase.service.database.getDefaultClientName();
       // current
       assert.equal(app.ctx.db.clientName, defaultClientName);
@@ -24,7 +24,7 @@ describe('database.test.ts', () => {
   it('action:model:clientName', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       const modelTest = scopeTest.model.test;
       assert.equal(modelTest.options.client, 'default');
       const modelTest2 = scopeTest.model.test;
@@ -34,7 +34,7 @@ describe('database.test.ts', () => {
   it('action:model:clientNameDynamic:transaction:fail', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:fail' });
       assert.equal(entityTest.title, 'clientNameDynamic:fail');
       await catchError(async () => {
@@ -55,7 +55,7 @@ describe('database.test.ts', () => {
   it('action:model:clientNameDynamic:transaction:success', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       const entityTest = await scopeTest.model.test.insert({ title: 'clientNameDynamic:success' });
       assert.equal(entityTest.title, 'clientNameDynamic:success');
       const db = app.bean.database.getDb({ clientName: 'default' });
@@ -73,7 +73,7 @@ describe('database.test.ts', () => {
   it('action:database:transaction:compensate', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       const entityTest = await scopeTest.model.test.insert({ title: 'transaction:compensate:fail' });
       assert.equal(entityTest.title, 'transaction:compensate:fail');
       await catchError(async () => {
@@ -96,7 +96,7 @@ describe('database.test.ts', () => {
   it('action:model:dynamicTableName', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       const entityTest = scopeTest.entity.test;
       const modelTest = scopeTest.model.testDynamicTable;
       // tableName

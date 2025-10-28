@@ -11,7 +11,7 @@ export interface IBasicFieldsOptions {
 }
 
 export function ExtendTableBuilder(app: VonaApplication) {
-  const scope = app.bean.scope(__ThisModule__);
+  const scope = app.scope(__ThisModule__);
   function _basicFields(this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions, identityType?: TableIdentityType) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) {

@@ -5,7 +5,7 @@ import { app } from 'vona-mock';
 describe('instance.test.ts', () => {
   it('action:instance:shareTest', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const scopeDatabase = app.bean.scope('a-orm');
+      const scopeDatabase = app.scope('a-orm');
       const defaultClientName = scopeDatabase.service.database.getDefaultClientName();
       assert.equal(app.ctx.instanceName, 'shareTest');
       assert.equal(app.ctx.instance.name, 'shareTest');
@@ -15,7 +15,7 @@ describe('instance.test.ts', () => {
   });
   it('action:instance:isolateTest', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const scopeDatabase = app.bean.scope('a-orm');
+      const scopeDatabase = app.scope('a-orm');
       const defaultClientName = scopeDatabase.service.database.getDefaultClientName();
       assert.equal(app.ctx.instanceName, 'isolateTest');
       assert.equal(app.ctx.instance.name, 'isolateTest');

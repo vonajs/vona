@@ -7,7 +7,7 @@ describe('model.test.ts', () => {
   it('action:model:defaultValue', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // create
       const item = await scopeTest.model.test.insert();
       assert.equal(isNil(item.testDate), false);

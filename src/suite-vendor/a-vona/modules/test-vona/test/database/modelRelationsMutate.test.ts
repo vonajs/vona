@@ -9,7 +9,7 @@ describe('modelRelationsMutate.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelRelationsMutate';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // insert: roles
       const roles = await scopeTest.model.role.insertBulk([
         { name: `${prefix}:family` },
@@ -154,7 +154,7 @@ describe('modelRelationsMutate.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelRelationsMutateWith';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // insert: roles
       const roles = await scopeTest.model.role.insertBulk([
         { name: `${prefix}:family` },
@@ -301,7 +301,7 @@ describe('modelRelationsMutate.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelRelationsMutateTree';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // create: categoryTree
       const categoryTree = await scopeTest.model.category.insert({
         name: `${prefix}:1`,

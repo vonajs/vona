@@ -7,7 +7,7 @@ describe('modelRelationsJoins.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelRelationsJoins';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // test data: create
       const testData = await scopeTest.service.testData.create(prefix);
       const {

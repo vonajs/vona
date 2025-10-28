@@ -6,7 +6,7 @@ describe('aopMethod.test.ts', () => {
   it('action:aopMethod', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       let result = scopeTest.service.aopMethod.testSyncBase();
       assert.equal(result, '-+hello+-');
       result = scopeTest.service.aopMethod.testSync();

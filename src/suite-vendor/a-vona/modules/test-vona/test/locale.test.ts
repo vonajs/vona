@@ -19,7 +19,7 @@ describe('locale.test.ts', () => {
         );
         assert.equal(app.meta.locale.getText(false, undefined, ctx.locale, 'test-vona::TestHelloWorld'), '您好，世界');
         // scope locale
-        const scopeTest = app.bean.scope('test-vona');
+        const scopeTest = app.scope('test-vona');
         assert.equal(scopeTest.locale.TestHelloWorld(), '您好，世界');
       },
       { locale: 'zh-cn' },
@@ -29,7 +29,7 @@ describe('locale.test.ts', () => {
   it('action:locale:plurals', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // english
       assert.equal(scopeTest.locale.TestApples.locale('en-us', 0), 'no apples');
       assert.equal(scopeTest.locale.TestApples.locale('en-us', 1), 'one apple');

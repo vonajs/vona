@@ -5,7 +5,7 @@ describe('orm.test.ts', () => {
   it('action:orm:hasOne', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // create: post/postContent
       const post1 = await scopeTest.model.post.insert({
         title: 'action:orm:hasOne:post1',

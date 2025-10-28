@@ -5,7 +5,7 @@ import { app } from 'vona-mock';
 describe('broadcast.test.ts', () => {
   it('action:broadcast', async () => {
     await app.bean.executor.mockCtx(async () => {
-      app.bean.scope('test-vona').broadcast.test.emit(
+      app.scope('test-vona').broadcast.test.emit(
         { message: 'hello' },
         {
           locale: 'zh-cn',

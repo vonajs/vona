@@ -7,7 +7,7 @@ describe('modelMagic.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const name = 'modelMagic:001';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // create
       const item = await scopeTest.model.user.insert({ name });
       assert.equal(item.name, name);

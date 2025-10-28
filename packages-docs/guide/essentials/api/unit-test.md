@@ -74,28 +74,28 @@ describe('student.test.ts', () => {
 
 ``` typescript
 await app.bean.executor.mockCtx(async () => {
-  const scopeTest = app.bean.scope('demo-student');
+  const scopeTest = app.scope('demo-student');
 });
 ```
 
 ### 3. Use Service
 
 ```typescript
-const scopeTest = app.bean.scope('demo-student');
+const scopeTest = app.scope('demo-student');
 const students = await scopeTest.service.student.findAll();
 ```
 
 ### 4. Use Model
 
 ```typescript
-const scopeTest = app.bean.scope('demo-student');
+const scopeTest = app.scope('demo-student');
 const students = await scopeTest.model.student.select();
 ```
 
 ### 5. Using Entity
 
 ``` typescript
-const scopeTest = app.bean.scope('demo-student');
+const scopeTest = app.scope('demo-student');
 const tableName = scopeTest.entity.student.$table;
 const fieldName = scopeTest.entity.student.name;
 ```
@@ -161,7 +161,7 @@ await app.bean.executor.mockCtx(async () => {
 
 ``` typescript
 await app.bean.executor.mockCtx(async () => {
-  const scopeTest = app.bean.scope('demo-student');
+  const scopeTest = app.scope('demo-student');
   try {
     const students = await scopeTest.service.student.findAll();
   } catch (err) {
@@ -176,7 +176,7 @@ await app.bean.executor.mockCtx(async () => {
 import { catchError } from '@cabloy/utils';
 
 await app.bean.executor.mockCtx(async () => {
-  const scopeTest = app.bean.scope('demo-student');
+  const scopeTest = app.scope('demo-student');
   const [students, err] = await catchError(() => {
     return scopeTest.service.student.findAll();
   });

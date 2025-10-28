@@ -7,7 +7,7 @@ describe('modelCache.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelCache:cacheQuery';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // create
       const user = await scopeTest.model.user.insert({ name: `${prefix}:1` });
       // select

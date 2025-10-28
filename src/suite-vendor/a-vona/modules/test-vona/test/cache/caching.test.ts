@@ -5,7 +5,7 @@ import { app } from 'vona-mock';
 describe('caching.test.ts', () => {
   it('action:caching', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // get: cacheKeyFn(string)
       const res = await scopeTest.service.caching.get(2);
       assert.equal(res.id, 2);

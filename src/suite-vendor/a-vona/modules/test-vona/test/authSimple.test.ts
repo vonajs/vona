@@ -5,7 +5,7 @@ import { app } from 'vona-mock';
 
 describe('authSimple.test.ts', () => {
   it('action:passwordHash', async () => {
-    const scope = app.bean.scope('a-authsimple');
+    const scope = app.scope('a-authsimple');
     const password = '12344##1xxaasDFQ,.$';
     const hash = await scope.service.authSimple.calcPasswordHash(password);
     let verified = await scope.service.authSimple.verifyPasswordHash(password, hash);

@@ -10,7 +10,7 @@ describe('modelAggregate.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const prefix = 'action:modelAggregate';
       // scope
-      const scopeTest = app.bean.scope('test-vona');
+      const scopeTest = app.scope('test-vona');
       // insert: roles
       const roles = await scopeTest.model.role.insertBulk([
         { name: `${prefix}:family` },

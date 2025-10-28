@@ -132,7 +132,7 @@ async function getFullPath(
       return _getFullPathInner(ctx, dir, filename, options);
     };
   }
-  const scopeSelf = ctx.app.bean.scope(__ThisModule__);
+  const scopeSelf = ctx.app.scope(__ThisModule__);
   return scopeSelf.event.resolvePath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
     return _getFullPathInner(ctx, dir, filename, options);
   });

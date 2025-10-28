@@ -42,7 +42,7 @@ describe('transaction.test.ts', () => {
     });
 
     // aop method
-    const scopeTest = app.bean.scope('test-vona');
+    const scopeTest = app.scope('test-vona');
     await app.bean.executor.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableNameFail, table => {
@@ -109,7 +109,7 @@ describe('transaction.test.ts', () => {
     });
 
     // aop method
-    const scopeTest = app.bean.scope('test-vona');
+    const scopeTest = app.scope('test-vona');
     await app.bean.executor.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableNameSuccess, table => {
