@@ -14,22 +14,28 @@ export class ServiceDatabase extends BeanBase {
     return this.app.config.database;
   }
 
-  getDatabasePrefix(configInstanceBase?: ConfigInstanceBase) {
+  public getDatabasePrefix(configInstanceBase?: ConfigInstanceBase) {
     const instanceName = configInstanceBase?.isolate ? `isolate${__separator}${configInstanceBase.name}` : 'share';
     return `vona${__separator}test${__separator}${this.app.name}${__separator}${instanceName}${__separator}`;
   }
 
-  async databaseInitStartup() {
+  public async databaseInitStartup() {
     // database
     await this.__preparedatabases(true);
   }
 
-  async databaseNameStartup() {
+  public async databaseNameStartup() {
     // database
     await this.__preparedatabases(false);
   }
 
-  async __fetchDatabases(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
+  public async preparedatabase(clientName: keyof IDatabaseClientRecord, versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+    await this.bean.database.switchDb(async () => {
+      await this.__preparedatabase(versionStart, configInstanceBase);
+    }, clientName);
+  }
+
+  private async __fetchDatabases(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
     const databasePrefix = this.getDatabasePrefix(configInstanceBase);
     // dbs
     let dbs = await client.connection.schema.fetchDatabases(databasePrefix);
@@ -42,7 +48,7 @@ export class ServiceDatabase extends BeanBase {
     return dbs;
   }
 
-  async __createDatabase(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
+  private async __createDatabase(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
     const databasePrefix = this.getDatabasePrefix(configInstanceBase);
     // create
     const databaseName = `${databasePrefix}${moment().format(__timeFormat)}`;
@@ -50,7 +56,7 @@ export class ServiceDatabase extends BeanBase {
     return databaseName;
   }
 
-  async __preparedatabases(versionStart: boolean) {
+  private async __preparedatabases(versionStart: boolean) {
     // default
     await this.preparedatabase('default', versionStart);
     // isolate
@@ -61,20 +67,14 @@ export class ServiceDatabase extends BeanBase {
     }
   }
 
-  public async preparedatabase(clientName: keyof IDatabaseClientRecord, versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
-    await this.bean.database.switchDb(async () => {
-      await this.__preparedatabase(versionStart, configInstanceBase);
-    }, clientName);
-  }
-
-  async __preparedatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+  private async __preparedatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
     await this.__preparedatabaseInner(configInstanceBase);
     if (versionStart) {
       await this.scope.service.version.__start();
     }
   }
 
-  async __preparedatabaseInner(configInstanceBase?: ConfigInstanceBase) {
+  private async __preparedatabaseInner(configInstanceBase?: ConfigInstanceBase) {
     if (this.app.meta.isProd) {
       // donothing
       return;
