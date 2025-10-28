@@ -32,37 +32,17 @@ export class ServiceStartup extends BeanBase {
     }
 
     // version init : force: should be false
-    if (this.app.meta.isTest || this.app.meta.isDev) {
-      const instanceName = '';
-      await this.bean.executor.newCtx(
-        async () => {
-          await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
-        },
-        {
-          dbInfo: { level: 1 },
-          instanceName,
-        },
-      );
+    if (!this.app.meta.isTest || this.app.meta.isDev) {
+      await this._appReadyInstanceStartup('', true);
     } else {
       // all instances
       const instances = await this.bean.executor.newCtx(async () => {
         return await this.bean.instance.list();
       }, { dbInfo: { level: 1 } });
       for (const instance of instances) {
-        const instanceName = instance.name;
-        // need not await
-        const res = this.bean.executor.newCtx(
-          async () => {
-            await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
-          },
-          {
-            dbInfo: { level: 1 },
-            instanceName,
-          },
-        );
-        if (this.app.config.server.listen.disable) {
-          await res;
-        }
+        // need not await for prod
+        const wait = this.app.config.server.listen.disable;
+        await this._appReadyInstanceStartup(instance.name, wait);
       }
     }
 
@@ -78,6 +58,21 @@ export class ServiceStartup extends BeanBase {
           instanceName,
         },
       );
+    }
+  }
+
+  private async _appReadyInstanceStartup(instanceName: keyof IInstanceRecord, wait: boolean) {
+    const res = this.bean.executor.newCtx(
+      async () => {
+        await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
+      },
+      {
+        dbInfo: { level: 1 },
+        instanceName,
+      },
+    );
+    if (wait) {
+      await res;
     }
   }
 
