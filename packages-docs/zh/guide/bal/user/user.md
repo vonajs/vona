@@ -7,7 +7,7 @@ VonaJS 为了兼顾`开箱即用`与`灵活定制`的架构设计理念，将用
 
 ## a-user: IUserBase
 
-模块`a-user`提供了接口`IUserBase`，约定了 User 的基础字段：
+模块`a-user`提供了接口`IUserBase`，约定了 User 的基础字段
 
 ``` typescript
 export interface IUserBase {
@@ -24,7 +24,7 @@ export interface IUserBase {
 
 ## a-user: bean.user
 
-模块`a-user`提供了全局 Bean `bean.user`，为业务开放了通用的调用规范：
+模块`a-user`提供了全局 Bean `bean.user`，为业务提供了通用的调用规范
 
 ``` typescript
 // find user
