@@ -22,7 +22,7 @@ export interface IUserBase {
 }
 ```
 
-## a-user: 全局Bean: bean.user
+## a-user: bean.user
 
 模块`a-user`提供了全局 Bean `bean.user`，为业务开放了通用的调用规范：
 
