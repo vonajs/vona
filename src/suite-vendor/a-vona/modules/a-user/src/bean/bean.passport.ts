@@ -110,17 +110,9 @@ export class BeanPassport extends BeanBase {
   }
 
   public async signinWithAnonymous(): Promise<void> {
-    const userAnonymous = await this.createUserAnonymous();
+    const userAnonymous = await this.bean.user.createAnonymous();
     const passport = { user: userAnonymous, auth: undefined };
     await this.setCurrent(passport);
-  }
-
-  public async createUserAnonymous(): Promise<IUserBase> {
-    const userAnonymous = await this.bean.user.createAnonymous();
-    // event
-    await this.scope.event.createUserAnonymous.emit(userAnonymous);
-    // ok
-    return userAnonymous;
   }
 
   public async kickOut(user?: IUserBase) {

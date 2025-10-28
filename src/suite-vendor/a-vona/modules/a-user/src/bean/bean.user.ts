@@ -42,7 +42,9 @@ export class BeanUser extends BeanBase {
   }
 
   async createAnonymous(): Promise<IUserBase> {
-    return this.userAdapter.createAnonymous() as Promise<IUserBase>;
+    return await this.scope.event.createAnonymous.emit(undefined, async () => {
+      return await this.userAdapter.createAnonymous();
+    }) as Promise<IUserBase>;
   }
 
   async findOneByName(name: string): Promise<IUserBase | undefined> {
