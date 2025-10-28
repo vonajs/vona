@@ -32,7 +32,7 @@ export class ServiceStartup extends BeanBase {
     }
 
     // version init : force: should be false
-    if (!this.app.meta.isTest || this.app.meta.isDev) {
+    if (this.app.meta.isTest || this.app.meta.isDev) {
       await this._appReadyInstanceStartup('', true);
     } else {
       // all instances
@@ -62,15 +62,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   private async _appReadyInstanceStartup(instanceName: keyof IInstanceRecord, wait: boolean) {
-    const res = this.bean.executor.newCtx(
-      async () => {
-        await this.$scope.instance.service.instance.instanceStartup(instanceName, { force: false });
-      },
-      {
-        dbInfo: { level: 1 },
-        instanceName,
-      },
-    );
+    const res = this.$scope.instance.service.instance.instanceStartupIsolate(instanceName, { force: false });
     if (wait) {
       await res;
     }

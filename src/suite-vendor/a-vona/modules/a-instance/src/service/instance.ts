@@ -83,6 +83,18 @@ export class ServiceInstance extends BeanBase {
     });
   }
 
+  async instanceStartupIsolate(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
+    await this.bean.executor.newCtx(
+      async () => {
+        await this.instanceStartup(instanceName, options);
+      },
+      {
+        dbInfo: { level: 1 },
+        instanceName,
+      },
+    );
+  }
+
   // options: force/instanceBase
   async instanceStartup(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
     if (!options) options = {};
