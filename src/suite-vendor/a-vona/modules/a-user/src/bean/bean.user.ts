@@ -40,23 +40,23 @@ export class BeanUser extends BeanBase {
     return await this.register(user, profile.confirmed);
   }
 
-  createAnonymous(): Promise<IUserBase> {
-    return this.userAdapter.createAnonymous();
+  async createAnonymous(): Promise<IUserBase> {
+    return this.userAdapter.createAnonymous() as Promise<IUserBase>;
   }
 
-  findOneByName(name: string): Promise<IUserBase | undefined> {
+  async findOneByName(name: string): Promise<IUserBase | undefined> {
     return this.userAdapter.findOneByName(name);
   }
 
-  findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
+  async findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined> {
     return this.userAdapter.findOne(user);
   }
 
-  update(user: Partial<IUserBase>): Promise<void> {
+  async update(user: Partial<IUserBase>): Promise<void> {
     return this.userAdapter.update(user);
   }
 
-  remove(user: Partial<IUserBase>): Promise<void> {
+  async remove(user: Partial<IUserBase>): Promise<void> {
     return this.userAdapter.remove(user);
   }
 }

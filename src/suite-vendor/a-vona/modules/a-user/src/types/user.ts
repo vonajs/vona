@@ -23,8 +23,8 @@ export interface IUserBase {
 
 export interface IUserAdapter {
   create(user: Partial<IUserBase>): Promise<IUserBase>;
-  userOfProfile(profile: IAuthUserProfile): Promise<IUserBase>;
-  createAnonymous(): Promise<IUserBase>;
+  userOfProfile(profile: IAuthUserProfile): Promise<Partial<IUserBase>>;
+  createAnonymous(): Promise<Partial<IUserBase>>;
   findOneByName(name: string): Promise<IUserBase | undefined>;
   findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
   update(user: Partial<IUserBase>): Promise<void>;
