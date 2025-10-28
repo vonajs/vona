@@ -16,7 +16,7 @@ export class EventListenerEmailConfirmCallback
       return this.scope.locale.ConfirmationEmailExpired();
     }
     // activate
-    const user = await this.bean.user.findOne({ id: data.userId });
+    const user = await this.bean.user.findOneById(data.userId);
     await this.bean.user.activate(user!);
     // ok
     return this.scope.locale.ConfirmationEmailSucceeded();

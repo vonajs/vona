@@ -23,7 +23,7 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
   }
 
   async deserialize(payloadData: IPayloadData): Promise<IPassport | undefined> {
-    const user = await this.bean.user.findOne({ id: payloadData.userId });
+    const user = await this.bean.user.findOneById(payloadData.userId);
     if (!user) return;
     const auth = await this.bean.auth.findOne({ id: payloadData.authId });
     if (!auth) return;

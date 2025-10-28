@@ -78,7 +78,7 @@ export class ServiceAuth extends BeanBase {
         await this.accountMigration(userCurrent.id, entityAuth.userId);
       }
       // user
-      const user = await this.bean.user.findOne({ id: entityAuth.userId });
+      const user = await this.bean.user.findOneById(entityAuth.userId);
       // ready
       passport.user = user;
     } else if (stateIntention === 'associate') {
@@ -110,7 +110,7 @@ export class ServiceAuth extends BeanBase {
       // check if user exists
       let entityUser: IUserBase | undefined;
       if (entityAuth.userId) {
-        entityUser = await this.bean.user.findOne({ id: entityAuth.userId });
+        entityUser = await this.bean.user.findOneById(entityAuth.userId);
       }
       if (!entityUser) {
         // register user
