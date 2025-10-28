@@ -867,7 +867,7 @@ importers:
         specifier: ^5.0.73
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.153
+        specifier: ^5.0.154
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1200,7 +1200,7 @@ importers:
         specifier: ^5.0.18
         version: link:modules/a-event
       vona-module-a-executor:
-        specifier: ^5.0.20
+        specifier: ^5.0.21
         version: link:modules/a-executor
       vona-module-a-i18n:
         specifier: ^5.0.16
@@ -1209,7 +1209,7 @@ importers:
         specifier: ^5.0.17
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.36
+        specifier: ^5.0.37
         version: link:modules/a-instance
       vona-module-a-jwt:
         specifier: ^5.0.19
@@ -1242,7 +1242,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.75
+        specifier: ^5.0.76
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.18
@@ -1269,13 +1269,13 @@ importers:
         specifier: workspace:^
         version: link:modules/a-serialization
       vona-module-a-startup:
-        specifier: ^5.0.25
+        specifier: ^5.0.26
         version: link:modules/a-startup
       vona-module-a-static:
         specifier: ^5.0.18
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.0.21
+        specifier: ^5.0.22
         version: link:modules/a-summer
       vona-module-a-swagger:
         specifier: ^5.0.26
@@ -1290,7 +1290,7 @@ importers:
         specifier: ^5.0.19
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.39
+        specifier: ^5.0.40
         version: link:modules/a-version
       vona-module-a-vona:
         specifier: ^5.0.24
