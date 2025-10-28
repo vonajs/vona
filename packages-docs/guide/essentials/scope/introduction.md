@@ -6,11 +6,11 @@ In Vona, the actual business code development is done in modules. As a relativel
 
 The reason is to prioritize the use of the `dependency lookup` strategy, resulting in fewer decorator functions and fewer type annotations. Accessing module's resources by the `Scope` object is one of the mechanisms for implementing `dependency lookup` strategies
 
-## How to obtain Scope Instance?
+## this.scope: Obtain scope instance of the current module
 
 All beans inherit from the base class `BeanBase`, thus the `Scope` instance of the module to which the current bean belongs can be directly obtained
 
-Take `src/suite/a-home/modules/home-base/src/service/menu.ts` as an example：
+`src/suite/a-home/modules/home-base/src/service/menu.ts`
 
 ```typescript
 @Service()
@@ -23,7 +23,7 @@ export class ServiceMenu extends BeanBase {
 
 - The `Scope` instance of the module to which the current bean belongs can be obtained through `this.scope`
 
-## How to obtain Scope Instance cross-module?
+## this.$scope: Obtain scope instance cross-module
 
 So, how to obtain `Scope` instances of other modules?
 
@@ -39,6 +39,20 @@ class ControllerHome extends BeanBase {
 ```
 
 - The `Scope` instance of the module home-base can be obtained through `this.$scope.homeBase`
+
+## app.scope
+
+If you do not inherit from the base class `BeanBase`, `this.scope` and `this.$scope` cannot be used. Instead, you can use the general method:
+
+`src/backend/demo/index.ts`
+
+``` typescript
+export async function main(app: VonaApplication, _argv: IArgv) {
+  await app.bean.executor.mockCtx(async () => {
+    const scopeHomeBase = app.scope('home-base');
+  });
+}
+```
 
 ## Members of the Scope object
 

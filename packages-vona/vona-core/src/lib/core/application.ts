@@ -3,6 +3,7 @@ import type { KoaApplicationOptions, VonaApplicationOptions } from '../../types/
 import type { VonaConfig } from '../../types/config/config.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { ApplicationError } from '../bean/resource/error/errorApplication.ts';
+import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
 import http from 'node:http';
 import KoaApplication from 'koa';
 import { cast } from '../../types/utils/cast.ts';
@@ -55,6 +56,13 @@ export class VonaApplication extends KoaApplication {
 
   get ctx(): VonaContext {
     return this.currentContext as unknown as VonaContext;
+  }
+
+  /** get specific module's scope */
+  scope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
+  // scope<T>(moduleScope: string): T;
+  scope<T>(moduleScope: string): T {
+    return this.bean.scope(moduleScope as never);
   }
 
   get name() {

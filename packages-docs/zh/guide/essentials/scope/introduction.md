@@ -6,11 +6,11 @@
 
 原因就是优先使用`依赖查找`策略，从而使用更少的装饰器函数，使用更少的类型标注。通过`Scope`对象访问模块提供的资源，就是践行`依赖查找策略`的机制之一
 
-## 如何获取Scope实例
+## this.scope: 获取本模块Scope实例
 
 所有 bean 都继承自基类`BeanBase`，因此可以直接获取到当前 bean 所属模块的`Scope`实例
 
-以`src/suite/a-home/modules/home-base/src/service/menu.ts`为例：
+`src/suite/a-home/modules/home-base/src/service/menu.ts`
 
 ```typescript
 @Service()
@@ -23,7 +23,7 @@ export class ServiceMenu extends BeanBase {
 
 - 通过`this.scope`即可访问到当前 bean 所属模块的`Scope`实例
 
-## 跨模块获取Scope实例
+## this.$scope: 跨模块获取Scope实例
 
 那么，如何获取其他模块的`Scope`实例呢？
 
@@ -40,6 +40,20 @@ class ControllerHome extends BeanBase {
 
 - 通过`this.$scope.homeBase`即可获取模块 home-base 的`Scope`实例
 
+## app.scope: 获取Scope实例的一般方法
+
+如果没有继承自基类`BeanBase`，无法使用`this.scope`和`this.$scope`，则可以使用一般方法：
+
+`src/backend/demo/index.ts`
+
+``` typescript
+export async function main(app: VonaApplication, _argv: IArgv) {
+  await app.bean.executor.mockCtx(async () => {
+    const scopeHomeBase = app.scope('home-base');
+  });
+}
+```
+
 ## Scope对象的成员
 
 | 名称     | 说明             |
@@ -49,5 +63,5 @@ class ControllerHome extends BeanBase {
 | locale   | 模块的I18n国际化 |
 | error    | 模块的错误异常   |
 | service      | 模块的Services    |
-| model|模块的Models |
-|entity|模块的Entities|
+| model |模块的Models |
+| entity |模块的Entities|
