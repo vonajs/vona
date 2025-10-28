@@ -391,7 +391,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         params.columns = options?.columns as any;
       }
       // select
-      const options2 = deepExtend({}, options, { columns: undefined, cache: { emptyArrayAsNull: true } });
+      const options2 = deepExtend({}, options, { columns: undefined });
       const items = await this.__select_raw(table, params, options2);
       return items[0];
     }
@@ -455,7 +455,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         id = id2;
       } else {
         const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
-        const options2 = deepExtend({}, options, { where: undefined, cache: { emptyArrayAsNull: true } });
+        const options2 = deepExtend({}, options, { where: undefined });
         const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options2);
         if (items.length === 0) {
         // donothing
@@ -514,8 +514,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     let id = this.__checkCacheKeyValid(where, table);
     if (isNil(id)) {
       // check where and get id
-      const options2 = deepExtend({}, options, { cache: { emptyArrayAsNull: true } });
-      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options2);
+      const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -696,14 +695,14 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (options?.disableCacheQuery === true || options?.disableCacheQuery === false) {
       return options?.disableCacheQuery;
     }
-    return !this.cacheQuery.enabled;
+    return !(options?.cache?.enable ?? this.cacheQuery.enabled);
   }
 
   protected _checkDisableCacheEntityByOptions(options?: IModelMethodOptionsGeneral) {
     if (options?.disableCacheEntity === true || options?.disableCacheEntity === false) {
       return options?.disableCacheEntity;
     }
-    return !this.cacheEntity.enabled;
+    return !(options?.cache?.enable ?? this.cacheEntity.enabled);
   }
 
   private __checkIfOnlyKey(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord, noCheckLength?: boolean): string | false {
