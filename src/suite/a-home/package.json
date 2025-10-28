@@ -6,6 +6,9 @@
   "description": "",
   "author": "zhennann",
   "files": [],
+  "scripts": {
+    "version": "node ../../../scripts/version-home.ts"
+  },
   "dependencies": {
     "vona-module-home-base": "workspace:^",
     "vona-module-home-index": "workspace:^",
