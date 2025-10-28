@@ -10,10 +10,10 @@ export interface IModelOptionsInstance extends IDecoratorModelOptions<EntityInst
   disableInstance: true,
   cache: {
     entity: {
-      preset: 'allWithIgnoreNull',
+      preset: 'all',
     },
     query: {
-      preset: 'allWithIgnoreNull',
+      preset: 'all',
     },
   },
 })

@@ -49,9 +49,7 @@ export function config(_app: VonaApplication) {
       presetDefault: 'redis' as TSummerCachePreset,
       preset: {
         redis: configRedis,
-        redisWithIgnoreNull: configRedisWithIgnoreNull,
         all: configAll,
-        allWithIgnoreNull: configAllWithIgnoreNull,
       },
       redis: {
         client: 'model',

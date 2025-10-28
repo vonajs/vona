@@ -10,7 +10,7 @@ export const configMem = {
   },
 } as IDecoratorSummerCacheOptions;
 
-export const configMemWithIgnoreNull = { ...configMem, ignoreNull: true };
+// export const configMemWithIgnoreNull = { ...configMem, ignoreNull: true };
 
 export const configRedis = {
   mode: 'redis', // only redis
@@ -19,7 +19,7 @@ export const configRedis = {
   },
 } as IDecoratorSummerCacheOptions;
 
-export const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
+// export const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
 
 export const configAll = {
   mode: 'all',
@@ -32,7 +32,7 @@ export const configAll = {
   },
 } as IDecoratorSummerCacheOptions;
 
-export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
+// export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
 
 export function config(_app: VonaApplication) {
   return {
@@ -42,11 +42,11 @@ export function config(_app: VonaApplication) {
       presetDefault: 'all' as TSummerCachePreset,
       preset: {
         mem: configMem,
-        memWithIgnoreNull: configMemWithIgnoreNull,
         redis: configRedis,
-        redisWithIgnoreNull: configRedisWithIgnoreNull,
         all: configAll,
-        allWithIgnoreNull: configAllWithIgnoreNull,
+        // memWithIgnoreNull: configMemWithIgnoreNull,
+        // redisWithIgnoreNull: configRedisWithIgnoreNull,
+        // allWithIgnoreNull: configAllWithIgnoreNull,
       },
       redis: {
         client: 'summer',
