@@ -172,7 +172,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const cache = this.cacheEntity.getInstance(table);
     let items = await cache.mget(ids, {
       mget: async ids => {
-        return await super._mget_original(table, ids, { disableDeleted: true });
+        const items = await super._mget_original(table, ids, { disableDeleted: true });
+        return items.map(item => item === undefined ? null : item);
       },
       db: this.db,
     });
