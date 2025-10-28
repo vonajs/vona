@@ -21,17 +21,17 @@ export class ServiceDatabase extends BeanBase {
 
   public async databaseInitStartup() {
     // database
-    await this.__preparedatabases(true);
+    await this.__prepareDatabases(true);
   }
 
   public async databaseNameStartup() {
     // database
-    await this.__preparedatabases(false);
+    await this.__prepareDatabases(false);
   }
 
-  public async preparedatabase(clientName: keyof IDatabaseClientRecord, versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+  public async prepareDatabase(clientName: keyof IDatabaseClientRecord, versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
     await this.bean.database.switchDb(async () => {
-      await this.__preparedatabase(versionStart, configInstanceBase);
+      await this.__prepareDatabase(versionStart, configInstanceBase);
     }, clientName);
   }
 
@@ -56,25 +56,25 @@ export class ServiceDatabase extends BeanBase {
     return databaseName;
   }
 
-  private async __preparedatabases(versionStart: boolean) {
+  private async __prepareDatabases(versionStart: boolean) {
     // default
-    await this.preparedatabase('default', versionStart);
+    await this.prepareDatabase('default', versionStart);
     // isolate
     for (const configInstanceBase of this.app.config.instances) {
       if (!configInstanceBase.isolate) continue;
       if (!configInstanceBase.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${configInstanceBase.name}`);
-      await this.preparedatabase(configInstanceBase.isolateClient, versionStart, configInstanceBase);
+      await this.prepareDatabase(configInstanceBase.isolateClient, versionStart, configInstanceBase);
     }
   }
 
-  private async __preparedatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
-    await this.__preparedatabaseInner(configInstanceBase);
+  private async __prepareDatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+    await this.__prepareDatabaseInner(configInstanceBase);
     if (versionStart) {
       await this.scope.service.version.__start();
     }
   }
 
-  private async __preparedatabaseInner(configInstanceBase?: ConfigInstanceBase) {
+  private async __prepareDatabaseInner(configInstanceBase?: ConfigInstanceBase) {
     if (this.app.meta.isProd) {
       // donothing
       return;
