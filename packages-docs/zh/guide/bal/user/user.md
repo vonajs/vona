@@ -166,28 +166,11 @@ class EventListenerActivate {
 - 先为用户分配角色
 - 然后调用`next`完成缺省的激活逻辑
 
-## 角色: admin
-
-在模块`home-user`的`meta.version`中自动创建`admin`角色
-
-- 参见：[迁移与变更](../../essentials/api/version.md)
-
-`src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
-
-``` typescript
-async init(options) {
-  if (options.version === 1) {
-    // role: admin
-    await this.scope.model.role.insert({
-      name: 'admin',
-    });
-  }
-}
-```
-
 ## 用户: admin
 
 在模块`home-user`的`meta.version`中自动创建`admin`用户
+
+- 参见：[迁移与变更](../../essentials/api/version.md)
 
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 
