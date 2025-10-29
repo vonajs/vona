@@ -84,8 +84,6 @@ class ControllerStudent {
 ### 2. this.bean.passport
 
 ``` diff
-import type { IUserBase } from 'vona-module-a-user';
-
 class ControllerStudent {
   @Web.get('test')
   test() {

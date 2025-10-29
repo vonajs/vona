@@ -31,6 +31,30 @@ const roles = await this.bean.role.findAllByUserId(userId);
 |findOne|查找角色|
 |findAllByUserId|查找某个用户的所有角色|
 
+## home-user适配器: ServiceRoleAdapter
+
+模块`home-user`提供了适配器`ServiceRoleAdapter`，允许我们定制角色的操作逻辑。业务代码调用`bean.role`，`bean.role`调用`ServiceRoleAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
+
+`src/suite/a-home/modules/home-user/src/service/roleAdapter.ts`
+
+|名称|说明|
+|--|--|
+|findOneByName|通过`name`查找角色|
+|findOne|查找角色|
+|findAllByUserId|查找某个用户的所有角色|
+
+## 获取当前角色
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const roles = this.bean.passport.getCurrentRoles();
+    console.log(roles);
+  }
+}  
+```
+
 ## 角色: admin
 
 在模块`home-user`的`meta.version`中自动创建`admin`角色
