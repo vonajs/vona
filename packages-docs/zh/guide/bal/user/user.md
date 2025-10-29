@@ -68,7 +68,7 @@ this.bean.user.activate(user);
 
 ## 获取当前用户
 
-### 参数装饰器
+### 1. 参数装饰器
 
 ``` diff
 import type { IUserBase } from 'vona-module-a-user';
@@ -81,7 +81,7 @@ class ControllerStudent {
 }  
 ```
 
-### this.bean.passport
+### 2. this.bean.passport
 
 ``` diff
 import type { IUserBase } from 'vona-module-a-user';
@@ -108,11 +108,119 @@ class ControllerStudent {
 }  
 ```
 
+## 注册监听：eventListener.register
 
-## 注册
+可以调用`bean.user.register`注册一个新用户，该方法会引发`a-user:register`事件，模块`home-user`监听该事件，从而实现逻辑定制
+
+`src/suite/a-home/modules/home-user/src/bean/eventListener.register.ts`
+
+``` typescript
+@EventListener({ match: 'a-user:register' })
+class EventListenerRegister {
+  async execute(data, next) {
+    // next: registered
+    const user = await next() as IUserBase;
+    // mail: activate
+    if (!data.autoActivate && user.email) {
+      await this.$scope.mailconfirm.service.mail.emailConfirm(user);
+    }
+    return user;
+  }
+}
+```
+
+- `@EventListener`: 此装饰器用于实现`事件监听`
+- 先调用`next`完成缺省的注册逻辑
+- 判断是否需要使用 email 激活，如果需要就调用`mail.emailConfirm`方法
+
+|名称|类型|说明|
+|--|--|--|
+|match|string\|regexp\|(string\|regexp)[]|监听哪些事件|
 
 ## 激活
 
+可以调用`bean.user.activate`激活用户，该方法会引发`a-user:activate`事件，模块`home-user`监听该事件，从而实现逻辑定制
+
+`src/suite/a-home/modules/home-user/src/bean/eventListener.activate.ts`
+
+``` typescript
+@EventListener({ match: 'a-user:activate' })
+class EventListenerActivate {
+  async execute(data, next) {
+    const user = data as IUserBase;
+    if (user.name === 'admin') {
+      // role: admin
+      const roleAdmin = await this.scope.model.role.get({ name: 'admin' });
+      // userRole: admin
+      await this.scope.model.roleUser.insert({
+        userId: user.id,
+        roleId: roleAdmin!.id,
+      });
+    }
+    // next
+    return next();
+  }
+}
+```
+
+- 先为用户分配角色
+- 然后调用`next`完成缺省的激活逻辑
+
+## 角色: admin
+
+在模块`home-user`的`meta.version`中自动创建`admin`角色
+
+- 参见：[迁移与变更](../../essentials/api/version.md)
+
+`src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
+
+``` typescript
+async init(options) {
+  if (options.version === 1) {
+    // role: admin
+    await this.scope.model.role.insert({
+      name: 'admin',
+    });
+  }
+}
+```
+
 ## 用户: admin
 
+在模块`home-user`的`meta.version`中自动创建`admin`用户
 
+`src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
+
+``` typescript
+async init(options) {
+  if (options.version === 1) {
+    // user: admin
+    await this.bean.authSimple.authenticate({
+      username: 'admin',
+      password: options.password || this.scope.config.passwordDefault.admin,
+      avatar: ':emoji:flower',
+      confirmed: true,
+    }, 'register', 'default');
+  }
+}
+```
+
+- `bean.authSimple`: 是`用户名/密码`认证服务
+- `authenticate`: 该方法会调用`bean.user.register`注册一个新用户
+
+## 默认密码
+
+`admin`用户的默认密码为`123456`，可以在 app config 中修改
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'home-user': {
+    passwordDefault: {
+      admin: 'xxxxxx',
+    },
+  },
+};
+```
