@@ -49,7 +49,47 @@ this.bean.user.activate(user);
 |removeById|通过`id`删除用户|
 |remove|删除用户|
 
+## 获取当前用户
+
+### 参数装饰器
+
+``` diff
+import type { IUserBase } from 'vona-module-a-user';
+
+class ControllerStudent {
+  @Web.get('test')
++ test(@Arg.user() user: IUserBase) {
+    console.log(user);
+  }
+}  
+```
+
+### this.bean.passport
+
+``` diff
+import type { IUserBase } from 'vona-module-a-user';
+
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const user = this.bean.passport.getCurrentUser();
+    console.log(user);
+  }
+}  
+```
+
 ## 匿名用户
+
+当匿名用户访问 API 时，系统会自动创建一个匿名 user 对象
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test(@Arg.user() user: IUserBase) {
++   console.log(user.anonymous);
+  }
+}  
+```
 
 ## 注册
 
