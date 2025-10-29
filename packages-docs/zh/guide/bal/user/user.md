@@ -49,6 +49,23 @@ this.bean.user.activate(user);
 |removeById|通过`id`删除用户|
 |remove|删除用户|
 
+## home-user适配器: ServiceUserAdapter
+
+模块`home-user`提供了适配器`ServiceUserAdapter`，允许我们定制用户的操作逻辑。业务代码调用`bean.user`，`bean.user`调用`ServiceUserAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
+
+`src/suite/a-home/modules/home-user/src/service/userAdapter.ts`
+
+|名称|说明|
+|--|--|
+|create|创建用户|
+|userOfProfile|将profile数据转换为user|
+|createAnonymous|创建匿名用户|
+|findOneByName|通过`name`查找用户|
+|findOne|查找用户|
+|update|更新用户|
+|remove|删除用户|
+|setActivated|设置激活状态|
+
 ## 获取当前用户
 
 ### 参数装饰器
@@ -91,11 +108,11 @@ class ControllerStudent {
 }  
 ```
 
+
 ## 注册
 
 ## 激活
 
 ## 用户: admin
 
-## 最后讲home-user适配器
 
