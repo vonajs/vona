@@ -43,8 +43,10 @@ this.bean.user.activate(user);
 |createAnonymous|创建匿名用户|
 |findOneByName|通过`name`查找用户|
 |findOneById|通过`id`查找用户|
-|findOne|通过更多条件查找用户|
+|findOne|查找用户|
+|updateById|通过`id`更新用户|
 |update|更新用户|
+|removeById|通过`id`删除用户|
 |remove|删除用户|
 
 ## 匿名用户

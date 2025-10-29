@@ -169,6 +169,6 @@ export class ServiceAuth extends BeanBase {
       },
     );
     // remove user
-    await this.bean.user.remove({ id: userIdFrom });
+    await this.bean.user.removeById(userIdFrom);
   }
 }
