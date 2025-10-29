@@ -60,6 +60,19 @@ this.bean.passport.signinMock();
 |serialize|将Passport序列化为payload，从而存入jwt token中|
 |deserialize|从payload反序列化出Passport|
 
+## 获取当前Passport
 
-* passport 装饰器:public/user/role/admin
-* Passport api
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const passport = this.bean.passport.getCurrent();
+    console.log(passport);
+  }
+}
+```
+
+-- to be done --
+
+## passport 装饰器:public/activated/admin/userName/roleName
+## Passport controller api
