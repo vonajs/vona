@@ -49,3 +49,14 @@ async init(options) {
   }
 }
 ```
+
+## 为用户分配角色
+
+``` typescript
+await this.scope.model.roleUser.insert({
+  userId,
+  roleId,
+});
+```
+
+- `this.scope`: 取得模块`home-user`的 scope 对象
