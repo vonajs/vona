@@ -59,8 +59,16 @@ export class BeanUser extends BeanBase {
     return this.userAdapter.findOne(user);
   }
 
+  async updateById(id: TableIdentity, user: Partial<IUserBase>): Promise<void> {
+    return this.userAdapter.update({ ...user, id });
+  }
+
   async update(user: Partial<IUserBase>): Promise<void> {
     return this.userAdapter.update(user);
+  }
+
+  async removeById(id: TableIdentity): Promise<void> {
+    return this.userAdapter.remove({ id });
   }
 
   async remove(user: Partial<IUserBase>): Promise<void> {

@@ -39,13 +39,13 @@ this.bean.user.activate(user);
 |--|--|
 |activate|激活用户|
 |register|注册用户|
-|registerByProfile||
-|createAnonymous||
-|findOneByName||
-|findOneById||
-|findOne||
-|update||
-|remove||
+|registerByProfile|使用profile数据注册用户，profile数据来自第三方认证|
+|createAnonymous|创建匿名用户|
+|findOneByName|通过`name`查找用户|
+|findOneById|通过`id`查找用户|
+|findOne|通过更多条件查找用户|
+|update|更新用户|
+|remove|删除用户|
 
 ## 匿名用户
 
