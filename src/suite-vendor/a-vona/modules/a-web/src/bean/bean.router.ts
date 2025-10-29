@@ -4,7 +4,7 @@ import type { IDecoratorControllerOptions } from '../types/controller.ts';
 import type { TypeRequestMethod } from '../types/request.ts';
 import * as ModuleInfo from '@cabloy/module-info';
 import Router from 'find-my-way';
-import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
+import { appMetadata, appResource, BeanBase, cast, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapi';
@@ -144,6 +144,8 @@ export class BeanRouter extends BeanBase {
       ctx.route = _route;
       ctx.request.params = params;
       ctx.request.query = searchParams;
+      ctx.response.status = 200;
+      cast(ctx.response)._explicitNullBody = true;
       if (!_route[SymbolRouteComposeMiddlewaresCache]) {
         _route[SymbolRouteComposeMiddlewaresCache] = self._registerComposeMiddlewares(ctx);
       }
