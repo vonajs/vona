@@ -11,7 +11,7 @@ export class InterceptorBodyRes extends BeanBase implements IInterceptorExecute 
     // next
     const res = await next();
     // handle
-    if (this.ctx.response.status === 404 && this.ctx.response.body === undefined) {
+    if (!this.bean.bodyRes.handled) {
       await this.bean.bodyRes.setHeaders();
       await this.bean.bodyRes.respond(res);
     }

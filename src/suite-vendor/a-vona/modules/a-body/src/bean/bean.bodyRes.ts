@@ -35,6 +35,10 @@ export class BeanBodyRes extends BeanBase {
     }
   }
 
+  get handled() {
+    return this.ctx.response.status !== 404 || this.ctx.response.body !== undefined;
+  }
+
   getResponseHttpCode(defaultCode: number = 200): number {
     if (this.ctx.response.status !== 404) return this.ctx.response.status;
     let httpCode: number | undefined;
