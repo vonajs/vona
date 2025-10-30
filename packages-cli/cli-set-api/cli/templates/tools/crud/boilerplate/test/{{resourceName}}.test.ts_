@@ -1,7 +1,6 @@
 import type { Dto<%=argv.resourceNameCapitalize%>Create, Dto<%=argv.resourceNameCapitalize%>QueryRes, Dto<%=argv.resourceNameCapitalize%>Update, Entity<%=argv.resourceNameCapitalize%> } from 'vona-module-<%=argv.moduleInfo.relativeName%>';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('<%=argv.resourceName%>.test.ts', () => {
@@ -30,15 +29,13 @@ describe('<%=argv.resourceName%>.test.ts', () => {
         body: dataUpdate,
       });
       // findOne
-      const <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>Id } });
+      let <%=argv.resourceName%>: Entity<%=argv.resourceNameCapitalize%> = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>Id } });
       assert.equal(<%=argv.resourceName%>.name, dataUpdate.name);
       // delete
       await app.bean.executor.performAction('delete', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>.id } });
       // findOne
-      const [_, err] = await catchError(() => {
-        return app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>.id } });
-      });
-      assert.equal(err?.code, 404);
+      <%=argv.resourceName%> = await app.bean.executor.performAction('get', '<%=argv.moduleActionPathRaw%>/:id', { params: { id: <%=argv.resourceName%>.id } });
+      assert.equal(<%=argv.resourceName%>, undefined);
       // logout
       await app.bean.passport.signout();
     });
