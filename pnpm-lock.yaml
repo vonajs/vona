@@ -458,7 +458,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.278
+        specifier: ^1.0.279
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -867,7 +867,7 @@ importers:
         specifier: ^5.0.73
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.155
+        specifier: ^5.0.156
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1188,7 +1188,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.92
+        specifier: ^5.0.93
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.19
@@ -1224,7 +1224,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-mailconfirm
       vona-module-a-menu:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:modules/a-menu
       vona-module-a-meta:
         specifier: ^5.0.15
@@ -6364,6 +6364,7 @@ packages:
   keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
     engines: {node: '>= 0.6'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
