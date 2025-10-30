@@ -95,7 +95,7 @@ import { Aspect } from 'vona-module-a-aspect';
 @Aspect.guard('a-user:roleName', { name: 'admin' })
 ```
 
-* 简写方式 1：
+* 简写方式：
 
 ``` typescript
 import { Passport } from 'vona-module-a-user';
@@ -103,7 +103,7 @@ import { Passport } from 'vona-module-a-user';
 @Passport.roleName({ name: 'admin' })
 ```
 
-* 简写方式 2：
+## 判断当前用户的角色名是否为`admin`
 
 由于判断角色名是否为`admin`使用频率较高，因此又进一步提供了一个简写方式，如下：
 

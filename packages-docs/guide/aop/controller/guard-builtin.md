@@ -95,7 +95,7 @@ import { Aspect } from 'vona-module-a-aspect';
 @Aspect.guard('a-user:roleName', { name: 'admin' })
 ```
 
-* Shorthand method 1:
+* Shorthand method:
 
 ``` typescript
 import { Passport } from 'vona-module-a-user';
@@ -103,7 +103,7 @@ import { Passport } from 'vona-module-a-user';
 @Passport.roleName({ name: 'admin' })
 ```
 
-* Shorthand method 2:
+## Determine whether the role name is `admin`
 
 Because determining whether the role name is `admin` is frequently used, we have provided a shorthand method as follows:
 
