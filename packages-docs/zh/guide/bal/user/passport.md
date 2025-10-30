@@ -74,5 +74,29 @@ class ControllerStudent {
 
 -- to be done --
 
-## passport 装饰器:public/activated/admin/userName/roleName
-## Passport controller api
+## a-user: Passport装饰器
+
+:public/activated/admin/userName/roleName
+
+## home-user: Passport API
+
+模块`home-user`提供了一组开箱即用的 Passport API，也可以在此基础之上扩展自定义的业务逻辑
+
+`src/suite/a-home/modules/home-user/src/controller/passport.ts`
+
+|名称|说明|
+|--|--|
+|current|获取当前Passport|
+|logout|退出登录|
+|register|注册新用户|
+|login|登录|
+|loginOauth|第三方认证|
+|associate|关联认证|
+|migrate|迁移认证|
+|refreshAuthToken|刷新jwt token|
+|createPassportJwtFromOauthCode|使用code生成jwt token。此code由第三方认证返回|
+|createTempAuthToken|生成临时jwt token，过期时间短，一般用于url query参数中|
+
+
+
+
