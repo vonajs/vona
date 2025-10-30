@@ -65,7 +65,7 @@ export class ControllerPassport extends BeanBase {
           );
           // code
           const code = await this.bean.passport.createOauthCodeFromOauthAuthToken(jwt.accessToken);
-          if (strategy.name === 'mock') {
+          if (strategy.name === 'mock' && !strategyState.redirect) {
             // mock
             const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
             return resolve(jwt2);
