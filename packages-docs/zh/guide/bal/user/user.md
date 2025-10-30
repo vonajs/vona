@@ -129,7 +129,7 @@ class EventListenerRegister {
 
 - `@EventListener`: 此装饰器用于实现`事件监听`
 - 先调用`next`完成缺省的注册逻辑
-- 判断是否需要使用 email 激活，如果需要就调用`emailConfirm`方法
+- 然后判断是否需要使用 email 激活，如果需要就调用`emailConfirm`方法
 
 |名称|类型|说明|
 |--|--|--|

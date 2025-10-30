@@ -109,90 +109,62 @@ class ControllerStudent {
 
 ## Register User
 
-You can call `bean.user.register` to register a new user. This method raises the `a-user:register` event. The `home-user` module listens for this event, thus enabling customized logic.
+You can call `bean.user.register` to register a new user. This method will trigger the `a-user:register` event. The `home-user` module listens for this event, thus enabling customized logic
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.register.ts`
 
 ``` typescript
-
 @EventListener({ match: 'a-user:register' })
-
 class EventListenerRegister {
-
-async execute(data, next) {
-
-// next: registered
-
-const user = await next() as IUserBase;
-
-// mail: activate
-
-if (!data.autoActivate && user.email) {
-
-await this.bean.mailConfirm.emailConfirm(user);
-
-}
-
-return user;
-
-}
+  async execute(data, next) {
+    // next: registered
+    const user = await next() as IUserBase;
+    // mail: activate
+    if (!data.autoActivate && user.email) {
+      await this.bean.mailConfirm.emailConfirm(user);
+    }
+    return user;
+  }
 }
 ```
 
-- `@EventListener`: This decorator is used to implement `event listeners`
+- `@EventListener`: This decorator is used to implement `event listener`
 
-- First, call `next` to complete the default registration logic.
+- First, call `next` to complete the default registration logic
 
-- Determine if email activation is required; if so, call the `emailConfirm` method.
+- Then, determine if email activation is required; if so, call the `emailConfirm` method
 
 |Name|Type|Description|
-
 |--|--|--|
-
 |match|string\|regexp\|(string\|regexp)[]|Which events to listen for|
 
 ## Activate User
 
-Users can be activated by calling `bean.user.activate`. This method will trigger the `a-user:activate` event. The module `home-user` listens for this event, thus enabling logic customization.
+Users can be activated by calling `bean.user.activate`. This method will trigger the `a-user:activate` event. The module `home-user` listens for this event, thus enabling logic customization
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.activate.ts`
 
 ``` typescript
-
 @EventListener({ match: 'a-user:activate' })
-
 class EventListenerActivate {
-
-async execute(data, next) {
-
-const user = data as IUserBase;
-
-if (user.name === 'admin') {
-
-// role: admin
-
-const roleAdmin = await this.scope.model.role.get({ name: 'admin' });
-
-// userRole: admin
-
-await this.scope.model.roleUser.insert({
-userId: user.id,
-
-roleId: roleAdmin!.id,
-
-});
-
-}
-// next
-
-return next();
-
-}
+  async execute(data, next) {
+    const user = data as IUserBase;
+    if (user.name === 'admin') {
+      // role: admin
+      const roleAdmin = await this.scope.model.role.get({ name: 'admin' });
+      // userRole: admin
+      await this.scope.model.roleUser.insert({
+        userId: user.id,
+        roleId: roleAdmin!.id,
+      });
+    }
+    // next
+    return next();
+  }
 }
 ```
 
 - Assign a role to the user first
-
 - Then call `next` to complete the default activation logic
 
 ## User: admin
@@ -204,26 +176,20 @@ Automatically create the `admin` user in the `meta.version` of the module `home-
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 
 ``` typescript
-
 async init(options) {
-
-if (options.version === 1) {
-
-// user: admin
-
-await this.bean.authSimple.authenticate({
-username: 'admin',
-password: options.password || this.scope.config.passwordDefault.admin,
-avatar: ':emoji:flower',
-confirmed: true,
-
-}, 'register', 'default');
-
+  if (options.version === 1) {
+    // user: admin
+    await this.bean.authSimple.authenticate({
+      username: 'admin',
+      password: options.password || this.scope.config.passwordDefault.admin,
+      avatar: ':emoji:flower',
+      confirmed: true,
+    }, 'register', 'default');
+  }
 }
-
 ```
 
-- `bean.authSimple`: is the username/password authentication service
+- `bean.authSimple`: This is the `username/password` authentication service
 
 - `authenticate`: This method calls `bean.user.register` to register a new user
 
@@ -234,21 +200,12 @@ The default password for the `admin` user is `123456`, which can be modified in 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-
 // modules
-
 config.modules = {
-
-'home-user': {
-
-passwordDefault: {
-
-admin: 'xxxxxx',
-
-},
-
-},
-
+  'home-user': {
+    passwordDefault: {
+      admin: 'xxxxxx',
+    },
+  },
 };
-
 ```
