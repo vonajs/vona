@@ -458,7 +458,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.280
+        specifier: ^1.0.281
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -867,7 +867,7 @@ importers:
         specifier: ^5.0.73
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.156
+        specifier: ^5.0.157
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1158,7 +1158,7 @@ importers:
         specifier: workspace:^
         version: link:modules/a-aspectutils
       vona-module-a-auth:
-        specifier: ^5.0.38
+        specifier: ^5.0.39
         version: link:modules/a-auth
       vona-module-a-authsimple:
         specifier: ^5.0.34

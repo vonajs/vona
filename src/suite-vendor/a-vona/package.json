@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.156",
+  "version": "5.0.157",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -9,7 +9,7 @@
   "dependencies": {
     "vona-module-a-aspect": "^5.0.23",
     "vona-module-a-aspectutils": "workspace:^",
-    "vona-module-a-auth": "^5.0.38",
+    "vona-module-a-auth": "^5.0.39",
     "vona-module-a-authsimple": "^5.0.34",
     "vona-module-a-bean": "^5.0.16",
     "vona-module-a-beanmutate": "workspace:^",
