@@ -45,6 +45,12 @@ class ControllerStudent {
 
 * 举例：`Github`认证
 
+`Github`认证是独立的模块，需要安装到项目中：
+
+``` bash
+$ pnpm add vona-module-a-authgithub -w
+```
+
 ``` typescript
 class ControllerStudent {
   @Web.get('login')
@@ -188,7 +194,6 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 
 前端取得`x-vona-oauth-code`值，再调用后端 api 换取`jwt token`
 :::
-
 
 ## passport api
 
