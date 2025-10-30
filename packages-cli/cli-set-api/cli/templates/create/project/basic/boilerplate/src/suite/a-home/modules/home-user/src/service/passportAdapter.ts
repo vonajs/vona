@@ -7,7 +7,6 @@ import { Service } from 'vona-module-a-bean';
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {
   async isAdmin(passport: IPassport | undefined): Promise<boolean> {
     if (!passport) return false;
-    if (passport.user?.name === 'admin') return true;
     if (passport.roles?.some(role => role.name === 'admin')) return true;
     return false;
   }
