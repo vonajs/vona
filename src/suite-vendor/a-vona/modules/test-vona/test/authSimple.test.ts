@@ -16,10 +16,11 @@ describe('authSimple.test.ts', () => {
 
   it('action:authSimple', async () => {
     await app.bean.executor.mockCtx(async () => {
+      const password = app.scope('home-user').config.passwordDefault.admin;
       // login
       const jwt = await app.bean.auth.authenticate('a-authsimple:simple', {
         clientName: 'default',
-        clientOptions: { username: 'admin', password: '123456' },
+        clientOptions: { username: 'admin', password },
       });
       assert.equal(!!jwt?.accessToken, true);
       // isAuthenticated: isolate
@@ -36,7 +37,7 @@ describe('authSimple.test.ts', () => {
       assert.equal(isAuthenticated, true);
       // login again
       const jwt2 = await app.bean.authSimple.authenticate(
-        { username: 'admin', password: '123456' },
+        { username: 'admin', password },
         'login',
         'default',
       );
