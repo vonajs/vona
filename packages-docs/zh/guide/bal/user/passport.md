@@ -72,11 +72,29 @@ class ControllerStudent {
 }
 ```
 
--- to be done --
-
 ## a-user: Passport装饰器
 
-:public/activated/admin/userName/roleName
+模块`a-user`提供了一组 Passport 装饰器，用于对当前用户进行权限校验
+
+|名称|说明|
+|--|--|
+|public|是否允许匿名用户访问API|
+|activated|是否允许非激活用户访问API|
+|userName|判断当前用户名|
+|roleName|判断当前用户的角色名|
+|admin|判断当前用户的角色名是否为`admin`|
+
+这里仅列出常用写法，具体信息参见: [内置守卫](../../aop/controller/guard-builtin.md)
+
+``` typescript
+import { Passport } from 'vona-module-a-user';
+
+@Passport.public()
+@Passport.activated(false)
+@Passport.userName({ name: 'admin' })
+@Passport.roleName({ name: 'admin' })
+@Passport.admin()
+```
 
 ## home-user: Passport API
 
