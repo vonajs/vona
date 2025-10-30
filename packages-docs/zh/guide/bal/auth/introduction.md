@@ -84,7 +84,19 @@ config.onions = {
 
 ### 如何添加更多Client凭据
 
-首先采用接口合并机制添加 Client 类型定义
+* 首先采用接口合并机制添加 Client 类型定义
+
+在 VSCode 编辑器中，输入代码片段`recordauthclient`，自动生成代码骨架:
+
+``` typescript
+declare module 'vona-module-x-x' {
+  export interface IAuthProvider_xxx_ClientRecord {
+    : never;
+  }
+}
+```
+
+调整代码:
 
 ``` typescript
 declare module 'vona-module-a-authgithub' {
@@ -94,7 +106,7 @@ declare module 'vona-module-a-authgithub' {
 }
 ```
 
-然后在 App Config 中设置认证凭据
+* 然后在 App Config 中设置认证凭据
 
 ``` diff
 // onions

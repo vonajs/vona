@@ -261,6 +261,18 @@
     ],
     "description": "record.menuItemLink"
   },
+  "record.authclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordauthclient",
+    "body": [
+      "declare module 'vona-module-x-x' {",
+      "  export interface IAuthProvider_xxx_ClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.authclient"
+  },
   "findManyQueryTransform": {
     "scope": "typescript,typescriptreact",
     "prefix": "findmanyquerytransform",
