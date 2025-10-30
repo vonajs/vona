@@ -1,4 +1,4 @@
-# Users
+# User
 
 To balance the `out-of-the-box` and `flexible customization` architectural design principles, VonaJS divides the user system into two parts:
 
