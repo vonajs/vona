@@ -1,10 +1,10 @@
 import type { NextEventStrict } from 'vona-module-a-event';
 import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
 import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-bean';
+import { Bean } from 'vona-module-a-bean';
 
-@Service()
-export class ServiceMenu extends BeanBase {
+@Bean()
+export class BeanMenu extends BeanBase {
   async retrieveMenus(
     publicPath?: string,
     nextOrDefault?: NextEventStrict<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult> | TypeEventRetrieveMenusResult,

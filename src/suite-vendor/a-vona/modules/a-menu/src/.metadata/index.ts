@@ -1,47 +1,31 @@
 /* eslint-disable */
 import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
-/** service: begin */
-export * from '../service/menu.ts';
+/** bean: begin */
+export * from '../bean/bean.menu.ts';
 
-import 'vona-module-a-bean';
-declare module 'vona-module-a-bean' {
+import 'vona';
+declare module 'vona' {
   
-    export interface IServiceRecord {
-      'a-menu:menu': never;
-    }
-
   
 }
 declare module 'vona-module-a-menu' {
   
-        export interface ServiceMenu {
+        export interface BeanMenu {
           /** @internal */
           get scope(): ScopeModuleAMenu;
-        }
-
-          export interface ServiceMenu {
-            get $beanFullName(): 'a-menu.service.menu';
-            get $onionName(): 'a-menu:menu';
-            
-          } 
+        } 
 }
-/** service: end */
-/** service: begin */
-import type { ServiceMenu } from '../service/menu.ts';
-export interface IModuleService {
-  'menu': ServiceMenu;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
+/** bean: end */
+/** bean: begin */
+import type { BeanMenu } from '../bean/bean.menu.ts';
+import 'vona';  
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-menu.service.menu': ServiceMenu;
+  export interface IBeanRecordGlobal {
+    'menu': BeanMenu;
   }
 }
-/** service: end */
+/** bean: end */
 /** event: begin */
 export * from '../bean/event.retrieveMenus.ts';
 
@@ -153,7 +137,6 @@ export class ScopeModuleAMenu extends BeanScopeBase {}
 
 export interface ScopeModuleAMenu {
   util: BeanScopeUtil;
-service: IModuleService;
 event: IModuleEvent;
 }
 
