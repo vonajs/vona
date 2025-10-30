@@ -4,7 +4,7 @@
 
 ## 特性
 
-* `Provider机制`：使用`Provider`支持各类认证方式，如：用户名/密码认证、第三方认证（Github），等等
+* `Provider机制`：使用`Provider`支持各类认证方式，如：用户名/密码认证、OAuth 认证（Github），等等
 * `Clients`：同一个 Provider 可以提供多个凭证
 * `关联认证`：可以为同一个用户关联多个认证方式
 * `迁移认证`：可以将一个用户的认证方式迁移到另一个用户
@@ -58,7 +58,7 @@ class ControllerStudent {
 }
 ```
 
-## 设置第三方认证凭据
+## 设置OAuth认证凭据
 
 仍以`Github`为例，在 App Config 中设置认证凭据
 
@@ -116,6 +116,14 @@ config.onions = {
 };
 ```
 
+## OAuth认证Callback URL
+
+在使用 OAuth 认证时，需要在 OAuth 网站提供系统的 Callback URL
+
+VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出在控制台，方便我们直接使用
+
+![](../../../assets/img/bal/auth-1.png)
+
 ## bean.auth.authenticate
 
 ### 方法定义
@@ -143,7 +151,7 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 
 * options.clientOptions
 
-对于第三方认证，有以下基本字段：
+对于 OAuth 认证，有以下基本字段：
 
 |名称|说明|
 |--|--|
@@ -153,7 +161,7 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 |confirmed|用户是否为确认状态|
 
 ::: tip
-`confirmed`: 一般而言，对于新用户，如果第三方认证返回了有效的 email，可以认为`confirmed=true`，从而不必执行后续的`用户激活`操作。根据业务的需求，可以灵活定制`confirmed`的判断规则
+`confirmed`: 一般而言，对于新用户，如果 OAuth 认证返回了有效的 email，可以认为`confirmed=true`，从而不必执行后续的`用户激活`操作。根据业务的需求，可以灵活定制`confirmed`的判断规则
 :::
 
 * options.state
@@ -164,13 +172,12 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 |redirect|string \| undefined|本次认证成功后需要转向的 URL|
 
 ::: tip
-`redirect`: 第三方认证成功后会返回`code`值，该值会附加到 URL 地址的尾部，形如：`/?x-vona-oauth-code=xxxxxx`
+`redirect`: OAuth 认证成功后会返回`code`值，该值会附加到 URL 地址的尾部，形如：`/?x-vona-oauth-code=xxxxxx`
 
 前端取得`x-vona-oauth-code`值，再调用后端 api 换取`jwt token`
 :::
 
+
 ## passport api
 
-## callback
-## meta.tip
 
