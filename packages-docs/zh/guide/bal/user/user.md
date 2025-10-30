@@ -81,7 +81,7 @@ class ControllerStudent {
 }  
 ```
 
-### 2. this.bean.passport
+### 2. bean.passport
 
 ``` diff
 class ControllerStudent {
@@ -106,7 +106,7 @@ class ControllerStudent {
 }  
 ```
 
-## 注册监听：eventListener.register
+## 注册用户
 
 可以调用`bean.user.register`注册一个新用户，该方法会引发`a-user:register`事件，模块`home-user`监听该事件，从而实现逻辑定制
 
@@ -135,7 +135,7 @@ class EventListenerRegister {
 |--|--|--|
 |match|string\|regexp\|(string\|regexp)[]|监听哪些事件|
 
-## 激活
+## 激活用户
 
 可以调用`bean.user.activate`激活用户，该方法会引发`a-user:activate`事件，模块`home-user`监听该事件，从而实现逻辑定制
 

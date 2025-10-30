@@ -1,0 +1,254 @@
+# Users
+
+To balance the `out-of-the-box` and `flexible customization` architectural design principles, VonaJS divides the user system into two parts:
+
+- Module `a-user`: Provides general capabilities
+
+- Module `home-user`: Provides customization capabilities
+
+## a-user: IUserBase
+
+The module `a-user` provides the interface `IUserBase`, defining the basic fields of the User
+
+``` typescript
+export interface IUserBase {
+  id: TableIdentity;
+  name: string;
+  avatar?: string;
+  email?: string;
+  mobile?: string;
+  activated?: boolean;
+  locale?: keyof ILocaleInfos | undefined;
+  anonymous?: boolean;
+}
+```
+
+## a-user: bean.user
+
+The module `a-user` provides the global Bean `bean.user`, providing a general calling convention for business logic
+
+``` typescript
+// find user
+const user = await this.bean.user.findOneById(userId);
+// activate user
+this.bean.user.activate(user);
+```
+
+* List of methods for `bean.user`
+
+|Name|Description|
+|--|--|
+|activate|Activate user|
+|register|Register user|
+|registerByProfile|Register user using profile data, profile data comes from third-party authentication|
+|createAnonymous|Create anonymous user|
+|findOneByName|Find user by `name`|
+|findOneById|Find user by `id`|
+|findOne|Find user|
+|updateById|Update user by `id`|
+|update|Update user|
+|removeById|Delete user by `id`|
+|remove|Delete user|
+
+## home-user adapter: ServiceUserAdapter
+
+The module `home-user` provides the adapter `ServiceUserAdapter`, which allows us to customize the user operation logic. The business logic calls `bean.user`, which in turn calls `ServiceUserAdapter`, thus achieving a perfect combination of `out-of-the-box` and `flexible customization`
+
+`src/suite/a-home/modules/home-user/src/service/userAdapter.ts`
+
+|Name|Description|
+|--|--|
+|create|Create user|
+|userOfProfile|Convert profile data to user|
+|createAnonymous|Create anonymous user|
+|findOneByName|Find user by `name`|
+|findOne|Find user|
+|update|Update user|
+|remove|Delete user|
+|setActivated|Set activation status|
+
+## Get the current user
+
+### 1. Parameter decorator
+
+``` diff
+import type { IUserBase } from 'vona-module-a-user';
+
+class ControllerStudent {
+  @Web.get('test')
++ test(@Arg.user() user: IUserBase) {
+    console.log(user);
+  }
+}  
+```
+
+### 2. bean.passport
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const user = this.bean.passport.getCurrentUser();
+    console.log(user);
+  }
+}  
+```
+
+## Anonymous User
+
+When an anonymous user accesses the API, the system automatically creates an anonymous user object
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test(@Arg.user() user: IUserBase) {
++   console.log(user.anonymous);
+  }
+}  
+```
+
+## Register User
+
+You can call `bean.user.register` to register a new user. This method raises the `a-user:register` event. The `home-user` module listens for this event, thus enabling customized logic.
+
+`src/suite/a-home/modules/home-user/src/bean/eventListener.register.ts`
+
+``` typescript
+
+@EventListener({ match: 'a-user:register' })
+
+class EventListenerRegister {
+
+async execute(data, next) {
+
+// next: registered
+
+const user = await next() as IUserBase;
+
+// mail: activate
+
+if (!data.autoActivate && user.email) {
+
+await this.bean.mailConfirm.emailConfirm(user);
+
+}
+
+return user;
+
+}
+}
+```
+
+- `@EventListener`: This decorator is used to implement `event listeners`
+
+- First, call `next` to complete the default registration logic.
+
+- Determine if email activation is required; if so, call the `emailConfirm` method.
+
+|Name|Type|Description|
+
+|--|--|--|
+
+|match|string\|regexp\|(string\|regexp)[]|Which events to listen for|
+
+## Activate User
+
+Users can be activated by calling `bean.user.activate`. This method will trigger the `a-user:activate` event. The module `home-user` listens for this event, thus enabling logic customization.
+
+`src/suite/a-home/modules/home-user/src/bean/eventListener.activate.ts`
+
+``` typescript
+
+@EventListener({ match: 'a-user:activate' })
+
+class EventListenerActivate {
+
+async execute(data, next) {
+
+const user = data as IUserBase;
+
+if (user.name === 'admin') {
+
+// role: admin
+
+const roleAdmin = await this.scope.model.role.get({ name: 'admin' });
+
+// userRole: admin
+
+await this.scope.model.roleUser.insert({
+userId: user.id,
+
+roleId: roleAdmin!.id,
+
+});
+
+}
+// next
+
+return next();
+
+}
+}
+```
+
+- Assign a role to the user first
+
+- Then call `next` to complete the default activation logic
+
+## User: admin
+
+Automatically create the `admin` user in the `meta.version` of the module `home-user`
+
+- See: [Migration and Changes](../../essentials/api/version.md)
+
+`src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
+
+``` typescript
+
+async init(options) {
+
+if (options.version === 1) {
+
+// user: admin
+
+await this.bean.authSimple.authenticate({
+username: 'admin',
+password: options.password || this.scope.config.passwordDefault.admin,
+avatar: ':emoji:flower',
+confirmed: true,
+
+}, 'register', 'default');
+
+}
+
+```
+
+- `bean.authSimple`: is the username/password authentication service
+
+- `authenticate`: This method calls `bean.user.register` to register a new user
+
+## Default Password
+
+The default password for the `admin` user is `123456`, which can be modified in the app config
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+
+// modules
+
+config.modules = {
+
+'home-user': {
+
+passwordDefault: {
+
+admin: 'xxxxxx',
+
+},
+
+},
+
+};
+
+```
