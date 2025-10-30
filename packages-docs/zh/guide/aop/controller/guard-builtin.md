@@ -103,7 +103,7 @@ import { Passport } from 'vona-module-a-user';
 @Passport.roleName({ name: 'admin' })
 ```
 
-## 判断当前用户的角色名是否为`admin`
+## 判断角色名是否为`admin`
 
 由于判断角色名是否为`admin`使用频率较高，因此又进一步提供了一个简写方式，如下：
 
