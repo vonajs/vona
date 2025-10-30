@@ -231,7 +231,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/bal/auth/',
           collapsed: true,
           items: [
-            { text: 'xxx', link: 'xxx' },
+            { text: '介绍', link: 'introduction' },
+            { text: 'a-authsimple', link: 'a-authsimple' },
+            { text: 'a-authgithub', link: 'a-authgithub' },
           ],
         },
         {

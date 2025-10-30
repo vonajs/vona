@@ -119,7 +119,3 @@ import { Passport } from 'vona-module-a-user';
 |refreshAuthToken|刷新jwt token|
 |createPassportJwtFromOauthCode|使用code生成jwt token。此code由第三方认证返回|
 |createTempAuthToken|生成临时jwt token，过期时间短，一般用于url query参数中|
-
-
-
-

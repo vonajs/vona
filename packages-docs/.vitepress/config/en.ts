@@ -231,7 +231,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/bal/auth/',
           collapsed: true,
           items: [
-            { text: 'xxx', link: 'xxx' },
+            { text: 'Introduction', link: 'introduction' },
+            { text: 'a-authsimple', link: 'a-authsimple' },
+            { text: 'a-authgithub', link: 'a-authgithub' },
           ],
         },
         {
