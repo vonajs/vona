@@ -16,23 +16,46 @@
 * 举例：`用户名/密码`认证
 
 ``` typescript
-const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
-  clientOptions: { username: 'admin', password:'123456' },
-});
+class ControllerStudent {
+  @Web.get('login')
+  @Passport.public()
+  async login() {
+    const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
+      clientOptions: { username: 'admin', password:'123456' },
+    });
+    return jwt;
+  }
+}
 ```
 
 * 简化方式：
 
 ``` typescript
-const jwt = await this.bean.authSimple.authenticate(
-  { username: 'admin', password:'123456' }
-);
+class ControllerStudent {
+  @Web.get('login')
+  @Passport.public()
+  async login() {
+    const jwt = await this.bean.authSimple.authenticate(
+      { username: 'admin', password:'123456' }
+    );
+    return jwt;
+  }
+}
 ```
 
 * 举例：`Github`认证
 
 ``` typescript
-await this.bean.auth.authenticate('');
+class ControllerStudent {
+  @Web.get('login')
+  @Passport.public()
+  async login() {
+    await this.bean.auth.authenticate(
+      'a-authgithub:github',
+      { state: { redirect: '/' } },
+    );
+  }
+}
 ```
 
 ## passport api
