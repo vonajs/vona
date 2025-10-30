@@ -120,7 +120,7 @@ class EventListenerRegister {
     const user = await next() as IUserBase;
     // mail: activate
     if (!data.autoActivate && user.email) {
-      await this.$scope.mailconfirm.service.mail.emailConfirm(user);
+      await this.bean.mailConfirm.emailConfirm(user);
     }
     return user;
   }
@@ -129,7 +129,7 @@ class EventListenerRegister {
 
 - `@EventListener`: 此装饰器用于实现`事件监听`
 - 先调用`next`完成缺省的注册逻辑
-- 判断是否需要使用 email 激活，如果需要就调用`mail.emailConfirm`方法
+- 判断是否需要使用 email 激活，如果需要就调用`emailConfirm`方法
 
 |名称|类型|说明|
 |--|--|--|

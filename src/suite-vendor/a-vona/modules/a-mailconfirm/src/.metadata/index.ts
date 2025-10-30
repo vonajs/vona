@@ -1,46 +1,30 @@
 /* eslint-disable */
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
-/** service: begin */
-export * from '../service/mail.ts';
+/** bean: begin */
+export * from '../bean/bean.mailConfirm.ts';
 
-import 'vona-module-a-bean';
-declare module 'vona-module-a-bean' {
+import 'vona';
+declare module 'vona' {
   
-    export interface IServiceRecord {
-      'a-mailconfirm:mail': never;
-    }
-
   
 }
 declare module 'vona-module-a-mailconfirm' {
   
-        export interface ServiceMail {
+        export interface BeanMailConfirm {
           /** @internal */
           get scope(): ScopeModuleAMailconfirm;
-        }
-
-          export interface ServiceMail {
-            get $beanFullName(): 'a-mailconfirm.service.mail';
-            get $onionName(): 'a-mailconfirm:mail';
-            
-          } 
+        } 
 }
-/** service: end */
-/** service: begin */
-import type { ServiceMail } from '../service/mail.ts';
-export interface IModuleService {
-  'mail': ServiceMail;
-}
-/** service: end */
-/** service: begin */
-
-import 'vona';
+/** bean: end */
+/** bean: begin */
+import type { BeanMailConfirm } from '../bean/bean.mailConfirm.ts';
+import 'vona';  
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-mailconfirm.service.mail': ServiceMail;
+  export interface IBeanRecordGlobal {
+    'mailConfirm': BeanMailConfirm;
   }
 }
-/** service: end */
+/** bean: end */
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.emailConfirm.ts';
 export * from '../bean/cacheRedis.passwordReset.ts';
@@ -202,7 +186,6 @@ export class ScopeModuleAMailconfirm extends BeanScopeBase {}
 export interface ScopeModuleAMailconfirm {
   util: BeanScopeUtil;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-service: IModuleService;
 cacheRedis: IModuleCacheRedis;
 event: IModuleEvent;
 }

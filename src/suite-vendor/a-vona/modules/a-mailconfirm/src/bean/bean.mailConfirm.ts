@@ -1,11 +1,11 @@
 import type { IUserBase } from 'vona-module-a-user';
 import { combineQueries, replaceTemplate } from '@cabloy/utils';
 import { BeanBase, uuidv4 } from 'vona';
-import { Service } from 'vona-module-a-bean';
+import { Bean } from 'vona-module-a-bean';
 import { $apiPath } from 'vona-module-a-web';
 
-@Service()
-export class ServiceMail extends BeanBase {
+@Bean()
+export class BeanMailConfirm extends BeanBase {
   async emailConfirm(user: IUserBase) {
     const userId = user.id;
     const email = user.email;

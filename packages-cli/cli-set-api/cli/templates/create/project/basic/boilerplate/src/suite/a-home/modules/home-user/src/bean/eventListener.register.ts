@@ -15,7 +15,7 @@ export class EventListenerRegister
     const user = await next() as IUserBase;
     // mail: activate
     if (!data.autoActivate && user.email) {
-      await this.$scope.mailconfirm.service.mail.emailConfirm(user);
+      await this.bean.mailConfirm.emailConfirm(user);
     }
     return user;
   }
