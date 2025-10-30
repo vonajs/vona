@@ -34,7 +34,7 @@ const user = await this.bean.user.findOneById(userId);
 this.bean.user.activate(user);
 ```
 
-* List of methods for `bean.user`
+* `bean.user` Method List
 
 |Name|Description|
 |--|--|
