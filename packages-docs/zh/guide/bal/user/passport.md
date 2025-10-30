@@ -76,6 +76,11 @@ class ControllerStudent {
 
 模块`a-user`提供了一组 Passport 装饰器，用于对当前用户进行权限校验
 
+对于许多中小型项目，这套 Passport 装饰器足以应对需求。如需更高级的权限校验，可以自行开发`Guard`，参见：
+
+- [局部守卫](../../aop/controller/guard-local.md)
+- [全局守卫](../../aop/controller/guard-global.md)
+
 |名称|说明|
 |--|--|
 |public|是否允许匿名用户访问API|
