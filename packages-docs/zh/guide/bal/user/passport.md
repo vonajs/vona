@@ -49,7 +49,7 @@ this.bean.passport.signinMock();
 
 ## home-user适配器: ServicePassportAdapter
 
-模块`home-user`提供了适配器`ServicePassportAdapter`，允许我们定制用户的操作逻辑。业务代码调用`bean.passport`，`bean.passport`调用`ServicePassportAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
+模块`home-user`提供了适配器`ServicePassportAdapter`，允许我们定制 Passport 的操作逻辑。业务代码调用`bean.passport`，`bean.passport`调用`ServicePassportAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
 
 `src/suite/a-home/modules/home-user/src/service/passportAdapter.ts`
 
