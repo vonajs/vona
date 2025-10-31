@@ -242,7 +242,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/bal/captcha/',
           collapsed: true,
           items: [
-            { text: 'xxx', link: 'xxx' },
+            { text: 'Introduction', link: 'introduction' },
+            { text: 'Image-Text Captcha', link: 'a-captchasimple' },
           ],
         },
         {

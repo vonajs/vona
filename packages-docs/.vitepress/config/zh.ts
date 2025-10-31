@@ -242,7 +242,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/bal/captcha/',
           collapsed: true,
           items: [
-            { text: 'xxx', link: 'xxx' },
+            { text: '介绍', link: 'introduction' },
+            { text: '图片文字验证码', link: 'a-captchasimple' },
           ],
         },
         {
