@@ -243,7 +243,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: '介绍', link: 'introduction' },
-            { text: '文字图形验证码', link: 'a-captchasimple' },
+            { text: 'Captcha Provider', link: 'captcha-provider' },
+            { text: 'Captcha Scene', link: 'captcha-scene' },
           ],
         },
         {

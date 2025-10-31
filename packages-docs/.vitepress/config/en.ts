@@ -243,7 +243,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
-            { text: 'Image-Text Captcha', link: 'a-captchasimple' },
+            { text: 'Captcha Provider', link: 'captcha-provider' },
+            { text: 'Captcha Scene', link: 'captcha-scene' },
           ],
         },
         {
