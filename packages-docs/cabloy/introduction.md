@@ -30,7 +30,7 @@ In 2025, ZovaJS V5 and VonaJS V5 have been released. CabloyJS V5, building on th
 
 |Name|Description|First release time|
 |--|--|--|
-|a-authgithub|Github Auth||
+|a-authgithub|Github Authentication|2025-10-30|
 |a-datasharding|Sharding|2025-09-24|
 |a-datasource|Dynamic Datasource|2025-09-24|
 |a-rest|--||
