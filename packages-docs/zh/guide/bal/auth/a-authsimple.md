@@ -87,3 +87,22 @@ config.modules = {
 ```
 
 ## 源码解析
+
+这里对模块`a-authsimple`的核心源码进行解析，从而说明如何开发一个新的 Provider
+
+### 1. 创建Auth Provider
+
+比如，在模块`a-authsimple`中创建一个局部中间件: `logger`
+
+### 1. Cli命令
+
+``` bash
+$ vona :create:bean middleware logger --module=demo-student
+```
+
+### 2. 菜单命令
+
+::: tip
+右键菜单 - [模块路径]: `Vona Aspect/Middleware`
+:::
+

@@ -2,7 +2,7 @@
 
 ## 创建拦截器
 
-比如，在模块 demo-student 中创建一个 局部拦截器: `logger`
+比如，在模块 demo-student 中创建一个局部拦截器: `logger`
 
 ### 1. Cli命令
 

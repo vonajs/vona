@@ -2,7 +2,7 @@
 
 ## 创建拦截器
 
-比如，在模块 demo-student 中创建一个 全局拦截器: `logger`
+比如，在模块 demo-student 中创建一个全局拦截器: `logger`
 
 ### 1. Cli命令
 

@@ -2,7 +2,7 @@
 
 ## 创建管道
 
-比如，在模块 demo-student 中创建一个 全局管道: `number`，将请求参数转换为`number`类型
+比如，在模块 demo-student 中创建一个全局管道: `number`，将请求参数转换为`number`类型
 
 ### 1. Cli命令
 

@@ -2,7 +2,7 @@
 
 ## 创建中间件
 
-比如，在模块 demo-student 中创建一个 局部中间件: `logger`
+比如，在模块 demo-student 中创建一个局部中间件: `logger`
 
 ### 1. Cli命令
 
