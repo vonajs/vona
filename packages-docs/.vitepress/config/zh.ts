@@ -30,6 +30,7 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
     { text: '介绍', link: 'introduction' },
     { text: '动态数据源', link: 'dynamic-datasource' },
     { text: '读写分离', link: 'sharding' },
+    { text: 'Github认证', link: 'a-authgithub' },
   ];
 }
 
