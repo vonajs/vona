@@ -1,6 +1,8 @@
-# Captcha Provider
+# Captcha Scene
 
-这里对模块`a-captchasimple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Provider
+使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个验证码 Provider 中进行轮替，或者根据用户状态使用不同难度的验证码 Provider，等等
+
+这里对模块`a-captchasimple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Scene
 
 ## 创建Captcha Provider
 

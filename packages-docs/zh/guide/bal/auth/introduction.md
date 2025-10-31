@@ -1,10 +1,10 @@
 # 认证体系
 
-模块`a-auth`提供了通用的认证体系，使用`Provider机制`支持各种认证方式
+模块`a-auth`提供了通用的认证体系，使用`Auth Provider`支持各种认证方式
 
 ## 特性
 
-* `Provider`：使用`Provider机制`支持各种认证方式，如：用户名/密码认证、OAuth 认证（Github），等等
+* `Auth Provider`：使用`Auth Provider`支持各种认证方式，如：用户名/密码认证、OAuth 认证（Github），等等
 * `Clients`：同一个 Provider 可以提供多个凭证
 * `关联认证`：可以为同一个用户关联多个认证方式
 * `迁移认证`：可以将一个用户的认证方式迁移到另一个用户
