@@ -4,7 +4,7 @@
 
 ## 特性
 
-* `Provider机制`：使用`Provider`支持各类认证方式，如：用户名/密码认证、OAuth 认证（Github），等等
+* `Provider`：使用`Provider机制`支持各种认证方式，如：用户名/密码认证、OAuth 认证（Github），等等
 * `Clients`：同一个 Provider 可以提供多个凭证
 * `关联认证`：可以为同一个用户关联多个认证方式
 * `迁移认证`：可以将一个用户的认证方式迁移到另一个用户
@@ -195,6 +195,18 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 前端取得`x-vona-oauth-code`值，再调用后端 api 换取`jwt token`
 :::
 
-## passport api
+## Passport API
 
+模块`home-user`提供了一组`开箱即用`的 Passport API，也可以在此基础之上扩展自定义的业务逻辑
 
+`src/suite/a-home/modules/home-user/src/controller/passport.ts`
+
+|名称|说明|
+|--|--|
+|current|获取当前Passport|
+|logout|退出登录|
+|register|注册新用户|
+|login|登录|
+|loginOauth|OAuth认证|
+|associate|关联认证|
+|migrate|迁移认证|

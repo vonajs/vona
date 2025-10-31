@@ -103,7 +103,7 @@ import { Passport } from 'vona-module-a-user';
 
 ## home-user: Passport API
 
-模块`home-user`提供了一组开箱即用的 Passport API，也可以在此基础之上扩展自定义的业务逻辑
+模块`home-user`提供了一组`开箱即用`的 Passport API，也可以在此基础之上扩展自定义的业务逻辑
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 
@@ -113,9 +113,9 @@ import { Passport } from 'vona-module-a-user';
 |logout|退出登录|
 |register|注册新用户|
 |login|登录|
-|loginOauth|第三方认证|
+|loginOauth|OAuth认证|
 |associate|关联认证|
 |migrate|迁移认证|
 |refreshAuthToken|刷新jwt token|
-|createPassportJwtFromOauthCode|使用code生成jwt token。此code由第三方认证返回|
+|createPassportJwtFromOauthCode|使用code生成jwt token。此code由OAuth认证返回|
 |createTempAuthToken|生成临时jwt token，过期时间短，一般用于url query参数中|

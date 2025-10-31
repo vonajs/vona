@@ -39,7 +39,7 @@ this.bean.user.activate(user);
 |--|--|
 |activate|激活用户|
 |register|注册用户|
-|registerByProfile|使用profile数据注册用户，profile数据来自第三方认证|
+|registerByProfile|使用profile数据注册用户，profile数据来自OAuth认证|
 |createAnonymous|创建匿名用户|
 |findOneByName|通过`name`查找用户|
 |findOneById|通过`id`查找用户|

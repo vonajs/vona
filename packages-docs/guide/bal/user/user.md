@@ -40,7 +40,7 @@ this.bean.user.activate(user);
 |--|--|
 |activate|Activate user|
 |register|Register user|
-|registerByProfile|Register user using profile data, profile data comes from third-party authentication|
+|registerByProfile|Register user using profile data, profile data comes from OAuth authentication|
 |createAnonymous|Create anonymous user|
 |findOneByName|Find user by `name`|
 |findOneById|Find user by `id`|

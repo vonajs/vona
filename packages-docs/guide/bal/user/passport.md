@@ -113,9 +113,9 @@ The `home-user` module provides a set of Passport APIs `out of the box`, and cus
 |logout|Log out|
 |register|Register a new user|
 |login|Log in|
-|loginOauth|Third-party authentication|
+|loginOauth|OAuth authentication|
 |associate|Associate authentication|
 |migrate|Migrate authentication|
 |refreshAuthToken|Refresh JWT token|
-|createPassportJwtFromOauthCode|Generate a JWT token using the code. This code is returned by third-party authentication|
+|createPassportJwtFromOauthCode|Generate a JWT token using the code. This code is returned by OAuth authentication|
 |createTempAuthToken|Generates a temporary JWT token with a short expiration time, typically used in URL query parameters|
