@@ -5,7 +5,7 @@
 ## 特性
 
 * `Captcha Provider`：使用`Captcha Provider`支持各种验证码方式，如：文字图形验证码、短信验证码，等等
-* `Captcha Scene`：使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个验证码 Provider 中进行轮替，或者根据用户状态使用不同难度的验证码 Provider，等等
+* `Captcha Scene`：使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个 Captcha Provider 中进行轮替，或者根据用户状态使用不同难度的 Captcha Provider，等等
 * `立即验证`：前端可以对用户输入的验证码进行立即验证。`立即验证`之后在提交表单时仍然要进行`二次验证`
 * `表单验证`：前端可以将用户输入的验证码与表单数据一起发往后端验证
 

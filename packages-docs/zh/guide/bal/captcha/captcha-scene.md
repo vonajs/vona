@@ -1,91 +1,75 @@
 # Captcha Scene
 
-使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个验证码 Provider 中进行轮替，或者根据用户状态使用不同难度的验证码 Provider，等等
+使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个 Captcha Provider 中进行轮替，或者根据用户状态使用不同难度的 Captcha Provider，等等
 
 这里对模块`a-captchasimple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Scene
 
-## 创建Captcha Provider
+## 创建Captcha Scene
 
-比如，在模块`a-captchasimple`中创建一个 Captcha Provider: `imageText`
+比如，在模块`a-captchasimple`中创建一个 Captcha Scene: `simple`
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean captchaProvider imageText --module=a-captchasimple
+$ vona :create:bean captchaScene simple --module=a-captchasimple
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Bean/Captcha Provider`
+右键菜单 - [模块路径]: `Vona Bean/Captcha Scene`
 :::
 
-## Captcha Provider定义
+## Captcha Scene定义
 
 ``` typescript
-export type TypeCaptchaProviderImageTextToken = string;
-export type TypeCaptchaProviderImageTextPayload = string;
-export type TypeCaptchaProviderImageTextData = ICaptchaProviderData<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload>;
-
-export type TypeCaptchaProviderImageTextType = 'char' | 'math';
-const CaptchaProviderImageTextTypes = ['char', 'math'] as const;
-export interface ICaptchaProviderOptionsImageText extends IDecoratorCaptchaProviderOptions {
-  type?: TypeCaptchaProviderImageTextType;
-  fontPath?: string;
-  opts: ConfigObject;
-}
-
-@CaptchaProvider<ICaptchaProviderOptionsImageText>({
-  opts: {
-    size: 4,
-    color: true,
+@CaptchaScene({
+  resolver: async (_ctx, _providers) => {
+    return 'a-captchasimple:imageText';
+  },
+  providers: {
+    'a-captchasimple:imageText': true,
   },
 })
-class CaptchaProviderImageText {
-  async create(options) {
-    this._confirmFont(options);
-    let type = options.type;
-    if (!type) {
-      type = CaptchaProviderImageTextTypes[getRandomInt(2, 0)];
-    }
-    const captcha = type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
-    return { token: captcha.text, payload: svg64(captcha.data) };
-  }
-
-  async verify(
-    token,
-    tokenInput,
-    _options,
-  ) {
-    return !!tokenInput && !!token && tokenInput.toLowerCase() === token.toLowerCase();
-  }
-}
+export class CaptchaSceneSimple extends BeanBase {}
 ```
 
-- `TypeCaptchaProviderImageTextToken`: token 类型，不同的 Provider 可能有不同的 token 类型
-- `TypeCaptchaProviderImageTextPayload`: payload 类型，不同的 Provider 可能有不同的 payload 类型
-- `TypeCaptchaProviderImageTextData`: 当前 Provider 对应的 Captcha Data 类型
-- `ICaptchaProviderOptionsImageText`: 当前 Provider 的参数。不同的 Provider 可以提供不同的参数配置。比如，该 Provider 基于[svg-captcha](https://github.com/produck/svg-captcha)实现文字图片的验证码能力，因此相应的提供 svg-captcha 所需的参数: `type/fontPath/opts`
-- `create`: 创建 captcha 数据
-- `verify`: 校验 token 是否正确
+- `resolver`: 解析方法。根据业务需求在 Providers 清单中提取一个返回
+- `providers`: 当前 Scene 可以使用的 Providers 清单
+
+* provider 类型
+
+|名称|说明|
+|--|--|
+|true|启用 Provider|
+|false|禁用 Provider|
+|object|Provider 参数|
 
 ## App config配置
 
-可以在 App config 中配置 Captcha Provider 参数
+可以在 App config 中配置 Captcha Scene 参数
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
-  captchaProvider: {
-    'a-captchasimple:imageText': {
-      type: 'char',
-      opts: {
-        size: 4,
-        color: true,
+  captchaScene: {
+    'a-captchasimple:simple': {
+      providers: {
+        'a-captchasimple:imageText': {
+          opts: {
+            size: 4,
+            color: true,
+          },
+        },
       },
     },
   },
 };
 ```
+
+- 可以为 Captcha Scene 动态配置可以支持的 Providers 清单，包括:
+  - 启用/禁用某个 Provider
+  - 修改某个 Provider 的参数配置
+  - 添加新的 Provider
