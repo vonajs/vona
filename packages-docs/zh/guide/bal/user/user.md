@@ -164,6 +164,25 @@ class EventListenerActivate {
 - 先为用户分配角色
 - 然后调用`next`完成缺省的激活逻辑
 
+## 禁用激活操作
+
+在默认情况下，新注册用户需要进行激活操作
+
+可以在 App Config 中启用`自动激活`配置
+
+`src/backend/config/config/config.mine.ts`
+
+```typescript
+// modules
+config.modules = {
+  'a-user': {
+    user: {
+      autoActivate: true,
+    },
+  },
+};
+```
+
 ## 用户: admin
 
 在模块`home-user`的`meta.version`中自动创建`admin`用户

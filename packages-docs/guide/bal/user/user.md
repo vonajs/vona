@@ -167,6 +167,25 @@ class EventListenerActivate {
 - Assign a role to the user first
 - Then call `next` to complete the default activation logic
 
+## Disable activation operation
+
+By default, newly registered users need to perform an activation operation
+
+You can enable the `autoActivate` configuration in App Config
+
+`src/backend/config/config/config.mine.ts`
+
+```typescript
+// modules
+config.modules = {
+  'a-user': {
+    user: {
+      autoActivate: true,
+    },
+  },
+};
+```
+
 ## User: admin
 
 Automatically create the `admin` user in the `meta.version` of the module `home-user`
