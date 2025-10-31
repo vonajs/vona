@@ -252,8 +252,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/bal/menu/',
           collapsed: true,
           items: [
-            { text: '菜单', link: 'menu' },
-            { text: 'SSR菜单(to be done)', link: 'ssr-menu' },
+            { text: '介绍', link: 'introduction' },
+            { text: 'SSR菜单', link: 'ssr-menu' },
           ],
         },
       ],
