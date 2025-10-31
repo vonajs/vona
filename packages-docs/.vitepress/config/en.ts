@@ -260,6 +260,20 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: 'Distributed Infrastructure',
+      base: '/guide/distributed/',
+      items: [
+        { text: 'Broadcast', link: 'broadcast' },
+        { text: 'Queue', link: 'queue' },
+        { text: 'Redlock', link: 'redlock' },
+        { text: 'Schedule', link: 'schedule' },
+        { text: 'Startup', link: 'startup' },
+        { text: 'Monkey', link: 'monkey' },
+        { text: 'Main', link: 'main' },
+      ],
+    },
+    {
+      collapsed: true,
       text: 'Techniques',
       items: [
         {

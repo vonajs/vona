@@ -260,6 +260,20 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: '分布式基建',
+      base: '/zh/guide/distributed/',
+      items: [
+        { text: '广播', link: 'broadcast' },
+        { text: '队列', link: 'queue' },
+        { text: '分布式锁', link: 'redlock' },
+        { text: '定时任务', link: 'schedule' },
+        { text: '启动项', link: 'startup' },
+        { text: 'Monkey', link: 'monkey' },
+        { text: 'Main', link: 'main' },
+      ],
+    },
+    {
+      collapsed: true,
       text: '技术',
       items: [
         {
