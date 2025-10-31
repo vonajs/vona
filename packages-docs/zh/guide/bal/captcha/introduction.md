@@ -41,7 +41,7 @@ export interface ICaptchaData {
 |--|--|
 |id|本次验证码数据的id标识|
 |provider|本次验证码所使用的Provider名称|
-|token|本次验证码数据的token，用于比对用户输入值|
+|token|本次验证码数据的token，用于比对用户输入值。在开发环境可以通过修改系统配置，将token发往前端，用于调试|
 |payload|本次验证码的负载内容，不同的Provider有不同的payload类型|
 
 ### 2. refresh
@@ -70,8 +70,8 @@ const tokenOrFalse = await this.bean.captcha.verifyImmediate(captchaId, '1234');
 ```
 
 - 如果立即验证失败，返回`false`
-- 如果立即验证成功，返回一个新 token
-- 前端需要将新 token 与表单数据一起发往后端进行`二次验证`
+- 如果立即验证成功，返回`二次token`
+- 前端需要将`二次token`与表单数据一起发往后端进行`二次验证`
 
 ## interceptor.captchaVerify
 
@@ -107,14 +107,32 @@ class ControllerPassport {
 ::: tip
 为何没有提供`verify`API？
 
-因为`verify`用于被局部拦截器`a-captcha:captchaVerify`调用
+因为`bean.captcha.verify`方法用于局部拦截器`a-captcha:captchaVerify`
 :::
 
 ## 参数配置
 
 可以在 App Config 中修改模块`a-captcha`的参数配置
 
-``
+`src/backend/config/config/config.ts`
 
 ``` typescript
+// modules
+config.modules = {
+  'a-captcha': {
+    captcha: {
+      showToken: false,
+    },
+    captchaProvider: {
+      ttl: 20 * 60 * 1000,
+      ttlSecondary: 20 * 60 * 1000,
+    },
+  },
+};
 ```
+
+|名称|说明|
+|--|--|
+|captcha.showToken|是否显示token。如果为true，就将token发往前端，用于调试。默认为false|
+|captchaProvider.ttl|captcha token的过期时间|
+|captchaProvider.ttlSecondary|二次token的过期时间|
