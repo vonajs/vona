@@ -90,19 +90,109 @@ config.modules = {
 
 这里对模块`a-authsimple`的核心源码进行解析，从而说明如何开发一个新的 Provider
 
-### 1. 创建Auth Provider
-
-比如，在模块`a-authsimple`中创建一个局部中间件: `logger`
+比如，在模块`a-authsimple`中创建一个 Auth Provider: `simple`
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean middleware logger --module=demo-student
+$ vona :create:bean authProvider simple --module=a-authsimple
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Aspect/Middleware`
+右键菜单 - [模块路径]: `Vona Bean/Auth Provider`
 :::
 
+## Auth Provider定义
+
+``` diff
+export interface IAuthProviderSimpleClientRecord extends IAuthProviderClientRecord {}
+
+export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOptions {
+  username?: string;
+  password?: string;
+  email?: string;
+  avatar?: string;
+  locale?: keyof ILocaleInfos;
+}
+
+export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions<
+  keyof IAuthProviderSimpleClientRecord,
+  IAuthProviderSimpleClientOptions
+> {}
+
+@AuthProvider<IAuthProviderOptionsSimple>()
+class AuthProviderSimple {
+  async verify(
+    _args,
+    clientOptions,
+    _options,
+    state,
+  ) {
+    if (state?.intention === 'register') {
+      if (!clientOptions.username || !clientOptions.password) return this.app.throw(403);
+      // authSimple: create
+      const authSimple = await this.scope.service.authSimple.create(clientOptions.password);
+      // profile
+      const profile: IAuthUserProfile = {
+        id: authSimple.id.toString(),
+        username: clientOptions.username,
+      };
+      if (clientOptions.email) {
+        profile.emails = [{ value: clientOptions.email }];
+      }
+      if (clientOptions.avatar) {
+        profile.photos = [{ value: clientOptions.avatar }];
+      }
+      if (clientOptions.locale) {
+        profile.locale = clientOptions.locale;
+      }
+      return profile;
+    } else {
+      if (!clientOptions.username || !clientOptions.password) return this.app.throw(401);
+      // user
+      const user = await this.bean.user.findOneByName(clientOptions.username);
+      if (!user) return this.app.throw(401);
+      // verify
+      const profileId = await this.scope.service.authSimple.verifyPassword(user.id, clientOptions.password);
+      if (!profileId) return this.app.throw(401);
+      // profile
+      const profile: IAuthUserProfile = {
+        id: profileId.toString(),
+      };
+      return profile;
+    }
+  }
+}
+```
+
+- `IAuthProviderSimpleClientRecord`: 定义多个 Clients，默认有`default`的定义
+- `IAuthProviderSimpleClientOptions`: 定义 Client options
+- `IAuthProviderOptionsSimple`: 定义 Auth Provider 的参数
+- `verify`: 对`register`和`login`进行处理，返回 Profile 数据
+
+## Profile
+
+1. Provider 的`verify`只需返回 Profile 数据。系统将根据 Profile 数据生成 User 对象
+2. `register`和`login`返回的 Profile 都必须包含相同的`id`字段值
+3. 确保为不同的用户生成唯一的`id`值
+
+Profile 具有统一的接口定义:
+
+``` typescript
+export interface IAuthUserProfile {
+  id: string;
+  username?: string;
+  displayName?: string;
+  name?: IAuthUserProfileName;
+  gender?: string; // male/female
+  profileUrl?: string;
+  emails?: IAuthUserProfilePropSlice[];
+  photos?: IAuthUserProfilePropSlice[];
+  locale?: keyof ILocaleInfos;
+  confirmed?: boolean;
+}
+```
+
+* `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作
