@@ -38,13 +38,52 @@ const jwt = await this.bean.authSimple.authenticate({
 ### 2. 登录
 
 ``` typescript
+const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
+  clientOptions: {
+    username: 'tom',
+    password: '123456',
+  },
+  state: {
+    intention: 'login',
+  },
+});
 ```
 
-### 3. 退出
+* 简写方式：
 
 ``` typescript
+const jwt = await this.bean.authSimple.authenticate({
+  username: 'tom',
+  password: '123456',
+}, 'login');
 ```
 
-### 4. 配置
+### 3. 退出登录
+
+``` typescript
+await this.bean.passport.signout();
+```
+
+### 4. 参数配置
+
+模块`a-authsimple`采用[password-hash-salt](https://www.npmjs.com/package/password-hash-salt)对 Password 进行 hash 处理
+
+可以在 App Config 中修改参数配置
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-authsimple': {
+    passwordHash: {
+      saltlen: 64,
+      iterations: 10000,
+      keylen: 64,
+      digest: 'sha1',
+    },
+  },
+};
+```
 
 ## 源码解析
