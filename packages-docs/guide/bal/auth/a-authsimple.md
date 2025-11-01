@@ -1,4 +1,4 @@
-## Username/Password Authentication
+# Username/Password Authentication
 
 The module `a-authsimple` provides out-of-the-box username/password authentication
 

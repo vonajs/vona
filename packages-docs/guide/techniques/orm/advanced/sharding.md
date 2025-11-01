@@ -1,3 +1,6 @@
 # Sharding
 
-`Sharding` is provided by the `a-cabloy` suite, see: [Sharding](../../../../cabloy/sharding.md)
+`Sharding` is provided by the `a-cabloy` suite
+
+- See: [Sharding](../../../../cabloy/sharding.md)
+
