@@ -190,7 +190,7 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 |redirect|string \| undefined|本次认证成功后需要转向的 URL|
 
 ::: tip
-`redirect`: OAuth 认证成功后会返回`code`值，该值会附加到 URL 地址的尾部，形如：`/?x-vona-oauth-code=xxxxxx`
+`redirect`: OAuth 认证成功后会返回`code`值，该值会附加到 URL Query 中，形如：`/?x-vona-oauth-code=xxxxxx`
 
 前端取得`x-vona-oauth-code`值，再调用后端 api 换取`jwt token`
 :::
