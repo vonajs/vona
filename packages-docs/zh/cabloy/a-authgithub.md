@@ -111,7 +111,7 @@ VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出�
 
 ### 6. 禁用`useMockForDev`
 
-在默认情况下，允许在开发环境模块用户登录
+在默认情况下，允许在开发环境模拟用户登录
 
 可以在 App Config 中禁用`useMockForDev`
 
@@ -130,7 +130,7 @@ config.onions = {
 
 ## 源码解析
 
-这里对模块`a-authgithub`的核心源码进行解析，从而说明如何开发一个新的 Provider
+这里对模块`a-authgithub`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider
 
 比如，在模块`a-authgithub`中创建一个 Auth Provider: `github`
 
