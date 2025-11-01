@@ -34,7 +34,7 @@ $ vona :create:bean captchaScene simple --module=a-captchasimple
 export class CaptchaSceneSimple extends BeanBase {}
 ```
 
-- `resolver`: 解析方法。根据业务需求在 Providers 清单中提取一个返回
+- `resolver`: 解析方法。根据业务需求在 Providers 清单中提取一个
 - `providers`: 当前 Scene 可以使用的 Providers 清单
 
 * provider 类型
@@ -45,9 +45,9 @@ export class CaptchaSceneSimple extends BeanBase {}
 |false|禁用 Provider|
 |object|Provider 参数|
 
-## App config配置
+## App Config配置
 
-可以在 App config 中配置 Captcha Scene 参数
+可以在 App Config 中配置 Captcha Scene 参数
 
 `src/backend/config/config/config.ts`
 
