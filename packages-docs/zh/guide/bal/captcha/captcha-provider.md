@@ -65,11 +65,11 @@ class CaptchaProviderImageText {
 - `TypeCaptchaProviderImageTextData`: 当前 Provider 对应的 Captcha Data 类型
 - `ICaptchaProviderOptionsImageText`: 当前 Provider 的参数。不同的 Provider 可以提供不同的参数配置。比如，该 Provider 基于[svg-captcha](https://github.com/produck/svg-captcha)实现文字图片的验证码能力，因此相应的提供 svg-captcha 所需的参数: `type/fontPath/opts`
 - `create`: 创建 captcha 数据
-- `verify`: 校验 token 是否正确
+- `verify`: 校验 captcha token 是否正确
 
-## App config配置
+## App Config配置
 
-可以在 App config 中配置 Captcha Provider 参数
+可以在 App Config 中配置 Captcha Provider 参数
 
 `src/backend/config/config/config.ts`
 
