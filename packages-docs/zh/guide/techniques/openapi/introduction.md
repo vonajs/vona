@@ -21,6 +21,17 @@ Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
 |--|--|
 |RapiDoc|http://localhost:7102/rapidoc|
 
+## bean.openapi
+
+模块`a-openapi`提供了全局 Bean `bean.openapi`，内置了多个操作 Swagger/Openapi 的实用工具
+
+|名称|说明|
+|--|--|
+|generateJsonOfClass|生成某个DTO Class对应的Openapi元数据|
+|generateJsonOfClasses|生成多个DTO Class对应的Openapi元数据|
+|generateJson|生成整个系统的Openapi元数据|
+|generateJsonOfControllerAction|生成某个API对应的Openapi元数据|
+
 ## 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
 如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而自动生成 Openapi 元数据

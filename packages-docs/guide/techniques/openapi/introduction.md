@@ -21,6 +21,17 @@ In addition, Vona also has built-in [RapiDoc](https://rapidocweb.com/), which pr
 |--|--|
 |RapiDoc|http://localhost:7102/rapidoc|
 
+## bean.openapi
+
+The module `a-openapi` provides a global bean `bean.openapi`, which includes several built-in utilities for manipulating Swagger/Openapi
+
+|Name|Description|
+|--|--|
+|generateJsonOfClass|Generates Openapi metadata for a specific DTO class|
+|generateJsonOfClasses|Generates Openapi metadata for multiple DTO classes|
+|generateJson|Generates Openapi metadata for the entire system|
+|generateJsonOfControllerAction|Generates Openapi metadata for a specific API|
+
 ## 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
 If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema, and automatically generate Openapi metadata

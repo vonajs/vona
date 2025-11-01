@@ -65,7 +65,7 @@ export class ControllerSwagger extends BeanBase {
   @Passport.public()
   @Api.contentType('text/plain')
   async json(@Arg.query('version', v.default('V31')) version: string): Promise<string> {
-    const json = await this.$scope.openapi.service.openapi.generateJson(version as unknown as keyof IOpenapiObject);
+    const json = await this.bean.openapi.generateJson(version as unknown as keyof IOpenapiObject);
     return JSON.stringify(json, null, 2);
   }
 }
