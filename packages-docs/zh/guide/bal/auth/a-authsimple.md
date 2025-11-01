@@ -88,7 +88,7 @@ config.modules = {
 
 ## 源码解析
 
-这里对模块`a-authsimple`的核心源码进行解析，从而说明如何开发一个新的 Provider
+这里对模块`a-authsimple`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider
 
 比如，在模块`a-authsimple`中创建一个 Auth Provider: `simple`
 
