@@ -4,7 +4,7 @@ import type {
   Constructable,
   IDecoratorBeanOptionsBase,
 } from 'vona';
-import type { IOpenApiHeader, IOpenapiObject, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
+import type { IOpenApiHeader, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -12,7 +12,7 @@ import { isEmptyObject, isNil } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { translateError } from '@cabloy/zod-errors-custom';
 import { getInnerTypeName } from '@cabloy/zod-query';
-import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
+import { OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import {
   appMetadata,
   appResource,
@@ -21,7 +21,6 @@ import {
   LocaleModuleNameSeparator,
 } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { Caching } from 'vona-module-a-caching';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -33,43 +32,6 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field',
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  protected generateJsonCacheKey(args: any[], prop: string) {
-    const version = args[0] ?? 'V31';
-    const locale = this.ctx.locale;
-    return `${prop}_${version}_${locale}`;
-  }
-
-  protected generateJsonOfControllerActionCacheKey(args: any[], prop: string) {
-    const [controller, actionKey, version] = args;
-    const beanOptions = appResource.getBean(controller)!;
-    const beanFullName = beanOptions.beanFullName;
-    const locale = this.ctx.locale;
-    return `${prop}_${beanFullName}_${actionKey}_${version ?? 'V31'}_${locale}`;
-  }
-
-  @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
-  async generateJson<K extends keyof IOpenapiObject>(version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
-    const registry = this._collectRegistry();
-    const generator =
-      version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
-    const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
-    this.translate(apiObj, 'api');
-    return apiObj as IOpenapiObject[K];
-  }
-
-  @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonOfControllerActionCacheKey' })
-  async generateJsonOfControllerAction<K extends keyof IOpenapiObject>(controller: Constructable, actionKey: string, version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
-    const registry = new OpenAPIRegistry();
-    const beanOptions = appResource.getBean(controller);
-    if (!beanOptions) throw new Error('invalid controller');
-    this._collectController(registry, beanOptions.module, controller, actionKey);
-    const generator =
-      version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
-    const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
-    this.translate(apiObj, 'rest');
-    return apiObj as IOpenapiObject[K];
-  }
-
   public translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
     // paths
     if (apiObj.paths) {
@@ -155,7 +117,7 @@ export class ServiceOpenapi extends BeanBase {
     }
   }
 
-  private _collectRegistry() {
+  public collectRegistry() {
     const registry = new OpenAPIRegistry();
     // securitySchemes
     const configSecuritySchemes = this.scope.config.securitySchemes;
@@ -178,12 +140,12 @@ export class ServiceOpenapi extends BeanBase {
     }
     // controller
     for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
-      this._collectController(registry, controller.beanOptions.module, controller.beanOptions.beanClass);
+      this.collectController(registry, controller.beanOptions.module, controller.beanOptions.beanClass);
     }
     return registry;
   }
 
-  private _collectController(registry: OpenAPIRegistry, moduleName: string, controller: Constructable, actionKey?: string) {
+  public collectController(registry: OpenAPIRegistry, moduleName: string, controller: Constructable, actionKey?: string) {
     // info
     const info = ModuleInfo.parseInfo(moduleName)!;
     // controller options
