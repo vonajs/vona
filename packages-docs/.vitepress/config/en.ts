@@ -263,6 +263,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Distributed Infrastructure',
       base: '/guide/distributed/',
       items: [
+        { text: 'Introduction', link: 'introduction' },
         { text: 'Broadcast', link: 'broadcast' },
         { text: 'Queue', link: 'queue' },
         { text: 'Redlock', link: 'redlock' },

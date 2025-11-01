@@ -263,6 +263,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '分布式基建',
       base: '/zh/guide/distributed/',
       items: [
+        { text: '介绍', link: 'introduction' },
         { text: '广播', link: 'broadcast' },
         { text: '队列', link: 'queue' },
         { text: '分布式锁', link: 'redlock' },
