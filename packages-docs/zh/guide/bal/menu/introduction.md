@@ -31,7 +31,7 @@ class ServiceMenu {
 - `bean.menu.retrieveMenus`: 获取菜单
 - `_getMenusDefault`: 提供缺省菜单
 
-## retrieveMenus源码解析
+## bean.menu.retrieveMenus
 
 ``` typescript
 class BeanMenu {
