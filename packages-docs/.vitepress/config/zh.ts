@@ -269,8 +269,17 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: '分布式锁', link: 'redlock' },
         { text: '定时任务', link: 'schedule' },
         { text: '启动项', link: 'startup' },
-        { text: 'Monkey', link: 'monkey' },
-        { text: 'Main', link: 'main' },
+      ],
+    },
+    {
+      collapsed: true,
+      text: '应用启动自定义',
+      base: '/zh/guide/startup/',
+      items: [
+        { text: '介绍', link: 'introduction' },
+        { text: 'Module Main', link: 'module-main' },
+        { text: 'Module Monkey', link: 'module-monkey' },
+        { text: 'App Monkey', link: 'app-monkey' },
       ],
     },
     {

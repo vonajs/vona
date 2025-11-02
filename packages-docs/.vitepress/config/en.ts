@@ -269,8 +269,17 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Redlock', link: 'redlock' },
         { text: 'Schedule', link: 'schedule' },
         { text: 'Startup', link: 'startup' },
-        { text: 'Monkey', link: 'monkey' },
-        { text: 'Main', link: 'main' },
+      ],
+    },
+    {
+      collapsed: true,
+      text: 'App Startup Customization',
+      base: '/zh/guide/startup/',
+      items: [
+        { text: 'Introduction', link: 'introduction' },
+        { text: 'Module Main', link: 'module-main' },
+        { text: 'Module Monkey', link: 'module-monkey' },
+        { text: 'App Monkey', link: 'app-monkey' },
       ],
     },
     {
