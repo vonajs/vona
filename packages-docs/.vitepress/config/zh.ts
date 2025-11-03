@@ -260,7 +260,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
-      text: '分布式基建',
+      text: '分布式组件',
       base: '/zh/guide/distributed/',
       items: [
         { text: '介绍', link: 'introduction' },

@@ -260,7 +260,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
-      text: 'Distributed Infrastructure',
+      text: 'Distributed Components',
       base: '/guide/distributed/',
       items: [
         { text: 'Introduction', link: 'introduction' },
