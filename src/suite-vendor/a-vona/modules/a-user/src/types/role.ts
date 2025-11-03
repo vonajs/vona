@@ -7,13 +7,13 @@ export interface IRoleNameRecord {
 export interface IRoleIdRecord {
 }
 
-export interface IRoleBase {
+export interface IRole {
   id: TableIdentity;
   name: string;
 }
 
 export interface IRoleAdapter {
-  findOneByName(name: string): Promise<IRoleBase | undefined>;
-  findOne(role: Partial<IRoleBase>): Promise<IRoleBase | undefined>;
-  findAllByUserId(userId: TableIdentity): Promise<IRoleBase[] | undefined>;
+  findOneByName(name: string): Promise<IRole | undefined>;
+  findOne(role: Partial<IRole>): Promise<IRole | undefined>;
+  findAllByUserId(userId: TableIdentity): Promise<IRole[] | undefined>;
 }

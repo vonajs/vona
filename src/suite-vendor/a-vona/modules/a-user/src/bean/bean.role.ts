@@ -1,5 +1,5 @@
 import type { TableIdentity } from 'table-identity';
-import type { IRoleAdapter, IRoleBase } from '../types/role.ts';
+import type { IRoleAdapter, IRole } from '../types/role.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
@@ -15,19 +15,19 @@ export class BeanRole extends BeanBase {
     return this._roleAdapter;
   }
 
-  findOneByName(name: string): Promise<IRoleBase | undefined> {
+  findOneByName(name: string): Promise<IRole | undefined> {
     return this.roleAdapter.findOneByName(name);
   }
 
-  findOneById(id: TableIdentity): Promise<IRoleBase | undefined> {
+  findOneById(id: TableIdentity): Promise<IRole | undefined> {
     return this.roleAdapter.findOne({ id });
   }
 
-  findOne(role: Partial<IRoleBase>): Promise<IRoleBase | undefined> {
+  findOne(role: Partial<IRole>): Promise<IRole | undefined> {
     return this.roleAdapter.findOne(role);
   }
 
-  findAllByUserId(userId: TableIdentity): Promise<IRoleBase[] | undefined> {
+  findAllByUserId(userId: TableIdentity): Promise<IRole[] | undefined> {
     return this.roleAdapter.findAllByUserId(userId);
   }
 }

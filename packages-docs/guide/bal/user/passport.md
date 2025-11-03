@@ -10,7 +10,7 @@ The module `a-user` provides the interface `IPassport`, which defines the basic 
 export interface IPassport {
   user?: IUser;
   auth?: IAuthBase;
-  roles?: IRoleBase[];
+  roles?: IRole[];
 }
 ```
 

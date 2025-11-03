@@ -1,11 +1,11 @@
 # 角色
 
-## a-user: IRoleBase
+## a-user: IRole
 
-模块`a-user`提供了接口`IRoleBase`，约定了 Role 的基础字段
+模块`a-user`提供了接口`IRole`，约定了 Role 的基础字段
 
 ``` typescript
-export interface IRoleBase {
+export interface IRole {
   id: TableIdentity;
   name: string;
 }

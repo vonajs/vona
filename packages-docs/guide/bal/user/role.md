@@ -1,11 +1,11 @@
 # Role
 
-## a-user: IRoleBase
+## a-user: IRole
 
-The module `a-user` provides the interface `IRoleBase`, which defines the basic fields of a Role
+The module `a-user` provides the interface `IRole`, which defines the basic fields of a Role
 
 ``` typescript
-export interface IRoleBase {
+export interface IRole {
   id: TableIdentity;
   name: string;
 }

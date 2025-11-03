@@ -2,7 +2,7 @@ import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, I
 import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassport } from '../types/passport.ts';
-import type { IRoleBase } from '../types/role.ts';
+import type { IRole } from '../types/role.ts';
 import type { IUser, IUserNameRecord } from '../types/user.ts';
 import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -62,7 +62,7 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport?.auth;
   }
 
-  public getCurrentRoles(): IRoleBase[] | undefined {
+  public getCurrentRoles(): IRole[] | undefined {
     return this.ctx.state.passport?.roles;
   }
 
