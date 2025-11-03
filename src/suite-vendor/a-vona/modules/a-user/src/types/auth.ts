@@ -6,7 +6,7 @@ export interface IAuthIdRecord {
   '-10000': 'mock';
 }
 
-export interface IAuthProviderBase {
+export interface IAuthProvider {
   id: TableIdentity;
   providerName: keyof IAuthProviderRecord;
   clientName: string;
@@ -15,7 +15,7 @@ export interface IAuthProviderBase {
 export interface IAuth {
   id: TableIdentity;
   profileId?: string;
-  authProvider?: IAuthProviderBase;
+  authProvider?: IAuthProvider;
 }
 
 export type TypeAuthToken = 'recreate' | 'refresh' | 'nochange';
