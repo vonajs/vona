@@ -1,3 +1,4 @@
+import type { IAuthenticateStrategyState } from 'vona-module-a-auth';
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadData } from '../types/jwt.ts';
 import ms from 'ms';
 import { BeanBase } from 'vona';
@@ -34,8 +35,8 @@ export class BeanJwt extends BeanBase {
     return await this.get('oauth').sign(payloadData, options);
   }
 
-  async createOauthState(payloadData: IPayloadData, options?: IJwtSignOptions) {
-    return await this.get('oauthstate').sign(payloadData, options);
+  async createOauthState(payloadData: IAuthenticateStrategyState, options?: IJwtSignOptions) {
+    return await this.get('oauthstate').sign(payloadData as unknown as IPayloadData, options);
   }
 
   async createOauthCode(payloadData: IPayloadData, options?: IJwtSignOptions) {
