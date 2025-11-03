@@ -1,4 +1,4 @@
-import type { IAuthUserProfile, IPassport, IUserBase } from 'vona-module-a-user';
+import type { IAuthUserProfile, IPassport, IUser } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
@@ -108,7 +108,7 @@ export class ServiceAuth extends BeanBase {
       passport.user = userCurrent;
     } else if (stateIntention === 'login' || stateIntention === 'register') {
       // check if user exists
-      let entityUser: IUserBase | undefined;
+      let entityUser: IUser | undefined;
       if (entityAuth.userId) {
         entityUser = await this.bean.user.findOneById(entityAuth.userId);
       }

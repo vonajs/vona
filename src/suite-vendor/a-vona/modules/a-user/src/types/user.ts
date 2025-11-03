@@ -10,7 +10,7 @@ export interface IUserIdRecord {
   '-1': 'anonymous';
 }
 
-export interface IUserBase {
+export interface IUser {
   id: TableIdentity;
   name: string;
   avatar?: string;
@@ -22,12 +22,12 @@ export interface IUserBase {
 }
 
 export interface IUserAdapter {
-  create(user: Partial<IUserBase>): Promise<IUserBase>;
-  userOfProfile(profile: IAuthUserProfile): Promise<Partial<IUserBase>>;
-  createAnonymous(): Promise<Partial<IUserBase>>;
-  findOneByName(name: string): Promise<IUserBase | undefined>;
-  findOne(user: Partial<IUserBase>): Promise<IUserBase | undefined>;
-  update(user: Partial<IUserBase>): Promise<void>;
-  remove(user: Partial<IUserBase>): Promise<void>;
+  create(user: Partial<IUser>): Promise<IUser>;
+  userOfProfile(profile: IAuthUserProfile): Promise<Partial<IUser>>;
+  createAnonymous(): Promise<Partial<IUser>>;
+  findOneByName(name: string): Promise<IUser | undefined>;
+  findOne(user: Partial<IUser>): Promise<IUser | undefined>;
+  update(user: Partial<IUser>): Promise<void>;
+  remove(user: Partial<IUser>): Promise<void>;
   setActivated(id: TableIdentity, activated: boolean): Promise<void>;
 }

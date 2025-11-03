@@ -1,13 +1,13 @@
-import type { IUserBase } from '../types/user.ts';
+import type { IUser } from '../types/user.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventRegisterData {
-  user: Partial<IUserBase>;
+  user: Partial<IUser>;
   confirmed?: boolean;
   autoActivate?: boolean;
 }
 
-export type TypeEventRegisterResult = Partial<IUserBase>;
+export type TypeEventRegisterResult = Partial<IUser>;
 
 @Event()
 export class EventRegister extends BeanEventBase<

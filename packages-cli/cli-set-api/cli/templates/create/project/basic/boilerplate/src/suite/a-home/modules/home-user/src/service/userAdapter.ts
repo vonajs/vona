@@ -1,5 +1,5 @@
 import type { TableIdentity } from 'table-identity';
-import type { IAuthUserProfile, IUserAdapter, IUserBase } from 'vona-module-a-user';
+import type { IAuthUserProfile, IUserAdapter, IUser } from 'vona-module-a-user';
 import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -19,7 +19,7 @@ export class ServiceUserAdapter extends BeanBase implements IUserAdapter {
     };
   }
 
-  async createAnonymous(): Promise<Partial<IUserBase>> {
+  async createAnonymous(): Promise<Partial<IUser>> {
     return { id: -1, anonymous: true, name: 'anonymous' };
   }
 

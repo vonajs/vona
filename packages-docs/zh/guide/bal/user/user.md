@@ -5,12 +5,12 @@ VonaJS 为了兼顾`开箱即用`与`灵活定制`的架构设计理念，将用
 - 模块`a-user`: 提供通用能力
 - 模块`home-user`: 提供定制能力
 
-## a-user: IUserBase
+## a-user: IUser
 
-模块`a-user`提供了接口`IUserBase`，约定了 User 的基础字段
+模块`a-user`提供了接口`IUser`，约定了 User 的基础字段
 
 ``` typescript
-export interface IUserBase {
+export interface IUser {
   id: TableIdentity;
   name: string;
   avatar?: string;
@@ -71,11 +71,11 @@ this.bean.user.activate(user);
 ### 1. 参数装饰器
 
 ``` diff
-import type { IUserBase } from 'vona-module-a-user';
+import type { IUser } from 'vona-module-a-user';
 
 class ControllerStudent {
   @Web.get('test')
-+ test(@Arg.user() user: IUserBase) {
++ test(@Arg.user() user: IUser) {
     console.log(user);
   }
 }  
@@ -100,7 +100,7 @@ class ControllerStudent {
 ``` diff
 class ControllerStudent {
   @Web.get('test')
-  test(@Arg.user() user: IUserBase) {
+  test(@Arg.user() user: IUser) {
 +   console.log(user.anonymous);
   }
 }  
@@ -117,7 +117,7 @@ class ControllerStudent {
 class EventListenerRegister {
   async execute(data, next) {
     // next: registered
-    const user = await next() as IUserBase;
+    const user = await next() as IUser;
     // mail: activate
     if (!data.autoActivate && user.email) {
       await this.bean.mailConfirm.emailConfirm(user);
@@ -145,7 +145,7 @@ class EventListenerRegister {
 @EventListener({ match: 'a-user:activate' })
 class EventListenerActivate {
   async execute(data, next) {
-    const user = data as IUserBase;
+    const user = data as IUser;
     if (user.name === 'admin') {
       // role: admin
       const roleAdmin = await this.scope.model.role.get({ name: 'admin' });

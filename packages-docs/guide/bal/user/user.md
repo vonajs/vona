@@ -6,12 +6,12 @@ To balance the `out-of-the-box` and `flexible customization` architectural desig
 
 - Module `home-user`: Provides customization capabilities
 
-## a-user: IUserBase
+## a-user: IUser
 
-The module `a-user` provides the interface `IUserBase`, defining the basic fields of the User
+The module `a-user` provides the interface `IUser`, defining the basic fields of the User
 
 ``` typescript
-export interface IUserBase {
+export interface IUser {
   id: TableIdentity;
   name: string;
   avatar?: string;
@@ -72,11 +72,11 @@ The module `home-user` provides the adapter `ServiceUserAdapter`, which allows u
 ### 1. Parameter decorator
 
 ``` diff
-import type { IUserBase } from 'vona-module-a-user';
+import type { IUser } from 'vona-module-a-user';
 
 class ControllerStudent {
   @Web.get('test')
-+ test(@Arg.user() user: IUserBase) {
++ test(@Arg.user() user: IUser) {
     console.log(user);
   }
 }  
@@ -101,7 +101,7 @@ When an anonymous user accesses the API, the system automatically creates an ano
 ``` diff
 class ControllerStudent {
   @Web.get('test')
-  test(@Arg.user() user: IUserBase) {
+  test(@Arg.user() user: IUser) {
 +   console.log(user.anonymous);
   }
 }  
@@ -118,7 +118,7 @@ You can call `bean.user.register` to register a new user. This method will trigg
 class EventListenerRegister {
   async execute(data, next) {
     // next: registered
-    const user = await next() as IUserBase;
+    const user = await next() as IUser;
     // mail: activate
     if (!data.autoActivate && user.email) {
       await this.bean.mailConfirm.emailConfirm(user);
@@ -148,7 +148,7 @@ Users can be activated by calling `bean.user.activate`. This method will trigger
 @EventListener({ match: 'a-user:activate' })
 class EventListenerActivate {
   async execute(data, next) {
-    const user = data as IUserBase;
+    const user = data as IUser;
     if (user.name === 'admin') {
       // role: admin
       const roleAdmin = await this.scope.model.role.get({ name: 'admin' });

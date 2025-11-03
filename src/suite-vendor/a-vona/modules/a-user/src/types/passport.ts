@@ -1,10 +1,10 @@
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthBase } from './auth.ts';
 import type { IRoleBase } from './role.ts';
-import type { IUserBase } from './user.ts';
+import type { IUser } from './user.ts';
 
 export interface IPassport {
-  user?: IUserBase;
+  user?: IUser;
   auth?: IAuthBase;
   roles?: IRoleBase[];
 }

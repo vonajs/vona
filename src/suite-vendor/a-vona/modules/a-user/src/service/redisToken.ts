@@ -1,5 +1,5 @@
 import type { IPayloadDataBase } from 'vona-module-a-jwt';
-import type { IUserBase } from 'vona-module-a-user';
+import type { IUser } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -38,7 +38,7 @@ export class ServiceRedisToken extends BeanBase {
     await this.scope.cacheRedis.authToken.del(key);
   }
 
-  async removeAll(user: IUserBase) {
+  async removeAll(user: IUser) {
     const keyPrefix = this._getAuthRedisKeyPrefix(user);
     const keys = await this.scope.cacheRedis.authToken.lookupKeys(keyPrefix, true);
     await this.scope.cacheRedis.authToken.mdel(keys);
@@ -49,7 +49,7 @@ export class ServiceRedisToken extends BeanBase {
     return `${this._getUserId(payloadData)}:${this._getAuthId(payloadData)}`;
   }
 
-  private _getAuthRedisKeyPrefix(user: IUserBase) {
+  private _getAuthRedisKeyPrefix(user: IUser) {
     return `${user.id}`;
   }
 

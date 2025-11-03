@@ -1,5 +1,5 @@
 import type { IEventExecute, NextEvent } from 'vona-module-a-event';
-import type { IUserBase, TypeEventRegisterData, TypeEventRegisterResult } from 'vona-module-a-user';
+import type { IUser, TypeEventRegisterData, TypeEventRegisterResult } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 
@@ -12,7 +12,7 @@ export class EventListenerRegister
   implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
     // next: registered
-    const user = await next() as IUserBase;
+    const user = await next() as IUser;
     // mail: activate
     if (!data.autoActivate && user.email) {
       await this.bean.mailConfirm.emailConfirm(user);

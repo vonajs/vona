@@ -3,7 +3,7 @@ import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts'
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassport } from '../types/passport.ts';
 import type { IRoleBase } from '../types/role.ts';
-import type { IUserBase, IUserNameRecord } from '../types/user.ts';
+import type { IUser, IUserNameRecord } from '../types/user.ts';
 import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -54,7 +54,7 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport;
   }
 
-  public getCurrentUser(): IUserBase | undefined {
+  public getCurrentUser(): IUser | undefined {
     return this.ctx.state.passport?.user;
   }
 
@@ -115,7 +115,7 @@ export class BeanPassport extends BeanBase {
     await this.setCurrent(passport);
   }
 
-  public async kickOut(user?: IUserBase) {
+  public async kickOut(user?: IUser) {
     if (!user) return;
     await this.authTokenAdapter.removeAll(user);
   }

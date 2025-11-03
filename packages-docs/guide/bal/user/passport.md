@@ -8,7 +8,7 @@ The module `a-user` provides the interface `IPassport`, which defines the basic 
 
 ``` typescript
 export interface IPassport {
-  user?: IUserBase;
+  user?: IUser;
   auth?: IAuthBase;
   roles?: IRoleBase[];
 }

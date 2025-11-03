@@ -1,5 +1,5 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
-import type { IUserBase, IUserNameRecord } from 'vona-module-a-user';
+import type { IUser, IUserNameRecord } from 'vona-module-a-user';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
@@ -15,7 +15,7 @@ export interface IControllerOptionsPassport extends IDecoratorControllerOptions 
 export class ControllerPassport extends BeanBase {
   @Web.get('echo/:name')
   @Passport.public()
-  echo(@Arg.param('name') name: string, @Arg.user() user: IUserBase) {
+  echo(@Arg.param('name') name: string, @Arg.user() user: IUser) {
     assert.equal(name, 'admin');
     assert.equal(user.name, 'admin');
     return { name, user };

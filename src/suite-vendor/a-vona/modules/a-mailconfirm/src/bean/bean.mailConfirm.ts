@@ -1,4 +1,4 @@
-import type { IUserBase } from 'vona-module-a-user';
+import type { IUser } from 'vona-module-a-user';
 import { combineQueries, replaceTemplate } from '@cabloy/utils';
 import { BeanBase, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -6,7 +6,7 @@ import { $apiPath } from 'vona-module-a-web';
 
 @Bean()
 export class BeanMailConfirm extends BeanBase {
-  async emailConfirm(user: IUserBase) {
+  async emailConfirm(user: IUser) {
     const userId = user.id;
     const email = user.email;
     if (!email) throw new Error(`email should not empty: ${user.name}`);
@@ -33,7 +33,7 @@ export class BeanMailConfirm extends BeanBase {
     await this.scope.cacheRedis.emailConfirm.set({ userId, email }, token);
   }
 
-  async passwordReset(user: IUserBase) {
+  async passwordReset(user: IUser) {
     const userId = user.id;
     const email = user.email;
     if (!email) throw new Error(`email should not empty: ${user.name}`);
