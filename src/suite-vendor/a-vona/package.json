@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.158",
+  "version": "5.0.159",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -9,7 +9,7 @@
   "dependencies": {
     "vona-module-a-aspect": "^5.0.23",
     "vona-module-a-aspectutils": "workspace:^",
-    "vona-module-a-auth": "^5.0.39",
+    "vona-module-a-auth": "^5.0.40",
     "vona-module-a-authsimple": "^5.0.34",
     "vona-module-a-bean": "^5.0.16",
     "vona-module-a-beanmutate": "workspace:^",
@@ -51,7 +51,7 @@
     "vona-module-a-summer": "^5.0.22",
     "vona-module-a-swagger": "^5.0.27",
     "vona-module-a-upload": "^5.0.18",
-    "vona-module-a-user": "^5.0.34",
+    "vona-module-a-user": "^5.0.35",
     "vona-module-a-validation": "^5.0.19",
     "vona-module-a-version": "^5.0.40",
     "vona-module-a-vona": "^5.0.24",
