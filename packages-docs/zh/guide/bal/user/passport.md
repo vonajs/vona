@@ -2,12 +2,12 @@
 
 当用户访问后端 API 时，系统会校验 jwt token，如果校验通过就会创建一个通行证`Passport`。该通行证包含`当前用户`和`认证`等信息
 
-## a-user: IPassportBase
+## a-user: IPassport
 
-模块`a-user`提供了接口`IPassportBase`，约定了 Passport 的基础字段
+模块`a-user`提供了接口`IPassport`，约定了 Passport 的基础字段
 
 ``` typescript
-export interface IPassportBase {
+export interface IPassport {
   user?: IUserBase;
   auth?: IAuthBase;
   roles?: IRoleBase[];

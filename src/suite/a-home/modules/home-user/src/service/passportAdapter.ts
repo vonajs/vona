@@ -1,5 +1,5 @@
-import type { IPassportAdapter } from 'vona-module-a-user';
-import type { IPassport, IPayloadData } from '../types/passport.ts';
+import type { IPassport, IPassportAdapter } from 'vona-module-a-user';
+import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 

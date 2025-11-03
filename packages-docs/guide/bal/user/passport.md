@@ -2,12 +2,12 @@
 
 When a user accesses the backend API, the system verifies the JWT token. If the verification passes, a `Passport` is created. This passport contains information such as the current user and authentication info
 
-## a-user: IPassportBase
+## a-user: IPassport
 
-The module `a-user` provides the interface `IPassportBase`, which defines the basic fields of the Passport
+The module `a-user` provides the interface `IPassport`, which defines the basic fields of the Passport
 
 ``` typescript
-export interface IPassportBase {
+export interface IPassport {
   user?: IUserBase;
   auth?: IAuthBase;
   roles?: IRoleBase[];

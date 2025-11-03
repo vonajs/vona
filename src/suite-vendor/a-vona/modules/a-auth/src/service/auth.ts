@@ -1,4 +1,4 @@
-import type { IAuthUserProfile, IPassportBase, IUserBase } from 'vona-module-a-user';
+import type { IAuthUserProfile, IPassport, IUserBase } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
@@ -32,7 +32,7 @@ export class ServiceAuth extends BeanBase {
     entityAuthProvider: EntityAuthProvider,
     clientOptions: IAuthProviderClientOptions,
     state?: IAuthenticateStrategyState,
-  ): Promise<IPassportBase> {
+  ): Promise<IPassport> {
     // event: issuePassport
     return await this.scope.event.issuePassport.emit(
       { profileUser, entityAuthProvider, clientOptions, state },
@@ -47,13 +47,13 @@ export class ServiceAuth extends BeanBase {
     entityAuthProvider: EntityAuthProvider,
     _clientOptions: IAuthProviderClientOptions,
     state?: IAuthenticateStrategyState,
-  ): Promise<IPassportBase> {
+  ): Promise<IPassport> {
     // stateIntention
     const stateIntention = state?.intention || 'login';
     const authProviderId = entityAuthProvider.id;
     const profileId = profileUser.id;
     // passport
-    const passport: IPassportBase = {};
+    const passport: IPassport = {};
     // auth
     let entityAuth = await this.scope.model.auth.get({ authProviderId, profileId });
     if (!entityAuth) {

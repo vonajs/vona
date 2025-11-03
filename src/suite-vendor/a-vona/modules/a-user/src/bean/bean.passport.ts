@@ -1,7 +1,7 @@
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadDataBase } from 'vona-module-a-jwt';
 import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
-import type { IPassportAdapter, IPassportBase } from '../types/passport.ts';
+import type { IPassportAdapter, IPassport } from '../types/passport.ts';
 import type { IRoleBase } from '../types/role.ts';
 import type { IUserBase, IUserNameRecord } from '../types/user.ts';
 import { catchError, isNil } from '@cabloy/utils';
@@ -46,11 +46,11 @@ export class BeanPassport extends BeanBase {
     return await this.passportAdapter.isAdmin(passport);
   }
 
-  public async setCurrent(passport: IPassportBase | undefined) {
+  public async setCurrent(passport: IPassport | undefined) {
     this.ctx.state.passport = await this.passportAdapter.setCurrent(passport);
   }
 
-  public getCurrent(): IPassportBase | undefined {
+  public getCurrent(): IPassport | undefined {
     return this.ctx.state.passport;
   }
 
@@ -66,7 +66,7 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport?.roles;
   }
 
-  public async signin(passport: IPassportBase, options?: ISigninOptions): Promise<IJwtToken> {
+  public async signin(passport: IPassport, options?: ISigninOptions): Promise<IJwtToken> {
     if (isNil(this.ctx.instanceName)) throw new Error('should specify instance');
     // current
     await this.setCurrent(passport);
@@ -198,7 +198,7 @@ export class BeanPassport extends BeanBase {
     return await this.bean.jwt.create(payloadData);
   }
 
-  private async _passportSerialize(passport: IPassportBase, options?: ISigninOptions) {
+  private async _passportSerialize(passport: IPassport, options?: ISigninOptions) {
     // serialize
     const payloadData = await this.passportAdapter.serialize(passport);
     return await this._handlePayloadData(payloadData, options);

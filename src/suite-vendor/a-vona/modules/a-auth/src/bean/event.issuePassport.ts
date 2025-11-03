@@ -1,5 +1,5 @@
 import type { EntityAuthProvider, IAuthenticateStrategyState, IAuthProviderClientOptions } from 'vona-module-a-auth';
-import type { IAuthUserProfile, IPassportBase } from 'vona-module-a-user';
+import type { IAuthUserProfile, IPassport } from 'vona-module-a-user';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventIssuePassportData {
@@ -9,7 +9,7 @@ export interface TypeEventIssuePassportData {
   state?: IAuthenticateStrategyState;
 }
 
-export type TypeEventIssuePassportResult = IPassportBase;
+export type TypeEventIssuePassportResult = IPassport;
 
 @Event()
 export class EventIssuePassport extends BeanEventBase<
