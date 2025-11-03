@@ -1,4 +1,4 @@
-import type { IPayloadDataBase } from 'vona-module-a-jwt';
+import type { IPayloadData } from 'vona-module-a-jwt';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
@@ -8,7 +8,7 @@ describe('jwt.test.ts', () => {
   it('action:jwt', async () => {
     await app.bean.executor.mockCtx(async () => {
       // sign
-      const payloadData: IPayloadDataBase = { userId: 1, authId: 1 };
+      const payloadData: IPayloadData = { userId: 1, authId: 1 };
       const token = await app.bean.jwt.get('access').sign(payloadData);
       assert.equal(token.split('.').length, 3);
       // verify

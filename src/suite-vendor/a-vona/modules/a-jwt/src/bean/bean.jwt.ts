@@ -1,4 +1,4 @@
-import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadDataBase } from '../types/jwt.ts';
+import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadData } from '../types/jwt.ts';
 import ms from 'ms';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -10,7 +10,7 @@ export class BeanJwt extends BeanBase {
     return this.app.bean._getBeanSelector(ServiceJwtClient, clientName);
   }
 
-  async create(payloadData: IPayloadDataBase, options?: IJwtSignOptions): Promise<IJwtToken> {
+  async create(payloadData: IPayloadData, options?: IJwtSignOptions): Promise<IJwtToken> {
     // accessToken
     const accessToken = await this.get('access').sign(payloadData, options);
     // refreshToken
@@ -26,19 +26,19 @@ export class BeanJwt extends BeanBase {
     };
   }
 
-  async createTempAuthToken(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+  async createTempAuthToken(payloadData: IPayloadData, options?: IJwtSignOptions) {
     return await this.get('access').sign(payloadData, Object.assign({}, options, { temp: true }));
   }
 
-  async createOauthAuthToken(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+  async createOauthAuthToken(payloadData: IPayloadData, options?: IJwtSignOptions) {
     return await this.get('oauth').sign(payloadData, options);
   }
 
-  async createOauthState(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+  async createOauthState(payloadData: IPayloadData, options?: IJwtSignOptions) {
     return await this.get('oauthstate').sign(payloadData, options);
   }
 
-  async createOauthCode(payloadData: IPayloadDataBase, options?: IJwtSignOptions) {
+  async createOauthCode(payloadData: IPayloadData, options?: IJwtSignOptions) {
     return await this.get('code').sign(payloadData, options);
   }
 }

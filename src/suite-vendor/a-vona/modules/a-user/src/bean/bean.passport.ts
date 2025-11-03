@@ -1,4 +1,4 @@
-import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadDataBase } from 'vona-module-a-jwt';
+import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadData } from 'vona-module-a-jwt';
 import type { IAuth, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassport } from '../types/passport.ts';
@@ -204,7 +204,7 @@ export class BeanPassport extends BeanBase {
     return await this._handlePayloadData(payloadData, options);
   }
 
-  private async _handlePayloadData(payloadData: IPayloadDataBase, options?: ISigninOptions) {
+  private async _handlePayloadData(payloadData: IPayloadData, options?: ISigninOptions) {
     // auth token
     const authToken = options?.authToken ?? 'refresh';
     if (authToken === 'recreate') {

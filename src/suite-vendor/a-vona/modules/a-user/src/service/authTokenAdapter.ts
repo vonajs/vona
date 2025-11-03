@@ -1,4 +1,4 @@
-import type { IPayloadDataBase } from 'vona-module-a-jwt';
+import type { IPayloadData } from 'vona-module-a-jwt';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IUser } from '../types/user.ts';
 import { BeanBase, createHash, uuidv4 } from 'vona';
@@ -6,7 +6,7 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapter {
-  async create(payloadData: IPayloadDataBase): Promise<IPayloadDataBase> {
+  async create(payloadData: IPayloadData): Promise<IPayloadData> {
     const authIdStr = this._getAuthId(payloadData)?.toString();
     const token = (authIdStr === '-1') ? createHash(authIdStr) : uuidv4();
     const payloadDataNew = Object.assign({}, payloadData, { [this.scope.config.payloadData.fields.token]: token });
@@ -14,19 +14,19 @@ export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapt
     return payloadDataNew;
   }
 
-  async retrieve(payloadData: IPayloadDataBase): Promise<IPayloadDataBase | undefined> {
+  async retrieve(payloadData: IPayloadData): Promise<IPayloadData | undefined> {
     return await this.scope.service.redisToken.retrieve(payloadData);
   }
 
-  async verify(payloadData: IPayloadDataBase): Promise<boolean> {
+  async verify(payloadData: IPayloadData): Promise<boolean> {
     return await this.scope.service.redisToken.verify(payloadData);
   }
 
-  async refresh(payloadData: IPayloadDataBase): Promise<void> {
+  async refresh(payloadData: IPayloadData): Promise<void> {
     await this.scope.service.redisToken.refresh(payloadData);
   }
 
-  async remove(payloadData: IPayloadDataBase): Promise<void> {
+  async remove(payloadData: IPayloadData): Promise<void> {
     await this.scope.service.redisToken.remove(payloadData);
   }
 
@@ -34,7 +34,7 @@ export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapt
     await this.scope.service.redisToken.removeAll(user);
   }
 
-  private _getAuthId(payloadData: IPayloadDataBase) {
+  private _getAuthId(payloadData: IPayloadData) {
     return payloadData[this.scope.config.payloadData.fields.authId];
   }
 }
