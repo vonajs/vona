@@ -1,5 +1,5 @@
+import type { IPayloadData } from 'vona-module-a-jwt';
 import type { IPassport, IPassportAdapter } from 'vona-module-a-user';
-import type { IPayloadData } from '../types/passport.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
