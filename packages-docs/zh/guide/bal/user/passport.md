@@ -9,7 +9,7 @@
 ``` typescript
 export interface IPassport {
   user?: IUser;
-  auth?: IAuthBase;
+  auth?: IAuth;
   roles?: IRole[];
 }
 ```

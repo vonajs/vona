@@ -12,7 +12,7 @@ export interface IAuthProviderBase {
   clientName: string;
 }
 
-export interface IAuthBase {
+export interface IAuth {
   id: TableIdentity;
   profileId?: string;
   authProvider?: IAuthProviderBase;

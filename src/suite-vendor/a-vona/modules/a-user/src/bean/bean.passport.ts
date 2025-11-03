@@ -1,5 +1,5 @@
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadDataBase } from 'vona-module-a-jwt';
-import type { IAuthBase, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
+import type { IAuth, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassportAdapter, IPassport } from '../types/passport.ts';
 import type { IRole } from '../types/role.ts';
@@ -58,7 +58,7 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport?.user;
   }
 
-  public getCurrentAuth(): IAuthBase | undefined {
+  public getCurrentAuth(): IAuth | undefined {
     return this.ctx.state.passport?.auth;
   }
 
