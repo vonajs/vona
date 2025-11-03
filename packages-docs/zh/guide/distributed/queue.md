@@ -78,3 +78,5 @@ class ControllerStudent {
 - `this.scope.queue.add`: 通过模块 scope 取得队列实例
 - `pushAsync`: 推送任务，可以等待结果返回
 
+## 任务参数
+
