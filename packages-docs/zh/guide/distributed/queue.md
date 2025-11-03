@@ -80,3 +80,8 @@ class ControllerStudent {
 
 ## 任务参数
 
+## 队列参数
+
+### 5. App config配置
+
+## 队列启用/禁用
