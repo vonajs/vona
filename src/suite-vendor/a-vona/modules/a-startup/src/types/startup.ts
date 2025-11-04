@@ -1,6 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { ConfigInstanceBase } from 'vona-module-a-instance';
-import type { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 
 export interface IStartupRecord {}
 
@@ -8,7 +8,7 @@ export interface IStartupExecute {
   execute: (options?: IInstanceStartupOptions) => Promise<void>;
 }
 
-export interface IDecoratorStartupOptions extends IOnionOptionsEnable, IOnionOptionsDeps<keyof IStartupRecord> {
+export interface IDecoratorStartupOptions extends TypeOnionOptionsEnableSimple, IOnionOptionsDeps<keyof IStartupRecord> {
   instance?: boolean;
   debounce?: boolean | number;
   transaction?: boolean;

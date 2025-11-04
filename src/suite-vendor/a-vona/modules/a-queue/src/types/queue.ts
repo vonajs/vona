@@ -2,7 +2,7 @@ import type Redlock from '@sesamecare-oss/redlock';
 import type * as Bull from 'bullmq';
 import type { OmitNever } from 'vona';
 import type { IGeneralInfoOptions } from 'vona-module-a-executor';
-import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 
 export interface IQueuePushOptions extends IGeneralInfoOptions {
   queueNameSub?: string;
@@ -54,7 +54,7 @@ export interface IQueueCallbacks {
 
 export interface IQueueRecord {}
 
-export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
+export interface IDecoratorQueueOptions extends TypeOnionOptionsEnableSimple {
   concurrency?: boolean;
   transaction?: boolean;
   options?: {
