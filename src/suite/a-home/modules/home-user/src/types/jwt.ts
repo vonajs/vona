@@ -1,11 +1,8 @@
 import type { TableIdentity } from 'table-identity';
+import type { IPayloadData } from 'vona-module-a-jwt';
 
-export interface IPayloadDataCustom {
+export interface IPayloadDataOfPassport extends IPayloadData {
   userId: TableIdentity;
   authId: TableIdentity;
   token?: string;
-}
-
-declare module 'vona-module-a-jwt' {
-  export interface IPayloadData extends IPayloadDataCustom {}
 }

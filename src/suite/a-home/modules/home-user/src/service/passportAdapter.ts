@@ -1,5 +1,5 @@
-import type { IPayloadData } from 'vona-module-a-jwt';
 import type { IPassport, IPassportAdapter } from 'vona-module-a-user';
+import type { IPayloadDataOfPassport } from '../types/jwt.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -15,13 +15,13 @@ export class ServicePassportAdapter extends BeanBase implements IPassportAdapter
     return passport;
   }
 
-  async serialize(passport: IPassport): Promise<IPayloadData> {
+  async serialize(passport: IPassport): Promise<IPayloadDataOfPassport> {
     const userId = passport.user!.id;
     const authId = passport.auth!.id;
     return { userId, authId };
   }
 
-  async deserialize(payloadData: IPayloadData): Promise<IPassport | undefined> {
+  async deserialize(payloadData: IPayloadDataOfPassport): Promise<IPassport | undefined> {
     const user = await this.bean.user.findOneById(payloadData.userId);
     if (!user) return;
     const auth = await this.bean.auth.findOne({ id: payloadData.authId });
