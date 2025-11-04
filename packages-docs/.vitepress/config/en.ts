@@ -265,7 +265,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'introduction' },
         { text: 'Broadcast', link: 'broadcast' },
-        { text: 'Queue', link: 'queue' },
+        {
+          text: 'Queue',
+          base: '/guide/distributed/queue/',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+          ],
+        },
         { text: 'Redlock', link: 'redlock' },
         { text: 'Schedule', link: 'schedule' },
         { text: 'Startup', link: 'startup' },
