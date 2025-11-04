@@ -38,7 +38,18 @@ class ControllerHome extends BeanBase {
 }
 ```
 
-- The `Scope` instance of the module home-base can be obtained through `this.$scope.homeBase`
+- The `Scope` instance of the module `home-base` can be obtained through `this.$scope.homeBase`
+
+``` typescript
+@Controller()
+class ControllerHome extends BeanBase {
+  index() {
+    console.log(this.$scope.user);
+  }
+}
+```
+
+- If the `providerId` of the module name is `a`, such as `a-user`, then it can be simplified to `user`
 
 ## app.scope
 
@@ -46,10 +57,11 @@ If you do not inherit from the base class `BeanBase`, `this.scope` and `this.$sc
 
 `src/backend/demo/index.ts`
 
-``` typescript
+``` diff 
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    const scopeHomeBase = app.scope('home-base');
++   const scopeHomeBase = app.scope('home-base');
++   const scopeUser = app.scope('a-user');
   });
 }
 ```

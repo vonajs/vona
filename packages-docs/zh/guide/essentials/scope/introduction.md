@@ -40,16 +40,28 @@ class ControllerHome extends BeanBase {
 
 - 通过`this.$scope.homeBase`即可获取模块 home-base 的`Scope`实例
 
+``` typescript
+@Controller()
+class ControllerHome extends BeanBase {
+  index() {
+    console.log(this.$scope.user);
+  }
+}
+```
+
+- 如果模块名称的 providerId 为`a`，比如`a-user`，那么可以简化为`user`
+
 ## app.scope: 获取Scope实例的一般方法
 
 如果没有继承自基类`BeanBase`，无法使用`this.scope`和`this.$scope`，则可以使用一般方法：
 
 `src/backend/demo/index.ts`
 
-``` typescript
+``` diff 
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    const scopeHomeBase = app.scope('home-base');
++   const scopeHomeBase = app.scope('home-base');
++   const scopeUser = app.scope('a-user');
   });
 }
 ```
