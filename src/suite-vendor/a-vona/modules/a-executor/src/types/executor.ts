@@ -40,7 +40,7 @@ export interface IPerformActionOptions {
 }
 
 export interface IGeneralInfoOptions {
-  dbInfo?: IDbInfo;
+  dbInfo?: Partial<IDbInfo>;
   locale?: keyof ILocaleInfos;
   instanceName?: keyof IInstanceRecord | undefined | null;
   extraData?: INewCtxExtraData;

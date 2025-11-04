@@ -96,10 +96,11 @@ async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT>;
 |queueNameSub|string|子队列名称|
 |jobName|string|任务名称|
 |jobOptions|Bull.JobsOptions|任务选项|
-|dbInfo|\{level: number;clientName: string;\}|数据源信息|
+|dbInfo.level|number|默认使用当前上下文的数据源分级`+1`，参见: [数据源分级](./db-level.md)|
+|dbInfo.clientName|string|默认使用当前上下文的数据源名称|
 |locale|string|默认使用当前上下文的locale|
 |instanceName|string|实例名，默认使用当前上下文的instanceName|
-|extraData|object|扩展数据|
+|extraData|object|参见: [扩展数据](./extra-data.md)|
 
 ## 队列参数
 
