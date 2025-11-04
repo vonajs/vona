@@ -58,9 +58,9 @@ export interface IDecoratorQueueOptions extends TypeOnionOptionsEnableSimple {
   concurrency?: boolean;
   transaction?: boolean;
   options?: {
-    queue?: Bull.QueueOptions;
+    queue?: Partial<Bull.QueueOptions>;
     worker?: Partial<Bull.WorkerOptions>;
-    redlock?: Redlock.Redlock & { lockTTL?: number };
+    redlock?: Partial<Redlock.Redlock> & { lockTTL?: number };
     job?: Bull.JobsOptions;
   };
 }
