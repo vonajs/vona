@@ -271,6 +271,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
+            { text: '数据源分级', link: 'db-level' },
+            { text: '扩展数据', link: 'extra-data' },
           ],
         },
         { text: '分布式锁', link: 'redlock' },

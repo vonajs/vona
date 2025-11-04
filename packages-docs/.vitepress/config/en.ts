@@ -271,6 +271,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
+            { text: 'Datasource Level', link: 'db-level' },
+            { text: 'Extra Data', link: 'extra-data' },
           ],
         },
         { text: 'Redlock', link: 'redlock' },
