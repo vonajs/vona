@@ -265,7 +265,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: '介绍', link: 'introduction' },
         { text: '广播', link: 'broadcast' },
-        { text: '队列', link: 'queue' },
+        {
+          text: '队列',
+          base: '/zh/guide/distributed/queue/',
+          collapsed: false,
+          items: [
+            { text: '介绍', link: 'introduction' },
+          ],
+        },
         { text: '分布式锁', link: 'redlock' },
         { text: '定时任务', link: 'schedule' },
         { text: '启动项', link: 'startup' },

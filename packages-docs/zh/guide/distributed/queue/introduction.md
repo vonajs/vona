@@ -179,8 +179,8 @@ config.onions = {
 
 |名称|类型|说明|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../env-config/mode-flavor/introduction.md)|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
 
 * 举例
 
