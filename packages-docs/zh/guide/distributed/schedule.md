@@ -44,6 +44,7 @@ export class ScheduleLog extends BeanBase implements IScheduleExecute {
   },
   templateOptions: {},
   dbInfo: undefined,
+  transaction: false,
 })
 class ScheduleLog {}
 ```
@@ -67,16 +68,12 @@ class ScheduleLog {}
 ``` typescript
 // onions
 config.onions = {
-  queue: {
-    'demo-student:add': {
-      concurrency: false,
-      transaction: false,
-      options: {
-        queue: {},
-        worker: {},
-        job: {},
-        redlock: {},
+  schedule: {
+    'demo-student:log': {
+      repeat: {
+        every: 5000,
       },
+      transaction: true,
     },
   },
 };
@@ -93,8 +90,8 @@ config.onions = {
 ``` diff
 // onions
 config.onions = {
-  queue: {
-    'demo-student:add': {
+  schedule: {
+    'demo-student:log': {
 +     enable: false,
     },
   },
@@ -107,18 +104,18 @@ config.onions = {
 
 |名称|类型|说明|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../env-config/mode-flavor/introduction.md)|
 
 * 举例
 
 ``` diff
-@Queue({
+@Schedule({
+  repeat: {},
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
 + },
 })
-class QueueAdd {}
+class ScheduleLog {}
 ```
-
