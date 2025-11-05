@@ -9,41 +9,36 @@ VonaJS 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean queue add --module=demo-student
+$ vona :create:bean meta redlock --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Bean/Queue`
+右键菜单 - [模块路径]: `Vona Meta/Redlock`
 :::
 
 ## 分布式定义
 
 ``` typescript
-export interface TypeQueueAddJobData { a: number; b: number }
+export interface MetaRedlock {}
 
-export type TypeQueueAddJobResult = number;
-
-@Queue()
-export class QueueAdd
-  extends BeanQueueBase<TypeQueueAddJobData, TypeQueueAddJobResult>
-  implements IQueueExecute<TypeQueueAddJobData, TypeQueueAddJobResult> {
-  async execute(data: TypeQueueAddJobData, _options?: IQueuePushOptions): Promise<TypeQueueAddJobResult> {
-    return data.a + data.b;
-  }
-}
+@Meta()
+export class MetaRedlock extends BeanRedlockBase {}
 ```
 
-- `TypeQueueAddJobData`: 定义任务数据
-- `TypeQueueAddJobResult`: 定义任务结果
-- `execute`: 执行任务
+- `MetaRedlock`: 定义需要提供的锁资源
 
-* execute 参数
+## 定义锁资源
 
-|名称|说明|
-|--|--|
-|data|任务数据|
-|options|任务参数|
+当我们使用分布式锁时，需要指定对应的锁资源。那么，可以采用接口合并机制直接在`MetaRedlock`中定义锁资源
+
+比如，定义锁资源`name`:
+
+``` typescript
+
+```
+
+
 
 
