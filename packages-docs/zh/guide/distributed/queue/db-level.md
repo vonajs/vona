@@ -51,6 +51,10 @@ aclass QueueAdd {
 
 VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源分级`，从而创建不同的数据库连接池，避免数据源竞争的发生
 
+::: tip
+在 VonaJS 中，在分布式场景下，将数据库连接池的最大连接数设为`1`，也不会发生因数据源竞争而导致的死锁情况
+:::
+
 ``` typescript
 class ControllerStudent {
   async test() {
@@ -67,7 +71,7 @@ class ControllerStudent {
 
 - `this.bean.database.current.level`: 获取当前数据源分级
 - `switchDb`: 传入新的`level`创建新的上下文
-- `student.select`: 在不同的上下文执行，因此使用不同的数据库连接池
+- `student.select`: 在不同的上下文执行，从而使用了不同的数据源分级，相应的也就使用了不同的数据库连接池
 
 ### 简写方式
 
@@ -86,7 +90,7 @@ class ControllerStudent {
 
 当使用`push/pushAsync`方法推送任务时，系统会自动传入`current.level + 1`，从而实现数据源分级，避免死锁发生
 
-我们也可以显式传入参数：
+也可以显式传入参数：
 
 ``` diff
 class ControllerStudent {
