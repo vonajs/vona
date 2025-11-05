@@ -1,6 +1,6 @@
 # 分布式锁
 
-VonaJS 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、易用的的分布式锁
+VonaJS 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、易用的分布式锁
 
 ## 创建分布式锁
 
