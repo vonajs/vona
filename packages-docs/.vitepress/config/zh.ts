@@ -336,6 +336,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '分表', link: 'table-partitioning' },
             { text: '动态数据源', link: 'dynamic-datasource' },
             { text: '读写分离', link: 'sharding' },
+            { text: '数据源分级', link: 'db-level' },
           ],
         },
       ],

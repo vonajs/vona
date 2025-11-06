@@ -336,6 +336,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Table-partitioning', link: 'table-partitioning' },
             { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
             { text: 'Sharding', link: 'sharding' },
+            { text: 'Datasource Level', link: 'db-level' },
           ],
         },
       ],
