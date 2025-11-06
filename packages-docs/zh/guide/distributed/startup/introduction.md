@@ -134,8 +134,8 @@ config.onions = {
 
 |名称|类型|说明|
 |--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../env-config/mode-flavor/introduction.md)|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
 
 * 举例
 
@@ -149,24 +149,24 @@ config.onions = {
 class StartupLog {}
 ```
 
-## 查看当前生效的全局中间件清单
+## 查看当前生效的启动项清单
 
-可以直接在 Controller action 中输出当前生效的全局中间件清单
+可以直接输出当前生效的启动项清单
 
 ``` diff
 class ControllerStudent {
-  @Web.get()
-  async findMany() {
-+   this.bean.onion.middleware.inspect();
+  @Web.get('test')
+  test() {
++   this.bean.onion.startup.inspect();
   }
 }
 ```
 
 - `this.bean.onion`: 取得全局 Service 实例 `onion`
-- `.middleware`: 取得与中间件相关的 Service 实例
-- `.inspect`: 输出当前生效的全局中间件清单
+- `.startup`: 取得与启动项相关的 Service 实例
+- `.inspect`: 输出当前生效的启动项清单
 
-当访问`findMany` API 时，会自动在控制台输出当前生效的全局中间件清单，效果如下：
+当访问`test` API 时，会自动在控制台输出当前生效的启动项清单，效果如下：
 
-![](../../../assets/img/aop/middleware-1.png)
+![](../../../assets/img/distributed/startup-1.png)
 
