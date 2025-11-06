@@ -4,6 +4,7 @@ import type {
   Next,
   VonaContext,
 } from 'vona';
+import type { IMetaNameRecord } from 'vona-module-a-meta';
 import type {
   IOnionExecuteCustom,
   IOnionOptionsDeps,
@@ -340,7 +341,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
   }
 
-  public inspectMeta(metaName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+  public inspectMeta(metaName: keyof IMetaNameRecord, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
     const onionSlices = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
     const onionSlices2: IOnionSlice[] = [];
     for (const item of onionSlices) {

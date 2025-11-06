@@ -9,3 +9,9 @@ export interface IRedlockLockOptions {
 }
 
 export interface IRedlockLockIsolateOptions extends IRedlockLockOptions, Partial<IDbInfo> {}
+
+declare module 'vona-module-a-meta' {
+  export interface IMetaNameRecord {
+    redlock: never;
+  }
+}

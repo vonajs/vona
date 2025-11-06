@@ -1,6 +1,8 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 
+export interface IMetaNameRecord {}
+
 export interface IMetaRecord {}
 
 export interface IDecoratorMetaOptions {}
