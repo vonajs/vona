@@ -12,3 +12,9 @@ export type TypeMetaPrintTipResult = IMetaPrintTipInfo | IMetaPrintTipInfo[] | u
 export interface IMetaPrintTipExecute {
   execute: () => Promise<TypeMetaPrintTipResult>;
 }
+
+declare module 'vona-module-a-meta' {
+  export interface IMetaNameRecord {
+    printTip: never;
+  }
+}

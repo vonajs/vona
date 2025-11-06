@@ -41,3 +41,9 @@ declare module 'vona' {
     version: never;
   }
 }
+
+declare module 'vona-module-a-meta' {
+  export interface IMetaNameRecord {
+    version: never;
+  }
+}
