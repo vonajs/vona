@@ -101,3 +101,24 @@ config.onions = {
   },
 };
 ```
+
+## 查看当前生效的广播清单
+
+可以直接输出当前生效的广播清单
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   this.bean.onion.broadcast.inspect();
+  }
+}
+```
+
+- `this.bean.onion`: 取得全局 Service 实例 `onion`
+- `.broadcast`: 取得与广播相关的 Service 实例
+- `.inspect`: 输出当前生效的广播清单
+
+当访问`test` API 时，会自动在控制台输出当前生效的广播清单，效果如下：
+
+![](../../assets/img/distributed/broadcast-1.png)
