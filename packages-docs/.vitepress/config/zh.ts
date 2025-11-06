@@ -277,7 +277,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         { text: '分布式锁', link: 'redlock' },
         { text: '定时任务', link: 'schedule' },
-        { text: '启动项', link: 'startup' },
+        {
+          text: '启动项',
+          base: '/zh/guide/distributed/startup/',
+          collapsed: false,
+          items: [
+            { text: '介绍', link: 'introduction' },
+            { text: '内置启动项', link: 'builtin' },
+          ],
+        },
       ],
     },
     {

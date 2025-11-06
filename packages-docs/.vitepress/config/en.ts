@@ -277,7 +277,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         { text: 'Redlock', link: 'redlock' },
         { text: 'Schedule', link: 'schedule' },
-        { text: 'Startup', link: 'startup' },
+        {
+          text: 'Startup',
+          base: '/guide/distributed/startup/',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+            { text: 'Built-in Startup', link: 'builtin' },
+          ],
+        },
       ],
     },
     {
