@@ -139,4 +139,4 @@ class ControllerStudent {
 
 当访问`test` API 时，会自动在控制台输出当前生效的定时任务清单，效果如下：
 
-![](../../../assets/img/distributed/schedule-1.png)
+![](../../assets/img/distributed/schedule-1.png)

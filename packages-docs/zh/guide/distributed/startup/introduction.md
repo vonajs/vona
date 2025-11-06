@@ -169,4 +169,3 @@ class ControllerStudent {
 当访问`test` API 时，会自动在控制台输出当前生效的启动项清单，效果如下：
 
 ![](../../../assets/img/distributed/startup-1.png)
-
