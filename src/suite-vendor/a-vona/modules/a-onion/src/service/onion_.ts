@@ -339,4 +339,17 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     this.$logger.silly(JSON.stringify(onionSlices, null, 2));
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
   }
+
+  public inspectMeta(metaName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+    const onionSlices = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
+    const onionSlices2: IOnionSlice[] = [];
+    for (const item of onionSlices) {
+      if (item.beanOptions.name === metaName) {
+        onionSlices2.push(item);
+      }
+    }
+    const onionNames = onionSlices.map(item => item.name).filter(item => item.toString().endsWith(`:${metaName}`));
+    this.$logger.silly(JSON.stringify(onionSlices2, null, 2));
+    this.$logger.silly(JSON.stringify(onionNames, null, 2));
+  }
 }

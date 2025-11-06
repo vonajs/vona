@@ -119,3 +119,23 @@ class ControllerStudent {
 }  
 ```
 
+## 查看当前生效的分布式锁清单
+
+可以直接输出当前生效的分布式锁清单
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   this.bean.onion.meta.inspectMeta('redlock');
+  }
+}
+```
+
+- `this.bean.onion`: 取得全局 Service 实例 `onion`
+- `.meta`: 取得与 meta 相关的 Service 实例
+- `.inspectMeta`: 输出当前生效的分布式锁清单
+
+当访问`test` API 时，会自动在控制台输出当前生效的分布式锁清单，效果如下：
+
+![](../../assets/img/distributed/redlock-1.png)
