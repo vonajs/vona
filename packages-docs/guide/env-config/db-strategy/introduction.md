@@ -40,7 +40,7 @@ $ vona demo
 
 ## Production Environment
 
-In the production environment, you must manually create a database and specify the database name in the [Datasource Config](./config-datasource.md)
+In the production environment, you must manually create a database and specify the database name in the [Datasource Config](../../techniques/orm/config-datasource.md)
 
 ``` bash
 $ npm run start
