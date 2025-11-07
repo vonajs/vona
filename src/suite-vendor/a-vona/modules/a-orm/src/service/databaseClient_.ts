@@ -1,6 +1,7 @@
 import type { Knex } from 'knex';
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientRecord } from '../types/database.ts';
+import { catchError } from '@cabloy/utils';
 import knex from 'knex';
 import { deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -70,7 +71,9 @@ export class ServiceDatabaseClient extends BeanMutateBase {
 
   private async __close() {
     if (this._knex) {
-      await this._knex.destroy();
+      await catchError(() => {
+        return this._knex.destroy();
+      });
       this._knex = undefined as any;
     }
   }
