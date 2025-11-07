@@ -74,6 +74,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/env-config/instance/',
           link: 'introduction',
         },
+        {
+          text: '数据库策略',
+          base: '/zh/guide/env-config/db-strategy/',
+          link: 'introduction',
+        },
       ],
     },
     {
@@ -307,7 +312,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: '介绍', link: 'introduction' },
         { text: '数据源配置', link: 'config-datasource' },
         { text: 'ORM配置', link: 'config-orm' },
-        { text: '数据库策略', link: 'strategy' },
         { text: 'ORM基础', link: 'basics' },
         { text: 'CRUD(查询)', link: 'crud-select' },
         { text: 'CRUD(插入/更新/删除)', link: 'crud-cud' },
@@ -345,6 +349,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '动态数据源', link: 'dynamic-datasource' },
             { text: '读写分离', link: 'sharding' },
             { text: '数据源分级', link: 'db-level' },
+            { text: '多实例/多租户', link: 'multi-instance' },
+            { text: '数据库策略', link: 'db-strategy' },
           ],
         },
       ],

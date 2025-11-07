@@ -74,6 +74,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/env-config/instance/',
           link: 'introduction',
         },
+        {
+          text: 'Database Strategy',
+          base: '/guide/env-config/db-strategy/',
+          link: 'introduction',
+        },
       ],
     },
     {
@@ -307,7 +312,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Introduction', link: 'introduction' },
         { text: 'Datasource Config', link: 'config-datasource' },
         { text: 'ORM Config', link: 'config-orm' },
-        { text: 'Database Strategy', link: 'strategy' },
         { text: 'ORM Basics', link: 'basics' },
         { text: 'CRUD(Select)', link: 'crud-select' },
         { text: 'CRUD(Insert/Update/Delete)', link: 'crud-cud' },
@@ -345,6 +349,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
             { text: 'Sharding', link: 'sharding' },
             { text: 'Datasource Level', link: 'db-level' },
+            { text: 'Multi-instance/Multi-tenancy', link: 'multi-instance' },
+            { text: 'Database Strategy', link: 'db-strategy' },
           ],
         },
       ],
