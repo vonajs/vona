@@ -296,7 +296,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       collapsed: true,
       text: 'App Startup Customization',
-      base: '/zh/guide/startup/',
+      base: '/guide/app-start/',
       items: [
         { text: 'Introduction', link: 'introduction' },
         { text: 'Module Main', link: 'module-main' },

@@ -296,7 +296,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       collapsed: true,
       text: '应用启动自定义',
-      base: '/zh/guide/startup/',
+      base: '/zh/guide/app-start/',
       items: [
         { text: '介绍', link: 'introduction' },
         { text: 'Module Main', link: 'module-main' },
