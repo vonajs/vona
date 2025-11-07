@@ -2,6 +2,13 @@
 
 VonaJS 提供了`启动项`，允许在系统启动时或者实例初始化时，执行初始化逻辑
 
+## 启动项分类
+
+VonaJS 提供了两类启动项：
+
+1. `应用启动项`：当系统启动时执行
+2. `实例启动项`：当实例初始化时执行。 因为 VonaJS 支持多实例/多租户，因此可以在每个实例初始化时执行`实例启动项`
+
 ## 创建启动项
 
 比如，在模块 demo-student 中创建一个启动项: `log`，在系统启动时在控制台输出当前时间
@@ -47,17 +54,14 @@ export class StartupLog {}
 
 |名称|类型|说明|
 |--|--|--|
-|instance|boolean|是否作为实例的启动项，默认为`false`|
+|instance|boolean|是否是实例启动项，默认为`false`|
 |after|boolean|控制启动项的时机，默认为`false`|
 |debounce|boolean\|number|采用debounce方式执行Startup，默认为`false`|
 |transaction|boolean|是否启用数据库事务，默认为`false`|
 
-- `instance`
-  - `false`: 系统启动项。当系统启动时执行
-  - `true`: 实例启动项。当实例初始化时执行。 因为 VonaJS 支持多实例/多租户，因此可以在每个实例初始化时执行`实例启动项`
 - `after`:  
-  - `false`: 在`appReady`(instance=false)或者`instanceReady`(instance=true)之前执行
-  - `true`: 在`appReady`(instance=false)或者`instanceReady`(instance=true)之后执行 
+  - `false`: 在`appReady`(应用启动项)或者`instanceReady`(实例启动项)之前执行
+  - `true`: 在`appReady`(应用启动项)或者`instanceReady`(实例启动项)之后执行 
 - `debounce`
   - `false`: 禁用 debounce
   - `true`: 使用系统默认的 debounce 时间
