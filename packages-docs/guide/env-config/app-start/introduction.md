@@ -22,3 +22,33 @@ The application startup timing is divided into four steps:
 3. `appReady`: Triggers the hook `appReady`. For example, the module a-startup responds to this hook and executes `app startups(after: true)`. See: [Startup](../../distributed/startup/introduction.md)
 4. `appStarted`: Triggers the hook `appStarted`
 
+## Application Shutdown Timing
+
+![](../../../assets/img/app-start/app-close.png)
+
+The application shutdown timing is divided into two steps:
+
+1. `appClose`: Triggers the hook `appClose`
+2. `appClosed`: Triggers the hook `appClosed`
+
+## Hook List
+
+The system provides three scenarios to respond to application startup/shutdown hooks:
+
+1. `Module Main`: Respond to the module's own hooks in the module code
+2. `Module Monkey`: Respond to system hooks in the module code
+3. `App Monkey`: Respond to system hooks in the app code
+
+For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
+
+|Hook|Module Main Interface|Module Monkey Interface|App Monkey Interface|
+|--|--|--|--|
+|moduleLoading|IModuleMain|IMonkeyModule|IMonkeyModule|
+|configLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
+|moduleLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
+|appStart||IMonkeyAppStart|IMonkeyAppStart|
+|appReady||IMonkeyAppReady|IMonkeyAppReady|
+|appStarted||IMonkeyAppStarted|IMonkeyAppStarted|
+|appClose||IMonkeyAppClose|IMonkeyAppClose|
+|appClosed||IMonkeyAppClosed|IMonkeyAppClosed|
+
