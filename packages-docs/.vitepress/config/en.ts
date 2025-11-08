@@ -79,6 +79,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/env-config/db-strategy/',
           link: 'introduction',
         },
+        {
+          text: 'App Startup Customization',
+          base: '/guide/env-config/app-start/',
+          link: 'introduction',
+        },
       ],
     },
     {
@@ -291,17 +296,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Built-in Startup', link: 'builtin' },
           ],
         },
-      ],
-    },
-    {
-      collapsed: true,
-      text: 'App Startup Customization',
-      base: '/guide/app-start/',
-      items: [
-        { text: 'Introduction', link: 'introduction' },
-        { text: 'Module Main', link: 'module-main' },
-        { text: 'Module Monkey', link: 'module-monkey' },
-        { text: 'App Monkey', link: 'app-monkey' },
       ],
     },
     {

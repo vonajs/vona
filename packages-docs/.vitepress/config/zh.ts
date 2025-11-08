@@ -79,6 +79,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/env-config/db-strategy/',
           link: 'introduction',
         },
+        {
+          text: '应用启动自定义',
+          base: '/zh/guide/env-config/app-start/',
+          link: 'introduction',
+        },
       ],
     },
     {
@@ -291,17 +296,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '内置启动项', link: 'builtin' },
           ],
         },
-      ],
-    },
-    {
-      collapsed: true,
-      text: '应用启动自定义',
-      base: '/zh/guide/app-start/',
-      items: [
-        { text: '介绍', link: 'introduction' },
-        { text: 'Module Main', link: 'module-main' },
-        { text: 'Module Monkey', link: 'module-monkey' },
-        { text: 'App Monkey', link: 'app-monkey' },
       ],
     },
     {
