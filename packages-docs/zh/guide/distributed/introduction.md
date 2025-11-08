@@ -1,6 +1,12 @@
 # 分布式组件
 
-使用 VonaJS 框架开发的系统，天然具备分布式能力。因为 VonaJS 基于`Redis`提供了以下核心组件: `广播、队列、分布式锁、定时任务、启动项`
+为了支持分布式开发，VonaJS 基于`Redis`提供了以下核心组件:
+
+- `广播`: 可以向系统的多个工作进程发送广播，从而让每个工作进程执行业务逻辑
+- `队列`: 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了强大的队列组件
+- `分布式锁`: 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、易用的分布式锁
+- `定时任务`: 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了直观、易用的定时任务。因为定时任务是队列的特例
+- `启动项`: 允许在系统启动时或者实例初始化时，执行初始化逻辑
 
 ## Redis配置
 
