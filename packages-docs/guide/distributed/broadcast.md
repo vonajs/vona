@@ -66,83 +66,59 @@ If business logic has already been executed in the current worker process, you c
 
 ## Broadcast Parameters
 
-Parameters can be configured for broadcasts.
+Parameters can be configured for broadcasts
 
 ``` typescript
-
 @Broadcast({
-instance: true,
-transaction: true,
-
+  instance: true,
+  transaction: true,
 })
 class BroadcastEcho {}
-
 ```
 
 |Name|Description|
-
 |--|--|
-
 |instance|Whether to enable instance|
-
 |transaction|Whether to enable database transaction|
 
-- `instance`: VonaJS supports `multi-instance/multi-tenancy`. If the broadcast's business logic requires operations on instance data, you need to set `instance: true` so that the system initializes `ctx.instance` and then calls the broadcast's `execute` method.
+- `instance`: VonaJS supports `multi-instance/multi-tenancy`. If the broadcast's business logic requires operations on instance data, you need to set `instance: true` so that the system initializes `ctx.instance` and then invokes the broadcast's `execute` method
+- `transaction`: If set to true, the system will automatically put the broadcast's `execute` method into a database transaction
 
-- `transaction`: If set to true, the system will automatically put the broadcast's `execute` method into a database transaction.
+## App Config
 
-## App Config Configuration
-
-Broadcast parameters can be configured in App Config.
+Broadcast parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-
 // onions
-
 config.onions = {
-broadcast: {
-
-'demo-student:echo': {
-
-instance: true,
-
-transaction: true,
-
-},
-
-},
-
+  broadcast: {
+    'demo-student:echo': {
+      instance: true,
+      transaction: true,
+    },
+  },
 };
-
 ```
 
-## View the List of Currently Effective Broadcasts
+## Inspect
 
-You can directly output the list of currently effective broadcasts.
+You can directly inspect the currently effective broadcast list
 
 ``` diff
-
 class ControllerStudent {
-
-@Web.get('test')
-
-test() {
-
-+ this.bean.onion.broadcast.inspect();
-
-}
-
+  @Web.get('test')
+  test() {
++   this.bean.onion.broadcast.inspect();
+  }
 }
 ```
 
-- `this.bean.onion`: Retrieves the global Service instance `onion`
+- `this.bean.onion`: Get the global Service instance `onion`
+- `.broadcast`: Get the Service instance related to the broadcast
+- `.inspect`: Output the currently effective broadcast list
 
-- `.broadcast`: Retrieves the Service instance associated with broadcasts
-
-- `.inspect`: Outputs the list of currently active broadcasts
-
-When the `test` API is accessed, the list of currently active broadcasts will be automatically output to the console, as shown below:
+When accessing the `test` API, the currently effective broadcast list will be automatically output to the console, as shown below:
 
 ![](../../assets/img/distributed/broadcast-1.png)
