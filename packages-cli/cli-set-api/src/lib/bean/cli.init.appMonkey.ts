@@ -1,0 +1,29 @@
+import path from 'node:path';
+import { BeanCliBase } from '@cabloy/cli';
+import fse from 'fs-extra';
+import { __ThisSetName__ } from '../this.ts';
+
+declare module '@cabloy/cli' {
+  interface ICommandArgv {}
+}
+
+export class CliInitMonkey extends BeanCliBase {
+  async execute() {
+    const { argv } = this.context;
+    // super
+    await super.execute();
+    // target dir
+    const targetDir = path.join(argv.projectPath, 'src/backend/config');
+    const monkeyFile = path.join(targetDir, 'monkey.ts');
+    if (fse.existsSync(monkeyFile)) {
+      throw new Error('app monkey exists');
+    }
+    // render boilerplate
+    await this.template.renderBoilerplateAndSnippets({
+      targetDir,
+      setName: __ThisSetName__,
+      snippetsPath: null,
+      boilerplatePath: 'init/appMonkey/boilerplate',
+    });
+  }
+}
