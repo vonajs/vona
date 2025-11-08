@@ -1,6 +1,6 @@
 import type { IModule } from '@cabloy/module-info';
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, VonaConfigEnv } from '../../types/index.ts';
-import type { AppMonkeyConstructable } from '../../types/interface/monkey.ts';
+import type { IAppMonkey } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
@@ -28,7 +28,7 @@ export class AppMeta extends BeanSimple {
   locale: AppLocale;
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
-  appMonkey?: AppMonkeyConstructable;
+  appMonkey?: IAppMonkey;
   //
   resource: AppResource;
   metadata: AppMetadata;
@@ -59,7 +59,7 @@ export class AppMeta extends BeanSimple {
     this.ctxCounter = new CtxCounter();
 
     // appMonkey
-    this.appMonkey = this.app.options.AppMonkey;
+    this.appMonkey = this.app.options.AppMonkey ? new (this.app.options.AppMonkey)() : undefined;
 
     // logger
     this.logger = this.bean._newBean(AppLogger);

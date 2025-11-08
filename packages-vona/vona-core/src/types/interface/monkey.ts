@@ -37,4 +37,5 @@ export interface IMonkeyAppClosed {
   appClosed: () => Promise<void>;
 }
 
-export type AppMonkeyConstructable = Constructable<IMonkeyModule & IMonkeySystem>;
+export type IAppMonkey = IMonkeyModule & IMonkeySystem;
+export type AppMonkeyConstructable = Constructable<IAppMonkey>;
