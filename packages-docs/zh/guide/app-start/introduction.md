@@ -95,3 +95,34 @@ export class Monkey extends BeanSimple implements IMonkeyModule {
   async configLoaded(_module: IModule, _config: any) {}
 }
 ```
+
+## 创建 App Monkey
+
+### 1. Cli命令
+
+``` bash
+$ vona :init:appMonkey
+```
+
+### 2. 菜单命令
+
+::: tip
+右键菜单 - [项目路径/src]: `Vona Init/App Monkey`
+:::
+
+## Module Monkey定义
+
+`src/backend/config/monkey.ts`
+
+``` typescript
+export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
+  async moduleLoading(_module: IModule) {}
+  async moduleLoaded(_module: IModule) {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async appStart() {}
+  async appReady() {}
+  async appStarted() {}
+  async appClose() {}
+  async appClosed() {}
+}
+```
