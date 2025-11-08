@@ -10,7 +10,7 @@
 
 ## Redis配置
 
-这些分布式组件默认使用同一个 Redis Client，可以在`.env`文件中配置：
+这些分布式组件默认使用相同的 Redis 配置，可以在`.env`文件中配置：
 
 `env/.env`
 
@@ -19,7 +19,7 @@
 
 REDIS_DEFAULT_HOST = 127.0.0.1
 REDIS_DEFAULT_PORT = 6379
-REDIS_DEFAULT_PASSWORD = 
+REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
@@ -37,7 +37,7 @@ config.redis = {
     broadcast: {
       host: 'host1',
     },
-    // queue/Schedule
+    // queue/schedule
     queue: {
       host: 'host2',
     },

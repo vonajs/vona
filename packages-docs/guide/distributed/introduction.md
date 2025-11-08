@@ -10,12 +10,12 @@ To support distributed development, VonaJS provides the following core component
 
 ## Redis Configuration
 
-These distributed components use the same Redis Client by default, which can be configured in the `.env` file:
+These distributed components use the same Redis configuration by default, which can be configured in the `.env` file:
 
 `env/.env`
 
-```typescript
-#redis
+``` typescript
+# redis
 
 REDIS_DEFAULT_HOST = 127.0.0.1
 REDIS_DEFAULT_PORT = 6379
@@ -23,28 +23,28 @@ REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
-## Independent configuration
+## Independent Configuration
 
 For large projects, independent configurations can be provided for different components
 
 `src/backend/config/config/config.ts`
 
-```typescript
-//redis
-config.redis = { 
-clients: { 
-// broadcast 
-broadcast: { 
-host: 'host1', 
-}, 
-//queue/Schedule 
-queue: { 
-host: 'host2', 
-}, 
-// Redlock 
-redlock: { 
-host: 'host3', 
-}, 
-},
+``` typescript
+// redis
+config.redis = {
+  clients: {
+    // broadcast
+    broadcast: {
+      host: 'host1',
+    },
+    // queue/schedule
+    queue: {
+      host: 'host2',
+    },
+    // redlock
+    redlock: {
+      host: 'host3',
+    },
+  },
 };
 ```
