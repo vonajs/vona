@@ -41,7 +41,7 @@ config.redis = {
     queue: {
       host: 'host2',
     },
-    // Redlock
+    // redlock
     redlock: {
       host: 'host3',
     },
