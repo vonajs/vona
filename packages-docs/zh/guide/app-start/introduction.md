@@ -47,3 +47,28 @@
 |appStarted||IMonkeyAppStarted|IMonkeyAppStarted|
 |appClose||IMonkeyAppClose|IMonkeyAppClose|
 |appClosed||IMonkeyAppClosed|IMonkeyAppClosed|
+
+## 创建 Module Main
+
+### 1. Cli命令
+
+``` bash
+$ vona :init:main demo-student
+```
+
+### 2. 菜单命令
+
+::: tip
+右键菜单 - [模块路径]: `Vona Init/Main`
+:::
+
+## Module Main定义
+
+``` typescript
+export class Main extends BeanSimple implements IModuleMain {
+  async moduleLoading() {}
+  async moduleLoaded() {}
+  async configLoaded(_config: any) {}
+}
+```
+
