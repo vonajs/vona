@@ -46,7 +46,7 @@ export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRe
 class ControllerStudent {
   async test() {
     const res = await this.scope.redlock.lock('name', async () => {
-      // do nothing in lock
+      // do something in lock
       return 'some result';
     });
   }
@@ -76,7 +76,7 @@ VonaJS 提供了两个锁方法: `lock/lockIsolate`。二者的区别是：`lock
 class ControllerStudent {
   async test() {
     const res = await this.scope.redlock.lockIsolate('name', async () => {
-      // do nothing in lock
+      // do something in lock
       return 'some result';
     });
   }
@@ -101,7 +101,7 @@ class ControllerStudent {
   async test() {
     const userId = 1;
     const res = await this.scope.redlock.lockIsolate(`user-${userId}`, async () => {
-      // do nothing in lock
+      // do something in lock
       return 'some result';
     });
   }
