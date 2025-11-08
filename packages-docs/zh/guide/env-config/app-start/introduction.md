@@ -14,10 +14,14 @@ VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深
 
 应用启动时序分四个步骤：
 
-1. `appLoad`: 加载所有的模块。针对每个模块均触发钩子`moduleLoading`、`configLoaded`、`moduleLoaded`
-2. `appStart`: 触发钩子`appStart`。比如，模块`a-startup`响应此钩子，执行`应用启动项`(after: false)
-   - 当`appStart`执行后，会设置`app.meta.appReady=true`。此时，系统提供的所有 API 服务可以接受客户端的请求
-3. `appReady`: 触发钩子`appReady`。比如，模块`a-startup`响应此钩子，执行`应用启动项`(after: true)
+1. `appLoad`: 加载所有的模块
+   - 针对每个模块均触发钩子`moduleLoading`、`configLoaded`、`moduleLoaded`
+2. `appStart`: 触发钩子`appStart`
+   - 比如，模块 a-startup 响应此钩子，执行`应用启动项(after: false)`。参见: [启动项](../../distributed/startup/introduction.md)
+   - 当`appStart`执行后，会设置`app.meta.appReady=true`
+   - 此时，系统提供的所有 API 服务可以接受客户端的请求
+3. `appReady`: 触发钩子`appReady`
+   - 比如，模块 a-startup 响应此钩子，执行`应用启动项(after: true)`。参见: [启动项](../../distributed/startup/introduction.md)
 4. `appStarted`: 触发钩子`appStarted`
 
 ## 应用停止时序
