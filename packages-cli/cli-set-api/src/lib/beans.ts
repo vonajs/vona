@@ -11,6 +11,7 @@ import { CliCreateProject } from './bean/cli.create.project.ts';
 import { CliCreateSuite } from './bean/cli.create.suite.ts';
 import { CliCreateTest } from './bean/cli.create.test.ts';
 import { CliDefaultList } from './bean/cli.default.list.ts';
+import { CliInitAppMonkey } from './bean/cli.init.appMonkey.ts';
 import { CliInitConfig } from './bean/cli.init.config.ts';
 import { CliInitConstant } from './bean/cli.init.constant.ts';
 import { CliInitError } from './bean/cli.init.error.ts';
@@ -47,6 +48,7 @@ export const beans = {
   'init.static': CliInitStatic,
   'init.lib': CliInitLib,
   'init.types': CliInitTypes,
+  'init.appMonkey': CliInitAppMonkey,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.crud': CliToolsCrud,

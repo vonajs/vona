@@ -7,7 +7,7 @@ declare module '@cabloy/cli' {
   interface ICommandArgv {}
 }
 
-export class CliInitMonkey extends BeanCliBase {
+export class CliInitAppMonkey extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super

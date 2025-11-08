@@ -11,6 +11,7 @@ import createProject from './command/create.project.ts';
 import createSuite from './command/create.suite.ts';
 import createTest from './command/create.test.ts';
 import defaultList from './command/default.list.ts';
+import initAppMonkey from './command/init.appMonkey.ts';
 import initConfig from './command/init.config.ts';
 import initConstant from './command/init.constant.ts';
 import initError from './command/init.error.ts';
@@ -54,6 +55,7 @@ export const commands = {
     static: initStatic,
     lib: initLib,
     types: initTypes,
+    appMonkey: initAppMonkey,
   },
   refactor: {},
   tools: {
