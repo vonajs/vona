@@ -46,11 +46,11 @@ For different scenarios, corresponding interface definitions are provided for di
 |moduleLoading|IModuleMain|IMonkeyModule|IMonkeyModule|
 |configLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
 |moduleLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
-|appStart||IMonkeyAppStart|IMonkeyAppStart|
-|appReady||IMonkeyAppReady|IMonkeyAppReady|
-|appStarted||IMonkeyAppStarted|IMonkeyAppStarted|
-|appClose||IMonkeyAppClose|IMonkeyAppClose|
-|appClosed||IMonkeyAppClosed|IMonkeyAppClosed|
+|appStart||IMonkeySystem / IMonkeyAppStart|IMonkeySystem / IMonkeyAppStart|
+|appReady||IMonkeySystem / IMonkeyAppReady|IMonkeySystem / IMonkeyAppReady|
+|appStarted||IMonkeySystem / IMonkeyAppStarted|IMonkeySystem / IMonkeyAppStarted|
+|appClose||IMonkeySystem / IMonkeyAppClose|IMonkeySystem / IMonkeyAppClose|
+|appClosed||IMonkeySystem / IMonkeyAppClosed|IMonkeySystem / IMonkeyAppClosed|
 
 ## Create Module Main
 
@@ -93,10 +93,15 @@ Context Menu - [Module Path]: `Vona Init/Monkey`
 ### Module Monkey Definition
 
 ``` typescript
-export class Monkey extends BeanSimple implements IMonkeyModule {
+export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
   async configLoaded(_module: IModule, _config: any) {}
+  async appStart() {}
+  async appReady() {}
+  async appStarted() {}
+  async appClose() {}
+  async appClosed() {}
 }
 ```
 
