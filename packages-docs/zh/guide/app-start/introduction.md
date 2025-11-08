@@ -72,3 +72,26 @@ export class Main extends BeanSimple implements IModuleMain {
 }
 ```
 
+## 创建 Module Monkey
+
+### 1. Cli命令
+
+``` bash
+$ vona :init:monkey demo-student
+```
+
+### 2. 菜单命令
+
+::: tip
+右键菜单 - [模块路径]: `Vona Init/Monkey`
+:::
+
+## Module Monkey定义
+
+``` typescript
+export class Monkey extends BeanSimple implements IMonkeyModule {
+  async moduleLoading(_module: IModule) {}
+  async moduleLoaded(_module: IModule) {}
+  async configLoaded(_module: IModule, _config: any) {}
+}
+```
