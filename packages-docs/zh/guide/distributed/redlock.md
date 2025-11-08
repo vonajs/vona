@@ -21,24 +21,23 @@ $ vona :create:bean meta redlock --module=demo-student
 ## 分布式锁定义
 
 ``` typescript
-export interface MetaRedlock {}
+export type TypeRedlockLockResource = never;
+export type TypeRedlockLockIsolateResource = never;
 
 @Meta()
-export class MetaRedlock extends BeanRedlockBase {}
+export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRedlockLockIsolateResource> {}
 ```
 
-- `MetaRedlock`: 定义需要提供的锁资源
+- `TypeRedlockLockResource`: 定义`lock`方法使用的锁资源
+- `TypeRedlockLockIsolateResource`: 定义`lockIsolate`方法使用的锁资源
 
 ## 定义锁资源
 
-当我们使用分布式锁时，需要指定对应的锁资源。那么，可以采用接口合并机制直接在`MetaRedlock`中定义锁资源
-
-比如，定义锁资源`name`:
+当我们使用分布式锁时，需要指定对应的锁资源。比如，为`lock`方法定义锁资源`name`:
 
 ``` diff
-class MetaRedlock {
-+ lock<RESULT>(resource: 'name', fn: FunctionAsync<RESULT>, options?: IRedlockLockOptions): Promise<RESULT>;
-}
+- export type TypeRedlockLockResource = never;
++ export type TypeRedlockLockResource = 'name';
 ```
 
 ## 使用分布式锁
@@ -67,13 +66,8 @@ VonaJS 提供了两个锁方法: `lock/lockIsolate`。二者的区别是：`lock
 为`lockIsolate`方法定义锁资源:
 
 ``` diff
-class MetaRedlock {
-+ lockIsolate<RESULT>(
-+   resource: 'name',
-+   fn: FunctionAsync<RESULT>,
-+   options?: IRedlockLockIsolateOptions,
-+ ): Promise<RESULT>;
-}
+- export type TypeRedlockLockIsolateResource = never;
++ export type TypeRedlockLockIsolateResource = 'name';
 ```
 
 ### 使用分布式锁: lockIsolate
@@ -96,13 +90,8 @@ class ControllerStudent {
 比如，如果要为不同的用户单独提供锁资源，那么可以使用形如`user-${userId}`的字符串，作为锁资源名称
 
 ``` diff
-class MetaRedlock {
-+ lockIsolate<RESULT, KEY extends string>(
-+   resource: `user-${KEY}`,
-+   fn: FunctionAsync<RESULT>,
-+   options?: IRedlockLockIsolateOptions,
-+ ): Promise<RESULT>;
-}
+- export type TypeRedlockLockIsolateResource = 'name';
++ export type TypeRedlockLockIsolateResource = 'name' | `user-${string}`;
 ```
 
 这样，在使用`lockIsolate`方法时同样可以提供类型提示
