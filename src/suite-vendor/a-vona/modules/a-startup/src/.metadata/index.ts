@@ -74,14 +74,12 @@ export interface IModuleCacheRedis {
 /** cacheRedis: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.ts';
-export * from '../bean/meta.redlock3.ts';
 
 import 'vona-module-a-meta';
 declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-startup:redlock': never;
-'a-startup:redlock3': never;
     }
 
   
@@ -96,17 +94,6 @@ declare module 'vona-module-a-startup' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-startup.meta.redlock';
             get $onionName(): 'a-startup:redlock';
-            
-          }
-
-        export interface MetaRedlock3 {
-          /** @internal */
-          get scope(): ScopeModuleAStartup;
-        }
-
-          export interface MetaRedlock3 {
-            get $beanFullName(): 'a-startup.meta.redlock3';
-            get $onionName(): 'a-startup:redlock3';
             
           } 
 }

@@ -42,14 +42,12 @@ declare module 'vona' {
 /** service: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.ts';
-export * from '../bean/meta.redlock3.ts';
 
 import 'vona-module-a-meta';
 declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-schedule:redlock': never;
-'a-schedule:redlock3': never;
     }
 
   
@@ -64,17 +62,6 @@ declare module 'vona-module-a-schedule' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-schedule.meta.redlock';
             get $onionName(): 'a-schedule:redlock';
-            
-          }
-
-        export interface MetaRedlock3 {
-          /** @internal */
-          get scope(): ScopeModuleASchedule;
-        }
-
-          export interface MetaRedlock3 {
-            get $beanFullName(): 'a-schedule.meta.redlock3';
-            get $onionName(): 'a-schedule:redlock3';
             
           } 
 }
