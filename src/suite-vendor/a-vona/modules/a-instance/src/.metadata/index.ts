@@ -277,6 +277,7 @@ export interface IModuleBroadcast {
 /** meta: begin */
 export * from '../bean/meta.index.ts';
 export * from '../bean/meta.redlock.ts';
+export * from '../bean/meta.redlock3.ts';
 export * from '../bean/meta.version.ts';
 import type { IMetaOptionsIndex } from 'vona-module-a-index';
 import 'vona-module-a-meta';
@@ -285,6 +286,7 @@ declare module 'vona-module-a-meta' {
     export interface IMetaRecord {
       'a-instance:index': IMetaOptionsIndex;
 'a-instance:redlock': never;
+'a-instance:redlock3': never;
 'a-instance:version': never;
     }
 
@@ -311,6 +313,17 @@ declare module 'vona-module-a-instance' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-instance.meta.redlock';
             get $onionName(): 'a-instance:redlock';
+            
+          }
+
+        export interface MetaRedlock3 {
+          /** @internal */
+          get scope(): ScopeModuleAInstance;
+        }
+
+          export interface MetaRedlock3 {
+            get $beanFullName(): 'a-instance.meta.redlock3';
+            get $onionName(): 'a-instance:redlock3';
             
           }
 

@@ -304,6 +304,7 @@ declare module 'vona-module-a-event' {
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';
 export * from '../bean/meta.redlock.ts';
+export * from '../bean/meta.redlock3.ts';
 export * from '../bean/meta.version.ts';
 
 import 'vona-module-a-meta';
@@ -312,6 +313,7 @@ declare module 'vona-module-a-meta' {
     export interface IMetaRecord {
       'a-auth:printTip': never;
 'a-auth:redlock': never;
+'a-auth:redlock3': never;
 'a-auth:version': never;
     }
 
@@ -338,6 +340,17 @@ declare module 'vona-module-a-auth' {
           export interface MetaRedlock {
             get $beanFullName(): 'a-auth.meta.redlock';
             get $onionName(): 'a-auth:redlock';
+            
+          }
+
+        export interface MetaRedlock3 {
+          /** @internal */
+          get scope(): ScopeModuleAAuth;
+        }
+
+          export interface MetaRedlock3 {
+            get $beanFullName(): 'a-auth.meta.redlock3';
+            get $onionName(): 'a-auth:redlock3';
             
           }
 
