@@ -2,20 +2,20 @@ import type { FunctionAsync } from 'vona';
 import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 import { BeanBase, SymbolModuleBelong } from 'vona';
 
-export class BeanRedlockBase extends BeanBase {
-  protected __get__(prop: string) {
-    if (prop === 'lock') {
-      return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockOptions) => {
-        return this.$scope.redlock.service.redlock.lock(this._prepareResource(resource), fn, options);
-      };
-    } else if (prop === 'lockIsolate') {
-      return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockIsolateOptions) => {
-        return this.$scope.redlock.service.redlock.lockIsolate(this._prepareResource(resource), fn, options);
-      };
-    }
+export class BeanRedlockBase<TypeRedlockLockResource, TypeRedlockLockIsolateResource> extends BeanBase {
+  async lock<RESULT>(resource: TypeRedlockLockResource, fn: FunctionAsync<RESULT>, options?: IRedlockLockOptions): Promise<RESULT> {
+    return this.$scope.redlock.service.redlock.lock(this._prepareResource(resource), fn, options);
   }
 
-  private _prepareResource(resource: string) {
+  async lockIsolate<RESULT>(
+    resource: TypeRedlockLockIsolateResource,
+    fn: FunctionAsync<RESULT>,
+    options?: IRedlockLockIsolateOptions,
+  ): Promise<RESULT> {
+    return this.$scope.redlock.service.redlock.lockIsolate(this._prepareResource(resource), fn, options);
+  }
+
+  private _prepareResource(resource: TypeRedlockLockResource | TypeRedlockLockIsolateResource) {
     return `${this[SymbolModuleBelong]}.${resource}`;
   }
 }
