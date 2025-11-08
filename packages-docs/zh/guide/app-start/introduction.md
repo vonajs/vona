@@ -38,14 +38,12 @@
 针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
 
 |钩子|Module Main 接口|Module Monkey 接口|App Monkey 接口|
-|moduleLoading||||
-|||||
-|||||
-|moduleLoaded||||
-|||||
-|||||
-|||||
-|||||
-|||||
-|||||
-|||||
+|--|--|--|--|
+|moduleLoading|IModuleMain|IMonkeyModule|IMonkeyModule|
+|configLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
+|moduleLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
+|appStart||IMonkeyAppStart|IMonkeyAppStart|
+|appReady||IMonkeyAppReady|IMonkeyAppReady|
+|appStarted||IMonkeyAppStarted|IMonkeyAppStarted|
+|appClose||IMonkeyAppClose|IMonkeyAppClose|
+|appClosed||IMonkeyAppClosed|IMonkeyAppClosed|
