@@ -66,12 +66,67 @@ $ vona :init:main demo-student
 Context Menu - [Module Path]: `Vona Init/Main`
 :::
 
-## Module Main Definition
+### Module Main Definition
 
 ``` typescript
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {}
   async configLoaded(_config: any) {}
+}
+```
+
+## Create Module Monkey
+
+### 1. Cli command
+
+``` bash
+$ vona :init:monkey demo-student
+```
+
+### 2. Menu command
+
+::: tip
+Context Menu - [Module Path]: `Vona Init/Monkey`
+:::
+
+### Module Monkey Definition
+
+``` typescript
+export class Monkey extends BeanSimple implements IMonkeyModule {
+  async moduleLoading(_module: IModule) {}
+  async moduleLoaded(_module: IModule) {}
+  async configLoaded(_module: IModule, _config: any) {}
+}
+```
+
+## Create App Monkey
+
+### 1. Cli command
+
+``` bash
+$ vona :init:appMonkey
+```
+
+### 2. Menu command
+
+::: tip
+Context Menu - [Project Path/src]: `Vona Init/App Monkey`
+:::
+
+### App Monkey Definition
+
+`src/backend/config/monkey.ts`
+
+``` typescript
+export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
+  async moduleLoading(_module: IModule) {}
+  async moduleLoaded(_module: IModule) {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async appStart() {}
+  async appReady() {}
+  async appStarted() {}
+  async appClose() {}
+  async appClosed() {}
 }
 ```
