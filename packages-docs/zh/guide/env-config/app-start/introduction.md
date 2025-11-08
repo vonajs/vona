@@ -1,14 +1,16 @@
 # 应用启动自定义
 
-对于常规业务需求，一般只需创建[启动项](../distributed/startup/introduction.md)即可
+VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制
 
-对于特殊的底层需求，可以使用 VonaJS 提供的`Hook/Monkey`机制
+::: tip
+当然，对于常规业务需求，一般只需创建[启动项](../../distributed/startup/introduction.md)即可
+:::
 
 在解释`Hook/Monkey`机制之前，有必要先了解应用启动/停止的时序
 
 ## 应用启动时序
 
-![](../../assets/img/app-start/app-start.png)
+![](../../../assets/img/app-start/app-start.png)
 
 应用启动时序分四个步骤：
 
@@ -20,7 +22,7 @@
 
 ## 应用停止时序
 
-![](../../assets/img/app-start/app-close.png)
+![](../../../assets/img/app-start/app-close.png)
 
 应用停止时序分两个步骤：
 
