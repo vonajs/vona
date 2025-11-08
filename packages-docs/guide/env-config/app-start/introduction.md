@@ -52,3 +52,26 @@ For different scenarios, corresponding interface definitions are provided for di
 |appClose||IMonkeyAppClose|IMonkeyAppClose|
 |appClosed||IMonkeyAppClosed|IMonkeyAppClosed|
 
+## Create Module Main
+
+### 1. Cli command
+
+``` bash
+$ vona :init:main demo-student
+```
+
+### 2. Menu command
+
+::: tip
+Context Menu - [Module Path]: `Vona Init/Main`
+:::
+
+## Module Main Definition
+
+``` typescript
+export class Main extends BeanSimple implements IModuleMain {
+  async moduleLoading() {}
+  async moduleLoaded() {}
+  async configLoaded(_config: any) {}
+}
+```
