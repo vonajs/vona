@@ -26,7 +26,7 @@ export class BeanAuthProvider extends BeanBase {
 
   private async _registerAuthProviderLock(data: Partial<EntityAuthProvider>) {
     // get
-    const res = await this.scope.model.authProvider.get(data);
+    const res = await this.scope.model.authProvider.get(data, { cache: { force: true } });
     if (res) return res;
     const dataNew: Partial<EntityAuthProvider> = {
       disabled: false,
