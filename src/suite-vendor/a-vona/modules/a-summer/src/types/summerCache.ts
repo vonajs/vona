@@ -47,6 +47,7 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   emptyArrayAsNull?: boolean;
   db?: ServiceDb;
   ttl?: number;
+  force?: boolean;
   updateAgeOnGet?: boolean;
   broadcastOnSet?: TypeBroadcastOnSet;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;

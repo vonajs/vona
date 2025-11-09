@@ -9,8 +9,9 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
-    let value = this.cacheMem.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
-    if (this.__checkValueEmpty(value, options)) {
+    const force = options?.force;
+    let value = force ? undefined : this.cacheMem.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
+    if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
       this.cacheMem.set(value!, key, { ttl: options?.ttl, db: options?.db, broadcastOnSet: false });
@@ -19,12 +20,13 @@ export class ServiceLocalMem<KEY = any, DATA = any>
   }
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
+    const force = options?.force;
     // mget
-    const values = this.cacheMem.mget(keys, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
+    const values = force ? keys.map(() => undefined) : this.cacheMem.mget(keys, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {
-      if (this.__checkValueEmpty(values[i], options)) {
+      if (force || this.__checkValueEmpty(values[i], options)) {
         keysMissing.push(keys[i]);
         indexesMissing.push(i);
       }

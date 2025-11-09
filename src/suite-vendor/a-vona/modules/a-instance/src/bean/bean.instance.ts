@@ -53,7 +53,7 @@ export class BeanInstance extends BeanBase {
 
   private async _registerLock(configInstanceBase: ConfigInstanceBase) {
     // get again
-    let instance = await this.modelInstance.get({ name: configInstanceBase.name }, { cache: { enable: false } });
+    let instance = await this.modelInstance.get({ name: configInstanceBase.name }, { cache: { force: true } });
     if (instance) return instance;
     // insert
     instance = {
