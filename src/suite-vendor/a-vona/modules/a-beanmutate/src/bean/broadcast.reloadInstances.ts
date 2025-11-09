@@ -7,7 +7,7 @@ export interface TypeBroadcastReloadInstancesJobData {
   data: unknown;
 }
 
-@Broadcast()
+@Broadcast({ instance: false })
 export class BroadcastReloadInstances
   extends BeanBroadcastBase<TypeBroadcastReloadInstancesJobData>
   implements IBroadcastExecute<TypeBroadcastReloadInstancesJobData> {

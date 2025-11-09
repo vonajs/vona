@@ -3,7 +3,7 @@ import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
 export type TypeBroadcastReloadAllJobData = unknown;
 
-@Broadcast()
+@Broadcast({ instance: false })
 export class BroadcastReloadAll
   extends BeanBroadcastBase<TypeBroadcastReloadAllJobData>
   implements IBroadcastExecute<TypeBroadcastReloadAllJobData> {

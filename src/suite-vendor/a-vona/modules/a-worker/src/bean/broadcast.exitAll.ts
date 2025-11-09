@@ -5,7 +5,7 @@ export interface TypeBroadcastExitAllJobData {
   code?: number | string | null | undefined;
 }
 
-@Broadcast()
+@Broadcast({ instance: false })
 export class BroadcastExitAll
   extends BeanBroadcastBase<TypeBroadcastExitAllJobData>
   implements IBroadcastExecute<TypeBroadcastExitAllJobData> {

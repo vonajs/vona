@@ -7,7 +7,7 @@ export interface TypeBroadcastSetLevelJobData {
   clientName?: keyof ILoggerClientRecord;
 }
 
-@Broadcast()
+@Broadcast({ instance: false })
 export class BroadcastSetLevel
   extends BeanBroadcastBase<TypeBroadcastSetLevelJobData>
   implements IBroadcastExecute<TypeBroadcastSetLevelJobData> {

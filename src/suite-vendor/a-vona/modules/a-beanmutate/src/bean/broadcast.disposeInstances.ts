@@ -7,7 +7,7 @@ export interface TypeBroadcastDisposeInstancesJobData {
   data: unknown;
 }
 
-@Broadcast()
+@Broadcast({ instance: false })
 export class BroadcastDisposeInstances
   extends BeanBroadcastBase<TypeBroadcastDisposeInstancesJobData>
   implements IBroadcastExecute<TypeBroadcastDisposeInstancesJobData> {
