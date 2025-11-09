@@ -5,7 +5,7 @@ To support distributed development, VonaJS provides the following core component
 - `Broadcast`: Broadcasts can be emitted to multiple worker processes in the system, allowing each worker process to execute business logic
 - `Queue`: Provides a powerful queue component based on [BullMQ](https://github.com/taskforcesh/bullmq)
 - `Redlock`: Provides an intuitive and easy-to-use distributed lock based on [Redlock](https://github.com/sesamecare/redlock/)
-- `Schedule`: Provides intuitive and easy-to-use scheduled tasks based on [BullMQ](https://github.com/taskforcesh/bullmq). Schedule is a special case of queue
+- `Schedule`: Provides intuitive and easy-to-use schedule based on [BullMQ](https://github.com/taskforcesh/bullmq). Schedule is a special case of queue
 - `Startup`: Allows initialization logic to be executed during system startup or instance initialization
 
 ## Redis Configuration

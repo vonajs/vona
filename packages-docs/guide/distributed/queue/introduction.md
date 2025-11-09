@@ -104,7 +104,7 @@ async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT>;
 
 ## Queue Parameters
 
-Parameters can be configured for the queue
+Parameters can be configured for queue
 
 ``` typescript
 @Queue({
