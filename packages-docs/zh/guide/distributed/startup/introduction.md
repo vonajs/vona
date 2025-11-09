@@ -7,7 +7,7 @@ VonaJS 提供了`启动项`，允许在系统启动时或者实例初始化时�
 VonaJS 提供了两类启动项：
 
 1. `应用启动项`：当系统启动时执行
-2. `实例启动项`：当实例初始化时执行。 因为 VonaJS 支持多实例/多租户，因此可以在每个实例初始化时执行`实例启动项`
+2. `实例启动项`：当实例初始化时执行。 因为 VonaJS 支持多实例/多租户，因此在每个实例初始化时都会自动执行`实例启动项`
 
 ## 创建启动项
 
@@ -44,9 +44,9 @@ export class StartupLog extends BeanBase implements IStartupExecute {
 
 ``` typescript
 @Startup({
+  instance: false,
   after: false,
   debounce: true,
-  instance: false,
   transaction: false,
 })
 export class StartupLog {}

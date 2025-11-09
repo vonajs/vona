@@ -6,6 +6,7 @@
 |--|--|
 |a-version:databaseInit|自动创建测试数据库|
 |a-version:databaseName|自动设置缺省数据源的数据库名称|
+|a-web:listen|启动服务的端口监听|
 
 ### 1. a-version:databaseInit
 
@@ -29,4 +30,4 @@
 |a-printtip:printTip|在控制台输出提示信息，比如`Swagger URL`等|
 |a-queue:loadQueueWorkers|启动队列的Worker执行体|
 |a-schedule:loadSchedules|启动定时任务|
-|a-web:listen|启动服务的端口监听|
+
