@@ -36,159 +36,107 @@ export class ScheduleLog extends BeanBase implements IScheduleExecute {
 Parameters can be configured for schedule
 
 ``` typescript
-
 @Schedule({
-queue: undefined,
-repeat: {
-every: 3000,
-pattern: '0 15 3 * * *',
-
-},
-templateOptions: {},
-
-dbInfo: undefined,
-
-transaction: false,
-
+  queue: undefined,
+  repeat: {
+    every: 3000,
+    pattern: '0 15 3 * * *',
+  },
+  templateOptions: {},
+  dbInfo: undefined,
+  transaction: false,
 })
 class ScheduleLog {}
-
 ```
 
 |Name|Type|Description|
-
 |--|--|--|
-
-|queue|string|The name of the queue used by the scheduled task. The default value is empty, thus using the system's built-in queue|
-
+|queue|string|The name of the queue used by the schedule. The default value is empty, thus using the system's built-in queue|
 |repeat.every|number|Interval|
-
-|repeat.pattern|string|cron expression. See: [cron-parser](https://github.com/harrisiirak/cron-parser)|
-
+|repeat.pattern|string|Cron expression. See: [cron-parser](https://github.com/harrisiirak/cron-parser)|
 |templateOptions|Bull.JobSchedulerTemplateOptions|Bull JobScheduler options|
+|dbInfo.level|number|Defaults to datasource level `1`, see: [Datasource Level](./queue/db-level.md)|
+|dbInfo.clientName|string|Defaults to the system's default datasource name|
+|transaction|boolean|Whether to enable database transaction, defaults to `false`|
 
-|dbInfo.level|number|Defaults to data source level `1`, see: [Data Source Level](./queue/db-level.md)|
+## App Config
 
-|dbInfo.clientName|string|Defaults to the system's default data source name|
-
-|transaction|boolean|Whether to enable database transactions, defaults to `false`|
-
-## App Config Configuration
-
-Scheduled task parameters can be configured in App Config
+Schedule parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-
 // onions
-
 config.onions = {
-
-schedule: {
-
-'demo-student:log': {
-
-repeat: {
-
-every: 5000,
-
-},
-
-transaction: true,
-
-},
-
-},
-
+  schedule: {
+    'demo-student:log': {
+      repeat: {
+        every: 5000,
+      },
+      transaction: true,
+    },
+  },
 };
 ```
 
-## Enabling/Disabling Scheduled Tasks
+## Schedule Enable/Disable
 
-You can control the enabling/disabling of scheduled tasks.
+You can control `enable/disable` of schedule
 
 ### 1. Enable
 
 `src/backend/config/config/config.ts`
 
 ``` diff
-
 // onions
-
 config.onions = {
-
-schedule: {
-
-'demo-student:log': {
-
-+ enable: false,
-
-},
-
-},
-
+  schedule: {
+    'demo-student:log': {
++     enable: false,
+    },
+  },
 };
-
 ```
 
 ### 2. Meta
 
-This allows scheduled tasks to take effect in a specified runtime environment.
+Allows schedule to take effect in a specified operating environment
 
 |Name|Type|Description|
-
 |--|--|--|
-
-|flavor|string\|string[]|See: [Runtime Environment and Flavor](../env-config/mode-flavor/introduction.md)|
-
-|mode|string\|string[]|See: [Runtime Environment and Flavor](../env-config/mode-flavor/introduction.md)|
+|flavor|string\|string[]|See: [Runtime Environments and Flavors](../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|See: [Runtime Environments and Flavors](../env-config/mode-flavor/introduction.md)|
 
 * Example
 
 ``` diff
-
 @Schedule({
-repeat: {},
-
+  repeat: {},
 + meta: {
-
-+ flavor: 'normal',
-
-+ mode: 'dev',
-
++   flavor: 'normal',
++   mode: 'dev',
 + },
-
 })
-
 class ScheduleLog {}
-
 ```
 
-## View the list of currently active scheduled tasks
+## Inspect
 
-You can directly output the list of currently active scheduled tasks
+You can directly inspect the currently effective schedule list
 
 ``` diff
-
 class ControllerStudent {
-
-@Web.get('test')
-
-test() {
-
-+ this.bean.onion.schedule.inspect();
-
-}
+  @Web.get('test')
+  test() {
++   this.bean.onion.schedule.inspect();
+  }
 }
 ```
 
-- `this.bean.onion`: Gets the global Service instance `onion`
+- `this.bean.onion`: Get the global Service instance `onion`
+- `.schedule`: Get the Service instance related to the schedule
+- `.inspect`: Output the currently effective schedule list
 
-- `.schedule`: Gets the Service instance associated with the scheduled task
-
-- `.inspect`: Outputs the list of currently active scheduled tasks
-
-When accessing the `test` API When the timer is active, a list of currently active scheduled tasks will be automatically output to the console, as shown below:
+When accessing the `test` API, the currently effective schedule list will be automatically output to the console, as shown below:
 
 ![](../../assets/img/distributed/schedule-1.png)
