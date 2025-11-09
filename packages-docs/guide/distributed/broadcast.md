@@ -6,13 +6,13 @@ Broadcasts can be emitted to multiple worker processes in the system, allowing e
 
 For example, create a broadcast `echo` in the module `demo-student`, so that each worker process outputs `Hello world` to the console
 
-### 1. Cli command
+### 1. Cli Command
 
 ``` bash
 $ vona :create:bean broadcast echo --module=demo-student
 ```
 
-### 2. Menu command
+### 2. Menu Command
 
 ::: tip
 Context Menu - [Module Path]: `Vona Bean/Broadcast`
