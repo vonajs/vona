@@ -78,7 +78,7 @@ class BroadcastEcho {}
 
 |名称|说明|
 |--|--|
-|instance|是否启用实例|
+|instance|是否启用实例，缺省值为`true`|
 |transaction|是否启用数据库事务|
 
 - `instance`: VonaJS 支持`多实例/多租户`。如果广播的业务逻辑需要操作实例数据，则需要设置`instance: true`，以便系统初始化`ctx.instance`，然后调用广播的`execute`方法

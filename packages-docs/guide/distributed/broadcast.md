@@ -78,7 +78,7 @@ class BroadcastEcho {}
 
 |Name|Description|
 |--|--|
-|instance|Whether to enable instance|
+|instance|Whether to enable instance. Defaults to `true`|
 |transaction|Whether to enable database transaction|
 
 - `instance`: VonaJS supports `multi-instance/multi-tenancy`. If the broadcast's business logic requires operations on instance data, you need to set `instance: true` so that the system initializes `ctx.instance` and then invokes the broadcast's `execute` method
