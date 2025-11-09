@@ -27,10 +27,10 @@ class ControllerStudent {
 
 ### 2. Worker B
 
-在 Worker B 中执行任务，代码如下:
+在 Worker B 中执行如下代码：
 
 ``` diff
-aclass QueueAdd {
+class QueueAdd {
   async execute(data, _options) {
 +   await this.scope.model.student.update({ id: 1, name: 'student name' });
     console.log(process.pid, data.a + data.b);
