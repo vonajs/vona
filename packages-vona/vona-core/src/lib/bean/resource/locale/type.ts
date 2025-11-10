@@ -2,12 +2,12 @@ export const LocaleModuleNameSeparator = '::';
 
 export interface IModuleLocale {
   (...args: any[]): string;
-  locale: <T extends keyof ILocaleInfoRecord>(locale: T, ...args: any[]) => string;
+  locale: <T extends keyof ILocaleRecord>(locale: T, ...args: any[]) => string;
 }
 
 export interface IModuleLocaleText {
   (text: string, ...args: any[]): string;
-  locale: <T extends keyof ILocaleInfoRecord>(locale: T, text: string, ...args: any[]) => string;
+  locale: <T extends keyof ILocaleRecord>(locale: T, text: string, ...args: any[]) => string;
 }
 
 export type TypeModuleLocales<T> = {
@@ -16,7 +16,7 @@ export type TypeModuleLocales<T> = {
 
 export type TypeLocaleBase = 'en-us';
 
-export interface ILocaleInfoRecord {
+export interface ILocaleRecord {
   'en-us': never;
   'zh-cn': never;
 }

@@ -278,7 +278,7 @@
     "prefix": "recordlocale",
     "body": [
       "declare module 'vona' {",
-      "  export interface ILocaleInfoRecord {",
+      "  export interface ILocaleRecord {",
       "    $0: never;",
       "  }",
       "}"

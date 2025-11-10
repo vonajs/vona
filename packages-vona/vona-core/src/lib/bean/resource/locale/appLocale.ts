@@ -1,14 +1,14 @@
-import type { ILocaleInfoRecord, IModuleLocale, IModuleLocaleText } from './type.ts';
+import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from './type.ts';
 import * as localeutil from '@cabloy/localeutil';
 import { BeanSimple } from '../../beanSimple.ts';
 import { LocaleModuleNameSeparator } from './type.ts';
 
 export class AppLocale extends BeanSimple {
-  get current(): keyof ILocaleInfoRecord {
+  get current(): keyof ILocaleRecord {
     return this.ctx.locale;
   }
 
-  set current(value: keyof ILocaleInfoRecord) {
+  set current(value: keyof ILocaleRecord) {
     this.ctx.locale = value;
   }
 
@@ -18,7 +18,7 @@ export class AppLocale extends BeanSimple {
     const getText = function (text: string, ...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleInfoRecord>(
+    getText.locale = function <T extends keyof ILocaleRecord>(
       locale: T | undefined,
       text: string,
       ...args: any[]
@@ -34,13 +34,13 @@ export class AppLocale extends BeanSimple {
     const getText = function (...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleInfoRecord>(locale: T | undefined, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, ...args: any[]): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;
   }
 
-  public getText<T extends keyof ILocaleInfoRecord>(
+  public getText<T extends keyof ILocaleRecord>(
     supportCustomMessage: boolean,
     moduleScope: string | undefined,
     locale: T | undefined,

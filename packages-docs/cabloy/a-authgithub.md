@@ -204,7 +204,7 @@ export interface IAuthUserProfile {
   profileUrl?: string;
   emails?: IAuthUserProfilePropSlice[];
   photos?: IAuthUserProfilePropSlice[];
-  locale?: keyof ILocaleInfoRecord;
+  locale?: keyof ILocaleRecord;
   confirmed?: boolean;
 }
 ```
