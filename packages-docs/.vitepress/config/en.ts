@@ -108,6 +108,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Bean Identifier', link: 'bean-identifier' },
+            { text: 'Onion Name', link: 'onion-name' },
             { text: 'Create Bean', link: 'bean-create' },
             { text: 'Dependency injection', link: 'dependency-injection' },
             { text: 'Dependency lookup', link: 'dependency-lookup' },
