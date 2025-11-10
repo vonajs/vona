@@ -24,6 +24,8 @@
 
 有了通用的 Onion 名称，就可以在 App Config 中修改所有 bean class 的参数配置
 
+`src/backend/config/config/config.ts`
+
 ``` typescript
 // onions
 config.onions = {
