@@ -213,7 +213,9 @@ export default {
 
 ```diff
 export default {
-+ StudentName: 'Student Name',
++ TestApples_: '%d apples',
++ TestApples_0: 'no apples',
++ TestApples_1: 'one apple',
 };
 ```
 
@@ -221,7 +223,73 @@ export default {
 
 ```diff
 export default {
-+ StudentName: '学生名称',
++ TestApples_: '%d个苹果',
++ TestApples_0: '没有苹果',
 };
 ```
+
+### 2. 使用语言资源
+
+``` typescript
+this.ctx.locale = 'en-us';
+const apple0 = this.scope.locale.TestApples_(0);
+const apple1 = this.scope.locale.TestApples_(1);
+const apple2 = this.scope.locale.TestApples_(2);
+console.log(`${apple0}, ${apple1}, ${apple2}`);
+```
+
+控制台输出如下：
+
+``` bash
+no apples, one apple, 2 apples
+```
+
+- `TestApples_`: 缺省语言资源。语言资源添加后缀`_`，可以提示开发者该语言资源需要传入参数
+- `TestApples_{n}`: 可以针对任何具体的`n`提供独立的语言资源。系统在进行语言翻译时，如果找不到具体`n`的语言资源，就使用缺省语言资源`TestApples_`
+
+## 复数: 多参数
+
+如果语言资源支持多参数，那么可以明确指定哪个参数支持复数
+
+### 1. 定义语言资源
+
+`src/module/demo-student/src/config/locale/en-us.ts`
+
+```diff
+export default {
++ TestNameApples_: '%s has %d apples',
++ TestNameApples_0_1: '%s has no apples',
++ TestNameApples_1_1: '%s has one apple',
+};
+```
+
+`src/module/demo-student/src/config/locale/zh-cn.ts`
+
+```diff
+export default {
++ TestNameApples_: '%s有%d个苹果',
++ TestNameApples_0_1: '%s没有苹果',
+};
+```
+
+### 2. 使用语言资源
+
+``` typescript
+this.ctx.locale = 'en-us';
+const apple0 = this.scope.locale.TestNameApples_('Tom', 0);
+const apple1 = this.scope.locale.TestNameApples_('Tom', 1);
+const apple2 = this.scope.locale.TestNameApples_('Tom', 2);
+console.log(`${apple0}, ${apple1}, ${apple2}`);
+```
+
+控制台输出如下：
+
+``` bash
+Tom has no apples, Tom has one apple, Tom has 2 apples
+```
+
+- `TestNameApples_`: 缺省语言资源。语言资源添加后缀`_`，可以提示开发者该语言资源需要传入参数
+- `TestNameApples_{n}_{ordinal}`: `ordinal`代表参数序数
+
+## Swagger/Openapi
 
