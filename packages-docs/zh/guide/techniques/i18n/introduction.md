@@ -169,4 +169,55 @@ config.modules = {
 
 VonaJS 默认提供了两个语言:`en-us`和`zh-cn`。下面演示如何添加新语言`zh-tw`
 
-### 1. 
+### 1. 添加类型定义
+
+通过接口合并机制添加新语言的类型定义
+
+在 VSCode 编辑器中，输入代码片段`recordlocale`，自动生成代码骨架:
+
+``` typescript
+declare module 'vona' {
+  export interface ILocaleInfoRecord {
+    : ILocaleInfo;
+  }
+}
+```
+
+调整代码，然后添加`zh-tw`
+
+``` diff
+declare module 'vona' {
+  export interface ILocaleInfoRecord {
++   'zh-tw': ILocaleInfo;
+  }
+}
+```
+
+### 2. 添加语言资源
+
+新建语言文件`zh-tw.ts`，然后添加语言资源
+
+`src/module/demo-student/src/config/locale/zh-tw.ts`
+
+``` typescript
+export default {
+  StudentName: '學生名稱',
+};
+```
+
+## 复数
+
+### 1. 定义语言资源
+
+```diff
+export default {
++ StudentName: 'Student Name',
+};
+```
+
+```diff
+export default {
++ StudentName: '学生名称',
+};
+```
+

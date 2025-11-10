@@ -1,4 +1,4 @@
-import type { ILocaleInfos } from 'vona';
+import type { ILocaleInfoRecord } from 'vona';
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import type { IUser } from 'vona-module-a-user';
 import { Api, v } from 'vona-module-a-openapi';
@@ -26,5 +26,5 @@ export class EntityUser extends EntityBase implements IUser {
   activated?: boolean;
 
   @Api.field(v.title($locale('UserLocale')), z.string().optional())
-  locale?: keyof ILocaleInfos | undefined;
+  locale?: keyof ILocaleInfoRecord | undefined;
 }

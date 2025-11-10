@@ -1,4 +1,4 @@
-import type { ILocaleInfos } from 'vona';
+import type { ILocaleInfoRecord } from 'vona';
 import type { IAuthenticateStrategyState, IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import { BeanBase } from 'vona';
@@ -11,7 +11,7 @@ export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOpt
   password?: string;
   email?: string;
   avatar?: string;
-  locale?: keyof ILocaleInfos;
+  locale?: keyof ILocaleInfoRecord;
 }
 
 export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions<

@@ -273,6 +273,18 @@
     ],
     "description": "record.authclient"
   },
+  "record.locale": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordlocale",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface ILocaleInfoRecord {",
+      "    $0: ILocaleInfo;",
+      "  }",
+      "}"
+    ],
+    "description": "record.locale"
+  },
   "findManyQueryTransform": {
     "scope": "typescript,typescriptreact",
     "prefix": "findmanyquerytransform",

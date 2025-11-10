@@ -1,8 +1,8 @@
-import type { ICustomKeyRecord, ILocaleInfos, VonaApplication } from 'vona';
+import type { ICustomKeyRecord, ILocaleInfoRecord, VonaApplication } from 'vona';
 import { $customKey } from 'vona';
 
 export interface I18nConfig {
-  defaultLocale: keyof ILocaleInfos;
+  defaultLocale: keyof ILocaleInfoRecord;
   queryField?: keyof ICustomKeyRecord;
   headerField?: keyof ICustomKeyRecord;
   cookieField?: string;
