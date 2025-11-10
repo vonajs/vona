@@ -369,6 +369,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/techniques/openapi/',
           link: 'introduction',
         },
+        {
+          text: 'I18N',
+          base: '/zh/guide/techniques/i18n/',
+          link: 'introduction',
+        },
       ],
     },
     {
