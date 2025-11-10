@@ -12,6 +12,7 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 | -------- | ----------------------------------------- |
 | app      | Global App object                            |
 | ctx      | The Context object which the current request belongs to  |
+| ctx.bean     | Ctx bean container            |
 | bean     | App bean container         |
 | scope    | The Scope object of the module which the current bean instance belongs to  |
 | $scope   | The Scope object of the specified module  |
