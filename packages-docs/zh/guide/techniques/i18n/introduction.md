@@ -107,3 +107,66 @@ export default {
   },
 };
 ```
+
+## 当前locale
+
+### 1. 获取当前locale
+
+``` typescript
+const locale = this.ctx.locale;
+```
+
+### 2. 设置当前locale
+
+``` typescript
+this.ctx.locale = 'en-us';
+```
+
+### 3. 获取缺省locale
+
+``` typescript
+const localeDefault = this.$scope.i18n.config.i18n.defaultLocale;
+```
+
+## 获取当前locale的规则
+
+当用户访问后端 API 时，后端会自动根据规则获取当前 locale
+
+### 1. 模块配置
+
+I18n 是由模块 a-i18n 提供的核心能力，可以在 App config 中修改模块的配置：
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// modules
+config.modules = {
+  'a-i18n': {
+    i18n: {
+      defaultLocale: 'en-us',
+      queryField: 'x-vona-locale',
+      headerField: 'x-vona-locale',
+      cookieField: 'locale',
+    },
+  },
+};
+```
+
+|名称|说明|
+|--|--|
+|defaultLocale|Default locale|
+|queryField|从request query中获取当前locale，query key默认为`x-vona-locale`|
+|headerField|从request header中获取当前locale，header key默认为`x-vona-locale`|
+|cookieField|从request cookie中获取当前locale，cookie key默认为`locale`|
+
+### 2. 规则次序
+
+系统按以下次序，依次判断当前 locale
+
+`queryField` > `headerField` > `cookieField` > `Header: Accept-Language` > `defaultLocale`
+
+## 添加新的语言
+
+VonaJS 默认提供了两个语言:`en-us`和`zh-cn`。下面演示如何添加新语言`zh-tw`
+
+### 1. 
