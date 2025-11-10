@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :init:locale home-index
+$ vona :init:locale demo-student
 ```
 
 ### 2. 菜单命令
@@ -18,21 +18,25 @@ $ vona :init:locale home-index
 
 ## 定义语言资源
 
-以模块`home-index`为例，定义模块的语言资源：
+以模块`demo-student`为例，定义模块的语言资源：
 
-英文：`src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
+* 英文
 
-```typescript{2}
+`src/module/demo-student/src/config/locale/en-us.ts`
+
+```diff
 export default {
-  HelloWorld: 'Hello World',
++ StudentName: 'Student Name',
 };
 ```
 
-中文：`src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
+* 中文
 
-```typescript{2}
+`src/module/demo-student/src/config/locale/zh-cn.ts`
+
+```diff
 export default {
-  HelloWorld: '您好世界',
++ StudentName: '学生名称',
 };
 ```
 
@@ -40,60 +44,66 @@ export default {
 
 可以通过 Scope 实例提供的`locale`对象获取模块的语言资源
 
-```typescript{3-9}
-class ControllerHome {
-  index() {
+```typescript
+class ControllerStudent {
+  @Web.get('test')
+  test() {
     // use current locale
-    const message1 = this.scope.locale.HelloWorld();
+    const message1 = this.scope.locale.StudentName();
     // use locale en-us
-    const message2 = this.scope.locale.HelloWorld.locale('en-us');
+    const message2 = this.scope.locale.StudentName.locale('en-us');
     // use locale zh-cn
-    const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
+    const message3 = this.scope.locale.StudentName.locale('zh-cn');
     console.log(message1, message2, message3);
   }
-}
+}  
 ```
 
 ## 跨模块使用语言资源
 
-```typescript{3-9}
-class ControllerHome {
-  index() {
+```typescript
+class ControllerStudent {
+  @Web.get('test')
+  test() {
     // use current locale
-    const message1 = this.$scope.homeIndex.locale.HelloWorld();
+    const message1 = this.$scope.demoStudent.locale.StudentName();
     // use locale en-us
-    const message2 = this.$scope.homeIndex.locale.HelloWorld.locale('en-us');
+    const message2 = this.$scope.demoStudent.locale.StudentName.locale('en-us');
     // use locale zh-cn
-    const message3 = this.$scope.homeIndex.locale.HelloWorld.locale('zh-cn');
+    const message3 = this.$scope.demoStudent.locale.StudentName.locale('zh-cn');
     console.log(message1, message2, message3);
   }
-}
+}  
 ```
 
 ## 覆盖语言资源
 
 可以使用`项目级别`的语言资源覆盖`模块级别`的语言资源
 
-英文：`src/backend/config/locale/en-us.ts`
+* 英文
 
-```typescript{3-5}
+`src/backend/config/locale/en-us.ts`
+
+```diff
 export default {
   modules: {
-    'home-index': {
-      HelloWorld: 'Hello World!!!',
-    },
++   'demo-student': {
++     StudentName: 'Student Name!',
++   },
   },
 };
 ```
 
-中文：`src/backend/config/locale/zh-cn.ts`
+* 中文
 
-```typescript{3-5}
+`src/backend/config/locale/zh-cn.ts`
+
+```diff
 export default {
   modules: {
-    'home-index': {
-      HelloWorld: '您好世界!!!',
-    },
++   'demo-student': {
++     StudentName: '学生名称!',
++   },
   },
 };
 ```
