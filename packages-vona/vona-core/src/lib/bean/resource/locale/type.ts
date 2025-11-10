@@ -16,8 +16,7 @@ export type TypeModuleLocales<T> = {
 
 export type TypeLocaleBase = 'en-us';
 
-export interface ILocaleInfo {}
 export interface ILocaleInfoRecord {
-  'en-us': ILocaleInfo;
-  'zh-cn': ILocaleInfo;
+  'en-us': never;
+  'zh-cn': never;
 }

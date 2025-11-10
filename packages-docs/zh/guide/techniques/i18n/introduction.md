@@ -178,7 +178,7 @@ VonaJS 默认提供了两个语言:`en-us`和`zh-cn`。下面演示如何添加�
 ``` typescript
 declare module 'vona' {
   export interface ILocaleInfoRecord {
-    : ILocaleInfo;
+    : never;
   }
 }
 ```
@@ -188,7 +188,7 @@ declare module 'vona' {
 ``` diff
 declare module 'vona' {
   export interface ILocaleInfoRecord {
-+   'zh-tw': ILocaleInfo;
++   'zh-tw': never;
   }
 }
 ```

@@ -279,7 +279,7 @@
     "body": [
       "declare module 'vona' {",
       "  export interface ILocaleInfoRecord {",
-      "    $0: ILocaleInfo;",
+      "    $0: never;",
       "  }",
       "}"
     ],
