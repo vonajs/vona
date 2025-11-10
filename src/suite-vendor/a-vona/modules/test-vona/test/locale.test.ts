@@ -31,13 +31,13 @@ describe('locale.test.ts', () => {
       // scope
       const scopeTest = app.scope('test-vona');
       // english
-      assert.equal(scopeTest.locale.TestApples.locale('en-us', 0), 'no apples');
-      assert.equal(scopeTest.locale.TestApples.locale('en-us', 1), 'one apple');
-      assert.equal(scopeTest.locale.TestApples.locale('en-us', 2), '2 apples');
+      assert.equal(scopeTest.locale.TestApples_.locale('en-us', 0), 'no apples');
+      assert.equal(scopeTest.locale.TestApples_.locale('en-us', 1), 'one apple');
+      assert.equal(scopeTest.locale.TestApples_.locale('en-us', 2), '2 apples');
       // chinese
-      assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 0), '没有苹果');
-      assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 1), '1个苹果');
-      assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 2), '2个苹果');
+      assert.equal(scopeTest.locale.TestApples_.locale('zh-cn', 0), '没有苹果');
+      assert.equal(scopeTest.locale.TestApples_.locale('zh-cn', 1), '1个苹果');
+      assert.equal(scopeTest.locale.TestApples_.locale('zh-cn', 2), '2个苹果');
       // english
       assert.equal(scopeTest.locale.TestNameApples_.locale('en-us', 'Mike', 0), 'Mike has no apples');
       assert.equal(scopeTest.locale.TestNameApples_.locale('en-us', 'Mike', 1), 'Mike has one apple');

@@ -209,11 +209,15 @@ export default {
 
 ### 1. 定义语言资源
 
+`src/module/demo-student/src/config/locale/en-us.ts`
+
 ```diff
 export default {
 + StudentName: 'Student Name',
 };
 ```
+
+`src/module/demo-student/src/config/locale/zh-cn.ts`
 
 ```diff
 export default {
