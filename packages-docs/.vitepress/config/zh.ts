@@ -370,7 +370,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: 'I18N',
+          text: 'I18n国际化',
           base: '/zh/guide/techniques/i18n/',
           link: 'introduction',
         },
