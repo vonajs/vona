@@ -1,4 +1,4 @@
-import type { ILocaleInfos } from 'vona';
+import type { ILocaleInfoRecord } from 'vona';
 
 export interface IAuthUserProfilePropSlice {
   value: string;
@@ -18,6 +18,6 @@ export interface IAuthUserProfile {
   profileUrl?: string;
   emails?: IAuthUserProfilePropSlice[];
   photos?: IAuthUserProfilePropSlice[];
-  locale?: keyof ILocaleInfos;
+  locale?: keyof ILocaleInfoRecord;
   confirmed?: boolean;
 }

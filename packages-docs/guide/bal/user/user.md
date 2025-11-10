@@ -18,7 +18,7 @@ export interface IUser {
   email?: string;
   mobile?: string;
   activated?: boolean;
-  locale?: keyof ILocaleInfos | undefined;
+  locale?: keyof ILocaleInfoRecord | undefined;
   anonymous?: boolean;
 }
 ```

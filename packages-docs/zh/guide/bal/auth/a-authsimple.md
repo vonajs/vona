@@ -114,7 +114,7 @@ export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOpt
   password?: string;
   email?: string;
   avatar?: string;
-  locale?: keyof ILocaleInfos;
+  locale?: keyof ILocaleInfoRecord;
 }
 
 export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions<
@@ -190,7 +190,7 @@ export interface IAuthUserProfile {
   profileUrl?: string;
   emails?: IAuthUserProfilePropSlice[];
   photos?: IAuthUserProfilePropSlice[];
-  locale?: keyof ILocaleInfos;
+  locale?: keyof ILocaleInfoRecord;
   confirmed?: boolean;
 }
 ```
