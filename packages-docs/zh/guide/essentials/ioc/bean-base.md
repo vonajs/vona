@@ -15,6 +15,19 @@
 | bean     | App bean 容器            |
 | scope    | 当前 bean 实例所归属模块的 Scope 对象       |
 | $scope   | 获取指定模块的 Scope 对象       |
-| $logger      | 获取logger对象 |
+| $logger      | 获取Logger对象 |
+|$loggerChild|获取Logger Child对象|
 
+## BeanBaseSimple
 
+`BeanBase`继承自`BeanBaseSimple`
+
+### 内置成员
+
+|名称|说明|
+|--|--|
+|$beanFullName|Bean标识|
+|$beanInstanceKey|Bean实例存储在IOC容器中的Key|
+|$beanOptions|Bean Options|
+|$onionName|Onion名称|
+|$onionOptions|Bean参数|

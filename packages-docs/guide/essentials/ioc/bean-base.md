@@ -8,11 +8,26 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 
 ## Built-in Members
 
-| Name     | Description                                                                     |
-| -------- | ------------------------------------------------------------------------------- |
-| app      | Global App object                                                               |
-| ctx      | The Context object which the current request belongs to                   |
-| bean     | App bean container                   |
-| scope    | The Scope object of the module which the current bean instance belongs to       |
+| Name     | Description                       |
+| -------- | ----------------------------------------- |
+| app      | Global App object                            |
+| ctx      | The Context object which the current request belongs to  |
+| bean     | App bean container         |
+| scope    | The Scope object of the module which the current bean instance belongs to  |
 | $scope   | The Scope object of the specified module  |
 | $logger  | Logger object |
+| $loggerChild  | Logger Child object |
+
+## BeanBaseSimple
+
+`BeanBase` inherits from `BeanBaseSimple`
+
+### Built-in Members
+
+|Name|Description|
+|--|--|
+|$beanFullName|Bean Identifier|
+|$beanInstanceKey|The key of the Bean instance stored in the IOC container|
+|$beanOptions|Bean Options|
+|$onionName|Onion Name|
+|$onionOptions|Bean Parameters|
