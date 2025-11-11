@@ -165,13 +165,13 @@ config.modules = {
 
 `queryField` > `headerField` > `cookieField` > `Header: Accept-Language` > `defaultLocale`
 
-## 添加新的语言
+## 添加新语言
 
 VonaJS 默认提供了两个语言:`en-us`和`zh-cn`。下面演示如何添加新语言`zh-tw`
 
 ### 1. 添加类型定义
 
-通过接口合并机制添加新语言的类型定义
+采用接口合并机制添加新语言的类型定义
 
 在 VSCode 编辑器中，输入代码片段`recordlocale`，自动生成代码骨架:
 

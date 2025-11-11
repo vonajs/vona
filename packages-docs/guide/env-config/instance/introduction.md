@@ -66,17 +66,29 @@ The following example demonstrates how to add a new instance using the `shareTes
 
 ### 1. Adding Type Definitions
 
+Using the interface merging mechanism to add the type definition for the new instance
+
+In the VSCode editor, enter the code snippet `recordinstance` to automatically generate a code skeleton:
+
 `src/backend/config/config/config.ts`
 
 ``` typescript
 declare module 'vona' {
   export interface IInstanceRecord {
-    shareTest: never;
+    : never;
   }
 }
 ```
 
-- Using the interface merging mechanism to add the type definition for the new instance
+Adjust the code and add `shareTest`
+
+``` diff
+declare module 'vona' {
+  export interface IInstanceRecord {
++   shareTest: never;
+  }
+}
+```
 
 ### 2. Adding Instance Configuration
 

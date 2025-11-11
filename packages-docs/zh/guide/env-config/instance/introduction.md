@@ -66,17 +66,29 @@ config.instances = [
 
 ### 1. 添加类型定义
 
+采用接口合并机制添加新实例的类型定义
+
+在 VSCode 编辑器中，输入代码片段`recordinstance`，自动生成代码骨架:
+
 `src/backend/config/config/config.ts`
 
 ``` typescript
 declare module 'vona' {
   export interface IInstanceRecord {
-    shareTest: never;
+    : never;
   }
 }
 ```
 
-- 采用接口合并机制添加新实例的类型定义
+调整代码，然后添加`shareTest`
+
+``` diff
+declare module 'vona' {
+  export interface IInstanceRecord {
++   shareTest: never;
+  }
+}
+```
 
 ### 2. 增加实例配置
 
