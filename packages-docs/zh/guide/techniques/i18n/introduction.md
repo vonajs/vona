@@ -291,3 +291,38 @@ Tom has no apples, Tom has one apple, Tom has 2 apples
 
 ## Swagger/Openapi
 
+VonaJS 提供了一组工具函数，为 Swagger/Openapi 实现 I18n 国际化
+
+比如，为`EntityStudent`的字段`name`提供国际化的`title`信息
+
+### 1. $localeScope
+
+在设置字段 title 信息时，要使用`语言资源Key`。在实际生成 Swagger/Openapi 元数据时，系统会自动将`语言资源Key`翻译为指定的语言
+
+``` diff
++ import { $localeScope } from 'vona';
+
+class EntityStudent {
++ @Api.field(v.title($localeScope('demo-student', 'Name')))
+  name: string;
+}
+```
+
+- `v.title`: 设置 title 信息
+- `$localeScope`: 传入`模块名称`和`语言资源Key`，从而生成完整的`语言资源Key`: `demo-student::Name`
+
+### 2. $locale
+
+VonaJS 还提供了一个简化的工具函数`$locale`
+
+``` diff
++ import { $locale } from '../.metadata/index.ts';
+
+class EntityStudent {
++ @Api.field(v.title($locale('Name')))
+  name: string;
+}
+```
+
+- `$locale`: 传入`语言资源Key`，从而生成完整的`语言资源Key`: `demo-student::Name`
+  - 每个模块都提供了$locale 函数，因此，使用本模块的$locale 函数就可以取得模块名称
