@@ -46,9 +46,7 @@ function __parseString(inst, parse, payload: IParsePayload, _) {
     // ignore upload file
     return payload;
   }
-  _coerce(payload, () => {
-    payload.value = String(payload.value);
-  });
+  _coerceString(payload);
   return parse(payload, _);
 }
 
@@ -164,7 +162,7 @@ function __parseArray(_inst, parse, payload: IParsePayload, _) {
 
 function __parseOptional(_inst, parse, payload: IParsePayload, _) {
   if (isZodType(Metadata.unwrapUntil(_inst), 'ZodString')) {
-    _coerce(payload);
+    _coerceString(payload);
   } else {
     _coerceWithNil(payload);
   }
@@ -184,7 +182,7 @@ function __parseOptional(_inst, parse, payload: IParsePayload, _) {
 
 function __parseDefault(_inst, parse, payload: IParsePayload, _) {
   if (isZodType(Metadata.unwrapUntil(_inst), 'ZodString')) {
-    _coerce(payload);
+    _coerceString(payload);
   } else {
     _coerceWithNil(payload);
   }
@@ -199,9 +197,21 @@ function __parseDefault(_inst, parse, payload: IParsePayload, _) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-function _coerce(payload: IParsePayload, fn?: Function) {
+// function _coerce(payload: IParsePayload, fn?: Function) {
+//   if (!isNil(payload.value)) {
+//     fn?.(payload);
+//   }
+// }
+
+function _coerceString(payload: IParsePayload, fn?: Function) {
   if (!isNil(payload.value)) {
-    fn?.(payload);
+    if (payload.value === '') {
+      payload.value = undefined;
+    } else if (typeof payload.value !== 'string') {
+      payload.value = String(payload.value);
+    } else {
+      fn?.(payload);
+    }
   }
 }
 
