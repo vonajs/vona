@@ -142,12 +142,10 @@ I18n 是由模块 a-i18n 提供的核心能力，可以在 App config 中修改�
 // modules
 config.modules = {
   'a-i18n': {
-    i18n: {
-      defaultLocale: 'en-us',
-      queryField: 'x-vona-locale',
-      headerField: 'x-vona-locale',
-      cookieField: 'locale',
-    },
+    defaultLocale: 'en-us',
+    queryField: 'x-vona-locale',
+    headerField: 'x-vona-locale',
+    cookieField: 'locale',
   },
 };
 ```

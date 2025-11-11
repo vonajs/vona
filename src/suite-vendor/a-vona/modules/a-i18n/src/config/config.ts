@@ -14,14 +14,12 @@ export interface I18nConfig {
 
 export function config(_app: VonaApplication) {
   return {
-    i18n: {
-      defaultLocale: 'en-us',
-      queryField: $customKey('x-vona-locale'),
-      headerField: $customKey('x-vona-locale'),
-      cookieField: 'locale',
-      localeAlias: {},
-      writeCookie: true,
-      cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
-    } as I18nConfig,
-  };
+    defaultLocale: 'en-us',
+    queryField: $customKey('x-vona-locale'),
+    headerField: $customKey('x-vona-locale'),
+    cookieField: 'locale',
+    localeAlias: {},
+    writeCookie: true,
+    cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
+  } as I18nConfig;
 }
