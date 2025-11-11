@@ -359,7 +359,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/techniques/validation/',
           collapsed: true,
           items: [
-            { text: 'Validation', link: 'introduction' },
+            { text: 'Introduction', link: 'introduction' },
             { text: 'Zod Refine', link: 'zod-refine' },
             { text: 'Zod Transform', link: 'zod-transform' },
           ],
@@ -368,6 +368,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           text: 'Swagger/Openapi',
           base: '/guide/techniques/openapi/',
           link: 'introduction',
+        },
+        {
+          text: 'Serialization',
+          base: '/zh/guide/techniques/serialization/',
+          collapsed: true,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+          ],
         },
         {
           text: 'I18n',

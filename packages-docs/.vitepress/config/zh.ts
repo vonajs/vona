@@ -359,7 +359,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/techniques/validation/',
           collapsed: true,
           items: [
-            { text: '参数校验', link: 'introduction' },
+            { text: '介绍', link: 'introduction' },
             { text: 'Zod Refine', link: 'zod-refine' },
             { text: 'Zod Transform', link: 'zod-transform' },
           ],
@@ -368,6 +368,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           text: 'Swagger/Openapi',
           base: '/zh/guide/techniques/openapi/',
           link: 'introduction',
+        },
+        {
+          text: '序列化',
+          base: '/zh/guide/techniques/serialization/',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+          ],
         },
         {
           text: 'I18n国际化',
