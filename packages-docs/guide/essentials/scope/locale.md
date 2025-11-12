@@ -77,7 +77,7 @@ You can use `project-level` language resources to override `module-level` langua
 English: `src/backend/config/locale/en-us.ts`
 
 ```typescript{2-4}
-locales.modules = {
+locale.modules = {
   'home-index': {
     HelloWorld: 'Hello World!!!',
   },  
@@ -87,7 +87,7 @@ locales.modules = {
 Chinese: `src/backend/config/locale/zh-cn.ts`
 
 ```typescript{2-4}
-locales.modules = {
+locale.modules = {
   'home-index': {
     HelloWorld: '您好世界!!!',
   },  

@@ -85,7 +85,7 @@ class ControllerStudent {
 `src/backend/config/locale/en-us.ts`
 
 ```diff
-locales.modules = {
+locale.modules = {
 + 'demo-student': {
 +   StudentName: 'Student Name!',
 + }, 
@@ -97,7 +97,7 @@ locales.modules = {
 `src/backend/config/locale/zh-cn.ts`
 
 ```diff
-locales.modules = {
+locale.modules = {
 + 'demo-student': {
 +   StudentName: '学生名称!',
 + },

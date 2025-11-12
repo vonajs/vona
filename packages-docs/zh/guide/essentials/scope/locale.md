@@ -77,7 +77,7 @@ class ControllerHome {
 英文：`src/backend/config/locale/en-us.ts`
 
 ```typescript{2-4}
-locales.modules = {
+locale.modules = {
   'home-index': {
     HelloWorld: 'Hello World!!!',
   },  
@@ -87,7 +87,7 @@ locales.modules = {
 中文：`src/backend/config/locale/zh-cn.ts`
 
 ```typescript{2-4}
-locales.modules = {
+locale.modules = {
   'home-index': {
     HelloWorld: '您好世界!!!',
   },  
