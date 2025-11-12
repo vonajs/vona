@@ -5,6 +5,10 @@ import { isClass } from '@cabloy/utils';
 import { cast } from 'vona';
 import { $schema } from './schema.ts';
 
+export function $makeSchema(...schemaLikes: SchemaLike[]): z.ZodType {
+  return makeSchemaLikes(schemaLikes, undefined);
+}
+
 export function makeSchemaLikes<T>(schemaLikes: SchemaLike<T> | SchemaLike<T>[], typeInit: any): z.ZodType<T> {
   if (!Array.isArray(schemaLikes)) schemaLikes = [schemaLikes];
   // default schema
