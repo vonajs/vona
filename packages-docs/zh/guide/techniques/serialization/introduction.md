@@ -11,111 +11,142 @@ VonaJS 提供了`序列化`能力，可以对 API 的响应数据进行转换，
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean middleware logger --module=demo-student --boilerplate=global
+$ vona :create:bean serializerTransform upper --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Aspect/Middleware Global`
+右键菜单 - [模块路径]: `Vona Bean/Serializer Transform`
 :::
 
-## 中间件定义
+## SerializerTransform定义
 
 ``` typescript
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
+export type TypeSerializerTransformUpperValue = string;
 
-@Middleware<IMiddlewareOptionsLogger>({ global: true })
-export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
-  async execute(_options: IMiddlewareOptionsLogger, next: Next) {
-    const timeBegin = Date.now();
-    const res = await next();
-    const timeEnd = Date.now();
-    console.log('time: ', timeEnd - timeBegin);
-    return res;
+export type TypeSerializerTransformUpperData = unknown;
+
+export type TypeSerializerTransformUpperResult = TypeSerializerTransformUpperValue;
+
+export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {}
+
+@SerializerTransform<ISerializerTransformOptionsUpper>()
+export class SerializerTransformUpper extends BeanBase {
+  async transform(
+    value: TypeSerializerTransformUpperValue,
+    _data: TypeSerializerTransformUpperData,
+    _options: ISerializerTransformOptionsUpper,
+  ): Promise<TypeSerializerTransformUpperResult> {
+    return value.toUpperCase();
   }
 }
 ```
 
-- `IMiddlewareOptionsLogger`: 定义中间件参数
-- `execute`: 输出执行时长
+- `TypeSerializerTransformUpperValue`: 定义字段类型
+- `TypeSerializerTransformUpperData`: 定义外层 object 对象类型
+- `TypeSerializerTransformUpperResult`: 定义结果类型
+- `transform`: 将字段值转为大写
 
-## 使用中间件
+## 使用SerializerTransform
 
-与局部中间件不同，系统会自动加载全局中间件，并使其生效
+比如学生 API`findOne`方法返回的结果类型是`EntityStudent`。下面将`EntityStudent`的`name`字段转为大写
 
-## 中间件参数
+### 1. 开启序列化
 
-可以为中间件定义参数，通过参数更灵活的配置中间件逻辑
+需要为 API 开启序列化
 
-比如，为 logger 中间件定义`prefix`参数，用于控制输出格式
+``` diff
+class ControllerStudent {
+  @Web.get(':id')
+  @Api.body(v.optional(), v.object(EntityStudent))
++ @Serializer.enable()
+  async findOne(id) {
+    return await this.scope.service.student.findOne(id);
+  }
+}
+```
+
+- `@Serializer.enable`: 开启序列化
+
+### 2. 设置字段
+
+``` diff
+class EntityStudent {
++ @Serializer.transform('demo-student:upper')
+  @Api.field(v.openapi({ title: $locale('Name') }), v.default(''), v.min(3))
+  name: string;
+}
+```
+
+## SerializerTransform参数
+
+可以为 SerializerTransform 定义参数，通过参数更灵活的配置转换逻辑
+
+比如，为 SerializerTransform `upper`定义`first`参数，用于控制是否只将首字母转为大写
 
 ### 1. 定义参数类型
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
-+ prefix: string;
+export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
++ first?: boolean;
 }
 ```
 
 ### 2. 提供参数缺省值
 
 ``` diff
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
-+ prefix: 'time',
+@SerializerTransform<ISerializerTransformOptionsUpper>({
++ first: false,
 })
 ```
 
 ### 3. 使用参数
 
 ``` diff
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
-  prefix: string;
+export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
+  first?: boolean;
 }
 
-@Middleware<IMiddlewareOptionsLogger>({
-  global: true,
-  prefix: 'time',
+@SerializerTransform<ISerializerTransformOptionsUpper>({
+  first: false,
 })
-class MiddlewareLogger {
-  async execute(options: IMiddlewareOptionsLogger, next: Next) {
-    const timeBegin = Date.now();
-    const res = await next();
-    const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);
-+   console.log(`${options.prefix}: `, timeEnd - timeBegin);
-    return res;
+class SerializerTransformUpper {
+  async transform(
+    value: TypeSerializerTransformUpperValue,
+    _data: TypeSerializerTransformUpperData,
+    options: ISerializerTransformOptionsUpper,
+  ): Promise<TypeSerializerTransformUpperResult> {
+-   return value.toUpperCase();
++   return options.first ? toUpperCaseFirstChar(value) : value.toUpperCase();
   }
 }
 ```
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定全局中间件的参数
+可以指定`@Serializer.transform`的参数
 
 ``` diff
-class ControllerStudent {
-  @Web.get()
-+ @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
-  async findMany() {}
+class EntityStudent {
++ @Serializer.transform('demo-student:upper', { first: true })
+  @Api.field(v.openapi({ title: $locale('Name') }), v.default(''), v.min(3))
+  name: string;
 }
 ```
 
-- 在使用中间件时直接提供参数值即可
-
 ### 5. App Config配置
 
-可以在 App Config 中配置中间件参数
+可以在 App Config 中配置 SerializerTransform 参数
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
-    'demo-student:logger': {
-      prefix: 'elapsed',
+  serializerTransform: {
+    'demo-student:upper': {
+      first: true,
     },
   },
 };
@@ -123,4 +154,4 @@ config.onions = {
 
 ### 6. 参数优先级
 
-`使用时指定参数` > `App config配置` > `参数缺省值`
+`使用时指定参数` > `App Config配置` > `参数缺省值`

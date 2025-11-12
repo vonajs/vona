@@ -297,7 +297,7 @@ VonaJS 提供了一组工具函数，为 Swagger/Openapi 实现 I18n 国际化
 
 ### 1. $localeScope
 
-在设置字段 title 信息时，要使用`语言资源Key`。在实际生成 Swagger/Openapi 元数据时，系统会自动将`语言资源Key`翻译为指定的语言
+在设置字段 title 信息时，要使用`语言资源FullKey`。在实际生成 Swagger/Openapi 元数据时，系统会自动将`语言资源FullKey`翻译为指定的语言
 
 ``` diff
 + import { $localeScope } from 'vona';
@@ -309,7 +309,7 @@ class EntityStudent {
 ```
 
 - `v.title`: 设置 title 信息
-- `$localeScope`: 传入`模块名称`和`语言资源Key`，从而生成完整的`语言资源Key`: `demo-student::Name`
+- `$localeScope`: 传入`模块名称`和`语言资源Key`，从而生成`语言资源FullKey`: `demo-student::Name`
 
 ### 2. $locale
 
@@ -324,5 +324,5 @@ class EntityStudent {
 }
 ```
 
-- `$locale`: 传入`语言资源Key`，从而生成完整的`语言资源Key`: `demo-student::Name`
+- `$locale`: 传入`语言资源Key`，从而生成`语言资源FullKey`: `demo-student::Name`
   - 每个模块都提供了$locale 函数，因此，使用本模块的$locale 函数就可以取得模块名称

@@ -1,7 +1,7 @@
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadData } from 'vona-module-a-jwt';
 import type { IAuth, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
-import type { IPassportAdapter, IPassport } from '../types/passport.ts';
+import type { IPassport, IPassportAdapter } from '../types/passport.ts';
 import type { IRole } from '../types/role.ts';
 import type { IUser, IUserNameRecord } from '../types/user.ts';
 import { catchError, isNil } from '@cabloy/utils';
