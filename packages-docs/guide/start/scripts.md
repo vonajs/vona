@@ -46,12 +46,12 @@ Perform type checking
 $ npm run tsc
 ```
 
-## demo playground
+## play
 
-Automatically run the Demo source code file and automatically create it if it does not exist
+Automatically run the Playground source code file and automatically create it if it does not exist
 
 ``` bash
-$ vona demo
+$ vona play
 ```
 
 ## db:reset

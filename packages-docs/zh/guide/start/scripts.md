@@ -46,12 +46,12 @@ $ npm run cov
 $ npm run tsc
 ```
 
-## demo练习场
+## play
 
-自动运行 Demo 源码文件，如果文件不存在则自动创建
+自动运行 Playground 源码文件，如果文件不存在则自动创建
 
 ``` bash
-$ vona demo
+$ vona play
 ```
 
 ## db:reset
