@@ -1,8 +1,8 @@
 import { CliBinBuild } from './bean/cli.bin.build.ts';
 import { CliBinBuildModule } from './bean/cli.bin.buildModule.ts';
 import { CliBinDbReset } from './bean/cli.bin.dbReset.ts';
-import { CliBinDemo } from './bean/cli.bin.demo.ts';
 import { CliBinDev } from './bean/cli.bin.dev.ts';
+import { CliBinPlay } from './bean/cli.bin.play.ts';
 import { CliBinTest } from './bean/cli.bin.test.ts';
 import { CliBinTsc } from './bean/cli.bin.tsc.ts';
 import { CliCreateBean } from './bean/cli.create.bean.ts';
@@ -30,7 +30,7 @@ export const beans = {
   'bin.build': CliBinBuild,
   'bin.buildModule': CliBinBuildModule,
   'bin.dbReset': CliBinDbReset,
-  'bin.demo': CliBinDemo,
+  'bin.play': CliBinPlay,
   'bin.dev': CliBinDev,
   'bin.test': CliBinTest,
   'bin.tsc': CliBinTsc,

@@ -1,9 +1,9 @@
 export default {
-  bean: 'bin.demo',
+  bean: 'bin.play',
   info: {
     version: '5.0.0',
-    title: 'Cli: Bin: Demo',
-    usage: 'vona :bin:demo [index.ts] [--flavor=] [--retainRuntime=]',
+    title: 'Cli: Bin: Play',
+    usage: 'vona :bin:play [index.ts] [--flavor=] [--retainRuntime=]',
   },
   options: {
     mode: {

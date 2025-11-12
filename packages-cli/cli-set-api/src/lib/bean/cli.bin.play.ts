@@ -14,20 +14,20 @@ declare module '@cabloy/cli' {
   }
 }
 
-export class CliBinDemo extends BeanCliBase {
+export class CliBinPlay extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super
     await super.execute();
     const projectPath = argv.projectPath;
     // test
-    await this._demo(projectPath);
+    await this._play(projectPath);
   }
 
-  async _demo(projectPath: string) {
+  async _play(projectPath: string) {
     const { argv } = this.context;
     const mode: VonaMetaMode = argv.mode || 'dev';
-    const flavor: VonaMetaFlavor = argv.flavor || 'demo';
+    const flavor: VonaMetaFlavor = argv.flavor || 'play';
     const configMeta: VonaConfigMeta = { flavor, mode };
     if (!argv.retainRuntime || !fse.existsSync(path.join(projectPath, '.vona'))) {
       const configOptions: VonaBinConfigOptions = {
@@ -42,15 +42,15 @@ export class CliBinDemo extends BeanCliBase {
 
   async _run(projectPath: string) {
     // testFile
-    let testFile = path.join(import.meta.dirname, './toolsBin/demo.ts');
+    let testFile = path.join(import.meta.dirname, './toolsBin/play.ts');
     if (!fse.existsSync(testFile)) {
-      testFile = path.join(import.meta.dirname, './toolsBin/demo.js');
+      testFile = path.join(import.meta.dirname, './toolsBin/play.js');
     }
     // run
     let args: string[] = [];
     args = args.concat([getImportEsm(), testFile, projectPath]);
     // args = args.concat(['--experimental-transform-types', getImportEsm(), testFile, projectPath]);
-    const pos = process.argv.indexOf(':bin:demo');
+    const pos = process.argv.indexOf(':bin:play');
     if (pos > -1) {
       args = args.concat(process.argv.slice(pos + 1));
     }

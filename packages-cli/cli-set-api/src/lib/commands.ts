@@ -1,8 +1,8 @@
 import binBuild from './command/bin.build.ts';
 import binBuildModule from './command/bin.buildModule.ts';
 import binDbReset from './command/bin.dbReset.ts';
-import binDemo from './command/bin.demo.ts';
 import binDev from './command/bin.dev.ts';
+import binPlay from './command/bin.play.ts';
 import binTest from './command/bin.test.ts';
 import binTsc from './command/bin.tsc.ts';
 import createBean from './command/create.bean.ts';
@@ -33,8 +33,8 @@ export const commands = {
     build: binBuild,
     buildModule: binBuildModule,
     dbReset: binDbReset,
-    demo: binDemo,
     dev: binDev,
+    play: binPlay,
     test: binTest,
     tsc: binTsc,
   },

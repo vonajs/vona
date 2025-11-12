@@ -45,7 +45,7 @@ src/backend/typing/mine.d.ts
 !/docker-compose/output/app/vona/.gitkeep
 !/docker-compose/output/app/dist/.gitkeep
 
-/src/backend/demo
+/src/backend/play
 /src/backend/app
 /src/backend/logs
 /src/backend/run

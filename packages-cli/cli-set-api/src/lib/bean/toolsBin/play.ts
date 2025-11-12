@@ -24,19 +24,19 @@ if (argv._[0]?.endsWith('.ts')) {
   mainFile = 'index.ts';
 }
 
-await demoRun(projectPath);
+await playRun(projectPath);
 
-async function demoRun(projectPath: string) {
+async function playRun(projectPath: string) {
   // create
   const app = await createGeneralApp(projectPath);
-  // demo
-  const demoFile = path.join(projectPath, `src/backend/demo/${mainFile}`);
-  if (!fse.existsSync(demoFile)) {
-    await fse.outputFile(demoFile, __template);
+  // play
+  const playFile = path.join(projectPath, `src/backend/play/${mainFile}`);
+  if (!fse.existsSync(playFile)) {
+    await fse.outputFile(playFile, __template);
   }
   // run
-  const demoInstance = await import(pathToHref(demoFile));
-  await demoInstance.main(app, argv);
+  const playInstance = await import(pathToHref(playFile));
+  await playInstance.main(app, argv);
   // close
   await app.close();
   // handles
