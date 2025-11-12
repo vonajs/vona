@@ -76,24 +76,20 @@ class ControllerHome {
 
 英文：`src/backend/config/locale/en-us.ts`
 
-```typescript{3-5}
-export default {
-  modules: {
-    'home-index': {
-      HelloWorld: 'Hello World!!!',
-    },
-  },
+```typescript{2-4}
+locales.modules = {
+  'home-index': {
+    HelloWorld: 'Hello World!!!',
+  },  
 };
 ```
 
 中文：`src/backend/config/locale/zh-cn.ts`
 
-```typescript{3-5}
-export default {
-  modules: {
-    'home-index': {
-      HelloWorld: '您好世界!!!',
-    },
-  },
+```typescript{2-4}
+locales.modules = {
+  'home-index': {
+    HelloWorld: '您好世界!!!',
+  },  
 };
 ```

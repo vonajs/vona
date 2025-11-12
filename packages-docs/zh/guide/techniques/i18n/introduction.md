@@ -85,12 +85,10 @@ class ControllerStudent {
 `src/backend/config/locale/en-us.ts`
 
 ```diff
-export default {
-  modules: {
-+   'demo-student': {
-+     StudentName: 'Student Name!',
-+   },
-  },
+locales.modules = {
++ 'demo-student': {
++   StudentName: 'Student Name!',
++ }, 
 };
 ```
 
@@ -99,12 +97,10 @@ export default {
 `src/backend/config/locale/zh-cn.ts`
 
 ```diff
-export default {
-  modules: {
-+   'demo-student': {
-+     StudentName: '学生名称!',
-+   },
-  },
+locales.modules = {
++ 'demo-student': {
++   StudentName: '学生名称!',
++ },
 };
 ```
 
