@@ -1,5 +1,6 @@
 import type { VonaLocaleOptional } from 'vona';
 
-export default {
-  modules: {},
-} as VonaLocaleOptional;
+const locales: VonaLocaleOptional = {};
+locales.modules = {};
+
+export default locales;
