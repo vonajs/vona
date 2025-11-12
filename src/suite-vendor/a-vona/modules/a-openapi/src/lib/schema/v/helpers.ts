@@ -109,9 +109,9 @@ export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
   };
 }
 
-export function schemaSerializerExclude() {
+export function schemaSerializerExclude(exclude: boolean = true) {
   return function (schema: z.ZodType): z.ZodType {
-    return schema.openapi({ exclude: true });
+    return schema.openapi({ exclude });
   };
 }
 

@@ -8,9 +8,9 @@ function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });
 }
 
-function Exclude(): PropertyDecorator {
+function Exclude(exclude: boolean = true): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
-    const metadata: TypeOpenapiMetadata = { exclude: true };
+    const metadata: TypeOpenapiMetadata = { exclude };
     mergeFieldOpenapiMetadata(target, prop as string, metadata);
   };
 }

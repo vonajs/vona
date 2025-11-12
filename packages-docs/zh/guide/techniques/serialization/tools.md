@@ -47,7 +47,7 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-* 直接修改 Openapi 参数
+* 方法 1: 直接修改 Openapi 参数
 
 ``` typescript
 // onions
@@ -62,9 +62,11 @@ config.onions = {
 };
 ```
 
-* 构造一个新的 schema
+* 方法 2: 构造一个新的 schema
 
 ``` typescript
+import { $makeSchema, v } from 'vona-module-a-openapi';
+
 // onions
 config.onions = {
   entity: {
