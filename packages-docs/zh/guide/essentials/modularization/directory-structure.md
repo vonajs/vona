@@ -48,5 +48,5 @@ Vona 对模块/套件进行了规划，方便我们在约定的目录立即开�
 | env                                  | [Env](../../env-config/env/introduction.md)                                                          |
 | src/backend/config/config              | [Config](../../env-config/config/introduction.md)                                                    |
 | src/backend/config/locales.ts          | [I18n国际化](../scope/locale.md)                                                                     |
-| src/backend/demo          | [Demo练习场](../../start/demo.md)                                                                    |
+| src/backend/play          | [练习场](../../start/play.md)                               |
 | src/backend/typing         | 项目级别的类型定义                                                                    |

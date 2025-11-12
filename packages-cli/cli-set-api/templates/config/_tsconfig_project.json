@@ -3,7 +3,7 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": [".vona/**/*.ts", "src/backend/package.json", "src/backend/config", "src/backend/demo", "src/backend/typing"],
+  "include": [".vona/**/*.ts", "src/backend/package.json", "src/backend/config", "src/backend/play", "src/backend/typing"],
   "exclude": [],
   "ts-node": {
     "swc": true

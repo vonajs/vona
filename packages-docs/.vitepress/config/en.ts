@@ -45,7 +45,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },
-        { text: 'Demo Playground', link: 'start/demo' },
+        { text: 'Playground', link: 'start/play' },
         { text: 'Update', link: 'start/update' },
         { text: 'Test Module', link: 'start/test-vona' },
       ],

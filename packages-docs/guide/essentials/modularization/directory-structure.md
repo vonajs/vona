@@ -48,5 +48,5 @@ Vona has planned the modules/suites so that we can start business development im
 | env                                  | [Env](../../env-config/env/introduction.md)                                                                   |
 | src/front/config/config              | [Config](../../env-config/config/introduction.md)                                                             |
 | src/front/config/locales.ts          | [I18n](../scope/locale.md)                                                                                    |
-| src/backend/demo          | [Demo playground](../../start/demo.md)                                                                    |
-| src/backend/typing         | Project-level type definitions                                                                    |
+| src/backend/play  | [Playground](../../start/play.md)                              |
+| src/backend/typing         | Project-level type definitions                                       |
