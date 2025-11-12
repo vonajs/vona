@@ -18,7 +18,7 @@ Vona 使用[dotenv](https://github.com/motdotla/dotenv)从`env`目录中加载�
 | 名称    | 类型        |
 | ------- | --------------- |
 | mode    | 'test' \|'dev' \| 'prod'    |
-| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
+| flavor  | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
 
 ## npm scripts
 

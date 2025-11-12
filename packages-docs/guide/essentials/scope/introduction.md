@@ -55,7 +55,7 @@ class ControllerHome extends BeanBase {
 
 If you do not inherit from the base class `BeanBase`, `this.scope` and `this.$scope` cannot be used. Instead, you can use the general method:
 
-`src/backend/demo/index.ts`
+`src/backend/play/index.ts`
 
 ``` diff 
 export async function main(app: VonaApplication, _argv: IArgv) {

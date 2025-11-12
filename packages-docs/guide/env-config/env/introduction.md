@@ -18,7 +18,7 @@ Vona uses [dotenv](https://github.com/motdotla/dotenv) to load environment varia
 | Name    | Description  |
 | ------- | ---------- |
 | mode    | 'test' \|'dev' \| 'prod' |
-| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
+| flavor  | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
 
 ## npm scripts
 

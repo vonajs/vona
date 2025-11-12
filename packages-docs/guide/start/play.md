@@ -1,20 +1,20 @@
-# Demo Playground
+# Playground
 
-Vona provides a Demo Playground, which allows us to test the code and verify the ideas very conveniently and quickly
+Vona provides a Playground, which allows us to test the code and verify the ideas very conveniently and quickly
 
 ## Steps
 
-### 1. Create a new demo file
+### 1. Create a new play file
 
-We need to create a new source code file: `src/backend/demo/index.ts`. Currently, we do not need to create this file manually, but execute the following command to automatically create the file:
+We need to create a new source code file: `src/backend/play/index.ts`. Currently, we do not need to create this file manually, but execute the following command to automatically create the file:
 
 ``` bash
-$ vona demo
+$ vona play
 ```
 
 ### 2. Write test code
 
-In the file `demo/index.ts`, we write the test code:
+In the file `play/index.ts`, we write the test code:
 
 ``` typescript{2}
 export async function main(app: VonaApplication, _argv: IArgv) {
@@ -22,10 +22,10 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 }
 ```
 
-### 3. Execute demo file
+### 3. Execute play file
 
 ``` bash
-$ vona demo
+$ vona play
 ```
 
 ## Example

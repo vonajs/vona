@@ -18,7 +18,7 @@ config.[meta].mine.ts    # 只在指定条件下加载，但会被 git 忽略
 | 名称    | 类型        |
 | ------- | --------------- |
 | mode    | 'test' \|'dev' \| 'prod'    |
-| flavor  | 'normal' \|'demo' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
+| flavor  | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
 
 ## npm scripts
 

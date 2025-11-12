@@ -55,7 +55,7 @@ class ControllerHome extends BeanBase {
 
 如果没有继承自基类`BeanBase`，无法使用`this.scope`和`this.$scope`，则可以使用一般方法：
 
-`src/backend/demo/index.ts`
+`src/backend/play/index.ts`
 
 ``` diff 
 export async function main(app: VonaApplication, _argv: IArgv) {

@@ -71,7 +71,7 @@ app.meta.isProd
 |名称|说明|
 |--|--|
 |normal|默认的Flavor|
-|demo|用于[Demo练习场](../../start/demo.md)|
+|play|用于[练习场](../../start/play.md)|
 |docker|用于Docker环境|
 |ci|用于CI环境，比如Github Actions|
 
