@@ -8,7 +8,7 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions {}
 
 @Entity<IEntityOptionsProduct>('testVonaProduct', { independent: true })
 export class EntityProduct extends EntityBase {
-  @Api.field(v.openapi({ title: $locale('Name') }))
+  @Api.field(v.title($locale('Name')))
   name: string;
 
   @Api.field(v.title($locale('Price')))

@@ -41,10 +41,10 @@ The usage of `@Api.field` in `Dto` is the same as that of `Entity`
 
 ``` typescript
 class DtoStudentCreate {
-  @Api.field(v.openapi({ title: $locale('Name') }), v.min(3))
+  @Api.field(v.title($locale('Name')), v.min(3))
   name: string;
 
-  @Api.field(v.openapi({ title: $locale('Description') }), v.optional())
+  @Api.field(v.title($locale('Description')), v.optional())
   description?: string;
 }
 ```

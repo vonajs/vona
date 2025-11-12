@@ -40,10 +40,10 @@ Dto 中`@Api.field`的使用方式与 Entity 一致
 
 ``` typescript
 class DtoStudentCreate {
-  @Api.field(v.openapi({ title: $locale('Name') }), v.min(3))
+  @Api.field(v.title($locale('Name')), v.min(3))
   name: string;
 
-  @Api.field(v.openapi({ title: $locale('Description') }), v.optional())
+  @Api.field(v.title($locale('Description')), v.optional())
   description?: string;
 }
 ```

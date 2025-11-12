@@ -375,6 +375,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
+            { text: 'Tools', link: 'tools' },
           ],
         },
         {

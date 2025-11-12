@@ -74,7 +74,7 @@ class ControllerStudent {
 ``` diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper')
-  @Api.field(v.openapi({ title: $locale('Name') }), v.default(''), v.min(3))
+  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
   name: string;
 }
 ```
@@ -130,7 +130,7 @@ class SerializerTransformUpper {
 ``` diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper', { first: true })
-  @Api.field(v.openapi({ title: $locale('Name') }), v.default(''), v.min(3))
+  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
   name: string;
 }
 ```

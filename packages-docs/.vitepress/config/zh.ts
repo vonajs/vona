@@ -375,6 +375,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: '介绍', link: 'introduction' },
+            { text: '工具函数', link: 'tools' },
           ],
         },
         {
