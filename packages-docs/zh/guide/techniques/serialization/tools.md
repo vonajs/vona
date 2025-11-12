@@ -146,3 +146,81 @@ config.onions = {
 };
 ```
 
+
+## @Serializer.sensitive/v.serializerSensitive
+
+比如，将`EntityStudent`中的`name`字段值进行脱敏处理
+
+比如，name 原始值为`tom`，脱敏之后为`t***m`
+
+### 1. @Serializer.sensitive
+
+``` diff
+class EntityStudent {
++ @Serializer.sensitive({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' })
+  @Api.field(v.title($locale('Name')))
+  name: string;
+}
+```
+
+### 2. v.serializerSensitive
+
+``` diff
+class EntityStudent {
+  @Api.field(
++   v.serializerSensitive({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
+    v.title($locale('Name')),
+  )
+  name: string;
+}
+```
+
+### 3. App Config
+
+可以在 App Config 中修改配置
+
+`src/backend/config/config/config.ts`
+
+* 方法 1: 直接修改 Openapi 参数
+
+``` typescript
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: {
+          serializerTransforms: {
+            'a-serialization:sensitive': {
+              patternFrom: /(\w)(\w+)(\w)/,
+              patternTo: '$1***$3',
+            },
+          },
+        },
+      },
+    },
+  },
+};
+```
+
+- `a-serialization:sensitive`: `a-serialization`模块提供的 SerializerTransform
+
+* 方法 2: 构造一个新的 schema
+
+``` typescript
+import { $makeSchema, v } from 'vona-module-a-openapi';
+
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: $makeSchema(
+          v.serializerSensitive({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
+          z.string(),
+        ),
+      },
+    },
+  },
+};
+```
