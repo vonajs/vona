@@ -1,4 +1,4 @@
-import type { ISerializerTransformOptionsExclude, ISerializerTransformRecord, TypeSerializerTransformGetter } from 'vona-module-a-serialization';
+import type { ISerializerTransformOptionsExclude, ISerializerTransformOptionsGetter, ISerializerTransformRecord, TypeSerializerTransformGetter } from 'vona-module-a-serialization';
 import type z from 'zod';
 
 export function schemaSerializerTransform<T extends keyof ISerializerTransformRecord>(
@@ -44,11 +44,19 @@ export function schemaSerializerSensitive(
   };
 }
 
-export function schemaSerializerGetter(getter: TypeSerializerTransformGetter) {
+export function schemaSerializerGetter(options: Partial<ISerializerTransformOptionsGetter>);
+export function schemaSerializerGetter(getter: TypeSerializerTransformGetter);
+export function schemaSerializerGetter(param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>) {
+  let options;
+  if (typeof param === 'function') {
+    options = { getter: param };
+  } else {
+    options = param;
+  }
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       serializerTransforms: {
-        'a-serialization:getter': { getter },
+        'a-serialization:getter': options,
       },
     });
   };
