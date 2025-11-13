@@ -8,7 +8,7 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 |--|--|--|
 |@Serializer.exclude|v.serializerExclude|排除字段|
 |@Serializer.transform|v.serializerTransform|使用[SerializerTransform](./introduction.md)|
-|@Serializer.sensitive|v.serializerSensitive|对字段值进行脱敏处理|
+|@Serializer.replace|v.serializerReplace|对字段值进行脱敏处理|
 |@Serializer.getter|v.serializerGetter|采用getter机制生成新的字段值|
 |@Serializer.custom|v.serializerCustom|使用自定义函数对字段值进行处理|
 
@@ -148,28 +148,28 @@ config.onions = {
 ```
 
 
-## @Serializer.sensitive/v.serializerSensitive
+## @Serializer.replace/v.serializerReplace
 
 比如，将`EntityStudent`中的`name`字段值进行脱敏处理
 
 比如，name 原始值为`tom`，脱敏之后为`t***m`
 
-### 1. @Serializer.sensitive
+### 1. @Serializer.replace
 
 ``` diff
 class EntityStudent {
-+ @Serializer.sensitive({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' })
++ @Serializer.replace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' })
   @Api.field(v.title($locale('Name')))
   name: string;
 }
 ```
 
-### 2. v.serializerSensitive
+### 2. v.serializerReplace
 
 ``` diff
 class EntityStudent {
   @Api.field(
-+   v.serializerSensitive({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
++   v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
     v.title($locale('Name')),
   )
   name: string;
@@ -192,7 +192,7 @@ config.onions = {
       fields: {
         name: {
           serializerTransforms: {
-            'a-serialization:sensitive': {
+            'a-serialization:replace': {
               patternFrom: /(\w)(\w+)(\w)/,
               patternTo: '$1***$3',
             },
@@ -204,7 +204,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:sensitive`: `a-serialization`模块提供的 SerializerTransform
+- `a-serialization:replace`: `a-serialization`模块提供的 SerializerTransform
 
 * 方法 2: 构造一个新的 schema
 
@@ -217,7 +217,7 @@ config.onions = {
     'demo-student:student': {
       fields: {
         name: $makeSchema(
-          v.serializerSensitive({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
+          v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
           z.string(),
         ),
       },

@@ -19,7 +19,7 @@ export class DtoSerializerSimple {
   email: string;
 
   @Serializer.transform(
-    'a-serialization:sensitive',
+    'a-serialization:replace',
     {
       // eslint-disable-next-line
       patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
@@ -29,7 +29,7 @@ export class DtoSerializerSimple {
   @Api.field(v.email())
   email2: string;
 
-  @Serializer.sensitive({
+  @Serializer.replace({
     // eslint-disable-next-line
     patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
     patternTo: '$1****$3$4',
@@ -43,7 +43,7 @@ export class DtoSerializerSimple {
   @Api.field(
     v.openapi({
       serializerTransforms: {
-        'a-serialization:sensitive': {
+        'a-serialization:replace': {
           // eslint-disable-next-line
           patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
           patternTo: '$1****$3$4',
@@ -55,7 +55,7 @@ export class DtoSerializerSimple {
   email5: string;
 
   @Api.field(
-    v.serializerTransform('a-serialization:sensitive', {
+    v.serializerTransform('a-serialization:replace', {
       // eslint-disable-next-line
       patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
       patternTo: '$1****$3$4',
@@ -65,7 +65,7 @@ export class DtoSerializerSimple {
   email6: string;
 
   @Api.field(
-    v.serializerSensitive({
+    v.serializerReplace({
       // eslint-disable-next-line
       patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
       patternTo: '$1****$3$4',

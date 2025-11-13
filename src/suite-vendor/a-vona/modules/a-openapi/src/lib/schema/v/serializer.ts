@@ -32,13 +32,13 @@ export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTra
   };
 }
 
-export function schemaSerializerSensitive(
-  options: ISerializerTransformRecord['a-serialization:sensitive'],
+export function schemaSerializerReplace(
+  options: ISerializerTransformRecord['a-serialization:replace'],
 ) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       serializerTransforms: {
-        'a-serialization:sensitive': options,
+        'a-serialization:replace': options,
       },
     });
   };

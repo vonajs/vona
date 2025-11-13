@@ -54,11 +54,11 @@ declare module 'vona' {
 export * from '../bean/serializerTransform.custom.ts';
 export * from '../bean/serializerTransform.exclude.ts';
 export * from '../bean/serializerTransform.getter.ts';
-export * from '../bean/serializerTransform.sensitive.ts';
+export * from '../bean/serializerTransform.replace.ts';
 import type { ISerializerTransformOptionsCustom } from '../bean/serializerTransform.custom.ts';
 import type { ISerializerTransformOptionsExclude } from '../bean/serializerTransform.exclude.ts';
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
-import type { ISerializerTransformOptionsSensitive } from '../bean/serializerTransform.sensitive.ts';
+import type { ISerializerTransformOptionsReplace } from '../bean/serializerTransform.replace.ts';
 import 'vona-module-a-serialization';
 declare module 'vona-module-a-serialization' {
   
@@ -66,7 +66,7 @@ declare module 'vona-module-a-serialization' {
       'a-serialization:custom': ISerializerTransformOptionsCustom;
 'a-serialization:exclude': ISerializerTransformOptionsExclude;
 'a-serialization:getter': ISerializerTransformOptionsGetter;
-'a-serialization:sensitive': ISerializerTransformOptionsSensitive;
+'a-serialization:replace': ISerializerTransformOptionsReplace;
     }
 
   
@@ -106,15 +106,15 @@ declare module 'vona-module-a-serialization' {
             get $onionOptions(): ISerializerTransformOptionsGetter;
           }
 
-        export interface SerializerTransformSensitive {
+        export interface SerializerTransformReplace {
           /** @internal */
           get scope(): ScopeModuleASerialization;
         }
 
-          export interface SerializerTransformSensitive {
-            get $beanFullName(): 'a-serialization.serializerTransform.sensitive';
-            get $onionName(): 'a-serialization:sensitive';
-            get $onionOptions(): ISerializerTransformOptionsSensitive;
+          export interface SerializerTransformReplace {
+            get $beanFullName(): 'a-serialization.serializerTransform.replace';
+            get $onionName(): 'a-serialization:replace';
+            get $onionOptions(): ISerializerTransformOptionsReplace;
           } 
 }
 /** serializerTransform: end */

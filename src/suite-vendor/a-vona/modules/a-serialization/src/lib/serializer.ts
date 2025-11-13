@@ -44,13 +44,13 @@ function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>):
   };
 }
 
-function Sensitive(
-  options: ISerializerTransformRecord['a-serialization:sensitive'],
+function Replace(
+  options: ISerializerTransformRecord['a-serialization:replace'],
 ): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
     const metadata: TypeOpenapiMetadata = {
       serializerTransforms: {
-        'a-serialization:sensitive': options,
+        'a-serialization:replace': options,
       },
     };
     mergeFieldOpenapiMetadata(target, prop as string, metadata);
@@ -99,7 +99,7 @@ export const Serializer = {
   enable: Enable,
   exclude: Exclude,
   transform: Transform,
-  sensitive: Sensitive,
+  replace: Replace,
   getter: Getter,
   custom: Custom,
 };
