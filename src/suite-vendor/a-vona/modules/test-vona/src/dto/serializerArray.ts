@@ -7,7 +7,7 @@ export interface IDtoOptionsSerializerArray extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsSerializerArray>()
 export class DtoSerializerArray {
-  @Api.field(v.serializerGetter((value: DtoSerializerSimple[], _data: DtoSerializerArray) => {
+  @Api.field(v.serializerGetter((_data: DtoSerializerArray, value: DtoSerializerSimple[]) => {
     return value.map(item => {
       return {
         ...item,
@@ -17,7 +17,7 @@ export class DtoSerializerArray {
   }), v.title('Simple'), v.array(DtoSerializerSimple))
   simples: DtoSerializerSimple[];
 
-  @Api.field(v.serializerGetter((value: DtoSerializerSimple[], _data: DtoSerializerArray) => {
+  @Api.field(v.serializerGetter((_data: DtoSerializerArray, value: DtoSerializerSimple[]) => {
     return value.map(item => {
       return {
         ...item,
