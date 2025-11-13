@@ -147,7 +147,6 @@ config.onions = {
 };
 ```
 
-
 ## @Serializer.replace/v.serializerReplace
 
 比如，将`EntityStudent`中的`name`字段值进行脱敏处理
@@ -220,6 +219,100 @@ config.onions = {
           v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
           z.string(),
         ),
+      },
+    },
+  },
+};
+```
+
+## @Serializer.getter/v.serializerGetter
+
+比如，`EntityStudent`中的`fullName`字段由`firstName`和`lastName`字段组合而成
+
+### 1. getter
+
+``` diff
+class EntityStudent {
+  @Api.field()
+  firstName: string;
+
+  @Api.field()
+  lastName: string;
+
+  @Api.field()
++ get fullName(): string | undefined {
++   return `${this.firstName} ${this.lastName}`;
++ }
+}
+```
+
+### 2. @Serializer.getter
+
+``` diff
+class EntityStudent {
++ @Serializer.getter((data: EntityStudent) => {
++   return `${data.firstName} ${data.lastName}`;
++ })
+  @Api.field()
+  fullName: string;
+}
+```
+
+### 3. v.serializerGetter
+
+``` diff
+class EntityStudent {
++ @Api.field(v.serializerGetter((data: EntityStudent) => {
++   return `${data.firstName} ${data.lastName}`;
++ }))
+  fullName: string;
+}
+```
+
+### 4. App Config
+
+可以在 App Config 中修改配置
+
+`src/backend/config/config/config.ts`
+
+* 方法 1: 直接修改 Openapi 参数
+
+``` typescript
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        fullName: {
+          serializerTransforms: {
+            'a-serialization:getter': {
+              getter: (data: EntityStudent) => {
+                return `${data.firstName} ${data.lastName}`;
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+```
+
+- `a-serialization:getter`: `a-serialization`模块提供的 SerializerTransform
+
+* 方法 2: 构造一个新的 schema
+
+``` typescript
+import { $makeSchema, v } from 'vona-module-a-openapi';
+
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        fullName: $makeSchema(v.serializerGetter((data: EntityStudent) => {
+          return `${data.firstName} ${data.lastName}`;
+        }), z.string()),
       },
     },
   },
