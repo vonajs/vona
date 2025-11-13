@@ -4,33 +4,43 @@
 
 ## 创建Event Listener
 
-比如，在模块 demo-student 中创建一个 Event: `echo`，触发事件时传入事件参数`Hello World`
+比如，在模块 demo-student 中创建一个 Event Listener: `echo`，在响应事件时，将事件参数`Hello World`添加`!`后缀，并将新参数传入`next`方法
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean event echo --module=demo-student
+$ vona :create:bean eventListener echo --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Bean/Event`
+右键菜单 - [模块路径]: `Vona Bean/Event Listener`
 :::
 
 ## Event定义
 
+* 自动生成的代码骨架
+
 ``` typescript
-export type TypeEventEchoData = string;
+type TypeEventData = unknown; // TypeEventEchoData;
+type TypeEventResult = unknown; // TypeEventEchoResult;
 
-export type TypeEventEchoResult = string | undefined;
-
-@Event()
-export class EventEcho extends BeanEventBase<
-  TypeEventEchoData,
-  TypeEventEchoResult
-> {}
+@EventListener({ match: 'some-module:echo' })
+export class EventListenerEcho
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult> {
+  async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+    // next
+    return next();
+  }
+}
 ```
 
-- `TypeEventEchoData`: 定义参数类型
-- `TypeEventEchoResult`: 定义结果类型
+- `TypeEventData`: 定义参数类型
+- `TypeEventResult`: 定义结果类型
+- `match`: 指定监听哪个事件
+
+* 调整代码
+
+
