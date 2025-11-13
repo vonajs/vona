@@ -24,6 +24,7 @@ export class SerializerTransformCustom extends BeanBase
     data: TypeSerializerTransformCustomData,
     options: ISerializerTransformOptionsCustom,
   ): Promise<TypeSerializerTransformCustomResult> {
+    if (!options.custom) return value;
     return options.custom.call(this.ctx, value, data, options);
   }
 }

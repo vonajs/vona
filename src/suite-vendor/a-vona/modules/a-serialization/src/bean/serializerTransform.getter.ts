@@ -25,6 +25,7 @@ export class SerializerTransformGetter extends BeanBase
     options: ISerializerTransformOptionsGetter,
   ): Promise<TypeSerializerTransformGetterResult> {
     const getter = options.getter;
+    if (!getter) return value;
     if (getter.name.startsWith('get ')) {
       return getter.call(data as any, data, value);
     } else {

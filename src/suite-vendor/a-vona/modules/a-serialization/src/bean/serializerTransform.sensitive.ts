@@ -25,6 +25,7 @@ export class SerializerTransformSensitive extends BeanBase
     _data: TypeSerializerTransformSensitiveData,
     options: ISerializerTransformOptionsSensitive,
   ): Promise<TypeSerializerTransformSensitiveResult> {
-    return value?.replace(options.patternFrom, options.patternTo);
+    if (!value) return value;
+    return value.replace(options.patternFrom, options.patternTo);
   }
 }
