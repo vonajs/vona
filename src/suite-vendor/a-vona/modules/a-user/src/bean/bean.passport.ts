@@ -32,12 +32,12 @@ export class BeanPassport extends BeanBase {
   }
 
   public get isAuthenticated(): boolean {
-    const user = this.getCurrentUser();
+    const user = this.currentUser;
     return !!user && !user.anonymous;
   }
 
   public get isActivated(): boolean {
-    const user = this.getCurrentUser();
+    const user = this.currentUser;
     return !!user && !!user.activated;
   }
 
@@ -54,15 +54,15 @@ export class BeanPassport extends BeanBase {
     return this.ctx.state.passport;
   }
 
-  public getCurrentUser(): IUser | undefined {
+  public get currentUser(): IUser | undefined {
     return this.ctx.state.passport?.user;
   }
 
-  public getCurrentAuth(): IAuth | undefined {
+  public get currentAuth(): IAuth | undefined {
     return this.ctx.state.passport?.auth;
   }
 
-  public getCurrentRoles(): IRole[] | undefined {
+  public get currentRoles(): IRole[] | undefined {
     return this.ctx.state.passport?.roles;
   }
 

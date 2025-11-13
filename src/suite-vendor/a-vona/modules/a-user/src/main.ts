@@ -8,7 +8,7 @@ export class Main extends BeanSimple implements IModuleMain {
     Object.defineProperty(this.app.context, 'user', {
       enumerable: false,
       get(this: VonaContext) {
-        return this.app.bean.passport.getCurrentUser();
+        return this.app.bean.passport.currentUser;
       },
     });
     // passport

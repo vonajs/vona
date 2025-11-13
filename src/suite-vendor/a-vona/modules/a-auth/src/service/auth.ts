@@ -133,7 +133,7 @@ export class ServiceAuth extends BeanBase {
     if (accessToken) {
       await this.bean.passport.checkAuthToken(accessToken, 'oauth');
     }
-    const userCurrent = this.bean.passport.getCurrentUser();
+    const userCurrent = this.bean.passport.currentUser;
     if (!userCurrent) return this.app.throw(401);
     return userCurrent;
   }

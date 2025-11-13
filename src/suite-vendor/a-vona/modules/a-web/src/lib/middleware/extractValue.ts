@@ -24,7 +24,7 @@ export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgument
     },
     ip: () => req.ip,
     rawBody: () => req.rawBody,
-    user: () => ctx.app.bean.passport.getCurrentUser(),
+    user: () => ctx.app.bean.passport.currentUser,
     fields: () => {
       const uploadValue: IUploadValue = ctx[SymbolUploadValue];
       if (!uploadValue) throw new Error('should use interceptor: a-upload:upload');

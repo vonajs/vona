@@ -28,7 +28,7 @@ export class GuardUserName extends BeanBase implements IGuardExecute {
 
   private async _check(options: IGuardOptionsUserName) {
     if (!options.name) return false;
-    const user = this.bean.passport.getCurrentUser();
+    const user = this.bean.passport.currentUser;
     if (!user || user.anonymous) return false;
     const userName = user.name as keyof IUserNameRecord;
     const optionsName = Array.isArray(options.name) ? options.name : [options.name];
