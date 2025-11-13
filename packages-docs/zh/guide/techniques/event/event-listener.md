@@ -68,4 +68,23 @@ export class EventListenerEcho
   - `next`:类型改为`NextEventSync`
 - `dataNew`: 生成新的事件参数值，并传入`next`方法
 
+## 查看事件监听器清单
 
+可以直接输出某个事件的事件监听器清单
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   this.bean.onion.eventListener.inspectEventListener('demo-student:echo');
+  }
+}
+```
+
+- `this.bean.onion`: 取得全局 Service 实例 `onion`
+- `.eventListener`: 取得与 Event Listener 相关的 Service 实例
+- `.inspectEventListener`: 输出某个事件的事件监听器清单，传入事件名`demo-student:echo`
+
+当访问`test` API 时，会自动在控制台输出事件监听器清单，效果如下：
+
+![](../../../assets/img/event/eventListener-1.png)

@@ -4,6 +4,7 @@ import type {
   Next,
   VonaContext,
 } from 'vona';
+import type { IEventRecord } from 'vona-module-a-event';
 import type { IMetaNameRecord } from 'vona-module-a-meta';
 import type {
   IOnionExecuteCustom,
@@ -336,6 +337,13 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
 
   public inspect(selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
     const onionSlices = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
+    const onionNames = onionSlices.map(item => item.name);
+    this.$logger.silly(JSON.stringify(onionSlices, null, 2));
+    this.$logger.silly(JSON.stringify(onionNames, null, 2));
+  }
+
+  public inspectEventListener(eventName: keyof IEventRecord) {
+    const onionSlices = this.getOnionsEnabled(eventName);
     const onionNames = onionSlices.map(item => item.name);
     this.$logger.silly(JSON.stringify(onionSlices, null, 2));
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
