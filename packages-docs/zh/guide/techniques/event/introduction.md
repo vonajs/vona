@@ -2,6 +2,8 @@
 
 VonaJS 提供了事件机制，由`事件`和`事件监听器`组成
 
+一个`事件`可以有多个`事件监听器`，这些`事件监听器`在执行时采用洋葱模型
+
 ## 创建Event
 
 比如，在模块 demo-student 中创建一个 Event: `echo`，触发事件时传入事件参数`Hello World`
@@ -23,7 +25,7 @@ $ vona :create:bean event echo --module=demo-student
 ``` typescript
 export type TypeEventEchoData = string;
 
-export type TypeEventEchoResult = boolean;
+export type TypeEventEchoResult = string | undefined;
 
 @Event()
 export class EventEcho extends BeanEventBase<
@@ -35,33 +37,38 @@ export class EventEcho extends BeanEventBase<
 - `TypeEventEchoData`: 定义参数类型
 - `TypeEventEchoResult`: 定义结果类型
 
-## 触发事件 使用SerializerTransform
+## 触发异步事件: emit
 
-比如学生 API`findOne`方法返回的结果类型是`EntityStudent`。下面将`EntityStudent`的`name`字段转为大写
+### 1. emit
 
-### 1. 开启序列化
-
-需要为 API 开启序列化
+触发事件时传入事件参数`Hello World`，并返回结果
 
 ``` diff
 class ControllerStudent {
-  @Web.get(':id')
-  @Api.body(v.optional(), v.object(EntityStudent))
-+ @Serializer.enable()
-  async findOne(id) {
-    return await this.scope.service.student.findOne(id);
+  @Web.get('test')
+  async test() {
++   const result = await this.scope.event.echo.emit('Hello World');
+    console.log(result);
   }
 }
 ```
 
-- `@Serializer.enable`: 开启序列化
+- `this.scope.event.echo`: 通过 Scope 对象获取`echo`事件实例
 
-### 2. 设置字段
+### 2. 缺省方法
+
+在触发事件时可以提供缺省方法
 
 ``` diff
-class EntityStudent {
-+ @Serializer.transform('demo-student:upper')
-  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
-  name: string;
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
++   const result = await this.scope.event.echo.emit('Hello World', async data => {
++     return `default: ${data}`;
++   });
+    console.log(result);
+  }
 }
 ```
+
+- 缺省方法参数`data`：事件监听器在执行时可以传入新的事件参数，所以需要使用`data`参数，确保接收到新的事件参数
