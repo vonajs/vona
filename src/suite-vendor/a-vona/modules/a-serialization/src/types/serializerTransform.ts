@@ -1,4 +1,4 @@
-import type { OmitNever } from 'vona';
+import type { OmitNever, VonaContext } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 
 export interface ISerializerTransformRecord {}
@@ -7,9 +7,13 @@ export interface ISerializerTransform<VALUE = unknown, DATA = unknown, RESULT = 
   transform(value: VALUE, data: DATA, options: IDecoratorSerializerTransformOptions): Promise<RESULT>;
 }
 
-export type TypeSerializerTransformGetter = (data: any, value: any) => any;
+export type TypeSerializerTransformGetter = (this: VonaContext, data: any, value: any) => any;
+export type TypeSerializerTransformFilter =
+  (this: VonaContext, value: any, data: any, options: IDecoratorSerializerTransformOptions) => Promise<boolean>;
 
-export interface IDecoratorSerializerTransformOptions {}
+export interface IDecoratorSerializerTransformOptions {
+  filter?: TypeSerializerTransformFilter;
+}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

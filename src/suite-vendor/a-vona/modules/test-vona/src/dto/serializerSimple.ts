@@ -86,7 +86,7 @@ export class DtoSerializerSimple {
   @Api.field(v.optional())
   fullName: string;
 
-  @Api.field(v.serializerGetter(data => {
+  @Api.field(v.serializerGetter((data: DtoSerializerSimple) => {
     return `${data.firstName} ${data.lastName}`;
   }), v.optional())
   fullName2: string;
