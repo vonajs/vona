@@ -458,7 +458,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.310
+        specifier: ^1.0.311
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -867,7 +867,7 @@ importers:
         specifier: ^5.0.79
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.175
+        specifier: ^5.0.176
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1158,7 +1158,7 @@ importers:
         specifier: ^5.0.7
         version: link:modules/a-aspectutils
       vona-module-a-auth:
-        specifier: ^5.0.43
+        specifier: ^5.0.44
         version: link:modules/a-auth
       vona-module-a-authsimple:
         specifier: ^5.0.35
@@ -1233,7 +1233,7 @@ importers:
         specifier: ^5.0.24
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.50
+        specifier: ^5.0.51
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.20
@@ -1266,7 +1266,7 @@ importers:
         specifier: ^5.0.17
         version: link:modules/a-security
       vona-module-a-serialization:
-        specifier: ^5.0.8
+        specifier: ^5.0.9
         version: link:modules/a-serialization
       vona-module-a-startup:
         specifier: ^5.0.28
@@ -1284,7 +1284,7 @@ importers:
         specifier: ^5.0.18
         version: link:modules/a-upload
       vona-module-a-user:
-        specifier: ^5.0.38
+        specifier: ^5.0.39
         version: link:modules/a-user
       vona-module-a-validation:
         specifier: ^5.0.19
@@ -1296,7 +1296,7 @@ importers:
         specifier: ^5.0.24
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.28
+        specifier: ^5.0.29
         version: link:modules/a-web
       vona-module-a-worker:
         specifier: ^5.0.19
