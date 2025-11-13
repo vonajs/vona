@@ -379,6 +379,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: '事件',
+          base: '/zh/guide/techniques/event/',
+          link: 'introduction',
+        },
+        {
           text: 'I18n国际化',
           base: '/zh/guide/techniques/i18n/',
           link: 'introduction',

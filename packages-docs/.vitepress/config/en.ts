@@ -379,6 +379,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: 'Event',
+          base: '/guide/techniques/event/',
+          link: 'introduction',
+        },
+        {
           text: 'I18n',
           base: '/guide/techniques/i18n/',
           link: 'introduction',
