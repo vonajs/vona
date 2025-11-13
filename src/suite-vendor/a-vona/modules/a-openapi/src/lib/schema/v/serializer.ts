@@ -1,11 +1,19 @@
-import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from 'vona-module-a-serialization';
+import type { ISerializerTransformOptionsExclude, ISerializerTransformRecord, TypeSerializerTransformGetter } from 'vona-module-a-serialization';
 import type z from 'zod';
 
-export function schemaSerializerExclude(exclude: boolean = true) {
+export function schemaSerializerExclude(options: Partial<ISerializerTransformOptionsExclude>);
+export function schemaSerializerExclude(exclude?: boolean);
+export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>) {
+  let options;
+  if (!param || typeof param === 'boolean') {
+    options = { exclude: param };
+  } else {
+    options = param;
+  }
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       serializerTransforms: {
-        'a-serialization:exclude': { exclude },
+        'a-serialization:exclude': options,
       },
     });
   };

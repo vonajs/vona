@@ -8,16 +8,17 @@ import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
 function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });
 }
+
 function Exclude(options: Partial<ISerializerTransformOptionsExclude>): PropertyDecorator;
 function Exclude(exclude?: boolean): PropertyDecorator;
 function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>): PropertyDecorator {
+  let options;
+  if (!param || typeof param === 'boolean') {
+    options = { exclude: param };
+  } else {
+    options = param;
+  }
   return function (target: object, prop: MetadataKey) {
-    let options;
-    if (!param || typeof param === 'boolean') {
-      options = { exclude: param };
-    } else {
-      options = param;
-    }
     const metadata: TypeOpenapiMetadata = {
       serializerTransforms: {
         'a-serialization:exclude': options,
