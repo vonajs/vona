@@ -1,5 +1,6 @@
 import type { MetadataKey } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { ISerializerTransformOptionsExclude } from '../bean/serializerTransform.exclude.ts';
 import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
 import { Aspect } from 'vona-module-a-aspect';
 import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
@@ -7,12 +8,19 @@ import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
 function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });
 }
-
-function Exclude(exclude: boolean = true): PropertyDecorator {
+function Exclude(options: Partial<ISerializerTransformOptionsExclude>): PropertyDecorator;
+function Exclude(exclude?: boolean): PropertyDecorator;
+function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
+    let options;
+    if (!param || typeof param === 'boolean') {
+      options = { exclude: param };
+    } else {
+      options = param;
+    }
     const metadata: TypeOpenapiMetadata = {
       serializerTransforms: {
-        'a-serialization:exclude': { exclude },
+        'a-serialization:exclude': options,
       },
     };
     mergeFieldOpenapiMetadata(target, prop as string, metadata);

@@ -8,11 +8,7 @@ export type TypeSerializerTransformSensitiveData = unknown;
 
 export type TypeSerializerTransformSensitiveResult = TypeSerializerTransformSensitiveValue;
 
-export interface ISerializerTransformOptionsSensitive
-  extends IDecoratorSerializerTransformOptions<
-    TypeSerializerTransformSensitiveValue,
-    TypeSerializerTransformSensitiveData
-  > {
+export interface ISerializerTransformOptionsSensitive extends IDecoratorSerializerTransformOptions {
   patternFrom: RegExp;
   patternTo: string;
 }

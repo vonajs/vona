@@ -8,11 +8,7 @@ export type TypeSerializerTransform<%=argv.beanNameCapitalize%>Data = unknown;
 
 export type TypeSerializerTransform<%=argv.beanNameCapitalize%>Result = TypeSerializerTransform<%=argv.beanNameCapitalize%>Value;
 
-export interface ISerializerTransformOptions<%=argv.beanNameCapitalize%>
-  extends IDecoratorSerializerTransformOptions<
-    TypeSerializerTransform<%=argv.beanNameCapitalize%>Value,
-    TypeSerializerTransform<%=argv.beanNameCapitalize%>Data
-  > {}
+export interface ISerializerTransformOptions<%=argv.beanNameCapitalize%> extends IDecoratorSerializerTransformOptions {}
 
 @SerializerTransform<ISerializerTransformOptions<%=argv.beanNameCapitalize%>>()
 export class SerializerTransform<%=argv.beanNameCapitalize%> extends BeanBase

@@ -8,11 +8,7 @@ export type TypeSerializerTransformExcludeData = unknown;
 
 export type TypeSerializerTransformExcludeResult = TypeSerializerTransformExcludeValue;
 
-export interface ISerializerTransformOptionsExclude
-  extends IDecoratorSerializerTransformOptions<
-    TypeSerializerTransformExcludeValue,
-    TypeSerializerTransformExcludeData
-  > {
+export interface ISerializerTransformOptionsExclude extends IDecoratorSerializerTransformOptions {
   exclude?: boolean;
 }
 
