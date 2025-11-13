@@ -14,7 +14,7 @@ export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
 export class GuardPassport extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsPassport, next: Next): Promise<boolean> {
     // auth token
-    if (!this.bean.passport.getCurrent()) {
+    if (!this.bean.passport.current) {
       if (options.checkAuthToken) {
         // will return undefined if no accessToken, so not check options.public
         const [_, err] = await catchError(() => {
@@ -24,7 +24,7 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
       }
     }
     // check current
-    if (!this.bean.passport.getCurrent()) {
+    if (!this.bean.passport.current) {
       await this.bean.passport.signinWithAnonymous();
     }
     if (!options.public && !this.bean.passport.isAuthenticated) {
