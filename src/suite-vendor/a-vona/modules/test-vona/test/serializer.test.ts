@@ -34,6 +34,7 @@ describe('serializer.test.ts', () => {
       assert.equal(res.fullName, 'k v');
       assert.equal(res.fullName2, 'k v');
       assert.equal(res.fullName3, 'k v');
+      assert.equal(res.fullName4, 'k v');
     });
   });
   it('action:serializerArray', async () => {
