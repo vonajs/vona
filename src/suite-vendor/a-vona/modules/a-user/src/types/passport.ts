@@ -20,4 +20,9 @@ declare module 'vona' {
   export interface ContextState {
     passport?: IPassport;
   }
+
+  export interface VonaContext {
+    get user(): IUser;
+    get passport(): IPassport;
+  }
 }

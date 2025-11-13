@@ -317,6 +317,9 @@ declare module 'vona-module-a-user' {
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
+/** main: begin */
+export * from '../main.ts';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
