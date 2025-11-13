@@ -1,8 +1,9 @@
 import type { MetadataKey } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { ISerializerTransformOptionsCustom } from '../bean/serializerTransform.custom.ts';
 import type { ISerializerTransformOptionsExclude } from '../bean/serializerTransform.exclude.ts';
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
-import type { ISerializerTransformRecord, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
+import type { ISerializerTransformRecord, TypeSerializerTransformCustom, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
 import { Aspect } from 'vona-module-a-aspect';
 import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
 
@@ -75,10 +76,30 @@ function Getter(param: TypeSerializerTransformGetter | Partial<ISerializerTransf
   };
 }
 
+function Custom(options: Partial<ISerializerTransformOptionsCustom>): PropertyDecorator;
+function Custom(custom: TypeSerializerTransformCustom): PropertyDecorator;
+function Custom(param: TypeSerializerTransformCustom | Partial<ISerializerTransformOptionsCustom>): PropertyDecorator {
+  let options: Partial<ISerializerTransformOptionsCustom>;
+  if (typeof param === 'function') {
+    options = { custom: param };
+  } else {
+    options = param;
+  }
+  return function (target: object, prop: MetadataKey) {
+    const metadata: TypeOpenapiMetadata = {
+      serializerTransforms: {
+        'a-serialization:custom': options,
+      },
+    };
+    mergeFieldOpenapiMetadata(target, prop as string, metadata);
+  };
+}
+
 export const Serializer = {
   enable: Enable,
   exclude: Exclude,
   transform: Transform,
   sensitive: Sensitive,
   getter: Getter,
+  custom: Custom,
 };
