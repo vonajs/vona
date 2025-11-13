@@ -1,6 +1,19 @@
 import type { ISerializerTransformOptionsExclude, ISerializerTransformRecord, TypeSerializerTransformGetter } from 'vona-module-a-serialization';
 import type z from 'zod';
 
+export function schemaSerializerTransform<T extends keyof ISerializerTransformRecord>(
+  serializerTransformName: T,
+  options?: Partial<ISerializerTransformRecord[T]>,
+) {
+  return function (schema: z.ZodType): z.ZodType {
+    return schema.openapi({
+      serializerTransforms: {
+        [serializerTransformName]: options,
+      },
+    });
+  };
+}
+
 export function schemaSerializerExclude(options: Partial<ISerializerTransformOptionsExclude>);
 export function schemaSerializerExclude(exclude?: boolean);
 export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>) {
@@ -14,19 +27,6 @@ export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTra
     return schema.openapi({
       serializerTransforms: {
         'a-serialization:exclude': options,
-      },
-    });
-  };
-}
-
-export function schemaSerializerTransform<T extends keyof ISerializerTransformRecord>(
-  serializerTransformName: T,
-  options?: Partial<ISerializerTransformRecord[T]>,
-) {
-  return function (schema: z.ZodType): z.ZodType {
-    return schema.openapi({
-      serializerTransforms: {
-        [serializerTransformName]: options,
       },
     });
   };

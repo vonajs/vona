@@ -9,6 +9,20 @@ function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });
 }
 
+function Transform<T extends keyof ISerializerTransformRecord>(
+  serializerTransformName: T,
+  options?: Partial<ISerializerTransformRecord[T]>,
+): PropertyDecorator {
+  return function (target: object, prop: MetadataKey) {
+    const metadata: TypeOpenapiMetadata = {
+      serializerTransforms: {
+        [serializerTransformName]: options,
+      },
+    };
+    mergeFieldOpenapiMetadata(target, prop as string, metadata);
+  };
+}
+
 function Exclude(options: Partial<ISerializerTransformOptionsExclude>): PropertyDecorator;
 function Exclude(exclude?: boolean): PropertyDecorator;
 function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>): PropertyDecorator {
@@ -22,20 +36,6 @@ function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>):
     const metadata: TypeOpenapiMetadata = {
       serializerTransforms: {
         'a-serialization:exclude': options,
-      },
-    };
-    mergeFieldOpenapiMetadata(target, prop as string, metadata);
-  };
-}
-
-function Transform<T extends keyof ISerializerTransformRecord>(
-  serializerTransformName: T,
-  options?: Partial<ISerializerTransformRecord[T]>,
-): PropertyDecorator {
-  return function (target: object, prop: MetadataKey) {
-    const metadata: TypeOpenapiMetadata = {
-      serializerTransforms: {
-        [serializerTransformName]: options,
       },
     };
     mergeFieldOpenapiMetadata(target, prop as string, metadata);
