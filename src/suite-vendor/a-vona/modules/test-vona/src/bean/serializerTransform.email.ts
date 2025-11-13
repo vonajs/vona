@@ -8,7 +8,11 @@ export type TypeSerializerTransformEmailData = unknown;
 
 export type TypeSerializerTransformEmailResult = TypeSerializerTransformEmailValue;
 
-export interface ISerializerTransformOptionsEmail extends IDecoratorSerializerTransformOptions {}
+export interface ISerializerTransformOptionsEmail
+  extends IDecoratorSerializerTransformOptions<
+    TypeSerializerTransformEmailValue,
+    TypeSerializerTransformEmailData
+  > {}
 
 @SerializerTransform<ISerializerTransformOptionsEmail>()
 export class SerializerTransformEmail extends BeanBase
