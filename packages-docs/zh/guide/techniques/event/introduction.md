@@ -72,3 +72,39 @@ class ControllerStudent {
 ```
 
 - 缺省方法参数`data`：事件监听器在执行时可以传入新的事件参数，所以需要使用`data`参数，确保接收到新的事件参数
+
+## 触发事件: emit
+
+### 1. emit
+
+触发事件时传入事件参数`Hello World`，并返回结果
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
++   const result = this.scope.event.echo.emitSync('Hello World');
+    console.log(result);
+  }
+}
+```
+
+- `this.scope.event.echo`: 通过 Scope 对象获取`echo`事件实例
+
+### 2. 缺省方法
+
+在触发事件时可以提供缺省方法
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
++   const result = this.scope.event.echo.emitSync('Hello World', data => {
++     return `default: ${data}`;
++   });
+    console.log(result);
+  }
+}
+```
+
+- 缺省方法参数`data`：事件监听器在执行时可以传入新的事件参数，所以需要使用`data`参数，确保接收到新的事件参数
