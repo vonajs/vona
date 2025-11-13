@@ -17,7 +17,7 @@ export function schemaSerializerTransform<T extends keyof ISerializerTransformRe
 export function schemaSerializerExclude(options: Partial<ISerializerTransformOptionsExclude>);
 export function schemaSerializerExclude(exclude?: boolean);
 export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>) {
-  let options;
+  let options: Partial<ISerializerTransformOptionsExclude>;
   if (!param || typeof param === 'boolean') {
     options = { exclude: param };
   } else {
@@ -47,7 +47,7 @@ export function schemaSerializerSensitive(
 export function schemaSerializerGetter(options: Partial<ISerializerTransformOptionsGetter>);
 export function schemaSerializerGetter(getter: TypeSerializerTransformGetter);
 export function schemaSerializerGetter(param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>) {
-  let options;
+  let options: Partial<ISerializerTransformOptionsGetter>;
   if (typeof param === 'function') {
     options = { getter: param };
   } else {

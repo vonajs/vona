@@ -28,7 +28,7 @@ function Transform<T extends keyof ISerializerTransformRecord>(
 function Exclude(options: Partial<ISerializerTransformOptionsExclude>): PropertyDecorator;
 function Exclude(exclude?: boolean): PropertyDecorator;
 function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>): PropertyDecorator {
-  let options;
+  let options: Partial<ISerializerTransformOptionsExclude>;
   if (!param || typeof param === 'boolean') {
     options = { exclude: param };
   } else {
@@ -60,7 +60,7 @@ function Sensitive(
 function Getter(options: Partial<ISerializerTransformOptionsGetter>): PropertyDecorator;
 function Getter(getter: TypeSerializerTransformGetter): PropertyDecorator;
 function Getter(param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>): PropertyDecorator {
-  let options;
+  let options: Partial<ISerializerTransformOptionsGetter>;
   if (typeof param === 'function') {
     options = { getter: param };
   } else {
