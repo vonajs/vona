@@ -8,7 +8,11 @@ export type TypeSerializerTransformGetterData = unknown;
 
 export type TypeSerializerTransformGetterResult = TypeSerializerTransformGetterValue;
 
-export interface ISerializerTransformOptionsGetter extends IDecoratorSerializerTransformOptions {
+export interface ISerializerTransformOptionsGetter
+  extends IDecoratorSerializerTransformOptions<
+    TypeSerializerTransformGetterValue,
+    TypeSerializerTransformGetterData
+  > {
   getter: TypeSerializerTransformGetter;
 }
 
