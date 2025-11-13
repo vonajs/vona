@@ -10,6 +10,8 @@ export interface ISerializerTransform<VALUE = unknown, DATA = unknown, RESULT = 
 export type TypeSerializerTransformGetter = (this: VonaContext, data: any, value: any) => any;
 export type TypeSerializerTransformFilter =
   (this: VonaContext, value: any, data: any, options: IDecoratorSerializerTransformOptions) => Promise<boolean> | boolean;
+export type TypeSerializerTransformCustom =
+  (this: VonaContext, value: any, data: any, options: IDecoratorSerializerTransformOptions) => Promise<any> | any;
 
 export interface IDecoratorSerializerTransformOptions {
   filter?: TypeSerializerTransformFilter;

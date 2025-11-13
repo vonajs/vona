@@ -51,9 +51,11 @@ declare module 'vona' {
 }
 /** bean: end */
 /** serializerTransform: begin */
+export * from '../bean/serializerTransform.custom.ts';
 export * from '../bean/serializerTransform.exclude.ts';
 export * from '../bean/serializerTransform.getter.ts';
 export * from '../bean/serializerTransform.sensitive.ts';
+import type { ISerializerTransformOptionsCustom } from '../bean/serializerTransform.custom.ts';
 import type { ISerializerTransformOptionsExclude } from '../bean/serializerTransform.exclude.ts';
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
 import type { ISerializerTransformOptionsSensitive } from '../bean/serializerTransform.sensitive.ts';
@@ -61,7 +63,8 @@ import 'vona-module-a-serialization';
 declare module 'vona-module-a-serialization' {
   
     export interface ISerializerTransformRecord {
-      'a-serialization:exclude': ISerializerTransformOptionsExclude;
+      'a-serialization:custom': ISerializerTransformOptionsCustom;
+'a-serialization:exclude': ISerializerTransformOptionsExclude;
 'a-serialization:getter': ISerializerTransformOptionsGetter;
 'a-serialization:sensitive': ISerializerTransformOptionsSensitive;
     }
@@ -70,6 +73,17 @@ declare module 'vona-module-a-serialization' {
 }
 declare module 'vona-module-a-serialization' {
   
+        export interface SerializerTransformCustom {
+          /** @internal */
+          get scope(): ScopeModuleASerialization;
+        }
+
+          export interface SerializerTransformCustom {
+            get $beanFullName(): 'a-serialization.serializerTransform.custom';
+            get $onionName(): 'a-serialization:custom';
+            get $onionOptions(): ISerializerTransformOptionsCustom;
+          }
+
         export interface SerializerTransformExclude {
           /** @internal */
           get scope(): ScopeModuleASerialization;
