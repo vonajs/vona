@@ -52,6 +52,11 @@ export class BeanSerializer extends BeanBase {
             transformName as keyof ISerializerTransformRecord,
             transformOptions,
           );
+          // filter
+          if (options.filter) {
+            const resFilter = await options.filter.call(this.ctx, valuePatch, data, options);
+            if (!resFilter) continue;
+          }
           // execute
           const beanFullName = beanFullNameFromOnionName(transformName, 'serializerTransform');
           const beanInstance = this.bean._getBean(beanFullName) as ISerializerTransform;
