@@ -20,7 +20,7 @@ The module `a-user` provides the global Bean `bean.passport`, providing a common
 
 ``` typescript
 // get the current passport
-const passport = this.bean.passport.getCurrent();
+const passport = this.bean.passport.current;
 // mock signin for test
 this.bean.passport.signinMock();
 ```
@@ -66,7 +66,7 @@ The `home-user` module provides the adapter `ServicePassportAdapter`, allowing u
 class ControllerStudent {
   @Web.get('test')
   test() {
-+   const passport = this.bean.passport.getCurrent();
++   const passport = this.bean.passport.current;
     console.log(passport);
   }
 }

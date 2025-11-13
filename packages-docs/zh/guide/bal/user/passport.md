@@ -20,7 +20,7 @@ export interface IPassport {
 
 ``` typescript
 // get the current passport
-const passport = this.bean.passport.getCurrent();
+const passport = this.bean.passport.current;
 // mock signin for test
 this.bean.passport.signinMock();
 ```
@@ -66,7 +66,7 @@ this.bean.passport.signinMock();
 class ControllerStudent {
   @Web.get('test')
   test() {
-+   const passport = this.bean.passport.getCurrent();
++   const passport = this.bean.passport.current;
     console.log(passport);
   }
 }

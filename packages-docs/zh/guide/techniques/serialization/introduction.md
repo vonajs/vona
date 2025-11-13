@@ -89,7 +89,7 @@ class EntityStudent {
 class EntityStudent {
   @Serializer.transform('demo-student:upper', {
 +   filter(this: VonaContext) {
-+     return this.app.bean.passport.getCurrentUser()?.name !== 'admin';
++     return this.user.name !== 'admin';
 +   },
   })
   @Api.field(v.title($locale('Name')), v.default(''), v.min(3))

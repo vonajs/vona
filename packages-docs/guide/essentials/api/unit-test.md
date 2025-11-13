@@ -128,10 +128,14 @@ await app.bean.passport.signinMock('admin');
 
 ``` typescript
 await app.bean.passport.signinMock();
-const passport = app.bean.passport.getCurrent();
-const auth = app.bean.passport.getCurrentAuth();
-const user = app.bean.passport.getCurrentUser();
-const roles = app.bean.passport.getCurrentRoles();
+
+const passport = app.ctx.passport;
+const user = app.ctx.user;
+
+const passport = app.bean.passport.current;
+const user = app.bean.passport.currentUser;
+const auth = app.bean.passport.currentAuth;
+const roles = app.bean.passport.currentRoles;
 ```
 
 * Simulate logout

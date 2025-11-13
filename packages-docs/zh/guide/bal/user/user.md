@@ -87,7 +87,19 @@ class ControllerStudent {
 class ControllerStudent {
   @Web.get('test')
   test() {
-+   const user = this.bean.passport.getCurrentUser();
++   const user = this.bean.passport.currentUser;
+    console.log(user);
+  }
+}  
+```
+
+### 3. ctx.user
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const user = this.ctx.user;
     console.log(user);
   }
 }  

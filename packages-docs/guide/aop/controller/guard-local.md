@@ -24,7 +24,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {}
 @Guard<IGuardOptionsAdmin>()
 class GuardAdmin {
   async execute(_options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
+    const user = this.ctx.user;
     if (!user || user.name !== 'admin') this.app.throw(403);
     // next
     return next();
@@ -101,7 +101,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 })
 export class GuardAdmin extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
-    const user = this.bean.passport.getCurrentUser();
+    const user = this.ctx.user;
 -   if (!user || user.name !== 'admin') this.app.throw(403);
 +   if (!user || user.name !== options.name) this.app.throw(403);
     // next

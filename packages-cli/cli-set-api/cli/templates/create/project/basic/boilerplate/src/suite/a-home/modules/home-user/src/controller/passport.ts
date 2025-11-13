@@ -124,7 +124,7 @@ export class ControllerPassport extends BeanBase {
   }
 
   private _combineDtoPassport(): DtoPassport | undefined {
-    const passport = this.bean.passport.getCurrent();
+    const passport = this.bean.passport.current;
     if (!passport || !passport.auth) return;
     return {
       user: passport.user as EntityUser,
