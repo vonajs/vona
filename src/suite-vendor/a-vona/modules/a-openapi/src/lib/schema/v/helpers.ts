@@ -111,7 +111,11 @@ export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
 
 export function schemaSerializerExclude(exclude: boolean = true) {
   return function (schema: z.ZodType): z.ZodType {
-    return schema.openapi({ exclude });
+    return schema.openapi({
+      serializerTransforms: {
+        'a-serialization:exclude': { exclude },
+      },
+    });
   };
 }
 

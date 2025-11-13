@@ -10,7 +10,11 @@ function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
 
 function Exclude(exclude: boolean = true): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
-    const metadata: TypeOpenapiMetadata = { exclude };
+    const metadata: TypeOpenapiMetadata = {
+      serializerTransforms: {
+        'a-serialization:exclude': { exclude },
+      },
+    };
     mergeFieldOpenapiMetadata(target, prop as string, metadata);
   };
 }
