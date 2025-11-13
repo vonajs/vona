@@ -49,7 +49,7 @@ The `home-user` module provides the adapter `ServiceRoleAdapter`, which allows u
 class ControllerStudent {
   @Web.get('test')
   test() {
-+   const roles = this.bean.passport.getCurrentRoles();
++   const roles = this.bean.passport.currentRoles;
     console.log(roles);
   }
 }  

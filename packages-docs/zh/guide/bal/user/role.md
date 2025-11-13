@@ -49,7 +49,7 @@ const roles = await this.bean.role.findAllByUserId(userId);
 class ControllerStudent {
   @Web.get('test')
   test() {
-+   const roles = this.bean.passport.getCurrentRoles();
++   const roles = this.bean.passport.currentRoles;
     console.log(roles);
   }
 }  
