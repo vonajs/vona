@@ -381,7 +381,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '事件',
           base: '/zh/guide/techniques/event/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+            { text: '事件监听器', link: 'event-listener' },
+          ],
         },
         {
           text: 'I18n国际化',
