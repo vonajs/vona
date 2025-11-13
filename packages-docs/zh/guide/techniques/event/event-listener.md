@@ -18,9 +18,9 @@ $ vona :create:bean eventListener echo --module=demo-student
 右键菜单 - [模块路径]: `Vona Bean/Event Listener`
 :::
 
-## Event定义
+## Event Listener定义
 
-* 自动生成的代码骨架
+### 1. 自动生成的代码骨架
 
 ``` typescript
 type TypeEventData = unknown; // TypeEventEchoData;
@@ -41,6 +41,31 @@ export class EventListenerEcho
 - `TypeEventResult`: 定义结果类型
 - `match`: 指定监听哪个事件
 
-* 调整代码
+### 2. 调整代码
+
+``` diff
++ import type { TypeEventEchoData, TypeEventEchoResult } from './event.echo.ts';
+
++ type TypeEventData = TypeEventEchoData;
++ type TypeEventResult = TypeEventEchoResult;
+
++ @EventListener({ match: 'demo-student:echo' })
+export class EventListenerEcho
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult> {
++ execute(data: TypeEventData, next: NextEventSync<TypeEventData, TypeEventResult>): TypeEventResult {
++   const dataNew = `${data}!`;
+    // next
++   return next(dataNew);
+  }
+}
+```
+
+- `TypeEventData`: 定义参数类型
+- `TypeEventResult`: 定义结果类型
+- `match`: 指定需要监听的事件名`demo-student:echo`
+- `execute`: 为了同时支持`异步事件`和`同步事件`，改为同步方法
+  - `next`:类型改为`NextEventSync`
+- `dataNew`: 生成新的事件参数值，并传入`next`方法
 
 
