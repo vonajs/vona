@@ -72,6 +72,18 @@ class ControllerStudent {
 }
 ```
 
+或者:
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const passport = this.ctx.passport;
+    console.log(passport);
+  }
+}
+```
+
 ## a-user: Passport装饰器
 
 模块`a-user`提供了一组 Passport 装饰器，用于对当前用户进行权限校验

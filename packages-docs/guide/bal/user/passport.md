@@ -72,6 +72,18 @@ class ControllerStudent {
 }
 ```
 
+Or:
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  test() {
++   const passport = this.ctx.passport;
+    console.log(passport);
+  }
+}
+```
+
 ## a-user: Passport Decorators
 
 The `a-user` module provides a set of Passport decorators for verifying permissions for the current user
