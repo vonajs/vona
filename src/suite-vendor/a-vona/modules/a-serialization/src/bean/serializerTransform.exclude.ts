@@ -12,9 +12,7 @@ export interface ISerializerTransformOptionsExclude extends IDecoratorSerializer
   exclude?: boolean;
 }
 
-@SerializerTransform<ISerializerTransformOptionsExclude>({
-  exclude: true,
-})
+@SerializerTransform<ISerializerTransformOptionsExclude>()
 export class SerializerTransformExclude extends BeanBase
   implements ISerializerTransform<
     TypeSerializerTransformExcludeValue,
@@ -26,6 +24,6 @@ export class SerializerTransformExclude extends BeanBase
     _data: TypeSerializerTransformExcludeData,
     options: ISerializerTransformOptionsExclude,
   ): Promise<TypeSerializerTransformExcludeResult> {
-    return options.exclude ? undefined : value;
+    return options.exclude !== false ? undefined : value;
   }
 }
