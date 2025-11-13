@@ -42,7 +42,7 @@ export class BeanPassport extends BeanBase {
   }
 
   public async isAdmin(): Promise<boolean> {
-    const passport = this.getCurrent();
+    const passport = this.current;
     return await this.passportAdapter.isAdmin(passport);
   }
 
@@ -50,7 +50,7 @@ export class BeanPassport extends BeanBase {
     this.ctx.state.passport = await this.passportAdapter.setCurrent(passport);
   }
 
-  public getCurrent(): IPassport | undefined {
+  public get current(): IPassport | undefined {
     return this.ctx.state.passport;
   }
 
@@ -80,7 +80,7 @@ export class BeanPassport extends BeanBase {
 
   public async signout(): Promise<void> {
     // current
-    const passport = this.getCurrent();
+    const passport = this.current;
     if (!passport) return;
     // removeAuthToken
     const payloadData = await this.passportAdapter.serialize(passport);
@@ -154,7 +154,7 @@ export class BeanPassport extends BeanBase {
   // only created by accessToken
   public async createTempAuthToken(options?: IJwtSignOptions) {
     // current
-    const passport = this.getCurrent();
+    const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
     const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
@@ -164,7 +164,7 @@ export class BeanPassport extends BeanBase {
 
   public async createOauthAuthToken(options?: IJwtSignOptions) {
     // current
-    const passport = this.getCurrent();
+    const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
     const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
@@ -174,7 +174,7 @@ export class BeanPassport extends BeanBase {
 
   public async createOauthCode(options?: IJwtSignOptions) {
     // current
-    const passport = this.getCurrent();
+    const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
     const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
