@@ -310,9 +310,95 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        fullName: $makeSchema(v.serializerGetter((data: EntityStudent) => {
-          return `${data.firstName} ${data.lastName}`;
-        }), z.string()),
+        fullName: $makeSchema(
+          v.serializerGetter((data: EntityStudent) => {
+            return `${data.firstName} ${data.lastName}`;
+          }),
+          z.string(),
+        ),
+      },
+    },
+  },
+};
+```
+
+## @Serializer.custom/v.serializerCustom
+
+比如，将`EntityStudent`中的`name`字段值转换为大写
+
+### 1. @Serializer.custom
+
+``` diff
+class EntityStudent {
++ @Serializer.custom((value: string) => {
++   return value.toUpperCase();
++ })
+  @Api.field(v.title($locale('Name')))
+  name: string;
+}
+```
+
+### 2. v.serializerCustom
+
+``` diff
+class EntityStudent {
+  @Api.field(
++   v.serializerCustom((value: string) => {
++     return value.toUpperCase();
++   }),
+    v.title($locale('Name')),
+  )
+  name: string;
+}
+```
+
+### 3. App Config
+
+可以在 App Config 中修改配置
+
+`src/backend/config/config/config.ts`
+
+* 方法 1: 直接修改 Openapi 参数
+
+``` typescript
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: {
+          serializerTransforms: {
+            'a-serialization:custom': {
+              custom: (value: string) => {
+                return value.toUpperCase();
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+```
+
+- `a-serialization:custom`: `a-serialization`模块提供的 SerializerTransform
+
+* 方法 2: 构造一个新的 schema
+
+``` typescript
+import { $makeSchema, v } from 'vona-module-a-openapi';
+
+// onions
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: $makeSchema(
+          v.serializerCustom((value: string) => {
+            return value.toUpperCase();
+          }),
+          z.string(),
+        ),
       },
     },
   },
