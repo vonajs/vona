@@ -79,6 +79,24 @@ class EntityStudent {
 }
 ```
 
+## Filter参数
+
+可以为 SerializerTransform 传入 Filter 参数。系统先执行 Filter 函数，根据结果来控制当前 SerializerTransform 是否需要执行
+
+比如，如果当前用户名是`admin`则不执行`upper`的转换逻辑
+
+``` diff
+class EntityStudent {
+  @Serializer.transform('demo-student:upper', {
++   filter(this: VonaContext) {
++     return this.app.bean.passport.getCurrentUser()?.name !== 'admin';
++   },
+  })
+  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
+  name: string;
+}
+```
+
 ## SerializerTransform参数
 
 可以为 SerializerTransform 定义参数，通过参数更灵活的配置转换逻辑

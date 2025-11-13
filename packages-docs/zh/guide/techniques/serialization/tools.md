@@ -10,6 +10,7 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 |@Serializer.transform|v.serializerTransform|使用[SerializerTransform](./introduction.md)|
 |@Serializer.sensitive|v.serializerSensitive|对字段值进行脱敏处理|
 |@Serializer.getter|v.serializerGetter|采用getter机制生成新的字段值|
+|@Serializer.custom|v.serializerCustom|使用自定义函数对字段值进行处理|
 
 ::: tip
 既然`@Serializer`工具非常简洁，直观，为什么还要提供`v`工具？
