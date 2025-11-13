@@ -7,7 +7,7 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 |工具: @Serializer|工具: v|说明|
 |--|--|--|
 |@Serializer.exclude|v.serializerExclude|排除字段|
-|@Serializer.transform|v.serializerTransform|使用[SerializerTransform](./introduction.md)|
+|@Serializer.transform|v.serializerTransform|使用Serializer Transform，参见: [序列化](./introduction.md)|
 |@Serializer.replace|v.serializerReplace|对字段值进行脱敏处理|
 |@Serializer.getter|v.serializerGetter|采用getter机制生成新的字段值|
 |@Serializer.custom|v.serializerCustom|使用自定义函数对字段值进行处理|
@@ -84,7 +84,7 @@ config.onions = {
 
 比如，将`EntityStudent`中的`name`字段值转化为大写
 
-我们直接使用[序列化](./introduction.md)中创建的 SerializerTransform `upper`
+我们直接使用[序列化](./introduction.md)中创建的 Serializer Transform `upper`
 
 ### 1. @Serializer.transform
 
@@ -203,7 +203,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:replace`: `a-serialization`模块提供的 SerializerTransform
+- `a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform
 
 * 方法 2: 构造一个新的 schema
 
@@ -298,7 +298,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:getter`: `a-serialization`模块提供的 SerializerTransform
+- `a-serialization:getter`: `a-serialization`模块提供的 Serializer Transform
 
 * 方法 2: 构造一个新的 schema
 
@@ -381,7 +381,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:custom`: `a-serialization`模块提供的 SerializerTransform
+- `a-serialization:custom`: `a-serialization`模块提供的 Serializer Transform
 
 * 方法 2: 构造一个新的 schema
 
