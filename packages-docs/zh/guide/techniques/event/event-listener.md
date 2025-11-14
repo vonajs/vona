@@ -39,7 +39,11 @@ export class EventListenerEcho
 
 - `TypeEventData`: 定义参数类型
 - `TypeEventResult`: 定义结果类型
-- `match`: 指定监听哪个事件
+- `match`: 指定需要监听的事件
+
+|名称|类型|说明|
+|--|--|--|
+|match|string\|regexp\|(string\|regexp)[]|指定需要监听的事件|
 
 ### 2. 调整代码
 
@@ -68,9 +72,77 @@ export class EventListenerEcho
   - `next`:类型改为`NextEventSync`
 - `dataNew`: 生成新的事件参数值，并传入`next`方法
 
-## 查看事件监听器清单
+## Event Listener顺序
 
-可以直接输出某个事件的事件监听器清单
+针对同一个事件，可以关联多个 Event Listener。所以，VonaJS 提供了两个参数，用于控制 Event Listener 的执行顺序
+
+### 1. dependencies
+
+比如，还有一个 Event Listener `demo-student:echo3`，我们希望执行顺序如下：`demo-student:echo3` > `Current`
+
+``` diff
+@EventListener({
+  match: 'demo-student:echo',
++ dependencies: 'demo-student:echo3',
+})
+class EventListenerEcho {}
+```
+
+### 2. dependents
+
+`dependents`的顺序刚好与`dependencies`相反，我们希望执行顺序如下：`Current` > `demo-student:echo3`
+
+``` diff
+@EventListener({
+  match: 'demo-student:echo',
++ dependents: 'demo-student:echo3',
+})
+class EventListenerEcho {}
+```
+
+## Event Listener 启用/禁用
+
+可以控制 Event Listener 的`启用/禁用`
+
+### 1. Enable
+
+`src/backend/config/config/config.ts`
+
+``` diff
+// onions
+config.onions = {
+  eventListener: {
+    'demo-student:echo': {
++     enable: false,
+    },
+  },
+};
+```
+
+### 2. Meta
+
+可以让 Event Listener 在指定的运行环境生效
+
+|名称|类型|说明|
+|--|--|--|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+
+* 举例
+
+``` diff
+@EventListener({
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++ },
+})
+class EventListenerEcho {}
+```
+
+## 查看当前生效的Event Listener清单
+
+可以直接输出当前生效的 Event Listener 清单
 
 ``` diff
 class ControllerStudent {
@@ -83,8 +155,8 @@ class ControllerStudent {
 
 - `this.bean.onion`: 取得全局 Service 实例 `onion`
 - `.eventListener`: 取得与 Event Listener 相关的 Service 实例
-- `.inspectEventListener`: 输出某个事件的事件监听器清单，传入事件名`demo-student:echo`
+- `.inspectEventListener`: 输出当前生效的 Event Listener 清单，传入事件名`demo-student:echo`
 
-当访问`test` API 时，会自动在控制台输出事件监听器清单，效果如下：
+当访问`test` API 时，会自动在控制台输出当前生效的 Event Listener 清单，效果如下：
 
 ![](../../../assets/img/event/eventListener-1.png)

@@ -1,5 +1,5 @@
 import type { NextGeneral, OmitNever } from 'vona';
-import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsEnableSimple, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
 import type { IEventRecord } from './event.ts';
 
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;
@@ -15,7 +15,7 @@ export interface IEventExecute<DATA = unknown, RESULT = unknown> {
 export interface IEventListenerRecord {}
 
 export interface IDecoratorEventListenerOptions
-  extends IOnionOptionsEnable,
+  extends TypeOnionOptionsEnableSimple,
   IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IEventRecord>>,
   IOnionOptionsDeps<keyof IEventListenerRecord> {}
 
