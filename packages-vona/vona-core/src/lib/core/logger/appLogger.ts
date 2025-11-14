@@ -4,7 +4,7 @@ import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import { BeanSimple } from '../../bean/beanSimple.ts';
 import { deepExtend } from '../../utils/util.ts';
-import { formatLoggerConsole, formatLoggerFilter, getLoggerClientLevel, setLoggerClientLevel } from './utils.ts';
+import { formatLoggerConsole, formatLoggerFilter } from './utils.ts';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
@@ -33,11 +33,18 @@ export class AppLogger extends BeanSimple {
   }
 
   getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
-    return getLoggerClientLevel(clientName);
+    clientName = clientName || 'default';
+    const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
+    const level = this.app.meta.env[envName];
+    if (level === 'false') return;
+    if (level === 'true' || !level) return 'info';
+    return level as LoggerLevel;
   }
 
   setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
-    setLoggerClientLevel(level, clientName);
+    clientName = clientName || 'default';
+    const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
+    this.app.meta.env[envName] = level.toString();
   }
 
   private _createClient(clientName: keyof ILoggerClientRecord): Winston.Logger {
@@ -59,7 +66,7 @@ export class AppLogger extends BeanSimple {
     if (typeof configClient !== 'function') return configClient;
     return configClient.call(this.app, {
       clientName,
-      level: () => getLoggerClientLevel(clientName),
+      level: () => this.getLevel(clientName),
     }, Winston);
   }
 

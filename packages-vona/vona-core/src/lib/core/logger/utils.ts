@@ -1,4 +1,3 @@
-import type { ILoggerClientRecord, LoggerLevel } from '../../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
@@ -6,21 +5,6 @@ import * as Winston from 'winston';
 import { cast } from '../../../types/utils/cast.ts';
 
 const SymbolLoggerMessage = Symbol('SymbolLoggerMessage');
-
-export function getLoggerClientLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
-  clientName = clientName || 'default';
-  const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
-  const level = process.env[envName];
-  if (level === 'false') return;
-  if (level === 'true' || !level) return 'info';
-  return level as LoggerLevel;
-}
-
-export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
-  clientName = clientName || 'default';
-  const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
-  process.env[envName] = level.toString();
-}
 
 export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: any) => {
   if ((einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) || einfo.name === 'AxiosError') {
