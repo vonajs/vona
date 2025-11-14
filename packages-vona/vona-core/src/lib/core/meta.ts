@@ -10,7 +10,7 @@ import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
 import { CtxCounter } from './ctxCounter.ts';
-import { AppLogger } from './logger.ts';
+import { AppLogger } from './logger/appLogger.ts';
 import { appMetadata } from './metadata.ts';
 import { appResource } from './resource.ts';
 

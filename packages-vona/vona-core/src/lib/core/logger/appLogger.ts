@@ -1,9 +1,10 @@
+import type * as Transport from 'winston-transport';
 import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../../types/interface/logger.ts';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import { BeanSimple } from '../../bean/beanSimple.ts';
 import { deepExtend } from '../../utils/util.ts';
-import { formatLoggerFilter, getLoggerClientLevel, setLoggerClientLevel } from './utils.ts';
+import { formatLoggerConsole, formatLoggerFilter, getLoggerClientLevel, setLoggerClientLevel } from './utils.ts';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
@@ -66,9 +67,22 @@ export class AppLogger extends BeanSimple {
     return this.createTransportFile(fileName, clientInfo, {
       level: levelStrict ?? 'silly',
       format: Winston.format.combine(
-        formatLoggerFilter({ level: 'http', strict: true }),
+        formatLoggerFilter({ level: levelStrict ?? clientInfo.level, strict: !!levelStrict }),
         Winston.format.json(),
       ),
+    });
+  }
+
+  public makeTransportConsole(clientInfo: ILoggerOptionsClientInfo): Transport | undefined {
+    if (this.app.meta.env.LOGGER_DUMMY === 'true') return;
+    return new Winston.transports.Console({
+      level: 'silly',
+      format: Winston.format.combine(
+        formatLoggerFilter({ level: clientInfo.level, silly: true }),
+        Winston.format.colorize(),
+        formatLoggerConsole(),
+      ),
+      forceConsole: true,
     });
   }
 

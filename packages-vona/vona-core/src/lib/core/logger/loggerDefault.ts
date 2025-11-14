@@ -3,7 +3,7 @@ import type { ConfigLogger } from '../../../types/interface/logger.ts';
 import type { VonaConfigEnv } from '../../../types/utils/env.ts';
 import type { VonaApplication } from '../application.ts';
 import { replaceTemplate } from '@cabloy/utils';
-import { formatLoggerAxiosError, formatLoggerConsole, formatLoggerFilter } from './utils.ts';
+import { formatLoggerAxiosError } from './utils.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const configDefault: ConfigLogger = {
@@ -18,48 +18,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
         };
       },
     },
-    default(this: VonaApplication, clientInfo, { format, transports }) {
-      const _transports = [
-        this.meta.logger.createTransportFile('error', clientInfo, {
-          level: 'error',
-          format: format.combine(
-            formatLoggerFilter({ level: 'error', strict: true }),
-            format.json(),
-          ),
-        }),
-        this.meta.logger.createTransportFile('warn', clientInfo, {
-          level: 'warn',
-          format: format.combine(
-            formatLoggerFilter({ level: 'warn', strict: true }),
-            format.json(),
-          ),
-        }),
-        this.meta.logger.createTransportFile('http', clientInfo, {
-          level: 'http',
-          format: format.combine(
-            formatLoggerFilter({ level: 'http', strict: true }),
-            format.json(),
-          ),
-        }),
-        this.meta.logger.createTransportFile('combined', clientInfo, {
-          level: 'silly',
-          format: format.combine(
-            formatLoggerFilter({ level: clientInfo.level }),
-            format.json(),
-          ),
-        }),
-      ];
-      if (env.LOGGER_DUMMY !== 'true') {
-        _transports.push(new transports.Console({
-          level: 'silly',
-          format: format.combine(
-            formatLoggerFilter({ level: clientInfo.level, silly: true }),
-            format.colorize(),
-            formatLoggerConsole(),
-          ),
-          forceConsole: true,
-        }) as any);
-      }
+    default(this: VonaApplication, _clientInfo, { format }) {
       return {
         format: format.combine(
           formatLoggerAxiosError({ stack: true }),
@@ -67,11 +26,20 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
           format.splat(),
           format.timestamp(),
         ),
-        transports: _transports,
+        transports: undefined,
       };
     },
     clients: {
-      default: {},
+      default(this: VonaApplication, clientInfo) {
+        const transports = [
+          this.meta.logger.makeTransportFile('error', clientInfo, 'error'),
+          this.meta.logger.makeTransportFile('warn', clientInfo, 'warn'),
+          this.meta.logger.makeTransportFile('http', clientInfo, 'http'),
+          this.meta.logger.makeTransportFile('combined', clientInfo),
+          this.meta.logger.makeTransportConsole(clientInfo),
+        ].filter(item => !!item);
+        return { transports };
+      },
     },
   };
   return configDefault;

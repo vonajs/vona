@@ -8,7 +8,7 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { cast } from '../../types/utils/cast.ts';
 import { deepExtend } from '../utils/util.ts';
-import { combineLoggerDefault } from './loggerDefault.ts';
+import { combineLoggerDefault } from './logger/loggerDefault.ts';
 
 export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
   let config: VonaConfigOptional = configDefault(appInfo, env);
