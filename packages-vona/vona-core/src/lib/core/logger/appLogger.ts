@@ -1,5 +1,5 @@
 import type * as Transport from 'winston-transport';
-import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../../types/interface/logger.ts';
+import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../../types/interface/logger.ts';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import { BeanSimple } from '../../bean/beanSimple.ts';
@@ -26,7 +26,7 @@ export class AppLogger extends BeanSimple {
     return this[SymbolLoggerInstances][clientName];
   }
 
-  child(childName?: keyof ILoggerClientChildRecord, clientName?: keyof ILoggerClientRecord) {
+  child(childName?: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord) {
     const logger = this.get(clientName);
     if (!childName) return logger;
     return logger.child({ name: childName });

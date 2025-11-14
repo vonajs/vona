@@ -37,7 +37,7 @@ export interface IMetaVersionTest {
 }
 
 declare module 'vona' {
-  export interface ILoggerClientChildRecord {
+  export interface ILoggerChildRecord {
     version: never;
   }
 }

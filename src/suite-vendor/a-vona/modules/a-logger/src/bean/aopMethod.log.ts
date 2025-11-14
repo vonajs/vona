@@ -1,4 +1,4 @@
-import type { ILoggerClientChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
+import type { ILoggerChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
 import { evaluateExpressions } from '@cabloy/utils';
@@ -7,7 +7,7 @@ import { AopMethod } from 'vona-module-a-aspect';
 
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
-  childName?: keyof ILoggerClientChildRecord;
+  childName?: keyof ILoggerChildRecord;
   clientName?: keyof ILoggerClientRecord;
   args?: boolean;
   result?: boolean;

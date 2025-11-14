@@ -1,5 +1,5 @@
 declare module 'vona'{
-  export interface ILoggerClientChildRecord {
+  export interface ILoggerChildRecord {
     req: never;
     res: never;
   }

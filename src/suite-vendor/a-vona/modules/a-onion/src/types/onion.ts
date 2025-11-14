@@ -53,7 +53,7 @@ declare module 'vona' {
     onions: ConfigOnions;
   }
 
-  export interface ILoggerClientChildRecord {
+  export interface ILoggerChildRecord {
     onion: never;
   }
 
