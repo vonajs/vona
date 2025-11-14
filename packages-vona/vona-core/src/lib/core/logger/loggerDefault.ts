@@ -1,7 +1,7 @@
-import type { PowerPartial } from 'vona';
 import type { VonaAppInfo } from '../../../types/application/app.ts';
 import type { ConfigLogger } from '../../../types/interface/logger.ts';
 import type { VonaConfigEnv } from '../../../types/utils/env.ts';
+import type { PowerPartial } from '../../../types/utils/powerPartial.ts';
 import type { VonaApplication } from '../application.ts';
 import { replaceTemplate } from '@cabloy/utils';
 import { formatLoggerAxiosError, formatLoggerCtx } from './utils.ts';

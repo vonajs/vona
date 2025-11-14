@@ -1,9 +1,9 @@
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
-import { useApp } from 'vona';
 import * as Winston from 'winston';
 import { cast } from '../../../types/utils/cast.ts';
+import { useApp } from '../../framework/useApp.ts';
 
 const SymbolLoggerMessage = Symbol('SymbolLoggerMessage');
 

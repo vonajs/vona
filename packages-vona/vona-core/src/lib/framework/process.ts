@@ -1,3 +1,4 @@
+import { catchErrorSync } from '@cabloy/utils';
 import { closeApp, useApp } from './useApp.ts';
 
 export function handleProcessWork() {
@@ -15,8 +16,14 @@ export function handleProcessWork() {
       console.error(err);
       process.kill(process.pid, 'SIGTERM');
     } else {
-      const logger = app.meta.logger.get();
-      logger.error(err);
+      const [logger] = catchErrorSync(() => {
+        return app.meta.logger.get();
+      });
+      if (logger) {
+        logger.error(err);
+      } else {
+        console.error(err);
+      }
       if (!app.meta.appStarted) {
         await app.meta.logger.dispose();
         process.kill(process.pid, 'SIGTERM');
