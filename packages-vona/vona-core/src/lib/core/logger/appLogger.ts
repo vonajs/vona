@@ -63,7 +63,7 @@ export class AppLogger extends BeanSimple {
     }, Winston);
   }
 
-  public makeTransportFile(fileName: string, clientInfo: ILoggerOptionsClientInfo, levelStrict?: LoggerLevel) {
+  public makeTransportFile(clientInfo: ILoggerOptionsClientInfo, fileName: string, levelStrict?: LoggerLevel) {
     return this.createTransportFile(fileName, clientInfo, {
       level: levelStrict ?? 'silly',
       format: Winston.format.combine(

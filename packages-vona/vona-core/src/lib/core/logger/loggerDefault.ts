@@ -33,10 +33,10 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
     clients: {
       default(this: VonaApplication, clientInfo) {
         const transports = [
-          this.meta.logger.makeTransportFile('error', clientInfo, 'error'),
-          this.meta.logger.makeTransportFile('warn', clientInfo, 'warn'),
-          this.meta.logger.makeTransportFile('http', clientInfo, 'http'),
-          this.meta.logger.makeTransportFile('combined', clientInfo),
+          this.meta.logger.makeTransportFile(clientInfo, 'error', 'error'),
+          this.meta.logger.makeTransportFile(clientInfo, 'warn', 'warn'),
+          this.meta.logger.makeTransportFile(clientInfo, 'http', 'http'),
+          this.meta.logger.makeTransportFile(clientInfo, 'combined'),
           this.meta.logger.makeTransportConsole(clientInfo),
         ].filter(item => !!item);
         return { transports };
