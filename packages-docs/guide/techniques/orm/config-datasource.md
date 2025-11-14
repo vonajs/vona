@@ -91,14 +91,26 @@ If we want to add a new datasource, named `pgOrder`, using the database dialect 
 
 ### 1. Add Type Definitions
 
-Add type definitions for the new datasource
+Using the interface merging mechanism to add the type definition for the new datasource
+
+In the VSCode editor, enter the code snippet `recorddatabaseclient` to automatically generate a code skeleton:
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
-    pgOrder: never;
+    : never;
+  }
+}
+```
+
+Adjust the code and add `pgOrder`
+
+``` diff
+declare module 'vona-module-a-orm' {
+  export interface IDatabaseClientRecord {
++   pgOrder: never;
   }
 }
 ```

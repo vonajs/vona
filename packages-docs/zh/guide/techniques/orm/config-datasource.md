@@ -91,14 +91,26 @@ DATABASE_CLIENT_MYSQL_DATABASE = mysql
 
 ### 1. 添加类型定义
 
-为新数据源添加类型定义
+采用接口合并机制添加新数据源的类型定义
+
+在 VSCode 编辑器中，输入代码片段`recorddatabaseclient`，自动生成代码骨架:
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
-    pgOrder: never;
+    : never;
+  }
+}
+```
+
+调整代码，然后添加`pgOrder`
+
+``` diff
+declare module 'vona-module-a-orm' {
+  export interface IDatabaseClientRecord {
++   pgOrder: never;
   }
 }
 ```
