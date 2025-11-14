@@ -11,7 +11,7 @@ const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
   private [SymbolLogger]: Record<keyof ILoggerClientRecord, winston.Logger> = {} as any;
-  private [SymbolLoggerChildren]: Record<string, winston.Logger> = {};
+  private [SymbolLoggerChildren]: Record<keyof ILoggerClientRecord, Record<string, winston.Logger>> = {} as any;
 
   protected get $text(): IModuleLocaleText {
     if (!this[SymbolText]) {
@@ -31,14 +31,15 @@ export class BeanBase extends BeanBaseSimple {
     return this[SymbolLogger][clientName];
   }
 
-  protected $loggerChild(childName: keyof ILoggerChildRecord) {
-    if (!this[SymbolLoggerChildren][childName]) {
-      this[SymbolLoggerChildren][childName] = this.app.meta.logger.get().child({
+  protected $loggerChild(childName: keyof ILoggerChildRecord, clientName: keyof ILoggerClientRecord = 'default') {
+    if (!this[SymbolLoggerChildren][clientName]) this[SymbolLoggerChildren][clientName] = {} as never;
+    if (!this[SymbolLoggerChildren][clientName][childName]) {
+      this[SymbolLoggerChildren][clientName][childName] = this.app.meta.logger.get(clientName).child({
         beanFullName: this.$beanFullName,
         name: childName,
       });
     }
-    return this[SymbolLoggerChildren][childName];
+    return this[SymbolLoggerChildren][clientName][childName];
   }
 
   protected get $scope(): IBeanScopeContainer {

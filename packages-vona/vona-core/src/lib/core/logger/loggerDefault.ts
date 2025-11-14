@@ -1,3 +1,4 @@
+import type { PowerPartial } from 'vona';
 import type { VonaAppInfo } from '../../../types/application/app.ts';
 import type { ConfigLogger } from '../../../types/interface/logger.ts';
 import type { VonaConfigEnv } from '../../../types/utils/env.ts';
@@ -6,7 +7,7 @@ import { replaceTemplate } from '@cabloy/utils';
 import { formatLoggerAxiosError } from './utils.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) {
-  const configDefault: ConfigLogger = {
+  const configDefault: PowerPartial<ConfigLogger> = {
     rotate: {
       enable: env.LOGGER_ROTATE_ENABLE === 'true',
       options(filename) {
