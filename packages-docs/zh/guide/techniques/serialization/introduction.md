@@ -79,6 +79,8 @@ class EntityStudent {
 }
 ```
 
+- `@Serializer.transform`: 传入 Serializer Transform 名称`demo-student:upper`
+
 ## Filter参数
 
 可以为 Serializer Transform 传入 Filter 参数。系统先执行 Filter 函数，根据结果来控制当前 Serializer Transform 是否需要执行
