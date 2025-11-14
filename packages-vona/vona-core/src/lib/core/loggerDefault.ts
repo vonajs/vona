@@ -18,7 +18,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
         };
       },
     },
-    default(this: VonaApplication, { format, transports }, clientInfo) {
+    default(this: VonaApplication, clientInfo, { format, transports }) {
       const _transports = [
         this.meta.logger.createTransportFile('error', clientInfo, {
           level: 'error',

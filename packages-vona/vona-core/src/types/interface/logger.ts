@@ -6,7 +6,7 @@ export interface ILoggerOptionsClientInfo {
   level: () => (LoggerLevel | undefined);
 }
 
-export type TypeLoggerOptions = Winston.LoggerOptions | ((winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => Winston.LoggerOptions);
+export type TypeLoggerOptions = Winston.LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) => Winston.LoggerOptions);
 export type TypeLoggerRotateOptions =
   (fileName: string, winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => DailyRotateFile.DailyRotateFileTransportOptions;
 

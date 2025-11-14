@@ -60,10 +60,10 @@ export class AppLogger extends BeanSimple {
 
   private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
     if (typeof configClient !== 'function') return configClient;
-    return configClient.call(this.app, Winston, {
+    return configClient.call(this.app, {
       clientName,
       level: () => getLoggerClientLevel(clientName),
-    });
+    }, Winston);
   }
 
   public createTransportFile(
