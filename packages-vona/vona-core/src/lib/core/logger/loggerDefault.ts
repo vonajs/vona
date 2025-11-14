@@ -1,9 +1,9 @@
-import type { VonaAppInfo } from '../../types/application/app.ts';
-import type { ConfigLogger } from '../../types/interface/logger.ts';
-import type { VonaConfigEnv } from '../../types/utils/env.ts';
-import type { VonaApplication } from './application.ts';
+import type { VonaAppInfo } from '../../../types/application/app.ts';
+import type { ConfigLogger } from '../../../types/interface/logger.ts';
+import type { VonaConfigEnv } from '../../../types/utils/env.ts';
+import type { VonaApplication } from '../application.ts';
 import { replaceTemplate } from '@cabloy/utils';
-import { formatLoggerAxiosError, formatLoggerConsole, formatLoggerFilter } from './logger.ts';
+import { formatLoggerAxiosError, formatLoggerConsole, formatLoggerFilter } from './utils.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const configDefault: ConfigLogger = {
