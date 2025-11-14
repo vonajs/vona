@@ -349,7 +349,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.80
+        specifier: ^6.0.81
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -458,7 +458,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.317
+        specifier: ^1.0.318
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -570,7 +570,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.81
+        specifier: ^5.0.82
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -864,10 +864,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.81
+        specifier: ^5.0.82
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.180
+        specifier: ^5.0.181
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -977,7 +977,7 @@ importers:
         specifier: ^1.0.39
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.81
+        specifier: ^5.0.82
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1191,7 +1191,7 @@ importers:
         specifier: ^5.0.6
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.102
+        specifier: ^5.0.103
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.19
@@ -1547,7 +1547,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.81
+        specifier: ^6.0.82
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
