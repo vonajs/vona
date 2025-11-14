@@ -1,5 +1,6 @@
 import type * as Transport from 'winston-transport';
 import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../../types/interface/logger.ts';
+import { catchErrorSync } from '@cabloy/utils';
 import fse from 'fs-extra';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
@@ -101,8 +102,13 @@ export class AppLogger extends BeanSimple {
   ) {
     const dirname = this.app.config.server.loggerDir;
     if (!fse.existsSync(dirname)) {
-      console.error(`========== Logger dir not exists: ${dirname} ==========`);
-      return;
+      const [_, err] = catchErrorSync(() => {
+        fse.ensureDirSync(dirname);
+      });
+      if (err) {
+        console.error(`========== Logger dir not exists: ${dirname} ==========`);
+        return;
+      }
     }
     const configRotate = this.app.config.logger.rotate;
     let optionsFile;

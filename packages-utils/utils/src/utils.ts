@@ -19,6 +19,19 @@ export async function catchError<T>(
   return error ? [undefined, error!] : [data!, undefined];
 }
 
+export function catchErrorSync<T>(
+  fnMethod: (...args: any[]) => T,
+): [T, undefined] | [undefined, Error] {
+  let error: Error | undefined;
+  let data: T | undefined;
+  try {
+    data = fnMethod();
+  } catch (err) {
+    error = err as Error;
+  }
+  return error ? [undefined, error!] : [data!, undefined];
+}
+
 export async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
