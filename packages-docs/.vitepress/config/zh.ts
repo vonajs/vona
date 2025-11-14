@@ -370,7 +370,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: '序列化',
+          text: '序列化/数据脱敏',
           base: '/zh/guide/techniques/serialization/',
           collapsed: true,
           items: [
