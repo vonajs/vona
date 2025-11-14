@@ -123,7 +123,13 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: { exclude: false },
+        name: {
+          serializerTransforms: {
+            'a-serialization:exclude': {
+              exclude: true,
+            },
+          },
+        },
       },
     },
   },
@@ -203,7 +209,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform
+`a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform
 
 * 方法 2: 构造一个新的 schema
 
@@ -298,7 +304,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:getter`: `a-serialization`模块提供的 Serializer Transform
+`a-serialization:getter`: `a-serialization`模块提供的 Serializer Transform
 
 * 方法 2: 构造一个新的 schema
 
@@ -381,7 +387,7 @@ config.onions = {
 };
 ```
 
-- `a-serialization:custom`: `a-serialization`模块提供的 Serializer Transform
+`a-serialization:custom`: `a-serialization`模块提供的 Serializer Transform
 
 * 方法 2: 构造一个新的 schema
 
