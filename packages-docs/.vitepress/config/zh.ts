@@ -392,6 +392,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/techniques/i18n/',
           link: 'introduction',
         },
+        {
+          text: '日志',
+          base: '/zh/guide/techniques/logger/',
+          link: 'introduction',
+        },
       ],
     },
     {

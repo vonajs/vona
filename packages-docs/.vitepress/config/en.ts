@@ -381,11 +381,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Event',
           base: '/guide/techniques/event/',
-          link: 'introduction',
-        },
-        {
-          text: 'Event',
-          base: '/guide/techniques/event/',
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
@@ -395,6 +390,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'I18n',
           base: '/guide/techniques/i18n/',
+          link: 'introduction',
+        },
+        {
+          text: 'Logger',
+          base: '/guide/techniques/logger/',
           link: 'introduction',
         },
       ],
