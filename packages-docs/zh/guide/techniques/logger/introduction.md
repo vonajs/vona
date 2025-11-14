@@ -187,7 +187,7 @@ class ControllerStudent extends BeanBase {
 }
 ```
 
-`方式2`不仅代码简洁，而且还会自动在日志中带上当前 Bean Class 的`BeanFullName`，便于排查问题
+`方式2`不仅代码简洁，而且还会自动在日志中带上当前 Bean Class 的`beanFullName`，便于排查问题
 
 * 举例：
 
@@ -205,7 +205,7 @@ loggerOrder.info('test');
 
 ![](../../../assets/img/logger/logger-2.png)
 
-图中输出了`[demo-student.controller.student]`
+图中输出了 beanFullName: `[demo-student.controller.student]`
 
 ## 获取Logger Child实例
 
@@ -220,7 +220,7 @@ loggerOrderPay.info('$50');
 
 ![](../../../assets/img/logger/logger-3.png)
 
-图中输出了`[pay]`
+图中输出了 child name: `[pay]`
 
 ### 添加类型定义
 
