@@ -4,7 +4,7 @@ import type { ConfigLogger } from '../../../types/interface/logger.ts';
 import type { VonaConfigEnv } from '../../../types/utils/env.ts';
 import type { VonaApplication } from '../application.ts';
 import { replaceTemplate } from '@cabloy/utils';
-import { formatLoggerAxiosError } from './utils.ts';
+import { formatLoggerAxiosError, formatLoggerCtx } from './utils.ts';
 
 export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const configDefault: PowerPartial<ConfigLogger> = {
@@ -23,6 +23,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
       return {
         format: format.combine(
           formatLoggerAxiosError({ stack: true }),
+          formatLoggerCtx(),
           format.errors({ stack: true }),
           format.splat(),
           format.timestamp(),

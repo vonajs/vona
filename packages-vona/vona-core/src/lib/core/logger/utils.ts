@@ -1,6 +1,7 @@
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
+import { useApp } from 'vona';
 import * as Winston from 'winston';
 import { cast } from '../../../types/utils/cast.ts';
 
@@ -24,6 +25,14 @@ export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: a
     return info;
   }
   return einfo;
+});
+
+export const formatLoggerCtx = Winston.format((info, _opts: any) => {
+  const app = useApp();
+  if (!app.ctx || !app.ctx.method || !app.ctx.path) return info;
+  info.method = app.ctx.method;
+  info.path = app.ctx.path;
+  return info;
 });
 
 export const formatLoggerFilter = Winston.format((info, opts: any) => {

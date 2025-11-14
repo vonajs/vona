@@ -87,8 +87,8 @@ export class VonaApplication extends KoaApplication {
         protocol: 'http',
         secure: 'false',
         method: 'POST',
-        url: '/',
-        path: '/',
+        url: '',
+        path: '',
         socket: {
           remoteAddress: '127.0.0.1',
           remotePort: 7001,
