@@ -165,7 +165,7 @@ config.logger = {
 
 获取 Logger 实例有两种方式:
 
-* 方式 1
+* `方式1`
 
 ``` typescript
 class ControllerStudent extends BeanBase {
@@ -176,7 +176,7 @@ class ControllerStudent extends BeanBase {
 }
 ```
 
-* 方式 2
+* `方式2`
 
 ``` typescript
 class ControllerStudent extends BeanBase {
@@ -187,7 +187,7 @@ class ControllerStudent extends BeanBase {
 }
 ```
 
-`方式2`不仅代码简洁，而且还会自动在日志中带上当前 Bean Class 的`beanFullName`，便于排查问题
+`方式2`不仅代码更加简洁，而且还会自动在日志中带上当前 Bean Class 的`beanFullName`，便于排查问题
 
 * 举例：
 
