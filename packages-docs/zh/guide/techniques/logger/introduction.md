@@ -161,7 +161,7 @@ config.logger = {
 - `makeTransportConsole`: 用于构造控制台通道
 - `filter`: 新建的通道有可能为空，需要进行 filter
 
-## 获取Logger实例
+## 获取Logger Client实例
 
 获取 Logger 实例有两种方式:
 
@@ -187,9 +187,61 @@ class ControllerStudent extends BeanBase {
 }
 ```
 
-`方式2`不仅代码简洁，而且还会自动在日志中带上当前 Bean Class 的`BeanFullName`，便于排查信息
+`方式2`不仅代码简洁，而且还会自动在日志中带上当前 Bean Class 的`BeanFullName`，便于排查问题
 
 * 举例：
 
+``` typescript
+const loggerOrder = this.app.meta.logger.get('order');
+loggerOrder.info('test');
+```
 
+![](../../../assets/img/logger/logger-1.png)
 
+``` typescript
+const loggerOrder = this.$loggerClient('order');
+loggerOrder.info('test');
+```
+
+![](../../../assets/img/logger/logger-2.png)
+
+图中输出了`[demo-student.controller.student]`
+
+## 获取Logger Child实例
+
+对于同一个 Logger Client，可以生成多个 Child 实例，不同的 Child 对应不同的场景
+
+比如，生成 Child `pay`，从而在日志中可以明确提示`pay`信息
+
+``` typescript
+const loggerOrderPay = this.$loggerChild('pay', 'order');
+loggerOrderPay.info('$50');
+```
+
+![](../../../assets/img/logger/logger-3.png)
+
+图中输出了`[pay]`
+
+### 添加类型定义
+
+同样，需要提供`pay`的类型定义，从而支持类型提示
+
+在 VSCode 编辑器中，输入代码片段`recordloggerchild`，自动生成代码骨架:
+
+``` typescript
+declare module 'vona' {
+  export interface ILoggerChildRecord {
+    : never;
+  }
+}
+```
+
+调整代码，然后添加`pay`
+
+``` diff
+declare module 'vona' {
+  export interface ILoggerChildRecord {
++   pay: never;
+  }
+}
+```
