@@ -1,5 +1,6 @@
 import type * as Transport from 'winston-transport';
 import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../../types/interface/logger.ts';
+import fse from 'fs-extra';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import { BeanSimple } from '../../bean/beanSimple.ts';
@@ -98,6 +99,10 @@ export class AppLogger extends BeanSimple {
     clientInfo: ILoggerOptionsClientInfo,
     options: Winston.transports.FileTransportOptions | DailyRotateFile.DailyRotateFileTransportOptions,
   ) {
+    const dirname = this.app.config.server.loggerDir;
+    if (!fse.existsSync(dirname)) {
+      throw new Error(`Logger dir not exists: ${dirname}`);
+    }
     const configRotate = this.app.config.logger.rotate;
     let optionsFile;
     if (configRotate.enable) {
@@ -105,7 +110,7 @@ export class AppLogger extends BeanSimple {
     } else {
       optionsFile = { filename: `${fileName}.log` };
     }
-    const _options = deepExtend({ dirname: this.app.config.server.loggerDir }, optionsFile, options);
+    const _options = deepExtend({ dirname }, optionsFile, options);
     if (configRotate.enable) {
       const transport = new DailyRotateFile(_options);
       transport.on('error', err => {
