@@ -101,7 +101,7 @@ export class AppLogger extends BeanSimple {
   ) {
     const dirname = this.app.config.server.loggerDir;
     if (!fse.existsSync(dirname)) {
-      console.error(`Logger dir not exists: ${dirname}`);
+      console.error(`========== Logger dir not exists: ${dirname} ==========`);
       return;
     }
     const configRotate = this.app.config.logger.rotate;
