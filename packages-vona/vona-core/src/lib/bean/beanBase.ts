@@ -1,5 +1,5 @@
 import type winston from 'winston';
-import type { ILoggerChildRecord } from '../../types/interface/logger.ts';
+import type { ILoggerChildRecord, ILoggerClientRecord } from '../../types/interface/logger.ts';
 import type { IModuleLocaleText } from './resource/locale/type.ts';
 import type { IBeanScopeContainer } from './scope/beanScopeContainer.ts';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
@@ -10,7 +10,7 @@ const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
 
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
-  private [SymbolLogger]: winston.Logger;
+  private [SymbolLogger]: Record<keyof ILoggerClientRecord, winston.Logger> = {} as any;
   private [SymbolLoggerChildren]: Record<string, winston.Logger> = {};
 
   protected get $text(): IModuleLocaleText {
@@ -21,10 +21,14 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected get $logger() {
-    if (!this[SymbolLogger]) {
-      this[SymbolLogger] = this.app.meta.logger.get().child({ beanFullName: this.$beanFullName });
+    return this.$loggerClient('default');
+  }
+
+  protected $loggerClient(clientName: keyof ILoggerClientRecord) {
+    if (!this[SymbolLogger][clientName]) {
+      this[SymbolLogger][clientName] = this.app.meta.logger.get(clientName).child({ beanFullName: this.$beanFullName });
     }
-    return this[SymbolLogger];
+    return this[SymbolLogger][clientName];
   }
 
   protected $loggerChild(childName: keyof ILoggerChildRecord) {

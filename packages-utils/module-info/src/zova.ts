@@ -1,14 +1,14 @@
 export type ZovaMetaFlavor = 'front' | 'admin' | 'vonaHome' | 'vonaCabloy' | keyof ZovaMetaFlavorExtend;
 export type ZovaMetaMode = 'development' | 'production';
 export type ZovaMetaAppMode =
-  | 'spa'
-  | 'ssr'
-  | 'pwa'
-  | 'cordova'
-  | 'capacitor'
-  | 'electron'
-  | 'bex'
-  | keyof ZovaMetaAppModeExtend;
+  'spa' |
+  'ssr' |
+  'pwa' |
+  'cordova' |
+  'capacitor' |
+  'electron' |
+  'bex' |
+  keyof ZovaMetaAppModeExtend;
 
 export interface ZovaConfigMeta {
   flavor: ZovaMetaFlavor;
