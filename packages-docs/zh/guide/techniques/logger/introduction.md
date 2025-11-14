@@ -146,7 +146,7 @@ config.logger = {
       const transports = [
         this.meta.logger.makeTransportFile(clientInfo, 'order'),
         this.meta.logger.makeTransportConsole(clientInfo),
-      ];
+      ].filter(item => !!item);
       return { transports };
     },
   },
@@ -159,6 +159,7 @@ config.logger = {
 - `makeTransportFile`: 用于构造文件通道，需要提供日志文件名`order`
   - 由于文件名模版是`${filename}-%DATE%.log`，那么实际生成的文件名是`order-2025-11-14.log`
 - `makeTransportConsole`: 用于构造控制台通道
+- `filter`: 新建的通道有可能为空，需要进行 filter
 
 ## 获取Logger实例
 
