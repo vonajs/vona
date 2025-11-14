@@ -177,6 +177,18 @@
     ],
     "description": "record.loggerclient"
   },
+  "record.loggerchild": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordloggerchild",
+    "body": [
+      "declare module 'vona' {",
+      "  export interface ILoggerChildRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.loggerchild"
+  },
   "record.redisclient": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordredisclient",
