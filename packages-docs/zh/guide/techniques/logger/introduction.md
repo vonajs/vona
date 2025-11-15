@@ -170,7 +170,9 @@ config.logger = {
 ``` typescript
 class ControllerStudent extends BeanBase {
   async test() {
+    // logger: default
     const loggerDefault = this.app.meta.logger.get();
+    // logger: order
     const loggerOrder = this.app.meta.logger.get('order');
   }
 }
@@ -181,7 +183,9 @@ class ControllerStudent extends BeanBase {
 ``` typescript
 class ControllerStudent extends BeanBase {
   async test() {
+    // logger: default
     const loggerDefault = this.$logger;
+    // logger: order
     const loggerOrder = this.$loggerClient('order');
   }
 }
@@ -199,8 +203,10 @@ loggerOrder.info('test');
 ![](../../../assets/img/logger/logger-1.png)
 
 ``` typescript
-const loggerOrder = this.$loggerClient('order');
-loggerOrder.info('test');
+// logger: default
+this.$logger.info('test');
+// logger: order
+this.$loggerClient('order').info('test');
 ```
 
 ![](../../../assets/img/logger/logger-2.png)
@@ -214,8 +220,10 @@ loggerOrder.info('test');
 比如，生成 Child `pay`，从而在日志中可以明确提示`pay`信息
 
 ``` typescript
-const loggerOrderPay = this.$loggerChild('pay', 'order');
-loggerOrderPay.info('$50');
+// child of logger: default
+this.$loggerChild('pay').info('$50');
+// child of logger: order
+this.$loggerChild('pay', 'order').info('$50');
 ```
 
 ![](../../../assets/img/logger/logger-3.png)
