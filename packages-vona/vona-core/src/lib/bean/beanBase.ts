@@ -24,7 +24,7 @@ export class BeanBase extends BeanBaseSimple {
     return this.$loggerClient('default');
   }
 
-  protected $loggerClient(clientName: keyof ILoggerClientRecord) {
+  protected $loggerClient(clientName: keyof ILoggerClientRecord = 'default') {
     if (!this[SymbolLogger][clientName]) {
       this[SymbolLogger][clientName] = this.app.meta.logger.get(clientName).child({ beanFullName: this.$beanFullName });
     }

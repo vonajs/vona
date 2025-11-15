@@ -171,9 +171,9 @@ config.logger = {
 class ControllerStudent extends BeanBase {
   async test() {
     // logger: default
-    const loggerDefault = this.app.meta.logger.get();
+    const loggerDefault = this.bean.logger.default;
     // logger: order
-    const loggerOrder = this.app.meta.logger.get('order');
+    const loggerOrder = this.bean.logger.getClient('order');
   }
 }
 ```
@@ -196,7 +196,7 @@ class ControllerStudent extends BeanBase {
 * 举例：
 
 ``` typescript
-const loggerOrder = this.app.meta.logger.get('order');
+const loggerOrder = this.bean.logger.getClient('order');
 loggerOrder.info('test');
 ```
 

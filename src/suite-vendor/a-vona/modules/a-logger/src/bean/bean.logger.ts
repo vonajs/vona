@@ -1,4 +1,4 @@
-import type { ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel } from 'vona';
+import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel } from 'vona';
 import type * as Transport from 'winston-transport';
 import { BeanBase, formatLoggerConsole, formatLoggerFilter } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -6,13 +6,25 @@ import * as Winston from 'winston';
 
 @Bean()
 export class BeanLogger extends BeanBase {
-  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
+  public getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
     return this.app.meta.logger.getLevel(clientName);
   }
 
-  setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+  public setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
     this.app.meta.logger.setLevel(level, clientName);
     this.scope.broadcast.setLevel.emit({ level, clientName });
+  }
+
+  public get default() {
+    return this.app.meta.logger.get();
+  }
+
+  public getClient(clientName?: keyof ILoggerClientRecord) {
+    return this.app.meta.logger.get(clientName);
+  }
+
+  public getChild(childName: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord) {
+    return this.app.meta.logger.get(clientName).child({ name: childName });
   }
 
   public makeTransportFile(clientInfo: ILoggerOptionsClientInfo, fileName: string, levelStrict?: LoggerLevel): Transport {
