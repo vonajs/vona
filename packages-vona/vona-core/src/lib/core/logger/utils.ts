@@ -1,3 +1,4 @@
+import type { ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
@@ -46,15 +47,16 @@ export const formatLoggerFilter = Winston.format((info, opts: any) => {
   return false;
 });
 
-export const formatLoggerConsole = () => {
+export const formatLoggerConsole = (clientInfo: ILoggerOptionsClientInfo) => {
   return Winston.format.printf(({ timestamp, level, stack, message, name, beanFullName, durationMs, ...meta }) => {
+    const textClientName = clientInfo.clientName === 'default' ? '' : ` ${chalk.cyan(`[${clientInfo.clientName}]`)}`;
     const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
     const textBeanFullName = beanFullName ? ` ${chalk.gray(`[${beanFullName}]`)}` : '';
     const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
     const textMessage = ` ${message}`;
     const textDurationMs = durationMs !== undefined ? ` ${chalk.cyan(`+${durationMs}ms`)}` : '';
     const textStack = stack ? `\n${stack}` : '';
-    return `${timestamp} ${level}${textName}${textBeanFullName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
+    return `${timestamp} ${level}${textClientName}${textName}${textBeanFullName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
   });
 };
 

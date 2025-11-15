@@ -89,7 +89,7 @@ export class AppLogger extends BeanSimple {
       format: Winston.format.combine(
         formatLoggerFilter({ level: clientInfo.level, silly: true }),
         Winston.format.colorize(),
-        formatLoggerConsole(),
+        formatLoggerConsole(clientInfo),
       ),
       forceConsole: true,
     });
