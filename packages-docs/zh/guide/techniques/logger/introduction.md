@@ -253,3 +253,102 @@ declare module 'vona' {
   }
 }
 ```
+
+## 日志分级
+
+可以基于分级控制写入日志文件的内容
+
+### 1. 分级
+
+VonaJS 采用 NPM 分级规则，参见: [RFC5424](https://tools.ietf.org/html/rfc5424)
+
+``` typescript
+const levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6
+};
+```
+
+### 2. 输出方法
+
+与分级对应的是一组输出方法
+
+``` typescript
+this.$logger.error('test');
+this.$logger.warn('test');
+this.$logger.info('test');
+this.$logger.http('test');
+this.$logger.verbose('test');
+this.$logger.debug('test');
+this.$logger.silly('test');
+```
+
+### 3. 默认分级
+
+VonaJS 的默认分级是`info`，从而可以控制只有`<=info`的分级日志才写入文件
+
+我们在新建`order` Client，可以通过`makeTransportFile`方法实现此策略
+
+``` diff
+// logger
+config.logger = {
+  clients: {
+    order(this: VonaApplication, clientInfo) {
+      const transports = [
++       this.meta.logger.makeTransportFile(clientInfo, 'order'),
+        this.meta.logger.makeTransportConsole(clientInfo),
+      ].filter(item => !!item);
+      return { transports };
+    },
+  },
+};
+```
+
+如果需要强制某个分级的日志写入独立的文件，可以再增加一个文件通道。比如，将`debug`分级的日志写入文件`order-debug`中
+
+``` diff
+// logger
+config.logger = {
+  clients: {
+    order(this: VonaApplication, clientInfo) {
+      const transports = [
++       this.meta.logger.makeTransportFile(clientInfo, 'order-debug', 'debug'),
+        this.meta.logger.makeTransportFile(clientInfo, 'order'),
+        this.meta.logger.makeTransportConsole(clientInfo),
+      ].filter(item => !!item);
+      return { transports };
+    },
+  },
+};
+```
+
+对于控制台通道，有一个特殊约定：凡是`silly`分级的日志，都会输出到控制台。因此，通过`makeTransportConsole`方法实现此策略
+
+``` diff
+// logger
+config.logger = {
+  clients: {
+    order(this: VonaApplication, clientInfo) {
+      const transports = [
+        this.meta.logger.makeTransportFile(clientInfo, 'order'),
++       this.meta.logger.makeTransportConsole(clientInfo),
+      ].filter(item => !!item);
+      return { transports };
+    },
+  },
+};
+```
+
+### 分级配置
+
+可以通过.env 文件修改默认的分级配置
+
+``` typescript
+
+```
+
