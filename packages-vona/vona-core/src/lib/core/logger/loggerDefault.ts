@@ -19,7 +19,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
         };
       },
     },
-    default(this: VonaApplication, _clientInfo, { format }) {
+    base(this: VonaApplication, _clientInfo, { format }) {
       return {
         format: format.combine(
           formatLoggerAxiosError({ stack: true }),

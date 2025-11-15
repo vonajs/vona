@@ -54,7 +54,7 @@ export class AppLogger extends BeanSimple {
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
     const configNode = deepExtend(
       {},
-      this._prepareConfigClient(clientName, this.app.config.logger.default),
+      this._prepareConfigClient(clientName, this.app.config.logger.base),
       this._prepareConfigClient(clientName, configClient),
     );
     const logger = Winston.createLogger(configNode);

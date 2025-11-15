@@ -16,13 +16,15 @@ export interface ILoggerClientRecord {
 
 export interface ILoggerChildRecord {}
 
+export interface ILoggerRotateConfig {
+  enable: boolean;
+  options: TypeLoggerRotateOptions;
+}
+
 export interface ConfigLogger {
-  default: TypeLoggerOptions;
+  base: TypeLoggerOptions;
   clients: Record<keyof ILoggerClientRecord, TypeLoggerOptions>;
-  rotate: {
-    enable: boolean;
-    options: TypeLoggerRotateOptions;
-  };
+  rotate: ILoggerRotateConfig;
 }
 
 export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
