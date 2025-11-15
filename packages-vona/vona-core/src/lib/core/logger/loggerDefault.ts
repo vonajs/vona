@@ -31,18 +31,7 @@ export function combineLoggerDefault(_appInfo: VonaAppInfo, env: VonaConfigEnv) 
         transports: undefined,
       };
     },
-    clients: {
-      default(this: VonaApplication, clientInfo) {
-        const transports = [
-          this.bean.logger.makeTransportFile(clientInfo, 'error', 'error'),
-          this.bean.logger.makeTransportFile(clientInfo, 'warn', 'warn'),
-          this.bean.logger.makeTransportFile(clientInfo, 'http', 'http'),
-          this.bean.logger.makeTransportFile(clientInfo, 'combined'),
-          this.bean.logger.makeTransportConsole(clientInfo),
-        ].filter(item => !!item);
-        return { transports };
-      },
-    },
+    clients: {},
   };
   return configDefault;
 }

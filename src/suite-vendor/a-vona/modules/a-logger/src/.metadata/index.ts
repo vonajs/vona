@@ -108,6 +108,9 @@ export interface IModuleBroadcast {
   'setLevel': BroadcastSetLevel;
 }
 /** broadcast: end */
+/** main: begin */
+export * from '../main.ts';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
