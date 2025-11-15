@@ -395,7 +395,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '日志',
           base: '/zh/guide/techniques/logger/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+            { text: '日志分级', link: 'logger-level' },
+          ],
         },
       ],
     },

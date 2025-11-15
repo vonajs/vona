@@ -395,7 +395,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Logger',
           base: '/guide/techniques/logger/',
-          link: 'introduction',
+          collapsed: true,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+            { text: 'Logger Level', link: 'logger-level' },
+          ],
         },
       ],
     },
