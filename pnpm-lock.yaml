@@ -349,7 +349,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.85
+        specifier: ^6.0.86
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -1661,6 +1661,12 @@ importers:
       pino-std-serializers:
         specifier: ^7.0.0
         version: 7.0.0
+      winston:
+        specifier: ^3.18.3
+        version: 3.18.3
+      winston-transport:
+        specifier: ^4.9.0
+        version: 4.9.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0

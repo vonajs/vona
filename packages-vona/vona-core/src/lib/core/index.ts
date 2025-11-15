@@ -1,6 +1,7 @@
 export * from './application.ts';
 export * from './config.ts';
 export * from './locales.ts';
+export * from './logger/index.ts';
 export * from './meta.ts';
 export * from './metadata.ts';
 export * from './resource.ts';

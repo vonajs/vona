@@ -41,7 +41,9 @@
     ]
   },
   "dependencies": {
-    "pino-std-serializers": "^7.0.0"
+    "pino-std-serializers": "^7.0.0",
+    "winston": "^3.18.3",
+    "winston-transport": "^4.9.0"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

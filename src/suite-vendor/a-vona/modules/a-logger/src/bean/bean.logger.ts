@@ -1,6 +1,8 @@
-import type { ILoggerClientRecord, LoggerLevel } from 'vona';
-import { BeanBase } from 'vona';
+import type { ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel } from 'vona';
+import type * as Transport from 'winston-transport';
+import { BeanBase, formatLoggerConsole, formatLoggerFilter } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import * as Winston from 'winston';
 
 @Bean()
 export class BeanLogger extends BeanBase {
@@ -11,5 +13,28 @@ export class BeanLogger extends BeanBase {
   setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
     this.app.meta.logger.setLevel(level, clientName);
     this.scope.broadcast.setLevel.emit({ level, clientName });
+  }
+
+  public makeTransportFile(clientInfo: ILoggerOptionsClientInfo, fileName: string, levelStrict?: LoggerLevel): Transport {
+    return this.app.meta.logger.createTransportFile(fileName, clientInfo, {
+      level: levelStrict ?? 'silly',
+      format: Winston.format.combine(
+        formatLoggerFilter({ level: levelStrict ?? clientInfo.level, strict: !!levelStrict }),
+        Winston.format.json(),
+      ),
+    });
+  }
+
+  public makeTransportConsole(clientInfo: ILoggerOptionsClientInfo): Transport | undefined {
+    if (this.app.meta.env.LOGGER_DUMMY === 'true') return;
+    return new Winston.transports.Console({
+      level: 'silly',
+      format: Winston.format.combine(
+        formatLoggerFilter({ level: clientInfo.level, silly: true }),
+        Winston.format.colorize(),
+        formatLoggerConsole(clientInfo),
+      ),
+      forceConsole: true,
+    });
   }
 }

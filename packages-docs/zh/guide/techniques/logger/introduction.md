@@ -144,8 +144,8 @@ config.logger = {
   clients: {
     order(this: VonaApplication, clientInfo) {
       const transports = [
-        this.meta.logger.makeTransportFile(clientInfo, 'order'),
-        this.meta.logger.makeTransportConsole(clientInfo),
+        this.bean.logger.makeTransportFile(clientInfo, 'order'),
+        this.bean.logger.makeTransportConsole(clientInfo),
       ].filter(item => !!item);
       return { transports };
     },
@@ -300,8 +300,8 @@ config.logger = {
   clients: {
     order(this: VonaApplication, clientInfo) {
       const transports = [
-+       this.meta.logger.makeTransportFile(clientInfo, 'order'),
-        this.meta.logger.makeTransportConsole(clientInfo),
++       this.bean.logger.makeTransportFile(clientInfo, 'order'),
+        this.bean.logger.makeTransportConsole(clientInfo),
       ].filter(item => !!item);
       return { transports };
     },
@@ -317,9 +317,9 @@ config.logger = {
   clients: {
     order(this: VonaApplication, clientInfo) {
       const transports = [
-+       this.meta.logger.makeTransportFile(clientInfo, 'order-debug', 'debug'),
-        this.meta.logger.makeTransportFile(clientInfo, 'order'),
-        this.meta.logger.makeTransportConsole(clientInfo),
++       this.bean.logger.makeTransportFile(clientInfo, 'order-debug', 'debug'),
+        this.bean.logger.makeTransportFile(clientInfo, 'order'),
+        this.bean.logger.makeTransportConsole(clientInfo),
       ].filter(item => !!item);
       return { transports };
     },
@@ -335,8 +335,8 @@ config.logger = {
   clients: {
     order(this: VonaApplication, clientInfo) {
       const transports = [
-        this.meta.logger.makeTransportFile(clientInfo, 'order'),
-+       this.meta.logger.makeTransportConsole(clientInfo),
+        this.bean.logger.makeTransportFile(clientInfo, 'order'),
++       this.bean.logger.makeTransportConsole(clientInfo),
       ].filter(item => !!item);
       return { transports };
     },
