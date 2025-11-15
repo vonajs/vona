@@ -254,3 +254,55 @@ declare module 'vona' {
 }
 ```
 
+## 日志消息
+
+### 1. 一般用法
+
+``` typescript
+this.$logger.info('test');
+```
+
+### 2. 字符串插值
+
+基于[util.format](https://nodejs.org/dist/latest/docs/api/util.html#util_util_format_format_args)实现字符串插值
+
+``` typescript
+this.$logger.info('%s has %d apples', 'Tom', 3);
+```
+
+### 3. 延迟消息
+
+由于存在日志分级，有些分级的消息并不会写入文件。那么，如果构造消息内容太大，则会浪费系统性能
+
+* 举例
+
+``` typescript
+const obj = { data: 'more info' };
+this.$logger.debug(JSON.stringify(obj));
+```
+
+如果当前分级是`info`，那么`debug`分级的日志就不会写入文件。那么，`JSON.stringify`就会空耗系统性能
+
+* 解决方案
+
+可以提供回调函数，当需要写入文件时才会执行回调函数，从而生成实际的消息
+
+``` typescript
+const obj = { data: 'more info' };
+this.$logger.debug(() => {
+  return JSON.stringify(obj);
+});
+```
+
+### 4. 多级Child
+
+可以从当前 Logger 实例创建多级 Child Logger，从而向日志中传入 metadata
+
+``` typescript
+this.$logger.child({ requestId: '451' }).child({ extra: 'some info' }).info('test');
+this.$logger.child({ requestId: '578', extra: 'some info' }).info('test');
+```
+
+如下图所示：`requestId/extra`
+
+![](../../../assets/img/logger/logger-4.png)
