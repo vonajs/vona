@@ -344,11 +344,79 @@ config.logger = {
 };
 ```
 
-### 分级配置
+### 4. 分级配置
 
 可以通过.env 文件修改默认的分级配置
 
-``` typescript
+* Client: `default`
 
+``` typescript
+LOGGER_CLIENT_DEFAULT = 
 ```
 
+支持如下值：`(empty)/true/false/{level}`
+
+比如，希望`<=debug`分级的日志写入文件，那么，配置如下:
+
+``` typescript
+LOGGER_CLIENT_DEFAULT = debug
+```
+
+也可以直接在控制台设置环境变量:
+
+``` bash
+LOGGER_CLIENT_DEFAULT=debug npm run dev
+```
+
+* Client: `order`
+
+对于新增的 Client `order`，也可以设置默认分级：
+
+``` typescript
+LOGGER_CLIENT_ORDER = verbose
+```
+
+### 5. 获取当前分级
+
+在系统运行中可以获取当前分级：
+
+``` typescript
+class ControllerStudent {
+  async test() {
+    // logger: default
+    const levelDefault = this.bean.logger.getLevel();
+    // logger: order
+    const levelOrder = this.bean.logger.getLevel('order');
+  }
+}  
+```
+
+### 6. 动态修改分级
+
+在系统运行中可以动态修改分级，从而在不停机、不重启的情况下，随时控制基于分级的写入策略
+
+当调用`setLevel`方法时，系统会自动广播至所有 Workers，修改每个工作进程中的当前分级
+
+``` typescript
+class ControllerStudent {
+  async test() {
+    // level: info
+    let levelDefault = this.bean.logger.getLevel();
+    assert.equal(levelDefault, 'info');
+    this.$logger.debug('1: this line will not output');
+    // level: debug
+    this.bean.logger.setLevel('debug');
+    levelDefault = this.bean.logger.getLevel();
+    assert.equal(levelDefault, 'debug');
+    this.$logger.debug('2: this line will output');
+    // disable
+    this.bean.logger.setLevel(false);
+    levelDefault = this.bean.logger.getLevel();
+    assert.equal(levelDefault, false);
+    this.$logger.info('3: this line will not output');
+    this.$logger.debug('4: this line will not output');
+    // enable
+    this.bean.logger.setLevel(true);
+  }
+}  
+```

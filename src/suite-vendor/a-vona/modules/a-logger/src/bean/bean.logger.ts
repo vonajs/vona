@@ -4,7 +4,7 @@ import { Bean } from 'vona-module-a-bean';
 
 @Bean()
 export class BeanLogger extends BeanBase {
-  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
     return this.app.meta.logger.getLevel(clientName);
   }
 
