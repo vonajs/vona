@@ -48,7 +48,7 @@ SERVER_LOGGERDIR = /new/path
 // logger
 config.logger = {
   rotate: {},
-  default: {},
+  base: {},
   clients: {},
 };
 ```
@@ -56,8 +56,8 @@ config.logger = {
 |名称|说明|
 |--|--|
 |rotate|日志Rotate|
-|default|缺省配置，为所有Client提供通用的基础配置|
-|clients|配置多个Client|
+|base|基础配置，为所有Client提供通用的基础配置|
+|clients|配置多个Client。系统提供了内置的`default` Client，实现开箱即用的日志能力|
 
 ## Rotate
 
