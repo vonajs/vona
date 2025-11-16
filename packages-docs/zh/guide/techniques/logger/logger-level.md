@@ -1,6 +1,6 @@
 # 日志分级
 
-可以基于分级控制写入日志文件的内容
+可以基于分级控制写入日志文件的消息内容
 
 ## NPM分级
 
@@ -147,7 +147,7 @@ class ControllerStudent {
 
 在系统运行中可以动态修改分级，从而在不停机、不重启的情况下，随时控制基于分级的写入策略
 
-当调用`setLevel`方法时，系统会自动广播至所有 Workers，修改每个工作进程中的当前分级
+当调用`setLevel`方法时，系统会自动广播至所有 Workers，从而修改每个工作进程中的当前分级
 
 ``` typescript
 class ControllerStudent {
@@ -170,5 +170,5 @@ class ControllerStudent {
     // enable
     this.bean.logger.setLevel(true);
   }
-}  
+}
 ```

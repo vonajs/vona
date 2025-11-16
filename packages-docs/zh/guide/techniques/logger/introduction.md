@@ -159,11 +159,11 @@ config.logger = {
 - `makeTransportFile`: 用于构造文件通道，需要提供日志文件名`order`
   - 由于文件名模版是`${filename}-%DATE%.log`，那么实际生成的文件名是`order-2025-11-14.log`
 - `makeTransportConsole`: 用于构造控制台通道
-- `filter`: 新建的通道有可能为空，需要进行 filter
+- `filter`: 新建的通道实例有可能为 undefined，因此需要进行 filter
 
 ## 获取Logger Client实例
 
-获取 Logger 实例有两种方式:
+获取 Logger Client 实例有两种方式:
 
 * `方式1`
 
@@ -220,9 +220,9 @@ this.$loggerClient('order').info('test');
 比如，生成 Child `pay`，从而在日志中可以明确提示`pay`信息
 
 ``` typescript
-// child of logger: default
+// child of logger-default
 this.$loggerChild('pay').info('$50');
-// child of logger: order
+// child of logger-order
 this.$loggerChild('pay', 'order').info('$50');
 ```
 
@@ -296,7 +296,7 @@ this.$logger.debug(() => {
 
 ### 4. 多级Child
 
-可以从当前 Logger 实例创建多级 Child Logger，从而向日志中传入 metadata
+可以从当前 Logger 实例创建多级 Child Logger，从而向日志消息中传入更多 metadata
 
 ``` typescript
 this.$logger.child({ requestId: '451' }).child({ extra: 'some info' }).info('test');
