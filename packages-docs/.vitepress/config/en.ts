@@ -371,7 +371,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         {
           text: 'Serialization',
-          base: '/zh/guide/techniques/serialization/',
+          base: '/guide/techniques/serialization/',
           collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
