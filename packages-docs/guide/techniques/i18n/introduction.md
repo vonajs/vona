@@ -111,68 +111,48 @@ locale.modules = {
 
 ``` typescript
 const locale = this.ctx.locale;
-
 ```
 
 ### 2. Set Current Locale
 
 ``` typescript
 this.ctx.locale = 'en-us';
-
 ```
 
 ### 3. Get Default Locale
 
 ``` typescript
 const localeDefault = this.$scope.i18n.config.defaultLocale;
-
 ```
 
 ## Rules for Getting the Current Locale
 
-When a user accesses the backend API, the backend will automatically obtain the current locale according to the rules.
+When a user accesses the backend API, the backend will automatically obtain the current locale according to the rules
 
 ### 1. Module Configuration
 
-I18n is the core capability provided by the module a-i18n. The module configuration can be modified in the App config:
+I18n is the core capability provided by the module `a-i18n`. The module configuration can be modified in the App config:
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-
 // modules
-
 config.modules = {
-
-'a-i18n': {
-
-defaultLocale: 'en-us',
-
-queryField: 'x-vona-locale',
-
-headerField: 'x-vona-locale',
-
-cookieField: 'locale',
-
-},
-
+  'a-i18n': {
+    defaultLocale: 'en-us',
+    queryField: 'x-vona-locale',
+    headerField: 'x-vona-locale',
+    cookieField: 'locale',
+  },
 };
-
 ```
 
 |Name|Description|
-
 |--|--|
-
 |defaultLocale|Default locale|
-
-|queryField|Retrieves the current locale from the request query. The query key defaults to `x-vona-locale`.|
-
-|headerField|Retrieves the current locale from the request header. The header key defaults to `x-vona-locale`.|
-
-|cookieField|Retrieves the current locale from the request header. The header key defaults to `x-vona-locale`.|
-
-|cookieField|Retrieves the current locale from the request header. Retrieve the current locale from the cookie. The cookie key defaults to `locale`.
+|queryField|Retrieves the current locale from the request query. The query key defaults to `x-vona-locale`|
+|headerField|Retrieves the current locale from the request header. The header key defaults to `x-vona-locale`|
+|cookieField|Retrieves the current locale from the request cookie. The cookie key defaults to `locale`|
 
 ### 2. Rule Order
 
@@ -184,7 +164,7 @@ The system determines the current locale in the following order:
 
 VonaJS provides two default languages: `en-us` and `zh-cn`. The following demonstrates how to add a new language `zh-tw`
 
-### 1. Adding a Type Definition
+### 1. Adding Type Definition
 
 Adding a new language type definition using the interface merging mechanism
 
@@ -192,11 +172,9 @@ In the VSCode editor, enter the code snippet `recordlocale`, which will automati
 
 ``` typescript
 declare module 'vona' {
-export interface ILocaleRecord {
-
-: never;
-
-}
+  export interface ILocaleRecord {
+    : never;
+  }
 }
 ```
 
@@ -204,11 +182,9 @@ Adjust the code, and then add `zh-tw`
 
 ``` diff
 declare module 'vona' {
-export interface ILocaleRecord {
-
-+ 'zh-tw': never;
-
-}
+  export interface ILocaleRecord {
++   'zh-tw': never;
+  }
 }
 ```
 
@@ -220,12 +196,11 @@ Create a new language file `zh-tw.ts`, and then add language resources
 
 ``` typescript
 export default {
-StudentName: 'Student Name',
-
+  StudentName: '學生名稱',
 };
 ```
 
-## Plural Numbers
+## Plurals
 
 ### 1. Define Language Resources
 
@@ -236,7 +211,6 @@ export default {
 + TestApples_: '%d apples',
 + TestApples_0: 'no apples',
 + TestApples_1: 'one apple',
-
 };
 ```
 
@@ -244,9 +218,8 @@ export default {
 
 ```diff
 export default {
-+ TestApples_: '%d apples',
-+ TestApples_0: 'No apples',
-
++ TestApples_: '%d个苹果',
++ TestApples_0: '没有苹果',
 };
 ```
 
@@ -258,23 +231,21 @@ const apple0 = this.scope.locale.TestApples_(0);
 const apple1 = this.scope.locale.TestApples_(1);
 const apple2 = this.scope.locale.TestApples_(2);
 console.log(`${apple0}, ${apple1}, ${apple2}`);
-
 ```
 
 The console output is as follows:
 
 ``` bash
 no apples, one apple, 2 apples
-
 ```
 
-- `TestApples_`: Default language resource. Adding the suffix `_` to a language resource prompts the developer that the language resource requires parameters.
+- `TestApples_`: Default language resource. Adding the suffix `_` to a language resource prompts the developer that the language resource requires parameters
 
-- `TestApples_{n}`: Can provide a separate language resource for any specific `n`. When translating languages, if the system cannot find a specific language resource `n`, it uses the default language resource `TestApples_`.
+- `TestApples_{n}`: Can provide a separate language resource for any specific `n`. When translating languages, if the system cannot find a specific language resource `n`, it uses the default language resource `TestApples_`
 
-## Plural Numbers: Multiple Parameters
+## Plurals: Multiple Parameters
 
-If the language resource supports multiple parameters, then you can explicitly specify which parameter supports plural numbers.
+If the language resource supports multiple parameters, then you can explicitly specify which parameter supports plurals
 
 ### 1. Defining Language Resources
 
@@ -283,79 +254,60 @@ If the language resource supports multiple parameters, then you can explicitly s
 ```diff
 export default {
 + TestNameApples_: '%s has %d apples',
-
 + TestNameApples_0_1: '%s has no apples',
-
 + TestNameApples_1_1: '%s has one apple',
-
 };
-
 ```
+
 `src/module/demo-student/src/config/locale/zh-cn.ts`
 
 ```diff
 export default {
-+ TestNameApples_: '%s has %d apples',
-
-+ TestNameApples_0_1: '%s has no apples',
-
++ TestNameApples_: '%s有%d个苹果',
++ TestNameApples_0_1: '%s没有苹果',
 };
-
 ```
 
 ### 2. Using Language Resources
 
 ``` typescript
-
 this.ctx.locale = 'en-us';
-
 const apple0 = this.scope.locale.TestNameApples_('Tom', 0);
-
 const apple1 = this.scope.locale.TestNameApples_('Tom', 1);
-
 const apple2 = this.scope.locale.TestNameApples_('Tom', 2);
-
 console.log(`${apple0}, ${apple1}, ${apple2}`);
-
 ```
 
 Console output is as follows:
 
 ``` bash
-
 Tom has no apples, Tom has one apple, Tom has 2 apples
-
 ```
 
-- `TestNameApples_`: Default language resource. Adding an underscore (`_`) to language resources prompts developers that the resource requires parameters.
+- `TestNameApples_`: Default language resource. Adding an underscore (`_`) to language resources prompts developers that the resource requires parameters
 
-- `TestNameApples_{n}_{ordinal}`: `ordinal` represents the parameter ordinal number.
+- `TestNameApples_{n}_{ordinal}`: `ordinal` represents the parameter ordinal number
 
 ## Swagger/Openapi
 
-VonaJS provides a set of utility functions for implementing I18n internationalization for Swagger/Openapi.
+VonaJS provides a set of utility functions for implementing I18n for Swagger/Openapi
 
-For example, providing internationalized `title` information for the `name` field of `EntityStudent`.
+For example, providing I18n `title` information for the `name` field of `EntityStudent`
 
 ### 1. $localeScope
 
-When setting the field title information, use `Local Resource FullKey`. When actually generating Swagger/Openapi metadata, the system automatically translates the `language resource FullKey` into the specified language.
+When setting the field title information, use `Language Resource FullKey`. When actually generating Swagger/Openapi metadata, the system automatically translates the `Language Resource FullKey` into the specified language
 
 ``` diff
-
 + import { $localeScope } from 'vona';
 
 class EntityStudent {
-
 + @Api.field(v.title($localeScope('demo-student', 'Name')))
-
-name: string;
-
+  name: string;
 }
 ```
 
 - `v.title`: Sets the title information
-
 - `$localeScope`: Takes the `module name` and `language resource key` as input, generating the `language resource FullKey`: `demo-student::Name`
 
 ### 2. $locale
@@ -363,18 +315,13 @@ name: string;
 VonaJS also provides a simplified utility function `$locale`
 
 ``` diff
-
 + import { $locale } from '../.metadata/index.ts';
 
 class EntityStudent {
-
 + @Api.field(v.title($locale('Name')))
-
-name: string;
-
+  name: string;
 }
 ```
 
 - `$locale`: Takes a `language resource key` as input, generating a `language resource FullKey`: `demo-student::Name`
-
-- Each module provides a `$locale` function, therefore, you can use the `$locale` function of this module to get the module name.
+  - Each module provides a `$locale` function, therefore, you can use the `$locale` function of this module to get the module name
