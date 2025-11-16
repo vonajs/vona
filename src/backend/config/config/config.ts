@@ -1,5 +1,7 @@
-import type { VonaAppInfo, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { VonaAppInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
+import { replaceTemplate } from '@cabloy/utils';
+import { formatLoggerAxiosError, formatLoggerCtx } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -16,6 +18,34 @@ declare module 'vona-module-a-orm' {
 
 export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
+
+  // logger
+  config.logger = {
+    rotate: {
+      enable: env.LOGGER_ROTATE_ENABLE === 'true',
+      options(filename) {
+        return {
+          filename: replaceTemplate(env.LOGGER_ROTATE_FILENAME!, { filename }),
+          datePattern: env.LOGGER_ROTATE_DATEPATTERN,
+          maxSize: env.LOGGER_ROTATE_MAXSIZE,
+          maxFiles: env.LOGGER_ROTATE_MAXFILES,
+        };
+      },
+    },
+    base(this: VonaApplication, _clientInfo, { format }) {
+      return {
+        format: format.combine(
+          formatLoggerAxiosError({ stack: true }),
+          formatLoggerCtx(),
+          format.errors({ stack: true }),
+          format.splat(),
+          format.timestamp(),
+        ),
+        transports: undefined,
+      };
+    },
+    clients: {},
+  };
 
   // redis
   config.redis = {
