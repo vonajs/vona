@@ -17,7 +17,7 @@ declare module 'vona-module-a-orm' {
   }
 }
 
-export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
+export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
 
   // logger
@@ -58,7 +58,16 @@ export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
       maxRetriesPerRequest: null,
       enableReadyCheck: false,
     },
-    clients: {},
+    clients: {
+      default: { keyPrefix: `default_${appInfo.name}:` },
+      redlock: {},
+      queue: {},
+      broadcast: {},
+      cache: { keyPrefix: `cache_${appInfo.name}:` },
+      io: { keyPrefix: `io_${appInfo.name}:` },
+      summer: { keyPrefix: `summer_${appInfo.name}:` },
+      model: { keyPrefix: `model_${appInfo.name}:` },
+    },
   };
 
   // database

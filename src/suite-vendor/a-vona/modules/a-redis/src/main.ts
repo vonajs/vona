@@ -13,17 +13,6 @@ export class Main extends BeanSimple implements IModuleMain {
   async configLoaded(_config: any) {}
 }
 
-export async function configDefault(app: VonaApplication): Promise<PowerPartial<ConfigRedis>> {
-  return {
-    clients: {
-      default: { keyPrefix: `default_${app.name}:` },
-      redlock: {},
-      queue: {},
-      broadcast: {},
-      cache: { keyPrefix: `cache_${app.name}:` },
-      io: { keyPrefix: `io_${app.name}:` },
-      summer: { keyPrefix: `summer_${app.name}:` },
-      model: { keyPrefix: `model_${app.name}:` },
-    },
-  };
+export async function configDefault(_app: VonaApplication): Promise<PowerPartial<ConfigRedis>> {
+  return {};
 }
