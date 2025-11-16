@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-orm",
   "type": "module",
-  "version": "5.0.78",
+  "version": "5.0.79",
   "title": "a-orm",
   "vonaModule": {
     "capabilities": {
