@@ -4,7 +4,11 @@
   "version": "5.0.26",
   "title": "a-logger",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "globalDependencies": {
+      "winston": true,
+      "winston-transport": true
+    }
   },
   "description": "",
   "author": "",
