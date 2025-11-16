@@ -55,8 +55,6 @@ export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaCon
       maxProxyCount: 1,
       maxIpsCount: 15,
     },
-    //
-    modules: {},
   };
 }
 

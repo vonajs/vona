@@ -45,7 +45,18 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
         transports: undefined,
       };
     },
-    clients: {},
+    clients: {
+      default(this: VonaApplication, clientInfo: ILoggerOptionsClientInfo) {
+        const transports = [
+          this.bean.logger.makeTransportFile(clientInfo, 'error', 'error'),
+          this.bean.logger.makeTransportFile(clientInfo, 'warn', 'warn'),
+          this.bean.logger.makeTransportFile(clientInfo, 'http', 'http'),
+          this.bean.logger.makeTransportFile(clientInfo, 'combined'),
+          this.bean.logger.makeTransportConsole(clientInfo),
+        ].filter(item => !!item);
+        return { transports };
+      },
+    },
   };
 
   // redis
