@@ -173,7 +173,7 @@ class ControllerStudent extends BeanBase {
     // logger: default
     const loggerDefault = this.bean.logger.default;
     // logger: order
-    const loggerOrder = this.bean.logger.getClient('order');
+    const loggerOrder = this.bean.logger.get('order');
   }
 }
 ```
@@ -196,7 +196,7 @@ class ControllerStudent extends BeanBase {
 * 举例：
 
 ``` typescript
-const loggerOrder = this.bean.logger.getClient('order');
+const loggerOrder = this.bean.logger.get('order');
 loggerOrder.info('test');
 ```
 

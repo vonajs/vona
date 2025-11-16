@@ -19,7 +19,7 @@ export class BeanLogger extends BeanBase {
     return this.app.meta.logger.get();
   }
 
-  public getClient(clientName?: keyof ILoggerClientRecord): Winston.Logger {
+  public get(clientName?: keyof ILoggerClientRecord): Winston.Logger {
     return this.app.meta.logger.get(clientName);
   }
 
