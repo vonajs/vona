@@ -6,7 +6,6 @@ import type { VonaApplication } from './application.ts';
 import os from 'node:os';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { cast } from '../../types/utils/cast.ts';
 import { deepExtend } from '../utils/util.ts';
 
 export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
@@ -22,88 +21,20 @@ export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv
   return config;
 }
 
-export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaConfigOptional {
-  // server
-  const publicDir = env.SERVER_PUBLICDIR || getPublicPathPhysicalRoot(appInfo);
-  const loggerDir = env.SERVER_LOGGERDIR || getLoggerPathPhysicalRoot(appInfo);
-  const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
-  const workers = Number.parseInt(env.SERVER_WORKERS!);
-  return {
-    meta: {
-      flavor: cast(env).META_FLAVOR,
-      mode: cast(env).META_MODE,
-    },
-    server: {
-      keys: (env.SERVER_KEYS || '').split(','),
-      globalPrefix: env.SERVER_GLOBALPREFIX || '/api',
-      publicDir,
-      loggerDir,
-      subdomainOffset,
-      workers,
-      listen: {
-        hostname: env.SERVER_LISTEN_HOSTNAME,
-        port: Number.parseInt(env.SERVER_LISTEN_PORT!),
-        disable: env.SERVER_LISTEN_DISABLE === 'true',
-      },
-      serve: {},
-    },
-    proxy: {
-      enabled: true,
-      ipHeaders: 'x-real-ip,x-forwarded-for',
-      hostHeaders: 'x-forwarded-host,host',
-      protocolHeaders: 'x-forwarded-proto',
-      maxProxyCount: 1,
-      maxIpsCount: 15,
-    },
-  };
+export function configDefault(_appInfo: VonaAppInfo, _env: VonaConfigEnv): VonaConfigOptional {
+  return {};
 }
 
 export function configDev(_env: VonaConfigEnv): VonaConfigOptional {
-  return {
-    proxy: {
-      enabled: true,
-    },
-  };
+  return {};
 }
 
 export function configProd(_env: VonaConfigEnv): VonaConfigOptional {
-  return {
-    proxy: {
-      enabled: true,
-    },
-  };
+  return {};
 }
 
 export function configTest(_env: VonaConfigEnv): VonaConfigOptional {
-  return {
-    proxy: {
-      enabled: false,
-    },
-  };
-}
-
-function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
-  const mode = appInfo.configMeta.mode;
-  let loggerDir: string;
-  if (mode === 'test' || mode === 'dev') {
-    loggerDir = path.join(appInfo.projectPath, '.app/logs');
-  } else {
-    loggerDir = path.join(os.homedir(), 'vona', appInfo.name, 'logs');
-  }
-  fse.ensureDirSync(loggerDir);
-  return loggerDir;
-}
-
-function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
-  const mode = appInfo.configMeta.mode;
-  let publicDir: string;
-  if (mode === 'test' || mode === 'dev') {
-    publicDir = path.join(appInfo.projectPath, '.app/public');
-  } else {
-    publicDir = path.join(os.homedir(), 'vona', appInfo.name, 'public');
-  }
-  fse.ensureDirSync(publicDir);
-  return publicDir;
+  return {};
 }
 
 export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial<T>>;
@@ -125,4 +56,28 @@ export async function combineConfigDefault<T>(
     config = deepExtend(config, await configTest(app));
   }
   return config;
+}
+
+export function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
+  const mode = appInfo.configMeta.mode;
+  let loggerDir: string;
+  if (mode === 'test' || mode === 'dev') {
+    loggerDir = path.join(appInfo.projectPath, '.app/logs');
+  } else {
+    loggerDir = path.join(os.homedir(), 'vona', appInfo.name, 'logs');
+  }
+  fse.ensureDirSync(loggerDir);
+  return loggerDir;
+}
+
+export function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
+  const mode = appInfo.configMeta.mode;
+  let publicDir: string;
+  if (mode === 'test' || mode === 'dev') {
+    publicDir = path.join(appInfo.projectPath, '.app/public');
+  } else {
+    publicDir = path.join(os.homedir(), 'vona', appInfo.name, 'public');
+  }
+  fse.ensureDirSync(publicDir);
+  return publicDir;
 }

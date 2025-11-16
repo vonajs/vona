@@ -2,7 +2,7 @@ import type { ILoggerOptionsClientInfo, VonaAppInfo, VonaApplication, VonaConfig
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
-import { formatLoggerAxiosError, formatLoggerCtx } from 'vona';
+import { formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -19,6 +19,42 @@ declare module 'vona-module-a-orm' {
 
 export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
+
+  // meta
+  config.meta = {
+    flavor: appInfo.configMeta.flavor,
+    mode: appInfo.configMeta.mode,
+  };
+
+  // server
+  const publicDir = env.SERVER_PUBLICDIR || getPublicPathPhysicalRoot(appInfo);
+  const loggerDir = env.SERVER_LOGGERDIR || getLoggerPathPhysicalRoot(appInfo);
+  const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
+  const workers = Number.parseInt(env.SERVER_WORKERS!);
+  config.server = {
+    keys: (env.SERVER_KEYS || '').split(','),
+    globalPrefix: env.SERVER_GLOBALPREFIX || '/api',
+    publicDir,
+    loggerDir,
+    subdomainOffset,
+    workers,
+    listen: {
+      hostname: env.SERVER_LISTEN_HOSTNAME,
+      port: Number.parseInt(env.SERVER_LISTEN_PORT!),
+      disable: env.SERVER_LISTEN_DISABLE === 'true',
+    },
+    serve: {},
+  };
+
+  // proxy
+  config.proxy = {
+    enabled: true,
+    ipHeaders: 'x-real-ip,x-forwarded-for',
+    hostHeaders: 'x-forwarded-host,host',
+    protocolHeaders: 'x-forwarded-proto',
+    maxProxyCount: 1,
+    maxIpsCount: 15,
+  };
 
   // logger
   config.logger = {

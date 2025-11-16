@@ -3,6 +3,11 @@ import type { VonaAppInfo, VonaConfigOptional } from 'vona';
 export default function (_appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
 
+  // proxy
+  config.proxy = {
+    enabled: false,
+  };
+
   // instances
   config.instances = [
     { name: '', password: '', title: '' },
