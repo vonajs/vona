@@ -20,7 +20,9 @@ Context Menu - [Module Path]: `Vona Init/Locale`
 
 Taking the module `home-index` as an example, define the `I18n` language resources of the module:
 
-English: `src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
+* English
+
+`src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
 
 ```typescript{2}
 export default {
@@ -28,7 +30,9 @@ export default {
 };
 ```
 
-Chinese: `src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
+* Chinese
+
+`src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
 
 ```typescript{2}
 export default {
@@ -74,7 +78,9 @@ class ControllerHome {
 
 You can use `project-level` language resources to override `module-level` language resources
 
-English: `src/backend/config/locale/en-us.ts`
+* English
+
+`src/backend/config/locale/en-us.ts`
 
 ```typescript{2-4}
 locale.modules = {
@@ -84,7 +90,9 @@ locale.modules = {
 };
 ```
 
-Chinese: `src/backend/config/locale/zh-cn.ts`
+* Chinese
+
+`src/backend/config/locale/zh-cn.ts`
 
 ```typescript{2-4}
 locale.modules = {
