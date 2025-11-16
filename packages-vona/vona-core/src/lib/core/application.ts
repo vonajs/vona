@@ -31,7 +31,7 @@ export class VonaApplication extends KoaApplication {
     const koaOptions: KoaApplicationOptions = {
       env: cast(env).NODE_ENV,
       keys: options.config.server.keys,
-      proxy: options.config.proxy.enabled,
+      proxy: options.config.proxy.enable,
       subdomainOffset: options.config.server.subdomainOffset,
       proxyIpHeader: options.config.proxy.ipHeaders,
       maxIpsCount: options.config.proxy.maxIpsCount,

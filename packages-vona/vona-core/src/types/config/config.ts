@@ -23,7 +23,7 @@ export interface VonaConfig {
     };
   };
   proxy: {
-    enabled: boolean;
+    enable: boolean;
     ipHeaders: string;
     hostHeaders: string;
     protocolHeaders: string;

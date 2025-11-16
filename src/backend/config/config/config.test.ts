@@ -5,7 +5,7 @@ export default function (_appInfo: VonaAppInfo) {
 
   // proxy
   config.proxy = {
-    enabled: false,
+    enable: false,
   };
 
   // instances

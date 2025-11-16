@@ -48,7 +48,7 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
 
   // proxy
   config.proxy = {
-    enabled: true,
+    enable: true,
     ipHeaders: 'x-real-ip,x-forwarded-for',
     hostHeaders: 'x-forwarded-host,host',
     protocolHeaders: 'x-forwarded-proto',
