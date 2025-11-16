@@ -8,7 +8,6 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { cast } from '../../types/utils/cast.ts';
 import { deepExtend } from '../utils/util.ts';
-import { combineLoggerDefault } from './logger/loggerDefault.ts';
 
 export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
   let config: VonaConfigOptional = configDefault(appInfo, env);
@@ -29,8 +28,6 @@ export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaCon
   const loggerDir = env.SERVER_LOGGERDIR || getLoggerPathPhysicalRoot(appInfo);
   const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(env.SERVER_WORKERS!);
-  // logger
-  const logger = combineLoggerDefault(appInfo, env);
   return {
     meta: {
       flavor: cast(env).META_FLAVOR,
@@ -58,7 +55,6 @@ export function configDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaCon
       maxProxyCount: 1,
       maxIpsCount: 15,
     },
-    logger,
     //
     modules: {},
   };
