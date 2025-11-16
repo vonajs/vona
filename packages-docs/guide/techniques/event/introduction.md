@@ -4,68 +4,52 @@ VonaJS provides an event mechanism, consisting of `Event` and `Event listener`
 
 An `event` can have multiple `event listeners`, which execute using the `onion model`
 
-## Creating an Event
+## Create Event
 
-For example, create an `event: `echo` in the module `demo-student`, passing the event parameter `Hello World` when the event is triggered.
+For example, create an event: `echo` in the module `demo-student`, passing the event parameter `Hello World` when the event is emitted
 
-### 1. CLI Commands
+### 1. Cli command
 
 ``` bash
-
 $ vona :create:bean event echo --module=demo-student
-
 ```
 
-### 2. Menu Commands
+### 2. Menu command
 
 ::: tip
-Right-click menu - [module path]: `Vona Bean/Event`
-
+Context Menu - [Module Path]: `Vona Bean/Event`
 :::
 
 ## Event Definition
 
 ``` typescript
-
 export type TypeEventEchoData = string;
 
 export type TypeEventEchoResult = string | undefined;
 
 @Event()
-
 export class EventEcho extends BeanEventBase<
-
-TypeEventEchoData,
-
-TypeEventEchoResult
-
+  TypeEventEchoData,
+  TypeEventEchoResult
 > {}
-
 ```
 
 - `TypeEventEchoData`: Defines the parameter type
-
 - `TypeEventEchoResult`: Defines the result type
 
-## Triggering Asynchronous Events: emit
+## Emitting Asynchronous Event: emit
 
 ### 1. emit
 
-Passing the event parameter `Hello World` when triggering the event, and returning the result
+Passing the event parameter `Hello World` when emitting the event, and returning the result
 
 ``` diff
-
 class ControllerStudent {
-
-@Web.get('test')
-
-async test() {
-
-+ const result = await this.scope.event.echo.emit('Hello World');
-
-console.log(result);
-
-}
+  @Web.get('test')
+  async test() {
++   const result = await this.scope.event.echo.emit('Hello World');
+    console.log(result);
+  }
 }
 ```
 
@@ -73,75 +57,54 @@ console.log(result);
 
 ### 2. Default Method
 
-A default method can be provided when triggering the event
+A default method can be provided when emitting the event
 
 ``` diff
-
 class ControllerStudent {
-
-@Web.get('test')
-
-async test() {
-
-+ const result = await this.scope.event.echo.emit('Hello World', async data => {
-
-+ return `default: ${data}`;
-
-+ });
-
-console.log(result);
-
-}
+  @Web.get('test')
+  async test() {
++   const result = await this.scope.event.echo.emit('Hello World', async data => {
++     return `default: ${data}`;
++   });
+    console.log(result);
+  }
 }
 ```
 
-- Default method parameter `data`: Event listeners can pass new event parameters when executing, so the `data` parameter is required to ensure that new event parameters are received.
+- Default method parameter `data`: Event listeners can modify event parameters during execution, so the `data` parameter is required to ensure that the current method uses the latest event parameters
 
-## Triggering the event: emit
+## Emitting Synchronous Event: emitSync
 
-### 1. emit
+### 1. emitSync
 
-Pass the event parameter `Hello World` when triggering the event and return the result.
+Pass the event parameter `Hello World` when emitting the event and return the result
 
 ``` diff
-
 class ControllerStudent {
-
-@Web.get('test')
-
-async test() {
-
-+ const result = this.scope.event.echo.emitSync('Hello World');
-
-console.log(result);
-
-}
+  @Web.get('test')
+  async test() {
++   const result = this.scope.event.echo.emitSync('Hello World');
+    console.log(result);
+  }
 }
 ```
 
-- `this.scope.event.echo`: Get the `echo` event instance through the Scope object.
+- `this.scope.event.echo`: Get the `echo` event instance through the Scope object
 
 ### 2. Default method
 
-A default method can be provided when triggering the event.
+A default method can be provided when emitting the event
 
 ``` diff
-
 class ControllerStudent {
-@Web.get('test')
-
-async test() {
-
-+ const result = this.scope.event.echo.emitSync('Hello World', data => {
-
-+ return `default: ${data}`;
-
-+ });
-
-console.log(result);
-
-}
+  @Web.get('test')
+  async test() {
++   const result = this.scope.event.echo.emitSync('Hello World', data => {
++     return `default: ${data}`;
++   });
+    console.log(result);
+  }
 }
 ```
 
-- Default method parameter `data`: Event listeners can pass new event parameters when executing, so the `data` parameter is required to ensure that new event parameters are received
+- Default method parameter `data`: Event listeners can modify event parameters during execution, so the `data` parameter is required to ensure that the current method uses the latest event parameters
