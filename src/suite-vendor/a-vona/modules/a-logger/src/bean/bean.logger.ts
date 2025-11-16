@@ -15,15 +15,15 @@ export class BeanLogger extends BeanBase {
     this.scope.broadcast.setLevel.emit({ level, clientName });
   }
 
-  public get default() {
+  public get default(): Winston.Logger {
     return this.app.meta.logger.get();
   }
 
-  public getClient(clientName?: keyof ILoggerClientRecord) {
+  public getClient(clientName?: keyof ILoggerClientRecord): Winston.Logger {
     return this.app.meta.logger.get(clientName);
   }
 
-  public getChild(childName: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord) {
+  public getChild(childName: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord): Winston.Logger {
     return this.app.meta.logger.get(clientName).child({ name: childName });
   }
 
