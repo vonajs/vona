@@ -6,7 +6,7 @@ VonaJS 基于[winston](https://github.com/winstonjs/winston)提供了强大而�
 
 1. `多Client`: 每个 Client 有独立的配置
 2. `多Child`: 可以为不同的场景创建 Child 日志
-3. `Rotate`: 按约定的规则对日志进行轮换
+3. `Rotate`: 按指定的规则对日志文件进行轮换
 4. `日志分级`: 可以基于分级控制写入日志文件的内容
 
 ## 日志目录
