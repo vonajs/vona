@@ -14,7 +14,7 @@ export function config(_app: VonaApplication) {
   return {
     sharding: {
       cache: {
-        doubleDelete: false,
+        doubleDelete: true,
       },
     },
     rest: {
