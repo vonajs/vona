@@ -19,7 +19,7 @@ export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
 
   // redis
   config.redis = {
-    default: {
+    base: {
       host: env.REDIS_DEFAULT_HOST,
       port: Number.parseInt(env.REDIS_DEFAULT_PORT!),
       password: env.REDIS_DEFAULT_PASSWORD,

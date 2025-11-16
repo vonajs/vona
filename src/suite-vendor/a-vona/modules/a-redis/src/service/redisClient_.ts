@@ -34,7 +34,7 @@ export class ServiceRedisClient extends BeanBase {
         cast<ConfigRedisCluster>(configClient),
       ) as unknown as Redis;
     } else {
-      const configNode = deepExtend({}, configRedis.default, configClient);
+      const configNode = deepExtend({}, configRedis.base, configClient);
       return new Redis(configNode);
     }
   }

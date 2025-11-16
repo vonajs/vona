@@ -16,7 +16,7 @@ export interface ConfigRedisCluster extends ClusterOptions {
 }
 
 export interface ConfigRedis {
-  default: RedisOptions;
+  base: RedisOptions;
   clients: Record<keyof IRedisClientRecord, RedisOptions | ConfigRedisCluster>;
 }
 
