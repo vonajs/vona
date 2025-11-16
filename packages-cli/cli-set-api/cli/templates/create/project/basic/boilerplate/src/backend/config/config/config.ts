@@ -1,5 +1,6 @@
-import type { VonaAppInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { ILoggerOptionsClientInfo, VonaAppInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
+import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
 import { formatLoggerAxiosError, formatLoggerCtx } from 'vona';
 
@@ -23,7 +24,7 @@ export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
   config.logger = {
     rotate: {
       enable: env.LOGGER_ROTATE_ENABLE === 'true',
-      options(filename) {
+      options(filename: string) {
         return {
           filename: replaceTemplate(env.LOGGER_ROTATE_FILENAME!, { filename }),
           datePattern: env.LOGGER_ROTATE_DATEPATTERN,
@@ -32,14 +33,14 @@ export default function (_appInfo: VonaAppInfo, env: VonaConfigEnv) {
         };
       },
     },
-    base(this: VonaApplication, _clientInfo, { format }) {
+    base(this: VonaApplication, _clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) {
       return {
-        format: format.combine(
+        format: winston.format.combine(
           formatLoggerAxiosError({ stack: true }),
           formatLoggerCtx(),
-          format.errors({ stack: true }),
-          format.splat(),
-          format.timestamp(),
+          winston.format.errors({ stack: true }),
+          winston.format.splat(),
+          winston.format.timestamp(),
         ),
         transports: undefined,
       };
