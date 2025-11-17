@@ -12,6 +12,7 @@ import resolveImport from '@rollup/plugin-node-resolve';
 import replaceImport from '@rollup/plugin-replace';
 import terserImport from '@rollup/plugin-terser';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
 import { generateConfigDefine, getAbsolutePathOfModule, getOutDir, getOutReleasesDir } from '../utils.ts';
@@ -93,14 +94,12 @@ export class CliBinBuild extends BeanCliBase {
     const assetsPath = path.join(outDir, 'assets');
     for (const relativeName in modulesMeta.modules) {
       const module = modulesMeta.modules[relativeName];
-      if (!module.package.files) continue;
-      for (const scene of module.package.files) {
-        if (['src', 'dist', 'cli', 'test'].includes(scene)) continue;
-        const scenePath = path.join(module.root, scene);
-        if (fse.existsSync(scenePath)) {
-          const destPath = path.join(assetsPath, scene, relativeName);
-          await fse.copy(scenePath, destPath);
-        }
+      const scenes = await globby('assets/*', { cwd: module.root, onlyDirectories: true });
+      for (const scene2 of scenes) {
+        const scene = scene2.substring('assets/'.length);
+        const scenePath = path.join(module.root, scene2);
+        const destPath = path.join(assetsPath, scene, relativeName);
+        await fse.copy(scenePath, destPath);
       }
     }
   }
