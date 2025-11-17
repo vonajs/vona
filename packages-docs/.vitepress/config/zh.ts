@@ -300,6 +300,18 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       ],
     },
     {
+      text: 'Vona Cache',
+      base: '/zh/guide/techniques/cache/',
+      collapsed: true,
+      items: [
+        { text: '介绍', link: 'introduction' },
+        { text: 'Mem Cache', link: 'mem' },
+        { text: 'Redis Cache', link: 'redis' },
+        { text: 'Summer(二级缓存)', link: 'summer' },
+        { text: 'Caching', link: 'caching' },
+      ],
+    },
+    {
       text: 'Vona ORM',
       base: '/zh/guide/techniques/orm/',
       collapsed: true,
