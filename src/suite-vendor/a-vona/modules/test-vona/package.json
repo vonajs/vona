@@ -34,8 +34,8 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "assets",
     "dist",
-    "static",
     "src",
     "test"
   ],

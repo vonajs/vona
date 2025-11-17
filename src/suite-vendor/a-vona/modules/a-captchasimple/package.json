@@ -23,8 +23,8 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "assets",
     "dist",
-    "static",
     "fonts"
   ],
   "scripts": {
