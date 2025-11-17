@@ -147,7 +147,7 @@ export class AppUtil extends BeanSimple {
     } else {
       const module = this.app.meta.modules[moduleName];
       if (!module) throw new Error('module not found');
-      return combineFilePathSafe(path.join(module.root, scene), assetPath || '');
+      return combineFilePathSafe(path.join(module.root, 'assets', scene), assetPath || '');
     }
   }
 
