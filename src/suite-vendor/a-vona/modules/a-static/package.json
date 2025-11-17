@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-static",
   "type": "module",
-  "version": "5.0.20",
+  "version": "5.0.21",
   "title": "a-static",
   "vonaModule": {
     "dependencies": {},
@@ -10,9 +10,9 @@
         "scopeResource": true,
         "boilerplate": "cli/static/boilerplate"
       },
-      "asset":{
-       "scopeResource": true,
-        "boilerplate": "cli/asset/boilerplate" 
+      "asset": {
+        "scopeResource": true,
+        "boilerplate": "cli/asset/boilerplate"
       }
     }
   },
