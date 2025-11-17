@@ -6,7 +6,7 @@ Vona provides a Playground, which allows us to test the code and verify the idea
 
 ### 1. Create a new play file
 
-We need to create a new source code file: `src/backend/play/index.ts`. Currently, we do not need to create this file manually, but execute the following command to automatically create the file:
+We need to create a new source code file: `src/backend/play/index.ts`. However, we do not need to create this file manually, but execute the following command to automatically create the file:
 
 ``` bash
 $ vona play
