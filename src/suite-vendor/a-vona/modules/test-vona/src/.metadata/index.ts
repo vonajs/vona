@@ -1310,19 +1310,32 @@ declare module 'vona-module-test-vona' {
 }
 /** eventListener: end */
 /** meta: begin */
+export * from '../bean/meta.static.ts';
 export * from '../bean/meta.version.ts';
 
 import 'vona-module-a-meta';
 declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
-      'test-vona:version': never;
+      'test-vona:static': never;
+'test-vona:version': never;
     }
 
   
 }
 declare module 'vona-module-test-vona' {
   
+        export interface MetaStatic {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface MetaStatic {
+            get $beanFullName(): 'test-vona.meta.static';
+            get $onionName(): 'test-vona:static';
+            
+          }
+
         export interface MetaVersion {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -1335,6 +1348,9 @@ declare module 'vona-module-test-vona' {
           } 
 }
 /** meta: end */
+/** meta static: begin */
+import type { MetaStatic } from '../bean/meta.static.ts';
+/** meta static: end */
 /** queue: begin */
 export * from '../bean/queue.test.ts';
 
@@ -2102,6 +2118,7 @@ broadcast: IModuleBroadcast;
 cacheMem: IModuleCacheMem;
 cacheRedis: IModuleCacheRedis;
 event: IModuleEvent;
+static: MetaStatic;
 queue: IModuleQueue;
 summerCache: IModuleSummerCache;
 }
