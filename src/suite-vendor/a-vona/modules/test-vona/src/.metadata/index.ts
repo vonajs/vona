@@ -1310,6 +1310,7 @@ declare module 'vona-module-test-vona' {
 }
 /** eventListener: end */
 /** meta: begin */
+export * from '../bean/meta.asset.ts';
 export * from '../bean/meta.static.ts';
 export * from '../bean/meta.version.ts';
 
@@ -1317,7 +1318,8 @@ import 'vona-module-a-meta';
 declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
-      'test-vona:static': never;
+      'test-vona:asset': never;
+'test-vona:static': never;
 'test-vona:version': never;
     }
 
@@ -1325,6 +1327,17 @@ declare module 'vona-module-a-meta' {
 }
 declare module 'vona-module-test-vona' {
   
+        export interface MetaAsset {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface MetaAsset {
+            get $beanFullName(): 'test-vona.meta.asset';
+            get $onionName(): 'test-vona:asset';
+            
+          }
+
         export interface MetaStatic {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -1351,6 +1364,9 @@ declare module 'vona-module-test-vona' {
 /** meta static: begin */
 import type { MetaStatic } from '../bean/meta.static.ts';
 /** meta static: end */
+/** meta asset: begin */
+import type { MetaAsset } from '../bean/meta.asset.ts';
+/** meta asset: end */
 /** queue: begin */
 export * from '../bean/queue.test.ts';
 
@@ -2119,6 +2135,7 @@ cacheMem: IModuleCacheMem;
 cacheRedis: IModuleCacheRedis;
 event: IModuleEvent;
 static: MetaStatic;
+asset: MetaAsset;
 queue: IModuleQueue;
 summerCache: IModuleSummerCache;
 }

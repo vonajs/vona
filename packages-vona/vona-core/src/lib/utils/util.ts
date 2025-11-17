@@ -374,6 +374,6 @@ export function filterHeaders(headers: object | undefined, whitelist: string[]) 
 export function combineFilePathSafe(dir: string, file: string) {
   const fullPath = path.normalize(path.join(dir, file));
   // files that can be accessd should be under options.dir
-  if (fullPath.indexOf(dir) !== 0) return;
+  if (fullPath.indexOf(dir) !== 0) throw new Error(`unsafe dir: ${dir}`);
   return fullPath;
 }
