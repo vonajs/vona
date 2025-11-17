@@ -23,7 +23,7 @@ export class CliInitStatic extends BeanCliBase {
     }
     // target dir
     const targetDir = await this.helper.ensureDir(_module.root);
-    const staticDir = path.join(targetDir, 'static');
+    const staticDir = path.join(targetDir, 'assets/static');
     if (fse.existsSync(staticDir)) {
       throw new Error(`static exists: ${moduleName}`);
     }

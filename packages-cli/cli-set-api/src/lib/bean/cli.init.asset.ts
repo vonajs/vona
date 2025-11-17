@@ -29,28 +29,10 @@ export class CliInitAsset extends BeanCliBase {
     // scene
     const scene = argv.scene;
     // directory
-    const assetDir = path.join(targetDir, scene);
+    const assetDir = path.join(targetDir, 'assets', scene);
     if (fse.existsSync(assetDir)) {
-      throw new Error(`asset exists: ${moduleName}/${scene}`);
+      throw new Error(`asset exists: ${moduleName}/assets/${scene}`);
     }
     await this.helper.ensureDir(assetDir);
-    // package.json
-    await this._setPackageInfo(targetDir, scene);
-  }
-
-  async _setPackageInfo(modulePath: string, scene: string) {
-    const pkgFile = path.join(modulePath, 'package.json');
-    const pkg = await this.helper.loadJSONFile(pkgFile);
-    if (!pkg.files) pkg.files = [];
-    let changed: boolean | undefined;
-    // files
-    if (!pkg.files.includes(scene)) {
-      pkg.files.push(scene);
-      changed = true;
-    }
-    // save
-    if (changed) {
-      await this.helper.saveJSONFile(pkgFile, pkg);
-    }
   }
 }
