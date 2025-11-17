@@ -39,6 +39,7 @@
   },
   "files": [
     "assets",
+    "cli",
     "dist"
   ],
   "scripts": {
