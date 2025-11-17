@@ -91,19 +91,22 @@ export class AppUtil extends BeanSimple {
     return combineApiPath(path, moduleName, prefix, simplify, this.app.config.server.globalPrefix);
   }
 
-  combineStaticPath(path: string | undefined, moduleName?: ModuleInfo.IModuleInfo | string) {
+  combineStaticPath(staticPath: string | undefined, moduleName?: ModuleInfo.IModuleInfo | string) {
     const globalPrefix = '/api/static';
-    if (!path) path = '';
+    if (!staticPath) staticPath = '';
+    // safe
+    staticPath = path.normalize(staticPath);
+    if (staticPath.includes('..')) throw new Error(`unsafe path: ${staticPath}`);
     // ignore globalPrefix
-    if (path.startsWith('//')) return path.substring(1);
+    if (staticPath.startsWith('//')) return staticPath.substring(1);
     // ignore module path
-    if (path.startsWith('/')) return `${globalPrefix}${path}`;
+    if (staticPath.startsWith('/')) return `${globalPrefix}${staticPath}`;
     // globalPrefix + module path + arg
     if (!moduleName) throw new Error('should specify the moduleName');
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     const parts = moduleName.split('-');
     // path
-    return `${globalPrefix}/${parts[0]}/${parts[1]}/${path}`;
+    return `${globalPrefix}/${parts[0]}/${parts[1]}/${staticPath}`;
   }
 
   combineResourceName(
