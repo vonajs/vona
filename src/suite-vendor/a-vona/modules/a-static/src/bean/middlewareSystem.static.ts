@@ -157,7 +157,7 @@ async function _getFullPathInner(
   if (wordFirst === 'public') {
     const fullPath = path.normalize(path.join(dir, parts.join(path.sep)));
     // files that can be accessd should be under options.dir
-    if (fullPath.indexOf(dir) !== 0) return;
+    if (fullPath.indexOf(dir) !== 0) throw new Error(`unsafe filename: ${filename}`);
     return fullPath;
   }
   // static
