@@ -45,7 +45,7 @@ export class CliInitMonkey extends BeanCliBase {
     const pkg = await this.helper.loadJSONFile(pkgFile);
     if (!pkg.vonaModule) pkg.vonaModule = {};
     if (!pkg.vonaModule.capabilities) pkg.vonaModule.capabilities = {};
-    let changed;
+    let changed: boolean | undefined;
     // monkey
     if (!pkg.vonaModule.capabilities.monkey) {
       pkg.vonaModule.capabilities.monkey = true;

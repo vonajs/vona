@@ -1,10 +1,14 @@
+import type { IModuleInfo } from '@cabloy/module-info';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
-import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
-  interface ICommandArgv {}
+  interface ICommandArgv {
+    module: string;
+    moduleInfo: IModuleInfo;
+    scene: string;
+  }
 }
 
 export class CliInitAsset extends BeanCliBase {
@@ -13,8 +17,7 @@ export class CliInitAsset extends BeanCliBase {
     // super
     await super.execute();
     // module name/info
-    const moduleName = argv._[0];
-    if (!moduleName) return;
+    const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);
     // check if exists
     const _module = this.helper.findModule(moduleName);
@@ -23,18 +26,30 @@ export class CliInitAsset extends BeanCliBase {
     }
     // target dir
     const targetDir = await this.helper.ensureDir(_module.root);
-    const staticDir = path.join(targetDir, 'static');
-    if (fse.existsSync(staticDir)) {
-      throw new Error(`static exists: ${moduleName}`);
+    // scene
+    const scene = argv.scene;
+    // directory
+    const assetDir = path.join(targetDir, scene);
+    if (fse.existsSync(assetDir)) {
+      throw new Error(`asset exists: ${moduleName}/${scene}`);
     }
-    // render boilerplate
-    await this.template.renderBoilerplateAndSnippets({
-      targetDir,
-      setName: __ThisSetName__,
-      snippetsPath: null,
-      boilerplatePath: 'init/static/boilerplate',
-    });
-    // // tools.metadata
-    // await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    // package.json
+    await this._setPackageInfo(targetDir, scene);
+  }
+
+  async _setPackageInfo(modulePath: string, scene: string) {
+    const pkgFile = path.join(modulePath, 'package.json');
+    const pkg = await this.helper.loadJSONFile(pkgFile);
+    if (!pkg.files) pkg.files = [];
+    let changed: boolean | undefined;
+    // files
+    if (!pkg.files.includes(scene)) {
+      pkg.files.push(scene);
+      changed = true;
+    }
+    // save
+    if (changed) {
+      await this.helper.saveJSONFile(pkgFile, pkg);
+    }
   }
 }
