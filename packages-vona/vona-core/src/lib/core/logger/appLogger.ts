@@ -75,7 +75,7 @@ export class AppLogger extends BeanSimple {
     clientInfo: ILoggerOptionsClientInfo,
     options: Winston.transports.FileTransportOptions | DailyRotateFile.DailyRotateFileTransportOptions,
   ) {
-    const dirname = this.app.config.server.loggerDir;
+    const dirname = this.app.config.logger.baseDir;
     if (!fse.existsSync(dirname)) {
       const [_, err] = catchErrorSync(() => {
         fse.ensureDirSync(dirname);

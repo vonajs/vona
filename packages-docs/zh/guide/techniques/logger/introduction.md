@@ -23,9 +23,9 @@ VonaJS 基于[winston](https://github.com/winstonjs/winston)提供了强大而�
 `src/backend/config/config/config.ts`
 
 ``` typescript
-// server
-config.server = {
-  loggerDir: '/new/path',
+// logger
+config.logger = {
+  baseDir: '/new/path',
 };
 ```
 
@@ -34,8 +34,8 @@ config.server = {
 `env/.env`
 
 ``` typescript
-# server
-SERVER_LOGGERDIR = /new/path
+# logger
+LOGGER_DIR = /new/path
 ```
 
 ## App Config配置
@@ -47,6 +47,7 @@ SERVER_LOGGERDIR = /new/path
 ``` typescript
 // logger
 config.logger = {
+  baseDir: '/new/path',
   rotate: {},
   base: {},
   clients: {},
@@ -55,6 +56,7 @@ config.logger = {
 
 |名称|说明|
 |--|--|
+|baseDir|日志目录|
 |rotate|日志Rotate|
 |base|基础配置，为所有Client提供通用的基础配置|
 |clients|配置多个Client。系统提供了内置的`default` Client，实现开箱即用的日志能力|

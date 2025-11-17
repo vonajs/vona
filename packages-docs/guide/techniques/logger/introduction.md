@@ -24,9 +24,9 @@ Configuration can be modified in the App Config or .env file
 `src/backend/config/config/config.ts`
 
 ``` typescript
-// server
-config.server = {
-  loggerDir: '/new/path',
+// logger
+config.logger = {
+  baseDir: '/new/path',
 };
 ```
 
@@ -35,8 +35,8 @@ config.server = {
 `env/.env`
 
 ``` typescript
-# server
-SERVER_LOGGERDIR = /new/path
+# logger
+LOGGER_DIR = /new/path
 ```
 
 ## App Config
@@ -48,6 +48,7 @@ Log configuration can be done in App Config:
 ``` typescript
 // logger
 config.logger = {
+  baseDir: '/new/path',
   rotate: {},
   base: {},
   clients: {},
@@ -56,6 +57,7 @@ config.logger = {
 
 |Name|Description|
 |--|--|
+|baseDir|Log Directory|
 |rotate|Log Rotate|
 |base|Basic configuration, providing common basic configuration for all clients|
 |clients|Configure multiple clients. The system provides a built-in `default` client, enabling out-of-the-box logging capabilities|
