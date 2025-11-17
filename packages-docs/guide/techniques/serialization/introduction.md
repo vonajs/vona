@@ -101,11 +101,11 @@ class EntityStudent {
 
 ## Serializer Transform Parameters
 
-Parameters can be defined for Serializer Transform, allowing for more flexible configuration of the conversion logic.
+Parameters can be defined for Serializer Transform, allowing for more flexible configuration of the conversion logic
 
-For example, define the `first` parameter for Serializer Transform `upper` to control whether only the first letter is capitalized.
+For example, define the `first` parameter for Serializer Transform `upper` to control whether only the first letter is capitalized
 
-### 1. Define Parameter Types
+### 1. Defining parameter types
 
 ``` diff
 export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
@@ -113,7 +113,7 @@ export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTr
 }
 ```
 
-### 2. Provide parameter default values
+### 2. Providing default values ​​for parameters
 
 ``` diff
 @SerializerTransform<ISerializerTransformOptionsUpper>({
@@ -121,70 +121,57 @@ export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTr
 })
 ```
 
-### 3. Using parameters
+### 3. Using Parameters
 
 ``` diff
-export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions { 
-first?: boolean;
+export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
+  first?: boolean;
 }
 
-@SerializerTransform<ISerializerTransformOptionsUpper>({ 
-first: false,
+@SerializerTransform<ISerializerTransformOptionsUpper>({
+  first: false,
 })
-class SerializerTransformUpper { 
-async transform( 
-value: TypeSerializerTransformUpperValue, 
-_data: TypeSerializerTransformUpperData, 
-options: ISerializerTransformOptionsUpper, 
-): Promise<TypeSerializerTransformUpperResult> {
--return value.toUpperCase();
-
-+ return options.first ? toUpperCaseFirstChar(value) : value.toUpperCase();
-
-}
+class SerializerTransformUpper {
+  async transform(
+    value: TypeSerializerTransformUpperValue,
+    _data: TypeSerializerTransformUpperData,
+    options: ISerializerTransformOptionsUpper,
+  ): Promise<TypeSerializerTransformUpperResult> {
+-   return value.toUpperCase();
++   return options.first ? toUpperCaseFirstChar(value) : value.toUpperCase();
+  }
 }
 ```
 
-### 4. Specifying Parameters When Using
+### 4. Specify parameters when using
 
 Parameters can be specified for `@Serializer.transform`
 
 ``` diff
-
 class EntityStudent {
-
 + @Serializer.transform('demo-student:upper', { first: true })
-
-@Api.field(v.title($locale('Name')))
-
-name: string;
-
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
-### 5. App Config Configuration
+### 5. App Config
 
 Serializer Transform parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-
 // onions
-
 config.onions = {
-serializerTransform: { 'demo-student:upper': {
-
-first: true,
-
-},
-
-},
-
+  serializerTransform: {
+    'demo-student:upper': {
+      first: true,
+    },
+  },
 };
-
 ```
 
-### 6. Parameter Priority
+### 6. Parameters precedence
 
-`Specifying parameters at usage` > `App Config configuration` > `Default parameter value`
+`Specify parameters when using` > `App config` > `Default values`
