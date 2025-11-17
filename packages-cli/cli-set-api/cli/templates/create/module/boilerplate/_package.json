@@ -22,7 +22,7 @@
   "description": "<%=argv.description%>",
   "keywords": ["Vona Module"],
   "author": "<%=argv.author%>",
-  "files": ["dist", "static"],
+  "files": ["dist", "assets"],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
