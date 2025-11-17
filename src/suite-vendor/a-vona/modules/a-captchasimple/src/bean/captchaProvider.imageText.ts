@@ -4,7 +4,6 @@ import svgCaptcha, { ConfigObject } from '@zhennann/svg-captcha';
 import svg64 from 'svg64';
 import { BeanBase, cast } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
-import { __ThisModule__ } from '../.metadata/this.ts';
 
 export type TypeCaptchaProviderImageTextToken = string;
 export type TypeCaptchaProviderImageTextPayload = string;

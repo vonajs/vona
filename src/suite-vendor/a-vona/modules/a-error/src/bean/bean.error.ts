@@ -3,7 +3,6 @@ import type { IErrorRenderOptions } from '../types/error.ts';
 import fs from 'node:fs';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { __ThisModule__ } from '../.metadata/this.ts';
 
 const __cacheViewTemplates: Record<string, any> = {};
 
@@ -33,7 +32,7 @@ export class BeanError extends BeanBase {
 
   private _getViewTemplate() {
     const fileTemplate =
-      this.scope.config.error.templatePath || this.app.util.getAssetPathPhysical(__ThisModule__, 'templates', 'onerror_page.mustache')!;
+      this.scope.config.error.templatePath || this.scope.asset.get('templates', 'onerror_page.mustache');
     if (!__cacheViewTemplates[fileTemplate]) {
       __cacheViewTemplates[fileTemplate] = fs.readFileSync(fileTemplate, 'utf8');
     }

@@ -91,6 +91,35 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** meta: begin */
+export * from '../bean/meta.asset.ts';
+
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
+  
+    export interface IMetaRecord {
+      'a-error:asset': never;
+    }
+
+  
+}
+declare module 'vona-module-a-error' {
+  
+        export interface MetaAsset {
+          /** @internal */
+          get scope(): ScopeModuleAError;
+        }
+
+          export interface MetaAsset {
+            get $beanFullName(): 'a-error.meta.asset';
+            get $onionName(): 'a-error:asset';
+            
+          } 
+}
+/** meta: end */
+/** meta asset: begin */
+import type { MetaAsset } from '../bean/meta.asset.ts';
+/** meta asset: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -109,6 +138,7 @@ export interface ScopeModuleAError {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 service: IModuleService;
+asset: MetaAsset;
 }
 
 import 'vona';
