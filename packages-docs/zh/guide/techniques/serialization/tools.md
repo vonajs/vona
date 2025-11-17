@@ -4,7 +4,7 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 
 ## 工具清单
 
-|工具: @Serializer|工具: v|说明|
+|@Serializer|v|说明|
 |--|--|--|
 |@Serializer.transform|v.serializerTransform|使用Serializer Transform，参见: [序列化](./introduction.md)|
 |@Serializer.exclude|v.serializerExclude|排除字段|
