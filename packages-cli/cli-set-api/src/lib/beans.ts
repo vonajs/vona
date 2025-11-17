@@ -12,6 +12,7 @@ import { CliCreateSuite } from './bean/cli.create.suite.ts';
 import { CliCreateTest } from './bean/cli.create.test.ts';
 import { CliDefaultList } from './bean/cli.default.list.ts';
 import { CliInitAppMonkey } from './bean/cli.init.appMonkey.ts';
+import { CliInitAsset } from './bean/cli.init.asset.ts';
 import { CliInitConfig } from './bean/cli.init.config.ts';
 import { CliInitConstant } from './bean/cli.init.constant.ts';
 import { CliInitError } from './bean/cli.init.error.ts';
@@ -46,6 +47,7 @@ export const beans = {
   'init.monkey': CliInitMonkey,
   'init.main': CliInitMain,
   'init.static': CliInitStatic,
+  'init.asset': CliInitAsset,
   'init.lib': CliInitLib,
   'init.types': CliInitTypes,
   'init.appMonkey': CliInitAppMonkey,

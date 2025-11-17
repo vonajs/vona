@@ -12,6 +12,7 @@ import createSuite from './command/create.suite.ts';
 import createTest from './command/create.test.ts';
 import defaultList from './command/default.list.ts';
 import initAppMonkey from './command/init.appMonkey.ts';
+import initAsset from './command/init.asset.ts';
 import initConfig from './command/init.config.ts';
 import initConstant from './command/init.constant.ts';
 import initError from './command/init.error.ts';
@@ -53,6 +54,7 @@ export const commands = {
     monkey: initMonkey,
     main: initMain,
     static: initStatic,
+    asset: initAsset,
     lib: initLib,
     types: initTypes,
     appMonkey: initAppMonkey,
