@@ -4,44 +4,34 @@ VonaJS provides a set of utility functions to make serialization capabilities mo
 
 ## Utility List
 
-|Tool: @Serializer|Tool: v|Description|
-
+|@Serializer|v|Description|
 |--|--|--|
-
 |@Serializer.transform|v.serializerTransform|For using Serializer Transform, see: [Serialization](./introduction.md)|
-
 |@Serializer.exclude|v.serializerExclude|Exclude fields|
-
-|@Serializer.replace|v.serializerReplace|De-identify field values|
-
+|@Serializer.replace|v.serializerReplace|Mask the field values|
 |@Serializer.getter|v.serializerGetter|Generate new field values ​​using getter mechanisms|
+|@Serializer.custom|v.serializerCustom|Transform field values ​​using custom function|
 
-|@Serializer.custom|v.serializerCustom|Process field values ​​using custom functions|
+::: tip
+Since the `@Serializer` utility is very concise and intuitive, why provide the `v` utility?
 
-::: tip Since the `@Serializer` utility is very concise and intuitive, why provide the `v` utility?
-
-1. The `v` tool allows modification of configurations via App Config.
-
-2. The underlying logic of the `v` tool and the `@Serializer` tool is consistent.
-
+1. The `v` tool allows modification of configurations via App Config
+2. The underlying logic of the `v` tool and the `@Serializer` tool is consistent
 :::
 
 ## @Serializer.transform/v.serializerTransform
 
-For example, to convert the `name` field value in `EntityStudent` to uppercase,
+For example, to convert the `name` field value in `EntityStudent` to uppercase
 
-we directly use the Serializer Transform `upper` created in [Serialization](./introduction.md).
+we directly use the Serializer Transform `upper` created in [Serialization](./introduction.md)
 
 ### 1. @Serializer.transform
 
 ``` diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper')
-
-@Api.field(v.title($locale('Name')))
-
-name: string;
-
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
@@ -50,9 +40,7 @@ name: string;
 ``` diff
 class EntityStudent {
 + @Api.field(v.serializerTransform('demo-student:upper'), v.title($locale('Name')))
-
-name: string;
-
+  name: string;
 }
 ```
 
@@ -65,55 +53,36 @@ Configuration can be modified in App Config
 * Method 1: Directly modify Openapi parameters
 
 ``` typescript
-
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-
-fields: {
-
-name: {
-
-serializerTransforms: {
-
-'demo-student:upper': {},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: {
+          serializerTransforms: {
+            'demo-student:upper': {},
+          },
+        },
+      },
+    },
+  },
 };
-
 ```
 
 * Method 2: Construct a new schema
 
 ``` typescript
-
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
-
 config.onions = {
-
-entity: { 'demo-student:student': { 
-fields: { 
-name: $makeSchema(v.serializerTransform('demo-student:upper'), z.string()), 
-}, 
-}, 
-},
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: $makeSchema(v.serializerTransform('demo-student:upper'), z.string()),
+      },
+    },
+  },
 };
 ```
 
@@ -125,9 +94,9 @@ For example, exclude the `name` field in `EntityStudent`
 
 ``` diff
 class EntityStudent {
-+ @Serializer.exclude() 
-@Api.field(v.title($locale('Name'))) 
-name: string;
++ @Serializer.exclude()
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
@@ -135,9 +104,8 @@ name: string;
 
 ``` diff
 class EntityStudent {
-+ @Api.field(v.serializerExclude(), v.title($locale('Name'))) 
-name: string;
-
++ @Api.field(v.serializerExclude(), v.title($locale('Name')))
+  name: string;
 }
 ```
 
@@ -150,66 +118,39 @@ Configuration can be modified in App Config
 * Method 1: Directly modify Openapi parameters
 
 ``` typescript
-
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-
-fields: {
-
-name: {
-
-serializerTransforms: {
-
-'a-serialization:exclude': {
-
-exclude: true,
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: {
+          serializerTransforms: {
+            'a-serialization:exclude': {
+              exclude: true,
+            },
+          },
+        },
+      },
+    },
+  },
 };
-
 ```
 
 * Method 2: Construct a new schema
 
 ``` typescript
-
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-fields: {
-
-name: $makeSchema(v.serializerExclude(), z.string()),
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: $makeSchema(v.serializerExclude(), z.string()),
+      },
+    },
+  },
 };
-
 ```
 
 ## @Serializer.replace/v.serializerReplace
