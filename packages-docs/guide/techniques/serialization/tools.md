@@ -155,41 +155,31 @@ config.onions = {
 
 ## @Serializer.replace/v.serializerReplace
 
-For example, to de-identify the value of the `name` field in `EntityStudent`
+For example, to mask the value of the `name` field in `EntityStudent`
 
-For example, the original value of `name` is `tom`, and after de-identification it becomes `t***m`
+For example, the original value of `name` is `tom`, this result after mask is `t***m`
 
 ### 1. @Serializer.replace
 
 ``` diff
-
 class EntityStudent {
-
 + @Serializer.replace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' })
-
-@Api.field(v.title($locale('Name')))
-
-name: string;
-
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
 ### 2. v.serializerReplace
 
 ``` diff
-
 class EntityStudent {
-
-@Api.field(
-+ `v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
-
-v.title($locale('Name')),
-
-)
-name: string;
-
+  @Api.field(
++   v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
+    v.title($locale('Name')),
+  )
+  name: string;
 }
-``
+```
 
 ### 3. App Config
 
@@ -200,41 +190,22 @@ Configuration can be modified in App Config
 * Method 1: Directly modify OpenAPI parameters
 
 ``` typescript
-
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-
-fields: {
-
-name: {
-
-serializerTransforms: {
-
-'a-serialization:replace': {
-
-patternFrom: /(\w)(\w+)(\w)/,
-
-patternTo: '$1***$3',
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-` ... },
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: {
+          serializerTransforms: {
+            'a-serialization:replace': {
+              patternFrom: /(\w)(\w+)(\w)/,
+              patternTo: '$1***$3',
+            },
+          },
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -243,35 +214,21 @@ patternTo: '$1***$3',
 * Method 2: Construct a new schema
 
 ``` typescript
-
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-
-fields: {
-
-name: $makeSchema(
-
-v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
-
-z.string(),
-
-),
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: $makeSchema(
+          v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
+          z.string(),
+        ),
+      },
+    },
+  },
 };
-
 ```
 
 ## @Serializer.getter/v.serializerGetter
@@ -281,16 +238,16 @@ For example, the `fullName` field in `EntityStudent` is composed of the `firstNa
 ### 1. getter
 
 ``` diff
-class EntityStudent { 
-@Api.field() 
-firstName: string; 
+class EntityStudent {
+  @Api.field()
+  firstName: string;
 
-@Api.field() 
-lastName: string; 
+  @Api.field()
+  lastName: string;
 
-@Api.field()
+  @Api.field()
 + get fullName(): string | undefined {
-+ return `${this.firstName} ${this.lastName}`;
++   return `${this.firstName} ${this.lastName}`;
 + }
 }
 ```
@@ -300,27 +257,21 @@ lastName: string;
 ``` diff
 class EntityStudent {
 + @Serializer.getter((data: EntityStudent) => {
-+ return `${data.firstName} ${data.lastName}`;
-+ }) 
-@Api.field() 
-fullName: string;
++   return `${data.firstName} ${data.lastName}`;
++ })
+  @Api.field()
+  fullName: string;
 }
 ```
 
 ### 3. v.serializerGetter
 
 ``` diff
-
 class EntityStudent {
-
 + @Api.field(v.serializerGetter((data: EntityStudent) => {
-
-+ return `${data.firstName} ${data.lastName}`;
-
++   return `${data.firstName} ${data.lastName}`;
 + }))
-
-fullName: string;
-
+  fullName: string;
 }
 ```
 
@@ -333,40 +284,23 @@ Configuration can be modified in App Config
 * Method 1: Directly modify OpenAPI parameters
 
 ``` typescript
-
 // onions
-
 config.onions = {
-entity: {
-'demo-student:student': {
-fields: {
-fullName: {
-serializerTransforms: {
-
-'a-serialization:getter': {
-getter: (data: EntityStudent) => {
-return `${data.firstName} ${data.lastName}`;
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        fullName: {
+          serializerTransforms: {
+            'a-serialization:getter': {
+              getter: (data: EntityStudent) => {
+                return `${data.firstName} ${data.lastName}`;
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -375,57 +309,38 @@ return `${data.firstName} ${data.lastName}`;
 * Method 2: Construct a new schema
 
 ``` typescript
-
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-
-fields: {
-
-fullName: $makeSchema(
-
-v.serializerGetter((data: EntityStudent) => {
-
-return `${data.firstName} ${data.lastName}`;
-
-}),
-
-z.string(),
-
-),
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        fullName: $makeSchema(
+          v.serializerGetter((data: EntityStudent) => {
+            return `${data.firstName} ${data.lastName}`;
+          }),
+          z.string(),
+        ),
+      },
+    },
+  },
 };
 ```
 
 ## @Serializer.custom/v.serializerCustom
 
-For example, convert the `name` field value in `EntityStudent` to uppercase.
+For example, convert the `name` field value in `EntityStudent` to uppercase
 
 ### 1. @Serializer.custom
 
 ``` diff
 class EntityStudent {
 + @Serializer.custom((value: string) => {
-+ return value.toUpperCase();
-
++   return value.toUpperCase();
 + })
-
-@Api.field(v.title($locale('Name')))
-
-name: string;
-
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
@@ -433,89 +348,65 @@ name: string;
 
 ``` diff
 class EntityStudent {
-
-@Api.field(
-+ v.serializerCustom((value: string) => {
-+ return value.toUpperCase();
-
-+ }),
-
-v.title($locale('Name')),
-
-)
-name: string;
-
+  @Api.field(
++   v.serializerCustom((value: string) => {
++     return value.toUpperCase();
++   }),
+    v.title($locale('Name')),
+  )
+  name: string;
 }
 ```
 
 ### 3. App Config
 
-You can do this in App Config Modifying Configuration in `src/backend/config/config/config.ts`
+Configuration can be modified in App Config
+
+`src/backend/config/config/config.ts`
 
 * Method 1: Directly Modify OpenAPI Parameters
 
 ``` typescript
-
 // onions
-
 config.onions = {
-
-entity: {
-
-'demo-student:student': {
-
-fields: {
-
-name: {
-
-serializerTransforms: {
-
-'a-serialization:custom': {
-
-custom: (value: string) => {
-
-return value.toUpperCase();
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
-},
-
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: {
+          serializerTransforms: {
+            'a-serialization:custom': {
+              custom: (value: string) => {
+                return value.toUpperCase();
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 };
+```
 
 `a-serialization:custom`: Serializer Transform provided by the `a-serialization` module
 
 * Method 2: Construct a New Schema
 
 ``` typescript
-
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
-
-config.onions = { 
-entity: { 
-'demo-student:student': { 
-fields: { 
-name: $makeSchema( 
-v.serializerCustom((value: string) => { 
-return value.toUpperCase(); 
-}), 
-z.string(), 
-), 
-}, 
-}, 
-},
+config.onions = {
+  entity: {
+    'demo-student:student': {
+      fields: {
+        name: $makeSchema(
+          v.serializerCustom((value: string) => {
+            return value.toUpperCase();
+          }),
+          z.string(),
+        ),
+      },
+    },
+  },
 };
 ```
