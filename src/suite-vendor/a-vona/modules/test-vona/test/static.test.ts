@@ -7,7 +7,7 @@ describe('static.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const scopeTest = app.scope('test-vona');
       const url = scopeTest.static.get('img/vona.png');
-      assert.equal(url, '');
+      assert.equal(url, '/api/static/test/vona/img/vona.png');
     });
   });
 });
