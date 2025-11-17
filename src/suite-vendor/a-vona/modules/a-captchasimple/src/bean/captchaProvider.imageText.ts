@@ -46,7 +46,7 @@ export class CaptchaProviderImageText
 
   private _confirmFont(options: ICaptchaProviderOptionsImageText) {
     if (cast(svgCaptcha.options).font) return;
-    const url = options.fontPath || this.app.util.getAssetPathPhysical(__ThisModule__, 'fonts', 'Comismsh.ttf')!;
+    const url = options.fontPath || this.scope.asset.get('fonts', 'Comismsh.ttf');
     svgCaptcha.loadFont(url);
   }
 }

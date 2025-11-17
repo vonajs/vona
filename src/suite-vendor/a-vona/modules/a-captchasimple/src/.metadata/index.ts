@@ -51,6 +51,35 @@ declare module 'vona-module-a-captchasimple' {
           } 
 }
 /** captchaScene: end */
+/** meta: begin */
+export * from '../bean/meta.asset.ts';
+
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
+  
+    export interface IMetaRecord {
+      'a-captchasimple:asset': never;
+    }
+
+  
+}
+declare module 'vona-module-a-captchasimple' {
+  
+        export interface MetaAsset {
+          /** @internal */
+          get scope(): ScopeModuleACaptchasimple;
+        }
+
+          export interface MetaAsset {
+            get $beanFullName(): 'a-captchasimple.meta.asset';
+            get $onionName(): 'a-captchasimple:asset';
+            
+          } 
+}
+/** meta: end */
+/** meta asset: begin */
+import type { MetaAsset } from '../bean/meta.asset.ts';
+/** meta asset: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
@@ -60,6 +89,7 @@ export class ScopeModuleACaptchasimple extends BeanScopeBase {}
 
 export interface ScopeModuleACaptchasimple {
   util: BeanScopeUtil;
+asset: MetaAsset;
 }
 
 import 'vona';
