@@ -143,11 +143,11 @@ async function _getFullPathInner(
   dir: string,
   filename: string,
   options: IMiddlewareSystemOptionsStatic,
-): Promise<string | undefined> {
+): Promise<string> {
   // trim prefix
   if (options.apiStaticPrefix !== '/') {
     const filePrefix = path.normalize(options.apiStaticPrefix.replace(/^\//, ''));
-    if (filename.indexOf(filePrefix) !== 0) return;
+    if (filename.indexOf(filePrefix) !== 0) throw new Error(`invalid filename: ${filename}`);
     filename = filename.slice(filePrefix.length);
   }
   // check
@@ -163,7 +163,7 @@ async function _getFullPathInner(
   // static
   const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
   const module = ctx.app.meta.modules[moduleRelativeName];
-  if (!module) return;
+  if (!module) throw new Error(`invalid filename: ${filename}`);
   const fullPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static', parts.join(path.sep));
   return fullPath;
 }
