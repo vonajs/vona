@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-index",
   "type": "module",
-  "version": "5.0.8",
+  "version": "5.0.9",
   "title": "home-index",
   "vonaModule": {
     "dependencies": {
@@ -25,8 +25,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist",
-    "static"
+    "assets",
+    "dist"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
