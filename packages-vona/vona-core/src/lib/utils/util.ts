@@ -28,7 +28,6 @@ export interface IExecuteBeanCallback {
 }
 
 export interface IModuleAssetSceneRecord {
-  cli: never;
   static: never;
   templates: never;
   site: never;
