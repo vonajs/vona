@@ -1,4 +1,4 @@
-# 日志
+# Logger日志
 
 VonaJS 基于[winston](https://github.com/winstonjs/winston)提供了强大而灵活的日志系统
 

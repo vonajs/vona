@@ -367,7 +367,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '技术',
       items: [
         {
-          text: '参数校验',
+          text: 'Validation参数校验',
           base: '/zh/guide/techniques/validation/',
           collapsed: true,
           items: [
@@ -382,7 +382,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: '序列化/数据脱敏',
+          text: 'Serialization序列化/数据脱敏',
           base: '/zh/guide/techniques/serialization/',
           collapsed: true,
           items: [
@@ -391,7 +391,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: '事件',
+          text: 'Event事件',
           base: '/zh/guide/techniques/event/',
           collapsed: true,
           items: [
@@ -405,7 +405,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: '日志',
+          text: 'Logger日志',
           base: '/zh/guide/techniques/logger/',
           collapsed: true,
           items: [
