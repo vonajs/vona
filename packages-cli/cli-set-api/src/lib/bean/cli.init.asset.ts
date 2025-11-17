@@ -33,6 +33,7 @@ export class CliInitAsset extends BeanCliBase {
     if (fse.existsSync(assetDir)) {
       throw new Error(`asset exists: ${moduleName}/${scene}`);
     }
+    await this.helper.ensureDir(assetDir);
     // package.json
     await this._setPackageInfo(targetDir, scene);
   }
