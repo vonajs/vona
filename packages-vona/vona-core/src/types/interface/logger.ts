@@ -22,6 +22,7 @@ export interface ILoggerRotateConfig {
 }
 
 export interface ConfigLogger {
+  baseDir: string;
   base: TypeLoggerOptions;
   clients: Record<keyof ILoggerClientRecord, TypeLoggerOptions>;
   rotate: ILoggerRotateConfig;

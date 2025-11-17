@@ -28,14 +28,12 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
 
   // server
   const publicDir = env.SERVER_PUBLICDIR || getPublicPathPhysicalRoot(appInfo);
-  const loggerDir = env.SERVER_LOGGERDIR || getLoggerPathPhysicalRoot(appInfo);
   const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(env.SERVER_WORKERS!);
   config.server = {
     keys: (env.SERVER_KEYS || '').split(','),
     globalPrefix: env.SERVER_GLOBALPREFIX || '/api',
     publicDir,
-    loggerDir,
     subdomainOffset,
     workers,
     listen: {
@@ -57,7 +55,9 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   };
 
   // logger
+  const loggerDir = env.LOGGER_DIR || getLoggerPathPhysicalRoot(appInfo);
   config.logger = {
+    baseDir: loggerDir,
     rotate: {
       enable: env.LOGGER_ROTATE_ENABLE === 'true',
       options(filename: string) {

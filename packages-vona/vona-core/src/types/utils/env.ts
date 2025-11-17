@@ -7,13 +7,13 @@ export interface VonaConfigEnv {
   SERVER_KEYS: string | undefined;
   SERVER_GLOBALPREFIX: string | undefined;
   SERVER_PUBLICDIR: string | undefined;
-  SERVER_LOGGERDIR: string | undefined;
   SERVER_SUBDOMAINOFFSET: string | undefined;
   SERVER_WORKERS: string | undefined;
   SERVER_LISTEN_HOSTNAME: string | undefined;
   SERVER_LISTEN_PORT: string | undefined;
   SERVER_LISTEN_DISABLE: 'true' | 'false' | undefined;
   TEST_WHYISNODERUNNING: string | undefined;
+  LOGGER_DIR: string | undefined;
   LOGGER_DUMMY: 'true' | 'false' | undefined;
   LOGGER_ROTATE_ENABLE: 'true' | 'false' | undefined;
   LOGGER_ROTATE_FILENAME: string | undefined;

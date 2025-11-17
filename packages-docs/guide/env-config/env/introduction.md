@@ -133,7 +133,6 @@ VonaJS provides several built-in env variables:
 |SERVER_KEYS||
 |SERVER_GLOBALPREFIX||
 |SERVER_PUBLICDIR||
-|SERVER_LOGGERDIR||
 |SERVER_SUBDOMAINOFFSET||
 |SERVER_WORKERS||
 |SERVER_LISTEN_HOSTNAME||
@@ -151,6 +150,7 @@ VonaJS provides several built-in env variables:
 
 | Name | Description |
 |-|-|
+|LOGGER_DIR||
 |LOGGER_CLIENT_DEFAULT||
 |LOGGER_DUMMY||
 |LOGGER_ROTATE_ENABLE||
