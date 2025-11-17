@@ -28,9 +28,9 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "assets",
     "cli",
-    "dist",
-    "static"
+    "dist"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
