@@ -1,8 +1,8 @@
-# Utility Functions
+# Tools
 
 VonaJS provides a set of utility functions to make serialization capabilities more convenient
 
-## Utility List
+## Tool List
 
 |@Serializer|v|Description|
 |--|--|--|
