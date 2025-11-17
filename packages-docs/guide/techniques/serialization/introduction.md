@@ -57,66 +57,45 @@ For example, the result type returned by the Student API's `findOne` method is `
 Serialization needs to be enabled for the API
 
 ``` diff
-
 class ControllerStudent {
-
-@Web.get(':id')
-
-@Api.body(v.optional(), v.object(EntityStudent))
-
+  @Web.get(':id')
+  @Api.body(v.optional(), v.object(EntityStudent))
 + @Serializer.enable()
-
-async findOne(id) {
-
-return await this.scope.service.student.findOne(id);
-
-}
+  async findOne(id) {
+    return await this.scope.service.student.findOne(id);
+  }
 }
 ```
 
 - `@Serializer.enable`: Enables serialization
 
-### 2. Set Fields
+### 2. Field Decorator
 
 ``` diff
-
 class EntityStudent {
-
 + @Serializer.transform('demo-student:upper')
-
-@Api.field(v.title($locale('Name')), v.default(''), v.min(3))
-
-name: string;
-
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
 - `@Serializer.transform`: Pass in the Serializer Transform name `demo-student:upper`
 
-## Filter Parameters
+## Filter Parameter
 
-You can pass Filter parameters to the Serializer Transform. The system first executes the Filter function, and controls whether the current Serializer Transform needs to be executed based on the result.
+You can pass Filter parameter to the Serializer Transform. The system first executes the Filter function, and controls whether the current Serializer Transform needs to be executed based on the result
 
-For example, if the current username is `admin`, the conversion logic for `upper` will not be executed.
+For example, if the current username is `admin`, the conversion logic for `upper` will not be executed
 
 ``` diff
-
 class EntityStudent {
-
-@Serializer.transform('demo-student:upper', {
-
-+ filter(this: VonaContext) {
-
-+ return this.user.name !== 'admin';
-
-+ },
-
-})
-
-@Api.field(v.title($locale('Name')), v.default(''), v.min(3))
-
-name: string;
-
+  @Serializer.transform('demo-student:upper', {
++   filter(this: VonaContext) {
++     return this.user.name !== 'admin';
++   },
+  })
+  @Api.field(v.title($locale('Name')))
+  name: string;
 }
 ```
 
@@ -176,7 +155,7 @@ class EntityStudent {
 
 + @Serializer.transform('demo-student:upper', { first: true })
 
-@Api.field(v.title($locale('Name')), v.default(''), v.min(3))
+@Api.field(v.title($locale('Name')))
 
 name: string;
 

@@ -69,12 +69,12 @@ class ControllerStudent {
 
 - `@Serializer.enable`: 开启序列化
 
-### 2. 设置字段
+### 2. 字段装饰器
 
 ``` diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper')
-  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
+  @Api.field(v.title($locale('Name')))
   name: string;
 }
 ```
@@ -94,7 +94,7 @@ class EntityStudent {
 +     return this.user.name !== 'admin';
 +   },
   })
-  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
+  @Api.field(v.title($locale('Name')))
   name: string;
 }
 ```
@@ -150,7 +150,7 @@ class SerializerTransformUpper {
 ``` diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper', { first: true })
-  @Api.field(v.title($locale('Name')), v.default(''), v.min(3))
+  @Api.field(v.title($locale('Name')))
   name: string;
 }
 ```
