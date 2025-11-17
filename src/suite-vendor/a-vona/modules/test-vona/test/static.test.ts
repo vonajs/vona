@@ -10,4 +10,11 @@ describe('static.test.ts', () => {
       assert.equal(url, '/api/static/test/vona/img/vona.png');
     });
   });
+  it('action:asset', async () => {
+    await app.bean.executor.mockCtx(async () => {
+      const scopeTest = app.scope('test-vona');
+      const file = scopeTest.asset.get('static', 'img/vona.png');
+      assert.equal(file.includes('vona.png'), true);
+    });
+  });
 });
