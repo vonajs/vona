@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.196",
+  "version": "5.0.197",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -47,7 +47,7 @@
     "vona-module-a-security": "^5.0.18",
     "vona-module-a-serialization": "^5.0.11",
     "vona-module-a-startup": "^5.0.29",
-    "vona-module-a-static": "^5.0.23",
+    "vona-module-a-static": "^5.0.24",
     "vona-module-a-summer": "^5.0.23",
     "vona-module-a-swagger": "^5.0.28",
     "vona-module-a-upload": "^5.0.19",

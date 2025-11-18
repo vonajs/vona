@@ -867,7 +867,7 @@ importers:
         specifier: ^5.0.93
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.196
+        specifier: ^5.0.197
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1266,7 +1266,7 @@ importers:
         specifier: ^5.0.29
         version: link:modules/a-startup
       vona-module-a-static:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-static
       vona-module-a-summer:
         specifier: ^5.0.23
