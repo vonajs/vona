@@ -8,7 +8,7 @@ export async function getRegistry() {
     const npmConfig = new NPMConfig(Object.assign({ npmPath: '' }, npmDefinitions));
     await npmConfig.load();
     __registry = npmConfig.get('registry') || 'https://registry.npmjs.org/';
-    if (__registry.charAt(__registry.length - 1) !== '/') {
+    if (!__registry.endsWith('/')) {
       __registry = `${__registry}/`;
     }
   }
