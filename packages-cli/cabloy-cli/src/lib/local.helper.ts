@@ -232,7 +232,8 @@ export class LocalHelper {
   }
 
   async invokeCli(args: string[], options) {
-    await this.processHelper.spawnExe({
+    // tsx: spawnCmd, node: spawnExe
+    await this.processHelper.spawnCmd({
       cmd: 'tsx',
       args: [this.parseBrandPath()].concat(args),
       // cmd: 'node',
