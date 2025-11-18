@@ -413,6 +413,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '日志分级', link: 'logger-level' },
           ],
         },
+        {
+          text: 'Static & Assets',
+          base: '/zh/guide/techniques/assets/',
+          collapsed: true,
+          items: [
+            { text: 'Static', link: 'static' },
+            { text: 'Assets', link: 'assets' },
+          ],
+        },
       ],
     },
     {

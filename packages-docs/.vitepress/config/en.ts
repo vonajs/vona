@@ -413,6 +413,15 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Logger Level', link: 'logger-level' },
           ],
         },
+        {
+          text: 'Static & Assets',
+          base: '/guide/techniques/assets/',
+          collapsed: true,
+          items: [
+            { text: 'Static', link: 'static' },
+            { text: 'Assets', link: 'assets' },
+          ],
+        },
       ],
     },
     {
