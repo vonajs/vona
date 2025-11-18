@@ -57,9 +57,6 @@ $ vona :create:bean meta static --module=demo-student
 ## meta.static定义
 
 ``` typescript
-import { Meta } from 'vona-module-a-meta';
-import { BeanStaticBase } from 'vona-module-a-static';
-
 export type TypeStaticGetPath = 'img/vona.png' | 'img/vona.svg';
 
 @Meta()
