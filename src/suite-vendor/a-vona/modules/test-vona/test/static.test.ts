@@ -15,6 +15,8 @@ describe('static.test.ts', () => {
       const scopeTest = app.scope('test-vona');
       const file = scopeTest.asset.get('static', 'img/vona.png');
       assert.equal(file.includes('vona.png'), true);
+      const file2 = scopeTest.asset.get('img', 'vona.png');
+      assert.equal(file2.includes('vona.png'), true);
     });
   });
 });

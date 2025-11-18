@@ -3,6 +3,7 @@ import { BeanAssetBase } from 'vona-module-a-static';
 
 export interface IAssetGetPath {
   static: 'img/vona.svg' | 'img/vona.png';
+  img: 'vona.png';
 }
 
 @Meta()
