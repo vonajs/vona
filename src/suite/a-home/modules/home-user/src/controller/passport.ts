@@ -20,7 +20,8 @@ export interface IControllerOptionsPassport extends IDecoratorControllerOptions 
 @Controller<IControllerOptionsPassport>('passport')
 export class ControllerPassport extends BeanBase {
   @Web.get('current')
-  @Passport.public()
+  // should not set public
+  // @Passport.public()
   @Api.body(v.optional(), v.object(DtoPassport))
   current(): DtoPassport | undefined {
     return this._combineDtoPassport();
