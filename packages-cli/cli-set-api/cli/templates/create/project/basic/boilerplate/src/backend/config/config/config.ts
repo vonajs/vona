@@ -58,16 +58,14 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const loggerDir = env.LOGGER_DIR || getLoggerPathPhysicalRoot(appInfo);
   config.logger = {
     baseDir: loggerDir,
-    rotate: {
-      enable: env.LOGGER_ROTATE_ENABLE === 'true',
-      options(filename: string) {
-        return {
-          filename: replaceTemplate(env.LOGGER_ROTATE_FILENAME!, { filename }),
-          datePattern: env.LOGGER_ROTATE_DATEPATTERN,
-          maxSize: env.LOGGER_ROTATE_MAXSIZE,
-          maxFiles: env.LOGGER_ROTATE_MAXFILES,
-        };
-      },
+    rotate(filename: string) {
+      return {
+        enable: env.LOGGER_ROTATE_ENABLE === 'true',
+        filename: replaceTemplate(env.LOGGER_ROTATE_FILENAME!, { filename }),
+        datePattern: env.LOGGER_ROTATE_DATEPATTERN,
+        maxSize: env.LOGGER_ROTATE_MAXSIZE,
+        maxFiles: env.LOGGER_ROTATE_MAXFILES,
+      };
     },
     base(this: VonaApplication, _clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) {
       return {

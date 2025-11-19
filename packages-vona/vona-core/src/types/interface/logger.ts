@@ -7,8 +7,9 @@ export interface ILoggerOptionsClientInfo {
 }
 
 export type TypeLoggerOptions = Winston.LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) => Winston.LoggerOptions);
-export type TypeLoggerRotateOptions =
-  (fileName: string, winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => DailyRotateFile.DailyRotateFileTransportOptions;
+export type TypeLoggerRotateOptions = DailyRotateFile.DailyRotateFileTransportOptions & { enable: boolean };
+export type TypeLoggerRotateOptionsFn =
+  (fileName: string, winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => TypeLoggerRotateOptions;
 
 export interface ILoggerClientRecord {
   default: never;
@@ -16,16 +17,11 @@ export interface ILoggerClientRecord {
 
 export interface ILoggerChildRecord {}
 
-export interface ILoggerRotateConfig {
-  enable: boolean;
-  options: TypeLoggerRotateOptions;
-}
-
 export interface ConfigLogger {
   baseDir: string;
   base: TypeLoggerOptions;
   clients: Record<keyof ILoggerClientRecord, TypeLoggerOptions>;
-  rotate: ILoggerRotateConfig;
+  rotate: TypeLoggerRotateOptionsFn;
 }
 
 export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';

@@ -84,12 +84,12 @@ export class AppLogger extends BeanSimple {
         throw new Error(`Failed to create logger dir: ${dirname}`);
       }
     }
-    const configRotate = this.app.config.logger.rotate;
+    const configRotate = this.app.config.logger.rotate.call(this, fileName, Winston, clientInfo);
     let optionsFile;
     if (configRotate.enable) {
-      optionsFile = configRotate.options.call(this, fileName, Winston, clientInfo);
+      optionsFile = configRotate;
     } else {
-      optionsFile = { filename: `${fileName}.log` };
+      optionsFile = Object.assign({}, { filename: `${fileName}.log` }, configRotate);
     }
     const _options = deepExtend({ dirname }, optionsFile, options);
     if (configRotate.enable) {
