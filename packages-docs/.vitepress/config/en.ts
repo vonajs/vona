@@ -422,6 +422,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Assets', link: 'assets' },
           ],
         },
+        {
+          text: 'Worker',
+          base: '/guide/techniques/worker/',
+          collapsed: true,
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+          ],
+        },
       ],
     },
     {

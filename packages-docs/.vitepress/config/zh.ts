@@ -422,6 +422,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Assets', link: 'assets' },
           ],
         },
+        {
+          text: 'Worker',
+          base: '/zh/guide/techniques/worker/',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+          ],
+        },
       ],
     },
     {
