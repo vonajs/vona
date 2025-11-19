@@ -98,6 +98,9 @@ export class BeanExecutor extends BeanBase {
     // instance
     const instanceName = this.ctx.instanceName; // use default instanceName when undefined
     if (instanceName !== undefined && instanceName !== null) {
+      if (!this.app.meta.appReady) {
+        throw new Error(`should not init ctx.instance: ${instanceName}, when app.meta.appReady not true`);
+      }
       this.ctx.instance = (await this.bean.instance.get(instanceName))!;
       // start instance
       if (options?.instance) {
