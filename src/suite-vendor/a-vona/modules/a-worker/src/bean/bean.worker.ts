@@ -38,17 +38,18 @@ export class BeanWorker extends BeanBase {
     this.scope.broadcast.exitAll.emit({ code });
   }
 
-  async reload() {
+  reload() {
     if (!cluster.worker) {
       return;
       // maybe throw uncaughtException
       // throw new Error('Only take affect in cluster');
     }
-    await closeApp(false);
-    cluster.worker.send('reload-worker');
+    closeApp(false).then(() => {
+      cluster.worker?.send('reload-worker');
+    });
   }
 
-  async reloadAll() {
+  reloadAll() {
     if (!cluster.worker) {
       return;
       // maybe throw uncaughtException
