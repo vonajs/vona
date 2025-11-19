@@ -39,13 +39,14 @@ export class BeanWorker extends BeanBase {
   }
 
   reload() {
-    if (!cluster.worker) {
+    const worker = cluster.worker;
+    if (!worker) {
       return;
       // maybe throw uncaughtException
       // throw new Error('Only take affect in cluster');
     }
     closeApp(false).then(() => {
-      cluster.worker?.send('reload-worker');
+      worker.send('reload-worker');
     });
   }
 

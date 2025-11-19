@@ -4,7 +4,6 @@ import type { IAppMonkey } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
-import cluster from 'node:cluster';
 
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
@@ -116,16 +115,13 @@ export class AppMeta extends BeanSimple {
   }
 
   private async _closeInner() {
-    if (this.app.meta.env.SERVER_WORKERS !== '1') {
-      // disconnect
-      cluster.worker?.disconnect();
-    } else {
-      // close server
-      if (this.app.server) {
-        this.app.server.close();
-        // maybe hang up using await
-        // await promisify(this.app.server.close).call(this.app.server);
-      }
+    // should not call disconnect, which will cause channel closed
+    // cluster.worker?.disconnect();
+    // close server
+    if (this.app.server) {
+      this.app.server.close();
+      // maybe hang up using await
+      // await promisify(this.app.server.close).call(this.app.server);
     }
     // appClose
     this.appClose = true;
