@@ -49,7 +49,7 @@ Log configuration can be done in App Config:
 // logger
 config.logger = {
   baseDir: '/new/path',
-  rotate: {},
+  rotate(filename: string) {},
   base: {},
   clients: {},
 };
@@ -73,28 +73,25 @@ The system provides a default rotation configuration, which is enabled. You can 
 ``` typescript
 // logger
 config.logger = {
-  rotate: {
-    enable: true,
-    options(filename: string) {
-      return {
-        filename: `${filename}-%DATE%.log`,
-        datePattern: 'YYYY-MM-DD',
-        maxSize: '20m',
-        maxFiles: '7d',
-      };
-    },
-  },
+  rotate(filename: string) {
+    return {
+      enable: true,
+      filename: `${filename}-%DATE%.log`,
+      datePattern: 'YYYY-MM-DD',
+      maxSize: '20m',
+      maxFiles: '7d',
+    };
+  },  
 };
 ```
 
 |Name|Description|
 |--|--|
 |enable|Whether Rotate is enabled|
-|options|Returns Rotate configuration via function|
-|options.filename|Filename template|
-|options.datePattern|Date pattern|
-|options.maxSize|Maximum size of each file|
-|options.maxFiles|Keep only files from the last few days|
+|filename|Filename template|
+|datePattern|Date pattern|
+|maxSize|Maximum size of each file|
+|maxFiles|Keep only files from the last few days|
 
 ### 2. .env
 

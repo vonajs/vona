@@ -48,7 +48,7 @@ LOGGER_DIR = /new/path
 // logger
 config.logger = {
   baseDir: '/new/path',
-  rotate: {},
+  rotate(filename: string) {},
   base: {},
   clients: {},
 };
@@ -72,28 +72,25 @@ config.logger = {
 ``` typescript
 // logger
 config.logger = {
-  rotate: {
-    enable: true,
-    options(filename: string) {
-      return {
-        filename: `${filename}-%DATE%.log`,
-        datePattern: 'YYYY-MM-DD',
-        maxSize: '20m',
-        maxFiles: '7d',
-      };
-    },
-  },
+  rotate(filename: string) {
+    return {
+      enable: true,
+      filename: `${filename}-%DATE%.log`,
+      datePattern: 'YYYY-MM-DD',
+      maxSize: '20m',
+      maxFiles: '7d',
+    };
+  },  
 };
 ```
 
 |名称|说明|
 |--|--|
 |enable|是否启用Rotate|
-|options|通过函数返回Rotate配置|
-|options.filename|文件名模版|
-|options.datePattern|日期模式|
-|options.maxSize|每个文件的最大尺寸|
-|options.maxFiles|只保留几天之内的文件|
+|filename|文件名模版|
+|datePattern|日期模式|
+|maxSize|每个文件的最大尺寸|
+|maxFiles|只保留几天之内的文件|
 
 ### 2. .env
 
