@@ -1,5 +1,6 @@
 import type { Redis } from 'ioredis';
 import type { IBroadcastExecute, IBroadcastJobContext } from '../types/broadcast.ts';
+import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -47,6 +48,14 @@ export class ServiceBroadcast extends BeanBase {
     // broadcast config
     const broadcastItem = this.bean.onion.broadcast.getOnionSlice(info.broadcastName);
     const broadcastConfig = this.bean.onion.broadcast.getOnionOptions(info.broadcastName);
+    // instance
+    const instanceName = info.options?.instanceName;
+    const instance = broadcastConfig?.instance !== false;
+    // check
+    if ((!isNil(instanceName) || instance) && !this.app.meta.appReady) {
+      // ignore
+      return;
+    }
     // execute
     return await this.bean.executor.newCtx(
       async () => {
@@ -57,10 +66,10 @@ export class ServiceBroadcast extends BeanBase {
       {
         dbInfo: info.options?.dbInfo,
         locale: info.options?.locale,
-        instanceName: info.options?.instanceName,
+        instanceName,
         extraData: info.options?.extraData,
         transaction: broadcastConfig?.transaction,
-        instance: broadcastConfig?.instance !== false,
+        instance,
       },
     );
   }
