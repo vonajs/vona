@@ -60,6 +60,3 @@ SERVER_WORKERS = 3
 ```
 
 - 在执行`npm run dev`时，将启动 2 个 Workers。这样可以在开发过程中，及时排查分布式情况下可能出现的问题
-
-
-
