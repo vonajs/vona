@@ -1,4 +1,4 @@
-import type { IElectionElectOptions } from '../types/election.ts';
+import type { IElectionElectOptions, TypeFunctionRelease } from '../types/election.ts';
 import { BeanBase, functionNoop } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -14,7 +14,7 @@ export class ServiceElection extends BeanBase {
     }
   }
 
-  public obtain(resource: string, fn: Function, options?: IElectionElectOptions) {
+  public obtain(resource: string, fn: TypeFunctionRelease, options?: IElectionElectOptions) {
     const tickets = options?.tickets ?? 1;
     if (tickets === -1 || tickets === Infinity) {
       fn(functionNoop);
