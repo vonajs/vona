@@ -391,6 +391,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: 'Election',
+          base: '/guide/techniques/election/',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: 'introduction' },
+          ],
+        },
+        {
           text: 'Event',
           base: '/guide/techniques/event/',
           collapsed: true,
