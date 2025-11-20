@@ -422,6 +422,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: 'PrintTip',
+          base: '/guide/techniques/printTip/',
+          link: 'introduction',
+        },
+        {
           text: 'Static & Assets',
           base: '/guide/techniques/assets/',
           collapsed: true,
