@@ -393,10 +393,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Election',
           base: '/zh/guide/techniques/election/',
-          collapsed: true,
-          items: [
-            { text: '介绍', link: 'introduction' },
-          ],
+          link: 'introduction',
         },
         {
           text: 'Event事件',
@@ -438,10 +435,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Worker',
           base: '/zh/guide/techniques/worker/',
-          collapsed: true,
-          items: [
-            { text: '介绍', link: 'introduction' },
-          ],
+          link: 'introduction',
         },
       ],
     },
