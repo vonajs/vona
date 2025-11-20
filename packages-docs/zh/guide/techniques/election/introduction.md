@@ -71,3 +71,28 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
 - `appStarted`: 调用`election.obtain`获取指定资源的所有权。当取得所有权就会调用回调函数。该回调函数提供一个`fnRelease`参数，用于后续释放所有权
 - `appClose`: 释放所有权，以便其他 Workers 参与后续的竞争
 - `_doCustomLogic`: 实现自定义的逻辑或者服务
+
+## 指定tickets
+
+在调用`election.obtain`时，可以指定允许多个 Workers 取得所有权:
+
+``` diff
+async appStarted() {
+    const scope = this.app.scope(__ThisModule__);
+    scope.election.obtain(
+      'echo',
+      fnRelease => {
+        this._fnRelease = fnRelease;
+        this._doCustomLogic();
+        setTimeout(() => {
+          this.app.bean.worker.reload();
+        }, 4000);
+      },
++     { tickets: 2 },
+    );
+  }
+```
+
+|名称|说明|
+|--|--|
+|tickets|允许指定数量的Workers取得所有权，默认为`1`|
