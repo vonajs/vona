@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.201",
+  "version": "5.0.202",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -20,7 +20,7 @@
     "vona-module-a-captcha": "^5.0.19",
     "vona-module-a-captchasimple": "^5.0.8",
     "vona-module-a-core": "^5.0.121",
-    "vona-module-a-election": "^5.0.20",
+    "vona-module-a-election": "^5.0.21",
     "vona-module-a-error": "^5.0.23",
     "vona-module-a-event": "^5.0.20",
     "vona-module-a-executor": "^5.0.25",
@@ -56,7 +56,7 @@
     "vona-module-a-version": "^5.0.43",
     "vona-module-a-vona": "^5.0.25",
     "vona-module-a-web": "^5.0.30",
-    "vona-module-a-worker": "^5.0.21",
+    "vona-module-a-worker": "^5.0.22",
     "vona-module-a-zod": "^5.0.5"
   },
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"

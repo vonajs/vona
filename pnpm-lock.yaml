@@ -352,7 +352,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.96
+        specifier: ^6.0.97
         version: link:packages-vona/vona-mock
       vona-module-test-cabloy:
         specifier: workspace:^
@@ -870,7 +870,7 @@ importers:
         specifier: ^5.0.97
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.201
+        specifier: ^5.0.202
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1197,7 +1197,7 @@ importers:
         specifier: ^5.0.121
         version: link:modules/a-core
       vona-module-a-election:
-        specifier: ^5.0.20
+        specifier: ^5.0.21
         version: link:modules/a-election
       vona-module-a-error:
         specifier: ^5.0.23
@@ -1305,7 +1305,7 @@ importers:
         specifier: ^5.0.30
         version: link:modules/a-web
       vona-module-a-worker:
-        specifier: ^5.0.21
+        specifier: ^5.0.22
         version: link:modules/a-worker
       vona-module-a-zod:
         specifier: ^5.0.5
