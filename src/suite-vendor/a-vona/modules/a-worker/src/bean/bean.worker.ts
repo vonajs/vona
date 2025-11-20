@@ -30,7 +30,7 @@ export class BeanWorker extends BeanBase {
   }
 
   exit(code?: number | string | null | undefined) {
-    this.app.meta.close().then(() => {
+    closeApp(false).then(() => {
       process.exit(code);
     });
   }
@@ -42,21 +42,15 @@ export class BeanWorker extends BeanBase {
   reload() {
     const worker = cluster.worker;
     if (!worker) {
-      return;
-      // maybe throw uncaughtException
-      // throw new Error('Only take affect in cluster');
+      this.exit(); // pm2 or forever
+    } else {
+      closeApp(false).then(() => {
+        worker.send('reload-worker');
+      });
     }
-    closeApp(false).then(() => {
-      worker.send('reload-worker');
-    });
   }
 
   reloadAll() {
-    if (!cluster.worker) {
-      return;
-      // maybe throw uncaughtException
-      // throw new Error('Only take affect in cluster');
-    }
     this.scope.broadcast.reloadAll.emit();
   }
 }
