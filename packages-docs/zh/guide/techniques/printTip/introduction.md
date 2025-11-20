@@ -22,14 +22,18 @@ $ vona :create:bean meta printTip --module=demo-student
 右键菜单 - [模块路径]: `Vona Meta/Print Tip`
 :::
 
-## meta.election定义
+## meta.printTip定义
 
 ``` typescript
-export type TypeElectionObtainResource = 'echo';
-
 @Meta()
-export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {}
+export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
+  async execute(): Promise<TypeMetaPrintTipResult> {
+    return {
+      title: 'Test',
+      message: '=== Hello World ===',
+    };
+  }
+}
 ```
 
-- `TypeElectionObtainResource`: 定义 Election 资源的类型
-
+- `execute`: 返回需要输出的提示信息，支持数组类型
