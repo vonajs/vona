@@ -8,7 +8,7 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
     return {
       title: 'passport callback',
-      path: this.app.util.getAbsoluteUrlByApiPath($apiPath('/auth/passport/callback')),
+      message: this.app.util.getAbsoluteUrlByApiPath($apiPath('/auth/passport/callback')),
     };
   }
 }

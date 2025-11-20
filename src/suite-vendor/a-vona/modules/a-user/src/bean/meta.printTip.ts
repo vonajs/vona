@@ -11,7 +11,7 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
     const accessToken = jwt.accessToken;
     return {
       title: 'access token [admin] [dev]',
-      path: `Bearer ${accessToken}`,
+      message: `Bearer ${accessToken}`,
     };
   }
 }

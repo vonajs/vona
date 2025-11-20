@@ -32,7 +32,7 @@ export class StartupPrintTip extends BeanBase implements IStartupExecute {
       }
     }
     //
-    const message = outputs.map(output => `${chalk.gray(`[${output.module}]`)} ${chalk.magenta(output.title)}: ${chalk.cyan(output.path)}`).join('\n');
+    const message = outputs.map(output => `${chalk.gray(`[${output.module}]`)} ${chalk.magenta(output.title)}: ${chalk.cyan(output.message)}`).join('\n');
     const text = `\n${chalk.yellow(__tipBegin)}\n${message}\n${chalk.yellow(__tipEnd)}`;
     this.$logger.silly(text);
   }

@@ -10,9 +10,9 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
     const _apiPathSwagger = this.app.util.getAbsoluteUrlByApiPath($apiPath('//swagger'));
     const _apiPathRapidoc = this.app.util.getAbsoluteUrlByApiPath($apiPath('//rapidoc'));
     return [
-      { title: 'swagger', path: _apiPathSwagger },
+      { title: 'swagger', message: _apiPathSwagger },
       // { title: 'swagger30', path: `http://localhost:${app.meta.env.SERVER_LISTEN_PORT}${_apiPathSwagger}?version=V30` },
-      { title: 'rapidoc', path: _apiPathRapidoc },
+      { title: 'rapidoc', message: _apiPathRapidoc },
       // { title: 'rapidoc30', path: `http://localhost:${app.meta.env.SERVER_LISTEN_PORT}${_apiPathRapidoc}?version=V30` },
     ];
   }

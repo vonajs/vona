@@ -1,6 +1,6 @@
 export interface IMetaPrintTipInfo {
   title: string;
-  path: string;
+  message: string;
 }
 
 export interface IMetaPrintTipInfoInner extends IMetaPrintTipInfo {
