@@ -59,7 +59,7 @@ config.logger = {
 |baseDir|日志目录|
 |rotate|日志Rotate|
 |base|基础配置，为所有Client提供通用的基础配置|
-|clients|配置多个Client。系统提供了内置的`default` Client，实现开箱即用的日志能力|
+|clients|配置多个Clients。系统提供了内置的`default` Client，实现开箱即用的日志能力|
 
 ## Rotate
 

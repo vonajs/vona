@@ -419,6 +419,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: 'Mail发送邮件',
+          base: '/zh/guide/techniques/mail/',
+          link: 'introduction',
+        },
+        {
           text: 'PrintTip',
           base: '/zh/guide/techniques/printTip/',
           link: 'introduction',

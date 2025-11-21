@@ -419,6 +419,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: 'Mail',
+          base: '/zh/guide/techniques/mail/',
+          link: 'introduction',
+        },
+        {
           text: 'PrintTip',
           base: '/guide/techniques/printTip/',
           link: 'introduction',
