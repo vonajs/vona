@@ -1,9 +1,6 @@
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30, SecurityRequirementObject } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
-import type {
-  Constructable,
-  IDecoratorBeanOptionsBase,
-} from 'vona';
+import type { Constructable, IDecoratorBeanOptionsBase } from 'vona';
 import type { IOpenApiHeader, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
@@ -13,13 +10,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { translateError } from '@cabloy/zod-errors-custom';
 import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenAPIRegistry } from '@cabloy/zod-to-openapi';
-import {
-  appMetadata,
-  appResource,
-  BeanBase,
-  cast,
-  LocaleModuleNameSeparator,
-} from 'vona';
+import { appMetadata, appResource, BeanBase, cast, LocaleModuleNameSeparator } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
