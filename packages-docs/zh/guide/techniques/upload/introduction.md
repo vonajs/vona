@@ -58,6 +58,20 @@ class ControllerStudent {
 
 在上传文件的同时，也可以附加多个表单字段
 
+对于数组类型的字段，前端在构造上传数据时，采用的方式不同，就需要使用不同的参数装饰器
+
+### 1. @Arg.field
+
+* 前端
+
+``` typescript
+const formData = new FormData();
+formData.append('name', 'vona');
+formData.append('tags', ['node', 'typescript']);
+```
+
+* API
+
 ``` diff
 export class ControllerStudent extends BeanBase {
   @Web.post('file')
@@ -75,5 +89,36 @@ export class ControllerStudent extends BeanBase {
 }
 ```
 
-- `@Arg.field`: 此装饰器用于标注参数`files`，从上传的数据中取得`name=files`的文件
+- `@Arg.field`: 此装饰器用于标注参数`name/tags`，从上传的数据中取得`name=name/tags`的字段值
 
+### 2. @Arg.fields
+
+* 前端
+
+``` typescript
+const formData = new FormData();
+formData.append('name', 'vona');
+formData.append('tags', 'node');
+formData.append('tags', 'typescript');
+```
+
+* API
+
+``` diff
+export class ControllerStudent extends BeanBase {
+  @Web.post('file')
+  @Core.fileUpload()
+  @Api.contentType('application/json')
+  async uploadFile(
++   @Arg.field('name', v.title('Name')) name: string,
++   @Arg.fields('tags', v.title('Tags'), v.array(z.string())) tags: string[],
+    @Arg.file('file1', v.title('Upload Single File')) file1: IUploadFile,
+  ) {
+    console.log(name, tags);
+    console.log(file1);
+    return file1.file;
+  }
+}
+```
+
+- `@Arg.fields`: 此装饰器用于标注参数`tags`，从上传的数据中取得`name=tags`的字段值
