@@ -420,7 +420,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         },
         {
           text: 'Mail',
-          base: '/zh/guide/techniques/mail/',
+          base: '/guide/techniques/mail/',
           link: 'introduction',
         },
         {
@@ -436,6 +436,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Static', link: 'static' },
             { text: 'Assets', link: 'assets' },
           ],
+        },
+        {
+          text: 'Upload',
+          base: '/guide/techniques/upload/',
+          link: 'introduction',
         },
         {
           text: 'Worker',

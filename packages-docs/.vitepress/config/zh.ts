@@ -438,6 +438,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
+          text: 'Upload文件上传',
+          base: '/zh/guide/techniques/upload/',
+          link: 'introduction',
+        },
+        {
           text: 'Worker',
           base: '/zh/guide/techniques/worker/',
           link: 'introduction',
