@@ -461,7 +461,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.362
+        specifier: ^1.0.363
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -870,7 +870,7 @@ importers:
         specifier: ^5.0.97
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.203
+        specifier: ^5.0.204
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1224,7 +1224,7 @@ importers:
         specifier: ^5.0.29
         version: link:modules/a-logger
       vona-module-a-mail:
-        specifier: ^5.0.10
+        specifier: ^5.0.11
         version: link:modules/a-mail
       vona-module-a-mailconfirm:
         specifier: ^5.0.8
@@ -1239,7 +1239,7 @@ importers:
         specifier: ^5.0.27
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.53
+        specifier: ^5.0.54
         version: link:modules/a-openapi
       vona-module-a-openapischema:
         specifier: ^5.0.21
