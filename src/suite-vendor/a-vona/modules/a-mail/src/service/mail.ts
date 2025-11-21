@@ -14,9 +14,10 @@ export class ServiceMail extends BeanBase {
     const clientName = mail.client;
     // client
     let client = this._getClient(clientName);
-    let clientTest = false;
+    if (!client) throw new Error(`config not found for mail client: ${clientName}`);
     // client test
-    if (!this._checkClientValid(client) && this.app.meta.isLocal) {
+    let clientTest = false;
+    if (client.transport.service === 'test') {
       client = await this._createClientTest();
       clientTest = true;
     }
