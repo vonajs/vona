@@ -297,6 +297,18 @@
     ],
     "description": "record.locale"
   },
+  "record.mailclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordmailclient",
+    "body": [
+      "declare module 'vona-module-a-mail' {",
+      "  export interface IMailClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.mailclient"
+  },
   "findManyQueryTransform": {
     "scope": "typescript,typescriptreact",
     "prefix": "findmanyquerytransform",

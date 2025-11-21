@@ -48,7 +48,7 @@ export class ServiceMail extends BeanBase {
   }
 
   private _checkClientValid(client?: ConfigMailClient) {
-    return !!client?.transport?.host;
+    return !!client?.transport?.host || !!client?.transport?.service;
   }
 
   private async _createClientTest(): Promise<ConfigMailClient> {
