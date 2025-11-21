@@ -1,4 +1,5 @@
 import type { ILoggerOptionsClientInfo, VonaAppInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { IMailClientRecord } from 'vona-module-a-mail';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
@@ -19,6 +20,12 @@ declare module 'vona-module-a-orm' {
 
 export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
+
+  // modules
+  config.modules = {};
+
+  // onions
+  config.onions = {};
 
   // meta
   config.meta = {
@@ -153,11 +160,27 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
     ...config.database.clients![env.DATABASE_DEFAULT_CLIENT as keyof IDatabaseClientRecord],
   };
 
-  // modules
-  config.modules = {};
-
-  // onions
-  config.onions = {};
+  // mail
+  config.modules['a-mail'] = {
+    defaultClient: env.MAIL_DEFAULT_CLIENT as keyof IMailClientRecord,
+    clients: {
+      system: {
+        transport: {
+          service: env.MAIL_SYSTEM_TRANSPORT_SERVICE || undefined,
+          host: env.MAIL_SYSTEM_TRANSPORT_HOST || undefined,
+          port: env.MAIL_SYSTEM_TRANSPORT_PORT ? Number.parseInt(env.MAIL_SYSTEM_TRANSPORT_PORT) : undefined,
+          secure: env.MAIL_SYSTEM_TRANSPORT_SECURE === 'true',
+          auth: {
+            user: env.MAIL_SYSTEM_TRANSPORT_AUTH_USER || undefined,
+            pass: env.MAIL_SYSTEM_TRANSPORT_AUTH_PASS || undefined,
+          },
+        },
+        defaults: {
+          from: env.MAIL_SYSTEM_DEFAULTS_FROM || undefined,
+        },
+      },
+    },
+  };
 
   return config;
 }
