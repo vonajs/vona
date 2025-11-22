@@ -210,7 +210,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Internal Aspect',
           base: '/guide/aop/internal/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'AOP Method', link: 'aop-method' },
             { text: 'Magic Method', link: 'magic-method' },
@@ -231,7 +231,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'User System',
           base: '/guide/bal/user/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'User', link: 'user' },
             { text: 'Role', link: 'role' },
@@ -241,7 +241,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Authentication System',
           base: '/guide/bal/auth/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'a-authsimple', link: 'a-authsimple' },
@@ -251,7 +251,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Captcha System',
           base: '/guide/bal/captcha/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Captcha Provider', link: 'captcha-provider' },
@@ -261,7 +261,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Menu System',
           base: '/guide/bal/menu/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'SSR Menu', link: 'ssr-menu' },
@@ -369,7 +369,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Validation',
           base: '/guide/techniques/validation/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Zod Refine', link: 'zod-refine' },
@@ -384,7 +384,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Serialization',
           base: '/guide/techniques/serialization/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Tools', link: 'tools' },
@@ -398,7 +398,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Event',
           base: '/guide/techniques/event/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Event Listener', link: 'event-listener' },
@@ -412,7 +412,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Logger',
           base: '/guide/techniques/logger/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Logger Level', link: 'logger-level' },
@@ -431,7 +431,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Static & Assets',
           base: '/guide/techniques/assets/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Static', link: 'static' },
             { text: 'Assets', link: 'assets' },

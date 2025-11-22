@@ -210,7 +210,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '内部切面',
           base: '/zh/guide/aop/internal/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'AOP Method', link: 'aop-method' },
             { text: '魔术方法', link: 'magic-method' },
@@ -231,7 +231,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '用户体系',
           base: '/zh/guide/bal/user/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '用户', link: 'user' },
             { text: '角色', link: 'role' },
@@ -241,7 +241,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '认证体系',
           base: '/zh/guide/bal/auth/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: 'a-authsimple', link: 'a-authsimple' },
@@ -251,7 +251,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '验证码体系',
           base: '/zh/guide/bal/captcha/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: 'Captcha Provider', link: 'captcha-provider' },
@@ -261,7 +261,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '菜单体系',
           base: '/zh/guide/bal/menu/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: 'SSR菜单', link: 'ssr-menu' },
@@ -369,7 +369,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Validation参数校验',
           base: '/zh/guide/techniques/validation/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: 'Zod Refine', link: 'zod-refine' },
@@ -384,7 +384,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Serialization序列化/数据脱敏',
           base: '/zh/guide/techniques/serialization/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: '工具函数', link: 'tools' },
@@ -398,7 +398,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Event事件',
           base: '/zh/guide/techniques/event/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: '事件监听器', link: 'event-listener' },
@@ -412,7 +412,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Logger日志',
           base: '/zh/guide/techniques/logger/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
             { text: '日志分级', link: 'logger-level' },
@@ -431,7 +431,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Static & Assets',
           base: '/zh/guide/techniques/assets/',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Static', link: 'static' },
             { text: 'Assets', link: 'assets' },
