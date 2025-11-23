@@ -10,6 +10,7 @@ const __template = `import type { IArgv, VonaApplication } from 'vona';
 export async function main(app: VonaApplication, _argv: IArgv) {
   console.log(import.meta.filename);
   console.log(app.config.meta);
+  return 'Hello VonaJS';
 }
 `;
 
@@ -36,7 +37,11 @@ async function playRun(projectPath: string) {
   }
   // run
   const playInstance = await import(pathToHref(playFile));
-  await playInstance.main(app, argv);
+  const res = await playInstance.main(app, argv);
+  if (res !== undefined) {
+    // eslint-disable-next-line no-console
+    console.log(res);
+  }
   // close
   await app.close();
   // handles
