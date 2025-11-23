@@ -1,7 +1,7 @@
 import type { IStartupExecute } from 'vona-module-a-startup';
 import type { IMetaRuntimeExecute } from '../types/runtime.ts';
 import path from 'node:path';
-import { writeJson } from 'fs-extra';
+import fse from 'fs-extra';
 import { BeanBase, getRuntimePathPhysicalRoot, instanceDesp } from 'vona';
 import { Startup } from 'vona-module-a-startup';
 
@@ -15,7 +15,7 @@ export class StartupRuntime extends BeanBase implements IStartupExecute {
     const runtime = await this._collectRuntime();
     const runtimeDir = getRuntimePathPhysicalRoot(this.app);
     const runtimeFile = path.join(runtimeDir, `${instanceDesp}.json`);
-    await writeJson(runtimeFile, runtime, {});
+    await fse.writeFile(runtimeFile, `${JSON.stringify(runtime, null, 2)}\n`);
   }
 
   async _collectRuntime() {
