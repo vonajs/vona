@@ -3,7 +3,7 @@ import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
-import { getImportEsm } from '../utils.ts';
+import { getImportEsm, loadJSONFile } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
@@ -48,21 +48,21 @@ export class CliBinPlay extends BeanCliBase {
   async _runAttach(projectPath: string) {
     const runtimeFile = path.join(projectPath, '.app/runtime/-.json');
     if (!fse.existsSync(runtimeFile)) throw new Error('dev server not running');
-  }
-
-  async _getPackageInfo(packageName: string) {
-    const registry = await getRegistry();
-    const result = await fetch(`${registry}${packageName}/latest`, {
+    const runtime = await loadJSONFile(runtimeFile);
+    const runtimeCore = runtime['a-core'];
+    const runtimeUser = runtime['a-user'];
+    const result = await fetch(`${runtimeCore.protocol}://${runtimeCore.host}/api/home/user/passport/current`, {
       headers: {
         'content-type': 'application/json',
+        'authorization': `Bearer ${runtimeUser.accessToken}`,
       },
     });
     if (result.status !== 200) {
-      const message = `npm info ${packageName} got error: ${result.status}, ${result.statusText}`;
+      const message = `error: ${result.status}, ${result.statusText}`;
       throw new Error(message);
     }
     const data = await result.json();
-    return data;
+    console.log(data);
   }
 
   async _runIsolate(projectPath: string) {
