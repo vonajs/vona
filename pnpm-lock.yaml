@@ -281,9 +281,6 @@ importers:
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
-      vona-module-demo-student3:
-        specifier: workspace:^
-        version: link:src/module/demo-student3
       vona-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -307,7 +304,7 @@ importers:
         version: 4.1.12
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.59
+        specifier: ^3.0.60
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -1009,15 +1006,6 @@ importers:
         version: 6.0.1
 
   src/module/demo-student:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-
-  src/module/demo-student3:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
