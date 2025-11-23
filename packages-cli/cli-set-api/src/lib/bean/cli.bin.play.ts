@@ -48,6 +48,14 @@ export class CliBinPlay extends BeanCliBase {
   async _runAttach(projectPath: string) {
     const runtimeFile = path.join(projectPath, '.app/runtime/-.json');
     if (!fse.existsSync(runtimeFile)) throw new Error('dev server not running');
+    // args
+    let args: string[] = [];
+    const pos = process.argv.indexOf(':bin:play');
+    if (pos > -1) {
+      args = args.concat(process.argv.slice(pos + 1));
+    }
+    const body = { args };
+    //
     const runtime = await loadJSONFile(runtimeFile);
     const runtimeCore = runtime['a-core'];
     const runtimeUser = runtime['a-user'];
@@ -57,6 +65,7 @@ export class CliBinPlay extends BeanCliBase {
         'content-type': 'application/json',
         'authorization': `Bearer ${runtimeUser.accessToken}`,
       },
+      body: JSON.stringify(body),
     });
     if (result.status !== 200) {
       const message = `error: ${result.status}, ${result.statusText}`;
