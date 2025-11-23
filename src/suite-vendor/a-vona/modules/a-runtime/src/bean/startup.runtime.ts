@@ -14,7 +14,7 @@ export class StartupRuntime extends BeanBase implements IStartupExecute {
   async execute() {
     const runtime = await this._collectRuntime();
     const runtimeDir = getRuntimePathPhysicalRoot(this.app);
-    const runtimeFile = path.join(runtimeDir, `${instanceDesp}.json`);
+    const runtimeFile = path.join(runtimeDir, `${instanceDesp(this.ctx.instanceName)}.json`);
     await fse.writeFile(runtimeFile, `${JSON.stringify(runtime, null, 2)}\n`);
   }
 
