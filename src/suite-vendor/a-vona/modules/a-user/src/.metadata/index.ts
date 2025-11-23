@@ -289,12 +289,14 @@ declare module 'vona-module-a-event' {
 /** event: end */
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';
+export * from '../bean/meta.runtime.ts';
 
 import 'vona-module-a-meta';
 declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
       'a-user:printTip': never;
+'a-user:runtime': never;
     }
 
   
@@ -309,6 +311,17 @@ declare module 'vona-module-a-user' {
           export interface MetaPrintTip {
             get $beanFullName(): 'a-user.meta.printTip';
             get $onionName(): 'a-user:printTip';
+            
+          }
+
+        export interface MetaRuntime {
+          /** @internal */
+          get scope(): ScopeModuleAUser;
+        }
+
+          export interface MetaRuntime {
+            get $beanFullName(): 'a-user.meta.runtime';
+            get $onionName(): 'a-user:runtime';
             
           } 
 }

@@ -208,7 +208,7 @@ export class CliCommand extends BaseCommand {
     if (options) {
       for (const key in options) {
         const option = options[key];
-        if (option.alias) {
+        if (option.alias && argv[key] === undefined) {
           argv[key] = argv[option.alias];
         }
       }

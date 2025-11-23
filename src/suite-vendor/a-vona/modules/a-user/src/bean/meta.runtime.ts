@@ -1,0 +1,8 @@
+import type { IMetaPrintTipExecute, TypeMetaPrintTipResult } from 'vona-module-a-runtime';
+import { BeanBase } from 'vona';
+import { Meta } from 'vona-module-a-meta';
+
+@Meta()
+export class MetaRuntime extends BeanBase implements IMetaPrintTipExecute {
+  async execute(): Promise<TypeMetaPrintTipResult> {}
+}
