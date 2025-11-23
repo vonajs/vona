@@ -9,4 +9,7 @@ export interface IDtoOptionsPlay extends IDecoratorDtoOptions {}
 export class DtoPlay {
   @Api.field(v.array(z.string()))
   args: string[];
+
+  @Api.field()
+  projectPath: string;
 }

@@ -49,6 +49,7 @@ export class CliBinDev extends BeanCliBase {
         execArgs: [getImportEsm()],
         // execArgs: ['--experimental-transform-types', getImportEsm(), '--trace-deprecation'],
         // signal: 'SIGHUP',
+        ignore: ['test/**/*.test.ts', 'src/backend/play'],
       });
       nodemon.on('quit', () => {
         resolve(undefined);

@@ -54,7 +54,7 @@ export class CliBinPlay extends BeanCliBase {
     if (pos > -1) {
       args = args.concat(process.argv.slice(pos + 1));
     }
-    const body = { args };
+    const body = { args, projectPath };
     //
     const runtime = await loadJSONFile(runtimeFile);
     const runtimeCore = runtime['a-core'];
