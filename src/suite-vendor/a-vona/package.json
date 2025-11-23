@@ -39,6 +39,7 @@
     "vona-module-a-openapiutils": "^5.0.9",
     "vona-module-a-orm": "^5.0.80",
     "vona-module-a-ormdialect": "^5.0.19",
+    "vona-module-a-play": "^5.0.0",
     "vona-module-a-printtip": "^5.0.21",
     "vona-module-a-queue": "^5.0.26",
     "vona-module-a-redis": "^5.0.24",

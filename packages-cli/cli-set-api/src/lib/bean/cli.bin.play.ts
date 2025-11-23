@@ -51,7 +51,7 @@ export class CliBinPlay extends BeanCliBase {
     const runtime = await loadJSONFile(runtimeFile);
     const runtimeCore = runtime['a-core'];
     const runtimeUser = runtime['a-user'];
-    const result = await fetch(`${runtimeCore.protocol}://${runtimeCore.host}/api/home/user/passport/current`, {
+    const result = await fetch(`${runtimeCore.protocol}://${runtimeCore.host}/api/a/play`, {
       headers: {
         'content-type': 'application/json',
         'authorization': `Bearer ${runtimeUser.accessToken}`,
@@ -61,8 +61,12 @@ export class CliBinPlay extends BeanCliBase {
       const message = `error: ${result.status}, ${result.statusText}`;
       throw new Error(message);
     }
-    const data = await result.json();
-    console.log(data);
+    const res = await result.json();
+    if (res.code !== 0) throw new Error(res.message);
+    if (res.data !== undefined) {
+      // eslint-disable-next-line no-console
+      console.log(res.data);
+    }
   }
 
   async _runIsolate(projectPath: string) {

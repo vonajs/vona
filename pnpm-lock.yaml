@@ -197,6 +197,9 @@ importers:
       vona-module-a-ormdialect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-ormdialect
+      vona-module-a-play:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-play
       vona-module-a-printtip:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-printtip
@@ -1256,6 +1259,9 @@ importers:
       vona-module-a-ormdialect:
         specifier: ^5.0.19
         version: link:modules/a-ormdialect
+      vona-module-a-play:
+        specifier: ^5.0.0
+        version: link:modules/a-play
       vona-module-a-printtip:
         specifier: ^5.0.21
         version: link:modules/a-printtip
@@ -1809,6 +1815,15 @@ importers:
       pg-types:
         specifier: ^4.1.0
         version: 4.1.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-play:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
