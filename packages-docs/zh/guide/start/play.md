@@ -28,6 +28,17 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 $ vona play
 ```
 
+## Attach模式
+
+为了提升性能，VonaJS 还提供了 Attach 模式
+
+如果已经启动了开发服务，可以使用 Attach 模式，直接在开发服务中执行 play 文件
+
+``` bash
+$ vona play --attach
+$ vona play -a
+```
+
 ## 举例
 
 ### 1. 模拟请求的上下文环境ctx

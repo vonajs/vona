@@ -52,6 +52,7 @@ Automatically run the Playground source code file and automatically create it if
 
 ``` bash
 $ vona play
+$ vona play -a
 ```
 
 ## db:reset

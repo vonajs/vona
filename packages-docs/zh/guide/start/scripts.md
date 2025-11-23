@@ -52,6 +52,7 @@ $ npm run tsc
 
 ``` bash
 $ vona play
+$ vona play -a
 ```
 
 ## db:reset

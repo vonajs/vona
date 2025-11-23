@@ -28,6 +28,17 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 $ vona play
 ```
 
+## Attach Mode
+
+To improve performance, VonaJS also provides an Attach mode
+
+If the dev service is already running, you can use Attach mode to execute the play file directly within the dev service
+
+``` bash
+$ vona play --attach
+$ vona play -a
+```
+
 ## Example
 
 ### 1. Simulate the context object of the request
