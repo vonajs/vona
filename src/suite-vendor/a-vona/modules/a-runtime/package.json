@@ -4,8 +4,11 @@
   "version": "5.0.0",
   "title": "a-runtime",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
+    "dependencies": {},
+    "metas": {
+      "runtime": {
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "description": "",
