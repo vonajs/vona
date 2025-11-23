@@ -80,7 +80,7 @@
     "uuid": "^11.1.0",
     "vona-core": "^5.0.97",
     "why-is-node-running": "^3.2.2",
-    "yargs-parser": "^21.1.1"
+    "yargs-parser": "^22.0.0"
   },
   "devDependencies": {
     "clean-package": "^2.2.0"

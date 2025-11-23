@@ -1,5 +1,31 @@
 /* eslint-disable */
-import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
+/** dto: begin */
+export * from '../dto/play.ts';
+import type { IDtoOptionsPlay } from '../dto/play.ts';
+import 'vona-module-a-web';
+declare module 'vona-module-a-web' {
+  
+    export interface IDtoRecord {
+      'a-play:play': IDtoOptionsPlay;
+    }
+
+  
+}
+declare module 'vona-module-a-play' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoPlay } from '../dto/play.ts'; 
+declare module 'vona-module-a-play' {
+  
+    export interface IDtoOptionsPlay {
+      fields?: TypeEntityOptionsFields<DtoPlay, IDtoOptionsPlay[TypeSymbolKeyFieldsMore]>;
+    }
+}
+/** dto: end */
 /** controller: begin */
 export * from '../controller/play.ts';
 import type { IControllerOptionsPlay } from '../controller/play.ts';
@@ -35,7 +61,12 @@ declare module 'vona-module-a-play' {
       actions?: TypeControllerOptionsActions<ControllerPlay>;
     }
 }
+declare module 'vona-module-a-web' {
+  export interface IApiPathPostRecord{
+        '/play': undefined;
+    }
 
+}
 /** controller: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';

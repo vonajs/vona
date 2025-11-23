@@ -585,8 +585,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
       yargs-parser:
-        specifier: ^21.1.1
-        version: 21.1.1
+        specifier: ^22.0.0
+        version: 22.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1824,6 +1824,10 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-play:
+    dependencies:
+      yargs-parser:
+        specifier: ^22.0.0
+        version: 22.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -8944,6 +8948,10 @@ packages:
   yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
+
+  yargs-parser@22.0.0:
+    resolution: {integrity: sha512-rwu/ClNdSMpkSrUb+d6BRsSkLUq1fmfsY6TOpYzTwvwkg1/NRG85KBy3kq++A8LKQwX6lsu+aWad+2khvuXrqw==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=23}
 
   yargs@13.3.2:
     resolution: {integrity: sha512-AX3Zw5iPruN5ie6xGRIDgqkT+ZhnRlZMLMHAs8tg7nRruy2Nb+i5o9bwghAogtM08q1dpr2LVoS8KSTMYpWXUw==}
@@ -17214,6 +17222,8 @@ snapshots:
   yargs-parser@20.2.9: {}
 
   yargs-parser@21.1.1: {}
+
+  yargs-parser@22.0.0: {}
 
   yargs@13.3.2:
     dependencies:
