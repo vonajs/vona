@@ -1,7 +1,7 @@
 {
   "name": "vona-cli",
   "type": "module",
-  "version": "1.0.366",
+  "version": "1.0.367",
   "description": "vona cli",
   "publishConfig": {
     "access": "public"
@@ -46,11 +46,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.0.59",
+    "@cabloy/cli": "^3.0.60",
     "@cabloy/process-helper": "^2.0.21",
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
-    "vona-cli-set-api": "^1.0.366"
+    "vona-cli-set-api": "^1.0.367"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

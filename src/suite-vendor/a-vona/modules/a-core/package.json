@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-core",
   "type": "module",
-  "version": "5.0.122",
+  "version": "5.0.123",
   "title": "a-core",
   "vonaModule": {
     "dependencies": {},
@@ -94,7 +94,7 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.59",
+    "@cabloy/cli": "^3.0.60",
     "@swc/core": "^1.14.0",
     "@swc/helpers": "^0.5.17",
     "@types/babel__core": "^7.20.5",
