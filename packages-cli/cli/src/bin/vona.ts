@@ -39,8 +39,8 @@ function main() {
   }
   args.push(bootstrapFile);
   const rawArgv = process.argv.slice(2);
-  if (rawArgv.length === 1 && rawArgv[0] === 'play') {
-    args = args.concat([':bin:play', '--dummy']);
+  if (rawArgv[0] === 'play') {
+    args = args.concat([':bin:play', '--dummy']).concat(rawArgv.slice(1));
   } else {
     args = args.concat(rawArgv);
   }

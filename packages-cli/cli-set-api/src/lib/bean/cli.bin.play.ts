@@ -38,10 +38,34 @@ export class CliBinPlay extends BeanCliBase {
       };
       await generateVonaMeta(configMeta, configOptions);
     }
-    await this._run(projectPath);
+    if (argv.attach) {
+      await this._runAttach(projectPath);
+    } else {
+      await this._runIsolate(projectPath);
+    }
   }
 
-  async _run(projectPath: string) {
+  async _runAttach(projectPath: string) {
+    const runtimeFile = path.join(projectPath, '.app/runtime/-.json');
+    if (!fse.existsSync(runtimeFile)) throw new Error('dev server not running');
+  }
+
+  async _getPackageInfo(packageName: string) {
+    const registry = await getRegistry();
+    const result = await fetch(`${registry}${packageName}/latest`, {
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+    if (result.status !== 200) {
+      const message = `npm info ${packageName} got error: ${result.status}, ${result.statusText}`;
+      throw new Error(message);
+    }
+    const data = await result.json();
+    return data;
+  }
+
+  async _runIsolate(projectPath: string) {
     // testFile
     let testFile = path.join(import.meta.dirname, './toolsBin/play.ts');
     if (!fse.existsSync(testFile)) {
