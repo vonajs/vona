@@ -10,4 +10,12 @@ export class BeanCore extends BeanBase {
   get host() {
     return this.app.util.host;
   }
+
+  getAbsoluteUrl(path?: string) {
+    return this.app.util.getAbsoluteUrl(path);
+  }
+
+  getAbsoluteUrlByApiPath(path: string) {
+    return this.app.util.getAbsoluteUrlByApiPath(path);
+  }
 }

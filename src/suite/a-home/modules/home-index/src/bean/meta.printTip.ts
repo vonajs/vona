@@ -7,7 +7,7 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
     return {
       title: 'home',
-      message: this.app.util.getAbsoluteUrl(),
+      message: this.bean.core.getAbsoluteUrl(),
     };
   }
 }
