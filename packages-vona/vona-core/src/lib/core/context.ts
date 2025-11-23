@@ -102,6 +102,7 @@ export const contextBase: ContextBase = {
     const self = cast<VonaContext>(this);
     if (self.path.endsWith('.json')) return true;
     if (self.response.type && self.response.type.includes('json')) return true;
+    if (self.request.headers['content-type']?.includes('application/json') && self.accepts('json') === 'json') return true;
     if (self.accepts('html', 'text', 'json') === 'json') return true;
     return false;
   },
