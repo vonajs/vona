@@ -15,9 +15,9 @@ export class CliCommand extends BaseCommand {
 
   constructor(rawArgv, { meta, argv }) {
     super(rawArgv);
-    this.usage = meta.info.usage;
+    // this.usage = meta.info.usage; // readonly
+    // this.options = meta.options; // readonly
     this.version = meta.info.version;
-    this.options = meta.options;
     this.__meta = meta;
     this.__groups = meta.groups;
     this.__argv = argv;
@@ -26,8 +26,7 @@ export class CliCommand extends BaseCommand {
   async run(options) {
     let { argv, cwd, env, rawArgv } = options;
     // argv
-    argv = Object.assign({}, argv, this.__argv);
-    delete argv.$0;
+    argv = this._prepareArgv(argv);
     // context
     const context = {
       brandName: process.env.CabloyCliBrandName as any,
@@ -199,5 +198,21 @@ export class CliCommand extends BaseCommand {
     const expression = group.condition && group.condition.expression;
     if (!expression) return true;
     return evaluate(expression, { group, context });
+  }
+
+  _prepareArgv(argv: any) {
+    argv = Object.assign({}, argv, this.__argv);
+    delete argv.$0;
+    // alias
+    const options = this.__meta.options;
+    if (options) {
+      for (const key in options) {
+        const option = options[key];
+        if (option.alias) {
+          argv[key] = argv[option.alias];
+        }
+      }
+    }
+    return argv;
   }
 }

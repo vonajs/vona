@@ -7,6 +7,7 @@ export default {
   },
   options: {
     module: {
+      alias: 'm',
       description: 'module name',
       type: 'string',
     },
