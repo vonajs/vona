@@ -11,6 +11,7 @@ declare module '@cabloy/cli' {
     mode?: VonaMetaMode;
     flavor?: VonaMetaFlavor;
     retainRuntime?: boolean;
+    attach?: boolean;
   }
 }
 
