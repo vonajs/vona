@@ -51,7 +51,8 @@ export class CliBinPlay extends BeanCliBase {
     const runtime = await loadJSONFile(runtimeFile);
     const runtimeCore = runtime['a-core'];
     const runtimeUser = runtime['a-user'];
-    const result = await fetch(`${runtimeCore.protocol}://${runtimeCore.host}/api/a/play`, {
+    const result = await fetch(`${runtimeCore.protocol}://${runtimeCore.host}/api/play`, {
+      method: 'post',
       headers: {
         'content-type': 'application/json',
         'authorization': `Bearer ${runtimeUser.accessToken}`,
