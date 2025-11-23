@@ -94,7 +94,7 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
           this.bean.logger.makeTransportFile(clientInfo, 'http', 'http'),
           this.bean.logger.makeTransportFile(clientInfo, 'combined'),
           this.bean.logger.makeTransportConsole(clientInfo),
-        ].filter(item => !!item);
+        ];
         return { transports };
       },
     },

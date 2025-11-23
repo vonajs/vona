@@ -36,6 +36,12 @@ export const formatLoggerCtx = Winston.format((info, _opts: any) => {
   return info;
 });
 
+export const formatLoggerDummy = Winston.format(info => {
+  const app = useApp();
+  if (app.meta.env.LOGGER_DUMMY === 'true') return false;
+  return info;
+});
+
 export const formatLoggerFilter = Winston.format((info, opts: any) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;

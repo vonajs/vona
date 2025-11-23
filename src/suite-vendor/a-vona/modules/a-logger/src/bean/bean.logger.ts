@@ -1,6 +1,6 @@
 import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel } from 'vona';
 import type * as Transport from 'winston-transport';
-import { BeanBase, formatLoggerConsole, formatLoggerFilter } from 'vona';
+import { BeanBase, formatLoggerConsole, formatLoggerDummy, formatLoggerFilter } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import * as Winston from 'winston';
 
@@ -37,11 +37,11 @@ export class BeanLogger extends BeanBase {
     });
   }
 
-  public makeTransportConsole(clientInfo: ILoggerOptionsClientInfo): Transport | undefined {
-    if (this.app.meta.env.LOGGER_DUMMY === 'true') return;
+  public makeTransportConsole(clientInfo: ILoggerOptionsClientInfo): Transport {
     return new Winston.transports.Console({
       level: 'silly',
       format: Winston.format.combine(
+        formatLoggerDummy(),
         formatLoggerFilter({ level: clientInfo.level, silly: true }),
         Winston.format.colorize(),
         formatLoggerConsole(clientInfo),

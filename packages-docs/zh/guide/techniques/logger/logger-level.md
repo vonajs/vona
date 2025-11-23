@@ -48,7 +48,7 @@ config.logger = {
       const transports = [
 +       this.bean.logger.makeTransportFile(clientInfo, 'order'),
         this.bean.logger.makeTransportConsole(clientInfo),
-      ].filter(item => !!item);
+      ];
       return { transports };
     },
   },
@@ -68,7 +68,7 @@ config.logger = {
 +       this.bean.logger.makeTransportFile(clientInfo, 'order-debug', 'debug'),
         this.bean.logger.makeTransportFile(clientInfo, 'order'),
         this.bean.logger.makeTransportConsole(clientInfo),
-      ].filter(item => !!item);
+      ];
       return { transports };
     },
   },
@@ -87,7 +87,7 @@ config.logger = {
       const transports = [
         this.bean.logger.makeTransportFile(clientInfo, 'order'),
 +       this.bean.logger.makeTransportConsole(clientInfo),
-      ].filter(item => !!item);
+      ];
       return { transports };
     },
   },

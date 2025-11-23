@@ -146,7 +146,7 @@ config.logger = {
       const transports = [
         this.bean.logger.makeTransportFile(clientInfo, 'order'),
         this.bean.logger.makeTransportConsole(clientInfo),
-      ].filter(item => !!item);
+      ];
       return { transports };
     },
   },
@@ -159,7 +159,6 @@ config.logger = {
 - `makeTransportFile`: Used to construct the file transport, requiring the log file name `order`
   - Since the file name template is `${filename}-%DATE%.log`, the actual generated file name is `order-2025-11-16.log`
 - `makeTransportConsole`: Used to construct the console transport
-- `filter`: The newly created transport instances may be undefined, therefore filtering is required
 
 ## Obtaining Logger Client Instance
 
