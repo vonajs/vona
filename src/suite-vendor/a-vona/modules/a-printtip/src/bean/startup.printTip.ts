@@ -7,7 +7,13 @@ import { Startup } from 'vona-module-a-startup';
 const __tipBegin = '=================== tip: begin ===================';
 const __tipEnd = '=================== tip: end =====================';
 
-@Startup({ instance: true, debounce: true, after: true, meta: { mode: 'dev' } })
+@Startup({
+  instance: true,
+  debounce: true,
+  after: true,
+  meta: { mode: 'dev' },
+  dependencies: 'a-runtime:runtime',
+})
 export class StartupPrintTip extends BeanBase implements IStartupExecute {
   async execute() {
     if (this.app.meta.env.LOGGER_DUMMY === 'true') return;

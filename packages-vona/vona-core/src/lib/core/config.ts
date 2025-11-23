@@ -81,3 +81,15 @@ export function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
   fse.ensureDirSync(publicDir);
   return publicDir;
 }
+
+export function getRuntimePathPhysicalRoot(app: VonaApplication) {
+  const mode = app.config.meta.mode;
+  let runtimeDir: string;
+  if (mode === 'test' || mode === 'dev') {
+    runtimeDir = path.join(app.options.projectPath, '.app/runtime');
+  } else {
+    runtimeDir = path.join(os.homedir(), 'vona', app.options.name, 'runtime');
+  }
+  fse.ensureDirSync(runtimeDir);
+  return runtimeDir;
+}

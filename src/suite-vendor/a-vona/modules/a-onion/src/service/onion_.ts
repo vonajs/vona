@@ -90,7 +90,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return this[SymbolOnionsEnabled][selector];
   }
 
-  getOnionsEnabledOfMeta(useCache: boolean, beanName: string, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+  getOnionsEnabledOfMeta(useCache: boolean, beanName: keyof IMetaNameRecord, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
     const method = useCache ? 'getOnionsEnabledCached' : 'getOnionsEnabled';
     return this[method](selector, matchThis, ...matchArgs).filter(item => item.beanOptions.name === beanName);
   }

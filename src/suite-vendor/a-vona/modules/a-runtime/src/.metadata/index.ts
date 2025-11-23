@@ -1,4 +1,30 @@
 /* eslint-disable */
+/** startup: begin */
+export * from '../bean/startup.runtime.ts';
+
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  
+    export interface IStartupRecord {
+      'a-runtime:runtime': IDecoratorStartupOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-runtime' {
+  
+        export interface StartupRuntime {
+          /** @internal */
+          get scope(): ScopeModuleARuntime;
+        }
+
+          export interface StartupRuntime {
+            get $beanFullName(): 'a-runtime.startup.runtime';
+            get $onionName(): 'a-runtime:runtime';
+            get $onionOptions(): IDecoratorStartupOptions;
+          } 
+}
+/** startup: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
