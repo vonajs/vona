@@ -65,20 +65,58 @@ declare module 'vona-module-a-core' {
           } 
 }
 /** middlewareSystem: end */
+/** bean: begin */
+export * from '../bean/bean.core.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-core' {
+  
+        export interface BeanCore {
+          /** @internal */
+          get scope(): ScopeModuleACore;
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import type { BeanCore } from '../bean/bean.core.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'core': BeanCore;
+  }
+}
+/** bean: end */
 /** meta: begin */
+export * from '../bean/meta.runtime.ts';
 export * from '../bean/meta.static.ts';
 
 import 'vona-module-a-meta';
 declare module 'vona-module-a-meta' {
   
     export interface IMetaRecord {
-      'a-core:static': never;
+      'a-core:runtime': never;
+'a-core:static': never;
     }
 
   
 }
 declare module 'vona-module-a-core' {
   
+        export interface MetaRuntime {
+          /** @internal */
+          get scope(): ScopeModuleACore;
+        }
+
+          export interface MetaRuntime {
+            get $beanFullName(): 'a-core.meta.runtime';
+            get $onionName(): 'a-core:runtime';
+            
+          }
+
         export interface MetaStatic {
           /** @internal */
           get scope(): ScopeModuleACore;
