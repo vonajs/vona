@@ -1,14 +1,16 @@
 {
   "name": "vona-module-a-play",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-play",
   "vonaModule": {
     "dependencies": {}
   },
   "description": "",
   "author": "",
-  "keywords": ["Vona Module"],
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [

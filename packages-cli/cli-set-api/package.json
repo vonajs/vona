@@ -1,7 +1,7 @@
 {
   "name": "vona-cli-set-api",
   "type": "module",
-  "version": "1.0.364",
+  "version": "1.0.365",
   "description": "vona cli-set-api",
   "publishConfig": {
     "access": "public"
@@ -48,7 +48,7 @@
     "@babel/plugin-proposal-decorators": "^7.25.9",
     "@babel/plugin-transform-class-properties": "^7.25.9",
     "@babel/plugin-transform-typescript": "^7.26.8",
-    "@cabloy/cli": "^3.0.58",
+    "@cabloy/cli": "^3.0.59",
     "@cabloy/dotenv": "^1.1.10",
     "@cabloy/extend": "^3.1.10",
     "@cabloy/module-glob": "^5.2.32",
@@ -78,7 +78,7 @@
     "ts-node-maintained": "^10.9.6",
     "urllib": "^4.6.11",
     "uuid": "^11.1.0",
-    "vona-core": "^5.0.97",
+    "vona-core": "^5.0.98",
     "why-is-node-running": "^3.2.2",
     "yargs-parser": "^22.0.0"
   },
