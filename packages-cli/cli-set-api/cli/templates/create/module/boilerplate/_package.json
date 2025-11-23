@@ -19,9 +19,9 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "<%=argv.description%>",
+  "description": "",
   "keywords": ["Vona Module"],
-  "author": "<%=argv.author%>",
+  "author": "",
   "files": [
     "assets",
     "dist"

@@ -15,8 +15,8 @@ export class CliCommand extends BaseCommand {
 
   constructor(rawArgv, { meta, argv }) {
     super(rawArgv);
-    // this.usage = meta.info.usage; // readonly
-    // this.options = meta.options; // readonly
+    this.usage = meta.info.usage; // readonly
+    this.options = meta.options; // readonly
     this.version = meta.info.version;
     this.__meta = meta;
     this.__groups = meta.groups;
