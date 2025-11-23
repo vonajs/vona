@@ -212,6 +212,9 @@ importers:
       vona-module-a-rest:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-rest
+      vona-module-a-runtime:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-runtime
       vona-module-a-schedule:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-schedule
@@ -1265,6 +1268,9 @@ importers:
       vona-module-a-redlock:
         specifier: ^5.0.24
         version: link:modules/a-redlock
+      vona-module-a-runtime:
+        specifier: ^5.0.0
+        version: link:modules/a-runtime
       vona-module-a-schedule:
         specifier: ^5.0.22
         version: link:modules/a-schedule
@@ -1851,6 +1857,15 @@ importers:
       '@sesamecare-oss/redlock':
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.8.2)
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+
+  src/suite-vendor/a-vona/modules/a-runtime:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
