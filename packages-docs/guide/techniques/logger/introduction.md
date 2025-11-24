@@ -106,7 +106,7 @@ LOGGER_ROTATE_MAXSIZE = 20m
 LOGGER_ROTATE_MAXFILES = 7d
 ```
 
-## How to add a new client
+## Adding a New Client
 
 The following explains the Client configuration by adding a new Client
 

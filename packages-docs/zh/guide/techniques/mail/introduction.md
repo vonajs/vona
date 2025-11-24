@@ -5,7 +5,7 @@ VonaJS 基于[Nodemailer](https://github.com/nodemailer/nodemailer)实现了发�
 ## 特性
 
 1. 基于队列发送邮件
-2. 提供了 test 服务，方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器
+2. 提供了`test`服务，方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器
 
 ## App Config配置
 
@@ -43,21 +43,26 @@ config.modules = {
 |--|--|
 |defaultClient|缺省Client名，默认为`system`|
 |clients|配置多个Clients。系统提供了内置的`system` Client|
-|system.transport|邮件服务配置|
-|system.defaults|邮件的缺省值。比如，当发送邮件时，如果不指定`from`字段的值，那么就使用缺省值|
 
-* transport
+* Client
 
 |名称|说明|
 |--|--|
-|service|内置服务名，比如`Gmail`。如果指定了service，则不再需要设置host/port|
+|transport|邮件服务配置|
+|defaults|邮件的缺省值。比如，当发送邮件时，如果不指定`from`字段的值，那么就使用缺省值|
+
+* Transport
+
+|名称|说明|
+|--|--|
+|service|内置服务名，比如`Gmail`。如果指定了service，则不再需要设置`host/port`|
 |host|Host|
 |port|Port|
 |secure|是否启用服务安全|
 |auth.user|账户名称|
 |auth.pass|账户密码|
 
-- `service: test`: VonaJS 提供了内置的`test`服务。方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器
+`service: test`: VonaJS 提供了内置的`test`服务。方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器
 
 ## env配置
 
@@ -152,9 +157,9 @@ class ControllerStudent {
 await this.bean.mail.send(mail, 'order');
 ```
 
-## 修改队列配置
+## 队列配置
 
-VonaJS 采用队列发送邮件。可以在 App Config 中修改队列配置
+VonaJS 采用一个内置队列发送邮件。可以在 App Config 中修改队列配置
 
 ``` typescript
 // onions
