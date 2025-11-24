@@ -2,7 +2,7 @@ import type { Settings } from '@sesamecare-oss/redlock';
 import type { FunctionAsync } from 'vona';
 import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 import { Redlock } from '@sesamecare-oss/redlock';
-import { BeanBase, instanceDesp } from 'vona';
+import { BeanBase, getRedisClientKeyPrefix, instanceDesp } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -18,7 +18,7 @@ export class ServiceRedlock extends BeanBase {
     const redlock = options?.redlock ?? this.redlockDefault;
     const lockTTL = options?.lockTTL ?? this.scope.config.redlock.lockTTL;
     // resource
-    const _lockResource = `redlock_${this.app.name}:${instanceDesp(instanceName)}:${resource}`;
+    const _lockResource = `${getRedisClientKeyPrefix('redlock', this.app)}${instanceDesp(instanceName)}:${resource}`;
     // lock
     let _lock = await redlock.acquire([_lockResource], lockTTL);
     // timer

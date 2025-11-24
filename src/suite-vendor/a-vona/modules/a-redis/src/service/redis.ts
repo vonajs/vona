@@ -1,6 +1,6 @@
 import type { Redis } from 'ioredis';
 import type { IRedisClientRecord } from '../types/redis.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, getRedisClientKeyPrefix } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -9,12 +9,12 @@ export class ServiceRedis extends BeanBase {
     const app = this.app;
     // clear keys
     // await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
-    await this._clearRedisKeys(app.bean.redis.get('queue'), `bull_${app.name}:*`);
+    await this._clearRedisKeys(app.bean.redis.get('queue'), `${getRedisClientKeyPrefix('bull', app)}*`);
     // broadcast channel has subscribed
     // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);
     // redlock
     for (const clientName of this.$scope.redlock.config.redlock.clients) {
-      await this._clearRedisKeys(app.bean.redis.get(clientName), `redlock_${app.name}:*`);
+      await this._clearRedisKeys(app.bean.redis.get(clientName), `${getRedisClientKeyPrefix('redlock', app)}*`);
     }
     for (const clientName in app.config.redis.clients) {
       if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
