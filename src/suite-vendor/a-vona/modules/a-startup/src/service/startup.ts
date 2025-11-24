@@ -36,10 +36,13 @@ export class ServiceStartup extends BeanBase {
       await this._appReadyInstanceStartup('', true);
     } else {
       // only start static instances (defined in config)
-      for (const configInstanceBase of this.app.config.instances) {
+      for (const key in this.app.config.instance.instances) {
+        const instanceName = key as keyof IInstanceRecord;
+        const configInstanceBase = this.app.config.instance.instances[instanceName];
+        if (configInstanceBase === false) continue;
         // need not await for prod
         const wait = this.app.config.server.listen.disable;
-        await this._appReadyInstanceStartup(configInstanceBase.name, wait);
+        await this._appReadyInstanceStartup(instanceName, wait);
       }
     }
 
