@@ -1,14 +1,15 @@
 # Election
 
-How do you start a separate service on the backend in VonaJS?
+How can you start a standalone service in the backend using VonaJS?
 
-Since VonaJS uses a distributed architecture, multiple Workers can be started on the backend. So, in which Worker should the service be started?
+Since VonaJS uses a distributed architecture, multiple Workers can be started in the backend. So, on which Worker should the standalone service be started?
 
-VonaJS provides `Election` for this scenario, and it works as follows:
+VonaJS provides `Election` for this scenario, which works as follows:
 
-1. All Workers compete to select a predetermined number of Workers
-2. These selected Workers will start the services
-3. If a selected Worker terminates abnormally, the other Workers will continue to compete until the predetermined number of Workers is selected
+1. All Workers compete to acquire ownership
+2. You can specify the number of Workers that can acquire ownership simultaneously
+3. The Worker that acquires ownership can start the service
+4. If a Worker that owns ownership exits normally or terminates abnormally, other Workers will continue to compete for ownership
 
 ## Create meta.election
 
