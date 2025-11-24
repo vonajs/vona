@@ -69,6 +69,15 @@ this.app.config.server.globalPrefix
 this.app.config.database.defaultClient
 ```
 
+## 获取实例config
+
+在任何 bean 实例中可以直接通过`this.ctx.config`获取实例 config 对象
+
+```typescript
+this.ctx.config.server.serve.protocol
+this.ctx.config.server.serve.host
+```
+
 ## 获取模块config
 
 模块可以单独提供自己的 config 配置，可以通过 Scope 实例获取模块的 config 配置，参见：[Config配置](../../essentials/scope/config.md)

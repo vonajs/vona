@@ -69,6 +69,15 @@ this.app.config.server.globalPrefix
 this.app.config.database.defaultClient
 ```
 
+## Obtaining instance config
+
+The instance config object can be obtained directly through `this.ctx.config` in any bean instance
+
+```typescript
+this.ctx.config.server.serve.protocol
+this.ctx.config.server.serve.host
+```
+
 ## Obtaining module config
 
 Modules can individually provide their own `config` configuration, which can be obtained through the `Scope` instance. See: [Config](../../essentials/scope/config.md)
