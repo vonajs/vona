@@ -54,6 +54,18 @@ export class VonaApplication extends KoaApplication {
     zodEnhance(this);
   }
 
+  get name() {
+    return this.options.name;
+  }
+
+  get projectPath() {
+    return this.options.projectPath;
+  }
+
+  get configMeta() {
+    return this.options.configMeta;
+  }
+
   get ctx(): VonaContext {
     return this.currentContext as unknown as VonaContext;
   }
@@ -63,10 +75,6 @@ export class VonaApplication extends KoaApplication {
   // scope<T>(moduleScope: string): T;
   scope<T>(moduleScope: string): T {
     return this.bean.scope(moduleScope as never);
-  }
-
-  get name() {
-    return this.options.name;
   }
 
   createAnonymousContext(req?: any, res?: any): VonaContext {

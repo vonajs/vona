@@ -58,6 +58,7 @@ function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Bootstrap
   const options: VonaApplicationOptions = {
     name: appInfo.name,
     projectPath: appInfo.projectPath,
+    configMeta: appInfo.configMeta,
     modulesMeta,
     locales,
     config: appConfig as unknown as VonaConfig,

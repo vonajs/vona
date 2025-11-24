@@ -30,6 +30,7 @@ export interface VonaAppInfo {
 export interface VonaApplicationOptions {
   name: string;
   projectPath: string;
+  configMeta: VonaConfigMeta;
   modulesMeta: TypeOptionsModulesMeta;
   locales: VonaLocaleOptionalMap;
   config: VonaConfig;
