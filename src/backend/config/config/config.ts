@@ -3,7 +3,7 @@ import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
-import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
+import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot, getRedisClientKeyPrefix } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -119,14 +119,14 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
       enableReadyCheck: false,
     },
     clients: {
-      default: { keyPrefix: `default_${appInfo.name}:` },
+      default: { keyPrefix: getRedisClientKeyPrefix('default', appInfo) },
       redlock: {},
       queue: {},
       broadcast: {},
-      cache: { keyPrefix: `cache_${appInfo.name}:` },
-      io: { keyPrefix: `io_${appInfo.name}:` },
-      summer: { keyPrefix: `summer_${appInfo.name}:` },
-      model: { keyPrefix: `model_${appInfo.name}:` },
+      cache: { keyPrefix: getRedisClientKeyPrefix('cache', appInfo) },
+      io: { keyPrefix: getRedisClientKeyPrefix('io', appInfo) },
+      summer: { keyPrefix: getRedisClientKeyPrefix('summer', appInfo) },
+      model: { keyPrefix: getRedisClientKeyPrefix('model', appInfo) },
     },
   };
 
