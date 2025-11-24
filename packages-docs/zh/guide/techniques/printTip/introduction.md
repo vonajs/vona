@@ -37,3 +37,7 @@ export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
 ```
 
 - `execute`: 返回需要输出的提示信息，支持数组类型
+
+如下图所示：
+ 
+![](../../../assets/img/printTip/printTip-2.png)
