@@ -170,7 +170,7 @@ export class ServiceErrorView extends BeanBase {
   }
 
   serializeAppInfo() {
-    let config = this.app.config;
+    let config = this.ctx.config;
     if (typeof cast(this.app).dumpConfigToObject === 'function') {
       config = cast(this.app).dumpConfigToObject().config.config;
     }

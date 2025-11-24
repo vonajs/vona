@@ -86,7 +86,7 @@ export class ServiceInstance extends BeanBase {
       configInstanceBase?.config,
       instanceConfigDb,
       {
-        instance: { instances: undefined },
+        instance: undefined,
       },
     );
   }
