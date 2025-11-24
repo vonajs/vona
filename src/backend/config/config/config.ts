@@ -38,9 +38,7 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
     getInstanceName: undefined,
     queryField: $customKey('x-vona-instance-name'),
     headerField: $customKey('x-vona-instance-name'),
-    instances: {
-      '': {},
-    },
+    instances: {},
   };
 
   // server

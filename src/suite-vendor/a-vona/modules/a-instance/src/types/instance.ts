@@ -4,7 +4,6 @@ import type { EntityInstance } from '../entity/instance.ts';
 import 'vona';
 
 export interface ConfigInstanceBase {
-  name: keyof IInstanceRecord;
   password?: string;
   title?: string;
   config?: VonaConfigOptional;
@@ -19,7 +18,7 @@ export interface ConfigInstance {
   getInstanceName?: TypeGetInstanceNameFn;
   queryField?: keyof ICustomKeyRecord;
   headerField?: keyof ICustomKeyRecord;
-  instances: Record<keyof IInstanceRecord, ConfigInstanceBase>;
+  instances: Record<keyof IInstanceRecord, ConfigInstanceBase | false>;
 }
 
 declare module 'vona' {
