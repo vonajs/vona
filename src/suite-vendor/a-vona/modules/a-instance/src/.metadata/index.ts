@@ -329,10 +329,6 @@ declare module 'vona-module-a-instance' {
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
-/** config: begin */
-export * from '../config/config.ts';
-import type { config } from '../config/config.ts';
-/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
@@ -345,7 +341,7 @@ export const locales = {
 export * from '../main.ts';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -353,7 +349,6 @@ export class ScopeModuleAInstance extends BeanScopeBase {}
 
 export interface ScopeModuleAInstance {
   util: BeanScopeUtil;
-config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
@@ -372,9 +367,7 @@ declare module 'vona' {
     instance: ScopeModuleAInstance;
   }
   
-  export interface IBeanScopeConfig {
-    'a-instance': ReturnType<typeof config>;
-  }
+  
 
   export interface IBeanScopeLocale {
     'a-instance': (typeof locales)[TypeLocaleBase];

@@ -3,7 +3,7 @@ import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
-import { formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
+import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -31,6 +31,16 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   config.meta = {
     flavor: appInfo.configMeta.flavor,
     mode: appInfo.configMeta.mode,
+  };
+
+  // instance
+  config.instance = {
+    getInstanceName: undefined,
+    queryField: $customKey('x-vona-instance-name'),
+    headerField: $customKey('x-vona-instance-name'),
+    instances: {
+      '': {},
+    },
   };
 
   // server
