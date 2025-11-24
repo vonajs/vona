@@ -1,16 +1,13 @@
 import type { IInstanceRecord, IModuleMain, VonaContext } from 'vona';
-import type { IInstanceConfig } from './config/config.ts';
 import { BeanSimple } from 'vona';
-import { __ThisModule__ } from './.metadata/this.ts';
 
 const SymbolInstanceName = Symbol('SymbolInstanceName');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {
-    const options = this.app.scope(__ThisModule__).config;
     this.app.context.__getInstanceName = function (this: VonaContext) {
-      return __getInstanceName(this, options);
+      return __getInstanceName(this);
     };
     this.app.context.__setInstanceName = function (this: VonaContext, instanceName: keyof IInstanceRecord) {
       return __setInstanceName(this, instanceName);
@@ -24,10 +21,12 @@ function __setInstanceName(ctx: VonaContext, instanceName: keyof IInstanceRecord
   ctx[SymbolInstanceName] = instanceName;
 }
 
-function __getInstanceName(ctx: VonaContext, options: IInstanceConfig) {
+function __getInstanceName(ctx: VonaContext) {
   if (Object.prototype.hasOwnProperty.call(ctx, SymbolInstanceName)) {
     return ctx[SymbolInstanceName];
   }
+
+  const options = ctx.app.config.instance;
 
   let instanceName;
 

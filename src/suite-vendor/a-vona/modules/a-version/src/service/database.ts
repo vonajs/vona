@@ -1,3 +1,4 @@
+import type { IInstanceRecord } from 'vona';
 import type { ConfigInstanceBase } from 'vona-module-a-instance';
 import type { IDatabaseClientRecord, ServiceDatabaseClient } from 'vona-module-a-orm';
 import chalk from 'chalk';
@@ -14,9 +15,9 @@ export class ServiceDatabase extends BeanBase {
     return this.app.config.database;
   }
 
-  public getDatabasePrefix(configInstanceBase?: ConfigInstanceBase) {
-    const instanceName = configInstanceBase?.isolate ? `isolate${__separator}${configInstanceBase.name}` : 'share';
-    return `vona${__separator}test${__separator}${this.app.name}${__separator}${instanceName}${__separator}`;
+  public getDatabasePrefix(instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+    const prefix = configInstanceBase?.isolate ? `isolate${__separator}${instanceName}` : 'share';
+    return `vona${__separator}test${__separator}${this.app.name}${__separator}${prefix}${__separator}`;
   }
 
   public async databaseInitStartup() {
@@ -29,14 +30,19 @@ export class ServiceDatabase extends BeanBase {
     await this.__prepareDatabases(false);
   }
 
-  public async prepareDatabase(clientName: keyof IDatabaseClientRecord, versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
+  public async prepareDatabase(
+    clientName: keyof IDatabaseClientRecord,
+    versionStart: boolean,
+    instanceName?: keyof IInstanceRecord,
+    configInstanceBase?: ConfigInstanceBase,
+  ) {
     await this.bean.database.switchDb(async () => {
-      await this.__prepareDatabase(versionStart, configInstanceBase);
+      await this.__prepareDatabase(versionStart, instanceName, configInstanceBase);
     }, clientName);
   }
 
-  private async __fetchDatabases(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
-    const databasePrefix = this.getDatabasePrefix(configInstanceBase);
+  private async __fetchDatabases(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+    const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     // dbs
     let dbs = await client.connection.schema.fetchDatabases(databasePrefix);
     // filter
@@ -48,8 +54,8 @@ export class ServiceDatabase extends BeanBase {
     return dbs;
   }
 
-  private async __createDatabase(client: ServiceDatabaseClient, configInstanceBase?: ConfigInstanceBase) {
-    const databasePrefix = this.getDatabasePrefix(configInstanceBase);
+  private async __createDatabase(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+    const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     // create
     const databaseName = `${databasePrefix}${moment().format(__timeFormat)}`;
     await client.connection.schema.createDatabase(databaseName);
@@ -60,26 +66,29 @@ export class ServiceDatabase extends BeanBase {
     // default
     await this.prepareDatabase('default', versionStart);
     // isolate
-    for (const configInstanceBase of this.app.config.instances) {
+    for (const key in this.app.config.instance.instances) {
+      const instanceName = key as keyof IInstanceRecord;
+      const configInstanceBase = this.app.config.instance.instances[instanceName];
+      if (configInstanceBase === false) continue;
       if (!configInstanceBase.isolate) continue;
-      if (!configInstanceBase.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${configInstanceBase.name}`);
-      await this.prepareDatabase(configInstanceBase.isolateClient, versionStart, configInstanceBase);
+      if (!configInstanceBase.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${instanceName}`);
+      await this.prepareDatabase(configInstanceBase.isolateClient, versionStart, instanceName, configInstanceBase);
     }
   }
 
-  private async __prepareDatabase(versionStart: boolean, configInstanceBase?: ConfigInstanceBase) {
-    await this.__prepareDatabaseInner(configInstanceBase);
+  private async __prepareDatabase(versionStart: boolean, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+    await this.__prepareDatabaseInner(instanceName, configInstanceBase);
     if (versionStart) {
       await this.scope.service.version.__start();
     }
   }
 
-  private async __prepareDatabaseInner(configInstanceBase?: ConfigInstanceBase) {
+  private async __prepareDatabaseInner(instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
     if (this.app.meta.isProd) {
       // donothing
       return;
     }
-    const databasePrefix = this.getDatabasePrefix(configInstanceBase);
+    const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     // client
     const client = this.bean.database.current.client;
     // get current database name
@@ -94,9 +103,9 @@ export class ServiceDatabase extends BeanBase {
         // donothing
         return;
       }
-      const dbs = await this.__fetchDatabases(client, configInstanceBase);
+      const dbs = await this.__fetchDatabases(client, instanceName, configInstanceBase);
       if (dbs.length === 0) {
-        databaseName = await this.__createDatabase(client, configInstanceBase);
+        databaseName = await this.__createDatabase(client, instanceName, configInstanceBase);
       } else {
         databaseName = dbs[0].name;
       }
@@ -113,12 +122,12 @@ export class ServiceDatabase extends BeanBase {
         return;
       }
       // drop old databases
-      const dbs = await this.__fetchDatabases(client, configInstanceBase);
+      const dbs = await this.__fetchDatabases(client, instanceName, configInstanceBase);
       for (const db of dbs) {
         await client.connection.schema.dropDatabase(db.name);
       }
       // create database
-      const databaseName = await this.__createDatabase(client, configInstanceBase);
+      const databaseName = await this.__createDatabase(client, instanceName, configInstanceBase);
       // set config and reload client
       await client.changeConfigConnectionAndReloadWorker(databaseName);
       // database ready
