@@ -44,12 +44,12 @@ export class AppUtil extends BeanSimple {
   }
 
   get protocol() {
-    const config = this.app.config;
+    const config = this.ctx ? this.ctx.config : this.app.config;
     return config.server.serve.protocol || this.ctx?.protocol;
   }
 
   get host() {
-    const config = this.app.config;
+    const config = this.ctx ? this.ctx.config : this.app.config;
     return config.server.serve.host || this.ctx?.host;
   }
 
