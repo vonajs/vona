@@ -41,13 +41,14 @@ config.instance = {
 
 |名称|说明|
 |--|--|
-|name|实例名|
 |password|实例中用户`admin`的初始密码，默认是`123456`|
 |title|网站标题|
 |config|实例的配置信息|
 |id|当使用`独立模式`时，必须明确指定唯一的`实例Id`|
 |isolate|是否使用`独立模式`，默认为`共享模式`|
 |isolateClient|当使用`独立模式`时，必须明确指定`数据源`|
+
+- `config`: `config`数据将与全局 Config 配置合并，从而生成`实例配置`。可以使用`this.ctx.config`获取实例配置
 
 ### 2. 生产环境
 
@@ -56,10 +57,13 @@ config.instance = {
 `src/backend/config/config/config.prod.ts`
 
 ``` typescript
-config.instances = [
-  { name: '', password: '', title: '', config: {} },
-  { name: 'vona', password: '', title: '', config: {} },
-];
+// instance
+config.instance = {
+  instances: {
+    '': { password: '', title: '', config: {} },
+    vona: { password: '', title: '', config: {} },
+  },
+};
 ```
 
 ## 如何添加新实例
@@ -99,10 +103,12 @@ declare module 'vona' {
 `src/backend/config/config/config.test.ts`
 
 ``` typescript
-// instances
-config.instances = [
-  { name: 'shareTest', password: '', title: '' },
-];
+// instance
+config.instance = {
+  instances: {
+    shareTest: { password: '', title: '', config: {} },
+  },
+};
 ```
 
 - 对于`独立模式`，还需要配置数据源，参见: [数据源配置](../../techniques/orm/config-datasource.md)
@@ -111,20 +117,16 @@ config.instances = [
 
 当用户访问后端 API 时，后端会自动根据规则获取当前实例名，然后根据实例名获取实例信息
 
-### 1. 模块配置
-
-多实例是由模块 a-instance 提供的核心能力，可以在 App config 中修改模块的配置：
+### 1. App Config配置
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-// modules
-config.modules = {
-  'a-instance': {
-    getInstanceName: undefined,
-    headerField: 'x-vona-instance-name',
-    queryField: 'x-vona-instance-name',
-  },
+// instance
+config.instance = {
+  getInstanceName: undefined,
+  headerField: 'x-vona-instance-name',
+  queryField: 'x-vona-instance-name',
 };
 ```
 

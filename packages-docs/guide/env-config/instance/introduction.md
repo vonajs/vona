@@ -19,12 +19,14 @@ In the test and development environments, a `empty` instance is provided by defa
 `src/backend/config/config/config.dev.ts`
 
 ``` typescript
-// instances
-config.instances = [
-  { name: '', password: '', title: '', config: {} },
-  { name: 'shareTest', password: '', title: '' },
-  { name: 'isolateTest', password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
-];
+// instance
+config.instance = {
+  instances: {
+    '': { password: '', title: '', config: {} },
+    'shareTest': { password: '', title: '' },
+    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+  },
+};
 ```
 
 * Instance List
@@ -39,13 +41,14 @@ config.instances = [
 
 |Name|Description|
 |--|--|
-|name|Instance name|
 |password|Initial password for the `admin` user in the instance, defaults to `123456`|
 |title|Website title|
 |config|Instance configuration information|
 |id|When using `isolated mode`, you must explicitly specify a unique `Instance Id`|
 |isolate|Whether to use `isolated mode`, the default is `shared mode`|
 |isolateClient|When using `isolated mode`, you must explicitly specify `datasource`|
+
+- `config`: The `config` data will be merged with the global `Config` to generate the `instance config`. The instance config can be retrieved using `this.ctx.config`
 
 ### 2. Production Environment
 
@@ -54,10 +57,13 @@ In the production environment, you need to configure instance information yourse
 `src/backend/config/config/config.prod.ts`
 
 ``` typescript
-config.instances = [
-  { name: '', password: '', title: '', config: {} },
-  { name: 'vona', password: '', title: '', config: {} },
-];
+// instance
+config.instance = {
+  instances: {
+    '': { password: '', title: '', config: {} },
+    vona: { password: '', title: '', config: {} },
+  },
+};
 ```
 
 ## How to add a new instance
@@ -97,10 +103,12 @@ Add instance configuration to the required config file, for example, to configur
 `src/backend/config/config/config.test.ts`
 
 ``` typescript
-// instances
-config.instances = [
-  { name: 'shareTest', password: '', title: '' },
-];
+// instance
+config.instance = {
+  instances: {
+    shareTest: { password: '', title: '', config: {} },
+  },
+};
 ```
 
 - For `isolated mode`, you also need to configure a `datasource`. See: [Datasource Config](../../techniques/orm/config-datasource.md)
@@ -110,20 +118,16 @@ config.instances = [
 
 When a user accesses the backend API, the backend automatically obtains the current instance name based on the rules and then retrieves instance information based on the instance name
 
-### 1. Module Configuration
-
-Multi-instance is provided by the `a-instance` module. You can modify the module configuration in App Config:
+### 1. App Config
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
-// modules
-config.modules = {
-  'a-instance': {
-    getInstanceName: undefined,
-    headerField: 'x-vona-instance-name',
-    queryField: 'x-vona-instance-name',
-  },
+// instance
+config.instance = {
+  getInstanceName: undefined,
+  headerField: 'x-vona-instance-name',
+  queryField: 'x-vona-instance-name',
 };
 ```
 
