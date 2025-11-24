@@ -1,7 +1,7 @@
 {
   "name": "vona-cli-set-api",
   "type": "module",
-  "version": "1.0.371",
+  "version": "1.0.372",
   "description": "vona cli-set-api",
   "publishConfig": {
     "access": "public"
@@ -78,7 +78,7 @@
     "ts-node-maintained": "^10.9.6",
     "urllib": "^4.6.11",
     "uuid": "^11.1.0",
-    "vona-core": "^5.0.99",
+    "vona-core": "^5.0.100",
     "why-is-node-running": "^3.2.2",
     "yargs-parser": "^22.0.0"
   },
