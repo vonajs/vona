@@ -6,13 +6,13 @@ VonaJS 采用的是分布式体系，允许多个工作进程同时提供服务�
 
 模块`a-worker`提供了全局 Bean `bean.worker`，用于管理工作进程
 
-* 属性清单
+* 属性
 
 |名称|说明|
 |--|--|
 |id|获取当前Worker Id|
 
-* 方法清单
+* 方法
 
 |名称|说明|
 |--|--|
@@ -34,7 +34,7 @@ this.bean.worker.reload();
 this.bean.worker.reloadAll();
 ```
 
-## 修改SERVER_WORKERS
+## SERVER_WORKERS
 
 可以通过.env 文件修改`SERVER_WORKERS`
 
