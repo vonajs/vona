@@ -54,7 +54,7 @@ class ControllerStudent {
 
 - `@Arg.files`: 此装饰器用于标注参数`files`，从上传的数据中取得`name=files`的文件
 
-## 附加表单字段
+## 表单字段
 
 在上传文件的同时，也可以附加多个表单字段
 
