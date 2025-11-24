@@ -19,12 +19,14 @@ VonaJS 支持以下几种`多实例/多租户`模式：
 `src/backend/config/config/config.dev.ts`
 
 ``` typescript
-// instances
-config.instances = [
-  { name: '', password: '', title: '', config: {} },
-  { name: 'shareTest', password: '', title: '' },
-  { name: 'isolateTest', password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
-];
+// instance
+config.instance = {
+  instances: {
+    '': { password: '', title: '', config: {} },
+    'shareTest': { password: '', title: '' },
+    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+  },
+};
 ```
 
 * 实例清单
