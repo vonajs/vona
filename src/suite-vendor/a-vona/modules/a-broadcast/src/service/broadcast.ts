@@ -1,7 +1,7 @@
 import type { Redis } from 'ioredis';
 import type { IBroadcastExecute, IBroadcastJobContext } from '../types/broadcast.ts';
 import { isNil } from '@cabloy/utils';
-import { BeanBase } from 'vona';
+import { BeanBase, getRedisClientKeyPrefix } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -14,7 +14,7 @@ export class ServiceBroadcast extends BeanBase {
   protected __init__() {
     const app = this.app;
     this.__callerId = app.bean.worker.id;
-    this.__channelName = `broadcast_${this.app.name}:`;
+    this.__channelName = getRedisClientKeyPrefix('broadcast', this.app);
     this.__pub = app.bean.redis.get('broadcast').duplicate();
     this.__sub = app.bean.redis.get('broadcast').duplicate();
     this.__sub.subscribe(this.__channelName, () => {});

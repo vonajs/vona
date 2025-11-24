@@ -11,7 +11,7 @@ export class ServiceRedis extends BeanBase {
     // await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
     await this._clearRedisKeys(app.bean.redis.get('queue'), `${getRedisClientKeyPrefix('bull', app)}*`);
     // broadcast channel has subscribed
-    // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);
+    // await _clearRedisKeys(app.redis.get('broadcast'), `${getRedisClientKeyPrefix('broadcast', app)}*`);
     // redlock
     for (const clientName of this.$scope.redlock.config.redlock.clients) {
       await this._clearRedisKeys(app.bean.redis.get(clientName), `${getRedisClientKeyPrefix('redlock', app)}*`);
