@@ -1,14 +1,15 @@
 # Election
 
-如果需要在后端开启一个服务，在 VonaJS 中该如何实现呢？
+如果需要在后端启动一个独立服务，在 VonaJS 中该如何实现呢？
 
-由于 VonaJS 是分布式架构，后端可以开启多个 Workers。那么，应该在哪个 Worker 中开启服务呢？
+由于 VonaJS 是分布式架构，后端可以启动多个 Workers。那么，应该在哪个 Worker 中启动独立服务呢？
 
-VonaJS 针对此场景提供了 Election，工作原理如下：
+VonaJS 针对此场景提供了`Election`，工作原理如下：
 
-1. 所有 Workers 都会参与竞争，选取约定数量的 Workers
-2. 这些被选中的 Workers 将开启服务
-3. 如果某个选中的 Worker 异常终止，那么其他 Workers 就会继续竞争，直到选出约定数量的 Workers
+1. 所有 Workers 都会参与竞争，获取所有权
+2. 可以指定同时获取所有权的 Workers 数量
+3. 取得所有权的 Workers 可以启动服务
+4. 如果某个拥有所有权的 Worker 正常退出或者异常终止，那么其他 Workers 就会继续参与竞争
 
 ## 创建meta.election
 
@@ -41,7 +42,7 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 
 接下来创建`Module Monkey`，响应`appStarted`和`appClose`钩子
 
--- 参见: [应用启动自定义](../../env-config/app-start/introduction.md)
+- 参见: [应用启动自定义](../../env-config/app-start/introduction.md)
 
 ``` typescript
 export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppClose {
@@ -72,25 +73,22 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
 - `appClose`: 释放所有权，以便其他 Workers 参与后续的竞争
 - `_doCustomLogic`: 实现自定义的逻辑或者服务
 
-## 指定tickets
+## Tickets
 
 在调用`election.obtain`时，可以指定允许多个 Workers 取得所有权:
 
 ``` diff
 async appStarted() {
-    const scope = this.app.scope(__ThisModule__);
-    scope.election.obtain(
-      'echo',
-      fnRelease => {
-        this._fnRelease = fnRelease;
-        this._doCustomLogic();
-        setTimeout(() => {
-          this.app.bean.worker.reload();
-        }, 4000);
-      },
-+     { tickets: 2 },
-    );
-  }
+  const scope = this.app.scope(__ThisModule__);
+  scope.election.obtain(
+    'echo',
+    fnRelease => {
+      this._fnRelease = fnRelease;
+      this._doCustomLogic();
+    },
++   { tickets: 2 },
+  );
+}
 ```
 
 |名称|说明|
