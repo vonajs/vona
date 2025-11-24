@@ -93,7 +93,9 @@ class ControllerStudent {
 
 ## URL Configuration
 
-`http://localhost:7102` is dynamically inferred by the system based on the current API context. In some application scenarios, the API Server's URL may differ from the domain name used to provide services. At this point, you can modify the URL configuration through App Config:
+`http://localhost:7102` is dynamically inferred by the system based on the current API context. In some application scenarios, the API Server's URL may differ from the domain name used to provide services. At this point, you can modify the URL configuration through `App Config` or `Instance Config`
+
+### 1. App Config
 
 `src/backend/config/config/config.ts`
 
@@ -108,3 +110,27 @@ config.server = {
 ```
 
 Then, executing the method `static.getURL` will return the URL `https://cabloy.com/api/static/demo/student/img/vona.png`
+
+### 2. Instance Config
+
+VonaJS supports `multi-instance/multi-tenancy`, allowing you to specify different configuration for specific instances
+
+``` typescript
+// instance
+config.instance = {
+  instances: {
+    '': {
+      password: '',
+      title: '',
+      config: {
+        server: {
+          serve: {
+            protocol: 'https',
+            host: 'cabloy.com',
+          },
+        },
+      },
+    },
+  },
+};
+```

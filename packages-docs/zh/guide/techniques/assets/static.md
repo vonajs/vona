@@ -93,7 +93,9 @@ class ControllerStudent {
 
 ## URL配置
 
-`http://localhost:7102`是系统根据当前 API 的上下文动态推断出来的。在一些应用场景，API Server 的 URL 与对外提供服务的域名可能并不相同。这时可以通过 App Config 修改 URL 配置
+`http://localhost:7102`是系统根据当前 API 的上下文动态推断出来的。在一些应用场景，API Server 的 URL 与对外提供服务的域名可能并不相同。这时可以通过`App Config`或者`Instance Config`修改 URL 配置
+
+### 1. App Config
 
 `src/backend/config/config/config.ts`
 
@@ -108,3 +110,29 @@ config.server = {
 ```
 
 这时再执行方法`static.getURL`，得到的 URL 是`https://cabloy.com/api/static/demo/student/img/vona.png`
+
+### 2. Instance Config
+
+VonaJS 支持`多实例/多租户`，可以为具体的实例指定不同的配置
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// instance
+config.instance = {
+  instances: {
+    '': {
+      password: '',
+      title: '',
+      config: {
+        server: {
+          serve: {
+            protocol: 'https',
+            host: 'cabloy.com',
+          },
+        },
+      },
+    },
+  },
+};
+```
