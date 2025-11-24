@@ -3,10 +3,12 @@ import type { VonaAppInfo, VonaConfigOptional } from 'vona';
 export default function (_appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
 
-  // instances
-  config.instances = [
-    { name: '', password: '', title: '', config: {} },
-  ];
+  // instance
+  config.instance = {
+    instances: {
+      '': { password: '', title: '' },
+    },
+  };
 
   // redis
   config.redis = {

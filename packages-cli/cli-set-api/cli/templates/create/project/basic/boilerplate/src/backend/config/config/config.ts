@@ -1,9 +1,9 @@
 import type { ILoggerOptionsClientInfo, VonaAppInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
-import type { IMailClientRecord } from 'vona-module-a-mail';
+import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-mail';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
-import { formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
+import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -31,6 +31,14 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   config.meta = {
     flavor: appInfo.configMeta.flavor,
     mode: appInfo.configMeta.mode,
+  };
+
+  // instance
+  config.instance = {
+    getInstanceName: undefined,
+    queryField: $customKey('x-vona-instance-name'),
+    headerField: $customKey('x-vona-instance-name'),
+    instances: {},
   };
 
   // server
@@ -166,7 +174,7 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
     clients: {
       system: {
         transport: {
-          service: env.MAIL_SYSTEM_TRANSPORT_SERVICE || undefined,
+          service: env.MAIL_SYSTEM_TRANSPORT_SERVICE as TypeMailTransportService || undefined,
           host: env.MAIL_SYSTEM_TRANSPORT_HOST || undefined,
           port: env.MAIL_SYSTEM_TRANSPORT_PORT ? Number.parseInt(env.MAIL_SYSTEM_TRANSPORT_PORT) : undefined,
           secure: env.MAIL_SYSTEM_TRANSPORT_SECURE === 'true',
