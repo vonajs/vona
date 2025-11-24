@@ -48,7 +48,7 @@ config.instance = {
 |isolate|Whether to use `isolated mode`, the default is `shared mode`|
 |isolateClient|When using `isolated mode`, you must explicitly specify `datasource`|
 
-- `config`: The `config` data will be merged with the global `Config` to generate the `instance config`. The instance config can be retrieved using `this.ctx.config`
+- `config`: The `config` data will be merged with `App Config` to generate `Instance Config`. The instance config can be retrieved using `this.ctx.config`
 
 ### 2. Production Environment
 

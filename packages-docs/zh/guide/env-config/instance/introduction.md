@@ -48,7 +48,7 @@ config.instance = {
 |isolate|是否使用`独立模式`，默认为`共享模式`|
 |isolateClient|当使用`独立模式`时，必须明确指定`数据源`|
 
-- `config`: `config`数据将与全局 Config 配置合并，从而生成`实例配置`。可以使用`this.ctx.config`获取实例配置
+- `config`: `config`数据将与`App Config`合并，从而生成`Instance Config`。可以使用`this.ctx.config`获取实例配置
 
 ### 2. 生产环境
 
