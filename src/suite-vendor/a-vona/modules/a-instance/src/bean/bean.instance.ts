@@ -37,29 +37,30 @@ export class BeanInstance extends BeanBase {
     if (instance) return instance;
     // instance base
     const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
+    if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
     if (!configInstanceBase) return null;
     if (configInstanceBase.isolate && !configInstanceBase.id) {
-      throw new Error(`should specify id for isolate instance: ${configInstanceBase.name}`);
+      throw new Error(`should specify id for isolate instance: ${instanceName}`);
     }
     // lock
     return await this.scope.redlock.lockIsolate(
       `registerInstance.${instanceName}`,
       async () => {
-        return await this._registerLock(configInstanceBase);
+        return await this._registerLock(instanceName, configInstanceBase);
       },
       { instanceName: null },
     );
   }
 
-  private async _registerLock(configInstanceBase: ConfigInstanceBase) {
+  private async _registerLock(instanceName: keyof IInstanceRecord, configInstanceBase: ConfigInstanceBase) {
     // get again
-    let instance = await this.modelInstance.get({ name: configInstanceBase.name }, { cache: { force: true } });
+    let instance = await this.modelInstance.get({ name: instanceName }, { cache: { force: true } });
     if (instance) return instance;
     // insert
     instance = {
-      name: configInstanceBase.name,
+      name: instanceName,
       title: configInstanceBase.title,
-      config: JSON.stringify(configInstanceBase.config || {}),
+      config: undefined,
       disabled: false,
     } as EntityInstance;
     // id
@@ -68,7 +69,7 @@ export class BeanInstance extends BeanBase {
     }
     // isolate
     if (configInstanceBase.isolate) {
-      if (!configInstanceBase.id) throw new Error(`should specify id for isolate instance: ${configInstanceBase.name}`);
+      if (!configInstanceBase.id) throw new Error(`should specify id for isolate instance: ${instanceName}`);
       instance.isolate = configInstanceBase.isolate;
     }
     return await this.modelInstance.insert(instance);

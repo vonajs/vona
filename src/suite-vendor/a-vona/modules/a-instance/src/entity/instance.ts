@@ -22,8 +22,8 @@ export class EntityInstance extends $Class.omit(EntityBaseSimple, ['iid']) {
   @Api.field()
   title: string;
 
-  @Api.field()
-  config: string;
+  @Api.field(v.optional())
+  config?: string;
 }
 
 export interface IInstanceStartupQueueInfo {

@@ -22,8 +22,8 @@ export class ServiceInstance extends BeanBase {
   }
 
   getConfigInstanceBase(instanceName: keyof IInstanceRecord) {
-    const instances = this.app.config.instances;
-    return instances.find(item => item.name === instanceName);
+    const instances = this.app.config.instance.instances;
+    return instances[instanceName];
   }
 
   getConfig(instanceName?: keyof IInstanceRecord | undefined | null): VonaConfig | undefined {
@@ -76,11 +76,18 @@ export class ServiceInstance extends BeanBase {
     if (!instance) this.app.throw(403);
     instance = instance!;
     // config
-    const instanceConfig = JSON.parse(instance.config);
+    const configInstanceBase = this.getConfigInstanceBase(instanceName);
+    const instanceConfigDb = instance.config ? JSON.parse(instance.config) : undefined;
     // cache configs
-    this.__cacheIntancesConfig[instanceName] = deepExtend({}, this.ctx.app.config, instanceConfig, {
-      instances: undefined,
-    });
+    this.__cacheIntancesConfig[instanceName] = deepExtend(
+      {},
+      this.app.config,
+      configInstanceBase,
+      instanceConfigDb,
+      {
+        instance: { instances: undefined },
+      },
+    );
   }
 
   async instanceStartupIsolate(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
@@ -99,7 +106,9 @@ export class ServiceInstance extends BeanBase {
   async instanceStartup(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
     if (!options) options = {};
     if (!options.configInstanceBase) {
-      options.configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
+      const configInstanceBase = this.getConfigInstanceBase(instanceName);
+      if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
+      options.configInstanceBase = configInstanceBase;
     }
     // cache instance config
     await this._cacheInstanceConfig(instanceName, false);
