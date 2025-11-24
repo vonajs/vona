@@ -77,12 +77,13 @@ export class ServiceInstance extends BeanBase {
     instance = instance!;
     // config
     const configInstanceBase = this.getConfigInstanceBase(instanceName);
+    if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
     const instanceConfigDb = instance.config ? JSON.parse(instance.config) : undefined;
     // cache configs
     this.__cacheIntancesConfig[instanceName] = deepExtend(
       {},
       this.app.config,
-      configInstanceBase,
+      configInstanceBase?.config,
       instanceConfigDb,
       {
         instance: { instances: undefined },
