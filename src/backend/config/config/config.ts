@@ -120,13 +120,13 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
     },
     clients: {
       default: { keyPrefix: getRedisClientKeyPrefix('default', appInfo) },
-      redlock: {},
-      queue: {},
-      broadcast: {},
       cache: { keyPrefix: getRedisClientKeyPrefix('cache', appInfo) },
       io: { keyPrefix: getRedisClientKeyPrefix('io', appInfo) },
       summer: { keyPrefix: getRedisClientKeyPrefix('summer', appInfo) },
       model: { keyPrefix: getRedisClientKeyPrefix('model', appInfo) },
+      redlock: {},
+      queue: {},
+      broadcast: {},
     },
   };
 

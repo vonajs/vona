@@ -13,7 +13,7 @@ import type {
 } from '../types/queue.ts';
 import { sleep } from '@cabloy/utils';
 import * as Bull from 'bullmq';
-import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
+import { BeanBase, beanFullNameFromOnionName, deepExtend, getRedisClientKeyPrefix, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -63,12 +63,16 @@ export class ServiceQueue extends BeanBase {
     this._queues = {};
   }
 
+  _getPrefix() {
+    return `${getRedisClientKeyPrefix('bull', this.app)}queue`;
+  }
+
   _createWorker<DATA>(info: IQueueJobContext<DATA>, queueKey: string) {
     const app = this.app;
     // worker
     const _worker = {} as IQueueWork;
     // prefix
-    const prefix = `bull_${app.name}:queue`;
+    const prefix = this._getPrefix();
     // queue config
     const queueConfig = app.bean.onion.queue.getOnionOptions(info.queueName);
     // queueConfig.options: queue/worker/job/redlock
@@ -139,7 +143,7 @@ export class ServiceQueue extends BeanBase {
     // queue
     const _queue = {} as IQueueQueue;
     // prefix
-    const prefix = `bull_${app.name}:queue`;
+    const prefix = this._getPrefix();
     // queue config
     const queueConfig = app.bean.onion.queue.getOnionOptions(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
