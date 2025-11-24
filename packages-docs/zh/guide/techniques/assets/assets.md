@@ -22,7 +22,7 @@ $ vona :init:asset templates --module=demo-student
 
 ### 3. 添加Assets
 
-执行命令会自动创建目录: `assets/templates`
+执行上述命令会自动创建目录: `assets/templates`
 
 根据业务需求添加 Assets，比如添加两个模版文件：
 
