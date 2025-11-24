@@ -18,7 +18,7 @@ $ vona :init:static demo-student
 
 ### 3. 添加静态资源
 
-执行命令会自动创建目录: `assets/static`
+执行上述命令会自动创建目录: `assets/static`
 
 根据业务需求添加静态资源，比如添加两张图片：
 
