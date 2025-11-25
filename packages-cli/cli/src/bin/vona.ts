@@ -29,7 +29,7 @@ async function checkPnpm() {
   }
 }
 
-function main() {
+async function main() {
   let args: string[] = [];
   // bootstrapFile
   let bootstrapFile = path.join(import.meta.dirname, '../bootstrap.ts');
@@ -40,12 +40,11 @@ function main() {
   const isPlay = rawArgv[0] === 'play';
   if (isPlay) {
     args = args.concat([':bin:play']).concat(rawArgv.slice(1)).concat(['--dummy']);
-    new VonaCommand(args, true).start();
+    await new VonaCommand(args, true).start();
     return;
   }
   args.push(bootstrapFile);
   args = args.concat(rawArgv);
-  checkPnpm().then(() => {
-    processHelper.spawnCmd({ cmd: 'tsx', args });
-  });
+  await checkPnpm();
+  processHelper.spawnCmd({ cmd: 'tsx', args });
 }
