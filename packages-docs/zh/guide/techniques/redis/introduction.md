@@ -90,7 +90,7 @@ declare module 'vona-module-a-redis' {
 config.redis = {
   clients: {
     order: {
-      keyPrefix: getRedisClientKeyPrefix('default', appInfo),
+      keyPrefix: getRedisClientKeyPrefix('order', appInfo),
       host: 'xx.xx.xx.xx',
       port: 6379,
       password: 'xxxxxx',
@@ -114,73 +114,29 @@ class ControllerStudent {
 
 ## 使用Redis Client
 
-``` typescript
-class ControllerStudent {
-  @Web.get('test')
-  async test() {
-    const jwtAccess = this.bean.jwt.get('access');
-    const accessToken = await jwtAccess.sign({ userId: '1' });
-  }
-}  
-```
-
-## 生成JWT Tokens
-
-可以同时生成`accessToken/refreshToken`
-
-``` typescript
-class ControllerStudent {
-  @Web.get('test')
-  async test() {
-    const jwtTokens = await this.bean.jwt.create({ userId: '1' });
-    console.log(jwtTokens);
-  }
-}  
-```
-
-如下图所示：
-
-![](../../../assets/img/jwt/jwt-1.png)
-
-## 生成临时accessToken
-
-在一些场景中，需要在 URL Query 中使用 accessToken。这时就需要生成临时 accessToken。临时 accessToken 的`expiresIn`比常规 accessToken 小，因而更加安全
-
-生成临时 accessToken 有两种方式:
-
-* `方式1`
-
-``` typescript
-class ControllerStudent {
-  @Web.get('test')
-  async test() {
-    const jwtAccess = this.bean.jwt.get('access');
-    const accessToken = await jwtAccess.sign({ userId: '1' }, { temp: true });
-  }
-}  
-```
-
-* `方式2`
-
-``` typescript
-class ControllerStudent {
-  @Web.get('test')
-  async test() {
-    const accessToken = await this.bean.jwt.createTempAuthToken({ userId: '1' });
-  }
-}  
-```
-
-## JWT校验
-
 ``` diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
-    const jwtAccess = this.bean.jwt.get('access');
-    const accessToken = await jwtAccess.sign({ userId: '1' });
-+   const payload = await jwtAccess.verify(accessToken);
-    assert.deepEqual(payload, { userId: '1' });
+    const redisOrder = this.bean.redis.get('order');
++   await redisOrder.set('order1', JSON.stringify({ id: '1', name: 'Order1' }));
++   const value = await redisOrder.get('order1');
+    const order = value ? JSON.parse(value) : undefined;
+    assert.deepEqual(order, { id: '1', name: 'Order1' });
   }
-}  
+}
 ```
+
+- 更多用法，参见：[ioredis](https://github.com/redis/node-redis)
+
+## 分布式组件
+
+为了支持分布式开发，VonaJS 基于`Redis`提供了以下核心组件:
+
+- `广播`: 可以向系统的多个工作进程发送广播，从而让每个工作进程执行业务逻辑
+- `队列`: 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了强大的队列组件
+- `分布式锁`: 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、易用的分布式锁
+- `定时任务`: 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了直观、易用的定时任务。因为定时任务是队列的特例
+- `启动项`: 允许在系统启动时或者实例初始化时，执行初始化逻辑
+
+参见: [分布式组件](../../distributed/introduction.md)
