@@ -410,6 +410,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'JWT',
+          base: '/zh/guide/techniques/jwt/',
+          link: 'introduction',
+        },
+        {
           text: 'Logger日志',
           base: '/zh/guide/techniques/logger/',
           collapsed: false,
