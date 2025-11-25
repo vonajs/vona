@@ -30,11 +30,11 @@ $ vona :create:bean meta runtime --module=demo-student
 ## meta.runtime定义
 
 ``` typescript
-export type TypeMetaPrintTipResult = { accessToken?: string } | undefined;
+export type TypeMetaRuntimeResult = { accessToken?: string } | undefined;
 
 @Meta()
 export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {
-  async execute(): Promise<TypeMetaPrintTipResult> {
+  async execute(): Promise<TypeMetaRuntimeResult> {
     if (this.app.meta.isProd) return;
     // signin
     const jwt = await this.bean.passport.signinSystem('dev', '-1');
@@ -46,6 +46,7 @@ export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {
 }
 ```
 
+- `TypeMetaRuntimeResult`: 定义runtime
 - `execute`: 返回需要输出的提示信息，支持数组类型
 
 如下图所示：

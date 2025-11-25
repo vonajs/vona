@@ -2,11 +2,11 @@ import type { IMetaRuntimeExecute } from 'vona-module-a-runtime';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
-export type TypeMetaPrintTipResult = { accessToken?: string } | undefined;
+export type TypeMetaRuntimeResult = { accessToken?: string } | undefined;
 
 @Meta()
 export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {
-  async execute(): Promise<TypeMetaPrintTipResult> {
+  async execute(): Promise<TypeMetaRuntimeResult> {
     if (this.app.meta.isProd) return;
     // signin
     const jwt = await this.bean.passport.signinSystem('dev', '-1');
