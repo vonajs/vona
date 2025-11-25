@@ -467,7 +467,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.377
+        specifier: ^1.0.378
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -876,7 +876,7 @@ importers:
         specifier: ^5.0.101
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.211
+        specifier: ^5.0.212
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1224,7 +1224,7 @@ importers:
         specifier: ^5.0.42
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-jwt
       vona-module-a-logger:
         specifier: ^5.0.30

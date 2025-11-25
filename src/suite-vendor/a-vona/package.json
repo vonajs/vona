@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.211",
+  "version": "5.0.212",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -27,7 +27,7 @@
     "vona-module-a-i18n": "^5.0.19",
     "vona-module-a-index": "^5.0.19",
     "vona-module-a-instance": "^5.0.42",
-    "vona-module-a-jwt": "^5.0.23",
+    "vona-module-a-jwt": "^5.0.24",
     "vona-module-a-logger": "^5.0.30",
     "vona-module-a-mail": "^5.0.11",
     "vona-module-a-mailconfirm": "^5.0.8",
