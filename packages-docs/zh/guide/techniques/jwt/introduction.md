@@ -57,7 +57,7 @@ declare module 'vona-module-a-jwt' {
 }
 ```
 
-调整代码，然后添加`order`
+调整代码，然后添加`test`
 
 ``` diff
 declare module 'vona-module-a-jwt' {

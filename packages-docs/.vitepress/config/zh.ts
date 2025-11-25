@@ -434,6 +434,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'Redis',
+          base: '/zh/guide/techniques/redis/',
+          link: 'introduction',
+        },
+        {
           text: 'Runtime',
           base: '/zh/guide/techniques/runtime/',
           link: 'introduction',
