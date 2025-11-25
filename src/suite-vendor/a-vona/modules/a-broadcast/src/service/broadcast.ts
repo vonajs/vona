@@ -1,8 +1,9 @@
 import type { Redis } from 'ioredis';
 import type { IBroadcastExecute, IBroadcastJobContext } from '../types/broadcast.ts';
 import { isNil } from '@cabloy/utils';
-import { BeanBase, getRedisClientKeyPrefix } from 'vona';
+import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
 
 @Service()
 export class ServiceBroadcast extends BeanBase {

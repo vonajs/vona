@@ -20,11 +20,11 @@ config.redis = {
     enableReadyCheck: false,
   },
   clients: {
-    default: { keyPrefix: getRedisClientKeyPrefix('default', appInfo) },
-    cache: { keyPrefix: getRedisClientKeyPrefix('cache', appInfo) },
-    io: { keyPrefix: getRedisClientKeyPrefix('io', appInfo) },
-    summer: { keyPrefix: getRedisClientKeyPrefix('summer', appInfo) },
-    model: { keyPrefix: getRedisClientKeyPrefix('model', appInfo) },
+    default: { keyPrefix: true },
+    cache: { keyPrefix: true },
+    io: { keyPrefix: true },
+    summer: { keyPrefix: true },
+    model: { keyPrefix: true },
     redlock: {},
     queue: {},
     broadcast: {},
@@ -90,7 +90,7 @@ declare module 'vona-module-a-redis' {
 config.redis = {
   clients: {
     order: {
-      keyPrefix: getRedisClientKeyPrefix('order', appInfo),
+      keyPrefix: true,
       host: 'xx.xx.xx.xx',
       port: 6379,
       password: 'xxxxxx',

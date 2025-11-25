@@ -13,8 +13,9 @@ import type {
 } from '../types/queue.ts';
 import { sleep } from '@cabloy/utils';
 import * as Bull from 'bullmq';
-import { BeanBase, beanFullNameFromOnionName, deepExtend, getRedisClientKeyPrefix, instanceDesp, uuidv4 } from 'vona';
+import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
 
 @Service()
 export class ServiceQueue extends BeanBase {

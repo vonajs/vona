@@ -1,7 +1,8 @@
 import type { Redis } from 'ioredis';
 import type { IRedisClientRecord } from '../types/redis.ts';
-import { BeanBase, getRedisClientKeyPrefix } from 'vona';
+import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { getRedisClientKeyPrefix, prepareRedisClientKeyPrefix } from '../lib/redis.ts';
 
 @Service()
 export class ServiceRedis extends BeanBase {
@@ -20,7 +21,8 @@ export class ServiceRedis extends BeanBase {
       if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
       if (clientName.includes('redlock')) continue;
       const client = app.config.redis.clients[clientName];
-      await this._clearRedisKeys(app.bean.redis.get(clientName as keyof IRedisClientRecord), `${client.keyPrefix}*`);
+      const keyPrefix = prepareRedisClientKeyPrefix(client.keyPrefix, clientName, this.app);
+      await this._clearRedisKeys(app.bean.redis.get(clientName as keyof IRedisClientRecord), `${keyPrefix}*`);
     }
   }
 

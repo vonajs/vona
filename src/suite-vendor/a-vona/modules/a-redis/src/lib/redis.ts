@@ -4,3 +4,11 @@ export function getRedisClientKeyPrefix(clientName: string, appInfo: VonaAppInfo
   const mode = ['test', 'dev'].includes(appInfo.configMeta.mode) ? '_local' : '';
   return `${clientName}_${appInfo.name}${mode}:`;
 }
+
+export function prepareRedisClientKeyPrefix(
+  keyPrefix: string | true | undefined,
+  clientName: string,
+  appInfo: VonaAppInfo | VonaApplication,
+): string | undefined {
+  return keyPrefix === true ? getRedisClientKeyPrefix(clientName, appInfo) : keyPrefix;
+}

@@ -2,8 +2,9 @@ import type { Settings } from '@sesamecare-oss/redlock';
 import type { FunctionAsync } from 'vona';
 import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 import { Redlock } from '@sesamecare-oss/redlock';
-import { BeanBase, getRedisClientKeyPrefix, instanceDesp } from 'vona';
+import { BeanBase, instanceDesp } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
 
 @Service()
 export class ServiceRedlock extends BeanBase {

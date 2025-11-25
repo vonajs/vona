@@ -3,7 +3,7 @@ import type { ConfigRedisCluster, IRedisClientRecord } from '../types/redis.ts';
 import { Redis } from 'ioredis';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { getRedisClientKeyPrefix } from '../lib/redis.ts';
+import { prepareRedisClientKeyPrefix } from '../lib/redis.ts';
 
 @Service()
 export class ServiceRedisClient extends BeanBase {
@@ -35,7 +35,7 @@ export class ServiceRedisClient extends BeanBase {
         cast<ConfigRedisCluster>(configClient),
       ) as unknown as Redis;
     } else {
-      const keyPrefix = configClient.keyPrefix === true ? getRedisClientKeyPrefix(clientName, this.app) : configClient.keyPrefix;
+      const keyPrefix = prepareRedisClientKeyPrefix(configClient.keyPrefix, clientName, this.app);
       const configNode = deepExtend({}, configRedis.base, configClient, { keyPrefix });
       return new Redis(configNode);
     }
