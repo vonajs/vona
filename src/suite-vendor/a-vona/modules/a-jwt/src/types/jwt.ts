@@ -1,4 +1,5 @@
 import type { SignOptions } from 'jsonwebtoken';
+import type { StringValue } from 'ms';
 
 export const ErrorMessageJwtExpired = 'jwt expired';
 
@@ -47,7 +48,7 @@ export interface ConfigJwt {
     };
   };
   tempToken: {
-    signOptions: { expiresIn: number };
+    signOptions: { expiresIn: StringValue | number };
   };
   base: IJwtClientOptions;
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;

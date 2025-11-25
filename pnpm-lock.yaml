@@ -1655,8 +1655,11 @@ importers:
   src/suite-vendor/a-vona/modules/a-jwt:
     dependencies:
       '@types/jsonwebtoken':
-        specifier: 9.0.8
-        version: 9.0.8
+        specifier: ^9.0.10
+        version: 9.0.10
+      '@types/ms':
+        specifier: ^2.1.0
+        version: 2.1.0
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
@@ -4005,8 +4008,8 @@ packages:
   '@types/jsonfile@6.1.4':
     resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
-  '@types/jsonwebtoken@9.0.8':
-    resolution: {integrity: sha512-7fx54m60nLFUVYlxAB1xpe9CBWX2vSrk50Y6ogRJ1v5xxtba7qXTg5BgYDN5dq+yuQQ9HaVlHJyAAt1/mxryFg==}
+  '@types/jsonwebtoken@9.0.10':
+    resolution: {integrity: sha512-asx5hIG9Qmf/1oStypjanR7iKTv0gXQ1Ov/jfrX6kS/EO0OFni8orbmGCn0672NHR3kXHwpAwR+B368ZGN/2rA==}
 
   '@types/keygrip@1.0.6':
     resolution: {integrity: sha512-lZuNAY9xeJt7Bx4t4dx0rYCDqGPW8RXhQZK1td7d4H6E9zYbLoOtjBvfwdTKpsyxQI/2jv+armjX/RW+ZNpXOQ==}
@@ -11516,7 +11519,7 @@ snapshots:
     dependencies:
       '@types/node': 22.18.12
 
-  '@types/jsonwebtoken@9.0.8':
+  '@types/jsonwebtoken@9.0.10':
     dependencies:
       '@types/ms': 2.1.0
       '@types/node': 22.18.12
