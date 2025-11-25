@@ -40,7 +40,8 @@ async function main() {
   const isPlay = rawArgv[0] === 'play';
   if (isPlay) {
     args = args.concat([':bin:play']).concat(rawArgv.slice(1)).concat(['--dummy']);
-    await new VonaCommand(args, true).start();
+    const command = new VonaCommand(args, true);
+    await command.start();
     return;
   }
   args.push(bootstrapFile);
