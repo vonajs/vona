@@ -47,11 +47,11 @@ config.modules = {
 
 采用接口合并机制添加新 Client 的类型定义，比如`test`，为测试场景生成 JWT token
 
-在 VSCode 编辑器中，输入代码片段`recordloggerclient`，自动生成代码骨架:
+在 VSCode 编辑器中，输入代码片段`recordjwtclient`，自动生成代码骨架:
 
 ``` typescript
-declare module 'vona' {
-  export interface ILoggerClientRecord {
+declare module 'vona-module-a-jwt' {
+  export interface IJwtClientRecord {
     : never;
   }
 }
@@ -60,9 +60,9 @@ declare module 'vona' {
 调整代码，然后添加`order`
 
 ``` diff
-declare module 'vona' {
-  export interface ILoggerClientRecord {
-+   order: never;
+declare module 'vona-module-a-jwt' {
+  export interface IJwtClientRecord {
++   test: never;
   }
 }
 ```
@@ -72,77 +72,124 @@ declare module 'vona' {
 `src/backend/config/config/config.ts`
 
 ``` typescript
-// logger
-config.logger = {
-  clients: {
-    order(this: VonaApplication, clientInfo) {
-      const transports = [
-        this.bean.logger.makeTransportFile(clientInfo, 'order'),
-        this.bean.logger.makeTransportConsole(clientInfo),
-      ];
-      return { transports };
+// modules
+config.modules = {
+  'a-jwt': {
+    clients: {
+      test: {
+        secret: 'xxxx',
+        signOptions: { expiresIn: 2 * 60 * 60 },
+      },
     },
   },
 };
 ```
 
-- `order`: 通过函数返回 Client 配置。该配置将与系统提供的默认配置进行合并
-  - 因此，在一般情况下，只需构造所需的`transports`即可
-- `clientInfo`: 包含环境信息，用于构造`transport`
-- `makeTransportFile`: 用于构造文件通道，需要提供日志文件名`order`
-  - 由于文件名模版是`${filename}-%DATE%.log`，那么实际生成的文件名是`order-2025-11-14.log`
-- `makeTransportConsole`: 用于构造控制台通道
+- `secret`: 可以为 Client 提供独立的`secret`值
+  - 如果为空，则使用`base.secret`值
+  - 如果`base.secret`也为空，则使用`this.app.config.server.keys[0]`
 
-## 获取Logger Client实例
+### 3. SERVER_KEYS
 
-获取 Logger Client 实例有两种方式:
+`env/.env`
+
+``` typescript
+# server
+
+SERVER_KEYS = vona__1596889047267_3245
+```
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// server
+config.server = {
+  keys: (env.SERVER_KEYS || '').split(','),
+};  
+```
+
+## 获取JWT Client实例
+
+``` typescript
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
+    const jwtAccess = this.bean.jwt.get('access');
+    const jwtRefresh = this.bean.jwt.get('refresh');
+    const jwtTest = this.bean.jwt.get('test');
+  }
+}  
+```
+
+## 生成accessToken
+
+``` typescript
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
+    const jwtAccess = this.bean.jwt.get('access');
+    const accessToken = await jwtAccess.sign({ userId: '1' });
+  }
+}  
+```
+
+## 生成JWT Tokens
+
+可以同时生成`accessToken/refreshToken`
+
+``` typescript
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
+    const jwtTokens = await this.bean.jwt.create({ userId: '1' });
+    console.log(jwtTokens);
+  }
+}  
+```
+
+如下图所示：
+
+![](../../../assets/img/jwt/jwt-1.png)
+
+## 生成临时accessToken
+
+在一些场景中，需要在 URL Query 中使用 accessToken。这时就需要生成临时 accessToken。临时 accessToken 的`expiresIn`比常规 accessToken 小，因而更加安全
+
+生成临时 accessToken 有两种方式:
 
 * `方式1`
 
 ``` typescript
-class ControllerStudent extends BeanBase {
+class ControllerStudent {
+  @Web.get('test')
   async test() {
-    // logger: default
-    const loggerDefault = this.bean.logger.default;
-    // logger: order
-    const loggerOrder = this.bean.logger.get('order');
+    const jwtAccess = this.bean.jwt.get('access');
+    const accessToken = await jwtAccess.sign({ userId: '1' }, { temp: true });
   }
-}
+}  
 ```
 
 * `方式2`
 
 ``` typescript
-class ControllerStudent extends BeanBase {
+class ControllerStudent {
+  @Web.get('test')
   async test() {
-    // logger: default
-    const loggerDefault = this.$logger;
-    // logger: order
-    const loggerOrder = this.$loggerClient('order');
+    const accessToken = await this.bean.jwt.createTempAuthToken({ userId: '1' });
   }
-}
+}  
 ```
 
-`方式2`不仅代码更加简洁，而且还会自动在日志中带上当前 Bean Class 的`beanFullName`，便于排查问题
+## JWT校验
 
-* 举例：
-
-``` typescript
-const loggerOrder = this.bean.logger.get('order');
-loggerOrder.info('test');
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
+    const jwtAccess = this.bean.jwt.get('access');
+    const accessToken = await jwtAccess.sign({ userId: '1' });
++   const payload = await jwtAccess.verify(accessToken);
+    assert.deepEqual(payload, { userId: '1' });
+  }
+}  
 ```
-
-![](../../../assets/img/logger/logger-1.png)
-
-``` typescript
-// logger: default
-this.$logger.info('test');
-// logger: order
-this.$loggerClient('order').info('test');
-```
-
-![](../../../assets/img/logger/logger-2.png)
-
-图中输出了 beanFullName: `[demo-student.controller.student]`
-
-
