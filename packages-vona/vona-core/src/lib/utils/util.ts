@@ -379,3 +379,12 @@ export function combineFilePathSafe(dir: string, file: string) {
   if (fullPath.indexOf(dir) !== 0) throw new Error(`unsafe dir: ${dir}`);
   return fullPath;
 }
+
+export async function loadJSONFile(fileName: string) {
+  const pkgContent = (await fse.readFile(fileName)).toString();
+  return JSON.parse(pkgContent);
+}
+
+export async function saveJSONFile(fileName: string, json: object) {
+  await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
+}
