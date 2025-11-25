@@ -1,6 +1,6 @@
-import type { VonaAppInfo, VonaConfigOptional } from 'vona';
+import type { VonaAppInfo, VonaConfigEnv, VonaConfigOptional } from 'vona';
 
-export default function (_appInfo: VonaAppInfo) {
+export default function (_appInfo: VonaAppInfo, _env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
 
   // proxy
