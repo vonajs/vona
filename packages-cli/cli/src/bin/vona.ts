@@ -10,9 +10,7 @@ const pnpm_version = '10.19.0';
 
 const processHelper = new ProcessHelper(process.cwd());
 
-checkPnpm().then(() => {
-  main();
-});
+main();
 
 async function checkPnpm() {
   const res = await processHelper.spawnCmd({
@@ -43,9 +41,11 @@ function main() {
   if (isPlay) {
     args = args.concat([':bin:play']).concat(rawArgv.slice(1)).concat(['--dummy']);
     new VonaCommand(args).start();
-  } else {
-    args.push(bootstrapFile);
-    args = args.concat(rawArgv);
-    processHelper.spawnCmd({ cmd: 'tsx', args });
+    return;
   }
+  args.push(bootstrapFile);
+  args = args.concat(rawArgv);
+  checkPnpm().then(() => {
+    processHelper.spawnCmd({ cmd: 'tsx', args });
+  });
 }
