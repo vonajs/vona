@@ -309,6 +309,18 @@
     ],
     "description": "record.mailclient"
   },
+  "record.jwtclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordjwtclient",
+    "body": [
+      "declare module 'vona-module-a-jwt' {",
+      "  export interface IJwtClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.jwtclient"
+  },
   "findManyQueryTransform": {
     "scope": "typescript,typescriptreact",
     "prefix": "findmanyquerytransform",

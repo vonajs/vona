@@ -33,10 +33,11 @@ config.modules = {
 
 |名称|说明|
 |--|--|
-|baseDir|日志目录|
-|rotate|日志Rotate|
-|base|基础配置，为所有Client提供通用的基础配置|
-|clients|配置多个Clients。系统提供了内置的`default` Client，实现开箱即用的日志能力|
+|tempToken|临时accessToken的配置|
+|base|基础配置，为所有Clients提供通用的基础配置|
+|clients|配置多个Clients。系统提供了内置的`access/refresh` Clients，用于生成`accessToken/refreshToken`|
+
+- `signOptions`: 参见: [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
 ## 添加新Client
 
@@ -44,7 +45,7 @@ config.modules = {
 
 ### 1. 添加类型定义
 
-采用接口合并机制添加新 Client 的类型定义，比如`order`，用于输出独立的与订单相关的日志
+采用接口合并机制添加新 Client 的类型定义，比如`test`，为测试场景生成 JWT token
 
 在 VSCode 编辑器中，输入代码片段`recordloggerclient`，自动生成代码骨架:
 
