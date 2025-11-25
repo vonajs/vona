@@ -10,6 +10,9 @@ export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}
   openapi: { query: { table: $tableName(EntityPost) } },
 })
 export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {
+  @Api.field(v.optional())
+  title?: string;
+
   @Api.field(v.optional(), v.openapi({
     query: {
       table: 'testVonaUser',

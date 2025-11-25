@@ -1,4 +1,5 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+import { Api, v } from 'vona-module-a-openapi';
 import { $Dto, $tableName } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.ts';
@@ -8,4 +9,7 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>Query extends IDecor
 @Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Query>({
   openapi: { query: { table: $tableName(Entity<%=argv.resourceNameCapitalize%>) } },
 })
-export class Dto<%=argv.resourceNameCapitalize%>Query extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name']) {}
+export class Dto<%=argv.resourceNameCapitalize%>Query extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name']) {
+  @Api.field(v.optional())
+  name?: string;
+}
