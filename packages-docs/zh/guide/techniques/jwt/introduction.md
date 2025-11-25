@@ -12,7 +12,7 @@ VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了
 // modules
 config.modules = {
   'a-jwt': {
-    tempToken: {
+    tempAuthToken: {
       signOptions: { expiresIn: 5 * 60 },
     },
     base: {
@@ -33,7 +33,7 @@ config.modules = {
 
 |名称|说明|
 |--|--|
-|tempToken|临时accessToken的配置|
+|tempAuthToken|临时accessToken的配置|
 |base|基础配置，为所有Clients提供通用的基础配置|
 |clients|配置多个Clients。系统提供了内置的`access/refresh` Clients，用于生成`accessToken/refreshToken`|
 

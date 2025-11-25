@@ -17,7 +17,7 @@ export function config(app: VonaApplication) {
         cookie: 'token',
       },
     },
-    tempToken: {
+    tempAuthToken: {
       signOptions: { expiresIn: 10 * 60 },
     },
     base: {

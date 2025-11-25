@@ -52,7 +52,7 @@ export class ServiceJwtClient extends BeanBase {
         signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.clients.refresh.signOptions.expiresIn });
       }
       if (options?.temp) {
-        signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.tempToken.signOptions.expiresIn });
+        signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.tempAuthToken.signOptions.expiresIn });
       }
       this._jwtInstance.sign(payload, this._clientOptions.secret!, signOptions, (err, encoded) => {
         if (err) return reject(err);

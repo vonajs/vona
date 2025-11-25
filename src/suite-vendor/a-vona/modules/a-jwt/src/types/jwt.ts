@@ -47,7 +47,7 @@ export interface ConfigJwt {
       cookie: string;
     };
   };
-  tempToken: {
+  tempAuthToken: {
     signOptions: { expiresIn: StringValue | number };
   };
   base: IJwtClientOptions;
