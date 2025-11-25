@@ -3,7 +3,7 @@ import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
-import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot, getRedisClientKeyPrefix } from 'vona';
+import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -119,11 +119,11 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
       enableReadyCheck: false,
     },
     clients: {
-      default: { keyPrefix: getRedisClientKeyPrefix('default', appInfo) },
-      cache: { keyPrefix: getRedisClientKeyPrefix('cache', appInfo) },
-      io: { keyPrefix: getRedisClientKeyPrefix('io', appInfo) },
-      summer: { keyPrefix: getRedisClientKeyPrefix('summer', appInfo) },
-      model: { keyPrefix: getRedisClientKeyPrefix('model', appInfo) },
+      default: { keyPrefix: true },
+      cache: { keyPrefix: true },
+      io: { keyPrefix: true },
+      summer: { keyPrefix: true },
+      model: { keyPrefix: true },
       redlock: {},
       queue: {},
       broadcast: {},

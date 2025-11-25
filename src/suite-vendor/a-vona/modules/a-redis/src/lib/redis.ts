@@ -1,5 +1,4 @@
-import type { VonaAppInfo } from '../../types/application/app.ts';
-import type { VonaApplication } from '../core/application.ts';
+import type { VonaAppInfo, VonaApplication } from 'vona';
 
 export function getRedisClientKeyPrefix(clientName: string, appInfo: VonaAppInfo | VonaApplication): string {
   const mode = ['test', 'dev'].includes(appInfo.configMeta.mode) ? '_local' : '';

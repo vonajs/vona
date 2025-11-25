@@ -11,13 +11,17 @@ export interface IRedisClientRecord {
   model: never;
 }
 
+export interface IRedisClientOptions extends Omit<RedisOptions, 'keyPrefix'> {
+  keyPrefix?: string | true;
+}
+
 export interface ConfigRedisCluster extends ClusterOptions {
   nodes: RedisOptions[];
 }
 
 export interface ConfigRedis {
   base: RedisOptions;
-  clients: Record<keyof IRedisClientRecord, RedisOptions | ConfigRedisCluster>;
+  clients: Record<keyof IRedisClientRecord, IRedisClientOptions | ConfigRedisCluster>;
 }
 
 declare module 'vona' {
