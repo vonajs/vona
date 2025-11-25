@@ -1,4 +1,4 @@
-import type { SignOptions } from 'jsonwebtoken';
+import type { SignOptions, VerifyOptions } from 'jsonwebtoken';
 import type { StringValue } from 'ms';
 
 export const ErrorMessageJwtExpired = 'jwt expired';
@@ -30,6 +30,7 @@ export interface IJwtVerifyOptions {
 export interface IJwtClientOptions {
   secret?: string;
   signOptions: SignOptions;
+  verifyOptions?: VerifyOptions;
 }
 
 export interface ConfigJwt {

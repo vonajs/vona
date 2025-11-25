@@ -23,7 +23,7 @@ export class ServiceJwtClient extends BeanBase {
     const configClient = configJwt.clients[clientName];
     if (!configClient) throw new Error(`jwt client not found: ${clientName}`);
     const secret = configJwt.base.secret ?? this.app.config.server.keys[0];
-    this._clientOptions = deepExtend({ }, configJwt.base, { secret }, configClient);
+    this._clientOptions = deepExtend({}, configJwt.base, { secret }, configClient);
     this._clientName = clientName;
     this._jwtInstance = jwt;
   }
@@ -65,7 +65,7 @@ export class ServiceJwtClient extends BeanBase {
     if (!token && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
-      this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.signOptions, (err, decoded) => {
+      this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.verifyOptions, (err, decoded) => {
         if (err) return reject(err);
         const payload = cast<IJwtPayload>(decoded);
         // check field client

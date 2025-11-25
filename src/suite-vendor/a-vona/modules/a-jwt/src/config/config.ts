@@ -23,6 +23,7 @@ export function config(app: VonaApplication) {
     base: {
       secret: undefined,
       signOptions: { issuer: app.meta.env.APP_NAME },
+      verifyOptions: { issuer: app.meta.env.APP_NAME },
     },
     clients: {
       access: {
