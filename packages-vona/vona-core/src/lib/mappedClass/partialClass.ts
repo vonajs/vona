@@ -17,11 +17,12 @@ export function PartialClass<T, KEYS extends Array<keyof T> | undefined = undefi
 ): TypePartialClass<T, KEYS> {
   abstract class TargetClass {}
   copyMetadataOfClasses(TargetClass.prototype, [classRef.prototype], (rules, key, metadataKeyOptions) => {
-    if (keys && !keys.includes(key)) return rules[key];
+    const schema = rules[key];
+    if (keys && !keys.includes(key)) return schema;
     if (metadataKeyOptions?.partialClass) {
-      return metadataKeyOptions?.partialClass(rules[key]);
+      return metadataKeyOptions?.partialClass(schema);
     }
-    return rules[key];
+    return schema;
   });
   copyPropertiesOfClasses(TargetClass as any, [classRef]);
   return TargetClass as any;
