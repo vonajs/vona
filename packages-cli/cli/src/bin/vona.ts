@@ -4,7 +4,7 @@ import path from 'node:path';
 import { ProcessHelper } from '@cabloy/process-helper';
 import fse from 'fs-extra';
 import semver from 'semver';
-import { VonaCommand } from '../start.ts';
+import { playAttach } from '../play.ts';
 
 const pnpm_version = '10.19.0';
 
@@ -42,17 +42,16 @@ async function main() {
   const isPlayAttach = isPlay && (rawArgv.includes('-a') || rawArgv.includes('--attach'));
   if (isPlay) {
     if (!isPlayAttach) {
-      args.push(bootstrapFile);
+      args = args.concat([bootstrapFile, ':bin:play']);
     }
-    args = args.concat([':bin:play']).concat(rawArgv.slice(1)).concat(['--dummy']);
+    args = args.concat(rawArgv.slice(1)).concat(['--dummy']);
   } else {
     args.push(bootstrapFile);
     args = args.concat(rawArgv);
   }
   // run
   if (isPlayAttach) {
-    const command = new VonaCommand(args, true);
-    await command.start();
+    await playAttach(process.cwd(), args);
   } else {
     if (!isPlay) {
       await checkPnpm();
