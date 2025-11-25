@@ -22,7 +22,7 @@ async function _collectCommands() {
   const sets = commandsConfig.sets[process.env.CabloyCliBrandName as any];
   for (const setName in sets) {
     const setModuleName = sets[setName];
-    const setModule = await import(setModuleName);
+    const setModule = await import(setModuleName); // 270ms
     const commands = setModule.commands;
     if (!commands) continue;
     const _commandsSet = (_commandsAll[setName] = {});
