@@ -40,7 +40,7 @@ function main() {
   const isPlay = rawArgv[0] === 'play';
   if (isPlay) {
     args = args.concat([':bin:play']).concat(rawArgv.slice(1)).concat(['--dummy']);
-    new VonaCommand(args).start();
+    new VonaCommand(args, true).start();
     return;
   }
   args.push(bootstrapFile);

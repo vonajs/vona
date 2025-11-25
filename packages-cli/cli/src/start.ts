@@ -2,9 +2,11 @@ import { createRequire } from 'node:module';
 import { CabloyCommand } from '@cabloy/cli';
 
 export class VonaCommand extends CabloyCommand {
-  constructor(rawArgv?) {
+  constructor(rawArgv?: any[], disableVersion?: boolean) {
     super('vona', rawArgv);
-    this.version = this._extractPackageVersion();
+    if (!disableVersion) {
+      this.version = this._extractPackageVersion();
+    }
   }
 
   private _extractPackageVersion() {
