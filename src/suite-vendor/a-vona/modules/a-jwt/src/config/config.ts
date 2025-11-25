@@ -20,7 +20,7 @@ export function config(app: VonaApplication) {
     tempToken: {
       signOptions: { expiresIn: 10 * 60 },
     },
-    default: {
+    base: {
       secret: undefined,
       signOptions: { issuer: app.meta.env.APP_NAME },
     },

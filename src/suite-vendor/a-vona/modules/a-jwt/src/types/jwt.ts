@@ -49,7 +49,7 @@ export interface ConfigJwt {
   tempToken: {
     signOptions: { expiresIn: number };
   };
-  default: IJwtClientOptions;
+  base: IJwtClientOptions;
   clients: Record<keyof IJwtClientRecord, IJwtClientOptions>;
 }
 
