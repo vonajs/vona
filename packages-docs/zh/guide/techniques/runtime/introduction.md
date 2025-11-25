@@ -4,7 +4,7 @@ VonaJS 在系统启动时将一些动态运行数据`统一`输出到`Runtime`�
 
 ## Runtime目录
 
-针对不同的运行环境默认使用不同的 Runtime 目录:
+针对不同的运行环境使用不同的 Runtime 目录:
 
 - `测试环境/开发环境`: `{project path}/.app/runtime`
 - `生产环境`: `{home}/vona/{project name}/runtime`
@@ -46,9 +46,5 @@ export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {
 }
 ```
 
-- `TypeMetaRuntimeResult`: 定义runtime
-- `execute`: 返回需要输出的提示信息，支持数组类型
-
-如下图所示：
- 
-![](../../../assets/img/printTip/printTip-2.png)
+- `TypeMetaRuntimeResult`: 定义 runtime 数据的类型
+- `execute`: 返回需要输出的 runtime 数据
