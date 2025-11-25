@@ -429,6 +429,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'Runtime',
+          base: '/zh/guide/techniques/runtime/',
+          link: 'introduction',
+        },
+        {
           text: 'Static & Assets',
           base: '/zh/guide/techniques/assets/',
           collapsed: false,
