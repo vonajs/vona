@@ -876,7 +876,7 @@ importers:
         specifier: ^5.0.101
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.210
+        specifier: ^5.0.211
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1224,7 +1224,7 @@ importers:
         specifier: ^5.0.42
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-jwt
       vona-module-a-logger:
         specifier: ^5.0.30
