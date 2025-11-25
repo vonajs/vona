@@ -9,7 +9,7 @@ export type TypeMetaPrintTipResult = {
 @Meta()
 export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
-    if (!this.app.meta.isDev) return;
+    if (this.app.meta.isProd) return;
     // signin
     const jwt = await this.bean.passport.signinSystem('dev', '-1');
     const accessToken = jwt.accessToken;
