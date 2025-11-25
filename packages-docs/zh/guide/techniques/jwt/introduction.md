@@ -18,7 +18,7 @@ config.modules = {
     base: {
       secret: undefined,
       signOptions: { issuer: env.APP_NAME },
-      verifyOptions: { issuer: app.meta.env.APP_NAME },
+      verifyOptions: { issuer: env.APP_NAME },
     },
     clients: {
       access: {
