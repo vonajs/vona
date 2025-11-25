@@ -18,7 +18,7 @@ export class BeanJwt extends BeanBase {
     const refreshToken = await this.get('refresh').sign(payloadData, options);
     // expiresIn
     let expiresIn = this.scope.config.clients.access.signOptions.expiresIn!;
-    if (typeof expiresIn === 'string') expiresIn = ms(expiresIn);
+    if (typeof expiresIn === 'string') expiresIn = Math.floor(ms(expiresIn) / 1000);
     // ok
     return {
       accessToken,
