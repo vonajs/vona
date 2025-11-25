@@ -2,9 +2,7 @@ import type { IMetaRuntimeExecute } from 'vona-module-a-runtime';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
-export type TypeMetaPrintTipResult = {
-  accessToken?: string;
-} | undefined;
+export type TypeMetaPrintTipResult = { accessToken?: string } | undefined;
 
 @Meta()
 export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {

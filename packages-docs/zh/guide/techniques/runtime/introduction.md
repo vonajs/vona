@@ -13,29 +13,34 @@ VonaJS 在系统启动时将一些动态运行数据`统一`输出到`Runtime`�
 
 可以通过`Runtime`添加自定义的动态运行数据
 
-比如，在模块 demo-student 中创建`meta.runtime`。在系统启动时在控制台输出`=== Hello World ===`
+比如，在模块 demo-student 中创建`meta.runtime`。在系统启动时在`Runtime`文件中输出`accessToken`
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean meta printTip --module=demo-student
+$ vona :create:bean meta runtime --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Meta/Print Tip`
+右键菜单 - [模块路径]: `Vona Meta/Runtime`
 :::
 
-## meta.printTip定义
+## meta.runtime定义
 
 ``` typescript
+export type TypeMetaPrintTipResult = { accessToken?: string } | undefined;
+
 @Meta()
-export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
+export class MetaRuntime extends BeanBase implements IMetaRuntimeExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
+    if (this.app.meta.isProd) return;
+    // signin
+    const jwt = await this.bean.passport.signinSystem('dev', '-1');
+    const accessToken = jwt.accessToken;
     return {
-      title: 'Test',
-      message: '=== Hello World ===',
+      accessToken,
     };
   }
 }
