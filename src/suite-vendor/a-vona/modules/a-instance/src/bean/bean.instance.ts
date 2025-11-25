@@ -37,7 +37,6 @@ export class BeanInstance extends BeanBase {
     if (instance) return instance;
     // instance base
     const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
-    if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
     if (!configInstanceBase) return null;
     if (configInstanceBase.isolate && !configInstanceBase.id) {
       throw new Error(`should specify id for isolate instance: ${instanceName}`);

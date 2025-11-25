@@ -85,7 +85,6 @@ export class ServiceDatabase extends BeanBase {
     const instanceName = this.ctx.instanceName;
     if (!isNil(instanceName)) {
       const configInstanceBase = this.$scope.instance.service.instance.getConfigInstanceBase(instanceName);
-      if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
       if (configInstanceBase?.isolate) {
         return configInstanceBase.isolateClient!;
       }

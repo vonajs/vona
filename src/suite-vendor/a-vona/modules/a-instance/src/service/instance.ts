@@ -1,6 +1,7 @@
 import type { IInstanceRecord, VonaConfig } from 'vona';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
 import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
+import type { ConfigInstanceBase } from '../types/instance.ts';
 import { isNil, sleep } from '@cabloy/utils';
 import async from 'async';
 import { BeanBase, deepExtend } from 'vona';
@@ -21,9 +22,11 @@ export class ServiceInstance extends BeanBase {
     return this.app.meta[SymbolCacheIntancesConfig];
   }
 
-  getConfigInstanceBase(instanceName: keyof IInstanceRecord) {
+  getConfigInstanceBase(instanceName: keyof IInstanceRecord): ConfigInstanceBase | undefined {
     const instances = this.app.config.instance.instances;
-    return instances[instanceName];
+    const configInstanceBase = instances[instanceName];
+    if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
+    return configInstanceBase;
   }
 
   getConfig(instanceName?: keyof IInstanceRecord | undefined | null): VonaConfig | undefined {
@@ -77,7 +80,6 @@ export class ServiceInstance extends BeanBase {
     instance = instance!;
     // config
     const configInstanceBase = this.getConfigInstanceBase(instanceName);
-    if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
     const instanceConfigDb = instance.config ? JSON.parse(instance.config) : undefined;
     // cache configs
     this.__cacheIntancesConfig[instanceName] = deepExtend(
@@ -108,7 +110,6 @@ export class ServiceInstance extends BeanBase {
     if (!options) options = {};
     if (!options.configInstanceBase) {
       const configInstanceBase = this.getConfigInstanceBase(instanceName);
-      if (configInstanceBase === false) throw new Error(`instance disabled: ${instanceName}`);
       options.configInstanceBase = configInstanceBase;
     }
     // cache instance config
