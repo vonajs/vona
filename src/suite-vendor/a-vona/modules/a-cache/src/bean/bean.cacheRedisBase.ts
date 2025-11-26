@@ -8,23 +8,23 @@ import { CacheBase } from '../common/cacheBase.ts';
 @Bean()
 @Virtual()
 export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheRedisOptions, KEY> {
-  private _redisSummer: Redis;
+  private _redisCache: Redis;
 
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorCacheRedisOptions) {
     super.__init__(cacheName, cacheOptions);
     this._cacheOptions = Object.assign({}, this.$scope.cache.config.redis.options, this._cacheOptions);
   }
 
-  private get redisSummer() {
-    if (!this._redisSummer) {
-      this._redisSummer = this.bean.redis.get(this._cacheOptions.client);
+  private get redisCache() {
+    if (!this._redisCache) {
+      this._redisCache = this.bean.redis.get(this._cacheOptions.client);
     }
-    return this._redisSummer;
+    return this._redisCache;
   }
 
   protected get __cacheInstance(): Redis | undefined {
     if (!this.__cacheEnabled) return undefined;
-    return this.redisSummer;
+    return this.redisCache;
   }
 
   public async get(key?: KEY, options?: ICacheRedisGetOptions): Promise<DATA | null | undefined> {
@@ -128,10 +128,10 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
     let valuePrev: any;
     if (ttl) {
-      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();
+      const res = await cache.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();
       valuePrev = res && res[0][1];
     } else {
-      const res = await this.redisSummer.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
+      const res = await cache.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
       valuePrev = res && res[0][1];
     }
     const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
