@@ -305,10 +305,10 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       items: [
         { text: '介绍', link: 'introduction' },
-        { text: 'Mem Cache', link: 'mem' },
-        { text: 'Redis Cache', link: 'redis' },
-        { text: 'Summer(二级缓存)', link: 'summer' },
-        { text: 'Caching', link: 'caching' },
+        { text: 'Mem缓存', link: 'mem' },
+        { text: 'Redis缓存', link: 'redis' },
+        { text: 'Summer缓存(二级缓存)', link: 'summer' },
+        { text: 'Caching装饰器', link: 'caching' },
       ],
     },
     {
