@@ -127,13 +127,18 @@ class SummerCacheStudent {}
 ``` typescript
 // onions
 config.onions = {
-  cacheRedis: {
+  summerCache: {
     'demo-student:student': {
-      ttl: 2 * 3600 * 1000,
-      updateAgeOnGet: true,
-      disableInstance: false,
-      disableTransactionCompensate: false,
-      client: 'cache',
+      preset: 'all',
+      mode: 'all',
+      mem: {
+        max: 500,
+        ttl: 2 * 3600 * 1000,
+      },
+      redis: {
+        ttl: 2 * 3600 * 1000,
+      },
+      ignoreNull: false,
     },
   },
 };
@@ -150,7 +155,7 @@ config.onions = {
 ``` diff
 // onions
 config.onions = {
-  cacheRedis: {
+  summerCache: {
     'demo-student:student': {
 +     enable: true,
     },
@@ -170,13 +175,13 @@ config.onions = {
 * 举例
 
 ``` diff
-@CacheRedis({
+@SummerCache({
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
 + },
 })
-class CacheRedisStudent {}
+class SummerCacheStudent {}
 ```
 
 ## 使用Summer缓存
