@@ -89,6 +89,8 @@ config.onions = {
 
 可以控制 Mem 缓存的`启用/禁用`
 
+### 1. Enable
+
 `src/backend/config/config/config.ts`
 
 ``` diff
@@ -100,6 +102,27 @@ config.onions = {
     },
   },
 };
+```
+
+### 2. Meta
+
+可以让 Redis 缓存在指定的运行环境生效
+
+|名称|类型|说明|
+|--|--|--|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+
+* 举例
+
+``` diff
+@CacheMem({
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++ },
+})
+class CacheMemStudent {}
 ```
 
 ## 使用Mem缓存
