@@ -9,13 +9,13 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean cacheRedis student --module=demo-student
+$ vona :create:bean summerCache student --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Bean/Cache Summer`
+右键菜单 - [模块路径]: `Vona Bean/Summer Cache`
 :::
 
 ## Summer缓存定义
