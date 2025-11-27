@@ -470,9 +470,9 @@ class ControllerBook {}
 |enable|Whether to enable Controller|
 |meta|Enable Controller based on conditions|
 
-### 3. App config configuration
+### 3. App Config
 
-Controller options can be configured in App config
+Controller options can be configured in App Config
 
 For example, by default, `http://localhost:7102/swagger` is only valid in `test`/`dev` environment. If you want to make Swagger accessible in the `prod` environment, you can configure it in App config
 

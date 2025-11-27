@@ -312,9 +312,9 @@ Change the openapi metadata of the field `name` to: `title: 'Student Name'`
 class EntityStudent {}
 ```
 
-## App config configuration
+## App Config
 
-Entity options can be configured in App config
+Entity options can be configured in App Config
 
 `src/backend/config/config/config.dev.ts`
 

@@ -185,9 +185,9 @@ class ServiceStudent {
   - If it is empty, the table name is automatically obtained from entity
   - You can also specify a function to achieve dynamic table partitioning
 
-## App config configuration
+## App Config
 
-Model options can be configured in App config
+Model options can be configured in App Config
 
 `src/backend/config/config/config.dev.ts`
 

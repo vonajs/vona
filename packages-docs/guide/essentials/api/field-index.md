@@ -57,9 +57,9 @@ class MetaIndex {}
 
 - `$tableColumns`: Generate typed table name and field name/names
 
-## App config configuration
+## App Config
 
-Field indexes can be configured in App config
+Field indexes can be configured in App Config
 
 `src/backend/config/config/config.dev.ts`
 

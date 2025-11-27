@@ -127,9 +127,9 @@ import z from 'zod';
 class DtoStudentCreate {}
 ```
 
-## App config configuration
+## App Config
 
-Dto options can be configured in App config
+Dto options can be configured in App Config
 
 `src/backend/config/config/config.dev.ts`
 

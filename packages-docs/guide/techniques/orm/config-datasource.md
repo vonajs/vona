@@ -1,6 +1,6 @@
 # Datasource Config
 
-## App Config Configuration
+## App Config
 
 We can configure the Datasources in App Config:
 
