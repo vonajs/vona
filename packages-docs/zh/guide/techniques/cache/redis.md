@@ -89,7 +89,7 @@ config.onions = {
 ``` diff
 // onions
 config.onions = {
-  cacheMem: {
+  cacheRedis: {
     'demo-student:student': {
 +     enable: true,
     },
@@ -125,8 +125,8 @@ class ControllerStudent {
   @Web.get('test')
   async test() {
     const student = { id: '1', name: 'tom' };
-    this.scope.cacheMem.student.set(student, '1');
-    const value = this.scope.cacheMem.student.get('1');
+    await this.scope.cacheRedis.student.set(student, '1');
+    const value = await this.scope.cacheRedis.student.get('1');
     assert.deepEqual(student, value);
   }
 }  
