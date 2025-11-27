@@ -1,12 +1,10 @@
 # Summer缓存(二级缓存)
 
-# Redis缓存
+`Summer缓存`基于 Mem 缓存和 Redis 缓存实现
 
-`Redis缓存`基于[Redis](../redis/introduction.md)实现
+## 创建Summer缓存
 
-## 创建Redis缓存
-
-比如，在模块 demo-student 中创建一个 Redis 缓存: `student`，用于缓存学生数据
+比如，在模块 demo-student 中创建一个 Summer 缓存: `student`，用于缓存学生数据
 
 ### 1. Cli命令
 
@@ -17,10 +15,10 @@ $ vona :create:bean cacheRedis student --module=demo-student
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Bean/Cache Redis`
+右键菜单 - [模块路径]: `Vona Bean/Cache Summer`
 :::
 
-## Redis缓存定义
+## Summer缓存定义
 
 ``` typescript
 export type TCacheRedisStudentKey = string;
@@ -36,9 +34,9 @@ export class CacheRedisStudent
 - `TCacheRedisStudentKey`: 定义缓存 Key 的类型
 - `TCacheRedisStudentData`: 定义缓存 Data 的类型
 
-## Redis缓存参数
+## Summer缓存参数
 
-可以为 Redis 缓存配置参数
+可以为 Summer 缓存配置参数
 
 ``` typescript
 @CacheRedis({
@@ -61,7 +59,7 @@ class CacheRedisStudent {}
 
 ## App Config配置
 
-可以在 App Config 中配置 Redis 缓存参数
+可以在 App Config 中配置 Summer 缓存参数
 
 `src/backend/config/config/config.ts`
 
@@ -80,9 +78,9 @@ config.onions = {
 };
 ```
 
-## Redis缓存启用/禁用
+## Summer缓存启用/禁用
 
-可以控制 Redis 缓存的`启用/禁用`
+可以控制 Summer 缓存的`启用/禁用`
 
 ### 1. Enable
 
@@ -101,7 +99,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 Redis 缓存在指定的运行环境生效
+可以让 Summer 缓存在指定的运行环境生效
 
 |名称|类型|说明|
 |--|--|--|
@@ -120,7 +118,7 @@ config.onions = {
 class CacheRedisStudent {}
 ```
 
-## 使用Redis缓存
+## 使用Summer缓存
 
 ``` typescript
 class ControllerStudent {
