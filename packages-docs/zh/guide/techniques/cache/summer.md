@@ -21,18 +21,66 @@ $ vona :create:bean summerCache student --module=demo-student
 ## Summer缓存定义
 
 ``` typescript
-export type TCacheRedisStudentKey = string;
-export interface TCacheRedisStudentData { id: string; name: string }
+export type TSummerCacheStudentKey = string;
+export interface TSummerCacheStudentData { id: string; name: string }
 
-@CacheRedis({
-  ttl: 2 * 3600 * 1000,
-})
-export class CacheRedisStudent
-  extends BeanCacheRedisBase<TCacheRedisStudentKey, TCacheRedisStudentData> {}
+@SummerCache()
+export class SummerCacheStudent
+  extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
+  implements ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
+  async getNative(
+    key?: TSummerCacheStudentKey,
+    _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
+  ): Promise<TSummerCacheStudentData | null | undefined> {
+    const student = await this.scope.model.student.getById(key!);
+    if (!student) return null;
+    return { id: student.id as string, name: student.name };
+  }
+}
 ```
 
-- `TCacheRedisStudentKey`: 定义缓存 Key 的类型
-- `TCacheRedisStudentData`: 定义缓存 Data 的类型
+- `TSummerCacheStudentKey`: 定义缓存 Key 的类型
+- `TSummerCacheStudentData`: 定义缓存 Data 的类型
+
+## getNative
+
+读取 Summer 缓存的一般流程：
+
+1. 先读取 Mem 缓存
+2. 如果 Mem 缓存不存在，则读取 Redis 缓存
+3. 如果 Redis 缓存不存在，则调用`getNative`方法
+   - 比如，在`getNative`方法中查询 db 数据
+
+## mgetNative
+
+可以提供`mgetNative`方法支持同时读取多个缓存
+
+如果没有提供`mgetNative`方法，在同时读取多个缓存时，系统会自动循环调用`mgetNative`方法
+
+``` diff
+export class SummerCacheStudent
+  extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
+  implements
+    ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData>,
++   ISummerCacheMGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
+  async getNative(
+    key?: TSummerCacheStudentKey,
+    _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
+  ): Promise<TSummerCacheStudentData | null | undefined> {
+    ...
+  }
+
++ async mgetNative(
++   keys: TSummerCacheStudentKey[],
++   _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
++ ): Promise<Array<TSummerCacheStudentData | null | undefined>> {
++   const students = await this.scope.model.student.mget(keys);
++   return students.map(student => {
++     return { id: student.id as string, name: student.name };
++   });
++ }
+}
+```
 
 ## Summer缓存参数
 
