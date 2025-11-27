@@ -1,10 +1,10 @@
 import type { OmitNever } from 'vona';
-import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 
 export interface ICacheRedisRecord {}
 
-export interface IDecoratorCacheRedisOptions extends IOnionOptionsEnable {
+export interface IDecoratorCacheRedisOptions extends TypeOnionOptionsEnableSimple {
   ttl?: number;
   updateAgeOnGet?: boolean;
   client?: keyof IRedisClientRecord;

@@ -1,6 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { TypeBroadcastOnSet } from 'vona-module-a-cache';
-import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { ServiceDb } from 'vona-module-a-orm';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 
@@ -19,7 +19,7 @@ export interface ISummerCacheMGet<KEY, DATA> {
 export type TSummerCachePreset = 'mem' | 'redis' | 'all';
 export type TSummerCacheMode = 'all' | 'mem' | 'redis';
 
-export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
+export interface IDecoratorSummerCacheOptions extends TypeOnionOptionsEnableSimple {
   preset?: TSummerCachePreset;
   mode?: TSummerCacheMode;
   mem?: {
