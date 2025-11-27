@@ -55,6 +55,7 @@ class CacheRedisStudent {}
 |updateAgeOnGet|boolean|true|当读取缓存时是否更新ttl|
 |disableInstance|boolean|false|是否禁用实例隔离。在默认情况下，多实例之间的缓存是隔离的|
 |disableTransactionCompensate|boolean|false|是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性|
+|client|string|'cache'|缓存所使用的Redis Client|
 
 ## App Config配置
 
@@ -65,15 +66,13 @@ class CacheRedisStudent {}
 ``` typescript
 // onions
 config.onions = {
-  cacheMem: {
+  cacheRedis: {
     'demo-student:student': {
-      max: 500,
       ttl: 2 * 3600 * 1000,
       updateAgeOnGet: true,
-      updateAgeOnHas: false,
-      broadcastOnSet: false,
       disableInstance: false,
       disableTransactionCompensate: false,
+      client: 'cache',
     },
   },
 };
@@ -82,6 +81,8 @@ config.onions = {
 ## Redis缓存启用/禁用
 
 可以控制 Redis 缓存的`启用/禁用`
+
+### 1. Enable
 
 `src/backend/config/config/config.ts`
 
@@ -94,6 +95,27 @@ config.onions = {
     },
   },
 };
+```
+
+### 2. Meta
+
+可以让 Redis 缓存在指定的运行环境生效
+
+|名称|类型|说明|
+|--|--|--|
+|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+
+* 举例
+
+``` diff
+@CacheRedis({
++ meta: {
++   flavor: 'normal',
++   mode: 'dev',
++ },
+})
+class CacheRedisStudent {}
 ```
 
 ## 使用Redis缓存
