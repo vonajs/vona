@@ -13,3 +13,11 @@
     }
   }
 }
+
+:root {
+  --vp-font-family-base: monospace;
+}
+
+:root:where(:lang(zh)) {
+  --vp-font-family-base: monospace;
+}
