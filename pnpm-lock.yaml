@@ -876,7 +876,7 @@ importers:
         specifier: ^5.0.102
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.214
+        specifier: ^5.0.215
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1188,7 +1188,7 @@ importers:
         specifier: ^5.0.24
         version: link:modules/a-broadcast
       vona-module-a-cache:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-cache
       vona-module-a-caching:
         specifier: ^5.0.14
@@ -1293,7 +1293,7 @@ importers:
         specifier: ^5.0.25
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-summer
       vona-module-a-swagger:
         specifier: ^5.0.29
