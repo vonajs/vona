@@ -1,5 +1,7 @@
 # Mem缓存
 
+`Mem缓存`基于[lru-cache](https://github.com/isaacs/node-lru-cache)实现
+
 ## 创建Mem缓存
 
 比如，在模块 demo-student 中创建一个 Mem 缓存: `student`，用于缓存学生数据
