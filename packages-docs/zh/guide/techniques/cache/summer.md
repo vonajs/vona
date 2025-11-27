@@ -190,33 +190,47 @@ class SummerCacheStudent {}
 class ControllerStudent {
   @Web.get('test')
   async test() {
-    const student = { id: '1', name: 'tom' };
-    await this.scope.cacheRedis.student.set(student, '1');
-    const value = await this.scope.cacheRedis.student.get('1');
-    assert.deepEqual(student, value);
+    const studentByDb = await this.scope.model.student.getById('2');
+    const studentBySummer = await this.scope.summerCache.student.get('2');
+    assert.equal(studentByDb?.id, studentBySummer?.id);
+    assert.equal(studentByDb?.name, studentBySummer?.name);
   }
 }  
 ```
 
-- `this.scope.cacheRedis.student`: 通过模块 scope 取得缓存实例
+- `this.scope.summerCache.student`: 通过模块 scope 取得缓存实例
 
 ## 缓存方法参数
 
-以`set方法`为例介绍缓存方法的参数
+以`get方法`为例介绍缓存方法的参数
 
 ``` typescript
-await this.scope.cacheRedis.student.set(student, '1', {
+await this.scope.summerCache.student.get('2', {
   ttl: 2 * 3600 * 1000,
-  disableTransactionCompensate: true,
+  broadcastOnSet: 'del',
+  updateAgeOnGet: true,
+  ignoreNull: false,
+  mode: 'all',
+  force: false,
   db: this.ctx.db,
+  enable: true,
+  get: async (_key?: string) => { return null; },
+  mget: async (_keys: string[]) => { return []; },
 });
 ```
 
 |名称|类型|说明|
 |--|--|--|
 |ttl|number|缓存的过期时间|
-|disableTransactionCompensate|boolean|是否禁止事务补偿|
+|broadcastOnSet|boolean \| 'del'|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
+|updateAgeOnGet|boolean|当读取缓存时是否更新ttl|
+|ignoreNull|boolean|是否忽略`null`值|
+|mode|'all' \| 'mem' \| 'redis'|缓存模式|
+|force|boolean|强制读取新值|
 |db|ServiceDb|在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象|
+|enable|boolean|是否禁用Summer缓存|
+|get|Function|覆盖`getNative`方法|
+|mget|Function|覆盖`mgetNative`方法|
 
 - `db`: VonaJS 支持多数据库/多数据源，因此可以通过`db`精确控制事务补偿能力
 
