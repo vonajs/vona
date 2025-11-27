@@ -87,23 +87,36 @@ export class SummerCacheStudent
 可以为 Summer 缓存配置参数
 
 ``` typescript
-@CacheRedis({
-  ttl: 2 * 3600 * 1000,
-  updateAgeOnGet: true,
-  disableInstance: false,
-  disableTransactionCompensate: false,
-  client: 'cache',
+@SummerCache({
+  preset: 'all',
+  mode: 'all',
+  mem: {
+    max: 500,
+    ttl: 2 * 3600 * 1000,
+  },
+  redis: {
+    ttl: 2 * 3600 * 1000,
+  },
+  ignoreNull: false,
 })
-class CacheRedisStudent {}
+class SummerCacheStudent {}
 ```
 
 |名称|类型|默认值|说明|
 |--|--|--|--|
-|ttl|number||缓存的过期时间|
-|updateAgeOnGet|boolean|true|当读取缓存时是否更新ttl|
-|disableInstance|boolean|false|是否禁用实例隔离。在默认情况下，多实例之间的缓存是隔离的|
-|disableTransactionCompensate|boolean|false|是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性|
-|client|string|'cache'|缓存所使用的Redis Client|
+|preset|'all' \| 'mem' \| 'redis'||预定义配置，是`mode/mem/redis`参数的组合|
+|mode|'all' \| 'mem' \| 'redis'|'all'|缓存模式|
+|mem|||Mem 缓存的配置|
+|redis|||Redis 缓存的配置|
+|ignoreNull|boolean|false|是否忽略`null`值。当`ignoreNull=true`时，如果从Mem缓存/Redis缓存中读取的数据为`null`则忽略掉，然后调用`getNative/mgetNative`方法获取新值|
+
+* mode
+
+|名称|说明|
+|--|--|
+|all|使用 Mem 缓存和 Redis 缓存|
+|mem|仅使用Mem 缓存|
+|redis|仅使用Redis 缓存|
 
 ## App Config配置
 

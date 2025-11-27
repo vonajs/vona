@@ -16,7 +16,7 @@ export interface ISummerCacheMGet<KEY, DATA> {
 }
 
 // export type TSummerCachePreset = 'mem' | 'redis' | 'all' | 'memWithIgnoreNull' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
-export type TSummerCachePreset = 'mem' | 'redis' | 'all';
+export type TSummerCachePreset = 'all' | 'mem' | 'redis';
 export type TSummerCacheMode = 'all' | 'mem' | 'redis';
 
 export interface IDecoratorSummerCacheOptions extends TypeOnionOptionsEnableSimple {
