@@ -31,33 +31,28 @@ export class CacheRedisStudent
   extends BeanCacheRedisBase<TCacheRedisStudentKey, TCacheRedisStudentData> {}
 ```
 
-- `TCacheMemStudentKey`: 定义缓存 Key 的类型
-- `TCacheMemStudentData`: 定义缓存 Data 的类型
+- `TCacheRedisStudentKey`: 定义缓存 Key 的类型
+- `TCacheRedisStudentData`: 定义缓存 Data 的类型
 
 ## Redis缓存参数
 
 可以为 Redis 缓存配置参数
 
 ``` typescript
-@CacheMem({
-  max: 500,
+@CacheRedis({
   ttl: 2 * 3600 * 1000,
   updateAgeOnGet: true,
-  updateAgeOnHas: false,
-  broadcastOnSet: false,
   disableInstance: false,
   disableTransactionCompensate: false,
+  client: 'cache',
 })
-class CacheMemStudent {}
+class CacheRedisStudent {}
 ```
 
 |名称|类型|默认值|说明|
 |--|--|--|--|
-|max|number||允许缓存的最大条数|
 |ttl|number||缓存的过期时间|
 |updateAgeOnGet|boolean|true|当读取缓存时是否更新ttl|
-|updateAgeOnHas|boolean|false|当判断缓存是否存在时是否更新ttl|
-|broadcastOnSet|boolean \| 'del'|false|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
 |disableInstance|boolean|false|是否禁用实例隔离。在默认情况下，多实例之间的缓存是隔离的|
 |disableTransactionCompensate|boolean|false|是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性|
 
