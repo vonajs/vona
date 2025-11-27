@@ -132,16 +132,15 @@ class ControllerStudent {
 }  
 ```
 
-- `this.scope.cacheMem.student`: 通过模块 scope 取得缓存实例
+- `this.scope.cacheRedis.student`: 通过模块 scope 取得缓存实例
 
 ## 缓存方法参数
 
 以`set方法`为例介绍缓存方法的参数
 
 ``` typescript
-this.scope.cacheMem.student.set(student, '1', {
+await this.scope.cacheRedis.student.set(student, '1', {
   ttl: 2 * 3600 * 1000,
-  broadcastOnSet: 'del',
   disableTransactionCompensate: true,
   db: this.ctx.db,
 });
@@ -150,7 +149,6 @@ this.scope.cacheMem.student.set(student, '1', {
 |名称|类型|说明|
 |--|--|--|
 |ttl|number|缓存的过期时间|
-|broadcastOnSet|boolean \| 'del'|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
 |disableTransactionCompensate|boolean|是否禁止事务补偿|
 |db|ServiceDb|在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象|
 
@@ -170,3 +168,5 @@ this.scope.cacheMem.student.set(student, '1', {
 |del|删除缓存|
 |mdel|同时删除多个缓存|
 |clear|清理所有缓存|
+|expire|修改缓存的过期时间|
+|lookupKeys|获取所有缓存键|
