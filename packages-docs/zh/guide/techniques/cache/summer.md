@@ -243,10 +243,6 @@ await this.scope.summerCache.student.get('2', {
 |peek|拣取缓存，不更新缓存的ttl|
 |set|设置缓存|
 |mset|同时设置多个缓存|
-|getset|设置新缓存，并返回旧值|
-|has|判断缓存是否存在|
 |del|删除缓存|
 |mdel|同时删除多个缓存|
 |clear|清理所有缓存|
-|expire|修改缓存的过期时间|
-|lookupKeys|获取所有缓存键|
