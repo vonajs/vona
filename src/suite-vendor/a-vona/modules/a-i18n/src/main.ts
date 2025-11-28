@@ -188,7 +188,7 @@ function __getTz(ctx: VonaContext, options: I18nConfigTz) {
   tz = parseTokenSafe(tz);
 
   // if header not send, set the tz cookie
-  if (cookieField && options.writeCookie && cookieTz !== tz && !ctx.headerSent) {
+  if (tzOrigin !== 'system' && cookieField && options.writeCookie && cookieTz !== tz && !ctx.headerSent) {
     updateCookie(ctx, options, tz);
   }
 

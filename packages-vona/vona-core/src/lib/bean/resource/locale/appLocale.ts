@@ -12,6 +12,14 @@ export class AppLocale extends BeanSimple {
     this.ctx.locale = value;
   }
 
+  get tz(): string {
+    return this.ctx.tz;
+  }
+
+  set tz(value: string) {
+    this.ctx.tz = value;
+  }
+
   /** @internal */
   public createLocaleText(moduleScope?: string): IModuleLocaleText {
     const self = this;

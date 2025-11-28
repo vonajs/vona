@@ -27,6 +27,14 @@ export const contextBase: ContextBase = {
     const self = cast(this);
     self.__setLocale(value);
   },
+  get tz() {
+    const self = cast(this);
+    return self.__getTz();
+  },
+  set tz(value) {
+    const self = cast(this);
+    self.__setTz(value);
+  },
   get instanceName(): keyof IInstanceRecord | undefined | null {
     const self = cast(this);
     return self.__getInstanceName();
