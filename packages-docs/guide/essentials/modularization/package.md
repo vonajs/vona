@@ -46,13 +46,13 @@ If the module needs to provide global dependencies, you need to configure `vonaM
   "vonaModule": {
     "globalDependencies": {
       "chalk": true,
-      "moment": true,
+      "luxon": true,
     },
   },
 }
 ```
 
-- Since the module a-core declares `chalk` and `moment` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import these modules and use
+- Since the module a-core declares `chalk` and `luxon` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import these modules and use
 
 ## vonaModule.globalDependenciesDev
 

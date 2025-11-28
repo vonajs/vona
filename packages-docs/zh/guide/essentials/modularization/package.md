@@ -46,13 +46,13 @@ Vona 提供的许多核心模块都是采用这种机制实现的。比如，模
   "vonaModule": {
     "globalDependencies": {
       "chalk": true,
-      "moment": true,
+      "luxon": true,
     },
   },
 }
 ```
 
-- 由于模块 a-core 将`chalk`和`moment`声明为全局依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入这些模块，并使用
+- 由于模块 a-core 将`chalk`和`luxon`声明为全局依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入这些模块，并使用
 
 ## vonaModule.globalDependenciesDev
 
