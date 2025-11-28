@@ -1,10 +1,13 @@
 import type { IModuleMain, VonaContext } from 'vona';
-import type { I18nConfigLocale } from './config/config.ts';
+import type { I18nConfigLocale, I18nConfigTz } from './config/config.ts';
+import { DateTime } from 'luxon';
 import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.ts';
 
 const SymbolLocale = Symbol('SymbolLocale');
 const SymbolLocaleOrigin = Symbol('SymbolLocaleOrigin');
+const SymbolTz = Symbol('SymbolTz');
+const SymbolTzOrigin = Symbol('SymbolTzOrigin');
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
@@ -15,6 +18,12 @@ export class Main extends BeanSimple implements IModuleMain {
     };
     this.app.context.__setLocale = function (this: VonaContext, locale: string) {
       return __setLocale(this, locale);
+    };
+    this.app.context.__getTz = function (this: VonaContext) {
+      return __getTz(this, options.tz);
+    };
+    this.app.context.__setTz = function (this: VonaContext, tz: string) {
+      return __setTz(this, tz);
     };
   }
 
@@ -121,7 +130,74 @@ function __getLocale(ctx: VonaContext, options: I18nConfigLocale) {
   return locale;
 }
 
-function updateCookie(ctx: VonaContext, options: I18nConfigLocale, locale: string) {
+function __setTz(ctx: VonaContext, tz: string) {
+  ctx[SymbolTz] = tz;
+  ctx[SymbolTzOrigin] = 'set';
+}
+
+function __getTz(ctx: VonaContext, options: I18nConfigTz) {
+  if (ctx[SymbolTz]) {
+    return ctx[SymbolTz];
+  }
+
+  const queryField = options.queryField;
+  const headerField = options.headerField;
+  const cookieField = options.cookieField;
+
+  let tz: string | undefined = '';
+  let tzOrigin: string = '';
+
+  const cookieTz = cookieField && ctx.cookies.get(cookieField, { signed: false });
+
+  // 1. Query
+  if (!tz && queryField) {
+    tz = ctx.request.query[queryField];
+    tzOrigin = 'query';
+  }
+
+  // 2. Header
+  if (!tz && headerField) {
+    tz = ctx.request.headers[headerField] as string;
+    tzOrigin = 'header';
+  }
+
+  // 3. Cookie
+  if (!tz && cookieField) {
+    tz = cookieTz;
+    tzOrigin = 'cookie';
+  }
+
+  // 4. user
+  if (!tz && ctx.user) {
+    tz = ctx.user.tz;
+    tzOrigin = 'user';
+  }
+
+  // 5. default config
+  if (!tz && options.defaultTz) {
+    tz = options.defaultTz;
+    tzOrigin = 'default';
+  }
+
+  // all missing, set it to system
+  if (!tz) {
+    tz = DateTime.now().zoneName;
+    tzOrigin = 'system';
+  }
+
+  tz = parseTokenSafe(tz);
+
+  // if header not send, set the tz cookie
+  if (cookieField && options.writeCookie && cookieTz !== tz && !ctx.headerSent) {
+    updateCookie(ctx, options, tz);
+  }
+
+  ctx[SymbolTz] = tz;
+  ctx[SymbolTzOrigin] = tzOrigin;
+  return tz;
+}
+
+function updateCookie(ctx: VonaContext, options: I18nConfigLocale | I18nConfigTz, locale: string) {
   const cookieOptions = {
     // make sure brower javascript can read the cookie
     httpOnly: false,
