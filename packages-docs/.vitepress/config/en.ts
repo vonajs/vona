@@ -407,7 +407,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'I18n',
           base: '/guide/techniques/i18n/',
-          link: 'introduction',
+          collapsed: false,
+          items: [
+            { text: 'Locale', link: 'locale' },
+            { text: 'Timezone', link: 'timezone' },
+          ],
         },
         {
           text: 'JWT',
