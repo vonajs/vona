@@ -62,6 +62,7 @@ export class BeanExecutor extends BeanBase {
     // locale/instanceName
     if (ctxRef) {
       options.locale = options.locale === undefined ? ctxRef.locale : options.locale;
+      options.tz = options.tz === undefined ? ctxRef.tz : options.tz;
       options.instanceName = options.instanceName === undefined ? ctxRef.instanceName : options.instanceName;
     }
     // run
@@ -72,6 +73,10 @@ export class BeanExecutor extends BeanBase {
       // locale
       if (options.locale !== undefined) {
         ctx.locale = options.locale;
+      }
+      // tz
+      if (options.tz !== undefined) {
+        ctx.tz = options.tz;
       }
       // instanceName: undefined/null is different
       if (options.instanceName !== undefined) {

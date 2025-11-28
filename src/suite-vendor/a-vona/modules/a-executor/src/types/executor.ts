@@ -17,6 +17,7 @@ export interface INewCtxOptions extends INewCtxBaseOptions {
 
 export interface INewCtxBaseOptions {
   locale?: keyof ILocaleRecord;
+  tz?: string;
   instanceName?: keyof IInstanceRecord | undefined | null;
   instance?: boolean;
   transaction?: boolean;

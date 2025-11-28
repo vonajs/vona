@@ -58,6 +58,7 @@ export class BeanAuth extends BeanBase {
       authProviderId: entityAuthProvider.id,
       instanceName: this.ctx.instanceName!,
       locale: this.ctx.locale,
+      tz: this.ctx.tz,
     });
     const strategyStateString = await this.bean.jwt.createOauthState(strategyState);
     // strategy

@@ -13,6 +13,7 @@ export interface IAuthenticateStrategyState extends IAuthenticateState {
   authProviderId: number;
   instanceName: keyof IInstanceRecord;
   locale: keyof ILocaleRecord;
+  tz?: string;
 }
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
