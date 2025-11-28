@@ -16,6 +16,7 @@
 
 :root {
   --vp-font-family-base: monospace;
+  --vp-sidebar-width: 320px;
 }
 
 :root:where(:lang(zh)) {

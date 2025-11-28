@@ -55,7 +55,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Environment & Configuration',
       items: [
         {
-          text: 'Runtime Environments & Flavor',
+          text: 'Runtime Environments & Flavors',
           base: '/guide/env-config/mode-flavor/',
           link: 'introduction',
         },
