@@ -73,10 +73,12 @@ export class ServiceExecutor extends BeanBase {
     const level = (options?.dbInfo?.level ?? current?.level ?? 0) + 1;
     const clientName = options?.dbInfo?.clientName ?? current?.clientName;
     const locale = options?.locale === undefined ? this.ctx?.locale : options.locale;
+    const tz = options?.tz === undefined ? this.ctx?.tz : options.tz;
     const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
     options = Object.assign({}, options, {
       dbInfo: { level, clientName },
       locale,
+      tz,
       instanceName,
     });
     if (this.ctx) {

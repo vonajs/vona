@@ -43,6 +43,7 @@ export interface IPerformActionOptions {
 export interface IGeneralInfoOptions {
   dbInfo?: Partial<IDbInfo>;
   locale?: keyof ILocaleRecord;
+  tz?: string;
   instanceName?: keyof IInstanceRecord | undefined | null;
   extraData?: INewCtxExtraData;
 }

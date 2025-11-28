@@ -67,6 +67,7 @@ export class ServiceBroadcast extends BeanBase {
       {
         dbInfo: info.options?.dbInfo,
         locale: info.options?.locale,
+        tz: info.options?.tz,
         instanceName,
         extraData: info.options?.extraData,
         transaction: broadcastConfig?.transaction,

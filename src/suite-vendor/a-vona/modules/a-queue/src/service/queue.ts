@@ -287,6 +287,7 @@ export class ServiceQueue extends BeanBase {
       {
         dbInfo: info.options?.dbInfo,
         locale: info.options?.locale,
+        tz: info.options?.tz,
         instanceName: info.options?.instanceName,
         extraData: info.options?.extraData,
         transaction: queueConfig?.transaction,
