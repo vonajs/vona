@@ -158,7 +158,7 @@ config.modules = {
 
 The system determines the current locale in the following order:
 
-`queryField` > `headerField` > `cookieField` > `Header: Accept-Language` > `defaultLocale`
+`queryField` > `user locale` > `headerField` > `cookieField` > `Header: Accept-Language` > `defaultLocale`
 
 ## Adding a New Language
 
