@@ -2005,6 +2005,10 @@ importers:
         version: 6.0.1
 
   src/suite-vendor/a-vona/modules/a-user:
+    dependencies:
+      timezone:
+        specifier: ^1.0.23
+        version: 1.0.23
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -8411,6 +8415,9 @@ packages:
   tildify@2.0.0:
     resolution: {integrity: sha512-Cc+OraorugtXNfs50hU9KS369rFXCfgGLpfCfvlc+Ud5u6VWmUQsOAa9HbTvheQdYnrdJqqv1e5oIqXppMYnSw==}
     engines: {node: '>=8'}
+
+  timezone@1.0.23:
+    resolution: {integrity: sha512-yhQgk6qmSLB+TF8HGmApZAVI5bfzR1CoKUGr+WMZWmx75ED1uDewAZA8QMGCQ70TEv4GmM8pDB9jrHuxdaQ1PA==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -16631,6 +16638,8 @@ snapshots:
   through@2.3.8: {}
 
   tildify@2.0.0: {}
+
+  timezone@1.0.23: {}
 
   tiny-inflate@1.0.3: {}
 
