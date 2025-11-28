@@ -11,6 +11,7 @@ export default {
   UserMobile: '手机号',
   UserActivated: '已激活',
   UserLocale: '语言',
+  UserTz: '时区',
   UsernameExists: '用户名已存在',
   EmailExists: '电子邮件已存在',
   PasswordsNotMatch: '密码不一致',

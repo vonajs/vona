@@ -24,6 +24,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         table.string(entityUser.mobile, 255).comment(entityUser.$comment.mobile);
         table.boolean(entityUser.activated).defaultTo(entityUser.$default.activated).comment(entityUser.$comment.activated);
         table.string(entityUser.locale, 255).comment(entityUser.$comment.locale);
+        table.integer(entityUser.tz).comment(entityUser.$comment.tz);
       });
       // homeRoleUser
       const entityRoleUser = this.scope.entity.roleUser;

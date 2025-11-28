@@ -18,6 +18,7 @@ export interface IUser {
   mobile?: string;
   activated?: boolean;
   locale?: keyof ILocaleRecord | undefined;
+  tz?: number;
   anonymous?: boolean;
 }
 

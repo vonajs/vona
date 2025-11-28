@@ -27,4 +27,7 @@ export class EntityUser extends EntityBase implements IUser {
 
   @Api.field(v.title($locale('UserLocale')), z.string().optional())
   locale?: keyof ILocaleRecord | undefined;
+
+  @Api.field(v.title($locale('UserTz')), v.optional())
+  tz?: number;
 }
