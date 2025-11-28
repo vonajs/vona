@@ -1,6 +1,6 @@
-# I18n
+# Locale
 
-Modules can individually provide their own `I18n` language resources
+Modules can individually provide their own `Locale` language resources
 
 ## Initialize code skeleton
 
