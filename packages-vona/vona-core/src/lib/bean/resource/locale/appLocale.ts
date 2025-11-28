@@ -12,11 +12,11 @@ export class AppLocale extends BeanSimple {
     this.ctx.locale = value;
   }
 
-  get tz(): string {
+  get tz(): string | undefined {
     return this.ctx.tz;
   }
 
-  set tz(value: string) {
+  set tz(value: string | undefined) {
     this.ctx.tz = value;
   }
 

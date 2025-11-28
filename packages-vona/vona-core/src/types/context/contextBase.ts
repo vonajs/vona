@@ -7,8 +7,8 @@ export interface ContextBase {
   get bean(): BeanContainer;
   get locale(): keyof ILocaleRecord;
   set locale(value: keyof ILocaleRecord);
-  get tz(): string;
-  set tz(value: string);
+  get tz(): string | undefined;
+  set tz(value: string | undefined);
   get instanceName(): keyof IInstanceRecord | undefined | null;
   set instanceName(value: keyof IInstanceRecord | undefined | null);
   get config(): VonaConfig;

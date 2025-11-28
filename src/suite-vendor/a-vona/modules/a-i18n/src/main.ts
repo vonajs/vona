@@ -1,6 +1,5 @@
 import type { IModuleMain, VonaContext } from 'vona';
 import type { I18nConfigLocale, I18nConfigTz } from './config/config.ts';
-import { Settings } from 'luxon';
 import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.ts';
 
@@ -36,7 +35,7 @@ function __setLocale(ctx: VonaContext, locale: string) {
 }
 
 function __getLocale(ctx: VonaContext, options: I18nConfigLocale) {
-  if (ctx[SymbolLocale]) {
+  if (ctx[SymbolLocaleOrigin]) {
     return ctx[SymbolLocale];
   }
 
@@ -130,13 +129,13 @@ function __getLocale(ctx: VonaContext, options: I18nConfigLocale) {
   return locale;
 }
 
-function __setTz(ctx: VonaContext, tz: string) {
+function __setTz(ctx: VonaContext, tz: string | undefined) {
   ctx[SymbolTz] = tz;
   ctx[SymbolTzOrigin] = 'set';
 }
 
-function __getTz(ctx: VonaContext, options: I18nConfigTz) {
-  if (ctx[SymbolTz]) {
+function __getTz(ctx: VonaContext, options: I18nConfigTz): string | undefined {
+  if (ctx[SymbolTzOrigin]) {
     return ctx[SymbolTz];
   }
 
@@ -179,16 +178,19 @@ function __getTz(ctx: VonaContext, options: I18nConfigTz) {
     tzOrigin = 'default';
   }
 
-  // all missing, set it to system
+  // all missing, set it to undefined
   if (!tz) {
-    tz = Settings.defaultZone.name;
+    // tz = Settings.defaultZone.name;
+    tz = undefined;
     tzOrigin = 'system';
   }
 
-  tz = parseTokenSafe(tz);
+  if (tz) {
+    tz = parseTokenSafe(tz);
+  }
 
   // if header not send, set the tz cookie
-  if (tzOrigin !== 'system' && cookieField && options.writeCookie && cookieTz !== tz && !ctx.headerSent) {
+  if (tz && cookieField && options.writeCookie && cookieTz !== tz && !ctx.headerSent) {
     updateCookie(ctx, options, tz);
   }
 
