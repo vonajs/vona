@@ -14,7 +14,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      await this.cacheRedis.set(value!, key, { ttl: options?.ttl, db: options?.db });
+      await this.cacheRedis.set(value!, key, {
+        ttl: options?.ttl,
+        db: options?.db,
+        disableTransactionCompensate: options?.disableTransactionCompensate,
+      });
     }
     return value;
   }
@@ -39,7 +43,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       const valuesMissing = await layered.mget(keysMissing, options);
       // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
-      await this.cacheRedis.mset(valuesMissing as any, keysMissing, { ttl: options?.ttl, db: options?.db });
+      await this.cacheRedis.mset(valuesMissing as any, keysMissing, {
+        ttl: options?.ttl,
+        db: options?.db,
+        disableTransactionCompensate: options?.disableTransactionCompensate,
+      });
       for (let i = 0; i < keysMissing.length; i++) {
         const valueMissing = valuesMissing[i];
         values[indexesMissing[i]] = valueMissing;
@@ -50,11 +58,19 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   }
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.set(value, key, { ttl: options?.ttl, db: options?.db });
+    await this.cacheRedis.set(value, key, {
+      ttl: options?.ttl,
+      db: options?.db,
+      disableTransactionCompensate: options?.disableTransactionCompensate,
+    });
   }
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.mset(values, keys, { ttl: options?.ttl, db: options?.db });
+    await this.cacheRedis.mset(values, keys, {
+      ttl: options?.ttl,
+      db: options?.db,
+      disableTransactionCompensate: options?.disableTransactionCompensate,
+    });
   }
 
   async del(key?: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {

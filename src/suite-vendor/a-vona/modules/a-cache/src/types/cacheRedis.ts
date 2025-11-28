@@ -4,13 +4,15 @@ import type { IRedisClientRecord } from 'vona-module-a-redis';
 
 export interface ICacheRedisRecord {}
 
-export interface IDecoratorCacheRedisOptions extends TypeOnionOptionsEnableSimple {
+export interface IDecoratorCacheRedisOptionsBase {
   ttl?: number;
   updateAgeOnGet?: boolean;
   client?: keyof IRedisClientRecord;
   disableInstance?: boolean;
   disableTransactionCompensate?: boolean;
 }
+
+export interface IDecoratorCacheRedisOptions extends IDecoratorCacheRedisOptionsBase, TypeOnionOptionsEnableSimple {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

@@ -5,7 +5,7 @@ export type TypeBroadcastOnSet = boolean | 'del';
 
 export interface ICacheMemRecord {}
 
-export interface IDecoratorCacheMemOptions extends TypeOnionOptionsEnableSimple {
+export interface IDecoratorCacheMemOptionsBase {
   max?: number;
   ttl?: number;
   updateAgeOnGet?: boolean;
@@ -14,6 +14,7 @@ export interface IDecoratorCacheMemOptions extends TypeOnionOptionsEnableSimple 
   disableInstance?: boolean;
   disableTransactionCompensate?: boolean;
 }
+export interface IDecoratorCacheMemOptions extends IDecoratorCacheMemOptionsBase, TypeOnionOptionsEnableSimple {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

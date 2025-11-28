@@ -1,8 +1,7 @@
 import type { OmitNever } from 'vona';
-import type { TypeBroadcastOnSet } from 'vona-module-a-cache';
+import type { IDecoratorCacheMemOptionsBase, IDecoratorCacheRedisOptionsBase, TypeBroadcastOnSet } from 'vona-module-a-cache';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { ServiceDb } from 'vona-module-a-orm';
-import type { IRedisClientRecord } from 'vona-module-a-redis';
 
 export interface ISummerCacheRecord {}
 
@@ -22,20 +21,8 @@ export type TSummerCacheMode = 'all' | 'mem' | 'redis';
 export interface IDecoratorSummerCacheOptions extends TypeOnionOptionsEnableSimple {
   preset?: TSummerCachePreset;
   mode?: TSummerCacheMode;
-  mem?: {
-    max?: number;
-    ttl?: number;
-    updateAgeOnGet?: boolean;
-    updateAgeOnHas?: boolean;
-    broadcastOnSet?: TypeBroadcastOnSet;
-    disableInstance?: boolean;
-  };
-  redis?: {
-    ttl?: number;
-    updateAgeOnGet?: boolean;
-    client?: keyof IRedisClientRecord;
-    disableInstance?: boolean;
-  };
+  mem?: IDecoratorCacheMemOptionsBase;
+  redis?: IDecoratorCacheRedisOptionsBase;
   ignoreNull?: boolean;
   emptyArrayAsNull?: boolean;
 }
@@ -50,6 +37,7 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   force?: boolean;
   updateAgeOnGet?: boolean;
   broadcastOnSet?: TypeBroadcastOnSet;
+  disableTransactionCompensate?: boolean;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
   mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
 }
