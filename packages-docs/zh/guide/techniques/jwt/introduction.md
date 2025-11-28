@@ -2,7 +2,7 @@
 
 VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了强大而灵活的 JWT 
 
-## App Config配置
+## App Config
 
 可以在 App Config 中进行 JWT 配置：
 

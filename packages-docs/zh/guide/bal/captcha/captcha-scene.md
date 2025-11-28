@@ -45,7 +45,7 @@ export class CaptchaSceneSimple extends BeanBase {}
 |false|禁用 Provider|
 |object|Provider 参数|
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置 Captcha Scene 参数
 

@@ -89,9 +89,9 @@ class MiddlewareSystemLogger {
 }
 ```
 
-### 4. App config配置
+### 4. App Config
 
-可以在 App config 中配置中间件参数
+可以在 App Config 中配置中间件参数
 
 `src/backend/config/config/config.ts`
 

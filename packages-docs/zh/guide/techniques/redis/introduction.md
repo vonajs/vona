@@ -2,7 +2,7 @@
 
 VonaJS 基于[ioredis](https://github.com/redis/node-redis)提供了强大而灵活的 Redis 客户端
 
-## App Config配置
+## App Config
 
 可以在 App Config 中进行 Redis 配置：
 

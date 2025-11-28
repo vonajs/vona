@@ -67,7 +67,7 @@ export class StartupLog {}
   - `true`: 使用系统默认的 debounce 时间
   - `number(ms)`: 指定具体的 debounce 时间
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置启动项参数
 

@@ -119,9 +119,9 @@ class ControllerStudent {
 }
 ```
 
-### 5. App config配置
+### 5. App Config
 
-可以在 App config 中配置 Zod Refine 参数
+可以在 App Config 中配置 Zod Refine 参数
 
 `src/backend/config/config/config.ts`
 

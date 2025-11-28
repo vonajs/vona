@@ -155,7 +155,7 @@ class EntityStudent {
 }
 ```
 
-### 5. App Config配置
+### 5. App Config
 
 可以在 App Config 中配置 Serializer Transform 参数
 

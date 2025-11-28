@@ -57,7 +57,7 @@ class CacheRedisStudent {}
 |disableTransactionCompensate|boolean|false|是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性|
 |client|string|'cache'|缓存所使用的Redis Client|
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置 Redis 缓存参数
 

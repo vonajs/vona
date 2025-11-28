@@ -97,9 +97,9 @@ class ControllerStudent {
 
 - 在使用守卫时直接提供参数值即可
 
-### 5. App config配置
+### 5. App Config
 
-可以在 App config 中配置守卫参数
+可以在 App Config 中配置守卫参数
 
 `src/backend/config/config/config.ts`
 

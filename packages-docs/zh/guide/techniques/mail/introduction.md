@@ -7,7 +7,7 @@ VonaJS 基于[Nodemailer](https://github.com/nodemailer/nodemailer)实现了发�
 1. 基于队列发送邮件
 2. 提供了`test`服务，方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器
 
-## App Config配置
+## App Config
 
 可以在 App Config 中进行邮件配置：
 

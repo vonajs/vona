@@ -59,7 +59,7 @@ class ScheduleLog {}
 |dbInfo.clientName|string|默认使用系统默认的数据源名称|
 |transaction|boolean|是否启用数据库事务，默认为`false`|
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置定时任务参数
 

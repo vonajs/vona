@@ -38,7 +38,7 @@ config.logger = {
 LOGGER_DIR = /new/path
 ```
 
-## App Config配置
+## App Config
 
 可以在 App Config 中进行日志配置：
 

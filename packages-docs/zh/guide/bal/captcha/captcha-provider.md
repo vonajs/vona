@@ -67,7 +67,7 @@ class CaptchaProviderImageText {
 - `create`: 创建 captcha 数据
 - `verify`: 校验 captcha token 是否正确
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置 Captcha Provider 参数
 

@@ -156,9 +156,9 @@ class ModelUser {}
 |cache.modelsClearedBy|当其他Models的Query缓存数据被清除时，可以同时清除当前Model的Query缓存|
 |cache.modelsClearedByFn|当其他Models的Query缓存数据被清除时，可以执行自定义函数，从而实现定制化的清除逻辑。比如在`动态分表`的场景中，就可以使用此机制清除不同数据表的Query缓存|
 
-### 2. App config配置
+### 2. App Config
 
-可以在 App config 中配置 Model options
+可以在 App Config 中配置 Model options
 
 `src/backend/config/config/config.dev.ts`
 

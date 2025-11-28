@@ -117,7 +117,7 @@ config.instance = {
 
 当用户访问后端 API 时，后端会自动根据规则获取当前实例名，然后根据实例名获取实例信息
 
-### 1. App Config配置
+### 1. App Config
 
 `src/backend/config/config/config.ts`
 

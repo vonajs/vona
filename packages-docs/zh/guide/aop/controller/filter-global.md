@@ -106,9 +106,9 @@ class ControllerStudent {
 
 - 在使用过滤器时直接提供参数值即可
 
-### 5. App config配置
+### 5. App Config
 
-可以在 App config 中配置过滤器参数
+可以在 App Config 中配置过滤器参数
 
 `src/backend/config/config/config.ts`
 

@@ -470,9 +470,9 @@ class ControllerBook {}
 |enable|是否启用Controller|
 |meta|根据条件启用Controller|
 
-### 3. App config配置
+### 3. App Config
 
-可以在 App config 中配置 Controller options
+可以在 App Config 中配置 Controller options
 
 比如，在默认情况下，`http://localhost:7102/swagger`只能在`test`/`dev`环境有效。如果要让 Swagger 在`prod`环境也能访问，那么，可以在 App config 中进行配置
 

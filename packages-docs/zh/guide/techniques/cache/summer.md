@@ -118,7 +118,7 @@ class SummerCacheStudent {}
 |mem|仅使用Mem 缓存|
 |redis|仅使用Redis 缓存|
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置 Summer 缓存参数
 

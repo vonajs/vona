@@ -57,9 +57,9 @@ class MetaIndex {}
 
 - `$tableColumns`：构造类型化的表名和字段名
 
-## App config配置
+## App Config
 
-可以在 App config 中配置字段索引
+可以在 App Config 中配置字段索引
 
 `src/backend/config/config/config.dev.ts`
 

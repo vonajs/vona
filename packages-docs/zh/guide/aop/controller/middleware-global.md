@@ -100,7 +100,7 @@ class ControllerStudent {
 
 - 在使用中间件时直接提供参数值即可
 
-### 5. App Config配置
+### 5. App Config
 
 可以在 App Config 中配置中间件参数
 

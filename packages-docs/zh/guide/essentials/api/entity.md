@@ -326,9 +326,9 @@ class EntityStudent {}
 class EntityStudent {}
 ```
 
-## App config配置
+## App Config
 
-可以在 App config 中配置 Entity options
+可以在 App Config 中配置 Entity options
 
 `src/backend/config/config/config.dev.ts`
 

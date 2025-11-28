@@ -84,7 +84,7 @@ class BroadcastEcho {}
 - `instance`: VonaJS 支持`多实例/多租户`。如果广播的业务逻辑需要操作实例数据，则需要确保实例已初始化
 - `transaction`: 如果设置为 true，系统会自动将广播的`execute`方法放入数据库事务当中
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置广播参数
 

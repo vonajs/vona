@@ -131,7 +131,7 @@ class QueueAdd {}
 
 - `options.redlock`: 当`concurrency=false`时，需要使用分布式锁实现任务的串行执行。系统提供了默认的分布式锁，也可以自行提供
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置队列参数
 

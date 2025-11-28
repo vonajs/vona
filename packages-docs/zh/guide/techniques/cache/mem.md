@@ -62,7 +62,7 @@ class CacheMemStudent {}
 |disableInstance|boolean|false|是否禁用实例隔离。在默认情况下，多实例之间的缓存是隔离的|
 |disableTransactionCompensate|boolean|false|是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性|
 
-## App Config配置
+## App Config
 
 可以在 App Config 中配置 Mem 缓存参数
 

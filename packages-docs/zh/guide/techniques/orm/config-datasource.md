@@ -1,6 +1,6 @@
 # 数据源配置
 
-## App Config配置
+## App Config
 
 可以在 App Config 中进行数据源配置：
 

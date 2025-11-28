@@ -185,9 +185,9 @@ class ServiceStudent {
   - 如果为空，则从 entity 获取表名
   - 可以指定函数，实现动态分表的能力
 
-## App config配置
+## App Config
 
-可以在 App config 中配置 Model options
+可以在 App Config 中配置 Model options
 
 `src/backend/config/config/config.dev.ts`
 
