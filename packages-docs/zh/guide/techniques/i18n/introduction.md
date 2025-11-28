@@ -157,7 +157,7 @@ config.modules = {
 
 系统按以下次序，依次判断当前 locale
 
-`queryField` > `user locale` > `headerField` > `cookieField` > `Header: Accept-Language` > `defaultLocale`
+`queryField` > `headerField` > `cookieField` > `user locale` > `Header: Accept-Language` > `defaultLocale`
 
 ## 添加新语言
 

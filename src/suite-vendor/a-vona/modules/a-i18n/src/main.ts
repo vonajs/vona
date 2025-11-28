@@ -1,5 +1,5 @@
 import type { IModuleMain, VonaContext } from 'vona';
-import type { I18nConfig } from './config/config.ts';
+import type { I18nConfigLocale } from './config/config.ts';
 import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.ts';
 
@@ -11,7 +11,7 @@ export class Main extends BeanSimple implements IModuleMain {
   async moduleLoaded() {
     const options = this.app.scope(__ThisModule__).config;
     this.app.context.__getLocale = function (this: VonaContext) {
-      return __getLocale(this, options);
+      return __getLocale(this, options.locale);
     };
     this.app.context.__setLocale = function (this: VonaContext, locale: string) {
       return __setLocale(this, locale);
@@ -26,7 +26,7 @@ function __setLocale(ctx: VonaContext, locale: string) {
   ctx[SymbolLocaleOrigin] = 'set';
 }
 
-function __getLocale(ctx: VonaContext, options: I18nConfig) {
+function __getLocale(ctx: VonaContext, options: I18nConfigLocale) {
   if (ctx[SymbolLocale]) {
     return ctx[SymbolLocale];
   }
@@ -48,22 +48,22 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
     localeOrigin = 'query';
   }
 
-  // 2. user
-  if (!locale && ctx.user) {
-    locale = ctx.user.locale;
-    localeOrigin = 'user';
-  }
-
-  // 3. Header
+  // 2. Header
   if (!locale && headerField) {
     locale = ctx.request.headers[headerField] as string;
     localeOrigin = 'header';
   }
 
-  // 4. Cookie
+  // 3. Cookie
   if (!locale && cookieField) {
     locale = cookieLocale;
     localeOrigin = 'cookie';
+  }
+
+  // 4. user
+  if (!locale && ctx.user) {
+    locale = ctx.user.locale;
+    localeOrigin = 'user';
   }
 
   // 5. Header: Accept
@@ -121,7 +121,7 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
   return locale;
 }
 
-function updateCookie(ctx: VonaContext, options: I18nConfig, locale: string) {
+function updateCookie(ctx: VonaContext, options: I18nConfigLocale, locale: string) {
   const cookieOptions = {
     // make sure brower javascript can read the cookie
     httpOnly: false,
