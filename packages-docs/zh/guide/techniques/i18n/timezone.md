@@ -3,7 +3,7 @@
 ## 1. 获取当前Timezone
 
 ``` typescript
-const locale = this.ctx.tz;
+const tz = this.ctx.tz;
 ```
 
 ## 2. 设置当前Timezone
@@ -26,23 +26,25 @@ I18n 是由模块 a-i18n 提供的核心能力，可以在 App config 中修改�
 // modules
 config.modules = {
   'a-i18n': {
-    defaultLocale: 'en-us',
-    queryField: 'x-vona-locale',
-    headerField: 'x-vona-locale',
-    cookieField: 'locale',
+    tz: {
+      defaultTz: undefined,
+      queryField: 'x-vona-tz',
+      headerField: 'x-vona-tz',
+      cookieField: 'tz',
+    },
   },
 };
 ```
 
 |名称|说明|
 |--|--|
-|defaultLocale|Default locale|
-|queryField|从request query中获取当前locale，query key默认为`x-vona-locale`|
-|headerField|从request header中获取当前locale，header key默认为`x-vona-locale`|
-|cookieField|从request cookie中获取当前locale，cookie key默认为`locale`|
+|defaultTz|Default timezone|
+|queryField|从request query中获取当前timezone，query key默认为`x-vona-tz`|
+|headerField|从request header中获取当前timezone，header key默认为`x-vona-tz`|
+|cookieField|从request cookie中获取当前timezone，cookie key默认为`tz`|
 
 ### 2. 规则次序
 
-系统按以下次序，依次判断当前 locale
+系统按以下次序，依次判断当前 timezone
 
-`queryField` > `headerField` > `cookieField` > `user locale` > `Header: Accept-Language` > `defaultLocale`
+`queryField` > `headerField` > `cookieField` > `user tz` > `defaultTz` > `undefined(system timezone)`

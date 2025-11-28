@@ -139,10 +139,12 @@ I18n is the core capability provided by the module `a-i18n`. The module configur
 // modules
 config.modules = {
   'a-i18n': {
-    defaultLocale: 'en-us',
-    queryField: 'x-vona-locale',
-    headerField: 'x-vona-locale',
-    cookieField: 'locale',
+    locale: {
+      defaultLocale: 'en-us',
+      queryField: 'x-vona-locale',
+      headerField: 'x-vona-locale',
+      cookieField: 'locale',
+    },
   },
 };
 ```
