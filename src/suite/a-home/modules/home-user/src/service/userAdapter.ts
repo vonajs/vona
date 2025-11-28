@@ -15,7 +15,7 @@ export class ServiceUserAdapter extends BeanBase implements IUserAdapter {
       email: profile.emails?.[0].value,
       avatar: profile.photos?.[0].value,
       locale: profile.locale || this.ctx.locale,
-      // tz: this.ctx.tz,
+      tz: this.ctx.tz,
     };
   }
 

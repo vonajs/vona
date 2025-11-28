@@ -1,6 +1,6 @@
 import type { IModuleMain, VonaContext } from 'vona';
 import type { I18nConfigLocale, I18nConfigTz } from './config/config.ts';
-import { DateTime } from 'luxon';
+import { Settings } from 'luxon';
 import { BeanSimple } from 'vona';
 import { __ThisModule__ } from './.metadata/this.ts';
 
@@ -181,7 +181,7 @@ function __getTz(ctx: VonaContext, options: I18nConfigTz) {
 
   // all missing, set it to system
   if (!tz) {
-    tz = DateTime.now().zoneName;
+    tz = Settings.defaultZone.name;
     tzOrigin = 'system';
   }
 
