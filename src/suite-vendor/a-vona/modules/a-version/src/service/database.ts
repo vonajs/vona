@@ -2,12 +2,12 @@ import type { IInstanceRecord } from 'vona';
 import type { ConfigInstanceBase } from 'vona-module-a-instance';
 import type { IDatabaseClientRecord, ServiceDatabaseClient } from 'vona-module-a-orm';
 import chalk from 'chalk';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 const __separator = '-';
-const __timeFormat = `YYYYMMDD${__separator}HHmmss`;
+const __timeFormat = `yyyyMMdd${__separator}HHmmss`;
 
 @Service()
 export class ServiceDatabase extends BeanBase {
@@ -57,7 +57,7 @@ export class ServiceDatabase extends BeanBase {
   private async __createDatabase(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
     const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     // create
-    const databaseName = `${databasePrefix}${moment().format(__timeFormat)}`;
+    const databaseName = `${databasePrefix}${DateTime.now().toFormat(__timeFormat)}`;
     await client.connection.schema.createDatabase(databaseName);
     return databaseName;
   }

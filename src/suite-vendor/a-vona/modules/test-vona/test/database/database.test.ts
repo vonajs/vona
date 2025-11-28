@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { app } from 'vona-mock';
 
 describe('database.test.ts', () => {
@@ -100,7 +100,7 @@ describe('database.test.ts', () => {
       const entityTest = scopeTest.entity.test;
       const modelTest = scopeTest.model.testDynamicTable;
       // tableName
-      const tableName = `${entityTest.$table}_${moment().format('YYYYMMDD')}`;
+      const tableName = `${entityTest.$table}_${DateTime.now().toFormat('yyyyMMdd')}`;
       // create table
       await app.bean.model.createTable(tableName, table => {
         table.basicFields();
