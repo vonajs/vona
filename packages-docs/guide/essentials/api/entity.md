@@ -285,7 +285,21 @@ class EntityStudent {}
 
 * Support I18n
 
-(Creating language resources: omitted)
+English: `src/module/demo-student/src/config/locale/en-us.ts`
+
+``` typescript
+export default {
+  Student: 'Student',
+};
+```
+
+Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
+
+``` typescript
+export default {
+  Student: '学生',
+};
+```
 
 ``` typescript
 import { $locale } from '../.metadata/index.ts';
