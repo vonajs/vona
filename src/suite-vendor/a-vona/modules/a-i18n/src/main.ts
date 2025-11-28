@@ -48,19 +48,25 @@ function __getLocale(ctx: VonaContext, options: I18nConfig) {
     localeOrigin = 'query';
   }
 
-  // 2. Header
+  // 2. user
+  if (!locale && ctx.user) {
+    locale = ctx.user.locale;
+    localeOrigin = 'user';
+  }
+
+  // 3. Header
   if (!locale && headerField) {
     locale = ctx.request.headers[headerField] as string;
     localeOrigin = 'header';
   }
 
-  // 3. Cookie
+  // 4. Cookie
   if (!locale && cookieField) {
     locale = cookieLocale;
     localeOrigin = 'cookie';
   }
 
-  // 4. Header: Accept
+  // 5. Header: Accept
   if (!locale) {
     // Accept-Language: zh-CN,zh;q=0.5
     // Accept-Language: zh-CN
