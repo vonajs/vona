@@ -212,6 +212,7 @@ await this.scope.summerCache.student.get('2', {
   ignoreNull: false,
   mode: 'all',
   force: false,
+  disableTransactionCompensate: false,
   db: this.ctx.db,
   enable: true,
   get: async (_key?: string) => { return null; },
@@ -227,6 +228,7 @@ await this.scope.summerCache.student.get('2', {
 |ignoreNull|boolean|是否忽略`null`值|
 |mode|'all' \| 'mem' \| 'redis'|缓存模式|
 |force|boolean|强制读取新值|
+|disableTransactionCompensate|boolean|是否禁止事务补偿|
 |db|ServiceDb|在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象|
 |enable|boolean|是否禁用Summer缓存|
 |get|Function|覆盖`getNative`方法|
