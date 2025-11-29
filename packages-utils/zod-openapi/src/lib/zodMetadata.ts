@@ -8,7 +8,8 @@ export class ZodMetadata {
     return (Metadata as any).unwrapUntil(schema, typeName);
   }
 
-  static unwrapChained(schema: z.ZodType): z.ZodType {
+  static unwrapChained(schema?: z.ZodType): z.ZodType | undefined {
+    if (!schema) return;
     return Metadata.unwrapChained(schema);
   }
 
@@ -38,7 +39,8 @@ export class ZodMetadata {
     return Metadata.getRefId(zodSchema);
   }
 
-  static getFieldSchema(zodSchema: z.ZodObject<any> | z.ZodUnion<any>, key: string): z.ZodType {
+  static getFieldSchema(zodSchema: z.ZodType | undefined, key: string): z.ZodType | undefined {
+    if (!zodSchema) return;
     let schema;
     if (zodSchema.def.type === 'object') {
       schema = zodSchema;
