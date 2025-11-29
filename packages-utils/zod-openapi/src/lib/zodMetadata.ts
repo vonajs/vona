@@ -38,7 +38,15 @@ export class ZodMetadata {
     return Metadata.getRefId(zodSchema);
   }
 
-  static getFieldSchema(schema: any, key: string): z.ZodType {
+  static getFieldSchema(zodSchema: z.ZodObject<any> | z.ZodUnion<any>, key: string): z.ZodType {
+    let schema;
+    if (zodSchema.def.type === 'object') {
+      schema = zodSchema;
+    } else if (zodSchema.def.type === 'union') {
+      schema = (zodSchema as z.ZodUnion<any>).def.options.find(item => item.def.type === 'object');
+    } else {
+      throw new Error('invalid zod schema');
+    }
     return schema.shape[key];
   }
 
