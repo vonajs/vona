@@ -35,7 +35,7 @@ export function config(_app: VonaApplication) {
       headerField: $customKey('x-vona-locale'),
       cookieField: 'locale',
       localeAlias: {},
-      writeCookie: true,
+      writeCookie: false,
       cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
     },
     tz: {
@@ -43,7 +43,7 @@ export function config(_app: VonaApplication) {
       queryField: $customKey('x-vona-tz'),
       headerField: $customKey('x-vona-tz'),
       cookieField: 'tz',
-      writeCookie: true,
+      writeCookie: false,
       cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,
     },
   } as I18nConfig;
