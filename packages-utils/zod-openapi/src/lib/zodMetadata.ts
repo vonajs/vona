@@ -8,9 +8,9 @@ export class ZodMetadata {
     return (Metadata as any).unwrapUntil(schema, typeName);
   }
 
-  static unwrapChained(schema?: z.ZodType): z.ZodType | undefined {
-    if (!schema) return;
-    return Metadata.unwrapChained(schema);
+  static unwrapChained<T extends z.ZodType | undefined>(schema?: T): T extends undefined ? undefined : z.ZodType {
+    if (!schema) return undefined as any;
+    return Metadata.unwrapChained(schema) as any;
   }
 
   static getDefaultValue<T>(zodSchema: z.ZodType): T | undefined {
