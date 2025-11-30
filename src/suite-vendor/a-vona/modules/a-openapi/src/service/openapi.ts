@@ -54,6 +54,15 @@ export class ServiceOpenapi extends BeanBase {
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
     // serializerTransforms
     delete schema.serializerTransforms;
+    // filter
+    if (schema.filter) {
+      const filterCapabilities = schema.filter.capabilities;
+      if (filterCapabilities) {
+        schema.filter = { capabilities: filterCapabilities };
+      } else {
+        delete schema.filter;
+      }
+    }
     // schema
     this._translateStrings(schema, ['title', 'description']);
     if (generateJsonScene === 'api' && !schema.description && schema.title) {
