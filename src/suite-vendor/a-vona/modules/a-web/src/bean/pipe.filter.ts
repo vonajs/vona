@@ -1,8 +1,7 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
-
-import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
+import type { IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
@@ -29,16 +28,16 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     // validateSchema
     value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
     // transform
-    value = this._transform(value, options);
+    value = await this._transform(value, options);
     // ok
     return value;
   }
 
-  private _transform(value: any, options: IPipeOptionsFilter) {
+  private async _transform(value: any, options: IPipeOptionsFilter) {
     // 1. system: columns/where/orders/pageNo/pageSize
     const params = this._transformSystem(value);
     // 2. fields
-    this._transformFields(params, value, options);
+    await this._transformFields(params, value, options);
     // 3. system: orders
     this._transformOrders(params, options);
     // ok
@@ -77,7 +76,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     if (!params.orders) return;
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema!);
-    const table = openapi?.query?.table;
+    const table = openapi?.filter?.table;
     // loop
     for (const order of params.orders) {
       const field = order[0] as string;
@@ -87,11 +86,11 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
       const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, field));
       if (fieldSchema) {
         const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
-        if (openapi?.query?.table) {
-          tableCurrent = openapi?.query?.table;
+        if (openapi?.filter?.table) {
+          tableCurrent = openapi?.filter?.table;
         }
-        if (openapi?.query?.originalName) {
-          fieldCurrent = openapi?.query?.originalName;
+        if (openapi?.filter?.originalName) {
+          fieldCurrent = openapi?.filter?.originalName;
         }
       }
       cast(order)[0] = tableCurrent ? `${tableCurrent}.${fieldCurrent}` : fieldCurrent;
@@ -159,10 +158,10 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     }
   }
 
-  private _transformFields(params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
+  private async _transformFields(params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
     // loop
     for (const key in value) {
-      this._transformField(key, value[key], params, value, options);
+      await this._transformField(key, value[key], params, value, options);
     }
   }
 }
