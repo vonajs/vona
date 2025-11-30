@@ -133,12 +133,12 @@ declare module 'vona-module-a-web' {
 /** startup: end */
 /** filterTransform: begin */
 export * from '../bean/filterTransform.base.ts';
-
-import { type IDecoratorFilterTransformOptions } from 'vona-module-a-web';
+import type { IFilterTransformOptionsBase } from '../bean/filterTransform.base.ts';
+import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IFilterTransformRecord {
-      'a-web:base': IDecoratorFilterTransformOptions;
+      'a-web:base': IFilterTransformOptionsBase;
     }
 
   
@@ -153,7 +153,7 @@ declare module 'vona-module-a-web' {
           export interface FilterTransformBase {
             get $beanFullName(): 'a-web.filterTransform.base';
             get $onionName(): 'a-web:base';
-            get $onionOptions(): IDecoratorFilterTransformOptions;
+            get $onionOptions(): IFilterTransformOptionsBase;
           } 
 }
 /** filterTransform: end */
