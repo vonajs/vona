@@ -6,7 +6,22 @@ export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOp
 
 @FilterTransform<IFilterTransformOptionsBase>()
 export class SerializerTransformBase extends BeanBase implements IFilterTransformWhere {
-  async where(_info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<boolean> {
-    return false;
+  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<boolean> {
+    const { params, fullName, value, schema, openapi } = info;
+    let op = openapi?.filter?.op;
+    if (!op) {
+      const typeName = schema?.type;
+      if (typeName === 'string') {
+        op = '_includesI_';
+      } else {
+        op = '_eq_';
+      }
+    }
+    if (op === '_eq_') {
+      params.where![fullName] = value;
+    } else {
+      params.where![fullName] = { [op]: value };
+    }
+    return true;
   }
 }

@@ -104,15 +104,16 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     if (!fieldSchema) return;
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
+    if (!openapi?.filter?.capabilities?.where) return;
     // name
-    const originalName = openapi?.query?.originalName ?? key;
+    const originalName = openapi?.filter?.originalName ?? key;
     let fullName: string;
     // joins
     let joinInfo;
-    if (openapi?.query?.joinOn) {
-      const joinType = openapi.query.joinType ?? 'innerJoin';
-      const joinTable = openapi.query.table;
-      const joinOn = openapi.query.joinOn;
+    if (openapi?.filter?.joinOn) {
+      const joinType = openapi.filter.joinType ?? 'innerJoin';
+      const joinTable = openapi.filter.table;
+      const joinOn = openapi.filter.joinOn;
       joinInfo = [joinType, joinTable, joinOn];
       fullName = `${joinTable}.${originalName}`;
     } else {
