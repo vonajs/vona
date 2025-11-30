@@ -320,15 +320,5 @@
       "}"
     ],
     "description": "record.jwtclient"
-  },
-  "findManyFilterTransform": {
-    "scope": "typescript,typescriptreact",
-    "prefix": "findmanyfiltertransform",
-    "body": [
-      "findManyFilterTransform(_info: IPipeOptionsFilterTransformInfo): boolean | undefined {",
-      "  $0return undefined;"
-      "}"
-    ],
-    "description": "findManyFilterTransform"
   }
 }
