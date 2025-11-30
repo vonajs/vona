@@ -7,19 +7,20 @@ import { EntityPost } from '../entity/post.ts';
 export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsPostQuery>({
-  openapi: { query: { table: $tableName(EntityPost) } },
+  openapi: { filter: { table: $tableName(EntityPost) } },
 })
 export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {
   @Api.field(v.optional())
   title?: string;
 
-  @Api.field(v.optional(), v.openapi({
-    query: {
+  @Api.field(
+    v.filter({
       table: 'testVonaUser',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
       op: '_eqI_',
-    },
-  }))
+    }),
+    v.optional(),
+  )
   userName?: string;
 }

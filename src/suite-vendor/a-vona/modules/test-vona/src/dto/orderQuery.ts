@@ -18,7 +18,6 @@ export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(
     v.filter({
-      capabilities: { where: true },
       table: $tableName(EntityUser),
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],

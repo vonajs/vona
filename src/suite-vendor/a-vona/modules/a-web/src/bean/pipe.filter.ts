@@ -103,7 +103,6 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     if (!fieldSchema) return;
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
-    if (!openapi?.filter?.capabilities?.where) return;
     // name
     const originalName = openapi?.filter?.originalName ?? key;
     let fullName: string;
@@ -121,7 +120,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     // check where
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
     // filter transform
-    const [transformName, transformOptions] = openapi.filter.transform ?? ['a-web:base', undefined];
+    const [transformName, transformOptions] = openapi?.filter?.transform ?? ['a-web:base', undefined];
     const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(
       transformName as keyof IFilterTransformRecord,
       transformOptions,
