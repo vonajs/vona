@@ -151,23 +151,23 @@ export class DtoOrderQuery
 }
 ```
 
-## 自定义Query Transform
+## 自定义Filter Transform
 
 对于自定义字段，Vona ORM 提供了内置的 Transform 规则。比如：
 
 - `orderNo`是 string 类型，系统自动转换为条件语句`'orderNo': { _includesI_: 'some input' }`
 - `userName`也是 string 类型，系统自动转换为条件语句`'name': { _includesI_: 'some input' }`
 
-为了支持更复杂的业务需求，可以提供自定义 Query Transform
+为了支持更复杂的业务需求，可以提供自定义 Filter Transform
 
 ### 1. 约定名称
 
-比如，我们在 Controller Order 的`findAll`方法中使用 Query。那么，只需在当前 Controller 中提供`findAllQueryTransform`即可
+比如，我们在 Controller Order 的`findAll`方法中使用 Query。那么，只需在当前 Controller 中提供`findAllFilterTransform`即可
 
 ``` diff
 @Controller
 class ControllerOrder {
-+  findAllQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++  findAllFilterTransform(_info: IPipeOptionsFilterTransformInfo): boolean | undefined {
 +    return undefined;
 +  }
 
@@ -185,7 +185,7 @@ class ControllerOrder {
 
 ``` typescript
 class ControllerOrder {
-  findAllQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+  findAllFilterTransform(info: IPipeOptionsFilterTransformInfo): boolean | undefined {
     if (info.key === 'userName') {
       info.params.where[info.fullName] = info.value;
       return true;
@@ -195,9 +195,9 @@ class ControllerOrder {
 }  
 ```
 
-### 2. Query Transform返回值
+### 2. Filter Transform返回值
 
-Query Transform 返回值如下：
+Filter Transform 返回值如下：
 
 |名称|说明|
 |--|--|
@@ -207,11 +207,11 @@ Query Transform 返回值如下：
 
 ### 2. 自定义名称
 
-我们也可以为`Query Transform`提供自定义名称，比如：`myCustomQueryTransform`
+我们也可以为`Filter Transform`提供自定义名称，比如：`myCustomFilterTransform`
 
 ``` diff
 class ControllerOrder {
-+ myCustomQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++ myCustomFilterTransform(info: IPipeOptionsFilterTransformInfo): boolean | undefined {
 +   if (info.key === 'userName') {
 +     info.params.where[info.fullName] = info.value;
 +     return true;
@@ -222,21 +222,21 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, 'myCustomQueryTransform') params: IQueryParams<ModelOrder>,
++   @Arg.queryPro(DtoOrderQuery, 'myCustomFilterTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
 }
 ```
 
-- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，传入参数`'myCustomQueryTransform'`
+- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，传入参数`'myCustomFilterTransform'`
 
 ### 3. 自定义函数
 
 也可以直接提供自定义函数：
 
 ``` diff
-+ function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++ function myCustomFilterTransform(_ctx: VonaContext, info: IPipeOptionsFilterTransformInfo): boolean | undefined {
 +   if (info.key === 'userName') {
 +     info.params.where[info.fullName] = info.value;
 +     return true;
@@ -248,7 +248,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, myCustomQueryTransform) params: IQueryParams<ModelOrder>,
++   @Arg.queryPro(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }

@@ -1,30 +1,30 @@
 /* eslint-disable */
 /** pipe: begin */
-export * from '../bean/pipe.query.ts';
+export * from '../bean/pipe.filter.ts';
 export * from '../bean/pipe.valid.ts';
-import type { IPipeOptionsQuery } from '../bean/pipe.query.ts';
+import type { IPipeOptionsFilter } from '../bean/pipe.filter.ts';
 import type { IPipeOptionsValid } from '../bean/pipe.valid.ts';
 import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
   
 export interface IPipeRecordLocal {
-  'a-web:query': IPipeOptionsQuery;
+  'a-web:filter': IPipeOptionsFilter;
 'a-web:valid': IPipeOptionsValid;
 }
 
 }
 declare module 'vona-module-a-web' {
   
-        export interface PipeQuery {
+        export interface PipeFilter {
           /** @internal */
           get scope(): ScopeModuleAWeb;
         }
 
-          export interface PipeQuery {
-            get $beanFullName(): 'a-web.pipe.query';
-            get $onionName(): 'a-web:query';
-            get $onionOptions(): IPipeOptionsQuery;
+          export interface PipeFilter {
+            get $beanFullName(): 'a-web.pipe.filter';
+            get $onionName(): 'a-web:filter';
+            get $onionOptions(): IPipeOptionsFilter;
           }
 
         export interface PipeValid {

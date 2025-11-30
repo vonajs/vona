@@ -151,23 +151,23 @@ export class DtoOrderQuery
 }
 ```
 
-## Custom Query Transform
+## Custom Filter Transform
 
 For custom fields, Vona ORM provides built-in Transform rules. For example:
 
 - `orderNo` is a string, so the system automatically converts it to the conditional statement `'orderNo': { _includesI_: 'some input' }`
 - `userName` is also a string, so the system automatically converts it to the conditional statement `'name': { _includesI_: 'some input' }`
 
-To support more complex business needs, you can provide a custom Query Transform
+To support more complex business needs, you can provide a custom Filter Transform
 
 ### 1. Convention Name
 
-For example, we use Query in the `findAll` method of the `Order` controller. Then, we only need to provide `findAllQueryTransform` in the current controller
+For example, we use Query in the `findAll` method of the `Order` controller. Then, we only need to provide `findAllFilterTransform` in the current controller
 
 ``` diff
 @Controller
 class ControllerOrder {
-+  findAllQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++  findAllFilterTransform(_info: IPipeOptionsFilterTransformInfo): boolean | undefined {
 +    return undefined;
 +  }
 
@@ -185,7 +185,7 @@ If you need to convert `userName` into a conditional statement `'name': 'some in
 
 ``` typescript
 class ControllerOrder {
-  findAllQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+  findAllFilterTransform(info: IPipeOptionsFilterTransformInfo): boolean | undefined {
     if (info.key === 'userName') {
       info.params.where[info.fullName] = info.value;
       return true;
@@ -195,9 +195,9 @@ class ControllerOrder {
 }  
 ```
 
-### 2. Query Transform Return Value
+### 2. Filter Transform Return Value
 
-Query Transform returns the following values:
+Filter Transform returns the following values:
 
 |Name|Description|
 |--|--|
@@ -207,11 +207,11 @@ Query Transform returns the following values:
 
 ### 2. Custom Name
 
-We can also provide a custom name for `Query Transform`, such as: `myCustomQueryTransform`
+We can also provide a custom name for `Filter Transform`, such as: `myCustomFilterTransform`
 
 ``` diff
 class ControllerOrder {
-+ myCustomQueryTransform(info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++ myCustomFilterTransform(info: IPipeOptionsFilterTransformInfo): boolean | undefined {
 +   if (info.key === 'userName') {
 +     info.params.where[info.fullName] = info.value;
 +     return true;
@@ -222,21 +222,21 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, 'myCustomQueryTransform') params: IQueryParams<ModelOrder>,
++   @Arg.queryPro(DtoOrderQuery, 'myCustomFilterTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
 }
 ```
 
-- `@Arg.queryPro`: This Pipe transforms the Query parameter, passing in the parameter `'myCustomQueryTransform'`
+- `@Arg.queryPro`: This Pipe transforms the Query parameter, passing in the parameter `'myCustomFilterTransform'`
 
 ### 3. Custom Function
 
 You can also provide a custom function directly:
 
 ``` diff
-+ function myCustomQueryTransform(_ctx: VonaContext, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
++ function myCustomFilterTransform(_ctx: VonaContext, info: IPipeOptionsFilterTransformInfo): boolean | undefined {
 +   if (info.key === 'userName') {
 +     info.params.where[info.fullName] = info.value;
 +     return true;
@@ -248,7 +248,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, myCustomQueryTransform) params: IQueryParams<ModelOrder>,
++   @Arg.queryPro(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
