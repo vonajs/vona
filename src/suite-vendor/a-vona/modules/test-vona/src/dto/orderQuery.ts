@@ -16,13 +16,15 @@ export interface IDtoOptionsOrderQuery extends IDecoratorDtoOptions {}
 })
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
-  @Api.field(v.optional(), v.openapi({
-    filter: {
+  @Api.field(
+    v.filter({
+      capabilities: { where: true },
       table: $tableName(EntityUser),
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
-    },
-  }))
+    }),
+    v.optional(),
+  )
   userName?: string;
 }

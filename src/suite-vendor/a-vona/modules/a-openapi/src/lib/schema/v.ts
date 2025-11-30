@@ -1,3 +1,4 @@
+import { schemaFilter, schemaFilterTransform } from './v/filter.ts';
 import { schemaCaptcha, schemaEmail, schemaIPv4, schemaIPv6, schemaLowercase, schemaMax, schemaMin, schemaRegex, schemaTableIdentity, schemaToLowerCase, schemaToUpperCase, schemaTrim, schemaUppercase, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import { schemaSerializerCustom, schemaSerializerExclude, schemaSerializerGetter, schemaSerializerReplace, schemaSerializerTransform } from './v/serializer.ts';
@@ -34,6 +35,8 @@ export const v = {
   serializerReplace: schemaSerializerReplace,
   serializerGetter: schemaSerializerGetter,
   serializerCustom: schemaSerializerCustom,
+  filter: schemaFilter,
+  filterTransform: schemaFilterTransform,
   // openapi
   openapi: schemaOpenapi,
   title: schemaTitle,
