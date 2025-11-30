@@ -22,6 +22,11 @@
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
         "boilerplate": "cli/controller/boilerplate",
         "metadataCustom": "cli/controller/metadata/generate.ts"
+      },
+      "filterTransform": {
+        "optionsGlobalInterfaceName": "IDecoratorFilterTransformOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-web",
+        "boilerplate": "cli/filterTransform/boilerplate"
       }
     }
   },

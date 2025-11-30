@@ -1,7 +1,6 @@
 import type { TableIdentity } from 'table-identity';
-import type { VonaContext } from 'vona';
 import type { IQueryParams } from 'vona-module-a-orm';
-import type { IDecoratorControllerOptions, IPipeOptionsFilterTransformInfo } from 'vona-module-a-web';
+import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { ModelOrder } from '../model/order.ts';
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapi';
@@ -14,14 +13,6 @@ import { DtoOrderResultPage } from '../dto/orderResultPage.ts';
 import { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 
 export interface IControllerOptionsOrder extends IDecoratorControllerOptions {}
-
-function myCustomFilterTransform(_ctx: VonaContext, info: IPipeOptionsFilterTransformInfo): boolean | undefined {
-  if (info.key === 'userName') {
-    info.params.where[info.fullName] = info.value;
-    return true;
-  }
-  return undefined;
-}
 
 @Controller<IControllerOptionsOrder>('order')
 export class ControllerOrder extends BeanBase {
@@ -39,7 +30,7 @@ export class ControllerOrder extends BeanBase {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-    @Arg.filter(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
+    @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,

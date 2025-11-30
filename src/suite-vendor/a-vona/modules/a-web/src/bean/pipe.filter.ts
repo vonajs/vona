@@ -1,4 +1,3 @@
-import type { VonaContext } from 'vona';
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { IQueryParams } from 'vona-module-a-orm';
@@ -13,9 +12,7 @@ export type TypePipeFilterData = unknown;
 
 export type TypePipeFilterResult = TypePipeFilterData;
 
-export interface IPipeOptionsFilter extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
-  transformFn?: TypePipeOptionsFilterTransform | string;
-}
+export interface IPipeOptionsFilter extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
 export type TypeQueryParamsPatch = IQueryParams & { where: {} };
 export interface IPipeOptionsFilterTransformInfo {
@@ -29,8 +26,6 @@ export interface IPipeOptionsFilterTransformInfo {
   schema?: z.ZodType;
   openapi?: ISchemaObjectExtensionField;
 }
-export type TypePipeOptionsFilterTransform =
-  (ctx: VonaContext, info: IPipeOptionsFilterTransformInfo) => boolean | undefined;
 
 const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 
@@ -182,28 +177,6 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     // loop
     for (const key in value) {
       this._transformField(key, value[key], params, value, options);
-    }
-    // custom transform
-    this._performTransformFn(options, { params, query: value, options } as IPipeOptionsFilterTransformInfo);
-  }
-
-  private _performTransformFn(options: IPipeOptionsFilter, info: IPipeOptionsFilterTransformInfo): boolean | undefined {
-    if (options.transformFn) {
-      if (typeof options.transformFn === 'string') {
-        const controller = this.ctx.getControllerBean();
-        if (!controller[options.transformFn]) {
-          throw new Error(`transformFn not found: ${this.ctx.getControllerBeanFullName()}`);
-        }
-        return controller[options.transformFn](info);
-      } else {
-        return options.transformFn(this.ctx, info);
-      }
-    } else {
-      const controller = this.ctx.getControllerBean();
-      const transformFn = `${String(this.ctx.getHandlerName())}FilterTransform`;
-      if (controller[transformFn]) {
-        return controller[transformFn](info);
-      }
     }
   }
 }
