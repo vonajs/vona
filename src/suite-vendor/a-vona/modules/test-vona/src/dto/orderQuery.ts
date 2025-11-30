@@ -9,7 +9,7 @@ export interface IDtoOptionsOrderQuery extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsOrderQuery>({
   openapi: {
-    query: {
+    filter: {
       table: $tableName(EntityOrder),
     },
   },

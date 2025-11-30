@@ -5,7 +5,16 @@ export interface ISchemaObjectExtensionFieldFilterJoin {
   table: keyof ITableRecord;
   on: [string, string];
 }
+
+export interface ISchemaObjectExtensionFieldFilterCapabilities {
+  where?: boolean;
+  filter?: boolean;
+  order?: boolean;
+  group?: boolean;
+}
+
 export interface ISchemaObjectExtensionFieldFilter {
+  capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;
   table?: keyof ITableRecord;
   joinType?: IModelSelectParamsJoinType;
   joinOn?: [string, string];
