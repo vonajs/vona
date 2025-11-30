@@ -5,7 +5,7 @@ import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
 import type { IComponentRecord } from './component.ts';
-import type { ISchemaObjectExtensionFieldQuery } from './query.ts';
+import type { ISchemaObjectExtensionFieldFilter } from './filter.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
@@ -20,7 +20,7 @@ export interface ISchemaObjectExtensionFieldRest {
 
 export interface ISchemaObjectExtensionField {
   rest?: ISchemaObjectExtensionFieldRest;
-  filter?: ISchemaObjectExtensionFieldQuery;
+  filter?: ISchemaObjectExtensionFieldFilter;
   captcha?: ISchemaObjectExtensionFieldCaptcha;
 }
 
