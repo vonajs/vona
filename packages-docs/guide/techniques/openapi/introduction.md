@@ -56,9 +56,9 @@ For example, `findOne(@Arg.query('id', v.default(3), v.optional()) id: number)`.
 
 ![](../../../assets/img/openapi/openapi-4.png)
 
-## 4. Decorator: @Arg.queryPro
+## 4. Decorator: @Arg.filter
 
-The decorator `@Arg.queryPro` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
+The decorator `@Arg.filter` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
 
 - See:
   - [$Dto.query/DtoQueryBase](../orm/dto/query.md)

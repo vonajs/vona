@@ -42,14 +42,14 @@ class ControllerOrder extends BeanBase {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
 }
 ```
 
-- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，需要传入参数`DtoOrderQuery`
+- `@Arg.filter`：此 Pipe 对 Query 参数进行 transform，需要传入参数`DtoOrderQuery`
 - `IQueryParams`: Pipe 对 Query 参数进行 transform 后的数据类型为`IQueryParams`，需要传入泛型参数`ModelOrder`，从而与`model.order.select`方法的参数类型相匹配
 
 基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
@@ -174,7 +174,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-    @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
+    @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
@@ -222,14 +222,14 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, 'myCustomFilterTransform') params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQuery, 'myCustomFilterTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
 }
 ```
 
-- `@Arg.queryPro`：此 Pipe 对 Query 参数进行 transform，传入参数`'myCustomFilterTransform'`
+- `@Arg.filter`：此 Pipe 对 Query 参数进行 transform，传入参数`'myCustomFilterTransform'`
 
 ### 3. 自定义函数
 
@@ -248,7 +248,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }

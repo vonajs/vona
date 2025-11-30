@@ -43,7 +43,7 @@ export class ControllerPost extends BeanBase {
   @Web.get('findManyEcho')
   @Api.body(DtoPostQueryRes)
   @Passport.public()
-  findManyEcho(@Arg.queryPro(DtoPostQuery) params: IQueryParams<ModelPost>) {
+  findManyEcho(@Arg.filter(DtoPostQuery) params: IQueryParams<ModelPost>) {
     return params;
   }
 
@@ -54,7 +54,7 @@ export class ControllerPost extends BeanBase {
   @Web.get('findMany')
   @Api.body(DtoPostQueryRes)
   @Passport.public()
-  async findMany(@Arg.queryPro(DtoPostQuery) params: IQueryParams<ModelPost>) {
+  async findMany(@Arg.filter(DtoPostQuery) params: IQueryParams<ModelPost>) {
     return await this.scope.service.post.findMany(params);
   }
 }

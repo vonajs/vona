@@ -68,9 +68,9 @@ class ControllerStudent3 {
 }
 ```
 
-## 4. 装饰器：@Arg.queryPro
+## 4. 装饰器：@Arg.filter
 
-装饰器`@Arg.queryPro`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
+装饰器`@Arg.filter`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
 
 - 参见:
   - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
@@ -133,7 +133,7 @@ export class DtoUserLazy {
 |@Arg.files|从Request Upload中取值|
 |@Arg.file|从Request Upload中取值|
 |@Arg.user|取得当前用户|
-|@Arg.queryPro|从Request Query中取值|
+|@Arg.filter|从Request Query中取值|
 
 ## 工具清单
 

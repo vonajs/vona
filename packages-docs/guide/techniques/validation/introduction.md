@@ -68,9 +68,9 @@ class ControllerStudent3 {
 }
 ```
 
-## 4. Decorator: @Arg.queryPro
+## 4. Decorator: @Arg.filter
 
-The decorator `@Arg.queryPro` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
+The decorator `@Arg.filter` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
 
 - See:
   - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
@@ -133,7 +133,7 @@ export class DtoUserLazy {
 |@Arg.files|Gets the value from the request upload|
 |@Arg.file|Gets the value from the request upload|
 |@Arg.user|Gets the current user|
-|@Arg.queryPro|Gets the value from the request query|
+|@Arg.filter|Gets the value from the request query|
 
 ## Tool List
 

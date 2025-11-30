@@ -56,9 +56,9 @@ Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
 
 ![](../../../assets/img/openapi/openapi-4.png)
 
-## 4. 装饰器：@Arg.queryPro
+## 4. 装饰器：@Arg.filter
 
-装饰器`@Arg.queryPro`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
+装饰器`@Arg.filter`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
 
 - 参见:
   - [$Dto.query/DtoQueryBase](../orm/dto/query.md)

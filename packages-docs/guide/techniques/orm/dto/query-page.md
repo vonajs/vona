@@ -46,14 +46,14 @@ class ControllerOrder extends BeanBase {
   @Web.get('findMany')
   @Api.body(DtoOrderResultPage)
   async findMany(
-+   @Arg.queryPro(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResultPage> {
     return this.scope.model.order.selectAndCount(params);
   }
 }
 ```
 
-- `@Arg.queryPro`: This Pipe transforms the Query parameter and needs to pass in the parameter `DtoOrderQueryPage`
+- `@Arg.filter`: This Pipe transforms the Query parameter and needs to pass in the parameter `DtoOrderQueryPage`
 - `IQueryParams`: The data type obtained by Pipe transforming the Query parameter is `IQueryParams`, and the generic parameter `ModelOrder` needs to be passed in to match the parameter type of the `model.order.selectAndCount` method
 
 The automatically generated Swagger/Openapi is as follows:

@@ -42,14 +42,14 @@ class ControllerOrder extends BeanBase {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
 }
 ```
 
-- `@Arg.queryPro`: This Pipe transforms the Query parameter and needs to pass in the parameter `DtoOrderQuery`
+- `@Arg.filter`: This Pipe transforms the Query parameter and needs to pass in the parameter `DtoOrderQuery`
 - `IQueryParams`: The data type obtained by Pipe transforming the Query parameter is `IQueryParams`, and the generic parameter `ModelOrder` needs to be passed in to match the parameter type of the `model.order.select` method
 
 The automatically generated Swagger/Openapi is as follows:
@@ -174,7 +174,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-    @Arg.queryPro(DtoOrderQuery) params: IQueryParams<ModelOrder>,
+    @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
@@ -222,14 +222,14 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, 'myCustomFilterTransform') params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQuery, 'myCustomFilterTransform') params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }
 }
 ```
 
-- `@Arg.queryPro`: This Pipe transforms the Query parameter, passing in the parameter `'myCustomFilterTransform'`
+- `@Arg.filter`: This Pipe transforms the Query parameter, passing in the parameter `'myCustomFilterTransform'`
 
 ### 3. Custom Function
 
@@ -248,7 +248,7 @@ class ControllerOrder {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-+   @Arg.queryPro(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
++   @Arg.filter(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select(params);
   }

@@ -39,7 +39,7 @@ class ControllerOrder extends BeanBase {
   @Web.get('findMany')
 + @Api.body(DtoOrderResultPage)
   async findMany(
-    @Arg.queryPro(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
+    @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
 + ): Promise<DtoOrderResultPage> {
     return this.scope.model.order.selectAndCount(params);
   }

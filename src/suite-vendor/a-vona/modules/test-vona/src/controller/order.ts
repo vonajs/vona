@@ -39,7 +39,7 @@ export class ControllerOrder extends BeanBase {
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
   async findAll(
-    @Arg.queryPro(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
+    @Arg.filter(DtoOrderQuery, myCustomFilterTransform) params: IQueryParams<ModelOrder>,
   ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,
@@ -52,7 +52,7 @@ export class ControllerOrder extends BeanBase {
   @Web.get('findMany')
   @Api.body(DtoOrderResultPage)
   async findMany(
-    @Arg.queryPro(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
+    @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
   ) {
     return this.scope.model.order.selectAndCount({
       ...params,
