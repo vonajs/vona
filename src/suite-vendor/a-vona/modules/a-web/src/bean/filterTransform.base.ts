@@ -2,7 +2,9 @@ import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOpti
 import { BeanBase } from 'vona';
 import { FilterTransform } from '../lib/decorator/filterTransform.ts';
 
-export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOptions {}
+export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOptions {
+  test: boolean;
+}
 
 @FilterTransform<IFilterTransformOptionsBase>()
 export class FilterTransformBase extends BeanBase implements IFilterTransformWhere {

@@ -22,7 +22,6 @@ export class DtoOrderQuery
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
-      transform: ['a-web:base', {}],
     },
   }))
   userName?: string;
