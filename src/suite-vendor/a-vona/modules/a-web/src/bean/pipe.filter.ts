@@ -121,7 +121,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     // check where
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
     // filter transform
-    const [transformName, transformOptions] = openapi.filter.transform ?? ['a-web:base', {}];
+    const [transformName, transformOptions] = openapi.filter.transform ?? ['a-web:base', undefined];
     const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(
       transformName as keyof IFilterTransformRecord,
       transformOptions,

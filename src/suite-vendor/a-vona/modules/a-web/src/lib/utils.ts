@@ -1,4 +1,6 @@
 import type { IApiPathRecord } from '../types/controller.ts';
+import type { TypeSchemaObjectExtensionFieldFilterTransform } from '../types/filter.ts';
+import type { IFilterTransformRecord } from '../types/filterTransform.ts';
 import { combineParamsAndQuery } from '@cabloy/utils';
 
 export function $apiPath<K extends keyof IApiPathRecord>(path: K): K {
@@ -9,5 +11,9 @@ export function $apiPathAndCombineParamsAndQuery<K extends keyof IApiPathRecord>
   return combineParamsAndQuery(path, options);
 }
 
-export function $makeFilterTransform(): {
+export function $makeFilterTransform<T extends keyof IFilterTransformRecord>(
+  filterTransformName: T,
+  options?: Partial<IFilterTransformRecord[T]>,
+): TypeSchemaObjectExtensionFieldFilterTransform {
+  return [filterTransformName, options];
 };

@@ -14,7 +14,7 @@ export interface ISchemaObjectExtensionFieldFilterCapabilities {
   // group?: boolean;
 }
 
-export type TypeSchemaObjectExtensionFieldFilterTransform = [keyof IFilterTransformRecord, IDecoratorFilterTransformOptions];
+export type TypeSchemaObjectExtensionFieldFilterTransform = [keyof IFilterTransformRecord, IDecoratorFilterTransformOptions | undefined];
 
 export interface ISchemaObjectExtensionFieldFilter {
   capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;
