@@ -9,19 +9,19 @@ import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
-export type TypePipeQueryData = unknown;
+export type TypePipeFilterData = unknown;
 
-export type TypePipeQueryResult = TypePipeQueryData;
+export type TypePipeFilterResult = TypePipeFilterData;
 
-export interface IPipeOptionsQuery extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
-  transformFn?: TypePipeOptionsQueryTransform | string;
+export interface IPipeOptionsFilter extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {
+  transformFn?: TypePipeOptionsFilterTransform | string;
 }
 
 export type TypeQueryParamsPatch = IQueryParams & { where: {} };
-export interface IPipeOptionsQueryTransformInfo {
+export interface IPipeOptionsFilterTransformInfo {
   params: TypeQueryParamsPatch;
   query: any;
-  options: IPipeOptionsQuery;
+  options: IPipeOptionsFilter;
   originalName: string;
   fullName: string;
   key?: string;
@@ -29,21 +29,21 @@ export interface IPipeOptionsQueryTransformInfo {
   schema?: z.ZodType;
   openapi?: ISchemaObjectExtensionField;
 }
-export type TypePipeOptionsQueryTransform =
-  (ctx: VonaContext, info: IPipeOptionsQueryTransformInfo) => boolean | undefined;
+export type TypePipeOptionsFilterTransform =
+  (ctx: VonaContext, info: IPipeOptionsFilterTransformInfo) => boolean | undefined;
 
 const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 
-@Pipe<IPipeOptionsQuery>({
+@Pipe<IPipeOptionsFilter>({
   // ValidatorOptions
   disableErrorMessages: false,
   errorHttpStatusCode: 400,
   loose: false,
   strict: false,
 })
-export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryData, TypePipeQueryResult> {
-  async transform(value: TypePipeQueryData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsQuery): Promise<TypePipeQueryResult> {
-    if (!options.schema) throw new Error(`should specify the schema of pipeQuery: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
+export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilterData, TypePipeFilterResult> {
+  async transform(value: TypePipeFilterData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsFilter): Promise<TypePipeFilterResult> {
+    if (!options.schema) throw new Error(`should specify the schema of pipeFilter: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
     // validateSchema
     value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
     // transform
@@ -52,7 +52,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryD
     return value;
   }
 
-  private _transform(value: any, options: IPipeOptionsQuery) {
+  private _transform(value: any, options: IPipeOptionsFilter) {
     // 1. system: columns/where/orders/pageNo/pageSize
     const params = this._transformSystem(value);
     // 2. fields
@@ -91,7 +91,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryD
     return params;
   }
 
-  private _transformOrders(params: TypeQueryParamsPatch, options: IPipeOptionsQuery) {
+  private _transformOrders(params: TypeQueryParamsPatch, options: IPipeOptionsFilter) {
     if (!params.orders) return;
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema!);
@@ -116,7 +116,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryD
     }
   }
 
-  private _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsQuery) {
+  private _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
     if (__FieldsSystem.includes(key)) return;
     const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, key));
     if (!fieldSchema) return;
@@ -178,16 +178,16 @@ export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryD
     }
   }
 
-  private _transformFields(params: TypeQueryParamsPatch, value: any, options: IPipeOptionsQuery) {
+  private _transformFields(params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
     // loop
     for (const key in value) {
       this._transformField(key, value[key], params, value, options);
     }
     // custom transform
-    this._performTransformFn(options, { params, query: value, options } as IPipeOptionsQueryTransformInfo);
+    this._performTransformFn(options, { params, query: value, options } as IPipeOptionsFilterTransformInfo);
   }
 
-  private _performTransformFn(options: IPipeOptionsQuery, info: IPipeOptionsQueryTransformInfo): boolean | undefined {
+  private _performTransformFn(options: IPipeOptionsFilter, info: IPipeOptionsFilterTransformInfo): boolean | undefined {
     if (options.transformFn) {
       if (typeof options.transformFn === 'string') {
         const controller = this.ctx.getControllerBean();
@@ -200,7 +200,7 @@ export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryD
       }
     } else {
       const controller = this.ctx.getControllerBean();
-      const transformFn = `${String(this.ctx.getHandlerName())}QueryTransform`;
+      const transformFn = `${String(this.ctx.getHandlerName())}FilterTransform`;
       if (controller[transformFn]) {
         return controller[transformFn](info);
       }
@@ -208,4 +208,4 @@ export class PipeQuery extends BeanBase implements IPipeTransform<TypePipeQueryD
   }
 }
 
-export const ArgQueryPro = createArgumentPipe('a-web:query');
+export const ArgFilterPro = createArgumentPipe('a-web:filter');

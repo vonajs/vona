@@ -321,14 +321,14 @@
     ],
     "description": "record.jwtclient"
   },
-  "findManyQueryTransform": {
+  "findManyFilterTransform": {
     "scope": "typescript,typescriptreact",
-    "prefix": "findmanyquerytransform",
+    "prefix": "findmanyfiltertransform",
     "body": [
-      "findManyQueryTransform(_info: IPipeOptionsQueryTransformInfo): boolean | undefined {",
+      "findManyFilterTransform(_info: IPipeOptionsFilterTransformInfo): boolean | undefined {",
       "  $0return undefined;"
       "}"
     ],
-    "description": "findManyQueryTransform"
+    "description": "findManyFilterTransform"
   }
 }
