@@ -1,27 +1,12 @@
-import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from 'vona-module-a-serialization';
+import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOptionsFilterTransformInfo } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { SerializerTransform } from 'vona-module-a-serialization';
+import { FilterTransform } from 'vona-module-a-web';
 
-export type TypeSerializerTransform<%=argv.beanNameCapitalize%>Value = unknown;
+export interface IFilterTransformOptions<%=argv.beanNameCapitalize%> extends IDecoratorFilterTransformOptions {}
 
-export type TypeSerializerTransform<%=argv.beanNameCapitalize%>Data = unknown;
-
-export type TypeSerializerTransform<%=argv.beanNameCapitalize%>Result = TypeSerializerTransform<%=argv.beanNameCapitalize%>Value;
-
-export interface ISerializerTransformOptions<%=argv.beanNameCapitalize%> extends IDecoratorSerializerTransformOptions {}
-
-@SerializerTransform<ISerializerTransformOptions<%=argv.beanNameCapitalize%>>()
-export class SerializerTransform<%=argv.beanNameCapitalize%> extends BeanBase
-  implements ISerializerTransform<
-    TypeSerializerTransform<%=argv.beanNameCapitalize%>Value,
-    TypeSerializerTransform<%=argv.beanNameCapitalize%>Data,
-    TypeSerializerTransform<%=argv.beanNameCapitalize%>Result
-  > {
-  async transform(
-    value: TypeSerializerTransform<%=argv.beanNameCapitalize%>Value,
-    _data: TypeSerializerTransform<%=argv.beanNameCapitalize%>Data,
-    _options: ISerializerTransformOptions<%=argv.beanNameCapitalize%>,
-  ): Promise<TypeSerializerTransform<%=argv.beanNameCapitalize%>Result> {
-    return value;
+@FilterTransform<IFilterTransformOptions<%=argv.beanNameCapitalize%>>()
+export class SerializerTransform<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterTransformWhere {
+  async where(_info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptions<%=argv.beanNameCapitalize%>): Promise<boolean> {
+    return false;
   }
 }

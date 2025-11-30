@@ -1,8 +1,8 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
-import type { IQueryParams } from 'vona-module-a-orm';
 import type { ValidatorOptions } from 'vona-module-a-validation';
-import type z from 'zod';
+
+import type { TypeQueryParamsPatch } from '../types/filterTransform.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, cast } from 'vona';
@@ -13,19 +13,6 @@ export type TypePipeFilterData = unknown;
 export type TypePipeFilterResult = TypePipeFilterData;
 
 export interface IPipeOptionsFilter extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
-
-export type TypeQueryParamsPatch = IQueryParams & { where: {} };
-export interface IPipeOptionsFilterTransformInfo {
-  params: TypeQueryParamsPatch;
-  query: any;
-  options: IPipeOptionsFilter;
-  originalName: string;
-  fullName: string;
-  key?: string;
-  value?: any;
-  schema?: z.ZodType;
-  openapi?: ISchemaObjectExtensionField;
-}
 
 const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 

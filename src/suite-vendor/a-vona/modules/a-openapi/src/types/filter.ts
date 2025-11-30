@@ -8,9 +8,9 @@ export interface ISchemaObjectExtensionFieldFilterJoin {
 
 export interface ISchemaObjectExtensionFieldFilterCapabilities {
   where?: boolean;
-  filter?: boolean;
+  // filter?: boolean;
   order?: boolean;
-  group?: boolean;
+  // group?: boolean;
 }
 
 export interface ISchemaObjectExtensionFieldFilter {
