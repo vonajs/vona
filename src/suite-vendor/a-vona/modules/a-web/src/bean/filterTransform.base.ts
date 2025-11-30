@@ -1,6 +1,6 @@
-import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOptionsFilterTransformInfo } from 'vona-module-a-web';
+import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOptionsFilterTransformInfo } from '../types/filterTransform.ts';
 import { BeanBase } from 'vona';
-import { FilterTransform } from 'vona-module-a-web';
+import { FilterTransform } from '../lib/decorator/filterTransform.ts';
 
 export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOptions {}
 
