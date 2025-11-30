@@ -1,7 +1,7 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
-import type { IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
+import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
@@ -122,8 +122,8 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
     // filter transform
     const [transformName, transformOptions] = openapi.filter.transform ?? ['a-web:base', {}];
-    const transformOptions2 = this.bean.onion.serializerTransform.getOnionOptionsDynamic(
-      transformName as any,
+    const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(
+      transformName as keyof IFilterTransformRecord,
       transformOptions,
     );
     // execute

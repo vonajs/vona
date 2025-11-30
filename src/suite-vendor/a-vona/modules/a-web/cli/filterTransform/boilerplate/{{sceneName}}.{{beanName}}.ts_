@@ -5,7 +5,7 @@ import { FilterTransform } from 'vona-module-a-web';
 export interface IFilterTransformOptions<%=argv.beanNameCapitalize%> extends IDecoratorFilterTransformOptions {}
 
 @FilterTransform<IFilterTransformOptions<%=argv.beanNameCapitalize%>>()
-export class SerializerTransform<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterTransformWhere {
+export class FilterTransform<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterTransformWhere {
   async where(_info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptions<%=argv.beanNameCapitalize%>): Promise<boolean> {
     return false;
   }

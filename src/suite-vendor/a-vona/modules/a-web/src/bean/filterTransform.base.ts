@@ -5,7 +5,7 @@ import { FilterTransform } from '../lib/decorator/filterTransform.ts';
 export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOptions {}
 
 @FilterTransform<IFilterTransformOptionsBase>()
-export class SerializerTransformBase extends BeanBase implements IFilterTransformWhere {
+export class FilterTransformBase extends BeanBase implements IFilterTransformWhere {
   async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<boolean> {
     const { params, fullName, value, schema, openapi } = info;
     let op = openapi?.filter?.op;
