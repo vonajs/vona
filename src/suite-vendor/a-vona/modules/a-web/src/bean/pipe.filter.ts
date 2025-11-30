@@ -2,10 +2,10 @@ import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransfo
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 
-import type { TypeQueryParamsPatch } from '../types/filterTransform.ts';
+import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
-import { BeanBase, cast } from 'vona';
+import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 export type TypePipeFilterData = unknown;
@@ -98,7 +98,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     }
   }
 
-  private _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
+  private async _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
     if (__FieldsSystem.includes(key)) return;
     const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, key));
     if (!fieldSchema) return;
@@ -121,8 +121,22 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     }
     // check where
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
-    // custom transform
-    const resTransform = this._performTransformFn(options, {
+    // filter transform
+    const [transformName, transformOptions] = openapi.filter.transform ?? ['a-web:base', {}];
+    const transformOptions2 = this.bean.onion.serializerTransform.getOnionOptionsDynamic(
+      transformName as any,
+      transformOptions,
+    );
+    // execute
+    const beanFullName = beanFullNameFromOnionName(transformName, 'filterTransform');
+    const beanInstance = this.bean._getBean(beanFullName) as unknown as IFilterTransformWhere;
+    if (!beanInstance) {
+      throw new Error(`filterTransform bean not found: ${beanFullName}`);
+    }
+    if (!beanInstance.where) {
+      throw new Error(`filterTransform.where not found: ${beanFullName}`);
+    }
+    const info = {
       params,
       query: value,
       options,
@@ -132,32 +146,16 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
       value: fieldValue,
       schema: fieldSchema,
       openapi,
-    });
-    // res: ignore
-    if (resTransform === false) return;
-    // join
-    if (joinInfo) {
-      if (!params.joins) params.joins = [];
-      if (params.joins.findIndex(item => item[1] === joinInfo.joinTable) === -1) {
-        params.joins.push(joinInfo);
+    };
+    const resTransform = await beanInstance.where(info, transformOptions2);
+    if (resTransform === true) {
+      // join
+      if (joinInfo) {
+        if (!params.joins) params.joins = [];
+        if (params.joins.findIndex(item => item[1] === joinInfo.joinTable) === -1) {
+          params.joins.push(joinInfo);
+        }
       }
-    }
-    // res: done
-    if (resTransform === true) return;
-    // default transform
-    let op = openapi?.query?.op;
-    if (!op) {
-      const typeName = fieldSchema.type;
-      if (typeName === 'string') {
-        op = '_includesI_';
-      } else {
-        op = '_eq_';
-      }
-    }
-    if (op === '_eq_') {
-      params.where![fullName] = fieldValue;
-    } else {
-      params.where![fullName] = { [op]: fieldValue };
     }
   }
 
