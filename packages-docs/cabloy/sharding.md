@@ -99,7 +99,7 @@ To address this issue, the module automatically provides a mechanism: when a use
 
 ### Modifying the Expiration Time
 
-The name of the `two-layer cache` is `a-datasharding:datasourceWrite`. You can modify the expiration time in the App config:
+The name of the `two-layer cache` is `a-datasharding:datasourceWrite`. You can modify the expiration time in the App Config:
 
 `src/backend/config/config/config.ts`
 
@@ -153,7 +153,7 @@ config.modules = {
 
 ### Modifying the cache-double-delete delay time
 
-The system uses a queue task to perform `cache-double-delete`. The queue name is `a-orm:doubleDelete`. You can modify the `cache-double-delete` delay time in App config:
+The system uses a queue task to perform `cache-double-delete`. The queue name is `a-orm:doubleDelete`. You can modify the `cache-double-delete` delay time in App Config:
 
 `src/backend/config/config/config.ts`
 

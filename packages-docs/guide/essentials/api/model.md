@@ -280,7 +280,7 @@ DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
 class ModelBook {}
 ```
 
-* Specify the datasource in App config
+* Specify the datasource in App Config
 
 `src/backend/config/config/config.dev.ts`
 
@@ -363,7 +363,7 @@ class ModelStudent {}
 - mem: `mem cache` configuration
 - redis: `redis cache` configuration
 
-### 3. Configure cache in App config
+### 3. Configure cache in App Config
 
 `src/backend/config/config/config.dev.ts`
 

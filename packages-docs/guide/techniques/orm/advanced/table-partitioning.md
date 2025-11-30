@@ -176,9 +176,9 @@ class ServiceOrder {
 }  
 ```
 
-## Using Table-partitioning: App config
+## Using Table-partitioning: App Config
 
-You can also configure Model options in App config:
+You can also configure Model options in App Config:
 
 `src/backend/config/config/config.ts`
 

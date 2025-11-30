@@ -120,9 +120,9 @@ class ControllerStudent {
 }
 ```
 
-### 5. App config
+### 5. App Config
 
-Zod Transform parameters can be configured in App config
+Zod Transform parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
@@ -139,4 +139,4 @@ config.onions = {
 
 ### 6. Parameter precedence
 
-`Specify parameters when using` > `App config` > `Default values`
+`Specify parameters when using` > `App Config` > `Default values`

@@ -474,7 +474,7 @@ class ControllerBook {}
 
 可以在 App Config 中配置 Controller options
 
-比如，在默认情况下，`http://localhost:7102/swagger`只能在`test`/`dev`环境有效。如果要让 Swagger 在`prod`环境也能访问，那么，可以在 App config 中进行配置
+比如，在默认情况下，`http://localhost:7102/swagger`只能在`test`/`dev`环境有效。如果要让 Swagger 在`prod`环境也能访问，那么，可以在 App Config 中进行配置
 
 `src/backend/config/config/config.prod.ts`
 
@@ -493,9 +493,9 @@ config.onions = {
 
 ### 4. actions
 
-在 Controller options 中提供 actions 选项，从而允许我们在 App config 中配置任何 Controller 中的 Action options
+在 Controller options 中提供 actions 选项，从而允许我们在 App Config 中配置任何 Controller 中的 Action options
 
-比如，我们在 App config 中设置`ControllerBook`类中的`findOne`的 action options：
+比如，我们在 App Config 中设置`ControllerBook`类中的`findOne`的 action options：
 
 `src/backend/config/config/config.dev.ts`
 

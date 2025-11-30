@@ -131,7 +131,7 @@ When a user accesses the backend API, the backend will automatically obtain the 
 
 ### 1. Module Configuration
 
-I18n is the core capability provided by the module `a-i18n`. The module configuration can be modified in the App config:
+I18n is the core capability provided by the module `a-i18n`. The module configuration can be modified in the App Config:
 
 `src/backend/config/config/config.ts`
 

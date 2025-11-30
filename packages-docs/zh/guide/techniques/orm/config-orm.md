@@ -1,6 +1,6 @@
 # ORM配置
 
-Vona ORM 是由模块`a-orm`提供的核心能力，可以在 App config 中修改模块的配置：
+Vona ORM 是由模块`a-orm`提供的核心能力，可以在 App Config 中修改模块的配置：
 
 `src/backend/config/config/config.ts`
 

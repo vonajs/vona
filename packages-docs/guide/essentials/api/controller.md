@@ -474,7 +474,7 @@ class ControllerBook {}
 
 Controller options can be configured in App Config
 
-For example, by default, `http://localhost:7102/swagger` is only valid in `test`/`dev` environment. If you want to make Swagger accessible in the `prod` environment, you can configure it in App config
+For example, by default, `http://localhost:7102/swagger` is only valid in `test`/`dev` environment. If you want to make Swagger accessible in the `prod` environment, you can configure it in App Config
 
 `src/backend/config/config/config.prod.ts`
 
@@ -493,9 +493,9 @@ config.onions = {
 
 ### 4. actions
 
-Provide `actions` options in Controller options, allowing us to configure the Action options in any Controller in App config
+Provide `actions` options in Controller options, allowing us to configure the Action options in any Controller in App Config
 
-For example, we set the action options of `findOne` in the `ControllerBook` class in App config:
+For example, we set the action options of `findOne` in the `ControllerBook` class in App Config:
 
 `src/backend/config/config/config.dev.ts`
 

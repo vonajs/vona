@@ -174,4 +174,4 @@ config.onions = {
 
 ### 6. Parameters precedence
 
-`Specify parameters when using` > `App config` > `Default values`
+`Specify parameters when using` > `App Config` > `Default values`

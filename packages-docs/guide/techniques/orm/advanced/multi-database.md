@@ -219,9 +219,9 @@ class ServiceOrder {
 }  
 ```
 
-## Using Datasources: App config
+## Using Datasources: App Config
 
-You can also configure Model options in App config:
+You can also configure Model options in App Config:
 
 `src/backend/config/config/config.ts`
 

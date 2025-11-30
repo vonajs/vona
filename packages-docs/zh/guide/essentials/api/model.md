@@ -280,7 +280,7 @@ DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
 class ModelBook {}
 ```
 
-* 在 App config 中指定数据源
+* 在 App Config 中指定数据源
 
 `src/backend/config/config/config.dev.ts`
 
@@ -362,7 +362,7 @@ class ModelStudent {}
 - mem：`mem缓存`配置
 - redis：`redis缓存`配置
 
-### 3. 在 App config 中配置缓存
+### 3. 在 App Config 中配置缓存
 
 `src/backend/config/config/config.dev.ts`
 

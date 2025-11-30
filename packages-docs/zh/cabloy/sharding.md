@@ -99,7 +99,7 @@ config.modules = {
 
 ### 修改过期时间
 
-`二级缓存`的名称是`a-datasharding:datasourceWrite`，可以在 App config 中修改过期时间：
+`二级缓存`的名称是`a-datasharding:datasourceWrite`，可以在 App Config 中修改过期时间：
 
 `src/backend/config/config/config.ts`
 
@@ -153,7 +153,7 @@ config.modules = {
 
 ### 修改缓存双删延迟时间
 
-系统采用队列任务执行缓存双删，`队列`名称是`a-orm:doubleDelete`，可以在 App config 中修改缓存双删延迟时间：
+系统采用队列任务执行缓存双删，`队列`名称是`a-orm:doubleDelete`，可以在 App Config 中修改缓存双删延迟时间：
 
 `src/backend/config/config/config.ts`
 

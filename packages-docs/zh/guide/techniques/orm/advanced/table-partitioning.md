@@ -178,7 +178,7 @@ class ServiceOrder {
 
 ## 使用分表：App Config配置
 
-也可以在 App config 中配置 Model options:
+也可以在 App Config 中配置 Model options:
 
 `src/backend/config/config/config.ts`
 

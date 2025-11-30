@@ -108,7 +108,7 @@ config.onions = {
 
 ### 5. 参数优先级
 
-`App config配置` > `参数缺省值`
+`App config` > `参数缺省值`
 
 ## 中间件顺序
 

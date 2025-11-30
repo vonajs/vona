@@ -1,6 +1,6 @@
 # ORM Configuration
 
-Vona ORM is a core capability provided by the `a-orm` module. You can modify the module's configuration in App config:
+Vona ORM is a core capability provided by the `a-orm` module. You can modify the module's configuration in App Config:
 
 `src/backend/config/config/config.ts`
 

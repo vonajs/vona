@@ -18,7 +18,7 @@ this.ctx.tz = 'America/New_York';
 
 ### 1. 模块配置
 
-I18n 是由模块 a-i18n 提供的核心能力，可以在 App config 中修改模块的配置：
+I18n 是由模块 a-i18n 提供的核心能力，可以在 App Config 中修改模块的配置：
 
 `src/backend/config/config/config.ts`
 

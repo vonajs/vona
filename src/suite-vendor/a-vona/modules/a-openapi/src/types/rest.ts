@@ -20,7 +20,7 @@ export interface ISchemaObjectExtensionFieldRest {
 
 export interface ISchemaObjectExtensionField {
   rest?: ISchemaObjectExtensionFieldRest;
-  query?: ISchemaObjectExtensionFieldQuery;
+  filter?: ISchemaObjectExtensionFieldQuery;
   captcha?: ISchemaObjectExtensionFieldCaptcha;
 }
 

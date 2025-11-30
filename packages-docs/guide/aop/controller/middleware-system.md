@@ -89,9 +89,9 @@ class MiddlewareSystemLogger {
 }
 ```
 
-### 4. App config
+### 4. App Config
 
-Middleware parameters can be configured in App config
+Middleware parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
@@ -108,7 +108,7 @@ config.onions = {
 
 ### 5. Parameters precedence
 
-`App config` > `Default values`
+`App Config` > `Default values`
 
 ## Middleware Order
 
