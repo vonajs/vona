@@ -8,11 +8,7 @@ import { EntityUser } from '../entity/user.ts';
 export interface IDtoOptionsOrderQuery extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsOrderQuery>({
-  openapi: {
-    filter: {
-      table: $tableName(EntityOrder),
-    },
-  },
+  openapi: { filter: { table: $tableName(EntityOrder) } },
 })
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
