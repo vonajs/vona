@@ -84,7 +84,7 @@ class DtoStudentQuery {
 
 可以为 Filter Transform 定义参数，通过参数更灵活的配置 Filter Transform 逻辑
 
-比如，为 `dateRange` Filter Transform 定义`separator`参数，用于指定时间范围的分隔符
+比如，为 `dateRange` Filter Transform 定义`separator`参数，用于指定日期范围的分隔符
 
 ### 1. 定义参数类型
 
