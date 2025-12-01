@@ -88,7 +88,7 @@ export class DtoOrderQuery
 - Automatically extract the field `remark` from `EntityOrder`
 - Add custom field `orderNo`
 
-## Openapi parameters
+## v.openapi/v.filter
 
 We can also specify OpenAPI parameters to support more capabilities
 

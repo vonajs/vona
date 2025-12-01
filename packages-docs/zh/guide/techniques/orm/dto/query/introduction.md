@@ -88,7 +88,7 @@ export class DtoOrderQuery
 - 从`EntityOrder`中自动提取字段`remark`
 - 添加自定义字段`orderNo`
 
-## Openapi参数
+## v.openapi/v.filter
 
 我们还可以指定 Openapi 参数，从而支持更多能力
 
