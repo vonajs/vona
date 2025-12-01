@@ -54,6 +54,12 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 - `IFilterTransformOptionsDateRange`: 定义 Filter Transform 参数
 - `where`: 转换查询条件
+- `this.ctx.tz`: 获取当前时区，比如`Asia/Tokyo`
 
+`where`返回值：
 
+|名称|说明|
+|--|--|
+|true|设置了查询条件|
+|false|没有设置查询条件|
 
