@@ -11,7 +11,7 @@ describe('dtoQuery.test.ts', () => {
       // findManyEcho
       const resEcho: IQueryParams = await app.bean.executor.performAction('get', '/test/vona/post/findManyEcho', {
         headers: {
-          [$customKey('x-vona-tz')]: 'Europe/Paris',
+          [$customKey('x-vona-tz')]: 'Asia/Tokyo',
         },
         query: {
           columns: 'id,title', // ['id', 'title'],
@@ -35,8 +35,8 @@ describe('dtoQuery.test.ts', () => {
         'title': { _includesI_: 'ai' },
         'testVonaUser.name': { _eqI_: 'tom' },
         'createdAt': {
-          _gte_: new Date('2025-11-30T16:00:00.000Z'),
-          _lt_: new Date('2025-12-02T16:00:00.000Z'),
+          _gte_: new Date('2025-11-30T15:00:00.000Z'),
+          _lt_: new Date('2025-12-02T15:00:00.000Z'),
         },
       });
       assert.deepEqual(resEcho.orders, [['testVonaPost.createdAt', 'desc']]);
