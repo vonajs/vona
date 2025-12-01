@@ -65,5 +65,100 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 ## 使用Filter Transform
 
-### 1. Openapi
+``` typescript
+import { v } from 'vona-module-a-openapi';
 
+class DtoStudentQuery {
+  @Api.field(
+    v.filterTransform('demo-student:dateRange'),
+    v.optional(),
+  )
+  createdAt?: string;
+}
+```
+
+- `v.filterTransform`: 此工具函数用于使用 Filter Transform，只需传入 Filter Transform 的名称
+  - `dateRange` Filter Transform 属于模块`demo-student`，因此完整的名称是`demo-student:dateRange`
+
+## Filter Transform参数
+
+可以为 Filter Transform 定义参数，通过参数更灵活的配置 Filter Transform 逻辑
+
+比如，为 `dateRange` Filter Transform 定义`separator`参数，用于指定时间范围的分隔符
+
+### 1. 定义参数类型
+
+``` diff
+export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransformOptions {
++ separator: string;
+}
+```
+
+### 2. 提供参数缺省值
+
+``` diff
+@FilterTransform<IFilterTransformOptionsDateRange>({
++ separator: '~',
+})
+```
+
+### 3. 使用参数
+
+``` diff
+export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransformOptions {
+  separator: string;
+}
+
+@FilterTransform<IFilterTransformOptionsDateRange>({
+  separator: '~',
+})
+export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
+  async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<boolean> {
+    const { params, fullName, value } = info;
+-   const [dateStartStr, dateEndStr] = value.split('~');
++   const [dateStartStr, dateEndStr] = value.split(options.separator);
+    const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
+    const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
+    params.where[fullName] = {
+      _gte_: dateStart.toJSDate(),
+      _lt_: dateEnd.toJSDate(),
+    };
+    return true;
+  }
+}
+```
+
+### 4. 使用时指定参数
+
+可以在使用时指定 Filter Transform 参数
+
+``` diff
+class DtoStudentQuery {
+  @Api.field(
++   v.filterTransform('demo-student:dateRange', { separator: ' - ' }),
+    v.optional(),
+  )
+  createdAt?: string;
+}
+```
+
+### 5. App Config
+
+可以在 App Config 中配置 Filter Transform 参数
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// onions
+config.onions = {
+  filterTransform: {
+    'demo-student:dateRange': {
+      separator: ' - ',
+    },
+  },
+};
+```
+
+### 6. 参数优先级
+
+`使用时指定参数` > `App Config` > `参数缺省值`
