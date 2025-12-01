@@ -20,7 +20,7 @@ createdAt >= '2025-11-30T15:00:00.000Z' and createdAt < '2025-12-02T15:00:00.000
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean filterTransform upper --module=demo-student
+$ vona :create:bean filterTransform dateRange --module=demo-student
 ```
 
 ### 2. 菜单命令
@@ -29,31 +29,31 @@ $ vona :create:bean filterTransform upper --module=demo-student
 右键菜单 - [模块路径]: `Vona Bean/Filter Transform`
 :::
 
-## Serializer Transform定义
+## Filter Transform定义
 
 ``` typescript
-export type TypeSerializerTransformUpperValue = string;
+import { DateTime } from 'luxon';
 
-export type TypeSerializerTransformUpperData = unknown;
+export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransformOptions {}
 
-export type TypeSerializerTransformUpperResult = TypeSerializerTransformUpperValue;
-
-export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {}
-
-@SerializerTransform<ISerializerTransformOptionsUpper>()
-export class SerializerTransformUpper extends BeanBase {
-  async transform(
-    value: TypeSerializerTransformUpperValue,
-    _data: TypeSerializerTransformUpperData,
-    _options: ISerializerTransformOptionsUpper,
-  ): Promise<TypeSerializerTransformUpperResult> {
-    return value.toUpperCase();
+@FilterTransform<IFilterTransformOptionsDateRange>()
+export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
+  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsDateRange): Promise<boolean> {
+    const { params, fullName, value } = info;
+    const [dateStartStr, dateEndStr] = value.split('~');
+    const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
+    const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
+    params.where[fullName] = {
+      _gte_: dateStart.toJSDate(),
+      _lt_: dateEnd.toJSDate(),
+    };
+    return true;
   }
 }
 ```
 
-- `TypeSerializerTransformUpperValue`: 定义字段类型
-- `TypeSerializerTransformUpperData`: 定义外层 object 对象类型
-- `TypeSerializerTransformUpperResult`: 定义结果类型
-- `transform`: 将字段值转为大写
+- `IFilterTransformOptionsDateRange`: 定义 Filter Transform 参数
+- `where`: 转换查询条件
+
+
 

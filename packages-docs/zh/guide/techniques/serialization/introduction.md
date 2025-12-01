@@ -46,6 +46,7 @@ export class SerializerTransformUpper extends BeanBase {
 - `TypeSerializerTransformUpperValue`: 定义字段类型
 - `TypeSerializerTransformUpperData`: 定义外层 object 对象类型
 - `TypeSerializerTransformUpperResult`: 定义结果类型
+- `ISerializerTransformOptionsUpper`: 定义 Serializer Transform 参数
 - `transform`: 将字段值转为大写
 
 ## 使用Serializer Transform

@@ -46,6 +46,7 @@ export class SerializerTransformUpper extends BeanBase {
 - `TypeSerializerTransformUpperValue`: Defines the field type
 - `TypeSerializerTransformUpperData`: Defines the parent object type
 - `TypeSerializerTransformUpperResult`: Defines the result type
+- `ISerializerTransformOptionsUpper`: Defines Serializer Transform parameters
 - `transform`: Converts the field value to uppercase
 
 ## Using Serializer Transform
