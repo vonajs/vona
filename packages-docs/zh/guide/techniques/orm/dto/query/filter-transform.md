@@ -63,3 +63,7 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 |true|设置了查询条件|
 |false|没有设置查询条件|
 
+## 使用Filter Transform
+
+### 1. Openapi
+

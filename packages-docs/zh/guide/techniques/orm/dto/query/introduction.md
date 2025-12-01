@@ -100,14 +100,17 @@ export class DtoOrderQuery
 @Dto()
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
-  @Api.field(v.optional(), v.openapi({
-    filter: {
-      table: $tableName(EntityUser),
-      joinType: 'innerJoin',
-      joinOn: ['userId', 'testVonaUser.id'],
-      originalName: 'name',
-    },
-  }))
+  @Api.field(
+    v.openapi({
+      filter: {
+        table: $tableName(EntityUser),
+        joinType: 'innerJoin',
+        joinOn: ['userId', 'testVonaUser.id'],
+        originalName: 'name',
+      },
+    }),
+    v.optional(),
+  )
   userName?: string;
 }
 ```
