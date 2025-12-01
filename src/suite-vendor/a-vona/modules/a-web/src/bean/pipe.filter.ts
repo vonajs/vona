@@ -99,10 +99,11 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
 
   private async _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
     if (__FieldsSystem.includes(key)) return;
-    const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, key));
-    if (!fieldSchema) return;
+    const fieldSchemaOriginal = ZodMetadata.getFieldSchema(options.schema, key);
+    if (!fieldSchemaOriginal) return;
+    const fieldSchema = ZodMetadata.unwrapChained(fieldSchemaOriginal);
     // openapi
-    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchemaOriginal);
     // name
     const originalName = openapi?.filter?.originalName ?? key;
     let fullName: string;
