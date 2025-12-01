@@ -338,7 +338,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '介绍', link: 'introduction' },
             { text: '$Dto.get', link: 'get' },
             { text: '$Dto.selectAndCount', link: 'selectAndCount' },
-            { text: '$Dto.query/DtoQueryBase', link: 'query' },
+            {
+              text: '$Dto.query/DtoQueryBase',
+              collapsed: false,
+              items: [
+                { text: '介绍', link: 'query/introduction' },
+                { text: 'Filter Transform', link: 'query/filter-transform' },
+              ],
+            },
             { text: '$Dto.queryPage/DtoQueryPageBase', link: 'query-page' },
             { text: '$Dto.create', link: 'create' },
             { text: '$Dto.update', link: 'update' },
