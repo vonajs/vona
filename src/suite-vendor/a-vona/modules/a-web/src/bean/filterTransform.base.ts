@@ -19,9 +19,9 @@ export class FilterTransformBase extends BeanBase implements IFilterTransformWhe
       }
     }
     if (op === '_eq_') {
-      params.where![fullName] = value;
+      params.where[fullName] = value;
     } else {
-      params.where![fullName] = { [op]: value };
+      params.where[fullName] = { [op]: value };
     }
     return true;
   }
