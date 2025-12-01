@@ -2,6 +2,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { isNil } from '@cabloy/utils';
+import { $customKey } from 'vona';
 import { app } from 'vona-mock';
 
 describe('dtoQuery.test.ts', () => {
@@ -9,6 +10,9 @@ describe('dtoQuery.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // findManyEcho
       const resEcho: IQueryParams = await app.bean.executor.performAction('get', '/test/vona/post/findManyEcho', {
+        headers: {
+          [$customKey('x-vona-tz')]: 'Europe/Paris',
+        },
         query: {
           columns: 'id,title', // ['id', 'title'],
           where: {
@@ -22,7 +26,7 @@ describe('dtoQuery.test.ts', () => {
           pageSize: 30,
           title: 'ai',
           userName: 'tom',
-          createdAt: '2025-12-01~2025-12-02',
+          createdAt: '2025-12-01 - 2025-12-02',
         },
       });
       assert.deepEqual(resEcho.columns, ['id', 'title']);
