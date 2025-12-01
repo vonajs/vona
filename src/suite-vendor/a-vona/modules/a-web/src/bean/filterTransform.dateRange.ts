@@ -14,12 +14,17 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
   async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<boolean> {
     const { params, fullName, value } = info;
     const [dateStartStr, dateEndStr] = value.split(options.separator);
-    const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
-    const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
-    params.where[fullName] = {
-      _gte_: dateStart.toJSDate(),
-      _lt_: dateEnd.toJSDate(),
-    };
+    if (!dateStartStr && !dateEndStr) return false;
+    //
+    params.where[fullName] = {};
+    if (dateStartStr) {
+      const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
+      params.where[fullName]._gte_ = dateStart.toJSDate();
+    }
+    if (dateEndStr) {
+      const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
+      params.where[fullName]._lt_ = dateEnd.toJSDate();
+    }
     return true;
   }
 }
