@@ -1,6 +1,6 @@
 # Filter Transform
 
-对于自定义字段，Vona ORM 提供了内置的 Transform 规则。比如`DtoOrderQuery`：
+对于自定义字段，Vona ORM 提供了内置的 Transform 规则。以`DtoOrderQuery`为例：
 
 - `orderNo`是 string 类型，系统自动转换为条件语句`'orderNo': { _includesI_: 'some input' }`
 - `userName`也是 string 类型，系统自动转换为条件语句`'name': { _includesI_: 'some input' }`
