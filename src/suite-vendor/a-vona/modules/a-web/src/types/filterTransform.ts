@@ -15,6 +15,7 @@ export interface IPipeOptionsFilterTransformInfo {
   fullName: string;
   key?: string;
   value?: any;
+  type?: string;
   schema?: z.ZodType;
   openapi?: ISchemaObjectExtensionField;
 }

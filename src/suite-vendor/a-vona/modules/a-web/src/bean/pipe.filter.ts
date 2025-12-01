@@ -83,7 +83,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
       if (field.includes('.')) continue;
       let tableCurrent = table;
       let fieldCurrent = field;
-      const fieldSchema = ZodMetadata.unwrapChained(ZodMetadata.getFieldSchema(options.schema, field));
+      const fieldSchema = ZodMetadata.getFieldSchema(options.schema, field);
       if (fieldSchema) {
         const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
         if (openapi?.filter?.table) {
@@ -99,11 +99,11 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
 
   private async _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
     if (__FieldsSystem.includes(key)) return;
-    const fieldSchemaOriginal = ZodMetadata.getFieldSchema(options.schema, key);
-    if (!fieldSchemaOriginal) return;
-    const fieldSchema = ZodMetadata.unwrapChained(fieldSchemaOriginal);
+    const fieldSchema = ZodMetadata.getFieldSchema(options.schema, key);
+    if (!fieldSchema) return;
+    const fieldSchemaInner = ZodMetadata.unwrapChained(fieldSchema);
     // openapi
-    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchemaOriginal);
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
     // name
     const originalName = openapi?.filter?.originalName ?? key;
     let fullName: string;
@@ -143,6 +143,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
       fullName,
       key,
       value: fieldValue,
+      type: fieldSchemaInner.type,
       schema: fieldSchema,
       openapi,
     };

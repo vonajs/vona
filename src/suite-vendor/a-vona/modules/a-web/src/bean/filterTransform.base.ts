@@ -10,12 +10,11 @@ export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOp
 @FilterTransform<IFilterTransformOptionsBase>()
 export class FilterTransformBase extends BeanBase implements IFilterTransformWhere {
   async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<boolean> {
-    const { params, fullName, value, schema, openapi } = info;
+    const { params, fullName, value, type, openapi } = info;
     if (isNilOrEmptyString(value)) return false;
     let op = openapi?.filter?.op;
     if (!op) {
-      const typeName = schema?.type;
-      if (typeName === 'string') {
+      if (type === 'string') {
         op = '_includesI_';
       } else {
         op = '_eq_';
