@@ -22,6 +22,7 @@ describe('dtoQuery.test.ts', () => {
           pageSize: 30,
           title: 'ai',
           userName: 'tom',
+          createdAt: '2025-12-01~2025-12-02',
         },
       });
       assert.deepEqual(resEcho.columns, ['id', 'title']);
@@ -29,6 +30,10 @@ describe('dtoQuery.test.ts', () => {
         'stars': { _gt_: 12 },
         'title': { _includesI_: 'ai' },
         'testVonaUser.name': { _eqI_: 'tom' },
+        'createdAt': {
+          _gte_: new Date('2025-11-30T16:00:00.000Z'),
+          _lt_: new Date('2025-12-02T16:00:00.000Z'),
+        },
       });
       assert.deepEqual(resEcho.orders, [['testVonaPost.createdAt', 'desc']]);
       assert.equal(resEcho.offset, 30);
