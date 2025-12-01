@@ -2,7 +2,7 @@ import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransfo
 import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
-import { isNil } from '@cabloy/utils';
+import { isNil, isNilOrEmptyString } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
@@ -98,6 +98,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
   }
 
   private async _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
+    if (isNilOrEmptyString(fieldValue)) return;
     if (__FieldsSystem.includes(key)) return;
     const fieldSchema = ZodMetadata.getFieldSchema(options.schema, key);
     if (!fieldSchema) return;

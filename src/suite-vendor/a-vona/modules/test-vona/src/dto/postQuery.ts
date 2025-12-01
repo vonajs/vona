@@ -23,4 +23,7 @@ export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {
     v.optional(),
   )
   userName?: string;
+
+  @Api.field(v.optional())
+  createdAt: string;
 }

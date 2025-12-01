@@ -1,5 +1,4 @@
 import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOptionsFilterTransformInfo } from '../types/filterTransform.ts';
-import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { FilterTransform } from '../lib/decorator/filterTransform.ts';
 
@@ -11,7 +10,6 @@ export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOp
 export class FilterTransformBase extends BeanBase implements IFilterTransformWhere {
   async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<boolean> {
     const { params, fullName, value, type, openapi } = info;
-    if (isNilOrEmptyString(value)) return false;
     let op = openapi?.filter?.op;
     if (!op) {
       if (type === 'string') {
