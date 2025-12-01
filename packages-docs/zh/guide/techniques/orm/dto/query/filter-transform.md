@@ -11,7 +11,7 @@
 
 比如，在模块 demo-student 中创建一个 Filter Transform: `dateRange`，将日期范围转换为条件语句
 
-比如，当前时区为`Asia/Tokyo(+9:00)`。传入字段`createdAt`值为`2025-12-01~2025-12-02`，转换后的条件语句为:
+比如，当前时区为`Asia/Tokyo (+9:00)`。传入字段`createdAt`值为`2025-12-01~2025-12-02`，转换后的条件语句为:
 
 ``` typescript
 createdAt >= '2025-11-30T15:00:00.000Z' and createdAt < '2025-12-02T15:00:00.000Z'
