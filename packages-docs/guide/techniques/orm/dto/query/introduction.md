@@ -54,7 +54,7 @@ class ControllerOrder extends BeanBase {
 
 The automatically generated Swagger/Openapi is as follows:
 
-![](../../../../assets/img/orm/dto/dto-2.png)
+![](../../../../../assets/img/orm/dto/dto-2.png)
 
 ## $Dto.query
 
@@ -70,7 +70,7 @@ export class DtoOrderQuery
 
 The automatically generated Swagger/Openapi is as follows:
 
-![](../../../../assets/img/orm/dto/dto-3.png)
+![](../../../../../assets/img/orm/dto/dto-3.png)
 
 ## Add custom fields
 
@@ -101,13 +101,32 @@ For example, if the Model `Order` and Model `User` have an `n:1` relation, we ca
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(v.optional(), v.openapi({
-    query: {
+    filter: {
       table: $tableName(EntityUser),
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
     },
   }))
+  userName?: string;
+}
+```
+
+You can also use `v.filter`:
+
+``` typescript
+@Dto()
+export class DtoOrderQuery
+  extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
+  @Api.field(
+    v.filter({
+      table: $tableName(EntityUser),
+      joinType: 'innerJoin',
+      joinOn: ['userId', 'testVonaUser.id'],
+      originalName: 'name',
+    }),
+    v.optional(),
+  )
   userName?: string;
 }
 ```
@@ -121,7 +140,7 @@ export class DtoOrderQuery
 
 The automatically generated Swagger/Openapi is as follows:
 
-![](../../../../assets/img/orm/dto/dto-4.png)
+![](../../../../../assets/img/orm/dto/dto-4.png)
 
 ### 2. Orders of relations
 
@@ -132,21 +151,22 @@ Vona ORM has built-in relations-based orders processing logic. You only need to 
 ``` diff
 @Dto<IDtoOptionsOrderQuery>({
 + openapi: {
-+   query: {
++   filter: {
 +     table: $tableName(EntityOrder),
 +   },
 + },
 })
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
-  @Api.field(v.optional(), v.openapi({
-    query: {
+  @Api.field(
+    v.filter({
       table: $tableName(EntityUser),
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
-    },
-  }))
+    }),
+    v.optional(),
+  )
   userName?: string;
 }
 ```

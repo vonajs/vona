@@ -54,7 +54,7 @@ class ControllerOrder extends BeanBase {
 
 基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
 
-![](../../../../assets/img/orm/dto/dto-2.png)
+![](../../../../../assets/img/orm/dto/dto-2.png)
 
 ## $Dto.query
 
@@ -70,7 +70,7 @@ export class DtoOrderQuery
 
 基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
 
-![](../../../../assets/img/orm/dto/dto-3.png)
+![](../../../../../assets/img/orm/dto/dto-3.png)
 
 ## 添加自定义字段
 
@@ -101,13 +101,32 @@ export class DtoOrderQuery
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(v.optional(), v.openapi({
-    query: {
+    filter: {
       table: $tableName(EntityUser),
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
     },
   }))
+  userName?: string;
+}
+```
+
+也可以使用`v.filter`:
+
+``` typescript
+@Dto()
+export class DtoOrderQuery
+  extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
+  @Api.field(
+    v.filter({
+      table: $tableName(EntityUser),
+      joinType: 'innerJoin',
+      joinOn: ['userId', 'testVonaUser.id'],
+      originalName: 'name',
+    }),
+    v.optional(),
+  )
   userName?: string;
 }
 ```
@@ -121,7 +140,7 @@ export class DtoOrderQuery
 
 基于`DtoOrderQuery`生成的 Swagger/Openapi 效果如下：
 
-![](../../../../assets/img/orm/dto/dto-4.png)
+![](../../../../../assets/img/orm/dto/dto-4.png)
 
 ### 2. 基于relations的orders
 
@@ -132,33 +151,29 @@ Vona ORM 内置了基于 relations 的 orders 处理逻辑，只需要在 DTO �
 ``` diff
 @Dto<IDtoOptionsOrderQuery>({
 + openapi: {
-+   query: {
++   filter: {
 +     table: $tableName(EntityOrder),
 +   },
 + },
 })
 export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
-  @Api.field(v.optional(), v.openapi({
-    query: {
+  @Api.field(
+    v.filter({
       table: $tableName(EntityUser),
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
-    },
-  }))
+    }),
+    v.optional(),
+  )
   userName?: string;
 }
 ```
 
 ## 自定义Filter Transform
 
-对于自定义字段，Vona ORM 提供了内置的 Transform 规则。比如：
 
-- `orderNo`是 string 类型，系统自动转换为条件语句`'orderNo': { _includesI_: 'some input' }`
-- `userName`也是 string 类型，系统自动转换为条件语句`'name': { _includesI_: 'some input' }`
-
-为了支持更复杂的业务需求，可以提供自定义 Filter Transform
 
 ### 1. 约定名称
 
