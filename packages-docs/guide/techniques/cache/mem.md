@@ -168,12 +168,12 @@ this.scope.cacheMem.student.set(student, '1', {
 |Name|Description|
 |--|--|
 |get|Read cache|
-|mget|Read multiple caches at the same time|
+|mget|Read multiple caches at once|
 |peek|Retrieve cache without updating its TTL|
 |set|Set cache|
-|mset|Set multiple caches at the same time|
+|mset|Set multiple caches at once|
 |getset|Set new cache and return the old value|
 |has|Check if cache exists|
 |del|Delete cache|
-|mdel|Delete multiple caches at the same time|
+|mdel|Delete multiple caches at once|
 |clear|Clear all caches|
