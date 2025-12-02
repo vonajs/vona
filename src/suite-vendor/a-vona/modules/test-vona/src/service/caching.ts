@@ -19,7 +19,7 @@ export class ServiceCaching extends BeanBase {
     return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
   }
 
-  cacheValueSet(_value: any, args: any[], _prop: string, _options: TypeCachingActionOptions) {
+  cacheValueSet(_result: any, args: any[], _prop: string, _options: TypeCachingActionOptions) {
     return args[1];
   }
 
