@@ -133,9 +133,24 @@ customCacheKey(args: any[]) {
 ### 1. @Caching.get
 
 ``` diff
+class ServiceStudent {
++ @Caching.get({ cacheName: 'demo-student:student', cacheProp: 'student' })
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
+    return await this.scope.model.student.getById(id);
+  }
 
++ @Caching.del({ cacheName: 'demo-student:student', cacheProp: 'student' })
+  async update(id: TableIdentity, student: DtoStudentUpdate) {
+    return await this.scope.model.student.updateById(id, student);
+  }
+
++ @Caching.del({ cacheName: 'demo-student:student', cacheProp: 'student' })
+  async remove(id: TableIdentity) {
+    return await this.scope.model.student.deleteById(id);
+  }
+}
 ```
 
-
-
+- 设置统一的`cacheProp`值，是为了确保 Cache Key 一致
+- 这里添加的`@Caching.xxx`装饰器仅用于演示目的。在实际业务当中，不需要在 Service 中使用`@Caching.xxx`。因为 Model 本身内置了更完善的缓存机制，参见: [Vona ORM: 缓存](../orm/caching.md)
 
