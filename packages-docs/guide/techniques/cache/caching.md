@@ -78,3 +78,75 @@ The system will automatically generate a unique `cacheKey`
   cacheKeyFn: 'customCacheKey',
 })
 ```
+
+|Name|Type|Description|
+|--|--|--|
+|cacheProp|string|Custom prop name, defaults to the name of the decorated method|
+|cacheKeyFn|function|Used to generate a custom cache key|
+
+## Custom cache key
+
+You can specify the `cacheKeyFn` parameter to generate a custom cache key
+
+``` diff
+import type { TypeCachingActionOptions } from 'vona-module-a-caching';
+import { getKeyHash } from 'vona-module-a-cache';
+
+class ServiceStudent {
++ customCacheKey(args: any[], prop: string, options: TypeCachingActionOptions) {
++   return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
++ }
+
+  @Caching.get({
+    cacheName: 'demo-student:student',
++   cacheKeyFn: 'customCacheKey',
+  })
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
+    return await this.scope.model.student.getById(id);
+  }
+}  
+```
+
+If `cacheKeyFn` returns the following values, the cache will be ignored: `undefined/null/false/''`
+
+The return value of `cacheKeyFn` can be of any type, as long as it ensures the Cache Key is unique, for example:
+
+``` typescript
+customCacheKey(args: any[]) {
+  return args[0]; // id
+}
+```
+
+## Caching Decorators
+
+|Name|Description|
+|--|--|
+|@Caching.get|Read cache|
+|@Caching.set|Set cache|
+|@Caching.del|Delete cache|
+|@Caching.clear|Clear all caches|
+
+## Complete example
+
+``` diff
+class ServiceStudent {
++ @Caching.get({ cacheName: 'demo-student:student', cacheProp: 'student' })
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
+    return await this.scope.model.student.getById(id);
+  }
+
++ @Caching.del({ cacheName: 'demo-student:student', cacheProp: 'student' })
+  async update(id: TableIdentity, student: DtoStudentUpdate) {
+    return await this.scope.model.student.updateById(id, student);
+  }
+
++ @Caching.del({ cacheName: 'demo-student:student', cacheProp: 'student' })
+  async remove(id: TableIdentity) {
+    return await this.scope.model.student.deleteById(id);
+  }
+}
+```
+
+- Setting a unified `cacheProp` value is to ensure consistency of the Cache Key
+- The `@Caching.xxx` decorators added here are for demonstration purposes only. In actual business scenarios, there is no need to use `@Caching.xxx` in the Service, because the Model itself has a more complete built-in caching mechanism
+  - See: [Vona ORM: Caching](../orm/caching.md)
