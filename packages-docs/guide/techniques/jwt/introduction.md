@@ -1,6 +1,6 @@
 # JWT
 
-VonaJS provides a powerful and flexible JWT based on [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+VonaJS provides a powerful and flexible JWT capabilities based on [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
 ## App Config
 
