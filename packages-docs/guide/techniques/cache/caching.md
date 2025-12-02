@@ -82,7 +82,7 @@ The system will automatically generate a unique `cacheKey`
 |Name|Type|Description|
 |--|--|--|
 |cacheProp|string|Custom prop name, defaults to the name of the decorated method|
-|cacheKeyFn|function|Used to generate a custom cache key|
+|cacheKeyFn|function\|string|Used to generate a custom cache key|
 
 ## Custom cache key
 

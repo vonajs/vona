@@ -82,7 +82,7 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 |名称|类型|说明|
 |--|--|--|
 |cacheProp|string|自定义属性名，默认等于被装饰的方法名|
-|cacheKeyFn|function|用于生成自定义的缓存Key|
+|cacheKeyFn|function\|string|用于生成自定义的缓存Key|
 
 ## 自定义缓存Key
 
