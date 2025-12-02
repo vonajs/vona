@@ -541,10 +541,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table: keyof ITableRecord,
     where: TypeModelWhere<TRecord>,
     options?: IModelMethodOptions,
-  ): Promise<TRecord | null | undefined> {
+  ): Promise<TRecord | undefined> {
     // cache
     const cache = this.cacheEntity.getInstance(table);
-    const item: TRecord | null | undefined = await cache.get(id, {
+    const item: TRecord | undefined = await cache.get(id, {
       get: async () => {
         // where: maybe contain aux key
         const item = await super._get(table, where, { disableDeleted: true });
