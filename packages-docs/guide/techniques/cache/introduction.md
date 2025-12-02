@@ -9,12 +9,12 @@ VonaJS provides a very powerful caching mechanism, including the following four 
 
 ## Model Caching
 
-VonaJS provides an `out-of-the-box` caching mechanism for `Model` based on `Summer Cache`. We just operate the ORM as usual, and the system handles the caching internally while ensuring consistency of cached data.
+VonaJS provides an `out-of-the-box` caching mechanism for `Model` based on `Summer Cache`. We just operate the ORM as usual, and the system handles the caching internally while ensuring consistency of cached data
 
 - See: [Vona ORM: Caching](../orm/caching.md)
 
-## Transactions and Cache Data Consistency
+## Transaction and Cache Data Consistency
 
-The Vona system adapts database transactions to the cache. When a database transaction fails, it automatically performs cache compensation operations, ensuring that the database data and cached data always remain consistent.
+The Vona system adapts database transactions to the cache. When a database transaction fails, it automatically performs cache compensation operations, ensuring that the database data and cached data always remain consistent
 
-- See: [Database Transactions](../orm/transaction.md)
+- See: [Transaction](../orm/transaction.md)

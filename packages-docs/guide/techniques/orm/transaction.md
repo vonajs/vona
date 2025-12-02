@@ -137,7 +137,7 @@ this.bean.database.current.compensate(async () => {
 
 Many frameworks use minimal use cases to demonstrate high performance, ignoring the performance challenges brought about by business complexity. As business grows and changes, project performance can plummet. Various optimization and mitigation measures can lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses by integrating caching strategies into its core framework. It implements mechanisms such as `two-layer cache`, `query cache`, and `entity cache`, making it easy to develop large-scale business systems while maintaining elegant and intuitive code
 
-The Vona system adapts to database transaction and caching. When a database transaction fails, it automatically performs cache compensation operations, ensuring that database and cache data remain consistent
+The Vona system adapts database transactions to the cache. When a database transaction fails, it automatically performs cache compensation operations, ensuring that the database data and cached data always remain consistent
 
 For this scenario, Vona provides a built-in solution
 
