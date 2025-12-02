@@ -20,7 +20,7 @@ export class ServiceCaching extends BeanBase {
   }
 
   cacheValueSet(_value: any, args: any[], _prop: string, _options: TypeCachingActionOptions) {
-    return args[args.length - 1];
+    return args[1];
   }
 
   @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn: 'cacheKey' })
