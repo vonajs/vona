@@ -90,7 +90,7 @@ class ServiceStudent {
     return await this.scope.model.student.select();
   }
   
-  async findOne(id: TableIdentity): Promise<EntityStudent | null> {
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
 }
@@ -160,7 +160,7 @@ class ServiceStudent {
 
 ``` typescript
 class ServiceStudent {
-  async findOne(id: TableIdentity): Promise<EntityStudent | null> {
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.queryOne('select * from demoStudent where id=?', [id]);
   }
 }

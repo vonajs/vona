@@ -13,7 +13,7 @@ import { Caching } from 'vona-module-a-caching';
 @Service()
 class ServiceStudent {
 + @Caching.get({ cacheName: 'demo-student:student' })
-  async findOne(id: TableIdentity): Promise<EntityStudent | null> {
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
 ```
@@ -103,7 +103,7 @@ class ServiceStudent {
     cacheName: 'demo-student:student',
 +   cacheKeyFn: 'customCacheKey',
   })
-  async findOne(id: TableIdentity): Promise<EntityStudent | null> {
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
 }  
