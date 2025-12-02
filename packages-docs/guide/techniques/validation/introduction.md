@@ -73,7 +73,7 @@ class ControllerStudent3 {
 The decorator `@Arg.filter` supports more advanced query parameters, including `columns/where/orders/pageNo/pageSize`
 
 - See:
-  - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
+  - [$Dto.query/DtoQueryBase](../orm/dto/query/introduction.md)
   - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
 
 ## 5. Tool: v.array

@@ -73,7 +73,7 @@ class ControllerStudent3 {
 装饰器`@Arg.filter`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
 
 - 参见:
-  - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
+  - [$Dto.query/DtoQueryBase](../orm/dto/query/introduction.md)
   - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
 
 ## 5. 工具：v.array

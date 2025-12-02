@@ -61,7 +61,7 @@ Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
 装饰器`@Arg.filter`支持更高级的 Query 参数，包括：`columns/where/orders/pageNo/pageSize`
 
 - 参见:
-  - [$Dto.query/DtoQueryBase](../orm/dto/query.md)
+  - [$Dto.query/DtoQueryBase](../orm/dto/query/introduction.md)
   - [$Dto.queryPage/DtoQueryPageBase](../orm/dto/query-page.md)
 
 ## 5. 工具：v.array
