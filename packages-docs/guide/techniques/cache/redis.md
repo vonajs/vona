@@ -148,7 +148,7 @@ await this.scope.cacheRedis.student.set(student, '1', {
 
 |Name|Type|Description|
 |--|--|--|
-|ttl|number|cache expiration time|
+|ttl|number|Cache expiration time|
 |disableTransactionCompensate|boolean|Whether to disable transaction compensation|
 |db| ServiceDb| This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
 

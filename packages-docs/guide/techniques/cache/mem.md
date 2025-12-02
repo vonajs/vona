@@ -156,7 +156,7 @@ this.scope.cacheMem.student.set(student, '1', {
 
 |Name|Type|Description|
 |--|--|--|
-|ttl|number|cache expiration time|
+|ttl|number|Cache expiration time|
 |broadcastOnSet|boolean \| 'del' | Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches|
 |disableTransactionCompensate|boolean|Whether to disable transaction compensation|
 |db| ServiceDb| This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|

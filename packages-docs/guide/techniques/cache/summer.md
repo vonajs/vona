@@ -15,47 +15,108 @@ $ vona :create:bean summerCache student --module=demo-student
 ### 2. Menu Command
 
 ::: tip
-Context menu - [Module Path]: `Vona Bean/Cache Summer`
+Context menu - [Module Path]: `Vona Bean/Summer Cache`
 :::
 
 ## Summer Cache Definition
 
 ``` typescript
-export type TCacheRedisStudentKey = string;
-export interface TCacheRedisStudentData { id: string; name: string }
+export type TSummerCacheStudentKey = string;
+export interface TSummerCacheStudentData { id: string; name: string }
 
-@CacheRedis({
-  ttl: 2 * 3600 * 1000,
-})
-export class CacheRedisStudent
-  extends BeanCacheRedisBase<TCacheRedisStudentKey, TCacheRedisStudentData> {}
+@SummerCache()
+export class SummerCacheStudent
+  extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
+  implements ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
+  async getNative(
+    key?: TSummerCacheStudentKey,
+    _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
+  ): Promise<TSummerCacheStudentData | null | undefined> {
+    const student = await this.scope.model.student.getById(key!);
+    if (!student) return null;
+    return { id: student.id as string, name: student.name };
+  }
+}
 ```
 
-- `TCacheRedisStudentKey`: Defines the type of the cache key
-- `TCacheRedisStudentData`: Defines the type of the cache data
+- `TSummerCacheStudentKey`: Defines the type of the cache key
+- `TSummerCacheStudentData`: Defines the type of the cache data
+
+## getNative
+
+General process for reading Summer cache:
+
+1. First, read the Mem cache
+2. If the Mem cache does not exist, read the Redis cache
+3. If the Redis cache does not exist, call the `getNative` method
+  - For example, query the database data in the `getNative` method
+
+## mgetNative
+
+The `mgetNative` method can be provided to support reading multiple caches simultaneously
+
+If the `mgetNative` method is not provided, the system will automatically loop through and call the `getNative` method when reading multiple caches at the same time
+
+``` diff
+export class SummerCacheStudent
+  extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
+  implements
+    ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData>,
++   ISummerCacheMGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
+  async getNative(
+    key?: TSummerCacheStudentKey,
+    _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
+  ): Promise<TSummerCacheStudentData | null | undefined> {
+    ...
+  }
+
++ async mgetNative(
++   keys: TSummerCacheStudentKey[],
++   _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
++ ): Promise<Array<TSummerCacheStudentData | null | undefined>> {
++   const students = await this.scope.model.student.mget(keys);
++   return students.map(student => {
++     return { id: student.id as string, name: student.name };
++   });
++ }
+}
+```
 
 ## Summer Cache Parameters
 
 Parameters can be configured for Summer Cache
 
 ``` typescript
-@CacheRedis({
-  ttl: 2 * 3600 * 1000,
-  updateAgeOnGet: true,
-  disableInstance: false,
-  disableTransactionCompensate: false,
-  client: 'cache',
+@SummerCache({
+  preset: 'all',
+  mode: 'all',
+  mem: {
+    max: 500,
+    ttl: 2 * 3600 * 1000,
+  },
+  redis: {
+    ttl: 2 * 3600 * 1000,
+  },
+  ignoreNull: false,
 })
-class CacheRedisStudent {}
+class SummerCacheStudent {}
 ```
 
 |Name|Type|Default|Description|
 |--|--|--|--|
-|ttl|number||Cache expiration time|
-|updateAgeOnGet|boolean|true|Whether to update the ttl when reading from the cache|
-|disableInstance|boolean|false|Whether to disable instance isolation. By default, caches between multiple instances are isolated|
-|disableTransactionCompensate|boolean|false|Whether to disable transaction compensation. Enabling transaction compensation ensures cache data consistency|
-|client|string|'cache'|Summer client used for caching|
+|preset|'all' \| 'mem' \| 'redis'||Predefined configuration is a combination of `mode/mem/redis` parameters|
+|mode|'all' \| 'mem' \| 'redis'|'all'|Cache mode|
+|mem|||Mem cache configuration|
+|redis|||Redis cache configuration|
+|ignoreNull|boolean|false|Whether to ignore `null` values. When `ignoreNull=true`, if the data read from Memcache/Redis cache is `null`, it will be ignored, and then the `getNative/mgetNative` method will be called to obtain a new value|
+
+* mode
+
+|Name|Description|
+|--|--|
+|all|Use both Mem cache and Redis cache|
+|mem|Use only Mem cache|
+|redis|Use only Redis cache|
 
 ## App Config
 
@@ -68,11 +129,16 @@ Summer Cache parameters can be configured in App Config
 config.onions = {
   summerCache: {
     'demo-student:student': {
-      ttl: 2 * 3600 * 1000,
-      updateAgeOnGet: true,
-      disableInstance: false,
-      disableTransactionCompensate: false,
-      client: 'cache',
+      preset: 'all',
+      mode: 'all',
+      mem: {
+        max: 500,
+        ttl: 2 * 3600 * 1000,
+      },
+      redis: {
+        ttl: 2 * 3600 * 1000,
+      },
+      ignoreNull: false,
     },
   },
 };
@@ -109,13 +175,13 @@ Allows Summer Cache to take effect in a specified operating environment
 * Example
 
 ``` diff
-@CacheRedis({
+@SummerCache({
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
 + },
 })
-class CacheRedisStudent {}
+class SummerCacheStudent {}
 ```
 
 ## Using Summer Cache
@@ -124,10 +190,10 @@ class CacheRedisStudent {}
 class ControllerStudent {
   @Web.get('test')
   async test() {
-    const student = { id: '1', name: 'tom' };
-    await this.scope.summerCache.student.set(student, '1');
-    const value = await this.scope.summerCache.student.get('1');
-    assert.deepEqual(student, value);
+    const studentByDb = await this.scope.model.student.getById('2');
+    const studentBySummer = await this.scope.summerCache.student.get('2');
+    assert.equal(studentByDb?.id, studentBySummer?.id);
+    assert.equal(studentByDb?.name, studentBySummer?.name);
   }
 }  
 ```
@@ -136,19 +202,41 @@ class ControllerStudent {
 
 ## Cache method parameters
 
-Take the `set` method as an example to introduce the parameters of the cache method
+Take the `get` method as an example to introduce the parameters of the cache method
 
 ``` typescript
-await this.scope.summerCache.student.set(student, '1', {
+await this.scope.summerCache.student.get('2', {
   ttl: 2 * 3600 * 1000,
-  disableTransactionCompensate: true,
+  broadcastOnSet: 'del',
+  updateAgeOnGet: true,
+  ignoreNull: false,
+  mode: 'all',
+  force: false,
+  disableTransactionCompensate: false,
   db: this.ctx.db,
+  enable: true,
+  get: async (_key?: string) => { return null; },
+  mget: async (_keys: string[]) => { return []; },
 });
 ```
 
+|名称|类型|说明|
+|--|--|--|
+|ttl|number|Cache expiration time|
+|broadcastOnSet|boolean \| 'del'|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
+|updateAgeOnGet|boolean|当读取缓存时是否更新ttl|
+|ignoreNull|boolean|是否忽略`null`值|
+|mode|'all' \| 'mem' \| 'redis'|缓存模式|
+|force|boolean|强制读取新值|
+|disableTransactionCompensate|boolean|是否禁止事务补偿|
+|db|ServiceDb|在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象|
+|enable|boolean|是否禁用Summer缓存|
+|get|Function|覆盖`getNative`方法|
+|mget|Function|覆盖`mgetNative`方法|
+
 |Name|Type|Description|
 |--|--|--|
-|ttl|number|cache expiration time|
+|ttl|number|Cache expiration time|
 |disableTransactionCompensate|boolean|Whether to disable transaction compensation|
 |db| ServiceDb| This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
 
