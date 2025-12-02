@@ -308,7 +308,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Mem Cache', link: 'mem' },
         { text: 'Redis Cache', link: 'redis' },
         { text: 'Summer Cache (Two-Layer Cache)', link: 'summer' },
-        { text: 'Caching', link: 'caching' },
+        { text: 'Caching Decorator', link: 'caching' },
       ],
     },
     {

@@ -6,7 +6,6 @@
 
 ## 最简用法
 
-
 ``` diff
 import { Caching } from 'vona-module-a-caching';
 
@@ -42,7 +41,6 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 })
 ```
 
-|名称|说明|
 |名称|类型|说明|
 |--|--|--|
 |cacheName|string|缓存名|
