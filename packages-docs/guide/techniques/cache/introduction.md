@@ -4,7 +4,7 @@ VonaJS provides a very powerful caching mechanism, including the following four 
 
 1. `Mem Cache`: Implemented based on [lru-cache](https://github.com/isaacs/node-lru-cache)
 2. `Redis Cache`: Implemented based on [Redis](../redis/introduction.md)
-3. `Summer Cache (Two-Layer Cache)`: Implemented using Mem Cache and Redis Cache
+3. `Summer Cache (Two-Layer Cache)`: Implemented based on Mem Cache and Redis Cache
 4. `Caching Decorator`: Uses decorators to provide caching capabilities for any method of any class
 
 ## Model Caching

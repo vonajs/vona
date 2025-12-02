@@ -1,24 +1,24 @@
 # Summer Cache (Two-Layer Cache)
 
-`Redis Cache` is implemented based on [Redis](../redis/introduction.md)
+`Summer Cache` is implemented based on Mem Cache and Redis Cache
 
-## Create Redis Cache
+## Create Summer Cache
 
-For example, create a Redis Cache `student` in the module `demo-student`, to cache student data
+For example, create a Summer Cache `student` in the module `demo-student`, to cache student data
 
 ### 1. Cli Command
 
 ``` bash
-$ vona :create:bean cacheRedis student --module=demo-student
+$ vona :create:bean summerCache student --module=demo-student
 ```
 
 ### 2. Menu Command
 
 ::: tip
-Context menu - [Module Path]: `Vona Bean/Cache Redis`
+Context menu - [Module Path]: `Vona Bean/Cache Summer`
 :::
 
-## Redis Cache Definition
+## Summer Cache Definition
 
 ``` typescript
 export type TCacheRedisStudentKey = string;
@@ -34,9 +34,9 @@ export class CacheRedisStudent
 - `TCacheRedisStudentKey`: Defines the type of the cache key
 - `TCacheRedisStudentData`: Defines the type of the cache data
 
-## Redis Cache Parameters
+## Summer Cache Parameters
 
-Parameters can be configured for Redis Cache
+Parameters can be configured for Summer Cache
 
 ``` typescript
 @CacheRedis({
@@ -55,18 +55,18 @@ class CacheRedisStudent {}
 |updateAgeOnGet|boolean|true|Whether to update the ttl when reading from the cache|
 |disableInstance|boolean|false|Whether to disable instance isolation. By default, caches between multiple instances are isolated|
 |disableTransactionCompensate|boolean|false|Whether to disable transaction compensation. Enabling transaction compensation ensures cache data consistency|
-|client|string|'cache'|Redis client used for caching|
+|client|string|'cache'|Summer client used for caching|
 
 ## App Config
 
-Redis Cache parameters can be configured in App Config
+Summer Cache parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
-  cacheRedis: {
+  summerCache: {
     'demo-student:student': {
       ttl: 2 * 3600 * 1000,
       updateAgeOnGet: true,
@@ -78,9 +78,9 @@ config.onions = {
 };
 ```
 
-## Redis Cache Enable/Disable
+## Summer Cache Enable/Disable
 
-You can control `enable/disable` of Redis Cache
+You can control `enable/disable` of Summer Cache
 
 ### 1. Enable
 
@@ -89,7 +89,7 @@ You can control `enable/disable` of Redis Cache
 ``` diff
 // onions
 config.onions = {
-  cacheRedis: {
+  summerCache: {
     'demo-student:student': {
 +     enable: true,
     },
@@ -99,7 +99,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows Redis Cache to take effect in a specified operating environment
+Allows Summer Cache to take effect in a specified operating environment
 
 |Name|Type|Description|
 |--|--|--|
@@ -118,28 +118,28 @@ Allows Redis Cache to take effect in a specified operating environment
 class CacheRedisStudent {}
 ```
 
-## Using Redis Cache
+## Using Summer Cache
 
 ``` typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const student = { id: '1', name: 'tom' };
-    await this.scope.cacheRedis.student.set(student, '1');
-    const value = await this.scope.cacheRedis.student.get('1');
+    await this.scope.summerCache.student.set(student, '1');
+    const value = await this.scope.summerCache.student.get('1');
     assert.deepEqual(student, value);
   }
 }  
 ```
 
-- `this.scope.cacheRedis.student`: Gets the Redis Cache instance through the module scope
+- `this.scope.summerCache.student`: Gets the Summer Cache instance through the module scope
 
 ## Cache method parameters
 
 Take the `set` method as an example to introduce the parameters of the cache method
 
 ``` typescript
-await this.scope.cacheRedis.student.set(student, '1', {
+await this.scope.summerCache.student.set(student, '1', {
   ttl: 2 * 3600 * 1000,
   disableTransactionCompensate: true,
   db: this.ctx.db,
