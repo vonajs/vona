@@ -38,30 +38,23 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
 
 @FilterTransform<IFilterTransformOptionsDateRange>()
 export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsDateRange): Promise<boolean> {
-    const { params, fullName, value } = info;
+  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsDateRange): Promise<any | undefined> {
+    const { value } = info;
     const [dateStartStr, dateEndStr] = value.split('~');
     const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
     const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
-    params.where[fullName] = {
+    return {
       _gte_: dateStart.toJSDate(),
       _lt_: dateEnd.toJSDate(),
     };
-    return true;
   }
 }
 ```
 
 - `IFilterTransformOptionsDateRange`: 定义 Filter Transform 参数
 - `where`: 转换查询条件
+  - 如果返回`undefined`就忽略该查询条件
 - `this.ctx.tz`: 获取当前时区，比如`Asia/Tokyo`
-
-`where`返回值：
-
-|名称|说明|
-|--|--|
-|true|设置了查询条件|
-|false|没有设置查询条件|
 
 ## 使用Filter Transform
 
@@ -113,17 +106,16 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
   separator: '~',
 })
 export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<boolean> {
-    const { params, fullName, value } = info;
+  async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<any | undefined> {
+    const { value } = info;
 -   const [dateStartStr, dateEndStr] = value.split('~');
 +   const [dateStartStr, dateEndStr] = value.split(options.separator);
     const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
     const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
-    params.where[fullName] = {
+    return {
       _gte_: dateStart.toJSDate(),
       _lt_: dateEnd.toJSDate(),
     };
-    return true;
   }
 }
 ```

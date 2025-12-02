@@ -149,7 +149,9 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
       openapi,
     };
     const resTransform = await beanInstance.where(info, transformOptions2);
-    if (resTransform === true) {
+    if (resTransform !== undefined) {
+      // where
+      params.where[fullName] = resTransform;
       // join
       if (joinInfo) {
         if (!params.joins) params.joins = [];

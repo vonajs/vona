@@ -11,20 +11,20 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
   separator: '~',
 })
 export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<boolean> {
-    const { params, fullName, value } = info;
+  async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<any | undefined> {
+    const { value } = info;
     const [dateStartStr, dateEndStr] = value.split(options.separator);
-    if (!dateStartStr && !dateEndStr) return false;
+    if (!dateStartStr && !dateEndStr) return;
     //
-    params.where[fullName] = {};
+    const where: any = {};
     if (dateStartStr) {
       const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
-      params.where[fullName]._gte_ = dateStart.toJSDate();
+      where._gte_ = dateStart.toJSDate();
     }
     if (dateEndStr) {
       const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
-      params.where[fullName]._lt_ = dateEnd.toJSDate();
+      where._lt_ = dateEnd.toJSDate();
     }
-    return true;
+    return where;
   }
 }

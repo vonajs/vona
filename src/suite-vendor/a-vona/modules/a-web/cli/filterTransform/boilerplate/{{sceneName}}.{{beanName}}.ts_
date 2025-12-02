@@ -6,7 +6,5 @@ export interface IFilterTransformOptions<%=argv.beanNameCapitalize%> extends IDe
 
 @FilterTransform<IFilterTransformOptions<%=argv.beanNameCapitalize%>>()
 export class FilterTransform<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterTransformWhere {
-  async where(_info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptions<%=argv.beanNameCapitalize%>): Promise<boolean> {
-    return false;
-  }
+  async where(_info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptions<%=argv.beanNameCapitalize%>): Promise<any | undefined> {}
 }

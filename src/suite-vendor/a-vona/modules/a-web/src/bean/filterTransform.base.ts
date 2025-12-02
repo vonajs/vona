@@ -8,8 +8,8 @@ export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOp
 
 @FilterTransform<IFilterTransformOptionsBase>()
 export class FilterTransformBase extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<boolean> {
-    const { params, fullName, value, type, openapi } = info;
+  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<any | undefined> {
+    const { value, type, openapi } = info;
     let op = openapi?.filter?.op;
     if (!op) {
       if (type === 'string') {
@@ -18,11 +18,12 @@ export class FilterTransformBase extends BeanBase implements IFilterTransformWhe
         op = '_eq_';
       }
     }
+    let where;
     if (op === '_eq_') {
-      params.where[fullName] = value;
+      where = value;
     } else {
-      params.where[fullName] = { [op]: value };
+      where = { [op]: value };
     }
-    return true;
+    return where;
   }
 }
