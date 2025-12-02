@@ -31,21 +31,21 @@ export function combineCachingKey(options: TypeCachingActionOptions, args: any[]
   return `${cast(receiver).$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
 }
 
-export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: [], receiver: BeanBase, prop: string, value: any) {
+export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: any[], receiver: BeanBase, prop: string, result: any) {
   // cacheValueFn
   if (!isNil(options.cacheValueFn)) {
     if (typeof options.cacheValueFn === 'string') {
       if (!receiver[options.cacheValueFn]) {
         throw new Error(`cacheValueFn not found: ${cast(receiver).$beanFullName}#${options.cacheValueFn}`);
       }
-      return receiver[options.cacheValueFn](value, args, prop, options, receiver);
+      return receiver[options.cacheValueFn](result, args, prop, options, receiver);
     }
-    return options.cacheValueFn.call(receiver, value, args, prop, options, receiver);
+    return options.cacheValueFn.call(receiver, result, args, prop, options, receiver);
   }
   // cacheValue
   if (!isNil(options.cacheValue)) {
     return evaluateExpressions(options.cacheValue, {
-      value,
+      result,
       args,
       prop,
       options,
@@ -55,7 +55,7 @@ export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: 
     });
   }
   // default
-  return value;
+  return args[1];
 }
 
 export function isCachingKeyValid(key: any) {

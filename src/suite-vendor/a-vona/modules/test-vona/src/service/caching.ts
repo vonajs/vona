@@ -5,18 +5,18 @@ import { Service } from 'vona-module-a-bean';
 import { getKeyHash } from 'vona-module-a-cache';
 import { Caching } from 'vona-module-a-caching';
 
-function cacheKeyFn(this: ServiceCaching, args: [], prop: string, options: TypeCachingActionOptions): any {
+function cacheKeyFn(this: ServiceCaching, args: any[], prop: string, options: TypeCachingActionOptions): any {
   return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
 }
 
 @Service()
 export class ServiceCaching extends BeanBase {
   cacheKey(args: any[], prop: string, options: TypeCachingActionOptions) {
-    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
+    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
   }
 
   cacheKeySet(args: any[], prop: string, options: TypeCachingActionOptions) {
-    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args.slice(0, -1))}`;
+    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
   }
 
   cacheValueSet(_value: any, args: any[], _prop: string, _options: TypeCachingActionOptions) {
@@ -36,7 +36,7 @@ export class ServiceCaching extends BeanBase {
     return undefined as any;
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://join([get(self,"$beanFullName"),options.cacheProp,hashkey(args)],"_")' })
+  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://join([get(self,"$beanFullName"),options.cacheProp,hashkey(args[0])],"_")' })
   async get3(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
@@ -53,7 +53,7 @@ export class ServiceCaching extends BeanBase {
   }
 
   //
-  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://join([get(self,"$beanFullName"),options.cacheProp,hashkey([args[0]])],"_")', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
+  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://join([get(self,"$beanFullName"),options.cacheProp,hashkey(args[0])],"_")', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
   async set2(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }
