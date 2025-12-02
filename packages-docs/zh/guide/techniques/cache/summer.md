@@ -55,7 +55,7 @@ export class SummerCacheStudent
 
 可以提供`mgetNative`方法支持同时读取多个缓存
 
-如果没有提供`mgetNative`方法，在同时读取多个缓存时，系统会自动循环调用`mgetNative`方法
+如果没有提供`mgetNative`方法，在同时读取多个缓存时，系统会自动循环调用`getNative`方法
 
 ``` diff
 export class SummerCacheStudent
