@@ -55,8 +55,88 @@ REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
+## Adding a New Client
 
+### 1. Adding Type Definition
 
+Add a new Client type definition using the interface merging mechanism, such as `order`, providing a separate Redis Client for the order business using a dedicated Redis service, thereby improving system performance
 
+In the VSCode editor, enter the code snippet `recordredisclient`, and the code skeleton will be automatically generated:
 
+``` typescript
+declare module 'vona-module-a-redis' {
+  export interface IRedisClientRecord {
+    : never;
+  }
+}
+```
 
+Adjust the code, and then add `order`
+
+``` diff
+declare module 'vona-module-a-redis' {
+  export interface IRedisClientRecord {
++   order: never;
+  }
+}
+```
+
+### 2. Adding Client Configuration
+
+`src/backend/config/config/config.ts`
+
+``` typescript
+// redis
+config.redis = {
+  clients: {
+    order: {
+      keyPrefix: true,
+      host: 'xx.xx.xx.xx',
+      port: 6379,
+      password: 'xxxxxx',
+    },
+  },
+};
+```
+
+## Obtaining Redis Client Instance
+
+``` typescript
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
+    const redisDefault = this.bean.redis.get('default');
+    const redisCache = this.bean.redis.get('cache');
+    const redisOrder = this.bean.redis.get('order');
+  }
+}
+```
+
+## Using Redis Client
+
+``` diff
+class ControllerStudent {
+  @Web.get('test')
+  async test() {
+    const redisOrder = this.bean.redis.get('order');
++   await redisOrder.set('order1', JSON.stringify({ id: '1', name: 'Order1' }));
++   const value = await redisOrder.get('order1');
+    const order = value ? JSON.parse(value) : undefined;
+    assert.deepEqual(order, { id: '1', name: 'Order1' });
+  }
+}
+```
+
+- For more usage, see: [ioredis](https://github.com/redis/node-redis)
+
+## Distributed Components
+
+To support distributed development, VonaJS provides the following core components based on `Redis`:
+
+- `Broadcast`: Broadcasts can be emitted to multiple worker processes in the system, allowing each worker process to execute business logic
+- `Queue`: Provides a powerful queue component based on [BullMQ](https://github.com/taskforcesh/bullmq)
+- `Redlock`: Provides an intuitive and easy-to-use distributed lock based on [Redlock](https://github.com/sesamecare/redlock/)
+- `Schedule`: Provides intuitive and easy-to-use schedule based on [BullMQ](https://github.com/taskforcesh/bullmq). Schedule is a special case of queue
+- `Startup`: Allows initialization logic to be executed during system startup or instance initialization
+
+See: [Distributed Components](../../distributed/introduction.md)
