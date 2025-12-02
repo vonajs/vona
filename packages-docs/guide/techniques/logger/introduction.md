@@ -41,7 +41,7 @@ LOGGER_DIR = /new/path
 
 ## App Config
 
-Log configuration can be done in App Config:
+Log configuration can be modified in App Config:
 
 `src/backend/config/config/config.ts`
 
