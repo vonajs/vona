@@ -26,8 +26,8 @@ export interface IUserAdapter {
   create(user: Partial<IUser>): Promise<IUser>;
   userOfProfile(profile: IAuthUserProfile): Promise<Partial<IUser>>;
   createAnonymous(): Promise<Partial<IUser>>;
-  findOneByName(name: string): Promise<IUser | undefined>;
-  findOne(user: Partial<IUser>): Promise<IUser | undefined>;
+  findOneByName(name: string): Promise<IUser | null>;
+  findOne(user: Partial<IUser>): Promise<IUser | null>;
   update(user: Partial<IUser>): Promise<void>;
   remove(user: Partial<IUser>): Promise<void>;
   setActivated(id: TableIdentity, activated: boolean): Promise<void>;

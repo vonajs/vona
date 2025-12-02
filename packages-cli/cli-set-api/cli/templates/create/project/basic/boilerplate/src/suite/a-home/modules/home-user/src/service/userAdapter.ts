@@ -22,11 +22,11 @@ export class ServiceUserAdapter extends BeanBase implements IUserAdapter {
     return { id: -1, anonymous: true, name: 'anonymous' };
   }
 
-  async findOneByName(name: string): Promise<IUser | undefined> {
+  async findOneByName(name: string): Promise<IUser | null> {
     return await this.scope.model.user.getByNameEqI(name);
   }
 
-  async findOne(user: Partial<IUser>): Promise<IUser | undefined> {
+  async findOne(user: Partial<IUser>): Promise<IUser | null> {
     return await this.scope.model.user.get(user);
   }
 

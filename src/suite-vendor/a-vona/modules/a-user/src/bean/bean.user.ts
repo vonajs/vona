@@ -47,15 +47,15 @@ export class BeanUser extends BeanBase {
     }) as Promise<IUser>;
   }
 
-  async findOneByName(name: string): Promise<IUser | undefined> {
+  async findOneByName(name: string): Promise<IUser | null> {
     return this.userAdapter.findOneByName(name);
   }
 
-  async findOneById(id: TableIdentity): Promise<IUser | undefined> {
+  async findOneById(id: TableIdentity): Promise<IUser | null> {
     return this.userAdapter.findOne({ id });
   }
 
-  async findOne(user: Partial<IUser>): Promise<IUser | undefined> {
+  async findOne(user: Partial<IUser>): Promise<IUser | null> {
     return this.userAdapter.findOne(user);
   }
 
