@@ -6,7 +6,7 @@ import { getKeyHash } from 'vona-module-a-cache';
 import { Caching } from 'vona-module-a-caching';
 
 function cacheKeyFn(this: ServiceCaching, args: any[], prop: string, options: TypeCachingActionOptions): any {
-  return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
+  return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
 }
 
 @Service()
