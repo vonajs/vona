@@ -223,22 +223,16 @@ await this.scope.summerCache.student.get('2', {
 |名称|类型|说明|
 |--|--|--|
 |ttl|number|Cache expiration time|
-|broadcastOnSet|boolean \| 'del'|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
-|updateAgeOnGet|boolean|当读取缓存时是否更新ttl|
-|ignoreNull|boolean|是否忽略`null`值|
-|mode|'all' \| 'mem' \| 'redis'|缓存模式|
-|force|boolean|强制读取新值|
-|disableTransactionCompensate|boolean|是否禁止事务补偿|
-|db|ServiceDb|在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象|
-|enable|boolean|是否禁用Summer缓存|
-|get|Function|覆盖`getNative`方法|
-|mget|Function|覆盖`mgetNative`方法|
-
-|Name|Type|Description|
-|--|--|--|
-|ttl|number|Cache expiration time|
+|broadcastOnSet|boolean \| 'del'|Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches|
+|updateAgeOnGet|boolean|Whether to update the ttl when reading from the cache|
+|ignoreNull|boolean|Whether to ignore `null` values|
+|mode|'all' \| 'mem' \| 'redis'|Cache mode|
+|force|boolean|Force read new value|
 |disableTransactionCompensate|boolean|Whether to disable transaction compensation|
-|db| ServiceDb| This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
+|db|ServiceDb|This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
+|enable|boolean|Whether to disable Summer Cache|
+|get|Function|Override `getNative` method|
+|mget|Function|Override `mgetNative` method|
 
 - `db`: VonaJS supports multiple databases/datasources, so transaction compensation can be precisely controlled through `db`
 
@@ -251,10 +245,6 @@ await this.scope.summerCache.student.get('2', {
 |peek|Retrieve cache without updating its TTL|
 |set|Set cache|
 |mset|Set multiple caches at once|
-|getset|Set new cache and return old value|
-|has|Check if cache exists|
 |del|Delete cache|
 |mdel|Delete multiple caches at once|
 |clear|Clear all caches|
-|expire|Modify cache expiration time|
-|lookupKeys|Get all cache keys|
