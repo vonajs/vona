@@ -108,7 +108,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table: keyof ITableRecord | undefined,
     where: TypeModelWhere<TRecord>,
     options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<TRecord | undefined> {
+  ): Promise<TRecord | null> {
     // table
     table = table || this.getTable(where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
@@ -120,7 +120,8 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // select
     const items = await this._select(table, params, options);
     const item = items[0];
-    if (!item) return undefined;
+    // return null for caching
+    if (!item) return null; // undefined;
     return item as unknown as TRecord;
   }
 

@@ -5,7 +5,7 @@ import { evaluateExpressions, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
 
-export function combineCachingKey(options: TypeCachingActionOptions, args: [], receiver: BeanBase, prop: string) {
+export function combineCachingKey(options: TypeCachingActionOptions, args: any[], receiver: BeanBase, prop: string) {
   // cacheKeyFn
   if (options.cacheKeyFn) {
     if (typeof options.cacheKeyFn === 'string') {
@@ -27,8 +27,8 @@ export function combineCachingKey(options: TypeCachingActionOptions, args: [], r
       ctx: cast(receiver).ctx,
     });
   }
-  // default
-  return `${cast(receiver).$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args)}`;
+  // default: only use first arg
+  return `${cast(receiver).$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
 }
 
 export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: [], receiver: BeanBase, prop: string, value: any) {

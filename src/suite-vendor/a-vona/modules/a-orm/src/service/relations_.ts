@@ -21,7 +21,7 @@ export class ServiceRelations extends BeanBase {
 
   public async handleRelationsOne<TRecord extends {}>(
     relations: IRelationItem[] | undefined,
-    entity: TRecord | undefined,
+    entity: TRecord | null,
     includeWrapper?: IModelRelationIncludeWrapper,
     methodOptions?: IModelMethodOptions,
   ) {

@@ -354,10 +354,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<Partial<TRecord> | undefined> {
+  async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<Partial<TRecord> | null> {
     const relations = this.relations.handleRelationsCollection(options);
     const [options2, refKeys] = this.relations.prepareColumnsByRelations(relations, options);
-    let item: TRecord | undefined = await this.__get_raw(undefined, where, options2);
+    let item: TRecord | null = await this.__get_raw(undefined, where, options2);
     if (!item) return item;
     item = await this.relations.handleRelationsOne(relations, item, options as any, options);
     if (refKeys) {
@@ -372,7 +372,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table: keyof ITableRecord | undefined,
     where: TypeModelWhere<TRecord>,
     options?: IModelGetOptions<TRecord>,
-  ): Promise<TRecord | undefined> {
+  ): Promise<TRecord | null> {
     // table
     table = table || this.getTable(where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
@@ -547,8 +547,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const item: TRecord | null | undefined = await cache.get(id, {
       get: async () => {
         // where: maybe contain aux key
-        const item = await super._get(table, where, { disableDeleted: true });
-        return item === undefined ? null : item;
+        return await super._get(table, where, { disableDeleted: true });
       },
       db: this.db,
     });
