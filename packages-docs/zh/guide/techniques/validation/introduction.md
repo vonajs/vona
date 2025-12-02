@@ -183,10 +183,10 @@ VonaJS 将用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而�
 
 |名称|说明|
 |--|--|
-|serializerExclude|排除字段|
-|serializerTransform|转换字段值|
-|serializerSensitive|字段脱敏处理|
-|serializerGetter|使用Getter生成字段值|
+|v.serializerExclude|排除字段|
+|v.serializerTransform|转换字段值|
+|v.serializerSensitive|字段脱敏处理|
+|v.serializerGetter|使用Getter生成字段值|
 
 ### 5. Zod Tools
 
@@ -195,7 +195,15 @@ VonaJS 将用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而�
 |v.refine|提供Zod Refine能力|
 |v.transform|提供Zod Transform能力|
 
-### 6. Special Tools
+### 6. Query Filter Tools
+
+|名称|说明|
+|--|--|
+|v.filter|设置Query Filter的参数|
+|v.filterTransform|提供Filter Transform能力|
+|v.filterDateRange|将日期范围转换为查询条件|
+
+### 7. Special Tools
 
 |名称|说明|
 |--|--|

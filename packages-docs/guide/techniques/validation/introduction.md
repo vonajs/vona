@@ -183,10 +183,10 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 
 |Name|Description|
 |--|--|
-|serializerExclude|Exclude fields|
-|serializerTransform|Transform field values|
-|serializerSensitive|Desensitize fields|
-|serializerGetter|Generate field values ​​using a getter|
+|v.serializerExclude|Exclude fields|
+|v.serializerTransform|Transform field values|
+|v.serializerSensitive|Desensitize fields|
+|v.serializerGetter|Generate field values ​​using a getter|
 
 ### 5. Zod Tools
 
@@ -195,7 +195,15 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 |v.refine|Provides `Zod Refine` capabilities|
 |v.transform|Provides `Zod Transform` capabilities|
 
-### 6. Special Tools
+### 6. Query Filter Tools
+
+|名称|说明|
+|--|--|
+|v.filter|Set the parameters for the Query Filter|
+|v.filterTransform|Provides `Filter Transform` capabilities|
+|v.filterDateRange|Converts date range into a conditional statement|
+
+### 7. Special Tools
 
 |Name|Description|
 |--|--|
