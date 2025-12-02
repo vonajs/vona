@@ -209,3 +209,15 @@ VonaJS 将用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而�
 |--|--|
 |v.tableIdentity|基于当前系统配置，提供`number`或者`bigint`的校验规则|
 |v.captcha|提供验证码选项|
+
+## Controller
+
+关于 Controller 更完整的使用说明，参见: [Controller](../../essentials/api/controller.md)
+
+## Entity
+
+Entity 字段也支持 Validation 参数校验，参见: [Entity](../../essentials/api/entity.md)
+
+## Dto
+
+Dto 字段也支持 Validation 参数校验，参见: [Dto](../../essentials/api/dto.md)

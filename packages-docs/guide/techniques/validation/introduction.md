@@ -209,3 +209,15 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 |--|--|
 |v.tableIdentity|Based on the current system configuration, provides `number` or `bigint` validation rules |
 |v.captcha| Provides captcha options|
+
+## Controller
+
+For a more complete guide on using Controller, see: [Controller](../../essentials/api/controller.md)
+
+## Entity
+
+The fields of Entity also support Validation. See: [Entity](../../essentials/api/entity.md)
+
+## Dto
+
+The fields of Dto also support Validation. See: [Dto](../../essentials/api/dto.md)
