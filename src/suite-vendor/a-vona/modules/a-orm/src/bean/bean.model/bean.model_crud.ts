@@ -18,7 +18,7 @@ export class BeanModelCrud<TRecord extends {} = {}> extends BeanModelCrudInner<T
     return await this._select(undefined, params, options);
   }
 
-  async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptionsGeneral<TRecord>): Promise<Partial<TRecord> | null> {
+  async get(where: TypeModelWhere<TRecord>, options?: IModelGetOptionsGeneral<TRecord>): Promise<Partial<TRecord> | undefined> {
     return await this._get(undefined, where, options);
   }
 

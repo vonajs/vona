@@ -68,7 +68,7 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
         const optional = magicField.optional ? '?' : '';
         const type = fieldName === 'id' ? entityInfo.idType : magicField.type;
         if (method === 'getBy') {
-          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | null>;`);
+          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
         } else if (method === 'selectBy') {
           contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}${optional}: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
         } else if (method === 'updateBy') {

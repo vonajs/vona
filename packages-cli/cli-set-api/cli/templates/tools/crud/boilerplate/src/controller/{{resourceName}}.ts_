@@ -29,7 +29,7 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
 
   @Web.get(':id')
   @Api.body(v.optional(), v.object(Entity<%=argv.resourceNameCapitalize%>))
-  async findOne(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | null> {
+  async findOne(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
     return await this.scope.service.<%=argv.resourceName%>.findOne(id);
   }
 

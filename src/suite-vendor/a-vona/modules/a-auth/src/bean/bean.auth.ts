@@ -95,7 +95,7 @@ export class BeanAuth extends BeanBase {
     });
   }
 
-  async findOne(auth: Partial<EntityAuth>): Promise<DtoAuth | null> {
+  async findOne(auth: Partial<EntityAuth>): Promise<DtoAuth | undefined> {
     if (String(auth.id).charAt(0) === '-') return auth as unknown as DtoAuth;
     return await this.scope.model.auth.get(auth, {
       columns: ['id', 'profileId'],
