@@ -1,6 +1,6 @@
 # Logger
 
-VonaJS provides a powerful and flexible logging system based on [winston](https://github.com/winstonjs/winston).
+VonaJS provides a powerful and flexible logging system based on [winston](https://github.com/winstonjs/winston)
 
 ## Features
 
