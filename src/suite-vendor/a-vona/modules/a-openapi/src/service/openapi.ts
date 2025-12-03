@@ -12,12 +12,9 @@ import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { appMetadata, appResource, BeanBase, cast, LocaleModuleNameSeparator } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
+import { $schema, bodySchemaWrapperDefault, SymbolOpenApiOptions, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
-import { bodySchemaWrapperDefault } from '../lib/schema/bodySchemaWrapper.ts';
-import { $schema } from '../lib/schema/schema.ts';
-import { SymbolRouteHandlersArgumentsMeta } from '../types/decorator.ts';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field', 'files', 'file'];
 

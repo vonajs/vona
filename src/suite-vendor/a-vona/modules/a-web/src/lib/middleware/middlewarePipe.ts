@@ -5,10 +5,7 @@ import type { IOnionExecuteCustom } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
-import {
-  SymbolRouteHandlersArgumentsMeta,
-  SymbolRouteHandlersArgumentsValue,
-} from 'vona-module-a-openapi';
+import { SymbolRouteHandlersArgumentsMeta, SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
 import { extractValue } from './extractValue.ts';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {

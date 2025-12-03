@@ -3,7 +3,7 @@ import type { RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
 import type { IDecoratorPipeOptionsArgument, IPipeRecord } from '../../types/pipe.ts';
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
-import { SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapi';
+import { SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
 
 export interface ArgumentPipeInfo<T extends keyof IPipeRecord> {
   pipeName: T;
