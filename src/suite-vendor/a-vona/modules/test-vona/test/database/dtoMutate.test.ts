@@ -46,7 +46,7 @@ describe('dtoMutate.test.ts', () => {
       rules = getTargetDecoratorRules(DtoPostCreate.prototype);
       assert.equal(rules.title?.type === 'string', true); // ZodOptional
       assert.equal(rules.stars?.type === 'optional', true);
-      assert.equal(['string', 'number'].includes(rules.userId?.type as string), true);
+      assert.equal(rules.userId?.type === 'pipe', true);
       assert.equal(rules.postContent?.type === 'optional', true);
       assert.equal(rules.user, undefined);
       assert.equal(rules.id, undefined);

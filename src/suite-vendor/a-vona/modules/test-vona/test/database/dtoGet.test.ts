@@ -35,9 +35,9 @@ describe('dtoGet.test.ts', () => {
         },
       });
       const rules: TypeDecoratorRules = getTargetDecoratorRules(DtoPostNew.prototype);
-      assert.equal(['string', 'number'].includes(rules.id?.type as string), true);
+      assert.equal(rules.id?.type === 'pipe', true);
       assert.equal(rules.title?.type === 'string', true);
-      assert.equal(['string', 'number'].includes(rules.userId?.type as string), true);
+      assert.equal(rules.userId?.type === 'pipe', true);
       assert.equal(rules.iid, undefined);
       assert.equal(rules.postContent?.type === 'optional', true);
       assert.equal(rules.user?.type === 'optional', true);
