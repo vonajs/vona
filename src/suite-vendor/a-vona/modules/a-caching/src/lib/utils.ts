@@ -1,4 +1,3 @@
-import type { BeanBase } from 'vona';
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
 import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from '../types/caching.ts';
 import { evaluateExpressions, isNil } from '@cabloy/utils';
@@ -6,7 +5,7 @@ import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
 
 export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCachingActionOptions) {
-  const { args, prop, receiver, intention } = info;
+  const { result, args, prop, receiver, intention } = info;
   // cacheKeyFn
   if (options.cacheKeyFn) {
     if (typeof options.cacheKeyFn === 'string') {
@@ -31,7 +30,9 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
   }
   // default: only use first arg
   let argsPick: any[];
-  if (intention === 'set') {
+  if (intention === 'create') {
+    argsPick = [result?.id];
+  } else if (intention === 'set') {
     argsPick = args.slice(0, args.length - 1);
   } else {
     argsPick = args;

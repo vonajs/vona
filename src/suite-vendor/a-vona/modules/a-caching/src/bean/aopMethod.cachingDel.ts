@@ -5,7 +5,9 @@ import { BeanAopMethodBase, beanFullNameFromOnionName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 import { combineCachingKey, isCachingKeyValid } from '../lib/utils.ts';
 
-export interface IAopMethodOptionsCachingDel extends IDecoratorAopMethodOptions, TypeCachingActionOptions {}
+export interface IAopMethodOptionsCachingDel extends IDecoratorAopMethodOptions, TypeCachingActionOptions {
+  intention: 'del' | 'create';
+}
 
 @AopMethod<IAopMethodOptionsCachingDel>()
 export class AopMethodCachingDel extends BeanAopMethodBase implements IAopMethodExecute {
@@ -14,7 +16,7 @@ export class AopMethodCachingDel extends BeanAopMethodBase implements IAopMethod
     // next
     const result = await next();
     // key
-    const key = combineCachingKey({ args, receiver, prop, intention: 'del' }, options);
+    const key = combineCachingKey({ args, receiver, prop, result, intention: options.intention ?? 'del' }, options);
     if (!isCachingKeyValid(key)) return result;
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));

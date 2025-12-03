@@ -1,8 +1,9 @@
 import type { BeanBase } from 'vona';
 import type { ISummerCacheRecord, TSummerCacheActionOptions } from 'vona-module-a-summer';
 
-export type TypeCachingActionIntention = 'get' | 'set' | 'del';
+export type TypeCachingActionIntention = 'get' | 'set' | 'del' | 'create';
 export interface ICachingActionKeyInfo {
+  result?: any;
   args: any[];
   prop: string;
   receiver: BeanBase;
