@@ -1,4 +1,4 @@
-import type { ISchemaObjectExtensionFieldCaptcha } from '../../../types/captcha.ts';
+import type { ISchemaObjectExtensionFieldCaptcha } from 'vona-module-a-openapi';
 import { useApp } from 'vona';
 import { z } from 'zod';
 

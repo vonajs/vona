@@ -1,4 +1,4 @@
-import type { ILocaleRecord } from 'vona';
+import type { ILocaleRecord } from '../../lib/bean/resource/locale/type.ts';
 import type { IBeanScopeLocale } from '../../lib/bean/type.ts';
 import type { PowerPartial } from '../utils/powerPartial.ts';
 

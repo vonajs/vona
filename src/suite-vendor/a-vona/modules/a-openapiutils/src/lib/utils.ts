@@ -1,11 +1,11 @@
 import type { Constructable } from 'vona';
-import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
-import type { TypeOpenapiMetadata } from '../types/rest.ts';
+import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { TypeDecoratorRules } from '../types/decorator.ts';
 import { isClass, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
-import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
+import { SymbolDecoratorRule } from '../types/decorator.ts';
 
 export function getTargetDecoratorRules(target: object, disableRegisterMetadata?: boolean): TypeDecoratorRules {
   if (!disableRegisterMetadata) {

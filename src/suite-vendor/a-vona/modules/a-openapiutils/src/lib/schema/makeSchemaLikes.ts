@@ -1,13 +1,45 @@
 import type { Constructable } from 'vona';
-import type { SchemaLike } from 'vona-module-a-openapiutils';
-import type { ISchemaObjectOptions } from '../../types/decorator.ts';
-import type { TypeOpenapiMetadata } from '../../types/rest.ts';
+import type { ISchemaObjectOptions, TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
+import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
-import { SymbolDecoratorRule } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
+import { SymbolDecoratorRule } from '../../types/decorator.ts';
 import { prepareClassType } from '../utils.ts';
-import { makeSchemaLikes } from './makeSchemaLikes.ts';
 import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
+
+export function $makeSchema(...schemaLikes: SchemaLike[]): z.ZodType {
+  return makeSchemaLikes(schemaLikes, undefined);
+}
+
+export function makeSchemaLikes<T>(schemaLikes: SchemaLike<T> | SchemaLike<T>[], typeInit: any): z.ZodType<T> {
+  if (!Array.isArray(schemaLikes)) schemaLikes = [schemaLikes];
+  // default schema
+  let argSchema: z.ZodType<T> = $schema(typeInit);
+  // loop
+  for (let index = schemaLikes.length - 1; index >= 0; index--) {
+    const schemaLike = schemaLikes[index];
+    argSchema = makeSchemaLike(schemaLike, argSchema);
+  }
+  return argSchema;
+}
+
+export function makeSchemaLike<T>(schemaLike: SchemaLike<T> | undefined, schemaPrevious: z.ZodType<T>): z.ZodType<T> {
+  if (!schemaLike) return schemaPrevious;
+  if (Object.prototype.hasOwnProperty.call(schemaLike, 'parseAsync')) {
+    // schema
+    return schemaLike as z.ZodType<T>;
+  } else if (
+    isClass(schemaLike) ||
+    ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)
+  ) {
+    // class
+    return $schema(cast<Constructable>(schemaLike)) as z.ZodType<T>;
+  } else {
+    // function
+    return cast<SchemaLikeCreate>(schemaLike)(schemaPrevious);
+  }
+}
 
 export function $schema<T>(schemaLike: z.ZodType<T>): z.ZodType<T>;
 export function $schema(classType: StringConstructor): z.ZodString;

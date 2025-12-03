@@ -1,12 +1,11 @@
 import type { Constructable } from 'vona';
-import type { SchemaLike } from 'vona-module-a-openapiutils';
-import type { ISchemaObjectOptions } from '../../../types/decorator.ts';
+import type { ISchemaObjectOptions } from 'vona-module-a-openapi';
+import type { SchemaLike } from '../../../types/decorator.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';
 import { $locale } from '../../../.metadata/index.ts';
-import { makeSchemaLike } from '../makeSchemaLikes.ts';
-import { $schema, $schemaLazy } from '../schema.ts';
+import { $schema, $schemaLazy, makeSchemaLike } from '../makeSchemaLikes.ts';
 
 export function schemaDefault(defaultValue: any | Function) {
   return function (schema: z.ZodType): z.ZodType {
