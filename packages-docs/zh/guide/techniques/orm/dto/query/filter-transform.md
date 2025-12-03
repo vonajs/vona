@@ -58,12 +58,14 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 ## 使用Filter Transform
 
-``` typescript
+### 1. 一般用法
+
+``` diff
 import { v } from 'vona-module-a-openapiutils';
 
 class DtoStudentQuery {
   @Api.field(
-    v.filterTransform('demo-student:dateRange'),
++   v.filterTransform('demo-student:dateRange'),
     v.optional(),
   )
   createdAt?: string;
@@ -72,6 +74,26 @@ class DtoStudentQuery {
 
 - `v.filterTransform`: 此工具函数用于使用 Filter Transform，只需传入 Filter Transform 的名称
   - `dateRange` Filter Transform 属于模块`demo-student`，因此完整的名称是`demo-student:dateRange`
+
+### 2. App Config
+
+可以在 App Config 中配置 createdAt 参数
+
+``` typescript
+config.onions = {
+  dto: {
+    'demo-student:studentQuery': {
+      fields: {
+        createdAt: {
+          filter: {
+            transform: $makeFilterTransform('demo-student:dateRange'),
+          },
+        },
+      },
+    },
+  },
+};
+```
 
 ## Filter Transform参数
 
@@ -124,6 +146,8 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 可以在使用时指定 Filter Transform 参数
 
+* 一般用法
+
 ``` diff
 class DtoStudentQuery {
   @Api.field(
@@ -132,6 +156,26 @@ class DtoStudentQuery {
   )
   createdAt?: string;
 }
+```
+
+* App Config
+
+可以在 App Config 中配置 createdAt 参数
+
+``` diff
+config.onions = {
+  dto: {
+    'demo-student:studentQuery': {
+      fields: {
+        createdAt: {
+          filter: {
++           transform: $makeFilterTransform('demo-student:dateRange', { separator: ' - ' }),
+          },
+        },
+      },
+    },
+  },
+};
 ```
 
 ### 5. App Config

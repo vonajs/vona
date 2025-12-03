@@ -58,12 +58,14 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 ## Using Filter Transform
 
-``` typescript
+### 1. General Usage
+
+``` diff
 import { v } from 'vona-module-a-openapiutils';
 
 class DtoStudentQuery {
   @Api.field(
-    v.filterTransform('demo-student:dateRange'),
++   v.filterTransform('demo-student:dateRange'),
     v.optional(),
   )
   createdAt?: string;
@@ -72,6 +74,26 @@ class DtoStudentQuery {
 
 - `v.filterTransform`: This function is used to use Filter Transform. Simply pass the Filter Transform name
   - The `dateRange` Filter Transform belongs to the `demo-student` module, so the full name is `demo-student:dateRange`
+
+### 2. App Config
+
+`createdAt` parameters can be configured in App Config
+
+``` typescript
+config.onions = {
+  dto: {
+    'demo-student:studentQuery': {
+      fields: {
+        createdAt: {
+          filter: {
+            transform: $makeFilterTransform('demo-student:dateRange'),
+          },
+        },
+      },
+    },
+  },
+};
+```
 
 ## Filter Transform Parameters
 
@@ -124,6 +146,8 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 You can specify Filter Transform parameters when using
 
+* General Usage
+
 ``` diff
 class DtoStudentQuery {
   @Api.field(
@@ -132,6 +156,26 @@ class DtoStudentQuery {
   )
   createdAt?: string;
 }
+```
+
+* App Config
+
+`createdAt` parameters can be configured in App Config
+
+``` diff
+config.onions = {
+  dto: {
+    'demo-student:studentQuery': {
+      fields: {
+        createdAt: {
+          filter: {
++           transform: $makeFilterTransform('demo-student:dateRange', { separator: ' - ' }),
+          },
+        },
+      },
+    },
+  },
+};
 ```
 
 ### 5. App Config
