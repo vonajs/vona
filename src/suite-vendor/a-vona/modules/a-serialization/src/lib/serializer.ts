@@ -5,7 +5,7 @@ import type { ISerializerTransformOptionsExclude } from '../bean/serializerTrans
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
 import type { ISerializerTransformRecord, TypeSerializerTransformCustom, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
 import { Aspect } from 'vona-module-a-aspect';
-import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapi';
+import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapiutils';
 
 function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });

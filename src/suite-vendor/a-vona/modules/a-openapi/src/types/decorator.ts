@@ -42,7 +42,4 @@ export type RouteHandlerArgumentType =
   'string' |
   'user';
 
-export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
-export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgumentsValue');
-
 export type TypeExtractValue = (ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) => Promise<any>;
