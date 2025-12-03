@@ -91,7 +91,7 @@ export function schemaRegex(regex: RegExp, params?: string | z.core.$ZodCheckReg
 export function schemaTableIdentity() {
   return function (_schema?: any): z.ZodType {
     const schema = z.union([z.number(), z.string()]);
-    return schema.transform(async value => {
+    return schema.transform(value => {
       const app = useApp();
       const ormConfig = app.util.getModuleConfigRaw('a-orm');
       const _identityType = ormConfig?.table?.identityType ?? 'bigint';
