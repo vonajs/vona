@@ -26,7 +26,6 @@ export type TypeCachingActionOptions =
     cacheName: keyof ISummerCacheRecord;
     cacheKey?: any;
     cacheKeyFn?: TypeCacheKeyFn | string;
-    cacheProp?: string;
   };
 
-export type TypeCachingActionClearOptions = Omit<TypeCachingActionOptions, 'cacheKey' | 'cacheKeyFn' | 'cacheProp'>;
+export type TypeCachingActionClearOptions = Omit<TypeCachingActionOptions, 'cacheKey' | 'cacheKeyFn'>;

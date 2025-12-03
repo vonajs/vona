@@ -1,6 +1,6 @@
 import type { BeanBase } from 'vona';
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
-import type { ICachingActionKeyInfo, TypeCachingActionOptions } from '../types/caching.ts';
+import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from '../types/caching.ts';
 import { evaluateExpressions, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
@@ -13,15 +13,16 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
       if (!receiver[options.cacheKeyFn]) {
         throw new Error(`cacheKeyFn not found: ${cast(receiver).$beanFullName}#${options.cacheKeyFn}`);
       }
-      return receiver[options.cacheKeyFn](args, prop, options, receiver);
+      return receiver[options.cacheKeyFn](info, options);
     }
-    return options.cacheKeyFn.call(receiver, args, prop, options, receiver);
+    return options.cacheKeyFn.call(receiver, info, options);
   }
   // cacheKey
   if (options.cacheKey) {
     return evaluateExpressions(options.cacheKey, {
       args,
       prop,
+      intention,
       options,
       self: receiver,
       app: cast(receiver).app,
@@ -29,19 +30,27 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
     });
   }
   // default: only use first arg
-  return `${cast(receiver).$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
+  let argsPick: any[];
+  if (intention === 'set') {
+    argsPick = args.slice(0, args.length - 1);
+  } else {
+    argsPick = args;
+  }
+  const argFirst = argsPick.length === 1 ? argsPick[0] : argsPick;
+  return getKeyHash(argFirst);
 }
 
-export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: any[], receiver: BeanBase, prop: string, result: any) {
+export function combineCachingValue(info: ICachingActionValueInfo, options: IAopMethodOptionsCachingSet) {
+  const { result, args, prop, receiver, intention } = info;
   // cacheValueFn
   if (!isNil(options.cacheValueFn)) {
     if (typeof options.cacheValueFn === 'string') {
       if (!receiver[options.cacheValueFn]) {
         throw new Error(`cacheValueFn not found: ${cast(receiver).$beanFullName}#${options.cacheValueFn}`);
       }
-      return receiver[options.cacheValueFn](result, args, prop, options, receiver);
+      return receiver[options.cacheValueFn](info, options);
     }
-    return options.cacheValueFn.call(receiver, result, args, prop, options, receiver);
+    return options.cacheValueFn.call(receiver, info, options);
   }
   // cacheValue
   if (!isNil(options.cacheValue)) {
@@ -49,6 +58,7 @@ export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: 
       result,
       args,
       prop,
+      intention,
       options,
       self: receiver,
       app: cast(receiver).app,
@@ -56,7 +66,11 @@ export function combineCachingValue(options: IAopMethodOptionsCachingSet, args: 
     });
   }
   // default
-  return args[1];
+  if (intention === 'set') {
+    return args[args.length - 1];
+  } else {
+    return result;
+  }
 }
 
 export function isCachingKeyValid(key: any) {

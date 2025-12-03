@@ -11,11 +11,11 @@ export class AopMethodCachingClear extends BeanAopMethodBase implements IAopMeth
   async execute(options: IAopMethodOptionsCachingClear, _args: [], next: Next, receiver: any, prop: string): Promise<any> {
     if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // next
-    const value = await next();
+    const result = await next();
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
     await cache.clear(options);
     // ok
-    return value;
+    return result;
   }
 }

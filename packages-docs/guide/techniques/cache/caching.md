@@ -74,14 +74,12 @@ The system will automatically generate a unique `cacheKey`
 ``` typescript
 @Caching.get({
   cacheName: 'demo-student:student',
-  cacheProp: 'student', // 'findOne'
   cacheKeyFn: 'customCacheKey',
 })
 ```
 
 |Name|Type|Description|
 |--|--|--|
-|cacheProp|string|Custom prop name, defaults to the name of the decorated method|
 |cacheKeyFn|function\|string|Used to generate a custom cache key|
 
 ## Custom cache key
@@ -130,23 +128,22 @@ customCacheKey(args: any[]) {
 
 ``` diff
 class ServiceStudent {
-+ @Caching.get({ cacheName: 'demo-student:student', cacheProp: 'student' })
++ @Caching.get({ cacheName: 'demo-student:student' })
   async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
 
-+ @Caching.del({ cacheName: 'demo-student:student', cacheProp: 'student' })
++ @Caching.del({ cacheName: 'demo-student:student' })
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
 
-+ @Caching.del({ cacheName: 'demo-student:student', cacheProp: 'student' })
++ @Caching.del({ cacheName: 'demo-student:student' })
   async remove(id: TableIdentity) {
     return await this.scope.model.student.deleteById(id);
   }
 }
 ```
 
-- Setting a unified `cacheProp` value is to ensure consistency of the Cache Key
 - The `@Caching.xxx` decorators added here are for demonstration purposes only. In actual business scenarios, there is no need to use `@Caching.xxx` in the Service, because the Model itself has a more complete built-in caching mechanism
   - See: [Vona ORM: Caching](../orm/caching.md)

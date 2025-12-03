@@ -12,14 +12,14 @@ export class AopMethodCachingDel extends BeanAopMethodBase implements IAopMethod
   async execute(options: IAopMethodOptionsCachingDel, args: [], next: Next, receiver: any, prop: string): Promise<any> {
     if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // next
-    const value = await next();
+    const result = await next();
     // key
     const key = combineCachingKey({ args, receiver, prop, intention: 'del' }, options);
-    if (!isCachingKeyValid(key)) return value;
+    if (!isCachingKeyValid(key)) return result;
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
     await cache.del(key, options);
     // ok
-    return value;
+    return result;
   }
 }
