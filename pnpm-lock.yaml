@@ -29,6 +29,9 @@ importers:
       '@cabloy/socket':
         specifier: workspace:^
         version: link:packages-utils/socket
+      '@cabloy/type-fest':
+        specifier: ^5.3.1
+        version: 5.3.1
       '@cabloy/utils':
         specifier: ^1.0.47
         version: link:packages-utils/utils
@@ -83,6 +86,9 @@ importers:
       table-identity:
         specifier: ^1.0.12
         version: link:packages-utils/table-identity
+      type-fest:
+        specifier: ^5.3.0
+        version: 5.3.0
       uuid:
         specifier: ^11.0.3
         version: 11.1.0
@@ -300,7 +306,7 @@ importers:
         specifier: ^4.9.0
         version: 4.9.0
       zod:
-        specifier: ^4.1.5
+        specifier: ^4.1.13
         version: 4.1.13
     devDependencies:
       '@cabloy/cli':
@@ -915,6 +921,9 @@ importers:
       '@cabloy/set':
         specifier: ^1.0.17
         version: link:../../packages-utils/set
+      '@cabloy/type-fest':
+        specifier: ^5.3.1
+        version: 5.3.1
       '@cabloy/utils':
         specifier: ^1.0.47
         version: link:../../packages-utils/utils
@@ -1476,6 +1485,9 @@ importers:
       '@cabloy/set':
         specifier: ^1.0.17
         version: link:../../../../../packages-utils/set
+      '@cabloy/type-fest':
+        specifier: ^5.3.1
+        version: 5.3.1
       '@cabloy/utils':
         specifier: ^1.0.47
         version: link:../../../../../packages-utils/utils
@@ -2532,6 +2544,10 @@ packages:
   '@cabloy/koa-static-cache@6.0.1':
     resolution: {integrity: sha512-B7dF43O1gE5Whwn+MwNanjXZUTqpv/e2TmKIyyzdcVjH6o7ENesebxiDXJAAjkX6dpg3Bijpq6acBE38VKGJSQ==}
     engines: {node: '>= 7.6.0'}
+
+  '@cabloy/type-fest@5.3.1':
+    resolution: {integrity: sha512-oiG+8jGoKigRKUd51wKIn7FVZHNpfap7vgMWzmjJdVv0HGKZa3XR7sRfZvUSOcLW7tu9Y+GT/aWuJvM0gQiNxg==}
+    engines: {node: '>=20'}
 
   '@cabloy/word-utils@2.0.1':
     resolution: {integrity: sha512-kZx3fdk8sOX9JpVv6Q7y6r+rbqZ0KvE8NukbvsQfSvOngV7Yi3dF8PmefCDJWuPqn6YZ4PdxKxCOWaYTrVQPQA==}
@@ -8373,6 +8389,10 @@ packages:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
     engines: {node: '>=10.0.0'}
 
+  tagged-tag@1.0.0:
+    resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
+    engines: {node: '>=20'}
+
   tapable@2.3.0:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
@@ -8580,6 +8600,10 @@ packages:
   type-fest@4.41.0:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
+
+  type-fest@5.3.0:
+    resolution: {integrity: sha512-d9CwU93nN0IA1QL+GSNDdwLAu1Ew5ZjTwupvedwg3WdfoH6pIDvYQ2hV0Uc2nKBLPq7NB5apCx57MLS5qlmO5g==}
+    engines: {node: '>=20'}
 
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
@@ -9824,6 +9848,10 @@ snapshots:
       mz: 2.7.0
     transitivePeerDependencies:
       - supports-color
+
+  '@cabloy/type-fest@5.3.1':
+    dependencies:
+      tagged-tag: 1.0.0
 
   '@cabloy/word-utils@2.0.1': {}
 
@@ -16575,6 +16603,8 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
 
+  tagged-tag@1.0.0: {}
+
   tapable@2.3.0: {}
 
   tar-stream@1.6.2:
@@ -16803,6 +16833,10 @@ snapshots:
   type-fest@4.2.0: {}
 
   type-fest@4.41.0: {}
+
+  type-fest@5.3.0:
+    dependencies:
+      tagged-tag: 1.0.0
 
   type-is@1.6.18:
     dependencies:
