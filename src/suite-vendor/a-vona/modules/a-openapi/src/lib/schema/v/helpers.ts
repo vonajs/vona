@@ -89,16 +89,20 @@ export function schemaRegex(regex: RegExp, params?: string | z.core.$ZodCheckReg
 }
 
 export function schemaTableIdentity() {
-  const app = useApp();
-  const ormConfig = app.util.getModuleConfigRaw('a-orm');
-  const _identityType = ormConfig?.table?.identityType ?? 'bigint';
-  return function (_schema?: any): z.ZodString | z.ZodNumber {
-    if (_identityType === 'number') {
-      return z.number();
-    } else if (_identityType === 'bigint') {
-      return z.string().regex(/^\d+$/);
-    }
-    throw new Error('not support');
+  return function (_schema?: any): z.ZodType {
+    const schema = z.union([z.number(), z.string()]);
+    return schema.transform(async value => {
+      const app = useApp();
+      const ormConfig = app.util.getModuleConfigRaw('a-orm');
+      const _identityType = ormConfig?.table?.identityType ?? 'bigint';
+      if (_identityType === 'number') {
+        return Number.parseInt(value as any);
+      } else if (_identityType === 'bigint') {
+        return String(value);
+      } else {
+        throw new Error('not support');
+      }
+    });
   };
 }
 
