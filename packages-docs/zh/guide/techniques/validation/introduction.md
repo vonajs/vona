@@ -40,7 +40,7 @@ class ControllerStudent3 {
 比如，我们要指定 id 为`number`，并且是`可选`，默认值为`3`
 
 ``` typescript
-import { v } from 'vona-module-a-openapi';
+import { v } from 'vona-module-a-openapiutils';
 
 class ControllerStudent3 {
   @Web.get()

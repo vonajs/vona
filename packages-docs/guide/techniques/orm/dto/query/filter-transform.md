@@ -59,7 +59,7 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 ## Using Filter Transform
 
 ``` typescript
-import { v } from 'vona-module-a-openapi';
+import { v } from 'vona-module-a-openapiutils';
 
 class DtoStudentQuery {
   @Api.field(

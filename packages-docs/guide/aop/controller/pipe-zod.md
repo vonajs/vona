@@ -43,7 +43,7 @@ class ControllerStudent {
 Equivalent to:
 
 ```diff
-import { v } from 'vona-module-a-openapi';
+import { v } from 'vona-module-a-openapiutils';
 
 class ControllerStudent {
   @Web.get(':id')

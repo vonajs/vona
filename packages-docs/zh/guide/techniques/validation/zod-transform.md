@@ -48,7 +48,7 @@ class ZodTransformNameCapitalize {
 ## 使用Zod Transform
 
 ``` diff
-import { v } from 'vona-module-a-openapi';
+import { v } from 'vona-module-a-openapiutils';
 
 @Controller()
 class ControllerStudent {

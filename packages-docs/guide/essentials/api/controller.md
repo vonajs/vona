@@ -225,7 +225,7 @@ We can also explicitly specify Zod Schema and automatically generate Swagger/Ope
 Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [Validation](../../techniques/validation/introduction.md)
 
 ``` typescript{5}
-import { Api } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapiutils';
 
 class ControllerStudent {
   @Web.get()

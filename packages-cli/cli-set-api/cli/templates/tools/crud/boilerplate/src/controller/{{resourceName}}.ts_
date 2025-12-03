@@ -3,7 +3,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 import { BeanBase } from 'vona';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resourceName%>Create.ts';
 import { Dto<%=argv.resourceNameCapitalize%>Query } from '../dto/<%=argv.resourceName%>Query.ts';

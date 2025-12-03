@@ -225,7 +225,7 @@ class ControllerStudent {
 使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../../techniques/validation/introduction.md)一致
 
 ``` typescript{5}
-import { Api } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapiutils';
 
 class ControllerStudent {
   @Web.get()

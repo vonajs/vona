@@ -1,6 +1,6 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import type { IJwtToken } from '../types/jwt.ts';
-import { Api } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 
 export interface IDtoOptionsJwtToken extends IDecoratorDtoOptions {}

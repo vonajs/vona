@@ -40,7 +40,7 @@ We can also extend new properties based on the existing Zod Schema
 For example, we want to specify id as `number`, and it is `optional`, with a default value of `3`
 
 ``` typescript
-import { v } from 'vona-module-a-openapi';
+import { v } from 'vona-module-a-openapiutils';
 
 class ControllerStudent3 {
   @Web.get()

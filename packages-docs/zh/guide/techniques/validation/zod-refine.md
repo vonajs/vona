@@ -47,7 +47,7 @@ class ZodRefineNameExists {
 ## 使用Zod Refine
 
 ``` diff
-import { v } from 'vona-module-a-openapi';
+import { v } from 'vona-module-a-openapiutils';
 
 @Controller()
 class ControllerStudent {
