@@ -5,7 +5,7 @@ import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
-import { Api } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapiutils';
 import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsPassport extends IDecoratorControllerOptions {}

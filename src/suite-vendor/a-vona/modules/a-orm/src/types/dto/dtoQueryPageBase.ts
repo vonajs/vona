@@ -1,5 +1,5 @@
 import { useApp } from 'vona';
-import { Api } from 'vona-module-a-openapi';
+import { Api } from 'vona-module-a-openapiutils';
 import z from 'zod';
 import { DtoQueryBase } from './dtoQueryBase.ts';
 
