@@ -1,6 +1,6 @@
-import type { VonaAppInfo, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
 
-export default function (_appInfo: VonaAppInfo, _env: VonaConfigEnv) {
+export default async function (_app: VonaApplication, _env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
 
   // instance
