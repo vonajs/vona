@@ -1,12 +1,11 @@
-import type { TypeAppInfoConfig, VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
-import type { VonaConfig } from '../../types/config/config.ts';
+import type { VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import type { VonaConfigEnv } from '../../types/utils/env.ts';
 import { sleep } from '@cabloy/utils';
 import { cast } from '../../types/utils/cast.ts';
 import { VonaApplication } from '../core/application.ts';
-import { combineAppConfigDefault } from '../core/config.ts';
-import { deepExtend, prepareEnv } from '../utils/util.ts';
+import { prepareEnv } from '../utils/util.ts';
+import { zodEnhance } from '../utils/zod-enhance.ts';
 import { Start } from './start.ts';
 
 export async function createAppMaster(bootstrapOptions: BootstrapOptions) {
@@ -48,12 +47,12 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
 }
 
 function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
+  // patch zod, should before config
+  zodEnhance();
   // env
   const env2 = prepareEnv(env);
   // appInfo
   const appInfo = prepareAppInfo(env2);
-  // config
-  const appConfig = prepareConfig(appInfo, config, env2);
   // options
   const options: VonaApplicationOptions = {
     name: appInfo.name,
@@ -61,7 +60,7 @@ function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Bootstrap
     configMeta: appInfo.configMeta,
     modulesMeta,
     locales,
-    config: appConfig as unknown as VonaConfig,
+    config,
     env: env2,
     AppMonkey,
   };
@@ -77,15 +76,4 @@ function prepareAppInfo(env: VonaConfigEnv): VonaAppInfo {
       mode: cast(env).META_MODE,
     },
   };
-}
-
-function prepareConfig(appInfo: VonaAppInfo, configs: TypeAppInfoConfig[], env: VonaConfigEnv) {
-  const config = combineAppConfigDefault(appInfo, env);
-  for (const configItem of configs) {
-    const res = configItem(appInfo, env);
-    if (res) {
-      deepExtend(config, res);
-    }
-  }
-  return config;
 }

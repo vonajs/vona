@@ -1,5 +1,5 @@
 import type { IModule, VonaConfigMeta } from '@cabloy/module-info';
-import type { VonaConfig, VonaConfigOptional } from '../config/config.ts';
+import type { VonaConfigOptional } from '../config/config.ts';
 import type { VonaLocaleOptionalMap } from '../config/locale.ts';
 import type { AppMonkeyConstructable } from '../interface/monkey.ts';
 import type { VonaConfigEnv } from '../utils/env.ts';
@@ -9,7 +9,9 @@ export interface VonaModulesMeta {
   moduleNames: string[];
 }
 
-export type TypeOptionsModulesMeta = () => Promise<{ modulesMeta: VonaModulesMeta }>;
+export type TypeBootstrapOptionsModulesMeta = () => Promise<{ modulesMeta: VonaModulesMeta }>;
+export type TypeBootstrapOptionsConfig = () => Promise<{ default: TypeAppInfoConfig[] }>;
+export type TypeBootstrapOptionsLocales = () => Promise<{ locales: VonaLocaleOptionalMap }>;
 
 export interface KoaApplicationOptions {
   env?: string | undefined;
@@ -31,9 +33,9 @@ export interface VonaApplicationOptions {
   name: string;
   projectPath: string;
   configMeta: VonaConfigMeta;
-  modulesMeta: TypeOptionsModulesMeta;
-  locales: VonaLocaleOptionalMap;
-  config: VonaConfig;
+  modulesMeta: TypeBootstrapOptionsModulesMeta;
+  locales: TypeBootstrapOptionsLocales;
+  config: TypeBootstrapOptionsConfig;
   env: VonaConfigEnv;
   AppMonkey?: AppMonkeyConstructable;
 }

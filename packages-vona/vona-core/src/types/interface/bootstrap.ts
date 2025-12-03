@@ -1,11 +1,10 @@
-import type { TypeAppInfoConfig, TypeOptionsModulesMeta } from '../application/app.ts';
-import type { VonaLocaleOptionalMap } from '../config/locale.ts';
+import type { TypeBootstrapOptionsConfig, TypeBootstrapOptionsLocales, TypeBootstrapOptionsModulesMeta } from '../application/app.ts';
 import type { AppMonkeyConstructable } from './monkey.ts';
 
 export interface BootstrapOptions {
-  modulesMeta: TypeOptionsModulesMeta;
-  locales: VonaLocaleOptionalMap;
-  config: TypeAppInfoConfig[];
+  modulesMeta: TypeBootstrapOptionsModulesMeta;
+  locales: TypeBootstrapOptionsLocales;
+  config: TypeBootstrapOptionsConfig;
   env: Partial<NodeJS.ProcessEnv>;
   AppMonkey?: AppMonkeyConstructable;
 }

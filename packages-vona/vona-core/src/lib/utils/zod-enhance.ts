@@ -4,12 +4,14 @@ import type { VonaApplication } from '../core/application.ts';
 import { setLocaleAdapter, setLocaleErrors, translateError } from '@cabloy/zod-errors-custom';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { setParseAdapter } from '@cabloy/zod-query';
+import { useApp } from 'vona';
 
 export type ZodLocaleError = () => { localeError: z.core.$ZodErrorMap };
 export type ZodLocaleErrors = Record<keyof ILocaleRecord, ZodLocaleError>;
 
-export function zodEnhance(app: VonaApplication) {
+export function zodEnhance() {
   setLocaleAdapter((text: string, iss?: object) => {
+    const app = useApp();
     return translateError((text: string, ...args: any[]) => {
       return app.meta.text(text, ...args);
     }, text, iss);

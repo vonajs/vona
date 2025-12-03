@@ -1,6 +1,9 @@
+import type { TypeBootstrapOptionsConfig, VonaAppInfo, VonaConfig, VonaConfigEnv } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
 import { EnumAppEvent } from '../../types/index.ts';
+import { combineAppConfigDefault } from '../core/config.ts';
 import { ModuleLoader } from '../module/loader.ts';
+import { deepExtend } from '../utils/util.ts';
 
 export class Start {
   app: VonaApplication;
@@ -12,6 +15,7 @@ export class Start {
   async start() {
     const app = this.app;
     try {
+      await this._start_appConfig();
       await this._start_appLoad();
       await this._start_appStart();
       await this._start_appReady();
@@ -55,4 +59,28 @@ export class Start {
     // hook: appStarted
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
   }
+
+  async _start_appConfig() {
+    const app = this.app;
+    // config
+    const appConfig = await __prepareConfig(app, app.options.config, app.options.env);
+    this.app.config = appConfig as VonaConfig;
+    this.app.keys = appConfig.server!.keys!;
+    this.app.proxy = appConfig.proxy!.enable!;
+    this.app.subdomainOffset = appConfig.server!.subdomainOffset!;
+    this.app.proxyIpHeader = appConfig.proxy!.ipHeaders!;
+    this.app.maxIpsCount = appConfig.proxy!.maxIpsCount!;
+  }
+}
+
+async function __prepareConfig(appInfo: VonaAppInfo, configs: TypeBootstrapOptionsConfig, env: VonaConfigEnv) {
+  const config = combineAppConfigDefault(appInfo, env);
+  const configItems = (await configs()).default;
+  for (const configItem of configItems) {
+    const res = configItem(appInfo, env);
+    if (res) {
+      deepExtend(config, res);
+    }
+  }
+  return config;
 }

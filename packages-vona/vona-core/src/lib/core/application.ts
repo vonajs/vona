@@ -10,7 +10,6 @@ import { cast } from '../../types/utils/cast.ts';
 import { BeanContainer } from '../bean/beanContainer.ts';
 import { closeApp } from '../framework/useApp.ts';
 import { AppUtil } from '../utils/util.ts';
-import { zodEnhance } from '../utils/zod-enhance.ts';
 import { VonaAsyncLocalStorage } from './asyncLocalStorage.ts';
 import { contextBase } from './context.ts';
 import { AppMeta } from './meta.ts';
@@ -30,16 +29,10 @@ export class VonaApplication extends KoaApplication {
     const env = options.env;
     const koaOptions: KoaApplicationOptions = {
       env: cast(env).NODE_ENV,
-      keys: options.config.server.keys,
-      proxy: options.config.proxy.enable,
-      subdomainOffset: options.config.server.subdomainOffset,
-      proxyIpHeader: options.config.proxy.ipHeaders,
-      maxIpsCount: options.config.proxy.maxIpsCount,
       asyncLocalStorage: false,
     };
     super(koaOptions);
     this.options = options;
-    this.config = options.config;
     this.bean = BeanContainer.create(this, undefined);
     this.util = this.bean._newBean(AppUtil);
     this.meta = this.bean._newBean(AppMeta, env);
@@ -50,8 +43,6 @@ export class VonaApplication extends KoaApplication {
       const desc = Object.getOwnPropertyDescriptor(contextBase, key)!;
       Object.defineProperty(this.context, key, desc);
     }
-    // zod
-    zodEnhance(this);
   }
 
   get name() {
