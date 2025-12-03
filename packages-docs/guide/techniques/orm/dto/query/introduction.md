@@ -145,7 +145,30 @@ The automatically generated Swagger/Openapi is as follows:
 
 ![](../../../../../assets/img/orm/dto/dto-4.png)
 
-### 2. Orders of relations
+### 2. App Config
+
+Openapi parameters can be configured in App Config
+
+``` typescript
+config.onions = {
+  dto: {
+    'test-vona:orderQuery': {
+      fields: {
+        userName: {
+          filter: {
+            table: 'testVonaUser',
+            joinType: 'innerJoin',
+            joinOn: ['userId', 'testVonaUser.id'],
+            originalName: 'name',
+          },
+        },
+      },
+    },
+  },
+};
+```
+
+### 3. Orders based on relations
 
 When querying Model `Order` which joins with Model `User`, if the fields in `orders` exist in both tables, you must specify the table name prefix. For example: `testVonaOrder.createdAt,desc`
 

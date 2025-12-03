@@ -150,7 +150,22 @@ export class DtoOrderQuery
 可以在 App Config 中配置 Openapi 参数
 
 ``` typescript
-
+config.onions = {
+  dto: {
+    'test-vona:orderQuery': {
+      fields: {
+        userName: {
+          filter: {
+            table: 'testVonaUser',
+            joinType: 'innerJoin',
+            joinOn: ['userId', 'testVonaUser.id'],
+            originalName: 'name',
+          },
+        },
+      },
+    },
+  },
+};
 ```
 
 ### 3. 基于relations的orders
