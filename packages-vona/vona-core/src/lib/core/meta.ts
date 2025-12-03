@@ -81,7 +81,7 @@ export class AppMeta extends BeanSimple {
   }
 
   private _prepareEnv() {
-    const mode = this.app.config.meta.mode;
+    const mode = this.app.configMeta.mode;
     this.isProd = mode === 'prod';
     this.isTest = mode === 'test';
     this.isDev = mode === 'dev';
