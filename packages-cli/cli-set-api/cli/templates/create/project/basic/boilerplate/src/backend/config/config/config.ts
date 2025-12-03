@@ -1,4 +1,4 @@
-import type { ILoggerOptionsClientInfo, VonaAppInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { ILoggerOptionsClientInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
 import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-mail';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
@@ -18,7 +18,7 @@ declare module 'vona-module-a-orm' {
   }
 }
 
-export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
+export default async function (app: VonaApplication, env: VonaConfigEnv) {
   const config = {} as VonaConfigOptional;
 
   // modules
@@ -29,8 +29,8 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
 
   // meta
   config.meta = {
-    flavor: appInfo.configMeta.flavor,
-    mode: appInfo.configMeta.mode,
+    flavor: app.configMeta.flavor,
+    mode: app.configMeta.mode,
   };
 
   // instance
@@ -42,7 +42,7 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   };
 
   // server
-  const publicDir = env.SERVER_PUBLICDIR || getPublicPathPhysicalRoot(appInfo);
+  const publicDir = env.SERVER_PUBLICDIR || getPublicPathPhysicalRoot(app);
   const subdomainOffset = Number.parseInt(env.SERVER_SUBDOMAINOFFSET || '1');
   const workers = Number.parseInt(env.SERVER_WORKERS!);
   config.server = {
@@ -70,7 +70,7 @@ export default function (appInfo: VonaAppInfo, env: VonaConfigEnv) {
   };
 
   // logger
-  const loggerDir = env.LOGGER_DIR || getLoggerPathPhysicalRoot(appInfo);
+  const loggerDir = env.LOGGER_DIR || getLoggerPathPhysicalRoot(app);
   config.logger = {
     baseDir: loggerDir,
     rotate(filename: string) {

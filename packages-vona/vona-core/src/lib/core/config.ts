@@ -1,4 +1,3 @@
-import type { VonaAppInfo } from '../../types/application/app.ts';
 import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 import type { VonaApplication } from './application.ts';
 import os from 'node:os';
@@ -27,25 +26,25 @@ export async function combineConfigDefault<T>(
   return config;
 }
 
-export function getLoggerPathPhysicalRoot(appInfo: VonaAppInfo) {
-  const mode = appInfo.configMeta.mode;
+export function getLoggerPathPhysicalRoot(app: VonaApplication) {
+  const mode = app.configMeta.mode;
   let loggerDir: string;
   if (mode === 'test' || mode === 'dev') {
-    loggerDir = path.join(appInfo.projectPath, '.app/logs');
+    loggerDir = path.join(app.projectPath, '.app/logs');
   } else {
-    loggerDir = path.join(os.homedir(), 'vona', appInfo.name, 'logs');
+    loggerDir = path.join(os.homedir(), 'vona', app.name, 'logs');
   }
   fse.ensureDirSync(loggerDir);
   return loggerDir;
 }
 
-export function getPublicPathPhysicalRoot(appInfo: VonaAppInfo) {
-  const mode = appInfo.configMeta.mode;
+export function getPublicPathPhysicalRoot(app: VonaApplication) {
+  const mode = app.configMeta.mode;
   let publicDir: string;
   if (mode === 'test' || mode === 'dev') {
-    publicDir = path.join(appInfo.projectPath, '.app/public');
+    publicDir = path.join(app.projectPath, '.app/public');
   } else {
-    publicDir = path.join(os.homedir(), 'vona', appInfo.name, 'public');
+    publicDir = path.join(os.homedir(), 'vona', app.name, 'public');
   }
   fse.ensureDirSync(publicDir);
   return publicDir;
