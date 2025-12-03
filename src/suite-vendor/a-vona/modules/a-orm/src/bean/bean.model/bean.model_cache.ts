@@ -256,9 +256,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     modelJoins?: ModelJoins,
   ): Promise<any> {
     // pageNo/pageSize
-    const pageSize = params?.limit;
+    const pageSize = params?.limit ?? this.scopeOrm.config.rest.query.pageSize.default;
     if (!pageSize) throw new Error('should specify the page size');
-    const pageNo = Math.floor(params.offset! / pageSize) + 1;
+    const pageNo = Math.floor((params?.offset ?? 0) / pageSize) + 1;
     // count
     const paramsCount = Object.assign({}, params, { columns: undefined, orders: undefined, limit: undefined, offset: undefined });
     let count = await this.count(paramsCount, options, modelJoins);
