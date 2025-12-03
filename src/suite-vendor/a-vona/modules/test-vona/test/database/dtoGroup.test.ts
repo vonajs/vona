@@ -3,7 +3,7 @@ import type z from 'zod';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { getTargetDecoratorRules } from 'vona-module-a-openapi';
+import { getTargetDecoratorRules } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { ModelUserStatsGroup } from 'vona-module-test-vona';
 

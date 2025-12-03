@@ -2,7 +2,7 @@ import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { getTargetDecoratorRules } from 'vona-module-a-openapi';
+import { getTargetDecoratorRules } from 'vona-module-a-openapiutils';
 import { $Dto, $relationDynamic } from 'vona-module-a-orm';
 import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
 
