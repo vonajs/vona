@@ -8,7 +8,7 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { deepExtend } from '../utils/util.ts';
 
-export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv) {
+export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaConfigOptional {
   let config: VonaConfigOptional = configDefault(appInfo, env);
   const mode = appInfo.configMeta.mode;
   if (mode === 'dev') {
@@ -46,7 +46,7 @@ export async function combineConfigDefault<T>(
   configProd?: TypeConfigLoader<T>,
   configTest?: TypeConfigLoader<T>,
 ): Promise<PowerPartial<T>> {
-  let config = await configDefault(app);
+  let config = (await configDefault(app))!;
   const mode = app.config.meta.mode;
   if (mode === 'dev' && configDev) {
     config = deepExtend(config, await configDev(app));
