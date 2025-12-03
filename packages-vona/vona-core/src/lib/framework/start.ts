@@ -75,10 +75,14 @@ export class Start {
 async function __prepareConfig(app: VonaApplication): Promise<VonaConfigOptional> {
   const config: VonaConfigOptional = {};
   const configItems = (await app.options.config()).default;
+  const configItemsPromise: (VonaConfigOptional | Promise<VonaConfigOptional>)[] = [];
   for (const configItem of configItems) {
-    const res = await configItem(app, app.options.env);
-    if (res) {
-      deepExtend(config, res);
+    configItemsPromise.push(configItem(app, app.options.env));
+  }
+  const configItemsRes = await Promise.all(configItemsPromise);
+  for (const configItem of configItemsRes) {
+    if (configItem) {
+      deepExtend(config, configItem);
     }
   }
   return config;
