@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns } from '../types/modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../types/onion/model.ts';
 import { appResource, beanFullNameFromOnionName } from 'vona';
-import { prepareClassType } from 'vona-module-a-openapi';
+import { prepareClassType } from 'vona-module-a-openapiutils';
 
 export function isRaw(raw) {
   return typeof raw?.constructor === 'function' && raw?.constructor?.name === 'Raw';

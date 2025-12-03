@@ -5,7 +5,7 @@ import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { isClass } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appResource, cast, useApp } from 'vona';
-import { getTargetDecoratorRuleColumnsMap, getTargetDecoratorRules } from 'vona-module-a-openapi';
+import { getTargetDecoratorRuleColumnsMap, getTargetDecoratorRules } from 'vona-module-a-openapiutils';
 
 export function $column<T>(key: keyof T): keyof T {
   return key;

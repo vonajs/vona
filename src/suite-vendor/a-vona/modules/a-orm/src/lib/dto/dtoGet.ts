@@ -7,7 +7,7 @@ import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onio
 import type { IRelationItem } from '../../types/relationsDef.ts';
 import { ensureArray, hashkey } from '@cabloy/utils';
 import { $Class, appResource } from 'vona';
-import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapi';
+import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapiutils';
 import z from 'zod';
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
 import { handleRelationsCollection } from '../utils.ts';
