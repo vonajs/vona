@@ -1,7 +1,6 @@
-import type { TypeBootstrapOptionsConfig, VonaAppInfo, VonaConfig, VonaConfigEnv } from '../../types/index.ts';
+import type { VonaConfig, VonaConfigOptional } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
 import { EnumAppEvent } from '../../types/index.ts';
-import { combineAppConfigDefault } from '../core/config.ts';
 import { ModuleLoader } from '../module/loader.ts';
 import { deepExtend } from '../utils/util.ts';
 
@@ -63,7 +62,7 @@ export class Start {
   async _start_appConfig() {
     const app = this.app;
     // config
-    const appConfig = await __prepareConfig(app, app.options.config, app.options.env);
+    const appConfig = await __prepareConfig(app);
     this.app.config = appConfig as VonaConfig;
     this.app.keys = appConfig.server!.keys!;
     this.app.proxy = appConfig.proxy!.enable!;
@@ -73,11 +72,11 @@ export class Start {
   }
 }
 
-async function __prepareConfig(appInfo: VonaAppInfo, configs: TypeBootstrapOptionsConfig, env: VonaConfigEnv) {
-  const config = combineAppConfigDefault(appInfo, env);
-  const configItems = (await configs()).default;
+async function __prepareConfig(app: VonaApplication): Promise<VonaConfigOptional> {
+  const config: VonaConfigOptional = {};
+  const configItems = (await app.options.config()).default;
   for (const configItem of configItems) {
-    const res = configItem(appInfo, env);
+    const res = await configItem(app, app.options.env);
     if (res) {
       deepExtend(config, res);
     }

@@ -1,41 +1,10 @@
 import type { VonaAppInfo } from '../../types/application/app.ts';
-import type { VonaConfigOptional } from '../../types/config/config.ts';
-import type { VonaConfigEnv } from '../../types/utils/env.ts';
 import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 import type { VonaApplication } from './application.ts';
 import os from 'node:os';
 import path from 'node:path';
 import fse from 'fs-extra';
 import { deepExtend } from '../utils/util.ts';
-
-export function combineAppConfigDefault(appInfo: VonaAppInfo, env: VonaConfigEnv): VonaConfigOptional {
-  let config: VonaConfigOptional = configDefault(appInfo, env);
-  const mode = appInfo.configMeta.mode;
-  if (mode === 'dev') {
-    config = deepExtend(config, configDev(env));
-  } else if (mode === 'prod') {
-    config = deepExtend(config, configProd(env));
-  } else if (mode === 'test') {
-    config = deepExtend(config, configTest(env));
-  }
-  return config;
-}
-
-export function configDefault(_appInfo: VonaAppInfo, _env: VonaConfigEnv): VonaConfigOptional {
-  return {};
-}
-
-export function configDev(_env: VonaConfigEnv): VonaConfigOptional {
-  return {};
-}
-
-export function configProd(_env: VonaConfigEnv): VonaConfigOptional {
-  return {};
-}
-
-export function configTest(_env: VonaConfigEnv): VonaConfigOptional {
-  return {};
-}
 
 export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial<T>>;
 

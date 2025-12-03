@@ -1,12 +1,13 @@
 import type { VonaApplication } from '../../lib/core/application.ts';
 import type { Constructable } from '../../lib/decorator/type/constructable.ts';
+import type { VonaConfigEnv } from '../utils/env.ts';
 import type { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.ts';
 
 export type TypeModuleResourceLocales = Record<string, object>;
 export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;
 export type TypeModuleResourceErrors = Record<string, number>;
 export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
-export type TypeModuleResourceConfig = (app: VonaApplication) => object | Promise<object>;
+export type TypeModuleResourceConfig = (app: VonaApplication, env: VonaConfigEnv) => object | Promise<object>;
 
 export interface IModuleResource {
   Main: new () => IModuleMain;
