@@ -19,7 +19,7 @@ declare module 'vona-module-a-orm' {
 }
 
 export default async function (app: VonaApplication, env: VonaConfigEnv) {
-  const config = {} as VonaConfigOptional;
+  const config: VonaConfigOptional = {};
 
   // modules
   config.modules = {};
