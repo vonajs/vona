@@ -1,7 +1,7 @@
 import type { TableIdentity } from 'table-identity';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { DtoCategoryTree } from '../dto/categoryTree.ts';

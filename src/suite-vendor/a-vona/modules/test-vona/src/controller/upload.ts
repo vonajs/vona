@@ -3,7 +3,7 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Core } from 'vona-module-a-core';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { SymbolUploadValue } from 'vona-module-a-upload';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';

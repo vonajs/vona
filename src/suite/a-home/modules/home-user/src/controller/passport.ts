@@ -6,7 +6,7 @@ import type { EntityUser } from '../entity/user.ts';
 import { BeanBase } from 'vona';
 import { Core } from 'vona-module-a-core';
 import { DtoJwtToken } from 'vona-module-a-jwt';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';

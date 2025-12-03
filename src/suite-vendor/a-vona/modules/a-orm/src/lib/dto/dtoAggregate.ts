@@ -5,7 +5,7 @@ import type { TypeModelSelectAggrParamsAggrs } from '../../types/modelAggr.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
 import { ensureArray } from '@cabloy/utils';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import z from 'zod';
 
 export function DtoAggregate<

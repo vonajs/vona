@@ -3,7 +3,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { ModelOrder } from '../model/order.ts';
 import { BeanBase } from 'vona';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { DtoOrderCreate } from '../dto/orderCreate.ts';
 import { DtoOrderQuery } from '../dto/orderQuery.ts';

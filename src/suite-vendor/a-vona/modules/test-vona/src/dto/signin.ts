@@ -1,6 +1,6 @@
 import type { DtoCaptchaVerify } from 'vona-module-a-captcha';
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 
 export interface IDtoOptionsSignin extends IDecoratorDtoOptions {}

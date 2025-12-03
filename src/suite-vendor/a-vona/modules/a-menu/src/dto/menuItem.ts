@@ -1,6 +1,6 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import type { IMenuItem, IMenuItemLinkRecord, IMenuItemMeta } from '../types/menu.ts';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
 import { DtoMenuItemMeta } from './menuItemMeta.ts';

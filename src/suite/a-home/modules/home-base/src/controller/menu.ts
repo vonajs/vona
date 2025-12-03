@@ -2,7 +2,7 @@ import type { IMenus } from 'vona-module-a-menu';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { DtoMenus } from 'vona-module-a-menu';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsMenu extends IDecoratorControllerOptions {}

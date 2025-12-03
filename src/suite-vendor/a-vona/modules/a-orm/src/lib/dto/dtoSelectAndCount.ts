@@ -3,7 +3,7 @@ import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDtoGetParams } from '../../types/dto/dtoGet.ts';
 import type { TypeDtoSelectAndCountResult } from '../../types/dto/dtoSelectAndCount.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import z from 'zod';
 import { DtoGet } from './dtoGet.ts';
 

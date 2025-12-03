@@ -2,7 +2,7 @@ import type { IOpenapiObject } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Caching } from 'vona-module-a-caching';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';
 import { $apiPath, Arg, Controller, Web } from 'vona-module-a-web';
 

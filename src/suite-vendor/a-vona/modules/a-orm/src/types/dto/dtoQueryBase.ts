@@ -1,5 +1,5 @@
 import { useApp } from 'vona';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import z from 'zod';
 
 const app = useApp();

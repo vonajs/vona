@@ -1,6 +1,6 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import type { IMailClientRecord, IMailOptions } from '../types/config.ts';
-import { Api, v } from 'vona-module-a-openapi';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
 import z from 'zod';
 
