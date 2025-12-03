@@ -7,7 +7,7 @@ import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, deepExtend, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { $apiPath } from 'vona-module-a-web';
+import { $apiPath } from 'vona-module-a-openapiutils';
 
 @Bean()
 export class BeanAuth extends BeanBase {

@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { Blob } from 'node:buffer';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
-import { $apiPath } from 'vona-module-a-web';
+import { $apiPath } from 'vona-module-a-openapiutils';
 
 describe('upload.test.ts', () => {
   it('action:upload:fields', async () => {
