@@ -12,13 +12,13 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
       if (!receiver[options.cacheKeyFn]) {
         throw new Error(`cacheKeyFn not found: ${cast(receiver).$beanFullName}#${options.cacheKeyFn}`);
       }
-      return receiver[options.cacheKeyFn](info, options);
+      return _hashKey(receiver[options.cacheKeyFn](info, options));
     }
-    return options.cacheKeyFn.call(receiver, info, options);
+    return _hashKey(options.cacheKeyFn.call(receiver, info, options));
   }
   // cacheKey
   if (options.cacheKey) {
-    return evaluateExpressions(options.cacheKey, {
+    return _hashKey(evaluateExpressions(options.cacheKey, {
       args,
       prop,
       intention,
@@ -26,7 +26,7 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
       self: receiver,
       app: cast(receiver).app,
       ctx: cast(receiver).ctx,
-    });
+    }));
   }
   // default: only use first arg
   let argsPick: any[];
@@ -38,7 +38,7 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
     argsPick = args;
   }
   const argFirst = argsPick.length === 1 ? argsPick[0] : argsPick;
-  return getKeyHash(argFirst);
+  return _hashKey(argFirst);
 }
 
 export function combineCachingValue(info: ICachingActionValueInfo, options: IAopMethodOptionsCachingSet) {
@@ -75,5 +75,10 @@ export function combineCachingValue(info: ICachingActionValueInfo, options: IAop
 }
 
 export function isCachingKeyValid(key: any) {
-  return !isNil(key) && key !== false && key !== '';
+  return !isNil(key);
+  // return !isNil(key) && key !== false && key !== '';
+}
+
+function _hashKey(arg: any) {
+  return isCachingKeyValid(arg) ? getKeyHash(arg) : arg;
 }

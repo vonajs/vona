@@ -1,7 +1,7 @@
 import objectHash from 'object-hash';
 
 export function hashkey(key: any): string {
-  if (key === undefined || key === null || key === false) {
+  if (key === undefined || key === null) {
     return '';
   }
   if (Array.isArray(key) || typeof key === 'object') {

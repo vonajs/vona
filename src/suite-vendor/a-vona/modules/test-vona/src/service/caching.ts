@@ -1,29 +1,24 @@
-import type { TypeCachingActionOptions } from 'vona-module-a-caching';
+import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from 'vona-module-a-caching';
 import type { TSummerCacheTestData } from '../bean/summerCache.test.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { getKeyHash } from 'vona-module-a-cache';
 import { Caching } from 'vona-module-a-caching';
 
-function cacheKeyFn(this: ServiceCaching, args: any[], prop: string, options: TypeCachingActionOptions): any {
-  return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
+function cacheKeyFn(this: ServiceCaching, info: ICachingActionKeyInfo, _options: TypeCachingActionOptions): any {
+  return info.args[0];
 }
 
 @Service()
 export class ServiceCaching extends BeanBase {
-  cacheKey(args: any[], prop: string, options: TypeCachingActionOptions) {
-    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
+  cacheKey(info: ICachingActionKeyInfo, _options: TypeCachingActionOptions) {
+    return info.args[0];
   }
 
-  cacheKeySet(args: any[], prop: string, options: TypeCachingActionOptions) {
-    return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
+  cacheValue(info: ICachingActionValueInfo, _options: TypeCachingActionOptions) {
+    return info.args[1];
   }
 
-  cacheValueSet(_result: any, args: any[], _prop: string, _options: TypeCachingActionOptions) {
-    return args[1];
-  }
-
-  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn: 'cacheKey' })
+  @Caching.get({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey' })
   async get(id: number): Promise<TSummerCacheTestData> {
     return {
       id,
@@ -31,39 +26,39 @@ export class ServiceCaching extends BeanBase {
     };
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn })
+  @Caching.get({ cacheName: 'test-vona:test', cacheKeyFn })
   async get2(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://join([get(self,"$beanFullName"),options.cacheProp,hashkey(args[0])],"_")' })
+  @Caching.get({ cacheName: 'test-vona:test', cacheKey: 'cel://args[0]' })
   async get3(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 
   // default cacheKey
-  @Caching.get({ cacheName: 'test-vona:test', cacheProp: 'test' })
+  @Caching.get({ cacheName: 'test-vona:test' })
   async get4(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 
-  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn: 'cacheKeySet', cacheValueFn: 'cacheValueSet' })
+  @Caching.set({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey', cacheValueFn: 'cacheValue' })
   async set(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }
 
   //
-  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKey: 'cel://join([get(self,"$beanFullName"),options.cacheProp,hashkey(args[0])],"_")', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
+  @Caching.set({ cacheName: 'test-vona:test', cacheKey: 'cel://args[0]', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
   async set2(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }
 
-  @Caching.set({ cacheName: 'test-vona:test', cacheProp: 'test', cacheKeyFn: 'cacheKeySet' })
+  @Caching.set({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey' })
   async set3(_id: number, value: TSummerCacheTestData): Promise<TSummerCacheTestData> {
     return value;
   }
 
-  @Caching.del({ cacheName: 'test-vona:test', cacheProp: 'test' })
+  @Caching.del({ cacheName: 'test-vona:test' })
   async del(_id: number): Promise<void> {
     // do nothing
   }

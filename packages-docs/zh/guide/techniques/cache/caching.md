@@ -105,7 +105,7 @@ class ServiceStudent {
 }  
 ```
 
-如果`cacheKeyFn`返回如下值，则忽略缓存：`undefined/null/false/''`
+如果`cacheKeyFn`返回值是`undefined/null`，则忽略缓存：
 
 `cacheKeyFn`返回值可以是任何类型，只要能确保 Cache Key 唯一即可，比如:
 

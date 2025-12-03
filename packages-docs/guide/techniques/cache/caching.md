@@ -105,7 +105,7 @@ class ServiceStudent {
 }  
 ```
 
-If `cacheKeyFn` returns the following values, the cache will be ignored: `undefined/null/false/''`
+If `cacheKeyFn` returns `undefined/null`, the cache will be ignored: 
 
 The return value of `cacheKeyFn` can be of any type, as long as it ensures the Cache Key is unique, for example:
 
