@@ -2,7 +2,7 @@ import type { Constructable, MetadataKey } from 'vona';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type z from 'zod';
 import { setArgumentPipe } from 'vona-module-a-aspect';
-import { $schema } from 'vona-module-a-openapi';
+import { $schema } from 'vona-module-a-openapiutils';
 import { createPipesArgumentDecorator } from './pipesArgument.ts';
 
 function Param(): ParameterDecorator;

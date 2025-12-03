@@ -2,7 +2,7 @@ import type { IOpenApiOptions, IResponseHeaders, TypeResponseContentType } from 
 import type z from 'zod';
 import { appMetadata, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { $schema } from 'vona-module-a-openapi';
+import { $schema } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
 @Bean()

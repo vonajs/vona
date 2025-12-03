@@ -3,7 +3,7 @@ import type { RouteHandlerArgumentType, TypeExtractValue } from 'vona-module-a-o
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import { appMetadata } from 'vona';
 import { setArgumentPipe } from 'vona-module-a-aspect';
-import { makeSchemaLikes } from 'vona-module-a-openapi';
+import { makeSchemaLikes } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {

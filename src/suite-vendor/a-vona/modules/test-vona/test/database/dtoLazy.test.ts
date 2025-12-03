@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { appResource, cast } from 'vona';
 import { app } from 'vona-mock';
-import { $schema } from 'vona-module-a-openapi';
+import { $schema } from 'vona-module-a-openapiutils';
 import { DtoUserLazy } from 'vona-module-test-vona';
 
 describe('dtoLazy.test.ts', () => {
