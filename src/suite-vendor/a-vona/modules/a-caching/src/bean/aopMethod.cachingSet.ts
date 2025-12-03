@@ -17,7 +17,7 @@ export class AopMethodCachingSet extends BeanAopMethodBase implements IAopMethod
     // next
     const result = await next();
     // key
-    const key = combineCachingKey(options, args, receiver, prop);
+    const key = combineCachingKey({ args, receiver, prop, intention: 'set' }, options);
     if (!isCachingKeyValid(key)) return result;
     // value
     const cacheValue = combineCachingValue(options, args, receiver, prop, result);

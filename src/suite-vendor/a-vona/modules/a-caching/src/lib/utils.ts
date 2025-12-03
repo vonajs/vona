@@ -1,11 +1,12 @@
 import type { BeanBase } from 'vona';
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
-import type { TypeCachingActionOptions } from '../types/caching.ts';
+import type { ICachingActionKeyInfo, TypeCachingActionOptions } from '../types/caching.ts';
 import { evaluateExpressions, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
 
-export function combineCachingKey(options: TypeCachingActionOptions, args: any[], receiver: BeanBase, prop: string) {
+export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCachingActionOptions) {
+  const { args, prop, receiver, intention } = info;
   // cacheKeyFn
   if (options.cacheKeyFn) {
     if (typeof options.cacheKeyFn === 'string') {

@@ -12,7 +12,7 @@ export class AopMethodCachingGet extends BeanAopMethodBase implements IAopMethod
   async execute(options: IAopMethodOptionsCachingGet, args: [], next: Next, receiver: any, prop: string): Promise<any> {
     if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // key
-    const key = combineCachingKey(options, args, receiver, prop);
+    const key = combineCachingKey({ args, receiver, prop, intention: 'get' }, options);
     if (!isCachingKeyValid(key)) return next();
     // cache
     const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
