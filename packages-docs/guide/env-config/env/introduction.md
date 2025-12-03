@@ -166,7 +166,6 @@ VonaJS provides several built-in env variables:
 | BUILD_OUTDIR  | Specify the output directory        |
 |BUILD_SOURCEMAP| Sourcemap|
 | BUILD_MINIFY  | Whether to enable minify            |
-|BUILD_INLINEDYNAMICIMPORTS||
 |BUILD_LOG_CIRCULAR_DEPENDENCY||
 |BUILD_COPY_DIST|Copy dist to the specified directory|
 |BUILD_COPY_RELEASE|Copy dist-releases to the specified directory|

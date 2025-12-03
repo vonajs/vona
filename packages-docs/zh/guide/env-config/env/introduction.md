@@ -166,7 +166,6 @@ VonaJS 提供了若干内置的环境变量：
 | BUILD_OUTDIR  | 指定输出目录     |
 |BUILD_SOURCEMAP| Sourcemap|
 | BUILD_MINIFY  | 是否最小化       |
-|BUILD_INLINEDYNAMICIMPORTS||
 |BUILD_LOG_CIRCULAR_DEPENDENCY||
 |BUILD_COPY_DIST|将dist拷贝至指定目录|
 |BUILD_COPY_RELEASE|将dist-releases拷贝至指定目录|
