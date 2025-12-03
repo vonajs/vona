@@ -1,5 +1,5 @@
 import type { TableIdentity } from 'table-identity';
-import { Api, OrderCoreBase, v } from 'vona-module-a-openapi';
+import { Api, OrderCoreBase, v } from 'vona-module-a-openapiutils';
 import { $locale } from '../.metadata/index.ts';
 import { EntityBaseInner } from './entityBaseInner.ts';
 

@@ -7,7 +7,7 @@ import Router from 'find-my-way';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
-import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapi';
+import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.ts';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
