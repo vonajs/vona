@@ -3,18 +3,19 @@ import type { TypeModuleResourceLocales } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
 import localesDefault from '../core/locales.ts';
 
-export default function (app: VonaApplication, modules: Record<string, IModule>) {
+export default async function (app: VonaApplication, modules: Record<string, IModule>) {
   // all locales
   app.meta.locales = localesDefault;
   app.meta.localeModules = {};
 
   // load locales
-  loadLocales();
+  await loadLocales();
 
-  function loadLocales() {
+  async function loadLocales() {
+    const locales = (await app.options.locales()).locales;
     // project locales
-    for (const locale in app.options.locales) {
-      _initLocales(locale, app.options.locales[locale]);
+    for (const locale in locales) {
+      _initLocales(locale, locales[locale]);
     }
     // module locales
     for (const moduleName in modules) {
