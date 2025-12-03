@@ -1,6 +1,4 @@
-import type { IApiPathRecord } from '../types/controller.ts';
-import type { TypeSchemaObjectExtensionFieldFilterTransform } from '../types/filter.ts';
-import type { IFilterTransformRecord } from '../types/filterTransform.ts';
+import type { IApiPathRecord, IFilterTransformRecord, TypeSchemaObjectExtensionFieldFilterTransform } from 'vona-module-a-web';
 import { combineParamsAndQuery } from '@cabloy/utils';
 
 export function $apiPath<K extends keyof IApiPathRecord>(path: K): K {
