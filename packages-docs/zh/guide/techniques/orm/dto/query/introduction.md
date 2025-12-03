@@ -145,7 +145,15 @@ export class DtoOrderQuery
 
 ![](../../../../../assets/img/orm/dto/dto-4.png)
 
-### 2. 基于relations的orders
+### 2. App Config
+
+可以在 App Config 中配置 Openapi 参数
+
+``` typescript
+
+```
+
+### 3. 基于relations的orders
 
 当 Model Order 与 Model User 进行联合查询时，`orders`中的字段如果在两个数据表中都存在，那么就必须明确指定表名前缀。比如：`testVonaOrder.createdAt,desc`
 
