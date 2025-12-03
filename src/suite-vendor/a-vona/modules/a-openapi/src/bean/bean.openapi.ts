@@ -4,7 +4,7 @@ import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cablo
 import { appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { Caching } from 'vona-module-a-caching';
-import { $schema } from '../lib/schema/schema.ts';
+import { $schema } from 'vona-module-a-openapiutils';
 
 @Bean()
 export class BeanOpenapi extends BeanBase {
