@@ -152,6 +152,9 @@ export class AppResource extends BeanSimple {
 
   _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
     const app = useApp();
+    if (!app?.config && scene !== 'scope') {
+      throw new Error('Should not import vona module in config');
+    }
     const optionsConfig = cast(app?.config)?.onions?.[scene]?.[name];
     if (optionsPrimitive) {
       return optionsConfig === undefined ? options : optionsConfig;
