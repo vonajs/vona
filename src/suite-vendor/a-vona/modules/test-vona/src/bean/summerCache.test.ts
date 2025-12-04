@@ -18,12 +18,12 @@ export class SummerCacheTest
   extends BeanSummerCacheBase<TSummerCacheTestKey, TSummerCacheTestData>
   implements ISummerCacheGet<TSummerCacheTestKey, TSummerCacheTestData> {
   async getNative(
-    key: TSummerCacheTestKey,
+    key?: TSummerCacheTestKey,
     _options?: TSummerCacheActionOptions<TSummerCacheTestKey, TSummerCacheTestData>,
   ): Promise<TSummerCacheTestData | undefined> {
     return {
-      id: key.id,
-      name: `name_${key.id}`,
+      id: key!.id,
+      name: `name_${key!.id}`,
     };
   }
 }

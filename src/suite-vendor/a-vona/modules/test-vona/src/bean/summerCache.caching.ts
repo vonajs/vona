@@ -18,12 +18,12 @@ export class SummerCacheCaching
   extends BeanSummerCacheBase<TSummerCacheCachingKey, TSummerCacheCachingData>
   implements ISummerCacheGet<TSummerCacheCachingKey, TSummerCacheCachingData> {
   async getNative(
-    key: TSummerCacheCachingKey,
+    key?: TSummerCacheCachingKey,
     _options?: TSummerCacheActionOptions<TSummerCacheCachingKey, TSummerCacheCachingData>,
   ): Promise<TSummerCacheCachingData | undefined> {
     return {
-      id: key.id,
-      name: `name_${key.id}`,
+      id: key!.id,
+      name: `name_${key!.id}`,
     };
   }
 }

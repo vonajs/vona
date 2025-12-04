@@ -29,10 +29,10 @@ export class SummerCacheStudent
   extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
   implements ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
   async getNative(
-    key: TSummerCacheStudentKey,
+    key?: TSummerCacheStudentKey,
     _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
   ): Promise<TSummerCacheStudentData | undefined> {
-    const student = await this.scope.model.student.getById(key);
+    const student = await this.scope.model.student.getById(key!);
     if (!student) return;
     return { id: student.id as string, name: student.name };
   }
@@ -64,7 +64,7 @@ export class SummerCacheStudent
     ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData>,
 +   ISummerCacheMGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
   async getNative(
-    key: TSummerCacheStudentKey,
+    key?: TSummerCacheStudentKey,
     _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
   ): Promise<TSummerCacheStudentData | undefined> {
     ...
