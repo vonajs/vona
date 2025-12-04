@@ -3,10 +3,14 @@ import type { IInstanceRecord } from 'vona';
 import type { IDbInfo } from 'vona-module-a-orm';
 import type { IRedisClientRecord } from 'vona-module-a-redis';
 
-export interface ConfigRedlock {
+export interface IRedlockClientOptions {
   clients: (keyof IRedisClientRecord)[];
-  lockTTL: number;
   options: Redlock.Settings;
+}
+
+export interface ConfigRedlock {
+  lockTTL: number;
+  base: IRedlockClientOptions;
 }
 
 export interface IRedlockLockOptions {

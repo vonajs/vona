@@ -1,8 +1,7 @@
-import type { Settings } from '@sesamecare-oss/redlock';
-import type { FunctionAsync } from 'vona';
-import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
+import type { FunctionAsync, PowerPartial } from 'vona';
+import type { IRedlockClientOptions, IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 import { Redlock } from '@sesamecare-oss/redlock';
-import { BeanBase, instanceDesp } from 'vona';
+import { BeanBase, deepExtend, instanceDesp } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
 
@@ -17,7 +16,7 @@ export class ServiceRedlock extends BeanBase {
   ): Promise<RESULT> {
     const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options?.instanceName;
     const redlock = options?.redlock ?? this.redlockDefault;
-    const lockTTL = options?.lockTTL ?? this.scope.config.redlock.lockTTL;
+    const lockTTL = options?.lockTTL ?? this.scope.config.lockTTL;
     // resource
     const _lockResource = `${getRedisClientKeyPrefix('redlock', this.app)}${instanceDesp(instanceName)}:${resource}`;
     // lock
@@ -70,19 +69,24 @@ export class ServiceRedlock extends BeanBase {
 
   private get redlockDefault() {
     if (!this._redlockDefault) {
-      this._redlockDefault = this.create(this.scope.config.redlock.options);
+      this._redlockDefault = this._create(this.scope.config.base);
     }
     return this._redlockDefault;
   }
 
-  public create(options: Settings) {
+  public create(options: PowerPartial<IRedlockClientOptions>): Redlock {
+    const options2: IRedlockClientOptions = deepExtend({}, this.scope.config.base, options);
+    return this._create(options2);
+  }
+
+  private _create(options: IRedlockClientOptions) {
     // clients
     const clients = [] as any;
-    for (const clientName of this.scope.config.redlock.clients) {
+    for (const clientName of options.clients) {
       const client = this.app.bean.redis.get(clientName);
       clients.push(client);
     }
     // create
-    return new Redlock(clients, options);
+    return new Redlock(clients, options.options);
   }
 }
