@@ -14,7 +14,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      if (value === undefined) value = null;
+      if (value === undefined) value = null as any;
       await this.cacheRedis.set(value!, key, {
         ttl: options?.ttl,
         db: options?.db,

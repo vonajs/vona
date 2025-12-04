@@ -14,7 +14,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
-      if (value === undefined) value = null;
+      if (value === undefined) value = null as any;
       this.cacheMem.set(value!, key, {
         ttl: options?.ttl,
         db: options?.db,
@@ -41,7 +41,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     if (keysMissing.length > 0) {
       const layered = this.__getLayered(options);
       let valuesMissing = await layered.mget(keysMissing, options);
-      valuesMissing = valuesMissing.map(item => item === undefined ? null : item);
+      valuesMissing = valuesMissing.map(item => item === undefined ? null as any : item);
       // this.$logger.silly('-------mem:', valuesMissing);
       // set/merge
       this.cacheMem.mset(valuesMissing as any, keysMissing, {
