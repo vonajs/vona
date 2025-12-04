@@ -551,8 +551,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       },
       db: this.db,
     });
-    if (!item) return item;
-    if (!this._checkIfEntityValidByDeleted(item, options)) return null as unknown as undefined;
+    if (!item || !this._checkIfEntityValidByDeleted(item, options)) return null as unknown as undefined;
     return item;
   }
 
