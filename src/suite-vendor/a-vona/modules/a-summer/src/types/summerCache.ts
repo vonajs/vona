@@ -6,12 +6,12 @@ import type { ServiceDb } from 'vona-module-a-orm';
 export interface ISummerCacheRecord {}
 
 export interface ISummerCacheGet<KEY, DATA> {
-  getNative(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined>;
-  getNative(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined>;
+  getNative(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | undefined>;
+  getNative(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | undefined>;
 }
 
 export interface ISummerCacheMGet<KEY, DATA> {
-  mgetNative(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>>;
+  mgetNative(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | undefined>>;
 }
 
 export type TSummerCachePreset = 'all' | 'mem' | 'redis';
@@ -37,8 +37,8 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   updateAgeOnGet?: boolean;
   broadcastOnSet?: TypeBroadcastOnSet;
   disableTransactionCompensate?: boolean;
-  get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | null | undefined>;
-  mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | null | undefined>>;
+  get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | undefined>;
+  mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | undefined>>;
 }
 
 declare module 'vona-module-a-onion' {

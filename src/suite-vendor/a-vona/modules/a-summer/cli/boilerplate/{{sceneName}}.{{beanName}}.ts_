@@ -12,5 +12,5 @@ export class SummerCache<%=argv.beanNameCapitalize%>
   async getNative(
     _key?: TSummerCache<%=argv.beanNameCapitalize%>Key,
     _options?: TSummerCacheActionOptions<TSummerCache<%=argv.beanNameCapitalize%>Key, TSummerCache<%=argv.beanNameCapitalize%>Data>,
-  ): Promise<TSummerCache<%=argv.beanNameCapitalize%>Data | null | undefined> {}
+  ): Promise<TSummerCache<%=argv.beanNameCapitalize%>Data | undefined> {}
 }

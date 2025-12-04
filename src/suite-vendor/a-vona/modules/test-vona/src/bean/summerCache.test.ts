@@ -20,7 +20,7 @@ export class SummerCacheTest
   async getNative(
     key: TSummerCacheTestKey,
     _options?: TSummerCacheActionOptions<TSummerCacheTestKey, TSummerCacheTestData>,
-  ): Promise<TSummerCacheTestData | null | undefined> {
+  ): Promise<TSummerCacheTestData | undefined> {
     return {
       id: key.id,
       name: `name_${key.id}`,

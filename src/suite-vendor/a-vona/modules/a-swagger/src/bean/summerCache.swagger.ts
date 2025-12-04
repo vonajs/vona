@@ -11,5 +11,5 @@ export class SummerCacheSwagger
   async getNative(
     _key?: TSummerCacheSwaggerKey,
     _options?: TSummerCacheActionOptions<TSummerCacheSwaggerKey, TSummerCacheSwaggerData>,
-  ): Promise<TSummerCacheSwaggerData | null | undefined> {}
+  ): Promise<TSummerCacheSwaggerData | undefined> {}
 }

@@ -38,7 +38,7 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
       return await cacheBean.mgetNative(keys, options);
     }
     // fallback
-    const values: Array<DATA | null | undefined> = [];
+    const values: Array<DATA | undefined> = [];
     for (let i = 0; i < keys.length; i++) {
       values.push(await this.get(keys[i], options));
     }

@@ -30,12 +30,12 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     super.__init__(_cacheName, _cacheOptions);
   }
 
-  async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
+  async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | undefined> {
     const layered = this.__getLayered(options);
     return await layered.get(key, options);
   }
 
-  async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>> {
+  async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | undefined>> {
     if (!keys || keys.length === 0) {
       return [];
     }
@@ -43,7 +43,7 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return await layered.mget(keys, options);
   }
 
-  async peek(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
+  async peek(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | undefined> {
     const layered = this.__getLayered(options);
     return await layered.peek(key, options);
   }

@@ -117,7 +117,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
       const layered = this.__getLayered(options);
       value = await layered.peek(key, options);
     }
-    return value;
+    return value === null ? undefined : value;
   }
 
   __getLayered(options?: TSummerCacheActionOptions<KEY, DATA>): ICacheLayeredBase<KEY, DATA> {

@@ -11,5 +11,5 @@ export class SummerCacheRapidoc
   async getNative(
     _key?: TSummerCacheRapidocKey,
     _options?: TSummerCacheActionOptions<TSummerCacheRapidocKey, TSummerCacheRapidocData>,
-  ): Promise<TSummerCacheRapidocData | null | undefined> {}
+  ): Promise<TSummerCacheRapidocData | undefined> {}
 }

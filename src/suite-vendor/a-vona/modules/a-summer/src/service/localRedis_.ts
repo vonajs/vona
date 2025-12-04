@@ -96,7 +96,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     //   const layered = this.__getLayered(options);
     //   value = await layered.peek(keyHash, key, options);
     // }
-    return value;
+    return value === null ? undefined : value;
   }
 
   __getLayered(_options?: TSummerCacheActionOptions<KEY, DATA>) {

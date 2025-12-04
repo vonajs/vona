@@ -11,5 +11,5 @@ export class SummerCacheJson
   async getNative(
     _key?: TSummerCacheJsonKey,
     _options?: TSummerCacheActionOptions<TSummerCacheJsonKey, TSummerCacheJsonData>,
-  ): Promise<TSummerCacheJsonData | null | undefined> {}
+  ): Promise<TSummerCacheJsonData | undefined> {}
 }
