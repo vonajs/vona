@@ -27,7 +27,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return this.redisCache;
   }
 
-  public async get(key?: KEY, options?: ICacheRedisGetOptions): Promise<DATA | null | undefined> {
+  public async get(key?: KEY, options?: ICacheRedisGetOptions): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
@@ -42,7 +42,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async mget(keys: KEY[], options?: ICacheRedisGetOptions): Promise<Array<DATA | null | undefined>> {
+  public async mget(keys: KEY[], options?: ICacheRedisGetOptions): Promise<Array<DATA | undefined>> {
     if (!keys || keys.length === 0) return [];
     const cache = this.__cacheInstance;
     if (!cache) return [];
@@ -67,7 +67,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return values;
   }
 
-  public async peek(key?: KEY): Promise<DATA | null | undefined> {
+  public async peek(key?: KEY): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const redisKey = this.__getRedisKey(key);
@@ -121,7 +121,7 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
-  public async getset(value?: DATA, key?: KEY, options?: ICacheRedisSetOptions): Promise<DATA | null | undefined> {
+  public async getset(value?: DATA, key?: KEY, options?: ICacheRedisSetOptions): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return;
     const redisKey = this.__getRedisKey(key);

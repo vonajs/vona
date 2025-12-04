@@ -44,7 +44,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     return this.lruCache;
   }
 
-  public get(key?: KEY, options?: ICacheMemGetOptions): DATA | null | undefined {
+  public get(key?: KEY, options?: ICacheMemGetOptions): DATA | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
@@ -52,7 +52,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public mget(keys: KEY[], options?: ICacheMemGetOptions): Array<DATA | null | undefined> {
+  public mget(keys: KEY[], options?: ICacheMemGetOptions): Array<DATA | undefined> {
     if (!keys || keys.length === 0) return [];
     const cache = this.__cacheInstance;
     if (!cache) return [];
@@ -63,7 +63,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     });
   }
 
-  public peek(key?: KEY): DATA | null | undefined {
+  public peek(key?: KEY): DATA | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const keyHash = this.__getKeyHash(key);
@@ -147,7 +147,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     }
   }
 
-  public getset(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): DATA | null | undefined {
+  public getset(value?: DATA, key?: KEY, options?: ICacheMemSetOptions): DATA | undefined {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     const valueOld = this.get(key);
