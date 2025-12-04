@@ -11,6 +11,7 @@ export default {
   UserMobile: 'Mobile',
   UserActivated: 'Activated',
   UserLocale: 'Language',
+  UserTz: 'Timezone',
   UsernameExists: 'Username Exists',
   EmailExists: 'Email Exists',
   PasswordsNotMatch: 'Passwords do not match',
