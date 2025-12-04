@@ -29,6 +29,7 @@ export default metadataCustomSnippet({
         'version',
         `--module=${argv.module}`,
         '--nometadata',
+        '--noformat',
       ], { cwd: argv.projectPath });
     });
     return fs.readFileSync(targetFile).toString('utf8');

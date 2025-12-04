@@ -17,7 +17,12 @@ export default metadataCustomSnippet({
   language: 'gogo',
   init: async ({ cli, argv, targetFile }) => {
     await catchError(() => {
-      return cli.helper.invokeCli([':init:locale', argv.module, '--nometadata'], {
+      return cli.helper.invokeCli([
+        ':init:locale',
+        argv.module,
+        '--nometadata',
+        '--noformat',
+      ], {
         cwd: argv.projectPath,
       });
     });
