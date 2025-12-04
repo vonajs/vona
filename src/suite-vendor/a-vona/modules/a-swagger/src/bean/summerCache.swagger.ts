@@ -9,7 +9,7 @@ export class SummerCacheSwagger
   extends BeanSummerCacheBase<TSummerCacheSwaggerKey, TSummerCacheSwaggerData>
   implements ISummerCacheGet<TSummerCacheSwaggerKey, TSummerCacheSwaggerData> {
   async getNative(
-    _key?: TSummerCacheSwaggerKey,
+    _key: TSummerCacheSwaggerKey,
     _options?: TSummerCacheActionOptions<TSummerCacheSwaggerKey, TSummerCacheSwaggerData>,
   ): Promise<TSummerCacheSwaggerData | undefined> {}
 }

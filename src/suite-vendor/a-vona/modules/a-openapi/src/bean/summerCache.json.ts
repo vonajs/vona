@@ -9,7 +9,7 @@ export class SummerCacheJson
   extends BeanSummerCacheBase<TSummerCacheJsonKey, TSummerCacheJsonData>
   implements ISummerCacheGet<TSummerCacheJsonKey, TSummerCacheJsonData> {
   async getNative(
-    _key?: TSummerCacheJsonKey,
+    _key: TSummerCacheJsonKey,
     _options?: TSummerCacheActionOptions<TSummerCacheJsonKey, TSummerCacheJsonData>,
   ): Promise<TSummerCacheJsonData | undefined> {}
 }

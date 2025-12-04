@@ -1465,19 +1465,32 @@ declare module 'vona-module-test-vona' {
 }
 /** serializerTransform: end */
 /** summerCache: begin */
+export * from '../bean/summerCache.caching.ts';
 export * from '../bean/summerCache.test.ts';
 
 import { type IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 declare module 'vona-module-a-summer' {
   
     export interface ISummerCacheRecord {
-      'test-vona:test': IDecoratorSummerCacheOptions;
+      'test-vona:caching': IDecoratorSummerCacheOptions;
+'test-vona:test': IDecoratorSummerCacheOptions;
     }
 
   
 }
 declare module 'vona-module-test-vona' {
   
+        export interface SummerCacheCaching {
+          /** @internal */
+          get scope(): ScopeModuleTestVona;
+        }
+
+          export interface SummerCacheCaching {
+            get $beanFullName(): 'test-vona.summerCache.caching';
+            get $onionName(): 'test-vona:caching';
+            get $onionOptions(): IDecoratorSummerCacheOptions;
+          }
+
         export interface SummerCacheTest {
           /** @internal */
           get scope(): ScopeModuleTestVona;
@@ -1491,9 +1504,11 @@ declare module 'vona-module-test-vona' {
 }
 /** summerCache: end */
 /** summerCache: begin */
+import type { SummerCacheCaching } from '../bean/summerCache.caching.ts';
 import type { SummerCacheTest } from '../bean/summerCache.test.ts';
 export interface IModuleSummerCache {
-  'test': SummerCacheTest;
+  'caching': SummerCacheCaching;
+'test': SummerCacheTest;
 }
 /** summerCache: end */
 /** dto: begin */
