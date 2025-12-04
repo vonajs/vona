@@ -87,12 +87,9 @@ The system will automatically generate a unique `cacheKey`
 You can specify the `cacheKeyFn` parameter to generate a custom cache key
 
 ``` diff
-import type { TypeCachingActionOptions } from 'vona-module-a-caching';
-import { getKeyHash } from 'vona-module-a-cache';
-
 class ServiceStudent {
-+ customCacheKey(args: any[], prop: string, options: TypeCachingActionOptions) {
-+   return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
++ customCacheKey(info: ICachingActionKeyInfo) {
++   return info.args[0];
 + }
 
   @Caching.get({
@@ -105,15 +102,7 @@ class ServiceStudent {
 }  
 ```
 
-If `cacheKeyFn` returns `undefined/null`, the cache will be ignored: 
-
-The return value of `cacheKeyFn` can be of any type, as long as it ensures the Cache Key is unique, for example:
-
-``` typescript
-customCacheKey(args: any[]) {
-  return args[0]; // id
-}
-```
+If `cacheKeyFn` returns `undefined/null`, the cache will be ignored 
 
 ## Caching Decorators
 
@@ -128,12 +117,17 @@ customCacheKey(args: any[]) {
 
 ``` diff
 class ServiceStudent {
++ @Caching.del({ cacheName: 'demo-student:student', intention: 'create' })
+  async create(student: DtoStudentCreate): Promise<EntityStudent> {
+    return await this.scope.model.student.insert(student);
+  }
+
 + @Caching.get({ cacheName: 'demo-student:student' })
   async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
 
-+ @Caching.del({ cacheName: 'demo-student:student' })
++ @Caching.set({ cacheName: 'demo-student:student' })
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
@@ -145,5 +139,11 @@ class ServiceStudent {
 }
 ```
 
-- The `@Caching.xxx` decorators added here are for demonstration purposes only. In actual business scenarios, there is no need to use `@Caching.xxx` in the Service, because the Model itself has a more complete built-in caching mechanism
-  - See: [Vona ORM: Caching](../orm/caching.md)
+- `create`: If the frontend first retrieves student data by Id and the student data does not exist at that time, a `null` value will be stored in the cache to improve performance. Therefore, when creating a new student, the cache corresponding to the Id needs to be deleted
+  - `intention: 'create'`: Indicates that @Caching.del should obtain the Id value from the return value of the create method
+
+::: warning
+The `@Caching.xxx` decorators added here are for demonstration purposes only. In actual business scenarios, there is no need to use `@Caching.xxx` in the Service, because the Model itself has a more complete built-in caching mechanism
+
+- See: [Vona ORM: Caching](../orm/caching.md)
+:::

@@ -87,12 +87,9 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 可以指定`cacheKeyFn`参数，用于生成自定义的缓存 Key
 
 ``` diff
-import type { TypeCachingActionOptions } from 'vona-module-a-caching';
-import { getKeyHash } from 'vona-module-a-cache';
-
 class ServiceStudent {
-+ customCacheKey(args: any[], prop: string, options: TypeCachingActionOptions) {
-+   return `${this.$beanFullName}_${options.cacheProp ?? prop}_${getKeyHash(args[0])}`;
++ customCacheKey(info: ICachingActionKeyInfo) {
++   return info.args[0];
 + }
 
   @Caching.get({
@@ -105,15 +102,7 @@ class ServiceStudent {
 }  
 ```
 
-如果`cacheKeyFn`返回值是`undefined/null`，则忽略缓存：
-
-`cacheKeyFn`返回值可以是任何类型，只要能确保 Cache Key 唯一即可，比如:
-
-``` typescript
-customCacheKey(args: any[]) {
-  return args[0]; // id
-}
-```
+如果`cacheKeyFn`返回值是`undefined/null`，则忽略缓存
 
 ## Caching装饰器清单
 
@@ -128,12 +117,17 @@ customCacheKey(args: any[]) {
 
 ``` diff
 class ServiceStudent {
++ @Caching.del({ cacheName: 'demo-student:student', intention: 'create' })
+  async create(student: DtoStudentCreate): Promise<EntityStudent> {
+    return await this.scope.model.student.insert(student);
+  }
+
 + @Caching.get({ cacheName: 'demo-student:student' })
   async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
 
-+ @Caching.del({ cacheName: 'demo-student:student' })
++ @Caching.set({ cacheName: 'demo-student:student' })
   async update(id: TableIdentity, student: DtoStudentUpdate) {
     return await this.scope.model.student.updateById(id, student);
   }
@@ -145,5 +139,11 @@ class ServiceStudent {
 }
 ```
 
-- 这里添加的`@Caching.xxx`装饰器仅用于演示目的。在实际业务当中，不需要在 Service 中使用`@Caching.xxx`。因为 Model 本身内置了更完善的缓存机制
-  - 参见: [Vona ORM: 缓存](../orm/caching.md)
+- `create`: 如果前端先通过 Id 获取学生数据，而此时学生数据不存在，则在缓存中存入`null`值，从而提升性能。那么，当创建新学生时，就需要从缓存中删除 Id 对应的缓存
+  - `intention: 'create'`: 指示 @Caching.del 从 create 方法的返回值中取得 Id 值
+
+::: warning
+这里添加的`@Caching.xxx`装饰器仅用于演示目的。在实际业务当中，不需要在 Service 中使用`@Caching.xxx`。因为 Model 本身内置了更完善的缓存机制
+
+- 参见: [Vona ORM: 缓存](../orm/caching.md)
+:::
