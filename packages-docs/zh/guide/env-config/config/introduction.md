@@ -60,6 +60,21 @@ config.normal.mine.ts
 config.normal.dev.mine.ts
 ```
 
+## 支持异步加载
+
+config 文件支持异步加载
+
+``` typescript
+export default async function (app: VonaApplication, env: VonaConfigEnv) {
+  const config: VonaConfigOptional = {};
+
+  // async load remote config
+  ...
+
+  return config;
+}  
+```
+
 ## 获取全局config
 
 在任何 bean 实例中可以直接通过`this.app.config`获取全局 config 对象

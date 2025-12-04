@@ -60,6 +60,21 @@ config.normal.mine.ts
 config.normal.dev.mine.ts
 ```
 
+## Support Asynchronous Loading
+
+The config files support asynchronous loading
+
+``` typescript
+export default async function (app: VonaApplication, env: VonaConfigEnv) {
+  const config: VonaConfigOptional = {};
+
+  // async load remote config
+  ...
+
+  return config;
+}  
+```
+
 ## Obtaining global config
 
 The global config object can be obtained directly through `this.app.config` in any bean instance
