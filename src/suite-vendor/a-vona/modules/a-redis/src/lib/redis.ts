@@ -1,14 +1,14 @@
-import type { VonaAppInfo, VonaApplication } from 'vona';
+import type { VonaApplication } from 'vona';
 
-export function getRedisClientKeyPrefix(clientName: string, appInfo: VonaAppInfo | VonaApplication): string {
-  const mode = ['test', 'dev'].includes(appInfo.configMeta.mode) ? '_local' : '';
-  return `${clientName}_${appInfo.name}${mode}:`;
+export function getRedisClientKeyPrefix(clientName: string, app: VonaApplication): string {
+  const mode = ['test', 'dev'].includes(app.configMeta.mode) ? '_local' : '';
+  return `${clientName}_${app.name}${mode}:`;
 }
 
 export function prepareRedisClientKeyPrefix(
   keyPrefix: string | true | undefined,
   clientName: string,
-  appInfo: VonaAppInfo | VonaApplication,
+  app: VonaApplication,
 ): string | undefined {
-  return keyPrefix === true ? getRedisClientKeyPrefix(clientName, appInfo) : keyPrefix;
+  return keyPrefix === true ? getRedisClientKeyPrefix(clientName, app) : keyPrefix;
 }

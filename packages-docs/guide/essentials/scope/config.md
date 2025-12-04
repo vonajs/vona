@@ -61,8 +61,8 @@ You can use `project-level` Config to override `module-level` Config
 `src/backend/config/config/config.ts`
 
 ```typescript{6-8}
-export default function (_appInfo: VonaAppInfo) {
-  const config = {} as VonaConfigOptional;
+export default async function (_app: VonaApplication, _env: VonaConfigEnv) {
+  const config: VonaConfigOptional = {};
 
   // modules
   config.modules = {
