@@ -1,4 +1,5 @@
 import type { Constructable } from 'vona';
+import type { ICachingActionKeyInfo } from 'vona-module-a-caching';
 import type { IOpenapiObject } from 'vona-module-a-openapiutils';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { appResource, BeanBase } from 'vona';
@@ -33,18 +34,18 @@ export class BeanOpenapi extends BeanBase {
     return apiObj as IOpenapiObject[K];
   }
 
-  protected generateJsonCacheKey(args: any[], prop: string) {
-    const version = args[0] ?? 'V31';
+  protected generateJsonCacheKey(info: ICachingActionKeyInfo) {
+    const version = info.args[0] ?? 'V31';
     const locale = this.ctx.locale;
-    return `${prop}_${version}_${locale}`;
+    return `${info.prop}_${version}_${locale}`;
   }
 
-  protected generateJsonOfControllerActionCacheKey(args: any[], prop: string) {
-    const [controller, actionKey, version] = args;
+  protected generateJsonOfControllerActionCacheKey(info: ICachingActionKeyInfo) {
+    const [controller, actionKey, version] = info.args;
     const beanOptions = appResource.getBean(controller)!;
     const beanFullName = beanOptions.beanFullName;
     const locale = this.ctx.locale;
-    return `${prop}_${beanFullName}_${actionKey}_${version ?? 'V31'}_${locale}`;
+    return `${info.prop}_${beanFullName}_${actionKey}_${version ?? 'V31'}_${locale}`;
   }
 
   @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
