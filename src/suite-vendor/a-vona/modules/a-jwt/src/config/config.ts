@@ -1,7 +1,7 @@
-import type { VonaApplication } from 'vona';
+import type { VonaApplication, VonaConfigEnv } from 'vona';
 import type { ConfigJwt } from '../types/jwt.ts';
 
-export function config(app: VonaApplication) {
+export function config(_app: VonaApplication, env: VonaConfigEnv) {
   return {
     field: {
       payload: {
@@ -22,8 +22,8 @@ export function config(app: VonaApplication) {
     },
     base: {
       secret: undefined,
-      signOptions: { issuer: app.meta.env.APP_NAME },
-      verifyOptions: { issuer: app.meta.env.APP_NAME },
+      signOptions: { issuer: env.APP_NAME },
+      verifyOptions: { issuer: env.APP_NAME },
     },
     clients: {
       access: {
