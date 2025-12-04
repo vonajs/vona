@@ -1,36 +1,15 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import type {
-  Next,
-  VonaContext,
-} from 'vona';
+import type { Next, VonaContext } from 'vona';
 import type { IEventRecord } from 'vona-module-a-event';
 import type { IMetaNameRecord } from 'vona-module-a-meta';
-import type {
-  IOnionExecuteCustom,
-  IOnionOptionsDeps,
-  IOnionOptionsEnable,
-  IOnionOptionsMatch,
-  IOnionSlice,
-  TypeOnionOptionsMatchRule,
-  TypeOnionsNormal,
-} from '../types/onion.ts';
+import type { IOnionExecuteCustom, IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice, TypeOnionOptionsMatchRule, TypeOnionsNormal } from '../types/onion.ts';
 import { isRegExp } from 'node:util/types';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
-import {
-  appMetadata,
-  appResource,
-  BeanBase,
-  cast,
-  compose,
-  deepExtend,
-  ProxyDisable,
-} from 'vona';
+import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, ProxyDisable } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import {
-  SymbolUseOnionLocal,
-} from '../types/onion.ts';
+import { SymbolUseOnionLocal } from '../types/onion.ts';
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
