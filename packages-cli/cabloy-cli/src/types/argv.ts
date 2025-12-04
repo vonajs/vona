@@ -7,6 +7,7 @@ export interface ICommandArgv {
   vscode: boolean;
   dummy: boolean;
   ci: boolean;
+  nometadata: boolean;
   _: string[];
 }
 

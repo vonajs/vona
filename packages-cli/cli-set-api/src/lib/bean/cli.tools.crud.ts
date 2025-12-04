@@ -50,6 +50,8 @@ export class CliToolsCrud extends BeanCliBase {
       boilerplatePath: 'tools/crud/boilerplate',
     });
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 }

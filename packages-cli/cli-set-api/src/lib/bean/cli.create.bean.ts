@@ -66,7 +66,9 @@ export class CliCreateBean extends BeanCliBase {
       boilerplatePath: boilerplateName,
     });
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 
   private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets', custom?: string) {

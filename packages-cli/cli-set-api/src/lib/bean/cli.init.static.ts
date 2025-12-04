@@ -35,6 +35,8 @@ export class CliInitStatic extends BeanCliBase {
       boilerplatePath: 'init/static/boilerplate',
     });
     // // tools.metadata
-    // await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    // if (!argv.nometadata) {
+    //   await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    // }
   }
 }
