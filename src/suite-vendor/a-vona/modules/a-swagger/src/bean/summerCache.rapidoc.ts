@@ -9,7 +9,7 @@ export class SummerCacheRapidoc
   extends BeanSummerCacheBase<TSummerCacheRapidocKey, TSummerCacheRapidocData>
   implements ISummerCacheGet<TSummerCacheRapidocKey, TSummerCacheRapidocData> {
   async getNative(
-    _key: TSummerCacheRapidocKey,
+    _key?: TSummerCacheRapidocKey,
     _options?: TSummerCacheActionOptions<TSummerCacheRapidocKey, TSummerCacheRapidocData>,
   ): Promise<TSummerCacheRapidocData | undefined> {}
 }
