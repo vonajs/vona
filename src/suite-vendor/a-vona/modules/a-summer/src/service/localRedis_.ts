@@ -14,13 +14,14 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
+      if (value === undefined) value = null;
       await this.cacheRedis.set(value!, key, {
         ttl: options?.ttl,
         db: options?.db,
         disableTransactionCompensate: options?.disableTransactionCompensate,
       });
     }
-    return value;
+    return value === null ? undefined : value;
   }
 
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -40,7 +41,8 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     // mget
     if (keysMissing.length > 0) {
       const layered = this.__getLayered(options);
-      const valuesMissing = await layered.mget(keysMissing, options);
+      let valuesMissing = await layered.mget(keysMissing, options);
+      valuesMissing = valuesMissing.map(item => item === undefined ? null : item);
       // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
       await this.cacheRedis.mset(valuesMissing as any, keysMissing, {
@@ -54,11 +56,12 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       }
     }
     // ok
-    return values;
+    return values.map(item => item === null ? undefined : item);
   }
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.set(value, key, {
+    const value2 = value === undefined ? null : value;
+    await this.cacheRedis.set(value2!, key, {
       ttl: options?.ttl,
       db: options?.db,
       disableTransactionCompensate: options?.disableTransactionCompensate,
@@ -66,7 +69,8 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   }
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    await this.cacheRedis.mset(values, keys, {
+    const values2 = values.map(item => item === undefined ? null : item);
+    await this.cacheRedis.mset(values2 as any, keys, {
       ttl: options?.ttl,
       db: options?.db,
       disableTransactionCompensate: options?.disableTransactionCompensate,

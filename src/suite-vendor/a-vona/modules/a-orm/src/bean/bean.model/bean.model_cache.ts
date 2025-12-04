@@ -546,12 +546,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const item: TRecord | undefined = await cache.get(id, {
       get: async () => {
         // where: maybe contain aux key
-        const item = await super._get(table, where, { disableDeleted: true });
-        return item === undefined ? null : item;
+        return await super._get(table, where, { disableDeleted: true });
       },
       db: this.db,
     });
-    if (!item || !this._checkIfEntityValidByDeleted(item, options)) return null as unknown as undefined;
+    if (!item || !this._checkIfEntityValidByDeleted(item, options)) return undefined;
     return item;
   }
 
