@@ -10,16 +10,12 @@ export const configMem = {
   },
 } as IDecoratorSummerCacheOptions;
 
-// export const configMemWithIgnoreNull = { ...configMem, ignoreNull: true };
-
 export const configRedis = {
   mode: 'redis', // only redis
   redis: {
     ttl: 20 * 60 * 1000, // 20 minutes
   },
 } as IDecoratorSummerCacheOptions;
-
-// export const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
 
 export const configAll = {
   mode: 'all',
@@ -32,8 +28,6 @@ export const configAll = {
   },
 } as IDecoratorSummerCacheOptions;
 
-// export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
-
 export function config(_app: VonaApplication) {
   return {
     summer: {
@@ -44,9 +38,6 @@ export function config(_app: VonaApplication) {
         mem: configMem,
         redis: configRedis,
         all: configAll,
-        // memWithIgnoreNull: configMemWithIgnoreNull,
-        // redisWithIgnoreNull: configRedisWithIgnoreNull,
-        // allWithIgnoreNull: configAllWithIgnoreNull,
       },
       redis: {
         client: 'summer',

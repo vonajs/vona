@@ -14,7 +14,6 @@ export interface ISummerCacheMGet<KEY, DATA> {
   mgetNative(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>>;
 }
 
-// export type TSummerCachePreset = 'mem' | 'redis' | 'all' | 'memWithIgnoreNull' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
 export type TSummerCachePreset = 'all' | 'mem' | 'redis';
 export type TSummerCacheMode = 'all' | 'mem' | 'redis';
 
