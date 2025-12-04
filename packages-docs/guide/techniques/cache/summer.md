@@ -215,7 +215,7 @@ await this.scope.summerCache.student.get('2', {
   disableTransactionCompensate: false,
   db: this.ctx.db,
   enable: true,
-  get: async (_key?: string) => { return null; },
+  get: async (_key?: string) => { return undefined; },
   mget: async (_keys: string[]) => { return []; },
 });
 ```
