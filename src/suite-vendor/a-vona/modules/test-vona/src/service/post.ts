@@ -9,7 +9,7 @@ import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
-  async findMany(params: IQueryParams<ModelPost>) {
+  async findMany(params?: IQueryParams<ModelPost>) {
     return await this.scope.model.post.selectAndCount(
       {
         ...params,
