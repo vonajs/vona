@@ -18,7 +18,7 @@ export class ServiceCaching extends BeanBase {
     return info.args[1];
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey' })
+  @Caching.get({ cacheName: 'test-vona:caching', cacheKeyFn: 'cacheKey' })
   async get(id: number): Promise<TSummerCacheTestData> {
     return {
       id,
@@ -26,44 +26,44 @@ export class ServiceCaching extends BeanBase {
     };
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheKeyFn })
+  @Caching.get({ cacheName: 'test-vona:caching', cacheKeyFn })
   async get2(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 
-  @Caching.get({ cacheName: 'test-vona:test', cacheKey: 'cel://args[0]' })
+  @Caching.get({ cacheName: 'test-vona:caching', cacheKey: 'cel://args[0]' })
   async get3(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 
   // default cacheKey
-  @Caching.get({ cacheName: 'test-vona:test' })
+  @Caching.get({ cacheName: 'test-vona:caching' })
   async get4(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
 
-  @Caching.set({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey', cacheValueFn: 'cacheValue' })
+  @Caching.set({ cacheName: 'test-vona:caching', cacheKeyFn: 'cacheKey', cacheValueFn: 'cacheValue' })
   async set(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }
 
   //
-  @Caching.set({ cacheName: 'test-vona:test', cacheKey: 'cel://args[0]', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
+  @Caching.set({ cacheName: 'test-vona:caching', cacheKey: 'cel://args[0]', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
   async set2(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }
 
-  @Caching.set({ cacheName: 'test-vona:test', cacheKeyFn: 'cacheKey' })
+  @Caching.set({ cacheName: 'test-vona:caching', cacheKeyFn: 'cacheKey' })
   async set3(_id: number, value: TSummerCacheTestData): Promise<TSummerCacheTestData> {
     return value;
   }
 
-  @Caching.del({ cacheName: 'test-vona:test' })
+  @Caching.del({ cacheName: 'test-vona:caching' })
   async del(_id: number): Promise<void> {
     // do nothing
   }
 
-  @Caching.clear({ cacheName: 'test-vona:test' })
+  @Caching.clear({ cacheName: 'test-vona:caching' })
   async clear(): Promise<void> {
     // do nothing
   }

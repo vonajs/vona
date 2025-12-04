@@ -2,7 +2,7 @@ import { hashkey } from '@cabloy/utils';
 
 export function getKeyHash(key: any): string {
   if (key === undefined || key === null) {
-    throw new Error('key is required');
+    return '';
   }
   return hashkey(key);
 }
