@@ -1,10 +1,17 @@
-import type { Redlock } from '@sesamecare-oss/redlock';
+import type * as Redlock from '@sesamecare-oss/redlock';
 import type { IInstanceRecord } from 'vona';
 import type { IDbInfo } from 'vona-module-a-orm';
+import type { IRedisClientRecord } from 'vona-module-a-redis';
+
+export interface ConfigRedlock {
+  clients: (keyof IRedisClientRecord)[];
+  lockTTL: number;
+  options: Redlock.Settings;
+}
 
 export interface IRedlockLockOptions {
   instanceName?: keyof IInstanceRecord | undefined | null;
-  redlock?: Redlock;
+  redlock?: Redlock.Redlock;
   lockTTL?: number;
 }
 
