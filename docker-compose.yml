@@ -39,12 +39,12 @@ services:
     shm_size: 128mb
     # or set shared memory limit when deploy via swarm stack
     volumes:
-      - ./docker-compose/data/pg:/var/lib/postgresql/data 
+      - ./docker-compose/data/pg:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: vona
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: '!%{9avv.Tw2LmcYP'
- 
+
   mysql:
     image: mysql:8.1
     command:
