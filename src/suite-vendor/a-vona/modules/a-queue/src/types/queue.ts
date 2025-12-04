@@ -1,8 +1,9 @@
 import type Redlock from '@sesamecare-oss/redlock';
 import type * as Bull from 'bullmq';
-import type { OmitNever } from 'vona';
+import type { OmitNever, PowerPartial } from 'vona';
 import type { IGeneralInfoOptions } from 'vona-module-a-executor';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
+import type { IRedlockClientOptions } from 'vona-module-a-redlock';
 
 export interface IQueuePushOptions extends IGeneralInfoOptions {
   queueNameSub?: string;
@@ -60,7 +61,7 @@ export interface IDecoratorQueueOptions extends TypeOnionOptionsEnableSimple {
   options?: {
     queue?: Partial<Bull.QueueOptions>;
     worker?: Partial<Bull.WorkerOptions>;
-    redlock?: Partial<Redlock.Redlock> & { lockTTL?: number };
+    redlock?: PowerPartial<IRedlockClientOptions> & { lockTTL?: number };
     job?: Bull.JobsOptions;
   };
 }

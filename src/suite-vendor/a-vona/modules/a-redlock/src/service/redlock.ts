@@ -74,8 +74,11 @@ export class ServiceRedlock extends BeanBase {
     return this._redlockDefault;
   }
 
-  public create(options: PowerPartial<IRedlockClientOptions>): Redlock {
-    const options2: IRedlockClientOptions = deepExtend({}, this.scope.config.base, options);
+  public create(options?: PowerPartial<IRedlockClientOptions>): Redlock {
+    const options2: IRedlockClientOptions =
+      options
+        ? deepExtend({}, this.scope.config.base, options)
+        : this.scope.config.base;
     return this._create(options2);
   }
 
