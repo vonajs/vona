@@ -74,30 +74,30 @@ describe('student.test.ts', () => {
 
 ``` typescript
 await app.bean.executor.mockCtx(async () => {
-  const scopeTest = app.scope('demo-student');
+  const scopeStudent = app.scope('demo-student');
 });
 ```
 
 ### 3. Use Service
 
 ```typescript
-const scopeTest = app.scope('demo-student');
-const students = await scopeTest.service.student.findAll();
+const scopeStudent = app.scope('demo-student');
+const students = await scopeStudent.service.student.findMany();
 ```
 
 ### 4. Use Model
 
 ```typescript
-const scopeTest = app.scope('demo-student');
-const students = await scopeTest.model.student.select();
+const scopeStudent = app.scope('demo-student');
+const students = await scopeStudent.model.student.select();
 ```
 
 ### 5. Using Entity
 
 ``` typescript
-const scopeTest = app.scope('demo-student');
-const tableName = scopeTest.entity.student.$table;
-const fieldName = scopeTest.entity.student.name;
+const scopeStudent = app.scope('demo-student');
+const tableName = scopeStudent.entity.student.$table;
+const fieldName = scopeStudent.entity.student.name;
 ```
 
 ### 6. Access API to test Controller
@@ -165,9 +165,9 @@ await app.bean.executor.mockCtx(async () => {
 
 ``` typescript
 await app.bean.executor.mockCtx(async () => {
-  const scopeTest = app.scope('demo-student');
+  const scopeStudent = app.scope('demo-student');
   try {
-    const students = await scopeTest.service.student.findAll();
+    const students = await scopeStudent.service.student.findMany();
   } catch (err) {
     // do something
   }
@@ -180,9 +180,9 @@ await app.bean.executor.mockCtx(async () => {
 import { catchError } from '@cabloy/utils';
 
 await app.bean.executor.mockCtx(async () => {
-  const scopeTest = app.scope('demo-student');
+  const scopeStudent = app.scope('demo-student');
   const [students, err] = await catchError(() => {
-    return scopeTest.service.student.findAll();
+    return scopeStudent.service.student.findMany();
   });
   // do somthing on err
 });
@@ -208,24 +208,22 @@ describe('student.test.ts', () => {
       // create
       const studentId = await app.bean.executor.performAction('post', '/demo/student', { body: data });
       assert.equal(!!studentId, true);
-      // findAll
-      const students: EntityStudent[] = await app.bean.executor.performAction('get', '/demo/student');
-      assert.equal(students.findIndex(item => item.name === data.name) > -1, true);
+      // findMany
+      const queryRes: DtoStudentQueryRes = await app.bean.executor.performAction('get', '/demo/student');
+      assert.equal(queryRes.list.findIndex(item => item.name === data.name) > -1, true);
       // update
       await app.bean.executor.performAction('patch', '/demo/student/:id', {
         params: { id: studentId },
         body: dataUpdate,
       });
       // findOne
-      const student: EntityStudent = await app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: studentId } });
+      let student: EntityStudent = await app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: studentId } });
       assert.equal(student.name, dataUpdate.name);
       // delete
       await app.bean.executor.performAction('delete', '/demo/student/:id', { params: { id: student.id } });
       // findOne
-      const [_, err] = await catchError(() => {
-        return app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: student.id } });
-      });
-      assert.equal(err?.code, 404);
+      student = await app.bean.executor.performAction('get', '/demo/student/:id', { params: { id: student.id } });
+      assert.equal(student, undefined);
       // logout
       await app.bean.passport.signout();
     });
