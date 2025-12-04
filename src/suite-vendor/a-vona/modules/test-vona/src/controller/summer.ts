@@ -30,8 +30,8 @@ export class ControllerSummer extends BeanBase {
     cacheOtherModule = this.bean.summer.cache(`${__ThisModule__}.summerCache.${name}`) as SummerCacheTest;
     assert.equal(cache, cacheOtherModule);
 
-    let value: TSummerCacheTestData | null | undefined;
-    let values: Array<TSummerCacheTestData | null | undefined>;
+    let value: TSummerCacheTestData | undefined;
+    let values: Array<TSummerCacheTestData | undefined>;
 
     // get: peek
     value = await cache.peek(key1);

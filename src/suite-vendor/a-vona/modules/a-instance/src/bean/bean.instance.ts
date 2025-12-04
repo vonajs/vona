@@ -31,13 +31,13 @@ export class BeanInstance extends BeanBase {
     return await this._get(instanceName);
   }
 
-  private async _get(instanceName: keyof IInstanceRecord): Promise<EntityInstance | null> {
+  private async _get(instanceName: keyof IInstanceRecord): Promise<EntityInstance | undefined> {
     // get
     const instance = await this.modelInstance.get({ name: instanceName });
     if (instance) return instance;
     // instance base
     const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(instanceName);
-    if (!configInstanceBase) return null;
+    if (!configInstanceBase) return;
     if (configInstanceBase.isolate && !configInstanceBase.id) {
       throw new Error(`should specify id for isolate instance: ${instanceName}`);
     }

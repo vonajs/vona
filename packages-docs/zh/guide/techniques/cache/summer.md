@@ -31,9 +31,9 @@ export class SummerCacheStudent
   async getNative(
     key?: TSummerCacheStudentKey,
     _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
-  ): Promise<TSummerCacheStudentData | null | undefined> {
+  ): Promise<TSummerCacheStudentData | undefined> {
     const student = await this.scope.model.student.getById(key!);
-    if (!student) return null;
+    if (!student) return;
     return { id: student.id as string, name: student.name };
   }
 }
@@ -66,14 +66,14 @@ export class SummerCacheStudent
   async getNative(
     key?: TSummerCacheStudentKey,
     _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
-  ): Promise<TSummerCacheStudentData | null | undefined> {
+  ): Promise<TSummerCacheStudentData | undefined> {
     ...
   }
 
 + async mgetNative(
 +   keys: TSummerCacheStudentKey[],
 +   _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
-+ ): Promise<Array<TSummerCacheStudentData | null | undefined>> {
++ ): Promise<Array<TSummerCacheStudentData | undefined>> {
 +   const students = await this.scope.model.student.mget(keys);
 +   return students.map(student => {
 +     return { id: student.id as string, name: student.name };

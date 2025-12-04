@@ -1,7 +1,7 @@
 import type { TCacheRedisPasswordResetData } from './cacheRedis.passwordReset.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export type TypeEventPasswordResetCallbackData = TCacheRedisPasswordResetData | null | undefined;
+export type TypeEventPasswordResetCallbackData = TCacheRedisPasswordResetData | undefined;
 
 export type TypeEventPasswordResetCallbackResult = string;
 
