@@ -13,16 +13,16 @@ export class ServiceRedis extends BeanBase {
     await this._clearRedisKeys(app.bean.redis.get('queue'), `${getRedisClientKeyPrefix('bull', app)}*`);
     // broadcast channel has subscribed
     // await _clearRedisKeys(app.redis.get('broadcast'), `${getRedisClientKeyPrefix('broadcast', app)}*`);
-    // redlock
-    for (const clientName of this.$scope.redlock.config.redlock.clients) {
-      await this._clearRedisKeys(app.bean.redis.get(clientName), `${getRedisClientKeyPrefix('redlock', app)}*`);
-    }
-    for (const clientName in app.config.redis.clients) {
-      if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
-      if (clientName.includes('redlock')) continue;
-      const client = app.config.redis.clients[clientName];
-      const keyPrefix = prepareRedisClientKeyPrefix(client.keyPrefix, clientName, this.app);
-      await this._clearRedisKeys(app.bean.redis.get(clientName as keyof IRedisClientRecord), `${keyPrefix}*`);
+    for (const _clientName in app.config.redis.clients) {
+      const clientName = _clientName as keyof IRedisClientRecord;
+      if (['limiter', 'queue', 'broadcast'].includes(clientName)) continue;
+      if (clientName.startsWith('redlock')) {
+        await this._clearRedisKeys(app.bean.redis.get(clientName), `${getRedisClientKeyPrefix('redlock', app)}*`);
+      } else {
+        const client = app.config.redis.clients[clientName];
+        const keyPrefix = prepareRedisClientKeyPrefix(client.keyPrefix, clientName, this.app);
+        await this._clearRedisKeys(app.bean.redis.get(clientName), `${keyPrefix}*`);
+      }
     }
   }
 
