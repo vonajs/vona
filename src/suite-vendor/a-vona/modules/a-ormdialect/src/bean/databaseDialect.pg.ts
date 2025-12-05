@@ -1,16 +1,8 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type {
-  ConfigDatabaseClient,
-  IDecoratorDatabaseDialectOptions,
-  IFetchDatabasesResultItem,
-  IFetchIndexesResultItem,
-} from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
 import { isNil } from '@cabloy/utils';
-import {
-  BeanDatabaseDialectBase,
-  DatabaseDialect,
-} from 'vona-module-a-orm';
+import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
 export interface IDatabaseDialectOptionsPg extends IDecoratorDatabaseDialectOptions {}
 
