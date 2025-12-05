@@ -165,9 +165,9 @@ export class LocalHelper {
 
   async pnpmInstall() {
     // args
-    const args = ['install', '--force'];
+    const args = ['install'];
     // log
-    await this.console.log('===> pnpm install --force');
+    await this.console.log('===> pnpm install');
     // spawn
     await this.spawnCmd({
       cmd: 'pnpm',
