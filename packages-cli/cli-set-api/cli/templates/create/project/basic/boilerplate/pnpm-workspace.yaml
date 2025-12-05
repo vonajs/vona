@@ -26,3 +26,10 @@ publicHoistPattern:
   - '*why-is-node-running*'
   - '*ts-node*'
   - zod
+onlyBuiltDependencies:
+  - better-sqlite3
+  - '@swc/core'
+  - '@zhennann/ejs'
+  - esbuild
+  - msgpackr-extract
+  - nx
