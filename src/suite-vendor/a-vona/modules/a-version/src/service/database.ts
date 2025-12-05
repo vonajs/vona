@@ -83,7 +83,7 @@ export class ServiceDatabase extends BeanBase {
     const client = this.bean.database.current.client;
     // get current database name
     let databaseName = client.getDatabaseName();
-    const isTestDatabase = databaseName.indexOf(databasePrefix) === 0;
+    const isTestDatabase = databaseName.includes(databasePrefix);
     // dev/debug db
     if (this.app.meta.isDev) {
       // if enable testDatabase
