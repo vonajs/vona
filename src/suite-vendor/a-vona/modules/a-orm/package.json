@@ -33,6 +33,8 @@
       },
       "databaseDialect": {
         "beanGeneral": true,
+        "optionsGlobalInterfaceName": "IDecoratorDatabaseDialectOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-orm",
         "boilerplate": "cli/databaseDialect/boilerplate"
       }
     }

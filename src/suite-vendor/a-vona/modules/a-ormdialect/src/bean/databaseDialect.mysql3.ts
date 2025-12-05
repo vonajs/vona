@@ -1,9 +1,11 @@
-import type { ConfigDatabaseClient } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions } from 'vona-module-a-orm';
 import { Virtual } from 'vona';
 import { DatabaseDialect } from 'vona-module-a-orm';
 import { DatabaseDialectMysql } from './databaseDialect.mysql.ts';
 
-@DatabaseDialect()
+export interface IDatabaseDialectOptionsMysql3 extends IDecoratorDatabaseDialectOptions {}
+
+@DatabaseDialect<IDatabaseDialectOptionsMysql3>()
 @Virtual()
 export class DatabaseDialectMysql3 extends DatabaseDialectMysql {
   getConfigBase(): ConfigDatabaseClient | undefined {

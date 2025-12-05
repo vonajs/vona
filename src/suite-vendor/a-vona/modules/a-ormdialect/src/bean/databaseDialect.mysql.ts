@@ -2,6 +2,7 @@ import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
 import type {
   ConfigDatabaseClient,
+  IDecoratorDatabaseDialectOptions,
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
 } from 'vona-module-a-orm';
@@ -12,7 +13,9 @@ import {
   DatabaseDialect,
 } from 'vona-module-a-orm';
 
-@DatabaseDialect()
+export interface IDatabaseDialectOptionsMysql extends IDecoratorDatabaseDialectOptions {}
+
+@DatabaseDialect<IDatabaseDialectOptionsMysql>()
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   getConfigBase(): ConfigDatabaseClient | undefined {
     return {

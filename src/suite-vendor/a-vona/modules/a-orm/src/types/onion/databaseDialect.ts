@@ -1,3 +1,4 @@
+import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IDatabaseDialectRecord {}
@@ -12,7 +13,7 @@ declare module 'vona-module-a-onion' {
 
 declare module 'vona' {
   export interface ConfigOnions {
-    // databaseDialect: OmitNever<IDatabaseDialectRecord>;
+    databaseDialect: OmitNever<IDatabaseDialectRecord>;
   }
 
   export interface IBeanSceneRecord {
