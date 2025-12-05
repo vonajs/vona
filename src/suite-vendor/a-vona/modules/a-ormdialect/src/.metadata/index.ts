@@ -4,15 +4,18 @@ export * from '../bean/databaseDialect.betterSqlite3.ts';
 export * from '../bean/databaseDialect.mysql.ts';
 export * from '../bean/databaseDialect.mysql3.ts';
 export * from '../bean/databaseDialect.pg.ts';
-
-import 'vona';
-declare module 'vona' {
+import type { IDatabaseDialectOptionsBetterSqlite3 } from '../bean/databaseDialect.betterSqlite3.ts';
+import type { IDatabaseDialectOptionsMysql } from '../bean/databaseDialect.mysql.ts';
+import type { IDatabaseDialectOptionsMysql3 } from '../bean/databaseDialect.mysql3.ts';
+import type { IDatabaseDialectOptionsPg } from '../bean/databaseDialect.pg.ts';
+import 'vona-module-a-orm';
+declare module 'vona-module-a-orm' {
   
     export interface IDatabaseDialectRecord {
-      'a-ormdialect:betterSqlite3': never;
-'a-ormdialect:mysql': never;
-'a-ormdialect:mysql3': never;
-'a-ormdialect:pg': never;
+      'a-ormdialect:betterSqlite3': IDatabaseDialectOptionsBetterSqlite3;
+'a-ormdialect:mysql': IDatabaseDialectOptionsMysql;
+'a-ormdialect:mysql3': IDatabaseDialectOptionsMysql3;
+'a-ormdialect:pg': IDatabaseDialectOptionsPg;
     }
 
   
@@ -27,7 +30,7 @@ declare module 'vona-module-a-ormdialect' {
           export interface DatabaseDialectBetterSqlite3 {
             get $beanFullName(): 'a-ormdialect.databaseDialect.betterSqlite3';
             get $onionName(): 'a-ormdialect:betterSqlite3';
-            
+            get $onionOptions(): IDatabaseDialectOptionsBetterSqlite3;
           }
 
         export interface DatabaseDialectMysql {
@@ -38,7 +41,7 @@ declare module 'vona-module-a-ormdialect' {
           export interface DatabaseDialectMysql {
             get $beanFullName(): 'a-ormdialect.databaseDialect.mysql';
             get $onionName(): 'a-ormdialect:mysql';
-            
+            get $onionOptions(): IDatabaseDialectOptionsMysql;
           }
 
         export interface DatabaseDialectPg {
@@ -49,7 +52,7 @@ declare module 'vona-module-a-ormdialect' {
           export interface DatabaseDialectPg {
             get $beanFullName(): 'a-ormdialect.databaseDialect.pg';
             get $onionName(): 'a-ormdialect:pg';
-            
+            get $onionOptions(): IDatabaseDialectOptionsPg;
           } 
 }
 /** databaseDialect: end */
