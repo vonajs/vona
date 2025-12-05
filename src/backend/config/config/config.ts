@@ -148,6 +148,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
             nativeBinding: env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING || null as any,
           },
         },
+        useNullAsDefault: true,
       },
       pg: {
         client: 'pg',
