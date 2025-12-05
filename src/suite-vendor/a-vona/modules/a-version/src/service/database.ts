@@ -43,15 +43,7 @@ export class ServiceDatabase extends BeanBase {
 
   private async __fetchDatabases(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
     const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
-    // dbs
-    let dbs = await client.connection.schema.fetchDatabases(databasePrefix);
-    // filter
-    dbs = dbs.filter(db => {
-      const _time = db.name.substring(databasePrefix.length);
-      return _time.length === __timeFormat.length;
-    });
-    // ok
-    return dbs;
+    return await client.connection.schema.fetchDatabases(databasePrefix);
   }
 
   private async __createDatabase(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
