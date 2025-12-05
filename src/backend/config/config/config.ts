@@ -145,7 +145,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
         connection: {
           filename: env.DATABASE_CLIENT_SQLITE3_FILENAME,
           options: {
-            nativeBinding: env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING,
+            nativeBinding: env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING || null as any,
           },
         },
       },

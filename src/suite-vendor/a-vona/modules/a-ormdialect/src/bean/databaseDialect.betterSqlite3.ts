@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import type { IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem } from 'vona-module-a-orm';
 import path from 'node:path';
-import { remove } from 'fs-extra';
+import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
@@ -25,7 +25,8 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
 
   async createDatabase(_schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<string> {
     const dbDir = this._getDbDir();
-    return path.join(dbDir, databaseName);
+    await ensureDir(dbDir);
+    return path.join(dbDir, `${databaseName}.db`);
   }
 
   async dropDatabase(_schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
