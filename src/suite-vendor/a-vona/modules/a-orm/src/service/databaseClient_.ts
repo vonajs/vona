@@ -93,7 +93,7 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     const connection = this.clientConfig.connection as any;
     if (connection.database !== undefined) {
       result.database = databaseName;
-    } else if (connection.filename != undefined) {
+    } else if (connection.filename !== undefined) {
       result.filename = databaseName;
     }
     return result;
