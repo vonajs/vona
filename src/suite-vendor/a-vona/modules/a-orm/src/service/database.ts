@@ -2,7 +2,7 @@ import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.t
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { isNil } from '@cabloy/utils';
-import { appResource, BeanBase, deepExtend } from 'vona';
+import { appResource, BeanBase, beanFullNameFromOnionName, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from './databaseClient_.ts';
 
@@ -14,7 +14,7 @@ export class ServiceDatabase extends BeanBase {
 
   getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
     if (!client) throw new Error('database dialect not specified');
-    const beanFullName = this.scope.config.dialects[client];
+    const beanFullName = beanFullNameFromOnionName(this.scope.config.dialects[client], 'databaseDialect');
     const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
     if (!dialect) throw new Error(`database dialect not found: ${client}`);
     return dialect;
