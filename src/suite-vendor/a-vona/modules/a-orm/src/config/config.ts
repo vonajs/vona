@@ -1,14 +1,9 @@
 import type { TableIdentityType } from 'table-identity';
-import type { TypeBeanRecordGeneralSelectorKeys, VonaApplication } from 'vona';
+import type { VonaApplication } from 'vona';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
 import type { TSummerCachePreset } from 'vona-module-a-summer';
-import type { IDatabaseClientDialectRecord } from '../types/database.ts';
+import type { IDataBaseConfigDialects } from '../types/config.ts';
 import { configAll, configRedis } from 'vona-module-a-summer';
-
-export type TypeDataBaseConfigDialects = Record<
-  keyof IDatabaseClientDialectRecord,
-  TypeBeanRecordGeneralSelectorKeys<'databaseDialect'>
->;
 
 export function config(_app: VonaApplication) {
   return {
@@ -42,10 +37,11 @@ export function config(_app: VonaApplication) {
       expired: 14 * 24 * 3600 * 1000,
     },
     dialects: {
-      mysql: 'a-ormdialect.databaseDialect.mysql',
-      mysql2: 'a-ormdialect.databaseDialect.mysql3',
-      pg: 'a-ormdialect.databaseDialect.pg',
-    } as unknown as TypeDataBaseConfigDialects,
+      'better-sqlite3': 'a-ormdialect:betterSqlite3',
+      'mysql': 'a-ormdialect:mysql',
+      'mysql2': 'a-ormdialect:mysql3',
+      'pg': 'a-ormdialect:pg',
+    } as IDataBaseConfigDialects,
     summer: {
       enable: true,
       meta: {} as IOnionOptionsMeta,
