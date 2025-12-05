@@ -4,7 +4,10 @@
   "version": "5.0.19",
   "title": "a-ormdialect",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "globalDependencies": {
+      "better-sqlite3": true
+    }
   },
   "description": "",
   "author": "",
