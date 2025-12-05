@@ -281,9 +281,6 @@ importers:
       vona-module-a-zod:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-zod
-      vona-module-demo-student:
-        specifier: workspace:^
-        version: link:src/module/demo-student
       vona-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -307,7 +304,7 @@ importers:
         version: 4.1.13
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.63
+        specifier: ^3.0.65
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -1006,15 +1003,6 @@ importers:
         version: 6.1.2
 
   packages-vona/vona-shared:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.2
-
-  src/module/demo-student:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
