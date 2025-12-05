@@ -10,14 +10,16 @@ export interface IDbInfo {
 
 export interface IDatabaseClientRecord {
   default: never;
+  sqlite3: never;
   pg: never;
   mysql: never;
 }
 
 export interface IDatabaseClientDialectRecord {
-  pg: never;
-  mysql: never;
-  mysql2: never;
+  'better-sqlite3': never;
+  'pg': never;
+  'mysql': never;
+  'mysql2': never;
 }
 
 export interface IDatabaseSwitchOptions {
@@ -42,6 +44,9 @@ declare module 'vona' {
   export interface VonaConfigEnv {
     // default
     DATABASE_DEFAULT_CLIENT: string | undefined;
+    // sqlite3
+    DATABASE_CLIENT_SQLITE3_FILENAME: string | undefined;
+    DATABASE_CLIENT_SQLITE3_NATIVEBINDING: string | undefined;
     // pg
     DATABASE_CLIENT_PG_HOST: string | undefined;
     DATABASE_CLIENT_PG_PORT: string | undefined;

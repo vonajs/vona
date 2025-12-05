@@ -140,6 +140,15 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
     },
     defaultClient: env.DATABASE_DEFAULT_CLIENT as keyof IDatabaseClientRecord,
     clients: {
+      sqlite3: {
+        client: 'better-sqlite3',
+        connection: {
+          filename: env.DATABASE_CLIENT_SQLITE3_FILENAME,
+          options: {
+            nativeBinding: env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING,
+          },
+        },
+      },
       pg: {
         client: 'pg',
         connection: {
