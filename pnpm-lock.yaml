@@ -1830,6 +1830,9 @@ importers:
       better-sqlite3:
         specifier: ^12.5.0
         version: 12.5.0
+      globby:
+        specifier: ^14.1.0
+        version: 14.1.0
       mysql2:
         specifier: ^3.15.0
         version: 3.15.3

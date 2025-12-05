@@ -32,10 +32,11 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     return dbs;
   }
 
-  async createDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
+  async createDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<string> {
     await schemaBuilder.raw(
       `CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`,
     );
+    return databaseName;
   }
 
   async dropDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {

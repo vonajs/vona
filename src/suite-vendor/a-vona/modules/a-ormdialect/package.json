@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^12.5.0",
+    "globby": "^14.1.0",
     "mysql2": "^3.15.0",
     "pg": "^8.16.3",
     "pg-types": "^4.1.0"

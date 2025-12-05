@@ -58,8 +58,7 @@ export class ServiceDatabase extends BeanBase {
     const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     // create
     const databaseName = `${databasePrefix}${DateTime.now().toFormat(__timeFormat)}`;
-    await client.connection.schema.createDatabase(databaseName);
-    return databaseName;
+    return await client.connection.schema.createDatabase(databaseName);
   }
 
   private async __prepareDatabases(versionStart: boolean) {

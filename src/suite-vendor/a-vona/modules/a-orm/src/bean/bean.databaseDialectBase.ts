@@ -21,7 +21,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async createDatabase(_schemaBuilder: Knex.SchemaBuilder, _databaseName: string): Promise<void> {
+  async createDatabase(_schemaBuilder: Knex.SchemaBuilder, _databaseName: string): Promise<string> {
     throw new Error('Not Implemented');
   }
 

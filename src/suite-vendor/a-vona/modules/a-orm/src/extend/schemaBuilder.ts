@@ -19,7 +19,7 @@ declare module 'knex' {
   namespace Knex {
     interface SchemaBuilder {
       fetchDatabases(databasePrefix: string): Promise<IFetchDatabasesResultItem[]>;
-      createDatabase(databaseName: string): Promise<void>;
+      createDatabase(databaseName: string): Promise<string>;
       dropDatabase(databaseName: string): Promise<void>;
       fetchIndexes(tableName: string): Promise<IFetchIndexesResultItem[]>;
     }

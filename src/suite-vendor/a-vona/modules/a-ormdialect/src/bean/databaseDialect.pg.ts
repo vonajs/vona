@@ -33,8 +33,9 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
     return dbs;
   }
 
-  async createDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
+  async createDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<string> {
     await schemaBuilder.raw(`CREATE DATABASE "${databaseName}" encoding=UTF8`);
+    return databaseName;
   }
 
   async dropDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
