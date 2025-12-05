@@ -91,9 +91,9 @@ export class ServiceDatabaseClient extends BeanMutateBase {
   private _prepareDatabaseName(databaseName: string): IPrepareDatabaseNameResult {
     const result: IPrepareDatabaseNameResult = {};
     const connection = this.clientConfig.connection as any;
-    if (connection.database) {
+    if (connection.database !== undefined) {
       result.database = databaseName;
-    } else if (connection.filename) {
+    } else if (connection.filename != undefined) {
       result.filename = databaseName;
     }
     return result;
