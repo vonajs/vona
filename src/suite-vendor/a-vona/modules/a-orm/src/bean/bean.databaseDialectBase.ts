@@ -54,6 +54,37 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return result;
   }
 
+  protected async insertAsMysql(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+    if (datas.length === 0) return [];
+    if (isNil(datas[0].id)) {
+      const ids: TableIdentity[] = [];
+      for (const data of datas) {
+        const builder2 = builder.clone();
+        builder2.insert(data);
+        const items = await builder2;
+        ids.push(items[0]);
+      }
+      return ids;
+    } else {
+      builder.insert(datas);
+      await builder;
+      return datas.map(item => item.id);
+    }
+  }
+
+  protected async insertAsPg(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+    if (datas.length === 0) return [];
+    if (isNil(datas[0].id)) {
+      builder.insert(datas).returning('id');
+      const items = await builder;
+      return items.map(item => item.id);
+    } else {
+      builder.insert(datas);
+      await builder;
+      return datas.map(item => item.id);
+    }
+  }
+
   protected _coerceColumnValue(type: string, value) {
     // null
     if (isNil(value)) return undefined;

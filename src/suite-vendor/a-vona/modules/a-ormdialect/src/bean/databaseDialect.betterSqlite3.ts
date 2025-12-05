@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+import type { TableIdentity } from 'table-identity';
 import type { IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem } from 'vona-module-a-orm';
 import path from 'node:path';
 import { ensureDir, remove } from 'fs-extra';
@@ -31,6 +32,10 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
 
   async dropDatabase(_schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
     await remove(databaseName);
+  }
+
+  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+    return await this.insertAsMysql(builder, datas);
   }
 
   private _getDbDir() {

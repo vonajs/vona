@@ -2,7 +2,6 @@ import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
 import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
 import { promisify } from 'node:util';
-import { isNil } from '@cabloy/utils';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
 export interface IDatabaseDialectOptionsMysql extends IDecoratorDatabaseDialectOptions {}
@@ -55,21 +54,7 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   }
 
   async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
-    if (datas.length === 0) return [];
-    if (isNil(datas[0].id)) {
-      const ids: TableIdentity[] = [];
-      for (const data of datas) {
-        const builder2 = builder.clone();
-        builder2.insert(data);
-        const items = await builder2;
-        ids.push(items[0]);
-      }
-      return ids;
-    } else {
-      builder.insert(datas);
-      await builder;
-      return datas.map(item => item.id);
-    }
+    return await this.insertAsMysql(builder, datas);
   }
 
   query(result) {

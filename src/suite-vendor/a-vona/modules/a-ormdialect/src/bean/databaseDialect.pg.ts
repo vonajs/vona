@@ -1,7 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
 import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
-import { isNil } from '@cabloy/utils';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
 export interface IDatabaseDialectOptionsPg extends IDecoratorDatabaseDialectOptions {}
@@ -56,16 +55,7 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
   }
 
   async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
-    if (datas.length === 0) return [];
-    if (isNil(datas[0].id)) {
-      builder.insert(datas).returning('id');
-      const items = await builder;
-      return items.map(item => item.id);
-    } else {
-      builder.insert(datas);
-      await builder;
-      return datas.map(item => item.id);
-    }
+    return await this.insertAsPg(builder, datas);
   }
 
   query(result) {
