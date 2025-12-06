@@ -65,5 +65,7 @@ export function getRuntimePathPhysicalRoot(app: VonaApplication) {
 export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
   const mode = app.configMeta.mode;
   if (mode !== 'prod') return '';
-  return path.join(os.homedir(), 'vona', app.name, 'sqlite3.db');
+  const dbPath = path.join(os.homedir(), 'vona', app.name);
+  fse.ensureDirSync(dbPath);
+  return path.join(dbPath, 'sqlite3.db');
 }
