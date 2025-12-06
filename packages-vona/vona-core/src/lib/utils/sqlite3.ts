@@ -8,9 +8,9 @@ import { pathToHref } from './util.ts';
 export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
   const mode = app.configMeta.mode;
   if (mode !== 'prod') return '';
-  const dbPath = path.join(os.homedir(), 'vona', app.name);
+  const dbPath = path.join(os.homedir(), 'vona', app.name, 'sqlite3');
   fse.ensureDirSync(dbPath);
-  return path.join(dbPath, 'sqlite3.db');
+  return path.join(dbPath, `${app.name}.db`);
 }
 
 export function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: string | undefined) {
