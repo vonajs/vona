@@ -46,6 +46,9 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
 
   async dropDatabase(_schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
     await remove(databaseName);
+    for (const part of ['shm', 'wal', 'journal']) {
+      await remove(`${databaseName}-${part}`);
+    }
   }
 
   async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
