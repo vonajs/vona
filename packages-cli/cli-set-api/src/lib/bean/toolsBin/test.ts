@@ -34,12 +34,14 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
   }
   // concurrency
   let concurrency = 1;
-  if (process.env.TEST_CONCURRENCY === 'true') {
-    concurrency = os.cpus().length;
-  } else if (process.env.TEST_CONCURRENCY === 'false') {
-    concurrency = 1;
-  } else {
-    concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
+  if (process.env.DATABASE_DEFAULT_CLIENT !== 'sqlite3') {
+    if (process.env.TEST_CONCURRENCY === 'true') {
+      concurrency = os.cpus().length;
+    } else if (process.env.TEST_CONCURRENCY === 'false') {
+      concurrency = 1;
+    } else {
+      concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
+    }
   }
   // coverage
   let coverageIncludeGlobs: string[] = [];
