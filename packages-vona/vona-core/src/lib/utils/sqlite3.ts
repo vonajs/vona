@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { pathToHref } from 'vona';
+import { pathToHref } from './util.ts';
 
 export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
   const mode = app.configMeta.mode;
