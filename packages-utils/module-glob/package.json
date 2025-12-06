@@ -39,7 +39,7 @@
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "fs-extra": "^11.3.0",
-    "globby": "^14.1.0",
+    "globby": "^16.0.0",
     "semver": "^7.7.1"
   },
   "clean-package": {

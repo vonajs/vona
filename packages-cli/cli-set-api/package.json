@@ -68,7 +68,7 @@
     "cli-table3": "^0.6.5",
     "compressing": "^1.10.0",
     "fs-extra": "^11.2.0",
-    "globby": "^14.1.0",
+    "globby": "^16.0.0",
     "gogocode": "^1.0.53",
     "lodash": "^4.17.21",
     "nodemon": "^3.1.9",

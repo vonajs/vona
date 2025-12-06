@@ -57,7 +57,7 @@
     "cli-table3": "^0.6.5",
     "enquirer": "^2.3.6",
     "fs-extra": "^11.2.0",
-    "globby": "^14.1.0",
+    "globby": "^16.0.0",
     "gogocode": "^1.0.53",
     "is-type-of": "^2.1.0",
     "istextorbinary": "^3.3.0",
