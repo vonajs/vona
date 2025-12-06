@@ -14,11 +14,7 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     return {
       pool: {
         afterCreate(conn, done) {
-          const pragma: { journal_mode: string }[] = conn.pragma('journal_mode');
-          if (pragma[0]?.journal_mode?.toLocaleLowerCase() !== 'wal') {
-            conn.pragma('journal_mode = wal');
-          }
-          done();
+          sqlite3_afterCreate(conn).then(done).catch(done);
         },
       },
     } as unknown as ConfigDatabaseClient;
@@ -59,7 +55,18 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     return await this.selectAsSqlite3(builder, datas, fn);
   }
 
+  query(result) {
+    return result;
+  }
+
   private _getDbDir() {
     return path.join(this.app.projectPath, '.app/sqlite3');
+  }
+}
+
+async function sqlite3_afterCreate(conn) {
+  const pragma: { journal_mode: string }[] = conn.pragma('journal_mode');
+  if (pragma[0]?.journal_mode?.toLocaleLowerCase() !== 'wal') {
+    conn.pragma('journal_mode = wal');
   }
 }
