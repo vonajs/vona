@@ -1,3 +1,4 @@
+import type { ICliBuildCustomOptions } from '@cabloy/cli';
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { LogLevel, LogOrStringHandler, OutputOptions, RollupBuild, RollupLog, RollupOptions } from 'rollup';
@@ -60,6 +61,9 @@ export class CliBinBuild extends BeanCliBase {
     await rimraf(outDir);
     await this._rollup(projectPath, env, outDir);
     await this._assets(projectPath, modulesMeta, outDir);
+    // custom
+    await this._custom(projectPath, env, outDir);
+    // remove .vona
     await rimraf(path.join(projectPath, '.vona'));
     // copy
     const outReleasesDir = path.join(projectPath, getOutReleasesDir());
@@ -88,6 +92,20 @@ export class CliBinBuild extends BeanCliBase {
         outReleasesDirCopy,
       );
     }
+  }
+
+  async _custom(projectPath: string, env: NodeJS.ProcessEnv, outDir: string) {
+    // custom
+    const jsFile = path.join(projectPath, 'src/backend/cli.ts');
+    if (!fse.existsSync(jsFile)) return;
+    return await this.helper.importDynamic(jsFile, async instance => {
+      const options: ICliBuildCustomOptions = {
+        cli: this,
+        env,
+        outDir,
+      };
+      return await instance.default(options);
+    });
   }
 
   async _assets(_projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>, outDir: string) {

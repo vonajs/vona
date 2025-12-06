@@ -4,6 +4,12 @@ import type { GoGoAST } from 'gogocode';
 import type { BeanCliBase } from '../lib/bean.cli.base.ts';
 import type { ICommandContext } from './argv.ts';
 
+export interface ICliBuildCustomOptions {
+  cli: BeanCliBase;
+  env: NodeJS.ProcessEnv;
+  outDir: string;
+}
+
 export interface IMetadataCustomGenerateOptions {
   cli: BeanCliBase;
   sceneName: string;
