@@ -10,7 +10,7 @@ describe('instance.test.ts', () => {
       assert.equal(app.ctx.instanceName, 'shareTest');
       assert.equal(app.ctx.instance.name, 'shareTest');
       assert.equal(app.bean.database.current.clientName, defaultClientName);
-      assert.equal(['pg', 'mysql'].includes(app.bean.database.current.clientName), true);
+      assert.equal(['sqlite3', 'pg', 'mysql'].includes(app.bean.database.current.clientName), true);
     }, { instanceName: 'shareTest' as any });
   });
   it('action:instance:isolateTest', async () => {
