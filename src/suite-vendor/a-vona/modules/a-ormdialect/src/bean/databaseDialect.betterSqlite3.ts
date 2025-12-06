@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, TypeGetTableColumnsFn } from 'vona-module-a-orm';
 import path from 'node:path';
 import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
@@ -47,6 +47,27 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
 
   async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
     return await this.insertAsMysql(builder, datas);
+  }
+
+  async select(_builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
+    const columns = await fn();
+    // data
+    const datasNew: any[] = [];
+    for (const data of datas) {
+      const dataNew = { ...data };
+      datasNew.push(dataNew);
+      for (const columnName in columns) {
+        const column = columns[columnName];
+        if (Object.prototype.hasOwnProperty.call(data, columnName)) {
+          let value = data[columnName];
+          if (column.type === 'json' && value !== undefined) {
+            value = JSON.parse(value);
+          }
+          dataNew[columnName] = value;
+        }
+      }
+    }
+    return datasNew;
   }
 
   private _getDbDir() {

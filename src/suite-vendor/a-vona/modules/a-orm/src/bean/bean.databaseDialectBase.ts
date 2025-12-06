@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ITableColumn } from '../types/columns.ts';
+import type { ITableColumn, TypeGetTableColumnsFn } from '../types/columns.ts';
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../types/dialect.ts';
 import { isNil, safeBoolean } from '@cabloy/utils';
@@ -35,6 +35,10 @@ export class BeanDatabaseDialectBase extends BeanBase {
 
   async insert(_builder: Knex.QueryBuilder, _datas: any[]): Promise<TableIdentity[]> {
     throw new Error('Not Implemented');
+  }
+
+  async select(_builder: Knex.QueryBuilder, datas: any[], _fn: TypeGetTableColumnsFn): Promise<any[]> {
+    return datas;
   }
 
   query(_result) {
