@@ -3,7 +3,7 @@ import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
 import { replaceTemplate } from '@cabloy/utils';
-import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot, getSqlite3DatabaseNameDefault } from 'vona';
+import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot, getSqlite3DatabaseNameDefault, getSqlite3NativeBinding } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -145,7 +145,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
         connection: {
           filename: env.DATABASE_CLIENT_SQLITE3_FILENAME || getSqlite3DatabaseNameDefault(app),
           options: {
-            nativeBinding: env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING || null as any,
+            nativeBinding: getSqlite3NativeBinding(app, env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING),
           },
         },
         useNullAsDefault: true,

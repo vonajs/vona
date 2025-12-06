@@ -69,3 +69,9 @@ export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
   fse.ensureDirSync(dbPath);
   return path.join(dbPath, 'sqlite3.db');
 }
+
+export function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: string | undefined) {
+  if (!nativeBinding) return null as unknown as undefined;
+  if (path.isAbsolute(nativeBinding)) return nativeBinding;
+  return path.join(import.meta.dirname, nativeBinding);
+}
