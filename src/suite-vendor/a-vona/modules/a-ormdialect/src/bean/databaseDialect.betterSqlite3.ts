@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem } from 'vona-module-a-orm';
 import path from 'node:path';
 import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
@@ -10,6 +10,17 @@ export interface IDatabaseDialectOptionsBetterSqlite3 extends IDecoratorDatabase
 
 @DatabaseDialect<IDatabaseDialectOptionsBetterSqlite3>()
 export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
+  getConfigBase(): ConfigDatabaseClient | undefined {
+    return {
+      pool: {
+        afterCreate(conn, done) {
+          conn.pragma('journal_mode = WAL');
+          done();
+        },
+      },
+    } as unknown as ConfigDatabaseClient;
+  }
+
   async fetchDatabases(
     _schemaBuilder: Knex.SchemaBuilder,
     databasePrefix: string,
