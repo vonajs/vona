@@ -50,21 +50,8 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     return await this.insertAsMysql(builder, datas);
   }
 
-  async select(_builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
-    const columns = await fn();
-    // data
-    for (const data of datas) {
-      for (const columnName in columns) {
-        const column = columns[columnName];
-        if (Object.prototype.hasOwnProperty.call(data, columnName)) {
-          const value = data[columnName];
-          if (column.type === 'json' && value !== undefined && typeof value === 'string') {
-            data[columnName] = JSON.parse(value);
-          }
-        }
-      }
-    }
-    return datas;
+  async select(builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
+    return await this.selectAsSqlite3(builder, datas, fn);
   }
 
   private _getDbDir() {

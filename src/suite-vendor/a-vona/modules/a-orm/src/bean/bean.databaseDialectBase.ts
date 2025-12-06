@@ -58,6 +58,23 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return result;
   }
 
+  protected async selectAsSqlite3(_builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
+    const columns = await fn();
+    // data
+    for (const data of datas) {
+      for (const columnName in columns) {
+        const column = columns[columnName];
+        if (Object.prototype.hasOwnProperty.call(data, columnName)) {
+          const value = data[columnName];
+          if (column.type === 'json' && value !== undefined && typeof value === 'string') {
+            data[columnName] = JSON.parse(value);
+          }
+        }
+      }
+    }
+    return datas;
+  }
+
   protected async insertAsMysql(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
     if (datas.length === 0) return [];
     if (isNil(datas[0].id)) {
