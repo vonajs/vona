@@ -52,22 +52,18 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
   async select(_builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
     const columns = await fn();
     // data
-    const datasNew: any[] = [];
     for (const data of datas) {
-      const dataNew = { ...data };
-      datasNew.push(dataNew);
       for (const columnName in columns) {
         const column = columns[columnName];
         if (Object.prototype.hasOwnProperty.call(data, columnName)) {
-          let value = data[columnName];
-          if (column.type === 'json' && value !== undefined) {
-            value = JSON.parse(value);
+          const value = data[columnName];
+          if (column.type === 'json' && value !== undefined && typeof value === 'string') {
+            data[columnName] = JSON.parse(value);
           }
-          dataNew[columnName] = value;
         }
       }
     }
-    return datasNew;
+    return datas;
   }
 
   private _getDbDir() {
