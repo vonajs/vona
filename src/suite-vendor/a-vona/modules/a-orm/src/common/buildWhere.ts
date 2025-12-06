@@ -156,9 +156,9 @@ function _buildWhereColumnOpNormal<TRecord>(
 ) {
   column = _checkHavingColumn(knex, column) as string;
   if (_shouldPatchLike(knex)) {
-    if (op === Op.startsWith) op = Op.startsWithI;
-    if (op === Op.endsWith) op = Op.endsWithI;
-    if (op === Op.includes) op = Op.includesI;
+    if (op === Op.startsWithI) op = Op.startsWith;
+    if (op === Op.endsWithI) op = Op.endsWith;
+    if (op === Op.includesI) op = Op.includes;
     if (op === Op.eqI) op = Op.eq;
     if (op === Op.notEqI) op = Op.notEq;
   }
@@ -211,7 +211,7 @@ function _buildWhereColumnOpNormal<TRecord>(
 
 function _shouldPatchLike(knex: Knex): boolean {
   const dialectName = _getDialectName(knex);
-  return dialectName === 'mysql' || dialectName === 'mysql2';
+  return ['mysql', 'mysql2', 'better-sqlite3'].includes(dialectName);
 }
 
 function _getDialectName(knex: Knex): keyof IDatabaseClientDialectRecord {
