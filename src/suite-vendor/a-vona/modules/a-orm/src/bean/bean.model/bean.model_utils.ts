@@ -81,7 +81,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
 
   buildWhere(builder: Knex.QueryBuilder, wheres?: TypeModelWhere<TRecord>) {
     if (!wheres) return;
-    return buildWhere(this.connection, builder, wheres);
+    return buildWhere(this.db, builder, wheres);
   }
 
   buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin<TRecord, ''>) {

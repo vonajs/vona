@@ -1,18 +1,18 @@
 import type { Knex } from 'knex';
-import type { IDatabaseClientDialectRecord } from '../types/index.ts';
+import type { ServiceDb } from '../service/db_.ts';
 import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
 import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { Op, OpAggrs, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw, isRef } from './utils.ts';
 
-export function buildWhere<TRecord>(knex: Knex, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>, having: boolean = false) {
-  _buildWhereInner(having, knex, builder, wheres);
+export function buildWhere<TRecord>(db: ServiceDb, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>, having: boolean = false) {
+  _buildWhereInner(having, db, builder, wheres);
 }
 
 function _buildWhereInner<TRecord>(
   having: boolean,
-  knex: Knex,
+  db: ServiceDb,
   builder: Knex.QueryBuilder,
   wheres: TypeModelWhere<TRecord>,
   column?: keyof TRecord,
@@ -31,11 +31,11 @@ function _buildWhereInner<TRecord>(
     const value = wheres[key];
     if (key[0] !== '_') {
       // columns
-      _buildWhereColumn(having, knex, builder, key, value);
+      _buildWhereColumn(having, db, builder, key, value);
     } else if (OpNormalValues.includes(key as any)) {
       // op: normal
       if (column) {
-        _buildWhereColumn(having, knex, builder, column, value, key as any);
+        _buildWhereColumn(having, db, builder, column, value, key as any);
       } else {
         // not go here
       }
@@ -43,7 +43,7 @@ function _buildWhereInner<TRecord>(
       const op = _checkOpJoint(key as any);
       if (op) {
         // op: joint
-        _buildWhereOpJoint(having, knex, builder, column, value, op);
+        _buildWhereOpJoint(having, db, builder, column, value, op);
       } else {
         // ignored, not throw error
       }
@@ -53,7 +53,7 @@ function _buildWhereInner<TRecord>(
 
 function _buildWhereOpJoint<TRecord>(
   having: boolean,
-  knex: Knex,
+  db: ServiceDb,
   builder: Knex.QueryBuilder,
   column: keyof TRecord | undefined,
   wheres: TypeModelWhere<TRecord>,
@@ -68,7 +68,7 @@ function _buildWhereOpJoint<TRecord>(
     builder[having ? 'having' : 'where'](builder => {
       for (const key in wheres) {
         builder.andWhere(builder => {
-          _buildWhereInner(false, knex, builder, { [key]: wheres[key] } as any, column);
+          _buildWhereInner(false, db, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -79,7 +79,7 @@ function _buildWhereOpJoint<TRecord>(
     builder[having ? 'having' : 'where'](builder => {
       for (const key in wheres) {
         builder.orWhere(builder => {
-          _buildWhereInner(false, knex, builder, { [key]: wheres[key] } as any, column);
+          _buildWhereInner(false, db, builder, { [key]: wheres[key] } as any, column);
         });
       }
     });
@@ -88,7 +88,7 @@ function _buildWhereOpJoint<TRecord>(
   // not
   if (op === Op.not) {
     builder[having ? 'havingNot' : 'whereNot'](builder => {
-      _buildWhereInner(false, knex, builder, wheres, column);
+      _buildWhereInner(false, db, builder, wheres, column);
     });
     return;
   }
@@ -105,7 +105,7 @@ function _buildWhereOpJoint<TRecord>(
 
 function _buildWhereColumn<TRecord>(
   having: boolean,
-  knex: Knex,
+  db: ServiceDb,
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
   value: TypeModelColumnValue<TRecord, TRecord[keyof TRecord]> | TypeModelWhereFieldAll<TRecord, TRecord[keyof TRecord]>,
@@ -117,60 +117,53 @@ function _buildWhereColumn<TRecord>(
   }
   // raw
   if (isRaw(value) || isRef(value)) {
-    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
+    _buildWhereColumnOpNormal(having, db, builder, column, value, op ?? Op.eq);
     return;
   }
   // null/undefined
   if (isNil(value)) {
-    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.is);
+    _buildWhereColumnOpNormal(having, db, builder, column, value, op ?? Op.is);
     return;
   }
   // array
   if (Array.isArray(value)) {
-    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.in);
+    _buildWhereColumnOpNormal(having, db, builder, column, value, op ?? Op.in);
     return;
   }
   // date
   if (value instanceof Date) {
-    _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
+    _buildWhereColumnOpNormal(having, db, builder, column, value, op ?? Op.eq);
     return;
   }
   // object
   if (typeof value === 'object') {
     builder[having ? 'having' : 'where'](builder => {
-      _buildWhereInner(false, knex, builder, value as any, column);
+      _buildWhereInner(false, db, builder, value as any, column);
     });
     return;
   }
   // column
-  _buildWhereColumnOpNormal(having, knex, builder, column, value, op ?? Op.eq);
+  _buildWhereColumnOpNormal(having, db, builder, column, value, op ?? Op.eq);
 }
 
 function _buildWhereColumnOpNormal<TRecord>(
   having: boolean,
-  knex: Knex,
+  db: ServiceDb,
   builder: Knex.QueryBuilder,
   column: keyof TRecord | string,
   value: any,
   op: TypeOpsNormal,
 ) {
-  column = _checkHavingColumn(knex, column) as string;
-  if (_shouldPatchLike(knex)) {
-    if (op === Op.startsWithI) op = Op.startsWith;
-    if (op === Op.endsWithI) op = Op.endsWith;
-    if (op === Op.includesI) op = Op.includes;
-    if (op === Op.eqI) op = Op.eq;
-    if (op === Op.notEqI) op = Op.notEq;
-  }
+  column = _checkHavingColumn(db, column) as string;
   if (op === Op.eq) {
     builder[having ? 'having' : 'where'](column, '=', value);
   } else if (op === Op.notEq) {
     builder[having ? 'having' : 'where'](column, '<>', value);
   } else if (op === Op.eqI) {
-    builder[having ? 'havingILike' : 'whereILike'](column, value);
+    builder[_getOpILikeReal(having, db)](column, value);
   } else if (op === Op.notEqI) {
     builder[having ? 'havingNot' : 'whereNot']((builder: Knex.QueryBuilder) => {
-      builder[having ? 'havingILike' : 'whereILike'](column, value);
+      builder[_getOpILikeReal(having, db)](column, value);
     });
   } else if (op === Op.gt) {
     builder[having ? 'having' : 'where'](column, '>', value);
@@ -199,30 +192,27 @@ function _buildWhereColumnOpNormal<TRecord>(
   } else if (op === Op.includes) {
     builder[having ? 'havingLike' : 'whereLike'](column, `%${value}%` as any);
   } else if (op === Op.startsWithI) {
-    builder[having ? 'havingILike' : 'whereILike'](column, `${value}%` as any);
+    builder[_getOpILikeReal(having, db)](column, `${value}%` as any);
   } else if (op === Op.endsWithI) {
-    builder[having ? 'havingILike' : 'whereILike'](column, `%${value}` as any);
+    builder[_getOpILikeReal(having, db)](column, `%${value}` as any);
   } else if (op === Op.includesI) {
-    builder[having ? 'havingILike' : 'whereILike'](column, `%${value}%` as any);
+    builder[_getOpILikeReal(having, db)](column, `%${value}%` as any);
   } else if (op === Op.ref) {
-    builder[having ? 'having' : 'where'](column, '=', knex.ref(value));
+    builder[having ? 'having' : 'where'](column, '=', db.connection.ref(value));
   }
 }
 
-function _shouldPatchLike(knex: Knex): boolean {
-  const dialectName = _getDialectName(knex);
-  return ['mysql', 'mysql2', 'better-sqlite3'].includes(dialectName);
+function _getOpILikeReal(having: boolean, db: ServiceDb) {
+  return db.dialect.capabilities.ilike
+    ? (having ? 'havingILike' : 'whereILike')
+    : (having ? 'havingLike' : 'whereLike');
 }
 
-function _getDialectName(knex: Knex): keyof IDatabaseClientDialectRecord {
-  return knex.client.config.client;
-}
-
-function _checkHavingColumn<TRecord>(knex: Knex, column: keyof TRecord | string) {
+function _checkHavingColumn<TRecord>(db: ServiceDb, column: keyof TRecord | string) {
   let [aggr, name] = cast<string>(column).split('_');
   if (!OpAggrs.includes(aggr) || !name) return column;
   if (aggr === 'count' && name === 'all') name = '*';
-  return knex.raw(`${_safeOp(aggr)}(${_safeColumn(name)})`);
+  return db.connection.raw(`${_safeOp(aggr)}(${_safeColumn(name)})`);
 }
 
 function _checkOpJoint(op: TypeOpsJoint) {
