@@ -3,7 +3,7 @@ import type { VonaApplication } from './application.ts';
 import os from 'node:os';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { deepExtend } from '../utils/util.ts';
+import { deepExtend, pathToHref } from '../utils/util.ts';
 
 export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial<T>>;
 
@@ -70,8 +70,9 @@ export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
   return path.join(dbPath, 'sqlite3.db');
 }
 
-export function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: string | undefined) {
+export async function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: string | undefined) {
   if (!nativeBinding) return null as unknown as undefined;
-  if (path.isAbsolute(nativeBinding)) return nativeBinding;
-  return path.join(import.meta.dirname, nativeBinding);
+  const nativeBindingPath = path.isAbsolute(nativeBinding) ? nativeBinding : path.join(import.meta.dirname, nativeBinding);
+  const addon = await import(pathToHref(nativeBindingPath));
+  return addon as any;
 }
