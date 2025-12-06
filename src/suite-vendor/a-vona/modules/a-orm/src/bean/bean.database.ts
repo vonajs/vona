@@ -29,7 +29,8 @@ export class BeanDatabase extends BeanBase {
 
   async switchDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): Promise<RESULT> {
     const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
-    return this.switchDb(fn, { level: dbInfo.level + 1, clientName: dbInfo.clientName });
+    const level = this.app.config.database.defaultClient === 'sqlite3' ? dbInfo.level : dbInfo.level + 1;
+    return this.switchDb(fn, { level, clientName: dbInfo.clientName });
   }
 
   async switchDb<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): Promise<RESULT> {
