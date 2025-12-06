@@ -8,6 +8,7 @@ export interface ICliBuildCustomOptions {
   cli: BeanCliBase;
   env: NodeJS.ProcessEnv;
   outDir: string;
+  projectPath: string;
 }
 
 export interface IMetadataCustomGenerateOptions {

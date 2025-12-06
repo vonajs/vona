@@ -103,8 +103,9 @@ export class CliBinBuild extends BeanCliBase {
         cli: this,
         env,
         outDir,
+        projectPath,
       };
-      return await instance.default(options);
+      return await instance.afterBuild(options);
     });
   }
 
