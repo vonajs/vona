@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, TypeDatabaseDialectTableColumnsFn } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem, TypeDatabaseDialectTableColumnsFn } from 'vona-module-a-orm';
 import path from 'node:path';
 import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
@@ -45,6 +45,16 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     for (const part of ['shm', 'wal', 'journal']) {
       await remove(`${databaseName}-${part}`);
     }
+  }
+
+  async fetchIndexes(schemaBuilder: Knex.SchemaBuilder, tableName: string): Promise<IFetchIndexesResultItem[]> {
+    let items: any = await schemaBuilder.raw(`PRAGMA index_list(${tableName})`);
+    items = items.map(item => {
+      return {
+        indexName: item.name,
+      };
+    });
+    return items;
   }
 
   async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
