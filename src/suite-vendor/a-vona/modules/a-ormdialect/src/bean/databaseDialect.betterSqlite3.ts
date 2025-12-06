@@ -12,13 +12,15 @@ export interface IDatabaseDialectOptionsBetterSqlite3 extends IDecoratorDatabase
 export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
   getConfigBase(): ConfigDatabaseClient | undefined {
     return {
-      // maybe cause buzy lock
-      // pool: {
-      //   afterCreate(conn, done) {
-      //     conn.pragma('journal_mode = WAL');
-      //     done();
-      //   },
-      // },
+      pool: {
+        afterCreate(conn, done) {
+          const pragma: { journal_mode: string }[] = conn.pragma('journal_mode');
+          if (pragma[0]?.journal_mode?.toLocaleLowerCase() !== 'wal') {
+            conn.pragma('journal_mode = wal');
+          }
+          done();
+        },
+      },
     } as unknown as ConfigDatabaseClient;
   }
 
