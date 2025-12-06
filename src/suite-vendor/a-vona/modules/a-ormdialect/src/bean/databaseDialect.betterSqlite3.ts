@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, TypeGetTableColumnsFn } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, TypeDatabaseDialectTableColumnsFn } from 'vona-module-a-orm';
 import path from 'node:path';
 import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
@@ -50,7 +50,7 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     return await this.insertAsMysql(builder, datas);
   }
 
-  async select(builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
+  async select(builder: Knex.QueryBuilder, datas: any[], fn: TypeDatabaseDialectTableColumnsFn): Promise<any[]> {
     return await this.selectAsSqlite3(builder, datas, fn);
   }
 

@@ -1,8 +1,8 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ITableColumn, TypeGetTableColumnsFn } from '../types/columns.ts';
+import type { ITableColumn } from '../types/columns.ts';
 import type { ConfigDatabaseClient } from '../types/config.ts';
-import type { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../types/dialect.ts';
+import type { IDatabaseDialectCapabilities, IFetchDatabasesResultItem, IFetchIndexesResultItem, TypeDatabaseDialectTableColumnsFn } from '../types/dialect.ts';
 import { isNil, safeBoolean } from '@cabloy/utils';
 import { BeanBase, Virtual } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -10,6 +10,10 @@ import { Bean } from 'vona-module-a-bean';
 @Bean()
 @Virtual()
 export class BeanDatabaseDialectBase extends BeanBase {
+  capabilities: IDatabaseDialectCapabilities = {
+    ilike: false,
+  };
+
   getConfigBase(): ConfigDatabaseClient | undefined {
     return undefined;
   }
@@ -37,7 +41,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async select(_builder: Knex.QueryBuilder, datas: any[], _fn: TypeGetTableColumnsFn): Promise<any[]> {
+  async select(_builder: Knex.QueryBuilder, datas: any[], _fn: TypeDatabaseDialectTableColumnsFn): Promise<any[]> {
     return datas;
   }
 
@@ -58,7 +62,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return result;
   }
 
-  protected async selectAsSqlite3(_builder: Knex.QueryBuilder, datas: any[], fn: TypeGetTableColumnsFn): Promise<any[]> {
+  protected async selectAsSqlite3(_builder: Knex.QueryBuilder, datas: any[], fn: TypeDatabaseDialectTableColumnsFn): Promise<any[]> {
     const columns = await fn();
     // data
     for (const data of datas) {

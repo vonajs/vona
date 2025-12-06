@@ -1,12 +1,16 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDatabaseDialectCapabilities, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
 export interface IDatabaseDialectOptionsPg extends IDecoratorDatabaseDialectOptions {}
 
 @DatabaseDialect<IDatabaseDialectOptionsPg>()
 export class DatabaseDialectPg extends BeanDatabaseDialectBase {
+  capabilities: IDatabaseDialectCapabilities = {
+    ilike: true,
+  };
+
   getConfigBase(): ConfigDatabaseClient | undefined {
     return {
       connection: {
