@@ -12,22 +12,23 @@ export class ServiceDatabase extends BeanBase {
     return this.app.config.database;
   }
 
-  getClientConfig(clientName: keyof IDatabaseClientRecord, original: boolean = false): ConfigDatabaseClient {
+  getClientConfig(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, original?: boolean): ConfigDatabaseClient {
     // clientConfig
-    let clientConfig = this.configDatabase.clients[clientName];
-    if (original) return clientConfig;
+    if (!clientConfig) {
+      clientConfig = this.configDatabase.clients[clientName];
+    }
     // check
     if (!clientConfig) {
       throw new Error(`database config not found: ${clientName}`);
     }
+    if (original) return clientConfig;
     // configBaseClient
     const dialect = this.bean.database.getDialect(clientConfig.client);
     const configBaseClient = dialect.getConfigBase();
     // combine
-    const configBase = this.configDatabase.base;
-    clientConfig = deepExtend({}, configBase, configBaseClient, clientConfig);
+    clientConfig = deepExtend({}, this.configDatabase.base, configBaseClient, clientConfig);
     // ready
-    return clientConfig;
+    return clientConfig!;
   }
 
   prepareDbInfo(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): IDbInfo {

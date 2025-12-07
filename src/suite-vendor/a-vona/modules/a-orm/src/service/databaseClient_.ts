@@ -78,8 +78,9 @@ export class ServiceDatabaseClient extends BeanMutateBase {
   }
 
   async reload(clientConfig?: ConfigDatabaseClient) {
+    const clientConfigReal = this.scope.service.database.getClientConfig(this.clientName, clientConfig);
     await this.__close();
-    this.__load(this.clientNameSelector, clientConfig);
+    this.__load(this.clientNameSelector, clientConfigReal);
   }
 
   getDatabaseName(): string {
@@ -104,7 +105,7 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     const connDatabaseName = this._prepareDatabaseName(databaseName);
     // set config
     //   * should not use this.clientConfig.connection, because password is hidden
-    const config = this.scope.service.database.getClientConfig(this.clientName, true);
+    const config = this.scope.service.database.getClientConfig(this.clientName, undefined, true);
     config.connection = Object.assign({}, config.connection, connDatabaseName);
     // only used by startup, so no consider that workers broadcast
     this.configDatabase.clients[this.clientName] = config;
