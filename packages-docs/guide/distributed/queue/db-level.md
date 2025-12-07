@@ -92,20 +92,16 @@ class ControllerStudent {
 
 When using the `push/pushAsync` method to push a job, the system automatically passes in `current.level + 1`, thus implementing datasource leveling and avoiding deadlocks
 
-You can also explicitly pass in the parameter:
+``` typescript
+await this.scope.queue.add.pushAsync(data);
+```
 
-``` diff
-class ControllerStudent {
-  async test() {
-    const result = await this.ctx.db.transaction.begin(async () => {
-      const data = { a: 1, b: 2 };
-      return await this.scope.queue.add.pushAsync(data, {
-+       dbInfo: {
-+         level: this.bean.database.current.level + 1,
-+       },
-      });
-    });
-    console.log(result);
-  }
-}
+is equivalent to:
+
+``` typescript
+await this.scope.queue.add.pushAsync(data, {
+  dbInfo: {
+    level: this.bean.database.current.level + 1,
+  },
+});
 ```

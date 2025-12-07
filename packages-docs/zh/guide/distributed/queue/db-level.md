@@ -92,20 +92,16 @@ class ControllerStudent {
 
 当使用`push/pushAsync`方法推送任务时，系统会自动传入`current.level + 1`，从而实现数据源分级，避免死锁发生
 
-也可以显式传入参数：
+``` typescript
+await this.scope.queue.add.pushAsync(data);
+```
 
-``` diff
-class ControllerStudent {
-  async test() {
-    const result = await this.ctx.db.transaction.begin(async () => {
-      const data = { a: 1, b: 2 };
-      return await this.scope.queue.add.pushAsync(data, {
-+       dbInfo: {
-+         level: this.bean.database.current.level + 1,
-+       },
-      });
-    });
-    console.log(result);
-  }
-}
+等价于：
+
+``` typescript
+await this.scope.queue.add.pushAsync(data, {
+  dbInfo: {
+    level: this.bean.database.current.level + 1,
+  },
+});
 ```
