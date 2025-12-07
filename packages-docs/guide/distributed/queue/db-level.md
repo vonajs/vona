@@ -4,6 +4,10 @@ In distributed scenarios, it's crucial to avoid deadlocks caused by datasource c
 
 VonaJS uses `Async Local Storage` to provide different `datasource level` for different contexts, thereby creating different database connection pools and preventing datasource contention
 
+::: warning
+`Sqlite3` only supports one write connection, so `datasource level` is not supported
+:::
+
 ## Scenario Description
 
 ### 1. Worker A
