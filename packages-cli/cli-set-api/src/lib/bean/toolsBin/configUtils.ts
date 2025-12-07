@@ -10,9 +10,9 @@ export function createConfigUtils(
   configMeta: VonaConfigMeta,
   configOptions: VonaBinConfigOptions,
 ): {
-    loadEnvs: () => NodeJS.ProcessEnv;
-    loadModulesMeta: () => ReturnType<typeof glob>;
-  } {
+  loadEnvs: () => NodeJS.ProcessEnv;
+  loadModulesMeta: () => ReturnType<typeof glob>;
+} {
   let __modulesMeta: Awaited<ReturnType<typeof glob>>;
   return {
     loadEnvs: __loadEnvs,
