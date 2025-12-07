@@ -22,10 +22,11 @@ export function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: st
 }
 
 export async function copySqlite3NativeBinding(projectPath: string, outDir: string, env: NodeJS.ProcessEnv) {
-  if (env.DATABASE_DEFAULT_CLIENT !== 'sqlite3') return;
+  // check env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING rather than env.DATABASE_DEFAULT_CLIENT
+  // if (env.DATABASE_DEFAULT_CLIENT !== 'sqlite3') return;
   // dest
   let fileDest = env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING!;
-  if (!fileDest) throw new Error('Should specify DATABASE_CLIENT_SQLITE3_NATIVEBINDING');
+  if (!fileDest) return;
   if (path.isAbsolute(fileDest)) return;
   fileDest = path.join(outDir, fileDest);
   // src
