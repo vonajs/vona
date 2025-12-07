@@ -2,7 +2,7 @@ import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.t
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { isNil } from '@cabloy/utils';
-import { appResource, BeanBase, beanFullNameFromOnionName, deepExtend } from 'vona';
+import { appResource, BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { ServiceDatabaseClient } from './databaseClient_.ts';
 
@@ -10,14 +10,6 @@ import { ServiceDatabaseClient } from './databaseClient_.ts';
 export class ServiceDatabase extends BeanBase {
   get configDatabase() {
     return this.app.config.database;
-  }
-
-  getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
-    if (!client) throw new Error('database dialect not specified');
-    const beanFullName = beanFullNameFromOnionName(this.scope.config.dialects[client], 'databaseDialect');
-    const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
-    if (!dialect) throw new Error(`database dialect not found: ${client}`);
-    return dialect;
   }
 
   getClientConfig(clientName: keyof IDatabaseClientRecord, original: boolean = false): ConfigDatabaseClient {
@@ -29,7 +21,7 @@ export class ServiceDatabase extends BeanBase {
       throw new Error(`database config not found: ${clientName}`);
     }
     // configBaseClient
-    const dialect = this.scope.service.database.getDialect(clientConfig.client);
+    const dialect = this.bean.database.getDialect(clientConfig.client);
     const configBaseClient = dialect.getConfigBase();
     // combine
     const configBase = this.configDatabase.base;
@@ -58,7 +50,7 @@ export class ServiceDatabase extends BeanBase {
   }
 
   prepareClientNameSelector(dbInfo: IDbInfo, dialect: BeanDatabaseDialectBase | keyof IDatabaseClientDialectRecord) {
-    const dialect2 = typeof dialect === 'string' ? this.getDialect(dialect) : dialect;
+    const dialect2 = typeof dialect === 'string' ? this.bean.database.getDialect(dialect) : dialect;
     if (!dialect2.capabilities.level) return dbInfo.clientName;
     // combine
     return dbInfo.level === 0 ? dbInfo.clientName : `${dbInfo.clientName}:${dbInfo.level}`;

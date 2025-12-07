@@ -8,7 +8,7 @@ import { catchError, sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
 import fse from 'fs-extra';
 import { globby } from 'globby';
-import { createGeneralApp } from 'vona-core';
+import { cast, createGeneralApp } from 'vona-core';
 import whyIsNodeRunning from 'why-is-node-running';
 import { resolveTemplatePath } from '../../utils.ts';
 
@@ -32,17 +32,6 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
   } else {
     files.push(resolveTemplatePath('test/done.test.js'));
   }
-  // concurrency
-  let concurrency = 1;
-  if (process.env.DATABASE_DEFAULT_CLIENT !== 'sqlite3') {
-    if (process.env.TEST_CONCURRENCY === 'true') {
-      concurrency = os.cpus().length;
-    } else if (process.env.TEST_CONCURRENCY === 'false') {
-      concurrency = 1;
-    } else {
-      concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
-    }
-  }
   // coverage
   let coverageIncludeGlobs: string[] = [];
   if (coverage) {
@@ -62,8 +51,11 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
     'src/suite-vendor/*/modules/*/cli/**/*.ts',
     'src/suite-vendor/*/modules/*/templates/**/*.ts',
   ];
+  // app
+  const app: VonaApplication = await createGeneralApp(projectPath);
+  // concurrency
+  const concurrency = await prepareConcurrency(app);
   return new Promise(resolve => {
-    let app: VonaApplication;
     const testStream = run({
       isolation: 'none',
       concurrency,
@@ -73,9 +65,7 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       coverageExcludeGlobs,
       cwd: projectPath,
       files,
-      setup: async () => {
-        app = await createGeneralApp(projectPath);
-      },
+      setup: async () => {},
     } as any)
       .on('test:coverage', data => {
         outputCoverageReport(data.summary.totals);
@@ -111,6 +101,24 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       testStream.compose(spec)
         .pipe(process.stdout);
     }
+  });
+}
+
+async function prepareConcurrency(app: VonaApplication) {
+  // check
+  let concurrency = 1;
+  if (process.env.TEST_CONCURRENCY === 'true') {
+    concurrency = os.cpus().length;
+  } else if (process.env.TEST_CONCURRENCY === 'false') {
+    concurrency = 1;
+  } else {
+    concurrency = Number.parseInt(process.env.TEST_CONCURRENCY!);
+  }
+  if (concurrency === 1) return concurrency;
+  // check again
+  return await cast(app.bean).executor.mockCtx(async () => {
+    const db = cast(app.bean).database.getDb();
+    return db.dialect.capabilities.level ? concurrency : 1;
   });
 }
 

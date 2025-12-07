@@ -61,7 +61,7 @@ export class ServiceDb extends BeanBase {
   }
 
   get dialect(): BeanDatabaseDialectBase {
-    return this.scope.service.database.getDialect(this.dialectName);
+    return this.bean.database.getDialect(this.dialectName);
   }
 
   async commit(cb: FunctionAny, options?: ITransactionConsistencyCommitOptions) {

@@ -1,7 +1,8 @@
 import type { FunctionAsync } from 'vona';
 import type { ConfigDatabaseClient } from '../types/config.ts';
-import type { IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
-import { BeanBase, deepExtend } from 'vona';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
+import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
+import { BeanBase, beanFullNameFromOnionName, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage_.ts';
 import { ServiceDatabaseClient } from '../service/databaseClient_.ts';
@@ -26,6 +27,14 @@ export class BeanDatabase extends BeanBase {
 
   getDb(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     return this.getClient(dbInfoOrClientName, clientConfig).db;
+  }
+
+  getDialect(client: keyof IDatabaseClientDialectRecord): BeanDatabaseDialectBase {
+    if (!client) throw new Error('database dialect not specified');
+    const beanFullName = beanFullNameFromOnionName(this.scope.config.dialects[client], 'databaseDialect');
+    const dialect = this.app.bean._getBean(beanFullName) as BeanDatabaseDialectBase;
+    if (!dialect) throw new Error(`database dialect not found: ${client}`);
+    return dialect;
   }
 
   async switchDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): Promise<RESULT> {
