@@ -23,9 +23,14 @@ export function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: st
 
 export async function copySqlite3NativeBinding(projectPath: string, outDir: string, env: NodeJS.ProcessEnv) {
   if (env.DATABASE_DEFAULT_CLIENT !== 'sqlite3') return;
+  // dest
+  let fileDest = env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING!;
+  if (path.isAbsolute(fileDest)) return;
+  fileDest = path.join(outDir, fileDest);
+  // src
   const require = createRequire(pathToHref(path.join(projectPath, '/')));
   const modulePath = require.resolve('better-sqlite3/package.json');
   const fileSrc = path.join(path.dirname(modulePath), 'build/Release/better_sqlite3.node');
-  const fileDest = path.join(outDir, 'node/better_sqlite3.node');
+  // copy
   await fse.copy(fileSrc, fileDest);
 }
