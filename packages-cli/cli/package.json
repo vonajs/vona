@@ -1,7 +1,7 @@
 {
   "name": "vona-cli",
   "type": "module",
-  "version": "1.0.400",
+  "version": "1.0.401",
   "description": "vona cli",
   "publishConfig": {
     "access": "public"
@@ -50,7 +50,7 @@
     "@cabloy/process-helper": "^2.0.21",
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
-    "vona-cli-set-api": "^1.0.398"
+    "vona-cli-set-api": "^1.0.399"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
