@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem, TypeDatabaseDialectTableColumnsFn } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDatabaseDialectCapabilities, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem, TypeDatabaseDialectTableColumnsFn } from 'vona-module-a-orm';
 import path from 'node:path';
 import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
@@ -10,6 +10,10 @@ export interface IDatabaseDialectOptionsBetterSqlite3 extends IDecoratorDatabase
 
 @DatabaseDialect<IDatabaseDialectOptionsBetterSqlite3>()
 export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
+  protected _capabilities: IDatabaseDialectCapabilities = {
+    ilike: false,
+  };
+
   getConfigBase(): ConfigDatabaseClient | undefined {
     return {
       pool: {

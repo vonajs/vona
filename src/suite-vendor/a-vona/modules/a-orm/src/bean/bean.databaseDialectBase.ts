@@ -10,9 +10,12 @@ import { Bean } from 'vona-module-a-bean';
 @Bean()
 @Virtual()
 export class BeanDatabaseDialectBase extends BeanBase {
-  capabilities: IDatabaseDialectCapabilities = {
-    ilike: false,
-  };
+  protected _capabilities?: IDatabaseDialectCapabilities;
+
+  get capabilities() {
+    if (!this._capabilities) throw new Error('Should provide dialect capabilities');
+    return this._capabilities;
+  }
 
   getConfigBase(): ConfigDatabaseClient | undefined {
     return undefined;

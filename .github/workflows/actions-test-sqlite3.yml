@@ -33,4 +33,6 @@ jobs:
       - run: cp package.original.json package.json
       - run: npm i tsx -g 
       - run: npm run init
-      - run: DATABASE_DEFAULT_CLIENT=mysql npm run test
+      - run: DATABASE_DEFAULT_CLIENT=sqlite3 npm run test
+      - run: DATABASE_DEFAULT_CLIENT=sqlite3 npm run build -- --flavor=ci
+      - run: DATABASE_DEFAULT_CLIENT=sqlite3 npm run play -- --mode=prod --flavor=ci

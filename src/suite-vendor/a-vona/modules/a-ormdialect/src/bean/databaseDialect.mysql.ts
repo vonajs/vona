@@ -1,6 +1,6 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
+import type { ConfigDatabaseClient, IDatabaseDialectCapabilities, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
 import { promisify } from 'node:util';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
@@ -8,6 +8,10 @@ export interface IDatabaseDialectOptionsMysql extends IDecoratorDatabaseDialectO
 
 @DatabaseDialect<IDatabaseDialectOptionsMysql>()
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
+  protected _capabilities: IDatabaseDialectCapabilities = {
+    ilike: false,
+  };
+
   getConfigBase(): ConfigDatabaseClient | undefined {
     return {
       pool: {
