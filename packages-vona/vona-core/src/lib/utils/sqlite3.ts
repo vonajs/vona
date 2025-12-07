@@ -25,6 +25,7 @@ export async function copySqlite3NativeBinding(projectPath: string, outDir: stri
   if (env.DATABASE_DEFAULT_CLIENT !== 'sqlite3') return;
   // dest
   let fileDest = env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING!;
+  if (!fileDest) throw new Error('Should specify DATABASE_CLIENT_SQLITE3_NATIVEBINDING');
   if (path.isAbsolute(fileDest)) return;
   fileDest = path.join(outDir, fileDest);
   // src
