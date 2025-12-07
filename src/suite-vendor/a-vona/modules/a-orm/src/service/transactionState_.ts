@@ -14,19 +14,19 @@ export class ServiceTransactionState extends BeanBase {
   }
 
   public get(db: ServiceDb): ServiceTransactionFiber | undefined {
-    const selector = this.serviceDatabase.prepareClientNameSelector(db.info, db.dialectName);
+    const selector = this.serviceDatabase.prepareClientNameSelector(db.info, db.dialect);
     return this._fibers[selector];
   }
 
   public add(db: ServiceDb, connection: knex.Knex.Transaction) {
-    const selector = this.serviceDatabase.prepareClientNameSelector(db.info, db.dialectName);
+    const selector = this.serviceDatabase.prepareClientNameSelector(db.info, db.dialect);
     const fiber = this.bean._newBean(ServiceTransactionFiber, connection);
     this._fibers[selector] = fiber;
     return fiber;
   }
 
   public remove(db: ServiceDb) {
-    const selector = this.serviceDatabase.prepareClientNameSelector(db.info, db.dialectName);
+    const selector = this.serviceDatabase.prepareClientNameSelector(db.info, db.dialect);
     delete this._fibers[selector];
   }
 }

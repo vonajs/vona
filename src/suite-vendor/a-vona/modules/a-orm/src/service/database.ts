@@ -57,8 +57,9 @@ export class ServiceDatabase extends BeanBase {
     return { level, clientName };
   }
 
-  prepareClientNameSelector(dbInfo: IDbInfo, dialectName: keyof IDatabaseClientDialectRecord) {
-    if (dialectName === 'better-sqlite3') return dbInfo.clientName;
+  prepareClientNameSelector(dbInfo: IDbInfo, dialect: BeanDatabaseDialectBase | keyof IDatabaseClientDialectRecord) {
+    const dialect2 = typeof dialect === 'string' ? this.getDialect(dialect) : dialect;
+    if (!dialect2.capabilities.level) return dbInfo.clientName;
     // combine
     return dbInfo.level === 0 ? dbInfo.clientName : `${dbInfo.clientName}:${dbInfo.level}`;
   }
