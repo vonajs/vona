@@ -3,7 +3,6 @@ import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientRecord } from '../types/database.ts';
 import { catchError } from '@cabloy/utils';
 import knex from 'knex';
-import { deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { BeanMutateBase } from 'vona-module-a-beanmutate';
 import { ServiceDb } from './db_.ts';
@@ -63,8 +62,8 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     const dbInfo = this.scope.service.database.parseClientNameSelector(clientNameSelector);
     this.level = dbInfo.level;
     this.clientName = dbInfo.clientName;
-    // config
-    this.clientConfig = clientConfig ? deepExtend({}, clientConfig) : this.scope.service.database.getClientConfig(this.clientName);
+    // config: inited by bean.database.getClient
+    this.clientConfig = clientConfig!;
     // knex
     this._knex = knex(this.clientConfig);
   }

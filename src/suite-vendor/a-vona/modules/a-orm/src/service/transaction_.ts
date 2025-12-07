@@ -22,7 +22,7 @@ export class ServiceTransaction extends BeanBase {
   }
 
   get transactionFiber(): ServiceTransactionFiber | undefined {
-    return this.transactionState.get(this._db.info);
+    return this.transactionState.get(this._db);
   }
 
   get inTransaction() {
@@ -107,7 +107,7 @@ export class ServiceTransaction extends BeanBase {
     if (!this.inTransaction) {
       const connection = this._db.client.connection;
       const transactionConnection = await connection.transaction(_translateTransactionOptions(options));
-      fiber = this.transactionState.add(this._db.info, transactionConnection);
+      fiber = this.transactionState.add(this._db, transactionConnection);
     }
     // fn
     try {
@@ -115,19 +115,19 @@ export class ServiceTransaction extends BeanBase {
     } catch (err) {
       if (fiber) {
         await fiber.doRollback();
-        this.transactionState.remove(this._db.info);
+        this.transactionState.remove(this._db);
       }
       throw err;
     }
     try {
       if (fiber) {
         await fiber.doCommit();
-        this.transactionState.remove(this._db.info);
+        this.transactionState.remove(this._db);
       }
     } catch (err) {
       if (fiber) {
         await fiber.doRollback();
-        this.transactionState.remove(this._db.info);
+        this.transactionState.remove(this._db);
       }
       throw err;
     }

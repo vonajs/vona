@@ -1,7 +1,7 @@
 import type { FunctionAsync } from 'vona';
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage_.ts';
 import { ServiceDatabaseClient } from '../service/databaseClient_.ts';
@@ -15,11 +15,12 @@ export class BeanDatabase extends BeanBase {
 
   getClient(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
     const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
-    const selector = this.scope.service.database.prepareClientNameSelector(dbInfo);
+    const clientConfigReal = this._prepareClientConfig(dbInfo.clientName, clientConfig);
+    const selector = this.scope.service.database.prepareClientNameSelector(dbInfo, clientConfigReal.client);
     return this.app.bean._getBeanSelector(
       ServiceDatabaseClient,
       selector,
-      clientConfig,
+      clientConfigReal,
     );
   }
 
@@ -29,7 +30,8 @@ export class BeanDatabase extends BeanBase {
 
   async switchDbIsolate<RESULT>(fn: FunctionAsync<RESULT>, dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord): Promise<RESULT> {
     const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
-    const level = this.app.config.database.defaultClient === 'sqlite3' ? dbInfo.level : dbInfo.level + 1;
+    // const level = this.app.config.database.defaultClient === 'sqlite3' ? dbInfo.level : dbInfo.level + 1;
+    const level = dbInfo.level + 1;
     return this.switchDb(fn, { level, clientName: dbInfo.clientName });
   }
 
@@ -43,5 +45,10 @@ export class BeanDatabase extends BeanBase {
     return this.bean._getBean(ServiceDatabaseAsyncLocalStorage).run(db, () => {
       return this.bean._getBean(ServiceTransactionAsyncLocalStorage).run(fn);
     });
+  }
+
+  // only for bean.database.getClient
+  private _prepareClientConfig(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient): ConfigDatabaseClient {
+    return clientConfig ? deepExtend({}, clientConfig) : this.scope.service.database.getClientConfig(clientName);
   }
 }
