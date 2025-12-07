@@ -12,6 +12,7 @@ export interface IDatabaseDialectOptionsBetterSqlite3 extends IDecoratorDatabase
 export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
   protected _capabilities: IDatabaseDialectCapabilities = {
     ilike: false,
+    level: false,
   };
 
   getConfigBase(): ConfigDatabaseClient | undefined {

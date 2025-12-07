@@ -10,6 +10,7 @@ export interface IDatabaseDialectOptionsMysql extends IDecoratorDatabaseDialectO
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   protected _capabilities: IDatabaseDialectCapabilities = {
     ilike: false,
+    level: true,
   };
 
   getConfigBase(): ConfigDatabaseClient | undefined {

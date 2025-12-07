@@ -12,4 +12,5 @@ export type TypeDatabaseDialectTableColumnsFn = () => Promise<ITableColumns>;
 
 export interface IDatabaseDialectCapabilities {
   ilike: boolean;
+  level: boolean;
 }
