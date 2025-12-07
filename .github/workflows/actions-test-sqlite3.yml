@@ -1,4 +1,4 @@
-name: actions-mysql-test
+name: actions-test-sqlite3
 on:
   push:
     branches:

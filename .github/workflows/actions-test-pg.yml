@@ -1,4 +1,4 @@
-name: actions-pg-test
+name: actions-test-pg
 on:
   push:
     branches:

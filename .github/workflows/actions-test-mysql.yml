@@ -1,4 +1,4 @@
-name: actions-mysql-test
+name: actions-test-mysql
 on:
   push:
     branches:
