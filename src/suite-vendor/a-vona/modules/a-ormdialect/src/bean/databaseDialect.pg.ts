@@ -12,7 +12,7 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
     level: true,
   };
 
-  getConfigBase(): ConfigDatabaseClient | undefined {
+  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
     return {
       connection: {
         // types: {
@@ -22,7 +22,7 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
         //   },
         // },
       },
-    } as unknown as ConfigDatabaseClient;
+    };
   }
 
   async fetchDatabases(

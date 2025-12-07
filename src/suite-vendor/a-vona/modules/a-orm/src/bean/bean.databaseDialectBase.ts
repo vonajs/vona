@@ -17,7 +17,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return this._capabilities;
   }
 
-  getConfigBase(): ConfigDatabaseClient | undefined {
+  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
     return undefined;
   }
 

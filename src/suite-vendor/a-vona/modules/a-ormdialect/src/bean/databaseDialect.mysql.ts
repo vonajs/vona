@@ -13,14 +13,14 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     level: true,
   };
 
-  getConfigBase(): ConfigDatabaseClient | undefined {
+  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
     return {
       pool: {
         afterCreate(conn, done) {
           mysql_afterCreate(conn).then(done).catch(done);
         },
       },
-    } as unknown as ConfigDatabaseClient;
+    };
   }
 
   async fetchDatabases(

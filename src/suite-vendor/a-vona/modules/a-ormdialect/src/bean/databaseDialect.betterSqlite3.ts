@@ -15,14 +15,15 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     level: false,
   };
 
-  getConfigBase(): ConfigDatabaseClient | undefined {
+  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
     return {
+      useNullAsDefault: true,
       pool: {
         afterCreate(conn, done) {
           sqlite3_afterCreate(conn).then(done).catch(done);
         },
       },
-    } as unknown as ConfigDatabaseClient;
+    };
   }
 
   async fetchDatabases(

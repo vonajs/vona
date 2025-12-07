@@ -8,7 +8,7 @@ export interface IDatabaseDialectOptionsMysql3 extends IDecoratorDatabaseDialect
 @DatabaseDialect<IDatabaseDialectOptionsMysql3>()
 @Virtual()
 export class DatabaseDialectMysql3 extends DatabaseDialectMysql {
-  getConfigBase(): ConfigDatabaseClient | undefined {
+  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
     return super.getConfigBase();
     // const configBase = super.getConfigBase();
     // return Object.assign({}, configBase, {
