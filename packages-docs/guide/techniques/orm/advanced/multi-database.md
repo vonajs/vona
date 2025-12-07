@@ -3,7 +3,7 @@
 Vona ORM supports `Multi-database/Multi-datasource`, with the following features:
 
 1. Multi-database
-    - For example: PostgreSQL/MySQL
+    - For example: Sqlite3/PostgreSQL/MySQL
     - Support for new database dialects is continuously being added
 2. Multi-datasource
 3. Cross-datasource relation queries

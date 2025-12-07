@@ -23,7 +23,7 @@ config.database = {
 
 ## 内置数据源
 
-为了开箱即用，系统内置了两个数据源：`pg`和`mysql`，配置如下：
+为了开箱即用，系统内置了三个数据源：`sqlite3/pg/mysql`，配置如下：
 
 `src/backend/config/config/config.ts`
 
@@ -31,6 +31,12 @@ config.database = {
 // database
 config.database = {
   clients: {
+    sqlite3: {
+      client: 'better-sqlite3',
+      connection: {
+        filename: env.DATABASE_CLIENT_SQLITE3_FILENAME,
+      },
+    },
     pg: {
       client: 'pg',
       connection: {
@@ -58,8 +64,9 @@ config.database = {
 * Vona ORM 底层使用的是[Knex](https://knexjs.org/)，因此，数据源的配置直接继承自`Knex.Config`
   - 参见：[Configuration Options](https://knexjs.org/guide/#configuration-options)
 
-* `clients.pg.client`：使用 Postgresql 方言`pg`
-* `clients.mysql.client`：使用 Mysql 方言`mysql2`
+* `clients.sqlite3.client`: 使用方言 `better-sqlite3`
+* `clients.pg.client`：使用方言`pg`
+* `clients.mysql.client`：使用方言`mysql2`
 
 ## env配置
 

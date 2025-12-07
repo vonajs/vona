@@ -11,12 +11,12 @@
 |pnpm| >=10.19.0 |
 |Nodejs| >=24.8.0 |
 |Redis|>=7.2.6|
+|Sqlite3|内置|
 |MySQL|>=8|
 |Postgresql|>=17|
 
 * `Redis`: VonaJS 基于 Redis 提供了以下能力: 
   - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
-* `MySQL/Postgresql`: 选择一个你想用的
 
 ## 准备工作
 

@@ -60,12 +60,12 @@ Vona 是一款直观、优雅、强大的 Node.js Web 框架，用于快速开�
 |Typescript| >=5.7.3 |
 |Koa|>=3.0.0|
 |Redis|>=7.2.6|
+|Sqlite3|内置|
 |MySQL|>=8|
 |Postgresql|>=17|
 
 * `Redis`: VonaJS 基于 Redis 提供了以下能力: 
   - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
-* `MySQL/Postgresql`: 选择一个你想用的
 
 ## 联系方式
 

@@ -3,7 +3,7 @@
 Vona ORM 支持`多数据库/多数据源`，特性如下：
 
 1. 支持多数据库
-    - 例如：Postgresql/MySQL
+    - 例如：Sqlite3/Postgresql/MySQL
     - 持续增加新的数据库支持
 2. 支持多数据源
 3. 支持跨数据源的关联查询

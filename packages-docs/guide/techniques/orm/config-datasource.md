@@ -23,7 +23,7 @@ config.database = {
 
 ## Built-in Datasources
 
-For out-of-the-box usage, two datasources are built-in: `pg` and `mysql`. The configuration is as follows:
+For out-of-the-box usage, three datasources are built-in: `sqlite3/pg/mysql`. The configuration is as follows:
 
 `src/backend/config/config/config.ts`
 
@@ -31,6 +31,12 @@ For out-of-the-box usage, two datasources are built-in: `pg` and `mysql`. The co
 // database
 config.database = {
   clients: {
+    sqlite3: {
+      client: 'better-sqlite3',
+      connection: {
+        filename: env.DATABASE_CLIENT_SQLITE3_FILENAME,
+      },
+    },
     pg: {
       client: 'pg',
       connection: {
@@ -58,8 +64,9 @@ config.database = {
 * Vona ORM uses [Knex](https://knexjs.org/) under the hood, so the datasource configuration inherits directly from `Knex.Config`
   - See: [Configuration Options](https://knexjs.org/guide/#configuration-options)
 
-* `clients.pg.client`: Uses the Postgresql dialect `pg`
-* `clients.mysql.client`: Uses the MySQL dialect `mysql2`
+* `clients.sqlite3.client`: Uses the dialect `better-sqlite3`
+* `clients.pg.client`: Uses the dialect `pg`
+* `clients.mysql.client`: Uses the dialect `mysql2`
 
 ## env
 
