@@ -24,9 +24,8 @@ export class ServiceDatabase extends BeanBase {
     if (original) return clientConfig;
     // configBaseClient
     const dialect = this.bean.database.getDialect(clientConfig.client);
-    const configBaseClient = dialect.getConfigBase();
     // combine
-    clientConfig = deepExtend({}, this.configDatabase.base, configBaseClient, clientConfig);
+    clientConfig = deepExtend({}, this.configDatabase.base, dialect.configBase, clientConfig);
     // ready
     return clientConfig!;
   }

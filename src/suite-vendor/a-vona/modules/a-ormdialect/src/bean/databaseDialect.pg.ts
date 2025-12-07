@@ -12,18 +12,7 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
     level: true,
   };
 
-  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
-    return {
-      connection: {
-        // types: {
-        //   getTypeParser: (oid: number, format: string): any => {
-        //     if (oid === 114) return pgTypes.getTypeParser(25, 'text');
-        //     return pgTypes.getTypeParser(oid, cast(format));
-        //   },
-        // },
-      },
-    };
-  }
+  protected _configBase?: Partial<ConfigDatabaseClient> = undefined;
 
   async fetchDatabases(
     schemaBuilder: Knex.SchemaBuilder,

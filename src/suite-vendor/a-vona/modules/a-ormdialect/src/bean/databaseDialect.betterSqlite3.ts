@@ -15,16 +15,14 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     level: false,
   };
 
-  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
-    return {
-      useNullAsDefault: true,
-      pool: {
-        afterCreate(conn, done) {
-          sqlite3_afterCreate(conn).then(done).catch(done);
-        },
+  protected _configBase?: Partial<ConfigDatabaseClient> = {
+    useNullAsDefault: true,
+    pool: {
+      afterCreate(conn, done) {
+        sqlite3_afterCreate(conn).then(done).catch(done);
       },
-    };
-  }
+    },
+  };
 
   async fetchDatabases(
     _schemaBuilder: Knex.SchemaBuilder,

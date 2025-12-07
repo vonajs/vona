@@ -13,15 +13,13 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     level: true,
   };
 
-  getConfigBase(): Partial<ConfigDatabaseClient> | undefined {
-    return {
-      pool: {
-        afterCreate(conn, done) {
-          mysql_afterCreate(conn).then(done).catch(done);
-        },
+  protected _configBase?: Partial<ConfigDatabaseClient> = {
+    pool: {
+      afterCreate(conn, done) {
+        mysql_afterCreate(conn).then(done).catch(done);
       },
-    };
-  }
+    },
+  };
 
   async fetchDatabases(
     schemaBuilder: Knex.SchemaBuilder,
