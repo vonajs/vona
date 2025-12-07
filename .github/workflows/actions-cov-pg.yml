@@ -38,7 +38,7 @@ jobs:
           timeout_minutes: 5
           max_attempts: 10
           command: |
-            npm run cov -- --ci
+            DATABASE_DEFAULT_CLIENT=pg npm run cov -- --ci
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
