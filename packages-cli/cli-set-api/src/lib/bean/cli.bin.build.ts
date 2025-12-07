@@ -19,7 +19,7 @@ import { rollup } from 'rollup';
 import { generateConfigDefine, getAbsolutePathOfModule, getOutDir, getOutReleasesDir } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
-const commonjs = commonjsImport as any as typeof commonjsImport;
+const commonjs = commonjsImport as any as typeof commonjsImport.default;
 const resolve = resolveImport as any as typeof resolveImport.default;
 // const swc = swcImport as any as typeof swcImport.default;
 const json = jsonImport as any as typeof jsonImport.default;
