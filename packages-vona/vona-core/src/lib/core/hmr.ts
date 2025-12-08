@@ -1,4 +1,5 @@
 import { BeanSimple } from '../bean/beanSimple.ts';
+import { pathToHref } from '../utils/util.ts';
 
 interface IRecordBeanInstance {
   beanInstanceKey: string;
@@ -36,5 +37,11 @@ export class AppHmr extends BeanSimple {
       prop,
       useOptions,
     });
+  }
+
+  async reloadBean(scene: string, file: string) {
+    const fileUrl = `${pathToHref(file)}?${Date.now()}`;
+    const fileInstance = await import(fileUrl);
+    console.log(scene, fileInstance);
   }
 }
