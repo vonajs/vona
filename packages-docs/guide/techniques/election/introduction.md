@@ -45,30 +45,19 @@ Next, create a `Module Monkey` that responds to the `appStarted` and `appClose` 
 - See also: [App Startup Customization](../../env-config/app-start/introduction.md)
 
 ``` typescript
-export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppClose {
+export class Monkey extends BeanSimple implements IMonkeyAppStarted {
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
     scope.election.obtain('echo', () => {
-      this._doCustomLogic();
+      // custom logic
+    }, async () => {
+      // cleanup
     });
-  }
-
-  async appClose() {
-    const scope = this.app.scope(__ThisModule__);
-    await scope.election.release('echo');
-  }
-
-  private _doCustomLogic() {
-    setInterval(() => {
-      console.log('Hello World, pid: ', process.pid);
-    }, 2000);
   }
 }
 ```
 
 - `appStarted`: Calls `election.obtain` to acquire ownership of the specified resource. A callback function is invoked upon acquisition of ownership
-- `appClose`: Releases ownership so other Workers can participate in subsequent competition
-- `_doCustomLogic`: Implements custom logic or services
 
 ## Tickets
 
@@ -77,16 +66,13 @@ When calling `election.obtain`, you can specify that multiple Workers are allowe
 ``` diff
 async appStarted() {
   const scope = this.app.scope(__ThisModule__);
-  scope.election.obtain(
-    'echo',
-    () => {
-      this._doCustomLogic();
-    },
-+   { tickets: 2 },
-  );
+  scope.election.obtain('echo', () => {
+    // custom logic
+  }, async () => {
+    // cleanup
++ }, { tickets: 2 });
 }
 ```
-
 
 |Name|Description|
 |--|--|

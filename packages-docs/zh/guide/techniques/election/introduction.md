@@ -45,30 +45,19 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 - 参见: [应用启动自定义](../../env-config/app-start/introduction.md)
 
 ``` typescript
-export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppClose {
+export class Monkey extends BeanSimple implements IMonkeyAppStarted {
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
     scope.election.obtain('echo', () => {
-      this._doCustomLogic();
+      // custom logic
+    }, async () => {
+      // cleanup
     });
-  }
-
-  async appClose() {
-    const scope = this.app.scope(__ThisModule__);
-    await scope.election.release('echo');
-  }
-
-  private _doCustomLogic() {
-    setInterval(() => {
-      console.log('Hello World, pid: ', process.pid);
-    }, 2000);
   }
 }
 ```
 
 - `appStarted`: 调用`election.obtain`获取指定资源的所有权。当取得所有权就会调用回调函数
-- `appClose`: 释放所有权，以便其他 Workers 参与后续的竞争
-- `_doCustomLogic`: 实现自定义的逻辑或者服务
 
 ## Tickets
 
@@ -77,13 +66,11 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
 ``` diff
 async appStarted() {
   const scope = this.app.scope(__ThisModule__);
-  scope.election.obtain(
-    'echo',
-    () => {
-      this._doCustomLogic();
-    },
-+   { tickets: 2 },
-  );
+  scope.election.obtain('echo', () => {
+    // custom logic
+  }, async () => {
+    // cleanup
++ }, { tickets: 2 });
 }
 ```
 
