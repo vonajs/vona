@@ -1,6 +1,6 @@
 import type { IDecoratorBeanOptionsBase } from 'vona';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { appResource, SymbolBeanContainerInstances } from 'vona';
+import { appResource, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy } from 'vona';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { pathToHref } from '../utils/util.ts';
 
@@ -13,7 +13,6 @@ interface IRecordBeanInstance {
 interface IRecordBeanInstanceProp {
   beanInstance: any;
   prop: string;
-  useOptions: any;
 }
 
 export const SymbolHmrStateSave = Symbol('SymbolHmrStateSave');
@@ -34,14 +33,13 @@ export class AppHmr extends BeanSimple {
     });
   }
 
-  addBeanInstanceProp(beanInstance: any, prop: string, targetBeanFullName: string, useOptions: any) {
+  addBeanInstanceProp(beanInstance: any, prop: string, targetBeanFullName: string) {
     if (!this.recordBeanInstanceProps[targetBeanFullName]) {
       this.recordBeanInstanceProps[targetBeanFullName] = [];
     }
     this.recordBeanInstanceProps[targetBeanFullName].push({
       beanInstance,
       prop,
-      useOptions,
     });
   }
 
@@ -53,9 +51,8 @@ export class AppHmr extends BeanSimple {
     if (!beanClassName) return;
     const beanClass = fileModule[beanClassName];
     const beanOptions = appResource.getBean(beanClass)!;
-    const beanFullName = beanOptions.beanFullName;
     await this._reloadBeanInstances(beanOptions);
-    this._reloadBeanInstanceProps(beanFullName);
+    this._reloadBeanInstanceProps(beanOptions);
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
@@ -74,6 +71,8 @@ export class AppHmr extends BeanSimple {
       const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
       beanInstanceNew[SymbolHmrStateLoad]?.(state);
       // scope
+      // 需要参考beanScopeBase中的逻辑，依次完成清理工作
+      //  error/locale或许也可以实现hmr
       if (scene === 'service') {
         const scope: any = beanContainer.scope(beanOptions.module as never);
         const scopeItems = scope?.__scenes[scene]?.__instances;
@@ -84,7 +83,14 @@ export class AppHmr extends BeanSimple {
     }
   }
 
-  private _reloadBeanInstanceProps(beanFullName: string) {
-
+  private _reloadBeanInstanceProps(beanOptions: IDecoratorBeanOptionsBase) {
+    const { beanFullName } = beanOptions;
+    const recordBeanInstanceProps = this.recordBeanInstanceProps[beanFullName];
+    if (!recordBeanInstanceProps) return;
+    const recordBeanInstancePropsClone = recordBeanInstanceProps.concat([]);
+    this.recordBeanInstanceProps[beanFullName] = [];
+    for (const { beanInstance, prop } of recordBeanInstancePropsClone) {
+      delete beanInstance[SymbolBeanInstancePropsLazy][prop];
+    }
   }
 }

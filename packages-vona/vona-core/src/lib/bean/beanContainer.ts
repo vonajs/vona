@@ -19,7 +19,7 @@ const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
 const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
 export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
-const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
+export const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export interface BeanContainer extends IBeanRecordGlobal {}
@@ -236,7 +236,7 @@ export class BeanContainer {
             targetBeanFullName,
             useOptions,
           );
-          self.containerType === 'app' && self.app.meta.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName, useOptions);
+          self.containerType === 'app' && self.app.meta.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName);
         }
         return beanInstance[SymbolBeanInstancePropsLazy][prop];
       },
