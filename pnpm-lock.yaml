@@ -158,9 +158,6 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-executor
-      vona-module-a-hmr:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-hmr
       vona-module-a-i18n:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-i18n
@@ -369,6 +366,9 @@ importers:
       vona-mock:
         specifier: ^6.0.104
         version: link:packages-vona/vona-mock
+      vona-module-a-hmr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-hmr
       vona-module-test-cabloy:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/test-cabloy
