@@ -46,7 +46,7 @@ declare module 'vona' {
     DATABASE_DEFAULT_CLIENT: string | undefined;
     // sqlite3
     DATABASE_CLIENT_SQLITE3_FILENAME: string | undefined;
-    DATABASE_CLIENT_SQLITE3_NATIVEBINDING: string | undefined;
+    DATABASE_CLIENT_SQLITE3_NATIVEBINDING: string | 'true' | 'false' | undefined;
     // pg
     DATABASE_CLIENT_PG_HOST: string | undefined;
     DATABASE_CLIENT_PG_PORT: string | undefined;
