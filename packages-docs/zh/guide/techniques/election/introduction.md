@@ -46,18 +46,16 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 
 ``` typescript
 export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppClose {
-  private _fnRelease: FunctionAsync<void> | undefined;
-
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
-    scope.election.obtain('echo', fnRelease => {
-      this._fnRelease = fnRelease;
+    scope.election.obtain('echo', () => {
       this._doCustomLogic();
     });
   }
 
   async appClose() {
-    await this._fnRelease?.();
+    const scope = this.app.scope(__ThisModule__);
+    await scope.election.release('echo');
   }
 
   private _doCustomLogic() {
@@ -68,8 +66,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
 }
 ```
 
-- `_fnRelease`: 此变量是一个函数，用于释放所有权
-- `appStarted`: 调用`election.obtain`获取指定资源的所有权。当取得所有权就会调用回调函数。该回调函数提供一个`fnRelease`参数，用于后续释放所有权
+- `appStarted`: 调用`election.obtain`获取指定资源的所有权。当取得所有权就会调用回调函数
 - `appClose`: 释放所有权，以便其他 Workers 参与后续的竞争
 - `_doCustomLogic`: 实现自定义的逻辑或者服务
 
@@ -82,8 +79,7 @@ async appStarted() {
   const scope = this.app.scope(__ThisModule__);
   scope.election.obtain(
     'echo',
-    fnRelease => {
-      this._fnRelease = fnRelease;
+    () => {
       this._doCustomLogic();
     },
 +   { tickets: 2 },

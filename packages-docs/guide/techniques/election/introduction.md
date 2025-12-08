@@ -46,18 +46,16 @@ Next, create a `Module Monkey` that responds to the `appStarted` and `appClose` 
 
 ``` typescript
 export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppClose {
-  private _fnRelease: FunctionAsync<void> | undefined;
-
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
-    scope.election.obtain('echo', fnRelease => {
-      this._fnRelease = fnRelease;
+    scope.election.obtain('echo', () => {
       this._doCustomLogic();
     });
   }
 
   async appClose() {
-    await this._fnRelease?.();
+    const scope = this.app.scope(__ThisModule__);
+    await scope.election.release('echo');
   }
 
   private _doCustomLogic() {
@@ -68,8 +66,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
 }
 ```
 
-- `_fnRelease`: This variable is a function used to release ownership of the specified resource
-- `appStarted`: Calls `election.obtain` to acquire ownership of the specified resource. A callback function is invoked upon acquisition of ownership. This callback function provides a `fnRelease` parameter for subsequent ownership release
+- `appStarted`: Calls `election.obtain` to acquire ownership of the specified resource. A callback function is invoked upon acquisition of ownership
 - `appClose`: Releases ownership so other Workers can participate in subsequent competition
 - `_doCustomLogic`: Implements custom logic or services
 
@@ -82,8 +79,7 @@ async appStarted() {
   const scope = this.app.scope(__ThisModule__);
   scope.election.obtain(
     'echo',
-    fnRelease => {
-      this._fnRelease = fnRelease;
+    () => {
       this._doCustomLogic();
     },
 +   { tickets: 2 },
