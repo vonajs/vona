@@ -48,6 +48,7 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 
 * `Redis`: VonaJS provides the following capabilities based on Redis:
   - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
+* `Sqlite3`: You need to set up the node-gyp environment in advance to ensure that `better_sqlite3.node` can be compiled properly when installing dependencies
 
 ## Stay In Touch
 

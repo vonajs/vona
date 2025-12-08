@@ -17,6 +17,7 @@
 
 * `Redis`: VonaJS 基于 Redis 提供了以下能力: 
   - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
+* `Sqlite3`: 需要预先准备 node-gyp 环境，确保在安装依赖时可以正常编译出`better_sqlite3.node`
 
 ## 准备工作
 
