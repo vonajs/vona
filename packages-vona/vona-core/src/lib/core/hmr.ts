@@ -1,3 +1,5 @@
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { appResource, SymbolBeanContainerInstances } from 'vona';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { pathToHref } from '../utils/util.ts';
 
@@ -12,6 +14,9 @@ interface IRecordBeanInstanceProp {
   prop: string;
   useOptions: any;
 }
+
+export const SymbolHmrStateSave = Symbol('SymbolHmrStateSave');
+export const SymbolHmrStateLoad = Symbol('SymbolHmrStateLoad');
 
 export class AppHmr extends BeanSimple {
   private recordBeanInstances: Record<string, IRecordBeanInstance[]> = {};
@@ -39,9 +44,32 @@ export class AppHmr extends BeanSimple {
     });
   }
 
-  async reloadBean(scene: string, file: string) {
+  async reloadBean(sceneName: string, file: string) {
     const fileUrl = `${pathToHref(file)}?${Date.now()}`;
-    const fileInstance = await import(fileUrl);
-    console.log(scene, fileInstance);
+    const fileModule = await import(fileUrl);
+    const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
+    const beanClassName = Object.keys(fileModule).find(item => item.startsWith(sceneNameCapitalize));
+    if (!beanClassName) return;
+    const beanClass = fileModule[beanClassName];
+    const beanOptions = appResource.getBean(beanClass)!;
+    const beanFullName = beanOptions.beanFullName;
+    await this._reloadBeanInstances(beanFullName);
+  }
+
+  private async _reloadBeanInstances(beanFullName: string) {
+    const beanContainer = this.app.bean;
+    const recordBeanInstances = this.recordBeanInstances[beanFullName];
+    if (!recordBeanInstances) return;
+    const recordBeanInstancesClone = recordBeanInstances.concat([]);
+    this.recordBeanInstances[beanFullName] = [];
+    for (const { beanInstanceKey, withSelector, args } of recordBeanInstancesClone) {
+      // dispose
+      const beanInstanceOld: any = beanContainer[SymbolBeanContainerInstances][beanInstanceKey];
+      const state = beanInstanceOld[SymbolHmrStateSave]?.();
+      await beanContainer.disposeInstance(beanInstanceKey);
+      // new
+      const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
+      beanInstanceNew[SymbolHmrStateLoad]?.(state);
+    }
   }
 }

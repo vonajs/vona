@@ -18,7 +18,7 @@ const SymbolProxyMagic = Symbol('SymbolProxyMagic');
 const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
 const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
-const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
+export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
 const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
