@@ -9,10 +9,16 @@
         "mode": [
           "dev"
         ]
-      }
+      },
+      "monkey": true
     },
     "dependencies": {}
   },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -24,9 +30,6 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": ["Vona Module"],
-  "author": "",
   "files": [
     "assets",
     "dist"
@@ -46,7 +49,9 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "chokidar": "^5.0.0"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
