@@ -40,6 +40,38 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.release.ts';
+
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  
+    export interface IBroadcastRecord {
+      'a-election:release': IDecoratorBroadcastOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-election' {
+  
+        export interface BroadcastRelease {
+          /** @internal */
+          get scope(): ScopeModuleAElection;
+        }
+
+          export interface BroadcastRelease {
+            get $beanFullName(): 'a-election.broadcast.release';
+            get $onionName(): 'a-election:release';
+            get $onionOptions(): IDecoratorBroadcastOptions;
+          } 
+}
+/** broadcast: end */
+/** broadcast: begin */
+import type { BroadcastRelease } from '../bean/broadcast.release.ts';
+export interface IModuleBroadcast {
+  'release': BroadcastRelease;
+}
+/** broadcast: end */
 /** cacheRedis: begin */
 export * from '../bean/cacheRedis.election.ts';
 
@@ -85,6 +117,7 @@ export class ScopeModuleAElection extends BeanScopeBase {}
 export interface ScopeModuleAElection {
   util: BeanScopeUtil;
 service: IModuleService;
+broadcast: IModuleBroadcast;
 cacheRedis: IModuleCacheRedis;
 }
 

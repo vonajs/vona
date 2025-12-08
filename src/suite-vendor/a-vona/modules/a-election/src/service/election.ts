@@ -1,28 +1,30 @@
-import type { IElectionElectOptions, TypeFunctionRelease } from '../types/election.ts';
+import type { IElectionElectInfo, IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceElection extends BeanBase {
-  _intervalId: any = null;
-  _isLeader: boolean = false;
+  private _electionElectInfos: Record<string, IElectionElectInfo | undefined> = {};
 
   public async dispose() {
-    if (this._intervalId) {
-      clearInterval(this._intervalId);
-      this._intervalId = null;
+    for (const resource in this._electionElectInfos) {
+      await this.release(resource);
     }
   }
 
-  public obtain(resource: string, fn: TypeFunctionRelease, options?: IElectionElectOptions) {
+  public obtain(resource: string, fnObtain: TypeFunctionObtain, fnRelease: TypeFunctionRelease, options?: IElectionElectOptions) {
+    const electionElectInfo: IElectionElectInfo = { intervalId: undefined, isLeader: false, fnRelease, options };
+    this._electionElectInfos[resource] = electionElectInfo;
+    //
     const tickets = options?.tickets ?? 1;
     if (tickets === -1 || tickets === Infinity) {
-      fn();
+      electionElectInfo.isLeader = true;
+      !this.app.meta.appClose && fnObtain();
       return;
     }
-    this._intervalId = setInterval(async () => {
+    electionElectInfo.intervalId = setInterval(async () => {
       const lockResource = `election.${resource}`;
-      this._isLeader = await this.$scope.redlock.service.redlock.lock(
+      electionElectInfo.isLeader = await this.$scope.redlock.service.redlock.lock(
         lockResource,
         async () => {
           // leaders
@@ -37,6 +39,8 @@ export class ServiceElection extends BeanBase {
               if (!alive) {
                 leaders.splice(index, 1);
                 changed = true;
+                // force release
+                this.scope.broadcast.release.emit({ workerId: leaders[index], resource });
               }
             }
             if (leaders.length < tickets) {
@@ -53,23 +57,35 @@ export class ServiceElection extends BeanBase {
         },
         options,
       );
-      if (this._isLeader) {
-        if (this._intervalId) {
+      if (electionElectInfo.isLeader) {
+        if (electionElectInfo.intervalId) {
           //
-          clearInterval(this._intervalId);
-          this._intervalId = null;
+          clearInterval(electionElectInfo.intervalId);
+          electionElectInfo.intervalId = undefined;
           //
-          fn();
+          !this.app.meta.appClose && fnObtain();
         }
       }
     }, this.$scope.worker.config.worker.alive.timeout);
   }
 
-  async release(resource: string, options?: IElectionElectOptions) {
-    const tickets = options?.tickets ?? 1;
-    if (tickets === -1 || tickets === Infinity) {
-      return;
+  async release(resource: string) {
+    const electionElectInfo = this._electionElectInfos[resource];
+    if (!electionElectInfo) return;
+    delete this._electionElectInfos[resource];
+    const { intervalId, isLeader, fnRelease, options } = electionElectInfo;
+    //
+    if (intervalId) {
+      clearInterval(intervalId);
     }
+    if (fnRelease) {
+      await fnRelease();
+    }
+    //
+    if (!isLeader) return;
+    const tickets = options?.tickets ?? 1;
+    if (tickets === -1 || tickets === Infinity) return;
+    //
     const lockResource = `election.${resource}`;
     await this.$scope.redlock.service.redlock.lock(
       lockResource,
