@@ -1,5 +1,4 @@
 import type { IDecoratorBeanOptionsBase } from 'vona';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { appResource, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy } from 'vona';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { pathToHref } from '../utils/util.ts';
@@ -43,16 +42,17 @@ export class AppHmr extends BeanSimple {
     });
   }
 
-  async reloadBean(sceneName: string, file: string) {
+  async reloadBean(file: string) {
     const fileUrl = `${pathToHref(file)}?${Date.now()}`;
     const fileModule = await import(fileUrl);
-    const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-    const beanClassName = Object.keys(fileModule).find(item => item.startsWith(sceneNameCapitalize));
-    if (!beanClassName) return;
-    const beanClass = fileModule[beanClassName];
-    const beanOptions = appResource.getBean(beanClass)!;
-    await this._reloadBeanInstances(beanOptions);
-    this._reloadBeanInstanceProps(beanOptions);
+    for (const key in fileModule) {
+      const item = fileModule[key];
+      if (typeof item !== 'function') continue;
+      const beanOptions = appResource.getBean(item);
+      if (!beanOptions) continue;
+      await this._reloadBeanInstances(beanOptions);
+      this._reloadBeanInstanceProps(beanOptions);
+    }
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {

@@ -46,19 +46,19 @@ export class ServiceWatch extends BeanBase {
     const item = __pathesWatchStrict.find(item => item[1].test(file));
     if (!item) return;
     const timeBegin = new Date();
-    await this._reloadBean(item[0], file);
+    await this._reloadBean(file);
     const timeEnd = new Date();
     // eslint-disable-next-line
     console.log(`[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`);
   }
 
-  private async _reloadBean(sceneName: string, file: string) {
-    await this.app.meta.hmr?.reloadBean(sceneName, file);
-    this.scope.broadcast.reloadBean.emit({ sceneName, file });
+  private async _reloadBean(file: string) {
+    await this.app.meta.hmr?.reloadBean(file);
+    this.scope.broadcast.reloadBean.emit({ file });
   }
 
   public async _reloadBeanWorker(item: TypeBroadcastReloadBeanJobData) {
-    await this.app.meta.hmr?.reloadBean(item.sceneName, item.file);
+    await this.app.meta.hmr?.reloadBean(item.file);
   }
 
   private async _collectWatchDirs() {
