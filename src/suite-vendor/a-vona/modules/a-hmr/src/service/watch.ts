@@ -1,7 +1,7 @@
 import chokidar, { FSWatcher } from 'chokidar';
 import debounce from 'debounce';
 import { globby } from 'globby';
-import { BeanBase, cast, pathToHref } from 'vona';
+import { BeanBase, pathToHref } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 const __pathesWatch = [
@@ -15,46 +15,27 @@ const __pathesWatchStrict: TypePathWatchStrict[] = [
 
 @Service()
 export class ServiceWatch extends BeanBase {
-  private _watcherInstance?: FSWatcher;
+  private _watcher?: FSWatcher;
 
   async start() {
     // stop
-    this.stop();
+    await this.stop();
     // watcher
     const watchDirs = await this._collectWatchDirs();
-    const _watcher = chokidar.watch(watchDirs, {
-      cwd: this.app.projectPath,
-    }).on(
-      'change',
-      debounce(info => {
+    this._watcher = chokidar
+      .watch(watchDirs, {
+        cwd: this.app.projectPath,
+      })
+      .on('change', debounce(info => {
         this._onChange(info);
-      }, this.scope.config.change.debounce),
-    );
-    // on ready
-    const _watcher2 = cast(_watcher);
-    _watcher.once('ready', () => {
-      _watcher2.__eb_ready = true;
-      if (_watcher2.__eb_closing) {
-        _watcher.close();
-        _watcher2.__eb_closed = true;
-      }
-    });
-    // ok
-    this._watcherInstance = _watcher;
+      }, this.scope.config.change.debounce));
   }
 
-  stop() {
+  async stop() {
     // close
-    if (this._watcherInstance) {
-      const _watcher = cast(this._watcherInstance);
-      if (!_watcher.__eb_closed) {
-        if (_watcher.__eb_ready) {
-          _watcher.close();
-        } else {
-          _watcher.__eb_closing = true;
-        }
-      }
-      this._watcherInstance = undefined;
+    if (this._watcher) {
+      await this._watcher.close();
+      this._watcher = undefined;
     }
   }
 

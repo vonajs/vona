@@ -15,7 +15,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
 
   async appClose() {
     const scope = this.app.scope(__ThisModule__);
-    scope.service.watch.stop();
+    await scope.service.watch.stop();
     this._fnRelease?.();
   }
 }
