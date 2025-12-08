@@ -1650,6 +1650,12 @@ importers:
       chokidar:
         specifier: ^5.0.0
         version: 5.0.0
+      debounce:
+        specifier: ^3.0.0
+        version: 3.0.0
+      globby:
+        specifier: ^16.0.0
+        version: 16.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -5066,6 +5072,10 @@ packages:
 
   dateformat@3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
+
+  debounce@3.0.0:
+    resolution: {integrity: sha512-64byRbF0/AirwbuHqB3/ZpMG9/nckDa6ZA0yd6UnaQNwbbemCOwvz2sL5sjXLHhZHADyiwLm0M5qMhltUUx+TA==}
+    engines: {node: '>=20'}
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -12799,6 +12809,8 @@ snapshots:
   dargs@7.0.0: {}
 
   dateformat@3.0.3: {}
+
+  debounce@3.0.0: {}
 
   debug@3.2.7:
     dependencies:

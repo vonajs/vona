@@ -69,11 +69,15 @@ declare module 'vona-module-a-hmr' {
 /** meta election: begin */
 import type { MetaElection } from '../bean/meta.election.ts';
 /** meta election: end */
+/** config: begin */
+export * from '../config/config.ts';
+import type { config } from '../config/config.ts';
+/** config: end */
 /** monkey: begin */
 export * from '../monkey.ts';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -81,6 +85,7 @@ export class ScopeModuleAHmr extends BeanScopeBase {}
 
 export interface ScopeModuleAHmr {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 service: IModuleService;
 election: MetaElection;
 }
@@ -95,7 +100,9 @@ declare module 'vona' {
     hmr: ScopeModuleAHmr;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-hmr': ReturnType<typeof config>;
+  }
 
   
 
