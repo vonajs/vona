@@ -55,6 +55,7 @@ export class CliBinDev extends BeanCliBase {
           './src',
         ],
         ignore: [
+          '**/node_modules/**',
           '**/dist/**',
           '**/test/**/*.test.ts',
           'src/backend/play/**',
