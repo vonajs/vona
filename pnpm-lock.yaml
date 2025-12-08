@@ -158,6 +158,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-executor
+      vona-module-a-hmr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-hmr
       vona-module-a-i18n:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-i18n
@@ -1214,6 +1217,9 @@ importers:
       vona-module-a-executor:
         specifier: ^5.0.26
         version: link:modules/a-executor
+      vona-module-a-hmr:
+        specifier: ^5.0.0
+        version: link:modules/a-hmr
       vona-module-a-i18n:
         specifier: ^5.0.20
         version: link:modules/a-i18n
@@ -1619,6 +1625,15 @@ importers:
       koa-compose:
         specifier: ^4.1.0
         version: 4.1.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.2
+
+  src/suite-vendor/a-vona/modules/a-hmr:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

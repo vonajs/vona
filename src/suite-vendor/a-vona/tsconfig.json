@@ -163,6 +163,9 @@
     },
     {
       "path": "modules/a-play/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-hmr/tsconfig.build.json"
     }
   ],
   "exclude": [

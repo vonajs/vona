@@ -1,4 +1,4 @@
-import type { BeanContainer } from 'vona';
+import type { BeanContainer } from './beanContainer.ts';
 
 interface IRecordBeanInstance {
   beanInstanceKey: string;
