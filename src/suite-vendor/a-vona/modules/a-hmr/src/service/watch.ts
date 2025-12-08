@@ -1,7 +1,7 @@
 import chokidar, { FSWatcher } from 'chokidar';
 import debounce from 'debounce';
 import { globby } from 'globby';
-import { BeanBase, cast } from 'vona';
+import { BeanBase, cast, pathToHref } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 const __pathesWatch = [
@@ -58,13 +58,21 @@ export class ServiceWatch extends BeanBase {
     }
   }
 
-  protected _onChange(info: string) {
+  protected async _onChange(info: string) {
     info = info.replace(/\\/g, '/');
     const item = __pathesWatchStrict.find(item => item[1].test(info));
     if (!item) return;
-    const scene = item[0];
+    const timeBegin = new Date();
+    await this._reload(item[0], info);
+    const timeEnd = new Date();
     // eslint-disable-next-line
-    console.log(`[hmr] reload 3ms: ${info}`);
+    console.log(`[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${info}`);
+  }
+
+  protected async _reload(scene: string, file: string) {
+    const fileUrl = `${pathToHref(file)}?${Date.now()}`;
+    const fileInstance = await import(fileUrl);
+    console.log(scene, fileInstance);
   }
 
   private async _collectWatchDirs() {
