@@ -40,6 +40,38 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.reloadBean.ts';
+
+import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  
+    export interface IBroadcastRecord {
+      'a-hmr:reloadBean': IDecoratorBroadcastOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-hmr' {
+  
+        export interface BroadcastReloadBean {
+          /** @internal */
+          get scope(): ScopeModuleAHmr;
+        }
+
+          export interface BroadcastReloadBean {
+            get $beanFullName(): 'a-hmr.broadcast.reloadBean';
+            get $onionName(): 'a-hmr:reloadBean';
+            get $onionOptions(): IDecoratorBroadcastOptions;
+          } 
+}
+/** broadcast: end */
+/** broadcast: begin */
+import type { BroadcastReloadBean } from '../bean/broadcast.reloadBean.ts';
+export interface IModuleBroadcast {
+  'reloadBean': BroadcastReloadBean;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.election.ts';
 
@@ -87,6 +119,7 @@ export interface ScopeModuleAHmr {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 service: IModuleService;
+broadcast: IModuleBroadcast;
 election: MetaElection;
 }
 

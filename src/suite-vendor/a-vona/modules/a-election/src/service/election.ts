@@ -56,25 +56,27 @@ export class ServiceElection extends BeanBase {
       );
       if (this._isLeader) {
         if (this._intervalId) {
+          //
           clearInterval(this._intervalId);
           this._intervalId = null;
+          const self = this;
+          //
+          async function release() {
+            await self.$scope.redlock.service.redlock.lock(
+              lockResource,
+              async () => {
+                const leaders = (await self.scope.cacheRedis.election.get('leaders')) || [];
+                const index = leaders.indexOf(self.bean.worker.id);
+                if (index > -1) {
+                  leaders.splice(index, 1);
+                  await self.scope.cacheRedis.election.set(leaders, 'leaders');
+                }
+              },
+              options,
+            );
+          }
+          fn(release);
         }
-        const self = this;
-        async function release() {
-          await self.$scope.redlock.service.redlock.lock(
-            lockResource,
-            async () => {
-              const leaders = (await self.scope.cacheRedis.election.get('leaders')) || [];
-              const index = leaders.indexOf(self.bean.worker.id);
-              if (index > -1) {
-                leaders.splice(index, 1);
-                await self.scope.cacheRedis.election.set(leaders, 'leaders');
-              }
-            },
-            options,
-          );
-        }
-        fn(release);
       }
     }, this.$scope.worker.config.worker.alive.timeout);
   }

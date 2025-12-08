@@ -57,7 +57,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted, IMonkeyAppC
   }
 
   async appClose() {
-    this._fnRelease?.();
+    await this._fnRelease?.();
   }
 
   private _doCustomLogic() {
