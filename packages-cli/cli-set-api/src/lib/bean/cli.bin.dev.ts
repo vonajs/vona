@@ -59,6 +59,7 @@ export class CliBinDev extends BeanCliBase {
           '**/test/**/*.test.ts',
           'src/backend/play/**',
           'src/backend/typing/**',
+          '**/src/service/*.ts',
         ],
       });
       nodemon.on('quit', () => {
