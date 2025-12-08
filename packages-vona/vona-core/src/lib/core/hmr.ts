@@ -1,4 +1,4 @@
-import type { BeanContainer } from './beanContainer.ts';
+import { BeanSimple } from '../bean/beanSimple.ts';
 
 interface IRecordBeanInstance {
   beanInstanceKey: string;
@@ -12,14 +12,9 @@ interface IRecordBeanInstanceProp {
   useOptions: any;
 }
 
-export class Hmr {
-  private beanContainer: BeanContainer;
+export class AppHmr extends BeanSimple {
   private recordBeanInstances: Record<string, IRecordBeanInstance[]> = {};
   private recordBeanInstanceProps: Record<string, IRecordBeanInstanceProp[]> = {};
-
-  constructor(beanContainer: BeanContainer) {
-    this.beanContainer = beanContainer;
-  }
 
   addBeanInstance(beanFullName: string, beanInstanceKey: string, args: any[], withSelector?: boolean) {
     if (!this.recordBeanInstances[beanFullName]) {

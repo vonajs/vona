@@ -9,6 +9,7 @@ import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
 import { CtxCounter } from './ctxCounter.ts';
+import { AppHmr } from './hmr.ts';
 import { AppLogger } from './logger/appLogger.ts';
 import { appMetadata } from './metadata.ts';
 import { appResource } from './resource.ts';
@@ -25,6 +26,7 @@ export class AppMeta extends BeanSimple {
   error: ErrorClass;
   logger: AppLogger;
   locale: AppLocale;
+  hmr?: AppHmr;
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
   appMonkey?: IAppMonkey;
@@ -65,6 +67,11 @@ export class AppMeta extends BeanSimple {
 
     // locale
     this.locale = this.bean._newBean(AppLocale);
+
+    // hmr
+    if (process.env.META_MODE === 'dev') {
+      this.hmr = this.bean._newBean(AppHmr);
+    }
 
     // text
     this.text = this.locale.createLocaleText();

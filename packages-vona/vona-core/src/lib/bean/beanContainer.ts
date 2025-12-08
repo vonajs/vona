@@ -13,7 +13,6 @@ import { BeanAopBase } from './beanAopBase.ts';
 import { BeanBase } from './beanBase.ts';
 import { SymbolBeanFullName, SymbolBeanInstanceKey } from './beanBaseSimple.ts';
 import { BeanSimple } from './beanSimple.ts';
-import { Hmr } from './hmr.ts';
 
 const SymbolProxyMagic = Symbol('SymbolProxyMagic');
 const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
@@ -28,7 +27,6 @@ export interface BeanContainer extends IBeanRecordGlobal {}
 export class BeanContainer {
   private app: VonaApplication;
   private ctx?: VonaContext;
-  private hmr?: Hmr;
 
   private [SymbolBeanContainerInstances]: Record<string, unknown> = {};
 
@@ -46,9 +44,6 @@ export class BeanContainer {
   protected constructor(app: VonaApplication, ctx: VonaContext | undefined) {
     this.app = app;
     this.ctx = ctx;
-    if (!this.ctx && app.configMeta.mode === 'dev') {
-      this.hmr = new Hmr(this);
-    }
   }
 
   /** @internal */
@@ -169,7 +164,7 @@ export class BeanContainer {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
         __setPropertyValue(beanInstance, SymbolBeanInstanceKey, key);
         this[SymbolBeanContainerInstances][key] = beanInstance;
-        this.hmr?.addBeanInstance(fullName, key, args, withSelector);
+        !this.ctx && this.app.meta.hmr?.addBeanInstance(fullName, key, args, withSelector);
       }
     }
     // init
@@ -236,7 +231,7 @@ export class BeanContainer {
             targetBeanFullName,
             useOptions,
           );
-          self.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName, useOptions);
+          !self.ctx && self.app.meta.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName, useOptions);
         }
         return beanInstance[SymbolBeanInstancePropsLazy][prop];
       },

@@ -1,5 +1,6 @@
 export * from './application.ts';
 export * from './config.ts';
+export * from './hmr.ts';
 export * from './locales.ts';
 export * from './logger/index.ts';
 export * from './meta.ts';
