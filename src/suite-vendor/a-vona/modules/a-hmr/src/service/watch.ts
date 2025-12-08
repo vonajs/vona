@@ -62,6 +62,7 @@ export class ServiceWatch extends BeanBase {
     info = info.replace(/\\/g, '/');
     const item = __pathesWatchStrict.find(item => item[1].test(info));
     if (!item) return;
+    const scene = item[0];
     // eslint-disable-next-line
     console.log(`[hmr] reload 3ms: ${info}`);
   }
