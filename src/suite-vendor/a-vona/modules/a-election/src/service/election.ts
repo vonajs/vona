@@ -1,6 +1,5 @@
-import type { FunctionAsync } from 'vona';
 import type { IElectionElectOptions, TypeFunctionRelease } from '../types/election.ts';
-import { BeanBase, functionNoop } from 'vona';
+import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -18,7 +17,7 @@ export class ServiceElection extends BeanBase {
   public obtain(resource: string, fn: TypeFunctionRelease, options?: IElectionElectOptions) {
     const tickets = options?.tickets ?? 1;
     if (tickets === -1 || tickets === Infinity) {
-      fn(functionNoop as FunctionAsync<void>);
+      fn();
       return;
     }
     this._intervalId = setInterval(async () => {
@@ -59,25 +58,30 @@ export class ServiceElection extends BeanBase {
           //
           clearInterval(this._intervalId);
           this._intervalId = null;
-          const self = this;
           //
-          async function release() {
-            await self.$scope.redlock.service.redlock.lock(
-              lockResource,
-              async () => {
-                const leaders = (await self.scope.cacheRedis.election.get('leaders')) || [];
-                const index = leaders.indexOf(self.bean.worker.id);
-                if (index > -1) {
-                  leaders.splice(index, 1);
-                  await self.scope.cacheRedis.election.set(leaders, 'leaders');
-                }
-              },
-              options,
-            );
-          }
-          fn(release);
+          fn();
         }
       }
     }, this.$scope.worker.config.worker.alive.timeout);
+  }
+
+  async release(resource: string, options?: IElectionElectOptions) {
+    const tickets = options?.tickets ?? 1;
+    if (tickets === -1 || tickets === Infinity) {
+      return;
+    }
+    const lockResource = `election.${resource}`;
+    await this.$scope.redlock.service.redlock.lock(
+      lockResource,
+      async () => {
+        const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
+        const index = leaders.indexOf(this.bean.worker.id);
+        if (index > -1) {
+          leaders.splice(index, 1);
+          await this.scope.cacheRedis.election.set(leaders, 'leaders');
+        }
+      },
+      options,
+    );
   }
 }
