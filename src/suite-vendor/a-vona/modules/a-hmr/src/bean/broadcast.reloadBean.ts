@@ -8,7 +8,6 @@ export class BroadcastReloadBean
   extends BeanBroadcastBase<TypeBroadcastReloadBeanJobData>
   implements IBroadcastExecute<TypeBroadcastReloadBeanJobData> {
   async execute(data: TypeBroadcastReloadBeanJobData, isEmitter?: boolean) {
-    console.log(isEmitter, process.pid);
     if (!isEmitter) {
       await this.scope.service.watch._reloadBeanWorker(data);
     }
