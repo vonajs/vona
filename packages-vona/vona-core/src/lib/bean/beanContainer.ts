@@ -1,7 +1,7 @@
 import type { VonaContext } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
 import type { MetadataKey } from '../core/metadata.ts';
-import type { Constructable, IDecoratorUseOptionsBase } from '../decorator/index.ts';
+import type { Constructable, ContainerType, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
 import { isClass, isNilOrEmptyString } from '@cabloy/utils';
 import { cast } from '../../types/index.ts';
@@ -66,6 +66,11 @@ export class BeanContainer {
       }
       delete this[SymbolBeanContainerInstances][beanInstanceKey];
     }
+  }
+
+  get containerType(): ContainerType {
+    if (!this.ctx) return 'app';
+    return 'ctx';
   }
 
   /** get specific module's scope */
@@ -164,7 +169,7 @@ export class BeanContainer {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
         __setPropertyValue(beanInstance, SymbolBeanInstanceKey, key);
         this[SymbolBeanContainerInstances][key] = beanInstance;
-        !this.ctx && this.app.meta.hmr?.addBeanInstance(fullName, key, args, withSelector);
+        this.containerType === 'app' && this.app.meta.hmr?.addBeanInstance(fullName, key, args, withSelector);
       }
     }
     // init
@@ -231,7 +236,7 @@ export class BeanContainer {
             targetBeanFullName,
             useOptions,
           );
-          !self.ctx && self.app.meta.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName, useOptions);
+          self.containerType === 'app' && self.app.meta.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName, useOptions);
         }
         return beanInstance[SymbolBeanInstancePropsLazy][prop];
       },
