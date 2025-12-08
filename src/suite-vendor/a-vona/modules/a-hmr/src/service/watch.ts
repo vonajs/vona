@@ -1,14 +1,16 @@
+import type { TypeBroadcastReloadBeanJobData } from '../bean/broadcast.reloadBean.ts';
 import chokidar, { FSWatcher } from 'chokidar';
 import debounce from 'debounce';
 import { globby } from 'globby';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
+type TypePathWatchStrict = [string, RegExp];
+
 const __pathesWatch = [
   '**/src/service/*.ts',
 ];
 
-type TypePathWatchStrict = [string, RegExp];
 const __pathesWatchStrict: TypePathWatchStrict[] = [
   ['service', /\/src\/service\/[^/]+.ts/],
 ];
@@ -26,8 +28,8 @@ export class ServiceWatch extends BeanBase {
       .watch(watchDirs, {
         cwd: this.app.projectPath,
       })
-      .on('change', debounce(info => {
-        this._onChange(info);
+      .on('change', debounce(file => {
+        this._onChange(file);
       }, this.scope.config.change.debounce));
   }
 
@@ -39,15 +41,24 @@ export class ServiceWatch extends BeanBase {
     }
   }
 
-  protected async _onChange(info: string) {
-    info = info.replace(/\\/g, '/');
-    const item = __pathesWatchStrict.find(item => item[1].test(info));
+  protected async _onChange(file: string) {
+    file = file.replace(/\\/g, '/');
+    const item = __pathesWatchStrict.find(item => item[1].test(file));
     if (!item) return;
     const timeBegin = new Date();
-    await this.app.meta.hmr?.reloadBean(item[0], info);
+    await this._reloadBean(item[0], file);
     const timeEnd = new Date();
     // eslint-disable-next-line
-    console.log(`[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${info}`);
+    console.log(`[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`);
+  }
+
+  private async _reloadBean(sceneName: string, file: string) {
+    await this.app.meta.hmr?.reloadBean(sceneName, file);
+    this.scope.broadcast.reloadBean.emit({ sceneName, file });
+  }
+
+  public async _reloadBeanWorker(item: TypeBroadcastReloadBeanJobData) {
+    await this.app.meta.hmr?.reloadBean(item.sceneName, item.file);
   }
 
   private async _collectWatchDirs() {

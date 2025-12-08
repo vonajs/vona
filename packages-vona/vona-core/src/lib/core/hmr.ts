@@ -1,3 +1,4 @@
+import type { IDecoratorBeanOptionsBase } from 'vona';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { appResource, SymbolBeanContainerInstances } from 'vona';
 import { BeanSimple } from '../bean/beanSimple.ts';
@@ -53,10 +54,12 @@ export class AppHmr extends BeanSimple {
     const beanClass = fileModule[beanClassName];
     const beanOptions = appResource.getBean(beanClass)!;
     const beanFullName = beanOptions.beanFullName;
-    await this._reloadBeanInstances(beanFullName);
+    await this._reloadBeanInstances(beanOptions);
+    this._reloadBeanInstanceProps(beanFullName);
   }
 
-  private async _reloadBeanInstances(beanFullName: string) {
+  private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
+    const { scene, beanFullName } = beanOptions;
     const beanContainer = this.app.bean;
     const recordBeanInstances = this.recordBeanInstances[beanFullName];
     if (!recordBeanInstances) return;
@@ -70,6 +73,18 @@ export class AppHmr extends BeanSimple {
       // new
       const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
       beanInstanceNew[SymbolHmrStateLoad]?.(state);
+      // scope
+      if (scene === 'service') {
+        const scope: any = beanContainer.scope(beanOptions.module as never);
+        const scopeItems = scope?.__scenes[scene]?.__instances;
+        if (scopeItems?.[beanOptions.name]) {
+          delete scopeItems?.[beanOptions.name];
+        }
+      }
     }
+  }
+
+  private _reloadBeanInstanceProps(beanFullName: string) {
+
   }
 }
