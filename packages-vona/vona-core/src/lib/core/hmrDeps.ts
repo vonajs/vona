@@ -6,6 +6,12 @@ export class AppHmrDeps extends BeanSimple {
   private _deps: Record<string, Set<string>> = {};
   private _depsTemp: Set<string> | undefined;
 
+  addBeans<T extends Constructable[]>(classRefs: T) {
+    for (const classRef of classRefs) {
+      this.addBean(classRef);
+    }
+  }
+
   addBean<T>(classRef: Constructable<T>) {
     const beanOptions = appResource.getBean(classRef);
     if (beanOptions) {

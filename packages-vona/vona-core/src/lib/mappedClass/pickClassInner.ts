@@ -1,5 +1,4 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
-import { appHmrDeps } from '../core/hmrDeps.ts';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
 export type TypePickClass<T, KEYS extends Array<keyof T> | undefined = undefined> =
@@ -10,7 +9,6 @@ export function PickClassInner<T, KEYS extends Array<keyof T> | undefined = unde
   classRef: Constructable<T>,
   keys?: KEYS,
 ): TypePickClass<T, KEYS> {
-  appHmrDeps.addBean(classRef);
   copyMetadataOfClasses(classTarget.prototype, [classRef.prototype], (rules, key) => {
     if (!keys || keys.includes(key)) {
       return rules[key];

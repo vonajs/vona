@@ -1,4 +1,5 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
+import { appHmrDeps } from '../core/hmrDeps.ts';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
 export type TypePartialClass<T, KEYS extends Array<keyof T> | undefined = undefined> =
@@ -15,6 +16,7 @@ export function PartialClass<T, KEYS extends Array<keyof T> | undefined = undefi
   classRef: Constructable<T>,
   keys?: KEYS,
 ): TypePartialClass<T, KEYS> {
+  appHmrDeps.addBean(classRef);
   abstract class TargetClass {}
   copyMetadataOfClasses(TargetClass.prototype, [classRef.prototype], (rules, key, metadataKeyOptions) => {
     const schema = rules[key];
