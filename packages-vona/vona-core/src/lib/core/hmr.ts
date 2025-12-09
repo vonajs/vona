@@ -72,7 +72,7 @@ export class AppHmr extends BeanSimple {
     this.app.meta.localeModules[moduleName][locale] = Object.assign(
       {},
       moduleLocales,
-      this.app.meta.localeModulesAppCache[moduleName][locale],
+      this.app.meta.localeModulesAppCache[moduleName]?.[locale],
     );
   }
 
