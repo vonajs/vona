@@ -11,12 +11,14 @@ type TypePathWatchStrict = [string, RegExp];
 const __pathesWatch = [
   '**/src/config/errors.ts',
   '**/src/config/locale/*.ts',
+  '**/src/config/config.ts',
   '**/src/service/*.ts',
 ];
 
 const __pathesWatchStrict: TypePathWatchStrict[] = [
   ['_error', /\/src\/config\/errors.ts/],
   ['_locale', /\/src\/config\/locale\/[^/]+.ts/],
+  ['_config', /\/src\/config\/config.ts/],
   ['service', /\/src\/service\/[^/]+.ts/],
 ];
 

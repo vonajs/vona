@@ -56,6 +56,8 @@ export class AppHmr extends BeanSimple {
       await this._reloadError(moduleName!, fileModule.errors);
     } else if (sceneName === '_locale') {
       await this._reloadLocale(moduleName!, fileModule.default, file);
+    } else if (sceneName === '_config') {
+
     } else {
       await this._reloadBeanWrapper(fileModule);
     }
@@ -72,7 +74,7 @@ export class AppHmr extends BeanSimple {
     this.app.meta.localeModules[moduleName][locale] = Object.assign(
       {},
       moduleLocales,
-      this.app.meta.localeModulesAppCache[moduleName]?.[locale],
+      this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale],
     );
   }
 

@@ -41,7 +41,8 @@ export class AppMeta extends BeanSimple {
   constants: Record<string, any>;
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
-  localeModulesAppCache: TypeModuleResourceLocaleModules;
+  //
+  hmrCacheLocaleModules: TypeModuleResourceLocaleModules;
   //
   appReady: boolean;
   appReadyInstances: Record<string, boolean>;

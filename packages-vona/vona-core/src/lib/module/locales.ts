@@ -19,7 +19,7 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
       _initLocales(locale, locales[locale]);
     }
     // app cache
-    app.meta.localeModulesAppCache = deepExtend({}, app.meta.localeModules);
+    app.meta.hmrCacheLocaleModules = deepExtend({}, app.meta.localeModules);
     // module locales
     for (const moduleName in modules) {
       const module = modules[moduleName];
