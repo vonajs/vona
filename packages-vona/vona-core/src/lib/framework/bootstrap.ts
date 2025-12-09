@@ -8,7 +8,7 @@ import { handleProcessWork } from './process.ts';
 export async function bootstrap(bootstrapOptions: BootstrapOptions): Promise<VonaApplication | undefined> {
   const env = prepareEnv(bootstrapOptions.env);
   const workers = Number.parseInt(env.SERVER_WORKERS!);
-  if (workers === 1) {
+  if (workers === 1 && process.env.META_MODE !== 'dev') {
     handleProcessWork();
     return await createApp(bootstrapOptions);
   }
