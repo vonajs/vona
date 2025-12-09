@@ -41,6 +41,7 @@ export class CliBinDev extends BeanCliBase {
   }
 
   async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
+    let closed = false;
     return new Promise((resolve, _reject) => {
       (nodemon as any)({
         script: '.vona/bootstrap.ts',
@@ -64,8 +65,13 @@ export class CliBinDev extends BeanCliBase {
         ],
       });
       nodemon.on('quit', () => {
+        closed = true;
         resolve(undefined);
       }).on('restart', files => {
+        if (closed) {
+          // force exit
+          process.exit(0);
+        }
         // eslint-disable-next-line
         console.log('App restarted due to: ', files);
       });
