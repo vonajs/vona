@@ -1,7 +1,7 @@
 import type { IDecoratorBeanOptionsBase, TypeModuleResourceConfig } from 'vona';
 import path from 'node:path';
 import { parseInfoFromPath } from '@cabloy/module-info';
-import { appHmrDeps, appResource, BeanBase, cast, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
+import { appHmrDeps, appResource, BeanBase, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -65,7 +65,7 @@ export class ServiceHmr extends BeanBase {
       if (!beanOptions) continue;
       const beanFullName = beanOptions.beanFullName;
       if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
-        cast(this.app.bean).worker.reloadAll();
+        this.app.bean.worker.reloadAll();
       } else {
         await this._reloadBean(beanOptions.beanFullName);
       }
