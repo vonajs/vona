@@ -1,6 +1,7 @@
 import type { IModule } from '@cabloy/module-info';
 import type { TypeModuleResourceLocales } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
+import { deepExtend } from 'vona';
 import localesDefault from '../core/locales.ts';
 
 export default async function (app: VonaApplication, modules: Record<string, IModule>) {
@@ -17,6 +18,8 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
     for (const locale in locales) {
       _initLocales(locale, locales[locale]);
     }
+    // app cache
+    app.meta.localeModulesAppCache = deepExtend({}, app.meta.localeModules);
     // module locales
     for (const moduleName in modules) {
       const module = modules[moduleName];

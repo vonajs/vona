@@ -62,6 +62,7 @@ export class CliBinDev extends BeanCliBase {
           'src/backend/play/**',
           'src/backend/typing/**',
           '**/src/config/errors.ts',
+          '**/src/config/locale/*.ts',
           '**/src/service/*.ts',
         ],
       });

@@ -54,6 +54,8 @@ export class AppHmr extends BeanSimple {
     const fileModule = await import(fileUrl);
     if (sceneName === '_error') {
       await this._reloadError(moduleName!, fileModule.errors);
+    } else if (sceneName === '_locale') {
+      await this._reloadLocale(moduleName!, fileModule.default, file);
     } else {
       await this._reloadBeanWrapper(fileModule);
     }
@@ -61,6 +63,17 @@ export class AppHmr extends BeanSimple {
 
   private async _reloadError(moduleName: string, errors: {}) {
     deepExtend(this.app.meta.error.ebErrors[moduleName], errors);
+  }
+
+  private async _reloadLocale(moduleName: string, moduleLocales: {}, file: string) {
+    const locale = path.basename(file, '.ts');
+    // localeModules
+    if (!this.app.meta.localeModules[moduleName]) this.app.meta.localeModules[moduleName] = {};
+    this.app.meta.localeModules[moduleName][locale] = Object.assign(
+      {},
+      moduleLocales,
+      this.app.meta.localeModulesAppCache[moduleName][locale],
+    );
   }
 
   private async _reloadBeanWrapper(fileModule: any) {
