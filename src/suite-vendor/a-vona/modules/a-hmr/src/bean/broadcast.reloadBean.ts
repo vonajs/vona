@@ -1,7 +1,7 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
-export interface TypeBroadcastReloadBeanJobData { file: string }
+export interface TypeBroadcastReloadBeanJobData { sceneName: string; file: string }
 
 @Broadcast()
 export class BroadcastReloadBean

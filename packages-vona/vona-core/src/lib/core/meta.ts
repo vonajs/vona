@@ -4,7 +4,7 @@ import type { IAppMonkey } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
-
+import chalk from 'chalk';
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
@@ -144,8 +144,10 @@ export class AppMeta extends BeanSimple {
     await this.app.bean.dispose();
     // logger dispose
     await this.app.meta.logger.dispose();
+    // log
+    const message = `App shutdown gracefully: ${process.pid}`;
     // eslint-disable-next-line
-    console.log(`App shutdown gracefully: ${process.pid}`);
+    console.log(chalk.cyan(message));
     // need not call process.exit
   }
 }

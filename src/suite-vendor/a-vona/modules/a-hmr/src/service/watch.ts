@@ -1,4 +1,5 @@
 import type { TypeBroadcastReloadBeanJobData } from '../bean/broadcast.reloadBean.ts';
+import chalk from 'chalk';
 import chokidar, { FSWatcher } from 'chokidar';
 import debounce from 'debounce';
 import { globby } from 'globby';
@@ -8,10 +9,12 @@ import { Service } from 'vona-module-a-bean';
 type TypePathWatchStrict = [string, RegExp];
 
 const __pathesWatch = [
+  '**/src/config/errors.ts',
   '**/src/service/*.ts',
 ];
 
 const __pathesWatchStrict: TypePathWatchStrict[] = [
+  ['_error', /\/src\/config\/errors.ts/],
   ['service', /\/src\/service\/[^/]+.ts/],
 ];
 
@@ -46,19 +49,21 @@ export class ServiceWatch extends BeanBase {
     const item = __pathesWatchStrict.find(item => item[1].test(file));
     if (!item) return;
     const timeBegin = new Date();
-    await this._reloadBean(file);
+    await this._reloadFile(item[0], file);
     const timeEnd = new Date();
+    // log
+    const message = `[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`;
     // eslint-disable-next-line
-    console.log(`[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`);
+    console.log(chalk.cyan(message));
   }
 
-  private async _reloadBean(file: string) {
-    await this.app.meta.hmr?.reloadFile(file);
-    this.scope.broadcast.reloadBean.emit({ file });
+  private async _reloadFile(sceneName: string, file: string) {
+    await this.app.meta.hmr?.reloadFile(sceneName, file);
+    this.scope.broadcast.reloadBean.emit({ sceneName, file });
   }
 
-  public async _reloadBeanWorker(item: TypeBroadcastReloadBeanJobData) {
-    await this.app.meta.hmr?.reloadFile(item.file);
+  public async _reloadBeanWorker(data: TypeBroadcastReloadBeanJobData) {
+    await this.app.meta.hmr?.reloadFile(data.sceneName, data.file);
   }
 
   private async _collectWatchDirs() {

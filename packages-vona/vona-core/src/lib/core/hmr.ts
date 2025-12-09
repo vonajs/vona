@@ -1,8 +1,10 @@
 import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.ts';
+import path from 'node:path';
+import { parseInfoFromPath } from '@cabloy/module-info';
 import { cast } from '../../types/utils/cast.ts';
 import { SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy } from '../bean/beanContainer.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
-import { pathToHref } from '../utils/util.ts';
+import { deepExtend, pathToHref } from '../utils/util.ts';
 import { appHmrDeps } from './hmrDeps.ts';
 import { appResource } from './resource.ts';
 
@@ -45,9 +47,23 @@ export class AppHmr extends BeanSimple {
     });
   }
 
-  async reloadFile(file: string, isUrl?: boolean) {
-    const fileUrl = `${isUrl ? file : pathToHref(file)}?${Date.now()}`;
+  async reloadFile(sceneName: string, file: string) {
+    const moduleInfo = parseInfoFromPath(path.dirname(file));
+    const moduleName = moduleInfo?.relativeName;
+    const fileUrl = `${pathToHref(file)}?${Date.now()}`;
     const fileModule = await import(fileUrl);
+    if (sceneName === '_error') {
+      await this._reloadError(moduleName!, fileModule.errors);
+    } else {
+      await this._reloadBeanWrapper(fileModule);
+    }
+  }
+
+  private async _reloadError(moduleName: string, errors: {}) {
+    deepExtend(this.app.meta.error.ebErrors[moduleName], errors);
+  }
+
+  private async _reloadBeanWrapper(fileModule: any) {
     for (const key in fileModule) {
       const item = fileModule[key];
       if (typeof item !== 'function') continue;
@@ -57,12 +73,12 @@ export class AppHmr extends BeanSimple {
       if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
         cast(this.app.bean).worker.reloadAll();
       } else {
-        await this.reloadBean(beanOptions.beanFullName);
+        await this._reloadBean(beanOptions.beanFullName);
       }
     }
   }
 
-  async reloadBean(beanFullName: string) {
+  private async _reloadBean(beanFullName: string) {
     const beanOptions = appResource.getBean(beanFullName)!;
     await this._reloadBeanInstances(beanOptions);
     this._reloadBeanInstanceProps(beanOptions);
