@@ -7,7 +7,9 @@ export class ServiceElection extends BeanBase {
   private _electionElectInfos: Record<string, IElectionElectInfo | undefined> = {};
 
   public async dispose() {
-    for (const resource in this._electionElectInfos) {
+    const electionElectInfos = this._electionElectInfos;
+    this._electionElectInfos = {};
+    for (const resource in electionElectInfos) {
       await this.release(resource);
     }
   }
