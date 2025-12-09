@@ -64,12 +64,12 @@ export class ServiceWatch extends BeanBase {
   }
 
   private async _reloadFile(sceneName: string, file: string) {
-    await this.app.meta.hmr?.reloadFile(sceneName, file);
+    await this.scope.service.hmr.reloadFile(sceneName, file);
     this.scope.broadcast.reloadBean.emit({ sceneName, file });
   }
 
   public async _reloadBeanWorker(data: TypeBroadcastReloadBeanJobData) {
-    await this.app.meta.hmr?.reloadFile(data.sceneName, data.file);
+    await this.scope.service.hmr.reloadFile(data.sceneName, data.file);
   }
 
   private async _collectWatchDirs() {

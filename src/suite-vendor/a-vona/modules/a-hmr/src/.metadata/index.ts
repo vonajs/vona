@@ -1,18 +1,31 @@
 /* eslint-disable */
 /** service: begin */
+export * from '../service/hmr.ts';
 export * from '../service/watch.ts';
 
 import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-hmr:watch': never;
+      'a-hmr:hmr': never;
+'a-hmr:watch': never;
     }
 
   
 }
 declare module 'vona-module-a-hmr' {
   
+        export interface ServiceHmr {
+          /** @internal */
+          get scope(): ScopeModuleAHmr;
+        }
+
+          export interface ServiceHmr {
+            get $beanFullName(): 'a-hmr.service.hmr';
+            get $onionName(): 'a-hmr:hmr';
+            
+          }
+
         export interface ServiceWatch {
           /** @internal */
           get scope(): ScopeModuleAHmr;
@@ -26,9 +39,11 @@ declare module 'vona-module-a-hmr' {
 }
 /** service: end */
 /** service: begin */
+import type { ServiceHmr } from '../service/hmr.ts';
 import type { ServiceWatch } from '../service/watch.ts';
 export interface IModuleService {
-  'watch': ServiceWatch;
+  'hmr': ServiceHmr;
+'watch': ServiceWatch;
 }
 /** service: end */
 /** service: begin */
@@ -36,7 +51,8 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-hmr.service.watch': ServiceWatch;
+    'a-hmr.service.hmr': ServiceHmr;
+'a-hmr.service.watch': ServiceWatch;
   }
 }
 /** service: end */
