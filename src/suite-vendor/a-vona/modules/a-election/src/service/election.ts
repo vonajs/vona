@@ -68,7 +68,7 @@ export class ServiceElection extends BeanBase {
           !this.app.meta.appClose && fnObtain();
         }
       }
-    }, this.$scope.worker.config.worker.alive.timeout);
+    }, this.scope.config.obtain.timeout);
   }
 
   async release(resource: string) {

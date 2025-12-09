@@ -10,7 +10,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppClose
   async moduleLoaded(module: IModule) {
     if (module.info.relativeName !== __ThisModule__) return;
     const scope = this.app.scope(__ThisModule__);
-    const aliveTimeout = scope.config.worker.alive.timeout;
+    const aliveTimeout = scope.config.alive.timeout;
     // interval
     this._intervalAlive = setInterval(async () => {
       await this.app.bean.worker.setAlive();
