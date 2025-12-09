@@ -1,5 +1,6 @@
 import type { IBeanSceneRecord } from '../interface/beanOptions.ts';
 import type { Constructable } from '../type/constructable.ts';
+import { appHmrDeps } from 'vona';
 import { appResource } from '../../core/resource.ts';
 import { parseModuleName } from './util.ts';
 
@@ -16,7 +17,7 @@ export function createBeanDecorator<T>(
     // name
     const name = scene === 'scope' ? 'module' : undefined;
     // add
-    appResource.addBean({
+    const beanOptions = appResource.addBean({
       module,
       scene,
       name,
@@ -26,5 +27,6 @@ export function createBeanDecorator<T>(
     });
     // fn
     fn?.(beanClass);
+    appHmrDeps.end(beanOptions.beanFullName);
   };
 }

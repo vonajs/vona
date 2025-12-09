@@ -1,7 +1,10 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
-import { PickClassInner } from './pickClassInner.ts';
+import { appHmrDeps, appResource } from 'vona';
 
 export function ExtendClass<T>(classRef: Constructable<T>): Constructable<T> {
-  abstract class TargetClass {}
-  return PickClassInner(TargetClass as any, classRef);
+  const beanOptions = appResource.getBean(classRef);
+  if (beanOptions) {
+    appHmrDeps.add(beanOptions.beanFullName);
+  }
+  return classRef;
 }
