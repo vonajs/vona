@@ -5,8 +5,8 @@ import { __ThisModule__ } from './.metadata/this.ts';
 export class Monkey extends BeanSimple implements IMonkeyAppStarted {
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
-    scope.election.obtain('hmr', () => {
-      scope.service.watch.start();
+    scope.election.obtain('hmr', async () => {
+      await scope.service.watch.start();
     }, async () => {
       await scope.service.watch.stop();
     });
