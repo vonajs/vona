@@ -18,6 +18,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   moduleBelong?: string;
   options?: OPTIONS;
   optionsPrimitive?: boolean;
+  file?: string;
 }
 
 export interface IDecoratorBeanInfoOptions {

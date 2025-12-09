@@ -1,7 +1,10 @@
-import type { IDecoratorBeanOptionsBase } from 'vona';
-import { appResource, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy } from 'vona';
+import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.ts';
+import { cast } from '../../types/utils/cast.ts';
+import { SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy } from '../bean/beanContainer.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { pathToHref } from '../utils/util.ts';
+import { appHmrDeps } from './hmrDeps.ts';
+import { appResource } from './resource.ts';
 
 interface IRecordBeanInstance {
   beanInstanceKey: string;
@@ -42,17 +45,27 @@ export class AppHmr extends BeanSimple {
     });
   }
 
-  async reloadBean(file: string) {
-    const fileUrl = `${pathToHref(file)}?${Date.now()}`;
+  async reloadFile(file: string, isUrl?: boolean) {
+    const fileUrl = `${isUrl ? file : pathToHref(file)}?${Date.now()}`;
     const fileModule = await import(fileUrl);
     for (const key in fileModule) {
       const item = fileModule[key];
       if (typeof item !== 'function') continue;
       const beanOptions = appResource.getBean(item);
       if (!beanOptions) continue;
-      await this._reloadBeanInstances(beanOptions);
-      this._reloadBeanInstanceProps(beanOptions);
+      const beanFullName = beanOptions.beanFullName;
+      if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
+        cast(this.app.bean).worker.reloadAll();
+      } else {
+        await this.reloadBean(beanOptions.beanFullName);
+      }
     }
+  }
+
+  async reloadBean(beanFullName: string) {
+    const beanOptions = appResource.getBean(beanFullName)!;
+    await this._reloadBeanInstances(beanOptions);
+    this._reloadBeanInstanceProps(beanOptions);
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {

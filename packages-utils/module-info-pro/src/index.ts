@@ -10,9 +10,13 @@ export function parseModuleName(level: number = ParseModuleNameLevelInit): strin
 }
 
 export function parseModuleInfo(level: number = ParseModuleNameLevelInit): IModuleInfo | undefined {
+  const fileName = parseModuleFile(level + 1);
+  return parseInfoFromPath(fileName);
+}
+
+export function parseModuleFile(level: number = ParseModuleNameLevelInit): string {
   const stackUtils = new StackUtils();
   const traces = stackUtils.capture(level);
   const trace = traces[level - 1];
-  const fileName = trace.getFileName();
-  return parseInfoFromPath(fileName);
+  return trace.getFileName();
 }

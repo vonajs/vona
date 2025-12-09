@@ -1,8 +1,8 @@
 import type { IBeanSceneRecord } from '../interface/beanOptions.ts';
 import type { Constructable } from '../type/constructable.ts';
-import { appHmrDeps } from 'vona';
+import { appHmrDeps } from '../../core/hmrDeps.ts';
 import { appResource } from '../../core/resource.ts';
-import { parseModuleName } from './util.ts';
+import { parseModuleFile, parseModuleName } from './util.ts';
 
 export function createBeanDecorator<T>(
   scene: keyof IBeanSceneRecord,
@@ -14,6 +14,7 @@ export function createBeanDecorator<T>(
     const beanClass = target as unknown as Constructable;
     // module
     const module = parseModuleName(beanClass);
+    const file = process.env.META_MODE !== 'prod' ? parseModuleFile() : undefined;
     // name
     const name = scene === 'scope' ? 'module' : undefined;
     // add
@@ -24,6 +25,7 @@ export function createBeanDecorator<T>(
       beanClass,
       options,
       optionsPrimitive,
+      file,
     });
     // fn
     fn?.(beanClass);
