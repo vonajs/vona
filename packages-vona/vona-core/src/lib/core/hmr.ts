@@ -59,6 +59,8 @@ export class AppHmr extends BeanSimple {
       await this._reloadLocale(moduleName!, fileModule.default, file);
     } else if (sceneName === '_config') {
       await this._reloadConfig(moduleName!, fileModule.config);
+    } else if (sceneName === '_constant') {
+      await this._reloadConstant(moduleName!, fileModule.constants);
     } else {
       await this._reloadBeanWrapper(fileModule);
     }
@@ -92,6 +94,10 @@ export class AppHmr extends BeanSimple {
     // instance config
     const serviceInstance = cast(app.bean._getBean('a-instance.service.instance' as never));
     await serviceInstance.resetAllCaches();
+  }
+
+  private async _reloadConstant(moduleName: string, constants: {}) {
+    deepExtend(this.app.meta.constants[moduleName], constants);
   }
 
   private async _reloadBeanWrapper(fileModule: any) {
