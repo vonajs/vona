@@ -1,8 +1,8 @@
 import type { IModule } from '@cabloy/module-info';
 import type { TypeModuleResourceLocales } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
-import { deepExtend } from 'vona';
 import localesDefault from '../core/locales.ts';
+import { deepExtend } from '../utils/util.ts';
 
 export default async function (app: VonaApplication, modules: Record<string, IModule>) {
   // all locales
