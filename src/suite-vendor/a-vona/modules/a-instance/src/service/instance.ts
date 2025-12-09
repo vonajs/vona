@@ -69,6 +69,15 @@ export class ServiceInstance extends BeanBase {
     return true;
   }
 
+  async resetAllCaches() {
+    const instanceNames = Object.keys(this.__cacheIntancesConfig);
+    for (const instanceName of instanceNames) {
+      await this.app.bean.executor.newCtxIsolate(async () => {
+        await this.resetCache(instanceName as any);
+      }, { dbInfo: {}, instanceName: instanceName as any });
+    }
+  }
+
   async resetCache(instanceName: keyof IInstanceRecord) {
     await this._cacheInstanceConfig(instanceName, true);
   }

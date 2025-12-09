@@ -1,7 +1,7 @@
 import type { IModule } from '@cabloy/module-info';
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, VonaConfigEnv } from '../../types/index.ts';
 import type { IAppMonkey } from '../../types/interface/monkey.ts';
-import type { ErrorClass, IModuleLocaleText } from '../bean/index.ts';
+import type { ErrorClass, IBeanScopeConfig, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
 import chalk from 'chalk';
@@ -43,6 +43,7 @@ export class AppMeta extends BeanSimple {
   localeModules: TypeModuleResourceLocaleModules;
   //
   hmrCacheLocaleModules: TypeModuleResourceLocaleModules;
+  hmrCacheConfigModules: IBeanScopeConfig;
   //
   appReady: boolean;
   appReadyInstances: Record<string, boolean>;

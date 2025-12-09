@@ -1,3 +1,4 @@
+import type { TypeModuleResourceConfig } from '../../types/interface/module.ts';
 import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.ts';
 import path from 'node:path';
 import { parseInfoFromPath } from '@cabloy/module-info';
@@ -57,7 +58,7 @@ export class AppHmr extends BeanSimple {
     } else if (sceneName === '_locale') {
       await this._reloadLocale(moduleName!, fileModule.default, file);
     } else if (sceneName === '_config') {
-
+      await this._reloadConfig(moduleName!, fileModule.config);
     } else {
       await this._reloadBeanWrapper(fileModule);
     }
@@ -76,6 +77,21 @@ export class AppHmr extends BeanSimple {
       moduleLocales,
       this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale],
     );
+  }
+
+  private async _reloadConfig(moduleName: string, config: TypeModuleResourceConfig) {
+    const app = this.app;
+    const configModule = await config(app, app.options.env);
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', app.meta.modules[moduleName], configModule);
+    // app config
+    app.config.modules[moduleName] = deepExtend(
+      {},
+      configModule,
+      app.meta.hmrCacheConfigModules[moduleName],
+    );
+    // instance config
+    const serviceInstance = cast(app.bean._getBean('a-instance.service.instance' as never));
+    await serviceInstance.resetAllCaches();
   }
 
   private async _reloadBeanWrapper(fileModule: any) {
