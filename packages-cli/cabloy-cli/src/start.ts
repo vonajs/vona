@@ -60,8 +60,8 @@ export class CabloyCommand extends CommonBin {
     }
     const command = new CliCommand(rawArgv, { meta, argv });
     await command[DISPATCH]();
-    // force exit
-    process.exit(0);
+    // should not force exit, let app shutdown gracefully
+    // process.exit(0);
   }
 
   _prepareCliFullName(cliName) {

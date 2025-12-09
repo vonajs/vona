@@ -144,6 +144,8 @@ export class AppMeta extends BeanSimple {
     await this.app.bean.dispose();
     // logger dispose
     await this.app.meta.logger.dispose();
+    // eslint-disable-next-line
+    console.log(`App shutdown gracefully: ${process.pid}`);
     // need not call process.exit
   }
 }
