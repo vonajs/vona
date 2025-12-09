@@ -18,8 +18,8 @@ export const SymbolHmrStateSave = Symbol('SymbolHmrStateSave');
 export const SymbolHmrStateLoad = Symbol('SymbolHmrStateLoad');
 
 export class AppHmr extends BeanSimple {
-  private recordBeanInstances: Record<string, IRecordBeanInstance[]> = {};
-  private recordBeanInstanceProps: Record<string, IRecordBeanInstanceProp[]> = {};
+  private recordBeanInstances: Record<string, IRecordBeanInstance[] | undefined> = {};
+  private recordBeanInstanceProps: Record<string, IRecordBeanInstanceProp[] | undefined> = {};
 
   addBeanInstance(beanFullName: string, beanInstanceKey: string, args: any[], withSelector?: boolean) {
     if (!this.recordBeanInstances[beanFullName]) {
@@ -60,9 +60,8 @@ export class AppHmr extends BeanSimple {
     const beanContainer = this.app.bean;
     const recordBeanInstances = this.recordBeanInstances[beanFullName];
     if (!recordBeanInstances) return;
-    const recordBeanInstancesClone = recordBeanInstances.concat([]);
     this.recordBeanInstances[beanFullName] = [];
-    for (const { beanInstanceKey, withSelector, args } of recordBeanInstancesClone) {
+    for (const { beanInstanceKey, withSelector, args } of recordBeanInstances) {
       // dispose
       const beanInstanceOld: any = beanContainer[SymbolBeanContainerInstances][beanInstanceKey];
       const state = beanInstanceOld[SymbolHmrStateSave]?.();
@@ -87,9 +86,8 @@ export class AppHmr extends BeanSimple {
     const { beanFullName } = beanOptions;
     const recordBeanInstanceProps = this.recordBeanInstanceProps[beanFullName];
     if (!recordBeanInstanceProps) return;
-    const recordBeanInstancePropsClone = recordBeanInstanceProps.concat([]);
     this.recordBeanInstanceProps[beanFullName] = [];
-    for (const { beanInstance, prop } of recordBeanInstancePropsClone) {
+    for (const { beanInstance, prop } of recordBeanInstanceProps) {
       delete beanInstance[SymbolBeanInstancePropsLazy][prop];
     }
   }
