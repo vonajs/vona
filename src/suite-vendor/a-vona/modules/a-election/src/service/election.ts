@@ -89,8 +89,7 @@ export class ServiceElection extends BeanBase {
     if (tickets === -1 || tickets === Infinity) return;
     // need not redlock
     const lockResource = `election.${resource}`;
-    const res = await this.clientRedis.hdel(lockResource, this.bean.worker.id);
-    console.log(res);
+    await this.clientRedis.hdel(lockResource, this.bean.worker.id);
   }
 
   private async _watchDogCheck() {
