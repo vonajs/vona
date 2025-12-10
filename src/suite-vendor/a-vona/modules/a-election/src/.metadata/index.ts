@@ -72,38 +72,6 @@ export interface IModuleBroadcast {
   'release': BroadcastRelease;
 }
 /** broadcast: end */
-/** cacheRedis: begin */
-export * from '../bean/cacheRedis.election.ts';
-
-import { type IDecoratorCacheRedisOptions } from 'vona-module-a-cache';
-declare module 'vona-module-a-cache' {
-  
-    export interface ICacheRedisRecord {
-      'a-election:election': IDecoratorCacheRedisOptions;
-    }
-
-  
-}
-declare module 'vona-module-a-election' {
-  
-        export interface CacheRedisElection {
-          /** @internal */
-          get scope(): ScopeModuleAElection;
-        }
-
-          export interface CacheRedisElection {
-            get $beanFullName(): 'a-election.cacheRedis.election';
-            get $onionName(): 'a-election:election';
-            get $onionOptions(): IDecoratorCacheRedisOptions;
-          } 
-}
-/** cacheRedis: end */
-/** cacheRedis: begin */
-import type { CacheRedisElection } from '../bean/cacheRedis.election.ts';
-export interface IModuleCacheRedis {
-  'election': CacheRedisElection;
-}
-/** cacheRedis: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -126,7 +94,6 @@ export interface ScopeModuleAElection {
 config: TypeModuleConfig<typeof config>;
 service: IModuleService;
 broadcast: IModuleBroadcast;
-cacheRedis: IModuleCacheRedis;
 }
 
 import 'vona';
