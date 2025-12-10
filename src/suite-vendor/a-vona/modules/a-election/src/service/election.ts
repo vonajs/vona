@@ -15,7 +15,7 @@ export class ServiceElection extends BeanBase {
   }
 
   public obtain(resource: string, fnObtain: TypeFunctionObtain, fnRelease: TypeFunctionRelease, options?: IElectionElectOptions) {
-    const electionElectInfo: IElectionElectInfo = { intervalId: undefined, isLeader: false, fnRelease, options };
+    const electionElectInfo: IElectionElectInfo = { intervalId: undefined, isLeader: false, fnObtain, fnRelease, options };
     this._electionElectInfos[resource] = electionElectInfo;
     //
     const tickets = options?.tickets ?? 1;
@@ -65,7 +65,12 @@ export class ServiceElection extends BeanBase {
           clearInterval(electionElectInfo.intervalId);
           electionElectInfo.intervalId = undefined;
           //
-          !this.app.meta.appClose && fnObtain();
+          if (!this.app.meta.appClose) {
+            fnObtain();
+            setTimeout(async () => {
+              await this._check(resource);
+            }, this.scope.config.obtain.timeout);
+          }
         }
       }
     }, this.scope.config.obtain.timeout);
@@ -101,5 +106,27 @@ export class ServiceElection extends BeanBase {
       },
       options,
     );
+  }
+
+  private async _check(resource: string) {
+    const electionElectInfo = this._electionElectInfos[resource];
+    if (!electionElectInfo) return;
+    const { fnObtain, fnRelease, options } = electionElectInfo;
+    const tickets = options?.tickets ?? 1;
+    //
+    const lockResource = `election.${resource}`;
+    const needRelease = await this.$scope.redlock.service.redlock.lock(
+      lockResource,
+      async () => {
+        const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
+        const index = leaders.indexOf(this.bean.worker.id);
+        return index > -1 && leaders.length > tickets;
+      },
+      options,
+    );
+    if (needRelease) {
+      await this.release(resource);
+      this.obtain(resource, fnObtain, fnRelease, options);
+    }
   }
 }

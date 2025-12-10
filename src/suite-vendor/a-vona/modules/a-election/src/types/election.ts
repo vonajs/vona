@@ -10,6 +10,7 @@ export type TypeFunctionRelease = () => Promise<void>;
 export interface IElectionElectInfo {
   intervalId: any;
   isLeader: boolean;
-  fnRelease?: TypeFunctionRelease;
+  fnObtain: TypeFunctionObtain;
+  fnRelease: TypeFunctionRelease;
   options?: IElectionElectOptions;
 }
