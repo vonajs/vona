@@ -16,6 +16,7 @@ for k, v in pairs(workers) do
   local workerIdCheck=KEYS[2] .. v
   local alive=redis.call('GET',workerIdCheck)
   if alive ~= 'true' then
+    redis.call('HDEL',KEYS[1],v)
     workersDead[#workersDead + 1]=v  
   end
 end

@@ -39,8 +39,26 @@ export class ServiceElection extends BeanBase {
       }
       return;
     }
+    const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
     electionElectInfo.intervalId = setInterval(async () => {
       const lockResource = `election.${resource}`;
+      const res = await cast(this.clientRedis).electionObtain(lockResource, workerAlivePrefix, this.bean.worker.id, tickets);
+      if (res) {
+        const [leader, workersDead] = res;
+        electionElectInfo.isLeader = leader === 1;
+        if (!this.app.meta.appClose && electionElectInfo.isLeader) {
+          fnObtain();
+        }
+        for (const workerDead of workersDead) {
+          // force release
+          this.scope.broadcast.release.emit({ workerId: workerDead, resource });
+        }
+      }
+      if (electionElectInfo.isLeader && electionElectInfo.intervalId) {
+        clearInterval(electionElectInfo.intervalId);
+        electionElectInfo.intervalId = undefined;
+      }
+
       const keyResource = `${resource}:${this.bean.worker.id}`;
       // const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
       await this.$scope.redlock.service.redlock.lock(
