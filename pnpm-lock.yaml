@@ -203,9 +203,6 @@ importers:
       vona-module-a-ormdialect:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-ormdialect
-      vona-module-a-play:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-play
       vona-module-a-printtip:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-printtip
@@ -372,6 +369,9 @@ importers:
       vona-module-a-hmr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-hmr
+      vona-module-a-play:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-play
       vona-module-test-cabloy:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/test-cabloy
