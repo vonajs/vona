@@ -39,59 +39,36 @@ export class ServiceElection extends BeanBase {
       }
       return;
     }
-    const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
     electionElectInfo.intervalId = setInterval(async () => {
-      const lockResource = `election.${resource}`;
-      const res = await cast(this.clientRedis).electionObtain(lockResource, workerAlivePrefix, this.bean.worker.id, tickets);
-      if (res) {
-        const [leader, workersDead] = res;
-        electionElectInfo.isLeader = leader === 1;
-        if (!this.app.meta.appClose && electionElectInfo.isLeader) {
-          fnObtain();
-        }
-        for (const workerDead of workersDead) {
-          // force release
-          this.scope.broadcast.release.emit({ workerId: workerDead, resource });
-        }
-      }
-      if (electionElectInfo.isLeader && electionElectInfo.intervalId) {
-        clearInterval(electionElectInfo.intervalId);
-        electionElectInfo.intervalId = undefined;
-      }
-
-      const keyResource = `${resource}:${this.bean.worker.id}`;
-      // const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
-      await this.$scope.redlock.service.redlock.lock(
-        lockResource,
-        async () => {
-          // leaders
-          const leaderKeys = await this.scope.cacheRedis.election.lookupKeys(`${resource}:`, true);
-          if (leaderKeys.includes(keyResource)) return;
-          for (let index = leaderKeys.length - 1; index >= 0; index--) {
-            const checkKey = leaderKeys[index];
-            const checkWorkerId = checkKey.split(':')[1];
-            const alive = await this.bean.worker.getAlive(checkWorkerId);
-            if (!alive) {
-              leaderKeys.splice(index, 1);
-              await this.scope.cacheRedis.election.del(checkKey);
-              // force release
-              this.scope.broadcast.release.emit({ workerId: checkWorkerId, resource });
-            }
-          }
-          if (!this.app.meta.appClose && leaderKeys.length < tickets) {
-            electionElectInfo.isLeader = true;
-            await this.scope.cacheRedis.election.set(true, keyResource);
-            leaderKeys.push(this.bean.worker.id);
-            fnObtain();
-          }
-        },
-        options,
-      );
-      if (electionElectInfo.isLeader && electionElectInfo.intervalId) {
+      const res = await this._obtain(resource, electionElectInfo, tickets);
+      if ((!res || electionElectInfo.isLeader) && electionElectInfo.intervalId) {
         clearInterval(electionElectInfo.intervalId);
         electionElectInfo.intervalId = undefined;
       }
     }, this.scope.config.obtain.timeout);
+  }
+
+  async _obtain(resource: string, electionElectInfo: IElectionElectInfo, tickets: number) {
+    if (this.app.meta.appClose) return;
+    const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
+    const lockResource = `election.${resource}`;
+    const res = await cast(this.clientRedis).electionObtain(lockResource, workerAlivePrefix, this.bean.worker.id, tickets);
+    if (!res) return; // exists
+    const [leader, workersDead] = res;
+    electionElectInfo.isLeader = leader === 1;
+    if (electionElectInfo.isLeader) {
+      if (this.app.meta.appClose) {
+        // force release
+        await this.release(resource);
+      } else {
+        electionElectInfo.fnObtain();
+      }
+    }
+    for (const workerDead of workersDead) {
+      // force release
+      this.scope.broadcast.release.emit({ workerId: workerDead, resource });
+    }
+    return res;
   }
 
   async release(resource: string) {
@@ -111,8 +88,9 @@ export class ServiceElection extends BeanBase {
     const tickets = options?.tickets ?? 1;
     if (tickets === -1 || tickets === Infinity) return;
     // need not redlock
-    const keyResource = `${resource}:${this.bean.worker.id}`;
-    await this.scope.cacheRedis.election.del(keyResource);
+    const lockResource = `election.${resource}`;
+    const res = await this.clientRedis.hdel(lockResource, this.bean.worker.id);
+    console.log(res);
   }
 
   private async _watchDogCheck() {
@@ -127,7 +105,8 @@ export class ServiceElection extends BeanBase {
     const { fnObtain, fnRelease, options } = electionElectInfo;
     const tickets = options?.tickets ?? 1;
     //
-    const leaderKeys = await this.scope.cacheRedis.election.lookupKeys(`${resource}:`, true);
+    const lockResource = `election.${resource}`;
+    const leaderKeys = await this.clientRedis.hkeys(lockResource);
     // need not check if exists, so as has chance to remove not alive app
     const needRelease = leaderKeys.length > tickets;
     // const index = leaderKeys.indexOf(keyResource);
