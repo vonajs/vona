@@ -13,7 +13,12 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted {
       // eslint-disable-next-line
       console.log(chalk.cyan(message));
     }, async () => {
-      await scope.service.watch.stop();
+      if (await scope.service.watch.stop()) {
+        // log
+        const message = `[hmr] stop: ${process.pid}`;
+        // eslint-disable-next-line
+        console.log(chalk.cyan(message));
+      }
     });
   }
 }

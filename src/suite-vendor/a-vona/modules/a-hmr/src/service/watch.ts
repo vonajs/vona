@@ -52,7 +52,9 @@ export class ServiceWatch extends BeanBase {
     if (this._watcher) {
       await this._watcher.close();
       this._watcher = undefined;
+      return true;
     }
+    return false;
   }
 
   protected async _onChange(file: string) {
