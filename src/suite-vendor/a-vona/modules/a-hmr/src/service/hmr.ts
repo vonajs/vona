@@ -67,7 +67,7 @@ export class ServiceHmr extends BeanBase {
       if (!beanOptions) continue;
       const beanFullName = beanOptions.beanFullName;
       if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
-        this.app.bean.worker.reloadAll();
+        this.app.bean.worker.reload();
       } else {
         await this._reloadBean(beanOptions.beanFullName);
       }
