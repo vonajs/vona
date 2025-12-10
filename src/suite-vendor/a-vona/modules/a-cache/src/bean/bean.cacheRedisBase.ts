@@ -212,6 +212,17 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return keysResult;
   }
 
+  public getRedisKey(key?: KEY | '*', fullKey?: boolean): string | undefined {
+    const cache = this.__cacheInstance;
+    if (!cache) return;
+    let redisKey = this.__getRedisKey(key);
+    if (fullKey) {
+      const keyPrefix = cache.options.keyPrefix;
+      redisKey = `${keyPrefix}${redisKey}`;
+    }
+    return redisKey;
+  }
+
   private __getRedisKeyPrefix(): string {
     const iid = this.__getInstanceIdScope();
     return `${iid}!${this._cacheName}!`;

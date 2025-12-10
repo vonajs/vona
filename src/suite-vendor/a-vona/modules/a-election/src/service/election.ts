@@ -1,11 +1,15 @@
 import type { IElectionElectInfo, IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceElection extends BeanBase {
   private _electionElectInfos: Record<string, IElectionElectInfo | undefined> = {};
   private _watchDogInterval: any;
+
+  private get clientRedis() {
+    return this.bean.redis.get('worker');
+  }
 
   protected __init__() {
     this._watchDogInterval = setInterval(async () => {
@@ -38,6 +42,7 @@ export class ServiceElection extends BeanBase {
     electionElectInfo.intervalId = setInterval(async () => {
       const lockResource = `election.${resource}`;
       const keyResource = `${resource}:${this.bean.worker.id}`;
+      // const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
       await this.$scope.redlock.service.redlock.lock(
         lockResource,
         async () => {

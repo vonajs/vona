@@ -124,6 +124,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
       io: { keyPrefix: true },
       summer: { keyPrefix: true },
       model: { keyPrefix: true },
+      worker: { keyPrefix: true },
       redlock: {},
       queue: {},
       broadcast: {},

@@ -1,6 +1,7 @@
 import type { IDecoratorBeanOptionsBase, TypeModuleResourceConfig } from 'vona';
 import path from 'node:path';
-import { parseInfoFromPath } from '@cabloy/module-info';
+import { getOnionMetasMeta, getOnionScenesMeta, parseInfoFromPath } from '@cabloy/module-info';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { appHmrDeps, appResource, BeanBase, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -75,11 +76,13 @@ export class ServiceHmr extends BeanBase {
   private async _reloadBean(beanFullName: string) {
     const beanOptions = appResource.getBean(beanFullName)!;
     await this._reloadBeanInstances(beanOptions);
+    this._reloadBeanInstanceScope(beanOptions);
     this._reloadBeanInstanceProps(beanOptions);
+    this._reloadBeanInstanceCustom(beanOptions);
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
-    const { scene, beanFullName } = beanOptions;
+    const { beanFullName } = beanOptions;
     const beanContainer = this.app.bean;
     const recordBeanInstances = this.app.meta.hmr!.recordBeanInstances[beanFullName];
     if (!recordBeanInstances) return;
@@ -92,20 +95,22 @@ export class ServiceHmr extends BeanBase {
       // new
       const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
       beanInstanceNew[SymbolHmrStateLoad]?.(state);
-      // scope
-      // 需要参考beanScopeBase中的逻辑，依次完成清理工作
-      //  error/locale或许也可以实现hmr
-      const scope: any = beanContainer.scope(beanOptions.module as never);
-      if (scene === 'meta') {
-        const scopeMetas = scope?.__metas;
-        if (scopeMetas?.[beanOptions.name]) {
-          delete scopeMetas?.[beanOptions.name];
-        }
-      } else {
-        const scopeItems = scope?.__scenes[scene]?.__instances;
-        if (scopeItems?.[beanOptions.name]) {
-          delete scopeItems?.[beanOptions.name];
-        }
+    }
+  }
+
+  private _reloadBeanInstanceScope(beanOptions: IDecoratorBeanOptionsBase) {
+    const { module, scene, name } = beanOptions;
+    const beanContainer = this.app.bean;
+    const scope: any = beanContainer.scope(module as never);
+    if (scene === 'meta') {
+      const scopeMetas = scope?.__metas;
+      if (scopeMetas?.[name]) {
+        delete scopeMetas?.[name];
+      }
+    } else {
+      const scopeItems = scope?.__scenes[scene]?.__instances;
+      if (scopeItems?.[name]) {
+        delete scopeItems?.[name];
       }
     }
   }
@@ -117,6 +122,25 @@ export class ServiceHmr extends BeanBase {
     this.app.meta.hmr!.recordBeanInstanceProps[beanFullName] = [];
     for (const { beanInstance, prop } of recordBeanInstanceProps) {
       delete beanInstance[SymbolBeanInstancePropsLazy][prop];
+    }
+  }
+
+  private _reloadBeanInstanceCustom(beanOptions: IDecoratorBeanOptionsBase) {
+    const { scene, name } = beanOptions;
+    const beanContainer = this.app.bean;
+    const hmrBeanName = scene === 'meta' ? `meta${toUpperCaseFirstChar(name)}` : scene;
+    let hmrModuleName: string;
+    if (scene === 'meta') {
+      const onionMetasMeta = getOnionMetasMeta(this.app.meta.modules);
+      hmrModuleName = onionMetasMeta[name].module!.info.relativeName;
+    } else {
+      const onionScenesMeta = getOnionScenesMeta(this.app.meta.modules);
+      hmrModuleName = onionScenesMeta[scene].module!.info.relativeName;
+    }
+    const beanFullName = `${hmrModuleName}.hmr.${hmrBeanName}`;
+    const beanInstance = beanContainer._getBean(beanFullName as never);
+    if (beanInstance) {
+
     }
   }
 }

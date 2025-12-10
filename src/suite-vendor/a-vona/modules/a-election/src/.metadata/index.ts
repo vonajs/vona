@@ -111,6 +111,9 @@ import type { config } from '../config/config.ts';
 /** monkey: begin */
 export * from '../monkey.ts';
 /** monkey: end */
+/** main: begin */
+export * from '../main.ts';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
