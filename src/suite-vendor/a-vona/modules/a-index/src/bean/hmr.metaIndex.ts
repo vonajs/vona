@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 import { Hmr } from 'vona-module-a-hmr';
 
 @Hmr()
-export class HmrMetaPrintTip extends BeanBase implements IHmrReload {
+export class HmrMetaIndex extends BeanBase implements IHmrReload {
   async reload() {
     await this.bean.instance.reloadWorker('');
   }

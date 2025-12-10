@@ -25,6 +25,32 @@ declare module 'vona-module-a-index' {
           } 
 }
 /** meta: end */
+/** hmr: begin */
+export * from '../bean/hmr.metaIndex.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-index:metaIndex': never;
+    }
+
+  
+}
+declare module 'vona-module-a-index' {
+  
+        export interface HmrMetaIndex {
+          /** @internal */
+          get scope(): ScopeModuleAIndex;
+        }
+
+          export interface HmrMetaIndex {
+            get $beanFullName(): 'a-index.hmr.metaIndex';
+            get $onionName(): 'a-index:metaIndex';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

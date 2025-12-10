@@ -74,8 +74,17 @@ export class BeanInstance extends BeanBase {
     return await this.modelInstance.insert(instance);
   }
 
-  async reload() {
+  async reload(instanceName?: keyof IInstanceRecord) {
+    const instanceName2 = instanceName ?? this.ctx.instanceName;
+    if (isNil(instanceName2)) throw new Error('Should specify the instanceName');
+    await this.reloadWorker(instanceName2);
     // broadcast
-    this.scope.broadcast.reload.emit();
+    this.scope.broadcast.reload.emit(instanceName2);
+  }
+
+  async reloadWorker(instanceName: keyof IInstanceRecord) {
+    await this.bean.executor.newCtx(async () => {
+      await this.scope.service.instance.instanceStartup(this.ctx.instanceName!, { force: true });
+    }, { dbInfo: {}, instanceName });
   }
 }
