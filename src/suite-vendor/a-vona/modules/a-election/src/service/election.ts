@@ -5,11 +5,20 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceElection extends BeanBase {
   private _electionElectInfos: Record<string, IElectionElectInfo | undefined> = {};
+  private _watchDogInterval: any;
+
+  protected __init__() {
+    this._watchDogInterval = setInterval(async () => {
+      await this._watchDogCheck();
+    }, this.scope.config.obtain.timeout);
+  }
 
   public async dispose() {
-    const electionElectInfos = this._electionElectInfos;
-    this._electionElectInfos = {};
-    for (const resource in electionElectInfos) {
+    if (this._watchDogInterval) {
+      clearInterval(this._watchDogInterval);
+      this._watchDogInterval = undefined;
+    }
+    for (const resource of Object.keys(this._electionElectInfos)) {
       await this.release(resource);
     }
   }
@@ -21,7 +30,9 @@ export class ServiceElection extends BeanBase {
     const tickets = options?.tickets ?? 1;
     if (tickets === -1 || tickets === Infinity) {
       electionElectInfo.isLeader = true;
-      !this.app.meta.appClose && fnObtain();
+      if (!this.app.meta.appClose) {
+        fnObtain();
+      }
       return;
     }
     electionElectInfo.intervalId = setInterval(async () => {
@@ -67,9 +78,6 @@ export class ServiceElection extends BeanBase {
           //
           if (!this.app.meta.appClose) {
             fnObtain();
-            setTimeout(async () => {
-              await this._check(resource);
-            }, this.scope.config.obtain.timeout);
           }
         }
       }
@@ -106,6 +114,12 @@ export class ServiceElection extends BeanBase {
       },
       options,
     );
+  }
+
+  private async _watchDogCheck() {
+    for (const resource of Object.keys(this._electionElectInfos)) {
+      await this._check(resource);
+    }
   }
 
   private async _check(resource: string) {
