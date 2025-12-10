@@ -5,19 +5,19 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceElection extends BeanBase {
   private _electionElectInfos: Record<string, IElectionElectInfo | undefined> = {};
-  // private _watchDogInterval: any;
+  private _watchDogInterval: any;
 
   protected __init__() {
-    // this._watchDogInterval = setInterval(async () => {
-    //   await this._watchDogCheck();
-    // }, this.scope.config.obtain.timeout);
+    this._watchDogInterval = setInterval(async () => {
+      await this._watchDogCheck();
+    }, this.scope.config.obtain.timeout);
   }
 
   public async dispose() {
-    // if (this._watchDogInterval) {
-    //   clearInterval(this._watchDogInterval);
-    //   this._watchDogInterval = undefined;
-    // }
+    if (this._watchDogInterval) {
+      clearInterval(this._watchDogInterval);
+      this._watchDogInterval = undefined;
+    }
     for (const resource of Object.keys(this._electionElectInfos)) {
       await this.release(resource);
     }
@@ -116,31 +116,33 @@ export class ServiceElection extends BeanBase {
     );
   }
 
-  // private async _watchDogCheck() {
-  //   for (const resource of Object.keys(this._electionElectInfos)) {
-  //     await this._check(resource);
-  //   }
-  // }
+  private async _watchDogCheck() {
+    for (const resource of Object.keys(this._electionElectInfos)) {
+      await this._check(resource);
+    }
+  }
 
-  // private async _check(resource: string) {
-  //   const electionElectInfo = this._electionElectInfos[resource];
-  //   if (!electionElectInfo) return;
-  //   const { fnObtain, fnRelease, options } = electionElectInfo;
-  //   const tickets = options?.tickets ?? 1;
-  //   //
-  //   const lockResource = `election.${resource}`;
-  //   const needRelease = await this.$scope.redlock.service.redlock.lock(
-  //     lockResource,
-  //     async () => {
-  //       const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
-  //       const index = leaders.indexOf(this.bean.worker.id);
-  //       return index > -1 && leaders.length > tickets;
-  //     },
-  //     options,
-  //   );
-  //   if (needRelease) {
-  //     await this.release(resource);
-  //     this.obtain(resource, fnObtain, fnRelease, options);
-  //   }
-  // }
+  private async _check(resource: string) {
+    const electionElectInfo = this._electionElectInfos[resource];
+    if (!electionElectInfo) return;
+    const { fnObtain, fnRelease, options } = electionElectInfo;
+    const tickets = options?.tickets ?? 1;
+    //
+    const lockResource = `election.${resource}`;
+    const needRelease = await this.$scope.redlock.service.redlock.lock(
+      lockResource,
+      async () => {
+        const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
+        // need not check if exists, so as has chance to remove not alive app
+        return leaders.length > tickets;
+        // const index = leaders.indexOf(this.bean.worker.id);
+        // return index > -1 && leaders.length > tickets;
+      },
+      options,
+    );
+    if (needRelease) {
+      await this.release(resource);
+      this.obtain(resource, fnObtain, fnRelease, options);
+    }
+  }
 }

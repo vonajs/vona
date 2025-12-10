@@ -14,7 +14,9 @@ const __pathesWatch = [
   '**/src/config/locale/*.ts',
   '**/src/config/config.ts',
   '**/src/config/constants.ts',
+  '**/src/model/*.ts',
   '**/src/service/*.ts',
+  '**/src/bean/*.*.ts',
 ];
 
 const __pathesWatchStrict: TypePathWatchStrict[] = [
@@ -22,7 +24,9 @@ const __pathesWatchStrict: TypePathWatchStrict[] = [
   ['_locale', /\/src\/config\/locale\/[^/]+.ts/],
   ['_config', /\/src\/config\/config.ts/],
   ['_constant', /\/src\/config\/constants.ts/],
+  ['model', /\/src\/model\/[^/]+.ts/],
   ['service', /\/src\/service\/[^/]+.ts/],
+  ['bean', /\/src\/bean\/[^/]+.ts/],
 ];
 
 @Service()

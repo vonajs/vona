@@ -95,8 +95,13 @@ export class ServiceHmr extends BeanBase {
       // scope
       // 需要参考beanScopeBase中的逻辑，依次完成清理工作
       //  error/locale或许也可以实现hmr
-      if (scene === 'service') {
-        const scope: any = beanContainer.scope(beanOptions.module as never);
+      const scope: any = beanContainer.scope(beanOptions.module as never);
+      if (scene === 'meta') {
+        const scopeMetas = scope?.__metas;
+        if (scopeMetas?.[beanOptions.name]) {
+          delete scopeMetas?.[beanOptions.name];
+        }
+      } else {
         const scopeItems = scope?.__scenes[scene]?.__instances;
         if (scopeItems?.[beanOptions.name]) {
           delete scopeItems?.[beanOptions.name];

@@ -65,7 +65,9 @@ export class CliBinDev extends BeanCliBase {
           '**/src/config/locale/*.ts',
           '**/src/config/config.ts',
           '**/src/config/constants.ts',
+          '**/src/model/*.ts',
           '**/src/service/*.ts',
+          '**/src/bean/*.*.ts',
         ],
       });
       nodemon.on('quit', () => {
