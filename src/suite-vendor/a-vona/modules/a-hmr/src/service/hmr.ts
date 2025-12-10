@@ -1,4 +1,5 @@
 import type { IDecoratorBeanOptionsBase, TypeModuleResourceConfig } from 'vona';
+import type { IHmrReload } from '../types/hmr.ts';
 import path from 'node:path';
 import { getOnionMetasMeta, getOnionScenesMeta, parseInfoFromPath } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -78,7 +79,7 @@ export class ServiceHmr extends BeanBase {
     await this._reloadBeanInstances(beanOptions);
     this._reloadBeanInstanceScope(beanOptions);
     this._reloadBeanInstanceProps(beanOptions);
-    this._reloadBeanInstanceCustom(beanOptions);
+    await this._reloadBeanInstanceCustom(beanOptions);
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
@@ -125,7 +126,7 @@ export class ServiceHmr extends BeanBase {
     }
   }
 
-  private _reloadBeanInstanceCustom(beanOptions: IDecoratorBeanOptionsBase) {
+  private async _reloadBeanInstanceCustom(beanOptions: IDecoratorBeanOptionsBase) {
     const { scene, name } = beanOptions;
     const beanContainer = this.app.bean;
     const hmrBeanName = scene === 'meta' ? `meta${toUpperCaseFirstChar(name)}` : scene;
@@ -138,9 +139,9 @@ export class ServiceHmr extends BeanBase {
       hmrModuleName = onionScenesMeta[scene].module!.info.relativeName;
     }
     const beanFullName = `${hmrModuleName}.hmr.${hmrBeanName}`;
-    const beanInstance = beanContainer._getBean(beanFullName as never);
+    const beanInstance = beanContainer._getBean<IHmrReload>(beanFullName as never);
     if (beanInstance) {
-
+      await beanInstance.reload();
     }
   }
 }

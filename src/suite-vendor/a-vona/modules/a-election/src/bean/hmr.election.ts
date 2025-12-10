@@ -4,5 +4,7 @@ import { Hmr } from 'vona-module-a-hmr';
 
 @Hmr()
 export class HmrElection extends BeanBase implements IHmrReload {
-  async reload() {}
+  async reload() {
+    this.app.bean.worker.reloadAll();
+  }
 }
