@@ -25,6 +25,32 @@ declare module 'vona-module-a-printtip' {
           } 
 }
 /** startup: end */
+/** hmr: begin */
+export * from '../bean/hmr.metaPrintTip.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-printtip:metaPrintTip': never;
+    }
+
+  
+}
+declare module 'vona-module-a-printtip' {
+  
+        export interface HmrMetaPrintTip {
+          /** @internal */
+          get scope(): ScopeModuleAPrinttip;
+        }
+
+          export interface HmrMetaPrintTip {
+            get $beanFullName(): 'a-printtip.hmr.metaPrintTip';
+            get $onionName(): 'a-printtip:metaPrintTip';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

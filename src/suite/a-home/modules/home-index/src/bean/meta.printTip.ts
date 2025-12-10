@@ -6,7 +6,7 @@ import { Meta } from 'vona-module-a-meta';
 export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {
     return {
-      title: 'home',
+      title: 'home2',
       message: this.bean.core.getAbsoluteUrl(),
     };
   }
