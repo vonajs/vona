@@ -25,6 +25,32 @@ declare module 'vona-module-a-runtime' {
           } 
 }
 /** startup: end */
+/** hmr: begin */
+export * from '../bean/hmr.metaRuntime.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-runtime:metaRuntime': never;
+    }
+
+  
+}
+declare module 'vona-module-a-runtime' {
+  
+        export interface HmrMetaRuntime {
+          /** @internal */
+          get scope(): ScopeModuleARuntime;
+        }
+
+          export interface HmrMetaRuntime {
+            get $beanFullName(): 'a-runtime.hmr.metaRuntime';
+            get $onionName(): 'a-runtime:metaRuntime';
+            
+          } 
+}
+/** hmr: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
