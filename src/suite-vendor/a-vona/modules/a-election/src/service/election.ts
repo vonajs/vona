@@ -5,23 +5,23 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceElection extends BeanBase {
   private _electionElectInfos: Record<string, IElectionElectInfo | undefined> = {};
-  private _watchDogInterval: any;
+  // private _watchDogInterval: any;
 
   private get clientRedis() {
     return this.bean.redis.get('worker');
   }
 
-  protected __init__() {
-    this._watchDogInterval = setInterval(async () => {
-      await this._watchDogCheck();
-    }, this.scope.config.obtain.timeout);
-  }
+  // protected __init__() {
+  //   this._watchDogInterval = setInterval(async () => {
+  //     await this._watchDogCheck();
+  //   }, this.scope.config.obtain.timeout);
+  // }
 
   public async dispose() {
-    if (this._watchDogInterval) {
-      clearInterval(this._watchDogInterval);
-      this._watchDogInterval = undefined;
-    }
+    // if (this._watchDogInterval) {
+    //   clearInterval(this._watchDogInterval);
+    //   this._watchDogInterval = undefined;
+    // }
     for (const resource of Object.keys(this._electionElectInfos)) {
       await this.release(resource);
     }
@@ -92,27 +92,27 @@ export class ServiceElection extends BeanBase {
     await this.clientRedis.hdel(lockResource, this.bean.worker.id);
   }
 
-  private async _watchDogCheck() {
-    for (const resource of Object.keys(this._electionElectInfos)) {
-      await this._check(resource);
-    }
-  }
+  // private async _watchDogCheck() {
+  //   for (const resource of Object.keys(this._electionElectInfos)) {
+  //     await this._check(resource);
+  //   }
+  // }
 
-  private async _check(resource: string) {
-    const electionElectInfo = this._electionElectInfos[resource];
-    if (!electionElectInfo) return;
-    const { fnObtain, fnRelease, options } = electionElectInfo;
-    const tickets = options?.tickets ?? 1;
-    //
-    const lockResource = `election.${resource}`;
-    const leaderKeys = await this.clientRedis.hkeys(lockResource);
-    // need not check if exists, so as has chance to remove not alive app
-    const needRelease = leaderKeys.length > tickets;
-    // const index = leaderKeys.indexOf(keyResource);
-    // return index > -1 && leaderKeys.length > tickets;
-    if (needRelease) {
-      await this.release(resource);
-      this.obtain(resource, fnObtain, fnRelease, options);
-    }
-  }
+  // private async _check(resource: string) {
+  //   const electionElectInfo = this._electionElectInfos[resource];
+  //   if (!electionElectInfo) return;
+  //   const { fnObtain, fnRelease, options } = electionElectInfo;
+  //   const tickets = options?.tickets ?? 1;
+  //   //
+  //   const lockResource = `election.${resource}`;
+  //   const leaderKeys = await this.clientRedis.hkeys(lockResource);
+  //   // need not check if exists, so as has chance to remove not alive app
+  //   const needRelease = leaderKeys.length > tickets;
+  //   // const index = leaderKeys.indexOf(keyResource);
+  //   // return index > -1 && leaderKeys.length > tickets;
+  //   if (needRelease) {
+  //     await this.release(resource);
+  //     this.obtain(resource, fnObtain, fnRelease, options);
+  //   }
+  // }
 }
