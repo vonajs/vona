@@ -52,8 +52,8 @@ export class ServiceWatch extends BeanBase {
   }
 
   protected async _onChange(file: string) {
-    file = file.replace(/\\/g, '/');
-    const item = __pathesWatchStrict.find(item => item[1].test(file));
+    const file2 = file.replace(/\\/g, '/');
+    const item = __pathesWatchStrict.find(item => item[1].test(file2));
     if (!item) return;
     const timeBegin = new Date();
     await this._reloadFile(item[0], path.join(this.app.projectPath, file));
