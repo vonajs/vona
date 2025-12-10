@@ -1,4 +1,5 @@
 import type { TypeBroadcastReloadBeanJobData } from '../bean/broadcast.reloadBean.ts';
+import path from 'node:path';
 import chalk from 'chalk';
 import chokidar, { FSWatcher } from 'chokidar';
 import debounce from 'debounce';
@@ -55,7 +56,7 @@ export class ServiceWatch extends BeanBase {
     const item = __pathesWatchStrict.find(item => item[1].test(file));
     if (!item) return;
     const timeBegin = new Date();
-    await this._reloadFile(item[0], file);
+    await this._reloadFile(item[0], path.join(this.app.projectPath, file));
     const timeEnd = new Date();
     // log
     const message = `[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`;
