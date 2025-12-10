@@ -37,34 +37,32 @@ export class ServiceElection extends BeanBase {
     }
     electionElectInfo.intervalId = setInterval(async () => {
       const lockResource = `election.${resource}`;
+      const keyResource = `${resource}:${this.bean.worker.id}`;
       electionElectInfo.isLeader = await this.$scope.redlock.service.redlock.lock(
         lockResource,
         async () => {
           // leaders
-          const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
-          let isLeader;
-          let changed;
-          if (leaders.includes(this.bean.worker.id)) {
+          const leaderKeys = await this.scope.cacheRedis.election.lookupKeys(`${resource}:`, true);
+          let isLeader: boolean = false;
+          if (leaderKeys.includes(keyResource)) {
             isLeader = true;
           } else {
-            for (let index = leaders.length - 1; index >= 0; index--) {
-              const alive = await this.bean.worker.getAlive(leaders[index]);
+            for (let index = leaderKeys.length - 1; index >= 0; index--) {
+              const checkKey = leaderKeys[index];
+              const checkWorkerId = checkKey.split(':')[1];
+              const alive = await this.bean.worker.getAlive(checkWorkerId);
               if (!alive) {
-                leaders.splice(index, 1);
-                changed = true;
+                leaderKeys.splice(index, 1);
+                await this.scope.cacheRedis.election.del(checkKey);
                 // force release
-                this.scope.broadcast.release.emit({ workerId: leaders[index], resource });
+                this.scope.broadcast.release.emit({ workerId: checkWorkerId, resource });
               }
             }
-            if (leaders.length < tickets) {
+            if (leaderKeys.length < tickets) {
               isLeader = true;
-              leaders.push(this.bean.worker.id);
-              changed = true;
+              await this.scope.cacheRedis.election.set(true, keyResource);
+              leaderKeys.push(this.bean.worker.id);
             }
-          }
-          // update
-          if (changed) {
-            await this.scope.cacheRedis.election.set(leaders, 'leaders');
           }
           return isLeader;
         },
@@ -102,15 +100,11 @@ export class ServiceElection extends BeanBase {
     if (tickets === -1 || tickets === Infinity) return;
     //
     const lockResource = `election.${resource}`;
+    const keyResource = `${resource}:${this.bean.worker.id}`;
     await this.$scope.redlock.service.redlock.lock(
       lockResource,
       async () => {
-        const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
-        const index = leaders.indexOf(this.bean.worker.id);
-        if (index > -1) {
-          leaders.splice(index, 1);
-          await this.scope.cacheRedis.election.set(leaders, 'leaders');
-        }
+        await this.scope.cacheRedis.election.del(keyResource);
       },
       options,
     );
@@ -132,11 +126,11 @@ export class ServiceElection extends BeanBase {
     const needRelease = await this.$scope.redlock.service.redlock.lock(
       lockResource,
       async () => {
-        const leaders = (await this.scope.cacheRedis.election.get('leaders')) || [];
+        const leaderKeys = await this.scope.cacheRedis.election.lookupKeys(`${resource}:`, true);
         // need not check if exists, so as has chance to remove not alive app
-        return leaders.length > tickets;
-        // const index = leaders.indexOf(this.bean.worker.id);
-        // return index > -1 && leaders.length > tickets;
+        return leaderKeys.length > tickets;
+        // const index = leaderKeys.indexOf(keyResource);
+        // return index > -1 && leaderKeys.length > tickets;
       },
       options,
     );
