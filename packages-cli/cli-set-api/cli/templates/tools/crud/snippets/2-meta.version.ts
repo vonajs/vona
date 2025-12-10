@@ -16,7 +16,8 @@ const __snippet_update = `if (options.version === <%=argv.fileVersion%>) {
       table.string(entity<%=argv.resourceNameCapitalize%>.name, 50).defaultTo(entity<%=argv.resourceNameCapitalize%>.$default.name).comment(entity<%=argv.resourceNameCapitalize%>.$comment.name);
       table.string(entity<%=argv.resourceNameCapitalize%>.description, 255).comment(entity<%=argv.resourceNameCapitalize%>.$comment.description);
     });
-  }`;
+  }
+`;
 
 export default metadataCustomSnippet({
   file: 'src/bean/meta.version.ts',
@@ -38,7 +39,7 @@ export default metadataCustomSnippet({
     // update
     ast.replace('async update(_options: IMetaVersionUpdateOptions) {$$$1}', 'async update(options: IMetaVersionUpdateOptions) {$$$1}');
     const code = await cli.template.renderContent({ content: __snippet_update });
-    ast.replace('async update($$$0) {$$$1}', `async update($$$0) {$$$1 \n  ${code}}`);
+    ast.replace('async update($$$0) {$$$1}', `async update($$$0) {$$$1 \n  ${code}  }`);
     // ok
     return ast;
   },
