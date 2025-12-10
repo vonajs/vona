@@ -12,7 +12,12 @@
       },
       "monkey": true
     },
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+       "hmr": {
+        "boilerplate": "cli/hmr/boilerplate"
+      }
+    }
   },
   "description": "",
   "author": "",
