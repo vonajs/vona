@@ -393,6 +393,32 @@ declare module 'vona-module-a-version' {
           } 
 }
 /** startup: end */
+/** hmr: begin */
+export * from '../bean/hmr.metaVersion.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-version:metaVersion': never;
+    }
+
+  
+}
+declare module 'vona-module-a-version' {
+  
+        export interface HmrMetaVersion {
+          /** @internal */
+          get scope(): ScopeModuleAVersion;
+        }
+
+          export interface HmrMetaVersion {
+            get $beanFullName(): 'a-version.hmr.metaVersion';
+            get $onionName(): 'a-version:metaVersion';
+            
+          } 
+}
+/** hmr: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
