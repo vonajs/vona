@@ -72,6 +72,32 @@ export interface IModuleBroadcast {
   'release': BroadcastRelease;
 }
 /** broadcast: end */
+/** hmr: begin */
+export * from '../bean/hmr.election.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-election:election': never;
+    }
+
+  
+}
+declare module 'vona-module-a-election' {
+  
+        export interface HmrElection {
+          /** @internal */
+          get scope(): ScopeModuleAElection;
+        }
+
+          export interface HmrElection {
+            get $beanFullName(): 'a-election.hmr.election';
+            get $onionName(): 'a-election:election';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
