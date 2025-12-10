@@ -8,8 +8,8 @@ declare module '@cabloy/cli' {
   }
 }
 
-const __snippet_import1 = 'import { $tableColumns } from \'vona-module-a-orm\';\n';
-const __snippet_import2 = 'import { Entity<%=argv.resourceNameCapitalize%> } from \'../entity/<%=argv.resourceName%>.ts\';\n';
+const __snippet_import1 = 'import { $tableColumns } from \'vona-module-a-orm\';';
+const __snippet_import2 = 'import { Entity<%=argv.resourceNameCapitalize%> } from \'../entity/<%=argv.resourceName%>.ts\';';
 const __snippet_update = '...$tableColumns(() => Entity<%=argv.resourceNameCapitalize%>, \'name\'),';
 
 export default metadataCustomSnippet({
@@ -32,11 +32,11 @@ export default metadataCustomSnippet({
     // import1
     if (!ast.includes(__snippet_import1)) {
       const code = await cli.template.renderContent({ content: __snippet_import1 });
-      ast = `${code}${ast}`;
+      ast = ast.replace('import { Meta } from \'vona-module-a-meta\';', `import { Meta } from 'vona-module-a-meta';\n${code}`);
     }
     // import2
     let code = await cli.template.renderContent({ content: __snippet_import2 });
-    ast = `${code}${ast}`;
+    ast = ast.replace('import { $tableColumns } from \'vona-module-a-orm\';', `import { $tableColumns } from 'vona-module-a-orm';\n${code}`);
     // update
     code = await cli.template.renderContent({ content: __snippet_update });
     ast = ast.replace('indexes: {', `indexes: {\n${code}`);
