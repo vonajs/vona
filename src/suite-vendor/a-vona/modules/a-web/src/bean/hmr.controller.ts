@@ -5,5 +5,7 @@ import { Hmr } from 'vona-module-a-hmr';
 
 @Hmr()
 export class HmrController extends BeanBase implements IHmrReload {
-  async reload(_beanOptions: IDecoratorBeanOptionsBase) {}
+  async reload(beanOptions: IDecoratorBeanOptionsBase) {
+    this.bean.router.reRegisterController(beanOptions.beanFullName);
+  }
 }
