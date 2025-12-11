@@ -1,9 +1,10 @@
+import type { IDecoratorBeanOptionsBase } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IHmrRecord {}
 
 export interface IHmrReload {
-  reload: () => Promise<void>;
+  reload: (beanOptions: IDecoratorBeanOptionsBase) => Promise<void>;
 }
 
 declare module 'vona-module-a-onion' {

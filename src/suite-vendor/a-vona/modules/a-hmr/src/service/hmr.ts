@@ -148,7 +148,7 @@ export class ServiceHmr extends BeanBase {
     const beanFullName = `${hmrModuleName}.hmr.${hmrBeanName}`;
     const beanInstance = beanContainer._getBean<IHmrReload>(beanFullName as never);
     if (beanInstance) {
-      await beanInstance.reload();
+      await beanInstance.reload(beanOptions);
     }
   }
 }
