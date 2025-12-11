@@ -82,7 +82,7 @@ export class ServiceInstance extends BeanBase {
     await this._cacheInstanceConfig(instanceName, true);
   }
 
-  private async _cacheInstanceConfig(instanceName: keyof IInstanceRecord, force: boolean) {
+  private async _cacheInstanceConfig(instanceName: keyof IInstanceRecord, force?: boolean) {
     if (this.__cacheIntancesConfig[instanceName] && !force) return;
     let instance = await this.bean.instance.get(instanceName);
     if (!instance) this.app.throw(403);
@@ -116,7 +116,7 @@ export class ServiceInstance extends BeanBase {
       options.configInstanceBase = configInstanceBase;
     }
     // cache instance config
-    await this._cacheInstanceConfig(instanceName, false);
+    await this._cacheInstanceConfig(instanceName, options?.force);
     // queue within the same worker
     if (!this.__queueInstanceStartup[instanceName]) {
       this.__queueInstanceStartup[instanceName] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
