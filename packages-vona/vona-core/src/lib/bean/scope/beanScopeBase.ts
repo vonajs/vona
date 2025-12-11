@@ -60,7 +60,7 @@ export class BeanScopeBase extends BeanBaseSimple {
     // config
     if (prop === 'config') {
       // app or ctx
-      const config = this.ctx ? this.ctx.config : this.app.config;
+      const config = this.ctx?.config ?? this.app.config;
       return config.modules[moduleBelong];
     }
     // constant
