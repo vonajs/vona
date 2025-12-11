@@ -12,6 +12,7 @@ import { AppUtil } from '../utils/util.ts';
 import { VonaAsyncLocalStorage } from './asyncLocalStorage.ts';
 import { contextBase } from './context.ts';
 import { AppMeta } from './meta.ts';
+import { ResponseMock } from './response.ts';
 
 export interface VonaApplication extends ApplicationError {}
 
@@ -93,7 +94,7 @@ export class VonaApplication extends KoaApplication {
         },
       };
     }
-    const response = res ?? {};
+    const response = res ?? new ResponseMock();
     return this.createContext(request as any, response) as unknown as VonaContext;
   }
 
