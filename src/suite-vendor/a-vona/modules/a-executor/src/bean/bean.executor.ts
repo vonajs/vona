@@ -95,13 +95,7 @@ export class BeanExecutor extends BeanBase {
           __delegateProperties(ctx, options.extraData);
         }
       }
-      try {
-        return await fn();
-      } finally {
-        if (!options.res) {
-          ctx.res.end();
-        }
-      }
+      return await fn();
     });
   }
 

@@ -4,7 +4,6 @@ import type { VonaConfig } from '../../types/config/config.ts';
 import type { VonaContext } from '../../types/context/index.ts';
 import type { ApplicationError } from '../bean/resource/error/errorApplication.ts';
 import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
-import http from 'node:http';
 import KoaApplication from 'koa';
 import { cast } from '../../types/utils/cast.ts';
 import { BeanContainer } from '../bean/beanContainer.ts';
@@ -94,7 +93,7 @@ export class VonaApplication extends KoaApplication {
         },
       };
     }
-    const response = res ?? new http.ServerResponse(request as any);
+    const response = res ?? {};
     return this.createContext(request as any, response) as unknown as VonaContext;
   }
 
