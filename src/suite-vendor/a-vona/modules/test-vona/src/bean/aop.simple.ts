@@ -16,7 +16,7 @@ class AopSimpleBase extends BeanAopBase {
   };
 }
 
-@Aop({ match: 'testCtx', dependencies: 'test-vona:regExp', meta: { mode: 'test' } })
+@Aop({ match: 'testCtx', dependencies: 'test-vona:regExp', meta: { mode: ['test', 'dev'] } })
 export class AopSimple extends AopSimpleBase {
   protected __get__: AopActionGet<BeanTestCtx> = (prop, next, _receiver) => {
     const value = next();

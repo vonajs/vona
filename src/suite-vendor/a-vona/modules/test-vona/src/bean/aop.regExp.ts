@@ -3,7 +3,7 @@ import type { BeanTestCtx } from './bean.testCtx.ts';
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
-@Aop({ match: [/^test-vona\.service\.test\w+$/, 'testCtx'], meta: { mode: 'test' } })
+@Aop({ match: [/^test-vona\.service\.test\w+$/, 'testCtx'], meta: { mode: ['test', 'dev'] } })
 export class AopRegExp extends BeanAopBase {
   protected __get_name__: AopActionGetter<BeanTestCtx, 'name'> = function (next, _receiver) {
     const value = next();
