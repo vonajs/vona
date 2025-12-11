@@ -1,10 +1,11 @@
+import type { IDecoratorBeanOptionsBase } from 'vona';
 import type { IHmrReload } from 'vona-module-a-hmr';
 import { BeanBase } from 'vona';
 import { Hmr } from 'vona-module-a-hmr';
 
 @Hmr()
 export class HmrMetaRuntime extends BeanBase implements IHmrReload {
-  async reload() {
+  async reload(_beanOptions: IDecoratorBeanOptionsBase) {
     await this.bean.instance.reloadWorker('');
   }
 }
