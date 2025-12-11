@@ -15,8 +15,8 @@ export interface ContextRoute {
   action: string;
   route: ContextRouteMetadata;
   routeMethod: TypeRequestMethod;
-  routePath: string | RegExp;
-  routePathRaw: string | RegExp;
+  routePath: string;
+  routePathRaw: string;
 }
 
 declare module 'vona' {
