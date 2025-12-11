@@ -1,6 +1,6 @@
 import type { Next, VonaApplication, VonaContext } from 'vona';
 import type { ContextRoute } from '../../types/router.ts';
-import { SymbolCacheComposeGuards } from '../../types/cache.ts';
+import { SymbolCacheComposeGuards } from 'vona-module-a-aspect';
 
 export async function middlewareGuard(ctx: VonaContext, next: Next) {
   // check handler

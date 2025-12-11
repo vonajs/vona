@@ -6,8 +6,8 @@ import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from
 import type { ContextRoute } from '../../types/router.ts';
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
+import { SymbolCacheComposePipes } from 'vona-module-a-aspect';
 import { SymbolRouteHandlersArgumentsMeta, SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
-import { SymbolCacheComposePipes } from '../../types/cache.ts';
 import { extractValue } from './extractValue.ts';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
