@@ -5,6 +5,6 @@ import { Hmr } from 'vona-module-a-hmr';
 @Hmr()
 export class HmrMetaIndex extends BeanBase implements IHmrReload {
   async reload() {
-    await this.bean.instance.reloadWorker('');
+    this.app.bean.worker.reload();
   }
 }

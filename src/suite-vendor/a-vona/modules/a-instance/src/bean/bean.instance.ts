@@ -83,8 +83,6 @@ export class BeanInstance extends BeanBase {
   }
 
   async reloadWorker(instanceName: keyof IInstanceRecord) {
-    await this.bean.executor.newCtx(async () => {
-      await this.scope.service.instance.instanceStartup(this.ctx.instanceName!, { force: true });
-    }, { dbInfo: {}, instanceName });
+    await this.scope.service.instance.instanceStartupIsolate(instanceName, { force: true });
   }
 }

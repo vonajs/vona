@@ -74,7 +74,7 @@ export class ServiceInstance extends BeanBase {
     for (const instanceName of instanceNames) {
       await this.app.bean.executor.newCtx(async () => {
         await this.resetCache(instanceName as any);
-      }, { dbInfo: {}, instanceName: instanceName as any });
+      }, { dbInfo: { level: 1 }, instanceName: instanceName as any });
     }
   }
 
@@ -103,15 +103,9 @@ export class ServiceInstance extends BeanBase {
   }
 
   async instanceStartupIsolate(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
-    await this.bean.executor.newCtx(
-      async () => {
-        await this.instanceStartup(instanceName, options);
-      },
-      {
-        dbInfo: { level: 1 },
-        instanceName,
-      },
-    );
+    await this.bean.executor.newCtx(async () => {
+      await this.instanceStartup(instanceName, options);
+    }, { dbInfo: { level: 1 }, instanceName });
   }
 
   // options: force/instanceBase

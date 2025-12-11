@@ -62,7 +62,10 @@ export class ServiceWatch extends BeanBase {
     const item = __pathesWatchStrict.find(item => item[1].test(file2));
     if (!item) return;
     const timeBegin = new Date();
-    await this._reloadFile(item[0], path.join(this.app.projectPath, file));
+    await this._reloadFile({
+      sceneName: item[0],
+      file: path.join(this.app.projectPath, file),
+    });
     const timeEnd = new Date();
     // log
     const message = `[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`;
@@ -70,13 +73,19 @@ export class ServiceWatch extends BeanBase {
     console.log(chalk.cyan(message));
   }
 
-  private async _reloadFile(sceneName: string, file: string) {
-    await this.scope.service.hmr.reloadFile(sceneName, file);
-    this.scope.broadcast.reloadBean.emit({ sceneName, file });
+  private async _reloadFile(data: TypeBroadcastReloadBeanJobData) {
+    await this._reloadFileInner(data);
+    this.scope.broadcast.reloadBean.emit(data);
   }
 
   public async _reloadBeanWorker(data: TypeBroadcastReloadBeanJobData) {
-    await this.scope.service.hmr.reloadFile(data.sceneName, data.file);
+    await this._reloadFileInner(data);
+  }
+
+  public async _reloadFileInner(data: TypeBroadcastReloadBeanJobData) {
+    return await this.bean.executor.newCtx(async () => {
+      return await this.scope.service.hmr.reloadFile(data.sceneName, data.file);
+    }, { dbInfo: {}, instanceName: '' });
   }
 
   private async _collectWatchDirs() {
