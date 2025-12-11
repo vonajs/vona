@@ -312,6 +312,7 @@ export class BeanContainer {
           const methodNameMagic = '__get__';
           const _aopChainsProp = self._getAopChainsProp(
             beanFullName,
+            beanInstance,
             methodName,
             methodNameMagic,
             'get',
@@ -328,7 +329,7 @@ export class BeanContainer {
           });
         }
         // method
-        return self._getInstanceMethodProxy(beanFullName, target, prop, receiver);
+        return self._getInstanceMethodProxy(beanFullName, beanInstance, target, prop, receiver);
       },
       set(target, prop, value, receiver) {
         if (typeof prop === 'symbol') {
@@ -347,7 +348,7 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'set', prop);
+        const _aopChainsProp = self._getAopChainsProp(beanFullName, beanInstance, methodName, methodNameMagic, 'set', prop);
         if (!_aopChainsProp) {
           Reflect.set(target, prop, value, receiver);
           return true;
@@ -370,14 +371,14 @@ export class BeanContainer {
     });
   }
 
-  private _getInstanceMethodProxy(beanFullName, target, prop, receiver) {
+  private _getInstanceMethodProxy(beanFullName, beanInstance, target, prop, receiver) {
     // not aop magic methods
     if (__isInnerMethod(prop)) {
       return Reflect.get(target, prop, receiver);
     }
     // aop chains
     const methodNameMagic = '__method__';
-    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, methodNameMagic, 'method', prop);
+    const _aopChainsProp = this._getAopChainsProp(beanFullName, beanInstance, prop, methodNameMagic, 'method', prop);
     if (!_aopChainsProp) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
@@ -431,14 +432,6 @@ export class BeanContainer {
     return chains;
   }
 
-  private _getAopChains(beanFullName) {
-    // beanFullName maybe class
-    const beanOptions = appResource.getBean(beanFullName);
-    const cacheKey = beanOptions?.beanFullName || beanFullName;
-    const host = this._aopCacheHost();
-    return host[SymbolCacheAopChains]?.[cacheKey] || [];
-  }
-
   private _aopCacheHost() {
     if (!this.app) throw new Error('Perhaps missing await');
     return this.app;
@@ -446,6 +439,7 @@ export class BeanContainer {
 
   private _getAopChainsProp(
     beanFullName,
+    beanInstance,
     methodName,
     methodNameMagic,
     methodType: 'get' | 'set' | 'method',
@@ -458,7 +452,7 @@ export class BeanContainer {
     if (!host[SymbolCacheAopChainsKey]) host[SymbolCacheAopChainsKey] = {};
     if (!host[SymbolCacheAopChainsKey][cacheKey]) host[SymbolCacheAopChainsKey][cacheKey] = {};
     if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey] !== undefined) return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
-    const _aopChains = this._getAopChains(beanFullName);
+    const _aopChains = this._prepareAopChains(beanFullName, beanInstance);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
       if (aopKey === SymbolProxyMagic) {

@@ -78,8 +78,8 @@ export class ServiceHmr extends BeanBase {
   private async _reloadBean(beanFullName: string) {
     const beanOptions = appResource.getBean(beanFullName)!;
     this._reloadBeanScene(beanOptions);
-    await this._reloadBeanInstances(beanOptions);
     this._reloadBeanAop(beanOptions);
+    await this._reloadBeanInstances(beanOptions);
     this._reloadBeanInstanceScope(beanOptions);
     this._reloadBeanInstanceProps(beanOptions);
     await this._reloadBeanInstanceCustom(beanOptions);
@@ -88,6 +88,11 @@ export class ServiceHmr extends BeanBase {
   private _reloadBeanScene(beanOptions: IDecoratorBeanOptionsBase) {
     const { scene } = beanOptions;
     cast<ServiceOnion<any>>(this.bean.onion[scene])?.load();
+  }
+
+  private _reloadBeanAop(_beanOptions: IDecoratorBeanOptionsBase) {
+    delete this.app[SymbolCacheAopChains];
+    delete this.app[SymbolCacheAopChainsKey];
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
@@ -105,11 +110,6 @@ export class ServiceHmr extends BeanBase {
       const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
       beanInstanceNew[SymbolHmrStateLoad]?.(state);
     }
-  }
-
-  private _reloadBeanAop(_beanOptions: IDecoratorBeanOptionsBase) {
-    delete this.app[SymbolCacheAopChains];
-    delete this.app[SymbolCacheAopChainsKey];
   }
 
   private _reloadBeanInstanceScope(beanOptions: IDecoratorBeanOptionsBase) {
