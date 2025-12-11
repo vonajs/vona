@@ -29,7 +29,7 @@ declare module 'vona' {
   }
 }
 
-declare module 'koa'{
+declare module 'koa' {
   export interface Request {
     params: { [key: string]: string };
     query: { [key: string]: string };

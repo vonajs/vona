@@ -2,6 +2,7 @@ import type { Constructable, VonaContext } from 'vona';
 import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
 import type { IDecoratorControllerOptions } from '../types/controller.ts';
 import type { TypeRequestMethod } from '../types/request.ts';
+import type { ContextRoute } from '../types/router.ts';
 import * as ModuleInfo from '@cabloy/module-info';
 import Router from 'find-my-way';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
@@ -17,6 +18,8 @@ const SymbolRouteComposeMiddlewaresCache = Symbol('SymbolRouteComposeMiddlewares
 
 @Bean()
 export class BeanRouter extends BeanBase {
+  private _controllerRoutes: Record<string, ContextRoute[]> = {};
+
   registerController(moduleName: string, controller: Constructable) {
     // info
     const info = ModuleInfo.parseInfo(moduleName)!;
@@ -124,7 +127,7 @@ export class BeanRouter extends BeanBase {
     };
 
     // route
-    const _route = {
+    const _route: ContextRoute = {
       pid: info.pid,
       module: info.name,
       controller,
