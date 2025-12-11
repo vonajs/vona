@@ -25,14 +25,22 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   private [SymbolOnionsEnabled]: Record<string, IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[]> = {};
   private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
-  _cacheOnionsGlobal: Function[];
-  _cacheOnionsHandler: Record<string, Function[]> = {};
+  private _cacheOnionsGlobal: Function[] | undefined;
+  private _cacheOnionsHandler: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
     this.sceneMeta = getOnionScenesMeta(this.app.meta.modules)[this.sceneName];
+    this.load();
+  }
+
+  load() {
     this._loadOnions();
     this._swapOnions(this.onionsGlobal);
+    this[SymbolOnionsEnabled] = {};
+    this[SymbolOnionsEnabledWrapped] = {};
+    this._cacheOnionsGlobal = undefined;
+    this._cacheOnionsHandler = {};
   }
 
   compose(

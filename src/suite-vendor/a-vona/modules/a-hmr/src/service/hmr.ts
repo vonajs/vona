@@ -1,9 +1,10 @@
 import type { IDecoratorBeanOptionsBase, TypeModuleResourceConfig } from 'vona';
+import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IHmrReload } from '../types/hmr.ts';
 import path from 'node:path';
 import { getOnionMetasMeta, getOnionScenesMeta, parseInfoFromPath } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { appHmrDeps, appResource, BeanBase, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
+import { appHmrDeps, appResource, BeanBase, cast, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -76,15 +77,21 @@ export class ServiceHmr extends BeanBase {
 
   private async _reloadBean(beanFullName: string) {
     const beanOptions = appResource.getBean(beanFullName)!;
+    this._reloadBeanScene(beanOptions);
     await this._reloadBeanInstances(beanOptions);
     this._reloadBeanInstanceScope(beanOptions);
     this._reloadBeanInstanceProps(beanOptions);
     await this._reloadBeanInstanceCustom(beanOptions);
   }
 
+  private _reloadBeanScene(beanOptions: IDecoratorBeanOptionsBase) {
+    const { scene } = beanOptions;
+    cast<ServiceOnion<any>>(this.bean.onion[scene]).load();
+  }
+
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
     const { beanFullName } = beanOptions;
-    const beanContainer = this.app.bean;
+    const beanContainer = this.bean;
     const recordBeanInstances = this.app.meta.hmr!.recordBeanInstances[beanFullName];
     if (!recordBeanInstances) return;
     this.app.meta.hmr!.recordBeanInstances[beanFullName] = [];
