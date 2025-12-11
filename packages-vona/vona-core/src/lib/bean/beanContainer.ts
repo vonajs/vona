@@ -16,8 +16,8 @@ import { BeanSimple } from './beanSimple.ts';
 
 const SymbolProxyMagic = Symbol('SymbolProxyMagic');
 const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
-const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
-const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
+export const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
+export const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
 export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
 export const SymbolBeanInstancePropsLazy = Symbol('SymbolBeanInstancePropsLazy');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
@@ -441,7 +441,7 @@ export class BeanContainer {
 
   private _aopCacheHost() {
     if (!this.app) throw new Error('Perhaps missing await');
-    return this.app;
+    return this.app.meta;
   }
 
   private _getAopChainsProp(

@@ -4,7 +4,7 @@ import type { IHmrReload } from '../types/hmr.ts';
 import path from 'node:path';
 import { getOnionMetasMeta, getOnionScenesMeta, parseInfoFromPath } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { appHmrDeps, appResource, BeanBase, cast, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
+import { appHmrDeps, appResource, BeanBase, cast, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolCacheAopChains, SymbolCacheAopChainsKey, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -79,6 +79,7 @@ export class ServiceHmr extends BeanBase {
     const beanOptions = appResource.getBean(beanFullName)!;
     this._reloadBeanScene(beanOptions);
     await this._reloadBeanInstances(beanOptions);
+    this._reloadBeanAop(beanOptions);
     this._reloadBeanInstanceScope(beanOptions);
     this._reloadBeanInstanceProps(beanOptions);
     await this._reloadBeanInstanceCustom(beanOptions);
@@ -104,6 +105,11 @@ export class ServiceHmr extends BeanBase {
       const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
       beanInstanceNew[SymbolHmrStateLoad]?.(state);
     }
+  }
+
+  private _reloadBeanAop(_beanOptions: IDecoratorBeanOptionsBase) {
+    delete this.app.meta[SymbolCacheAopChains];
+    delete this.app.meta[SymbolCacheAopChainsKey];
   }
 
   private _reloadBeanInstanceScope(beanOptions: IDecoratorBeanOptionsBase) {
