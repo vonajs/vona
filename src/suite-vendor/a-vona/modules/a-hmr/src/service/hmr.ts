@@ -108,8 +108,8 @@ export class ServiceHmr extends BeanBase {
   }
 
   private _reloadBeanAop(_beanOptions: IDecoratorBeanOptionsBase) {
-    delete this.app.meta[SymbolCacheAopChains];
-    delete this.app.meta[SymbolCacheAopChainsKey];
+    delete this.app[SymbolCacheAopChains];
+    delete this.app[SymbolCacheAopChainsKey];
   }
 
   private _reloadBeanInstanceScope(beanOptions: IDecoratorBeanOptionsBase) {
