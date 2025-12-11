@@ -153,6 +153,12 @@ export class BeanRouter extends BeanBase {
       return _route[SymbolRouteComposeMiddlewaresCache](ctx);
     };
 
+    // add
+    if (!this._controllerRoutes[controllerBeanFullName]) {
+      this._controllerRoutes[controllerBeanFullName] = [];
+      this._controllerRoutes[controllerBeanFullName].push(_route);
+    }
+
     // register
     app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath.toString(), fn);
   }
