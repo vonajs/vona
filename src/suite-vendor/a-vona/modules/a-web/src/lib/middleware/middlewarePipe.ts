@@ -7,6 +7,7 @@ import type { ContextRoute } from '../../types/router.ts';
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import { SymbolRouteHandlersArgumentsMeta, SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
+import { SymbolCacheComposePipes } from '../../types/cache.ts';
 import { extractValue } from './extractValue.ts';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
@@ -87,16 +88,14 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
   return extractValue(ctx, argMeta);
 }
 
-const SymbolCacheMiddlewaresArgument = Symbol('SymbolCacheMiddlewaresArgument');
-
 function composePipes(
   app: VonaApplication,
   route: ContextRoute,
   argMeta: RouteHandlerArgumentMetaDecorator,
   executeCustom: IOnionExecuteCustom,
 ) {
-  if (!app.meta[SymbolCacheMiddlewaresArgument]) app.meta[SymbolCacheMiddlewaresArgument] = {};
-  const __cacheMiddlewaresArgument: Record<string, Function[]> = app.meta[SymbolCacheMiddlewaresArgument];
+  if (!app.meta[SymbolCacheComposePipes]) app.meta[SymbolCacheComposePipes] = {};
+  const __cacheMiddlewaresArgument: Record<string, Function[]> = app.meta[SymbolCacheComposePipes];
   const onionPipe = app.bean.onion.pipe;
   const beanFullName = route.controllerBeanFullName;
   const handlerName = route.action;
