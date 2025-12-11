@@ -95,12 +95,12 @@ function composePipes(
   executeCustom: IOnionExecuteCustom,
 ) {
   if (!app.meta[SymbolCacheComposePipes]) app.meta[SymbolCacheComposePipes] = {};
-  const __cacheMiddlewaresArgument: Record<string, Function[]> = app.meta[SymbolCacheComposePipes];
+  const cacheComposePipes: Record<string, Function[]> = app.meta[SymbolCacheComposePipes];
   const onionPipe = app.bean.onion.pipe;
   const beanFullName = route.controllerBeanFullName;
   const handlerName = route.action;
   const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
-  if (!__cacheMiddlewaresArgument[key]) {
+  if (!cacheComposePipes[key]) {
     const middlewares: Function[] = [];
     // pipes: global
     for (const item of onionPipe.onionsGlobal) {
@@ -118,9 +118,9 @@ function composePipes(
         middlewares.push(onionPipe._wrapOnion(item, executeCustom));
       }
     }
-    __cacheMiddlewaresArgument[key] = middlewares;
+    cacheComposePipes[key] = middlewares;
   }
-  return __cacheMiddlewaresArgument[key];
+  return cacheComposePipes[key];
 }
 
 function _collectArgumentMiddlewares(

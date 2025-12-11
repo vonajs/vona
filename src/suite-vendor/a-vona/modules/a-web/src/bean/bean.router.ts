@@ -12,6 +12,7 @@ import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.ts';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
+import { SymbolCacheComposeMiddlewares } from '../types/cache.ts';
 import { SymbolRequestMappingHandler } from '../types/request.ts';
 
 const SymbolRouteComposeMiddlewaresCache = Symbol('SymbolRouteComposeMiddlewaresCache');
@@ -158,7 +159,7 @@ export class BeanRouter extends BeanBase {
       ctx.request.params = params;
       ctx.request.query = searchParams;
       if (!_route[SymbolRouteComposeMiddlewaresCache]) {
-        _route[SymbolRouteComposeMiddlewaresCache] = self._registerComposeMiddlewares(ctx);
+        _route[SymbolRouteComposeMiddlewaresCache] = self._registerComposeMiddlewares(_route);
       }
       return _route[SymbolRouteComposeMiddlewaresCache](ctx);
     };
@@ -173,7 +174,7 @@ export class BeanRouter extends BeanBase {
     app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath, fn);
   }
 
-  _registerComposeMiddlewares(ctx: VonaContext) {
+  private _registerComposeMiddlewares(route: ContextRoute) {
     // start
     const fnStart = routeStartMiddleware;
     // mid: guard/interceptor/pipes/tail
@@ -185,7 +186,15 @@ export class BeanRouter extends BeanBase {
     // end: controller
     const fnEnd = classControllerMiddleware;
     // compose
-    return this.app.bean.onion.middleware.compose(ctx.route, fnStart, fnMid, fnEnd);
+    if (!this.app.meta[SymbolCacheComposeMiddlewares]) this.app.meta[SymbolCacheComposeMiddlewares] = {};
+    const cacheComposeMiddlewares: Record<string, Function> = this.app.meta[SymbolCacheComposeMiddlewares];
+    const beanFullName = route.controllerBeanFullName;
+    const handlerName = route.action;
+    const key = `${beanFullName}:${handlerName}`;
+    if (!cacheComposeMiddlewares[key]) {
+      cacheComposeMiddlewares[key] = this.app.bean.onion.middleware.compose(route, fnStart, fnMid, fnEnd);
+    }
+    return cacheComposeMiddlewares[key];
   }
 }
 
