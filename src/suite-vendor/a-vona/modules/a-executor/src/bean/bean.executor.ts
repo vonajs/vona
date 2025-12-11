@@ -1,7 +1,7 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
-import { isNil } from '@cabloy/utils';
+import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
@@ -95,7 +95,13 @@ export class BeanExecutor extends BeanBase {
           __delegateProperties(ctx, options.extraData);
         }
       }
-      return await fn();
+      try {
+        return await fn();
+      } finally {
+        if (!options.res) {
+          ctx.res.end();
+        }
+      }
     });
   }
 
