@@ -5,7 +5,7 @@ export async function middlewareGuard(ctx: VonaContext, next: Next) {
   const handler = ctx.getHandler();
   if (!handler) return next();
   // compose
-  const result = await ctx.app.bean.onion.guard.compose(ctx)(ctx);
+  const result = await ctx.app.bean.onion.guard.compose(ctx.route)(ctx);
   if (result === false) ctx.app.throw(403);
   // next
   return next();

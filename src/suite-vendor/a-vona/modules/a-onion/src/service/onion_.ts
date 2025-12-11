@@ -1,8 +1,9 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import type { Next, VonaContext } from 'vona';
+import type { Next } from 'vona';
 import type { IEventRecord } from 'vona-module-a-event';
 import type { IMetaNameRecord } from 'vona-module-a-meta';
+import type { ContextRoute } from 'vona-module-a-web';
 import type { IOnionExecuteCustom, IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice, TypeOnionOptionsMatchRule, TypeOnionsNormal } from '../types/onion.ts';
 import { isRegExp } from 'node:util/types';
 import { swapDeps } from '@cabloy/deps';
@@ -44,14 +45,14 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   }
 
   compose(
-    ctx: VonaContext | undefined,
+    route: ContextRoute | undefined,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
     executeCustom?: IOnionExecuteCustom,
   ) {
     // compose
-    const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
+    const onions = this._composeOnionsHandler(route, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
     return compose(onions);
   }
@@ -128,14 +129,14 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   }
 
   private _composeOnionsHandler(
-    ctx: VonaContext | undefined,
+    route: ContextRoute | undefined,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
     executeCustom?: IOnionExecuteCustom,
   ) {
-    const beanFullName = ctx?.getControllerBeanFullName();
-    const handlerName = ctx?.getHandler()?.name;
+    const beanFullName = route?.controllerBeanFullName;
+    const handlerName = route?.action;
     const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
     if (!this._cacheOnionsHandler[key]) {
       let onions: Function[] = [];
@@ -144,7 +145,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
       onions = onions.concat(this._composeOnionsGlobal(executeCustom));
       if (fnMid) onions = onions.concat(fnMid);
       // onions: handler
-      const onionsLocal = this._collectOnionsHandler(ctx);
+      const onionsLocal = this._collectOnionsHandler(route);
       for (const item of onionsLocal) {
         onions.push(this._wrapOnion(item, executeCustom));
       }
@@ -154,19 +155,19 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return this._cacheOnionsHandler[key];
   }
 
-  public _collectOnionsHandler(ctx: VonaContext | undefined) {
-    if (!ctx?.getController()) return [];
+  public _collectOnionsHandler(route: ContextRoute | undefined) {
+    if (!route?.controller) return [];
     // onionsLocal: controller
     const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
-      ctx.getController()!,
+      route.controller,
     )?.[this.sceneName] as string[];
     // onionsLocal: action
     const onionsLocal: IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[] = [];
     const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
-      ctx.getControllerPrototype()!,
-      ctx.getHandlerName()!,
+      route.controller.prototype,
+      route.action,
     )?.[this.sceneName] as string[];
     const onionsLocalAll: string[] = [];
     if (actionOnionsLocal) {

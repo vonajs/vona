@@ -1,8 +1,9 @@
-import type { Constructable, Next, VonaContext } from 'vona';
+import type { Next, VonaApplication, VonaContext } from 'vona';
 import type { IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IOnionExecuteCustom } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
+import type { ContextRoute } from '../../types/router.ts';
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import { SymbolRouteHandlersArgumentsMeta, SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
@@ -13,24 +14,23 @@ export async function middlewarePipe(ctx: VonaContext, next: Next) {
   const handler = ctx.getHandler();
   if (!handler) return next();
   // arguments
-  ctx[SymbolRouteHandlersArgumentsValue] = await _transformArguments(ctx, ctx.getController()!, handler);
+  ctx[SymbolRouteHandlersArgumentsValue] = await _transformArguments(ctx.app, ctx.route);
   // next
   return next();
 }
 
 async function _transformArguments(
-  ctx: VonaContext,
-  controller: Constructable,
-  handler: Function,
+  app: VonaApplication,
+  route: ContextRoute,
 ): Promise<any[] | undefined> {
-  const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', controller.prototype, handler.name);
+  const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', route.controller.prototype, route.action);
   if (!paramtypes) return;
 
   // meta
   const argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
     SymbolRouteHandlersArgumentsMeta,
-    controller.prototype,
-    handler.name,
+    route.controller.prototype,
+    route.action,
   );
   if (!argsMeta) return;
 
@@ -40,30 +40,31 @@ async function _transformArguments(
     const argMeta = argsMeta.find(item => item?.index === index);
     if (!argMeta) continue;
     // extractValue
-    const value = await _extractArgumentValue(ctx, argMeta);
+    const value = await _extractArgumentValue(app.ctx, argMeta);
     // metadata
     const metadata: RouteHandlerArgumentMeta = {
       type: argMeta.type,
       field: argMeta.field,
       metaType: paramtypes[index],
-      controller,
-      method: handler.name,
+      controller: route.controller,
+      method: route.action,
       index: argMeta.index,
     };
     // transform
-    args[index] = await _transformArgument(ctx, argMeta, metadata, value);
+    args[index] = await _transformArgument(app, route, argMeta, metadata, value);
   }
   return args;
 }
 
 async function _transformArgument(
-  ctx: VonaContext,
+  app: VonaApplication,
+  route: ContextRoute,
   argMeta: RouteHandlerArgumentMetaDecorator,
   metadata: RouteHandlerArgumentMeta,
   value: any,
 ) {
   // pipes
-  const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, value, options, _next) => {
+  const pipes = composePipes(app, route, argMeta, (beanInstance: IPipeTransform, value, options, _next) => {
     if (!isNil(options.argIndex) && argMeta.index !== options.argIndex) return value;
     return beanInstance.transform(value, metadata, options);
   });
@@ -89,15 +90,16 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
 const SymbolCacheMiddlewaresArgument = Symbol('SymbolCacheMiddlewaresArgument');
 
 function composePipes(
-  ctx: VonaContext,
+  app: VonaApplication,
+  route: ContextRoute,
   argMeta: RouteHandlerArgumentMetaDecorator,
   executeCustom: IOnionExecuteCustom,
 ) {
-  if (!ctx.app.meta[SymbolCacheMiddlewaresArgument]) ctx.app.meta[SymbolCacheMiddlewaresArgument] = {};
-  const __cacheMiddlewaresArgument: Record<string, Function[]> = ctx.app.meta[SymbolCacheMiddlewaresArgument];
-  const onionPipe = ctx.app.bean.onion.pipe;
-  const beanFullName = ctx.getControllerBeanFullName();
-  const handlerName = ctx.getHandler()!.name;
+  if (!app.meta[SymbolCacheMiddlewaresArgument]) app.meta[SymbolCacheMiddlewaresArgument] = {};
+  const __cacheMiddlewaresArgument: Record<string, Function[]> = app.meta[SymbolCacheMiddlewaresArgument];
+  const onionPipe = app.bean.onion.pipe;
+  const beanFullName = route.controllerBeanFullName;
+  const handlerName = route.action;
   const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
   if (!__cacheMiddlewaresArgument[key]) {
     const middlewares: Function[] = [];
@@ -106,7 +108,7 @@ function composePipes(
       middlewares.push(onionPipe._wrapOnion(item, executeCustom));
     }
     // pipes: route
-    const middlewaresLocal = onionPipe._collectOnionsHandler(ctx);
+    const middlewaresLocal = onionPipe._collectOnionsHandler(route);
     for (const item of middlewaresLocal) {
       middlewares.push(onionPipe._wrapOnion(item, executeCustom));
     }

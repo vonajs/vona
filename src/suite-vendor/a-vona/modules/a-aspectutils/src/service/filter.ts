@@ -11,7 +11,7 @@ export class ServiceFilter extends BeanBase {
 
   private _composeFilters() {
     return this.app.bean.onion.filter.compose(
-      this.ctx,
+      this.ctx.route,
       undefined,
       undefined,
       undefined,
