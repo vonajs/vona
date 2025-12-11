@@ -14,7 +14,7 @@ declare module '@cabloy/cli' {
 
 export default metadataCustomSnippet({
   file: 'src/config/locale/en-us.ts',
-  language: 'gogo',
+  language: 'plain',
   init: async ({ cli, argv, targetFile }) => {
     await catchError(() => {
       return cli.helper.invokeCli([
