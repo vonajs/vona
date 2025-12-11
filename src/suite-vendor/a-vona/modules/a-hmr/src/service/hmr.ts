@@ -87,7 +87,9 @@ export class ServiceHmr extends BeanBase {
 
   private _reloadBeanScene(beanOptions: IDecoratorBeanOptionsBase) {
     const { scene } = beanOptions;
-    cast<ServiceOnion<any>>(this.bean.onion[scene])?.load();
+    if (!['bean'].includes(scene)) {
+      cast<ServiceOnion<any>>(this.bean.onion[scene])?.load();
+    }
   }
 
   private _reloadBeanAop(beanOptions: IDecoratorBeanOptionsBase) {
