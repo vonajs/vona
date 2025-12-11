@@ -1,4 +1,4 @@
-import type { Constructable, VonaContext } from 'vona';
+import type { Constructable, VonaApplication, VonaContext } from 'vona';
 import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
 import type { IDecoratorControllerOptions } from '../types/controller.ts';
 import type { TypeRequestMethod } from '../types/request.ts';
@@ -6,16 +6,14 @@ import type { ContextRoute } from '../types/router.ts';
 import * as ModuleInfo from '@cabloy/module-info';
 import Router from 'find-my-way';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
+import { SymbolCacheComposeMiddlewares } from 'vona-module-a-aspect';
 import { Bean } from 'vona-module-a-bean';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.ts';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
-import { SymbolCacheComposeMiddlewares } from '../types/cache.ts';
 import { SymbolRequestMappingHandler } from '../types/request.ts';
-
-const SymbolRouteComposeMiddlewaresCache = Symbol('SymbolRouteComposeMiddlewaresCache');
 
 @Bean()
 export class BeanRouter extends BeanBase {
@@ -152,16 +150,12 @@ export class BeanRouter extends BeanBase {
     };
 
     // fn
-    const self = this;
     const fn = function (this: VonaContext, _req, _res, params, _store, searchParams) {
       const ctx = this;
       ctx.route = _route;
       ctx.request.params = params;
       ctx.request.query = searchParams;
-      if (!_route[SymbolRouteComposeMiddlewaresCache]) {
-        _route[SymbolRouteComposeMiddlewaresCache] = self._registerComposeMiddlewares(_route);
-      }
-      return _route[SymbolRouteComposeMiddlewaresCache](ctx);
+      return _composeMiddlewares(this.app, _route)(ctx);
     };
 
     // add
@@ -173,8 +167,16 @@ export class BeanRouter extends BeanBase {
     // register
     app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath, fn);
   }
+}
 
-  private _registerComposeMiddlewares(route: ContextRoute) {
+function _composeMiddlewares(app: VonaApplication, route: ContextRoute) {
+  // compose
+  if (!app.meta[SymbolCacheComposeMiddlewares]) app.meta[SymbolCacheComposeMiddlewares] = {};
+  const cacheComposeMiddlewares: Record<string, Function> = app.meta[SymbolCacheComposeMiddlewares];
+  const beanFullName = route.controllerBeanFullName;
+  const handlerName = route.action;
+  const key = `${beanFullName}:${handlerName}`;
+  if (!cacheComposeMiddlewares[key]) {
     // start
     const fnStart = routeStartMiddleware;
     // mid: guard/interceptor/pipes/tail
@@ -185,17 +187,9 @@ export class BeanRouter extends BeanBase {
     fnMid.push(routeTailDoneMiddleware);
     // end: controller
     const fnEnd = classControllerMiddleware;
-    // compose
-    if (!this.app.meta[SymbolCacheComposeMiddlewares]) this.app.meta[SymbolCacheComposeMiddlewares] = {};
-    const cacheComposeMiddlewares: Record<string, Function> = this.app.meta[SymbolCacheComposeMiddlewares];
-    const beanFullName = route.controllerBeanFullName;
-    const handlerName = route.action;
-    const key = `${beanFullName}:${handlerName}`;
-    if (!cacheComposeMiddlewares[key]) {
-      cacheComposeMiddlewares[key] = this.app.bean.onion.middleware.compose(route, fnStart, fnMid, fnEnd);
-    }
-    return cacheComposeMiddlewares[key];
+    cacheComposeMiddlewares[key] = app.bean.onion.middleware.compose(route, fnStart, fnMid, fnEnd);
   }
+  return cacheComposeMiddlewares[key];
 }
 
 function classControllerMiddleware(ctx: VonaContext) {

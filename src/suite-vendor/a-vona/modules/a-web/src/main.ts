@@ -1,8 +1,9 @@
-import type { IModuleMain, Next, VonaContext } from 'vona';
+import type { IModuleMain, Next, VonaApplication, VonaContext } from 'vona';
 import type { IMiddlewareSystemExecute, IMiddlewareSystemRecord } from 'vona-module-a-aspect';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import Router from 'find-my-way';
 import { BeanSimple, compose } from 'vona';
+import { SymbolCacheMiddlewareSystems } from 'vona-module-a-aspect';
 import { SymbolRouterMiddleware } from 'vona-module-a-executor';
 import { __ThisModule__ } from './.metadata/this.ts';
 
@@ -29,34 +30,15 @@ export class Main extends BeanSimple implements IModuleMain {
       this.bean.router.registerController(controller.beanOptions.beanFullName);
     }
     // middleware: system
-    const middlewares = this.bean.onion.middlewareSystem.getOnionsEnabledWrapped(item => {
-      return this._wrapOnion(item);
+    this.app.use((ctx, next) => {
+      return _composeMiddlewareSystems(this.app)(ctx, next);
     });
-    this.app.use(compose(middlewares));
     // middleware: router
     this.app[SymbolRouterMiddleware] = routerMiddleware(this[SymbolRouter]);
     this.app.use(this.app[SymbolRouterMiddleware]);
   }
 
   async configLoaded(_config: any) {}
-
-  private _wrapOnion<T extends keyof IMiddlewareSystemRecord>(item: IOnionSlice<IMiddlewareSystemRecord, T>) {
-    const fn = (_ctx: VonaContext, next: Next) => {
-      const options = item.beanOptions.options!;
-      if (!this.bean.onion.checkOnionOptionsEnabled(options, this.ctx.path)) {
-        return next();
-      }
-      // execute
-      const beanFullName = item.beanOptions.beanFullName;
-      const beanInstance = this.app.bean._getBean<IMiddlewareSystemExecute>(beanFullName as any);
-      if (!beanInstance) {
-        throw new Error(`middlewareSystem bean not found: ${beanFullName}`);
-      }
-      return beanInstance.execute(options, next);
-    };
-    fn._name = item.name;
-    return fn;
-  }
 }
 
 function routerMiddleware(router: Router.Instance<Router.HTTPVersion.V1>) {
@@ -68,4 +50,33 @@ function routerMiddleware(router: Router.Instance<Router.HTTPVersion.V1>) {
       });
     });
   };
+}
+
+function _composeMiddlewareSystems(app: VonaApplication) {
+  // compose
+  if (!app.meta[SymbolCacheMiddlewareSystems]) {
+    const middlewares = app.bean.onion.middlewareSystem.getOnionsEnabledWrapped(item => {
+      return _wrapOnion(app, item);
+    });
+    app.meta[SymbolCacheMiddlewareSystems] = compose(middlewares);
+  }
+  return app.meta[SymbolCacheMiddlewareSystems];
+}
+
+function _wrapOnion<T extends keyof IMiddlewareSystemRecord>(app: VonaApplication, item: IOnionSlice<IMiddlewareSystemRecord, T>) {
+  const fn = (_ctx: VonaContext, next: Next) => {
+    const options = item.beanOptions.options!;
+    if (!app.bean.onion.checkOnionOptionsEnabled(options, app.ctx.path)) {
+      return next();
+    }
+    // execute
+    const beanFullName = item.beanOptions.beanFullName;
+    const beanInstance = app.bean._getBean<IMiddlewareSystemExecute>(beanFullName as any);
+    if (!beanInstance) {
+      throw new Error(`middlewareSystem bean not found: ${beanFullName}`);
+    }
+    return beanInstance.execute(options, next);
+  };
+  fn._name = item.name;
+  return fn;
 }
