@@ -1,7 +1,7 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
 import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
-import { catchError, isNil } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { __delegateProperties } from '../lib/utils.ts';
