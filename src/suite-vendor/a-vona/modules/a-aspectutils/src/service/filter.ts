@@ -1,17 +1,28 @@
 import type { IFilterComposeData, IFilterJson } from 'vona-module-a-aspect';
-import { BeanBase } from 'vona';
+import type { ContextRoute } from 'vona-module-a-web';
+import { BeanBase, VonaApplication } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+export const SymbolCacheComposeFilters = Symbol('SymbolCacheComposeFilters');
 
 @Service()
 export class ServiceFilter extends BeanBase {
   async performErrorFilters(err: Error, method: string) {
     const filterContext: IFilterComposeData = { err, method };
-    return await this._composeFilters()(filterContext);
+    return await _composeFilters(this.app, this.ctx.route)(filterContext);
   }
+}
 
-  private _composeFilters() {
-    return this.app.bean.onion.filter.compose(
-      this.ctx.route,
+function _composeFilters(app: VonaApplication, route: ContextRoute | undefined) {
+  // compose
+  if (!app.meta[SymbolCacheComposeFilters]) app.meta[SymbolCacheComposeFilters] = {};
+  const cacheComposeFilters: Record<string, Function> = app.meta[SymbolCacheComposeFilters];
+  const beanFullName = route?.controllerBeanFullName ?? '';
+  const handlerName = route?.action ?? '';
+  const key = `${beanFullName}:${handlerName}`;
+  if (!cacheComposeFilters[key]) {
+    cacheComposeFilters[key] = app.bean.onion.filter.compose(
+      route,
       undefined,
       undefined,
       undefined,
@@ -21,4 +32,5 @@ export class ServiceFilter extends BeanBase {
       },
     );
   }
+  return cacheComposeFilters[key];
 }
