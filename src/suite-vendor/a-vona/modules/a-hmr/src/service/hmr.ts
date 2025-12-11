@@ -90,9 +90,9 @@ export class ServiceHmr extends BeanBase {
     cast<ServiceOnion<any>>(this.bean.onion[scene])?.load();
   }
 
-  private _reloadBeanAop(_beanOptions: IDecoratorBeanOptionsBase) {
-    delete this.app[SymbolCacheAopChains];
-    delete this.app[SymbolCacheAopChainsKey];
+  private _reloadBeanAop(beanOptions: IDecoratorBeanOptionsBase) {
+    delete this.app[SymbolCacheAopChains][beanOptions.beanFullName];
+    delete this.app[SymbolCacheAopChainsKey][beanOptions.beanFullName];
   }
 
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
