@@ -20,12 +20,24 @@ const SymbolRouteComposeMiddlewaresCache = Symbol('SymbolRouteComposeMiddlewares
 export class BeanRouter extends BeanBase {
   private _controllerRoutes: Record<string, ContextRoute[]> = {};
 
-  registerController(moduleName: string, controller: Constructable) {
-    // info
-    const info = ModuleInfo.parseInfo(moduleName)!;
+  reRegisterController(beanFullName: string) {
+    const app = this.app;
+    // remove
+    const routes = this._controllerRoutes[beanFullName];
+    if (!routes) return;
+    delete this._controllerRoutes[beanFullName];
+    for (const route of routes) {
+      app.router.off(route.routeMethod.toUpperCase() as any, route.routePath);
+    }
+    // register
+    this.registerController(beanFullName);
+  }
+
+  registerController(beanFullName: string) {
     // controller options
-    const beanOptions = appResource.getBean(controller);
+    const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
+    const controller = beanOptions.beanClass;
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
@@ -37,7 +49,7 @@ export class BeanRouter extends BeanBase {
       if (['constructor'].includes(actionKey)) continue;
       if (!desc.value || typeof desc.value !== 'function') continue;
       this._registerControllerAction(
-        info,
+        beanOptions.module,
         controller,
         controllerBeanFullName,
         controllerPath,
@@ -83,7 +95,7 @@ export class BeanRouter extends BeanBase {
   }
 
   private _registerControllerAction(
-    info: ModuleInfo.IModuleInfo,
+    moduleName: string,
     controller: Constructable,
     controllerBeanFullName: string,
     controllerPath: string | undefined,
@@ -105,14 +117,14 @@ export class BeanRouter extends BeanBase {
     const actionMethod: TypeRequestMethod = handlerMetadata.method || 'get';
     // routePath
     const routePath = app.util.combineApiPathControllerAndAction(
-      info.relativeName,
+      moduleName,
       controllerPath,
       actionPath,
       true,
       true,
     );
     const routePathRaw = app.util.combineApiPathControllerAndActionRaw(
-      info.relativeName,
+      moduleName,
       controllerPath,
       actionPath,
       true,
@@ -128,8 +140,6 @@ export class BeanRouter extends BeanBase {
 
     // route
     const _route: ContextRoute = {
-      pid: info.pid,
-      module: info.name,
       controller,
       actionDescriptor: desc,
       controllerBeanFullName,
@@ -156,11 +166,11 @@ export class BeanRouter extends BeanBase {
     // add
     if (!this._controllerRoutes[controllerBeanFullName]) {
       this._controllerRoutes[controllerBeanFullName] = [];
-      this._controllerRoutes[controllerBeanFullName].push(_route);
     }
+    this._controllerRoutes[controllerBeanFullName].push(_route);
 
     // register
-    app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath.toString(), fn);
+    app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath, fn);
   }
 
   _registerComposeMiddlewares(ctx: VonaContext) {

@@ -7,8 +7,6 @@ export interface ContextRouteMetadata {
 }
 
 export interface ContextRoute {
-  pid: string;
-  module: string;
   controller: Constructable;
   actionDescriptor: PropertyDescriptor;
   controllerBeanFullName: string;
