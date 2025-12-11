@@ -65,6 +65,7 @@ export class CliBinDev extends BeanCliBase {
           '**/src/config/locale/*.ts',
           '**/src/config/config.ts',
           '**/src/config/constants.ts',
+          '**/src/controller/*.ts',
           '**/src/model/*.ts',
           '**/src/service/*.ts',
           '**/src/bean/*.*.ts',
