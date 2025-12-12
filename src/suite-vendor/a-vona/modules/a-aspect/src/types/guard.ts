@@ -1,5 +1,5 @@
 import type { Next, OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsBaseSimple, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IGuardRecordGlobal {}
@@ -13,7 +13,7 @@ export interface IGuardExecute {
 export interface IDecoratorGuardOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorGuardOptionsGlobal
-  extends IOnionOptionsBase<keyof IApiPathRecord>,
+  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
   IOnionOptionsDeps<keyof IGuardRecordGlobal> {
   global: true;
 }

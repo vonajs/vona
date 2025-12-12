@@ -1,5 +1,5 @@
 import type { Constructable, OmitNever } from 'vona';
-import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import type { IAuthenticateStrategyState } from './auth.ts';
 
@@ -35,7 +35,7 @@ export interface IDecoratorAuthProviderOptions<
   K extends keyof IAuthProviderClientRecord = keyof IAuthProviderClientRecord,
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 >
-  extends IOnionOptionsEnable {
+  extends TypeOnionOptionsEnableSimple {
   default?: T;
   clients?: { [prop in K]?: T }; // Record<K, T>;
 }

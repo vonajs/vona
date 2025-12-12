@@ -1,5 +1,5 @@
 import type { Next, OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsBaseSimple } from 'vona-module-a-onion';
 
 export interface IMiddlewareSystemRecord {}
 
@@ -9,7 +9,7 @@ export interface IMiddlewareSystemExecute {
 
 export interface IDecoratorMiddlewareSystemOptions
   // not use IApiPathRecord, because has no matched route
-  extends IOnionOptionsBase<string>,
+  extends TypeOnionOptionsBaseSimple<string>,
   IOnionOptionsDeps<keyof IMiddlewareSystemRecord> {}
 
 declare module 'vona-module-a-onion' {

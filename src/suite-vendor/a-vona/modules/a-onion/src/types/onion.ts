@@ -40,6 +40,8 @@ export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
 }
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
+export interface TypeOnionOptionsBaseSimple<T extends string>
+  extends TypeOnionOptionsEnableSimple, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
 
 export interface IOnionSlice<ONIONRECORD = unknown, ONIONNAME extends keyof ONIONRECORD = any, T = unknown> {
   name: ONIONNAME;

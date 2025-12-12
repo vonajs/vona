@@ -1,5 +1,5 @@
 import type { OmitNever } from 'vona';
-import type { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
+import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsBaseSimple, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentType, TypeExtractValue } from 'vona-module-a-openapi';
 import type { IApiPathRecord } from 'vona-module-a-web';
 import type z from 'zod';
@@ -24,7 +24,7 @@ export interface IDecoratorPipeOptions extends TypeOnionOptionsEnableSimple {
 }
 
 export interface IDecoratorPipeOptionsGlobal
-  extends IOnionOptionsBase<keyof IApiPathRecord>,
+  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
   IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   global: true;
   argIndex?: number;
