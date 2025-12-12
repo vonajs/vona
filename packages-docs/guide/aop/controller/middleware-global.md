@@ -190,8 +190,6 @@ Allows global middleware to take effect in a specified operating environment
 |--|--|--|
 |flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
 |mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|instanceName|string\|string[]|See: [Multi-Instance/Multi-Tenancy](../../env-config/instance/introduction.md)|
-|host|string\|string[]|Host|
 
 * Example
 
@@ -201,8 +199,6 @@ Allows global middleware to take effect in a specified operating environment
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
-+   instanceName: '',
-+   host: 'localhost:7102',
 + },
 })
 class MiddlewareLogger {}
