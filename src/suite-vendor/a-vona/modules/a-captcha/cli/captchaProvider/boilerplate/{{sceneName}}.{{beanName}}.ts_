@@ -18,7 +18,8 @@ export class CaptchaProvider<%=argv.beanNameCapitalize%>
   async verify(
     _token: TypeCaptchaProvider<%=argv.beanNameCapitalize%>Token,
     _tokenInput: TypeCaptchaProvider<%=argv.beanNameCapitalize%>Token,
-    _options: ICaptchaProviderOptions<%=argv.beanNameCapitalize%>): Promise<boolean> {
+    _options: ICaptchaProviderOptions<%=argv.beanNameCapitalize%>,
+  ): Promise<boolean> {
     return false;
   }
 }
