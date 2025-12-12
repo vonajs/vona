@@ -118,6 +118,32 @@ export interface IModuleBroadcast {
 'memSet': BroadcastMemSet;
 }
 /** broadcast: end */
+/** hmr: begin */
+export * from '../bean/hmr.cacheMem.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-cache:cacheMem': never;
+    }
+
+  
+}
+declare module 'vona-module-a-cache' {
+  
+        export interface HmrCacheMem {
+          /** @internal */
+          get scope(): ScopeModuleACache;
+        }
+
+          export interface HmrCacheMem {
+            get $beanFullName(): 'a-cache.hmr.cacheMem';
+            get $onionName(): 'a-cache:cacheMem';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

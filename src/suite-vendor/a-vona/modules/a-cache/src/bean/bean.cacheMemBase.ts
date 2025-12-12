@@ -4,8 +4,7 @@ import { LRUCache } from 'lru-cache';
 import { Virtual } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
-
-const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
+import { SymbolCacheMemories } from '../lib/const.ts';
 
 @Bean()
 @Virtual()
@@ -16,14 +15,14 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
   }
 
   private get memoryInstance() {
-    if (!this.app[SUMMERCACHEMEMORY]) {
-      this.app[SUMMERCACHEMEMORY] = {};
+    if (!this.app[SymbolCacheMemories]) {
+      this.app[SymbolCacheMemories] = {};
     }
     const iid = this.__getInstanceIdScope();
-    if (!this.app[SUMMERCACHEMEMORY][iid]) {
-      this.app[SUMMERCACHEMEMORY][iid] = {};
+    if (!this.app[SymbolCacheMemories][iid]) {
+      this.app[SymbolCacheMemories][iid] = {};
     }
-    return this.app[SUMMERCACHEMEMORY][iid];
+    return this.app[SymbolCacheMemories][iid];
   }
 
   private get lruCache(): LRUCache<string, any> {
