@@ -39,7 +39,11 @@ export default metadataCustomSnippet({
     ast = ast.replace('import { $tableColumns } from \'vona-module-a-orm\';', `import { $tableColumns } from 'vona-module-a-orm';\n${code}`);
     // update
     code = await cli.template.renderContent({ content: __snippet_update });
-    ast = ast.replace('indexes: {', `indexes: {\n    ${code}\n  `);
+    if (ast.includes('indexes: {}')) {
+      ast = ast.replace('indexes: {', `indexes: {\n    ${code}\n  `);
+    } else {
+      ast = ast.replace('indexes: {', `indexes: {\n    ${code}`);
+    }
     // ok
     return ast;
   },

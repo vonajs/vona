@@ -515,6 +515,9 @@ importers:
       '@cabloy/module-info':
         specifier: ^1.3.31
         version: link:../../packages-utils/module-info
+      '@cabloy/utils':
+        specifier: ^1.0.48
+        version: link:../../packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
         version: 2.0.1
@@ -1107,6 +1110,9 @@ importers:
       http-proxy:
         specifier: ^1.18.1
         version: 1.18.1
+      vona-module-a-socket:
+        specifier: workspace:^
+        version: link:../a-socket
     devDependencies:
       '@types/http-proxy':
         specifier: ^1.17.16
