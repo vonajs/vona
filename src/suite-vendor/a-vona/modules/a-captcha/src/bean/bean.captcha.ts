@@ -5,13 +5,10 @@ import type { ICaptchaSceneOptionsProviders, ICaptchaSceneOptionsResolverResult,
 import { getRandomInt } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName, deepExtend, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-
-const SymbolProviders = Symbol('SymbolProviders');
+import { SymbolCacheSceneProviders } from '../lib/const.ts';
 
 @Bean()
 export class BeanCaptcha extends BeanBase {
-  protected [SymbolProviders]: Record<keyof ICaptchaSceneRecord, ICaptchaProviderRecord> = {} as any;
-
   async create(sceneName: keyof ICaptchaSceneRecord): Promise<ICaptchaData> {
     // resolve provider
     const provider = await this._resolveProvider(sceneName);
@@ -165,13 +162,14 @@ export class BeanCaptcha extends BeanBase {
   }
 
   private _getProviders(sceneName: keyof ICaptchaSceneRecord) {
-    if (!this[SymbolProviders][sceneName]) {
+    if (!this.app.meta[SymbolCacheSceneProviders]) this.app.meta[SymbolCacheSceneProviders] = {};
+    if (!this.app.meta[SymbolCacheSceneProviders][sceneName]) {
       const onionSlice = this.bean.onion.captchaScene.getOnionSlice(sceneName);
       if (!onionSlice) throw new Error(`not found captcha scene: ${sceneName}`);
       const onionOptions = onionSlice.beanOptions.options;
-      this[SymbolProviders][sceneName] = this._prepareProviders(onionOptions?.providers);
+      this.app.meta[SymbolCacheSceneProviders][sceneName] = this._prepareProviders(onionOptions?.providers);
     }
-    return this[SymbolProviders][sceneName];
+    return this.app.meta[SymbolCacheSceneProviders][sceneName];
   }
 
   private _prepareProviders(providers?: ICaptchaSceneOptionsProviders): ICaptchaProviderRecord {

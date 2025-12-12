@@ -161,6 +161,45 @@ declare module 'vona-module-a-web' {
 
 }
 /** controller: end */
+/** hmr: begin */
+export * from '../bean/hmr.captchaProvider.ts';
+export * from '../bean/hmr.captchaScene.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-captcha:captchaProvider': never;
+'a-captcha:captchaScene': never;
+    }
+
+  
+}
+declare module 'vona-module-a-captcha' {
+  
+        export interface HmrCaptchaProvider {
+          /** @internal */
+          get scope(): ScopeModuleACaptcha;
+        }
+
+          export interface HmrCaptchaProvider {
+            get $beanFullName(): 'a-captcha.hmr.captchaProvider';
+            get $onionName(): 'a-captcha:captchaProvider';
+            
+          }
+
+        export interface HmrCaptchaScene {
+          /** @internal */
+          get scope(): ScopeModuleACaptcha;
+        }
+
+          export interface HmrCaptchaScene {
+            get $beanFullName(): 'a-captcha.hmr.captchaScene';
+            get $onionName(): 'a-captcha:captchaScene';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
