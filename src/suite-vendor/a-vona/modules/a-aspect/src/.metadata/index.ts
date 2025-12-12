@@ -1,30 +1,4 @@
 /* eslint-disable */
-/** eventListener: begin */
-export * from '../bean/eventListener.hmrReload.ts';
-
-import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
-declare module 'vona-module-a-event' {
-  
-    export interface IEventListenerRecord {
-      'a-aspect:hmrReload': IDecoratorEventListenerOptions;
-    }
-
-  
-}
-declare module 'vona-module-a-aspect' {
-  
-        export interface EventListenerHmrReload {
-          /** @internal */
-          get scope(): ScopeModuleAAspect;
-        }
-
-          export interface EventListenerHmrReload {
-            get $beanFullName(): 'a-aspect.eventListener.hmrReload';
-            get $onionName(): 'a-aspect:hmrReload';
-            get $onionOptions(): IDecoratorEventListenerOptions;
-          } 
-}
-/** eventListener: end */
 /** hmr: begin */
 export * from '../bean/hmr.aop.ts';
 export * from '../bean/hmr.aopMethod.ts';

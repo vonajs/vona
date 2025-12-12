@@ -72,6 +72,32 @@ export interface IModuleBroadcast {
   'release': BroadcastRelease;
 }
 /** broadcast: end */
+/** eventListener: begin */
+export * from '../bean/eventListener.hmrReload.ts';
+
+import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  
+    export interface IEventListenerRecord {
+      'a-election:hmrReload': IDecoratorEventListenerOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-election' {
+  
+        export interface EventListenerHmrReload {
+          /** @internal */
+          get scope(): ScopeModuleAElection;
+        }
+
+          export interface EventListenerHmrReload {
+            get $beanFullName(): 'a-election.eventListener.hmrReload';
+            get $onionName(): 'a-election:hmrReload';
+            get $onionOptions(): IDecoratorEventListenerOptions;
+          } 
+}
+/** eventListener: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

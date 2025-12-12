@@ -5,4 +5,4 @@ export type Type<%=argv.beanNameCapitalize%>LockResource = never;
 export type Type<%=argv.beanNameCapitalize%>LockIsolateResource = never;
 
 @Meta()
-export class Meta<%=argv.beanNameCapitalize%> extends BeanRedlockBase<Type<%=argv.beanNameCapitalize%>LockResource,Type<%=argv.beanNameCapitalize%>LockIsolateResource> {}
+export class Meta<%=argv.beanNameCapitalize%> extends BeanRedlockBase<Type<%=argv.beanNameCapitalize%>LockResource, Type<%=argv.beanNameCapitalize%>LockIsolateResource> {}
