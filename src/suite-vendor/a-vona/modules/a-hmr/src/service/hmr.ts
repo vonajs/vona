@@ -1,6 +1,6 @@
 import type { IDecoratorBeanOptionsBase, TypeModuleResourceConfig } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import type { IHmrReload } from '../types/hmr.ts';
+import type { IHmrReload, TypeHmrWatchScene } from '../types/hmr.ts';
 import path from 'node:path';
 import { getOnionMetasMeta, getOnionScenesMeta, parseInfoFromPath } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -9,7 +9,7 @@ import { Service } from 'vona-module-a-bean';
 
 @Service()
 export class ServiceHmr extends BeanBase {
-  async reloadFile(sceneName: string, file: string) {
+  async reloadFile(sceneName: TypeHmrWatchScene, file: string) {
     const moduleInfo = parseInfoFromPath(path.dirname(file));
     const moduleName = moduleInfo?.relativeName;
     const fileUrl = `${pathToHref(file)}?${Date.now()}`;

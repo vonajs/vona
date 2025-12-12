@@ -1,4 +1,5 @@
 import type { TypeBroadcastReloadBeanJobData } from '../bean/broadcast.reloadBean.ts';
+import type { TypeHmrWatchScene } from '../types/hmr.ts';
 import path from 'node:path';
 import chalk from 'chalk';
 import chokidar, { FSWatcher } from 'chokidar';
@@ -7,7 +8,7 @@ import { globby } from 'globby';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
-type TypePathWatchStrict = [string, RegExp];
+type TypePathWatchStrict = [TypeHmrWatchScene, RegExp];
 
 const __pathesWatch = [
   '**/src/config/errors.ts',
