@@ -8,8 +8,7 @@ type TypeEventResult = unknown; // TypeEvent<%=argv.beanNameCapitalize%>Result;
 @EventListener({ match: 'some-module:<%=argv.beanName%>' })
 export class EventListener<%=argv.beanNameCapitalize%>
   extends BeanBase
-  implements IEventExecute<TypeEventData, TypeEventResult>
-{
+  implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
     // next
     return next();

@@ -1,17 +1,16 @@
 import type { IEventExecute, NextEvent } from 'vona-module-a-event';
+import type { TypeEventHmrReloadData, TypeEventHmrReloadResult } from 'vona-module-a-hmr';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
 
-type TypeEventData = unknown; // TypeEventHmrReloadData;
-type TypeEventResult = unknown; // TypeEventHmrReloadResult;
+type TypeEventData = TypeEventHmrReloadData;
+type TypeEventResult = TypeEventHmrReloadResult;
 
-@EventListener({ match: 'some-module:hmrReload' })
+@EventListener({ match: 'a-hmr:hmrReload' })
 export class EventListenerHmrReload
   extends BeanBase
-  implements IEventExecute<TypeEventData, TypeEventResult>
-{
-  async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
-    // next
-    return next();
+  implements IEventExecute<TypeEventData, TypeEventResult> {
+  async execute(_data: TypeEventData, _next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+    this.app.bean.worker.reload();
   }
 }
