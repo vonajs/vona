@@ -88,6 +88,43 @@ export interface IModuleBroadcast {
   'reloadBean': BroadcastReloadBean;
 }
 /** broadcast: end */
+/** event: begin */
+export * from '../bean/event.hmrReload.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-hmr' {
+  
+        export interface EventHmrReload {
+          /** @internal */
+          get scope(): ScopeModuleAHmr;
+        }
+
+          export interface EventHmrReload {
+            get $beanFullName(): 'a-hmr.event.hmrReload';
+            get $onionName(): 'a-hmr:hmrReload';
+            
+          } 
+}
+/** event: end */
+/** event: begin */
+import type { EventHmrReload } from '../bean/event.hmrReload.ts';
+export interface IModuleEvent {
+  'hmrReload': EventHmrReload;
+}
+/** event: end */
+/** event: begin */
+import type { TypeEventHmrReloadData, TypeEventHmrReloadResult } from '../bean/event.hmrReload.ts';
+import type { EventOn } from 'vona-module-a-event'; 
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-hmr:hmrReload': EventOn<TypeEventHmrReloadData, TypeEventHmrReloadResult>;
+  }
+}
+/** event: end */
 /** meta: begin */
 export * from '../bean/meta.election.ts';
 
@@ -136,6 +173,7 @@ export interface ScopeModuleAHmr {
 config: TypeModuleConfig<typeof config>;
 service: IModuleService;
 broadcast: IModuleBroadcast;
+event: IModuleEvent;
 election: MetaElection;
 }
 

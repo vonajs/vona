@@ -14,7 +14,7 @@
     },
     "dependencies": {},
     "onions": {
-       "hmr": {
+      "hmr": {
         "boilerplate": "cli/hmr/boilerplate"
       }
     }
@@ -37,6 +37,7 @@
   },
   "files": [
     "assets",
+    "cli",
     "dist"
   ],
   "scripts": {

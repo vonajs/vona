@@ -14,17 +14,21 @@ export class ServiceHmr extends BeanBase {
     const moduleName = moduleInfo?.relativeName;
     const fileUrl = `${pathToHref(file)}?${Date.now()}`;
     const fileModule = await import(fileUrl);
-    if (sceneName === '_error') {
-      await this._reloadError(moduleName!, fileModule.errors);
-    } else if (sceneName === '_locale') {
-      await this._reloadLocale(moduleName!, fileModule.default, file);
-    } else if (sceneName === '_config') {
-      await this._reloadConfig(moduleName!, fileModule.config);
-    } else if (sceneName === '_constant') {
-      await this._reloadConstant(moduleName!, fileModule.constants);
-    } else {
-      await this._reloadBeanWrapper(fileModule);
-    }
+    await this.scope.event.hmrReload.emit({ sceneName, file }, async data => {
+      let beanOptions;
+      if (sceneName === '_error') {
+        await this._reloadError(moduleName!, fileModule.errors);
+      } else if (sceneName === '_locale') {
+        await this._reloadLocale(moduleName!, fileModule.default, file);
+      } else if (sceneName === '_config') {
+        await this._reloadConfig(moduleName!, fileModule.config);
+      } else if (sceneName === '_constant') {
+        await this._reloadConstant(moduleName!, fileModule.constants);
+      } else {
+        beanOptions = await this._reloadBeanWrapper(fileModule);
+      }
+      data.beanOptions = beanOptions;
+    });
   }
 
   private async _reloadError(moduleName: string, errors: {}) {
@@ -61,10 +65,11 @@ export class ServiceHmr extends BeanBase {
   }
 
   private async _reloadBeanWrapper(fileModule: any) {
+    let beanOptions;
     for (const key in fileModule) {
       const item = fileModule[key];
       if (typeof item !== 'function') continue;
-      const beanOptions = appResource.getBean(item);
+      beanOptions = appResource.getBean(item);
       if (!beanOptions) continue;
       const beanFullName = beanOptions.beanFullName;
       if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
@@ -73,6 +78,7 @@ export class ServiceHmr extends BeanBase {
         await this._reloadBean(beanOptions.beanFullName);
       }
     }
+    return beanOptions;
   }
 
   private async _reloadBean(beanFullName: string) {
