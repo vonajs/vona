@@ -10,7 +10,10 @@ type TypeEventResult = TypeEventHmrReloadResult;
 export class EventListenerHmrReload
   extends BeanBase
   implements IEventExecute<TypeEventData, TypeEventResult> {
-  async execute(_data: TypeEventData, _next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
-    this.app.bean.worker.reload();
+  async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+    await next();
+    if (data.beanOptions?.scene === 'meta' && data.beanOptions.name === 'election') {
+      this.app.bean.worker.reload();
+    }
   }
 }
