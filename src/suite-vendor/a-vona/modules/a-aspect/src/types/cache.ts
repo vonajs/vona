@@ -1,6 +1,6 @@
 import type { VonaApplication } from 'vona';
 
-export const SymbolCacheMiddlewareSystems = Symbol('SymbolCacheMiddlewareSystems');
+export const SymbolCacheComposeMiddlewareSystems = Symbol('SymbolCacheComposeMiddlewareSystems');
 export const SymbolCacheComposeMiddlewares = Symbol('SymbolCacheComposeMiddlewares');
 export const SymbolCacheComposeGuards = Symbol('SymbolCacheComposeGuards');
 export const SymbolCacheComposeInterceptors = Symbol('SymbolCacheComposeInterceptors');
@@ -8,7 +8,7 @@ export const SymbolCacheComposePipes = Symbol('SymbolCacheComposePipes');
 export const SymbolCacheComposeFilters = Symbol('SymbolCacheComposeFilters');
 
 export function clearCacheComposesAll(app: VonaApplication) {
-  delete app.meta[SymbolCacheMiddlewareSystems];
+  delete app.meta[SymbolCacheComposeMiddlewareSystems];
   clearCacheComposesRouter(app);
 }
 

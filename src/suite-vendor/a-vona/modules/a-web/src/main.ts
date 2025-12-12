@@ -3,7 +3,7 @@ import type { IMiddlewareSystemExecute, IMiddlewareSystemRecord } from 'vona-mod
 import type { IOnionSlice } from 'vona-module-a-onion';
 import Router from 'find-my-way';
 import { BeanSimple, compose } from 'vona';
-import { SymbolCacheMiddlewareSystems } from 'vona-module-a-aspect';
+import { SymbolCacheComposeMiddlewareSystems } from 'vona-module-a-aspect';
 import { SymbolRouterMiddleware } from 'vona-module-a-executor';
 import { __ThisModule__ } from './.metadata/this.ts';
 
@@ -54,13 +54,13 @@ function routerMiddleware(router: Router.Instance<Router.HTTPVersion.V1>) {
 
 function _composeMiddlewareSystems(app: VonaApplication) {
   // compose
-  if (!app.meta[SymbolCacheMiddlewareSystems]) {
+  if (!app.meta[SymbolCacheComposeMiddlewareSystems]) {
     const middlewares = app.bean.onion.middlewareSystem.getOnionsEnabledWrapped(item => {
       return _wrapOnion(app, item);
     });
-    app.meta[SymbolCacheMiddlewareSystems] = compose(middlewares);
+    app.meta[SymbolCacheComposeMiddlewareSystems] = compose(middlewares);
   }
-  return app.meta[SymbolCacheMiddlewareSystems];
+  return app.meta[SymbolCacheComposeMiddlewareSystems];
 }
 
 function _wrapOnion<T extends keyof IMiddlewareSystemRecord>(app: VonaApplication, item: IOnionSlice<IMiddlewareSystemRecord, T>) {
