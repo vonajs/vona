@@ -76,8 +76,8 @@ export class ServiceWatch extends BeanBase {
   }
 
   private async _reloadFile(data: TypeBroadcastReloadBeanJobData) {
-    await this._reloadFileInner(data);
     this.scope.broadcast.reloadBean.emit(data);
+    await this._reloadFileInner(data);
   }
 
   public async _reloadBeanWorker(data: TypeBroadcastReloadBeanJobData) {
