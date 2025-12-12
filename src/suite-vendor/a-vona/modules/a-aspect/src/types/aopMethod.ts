@@ -3,8 +3,13 @@ import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-o
 
 export const SymbolDecoratorUseAopMethod = Symbol('SymbolDecoratorUseAopMethod');
 export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord = any> {
-  beanInstance?: any;
   onionName?: T;
+  options?: Partial<IAopMethodRecord[T]>;
+}
+
+export interface IUseAopMethodPropMetadataInner<T extends keyof IAopMethodRecord = any> {
+  beanFullName: string;
+  onionName: T;
   options?: Partial<IAopMethodRecord[T]>;
 }
 

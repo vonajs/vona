@@ -513,24 +513,28 @@ export class BeanContainer {
   }
 
   private _getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, prop: string) {
+    const self = this;
     const beanAop = this.app.bean._getBean('a-aspectutils.service.aop' as never) as any;
     const aopMethods = beanAop.findAopMethodsMatched(beanFullName, prop);
     for (const aopMethod of aopMethods) {
       let fn;
       if (methodType === 'get') {
         fn = function ([receiver, _], next) {
-          if (!aopMethod.beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
-          return aopMethod.beanInstance.get(aopMethod.options, _patchAopNext([receiver, _], next), receiver, prop);
+          const beanInstance = self.app.bean._getBean<any>(aopMethod.beanFullName);
+          if (!beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
+          return beanInstance.get(aopMethod.options, _patchAopNext([receiver, _], next), receiver, prop);
         };
       } else if (methodType === 'set') {
         fn = function ([receiver, value], next) {
-          if (!aopMethod.beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
-          return aopMethod.beanInstance.set(aopMethod.options, value, _patchAopNext([receiver, value], next), receiver, prop);
+          const beanInstance = self.app.bean._getBean<any>(aopMethod.beanFullName);
+          if (!beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
+          return beanInstance.set(aopMethod.options, value, _patchAopNext([receiver, value], next), receiver, prop);
         };
       } else if (methodType === 'method') {
         fn = function ([receiver, args], next) {
-          if (!aopMethod.beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
-          return aopMethod.beanInstance.execute(aopMethod.options, args, _patchAopNext([receiver, args], next), receiver, prop);
+          const beanInstance = self.app.bean._getBean<any>(aopMethod.beanFullName);
+          if (!beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
+          return beanInstance.execute(aopMethod.options, args, _patchAopNext([receiver, args], next), receiver, prop);
         };
       }
       chains.push([aopKey, fn]);
