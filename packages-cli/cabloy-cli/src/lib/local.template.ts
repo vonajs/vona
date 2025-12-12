@@ -296,7 +296,7 @@ export class LocalTemplate {
       // save
       fs.writeFileSync(targetFile, outputCode);
       // format
-      if (!this.context.argv.noformat) {
+      if (snippet.format || !this.context.argv.noformat) {
         await catchError(() => {
           return this.helper.formatFile({ fileName: targetFile, logPrefix: 'format: ' });
         });

@@ -22,6 +22,7 @@ const __snippet_update = `if (options.version === <%=argv.fileVersion%>) {
 export default metadataCustomSnippet({
   file: 'src/bean/meta.version.ts',
   language: 'gogo',
+  format: true,
   init: async ({ cli, argv, targetFile }) => {
     await catchError(() => {
       return cli.helper.invokeCli([

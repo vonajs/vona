@@ -52,6 +52,7 @@ export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE exte
 
 export interface ISnippet<LANGUAGE extends TypeParseLanguage = ''> {
   language: LANGUAGE;
+  format?: boolean;
   file: string | ((ejsData: IEjsData) => string);
   init?: string | ((initData: IInitData) => Promise<string>);
   parseOptions?: TypeParseOptions<LANGUAGE>;
