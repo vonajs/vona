@@ -20,7 +20,7 @@ export class BeanAuth extends BeanBase {
     // stateIntention
     const stateIntention = options?.state?.intention ?? 'login';
     // onionSlice
-    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(false, authProviderName);
+    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(true, authProviderName);
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
     const onionOptions = onionSlice.beanOptions.options!;
     // authProvider
