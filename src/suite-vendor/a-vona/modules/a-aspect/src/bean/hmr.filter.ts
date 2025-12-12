@@ -2,7 +2,7 @@ import type { IDecoratorBeanOptionsBase } from 'vona';
 import type { IHmrReload } from 'vona-module-a-hmr';
 import { BeanBase } from 'vona';
 import { Hmr } from 'vona-module-a-hmr';
-import { SymbolCacheComposeFilters } from '../types/cache.ts';
+import { SymbolCacheComposeFilters } from '../lib/const.ts';
 
 @Hmr()
 export class HmrFilter extends BeanBase implements IHmrReload {
