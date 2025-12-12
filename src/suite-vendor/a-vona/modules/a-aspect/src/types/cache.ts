@@ -7,8 +7,12 @@ export const SymbolCacheComposeInterceptors = Symbol('SymbolCacheComposeIntercep
 export const SymbolCacheComposePipes = Symbol('SymbolCacheComposePipes');
 export const SymbolCacheComposeFilters = Symbol('SymbolCacheComposeFilters');
 
-export function clearAllCacheComposes(app: VonaApplication) {
+export function clearCacheComposesAll(app: VonaApplication) {
   delete app.meta[SymbolCacheMiddlewareSystems];
+  clearCacheComposesRouter(app);
+}
+
+export function clearCacheComposesRouter(app: VonaApplication) {
   delete app.meta[SymbolCacheComposeMiddlewares];
   delete app.meta[SymbolCacheComposeGuards];
   delete app.meta[SymbolCacheComposeInterceptors];
