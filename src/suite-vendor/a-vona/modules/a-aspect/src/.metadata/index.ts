@@ -28,6 +28,7 @@ declare module 'vona-module-a-aspect' {
 /** hmr: begin */
 export * from '../bean/hmr.aop.ts';
 export * from '../bean/hmr.aopMethod.ts';
+export * from '../bean/hmr.filter.ts';
 
 import 'vona';
 declare module 'vona' {
@@ -35,6 +36,7 @@ declare module 'vona' {
     export interface IHmrRecord {
       'a-aspect:aop': never;
 'a-aspect:aopMethod': never;
+'a-aspect:filter': never;
     }
 
   
@@ -60,6 +62,17 @@ declare module 'vona-module-a-aspect' {
           export interface HmrAopMethod {
             get $beanFullName(): 'a-aspect.hmr.aopMethod';
             get $onionName(): 'a-aspect:aopMethod';
+            
+          }
+
+        export interface HmrFilter {
+          /** @internal */
+          get scope(): ScopeModuleAAspect;
+        }
+
+          export interface HmrFilter {
+            get $beanFullName(): 'a-aspect.hmr.filter';
+            get $onionName(): 'a-aspect:filter';
             
           } 
 }
