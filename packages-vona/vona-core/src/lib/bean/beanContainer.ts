@@ -445,6 +445,7 @@ export class BeanContainer {
     methodType: 'get' | 'set' | 'method',
     prop: string,
   ) {
+    const self = this;
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
     const cacheKey = beanOptions?.beanFullName || beanFullName;
@@ -463,37 +464,43 @@ export class BeanContainer {
         this._getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, prop);
       } else {
         // singleton
-        const aop: BeanAopBase = this.app.bean._getBean(aopKey as string as any);
-        if (aop[methodName]) {
+        const aopOuter: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
+        if (aopOuter[methodName]) {
           let fn;
           if (methodType === 'get') {
             fn = function ([receiver, _], next) {
+              const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
               return aop[methodName](_patchAopNext([receiver, _], next), receiver);
             };
           } else if (methodType === 'set') {
             fn = function ([receiver, value], next) {
+              const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
               return aop[methodName](value, _patchAopNext([receiver, value], next), receiver);
             };
           } else if (methodType === 'method') {
             fn = function ([receiver, args], next) {
+              const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
               return aop[methodName](args, _patchAopNext([receiver, args], next), receiver);
             };
           }
           chains.push([aopKey, fn]);
         }
-        if (methodNameMagic && aop[methodNameMagic]) {
+        if (methodNameMagic && aopOuter[methodNameMagic]) {
           if (!__isLifeCycleMethod(methodName)) {
             let fn;
             if (methodType === 'get') {
               fn = function ([receiver, _], next) {
+                const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
                 return aop[methodNameMagic](prop, _patchAopNext([receiver, _], next), receiver);
               };
             } else if (methodType === 'set') {
               fn = function ([receiver, value], next) {
+                const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
                 return aop[methodNameMagic](prop, value, _patchAopNext([receiver, value], next), receiver);
               };
             } else if (methodType === 'method') {
               fn = function ([receiver, args], next) {
+                const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
                 return aop[methodNameMagic](prop, args, _patchAopNext([receiver, args], next), receiver);
               };
             }
