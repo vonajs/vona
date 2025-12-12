@@ -26,7 +26,7 @@ export class Main extends BeanSimple implements IModuleMain {
       },
     });
     // register controllers
-    for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
+    for (const controller of this.bean.onion.controller.getOnionsEnabledCached()) {
       this.bean.router.registerController(controller.beanOptions.beanFullName);
     }
     // middleware: system

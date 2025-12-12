@@ -35,7 +35,7 @@ export class ServiceQueue extends BeanBase {
   }
 
   loadQueueWorkers(instanceName?: keyof IInstanceRecord | undefined | null) {
-    for (const queueItem of this.bean.onion.queue.getOnionsEnabled()) {
+    for (const queueItem of this.bean.onion.queue.getOnionsEnabledCached()) {
       const info: IQueueJobContext<unknown> = {
         queueName: queueItem.name as never,
         data: undefined as any,

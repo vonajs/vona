@@ -136,7 +136,7 @@ export class ServiceOpenapi extends BeanBase {
     }
     // schema: independent
     for (const sceneName of ['dto', 'entity']) {
-      const onionSlices = this.bean.onion[sceneName].getOnionsEnabled();
+      const onionSlices = this.bean.onion[sceneName].getOnionsEnabledCached();
       for (const onionSlice of onionSlices) {
         if (onionSlice.beanOptions.options?.independent) {
           const schema = $schema(onionSlice.beanOptions.beanClass);
@@ -145,7 +145,7 @@ export class ServiceOpenapi extends BeanBase {
       }
     }
     // controller
-    for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
+    for (const controller of this.bean.onion.controller.getOnionsEnabledCached()) {
       this.collectController(registry, controller.beanOptions.module, controller.beanOptions.beanClass);
     }
     return registry;

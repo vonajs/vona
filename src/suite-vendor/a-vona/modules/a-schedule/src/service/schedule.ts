@@ -55,7 +55,7 @@ export class ServiceSchedule extends BeanBase {
       return false;
     }
     // check disable
-    if (this.bean.onion.schedule.getOnionsEnabled().findIndex(item => item.name === scheduleName) === -1) {
+    if (this.bean.onion.schedule.getOnionsEnabledCached().findIndex(item => item.name === scheduleName) === -1) {
       await this.deleteSchedule(job);
       return false;
     }
@@ -80,7 +80,7 @@ export class ServiceSchedule extends BeanBase {
 
   public async loadSchedules(instanceName?: keyof IInstanceRecord | undefined | null) {
     if (instanceName === undefined) instanceName = this.ctx.instanceName;
-    for (const scheduleItem of this.bean.onion.schedule.getOnionsEnabled()) {
+    for (const scheduleItem of this.bean.onion.schedule.getOnionsEnabledCached()) {
       const scheduleName = scheduleItem.name;
       await this.addSchedule(scheduleName, instanceName);
     }

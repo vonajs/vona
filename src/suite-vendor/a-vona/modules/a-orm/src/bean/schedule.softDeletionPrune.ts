@@ -8,7 +8,7 @@ import { Schedule } from 'vona-module-a-schedule';
 @Schedule({ repeat: { every: 24 * 3600 * 1000 } })
 export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExecute {
   async execute() {
-    const onionSlices = this.bean.onion.model.getOnionsEnabled();
+    const onionSlices = this.bean.onion.model.getOnionsEnabledCached();
     for (const onionSlice of onionSlices) {
       if (onionSlice.beanOptions.options?.disableDeleted) continue;
       let softDeletionPrune = onionSlice.beanOptions.options?.softDeletionPrune ?? this.scope.config.softDeletionPrune.enable;

@@ -667,7 +667,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   private _collectModelsClearAll() {
     const modelsClearAll: Record<keyof IModelRecord, TypeModelClassLikeGeneral[]> = {} as any;
-    const onionSlices = this.bean.onion.model.getOnionsEnabled();
+    const onionSlices = this.bean.onion.model.getOnionsEnabledCached();
     for (const onionSlice of onionSlices) {
       const modelName = onionSlice.name;
       if (!modelsClearAll[modelName]) modelsClearAll[modelName] = [];
