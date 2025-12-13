@@ -14,6 +14,12 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     this._cacheOptions = Object.assign({}, this.$scope.cache.config.mem.options, this._cacheOptions);
   }
 
+  protected async __dispose__() {
+    // special for hmr reload
+    const cacheMemories = getCacheMemories(this.app);
+    delete cacheMemories[this._cacheName];
+  }
+
   private get lruCache(): LRUCache<string, any> {
     const iid = this.__getInstanceIdScope();
     const cacheMemories = getCacheMemories(this.app);
