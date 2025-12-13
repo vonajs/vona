@@ -9,13 +9,21 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   protected _cacheName: string;
   protected _cacheOptions: IDecoratorSummerCacheOptions;
 
-  protected _localMem: ServiceLocalMem<KEY, DATA>;
-  protected _localRedis: ServiceLocalRedis<KEY, DATA>;
-  protected _localFetch: ServiceLocalFetch<KEY, DATA>;
+  protected _localMem: ServiceLocalMem<KEY, DATA> | undefined;
+  protected _localRedis: ServiceLocalRedis<KEY, DATA> | undefined;
+  protected _localFetch: ServiceLocalFetch<KEY, DATA> | undefined;
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
     this._cacheName = cacheName;
     this._cacheOptions = cacheOptions;
+  }
+
+  protected async __dispose__() {
+    // special for hmr reload
+    if (this._localMem) {
+      await this._localMem.__dispose__();
+      this._localMem = undefined;
+    }
   }
 
   protected get scopeSummer() {
@@ -26,7 +34,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
     return this.scopeSummer.config;
   }
 
-  protected get localMem() {
+  protected get localMem(): ServiceLocalMem<KEY, DATA> {
     if (!this._localMem) {
       this._localMem = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localMem` as any,
@@ -34,10 +42,10 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
         this._cacheOptions,
       );
     }
-    return this._localMem;
+    return this._localMem!;
   }
 
-  protected get localRedis() {
+  protected get localRedis(): ServiceLocalRedis<KEY, DATA> {
     if (!this._localRedis) {
       this._localRedis = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localRedis` as any,
@@ -45,10 +53,10 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
         this._cacheOptions,
       );
     }
-    return this._localRedis;
+    return this._localRedis!;
   }
 
-  protected get localFetch() {
+  protected get localFetch(): ServiceLocalFetch<KEY, DATA> {
     if (!this._localFetch) {
       this._localFetch = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localFetch` as any,
@@ -56,7 +64,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
         this._cacheOptions,
       );
     }
-    return this._localFetch;
+    return this._localFetch!;
   }
 
   protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
