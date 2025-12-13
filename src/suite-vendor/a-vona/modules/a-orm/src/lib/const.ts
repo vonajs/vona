@@ -3,9 +3,19 @@ import type { IModelRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLikeGeneral } from '../types/relations.ts';
 
 export const SymbolCacheModelsClear = Symbol('SymbolCacheModelsClearAll');
+export const SymbolCacheModelCacheInstances = Symbol('SymbolCacheModelCacheInstances');
 
 export function clearAllCacheModelsClear(app: VonaApplication) {
   delete app.meta[SymbolCacheModelsClear];
+}
+
+export function clearCacheModelCacheInstance(app: VonaApplication, beanFullName: string) {
+  delete app.meta[SymbolCacheModelCacheInstances][beanFullName];
+}
+
+export function getCacheModelCacheInstances(app: VonaApplication) {
+  if (!app.meta[SymbolCacheModelCacheInstances]) app.meta[SymbolCacheModelCacheInstances] = {};
+  return app.meta[SymbolCacheModelCacheInstances];
 }
 
 export function getCacheModelsClear(app: VonaApplication): Record<keyof IModelRecord, TypeModelClassLikeGeneral[]> {

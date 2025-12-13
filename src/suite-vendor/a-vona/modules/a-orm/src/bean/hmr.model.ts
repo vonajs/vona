@@ -2,11 +2,12 @@ import type { IDecoratorBeanOptionsBase } from 'vona';
 import type { IHmrReload } from 'vona-module-a-hmr';
 import { BeanBase } from 'vona';
 import { Hmr } from 'vona-module-a-hmr';
-import { clearAllCacheModelsClear } from '../lib/const.ts';
+import { clearAllCacheModelsClear, clearCacheModelCacheInstance } from '../lib/const.ts';
 
 @Hmr()
 export class HmrModel extends BeanBase implements IHmrReload {
-  async reload(_beanOptions: IDecoratorBeanOptionsBase) {
+  async reload(beanOptions: IDecoratorBeanOptionsBase) {
     clearAllCacheModelsClear(this.app);
+    clearCacheModelCacheInstance(this.app, beanOptions.beanFullName);
   }
 }

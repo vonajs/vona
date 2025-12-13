@@ -3,6 +3,7 @@ import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { TypeModelCacheType } from '../types/model.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
 import { BeanBase, deepExtend } from 'vona';
+import { getCacheModelCacheInstances } from './const.ts';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
@@ -11,18 +12,10 @@ export class ModelCacheBase extends BeanBase {
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
   protected _model: BeanModelCache;
   private _cacheType: TypeModelCacheType;
-  private _cacheInstance: BeanSummerCacheBase | undefined;
 
   protected __init__(model: BeanModelCache, cacheType: TypeModelCacheType) {
     this._model = model;
     this._cacheType = cacheType;
-  }
-
-  protected async __dispose__() {
-    if (this._cacheInstance) {
-      await this.bean._removeBean(this._cacheInstance);
-      this._cacheInstance = undefined;
-    }
   }
 
   private get scopeOrm() {
@@ -31,10 +24,14 @@ export class ModelCacheBase extends BeanBase {
 
   public getInstance(table: keyof ITableRecord): BeanSummerCacheBase {
     if (this.options === false) throw new Error('cache disabled');
-    if (!this._cacheInstance) {
-      this._cacheInstance = this.app.bean.summer.cache<any, any>(this.getName(table), this.options);
+    const beanFullName = this._model.$beanFullName;
+    const cacheName = this.getName(table);
+    const cacheModelCacheInstances = getCacheModelCacheInstances(this.app);
+    if (!cacheModelCacheInstances[beanFullName]) cacheModelCacheInstances[beanFullName] = {};
+    if (!cacheModelCacheInstances[beanFullName][cacheName]) {
+      cacheModelCacheInstances[beanFullName][cacheName] = this.app.bean.summer.cache<any, any>(cacheName, this.options);
     }
-    return this._cacheInstance;
+    return cacheModelCacheInstances[beanFullName][cacheName];
   }
 
   public getName(table: keyof ITableRecord) {
