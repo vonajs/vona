@@ -65,6 +65,32 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** hmr: begin */
+export * from '../bean/hmr.eventListener.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-event:eventListener': never;
+    }
+
+  
+}
+declare module 'vona-module-a-event' {
+  
+        export interface HmrEventListener {
+          /** @internal */
+          get scope(): ScopeModuleAEvent;
+        }
+
+          export interface HmrEventListener {
+            get $beanFullName(): 'a-event.hmr.eventListener';
+            get $onionName(): 'a-event:eventListener';
+            
+          } 
+}
+/** hmr: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';

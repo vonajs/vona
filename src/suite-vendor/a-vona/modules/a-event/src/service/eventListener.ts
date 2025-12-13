@@ -15,6 +15,10 @@ export class ServiceEventListener extends BeanBase {
     this._eventName = eventName;
   }
 
+  protected async __dispose__() {
+    this._composer = undefined;
+  }
+
   get composer() {
     if (!this._composer) {
       const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
