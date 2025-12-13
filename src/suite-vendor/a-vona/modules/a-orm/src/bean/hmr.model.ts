@@ -8,6 +8,6 @@ import { clearAllCacheModelsClear, clearCacheModelCacheInstance } from '../lib/c
 export class HmrModel extends BeanBase implements IHmrReload {
   async reload(beanOptions: IDecoratorBeanOptionsBase) {
     clearAllCacheModelsClear(this.app);
-    clearCacheModelCacheInstance(this.app, beanOptions.beanFullName);
+    await clearCacheModelCacheInstance(this.app, beanOptions.beanFullName);
   }
 }

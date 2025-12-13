@@ -9,8 +9,13 @@ export function clearAllCacheModelsClear(app: VonaApplication) {
   delete app.meta[SymbolCacheModelsClear];
 }
 
-export function clearCacheModelCacheInstance(app: VonaApplication, beanFullName: string) {
+export async function clearCacheModelCacheInstance(app: VonaApplication, beanFullName: string) {
+  const instances = app.meta[SymbolCacheModelCacheInstances][beanFullName];
+  if (!instances) return;
   delete app.meta[SymbolCacheModelCacheInstances][beanFullName];
+  for (const cacheName in instances) {
+    await app.bean._removeBean(instances[cacheName]);
+  }
 }
 
 export function getCacheModelCacheInstances(app: VonaApplication) {
