@@ -66,6 +66,32 @@ declare module 'vona-module-a-queue' {
           } 
 }
 /** startup: end */
+/** hmr: begin */
+export * from '../bean/hmr.queue.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-queue:queue': never;
+    }
+
+  
+}
+declare module 'vona-module-a-queue' {
+  
+        export interface HmrQueue {
+          /** @internal */
+          get scope(): ScopeModuleAQueue;
+        }
+
+          export interface HmrQueue {
+            get $beanFullName(): 'a-queue.hmr.queue';
+            get $onionName(): 'a-queue:queue';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
