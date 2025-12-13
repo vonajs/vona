@@ -2,20 +2,18 @@ import { BeanBase } from 'vona';
 
 export class BeanMutateBase extends BeanBase {
   private _onReloadInstancesCancel?: Function;
-  private _onDisposeInstancesCancel?: Function;
+  private _onRemoveInstancesCancel?: Function;
 
   protected __init__() {
-    // event: databaseClientReload
     this._onReloadInstancesCancel = this.$scope.beanmutate.event.reloadInstances.on(async ({ beanFullName, data }, next) => {
       if (this.$beanFullName === beanFullName) {
         await this.onReloadInstance(data);
       }
       await next();
     });
-    // event: databaseClientDispose
-    this._onDisposeInstancesCancel = this.$scope.beanmutate.event.disposeInstances.on(async ({ beanFullName, data }, next) => {
+    this._onRemoveInstancesCancel = this.$scope.beanmutate.event.removeInstances.on(async ({ beanFullName, data }, next) => {
       if (this.$beanFullName === beanFullName) {
-        await this.onDisposeInstance(data);
+        await this.onRemoveInstance(data);
       }
       await next();
     });
@@ -23,14 +21,14 @@ export class BeanMutateBase extends BeanBase {
 
   protected async __dispose__() {
     this._onReloadInstancesCancel?.();
-    this._onDisposeInstancesCancel?.();
+    this._onRemoveInstancesCancel?.();
     this._onReloadInstancesCancel = undefined;
-    this._onDisposeInstancesCancel = undefined;
+    this._onRemoveInstancesCancel = undefined;
   }
 
   protected async onReloadInstance(_data: unknown) {}
 
-  protected async onDisposeInstance(_data: unknown) {
+  protected async onRemoveInstance(_data: unknown) {
     await this.bean._removeBean(this);
   }
 }

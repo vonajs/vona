@@ -1,6 +1,6 @@
 import type { Constructable, IBeanRecord } from 'vona';
-import type { TypeEventDisposeInstancesData } from './event.disposeInstances.ts';
 import type { TypeEventReloadInstancesData } from './event.reloadInstances.ts';
+import type { TypeEventRemoveInstancesData } from './event.removeInstances.ts';
 import { appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
@@ -18,15 +18,15 @@ export class BeanMutate extends BeanBase {
     await this.scope.event.reloadInstances.emit(data);
   }
 
-  async disposeInstances<T>(beanFullName: Constructable, data: T): Promise<void>;
-  async disposeInstances<K extends keyof IBeanRecord, T>(beanFullName: K, data: T): Promise<void>;
-  async disposeInstances<T>(beanFullName: any, data: T): Promise<void> {
+  async removeInstances<T>(beanFullName: Constructable, data: T): Promise<void>;
+  async removeInstances<K extends keyof IBeanRecord, T>(beanFullName: K, data: T): Promise<void>;
+  async removeInstances<T>(beanFullName: any, data: T): Promise<void> {
     beanFullName = appResource.getBeanFullName(beanFullName);
-    await this.disposeInstancesWorker({ beanFullName, data });
-    this.scope.broadcast.disposeInstances.emit({ beanFullName, data });
+    await this.removeInstancesWorker({ beanFullName, data });
+    this.scope.broadcast.removeInstances.emit({ beanFullName, data });
   }
 
-  async disposeInstancesWorker(data: TypeEventDisposeInstancesData) {
-    await this.scope.event.disposeInstances.emit(data);
+  async removeInstancesWorker(data: TypeEventRemoveInstancesData) {
+    await this.scope.event.removeInstances.emit(data);
   }
 }

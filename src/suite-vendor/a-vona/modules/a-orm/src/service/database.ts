@@ -118,7 +118,7 @@ export class ServiceDatabase extends BeanBase {
 
   async disposeClients(clientName?: keyof IDatabaseClientRecord) {
     clientName = this.prepareClientName(clientName);
-    await this.bean.mutate.disposeInstances(ServiceDatabaseClient, { clientName });
+    await this.bean.mutate.removeInstances(ServiceDatabaseClient, { clientName });
     this.columnsClear(clientName);
   }
 }
