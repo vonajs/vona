@@ -10,6 +10,7 @@ import { SymbolCacheComposeMiddlewares } from 'vona-module-a-aspect';
 import { Bean } from 'vona-module-a-bean';
 import { SymbolUseOnionOptions } from 'vona-module-a-onion';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
+import { getCacheControllerRoutes } from '../lib/const.ts';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.ts';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.ts';
@@ -17,14 +18,13 @@ import { SymbolRequestMappingHandler } from '../types/request.ts';
 
 @Bean()
 export class BeanRouter extends BeanBase {
-  private _controllerRoutes: Record<string, ContextRoute[]> = {};
-
   reRegisterController(beanFullName: string) {
     const app = this.app;
     // remove
-    const routes = this._controllerRoutes[beanFullName];
+    const cacheControllerRoutes = getCacheControllerRoutes(this.app);
+    const routes = cacheControllerRoutes[beanFullName];
     if (!routes) return;
-    delete this._controllerRoutes[beanFullName];
+    delete cacheControllerRoutes[beanFullName];
     for (const route of routes) {
       app.router.off(route.routeMethod.toUpperCase() as any, route.routePath);
     }
@@ -159,10 +159,11 @@ export class BeanRouter extends BeanBase {
     };
 
     // add
-    if (!this._controllerRoutes[controllerBeanFullName]) {
-      this._controllerRoutes[controllerBeanFullName] = [];
+    const cacheControllerRoutes = getCacheControllerRoutes(this.app);
+    if (!cacheControllerRoutes[controllerBeanFullName]) {
+      cacheControllerRoutes[controllerBeanFullName] = [];
     }
-    this._controllerRoutes[controllerBeanFullName].push(_route);
+    cacheControllerRoutes[controllerBeanFullName].push(_route);
 
     // register
     app.router.on(_route.routeMethod.toUpperCase() as any, _route.routePath, fn);
