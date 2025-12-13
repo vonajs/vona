@@ -1,4 +1,4 @@
-import type { Next } from 'vona';
+import type { Next, VonaApplication } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IEventRecord, TypeEventOff } from '../types/event.ts';
 import type { IEventExecute, IEventListenerRecord } from '../types/eventListener.ts';
@@ -18,7 +18,7 @@ export class ServiceEventListener extends BeanBase {
   get composer() {
     if (!this._composer) {
       const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
-        return this._wrapOnion(item);
+        return _wrapOnion(this.app, item);
       }, this._eventName);
       const eventHandlers = [...eventListeners, ...this._eventHandlers];
       this._composer = compose(eventHandlers);
@@ -38,18 +38,18 @@ export class ServiceEventListener extends BeanBase {
       }
     };
   }
+}
 
-  private _wrapOnion<T extends keyof IEventListenerRecord>(item: IOnionSlice<IEventListenerRecord, T>) {
-    const fn = (data: unknown, next: Next) => {
-      // execute
-      const beanFullName = item.beanOptions.beanFullName;
-      const beanInstance = this.app.bean._getBean<IEventExecute>(beanFullName as any);
-      if (!beanInstance) {
-        throw new Error(`event listener bean not found: ${beanFullName}`);
-      }
-      return beanInstance.execute(data, next);
-    };
-    fn._name = item.name;
-    return fn;
-  }
+function _wrapOnion<T extends keyof IEventListenerRecord>(app: VonaApplication, item: IOnionSlice<IEventListenerRecord, T>) {
+  const fn = (data: unknown, next: Next) => {
+    // execute
+    const beanFullName = item.beanOptions.beanFullName;
+    const beanInstance = app.bean._getBean<IEventExecute>(beanFullName as any);
+    if (!beanInstance) {
+      throw new Error(`event listener bean not found: ${beanFullName}`);
+    }
+    return beanInstance.execute(data, next);
+  };
+  fn._name = item.name;
+  return fn;
 }
