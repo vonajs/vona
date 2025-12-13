@@ -1,5 +1,5 @@
 import type { IDecoratorDatabaseDialectOptions } from 'vona-module-a-orm';
-import { Virtual } from 'vona';
+import { $Class, Virtual } from 'vona';
 import { DatabaseDialect } from 'vona-module-a-orm';
 import { DatabaseDialectMysql } from './databaseDialect.mysql.ts';
 
@@ -7,4 +7,4 @@ export interface IDatabaseDialectOptionsMysql3 extends IDecoratorDatabaseDialect
 
 @DatabaseDialect<IDatabaseDialectOptionsMysql3>()
 @Virtual()
-export class DatabaseDialectMysql3 extends DatabaseDialectMysql {}
+export class DatabaseDialectMysql3 extends $Class.extend(DatabaseDialectMysql) {}
