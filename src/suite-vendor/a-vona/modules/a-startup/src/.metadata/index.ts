@@ -101,6 +101,32 @@ declare module 'vona-module-a-startup' {
 /** meta redlock: begin */
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
+/** hmr: begin */
+export * from '../bean/hmr.startup.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-startup:startup': never;
+    }
+
+  
+}
+declare module 'vona-module-a-startup' {
+  
+        export interface HmrStartup {
+          /** @internal */
+          get scope(): ScopeModuleAStartup;
+        }
+
+          export interface HmrStartup {
+            get $beanFullName(): 'a-startup.hmr.startup';
+            get $onionName(): 'a-startup:startup';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
