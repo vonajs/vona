@@ -127,6 +127,32 @@ declare module 'vona-module-a-schedule' {
           } 
 }
 /** startup: end */
+/** hmr: begin */
+export * from '../bean/hmr.schedule.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-schedule:schedule': never;
+    }
+
+  
+}
+declare module 'vona-module-a-schedule' {
+  
+        export interface HmrSchedule {
+          /** @internal */
+          get scope(): ScopeModuleASchedule;
+        }
+
+          export interface HmrSchedule {
+            get $beanFullName(): 'a-schedule.hmr.schedule';
+            get $onionName(): 'a-schedule:schedule';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

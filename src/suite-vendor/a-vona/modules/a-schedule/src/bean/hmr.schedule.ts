@@ -5,5 +5,7 @@ import { Hmr } from 'vona-module-a-hmr';
 
 @Hmr()
 export class HmrSchedule extends BeanBase implements IHmrReload {
-  async reload(_beanOptions: IDecoratorBeanOptionsBase) {}
+  async reload(_beanOptions: IDecoratorBeanOptionsBase) {
+    await this.$scope.schedule.service.schedule.loadSchedules('');
+  }
 }
