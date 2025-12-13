@@ -9,7 +9,6 @@ export const SymbolModuleName = Symbol('SymbolModuleName');
 
 export class BeanBaseSimple extends BeanSimple {
   private [SymbolBeanFullName]: string;
-  private [SymbolBeanInstanceKey]: string;
 
   protected get [SymbolModuleBelong]() {
     return appResource._getModuleBelong(this[SymbolBeanFullName]);
