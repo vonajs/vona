@@ -27,7 +27,7 @@ import type { TypeQueueDoubleDeleteJobData } from '../queue.doubleDelete.ts';
 import { isNil } from '@cabloy/utils';
 import { parseFirstWord, toLowerCaseFirstChar } from '@cabloy/word-utils';
 import BigNumber from 'bignumber.js';
-import { cast, deepExtend } from 'vona';
+import { cast, deepExtend, disposeInstance } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
 import { getCacheModelsClear } from '../../lib/const.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
@@ -48,8 +48,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   protected async __dispose__() {
-    cast(this.cacheQuery).__dispose__();
-    cast(this.cacheEntity).__dispose__();
+    await disposeInstance(this.cacheQuery);
+    await disposeInstance(this.cacheEntity);
   }
 
   async insert<T extends IModelInsertOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<TRecord> {
