@@ -4,7 +4,7 @@ import { LRUCache } from 'lru-cache';
 import { Virtual } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { CacheBase } from '../common/cacheBase.ts';
-import { SymbolCacheMemories } from '../lib/const.ts';
+import { getCacheMemories } from '../lib/const.ts';
 
 @Bean()
 @Virtual()
@@ -14,20 +14,12 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     this._cacheOptions = Object.assign({}, this.$scope.cache.config.mem.options, this._cacheOptions);
   }
 
-  private get memoryInstance() {
-    if (!this.app[SymbolCacheMemories]) {
-      this.app[SymbolCacheMemories] = {};
-    }
-    const iid = this.__getInstanceIdScope();
-    if (!this.app[SymbolCacheMemories][iid]) {
-      this.app[SymbolCacheMemories][iid] = {};
-    }
-    return this.app[SymbolCacheMemories][iid];
-  }
-
   private get lruCache(): LRUCache<string, any> {
-    if (!this.memoryInstance[this._cacheName]) {
-      this.memoryInstance[this._cacheName] = new LRUCache<string, any>({
+    const iid = this.__getInstanceIdScope();
+    const cacheMemories = getCacheMemories(this.app);
+    if (!cacheMemories[this._cacheName]) cacheMemories[this._cacheName] = {};
+    if (!cacheMemories[this._cacheName][iid]) {
+      cacheMemories[this._cacheName][iid] = new LRUCache<string, any>({
         max: this._cacheOptions.max,
         ttl: this._cacheOptions.ttl,
         updateAgeOnGet: this._cacheOptions.updateAgeOnGet,
@@ -35,7 +27,7 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         ttlAutopurge: true,
       } as any);
     }
-    return this.memoryInstance[this._cacheName];
+    return cacheMemories[this._cacheName][iid];
   }
 
   protected get __cacheInstance(): LRUCache<string, any> | undefined {
