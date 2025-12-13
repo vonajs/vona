@@ -115,7 +115,7 @@ export class ServiceHmr extends BeanBase {
       // dispose
       const beanInstanceOld: any = beanContainer[SymbolBeanContainerInstances][beanInstanceKey];
       const state = beanInstanceOld[SymbolHmrStateSave]?.();
-      await beanContainer.disposeInstance(beanInstanceKey);
+      await beanContainer._removeBean(beanInstanceKey);
       // new
       const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
       beanInstanceNew[SymbolHmrStateLoad]?.(state);
