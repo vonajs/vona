@@ -1,4 +1,4 @@
-import type { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import type { BeanSummerCacheBase, IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { TypeModelCacheType } from '../types/model.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
@@ -11,19 +11,30 @@ export class ModelCacheBase extends BeanBase {
   private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
   protected _model: BeanModelCache;
   private _cacheType: TypeModelCacheType;
+  private _cacheInstance: BeanSummerCacheBase | undefined;
 
   protected __init__(model: BeanModelCache, cacheType: TypeModelCacheType) {
     this._model = model;
     this._cacheType = cacheType;
   }
 
+  protected async __dispose__() {
+    if (this._cacheInstance) {
+      await this.bean.disposeInstance(this._cacheInstance);
+      this._cacheInstance = undefined;
+    }
+  }
+
   private get scopeOrm() {
     return this.$scope.orm;
   }
 
-  public getInstance(table: keyof ITableRecord) {
+  public getInstance(table: keyof ITableRecord): BeanSummerCacheBase {
     if (this.options === false) throw new Error('cache disabled');
-    return this.app.bean.summer.cache<any, any>(this.getName(table), this.options);
+    if (!this._cacheInstance) {
+      this._cacheInstance = this.app.bean.summer.cache<any, any>(this.getName(table), this.options);
+    }
+    return this._cacheInstance;
   }
 
   public getName(table: keyof ITableRecord) {

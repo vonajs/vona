@@ -1,4 +1,5 @@
 export * from './columns.ts';
+export * from './const.ts';
 export * from './databaseDialect.ts';
 export * from './dto/index.ts';
 export * from './entity.ts';

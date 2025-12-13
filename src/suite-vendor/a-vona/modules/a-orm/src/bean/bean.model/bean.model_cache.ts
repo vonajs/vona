@@ -29,24 +29,27 @@ import { parseFirstWord, toLowerCaseFirstChar } from '@cabloy/word-utils';
 import BigNumber from 'bignumber.js';
 import { cast, deepExtend } from 'vona';
 import { getTargetColumnName } from '../../common/utils.ts';
+import { getCacheModelsClear } from '../../lib/const.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
 import { ServiceCacheQuery } from '../../service/cacheQuery_.ts';
 import { ServiceRelations } from '../../service/relations_.ts';
 import { BeanModelCrud } from './bean.model_crud.ts';
 
-const SymbolModelsClearAll = Symbol('SymbolModelsClearAll');
-
 export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TRecord> {
   public cacheQuery: ServiceCacheQuery;
   public cacheEntity: ServiceCacheEntity;
   protected relations: ServiceRelations;
-  protected [SymbolModelsClearAll]: Record<keyof IModelRecord, TypeModelClassLikeGeneral[]>;
 
   protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
     super.__init__(clientName, table);
     this.cacheQuery = this.bean._newBean(ServiceCacheQuery, this);
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
     this.relations = this.bean._newBean(ServiceRelations, this);
+  }
+
+  protected async __dispose__() {
+    cast(this.cacheQuery).__dispose__();
+    cast(this.cacheEntity).__dispose__();
   }
 
   async insert<T extends IModelInsertOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<TRecord> {
@@ -654,40 +657,8 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   }
 
   private _getModelsClear(modelName?: keyof IModelRecord): TypeModelClassLikeGeneral[] {
-    const modelsClearAll = this._getModelsClearAll();
+    const modelsClearAll = getCacheModelsClear(this.app);
     return modelsClearAll[modelName ?? this.$onionName];
-  }
-
-  private _getModelsClearAll() {
-    if (!this[SymbolModelsClearAll]) {
-      this[SymbolModelsClearAll] = this._collectModelsClearAll();
-    }
-    return this[SymbolModelsClearAll];
-  }
-
-  private _collectModelsClearAll() {
-    const modelsClearAll: Record<keyof IModelRecord, TypeModelClassLikeGeneral[]> = {} as any;
-    const onionSlices = this.bean.onion.model.getOnionsEnabledCached();
-    for (const onionSlice of onionSlices) {
-      const modelName = onionSlice.name;
-      if (!modelsClearAll[modelName]) modelsClearAll[modelName] = [];
-      //
-      const modelsClear = onionSlice.beanOptions.options?.cache?.modelsClear;
-      if (modelsClear) {
-        const modelsClear2 = Array.isArray(modelsClear) ? modelsClear : [modelsClear];
-        modelsClearAll[modelName].push(...modelsClear2);
-      }
-      //
-      const modelsClearedBy = onionSlice.beanOptions.options?.cache?.modelsClearedBy;
-      if (modelsClearedBy) {
-        const modelsClearedBy2 = Array.isArray(modelsClearedBy) ? modelsClearedBy : [modelsClearedBy];
-        for (const modelName2 of modelsClearedBy2) {
-          if (!modelsClearAll[modelName2]) modelsClearAll[modelName2] = [];
-          modelsClearAll[modelName2].push(modelName);
-        }
-      }
-    }
-    return modelsClearAll;
   }
 
   protected _checkDisableCacheQueryByOptions(options?: IModelMethodOptionsGeneral) {

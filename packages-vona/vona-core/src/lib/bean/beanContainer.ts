@@ -58,7 +58,11 @@ export class BeanContainer {
     this[SymbolBeanContainerInstances] = {};
   }
 
-  public async disposeInstance(beanInstanceKey: string) {
+  public async disposeInstance(beanInstance: BeanSimple): Promise<void>;
+  public async disposeInstance(beanInstanceKey: string): Promise<void>;
+  public async disposeInstance(beanInstanceKeyLike: BeanSimple | string): Promise<void> {
+    const beanInstanceKey = typeof beanInstanceKeyLike === 'string' ? beanInstanceKeyLike : beanInstanceKeyLike[SymbolBeanInstanceKey];
+    if (!beanInstanceKey) return;
     const beanInstance = this[SymbolBeanContainerInstances][beanInstanceKey] as any;
     if (beanInstance) {
       if (!(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {

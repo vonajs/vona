@@ -252,6 +252,32 @@ declare module 'vona-module-a-orm' {
           } 
 }
 /** schedule: end */
+/** hmr: begin */
+export * from '../bean/hmr.model.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-orm:model': never;
+    }
+
+  
+}
+declare module 'vona-module-a-orm' {
+  
+        export interface HmrModel {
+          /** @internal */
+          get scope(): ScopeModuleAOrm;
+        }
+
+          export interface HmrModel {
+            get $beanFullName(): 'a-orm.hmr.model';
+            get $onionName(): 'a-orm:model';
+            
+          } 
+}
+/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
