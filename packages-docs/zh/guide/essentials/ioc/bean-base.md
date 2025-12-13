@@ -28,7 +28,6 @@
 |名称|说明|
 |--|--|
 |$beanFullName|Bean标识|
-|$beanInstanceKey|Bean实例存储在IOC容器中的Key|
 |$beanOptions|Bean Options|
 |$onionName|Onion名称|
 |$onionOptions|Bean参数|

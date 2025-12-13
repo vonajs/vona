@@ -28,7 +28,6 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 |Name|Description|
 |--|--|
 |$beanFullName|Bean Identifier|
-|$beanInstanceKey|The key of the Bean instance stored in the IOC container|
 |$beanOptions|Bean Options|
 |$onionName|Onion Name|
 |$onionOptions|Bean Parameters|

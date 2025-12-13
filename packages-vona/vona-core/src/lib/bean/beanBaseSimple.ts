@@ -23,10 +23,6 @@ export class BeanBaseSimple extends BeanSimple {
     return this[SymbolBeanFullName];
   }
 
-  public get $beanInstanceKey() {
-    return this[SymbolBeanInstanceKey];
-  }
-
   protected get $beanOptions(): IDecoratorBeanOptionsBase {
     return appResource.getBean(this[SymbolBeanFullName])!;
   }
