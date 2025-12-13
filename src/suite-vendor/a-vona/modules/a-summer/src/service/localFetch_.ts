@@ -1,6 +1,5 @@
 import type { ICacheLayeredBase } from '../common/cacheLayeredBase.ts';
 import type {
-  IDecoratorSummerCacheOptions,
   ISummerCacheGet,
   ISummerCacheMGet,
   TSummerCacheActionOptions,
@@ -13,8 +12,20 @@ import { CacheBase } from '../common/cacheBase.ts';
 export class ServiceLocalFetch<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
-  protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
-    super.__init__(cacheName, cacheOptions);
+  private _cacheNativeInstance: CacheBase<KEY, DATA> | undefined;
+
+  protected async __dispose__() {
+    if (this._cacheNativeInstance) {
+      await this.bean._removeBean(this._cacheNativeInstance);
+      this._cacheNativeInstance = undefined;
+    }
+  }
+
+  private get cacheBeanNative(): CacheBase {
+    if (!this._cacheNativeInstance) {
+      this._cacheNativeInstance = this.app.bean._getBean(this._cacheName as any);
+    }
+    return this._cacheNativeInstance!;
   }
 
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -68,9 +79,5 @@ export class ServiceLocalFetch<KEY = any, DATA = any>
 
   async clear(_options) {
     // do nothing
-  }
-
-  private get cacheBeanNative(): CacheBase {
-    return this.app.bean._getBean(this._cacheName as any);
   }
 }

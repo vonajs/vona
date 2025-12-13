@@ -8,6 +8,22 @@ import { CacheBase } from '../common/cacheBase.ts';
 export class ServiceLocalRedis<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
+  private _cacheRedisInstance: BeanCacheRedisBase<KEY, DATA> | undefined;
+
+  protected async __dispose__() {
+    if (this._cacheRedisInstance) {
+      await this.bean._removeBean(this._cacheRedisInstance);
+      this._cacheRedisInstance = undefined;
+    }
+  }
+
+  get cacheRedis(): BeanCacheRedisBase<KEY, DATA> {
+    if (!this._cacheRedisInstance) {
+      this._cacheRedisInstance = this.app.bean.cache.redis(this._cacheName, this._cacheOptions.redis);
+    }
+    return this._cacheRedisInstance;
+  }
+
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const force = options?.force;
     let value = force ? undefined : await this.cacheRedis.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
@@ -101,9 +117,5 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
 
   __getLayered(_options?: TSummerCacheActionOptions<KEY, DATA>) {
     return this.localFetch;
-  }
-
-  get cacheRedis(): BeanCacheRedisBase<KEY, DATA> {
-    return this.app.bean.cache.redis(this._cacheName, this._cacheOptions.redis);
   }
 }

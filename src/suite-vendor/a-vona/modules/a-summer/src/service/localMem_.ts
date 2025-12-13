@@ -8,6 +8,22 @@ import { CacheBase } from '../common/cacheBase.ts';
 export class ServiceLocalMem<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA> {
+  private _cacheMemInstance: BeanCacheMemBase<KEY, DATA> | undefined;
+
+  protected async __dispose__() {
+    if (this._cacheMemInstance) {
+      await this.bean._removeBean(this._cacheMemInstance);
+      this._cacheMemInstance = undefined;
+    }
+  }
+
+  get cacheMem(): BeanCacheMemBase<KEY, DATA> {
+    if (!this._cacheMemInstance) {
+      this._cacheMemInstance = this.app.bean.cache.mem(this._cacheName, this._cacheOptions.mem);
+    }
+    return this._cacheMemInstance;
+  }
+
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const force = options?.force;
     let value = force ? undefined : this.cacheMem.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
@@ -126,9 +142,5 @@ export class ServiceLocalMem<KEY = any, DATA = any>
       return this.localRedis;
     }
     return this.localFetch;
-  }
-
-  get cacheMem(): BeanCacheMemBase<KEY, DATA> {
-    return this.app.bean.cache.mem(this._cacheName, this._cacheOptions.mem);
   }
 }
