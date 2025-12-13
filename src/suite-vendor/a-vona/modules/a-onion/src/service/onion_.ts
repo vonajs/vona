@@ -40,6 +40,10 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     this._swapOnions(this.onionsGlobal);
     this[SymbolOnionsEnabled] = {};
     this[SymbolOnionsEnabledWrapped] = {};
+    this.clearCache();
+  }
+
+  clearCache() {
     this._cacheOnionsGlobal = undefined;
     this._cacheOnionsHandler = {};
   }
