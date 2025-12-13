@@ -12,7 +12,7 @@ export function getCacheModelsClear(app: VonaApplication): Record<keyof IModelRe
   if (!app.meta[SymbolCacheModelsClear]) {
     app.meta[SymbolCacheModelsClear] = _collectModelsClear(app);
   }
-  return app[SymbolCacheModelsClear];
+  return app.meta[SymbolCacheModelsClear];
 }
 
 function _collectModelsClear(app: VonaApplication) {
