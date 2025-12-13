@@ -64,8 +64,9 @@ export class BeanContainer {
       if (!(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
         await beanInstance.__dispose__();
       }
-      delete this[SymbolBeanContainerInstances][beanInstanceKey];
     }
+    // maybe null
+    delete this[SymbolBeanContainerInstances][beanInstanceKey];
   }
 
   get containerType(): ContainerType {
