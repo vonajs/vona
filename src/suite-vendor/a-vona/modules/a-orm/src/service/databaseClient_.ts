@@ -50,9 +50,9 @@ export class ServiceDatabaseClient extends BeanMutateBase {
     }
   }
 
-  protected async onDisposeInstance({ clientName }) {
+  protected async onRemoveInstance({ clientName }) {
     if (clientName === this.clientName) {
-      await super.onDisposeInstance({ clientName });
+      await super.onRemoveInstance({ clientName });
     }
   }
 
