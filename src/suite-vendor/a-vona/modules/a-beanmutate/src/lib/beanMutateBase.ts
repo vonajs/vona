@@ -31,6 +31,6 @@ export class BeanMutateBase extends BeanBase {
   protected async onReloadInstance(_data: unknown) {}
 
   protected async onDisposeInstance(_data: unknown) {
-    await this.bean.disposeInstance(this.$beanInstanceKey);
+    await this.bean._removeBean(this.$beanInstanceKey);
   }
 }

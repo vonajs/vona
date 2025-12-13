@@ -20,7 +20,7 @@ export class ModelCacheBase extends BeanBase {
 
   protected async __dispose__() {
     if (this._cacheInstance) {
-      await this.bean.disposeInstance(this._cacheInstance);
+      await this.bean._removeBean(this._cacheInstance);
       this._cacheInstance = undefined;
     }
   }

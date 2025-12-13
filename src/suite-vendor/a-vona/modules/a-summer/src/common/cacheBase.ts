@@ -21,15 +21,15 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   protected async __dispose__() {
     // special for hmr reload
     if (this._localMem) {
-      await this.bean.disposeInstance(this._localMem);
+      await this.bean._removeBean(this._localMem);
       this._localMem = undefined;
     }
     if (this._localRedis) {
-      await this.bean.disposeInstance(this._localRedis);
+      await this.bean._removeBean(this._localRedis);
       this._localRedis = undefined;
     }
     if (this._localFetch) {
-      await this.bean.disposeInstance(this._localFetch);
+      await this.bean._removeBean(this._localFetch);
       this._localFetch = undefined;
     }
   }

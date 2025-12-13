@@ -58,9 +58,9 @@ export class BeanContainer {
     this[SymbolBeanContainerInstances] = {};
   }
 
-  public async disposeInstance(beanInstance: BeanSimple): Promise<void>;
-  public async disposeInstance(beanInstanceKey: string): Promise<void>;
-  public async disposeInstance(beanInstanceKeyLike: BeanSimple | string): Promise<void> {
+  public async _removeBean(beanInstance: BeanSimple): Promise<void>;
+  public async _removeBean(beanInstanceKey: string): Promise<void>;
+  public async _removeBean(beanInstanceKeyLike: BeanSimple | string): Promise<void> {
     const beanInstanceKey = typeof beanInstanceKeyLike === 'string' ? beanInstanceKeyLike : beanInstanceKeyLike[SymbolBeanInstanceKey];
     if (!beanInstanceKey) return;
     const beanInstance = this[SymbolBeanContainerInstances][beanInstanceKey] as any;
