@@ -29,7 +29,6 @@ export class LocalCommon {
     await fse.writeFile(typeFile, content);
     const typeFileStat = await fse.stat(typeFile);
     // all modules: type file
-    console.time('a');
     const promises: Promise<void>[] = [];
     for (const module of this.cli.modulesMeta.modulesArray) {
       if (module.info.node_modules) continue;
@@ -37,11 +36,10 @@ export class LocalCommon {
       promises.push(this._generateTypeModulesFileInner(typeFile, typeFileStat, moduleTypeFile));
     }
     await Promise.all(promises);
-    console.timeLog('a');
   }
 
   async _generateTypeModulesFileInner(typeFile: string, typeFileStat: Stats, moduleTypeFile: string) {
-    const win = process.platform.startsWith('win');
+    const win = true;// process.platform.startsWith('win');
     let needCreate = true;
     const exists = await fse.exists(moduleTypeFile);
     if (exists) {
