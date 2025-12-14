@@ -27,11 +27,15 @@ export class LocalCommon {
     });
     await fse.writeFile(typeFile, content);
     // all modules: type file
+    console.time('a');
+    const promises: Promise<void>[] = [];
     for (const module of this.cli.modulesMeta.modulesArray) {
       if (module.info.node_modules) continue;
       const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
-      await this._generateTypeModulesFileInner(typeFile, moduleTypeFile);
+      promises.push(this._generateTypeModulesFileInner(typeFile, moduleTypeFile));
     }
+    await Promise.all(promises);
+    console.timeLog('a');
   }
 
   async _generateTypeModulesFileInner(typeFile: string, moduleTypeFile: string) {
