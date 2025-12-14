@@ -49,9 +49,9 @@ export class CliBinTest extends BeanCliBase {
     // globs
     const patterns = this._combineTestPatterns(projectPath, modulesMeta);
     // testFile
-    let testFile = path.join(import.meta.dirname, './toolsIsolate/test.ts');
+    let testFile = path.join(import.meta.dirname, '../../../toolsIsolate/test.ts');
     if (!fse.existsSync(testFile)) {
-      testFile = path.join(import.meta.dirname, './toolsIsolate/test.js');
+      testFile = path.join(import.meta.dirname, '../dist-toolsIsolate/test.js');
     }
     // run
     let args: string[] = [];

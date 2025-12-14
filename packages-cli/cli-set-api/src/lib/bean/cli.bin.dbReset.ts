@@ -41,9 +41,9 @@ export class CliBinDbReset extends BeanCliBase {
 
   async _run(projectPath: string, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
     // testFile
-    let testFile = path.join(import.meta.dirname, './toolsIsolate/dbReset.ts');
+    let testFile = path.join(import.meta.dirname, '../../../toolsIsolate/dbReset.ts');
     if (!fse.existsSync(testFile)) {
-      testFile = path.join(import.meta.dirname, './toolsIsolate/dbReset.js');
+      testFile = path.join(import.meta.dirname, '../dist-toolsIsolate/dbReset.js');
     }
     // run
     let args: string[] = [];
