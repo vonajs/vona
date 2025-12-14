@@ -12,6 +12,8 @@ export class CliInitLocale extends BeanCliBase {
     const { argv } = this.context;
     // super
     await super.execute();
+    // noformat
+    argv.noformat = true;
     // module name/info
     const moduleName = argv._[0];
     if (!moduleName) return;
