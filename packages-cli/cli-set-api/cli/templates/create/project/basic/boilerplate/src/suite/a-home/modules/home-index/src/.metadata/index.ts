@@ -69,12 +69,7 @@ declare module 'vona-module-a-web' {
 }
 /** controller: end */
 /** locale: begin */
-import locale_en_us from '../config/locale/en-us.ts';
-import locale_zh_cn from '../config/locale/zh-cn.ts';
-export const locales = {
-  'en-us': locale_en_us,
-'zh-cn': locale_zh_cn,
-};
+import { locales } from './locales.ts'
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
@@ -105,9 +100,5 @@ declare module 'vona' {
   }
 
   
-}
-
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-index::${K}` {
-  return `home-index::${key}`;
 }
 /** scope: end */
