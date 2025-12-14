@@ -428,12 +428,7 @@ export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
 /** locale: begin */
-import locale_en_us from '../config/locale/en-us.ts';
-import locale_zh_cn from '../config/locale/zh-cn.ts';
-export const locales = {
-  'en-us': locale_en_us,
-'zh-cn': locale_zh_cn,
-};
+import { locales } from './locales.ts'
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';
@@ -479,9 +474,5 @@ declare module 'vona' {
   export interface IBeanScopeErrors {
     'a-auth': typeof errors;
   }
-}
-
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-auth::${K}` {
-  return `a-auth::${key}`;
 }
 /** scope: end */
