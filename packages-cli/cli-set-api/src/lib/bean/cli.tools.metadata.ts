@@ -217,6 +217,12 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
     if (fse.existsSync(jsLibFile) && !jsContent.includes(jsLib)) {
       jsContent = `${jsLib}\n${jsContent}`;
     }
+    // jsLocales
+    const jsLocales = "export * from './.metadata/locales.ts';";
+    const jsLocalesFile = path.join(modulePath, 'src/.metadata/locales.ts');
+    if (fse.existsSync(jsLocalesFile) && !jsContent.includes(jsLocales)) {
+      jsContent = `${jsLocales}\n${jsContent}`;
+    }
     // jsMetadata
     const jsMetadata = "export * from './.metadata/index.ts';";
     const jsMetadataFile = path.join(modulePath, 'src/.metadata/index.ts');
