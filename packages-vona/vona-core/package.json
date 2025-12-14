@@ -26,7 +26,6 @@
     "dist"
   ],
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
