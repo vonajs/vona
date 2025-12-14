@@ -1,4 +1,5 @@
 import type { IModule, IModulePackage } from '@cabloy/module-info';
+import type { Stats } from 'fs-extra';
 import type { BeanCliBase } from './bean.cli.base.ts';
 import path from 'node:path';
 import fse from 'fs-extra';
@@ -26,31 +27,45 @@ export class LocalCommon {
       content += `import '${module.package.name}';\n`;
     });
     await fse.writeFile(typeFile, content);
+    const typeFileStat = await fse.stat(typeFile);
     // all modules: type file
     console.time('a');
     const promises: Promise<void>[] = [];
     for (const module of this.cli.modulesMeta.modulesArray) {
       if (module.info.node_modules) continue;
       const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
-      promises.push(this._generateTypeModulesFileInner(typeFile, moduleTypeFile));
+      promises.push(this._generateTypeModulesFileInner(typeFile, typeFileStat, moduleTypeFile));
     }
     await Promise.all(promises);
     console.timeLog('a');
   }
 
-  async _generateTypeModulesFileInner(typeFile: string, moduleTypeFile: string) {
+  async _generateTypeModulesFileInner(typeFile: string, typeFileStat: Stats, moduleTypeFile: string) {
+    const win = process.platform.startsWith('win');
     let needCreate = true;
-    if (fse.existsSync(moduleTypeFile)) {
+    const exists = await fse.exists(moduleTypeFile);
+    if (exists) {
       try {
-        const realFile = await fse.readlink(moduleTypeFile);
-        if (realFile === typeFile) {
-          needCreate = false;
+        if (win) {
+          const stat = await fse.stat(moduleTypeFile);
+          if (stat.size === typeFileStat.size) {
+            needCreate = false;
+          }
+        } else {
+          const realFile = await fse.readlink(moduleTypeFile);
+          if (realFile === typeFile) {
+            needCreate = false;
+          }
         }
       } catch (_err) {}
     }
     if (needCreate) {
       await fse.remove(moduleTypeFile);
-      await fse.ensureSymlink(typeFile, moduleTypeFile);
+      if (win) {
+        await fse.copy(typeFile, moduleTypeFile);
+      } else {
+        await fse.ensureSymlink(typeFile, moduleTypeFile);
+      }
     }
   }
 
