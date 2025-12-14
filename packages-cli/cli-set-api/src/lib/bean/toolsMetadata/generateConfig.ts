@@ -26,7 +26,7 @@ import { constants } from '../config/constants.ts';
   return content;
 }
 
-export async function generateLocale1(modulePath: string) {
+export async function generateLocale1(modulePath: string, moduleName: string) {
   const files = await globby('src/config/locale/*.ts', { cwd: modulePath });
   if (files.length === 0) return '';
   files.sort();
@@ -39,11 +39,16 @@ export async function generateLocale1(modulePath: string) {
     contentLocales.push(`  '${localeName}': ${className},`);
   }
   // combine
-  const content = `${contentImports.join('\n')}
+  const content = `import type { TypeLocaleBase } from 'vona';
+${contentImports.join('\n')}
 
 export const locales = {
 ${contentLocales.join('\n')}
 };
+
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}::\${K}\` {
+  return \`${moduleName}::\${key}\`;
+}
 `;
   return content;
 }

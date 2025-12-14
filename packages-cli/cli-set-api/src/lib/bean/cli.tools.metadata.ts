@@ -1,4 +1,3 @@
-import type { GenerateScopeOptions } from './toolsMetadata/generateScope.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
@@ -117,7 +116,7 @@ export class CliToolsMetadata extends BeanCliBase {
     const contentConstants = await generateConstant(modulePath);
     content += contentConstants;
     // locale
-    const contentLocales1 = await generateLocale1(modulePath);
+    const contentLocales1 = await generateLocale1(modulePath, moduleName);
     const contentLocales2 = await generateLocale2(contentLocales1);
     content += contentLocales2;
     // error
@@ -149,7 +148,7 @@ export class CliToolsMetadata extends BeanCliBase {
     // locales
     await this._generateLocales(modulePath, contentLocales1);
     // generate this
-    await this._generateThis(moduleName, relativeNameCapitalize, modulePath, generateScopeOptions);
+    await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
     // index
     await this._generateIndex(modulePath);
     // package
@@ -190,23 +189,12 @@ export class CliToolsMetadata extends BeanCliBase {
     await fse.writeFile(localesDest, contentLocales);
   }
 
-  async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string, generateScopeOptions: GenerateScopeOptions) {
+  async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
     const thisDest = path.join(modulePath, 'src/.metadata/this.ts');
-    // this
-    let content = `export const __ThisModule__ = '${moduleName}';
+    if (fse.existsSync(thisDest)) return;
+    const content = `export const __ThisModule__ = '${moduleName}';
 export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts';
 `;
-    // locale
-    if (generateScopeOptions.locales) {
-      content = `import type { TypeLocaleBase } from 'vona';
-import type { locales } from './locales.ts';
-
-${content}`;
-      content += `export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}::\${K}\` {
-  return \`${moduleName}::\${key}\`;
-}
-`;
-    }
     // save
     await fse.writeFile(thisDest, content);
   }
