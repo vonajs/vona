@@ -2,7 +2,7 @@ import type { TableIdentity } from 'table-identity';
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 export interface IEntityOptionsProduct extends IDecoratorEntityOptions {}
 

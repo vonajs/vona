@@ -420,7 +420,7 @@ export default {
 使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Web.get(':id', {
   description: $locale('FindBook'),

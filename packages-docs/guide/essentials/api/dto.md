@@ -93,7 +93,7 @@ export default {
 Use `$locale` function for language translation
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Dto({
   openapi: { description: $locale('CreateStudent') },

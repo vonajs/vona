@@ -420,7 +420,7 @@ export default {
 Use the `$locale` method for language translation, and support automatic type hints for language resources
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Web.get(':id', {
   description: $locale('FindBook'),

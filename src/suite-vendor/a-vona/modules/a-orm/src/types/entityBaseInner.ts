@@ -1,5 +1,5 @@
 import { Api, OrderMaxBase, v } from 'vona-module-a-openapiutils';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseEmpty } from './entityBaseEmpty.ts';
 
 export class EntityBaseInner extends EntityBaseEmpty {

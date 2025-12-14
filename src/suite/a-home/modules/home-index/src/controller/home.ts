@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 import { Api } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 export interface IControllerOptionsHome extends IDecoratorControllerOptions {}
 

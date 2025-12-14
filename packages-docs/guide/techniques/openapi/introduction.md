@@ -143,7 +143,7 @@ export default {
 Use the `$locale` method for language translation, and support auto-complete hints for language resources
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 class ControllerStudent3 {
   @Web.get()

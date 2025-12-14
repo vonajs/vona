@@ -248,7 +248,7 @@ export default {
 Use the `$locale` method for language translation, and support automatic type hints for language resources
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Api.field(v.title($locale('Name')))
 ```
@@ -302,7 +302,7 @@ export default {
 ```
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Entity({
   openapi: { description: $locale('Student') },

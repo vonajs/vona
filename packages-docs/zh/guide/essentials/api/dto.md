@@ -92,7 +92,7 @@ export default {
 使用`$locale`函数进行语言翻译
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Dto({
   openapi: { description: $locale('CreateStudent') },

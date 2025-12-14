@@ -1,5 +1,5 @@
 import { Api, OrderCoreBase, v } from 'vona-module-a-openapiutils';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseInner } from './entityBaseInner.ts';
 
 export class EntityBaseSimple extends EntityBaseInner {

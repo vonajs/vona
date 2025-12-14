@@ -6,7 +6,7 @@ import { Api, v } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import { z } from 'zod';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 import { DtoUser } from '../dto/user.ts';
 
 export interface IControllerOptionsOnion extends IDecoratorControllerOptions {}

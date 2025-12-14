@@ -317,7 +317,7 @@ class EntityStudent {
 VonaJS also provides a simplified utility function `$locale`
 
 ``` diff
-+ import { $locale } from '../.metadata/index.ts';
++ import { $locale } from '../.metadata/locales.ts';
 
 class EntityStudent {
 + @Api.field(v.title($locale('Name')))

@@ -4,7 +4,7 @@ import type { SchemaLike } from '../../../types/decorator.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';
-import { $locale } from '../../../.metadata/index.ts';
+import { $locale } from '../../../.metadata/locales.ts';
 import { $schema, $schemaLazy, makeSchemaLike } from '../makeSchemaLikes.ts';
 
 export function schemaDefault(defaultValue: any | Function) {

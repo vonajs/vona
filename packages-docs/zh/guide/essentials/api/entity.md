@@ -248,7 +248,7 @@ export default {
 使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Api.field(v.title($locale('Name')))
 ```
@@ -302,7 +302,7 @@ export default {
 ```
 
 ``` typescript
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 @Entity({
   openapi: { description: $locale('Student') },

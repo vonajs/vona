@@ -1,6 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 import { Api, OrderCoreBase, v } from 'vona-module-a-openapiutils';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseInner } from './entityBaseInner.ts';
 
 export class EntityBase extends EntityBaseInner {

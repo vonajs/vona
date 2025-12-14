@@ -4,7 +4,7 @@ import type { IUser } from 'vona-module-a-user';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
 import { z } from 'zod';
-import { $locale } from '../.metadata/index.ts';
+import { $locale } from '../.metadata/locales.ts';
 
 export interface IEntityOptionsUser extends IDecoratorEntityOptions {}
 
