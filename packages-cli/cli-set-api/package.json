@@ -26,6 +26,7 @@
   "files": [
     "cli",
     "dist",
+    "dist-toolsIsolate",
     "templates"
   ],
   "clean-package": {
