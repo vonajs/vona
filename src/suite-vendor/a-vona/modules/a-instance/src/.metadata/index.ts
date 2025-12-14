@@ -330,12 +330,7 @@ declare module 'vona-module-a-instance' {
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
 /** locale: begin */
-import locale_en_us from '../config/locale/en-us.ts';
-import locale_zh_cn from '../config/locale/zh-cn.ts';
-export const locales = {
-  'en-us': locale_en_us,
-'zh-cn': locale_zh_cn,
-};
+import { locales } from './locales.ts'
 /** locale: end */
 /** main: begin */
 export * from '../main.ts';
@@ -374,9 +369,5 @@ declare module 'vona' {
   }
 
   
-}
-
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-instance::${K}` {
-  return `a-instance::${key}`;
 }
 /** scope: end */
