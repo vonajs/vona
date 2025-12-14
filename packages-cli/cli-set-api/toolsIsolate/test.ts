@@ -175,6 +175,6 @@ interface CoverageTotals {
 };
 
 function resolveTemplatePath(file: string) {
-  const url = (new URL(path.join('../../../../templates', file), import.meta.url));
+  const url = (new URL(path.join('../templates', file), import.meta.url));
   return fileURLToPath(url);
 }

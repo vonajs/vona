@@ -38,8 +38,8 @@
     ]
   },
   "scripts": {
-    "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc && tsc -p tsconfig.isolate.json",
+    "clean": "rimraf dist dist-toolsIsolate tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc -p tsconfig.build.json && tsc -p tsconfig.isolate.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
