@@ -891,7 +891,7 @@ importers:
         specifier: ^5.0.105
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.225
+        specifier: ^5.0.226
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1284,7 +1284,7 @@ importers:
         specifier: ^5.0.22
         version: link:modules/a-ormdialect
       vona-module-a-play:
-        specifier: ^5.0.4
+        specifier: ^5.0.6
         version: link:modules/a-play
       vona-module-a-printtip:
         specifier: ^5.0.23
