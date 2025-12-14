@@ -15,6 +15,7 @@ const __snippet_update = '...$tableColumns(() => Entity<%=argv.resourceNameCapit
 export default metadataCustomSnippet({
   file: 'src/bean/meta.index.ts',
   language: 'plain',
+  format: true,
   init: async ({ cli, argv, targetFile }) => {
     await catchError(() => {
       return cli.helper.invokeCli([
