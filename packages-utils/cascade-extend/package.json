@@ -1,7 +1,7 @@
 {
   "name": "cascade-extend",
   "type": "module",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "cascade-extend",
   "publishConfig": {
     "access": "public"
@@ -50,7 +50,7 @@
     ]
   },
   "dependencies": {
-    "@cabloy/extend": "^3.1.10"
+    "@cabloy/extend": "^3.1.11"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

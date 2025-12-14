@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-instance",
   "type": "module",
-  "version": "5.0.44",
+  "version": "5.0.45",
   "title": "Instance",
   "vonaModule": {
     "fileVersion": 1,

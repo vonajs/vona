@@ -1,7 +1,7 @@
 {
   "name": "vona-module-test-vona",
   "type": "module",
-  "version": "5.0.86",
+  "version": "5.0.87",
   "title": "test-vona",
   "vonaModule": {
     "fileVersion": 1,
