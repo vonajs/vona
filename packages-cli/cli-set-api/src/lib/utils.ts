@@ -1,7 +1,5 @@
 import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
@@ -12,11 +10,6 @@ export function getEnvMeta(configMeta: VonaConfigMeta) {
 
 export function getNodeEnv(mode: VonaMetaMode) {
   return mode === 'test' ? 'test' : mode === 'dev' ? 'development' : 'production';
-}
-
-export function resolveTemplatePath(file: string) {
-  const url = (new URL(path.join('../../templates', file), import.meta.url));
-  return fileURLToPath(url);
 }
 
 export function generateConfigDefine(env, translates?: string[]) {

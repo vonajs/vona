@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.esm.json",
+  "compilerOptions": {
+    "rootDir": "src/lib/bean/toolsBin",
+    "outDir": "dist/lib/bean/toolsBin",
+  },
+  "include": ["src/**/*"]
+}

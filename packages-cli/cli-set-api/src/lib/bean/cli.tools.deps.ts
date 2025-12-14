@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
-import { resolveTemplatePath } from '../utils.ts';
+import { resolveTemplatePath } from '../../utils.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {

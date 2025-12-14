@@ -4,13 +4,13 @@ import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
 import { lcov, spec } from 'node:test/reporters';
+import { fileURLToPath } from 'node:url';
 import { catchError, sleep } from '@cabloy/utils';
 import TableClass from 'cli-table3';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import { cast, createGeneralApp } from 'vona-core';
 import whyIsNodeRunning from 'why-is-node-running';
-import { resolveTemplatePath } from '../../utils.ts';
 
 const argv = process.argv.slice(2);
 const projectPath = argv[0];
@@ -173,3 +173,8 @@ interface CoverageTotals {
    */
   coveredFunctionPercent: number;
 };
+
+function resolveTemplatePath(file: string) {
+  const url = (new URL(path.join('../../../../templates', file), import.meta.url));
+  return fileURLToPath(url);
+}
