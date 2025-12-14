@@ -1,5 +1,6 @@
 import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from 'vona-module-a-caching';
 import type { TSummerCacheTestData } from '../bean/summerCache.test.ts';
+import { cel } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { Caching } from 'vona-module-a-caching';
@@ -31,7 +32,7 @@ export class ServiceCaching extends BeanBase {
     return undefined as any;
   }
 
-  @Caching.get({ cacheName: 'test-vona:caching', cacheKey: 'cel://args[0]' })
+  @Caching.get({ cacheName: 'test-vona:caching', cacheKey: cel('args[0]') })
   async get3(_id: number): Promise<TSummerCacheTestData> {
     return undefined as any;
   }
@@ -48,7 +49,7 @@ export class ServiceCaching extends BeanBase {
   }
 
   //
-  @Caching.set({ cacheName: 'test-vona:caching', cacheKey: 'cel://args[0]', cacheValue: 'cel://{"id": args[1].id, "name": args[1].name}' })
+  @Caching.set({ cacheName: 'test-vona:caching', cacheKey: cel('args[0]'), cacheValue: cel('{"id": args[1].id, "name": args[1].name}') })
   async set2(_id: number, _value: TSummerCacheTestData): Promise<void> {
     // do nothing
   }

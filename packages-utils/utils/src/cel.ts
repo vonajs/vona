@@ -6,6 +6,14 @@ import { hashkey } from './hash.ts';
 import { StringPrefixCel, StringPrefixRaw } from './types.ts';
 import { getProperty } from './utils.ts';
 
+export function cel(str: string) {
+  return `${StringPrefixCel}${str}`;
+}
+
+export function raw(str: string) {
+  return `${StringPrefixRaw}${str}`;
+}
+
 export function evaluateExpressions<T = any>(
   expressions: any,
   context?: object,
