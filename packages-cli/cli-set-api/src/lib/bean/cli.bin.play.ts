@@ -81,9 +81,9 @@ export class CliBinPlay extends BeanCliBase {
 
   async _runIsolate(projectPath: string) {
     // testFile
-    let testFile = path.join(import.meta.dirname, './toolsBin/play.ts');
+    let testFile = path.join(import.meta.dirname, './toolsIsolate/play.ts');
     if (!fse.existsSync(testFile)) {
-      testFile = path.join(import.meta.dirname, './toolsBin/play.js');
+      testFile = path.join(import.meta.dirname, './toolsIsolate/play.js');
     }
     // run
     let args: string[] = [];
