@@ -1,4 +1,5 @@
 import binBuild from './command/bin.build.ts';
+import binBuildGeneral from './command/bin.buildGeneral.ts';
 import binBuildModule from './command/bin.buildModule.ts';
 import binDbReset from './command/bin.dbReset.ts';
 import binDev from './command/bin.dev.ts';
@@ -33,6 +34,7 @@ export const commands = {
   bin: {
     build: binBuild,
     buildModule: binBuildModule,
+    buildGeneral: binBuildGeneral,
     dbReset: binDbReset,
     dev: binDev,
     play: binPlay,
