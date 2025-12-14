@@ -79,6 +79,7 @@ export class ServiceDatabaseClient extends BeanMutateBase {
 
   async reload(clientConfig?: ConfigDatabaseClient) {
     const clientConfigReal = this.scope.service.database.getClientConfig(this.clientName, clientConfig);
+    this.$mutate([this.clientNameSelector, clientConfigReal]);
     await this.__close();
     this.__load(this.clientNameSelector, clientConfigReal);
   }

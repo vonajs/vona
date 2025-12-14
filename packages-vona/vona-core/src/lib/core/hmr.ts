@@ -38,4 +38,12 @@ export class AppHmr extends BeanSimple {
       prop,
     });
   }
+
+  mutateBeanInstance(beanFullName: string, beanInstanceKey: string, args: any[]) {
+    const beanInstances = this.recordBeanInstances[beanFullName];
+    if (!beanInstances) return;
+    const beanInstance = beanInstances.find(item => item.beanInstanceKey === beanInstanceKey);
+    if (!beanInstance) return;
+    beanInstance.args = args;
+  }
 }
