@@ -26,7 +26,7 @@ import { constants } from '../config/constants.ts';
   return content;
 }
 
-export async function generateLocale(modulePath: string) {
+export async function generateLocale1(modulePath: string) {
   const files = await globby('src/config/locale/*.ts', { cwd: modulePath });
   if (files.length === 0) return '';
   files.sort();
@@ -36,14 +36,23 @@ export async function generateLocale(modulePath: string) {
     const localeName = path.basename(file, '.ts');
     const className = `locale_${localeName.replace('-', '_')}`;
     contentImports.push(`import ${className} from '../config/locale/${localeName}.ts';`);
-    contentLocales.push(`'${localeName}': ${className},`);
+    contentLocales.push(`  '${localeName}': ${className},`);
   }
   // combine
-  const content = `/** locale: begin */
-${contentImports.join('\n')}
+  const content = `${contentImports.join('\n')}
+
 export const locales = {
-  ${contentLocales.join('\n')}
+${contentLocales.join('\n')}
 };
+`;
+  return content;
+}
+
+export async function generateLocale2(contentLocales: string) {
+  if (!contentLocales) return '';
+  // combine
+  const content = `/** locale: begin */
+import { locales } from './locales.ts'
 /** locale: end */
 `;
   return content;

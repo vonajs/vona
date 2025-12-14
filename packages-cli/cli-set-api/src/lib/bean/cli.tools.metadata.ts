@@ -1,3 +1,4 @@
+import type { GenerateScopeOptions } from './toolsMetadata/generateScope.ts';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
@@ -5,7 +6,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { loadJSONFile, saveJSONFile } from '../utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
-import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.ts';
+import { generateConfig, generateConstant, generateError, generateLocale1, generateLocale2 } from './toolsMetadata/generateConfig.ts';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.ts';
 import { generateMain, generateMonkey } from './toolsMetadata/generateMonkey.ts';
 import { generateOnions } from './toolsMetadata/generateOnions.ts';
@@ -116,8 +117,9 @@ export class CliToolsMetadata extends BeanCliBase {
     const contentConstants = await generateConstant(modulePath);
     content += contentConstants;
     // locale
-    const contentLocales = await generateLocale(modulePath);
-    content += contentLocales;
+    const contentLocales1 = await generateLocale1(modulePath);
+    const contentLocales2 = await generateLocale2(contentLocales1);
+    content += contentLocales2;
     // error
     const contentErrors = await generateError(modulePath);
     content += contentErrors;
@@ -126,12 +128,13 @@ export class CliToolsMetadata extends BeanCliBase {
     // main
     content += await generateMain(modulePath);
     // scope
-    content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
+    const generateScopeOptions = {
       config: contentConfig,
       errors: contentErrors,
-      locales: contentLocales,
+      locales: contentLocales2,
       constants: contentConstants,
-    });
+    };
+    content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, generateScopeOptions);
     // patch
     content = this._generatePatch(content);
     // empty
@@ -143,8 +146,10 @@ export class CliToolsMetadata extends BeanCliBase {
     // save
     await fse.writeFile(metaIndexFile, content);
     // await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
+    // locales
+    await this._generateLocales(modulePath, contentLocales1);
     // generate this
-    await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
+    await this._generateThis(moduleName, relativeNameCapitalize, modulePath, generateScopeOptions);
     // index
     await this._generateIndex(modulePath);
     // package
@@ -178,12 +183,30 @@ export class CliToolsMetadata extends BeanCliBase {
     return `${importContent}\n${content}`;
   }
 
-  async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
+  async _generateLocales(modulePath, contentLocales) {
+    if (!contentLocales) return;
+    const localesDest = path.join(modulePath, 'src/.metadata/locales.ts');
+    // save
+    await fse.writeFile(localesDest, contentLocales);
+  }
+
+  async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string, generateScopeOptions: GenerateScopeOptions) {
     const thisDest = path.join(modulePath, 'src/.metadata/this.ts');
-    if (fse.existsSync(thisDest)) return;
-    const content = `export const __ThisModule__ = '${moduleName}';
+    // this
+    let content = `export const __ThisModule__ = '${moduleName}';
 export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts';
 `;
+    // locale
+    if (generateScopeOptions.locales) {
+      content = `import type { TypeLocaleBase } from 'vona';
+import type { locales } from './locales.ts';
+
+${content}`;
+      content += `export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}::\${K}\` {
+  return \`${moduleName}::\${key}\`;
+}
+`;
+    }
     // save
     await fse.writeFile(thisDest, content);
   }
