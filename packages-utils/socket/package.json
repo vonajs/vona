@@ -36,9 +36,8 @@
     "dist"
   ],
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "tsc:publish": "npm run clean && tsc",
+    "tsc:publish": "npm run clean && vona :bin:buildModule && tsc",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
