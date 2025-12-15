@@ -4,6 +4,7 @@ miniprogram_npm
 /coverage
 **/dist/
 **/dist-toolsIsolate/
+**/dist-cli/
 /dist-releases
 /docs-api
 /run

@@ -3,6 +3,8 @@ miniprogram_npm
 /typings/core
 /coverage
 **/dist/
+**/dist-toolsIsolate/
+**/dist-cli/
 /dist-releases
 /docs-api
 /run
