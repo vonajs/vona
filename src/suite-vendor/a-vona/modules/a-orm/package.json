@@ -20,7 +20,7 @@
         "scopeResource": true,
         "scopeResourceTypeTemplate": "{{className}}Meta",
         "boilerplate": "entity/boilerplate",
-        "metadataCustom": "cli/entity/metadata/generate.ts"
+        "metadataCustom": "entity/metadata/generate.ts"
       },
       "model": {
         "sceneIsolate": true,
@@ -29,7 +29,7 @@
         "scopeResource": true,
         "beanGeneral": true,
         "boilerplate": "model/boilerplate",
-        "metadataCustom": "cli/model/metadata/generate.ts"
+        "metadataCustom": "model/metadata/generate.ts"
       },
       "databaseDialect": {
         "beanGeneral": true,

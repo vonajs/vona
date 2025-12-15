@@ -14,14 +14,14 @@
         "optionsGlobalInterfaceName": "IDecoratorDtoOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
         "boilerplate": "dto/boilerplate",
-        "metadataCustom": "cli/dto/metadata/generate.ts"
+        "metadataCustom": "dto/metadata/generate.ts"
       },
       "controller": {
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorControllerOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
         "boilerplate": "controller/boilerplate",
-        "metadataCustom": "cli/controller/metadata/generate.ts"
+        "metadataCustom": "controller/metadata/generate.ts"
       },
       "filterTransform": {
         "optionsGlobalInterfaceName": "IDecoratorFilterTransformOptions",

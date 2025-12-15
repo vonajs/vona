@@ -10,7 +10,7 @@
       "bean": {
         "optionsNone": true,
         "boilerplate": "bean/boilerplate",
-        "metadataCustom": "cli/bean/metadata/generate.ts"
+        "metadataCustom": "bean/metadata/generate.ts"
       },
       "service": {
         "sceneIsolate": true,

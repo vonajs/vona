@@ -10,7 +10,7 @@
         "optionsNone": true,
         "scopeResource": true,
         "boilerplate": "event/boilerplate",
-        "metadataCustom": "cli/event/metadata/generate.ts"
+        "metadataCustom": "event/metadata/generate.ts"
       },
       "eventListener": {
         "optionsGlobalInterfaceName": "IDecoratorEventListenerOptions",
