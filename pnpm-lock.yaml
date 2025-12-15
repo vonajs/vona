@@ -479,7 +479,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.419
+        specifier: ^1.0.420
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -891,7 +891,7 @@ importers:
         specifier: ^5.0.105
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.232
+        specifier: ^5.0.233
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1197,7 +1197,7 @@ importers:
         specifier: ^5.0.40
         version: link:modules/a-authsimple
       vona-module-a-bean:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:modules/a-bean
       vona-module-a-beanmutate:
         specifier: ^5.0.8
@@ -1230,7 +1230,7 @@ importers:
         specifier: ^5.0.26
         version: link:modules/a-error
       vona-module-a-event:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-event
       vona-module-a-executor:
         specifier: ^5.0.28
@@ -1278,7 +1278,7 @@ importers:
         specifier: ^5.0.12
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.89
+        specifier: ^5.0.90
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.24
@@ -1338,7 +1338,7 @@ importers:
         specifier: ^5.0.29
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.34
+        specifier: ^5.0.35
         version: link:modules/a-web
       vona-module-a-worker:
         specifier: ^5.0.25
