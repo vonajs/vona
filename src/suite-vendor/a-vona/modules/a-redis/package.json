@@ -34,7 +34,7 @@
     "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
     "ioredis": "^5.7.0"
