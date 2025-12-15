@@ -467,7 +467,7 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.72
+        specifier: ^3.0.73
         version: link:../cabloy-cli
       '@cabloy/process-helper':
         specifier: ^2.0.24
@@ -479,7 +479,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.417
+        specifier: ^1.0.418
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -501,7 +501,7 @@ importers:
         specifier: ^7.26.8
         version: 7.28.5(@babel/core@7.28.5)
       '@cabloy/cli':
-        specifier: ^3.0.72
+        specifier: ^3.0.73
         version: link:../cabloy-cli
       '@cabloy/dotenv':
         specifier: ^1.1.12
@@ -891,7 +891,7 @@ importers:
         specifier: ^5.0.105
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.231
+        specifier: ^5.0.232
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1185,166 +1185,166 @@ importers:
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-aspect:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-aspect
       vona-module-a-aspectutils:
-        specifier: ^5.0.10
+        specifier: ^5.0.11
         version: link:modules/a-aspectutils
       vona-module-a-auth:
-        specifier: ^5.0.49
+        specifier: ^5.0.50
         version: link:modules/a-auth
       vona-module-a-authsimple:
-        specifier: ^5.0.39
+        specifier: ^5.0.40
         version: link:modules/a-authsimple
       vona-module-a-bean:
-        specifier: ^5.0.18
+        specifier: ^5.0.19
         version: link:modules/a-bean
       vona-module-a-beanmutate:
-        specifier: ^5.0.7
+        specifier: ^5.0.8
         version: link:modules/a-beanmutate
       vona-module-a-body:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-body
       vona-module-a-broadcast:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-broadcast
       vona-module-a-cache:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-cache
       vona-module-a-caching:
-        specifier: ^5.0.16
+        specifier: ^5.0.17
         version: link:modules/a-caching
       vona-module-a-captcha:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-captcha
       vona-module-a-captchasimple:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.140
+        specifier: ^5.0.141
         version: link:modules/a-core
       vona-module-a-election:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-election
       vona-module-a-error:
-        specifier: ^5.0.25
+        specifier: ^5.0.26
         version: link:modules/a-error
       vona-module-a-event:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-event
       vona-module-a-executor:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-executor
       vona-module-a-hmr:
-        specifier: ^5.0.2
+        specifier: ^5.0.3
         version: link:modules/a-hmr
       vona-module-a-i18n:
-        specifier: ^5.0.21
+        specifier: ^5.0.22
         version: link:modules/a-i18n
       vona-module-a-index:
-        specifier: ^5.0.21
+        specifier: ^5.0.22
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.0.27
+        specifier: ^5.0.28
         version: link:modules/a-jwt
       vona-module-a-logger:
-        specifier: ^5.0.31
+        specifier: ^5.0.32
         version: link:modules/a-logger
       vona-module-a-mail:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-mail
       vona-module-a-mailconfirm:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-mailconfirm
       vona-module-a-menu:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-menu
       vona-module-a-meta:
-        specifier: ^5.0.18
+        specifier: ^5.0.19
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.0.31
+        specifier: ^5.0.32
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.58
+        specifier: ^5.0.59
         version: link:modules/a-openapi
       vona-module-a-openapischema:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-openapischema
       vona-module-a-openapiutils:
-        specifier: ^5.0.11
+        specifier: ^5.0.12
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.88
+        specifier: ^5.0.89
         version: link:modules/a-orm
       vona-module-a-ormdialect:
-        specifier: ^5.0.23
+        specifier: ^5.0.24
         version: link:modules/a-ormdialect
       vona-module-a-play:
-        specifier: ^5.0.7
+        specifier: ^5.0.8
         version: link:modules/a-play
       vona-module-a-printtip:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-printtip
       vona-module-a-queue:
-        specifier: ^5.0.31
+        specifier: ^5.0.32
         version: link:modules/a-queue
       vona-module-a-redis:
-        specifier: ^5.0.30
+        specifier: ^5.0.31
         version: link:modules/a-redis
       vona-module-a-redlock:
-        specifier: ^5.0.29
+        specifier: ^5.0.30
         version: link:modules/a-redlock
       vona-module-a-runtime:
-        specifier: ^5.0.5
+        specifier: ^5.0.6
         version: link:modules/a-runtime
       vona-module-a-schedule:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-schedule
       vona-module-a-security:
-        specifier: ^5.0.19
+        specifier: ^5.0.20
         version: link:modules/a-security
       vona-module-a-serialization:
-        specifier: ^5.0.13
+        specifier: ^5.0.14
         version: link:modules/a-serialization
       vona-module-a-startup:
-        specifier: ^5.0.32
+        specifier: ^5.0.33
         version: link:modules/a-startup
       vona-module-a-static:
-        specifier: ^5.0.26
+        specifier: ^5.0.27
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.0.28
+        specifier: ^5.0.29
         version: link:modules/a-summer
       vona-module-a-swagger:
-        specifier: ^5.0.32
+        specifier: ^5.0.33
         version: link:modules/a-swagger
       vona-module-a-upload:
-        specifier: ^5.0.20
+        specifier: ^5.0.21
         version: link:modules/a-upload
       vona-module-a-user:
-        specifier: ^5.0.46
+        specifier: ^5.0.47
         version: link:modules/a-user
       vona-module-a-validation:
-        specifier: ^5.0.22
+        specifier: ^5.0.23
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.0.48
+        specifier: ^5.0.49
         version: link:modules/a-version
       vona-module-a-vona:
-        specifier: ^5.0.28
+        specifier: ^5.0.29
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.33
+        specifier: ^5.0.34
         version: link:modules/a-web
       vona-module-a-worker:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-worker
       vona-module-a-zod:
-        specifier: ^5.0.6
+        specifier: ^5.0.7
         version: link:modules/a-zod
 
   src/suite-vendor/a-vona/modules/a-aspect:
@@ -1544,7 +1544,7 @@ importers:
         version: 3.19.0
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.72
+        specifier: ^3.0.73
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
         specifier: ^1.14.0
