@@ -13,20 +13,20 @@
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorDtoOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
-        "boilerplate": "cli/dto/boilerplate",
+        "boilerplate": "dto/boilerplate",
         "metadataCustom": "cli/dto/metadata/generate.ts"
       },
       "controller": {
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorControllerOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
-        "boilerplate": "cli/controller/boilerplate",
+        "boilerplate": "controller/boilerplate",
         "metadataCustom": "cli/controller/metadata/generate.ts"
       },
       "filterTransform": {
         "optionsGlobalInterfaceName": "IDecoratorFilterTransformOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
-        "boilerplate": "cli/filterTransform/boilerplate"
+        "boilerplate": "filterTransform/boilerplate"
       }
     }
   },

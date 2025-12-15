@@ -9,7 +9,7 @@
       "beanTemp": {},
       "bean": {
         "optionsNone": true,
-        "boilerplate": "cli/bean/boilerplate",
+        "boilerplate": "bean/boilerplate",
         "metadataCustom": "cli/bean/metadata/generate.ts"
       },
       "service": {
@@ -17,7 +17,7 @@
         "scopeResource": true,
         "beanGeneral": true,
         "optionsGlobalInterfaceFrom": "vona-module-a-bean",
-        "boilerplate": "cli/service/boilerplate"
+        "boilerplate": "service/boilerplate"
       }
     }
   },

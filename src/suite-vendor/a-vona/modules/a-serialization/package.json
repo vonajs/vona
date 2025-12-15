@@ -9,7 +9,7 @@
       "serializerTransform": {
         "optionsGlobalInterfaceName": "IDecoratorSerializerTransformOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-serialization",
-        "boilerplate": "cli/serializerTransform/boilerplate"
+        "boilerplate": "serializerTransform/boilerplate"
       }
     }
   },

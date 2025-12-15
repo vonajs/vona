@@ -7,7 +7,7 @@
     "dependencies": {},
     "metas": {
       "printTip": {
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     }
   },

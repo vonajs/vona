@@ -12,7 +12,7 @@
         "optionsGlobalInterfaceName": "IDecoratorBroadcastOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-broadcast",
         "scopeResource": true,
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     },
     "capabilities": {

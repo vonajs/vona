@@ -9,7 +9,7 @@
     "dependencies": {},
     "metas": {
       "index": {
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     }
   },

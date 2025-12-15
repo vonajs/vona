@@ -12,7 +12,7 @@
     "metas": {
       "redlock": {
         "scopeResource": true,
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     }
   },

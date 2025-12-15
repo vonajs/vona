@@ -9,12 +9,12 @@
       "zodRefine": {
         "optionsGlobalInterfaceName": "IDecoratorZodRefineOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-zod",
-        "boilerplate": "cli/zodRefine/boilerplate"
+        "boilerplate": "zodRefine/boilerplate"
       },
       "zodTransform": {
         "optionsGlobalInterfaceName": "IDecoratorZodTransformOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-zod",
-        "boilerplate": "cli/zodTransform/boilerplate"
+        "boilerplate": "zodTransform/boilerplate"
       }
     }
   },

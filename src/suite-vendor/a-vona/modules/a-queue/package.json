@@ -13,7 +13,7 @@
         "optionsGlobalInterfaceName": "IDecoratorQueueOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-queue",
         "scopeResource": true,
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     },
     "capabilities": {

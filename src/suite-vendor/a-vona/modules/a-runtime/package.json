@@ -7,7 +7,7 @@
     "dependencies": {},
     "metas": {
       "runtime": {
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     }
   },

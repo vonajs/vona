@@ -9,13 +9,13 @@
       "event": {
         "optionsNone": true,
         "scopeResource": true,
-        "boilerplate": "cli/event/boilerplate",
+        "boilerplate": "event/boilerplate",
         "metadataCustom": "cli/event/metadata/generate.ts"
       },
       "eventListener": {
         "optionsGlobalInterfaceName": "IDecoratorEventListenerOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-event",
-        "boilerplate": "cli/eventListener/boilerplate"
+        "boilerplate": "eventListener/boilerplate"
       }
     }
   },

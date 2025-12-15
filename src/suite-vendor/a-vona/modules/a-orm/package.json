@@ -19,7 +19,7 @@
         "optionsGlobalInterfaceFrom": "vona-module-a-orm",
         "scopeResource": true,
         "scopeResourceTypeTemplate": "{{className}}Meta",
-        "boilerplate": "cli/entity/boilerplate",
+        "boilerplate": "entity/boilerplate",
         "metadataCustom": "cli/entity/metadata/generate.ts"
       },
       "model": {
@@ -28,14 +28,14 @@
         "optionsGlobalInterfaceFrom": "vona-module-a-orm",
         "scopeResource": true,
         "beanGeneral": true,
-        "boilerplate": "cli/model/boilerplate",
+        "boilerplate": "model/boilerplate",
         "metadataCustom": "cli/model/metadata/generate.ts"
       },
       "databaseDialect": {
         "beanGeneral": true,
         "optionsGlobalInterfaceName": "IDecoratorDatabaseDialectOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-orm",
-        "boilerplate": "cli/databaseDialect/boilerplate"
+        "boilerplate": "databaseDialect/boilerplate"
       }
     }
   },

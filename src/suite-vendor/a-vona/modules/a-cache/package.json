@@ -10,13 +10,13 @@
         "optionsGlobalInterfaceName": "IDecoratorCacheMemOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-cache",
         "scopeResource": true,
-        "boilerplate": "cli/cacheMem/boilerplate"
+        "boilerplate": "cacheMem/boilerplate"
       },
       "cacheRedis": {
         "optionsGlobalInterfaceName": "IDecoratorCacheRedisOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-cache",
         "scopeResource": true,
-        "boilerplate": "cli/cacheRedis/boilerplate"
+        "boilerplate": "cacheRedis/boilerplate"
       }
     }
   },

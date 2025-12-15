@@ -8,11 +8,11 @@
     "metas": {
       "static": {
         "scopeResource": true,
-        "boilerplate": "cli/static/boilerplate"
+        "boilerplate": "static/boilerplate"
       },
       "asset": {
         "scopeResource": true,
-        "boilerplate": "cli/asset/boilerplate"
+        "boilerplate": "asset/boilerplate"
       }
     }
   },

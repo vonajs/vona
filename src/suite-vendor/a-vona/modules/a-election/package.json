@@ -8,7 +8,7 @@
     "metas": {
       "election": {
         "scopeResource": true,
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     },
     "capabilities": {

@@ -7,7 +7,7 @@
     "dependencies": {},
     "metas": {
       "version": {
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     }
   },

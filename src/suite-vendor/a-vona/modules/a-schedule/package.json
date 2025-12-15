@@ -9,7 +9,7 @@
       "schedule": {
         "optionsGlobalInterfaceName": "IDecoratorScheduleOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-schedule",
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "boilerplate"
       }
     }
   },

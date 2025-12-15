@@ -12,7 +12,7 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorFilterOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/filter/boilerplate",
+        "boilerplate": "filter/boilerplate",
         "boilerplateGlobal": "cli/filterGlobal/boilerplate"
       },
       "pipe": {
@@ -22,7 +22,7 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorPipeOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/pipe/boilerplate",
+        "boilerplate": "pipe/boilerplate",
         "boilerplateGlobal": "cli/pipeGlobal/boilerplate"
       },
       "interceptor": {
@@ -31,7 +31,7 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorInterceptorOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/interceptor/boilerplate",
+        "boilerplate": "interceptor/boilerplate",
         "boilerplateGlobal": "cli/interceptorGlobal/boilerplate"
       },
       "guard": {
@@ -40,7 +40,7 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorGuardOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/guard/boilerplate",
+        "boilerplate": "guard/boilerplate",
         "boilerplateGlobal": "cli/guardGlobal/boilerplate"
       },
       "middleware": {
@@ -49,23 +49,23 @@
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/middleware/boilerplate",
+        "boilerplate": "middleware/boilerplate",
         "boilerplateGlobal": "cli/middlewareGlobal/boilerplate"
       },
       "middlewareSystem": {
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareSystemOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/middlewareSystem/boilerplate"
+        "boilerplate": "middlewareSystem/boilerplate"
       },
       "aop": {
         "optionsGlobalInterfaceName": "IDecoratorAopOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/aop/boilerplate"
+        "boilerplate": "aop/boilerplate"
       },
       "aopMethod": {
         "optionsGlobalInterfaceName": "IDecoratorAopMethodOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
-        "boilerplate": "cli/aopMethod/boilerplate"
+        "boilerplate": "aopMethod/boilerplate"
       }
     }
   },

@@ -15,7 +15,7 @@
     "dependencies": {},
     "onions": {
       "hmr": {
-        "boilerplate": "cli/hmr/boilerplate"
+        "boilerplate": "hmr/boilerplate"
       }
     }
   },
