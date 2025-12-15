@@ -5,6 +5,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { catchError } from '@cabloy/utils';
 import ejs from '@zhennann/ejs';
+import fse from 'fs-extra';
 import { globby } from 'globby';
 import gogocode from 'gogocode';
 import isTextOrBinary from 'istextorbinary';
@@ -50,7 +51,11 @@ export class LocalTemplate {
     const sets = this.moduleConfig.sets;
     const require = createRequire(import.meta.url);
     const modulePath = require.resolve(`${sets[process.env.CabloyCliBrandName as any][setName]}/package.json`);
-    return path.join(path.dirname(modulePath), 'cli/templates', _path);
+    let templatePath = path.join(path.dirname(modulePath), 'dist-cli/templates', _path);
+    if (!fse.existsSync(templatePath)) {
+      templatePath = path.join(path.dirname(modulePath), 'cli/templates', _path);
+    }
+    return templatePath;
   }
 
   async renderBoilerplateAndSnippets({
