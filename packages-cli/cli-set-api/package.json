@@ -26,6 +26,7 @@
   "files": [
     "cli",
     "dist",
+    "dist-cli",
     "dist-toolsIsolate",
     "templates"
   ],
