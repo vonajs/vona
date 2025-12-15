@@ -224,7 +224,7 @@ export class LocalTemplate {
 
   async applySnippets(targetDir: string, snippetsDir: string) {
     // snippets
-    let files = await globby('*.{cjs,ts}', {
+    let files = await globby('*.{cjs,js,ts}', {
       cwd: snippetsDir,
       onlyFiles: true,
     });
