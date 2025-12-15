@@ -24,7 +24,6 @@
 1. 安装命令行工具
 
 ``` bash
-$ pnpm add -g tsx@latest
 $ pnpm add -g vona-cli@latest
 ```
 

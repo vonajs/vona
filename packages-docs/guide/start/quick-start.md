@@ -20,7 +20,6 @@
 1. Install command-line tools
 
 ``` bash
-$ pnpm add -g tsx@latest
 $ pnpm add -g vona-cli@latest
 ```
 

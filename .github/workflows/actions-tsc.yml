@@ -19,6 +19,5 @@ jobs:
         with:
           version: 10.19.0
       - run: cp package.original.json package.json
-      - run: npm i tsx -g 
       - run: npm run init
       - run: npm run tsc
