@@ -4,6 +4,7 @@ import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -60,13 +61,12 @@ export class CliCreateBean extends BeanCliBase {
     const boilerplates = this._getBoilerplatesOrSnippets('boilerplate', argv.boilerplate);
     const snippetsName = snippets[`${sceneName}:${argv.beanName}`] || snippets[sceneName];
     const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
-    const boilerplatePath = `cli/${boilerplateName}`;
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
       setName: __ThisSetName__,
       snippetsPath: snippetsName,
-      boilerplatePath,
+      boilerplatePath: boilerplateName,
     });
     // tools.metadata
     if (!argv.nometadata) {
@@ -83,7 +83,7 @@ export class CliCreateBean extends BeanCliBase {
       const onionSceneMeta = onionScenesMeta[sceneName];
       const scenePath = onionSceneMeta[type2];
       if (scenePath) {
-        result[sceneName] = path.join(onionSceneMeta.module!.root, scenePath);
+        result[sceneName] = this._combineBoilerplatesOrSnippetsPath(type, onionSceneMeta.module!.root, scenePath);
       }
     }
     // metas
@@ -92,9 +92,20 @@ export class CliCreateBean extends BeanCliBase {
       const onionMetaMeta = onionMetasMeta[sceneName];
       const scenePath = onionMetaMeta[type2];
       if (scenePath) {
-        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, scenePath);
+        result[`meta:${sceneName}`] = this._combineBoilerplatesOrSnippetsPath(type, onionMetaMeta.module!.root, scenePath);
       }
     }
     return result;
+  }
+
+  private _combineBoilerplatesOrSnippetsPath(type: 'boilerplate' | 'snippets', moduleRoot: string, scenePath: string) {
+    if (type === 'boilerplate') {
+      return path.join(moduleRoot, 'cli', scenePath);
+    }
+    let snippetsPath = path.join(moduleRoot, 'dist-cli', scenePath);
+    if (!fse.existsSync(snippetsPath)) {
+      snippetsPath = path.join(moduleRoot, 'cli', scenePath);
+    }
+    return snippetsPath;
   }
 }
