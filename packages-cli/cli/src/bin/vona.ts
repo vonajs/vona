@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-import path from 'node:path';
 import { ProcessHelper } from '@cabloy/process-helper';
-import fse from 'fs-extra';
 import semver from 'semver';
 import { playAttach } from '../play.ts';
+import { VonaCommand } from '../start.ts';
 
 const pnpm_version = '10.19.0';
 
@@ -30,11 +29,6 @@ async function checkPnpm() {
 }
 
 async function main() {
-  // bootstrapFile
-  let bootstrapFile = path.join(import.meta.dirname, '../bootstrap.ts');
-  if (!fse.existsSync(bootstrapFile)) {
-    bootstrapFile = path.join(import.meta.dirname, '../bootstrap.js');
-  }
   // args
   let args: string[] = [];
   const rawArgv = process.argv.slice(2);
@@ -42,12 +36,11 @@ async function main() {
   const isPlayAttach = isPlay && (rawArgv.includes('-a') || rawArgv.includes('--attach'));
   if (isPlay) {
     if (!isPlayAttach) {
-      args = args.concat([bootstrapFile, ':bin:play']);
+      args = args.concat([':bin:play']);
     }
     args = args.concat(rawArgv.slice(1)).concat(['--dummy']);
   } else {
-    args.push(bootstrapFile);
-    args = args.concat(rawArgv);
+    args = rawArgv;
   }
   // run
   if (isPlayAttach) {
@@ -56,6 +49,6 @@ async function main() {
     if (!isPlay) {
       await checkPnpm();
     }
-    processHelper.spawnCmd({ cmd: 'tsx', args });
+    new VonaCommand(args).start();
   }
 }
