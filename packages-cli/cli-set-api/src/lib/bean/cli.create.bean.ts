@@ -60,12 +60,13 @@ export class CliCreateBean extends BeanCliBase {
     const boilerplates = this._getBoilerplatesOrSnippets('boilerplate', argv.boilerplate);
     const snippetsName = snippets[`${sceneName}:${argv.beanName}`] || snippets[sceneName];
     const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
+    const boilerplatePath = `cli/${boilerplateName}`;
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
       setName: __ThisSetName__,
       snippetsPath: snippetsName,
-      boilerplatePath: boilerplateName,
+      boilerplatePath,
     });
     // tools.metadata
     if (!argv.nometadata) {

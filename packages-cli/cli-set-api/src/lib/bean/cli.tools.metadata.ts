@@ -256,6 +256,10 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
         changed = true;
         pkg.files.push('cli');
       }
+      if (pkg['tsc:publish'].includes('tsconfig.cli.json')) {
+        changed = true;
+        pkg.files.push('dist-cli');
+      }
     }
     // save
     if (changed) {

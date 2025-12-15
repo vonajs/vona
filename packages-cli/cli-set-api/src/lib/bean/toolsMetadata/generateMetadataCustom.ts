@@ -3,6 +3,7 @@ import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import path from 'node:path';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
 import { globBeanFiles } from './utils.ts';
 
 export async function generateMetadataCustom(
@@ -16,7 +17,10 @@ export async function generateMetadataCustom(
   const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
   if (globFiles.length === 0) return '';
   // custom
-  const jsFile = path.join(sceneMeta.module!.root, sceneMeta.metadataCustom!);
+  let jsFile = path.join(sceneMeta.module!.root, 'dist-cli', sceneMeta.metadataCustom!.replace('.ts', '.js'));
+  if (!fse.existsSync(jsFile)) {
+    jsFile = path.join(sceneMeta.module!.root, 'cli', sceneMeta.metadataCustom!);
+  }
   return await cli.helper.importDynamic(jsFile, async instance => {
     const options: IMetadataCustomGenerateOptions = {
       cli,
