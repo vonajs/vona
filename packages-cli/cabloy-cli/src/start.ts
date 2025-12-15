@@ -4,7 +4,6 @@ import CommonBin from '@zhennann/common-bin';
 import { BeanCli } from './lib/bean.cli.ts';
 import { CliCommand } from './lib/cli.ts';
 import { collectCommands } from './lib/commands.ts';
-import { checkForUpdates } from './utils.ts';
 
 const DISPATCH = Symbol.for('eb:Command#dispatch');
 const PARSE = Symbol.for('eb:Command#parse');
@@ -28,7 +27,7 @@ export class CabloyCommand extends CommonBin {
       return;
     }
     // checkForUpdates
-    checkForUpdates(`${this.brandName}-cli`);
+    // checkForUpdates(`${this.brandName}-cli`);
     // collectCommands
     await collectCommands();
     // cli
