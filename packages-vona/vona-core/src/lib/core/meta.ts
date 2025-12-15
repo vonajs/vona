@@ -148,9 +148,11 @@ export class AppMeta extends BeanSimple {
     // logger dispose
     await this.app.meta.logger.dispose();
     // log
-    const message = `App shutdown gracefully: ${process.pid}`;
-    // eslint-disable-next-line
-    console.log(chalk.cyan(message));
+    if (this.app.meta.env.LOGGER_DUMMY !== 'true') {
+      const message = `App shutdown gracefully: ${process.pid}`;
+      // eslint-disable-next-line
+      console.log(chalk.cyan(message));
+    }
     // need not call process.exit
   }
 }
