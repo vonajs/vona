@@ -162,7 +162,7 @@ export class ProcessHelper {
       });
       proc.once('exit', code => {
         if (options.gracefull) childs.delete(proc);
-        if (code !== 0) {
+        if (code) {
           const message = stderr || `spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`;
           const err = new Error(message);
           (err as any).code = 10000 + Number(code);
