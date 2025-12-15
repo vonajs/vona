@@ -39,7 +39,7 @@ export class LocalCommon {
   }
 
   async _generateTypeModulesFileInner(typeFile: string, typeFileStat: Stats, moduleTypeFile: string) {
-    const win = true;// process.platform.startsWith('win');
+    const win = process.platform.startsWith('win');
     let needCreate = true;
     const exists = await fse.exists(moduleTypeFile);
     if (exists) {
