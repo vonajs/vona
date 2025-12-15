@@ -307,7 +307,7 @@ importers:
         version: 4.1.13
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.71
+        specifier: ^3.0.73
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -467,7 +467,7 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.73
+        specifier: ^3.0.74
         version: link:../cabloy-cli
       '@cabloy/process-helper':
         specifier: ^2.0.24
@@ -479,7 +479,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.421
+        specifier: ^1.0.422
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -501,7 +501,7 @@ importers:
         specifier: ^7.26.8
         version: 7.28.5(@babel/core@7.28.5)
       '@cabloy/cli':
-        specifier: ^3.0.73
+        specifier: ^3.0.74
         version: link:../cabloy-cli
       '@cabloy/dotenv':
         specifier: ^1.1.12
@@ -594,7 +594,7 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.0.105
+        specifier: ^5.0.106
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -888,10 +888,10 @@ importers:
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.0.105
+        specifier: ^5.0.106
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.233
+        specifier: ^5.0.234
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1004,7 +1004,7 @@ importers:
         specifier: ^1.0.40
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.0.105
+        specifier: ^5.0.106
         version: link:../vona-core
     devDependencies:
       clean-package:
@@ -1221,7 +1221,7 @@ importers:
         specifier: ^5.0.10
         version: link:modules/a-captchasimple
       vona-module-a-core:
-        specifier: ^5.0.141
+        specifier: ^5.0.142
         version: link:modules/a-core
       vona-module-a-election:
         specifier: ^5.0.24
@@ -1544,7 +1544,7 @@ importers:
         version: 3.19.0
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.73
+        specifier: ^3.0.74
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
         specifier: ^1.14.0
@@ -1592,7 +1592,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.105
+        specifier: ^6.0.106
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2

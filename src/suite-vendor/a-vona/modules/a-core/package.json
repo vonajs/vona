@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-core",
   "type": "module",
-  "version": "5.0.141",
+  "version": "5.0.142",
   "title": "a-core",
   "vonaModule": {
     "dependencies": {},
@@ -97,7 +97,7 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.73",
+    "@cabloy/cli": "^3.0.74",
     "@swc/core": "^1.14.0",
     "@swc/helpers": "^0.5.17",
     "@types/babel__core": "^7.20.5",
@@ -113,7 +113,7 @@
     "ts-node-maintained": "^10.9.6",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
-    "vona-mock": "^6.0.105",
+    "vona-mock": "^6.0.106",
     "why-is-node-running": "^3.2.2"
   },
   "clean-package": {
