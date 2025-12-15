@@ -232,12 +232,9 @@ export class LocalHelper {
   }
 
   async invokeCli(args: string[], options) {
-    // tsx: spawnCmd, node: spawnExe
-    await this.processHelper.spawnCmd({
-      cmd: 'tsx',
+    await this.processHelper.spawnExe({
+      cmd: 'node',
       args: [this.parseBrandPath()].concat(args),
-      // cmd: 'node',
-      // args: ['--experimental-transform-types', getImportEsm(), this.parseBrandPath()].concat(args),
       options,
     });
   }
