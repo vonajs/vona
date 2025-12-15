@@ -12,19 +12,12 @@ function gracefull(proc) {
   /* istanbul ignore else */
   if (!hadHook) {
     hadHook = true;
-    let signal;
     ['SIGINT', 'SIGQUIT', 'SIGTERM'].forEach(event => {
       process.once(event, () => {
-        signal = event;
-        process.exit(0);
+        for (const child of childs) {
+          child.kill(event as any);
+        }
       });
-    });
-
-    process.once('exit', () => {
-      // had test at my-helper.test.js, but coffee can't collect coverage info.
-      for (const child of childs) {
-        child.kill(signal);
-      }
     });
   }
 }
