@@ -276,6 +276,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: '介绍', link: 'introduction' },
         { text: '广播', link: 'broadcast' },
+        { text: 'Election', link: 'election' },
         {
           text: '队列',
           base: '/zh/guide/distributed/queue/',
@@ -396,11 +397,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '介绍', link: 'introduction' },
             { text: '工具函数', link: 'tools' },
           ],
-        },
-        {
-          text: 'Election',
-          base: '/zh/guide/techniques/election/',
-          link: 'introduction',
         },
         {
           text: 'Event事件',

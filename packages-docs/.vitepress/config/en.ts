@@ -276,6 +276,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'introduction' },
         { text: 'Broadcast', link: 'broadcast' },
+        { text: 'Election', link: 'election' },
         {
           text: 'Queue',
           base: '/guide/distributed/queue/',
@@ -396,11 +397,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Introduction', link: 'introduction' },
             { text: 'Tools', link: 'tools' },
           ],
-        },
-        {
-          text: 'Election',
-          base: '/guide/techniques/election/',
-          link: 'introduction',
         },
         {
           text: 'Event',
