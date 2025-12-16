@@ -891,7 +891,7 @@ importers:
         specifier: ^5.0.106
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.235
+        specifier: ^5.0.236
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1236,7 +1236,7 @@ importers:
         specifier: ^5.0.28
         version: link:modules/a-executor
       vona-module-a-hmr:
-        specifier: ^5.0.3
+        specifier: ^5.0.4
         version: link:modules/a-hmr
       vona-module-a-i18n:
         specifier: ^5.0.22
