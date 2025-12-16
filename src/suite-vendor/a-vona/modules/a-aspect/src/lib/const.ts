@@ -8,9 +8,13 @@ export const SymbolCacheComposePipes = Symbol('SymbolCacheComposePipes');
 export const SymbolCacheComposeFilters = Symbol('SymbolCacheComposeFilters');
 
 export function clearCacheComposesAll(app: VonaApplication) {
+  clearCacheComposeMiddlewareSystems(app);
+  clearCacheComposesRouter(app);
+}
+
+export function clearCacheComposeMiddlewareSystems(app: VonaApplication) {
   delete app.meta[SymbolCacheComposeMiddlewareSystems];
   app.bean.onion.middlewareSystem.clearCache();
-  clearCacheComposesRouter(app);
 }
 
 export function clearCacheComposesRouter(app: VonaApplication) {
