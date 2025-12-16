@@ -1,13 +1,13 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.236",
+  "version": "5.0.237",
   "title": "a-core",
   "description": "",
   "author": "",
   "files": [],
   "dependencies": {
-    "vona-module-a-aspect": "^5.0.28",
+    "vona-module-a-aspect": "^5.0.29",
     "vona-module-a-aspectutils": "^5.0.11",
     "vona-module-a-auth": "^5.0.50",
     "vona-module-a-authsimple": "^5.0.40",
