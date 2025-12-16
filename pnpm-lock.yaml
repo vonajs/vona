@@ -281,9 +281,9 @@ importers:
       vona-module-a-zod:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-zod
-      vona-module-demo-studetn:
+      vona-module-demo-student:
         specifier: workspace:^
-        version: link:src/module/demo-studetn
+        version: link:src/module/demo-student
       vona-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -1023,7 +1023,7 @@ importers:
         specifier: ^6.0.1
         version: 6.1.2
 
-  src/module/demo-studetn:
+  src/module/demo-student:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
