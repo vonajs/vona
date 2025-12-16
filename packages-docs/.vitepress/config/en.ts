@@ -275,8 +275,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/guide/distributed/',
       items: [
         { text: 'Introduction', link: 'introduction' },
-        { text: 'Broadcast', link: 'broadcast' },
-        { text: 'Election', link: 'election' },
         {
           text: 'Queue',
           base: '/guide/distributed/queue/',
@@ -287,8 +285,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Extra Data', link: 'extra-data' },
           ],
         },
-        { text: 'Redlock', link: 'redlock' },
-        { text: 'Schedule', link: 'schedule' },
         {
           text: 'Startup',
           base: '/guide/distributed/startup/',
@@ -298,6 +294,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Built-in Startup', link: 'builtin' },
           ],
         },
+        { text: 'Broadcast', link: 'broadcast' },
+        { text: 'Schedule', link: 'schedule' },
+        { text: 'Redlock', link: 'redlock' },
+        { text: 'Election', link: 'election' },
+        { text: 'Worker', link: 'worker' },
       ],
     },
     {
@@ -462,11 +463,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Upload',
           base: '/guide/techniques/upload/',
-          link: 'introduction',
-        },
-        {
-          text: 'Worker',
-          base: '/guide/techniques/worker/',
           link: 'introduction',
         },
       ],

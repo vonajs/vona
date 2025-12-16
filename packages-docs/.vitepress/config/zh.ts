@@ -275,8 +275,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/zh/guide/distributed/',
       items: [
         { text: '介绍', link: 'introduction' },
-        { text: '广播', link: 'broadcast' },
-        { text: 'Election', link: 'election' },
         {
           text: '队列',
           base: '/zh/guide/distributed/queue/',
@@ -287,8 +285,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '扩展数据', link: 'extra-data' },
           ],
         },
-        { text: '分布式锁', link: 'redlock' },
-        { text: '定时任务', link: 'schedule' },
         {
           text: '启动项',
           base: '/zh/guide/distributed/startup/',
@@ -298,6 +294,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '内置启动项', link: 'builtin' },
           ],
         },
+        { text: '广播', link: 'broadcast' },
+        { text: '定时任务', link: 'schedule' },
+        { text: '分布式锁', link: 'redlock' },
+        { text: 'Election', link: 'election' },
+        { text: 'Worker', link: 'worker' },
       ],
     },
     {
@@ -462,11 +463,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Upload文件上传',
           base: '/zh/guide/techniques/upload/',
-          link: 'introduction',
-        },
-        {
-          text: 'Worker',
-          base: '/zh/guide/techniques/worker/',
           link: 'introduction',
         },
       ],
