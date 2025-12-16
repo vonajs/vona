@@ -1,6 +1,6 @@
 # Redis缓存
 
-`Redis缓存`基于[Redis](../redis/introduction.md)实现
+`Redis缓存`基于[Redis](../../distributed/redis.md)实现
 
 ## 创建Redis缓存
 

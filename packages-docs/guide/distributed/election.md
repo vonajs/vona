@@ -42,7 +42,7 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 
 Next, create a `Module Monkey` that responds to the `appStarted` and `appClose` hooks
 
-- See also: [App Startup Customization](../../env-config/app-start/introduction.md)
+- See also: [App Startup Customization](../env-config/app-start/introduction.md)
 
 ``` typescript
 export class Monkey extends BeanSimple implements IMonkeyAppStarted {

@@ -1,6 +1,6 @@
 # Redis Cache
 
-`Redis Cache` is implemented based on [Redis](../redis/introduction.md)
+`Redis Cache` is implemented based on [Redis](../../distributed/redis.md)
 
 ## Create Redis Cache
 

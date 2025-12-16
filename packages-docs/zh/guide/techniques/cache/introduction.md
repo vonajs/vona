@@ -3,7 +3,7 @@
 VonaJS 提供了非常强大的缓存机制，包括以下 4 个功能:
 
 1. `Mem缓存`: 基于[lru-cache](https://github.com/isaacs/node-lru-cache)实现
-2. `Redis缓存`: 基于[Redis](../redis/introduction.md)实现
+2. `Redis缓存`: 基于[Redis](../../distributed/redis.md)实现
 3. `Summer缓存（二级缓存）`: 基于 Mem 缓存和 Redis 缓存实现
 4. `Caching装饰器`: 使用装饰器为任何 Class 的任何 Method 提供缓存能力
 
