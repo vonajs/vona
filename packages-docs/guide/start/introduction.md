@@ -18,6 +18,7 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 
 * `Developed in TypeScript`: Provides comprehensive TypeScript type hints
 * `Using ESM modules throughout`: Faster project startup
+* `File-level precise HMR`: Makes the development experience smoother and more efficient
 * `Complete modular system`: Module-based business segmentation makes code more cohesive and easier to reuse and share
 * `IOC container and dependency lookup`: We recommend using `dependency lookup` to obtain bean instances directly from the container, making code writing more intuitive and elegant
 * `Universal bean configuration capabilities`: All options of bean classes can be modified in App Config, significantly improving the scalability of the entire system and saving a large amount of configuration-related code
