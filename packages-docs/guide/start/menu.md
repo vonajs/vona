@@ -6,64 +6,30 @@ Vona provides a large number of menu commands based on Cli commands. Cli command
 
 In order to use menu commands, you need to install this extension
 
-## Menu cheat sheet
+## Menus
+
+### Vona Aspect
+
+![](../../assets/img/menu/menu-aspect.png)
 
 ### Vona Bean
 
-- Aop
-- Aop Method
-- Auth Provider
-- Broadcast
-- Cache Mem
-- Cache Redis
-- Database Dialect
-- Event
-- Event Listener
-- Filter
-- Global
-- Guard
-- Interceptor
-- Middleware
-- Middleware System
-- Pipe
-- Queue
-- Schedule
-- Startup
-- Summer Cache
+![](../../assets/img/menu/menu-bean.png)
 
 ### Vona Create
 
-- Suite
-- Module
-- Controller
-- Dto
-- Entity
-- Model
-- Service
-- Test
+![](../../assets/img/menu/menu-create.png)
 
 ### Vona Init
 
-- Config
-- Constant
-- Error
-- Locale
-- Main
-- Monkey
-- Static Resources
+![](../../assets/img/menu/menu-init.png)
 
 ### Vona Meta
 
-- Election
-- Index
-- Print Tip
-- Redlock
-- static
-- Version
+![](../../assets/img/menu/menu-meta.png)
 
 ### Vona Tools
 
-- Generate .metadata
-- Generate Crud
+![](../../assets/img/menu/menu-tools.png)
 
 **Enjoy!**

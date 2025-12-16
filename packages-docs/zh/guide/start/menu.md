@@ -8,62 +8,28 @@ Vona 在 Cli 命令的基础上提供了大量菜单命令，通过菜单来执�
 
 ## 菜单清单
 
+### Vona Aspect
+
+![](../../assets/img/menu/menu-aspect.png)
+
 ### Vona Bean
 
-- Aop
-- Aop Method
-- Auth Provider
-- Broadcast
-- Cache Mem
-- Cache Redis
-- Database Dialect
-- Event
-- Event Listener
-- Filter
-- Global
-- Guard
-- Interceptor
-- Middleware
-- Middleware System
-- Pipe
-- Queue
-- Schedule
-- Startup
-- Summer Cache
+![](../../assets/img/menu/menu-bean.png)
 
 ### Vona Create
 
-- Suite
-- Module
-- Controller
-- Dto
-- Entity
-- Model
-- Service
-- Test
+![](../../assets/img/menu/menu-create.png)
 
 ### Vona Init
 
-- Config
-- Constant
-- Error
-- Locale
-- Main
-- Monkey
-- Static Resources
+![](../../assets/img/menu/menu-init.png)
 
 ### Vona Meta
 
-- Election
-- Index
-- Print Tip
-- Redlock
-- static
-- Version
+![](../../assets/img/menu/menu-meta.png)
 
 ### Vona Tools
 
-- Generate .metadata
-- Generate Crud
+![](../../assets/img/menu/menu-tools.png)
 
 **Enjoy!**
