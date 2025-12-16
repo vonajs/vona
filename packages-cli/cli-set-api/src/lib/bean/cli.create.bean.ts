@@ -20,6 +20,8 @@ declare module '@cabloy/cli' {
   }
 }
 
+let __snippetsPathPrefix: string | undefined;
+
 export class CliCreateBean extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
@@ -99,12 +101,20 @@ export class CliCreateBean extends BeanCliBase {
   }
 
   private _combineBoilerplatesOrSnippetsPath(type: 'boilerplate' | 'snippets', moduleRoot: string, scenePath: string) {
+    // boilerplate
     if (type === 'boilerplate') {
       return path.join(moduleRoot, 'cli', scenePath);
+    }
+    // snippets
+    if (__snippetsPathPrefix) {
+      return path.join(moduleRoot, __snippetsPathPrefix, scenePath);
     }
     let snippetsPath = path.join(moduleRoot, 'dist-cli', scenePath);
     if (!fse.existsSync(snippetsPath)) {
       snippetsPath = path.join(moduleRoot, 'cli', scenePath);
+      __snippetsPathPrefix = 'cli';
+    } else {
+      __snippetsPathPrefix = 'dist-cli';
     }
     return snippetsPath;
   }
