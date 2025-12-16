@@ -275,6 +275,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/zh/guide/distributed/',
       items: [
         { text: '介绍', link: 'introduction' },
+        { text: 'Redis', link: 'redis' },
         {
           text: '队列',
           base: '/zh/guide/distributed/queue/',
@@ -439,11 +440,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'PrintTip',
           base: '/zh/guide/techniques/printTip/',
-          link: 'introduction',
-        },
-        {
-          text: 'Redis',
-          base: '/zh/guide/techniques/redis/',
           link: 'introduction',
         },
         {

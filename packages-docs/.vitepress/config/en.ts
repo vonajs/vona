@@ -275,6 +275,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/guide/distributed/',
       items: [
         { text: 'Introduction', link: 'introduction' },
+        { text: 'Redis', link: 'redis' },
         {
           text: 'Queue',
           base: '/guide/distributed/queue/',
@@ -439,11 +440,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'PrintTip',
           base: '/guide/techniques/printTip/',
-          link: 'introduction',
-        },
-        {
-          text: 'Redis',
-          base: '/guide/techniques/redis/',
           link: 'introduction',
         },
         {
