@@ -9,22 +9,22 @@ Vona injects Bean instances through `@Use` decorator function
 
 ## Based on Class type
 
-Inject the ServiceStudent provided by the demo-student module into ControllerStudent of the demo-student module, as shown in the code below:
+Inject the ServiceStudent provided by the module demo-student in the current module. The code is as follows:
 
 ``` typescript
-import { Use } from 'vona';
 import { ServiceStudent } from '../service/student.ts';
 
 export class ControllerStudent {
   @Use()
   student: ServiceStudent;
-}  
+}
 ```
 
 ## Based on Bean identifier
 
+Inject the ServiceStudent provided by the module demo-student into other modules, as shown in the code below:
+
 ``` typescript
-import { Use } from 'vona';
 import type { ServiceStudent } from 'vona-module-demo-student';
 
 export class ControllerStudent {
@@ -33,4 +33,4 @@ export class ControllerStudent {
 }  
 ```
 
-- Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified
+Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified

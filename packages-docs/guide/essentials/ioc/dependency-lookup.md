@@ -4,42 +4,42 @@ In addition to `Dependency Injection`, Vona also provides `Dependency Lookup`. I
 
 ## Dependency Lookup in current module
 
-Suppose we want to lookup the ServiceMenu provided by this module home-base in the ControllerMenu of the current module, the code is as follows:
+In the module demo-student, lookup the ServiceStudent provided by this module. The code is as follows:
 
 ``` typescript
-class ControllerMenu {
-  async test() {
-    return await this.scope.service.menu.retrieveMenus('');
+class ControllerStudent {
+  async findMany() {
+    return await this.scope.service.student.findMany();
   }
 }
 ```
 
-- Get the scope object of this current module through `this.scope` to lookup the service provided by this module
+Get the scope object of this current module through `this.scope` to lookup the service provided by this module
 
 ## Dependency Lookup Cross-module 
 
-Suppose we want to lookup the ServiceMenu provided by the module home-base in the ControllerHome of the module home-index, the code is as follows:
+In other modules, lookup the ServiceStudent provided by the module demo-student, the code is as follows:
 
 ``` typescript
-class ControllerHome {
-  async test() {
-    return await this.$scope.homeBase.service.menu.retrieveMenus('');
+class ControllerOther {
+  async findMany() {
+    return await this.$scope.demoStudent.service.student.findMany();
   }
-}
+}  
 ```
 
-- Get the scope object of the module home-base through `this.$scope.homeBase` to lookup the service provided by module home-base
+Get the scope object of the module demo-student through `this.$scope.demoStudent` to lookup the service provided by the module demo-student
 
 ## Lookup global service beans
 
-Suppose we want to lookup the global service bean `BeanJwt` provided by module a-jwt in ControllerHome of module home-index, the code is as follows:
+In the module demo-student, lookup the global service bean `BeanJwt` provided by the module a-jwt. The code is as follows:
 
 ``` typescript
-class ControllerHome {
+class ControllerStudent {
   async test() {
     return await this.bean.jwt.create({});
   }
 }
 ```
 
-- Get the app bean container through `this.bean` to lookup the global service bean
+Get the app container through `this.bean` to lookup the global service bean

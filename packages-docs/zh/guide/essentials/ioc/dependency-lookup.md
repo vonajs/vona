@@ -4,42 +4,42 @@
 
 ## 本模块查找
 
-假设我们要在模块 home-base 的 ControllerMenu 中查找本模块提供的 ServiceMenu，代码如下：
+在模块 demo-student 查找本模块提供的 ServiceStudent，代码如下：
 
 ``` typescript
-class ControllerMenu {
-  async test() {
-    return await this.scope.service.menu.retrieveMenus('');
+class ControllerStudent {
+  async findMany() {
+    return await this.scope.service.student.findMany();
   }
-}  
+}
 ```
 
-- 通过`this.scope`获取本模块的 scope 对象，从而找到本模块提供的 service
+通过`this.scope`获取本模块的 scope 对象，从而找到本模块提供的 service
 
 ## 跨模块查找
 
-假设我们要在模块 home-index 的 ControllerHome 中查找模块 home-base 提供的 ServiceMenu，代码如下：
+在其他模块查找模块 demo-student 提供的 ServiceStudent，代码如下：
 
 ``` typescript
-class ControllerHome {
-  async test() {
-    return await this.$scope.homeBase.service.menu.retrieveMenus('');
+class ControllerOther {
+  async findMany() {
+    return await this.$scope.demoStudent.service.student.findMany();
   }
 }  
 ```
 
-- 通过`this.$scope.homeBase`获取模块 home-base 的 scope 对象，从而找到模块 home-base 提供的 service
+通过`this.$scope.demoStudent`获取模块 demo-student 的 scope 对象，从而找到模块 demo-student 提供的 service
 
 ## 查找全局service bean
 
-假设我们要在模块 home-index 的 ControllerHome 中查找模块 a-jwt 提供的全局 service bean `BeanJwt`，代码如下：
+在模块 demo-student 查找模块 a-jwt 提供的全局 service bean `BeanJwt`，代码如下：
 
 ``` typescript
-class ControllerHome {
+class ControllerStudent {
   async test() {
     return await this.bean.jwt.create({});
   }
-}  
+}
 ```
 
-- 通过`this.bean`获取 app bean 容器，从而找到全局 service bean
+通过`this.bean`获取 app 容器，从而找到全局 service bean
