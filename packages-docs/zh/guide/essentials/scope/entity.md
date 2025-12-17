@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean entity menu --module=home-base
+$ vona :create:bean entity student --module=demo-student
 ```
 
 ### 2. 菜单命令
@@ -20,24 +20,20 @@ $ vona :create:bean entity menu --module=home-base
 
 可以通过 Scope 实例获取模块的 Entity
 
-比如，我们在模块 home-base 内部使用本模块提供的 Entity：`menu`
-
-```typescript{3}
-class ControllerMenu {
-  async retrieveMenus() {
-    const entityMenu = this.scope.entity.menu;
+```diff
+class ControllerStudent {
+  async test() {
++   const entityStudent = this.scope.entity.student;
   }
 }
 ```
 
 ## 跨模块使用Entity
 
-比如，我们在模块 home-index 中使用模块 home-base 提供的 Entity：`menu`
-
-```typescript{3}
-class ControllerHome {
-  index() {
-    const entityMenu = this.$scope.homeBase.entity.menu;
+```diff
+class ControllerOther {
+  async test() {
++   const entityStudent = this.$scope.demoStudent.entity.student;
   }
 }
 ```
