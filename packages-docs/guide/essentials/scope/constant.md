@@ -7,7 +7,7 @@ Modules can individually provide their own `Constant`
 ### 1. Cli command
 
 ``` bash
-$ vona :init:constant home-index
+$ vona :init:constant demo-student
 ```
 
 ### 2. Menu command
@@ -18,41 +18,41 @@ Context Menu - [Module Path]: `Vona Init/Constant`
 
 ## Define Constant
 
-Taking the module `home-index` as an example, define the `Constant` of the module:
+Taking the module `demo-student` as an example, define the `Constant` of the module:
 
-`src/suite/a-home/modules/home-index/src/config/constants.ts`
+`src/module/demo-student/src/config/constants.ts`
 
-```typescript{2-5}
+```diff
 export const constants = {
-  gender: {
-    male: 1,
-    female: 2,
-  },
++ gender: {
++   male: 1,
++   female: 2,
++ },
 } as const;
 ```
 
-- Just define the required constants directly, and the system will automatically extract the type information of constants
+Just define the required constants directly, and the system will automatically extract the type information of constants
 
 ## Use Constant
 
 The `Constant` of the module can be obtained through the `Scope` instance
 
-```typescript{3-4}
-class ControllerHome {
-  index() {
-    console.log(this.scope.constant.gender.male);
-    console.log(this.scope.constant.gender.female);
+```diff
+class ControllerStudent {
+  async test() {
++   console.log(this.scope.constant.gender.male);
++   console.log(this.scope.constant.gender.female);
   }
 }
 ```
 
 ## Use Constant cross-module
 
-```typescript{3-4}
-class ControllerHome {
-  index() {
-    console.log(this.$scope.homeIndex.constant.gender.male);
-    console.log(this.$scope.homeIndex.constant.gender.female);
+```diff
+class ControllerOther {
+  async test() {
++   console.log(this.$scope.demoStudent.constant.gender.male);
++   console.log(this.$scope.demoStudent.constant.gender.female);
   }
 }
 ```

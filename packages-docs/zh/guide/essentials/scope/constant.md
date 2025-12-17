@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :init:constant home-index
+$ vona :init:constant demo-student
 ```
 
 ### 2. 菜单命令
@@ -18,41 +18,41 @@ $ vona :init:constant home-index
 
 ## 定义Constant
 
-以模块`home-index`为例，定义模块的 Constant 常量：
+以模块`demo-student`为例，定义模块的 Constant 常量：
 
-`src/suite/a-home/modules/home-index/src/config/constants.ts`
+`src/module/demo-student/src/config/constants.ts`
 
-```typescript{2-5}
+```diff
 export const constants = {
-  gender: {
-    male: 1,
-    female: 2,
-  },
++ gender: {
++   male: 1,
++   female: 2,
++ },
 } as const;
 ```
 
-- 直接定义所需要的常量即可，系统会自动提取 Constant 的类型信息
+直接定义所需要的常量即可，系统会自动提取 Constant 的类型信息
 
 ## 使用Constant
 
 可以通过 Scope 实例获取模块的 Constant 常量
 
-```typescript{3-4}
-class ControllerHome {
-  index() {
-    console.log(this.scope.constant.gender.male);
-    console.log(this.scope.constant.gender.female);
+```diff
+class ControllerStudent {
+  async test() {
++   console.log(this.scope.constant.gender.male);
++   console.log(this.scope.constant.gender.female);
   }
 }
 ```
 
 ## 跨模块使用Constant
 
-```typescript{3-4}
-class ControllerHome {
-  index() {
-    console.log(this.$scope.homeIndex.constant.gender.male);
-    console.log(this.$scope.homeIndex.constant.gender.female);
+```diff
+class ControllerOther {
+  async test() {
++   console.log(this.$scope.demoStudent.constant.gender.male);
++   console.log(this.$scope.demoStudent.constant.gender.female);
   }
 }
 ```
