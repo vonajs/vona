@@ -12,8 +12,8 @@
 | -------- | ------------------------------------------- |
 | app      | 全局 App 对象                               |
 | ctx      | 当前 request 的 Context 对象         |
-| ctx.bean     | Ctx bean 容器            |
-| bean     | App bean 容器            |
+| ctx.bean     | ctx 容器            |
+| bean     | app 容器            |
 | scope    | 当前 bean 实例所归属模块的 Scope 对象       |
 | $scope   | 获取指定模块的 Scope 对象       |
 | $logger      | 获取Logger对象 |
