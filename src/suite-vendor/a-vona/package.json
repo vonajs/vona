@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.237",
+  "version": "5.0.238",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -20,7 +20,7 @@
     "vona-module-a-captcha": "^5.0.23",
     "vona-module-a-captchasimple": "^5.0.10",
     "vona-module-a-core": "^5.0.143",
-    "vona-module-a-election": "^5.0.24",
+    "vona-module-a-election": "^5.0.25",
     "vona-module-a-error": "^5.0.26",
     "vona-module-a-event": "^5.0.24",
     "vona-module-a-executor": "^5.0.28",
