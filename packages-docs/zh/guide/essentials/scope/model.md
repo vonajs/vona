@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean model menu --module=home-base
+$ vona :create:bean model student --module=demo-student
 ```
 
 ### 2. 菜单命令
@@ -20,34 +20,20 @@ $ vona :create:bean model menu --module=home-base
 
 可以通过 Scope 实例获取模块的 Model
 
-比如，我们在模块 home-base 内部使用本模块提供的 Model：`menu`
-
-```typescript{3}
-class ControllerMenu {
-  async retrieveMenus() {
-    const menus = await this.scope.model.menu.select();
+```diff
+class ServiceStudent {
+  async findMany() {
++   return await this.scope.model.student.select();
   }
 }
 ```
 
 ## 跨模块使用Model
 
-比如，我们在模块 home-index 中使用模块 home-base 提供的 Model：`menu`
-
-```typescript{3}
-class ControllerHome {
-  async index() {
-    const menus = await this.$scope.homeBase.model.menu.select();
-  }
-}
-```
-
-也可以使用`bean._getBean`从 IOC 容器中直接获取 Model 实例：
-
-``` typescript
-class ControllerHome {
-  async index() {
-    const menus = await this.bean._getBean('home-base.model.menu').select();
+```diff
+class ServiceOther {
+  async findMany() {
++   return await this.$scope.demoStudent.model.student.select();
   }
 }
 ```
