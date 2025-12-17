@@ -8,17 +8,17 @@
 
 ## 举例
 
-* 模块 home-base 的 Service bean：ServiceMenu
+* 模块 demo-student 的 Controller bean：ControllerStudent
 
-|Class 名称|Scene 名称|Bean 标识|Onion 名称|Service 名称|
+|Class 名称|Scene 名称|Bean 标识|Onion 名称|Controller 名称|
 |--|--|--|--|--|
-|ServiceMenu|service|home-base.service.menu|home-base:menu|home-base:menu|
+|ControllerStudent|controller|demo-student.controller.student|demo-student:student|`= Onion 名称`|
 
 * 模块 demo-student 的 Model bean：ModelStudent
 
 |Class 名称|Scene 名称|Bean 标识|Onion 名称|Model 名称|
 |--|--|--|--|--|
-|ModelStudent|model|demo-student.model.student|demo-student:student|demo-student:student|
+|ModelStudent|model|demo-student.model.student|demo-student:student|`= Onion 名称`|
 
 ## App Config
 
@@ -29,8 +29,8 @@
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
-    'a-core:gate': {
+  controller: {
+    'demo-student:student': {
       enable: false,
     },
   },
@@ -40,6 +40,11 @@ config.onions = {
         query: false,
         entity: false,
       },
+    },
+  },
+  middleware: {
+    'a-core:gate': {
+      enable: false,
     },
   },
   schedule: {
@@ -63,4 +68,3 @@ config.onions = {
 * 所有配置提示
 
 ![](../../../assets/img/ioc/onion-3.png)
-

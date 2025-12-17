@@ -8,17 +8,17 @@ The system will automatically assign an Onion name to each bean class as the fol
 
 ## For Example
 
-* The module home-base provides a Service bean: ServiceMenu
+* The module demo-student provides a Controller bean: ControllerStudent
 
-|Class Name|Scene Name|Bean Identifier|Onion Name|Service Name|
+|Class Name|Scene Name|Bean Identifier|Onion Name|Controller Name|
 |--|--|--|--|--|
-|ServiceMenu|service|home-base.service.menu|home-base:menu|home-base:menu|
+|ControllerStudent|controller|demo-student.controller.student|demo-student:student|`= Onion Name`|
 
 * The module demo-student provides a Model bean: ModelStudent
 
 |Class Name|Scene Name|Bean Identifier|Onion Name|Model Name|
 |--|--|--|--|--|
-|ModelStudent|model|demo-student.model.student|demo-student:student|demo-student:student|
+|ModelStudent|model|demo-student.model.student|demo-student:student|`= Onion Name`|
 
 ## App Config
 
@@ -29,8 +29,8 @@ With a common Onion name, you can modify the parameters of all bean classes in A
 ``` typescript
 // onions
 config.onions = {
-  middleware: {
-    'a-core:gate': {
+  controller: {
+    'demo-student:student': {
       enable: false,
     },
   },
@@ -40,6 +40,11 @@ config.onions = {
         query: false,
         entity: false,
       },
+    },
+  },
+  middleware: {
+    'a-core:gate': {
+      enable: false,
     },
   },
   schedule: {
