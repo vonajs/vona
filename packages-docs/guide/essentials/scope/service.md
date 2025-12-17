@@ -7,7 +7,7 @@ Modules can individually provide their own `Services`
 ### 1. Cli command
 
 ``` bash
-$ vona :create:bean service menu --module=home-base
+$ vona :create:bean service student --module=demo-student
 ```
 
 ### 2. Menu command
@@ -20,24 +20,20 @@ Context Menu - [Module Path]: `Vona Create/Service`
 
 The `Service` of the module can be obtained through the `Scope` instance
 
-For example, we use the Service `menu` provided by thie module home-base inside the current module: 
-
-```typescript{3}
-class ControllerMenu {
-  retrieveMenus() {
-    return this.scope.service.menu.retrieveMenus('');
+```diff
+class ControllerStudent {
+  async findMany() {
++   return await this.scope.service.student.findMany();
   }
 }
 ```
 
 ## Use Service cross-module
 
-For example, we use the Service `menu` provided by thie module home-base inside the module home-index:
-
-```typescript{3}
-class ControllerHome {
-  index() {
-    return this.$scope.homeBase.service.menu.retrieveMenus('');
+```diff
+class ControllerOther {
+  async findMany() {
++   return await this.$scope.demoStudent.service.student.findMany();
   }
 }
 ```

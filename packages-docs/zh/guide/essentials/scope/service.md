@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean service menu --module=home-base
+$ vona :create:bean service student --module=demo-student
 ```
 
 ### 2. 菜单命令
@@ -20,24 +20,20 @@ $ vona :create:bean service menu --module=home-base
 
 可以通过 Scope 实例获取模块的 Service
 
-比如，我们在模块 home-base 内部使用本模块提供的 Service：`menu`
-
-```typescript{3}
-class ControllerMenu {
-  retrieveMenus() {
-    return this.scope.service.menu.retrieveMenus('');
+```diff
+class ControllerStudent {
+  async findMany() {
++   return await this.scope.service.student.findMany();
   }
 }
 ```
 
 ## 跨模块使用Service
 
-比如，我们在模块 home-index 中使用模块 home-base 提供的 Service：`menu`
-
-```typescript{3}
-class ControllerHome {
-  index() {
-    return this.$scope.homeBase.service.menu.retrieveMenus('');
+```diff
+class ControllerOther {
+  async findMany() {
++   return await this.$scope.demoStudent.service.student.findMany();
   }
 }
 ```
