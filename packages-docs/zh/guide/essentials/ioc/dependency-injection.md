@@ -2,30 +2,35 @@
 
 Vona 通过`@Use`装饰器函数注入 Bean 实例
 
-## 解析规则
+## 注入方式
 
-Vona 采用模块化体系，Bean Class 都由不同的模块提供。注入模块内部的 Bean 时可以直接基于`Class类型`解析。在跨模块注入时可以基于`Bean标识`解析，而不是基于`Class类型/文件路径`解析，这样有利于实现模块之间的松耦合
+1. `本模块注入`：可以直接基于`Class类型`注入
+2. `跨模块注入`：可以基于`Bean标识`注入，这样有利于实现模块之间的松耦合，支持循环引用
 
-## 依赖注入：基于Class类型
+## 基于Class类型
 
-假设我们要在模块 home-index 的 ControllerHome 中注入模块 home-base 提供的 ServiceMenu，代码如下：
+在模块 demo-student 的 ControllerStudent 中注入模块 demo-student 提供的 ServiceStudent，代码如下：
 
 ``` typescript
-import { ServiceMenu } from 'vona-module-home-base';
-export class ControllerHome {
+import { Use } from 'vona';
+import { ServiceStudent } from '../service/student.ts';
+
+export class ControllerStudent {
   @Use()
-  menu: ServiceMenu;
+  student: ServiceStudent;
 }  
 ```
 
-## 依赖注入：基于Bean标识
+## 基于Bean标识
 
 ``` typescript
-import type { ServiceMenu } from 'vona-module-home-base';
-export class ControllerHome {
-  @Use('home-base.service.menu')
-  menu: ServiceMenu;
+import { Use } from 'vona';
+import type { ServiceStudent } from 'vona-module-demo-student';
+
+export class ControllerStudent {
+  @Use('demo-student.service.student')
+  student: ServiceStudent;
 }  
 ```
 
-- 由于导入的 ServiceMenu 是 type，因此需要指定 Service 的 Bean 标识
+- 由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识

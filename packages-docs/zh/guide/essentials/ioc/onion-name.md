@@ -8,13 +8,13 @@
 
 ## 举例
 
-* 模块 demo-student 的 Controller bean：ControllerStudent
+* 模块 demo-student 的 Controller bean: ControllerStudent
 
 |Class 名称|Scene 名称|Bean 标识|Onion 名称|Controller 名称|
 |--|--|--|--|--|
 |ControllerStudent|controller|demo-student.controller.student|demo-student:student|`= Onion 名称`|
 
-* 模块 demo-student 的 Model bean：ModelStudent
+* 模块 demo-student 的 Model bean: ModelStudent
 
 |Class 名称|Scene 名称|Bean 标识|Onion 名称|Model 名称|
 |--|--|--|--|--|

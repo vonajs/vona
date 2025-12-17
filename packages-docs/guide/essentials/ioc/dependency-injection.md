@@ -2,30 +2,35 @@
 
 Vona injects Bean instances through `@Use` decorator function
 
-## Resolution rules
+## Injection methods
 
-Vona adopts a modular system, and Bean Classes are provided by different modules. When using the Bean Class inside the same module, you can directly resolve it based on `Class type`. When using cross-module, you can resolve it based on `Bean identifier` instead of `Class type/file path`, which is conducive to achieving loose coupling between modules
+1. `Module Injection`: Can be directly injected based on `Class type`
+2. `Cross-Module Injection`: Can be injected based on `Bean identifier`, which helps achieve loose coupling between modules and supports circular references
 
-## Dependency injection: Based on Class type
+## Based on Class type
 
-Suppose we want to inject the ServiceMenu provided by the module home-base into the ControllerHome of the module home-index. The code is as follows:
+Inject the ServiceStudent provided by the demo-student module into ControllerStudent of the demo-student module, as shown in the code below:
 
 ``` typescript
-import { ServiceMenu } from 'vona-module-home-base';
-export class ControllerHome {
+import { Use } from 'vona';
+import { ServiceStudent } from '../service/student.ts';
+
+export class ControllerStudent {
   @Use()
-  menu: ServiceMenu;
+  student: ServiceStudent;
 }  
 ```
 
-## Dependency injection: Based on Bean identifier
+## Based on Bean identifier
 
 ``` typescript
-import type { ServiceMenu } from 'vona-module-home-base';
-export class ControllerHome {
-  @Use('home-base.service.menu')
-  menu: ServiceMenu;
+import { Use } from 'vona';
+import type { ServiceStudent } from 'vona-module-demo-student';
+
+export class ControllerStudent {
+  @Use('demo-student.service.student')
+  student: ServiceStudent;
 }  
 ```
 
-- Since the imported `ServiceMenu` is of `type`, the Bean identifier of the Service needs to be specified
+- Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified

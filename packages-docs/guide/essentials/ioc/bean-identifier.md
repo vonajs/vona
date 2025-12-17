@@ -20,4 +20,4 @@ For example, the module a-jwt provides a global service bean: `jwt`. Then, the i
 
 When using named beans cross-module, we do not recommend injecting directly based on `class type`, but rather on `bean identifier`. `Bean-identifier-based` injection has the following advantages:
 
-1. `Support circular reference`: In complex business scenarios, multiple beans often reference each other. `Bean-identifier-based` injection can intuitively support circular reference scenarios without error prompts and without any mental burden
+1. `Support circular references`: In complex business scenarios, multiple beans often reference each other. `Bean-identifier-based` injection can intuitively support circular reference scenarios without error prompts and without any mental burden
