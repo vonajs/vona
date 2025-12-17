@@ -2,7 +2,7 @@
 
 ## 创建Controller
 
-比如，我们在模块 demo-student 中创建一个 Controller: `student`
+比如，在模块 demo-student 中创建一个 Controller: `student`
 
 ### 1. Cli命令
 
@@ -18,19 +18,16 @@ $ vona :create:bean controller student --module=demo-student
 
 ## Controller定义
 
-``` typescript{1,3}
-@Controller<IControllerOptionsStudent>('student')
+``` diff
++ @Controller<IControllerOptionsStudent>('student')
 export class ControllerStudent extends BeanBase {
-  @Web.post('')
++ @Web.post('')
   @Api.body(v.tableIdentity())
   async create(@Arg.body() student: DtoStudentCreate): Promise<TableIdentity> {
     return (await this.scope.service.student.create(student)).id;
   }
 }
 ```
-
-- 继承自`BeanBase`基类
-- 使用`Controller`装饰器
 
 - 行 1: Controller Path: `'student'`
 - 行 3: Action Path : `''`
@@ -94,7 +91,7 @@ Route Path = GlobalPrefix + Module Url + Controller Path + Action Path
 
 ## 请求方法
 
-Vona 使用装饰器来定义请求方法。这些装饰器都放入一个分组`@Web`中。因为装饰器比较多，采用分组的机制，可以减轻心智负担。比如：我们为 create 设置一个 post 方法：
+Vona 使用装饰器来定义请求方法。这些装饰器都放入一个分组`@Web`中。因为装饰器比较多，采用分组的机制，可以减轻心智负担。比如：为 create 设置一个 post 方法：
 
 ``` typescript
 import { Web } from 'vona-module-a-web';
@@ -119,7 +116,7 @@ class ControllerStudent {
 
 ## 请求参数
 
-我们需要从请求中取得各种参数，比如 Query、Params、Body、Headers，等等。同样，Vona 也提供了许多装饰器用于获取参数。我们也将所有参数装饰器放入分组`@Arg`中，从而减轻心智负担。比如，我们要获取某位学生的数据，请求的 URL 为`/?id=1`：
+我们需要从请求中取得各种参数，比如 Query、Params、Body、Headers，等等。同样，Vona 也提供了许多装饰器用于获取参数。Vona 也将所有参数装饰器放入分组`@Arg`中，从而减轻心智负担。比如，要获取某位学生的数据，请求的 URL 为`/?id=1`：
 
 ``` typescript
 class ControllerStudent3 {
@@ -128,7 +125,7 @@ class ControllerStudent3 {
 }
 ```
 
-根据参数的特点，不同类型的参数允许指定字段名称，比如在 query 装饰器中指定`id`。我们也可以不指定字段名称，从而取得整个 query 对象。
+根据参数的特点，不同类型的参数允许指定字段名称，比如在 query 装饰器中指定`id`。也可以不指定字段名称，从而取得整个 query 对象
 
 比如，URL 为`/?id=1&name=tom`:
 
@@ -182,10 +179,10 @@ Vona 提供了与[参数校验](../../techniques/validation/introduction.md)类�
 
 * 举例：`string`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  findOne(): string {
++ findOne(): string {
     return 'Tom';
   }
 }  
@@ -195,10 +192,10 @@ class ControllerStudent {
 
 * 举例：`EntityStudent`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  findOne(): EntityStudent {
++ findOne(): EntityStudent {
     return {} as EntityStudent;
   }
 }  
@@ -218,18 +215,18 @@ class ControllerStudent {
 
 ### 2. 指定Zod Schema
 
-我们还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi
+还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi
 
 * 举例：`string[]`
 
 使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../../techniques/validation/introduction.md)一致
 
-``` typescript{5}
+```diff
 import { Api } from 'vona-module-a-openapiutils';
 
 class ControllerStudent {
   @Web.get()
-  @Api.body(v.array(String))
++ @Api.body(v.array(String))
   findOne(): string[] {
     return ['Tom'];
   }
@@ -240,10 +237,10 @@ class ControllerStudent {
 
 * 举例：`Promise<EntityStudent>`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.body(EntityStudent)
++ @Api.body(EntityStudent)
   async findOne(): Promise<EntityStudent> {
     return {} as EntityStudent;
   }
@@ -254,7 +251,7 @@ class ControllerStudent {
 
 ## Response Body包装对象
 
-在默认情况下，Vona 自动为 Response body 提供一个包装对象。比如，我们要返回 string 类型的 body，那么实际返回的数据类型是：
+在默认情况下，Vona 自动为 Response body 提供一个包装对象。比如，要返回 string 类型的 body，那么实际返回的数据类型是：
 
 ``` typescript
 {
@@ -264,16 +261,16 @@ class ControllerStudent {
 }
 ```
 
-我们还可以使用装饰器`@Api.bodyCustom`来自定义包装对象
+还可以使用装饰器`@Api.bodyCustom`来自定义包装对象
 
 ### 1. 禁用包装对象
 
 可以禁用包装对象，直接返回 Response body 本身
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.bodyCustom(false)
++ @Api.bodyCustom(false)
   findOne(): string {
     return 'Tom';
   }
@@ -298,10 +295,10 @@ export function bodySchemaWrapperCustom(bodySchema: any) {
 
 * 然后将包装函数`bodySchemaWrapperCustom`传入装饰器`@Api.bodyCustom`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.bodyCustom(bodySchemaWrapperCustom)
++ @Api.bodyCustom(bodySchemaWrapperCustom)
   findOne(): string {
     return 'Tom';
   }
@@ -312,10 +309,10 @@ class ControllerStudent {
 
 * 如果 Response body 的类型是`Promise<EntityStudent>`，那么代码如下：
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
++ @Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
   async findOne(): Promise<EntityStudent> {
     return {} as EntityStudent;
   }
@@ -385,12 +382,12 @@ class ControllerStudent {
 可以在定义 Action 的请求方法时传递更多选项
 
 ``` typescript
-class ControllerBook {
+class ControllerStudent {
   @Web.get(':id', {
-    tags: ['Book'],
-    description: 'Find a book',
+    tags: ['Student'],
+    description: 'Find a student',
   })
-  findOne(@Arg.param('id') id: number): EntityBook {}
+  findOne(@Arg.param('id') id: number): EntityStudent {}
 }
 ```
 
@@ -405,7 +402,7 @@ class ControllerBook {
 
 ``` typescript
 export default {
-  FindBook: 'Find a book',
+  FindStudent: 'Find a student',
 };
 ```
 
@@ -413,7 +410,7 @@ export default {
 
 ``` typescript
 export default {
-  FindBook: '查找一本书',
+  FindStudent: '查找一个学生',
 };
 ```
 
@@ -423,7 +420,7 @@ export default {
 import { $locale } from '../.metadata/locales.ts';
 
 @Web.get(':id', {
-  description: $locale('FindBook'),
+  description: $locale('FindStudent'),
 })
 ```
 
@@ -450,11 +447,11 @@ import { $locale } from '../.metadata/locales.ts';
 可以在定义 Controller 时传递更多选项
 
 ``` typescript
-@Controller('book', {
+@Controller('student', {
   exclude: false,
-  tags: ['Book'],
+  tags: ['Student'],
 })
-class ControllerBook {}
+class ControllerStudent {}
 ```
 
 - exclude: 不在 Swagger/Openapi 元数据中显示此 Controller 的所有 API
@@ -495,22 +492,21 @@ config.onions = {
 
 在 Controller options 中提供 actions 选项，从而允许我们在 App Config 中配置任何 Controller 中的 Action options
 
-比如，我们在 App Config 中设置`ControllerBook`类中的`findOne`的 action options：
+比如，在 App Config 中设置`ControllerStudent`类中的`findOne`的 action options：
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
   controller: {
-    'demo-student:book': {
+    'demo-student:student': {
       actions: {
         findOne: {
-          description: 'Find a book!!!',
+          description: 'Find a student!!!',
         },
       },
     },
   },
 };
 ```
-

@@ -18,19 +18,16 @@ Context Menu - [Module Path]: `Vona Create/Controller`
 
 ## Controller Definition
 
-``` typescript{1,3}
-@Controller<IControllerOptionsStudent>('student')
+``` diff
++ @Controller<IControllerOptionsStudent>('student')
 export class ControllerStudent extends BeanBase {
-  @Web.post('')
++ @Web.post('')
   @Api.body(v.tableIdentity())
   async create(@Arg.body() student: DtoStudentCreate): Promise<TableIdentity> {
     return (await this.scope.service.student.create(student)).id;
   }
 }
 ```
-
-- Inherited from the `BeanBase` class
-- Use the `Controller` decorator
 
 - Line 1: Controller Path: `'student'`
 - Line 3: Action Path : `''`
@@ -182,26 +179,26 @@ If the body type is `Basic type/Dto/Entity`, then the system will automatically 
 
 * Example: `string`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  findOne(): string {
++ findOne(): string {
     return 'Tom';
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-10.png)
 
 * Example: `EntityStudent`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  findOne(): EntityStudent {
++ findOne(): EntityStudent {
     return {} as EntityStudent;
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-11.png)
@@ -224,30 +221,30 @@ We can also explicitly specify Zod Schema and automatically generate Swagger/Ope
 
 Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [Validation](../../techniques/validation/introduction.md)
 
-``` typescript{5}
+```diff
 import { Api } from 'vona-module-a-openapiutils';
 
 class ControllerStudent {
   @Web.get()
-  @Api.body(v.array(String))
++ @Api.body(v.array(String))
   findOne(): string[] {
     return ['Tom'];
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-12.png)
 
 * Example: `Promise<EntityStudent>`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.body(EntityStudent)
++ @Api.body(EntityStudent)
   async findOne(): Promise<EntityStudent> {
     return {} as EntityStudent;
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-13.png)
@@ -270,14 +267,14 @@ We can also use the decorator `@Api.bodyCustom` to customize the wrapper object
 
 You can disable the wrapper object and directly return the Response body itself
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.bodyCustom(false)
++ @Api.bodyCustom(false)
   findOne(): string {
     return 'Tom';
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-14.png)
@@ -298,28 +295,28 @@ export function bodySchemaWrapperCustom(bodySchema: any) {
 
 * Then pass the wrapper function `bodySchemaWrapperCustom` to the decorator `@Api.bodyCustom`
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.bodyCustom(bodySchemaWrapperCustom)
++ @Api.bodyCustom(bodySchemaWrapperCustom)
   findOne(): string {
     return 'Tom';
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-15.png)
 
 * If the type of Response body is `Promise<EntityStudent>`, the code is as follows:
 
-``` typescript{3}
+```diff
 class ControllerStudent {
   @Web.get()
-  @Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
++ @Api.bodyCustom(bodySchemaWrapperCustom, EntityStudent)
   async findOne(): Promise<EntityStudent> {
     return {} as EntityStudent;
   }
-}
+}  
 ```
 
 ![](../../../assets/img/openapi/openapi-16.png)
@@ -385,12 +382,12 @@ Set the grouping information in Swagger/Openapi. This decorator can be used for 
 You can pass more options when defining the request method of Action
 
 ``` typescript
-class ControllerBook {
+class ControllerStudent {
   @Web.get(':id', {
-    tags: ['Book'],
-    description: 'Find a book',
+    tags: ['Student'],
+    description: 'Find a student',
   })
-  findOne(@Arg.param('id') id: number): EntityBook {}
+  findOne(@Arg.param('id') id: number): EntityStudent {}
 }
 ```
 
@@ -405,7 +402,7 @@ First, define the language resources:
 
 ``` typescript
 export default {
-  FindBook: 'Find a book',
+  FindStudent: 'Find a student',
 };
 ```
 
@@ -413,7 +410,7 @@ export default {
 
 ``` typescript
 export default {
-  FindBook: 'Find a book',
+  FindStudent: '查找一个学生',
 };
 ```
 
@@ -423,7 +420,7 @@ Use the `$locale` method for language translation, and support automatic type hi
 import { $locale } from '../.metadata/locales.ts';
 
 @Web.get(':id', {
-  description: $locale('FindBook'),
+  description: $locale('FindStudent'),
 })
 ```
 
@@ -450,11 +447,11 @@ import { $locale } from '../.metadata/locales.ts';
 You can pass more options when defining a Controller
 
 ``` typescript
-@Controller('book', {
+@Controller('student', {
   exclude: false,
-  tags: ['Book'],
+  tags: ['Student'],
 })
-class ControllerBook {}
+class ControllerStudent {}
 ```
 
 - exclude: Do not display all APIs of this Controller in Swagger/Openapi metadata
@@ -495,21 +492,21 @@ config.onions = {
 
 Provide `actions` options in Controller options, allowing us to configure the Action options in any Controller in App Config
 
-For example, we set the action options of `findOne` in the `ControllerBook` class in App Config:
+For example, we set the action options of `findOne` in the `ControllerStudent` class in App Config:
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
 config.onions = {
   controller: {
-    'demo-student:book': {
-      actions: { 
-        findOne: { 
-          description: 'Find a book!!!', 
-        }, 
-      }, 
-    }, 
+    'demo-student:student': {
+      actions: {
+        findOne: {
+          description: 'Find a student!!!',
+        },
+      },
+    },
   },
 };
 ```
