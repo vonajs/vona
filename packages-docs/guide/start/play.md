@@ -16,9 +16,9 @@ $ vona play
 
 In the file `play/index.ts`, we write the test code:
 
-``` typescript{2}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
-  console.log('server listen: ', app.config.server.listen);
++ console.log('server listen: ', app.config.server.listen);
 }
 ```
 
@@ -43,11 +43,11 @@ $ vona play -a
 
 ### 1. Simulate the context object of the request
 
-``` typescript{2-4}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
-  await app.bean.executor.mockCtx(async () => {
-    // do something in ctx
-  });
++ await app.bean.executor.mockCtx(async () => {
++   // do something in ctx
++ });
 }
 ```
 
@@ -55,36 +55,36 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 For example, we access the home API:
 
-``` typescript{3-4}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    const homeBody = await app.bean.executor.performAction('get', '//');
-    console.log(homeBody); // Hello Vona!
++   const homeBody = await app.bean.executor.performAction('get', '//');
++   console.log(homeBody); // Hello Vona!
   });
 }
 ```
 
 We can also simulate Chinese ctx and then access the home API:
 
-``` typescript{3-5}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    const homeBody = await app.bean.executor.performAction('get', '//');
-    console.log(homeBody);
-  }, { locale: 'zh-cn' }); // 您好, Vona!
++   const homeBody = await app.bean.executor.performAction('get', '//');
++   console.log(homeBody); // 您好, Vona!
++ }, { locale: 'zh-cn' });
 }
 ```
 
 ### 3. Simulate signin and signout
 
-``` typescript{3-7}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
     // signin as user: admin
-    await app.bean.passport.signinMock();
++   await app.bean.passport.signinMock();
     // do something
     // signout
-    await app.bean.passport.signout();
++   await app.bean.passport.signout();
   });
 }
 ```

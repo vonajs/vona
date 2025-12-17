@@ -16,9 +16,9 @@ $ vona play
 
 在文件`play/index.ts`中，我们写入测试代码：
 
-``` typescript{2}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
-  console.log('server listen: ', app.config.server.listen);
++ console.log('server listen: ', app.config.server.listen);
 }
 ```
 
@@ -43,11 +43,11 @@ $ vona play -a
 
 ### 1. 模拟请求的上下文环境ctx
 
-``` typescript{2-4}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
-  await app.bean.executor.mockCtx(async () => {
-    // do something in ctx
-  });
++ await app.bean.executor.mockCtx(async () => {
++   // do something in ctx
++ });
 }
 ```
 
@@ -55,36 +55,36 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 比如我们访问首页 Api：
 
-``` typescript{3-4}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    const homeBody = await app.bean.executor.performAction('get', '//');
-    console.log(homeBody); // Hello Vona!
++   const homeBody = await app.bean.executor.performAction('get', '//');
++   console.log(homeBody); // Hello Vona!
   });
 }
 ```
 
 我们也可以模拟中文的 ctx，然后访问首页 Api：
 
-``` typescript{3-5}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-    const homeBody = await app.bean.executor.performAction('get', '//');
-    console.log(homeBody); // 您好, Vona!
-  }, { locale: 'zh-cn' });
++   const homeBody = await app.bean.executor.performAction('get', '//');
++   console.log(homeBody); // 您好, Vona!
++ }, { locale: 'zh-cn' });
 }
 ```
 
 ### 3. 模拟登录和退出登录
 
-``` typescript{3-7}
+``` diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
     // signin as user: admin
-    await app.bean.passport.signinMock();
++   await app.bean.passport.signinMock();
     // do something
     // signout
-    await app.bean.passport.signout();
++   await app.bean.passport.signout();
   });
 }
 ```
