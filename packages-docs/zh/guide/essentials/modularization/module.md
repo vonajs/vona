@@ -27,8 +27,10 @@
 短名: {providerId}-{moduleName}
 ```
 
-- providerId: 提供者 Id。可以将某个功能、特性或者组织作为 providerId，比如：test, demo, blog, dashboard, flow, cabloy, apple, 等等
-- moduleName: 模块名称
+|名称|说明|
+|--|--|
+|providerId|提供者 Id。可以将某个功能、特性或者组织作为 providerId，比如：test, demo, blog, dashboard, flow, cabloy, apple, 等等|
+|moduleName|模块名称|
 
 ## 新建模块
 
@@ -38,19 +40,17 @@
 $ vona :create:module moduleName [--suite=]
 ```
 
-- moduleName：模块名称
-- suite：套件名称，允许为空
+|名称|说明|
+|--|--|
+|moduleName|模块名称|
+|suite|套件名称，允许为空|
 
 ### 2. 菜单命令
 
 ::: tip
 右键菜单 - [项目路径/src/module]: `Vona Create/Module`
 
-右键菜单 - [项目路径/src/module-vendor]: `Vona Create/Module`
-
 右键菜单 - [项目路径/src/suite/suite-name/modules]: `Vona Create/Module`
-
-右键菜单 - [项目路径/src/suite-vendor/suite-name/modules]: `Vona Create/Module`
 :::
 
 依据提示输入模块的名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架

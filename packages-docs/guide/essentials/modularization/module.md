@@ -27,7 +27,10 @@ FullName: vona-module-{providerId}-{moduleName}
 ShortName: {providerId}-{moduleName}
 ```
 
-- You can use a function, feature or organization as a `providerid`, such as: test, demo, blog, dashboard, flow, cabloy, apple, etc.
+|Name|Description|
+|--|--|
+|providerId|Provider ID. You can designate a certain feature, function, or organization as the providerId, such as: test, demo, blog, dashboard, flow, cabloy, apple, etc.|
+|moduleName|Module Name|
 
 ## Create Module
 
@@ -37,19 +40,17 @@ ShortName: {providerId}-{moduleName}
 $ vona :create:module moduleName [--suite=]
 ```
 
-- moduleName: this name of module
-- suite: this name of suite, maybe empty
+|Name|Description|
+|--|--|
+|moduleName|Module Name|
+|suite|Suite Name. Optional|
 
 ### 2. Menu command
 
 ::: tip
 Context Menu - [Project Path/src/module]: `Vona Create/Module`
 
-Context Menu - [Project Path/src/module-vendor]: `Vona Create/Module`
-
 Context Menu - [Project Path/src/suite/suite-name/modules]: `Vona Create/Module`
-
-Context Menu - [Project Path/src/suite-vendor/suite-name/modules]: `Vona Create/Module`
 :::
 
 Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module
