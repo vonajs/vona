@@ -10,46 +10,37 @@
 
 所有 bean 都继承自基类`BeanBase`，因此可以直接获取到当前 bean 所属模块的`Scope`实例
 
-`src/suite/a-home/modules/home-base/src/service/menu.ts`
-
 ```typescript
-@Service()
-export class ServiceMenu extends BeanBase {
-  retrieveMenus(publicPath?: string) {
+class ControllerStudent extends BeanBase {
+  async test() {
     console.log(this.scope);
   }
 }
 ```
 
-- 通过`this.scope`即可访问到当前 bean 所属模块的`Scope`实例
+通过`this.scope`即可访问到当前 bean 所属模块的`Scope`实例
 
 ## this.$scope: 跨模块获取Scope实例
 
-那么，如何获取其他模块的`Scope`实例呢？
-
-比如，我们在模块 home-index 中获取模块 home-base 的 Scope 实例：
-
 ``` typescript
-@Controller()
-class ControllerHome extends BeanBase {
-  index() {
-    console.log(this.$scope.homeBase);
+class ControllerOther extends BeanBase {
+  async test() {
+    console.log(this.$scope.demoStudent);
   }
 }
 ```
 
-- 通过`this.$scope.homeBase`即可获取模块 home-base 的`Scope`实例
+通过`this.$scope.demoStudent`获取模块 demo-student 的`Scope`实例
 
 ``` typescript
-@Controller()
-class ControllerHome extends BeanBase {
-  index() {
+class ControllerOther extends BeanBase {
+  async test() {
     console.log(this.$scope.user);
   }
 }
 ```
 
-- 如果模块名称的 providerId 为`a`，比如`a-user`，那么可以简化为`user`
+如果模块名称的 providerId 为`a`，比如`a-user`，那么可以简化为`user`
 
 ## app.scope: 获取Scope实例的一般方法
 
@@ -60,7 +51,7 @@ class ControllerHome extends BeanBase {
 ``` diff 
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-+   const scopeHomeBase = app.scope('home-base');
++   const scopeDemoStudent = app.scope('demo-student');
 +   const scopeUser = app.scope('a-user');
   });
 }

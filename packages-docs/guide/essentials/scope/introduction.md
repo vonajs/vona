@@ -10,46 +10,37 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 
 All beans inherit from the base class `BeanBase`, thus the `Scope` instance of the module to which the current bean belongs can be directly obtained
 
-`src/suite/a-home/modules/home-base/src/service/menu.ts`
-
 ```typescript
-@Service()
-export class ServiceMenu extends BeanBase {
-  retrieveMenus(publicPath?: string) {
+class ControllerStudent extends BeanBase {
+  async test() {
     console.log(this.scope);
   }
 }
 ```
 
-- The `Scope` instance of the module to which the current bean belongs can be obtained through `this.scope`
+The `Scope` instance of the module to which the current bean belongs can be obtained through `this.scope`
 
 ## this.$scope: Obtain scope instance cross-module
 
-So, how to obtain `Scope` instances of other modules?
-
-For example, we obtain the Scope instance of the module home-base in the module home-index:
-
 ``` typescript
-@Controller()
-class ControllerHome extends BeanBase {
-  index() {
-    console.log(this.$scope.homeBase);
+class ControllerOther extends BeanBase {
+  async test() {
+    console.log(this.$scope.demoStudent);
   }
 }
 ```
 
-- The `Scope` instance of the module `home-base` can be obtained through `this.$scope.homeBase`
+The `Scope` instance of the module `demo-student` can be obtained through `this.$scope.demoStudent`
 
 ``` typescript
-@Controller()
-class ControllerHome extends BeanBase {
-  index() {
+class ControllerOther extends BeanBase {
+  async test() {
     console.log(this.$scope.user);
   }
 }
 ```
 
-- If the `providerId` of the module name is `a`, such as `a-user`, then it can be simplified to `user`
+If the `providerId` of the module name is `a`, such as `a-user`, then it can be simplified to `user`
 
 ## app.scope
 
@@ -60,7 +51,7 @@ If you do not inherit from the base class `BeanBase`, `this.scope` and `this.$sc
 ``` diff 
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
-+   const scopeHomeBase = app.scope('home-base');
++   const scopeDemoStudent = app.scope('demo-student');
 +   const scopeUser = app.scope('a-user');
   });
 }
