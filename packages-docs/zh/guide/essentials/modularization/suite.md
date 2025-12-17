@@ -13,8 +13,10 @@
 短名: {providerId}-{suiteName}
 ```
 
-- providerId: 提供者 Id
-- suiteName: 套件名称
+|名称|说明|
+|--|--|
+|providerId|提供者 Id|
+|suiteName|套件名称|
 
 ## 目录结构
 
@@ -34,8 +36,6 @@ a-home
 
 ::: tip
 右键菜单 - [项目路径/src/suite]: `Vona Create/Suite`
-
-右键菜单 - [项目路径/src/suite-vendor]: `Vona Create/Suite`
 :::
 
 依据提示输入套件的名称，比如`test-home`，VSCode 插件会自动创建套件的代码骨架
