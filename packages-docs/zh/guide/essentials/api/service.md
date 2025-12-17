@@ -2,7 +2,7 @@
 
 ## 创建Service
 
-比如，我们在模块 demo-student 中创建一个 Service: `student`
+比如，在模块 demo-student 中创建一个 Service: `student`
 
 ### 1. Cli命令
 

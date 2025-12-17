@@ -2,7 +2,7 @@
 
 ## 创建Entity
 
-比如，我们在模块 demo-student 中创建一个 Entity: `student`
+比如，在模块 demo-student 中创建一个 Entity: `student`
 
 ### 1. Cli命令
 
