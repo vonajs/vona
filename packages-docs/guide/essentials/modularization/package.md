@@ -4,11 +4,11 @@ You can set some meta configuration in the module's `package.json`
 
 ## vonaModule.dependencies
 
-If a module needs to depend on other modules, you need to configure `vonaModule.dependencies`, for example: the configuration of module `home-user`:
+If a module needs to depend on other modules, you need to configure `vonaModule.dependencies`, for example: the configuration of module `demo-student`:
 
 ```typescript
 {
-  "name": "vona-module-home-user",
+  "name": "vona-module-demo-student",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"

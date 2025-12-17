@@ -4,11 +4,11 @@
 
 ## vonaModule.dependencies
 
-如果模块需要依赖其他模块，那么，需要配置`vonaModule.dependencies`，比如：模块 home-user 的配置：
+如果模块需要依赖其他模块，那么，需要配置`vonaModule.dependencies`，比如：模块 demo-student 的配置：
 
 ```typescript
 {
-  "name": "vona-module-home-user",
+  "name": "vona-module-demo-student",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"
