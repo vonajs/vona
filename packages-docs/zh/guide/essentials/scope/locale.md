@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :init:locale home-index
+$ vona :init:locale demo-student
 ```
 
 ### 2. 菜单命令
@@ -18,21 +18,21 @@ $ vona :init:locale home-index
 
 ## 定义语言资源
 
-以模块`home-index`为例，定义模块的语言资源：
+以模块`demo-student`为例，定义模块的语言资源：
 
-英文：`src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
+英文：`src/module/demo-student/src/config/locale/en-us.ts`
 
-```typescript{2}
+```diff
 export default {
-  HelloWorld: 'Hello World',
++ HelloWorld: 'Hello World',
 };
 ```
 
-中文：`src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
+中文：`src/module/demo-student/src/config/locale/zh-cn.ts`
 
-```typescript{2}
+```diff
 export default {
-  HelloWorld: '您好世界',
++ HelloWorld: '您好世界',
 };
 ```
 
@@ -40,15 +40,15 @@ export default {
 
 可以通过 Scope 实例提供的`locale`对象获取模块的语言资源
 
-```typescript{3-9}
-class ControllerHome {
-  index() {
+```diff
+class ControllerStudent {
+  async test() {
     // use current locale
-    const message1 = this.scope.locale.HelloWorld();
++   const message1 = this.scope.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.scope.locale.HelloWorld.locale('en-us');
++   const message2 = this.scope.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
++   const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -56,15 +56,15 @@ class ControllerHome {
 
 ## 跨模块使用语言资源
 
-```typescript{3-9}
-class ControllerHome {
-  index() {
+```diff
+class ControllerOther {
+  async test() {
     // use current locale
-    const message1 = this.$scope.homeIndex.locale.HelloWorld();
++   const message1 = this.$scope.demoStudent.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.$scope.homeIndex.locale.HelloWorld.locale('en-us');
++   const message2 = this.$scope.demoStudent.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.$scope.homeIndex.locale.HelloWorld.locale('zh-cn');
++   const message3 = this.$scope.demoStudent.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -76,20 +76,20 @@ class ControllerHome {
 
 英文：`src/backend/config/locale/en-us.ts`
 
-```typescript{2-4}
+```diff
 locale.modules = {
-  'home-index': {
-    HelloWorld: 'Hello World!!!',
+  'demo-student': {
++   HelloWorld: 'Hello World!!!',
   },  
 };
 ```
 
 中文：`src/backend/config/locale/zh-cn.ts`
 
-```typescript{2-4}
+```diff
 locale.modules = {
-  'home-index': {
-    HelloWorld: '您好世界!!!',
+  'demo-student': {
++   HelloWorld: '您好世界!!!',
   },  
 };
 ```

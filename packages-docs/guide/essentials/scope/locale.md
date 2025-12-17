@@ -7,7 +7,7 @@ Modules can individually provide their own `I18n` language resources
 ### 1. Cli command
 
 ``` bash
-$ vona :init:locale home-index
+$ vona :init:locale demo-student
 ```
 
 ### 2. Menu command
@@ -18,25 +18,21 @@ Context Menu - [Module Path]: `Vona Init/Locale`
 
 ## Define language resources
 
-Taking the module `home-index` as an example, define the `I18n` language resources of the module:
+Taking the module `demo-student` as an example, define the `I18n` language resources of the module:
 
-* English
+English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-`src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
-
-```typescript{2}
+```diff
 export default {
-  HelloWorld: 'Hello World',
++ HelloWorld: 'Hello World',
 };
 ```
 
-* Chinese
+Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-`src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
-
-```typescript{2}
+```diff
 export default {
-  HelloWorld: '您好世界',
++ HelloWorld: '您好世界',
 };
 ```
 
@@ -44,15 +40,15 @@ export default {
 
 The `I18n` language resources of the module can be obtained through the `locale` object of the `Scope` instance
 
-```typescript{3-9}
-class ControllerHome {
-  index() {
+```diff
+class ControllerStudent {
+  async test() {
     // use current locale
-    const message1 = this.scope.locale.HelloWorld();
++   const message1 = this.scope.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.scope.locale.HelloWorld.locale('en-us');
++   const message2 = this.scope.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
++   const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -60,15 +56,15 @@ class ControllerHome {
 
 ## Use language resources cross-module
 
-```typescript{3-9}
-class ControllerHome {
-  index() {
+```diff
+class ControllerOther {
+  async test() {
     // use current locale
-    const message1 = this.$scope.homeIndex.locale.HelloWorld();
++   const message1 = this.$scope.demoStudent.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.$scope.homeIndex.locale.HelloWorld.locale('en-us');
++   const message2 = this.$scope.demoStudent.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.$scope.homeIndex.locale.HelloWorld.locale('zh-cn');
++   const message3 = this.$scope.demoStudent.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -78,26 +74,22 @@ class ControllerHome {
 
 You can use `project-level` language resources to override `module-level` language resources
 
-* English
+English: `src/backend/config/locale/en-us.ts`
 
-`src/backend/config/locale/en-us.ts`
-
-```typescript{2-4}
+```diff
 locale.modules = {
-  'home-index': {
-    HelloWorld: 'Hello World!!!',
+  'demo-student': {
++   HelloWorld: 'Hello World!!!',
   },  
 };
 ```
 
-* Chinese
+Chinese: `src/backend/config/locale/zh-cn.ts`
 
-`src/backend/config/locale/zh-cn.ts`
-
-```typescript{2-4}
+```diff
 locale.modules = {
-  'home-index': {
-    HelloWorld: '您好世界!!!',
+  'demo-student': {
++   HelloWorld: '您好世界!!!',
   },  
 };
 ```
