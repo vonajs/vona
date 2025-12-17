@@ -7,7 +7,7 @@ Modules can individually provide their own `Error` exceptions
 ### 1. Cli command
 
 ``` bash
-$ vona :init:error home-index
+$ vona :init:error demo-student
 ```
 
 ### 2. Menu command
@@ -18,35 +18,35 @@ Context Menu - [Module Path]: `Vona Init/Error`
 
 ## Define Error
 
-It takes two steps to define `Error`. Taking the module `home-index` as an example:
+It takes two steps to define `Error`. Taking the module `demo-student` as an example:
 
 ### 1. Define Errors
 
-`src/suite/a-home/modules/home-index/src/config/errors.ts`
+`src/module/demo-student/src/config/errors.ts`
 
-```typescript{2}
+```diff
 export const errors = {
-  ErrorTest: 1001,
++ ErrorTest: 1001,
 } as const;
 ```
 
-- Convention: Error Code > 1000
+Convention: Error Code > 1000
 
 ### 2. Define Error language resources
 
-English: `src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
+English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-```typescript{2}
+```diff
 export default {
-  ErrorTest: 'This is a error test',
++ ErrorTest: 'This is a error test',
 };
 ```
 
-Chinese: `src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
+Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-```typescript{2}
+```diff
 export default {
-  ErrorTest: '这是一个错误测试',
++ ErrorTest: '这是一个错误测试',
 };
 ```
 
@@ -54,20 +54,20 @@ export default {
 
 You can directly throw the module's `Error` exception through the `Scope` instance
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    this.scope.error.ErrorTest.throw();
+```diff
+class ControllerStudent {
+  async test() {
++   this.scope.error.ErrorTest.throw();
   }
 }
 ```
 
 ## Use Error cross-module
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    this.$scope.homeIndex.error.ErrorTest.throw();
+```diff
+class ControllerOther {
+  async test() {
++   this.$scope.demoStudent.error.ErrorTest.throw();
   }
 }
 ```

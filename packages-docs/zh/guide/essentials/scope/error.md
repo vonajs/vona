@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :init:error home-index
+$ vona :init:error demo-student
 ```
 
 ### 2. 菜单命令
@@ -18,35 +18,35 @@ $ vona :init:error home-index
 
 ## 定义Error
 
-定义 Error 分为两个步骤，以模块`home-index`为例：
+定义 Error 分为两个步骤，以模块`demo-student`为例：
 
 ### 1. 定义Errors常量
 
-`src/suite/a-home/modules/home-index/src/config/errors.ts`
+`src/module/demo-student/src/config/errors.ts`
 
-```typescript{2}
+```diff
 export const errors = {
-  ErrorTest: 1001,
++ ErrorTest: 1001,
 } as const;
 ```
 
-- 约定：错误码 > 1000
+约定：错误码 > 1000
 
 ### 2. 定义Error语言资源
 
-英文：`src/suite/a-home/modules/home-index/src/config/locale/en-us.ts`
+英文：`src/module/demo-student/src/config/locale/en-us.ts`
 
-```typescript{2}
+```diff
 export default {
-  ErrorTest: 'This is a error test',
++ ErrorTest: 'This is a error test',
 };
 ```
 
-中文：`src/suite/a-home/modules/home-index/src/config/locale/zh-cn.ts`
+中文：`src/module/demo-student/src/config/locale/zh-cn.ts`
 
-```typescript{2}
+```diff
 export default {
-  ErrorTest: '这是一个错误测试',
++ ErrorTest: '这是一个错误测试',
 };
 ```
 
@@ -54,20 +54,20 @@ export default {
 
 可以通过 Scope 实例直接抛出模块的 Error 错误异常
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    this.scope.error.ErrorTest.throw();
+```diff
+class ControllerStudent {
+  async test() {
++   this.scope.error.ErrorTest.throw();
   }
 }
 ```
 
 ## 跨模块使用Error
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    this.$scope.homeIndex.error.ErrorTest.throw();
+```diff
+class ControllerOther {
+  async test() {
++   this.$scope.demoStudent.error.ErrorTest.throw();
   }
 }
 ```
