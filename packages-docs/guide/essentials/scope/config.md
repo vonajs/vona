@@ -7,7 +7,7 @@ Modules can individually provide their own `Config` configuration
 ### 1. Cli command
 
 ``` bash
-$ vona :init:config home-index
+$ vona :init:config demo-student
 ```
 
 ### 2. Menu command
@@ -18,38 +18,38 @@ Context Menu - [Module Path]: `Vona Init/Config`
 
 ## Define Config
 
-Taking the module `home-index` as an example, define the `Config` configuration of the module:
+Taking the module `demo-student` as an example, define the `Config` configuration of the module:
 
-`src/suite/a-home/modules/home-index/src/config/config.ts`
+`src/module/demo-student/src/config/config.ts`
 
-```typescript{3}
+```diff
 export function config(_app: VonaApplication) {
   return {
-    title: 'Hello World',
++   title: 'Hello World',
   };
 }
 ```
 
-- Just define the required configuration fields directly, and the system will automatically extract the type information of config
+Just define the required configuration fields directly, and the system will automatically extract the type information of config
 
 ## Use Config
 
 The `Config` configuration of the module can be obtained through the `Scope` instance
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    console.log(this.scope.config.title);
+```diff
+class ControllerStudent {
+  async test() {
++   console.log(this.scope.config.title);
   }
 }
 ```
 
 ## Use Config cross-module
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    console.log(this.$scope.homeIndex.config.title);
+```diff
+class ControllerOther {
+  async test() {
++   console.log(this.$scope.demoStudent.config.title);
   }
 }
 ```
@@ -60,19 +60,11 @@ You can use `project-level` Config to override `module-level` Config
 
 `src/backend/config/config/config.ts`
 
-```typescript{6-8}
-export default async function (_app: VonaApplication, _env: VonaConfigEnv) {
-  const config: VonaConfigOptional = {};
-
-  // modules
-  config.modules = {
-    'home-index': {
-      title: 'Hello World!!',
-    },
-  };
-
-  return config;
-}
+```diff
+// modules
+config.modules = {
+  'demo-student': {
++   title: 'Hello World!!',
+  },
+};
 ```
-
-- Change the `title` of the module `home-index` to `Hello World!!`

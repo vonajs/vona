@@ -7,7 +7,7 @@
 ### 1. Cli命令
 
 ``` bash
-$ vona :init:config home-index
+$ vona :init:config demo-student
 ```
 
 ### 2. 菜单命令
@@ -18,38 +18,38 @@ $ vona :init:config home-index
 
 ## 定义Config
 
-以模块`home-index`为例，定义模块的 Config 配置：
+以模块`demo-student`为例，定义模块的 Config 配置：
 
-`src/suite/a-home/modules/home-index/src/config/config.ts`
+`src/module/demo-student/src/config/config.ts`
 
-```typescript{3}
+```diff
 export function config(_app: VonaApplication) {
   return {
-    title: 'Hello World',
++   title: 'Hello World',
   };
 }
 ```
 
-- 直接定义所需要的配置字段即可，系统会自动提取 Config 的类型信息
+直接定义所需要的配置字段即可，系统会自动提取 Config 的类型信息
 
 ## 使用Config
 
 可以通过 Scope 实例获取模块的 Config 配置
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    console.log(this.scope.config.title);
+```diff
+class ControllerStudent {
+  async test() {
++   console.log(this.scope.config.title);
   }
 }
 ```
 
 ## 跨模块使用Config
 
-```typescript{3}
-class ControllerHome {
-  index() {
-    console.log(this.$scope.homeIndex.config.title);
+```diff
+class ControllerOther {
+  async test() {
++   console.log(this.$scope.demoStudent.config.title);
   }
 }
 ```
@@ -60,19 +60,11 @@ class ControllerHome {
 
 `src/backend/config/config/config.ts`
 
-```typescript{6-8}
-export default async function (_app: VonaApplication, _env: VonaConfigEnv) {
-  const config: VonaConfigOptional = {};
-
-  // modules
-  config.modules = {
-    'home-index': {
-      title: 'Hello World!!',
-    },
-  };
-
-  return config;
-}
+```diff
+// modules
+config.modules = {
+  'demo-student': {
++   title: 'Hello World!!',
+  },
+};
 ```
-
-- 将模块`home-index`的`title`修改为`Hello World!!`
