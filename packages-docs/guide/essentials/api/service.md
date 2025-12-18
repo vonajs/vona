@@ -23,9 +23,6 @@ Context Menu - [Module Path]: `Vona Create/Service`
 export class ServiceStudent extends BeanBase {}
 ```
 
-- Inherited from the `BeanBase` class
-- Use `Serivce` decorator
-
 ## Use Service
 
 The use of Service can be explained from different dimensions
@@ -60,7 +57,7 @@ export class ControllerStudent {
 }
 ```
 
-- Since the imported `ServiceStudent` is a `type`, the Bean identifier of Service needs to be specified
+Since the imported `ServiceStudent` is a `type`, the Bean identifier of Service needs to be specified
 
 ## 2. Dependency lookup
 
@@ -91,6 +88,8 @@ class ControllerStudent {
 1. Lookup based on Bean class
 
 ``` typescript
+import { ServiceStudent } from '../service/student.ts';
+
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._getBean(ServiceStudent);
@@ -98,7 +97,7 @@ class ControllerStudent {
 }
 ```
 
-- this.bean === this.app.bean, which is the global ioc container
+this.bean === this.app.bean, which is the app container
 
 2. Lookup based on Bean identifier
 
@@ -129,11 +128,9 @@ class ControllerStudent {
 1. Create a new instance based on the Bean class
 
 ``` typescript
-import { ServiceMenu } from 'vona-module-home-base';
-
 class ControllerStudent {
   findOne() {
-    const serviceMenu = this.bean._newBean(ServiceMenu);
+    const serviceStudent = this.bean._newBean(ServiceStudent);
   }
 }
 ```
@@ -143,7 +140,7 @@ class ControllerStudent {
 ``` typescript
 class ControllerStudent {
   findOne() {
-    const serviceMenu = this.bean._newBean('home-base.service.menu');
+    const serviceStudent = this.bean._newBean('demo-student.service.student');
   }
 }
 ```

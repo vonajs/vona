@@ -23,9 +23,6 @@ $ vona :create:bean service student --module=demo-student
 export class ServiceStudent extends BeanBase {}
 ```
 
-- 继承自 BeanBase 基类
-- 使用 Serivce 装饰器
-
 ## 使用Service
 
 关于 Service 的使用可以从不同维度来讲
@@ -58,7 +55,7 @@ export class ControllerStudent {
 }
 ```
 
-- 由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识
+由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识
 
 ## 2. 依赖查找
 
@@ -89,6 +86,8 @@ class ControllerStudent {
 1. 基于 Bean class 查找
 
 ``` typescript
+import { ServiceStudent } from '../service/student.ts';
+
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._getBean(ServiceStudent);
@@ -96,7 +95,7 @@ class ControllerStudent {
 }
 ```
 
-- this.bean === this.app.bean，就是全局 ioc 容器
+this.bean === this.app.bean，就是 app 容器
 
 2. 基于 Bean 标识查找
 
@@ -110,7 +109,7 @@ class ControllerStudent {
 
 ### 请求级别
 
-如果我们要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法
+如果要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法
 
 ``` typescript
 class ControllerStudent {
@@ -127,11 +126,9 @@ class ControllerStudent {
 1. 基于 Bean class 创建新实例
 
 ``` typescript
-import { ServiceMenu } from 'vona-module-home-base';
-
 class ControllerStudent {
   findOne() {
-    const serviceMenu = this.bean._newBean(ServiceMenu);
+    const serviceStudent = this.bean._newBean(ServiceStudent);
   }
 }
 ```
@@ -141,7 +138,7 @@ class ControllerStudent {
 ``` typescript
 class ControllerStudent {
   findOne() {
-    const serviceMenu = this.bean._newBean('home-base.service.menu');
+    const serviceStudent = this.bean._newBean('demo-student.service.student');
   }
 }
 ```
