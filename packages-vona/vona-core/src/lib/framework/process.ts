@@ -10,7 +10,7 @@ async function _closeAppInner() {
     process.exit(1);
   }, 5000);
   const [_, err] = await catchError(() => {
-    return closeApp(true);
+    return closeApp();
   });
   if (err) {
     console.error(err);

@@ -98,7 +98,7 @@ export class VonaApplication extends KoaApplication {
     return this.createContext(request as any, response) as unknown as VonaContext;
   }
 
-  async close(terminate?: boolean) {
-    await closeApp(terminate);
+  async close() {
+    await closeApp();
   }
 }

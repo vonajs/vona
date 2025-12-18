@@ -7,7 +7,7 @@ export function useApp(): VonaApplication {
   return globalThis.__app__;
 }
 
-export async function closeApp(terminate?: boolean) {
+export async function closeApp() {
   while (globalThis.__closing__) {
     await sleep(50);
   }
@@ -19,9 +19,6 @@ export async function closeApp(terminate?: boolean) {
     }
   } finally {
     globalThis.__closing__ = false;
-  }
-  if (terminate) {
-    process.kill(process.pid, 'SIGTERM');
   }
 }
 

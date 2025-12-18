@@ -23,12 +23,12 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
     });
 
     cluster.on('exit', (_worker, _code, _signal) => {
-      // console.log(`worker ${worker.process.pid} died`, code, signal);
+      console.log(`----------------- worker ${_worker.process.pid} died`, _code, _signal);
       // should not kill master self by manual
       // master -> worker, rather than worker -> master
-      // if (cluster.workers && Object.keys(cluster.workers).length === 0) {
-      //   process.kill(process.pid, 'SIGTERM');
-      // }
+      if (cluster.workers && Object.keys(cluster.workers).length === 0) {
+        process.exit(0);
+      }
     });
   } else {
     handleProcessWork();

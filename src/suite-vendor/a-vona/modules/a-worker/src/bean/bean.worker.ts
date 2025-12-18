@@ -1,6 +1,6 @@
 import cluster from 'node:cluster';
 import { isNil } from '@cabloy/utils';
-import { BeanBase, closeApp, uuidv4 } from 'vona';
+import { BeanBase, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 const SymbolWorkerId = Symbol('SymbolWorkerId');
@@ -30,7 +30,7 @@ export class BeanWorker extends BeanBase {
   }
 
   exit(code?: number | string | null | undefined) {
-    closeApp(false).then(() => {
+    this.app.close().then(() => {
       process.exit(code);
     });
   }
@@ -44,7 +44,7 @@ export class BeanWorker extends BeanBase {
     if (!worker) {
       this.exit(); // pm2 or forever
     } else {
-      closeApp(false).then(() => {
+      this.app.close().then(() => {
         worker.send('reload-worker');
       });
     }
