@@ -1,6 +1,6 @@
 # 创建第一个CRUD API
 
-下面我们来创建第一个 CRUD API，用于管理 Student 数据
+下面来创建第一个 CRUD API，用于管理 Student 数据
 
 ## 新建模块
 
@@ -26,7 +26,7 @@ $ vona :create:module demo-student --suite=
 
 ## 新建CRUD
 
-然后，我们使用 Vona 内置的代码生成器来创建 CRUD 的代码骨架。同样有两种方式：
+然后，使用 Vona 内置的代码生成器来创建 CRUD 的代码骨架。同样有两种方式：
 
 ### 1. Cli命令
 
@@ -44,7 +44,7 @@ $ vona :tools:crud student --module=demo-student
 
 ## Swagger/Rapidoc
 
-我们可以使用 [Swagger](https://swagger.io)/[Rapidoc](https://rapidocweb.com) 来查看和运行 Student 的 CRUD API
+可以使用 [Swagger](https://swagger.io)/[Rapidoc](https://rapidocweb.com) 来查看和运行 Student 的 CRUD API
 
 当启动开发服务后，系统自动在终端输出 Swagger/Rapidoc 的 URL 路径：
 
