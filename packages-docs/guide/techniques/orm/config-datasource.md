@@ -77,7 +77,7 @@ For ease of configuration, built-in datasources obtain configuration parameters 
 ``` typescript
 # database
 
-DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 
 DATABASE_CLIENT_PG_HOST = 127.0.0.1
 DATABASE_CLIENT_PG_PORT = 5432

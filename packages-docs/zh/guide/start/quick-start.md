@@ -46,17 +46,13 @@ $ cd projectName
 
 ``` bash
 # database
-DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 DATABASE_CLIENT_PG_PASSWORD =
 DATABASE_CLIENT_MYSQL_PASSWORD =
 
 # redis
 REDIS_DEFAULT_PASSWORD =
 ```
-
-::: warning
-对于开发环境和测试环境，建议使用系统默认的数据库名称，从而让系统自动创建测试数据库
-:::
 
 3. 启动开发服务
 

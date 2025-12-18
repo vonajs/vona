@@ -42,17 +42,13 @@ $ cd projectName
 
 ``` bash
 # database
-DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 DATABASE_CLIENT_PG_PASSWORD =
 DATABASE_CLIENT_MYSQL_PASSWORD =
 
 # redis
 REDIS_DEFAULT_PASSWORD =
 ```
-
-::: warning
-For development and test environments, it is recommended to use the system default database name so that the system can automatically create a test database
-:::
 
 3. Start Dev Server
 
