@@ -4,6 +4,10 @@ Vona strongly recommends test-driven development. Test-driven development can ef
 
 Vona uses a `parallel mechanism` to run test files, thereby significantly improving test efficiency
 
+::: warning
+`Sqlite3` only supports one write connection, so `parallel mechanism` is not supported
+:::
+
 ## Create test file
 
 ### 1. Cli command
@@ -141,7 +145,6 @@ const roles = app.bean.passport.currentRoles;
 * Simulate logout
 
 ``` typescript
-await app.bean.passport.signinMock();
 await app.bean.passport.signout();
 ```
 
@@ -184,7 +187,9 @@ await app.bean.executor.mockCtx(async () => {
   const [students, err] = await catchError(() => {
     return scopeStudent.service.student.findMany();
   });
-  // do somthing on err
+  if (err) {
+    // do somthing on err
+  }
 });
 ```
 

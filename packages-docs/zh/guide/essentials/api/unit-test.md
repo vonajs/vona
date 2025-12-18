@@ -4,6 +4,10 @@ Vona 强烈建议基于测试驱动开发。测试驱动开发，可以有效沉
 
 Vona 采用`并行机制`运行测试文件，从而显著提升测试效率
 
+::: warning
+`Sqlite3`只支持一个写连接，因此不支持`并行机制`
+:::
+
 ## 创建测试文件
 
 ### 1. Cli命令
@@ -141,7 +145,6 @@ const roles = app.bean.passport.currentRoles;
 * 模拟退出登录
 
 ``` typescript
-await app.bean.passport.signinMock();
 await app.bean.passport.signout();
 ```
 
@@ -184,7 +187,9 @@ await app.bean.executor.mockCtx(async () => {
   const [students, err] = await catchError(() => {
     return scopeStudent.service.student.findMany();
   });
-  // do somthing on err
+  if (err) {
+    // do somthing on err
+  }
 });
 ```
 
