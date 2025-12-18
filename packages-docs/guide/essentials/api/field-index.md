@@ -25,9 +25,6 @@ Context Menu - [Module Path]: `Vona Meta/Index`
 export class MetaIndex extends BeanBase {}
 ```
 
-- Inherited from `BeanBase` class
-- Use `Meta` decorator
-
 ## Configure field indexes: normal style
 
 ```typescript
@@ -69,7 +66,7 @@ config.onions = {
   meta: {
     'demo-student:index': {
       indexes: {
-        ...$tableColumns(() => EntityStudent, 'name'),
+        demoStudent: 'name',
       },
     },
   },

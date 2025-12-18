@@ -25,9 +25,6 @@ $ vona :create:bean meta index --module=demo-student
 export class MetaIndex extends BeanBase {}
 ```
 
-- 继承自 BeanBase 基类
-- 使用 Meta 装饰器
-
 ## 配置字段索引：普通风格
 
 ```typescript
@@ -44,7 +41,7 @@ class MetaIndex {}
 
 ## 配置字段索引：类型化风格
 
-为了让代码质量更高，更容易维护，我们还可以使用类型化的代码风格
+为了让代码质量更高，更容易维护，还可以使用类型化的代码风格
 
 ``` typescript
 @Meta({
@@ -69,7 +66,7 @@ config.onions = {
   meta: {
     'demo-student:index': {
       indexes: {
-        ...$tableColumns(() => EntityStudent, 'name'),
+        demoStudent: 'name',
       },
     },
   },
