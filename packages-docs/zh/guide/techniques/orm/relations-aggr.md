@@ -2,7 +2,7 @@
 
 下面以模块`test-vona`为例，讲解`基于关系的聚合`的用法
 
-比如，Model User 和 Model Post 是`1:n`的关系。当我们在查询 User 数据时，可以基于关系查询相应 Post 的聚合数据
+比如，Model User 和 Model Post 是`1:n`的关系。在查询 User 数据时，可以基于关系查询相应 Post 的聚合数据
 
 ## 动态关系
 

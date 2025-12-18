@@ -4,7 +4,7 @@ Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zo
 
 ## URL
 
-Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
+Vona 内置了 Swagger 模块，可以直接通过 URL 访问：
 
 |名称|URL|
 |--|--|
@@ -46,7 +46,7 @@ Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
 
 ## 2. 指定Zod Schema
 
-比如，`findOne(@Arg.query('id', z.number().min(6)) id: number)`，我们指定 id 的类型是`number`，并且`>=6`。那么，自动生成的 Swagger/Openapi 如下：
+比如，`findOne(@Arg.query('id', z.number().min(6)) id: number)`，指定 id 的类型是`number`，并且`>=6`。那么，自动生成的 Swagger/Openapi 如下：
 
 ![](../../../assets/img/openapi/openapi-3.png)
 
@@ -66,7 +66,7 @@ Vona 内置了 Swagger 模块，我们可以直接通过 URL 访问：
 
 ## 5. 工具：v.array
 
-比如，`findOne(@Arg.query('ids', v.array(Number)) ids: number[])`，我们指定 ids 为`number[]`。那么，自动生成的 Swagger/Openapi 如下：
+比如，`findOne(@Arg.query('ids', v.array(Number)) ids: number[])`，指定 ids 为`number[]`。那么，自动生成的 Swagger/Openapi 如下：
 
 ![](../../../assets/img/openapi/openapi-5.png)
 
@@ -86,7 +86,7 @@ Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据
 
 ### 1. 举例：v.title
 
-比如，我们可以为 Openapi 指定`title`为`Name`
+比如，可以为 Openapi 指定`title`为`Name`
 
 ``` typescript
 class ControllerStudent3 {
@@ -101,7 +101,7 @@ class ControllerStudent3 {
 
 ### 2. 举例：v.openapi
 
-我们可以使用`v.openapi`一次设置更多的元数据。比如，我们可以为 Openapi 指定`title`为`Name`，`example`为`Tom`
+可以使用`v.openapi`一次设置更多的元数据。比如，可以为 Openapi 指定`title`为`Name`，`example`为`Tom`
 
 ``` typescript
 class ControllerStudent3 {

@@ -38,7 +38,7 @@ VonaJS 的默认分级是`info`，从而可以控制只有`<=info`的分级日�
 
 ### 1. makeTransportFile
 
-我们在新建`order` Client，可以通过`makeTransportFile`方法实现此策略: 只有`<=info`的分级日志才写入文件
+我们再新建`order` Client，可以通过`makeTransportFile`方法实现此策略: 只有`<=info`的分级日志才写入文件
 
 ``` diff
 // logger

@@ -94,7 +94,7 @@ DATABASE_CLIENT_MYSQL_DATABASE = mysql
 
 ## 添加新数据源
 
-如果我们要添加一个新的数据源，名称为`pgOrder`，使用数据库方言`pg`，那么，可以如下操作：
+如果要添加一个新的数据源，名称为`pgOrder`，使用数据库方言`pg`，那么，可以如下操作：
 
 ### 1. 添加类型定义
 
@@ -176,7 +176,7 @@ const items = dbDefault.connection.select('*').from('tableName');
 
 ### 4. 获取当前数据源
 
-在实际的代码上下文中，我们可能使用任何一个数据源，那么可以通过以下代码获取上下文中的当前数据源：
+在实际的代码上下文中，可能使用任何一个数据源，那么可以通过以下代码获取上下文中的当前数据源：
 
 ``` typescript
 const current = app.bean.database.current;

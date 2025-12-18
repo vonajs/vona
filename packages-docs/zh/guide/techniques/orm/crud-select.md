@@ -166,7 +166,7 @@ class ModelPost {}
 
 在一个大型的业务系统中，Model 可能并不会定义所有的关系。那么，也可以通过参数`_modelJoins`指定需要关联的 Models，系统从这些 Models 中提取对应的数据表
 
-比如，模块`test-vona`中定义了 model`order`。那么，我们可以这样使用`joins`:
+比如，模块`test-vona`中定义了 model`order`。那么，可以这样使用`joins`:
 
 ![](../../../assets/img/orm/select/select-2.png)
 

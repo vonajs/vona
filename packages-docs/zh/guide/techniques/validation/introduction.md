@@ -22,7 +22,7 @@ Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请�
 
 ## 2. 指定Zod Schema
 
-我们还可以显式的指定 Zod Schema，从而提供更加复杂的校验规则。比如，URL 为`/?id=1`，我们要求 id 为`number`，并且`>=6`。那么，我们可以给 query 传入参数：`z.number().min(6)`
+还可以显式的指定 Zod Schema，从而提供更加复杂的校验规则。比如，URL 为`/?id=1`，要求 id 为`number`，并且`>=6`。那么，可以给 query 传入参数：`z.number().min(6)`
 
 ``` typescript
 import z from 'zod';
@@ -35,9 +35,9 @@ class ControllerStudent3 {
 
 ## 3. 扩展Zod Schema的属性
 
-我们还可以在现有的 Zod Schema 基础之上扩展新的属性
+还可以在现有的 Zod Schema 基础之上扩展新的属性
 
-比如，我们要指定 id 为`number`，并且是`可选`，默认值为`3`
+比如，指定 id 为`number`，并且是`可选`，默认值为`3`
 
 ``` typescript
 import { v } from 'vona-module-a-openapiutils';
@@ -78,7 +78,7 @@ class ControllerStudent3 {
 
 ## 5. 工具：v.array
 
-对于 Array 类型的参数，Vona 也提供了便利的工具。比如，我们要求 ids 为`number[]`：
+对于 Array 类型的参数，Vona 也提供了便利的工具。比如，要求 ids 为`number[]`：
 
 ``` typescript
 class ControllerStudent3 {
@@ -96,7 +96,7 @@ class ControllerStudent3 {
 }
 ```
 
-再比如，我们从 Request body 获取 students 数组，类型为`DtoStudentInfo[]`：
+再比如，从 Request body 获取 students 数组，类型为`DtoStudentInfo[]`：
 
 ``` typescript
 class ControllerStudent3 {

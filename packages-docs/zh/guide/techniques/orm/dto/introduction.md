@@ -86,7 +86,7 @@ class ControllerOrder {
 
 ## 4. 封装DTO
 
-我们还可以创建一个新的 DTO class，将前面的`$Dto.get`动态推断代码封装起来，从而用于其他地方
+还可以创建一个新的 DTO class，将前面的`$Dto.get`动态推断代码封装起来，从而用于其他地方
 
 1. 在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
 
@@ -105,7 +105,7 @@ export class DtoOrderResult
 + extends $Dto.get(() => ModelOrder, { include: { products: true } }) {}
 ```
 
-3. 现在，我们再使用`DtoOrderResult`重构前面的 API 代码：
+3. 现在，再使用`DtoOrderResult`重构前面的 API 代码：
 
 ``` diff
 class ControllerOrder {
