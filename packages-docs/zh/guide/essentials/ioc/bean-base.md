@@ -1,6 +1,6 @@
 # BeanBase
 
-`BeanBase` 是所有 bean 的基类。通过继承自`BeanBase`，我们可以在书写代码时便利的访问到常用的工具和能力
+`BeanBase` 是所有 bean 的基类。通过继承自`BeanBase`，可以在书写代码时便利的访问到常用的工具和能力
 
 ## Vona 的 IOC 容器为何代码更简洁？
 

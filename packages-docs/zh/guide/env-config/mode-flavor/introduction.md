@@ -62,7 +62,7 @@ app.meta.isProd
 
 ## Flavor
 
-面对更复杂的业务场景，我们往往需要提供更多场景的配置能力。那么，Vona 专门提供了 Flavor 机制。通过`运行环境`和`Flavor`的组合，使我们可以非常方便的定义各种场景的配置信息
+面对更复杂的业务场景，往往需要提供更多场景的配置能力。那么，Vona 专门提供了 Flavor 机制。通过`运行环境`和`Flavor`的组合，使我们可以非常方便的定义各种场景的配置信息
 
 ### 1. 内置Flavor
 
@@ -113,7 +113,7 @@ app.config.meta.flavor === 'ci'
 
 可以基于任何业务需求来新建 Flavor，比如客户、项目、组织等等
 
-比如，我们为顾客 A 分配一个 Flavor: `customA`，从而为顾客 A 提供独立的 Env/Config 配置
+比如，为顾客 A 分配一个 Flavor: `customA`，从而为顾客 A 提供独立的 Env/Config 配置
 
 * 启用 Flavor
 

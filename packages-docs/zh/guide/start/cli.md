@@ -12,7 +12,7 @@ $ vona :create:bean service student --module=demo-student
 
 ## 命令的用法
 
-Vona 的 Cli 命令有统一的格式，我们只要掌握了以下几个命令运行的思路，就可以轻松使用所有的命令
+Vona 的 Cli 命令有统一的格式，只要掌握了以下几个命令运行的思路，就可以轻松使用所有的命令
 
 1. 列出所有命令
 

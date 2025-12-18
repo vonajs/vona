@@ -33,7 +33,7 @@ export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRe
 
 ## 定义锁资源
 
-当我们使用分布式锁时，需要指定对应的锁资源。比如，为`lock`方法定义锁资源`name`:
+当使用分布式锁时，需要指定对应的锁资源。比如，为`lock`方法定义锁资源`name`:
 
 ``` diff
 - export type TypeRedlockLockResource = never;

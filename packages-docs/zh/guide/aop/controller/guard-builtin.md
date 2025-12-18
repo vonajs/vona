@@ -115,7 +115,7 @@ import { Passport } from 'vona-module-a-user';
 
 ## 组合使用
 
-比如，我们同时使用局部守卫`a-user:userName`和`a-user:roleName`。判断规则如下：
+比如，同时使用局部守卫`a-user:userName`和`a-user:roleName`。判断规则如下：
 
 * 有一个条件满足则完成判断
 

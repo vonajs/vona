@@ -148,7 +148,7 @@ config.onions = {
 
 ## Mapped Class
 
-在上面我们为`DtoStudentCreate`定义了两个字段：`name`和`description`。事实上这两个字段在`EntityStudent`中也有定义。为了实现代码复用，提升开发效率，Vona 提供了 4 个 Mapped 工具函数，用于从现有 Class 中派生出目标 Class
+在上面为`DtoStudentCreate`定义了两个字段：`name`和`description`。事实上这两个字段在`EntityStudent`中也有定义。为了实现代码复用，提升开发效率，Vona 提供了 4 个 Mapped 工具函数，用于从现有 Class 中派生出目标 Class
 
 ### 1. $Class.pick
 

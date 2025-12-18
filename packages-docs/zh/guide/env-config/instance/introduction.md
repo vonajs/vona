@@ -200,7 +200,7 @@ await this.scope.model.student.update({ id: 1, name: 'Jimmy' });
 await this.scope.model.student.delete({ id: 1 });
 ```
 
-当我们使用 Model `student`操作数据时，系统会自动设置`实例Id`
+当使用 Model `student`操作数据时，系统会自动设置`实例Id`
 
 ### 3. 使用Query Builder操作数据库
 

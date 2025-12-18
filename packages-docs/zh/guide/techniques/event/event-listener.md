@@ -78,7 +78,7 @@ export class EventListenerEcho
 
 ### 1. dependencies
 
-比如，还有一个 Event Listener `demo-student:echo3`，我们希望执行顺序如下：`demo-student:echo3` > `Current`
+比如，还有一个 Event Listener `demo-student:echo3`，希望执行顺序如下：`demo-student:echo3` > `Current`
 
 ``` diff
 @EventListener({
@@ -90,7 +90,7 @@ class EventListenerEcho {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望执行顺序如下：`Current` > `demo-student:echo3`
+`dependents`的顺序刚好与`dependencies`相反，希望执行顺序如下：`Current` > `demo-student:echo3`
 
 ``` diff
 @EventListener({
