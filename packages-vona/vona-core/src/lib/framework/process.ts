@@ -34,7 +34,7 @@ export function handleProcessWork() {
     const app = useApp();
     if (!app) {
       console.error(err);
-      process.kill(process.pid, 'SIGTERM');
+      process.exit(1);
     } else {
       const [logger] = catchErrorSync(() => {
         return app.meta.logger.get();
@@ -46,7 +46,7 @@ export function handleProcessWork() {
       }
       if (!app.meta.appStarted) {
         await app.meta.logger.dispose();
-        process.kill(process.pid, 'SIGTERM');
+        process.exit(1);
       }
     }
   });
@@ -57,11 +57,6 @@ export function handleProcessMaster() {
     // donothing
   });
   process.on('SIGUSR2', () => {
-    // should not kill master self by manual
-    // process.kill(process.pid, 'SIGTERM');
+    // donothing
   });
-  // should not kill master self by manual
-  // process.once('SIGINT', () => {
-  //   process.kill(process.pid, 'SIGTERM');
-  // });
 }
