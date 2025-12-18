@@ -8,9 +8,6 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
     handleProcessMaster();
     createAppMaster(bootstrapOptions);
 
-    // console.log(`Primary ${process.pid} is running`);
-
-    // Fork workers.
     for (let i = 0; i < workers; i++) {
       cluster.fork();
     }
@@ -31,6 +28,5 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
   } else {
     handleProcessWork();
     await createApp(bootstrapOptions);
-    // console.log(`Worker ${process.pid} started`);
   }
 }
