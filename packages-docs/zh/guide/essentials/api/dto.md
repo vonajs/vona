@@ -23,8 +23,6 @@ $ vona :create:bean dto studentCreate --module=demo-student
 export class DtoStudentCreate {}
 ```
 
-- 使用 Dto 装饰器
-
 ## @Api.field
 
 一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据

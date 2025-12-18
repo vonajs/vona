@@ -23,8 +23,6 @@ Context Menu - [Module Path]: `Vona Create/Dto`
 export class DtoStudentCreate {}
 ```
 
-- Use `Dto` decorator
-
 ## @Api.field
 
 Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata
