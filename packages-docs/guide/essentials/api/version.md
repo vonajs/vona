@@ -56,9 +56,6 @@ Context Menu - [Module Path]: `Vona Meta/Version`
 export class MetaVersion extends BeanBase {}
 ```
 
-- Inherited from `BeanBase` class
-- Use `Meta` decorator
-
 ## Change-scenario
 
 Vona provides three change-scenarios. You can inherit the corresponding interface and implement the corresponding method according to business needs
@@ -169,13 +166,14 @@ If we need to create a new data table, such as `Book`, in subsequent business it
 
 ### 1. Increment fileVersion
 
-``` typescript
+``` diff
 {
   "name": "vona-module-demo-student",
   "vonaModule": {
-    "fileVersion": 2 // 1 -> 2
+-   "fileVersion": 1
++   "fileVersion": 2
   },
-}
+}  
 ```
 
 ### 2. Create Entity: EntityBook
@@ -231,12 +229,12 @@ When we develop locally, we need to frequently update the database schema for th
 $ npm run test
 ```
 
-When we execute unit tests, the system will automatically delete the old database and create a new database, which will re-execute the migration code and then execute the unit test code
+When we run this command, the system will automatically delete the old database and create a new database, which will re-execute the migration code and then execute unit tests
 
 ``` bash
 $ npm run db:reset
 ```
 
-This command is only used to recreate the database and re-execute the migration code
+This command is only used to recreate the database and re-execute the migration code; it does not execute unit tests
 
 ![](../../../assets/img/api/version-reset.png)

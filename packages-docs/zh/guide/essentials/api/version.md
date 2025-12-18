@@ -51,9 +51,6 @@ $ vona :create:bean meta version --module=demo-student
 export class MetaVersion extends BeanBase {}
 ```
 
-- 继承自 BeanBase 基类
-- 使用 Meta 装饰器
-
 ## 变更场景
 
 Vona 提供了三个变更场景，可以根据业务需求，继承相应的接口，并实现约定的方法即可
@@ -66,7 +63,7 @@ Vona 提供了三个变更场景，可以根据业务需求，继承相应的接
 
 ## update：架构迁移
 
-比如，模块 demo-student 当前数据版本为`1`，我们为`版本1`创建数据表`demoStudent`
+比如，模块 demo-student 当前数据版本为`1`，为`版本1`创建数据表`demoStudent`
 
 ``` typescript
 @Meta()
@@ -88,7 +85,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 Vona 底层采用 knex，更多细节，参见：[knex](https://knexjs.org/)
 
-为了让代码质量更高，更容易维护，我们还可以使用类型化的代码风格
+为了让代码质量更高，更容易维护，还可以使用类型化的代码风格
 
 ``` typescript
 @Meta()
@@ -108,7 +105,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 ## init：初始化数据
 
-比如，我们初始化一个学生数据
+比如，初始化一个学生数据
 
 ``` typescript
 @Meta()
@@ -160,15 +157,16 @@ export class MetaVersion extends BeanBase implements IMetaVersionTest {
 
 ## 版本变更
 
-如果我们在后续业务迭代中需要创建新的数据表，比如`Book`。那么，执行步骤如下：
+如果在后续业务迭代中需要创建新的数据表，比如`Book`。那么，执行步骤如下：
 
 ### 1. 递增fileVersion
 
-``` typescript
+``` diff
 {
   "name": "vona-module-demo-student",
   "vonaModule": {
-    "fileVersion": 2 // 1 -> 2
+-   "fileVersion": 1
++   "fileVersion": 2
   },
 }  
 ```
@@ -185,7 +183,7 @@ export class EntityBook {
 
 ### 3. 修改update/init/test
 
-根据需要，在`update/init/test`中编写迁移代码。在这里，我们仅需在`update`中创建新的数据表
+根据需要，在`update/init/test`中编写迁移代码。在这里，仅需在`update`中创建新的数据表
 
 ``` typescript
 @Meta()
@@ -220,18 +218,18 @@ $ npm run start
 
 ## 支持本地开发
 
-我们在本地开发时，针对当前的数据版本，需要频繁的更新数据库架构。那么，我们并不需要修改`fileVersion`，而是执行以下命令，让迁移代码生效
+在本地开发时，针对当前的数据版本，需要频繁的更新数据库架构。那么，并不需要修改`fileVersion`，而是执行以下命令，让迁移代码生效
 
 ``` bash
 $ npm run test
 ```
 
-当我们执行单元测试时，系统就会自动删除旧数据库，并创建一个新的数据库，从而会重新执行迁移代码，然后执行单元测试的代码
+当执行单元测试时，系统就会自动删除旧数据库，并创建一个新的数据库，从而会重新执行迁移代码，然后执行单元测试
 
 ``` bash
 $ npm run db:reset
 ```
 
-此命令仅用于重新创建数据库，并重新执行迁移代码
+此命令仅用于重新创建数据库，并重新执行迁移代码，不执行单元测试
 
 ![](../../../assets/img/api/version-reset.png)
