@@ -42,7 +42,7 @@ export class BeanWorker extends BeanBase {
   reload() {
     const worker = cluster.worker;
     if (!worker) {
-      this.exit(); // pm2 or forever
+      this.exit(); // docker restart
     } else {
       this.app.close().then(() => {
         worker.send('reload-worker');
