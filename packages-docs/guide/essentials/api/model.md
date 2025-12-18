@@ -326,7 +326,7 @@ Vona Model has cache enabled by default, making the system high performant by de
 
 Model supports `two-layer cache`/`mem cache`/`redis cache`. `redis cache` is used by default. Because `redis cache` can maintain data consistency in distributed scenarios, while `mem cache` has a delay in synchronizing data in distributed scenarios. If business data changes infrequently, you can use `mem cache` or `two-layer cache` to achieve higher performance
 
-How to set cache configuration:
+This briefly introduces the basic configuration of caching. For more detailed information, see: [Vona ORM: Caching](../../techniques/orm/caching.md)
 
 ### 1. Disable cache
 
