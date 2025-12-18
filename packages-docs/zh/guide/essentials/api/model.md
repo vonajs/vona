@@ -18,16 +18,14 @@ $ vona :create:bean model student --module=demo-student
 
 ## Model定义
 
-``` typescript
+```diff
 import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityStudent } from '../entity/student.ts';
 
-@Model({ entity: EntityStudent })
++ @Model({ entity: EntityStudent })
 export class ModelStudent extends BeanModelBase<EntityStudent> {}
 ```
 
-- 继承自 BeanModelBase 基类
-- 使用 Model 装饰器
 - 设置对应的 entity
 
 ## 使用Model
@@ -66,7 +64,7 @@ class ServiceStudent {
 
 ## CRUD
 
-在这里，我们仅介绍基本的 CRUD 操作。更多信息，参见：
+在这里，仅介绍基本的 CRUD 操作。更多信息，参见：
 
 - [CRUD(查询)](../../techniques/orm/crud-select.md) 
 - [CRUD(插入/更新/删除)](../../techniques/orm/crud-cud.md)
@@ -207,7 +205,7 @@ config.onions = {
 
 ## 动态分表
 
-Model 支持动态分表的能力。比如，我们对 Order 进行分表处理，将每天的订单存入`order_YYYYMMDD`格式的数据表中
+Model 支持动态分表的能力。比如，对 Order 进行分表处理，将每天的订单存入`order_YYYYMMDD`格式的数据表中
 
 ``` typescript
 @Model({ table: (ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) => {
@@ -238,7 +236,7 @@ select "demoStudent"."id" from "demoStudent"
 
 ### 1. 临时禁用软删除
 
-我们也可以在执行 model 方法时临时指定`软删除`参数
+也可以在执行 model 方法时临时指定`软删除`参数
 
 ``` typescript
 class ServiceStudent {
@@ -268,21 +266,21 @@ Vona 支持`多数据库`、`多数据源`。可以针对任何一个数据源�
 `env/.env`
 
 ``` bash
-DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 ```
 
 ### 2. 静态数据源
 
 * 在 Model options 中指定数据源
 
-``` typescript{1}
-@Model({ client: 'mysql' })
+```diff
++ @Model({ client: 'mysql' })
 class ModelBook {}
 ```
 
 * 在 App Config 中指定数据源
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
@@ -311,7 +309,7 @@ export class ModelOrder {}
 
 ### 4. 动态数据源
 
-我们还可以在代码中动态指定数据源
+还可以在代码中动态指定数据源
 
 ``` typescript
 class ServiceStudent {
@@ -364,7 +362,7 @@ class ModelStudent {}
 
 ### 3. 在 App Config 中配置缓存
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions

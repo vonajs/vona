@@ -18,16 +18,14 @@ Context Menu - [Module Path]: `Vona Create/Model`
 
 ## Model Definition
 
-``` typescript
+```diff
 import { BeanModelBase, Model } from 'vona-module-a-orm';
 import { EntityStudent } from '../entity/student.ts';
 
-@Model({ entity: EntityStudent })
++ @Model({ entity: EntityStudent })
 export class ModelStudent extends BeanModelBase<EntityStudent> {}
 ```
 
-- Inherit from `BeanModelBase` class
-- Use `Model` decorator
 - Set the corresponding `entity`
 
 ## Using Model
@@ -268,21 +266,21 @@ By default, Model uses the default datasource set by the system
 `env/.env`
 
 ``` bash
-DATABASE_DEFAULT_CLIENT = 'pg' # pg/mysql
+DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 ```
 
 ### 2. Static datasource
 
 * Specify the datasource in Model options
 
-``` typescript{1}
-@Model({ clientName: 'mysql' })
+```diff
++ @Model({ client: 'mysql' })
 class ModelBook {}
 ```
 
 * Specify the datasource in App Config
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
@@ -365,7 +363,7 @@ class ModelStudent {}
 
 ### 3. Configure cache in App Config
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
