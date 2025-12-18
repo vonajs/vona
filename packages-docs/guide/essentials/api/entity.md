@@ -18,13 +18,11 @@ Context Menu - [Module Path]: `Vona Create/Entity`
 
 ## Entity Definition
 
-``` typescript
-@Entity<IEntityOptionsStudent>('demoStudent')
+``` diff
++ @Entity<IEntityOptionsStudent>('demoStudent')
 export class EntityStudent extends EntityBase {}
 ```
 
-- Inherited from the `EntityBase` class
-- Use the `Entity` decorator
 - Set the corresponding data table name
 
 ## table name

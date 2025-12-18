@@ -18,13 +18,11 @@ $ vona :create:bean entity student --module=demo-student
 
 ## Entity定义
 
-``` typescript
-@Entity<IEntityOptionsStudent>('demoStudent')
+``` diff
++ @Entity<IEntityOptionsStudent>('demoStudent')
 export class EntityStudent extends EntityBase {}
 ```
 
-- 继承自 EntityBase 基类
-- 使用 Entity 装饰器
 - 设置对应的数据表名
 
 ## 数据表名
@@ -95,7 +93,7 @@ class EntityStudent {
 
 ### 2. 指定Zod Schema
 
-我们还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi
+还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi
 
 * 举例：`number，>=18`
 
@@ -110,7 +108,7 @@ class EntityStudent {
 
 ### 3. 扩展Zod Schema的属性
 
-我们还可以在现有的 Zod Schema 基础之上扩展新的属性
+还可以在现有的 Zod Schema 基础之上扩展新的属性
 
 * 举例：`number，可选，默认值为18`
 
@@ -206,7 +204,7 @@ class EntityStudent {
 
 ### 2. 举例：v.openapi
 
-我们可以使用`v.openapi`一次设置更多的元数据
+可以使用`v.openapi`一次设置更多的元数据
 
 `title='Name', example='Tom'`
 
@@ -363,7 +361,7 @@ config.onions = {
 
 ## id: TableIdentity
 
-关键字段`id`使用`TableIdentity`类型，从而支持任何规模的业务系统。当我们使用`int64`作为数据库字段类型时，从数据库读取出来的值是`string`类型
+关键字段`id`使用`TableIdentity`类型，从而支持任何规模的业务系统。当使用`int64`作为数据库字段类型时，从数据库读取出来的值是`string`类型
 
 ``` typescript
 export type TableIdentity = string | number;
