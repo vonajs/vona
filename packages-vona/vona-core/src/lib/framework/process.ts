@@ -1,13 +1,17 @@
 import { catchErrorSync } from '@cabloy/utils';
 import { closeApp, useApp } from './useApp.ts';
 
+let __sigintHandled = false;
+
 export function handleProcessWork() {
-  process.once('SIGUSR2', async () => {
-    // console.log('------------SIGUSR2');
+  process.on('SIGINT', async () => {
+    if (__sigintHandled) return;
+    __sigintHandled = true;
+    // console.log('------------SIGINT');
     await closeApp(true);
   });
-  process.once('SIGINT', async () => {
-    // console.log('------------SIGINT');
+  process.once('SIGUSR2', async () => {
+    // console.log('------------SIGUSR2');
     await closeApp(true);
   });
   process.on('uncaughtException', async err => {
@@ -33,6 +37,9 @@ export function handleProcessWork() {
 }
 
 export function handleProcessMaster() {
+  process.on('SIGINT', () => {
+    // donothing
+  });
   process.once('SIGUSR2', () => {
     // should not kill master self by manual
     // process.kill(process.pid, 'SIGTERM');

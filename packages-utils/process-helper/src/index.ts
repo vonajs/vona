@@ -1,26 +1,26 @@
 import ChildProcess from 'node:child_process';
 import path from 'node:path';
 
-// only hook once and only when ever start any child.
-const childs: Set<ChildProcess.ChildProcess> = new Set();
-let hadHook = false;
-function gracefull(proc) {
-  // save child ref
-  childs.add(proc);
+// // only hook once and only when ever start any child.
+// const childs: Set<ChildProcess.ChildProcess> = new Set();
+// let hadHook = false;
+// function gracefull(proc) {
+//   // save child ref
+//   childs.add(proc);
 
-  // only hook once
-  /* istanbul ignore else */
-  if (!hadHook) {
-    hadHook = true;
-    ['SIGINT', 'SIGQUIT', 'SIGTERM'].forEach(event => {
-      process.once(event, () => {
-        for (const child of childs) {
-          child.kill(event as any);
-        }
-      });
-    });
-  }
-}
+//   // only hook once
+//   /* istanbul ignore else */
+//   if (!hadHook) {
+//     hadHook = true;
+//     ['SIGINT', 'SIGQUIT', 'SIGTERM'].forEach(event => {
+//       process.once(event, () => {
+//         for (const child of childs) {
+//           child.kill(event as any);
+//         }
+//       });
+//     });
+//   }
+// }
 
 export interface IProcessHelperSpawnOptions {
   cwd?: string;
@@ -28,7 +28,7 @@ export interface IProcessHelperSpawnOptions {
   logPrefix?: string;
   stdio?: any;
   shell?: boolean | string;
-  gracefull?: boolean;
+  // gracefull?: boolean;
 }
 
 export class ProcessHelperConsole {
@@ -140,11 +140,11 @@ export class ProcessHelper {
     options.cwd = options.cwd || this.cwd;
     options.stdio = options.stdio || 'inherit';
     options.shell = options.shell ?? true;
-    options.gracefull = options.gracefull ?? true;
+    // options.gracefull = options.gracefull ?? true;
     return new Promise((resolve, reject) => {
       const logPrefix = options.logPrefix;
       const proc = ChildProcess.spawn(`${cmd} ${args.join(' ')}`, options);
-      if (options.gracefull) gracefull(proc);
+      // if (options.gracefull) gracefull(proc);
       let stdout = '';
       let stderr = '';
       proc.stdout?.on('data', async data => {
@@ -161,7 +161,7 @@ export class ProcessHelper {
         reject(err);
       });
       proc.once('exit', code => {
-        if (options.gracefull) childs.delete(proc);
+        // if (options.gracefull) childs.delete(proc);
         if (code) {
           const message = stderr || `spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`;
           const err = new Error(message);
