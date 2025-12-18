@@ -61,7 +61,7 @@ class MetaIndex {}
 
 可以在 App Config 中配置字段索引
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions

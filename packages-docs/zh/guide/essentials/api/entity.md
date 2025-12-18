@@ -330,7 +330,7 @@ class EntityStudent {}
 
 可以在 App Config 中配置 Entity options
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
@@ -373,7 +373,7 @@ export type TableIdentity = string | number;
 
 在创建数据表时，系统会根据当前的配置使用`number`或者`bigint`作为 id 字段的类型，默认为`bigint`
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // modules

@@ -82,7 +82,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 The default value of pageSize is `20`, which can be modified in App Config:
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // modules

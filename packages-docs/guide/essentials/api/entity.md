@@ -330,7 +330,7 @@ class EntityStudent {}
 
 Entity options can be configured in App Config
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions
@@ -375,7 +375,7 @@ export type TableIdentity = string | number;
 
 When creating a data table, the system will use `number` or `bigint` as the type of the id field according to the current configuration, and the default is `bigint`
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // modules

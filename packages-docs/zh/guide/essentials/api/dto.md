@@ -130,7 +130,7 @@ class DtoStudentCreate {}
 
 可以在 App Config 中配置 Dto options
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions

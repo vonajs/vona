@@ -160,7 +160,7 @@ class ModelUser {}
 
 可以在 App Config 中配置 Model options
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions

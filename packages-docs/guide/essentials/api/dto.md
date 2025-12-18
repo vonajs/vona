@@ -131,7 +131,7 @@ class DtoStudentCreate {}
 
 Dto options can be configured in App Config
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // onions

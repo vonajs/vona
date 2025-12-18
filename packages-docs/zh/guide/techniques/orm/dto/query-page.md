@@ -82,7 +82,7 @@ export class DtoOrderQueryPage
 
 pageSize 默认值为`20`，可以修改 App Config 配置：
 
-`src/backend/config/config/config.dev.ts`
+`src/backend/config/config/config.ts`
 
 ``` typescript
 // modules
