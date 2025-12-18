@@ -1,18 +1,34 @@
-import { catchErrorSync } from '@cabloy/utils';
+import { catchError, catchErrorSync } from '@cabloy/utils';
 import { closeApp, useApp } from './useApp.ts';
 
 let __sigintHandled = false;
+
+async function _closeAppInner() {
+  const timeout = setTimeout(() => {
+    // eslint-disable-next-line no-console
+    console.log('Cleanup timed out. Forcing termination...');
+    process.exit(1);
+  }, 5000);
+  const [_, err] = await catchError(() => {
+    return closeApp(true);
+  });
+  if (err) {
+    console.error(err);
+  }
+  clearTimeout(timeout);
+  process.exit(err ? 1 : 0);
+}
 
 export function handleProcessWork() {
   process.on('SIGINT', async () => {
     if (__sigintHandled) return;
     __sigintHandled = true;
     // console.log('------------SIGINT');
-    await closeApp(true);
+    await _closeAppInner();
   });
-  process.once('SIGUSR2', async () => {
+  process.on('SIGUSR2', async () => {
     // console.log('------------SIGUSR2');
-    await closeApp(true);
+    await _closeAppInner();
   });
   process.on('uncaughtException', async err => {
     const app = useApp();
@@ -40,7 +56,7 @@ export function handleProcessMaster() {
   process.on('SIGINT', () => {
     // donothing
   });
-  process.once('SIGUSR2', () => {
+  process.on('SIGUSR2', () => {
     // should not kill master self by manual
     // process.kill(process.pid, 'SIGTERM');
   });
