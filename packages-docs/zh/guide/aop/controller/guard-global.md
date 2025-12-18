@@ -124,7 +124,7 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置全局守卫`a-user:passport`，我们希望加载顺序如下：`a-user:passport` > `Current`
+比如，系统有一个内置全局守卫`a-user:passport`，希望加载顺序如下：`a-user:passport` > `Current`
 
 ``` diff
 @Guard({
@@ -137,7 +137,7 @@ class GuardAdmin {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-user:passport`
+`dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-user:passport`
 
 ``` diff
 @Guard({

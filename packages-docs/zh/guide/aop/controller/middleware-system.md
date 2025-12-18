@@ -116,7 +116,7 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置系统中间件`a-core:notfound`，我们希望加载顺序如下：`a-core:notfound` > `Current`
+比如，系统有一个内置系统中间件`a-core:notfound`，希望加载顺序如下：`a-core:notfound` > `Current`
 
 ``` diff
 @MiddlewareSystem({
@@ -128,7 +128,7 @@ class MiddlewareSystemLogger {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-core:notfound`
+`dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-core:notfound`
 
 ``` diff
 @MiddlewareSystem({

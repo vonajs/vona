@@ -128,7 +128,7 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置全局管道`a-xxx:yyy`，我们希望加载顺序如下：`a-xxx:yyy` > `Current`
+比如，系统有一个内置全局管道`a-xxx:yyy`，希望加载顺序如下：`a-xxx:yyy` > `Current`
 
 ``` diff
 @Pipe({
@@ -141,7 +141,7 @@ class PipeNumber {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-xxx:yyy`
+`dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-xxx:yyy`
 
 ``` diff
 @Pipe({

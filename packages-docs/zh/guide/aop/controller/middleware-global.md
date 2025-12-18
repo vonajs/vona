@@ -127,7 +127,7 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置全局中间件`a-core:gate`，我们希望加载顺序如下：`a-core:gate` > `Current`
+比如，系统有一个内置全局中间件`a-core:gate`，希望加载顺序如下：`a-core:gate` > `Current`
 
 ``` diff
 @Middleware({
@@ -140,7 +140,7 @@ class MiddlewareLogger {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-core:gate`
+`dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-core:gate`
 
 ``` diff
 @Middleware({

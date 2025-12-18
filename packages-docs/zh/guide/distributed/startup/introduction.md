@@ -93,7 +93,7 @@ config.onions = {
 
 ### 1. dependencies
 
-比如，系统有一个内置启动项`a-web:listen`，我们希望加载顺序如下：`a-web:listen` > `Current`
+比如，系统有一个内置启动项`a-web:listen`，希望加载顺序如下：`a-web:listen` > `Current`
 
 ``` diff
 @Startup({
@@ -104,7 +104,7 @@ class StartupLog {}
 
 ### 2. dependents
 
-`dependents`的顺序刚好与`dependencies`相反，我们希望加载顺序如下：`Current` > `a-web:listen`
+`dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-web:listen`
 
 ``` diff
 @Startup({
