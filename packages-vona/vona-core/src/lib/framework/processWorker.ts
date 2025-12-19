@@ -51,12 +51,3 @@ export function handleProcessWork() {
     }
   });
 }
-
-export function handleProcessMaster() {
-  process.on('SIGINT', () => {
-    // donothing
-  });
-  process.on('SIGUSR2', () => {
-    // donothing
-  });
-}
