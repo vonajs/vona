@@ -1,8 +1,6 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type { TypeEntityMeta, TypeEntityStudentMetaSimpleColumns } from '../types/entity.ts';
-import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
-import type { ITableRecord } from '../types/onion/table.ts';
+import type { IDecoratorEntityOptions, ITableRecord, TypeEntityMeta, TypeEntityStudentMetaSimpleColumns } from 'vona-module-a-orm';
 import { isClass } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appResource, cast, useApp } from 'vona';
