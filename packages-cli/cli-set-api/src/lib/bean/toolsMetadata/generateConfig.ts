@@ -40,7 +40,7 @@ export async function generateLocale1(modulePath: string, moduleName: string) {
   }
   // combine
   const content = `import type { TypeLocaleBase } from 'vona';
-import { makeLocaleMagic } from 'vona';
+import { $makeLocaleMagic } from 'vona';
 ${contentImports.join('\n')}
 
 export const locales = {
@@ -48,7 +48,7 @@ ${contentLocales.join('\n')}
 };
 
 export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K) {
-  return makeLocaleMagic(\`${moduleName}::\${key}\`);
+  return $makeLocaleMagic(\`${moduleName}::\${key}\`);
 }
 `;
   return content;
