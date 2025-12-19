@@ -43,9 +43,9 @@ export type EntityRoleUserMeta=TypeEntityMeta<EntityRoleUser,EntityRoleUserTable
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'homeRole': never;
-'homeRoleUser': never;
-'homeUser': never;
+    'homeRole': EntityRoleMeta;
+'homeRoleUser': EntityRoleUserMeta;
+'homeUser': EntityUserMeta;
   }
 }
 declare module 'vona-module-home-user' {

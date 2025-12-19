@@ -1,7 +1,7 @@
 {
   "name": "vona-module-home-user",
   "type": "module",
-  "version": "5.0.23",
+  "version": "5.0.24",
   "title": "home-user",
   "vonaModule": {
     "fileVersion": 1,
