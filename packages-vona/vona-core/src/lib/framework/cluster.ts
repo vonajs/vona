@@ -26,7 +26,11 @@ export async function startCluster(workers: number, bootstrapOptions: BootstrapO
       }
     });
   } else {
-    handleProcessWork();
-    await createApp(bootstrapOptions);
+    await startWorker(bootstrapOptions);
   }
+}
+
+export async function startWorker(bootstrapOptions: BootstrapOptions) {
+  handleProcessWork();
+  return await createApp(bootstrapOptions);
 }

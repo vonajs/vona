@@ -1,16 +1,15 @@
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import type { VonaApplication } from '../core/application.ts';
 import { prepareEnv } from '../utils/util.ts';
-import { startCluster } from './cluster.ts';
-import { createApp } from './createApp.ts';
-import { handleProcessWork } from './process.ts';
+import { startCluster, startWorker } from './cluster.ts';
 
 export async function bootstrap(bootstrapOptions: BootstrapOptions): Promise<VonaApplication | undefined> {
   const env = prepareEnv(bootstrapOptions.env);
   const workers = Number.parseInt(env.SERVER_WORKERS!);
-  if (workers === 1 && process.env.META_MODE !== 'dev') {
-    handleProcessWork();
-    return await createApp(bootstrapOptions);
+  const alwaysCluster = process.env.META_MODE === 'dev' || process.platform.startsWith('win');
+  if (workers > 1 || alwaysCluster) {
+    await startCluster(workers, bootstrapOptions);
+  } else {
+    return await startWorker(bootstrapOptions);
   }
-  await startCluster(workers, bootstrapOptions);
 }
