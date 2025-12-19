@@ -75,7 +75,7 @@ export function $tableComments<T>(
   if (beanOptions) {
     const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
     const comment = openapi?.description || openapi?.title;
-    cast(comments).$table = comment ? app.meta.text(comment) : '';
+    cast(comments).$table = comment ? app.meta.text(String(comment)) : '';
   }
   // ok
   return comments;
