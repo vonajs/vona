@@ -50,6 +50,14 @@ export function $tableName<K extends keyof ITableRecord>(
   return tableName;
 }
 
+export function $tableNameFromEntity<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): keyof ITableRecord {
+  const beanOptionsEntity = appResource.getBean(_prepareClassEntity(classEntity));
+  const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
+  return entityOptions.table!;
+}
+
 export function $tableComments<T>(
   classEntity: (() => Constructable<T>) | Constructable<T>,
 ): Record<string, string> {
@@ -88,14 +96,6 @@ export function $tableDefaults<T>(
   }
   // ok
   return defaults;
-}
-
-export function $tableNameFromEntity<T>(
-  classEntity: (() => Constructable<T>) | Constructable<T>,
-): keyof ITableRecord {
-  const beanOptionsEntity = appResource.getBean(_prepareClassEntity(classEntity));
-  const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
-  return entityOptions.table!;
 }
 
 function _prepareClassEntity<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
