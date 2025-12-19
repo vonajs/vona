@@ -3,8 +3,8 @@ import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, 
 import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
+import { $tableNameFromEntity } from 'vona-module-a-ormutils';
 import { getTableOrTableAlias, prepareClassModel } from '../../common/utils.ts';
-import { $tableNameFromEntity } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
 const SymbolModelDb = Symbol('SymbolModelDb');

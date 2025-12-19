@@ -1,6 +1,6 @@
 import { appResource, BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { $columnsAll } from '../lib/columns.ts';
+import { $columnsAll } from 'vona-module-a-ormutils';
 
 const SymbolModuleScope = Symbol('SymbolModuleScope');
 
