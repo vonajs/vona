@@ -69,7 +69,7 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
       if (isEmptyObject(fieldRule)) {
         rules[prop] = z.any();
       } else {
-        rules[prop] = z.any().openapi(fieldRule as object);
+        rules[prop] = z.any().openapi(fieldRule as any);
       }
     }
   }
