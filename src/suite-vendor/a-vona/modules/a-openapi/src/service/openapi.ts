@@ -236,7 +236,7 @@ export class ServiceOpenapi extends BeanBase {
       path: routePath2,
       operationId,
       security,
-      description: actionOpenApiOptions?.description,
+      description: actionOpenApiOptions?.description as string,
       summary: actionOpenApiOptions?.summary as string,
       request: this._collectRequest(info, controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions),
       responses: this._collectResponses(controller, actionKey, actionOpenApiOptions),

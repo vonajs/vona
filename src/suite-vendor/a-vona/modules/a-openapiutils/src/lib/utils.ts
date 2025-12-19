@@ -1,4 +1,4 @@
-import type { Constructable } from 'vona';
+import type { Constructable, ILocaleMagic } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type { TypeDecoratorRules } from '../types/decorator.ts';
 import { isClass, isEmptyObject } from '@cabloy/utils';
@@ -78,4 +78,13 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
 
 export function prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
   return isClass(classType) ? classType as Constructable<T> : cast(classType)();
+}
+
+export function normalizeErrorParams(params?: string | ILocaleMagic | any, errorDefault?: any) {
+  const params2 = params as any;
+  if (!params2) return errorDefault;
+  if (params2.toJSON) {
+    return { error: () => params2 };
+  }
+  return z.util.normalizeParams(params2);
 }

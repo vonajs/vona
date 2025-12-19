@@ -29,7 +29,7 @@ export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => obj
 
 export interface IOpenApiOptions {
   public?: boolean;
-  description?: string;
+  description?: string | ILocaleMagic;
   summary?: string | ILocaleMagic;
   httpCode?: number;
   contentType?: TypeResponseContentType;

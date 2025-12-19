@@ -1,10 +1,11 @@
-import type { Constructable } from 'vona';
+import type { Constructable, ILocaleMagic } from 'vona';
 import type { ISchemaObjectOptions } from 'vona-module-a-openapi';
 import type { SchemaLike } from '../../../types/decorator.ts';
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';
 import { $locale } from '../../../.metadata/locales.ts';
+import { normalizeErrorParams } from '../../utils.ts';
 import { $schema, $schemaLazy, makeSchemaLike } from '../makeSchemaLikes.ts';
 
 export function schemaDefault(defaultValue: any | Function) {
@@ -59,10 +60,10 @@ export function schemaLooseObject() {
   };
 }
 
-export function schemaRequired(params?: string | z.core.$ZodStringParams) {
-  params = params || $locale('ZodErrorRequired');
+export function schemaRequired(params?: string | ILocaleMagic | z.core.$ZodStringParams) {
+  const errorDefault = { error: () => $locale('ZodErrorRequired') };
   return function (schema: z.ZodType): z.ZodType {
-    schema._zod.def.error = z.util.normalizeParams(params).error;
+    schema._zod.def.error = normalizeErrorParams(params, errorDefault).error;
     return schema;
   };
 }

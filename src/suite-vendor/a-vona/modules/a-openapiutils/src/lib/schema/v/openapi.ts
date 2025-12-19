@@ -1,9 +1,9 @@
-import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
 import type { ILocaleMagic } from 'vona';
+import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type { z } from 'zod';
 
-export function schemaOpenapi<T extends z.ZodType>(metadata: Partial<ZodOpenAPIMetadata<z.input<T>>>): T;
-export function schemaOpenapi<T extends z.ZodType>(refId: string, metadata?: Partial<ZodOpenAPIMetadata<z.input<T>>>): T;
+export function schemaOpenapi<T extends z.ZodType>(metadata: TypeOpenapiMetadata<T>): T;
+export function schemaOpenapi<T extends z.ZodType>(refId: string, metadata?: TypeOpenapiMetadata<T>): T;
 export function schemaOpenapi<T extends z.ZodType>(refId: any, metadata?: any) {
   return function (schema: T): T {
     return schema.openapi(refId, metadata);
