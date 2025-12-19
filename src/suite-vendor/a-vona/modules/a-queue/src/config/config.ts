@@ -8,8 +8,5 @@ export function config(_app: VonaApplication) {
       maxStalledCount: 1000,
       stalledInterval: 10 * 1000,
     } as Bull.WorkerOptions,
-    // queueEvents: {
-    // waitUntilReady: 200,
-    // },
   };
 }

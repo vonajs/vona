@@ -258,11 +258,6 @@ export class ServiceQueue extends BeanBase {
   async _queueEventsReady(queueQueue: IQueueQueue) {
     if (queueQueue.queueEventsReady) return;
     await queueQueue.queueEvents.waitUntilReady();
-    // **: sleep will stop worker fetching next job?
-    // const waitUntilReady = this.scope.config.queueEvents.waitUntilReady;
-    // if (waitUntilReady) {
-    //   await sleep(waitUntilReady);
-    // }
     queueQueue.queueEventsReady = true;
   }
 
