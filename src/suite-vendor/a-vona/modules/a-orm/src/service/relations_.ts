@@ -283,7 +283,11 @@ export class ServiceRelations extends BeanBase {
           if (!isNil(item?.id) && !isNil(entity[relationName].id) && item?.id !== entity[relationName].id) {
             throw new Error(`invalid id: ${entity[relationName].id}`);
           }
-          children.push(Object.assign({}, entity[relationName], { [key]: cast(entity).id, id: item?.id }));
+          const dataNew: any = { [key]: cast(entity).id };
+          if (!isNil(item?.id)) {
+            dataNew.id = item.id;
+          }
+          children.push(Object.assign({}, entity[relationName], dataNew));
         }
       }
       children = await modelTarget.mutateBulk(children, methodOptionsReal);
