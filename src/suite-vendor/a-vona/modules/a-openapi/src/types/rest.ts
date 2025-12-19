@@ -1,5 +1,6 @@
 import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
+import type { ILocaleMagic } from 'vona';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
@@ -37,7 +38,10 @@ export type TypeFieldRenderComponentProvider = (keyof IComponentRecord) | (keyof
 
 export type TypeSchemaScene = 'table' | 'form';
 
-export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Partial<ZodOpenAPIMetadata<z.input<T>>>;
+export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<Partial<ZodOpenAPIMetadata<z.input<T>>>, 'title' | 'description'> & {
+  title?: string | ILocaleMagic;
+  description?: string | ILocaleMagic;
+};
 
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
   [key in ((keyof T) | (More extends string ? More : never))]?: TypeOpenapiMetadata | z.ZodType;

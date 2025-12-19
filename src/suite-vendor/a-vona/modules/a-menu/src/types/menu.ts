@@ -1,3 +1,5 @@
+import type { ILocaleMagic } from 'vona';
+
 export interface IMenuItemLinkPresetRecord {}
 
 export interface IMenuItemLinkRecord extends IMenuItemLinkPresetRecord {
@@ -18,8 +20,8 @@ export interface IMenuItemMeta {
 
 export interface IMenuItem {
   name: string;
-  title?: string;
-  description?: string;
+  title?: string | ILocaleMagic;
+  description?: string | ILocaleMagic;
   icon?: string;
   order?: number;
   group?: string | string[];
