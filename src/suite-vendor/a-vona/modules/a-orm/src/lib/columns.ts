@@ -1,7 +1,8 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type { ITableRecord, TypeEntityMeta } from '../types/index.ts';
+import type { TypeEntityMeta, TypeEntityStudentMetaSimpleColumns } from '../types/entity.ts';
 import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
+import type { ITableRecord } from '../types/onion/table.ts';
 import { isClass } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appResource, cast, useApp } from 'vona';
@@ -36,13 +37,11 @@ export function $columnsAll<T, TableName extends boolean, Meta extends boolean>(
   return columns as any;
 }
 
-export function $tableColumns<T>(
-  classEntity: (() => Constructable<T>) | Constructable<T>,
-  key?: (keyof T) | Array<keyof T> | undefined,
-): Record<keyof ITableRecord, (keyof T) | Array<keyof T> | undefined> {
-  // tableName
-  const tableName = $tableName(classEntity);
-  return { [tableName]: key } as any;
+export function $tableColumns<K extends keyof ITableRecord>(
+  tableName: K,
+  key?: TypeEntityStudentMetaSimpleColumns<ITableRecord[K]> | TypeEntityStudentMetaSimpleColumns<ITableRecord[K]>[] | undefined,
+) {
+  return { [tableName]: key };
 }
 
 export function $tableName<T>(
