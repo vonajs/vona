@@ -9,7 +9,8 @@ export interface IDatabaseDialectOptionsMysql extends IDecoratorDatabaseDialectO
 @DatabaseDialect<IDatabaseDialectOptionsMysql>()
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   protected _capabilities: IDatabaseDialectCapabilities = {
-    ilike: false,
+    like: false,
+    ilike: true,
     level: true,
   };
 

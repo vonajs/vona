@@ -8,6 +8,7 @@ export interface IDatabaseDialectOptionsPg extends IDecoratorDatabaseDialectOpti
 @DatabaseDialect<IDatabaseDialectOptionsPg>()
 export class DatabaseDialectPg extends BeanDatabaseDialectBase {
   protected _capabilities: IDatabaseDialectCapabilities = {
+    like: true,
     ilike: true,
     level: true,
   };

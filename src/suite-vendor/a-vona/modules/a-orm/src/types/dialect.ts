@@ -11,6 +11,7 @@ export interface IFetchIndexesResultItem {
 export type TypeDatabaseDialectTableColumnsFn = () => Promise<ITableColumns>;
 
 export interface IDatabaseDialectCapabilities {
+  like: boolean;
   ilike: boolean;
   level: boolean;
 }

@@ -186,11 +186,11 @@ function _buildWhereColumnOpNormal<TRecord>(
   } else if (op === Op.notBetween) {
     builder[having ? 'havingNotBetween' : 'whereNotBetween'](column, value);
   } else if (op === Op.startsWith) {
-    builder[having ? 'havingLike' : 'whereLike'](column, `${value}%` as any);
+    builder[_getOpLikeReal(having, db)](column, `${value}%` as any);
   } else if (op === Op.endsWith) {
-    builder[having ? 'havingLike' : 'whereLike'](column, `%${value}` as any);
+    builder[_getOpLikeReal(having, db)](column, `%${value}` as any);
   } else if (op === Op.includes) {
-    builder[having ? 'havingLike' : 'whereLike'](column, `%${value}%` as any);
+    builder[_getOpLikeReal(having, db)](column, `%${value}%` as any);
   } else if (op === Op.startsWithI) {
     builder[_getOpILikeReal(having, db)](column, `${value}%` as any);
   } else if (op === Op.endsWithI) {
@@ -200,6 +200,12 @@ function _buildWhereColumnOpNormal<TRecord>(
   } else if (op === Op.ref) {
     builder[having ? 'having' : 'where'](column, '=', db.connection.ref(value));
   }
+}
+
+function _getOpLikeReal(having: boolean, db: ServiceDb) {
+  return db.dialect.capabilities.like
+    ? (having ? 'havingLike' : 'whereLike')
+    : (having ? 'havingILike' : 'whereILike');
 }
 
 function _getOpILikeReal(having: boolean, db: ServiceDb) {
