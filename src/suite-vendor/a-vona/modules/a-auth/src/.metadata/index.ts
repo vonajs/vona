@@ -36,8 +36,8 @@ export type EntityAuthMeta=TypeEntityMeta<EntityAuth,EntityAuthTableName>;
 export type EntityAuthProviderMeta=TypeEntityMeta<EntityAuthProvider,EntityAuthProviderTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'aAuth': never;
-'aAuthProvider': never;
+    'aAuth': EntityAuthMeta;
+'aAuthProvider': EntityAuthProviderMeta;
   }
 }
 declare module 'vona-module-a-auth' {

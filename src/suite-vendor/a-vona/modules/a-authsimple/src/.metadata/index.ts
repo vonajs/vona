@@ -29,7 +29,7 @@ export type EntityAuthSimpleTableName = 'aAuthSimple';
 export type EntityAuthSimpleMeta=TypeEntityMeta<EntityAuthSimple,EntityAuthSimpleTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'aAuthSimple': never;
+    'aAuthSimple': EntityAuthSimpleMeta;
   }
 }
 declare module 'vona-module-a-authsimple' {

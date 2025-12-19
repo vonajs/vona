@@ -35,6 +35,11 @@ export interface IModuleAssetSceneRecord {
   fonts: never;
 }
 
+export interface ILocaleMagic<T extends string = string> {
+  toString: () => T;
+  toJSON(): () => T;
+}
+
 const SymbolProdRootPath = Symbol('SymbolProdRootPath');
 
 export class AppUtil extends BeanSimple {
@@ -390,7 +395,7 @@ export async function saveJSONFile(fileName: string, json: object) {
   await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
 }
 
-export function makeLocaleMagic(str: string) {
+export function makeLocaleMagic<T extends string>(str: T): ILocaleMagic<T> {
   return {
     toString() {
       return str;

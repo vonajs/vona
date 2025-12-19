@@ -29,7 +29,7 @@ export type EntityMailTableName = 'mail';
 export type EntityMailMeta=TypeEntityMeta<EntityMail,EntityMailTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'mail': never;
+    'mail': EntityMailMeta;
   }
 }
 declare module 'vona-module-a-mail' {

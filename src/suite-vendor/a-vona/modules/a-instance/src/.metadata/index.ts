@@ -69,7 +69,7 @@ export type EntityInstanceTableName = 'aInstance';
 export type EntityInstanceMeta=TypeEntityMeta<EntityInstance,EntityInstanceTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'aInstance': never;
+    'aInstance': EntityInstanceMeta;
   }
 }
 declare module 'vona-module-a-instance' {

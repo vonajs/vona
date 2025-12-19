@@ -150,15 +150,15 @@ export type EntityTestMeta=TypeEntityMeta<EntityTest,EntityTestTableName>;
 export type EntityUserMeta=TypeEntityMeta<EntityUser,EntityUserTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'testVonaCategory': never;
-'testVonaOrder': never;
-'testVonaPost': never;
-'testVonaPostContent': never;
-'testVonaProduct': never;
-'testVonaRole': never;
-'testVonaRoleUser': never;
-'testVonaTest': never;
-'testVonaUser': never;
+    'testVonaCategory': EntityCategoryMeta;
+'testVonaOrder': EntityOrderMeta;
+'testVonaPost': EntityPostMeta;
+'testVonaPostContent': EntityPostContentMeta;
+'testVonaProduct': EntityProductMeta;
+'testVonaRole': EntityRoleMeta;
+'testVonaRoleUser': EntityRoleUserMeta;
+'testVonaTest': EntityTestMeta;
+'testVonaUser': EntityUserMeta;
   }
 }
 declare module 'vona-module-test-vona' {

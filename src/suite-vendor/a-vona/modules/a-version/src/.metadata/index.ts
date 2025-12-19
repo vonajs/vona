@@ -43,9 +43,9 @@ export type EntityVersionInitMeta=TypeEntityMeta<EntityVersionInit,EntityVersion
 export type EntityViewRecordMeta=TypeEntityMeta<EntityViewRecord,EntityViewRecordTableName>;
 declare module 'vona-module-a-orm' {
   export interface ITableRecord {
-    'aVersion': never;
-'aVersionInit': never;
-'aViewRecord': never;
+    'aVersion': EntityVersionMeta;
+'aVersionInit': EntityVersionInitMeta;
+'aViewRecord': EntityViewRecordMeta;
   }
 }
 declare module 'vona-module-a-version' {

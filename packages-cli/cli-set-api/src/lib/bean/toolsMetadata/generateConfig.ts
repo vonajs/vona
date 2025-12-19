@@ -47,7 +47,7 @@ export const locales = {
 ${contentLocales.join('\n')}
 };
 
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}::\${K}\` {
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K) {
   return makeLocaleMagic(\`${moduleName}::\${key}\`);
 }
 `;

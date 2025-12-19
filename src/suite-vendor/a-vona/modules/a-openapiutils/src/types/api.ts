@@ -1,6 +1,6 @@
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
-import type { VonaApplication } from 'vona';
+import type { ILocaleMagic, VonaApplication } from 'vona';
 import type z from 'zod';
 import type { SchemaLikeCreate } from './decorator.ts';
 
@@ -30,7 +30,7 @@ export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => obj
 export interface IOpenApiOptions {
   public?: boolean;
   description?: string;
-  summary?: string;
+  summary?: string | ILocaleMagic;
   httpCode?: number;
   contentType?: TypeResponseContentType;
   bodySchema?: z.ZodType;
