@@ -1,3 +1,5 @@
+import type { PickString } from 'vona';
+
 export type TypeEntityMeta<T, N = string> = Required<{
   [key in keyof T]: key;
 }> & {
@@ -10,4 +12,4 @@ export const SymbolKeyFieldsMore = Symbol('$fieldsMore');
 export type TypeSymbolKeyFieldsMore = typeof SymbolKeyFieldsMore;
 
 export type TypeEntityStudentMetaSimple<T> = Omit<T, '$table' | '$comment' | '$default'>;
-export type TypeEntityStudentMetaSimpleColumns<T> = keyof TypeEntityStudentMetaSimple<T>;
+export type TypeEntityStudentMetaSimpleColumns<T> = PickString<keyof TypeEntityStudentMetaSimple<T>>;

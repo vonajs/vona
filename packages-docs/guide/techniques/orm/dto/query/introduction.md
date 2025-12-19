@@ -103,7 +103,7 @@ export class DtoOrderQuery
   @Api.field(
     v.openapi({
       filter: {
-        table: $tableName(EntityUser),
+        table: 'testVonaUser',
         joinType: 'innerJoin',
         joinOn: ['userId', 'testVonaUser.id'],
         originalName: 'name',
@@ -123,7 +123,7 @@ export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(
     v.filter({
-      table: $tableName(EntityUser),
+      table: 'testVonaUser',
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',
@@ -178,7 +178,7 @@ Vona ORM has built-in relations-based orders processing logic. You only need to 
 @Dto<IDtoOptionsOrderQuery>({
 + openapi: {
 +   filter: {
-+     table: $tableName(EntityOrder),
++     table: 'testVonaOrder',
 +   },
 + },
 })
@@ -186,7 +186,7 @@ export class DtoOrderQuery
   extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(
     v.filter({
-      table: $tableName(EntityUser),
+      table: 'testVonaUser',
       joinType: 'innerJoin',
       joinOn: ['userId', 'testVonaUser.id'],
       originalName: 'name',

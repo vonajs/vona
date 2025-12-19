@@ -4,7 +4,7 @@ import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
 import { getTableOrTableAlias, prepareClassModel } from '../../common/utils.ts';
-import { $tableName } from '../../lib/columns.ts';
+import { $tableNameFromEntity } from '../../lib/columns.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
 const SymbolModelDb = Symbol('SymbolModelDb');
@@ -74,7 +74,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   private _getTable(where: object | undefined) {
     const table = this[SymbolModelTable] ?? this.options.table;
     if (table && typeof table === 'string') return table;
-    const defaultTable = this.options.entity && $tableName(this.options.entity);
+    const defaultTable = this.options.entity && $tableNameFromEntity(this.options.entity);
     if (table && typeof table === 'function') {
       return table(this.ctx, where, defaultTable!, this) as any;
     }

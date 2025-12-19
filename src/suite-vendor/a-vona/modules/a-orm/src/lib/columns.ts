@@ -26,7 +26,7 @@ export function $columnsAll<T, TableName extends boolean, Meta extends boolean>(
   const classEntity2 = _prepareClassEntity(classEntity);
   let columns = getTargetDecoratorRuleColumnsMap(classEntity2.prototype);
   if (withTableName) {
-    const tableName = $tableName(classEntity2);
+    const tableName = $tableNameFromEntity(classEntity2);
     columns = { ...columns, $table: tableName } as any;
   }
   if (withMeta) {
@@ -44,12 +44,10 @@ export function $tableColumns<K extends keyof ITableRecord>(
   return { [tableName]: key };
 }
 
-export function $tableName<T>(
-  classEntity: (() => Constructable<T>) | Constructable<T>,
+export function $tableName<K extends keyof ITableRecord>(
+  tableName: K,
 ): keyof ITableRecord {
-  const beanOptionsEntity = appResource.getBean(_prepareClassEntity(classEntity));
-  const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
-  return entityOptions.table!;
+  return tableName;
 }
 
 export function $tableComments<T>(
@@ -90,6 +88,14 @@ export function $tableDefaults<T>(
   }
   // ok
   return defaults;
+}
+
+export function $tableNameFromEntity<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): keyof ITableRecord {
+  const beanOptionsEntity = appResource.getBean(_prepareClassEntity(classEntity));
+  const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
+  return entityOptions.table!;
 }
 
 function _prepareClassEntity<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Constructable<T> {

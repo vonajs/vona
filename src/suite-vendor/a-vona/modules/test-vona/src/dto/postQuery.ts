@@ -1,13 +1,13 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { Api, v } from 'vona-module-a-openapiutils';
-import { $Dto, $tableName } from 'vona-module-a-orm';
+import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import { EntityPost } from '../entity/post.ts';
 
 export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsPostQuery>({
-  openapi: { filter: { table: $tableName(EntityPost) } },
+  openapi: { filter: { table: 'testVonaPost' } },
 })
 export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title']) {
   @Api.field(v.optional())
