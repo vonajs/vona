@@ -51,7 +51,7 @@
     ]
   },
   "dependencies": {
-    "@cabloy/zod-to-openapi": "^8.1.4"
+    "@cabloy/zod-to-openapi": "^8.1.5"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

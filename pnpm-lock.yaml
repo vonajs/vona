@@ -42,8 +42,8 @@ importers:
         specifier: ^1.0.7
         version: link:packages-utils/zod-openapi
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.4
-        version: 8.1.4(zod@4.2.1)
+        specifier: ^8.1.5
+        version: 8.1.5(zod@4.2.1)
       '@sesamecare-oss/redlock':
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.8.2)
@@ -367,7 +367,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.107
+        specifier: ^6.0.108
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
@@ -869,8 +869,8 @@ importers:
   packages-utils/zod-openapi:
     dependencies:
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.4
-        version: 8.1.4(zod@4.2.1)
+        specifier: ^8.1.5
+        version: 8.1.5(zod@4.2.1)
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -949,8 +949,8 @@ importers:
         specifier: ^2.0.4
         version: link:../../packages-utils/zod-query
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.4
-        version: 8.1.4(zod@4.2.1)
+        specifier: ^8.1.5
+        version: 8.1.5(zod@4.2.1)
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -1809,8 +1809,8 @@ importers:
         specifier: ^2.0.4
         version: link:../../../../../packages-utils/zod-query
       '@cabloy/zod-to-openapi':
-        specifier: ^8.1.4
-        version: 8.1.4(zod@4.2.1)
+        specifier: ^8.1.5
+        version: 8.1.5(zod@4.2.1)
       '@zhennann/currency':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2604,8 +2604,8 @@ packages:
   '@cabloy/word-utils@2.0.1':
     resolution: {integrity: sha512-kZx3fdk8sOX9JpVv6Q7y6r+rbqZ0KvE8NukbvsQfSvOngV7Yi3dF8PmefCDJWuPqn6YZ4PdxKxCOWaYTrVQPQA==}
 
-  '@cabloy/zod-to-openapi@8.1.4':
-    resolution: {integrity: sha512-cGfOXe3Ve2qfLnwGTpZCLM9lq2woK6yeiNMSW8FtHmvBSQXGFTNHl8RUxC29vjk+kT7eLEZ5Fvr4h5guvPs0fg==}
+  '@cabloy/zod-to-openapi@8.1.5':
+    resolution: {integrity: sha512-NuMtCBKAFpLgzEzmj1+VAq4LJqsL2LLBfCsFoTW0Emr9QgvTA7cumb/j5tHN+FOTlndu7b+FUFXBEs87iogABw==}
     peerDependencies:
       zod: ^4.0.0
 
@@ -9991,7 +9991,7 @@ snapshots:
 
   '@cabloy/word-utils@2.0.1': {}
 
-  '@cabloy/zod-to-openapi@8.1.4(zod@4.2.1)':
+  '@cabloy/zod-to-openapi@8.1.5(zod@4.2.1)':
     dependencies:
       openapi3-ts: 4.5.0
       zod: 4.2.1
