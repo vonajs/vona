@@ -11,7 +11,6 @@ import type {
   IQueueWorks,
   TypeQueueJob,
 } from '../types/queue.ts';
-import { sleep } from '@cabloy/utils';
 import * as Bull from 'bullmq';
 import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -259,10 +258,11 @@ export class ServiceQueue extends BeanBase {
   async _queueEventsReady(queueQueue: IQueueQueue) {
     if (queueQueue.queueEventsReady) return;
     await queueQueue.queueEvents.waitUntilReady();
-    const waitUntilReady = this.scope.config.queueEvents.waitUntilReady;
-    if (waitUntilReady) {
-      await sleep(waitUntilReady);
-    }
+    // **: sleep will stop worker fetching next job?
+    // const waitUntilReady = this.scope.config.queueEvents.waitUntilReady;
+    // if (waitUntilReady) {
+    //   await sleep(waitUntilReady);
+    // }
     queueQueue.queueEventsReady = true;
   }
 
