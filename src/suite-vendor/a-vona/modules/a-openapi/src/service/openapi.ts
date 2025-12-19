@@ -10,7 +10,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { translateError } from '@cabloy/zod-errors-custom';
 import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenAPIRegistry } from '@cabloy/zod-to-openapi';
-import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, cast, LocaleModuleNameSeparator } from 'vona';
+import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $schema, bodySchemaWrapperDefault, SymbolOpenApiOptions, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
@@ -36,7 +36,6 @@ export class ServiceOpenapi extends BeanBase {
         const pathObj = apiObj.paths[key];
         for (const method in pathObj) {
           const methodObj = pathObj[method];
-          this._translateStrings(methodObj, ['description', 'summary']);
           // parameters
           for (const parameterObj of methodObj.parameters || []) {
             this._translateSchema(parameterObj.schema, generateJsonScene);
@@ -70,7 +69,6 @@ export class ServiceOpenapi extends BeanBase {
       }
     }
     // schema
-    this._translateStrings(schema, ['title', 'description']);
     if (generateJsonScene === 'api' && !schema.description && schema.title) {
       schema.description = schema.title;
       delete schema.title;
@@ -107,19 +105,6 @@ export class ServiceOpenapi extends BeanBase {
       obj.errorMessage[key] = translateError((text: string, ...args: any[]) => {
         return this.app.meta.text(text, ...args);
       }, error, scope);
-    }
-  }
-
-  private _translateStrings(obj: any, keys: string[]) {
-    for (const key of keys) {
-      this._translateString(obj, key);
-    }
-  }
-
-  private _translateString(obj: any, key: string) {
-    if (!obj) return;
-    if (obj[key] && obj[key].includes(LocaleModuleNameSeparator)) {
-      obj[key] = this.app.meta.text(obj[key]);
     }
   }
 
@@ -252,7 +237,7 @@ export class ServiceOpenapi extends BeanBase {
       operationId,
       security,
       description: actionOpenApiOptions?.description,
-      summary: actionOpenApiOptions?.summary,
+      summary: actionOpenApiOptions?.summary as string,
       request: this._collectRequest(info, controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions),
       responses: this._collectResponses(controller, actionKey, actionOpenApiOptions),
     });
