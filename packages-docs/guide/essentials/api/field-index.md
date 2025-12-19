@@ -44,9 +44,11 @@ class MetaIndex {}
 In order to make the code higher quality and easier to maintain, we can also use a typed code style
 
 ``` typescript
+import { $tableColumns } from 'vona-module-a-ormutils';
+
 @Meta({
   indexes: {
-    ...$tableColumns(() => EntityStudent, 'name'),
+    ...$tableColumns('demoStudent', 'name'),
   },
 })
 class MetaIndex {}
@@ -66,7 +68,7 @@ config.onions = {
   meta: {
     'demo-student:index': {
       indexes: {
-        demoStudent: 'name',
+        ...$tableColumns('demoStudent', 'name'),
       },
     },
   },

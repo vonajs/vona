@@ -2,9 +2,9 @@ import type { Knex } from 'knex';
 import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumn, TypeModelColumns, TypeModelColumnsStrict, TypeModelSelectAggrParamsAggrs, TypeModelSelectGroupParamsColumns, TypeModelWhere } from '../../types/index.ts';
 import { ensureArray, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
+import { $tableDefaults } from 'vona-module-a-ormutils';
 import { buildWhere } from '../../common/buildWhere.ts';
 import { isRaw } from '../../common/utils.ts';
-import { $tableDefaults } from '../../lib/columns.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
