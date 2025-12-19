@@ -34,8 +34,8 @@ export interface IMenuItem {
 
 export interface IMenuGroup {
   name: string;
-  title?: string;
-  description?: string;
+  title?: string | ILocaleMagic;
+  description?: string | ILocaleMagic;
   icon?: string;
   order?: number;
   group?: string | string[];
