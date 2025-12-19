@@ -1,9 +1,9 @@
 import { catchError, catchErrorSync } from '@cabloy/utils';
 import { closeApp, useApp } from './useApp.ts';
 
-let __sigintHandled = false;
+let __closing = false;
 
-async function _closeAppInner() {
+async function _closeInner() {
   const timeout = setTimeout(() => {
     // eslint-disable-next-line no-console
     console.log('Cleanup timed out. Forcing termination...');
@@ -20,15 +20,12 @@ async function _closeAppInner() {
 }
 
 export function handleProcessWork() {
-  process.on('SIGINT', async () => {
-    if (__sigintHandled) return;
-    __sigintHandled = true;
-    // console.log('------------SIGINT');
-    await _closeAppInner();
-  });
-  process.on('SIGUSR2', async () => {
-    // console.log('------------SIGUSR2');
-    await _closeAppInner();
+  ['SIGINT', 'SIGUSR2'].forEach(signal => {
+    process.on(signal, async () => {
+      if (__closing) return;
+      __closing = true;
+      await _closeInner();
+    });
   });
   process.on('uncaughtException', async err => {
     const app = useApp();
