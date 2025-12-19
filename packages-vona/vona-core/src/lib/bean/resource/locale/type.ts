@@ -20,3 +20,8 @@ export interface ILocaleRecord {
   'en-us': never;
   'zh-cn': never;
 }
+
+export interface ILocaleMagic<T extends string = string> {
+  toString: () => T;
+  toJSON(): () => T;
+}

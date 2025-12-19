@@ -16,7 +16,6 @@ import fse from 'fs-extra';
 import * as uuid from 'uuid';
 import { cast } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
-import { useApp } from '../framework/useApp.ts';
 import { zodSetLocaleErrors } from './zod-enhance.ts';
 
 export interface IExecuteBeanCallbackParams {
@@ -33,11 +32,6 @@ export interface IModuleAssetSceneRecord {
   templates: never;
   site: never;
   fonts: never;
-}
-
-export interface ILocaleMagic<T extends string = string> {
-  toString: () => T;
-  toJSON(): () => T;
 }
 
 const SymbolProdRootPath = Symbol('SymbolProdRootPath');
@@ -393,16 +387,4 @@ export async function loadJSONFile(fileName: string) {
 
 export async function saveJSONFile(fileName: string, json: object) {
   await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
-}
-
-export function makeLocaleMagic<T extends string>(str: T): ILocaleMagic<T> {
-  return {
-    toString() {
-      return str;
-    },
-    toJSON() {
-      const app = useApp();
-      return app.meta.text(str);
-    },
-  } as any;
 }
