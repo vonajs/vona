@@ -1,4 +1,5 @@
 /* eslint-disable */
+import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** interceptor: begin */
 export * from '../bean/interceptor.openapiSchema.ts';
 import type { IInterceptorOptionsOpenapiSchema } from '../bean/interceptor.openapiSchema.ts';
@@ -62,6 +63,43 @@ declare module 'vona-module-a-event' {
   }
 }
 /** event: end */
+/** controller: begin */
+export * from '../controller/resource.ts';
+import type { IControllerOptionsResource } from '../controller/resource.ts';
+import 'vona-module-a-web';
+declare module 'vona-module-a-web' {
+  
+    export interface IControllerRecord {
+      'a-openapischema:resource': IControllerOptionsResource;
+    }
+
+  
+}
+declare module 'vona-module-a-openapischema' {
+  
+        export interface ControllerResource {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapischema;
+        }
+
+          export interface ControllerResource {
+            get $beanFullName(): 'a-openapischema.controller.resource';
+            get $onionName(): 'a-openapischema:resource';
+            get $onionOptions(): IControllerOptionsResource;
+          } 
+}
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerResource } from '../controller/resource.ts';
+declare module 'vona-module-a-openapischema' {
+  
+    export interface IControllerOptionsResource {
+      actions?: TypeControllerOptionsActions<ControllerResource>;
+    }
+}
+
+/** controller: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';

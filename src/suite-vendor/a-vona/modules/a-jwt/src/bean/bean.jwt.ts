@@ -42,4 +42,8 @@ export class BeanJwt extends BeanBase {
   async createOauthCode(payloadData: IPayloadData, options?: IJwtSignOptions) {
     return await this.get('code').sign(payloadData, options);
   }
+
+  extractAuthTokenFromAllWays() {
+    return this.scope.service.jwtExtract.fromAllWays();
+  }
 }
