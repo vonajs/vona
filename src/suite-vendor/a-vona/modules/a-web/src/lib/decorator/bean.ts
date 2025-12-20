@@ -2,7 +2,7 @@ import type { Constructable } from 'vona';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
-import { combineApiPathControllerAndAction } from '@cabloy/utils';
+import { combineApiPathControllerAndAction, combineApiPathControllerAndActionRaw } from '@cabloy/utils';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName } from 'vona';
 import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
@@ -31,7 +31,8 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     const optionsResource = appMetadata.getOwnMetadata(SymbolControllerOptionsResource, target);
     if (optionsResource) {
       const routePath = combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, false, true);
-      recordResourceNameToRoutePath[onionNameFromBeanFullName(beanOptions.beanFullName)] = routePath;
+      const routePathRaw = combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
+      recordResourceNameToRoutePath[onionNameFromBeanFullName(beanOptions.beanFullName)] = { routePath, routePathRaw };
     }
   });
 }
