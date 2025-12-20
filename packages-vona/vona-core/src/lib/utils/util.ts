@@ -358,8 +358,9 @@ export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IB
   return onionName.replace(':', `.${sceneName}.`) as unknown as keyof IBeanRecord;
 }
 
-export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {
-  return beanFullName.replace(`.${sceneName}.`, ':');
+export function onionNameFromBeanFullName(beanFullName: string): string {
+  const parts = beanFullName.split('.');
+  return `${parts[0]}:${parts[2]}`;
 }
 
 export function filterHeaders(headers: object | undefined, whitelist: string[]) {
