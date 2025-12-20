@@ -23,10 +23,11 @@ export class BeanRouter extends BeanBase {
     // remove
     const cacheControllerRoutes = getCacheControllerRoutes(this.app);
     const routes = cacheControllerRoutes[beanFullName];
-    if (!routes) return;
-    delete cacheControllerRoutes[beanFullName];
-    for (const route of routes) {
-      app.router.off(route.routeMethod.toUpperCase() as any, route.routePath);
+    if (routes) {
+      delete cacheControllerRoutes[beanFullName];
+      for (const route of routes) {
+        app.router.off(route.routeMethod.toUpperCase() as any, route.routePath);
+      }
     }
     // register
     this.registerController(beanFullName);
