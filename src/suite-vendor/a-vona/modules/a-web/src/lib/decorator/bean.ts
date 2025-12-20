@@ -6,7 +6,7 @@ import { combineApiPathControllerAndAction } from '@cabloy/utils';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName } from 'vona';
 import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
-import { recordResourceNameToPath, SymbolControllerOptionsResource } from '../const.ts';
+import { recordResourceNameToRoutePath, SymbolControllerOptionsResource } from '../const.ts';
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
 export function Controller<T extends IDecoratorControllerOptions>(path?: string, options?: Omit<T, 'path'>): ClassDecorator;
@@ -31,7 +31,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     const optionsResource = appMetadata.getOwnMetadata(SymbolControllerOptionsResource, target);
     if (optionsResource) {
       const routePath = combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, false, true);
-      recordResourceNameToPath[onionNameFromBeanFullName(beanOptions.beanFullName)] = routePath;
+      recordResourceNameToRoutePath[onionNameFromBeanFullName(beanOptions.beanFullName)] = routePath;
     }
   });
 }

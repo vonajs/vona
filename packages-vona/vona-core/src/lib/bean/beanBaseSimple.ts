@@ -1,5 +1,6 @@
 import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.ts';
 import { appResource } from '../core/resource.ts';
+import { onionNameFromBeanFullName } from '../utils/util.ts';
 import { BeanSimple } from './beanSimple.ts';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');
@@ -27,8 +28,7 @@ export class BeanBaseSimple extends BeanSimple {
   }
 
   public get $onionName() {
-    const parts = this.$beanFullName.split('.');
-    return `${parts[0]}:${parts[2]}`;
+    return onionNameFromBeanFullName(this.$beanFullName);
   }
 
   public get $onionOptions(): unknown | undefined {
