@@ -15,7 +15,7 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
     if (headerOpenapiSchema?.toString() !== 'true') return next();
     // openapi-schema
     let body;
-    if (this.ctx.route.routePath === '/api/rest/resource/bootstrap/:resource') {
+    if (this.ctx.route.routePath === '/api/openapischema/resource/bootstrap/:resource') {
       const resource = this.ctx.request.params.resource;
       const routePathInfo: IRecordResourceNameToRoutePathItem = recordResourceNameToRoutePath[resource];
       if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);

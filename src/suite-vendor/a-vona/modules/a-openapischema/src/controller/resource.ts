@@ -5,7 +5,7 @@ import { Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsResource extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsResource>('resource')
+@Controller<IControllerOptionsResource>('resource', { exclude: true })
 export class ControllerResource extends BeanBase {
   @Web.get('bootstrap/:resource')
   @Passport.public()
