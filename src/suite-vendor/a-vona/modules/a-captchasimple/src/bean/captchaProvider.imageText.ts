@@ -1,6 +1,8 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
 import { getRandomInt } from '@cabloy/utils';
 import svgCaptcha, { ConfigObject } from '@zhennann/svg-captcha';
+import fse from 'fs-extra';
+import opentype from 'opentype.js';
 import svg64 from 'svg64';
 import { BeanBase, cast } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
@@ -26,7 +28,7 @@ export interface ICaptchaProviderOptionsImageText extends IDecoratorCaptchaProvi
 export class CaptchaProviderImageText
   extends BeanBase implements ICaptchaProviderExecute<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload> {
   async create(options: ICaptchaProviderOptionsImageText): Promise<TypeCaptchaProviderImageTextData> {
-    this._confirmFont(options);
+    await this._confirmFont(options);
     let type = options.type;
     if (!type) {
       type = CaptchaProviderImageTextTypes[getRandomInt(2, 0)];
@@ -43,9 +45,27 @@ export class CaptchaProviderImageText
     return !!tokenInput && !!token && tokenInput.toLowerCase() === token.toLowerCase();
   }
 
-  private _confirmFont(options: ICaptchaProviderOptionsImageText) {
+  private async _confirmFont(options: ICaptchaProviderOptionsImageText) {
     if (cast(svgCaptcha.options).font) return;
-    const url = options.fontPath || this.scope.asset.get('fonts', 'Comismsh.ttf');
-    svgCaptcha.loadFont(url);
+    const fontFile = options.fontPath || this.scope.asset.get('fonts', 'Comismsh.ttf');
+    const font = await _loadFont(fontFile);
+    cast(svgCaptcha.options).font = font;
+    cast(svgCaptcha.options).ascender = font.ascender;
+    cast(svgCaptcha.options).descender = font.descender;
   }
+}
+
+async function _loadFont(fontFile: string) {
+  const buffer = await fse.readFile(fontFile);
+  return opentype.parse(_nodeBufferToArrayBuffer(buffer));
+}
+
+function _nodeBufferToArrayBuffer(buffer) {
+  const ab = new ArrayBuffer(buffer.length);
+  const view = new Uint8Array(ab);
+  for (let i = 0; i < buffer.length; ++i) {
+    view[i] = buffer[i];
+  }
+
+  return ab;
 }
