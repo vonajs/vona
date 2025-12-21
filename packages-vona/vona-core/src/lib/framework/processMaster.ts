@@ -1,4 +1,6 @@
 import cluster from 'node:cluster';
+import chalk from 'chalk';
+import { useApp } from './useApp.ts';
 
 let __closing = false;
 let __timeout;
@@ -37,6 +39,14 @@ export function handleProcessMaster(workers: number) {
     // console.log(`----------------- worker ${_worker.process.pid} died`, _code, _signal);
     if (cluster.workers && Object.keys(cluster.workers).length === 0) {
       clearTimeout(__timeout);
+      // log
+      const app = useApp();
+      if (app.meta.env.LOGGER_DUMMY !== 'true') {
+        const message = `Master shutdown gracefully: ${process.pid}`;
+        // eslint-disable-next-line
+        console.log(chalk.cyan(message));
+      }
+      // exit
       process.exit(0);
     }
   });
