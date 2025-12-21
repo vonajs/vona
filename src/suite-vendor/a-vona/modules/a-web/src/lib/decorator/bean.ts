@@ -2,8 +2,7 @@ import type { Constructable } from 'vona';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
-import { combineApiPathControllerAndAction, combineApiPathControllerAndActionRaw } from '@cabloy/utils';
-import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName } from 'vona';
+import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName, useApp } from 'vona';
 import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { recordResourceNameToRoutePath, SymbolControllerOptionsResource } from '../const.ts';
@@ -31,8 +30,15 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     const onionName = onionNameFromBeanFullName(beanOptions.beanFullName);
     const optionsResource = appMetadata.getOwnMetadata(SymbolControllerOptionsResource, target);
     if (optionsResource) {
-      const apiPath = combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, true, true);
-      const routePathRaw = combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
+      const app = useApp();
+      const apiPath = app.util.combineApiPathControllerAndAction(
+        beanOptions.module,
+        cast(beanOptions.options).path,
+        undefined,
+        true,
+        true,
+      );
+      const routePathRaw = app.util.combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
       recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw };
     } else {
       // for hmr
