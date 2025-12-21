@@ -73,14 +73,17 @@ export class ServiceHmr extends BeanBase {
       if (typeof item !== 'function') continue;
       beanOptions = appResource.getBean(item);
       if (!beanOptions) continue;
-      const beanFullName = beanOptions.beanFullName;
-      if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
-        this.app.bean.worker.reload();
-      } else {
-        await this._reloadBean(beanOptions.beanFullName);
-      }
+      await this.reloadBean(beanOptions.beanFullName);
     }
     return beanOptions;
+  }
+
+  public async reloadBean(beanFullName: string) {
+    if (appHmrDeps.deps[beanFullName] && appHmrDeps.deps[beanFullName].size > 0) {
+      this.app.bean.worker.reload();
+    } else {
+      await this._reloadBean(beanFullName);
+    }
   }
 
   private async _reloadBean(beanFullName: string) {
