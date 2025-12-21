@@ -1,4 +1,29 @@
 /* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.hmr.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-hmr' {
+  
+        export interface BeanHmr {
+          /** @internal */
+          get scope(): ScopeModuleAHmr;
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import type { BeanHmr } from '../bean/bean.hmr.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'hmr': BeanHmr;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/hmr.ts';
 export * from '../service/watch.ts';
