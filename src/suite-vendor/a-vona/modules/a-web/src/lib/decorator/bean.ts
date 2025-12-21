@@ -30,9 +30,9 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     // map: resourceName->api path
     const optionsResource = appMetadata.getOwnMetadata(SymbolControllerOptionsResource, target);
     if (optionsResource) {
-      const routePath = combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, false, true);
+      const apiPath = combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, true, true);
       const routePathRaw = combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
-      recordResourceNameToRoutePath[onionNameFromBeanFullName(beanOptions.beanFullName)] = { routePath, routePathRaw };
+      recordResourceNameToRoutePath[onionNameFromBeanFullName(beanOptions.beanFullName)] = { apiPath, routePathRaw };
     }
   });
 }

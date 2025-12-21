@@ -3,7 +3,7 @@ import type { IControllerRecord } from '../types/controller.ts';
 import type { ContextRoute } from '../types/router.ts';
 
 export interface IRecordResourceNameToRoutePathItem {
-  routePath: string;
+  apiPath: string;
   routePathRaw: string;
 }
 

@@ -27,7 +27,7 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
           [$customKey('x-vona-openapi-schema')]: true,
         },
       });
-      body = Object.assign({}, data, { api: routePathInfo.routePath });
+      body = Object.assign({}, data, { api: routePathInfo.apiPath });
     } else {
       const data: TypeEventRetrieveOpenapiSchemaData = { route: this.ctx.route };
       body = await this.scope.event.retrieveOpenapiSchema.emit(data, async data => {
