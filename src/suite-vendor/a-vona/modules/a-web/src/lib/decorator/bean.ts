@@ -28,11 +28,15 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     // IOpenApiOptions
     mergeActionsOpenapiMetadata(target);
     // map: resourceName->api path
+    const onionName = onionNameFromBeanFullName(beanOptions.beanFullName);
     const optionsResource = appMetadata.getOwnMetadata(SymbolControllerOptionsResource, target);
     if (optionsResource) {
       const apiPath = combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, true, true);
       const routePathRaw = combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
-      recordResourceNameToRoutePath[onionNameFromBeanFullName(beanOptions.beanFullName)] = { apiPath, routePathRaw };
+      recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw };
+    } else {
+      // for hmr
+      delete recordResourceNameToRoutePath[onionName];
     }
   });
 }
