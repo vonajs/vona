@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { cel, evaluateExpressions } from '@cabloy/celjs';
+import { cel, evaluateExpressions } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('celjs.test.ts', () => {
