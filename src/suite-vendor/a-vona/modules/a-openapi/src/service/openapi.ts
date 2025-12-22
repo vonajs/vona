@@ -144,7 +144,7 @@ export class ServiceOpenapi extends BeanBase {
     if (children) {
       if (Array.isArray(children)) {
         componentNew.props.children = children.map(item => this._translateJsxRender(item));
-      } else if (typeof children === 'object') {
+      } else if (typeof children === 'object' && !children.toJSON) {
         componentNew.props.children = this._translateJsxRender(children);
       }
     }
