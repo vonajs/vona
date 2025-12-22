@@ -68,6 +68,10 @@ export class BeanOpenapi extends BeanBase {
       version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this.scope.service.openapi.translate(apiObj, 'rest');
+    const generator2 =
+      version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+    const apiObj2 = generator2.generateDocument(this.scope.config.generateDocument[version]);
+    this.scope.service.openapi.translate(apiObj2, 'rest');
     return apiObj as IOpenapiObject[K];
   }
 }

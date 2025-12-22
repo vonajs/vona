@@ -38,10 +38,15 @@ export class ServiceOpenapi extends BeanBase {
           const methodObj = pathObj[method];
           // parameters
           for (const parameterObj of methodObj.parameters || []) {
-            this._translateSchema(parameterObj.schema, generateJsonScene);
+            if (parameterObj.schema) {
+              parameterObj.schema = this._translateSchema(parameterObj.schema, generateJsonScene);
+            }
           }
           // requestBody
-          this._translateSchema(methodObj.requestBody?.content?.['application/json']?.schema, generateJsonScene);
+          if (methodObj.requestBody?.content?.['application/json']?.schema) {
+            methodObj.requestBody.content['application/json'].schema =
+              this._translateSchema(methodObj.requestBody.content['application/json'].schema, generateJsonScene);
+          }
         }
       }
     }
@@ -49,13 +54,15 @@ export class ServiceOpenapi extends BeanBase {
     if (apiObj.components?.schemas) {
       for (const key in apiObj.components.schemas) {
         const schema = apiObj.components.schemas[key];
-        this._translateSchema(schema, generateJsonScene);
+        if (schema) {
+          apiObj.components.schemas[key] = this._translateSchema(schema, generateJsonScene);
+        }
       }
     }
   }
 
   private _translateSchema(schema: any, generateJsonScene: TypeGenerateJsonScene) {
-    if (!schema) return;
+    schema = { ...schema };
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
     // serializerTransforms
     delete schema.serializerTransforms;
@@ -82,14 +89,18 @@ export class ServiceOpenapi extends BeanBase {
     if (properties && typeof properties === 'object') {
       for (const prop in properties) {
         const propObj = properties[prop];
-        this._translateSchema(propObj, generateJsonScene);
+        if (propObj) {
+          properties[prop] = this._translateSchema(propObj, generateJsonScene);
+        }
       }
     }
     // items
     const items = cast<SchemaObject30 | SchemaObject31>(schema).items;
     if (items && typeof items === 'object') {
-      this._translateSchema(items, generateJsonScene);
+      cast<SchemaObject30 | SchemaObject31>(schema).items = this._translateSchema(items, generateJsonScene);
     }
+    // ok
+    return schema;
   }
 
   private _translateErrorMessages(obj: any) {
