@@ -98,7 +98,12 @@ declare module 'vona-module-a-openapischema' {
       actions?: TypeControllerOptionsActions<ControllerResource>;
     }
 }
+declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord{
+        '/openapischema/resource/bootstrap/:resource': undefined;
+    }
 
+}
 /** controller: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
