@@ -25,7 +25,6 @@ export default function eslintConfig(config, ...args) {
         ...globals.node,
         ...globals.jest,
         NodeJS: true,
-        // BigNumber: true,
       },
     },
   }, ...args);
