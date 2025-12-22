@@ -88,6 +88,7 @@ function __prepareInjectSelectorInfo_init(
   const withSelector = init.withSelector ?? false;
   const _args = init.args ?? [init.arg];
   if (!_args) return;
-  const args = _args.map(arg => evaluateExpressions(arg, { self: beanInstance, app: beanInstance.app, ctx: beanInstance.ctx }));
+  const context = { self: { ...beanInstance } };
+  const args = _args.map(arg => evaluateExpressions(arg, context));
   return { withSelector, args };
 }

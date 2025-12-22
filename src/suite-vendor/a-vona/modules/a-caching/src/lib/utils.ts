@@ -24,9 +24,7 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
       prop,
       intention,
       options,
-      self: receiver,
-      app: cast(receiver).app,
-      ctx: cast(receiver).ctx,
+      self: { ...receiver },
     }));
   }
   // default: only use first arg
@@ -62,9 +60,7 @@ export function combineCachingValue(info: ICachingActionValueInfo, options: IAop
       prop,
       intention,
       options,
-      self: receiver,
-      app: cast(receiver).app,
-      ctx: cast(receiver).ctx,
+      self: { ...receiver },
     });
   }
   // default

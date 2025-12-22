@@ -81,9 +81,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
 
   _getContext(options: IAopMethodOptionsLog, receiver: any) {
     return evaluateExpressions(options.context, {
-      self: receiver,
-      app: cast(receiver).app,
-      ctx: cast(receiver).ctx,
+      self: { ...receiver },
     });
   }
 

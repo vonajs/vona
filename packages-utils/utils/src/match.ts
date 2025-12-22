@@ -11,7 +11,7 @@ export function matchSelector<T>(match: TypeMatchSelectorRules<T>, selector: str
       match = evaluateSimple(match.substring(StringPrefixRegexp.length));
     }
     return (
-      (typeof match === 'string' && match.startsWith(StringPrefixCel) && !!evaluateExpressions(match, { selector, context: matchArgs[0], args: matchArgs })) ||
+      (typeof match === 'string' && match.startsWith(StringPrefixCel) && !!evaluateExpressions(match, { selector, context: (matchArgs[0] && typeof matchArgs[0] === 'object') ? { ...matchArgs[0] } : matchArgs[0], args: matchArgs })) ||
       (typeof match === 'string' && !match.startsWith(StringPrefixCel) && typeof selector === 'string' && match === selector) ||
       (match instanceof RegExp && typeof selector === 'string' && match.test(selector)) ||
       (typeof match === 'function' && (match as any).call(matchThis, selector, ...matchArgs))
