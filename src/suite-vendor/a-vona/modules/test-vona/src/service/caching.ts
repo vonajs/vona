@@ -1,6 +1,6 @@
 import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from 'vona-module-a-caching';
 import type { TSummerCacheTestData } from '../bean/summerCache.test.ts';
-import { cel } from '@cabloy/utils';
+import { cel } from '@cabloy/celjs';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { Caching } from 'vona-module-a-caching';
