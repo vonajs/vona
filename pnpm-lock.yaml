@@ -629,6 +629,15 @@ importers:
         specifier: ^6.0.1
         version: 6.1.2
 
+  packages-utils/celjs:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.2
+
   packages-utils/compose:
     devDependencies:
       clean-package:
