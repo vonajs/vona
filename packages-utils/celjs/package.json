@@ -41,7 +41,6 @@
     ]
   },
   "dependencies": {
-    "@cabloy/utils": "workspace:^",
     "@marcbachmann/cel-js": "^6.4.0"
   },
   "devDependencies": {
