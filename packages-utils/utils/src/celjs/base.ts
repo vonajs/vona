@@ -1,4 +1,5 @@
 import { Environment } from '@marcbachmann/cel-js';
+import { getProperty } from '../utils.ts';
 
 export const celEnvBase = new Environment({
   unlistedVariablesAreDyn: true,
@@ -17,6 +18,13 @@ celEnvBase.registerFunction('join(list):string', list => {
 });
 celEnvBase.registerFunction('join(list,string):string', (list, sep) => {
   return _join(list, sep);
+});
+
+celEnvBase.registerFunction('get(map,string):dyn', (obj, name) => {
+  return getProperty(obj, name);
+});
+celEnvBase.registerFunction('get(map,string,string):dyn', (obj, name, sep) => {
+  return getProperty(obj, name, sep);
 });
 
 celEnvBase.registerOperator('string + int', (str, n) => str + String(n));

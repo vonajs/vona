@@ -1,4 +1,6 @@
-import { evaluateExpressions, evaluateSimple, StringPrefixCel, StringPrefixRegexp } from '@cabloy/celjs';
+import { evaluateExpressions } from './celjs/evaluate.ts';
+import { StringPrefixCel, StringPrefixRegexp } from './celjs/types.ts';
+import { evaluateSimple } from './celjs/utils.ts';
 
 export type TypeMatchSelectorFunction = (this: any, ...args: any[]) => boolean;
 export type TypeMatchSelectorRule<T> = T | RegExp | TypeMatchSelectorFunction;

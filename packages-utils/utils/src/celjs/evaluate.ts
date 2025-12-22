@@ -1,10 +1,8 @@
 import type { Environment, ParseResult } from '@marcbachmann/cel-js';
+import { isNil } from '../check.ts';
 import { celEnvBase } from './base.ts';
 import { StringPrefixCel, StringPrefixRaw, StringPrefixRegexp } from './types.ts';
 import { evaluateSimple } from './utils.ts';
-
-const isUndefined = (obj: any): obj is undefined => typeof obj === 'undefined';
-const isNil = (val: any): val is null | undefined => isUndefined(val) || val === null;
 
 export function evaluateExpressions<T = any>(
   expressions: any,
