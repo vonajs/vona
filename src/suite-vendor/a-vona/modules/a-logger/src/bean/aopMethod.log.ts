@@ -1,7 +1,7 @@
 import type { ILoggerChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
 import type winston from 'winston';
-import { evaluateExpressions } from '@cabloy/utils';
+import { evaluateExpressions } from '@cabloy/celjs';
 import { BeanAopMethodBase, cast, SymbolBeanFullName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 

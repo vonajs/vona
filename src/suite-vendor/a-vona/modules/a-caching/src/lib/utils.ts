@@ -1,6 +1,7 @@
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
 import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from '../types/caching.ts';
-import { evaluateExpressions, isNil } from '@cabloy/utils';
+import { evaluateExpressions } from '@cabloy/celjs';
+import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
 

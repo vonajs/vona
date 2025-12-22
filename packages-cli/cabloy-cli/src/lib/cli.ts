@@ -1,4 +1,4 @@
-import { evaluate } from '@cabloy/utils';
+import { evaluate } from '@cabloy/celjs';
 import BaseCommand from '@zhennann/common-bin';
 import chalk from 'chalk';
 import enquirer from 'enquirer';

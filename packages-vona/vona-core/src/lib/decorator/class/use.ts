@@ -7,7 +7,8 @@ import type {
   IInjectSelectorInfo,
   IUsePrepareArgResult,
 } from '../index.ts';
-import { evaluateExpressions, isNilOrEmptyString } from '@cabloy/utils';
+import { evaluateExpressions } from '@cabloy/celjs';
+import { isNilOrEmptyString } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.ts';
 import { appResource } from '../../core/resource.ts';
 
