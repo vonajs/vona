@@ -40,6 +40,10 @@
       "exports.\\..import"
     ]
   },
+  "dependencies": {
+    "@cabloy/utils": "workspace:^",
+    "@marcbachmann/cel-js": "^6.4.0"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
