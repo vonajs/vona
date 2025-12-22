@@ -17,6 +17,7 @@ import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field', 'files', 'file'];
+const symbolJsxRenderTranslated = Symbol('symbolJsxRenderTranslated');
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
@@ -62,7 +63,6 @@ export class ServiceOpenapi extends BeanBase {
   }
 
   private _translateSchema(schema: any, generateJsonScene: TypeGenerateJsonScene) {
-    schema = { ...schema };
     if (schema.type === 'object' && schema.required === undefined) schema.required = [];
     // serializerTransforms
     delete schema.serializerTransforms;
@@ -134,7 +134,9 @@ export class ServiceOpenapi extends BeanBase {
   }
 
   private _translateJsxRender(component: any) {
+    if (component[symbolJsxRenderTranslated] === true) return component;
     const componentNew: any = {};
+    componentNew[symbolJsxRenderTranslated] = true;
     componentNew.type = typeof component.type === 'function' ? component.type() : component.type;
     componentNew.key = component.key;
     componentNew.props = { ...component.props };
