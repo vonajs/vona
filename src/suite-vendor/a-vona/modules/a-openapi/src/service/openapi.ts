@@ -75,6 +75,8 @@ export class ServiceOpenapi extends BeanBase {
     }
     // errorMessage
     this._translateErrorMessages(schema);
+    // jsxRender
+    this._translateJsxRenders(schema);
     // properties
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
@@ -105,6 +107,25 @@ export class ServiceOpenapi extends BeanBase {
       obj.errorMessage[key] = translateError((text: string, ...args: any[]) => {
         return this.app.meta.text(text, ...args);
       }, error, scope);
+    }
+  }
+
+  private _translateJsxRenders(obj: any) {
+    this._translateJsxRender(obj.rest?.render);
+    this._translateJsxRender(obj.rest?.table?.render);
+    this._translateJsxRender(obj.rest?.form?.render);
+  }
+
+  private _translateJsxRender(component: any) {
+    const componentNew: any = {};
+    componentNew.type = typeof component.type === 'function' ? component.type() : component.type;
+    componentNew.key = component.key;
+    componentNew.props = { ...component.props };
+    const children = componentNew.props.children;
+    if (children) {
+      if (typeof children === 'object') {
+        componentNew.props.children = this._translateJsxRender(children);
+      }
     }
   }
 
