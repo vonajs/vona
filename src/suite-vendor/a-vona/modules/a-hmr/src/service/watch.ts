@@ -19,6 +19,8 @@ const __pathesWatch = [
   '**/src/model/*.ts',
   '**/src/service/*.ts',
   '**/src/bean/*.*.ts',
+  '**/src/dto/*.ts(x)?',
+  '**/src/entity/*.ts(x)?',
 ];
 
 const __pathesWatchStrict: TypePathWatchStrict[] = [
@@ -29,6 +31,8 @@ const __pathesWatchStrict: TypePathWatchStrict[] = [
   ['controller', /\/src\/controller\/[^/]+.ts/],
   ['model', /\/src\/model\/[^/]+.ts/],
   ['service', /\/src\/service\/[^/]+.ts/],
+  ['dto', /\/src\/dto\/[^/]+.tsx?/],
+  ['entity', /\/src\/entity\/[^/]+.tsx?/],
   ['bean', /\/src\/bean\/[^/]+.ts/],
 ];
 

@@ -70,6 +70,8 @@ export class CliBinDev extends BeanCliBase {
           '**/src/model/*.ts',
           '**/src/service/*.ts',
           '**/src/bean/*.*.ts',
+          '**/src/dto/*.ts(x)?',
+          '**/src/entity/*.ts(x)?',
         ],
       });
       nodemon.on('quit', () => {
