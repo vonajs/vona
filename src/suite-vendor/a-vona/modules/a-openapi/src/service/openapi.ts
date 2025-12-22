@@ -111,9 +111,15 @@ export class ServiceOpenapi extends BeanBase {
   }
 
   private _translateJsxRenders(obj: any) {
-    this._translateJsxRender(obj.rest?.render);
-    this._translateJsxRender(obj.rest?.table?.render);
-    this._translateJsxRender(obj.rest?.form?.render);
+    if (obj.rest?.render) {
+      obj.rest.render = this._translateJsxRender(obj.rest.render);
+    }
+    if (obj.rest?.table?.render) {
+      obj.rest.table.render = this._translateJsxRender(obj.rest.table.render);
+    }
+    if (obj.rest?.form?.render) {
+      obj.rest.form.render = this._translateJsxRender(obj.rest.form.render);
+    }
   }
 
   private _translateJsxRender(component: any) {
@@ -123,10 +129,13 @@ export class ServiceOpenapi extends BeanBase {
     componentNew.props = { ...component.props };
     const children = componentNew.props.children;
     if (children) {
-      if (typeof children === 'object') {
+      if (Array.isArray(children)) {
+        componentNew.props.children = children.map(item => this._translateJsxRender(item));
+      } else if (typeof children === 'object') {
         componentNew.props.children = this._translateJsxRender(children);
       }
     }
+    return componentNew;
   }
 
   public collectRegistry() {
