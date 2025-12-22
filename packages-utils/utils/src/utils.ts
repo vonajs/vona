@@ -1,3 +1,5 @@
+import { isNil } from './check.ts';
+
 export function deprecated(oldUsage, newUsage) {
   const message = '`'
     .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
@@ -125,7 +127,8 @@ export function combineQueries(pagePath?: string, queries?: Record<string, any>)
   if (queries) {
     for (const key in queries) {
       const value = queries[key];
-      if (value && typeof value === 'object') {
+      if (isNil(value)) continue;
+      if (typeof value === 'object') {
         query2.push([key, value]);
       } else {
         parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);

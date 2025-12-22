@@ -26,8 +26,8 @@ export async function globBeanFiles(
   const result: IGlobBeanFile[] = [];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = sceneMeta.sceneIsolate
-    ? `src/${sceneName}/*.ts`
-    : `src/bean/${sceneName}.*.ts`;
+    ? `src/${sceneName}/*.ts(x)?`
+    : `src/bean/${sceneName}.*.ts(x)?`;
   const files = await globby(pattern, { cwd: modulePath });
   if (files.length === 0) return result;
   files.sort();
