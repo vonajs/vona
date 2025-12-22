@@ -46,6 +46,7 @@
     }
   },
   "dependencies": {
+    "react": "^19.2.3",
     "vona": "^5.0.247"
   },
   "devDependencies": {
