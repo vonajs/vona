@@ -153,7 +153,7 @@ export class CliBinBuild extends BeanCliBase {
       json(),
       commonjs(),
       babel({
-        include: '**/*.ts',
+        include: '**/*.ts(x)?',
         extensions: ['.ts', '.tsx'],
         babelHelpers: 'bundled',
         skipPreflightCheck: true,
