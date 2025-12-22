@@ -33,7 +33,7 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.0.0
+        specifier: ^2.0.1
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.1
@@ -313,7 +313,7 @@ importers:
         version: 4.2.1
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.76
+        specifier: ^3.0.77
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -370,7 +370,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.110
+        specifier: ^6.0.111
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
@@ -551,6 +551,9 @@ importers:
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.53.5)
+      '@rollup/plugin-typescript':
+        specifier: ^12.3.0
+        version: 12.3.0(rollup@4.53.5)(tslib@2.8.1)(typescript@5.9.3)
       babel-plugin-transform-typescript-metadata:
         specifier: ^0.3.2
         version: 0.3.2(@babel/core@7.28.5)(@babel/traverse@7.28.5)
@@ -3484,6 +3487,19 @@ packages:
       rollup: ^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
+        optional: true
+
+  '@rollup/plugin-typescript@12.3.0':
+    resolution: {integrity: sha512-7DP0/p7y3t67+NabT9f8oTBFE6gGkto4SA6Np2oudYmZE/m1dt8RB0SjL1msMxFpLo631qjRCcBlAbq1ml/Big==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0||^3.0.0||^4.0.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      tslib:
         optional: true
 
   '@rollup/pluginutils@5.3.0':
@@ -10955,6 +10971,15 @@ snapshots:
       terser: 5.44.1
     optionalDependencies:
       rollup: 4.53.5
+
+  '@rollup/plugin-typescript@12.3.0(rollup@4.53.5)(tslib@2.8.1)(typescript@5.9.3)':
+    dependencies:
+      '@rollup/pluginutils': 5.3.0(rollup@4.53.5)
+      resolve: 1.22.11
+      typescript: 5.9.3
+    optionalDependencies:
+      rollup: 4.53.5
+      tslib: 2.8.1
 
   '@rollup/pluginutils@5.3.0(rollup@4.53.5)':
     dependencies:

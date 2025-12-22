@@ -12,6 +12,7 @@ import jsonImport from '@rollup/plugin-json';
 import resolveImport from '@rollup/plugin-node-resolve';
 import replaceImport from '@rollup/plugin-replace';
 import terserImport from '@rollup/plugin-terser';
+import typescriptImport from '@rollup/plugin-typescript';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import { rimraf } from 'rimraf';
@@ -20,6 +21,7 @@ import { generateConfigDefine, getAbsolutePathOfModule, getOutDir, getOutRelease
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
+const typescript = typescriptImport as any as typeof typescriptImport.default;
 const resolve = resolveImport as any as typeof resolveImport.default;
 // const swc = swcImport as any as typeof swcImport.default;
 const json = jsonImport as any as typeof jsonImport.default;
@@ -152,6 +154,14 @@ export class CliBinBuild extends BeanCliBase {
       }),
       json(),
       commonjs(),
+      typescript({
+        module: 'nodenext',
+        compilerOptions: {
+          noCheck: true,
+          declaration: false,
+          composite: false,
+        },
+      }),
       babel({
         include: '**/*.ts(x)?',
         extensions: ['.ts', '.tsx'],
