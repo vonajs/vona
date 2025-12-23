@@ -49,6 +49,8 @@ export class CliBinBuildModule extends BeanCliBase {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
 
+    const sourceMap = argv.sourcemap;
+
     const babelPluginVonaBeanModule = getAbsolutePathOfModule('babel-plugin-vona-bean-module', '');
     const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
     const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
@@ -70,7 +72,9 @@ export class CliBinBuildModule extends BeanCliBase {
           noCheck: true,
           declaration: false,
           composite: false,
+          sourceMap,
         },
+        outputToFilesystem: false,
       }),
       babel({
         include: '**/*.ts(x)?',
@@ -113,7 +117,7 @@ export class CliBinBuildModule extends BeanCliBase {
       dir: path.join(projectPath, 'dist'),
       // file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
-      sourcemap: argv.sourcemap,
+      sourcemap: sourceMap,
       // https://github.com/rollup/rollup/issues/4166
       inlineDynamicImports: true,
     };

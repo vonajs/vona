@@ -133,6 +133,8 @@ export class CliBinBuild extends BeanCliBase {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
 
+    const sourceMap = process.env.BUILD_SOURCEMAP === 'true';
+
     const replaceValues = generateConfigDefine(env, ['NODE_ENV', 'META_MODE', 'META_FLAVOR']);
 
     const babelPluginVonaBeanModule = getAbsolutePathOfModule('babel-plugin-vona-bean-module', '');
@@ -160,7 +162,9 @@ export class CliBinBuild extends BeanCliBase {
           noCheck: true,
           declaration: false,
           composite: false,
+          sourceMap,
         },
+        outputToFilesystem: false,
       }),
       babel({
         include: '**/*.ts(x)?',
@@ -199,7 +203,7 @@ export class CliBinBuild extends BeanCliBase {
       dir: outDir,
       // file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
-      sourcemap: process.env.BUILD_SOURCEMAP === 'true',
+      sourcemap: sourceMap,
       // https://github.com/rollup/rollup/issues/4166
       inlineDynamicImports: false, // should not true
     };

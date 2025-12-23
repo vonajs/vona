@@ -44,6 +44,8 @@ export class CliBinBuildGeneral extends BeanCliBase {
     const { argv } = this.context;
     const aliasEntries: aliasImport.Alias[] = [];
 
+    const sourceMap = argv.sourcemap;
+
     const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
     const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
     const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
@@ -98,7 +100,7 @@ export class CliBinBuildGeneral extends BeanCliBase {
       dir: path.join(projectPath, 'dist'),
       // file: path.join(projectPath, 'dist/index.js'),
       format: 'esm',
-      sourcemap: argv.sourcemap,
+      sourcemap: sourceMap,
       // https://github.com/rollup/rollup/issues/4166
       inlineDynamicImports: true,
     };
