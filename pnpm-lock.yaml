@@ -485,7 +485,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.440
+        specifier: ^1.0.441
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -558,7 +558,7 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2(@babel/core@7.28.5)(@babel/traverse@7.28.5)
       babel-plugin-vona-bean-module:
-        specifier: ^1.0.0
+        specifier: ^1.0.1
         version: link:../../packages-utils/babel-plugin-vona-bean-module
       chalk:
         specifier: ^3.0.0
@@ -925,7 +925,7 @@ importers:
         specifier: ^5.0.111
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.243
+        specifier: ^5.0.244
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1270,7 +1270,7 @@ importers:
         specifier: ^5.0.28
         version: link:modules/a-executor
       vona-module-a-hmr:
-        specifier: ^5.0.5
+        specifier: ^5.0.6
         version: link:modules/a-hmr
       vona-module-a-i18n:
         specifier: ^5.0.22
@@ -1303,16 +1303,16 @@ importers:
         specifier: ^5.0.32
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.0.60
+        specifier: ^5.0.61
         version: link:modules/a-openapi
       vona-module-a-openapischema:
-        specifier: ^5.0.24
+        specifier: ^5.0.25
         version: link:modules/a-openapischema
       vona-module-a-openapiutils:
         specifier: ^5.0.13
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.0.93
+        specifier: ^5.0.94
         version: link:modules/a-orm
       vona-module-a-ormdialect:
         specifier: ^5.0.25
@@ -1375,7 +1375,7 @@ importers:
         specifier: ^5.0.30
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.0.37
+        specifier: ^5.0.38
         version: link:modules/a-web
       vona-module-a-worker:
         specifier: ^5.0.26
