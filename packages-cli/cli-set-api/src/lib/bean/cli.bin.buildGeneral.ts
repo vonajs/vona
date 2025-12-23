@@ -9,6 +9,7 @@ import resolveImport from '@rollup/plugin-node-resolve';
 import terserImport from '@rollup/plugin-terser';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
+import { getAbsolutePathOfModule } from '../utils.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
 const resolve = resolveImport as any as typeof resolveImport.default;
@@ -43,6 +44,11 @@ export class CliBinBuildGeneral extends BeanCliBase {
     const { argv } = this.context;
     const aliasEntries: aliasImport.Alias[] = [];
 
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
+    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
+    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
+
     const plugins = [
       alias({
         entries: aliasEntries,
@@ -60,10 +66,10 @@ export class CliBinBuildGeneral extends BeanCliBase {
         babelrc: false,
         configFile: false,
         plugins: [
-          ['babel-plugin-transform-typescript-metadata'],
-          ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
-          ['@babel/plugin-transform-class-properties', { loose: true }],
-          ['@babel/plugin-transform-typescript'],
+          [babelPluginTransformTypescriptMetadata],
+          [babelPluginProposalDecorators, { version: 'legacy' }],
+          [babelPluginTransformClassProperties, { loose: true }],
+          [babelPluginTransformTypescript],
         ],
       }),
     ];

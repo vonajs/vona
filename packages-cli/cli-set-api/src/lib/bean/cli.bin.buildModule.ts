@@ -10,6 +10,7 @@ import terserImport from '@rollup/plugin-terser';
 import typescriptImport from '@rollup/plugin-typescript';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
+import { getAbsolutePathOfModule } from '../utils.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
 const typescript = typescriptImport as any as typeof typescriptImport.default;
@@ -48,6 +49,12 @@ export class CliBinBuildModule extends BeanCliBase {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
 
+    const babelPluginVonaBeanModule = getAbsolutePathOfModule('babel-plugin-vona-bean-module', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
+    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
+    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
+
     const plugins = [
       alias({
         entries: aliasEntries,
@@ -73,11 +80,11 @@ export class CliBinBuildModule extends BeanCliBase {
         babelrc: false,
         configFile: false,
         plugins: [
-          ['babel-plugin-vona-bean-module', { brandName: 'vona' }],
-          ['babel-plugin-transform-typescript-metadata'],
-          ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
-          ['@babel/plugin-transform-class-properties', { loose: true }],
-          ['@babel/plugin-transform-typescript'],
+          [babelPluginVonaBeanModule, { brandName: 'vona' }],
+          [babelPluginTransformTypescriptMetadata],
+          [babelPluginProposalDecorators, { version: 'legacy' }],
+          [babelPluginTransformClassProperties, { loose: true }],
+          [babelPluginTransformTypescript],
         ],
       }),
     ];
