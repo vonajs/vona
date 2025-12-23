@@ -871,8 +871,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       '@marcbachmann/cel-js':
-        specifier: ^6.4.0
-        version: 6.4.0
+        specifier: ^6.5.1
+        version: 6.5.1
       object-hash:
         specifier: ^3.0.0
         version: 3.0.0
@@ -3178,8 +3178,8 @@ packages:
     resolution: {integrity: sha512-hUTEWrR8zH+/Z3bp/R1aLm6DW8vB/BB7KH7Yeg4fMfrvSwxegiLVW9uJFAzWkK4mzEagmj/Dti85Yg9MN13t0g==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
-  '@marcbachmann/cel-js@6.4.0':
-    resolution: {integrity: sha512-OKg83zcNx5iuEsOUGe8P2gwU6DI9aOF1K75A/QsN6OzkwtS5JOCzD16AkR0xlca4D/i0gwefNWvWuegDfC/Lfg==}
+  '@marcbachmann/cel-js@6.5.1':
+    resolution: {integrity: sha512-eiTpK0DffnEoMg5iuLo0Lu+KQdwxaSZS8jA1biE62Atb7LiYCy3M3ZHI9aoBVQJvGf16ylBCLF92+uEnLc7G6g==}
     engines: {node: '>=20.19.0'}
 
   '@modelcontextprotocol/sdk@1.25.1':
@@ -10589,7 +10589,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@marcbachmann/cel-js@6.4.0': {}
+  '@marcbachmann/cel-js@6.5.1': {}
 
   '@modelcontextprotocol/sdk@1.25.1(hono@4.11.1)(zod@3.25.76)':
     dependencies:
