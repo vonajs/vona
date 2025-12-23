@@ -33,11 +33,16 @@ export default function (_plugin: any, options: PluginZovaBeanModuleOptions) {
 
 function createVisitor(context: ContextInfo, beanInfo) {
   return {
-    ClassDeclaration(path: NodePath<t.ClassDeclaration>) {
-      const decorators = path.node.decorators;
-      if (!decorators || decorators.length === 0) return;
+    ExpressionStatement(path: NodePath<t.ExpressionStatement>) {
+      if (!t.isAssignmentExpression(path.node.expression)) return;
+      const right = path.node.expression.right;
+      if (!t.isCallExpression(right)) return;
+      if ((right.callee as t.Identifier).name !== '__decorate') return;
+      if (right.arguments.length !== 2) return;
+      const decorators = right.arguments[0];
+      if (!t.isArrayExpression(decorators)) return;
       const decoratorNode = __createDecoratorNode(beanInfo);
-      decorators.push(decoratorNode);
+      decorators.elements.push(decoratorNode);
       context.needBeanInfo = true;
     },
   };
@@ -69,8 +74,7 @@ function __createDecoratorNode(beanInfo) {
   const propertyNodeModule = t.objectProperty(t.identifier('module'), t.stringLiteral(beanInfo.module));
   const objectExpression = t.objectExpression([propertyNodeModule]);
   const callExpression = t.callExpression(t.identifier('__z_BeanInfo'), [objectExpression]);
-  const decoratorNode = t.decorator(callExpression);
-  return decoratorNode;
+  return callExpression;
 }
 
 // function __applyDecorator(expression: t.CallExpression, moduleName: string) {
