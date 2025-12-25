@@ -30,6 +30,10 @@ celEnvBase.registerFunction('get(map,string,string):dyn', (obj, name, sep) => {
 celEnvBase.registerOperator('string + int', (str, n) => str + String(n));
 celEnvBase.registerOperator('int + string', (n, str) => String(n) + str);
 
+celEnvBase.registerFunction('string(null):string', value => {
+  return String(value);
+});
+
 function _concat(...args: any[]): any[] {
   return [].concat(...args);
 }

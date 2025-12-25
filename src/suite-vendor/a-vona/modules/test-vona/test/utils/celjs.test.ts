@@ -17,6 +17,8 @@ describe('celjs.test.ts', () => {
       // +
       assert.equal(evaluateExpressions(cel('1+"a"')), '1a');
       assert.equal(evaluateExpressions(cel('"a"+1')), 'a1');
+      // string
+      assert.equal(evaluateExpressions(cel('string(null)')), 'null');
       // optional
       assert.equal(evaluateExpressions(cel('a.?b.hasValue()'), { a: {} }), false);
       assert.equal(evaluateExpressions(cel('a.?b.value()'), { a: { b: 1 } }), 1);
