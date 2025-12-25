@@ -14,6 +14,9 @@ export interface ISchemaObjectExtensionFieldRest {
   currency?: CurrencyOptions | boolean;
   visible?: boolean;
   order?: number;
+  label?: string;
+  class?: any;
+  classLayout?: any;
   table?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
   form?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
 }
