@@ -6,8 +6,9 @@ import { LocaleModuleNameSeparator } from './type.ts';
 export function $localeScope<M extends keyof IBeanScopeLocale, K extends keyof IBeanScopeLocale[M]>(
   moduleName: M,
   key: K,
+  ...args: any[]
 ): ILocaleMagic<`${M}::${K extends string ? K : never}`> {
-  return $makeLocaleMagic(`${moduleName}::${String(key)}`) as any;
+  return $makeLocaleMagic(`${moduleName}::${String(key)}`, ...args) as any;
 }
 
 export function $makeLocaleMagic<T extends string>(str: T, ...args: any[]): ILocaleMagic<T> {

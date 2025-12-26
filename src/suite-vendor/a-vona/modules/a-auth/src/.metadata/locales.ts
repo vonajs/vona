@@ -8,6 +8,6 @@ export const locales = {
   'zh-cn': locale_zh_cn,
 };
 
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K) {
-  return $makeLocaleMagic(`a-auth::${key}`);
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
+  return $makeLocaleMagic(`a-auth::${key}`, ...args);
 }
