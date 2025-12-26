@@ -14,11 +14,25 @@ describe('celjs.test.ts', () => {
       // array
       assert.deepEqual(evaluateExpressions(cel('concat(1,[2,3],4)')), [1, 2, 3, 4]);
       assert.deepEqual(evaluateExpressions(cel('join(concat(1,[2,3],4),"_")')), '1_2_3_4');
-      // +
-      assert.equal(evaluateExpressions(cel('1+"a"')), '1a');
-      assert.equal(evaluateExpressions(cel('"a"+1')), 'a1');
       // string
       assert.equal(evaluateExpressions(cel('string(null)')), 'null');
+      // operator: +
+      assert.equal(evaluateExpressions(cel('1+"a"')), '1a');
+      assert.equal(evaluateExpressions(cel('"a"+1')), 'a1');
+      // operator: ==
+      assert.equal(evaluateExpressions(cel('"name"==null')), false);
+      assert.equal(evaluateExpressions(cel('null=="name"')), false);
+      assert.equal(evaluateExpressions(cel('1==null')), false);
+      assert.equal(evaluateExpressions(cel('null==1')), false);
+      assert.equal(evaluateExpressions(cel('true==null')), false);
+      assert.equal(evaluateExpressions(cel('null==true')), false);
+      assert.equal(evaluateExpressions(cel('false==null')), false);
+      assert.equal(evaluateExpressions(cel('null==false')), false);
+      // operator: !=
+      assert.equal(evaluateExpressions(cel('"name"!=null')), true);
+      assert.equal(evaluateExpressions(cel('null!="name"')), true);
+      assert.equal(evaluateExpressions(cel('1!=null')), true);
+      assert.equal(evaluateExpressions(cel('null!=1')), true);
       // optional
       assert.equal(evaluateExpressions(cel('a.?b.hasValue()'), { a: {} }), false);
       assert.equal(evaluateExpressions(cel('a.?b.value()'), { a: { b: 1 } }), 1);

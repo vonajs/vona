@@ -7,6 +7,7 @@ export const celEnvBase = new Environment({
   homogeneousAggregateLiterals: false,
 });
 
+// array
 const params: string[] = [];
 for (let i = 0; i < 10; i++) {
   params.push('dyn');
@@ -20,6 +21,7 @@ celEnvBase.registerFunction('join(list,string):string', (list, sep) => {
   return _join(list, sep);
 });
 
+// get
 celEnvBase.registerFunction('get(map,string):dyn', (obj, name) => {
   return getProperty(obj, name);
 });
@@ -27,12 +29,19 @@ celEnvBase.registerFunction('get(map,string,string):dyn', (obj, name, sep) => {
   return getProperty(obj, name, sep);
 });
 
-celEnvBase.registerOperator('string + int', (str, n) => str + String(n));
-celEnvBase.registerOperator('int + string', (n, str) => String(n) + str);
-
+// string
 celEnvBase.registerFunction('string(null):string', value => {
   return String(value);
 });
+
+// operator: +
+celEnvBase.registerOperator('string + int', (str, n) => str + String(n));
+celEnvBase.registerOperator('int + string', (n, str) => String(n) + str);
+
+// operator: ==
+celEnvBase.registerOperator('string == null', (str, n) => str === n);
+celEnvBase.registerOperator('int == null', (num, n) => num === n);
+celEnvBase.registerOperator('bool == null', (b, n) => b === n);
 
 function _concat(...args: any[]): any[] {
   return [].concat(...args);
