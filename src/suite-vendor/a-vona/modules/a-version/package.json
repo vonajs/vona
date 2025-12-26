@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-version",
   "type": "module",
-  "version": "5.0.52",
+  "version": "5.0.53",
   "vonaModule": {
     "fileVersion": 1,
     "dependencies": {},
