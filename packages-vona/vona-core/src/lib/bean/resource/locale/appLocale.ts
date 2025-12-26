@@ -1,7 +1,9 @@
 import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from './type.ts';
 import * as localeutil from '@cabloy/localeutil';
+import { cast } from '../../../../types/utils/cast.ts';
 import { BeanSimple } from '../../beanSimple.ts';
 import { LocaleModuleNameSeparator } from './type.ts';
+import { isLocaleMagic } from './utils.ts';
 
 export class AppLocale extends BeanSimple {
   get current(): keyof ILocaleRecord {
@@ -23,12 +25,12 @@ export class AppLocale extends BeanSimple {
   /** @internal */
   public createLocaleText(moduleScope?: string): IModuleLocaleText {
     const self = this;
-    const getText = function (text: string, ...args: any[]): string {
+    const getText = function (text: string | object, ...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
     getText.locale = function <T extends keyof ILocaleRecord>(
       locale: T | undefined,
-      text: string,
+      text: string | object,
       ...args: any[]
     ): string {
       return self.getText(false, moduleScope, locale, text, ...args);
@@ -52,11 +54,13 @@ export class AppLocale extends BeanSimple {
     supportCustomMessage: boolean,
     moduleScope: string | undefined,
     locale: T | undefined,
-    key: string,
+    key: string | object,
     ...args: any[]
   ): string {
     if (!key) return key;
-    if (typeof key === 'object') key = String(key);
+    if (isLocaleMagic(key)) {
+      return cast(key).toJSON();
+    }
     if (typeof key !== 'string') throw new Error(`${key} should be string`);
     const pos = key.indexOf(LocaleModuleNameSeparator);
     if (pos > -1) {

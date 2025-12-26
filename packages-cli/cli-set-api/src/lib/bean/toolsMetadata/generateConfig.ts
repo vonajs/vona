@@ -58,7 +58,7 @@ export async function generateLocale2(contentLocales: string) {
   if (!contentLocales) return '';
   // combine
   const content = `/** locale: begin */
-import { locales } from './locales.ts'
+import { locales } from './locales.ts';
 /** locale: end */
 `;
   return content;

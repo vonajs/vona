@@ -6,8 +6,8 @@ export interface IModuleLocale {
 }
 
 export interface IModuleLocaleText {
-  (text: string, ...args: any[]): string;
-  locale: <T extends keyof ILocaleRecord>(locale: T, text: string, ...args: any[]) => string;
+  (text: string | object, ...args: any[]): string;
+  locale: <T extends keyof ILocaleRecord>(locale: T, text: string | object, ...args: any[]) => string;
 }
 
 export type TypeModuleLocales<T> = {
