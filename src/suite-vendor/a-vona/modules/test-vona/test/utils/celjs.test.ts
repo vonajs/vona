@@ -19,6 +19,7 @@ describe('celjs.test.ts', () => {
       // operator: +
       assert.equal(evaluateExpressions(cel('1+"a"')), '1a');
       assert.equal(evaluateExpressions(cel('"a"+1')), 'a1');
+      assert.equal(evaluateExpressions(cel('int(a)+1'), { a: 1 }), 2);
       // operator: ==
       assert.equal(evaluateExpressions(cel('"name"==null')), false);
       assert.equal(evaluateExpressions(cel('null=="name"')), false);
