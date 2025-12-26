@@ -10,15 +10,19 @@ export function $localeScope<M extends keyof IBeanScopeLocale, K extends keyof I
   return $makeLocaleMagic(`${moduleName}::${String(key)}`) as any;
 }
 
-export function $makeLocaleMagic<T extends string>(str: T): ILocaleMagic<T> {
+export function $makeLocaleMagic<T extends string>(str: T, ...args: any[]): ILocaleMagic<T> {
   return {
     toString() {
       return str;
     },
     toJSON() {
-      if (!str || !str.includes(LocaleModuleNameSeparator)) return str;
-      const app = useApp();
-      return app.meta.text(str);
+      return _translate(str, ...args);
     },
   } as any;
+}
+
+function _translate<T extends string>(str: T, ...args: any[]) {
+  if (!str || !str.includes(LocaleModuleNameSeparator)) return str;
+  const app = useApp();
+  return app.meta.text(str, ...args);
 }
