@@ -1,5 +1,5 @@
 import { Environment } from '@marcbachmann/cel-js';
-import { getProperty } from '../utils.ts';
+import { getProperty, hasProperty } from '../utils.ts';
 
 export const celEnvBase = new Environment({
   unlistedVariablesAreDyn: true,
@@ -21,14 +21,6 @@ celEnvBase.registerFunction('join(list,string):string', (list, sep) => {
   return _join(list, sep);
 });
 
-// get
-celEnvBase.registerFunction('get(map,string):dyn', (obj, name) => {
-  return getProperty(obj, name);
-});
-celEnvBase.registerFunction('get(map,string,string):dyn', (obj, name, sep) => {
-  return getProperty(obj, name, sep);
-});
-
 // string
 celEnvBase.registerFunction('string(null):string', value => {
   return String(value);
@@ -42,6 +34,21 @@ celEnvBase.registerOperator('int + string', (n, str) => String(n) + str);
 celEnvBase.registerOperator('string == null', (str, n) => str === n);
 celEnvBase.registerOperator('int == null', (num, n) => num === n);
 celEnvBase.registerOperator('bool == null', (b, n) => b === n);
+
+// get
+celEnvBase.registerFunction('get(map,string):dyn', (obj, name) => {
+  return getProperty(obj, name);
+});
+celEnvBase.registerFunction('get(map,string,string):dyn', (obj, name, sep) => {
+  return getProperty(obj, name, sep);
+});
+
+celEnvBase.registerFunction('exists(null,string):bool', (obj, name) => {
+  return hasProperty(obj, name);
+});
+celEnvBase.registerFunction('exists(map,string):bool', (obj, name) => {
+  return hasProperty(obj, name);
+});
 
 function _concat(...args: any[]): any[] {
   return [].concat(...args);

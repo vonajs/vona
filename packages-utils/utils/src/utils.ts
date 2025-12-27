@@ -66,6 +66,10 @@ export function setProperty<T>(obj: object, name: string, value: T) {
   }
 }
 
+export function hasProperty(obj: object | undefined, name: string, sep?: string): boolean {
+  return _hasProperty(obj, name, sep);
+}
+
 export function getProperty<T>(obj: object | undefined, name: string, sep?: string) {
   return _getProperty<T>(obj, name, sep, false);
 }
@@ -75,6 +79,26 @@ export function getPropertyObject<T>(obj: object | undefined, name: string, sep?
 }
 
 const __keysIgnore = ['constructor', 'prototype', '__proto__'];
+
+function _hasProperty(_obj: object | undefined, name: string, sep: string | undefined): boolean {
+  if (!_obj) return false;
+  let obj = _obj as object;
+  const names = name.split(sep || '.');
+  // loop
+  for (const _name of names) {
+    const [name, index] = _parsePropertyKey(_name);
+    if (__keysIgnore.includes(name)) throw new Error(`invalid prop: ${name}`);
+    if (obj === undefined || !Object.hasOwnProperty.call(obj, name)) {
+      return false;
+    }
+    obj = obj[name];
+    if (index !== undefined) {
+      obj = obj[index];
+    }
+  }
+  return true;
+}
+
 function _getProperty<T>(_obj: object | undefined, name: string, sep: string | undefined, forceObject: boolean): T | undefined {
   if (!_obj) return undefined;
   let obj = _obj as object;

@@ -39,6 +39,9 @@ describe('celjs.test.ts', () => {
       assert.equal(evaluateExpressions(cel('a.?b.value()'), { a: { b: 1 } }), 1);
       assert.equal(evaluateExpressions(cel('get(a, "b.c")'), { a: { b: 1 } }), undefined);
       assert.equal(evaluateExpressions(cel('get(a, "b.c")'), { a: { b: { c: 1 } } }), 1);
+      assert.equal(evaluateExpressions(cel('exists(a, "b.c")'), { a: { b: { c: null } } }), true);
+      assert.equal(evaluateExpressions(cel('exists(a, "b.c")'), { a: { b: {} } }), false);
+      assert.equal(evaluateExpressions(cel('exists(a, "b.c")'), { a: {} }), false);
     });
   });
 });
