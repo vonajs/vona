@@ -9,16 +9,35 @@ import type { IComponentRecord } from './component.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
-export interface ISchemaObjectExtensionFieldRest {
-  render?: TypeFieldRenderComponent;
+export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
+
+export interface ISchemaObjectExtensionFieldRestProps {
   currency?: CurrencyOptions | boolean;
   visible?: boolean;
   order?: number;
-  label?: string;
-  class?: any;
+  //
   classContainer?: any;
-  table?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
-  form?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
+  label?: string | false;
+  inline?: boolean;
+  bordered?: boolean;
+  floating?: boolean;
+  iconPrefix?: string;
+  iconSuffix?: string;
+  //
+  class?: any;
+  placeholder?: string;
+  readonly?: boolean;
+  inputType?: HTMLInputElementType;
+}
+
+export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {
+  render?: TypeRenderComponentPreset;
+  table?: ISchemaObjectExtensionFieldRestScene;
+  form?: ISchemaObjectExtensionFieldRestScene;
+}
+
+export interface ISchemaObjectExtensionFieldRestScene extends ISchemaObjectExtensionFieldRestProps {
+  render?: TypeRenderComponent;
 }
 
 export interface ISchemaObjectExtensionField {
@@ -34,10 +53,26 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeFieldRenderComponent =
-  (keyof IComponentRecord) | (keyof TypeResourceActionRowRecordRender) | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export interface TypeRenderComponentJsxProps {
+  'children': TypeRenderComponentJsx | TypeRenderComponentJsx[];
+  'v-if'?: string | boolean;
+  'v-for'?: string | any[];
+  'v-each'?: string;
+  'v-slot'?: string;
+  'v-slot-scope'?: string;
+}
 
-export type TypeFieldRenderComponentProvider = (keyof IComponentRecord) | (keyof TypeResourceActionRowRecordRender) | 'input' | 'textarea' | 'select';
+export interface TypeRenderComponentJsx {
+  type: string;
+  key?: string | null;
+  props?: TypeRenderComponentJsxProps;
+};
+
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+
+export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
+
+export type TypeRenderComponentProvider = (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
 
 export type TypeSchemaScene = 'table' | 'form';
 
