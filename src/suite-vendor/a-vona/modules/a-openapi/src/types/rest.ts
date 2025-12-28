@@ -26,6 +26,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   header?: TypeRenderComponentJsx | string;
   footer?: TypeRenderComponentJsx | string;
   //
+  displayValue?: any;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
