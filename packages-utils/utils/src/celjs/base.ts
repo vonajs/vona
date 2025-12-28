@@ -41,10 +41,10 @@ celEnvBase.registerOperator('bool == null', (b, n) => b === n);
 
 // get
 celEnvBase.registerFunction('get(map,string):dyn', (obj, name) => {
-  return getProperty(obj, name);
+  return getProperty(obj, name) ?? null;
 });
 celEnvBase.registerFunction('get(map,string,string):dyn', (obj, name, sep) => {
-  return getProperty(obj, name, sep);
+  return getProperty(obj, name, sep) ?? null;
 });
 
 celEnvBase.registerFunction('exists(null,string):bool', (obj, name) => {
