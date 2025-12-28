@@ -29,6 +29,8 @@ celEnvBase.registerFunction('string(null):string', value => {
 // operator: +
 celEnvBase.registerOperator('string + int', (str, n) => str + String(n));
 celEnvBase.registerOperator('int + string', (n, str) => String(n) + str);
+celEnvBase.registerOperator('string + double', (str, n) => str + String(n));
+celEnvBase.registerOperator('double + string', (n, str) => String(n) + str);
 celEnvBase.registerOperator('string + null', (str, _n) => str);
 celEnvBase.registerOperator('null + string', (_n, str) => str);
 
