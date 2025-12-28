@@ -4,7 +4,8 @@ export function regexp(str: string) {
   return `${StringPrefixRegexp}${str}`;
 }
 
-export function cel(str: string) {
+// should return any
+export function cel(str: string): any {
   return `${StringPrefixCel}${str}`;
 }
 
