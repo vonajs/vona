@@ -23,6 +23,8 @@ export interface ISchemaObjectExtensionFieldRestProps {
   floating?: boolean;
   iconPrefix?: string;
   iconSuffix?: string;
+  header?: TypeRenderComponentJsx | string;
+  footer?: TypeRenderComponentJsx | string;
   //
   class?: any;
   placeholder?: string;

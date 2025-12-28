@@ -122,21 +122,24 @@ export class ServiceOpenapi extends BeanBase {
   }
 
   private _translateJsxRenders(obj: any) {
-    if (obj.rest?.render) {
-      obj.rest.render = this._translateJsxRender(obj.rest.render);
-    }
-    if (obj.rest?.table?.render) {
-      obj.rest.table.render = this._translateJsxRender(obj.rest.table.render);
-    }
-    if (obj.rest?.form?.render) {
-      obj.rest.form.render = this._translateJsxRender(obj.rest.form.render);
+    this._translateJsxRendersInner(obj.rest);
+    this._translateJsxRendersInner(obj.rest?.table);
+    this._translateJsxRendersInner(obj.rest?.form);
+  }
+
+  private _translateJsxRendersInner(obj: any) {
+    if (!obj) return;
+    for (const key in obj) {
+      obj[key] = this._translateJsxRender(obj[key]);
     }
   }
 
   private _translateJsxRender(component: any) {
+    if (typeof component !== 'object' || !component.$$typeof) return component;
     if (component[symbolJsxRenderTranslated] === true) return component;
     const componentNew: any = {};
     componentNew[symbolJsxRenderTranslated] = true;
+    componentNew.$$typeof = 'zova-jsx';
     componentNew.type = typeof component.type === 'function' ? component.type() : component.type;
     componentNew.key = component.key;
     componentNew.props = { ...component.props };
