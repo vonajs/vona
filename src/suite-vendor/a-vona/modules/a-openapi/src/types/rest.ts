@@ -1,5 +1,4 @@
 import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
-import type { CurrencyOptions } from '@zhennann/currency';
 import type { ILocaleMagic } from 'vona';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
@@ -12,7 +11,6 @@ import 'openapi3-ts/oas31';
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
 export interface ISchemaObjectExtensionFieldRestProps {
-  currency?: CurrencyOptions | boolean;
   visible?: boolean;
   order?: number;
   //
@@ -71,7 +69,7 @@ export interface TypeRenderComponentJsx {
   props?: TypeRenderComponentJsxProps;
 };
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
