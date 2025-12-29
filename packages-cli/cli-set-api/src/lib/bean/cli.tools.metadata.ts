@@ -248,20 +248,22 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
       return pkg;
     }
     // cli
-    const cli = path.join(modulePath, 'cli');
-    if (fse.existsSync(cli)) {
-      pkg = await _loadPkg();
-      const index = pkg.files.indexOf('cli');
-      if (index === -1) {
-        changed = true;
-        pkg.files.push('cli');
-      }
-      if (pkg.scripts['tsc:publish'].includes('tsconfig.cli.json')) {
-        const index = pkg.files.indexOf('dist-cli');
+    for (const name of ['cli', 'zovaRest']) {
+      const cli = path.join(modulePath, name);
+      if (fse.existsSync(cli)) {
+        pkg = await _loadPkg();
+        const index = pkg.files.indexOf(name);
         if (index === -1) {
           changed = true;
-          pkg.files.push('dist-cli');
+          pkg.files.push(name);
         }
+      }
+    }
+    if (pkg.scripts['tsc:publish'].includes('tsconfig.cli.json')) {
+      const index = pkg.files.indexOf('dist-cli');
+      if (index === -1) {
+        changed = true;
+        pkg.files.push('dist-cli');
       }
     }
     // save
