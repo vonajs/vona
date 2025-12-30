@@ -30,7 +30,7 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.0.9
+        specifier: ^2.0.11
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.2
@@ -313,7 +313,7 @@ importers:
         version: file:zovaRest/vona-home
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.85
+        specifier: ^3.0.87
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -370,7 +370,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.120
+        specifier: ^6.0.122
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
