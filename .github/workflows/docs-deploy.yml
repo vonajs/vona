@@ -46,7 +46,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
         working-directory: packages-docs
       - name: Build with VitePress
         run: npm run docs:build

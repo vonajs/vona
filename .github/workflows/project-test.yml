@@ -27,7 +27,7 @@ jobs:
       - run: vona :create:project vona-test --template=basic
       - run: vona :create:module demo-student --suite --ci
         working-directory: vona-test
-      - run: pnpm install
+      - run: pnpm install --no-frozen-lockfile
         working-directory: vona-test
       - run: vona :tools:crud student --module=demo-student
         working-directory: vona-test  
