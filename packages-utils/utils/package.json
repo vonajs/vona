@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@cabloy/module-info": "^1.3.33",
-    "@cabloy/word-utils": "^2.0.1",
+    "@cabloy/word-utils": "^2.0.2",
     "@marcbachmann/cel-js": "^6.5.1",
     "object-hash": "^3.0.0"
   },

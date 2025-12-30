@@ -41,7 +41,7 @@
     "@cabloy/module-info-pro": "^1.0.41",
     "@cabloy/type-fest": "^5.3.1",
     "@cabloy/utils": "^2.0.9",
-    "@cabloy/word-utils": "^2.0.1",
+    "@cabloy/word-utils": "^2.0.2",
     "@cabloy/zod-errors-custom": "^2.0.4",
     "@cabloy/zod-openapi": "^1.0.8",
     "@cabloy/zod-query": "^2.0.4",
