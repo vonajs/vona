@@ -164,9 +164,11 @@ export class LocalHelper {
   }
 
   async pnpmInstall() {
-    await this.console.log(JSON.stringify(process.env, null, 2));
     // args
     const args = ['install'];
+    if (process.env.GITHUB_ACTIONS === 'true') {
+      args.push('--no-frozen-lockfile');
+    }
     // log
     await this.console.log('===> pnpm install');
     // spawn
