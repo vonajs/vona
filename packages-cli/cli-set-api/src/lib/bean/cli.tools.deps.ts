@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 import { resolveTemplatePath } from '../../utils.ts';
 
 declare module '@cabloy/cli' {
@@ -19,6 +20,8 @@ export class CliToolsDeps extends BeanCliBase {
   }
 
   async _generate(projectPath: string) {
+    // generate zovaRest
+    await this._generateZovaRest(projectPath);
     // generate package.json
     await this.common._generatePackageJson(projectPath);
     // generate type modules file
@@ -45,6 +48,29 @@ export class CliToolsDeps extends BeanCliBase {
     const fileConfig = path.join(projectPath, 'tsconfig.json');
     if (!fse.existsSync(fileConfig)) {
       await fse.copyFile(fileTemplate, fileConfig);
+    }
+  }
+
+  async _generateZovaRest(projectPath: string) {
+    const targetDir = path.join(projectPath, 'zovaRest');
+    for (const module of this.modulesMeta.modulesArray) {
+      const moduleZovaRest = path.join(module.root, 'zovaRest');
+      if (!fse.existsSync(moduleZovaRest)) continue;
+      const bundles = await globby('*', { cwd: moduleZovaRest, onlyDirectories: true });
+      for (const bundle of bundles) {
+        const moduleZovaRestSrc = path.join(moduleZovaRest, bundle);
+        const moduleZovaRestDest = path.join(targetDir, bundle);
+        let needCopy = true;
+        if (fse.existsSync(moduleZovaRestDest)) {
+          const statDest = await fse.stat(path.join(moduleZovaRestDest, 'package.json'));
+          const statSrc = await fse.stat(path.join(moduleZovaRestSrc, 'package.json'));
+          if (statDest.mtimeMs >= statSrc.mtimeMs) {
+            needCopy = false;
+          }
+        }
+        if (!needCopy) continue;
+        await fse.copy(moduleZovaRestSrc, moduleZovaRestDest, { preserveTimestamps: true });
+      }
     }
   }
 }
