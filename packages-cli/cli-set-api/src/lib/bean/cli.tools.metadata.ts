@@ -250,20 +250,19 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
     // cli
     for (const name of ['cli', 'zovaRest']) {
       const pathCheck = path.join(modulePath, name);
-      if (fse.existsSync(pathCheck)) {
-        pkg = await _loadPkg();
-        const index = pkg.files.indexOf(name);
-        if (index === -1) {
-          changed = true;
-          pkg.files.push(name);
-        }
-        if (name === 'cli') {
-          if (pkg.scripts?.['tsc:publish'].includes('tsconfig.cli.json')) {
-            const index = pkg.files.indexOf('dist-cli');
-            if (index === -1) {
-              changed = true;
-              pkg.files.push('dist-cli');
-            }
+      if (!fse.existsSync(pathCheck)) continue;
+      pkg = await _loadPkg();
+      const index = pkg.files.indexOf(name);
+      if (index === -1) {
+        changed = true;
+        pkg.files.push(name);
+      }
+      if (name === 'cli') {
+        if (pkg.scripts?.['tsc:publish'].includes('tsconfig.cli.json')) {
+          const index = pkg.files.indexOf('dist-cli');
+          if (index === -1) {
+            changed = true;
+            pkg.files.push('dist-cli');
           }
         }
       }
