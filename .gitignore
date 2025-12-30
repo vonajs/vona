@@ -74,6 +74,7 @@ src/backend/typing/mine.d.ts
 
 # package-lock.json
 # yarn.lock
+pnpm-lock.yaml
 
 .vscode/sftp.json
 .sync-config.cson
