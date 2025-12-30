@@ -145,8 +145,7 @@ export class LocalCommon {
     const bundles = await globby('*', { cwd: targetDir, onlyDirectories: true });
     for (const bundle of bundles) {
       const name = `zova-rest-${bundle}`;
-      const file = path.join(targetDir, bundle);
-      devDependencies[name] = `file:${file}`;
+      devDependencies[name] = `file:./zovaRest/${bundle}`;
     }
   }
 
