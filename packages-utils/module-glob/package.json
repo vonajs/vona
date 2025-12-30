@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/module-glob",
   "type": "module",
-  "version": "5.2.46",
+  "version": "5.2.47",
   "description": "cabloy module-glob",
   "publishConfig": {
     "access": "public"
@@ -33,8 +33,8 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.33",
-    "@cabloy/utils": "^2.0.11",
+    "@cabloy/module-info": "^1.3.34",
+    "@cabloy/utils": "^2.0.12",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "fs-extra": "^11.3.0",

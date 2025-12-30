@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/utils",
   "type": "module",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "cabloy utils",
   "publishConfig": {
     "access": "public"
@@ -41,7 +41,7 @@
     ]
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.33",
+    "@cabloy/module-info": "^1.3.34",
     "@cabloy/word-utils": "^2.0.2",
     "@marcbachmann/cel-js": "^6.5.1",
     "object-hash": "^3.0.0"
