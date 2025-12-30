@@ -1,38 +1,38 @@
-export interface ISocketCabloyEventRecordSystem {
+export interface ISocketEventRecordSystem {
   sysReady: never;
   sysPerformAction: never;
   sysPerformActionBack: never;
 }
 
-export interface ISocketCabloyEventRecord {}
+export interface ISocketEventRecord {}
 
-export const socketCabloyEventRecord = {
+export const socketEventRecord = {
   sysReady: '_a',
   sysPerformAction: '_b',
   sysPerformActionBack: '_c',
 };
-export const socketCabloyEventRecordReverse = {
+export const socketEventRecordReverse = {
   _a: 'sysReady',
   _b: 'sysPerformAction',
   _c: 'sysPerformActionBack',
 };
 
-export type TypeSocketCabloyPerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
-export interface ISocketCabloyPerformActionOptions {
+export type TypeSocketEventPerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
+export interface ISocketEventPerformActionOptions {
   query?: object;
   body?: any;
   headers?: object;
 }
-export interface ISocketCabloyPerformActionOptionsInner {
+export interface ISocketEventPerformActionOptionsInner {
   i: number;
-  m: TypeSocketCabloyPerformActionMethod;
+  m: TypeSocketEventPerformActionMethod;
   p: string;
   q?: object;
   b?: any;
   h?: object;
 }
 
-export type TypeSocketPacketCabloy<K extends keyof ISocketCabloyEventRecord = never> = [K | undefined, ISocketCabloyEventRecord[K] | any];
+export type TypeSocketPacketEvent<K extends keyof ISocketEventRecord = never> = [K | undefined, ISocketEventRecord[K] | any];
 
 export interface ISendEventOptions {
   mask?: boolean | undefined;
@@ -44,13 +44,13 @@ export interface ISendEventOptions {
 declare global {
   interface WebSocket {
     onReady(): void;
-    onEvent<K extends keyof ISocketCabloyEventRecord>(eventName: K, data: ISocketCabloyEventRecord[K], event: MessageEvent): void;
+    onEvent<K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent): void;
     onFallback(event: MessageEvent): void;
-    parseEvent(event: MessageEvent): TypeSocketPacketCabloy;
-    sendEvent<K extends keyof ISocketCabloyEventRecord>(eventName: K, data: ISocketCabloyEventRecord[K] | undefined): void;
-    performAction(method: TypeSocketCabloyPerformActionMethod,
+    parseEvent(event: MessageEvent): TypeSocketPacketEvent;
+    sendEvent<K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K] | undefined): void;
+    performAction(method: TypeSocketEventPerformActionMethod,
       path: string,
-      options?: ISocketCabloyPerformActionOptions,
+      options?: ISocketEventPerformActionOptions,
     ): Promise<any>;
     closeEvents(): void;
   }

@@ -3,13 +3,13 @@ import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from
 import { BeanBase } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
 
-export interface IMiddlewareSystemOptionsAppReady extends IDecoratorMiddlewareSystemOptions {}
+export interface IMiddlewareSystemOptionsApp extends IDecoratorMiddlewareSystemOptions {}
 
-@MiddlewareSystem<IMiddlewareSystemOptionsAppReady>({
+@MiddlewareSystem<IMiddlewareSystemOptionsApp>({
   dependencies: 'a-core:overrideMethod',
 })
-export class MiddlewareSystemAppReady extends BeanBase implements IMiddlewareSystemExecute {
-  async execute(_options: IMiddlewareSystemOptionsAppReady, next: Next) {
+export class MiddlewareSystemApp extends BeanBase implements IMiddlewareSystemExecute {
+  async execute(_options: IMiddlewareSystemOptionsApp, next: Next) {
     // check appReady
     if (!this.ctx.innerAccess) {
       if (this.app.meta.appClose) this.app.throw(423);

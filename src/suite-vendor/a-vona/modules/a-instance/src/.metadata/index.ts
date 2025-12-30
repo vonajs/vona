@@ -3,15 +3,15 @@ import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore 
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
 import type { TableIdentity } from 'table-identity';
 /** middlewareSystem: begin */
-export * from '../bean/middlewareSystem.appReady.ts';
+export * from '../bean/middlewareSystem.app.ts';
 export * from '../bean/middlewareSystem.instance.ts';
-import type { IMiddlewareSystemOptionsAppReady } from '../bean/middlewareSystem.appReady.ts';
+import type { IMiddlewareSystemOptionsApp } from '../bean/middlewareSystem.app.ts';
 import type { IMiddlewareSystemOptionsInstance } from '../bean/middlewareSystem.instance.ts';
 import 'vona-module-a-aspect';
 declare module 'vona-module-a-aspect' {
   
     export interface IMiddlewareSystemRecord {
-      'a-instance:appReady': IMiddlewareSystemOptionsAppReady;
+      'a-instance:app': IMiddlewareSystemOptionsApp;
 'a-instance:instance': IMiddlewareSystemOptionsInstance;
     }
 
@@ -19,15 +19,15 @@ declare module 'vona-module-a-aspect' {
 }
 declare module 'vona-module-a-instance' {
   
-        export interface MiddlewareSystemAppReady {
+        export interface MiddlewareSystemApp {
           /** @internal */
           get scope(): ScopeModuleAInstance;
         }
 
-          export interface MiddlewareSystemAppReady {
-            get $beanFullName(): 'a-instance.middlewareSystem.appReady';
-            get $onionName(): 'a-instance:appReady';
-            get $onionOptions(): IMiddlewareSystemOptionsAppReady;
+          export interface MiddlewareSystemApp {
+            get $beanFullName(): 'a-instance.middlewareSystem.app';
+            get $onionName(): 'a-instance:app';
+            get $onionOptions(): IMiddlewareSystemOptionsApp;
           }
 
         export interface MiddlewareSystemInstance {
@@ -330,7 +330,7 @@ declare module 'vona-module-a-instance' {
 import type { MetaRedlock } from '../bean/meta.redlock.ts';
 /** meta redlock: end */
 /** locale: begin */
-import { locales } from './locales.ts'
+import { locales } from './locales.ts';
 /** locale: end */
 /** main: begin */
 export * from '../main.ts';

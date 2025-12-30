@@ -5,7 +5,7 @@ import { MiddlewareSystem } from 'vona-module-a-aspect';
 
 export interface IMiddlewareSystemOptionsInstance extends IDecoratorMiddlewareSystemOptions {}
 
-@MiddlewareSystem<IMiddlewareSystemOptionsInstance>({ dependencies: 'a-instance:appReady' })
+@MiddlewareSystem<IMiddlewareSystemOptionsInstance>({ dependencies: 'a-instance:app' })
 export class MiddlewareSystemInstance extends BeanBase implements IMiddlewareSystemExecute {
   async execute(_options: IMiddlewareSystemOptionsInstance, next: Next) {
     // init instance
