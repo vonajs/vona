@@ -78,13 +78,14 @@ export class LocalCommon {
     const { deps, depsDev } = await this._generatePackageJson_prepareDeps(projectPath);
     // pkg/pkgOriginal
     const pkgOriginal = await this.cli.helper.loadJSONFile(pkgOriginalFile);
+    let pkg: IModulePackage | undefined;
     if (fse.existsSync(pkgFile)) {
-      const pkg = await this.cli.helper.loadJSONFile(pkgFile);
+      pkg = await this.cli.helper.loadJSONFile(pkgFile);
       // save back
-      await this._generatePackageJson_saveBack(pkg, pkgOriginal, pkgOriginalFile, deps, depsDev);
+      await this._generatePackageJson_saveBack(pkg!, pkgOriginal, pkgOriginalFile, deps, depsDev);
     }
     // generate pkg from pkgOriginal
-    await this._generatePackageJson_pkgFromPkgOriginal(pkgOriginal, pkgFile, deps, depsDev);
+    await this._generatePackageJson_pkgFromPkgOriginal(pkgOriginal, pkg, pkgFile, deps, depsDev);
   }
 
   async _generatePackageJson_prepareDeps(_projectPath: string) {
@@ -110,6 +111,7 @@ export class LocalCommon {
 
   async _generatePackageJson_pkgFromPkgOriginal(
     pkgOriginal: IModulePackage,
+    pkg: IModulePackage | undefined,
     pkgFile: string,
     deps: TypeDeps,
     depsDev: TypeDeps,
@@ -124,7 +126,12 @@ export class LocalCommon {
     }
     _handleDeps('dependencies', deps);
     _handleDeps('devDependencies', depsDev);
-    await this.cli.helper.saveJSONFile(pkgFile, pkgOriginal);
+    //
+    const strPkgOriginal = `${JSON.stringify(pkgOriginal, null, 2)}\n`;
+    const strPkg = pkg ? `${JSON.stringify(pkg, null, 2)}\n` : '';
+    if (strPkgOriginal !== strPkg) {
+      await fse.writeFile(pkgFile, strPkgOriginal);
+    }
   }
 
   async _generatePackageJson_saveBack(

@@ -131,6 +131,7 @@ export interface IModulePackage {
   author: string;
   files: string[];
   dependencies: Record<string, string>;
+  devDependencies: Record<string, string>;
 }
 
 export interface IGlobBeanFile {
