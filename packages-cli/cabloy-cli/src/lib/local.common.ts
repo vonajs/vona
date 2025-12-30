@@ -3,6 +3,7 @@ import type { Stats } from 'fs-extra';
 import type { BeanCliBase } from './bean.cli.base.ts';
 import path from 'node:path';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 
 type TypeDeps = Record<string, string>;
 
@@ -85,7 +86,7 @@ export class LocalCommon {
       await this._generatePackageJson_saveBack(pkg!, pkgOriginal, pkgOriginalFile, deps, depsDev);
     }
     // generate pkg from pkgOriginal
-    await this._generatePackageJson_pkgFromPkgOriginal(pkgOriginal, pkg, pkgFile, deps, depsDev);
+    await this._generatePackageJson_pkgFromPkgOriginal(projectPath, pkgOriginal, pkg, pkgFile, deps, depsDev);
   }
 
   async _generatePackageJson_prepareDeps(_projectPath: string) {
@@ -110,6 +111,7 @@ export class LocalCommon {
   }
 
   async _generatePackageJson_pkgFromPkgOriginal(
+    projectPath: string,
     pkgOriginal: IModulePackage,
     pkg: IModulePackage | undefined,
     pkgFile: string,
@@ -126,12 +128,25 @@ export class LocalCommon {
     }
     _handleDeps('dependencies', deps);
     _handleDeps('devDependencies', depsDev);
-    //
+    // zovaRest
+    await this._generatePackageJson_pkgFromZovaRest(projectPath, pkgOriginal.dependencies);
+    // save
     const strPkgOriginal = `${JSON.stringify(pkgOriginal, null, 2)}\n`;
     const strPkg = pkg ? `${JSON.stringify(pkg, null, 2)}\n` : '';
     if (strPkgOriginal !== strPkg) {
       await fse.writeFile(pkgFile, strPkgOriginal);
       await this.cli.helper.pnpmInstall();
+    }
+  }
+
+  async _generatePackageJson_pkgFromZovaRest(projectPath: string, devDependencies: {}) {
+    if (this.cli.context.brandName !== 'vona') return;
+    const targetDir = path.join(projectPath, 'zovaRest');
+    const bundles = await globby('*', { cwd: targetDir, onlyDirectories: true });
+    for (const bundle of bundles) {
+      const name = `zova-rest-${bundle}`;
+      const file = path.join(targetDir, bundle);
+      devDependencies[name] = `file:${file}`;
     }
   }
 

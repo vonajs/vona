@@ -48,7 +48,8 @@
   },
   "dependencies": {
     "react": "^19.2.3",
-    "vona": "workspace:^"
+    "vona": "workspace:^",
+    "zova-rest-vona-home": "file:/Volumes/my-data/cabloy/vona/zovaRest/vona-home"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.16",
