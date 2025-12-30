@@ -169,8 +169,10 @@ export class LocalCommon {
       for (const key in moduleDeps) {
         const version = moduleDeps[key];
         if (moduleDepsOriginal[key] && moduleDepsOriginal[key] === version) continue;
+        const isZovaRest = key.includes('zova-rest-');
         const isModule = key.includes('vona-module-') || key.includes('zova-module-');
         const isModuleWorkspace = isModule && version.startsWith('workspace:');
+        if (isZovaRest && version.includes('file:')) continue;
         if (isModuleWorkspace) continue;
         if (deps[key] && !isModule) continue;
         moduleDepsOriginal[key] = version;
