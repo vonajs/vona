@@ -164,6 +164,7 @@ export class LocalHelper {
   }
 
   async pnpmInstall() {
+    await this.console.log(JSON.stringify(process.env, null, 2));
     // args
     const args = ['install'];
     // log
