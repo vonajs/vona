@@ -1,4 +1,5 @@
 import type { ISocketEventPerformActionItem, ISocketEventPerformActionOptions, ISocketEventPerformActionOptionsInner, ISocketEventRecord, ISocketEventRecordSystem, TypeSocketEventPerformActionMethod, TypeSocketPacketEvent } from '../types/socket.ts';
+import { getRandomInt } from '@cabloy/utils';
 import { socketEventRecord, socketEventRecordReverse } from '../types/socket.ts';
 
 const SymbolPerformActionId = Symbol('SymbolPerformActionId');
@@ -11,6 +12,7 @@ export class WebSocketClient {
   private _ws?: WebSocket;
   private _url: string | URL;
   private _protocols?: string | string[];
+  private _timeoutRetry: any;
 
   public onReady?: () => void;
   public onEvent?: <K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent) => void;
@@ -28,17 +30,32 @@ export class WebSocketClient {
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
     };
-    const onClose = (_event: CloseEvent) => {
+    const onClose = (event: CloseEvent) => {
       this._closeEvents();
+      this._closeTimeoutRetry();
       ws.removeEventListener('message', onMessage);
       ws.removeEventListener('close', onClose);
+      if (event.reason !== 'normal') {
+        this._startTimeoutRetry();
+      }
     };
     ws.addEventListener('message', onMessage);
     ws.addEventListener('close', onClose);
   }
 
-  private _reconnect() {
+  private _closeTimeoutRetry() {
+    if (this._timeoutRetry) {
+      clearTimeout(this._timeoutRetry);
+      this._timeoutRetry = undefined;
+    }
+  }
 
+  private _startTimeoutRetry() {
+    this._closeTimeoutRetry();
+    const delay = 1000 * getRandomInt(3, 1);
+    this._timeoutRetry = setTimeout(() => {
+      this.connect(this._url, this._protocols);
+    }, delay);
   }
 
   public disconnect() {
