@@ -272,7 +272,7 @@ export class ServiceQueue extends BeanBase {
       return this._performTask(job);
     });
     if (err) {
-      this.app.handleError(err);
+      await this.app.handleError(err);
       throw err;
     } else {
       return res;
