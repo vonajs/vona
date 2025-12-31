@@ -21,9 +21,17 @@ export class WebSocketClient {
   public onEvent?: <K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent) => void;
   public onFallback?: (event: MessageEvent) => void;
 
+  public onOpen?: (event: Event, reconnectAttempts: number) => void;
+  public onError?: (event: Event) => void;
+  public onClose?: (event: CloseEvent, reconnect: boolean) => void;
+
   constructor(options?: IWebSocketOptions) {
     this._reconnectInterval = options?.reconnectInterval || 1000;
     this._maxReconnectAttempts = options?.maxReconnectAttempts || Infinity;
+  }
+
+  public get ws() {
+    return this._ws;
   }
 
   public connect(url: string | URL, protocols?: string | string[]) {
@@ -38,10 +46,13 @@ export class WebSocketClient {
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
     };
-    const onOpen = (_event: Event) => {
+    const onOpen = (event: Event) => {
+      this.onOpen?.(event, this._reconnectAttempts);
       this._reconnectAttempts = 0;
     };
-    const onError = (_event: Event) => {};
+    const onError = (event: Event) => {
+      this.onError?.(event);
+    };
     const onClose = (event: CloseEvent) => {
       this._closeEvents();
       this._closeTimeoutRetry();
@@ -49,7 +60,9 @@ export class WebSocketClient {
       ws.removeEventListener('open', onOpen);
       ws.removeEventListener('error', onError);
       ws.removeEventListener('close', onClose);
-      if (event.reason !== __closeReasonNormal) {
+      const reconnect = event.reason !== __closeReasonNormal && this._reconnectAttempts < this._maxReconnectAttempts;
+      this.onClose?.(event, reconnect);
+      if (reconnect) {
         this._startTimeoutRetry();
       }
     };
@@ -67,7 +80,6 @@ export class WebSocketClient {
   }
 
   private _startTimeoutRetry() {
-    if (this._reconnectAttempts >= this._maxReconnectAttempts) return;
     this._closeTimeoutRetry();
     this._reconnectAttempts++;
     const delay = this._reconnectInterval * Math.min(this._reconnectAttempts, 5);
