@@ -32,7 +32,7 @@ export interface IMiddlewareSystemOptionsStatic extends IDecoratorMiddlewareSyst
 }
 
 @MiddlewareSystem<IMiddlewareSystemOptionsStatic>({
-  dependencies: 'a-instance:instance',
+  dependencies: 'a-security:securities',
   apiStaticPrefix: '/api/static/',
   dirs: [],
   dynamic: true,
