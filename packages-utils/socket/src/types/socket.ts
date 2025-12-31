@@ -42,15 +42,3 @@ export interface ISendEventOptions {
   compress?: boolean | undefined;
   fin?: boolean | undefined;
 }
-
-declare global {
-  interface WebSocket {
-    onReady(): void;
-    onEvent<K extends keyof ISocketEventRecord>(
-      eventName: K,
-      data: ISocketEventRecord[K],
-      event: MessageEvent
-    ): void;
-    onFallback(event: MessageEvent): void;
-  }
-}
