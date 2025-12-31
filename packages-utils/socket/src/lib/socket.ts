@@ -37,7 +37,7 @@ export class WebSocketClient extends WebSocket {
     const eventName: keyof ISocketEventRecord | undefined = packet[0];
     const result = packet[1] as any;
     if (eventName === ('sysReady' satisfies keyof ISocketEventRecordSystem)) {
-      this.onReady();
+      this.onReady?.();
     } else if (eventName === ('sysPerformActionBack' satisfies keyof ISocketEventRecordSystem)) {
       const id = result.i;
       const performActionBack = this[SymbolPerformActionRecord][id];
@@ -53,9 +53,9 @@ export class WebSocketClient extends WebSocket {
         }
       }
     } else if (eventName !== undefined) {
-      this.onEvent(eventName, result as never, event);
+      this.onEvent?.(eventName, result as never, event);
     } else {
-      this.onFallback(event);
+      this.onFallback?.(event);
     }
     return packet;
   }
