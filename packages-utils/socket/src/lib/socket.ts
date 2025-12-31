@@ -30,16 +30,21 @@ export class WebSocketClient {
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
     };
+    const onError = (_event: Event) => {
+      this._startTimeoutRetry();
+    };
     const onClose = (event: CloseEvent) => {
       this._closeEvents();
       this._closeTimeoutRetry();
       ws.removeEventListener('message', onMessage);
+      ws.removeEventListener('error', onError);
       ws.removeEventListener('close', onClose);
       if (event.reason !== 'normal') {
         this._startTimeoutRetry();
       }
     };
     ws.addEventListener('message', onMessage);
+    ws.addEventListener('error', onError);
     ws.addEventListener('close', onClose);
   }
 
