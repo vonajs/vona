@@ -5,6 +5,7 @@ const SymbolPerformActionId = Symbol('SymbolPerformActionId');
 const SymbolPerformActionRecord = Symbol('SymbolPerformActionRecord');
 
 const __cabloyEventPrefix = '_:';
+const __closeReasonNormal = 'Manual close';
 
 export class WebSocketClient {
   private [SymbolPerformActionRecord]: Record<string, ISocketEventPerformActionItem | undefined> = {};
@@ -48,7 +49,7 @@ export class WebSocketClient {
       ws.removeEventListener('open', onOpen);
       ws.removeEventListener('error', onError);
       ws.removeEventListener('close', onClose);
-      if (event.reason !== 'normal') {
+      if (event.reason !== __closeReasonNormal) {
         this._startTimeoutRetry();
       }
     };
@@ -77,7 +78,7 @@ export class WebSocketClient {
 
   public disconnect() {
     if (this._ws) {
-      this._ws.close(0, 'normal');
+      this._ws.close(undefined, __closeReasonNormal);
       this._ws = undefined;
     }
   }
