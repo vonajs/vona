@@ -11,12 +11,16 @@ export class WebSocketClient extends WebSocket {
 
   constructor(url: string | URL, protocols?: string | string[] | undefined) {
     super(url, protocols);
-    this.addEventListener('close', _event => {
-      this._closeEvents();
-    });
-    this.addEventListener('message', event => {
+    const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
-    });
+    };
+    const onClose = (_event: CloseEvent) => {
+      this._closeEvents();
+      this.removeEventListener('message', onMessage);
+      this.removeEventListener('close', onClose);
+    };
+    this.addEventListener('message', onMessage);
+    this.addEventListener('close', onClose);
   }
 
   public sendEvent(eventName: keyof ISocketEventRecord, data: any) {
