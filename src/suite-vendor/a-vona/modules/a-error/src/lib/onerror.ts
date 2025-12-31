@@ -1,3 +1,4 @@
+import type { VonaApplication } from 'vona';
 import http from 'node:http';
 import { format } from 'node:util';
 import { sendToWormhole } from 'stream-wormhole';
@@ -22,8 +23,23 @@ export interface OnerrorOptions {
 
 const defaultOptions: OnerrorOptions = {};
 
-export function onerror(app: any, options?: OnerrorOptions) {
+export function onerror(app: VonaApplication, options?: OnerrorOptions) {
   options = { ...defaultOptions, ...options };
+
+  app.onerrorGeneral = async function (err: Error) {
+    // 700/701: exit/reload
+    if ([700, 701].includes(err.code as any)) {
+      return;
+    }
+
+    // 301/302
+    if ([301, 302].includes(err.code as any)) {
+      return;
+    }
+
+    // log filter, need not app.emit('error')
+    await (options as any).log.call(this, err, this);
+  };
 
   app.context.onerror = async function (err: any) {
     // don't do anything if there is no error.
@@ -39,7 +55,7 @@ export function onerror(app: any, options?: OnerrorOptions) {
     }
 
     // 700/701: exit/reload
-    if (err.code === 700 || err.code === 701) {
+    if ([700, 701].includes(err.code as any)) {
       this.res.statusCode = 200;
       this.res.end();
       return;
@@ -108,7 +124,7 @@ export function onerror(app: any, options?: OnerrorOptions) {
     if (options.accepts) {
       type = options.accepts.call(this, 'html', 'text', 'json');
     } else {
-      type = this.accepts('html', 'text', 'json');
+      type = this.accepts('html', 'text', 'json') as any;
     }
     type = type || 'text';
     if (options.all) {
