@@ -19,14 +19,17 @@ export function config(_app: VonaApplication) {
         const fn = accepts;
         return fn(this as any);
       },
+      async logWithApp(err: Error, app: VonaApplication) {
+        return await _performErrorFilters(app, err, 'log');
+      },
       async log(err: Error, ctx: VonaContext) {
-        return await _performErrorFilters(ctx, err, 'log');
+        return await _performErrorFiltersWithCtx(ctx, err, 'log');
       },
       async json(err: Error, ctx: VonaContext) {
-        return await _performErrorFilters(ctx, err, 'json');
+        return await _performErrorFiltersWithCtx(ctx, err, 'json');
       },
       async html(err: Error, ctx: VonaContext) {
-        return await _performErrorFilters(ctx, err, 'html');
+        return await _performErrorFiltersWithCtx(ctx, err, 'html');
       },
       async text(err: Error, ctx: VonaContext) {
         ctx.body = err.code; // not set err.message for safety
@@ -35,9 +38,13 @@ export function config(_app: VonaApplication) {
   };
 }
 
-async function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
+async function _performErrorFiltersWithCtx(ctx: VonaContext, err: Error, method: string) {
   return await ctx.app.ctxStorage.run(ctx as any, async () => {
-    const beanFilter = ctx.app.bean._getBean('a-aspectutils.service.filter' as never) as ServiceFilter;
-    return await beanFilter.performErrorFilters(err, method);
+    return await _performErrorFilters(ctx.app, err, method);
   });
+}
+
+async function _performErrorFilters(app: VonaApplication, err: Error, method: string) {
+  const beanFilter = app.bean._getBean('a-aspectutils.service.filter' as never) as ServiceFilter;
+  return await beanFilter.performErrorFilters(err, method);
 }
