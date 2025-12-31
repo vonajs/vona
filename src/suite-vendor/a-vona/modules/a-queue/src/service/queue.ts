@@ -11,6 +11,7 @@ import type {
   IQueueWorks,
   TypeQueueJob,
 } from '../types/queue.ts';
+import { catchError } from '@cabloy/utils';
 import * as Bull from 'bullmq';
 import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -97,7 +98,7 @@ export class ServiceQueue extends BeanBase {
       async job => {
         // concurrency
         if (queueConfig?.concurrency) {
-          return await this._performTask(job);
+          return await this._performTaskWrapper(job);
         }
         // redlock
         const info = job.data as IQueueJobContext<DATA>;
@@ -106,7 +107,7 @@ export class ServiceQueue extends BeanBase {
         return await this.$scope.redlock.service.redlock.lock(
           _lockResource,
           async () => {
-            return await this._performTask(job);
+            return await this._performTaskWrapper(job);
           },
           {
             // instanceName: job.data.instanceName, // need not
@@ -264,6 +265,18 @@ export class ServiceQueue extends BeanBase {
   _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
     const instanceName = instanceDesp(info.options?.instanceName);
     return `${instanceName}||${beanFullNameFromOnionName(info.queueName, 'queue')}`;
+  }
+
+  async _performTaskWrapper<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
+    const [res, err] = await catchError(() => {
+      return this._performTask(job);
+    });
+    if (err) {
+      this.app.handleError(err);
+      throw err;
+    } else {
+      return res;
+    }
   }
 
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
