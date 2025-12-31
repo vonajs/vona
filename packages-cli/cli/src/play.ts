@@ -23,7 +23,9 @@ export async function playAttach(projectPath: string, args: string[]) {
     const message = `error: ${result.status}, ${result.statusText}`;
     throw new Error(message);
   }
-  const res = await result.json();
+  const resText = await result.text();
+  const res = resText ? JSON.parse(resText) : undefined;
+  if (!res) return;
   if (res.code !== 0) throw new Error(res.message);
   if (res.data !== undefined) {
     // eslint-disable-next-line no-console

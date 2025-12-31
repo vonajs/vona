@@ -65,6 +65,8 @@ export const errorsInternal = {
   '509': 'Bandwidth Limit Exceeded',
   '510': 'Not Extended',
   '511': 'Network Authentication Required',
+  '700': 'Exit',
+  '701': 'Reload'
 };
 
 export type TypeErrorsInternal = typeof errorsInternal;

@@ -33,6 +33,7 @@ export class BeanWorker extends BeanBase {
     this.app.close().then(() => {
       process.exit(code);
     });
+    this.app.throw(700);
   }
 
   exitAll(code?: number | string | null | undefined) {
@@ -47,6 +48,7 @@ export class BeanWorker extends BeanBase {
       this.app.close().then(() => {
         worker.send('reload-worker');
       });
+      this.app.throw(701);
     }
   }
 

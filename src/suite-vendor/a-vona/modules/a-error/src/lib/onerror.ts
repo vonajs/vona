@@ -38,6 +38,13 @@ export function onerror(app: any, options?: OnerrorOptions) {
       sendToWormhole(this.req);
     }
 
+    // 700/701: exit/reload
+    if (err.code === 700 || err.code === 701) {
+      this.res.statusCode = 200;
+      this.res.end();
+      return;
+    }
+
     // wrap non-error object
     if (!(err instanceof Error)) {
       let errMsg = err;
