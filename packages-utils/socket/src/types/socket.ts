@@ -42,3 +42,8 @@ export interface ISendEventOptions {
   compress?: boolean | undefined;
   fin?: boolean | undefined;
 }
+
+export interface IWebSocketOptions {
+  reconnectInterval?: number;
+  maxReconnectAttempts?: number;
+}

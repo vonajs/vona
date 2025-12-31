@@ -1,4 +1,4 @@
-import type { ISocketEventPerformActionItem, ISocketEventPerformActionOptions, ISocketEventPerformActionOptionsInner, ISocketEventRecord, ISocketEventRecordSystem, TypeSocketEventPerformActionMethod, TypeSocketPacketEvent } from '../types/socket.ts';
+import type { ISocketEventPerformActionItem, ISocketEventPerformActionOptions, ISocketEventPerformActionOptionsInner, ISocketEventRecord, ISocketEventRecordSystem, IWebSocketOptions, TypeSocketEventPerformActionMethod, TypeSocketPacketEvent } from '../types/socket.ts';
 import { getRandomInt } from '@cabloy/utils';
 import { socketEventRecord, socketEventRecordReverse } from '../types/socket.ts';
 
@@ -13,10 +13,18 @@ export class WebSocketClient {
   private _url: string | URL;
   private _protocols?: string | string[];
   private _timeoutRetry: any;
+  private _reconnectInterval: number;
+  private _maxReconnectAttempts: number;
+  private _reconnectAttempts: number = 0;
 
   public onReady?: () => void;
   public onEvent?: <K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent) => void;
   public onFallback?: (event: MessageEvent) => void;
+
+  constructor(options: IWebSocketOptions) {
+    this._reconnectInterval = options.reconnectInterval || 1000;
+    this._maxReconnectAttempts = options.maxReconnectAttempts || Infinity;
+  }
 
   public connect(url: string | URL, protocols?: string | string[]) {
     this.disconnect();
@@ -30,13 +38,15 @@ export class WebSocketClient {
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
     };
-    const onError = (_event: Event) => {
-      this._startTimeoutRetry();
+    const onOpen = (_event: Event) => {
+      this._reconnectAttempts = 0;
     };
+    const onError = (_event: Event) => {};
     const onClose = (event: CloseEvent) => {
       this._closeEvents();
       this._closeTimeoutRetry();
       ws.removeEventListener('message', onMessage);
+      ws.removeEventListener('open', onOpen);
       ws.removeEventListener('error', onError);
       ws.removeEventListener('close', onClose);
       if (event.reason !== 'normal') {
@@ -44,6 +54,7 @@ export class WebSocketClient {
       }
     };
     ws.addEventListener('message', onMessage);
+    ws.addEventListener('open', onOpen);
     ws.addEventListener('error', onError);
     ws.addEventListener('close', onClose);
   }
@@ -57,7 +68,8 @@ export class WebSocketClient {
 
   private _startTimeoutRetry() {
     this._closeTimeoutRetry();
-    const delay = 1000 * getRandomInt(3, 1);
+    this._reconnectAttempts++;
+    const delay = this._reconnectInterval * Math.min(this._reconnectAttempts, 5);
     this._timeoutRetry = setTimeout(() => {
       this.connect(this._url, this._protocols);
     }, delay);
