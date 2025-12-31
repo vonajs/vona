@@ -9,31 +9,43 @@ const __cabloyEventPrefix = '_:';
 export class WebSocketClient {
   private [SymbolPerformActionRecord]: Record<string, ISocketEventPerformActionItem | undefined> = {};
   private _ws?: WebSocket;
+  private _url: string | URL;
+  private _protocols?: string | string[];
 
   public onReady?: () => void;
   public onEvent?: <K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent) => void;
   public onFallback?: (event: MessageEvent) => void;
 
-  public connect(url: string | URL, protocols?: string | string[] | undefined) {
-    if (this._ws) return;
-    this._ws = new WebSocket(url, protocols);
+  public connect(url: string | URL, protocols?: string | string[]) {
+    this.disconnect();
+    this._connect(url, protocols);
+  }
+
+  private _connect(url: string | URL, protocols?: string | string[]) {
+    this._url = url;
+    this._protocols = protocols;
+    const ws = this._ws = new WebSocket(url, protocols);
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
     };
     const onClose = (_event: CloseEvent) => {
       this._closeEvents();
-      if (this._ws) {
-        this._ws.removeEventListener('message', onMessage);
-        this._ws.removeEventListener('close', onClose);
-        this._ws = undefined;
-      }
+      ws.removeEventListener('message', onMessage);
+      ws.removeEventListener('close', onClose);
     };
-    this._ws.addEventListener('message', onMessage);
-    this._ws.addEventListener('close', onClose);
+    ws.addEventListener('message', onMessage);
+    ws.addEventListener('close', onClose);
+  }
+
+  private _reconnect() {
+
   }
 
   public disconnect() {
-    this._ws?.close(0, 'normal');
+    if (this._ws) {
+      this._ws.close(0, 'normal');
+      this._ws = undefined;
+    }
   }
 
   public sendEvent(eventName: keyof ISocketEventRecord, data: any) {
