@@ -38,7 +38,7 @@ export function onerror(app: VonaApplication, options?: OnerrorOptions) {
     }
 
     // log filter, need not app.emit('error')
-    await (options as any).log.call(this, err, this);
+    await (options as any).logWithApp.call(this, err, this);
   };
 
   app.context.onerror = async function (err: any) {
