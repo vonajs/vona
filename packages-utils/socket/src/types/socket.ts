@@ -1,3 +1,5 @@
+export interface ISocketEventPerformActionItem { resolve: Function; reject: Function };
+
 export interface ISocketEventRecordSystem {
   sysReady: never;
   sysPerformAction: never;
@@ -44,14 +46,11 @@ export interface ISendEventOptions {
 declare global {
   interface WebSocket {
     onReady(): void;
-    onEvent<K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent): void;
+    onEvent<K extends keyof ISocketEventRecord>(
+      eventName: K,
+      data: ISocketEventRecord[K],
+      event: MessageEvent
+    ): void;
     onFallback(event: MessageEvent): void;
-    parseEvent(event: MessageEvent): TypeSocketPacketEvent;
-    sendEvent<K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K] | undefined): void;
-    performAction(method: TypeSocketEventPerformActionMethod,
-      path: string,
-      options?: ISocketEventPerformActionOptions,
-    ): Promise<any>;
-    closeEvents(): void;
   }
 }
