@@ -4,6 +4,6 @@ export interface IErrorRenderOptions {
 
 declare module 'vona' {
   export interface VonaApplication {
-    onerrorGeneral: (err: Error) => Promise<void>;
+    handleError: (err: Error) => Promise<void>;
   }
 }

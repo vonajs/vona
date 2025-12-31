@@ -26,7 +26,7 @@ const defaultOptions: OnerrorOptions = {};
 export function onerror(app: VonaApplication, options?: OnerrorOptions) {
   options = { ...defaultOptions, ...options };
 
-  app.onerrorGeneral = async function (err: Error) {
+  app.handleError = async function (err: Error) {
     // 700/701: exit/reload
     if ([700, 701].includes(err.code as any)) {
       return;

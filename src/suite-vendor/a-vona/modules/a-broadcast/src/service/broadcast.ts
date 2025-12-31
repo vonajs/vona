@@ -25,7 +25,7 @@ export class ServiceBroadcast extends BeanBase {
           // do nothing
         })
         .catch((err: Error) => {
-          this.$logger.error(err);
+          this.app.handleError(err);
         });
     });
   }
