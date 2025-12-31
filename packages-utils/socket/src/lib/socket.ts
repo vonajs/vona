@@ -1,5 +1,4 @@
 import type { ISocketEventPerformActionItem, ISocketEventPerformActionOptions, ISocketEventPerformActionOptionsInner, ISocketEventRecord, ISocketEventRecordSystem, IWebSocketOptions, TypeSocketEventPerformActionMethod, TypeSocketPacketEvent } from '../types/socket.ts';
-import { getRandomInt } from '@cabloy/utils';
 import { socketEventRecord, socketEventRecordReverse } from '../types/socket.ts';
 
 const SymbolPerformActionId = Symbol('SymbolPerformActionId');
@@ -21,9 +20,9 @@ export class WebSocketClient {
   public onEvent?: <K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent) => void;
   public onFallback?: (event: MessageEvent) => void;
 
-  constructor(options: IWebSocketOptions) {
-    this._reconnectInterval = options.reconnectInterval || 1000;
-    this._maxReconnectAttempts = options.maxReconnectAttempts || Infinity;
+  constructor(options?: IWebSocketOptions) {
+    this._reconnectInterval = options?.reconnectInterval || 1000;
+    this._maxReconnectAttempts = options?.maxReconnectAttempts || Infinity;
   }
 
   public connect(url: string | URL, protocols?: string | string[]) {
@@ -67,6 +66,7 @@ export class WebSocketClient {
   }
 
   private _startTimeoutRetry() {
+    if (this._reconnectAttempts >= this._maxReconnectAttempts) return;
     this._closeTimeoutRetry();
     this._reconnectAttempts++;
     const delay = this._reconnectInterval * Math.min(this._reconnectAttempts, 5);
