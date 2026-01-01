@@ -8,7 +8,7 @@ import { Service } from 'vona-module-a-bean';
 export class ServiceFilter extends BeanBase {
   async performErrorFilters(err: Error, method: string) {
     const filterContext: IFilterComposeData = { err, method };
-    return await _composeFilters(this.app, this.ctx.route)(filterContext);
+    return await _composeFilters(this.app, this.ctx?.route)(filterContext);
   }
 }
 
