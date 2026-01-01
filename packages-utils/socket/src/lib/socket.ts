@@ -10,8 +10,6 @@ const __closeReasonNormal = 'Manual close';
 export class WebSocketClient {
   private [SymbolPerformActionRecord]: Record<string, ISocketEventPerformActionItem | undefined> = {};
   private _ws?: WebSocket;
-  private _url: string | URL;
-  private _protocols?: string | string[];
   private _timeoutRetry: any;
   private _reconnectDelay: number;
   private _reconnectDelayMax: number;
@@ -42,8 +40,6 @@ export class WebSocketClient {
   }
 
   private _connect(url: string | URL, protocols?: string | string[]) {
-    this._url = url;
-    this._protocols = protocols;
     const ws = this._ws = new WebSocket(url, protocols);
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
@@ -65,7 +61,7 @@ export class WebSocketClient {
       const reconnect = event.reason !== __closeReasonNormal && this._reconnectAttempts < this._reconnectAttemptsMax;
       this.onClose?.(event, reconnect);
       if (reconnect) {
-        this._startTimeoutRetry();
+        this._startTimeoutRetry(url, protocols);
       }
     };
     ws.addEventListener('message', onMessage);
@@ -81,12 +77,12 @@ export class WebSocketClient {
     }
   }
 
-  private _startTimeoutRetry() {
+  private _startTimeoutRetry(url: string | URL, protocols?: string | string[]) {
     this._closeTimeoutRetry();
     this._reconnectAttempts++;
     const delay = this._reconnectDelay * Math.min(this._reconnectAttempts, this._reconnectDelayMax);
     this._timeoutRetry = setTimeout(() => {
-      this.connect(this._url, this._protocols);
+      this.connect(url, protocols);
     }, delay);
   }
 
