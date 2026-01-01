@@ -15,7 +15,7 @@ export class ModuleLoader extends BeanSimple {
     // load modules
     await moduleTools.load();
     // monkey modules
-    await moduleTools.monkey('moduleLoading');
+    await moduleTools.monkey(true, 'moduleLoading');
 
     await loadConfig(app, modules);
     await loadLocales(app, modules);
@@ -23,6 +23,6 @@ export class ModuleLoader extends BeanSimple {
     loadConstants(app, modules);
 
     // monkey modules
-    await moduleTools.monkey('moduleLoaded');
+    await moduleTools.monkey(true, 'moduleLoaded');
   }
 }

@@ -51,7 +51,7 @@ export class ServiceHmr extends BeanBase {
   private async _reloadConfig(moduleName: string, config: TypeModuleResourceConfig) {
     const app = this.app;
     const configModule = await config(app, app.options.env);
-    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', app.meta.modules[moduleName], configModule);
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'configLoaded', app.meta.modules[moduleName], configModule);
     // app config
     app.config.modules[moduleName] = deepExtend(
       {},
