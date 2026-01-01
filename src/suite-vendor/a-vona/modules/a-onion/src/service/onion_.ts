@@ -1,6 +1,6 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import type { Next } from 'vona';
+import type { Next, VonaContext } from 'vona';
 import type { IEventRecord } from 'vona-module-a-event';
 import type { IMetaNameRecord } from 'vona-module-a-meta';
 import type { ContextRoute } from 'vona-module-a-web';
@@ -202,18 +202,18 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   }
 
   combineOnionOptions<T extends keyof ONIONRECORD>(item: IOnionSlice<ONIONRECORD, T>, optionsCustom?: Partial<ONIONRECORD[T]>): ONIONRECORD[T] {
-    const ctx = this.ctx;
+    const ctx = this.ctx as VonaContext | undefined;
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
     const optionsMetaAndConfig = item.beanOptions.options;
     // options: instance config
-    const optionsInstanceConfig = ctx.instance ? ctx.config.onions[item.beanOptions.scene]?.[item.name] : undefined;
+    const optionsInstanceConfig = ctx?.instance ? ctx?.config.onions[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
     //    not use route options for argument pipe
     let optionsRoute;
     if (!cast(item).argumentPipe && this.sceneMeta.optionsRoute) {
-      const route = ctx.route?.route;
+      const route = ctx?.route?.route;
       optionsRoute = route?.meta?.[item.beanOptions.beanFullName];
     }
     // options: argument pipe
@@ -221,7 +221,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
-      optionsDynamic = ctx.onionsDynamic?.[item.beanOptions.scene]?.[item.name];
+      optionsDynamic = ctx?.onionsDynamic?.[item.beanOptions.scene]?.[item.name];
     }
     // final options
     let options;
