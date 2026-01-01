@@ -88,7 +88,7 @@ export class WebSocketClient {
 
   public disconnect() {
     if (this._ws) {
-      this._ws.close(undefined, __closeReasonNormal);
+      this._ws.close(1000, __closeReasonNormal);
       this._ws = undefined;
     }
   }
