@@ -11,7 +11,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
-import { combineApiPath, combineApiPathControllerAndAction, combineApiPathControllerAndActionRaw, combineResourceName } from '@cabloy/utils';
+import { combineApiPath, combineApiPathControllerAndAction, combineApiPathControllerAndActionRaw, combineResourceName, forEach, forEachSync } from '@cabloy/utils';
 import fse from 'fs-extra';
 import * as uuid from 'uuid';
 import { cast } from '../../types/index.ts';
@@ -173,7 +173,8 @@ export class AppUtil extends BeanSimple {
 
   async monkeyModule(
     ebAppMonkey,
-    ebModulesMonkey,
+    ebModulesMonkey: IModule[],
+    order: boolean,
     monkeyName: TypeMonkeyName,
     moduleTarget?: IModule,
     ...monkeyData: any[]
@@ -184,8 +185,7 @@ export class AppUtil extends BeanSimple {
       await moduleTarget.mainInstance[monkeyName](...monkeyData);
     }
     // module monkey
-    for (const key in ebModulesMonkey) {
-      const moduleMonkey: IModule = ebModulesMonkey[key];
+    await forEach(ebModulesMonkey, order, async moduleMonkey => {
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
         if (moduleTarget === undefined) {
           // @ts-ignore ignore
@@ -195,7 +195,7 @@ export class AppUtil extends BeanSimple {
           await moduleMonkey.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
         }
       }
-    }
+    });
     // app monkey
     if (ebAppMonkey && ebAppMonkey[monkeyName]) {
       if (moduleTarget === undefined) {
@@ -208,7 +208,8 @@ export class AppUtil extends BeanSimple {
 
   monkeyModuleSync(
     ebAppMonkey,
-    ebModulesMonkey,
+    ebModulesMonkey: IModule[],
+    order: boolean,
     monkeyName: TypeMonkeyName,
     moduleTarget?: IModule,
     ...monkeyData: any[]
@@ -219,8 +220,7 @@ export class AppUtil extends BeanSimple {
       moduleTarget.mainInstance[monkeyName](...monkeyData);
     }
     // module monkey
-    for (const key in ebModulesMonkey) {
-      const moduleMonkey: IModule = ebModulesMonkey[key];
+    forEachSync(ebModulesMonkey, order, async moduleMonkey => {
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
         if (moduleTarget === undefined) {
           // @ts-ignore ignore
@@ -230,7 +230,7 @@ export class AppUtil extends BeanSimple {
           moduleMonkey.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
         }
       }
-    }
+    });
     // app monkey
     if (ebAppMonkey && ebAppMonkey[monkeyName]) {
       if (moduleTarget === undefined) {

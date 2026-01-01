@@ -9,7 +9,7 @@ export class ModuleTools extends BeanSimple {
     const modulesArray = modulesMeta.modulesMeta.moduleNames.map(relativeName => modules[relativeName]);
     app.meta.modules = modules;
     app.meta.modulesArray = modulesArray;
-    app.meta.modulesMonkey = {};
+    app.meta.modulesMonkey = [];
     return modules;
   }
 
@@ -22,15 +22,15 @@ export class ModuleTools extends BeanSimple {
       }
       if (module.resource.Monkey) {
         module.monkeyInstance = app.bean._newBean(module.resource.Monkey, module);
-        app.meta.modulesMonkey[module.info.relativeName] = module;
+        app.meta.modulesMonkey.push(module);
       }
     }
   }
 
-  async monkey(monkeyName) {
+  async monkey(order: boolean, monkeyName) {
     const app = this.app;
     for (const module of app.meta.modulesArray) {
-      await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, module);
+      await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, order, monkeyName, module);
     }
   }
 }

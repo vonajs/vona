@@ -39,7 +39,7 @@ export class Start {
   async _start_appStart() {
     const app = this.app;
     // hook: appStart
-    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStart');
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'appStart');
   }
 
   async _start_appReady() {
@@ -47,7 +47,7 @@ export class Start {
     app.meta.appReady = true;
     app.meta.appReadyInstances = {};
     // hook: appReady
-    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appReady');
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'appReady');
   }
 
   async _start_appStarted() {
@@ -56,7 +56,7 @@ export class Start {
     // event: appStarted
     app.emit(EnumAppEvent.AppStarted);
     // hook: appStarted
-    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'appStarted');
+    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'appStarted');
   }
 
   async _start_appConfig() {

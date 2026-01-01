@@ -14,7 +14,7 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
       if (module.resource.config) {
         const configModule = await module.resource.config(app, app.options.env);
         // configNew is not used by now
-        await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', module, configModule);
+        await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'configLoaded', module, configModule);
         app.config.modules[module.info.relativeName] = deepExtend(
           {},
           configModule,

@@ -202,3 +202,27 @@ export function stringLazy(fn: () => string) {
     toString: fn,
   };
 }
+
+export async function forEach<T>(arr: T[], order: boolean, fn: (item: T, index: number) => Promise<void>) {
+  if (order) {
+    for (let index = 0; index < arr.length; index++) {
+      await fn(arr[index], index);
+    }
+  } else {
+    for (let index = arr.length - 1; index >= 0; index--) {
+      await fn(arr[index], index);
+    }
+  }
+}
+
+export function forEachSync<T>(arr: T[], order: boolean, fn: (item: T, index: number) => void) {
+  if (order) {
+    for (let index = 0; index < arr.length; index++) {
+      fn(arr[index], index);
+    }
+  } else {
+    for (let index = arr.length - 1; index >= 0; index--) {
+      fn(arr[index], index);
+    }
+  }
+}

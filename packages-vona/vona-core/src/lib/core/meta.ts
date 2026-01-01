@@ -36,7 +36,7 @@ export class AppMeta extends BeanSimple {
   //
   modules: Record<string, IModule>;
   modulesArray: IModule[];
-  modulesMonkey: Record<string, IModule>;
+  modulesMonkey: IModule[];
   //
   constants: Record<string, any>;
   locales: TypeModuleResourceLocales;
@@ -134,13 +134,13 @@ export class AppMeta extends BeanSimple {
     // appClose
     this.appClose = true;
     // hook: appClose
-    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClose');
+    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, false, 'appClose');
     // ctx counter
     await this.app.meta.ctxCounter.awaitUntilZero();
     // appClosed
     this.appClosed = true;
     // hook: appClosed
-    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, 'appClosed');
+    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, false, 'appClosed');
     // container dispose
     await this.app.bean.dispose();
     // logger dispose
