@@ -174,7 +174,7 @@ export class BeanContainer {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
         __setPropertyValue(beanInstance, SymbolBeanInstanceKey, key);
         this[SymbolBeanContainerInstances][key] = beanInstance;
-        this.containerType === 'app' && this.app.meta.hmr?.addBeanInstance(fullName, key, args, withSelector);
+        this.containerType === 'app' && this.app.meta.hmr.addBeanInstance(fullName, key, args, withSelector);
       }
     }
     // init
@@ -241,7 +241,7 @@ export class BeanContainer {
             targetBeanFullName,
             useOptions,
           );
-          self.containerType === 'app' && self.app.meta.hmr?.addBeanInstanceProp(beanInstance, prop, targetBeanFullName);
+          self.containerType === 'app' && self.app.meta.hmr.addBeanInstanceProp(beanInstance, prop, targetBeanFullName);
         }
         return beanInstance[SymbolBeanInstancePropsLazy][prop];
       },

@@ -26,7 +26,7 @@ export class AppMeta extends BeanSimple {
   error: ErrorClass;
   logger: AppLogger;
   locale: AppLocale;
-  hmr?: AppHmr;
+  hmr: AppHmr;
   text: IModuleLocaleText;
   scopeContainer: BeanScopeContainer;
   appMonkey?: IAppMonkey;
@@ -72,9 +72,7 @@ export class AppMeta extends BeanSimple {
     this.locale = this.bean._newBean(AppLocale);
 
     // hmr
-    if (process.env.META_MODE === 'dev') {
-      this.hmr = this.bean._newBean(AppHmr);
-    }
+    this.hmr = this.bean._newBean(AppHmr);
 
     // text
     this.text = this.locale.createLocaleText();

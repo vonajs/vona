@@ -43,7 +43,7 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected $mutate(args: any[]) {
-    this.app.meta.hmr?.mutateBeanInstance(this.$beanFullName, this[SymbolBeanInstanceKey], args);
+    this.app.meta.hmr.mutateBeanInstance(this.$beanFullName, this[SymbolBeanInstanceKey], args);
   }
 
   protected get $scope(): IBeanScopeContainer {

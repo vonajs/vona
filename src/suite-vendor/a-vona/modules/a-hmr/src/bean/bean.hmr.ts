@@ -10,7 +10,7 @@ export class BeanHmr extends BeanBase {
 
   public async reloadBeansOfScene(sceneName: keyof IBeanSceneRecord) {
     const sceneNameLike = `.${sceneName}.`;
-    const recordBeanInstances = this.app.meta.hmr?.recordBeanInstances;
+    const recordBeanInstances = this.app.meta.hmr.recordBeanInstances;
     if (!recordBeanInstances) return;
     for (const beanFullName of Object.keys(recordBeanInstances)) {
       if (!beanFullName.includes(sceneNameLike)) continue;

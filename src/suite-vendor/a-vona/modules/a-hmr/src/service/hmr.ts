@@ -111,9 +111,9 @@ export class ServiceHmr extends BeanBase {
   private async _reloadBeanInstances(beanOptions: IDecoratorBeanOptionsBase) {
     const { beanFullName } = beanOptions;
     const beanContainer = this.bean;
-    const recordBeanInstances = this.app.meta.hmr!.recordBeanInstances[beanFullName];
+    const recordBeanInstances = this.app.meta.hmr.recordBeanInstances[beanFullName];
     if (!recordBeanInstances) return;
-    this.app.meta.hmr!.recordBeanInstances[beanFullName] = [];
+    this.app.meta.hmr.recordBeanInstances[beanFullName] = [];
     for (const { beanInstanceKey, withSelector, args } of recordBeanInstances) {
       // dispose
       const beanInstanceOld: any = beanContainer[SymbolBeanContainerInstances][beanInstanceKey];
@@ -146,9 +146,9 @@ export class ServiceHmr extends BeanBase {
 
   private _reloadBeanInstanceProps(beanOptions: IDecoratorBeanOptionsBase) {
     const { beanFullName } = beanOptions;
-    const recordBeanInstanceProps = this.app.meta.hmr!.recordBeanInstanceProps[beanFullName];
+    const recordBeanInstanceProps = this.app.meta.hmr.recordBeanInstanceProps[beanFullName];
     if (!recordBeanInstanceProps) return;
-    this.app.meta.hmr!.recordBeanInstanceProps[beanFullName] = [];
+    this.app.meta.hmr.recordBeanInstanceProps[beanFullName] = [];
     for (const { beanInstance, prop } of recordBeanInstanceProps) {
       delete beanInstance[SymbolBeanInstancePropsLazy][prop];
     }
