@@ -1,7 +1,7 @@
 {
   "name": "vona-suite-a-vona",
   "type": "module",
-  "version": "5.0.261",
+  "version": "5.0.262",
   "title": "a-core",
   "description": "",
   "author": "",
@@ -34,7 +34,7 @@
     "vona-module-a-mailconfirm": "^5.0.14",
     "vona-module-a-menu": "^5.0.25",
     "vona-module-a-meta": "^5.0.19",
-    "vona-module-a-onion": "^5.0.34",
+    "vona-module-a-onion": "^5.0.35",
     "vona-module-a-openapi": "^5.0.66",
     "vona-module-a-openapischema": "^5.0.25",
     "vona-module-a-openapiutils": "^5.0.14",

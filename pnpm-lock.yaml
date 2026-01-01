@@ -919,7 +919,7 @@ importers:
         specifier: ^5.0.126
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.261
+        specifier: ^5.0.262
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1300,7 +1300,7 @@ importers:
         specifier: ^5.0.19
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.0.34
+        specifier: ^5.0.35
         version: link:modules/a-onion
       vona-module-a-openapi:
         specifier: ^5.0.66
