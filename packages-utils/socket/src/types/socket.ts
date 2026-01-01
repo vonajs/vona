@@ -44,6 +44,7 @@ export interface ISendEventOptions {
 }
 
 export interface IWebSocketOptions {
-  reconnectInterval?: number;
-  maxReconnectAttempts?: number;
+  reconnectDelay?: number;
+  reconnectDelayMax?: number;
+  reconnectAttemptsMax?: number;
 }

@@ -13,8 +13,9 @@ export class WebSocketClient {
   private _url: string | URL;
   private _protocols?: string | string[];
   private _timeoutRetry: any;
-  private _reconnectInterval: number;
-  private _maxReconnectAttempts: number;
+  private _reconnectDelay: number;
+  private _reconnectDelayMax: number;
+  private _reconnectAttemptsMax: number;
   private _reconnectAttempts: number = 0;
 
   public onReady?: () => void;
@@ -26,8 +27,9 @@ export class WebSocketClient {
   public onClose?: (event: CloseEvent, reconnect: boolean) => void;
 
   constructor(options?: IWebSocketOptions) {
-    this._reconnectInterval = options?.reconnectInterval || 1000;
-    this._maxReconnectAttempts = options?.maxReconnectAttempts || Infinity;
+    this._reconnectDelay = options?.reconnectDelay || 1000;
+    this._reconnectDelayMax = options?.reconnectDelayMax || 5000;
+    this._reconnectAttemptsMax = options?.reconnectAttemptsMax || Infinity;
   }
 
   public get ws() {
@@ -60,7 +62,7 @@ export class WebSocketClient {
       ws.removeEventListener('open', onOpen);
       ws.removeEventListener('error', onError);
       ws.removeEventListener('close', onClose);
-      const reconnect = event.reason !== __closeReasonNormal && this._reconnectAttempts < this._maxReconnectAttempts;
+      const reconnect = event.reason !== __closeReasonNormal && this._reconnectAttempts < this._reconnectAttemptsMax;
       this.onClose?.(event, reconnect);
       if (reconnect) {
         this._startTimeoutRetry();
@@ -82,7 +84,7 @@ export class WebSocketClient {
   private _startTimeoutRetry() {
     this._closeTimeoutRetry();
     this._reconnectAttempts++;
-    const delay = this._reconnectInterval * Math.min(this._reconnectAttempts, 5);
+    const delay = this._reconnectDelay * Math.min(this._reconnectAttempts, this._reconnectDelayMax);
     this._timeoutRetry = setTimeout(() => {
       this.connect(this._url, this._protocols);
     }, delay);
