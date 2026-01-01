@@ -220,7 +220,7 @@ export class AppUtil extends BeanSimple {
       moduleTarget.mainInstance[monkeyName](...monkeyData);
     }
     // module monkey
-    forEachSync(ebModulesMonkey, order, async moduleMonkey => {
+    forEachSync(ebModulesMonkey, order, moduleMonkey => {
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
         if (moduleTarget === undefined) {
           // @ts-ignore ignore
