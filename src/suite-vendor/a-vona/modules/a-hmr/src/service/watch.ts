@@ -1,4 +1,4 @@
-import type { TypeBroadcastReloadBeanJobData } from '../bean/broadcast.reloadBean.ts';
+import type { TypeBroadcastReloadFileJobData } from '../bean/broadcast.reloadFile.ts';
 import type { TypeHmrWatchScene } from '../types/hmr.ts';
 import path from 'node:path';
 import chalk from 'chalk';
@@ -80,16 +80,12 @@ export class ServiceWatch extends BeanBase {
     console.log(chalk.cyan(message));
   }
 
-  private async _reloadFile(data: TypeBroadcastReloadBeanJobData) {
-    this.scope.broadcast.reloadBean.emit(data);
-    await this._reloadFileInner(data);
+  private async _reloadFile(data: TypeBroadcastReloadFileJobData) {
+    this.scope.broadcast.reloadFile.emit(data);
+    await this._reloadFileWorker(data);
   }
 
-  public async _reloadBeanWorker(data: TypeBroadcastReloadBeanJobData) {
-    await this._reloadFileInner(data);
-  }
-
-  public async _reloadFileInner(data: TypeBroadcastReloadBeanJobData) {
+  public async _reloadFileWorker(data: TypeBroadcastReloadFileJobData) {
     return await this.bean.executor.newCtx(async () => {
       return await this.scope.service.hmr.reloadFile(data.sceneName, data.file);
     }, { dbInfo: {}, instanceName: '' });

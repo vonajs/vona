@@ -82,35 +82,35 @@ declare module 'vona' {
 }
 /** service: end */
 /** broadcast: begin */
-export * from '../bean/broadcast.reloadBean.ts';
+export * from '../bean/broadcast.reloadFile.ts';
 
 import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   
     export interface IBroadcastRecord {
-      'a-hmr:reloadBean': IDecoratorBroadcastOptions;
+      'a-hmr:reloadFile': IDecoratorBroadcastOptions;
     }
 
   
 }
 declare module 'vona-module-a-hmr' {
   
-        export interface BroadcastReloadBean {
+        export interface BroadcastReloadFile {
           /** @internal */
           get scope(): ScopeModuleAHmr;
         }
 
-          export interface BroadcastReloadBean {
-            get $beanFullName(): 'a-hmr.broadcast.reloadBean';
-            get $onionName(): 'a-hmr:reloadBean';
+          export interface BroadcastReloadFile {
+            get $beanFullName(): 'a-hmr.broadcast.reloadFile';
+            get $onionName(): 'a-hmr:reloadFile';
             get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */
 /** broadcast: begin */
-import type { BroadcastReloadBean } from '../bean/broadcast.reloadBean.ts';
+import type { BroadcastReloadFile } from '../bean/broadcast.reloadFile.ts';
 export interface IModuleBroadcast {
-  'reloadBean': BroadcastReloadBean;
+  'reloadFile': BroadcastReloadFile;
 }
 /** broadcast: end */
 /** event: begin */
