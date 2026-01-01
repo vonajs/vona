@@ -28,6 +28,8 @@ export class ServiceOpenapi extends BeanBase {
     await cacheSwagger.clear();
     const cacheRapidoc = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:rapidoc', 'summerCache'));
     await cacheRapidoc.clear();
+    // event
+    await this.scope.event.clearAllCaches.emit(undefined);
   }
 
   public translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
