@@ -9,7 +9,7 @@ export type NextEventSyncStrict<DATA = unknown, RESULT = unknown> = (data: DATA)
 export type EventOn<DATA = unknown, RESULT = unknown> = (data: DATA, next: (data?: DATA) => Promise<RESULT> | RESULT) => Promise<RESULT> | RESULT;
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
-  execute: (data: DATA, next: NextGeneral<DATA, RESULT>) => Promise<RESULT> | RESULT;
+  execute: (data: DATA, next: NextGeneral) => Promise<RESULT> | RESULT;
 }
 
 export interface IEventListenerRecord {}
