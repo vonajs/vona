@@ -33,7 +33,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.34",
+    "@cabloy/module-info": "^1.3.35",
     "@cabloy/utils": "^2.0.13",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
