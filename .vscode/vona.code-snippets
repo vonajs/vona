@@ -320,5 +320,29 @@
       "}"
     ],
     "description": "record.jwtclient"
+  },
+  "record.socketnamespace": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordsocketnamespace",
+    "body": [
+      "declare module 'vona-module-a-socket' {",
+      "  export interface ISocketNamespaceRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.socketnamespace"
+  },
+  "record.socketevent": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordsocketevent",
+    "body": [
+      "declare module 'vona-module-a-socket' {",
+      "  export interface ISocketEventRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.socketevent"
   }
 }
