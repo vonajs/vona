@@ -3,7 +3,6 @@ import type { TypeHmrWatchScene } from '../types/hmr.ts';
 import path from 'node:path';
 import chalk from 'chalk';
 import chokidar, { FSWatcher } from 'chokidar';
-import debounce from 'debounce';
 import { globby } from 'globby';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -39,6 +38,7 @@ const __pathesWatchStrict: TypePathWatchStrict[] = [
 @Service()
 export class ServiceWatch extends BeanBase {
   private _watcher?: FSWatcher;
+  private _changeFiles: Record<string, number | undefined> = {};
 
   async start() {
     // stop
@@ -49,9 +49,9 @@ export class ServiceWatch extends BeanBase {
       .watch(watchDirs, {
         cwd: this.app.projectPath,
       })
-      .on('change', debounce(file => {
+      .on('change', file => {
         this._onChange(file);
-      }, this.scope.config.change.debounce));
+      });
   }
 
   async stop() {
@@ -65,6 +65,17 @@ export class ServiceWatch extends BeanBase {
   }
 
   protected async _onChange(file: string) {
+    const datePrev = this._changeFiles[file];
+    const dateNow = Date.now();
+    if (datePrev && datePrev + this.scope.config.change.debounce >= dateNow) {
+      // donothing
+      return;
+    }
+    this._changeFiles[file] = dateNow;
+    await this._onChangeInner(file);
+  }
+
+  protected async _onChangeInner(file: string) {
     const file2 = file.replace(/\\/g, '/');
     const item = __pathesWatchStrict.find(item => item[1].test(file2));
     if (!item) return;
