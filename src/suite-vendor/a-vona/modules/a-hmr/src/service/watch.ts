@@ -1,6 +1,7 @@
 import type { TypeBroadcastReloadFileJobData } from '../bean/broadcast.reloadFile.ts';
 import type { TypeHmrWatchScene } from '../types/hmr.ts';
 import path from 'node:path';
+import { catchError } from '@cabloy/utils';
 import chalk from 'chalk';
 import chokidar, { FSWatcher } from 'chokidar';
 import { globby } from 'globby';
@@ -49,8 +50,13 @@ export class ServiceWatch extends BeanBase {
       .watch(watchDirs, {
         cwd: this.app.projectPath,
       })
-      .on('change', file => {
-        this._onChange(file);
+      .on('change', async file => {
+        const [_, err] = await catchError(() => {
+          return this._onChange(file);
+        });
+        if (err) {
+          this.app.handleError(err);
+        }
       });
   }
 

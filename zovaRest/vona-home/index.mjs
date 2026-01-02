@@ -130,4 +130,10 @@ function ZATabsRouterViewTabs(_props) {
 }
 
 //#endregion
-export { ZAAppApp, ZABCard, ZABCard3, ZABehaviorBehavior, ZACurrencyFormFieldCurrency, ZAFormForm, ZAFormFormField, ZAFormFormSubscribe, ZAIconIcon, ZATabsRouterViewTabs, ZDemoBasicCard, ZDemoBasicFormFieldTest, ZDevuiRestpageRestPage, ZDevuiRestpageWrapperFilter, ZDevuiRestpageWrapperForm, ZDevuiRestpageWrapperTable, ZDevuiTableTable, ZHomeBasePage, ZHomeLayoutEssentialLink, ZHomeLayoutLayoutDefault, ZHomeLayoutLayoutEmpty, ZHomeUserFormFieldCaptcha };
+//#region .zova-rest/index.ts
+function $iconName(name) {
+	return name;
+}
+
+//#endregion
+export { $iconName, ZAAppApp, ZABCard, ZABCard3, ZABehaviorBehavior, ZACurrencyFormFieldCurrency, ZAFormForm, ZAFormFormField, ZAFormFormSubscribe, ZAIconIcon, ZATabsRouterViewTabs, ZDemoBasicCard, ZDemoBasicFormFieldTest, ZDevuiRestpageRestPage, ZDevuiRestpageWrapperFilter, ZDevuiRestpageWrapperForm, ZDevuiRestpageWrapperTable, ZDevuiTableTable, ZHomeBasePage, ZHomeLayoutEssentialLink, ZHomeLayoutLayoutDefault, ZHomeLayoutLayoutEmpty, ZHomeUserFormFieldCaptcha };

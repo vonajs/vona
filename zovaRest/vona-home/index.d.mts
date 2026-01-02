@@ -22874,7 +22874,7 @@ interface TypeEventHandlerWrapper<D$1, R$1> {
   fn: TypeEventHandler<D$1, R$1> | undefined;
 }
 interface TypeEventHandler<D$1, R$1> {
-  (data: D$1, next: NextGeneral): Promise<R$1> | R$1;
+  (data: D$1, next: NextGeneral<D$1, R$1>): Promise<R$1> | R$1;
 }
 type NextEventStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => Promise<RESULT>;
 type NextEventSyncStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => RESULT;
@@ -23887,6 +23887,10 @@ interface ZovaConfig {
     prefix: string;
     jwt: boolean;
   };
+  ws: {
+    baseURL: string;
+    prefix: string;
+  };
   ssr: {
     server: {
       protocol: string;
@@ -24026,8 +24030,8 @@ interface IMonkeyModuleSys {
   moduleLoaded(module: IModule): Promise<void>;
   configLoaded(module: IModule, config: any): Promise<void>;
 }
-interface IMonkeySys extends IMonkeySysApplicationInitialize, IMonkeySysContextInitialize, IMonkeySysInitialize, IMonkeySysInitialized, IMonkeySysReady, IMonkeyBeanInit, IMonkeyBeanInited, IMonkeyBeanDispose, IMonkeyBeanDisposed {}
-interface IMonkeyApp extends IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyBeanInit, IMonkeyBeanInited, IMonkeyBeanDispose, IMonkeyBeanDisposed {}
+interface IMonkeySys extends IMonkeySysApplicationInitialize, IMonkeySysContextInitialize, IMonkeySysInitialize, IMonkeySysInitialized, IMonkeySysReady, IMonkeySysClose, IMonkeyBeanInit, IMonkeyBeanInited, IMonkeyBeanDispose, IMonkeyBeanDisposed {}
+interface IMonkeyApp extends IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyBeanInit, IMonkeyBeanInited, IMonkeyBeanDispose, IMonkeyBeanDisposed {}
 interface IMonkeyController {
   controllerDataPrepare(controllerData: IControllerData): void;
   controllerDataInit(controllerData: IControllerData, controller: BeanBase): void;
@@ -24048,6 +24052,9 @@ interface IMonkeySysInitialized {
 interface IMonkeySysReady {
   sysReady(): Promise<void>;
 }
+interface IMonkeySysClose {
+  sysClose(): void;
+}
 interface IMonkeyAppContextInitialize {
   appContextInitialize(ctx: ZovaContext): void;
 }
@@ -24059,6 +24066,9 @@ interface IMonkeyAppInitialized {
 }
 interface IMonkeyAppReady {
   appReady(): Promise<void>;
+}
+interface IMonkeyAppClose {
+  appClose(): void;
 }
 interface IMonkeyBeanInit {
   beanInit(bean: BeanContainer, beanInstance: BeanBase): Promise<void>;
@@ -25605,6 +25615,7 @@ declare class SysMeta extends BeanSimple {
   logger: SysLogger;
   locale: SysLocale;
   error: SysError;
+  event: AppEvent;
   protected __init__(): void;
 }
 //#endregion
@@ -25629,8 +25640,10 @@ declare class SysUtil extends BeanSimple {
 //#endregion
 //#region packages-zova/zova-core/src/core/sys/sys.d.ts
 declare const SymbolSysInitializePromise: unique symbol;
+declare const SymbolSysClose: unique symbol;
 declare class ZovaSys {
   private [SymbolSysInitializePromise];
+  private [SymbolSysClose];
   bean: BeanContainer;
   util: SysUtil;
   meta: SysMeta;
@@ -25639,6 +25652,8 @@ declare class ZovaSys {
   constant: ZovaConstant;
   constructor();
   private _initializeInner;
+  private _hookClose;
+  close(): void;
   private _combineConfig;
   private _prepareEnv;
 }
@@ -27739,8 +27754,10 @@ declare class AppUtil extends BeanSimple {
 }
 //#endregion
 //#region packages-zova/zova-core/src/core/app/application.d.ts
+declare const SymbolAppClose: unique symbol;
 declare class ZovaApplication {
   private _reloadDelayTimer;
+  private [SymbolAppClose];
   vue: App;
   bean: BeanContainer;
   util: AppUtil;
@@ -27751,6 +27768,7 @@ declare class ZovaApplication {
   reload(): void;
   reloadDelay(cancel?: boolean): void;
   throw(code: keyof TypeErrorsInternal | number, ...args: any[]): never;
+  close(): void;
 }
 declare module 'vue' {
   interface App {
@@ -27770,8 +27788,8 @@ declare class BeanSimple {
 declare class AppEvent extends BeanSimple {
   private eventHandlersMap;
   getEventHandlers<K$1 extends keyof IEventRecord>(eventName: K$1): TypeEventHandlers<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']>;
-  emit<K$1 extends keyof IEventRecord>(eventName: K$1, data: IEventRecord[K$1]['data'], nextOrDefault?: NextEventStrict<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']> | IEventRecord[K$1]['result']): Promise<IEventRecord[K$1]['result']>;
-  emitSync<K$1 extends keyof IEventRecord>(eventName: K$1, data: IEventRecord[K$1]['data'], nextOrDefault?: NextEventSyncStrict<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']> | IEventRecord[K$1]['result']): IEventRecord[K$1]['result'];
+  emit<K$1 extends keyof IEventRecord>(eventName: K$1, data?: IEventRecord[K$1]['data'], nextOrDefault?: NextEventStrict<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']> | IEventRecord[K$1]['result']): Promise<IEventRecord[K$1]['result']>;
+  emitSync<K$1 extends keyof IEventRecord>(eventName: K$1, data?: IEventRecord[K$1]['data'], nextOrDefault?: NextEventSyncStrict<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']> | IEventRecord[K$1]['result']): IEventRecord[K$1]['result'];
   on<K$1 extends keyof IEventRecord>(eventName: K$1, fn: TypeEventHandler<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']>): TypeEventOff;
   once<K$1 extends keyof IEventRecord>(eventName: K$1, fn: TypeEventHandler<IEventRecord[K$1]['data'], IEventRecord[K$1]['result']>): TypeEventOff;
 }
@@ -28217,7 +28235,7 @@ declare class Environment {
   evaluate(expression: string, context?: Context): any;
 }
 //#endregion
-//#region node_modules/.pnpm/@cabloy+utils@2.0.8/node_modules/@cabloy/utils/dist/celjs/base.d.ts
+//#region node_modules/.pnpm/@cabloy+utils@2.0.13/node_modules/@cabloy/utils/dist/celjs/base.d.ts
 declare const celEnvBase: Environment;
 //#endregion
 //#region packages-utils/zova-jsx/src/lib/zovaJsx.d.ts
@@ -30709,7 +30727,11 @@ declare class SysSdk extends BeanBase {
   private locale;
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
+  private _eventSsrHmrReload;
+  private _fetch;
   protected __init__(locale: keyof ILocaleRecord): Promise<void>;
+  protected __dispose__(): void;
+  private reload;
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined;
   getSchema(schemaName: string): SchemaObject;
   loadSdk($fetch: BeanFetch, api?: string, apiMethod?: TypeRequestMethod): Promise<IOpenapiSdkItem | undefined>;
@@ -32257,8 +32279,10 @@ declare class BeanModelQuery extends BeanModelCookie {
   $setQueryData<TQueryFnData$1, TData$1 = NoUnknown<TQueryFnData$1>>(queryKey: MaybeRefDeep<QueryKey>, updater: Updater$1<NoInfer<TData$1> | undefined, NoInfer<TData$1> | undefined>, persisterSave?: boolean, options?: MaybeRefDeep<SetDataOptions>): TData$1 | undefined;
   $queryFind<TQueryFnData$1 = unknown, TError$1 = DefaultError, TData$1 = TQueryFnData$1>(filters: QueryFilters): Query<TQueryFnData$1, TError$1, TData$1> | undefined;
   $invalidateQueries(filters?: InvalidateQueryFilters, options?: MaybeRefDeep<InvalidateOptions>): Promise<void>;
+  $refetchQueries(filters?: RefetchQueryFilters, options?: MaybeRefDeep<RefetchOptions>): Promise<void>;
   $setQueryDataDirect(queryKey: QueryKey, value: any): void;
   $clear(): Promise<void>;
+  $normalizeFilters<T$1 extends {}>(filters?: T$1): T$1;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-model/src/bean/bean.model/bean.model.useQuery.d.ts
@@ -32400,8 +32424,10 @@ declare module 'zova' {
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/model/sdk.d.ts
 interface IModelOptionsSdk extends IDecoratorModelOptions {}
 declare class ModelSdk extends BeanModelBase {
+  private _eventSsrHmrReload;
   get $$sysSdk(): SysSdk;
   protected __init__(locale: keyof ILocaleRecord): Promise<void>;
+  protected __dispose__(): void;
   getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined): {
     dataUpdatedAt: number;
     errorUpdatedAt: number;
@@ -32827,7 +32853,7 @@ declare class IconGroup {
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-icon/src/types/icon.d.ts
-interface IIconRecord {}
+interface IIconRecord$1 {}
 interface IIconMeta {
   module: string;
   group: string;
@@ -32880,7 +32906,7 @@ declare class ToolIcon extends BeanBase {
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-icon/src/component/icon/controller.d.ts
 interface ControllerIconProps {
-  name?: keyof IIconRecord;
+  name?: keyof IIconRecord$1;
   href?: string;
   width?: string | number;
   height?: string | number;
@@ -33029,8 +33055,8 @@ interface IFormFieldLayoutOptionsBase {
   inline?: boolean;
   bordered?: boolean;
   floating?: boolean;
-  iconPrefix?: keyof IIconRecord;
-  iconSuffix?: keyof IIconRecord;
+  iconPrefix?: keyof IIconRecord$1;
+  iconSuffix?: keyof IIconRecord$1;
   header?: TypeRenderComponentJsx | string;
   footer?: TypeRenderComponentJsx | string;
 }
@@ -33505,7 +33531,7 @@ declare function ZHomeBasePage(_props: TypeControllerPagePublicProps): string;
 interface ControllerEssentialLinkProps {
   title: string;
   description?: string;
-  icon?: keyof IIconRecord;
+  icon?: keyof IIconRecord$1;
   href?: string;
   to?: string | object;
 }
@@ -39931,6 +39957,7 @@ declare class BeanRouterBase extends BeanBase {
   private _eventRouterGuards;
   protected __init__(): Promise<void>;
   protected __dispose__(): void;
+  dispose(): void;
   protected onRouterGuards(_router: BeanRouter): void;
 }
 //#endregion
@@ -44197,4 +44224,244 @@ declare function ZDevuiTableTable<T$1 extends {} = {}>(_props: TypeControllerTab
 type TypeControllerRouterViewTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerRouterViewTabsProps;
 declare function ZATabsRouterViewTabs(_props: TypeControllerRouterViewTabsPublicProps): string;
 //#endregion
-export { ZAAppApp, ZABCard, ZABCard3, ZABehaviorBehavior, ZACurrencyFormFieldCurrency, ZAFormForm, ZAFormFormField, ZAFormFormSubscribe, ZAIconIcon, ZATabsRouterViewTabs, ZDemoBasicCard, ZDemoBasicFormFieldTest, ZDevuiRestpageRestPage, ZDevuiRestpageWrapperFilter, ZDevuiRestpageWrapperForm, ZDevuiRestpageWrapperTable, ZDevuiTableTable, ZHomeBasePage, ZHomeLayoutEssentialLink, ZHomeLayoutLayoutDefault, ZHomeLayoutLayoutEmpty, ZHomeUserFormFieldCaptcha };
+//#region .zova-rest/index.d.ts
+interface IIconRecord {
+  ':auth:dingtalk-square': true;
+  ':auth:github': true;
+  ':auth:password': true;
+  ':auth:sms': true;
+  ':auth:wechat-outline': true;
+  ':auth:wxwork-outline': true;
+  ':business:coupon': true;
+  ':business:course': true;
+  ':business:distribution': true;
+  ':business:hotsprings': true;
+  ':business:kitchen-set': true;
+  ':business:money-bag': true;
+  ':business:party': true;
+  ':business:provider': true;
+  ':business:purchase': true;
+  ':business:store': true;
+  ':daisy:lock': true;
+  ':daisy:person': true;
+  '::add': true;
+  '::alert': true;
+  '::archive': true;
+  '::arrow-back': true;
+  '::arrow-cycle': true;
+  '::arrow-down-left': true;
+  '::arrow-down-right': true;
+  '::arrow-down': true;
+  '::arrow-drop-down': true;
+  '::arrow-drop-up': true;
+  '::arrow-forward': true;
+  '::arrow-left': true;
+  '::arrow-repeat': true;
+  '::arrow-right-left': true;
+  '::arrow-right': true;
+  '::arrow-shuffle': true;
+  '::arrow-up-down': true;
+  '::arrow-up-left': true;
+  '::arrow-up-right': true;
+  '::arrow-up': true;
+  '::article': true;
+  '::attachment-line': true;
+  '::book': true;
+  '::checkbox-checked': true;
+  '::checkbox-intermediate': true;
+  '::checkbox-off': true;
+  '::checkbox': true;
+  '::chevron-left': true;
+  '::chevron-right': true;
+  '::close': true;
+  '::comment-dots': true;
+  '::construction': true;
+  '::copyright': true;
+  '::cross-circle': true;
+  '::dark-theme': true;
+  '::dashboard': true;
+  '::database': true;
+  '::delete-forever': true;
+  '::delete': true;
+  '::developer-board': true;
+  '::done': true;
+  '::dot': true;
+  '::draft': true;
+  '::drive-file-move': true;
+  '::edit': true;
+  '::expand-more': true;
+  '::export': true;
+  '::fast-forward': true;
+  '::flow-chart': true;
+  '::folder-open': true;
+  '::folder': true;
+  '::fullscreen-exit': true;
+  '::fullscreen': true;
+  '::grading': true;
+  '::group-work': true;
+  '::group': true;
+  '::groups': true;
+  '::heart': true;
+  '::home': true;
+  '::identification': true;
+  '::import': true;
+  '::info-circle': true;
+  '::information-filled': true;
+  '::information': true;
+  '::label': true;
+  '::language': true;
+  '::layers': true;
+  '::layout-columns': true;
+  '::location-on': true;
+  '::lock-open': true;
+  '::lock': true;
+  '::mail': true;
+  '::mark-as-unread': true;
+  '::mark-email-read': true;
+  '::menu': true;
+  '::message': true;
+  '::module': true;
+  '::more-horiz': true;
+  '::none': true;
+  '::notebook': true;
+  '::open-in-new': true;
+  '::open-with': true;
+  '::people': true;
+  '::person': true;
+  '::play-arrow': true;
+  '::popup': true;
+  '::preview': true;
+  '::radio-button-checked': true;
+  '::radio-button-unchecked': true;
+  '::redo': true;
+  '::remove': true;
+  '::reply': true;
+  '::reset': true;
+  '::round-person-add': true;
+  '::save-and-return': true;
+  '::save-and-submit': true;
+  '::save-as-draft': true;
+  '::save': true;
+  '::search': true;
+  '::send': true;
+  '::settings': true;
+  '::share': true;
+  '::sort': true;
+  '::star': true;
+  '::stats-chart': true;
+  '::stop': true;
+  '::text-fields': true;
+  '::timeline': true;
+  '::undo': true;
+  '::view-list': true;
+  '::visibility': true;
+  '::zoom-in': true;
+  '::zoom-out': true;
+  '::zova': true;
+  ':editor:add-box-outline': true;
+  ':editor:add-box': true;
+  ':editor:bookmark-outline': true;
+  ':editor:bookmark': true;
+  ':editor:code-block': true;
+  ':editor:code': true;
+  ':editor:format-align-center': true;
+  ':editor:format-align-left': true;
+  ':editor:format-align-right': true;
+  ':editor:format-bold': true;
+  ':editor:format-italic': true;
+  ':editor:format-list-bulleted': true;
+  ':editor:format-list-numbered': true;
+  ':editor:format-quote': true;
+  ':editor:format-strikethrough': true;
+  ':editor:format-underlined': true;
+  ':editor:grid-on': true;
+  ':editor:horizontal-rule': true;
+  ':editor:image-outline': true;
+  ':editor:image': true;
+  ':editor:insert-link-outline': true;
+  ':editor:paragraph-break': true;
+  ':editor:paragraph': true;
+  ':editor:redo': true;
+  ':editor:source-outline': true;
+  ':editor:subscript': true;
+  ':editor:superscript': true;
+  ':editor:task-alt': true;
+  ':editor:title': true;
+  ':editor:undo': true;
+  ':emoji:flower': true;
+  ':flow:activity-none': true;
+  ':flow:activity-service': true;
+  ':flow:activity-user-task': true;
+  ':flow:end-event-atom': true;
+  ':flow:end-event-none': true;
+  ':flow:gateway-exclusive': true;
+  ':flow:gateway-inclusive': true;
+  ':flow:gateway-parallel': true;
+  ':flow:start-event-atom': true;
+  ':flow:start-event-none': true;
+  ':flow:start-event-timer': true;
+  ':login:call-outline': true;
+  ':login:chevron-left': true;
+  ':login:done': true;
+  ':login:lock-outline': true;
+  ':login:person-outline': true;
+  ':outline:add-circle-outline': true;
+  ':outline:alert-outline': true;
+  ':outline:apps-outline': true;
+  ':outline:archive-lock-outline': true;
+  ':outline:archive-outline': true;
+  ':outline:article-outline': true;
+  ':outline:backspace-outline': true;
+  ':outline:build-circle-outline': true;
+  ':outline:calendar-today-outline': true;
+  ':outline:check-circle-outline': true;
+  ':outline:checkbox-checked-outline': true;
+  ':outline:checkbox-off-outline': true;
+  ':outline:checkbox-outline': true;
+  ':outline:copy-outline': true;
+  ':outline:data-list-outline': true;
+  ':outline:database-lock-outline': true;
+  ':outline:delete-forever-outline': true;
+  ':outline:delete-outline': true;
+  ':outline:dict-outline': true;
+  ':outline:draft-outline': true;
+  ':outline:folder-transfer-outline': true;
+  ':outline:group-outline': true;
+  ':outline:heart-outline': true;
+  ':outline:insert-emoticon-outline': true;
+  ':outline:key-reset-outline': true;
+  ':outline:label-outline': true;
+  ':outline:layout-outline': true;
+  ':outline:login-outline': true;
+  ':outline:logout-outline': true;
+  ':outline:mail-outline': true;
+  ':outline:note-outline': true;
+  ':outline:software-resource-cluster-outline': true;
+  ':outline:software-resource-outline': true;
+  ':outline:star-outline': true;
+  ':outline:theme-outline': true;
+  ':outline:timer-outline': true;
+  ':outline:visibility-off-outline': true;
+  ':outline:visibility-outline': true;
+  ':outline:work-history-outline': true;
+  ':role:collaboration': true;
+  ':role:level': true;
+  ':role:organization': true;
+  ':role:position': true;
+  ':role:relation': true;
+  ':role:role': true;
+  ':role:shield-key': true;
+  ':role:template': true;
+  ':social:chat': true;
+  ':social:facebook': true;
+  ':social:github': true;
+  ':social:public': true;
+  ':social:record-voice-over': true;
+  ':social:school': true;
+  ':social:twitter': true;
+  ':tools:pomotodo': true;
+  ':tools:spreadsheet': true;
+}
+declare function $iconName<K$1 extends keyof IIconRecord>(name: K$1): K$1;
+//#endregion
+export { $iconName, IIconRecord, ZAAppApp, ZABCard, ZABCard3, ZABehaviorBehavior, ZACurrencyFormFieldCurrency, ZAFormForm, ZAFormFormField, ZAFormFormSubscribe, ZAIconIcon, ZATabsRouterViewTabs, ZDemoBasicCard, ZDemoBasicFormFieldTest, ZDevuiRestpageRestPage, ZDevuiRestpageWrapperFilter, ZDevuiRestpageWrapperForm, ZDevuiRestpageWrapperTable, ZDevuiTableTable, ZHomeBasePage, ZHomeLayoutEssentialLink, ZHomeLayoutLayoutDefault, ZHomeLayoutLayoutEmpty, ZHomeUserFormFieldCaptcha };
