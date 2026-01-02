@@ -86,7 +86,7 @@ export class LocalCommon {
       await this._generatePackageJson_saveBack(pkg!, pkgOriginal, pkgOriginalFile, deps, depsDev);
     }
     // generate pkg from pkgOriginal
-    await this._generatePackageJson_pkgFromPkgOriginal(projectPath, pkgOriginal, pkg, pkgFile, deps, depsDev);
+    return await this._generatePackageJson_pkgFromPkgOriginal(projectPath, pkgOriginal, pkg, pkgFile, deps, depsDev);
   }
 
   async _generatePackageJson_prepareDeps(_projectPath: string) {
@@ -136,7 +136,9 @@ export class LocalCommon {
     if (strPkgOriginal !== strPkg) {
       await fse.writeFile(pkgFile, strPkgOriginal);
       await this.cli.helper.pnpmInstall();
+      return true;
     }
+    return false;
   }
 
   async _generatePackageJson_pkgFromZovaRest(projectPath: string, devDependencies: {}) {

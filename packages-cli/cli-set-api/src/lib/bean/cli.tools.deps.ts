@@ -21,9 +21,12 @@ export class CliToolsDeps extends BeanCliBase {
 
   async _generate(projectPath: string) {
     // generate zovaRest
-    await this._generateZovaRest(projectPath);
+    const needPnpmInstall = await this._generateZovaRest(projectPath);
     // generate package.json
-    await this.common._generatePackageJson(projectPath);
+    const pnpmInstalled = await this.common._generatePackageJson(projectPath);
+    if (needPnpmInstall && !pnpmInstalled) {
+      await this.helper.pnpmInstall();
+    }
     // generate type modules file
     await this.common._generateTypeModulesFile(projectPath);
     // generate type project file
@@ -52,6 +55,7 @@ export class CliToolsDeps extends BeanCliBase {
   }
 
   async _generateZovaRest(projectPath: string) {
+    let needPnpmInstall = false;
     const targetDir = path.join(projectPath, 'zovaRest');
     for (const module of this.modulesMeta.modulesArray) {
       const moduleZovaRest = path.join(module.root, 'zovaRest');
@@ -70,7 +74,9 @@ export class CliToolsDeps extends BeanCliBase {
         }
         if (!needCopy) continue;
         await fse.copy(moduleZovaRestSrc, moduleZovaRestDest, { preserveTimestamps: true });
+        needPnpmInstall = true;
       }
     }
+    return needPnpmInstall;
   }
 }
