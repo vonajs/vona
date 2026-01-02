@@ -488,7 +488,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.474
+        specifier: ^1.0.475
         version: link:../cli-set-api
     devDependencies:
       clean-package:
@@ -919,7 +919,7 @@ importers:
         specifier: ^5.0.126
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.262
+        specifier: ^5.0.263
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1270,7 +1270,7 @@ importers:
         specifier: ^5.0.28
         version: link:modules/a-executor
       vona-module-a-hmr:
-        specifier: ^5.0.7
+        specifier: ^5.0.8
         version: link:modules/a-hmr
       vona-module-a-i18n:
         specifier: ^5.0.22
