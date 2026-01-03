@@ -10,7 +10,7 @@ export class ServiceMenu extends BeanBase {
     });
   }
 
-  private _getMenusDefault(): IMenus {
+  private _getMenusDefault(): IMenus<any> {
     return {
       menus: [
         { name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' },
