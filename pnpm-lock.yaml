@@ -311,6 +311,9 @@ importers:
       zod:
         specifier: ^4.1.13
         version: 4.3.4
+      zova-rest-vona-cabloy:
+        specifier: file:./.zova-rest/vona-cabloy
+        version: file:.zova-rest/vona-cabloy
       zova-rest-vona-home:
         specifier: file:./.zova-rest/vona-home
         version: file:.zova-rest/vona-home
@@ -9242,6 +9245,9 @@ packages:
   zod@4.3.4:
     resolution: {integrity: sha512-Zw/uYiiyF6pUT1qmKbZziChgNPRu+ZRneAsMUDU6IwmXdWt5JwcUfy2bvLOCUtz5UniaN/Zx5aFttZYbYc7O/A==}
 
+  zova-rest-vona-cabloy@file:.zova-rest/vona-cabloy:
+    resolution: {directory: .zova-rest/vona-cabloy, type: directory}
+
   zova-rest-vona-home@file:.zova-rest/vona-home:
     resolution: {directory: .zova-rest/vona-home, type: directory}
 
@@ -17649,6 +17655,8 @@ snapshots:
   zod@3.25.76: {}
 
   zod@4.3.4: {}
+
+  zova-rest-vona-cabloy@file:.zova-rest/vona-cabloy: {}
 
   zova-rest-vona-home@file:.zova-rest/vona-home: {}
 

@@ -1,5 +1,6 @@
+import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import type { IMenuItem, IMenuItemLinkRecord, IMenuItemMeta } from '../types/menu.ts';
+import type { IMenuItem, IMenuItemMeta } from '../types/menu.ts';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
@@ -31,7 +32,7 @@ export class DtoMenuItem implements IMenuItem {
   separator?: boolean;
 
   @Api.field(v.optional(), z.string())
-  link?: keyof IMenuItemLinkRecord;
+  link?: keyof IDecoratorSsrSiteOptions['pages'];
 
   @Api.field(v.optional())
   external?: boolean;

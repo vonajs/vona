@@ -1,11 +1,5 @@
 import type { ILocaleMagic } from 'vona';
 
-export interface IMenuItemLinkPresetRecord {}
-
-export interface IMenuItemLinkRecord extends IMenuItemLinkPresetRecord {
-  '/': never;
-}
-
 export interface IMenus {
   menus?: IMenuItem[];
   groups?: IMenuGroup[];
@@ -18,7 +12,7 @@ export interface IMenuItemMeta {
   query?: IMenuItemMetaQuery;
 }
 
-export interface IMenuItem {
+export interface IMenuItem<MenuLinks extends {} = {}> {
   name: string;
   title?: string | ILocaleMagic;
   description?: string | ILocaleMagic;
@@ -26,7 +20,7 @@ export interface IMenuItem {
   order?: number;
   group?: string | string[];
   separator?: boolean;
-  link?: keyof IMenuItemLinkRecord;
+  link?: MenuLinks;
   external?: boolean;
   target?: string;
   meta?: IMenuItemMeta;
