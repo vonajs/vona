@@ -8,7 +8,7 @@ import { DtoMenuItem } from './menuItem.ts';
 export interface IDtoOptionsMenus extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsMenus>()
-export class DtoMenus implements IMenus {
+export class DtoMenus implements IMenus<any> {
   @Api.field(v.optional(), v.array(DtoMenuItem))
   menus?: DtoMenuItem[];
 
