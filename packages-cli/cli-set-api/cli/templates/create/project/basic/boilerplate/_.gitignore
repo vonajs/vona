@@ -24,7 +24,7 @@ miniprogram_npm
 # vona core related directories
 .vona
 .app
-.zovaRest
+.zova-rest
 
 # mine .env files
 env/.env*.mine

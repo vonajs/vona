@@ -143,11 +143,11 @@ export class LocalCommon {
 
   async _generatePackageJson_pkgFromZovaRest(projectPath: string, devDependencies: {}) {
     if (this.cli.context.brandName !== 'vona') return;
-    const targetDir = path.join(projectPath, '.zovaRest');
+    const targetDir = path.join(projectPath, '.zova-rest');
     const bundles = await globby('*', { cwd: targetDir, onlyDirectories: true });
     for (const bundle of bundles) {
       const name = `zova-rest-${bundle}`;
-      devDependencies[name] = `file:./.zovaRest/${bundle}`;
+      devDependencies[name] = `file:./.zova-rest/${bundle}`;
     }
   }
 
