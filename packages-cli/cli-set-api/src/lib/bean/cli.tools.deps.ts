@@ -56,7 +56,7 @@ export class CliToolsDeps extends BeanCliBase {
 
   async _generateZovaRest(projectPath: string) {
     let needPnpmInstall = false;
-    const targetDir = path.join(projectPath, 'zovaRest');
+    const targetDir = path.join(projectPath, '.zovaRest');
     for (const module of this.modulesMeta.modulesArray) {
       const moduleZovaRest = path.join(module.root, 'zovaRest');
       if (!fse.existsSync(moduleZovaRest)) continue;
