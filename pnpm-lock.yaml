@@ -316,7 +316,7 @@ importers:
         version: file:.zovaRest/vona-home
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.90
+        specifier: ^3.0.91
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16
@@ -406,8 +406,8 @@ importers:
         specifier: ^5.2.49
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/process-helper':
         specifier: ^2.0.25
         version: link:../../packages-utils/process-helper
@@ -522,8 +522,8 @@ importers:
         specifier: ^5.2.49
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/utils':
         specifier: ^2.0.14
         version: link:../../packages-utils/utils
@@ -634,8 +634,8 @@ importers:
         specifier: ^7.28.0
         version: 7.28.5
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/word-utils':
         specifier: ^2.0.2
         version: 2.0.2
@@ -767,8 +767,8 @@ importers:
   packages-utils/module-glob:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/utils':
         specifier: ^2.0.14
         version: link:../utils
@@ -798,8 +798,8 @@ importers:
   packages-utils/module-info-pro:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       stack-utils:
         specifier: ^2.0.6
         version: 2.0.6
@@ -850,8 +850,8 @@ importers:
   packages-utils/utils:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/word-utils':
         specifier: ^2.0.2
         version: 2.0.2
@@ -938,8 +938,8 @@ importers:
         specifier: ^2.0.11
         version: link:../../packages-utils/localeutil
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/module-info-pro':
         specifier: ^1.0.43
         version: link:../../packages-utils/module-info-pro
@@ -1014,8 +1014,8 @@ importers:
   packages-vona/vona-mock:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/module-info-pro':
         specifier: ^1.0.43
         version: link:../../packages-utils/module-info-pro
@@ -1523,8 +1523,8 @@ importers:
         specifier: ^1.0.19
         version: link:../../../../../packages-utils/json5
       '@cabloy/module-info':
-        specifier: ^1.3.36
-        version: 1.3.36
+        specifier: ^1.3.37
+        version: 1.3.37
       '@cabloy/type-fest':
         specifier: ^5.3.1
         version: 5.3.1
@@ -2615,8 +2615,8 @@ packages:
     resolution: {integrity: sha512-B7dF43O1gE5Whwn+MwNanjXZUTqpv/e2TmKIyyzdcVjH6o7ENesebxiDXJAAjkX6dpg3Bijpq6acBE38VKGJSQ==}
     engines: {node: '>= 7.6.0'}
 
-  '@cabloy/module-info@1.3.36':
-    resolution: {integrity: sha512-9+tzL91iTsyhptgRtcLrs7l0iejYGGUWWWiWk9ovzLe15tBDsVSPQqKWgP2pMcWb/IfgoIK0y6/lHCSLHW7LBg==}
+  '@cabloy/module-info@1.3.37':
+    resolution: {integrity: sha512-7gwbacwugWbf+IEnOLTOLVGMAWpDxajdj4tR+JITj4kMK+XC6vS1DQZsxFqo4BApEIMqU57bcOCP3tK4Ny6SYQ==}
 
   '@cabloy/type-fest@5.3.1':
     resolution: {integrity: sha512-oiG+8jGoKigRKUd51wKIn7FVZHNpfap7vgMWzmjJdVv0HGKZa3XR7sRfZvUSOcLW7tu9Y+GT/aWuJvM0gQiNxg==}
@@ -10014,7 +10014,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@cabloy/module-info@1.3.36': {}
+  '@cabloy/module-info@1.3.37': {}
 
   '@cabloy/type-fest@5.3.1':
     dependencies:
