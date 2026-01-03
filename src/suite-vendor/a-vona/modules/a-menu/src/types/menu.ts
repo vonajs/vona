@@ -1,7 +1,7 @@
 import type { ILocaleMagic } from 'vona';
 
-export interface IMenus {
-  menus?: IMenuItem[];
+export interface IMenus<Pages extends {} = {}> {
+  menus?: IMenuItem<Pages>[];
   groups?: IMenuGroup[];
 }
 
@@ -12,7 +12,7 @@ export interface IMenuItemMeta {
   query?: IMenuItemMetaQuery;
 }
 
-export interface IMenuItem<MenuLinks extends {} = {}> {
+export interface IMenuItem<Pages extends {} = {}> {
   name: string;
   title?: string | ILocaleMagic;
   description?: string | ILocaleMagic;
@@ -20,7 +20,7 @@ export interface IMenuItem<MenuLinks extends {} = {}> {
   order?: number;
   group?: string | string[];
   separator?: boolean;
-  link?: keyof MenuLinks;
+  link?: keyof Pages;
   external?: boolean;
   target?: string;
   meta?: IMenuItemMeta;
