@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-vona-bean-module",
   "type": "module",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "babel-plugin-vona-bean-module",
   "publishConfig": {
     "access": "public"
