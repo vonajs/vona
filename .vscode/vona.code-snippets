@@ -344,5 +344,17 @@
       "}"
     ],
     "description": "record.socketevent"
+  },
+  "record.ssrsitepublicpath": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordssrsitepublicpath",
+    "body": [
+      "declare module 'vona-module-a-ssr' {",
+      "  export interface ISsrSitePublicPathRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.ssrsitepublicpath"
   }
 }
