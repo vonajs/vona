@@ -1,6 +1,6 @@
 import type { ILocaleMagic } from 'vona';
 
-export interface IMenus<Pages extends {} = {}> {
+export interface IMenus<Pages extends {} = any> {
   menus?: IMenuItem<Pages>[];
   groups?: IMenuGroup[];
 }
@@ -12,7 +12,7 @@ export interface IMenuItemMeta {
   query?: IMenuItemMetaQuery;
 }
 
-export interface IMenuItem<Pages extends {} = {}> {
+export interface IMenuItem<Pages extends {} = any> {
   name: string;
   title?: string | ILocaleMagic;
   description?: string | ILocaleMagic;
