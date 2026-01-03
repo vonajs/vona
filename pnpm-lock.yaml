@@ -913,7 +913,7 @@ importers:
         specifier: ^5.0.128
         version: link:../vona-core
       vona-suite-a-vona:
-        specifier: ^5.0.267
+        specifier: ^5.0.268
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
@@ -1288,7 +1288,7 @@ importers:
         specifier: ^5.0.14
         version: link:modules/a-mailconfirm
       vona-module-a-menu:
-        specifier: ^5.0.26
+        specifier: ^5.0.27
         version: link:modules/a-menu
       vona-module-a-meta:
         specifier: ^5.0.19
