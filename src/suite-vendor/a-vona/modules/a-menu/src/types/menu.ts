@@ -20,7 +20,7 @@ export interface IMenuItem<MenuLinks extends {} = {}> {
   order?: number;
   group?: string | string[];
   separator?: boolean;
-  link?: MenuLinks;
+  link?: keyof MenuLinks;
   external?: boolean;
   target?: string;
   meta?: IMenuItemMeta;
