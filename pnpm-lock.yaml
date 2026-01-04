@@ -319,7 +319,7 @@ importers:
         version: file:.zova-rest/vona-home
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.92
+        specifier: ^3.0.93
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: ^5.0.16

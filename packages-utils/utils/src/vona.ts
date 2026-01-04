@@ -37,7 +37,7 @@ export function combineApiPath(
   prefix?: string | boolean,
   simplify?: boolean,
   globalPrefixConfig?: string,
-) {
+): string {
   const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : globalPrefixConfig;
   simplify = simplify ?? true;
   if (!path) path = '';
