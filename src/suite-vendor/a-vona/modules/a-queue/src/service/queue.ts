@@ -11,7 +11,6 @@ import type {
   IQueueWorks,
   TypeQueueJob,
 } from '../types/queue.ts';
-import { catchError } from '@cabloy/utils';
 import * as Bull from 'bullmq';
 import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -120,7 +119,7 @@ export class ServiceQueue extends BeanBase {
     );
 
     _worker.worker.on('failed', (_job, err) => {
-      this.$logger.error(err);
+      this.app.handleError(err);
     });
 
     _worker.worker.on('error', err => {
@@ -128,7 +127,7 @@ export class ServiceQueue extends BeanBase {
         const workerInner = _worker.worker as any;
         if (!workerInner.running) {
           _worker.worker.run().catch(err => {
-            this.$logger.error(err);
+            this.app.handleError(err);
           });
         }
       }
@@ -268,15 +267,7 @@ export class ServiceQueue extends BeanBase {
   }
 
   async _performTaskWrapper<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
-    const [res, err] = await catchError(() => {
-      return this._performTask(job);
-    });
-    if (err) {
-      await this.app.handleError(err);
-      throw err;
-    } else {
-      return res;
-    }
+    return await this._performTask(job);
   }
 
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
