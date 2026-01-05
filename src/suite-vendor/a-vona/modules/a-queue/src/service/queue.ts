@@ -97,7 +97,7 @@ export class ServiceQueue extends BeanBase {
       async job => {
         // concurrency
         if (queueConfig?.concurrency) {
-          return await this._performTaskWrapper(job);
+          return await this._performTask(job);
         }
         // redlock
         const info = job.data as IQueueJobContext<DATA>;
@@ -106,7 +106,7 @@ export class ServiceQueue extends BeanBase {
         return await this.$scope.redlock.service.redlock.lock(
           _lockResource,
           async () => {
-            return await this._performTaskWrapper(job);
+            return await this._performTask(job);
           },
           {
             // instanceName: job.data.instanceName, // need not
@@ -264,10 +264,6 @@ export class ServiceQueue extends BeanBase {
   _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
     const instanceName = instanceDesp(info.options?.instanceName);
     return `${instanceName}||${beanFullNameFromOnionName(info.queueName, 'queue')}`;
-  }
-
-  async _performTaskWrapper<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
-    return await this._performTask(job);
   }
 
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
