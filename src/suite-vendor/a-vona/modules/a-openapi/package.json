@@ -7,7 +7,9 @@
     "capabilities": {
       "preload": true
     },
-    "dependencies": {},
+    "dependencies": {
+      "a-openapiutils": true
+    },
     "globalDependencies": {
       "@cabloy/zod-openapi": true,
       "@cabloy/zod-to-openapi": true,
