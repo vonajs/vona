@@ -4,7 +4,7 @@ import { EntityBaseInner } from './entityBaseInner.ts';
 
 export class EntityBaseSimple extends EntityBaseInner {
   @Api.field(
-    v.order({ order: 1, level: 'core' }),
+    v.order(1, 'core'),
     v.title($locale('TableIdentity')),
   )
   id: number;

@@ -1,17 +1,23 @@
+import type { TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
-import type { ISchemaOrderParams } from '../../../types/order.ts';
+import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 import { OrderLevelBaseMap } from '../../const/database.ts';
 
-export function schemaOrder<T extends z.ZodType>(order: ISchemaOrderParams | number) {
-  const order2 = typeof order === 'number' ? { order } : order;
-  const levelBase = OrderLevelBaseMap[order2.level ?? 'business'];
-  const orderReal = levelBase + order2.order;
-  const scene = order2.scene;
+export function schemaOrder<T extends z.ZodType>(order: number, level?: TypeSchemaOrderLevel, scene?: TypeSchemaScene) {
+  const levelBase = OrderLevelBaseMap[level ?? 'business'];
+  const orderReal = levelBase + order;
   return function (schema: T): T {
-    return schema.openapi(
-      scene
-        ? { rest: { [scene]: { order: orderReal } } }
-        : { rest: { order: orderReal } },
+    return schema.openapi(scene
+      ? { rest: { [scene]: { order: orderReal } } }
+      : { rest: { order: orderReal } },
     );
+  };
+}
+
+export function schemaRender<T extends z.ZodType>(render: TypeRenderComponent, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    return schema.openapi(scene
+      ? { rest: { [scene]: { render: render as any } } }
+      : { rest: { render: render as any } });
   };
 }
