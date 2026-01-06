@@ -1,9 +1,13 @@
 import type { TableIdentity } from 'table-identity';
-import { Api, OrderCoreBase, v } from 'vona-module-a-openapiutils';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseInner } from './entityBaseInner.ts';
 
 export class EntityBase extends EntityBaseInner {
-  @Api.field(v.openapi({ title: $locale('TableIdentity'), rest: { order: OrderCoreBase + 1 } }), v.tableIdentity())
+  @Api.field(
+    v.order({ order: 1, level: 'core' }),
+    v.title($locale('TableIdentity')),
+    v.tableIdentity(),
+  )
   id: TableIdentity;
 }
