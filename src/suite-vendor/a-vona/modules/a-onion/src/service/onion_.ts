@@ -322,7 +322,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
 
   // todo: maybe use routePathRaw directly
   private _getRoutePathForMatch() {
-    const routePathRaw: string | RegExp | undefined = this.ctx.route?.routePathRaw;
+    const routePathRaw: string | RegExp | undefined = this.ctx?.route?.routePathRaw;
     if (!routePathRaw || isRegExp(routePathRaw)) return;
     return routePathRaw;
   }
