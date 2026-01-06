@@ -1863,6 +1863,10 @@ importers:
         version: 6.1.2
 
   src/suite-vendor/a-vona/modules/a-openapiutils:
+    dependencies:
+      '@zhennann/currency':
+        specifier: ^2.0.0
+        version: 2.0.2
     devDependencies:
       clean-package:
         specifier: ^2.2.0

@@ -41,6 +41,9 @@
       "exports.\\..import"
     ]
   },
+  "dependencies": {
+    "@zhennann/currency": "^2.0.0"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

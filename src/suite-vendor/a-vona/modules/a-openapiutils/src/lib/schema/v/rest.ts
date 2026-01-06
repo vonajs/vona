@@ -1,3 +1,4 @@
+import type { CurrencyOptions } from '@zhennann/currency';
 import type { TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
@@ -19,5 +20,22 @@ export function schemaRender<T extends z.ZodType>(render: TypeRenderComponent, s
     return schema.openapi(scene
       ? { rest: { [scene]: { render: render as any } } }
       : { rest: { render: render as any } });
+  };
+}
+
+export function schemaVisible<T extends z.ZodType>(visible?: boolean, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    return schema.openapi(scene
+      ? { rest: { [scene]: { visible } } }
+      : { rest: { visible } });
+  };
+}
+
+export function schemaCurrency<T extends z.ZodType>(currency?: CurrencyOptions, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    const options = currency !== undefined ? { render: 'currency', currency } : { render: 'currency' };
+    return schema.openapi(scene
+      ? { rest: { [scene]: options as any } }
+      : { rest: options as any });
   };
 }

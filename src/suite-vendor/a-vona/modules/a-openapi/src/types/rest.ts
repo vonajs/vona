@@ -1,4 +1,5 @@
 import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
+import type { CurrencyOptions } from '@zhennann/currency';
 import type { ILocaleMagic } from 'vona';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
@@ -29,6 +30,8 @@ export interface ISchemaObjectExtensionFieldRestProps {
   placeholder?: string;
   readonly?: boolean;
   inputType?: HTMLInputElementType;
+  //
+  currency?: CurrencyOptions;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {

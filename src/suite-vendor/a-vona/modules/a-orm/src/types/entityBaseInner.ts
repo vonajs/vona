@@ -1,17 +1,17 @@
-import { Api, OrderMaxBase, v } from 'vona-module-a-openapiutils';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseEmpty } from './entityBaseEmpty.ts';
 
 export class EntityBaseInner extends EntityBaseEmpty {
-  @Api.field(v.openapi({ title: $locale('CreatedAt'), rest: { order: OrderMaxBase - 2 } }))
+  @Api.field(v.title($locale('CreatedAt')), v.order(-2, 'max'))
   createdAt: Date;
 
-  @Api.field(v.openapi({ title: $locale('UpdatedAt'), rest: { order: OrderMaxBase - 1 } }))
+  @Api.field(v.title($locale('UpdatedAt')), v.order(-1, 'max'))
   updatedAt: Date;
 
-  @Api.field(v.openapi({ title: $locale('Deleted'), rest: { visible: false } }), v.default(false))
+  @Api.field(v.title($locale('Deleted')), v.visible(false), v.default(false))
   deleted: boolean;
 
-  @Api.field(v.openapi({ title: $locale('InstanceId'), rest: { visible: false } }), v.default(0))
+  @Api.field(v.title($locale('InstanceId')), v.visible(false), v.default(0))
   iid: number;
 }
