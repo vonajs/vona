@@ -1,4 +1,5 @@
 export interface IComponentRecord {}
+export interface ITableCellComponentRecord {}
 
 export type TypeComponentRecordSelector<PREFIX extends string> = {
   [K in keyof IComponentRecord as K extends `${string}:${PREFIX}${string}` ? K : never]: IComponentRecord[K];

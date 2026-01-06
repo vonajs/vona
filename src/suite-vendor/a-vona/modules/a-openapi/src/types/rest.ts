@@ -5,7 +5,7 @@ import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
-import type { IComponentRecord } from './component.ts';
+import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
@@ -72,13 +72,16 @@ export interface TypeRenderComponentJsx {
   props?: TypeRenderComponentJsxProps;
 };
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeSchemaScene = 'table' | 'form';
 
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
-export type TypeRenderComponentProvider = (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+// form
+export type TypeFormFieldRenderComponentProvider = (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
 
-export type TypeSchemaScene = 'table' | 'form';
+// table
+export type TypeTableCellRenderComponentProvider = (keyof IComponentRecord) | (keyof ITableCellComponentRecord) | 'text';
 
 export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<Partial<ZodOpenAPIMetadata<z.input<T>>>, 'title' | 'description'> & {
   title?: string | ILocaleMagic;
